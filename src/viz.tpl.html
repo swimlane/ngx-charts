@@ -1,0 +1,297 @@
+<div class='viz-container'>
+  <div ng-if="statusMessage" class="status-message">
+    <div ng-if="statusMessage == 'Loading'" div class="loading"><span class="icon-loading"></span></div>
+    {{statusMessage}}
+  </div>
+
+  <div ng-switch="vizType" ng-if="!statusMessage">
+    <bar-vertical
+      ng-switch-when="BarVertical"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-vertical>
+
+    <bar-vertical-2-d
+      ng-switch-when="BarVertical2D"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-vertical-2-d>
+
+    <bar-vertical-stacked
+      ng-switch-when="BarVerticalStacked"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-vertical-stacked>
+
+    <bar-vertical-normalized
+      ng-switch-when="BarVerticalNormalized"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-vertical-normalized>
+
+    <bar-horizontal
+      ng-switch-when="BarHorizontal"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-horizontal>
+
+    <bar-horizontal-2-d
+      ng-switch-when="BarHorizontal2D"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-horizontal-2-d>
+
+    <bar-horizontal-stacked
+      ng-switch-when="BarHorizontalStacked"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-horizontal-stacked>
+
+    <bar-horizontal-normalized
+      ng-switch-when="BarHorizontalNormalized"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </bar-horizontal-normalized>
+
+    <line-chart
+      ng-switch-when="LineChart"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [auto-scale]="statsReport.report.chartOptions.autoScale"
+      [timeline]="statsReport.report.chartOptions.zoom">
+    </line-chart>
+
+    <line-chart-2-d
+      ng-switch-when="LineChart2D"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [auto-scale]="statsReport.report.chartOptions.autoScale"
+      [timeline]="statsReport.report.chartOptions.zoom">
+    </line-chart-2-d>
+
+    <area-chart
+      ng-switch-when="AreaChart"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [auto-scale]="statsReport.report.chartOptions.autoScale"
+      [timeline]="statsReport.report.chartOptions.zoom">
+    </area-chart>
+
+    <area-chart-stacked
+      ng-switch-when="AreaChartStacked"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [timeline]="statsReport.report.chartOptions.zoom">
+    </area-chart-stacked>
+
+    <area-chart-normalized
+      ng-switch-when="AreaChartNormalized"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [timeline]="statsReport.report.chartOptions.zoom">
+    </area-chart-normalized>
+
+    <number-card
+      ng-switch-when="NumberCard"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart">
+    </number-card>
+
+    <heat-map
+      ng-switch-when="HeatMap"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [xaxis]="statsReport.report.chartOptions.showXAxis"
+      [yaxis]="statsReport.report.chartOptions.showYAxis"
+      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
+      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
+      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
+      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+    </heat-map>
+
+    <pie-chart
+      ng-switch-when="PieChart"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [doughnut]="false"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [labels]="statsReport.report.chartOptions.showLabels"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
+      [explode-slices]="statsReport.report.chartOptions.explodeSlices">
+    </pie-chart>
+
+    <pie-chart
+      ng-switch-when="DonutChart"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [doughnut]="true"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [labels]="statsReport.report.chartOptions.showLabels"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart">
+    </pie-chart>
+
+    <pie-grid
+      ng-switch-when="PieGrid"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [legend]="statsReport.report.chartOptions.showLegend && !miniChart">
+    </pie-grid>
+
+    <advanced-pie-chart
+      ng-switch-when="AdvancedPieChart"
+      [view]="view"
+      (click-handler)="pointClick($event)"
+      [results]="results"
+      [scheme]="statsReport.report.chartOptions.colorScheme"
+      [custom-colors]="statsReport.report.chartOptions.colorMap">
+    </advanced-pie-chart>
+
+    <div ng-switch-default>
+    </div>
+  </div>
+</div>
