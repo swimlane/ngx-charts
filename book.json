@@ -1,0 +1,25 @@
+{
+    "gitbook": "3.x.x",
+    "title": "A2D3",
+    "root": "/docs",
+    "plugins": [
+        "highlight",
+        "github",
+        "gistrun",
+        "theme-api",
+        "include-codeblock",
+        "versions",
+        "anchors"
+    ],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/swimlane/a2d3/"
+        },
+        "theme-api": {
+            "theme": "dark"
+        },
+        "versions": {
+            "type": "tags"
+        }
+    }
+}
