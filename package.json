@@ -4,7 +4,25 @@
   "description": "Angular2 + D3 Charting Library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check": "npm-check --skip-unused",
+    "test": "npm run lint",
+    "lint": "tslint ./src/**/*.ts",
+
+    "clean": "npm-run-all -p clean:*",
+      "clean:dist": "rimraf dist",
+      "clean:release": "rimraf release",
+
+    "build:dev": "webpack --config webpack.config.js --progress --profile --bail",
+    "build:ts": "tsc",
+    "build:sass": "node-sass -o dist/ src/",
+    "build:css": "postcss --use autoprefixer dist/*.css -d dist/",
+
+    "watch": "npm run watch:ts && npm run watch:sass",
+      "watch:ts": "tsc --watch",
+      "watch:sass": "npm run build:sass && node-sass -o dist/ -w src/",
+
+    "start": "npm-run-all -s clean:dist start:server",
+      "start:server": "webpack-dev-server --progress --port 8000"
   },
   "repository": {
     "type": "git",
@@ -22,5 +40,42 @@
   "bugs": {
     "url": "https://github.com/swimlane/a2d3/issues"
   },
-  "homepage": "https://github.com/swimlane/a2d3#readme"
+  "homepage": "https://github.com/swimlane/a2d3#readme",
+  "dependencies": {
+    "@angular/common": "2.0.0-rc.4",
+    "@angular/compiler": "2.0.0-rc.4",
+    "@angular/core": "2.0.0-rc.4",
+    "@angular/platform-browser": "2.0.0-rc.4",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.4",
+    "core-js": "^2.4.0",
+    "d3": "^3.5.17",
+    "moment": "^2.14.1",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "0.6.12"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.28",
+    "autoprefixer": "^6.3.7",
+    "awesome-typescript-loader": "^2.0.3",
+    "css-loader": "^0.12.0",
+    "html-webpack-plugin": "^2.22.0",
+    "node-sass": "^3.7.0",
+    "npm-run-all": "^2.3.0",
+    "rimraf": "^2.5.2",
+    "rollup": "^0.34.1",
+    "rollup-plugin-sass": "^0.1.1",
+    "rollup-plugin-sourcemaps": "^0.3.5",
+    "rollup-plugin-typescript": "^0.7.7",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "ts-helpers": "^1.1.1",
+    "tslint": "^3.12.0-dev.2",
+    "typescript": "^2.0.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "module-header": "^0.5.0",
+    "postcss": "^5.1.1",
+    "npm-check": "^5.2.3"
+  }
 }

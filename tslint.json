@@ -21,7 +21,8 @@
     "no-reference": false,
     "no-var-requires": false,
     "ordered-imports": false,
-    "no-trailing-whitespace": false
+    "no-trailing-whitespace": false,
+    "typedef": true
   },
   "rulesDirectory": []
 }

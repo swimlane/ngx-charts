@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "moduleResolution": "node",
+    "target": "es5",
     "module": "commonjs",
-    "declaration": false,
-    "noLib": false,
+    "moduleResolution": "node",
+    "declaration": true,
+    "removeComments": true,
+    "noEmitHelpers": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
@@ -15,20 +16,25 @@
     "noImplicitReturns": false,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": false,
-    "noEmitOnError": false,
     "allowSyntheticDefaultImports": true,
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist/",
-    "baseUrl": "src/",
-    "listFiles": false,
-    "noEmitHelpers": true
+    "outDir": "dist",
+    "baseUrl": "src",
+    "types": [
+      "core-js"
+    ]
   },
-  "include": [
-    "src/**/*"
+  "files": [
+    "src/viz.ts",
+    "typings/index.d.ts"
   ],
   "exclude": [
     "node_modules"
   ],
-  "compileOnSave": false
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true
+  }
 }

@@ -1,0 +1,11 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/types/npm-d3/a3171387d85d30049479ca880c617e63dca23afe/typings.json",
+    "raw": "registry:npm/d3#3.0.0+20160723033700",
+    "main": "index.d.ts",
+    "global": false,
+    "name": "d3",
+    "type": "typings"
+  }
+}
