@@ -26,8 +26,7 @@
     ]
   },
   "files": [
-    "src/viz.ts",
-    "typings/index.d.ts"
+    "src/viz.ts"
   ],
   "exclude": [
     "node_modules"
