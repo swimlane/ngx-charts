@@ -40,6 +40,4 @@ export class App {
     console.log('Alles gut');
     Object.assign(this, {barData, pieData, lineData});
   }
-
-
 }

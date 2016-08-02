@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import d3 from 'd3';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
 import { CardSeries } from './CardSeries';

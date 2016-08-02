@@ -52,8 +52,8 @@ import * as d3 from 'd3';
 })
 export class BarVertical extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  xScale: d3.scale.Ordinal;
-  yScale: d3.scale.Linear;
+  xScale: d3.scale.Ordinal<any, any>;
+  yScale: d3.scale.Linear<number, number>;
   transform: string;
   colors: Function;
 
@@ -71,12 +71,6 @@ export class BarVertical extends BaseChart implements OnInit {
   @Input() yaxisLabel;
 
   @Output() clickHandler = new EventEmitter();
-
-  dims: any;
-  yScale: any;
-  xScale: any;
-  transform: any;
-  colors: any;
 
   ngOnInit() {
     this.update();

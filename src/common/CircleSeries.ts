@@ -80,7 +80,7 @@ export class CircleSeries implements OnInit {
     if (this.scaleType === 'time') {
       this.data = this.data.filter(d => {
         return d.vals[0].label[0][0] !== 'No Value' && d.vals[0].label[0][0] !== 'Other'
-          && d.vals[0].label[0][1] !== 'No Value' && d.vals[0].label[0][1] !== 'Other'
+          && d.vals[0].label[0][1] !== 'No Value' && d.vals[0].label[0][1] !== 'Other';
       });
     }
     this.areaPath = area(this.data);
@@ -104,7 +104,7 @@ export class CircleSeries implements OnInit {
         if (this.scaleType === 'time') {
           cx = this.xScale(moment(label).toDate());
         } else {
-          cx = this.xScale(label) + this.xScale.rangeBand() / 2
+          cx = this.xScale(label) + this.xScale.rangeBand() / 2;
         }
         let cy = this.yScale(this.type === 'standard' ? value.value : value.d1);
         let radius = 5;
