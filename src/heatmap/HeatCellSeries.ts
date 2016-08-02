@@ -48,8 +48,8 @@ export class HeatCellSeries implements OnInit {
         cells.push({
           x: this.xScale(label[0]),
           y: this.yScale(label[1]),
-          width: this.xScale.rangeBand(),
-          height: this.yScale.rangeBand(),
+          width: this.xScale.bandwidth(),
+          height: this.yScale.bandwidth(),
           fill: this.colors(value),
           data: cell.vals[0],
           tooltipText: `${label}: ${value}`

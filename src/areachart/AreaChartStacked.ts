@@ -10,6 +10,7 @@ import { CircleSeries } from '../common/CircleSeries';
 import { Timeline } from '../common/Timeline';
 import moment = require("moment");
 import ObjectId from "../utils/objectid";
+import d3 from '../d3';
 
 @Component({
   selector: 'area-chart-stacked',
@@ -102,8 +103,8 @@ export class AreaChartStacked extends BaseChart implements OnInit {
   element: HTMLElement;
   dims: ViewDimensions;
   scaleType: string;
-  xScale: d3.time.Scale;
-  yScale: d3.scale.Linear;
+  xScale: any;
+  yScale: any;
   transform: string;
   clipPathId: string;
   clipPath: string;
@@ -148,17 +149,17 @@ export class AreaChartStacked extends BaseChart implements OnInit {
         });
       }
       this.scaleType = 'time';
-      this.xScale = d3.time.scale()
+      this.xScale = d3.scaleTime()
         .range([0, this.dims.width])
         .domain(domain);
     } else {
       this.scaleType = 'ordinal';
-      this.xScale = d3.scale.ordinal()
-        .rangePoints([0, this.dims.width], 0.1)
+      this.xScale = d3.scalePoint()
+        .range([0, this.dims.width], 0.1)
         .domain(this.results.d0Domain);
     }
 
-    this.yScale = d3.scale.linear()
+    this.yScale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain([0, this.results.maxValue]);
 

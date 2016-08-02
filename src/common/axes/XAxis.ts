@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import d3 from 'd3';
+import d3 from '../../d3';
 import { XAxisTicks } from './XAxisTicks';
 import { AxisLabel } from './AxisLabel';
 
@@ -71,7 +71,8 @@ export class XAxis implements OnInit {
     }
 
     if (typeof this.xAxisTickInterval !== 'undefined') {
-      this.tickArguments = [d3.time[this.xAxisTickInterval.unit], this.xAxisTickInterval.interval];
+      // todo we need to change this, because the function names have changed: https://github.com/d3/d3/blob/master/CHANGES.md#time-intervals-d3-time
+      // this.tickArguments = [d3.time[this.xAxisTickInterval.unit], this.xAxisTickInterval.interval];
     }
   }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Line } from './Line';
-import d3 from 'd3';
+import d3 from '../d3';
 import moment = require("moment");
 
 @Component({
@@ -26,13 +26,13 @@ export class LineSeries implements OnInit {
   @Input() scaleType;
 
   ngOnInit() {
-    let line = d3.svg.line()
+    let line = d3.line()
       .x(d => {
         let label = d.vals[0].label[0][0];
         if (this.scaleType === 'time') {
           return this.xScale(moment(label).toDate());
         } else {
-          return this.xScale(label) + this.xScale.rangeBand() / 2;
+          return this.xScale(label) + this.xScale.bandwidth() / 2;
         }
       })
       .y(d => this.yScale(d.vals[0].value));

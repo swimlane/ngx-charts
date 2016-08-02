@@ -1,5 +1,6 @@
 import { Component, Input, ElementRef, OnInit } from '@angular/core';
 import { trimLabel } from '../common/trimLabel';
+import d3 from '../d3';
 
 @Component({
   selector: 'g[pie-label]',
@@ -49,7 +50,7 @@ export class Label implements OnInit {
   ngOnInit() {
     let factor = 1.5;
 
-    let outerArc = d3.svg.arc()
+    let outerArc = d3.arc()
       .innerRadius(this.radius * factor)
       .outerRadius(this.radius * factor);
 
@@ -58,7 +59,7 @@ export class Label implements OnInit {
       startRadius = this.radius * this.value / this.max;
     }
 
-    let innerArc = d3.svg.arc()
+    let innerArc = d3.arc()
       .innerRadius(startRadius)
       .outerRadius(startRadius);
 

@@ -7,8 +7,7 @@ import {SeriesVertical} from './SeriesVertical';
 import {XAxis} from '../common/axes/XAxis';
 import {YAxis} from '../common/axes/YAxis';
 import {tickFormat} from '../common/tickFormat';
-import * as d3 from 'd3';
-
+import d3 from '../d3';
 
 @Component({
   selector: 'bar-vertical',
@@ -52,8 +51,8 @@ import * as d3 from 'd3';
 })
 export class BarVertical extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  xScale: d3.scale.Ordinal<any, any>;
-  yScale: d3.scale.Linear<number, number>;
+  xScale: any;
+  yScale: any;
   transform: string;
   colors: Function;
 
@@ -80,12 +79,12 @@ export class BarVertical extends BaseChart implements OnInit {
     let groupSpacing = 0.2;
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    this.yScale = d3.scale.linear()
+    this.yScale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain([0, this.results.m0Domain[1]]);
 
-    this.xScale = d3.scale.ordinal()
-      .rangeRoundBands([0, this.dims.width], groupSpacing)
+    this.xScale = d3.scaleBand()
+      .rangeRound([0, this.dims.width], groupSpacing)
       .domain(this.results.d0Domain);
 
     this.setColors();

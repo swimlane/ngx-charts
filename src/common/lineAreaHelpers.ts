@@ -1,4 +1,6 @@
 import moment = require("moment");
+import d3 from '../d3';
+
 /**
  * Finds and returns the index of the nearest point on the X scale range
  */
@@ -141,7 +143,8 @@ export function updateTooltip(el, chartEl, chart) {
 
   var tTip: HTMLElement = <HTMLElement>d3.select('.popover')[0][0];
   if (tTip) {
-    var newY = d3.event['pageY'] - tTip.getClientRects()[0].height / 2;
+    // we need to use require here, to be sure that we get the latest event
+    var newY = require("d3-selection").event.pageY - tTip.getClientRects()[0].height / 2;
     d3.select('.popover').style('left', xPos + 10);
     d3.select('.popover').style('top', newY);
   }

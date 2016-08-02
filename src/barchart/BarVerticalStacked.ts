@@ -7,6 +7,7 @@ import { SeriesVertical } from './SeriesVertical';
 import { XAxis } from '../common/axes/XAxis';
 import { YAxis } from '../common/axes/YAxis';
 import { tickFormat } from '../common/tickFormat';
+import d3 from '../d3';
 
 @Component({
   selector: 'bar-vertical-stacked',
@@ -57,8 +58,8 @@ import { tickFormat } from '../common/tickFormat';
 })
 export class BarVerticalStacked extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  xScale: d3.scale.Ordinal;
-  yScale: d3.scale.Linear;
+  xScale: any;
+  yScale: any;
   transform: string;
   tickFormatting: Function;
   colors: Function;
@@ -81,11 +82,11 @@ export class BarVerticalStacked extends BaseChart implements OnInit {
   ngOnInit() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    this.xScale = d3.scale.ordinal()
-      .rangeRoundBands([0, this.dims.width], 0.1)
+    this.xScale = d3.scaleBand()
+      .rangeRound([0, this.dims.width], 0.1)
       .domain(this.results.d0Domain);
 
-    this.yScale = d3.scale.linear()
+    this.yScale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain([0, this.results.maxValue]);
 

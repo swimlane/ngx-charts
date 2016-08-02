@@ -19,11 +19,11 @@ module.exports = {
   resolve: {
 
     /*
-    * An array of extensions that should be used to resolve modules.
-    *
-    * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
-    */
-    extensions: ['', '.ts', '.js'],
+     * An array of extensions that should be used to resolve modules.
+     *
+     * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
+     */
+    extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
 
     // remove other default values
     modulesDirectories: ['node_modules'],
@@ -108,14 +108,16 @@ module.exports = {
    * See: https://webpack.github.io/docs/webpack-dev-server.html
    */
   devServer: {
-    port: '8080',
-    host: 'localhost',
-    historyApiFallback: true,
+    contentBase: './',
     watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
+      poll: true
     },
-    outputPath: root('dist')
+    stats: {
+      modules: false,
+      cached: false,
+      colors: true,
+      chunk: false
+    }
   },
 
   output: {
@@ -151,7 +153,7 @@ module.exports = {
     chunkFilename: '[id].chunk.js',
 
     library: 'ac_[name]',
-    libraryTarget: 'var',
+    libraryTarget: 'var'
   },
 
   /*
@@ -178,7 +180,7 @@ module.exports = {
      * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
      */
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['polyfills', 'vendor'].reverse()
+      name: ['vendor', 'polyfills']
     }),
 
     /*
@@ -191,7 +193,7 @@ module.exports = {
      */
     new HtmlWebpackPlugin({
       template: 'index.html',
-      //chunksSortMode: 'dependency'
+      chunksSortMode: 'dependency'
     })
 
   ]

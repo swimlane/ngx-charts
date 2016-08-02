@@ -6,6 +6,7 @@ import { BaseChart } from '../BaseChart';
 import { PieGridSeries } from './PieGridSeries';
 import { trimLabel } from '../common/trimLabel';
 import { gridLayout } from '../common/gridLayout';
+import d3 from '../d3';
 
 @Component({
   selector: 'pie-grid',

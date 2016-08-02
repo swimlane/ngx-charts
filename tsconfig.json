@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "noEmitHelpers": true,
@@ -10,9 +9,10 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "pretty": true,
-    "allowUnreachableCode": true,
-    "allowUnusedLabels": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "noImplicitAny": false,
+    "noImplicitThis": false,
     "noImplicitReturns": false,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": false,
@@ -25,9 +25,6 @@
       "core-js"
     ]
   },
-  "files": [
-    "src/viz.ts"
-  ],
   "exclude": [
     "node_modules"
   ],

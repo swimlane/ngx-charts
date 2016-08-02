@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { trimLabel } from '../common/trimLabel';
 import CountUp from 'countUp'; // todo fix missing dependency
+import d3 from '../d3';
 
 @Component({
   selector: 'g[card]',

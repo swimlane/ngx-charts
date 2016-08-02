@@ -53,7 +53,7 @@ export class SeriesVertical implements OnInit {
         let secondDate = moment(firstDate).add(1, 'hours');
         width = Math.abs(this.xScale(secondDate) - this.xScale(firstDate)) * 0.8;
       } else {
-        width = this.xScale.rangeBand();
+        width = this.xScale.bandwidth();
       }
     }
 

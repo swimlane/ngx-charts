@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { SvgLinearGradient } from '../common/SvgLinearGradient';
 import ObjectId from "../utils/objectid";
+import d3 from '../d3';
 
 @Component({
   selector: 'g[area]',

@@ -10,6 +10,7 @@ import { CircleSeries } from '../common/CircleSeries';
 import { Timeline } from '../common/Timeline';
 import ObjectId from "../utils/objectid";
 import moment = require("moment"); // todo remove moment dependency
+import d3 from '../d3';
 
 @Component({
   selector: 'line-chart',
@@ -92,8 +93,8 @@ import moment = require("moment"); // todo remove moment dependency
 })
 export class LineChart extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  yScale: d3.scale.Linear;
-  xScale: d3.time.Scale;
+  yScale: any;
+  xScale: any;
   colors: Function;
   scaleType: string;
   transform: string;
@@ -128,7 +129,7 @@ export class LineChart extends BaseChart implements OnInit {
       return this.results.d0Domain.indexOf(a.vals[0].label[0][0]) - this.results.d0Domain.indexOf(b.vals[0].label[0][0]);
     });
 
-    this.yScale = d3.scale.linear()
+    this.yScale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.results.m0Domain);
 
@@ -146,13 +147,13 @@ export class LineChart extends BaseChart implements OnInit {
         });
       }
       this.scaleType = 'time';
-      this.xScale = d3.time.scale()
+      this.xScale = d3.scaleTime()
         .range([0, this.dims.width])
         .domain(domain);
     } else {
       this.scaleType = 'ordinal';
-      this.xScale = d3.scale.ordinal()
-        .rangePoints([0, this.dims.width], 0.1)
+      this.xScale = d3.scalePoint()
+        .range([0, this.dims.width], 0.1)
         .domain(this.results.d0Domain);
     }
 

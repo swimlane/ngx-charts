@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import d3 from 'd3';
+import d3 from '../d3';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
 import { XAxis } from '../common/axes/XAxis';
@@ -57,11 +57,11 @@ import { generateColorScale, colorHelper } from '../utils/colorSets';
 })
 export class HeatMap extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  xScale: d3.scale.Ordinal;
-  yScale: d3.scale.Ordinal;
-  color: d3.rgb;
+  xScale: any;
+  yScale: any;
+  color: any;
   colors: Function;
-  colorScale: d3.scale.Ordinal;
+  colorScale: any;
   transform: string;
   rects: any[];
 
@@ -83,12 +83,12 @@ export class HeatMap extends BaseChart implements OnInit {
   ngOnInit() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 11);
 
-    this.xScale = d3.scale.ordinal()
-      .rangeRoundBands([0, this.dims.width], 0.1)
+    this.xScale = d3.scaleBand()
+      .rangeRound([0, this.dims.width], 0.1)
       .domain(this.results.d0Domain);
 
-    this.yScale = d3.scale.ordinal()
-      .rangeRoundBands([this.dims.height, 0], 0.1)
+    this.yScale = d3.scaleBand()
+      .rangeRound([this.dims.height, 0], 0.1)
       .domain(this.results.d1Domain);
 
     this.color = d3.rgb(this.scheme.domain[0]);
@@ -110,8 +110,8 @@ export class HeatMap extends BaseChart implements OnInit {
           x: this.xScale(d0),
           y: this.yScale(d1),
           rx: 3,
-          width: this.xScale.rangeBand(),
-          height: this.yScale.rangeBand(),
+          width: this.xScale.bandwidth(),
+          height: this.yScale.bandwidth(),
           fill: 'rgba(200,200,200,0.03)'
         });
       });
@@ -123,5 +123,4 @@ export class HeatMap extends BaseChart implements OnInit {
   click(data) {
     this.clickHandler.emit(data);
   }
-
 }

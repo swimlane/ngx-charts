@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { formatNumber } from 'common/utils/number/format'; // todo fix import
 // todo fix missing "props"
+import d3 from '../d3';
+
 @Component({
   selector: 'g[cell]',
   template: `

@@ -96,8 +96,8 @@ export class YAxisTicks implements OnInit {
       };
     }
 
-    this.adjustedScale = scale.rangeBand ? function(d) {
-      return scale(d) + scale.rangeBand() * 0.5;
+    this.adjustedScale = scale.bandwidth ? function(d) {
+      return scale(d) + scale.bandwidth() * 0.5;
     } : scale;
 
     switch (this.orient) {

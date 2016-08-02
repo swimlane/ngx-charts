@@ -6,6 +6,7 @@ import { BaseChart } from '../BaseChart';
 import { SeriesVertical } from './SeriesVertical';
 import { XAxis } from '../common/axes/XAxis';
 import { YAxis } from '../common/axes/YAxis';
+import d3 from '../d3';
 
 @Component({
   selector: 'date-bar',
@@ -50,8 +51,8 @@ import { YAxis } from '../common/axes/YAxis';
 })
 export class DateBar extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  xScale: d3.scale.Ordinal;
-  yScale: d3.scale.Linear;
+  xScale: any;
+  yScale: any;
   transform: string;
   colors: Function;
 
@@ -73,12 +74,12 @@ export class DateBar extends BaseChart implements OnInit {
   ngOnInit() {
     let groupSpacing = 0.2;
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
-    this.yScale = d3.scale.linear()
+    this.yScale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain([0, this.results.m0Domain[1]]);
 
-    this.xScale = d3.scale.ordinal()
-      .rangeRoundBands([0, this.dims.width], groupSpacing)
+    this.xScale = d3.scaleBand()
+      .rangeRound([0, this.dims.width], groupSpacing)
       .domain(this.results.d0Domain);
 
     this.setColors();

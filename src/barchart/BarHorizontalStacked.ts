@@ -6,7 +6,7 @@ import {BaseChart} from '../BaseChart';
 import {SeriesHorizontal} from './SeriesHorizontal';
 import {XAxis} from '../common/axes/XAxis';
 import {YAxis} from '../common/axes/YAxis';
-import d3 from 'd3';
+import d3 from '../d3';
 
 @Component({
   selector: 'bar-horizontal-stacked',
@@ -58,8 +58,8 @@ import d3 from 'd3';
 })
 export class BarHorizontalStacked extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  xScale: d3.scale.Linear;
-  yScale: d3.scale.Ordinal;
+  xScale: any;
+  yScale: any;
   transform: string;
   colors: Function;
 
@@ -81,12 +81,12 @@ export class BarHorizontalStacked extends BaseChart implements OnInit {
   ngOnInit() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    this.xScale = d3.scale.linear()
+    this.xScale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain([0, this.results.maxValue]);
 
-    this.yScale = d3.scale.ordinal()
-      .rangeRoundBands([0, this.dims.height], 0.1)
+    this.yScale = d3.scaleBand()
+      .rangeRound([0, this.dims.height], 0.1)
       .domain(this.results.d0Domain);
 
     this.setColors();

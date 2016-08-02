@@ -55,4 +55,4 @@ export default angular
 
   .directive('numberCard', adapter.downgradeNg2Component(NumberCard))
   .directive('heatMap', adapter.downgradeNg2Component(HeatMap))
-  .directive('treeMap', adapter.downgradeNg2Component(TreeMap));
+  .directive('treeMap', adapter.downgradeNg2Component(TreeMap))

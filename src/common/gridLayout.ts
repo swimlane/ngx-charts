@@ -1,7 +1,9 @@
+import d3 from '../d3';
+
 export function gridLayout(dims, data, minWidth) {
   let rows = 1;
-  let xScale: any = d3.scale.ordinal();
-  let yScale: any = d3.scale.ordinal();
+  let xScale: any = d3.scaleBand();
+  let yScale: any = d3.scaleBand();
   let dataLength = data.length;
   let width = dims.width;
   let height = dims.height;
@@ -26,14 +28,14 @@ export function gridLayout(dims, data, minWidth) {
   xScale.domain(xDomain);
   yScale.domain(yDomain);
 
-  xScale.rangeRoundBands([0, width], 0.1);
-  yScale.rangeRoundBands([0, height], 0.1);
+  xScale.rangeRound([0, width], 0.1);
+  yScale.rangeRound([0, height], 0.1);
 
   let res = [];
   let total = data.total();
   // let total = data.reduce((m, n) => m + n.vals[0].value, 0);
-  let cardWidth = xScale.rangeBand();
-  let cardHeight = yScale.rangeBand();
+  let cardWidth = xScale.bandwidth();
+  let cardHeight = yScale.bandwidth();
 
   for (let i = 0; i < data.array.length; i++) {
     res[i] = {};

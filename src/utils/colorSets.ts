@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import d3 from '../d3';
 
 export var colorSets = [
   {
@@ -78,17 +78,17 @@ export function generateColorScale(scheme, type, domain) {
   }
   let colorScale;
   if (type === 'quantile') {
-    colorScale = d3.scale.quantile()
+    colorScale = d3.scaleQuantile()
       .range(scheme.domain)
       .domain(domain);
 
   } else if (type === 'ordinal') {
-    colorScale = d3.scale.ordinal()
+    colorScale = d3.scaleOrdinal()
       .range(scheme.domain)
       .domain(domain);
 
   } else if (type === 'linear') {
-    colorScale = d3.scale.linear()
+    colorScale = d3.scaleLinear()
       .domain(d3.range(0, 1, 1.0 / (scheme.domain.length - 1)))
       .range(scheme.domain);
   }
@@ -100,7 +100,7 @@ export function colorHelper(scheme, type, domain, customColors?) {
   let colorScale = generateColorScale(scheme, type, domain);
   let colorScaleFunction = function(value) {
     if (type === 'linear') {
-      let valueScale = d3.scale.linear()
+      let valueScale = d3.scaleLinear()
         .domain(domain)
         .range([0, 1]);
 

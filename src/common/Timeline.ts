@@ -4,6 +4,7 @@ import { Chart } from '../common/charts/Chart';
 import { XAxis } from '../common/axes/XAxis';
 import moment = require("moment");
 import { throttle } from "../utils/throttle";
+import d3 from '../d3';
 
 @Component({
   selector: 'g[timeline]',
@@ -27,8 +28,8 @@ import { throttle } from "../utils/throttle";
 export class Timeline implements OnInit {
   element: HTMLElement;
   dims: any;
-  xScale: d3.time.Scale;
-  brush: d3.svg.Brush;
+  xScale: any;
+  brush: any;
   transform: string;
 
   @Input() view;
@@ -57,7 +58,7 @@ export class Timeline implements OnInit {
       return results.d0Domain.indexOf(a.vals[0].label[0][0]) - results.d0Domain.indexOf(b.vals[0].label[0][0]);
     });
 
-    let yScale = d3.scale.linear()
+    let yScale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(results.m0Domain);
 
@@ -75,8 +76,7 @@ export class Timeline implements OnInit {
     if (this.state.brush) {
       this.brush = this.state.brush;
     } else {
-      this.brush = d3.svg.brush()
-        .x(this.state.xScale)
+      this.brush = d3.brushX(this.state.xScale) // todo need to check if it's working, haven't used brush with d3 v4 yet
         .on("brush", throttle(() => {
           var newDomain = this.brush.empty() ? this.state.xScale.domain() : this.brush.extent();
           this.updateXDomain.emit(newDomain);
@@ -116,7 +116,7 @@ export class Timeline implements OnInit {
       xScale = this.state.xScale;
 
     } else {
-      xScale = d3.time.scale()
+      xScale = d3.scaleTime()
         .range([0, this.dims.width])
         .domain(domain);
     }

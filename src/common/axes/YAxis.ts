@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import d3 from 'd3';
+import d3 from '../../d3';
 import { YAxisTicks } from './YAxisTicks';
 import { AxisLabel } from './AxisLabel';
 
@@ -76,7 +76,8 @@ export class YAxis implements OnInit {
     }
 
     if (typeof this.yAxisTickInterval !== 'undefined') {
-      this.tickArguments = [d3.time[this.yAxisTickInterval.unit], this.yAxisTickInterval.interval];
+      // todo we need to change this, because the function names have changed: https://github.com/d3/d3/blob/master/CHANGES.md#time-intervals-d3-time
+      // this.tickArguments = [d3.time[this.yAxisTickInterval.unit], this.yAxisTickInterval.interval];
     }
   }
 

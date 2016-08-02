@@ -39,7 +39,7 @@ export class GridPanelSeries implements OnInit {
           color = 'rgba(255,255,255,0)';
         }
         offset = this.xScale.range()[0] / 2;
-        width = this.xScale.rangeBand() + 2 * offset;
+        width = this.xScale.bandwidth() + 2 * offset;
         height = this.dims.height;
         x = this.xScale(d.name) - offset;
         y = 0;
@@ -51,7 +51,7 @@ export class GridPanelSeries implements OnInit {
         }
         offset = this.yScale.range()[0] / 2;
         width = this.dims.width;
-        height = this.yScale.rangeBand() + 2 * offset;
+        height = this.yScale.bandwidth() + 2 * offset;
         x = 0;
         y = this.yScale(d.name) - offset;
       }

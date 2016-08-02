@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Area } from './Area';
-import d3 from 'd3';
+import d3 from '../d3';
 import moment = require("moment");
 
 @Component({
@@ -18,8 +18,8 @@ import moment = require("moment");
 })
 export class AreaSeries implements OnInit {
   opacity: number;
-  path: d3.path;
-  startingPath: d3.path;
+  path: string;
+  startingPath: string;
 
   @Input() data;
   @Input() xScale;
@@ -39,27 +39,27 @@ export class AreaSeries implements OnInit {
       if (this.scaleType === 'time') {
         return this.xScale(moment(label).toDate());
       } else {
-        return this.xScale(label) + this.xScale.rangeBand() / 2;
+        return this.xScale(label) + this.xScale.bandwidth() / 2;
       }
     };
 
     if (this.stacked === true) {
-      area = d3.svg.area().interpolate("linear")
+      area = d3.area().interpolate("linear")
         .x(xProperty)
         .y0(d => this.yScale(d.vals[0].d0))
         .y1(d => this.yScale(d.vals[0].d1));
 
-      startingArea = d3.svg.area().interpolate("linear")
+      startingArea = d3.area().interpolate("linear")
         .x(xProperty)
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);
     } else {
-      area = d3.svg.area().interpolate("linear")
+      area = d3.area().interpolate("linear")
         .x(xProperty)
         .y0(() => this.yScale.range()[0])
         .y1(d => this.yScale(d.vals[0].value));
 
-      startingArea = d3.svg.area().interpolate("linear")
+      startingArea = d3.area().interpolate("linear")
         .x(xProperty)
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
-import d3 from 'd3';
+import d3 from '../d3';
 import { SvgLinearGradient } from '../common/SvgLinearGradient';
 import { SvgRadialGradient } from '../common/SvgRadialGradient';
 import ObjectId from "../utils/objectid";
@@ -35,7 +35,7 @@ import ObjectId from "../utils/objectid";
 })
 export class PieArc implements OnInit {
   element: HTMLElement;
-  path: d3.path;
+  path: any;
   startOpacity: number;
   radialGradientId: string;
   linearGradientId: string;
@@ -81,7 +81,7 @@ export class PieArc implements OnInit {
       outerRadius = this.outerRadius * this.value / this.max;
     }
 
-    return d3.svg.arc()
+    return d3.arc()
       .innerRadius(this.innerRadius).outerRadius(outerRadius);
   }
 

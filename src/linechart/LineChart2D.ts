@@ -10,6 +10,7 @@ import { CircleSeries } from '../common/CircleSeries';
 import { Timeline } from '../common/Timeline';
 import moment = require("moment");
 import ObjectId from "../utils/objectid";
+import d3 from '../d3';
 
 @Component({
   selector: 'line-chart-2-d',
@@ -99,8 +100,8 @@ import ObjectId from "../utils/objectid";
 export class LineChart2D extends BaseChart implements OnInit {
   dims: ViewDimensions;
   scaleType: string;
-  xScale: d3.time.Scale;
-  yScale: d3.scale.Linear;
+  xScale: any;
+  yScale: any;
   transform: string;
   clipPath: string;
   colors: Function;
@@ -140,17 +141,17 @@ export class LineChart2D extends BaseChart implements OnInit {
         });
       }
       this.scaleType = 'time';
-      this.xScale = d3.time.scale()
+      this.xScale = d3.scaleTime()
         .range([0, this.dims.width])
         .domain(domain);
     } else {
       this.scaleType = 'ordinal';
-      this.xScale = d3.scale.ordinal()
-        .rangePoints([0, this.dims.width], 0.1)
+      this.xScale = d3.scalePoint()
+        .range([0, this.dims.width], 0.1)
         .domain(this.results.d0Domain);
     }
 
-    this.yScale = d3.scale.linear()
+    this.yScale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.results.m0Domain);
 

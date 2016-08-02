@@ -8,6 +8,7 @@ import { XAxis } from '../common/axes/XAxis';
 import { YAxis } from '../common/axes/YAxis';
 import { tickFormat } from '../common/tickFormat';
 import { GridPanelSeries } from '../common/GridPanelSeries';
+import d3 from '../d3';
 
 @Component({
   selector: 'bar-horizontal-2-d',
@@ -64,9 +65,9 @@ import { GridPanelSeries } from '../common/GridPanelSeries';
 })
 export class BarHorizontal2D extends BaseChart implements OnInit {
   dims: ViewDimensions;
-  x0Scale: d3.scale.Linear;
-  y0Scale: d3.scale.Ordinal;
-  y1Scale: d3.scale.Ordinal;
+  x0Scale: any;
+  y0Scale: any;
+  y1Scale: any;
   transform: string;
   tickFormatting: Function;
   colors: Function;
@@ -90,16 +91,16 @@ export class BarHorizontal2D extends BaseChart implements OnInit {
     // let groupSpacing = 0.2; // unusued variable
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    this.x0Scale = d3.scale.linear()
+    this.x0Scale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain([0, this.results.m0Domain[1]]);
 
-    this.y0Scale = d3.scale.ordinal()
-      .rangeRoundBands([0, this.dims.height], 0.1)
+    this.y0Scale = d3.scaleBand()
+      .rangeRound([0, this.dims.height], 0.1)
       .domain(this.results.d0Domain);
 
-    this.y1Scale = d3.scale.ordinal()
-      .rangeRoundBands([0, this.y0Scale.rangeBand()], 0.1)
+    this.y1Scale = d3.scaleBand()
+      .rangeRound([0, this.y0Scale.bandwidth()], 0.1)
       .domain(this.results.d1Domain);
 
     this.setColors();

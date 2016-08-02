@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import d3 from 'd3';
+import d3 from '../d3';
 import { PieArc } from './PieArc';
 import { Label } from './Label';
 import { Popover } from '../common/popover/PopoverComponent';
@@ -55,7 +55,7 @@ export class PieSeries implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    let pie: any = d3.layout.pie()
+    let pie: any = d3.pie()
       .value((d) => d.vals[0].value)
       .sort(null);
 
@@ -76,7 +76,7 @@ export class PieSeries implements OnInit {
 
   outerArc() {
     let factor = 1.5;
-    return d3.svg.arc()
+    return d3.arc()
       .innerRadius(this.outerRadius * factor)
       .outerRadius(this.outerRadius * factor);
   }

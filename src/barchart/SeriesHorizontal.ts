@@ -58,12 +58,12 @@ export class SeriesHorizontal implements OnInit {
 
       if (this.type === 'standard') {
         bar.width = this.xScale(value.value);
-        bar.height = this.yScale.rangeBand();
+        bar.height = this.yScale.bandwidth();
         bar.x = 0;
         bar.y = this.yScale(label);
       } else if (this.type === 'stacked') {
         bar.width = this.xScale(value.d1) - this.xScale(value.d0);
-        bar.height = this.yScale.rangeBand();
+        bar.height = this.yScale.bandwidth();
         bar.x = this.xScale(value.d0);
         bar.y = 0;
       }

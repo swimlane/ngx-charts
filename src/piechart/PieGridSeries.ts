@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
-import d3 from 'd3';
+import d3 from '../d3';
 
 @Component({
   selector: 'g[pie-grid-series]',
@@ -33,7 +33,7 @@ export class PieGridSeries implements OnInit {
   }
 
   ngOnInit() {
-    this.layout = d3.layout.pie()
+    this.layout = d3.pie()
       .value((d) => d.data.value).sort(null);
 
     this.arcs = this.getArcs();
@@ -48,7 +48,7 @@ export class PieGridSeries implements OnInit {
       if (index === 0) {
         arc.startAngle = 0;
       }
-      let genArcPath: any = d3.svg.arc()
+      let genArcPath: any = d3.arc()
         .innerRadius(this.innerRadius).outerRadius(this.outerRadius)
         .startAngle(arc.startAngle).endAngle(arc.endAngle);
 
@@ -63,7 +63,7 @@ export class PieGridSeries implements OnInit {
 
 
   loadAnimation() {
-    let layout = d3.layout.pie()
+    let layout = d3.pie()
       .value((d) => d.data.value).sort(null);
     let data = layout(this.data);
 
@@ -97,7 +97,7 @@ export class PieGridSeries implements OnInit {
   }
 
   calculateArc(innerRadius, outerRadius) {
-    return d3.svg.arc()
+    return d3.arc()
       .innerRadius(innerRadius).outerRadius(outerRadius);
   }
 

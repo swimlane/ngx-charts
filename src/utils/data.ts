@@ -1,23 +1,23 @@
-import d3 from 'd3';
+import d3 from '../d3';
 
 export var calculateScales = function(chartWidth, chartHeight, xValues, yValues) {
 
   var xScale, yScale;
 
   if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]') {
-    xScale = d3.time.scale()
+    xScale = d3.scaleTime()
       .range([0, chartWidth]);
   } else {
-    xScale = d3.scale.linear()
+    xScale = d3.scaleLinear()
       .range([0, chartWidth]);
   }
   xScale.domain(d3.extent(xValues));
 
   if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object Date]') {
-    yScale = d3.time.scale()
+    yScale = d3.scaleTime()
       .range([chartHeight, 0]);
   } else {
-    yScale = d3.scale.linear()
+    yScale = d3.scaleLinear()
       .range([chartHeight, 0]);
   }
 

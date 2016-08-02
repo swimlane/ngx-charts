@@ -5,6 +5,7 @@ import 'common/utils/objectid';
 import { Popover } from '../common/popover/PopoverComponent';
 import moment = require("moment");
 import ObjectId from "../utils/objectid";
+import d3 from '../d3';
 
 @Component({
   selector: 'g[circle-series]',
@@ -47,7 +48,7 @@ import ObjectId from "../utils/objectid";
   `
 })
 export class CircleSeries implements OnInit {
-  areaPath: d3.svg.Area;
+  areaPath: any;
   circles: any[];
 
   @Input() data;
@@ -68,11 +69,11 @@ export class CircleSeries implements OnInit {
       if (this.scaleType === 'time') {
         return this.xScale(moment(label).toDate());
       } else {
-        return this.xScale(label) + this.xScale.rangeBand() / 2;
+        return this.xScale(label) + this.xScale.bandwidth() / 2;
       }
     };
 
-    let area = d3.svg.area().interpolate("linear")
+    let area = d3.area().interpolate("linear")
       .x(xProperty)
       .y0(() => this.yScale.range()[0])
       .y1(d => this.yScale(d.vals[0].value));
@@ -104,7 +105,7 @@ export class CircleSeries implements OnInit {
         if (this.scaleType === 'time') {
           cx = this.xScale(moment(label).toDate());
         } else {
-          cx = this.xScale(label) + this.xScale.rangeBand() / 2;
+          cx = this.xScale(label) + this.xScale.bandwidth() / 2;
         }
         let cy = this.yScale(this.type === 'standard' ? value.value : value.d1);
         let radius = 5;

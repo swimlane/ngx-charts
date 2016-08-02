@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import d3 from 'd3';
+import d3 from '../d3';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
 import { CellSeries } from './CellSeries';
@@ -52,7 +52,7 @@ export class TreeMap extends BaseChart implements OnInit {
       data[i].label = this.results.data[i].label;
     }
 
-    this.treemap = d3.layout.treemap()
+    this.treemap = d3.treemap()
       .children(d => d)
       .size([this.dims.width, this.dims.height])
       .sticky(true)
