@@ -81,7 +81,7 @@ export class BarVertical extends BaseChart{
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     this.yScale = d3.scale.linear()
-      .range([this.dims.height, 0], 1)
+      .range([this.dims.height, 0])
       .domain([0, this.results.m0Domain[1]]);
 
     this.xScale = d3.scale.ordinal()

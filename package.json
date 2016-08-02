@@ -10,7 +10,7 @@
     "clean": "npm-run-all -p clean:*",
     "clean:dist": "rimraf dist",
     "clean:release": "rimraf release",
-    "build:dev": "webpack --config webpack.config.js --progress --profile --bail",
+    "build:dev": "webpack --config webpack.config.js --progress --profile",
     "build:ts": "tsc",
     "build:sass": "node-sass -o dist/ src/",
     "build:css": "postcss --use autoprefixer dist/*.css -d dist/",
