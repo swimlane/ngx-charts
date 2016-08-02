@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { trimLabel } from '../common/trimLabel';
-import CountUp from 'countUp';
+import CountUp from 'countUp'; // todo fix missing dependency
 
 @Component({
   selector: 'g[card]',
@@ -41,7 +41,15 @@ import CountUp from 'countUp';
     </svg:g>
   `
 })
-export class Card {
+export class Card implements OnInit {
+  element: HTMLElement;
+  transform: string;
+  trimmedLabel: string;
+  value: string;
+  cardWidth: number;
+  cardHeight: number;
+  textWidth: number;
+
   @Input() color;
   @Input() x;
   @Input() y;
@@ -52,7 +60,7 @@ export class Card {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -65,36 +73,38 @@ export class Card {
 
     this.cardWidth = Math.max(0, this.width - 5);
     this.cardHeight = Math.max(0, this.height - 5);
-    this.textWidth = Math.max(0, this.width - 15)
+    this.textWidth = Math.max(0, this.width - 15);
 
-    this.loadAnimation()
+    this.loadAnimation();
   }
 
   loadAnimation() {
-    let node = d3.select(this.element).selectAll('.value-text');;
+    let node = d3.select(this.element).selectAll('.value-text');
 
     node.text('0');
 
     this.animateToCurrentForm();
   }
 
-  animateToCurrentForm(){
+  animateToCurrentForm() {
     let node = d3.select(this.element).selectAll('.value-text');
 
     var options = {
       useEasing: true,
       useGrouping: true,
       separator: ',',
-      decimal: '.'
+      decimal: '.',
+      prefix: '',
+      suffix: ''
     };
 
     var endValue = this.data.value;
-    if (this.data.valueType === 'currency'){
+    if (this.data.valueType === 'currency') {
       options.prefix = '$';
-    } else if (this.data.valueType === 'duration'){
-      if (endValue < 60){
+    } else if (this.data.valueType === 'duration') {
+      if (endValue < 60) {
         options.suffix = ' sec';
-      } else if (endValue < 3600){
+      } else if (endValue < 3600) {
         endValue = endValue / 60;
         options.suffix = ' min';
       } else {
@@ -107,7 +117,7 @@ export class Card {
     counter.start();
   }
 
-  click(){
+  click() {
     this.clickHandler.emit(this.data);
   }
 }

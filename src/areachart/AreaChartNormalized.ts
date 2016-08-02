@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
@@ -8,8 +8,9 @@ import { YAxis } from '../common/axes/YAxis';
 import { AreaSeries } from './AreaSeries';
 import { CircleSeries } from '../common/CircleSeries';
 import { Timeline } from '../common/Timeline';
-import { showTooltip, updateTooltip, hideTooltip } from '../common/lineAreaHelpers';
 import d3 from 'd3';
+import moment = require("moment");
+import ObjectId from "../utils/objectid";
 
 @Component({
   selector: 'area-chart-normalized',
@@ -99,8 +100,19 @@ import d3 from 'd3';
     </chart>
   `
 })
-export class AreaChartNormalized extends BaseChart {
+export class AreaChartNormalized extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  scaleType: string;
+  xScale: d3.time.Scale;
+  yScale: d3.scale.Linear;
+  transform: string;
+  clipPathId: string;
+  clipPath: string;
+  tickFormatting: Function;
+  colors: Function;
+
   @Input() view;
+  @Input() xDomain;
   @Input() results;
   @Input() margin = [10, 20, 70, 70];
   @Input() scheme;
@@ -119,34 +131,36 @@ export class AreaChartNormalized extends BaseChart {
   ngOnInit() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    if (this.timeline){
+    if (this.timeline) {
       this.dims.height -= 150;
     }
 
-    if (this.results.query && this.results.query.dimensions[0].field && this.results.query.dimensions[0].field.fieldType === 'date' && this.results.query.dimensions[0].groupByType.value === 'groupBy'){
+    if (this.results.query && this.results.query.dimensions[0].field && this.results.query.dimensions[0].field.fieldType === 'date' && this.results.query.dimensions[0].groupByType.value === 'groupBy') {
       let domain;
-      if (this.xDomain){
+      if (this.xDomain) {
         domain = this.xDomain;
       } else {
-        domain = d3.extent(this.results.d0Domain, function (d) { return moment(d).toDate(); })
+        domain = d3.extent(this.results.d0Domain, function(d) {
+          return moment(d).toDate();
+        });
       }
       this.scaleType = 'time';
       this.xScale = d3.time.scale()
         .range([0, this.dims.width])
         .domain(domain);
     } else {
-      this.scaleType = 'ordinal'
+      this.scaleType = 'ordinal';
       this.xScale = d3.scale.ordinal()
         .rangePoints([0, this.dims.width], 0.1)
         .domain(this.results.d0Domain);
     }
 
     this.yScale = d3.scale.linear()
-      .range([this.dims.height, 0], 0.1)
+      .range([this.dims.height, 0])
       .domain([0, 1]);
 
     this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;;
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;
     this.clipPathId = 'clip' + ObjectId().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
@@ -154,12 +168,12 @@ export class AreaChartNormalized extends BaseChart {
     this.tickFormatting = d3.format('.0%');
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
-    this.colors =  colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
+  setColors() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
   }
 
 }

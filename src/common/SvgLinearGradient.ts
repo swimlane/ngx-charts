@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'g[svg-linear-gradient]',
@@ -22,7 +22,7 @@ import { Component, Input } from '@angular/core';
     </svg:linearGradient>
   `
 })
-export class SvgLinearGradient {
+export class SvgLinearGradient implements OnInit {
   @Input() orientation = 'vertical';
   @Input() color;
   @Input() name;
@@ -40,12 +40,13 @@ export class SvgLinearGradient {
     this.y1 = '0%';
     this.y2 = '0%';
 
-    let startOpacity = this.startOpacity;
-    let endOpacity = this.endOpacity;
+    // unused variables
+    // let startOpacity = this.startOpacity;
+    // let endOpacity = this.endOpacity;
 
-    if (this.orientation === 'horizontal'){
+    if (this.orientation === 'horizontal') {
       this.x2 = '100%';
-    } else if (this.orientation === 'vertical'){
+    } else if (this.orientation === 'vertical') {
       this.y1 = '100%';
     }
 

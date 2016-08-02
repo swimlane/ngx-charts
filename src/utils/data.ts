@@ -1,6 +1,6 @@
 import d3 from 'd3';
 
-export var calculateScales = function (chartWidth, chartHeight, xValues, yValues) {
+export var calculateScales = function(chartWidth, chartHeight, xValues, yValues) {
 
   var xScale, yScale;
 
@@ -30,15 +30,15 @@ export var calculateScales = function (chartWidth, chartHeight, xValues, yValues
 
 };
 
-export var flattenData = function (data, xAccessor, yAccessor) {
+export var flattenData = function(data, xAccessor, yAccessor) {
   var allValues = [];
-  var xValues   = [];
-  var yValues   = [];
+  var xValues = [];
+  var yValues = [];
 
   var coincidentCoordinateCheck = {};
 
   data.forEach(function(series) {
-    series.values.forEach(function (item, idx) {
+    series.values.forEach(function(item, idx) {
 
       var x = xAccessor(item);
 
@@ -55,7 +55,7 @@ export var flattenData = function (data, xAccessor, yAccessor) {
       // iterate over the keys and push all the values to yValues array
       var yNode;
       if (typeof y === 'object' && Object.keys(y).length > 0) {
-        Object.keys(y).forEach(function (key) {
+        Object.keys(y).forEach(function(key) {
           // Check for NaN since d3's Voronoi cannot handle NaN values
           // Go ahead and Proceed to next iteration since we don't want NaN
           // in allValues or in xValues or yValues

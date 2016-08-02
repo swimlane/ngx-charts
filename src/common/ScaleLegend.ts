@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'scale-legend',
@@ -13,7 +13,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
         </div>
 
         <div class="legend-wrap"
-          style="height: 100%; width: 100%; border-radius: 5;"
+          style="height: 100%; width: 100%; border-radius: 5px;"
           [style.background]="gradient">
         </div>
 
@@ -24,14 +24,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     </div>
   `
 })
-export class ScaleLegend {
+export class ScaleLegend implements OnInit {
   @Input() valueRange;
   @Input() colors;
   @Input() height;
 
   gradient: any;
 
-  ngOnInit(){
+  ngOnInit() {
     let gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
     this.gradient = `linear-gradient(to bottom, ${gradientValues})`;
   }
@@ -46,9 +46,9 @@ export class ScaleLegend {
     // add the 100%
     splits.push(1);
     let pairs = [];
-    colors.forEach((c, i) =>{
-      pairs.push(`${c} ${Math.round(splits[i]*100)}%`);
-    })
+    colors.forEach((c, i) => {
+      pairs.push(`${c} ${Math.round(splits[i] * 100)}%`);
+    });
 
     return pairs.join(', ');
   }

@@ -1,6 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Card } from './Card';
 import { Popover } from '../common/popover/PopoverComponent';
+
+interface Card {
+  x;
+  y;
+  width: number;
+  height: number;
+  color: string;
+  label: string;
+  data;
+  tooltipText: string;
+}
 
 @Component({
   selector: 'g[card-series]',
@@ -23,7 +34,9 @@ import { Popover } from '../common/popover/PopoverComponent';
     </svg:g>
   `
 })
-export class CardSeries {
+export class CardSeries implements OnInit {
+  cards: Card[];
+
   @Input() data;
   @Input() dims;
   @Input() colors;
@@ -34,7 +47,7 @@ export class CardSeries {
     this.cards = this.getCards();
   }
 
-  getCards(){
+  getCards() {
     return this.data
       .map((d, index) => {
         let label = d.data.label[1];
@@ -48,11 +61,11 @@ export class CardSeries {
           label: d.data.label,
           data: d.data,
           tooltipText: `${label}: ${value}`
-        }
-      })
+        };
+      });
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Cell } from './Cell';
+import { OnInit } from "@angular/core/esm";
 
 @Component({
   selector: 'g[cell-series]',
@@ -20,7 +21,8 @@ import { Cell } from './Cell';
     </svg:g>
   `
 })
-export class CellSeries {
+export class CellSeries implements OnInit {
+  cells: any[];
   @Input() data;
   @Input() dims;
   @Input() colors;
@@ -31,7 +33,7 @@ export class CellSeries {
     this.cells = this.getCells();
   }
 
-  getCells(){
+  getCells() {
     return this.data
       .filter((d) => {
         return d.depth === 1;
@@ -46,11 +48,11 @@ export class CellSeries {
           label: d.label,
           value: d.value,
           valueType: d.valueType
-        }
-      })
+        };
+      });
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
@@ -60,7 +60,13 @@ import { gridLayout } from '../common/gridLayout';
     </chart>
   `
 })
-export class PieGrid extends BaseChart {
+export class PieGrid extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  data: any[];
+  transform: string;
+  series: any[];
+  colorScale: Function;
+
   @Input() view;
   @Input() results;
   @Input() margin = [20, 20, 20, 20];
@@ -76,8 +82,8 @@ export class PieGrid extends BaseChart {
     // sort data according to domain
     let sortedData = this.results.series[0];
     sortedData.array = sortedData.array.sort((a, b) => {
-      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1])
-    })
+      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
+    });
 
     this.data = gridLayout(this.dims, sortedData, 150);
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
@@ -85,7 +91,7 @@ export class PieGrid extends BaseChart {
     this.series = this.getSeries();
   }
 
-  getSeries(){
+  getSeries() {
     return this.data.map((d) => {
       let label = d.data.label[0][0];
       let value = d.data.value;
@@ -120,15 +126,15 @@ export class PieGrid extends BaseChart {
             formattedLabel: ['other']
           }
         }]
-      }
-    })
+      };
+    });
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
+  setColors() {
     this.colorScale = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
   }
 

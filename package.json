@@ -55,6 +55,7 @@
     "@types/d3": "0.0.30",
     "autoprefixer": "6.3.7",
     "awesome-typescript-loader": "2.1.1",
+    "codelyzer": "0.0.26",
     "css-loader": "0.23.1",
     "html-webpack-plugin": "2.22.0",
     "module-header": "0.5.0",

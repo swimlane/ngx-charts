@@ -1,4 +1,3 @@
-
 export function layout(d, normalize) {
   let stacks = [], stack;
 
@@ -14,7 +13,7 @@ export function layout(d, normalize) {
         d[i].values = {};
       }
       stack.push({
-        value: +d[i].values[groups[j]]|| 0,
+        value: +d[i].values[groups[j]] || 0,
         label: d[i].label,
         group: groups[j],
         d0: d0,
@@ -29,10 +28,10 @@ export function layout(d, normalize) {
       });
     }
   }
-  stacks.series = groups.map(function (d) {
-    return {label: d};
+  stacks['series'] = groups.map(function(data) {
+    return {label: data};
   });
-  stacks.series.meta = d.meta.slice(1);
+  stacks['series'].meta = d.meta.slice(1);
   return stacks;
 }
 

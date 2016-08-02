@@ -10,16 +10,18 @@
         timeout = setTimeout(later, wait - last);
       } else {
         timeout = null;
-        if (!immediate)
+        if (!immediate) {
           result = func.apply(context, args);
+        }
       }
     };
     var callNow = immediate && !timeout;
     if (!timeout) {
       timeout = setTimeout(later, wait);
     }
-    if (callNow)
+    if (callNow) {
       result = func.apply(context, args);
+    }
     return result;
   };
 }
@@ -32,12 +34,12 @@
  *    myFn() { ... }
  *  }
  */
-export function debounceable (duration, immediate) {
-  return function innerDecorator (target, key, descriptor) {
+export function debounceable(duration, immediate) {
+  return function innerDecorator(target, key, descriptor) {
     return {
       configurable: true,
       enumerable: descriptor.enumerable,
-      get: function getter () {
+      get: function getter() {
         Object.defineProperty(this, key, {
           configurable: true,
           enumerable: descriptor.enumerable,
@@ -46,15 +48,14 @@ export function debounceable (duration, immediate) {
 
         return this[key];
       }
-    }
-  }
+    };
+  };
 }
 
-export function throttle(func, wait, options) {
+export function throttle(func, wait, options: any = {}) {
   var context, args, result;
   var timeout = null;
   var previous: any = 0;
-  options || (options = {});
   var later = function() {
     previous = options.leading === false ? 0 : new Date();
     timeout = null;
@@ -62,8 +63,9 @@ export function throttle(func, wait, options) {
   };
   return function() {
     var now = new Date();
-    if (!previous && options.leading === false)
+    if (!previous && options.leading === false) {
       previous = now;
+    }
     var remaining: any = wait - (now.getTime() - previous);
     context = this;
     args = arguments;
@@ -87,12 +89,12 @@ export function throttle(func, wait, options) {
  *    myFn() { ... }
  *  }
  */
-export function throttleable (duration, options) {
-  return function innerDecorator (target, key, descriptor) {
+export function throttleable(duration, options) {
+  return function innerDecorator(target, key, descriptor) {
     return {
       configurable: true,
       enumerable: descriptor.enumerable,
-      get: function getter () {
+      get: function getter() {
         Object.defineProperty(this, key, {
           configurable: true,
           enumerable: descriptor.enumerable,
@@ -101,6 +103,6 @@ export function throttleable (duration, options) {
 
         return this[key];
       }
-    }
-  }
+    };
+  };
 }

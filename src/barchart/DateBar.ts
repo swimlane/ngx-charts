@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
@@ -48,7 +48,13 @@ import { YAxis } from '../common/axes/YAxis';
     </chart>
   `
 })
-export class DateBar extends BaseChart {
+export class DateBar extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  xScale: d3.scale.Ordinal;
+  yScale: d3.scale.Linear;
+  transform: string;
+  colors: Function;
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 20, 70, 100];
@@ -68,7 +74,7 @@ export class DateBar extends BaseChart {
     let groupSpacing = 0.2;
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
     this.yScale = d3.scale.linear()
-      .range([this.dims.height, 0], 1)
+      .range([this.dims.height, 0])
       .domain([0, this.results.m0Domain[1]]);
 
     this.xScale = d3.scale.ordinal()
@@ -80,12 +86,11 @@ export class DateBar extends BaseChart {
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
+  setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
   }
-
 }

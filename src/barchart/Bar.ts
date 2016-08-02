@@ -1,7 +1,6 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import ObjectId from '../utils/objectid';
 import { SvgLinearGradient } from '../common/SvgLinearGradient';
-import { throttle, debounce } from '../utils/throttle';
 import * as d3 from 'd3';
 
 @Component({
@@ -28,7 +27,7 @@ import * as d3 from 'd3';
     </svg:g>
   `
 })
-export class Bar {
+export class Bar implements OnInit {
   @Input() fill;
   @Input() data;
   @Input() width;
@@ -47,7 +46,7 @@ export class Bar {
   gradientFill: any;
   startOpacity: any;
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -65,33 +64,33 @@ export class Bar {
   loadAnimation() {
     let node = d3.select(this.element).select('.bar');
     let startingPath = this.calculateStartingPath();
-    node.attr('d', startingPath)
+    node.attr('d', startingPath);
 
     this.animateToCurrentForm();
   }
 
-  animateToCurrentForm(){
+  animateToCurrentForm() {
     let node = d3.select(this.element).select('.bar');
-    let path = this.calculatePath();
+    this.path = this.calculatePath(); // todo check if defining this.path or local variable path to use below
 
     node.transition().duration(750)
-      .attr('d', this.path);
+      .attr('d', this.path); // todo check if use this.path or use path defined above
   }
 
-  calculateStartingPath(){
+  calculateStartingPath() {
     let radius = this.calculateRadius();
     let path;
 
-    if (this.roundEdges){
-      if (this.orientation === 'vertical'){
+    if (this.roundEdges) {
+      if (this.orientation === 'vertical') {
         path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
-      } else if (this.orientation === 'horizontal'){
+      } else if (this.orientation === 'horizontal') {
         path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
       }
     } else {
-      if (this.orientation === 'vertical'){
+      if (this.orientation === 'vertical') {
         path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, false, false, false, false);
-      } else if (this.orientation === 'horizontal'){
+      } else if (this.orientation === 'horizontal') {
         path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, false, false, false);
       }
     }
@@ -99,14 +98,14 @@ export class Bar {
     return path;
   }
 
-  calculatePath(){
+  calculatePath() {
     let radius = this.calculateRadius();
     let path;
 
-    if (this.roundEdges){
-      if (this.orientation === 'vertical'){
+    if (this.roundEdges) {
+      if (this.orientation === 'vertical') {
         path = this.roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
-      } else if (this.orientation === 'horizontal'){
+      } else if (this.orientation === 'horizontal') {
         path = this.roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
       }
     } else {
@@ -116,19 +115,19 @@ export class Bar {
     return path;
   }
 
-  calculateRadius(){
+  calculateRadius() {
     let radius = 0;
-    if (this.roundEdges){
+    if (this.roundEdges) {
       radius = 5;
-      if (this.height <= radius || this.width <= radius){
+      if (this.height <= radius || this.width <= radius) {
         radius = 0;
       }
     }
     return radius;
   }
 
-  calculateStartOpacity(){
-    if (this.roundEdges){
+  calculateStartOpacity() {
+    if (this.roundEdges) {
       return 0;
     } else {
       return 0.5;
@@ -137,24 +136,40 @@ export class Bar {
 
   roundedRect(x, y, w, h, r, tl, tr, bl, br) {
     var retval;
-    retval  = "M" + (x + r) + "," + y;
-    retval += "h" + (w - 2*r);
-    if (tr) { retval += "a" + r + "," + r + " 0 0 1 " + r + "," + r; }
-    else { retval += "h" + r; retval += "v" + r; }
-    retval += "v" + (h - 2*r);
-    if (br) { retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + r; }
-    else { retval += "v" + r; retval += "h" + -r; }
-    retval += "h" + (2*r - w);
-    if (bl) { retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + -r; }
-    else { retval += "h" + -r; retval += "v" + -r; }
-    retval += "v" + (2*r - h);
-    if (tl) { retval += "a" + r + "," + r + " 0 0 1 " + r + "," + -r; }
-    else { retval += "v" + -r; retval += "h" + r; }
+    retval = "M" + (x + r) + "," + y;
+    retval += "h" + (w - 2 * r);
+    if (tr) {
+      retval += "a" + r + "," + r + " 0 0 1 " + r + "," + r;
+    } else {
+      retval += "h" + r;
+      retval += "v" + r;
+    }
+    retval += "v" + (h - 2 * r);
+    if (br) {
+      retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + r;
+    } else {
+      retval += "v" + r;
+      retval += "h" + -r;
+    }
+    retval += "h" + (2 * r - w);
+    if (bl) {
+      retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + -r;
+    } else {
+      retval += "h" + -r;
+      retval += "v" + -r;
+    }
+    retval += "v" + (2 * r - h);
+    if (tl) {
+      retval += "a" + r + "," + r + " 0 0 1 " + r + "," + -r;
+    } else {
+      retval += "v" + -r;
+      retval += "h" + r;
+    }
     retval += "z";
     return retval;
   }
 
-  click(){
+  click() {
     this.clickHandler.emit(this.data);
   }
 

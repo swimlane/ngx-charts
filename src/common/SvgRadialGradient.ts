@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'g[svg-radial-gradient]',
@@ -22,7 +22,11 @@ import { Component, Input } from '@angular/core';
     </svg:radialGradient>
   `
 })
-export class SvgRadialGradient {
+export class SvgRadialGradient implements OnInit {
+  cx: number;
+  cy: number;
+  r: string;
+
   @Input() color = 'vertical';
   @Input() color;
   @Input() name;
@@ -30,8 +34,8 @@ export class SvgRadialGradient {
   @Input() endOpacity = 1;
 
   ngOnInit() {
-    this.cx = "0";
-    this.cy = "0";
+    this.cx = 0;
+    this.cy = 0;
     this.r = "30%";
   }
 }

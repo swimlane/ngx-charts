@@ -70,14 +70,14 @@ export var colorSets = [
 
 ];
 
-export function generateColorScale(scheme, type, domain){
-  if (typeof(scheme) === 'string'){
+export function generateColorScale(scheme, type, domain) {
+  if (typeof(scheme) === 'string') {
     scheme = colorSets.find(cs => {
       return cs.name === scheme;
-    })
+    });
   }
   let colorScale;
-  if (type === 'quantile'){
+  if (type === 'quantile') {
     colorScale = d3.scale.quantile()
       .range(scheme.domain)
       .domain(domain);
@@ -87,32 +87,31 @@ export function generateColorScale(scheme, type, domain){
       .range(scheme.domain)
       .domain(domain);
 
-  } else if (type === 'linear'){
+  } else if (type === 'linear') {
     colorScale = d3.scale.linear()
-      .domain(d3.range(0, 1, 1.0/ (scheme.domain.length-1)))
-      .range(scheme.domain)
+      .domain(d3.range(0, 1, 1.0 / (scheme.domain.length - 1)))
+      .range(scheme.domain);
   }
 
   return colorScale;
 }
 
-export function colorHelper(scheme, type, domain, customColors){
-  let colorScale = generateColorScale(scheme, type, domain)
-  let colorScaleFunction = function(value){
-    if (type === 'linear'){
+export function colorHelper(scheme, type, domain, customColors?) {
+  let colorScale = generateColorScale(scheme, type, domain);
+  let colorScaleFunction = function(value) {
+    if (type === 'linear') {
       let valueScale = d3.scale.linear()
         .domain(domain)
         .range([0, 1]);
 
-      return(colorScale(valueScale(value)));
-    }
-    else {
+      return (colorScale(valueScale(value)));
+    } else {
       let formattedValue = value.toString();
-      let found = undefined;
-      if (customColors && customColors.length > 0){
+      let found: any = undefined; // todo type customColors
+      if (customColors && customColors.length > 0) {
         found = customColors.find((mapping) => {
           return mapping.name === formattedValue.toLowerCase();
-        })
+        });
       }
 
       if (found) {
@@ -121,7 +120,7 @@ export function colorHelper(scheme, type, domain, customColors){
         return colorScale(value);
       }
     }
-  }
+  };
 
   return colorScaleFunction;
 }

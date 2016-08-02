@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Bar } from './Bar';
 import { Popover } from '../common/popover/PopoverComponent';
 import * as moment from 'moment';
@@ -24,7 +24,7 @@ import * as moment from 'moment';
     </svg:g>
   `
 })
-export class SeriesVertical {
+export class SeriesVertical implements OnInit {
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
@@ -44,15 +44,15 @@ export class SeriesVertical {
     this.update();
   }
 
-  update(){
+  update() {
     let width;
-    if (this.series.array.length){
-      if (this.scaleType === 'time'){
+    if (this.series.array.length) {
+      if (this.scaleType === 'time') {
         let count = this.series.array[0].vals[0].label[0].length;
         let firstDate = this.series.array[0].vals[0].label[0][count - 1];
         let secondDate = moment(firstDate).add(1, 'hours');
-        width = Math.abs(this.xScale(secondDate) - this.xScale(firstDate))*0.8;
-      } else  {
+        width = Math.abs(this.xScale(secondDate) - this.xScale(firstDate)) * 0.8;
+      } else {
         width = this.xScale.rangeBand();
       }
     }
@@ -61,10 +61,10 @@ export class SeriesVertical {
       let value = d.vals[0];
       let count = value.label[0].length;
       let label = value.label[0][count - 1];
-      let formattedLabel = value.formattedLabel[count-1];
+      let formattedLabel = value.formattedLabel[count - 1];
       let roundEdges = this.type === 'standard';
 
-      let bar = {
+      let bar: any = {
         value: value,
         label: formattedLabel,
         color: this.colors(formattedLabel),
@@ -82,7 +82,7 @@ export class SeriesVertical {
         bar.x = this.xScale(label);
         bar.y = this.yScale(value.value);
       } else if (this.type === 'stacked') {
-        bar.height = this.yScale(value.d0) - this.yScale(value.d1),
+        bar.height = this.yScale(value.d0) - this.yScale(value.d1);
         bar.x = 0;
         bar.y = this.yScale(value.d1);
       }
@@ -91,8 +91,7 @@ export class SeriesVertical {
     });
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
-
 }

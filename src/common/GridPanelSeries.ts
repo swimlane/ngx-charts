@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GridPanel } from './GridPanel';
 
 @Component({
@@ -14,7 +14,9 @@ import { GridPanel } from './GridPanel';
     </svg:g>
   `
 })
-export class GridPanelSeries {
+export class GridPanelSeries implements OnInit {
+  gridPanels: any[];
+
   @Input() data;
   @Input() dims;
   @Input() xScale;
@@ -25,18 +27,18 @@ export class GridPanelSeries {
     this.gridPanels = this.getGridPanels();
   }
 
-  getGridPanels(){
-    return this.data.map((d,i) => {
+  getGridPanels() {
+    return this.data.map((d, i) => {
       let color = 'rgba(255,255,255,0.02)';
       let offset, width, height, x, y;
 
       if (this.orient === 'vertical') {
         let position = this.xScale(d.name);
         let positionIndex = this.xScale.range().indexOf(position);
-        if (positionIndex % 2 === 1){
+        if (positionIndex % 2 === 1) {
           color = 'rgba(255,255,255,0)';
         }
-        offset = this.xScale.range()[0]/2;
+        offset = this.xScale.range()[0] / 2;
         width = this.xScale.rangeBand() + 2 * offset;
         height = this.dims.height;
         x = this.xScale(d.name) - offset;
@@ -44,10 +46,10 @@ export class GridPanelSeries {
       } else if (this.orient === 'horizontal') {
         let position = this.yScale(d.name);
         let positionIndex = this.yScale.range().indexOf(position);
-        if (positionIndex % 2 === 1){
+        if (positionIndex % 2 === 1) {
           color = 'rgba(255,255,255,0)';
         }
-        offset = this.yScale.range()[0]/2;
+        offset = this.yScale.range()[0] / 2;
         width = this.dims.width;
         height = this.yScale.rangeBand() + 2 * offset;
         x = 0;
@@ -62,7 +64,7 @@ export class GridPanelSeries {
         width: width,
         x: x,
         y: y
-      }
+      };
     });
   }
 }

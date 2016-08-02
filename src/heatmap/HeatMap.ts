@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import d3 from 'd3';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
 import { XAxis } from '../common/axes/XAxis';
 import { YAxis } from '../common/axes/YAxis';
 import { HeatCellSeries } from './HeatCellSeries';
-import { calculateViewDimensions } from '../common/viewDimensions';
+import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { generateColorScale, colorHelper } from '../utils/colorSets';
 
 @Component({
@@ -55,7 +55,16 @@ import { generateColorScale, colorHelper } from '../utils/colorSets';
     </chart>
   `
 })
-export class HeatMap extends BaseChart {
+export class HeatMap extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  xScale: d3.scale.Ordinal;
+  yScale: d3.scale.Ordinal;
+  color: d3.rgb;
+  colors: Function;
+  colorScale: d3.scale.Ordinal;
+  transform: string;
+  rects: any[];
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 20, 70, 100];
@@ -92,7 +101,7 @@ export class HeatMap extends BaseChart {
     this.rects = this.getRects();
   }
 
-  getRects(){
+  getRects() {
     let rects = [];
 
     this.results.d0Domain.map((d0, index0) => {
@@ -111,7 +120,7 @@ export class HeatMap extends BaseChart {
     return rects;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

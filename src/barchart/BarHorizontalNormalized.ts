@@ -1,12 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
-import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { SeriesHorizontal } from './SeriesHorizontal';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
-import { tickFormat } from '../common/tickFormat';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {calculateViewDimensions, ViewDimensions} from '../common/viewDimensions';
+import {colorHelper} from '../utils/colorSets';
+import {Chart} from '../common/charts/Chart';
+import {BaseChart} from '../BaseChart';
+import {SeriesHorizontal} from './SeriesHorizontal';
+import {XAxis} from '../common/axes/XAxis';
+import {YAxis} from '../common/axes/YAxis';
 import d3 from 'd3';
 
 @Component({
@@ -57,7 +56,14 @@ import d3 from 'd3';
     </chart>
   `
 })
-export class BarHorizontalNormalized extends BaseChart {
+export class BarHorizontalNormalized extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  xScale: d3.scale.Linear;
+  yScale: d3.scale.Ordinal;
+  transform: string;
+  xAxisTickFormatting: Function;
+  colors: Function;
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 20, 70, 100];
@@ -77,7 +83,7 @@ export class BarHorizontalNormalized extends BaseChart {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     this.xScale = d3.scale.linear()
-      .range([0, this.dims.width], 0.1)
+      .range([0, this.dims.width])
       .domain([0, 1]);
 
     this.yScale = d3.scale.ordinal()
@@ -91,15 +97,15 @@ export class BarHorizontalNormalized extends BaseChart {
     this.xAxisTickFormatting = d3.format('.0%');
   }
 
-  seriesTransform(series){
+  seriesTransform(series) {
     return `translate(0, ${this.yScale(series.name)})`;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
+  setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
   }
 

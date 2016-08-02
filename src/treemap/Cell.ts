@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
-import { formatNumber } from 'common/utils/number/format';
-
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { formatNumber } from 'common/utils/number/format'; // todo fix import
+// todo fix missing "props"
 @Component({
   selector: 'g[cell]',
   template: `
@@ -28,7 +28,10 @@ import { formatNumber } from 'common/utils/number/format';
     </svg:g>
   `
 })
-export class Cell {
+export class Cell implements OnInit {
+  element: HTMLElement;
+  transform: string;
+  formattedValue: string; // todo check string or number ?
   @Input() fill;
   @Input() x;
   @Input() y;
@@ -40,7 +43,7 @@ export class Cell {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -48,26 +51,26 @@ export class Cell {
     this.transform = `translate(${props.x} , ${props.y})`;
     this.formattedValue = formatNumber(props.value, props.valueType);
 
-    this.loadAnimation()
+    this.loadAnimation();
   }
 
   loadAnimation() {
     let node = d3.select(this.element).select('.cell');
 
     node
-      .attr('opacity', 0)
+      .attr('opacity', 0);
 
     this.animateToCurrentForm();
   }
 
-  animateToCurrentForm(){
+  animateToCurrentForm() {
     let node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1);
   }
 
-  click(){
+  click() {
     this.clickHandler.emit(this.label);
   }
 

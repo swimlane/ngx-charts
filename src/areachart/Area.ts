@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { SvgLinearGradient } from '../common/SvgLinearGradient';
+import ObjectId from "../utils/objectid";
 
 @Component({
   selector: 'g[area]',
@@ -24,7 +25,11 @@ import { SvgLinearGradient } from '../common/SvgLinearGradient';
     </svg:g>
   `
 })
-export class Area {
+export class Area implements OnInit {
+  element: HTMLElement;
+  gradientId: string;
+  gradientFill: string;
+
   @Input() data;
   @Input() path;
   @Input() startingPath;
@@ -36,14 +41,13 @@ export class Area {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
   ngOnInit() {
-    let label = this.data.name;
-
-    let active = label === this.activeLabel;
+    // let label = this.data.name; // unusued variable
+    // let active = label === this.activeLabel; // unusued variable
 
     let pageUrl = window.location.href;
     this.gradientId = 'grad' + ObjectId().toString();
@@ -56,12 +60,12 @@ export class Area {
     let node = d3.select(this.element).select('.area');
 
     node
-      .attr('d', this.startingPath)
+      .attr('d', this.startingPath);
 
     this.animateToCurrentForm();
   }
 
-  animateToCurrentForm(){
+  animateToCurrentForm() {
     let node = d3.select(this.element).select('.area');
 
     node.transition().duration(750)

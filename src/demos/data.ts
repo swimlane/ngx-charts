@@ -1,4 +1,4 @@
-export var pieData  = {
+export var pieData = {
   "d0Domain": [
     "complete",
     "not complete"
@@ -41,14 +41,14 @@ export var pieData  = {
       ]
     }
   ]
-}
+};
 
-export var barData  = {
+export var barData = {
   "d0Domain": [
     "complete",
     "not complete"
   ],
-  "m0Domain": [1,2],
+  "m0Domain": [1, 2],
   "series": [
     {
       array: [
@@ -84,9 +84,9 @@ export var barData  = {
             }
           ]
         }
-    ]
-  }]
-}
+      ]
+    }]
+};
 
 export var lineData = {
   series: [{
@@ -100,7 +100,7 @@ export var lineData = {
 };
 
 ['app 1', 'app 2', 'app 3'].map((app) => {
-  let val = Math.random()*100;
+  let val = Math.random() * 100;
   lineData.series[0].array.push({
     vals: [
       {
@@ -110,10 +110,10 @@ export var lineData = {
       }
     ],
     maxValue: 100
-  })
+  });
   lineData.series[0].name = app;
   lineData.series[0].maxValue = 100;
 
   lineData.d0Domain.push(app);
   lineData.m0Domain = [Math.min(val, lineData.m0Domain[0]), Math.max(val, lineData.m0Domain[1])];
-})
+});

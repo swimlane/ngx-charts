@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
@@ -55,7 +55,14 @@ import { tickFormat } from '../common/tickFormat';
     </chart>
   `
 })
-export class BarVerticalStacked extends BaseChart {
+export class BarVerticalStacked extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  xScale: d3.scale.Ordinal;
+  yScale: d3.scale.Linear;
+  transform: string;
+  tickFormatting: Function;
+  colors: Function;
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 20, 70, 100];
@@ -79,7 +86,7 @@ export class BarVerticalStacked extends BaseChart {
       .domain(this.results.d0Domain);
 
     this.yScale = d3.scale.linear()
-      .range([this.dims.height, 0], 0.1)
+      .range([this.dims.height, 0])
       .domain([0, this.results.maxValue]);
 
     this.setColors();
@@ -88,16 +95,15 @@ export class BarVerticalStacked extends BaseChart {
     this.tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
   }
 
-  seriesTransform(series){
+  seriesTransform(series) {
     return `translate(${this.xScale(series.name)}, 0)`;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
+  setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
   }
-
 }

@@ -28,7 +28,7 @@ import '../viz.scss';
 
     </div>
   `,
-  directives: [ VIZ_COMPONENTS ]
+  directives: [VIZ_COMPONENTS]
 })
 export class App {
 
@@ -36,11 +36,10 @@ export class App {
   pieData: any;
   lineData: any;
 
-	constructor() {
+  constructor() {
     console.log('Alles gut');
     Object.assign(this, {barData, pieData, lineData});
   }
-
 
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { trimLabel } from '../trimLabel';
 
 @Component({
@@ -33,7 +33,7 @@ import { trimLabel } from '../trimLabel';
     </svg:g>
   `
 })
-export class XAxisTicks {
+export class XAxisTicks implements OnInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -56,7 +56,7 @@ export class XAxisTicks {
   ticks: any;
   tickFormat: any;
 
-  constructor(){
+  constructor() {
     Object.assign(this, {
       innerTickSize: 6,
       outerTickSize: 6,
@@ -73,12 +73,12 @@ export class XAxisTicks {
     this.update();
   }
 
-  update(){
-    var scale;
-    var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
-    var tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
+  update() {
+    // unused variables
+    // var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
+    // var tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 
-    scale = this.scale;
+    var scale = this.scale;
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {
@@ -86,7 +86,9 @@ export class XAxisTicks {
     } else if (scale.tickFormat) {
       this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
-      this.tickFormat = function(d) { return d; };
+      this.tickFormat = function(d) {
+        return d;
+      };
     }
 
     for (var i = 0; i < this.ticks.length; i++) {
@@ -95,7 +97,9 @@ export class XAxisTicks {
       }
     }
 
-    this.adjustedScale = scale.rangeBand ? function(d) { return scale(d) + scale.rangeBand() * 0.5; } : scale;
+    this.adjustedScale = scale.rangeBand ? function(d) {
+      return scale(d) + scale.rangeBand() * 0.5;
+    } : scale;
 
     this.textTransform = '';
     if (this.rotateLabels) {
@@ -118,11 +122,11 @@ export class XAxisTicks {
     return ticks;
   }
 
-  tickTransform(tick){
+  tickTransform(tick) {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
   }
 
-  gridLineTransform(){
+  gridLineTransform() {
     return `translate(0,${-this.verticalSpacing - 5})`;
   }
 

@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Area } from './Area';
 import d3 from 'd3';
+import moment = require("moment");
 
 @Component({
   selector: 'g[area-series]',
@@ -15,7 +16,11 @@ import d3 from 'd3';
     />
   `
 })
-export class AreaSeries {
+export class AreaSeries implements OnInit {
+  opacity: number;
+  path: d3.path;
+  startingPath: d3.path;
+
   @Input() data;
   @Input() xScale;
   @Input() yScale;
@@ -31,12 +36,12 @@ export class AreaSeries {
 
     let xProperty = (d) => {
       let label = d.vals[0].label[0][0];
-      if (this.scaleType === 'time'){
+      if (this.scaleType === 'time') {
         return this.xScale(moment(label).toDate());
       } else {
         return this.xScale(label) + this.xScale.rangeBand() / 2;
       }
-    }
+    };
 
     if (this.stacked === true) {
       area = d3.svg.area().interpolate("linear")
@@ -61,10 +66,10 @@ export class AreaSeries {
     }
 
 
-    if (this.scaleType === 'time'){
+    if (this.scaleType === 'time') {
       this.data = this.data.filter(d => {
         return d.vals[0].label[0][0] !== 'No Value' && d.vals[0].label[0][0] !== 'Other';
-      })
+      });
     }
     this.opacity = 1;
     this.path = area(this.data);

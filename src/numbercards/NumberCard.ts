@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import d3 from 'd3';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
 import { CardSeries } from './CardSeries';
-import { calculateViewDimensions } from '../common/viewDimensions';
+import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { gridLayout } from '../common/gridLayout';
 
@@ -25,7 +25,12 @@ import { gridLayout } from '../common/gridLayout';
     </chart>
   `
 })
-export class NumberCard extends BaseChart {
+export class NumberCard extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  data: any[];
+  colors: Function;
+  transform: string;
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 10, 10, 10];
@@ -38,8 +43,8 @@ export class NumberCard extends BaseChart {
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
 
     let sortedData = this.results.series[0].sort((a, b) => {
-      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1])
-    })
+      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
+    });
 
     this.data = gridLayout(this.dims, sortedData, 150);
 
@@ -47,7 +52,7 @@ export class NumberCard extends BaseChart {
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

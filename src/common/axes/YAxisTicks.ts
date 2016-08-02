@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { trimLabel } from '../trimLabel';
 
 @Component({
@@ -36,7 +36,7 @@ import { trimLabel } from '../trimLabel';
     </svg:g>
   `
 })
-export class YAxisTicks {
+export class YAxisTicks implements OnInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -47,13 +47,10 @@ export class YAxisTicks {
   @Input() gridLineHeight;
 
   innerTickSize: any;
-  outerTickSize: any;
   tickPadding: any;
   tickSpacing: any;
-  rotateLabels: any;
   verticalSpacing: any;
   textAnchor: any;
-  trimLabel: any;
   dy: any;
   x1: any;
   x2: any;
@@ -64,7 +61,7 @@ export class YAxisTicks {
   tickFormat: any;
   ticks: any;
 
-  constructor(){
+  constructor() {
     Object.assign(this, {
       innerTickSize: 6,
       outerTickSize: 6,
@@ -80,7 +77,7 @@ export class YAxisTicks {
     this.update();
   }
 
-  update(){
+  update() {
     var scale;
 
     var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
@@ -94,14 +91,18 @@ export class YAxisTicks {
     } else if (scale.tickFormat) {
       this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
-      this.tickFormat = function(d) { return d; };
+      this.tickFormat = function(d) {
+        return d;
+      };
     }
 
-    this.adjustedScale = scale.rangeBand ? function(d) { return scale(d) + scale.rangeBand() * 0.5; } : scale;
+    this.adjustedScale = scale.rangeBand ? function(d) {
+      return scale(d) + scale.rangeBand() * 0.5;
+    } : scale;
 
     switch (this.orient) {
       case "top":
-        this.transform = function (tick) {
+        this.transform = function(tick) {
           return "translate(" + this.adjustedScale(tick) + ",0)";
         };
         this.textAnchor = "middle";
@@ -110,7 +111,7 @@ export class YAxisTicks {
         this.dy = sign < 0 ? "0em" : ".71em";
         break;
       case "bottom":
-        this.transform = function (tick) {
+        this.transform = function(tick) {
           return "translate(" + this.adjustedScale(tick) + ",0)";
         };
         this.textAnchor = "middle";
@@ -119,7 +120,7 @@ export class YAxisTicks {
         this.dy = sign < 0 ? "0em" : ".71em";
         break;
       case "left":
-        this.transform = function (tick) {
+        this.transform = function(tick) {
           return "translate(0," + this.adjustedScale(tick) + ")";
         };
         this.textAnchor = "end";
@@ -128,7 +129,7 @@ export class YAxisTicks {
         this.dy = ".32em";
         break;
       case "right":
-        this.transform = function (tick) {
+        this.transform = function(tick) {
           return "translate(0," + this.adjustedScale(tick) + ")";
         };
         this.textAnchor = "start";
@@ -152,11 +153,11 @@ export class YAxisTicks {
     return ticks;
   }
 
-  tickTransform(tick){
+  tickTransform(tick) {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
   }
 
-  gridLineTransform(){
+  gridLineTransform() {
     return `translate(0,${this.verticalSpacing})`;
   }
 

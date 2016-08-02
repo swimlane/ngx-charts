@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import d3 from 'd3';
 
 @Component({
   selector: 'g[line]',
@@ -20,5 +19,4 @@ export class Line {
   @Input() data;
 
   @Output() clickHandler = new EventEmitter();
-
 }

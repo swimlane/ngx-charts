@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import d3 from 'd3';
 import { XAxisTicks } from './XAxisTicks';
 import { AxisLabel } from './AxisLabel';
@@ -31,7 +31,7 @@ import { AxisLabel } from './AxisLabel';
     </svg:g>
   `
 })
-export class XAxis {
+export class XAxis implements OnInit {
   @Input() xScale;
   @Input() dims;
   @Input() tickFormatting;
@@ -47,7 +47,7 @@ export class XAxis {
   xAxisOffset: any;
   transform: any;
 
-  constructor(){
+  constructor() {
     Object.assign(this, {
       xAxisClassName: 'x axis',
       xOrient: 'bottom',
@@ -63,7 +63,7 @@ export class XAxis {
     this.update();
   }
 
-  update(){
+  update() {
     this.transform = `translate(0,${this.xAxisOffset + this.dims.height})`;
 
     if (typeof this.xAxisTickCount !== 'undefined') {

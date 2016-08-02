@@ -1,12 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
-import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { SeriesVertical } from './SeriesVertical';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
-import { tickFormat } from '../common/tickFormat';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {calculateViewDimensions, ViewDimensions} from '../common/viewDimensions';
+import {colorHelper} from '../utils/colorSets';
+import {Chart} from '../common/charts/Chart';
+import {BaseChart} from '../BaseChart';
+import {SeriesVertical} from './SeriesVertical';
+import {XAxis} from '../common/axes/XAxis';
+import {YAxis} from '../common/axes/YAxis';
+import {tickFormat} from '../common/tickFormat';
 import * as d3 from 'd3';
 
 
@@ -50,7 +50,13 @@ import * as d3 from 'd3';
     </chart>
   `
 })
-export class BarVertical extends BaseChart{
+export class BarVertical extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  xScale: d3.scale.Ordinal;
+  yScale: d3.scale.Linear;
+  transform: string;
+  colors: Function;
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 20, 70, 100];
@@ -76,7 +82,7 @@ export class BarVertical extends BaseChart{
     this.update();
   }
 
-  update(){
+  update() {
     let groupSpacing = 0.2;
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
@@ -93,20 +99,19 @@ export class BarVertical extends BaseChart{
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
-  xAxisTickFormatting(){
+  xAxisTickFormatting() {
     let tickFormatting;
-    if (this.results.query && this.results.query.dimensions.length){
+    if (this.results.query && this.results.query.dimensions.length) {
       tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
     }
     return tickFormatting;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
+  setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
   }
-
 }

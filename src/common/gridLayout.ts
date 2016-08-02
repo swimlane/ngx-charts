@@ -1,12 +1,12 @@
-export function gridLayout(dims, data, minWidth){
+export function gridLayout(dims, data, minWidth) {
   let rows = 1;
-  let xScale = d3.scale.ordinal();
-  let yScale = d3.scale.ordinal();
+  let xScale: any = d3.scale.ordinal();
+  let yScale: any = d3.scale.ordinal();
   let dataLength = data.length;
   let width = dims.width;
   let height = dims.height;
 
-  if (width >  minWidth){
+  if (width > minWidth) {
     while (width / dataLength < minWidth) {
       rows += 1;
       dataLength = Math.ceil(data.length / rows);
@@ -17,10 +17,10 @@ export function gridLayout(dims, data, minWidth){
 
   var xDomain = [];
   var yDomain = [];
-  for (var i = 0; i < rows; i++) {
+  for (let i = 0; i < rows; i++) {
     yDomain.push(i);
   }
-  for (var i = 0; i < columns; i++) {
+  for (let i = 0; i < columns; i++) {
     xDomain.push(i);
   }
   xScale.domain(xDomain);
@@ -35,7 +35,7 @@ export function gridLayout(dims, data, minWidth){
   let cardWidth = xScale.rangeBand();
   let cardHeight = yScale.rangeBand();
 
-  for (var i = 0; i < data.array.length; i++) {
+  for (let i = 0; i < data.array.length; i++) {
     res[i] = {};
     res[i].data = data.array[i].vals[0];
     res[i].x = xScale(i % columns);

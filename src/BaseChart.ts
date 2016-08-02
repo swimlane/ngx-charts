@@ -1,19 +1,21 @@
-export class BaseChart {
-  ngOnChanges(changes){
-    if (changes.scheme){
+import { OnChanges } from "@angular/core";
+
+export class BaseChart implements OnChanges {
+  ngOnChanges(changes) {
+    if (changes.scheme) {
       this.setColors();
     }
   }
 
-  update(){
+  update() {
     console.warn('update needs to be implemented in the chart');
   }
 
-  setColors(){
+  setColors() {
     console.warn('setColors needs to be implemented in the chart');
   }
 
-  click(data){
+  click(data) {
     console.warn('click needs to be implemented in the chart');
   }
 }

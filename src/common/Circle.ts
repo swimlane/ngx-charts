@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'g[circle]',
@@ -15,13 +15,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     />
   `
 })
-export class Circle {
+export class Circle implements OnInit {
   @Input() cx;
   @Input() cy;
   @Input() r;
   @Input() fill;
   @Input() data;
-  @Input() activeLabel;
+  // @Input() activeLabel; // unused input
   @Input() classNames;
   @Input() circleOpacity;
   @Input() pointerEvents;
@@ -29,14 +29,15 @@ export class Circle {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    let count = this.data.label[0].length;
-    let label = this.data.label[0][count - 1];
-    let active = label === this.activeLabel;
+    // unused variables
+    // let count = this.data.label[0].length;
+    // let label = this.data.label[0][count - 1];
+    // let active = label === this.activeLabel;
 
     this.classNames = this.classNames.join(' ') + ' viz ' + 'circle';
   }
 
-  click(){
+  click() {
     this.clickHandler.emit(this.data);
   }
 }

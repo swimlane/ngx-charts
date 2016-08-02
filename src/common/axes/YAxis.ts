@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import d3 from 'd3';
 import { YAxisTicks } from './YAxisTicks';
 import { AxisLabel } from './AxisLabel';
@@ -31,7 +31,7 @@ import { AxisLabel } from './AxisLabel';
     </svg:g>
   `
 })
-export class YAxis {
+export class YAxis implements OnInit {
   @Input() yScale;
   @Input() dims;
   @Input() tickFormatting;
@@ -47,7 +47,7 @@ export class YAxis {
   yAxisOffset: any;
   yOrient: any;
 
-  constructor(){
+  constructor() {
     Object.assign(this, {
       yAxisClassName: 'y axis',
       yOrient: 'left',
@@ -63,12 +63,12 @@ export class YAxis {
     this.update();
   }
 
-  update(){
+  update() {
     this.offset = this.yAxisOffset;
     if (this.yOrient === 'right') {
-       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
+      this.transform = `translate(${this.offset + this.dims.width} , 0)`;
     } else {
-       this.transform = `translate(${this.offset} , 0)`;
+      this.transform = `translate(${this.offset} , 0)`;
     }
 
     if (typeof this.yAxisTickCount !== 'undefined') {

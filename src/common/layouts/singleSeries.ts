@@ -1,4 +1,4 @@
-export function layout (d) {
+export function layout(d) {
   let data = [], item;
 
   for (let i = 0; i < d.length; i++) {
@@ -8,8 +8,8 @@ export function layout (d) {
     item.group = '__all__';
     data.push(item);
   }
-  data.label = '__all__';
-  data.meta = d.meta.slice();
+  data['label'] = '__all__';
+  data['meta'] = d.meta.slice();
 
   return data;
 }

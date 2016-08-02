@@ -1,7 +1,6 @@
-
 export function layout(d, normalize) {
   let groups = [], group;
-  groups.series = [];
+  groups['series'] = [];
 
   let series = getSeries(d);
   let totals = {};
@@ -9,7 +8,7 @@ export function layout(d, normalize) {
   for (let i = 0; i < series.length; i++) {
     groups.push(group = []);
     group.label = series[i];
-    groups.series.push({label: series[i]});
+    groups['series'].push({label: series[i]});
 
     for (let j = 0; j < d.length; j++) {
       if (!d[j].values) {
@@ -35,7 +34,7 @@ export function layout(d, normalize) {
     }
   }
 
-  groups.series.meta = d.meta.slice(1);
+  groups['series'].meta = d.meta.slice(1);
 
   return groups;
 }

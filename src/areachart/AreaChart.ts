@@ -1,14 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
-import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
-import { AreaSeries } from './AreaSeries';
-import { CircleSeries } from '../common/CircleSeries';
-import { Timeline } from '../common/Timeline';
-import { showTooltip, updateTooltip, hideTooltip } from '../common/lineAreaHelpers';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {calculateViewDimensions, ViewDimensions} from '../common/viewDimensions';
+import {colorHelper} from '../utils/colorSets';
+import {Chart} from '../common/charts/Chart';
+import {BaseChart} from '../BaseChart';
+import {XAxis} from '../common/axes/XAxis';
+import {YAxis} from '../common/axes/YAxis';
+import {AreaSeries} from './AreaSeries';
+import {CircleSeries} from '../common/CircleSeries';
+import {Timeline} from '../common/Timeline';
+import moment = require("moment");
+import ObjectId from "../utils/objectid";
 
 @Component({
   selector: 'area-chart',
@@ -91,11 +92,22 @@ import { showTooltip, updateTooltip, hideTooltip } from '../common/lineAreaHelpe
     </chart>
   `
 })
-export class AreaChart extends BaseChart {
+export class AreaChart extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  xScale: d3.time.Scale;
+  yScale: d3.scale.Linear;
+  transform: string;
+  colors: Function;
+  clipPathId: string;
+  clipPath: string;
+  scaleType: string;
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 20, 70, 70];
   @Input() scheme;
+  @Input() legend;
+  @Input() state;
   @Input() customColors;
   @Input() xaxis;
   @Input() yaxis;
@@ -111,13 +123,13 @@ export class AreaChart extends BaseChart {
   ngOnInit() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    if (this.timeline){
+    if (this.timeline) {
       this.dims.height -= 150;
     }
 
     this.results.series[0] = this.results.series[0].sort((a, b) => {
       return this.results.d0Domain.indexOf(a.vals[0].label[0][0]) - this.results.d0Domain.indexOf(b.vals[0].label[0][0]);
-    })
+    });
 
     this.yScale = d3.scale.linear()
       .range([this.dims.height, 0])
@@ -127,37 +139,39 @@ export class AreaChart extends BaseChart {
       this.yScale.domain([0, this.results.m0Domain[1]]);
     }
 
-    if (this.results.query && this.results.query.dimensions.length && this.results.query.dimensions[0].field.fieldType === 'date' && this.results.query.dimensions[0].groupByType.value === 'groupBy'){
+    if (this.results.query && this.results.query.dimensions.length && this.results.query.dimensions[0].field.fieldType === 'date' && this.results.query.dimensions[0].groupByType.value === 'groupBy') {
       let domain;
-      if (this.state.xDomain){
+      if (this.state.xDomain) {
         domain = this.state.xDomain;
       } else {
-        domain = d3.extent(this.results.d0Domain, function (d) { return moment(d).toDate(); })
+        domain = d3.extent(this.results.d0Domain, function(d) {
+          return moment(d).toDate();
+        });
       }
       this.scaleType = 'time';
       this.xScale = d3.time.scale()
         .range([0, this.dims.width])
         .domain(domain);
     } else {
-      this.scaleType = 'ordinal'
+      this.scaleType = 'ordinal';
       this.xScale = d3.scale.ordinal()
         .rangePoints([0, this.dims.width], 0.1)
         .domain(this.results.d0Domain);
     }
 
     this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;;
+    this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
 
     let pageUrl = window.location.href;
     this.clipPathId = 'clip' + ObjectId().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
+  setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', ['Area'], this.customColors);
   }
 

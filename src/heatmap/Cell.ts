@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { SvgLinearGradient } from '../common/SvgLinearGradient';
-import { formatNumber } from 'common/utils/number/format';
+import ObjectId from "../utils/objectid";
 
 @Component({
   selector: 'g[cell]',
@@ -29,7 +29,14 @@ import { formatNumber } from 'common/utils/number/format';
     </svg:g>
   `
 })
-export class Cell {
+export class Cell implements OnInit {
+  element: HTMLElement;
+  transform: string;
+  activeRange: any[];
+  startOpacity: number;
+  gradientId: string;
+  gradientUrl: string;
+
   @Input() fill;
   @Input() x;
   @Input() y;
@@ -40,41 +47,41 @@ export class Cell {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
   ngOnInit() {
     this.transform = `translate(${this.x} , ${this.y})`;
 
-    let value = this.data.value;
-    let range = this.activeRange;
+    // let value = this.data.value; // unused variable
+    // let range = this.activeRange; // unused variable
 
     let pageUrl = window.location.href;
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + ObjectId().toString();
     this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
 
-    this.loadAnimation()
+    this.loadAnimation();
   }
 
   loadAnimation() {
     let node = d3.select(this.element).select('.cell');
 
     node
-      .attr('opacity', 0)
+      .attr('opacity', 0);
 
     this.animateToCurrentForm();
   }
 
-  animateToCurrentForm(){
+  animateToCurrentForm() {
     let node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1);
   }
 
-  click(){
+  click() {
     this.clickHandler.emit(this.data);
   }
 

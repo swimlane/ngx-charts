@@ -1,4 +1,4 @@
-import { Component, Directive, Input, Output, EventEmitter, ElementRef, Renderer } from '@angular/core';
+import { Directive, Input, ElementRef, Renderer, OnInit, OnDestroy } from '@angular/core';
 import { PositionHelper } from './PositionHelper';
 import { PopoverRegistry } from './PopoverRegistry';
 import './popover.scss';
@@ -6,7 +6,7 @@ import './popover.scss';
 @Directive({
   selector: '[sw-popover]'
 })
-export class Popover {
+export class Popover implements OnInit, OnDestroy {
 
   @Input() popoverText;
   @Input() popoverTemplate;
@@ -34,29 +34,29 @@ export class Popover {
     this.renderer = renderer;
 
     // attach exit and enter events to element
-    if (this.mouseEnterListener){
+    if (this.mouseEnterListener) {
       this.mouseEnterListener();
     }
     this.mouseEnterListener = this.renderer.listen(this.element, 'mouseenter', this.display.bind(this));
 
-    if (this.mouseLeaveListener){
+    if (this.mouseLeaveListener) {
       this.mouseLeaveListener();
     }
     this.mouseLeaveListener = this.renderer.listen(this.element, 'mouseleave', this.mouseOut.bind(this));
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.popoverRegistry = PopoverRegistry.getInstance();
   }
 
-  mouseOut(){
+  mouseOut() {
     this.exitTimeout = setTimeout(this.remove.bind(this), 200);
   };
 
   /**
    * Displays the popover on the page
    */
-  display(){
+  display() {
     // this.options = {
     //   text: this.popoverText,
     //   cssClass: this.popoverCssClass,
@@ -101,8 +101,8 @@ export class Popover {
   /**
    * Removes the popover from the registry and page
    */
-  remove(){
-    if (this.popover){
+  remove() {
+    if (this.popover) {
       this.popover.remove();
     }
 
@@ -114,19 +114,18 @@ export class Popover {
    * Checks if the popover's position should be flipped on the other side of
    * the element and flips it
    */
-  checkFlip(triggerElement, popover, options){
+  checkFlip(triggerElement, popover, options) {
     var elDimensions = triggerElement.getBoundingClientRect(),
-        popoverDimensions = popover[0].getBoundingClientRect(),
-        top, left;
+      popoverDimensions = popover[0].getBoundingClientRect();
 
-    if (PositionHelper.shouldFlip(elDimensions, popoverDimensions, options.placement, options.alignment, options.spacing)){
-      if (options.placement === 'right'){
+    if (PositionHelper.shouldFlip(elDimensions, popoverDimensions, options.placement, options.alignment, options.spacing)) {
+      if (options.placement === 'right') {
         options.placement = 'left';
-      } else if (options.placement === 'left'){
+      } else if (options.placement === 'left') {
         options.placement = 'right';
-      } else if (options.placement === 'top'){
+      } else if (options.placement === 'top') {
         options.placement = 'bottom';
-      } else if (options.placement === 'bottom'){
+      } else if (options.placement === 'bottom') {
         options.placement = 'top';
       }
     }
@@ -138,27 +137,27 @@ export class Popover {
    * @param  {object} popover
    * @param  {object} options
    */
-  positionPopover(triggerElement, popover, options){
+  positionPopover(triggerElement, popover, options) {
     var elDimensions = triggerElement.getBoundingClientRect(),
-        popoverDimensions = popover[0].getBoundingClientRect(),
-        top, left;
+      popoverDimensions = popover[0].getBoundingClientRect(),
+      top, left;
 
-    if (options.placement === 'right'){
+    if (options.placement === 'right') {
       left = elDimensions.left + elDimensions.width + options.spacing;
       top = PositionHelper.calculateVerticalAlignment(elDimensions,
         popoverDimensions, options.alignment);
     }
-    if (options.placement === 'left'){
+    if (options.placement === 'left') {
       left = elDimensions.left - popoverDimensions.width - options.spacing;
       top = PositionHelper.calculateVerticalAlignment(elDimensions,
         popoverDimensions, options.alignment);
     }
-    if (options.placement === 'top'){
+    if (options.placement === 'top') {
       top = elDimensions.top - popoverDimensions.height - options.spacing;
       left = PositionHelper.calculateHorizontalAlignment(elDimensions,
         popoverDimensions, options.alignment);
     }
-    if (options.placement === 'bottom'){
+    if (options.placement === 'bottom') {
       top = elDimensions.top + elDimensions.height + options.spacing;
       left = PositionHelper.calculateHorizontalAlignment(elDimensions,
         popoverDimensions, options.alignment);
@@ -169,7 +168,7 @@ export class Popover {
       left: left + 'px'
     });
 
-    if(this.options.showCaret){
+    if (this.options.showCaret) {
       this.addCaret(this.popover, elDimensions, popoverDimensions);
     }
 
@@ -182,7 +181,7 @@ export class Popover {
    * @param {object} elDimensions
    * @param {object} popoverDimensions
    */
-  addCaret(popoverEl, elDimensions, popoverDimensions){
+  addCaret(popoverEl, elDimensions, popoverDimensions) {
     // if (!popoverEl){
     //   return;
     // }
@@ -227,7 +226,7 @@ export class Popover {
   toBoolean(value) {
     if (value && value.length !== 0) {
       var v = ("" + value).toLowerCase();
-      value = (v == 'true');
+      value = (v === 'true');
     } else {
       value = false;
     }
@@ -235,11 +234,11 @@ export class Popover {
   };
 
   ngOnDestroy() {
-    if (this.mouseEnterListener){
+    if (this.mouseEnterListener) {
       this.mouseEnterListener();
     }
 
-    if (this.mouseLeaveListener){
+    if (this.mouseLeaveListener) {
       this.mouseLeaveListener();
     }
 

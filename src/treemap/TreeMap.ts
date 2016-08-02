@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import d3 from 'd3';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
@@ -24,7 +24,7 @@ import { colorHelper } from '../utils/colorSets';
     </chart>
   `
 })
-export class TreeMap extends BaseChart{
+export class TreeMap extends BaseChart implements OnInit {
   @Input() view;
   @Input() results;
   @Input() margin = [10, 10, 10, 10];
@@ -56,16 +56,16 @@ export class TreeMap extends BaseChart{
       .children(d => d)
       .size([this.dims.width, this.dims.height])
       .sticky(true)
-      .value(d => d.value);
+      .value(d => d.value); // todo check if value method exists ?
 
-    this.data = this.treemap(data)
+    this.data = this.treemap(data);
 
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

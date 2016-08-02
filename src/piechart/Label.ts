@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, ElementRef, OnInit } from '@angular/core';
 import { trimLabel } from '../common/trimLabel';
 
 @Component({
@@ -26,7 +26,13 @@ import { trimLabel } from '../common/trimLabel';
     </svg:g>
   `
 })
-export class Label {
+export class Label implements OnInit {
+  element: HTMLElement;
+  trimLabel: Function;
+  labelXY: string;
+  transform: string;
+  line: string;
+
   @Input() data;
   @Input() radius;
   @Input() label;
@@ -35,7 +41,7 @@ export class Label {
   @Input() value;
   @Input() explodeSlices;
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
     this.trimLabel = trimLabel;
   }
@@ -48,8 +54,8 @@ export class Label {
       .outerRadius(this.radius * factor);
 
     let startRadius = this.radius;
-    if (this.explodeSlices){
-      startRadius = this.radius * this.value/this.max;
+    if (this.explodeSlices) {
+      startRadius = this.radius * this.value / this.max;
     }
 
     let innerArc = d3.svg.arc()
@@ -66,7 +72,7 @@ export class Label {
     this.loadAnimation();
   }
 
-  textAnchor(){
+  textAnchor() {
     return this.midAngle(this.data) < Math.PI ? "start" : "end";
   }
 
@@ -81,14 +87,14 @@ export class Label {
     label
       .attr('opacity', 0)
       .transition().delay(750).duration(750)
-        .attr('opacity', 1)
+      .attr('opacity', 1);
 
     line
       .style('stroke-dashoffset', 2000)
       .transition().delay(750).duration(750)
-        .style('stroke-dashoffset', '0')
+      .style('stroke-dashoffset', '0')
       .transition()
-        .style('stroke-dasharray', 'none')
+      .style('stroke-dasharray', 'none');
   }
 
 }

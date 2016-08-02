@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import d3 from 'd3';
 
 @Component({
@@ -16,7 +16,11 @@ import d3 from 'd3';
     </svg:g>
   `
 })
-export class PieGridSeries {
+export class PieGridSeries implements OnInit {
+  element: HTMLElement;
+  layout: any;
+  arcs: any;
+
   @Input() colors;
   @Input() data;
   @Input() innerRadius = 60;
@@ -24,7 +28,7 @@ export class PieGridSeries {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -36,24 +40,24 @@ export class PieGridSeries {
     this.loadAnimation();
   }
 
-  getArcs(){
+  getArcs() {
     return this.layout(this.data).reverse().map((arc, index) => {
       let label = arc.data.data.formattedLabel[0];
-      let value = arc.data.data.value;
+      // let value = arc.data.data.value; // unusued variable
       let other = arc.data.data.other;
-      if (index === 0){
+      if (index === 0) {
         arc.startAngle = 0;
       }
-      let genArcPath = d3.svg.arc()
+      let genArcPath: any = d3.svg.arc()
         .innerRadius(this.innerRadius).outerRadius(this.outerRadius)
-        .startAngle(arc.startAngle).endAngle(arc.endAngle)
+        .startAngle(arc.startAngle).endAngle(arc.endAngle);
 
       return {
         class: 'viz arc ' + 'arc' + index,
-        d: genArcPath(),
-        cursor: other ? 'auto': 'pointer',
+        d: genArcPath(), // todo check need arguments ?
+        cursor: other ? 'auto' : 'pointer',
         fill: this.colors(label)
-      }
+      };
     });
   }
 
@@ -63,38 +67,41 @@ export class PieGridSeries {
       .value((d) => d.data.value).sort(null);
     let data = layout(this.data);
 
-    let node = d3.select(this.element).selectAll('.arc1').data([{startAngle: data[0].startAngle, endAngle: data[0].endAngle}]);
-    var arc = this.calculateArc(this.innerRadius, this.outerRadius)
+    let node = d3.select(this.element).selectAll('.arc1').data([{
+      startAngle: data[0].startAngle,
+      endAngle: data[0].endAngle
+    }]);
+    var arc = this.calculateArc(this.innerRadius, this.outerRadius);
 
     node
       .transition()
-      .attrTween("d", function (d) {
+      .attrTween("d", function(d) {
         this._current = this._current || d;
-        var copyOfD = jQuery.extend({}, d);
+        var copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
         var interpolate = d3.interpolate(copyOfD, copyOfD);
         this._current = interpolate(0);
-        return function (t) {
-            return arc(interpolate(t));
+        return function(t) {
+          return arc(interpolate(t));
         };
       })
       .transition().duration(750)
-      .attrTween("d", function (d) {
+      .attrTween("d", function(d) {
         this._current = this._current || d;
         var interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
-        return function (t) {
-            return arc(interpolate(t));
+        return function(t) {
+          return arc(interpolate(t));
         };
-      })
+      });
   }
 
-  calculateArc(innerRadius, outerRadius){
+  calculateArc(innerRadius, outerRadius) {
     return d3.svg.arc()
       .innerRadius(innerRadius).outerRadius(outerRadius);
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

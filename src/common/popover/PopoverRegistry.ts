@@ -3,15 +3,15 @@
  * @param {function} $animate
  */
 export class PopoverRegistry {
-  private static _instance:PopoverRegistry = new PopoverRegistry();
+  private static _instance: PopoverRegistry = new PopoverRegistry();
 
   popovers: any;
   instance: any;
 
-  constructor(){
+  constructor() {
     "ngInject";
 
-    if(PopoverRegistry._instance){
+    if (PopoverRegistry._instance) {
       throw new Error("Error: Instantiation failed: Use PopoverRegistry.getInstance() instead of new.");
     }
     PopoverRegistry._instance = this;
@@ -21,44 +21,48 @@ export class PopoverRegistry {
     setInterval(this.cleanUp.bind(this), 1000);
   }
 
-  public static getInstance(){
+  public static getInstance() {
     return PopoverRegistry._instance;
   }
 
-  add(id, object){
+  add(id, object) {
     this.popovers[id] = object;
   }
 
-  find(id){
-    this.popovers[id];
+  find(id) {
+    return this.popovers[id];
   }
 
-  remove(id){
-    if (!this.popovers[id]) return;
+  remove(id) {
+    if (!this.popovers[id]) {
+      return;
+    }
 
     if (this.popovers[id].popoverScope) {
       this.popovers[id].popoverScope.$destroy();
     }
 
-    if (this.popovers[id].popover){
+    if (this.popovers[id].popover) {
       this.popovers[id].popover.remove();
     }
 
     delete this.popovers[id];
   }
 
-  removeGroup (group, currentId){
+  removeGroup(group, currentId) {
     let ids = Object.keys(this.popovers);
     for (let id of ids) {
 
       let popoverOb = this.popovers[id];
-      if (!popoverOb){
+      if (!popoverOb) {
         continue;
       }
 
-      if (id === currentId) return;
+      if (id === currentId) {
+        return;
+      }
 
-      if (popoverOb.group && popoverOb.group === group){
+      if (popoverOb.group && popoverOb.group === group) {
         popoverOb.popover.removeClass('sw-popover-animation');
         setTimeout(() => {
           popoverOb.popover.remove();
@@ -66,7 +70,7 @@ export class PopoverRegistry {
             popoverOb.popoverScope.$destroy();
           }
           delete this.popovers[id];
-        }, 50)
+        }, 50);
       }
     }
   }
@@ -75,16 +79,16 @@ export class PopoverRegistry {
    * Deletes orphan popovers whose elements are no longer present
    * in the document
    */
-  cleanUp(){
+  cleanUp() {
     let ids = Object.keys(this.popovers);
-    for (let id of ids){
+    for (let id of ids) {
       let element = this.popovers[id].element;
-      if (element && element[0]){
+      if (element && element[0]) {
         element = element[0];
       }
-      if (element && !document.contains(element)){
+      if (element && !document.contains(element)) {
         this.remove(id);
       }
     }
   }
-};
+}

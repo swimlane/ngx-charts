@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import d3 from 'd3';
 import { PieArc } from './PieArc';
 import { Label } from './Label';
@@ -40,9 +40,12 @@ import { Popover } from '../common/popover/PopoverComponent';
     </svg:g>
   `
 })
-export class PieSeries {
+export class PieSeries implements OnInit {
+  total: number;
+  max: number;
+
   @Input() colors;
-  @Input() data = [];
+  @Input() data: any = [];
   @Input() dims;
   @Input() innerRadius = 60;
   @Input() outerRadius = 80;
@@ -52,7 +55,7 @@ export class PieSeries {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    let pie = d3.layout.pie()
+    let pie: any = d3.layout.pie()
       .value((d) => d.vals[0].value)
       .sort(null);
 
@@ -60,7 +63,9 @@ export class PieSeries {
 
     let arcData = pie(this.data.array);
 
-    this.max = d3.max(arcData, function(d){ return d.data.vals[0].value});
+    this.max = d3.max(arcData, function(d) {
+      return d.data.vals[0].value;
+    });
 
     this.data = this.calculateLabelPositions(arcData);
   }
@@ -69,7 +74,7 @@ export class PieSeries {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
   }
 
-  outerArc(){
+  outerArc() {
     let factor = 1.5;
     return d3.svg.arc()
       .innerRadius(this.outerRadius * factor)
@@ -81,7 +86,7 @@ export class PieSeries {
     var chart = this;
     var labelPositions = pieData;
 
-    labelPositions.forEach(function (d) {
+    labelPositions.forEach(function(d) {
       d.pos = chart.outerArc().centroid(d);
       d.pos[0] = chart.outerRadius * (chart.midAngle(d) < Math.PI ? 1 : -1);
     });
@@ -89,7 +94,7 @@ export class PieSeries {
     for (var i = 0; i < labelPositions.length - 1; i++) {
       var a = labelPositions[i];
 
-      for (var j = i+1; j < labelPositions.length; j++) {
+      for (var j = i + 1; j < labelPositions.length; j++) {
         var b = labelPositions[j];
         // if they're on the same side
         if (b.pos[0] * a.pos[0] > 0) {
@@ -106,23 +111,23 @@ export class PieSeries {
     return labelPositions;
   }
 
-  labelVisible(arc){
+  labelVisible(arc) {
     return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
   }
 
-  label(arc){
+  label(arc) {
     return arc.data.vals[0].formattedLabel[0].toString();
   }
 
-  tooltipText(arc){
+  tooltipText(arc) {
     return `${this.label(arc)}: ${arc.data.vals[0].value}`;
   }
 
-  color(arc){
+  color(arc) {
     return this.colors(this.label(arc));
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { trimLabel } from './trimLabel';
 
 @Component({
@@ -30,7 +30,7 @@ import { trimLabel } from './trimLabel';
     </div>
   `
 })
-export class Legend {
+export class Legend implements OnInit {
   @Input() data;
   @Input() title;
   @Input() colors;
@@ -38,11 +38,11 @@ export class Legend {
 
   legendItems: any;
 
-  ngOnInit(){
+  ngOnInit() {
     this.legendItems = this.getLegendItems();
   }
 
-  getLegendItems(){
+  getLegendItems() {
     let uniques = {};
 
     let uniqueItems = this.data.array.filter((d) => {
@@ -75,7 +75,7 @@ export class Legend {
         label: label,
         trimmedLabel: trimLabel(label) || '(empty)',
         backgroundColor: this.colors(label)
-      }
+      };
     });
   }
 }

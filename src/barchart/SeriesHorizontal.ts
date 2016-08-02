@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Bar } from './Bar';
 import { Popover } from '../common/popover/PopoverComponent';
 
@@ -23,7 +23,9 @@ import { Popover } from '../common/popover/PopoverComponent';
     </svg:g>
   `
 })
-export class SeriesHorizontal {
+export class SeriesHorizontal implements OnInit {
+  bars: any[];
+
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
@@ -37,15 +39,15 @@ export class SeriesHorizontal {
     this.update();
   }
 
-  update(){
+  update() {
     this.bars = this.series.array.map((d, index) => {
       let value = d.vals[0];
       let count = value.label[0].length;
       let label = value.label[0][count - 1];
-      let formattedLabel = value.formattedLabel[count-1];
+      let formattedLabel = value.formattedLabel[count - 1];
       let roundEdges = this.type === 'standard';
 
-      let bar = {
+      let bar: any = {
         value: value,
         label: formattedLabel,
         color: this.colors(formattedLabel),
@@ -70,8 +72,7 @@ export class SeriesHorizontal {
     });
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
-
 }

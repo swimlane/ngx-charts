@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Legend } from '../Legend';
 import { ScaleLegend } from '../ScaleLegend';
 @Component({
@@ -36,7 +36,7 @@ import { ScaleLegend } from '../ScaleLegend';
   </div>
 `
 })
-export class Chart {
+export class Chart implements OnInit {
   @Input() view;
   @Input() legend = false;
   @Input() data;
@@ -49,20 +49,20 @@ export class Chart {
   legendType: any;
   className: any;
 
-  ngOnInit(){
+  ngOnInit() {
     this.legendWidth = 0;
-    if (this.legend){
+    if (this.legend) {
       this.legendType = this.getLegendType();
 
-      if (this.legendData.label){
+      if (this.legendData.label) {
         this.title = this.legendData.label();
-      } else if (this.legendData[0] && this.legendData[0].label){
+      } else if (this.legendData[0] && this.legendData[0].label) {
         this.title = this.legendData[0].label();
       } else {
         this.title = 'Color Scale';
       }
 
-      if (this.legendType === 'scaleLegend'){
+      if (this.legendType === 'scaleLegend') {
         this.legendWidth = 1;
       } else {
         this.legendWidth = 3;
@@ -73,11 +73,11 @@ export class Chart {
     this.className = `col-sm-${this.chartWidth} col-md-${this.chartWidth} col-lg-${this.chartWidth}`;
   }
 
-  getLegendType(){
-    if (typeof this.legendData === 'function'){
-      return 'scaleLegend'
+  getLegendType() {
+    if (typeof this.legendData === 'function') {
+      return 'scaleLegend';
     } else {
-      return 'legend'
+      return 'legend';
     }
   }
 }

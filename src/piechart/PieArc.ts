@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import d3 from 'd3';
 import { SvgLinearGradient } from '../common/SvgLinearGradient';
 import { SvgRadialGradient } from '../common/SvgRadialGradient';
+import ObjectId from "../utils/objectid";
 
 @Component({
   selector: 'g[pie-arc]',
@@ -32,7 +33,14 @@ import { SvgRadialGradient } from '../common/SvgRadialGradient';
     </svg:g>
   `
 })
-export class PieArc {
+export class PieArc implements OnInit {
+  element: HTMLElement;
+  path: d3.path;
+  startOpacity: number;
+  radialGradientId: string;
+  linearGradientId: string;
+  gradientFill: string;
+
   @Input() fill;
   @Input() startAngle;
   @Input() endAngle;
@@ -45,7 +53,7 @@ export class PieArc {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef){
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -58,7 +66,7 @@ export class PieArc {
     this.radialGradientId = 'linearGrad' + ObjectId().toString();
     this.linearGradientId = 'radialGrad' + ObjectId().toString();
 
-    if (this.innerRadius !== 0){
+    if (this.innerRadius !== 0) {
       this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;
     } else {
       this.gradientFill = `url(${pageUrl}#${this.linearGradientId})`;
@@ -67,10 +75,10 @@ export class PieArc {
     this.loadAnimation();
   }
 
-  calculateArc(){
+  calculateArc() {
     let outerRadius = this.outerRadius;
-    if (this.explodeSlices && this.innerRadius === 0){
-      outerRadius = this.outerRadius * this.value/this.max;
+    if (this.explodeSlices && this.innerRadius === 0) {
+      outerRadius = this.outerRadius * this.value / this.max;
     }
 
     return d3.svg.arc()
@@ -83,28 +91,28 @@ export class PieArc {
 
     node
       .transition()
-      .attrTween("d", function (d) {
+      .attrTween("d", function(d) {
         this._current = this._current || d;
-        var copyOfD = jQuery.extend({}, d);
+        var copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
         var interpolate = d3.interpolate(copyOfD, copyOfD);
         this._current = interpolate(0);
-        return function (t) {
-            return arc(interpolate(t));
+        return function(t) {
+          return arc(interpolate(t));
         };
       })
       .transition().duration(750)
-      .attrTween("d", function (d) {
+      .attrTween("d", function(d) {
         this._current = this._current || d;
         var interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
-        return function (t) {
-            return arc(interpolate(t));
+        return function(t) {
+          return arc(interpolate(t));
         };
-      })
+      });
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { calculateViewDimensions } from '../common/viewDimensions';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { Chart } from '../common/charts/Chart';
 import { BaseChart } from '../BaseChart';
@@ -62,7 +62,15 @@ import { GridPanelSeries } from '../common/GridPanelSeries';
     </chart>
   `
 })
-export class BarHorizontal2D extends BaseChart{
+export class BarHorizontal2D extends BaseChart implements OnInit {
+  dims: ViewDimensions;
+  x0Scale: d3.scale.Linear;
+  y0Scale: d3.scale.Ordinal;
+  y1Scale: d3.scale.Ordinal;
+  transform: string;
+  tickFormatting: Function;
+  colors: Function;
+
   @Input() view;
   @Input() results;
   @Input() margin = [10, 20, 70, 100];
@@ -79,11 +87,11 @@ export class BarHorizontal2D extends BaseChart{
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    let groupSpacing = 0.2;
+    // let groupSpacing = 0.2; // unusued variable
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     this.x0Scale = d3.scale.linear()
-      .range([0, this.dims.width], 0.1)
+      .range([0, this.dims.width])
       .domain([0, this.results.m0Domain[1]]);
 
     this.y0Scale = d3.scale.ordinal()
@@ -100,16 +108,15 @@ export class BarHorizontal2D extends BaseChart{
     this.tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
   }
 
-  seriesTransform(series){
+  seriesTransform(series) {
     return `translate(0, ${this.y0Scale(series.name)})`;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 
-  setColors(){
+  setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
   }
-
 }

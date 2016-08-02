@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Cell } from './Cell';
 import { Popover } from '../common/popover/PopoverComponent';
 
@@ -23,7 +23,9 @@ import { Popover } from '../common/popover/PopoverComponent';
     </svg:g>
   `
 })
-export class HeatCellSeries {
+export class HeatCellSeries implements OnInit {
+  cells: any[];
+
   @Input() data;
   @Input() colors;
   @Input() xScale;
@@ -35,7 +37,7 @@ export class HeatCellSeries {
     this.cells = this.getCells();
   }
 
-  getCells(){
+  getCells() {
     let cells = [];
 
     this.data.map((series, index0) => {
@@ -58,7 +60,7 @@ export class HeatCellSeries {
     return cells;
   }
 
-  click(data){
+  click(data) {
     this.clickHandler.emit(data);
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'g[axis-label]',
@@ -14,7 +14,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
     </svg:text>
   `
 })
-export class AxisLabel {
+export class AxisLabel implements OnInit {
   @Input() orient;
   @Input() label;
   @Input() offset;
@@ -32,7 +32,7 @@ export class AxisLabel {
     this.textAnchor = 'middle';
     this.transform = '';
 
-    switch(this.orient){
+    switch (this.orient) {
       case 'top':
         this.y = this.offset;
         this.x = this.width / 2;
