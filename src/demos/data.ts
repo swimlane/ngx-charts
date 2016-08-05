@@ -5,6 +5,9 @@ export var pieData = {
   ],
   "series": [
     {
+      total: function(){
+        return 3;
+      },
       array: [
         {
           "vals": [

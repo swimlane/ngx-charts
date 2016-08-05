@@ -30,7 +30,7 @@ import d3 from '../d3';
 export class Label implements OnInit {
   element: HTMLElement;
   trimLabel: Function;
-  labelXY: string;
+  labelXY: any;
   transform: string;
   line: string;
 

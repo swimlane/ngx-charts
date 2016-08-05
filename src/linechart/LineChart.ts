@@ -73,7 +73,7 @@ import d3 from '../d3';
             [color]="colors('Line')"
             [data]="results.series[0].array"
             [scaleType]="scaleType"
-            [chartType]="'line'"
+            [chartType]="line"
             (clickHandler)="click($event)"
           />
 

@@ -108,10 +108,11 @@ module.exports = {
    * See: https://webpack.github.io/docs/webpack-dev-server.html
    */
   devServer: {
-    contentBase: './',
+    contentBase: './dist',
     watchOptions: {
       poll: true
     },
+    outputPath: root('dist'),
     stats: {
       modules: false,
       cached: false,

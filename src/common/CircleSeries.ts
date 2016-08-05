@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Circle } from './Circle';
 import { Area } from '../areachart/Area';
-import 'common/utils/objectid';
 import { Popover } from '../common/popover/PopoverComponent';
 import moment = require("moment");
 import ObjectId from "../utils/objectid";

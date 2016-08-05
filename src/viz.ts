@@ -3,7 +3,7 @@ import { BarVertical } from './barchart/BarVertical';
 // import { BarVertical2D } from './barchart/BarVertical2D';
 // import { BarVerticalStacked } from './barchart/BarVerticalStacked';
 // import { BarVerticalNormalized } from './barchart/BarVerticalNormalized';
-// import { BarHorizontal } from './barchart/BarHorizontal';
+import { BarHorizontal } from './barchart/BarHorizontal';
 // import { BarHorizontal2D } from './barchart/BarHorizontal2D';
 // import { BarHorizontalStacked } from './barchart/BarHorizontalStacked';
 // import { BarHorizontalNormalized } from './barchart/BarHorizontalNormalized';
@@ -13,7 +13,7 @@ import { BarVertical } from './barchart/BarVertical';
 // import { AreaChartStacked } from './areachart/AreaChartStacked';
 // import { AreaChartNormalized } from './areachart/AreaChartNormalized';
 //
-// import { PieChart } from './piechart/PieChart';
+import { PieChart } from './piechart/PieChart';
 // import { AdvancedPieChart } from './piechart/AdvancedPieChart';
 // import { PieGrid } from './piechart/PieGrid';
 //
@@ -29,7 +29,7 @@ export { BarVertical } from './barchart/BarVertical';
 // export { BarVertical2D } from './barchart/BarVertical2D';
 // export { BarVerticalStacked } from './barchart/BarVerticalStacked';
 // export { BarVerticalNormalized } from './barchart/BarVerticalNormalized';
-// export { BarHorizontal } from './barchart/BarHorizontal';
+export { BarHorizontal } from './barchart/BarHorizontal';
 // export { BarHorizontal2D } from './barchart/BarHorizontal2D';
 // export { BarHorizontalStacked } from './barchart/BarHorizontalStacked';
 // export { BarHorizontalNormalized } from './barchart/BarHorizontalNormalized';
@@ -39,7 +39,7 @@ export { BarVertical } from './barchart/BarVertical';
 // export { AreaChartStacked } from './areachart/AreaChartStacked';
 // export { AreaChartNormalized } from './areachart/AreaChartNormalized';
 //
-// export { PieChart } from './piechart/PieChart';
+export { PieChart } from './piechart/PieChart';
 // export { AdvancedPieChart } from './piechart/AdvancedPieChart';
 // export { PieGrid } from './piechart/PieGrid';
 //
@@ -55,7 +55,7 @@ export const VIZ_COMPONENTS = [
   // BarVertical2D,
   // BarVerticalStacked,
   // BarVerticalNormalized,
-  // BarHorizontal,
+  BarHorizontal,
   // BarHorizontal2D,
   // BarHorizontalStacked,
   // BarHorizontalNormalized,
@@ -63,7 +63,7 @@ export const VIZ_COMPONENTS = [
   // AreaChart,
   // AreaChartStacked,
   // AreaChartNormalized,
-  // PieChart,
+  PieChart,
   // AdvancedPieChart,
   // PieGrid,
   // LineChart,

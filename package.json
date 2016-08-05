@@ -18,7 +18,7 @@
     "watch:ts": "tsc --watch",
     "watch:sass": "npm run build:sass && node-sass -o dist/ -w src/",
     "start": "npm-run-all -s clean:dist start:server",
-    "start:server": "webpack-dev-server --progress --port 8000 --inline"
+    "start:server": "webpack-dev-server --progress --watch --inline"
   },
   "repository": {
     "type": "git",

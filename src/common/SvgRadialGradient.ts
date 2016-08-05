@@ -27,7 +27,6 @@ export class SvgRadialGradient implements OnInit {
   cy: number;
   r: string;
 
-  @Input() color = 'vertical';
   @Input() color;
   @Input() name;
   @Input() startOpacity;

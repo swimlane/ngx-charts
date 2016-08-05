@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
-import d3 from 'd3';
 import { Chart } from '../common/charts/Chart';
 import { XAxis } from '../common/axes/XAxis';
 import moment = require("moment");
@@ -83,9 +82,9 @@ export class Timeline implements OnInit {
         }, 100));
 
       // todo fix missing function
-      this.setState({
-        brush: this.brush
-      });
+      // this.setState({
+      //   brush: this.brush
+      // });
     }
 
     let height = 150 - this.margin[0] - this.margin[2];
