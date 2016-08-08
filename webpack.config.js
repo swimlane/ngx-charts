@@ -3,8 +3,8 @@ var webpack = require('webpack');
 
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var WebpackNotifierPlugin = require('webpack-notifier');
-var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 var ENV = process.env.NODE_ENV;
 var IS_PRODUCTION = ENV === 'production';
@@ -49,7 +49,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+        loaders: ['style', 'css?sourceMap', 'postcss?sourceMap', 'sass?sourceMap']
       }
     ]
   },
@@ -81,9 +81,19 @@ module.exports = {
     chunkFilename: '[id].[hash].chunk.js'
   },
 
-  plugins: [
-    new ForkCheckerPlugin(),
+  postcss: [
+    autoprefixer({
+      browsers: ['last 2 version']
+    })
+  ],
 
+  tslint: {
+    emitErrors: false,
+    failOnHint: false,
+    resourcePath: 'src'
+  },
+
+  plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'polyfills'],
       minChunks: Infinity
@@ -111,11 +121,5 @@ module.exports = {
       verbose: false,
       dry: false
     })
-  ],
-
-  tslint: {
-    emitErrors: false,
-    failOnHint: false,
-    resourcePath: 'src'
-  }
+  ]
 };

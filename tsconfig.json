@@ -31,6 +31,6 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true
+    "forkChecker": false
   }
 }

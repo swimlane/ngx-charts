@@ -11,8 +11,9 @@ import '../viz.scss';
   selector: 'app',
   template: `
     <div>
-    	<h3>Bar charts</h3>
+      <h3>Bar chart</h3>
       <h4>Vertical</h4>
+
       <bar-vertical
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
@@ -80,11 +81,6 @@ import '../viz.scss';
   directives: [VIZ_COMPONENTS]
 })
 export class App {
-
-  barData: any;
-  pieData: any;
-  lineData: any;
-
   constructor() {
     Object.assign(this, {barData, pieData, lineData});
   }

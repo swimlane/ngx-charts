@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import d3 from '../../d3';
+// import d3 from '../../d3';
 import { XAxisTicks } from './XAxisTicks';
 import { AxisLabel } from './AxisLabel';
 
