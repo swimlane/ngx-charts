@@ -9,7 +9,7 @@ import { BarHorizontal } from './barchart/BarHorizontal';
 // import { BarHorizontalNormalized } from './barchart/BarHorizontalNormalized';
 // import { DateBar } from './barchart/DateBar';
 //
-// import { AreaChart } from './areachart/AreaChart';
+import { AreaChart } from './areachart/AreaChart';
 // import { AreaChartStacked } from './areachart/AreaChartStacked';
 // import { AreaChartNormalized } from './areachart/AreaChartNormalized';
 //
@@ -17,7 +17,7 @@ import { PieChart } from './piechart/PieChart';
 // import { AdvancedPieChart } from './piechart/AdvancedPieChart';
 // import { PieGrid } from './piechart/PieGrid';
 //
-// import { LineChart } from './linechart/LineChart';
+import { LineChart } from './linechart/LineChart';
 // import { LineChart2D } from './linechart/LineChart2D';
 //
 // import { NumberCard } from './numbercards/NumberCard';
@@ -35,7 +35,7 @@ export { BarHorizontal } from './barchart/BarHorizontal';
 // export { BarHorizontalNormalized } from './barchart/BarHorizontalNormalized';
 // export { DateBar } from './barchart/DateBar';
 //
-// export { AreaChart } from './areachart/AreaChart';
+export { AreaChart } from './areachart/AreaChart';
 // export { AreaChartStacked } from './areachart/AreaChartStacked';
 // export { AreaChartNormalized } from './areachart/AreaChartNormalized';
 //
@@ -43,7 +43,7 @@ export { PieChart } from './piechart/PieChart';
 // export { AdvancedPieChart } from './piechart/AdvancedPieChart';
 // export { PieGrid } from './piechart/PieGrid';
 //
-// export { LineChart } from './linechart/LineChart';
+export { LineChart } from './linechart/LineChart';
 // export { LineChart2D } from './linechart/LineChart2D';
 //
 // export { NumberCard } from './numbercards/NumberCard';
@@ -60,13 +60,13 @@ export const VIZ_COMPONENTS = [
   // BarHorizontalStacked,
   // BarHorizontalNormalized,
   // DateBar,
-  // AreaChart,
+  AreaChart,
   // AreaChartStacked,
   // AreaChartNormalized,
   PieChart,
   // AdvancedPieChart,
   // PieGrid,
-  // LineChart,
+  LineChart,
   // LineChart2D,
   // NumberCard,
   // HeatMap,

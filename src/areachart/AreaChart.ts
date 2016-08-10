@@ -56,7 +56,7 @@ import d3 from '../d3';
             [xScale]="xScale"
             [yScale]="yScale"
             [color]="colors('Area')"
-            [data]="results.series[0].array"
+            [data]="series"
             [scaleType]="scaleType"
           />
 
@@ -73,9 +73,8 @@ import d3 from '../d3';
             [xScale]="xScale"
             [yScale]="yScale"
             [color]="colors('Area')"
-            [data]="results.series[0].array"
+            [data]="series"
             [scaleType]="scaleType"
-            chartType="area"
             (clickHandler)="click($event)"
           />
 
@@ -102,6 +101,7 @@ export class AreaChart extends BaseChart implements OnInit {
   clipPathId: string;
   clipPath: string;
   scaleType: string;
+  series: any;
 
   @Input() view;
   @Input() results;
@@ -122,13 +122,17 @@ export class AreaChart extends BaseChart implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     if (this.timeline) {
       this.dims.height -= 150;
     }
 
-    this.results.series[0] = this.results.series[0].sort((a, b) => {
+    this.series = this.results.series[0].array.sort((a, b) => {
       return this.results.d0Domain.indexOf(a.vals[0].label[0][0]) - this.results.d0Domain.indexOf(b.vals[0].label[0][0]);
     });
 

@@ -56,7 +56,6 @@ export class CircleSeries implements OnInit {
   @Input() yScale;
   @Input() color;
   @Input() scaleType;
-  // @Input() chartType; // unused input
 
   @Output() clickHandler = new EventEmitter();
 
@@ -72,7 +71,7 @@ export class CircleSeries implements OnInit {
       }
     };
 
-    let area = d3.area().interpolate("linear")
+    let area = d3.area()
       .x(xProperty)
       .y0(() => this.yScale.range()[0])
       .y1(d => this.yScale(d.vals[0].value));

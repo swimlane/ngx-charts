@@ -4,7 +4,6 @@ import {
 } from '../viz';
 
 import { barData, pieData, lineData } from './data';
-
 import '../viz.scss';
 
 @Component({
@@ -59,7 +58,8 @@ import '../viz.scss';
       <line-chart
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [labels]="true"
+        [xaxis]="true"
+        [yaxis]="true"
         [results]="lineData"
         [legend]="false">
       </line-chart>
@@ -71,7 +71,8 @@ import '../viz.scss';
       <area-chart
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [labels]="true"
+        [xaxis]="true"
+        [yaxis]="true"
         [results]="lineData"
         [legend]="false">
       </area-chart>

@@ -44,22 +44,22 @@ export class AreaSeries implements OnInit {
     };
 
     if (this.stacked === true) {
-      area = d3.area().interpolate("linear")
+      area = d3.area()
         .x(xProperty)
         .y0(d => this.yScale(d.vals[0].d0))
         .y1(d => this.yScale(d.vals[0].d1));
 
-      startingArea = d3.area().interpolate("linear")
+      startingArea = d3.area()
         .x(xProperty)
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);
     } else {
-      area = d3.area().interpolate("linear")
+      area = d3.area()
         .x(xProperty)
         .y0(() => this.yScale.range()[0])
         .y1(d => this.yScale(d.vals[0].value));
 
-      startingArea = d3.area().interpolate("linear")
+      startingArea = d3.area()
         .x(xProperty)
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);
