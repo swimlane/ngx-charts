@@ -50,7 +50,7 @@ export class Cell implements OnInit {
   }
 
   ngOnInit() {
-    this.transform = `translate(${props.x} , ${props.y})`;
+    this.transform = `translate(${this.x} , ${this.y})`;
     this.formattedValue = formatNumber(props.value, props.valueType);
 
     this.loadAnimation();

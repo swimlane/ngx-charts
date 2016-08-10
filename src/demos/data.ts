@@ -51,7 +51,7 @@ export var barData = {
     "complete",
     "not complete"
   ],
-  "m0Domain": [1, 2],
+  "m0Domain": [-1, 2],
   "series": [
     {
       array: [
@@ -64,7 +64,7 @@ export var barData = {
                 ],
                 "complete"
               ],
-              "value": 1,
+              "value": -1,
               "formattedLabel": [
                 'complete'
               ]
