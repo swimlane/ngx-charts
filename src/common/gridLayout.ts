@@ -4,14 +4,14 @@ export function gridLayout(dims, data, minWidth) {
   let rows = 1;
   let xScale: any = d3.scaleBand();
   let yScale: any = d3.scaleBand();
-  let dataLength = data.length;
+  let dataLength = data.array.length;
   let width = dims.width;
   let height = dims.height;
 
   if (width > minWidth) {
     while (width / dataLength < minWidth) {
       rows += 1;
-      dataLength = Math.ceil(data.length / rows);
+      dataLength = Math.ceil(data.array.length / rows);
     }
   }
 

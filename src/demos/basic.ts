@@ -77,6 +77,15 @@ import '../viz.scss';
         [legend]="false">
       </area-chart>
 
+      <hr />
+      <h3>Number Card</h3>
+
+      <number-card
+        [view]="[700,300]"
+        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [results]="pieData">
+      </number-card>
+
     </div>
   `,
   directives: [VIZ_COMPONENTS]

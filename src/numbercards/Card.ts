@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { trimLabel } from '../common/trimLabel';
-import CountUp from 'countUp'; // todo fix missing dependency
 import d3 from '../d3';
 
 @Component({
@@ -10,7 +9,7 @@ import d3 from '../d3';
       (click)="click()">
       <svg:rect
         class="viz card"
-        fill="#22292d"
+        fill="#666"
         style="cursor: pointer; stroke-width: 2px; stroke: #192024;"
         [attr.width]="cardWidth"
         [attr.height]="cardHeight"
@@ -80,16 +79,15 @@ export class Card implements OnInit {
   }
 
   loadAnimation() {
-    let node = d3.select(this.element).selectAll('.value-text');
-
-    node.text('0');
+    // TODO: replace counup animation
+    // let node = d3.select(this.element).selectAll('.value-text');
+    //
+    // node.text('0');
 
     this.animateToCurrentForm();
   }
 
   animateToCurrentForm() {
-    let node = d3.select(this.element).selectAll('.value-text');
-
     var options = {
       useEasing: true,
       useGrouping: true,
@@ -114,8 +112,10 @@ export class Card implements OnInit {
       }
     }
 
-    var counter = new CountUp(node[0][0], 0, endValue, 0, 2.5, options);
-    counter.start();
+    // TODO: replace counup animation
+    // let node = d3.select(this.element).selectAll('.value-text');
+    // var counter = new CountUp(node[0][0], 0, endValue, 0, 2.5, options);
+    // counter.start();
   }
 
   click() {

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Card } from './Card';
 import { Popover } from '../common/popover/PopoverComponent';
 
-interface Card {
+export interface CardModel {
   x;
   y;
   width: number;
@@ -35,7 +35,7 @@ interface Card {
   `
 })
 export class CardSeries implements OnInit {
-  cards: Card[];
+  cards: CardModel[];
 
   @Input() data;
   @Input() dims;
@@ -45,6 +45,8 @@ export class CardSeries implements OnInit {
 
   ngOnInit() {
     this.cards = this.getCards();
+    console.log('data', this.data);
+    console.log('cards', this.cards);
   }
 
   getCards() {

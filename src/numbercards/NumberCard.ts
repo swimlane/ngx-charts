@@ -41,7 +41,8 @@ export class NumberCard extends BaseChart implements OnInit {
   ngOnInit() {
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
 
-    let sortedData = this.results.series[0].sort((a, b) => {
+    let sortedData = this.results.series[0];
+    sortedData.array = sortedData.array.sort((a, b) => {
       return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
     });
 

@@ -20,7 +20,7 @@ import { PieChart } from './piechart/PieChart';
 import { LineChart } from './linechart/LineChart';
 // import { LineChart2D } from './linechart/LineChart2D';
 //
-// import { NumberCard } from './numbercards/NumberCard';
+import { NumberCard } from './numbercards/NumberCard';
 // import { HeatMap } from './heatmap/HeatMap';
 // import { TreeMap } from './treemap/TreeMap';
 
@@ -46,7 +46,7 @@ export { PieChart } from './piechart/PieChart';
 export { LineChart } from './linechart/LineChart';
 // export { LineChart2D } from './linechart/LineChart2D';
 //
-// export { NumberCard } from './numbercards/NumberCard';
+export { NumberCard } from './numbercards/NumberCard';
 // export { HeatMap } from './heatmap/HeatMap';
 // export { TreeMap } from './treemap/TreeMap';
 
@@ -68,7 +68,7 @@ export const VIZ_COMPONENTS = [
   // PieGrid,
   LineChart,
   // LineChart2D,
-  // NumberCard,
+  NumberCard,
   // HeatMap,
   // TreeMap
 ];
