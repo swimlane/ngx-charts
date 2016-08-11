@@ -1,4 +1,4 @@
-# a2d3 [![Join the chat at https://gitter.im/swimlane/a2d3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/swimlane/a2d3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Dependency Status](https://david-dm.org/swimlane/a2d3.svg)](https://david-dm.org/swimlane/a2d3) [![devDependency Status](https://david-dm.org/swimlane/a2d3/dev-status.svg)](https://david-dm.org/swimlane/a2d3#info=devDependencies)
+# a2d3 [![Join the chat at https://gitter.im/swimlane/a2d3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/swimlane/a2d3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 D3 + Angular2 Composable Re-usable Charting Framework
 
