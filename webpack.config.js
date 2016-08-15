@@ -70,7 +70,7 @@ module.exports = {
       modules: false,
       cached: false,
       colors: true,
-      chunk: false
+      chunks: false
     }
   },
 
