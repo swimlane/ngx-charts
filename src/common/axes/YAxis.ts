@@ -4,13 +4,13 @@ import { YAxisTicks } from './YAxisTicks';
 import { AxisLabel } from './AxisLabel';
 
 @Component({
-  selector: 'g[y-axis]',
+  selector: 'g[yAxis]',
   directives: [YAxisTicks, AxisLabel],
   template: `
     <svg:g
       [attr.class]="yAxisClassName"
       [attr.transform]="transform">
-      <svg:g y-axis-ticks
+      <svg:g yAxisTicks
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
@@ -20,7 +20,7 @@ import { AxisLabel } from './AxisLabel';
         [gridLineHeight]="dims.height"
       />
 
-      <svg:g axis-label
+      <svg:g axisLabel
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="80"

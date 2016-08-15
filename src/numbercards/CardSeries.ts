@@ -14,7 +14,7 @@ export interface CardModel {
 }
 
 @Component({
-  selector: 'g[card-series]',
+  selector: 'g[cardSeries]',
   directives: [Card, Popover],
   template: `
     <svg:g>
@@ -26,7 +26,7 @@ export interface CardModel {
         [color]="c.color"
         [data]="c.data"
         (clickHandler)="click($event)"
-        sw-popover
+        swPopover
         [popoverSpacing]="15"
         [popoverText]="c.tooltipText"
         [popoverGroup]="'charts'"

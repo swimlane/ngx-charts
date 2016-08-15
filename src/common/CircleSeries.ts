@@ -7,7 +7,7 @@ import ObjectId from "../utils/objectid";
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[circle-series]',
+  selector: 'g[circleSeries]',
   directives: [Circle, Area, Popover],
   template: `
     <svg:g>

@@ -20,7 +20,7 @@ import d3 from '../d3';
       [colors]="colors"
       [legendData]="results.series[0]">
       <svg:g [attr.transform]="transform" class="viz bar chart">
-        <svg:g grid-panel-series
+        <svg:g gridPanelSeries
           [xScale]="x0Scale"
           [yScale]="y0Scale"
           [data]="results.series"
@@ -28,7 +28,7 @@ import d3 from '../d3';
           orient="vertical">
         </svg:g>
 
-        <svg:g x-axis
+        <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="x0Scale"
           [dims]="dims"
@@ -37,7 +37,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel">
         </svg:g>
 
-        <svg:g y-axis
+        <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="y0Scale"
           [dims]="dims"
@@ -49,7 +49,7 @@ import d3 from '../d3';
         <svg:g
           *ngFor="let series of results.series"
           [attr.transform]="seriesTransform(series)">
-          <svg:g series-vertical
+          <svg:g seriesVertical
             [xScale]="x1Scale"
             [yScale]="y0Scale"
             [colors]="colors"
@@ -101,7 +101,6 @@ export class BarVertical2D extends BaseChart implements OnInit {
         .domain(this.results.d0Domain);
     }
 
-    //todo check this.x0Scale.bandwidth() depending on scaleType
     this.x1Scale = d3.scaleBand()
       .rangeRound([0, this.x0Scale.bandwidth()], groupSpacing)
       .domain(this.results.d1Domain);

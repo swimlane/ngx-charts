@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { trimLabel } from '../trimLabel';
 
 @Component({
-  selector: 'g[x-axis-ticks]',
+  selector: 'g[xAxisTicks]',
   template: `
     <svg:g *ngFor="let tick of getTicks()" class="tick"
       [attr.transform]="tickTransform(tick)">

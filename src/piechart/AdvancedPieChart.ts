@@ -29,7 +29,7 @@ interface LegendItem {
           <svg:g
             [attr.transform]="transform"
             class="viz pie chart">
-            <svg:g pie-series
+            <svg:g pieSeries
               [colors]="colors"
               [showLabels]="labels"
               [data]="data"

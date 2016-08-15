@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'g[grid-panel]',
+  selector: 'g[gridPanel]',
   template: `
     <svg:rect
       [attr.height]="height"

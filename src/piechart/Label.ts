@@ -3,7 +3,7 @@ import { trimLabel } from '../common/trimLabel';
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[pie-label]',
+  selector: 'g[pieLabel]',
   template: `
     <svg:g>
       <title>{{label}}</title>

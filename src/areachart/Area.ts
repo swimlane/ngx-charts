@@ -9,7 +9,7 @@ import d3 from '../d3';
   template: `
     <svg:g>
       <svg:defs>
-        <svg:g svg-linear-gradient
+        <svg:g svgLinearGradient
           [color]="fill"
           orientation="vertical"
           [name]="gradientId"

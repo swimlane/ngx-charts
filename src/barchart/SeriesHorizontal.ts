@@ -3,7 +3,7 @@ import { Bar } from './Bar';
 import { Popover } from '../common/popover/PopoverComponent';
 
 @Component({
-  selector: 'g[series-horizontal]',
+  selector: 'g[seriesHorizontal]',
   directives: [Bar, Popover],
   template: `
     <svg:g bar *ngFor="let bar of bars"
@@ -16,7 +16,7 @@ import { Popover } from '../common/popover/PopoverComponent';
       [orientation]="'horizontal'"
       [roundEdges]="bar.roundEdges"
       (clickHandler)="click($event)"
-      sw-popover
+      swPopover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
       [popoverGroup]="'charts'">

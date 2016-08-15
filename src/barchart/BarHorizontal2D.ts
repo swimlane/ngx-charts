@@ -20,7 +20,7 @@ import d3 from '../d3';
       [colors]="colors"
       [legendData]="results.legend">
       <svg:g [attr.transform]="transform" class="viz bar chart">
-        <svg:g grid-panel-series
+        <svg:g gridPanelSeries
           [xScale]="x0Scale"
           [yScale]="y0Scale"
           [data]="results.series"
@@ -28,7 +28,7 @@ import d3 from '../d3';
           orient="horizontal">
         </svg:g>
 
-        <svg:g x-axis
+        <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="x0Scale"
           [dims]="dims"
@@ -37,7 +37,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel">
         </svg:g>
 
-        <svg:g y-axis
+        <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="y0Scale"
           [dims]="dims"
@@ -49,7 +49,7 @@ import d3 from '../d3';
         <svg:g
           *ngFor="let series of results.series"
           [attr.transform]="seriesTransform(series)">
-          <svg:g series-horizontal
+          <svg:g seriesHorizontal
             [xScale]="x0Scale"
             [yScale]="y1Scale"
             [colors]="colors"

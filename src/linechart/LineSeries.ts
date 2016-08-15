@@ -4,7 +4,7 @@ import d3 from '../d3';
 import moment = require("moment");
 
 @Component({
-  selector: 'g[line-series]',
+  selector: 'g[lineSeries]',
   directives: [Line],
   template: `
     <svg:g line

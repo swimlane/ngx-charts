@@ -32,7 +32,7 @@ import ObjectId from "../utils/objectid";
       </svg:defs>
 
       <svg:g [attr.transform]="transform" class="viz line chart">
-        <svg:g x-axis
+        <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -41,7 +41,7 @@ import ObjectId from "../utils/objectid";
           [labelText]="xAxisLabel">
         </svg:g>
 
-        <svg:g y-axis
+        <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -54,7 +54,7 @@ import ObjectId from "../utils/objectid";
         <svg:g [attr.clip-path]="clipPath">
 
           <svg:g *ngFor="let series of results.series">
-            <svg:g area-series
+            <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
               [color]="colors(series.name)"
@@ -74,7 +74,7 @@ import ObjectId from "../utils/objectid";
           />
 
           <svg:g *ngFor="let series of results.series">
-            <svg:g circle-series
+            <svg:g circleSeries
               type="stacked"
               [xScale]="xScale"
               [yScale]="yScale"

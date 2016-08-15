@@ -4,7 +4,7 @@ import d3 from '../d3';
 import moment = require("moment");
 
 @Component({
-  selector: 'g[area-series]',
+  selector: 'g[areaSeries]',
   directives: [Area],
   template: `
     <svg:g area

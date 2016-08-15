@@ -3,7 +3,7 @@ import { Cell } from './Cell';
 import { OnInit } from "@angular/core/esm";
 
 @Component({
-  selector: 'g[cell-series]',
+  selector: 'g[cellSeries]',
   directives: [Cell],
   template: `
     <svg:g>

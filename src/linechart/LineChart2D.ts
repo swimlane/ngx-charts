@@ -32,7 +32,7 @@ import d3 from '../d3';
       </svg:defs>
 
       <svg:g [attr.transform]="transform" class="viz line chart">
-        <svg:g x-axis
+        <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -41,7 +41,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel">
         </svg:g>
 
-        <svg:g y-axis
+        <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -53,7 +53,7 @@ import d3 from '../d3';
         <svg:g [attr.clip-path]="clipPath">
 
           <svg:g *ngFor="let series of results.series">
-            <svg:g line-series
+            <svg:g lineSeries
               [xScale]="xScale"
               [yScale]="yScale"
               [color]="colors(series.name)"
@@ -72,7 +72,7 @@ import d3 from '../d3';
           />
 
           <svg:g *ngFor="let series of results.series">
-            <svg:g circle-series
+            <svg:g circleSeries
               [xScale]="xScale"
               [yScale]="yScale"
               [color]="colors(series.name)"

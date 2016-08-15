@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@ang
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[pie-grid-series]',
+  selector: 'g[pieGridSeries]',
   directives: [],
   template: `
     <svg:g class="pie-grid-arcs">

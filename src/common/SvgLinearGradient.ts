@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'g[svg-linear-gradient]',
+  selector: 'g[svgLinearGradient]',
   template: `
     <svg:linearGradient
       [id]="name"

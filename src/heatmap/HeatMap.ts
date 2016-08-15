@@ -19,7 +19,7 @@ import { generateColorScale, colorHelper } from '../utils/colorSets';
       [view]="view">
       <svg:g [attr.transform]="transform" class="viz numbercard">
 
-        <svg:g x-axis
+        <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -27,7 +27,7 @@ import { generateColorScale, colorHelper } from '../utils/colorSets';
           [labelText]="xAxisLabel">
         </svg:g>
 
-        <svg:g y-axis
+        <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -44,7 +44,7 @@ import { generateColorScale, colorHelper } from '../utils/colorSets';
           [attr.fill]="rect.fill"
         />
 
-        <svg:g heat-cell-series
+        <svg:g heatCellSeries
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"

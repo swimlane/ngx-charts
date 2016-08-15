@@ -15,7 +15,7 @@ import { PieSeries } from './PieSeries';
       [view]="view"
       [legendData]="data">
       <svg:g [attr.transform]="translation" class="viz pie chart">
-        <svg:g pie-series
+        <svg:g pieSeries
           [colors]="colors"
           [showLabels]="labels"
           [data]="data"

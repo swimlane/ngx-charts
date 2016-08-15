@@ -4,13 +4,13 @@ import { XAxisTicks } from './XAxisTicks';
 import { AxisLabel } from './AxisLabel';
 
 @Component({
-  selector: 'g[x-axis]',
+  selector: 'g[xAxis]',
   directives: [XAxisTicks, AxisLabel],
   template: `
     <svg:g
       [attr.class]="xAxisClassName"
       [attr.transform]="transform">
-      <svg:g x-axis-ticks
+      <svg:g xAxisTicks
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
@@ -20,7 +20,7 @@ import { AxisLabel } from './AxisLabel';
         [gridLineHeight]="dims.height"
       />
 
-      <svg:g axis-label
+      <svg:g axisLabel
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="80"

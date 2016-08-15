@@ -14,7 +14,7 @@ import { colorHelper } from '../utils/colorSets';
       legend="false"
       [view]="view">
       <svg:g [attr.transform]="transform" class="viz treemap">
-        <svg:g cell-series
+        <svg:g cellSeries
           [colors]="colors"
           [data]="data"
           [dims]="dims"

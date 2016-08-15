@@ -4,7 +4,7 @@ import { PopoverRegistry } from './PopoverRegistry';
 import './popover.scss';
 
 @Directive({
-  selector: '[sw-popover]'
+  selector: '[swPopover]'
 })
 export class Popover implements OnInit, OnDestroy {
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'g[svg-radial-gradient]',
+  selector: 'g[svgRadialGradient]',
   template: `
     <svg:radialGradient
       [id]="name"

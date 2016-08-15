@@ -21,7 +21,7 @@ import d3 from '../d3';
           class="pie-grid-item"
           [attr.transform]="series.transform">
 
-          <svg:g pie-grid-series
+          <svg:g pieGridSeries
             [colors]="series.colors"
             [data]="series.data"
             [innerRadius]="series.innerRadius"

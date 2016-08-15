@@ -14,7 +14,7 @@ import { gridLayout } from '../common/gridLayout';
       [legend]="false"
       [view]="view">
       <svg:g [attr.transform]="transform" class="viz numbercard">
-        <svg:g card-series
+        <svg:g cardSeries
           [colors]="colors"
           [data]="data"
           [dims]="dims"

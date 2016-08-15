@@ -5,11 +5,11 @@ import { Label } from './Label';
 import { Popover } from '../common/popover/PopoverComponent';
 
 @Component({
-  selector: 'g[pie-series]',
+  selector: 'g[pieSeries]',
   directives: [PieArc, Label, Popover],
   template: `
     <svg:g *ngFor="let arc of data">
-      <svg:g pie-label
+      <svg:g pieLabel
         *ngIf="labelVisible(arc)"
         [data]="arc"
         [radius]="outerRadius"
@@ -20,7 +20,7 @@ import { Popover } from '../common/popover/PopoverComponent';
         [explodeSlices]="explodeSlices">
       </svg:g>
 
-      <svg:g pie-arc
+      <svg:g pieArc
         [startAngle]="arc.startAngle"
         [endAngle]="arc.endAngle"
         [innerRadius]="innerRadius"
@@ -31,7 +31,7 @@ import { Popover } from '../common/popover/PopoverComponent';
         [max]="max"
         [explodeSlices]="explodeSlices"
         (clickHandler)="click($event)"
-        sw-popover
+        swPopover
         [popoverSpacing]="15"
         [popoverText]="tooltipText(arc)"
         [popoverGroup]="'charts'">

@@ -4,7 +4,7 @@ import { Popover } from '../common/popover/PopoverComponent';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'g[series-vertical]',
+  selector: 'g[seriesVertical]',
   directives: [Bar, Popover],
   template: `
     <svg:g bar *ngFor="let bar of bars"
@@ -17,7 +17,7 @@ import * as moment from 'moment';
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
       (clickHandler)="click($event)"
-      sw-popover
+      swPopover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
       [popoverGroup]="'charts'">

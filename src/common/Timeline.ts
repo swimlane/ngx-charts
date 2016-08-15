@@ -12,7 +12,7 @@ import d3 from '../d3';
     <svg:g
       [attr.transform]="transform">
 
-      <svg:g x-axis
+      <svg:g xAxis
         [xScale]="xScale"
         [dims]="dims"
         [showGridLines]="showGridLines"

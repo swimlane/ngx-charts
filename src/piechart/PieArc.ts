@@ -5,18 +5,18 @@ import { SvgRadialGradient } from '../common/SvgRadialGradient';
 import ObjectId from "../utils/objectid";
 
 @Component({
-  selector: 'g[pie-arc]',
+  selector: 'g[pieArc]',
   directives: [SvgLinearGradient, SvgRadialGradient],
   template: `
     <svg:g class="arc-group">
       <svg:defs>
-        <svg:g svg-linear-gradient
+        <svg:g svgLinearGradient
           [color]="fill"
           orientation="vertical"
           [name]="linearGradientId"
           [startOpacity]="startOpacity"
         />
-        <svg:g svg-radial-gradient
+        <svg:g svgRadialGradient
           [color]="fill"
           orientation="vertical"
           [name]="radialGradientId"

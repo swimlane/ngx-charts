@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'g[axis-label]',
+  selector: 'g[axisLabel]',
   template: `
     <svg:text
       [attr.stroke-width]="strokeWidth"

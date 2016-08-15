@@ -3,7 +3,7 @@ import { Cell } from './Cell';
 import { Popover } from '../common/popover/PopoverComponent';
 
 @Component({
-  selector: 'g[heat-cell-series]',
+  selector: 'g[heatCellSeries]',
   directives: [Cell, Popover],
   template: `
     <svg:g>
@@ -15,7 +15,7 @@ import { Popover } from '../common/popover/PopoverComponent';
         [fill]="c.fill"
         [data]="c.data"
         (clickHandler)="click($event)"
-        sw-popover
+        swPopover
         [popoverSpacing]="15"
         [popoverText]="c.tooltipText"
         [popoverGroup]="'charts'"
