@@ -18,28 +18,28 @@ import '../viz.scss';
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [labels]="true"
         [results]="barData"
-        [xaxis]="true"
-        [yaxis]="true"
-        [show-x-axis-label]="true"
-        [xaxis-label]="'hello x'"
-        [yaxis-label]="'hello y'"
-        [show-y-axis-label]="true">
+        [xAxis]="true"
+        [yAxis]="true"
+        [showXAxisLabel]="true"
+        [xAxisLabel]="'hello x'"
+        [yAxisLabel]="'hello y'"
+        [showYAxisLabel]="true">
       </bar-vertical>
 
-      <h4>Vertical 2D</h4>
+      <!--<h4>Vertical 2D</h4>-->
 
-      <bar-vertical-2-d
-        [view]="[700,200]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [labels]="true"
-        [results]="barData"
-        [xaxis]="true"
-        [yaxis]="true"
-        [show-x-axis-label]="true"
-        [xaxis-label]="'hello x'"
-        [yaxis-label]="'hello y'"
-        [show-y-axis-label]="true">
-      </bar-vertical-2-d>
+      <!--<bar-vertical-2-d-->
+        <!--[view]="[700,200]"-->
+        <!--[scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"-->
+        <!--[labels]="true"-->
+        <!--[results]="barData"-->
+        <!--[xAxis]="true"-->
+        <!--[yAxis]="true"-->
+        <!--[showXAxisLabel]="true"-->
+        <!--[xAxisLabel]="'hello x'"-->
+        <!--[yAxisLabel]="'hello y'"-->
+        <!--[showYAxisLabel]="true">-->
+      <!--</bar-vertical-2-d>-->
 
       <h4>Horizontal</h4>
       <bar-horizontal
@@ -47,12 +47,12 @@ import '../viz.scss';
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [labels]="true"
         [results]="barData"
-        [xaxis]="true"
-        [yaxis]="true"
-        [show-x-axis-label]="true"
-        [xaxis-label]="'hello x'"
-        [yaxis-label]="'hello y'"
-        [show-y-axis-label]="true">
+        [xAxis]="true"
+        [xAxisLabel]="'hello x'"
+        [showXAxisLabel]="true"
+        [yAxis]="true"
+        [yAxisLabel]="'hello y'"
+        [showYAxisLabel]="true">
       </bar-horizontal>
 
       <hr />
@@ -73,8 +73,8 @@ import '../viz.scss';
       <line-chart
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [xaxis]="true"
-        [yaxis]="true"
+        [xAxis]="true"
+        [yAxis]="true"
         [results]="lineData"
         [legend]="false">
       </line-chart>
@@ -86,8 +86,8 @@ import '../viz.scss';
       <area-chart
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [xaxis]="true"
-        [yaxis]="true"
+        [xAxis]="true"
+        [yAxis]="true"
         [results]="lineData"
         [legend]="false">
       </area-chart>

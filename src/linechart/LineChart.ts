@@ -31,21 +31,21 @@ import d3 from '../d3';
 
       <svg:g [attr.transform]="transform" class="viz line chart">
         <svg:g x-axis
-          *ngIf="xaxis"
+          *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
           [showGridLines]="true"
           [showLabel]="showXAxisLabel"
-          [labelText]="xaxisLabel">
+          [labelText]="xAxisLabel">
         </svg:g>
 
         <svg:g y-axis
-          *ngIf="yaxis"
+          *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
           [showGridLines]="true"
           [showLabel]="showYAxisLabel"
-          [labelText]="yaxisLabel">
+          [labelText]="yAxisLabel">
         </svg:g>
 
         <svg:g [attr.clip-path]="clipPath">
@@ -107,12 +107,12 @@ export class LineChart extends BaseChart implements OnInit {
   @Input() margin = [10, 20, 70, 70];
   @Input() scheme;
   @Input() customColors;
-  @Input() xaxis;
-  @Input() yaxis;
+  @Input() xAxis;
+  @Input() yAxis;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
-  @Input() xaxisLabel;
-  @Input() yaxisLabel;
+  @Input() xAxisLabel;
+  @Input() yAxisLabel;
   @Input() autoScale;
   @Input() timeline;
 

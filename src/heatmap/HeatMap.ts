@@ -20,19 +20,19 @@ import { generateColorScale, colorHelper } from '../utils/colorSets';
       <svg:g [attr.transform]="transform" class="viz numbercard">
 
         <svg:g x-axis
-          *ngIf="xaxis"
+          *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
           [showLabel]="showXAxisLabel"
-          [labelText]="xaxisLabel">
+          [labelText]="xAxisLabel">
         </svg:g>
 
         <svg:g y-axis
-          *ngIf="yaxis"
+          *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
           [showLabel]="showYAxisLabel"
-          [labelText]="yaxisLabel">
+          [labelText]="yAxisLabel">
         </svg:g>
 
         <svg:rect *ngFor="let rect of rects"
@@ -71,12 +71,12 @@ export class HeatMap extends BaseChart implements OnInit {
   @Input() scheme;
   @Input() customColors;
   @Input() legend;
-  @Input() xaxis;
-  @Input() yaxis;
+  @Input() xAxis;
+  @Input() yAxis;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
-  @Input() xaxisLabel;
-  @Input() yaxisLabel;
+  @Input() xAxisLabel;
+  @Input() yAxisLabel;
 
   @Output() clickHandler = new EventEmitter();
 

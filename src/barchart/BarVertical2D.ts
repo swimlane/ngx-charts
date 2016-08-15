@@ -29,21 +29,21 @@ import d3 from '../d3';
         </svg:g>
 
         <svg:g x-axis
-          *ngIf="xaxis"
+          *ngIf="xAxis"
           [xScale]="x0Scale"
           [dims]="dims"
           [tickFormatting]="tickFormatting"
           [showLabel]="showXAxisLabel"
-          [labelText]="xaxisLabel">
+          [labelText]="xAxisLabel">
         </svg:g>
 
         <svg:g y-axis
-          *ngIf="yaxis"
+          *ngIf="yAxis"
           [yScale]="y0Scale"
           [dims]="dims"
           showGridLines="true"
           [showLabel]="showYAxisLabel"
-          [labelText]="yaxisLabel">
+          [labelText]="yAxisLabel">
         </svg:g>
 
         <svg:g
@@ -77,12 +77,12 @@ export class BarVertical2D extends BaseChart implements OnInit {
   @Input() scheme;
   @Input() customColors;
   @Input() legend = false;
-  @Input() xaxis;
-  @Input() yaxis;
+  @Input() xAxis;
+  @Input() yAxis;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
-  @Input() xaxisLabel;
-  @Input() yaxisLabel;
+  @Input() xAxisLabel;
+  @Input() yAxisLabel;
   @Input() scaleType = 'ordinal';
 
   @Output() clickHandler = new EventEmitter();
@@ -101,6 +101,7 @@ export class BarVertical2D extends BaseChart implements OnInit {
         .domain(this.results.d0Domain);
     }
 
+    //todo check this.x0Scale.bandwidth() depending on scaleType
     this.x1Scale = d3.scaleBand()
       .rangeRound([0, this.x0Scale.bandwidth()], groupSpacing)
       .domain(this.results.d1Domain);

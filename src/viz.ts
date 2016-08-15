@@ -1,6 +1,6 @@
 // Imports
 import { BarVertical } from './barchart/BarVertical';
-// import { BarVertical2D } from './barchart/BarVertical2D';
+import { BarVertical2D } from './barchart/BarVertical2D';
 // import { BarVerticalStacked } from './barchart/BarVerticalStacked';
 // import { BarVerticalNormalized } from './barchart/BarVerticalNormalized';
 import { BarHorizontal } from './barchart/BarHorizontal';
@@ -52,7 +52,7 @@ export { NumberCard } from './numbercards/NumberCard';
 
 export const VIZ_COMPONENTS = [
   BarVertical,
-  // BarVertical2D,
+  BarVertical2D,
   // BarVerticalStacked,
   // BarVerticalNormalized,
   BarHorizontal,

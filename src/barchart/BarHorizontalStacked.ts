@@ -20,22 +20,22 @@ import d3 from '../d3';
       <svg:g [attr.transform]="transform" class="viz bar chart">
 
         <svg:g x-axis
-          *ngIf="xaxis"
+          *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
           [tickFormatting]="xAxisFormat"
           showGridLines="true"
           [showLabel]="showXAxisLabel"
-          [labelText]="xaxisLabel">
+          [labelText]="xAxisLabel">
         </svg:g>
 
         <svg:g y-axis
-          *ngIf="yaxis"
+          *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
           [tickFormatting]="tickFormatting"
           [showLabel]="showYAxisLabel"
-          [labelText]="yaxisLabel">
+          [labelText]="yAxisLabel">
         </svg:g>
 
         <svg:g
@@ -69,12 +69,12 @@ export class BarHorizontalStacked extends BaseChart implements OnInit {
   @Input() scheme;
   @Input() customColors;
   @Input() legend = false;
-  @Input() xaxis;
-  @Input() yaxis;
+  @Input() xAxis;
+  @Input() yAxis;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
-  @Input() xaxisLabel;
-  @Input() yaxisLabel;
+  @Input() xAxisLabel;
+  @Input() yAxisLabel;
 
   @Output() clickHandler = new EventEmitter();
 

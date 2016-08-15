@@ -6,289 +6,289 @@
 
   <div ng-switch="vizType" ng-if="!statusMessage">
     <bar-vertical
-      ng-switch-when="BarVertical"
+      ngSwitchWhen="BarVertical"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-vertical>
 
     <bar-vertical-2-d
-      ng-switch-when="BarVertical2D"
+      ngSwitchWhen="BarVertical2D"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-vertical-2-d>
 
     <bar-vertical-stacked
-      ng-switch-when="BarVerticalStacked"
+      ngSwitchWhen="BarVerticalStacked"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-vertical-stacked>
 
     <bar-vertical-normalized
-      ng-switch-when="BarVerticalNormalized"
+      ngSwitchWhen="BarVerticalNormalized"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-vertical-normalized>
 
     <bar-horizontal
-      ng-switch-when="BarHorizontal"
+      ngSwitchWhen="BarHorizontal"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-horizontal>
 
     <bar-horizontal-2-d
-      ng-switch-when="BarHorizontal2D"
+      ngSwitchWhen="BarHorizontal2D"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-horizontal-2-d>
 
     <bar-horizontal-stacked
-      ng-switch-when="BarHorizontalStacked"
+      ngSwitchWhen="BarHorizontalStacked"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-horizontal-stacked>
 
     <bar-horizontal-normalized
-      ng-switch-when="BarHorizontalNormalized"
+      ngSwitchWhen="BarHorizontalNormalized"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-horizontal-normalized>
 
     <line-chart
-      ng-switch-when="LineChart"
+      ngSwitchWhen="LineChart"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText"
       [auto-scale]="statsReport.report.chartOptions.autoScale"
       [timeline]="statsReport.report.chartOptions.zoom">
     </line-chart>
 
     <line-chart-2-d
-      ng-switch-when="LineChart2D"
+      ngSwitchWhen="LineChart2D"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText"
       [auto-scale]="statsReport.report.chartOptions.autoScale"
       [timeline]="statsReport.report.chartOptions.zoom">
     </line-chart-2-d>
 
     <area-chart
-      ng-switch-when="AreaChart"
+      ngSwitchWhen="AreaChart"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText"
       [auto-scale]="statsReport.report.chartOptions.autoScale"
       [timeline]="statsReport.report.chartOptions.zoom">
     </area-chart>
 
     <area-chart-stacked
-      ng-switch-when="AreaChartStacked"
+      ngSwitchWhen="AreaChartStacked"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText"
       [timeline]="statsReport.report.chartOptions.zoom">
     </area-chart-stacked>
 
     <area-chart-normalized
-      ng-switch-when="AreaChartNormalized"
+      ngSwitchWhen="AreaChartNormalized"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText"
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText"
       [timeline]="statsReport.report.chartOptions.zoom">
     </area-chart-normalized>
 
     <number-card
-      ng-switch-when="NumberCard"
+      ngSwitchWhen="NumberCard"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart">
     </number-card>
 
     <heat-map
-      ng-switch-when="HeatMap"
+      ngSwitchWhen="HeatMap"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
-      [xaxis]="statsReport.report.chartOptions.showXAxis"
-      [yaxis]="statsReport.report.chartOptions.showYAxis"
-      [show-x-axis-label]="statsReport.report.chartOptions.showXAxisLabel"
-      [show-y-axis-label]="statsReport.report.chartOptions.showYAxisLabel"
-      [xaxis-label]="statsReport.report.chartOptions.xAxisLabelText"
-      [yaxis-label]="statsReport.report.chartOptions.yAxisLabelText">
+      [xAxis]="statsReport.report.chartOptions.showXAxis"
+      [yAxis]="statsReport.report.chartOptions.showYAxis"
+      [showXAxisLabel]="statsReport.report.chartOptions.showXAxisLabel"
+      [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
+      [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
+      [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </heat-map>
 
     <pie-chart
-      ng-switch-when="PieChart"
+      ngSwitchWhen="PieChart"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [doughnut]="false"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [labels]="statsReport.report.chartOptions.showLabels"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart"
       [explode-slices]="statsReport.report.chartOptions.explodeSlices">
     </pie-chart>
 
     <pie-chart
-      ng-switch-when="DonutChart"
+      ngSwitchWhen="DonutChart"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [doughnut]="true"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [labels]="statsReport.report.chartOptions.showLabels"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart">
     </pie-chart>
 
     <pie-grid
-      ng-switch-when="PieGrid"
+      ngSwitchWhen="PieGrid"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap"
+      [customColors]="statsReport.report.chartOptions.colorMap"
       [legend]="statsReport.report.chartOptions.showLegend && !miniChart">
     </pie-grid>
 
     <advanced-pie-chart
-      ng-switch-when="AdvancedPieChart"
+      ngSwitchWhen="AdvancedPieChart"
       [view]="view"
-      (click-handler)="pointClick($event)"
+      (clickHandler)="pointClick($event)"
       [results]="results"
       [scheme]="statsReport.report.chartOptions.colorScheme"
-      [custom-colors]="statsReport.report.chartOptions.colorMap">
+      [customColors]="statsReport.report.chartOptions.colorMap">
     </advanced-pie-chart>
 
     <div ng-switch-default>
