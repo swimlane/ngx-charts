@@ -12,8 +12,8 @@ import d3 from '../d3';
         [attr.transform]="transform"
         dy=".35em"
         [style.textAnchor]="textAnchor()"
-        [style.shapeRendering]="crispEdges"
-        [style.textTransform]="uppercase">
+        [style.shapeRendering]="'crispEdges'"
+        [style.textTransform]="'uppercase'">
         {{trimLabel(label)}}
       </svg:text>
       <svg:path
