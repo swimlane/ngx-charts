@@ -1,20 +1,17 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import d3 from '../d3';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { CellSeries } from './CellSeries';
+import { BaseChart } from '../common/BaseChart';
 import { calculateViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 
 @Component({
   selector: 'tree-map',
-  directives: [Chart, CellSeries],
   template: `
     <chart
       legend="false"
       [view]="view">
       <svg:g [attr.transform]="transform" class="viz treemap">
-        <svg:g cellSeries
+        <svg:g treeMapCellSeries
           [colors]="colors"
           [data]="data"
           [dims]="dims"
@@ -67,6 +64,12 @@ export class TreeMap extends BaseChart implements OnInit {
 
   click(data) {
     this.clickHandler.emit(data);
+  }
+
+  setColors() {
+  }
+
+  update() {
   }
 
 }

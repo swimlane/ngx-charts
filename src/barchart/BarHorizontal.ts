@@ -1,17 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { SeriesHorizontal } from './SeriesHorizontal';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
+import { BaseChart } from '../common/BaseChart';
 import { tickFormat } from '../common/tickFormat';
 import d3 from '../d3';
 
 @Component({
   selector: 'bar-horizontal',
-  directives: [Chart, SeriesHorizontal, XAxis, YAxis],
   template: `
     <chart
       [legend]="legend"
@@ -100,6 +95,9 @@ export class BarHorizontal extends BaseChart implements OnInit {
 
   setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+  }
+
+  update() {
   }
 
 }

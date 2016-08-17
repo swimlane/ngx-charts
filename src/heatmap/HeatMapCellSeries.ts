@@ -1,13 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Cell } from './Cell';
-import { Popover } from '../common/popover/PopoverComponent';
 
 @Component({
-  selector: 'g[heatCellSeries]',
-  directives: [Cell, Popover],
+  selector: 'g[heatMapCellSeries]',
   template: `
     <svg:g>
-      <svg:g cell *ngFor="let c of cells"
+      <svg:g heatMapCell *ngFor="let c of cells"
         [x]="c.x"
         [y]="c.y"
         [width]="c.width"

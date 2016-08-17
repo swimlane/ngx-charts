@@ -1,20 +1,13 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
-import { AreaSeries } from './AreaSeries';
-import { CircleSeries } from '../common/CircleSeries';
-import { Timeline } from '../common/Timeline';
+import { BaseChart } from '../common/BaseChart';
 import moment = require("moment");
 import ObjectId from "../utils/objectid";
 import d3 from '../d3';
 
 @Component({
   selector: 'area-chart-stacked',
-  directives: [Chart, XAxis, YAxis, AreaSeries, CircleSeries, Timeline],
   template: `
     <chart
       [legend]="legend"
@@ -193,6 +186,9 @@ export class AreaChartStacked extends BaseChart implements OnInit {
 
   setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
+  }
+
+  update() {
   }
 
 }

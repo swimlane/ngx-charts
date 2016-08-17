@@ -1,12 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import d3 from '../d3';
-import { PieArc } from './PieArc';
-import { Label } from './Label';
-import { Popover } from '../common/popover/PopoverComponent';
 
 @Component({
   selector: 'g[pieSeries]',
-  directives: [PieArc, Label, Popover],
   template: `
     <svg:g *ngFor="let arc of data">
       <svg:g pieLabel

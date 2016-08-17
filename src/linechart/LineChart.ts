@@ -1,20 +1,13 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
-import { LineSeries } from './LineSeries';
-import { CircleSeries } from '../common/CircleSeries';
-import { Timeline } from '../common/Timeline';
+import { BaseChart } from '../common/BaseChart';
 import ObjectId from "../utils/objectid";
 import moment = require("moment"); // todo remove moment dependency
 import d3 from '../d3';
 
 @Component({
   selector: 'line-chart',
-  directives: [Chart, XAxis, YAxis, LineSeries, CircleSeries, Timeline],
   template: `
     <chart
       [legend]="false"

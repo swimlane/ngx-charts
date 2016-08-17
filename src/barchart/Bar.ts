@@ -1,11 +1,9 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import ObjectId from '../utils/objectid';
-import { SvgLinearGradient } from '../common/SvgLinearGradient';
 import d3 from '../d3';
 
 @Component({
   selector: 'g[bar]',
-  directives: [SvgLinearGradient],
   template: `
     <svg:g>
       <svg:defs>

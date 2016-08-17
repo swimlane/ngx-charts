@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-import {
-  VIZ_COMPONENTS,
-} from '../viz';
-
 import { barData, pieData, lineData } from './data';
-import '../viz.scss';
+import '../src/viz.scss';
 
 @Component({
   selector: 'app',
@@ -16,7 +12,6 @@ import '../viz.scss';
       <bar-vertical
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [labels]="true"
         [results]="barData"
         [xAxis]="true"
         [yAxis]="true"
@@ -45,7 +40,6 @@ import '../viz.scss';
       <bar-horizontal
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [labels]="true"
         [results]="barData"
         [xAxis]="true"
         [xAxisLabel]="'hello x'"
@@ -75,8 +69,7 @@ import '../viz.scss';
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [xAxis]="true"
         [yAxis]="true"
-        [results]="lineData"
-        [legend]="false">
+        [results]="lineData">
       </line-chart>
 
       <hr />
@@ -102,8 +95,7 @@ import '../viz.scss';
       </number-card>
 
     </div>
-  `,
-  directives: [VIZ_COMPONENTS]
+  `
 })
 export class App {
   constructor() {

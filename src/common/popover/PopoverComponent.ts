@@ -7,7 +7,6 @@ import './popover.scss';
   selector: '[swPopover]'
 })
 export class Popover implements OnInit, OnDestroy {
-
   @Input() popoverText;
   @Input() popoverTemplate;
   @Input() popoverPlacement = 'top';

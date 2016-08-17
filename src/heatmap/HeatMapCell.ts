@@ -1,47 +1,48 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
-import { formatNumber } from 'common/utils/number/format'; // todo fix import
-// todo fix missing "props"
+import ObjectId from "../utils/objectid";
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[cell]',
+  selector: 'g[heatMapCell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
+      <defs>
+        <svg:g svgLinearGradient
+          [color]="fill"
+          orientation="vertical"
+          [name]="gradientId"
+          [startOpacity]="startOpacity"
+        />
+      </defs>
+
       <svg:rect
-        [attr.fill]="fill"
+        [attr.fill]="gradientUrl"
+        rx="3"
         [attr.width]="width"
         [attr.height]="height"
         class="viz cell"
+        style="cursor: pointer"
         (click)="click()"
       />
 
-      <svg:foreignObject
-        *ngIf="width >= 70 && height >= 35"
-        x="0"
-        [attr.y]="height/2 - 15"
-        [attr.width]="width"
-        height="40">
-        <xhtml:p>
-          <xhtml:b>{{label}}</xhtml:b>
-          <xhtml:br/>
-          {{formattedValue}}
-        </xhtml:p>
-      </svg:foreignObject>
     </svg:g>
   `
 })
-export class Cell implements OnInit {
+export class HeatMapCell implements OnInit {
   element: HTMLElement;
   transform: string;
-  formattedValue: string; // todo check string or number ?
+  activeRange: any[];
+  startOpacity: number;
+  gradientId: string;
+  gradientUrl: string;
+
   @Input() fill;
   @Input() x;
   @Input() y;
   @Input() width;
   @Input() height;
+  @Input() data;
   @Input() label;
-  @Input() value;
-  @Input() valueType;
 
   @Output() clickHandler = new EventEmitter();
 
@@ -51,7 +52,14 @@ export class Cell implements OnInit {
 
   ngOnInit() {
     this.transform = `translate(${this.x} , ${this.y})`;
-    this.formattedValue = formatNumber(props.value, props.valueType);
+
+    // let value = this.data.value; // unused variable
+    // let range = this.activeRange; // unused variable
+
+    let pageUrl = window.location.href;
+    this.startOpacity = 0.3;
+    this.gradientId = 'grad' + ObjectId().toString();
+    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
 
     this.loadAnimation();
   }
@@ -73,8 +81,7 @@ export class Cell implements OnInit {
   }
 
   click() {
-    this.clickHandler.emit(this.label);
+    this.clickHandler.emit(this.data);
   }
-
 
 }

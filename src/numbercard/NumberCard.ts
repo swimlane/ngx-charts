@@ -1,14 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { CardSeries } from './CardSeries';
+import { BaseChart } from '../common/BaseChart';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { gridLayout } from '../common/gridLayout';
 
 @Component({
   selector: 'number-card',
-  directives: [Chart, CardSeries],
   template: `
     <chart
       [legend]="false"
@@ -54,6 +51,12 @@ export class NumberCard extends BaseChart implements OnInit {
 
   click(data) {
     this.clickHandler.emit(data);
+  }
+
+  setColors() {
+  }
+
+  update() {
   }
 
 }

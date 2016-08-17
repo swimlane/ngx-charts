@@ -1,13 +1,10 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
-import { Chart } from '../common/charts/Chart';
-import { XAxis } from '../common/axes/XAxis';
 import moment = require("moment");
 import { throttle } from "../utils/throttle";
 import d3 from '../d3';
 
 @Component({
   selector: 'g[timeline]',
-  directives: [Chart, XAxis],
   template: `
     <svg:g
       [attr.transform]="transform">

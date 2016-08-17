@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Legend } from '../Legend';
-import { ScaleLegend } from '../ScaleLegend';
+
 @Component({
   selector: 'chart',
-  directives: [Legend, ScaleLegend],
   template: `
   <div class="row">
     <div [class]="className">

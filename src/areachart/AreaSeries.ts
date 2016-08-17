@@ -1,11 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Area } from './Area';
 import d3 from '../d3';
 import moment = require("moment");
 
 @Component({
   selector: 'g[areaSeries]',
-  directives: [Area],
   template: `
     <svg:g area
       [data]="data"

@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Line } from './Line';
 import d3 from '../d3';
 import moment = require("moment");
 
 @Component({
   selector: 'g[lineSeries]',
-  directives: [Line],
   template: `
     <svg:g line
       [data]="data"

@@ -1,20 +1,13 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
-import { LineSeries } from './LineSeries';
-import { CircleSeries } from '../common/CircleSeries';
-import { Timeline } from '../common/Timeline';
+import { BaseChart } from '../common/BaseChart';
 import moment = require("moment");
 import ObjectId from "../utils/objectid";
 import d3 from '../d3';
 
 @Component({
   selector: 'line-chart-2-d',
-  directives: [Chart, XAxis, YAxis, LineSeries, CircleSeries, Timeline],
   template: `
     <chart
       [legend]="legend"
@@ -78,7 +71,6 @@ import d3 from '../d3';
               [color]="colors(series.name)"
               [data]="series.array"
               [scaleType]="scaleType"
-              [chartType]="'line'"
               (clickHandler)="click($event)"
             />
           </svg:g>
@@ -173,5 +165,8 @@ export class LineChart2D extends BaseChart implements OnInit {
 
   setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
+  }
+
+  update() {
   }
 }

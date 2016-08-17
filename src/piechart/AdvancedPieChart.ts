@@ -1,12 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { PieSeries } from './PieSeries';
-import { truncate } from 'common/utils/truncate'; // todo fix import
+import { BaseChart } from '../common/BaseChart';
+import { truncate } from '../common/utils/truncate';
 
-interface LegendItem {
+export interface LegendItem {
   value: number;
   label: string;
   percentage: number;
@@ -14,7 +12,6 @@ interface LegendItem {
 
 @Component({
   selector: 'advanced-pie-chart',
-  directives: [Chart, PieSeries],
   template: `
     <div class="row"
       [style.height]="view[1]">
@@ -144,6 +141,9 @@ export class AdvancedPieChart extends BaseChart implements OnInit {
 
   setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+  }
+
+  update() {
   }
 
 }

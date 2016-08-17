@@ -1,13 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { calculateViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { PieSeries } from './PieSeries';
+import { BaseChart } from '../common/BaseChart';
 
 @Component({
   selector: 'pie-chart',
-  directives: [Chart, PieSeries],
   template: `
     <chart
       [colors]="colors"
@@ -78,6 +75,9 @@ export class PieChart extends BaseChart implements OnInit {
 
   setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+  }
+
+  update() {
   }
 
 }

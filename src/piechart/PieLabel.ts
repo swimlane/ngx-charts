@@ -27,7 +27,7 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class Label implements OnInit {
+export class PieLabel implements OnInit {
   element: HTMLElement;
   trimLabel: Function;
   labelXY: any;

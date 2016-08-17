@@ -1,16 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import d3 from '../d3';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { XAxis } from '../common/axes/XAxis';
-import { YAxis } from '../common/axes/YAxis';
-import { HeatCellSeries } from './HeatCellSeries';
+import { BaseChart } from '../common/BaseChart';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { generateColorScale, colorHelper } from '../utils/colorSets';
 
 @Component({
   selector: 'heat-map',
-  directives: [Chart, HeatCellSeries, XAxis, YAxis],
   template: `
     <chart
       [legend]="false"
@@ -44,7 +39,7 @@ import { generateColorScale, colorHelper } from '../utils/colorSets';
           [attr.fill]="rect.fill"
         />
 
-        <svg:g heatCellSeries
+        <svg:g heatMapCellSeries
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -122,5 +117,11 @@ export class HeatMap extends BaseChart implements OnInit {
 
   click(data) {
     this.clickHandler.emit(data);
+  }
+
+  setColors() {
+  }
+
+  update() {
   }
 }

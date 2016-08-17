@@ -1,11 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Bar } from './Bar';
-import { Popover } from '../common/popover/PopoverComponent';
 import * as moment from 'moment';
 
 @Component({
   selector: 'g[seriesVertical]',
-  directives: [Bar, Popover],
   template: `
     <svg:g bar *ngFor="let bar of bars"
       [width]="bar.width"

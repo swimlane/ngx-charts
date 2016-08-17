@@ -3,7 +3,6 @@ import d3 from '../d3';
 
 @Component({
   selector: 'g[pieGridSeries]',
-  directives: [],
   template: `
     <svg:g class="pie-grid-arcs">
       <svg:path *ngFor="let arc of arcs"

@@ -1,14 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Circle } from './Circle';
-import { Area } from '../areachart/Area';
-import { Popover } from '../common/popover/PopoverComponent';
 import moment = require("moment");
 import ObjectId from "../utils/objectid";
 import d3 from '../d3';
 
 @Component({
   selector: 'g[circleSeries]',
-  directives: [Circle, Area, Popover],
   template: `
     <svg:g>
       <svg:g area

@@ -18,10 +18,10 @@ function root(args) {
 module.exports = {
   resolve: {
     extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
-    root: root('src'),
+    root: root('demo'),
     descriptionFiles: ['package.json'],
     modules: [
-      root('src'),
+      root('demo'),
       'node_modules'
     ]
   },
@@ -55,9 +55,9 @@ module.exports = {
   },
 
   entry: {
-    'app': './src/app.ts',
-    'polyfills': './src/polyfills.ts',
-    'vendor': './src/vendor.ts'
+    'app': './demo/bootstrap.ts',
+    'polyfills': './demo/polyfills.ts',
+    'vendor': './demo/vendor.ts'
   },
 
   devServer: {
@@ -90,7 +90,7 @@ module.exports = {
   tslint: {
     emitErrors: false,
     failOnHint: false,
-    resourcePath: 'src'
+    resourcePath: 'demo'
   },
 
   plugins: [

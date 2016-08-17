@@ -1,16 +1,13 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
-import { Chart } from '../common/charts/Chart';
-import { BaseChart } from '../BaseChart';
-import { PieGridSeries } from './PieGridSeries';
+import { BaseChart } from '../common/BaseChart';
 import { trimLabel } from '../common/trimLabel';
 import { gridLayout } from '../common/gridLayout';
 import d3 from '../d3';
 
 @Component({
   selector: 'pie-grid',
-  directives: [Chart, PieGridSeries],
   template: `
     <chart
       [legend]="false"
@@ -137,6 +134,9 @@ export class PieGrid extends BaseChart implements OnInit {
 
   setColors() {
     this.colorScale = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+  }
+
+  update() {
   }
 
 }

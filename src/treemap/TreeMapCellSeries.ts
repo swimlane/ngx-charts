@@ -1,13 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Cell } from './Cell';
 import { OnInit } from "@angular/core/esm";
 
 @Component({
-  selector: 'g[cellSeries]',
-  directives: [Cell],
+  selector: 'g[treeMapCellSeries]',
   template: `
     <svg:g>
-      <svg:g cell *ngFor="let c of cells"
+      <svg:g treeMapCell *ngFor="let c of cells"
         [x]="c.x"
         [y]="c.y"
         [width]="c.width"
@@ -21,7 +19,7 @@ import { OnInit } from "@angular/core/esm";
     </svg:g>
   `
 })
-export class CellSeries implements OnInit {
+export class TreeMapCellSeries implements OnInit {
   cells: any[];
   @Input() data;
   @Input() dims;

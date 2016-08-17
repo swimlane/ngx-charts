@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 // import d3 from '../../d3';
-import { XAxisTicks } from './XAxisTicks';
-import { AxisLabel } from './AxisLabel';
 
 @Component({
   selector: 'g[xAxis]',
-  directives: [XAxisTicks, AxisLabel],
   template: `
     <svg:g
       [attr.class]="xAxisClassName"

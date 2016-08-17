@@ -1,12 +1,9 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import d3 from '../d3';
-import { SvgLinearGradient } from '../common/SvgLinearGradient';
-import { SvgRadialGradient } from '../common/SvgRadialGradient';
 import ObjectId from "../utils/objectid";
 
 @Component({
   selector: 'g[pieArc]',
-  directives: [SvgLinearGradient, SvgRadialGradient],
   template: `
     <svg:g class="arc-group">
       <svg:defs>

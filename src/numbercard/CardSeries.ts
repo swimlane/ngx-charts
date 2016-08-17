@@ -1,6 +1,4 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Card } from './Card';
-import { Popover } from '../common/popover/PopoverComponent';
 
 export interface CardModel {
   x;
@@ -15,7 +13,6 @@ export interface CardModel {
 
 @Component({
   selector: 'g[cardSeries]',
-  directives: [Card, Popover],
   template: `
     <svg:g>
       <svg:g card *ngFor="let c of cards"
@@ -45,8 +42,6 @@ export class CardSeries implements OnInit {
 
   ngOnInit() {
     this.cards = this.getCards();
-    console.log('data', this.data);
-    console.log('cards', this.cards);
   }
 
   getCards() {

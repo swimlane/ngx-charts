@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GridPanel } from './GridPanel';
 
 @Component({
   selector: 'g[gridPanelSeries]',
-  directives: [GridPanel],
   template: `
     <svg:g gridPanel *ngFor="let gridPanel of gridPanels"
       [height]="gridPanel.height"
