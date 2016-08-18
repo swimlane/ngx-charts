@@ -11,6 +11,15 @@ import '../src/viz.scss';
 
       <bar-vertical
         [view]="[700,200]"
+        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"        
+        [results]="barData">
+      </bar-vertical>
+
+
+      <hr />
+
+      <bar-vertical
+        [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [results]="barData"
         [xAxis]="true"
