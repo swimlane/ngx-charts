@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/viewDimensions';
 import { colorHelper } from '../utils/colorSets';
 import { BaseChart } from '../common/BaseChart';
-import { truncate } from '../common/utils/truncate';
+import { trimLabel } from '../common/trimLabel';
 
 export interface LegendItem {
   value: number;
@@ -129,7 +129,7 @@ export class AdvancedPieChart extends BaseChart implements OnInit {
       let percentage = Math.round(value / this.total * 100);
       return {
         value: Math.round(value),
-        label: truncate(label, 20),
+        label: trimLabel(label, 20),
         percentage: percentage
       };
     });
