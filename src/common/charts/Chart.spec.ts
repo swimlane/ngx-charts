@@ -3,7 +3,7 @@ import {
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
 import d3 from '../../d3';
-import '../../utils/testing';
+import '../../../config/testingUtils';
 
 // app imports
 // import { Chart } from './Chart'; // since we HAVE to import the CommonModule, we don't even have to import the Chart.ts..

@@ -1,4 +1,4 @@
-import '../utils/testing';
+import '../../config/testingUtils';
 import { trimLabel } from './trimLabel';
 
 describe('trimLabel', () => {

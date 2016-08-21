@@ -3,7 +3,7 @@ import {
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
 import d3 from '../d3';
-import '../utils/testing';
+import '../../config/testingUtils';
 
 import { CommonModule } from './CommonModule';
 import {colorHelper} from '../utils/colorSets';

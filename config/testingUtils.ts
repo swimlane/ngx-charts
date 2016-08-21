@@ -1,4 +1,4 @@
-/// <reference path="../../node_modules/@types/jasmine/index.d.ts" />
+/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 
 /*
   Temporary fiile for referencing the TypeScript defs for Jasmine + some potentially
