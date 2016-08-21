@@ -8,44 +8,47 @@ import '../utils/testing';
 import { CommonModule } from './CommonModule';
 import {colorHelper} from '../utils/colorSets';
 
+// some test data (includes just enought data to run the tests)
+let seriesData = {
+  array: [
+    {
+      "vals": [
+        {
+          "formattedLabel": [
+            'complete'
+          ]
+        }
+      ]
+    },
+    {
+      "vals": [
+        {
+          "formattedLabel": [
+            "not complete"
+          ]
+        }
+      ]
+    }
+  ]
+};
+
 @Component({
   selector: 'test-component',
   template: ''
 })
 class TestComponent {
-  seriesData: any;
-  legendTitle: string;
+  seriesData: any = seriesData;
+  legendTitle: string = 'Test legend title';
   colors: any;
   legendHeight: number;
 
   constructor() {
+    let scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
+    this.colors = colorHelper(scheme, 'ordinal', [], null);
   }
 }
 
 describe('<legend>', () => {
-  // some test data (includes just enought data to run the tests)
-  let seriesData = {
-    array: [
-      {
-        "vals": [
-          {
-            "formattedLabel": [
-              'complete'
-            ]
-          }
-        ]
-      },
-      {
-        "vals": [
-          {
-            "formattedLabel": [
-              "not complete"
-            ]
-          }
-        ]
-      }
-    ]
-  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -71,15 +74,9 @@ describe('<legend>', () => {
   it('should set the legend title', (done) => {
     TestBed.compileComponents().then(() => {
       let fixture = TestBed.createComponent(TestComponent);
-      fixture.componentInstance.seriesData = seriesData;
-      fixture.componentInstance.legendTitle = 'Test legend title';
-      let scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
-      fixture.componentInstance.colors = colorHelper(scheme, 'ordinal', [], null);
-
       fixture.detectChanges();
 
-      let compiled = fixture.debugElement.nativeElement;
-      let legendTitle = compiled.querySelector('.legend-title-text');
+      let legendTitle = fixture.debugElement.nativeElement.querySelector('.legend-title-text');
 
       expect(legendTitle).toHaveText('Test legend title');
 
@@ -90,22 +87,16 @@ describe('<legend>', () => {
   it('should set the legend labels', (done) => {
     TestBed.compileComponents().then(() => {
       let fixture = TestBed.createComponent(TestComponent);
-      fixture.componentInstance.seriesData = seriesData;
-      fixture.componentInstance.legendTitle = 'Test legend title';
-      let scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
-      fixture.componentInstance.colors = colorHelper(scheme, 'ordinal', [], null);
-
       fixture.detectChanges();
 
-      let compiled = fixture.debugElement.nativeElement;
-      let labelsElement = compiled.querySelectorAll('.legend-labels');
+      let labelsElement = fixture.debugElement.nativeElement.querySelector('.legend-labels');
 
       expect(labelsElement).toBeDefined();
-      expect(labelsElement[0].childElementCount).toEqual(2); // 2 legend labels
+      expect(labelsElement.childElementCount).toEqual(2); // 2 legend labels
 
 
-      expect(labelsElement[0].children[0]).toContainText('complete');
-      expect(labelsElement[0].children[1]).toContainText('not complete');
+      expect(labelsElement.children[0]).toContainText('complete');
+      expect(labelsElement.children[1]).toContainText('not complete');
 
       done();
     });
@@ -126,18 +117,10 @@ describe('<legend>', () => {
             ]
           }
       };
-
-      fixture.componentInstance.legendTitle = 'Test legend title';
-      let scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
-      fixture.componentInstance.colors = colorHelper(scheme, 'ordinal', [], null);
-
       fixture.detectChanges();
 
-      let compiled = fixture.debugElement.nativeElement;
-      let labelsElement = compiled.querySelector('.legend-labels');
+      let labelsElement = fixture.debugElement.nativeElement.querySelector('.legend-labels');
 
-      expect(labelsElement).toBeDefined();
-      
       // not checking for the exact size to avoid breaking this test when the
       // default length of the trim fn is changed. Let's test for the presence of the dots
       // instead :)
