@@ -23,18 +23,12 @@ class TestComponent {
 }
 
 describe('<legend>', () => {
+  // some test data (includes just enought data to run the tests)
   let seriesData = {
     array: [
       {
         "vals": [
           {
-            "label": [
-              [
-                "complete"
-              ],
-              "complete"
-            ],
-            "value": -1,
             "formattedLabel": [
               'complete'
             ]
@@ -44,13 +38,6 @@ describe('<legend>', () => {
       {
         "vals": [
           {
-            "label": [
-              [
-                "not complete"
-              ],
-              "not complete"
-            ],
-            "value": 2,
             "formattedLabel": [
               "not complete"
             ]
@@ -115,10 +102,46 @@ describe('<legend>', () => {
 
       expect(labelsElement).toBeDefined();
       expect(labelsElement[0].childElementCount).toEqual(2); // 2 legend labels
- 
+
 
       expect(labelsElement[0].children[0]).toContainText('complete');
       expect(labelsElement[0].children[1]).toContainText('not complete');
+
+      done();
+    });
+  });
+
+  it('should trim long labels', (done) => {
+    TestBed.compileComponents().then(() => {
+      let fixture = TestBed.createComponent(TestComponent);
+      fixture.componentInstance.seriesData = {
+        array: [
+          {
+            "vals": [
+              {
+                "formattedLabel": [
+                  'a very long label that is trimmed'
+                ]
+              }
+            ]
+          }
+      };
+
+      fixture.componentInstance.legendTitle = 'Test legend title';
+      let scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
+      fixture.componentInstance.colors = colorHelper(scheme, 'ordinal', [], null);
+
+      fixture.detectChanges();
+
+      let compiled = fixture.debugElement.nativeElement;
+      let labelsElement = compiled.querySelector('.legend-labels');
+
+      expect(labelsElement).toBeDefined();
+      
+      // not checking for the exact size to avoid breaking this test when the
+      // default length of the trim fn is changed. Let's test for the presence of the dots
+      // instead :)
+      expect(labelsElement.children[0]).toContainText('...');
 
       done();
     });
