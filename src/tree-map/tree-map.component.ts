@@ -10,7 +10,7 @@ import { colorHelper } from '../utils/color-sets';
     <chart
       legend="false"
       [view]="view">
-      <svg:g [attr.transform]="transform" class="a2d3 treemap">
+      <svg:g [attr.transform]="transform" class="treemap">
         <svg:g treeMapCellSeries
           [colors]="colors"
           [data]="data"

@@ -16,7 +16,7 @@ import d3 from '../d3';
       </svg:defs>
       <svg:path
         [attr.d]="path"
-        class="a2d3 bar"
+        class="bar"
         [attr.fill]="gradientFill"
         stroke="none"
         [style.cursor]="'pointer'"

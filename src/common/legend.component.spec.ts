@@ -60,7 +60,7 @@ describe('<legend>', () => {
       set: {
         template: `
                 <legend
-                  class="col-sm-3 col-md-3 col-lg-3 a2d3 legend"
+                  class="col-sm-3 col-md-3 col-lg-3 legend"
                   [data]="seriesData"
                   [title]="legendTitle"
                   [colors]="colors"

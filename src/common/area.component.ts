@@ -16,7 +16,7 @@ import d3 from '../d3';
         />
       </svg:defs>
       <svg:path
-        class="a2d3 area"
+        class="area"
         [attr.d]="path"
         [attr.fill]="gradientFill"
         [attr.opacity]="opacity"

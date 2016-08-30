@@ -5,14 +5,14 @@ import { trimLabel } from './trim-label.helper';
   selector: 'legend',
   template: `
     <div >
-      <h6 class="a2d3 legend-title"
+      <h6 class="legend-title"
         style="white-space: nowrap; overflow: hidden;">
         <span class="legend-icon incon-eye-1"></span>
         <span class="legend-title-text">{{title}}</span>
       </h6>
 
       <div class="legend-wrap">
-        <ul class="a2d3 legend-labels" style="white-space: nowrap;">
+        <ul class="legend-labels" style="white-space: nowrap;">
           <li *ngFor="let legendItem of legendItems" [class]="legendItem.className">
             <span
               [title]="legendItem.label"

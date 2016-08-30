@@ -52,7 +52,7 @@ export class PieGridSeries implements OnInit {
         .startAngle(arc.startAngle).endAngle(arc.endAngle);
 
       return {
-        class: 'a2d3 arc ' + 'arc' + index,
+        class: 'arc ' + 'arc' + index,
         d: genArcPath(), // todo check need arguments ?
         cursor: other ? 'auto' : 'pointer',
         fill: this.colors(label)

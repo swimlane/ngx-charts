@@ -25,7 +25,7 @@ export interface LegendItem {
 
           <svg:g
             [attr.transform]="transform"
-            class="a2d3 pie chart">
+            class="pie chart">
             <svg:g pieSeries
               [colors]="colors"
               [showLabels]="labels"
