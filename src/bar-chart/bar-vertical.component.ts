@@ -1,8 +1,8 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
-import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
-import {colorHelper} from '../utils/color-sets';
-import {BaseChart} from '../common/base-chart.component';
-import {tickFormat} from '../common/tick-format.helper';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { colorHelper } from '../utils/color-sets';
+import { BaseChart } from '../common/base-chart.component';
+import { tickFormat } from '../common/tick-format.helper';
 import d3 from '../d3';
 
 @Component({
@@ -13,7 +13,7 @@ import d3 from '../d3';
       [view]="view"
       [colors]="colors"
       [legendData]="results.series[0]">
-      <svg:g [attr.transform]="transform" class="viz bar chart">
+      <svg:g [attr.transform]="transform" class="a2d3 bar chart">
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
@@ -38,8 +38,8 @@ import d3 from '../d3';
           [colors]="colors"
           [series]="results.series[0]"
           [dims]="dims"
-          (clickHandler)="click($event)"
-        />
+          (clickHandler)="click($event)">
+        </svg:g>
       </svg:g>
     </chart>
   `
@@ -89,7 +89,7 @@ export class BarVertical extends BaseChart implements OnInit {
 
   xAxisTickFormatting() {
     let tickFormatting;
-    if (this.results.query && this.results.query.dimensions.length) {
+    if(this.results.query && this.results.query.dimensions.length) {
       tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
     }
     return tickFormatting;

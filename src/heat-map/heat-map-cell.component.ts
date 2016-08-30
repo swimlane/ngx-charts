@@ -20,7 +20,7 @@ import d3 from '../d3';
         rx="3"
         [attr.width]="width"
         [attr.height]="height"
-        class="viz cell"
+        class="a2d3 cell"
         style="cursor: pointer"
         (click)="click()"
       />

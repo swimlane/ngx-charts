@@ -8,7 +8,7 @@ import d3 from '../d3';
     <svg:g [attr.transform]="transform" class="cell"
       (click)="click()">
       <svg:rect
-        class="viz card"
+        class="a2d3 card"
         fill="#666"
         style="cursor: pointer; stroke-width: 2px; stroke: #192024;"
         [attr.width]="cardWidth"

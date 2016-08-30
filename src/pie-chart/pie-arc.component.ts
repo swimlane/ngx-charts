@@ -22,7 +22,7 @@ import ObjectId from "../utils/object-id";
       </svg:defs>
       <svg:path
         [attr.d]="path"
-        class="viz arc"
+        class="a2d3 arc"
         [style.cursor]="'pointer'"
         [attr.fill]="gradientFill"
         (click)="click()"

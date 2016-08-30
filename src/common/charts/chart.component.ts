@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   <div class="row">
     <div [class]="className">
       <svg
-        class="viz"
+        class="a2d3"
         [attr.width]="view[0] * chartWidth / 12.0"
         [attr.height]="view[1]">
 
@@ -17,7 +17,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
     <scale-legend
       *ngIf="legend && legendType === 'scaleLegend'"
-      class="col-sm-1 col-md-1 col-lg-1 viz legend"
+      class="col-sm-1 col-md-1 col-lg-1 a2d3 legend"
       [valueRange]="data"
       [colors]="legendData"
       [height]="view[1]">
@@ -25,7 +25,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
     <legend
       *ngIf="legend && legendType === 'legend'"
-      class="col-sm-3 col-md-3 col-lg-3 viz legend"
+      class="col-sm-3 col-md-3 col-lg-3 a2d3 legend"
       [data]="legendData"
       [title]="title"
       [colors]="colors"
