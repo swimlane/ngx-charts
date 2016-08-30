@@ -5,24 +5,22 @@ import d3 from '../d3';
 @Component({
   selector: 'g[bar]',
   template: `
-    <svg:g>
-      <svg:defs>
-        <svg:g svgLinearGradient
-          [color]="fill"
-          [orientation]="orientation"
-          [name]="gradientId"
-          [startOpacity]="startOpacity"
-        />
-      </svg:defs>
-      <svg:path
-        [attr.d]="path"
-        class="bar"
-        [attr.fill]="gradientFill"
-        stroke="none"
-        [style.cursor]="'pointer'"
-        (click)="click()"
+    <svg:defs>
+      <svg:g svgLinearGradient
+        [color]="fill"
+        [orientation]="orientation"
+        [name]="gradientId"
+        [startOpacity]="startOpacity"
       />
-    </svg:g>
+    </svg:defs>
+    <svg:path
+      [attr.d]="path"
+      class="bar"
+      [attr.fill]="gradientFill"
+      stroke="none"
+      [style.cursor]="'pointer'"
+      (click)="click()"
+    />
   `
 })
 export class Bar implements OnInit {

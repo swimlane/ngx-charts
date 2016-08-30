@@ -6,39 +6,37 @@ import d3 from '../d3';
 @Component({
   selector: 'g[circleSeries]',
   template: `
-    <svg:g>
-      <svg:g area
-        [fill]="color"
-        [path]="areaPath"
-        [startingPath]="areaPath"
-        [data]="data"
-        startOpacity="0"
-        endOpacity="0.2"
+    <svg:g area
+      [fill]="color"
+      [path]="areaPath"
+      [startingPath]="areaPath"
+      [data]="data"
+      startOpacity="0"
+      endOpacity="0.2"
+    />
+
+    <svg:g *ngFor="let circle of circles">
+      <svg:rect
+        [attr.x]="circle.cx - circle.radius"
+        [attr.y]="circle.cy"
+        [attr.width]="circle.radius * 2"
+        [attr.height]="circle.height"
+        [attr.fill]="color"
+        class="tooltip-bar"
+        style="pointerEvents: 'none'; opacity: 0;"
       />
 
-      <svg:g *ngFor="let circle of circles">
-        <svg:rect
-          [attr.x]="circle.cx - circle.radius"
-          [attr.y]="circle.cy"
-          [attr.width]="circle.radius * 2"
-          [attr.height]="circle.height"
-          [attr.fill]="color"
-          class="tooltip-bar"
-          style="pointerEvents: 'none'; opacity: 0;"
-        />
-
-        <svg:g circle
-          [attr.class]="className"
-          [cx]="circle.cx"
-          [cy]="circle.cy"
-          [r]="circle.radius"
-          [fill]="color"
-          [pointerEvents]="circle.value.value === 0 ? 'none': 'all'"
-          [data]="circle.value"
-          [classNames]="circle.classNames"
-          (clickHandler)="click($event)"
-        />
-      </svg:g>
+      <svg:g circle
+        [attr.class]="className"
+        [cx]="circle.cx"
+        [cy]="circle.cy"
+        [r]="circle.radius"
+        [fill]="color"
+        [pointerEvents]="circle.value.value === 0 ? 'none': 'all'"
+        [data]="circle.value"
+        [classNames]="circle.classNames"
+        (clickHandler)="click($event)"
+      />
     </svg:g>
   `
 })
