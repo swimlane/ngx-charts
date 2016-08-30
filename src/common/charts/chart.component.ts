@@ -3,21 +3,17 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'chart',
   template: `
-  <div class="row">
-    <div [class]="className">
-      <svg
-        class="a2d3"
-        [attr.width]="view[0] * chartWidth / 12.0"
-        [attr.height]="view[1]">
+    <svg
+      class="a2d3"
+      [attr.width]="view[0] * chartWidth / 12.0"
+      [attr.height]="view[1]">
 
-        <ng-content></ng-content>
-      </svg>
-
-    </div>
+      <ng-content></ng-content>
+    </svg>
 
     <scale-legend
       *ngIf="legend && legendType === 'scaleLegend'"
-      class="col-sm-1 col-md-1 col-lg-1 legend"
+      class="legend"
       [valueRange]="data"
       [colors]="legendData"
       [height]="view[1]">
@@ -25,13 +21,12 @@ import { Component, Input, OnInit } from '@angular/core';
 
     <legend
       *ngIf="legend && legendType === 'legend'"
-      class="col-sm-3 col-md-3 col-lg-3 legend"
+      class="legend"
       [data]="legendData"
       [title]="title"
       [colors]="colors"
       [height]="view[1]">
     </legend>
-  </div>
 `
 })
 export class Chart implements OnInit {
@@ -45,7 +40,6 @@ export class Chart implements OnInit {
   title: any;
   legendWidth: any;
   legendType: any;
-  className: any;
 
   ngOnInit() {
     this.legendWidth = 0;
@@ -68,7 +62,6 @@ export class Chart implements OnInit {
     }
 
     this.chartWidth = 12 - this.legendWidth;
-    this.className = `col-sm-${this.chartWidth} col-md-${this.chartWidth} col-lg-${this.chartWidth}`;
   }
 
   getLegendType() {
