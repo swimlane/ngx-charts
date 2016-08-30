@@ -60,7 +60,7 @@ describe('<legend>', () => {
       set: {
         template: `
                 <legend
-                  class="col-sm-3 col-md-3 col-lg-3 viz legend"
+                  class="col-sm-3 col-md-3 col-lg-3 a2d3 legend"
                   [data]="seriesData"
                   [title]="legendTitle"
                   [colors]="colors"
@@ -106,16 +106,13 @@ describe('<legend>', () => {
     TestBed.compileComponents().then(() => {
       let fixture = TestBed.createComponent(TestComponent);
       fixture.componentInstance.seriesData = {
-        array: [
-          {
-            "vals": [
-              {
-                "formattedLabel": [
-                  'a very long label that is trimmed'
-                ]
-              }
+        array: [{
+          "vals": [{
+            "formattedLabel": [
+              'a very long label that is trimmed'
             ]
-          }
+          }]
+        }]
       };
       fixture.detectChanges();
 

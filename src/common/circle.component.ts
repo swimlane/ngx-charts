@@ -34,7 +34,7 @@ export class Circle implements OnInit {
     // let label = this.data.label[0][count - 1];
     // let active = label === this.activeLabel;
 
-    this.classNames = this.classNames.join(' ') + ' viz ' + 'circle';
+    this.classNames = this.classNames.join(' ') + ' a2d3 ' + 'circle';
   }
 
   click() {

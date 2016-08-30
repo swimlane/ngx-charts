@@ -1,4 +1,4 @@
-﻿.viz {
+﻿.a2d3 {
   &.bar, &.cell, &.arc, &.card {
     &:hover {
       opacity: 0.8;
@@ -13,14 +13,14 @@
     }
   }
 
-  &.treemap{
-    .cell{
+  &.treemap {
+    .cell {
       cursor: pointer;
 
-      foreignobject{
+      foreignObject {
         pointer-events: none;
       }
-      p{
+      p {
         text-align: center;
         pointer-events: none;
       }
@@ -28,43 +28,40 @@
   }
 }
 
-.label{
+.label {
   font-size: 12px;
   font-weight: normal;
 }
 
-.gridline-path{
-  stroke: rgba(200,200,200,0.3);
+.gridline-path {
+  stroke: rgba(200, 200, 200, 0.3);
   stroke-width: 0.5;
   fill: none;
 }
 
-.gridline-path-shadow{
-  stroke: rgba(0,0,0,1);
+.gridline-path-shadow {
+  stroke: rgba(0, 0, 0, 1);
 }
 
-.viz-container{
+.a2d3-container {
   height: 100%;
 
-  .status-message{
+  .status-message {
     font-size: 14px;
     text-align: center;
     position: relative;
     top: 43%;
-    color:#999;
+    color: #999;
   }
 
-  .icon-loading{
+  .icon-loading {
     color: #999;
     font-size: 32px;
   }
 }
 
-.mini-chart{
-  -ms-transform: scale(0.25,0.25); /* IE 9 */
-  -webkit-transform: scale(0.25,0.25); /* Safari */
-  transform: scale(0.25,0.25);
-  -webkit-transform-origin: 100% 100%;
+.mini-chart {
+  transform: scale(0.25, 0.25);
   transform-origin: 100% 100%;
   position: fixed;
   width: 600px;
@@ -75,29 +72,30 @@
   bottom: 50px;
   background: #21292C;
 
-  &:hover{
+  &:hover {
     opacity: 1;
     cursor: pointer;
   }
 
-  .stats-chart-container{
+  .stats-chart-container {
     pointer-events: none;
   }
 }
 
 // Animations
 .mini-chart.ng-enter, .mini-chart.ng-leave {
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 }
 
-.mini-chart.ng-enter{
+.mini-chart.ng-enter {
   bottom: -100%;
 }
+
 .mini-chart.ng-leave.ng-leave-active {
   bottom: -100%;
 }
 
-.mini-chart.ng-leave{
+.mini-chart.ng-leave {
   bottom: 60px;
 }
 
@@ -106,9 +104,9 @@
 }
 
 .brush {
-  .background{
+  .background {
     visibility: visible !important;
-    fill: rgba(255,255,255,0.03);
+    fill: rgba(255, 255, 255, 0.03);
   }
   .extent {
     stroke: none;
@@ -117,122 +115,118 @@
   }
 }
 
-.legend{
+.legend {
 
-  .legend-title{
-    color:#76818a;
-    margin-left:10px;
+  .legend-title {
+    color: #76818a;
+    margin-left: 10px;
     margin-bottom: 5px;
   }
 
-  ul,li{
-    padding:0;
-    margin:0;
-    list-style:none;
+  ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
 
-  .legend-wrap{
+  .legend-wrap {
     width: 90%;
   }
-  .legend-labels{
+  .legend-labels {
     line-height: 85%;
     list-style: none;
     text-align: left;
     float: left;
     width: 100%;
-    background:#192024;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    background: #192024;
     border-radius: 3px;
   }
 
-  .legend-label{
+  .legend-label {
     cursor: pointer;
     font-size: 90%;
     margin: 8px;
-    color:#76818a;
+    color: #76818a;
 
-    &.active{
-      color:#FFF;
+    &.active {
+      color: #FFF;
     }
   }
 
-  .legend-label-color{
+  .legend-label-color {
     display: inline-block;
     height: 15px;
     width: 15px;
     margin-right: 5px;
-    color:#5b646b;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
+    color: #5b646b;
     border-radius: 3px;
   }
 
-  .legend-label-text{
+  .legend-label-text {
     display: inline-block;
     vertical-align: top;
     line-height: 15px;
     font-size: 12px;
   }
 
-  .legend-icon{
-    color:#4d9df6;
-    margin-right:5px;
+  .legend-icon {
+    color: #4d9df6;
+    margin-right: 5px;
   }
 
-  .legend-title-text{
+  .legend-title-text {
     vertical-align: bottom;
     display: inline-block;
     line-height: 16px;
-    overflow:hidden;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width:80%;
+    width: 80%;
   }
 }
 
-.advanced-pie-legend{
+.advanced-pie-legend {
   color: white;
-  .total-value{
+  .total-value {
     font-size: 48px
   }
-  .total-label{
+  .total-label {
     font-size: 32px;
     margin-bottom: 19px;
     margin-top: -18px;
   }
 
-  .legend-items-container{
+  .legend-items-container {
     width: 100%;
 
-    .legend-items{
+    .legend-items {
       white-space: nowrap;
       overflow: auto;
 
-      .legend-item{
+      .legend-item {
         margin-right: 20px;
         display: inline-block;
 
-        .item-value{
+        .item-value {
           font-size: 32px;
           margin-top: -6px;
           margin-left: 11px;
         }
 
-        .item-label{
+        .item-label {
           font-size: 12px;
           opacity: 0.7;
           margin-left: 11px;
           margin-top: -6px;
         }
 
-        .item-percent{
-          font-size:24px;
+        .item-percent {
+          font-size: 24px;
           opacity: 0.7;
           margin-left: 11px;
         }
 
-        .item-color{
+        .item-color {
           width: 4px;
           height: 32px;
           float: left;

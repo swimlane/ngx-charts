@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { barData, pieData, lineData } from './data';
-import '../src/viz.scss';
+import '../src/a2d3.scss';
 
 @Component({
   selector: 'app',
