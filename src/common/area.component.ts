@@ -5,7 +5,7 @@ import d3 from '../d3';
 @Component({
   selector: 'g[area]',
   template: `
-    <svg:defs>
+    <svg:defs *ngIf="gradient">
       <svg:g svgLinearGradient
         [color]="fill"
         orientation="vertical"
@@ -17,7 +17,7 @@ import d3 from '../d3';
     <svg:path
       class="area"
       [attr.d]="path"
-      [attr.fill]="gradientFill"
+      [attr.fill]="gradient ? gradientFill : fill"
       [attr.opacity]="opacity"
     />
   `
@@ -35,6 +35,7 @@ export class Area implements OnInit {
   @Input() startOpacity = 0.5;
   @Input() endOpacity = 1;
   @Input() activeLabel;
+  @Input() gradient: boolean = false;
 
   @Output() clickHandler = new EventEmitter();
 

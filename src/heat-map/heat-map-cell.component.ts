@@ -6,7 +6,7 @@ import d3 from '../d3';
   selector: 'g[heatMapCell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
-      <defs>
+      <defs *ngIf="gradient">
         <svg:g svgLinearGradient
           [color]="fill"
           orientation="vertical"
@@ -16,7 +16,7 @@ import d3 from '../d3';
       </defs>
 
       <svg:rect
-        [attr.fill]="gradientUrl"
+        [attr.fill]="gradient ? gradientUrl : fill"
         rx="3"
         [attr.width]="width"
         [attr.height]="height"
@@ -43,6 +43,7 @@ export class HeatMapCell implements OnInit {
   @Input() height;
   @Input() data;
   @Input() label;
+  @Input() gradient: boolean = false;
 
   @Output() clickHandler = new EventEmitter();
 

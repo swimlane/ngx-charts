@@ -32,6 +32,7 @@ export interface LegendItem {
               [data]="data"
               [innerRadius]="innerRadius"
               [outerRadius]="outerRadius"
+              [gradient]="gradient"
               (clickHandler)="click($event)">
             </svg:g>
           </svg:g>
@@ -85,6 +86,7 @@ export class AdvancedPieChart extends BaseChart implements OnInit {
   @Input() margin = [20, 20, 20, 20];
   @Input() scheme;
   @Input() customColors;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 

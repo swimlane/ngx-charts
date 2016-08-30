@@ -17,8 +17,9 @@ import * as moment from 'moment';
       swPopover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
-      [popoverGroup]="'charts'">
-    </svg:g>
+      [popoverGroup]="'charts'"
+      [gradient]="gradient"
+    ></svg:g>
   `
 })
 export class SeriesVertical implements OnInit {
@@ -29,6 +30,7 @@ export class SeriesVertical implements OnInit {
   @Input() yScale;
   @Input() colors;
   @Input() scaleType = 'ordinal';
+  @Input() gradient: boolean;
 
   bars: any;
   height: any;

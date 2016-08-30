@@ -44,6 +44,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [yScale]="yScale"
           [colors]="colors"
           [data]="results.series"
+          [gradient]="gradient"
           (clickHandler)="click($event)"
         />
       </svg:g>
@@ -72,6 +73,7 @@ export class HeatMap extends BaseChart implements OnInit {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 

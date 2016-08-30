@@ -30,8 +30,9 @@ import d3 from '../d3';
         swPopover
         [popoverSpacing]="15"
         [popoverText]="tooltipText(arc)"
-        [popoverGroup]="'charts'">
-      </svg:g>
+        [popoverGroup]="'charts'"
+        [gradient]="gradient"
+      ></svg:g>
 
     </svg:g>
   `
@@ -47,6 +48,7 @@ export class PieSeries implements OnInit {
   @Input() outerRadius = 80;
   @Input() explodeSlices;
   @Input() showLabels;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 

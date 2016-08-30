@@ -12,8 +12,9 @@ import '../src/a2d3.scss';
       <bar-vertical
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"        
-        [results]="barData">
-      </bar-vertical>
+        [results]="barData"
+        [gradient]="true"
+      ></bar-vertical>
 
 
       <hr />
@@ -78,7 +79,8 @@ import '../src/a2d3.scss';
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [xAxis]="true"
         [yAxis]="true"
-        [results]="lineData">
+        [results]="lineData"
+        [gradient]="true">
       </line-chart>
 
       <hr />

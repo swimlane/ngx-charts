@@ -19,6 +19,7 @@ import { BaseChart } from '../common/base-chart.component';
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
+          [gradient]="gradient"
           (clickHandler)="click($event)"
         />
       </svg:g>
@@ -40,6 +41,7 @@ export class PieChart extends BaseChart implements OnInit {
   @Input() legend = false;
   @Input() explodeSlices = false;
   @Input() doughnut = false;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 

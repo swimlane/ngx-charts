@@ -69,6 +69,7 @@ import d3 from '../d3';
               [xScale]="xScale"
               [yScale]="yScale"
               [color]="colors(series.name)"
+              [strokeColor]="colors(series.name)"
               [data]="series.array"
               [scaleType]="scaleType"
               (clickHandler)="click($event)"

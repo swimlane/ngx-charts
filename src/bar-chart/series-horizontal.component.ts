@@ -16,8 +16,9 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
       swPopover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
-      [popoverGroup]="'charts'">
-    </svg:g>
+      [popoverGroup]="'charts'"
+      [gradient]="gradient"
+    ></svg:g>
   `
 })
 export class SeriesHorizontal implements OnInit {
@@ -29,6 +30,7 @@ export class SeriesHorizontal implements OnInit {
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 
