@@ -11,7 +11,7 @@ import d3 from '../d3';
         [attr.fill]="fill"
         [attr.width]="width"
         [attr.height]="height"
-        class="a2d3 cell"
+        class="cell"
         (click)="click()"
       />
 

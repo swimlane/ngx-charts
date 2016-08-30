@@ -24,7 +24,7 @@ import d3 from '../d3';
         </svg:clipPath>
       </svg:defs>
 
-      <svg:g [attr.transform]="transform" class="a2d3 line chart">
+      <svg:g [attr.transform]="transform" class="line chart">
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"

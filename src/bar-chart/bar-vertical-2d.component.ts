@@ -13,7 +13,7 @@ import d3 from '../d3';
       [view]="view"
       [colors]="colors"
       [legendData]="results.series[0]">
-      <svg:g [attr.transform]="transform" class="a2d3 bar chart">
+      <svg:g [attr.transform]="transform" class="bar chart">
         <svg:g gridPanelSeries
           [xScale]="x0Scale"
           [yScale]="y0Scale"

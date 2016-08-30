@@ -17,7 +17,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
     <scale-legend
       *ngIf="legend && legendType === 'scaleLegend'"
-      class="col-sm-1 col-md-1 col-lg-1 a2d3 legend"
+      class="col-sm-1 col-md-1 col-lg-1 legend"
       [valueRange]="data"
       [colors]="legendData"
       [height]="view[1]">
@@ -25,7 +25,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
     <legend
       *ngIf="legend && legendType === 'legend'"
-      class="col-sm-3 col-md-3 col-lg-3 a2d3 legend"
+      class="col-sm-3 col-md-3 col-lg-3 legend"
       [data]="legendData"
       [title]="title"
       [colors]="colors"

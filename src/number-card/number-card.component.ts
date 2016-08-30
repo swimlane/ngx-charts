@@ -10,7 +10,7 @@ import { gridLayout } from '../common/grid-layout.helper';
     <chart
       [legend]="false"
       [view]="view">
-      <svg:g [attr.transform]="transform" class="a2d3 numbercard">
+      <svg:g [attr.transform]="transform" class="numbercard">
         <svg:g cardSeries
           [colors]="colors"
           [data]="data"
