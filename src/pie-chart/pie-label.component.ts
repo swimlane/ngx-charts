@@ -5,26 +5,24 @@ import d3 from '../d3';
 @Component({
   selector: 'g[pieLabel]',
   template: `
-    <svg:g>
-      <title>{{label}}</title>
-      <svg:text
-        class="label"
-        [attr.transform]="transform"
-        dy=".35em"
-        [style.textAnchor]="textAnchor()"
-        [style.shapeRendering]="'crispEdges'"
-        [style.textTransform]="'uppercase'">
-        {{trimLabel(label)}}
-      </svg:text>
-      <svg:path
-        [attr.d]="line"
-        [attr.stroke]="color"
-        fill="none"
-        class="line"
-        [style.strokeDasharray]="2000"
-        [style.strokeDashoffset]="0">
-      </svg:path>
-    </svg:g>
+    <title>{{label}}</title>
+    <svg:text
+      class="label"
+      [attr.transform]="transform"
+      dy=".35em"
+      [style.textAnchor]="textAnchor()"
+      [style.shapeRendering]="'crispEdges'"
+      [style.textTransform]="'uppercase'">
+      {{trimLabel(label)}}
+    </svg:text>
+    <svg:path
+      [attr.d]="line"
+      [attr.stroke]="color"
+      fill="none"
+      class="line"
+      [style.strokeDasharray]="2000"
+      [style.strokeDashoffset]="0">
+    </svg:path>
   `
 })
 export class PieLabel implements OnInit {

@@ -3,21 +3,19 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 @Component({
   selector: 'g[heatMapCellSeries]',
   template: `
-    <svg:g>
-      <svg:g heatMapCell *ngFor="let c of cells"
-        [x]="c.x"
-        [y]="c.y"
-        [width]="c.width"
-        [height]="c.height"
-        [fill]="c.fill"
-        [data]="c.data"
-        (clickHandler)="click($event)"
-        swPopover
-        [popoverSpacing]="15"
-        [popoverText]="c.tooltipText"
-        [popoverGroup]="'charts'"
-      />
-    </svg:g>
+    <svg:g heatMapCell *ngFor="let c of cells"
+      [x]="c.x"
+      [y]="c.y"
+      [width]="c.width"
+      [height]="c.height"
+      [fill]="c.fill"
+      [data]="c.data"
+      (clickHandler)="click($event)"
+      swPopover
+      [popoverSpacing]="15"
+      [popoverText]="c.tooltipText"
+      [popoverGroup]="'charts'"
+    />
   `
 })
 export class HeatCellSeries implements OnInit {

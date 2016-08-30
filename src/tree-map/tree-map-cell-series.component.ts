@@ -4,19 +4,17 @@ import { OnInit } from "@angular/core/esm";
 @Component({
   selector: 'g[treeMapCellSeries]',
   template: `
-    <svg:g>
-      <svg:g treeMapCell *ngFor="let c of cells"
-        [x]="c.x"
-        [y]="c.y"
-        [width]="c.width"
-        [height]="c.height"
-        [fill]="c.fill"
-        [label]="c.label"
-        [value]="c.value"
-        [valueType]="c.valueType"
-        (clickHandler)="click($event)"
-      />
-    </svg:g>
+    <svg:g treeMapCell *ngFor="let c of cells"
+      [x]="c.x"
+      [y]="c.y"
+      [width]="c.width"
+      [height]="c.height"
+      [fill]="c.fill"
+      [label]="c.label"
+      [value]="c.value"
+      [valueType]="c.valueType"
+      (clickHandler)="click($event)"
+    />
   `
 })
 export class TreeMapCellSeries implements OnInit {

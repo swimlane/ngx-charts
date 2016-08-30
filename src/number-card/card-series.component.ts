@@ -14,21 +14,19 @@ export interface CardModel {
 @Component({
   selector: 'g[cardSeries]',
   template: `
-    <svg:g>
-      <svg:g card *ngFor="let c of cards"
-        [x]="c.x"
-        [y]="c.y"
-        [width]="c.width"
-        [height]="c.height"
-        [color]="c.color"
-        [data]="c.data"
-        (clickHandler)="click($event)"
-        swPopover
-        [popoverSpacing]="15"
-        [popoverText]="c.tooltipText"
-        [popoverGroup]="'charts'"
-      />
-    </svg:g>
+    <svg:g card *ngFor="let c of cards"
+      [x]="c.x"
+      [y]="c.y"
+      [width]="c.width"
+      [height]="c.height"
+      [color]="c.color"
+      [data]="c.data"
+      (clickHandler)="click($event)"
+      swPopover
+      [popoverSpacing]="15"
+      [popoverText]="c.tooltipText"
+      [popoverGroup]="'charts'"
+    />
   `
 })
 export class CardSeries implements OnInit {

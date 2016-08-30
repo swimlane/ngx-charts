@@ -5,23 +5,21 @@ import d3 from '../d3';
 @Component({
   selector: 'g[area]',
   template: `
-    <svg:g>
-      <svg:defs>
-        <svg:g svgLinearGradient
-          [color]="fill"
-          orientation="vertical"
-          [name]="gradientId"
-          [startOpacity]="startOpacity"
-          [endOpacity]="endOpacity"
-        />
-      </svg:defs>
-      <svg:path
-        class="area"
-        [attr.d]="path"
-        [attr.fill]="gradientFill"
-        [attr.opacity]="opacity"
+    <svg:defs>
+      <svg:g svgLinearGradient
+        [color]="fill"
+        orientation="vertical"
+        [name]="gradientId"
+        [startOpacity]="startOpacity"
+        [endOpacity]="endOpacity"
       />
-    </svg:g>
+    </svg:defs>
+    <svg:path
+      class="area"
+      [attr.d]="path"
+      [attr.fill]="gradientFill"
+      [attr.opacity]="opacity"
+    />
   `
 })
 export class Area implements OnInit {
