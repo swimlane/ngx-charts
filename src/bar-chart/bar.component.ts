@@ -5,7 +5,7 @@ import d3 from '../d3';
 @Component({
   selector: 'g[bar]',
   template: `
-    <svg:defs>
+    <svg:defs *ngIf="gradient">
       <svg:g svgLinearGradient
         [color]="fill"
         [orientation]="orientation"
@@ -16,7 +16,7 @@ import d3 from '../d3';
     <svg:path
       [attr.d]="path"
       class="bar"
-      [attr.fill]="gradientFill"
+      [attr.fill]="gradient ? gradientFill : fill"
       stroke="none"
       [style.cursor]="'pointer'"
       (click)="click()"
@@ -31,7 +31,8 @@ export class Bar implements OnInit {
   @Input() x;
   @Input() y;
   @Input() orientation;
-  @Input() roundEdges = true;
+  @Input() roundEdges: boolean = true;
+  @Input() gradient: boolean = false;
   @Input() offset = 0;
 
   @Output() clickHandler = new EventEmitter();

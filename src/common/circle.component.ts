@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
       [attr.cy]="cy"
       [attr.r]="r"
       [attr.fill]="fill"
+      [attr.stroke]="stroke"
       [attr.opacity]="circleOpacity"
       [attr.class]="classNames"
       [attr.pointer-events]="pointerEvents"
@@ -20,6 +21,7 @@ export class Circle implements OnInit {
   @Input() cy;
   @Input() r;
   @Input() fill;
+  @Input() stroke;
   @Input() data;
   // @Input() activeLabel; // unused input
   @Input() classNames;

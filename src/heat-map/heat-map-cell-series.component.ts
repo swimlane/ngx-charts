@@ -15,6 +15,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
       [popoverSpacing]="15"
       [popoverText]="c.tooltipText"
       [popoverGroup]="'charts'"
+      [gradient]="gradient"
     />
   `
 })
@@ -25,6 +26,7 @@ export class HeatCellSeries implements OnInit {
   @Input() colors;
   @Input() xScale;
   @Input() yScale;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 

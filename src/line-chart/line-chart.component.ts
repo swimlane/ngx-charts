@@ -42,6 +42,16 @@ import d3 from '../d3';
         </svg:g>
 
         <svg:g [attr.clip-path]="clipPath">
+          <svg:g area
+            *ngIf="gradient"
+            [fill]="colors('Line')"
+            [path]="areaPath"
+            [startingPath]="areaPath"
+            [data]="series"
+            startOpacity="0"
+            endOpacity="0.2"
+            [gradient]="gradient"
+          />
 
           <svg:g lineSeries
             [xScale]="xScale"
@@ -64,6 +74,7 @@ import d3 from '../d3';
             [xScale]="xScale"
             [yScale]="yScale"
             [color]="colors('Line')"
+            [strokeColor]="colors('Line')"
             [data]="series"
             [scaleType]="scaleType"
             (clickHandler)="click($event)"
@@ -93,6 +104,7 @@ export class LineChart extends BaseChart implements OnInit {
   clipPath: string;
   legend: boolean = false;
   series: any;
+  areaPath: any;
 
   @Input() view;
   @Input() xDomain;
@@ -108,6 +120,7 @@ export class LineChart extends BaseChart implements OnInit {
   @Input() yAxisLabel;
   @Input() autoScale;
   @Input() timeline;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 
@@ -155,6 +168,22 @@ export class LineChart extends BaseChart implements OnInit {
     }
 
     this.setColors();
+
+    let xProperty = (d) => {
+      let label = d.vals[0].label[0][0];
+      if (this.scaleType === 'time') {
+        return this.xScale(moment(label).toDate());
+      } else {
+        return this.xScale(label) + this.xScale.bandwidth() / 2;
+      }
+    };
+
+    let area = d3.area()
+      .x(xProperty)
+      .y0(() => this.yScale.range()[0])
+      .y1(d => this.yScale(d.vals[0].value));
+
+    this.areaPath = area(this.series);
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;

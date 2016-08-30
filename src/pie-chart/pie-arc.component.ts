@@ -6,7 +6,7 @@ import ObjectId from "../utils/object-id";
   selector: 'g[pieArc]',
   template: `
     <svg:g class="arc-group">
-      <svg:defs>
+      <svg:defs *ngIf="gradient">
         <svg:g svgLinearGradient
           [color]="fill"
           orientation="vertical"
@@ -24,7 +24,7 @@ import ObjectId from "../utils/object-id";
         [attr.d]="path"
         class="arc"
         [style.cursor]="'pointer'"
-        [attr.fill]="gradientFill"
+        [attr.fill]="gradient ? gradientFill : fill"
         (click)="click()"
       />
     </svg:g>
@@ -47,6 +47,7 @@ export class PieArc implements OnInit {
   @Input() total;
   @Input() max;
   @Input() explodeSlices;
+  @Input() gradient: boolean = false;
 
   @Output() clickHandler = new EventEmitter();
 

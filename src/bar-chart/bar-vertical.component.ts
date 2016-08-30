@@ -38,6 +38,7 @@ import d3 from '../d3';
           [colors]="colors"
           [series]="results.series[0]"
           [dims]="dims"
+          [gradient]="gradient"
           (clickHandler)="click($event)">
         </svg:g>
       </svg:g>
@@ -63,6 +64,7 @@ export class BarVertical extends BaseChart implements OnInit {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 
