@@ -21,8 +21,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "outDir": "dist",
     "baseUrl": "src",
-    "types": [
-      "core-js"
+    "typeRoots": [
+      "./node_modules/@types"
     ]
   },
   "exclude": [
