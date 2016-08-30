@@ -1,12 +1,12 @@
 import {NgModule} from "@angular/core";
-import {CommonModule} from "./common/CommonModule";
-import {AreaChartModule} from "./areachart/AreaChartModule";
-import {BarChartModule} from "./barchart/BarChartModule";
-import {HeatMapModule} from "./heatmap/HeatMapModule";
-import {LineChartModule} from "./linechart/LineChartModule";
-import {NumberCardModule} from "./numbercard/NumberCardModule";
-import {PieChartModule} from "./piechart/PieChartModule";
-import {TreeMapModule} from "./treemap/TreeMapModule";
+import {CommonModule} from "./common/common.module";
+import {AreaChartModule} from "./area-chart/area-chart.module";
+import {BarChartModule} from "./bar-chart/bar-chart.module";
+import {HeatMapModule} from "./heat-map/heat-map.module";
+import {LineChartModule} from "./line-chart/line-chart.module";
+import {NumberCardModule} from "./number-card/number-card.module";
+import {PieChartModule} from "./pie-chart/pie-chart.module";
+import {TreeMapModule} from "./tree-map/tree-map.module";
 
 @NgModule({
   exports: [

@@ -21,7 +21,7 @@
       [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-vertical>
 
-    <bar-vertical-2-d
+    <bar-vertical-2d
       ngSwitchWhen="BarVertical2D"
       [view]="view"
       (clickHandler)="pointClick($event)"
@@ -35,7 +35,7 @@
       [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
       [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
       [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
-    </bar-vertical-2-d>
+    </bar-vertical-2d>
 
     <bar-vertical-stacked
       ngSwitchWhen="BarVerticalStacked"
@@ -85,7 +85,7 @@
       [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
     </bar-horizontal>
 
-    <bar-horizontal-2-d
+    <bar-horizontal-2d
       ngSwitchWhen="BarHorizontal2D"
       [view]="view"
       (clickHandler)="pointClick($event)"
@@ -99,7 +99,7 @@
       [showYAxisLabel]="statsReport.report.chartOptions.showYAxisLabel"
       [xAxisLabel]="statsReport.report.chartOptions.xAxisLabelText"
       [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText">
-    </bar-horizontal-2-d>
+    </bar-horizontal-2d>
 
     <bar-horizontal-stacked
       ngSwitchWhen="BarHorizontalStacked"
@@ -151,7 +151,7 @@
       [timeline]="statsReport.report.chartOptions.zoom">
     </line-chart>
 
-    <line-chart-2-d
+    <line-chart-2d
       ngSwitchWhen="LineChart2D"
       [view]="view"
       (clickHandler)="pointClick($event)"
@@ -167,7 +167,7 @@
       [yAxisLabel]="statsReport.report.chartOptions.yAxisLabelText"
       [auto-scale]="statsReport.report.chartOptions.autoScale"
       [timeline]="statsReport.report.chartOptions.zoom">
-    </line-chart-2-d>
+    </line-chart-2d>
 
     <area-chart
       ngSwitchWhen="AreaChart"
