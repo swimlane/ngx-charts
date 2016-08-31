@@ -1,6 +1,6 @@
 {
     "gitbook": "3.x.x",
-    "title": "A2D3",
+    "title": "ng2d3",
     "root": "/docs",
     "plugins": [
         "highlight",
@@ -13,7 +13,7 @@
     ],
     "pluginsConfig": {
         "github": {
-            "url": "https://github.com/swimlane/a2d3/"
+            "url": "https://github.com/swimlane/ng2d3/"
         },
         "theme-api": {
             "theme": "dark"

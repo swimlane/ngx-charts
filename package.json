@@ -1,5 +1,5 @@
 {
-  "name": "a2d3",
+  "name": "ng2d3",
   "version": "1.0.0",
   "description": "Angular2 + D3 Charting Library",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swimlane/a2d3.git"
+    "url": "git+https://github.com/swimlane/ng2d3.git"
   },
   "keywords": [
     "angular2",
@@ -27,9 +27,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/swimlane/a2d3/issues"
+    "url": "https://github.com/swimlane/ng2d3/issues"
   },
-  "homepage": "https://github.com/swimlane/a2d3#readme",
+  "homepage": "https://github.com/swimlane/ng2d3#readme",
   "dependencies": {
     "@angular/common": "2.0.0-rc.5",
     "@angular/compiler": "2.0.0-rc.5",
