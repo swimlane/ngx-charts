@@ -12,4 +12,3 @@ branches:
     - master
 before_install:
   - npm install
-  
