@@ -1,0 +1,15 @@
+sudo: false
+language: node_js
+node_js:
+  - "4"
+  - "5"
+  - "node"
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
+before_install:
+  - npm install
+  
