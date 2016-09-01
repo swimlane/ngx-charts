@@ -1,28 +1,38 @@
 import { Component } from '@angular/core';
-import { barData, pieData, lineData } from './data';
+import { FORM_DIRECTIVES } from '@angular/common';
+import { single, multi } from './data';
 import '../src/a2d3.scss';
+import './demo.scss';
 
 @Component({
   selector: 'app',
+  directives: [FORM_DIRECTIVES],
   template: `
-    <div>
+    <div class="content">
       <h3>Bar chart</h3>
       <h4>Vertical</h4>
 
       <bar-vertical
         [view]="[700,200]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"        
-        [results]="barData"
-        [gradient]="true"
-      ></bar-vertical>
-
+        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [results]="single"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </bar-vertical>
 
       <hr />
 
+      <!--
       <bar-vertical
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [results]="barData"
+        [results]="single"
         [xAxis]="true"
         [yAxis]="true"
         [showXAxisLabel]="true"
@@ -30,6 +40,7 @@ import '../src/a2d3.scss';
         [yAxisLabel]="'hello y'"
         [showYAxisLabel]="true">
       </bar-vertical>
+      -->
 
       <!--<h4>Vertical 2D</h4>-->
 
@@ -46,11 +57,12 @@ import '../src/a2d3.scss';
         <!--[showYAxisLabel]="true">-->
       <!--</bar-vertical-2-d>-->
 
+      <!--
       <h4>Horizontal</h4>
       <bar-horizontal
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [results]="barData"
+        [results]="single"
         [xAxis]="true"
         [xAxisLabel]="'hello x'"
         [showXAxisLabel]="true"
@@ -66,7 +78,7 @@ import '../src/a2d3.scss';
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [labels]="true"
-        [results]="pieData"
+        [results]="single"
         [legend]="false">
       </pie-chart>
 
@@ -79,7 +91,7 @@ import '../src/a2d3.scss';
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [xAxis]="true"
         [yAxis]="true"
-        [results]="lineData"
+        [results]="single"
         [gradient]="true">
       </line-chart>
 
@@ -92,7 +104,7 @@ import '../src/a2d3.scss';
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [xAxis]="true"
         [yAxis]="true"
-        [results]="lineData"
+        [results]="single"
         [legend]="false">
       </area-chart>
 
@@ -102,14 +114,63 @@ import '../src/a2d3.scss';
       <number-card
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [results]="pieData">
+        [results]="single">
       </number-card>
+      -->
+    </div>
 
+    <div class="sidebar">
+      <h3>Options</h3>
+
+      <label>
+        <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
+        Show X Axis
+      </label> <br />
+
+      <label>
+        <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked">
+        Show Y Axis
+      </label> <br />
+
+      <label>
+        <input type="checkbox" [checked]="gradient" (change)="gradient = $event.target.checked">
+        Use gradients
+      </label> <br />
+
+      <label>
+        <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
+        Show Legend
+      </label> <br />
+
+      <label>
+        <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
+        Show X Axis Label
+      </label> <br />
+
+      <label>X Axis Label:</label><br />
+      <input type="text" [(ngModel)]="xAxisLabel"><br />
+
+      <label>
+        <input type="checkbox" [checked]="showYAxisLabel" (change)="showYAxisLabel = $event.target.checked">
+        Show Y Axis Label
+      </label> <br />
+
+      <label>Y Axis Label:</label><br />
+      <input type="text" [(ngModel)]="yAxisLabel"><br />
     </div>
   `
 })
 export class App {
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = false;
+  showXAxisLabel = true;
+  xAxisLabel = 'Country';
+  showYAxisLabel = true;
+  yAxisLabel = 'Population';
+
   constructor() {
-    Object.assign(this, {barData, pieData, lineData});
+    Object.assign(this, {single, multi});
   }
 }
