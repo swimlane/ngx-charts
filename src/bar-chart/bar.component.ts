@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
 import ObjectId from '../utils/object-id';
 import d3 from '../d3';
 
@@ -14,16 +14,16 @@ import d3 from '../d3';
       />
     </svg:defs>
     <svg:path
-      [attr.d]="path"
       class="bar"
-      [attr.fill]="gradient ? gradientFill : fill"
       stroke="none"
+      [attr.d]="path"
+      [attr.fill]="gradient ? gradientFill : fill"
       [style.cursor]="'pointer'"
       (click)="click()"
     />
   `
 })
-export class Bar implements OnInit {
+export class Bar implements OnInit, OnChanges {
   @Input() fill;
   @Input() data;
   @Input() width;
@@ -48,19 +48,25 @@ export class Bar implements OnInit {
   }
 
   ngOnInit() {
-    this.path = this.calculatePath();
-
     let pageUrl = window.location.href;
     this.gradientId = 'grad' + ObjectId().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
-    this.startOpacity = this.calculateStartOpacity();
+    this.startOpacity = this.getStartOpacity();
 
     this.loadAnimation();
   }
 
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
+    this.animateToCurrentForm();
+  }
+
   loadAnimation() {
     let node = d3.select(this.element).select('.bar');
-    let startingPath = this.calculateStartingPath();
+    let startingPath = this.getStartingPath();
     node.attr('d', startingPath);
 
     this.animateToCurrentForm();
@@ -68,14 +74,14 @@ export class Bar implements OnInit {
 
   animateToCurrentForm() {
     let node = d3.select(this.element).select('.bar');
-    this.path = this.calculatePath(); // todo check if defining this.path or local variable path to use below
+    this.path = this.getPath(); // todo check if defining this.path or local variable path to use below
 
     node.transition().duration(750)
       .attr('d', this.path); // todo check if use this.path or use path defined above
   }
 
-  calculateStartingPath() {
-    let radius = this.calculateRadius();
+  getStartingPath() {
+    let radius = this.getRadius();
     let path;
 
     if (this.roundEdges) {
@@ -95,8 +101,8 @@ export class Bar implements OnInit {
     return path;
   }
 
-  calculatePath() {
-    let radius = this.calculateRadius();
+  getPath() {
+    let radius = this.getRadius();
     let path;
 
     if (this.roundEdges) {
@@ -112,18 +118,15 @@ export class Bar implements OnInit {
     return path;
   }
 
-  calculateRadius() {
+  getRadius() {
     let radius = 0;
-    if (this.roundEdges) {
+    if (this.roundEdges && this.height > radius && this.width > radius) {
       radius = 5;
-      if (this.height <= radius || this.width <= radius) {
-        radius = 0;
-      }
     }
     return radius;
   }
 
-  calculateStartOpacity() {
+  getStartOpacity() {
     if (this.roundEdges) {
       return 0;
     } else {

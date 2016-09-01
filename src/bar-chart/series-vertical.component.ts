@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -9,20 +9,21 @@ import * as moment from 'moment';
       [height]="bar.height"
       [x]="bar.x"
       [y]="bar.y"
-      [fill]="colors(bar.label)"
+      [fill]="bar.color"
       [data]="bar.data"
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
       (clickHandler)="click($event)"
+      [gradient]="gradient"
+
       swPopover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
-      [popoverGroup]="'charts'"
-      [gradient]="gradient"
-    ></svg:g>
+      [popoverGroup]="'charts'">
+    </svg:g>
   `
 })
-export class SeriesVertical implements OnInit {
+export class SeriesVertical implements OnInit, OnChanges {
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
@@ -33,7 +34,6 @@ export class SeriesVertical implements OnInit {
   @Input() gradient: boolean;
 
   bars: any;
-  height: any;
   x: any;
   y: any;
 
@@ -43,9 +43,13 @@ export class SeriesVertical implements OnInit {
     this.update();
   }
 
+  ngOnChanges(changes) {
+    this.update();
+  }
+
   update() {
     let width;
-    if (this.series.array.length) {
+    if (this.series.length) {
       if (this.scaleType === 'time') {
         let count = this.series.array[0].vals[0].label[0].length;
         let firstDate = this.series.array[0].vals[0].label[0][count - 1];
@@ -56,30 +60,28 @@ export class SeriesVertical implements OnInit {
       }
     }
 
-    this.bars = this.series.array.map((d, index) => {
-      let value = d.vals[0];
-      let count = value.label[0].length;
-      let label = value.label[0][count - 1];
-      let formattedLabel = value.formattedLabel[count - 1];
+    this.bars = this.series.map((d, index) => {
+      let value = d.value;
+      let label = d.name;
       let roundEdges = this.type === 'standard';
 
       let bar: any = {
         value: value,
-        label: formattedLabel,
-        color: this.colors(formattedLabel),
+        label: label,
+        color: this.colors(label),
         roundEdges: roundEdges,
-        data: d.vals[0],
+        data: d,
         width: width,
-        tooltipText: `${label}: ${value.value}`,
+        tooltipText: `${label}: ${value}`,
         height: 0,
         x: 0,
         y: 0
       };
 
       if (this.type === 'standard') {
-        bar.height = this.dims.height - this.yScale(value.value);
+        bar.height = this.dims.height - this.yScale(value);
         bar.x = this.xScale(label);
-        bar.y = this.yScale(value.value);
+        bar.y = this.yScale(value);
       } else if (this.type === 'stacked') {
         bar.height = this.yScale(value.d0) - this.yScale(value.d1);
         bar.x = 0;
