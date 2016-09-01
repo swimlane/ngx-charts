@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 
 @Component({
@@ -36,7 +36,7 @@ import { trimLabel } from '../trim-label.helper';
     </svg:g>
   `
 })
-export class YAxisTicks implements OnInit {
+export class YAxisTicks implements OnInit, OnChanges {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -74,6 +74,10 @@ export class YAxisTicks implements OnInit {
   }
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
     this.update();
   }
 
