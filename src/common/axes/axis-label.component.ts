@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[axisLabel]',
@@ -14,7 +14,7 @@ import { Component, Input, OnInit } from '@angular/core';
     </svg:text>
   `
 })
-export class AxisLabel implements OnInit {
+export class AxisLabel implements OnInit, OnChanges {
   @Input() orient;
   @Input() label;
   @Input() offset;
@@ -28,6 +28,14 @@ export class AxisLabel implements OnInit {
   textAnchor: any;
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.strokeWidth = '0.01';
     this.textAnchor = 'middle';
     this.transform = '';

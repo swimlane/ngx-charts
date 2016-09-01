@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 // import d3 from '../../d3';
 
 @Component({
@@ -28,7 +28,7 @@ import { Component, Input, OnInit } from '@angular/core';
     </svg:g>
   `
 })
-export class YAxis implements OnInit {
+export class YAxis implements OnInit, OnChanges {
   @Input() yScale;
   @Input() dims;
   @Input() tickFormatting;
@@ -57,6 +57,10 @@ export class YAxis implements OnInit {
   }
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
     this.update();
   }
 
