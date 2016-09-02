@@ -65,9 +65,13 @@ export class Card implements OnInit {
   }
 
   ngOnInit() {
+    this.update();
+  }
+
+  update() {
     this.transform = `translate(${this.x} , ${this.y})`;
 
-    this.label = this.data.label[0][0];
+    this.label = this.data.name;
     this.trimmedLabel = trimLabel(this.label, 55);
     this.value = d3.format(",.0f")(this.data.value);
 
@@ -79,7 +83,7 @@ export class Card implements OnInit {
   }
 
   loadAnimation() {
-    // TODO: replace counup animation
+    // TODO: replace countup animation
     // let node = d3.select(this.element).selectAll('.value-text');
     //
     // node.text('0');
@@ -112,7 +116,7 @@ export class Card implements OnInit {
       }
     }
 
-    // TODO: replace counup animation
+    // TODO: replace countup animation
     // let node = d3.select(this.element).selectAll('.value-text');
     // var counter = new CountUp(node[0][0], 0, endValue, 0, 2.5, options);
     // counter.start();

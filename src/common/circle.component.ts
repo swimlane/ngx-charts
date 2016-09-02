@@ -23,7 +23,6 @@ export class Circle implements OnInit {
   @Input() fill;
   @Input() stroke;
   @Input() data;
-  // @Input() activeLabel; // unused input
   @Input() classNames;
   @Input() circleOpacity;
   @Input() pointerEvents;
@@ -31,11 +30,6 @@ export class Circle implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    // unused variables
-    // let count = this.data.label[0].length;
-    // let label = this.data.label[0][count - 1];
-    // let active = label === this.activeLabel;
-
     this.classNames = this.classNames.join(' ') + 'circle';
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -21,11 +21,12 @@ import { gridLayout } from '../common/grid-layout.helper';
     </chart>
   `
 })
-export class NumberCard extends BaseChart implements OnInit {
+export class NumberCard extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
   data: any[];
   colors: Function;
   transform: string;
+  domain: any[];
 
   @Input() view;
   @Input() results;
@@ -36,17 +37,38 @@ export class NumberCard extends BaseChart implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
 
-    let sortedData = this.results.series[0];
-    sortedData.array = sortedData.array.sort((a, b) => {
-      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
-    });
+    this.domain = this.getDomain();
 
-    this.data = gridLayout(this.dims, sortedData, 150);
+    // let sortedData = this.results;
+    // sortedData.array = sortedData.sort((a, b) => {
+    //   return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
+    // });
 
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+    this.data = gridLayout(this.dims, this.results, 150);
+
+    this.setColors();
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+  }
+
+  getDomain() {
+    let domain = [];
+    for (let d of this.results) {
+      if (!domain.includes(d.value)) {
+        domain.push(d.value);
+      }
+    }
+
+    return domain;
   }
 
   click(data) {
@@ -54,9 +76,7 @@ export class NumberCard extends BaseChart implements OnInit {
   }
 
   setColors() {
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }
