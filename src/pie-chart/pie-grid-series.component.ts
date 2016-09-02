@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
 import d3 from '../d3';
 
 @Component({
@@ -9,13 +9,14 @@ import d3 from '../d3';
         [attr.class]="arc.class"
         [attr.d]="arc.d"
         [style.cursor]="arc.cursor"
+        [style.opacity]="arc.opacity"
         [attr.fill]="arc.fill"
         (clickHandler)="click($event)"
       />
     </svg:g>
   `
 })
-export class PieGridSeries implements OnInit {
+export class PieGridSeries implements OnInit, OnChanges {
   element: HTMLElement;
   layout: any;
   arcs: any;
@@ -32,6 +33,14 @@ export class PieGridSeries implements OnInit {
   }
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.layout = d3.pie()
       .value((d) => d.data.value).sort(null);
 
@@ -40,10 +49,10 @@ export class PieGridSeries implements OnInit {
   }
 
   getArcs() {
-    return this.layout(this.data).reverse().map((arc, index) => {
-      let label = arc.data.data.formattedLabel[0];
-      // let value = arc.data.data.value; // unusued variable
+    return this.layout(this.data).map((arc, index) => {
+      let label = arc.data.data.name;
       let other = arc.data.data.other;
+
       if (index === 0) {
         arc.startAngle = 0;
       }
@@ -55,11 +64,11 @@ export class PieGridSeries implements OnInit {
         class: 'arc ' + 'arc' + index,
         d: genArcPath(), // todo check need arguments ?
         cursor: other ? 'auto' : 'pointer',
-        fill: this.colors(label)
+        fill: this.colors(label),
+        opacity: other ? 0.4 : 1
       };
     });
   }
-
 
   loadAnimation() {
     let layout = d3.pie()

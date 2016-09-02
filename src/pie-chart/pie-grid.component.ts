@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -58,11 +58,12 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class PieGrid extends BaseChart implements OnInit {
+export class PieGrid extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
   data: any[];
   transform: string;
   series: any[];
+  domain: any[];
   colorScale: Function;
 
   @Input() view;
@@ -74,26 +75,40 @@ export class PieGrid extends BaseChart implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
-    this.setColors();
+    this.domain = this.getDomain();
 
+    // TODO
     // sort data according to domain
-    let sortedData = this.results.series[0];
-    sortedData.array = sortedData.array.sort((a, b) => {
-      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
-    });
+    // let sortedData = this.results.series[0];
+    // sortedData.array = sortedData.array.sort((a, b) => {
+    //   return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
+    // });
 
-    this.data = gridLayout(this.dims, sortedData, 150);
+    this.data = gridLayout(this.dims, this.results, 150);
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
 
     this.series = this.getSeries();
+    this.setColors();
+  }
+
+  getDomain() {
+    return this.results.map(d => d.name);
   }
 
   getSeries() {
+    let total = this.getTotal();
     return this.data.map((d) => {
-      let label = d.data.label[0][0];
+      let label = d.data.name;
       let value = d.data.value;
-
       let radius = d3.min([d.width, d.height]) / 2.1;
       let innerRadius = radius * 0.75;
 
@@ -119,13 +134,18 @@ export class PieGrid extends BaseChart implements OnInit {
         data: [d, {
           data: {
             other: true,
-            value: d.data.total - value,
-            label: [['other']],
-            formattedLabel: ['other']
+            value: total - value,
+            name: 'other'
           }
         }]
       };
     });
+  }
+
+  getTotal() {
+    return this.results
+      .map(d => d.value)
+      .reduce((sum, d) => sum + d);
   }
 
   click(data) {
@@ -133,10 +153,7 @@ export class PieGrid extends BaseChart implements OnInit {
   }
 
   setColors() {
-    this.colorScale = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
-  }
-
-  update() {
+    this.colorScale = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }
