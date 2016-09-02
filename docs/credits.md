@@ -5,3 +5,5 @@
 ### Contributors
 * [amcdnl](https://github.com/amcdnl)
 * [marjan-georgiev](https://github.com/marjan-georgiev)
+* [juristr](https://github.com/juristr)
+* [ocombe](https://github.com/ocombe)
