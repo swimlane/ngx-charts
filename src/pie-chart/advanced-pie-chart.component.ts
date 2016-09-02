@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -29,7 +29,7 @@ export interface LegendItem {
             <svg:g pieSeries
               [colors]="colors"
               [showLabels]="labels"
-              [series]="data"
+              [series]="results"
               [innerRadius]="innerRadius"
               [outerRadius]="outerRadius"
               [gradient]="gradient"
@@ -69,9 +69,10 @@ export interface LegendItem {
 
   `
 })
-export class AdvancedPieChart extends BaseChart implements OnInit {
+export class AdvancedPieChart extends BaseChart implements OnInit, OnChanges {
   data: any;
   dims: ViewDimensions;
+  domain: any[];
   outerRadius: number;
   innerRadius: number;
   transform: string;
@@ -91,15 +92,24 @@ export class AdvancedPieChart extends BaseChart implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    this.dims = calculateViewDimensions([this.view[0] * 4 / 12.0, this.view[1]], this.margin, false, false, false);
+    this.update();
+  }
 
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
+    this.dims = calculateViewDimensions([this.view[0] * 4 / 12.0, this.view[1]], this.margin, false, false, false);
+    this.domain = this.getDomain();
     this.setColors();
 
+    // TODO
     // sort data according to domain
-    this.data = this.results.series[0];
-    this.data.array = this.data.array.sort((a, b) => {
-      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
-    });
+    // this.data = this.results.series[0];
+    // this.data.array = this.data.array.sort((a, b) => {
+    //   return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
+    // });
 
     let xOffset = this.margin[3] + this.dims.width / 2;
     let yOffset = this.margin[0] + this.dims.height / 2;
@@ -109,26 +119,32 @@ export class AdvancedPieChart extends BaseChart implements OnInit {
 
     this.transform = `translate(${xOffset} , ${yOffset})`;
 
-    this.total = this.data.array
-      .map(series => {
-        return series.vals[0].value;
-      })
-      .reduce((a, b) => {
-        return a + b;
-      });
+    this.total = this.getTotal();
     this.roundedTotal = Math.round(this.total);
 
     this.totalLabel = 'total';
 
     this.legendItems = this.getLegendItems();
+
+    console.log('this.legendItems', this.legendItems);
+  }
+
+  getTotal() {
+    return this.results
+      .map(d => d.value)
+      .reduce((sum, d) => sum + d);
+  }
+
+  getDomain() {
+    return this.results.map(d => d.name);
   }
 
   getLegendItems(): LegendItem {
-    // let legendItemsWidth = Math.floor(this.view[0] * 8 / 12) - 10; // unused
-    return this.data.array.map((series, index) => {
-      let label = series.vals[0].label[1];
-      let value = series.vals[0].value;
+    return this.results.map((d, index) => {
+      let label = d.name;
+      let value = d.value;
       let percentage = Math.round(value / this.total * 100);
+      console.log('d', this.total);
       return {
         value: Math.round(value),
         label: trimLabel(label, 20),
@@ -142,10 +158,7 @@ export class AdvancedPieChart extends BaseChart implements OnInit {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

@@ -61,14 +61,7 @@ export class NumberCard extends BaseChart implements OnInit, OnChanges {
   }
 
   getDomain() {
-    let domain = [];
-    for (let d of this.results) {
-      if (!domain.includes(d.value)) {
-        domain.push(d.value);
-      }
-    }
-
-    return domain;
+    return this.results.map(d => d.name);
   }
 
   click(data) {
