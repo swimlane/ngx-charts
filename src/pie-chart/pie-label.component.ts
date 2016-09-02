@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, ElementRef, OnInit, OnChanges } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
 
@@ -25,7 +25,7 @@ import d3 from '../d3';
     </svg:path>
   `
 })
-export class PieLabel implements OnInit {
+export class PieLabel implements OnInit, OnChanges {
   element: HTMLElement;
   trimLabel: Function;
   labelXY: any;
@@ -46,6 +46,14 @@ export class PieLabel implements OnInit {
   }
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     let factor = 1.5;
 
     let outerArc = d3.arc()

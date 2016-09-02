@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import d3 from '../d3';
 
 @Component({
@@ -12,7 +12,7 @@ import d3 from '../d3';
         [color]="color(arc)"
         [label]="label(arc)"
         [max]="max"
-        [value]="arc.data.vals[0].value"
+        [value]="arc.value"
         [explodeSlices]="explodeSlices">
       </svg:g>
 
@@ -23,7 +23,7 @@ import d3 from '../d3';
         [outerRadius]="outerRadius"
         [fill]="color(arc)"
         [total]="total"
-        [value]="arc.data.vals[0].value"
+        [value]="arc.data.value"
         [max]="max"
         [explodeSlices]="explodeSlices"
         (clickHandler)="click($event)"
@@ -37,12 +37,13 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class PieSeries implements OnInit {
+export class PieSeries implements OnInit, OnChanges {
   total: number;
   max: number;
+  data: any;
 
   @Input() colors;
-  @Input() data: any = [];
+  @Input() series: any = [];
   @Input() dims;
   @Input() innerRadius = 60;
   @Input() outerRadius = 80;
@@ -53,19 +54,33 @@ export class PieSeries implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     let pie: any = d3.pie()
-      .value((d) => d.vals[0].value)
+      .value((d) => d.value)
       .sort(null);
 
-    this.total = this.data.total();
+    this.total = this.getTotal();
 
-    let arcData = pie(this.data.array);
+    let arcData = pie(this.series);
 
-    this.max = d3.max(arcData, function(d) {
-      return d.data.vals[0].value;
+    this.max = d3.max(arcData, (d) => {
+      return d.value;
     });
 
     this.data = this.calculateLabelPositions(arcData);
+  }
+
+  getTotal() {
+    return this.series
+      .map(d => d.value)
+      .reduce((sum, val) => { return sum + val; } );
   }
 
   midAngle(d) {
@@ -114,11 +129,11 @@ export class PieSeries implements OnInit {
   }
 
   label(arc) {
-    return arc.data.vals[0].formattedLabel[0].toString();
+    return arc.data.name;
   }
 
   tooltipText(arc) {
-    return `${this.label(arc)}: ${arc.data.vals[0].value}`;
+    return `${this.label(arc)}: ${arc.data.value}`;
   }
 
   color(arc) {

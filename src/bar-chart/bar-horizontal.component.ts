@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -12,7 +12,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results.series[0]">
+      [legendData]="results">
       <svg:g [attr.transform]="transform" class="bar chart">
         <svg:g xAxis
           *ngIf="xAxis"
@@ -36,7 +36,7 @@ import d3 from '../d3';
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
-          [series]="results.series[0]"
+          [series]="results"
           [dims]="dims"
           [gradient]="gradient"
           (clickHandler)="click($event)"
@@ -45,10 +45,12 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class BarHorizontal extends BaseChart implements OnInit {
+export class BarHorizontal extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
   yScale: any;
   xScale: any;
+  xDomain: any;
+  yDomain: any;
   transform: string;
   colors: Function;
 
@@ -69,18 +71,49 @@ export class BarHorizontal extends BaseChart implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    let groupSpacing = 0.2;
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    this.yScale = d3.scaleBand()
-      .rangeRound([0, this.dims.height], groupSpacing)
-      .domain(this.results.d0Domain);
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
 
-    this.xScale = d3.scaleLinear()
-      .range([0, this.dims.width])
-      .domain([0, this.results.m0Domain[1]]);
+    this.setColors();
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+  }
+
+  getXScale() {
+    this.xDomain = this.getXDomain();
+    return d3.scaleLinear()
+      .range([0, this.dims.width])
+      .domain(this.xDomain);
+  }
+
+  getYScale() {
+    const spacing = 0.2;
+    this.yDomain = this.getYDomain();
+    return d3.scaleBand()
+      .rangeRound([this.dims.height, 0])
+      .paddingInner(spacing)
+      .domain(this.yDomain);
+  }
+
+  getXDomain() {
+    let values = this.results.map(d => d.value);
+    let min = Math.min(0, ...values);
+    let max = Math.max(...values);
+    return [min, max];
+  }
+
+  getYDomain() {
+    return this.results.map(d => d.name);
   }
 
   yAxisTickFormatting() {
@@ -96,10 +129,6 @@ export class BarHorizontal extends BaseChart implements OnInit {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+    this.colors = colorHelper(this.scheme, 'ordinal', this.yDomain, this.customColors);
   }
-
-  update() {
-  }
-
 }

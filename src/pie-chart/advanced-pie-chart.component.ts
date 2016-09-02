@@ -29,7 +29,7 @@ export interface LegendItem {
             <svg:g pieSeries
               [colors]="colors"
               [showLabels]="labels"
-              [data]="data"
+              [series]="data"
               [innerRadius]="innerRadius"
               [outerRadius]="outerRadius"
               [gradient]="gradient"
