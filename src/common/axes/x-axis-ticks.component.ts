@@ -78,10 +78,6 @@ export class XAxisTicks implements OnInit, OnChanges {
   }
 
   update() {
-    // unused variables
-    // var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
-    // var tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
-
     var scale = this.scale;
     this.ticks = this.getTicks();
 

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 
 export interface CardModel {
   x;
@@ -29,7 +29,7 @@ export interface CardModel {
     />
   `
 })
-export class CardSeries implements OnInit {
+export class CardSeries implements OnInit, OnChanges {
   cards: CardModel[];
 
   @Input() data;
@@ -39,13 +39,22 @@ export class CardSeries implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.cards = this.getCards();
   }
 
   getCards() {
     return this.data
       .map((d, index) => {
-        let label = d.data.label[1];
+        let label = d.data.name;
+
         let value = d.data.value;
         return {
           x: d.x,

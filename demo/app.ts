@@ -15,7 +15,7 @@ import './demo.scss';
       <!--
       <bar-vertical
         [view]="[700,200]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [scheme]="colorScheme"
         [results]="single"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -26,14 +26,14 @@ import './demo.scss';
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel">
       </bar-vertical>
-      -->
+
       <hr />
-      <!--
+
       <h4>Vertical 2D</h4>
 
       <bar-vertical-2-d
         [view]="[700,200]"
-        scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        scheme]="colorScheme"
         [labels]="true"
         [results]="barData"
         [xAxis]="true"
@@ -43,13 +43,11 @@ import './demo.scss';
         [yAxisLabel]="'hello y'"
         [showYAxisLabel]="true">
       </bar-vertical-2-d>
-      -->
 
-      <!--
       <h4>Horizontal</h4>
       <bar-horizontal
         [view]="[700,200]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [scheme]="colorScheme"
         [results]="single"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -66,7 +64,7 @@ import './demo.scss';
       <h4>Pie</h4>
       <pie-chart
         [view]="[700,300]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [scheme]="colorScheme"
         [results]="single"
         [legend]="showLegend"
         [explodeSlices]="explodeSlices"
@@ -81,7 +79,7 @@ import './demo.scss';
 
       <line-chart
         [view]="[700,300]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [scheme]="colorScheme"
         [results]="multi"
         [legend]="showLegend"
         [gradient]="gradient"
@@ -93,14 +91,14 @@ import './demo.scss';
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale">
       </line-chart>
-      -->
+
       <hr />
       <h3>Area Charts</h3>
       <h4>Area Chart</h4>
 
       <area-chart
         [view]="[700,300]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [scheme]="colorScheme"
         [results]="multi"
         [legend]="showLegend"
         [gradient]="gradient"
@@ -112,17 +110,16 @@ import './demo.scss';
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale">
       </area-chart>
+-->
 
-      <!--
       <hr />
       <h3>Number Card</h3>
 
       <number-card
         [view]="[700,300]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [scheme]="colorScheme"
         [results]="single">
       </number-card>
-      -->
     </div>
 
     <div class="sidebar">
@@ -195,6 +192,10 @@ export class App {
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'Population';
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 
   // pie
   showLabels = true;

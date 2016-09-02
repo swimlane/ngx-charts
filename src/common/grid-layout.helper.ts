@@ -4,14 +4,14 @@ export function gridLayout(dims, data, minWidth) {
   let rows = 1;
   let xScale: any = d3.scaleBand();
   let yScale: any = d3.scaleBand();
-  let dataLength = data.array.length;
+  let dataLength = data.length;
   let width = dims.width;
   let height = dims.height;
 
   if (width > minWidth) {
     while (width / dataLength < minWidth) {
       rows += 1;
-      dataLength = Math.ceil(data.array.length / rows);
+      dataLength = Math.ceil(data.length / rows);
     }
   }
 
@@ -32,14 +32,13 @@ export function gridLayout(dims, data, minWidth) {
   yScale.rangeRound([0, height], 0.1);
 
   let res = [];
-  let total = data.total();
-  // let total = data.reduce((m, n) => m + n.vals[0].value, 0);
+  let total = getTotal(data);
   let cardWidth = xScale.bandwidth();
   let cardHeight = yScale.bandwidth();
 
-  for (let i = 0; i < data.array.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     res[i] = {};
-    res[i].data = data.array[i].vals[0];
+    res[i].data = data[i];
     res[i].x = xScale(i % columns);
     res[i].y = yScale(Math.floor(i / columns));
     res[i].width = cardWidth;
@@ -49,4 +48,10 @@ export function gridLayout(dims, data, minWidth) {
   }
 
   return res;
+}
+
+function getTotal(results) {
+  return results
+    .map(d => d.value)
+    .reduce((sum, val) => { return sum + val; } );
 }

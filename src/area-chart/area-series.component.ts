@@ -43,7 +43,7 @@ export class AreaSeries implements OnInit, OnChanges {
     let startingArea;
 
     let xProperty = (d) => {
-      let label = d.name
+      let label = d.name;
       if (this.scaleType === 'time') {
         return this.xScale(moment(label).toDate());
       } else {
