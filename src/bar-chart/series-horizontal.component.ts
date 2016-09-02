@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[seriesHorizontal]',
@@ -8,21 +8,24 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
       [height]="bar.height"
       [x]="bar.x"
       [y]="bar.y"
-      [fill]="colors(bar.label)"
+      [fill]="bar.color"
       [data]="bar.data"
       [orientation]="'horizontal'"
       [roundEdges]="bar.roundEdges"
       (clickHandler)="click($event)"
+      [gradient]="gradient"
+
       swPopover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
-      [popoverGroup]="'charts'"
-      [gradient]="gradient"
-    ></svg:g>
+      [popoverGroup]="'charts'">
+    </svg:g>
   `
 })
-export class SeriesHorizontal implements OnInit {
-  bars: any[];
+export class SeriesHorizontal implements OnInit, OnChanges {
+  bars: any;
+  x: any;
+  y: any;
 
   @Input() dims;
   @Input() type = 'standard';
@@ -38,25 +41,27 @@ export class SeriesHorizontal implements OnInit {
     this.update();
   }
 
+  ngOnChanges(changes) {
+    this.update();
+  }
+
   update() {
-    this.bars = this.series.array.map((d, index) => {
-      let value = d.vals[0];
-      let count = value.label[0].length;
-      let label = value.label[0][count - 1];
-      let formattedLabel = value.formattedLabel[count - 1];
+    this.bars = this.series.map((d, index) => {
+      let value = d.value;
+      let label = d.name;
       let roundEdges = this.type === 'standard';
 
       let bar: any = {
         value: value,
-        label: formattedLabel,
-        color: this.colors(formattedLabel),
+        label: label,
+        color: this.colors(label),
         roundEdges: roundEdges,
-        data: d.vals[0],
-        tooltipText: `${label}: ${value.value}`
+        data: d,
+        tooltipText: `${label}: ${value}`
       };
 
       if (this.type === 'standard') {
-        bar.width = this.xScale(value.value);
+        bar.width = this.xScale(value);
         bar.height = this.yScale.bandwidth();
         bar.x = 0;
         bar.y = this.yScale(label);

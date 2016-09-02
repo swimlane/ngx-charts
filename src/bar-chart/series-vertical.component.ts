@@ -24,6 +24,10 @@ import * as moment from 'moment';
   `
 })
 export class SeriesVertical implements OnInit, OnChanges {
+  bars: any;
+  x: any;
+  y: any;
+
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
@@ -32,10 +36,6 @@ export class SeriesVertical implements OnInit, OnChanges {
   @Input() colors;
   @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
-
-  bars: any;
-  x: any;
-  y: any;
 
   @Output() clickHandler = new EventEmitter();
 
