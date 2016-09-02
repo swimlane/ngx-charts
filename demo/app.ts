@@ -167,10 +167,14 @@ import './demo.scss';
         Explode Slices
       </label> <br />
 
-
       <label>
         <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked">
         Doughnut
+      </label> <br />
+
+      <label>
+        <input type="checkbox" [checked]="autoScale" (change)="autoScale = $event.target.checked">
+        Auto Scale
       </label> <br />
     </div>
   `
@@ -190,6 +194,8 @@ export class App {
   explodeSlices = false;
   doughnut = false;
 
+  // line, area
+  autoScale = true;
 
   constructor() {
     Object.assign(this, {single, multi});

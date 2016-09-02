@@ -4,6 +4,7 @@ import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
+import moment from 'moment';
 
 @Component({
   selector: 'line-chart',
@@ -192,9 +193,15 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
-    if (this.scaleType === 'time' || this.scaleType === 'linear') {
-      let min = Math.min(...domain);
-      let max = Math.max(...domain);
+    if (this.scaleType === 'time') {
+      values = values.map(v => moment(v).toDate());
+      let min = Math.min(...values);
+      let max = Math.max(...values);
+      domain = [min, max];
+    } else if (this.scaleType === 'linear') {
+      values = values.map(v => Number(v));
+      let min = Math.min(...values);
+      let max = Math.max(...values);
       domain = [min, max];
     } else {
       domain = values;
@@ -254,7 +261,7 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
       if (!this.isDate(value)) {
         date = false;
       }
-      if (isNaN(Number(value))) {
+      if (typeof value !== 'number') {
         number = false;
       }
     }
