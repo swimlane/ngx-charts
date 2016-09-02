@@ -125,8 +125,6 @@ export class AdvancedPieChart extends BaseChart implements OnInit, OnChanges {
     this.totalLabel = 'total';
 
     this.legendItems = this.getLegendItems();
-
-    console.log('this.legendItems', this.legendItems);
   }
 
   getTotal() {
@@ -144,7 +142,6 @@ export class AdvancedPieChart extends BaseChart implements OnInit, OnChanges {
       let label = d.name;
       let value = d.value;
       let percentage = Math.round(value / this.total * 100);
-      console.log('d', this.total);
       return {
         value: Math.round(value),
         label: trimLabel(label, 20),
