@@ -10,9 +10,8 @@ import './demo.scss';
   template: `
     <div class="content">
       <h3>Bar chart</h3>
-      <h4>Vertical</h4>
 
-      <!--
+      <h4>Vertical</h4>
       <bar-vertical
         [view]="[700,200]"
         [scheme]="colorScheme"
@@ -28,7 +27,7 @@ import './demo.scss';
       </bar-vertical>
 
       <hr />
-
+      <!--
       <h4>Vertical 2D</h4>
 
       <bar-vertical-2-d
@@ -43,6 +42,7 @@ import './demo.scss';
         [yAxisLabel]="'hello y'"
         [showYAxisLabel]="true">
       </bar-vertical-2-d>
+      -->
 
       <h4>Horizontal</h4>
       <bar-horizontal
@@ -60,7 +60,9 @@ import './demo.scss';
       </bar-horizontal>
 
       <hr />
+
       <h3>Pie Charts</h3>
+
       <h4>Pie</h4>
       <pie-chart
         [view]="[700,300]"
@@ -73,10 +75,26 @@ import './demo.scss';
         [gradient]="gradient">
       </pie-chart>
 
-      <hr />
-      <h3>Line Charts</h3>
-      <h4>Line Chart</h4>
+      <h4>Advanced Pie Chart</h4>
+      <advanced-pie-chart
+        [view]="[700,300]"
+        [scheme]="colorScheme"
+        [results]="single"
+        [gradient]="gradient">
+      </advanced-pie-chart>
 
+      <h4>Pie Grid</h4>
+      <pie-grid
+        [view]="[700,300]"
+        [scheme]="colorScheme"
+        [results]="single">
+      </pie-grid>
+
+      <hr />
+
+      <h3>Line Charts</h3>
+
+      <h4>Line Chart</h4>
       <line-chart
         [view]="[700,300]"
         [scheme]="colorScheme"
@@ -93,9 +111,10 @@ import './demo.scss';
       </line-chart>
 
       <hr />
-      <h3>Area Charts</h3>
-      <h4>Area Chart</h4>
 
+      <h3>Area Charts</h3>
+
+      <h4>Area Chart</h4>
       <area-chart
         [view]="[700,300]"
         [scheme]="colorScheme"
@@ -110,11 +129,10 @@ import './demo.scss';
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale">
       </area-chart>
--->
 
       <hr />
-      <h3>Number Card</h3>
 
+      <h3>Number Card</h3>
       <number-card
         [view]="[700,300]"
         [scheme]="colorScheme"
