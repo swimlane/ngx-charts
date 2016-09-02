@@ -43,17 +43,12 @@ export class LineSeries implements OnInit, OnChanges {
         } else {
           value = this.xScale(label);
         }
-        console.log('value', value);
         return value;
       })
       .y(d => this.yScale(d.value));
 
     let data = this.data.series;
 
-    console.log('Data', this.data);
-
     this.path = line(data) || '';
-
-    console.log('path', this.path);
   }
 }

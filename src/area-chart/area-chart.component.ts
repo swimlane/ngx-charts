@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, OnChanges} from '@angular/core';
 import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
 import {colorHelper} from '../utils/color-sets';
 import {BaseChart} from '../common/base-chart.component';
@@ -13,7 +13,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results.legend">
+      [legendData]="xDomain">
 
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
@@ -45,13 +45,16 @@ import d3 from '../d3';
 
         <svg:g [attr.clip-path]="clipPath">
 
-          <svg:g areaSeries
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [color]="colors('Area')"
-            [data]="series"
-            [scaleType]="scaleType"
-          />
+          <svg:g *ngFor="let series of results">
+            <svg:g areaSeries
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [color]="colors(series.name)"
+              [data]="series"
+              [scaleType]="scaleType"
+              [gradient]="gradient"
+            />
+          </svg:g>
 
           <svg:rect
             class="tooltip-area"
@@ -62,15 +65,17 @@ import d3 from '../d3';
             style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           />
 
-          <svg:g circleSeries
-            [xScale]="xScale"
-            [yScale]="yScale"
-            [color]="colors('Area')"
-            [strokeColor]="colors('Area')"
-            [data]="series"
-            [scaleType]="scaleType"
-            (clickHandler)="click($event)"
-          />
+          <svg:g *ngFor="let series of results">
+            <svg:g circleSeries
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [color]="colors(series.name)"
+              [strokeColor]="colors(series.name)"
+              [data]="series"
+              [scaleType]="scaleType"
+              (clickHandler)="click($event)"
+            />
+          </svg:g>
 
         </svg:g>
       </svg:g>
@@ -86,8 +91,10 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class AreaChart extends BaseChart implements OnInit {
+export class AreaChart extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
+  xDomain: any;
+  yDomain: any;
   xScale: any;
   yScale: any;
   transform: string;
@@ -112,10 +119,15 @@ export class AreaChart extends BaseChart implements OnInit {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() timeline;
+  @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
     this.update();
   }
 
@@ -126,44 +138,125 @@ export class AreaChart extends BaseChart implements OnInit {
       this.dims.height -= 150;
     }
 
-    this.series = this.results.series[0].array.sort((a, b) => {
-      return this.results.d0Domain.indexOf(a.vals[0].label[0][0]) - this.results.d0Domain.indexOf(b.vals[0].label[0][0]);
-    });
+    this.xDomain = this.getXDomain();
+    this.yDomain = this.getYDomain();
 
-    this.yScale = d3.scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.results.m0Domain);
+    // TODO: should sorting happen here?
+    // this.series = this.results.series[0].array.sort((a, b) => {
+    //   return this.results.d0Domain.indexOf(a.vals[0].label[0][0]) - this.results.d0Domain.indexOf(b.vals[0].label[0][0]);
+    // });
 
-    if (!this.autoScale) {
-      this.yScale.domain([0, this.results.m0Domain[1]]);
-    }
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
 
-    if (this.results.query && this.results.query.dimensions.length && this.results.query.dimensions[0].field.fieldType === 'date' && this.results.query.dimensions[0].groupByType.value === 'groupBy') {
-      let domain;
-      if (this.state.xDomain) {
-        domain = this.state.xDomain;
-      } else {
-        domain = d3.extent(this.results.d0Domain, function(d) {
-          return moment(d).toDate();
-        });
-      }
-      this.scaleType = 'time';
-      this.xScale = d3.scaleTime()
-        .range([0, this.dims.width])
-        .domain(domain);
-    } else {
-      this.scaleType = 'ordinal';
-      this.xScale = d3.scalePoint()
-        .range([0, this.dims.width], 0.1)
-        .domain(this.results.d0Domain);
-    }
 
     this.setColors();
-    this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
 
+    this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
     let pageUrl = window.location.href;
     this.clipPathId = 'clip' + ObjectId().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+  }
+
+  getXDomain() {
+    let values = [];
+    for (let results of this.results) {
+      for (let d of results.series){
+        if (!values.includes(d.name)) {
+          values.push(d.name);
+        }
+      }
+    }
+
+    this.scaleType = this.getScaleType(values);
+    let domain = [];
+    if (this.scaleType === 'time') {
+      values = values.map(v => moment(v).toDate());
+      let min = Math.min(...values);
+      let max = Math.max(...values);
+      domain = [min, max];
+    } else if (this.scaleType === 'linear') {
+      values = values.map(v => Number(v));
+      let min = Math.min(...values);
+      let max = Math.max(...values);
+      domain = [min, max];
+    } else {
+      domain = values;
+    }
+    return domain;
+  }
+
+  getYDomain() {
+    let domain = [];
+    for (let results of this.results) {
+      for (let d of results.series){
+        if (!domain.includes(d.value)) {
+          domain.push(d.value);
+        }
+      }
+    }
+
+    let min = Math.min(...domain);
+    let max = Math.max(...domain);
+    if (!this.autoScale) {
+      min = Math.min(0, min);
+    }
+    return [min, max];
+  }
+
+  getXScale() {
+    let scale;
+    if (this.scaleType === 'time') {
+      scale = d3.scaleTime()
+        .range([0, this.dims.width])
+        .domain(this.xDomain);
+    } else if (this.scaleType === 'linear') {
+      scale = d3.scaleLinear()
+        .range([0, this.dims.width])
+        .domain(this.xDomain);
+    } else if (this.scaleType === 'ordinal') {
+      scale = d3.scalePoint()
+        .range([0, this.dims.width])
+        .padding(0.1)
+        .domain(this.xDomain);
+    }
+
+    return scale;
+  }
+
+  getYScale() {
+    return d3.scaleLinear()
+      .range([this.dims.height, 0])
+      .domain(this.yDomain);
+  }
+
+  getScaleType(values) {
+    let date = true;
+    let number = true;
+    for (let value of values) {
+      if (!this.isDate(value)) {
+        date = false;
+      }
+      if (typeof value !== 'number') {
+        number = false;
+      }
+    }
+
+    if (date) {
+      return 'time';
+    }
+    if (number) {
+      return 'linear';
+    }
+    return 'ordinal';
+  }
+
+  isDate(value) {
+    if (value instanceof Date) {
+      return true;
+    }
+
+    return false;
   }
 
   click(data) {

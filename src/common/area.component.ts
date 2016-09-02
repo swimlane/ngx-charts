@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
 
@@ -22,7 +22,7 @@ import d3 from '../d3';
     />
   `
 })
-export class Area implements OnInit {
+export class Area implements OnInit, OnChanges {
   element: HTMLElement;
   gradientId: string;
   gradientFill: string;
@@ -44,14 +44,20 @@ export class Area implements OnInit {
   }
 
   ngOnInit() {
-    // let label = this.data.name; // unusued variable
-    // let active = label === this.activeLabel; // unusued variable
+    this.update();
+  }
 
-    let pageUrl = window.location.href;
-    this.gradientId = 'grad' + ObjectId().toString();
-    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
+  ngOnChanges() {
+    this.update();
+  }
 
-    this.loadAnimation();
+  update() {
+
+        let pageUrl = window.location.href;
+        this.gradientId = 'grad' + ObjectId().toString();
+        this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
+
+        this.loadAnimation();
   }
 
   loadAnimation() {
