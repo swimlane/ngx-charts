@@ -11,36 +11,42 @@ export var single = [
 
 export var multi = [
   {
-    "name": "2010",
+    "name": "Germany",
     "series": [
       {
-        "name": "Germany",
+        "name": "2010",
+        "value": 73000
+      },
+      {
+        "name": "2011",
         "value": 89400
-      },
-      {
-        "name": "USA",
-        "value": 78700
-      },
-      {
-        "name": "France",
-        "value": 50002
       }
     ]
   },
 
   {
-    "name": "2011",
+    "name": "USA",
     "series": [
       {
-        "name": "Germany",
-        "value": 89400
-      },
-      {
-        "name": "USA",
+        "name": "2010",
         "value": 78700
       },
       {
-        "name": "France",
+        "name": "2011",
+        "value": 82700
+      }
+    ]
+  },
+
+  {
+    "name": "France",
+    "series": [
+      {
+        "name": "2010",
+        "value": 50002
+      },
+      {
+        "name": "2011",
         "value": 58000
       }
     ]

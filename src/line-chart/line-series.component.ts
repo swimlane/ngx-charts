@@ -35,16 +35,25 @@ export class LineSeries implements OnInit, OnChanges {
     let line = d3.line()
       .x(d => {
         let label = d.name;
+        let value;
         if (this.scaleType === 'time') {
-          return this.xScale(moment(label).toDate());
+          value = this.xScale(moment(label).toDate());
+        } else if (this.scaleType === 'linear') {
+          value = this.xScale(Number(label));
         } else {
-          return this.xScale(label);
+          value = this.xScale(label);
         }
+        console.log('value', value);
+        return value;
       })
       .y(d => this.yScale(d.value));
 
     let data = this.data.series;
 
+    console.log('Data', this.data);
+
     this.path = line(data) || '';
+
+    console.log('path', this.path);
   }
 }

@@ -75,6 +75,8 @@ export class CircleSeries implements OnInit, OnChanges {
         let cx;
         if (this.scaleType === 'time') {
           cx = this.xScale(moment(label).toDate());
+        } else if (this.scaleType === 'linear') {
+          cx = this.xScale(Number(label));
         } else {
           cx = this.xScale(label);
         }
