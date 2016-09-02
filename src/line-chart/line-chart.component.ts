@@ -13,7 +13,7 @@ import moment from 'moment';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results">>
+      [legendData]="series">
 
       <svg:defs>
         <svg:clipPath id="clipPathId">
@@ -65,16 +65,6 @@ import moment from 'moment';
               [data]="series"
               [scaleType]="scaleType"
             />
-
-            <svg:g circleSeries
-              [xScale]="xScale"
-              [yScale]="yScale"
-              [color]="colors(series.name)"
-              [strokeColor]="colors(series.name)"
-              [data]="series"
-              [scaleType]="scaleType"
-              (clickHandler)="click($event)"
-            />
           </svg:g>
 
           <svg:rect
@@ -85,6 +75,18 @@ import moment from 'moment';
             y="-5"
             style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           />
+
+          <svg:g *ngFor="let series of results">
+            <svg:g circleSeries
+              [xScale]="xScale"
+              [yScale]="yScale"
+              [color]="colors(series.name)"
+              [strokeColor]="colors(series.name)"
+              [data]="series"
+              [scaleType]="scaleType"
+              (clickHandler)="click($event)"
+            />
+          </svg:g>
 
         </svg:g>
       </svg:g>

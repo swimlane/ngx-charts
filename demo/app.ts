@@ -12,7 +12,7 @@ import './demo.scss';
       <h3>Bar chart</h3>
       <h4>Vertical</h4>
 
-
+      <!--
       <bar-vertical
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
@@ -26,7 +26,7 @@ import './demo.scss';
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel">
       </bar-vertical>
-
+      -->
       <hr />
       <!--
       <h4>Vertical 2D</h4>
@@ -45,7 +45,7 @@ import './demo.scss';
       </bar-vertical-2-d>
       -->
 
-
+      <!--
       <h4>Horizontal</h4>
       <bar-horizontal
         [view]="[700,200]"
@@ -93,7 +93,7 @@ import './demo.scss';
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale">
       </line-chart>
-      <!--
+      -->
       <hr />
       <h3>Area Charts</h3>
       <h4>Area Chart</h4>
@@ -101,12 +101,19 @@ import './demo.scss';
       <area-chart
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [xAxis]="true"
-        [yAxis]="true"
-        [results]="single"
-        [legend]="false">
+        [results]="multi"
+        [legend]="showLegend"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale">
       </area-chart>
 
+      <!--
       <hr />
       <h3>Number Card</h3>
 
