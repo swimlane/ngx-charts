@@ -28,20 +28,6 @@ import './demo.scss';
 
       <hr />
 
-      <!--
-      <bar-vertical
-        [view]="[700,200]"
-        [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [results]="single"
-        [xAxis]="true"
-        [yAxis]="true"
-        [showXAxisLabel]="true"
-        [xAxisLabel]="'hello x'"
-        [yAxisLabel]="'hello y'"
-        [showYAxisLabel]="true">
-      </bar-vertical>
-      -->
-
       <!--<h4>Vertical 2D</h4>-->
 
       <!--<bar-vertical-2-d-->
@@ -57,18 +43,20 @@ import './demo.scss';
         <!--[showYAxisLabel]="true">-->
       <!--</bar-vertical-2-d>-->
 
-      <!--
+
       <h4>Horizontal</h4>
       <bar-horizontal
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
         [results]="single"
-        [xAxis]="true"
-        [xAxisLabel]="'hello x'"
-        [showXAxisLabel]="true"
-        [yAxis]="true"
-        [yAxisLabel]="'hello y'"
-        [showYAxisLabel]="true">
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
       </bar-horizontal>
 
       <hr />
@@ -77,10 +65,15 @@ import './demo.scss';
       <pie-chart
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [labels]="true"
         [results]="single"
-        [legend]="false">
+        [legend]="showLegend"
+        [explodeSlices]="explodeSlices"
+        [labels]="showLabels"
+        [doughnut]="doughnut"
+        [gradient]="gradient">
       </pie-chart>
+
+      <!--
 
       <hr />
       <h3>Line Charts</h3>
@@ -157,6 +150,22 @@ import './demo.scss';
 
       <label>Y Axis Label:</label><br />
       <input type="text" [(ngModel)]="yAxisLabel"><br />
+
+      <label>
+        <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked">
+        Show Pie/Doughnut labels
+      </label> <br />
+
+      <label>
+        <input type="checkbox" [checked]="explodeSlices" (change)="explodeSlices = $event.target.checked">
+        Explode Slices
+      </label> <br />
+
+
+      <label>
+        <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked">
+        Doughnut
+      </label> <br />
     </div>
   `
 })
@@ -169,6 +178,12 @@ export class App {
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'Population';
+
+  // pie
+  showLabels = true;
+  explodeSlices = false;
+  doughnut = false;
+
 
   constructor() {
     Object.assign(this, {single, multi});

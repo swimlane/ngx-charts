@@ -79,7 +79,6 @@ export class BarVertical extends BaseChart implements OnInit, OnChanges {
   }
 
   update() {
-    console.log('vertical update');
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     this.xScale = this.getXScale();

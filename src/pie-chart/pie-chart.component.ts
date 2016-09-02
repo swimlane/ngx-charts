@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -15,7 +15,7 @@ import { BaseChart } from '../common/base-chart.component';
         <svg:g pieSeries
           [colors]="colors"
           [showLabels]="labels"
-          [data]="data"
+          [series]="data"
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
@@ -26,11 +26,12 @@ import { BaseChart } from '../common/base-chart.component';
     </chart>
   `
 })
-export class PieChart extends BaseChart implements OnInit {
+export class PieChart extends BaseChart implements OnInit, OnChanges {
   outerRadius: number;
   innerRadius: number;
   data: any;
   colors: Function;
+  domain: any;
 
   @Input() view;
   @Input() results;
@@ -48,6 +49,14 @@ export class PieChart extends BaseChart implements OnInit {
   translation: string;
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     let dims = calculateViewDimensions(this.view, this.margin, false, false, this.legend, 9);
     let xOffset = this.margin[3] + dims.width / 2;
     let yOffset = this.margin[0] + dims.height / 2;
@@ -64,11 +73,18 @@ export class PieChart extends BaseChart implements OnInit {
       this.innerRadius = this.outerRadius * 0.75;
     }
 
-    this.data = this.results.series[0];
+    this.domain = this.getDomain();
+
     // sort data according to domain
-    this.data.array = this.data.array.sort((a, b) => {
-      return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
+    this.data = this.results.sort((a, b) => {
+      return this.domain.indexOf(a.name) - this.domain.indexOf(b.name);
     });
+
+    this.setColors();
+  }
+
+  getDomain() {
+    return this.results.map(d => d.name);
   }
 
   click(data) {
@@ -76,10 +92,7 @@ export class PieChart extends BaseChart implements OnInit {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }
