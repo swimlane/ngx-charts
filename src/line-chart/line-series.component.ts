@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import d3 from '../d3';
 import moment = require("moment");
 
@@ -14,7 +14,7 @@ import moment = require("moment");
     <text class="color">{{color}}</text>
   `
 })
-export class LineSeries implements OnInit {
+export class LineSeries implements OnInit, OnChanges {
   path: string;
 
   @Input() data;
@@ -24,23 +24,26 @@ export class LineSeries implements OnInit {
   @Input() scaleType;
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     let line = d3.line()
       .x(d => {
-        let label = d.vals[0].label[0][0];
+        let label = d.name;
         if (this.scaleType === 'time') {
           return this.xScale(moment(label).toDate());
         } else {
-          return this.xScale(label) + this.xScale.bandwidth() / 2;
+          return this.xScale(label);
         }
       })
-      .y(d => this.yScale(d.vals[0].value));
+      .y(d => this.yScale(d.value));
 
-    let data = this.data;
-    if (this.scaleType === 'time') {
-      data = this.data.filter(d => {
-        return d.vals[0].label[0][0] !== 'No Value' && d.vals[0].label[0][0] !== 'Other';
-      });
-    }
+    let data = this.data.series;
 
     this.path = line(data) || '';
   }
