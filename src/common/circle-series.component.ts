@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import moment = require("moment");
 import ObjectId from "../utils/object-id";
 
@@ -31,7 +31,7 @@ import ObjectId from "../utils/object-id";
     </svg:g>
   `
 })
-export class CircleSeries implements OnInit {
+export class CircleSeries implements OnInit, OnChanges {
   areaPath: any;
   circles: any[];
 
@@ -46,40 +46,43 @@ export class CircleSeries implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    // let pageUrl = window.location.href; // unused variable
-
-    if (this.scaleType === 'time') {
-      this.data = this.data.filter(d => {
-        return d.vals[0].label[0][0] !== 'No Value' && d.vals[0].label[0][0] !== 'Other'
-          && d.vals[0].label[0][1] !== 'No Value' && d.vals[0].label[0][1] !== 'Other';
-      });
-    }
-
-    this.circles = this.processCircles();
+    this.update();
   }
 
-  processCircles() {
-    return this.data.map((d, i) => {
-      let value = d.vals[0];
-      let label = value.label[0][0];
+  ngOnChanges() {
+    this.update();
+  }
 
-      // unused variable
-      // let circle = {
-      //   value: value,
-      //   label: label,
-      // };
+  update() {
+    // TODO: do this filtering before passing the data down here
+    // if (this.scaleType === 'time') {
+    //   this.data = this.data.filter(d => {
+    //     return d.vals[0].label[0][0] !== 'No Value' && d.vals[0].label[0][0] !== 'Other'
+    //       && d.vals[0].label[0][1] !== 'No Value' && d.vals[0].label[0][1] !== 'Other';
+    //   });
+    // }
 
-      if (value.value) {
+    this.circles = this.getCircles();
+  }
+
+  getCircles() {
+    return this.data.series.map((d, i) => {
+      let value = d.value;
+      let label = d.name;
+
+
+      if (value) {
         let cx;
         if (this.scaleType === 'time') {
           cx = this.xScale(moment(label).toDate());
         } else {
-          cx = this.xScale(label) + this.xScale.bandwidth() / 2;
+          cx = this.xScale(label);
         }
-        let cy = this.yScale(this.type === 'standard' ? value.value : value.d1);
+        let cy = this.yScale(this.type === 'standard' ? value : value.d1);
         let radius = 5;
         let height = this.yScale.range()[0] - cy;
 
+        // TODO: figure out if this is needed here
         let gradientIdRect = 'grad' + ObjectId().toString();
 
         return {

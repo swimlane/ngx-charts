@@ -12,6 +12,7 @@ import './demo.scss';
       <h3>Bar chart</h3>
       <h4>Vertical</h4>
 
+
       <bar-vertical
         [view]="[700,200]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
@@ -27,21 +28,22 @@ import './demo.scss';
       </bar-vertical>
 
       <hr />
+      <!--
+      <h4>Vertical 2D</h4>
 
-      <!--<h4>Vertical 2D</h4>-->
-
-      <!--<bar-vertical-2-d-->
-        <!--[view]="[700,200]"-->
-        <!--[scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"-->
-        <!--[labels]="true"-->
-        <!--[results]="barData"-->
-        <!--[xAxis]="true"-->
-        <!--[yAxis]="true"-->
-        <!--[showXAxisLabel]="true"-->
-        <!--[xAxisLabel]="'hello x'"-->
-        <!--[yAxisLabel]="'hello y'"-->
-        <!--[showYAxisLabel]="true">-->
-      <!--</bar-vertical-2-d>-->
+      <bar-vertical-2-d
+        [view]="[700,200]"
+        scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
+        [labels]="true"
+        [results]="barData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [showXAxisLabel]="true"
+        [xAxisLabel]="'hello x'"
+        [yAxisLabel]="'hello y'"
+        [showYAxisLabel]="true">
+      </bar-vertical-2-d>
+      -->
 
 
       <h4>Horizontal</h4>
@@ -73,8 +75,6 @@ import './demo.scss';
         [gradient]="gradient">
       </pie-chart>
 
-      <!--
-
       <hr />
       <h3>Line Charts</h3>
       <h4>Line Chart</h4>
@@ -82,12 +82,18 @@ import './demo.scss';
       <line-chart
         [view]="[700,300]"
         [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']}"
-        [xAxis]="true"
-        [yAxis]="true"
-        [results]="single"
-        [gradient]="true">
+        [results]="multi"
+        [legend]="showLegend"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale">
       </line-chart>
-
+      <!--
       <hr />
       <h3>Area Charts</h3>
       <h4>Area Chart</h4>

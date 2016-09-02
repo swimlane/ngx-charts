@@ -20,6 +20,10 @@ export var multi = [
       {
         "name": "USA",
         "value": 78700
+      },
+      {
+        "name": "France",
+        "value": 50002
       }
     ]
   },
@@ -34,6 +38,10 @@ export var multi = [
       {
         "name": "USA",
         "value": 78700
+      },
+      {
+        "name": "France",
+        "value": 58000
       }
     ]
   }
