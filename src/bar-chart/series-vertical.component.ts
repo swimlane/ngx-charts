@@ -60,6 +60,12 @@ export class SeriesVertical implements OnInit, OnChanges {
       }
     }
 
+    let d0 = 0;
+    let total;
+    if (this.type === 'normalized') {
+      total = this.series.map(d => d.value).reduce((sum, d) => sum + d);
+    }
+
     this.bars = this.series.map((d, index) => {
       let value = d.value;
       let label = d.name;
@@ -83,9 +89,29 @@ export class SeriesVertical implements OnInit, OnChanges {
         bar.x = this.xScale(label);
         bar.y = this.yScale(value);
       } else if (this.type === 'stacked') {
-        bar.height = this.yScale(value.d0) - this.yScale(value.d1);
+        let offset0 = d0;
+        let offset1 = offset0 + value;
+        d0 += value;
+
+        bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
-        bar.y = this.yScale(value.d1);
+        bar.y = this.yScale(offset1);
+      } else if (this.type === 'normalized') {
+        let offset0 = d0;
+        let offset1 = offset0 + value;
+        d0 += value;
+
+        if (total > 0) {
+          offset0 = (offset0 * 100) / total;
+          offset1 = (offset1 * 100) /total;
+        } else {
+          offset0 = 0;
+          offset1 = 0;
+        }
+
+        bar.height = this.yScale(offset0) - this.yScale(offset1);
+        bar.x = 0;
+        bar.y = this.yScale(offset1);
       }
 
       return bar;

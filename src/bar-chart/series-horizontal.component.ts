@@ -46,6 +46,12 @@ export class SeriesHorizontal implements OnInit, OnChanges {
   }
 
   update() {
+    let d0 = 0;
+    let total;
+    if (this.type === 'normalized') {
+      total = this.series.map(d => d.value).reduce((sum, d) => sum + d);
+    }
+
     this.bars = this.series.map((d, index) => {
       let value = d.value;
       let label = d.name;
@@ -60,15 +66,35 @@ export class SeriesHorizontal implements OnInit, OnChanges {
         tooltipText: `${label}: ${value}`
       };
 
+      bar.height = this.yScale.bandwidth();
+
       if (this.type === 'standard') {
         bar.width = this.xScale(value);
-        bar.height = this.yScale.bandwidth();
         bar.x = 0;
         bar.y = this.yScale(label);
       } else if (this.type === 'stacked') {
-        bar.width = this.xScale(value.d1) - this.xScale(value.d0);
-        bar.height = this.yScale.bandwidth();
-        bar.x = this.xScale(value.d0);
+        let offset0 = d0;
+        let offset1 = offset0 + value;
+        d0 += value;
+
+        bar.width = this.xScale(offset1) - this.xScale(offset0);
+        bar.x = this.xScale(offset0);
+        bar.y = 0;
+      } else if (this.type === 'normalized') {
+        let offset0 = d0;
+        let offset1 = offset0 + value;
+        d0 += value;
+
+        if (total > 0) {
+          offset0 = (offset0 * 100) / total;
+          offset1 = (offset1 * 100) /total;
+        } else {
+          offset0 = 0;
+          offset1 = 0;
+        }
+
+        bar.width = this.xScale(offset1) - this.xScale(offset0);
+        bar.x = this.xScale(offset0);
         bar.y = 0;
       }
 

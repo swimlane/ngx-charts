@@ -12,6 +12,7 @@ import './demo.scss';
       <h3>Bar chart</h3>
 
       <h4>Vertical</h4>
+      <!-- -->
       <bar-vertical
         [view]="[700,200]"
         [scheme]="colorScheme"
@@ -25,24 +26,6 @@ import './demo.scss';
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel">
       </bar-vertical>
-
-      <hr />
-      <!--
-      <h4>Vertical 2D</h4>
-
-      <bar-vertical-2-d
-        [view]="[700,200]"
-        scheme]="colorScheme"
-        [labels]="true"
-        [results]="barData"
-        [xAxis]="true"
-        [yAxis]="true"
-        [showXAxisLabel]="true"
-        [xAxisLabel]="'hello x'"
-        [yAxisLabel]="'hello y'"
-        [showYAxisLabel]="true">
-      </bar-vertical-2-d>
-      -->
 
       <h4>Horizontal</h4>
       <bar-horizontal
@@ -58,6 +41,96 @@ import './demo.scss';
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel">
       </bar-horizontal>
+
+      <h4>Vertical 2D</h4>
+      <bar-vertical-2d
+        [view]="[700,200]"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </bar-vertical-2d>
+
+      <h4>Horizontal 2D</h4>
+      <bar-horizontal-2d
+        [view]="[700,200]"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </bar-horizontal-2d>
+
+      <h4>Vertical Stacked</h4>
+      <bar-vertical-stacked
+        [view]="[700,200]"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </bar-vertical-stacked>
+
+      <h4>Horizontal Stacked</h4>
+      <bar-horizontal-stacked
+        [view]="[700,200]"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </bar-horizontal-stacked>
+
+      <h4>Vertical Normalized</h4>
+      <bar-vertical-normalized
+        [view]="[700,200]"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </bar-vertical-normalized>
+
+      <h4>Horizontal Normalized</h4>
+      <bar-horizontal-normalized
+        [view]="[700,200]"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </bar-horizontal-normalized>
 
       <hr />
 
@@ -138,6 +211,7 @@ import './demo.scss';
         [scheme]="colorScheme"
         [results]="single">
       </number-card>
+      <!-- -->
     </div>
 
     <div class="sidebar">
