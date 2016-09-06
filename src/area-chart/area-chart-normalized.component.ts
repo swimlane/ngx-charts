@@ -165,7 +165,7 @@ export class AreaChartNormalized extends BaseChart implements OnInit, OnChanges 
         d.d1 = d0 + d.value;
         d0 += d.value;
 
-        if (total > 0){
+        if (total > 0) {
           d.d0 = (d.d0 * 100) / total;
           d.d1 = (d.d1 * 100) / total;
         } else {

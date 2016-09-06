@@ -12,7 +12,6 @@ import './demo.scss';
       <h3>Bar chart</h3>
 
       <h4>Vertical</h4>
-      <!--
       <bar-vertical
         [view]="[700,200]"
         [scheme]="colorScheme"
@@ -203,8 +202,6 @@ import './demo.scss';
         [autoScale]="autoScale">
       </area-chart>
 
-
-
       <h4>Area Chart Stacked</h4>
       <area-chart-stacked
         [view]="[700,300]"
@@ -219,7 +216,6 @@ import './demo.scss';
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel">
       </area-chart-stacked>
-        -->
 
       <h4>Area Chart Normalized</h4>
       <area-chart-normalized
@@ -236,8 +232,21 @@ import './demo.scss';
         [yAxisLabel]="yAxisLabel">
       </area-chart-normalized>
 
+      <heat-map
+        [view]="[700,300]"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [legend]="showLegend"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
 
-      <!--
+      </heat-map>
+
       <hr />
 
       <h3>Number Card</h3>
@@ -246,7 +255,6 @@ import './demo.scss';
         [scheme]="colorScheme"
         [results]="single">
       </number-card>
-       -->
     </div>
 
     <div class="sidebar">
