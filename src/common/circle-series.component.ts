@@ -80,7 +80,8 @@ export class CircleSeries implements OnInit, OnChanges {
         } else {
           cx = this.xScale(label);
         }
-        let cy = this.yScale(this.type === 'standard' ? value : value.d1);
+
+        let cy = this.yScale(this.type === 'standard' ? value : d.d1);
         let radius = 5;
         let height = this.yScale.range()[0] - cy;
 

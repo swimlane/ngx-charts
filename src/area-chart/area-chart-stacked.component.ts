@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -13,7 +13,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results.legend">
+      [legendData]="results">
 
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
@@ -24,7 +24,7 @@ import d3 from '../d3';
         </svg:clipPath>
       </svg:defs>
 
-      <svg:g [attr.transform]="transform" class="line chart">
+      <svg:g [attr.transform]="transform" class="area chart">
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
@@ -45,13 +45,14 @@ import d3 from '../d3';
 
         <svg:g [attr.clip-path]="clipPath">
 
-          <svg:g *ngFor="let series of results.series">
+          <svg:g *ngFor="let series of results">
             <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
               [color]="colors(series.name)"
-              [data]="series.array"
+              [data]="series"
               [scaleType]="scaleType"
+              [gradient]="gradient"
               stacked="true"
             />
           </svg:g>
@@ -65,16 +66,15 @@ import d3 from '../d3';
             style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           />
 
-          <svg:g *ngFor="let series of results.series">
+          <svg:g *ngFor="let series of results">
             <svg:g circleSeries
               type="stacked"
               [xScale]="xScale"
               [yScale]="yScale"
               [color]="colors(series.name)"
               [strokeColor]="colors(series.name)"
-              [data]="series.array"
+              [data]="series"
               [scaleType]="scaleType"
-              chartType="area"
               (clickHandler)="click($event)"
             />
           </svg:g>
@@ -93,10 +93,12 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class AreaChartStacked extends BaseChart implements OnInit {
+export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
   element: HTMLElement;
   dims: ViewDimensions;
   scaleType: string;
+  xDomain: any[];
+  yDomain: any[];
   xScale: any;
   yScale: any;
   transform: string;
@@ -105,7 +107,6 @@ export class AreaChartStacked extends BaseChart implements OnInit {
   colors: Function;
 
   @Input() view;
-  @Input() xDomain;
   @Input() results;
   @Input() margin = [10, 20, 70, 70];
   @Input() scheme;
@@ -118,6 +119,7 @@ export class AreaChartStacked extends BaseChart implements OnInit {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() timeline;
+  @Input() gradient;
 
   @Output() clickHandler = new EventEmitter();
 
@@ -127,35 +129,39 @@ export class AreaChartStacked extends BaseChart implements OnInit {
   }
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     if (this.timeline) {
       this.dims.height -= 150;
     }
 
-    if (this.results.query && this.results.query.dimensions[0].field && this.results.query.dimensions[0].field.fieldType === 'date' && this.results.query.dimensions[0].groupByType.value === 'groupBy') {
-      let domain;
-      if (this.xDomain) {
-        domain = this.xDomain;
-      } else {
-        domain = d3.extent(this.results.d0Domain, function(d) {
-          return moment(d).toDate();
-        });
-      }
-      this.scaleType = 'time';
-      this.xScale = d3.scaleTime()
-        .range([0, this.dims.width])
-        .domain(domain);
-    } else {
-      this.scaleType = 'ordinal';
-      this.xScale = d3.scalePoint()
-        .range([0, this.dims.width], 0.1)
-        .domain(this.results.d0Domain);
-    }
+    this.xDomain = this.getXDomain();
+    this.yDomain = this.getYDomain();
 
-    this.yScale = d3.scaleLinear()
-      .range([this.dims.height, 0])
-      .domain([0, this.results.maxValue]);
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+
+    // modifies results in place
+    for (let i = 0; i < this.xDomain.length; i++) {
+      let val = this.xDomain[i];
+      let d0 = 0;
+      for (let group of this.results){
+        let d = group.series.find(item => item.name === val);
+
+        d.d0 = d0;
+        d.d1 = d0 + d.value;
+        d0 += d.value;
+      }
+    }
 
     this.setColors();
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
@@ -164,6 +170,108 @@ export class AreaChartStacked extends BaseChart implements OnInit {
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
 
     this.addTooltip();
+  }
+
+  getXDomain() {
+    let values = [];
+    for (let results of this.results) {
+      for (let d of results.series){
+        if (!values.includes(d.name)) {
+          values.push(d.name);
+        }
+      }
+    }
+
+    this.scaleType = this.getScaleType(values);
+    let domain = [];
+    if (this.scaleType === 'time') {
+      values = values.map(v => moment(v).toDate());
+      let min = Math.min(...values);
+      let max = Math.max(...values);
+      domain = [min, max];
+    } else if (this.scaleType === 'linear') {
+      values = values.map(v => Number(v));
+      let min = Math.min(...values);
+      let max = Math.max(...values);
+      domain = [min, max];
+    } else {
+      domain = values;
+    }
+    return domain;
+  }
+
+  getYDomain() {
+    let domain = [];
+
+    for (let i = 0; i < this.xDomain.length; i++){
+      let val = this.xDomain[i];
+      let sum = 0;
+      for (let group of this.results){
+        let d = group.series.find(item => item.name === val);
+        sum += d.value;
+      }
+
+      domain.push(sum);
+    }
+
+    let min = Math.min(0, ...domain);
+    let max = Math.max(...domain);
+    return [min, max];
+  }
+
+  getXScale() {
+    let scale;
+    if (this.scaleType === 'time') {
+      scale = d3.scaleTime()
+        .range([0, this.dims.width])
+        .domain(this.xDomain);
+    } else if (this.scaleType === 'linear') {
+      scale = d3.scaleLinear()
+        .range([0, this.dims.width])
+        .domain(this.xDomain);
+    } else if (this.scaleType === 'ordinal') {
+      scale = d3.scalePoint()
+        .range([0, this.dims.width])
+        .padding(0.1)
+        .domain(this.xDomain);
+    }
+
+    return scale;
+  }
+
+  getYScale() {
+    return d3.scaleLinear()
+      .range([this.dims.height, 0])
+      .domain(this.yDomain);
+  }
+
+  getScaleType(values) {
+    let date = true;
+    let number = true;
+    for (let value of values) {
+      if (!this.isDate(value)) {
+        date = false;
+      }
+      if (typeof value !== 'number') {
+        number = false;
+      }
+    }
+
+    if (date) {
+      return 'time';
+    }
+    if (number) {
+      return 'linear';
+    }
+    return 'ordinal';
+  }
+
+  isDate(value) {
+    if (value instanceof Date) {
+      return true;
+    }
+
+    return false;
   }
 
   addTooltip() {
@@ -186,10 +294,7 @@ export class AreaChartStacked extends BaseChart implements OnInit {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.xDomain, this.customColors);
   }
 
 }

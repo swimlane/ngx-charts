@@ -26,6 +26,7 @@ export class AreaSeries implements OnInit, OnChanges {
   @Input() color;
   @Input() scaleType;
   @Input() stacked = false;
+  @Input() normalized = false;
   @Input() gradient;
 
   @Output() clickHandler = new EventEmitter();
@@ -51,11 +52,48 @@ export class AreaSeries implements OnInit, OnChanges {
       }
     };
 
-    if (this.stacked === true) {
+    // let areaData = this.data.series.map(d => {
+    //   if (this.stacked) {
+    //     let offset0 = d0;
+    //     let offset1 = d0 + d.value;
+    //     d0 = d0 + d.value;
+    //
+    //     return {
+    //       name: d.name,
+    //       value: d.value,
+    //       d0: offset0,
+    //       d1: offset1
+    //     };
+    //   } else if (this.normalized) {
+    //     let offset0 = d0;
+    //     let offset1 = d0 + d.value;
+    //     d0 = d0 + d.value;
+    //
+    //     if (total > 0) {
+    //       offset0 = (offset0 * 100) / total;
+    //       offset1 = (offset1 * 100) /total;
+    //     } else {
+    //       offset0 = 0;
+    //       offset1 = 0;
+    //     }
+    //
+    //     return {
+    //       name: d.name,
+    //       value: d.value,
+    //       d0: offset0,
+    //       d1: offset1
+    //     };
+    //   } else {
+    //     return d;
+    //   }
+    // });
+
+
+    if (this.stacked || this.normalized) {
       area = d3.area()
         .x(xProperty)
-        .y0(d => this.yScale(d.d0))
-        .y1(d => this.yScale(d.d1));
+        .y0((d, i) => this.yScale(d.d0))
+        .y1((d, i) => this.yScale(d.d1));
 
       startingArea = d3.area()
         .x(xProperty)
@@ -73,15 +111,9 @@ export class AreaSeries implements OnInit, OnChanges {
         .y1(d => this.yScale.range()[0]);
     }
 
-    // TODO: filter data before coming here
-    // if (this.scaleType === 'time') {
-    //   this.data = this.data.filter(d => {
-    //     return d.vals[0].label[0][0] !== 'No Value' && d.vals[0].label[0][0] !== 'Other';
-    //   });
-    // }
-
     this.opacity = 1;
     this.path = area(this.data.series);
+
     this.startingPath = startingArea(this.data.series);
   }
 }
