@@ -1,5 +1,6 @@
 import {
-  TestBed
+  TestBed,
+  async
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
 import d3 from '../d3';
@@ -71,7 +72,7 @@ describe('<legend>', () => {
     });
   });
 
-  it('should set the legend title', (done) => {
+  it('should set the legend title', async(() => {
     TestBed.compileComponents().then(() => {
       let fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
@@ -79,12 +80,10 @@ describe('<legend>', () => {
       let legendTitle = fixture.debugElement.nativeElement.querySelector('.legend-title-text');
 
       expect(legendTitle).toHaveText('Test legend title');
-
-      done();
     });
-  });
+  }));
 
-  it('should set the legend labels', (done) => {
+  it('should set the legend labels', async(() => {
     TestBed.compileComponents().then(() => {
       let fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
@@ -98,11 +97,10 @@ describe('<legend>', () => {
       expect(labelsElement.children[0]).toContainText('complete');
       expect(labelsElement.children[1]).toContainText('not complete');
 
-      done();
     });
-  });
+  }));
 
-  it('should trim long labels', (done) => {
+  it('should trim long labels', async(() => {
     TestBed.compileComponents().then(() => {
       let fixture = TestBed.createComponent(TestComponent);
       fixture.componentInstance.seriesData = {
@@ -122,10 +120,8 @@ describe('<legend>', () => {
       // default length of the trim fn is changed. Let's test for the presence of the dots
       // instead :)
       expect(labelsElement.children[0]).toContainText('...');
-
-      done();
     });
-  });
+  }));
 
 
 });

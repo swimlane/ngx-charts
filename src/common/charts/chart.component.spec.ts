@@ -1,5 +1,6 @@
 import {
-  TestBed
+  TestBed,
+  async
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
 import d3 from '../../d3';
@@ -40,14 +41,14 @@ describe('<chart>', () => {
                     <chart
                         [view]="[400,800]"
                         >
-                        <text>a2d3 is cool!</text>
+                        <p>a2d3 is cool!</p>
                     </chart>
                 `
         }
       });
     });
 
-    it('should set the svg width and height', (done) => {
+    it('should set the svg width and height', async(() => {
       TestBed.compileComponents().then(() => {
         let fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
@@ -57,12 +58,10 @@ describe('<chart>', () => {
         let svg = compiled.querySelectorAll('svg')[0];
         expect(d3.select(svg).attr('width')).toEqual('400');
         expect(d3.select(svg).attr('height')).toEqual('800');
-
-        done();
       });
-    });
+    }));
 
-    it('should correctly project the inner content', (done) => {
+    it('should correctly project the inner content', async((done) => {
       TestBed.compileComponents().then(() => {
         let fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
@@ -71,12 +70,11 @@ describe('<chart>', () => {
 
         let svg = d3.select(compiled.querySelectorAll('svg')[0]);
 
-        let textNode = svg.select('text');
+        let textNode = svg.select('p');
         expect(textNode.text()).toEqual('a2d3 is cool!');
 
-        done();
       });
-    });
+    }));
 
   });
 
