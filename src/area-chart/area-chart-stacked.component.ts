@@ -203,7 +203,7 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
   getYDomain() {
     let domain = [];
 
-    for (let i = 0; i < this.xDomain.length; i++){
+    for (let i = 0; i < this.xDomain.length; i++) {
       let val = this.xDomain[i];
       let sum = 0;
       for (let group of this.results){

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -43,7 +43,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
-          [data]="results.series"
+          [data]="results"
           [gradient]="gradient"
           (clickHandler)="click($event)"
         />
@@ -51,8 +51,11 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
     </chart>
   `
 })
-export class HeatMap extends BaseChart implements OnInit {
+export class HeatMap extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
+  xDomain: any[];
+  yDomain: any[];
+  valueDomain: any[];
   xScale: any;
   yScale: any;
   color: any;
@@ -78,34 +81,90 @@ export class HeatMap extends BaseChart implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 11);
 
-    this.xScale = d3.scaleBand()
-      .rangeRound([0, this.dims.width], 0.1)
-      .domain(this.results.d0Domain);
+    this.xDomain = this.getXDomain();
+    this.yDomain = this.getYDomain();
+    this.valueDomain = this.getValueDomain();
 
-    this.yScale = d3.scaleBand()
-      .rangeRound([this.dims.height, 0], 0.1)
-      .domain(this.results.d1Domain);
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
 
-    this.color = d3.rgb(this.scheme.domain[0]);
-
-    this.colors = colorHelper(this.scheme, 'linear', this.results.m0Domain);
-    this.colorScale = generateColorScale(this.scheme, 'linear', this.results.m0Domain);
-
+    this.setColors();
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
 
     this.rects = this.getRects();
   }
 
+  getXDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      if (!domain.includes(group.name)) {
+        domain.push(group.name);
+      }
+    }
+
+    return domain;
+  }
+
+  getYDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      for (let d of group.series) {
+        if (!domain.includes(d.name)) {
+          domain.push(d.name);
+        }
+      }
+    }
+
+    return domain;
+  }
+
+  getValueDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      for (let d of group.series) {
+        if (!domain.includes(d.value)) {
+          domain.push(d.value);
+        }
+      }
+    }
+
+    let min = Math.min(0, ...domain);
+    let max = Math.max(...domain);
+    return [min, max];
+  }
+
+  getXScale() {
+    return d3.scaleBand()
+      .rangeRound([0, this.dims.width])
+      .paddingInner(0.1)
+      .domain(this.xDomain);
+  }
+
+  getYScale() {
+    return d3.scaleBand()
+      .rangeRound([this.dims.height, 0])
+      .paddingInner(0.1)
+      .domain(this.yDomain);
+  }
+
   getRects() {
     let rects = [];
 
-    this.results.d0Domain.map((d0, index0) => {
-      this.results.d1Domain.map((d1, index1) => {
+    this.xDomain.map((xVal) => {
+      this.yDomain.map((yVal) => {
         rects.push({
-          x: this.xScale(d0),
-          y: this.yScale(d1),
+          x: this.xScale(xVal),
+          y: this.yScale(yVal),
           rx: 3,
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
@@ -122,8 +181,7 @@ export class HeatMap extends BaseChart implements OnInit {
   }
 
   setColors() {
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'linear', this.valueDomain);
+    this.colorScale = generateColorScale(this.scheme, 'linear', this.valueDomain);
   }
 }

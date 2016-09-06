@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[heatMapCellSeries]',
@@ -19,7 +19,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
     />
   `
 })
-export class HeatCellSeries implements OnInit {
+export class HeatCellSeries implements OnInit, OnChanges {
   cells: any[];
 
   @Input() data;
@@ -31,24 +31,30 @@ export class HeatCellSeries implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.cells = this.getCells();
   }
 
   getCells() {
     let cells = [];
-
-    this.data.map((series, index0) => {
-      series.array.map((cell, index1) => {
-        let value = cell.vals[0].value;
-        let label = cell.vals[0].label[0];
-
+    this.data.map((row) => {
+      row.series.map((cell) => {
+        let value = cell.value;
+        let label = cell.name;
         cells.push({
-          x: this.xScale(label[0]),
-          y: this.yScale(label[1]),
+          x: this.xScale(row.name),
+          y: this.yScale(cell.name),
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
           fill: this.colors(value),
-          data: cell.vals[0],
+          data: value,
           tooltipText: `${label}: ${value}`
         });
       });
