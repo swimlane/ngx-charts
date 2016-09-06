@@ -1,8 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
-import { tickFormat } from '../common/tick-format.helper';
 import d3 from '../d3';
 
 @Component({
@@ -12,28 +11,27 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results.series[0]">
+      [legendData]="results">
       <svg:g [attr.transform]="transform" class="bar chart">
         <svg:g gridPanelSeries
-          [xScale]="x0Scale"
-          [yScale]="y0Scale"
-          [data]="results.series"
+          [xScale]="groupScale"
+          [yScale]="valueScale"
+          [data]="results"
           [dims]="dims"
           orient="vertical">
         </svg:g>
 
         <svg:g xAxis
           *ngIf="xAxis"
-          [xScale]="x0Scale"
+          [xScale]="groupScale"
           [dims]="dims"
-          [tickFormatting]="tickFormatting"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel">
         </svg:g>
 
         <svg:g yAxis
           *ngIf="yAxis"
-          [yScale]="y0Scale"
+          [yScale]="valueScale"
           [dims]="dims"
           showGridLines="true"
           [showLabel]="showYAxisLabel"
@@ -41,13 +39,13 @@ import d3 from '../d3';
         </svg:g>
 
         <svg:g
-          *ngFor="let series of results.series"
-          [attr.transform]="seriesTransform(series)">
+          *ngFor="let group of results"
+          [attr.transform]="groupTransform(group)">
           <svg:g seriesVertical
-            [xScale]="x1Scale"
-            [yScale]="y0Scale"
+            [xScale]="innerScale"
+            [yScale]="valueScale"
             [colors]="colors"
-            [series]="series"
+            [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
             (clickHandler)="click($event)"
@@ -57,13 +55,15 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class BarVertical2D extends BaseChart implements OnInit {
+export class BarVertical2D extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
-  x0Scale: any;
-  x1Scale: any;
-  y0Scale: any;
+  groupDomain: any[];
+  innerDomain: any[];
+  valuesDomain: any[];
+  groupScale: any;
+  innerScale: any;
+  valueScale: any;
   transform: string;
-  tickFormatting: Function;
   colors: Function;
 
   @Input() view;
@@ -84,35 +84,92 @@ export class BarVertical2D extends BaseChart implements OnInit {
   @Output() clickHandler = new EventEmitter();
 
   ngOnInit() {
-    let groupSpacing = 0.2;
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    if (this.scaleType === 'ordinal') {
-      this.x0Scale = d3.scaleBand()
-        .rangeRound([0, this.dims.width], groupSpacing)
-        .domain(this.results.d0Domain);
-    } else if (this.scaleType === 'time') {
-      this.x0Scale = d3.scaleTime()
-        .range([0, this.dims.width])
-        .domain(this.results.d0Domain);
-    }
+    this.groupDomain = this.getGroupDomain();
+    this.innerDomain = this.getInnerDomain();
+    this.valuesDomain = this.getValueDomain();
 
-    this.x1Scale = d3.scaleBand()
-      .rangeRound([0, this.x0Scale.bandwidth()], groupSpacing)
-      .domain(this.results.d1Domain);
-
-    this.y0Scale = d3.scaleLinear()
-      .range([this.dims.height, 0])
-      .domain([0, this.results.m0Domain[1]]);
+    this.groupScale = this.getGroupScale();
+    this.innerScale = this.getInnerScale();
+    this.valueScale = this.getValueScale();
 
     this.setColors();
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-    this.tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
   }
 
-  seriesTransform(series) {
-    return `translate(${this.x0Scale(series.name)}, 0)`;
+  getGroupScale() {
+    let spacing = 0.2;
+    return d3.scaleBand()
+      .rangeRound([0, this.dims.width])
+      .paddingInner(spacing)
+      .domain(this.groupDomain);
+  }
+
+  getInnerScale() {
+    let spacing = 0.2;
+    return d3.scaleBand()
+      .rangeRound([0, this.groupScale.bandwidth()])
+      .paddingInner(spacing)
+      .domain(this.innerDomain);
+  }
+
+  getValueScale() {
+    return d3.scaleLinear()
+      .range([this.dims.height, 0])
+      .domain(this.valuesDomain);
+  }
+
+  getGroupDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      if (!domain.includes(group.name)) {
+        domain.push(group.name);
+      }
+    }
+
+    return domain;
+  }
+
+  getInnerDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      for (let d of group.series) {
+        if (!domain.includes(d.name)) {
+          domain.push(d.name);
+        }
+      }
+    }
+
+    return domain;
+  }
+
+  getValueDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      for (let d of group.series) {
+        if (!domain.includes(d.value)) {
+          domain.push(d.value);
+        }
+      }
+    }
+
+    let min = Math.min(0, ...domain);
+    let max = Math.max(...domain);
+    return [min, max];
+  }
+
+  groupTransform(group) {
+    return `translate(${this.groupScale(group.name)}, 0)`;
   }
 
   click(data) {
@@ -120,9 +177,6 @@ export class BarVertical2D extends BaseChart implements OnInit {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
   }
 }

@@ -1,8 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
-import { tickFormat } from '../common/tick-format.helper';
 import d3 from '../d3';
 
 @Component({
@@ -12,19 +11,19 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results.legend">
+      [legendData]="results">
       <svg:g [attr.transform]="transform" class="bar chart">
         <svg:g gridPanelSeries
-          [xScale]="x0Scale"
-          [yScale]="y0Scale"
-          [data]="results.series"
+          [xScale]="valueScale"
+          [yScale]="groupScale"
+          [data]="results"
           [dims]="dims"
           orient="horizontal">
         </svg:g>
 
         <svg:g xAxis
           *ngIf="xAxis"
-          [xScale]="x0Scale"
+          [xScale]="valueScale"
           [dims]="dims"
           showGridLines="true"
           [showLabel]="showXAxisLabel"
@@ -33,21 +32,20 @@ import d3 from '../d3';
 
         <svg:g yAxis
           *ngIf="yAxis"
-          [yScale]="y0Scale"
+          [yScale]="groupScale"
           [dims]="dims"
-          [tickFormatting]="tickFormatting"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel">
         </svg:g>
 
         <svg:g
-          *ngFor="let series of results.series"
-          [attr.transform]="seriesTransform(series)">
+          *ngFor="let group of results"
+          [attr.transform]="groupTransform(group)">
           <svg:g seriesHorizontal
-            [xScale]="x0Scale"
-            [yScale]="y1Scale"
+            [xScale]="valueScale"
+            [yScale]="innerScale"
             [colors]="colors"
-            [series]="series"
+            [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
             (clickHandler)="click($event)"
@@ -58,13 +56,15 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class BarHorizontal2D extends BaseChart implements OnInit {
+export class BarHorizontal2D extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
-  x0Scale: any;
-  y0Scale: any;
-  y1Scale: any;
+  groupDomain: any[];
+  innerDomain: any[];
+  valuesDomain: any[];
+  groupScale: any;
+  innerScale: any;
+  valueScale: any;
   transform: string;
-  tickFormatting: Function;
   colors: Function;
 
   @Input() view;
@@ -83,30 +83,94 @@ export class BarHorizontal2D extends BaseChart implements OnInit {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
-    // let groupSpacing = 0.2; // unusued variable
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    ngOnInit() {
+      this.update();
+    }
 
-    this.x0Scale = d3.scaleLinear()
-      .range([0, this.dims.width])
-      .domain([0, this.results.m0Domain[1]]);
+    ngOnChanges() {
+      this.update();
+    }
 
-    this.y0Scale = d3.scaleBand()
-      .rangeRound([0, this.dims.height], 0.1)
-      .domain(this.results.d0Domain);
+    update() {
+      this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
-    this.y1Scale = d3.scaleBand()
-      .rangeRound([0, this.y0Scale.bandwidth()], 0.1)
-      .domain(this.results.d1Domain);
+      this.groupDomain = this.getGroupDomain();
+      this.innerDomain = this.getInnerDomain();
+      this.valuesDomain = this.getValueDomain();
 
-    this.setColors();
+      this.groupScale = this.getGroupScale();
+      this.innerScale = this.getInnerScale();
+      this.valueScale = this.getValueScale();
 
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-    this.tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
-  }
+      this.setColors();
 
-  seriesTransform(series) {
-    return `translate(0, ${this.y0Scale(series.name)})`;
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    }
+
+    getGroupScale() {
+      let spacing = 0.2;
+      return d3.scaleBand()
+        .rangeRound([this.dims.height, 0])
+        .paddingInner(spacing)
+        .domain(this.groupDomain);
+    }
+
+    getInnerScale() {
+      let spacing = 0.2;
+      return d3.scaleBand()
+        .rangeRound([0, this.groupScale.bandwidth()])
+        .paddingInner(spacing)
+        .domain(this.innerDomain);
+    }
+
+    getValueScale() {
+      return d3.scaleLinear()
+        .range([0, this.dims.width])
+        .domain(this.valuesDomain);
+    }
+
+    getGroupDomain() {
+      let domain = [];
+      for (let group of this.results) {
+        if (!domain.includes(group.name)) {
+          domain.push(group.name);
+        }
+      }
+
+      return domain;
+    }
+
+    getInnerDomain() {
+      let domain = [];
+      for (let group of this.results) {
+        for (let d of group.series) {
+          if (!domain.includes(d.name)) {
+            domain.push(d.name);
+          }
+        }
+      }
+
+      return domain;
+    }
+
+    getValueDomain() {
+      let domain = [];
+      for (let group of this.results) {
+        for (let d of group.series) {
+          if (!domain.includes(d.value)) {
+            domain.push(d.value);
+          }
+        }
+      }
+
+      let min = Math.min(0, ...domain);
+      let max = Math.max(...domain);
+      return [min, max];
+    }
+
+
+  groupTransform(group) {
+    return `translate(0, ${this.groupScale(group.name)})`;
   }
 
   click(data) {
@@ -114,9 +178,6 @@ export class BarHorizontal2D extends BaseChart implements OnInit {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d1Domain, this.customColors);
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
   }
 }
