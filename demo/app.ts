@@ -261,12 +261,19 @@ import './demo.scss';
         </select>
 
         <h3>Data</h3>
-        <label>
-          <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
-          Real-time
-        </label> <br />
+        <select>
+          <option>Country</option>
+        </select>
+        
         <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries'">{{multi | json}}</pre>
+
+        <div>
+          <label>
+            <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
+            Real-time
+          </label>
+        </div>
 
         <h3>Options</h3>
 
