@@ -86,6 +86,7 @@
     "@angular/common": "2.0.0-rc.6",
     "@angular/compiler": "2.0.0-rc.6",
     "@angular/core": "2.0.0-rc.6",
+    "@angular/forms": "2.0.0-rc.6",
     "@angular/platform-browser": "2.0.0-rc.6",
     "@angular/platform-browser-dynamic": "2.0.0-rc.6",
     "core-js": "2.4.1",

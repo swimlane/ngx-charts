@@ -10,7 +10,7 @@ import moment from 'moment';
       [path]="path"
       [stroke]="color"
     />
-    <text class="color">{{color}}</text>
+    <svg:text class="color">{{color}}</svg:text>
   `
 })
 export class LineSeries implements OnInit, OnChanges {

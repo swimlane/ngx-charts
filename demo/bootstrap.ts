@@ -1,12 +1,13 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { App } from './app';
 import { A2D3Module } from "../src/A2D3Module";
 
 @NgModule({
-  imports: [A2D3Module, BrowserModule],
+  imports: [A2D3Module, BrowserModule, FormsModule],
   declarations: [App],
   bootstrap: [App]
 })
