@@ -1,32 +1,34 @@
-import { Directive, Input, ElementRef, Renderer, OnInit, OnDestroy } from '@angular/core';
+import { Directive, Input, ElementRef, Renderer, ViewChild, ViewContainerRef, OnInit, OnDestroy } from '@angular/core';
 import { PositionHelper } from './position.helper';
 import { PopoverRegistry } from './popover-registry.service';
 import './popover.scss';
 
 @Directive({
-  selector: '[swPopover]'
+  selector: '[sw-popover]'
 })
 export class Popover implements OnInit, OnDestroy {
+  element: ElementRef;
+  renderer: Renderer;
+  mouseEnterListener: Function;
+  mouseLeaveListener: Function;
+  exitTimeout: any;
+  options: any;
+  popoverCssClass: any;
+  popoverPlain: any;
+  popoverId: any;
+  popover: any;
+  popoverRegistry: PopoverRegistry;
+
+  @ViewChild('parent', {read: ViewContainerRef})
+  parent: ViewContainerRef;
+
   @Input() popoverText;
   @Input() popoverTemplate;
   @Input() popoverPlacement = 'top';
   @Input() popoverAlignment = 'center';
   @Input() popoverGroup;
-  @Input() popoverSpacing = '0';
+  @Input() popoverSpacing = 0;
   @Input() showCaret = true;
-
-  element: ElementRef;
-  renderer: Renderer;
-  popover: any;
-  mouseLeaveListener: any;
-  mouseEnterListener: any;
-  options: any;
-  placement: any;
-  popoverId: any;
-  popoverRegistry: PopoverRegistry;
-  exitTimeout: any;
-  popoverPlain: any;
-  popoverCssClass: any;
 
   constructor(element: ElementRef, renderer: Renderer) {
     this.element = element.nativeElement;
@@ -56,6 +58,8 @@ export class Popover implements OnInit, OnDestroy {
    * Displays the popover on the page
    */
   display() {
+    // TODO: Do not use angular.element
+
     // this.options = {
     //   text: this.popoverText,
     //   cssClass: this.popoverCssClass,
@@ -64,7 +68,7 @@ export class Popover implements OnInit, OnDestroy {
     //   placement: this.popoverPlacement || 'right',
     //   alignment: this.popoverAlignment  || 'center',
     //   group: this.popoverGroup,
-    //   spacing: parseInt(this.popoverSpacing) || 0,
+    //   spacing: parseInt(this.popoverSpacing.toString()) || 0,
     //   showCaret: this.toBoolean(this.popoverPlain || true)
     // };
     //
@@ -94,6 +98,7 @@ export class Popover implements OnInit, OnDestroy {
     //   this.checkFlip(this.element, this.popover, this.options);
     //   this.positionPopover(this.element, this.popover, this.options);
     //   this.popoverRegistry.add(this.popoverId, {element: this.element, popover: this.popover, group: this.options.group});
+    //
     // }
   };
 
@@ -115,7 +120,7 @@ export class Popover implements OnInit, OnDestroy {
    */
   checkFlip(triggerElement, popover, options) {
     var elDimensions = triggerElement.getBoundingClientRect(),
-      popoverDimensions = popover[0].getBoundingClientRect();
+        popoverDimensions = popover[0].getBoundingClientRect();
 
     if (PositionHelper.shouldFlip(elDimensions, popoverDimensions, options.placement, options.alignment, options.spacing)) {
       if (options.placement === 'right') {
@@ -138,8 +143,8 @@ export class Popover implements OnInit, OnDestroy {
    */
   positionPopover(triggerElement, popover, options) {
     var elDimensions = triggerElement.getBoundingClientRect(),
-      popoverDimensions = popover[0].getBoundingClientRect(),
-      top, left;
+        popoverDimensions = popover[0].getBoundingClientRect(),
+        top, left;
 
     if (options.placement === 'right') {
       left = elDimensions.left + elDimensions.width + options.spacing;
@@ -167,7 +172,7 @@ export class Popover implements OnInit, OnDestroy {
       left: left + 'px'
     });
 
-    if (this.options.showCaret) {
+    if(this.options.showCaret) {
       this.addCaret(this.popover, elDimensions, popoverDimensions);
     }
 
@@ -181,6 +186,7 @@ export class Popover implements OnInit, OnDestroy {
    * @param {object} popoverDimensions
    */
   addCaret(popoverEl, elDimensions, popoverDimensions) {
+    // TODO: do not use angular.element
     // if (!popoverEl){
     //   return;
     // }
@@ -205,7 +211,7 @@ export class Popover implements OnInit, OnDestroy {
     //     popoverDimensions, caretDimensions, this.options.alignment);
     // }
     //
-    // if (this.placement === 'bottom'){
+    // if (this.options.placement === 'bottom'){
     //   top = -8;
     //   left = PositionHelper.calculateHorizontalCaret(elDimensions,
     //     popoverDimensions, caretDimensions, this.options.alignment);

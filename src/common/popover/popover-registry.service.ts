@@ -1,6 +1,5 @@
 /**
  * Registering to deal with popovers
- * @param {function} $animate
  */
 export class PopoverRegistry {
   private static _instance: PopoverRegistry = new PopoverRegistry();
