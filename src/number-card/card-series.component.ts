@@ -22,7 +22,7 @@ export interface CardModel {
       [color]="c.color"
       [data]="c.data"
       (clickHandler)="click($event)"
-      swPopover
+      sw-popover
       [popoverSpacing]="15"
       [popoverText]="c.tooltipText"
       [popoverGroup]="'charts'"

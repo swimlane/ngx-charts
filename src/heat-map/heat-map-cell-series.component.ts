@@ -11,7 +11,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
       [fill]="c.fill"
       [data]="c.data"
       (clickHandler)="click($event)"
-      swPopover
+      sw-popover
       [popoverSpacing]="15"
       [popoverText]="c.tooltipText"
       [popoverGroup]="'charts'"

@@ -16,7 +16,7 @@ import * as moment from 'moment';
       (clickHandler)="click($event)"
       [gradient]="gradient"
 
-      swPopover
+      sw-popover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
       [popoverGroup]="'charts'">

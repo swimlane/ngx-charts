@@ -27,7 +27,7 @@ import d3 from '../d3';
         [max]="max"
         [explodeSlices]="explodeSlices"
         (clickHandler)="click($event)"
-        swPopover
+        sw-popover
         [popoverSpacing]="15"
         [popoverText]="tooltipText(arc)"
         [popoverGroup]="'charts'"

@@ -15,7 +15,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
       (clickHandler)="click($event)"
       [gradient]="gradient"
 
-      swPopover
+      sw-popover
       [popoverSpacing]="15"
       [popoverText]="bar.tooltipText"
       [popoverGroup]="'charts'">
