@@ -369,7 +369,7 @@ export class App implements OnInit {
   single: any[];
   multi: any[];
 
-  view: any[] = [900, 200];
+  view: any[] = [900, 400];
 
   // options
   showXAxis = true;

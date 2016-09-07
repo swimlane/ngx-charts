@@ -7,7 +7,11 @@
     "start": "webpack-dev-server --progress --watch --inline",
     "test": "karma start",
     "test:watch": "npm run test -- --auto-watch --no-single-run",
-    "build": "webpack --progress --profile"
+    "build": "webpack --progress --profile",
+    "build:release": "NODE_ENV=production npm run build",
+    "release": "npm run build:release && npm run deploy-docs",
+    "deploy-docs": "node ./tasks/deploy-gh-page.js"
+
   },
   "repository": {
     "type": "git",
@@ -60,6 +64,7 @@
     "clean-webpack-plugin": "0.1.10",
     "codelyzer": "0.0.28",
     "css-loader": "0.24.0",
+    "gh-pages": "^0.11.0",
     "html-webpack-plugin": "2.22.0",
     "istanbul-instrumenter-loader": "0.2.0",
     "jasmine-core": "2.4.1",
