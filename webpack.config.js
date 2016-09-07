@@ -34,7 +34,8 @@ module.exports = {
     preLoaders: [
       {
         test: /\.js$/,
-        loader: 'source-map'
+        loader: 'source-map',
+        exclude: /(node_modules)/
       },
       {
         test: /\.ts$/,
@@ -49,7 +50,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css?sourceMap', 'postcss?sourceMap', 'sass?sourceMap']
+        loaders: [
+          'style',
+          'css?sourceMap',
+          'postcss?sourceMap',
+          'sass?sourceMap'
+        ]
       }
     ]
   },

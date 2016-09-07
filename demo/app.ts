@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FORM_DIRECTIVES } from '@angular/common';
 import { single, multi, countries } from './data';
 import chartGroups from './chartTypes';
 import '../src/a2d3.scss';
@@ -7,7 +6,6 @@ import './demo.scss';
 
 @Component({
   selector: 'app',
-  directives: [FORM_DIRECTIVES],
   template: `
     <div class="content">
 
@@ -388,7 +386,7 @@ export class App implements OnInit {
   ngOnInit() {
     this.selectChart(this.chartType);
 
-    setInterval(this.updateData.bind(this), 1000);
+    setInterval(this.updateData.bind(this), 3000);
   }
 
   updateData() {
@@ -400,7 +398,7 @@ export class App implements OnInit {
     let add = Math.random() < 0.5;
     let remove = Math.random() < 0.5;
 
-    if (remove) {
+    if (remove && this.single.length > 1) {
       let index = Math.floor(Math.random() * this.single.length);
       this.single.splice(index, 1);
       this.single = [ ...this.single ];
