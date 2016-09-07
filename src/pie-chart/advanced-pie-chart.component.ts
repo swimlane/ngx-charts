@@ -100,6 +100,7 @@ export class AdvancedPieChart extends BaseChart implements OnInit, OnChanges {
   }
 
   update() {
+    super.update();
     this.dims = calculateViewDimensions([this.view[0] * 4 / 12.0, this.view[1]], this.margin, false, false, false);
     this.domain = this.getDomain();
     this.setColors();

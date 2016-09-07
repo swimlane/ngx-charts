@@ -57,6 +57,7 @@ export class PieChart extends BaseChart implements OnInit, OnChanges {
   }
 
   update() {
+    super.update();
     let dims = calculateViewDimensions(this.view, this.margin, false, false, this.legend, 9);
     let xOffset = this.margin[3] + dims.width / 2;
     let yOffset = this.margin[0] + dims.height / 2;

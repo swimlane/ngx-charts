@@ -142,6 +142,7 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
   }
 
   update() {
+    super.update();
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     if (this.timeline) {

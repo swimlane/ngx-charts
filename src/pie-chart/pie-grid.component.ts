@@ -83,6 +83,7 @@ export class PieGrid extends BaseChart implements OnInit, OnChanges {
   }
 
   update() {
+    super.update();
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
     this.domain = this.getDomain();
 

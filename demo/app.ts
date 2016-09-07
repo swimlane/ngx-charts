@@ -402,7 +402,7 @@ export class App implements OnInit {
 
     if (remove) {
       let index = Math.floor(Math.random() * this.single.length);
-      this.single.splice(index, 1)
+      this.single.splice(index, 1);
       this.single = [ ...this.single ];
     }
 
@@ -411,7 +411,7 @@ export class App implements OnInit {
         name: country,
         value: Math.floor(1000000 + Math.random() * 20000000)
       };
-      this.single = [ ...this.single, entry ]
+      this.single = [ ...this.single, entry ];
     }
   }
 

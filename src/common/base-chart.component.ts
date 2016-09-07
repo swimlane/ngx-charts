@@ -1,11 +1,36 @@
-import { OnChanges } from "@angular/core";
+export abstract class BaseChart {
+  results: any[];
 
-export abstract class BaseChart implements OnChanges {
-  ngOnChanges(changes) {
-
+  update() {
+    this.results = this.cloneData(this.results);
   }
 
-  abstract update()
+  // Clones the data into a new object
+  cloneData(data) {
+    let results = [];
+
+    for (let item of data){
+      let copy = {
+        name: item['name']
+      };
+
+      if (item['value']) {
+        copy['value'] = item['value'];
+      };
+
+      if (item['series']) {
+        copy['series'] = [];
+        for (let seriesItem of item['series']){
+          let seriesItemCopy = Object.assign({}, seriesItem);
+          copy['series'].push(seriesItemCopy);
+        }
+      }
+
+      results.push(copy);
+    }
+
+    return results;
+  }
 
   abstract setColors()
 

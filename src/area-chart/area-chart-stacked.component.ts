@@ -137,6 +137,7 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
   }
 
   update() {
+    super.update();
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     if (this.timeline) {
@@ -148,7 +149,6 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
-
 
     // modifies results in place
     for (let i = 0; i < this.xDomain.length; i++) {

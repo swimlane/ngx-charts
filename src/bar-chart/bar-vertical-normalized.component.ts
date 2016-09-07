@@ -85,6 +85,7 @@ export class BarVerticalNormalized extends BaseChart implements OnInit, OnChange
   }
 
   update() {
+    super.update();
     this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     this.groupDomain = this.getGroupDomain();
