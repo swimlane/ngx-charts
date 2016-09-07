@@ -1,4 +1,6 @@
 ﻿.a2d3 {
+  float: left;
+
   &.bar, &.cell, &.arc, &.card {
     &:hover {
       opacity: 0.8;
@@ -116,6 +118,8 @@
 }
 
 .legend {
+  display: inline-block;
+  float: left;
 
   .legend-title {
     color: #76818a;
@@ -138,7 +142,6 @@
     text-align: left;
     float: left;
     width: 100%;
-    background: #192024;
     border-radius: 3px;
   }
 

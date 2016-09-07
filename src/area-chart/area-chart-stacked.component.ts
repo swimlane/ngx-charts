@@ -13,7 +13,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results">
+      [legendData]="seriesDomain">
 
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
@@ -99,6 +99,7 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
   scaleType: string;
   xDomain: any[];
   yDomain: any[];
+  seriesDomain: any;
   xScale: any;
   yScale: any;
   transform: string;
@@ -146,6 +147,7 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
 
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
@@ -217,6 +219,10 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
     let min = Math.min(0, ...domain);
     let max = Math.max(...domain);
     return [min, max];
+  }
+
+  getSeriesDomain() {
+    return this.results.map(d => d.name);
   }
 
   getXScale() {
@@ -294,7 +300,7 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.xDomain, this.customColors);
+    this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
 }

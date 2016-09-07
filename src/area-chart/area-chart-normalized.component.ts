@@ -13,7 +13,7 @@ import ObjectId from "../utils/object-id";
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results">
+      [legendData]="seriesDomain">
 
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
@@ -99,6 +99,7 @@ export class AreaChartNormalized extends BaseChart implements OnInit, OnChanges 
   scaleType: string;
   xDomain: any[];
   yDomain: any[];
+  seriesDomain: any;
   xScale: any;
   yScale: any;
   transform: string;
@@ -142,11 +143,10 @@ export class AreaChartNormalized extends BaseChart implements OnInit, OnChanges 
 
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
-
-
 
     // modifies results in place
     for (let i = 0; i < this.xDomain.length; i++) {
@@ -216,6 +216,10 @@ export class AreaChartNormalized extends BaseChart implements OnInit, OnChanges 
     return [0, 100];
   }
 
+  getSeriesDomain() {
+    return this.results.map(d => d.name);
+  }
+
   getXScale() {
     let scale;
     if (this.scaleType === 'time') {
@@ -277,7 +281,7 @@ export class AreaChartNormalized extends BaseChart implements OnInit, OnChanges 
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.xDomain, this.customColors);
+    this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
 }

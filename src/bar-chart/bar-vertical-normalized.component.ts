@@ -11,9 +11,8 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results">
+      [legendData]="innerDomain">
       <svg:g [attr.transform]="transform" class="bar chart">
-
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"

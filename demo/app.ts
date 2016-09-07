@@ -363,7 +363,7 @@ export class App implements OnInit {
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = false;
+  showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
@@ -426,10 +426,10 @@ export class App implements OnInit {
       let multiEntry = {
         name: country,
         series: [{
-          name: 2010,
+          name: "2010",
           value: Math.floor(1000000 + Math.random() * 20000000)
         }, {
-          name: 2011,
+          name: "2011",
           value: Math.floor(1000000 + Math.random() * 20000000)
         }]
       };

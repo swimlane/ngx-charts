@@ -13,7 +13,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="xDomain">
+      [legendData]="seriesDomain">
 
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
@@ -95,6 +95,7 @@ export class AreaChart extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
   xDomain: any;
   yDomain: any;
+  seriesDomain: any;
   xScale: any;
   yScale: any;
   transform: string;
@@ -141,6 +142,7 @@ export class AreaChart extends BaseChart implements OnInit, OnChanges {
 
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
 
     // TODO: should sorting happen here?
     // this.series = this.results.series[0].array.sort((a, b) => {
@@ -205,6 +207,10 @@ export class AreaChart extends BaseChart implements OnInit, OnChanges {
     return [min, max];
   }
 
+  getSeriesDomain() {
+    return this.results.map(d => d.name);
+  }
+
   getXScale() {
     let scale;
     if (this.scaleType === 'time') {
@@ -265,7 +271,7 @@ export class AreaChart extends BaseChart implements OnInit, OnChanges {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', ['Area'], this.customColors);
+    this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
 }

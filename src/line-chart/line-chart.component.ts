@@ -13,7 +13,7 @@ import moment from 'moment';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="series">
+      [legendData]="seriesDomain">
 
       <svg:defs>
         <svg:clipPath id="clipPathId">
@@ -106,6 +106,7 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
   dims: ViewDimensions;
   xDomain: any;
   yDomain: any;
+  seriesDomain: any;
   yScale: any;
   xScale: any;
   colors: Function;
@@ -151,6 +152,7 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
 
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
 
     // TODO: should sorting happen here?
     // this.series = this.results.series[0].array.sort((a, b) => {
@@ -230,6 +232,9 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
     return [min, max];
   }
 
+  getSeriesDomain() {
+    return this.results.map(d => d.name);
+  }
 
   getXScale() {
     let scale;
@@ -291,6 +296,6 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
   }
 
   setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', ['Line'], this.customColors);
+    this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'chart',
@@ -23,17 +23,18 @@ import { Component, Input, OnInit } from '@angular/core';
       *ngIf="legend && legendType === 'legend'"
       class="legend"
       [data]="legendData"
-      [title]="title"
+      [title]="legendTitle"
       [colors]="colors"
       [height]="view[1]">
     </legend>
 `
 })
-export class Chart implements OnInit {
+export class Chart implements OnInit, OnChanges {
   @Input() view;
   @Input() legend = false;
   @Input() data;
   @Input() legendData;
+  @Input() legendTitle = 'Legend';
   @Input() colors;
 
   chartWidth: any;
@@ -42,17 +43,18 @@ export class Chart implements OnInit {
   legendType: any;
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.legendWidth = 0;
+
     if (this.legend) {
       this.legendType = this.getLegendType();
-
-      if (this.legendData.label) {
-        this.title = this.legendData.label();
-      } else if (this.legendData[0] && this.legendData[0].label) {
-        this.title = this.legendData[0].label();
-      } else {
-        this.title = 'Color Scale';
-      }
 
       if (this.legendType === 'scaleLegend') {
         this.legendWidth = 1;

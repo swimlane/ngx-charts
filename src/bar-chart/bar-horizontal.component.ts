@@ -12,7 +12,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="view"
       [colors]="colors"
-      [legendData]="results">
+      [legendData]="yDomain">
       <svg:g [attr.transform]="transform" class="bar chart">
         <svg:g xAxis
           *ngIf="xAxis"

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { trimLabel } from './trim-label.helper';
 
 @Component({
@@ -30,7 +30,7 @@ import { trimLabel } from './trim-label.helper';
     </div>
   `
 })
-export class Legend implements OnInit {
+export class Legend implements OnInit, OnChanges {
   @Input() data;
   @Input() title;
   @Input() colors;
@@ -39,37 +39,19 @@ export class Legend implements OnInit {
   legendItems: any;
 
   ngOnInit() {
+    this.update();
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.legendItems = this.getLegendItems();
   }
 
   getLegendItems() {
-    let uniques = {};
-
-    let uniqueItems = this.data.array.filter((d) => {
-      let label;
-      if (d.vals) {
-        label = d.vals[0].formattedLabel[0];
-      } else {
-        label = d.name;
-      }
-
-      if (uniques[label]) {
-        return false;
-      }
-
-      uniques[label] = true;
-      return true;
-    });
-
-    return uniqueItems.map((item, index) => {
-      let label;
-
-      if (item.vals) {
-        label = item.vals[0].formattedLabel[0];
-      } else {
-        label = item.name;
-      }
-
+    return this.data.map((label, index) => {
       return {
         className: 'legend-label',
         label: label,
