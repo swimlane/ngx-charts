@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import d3 from '../d3';
-import moment = require("moment");
+import moment from 'moment';
 
 @Component({
   selector: 'g[lineSeries]',
@@ -10,11 +10,11 @@ import moment = require("moment");
       [path]="path"
       [stroke]="color"
     />
-
     <text class="color">{{color}}</text>
   `
 })
 export class LineSeries implements OnInit, OnChanges {
+
   path: string;
 
   @Input() data;

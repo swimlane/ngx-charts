@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { FORM_DIRECTIVES } from '@angular/common';
 import { single, multi } from './data';
 import '../src/a2d3.scss';
 import './demo.scss';
 
 @Component({
   selector: 'app',
-  directives: [FORM_DIRECTIVES],
   template: `
     <div class="content">
       <h3>Bar chart</h3>
