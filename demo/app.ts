@@ -24,7 +24,7 @@ import './demo.scss';
 
       <bar-vertical
         *ngIf="chartType === 'bar-vertical'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="single"
         [gradient]="gradient"
@@ -39,7 +39,7 @@ import './demo.scss';
 
       <bar-horizontal
         *ngIf="chartType === 'bar-horizontal'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="single"
         [gradient]="gradient"
@@ -55,7 +55,7 @@ import './demo.scss';
 
       <bar-vertical-2d
         *ngIf="chartType === 'bar-vertical-2d'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [gradient]="gradient"
@@ -70,7 +70,7 @@ import './demo.scss';
 
       <bar-horizontal-2d
         *ngIf="chartType === 'bar-horizontal-2d'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [gradient]="gradient"
@@ -85,7 +85,7 @@ import './demo.scss';
 
       <bar-vertical-stacked
         *ngIf="chartType === 'bar-vertical-stacked'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [gradient]="gradient"
@@ -100,7 +100,7 @@ import './demo.scss';
 
       <bar-horizontal-stacked
         *ngIf="chartType === 'bar-horizontal-stacked'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [gradient]="gradient"
@@ -115,7 +115,7 @@ import './demo.scss';
 
       <bar-vertical-normalized
         *ngIf="chartType === 'bar-vertical-normalized'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [gradient]="gradient"
@@ -130,7 +130,7 @@ import './demo.scss';
 
       <bar-horizontal-normalized
         *ngIf="chartType === 'bar-horizontal-normalized'"
-        [view]="[700,200]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [gradient]="gradient"
@@ -145,7 +145,7 @@ import './demo.scss';
 
       <pie-chart
         *ngIf="chartType === 'pie-chart'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="single"
         [legend]="showLegend"
@@ -157,7 +157,7 @@ import './demo.scss';
 
       <advanced-pie-chart
         *ngIf="chartType === 'advanced-pie-chart'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="single"
         [gradient]="gradient">
@@ -165,14 +165,14 @@ import './demo.scss';
 
       <pie-grid
         *ngIf="chartType === 'pie-grid'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="single">
       </pie-grid>
 
       <line-chart
         *ngIf="chartType === 'line-chart'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [legend]="showLegend"
@@ -188,7 +188,7 @@ import './demo.scss';
 
       <area-chart
         *ngIf="chartType === 'area-chart'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [legend]="showLegend"
@@ -204,7 +204,7 @@ import './demo.scss';
 
       <area-chart-stacked
         *ngIf="chartType === 'area-chart-stacked'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [legend]="showLegend"
@@ -219,7 +219,7 @@ import './demo.scss';
 
       <area-chart-normalized
         *ngIf="chartType === 'area-chart-normalized'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [legend]="showLegend"
@@ -234,7 +234,7 @@ import './demo.scss';
 
       <heat-map
         *ngIf="chartType === 'heat-map'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="multi"
         [legend]="showLegend"
@@ -249,7 +249,7 @@ import './demo.scss';
 
       <number-card
         *ngIf="chartType === 'number-card'"
-        [view]="[700,300]"
+        [view]="view"
         [scheme]="colorScheme"
         [results]="single">
       </number-card>
@@ -357,6 +357,8 @@ export class App implements OnInit {
   single: any[];
   multi: any[];
 
+  view: any[] = [700, 400];
+
   // options
   showXAxis = true;
   showYAxis = true;
@@ -386,7 +388,7 @@ export class App implements OnInit {
   ngOnInit() {
     this.selectChart(this.chartType);
 
-    setInterval(this.updateData.bind(this), 3000);
+    setInterval(this.updateData.bind(this), 2000);
   }
 
   updateData() {
@@ -395,21 +397,44 @@ export class App implements OnInit {
     }
 
     let country = this.countries[Math.floor(Math.random() * this.countries.length)];
-    let add = Math.random() < 0.5;
+    let add = Math.random() < 0.7;
     let remove = Math.random() < 0.5;
 
-    if (remove && this.single.length > 1) {
-      let index = Math.floor(Math.random() * this.single.length);
-      this.single.splice(index, 1);
-      this.single = [ ...this.single ];
+    if (remove) {
+      if (this.single.length > 1) {
+        let index = Math.floor(Math.random() * this.single.length);
+        this.single.splice(index, 1);
+        this.single = [ ...this.single ];
+      }
+
+      if (this.multi.length > 1) {
+        let index = Math.floor(Math.random() * this.multi.length);
+        this.multi.splice(index, 1);
+        this.multi = [ ...this.multi ];
+      }
     }
 
     if (add) {
+      // single
       let entry = {
         name: country,
         value: Math.floor(1000000 + Math.random() * 20000000)
       };
       this.single = [ ...this.single, entry ];
+
+      // multi
+      let multiEntry = {
+        name: country,
+        series: [{
+          name: 2010,
+          value: Math.floor(1000000 + Math.random() * 20000000)
+        }, {
+          name: 2011,
+          value: Math.floor(1000000 + Math.random() * 20000000)
+        }]
+      };
+
+      this.multi = [ ...this.multi, multiEntry ];
     }
   }
 
