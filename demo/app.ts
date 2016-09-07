@@ -264,7 +264,7 @@ import './demo.scss';
         <select>
           <option>Country</option>
         </select>
-        
+
         <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries'">{{multi | json}}</pre>
 
@@ -369,7 +369,7 @@ export class App implements OnInit {
   single: any[];
   multi: any[];
 
-  view: any[] = [700, 400];
+  view: any[] = [900, 200];
 
   // options
   showXAxis = true;

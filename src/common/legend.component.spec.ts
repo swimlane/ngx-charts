@@ -10,28 +10,7 @@ import { CommonModule } from './common.module';
 import {colorHelper} from '../utils/color-sets';
 
 // some test data (includes just enought data to run the tests)
-let seriesData = {
-  array: [
-    {
-      "vals": [
-        {
-          "formattedLabel": [
-            'complete'
-          ]
-        }
-      ]
-    },
-    {
-      "vals": [
-        {
-          "formattedLabel": [
-            "not complete"
-          ]
-        }
-      ]
-    }
-  ]
-};
+let seriesData = ['complete', 'not complete'];
 
 @Component({
   selector: 'test-component',
@@ -103,15 +82,7 @@ describe('<legend>', () => {
   it('should trim long labels', async(() => {
     TestBed.compileComponents().then(() => {
       let fixture = TestBed.createComponent(TestComponent);
-      fixture.componentInstance.seriesData = {
-        array: [{
-          "vals": [{
-            "formattedLabel": [
-              'a very long label that is trimmed'
-            ]
-          }]
-        }]
-      };
+      fixture.componentInstance.seriesData = ['a very long label that is trimmed'];
       fixture.detectChanges();
 
       let labelsElement = fixture.debugElement.nativeElement.querySelector('.legend-labels');
