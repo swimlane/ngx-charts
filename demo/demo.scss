@@ -12,4 +12,14 @@
   background: #eee;
   text-align: left;
   padding: 20px;
+
+  pre {
+    background: #333;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1em;
+    max-height: 400px;
+    overflow: auto;
+    padding: 15px;
+  }
 }
