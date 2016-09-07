@@ -9,7 +9,8 @@ import d3 from '../d3';
       (click)="click()">
       <svg:rect
         class="card"
-        fill="#666"
+        [style.fill]="color"
+        [style.opacity]="0.3"
         style="cursor: pointer; stroke-width: 2px; stroke: #192024;"
         [attr.width]="cardWidth"
         [attr.height]="cardHeight"

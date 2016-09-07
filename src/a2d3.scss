@@ -62,49 +62,6 @@
   }
 }
 
-.mini-chart {
-  transform: scale(0.25, 0.25);
-  transform-origin: 100% 100%;
-  position: fixed;
-  width: 600px;
-  height: 430px;
-  z-index: 1000;
-  opacity: 0.7;
-  right: 25px;
-  bottom: 50px;
-  background: #21292C;
-
-  &:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
-
-  .stats-chart-container {
-    pointer-events: none;
-  }
-}
-
-// Animations
-.mini-chart.ng-enter, .mini-chart.ng-leave {
-  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-}
-
-.mini-chart.ng-enter {
-  bottom: -100%;
-}
-
-.mini-chart.ng-leave.ng-leave-active {
-  bottom: -100%;
-}
-
-.mini-chart.ng-leave {
-  bottom: 60px;
-}
-
-.mini-chart.ng-enter.ng-enter-active {
-  bottom: 60px;
-}
-
 .brush {
   .background {
     visibility: visible !important;
@@ -125,6 +82,8 @@
     color: #76818a;
     margin-left: 10px;
     margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
   }
 
   ul, li {
@@ -188,15 +147,18 @@
   }
 }
 
+.advanced-pie {
+  float: left;
+}
+
 .advanced-pie-legend {
-  color: white;
+  float: left;
   .total-value {
-    font-size: 48px
+    font-size: 36px
   }
   .total-label {
-    font-size: 32px;
+    font-size: 24px;
     margin-bottom: 19px;
-    margin-top: -18px;
   }
 
   .legend-items-container {
@@ -211,7 +173,7 @@
         display: inline-block;
 
         .item-value {
-          font-size: 32px;
+          font-size: 24px;
           margin-top: -6px;
           margin-left: 11px;
         }

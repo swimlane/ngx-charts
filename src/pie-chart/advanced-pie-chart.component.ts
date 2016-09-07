@@ -13,60 +13,56 @@ export interface LegendItem {
 @Component({
   selector: 'advanced-pie-chart',
   template: `
-    <div class="row"
+    <div class="advanced-pie"
+      [style.width]="dims.width"
       [style.height]="view[1]">
 
-      <div class="col-md-4"
-        [style.height]="view[1]">
+      <chart
+        [colors]="colors"
+        [view]="[dims.width, dims.height]">
 
-        <chart
-          [colors]="colors"
-          [view]="view">
-
-          <svg:g
-            [attr.transform]="transform"
-            class="pie chart">
-            <svg:g pieSeries
-              [colors]="colors"
-              [showLabels]="labels"
-              [series]="results"
-              [innerRadius]="innerRadius"
-              [outerRadius]="outerRadius"
-              [gradient]="gradient"
-              (clickHandler)="click($event)">
-            </svg:g>
+        <svg:g
+          [attr.transform]="transform"
+          class="pie chart">
+          <svg:g pieSeries
+            [colors]="colors"
+            [showLabels]="labels"
+            [series]="results"
+            [innerRadius]="innerRadius"
+            [outerRadius]="outerRadius"
+            [gradient]="gradient"
+            (clickHandler)="click($event)">
           </svg:g>
-        </chart>
-      </div>
-
-      <div class="col-md-8">
-        <div class="advanced-pie-legend"
-          [style.margin-top]="(view[1] - 215)/2">
-
-          <div class="total-value">
-            {{roundedTotal}}
-          </div>
-          <div class="total-label">
-            {{totalLabel}}
-          </div>
-
-          <div class="legend-items-container">
-            <div class="legend-items">
-              <div *ngFor="let legendItem of legendItems" class="legend-item">
-                <div class="item-color"
-                  [style.background]="colors(legendItem.label)">
-                </div>
-                <div class="item-value">{{legendItem.value}}</div>
-                <div class="item-label">{{legendItem.label}}</div>
-                <div class="item-percent">{{legendItem.percentage}}%</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
+        </svg:g>
+      </chart>
     </div>
 
+    <div [style.width]="view[0] - dims.width">
+      <div class="advanced-pie-legend"
+        [style.margin-top]="(view[1] - 215)/2">
+
+        <div class="total-value">
+          {{roundedTotal}}
+        </div>
+        <div class="total-label">
+          {{totalLabel}}
+        </div>
+
+        <div class="legend-items-container">
+          <div class="legend-items">
+            <div *ngFor="let legendItem of legendItems" class="legend-item">
+              <div class="item-color"
+                [style.background]="colors(legendItem.label)">
+              </div>
+              <div class="item-value">{{legendItem.value}}</div>
+              <div class="item-label">{{legendItem.label}}</div>
+              <div class="item-percent">{{legendItem.percentage}}%</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   `
 })
 export class AdvancedPieChart extends BaseChart implements OnInit, OnChanges {
