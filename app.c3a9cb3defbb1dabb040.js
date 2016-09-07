@@ -5664,7 +5664,7 @@ var App = (function () {
     function App() {
         this.chartType = 'bar-vertical';
         this.realTimeData = false;
-        this.view = [900, 200];
+        this.view = [900, 400];
         this.showXAxis = true;
         this.showYAxis = true;
         this.gradient = false;
@@ -13757,4 +13757,4 @@ var EventEmitter = (function (_super) {
 /***/ }
 
 },[1096]);
-//# sourceMappingURL=app.7b7321182b0303359d43.map
+//# sourceMappingURL=app.c3a9cb3defbb1dabb040.map
