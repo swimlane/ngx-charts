@@ -23,6 +23,9 @@
     "outDir": "dist",
     "baseUrl": "src"
   },
+  "files": [
+    "src/ng2d3.ts"
+  ],
   "exclude": [
     "node_modules",
     "*.spec.ts"

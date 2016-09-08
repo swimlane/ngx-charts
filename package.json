@@ -2,7 +2,7 @@
   "name": "ng2d3",
   "version": "1.0.0",
   "description": "Angular2 + D3 Charting Library",
-  "main": "index.js",
+  "main": "release/ng2d3.js",
   "scripts": {
     "clean": "npm-run-all -p clean:*",
       "clean:dist": "rimraf dist",
@@ -16,7 +16,7 @@
     "build": "webpack --progress --profile",
       "build:release": "NODE_ENV=production npm run build",
 
-    "release": "npm-run-all -s clean:* release:css release:ts -p release:replace release:build:* -s release:minify",
+    "release": "npm-run-all -s clean:* release:css release:ts -p release:build:* -s release:minify",
       "release:ts": "tsc --outDir release",
       "release:build:umd": "rollup -c -f umd -o release/ng2d3.umd.js",
       "release:build:cjs": "rollup -c -f cjs -o release/ng2d3.cjs.js",

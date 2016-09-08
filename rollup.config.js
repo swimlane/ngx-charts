@@ -12,7 +12,7 @@ var banner =
  */`;
 
 module.exports = {
-  entry: './src/module.ts',
+  entry: './src/ng2d3.ts',
   sourceMap: true,
   moduleId: 'ng2d3',
   moduleName: 'ng2d3',
@@ -43,7 +43,9 @@ module.exports = {
     'rxjs/observable/PromiseObservable': 'Rx',
     'rxjs/operator/toPromise': 'Rx.Observable.prototype',
     'rxjs/Observable': 'Rx',
-    'rxjs/Rx': 'Rx'
+    'rxjs/Rx': 'Rx',
+
+    'moment': 'moment'
   },
 
   plugins: [
