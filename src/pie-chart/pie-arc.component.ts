@@ -46,6 +46,7 @@ export class PieArc implements OnInit {
   @Input() value;
   @Input() total;
   @Input() max;
+  @Input() data;
   @Input() explodeSlices;
   @Input() gradient: boolean = false;
 
@@ -110,8 +111,8 @@ export class PieArc implements OnInit {
       });
   }
 
-  click(data) {
-    this.clickHandler.emit(data);
+  click() {
+    this.clickHandler.emit(this.data);
   }
 
 }

@@ -24,6 +24,7 @@ import d3 from '../d3';
         [fill]="color(arc)"
         [total]="total"
         [value]="arc.data.value"
+        [data]="arc.data"
         [max]="max"
         [explodeSlices]="explodeSlices"
         (clickHandler)="click($event)"

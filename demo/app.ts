@@ -22,7 +22,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-vertical>
 
           <bar-horizontal
@@ -37,7 +38,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-horizontal>
 
           <bar-vertical-2d
@@ -52,7 +54,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-vertical-2d>
 
           <bar-horizontal-2d
@@ -67,7 +70,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-horizontal-2d>
 
           <bar-vertical-stacked
@@ -82,7 +86,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-vertical-stacked>
 
           <bar-horizontal-stacked
@@ -97,7 +102,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-horizontal-stacked>
 
           <bar-vertical-normalized
@@ -112,7 +118,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-vertical-normalized>
 
           <bar-horizontal-normalized
@@ -127,7 +134,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </bar-horizontal-normalized>
 
           <pie-chart
@@ -139,7 +147,8 @@ import './demo.scss';
             [explodeSlices]="explodeSlices"
             [labels]="showLabels"
             [doughnut]="doughnut"
-            [gradient]="gradient">
+            [gradient]="gradient"
+            (clickHandler)="clickHandler($event)">
           </pie-chart>
 
           <advanced-pie-chart
@@ -147,14 +156,16 @@ import './demo.scss';
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
-            [gradient]="gradient">
+            [gradient]="gradient"
+            (clickHandler)="clickHandler($event)">
           </advanced-pie-chart>
 
           <pie-grid
             *ngIf="chartType === 'pie-grid'"
             [view]="view"
             [scheme]="colorScheme"
-            [results]="single">
+            [results]="single"
+            (clickHandler)="clickHandler($event)">
           </pie-grid>
 
           <line-chart
@@ -170,7 +181,8 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
-            [autoScale]="autoScale">
+            [autoScale]="autoScale"
+            (clickHandler)="clickHandler($event)">
           </line-chart>
 
           <area-chart
@@ -186,7 +198,8 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
-            [autoScale]="autoScale">
+            [autoScale]="autoScale"
+            (clickHandler)="clickHandler($event)">
           </area-chart>
 
           <area-chart-stacked
@@ -201,7 +214,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </area-chart-stacked>
 
           <area-chart-normalized
@@ -216,7 +230,8 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </area-chart-normalized>
 
           <heat-map
@@ -231,14 +246,16 @@ import './demo.scss';
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
+            [yAxisLabel]="yAxisLabel"
+            (clickHandler)="clickHandler($event)">
           </heat-map>
 
           <number-card
             *ngIf="chartType === 'number-card'"
             [view]="view"
             [scheme]="colorScheme"
-            [results]="single">
+            [results]="single"
+            (clickHandler)="clickHandler($event)">
           </number-card>
         </div>
       </div>
@@ -369,7 +386,7 @@ export class App implements OnInit {
   single: any[];
   multi: any[];
 
-  view: any[] = [900, 300];
+  view: any[] = [900, 400];
 
   // options
   showXAxis = true;
@@ -460,5 +477,9 @@ export class App implements OnInit {
         }
       }
     }
+  }
+
+  clickHandler(data) {
+    console.log('Item clicked', data);
   }
 }

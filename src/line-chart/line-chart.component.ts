@@ -84,7 +84,7 @@ import moment from 'moment';
               [strokeColor]="colors(series.name)"
               [data]="series"
               [scaleType]="scaleType"
-              (clickHandler)="click($event)"
+              (clickHandler)="click($event, series)"
             />
           </svg:g>
 
@@ -291,7 +291,8 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
     return false;
   }
 
-  click(data) {
+  click(data, series) {
+    data.series = series.name;
     this.clickHandler.emit(data);
   }
 

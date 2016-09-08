@@ -76,7 +76,7 @@ import ObjectId from "../utils/object-id";
               [data]="series"
               [scaleType]="scaleType"
               chartType="area"
-              (clickHandler)="click($event)"
+              (clickHandler)="click($event, series)"
             />
           </svg:g>
 
@@ -276,7 +276,8 @@ export class AreaChartNormalized extends BaseChart implements OnInit, OnChanges 
   }
 
 
-  click(data) {
+  click(data, series) {
+    data.series = series.name;
     this.clickHandler.emit(data);
   }
 

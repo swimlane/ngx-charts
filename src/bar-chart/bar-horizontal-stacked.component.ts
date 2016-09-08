@@ -41,7 +41,7 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
-            (clickHandler)="click($event)"
+            (clickHandler)="click($event, group)"
           />
         </svg:g>
 
@@ -158,7 +158,8 @@ export class BarHorizontalStacked extends BaseChart implements OnInit, OnChanges
     return `translate(0, ${this.yScale(group.name)})`;
   }
 
-  click(data) {
+  click(data, group) {
+    data.series = group.name;
     this.clickHandler.emit(data);
   }
 

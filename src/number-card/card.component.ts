@@ -124,6 +124,9 @@ export class Card implements OnInit {
   }
 
   click() {
-    this.clickHandler.emit(this.data);
+    this.clickHandler.emit({
+      name: this.data.name,
+      value: this.data.value
+    });
   }
 }

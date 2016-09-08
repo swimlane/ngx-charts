@@ -23,10 +23,10 @@ import ObjectId from "../utils/object-id";
         [r]="circle.radius"
         [fill]="color"
         [stroke]="strokeColor"
-        [pointerEvents]="circle.value.value === 0 ? 'none': 'all'"
+        [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
-        (clickHandler)="click($event)"
+        (clickHandler)="click($event, circle.label)"
       />
     </svg:g>
   `
@@ -102,7 +102,10 @@ export class CircleSeries implements OnInit, OnChanges {
     }).filter((circle) => circle !== undefined);
   }
 
-  click(data) {
-    this.clickHandler.emit(data);
+  click(value, label) {
+    this.clickHandler.emit({
+      name: label,
+      value: value
+    });
   }
 }

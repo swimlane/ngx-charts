@@ -10,7 +10,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
       [height]="c.height"
       [fill]="c.fill"
       [data]="c.data"
-      (clickHandler)="click($event)"
+      (clickHandler)="click($event, c.label, c.series)"
       sw-popover
       [popoverSpacing]="15"
       [popoverText]="c.tooltipText"
@@ -55,6 +55,8 @@ export class HeatCellSeries implements OnInit, OnChanges {
           height: this.yScale.bandwidth(),
           fill: this.colors(value),
           data: value,
+          label: label,
+          series: row.name,
           tooltipText: `${label}: ${value}`
         });
       });
@@ -63,8 +65,12 @@ export class HeatCellSeries implements OnInit, OnChanges {
     return cells;
   }
 
-  click(data) {
-    this.clickHandler.emit(data);
+  click(value, label, series) {
+    this.clickHandler.emit({
+      name: label,
+      value: value,
+      series: series
+    });
   }
 
 }

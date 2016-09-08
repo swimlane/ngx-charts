@@ -11,7 +11,7 @@ import d3 from '../d3';
         [style.cursor]="arc.cursor"
         [style.opacity]="arc.opacity"
         [attr.fill]="arc.fill"
-        (clickHandler)="click($event)"
+        (click)="click(arc.data)"
       />
     </svg:g>
   `
@@ -110,7 +110,10 @@ export class PieGridSeries implements OnInit, OnChanges {
   }
 
   click(data) {
-    this.clickHandler.emit(data);
+    this.clickHandler.emit({
+      name: this.data[0].data.name,
+      value: this.data[0].data.value
+    });
   }
 
 }

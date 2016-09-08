@@ -34,5 +34,5 @@ export abstract class BaseChart {
 
   abstract setColors()
 
-  abstract click(data)
+  abstract click(data, group)
 }
