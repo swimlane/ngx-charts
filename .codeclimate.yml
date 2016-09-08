@@ -1,0 +1,14 @@
+---
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - javascript
+exclude_paths:
+  - "release/"
+  - "assets/"
+  - "docs/"
+ratings:
+   paths:
+   - "src/**/**.ts"
