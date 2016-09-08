@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
+import { reduceTicks } from './ticks.helper';
 
 @Component({
   selector: 'g[yAxisTicks]',
@@ -44,7 +45,7 @@ export class YAxisTicks implements OnInit, OnChanges {
   @Input() tickStroke = '#ccc';
   @Input() tickFormatting;
   @Input() showGridLines = false;
-  @Input() gridLineHeight;
+  @Input() height;
 
   innerTickSize: any;
   tickPadding: any;
@@ -146,15 +147,31 @@ export class YAxisTicks implements OnInit, OnChanges {
 
   getTicks() {
     let ticks;
+    let maxTicks = this.getMaxTicks();
 
     if (this.tickValues) {
       ticks = this.tickValues;
     } else if (this.scale.ticks) {
       ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
+      if (ticks.length > maxTicks) {
+        if (this.tickArguments) {
+          this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
+        } else {
+          this.tickArguments = [maxTicks];
+        }
+        ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
+      }
     } else {
       ticks = this.scale.domain();
+      ticks = reduceTicks(ticks, maxTicks);
     }
+
     return ticks;
+  }
+
+  getMaxTicks() {
+    let tickHeight = 20;
+    return Math.floor(this.height / tickHeight);
   }
 
   tickTransform(tick) {

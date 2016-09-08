@@ -15,6 +15,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
         [orient]="xOrient"
         [showGridLines]="showGridLines"
         [gridLineHeight]="dims.height"
+        [width]="dims.width"
       />
 
       <svg:g axisLabel

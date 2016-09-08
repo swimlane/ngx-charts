@@ -14,14 +14,14 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
         [scale]="yScale"
         [orient]="yOrient"
         [showGridLines]="showGridLines"
-        [gridLineHeight]="dims.height"
+        [height]="dims.height"
       />
 
       <svg:g axisLabel
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="80"
-        [orient]="'left'"
+        [orient]="yOrient"
         [height]="dims.height"
         [width]="dims.width">
       </svg:g>
@@ -72,7 +72,7 @@ export class YAxis implements OnInit, OnChanges {
       this.transform = `translate(${this.offset} , 0)`;
     }
 
-    if (typeof this.yAxisTickCount !== 'undefined') {
+    if (this.yAxisTickCount !== undefined) {
       this.tickArguments = [this.yAxisTickCount];
     }
 
