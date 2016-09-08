@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[seriesHorizontal]',
@@ -22,7 +22,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
     </svg:g>
   `
 })
-export class SeriesHorizontal implements OnInit, OnChanges {
+export class SeriesHorizontal implements OnChanges {
   bars: any;
   x: any;
   y: any;
@@ -36,10 +36,6 @@ export class SeriesHorizontal implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges(changes) {
     this.update();

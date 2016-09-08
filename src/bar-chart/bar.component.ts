@@ -42,6 +42,7 @@ export class Bar implements OnInit, OnChanges {
   gradientId: any;
   gradientFill: any;
   startOpacity: any;
+  initialized: boolean = false;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -52,12 +53,16 @@ export class Bar implements OnInit, OnChanges {
     this.gradientId = 'grad' + ObjectId().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
     this.startOpacity = this.getStartOpacity();
-
-    this.loadAnimation();
   }
 
   ngOnChanges() {
-    this.update();
+    // ngOnInit gets called after ngOnChanges, so we need to do this here
+    if (!this.initialized) {
+      this.loadAnimation();
+      this.initialized = true;
+    } else {
+      this.update();
+    }
   }
 
   update() {
@@ -65,19 +70,16 @@ export class Bar implements OnInit, OnChanges {
   }
 
   loadAnimation() {
-    let node = d3.select(this.element).select('.bar');
-    let startingPath = this.getStartingPath();
-    node.attr('d', startingPath);
-
-    this.animateToCurrentForm();
+    this.path = this.getStartingPath();
+    setTimeout(this.update.bind(this), 100);
   }
 
   animateToCurrentForm() {
     let node = d3.select(this.element).select('.bar');
-    this.path = this.getPath(); // todo check if defining this.path or local variable path to use below
+    let path = this.getPath();
 
     node.transition().duration(750)
-      .attr('d', this.path); // todo check if use this.path or use path defined above
+      .attr('d', path);
   }
 
   getStartingPath() {

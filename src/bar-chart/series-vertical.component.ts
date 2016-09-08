@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -23,7 +23,7 @@ import * as moment from 'moment';
     </svg:g>
   `
 })
-export class SeriesVertical implements OnInit, OnChanges {
+export class SeriesVertical implements OnChanges {
   bars: any;
   x: any;
   y: any;
@@ -38,10 +38,6 @@ export class SeriesVertical implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges(changes) {
     this.update();

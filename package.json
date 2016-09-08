@@ -11,7 +11,6 @@
     "build:release": "NODE_ENV=production npm run build",
     "release": "npm run build:release && npm run deploy-docs",
     "deploy-docs": "node ./tasks/deploy-gh-page.js"
-
   },
   "repository": {
     "type": "git",

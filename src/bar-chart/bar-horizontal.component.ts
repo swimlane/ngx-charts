@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -45,7 +45,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class BarHorizontal extends BaseChart implements OnInit, OnChanges {
+export class BarHorizontal extends BaseChart implements OnChanges {
   dims: ViewDimensions;
   yScale: any;
   xScale: any;
@@ -69,10 +69,6 @@ export class BarHorizontal extends BaseChart implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();
