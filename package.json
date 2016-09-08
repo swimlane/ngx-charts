@@ -4,14 +4,27 @@
   "description": "Angular2 + D3 Charting Library",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --watch --inline",
-    "test": "karma start",
-    "test:watch": "npm run test -- --auto-watch --no-single-run",
-    "build": "webpack --progress --profile",
-    "build:release": "NODE_ENV=production npm run build",
-    "release": "npm run build:release && npm run deploy-docs",
-    "deploy-docs": "node ./tasks/deploy-gh-page.js"
+    "clean": "npm-run-all -p clean:*",
+      "clean:dist": "rimraf dist",
+      "clean:release": "rimraf release",
 
+    "start": "webpack-dev-server --progress --watch --inline",
+
+    "test": "karma start",
+      "test:watch": "npm run test -- --auto-watch --no-single-run",
+
+    "build": "webpack --progress --profile",
+      "build:release": "NODE_ENV=production npm run build",
+
+    "release": "npm-run-all -s clean:* release:css release:ts -p release:replace release:build:* -s release:minify",
+      "release:ts": "tsc --outDir release",
+      "release:build:umd": "rollup -c -f umd -o release/ng2d3.umd.js",
+      "release:build:cjs": "rollup -c -f cjs -o release/ng2d3.cjs.js",
+      "release:build:es": "rollup -c -f es -o release/ng2d3.es.js",
+      "release:css": "node-sass -o release/ src/ng2d3.scss",
+      "release:minify": "uglifyjs release/ng2d3.js --source-map release/ng2d3.min.js.map --source-map-url release/ng2d3.js.map --compress --mangle --screw-ie8 --output release/ng2d3.min.js",
+
+    "deploy:demo": "node ./tasks/deploy-gh-page.js"
   },
   "repository": {
     "type": "git",
@@ -48,6 +61,13 @@
     "zone.js": "0.6.17"
   },
   "devDependencies": {
+    "rimraf": "^2.5.2",
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/forms": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
     "@types/core-js": "0.9.32",
     "@types/d3-array": "0.0.3",
     "@types/d3-brush": "0.0.3",
@@ -63,7 +83,9 @@
     "awesome-typescript-loader": "2.2.1",
     "clean-webpack-plugin": "0.1.10",
     "codelyzer": "0.0.28",
+    "core-js": "2.4.1",
     "css-loader": "0.24.0",
+    "d3": "4.2.2",
     "gh-pages": "^0.11.0",
     "html-webpack-plugin": "2.22.0",
     "istanbul-instrumenter-loader": "0.2.0",
@@ -75,9 +97,16 @@
     "karma-mocha-reporter": "2.1.0",
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "1.8.0",
+    "moment": "2.14.1",
     "node-sass": "3.8.0",
+    "npm-run-all": "^3.1.0",
+    "postcss": "^5.1.1",
     "postcss-loader": "0.11.0",
     "raw-loader": "0.5.1",
+    "rollup": "^0.34.13",
+    "rollup-plugin-sourcemaps": "^0.3.7",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rxjs": "5.0.0-beta.11",
     "sass-loader": "4.0.0",
     "source-map-loader": "0.1.5",
     "style-loader": "0.13.1",
@@ -88,16 +117,7 @@
     "webpack": "2.1.0-beta.22",
     "webpack-dev-server": "^2.1.0-beta.3",
     "webpack-notifier": "^1.3.0",
-    "@angular/common": "2.0.0-rc.6",
-    "@angular/compiler": "2.0.0-rc.6",
-    "@angular/core": "2.0.0-rc.6",
-    "@angular/forms": "2.0.0-rc.6",
-    "@angular/platform-browser": "2.0.0-rc.6",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
-    "core-js": "2.4.1",
-    "d3": "4.2.2",
-    "moment": "2.14.1",
-    "rxjs": "5.0.0-beta.11",
-    "zone.js": "0.6.17"
+    "zone.js": "0.6.17",
+    "uglify-js": "2.7.3"
   }
 }
