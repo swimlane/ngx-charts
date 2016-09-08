@@ -4,7 +4,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
   selector: 'chart',
   template: `
     <svg
-      class="a2d3"
+      class="ng2d3"
       [attr.width]="view[0] * chartWidth / 12.0"
       [attr.height]="view[1]">
 

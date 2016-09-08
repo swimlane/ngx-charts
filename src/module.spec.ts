@@ -1,6 +1,6 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 
-import { A2D3Module } from './A2D3Module';
+import { ng2d3Module } from './ng2d3Module';
 
 /*
   This file is to import the main module. By importing it into this
@@ -8,10 +8,10 @@ import { A2D3Module } from './A2D3Module';
   in the code coverage stats.
 */
 
-describe('A2D3 Module', () => {
+describe('ng2d3 Module', () => {
 
   it('should load', () => {
-    expect(A2D3Module).toBeDefined();
+    expect(ng2d3Module).toBeDefined();
   });
 
 });

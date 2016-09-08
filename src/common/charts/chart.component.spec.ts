@@ -41,7 +41,7 @@ describe('<chart>', () => {
                     <chart
                         [view]="[400,800]"
                         >
-                        <p>a2d3 is cool!</p>
+                        <p>ng2d3 is cool!</p>
                     </chart>
                 `
         }
@@ -71,7 +71,7 @@ describe('<chart>', () => {
         let svg = d3.select(compiled.querySelectorAll('svg')[0]);
 
         let textNode = svg.select('p');
-        expect(textNode.text()).toEqual('a2d3 is cool!');
+        expect(textNode.text()).toEqual('ng2d3 is cool!');
 
       });
     }));
@@ -147,7 +147,7 @@ describe('<chart>', () => {
         let svg = d3.select(compiled.querySelectorAll('svg')[0]);
 
         let textNode = svg.select('text');
-        expect(textNode.text()).toEqual('a2d3 is cool!');
+        expect(textNode.text()).toEqual('ng2d3 is cool!');
 
         done();
       });
