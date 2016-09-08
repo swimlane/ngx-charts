@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { single, multi, countries } from './data';
 import chartGroups from './chartTypes';
-import '../src/a2d3.scss';
+import '../src/ng2d3.scss';
 import './demo.scss';
 
 @Component({

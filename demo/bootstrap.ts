@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { App } from './app';
-import { A2D3Module } from "../src/A2D3Module";
+import { NG2D3Module } from "../src/ng2d3";
 
 @NgModule({
-  imports: [A2D3Module, BrowserModule, FormsModule],
+  imports: [NG2D3Module, BrowserModule, FormsModule],
   declarations: [App],
   bootstrap: [App]
 })

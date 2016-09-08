@@ -19,6 +19,10 @@ body {
       overflow: hidden;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 main {
   display: flex;
   flex: 1;
@@ -38,7 +42,7 @@ main {
     overflow-y: auto;
     height: 100vh;
 
-    padding: 0 20px 20px 20px;
+    padding: 20px;
     background: #2f3646;
     color: #fff;
     font-size: .6em;
@@ -48,6 +52,8 @@ main {
       color: #1f89ff;
       font-weight: 100;
       text-transform: uppercase;
+      display: block;
+      margin-top: 0;
 
       strong {
         font-weight: 700;

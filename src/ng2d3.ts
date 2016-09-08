@@ -20,4 +20,4 @@ import {TreeMapModule} from "./tree-map/tree-map.module";
     TreeMapModule
   ]
 })
-export class A2D3Module {}
+export class NG2D3Module {}

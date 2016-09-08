@@ -3,6 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
+    "moduleResolution": "node",
     "removeComments": true,
     "noEmitHelpers": true,
     "emitDecoratorMetadata": true,
@@ -20,13 +21,14 @@
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
     "outDir": "dist",
-    "baseUrl": "src",
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "baseUrl": "src"
   },
+  "files": [
+    "src/ng2d3.ts"
+  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "*.spec.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

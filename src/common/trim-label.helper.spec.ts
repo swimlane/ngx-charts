@@ -20,23 +20,23 @@ describe('trimLabel', () => {
   });
 
   it('returns the same string in case it is <= max length', () => {
-    let text = 'Hi, try a2d3!';
+    let text = 'Hi, try ng2d3!';
 
     expect(trimLabel(text, 13)).toEqual(text);
   });
 
   it('should trim down to 16 chars by default', () => {
-    let text = 'Hi, you should check out a2d3, DO IT!';
+    let text = 'Hi, you should check out ng2d3, DO IT!';
     let trimmedText = trimLabel(text);
 
     expect(trimmedText).toEqual('Hi, you should c...');
   });
 
   it('should trim the passed text to the given max length', () => {
-    let text = 'Hi, a2d3 is cool!';
+    let text = 'Hi, ng2d3 is cool!';
 
     let trimmedText = trimLabel(text, 8);
-    expect(trimmedText).toEqual(`Hi, a2d3...`);
+    expect(trimmedText).toEqual(`Hi, ng2d3...`);
   });
 
 });

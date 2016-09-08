@@ -1,14 +1,19 @@
-﻿.a2d3 {
+﻿.ng2d3 {
   float: left;
 
-  &.bar, &.cell, &.arc, &.card {
+  &.bar,
+  &.cell,
+  &.arc,
+  &.card {
     &:hover {
       opacity: 0.8;
     }
   }
+  
   &.area {
     opacity: 0.6;
   }
+
   &.circle {
     &:hover {
       cursor: pointer;
@@ -22,6 +27,7 @@
       foreignObject {
         pointer-events: none;
       }
+
       p {
         text-align: center;
         pointer-events: none;
@@ -67,6 +73,7 @@
     visibility: visible !important;
     fill: rgba(255, 255, 255, 0.03);
   }
+
   .extent {
     stroke: none;
     fill-opacity: .3;
@@ -95,6 +102,7 @@
   .legend-wrap {
     width: 90%;
   }
+
   .legend-labels {
     line-height: 85%;
     list-style: none;
@@ -153,9 +161,11 @@
 
 .advanced-pie-legend {
   float: left;
+
   .total-value {
     font-size: 36px
   }
+
   .total-label {
     font-size: 24px;
     margin-bottom: 19px;

@@ -1,0 +1,46 @@
+/// <reference types="core-js" />
+import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { ViewDimensions } from '../common/view-dimensions.helper';
+import { BaseChart } from '../common/base-chart.component';
+export declare class LineChart extends BaseChart implements OnInit, OnChanges {
+    dims: ViewDimensions;
+    xDomain: any;
+    yDomain: any;
+    seriesDomain: any;
+    yScale: any;
+    xScale: any;
+    colors: Function;
+    scaleType: string;
+    transform: string;
+    clipPath: string;
+    series: any;
+    areaPath: any;
+    view: any;
+    results: any;
+    margin: number[];
+    scheme: any;
+    legend: any;
+    customColors: any;
+    xAxis: any;
+    yAxis: any;
+    showXAxisLabel: any;
+    showYAxisLabel: any;
+    xAxisLabel: any;
+    yAxisLabel: any;
+    autoScale: any;
+    timeline: any;
+    gradient: boolean;
+    clickHandler: EventEmitter<{}>;
+    ngOnInit(): void;
+    ngOnChanges(): void;
+    update(): void;
+    getXDomain(): any[];
+    getYDomain(): number[];
+    getSeriesDomain(): any;
+    getXScale(): any;
+    getYScale(): any;
+    getScaleType(values: any): string;
+    isDate(value: any): boolean;
+    click(data: any, series: any): void;
+    setColors(): void;
+}

@@ -1,7 +1,7 @@
 import { Directive, Input, ElementRef, Renderer, ViewChild, ViewContainerRef, OnInit, OnDestroy } from '@angular/core';
 import { PositionHelper } from './position.helper';
 import { PopoverRegistry } from './popover-registry.service';
-import './popover.scss';
+// import './popover.scss';
 
 @Directive({
   selector: '[sw-popover]'
