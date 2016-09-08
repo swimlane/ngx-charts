@@ -36,6 +36,6 @@ export declare class BarVertical2D extends BaseChart implements OnInit, OnChange
     getInnerDomain(): any[];
     getValueDomain(): number[];
     groupTransform(group: any): string;
-    click(data: any): void;
+    click(data: any, group: any): void;
     setColors(): void;
 }

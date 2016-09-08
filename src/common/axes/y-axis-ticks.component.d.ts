@@ -7,7 +7,7 @@ export declare class YAxisTicks implements OnInit, OnChanges {
     tickStroke: string;
     tickFormatting: any;
     showGridLines: boolean;
-    gridLineHeight: any;
+    height: any;
     innerTickSize: any;
     tickPadding: any;
     tickSpacing: any;
@@ -27,6 +27,7 @@ export declare class YAxisTicks implements OnInit, OnChanges {
     ngOnChanges(): void;
     update(): void;
     getTicks(): any;
+    getMaxTicks(): number;
     tickTransform(tick: any): string;
     gridLineTransform(): string;
 }

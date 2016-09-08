@@ -33,6 +33,6 @@ export declare class BarHorizontalStacked extends BaseChart implements OnInit, O
     getYScale(): any;
     getXScale(): any;
     groupTransform(group: any): string;
-    click(data: any): void;
+    click(data: any, group: any): void;
     setColors(): void;
 }

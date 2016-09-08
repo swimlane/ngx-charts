@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import '../src/a2d3.scss';
+import '../src/ng2d3.scss';
 import './demo.scss';
 export declare class App implements OnInit {
     chartType: string;
@@ -29,4 +29,5 @@ export declare class App implements OnInit {
     ngOnInit(): void;
     updateData(): void;
     selectChart(chartSelector: any): void;
+    clickHandler(data: any): void;
 }

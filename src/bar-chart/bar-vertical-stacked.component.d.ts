@@ -34,6 +34,6 @@ export declare class BarVerticalStacked extends BaseChart implements OnInit, OnC
     getXScale(): any;
     getYScale(): any;
     groupTransform(group: any): string;
-    click(data: any): void;
+    click(data: any, group: any): void;
     setColors(): void;
 }

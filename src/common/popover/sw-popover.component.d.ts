@@ -1,6 +1,5 @@
 import { ElementRef, Renderer, ViewContainerRef, OnInit, OnDestroy } from '@angular/core';
 import { PopoverRegistry } from './popover-registry.service';
-import './popover.scss';
 export declare class Popover implements OnInit, OnDestroy {
     element: ElementRef;
     renderer: Renderer;

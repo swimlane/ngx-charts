@@ -16,6 +16,7 @@ export declare class Bar implements OnInit, OnChanges {
     gradientId: any;
     gradientFill: any;
     startOpacity: any;
+    initialized: boolean;
     constructor(element: ElementRef);
     ngOnInit(): void;
     ngOnChanges(): void;

@@ -41,6 +41,6 @@ export declare class AreaChartStacked extends BaseChart implements OnInit, OnCha
     getScaleType(values: any): string;
     isDate(value: any): boolean;
     addTooltip(): void;
-    click(data: any): void;
+    click(data: any, series: any): void;
     setColors(): void;
 }

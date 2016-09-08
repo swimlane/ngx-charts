@@ -33,6 +33,6 @@ export declare class BarVerticalNormalized extends BaseChart implements OnInit, 
     getXScale(): any;
     getYScale(): any;
     groupTransform(group: any): string;
-    click(data: any): void;
+    click(data: any, group: any): void;
     setColors(): void;
 }

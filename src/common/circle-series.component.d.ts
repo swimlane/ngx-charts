@@ -14,5 +14,5 @@ export declare class CircleSeries implements OnInit, OnChanges {
     ngOnChanges(): void;
     update(): void;
     getCircles(): any;
-    click(data: any): void;
+    click(value: any, label: any): void;
 }

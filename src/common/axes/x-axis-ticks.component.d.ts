@@ -7,6 +7,7 @@ export declare class XAxisTicks implements OnInit, OnChanges {
     tickFormatting: any;
     showGridLines: boolean;
     gridLineHeight: any;
+    width: any;
     verticalSpacing: any;
     rotateLabels: any;
     innerTickSize: any;
@@ -14,6 +15,7 @@ export declare class XAxisTicks implements OnInit, OnChanges {
     tickPadding: any;
     textAnchor: any;
     maxTicksLength: any;
+    maxAllowedLength: number;
     trimLabel: any;
     adjustedScale: any;
     tickValues: any;
@@ -24,7 +26,9 @@ export declare class XAxisTicks implements OnInit, OnChanges {
     ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
+    getRotationAngle(ticks: any): number;
     getTicks(): any;
+    getMaxTicks(): number;
     tickTransform(tick: any): string;
     gridLineTransform(): string;
 }

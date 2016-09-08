@@ -14,6 +14,7 @@ export declare class PieArc implements OnInit {
     value: any;
     total: any;
     max: any;
+    data: any;
     explodeSlices: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
@@ -21,5 +22,5 @@ export declare class PieArc implements OnInit {
     ngOnInit(): void;
     calculateArc(): any;
     loadAnimation(): void;
-    click(data: any): void;
+    click(): void;
 }

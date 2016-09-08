@@ -38,6 +38,6 @@ export declare class AreaChartNormalized extends BaseChart implements OnInit, On
     getYScale(): any;
     getScaleType(values: any): string;
     isDate(value: any): boolean;
-    click(data: any): void;
+    click(data: any, series: any): void;
     setColors(): void;
 }

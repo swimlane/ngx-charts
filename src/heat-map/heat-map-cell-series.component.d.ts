@@ -11,5 +11,5 @@ export declare class HeatCellSeries implements OnInit, OnChanges {
     ngOnChanges(): void;
     update(): void;
     getCells(): any[];
-    click(data: any): void;
+    click(value: any, label: any, series: any): void;
 }

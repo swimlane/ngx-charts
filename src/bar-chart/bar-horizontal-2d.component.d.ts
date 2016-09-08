@@ -35,6 +35,6 @@ export declare class BarHorizontal2D extends BaseChart implements OnInit, OnChan
     getInnerDomain(): any[];
     getValueDomain(): number[];
     groupTransform(group: any): string;
-    click(data: any): void;
+    click(data: any, group: any): void;
     setColors(): void;
 }
