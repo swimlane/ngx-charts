@@ -20,7 +20,7 @@ describe('trimLabel', () => {
   });
 
   it('returns the same string in case it is <= max length', () => {
-    let text = 'Hi, try ng2d3!';
+    let text = 'Hi, try ng2d3';
 
     expect(trimLabel(text, 13)).toEqual(text);
   });
@@ -36,7 +36,7 @@ describe('trimLabel', () => {
     let text = 'Hi, ng2d3 is cool!';
 
     let trimmedText = trimLabel(text, 8);
-    expect(trimmedText).toEqual(`Hi, ng2d3...`);
+    expect(trimmedText).toEqual(`Hi, ng2d...`);
   });
 
 });
