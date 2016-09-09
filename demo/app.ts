@@ -264,6 +264,9 @@ import './demo.scss';
         <h1>
           ng2<strong>d3</strong>
           <small>Angular2 D3 Chart Framework</small>
+
+          <!-- Place this tag where you want the button to render. -->
+          
         </h1>
 
         <h3>Chart Type</h3>
