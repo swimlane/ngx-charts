@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  OnInit,
+  OnChanges
+ } from '@angular/core';
 import ObjectId from '../utils/object-id';
 import d3 from '../d3';
 

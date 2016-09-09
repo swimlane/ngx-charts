@@ -381,7 +381,7 @@ export class App implements OnInit {
   chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
-  realTimeData: boolean = false;
+  realTimeData: boolean = true;
   countries: any[];
   single: any[];
   multi: any[];
@@ -417,7 +417,7 @@ export class App implements OnInit {
   ngOnInit() {
     this.selectChart(this.chartType);
 
-    setInterval(this.updateData.bind(this), 2000);
+    setInterval(this.updateData.bind(this), 1000);
   }
 
   updateData() {

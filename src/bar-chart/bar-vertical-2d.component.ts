@@ -1,4 +1,14 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  trigger,
+  style,
+  transition,
+  animate
+} from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -38,10 +48,11 @@ import d3 from '../d3';
           [labelText]="yAxisLabel">
         </svg:g>
 
-        <svg:g
-          *ngFor="let group of results"
-          [attr.transform]="groupTransform(group)">
           <svg:g seriesVertical
+            *ngFor="let group of results; trackBy:trackBy"
+            [@animationState]="'active'"
+            [attr.transform]="groupTransform(group)"
+
             [xScale]="innerScale"
             [yScale]="valueScale"
             [colors]="colors"
@@ -51,11 +62,21 @@ import d3 from '../d3';
             (clickHandler)="click($event, group)"
           />
         </svg:g>
-      </svg:g>
     </chart>
-  `
+  `,
+  animations: [
+    trigger('animationState', [
+      transition('* => void', [
+        style({
+          opacity: 1,
+          transform: '*',
+        }),
+        animate(500, style({opacity: 0, transform: 'scale(0)'}))
+      ])
+    ])
+  ]
 })
-export class BarVertical2D extends BaseChart implements OnInit, OnChanges {
+export class BarVertical2D extends BaseChart implements OnChanges {
   dims: ViewDimensions;
   groupDomain: any[];
   innerDomain: any[];
@@ -82,10 +103,6 @@ export class BarVertical2D extends BaseChart implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();
@@ -176,6 +193,10 @@ export class BarVertical2D extends BaseChart implements OnInit, OnChanges {
   click(data, group) {
     data.series = group.name;
     this.clickHandler.emit(data);
+  }
+
+  trackBy(index, item) {
+    return item.name;
   }
 
   setColors() {

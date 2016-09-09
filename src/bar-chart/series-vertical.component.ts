@@ -1,10 +1,20 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  trigger,
+  style,
+  transition,
+  animate } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
   selector: 'g[seriesVertical]',
   template: `
-    <svg:g bar *ngFor="let bar of bars"
+    <svg:g bar *ngFor="let bar of bars; trackBy:trackBy"
+      [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
       [x]="bar.x"
@@ -21,7 +31,18 @@ import * as moment from 'moment';
       [popoverText]="bar.tooltipText"
       [popoverGroup]="'charts'">
     </svg:g>
-  `
+  `,
+  animations: [
+    trigger('animationState', [
+      transition('* => void', [
+        style({
+          opacity: 1,
+          transform: '*',
+        }),
+        animate(500, style({opacity: 0, transform: 'scale(0)'}))
+      ])
+    ])
+  ]
 })
 export class SeriesVertical implements OnChanges {
   bars: any;
@@ -112,6 +133,10 @@ export class SeriesVertical implements OnChanges {
 
       return bar;
     });
+  }
+
+  trackBy(index, bar) {
+    return bar.label;
   }
 
   click(data) {
