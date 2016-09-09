@@ -276,11 +276,12 @@ import './demo.scss';
             </optgroup>
           </template>
         </select>
-
+        <!--
         <h3>Data</h3>
         <select>
           <option>Country</option>
         </select>
+        -->
 
         <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries'">{{multi | json}}</pre>
