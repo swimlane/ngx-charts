@@ -1,5 +1,5 @@
 /**
- * ng2d3 v1.0.0 (https://github.com/swimlane/ng2d3)
+ * ng2d3 v1.0.1 (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -2707,6 +2707,7 @@ var Bar = (function () {
         this.gradient = false;
         this.offset = 0;
         this.clickHandler = new EventEmitter();
+        this.initialized = false;
         this.element = element.nativeElement;
     }
     Bar.prototype.ngOnInit = function () {
@@ -2714,25 +2715,28 @@ var Bar = (function () {
         this.gradientId = 'grad' + ObjectId().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         this.startOpacity = this.getStartOpacity();
-        this.loadAnimation();
     };
     Bar.prototype.ngOnChanges = function () {
-        this.update();
+        if (!this.initialized) {
+            this.loadAnimation();
+            this.initialized = true;
+        }
+        else {
+            this.update();
+        }
     };
     Bar.prototype.update = function () {
         this.animateToCurrentForm();
     };
     Bar.prototype.loadAnimation = function () {
-        var node = d3.select(this.element).select('.bar');
-        var startingPath = this.getStartingPath();
-        node.attr('d', startingPath);
-        this.animateToCurrentForm();
+        this.path = this.getStartingPath();
+        setTimeout(this.update.bind(this), 100);
     };
     Bar.prototype.animateToCurrentForm = function () {
         var node = d3.select(this.element).select('.bar');
-        this.path = this.getPath();
+        var path = this.getPath();
         node.transition().duration(750)
-            .attr('d', this.path);
+            .attr('d', path);
     };
     Bar.prototype.getStartingPath = function () {
         var radius = this.getRadius();
@@ -2902,9 +2906,6 @@ var BarHorizontal = (function (_super) {
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
-    BarHorizontal.prototype.ngOnInit = function () {
-        this.update();
-    };
     BarHorizontal.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -3475,9 +3476,6 @@ var BarVertical = (function (_super) {
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
-    BarVertical.prototype.ngOnInit = function () {
-        this.update();
-    };
     BarVertical.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -3533,10 +3531,6 @@ var BarVertical = (function (_super) {
         Input(), 
         __metadata('design:type', Object)
     ], BarVertical.prototype, "results", void 0);
-    __decorate([
-        Input(), 
-        __metadata('design:type', Object)
-    ], BarVertical.prototype, "margin", void 0);
     __decorate([
         Input(), 
         __metadata('design:type', Object)
@@ -4144,9 +4138,6 @@ var SeriesHorizontal = (function () {
         this.type = 'standard';
         this.clickHandler = new EventEmitter();
     }
-    SeriesHorizontal.prototype.ngOnInit = function () {
-        this.update();
-    };
     SeriesHorizontal.prototype.ngOnChanges = function (changes) {
         this.update();
     };
@@ -4253,9 +4244,6 @@ var SeriesVertical = (function () {
         this.scaleType = 'ordinal';
         this.clickHandler = new EventEmitter();
     }
-    SeriesVertical.prototype.ngOnInit = function () {
-        this.update();
-    };
     SeriesVertical.prototype.ngOnChanges = function (changes) {
         this.update();
     };

@@ -7,9 +7,6 @@ var SeriesVertical = (function () {
         this.scaleType = 'ordinal';
         this.clickHandler = new core_1.EventEmitter();
     }
-    SeriesVertical.prototype.ngOnInit = function () {
-        this.update();
-    };
     SeriesVertical.prototype.ngOnChanges = function (changes) {
         this.update();
     };

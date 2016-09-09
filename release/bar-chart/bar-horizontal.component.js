@@ -13,9 +13,6 @@ var BarHorizontal = (function (_super) {
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    BarHorizontal.prototype.ngOnInit = function () {
-        this.update();
-    };
     BarHorizontal.prototype.ngOnChanges = function () {
         this.update();
     };

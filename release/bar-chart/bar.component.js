@@ -8,6 +8,7 @@ var Bar = (function () {
         this.gradient = false;
         this.offset = 0;
         this.clickHandler = new core_1.EventEmitter();
+        this.initialized = false;
         this.element = element.nativeElement;
     }
     Bar.prototype.ngOnInit = function () {
@@ -15,25 +16,28 @@ var Bar = (function () {
         this.gradientId = 'grad' + object_id_1.default().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         this.startOpacity = this.getStartOpacity();
-        this.loadAnimation();
     };
     Bar.prototype.ngOnChanges = function () {
-        this.update();
+        if (!this.initialized) {
+            this.loadAnimation();
+            this.initialized = true;
+        }
+        else {
+            this.update();
+        }
     };
     Bar.prototype.update = function () {
         this.animateToCurrentForm();
     };
     Bar.prototype.loadAnimation = function () {
-        var node = d3_1.default.select(this.element).select('.bar');
-        var startingPath = this.getStartingPath();
-        node.attr('d', startingPath);
-        this.animateToCurrentForm();
+        this.path = this.getStartingPath();
+        setTimeout(this.update.bind(this), 100);
     };
     Bar.prototype.animateToCurrentForm = function () {
         var node = d3_1.default.select(this.element).select('.bar');
-        this.path = this.getPath();
+        var path = this.getPath();
         node.transition().duration(750)
-            .attr('d', this.path);
+            .attr('d', path);
     };
     Bar.prototype.getStartingPath = function () {
         var radius = this.getRadius();

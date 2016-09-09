@@ -13,9 +13,6 @@ var BarVertical = (function (_super) {
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    BarVertical.prototype.ngOnInit = function () {
-        this.update();
-    };
     BarVertical.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -71,10 +68,6 @@ var BarVertical = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], BarVertical.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVertical.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

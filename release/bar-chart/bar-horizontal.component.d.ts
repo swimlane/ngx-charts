@@ -1,8 +1,8 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class BarHorizontal extends BaseChart implements OnInit, OnChanges {
+export declare class BarHorizontal extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     yScale: any;
     xScale: any;
@@ -24,7 +24,6 @@ export declare class BarHorizontal extends BaseChart implements OnInit, OnChange
     yAxisLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getXScale(): any;

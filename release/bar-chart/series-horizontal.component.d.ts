@@ -1,5 +1,5 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
-export declare class SeriesHorizontal implements OnInit, OnChanges {
+import { EventEmitter, OnChanges } from '@angular/core';
+export declare class SeriesHorizontal implements OnChanges {
     bars: any;
     x: any;
     y: any;
@@ -11,7 +11,6 @@ export declare class SeriesHorizontal implements OnInit, OnChanges {
     colors: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(changes: any): void;
     update(): void;
     click(data: any): void;

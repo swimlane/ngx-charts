@@ -53,10 +53,10 @@ export class BarVertical extends BaseChart implements OnChanges {
   yDomain: any;
   transform: string;
   colors: Function;
+  margin: any[] = [10, 20, 70, 100];
 
   @Input() view;
   @Input() results;
-  @Input() margin = [10, 20, 70, 100];
   @Input() scheme;
   @Input() customColors;
   @Input() legend = false;

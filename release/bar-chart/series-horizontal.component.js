@@ -5,9 +5,6 @@ var SeriesHorizontal = (function () {
         this.type = 'standard';
         this.clickHandler = new core_1.EventEmitter();
     }
-    SeriesHorizontal.prototype.ngOnInit = function () {
-        this.update();
-    };
     SeriesHorizontal.prototype.ngOnChanges = function (changes) {
         this.update();
     };
