@@ -381,7 +381,7 @@ export class App implements OnInit {
   chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
-  realTimeData: boolean = true;
+  realTimeData: boolean = false;
   countries: any[];
   single: any[];
   multi: any[];
@@ -399,7 +399,7 @@ export class App implements OnInit {
   yAxisLabel = 'Population';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#F44336', '#3F51B5', '#8BC34A', '#2196F3', '#009688', '#FF5722', '#CDDC39', '#00BCD4', '#FFC107', '#795548', '#607D8B']
   };
 
   // pie
@@ -417,7 +417,7 @@ export class App implements OnInit {
   ngOnInit() {
     this.selectChart(this.chartType);
 
-    setInterval(this.updateData.bind(this), 1000);
+    setInterval(this.updateData.bind(this), 2000);
   }
 
   updateData() {
