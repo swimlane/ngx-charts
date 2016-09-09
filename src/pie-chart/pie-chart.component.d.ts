@@ -1,6 +1,6 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
-export declare class PieChart extends BaseChart implements OnInit, OnChanges {
+export declare class PieChart extends BaseChart implements OnChanges {
     outerRadius: number;
     innerRadius: number;
     data: any;

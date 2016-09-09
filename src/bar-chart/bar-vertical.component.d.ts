@@ -9,9 +9,9 @@ export declare class BarVertical extends BaseChart implements OnChanges {
     yDomain: any;
     transform: string;
     colors: Function;
+    margin: any[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     legend: boolean;

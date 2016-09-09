@@ -13,5 +13,6 @@ export declare class SeriesHorizontal implements OnChanges {
     clickHandler: EventEmitter<{}>;
     ngOnChanges(changes: any): void;
     update(): void;
+    trackBy(index: any, bar: any): any;
     click(data: any): void;
 }

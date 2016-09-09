@@ -1,11 +1,12 @@
-import { EventEmitter, ElementRef, OnInit } from '@angular/core';
-export declare class PieArc implements OnInit {
+import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+export declare class PieArc implements OnChanges {
     element: HTMLElement;
     path: any;
     startOpacity: number;
     radialGradientId: string;
     linearGradientId: string;
     gradientFill: string;
+    initialized: boolean;
     fill: any;
     startAngle: any;
     endAngle: any;
@@ -19,8 +20,10 @@ export declare class PieArc implements OnInit {
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef);
-    ngOnInit(): void;
+    ngOnChanges(): void;
+    update(): void;
     calculateArc(): any;
     loadAnimation(): void;
+    updateAnimation(): void;
     click(): void;
 }

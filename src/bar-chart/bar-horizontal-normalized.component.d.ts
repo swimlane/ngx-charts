@@ -1,7 +1,7 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class BarHorizontalNormalized extends BaseChart implements OnInit, OnChanges {
+export declare class BarHorizontalNormalized extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];
@@ -24,7 +24,6 @@ export declare class BarHorizontalNormalized extends BaseChart implements OnInit
     yAxisLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getGroupDomain(): any[];
@@ -34,5 +33,6 @@ export declare class BarHorizontalNormalized extends BaseChart implements OnInit
     getXScale(): any;
     groupTransform(group: any): string;
     click(data: any, group: any): void;
+    trackBy(index: any, item: any): any;
     setColors(): void;
 }

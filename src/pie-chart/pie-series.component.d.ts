@@ -23,5 +23,6 @@ export declare class PieSeries implements OnInit, OnChanges {
     label(arc: any): any;
     tooltipText(arc: any): string;
     color(arc: any): any;
+    trackBy(index: any, item: any): any;
     click(data: any): void;
 }

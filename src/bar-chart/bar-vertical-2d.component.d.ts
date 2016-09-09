@@ -1,7 +1,7 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class BarVertical2D extends BaseChart implements OnInit, OnChanges {
+export declare class BarVertical2D extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];
@@ -26,7 +26,6 @@ export declare class BarVertical2D extends BaseChart implements OnInit, OnChange
     scaleType: string;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getGroupScale(): any;
@@ -37,5 +36,6 @@ export declare class BarVertical2D extends BaseChart implements OnInit, OnChange
     getValueDomain(): number[];
     groupTransform(group: any): string;
     click(data: any, group: any): void;
+    trackBy(index: any, item: any): any;
     setColors(): void;
 }
