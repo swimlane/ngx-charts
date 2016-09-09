@@ -1,5 +1,7 @@
 # Stacked Vertical Bar Chart
 
+<iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/THIN2SfIIjSXB1ICJUnu?show=preview"></iframe>
+
 # Inputs
 * view
 * results
