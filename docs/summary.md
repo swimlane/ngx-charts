@@ -1,8 +1,10 @@
 # Summary
 
 * [Introduction](README.md)
-* [Demo](demo.md)
-* Charts
+  * [Motivation](intro/motivation.md)
+  * [Features](intro/features.md)
+  * [Installing](intro/installing.md)
+* Examples
    * Bar Charts
       * [Vertical Bar Chart](charts/bar-vertical.md)
       * [Horizontal Bar Chart](charts/bar-horizontal.md)
