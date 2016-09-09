@@ -16,10 +16,10 @@ We don't discriminate against module loaders and package in `UMD`, `ES6` and `CJ
 - `release/ng2d3.es.js` - ES6 Version
 
 ### CSS
-Additionally you will need to include `./release/ng2d3.css`.
+Additionally, you will need to include `./release/ng2d3.css`.
 
 ## Developing
-If you are wanting to run the demos locally, just do:
+If you want to run the demos locally, just do:
 
 - `npm i`
 - `npm start`

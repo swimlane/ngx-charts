@@ -26,13 +26,12 @@ it also has a lot of 'smarts' such as:
 - More Chart Types such as Bubble, Radar, Scatter
 
 If you have an idea for a new feature, create a Github issue or even better a PR ;).
-Make sure to include the use case, a example image of the chart if applicable and
+Make sure to include the use case, an example image of the chart (if applicable) and
 data formats.
 
 ## Alternatives
-Chart frameworks are a dime a dozen now days. Not many of them existed 2+
-years ago when we started this project internally and many of them work
-still don't really don't work well with Angular. Heres a recent list
+Chart frameworks are a dime a dozen nowadays. Not many of them existed 2+
+years ago when we started this project internally and many of them still don't really work well with Angular. Here's a recent list
 we compiled during our effort to open-source this:
 
 - [recharts](http://recharts.org/)
