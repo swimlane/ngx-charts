@@ -16,11 +16,11 @@ import * as moment from 'moment';
       [legendData]="seriesDomain">
 
       <svg:defs>
-        <svg:clipPath id="clipPathId">
+        <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
             [attr.width]="dims.width + 10"
             [attr.height]="dims.height + 10"
-            transform="translate(-5, -5)"/>
+            [attr.transform]="'translate(-5, -5)'"/>
         </svg:clipPath>
       </svg:defs>
 
@@ -97,7 +97,9 @@ import * as moment from 'moment';
         [view]="view"
         [scheme]="scheme"
         [customColors]="customColors"
-        [legend]="legend">
+        [scaleType]="scaleType"
+        [legend]="legend"
+        (onDomainChange)="updateDomain($event)">
       </svg:g>
     </chart>
   `
@@ -113,6 +115,7 @@ export class LineChart extends BaseChart implements OnChanges {
   scaleType: string;
   transform: string;
   clipPath: string;
+  clipPathId: string;
   series: any;
   areaPath: any;
   margin = [10, 20, 70, 70];
@@ -173,8 +176,8 @@ export class LineChart extends BaseChart implements OnChanges {
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;
-    let clipPathId = 'clip' + ObjectId().toString();
-    this.clipPath = `url(${pageUrl}#${clipPathId})`;
+    this.clipPathId = 'clip' + ObjectId().toString();
+    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 
   getXDomain() {
@@ -280,6 +283,11 @@ export class LineChart extends BaseChart implements OnChanges {
     }
 
     return false;
+  }
+
+  updateDomain(domain) {
+    this.xDomain = domain;
+    this.xScale = this.getXScale();
   }
 
   click(data, series) {

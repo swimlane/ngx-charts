@@ -9,7 +9,7 @@
       opacity: 0.8;
     }
   }
-  
+
   &.area {
     opacity: 0.6;
   }
@@ -69,15 +69,18 @@
 }
 
 .brush {
-  .background {
-    visibility: visible !important;
-    fill: rgba(255, 255, 255, 0.03);
+  .overlay {
+    fill: rgba(0, 0, 0, 0.07);
   }
 
-  .extent {
+  .selection {
     stroke: none;
     fill-opacity: .3;
     shape-rendering: 'crispEdges';
+  }
+
+  .handle {
+    fill: #3f51b5;
   }
 }
 

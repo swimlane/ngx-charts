@@ -79,8 +79,8 @@ export function generateData(seriesLength) {
 
     for (let j = 0; j < domain.length; j++) {
       let value = Math.floor(2000 + Math.random() * 5000);
-      let name = Math.floor(1473700105009 + Math.random() * 1000000000);
-      // let name = domain[j];
+      // let name = Math.floor(1473700105009 + Math.random() * 1000000000);
+      let name = domain[j];
       series.series.push({
         value: value,
         name: new Date(name)

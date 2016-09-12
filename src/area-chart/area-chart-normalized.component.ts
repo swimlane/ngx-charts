@@ -89,7 +89,9 @@ import ObjectId from "../utils/object-id";
         [view]="view"
         [scheme]="scheme"
         [customColors]="customColors"
-        [legend]="legend">
+        [legend]="legend"
+        [scaleType]="scaleType"
+        (onDomainChange)="updateDomain($event)">
       </svg:g>
     </chart>
   `
@@ -297,6 +299,11 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
     }
 
     return false;
+  }
+
+  updateDomain(domain) {
+    this.xDomain = domain;
+    this.xScale = this.getXScale();
   }
 
   click(data, series) {

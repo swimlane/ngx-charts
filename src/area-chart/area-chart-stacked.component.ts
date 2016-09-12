@@ -88,7 +88,9 @@ import d3 from '../d3';
         [view]="view"
         [scheme]="scheme"
         [customColors]="customColors"
-        [legend]="legend">
+        [legend]="legend"
+        [scaleType]="scaleType"
+        (onDomainChange)="updateDomain($event)">
       </svg:g>
     </chart>
   `
@@ -305,6 +307,11 @@ export class AreaChartStacked extends BaseChart implements OnChanges {
     }
 
     return false;
+  }
+
+  updateDomain(domain) {
+    this.xDomain = domain;
+    this.xScale = this.getXScale();
   }
 
   addTooltip() {

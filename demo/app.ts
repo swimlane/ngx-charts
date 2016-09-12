@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { single, multi, countries } from './data';
+import { single, multi, countries, generateData } from './data';
 import chartGroups from './chartTypes';
 import '../src/ng2d3.scss';
 import './demo.scss';
@@ -172,7 +172,7 @@ import './demo.scss';
             *ngIf="chartType === 'line-chart'"
             [view]="view"
             [scheme]="colorScheme"
-            [results]="multi"
+            [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -182,6 +182,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [autoScale]="autoScale"
+            [timeline]="timeline"
             (clickHandler)="clickHandler($event)">
           </line-chart>
 
@@ -189,7 +190,7 @@ import './demo.scss';
             *ngIf="chartType === 'area-chart'"
             [view]="view"
             [scheme]="colorScheme"
-            [results]="multi"
+            [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -199,6 +200,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [autoScale]="autoScale"
+            [timeline]="timeline"
             (clickHandler)="clickHandler($event)">
           </area-chart>
 
@@ -206,7 +208,7 @@ import './demo.scss';
             *ngIf="chartType === 'area-chart-stacked'"
             [view]="view"
             [scheme]="colorScheme"
-            [results]="multi"
+            [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -215,6 +217,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
             (clickHandler)="clickHandler($event)">
           </area-chart-stacked>
 
@@ -222,7 +225,7 @@ import './demo.scss';
             *ngIf="chartType === 'area-chart-normalized'"
             [view]="view"
             [scheme]="colorScheme"
-            [results]="multi"
+            [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -231,6 +234,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
             (clickHandler)="clickHandler($event)">
           </area-chart-normalized>
 
@@ -284,7 +288,8 @@ import './demo.scss';
         -->
 
         <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
-        <pre *ngIf="chart.inputFormat === 'multiSeries'">{{multi | json}}</pre>
+        <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
+        <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>
 
         <div>
           <label>
@@ -374,6 +379,13 @@ import './demo.scss';
             Auto Scale
           </label> <br />
         </div>
+
+        <div *ngIf="chart.options.includes('timeline')">
+          <label>
+            <input type="checkbox" [checked]="timeline" (change)="timeline = $event.target.checked">
+            Timeline
+          </label> <br />
+        </div>
       </div>
     </main>
   `
@@ -386,6 +398,8 @@ export class App implements OnInit {
   countries: any[];
   single: any[];
   multi: any[];
+  dateData: any[];
+  linearScale: boolean = false;
 
   view: any[] = [900, 400];
 
@@ -410,9 +424,12 @@ export class App implements OnInit {
 
   // line, area
   autoScale = true;
+  timeline = false;
 
   constructor() {
     Object.assign(this, {single, multi, countries, chartGroups});
+
+    this.dateData = generateData(5);
   }
 
   ngOnInit() {
@@ -470,6 +487,12 @@ export class App implements OnInit {
 
   selectChart(chartSelector) {
     this.chartType = chartSelector;
+
+    this.linearScale = this.chartType === 'line-chart' ||
+      this.chartType === 'area-chart' ||
+      this.chartType === 'area-chart-normalized' ||
+      this.chartType === 'area-chart-stacked';
+
     for (let group of this.chartGroups) {
       for (let chart of group.charts) {
         if (chart.selector === chartSelector) {
