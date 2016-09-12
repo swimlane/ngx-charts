@@ -86,10 +86,10 @@ export class BarVertical2D extends BaseChart implements OnChanges {
   valueScale: any;
   transform: string;
   colors: Function;
+  margin = [10, 20, 70, 100];
 
   @Input() view;
   @Input() results;
-  @Input() margin = [10, 20, 70, 100];
   @Input() scheme;
   @Input() customColors;
   @Input() legend = false;

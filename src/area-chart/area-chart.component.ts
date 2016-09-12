@@ -104,10 +104,10 @@ export class AreaChart extends BaseChart implements OnChanges {
   clipPath: string;
   scaleType: string;
   series: any;
+  margin = [10, 20, 70, 70];
 
   @Input() view;
   @Input() results;
-  @Input() margin = [10, 20, 70, 70];
   @Input() scheme;
   @Input() legend;
   @Input() state;

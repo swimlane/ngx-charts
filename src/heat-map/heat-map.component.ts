@@ -63,10 +63,10 @@ export class HeatMap extends BaseChart implements OnChanges {
   colorScale: any;
   transform: string;
   rects: any[];
+  margin = [10, 20, 70, 100];
 
   @Input() view;
   @Input() results;
-  @Input() margin = [10, 20, 70, 100];
   @Input() scheme;
   @Input() customColors;
   @Input() legend;

@@ -115,10 +115,10 @@ export class LineChart extends BaseChart implements OnChanges {
   clipPath: string;
   series: any;
   areaPath: any;
+  margin = [10, 20, 70, 70];
 
   @Input() view;
   @Input() results;
-  @Input() margin = [10, 20, 70, 70];
   @Input() scheme;
   @Input() legend;
   @Input() customColors;

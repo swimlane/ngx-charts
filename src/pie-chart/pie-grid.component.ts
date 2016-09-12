@@ -65,10 +65,10 @@ export class PieGrid extends BaseChart implements OnChanges {
   series: any[];
   domain: any[];
   colorScale: Function;
+  margin = [20, 20, 20, 20];
 
   @Input() view;
   @Input() results;
-  @Input() margin = [20, 20, 20, 20];
   @Input() scheme;
   @Input() customColors;
 

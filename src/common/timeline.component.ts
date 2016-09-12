@@ -27,12 +27,12 @@ export class Timeline implements OnChanges {
   xScale: any;
   brush: any;
   transform: string;
+  margin = [10, 20, 70, 20];
 
   @Input() view;
   @Input() state;
   @Input() results;
   @Input() scheme;
-  @Input() margin = [10, 20, 70, 20];
   @Input() customColors;
   @Input() legend;
   @Input() miniChart;

@@ -22,9 +22,10 @@ import { colorHelper } from '../utils/color-sets';
   `
 })
 export class TreeMap extends BaseChart implements OnChanges {
+  margin = [10, 10, 10, 10];
+
   @Input() view;
   @Input() results;
-  @Input() margin = [10, 10, 10, 10];
   @Input() scheme;
   @Input() customColors;
 

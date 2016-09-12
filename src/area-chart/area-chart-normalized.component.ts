@@ -106,10 +106,10 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
   clipPathId: string;
   clipPath: string;
   colors: Function;
+  margin = [10, 20, 70, 70];
 
   @Input() view;
   @Input() results;
-  @Input() margin = [10, 20, 70, 70];
   @Input() scheme;
   @Input() customColors;
   @Input() legend = false;
