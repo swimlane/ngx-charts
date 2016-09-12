@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import d3 from '../d3';
-import moment = require("moment");
+import {sortLinear} from '../utils/sort';
 
 @Component({
   selector: 'g[areaSeries]',
@@ -34,18 +34,15 @@ export class AreaSeries implements OnChanges {
   ngOnChanges() {
     this.update();
   }
-  
+
   update() {
     let area;
     let startingArea;
 
     let xProperty = (d) => {
       let label = d.name;
-      if (this.scaleType === 'time') {
-        return this.xScale(moment(label).toDate());
-      } else {
-        return this.xScale(label);
-      }
+
+      return this.xScale(label);
     };
 
     if (this.stacked || this.normalized) {
@@ -71,8 +68,13 @@ export class AreaSeries implements OnChanges {
     }
 
     this.opacity = 1;
-    this.path = area(this.data.series);
 
-    this.startingPath = startingArea(this.data.series);
+    let data = this.data.series;
+    if (this.scaleType === 'time' || this.scaleType === 'linear') {
+      data = sortLinear(data, 'name');
+    }
+
+    this.path = area(data);
+    this.startingPath = startingArea(data);
   }
 }

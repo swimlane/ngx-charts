@@ -2,7 +2,7 @@ import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
 import {colorHelper} from '../utils/color-sets';
 import {BaseChart} from '../common/base-chart.component';
-import moment = require("moment");
+import * as moment from 'moment';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
 

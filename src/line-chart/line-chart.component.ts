@@ -4,7 +4,7 @@ import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'line-chart',

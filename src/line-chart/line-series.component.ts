@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import d3 from '../d3';
-import moment from 'moment';
+import * as moment from 'moment';
+import {sortLinear} from '../utils/sort';
 
 @Component({
   selector: 'g[lineSeries]',
@@ -43,6 +44,11 @@ export class LineSeries implements OnChanges {
       .y(d => this.yScale(d.value));
 
     let data = this.data.series;
+    if (this.scaleType === 'time' || this.scaleType === 'linear') {
+      data = sortLinear(data, 'name');
+    }
+
+    console.log('data');
 
     this.path = line(data) || '';
   }

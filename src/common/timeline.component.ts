@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
-import moment = require("moment");
+import * as moment from 'moment';
 import { throttle } from "../utils/throttle";
 import d3 from '../d3';
 

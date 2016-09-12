@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import moment = require("moment");
+import * as moment from 'moment';
 import ObjectId from "../utils/object-id";
 
 @Component({

@@ -1,4 +1,4 @@
-import moment = require("moment");
+import * as moment from 'moment';
 import d3 from '../d3';
 
 /**

@@ -3,7 +3,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
 import d3 from '../d3';
-import moment = require("moment");
+import * as moment from 'moment';
 import ObjectId from "../utils/object-id";
 
 @Component({
@@ -98,6 +98,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
   dims: ViewDimensions;
   scaleType: string;
   xDomain: any[];
+  xSet: any[]; // the set of all values on the X Axis
   yDomain: any[];
   seriesDomain: any;
   xScale: any;
@@ -143,23 +144,50 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
-    // modifies results in place
-    for (let i = 0; i < this.xDomain.length; i++) {
-      let val = this.xDomain[i];
+    for (let i = 0; i < this.xSet.length; i++) {
+      let val = this.xSet[i];
       let d0 = 0;
 
       let total = 0;
       for (let group of this.results){
-        let d = group.series.find(item => item.name === val);
-        total += d.value;
+        let d = group.series.find(item => {
+          let a = item.name;
+          let b = val;
+          if (this.scaleType === 'time') {
+            a = a.valueOf();
+            b = b.valueOf();
+          }
+          return a === b;
+        });
+        if (d) {
+          total += d.value;
+        }
       }
 
       for (let group of this.results){
-        let d = group.series.find(item => item.name === val);
+        let d = group.series.find(item => {
+          let a = item.name;
+          let b = val;
+          if (this.scaleType === 'time') {
+            a = a.valueOf();
+            b = b.valueOf();
+          }
+          return a === b;
+        });
 
-        d.d0 = d0;
-        d.d1 = d0 + d.value;
-        d0 += d.value;
+        if (d) {
+          d.d0 = d0;
+          d.d1 = d0 + d.value;
+          d0 += d.value;
+        } else {
+          d = {
+            name: val,
+            value: 0,
+            d0: d0,
+            d1: d0
+          };
+          group.series.push(d);
+        }
 
         if (total > 0) {
           d.d0 = (d.d0 * 100) / total;
@@ -182,7 +210,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
   getXDomain() {
     let values = [];
     for (let results of this.results) {
-      for (let d of results.series){
+      for (let d of results.series) {
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -195,7 +223,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
       values = values.map(v => moment(v).toDate());
       let min = Math.min(...values);
       let max = Math.max(...values);
-      domain = [min, max];
+      domain = [new Date(min), new Date(max)];
     } else if (this.scaleType === 'linear') {
       values = values.map(v => Number(v));
       let min = Math.min(...values);
@@ -204,6 +232,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
     } else {
       domain = values;
     }
+    this.xSet = values;
     return domain;
   }
 
