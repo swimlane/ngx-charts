@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -26,7 +26,7 @@ import { BaseChart } from '../common/base-chart.component';
     </chart>
   `
 })
-export class PieChart extends BaseChart implements OnInit, OnChanges {
+export class PieChart extends BaseChart implements OnChanges {
   outerRadius: number;
   innerRadius: number;
   data: any;
@@ -47,10 +47,6 @@ export class PieChart extends BaseChart implements OnInit, OnChanges {
   @Output() clickHandler = new EventEmitter();
 
   translation: string;
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

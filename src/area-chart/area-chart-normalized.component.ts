@@ -45,7 +45,7 @@ import ObjectId from "../utils/object-id";
 
         <svg:g [attr.clip-path]="clipPath">
 
-          <svg:g *ngFor="let series of results">
+          <svg:g *ngFor="let series of results; trackBy:trackBy">
             <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
@@ -275,10 +275,13 @@ export class AreaChartNormalized extends BaseChart implements OnInit, OnChanges 
     return false;
   }
 
-
   click(data, series) {
     data.series = series.name;
     this.clickHandler.emit(data);
+  }
+
+  trackBy(index, item) {
+    return item.name;
   }
 
   setColors() {

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
 
@@ -16,16 +16,18 @@ import d3 from '../d3';
     </svg:defs>
     <svg:path
       class="area"
-      [attr.d]="path"
+      [attr.d]="areaPath"
       [attr.fill]="gradient ? gradientFill : fill"
       [attr.opacity]="opacity"
     />
   `
 })
-export class Area implements OnInit, OnChanges {
+export class Area implements OnChanges {
   element: HTMLElement;
   gradientId: string;
   gradientFill: string;
+  areaPath: string;
+  initialized: boolean = false;
 
   @Input() data;
   @Input() path;
@@ -43,30 +45,26 @@ export class Area implements OnInit, OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
-    this.update();
-  }
-
   ngOnChanges() {
-    this.update();
+    if (!this.initialized) {
+      this.loadAnimation();
+      this.initialized = true;
+    } else {
+      this.update();
+    }
   }
 
   update() {
+    let pageUrl = window.location.href;
+    this.gradientId = 'grad' + ObjectId().toString();
+    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 
-        let pageUrl = window.location.href;
-        this.gradientId = 'grad' + ObjectId().toString();
-        this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
-
-        this.loadAnimation();
+    this.animateToCurrentForm();
   }
 
   loadAnimation() {
-    let node = d3.select(this.element).select('.area');
-
-    node
-      .attr('d', this.startingPath);
-
-    this.animateToCurrentForm();
+    this.areaPath = this.startingPath;
+    setTimeout(this.update.bind(this), 100);
   }
 
   animateToCurrentForm() {

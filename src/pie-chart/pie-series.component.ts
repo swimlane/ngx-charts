@@ -4,7 +4,7 @@ import d3 from '../d3';
 @Component({
   selector: 'g[pieSeries]',
   template: `
-    <svg:g *ngFor="let arc of data">
+    <svg:g *ngFor="let arc of data; trackBy:trackBy">
       <svg:g pieLabel
         *ngIf="labelVisible(arc)"
         [data]="arc"
@@ -139,6 +139,10 @@ export class PieSeries implements OnInit, OnChanges {
 
   color(arc) {
     return this.colors(this.label(arc));
+  }
+
+  trackBy(index, item) {
+    return item.data.name;
   }
 
   click(data) {

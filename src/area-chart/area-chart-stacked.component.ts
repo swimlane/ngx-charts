@@ -45,7 +45,7 @@ import d3 from '../d3';
 
         <svg:g [attr.clip-path]="clipPath">
 
-          <svg:g *ngFor="let series of results">
+          <svg:g *ngFor="let series of results; trackBy:trackBy">
             <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
@@ -66,7 +66,7 @@ import d3 from '../d3';
             style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           />
 
-          <svg:g *ngFor="let series of results">
+          <svg:g *ngFor="let series of results; trackBy:trackBy">
             <svg:g circleSeries
               type="stacked"
               [xScale]="xScale"
@@ -298,6 +298,10 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
   click(data, series) {
     data.series = series.name;
     this.clickHandler.emit(data);
+  }
+
+  trackBy(index, item) {
+    return item.name;
   }
 
   setColors() {

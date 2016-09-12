@@ -45,7 +45,7 @@ import d3 from '../d3';
 
         <svg:g [attr.clip-path]="clipPath">
 
-          <svg:g *ngFor="let series of results">
+          <svg:g *ngFor="let series of results; trackBy:trackBy">
             <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
@@ -144,14 +144,8 @@ export class AreaChart extends BaseChart implements OnInit, OnChanges {
     this.yDomain = this.getYDomain();
     this.seriesDomain = this.getSeriesDomain();
 
-    // TODO: should sorting happen here?
-    // this.series = this.results.series[0].array.sort((a, b) => {
-    //   return this.results.d0Domain.indexOf(a.vals[0].label[0][0]) - this.results.d0Domain.indexOf(b.vals[0].label[0][0]);
-    // });
-
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
-
 
     this.setColors();
 
@@ -269,6 +263,10 @@ export class AreaChart extends BaseChart implements OnInit, OnChanges {
   click(data, series) {
     data.series = series.name;
     this.clickHandler.emit(data);
+  }
+
+  trackBy(index, item) {
+    return item.name;
   }
 
   setColors() {

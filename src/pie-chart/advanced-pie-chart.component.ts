@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -65,7 +65,7 @@ export interface LegendItem {
     </div>
   `
 })
-export class AdvancedPieChart extends BaseChart implements OnInit, OnChanges {
+export class AdvancedPieChart extends BaseChart implements OnChanges {
   data: any;
   dims: ViewDimensions;
   domain: any[];
@@ -86,10 +86,6 @@ export class AdvancedPieChart extends BaseChart implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

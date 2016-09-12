@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import d3 from '../d3';
 import ObjectId from "../utils/object-id";
 
@@ -30,13 +30,14 @@ import ObjectId from "../utils/object-id";
     </svg:g>
   `
 })
-export class PieArc implements OnInit {
+export class PieArc implements OnChanges {
   element: HTMLElement;
   path: any;
   startOpacity: number;
   radialGradientId: string;
   linearGradientId: string;
   gradientFill: string;
+  initialized: boolean = false;
 
   @Input() fill;
   @Input() startAngle;
@@ -56,7 +57,11 @@ export class PieArc implements OnInit {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     var arc = this.calculateArc();
     this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
     this.startOpacity = 0.3;
@@ -71,7 +76,13 @@ export class PieArc implements OnInit {
       this.gradientFill = `url(${pageUrl}#${this.linearGradientId})`;
     }
 
-    this.loadAnimation();
+    if (this.initialized) {
+      this.updateAnimation();
+    } else {
+      this.loadAnimation();
+      this.initialized = true;
+    }
+
   }
 
   calculateArc() {
@@ -100,6 +111,22 @@ export class PieArc implements OnInit {
           return arc(interpolate(t));
         };
       })
+      .transition().duration(750)
+      .attrTween("d", function(d) {
+        this._current = this._current || d;
+        var interpolate = d3.interpolate(this._current, d);
+        this._current = interpolate(0);
+        return function(t) {
+          return arc(interpolate(t));
+        };
+      });
+  }
+
+  updateAnimation() {
+    let node = d3.select(this.element).selectAll('.arc').data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
+    var arc = this.calculateArc();
+
+    node
       .transition().duration(750)
       .attrTween("d", function(d) {
         this._current = this._current || d;
