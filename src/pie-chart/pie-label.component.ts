@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, ElementRef, OnChanges } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
 
@@ -25,7 +25,7 @@ import d3 from '../d3';
     </svg:path>
   `
 })
-export class PieLabel implements OnInit, OnChanges {
+export class PieLabel implements OnChanges {
   element: HTMLElement;
   trimLabel: Function;
   labelXY: any;
@@ -43,10 +43,6 @@ export class PieLabel implements OnInit, OnChanges {
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
     this.trimLabel = trimLabel;
-  }
-
-  ngOnInit() {
-    this.update();
   }
 
   ngOnChanges() {

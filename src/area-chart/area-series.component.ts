@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import d3 from '../d3';
 import moment = require("moment");
 
@@ -15,7 +15,7 @@ import moment = require("moment");
     />
   `
 })
-export class AreaSeries implements OnInit, OnChanges {
+export class AreaSeries implements OnChanges {
   opacity: number;
   path: string;
   startingPath: string;
@@ -31,14 +31,10 @@ export class AreaSeries implements OnInit, OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
-    this.update();
-  }
-
   ngOnChanges() {
     this.update();
   }
-
+  
   update() {
     let area;
     let startingArea;
@@ -51,43 +47,6 @@ export class AreaSeries implements OnInit, OnChanges {
         return this.xScale(label);
       }
     };
-
-    // let areaData = this.data.series.map(d => {
-    //   if (this.stacked) {
-    //     let offset0 = d0;
-    //     let offset1 = d0 + d.value;
-    //     d0 = d0 + d.value;
-    //
-    //     return {
-    //       name: d.name,
-    //       value: d.value,
-    //       d0: offset0,
-    //       d1: offset1
-    //     };
-    //   } else if (this.normalized) {
-    //     let offset0 = d0;
-    //     let offset1 = d0 + d.value;
-    //     d0 = d0 + d.value;
-    //
-    //     if (total > 0) {
-    //       offset0 = (offset0 * 100) / total;
-    //       offset1 = (offset1 * 100) /total;
-    //     } else {
-    //       offset0 = 0;
-    //       offset1 = 0;
-    //     }
-    //
-    //     return {
-    //       name: d.name,
-    //       value: d.value,
-    //       d0: offset0,
-    //       d1: offset1
-    //     };
-    //   } else {
-    //     return d;
-    //   }
-    // });
-
 
     if (this.stacked || this.normalized) {
       area = d3.area()

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
-// import d3 from '../../d3';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[xAxis]',
@@ -29,7 +28,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
     </svg:g>
   `
 })
-export class XAxis implements OnInit, OnChanges {
+export class XAxis implements OnChanges {
   @Input() xScale;
   @Input() dims;
   @Input() tickFormatting;
@@ -55,10 +54,6 @@ export class XAxis implements OnInit, OnChanges {
       strokeWidth: 'none',
       xAxisOffset: 5,
     });
-  }
-
-  ngOnInit() {
-    this.update();
   }
 
   ngOnChanges() {

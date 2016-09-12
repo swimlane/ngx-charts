@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -51,7 +51,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
     </chart>
   `
 })
-export class HeatMap extends BaseChart implements OnInit, OnChanges {
+export class HeatMap extends BaseChart implements OnChanges {
   dims: ViewDimensions;
   xDomain: any[];
   yDomain: any[];
@@ -79,10 +79,6 @@ export class HeatMap extends BaseChart implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

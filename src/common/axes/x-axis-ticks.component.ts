@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 
@@ -34,7 +34,7 @@ import { reduceTicks } from './ticks.helper';
     </svg:g>
   `
 })
-export class XAxisTicks implements OnInit, OnChanges {
+export class XAxisTicks implements OnChanges {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -70,10 +70,6 @@ export class XAxisTicks implements OnInit, OnChanges {
       maxTicksLength: 0,
       trimLabel: trimLabel
     });
-  }
-
-  ngOnInit() {
-    this.update();
   }
 
   ngOnChanges() {

@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import d3 from '../d3';
 
 @Component({
   selector: 'g[pieGridSeries]',
   template: `
     <svg:g class="pie-grid-arcs">
-      <svg:path *ngFor="let arc of arcs"
+      <svg:path *ngFor="let arc of arcs; trackBy:trackBy"
         [attr.class]="arc.class"
         [attr.d]="arc.d"
         [style.cursor]="arc.cursor"
@@ -16,7 +16,7 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class PieGridSeries implements OnInit, OnChanges {
+export class PieGridSeries implements OnChanges {
   element: HTMLElement;
   layout: any;
   arcs: any;
@@ -32,10 +32,6 @@ export class PieGridSeries implements OnInit, OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
-    this.update();
-  }
-
   ngOnChanges() {
     this.update();
   }
@@ -45,6 +41,8 @@ export class PieGridSeries implements OnInit, OnChanges {
       .value((d) => d.data.value).sort(null);
 
     this.arcs = this.getArcs();
+
+    console.log('Arcs', this.arcs);
     this.loadAnimation();
   }
 
@@ -60,11 +58,14 @@ export class PieGridSeries implements OnInit, OnChanges {
         .innerRadius(this.innerRadius).outerRadius(this.outerRadius)
         .startAngle(arc.startAngle).endAngle(arc.endAngle);
 
+        let color = this.colors(label);
+        color = this.colors(label);
       return {
+        data: arc.data.data,
         class: 'arc ' + 'arc' + index,
-        d: genArcPath(), // todo check need arguments ?
+        d: genArcPath(),
         cursor: other ? 'auto' : 'pointer',
-        fill: this.colors(label),
+        fill: color,
         opacity: other ? 0.4 : 1
       };
     });
@@ -114,6 +115,10 @@ export class PieGridSeries implements OnInit, OnChanges {
       name: this.data[0].data.name,
       value: this.data[0].data.value
     });
+  }
+
+  trackBy(index, item) {
+    return item.data.name;
   }
 
 }

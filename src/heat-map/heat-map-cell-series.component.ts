@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[heatMapCellSeries]',
@@ -19,7 +19,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angu
     />
   `
 })
-export class HeatCellSeries implements OnInit, OnChanges {
+export class HeatCellSeries implements OnChanges {
   cells: any[];
 
   @Input() data;
@@ -29,10 +29,6 @@ export class HeatCellSeries implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
 
@@ -28,7 +28,7 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class HeatMapCell implements OnInit {
+export class HeatMapCell implements OnChanges {
   element: HTMLElement;
   transform: string;
   activeRange: any[];
@@ -51,12 +51,8 @@ export class HeatMapCell implements OnInit {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.transform = `translate(${this.x} , ${this.y})`;
-
-    // let value = this.data.value; // unused variable
-    // let range = this.activeRange; // unused variable
-
     let pageUrl = window.location.href;
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + ObjectId().toString();

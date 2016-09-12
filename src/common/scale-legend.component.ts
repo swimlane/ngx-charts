@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'scale-legend',
@@ -24,14 +24,14 @@ import { Component, Input, OnInit } from '@angular/core';
     </div>
   `
 })
-export class ScaleLegend implements OnInit {
+export class ScaleLegend implements OnChanges {
   @Input() valueRange;
   @Input() colors;
   @Input() height;
 
   gradient: any;
 
-  ngOnInit() {
+  ngOnChanges() {
     let gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
     this.gradient = `linear-gradient(to bottom, ${gradientValues})`;
   }

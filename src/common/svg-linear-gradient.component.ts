@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[svgLinearGradient]',
@@ -22,7 +22,7 @@ import { Component, Input, OnInit } from '@angular/core';
     </svg:linearGradient>
   `
 })
-export class SvgLinearGradient implements OnInit {
+export class SvgLinearGradient implements OnChanges {
   @Input() orientation = 'vertical';
   @Input() color;
   @Input() name;
@@ -34,15 +34,11 @@ export class SvgLinearGradient implements OnInit {
   y1: any;
   y2: any;
 
-  ngOnInit() {
+  ngOnChanges() {
     this.x1 = '0%';
     this.x2 = '0%';
     this.y1 = '0%';
     this.y2 = '0%';
-
-    // unused variables
-    // let startOpacity = this.startOpacity;
-    // let endOpacity = this.endOpacity;
 
     if (this.orientation === 'horizontal') {
       this.x2 = '100%';

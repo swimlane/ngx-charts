@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 export interface CardModel {
   x;
@@ -29,7 +29,7 @@ export interface CardModel {
     />
   `
 })
-export class CardSeries implements OnInit, OnChanges {
+export class CardSeries implements OnChanges {
   cards: CardModel[];
 
   @Input() data;
@@ -37,10 +37,6 @@ export class CardSeries implements OnInit, OnChanges {
   @Input() colors;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

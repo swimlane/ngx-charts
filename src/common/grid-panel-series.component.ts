@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[gridPanelSeries]',
@@ -12,7 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
     </svg:g>
   `
 })
-export class GridPanelSeries implements OnInit {
+export class GridPanelSeries implements OnChanges {
   gridPanels: any[];
 
   @Input() data;
@@ -21,7 +21,11 @@ export class GridPanelSeries implements OnInit {
   @Input() yScale;
   @Input() orient;
 
-  ngOnInit() {
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.gridPanels = this.getGridPanels();
   }
 

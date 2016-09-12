@@ -9,7 +9,6 @@ import {BarVertical} from "./bar-vertical.component";
 import {BarVertical2D} from "./bar-vertical-2d.component";
 import {BarVerticalNormalized} from "./bar-vertical-normalized.component";
 import {BarVerticalStacked} from "./bar-vertical-stacked.component";
-import {DateBar} from "./date-bar.component";
 import {SeriesHorizontal} from "./series-horizontal.component";
 import {SeriesVertical} from "./series-vertical.component";
 
@@ -25,7 +24,6 @@ import {SeriesVertical} from "./series-vertical.component";
     BarVertical2D,
     BarVerticalNormalized,
     BarVerticalStacked,
-    DateBar,
     SeriesHorizontal,
     SeriesVertical
   ],
@@ -39,7 +37,6 @@ import {SeriesVertical} from "./series-vertical.component";
     BarVertical2D,
     BarVerticalNormalized,
     BarVerticalStacked,
-    DateBar,
     SeriesHorizontal,
     SeriesVertical
   ]

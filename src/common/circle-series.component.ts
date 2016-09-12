@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import moment = require("moment");
 import ObjectId from "../utils/object-id";
 
@@ -31,7 +31,7 @@ import ObjectId from "../utils/object-id";
     </svg:g>
   `
 })
-export class CircleSeries implements OnInit, OnChanges {
+export class CircleSeries implements OnChanges {
   areaPath: any;
   circles: any[];
 
@@ -45,23 +45,11 @@ export class CircleSeries implements OnInit, OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
-    this.update();
-  }
-
   ngOnChanges() {
     this.update();
   }
 
   update() {
-    // TODO: do this filtering before passing the data down here
-    // if (this.scaleType === 'time') {
-    //   this.data = this.data.filter(d => {
-    //     return d.vals[0].label[0][0] !== 'No Value' && d.vals[0].label[0][0] !== 'Other'
-    //       && d.vals[0].label[0][1] !== 'No Value' && d.vals[0].label[0][1] !== 'Other';
-    //   });
-    // }
-
     this.circles = this.getCircles();
   }
 

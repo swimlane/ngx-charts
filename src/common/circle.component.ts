@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[circle]',
@@ -16,7 +16,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
     />
   `
 })
-export class Circle implements OnInit {
+export class Circle implements OnChanges {
   @Input() cx;
   @Input() cy;
   @Input() r;
@@ -29,7 +29,7 @@ export class Circle implements OnInit {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
+  ngOnChanges() {
     this.classNames = this.classNames.join(' ') + 'circle';
   }
 

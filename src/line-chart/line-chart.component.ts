@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -102,7 +102,7 @@ import moment from 'moment';
     </chart>
   `
 })
-export class LineChart extends BaseChart implements OnInit, OnChanges {
+export class LineChart extends BaseChart implements OnChanges {
   dims: ViewDimensions;
   xDomain: any;
   yDomain: any;
@@ -134,10 +134,6 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
-    this.update();
-  }
-
   ngOnChanges() {
     this.update();
   }
@@ -153,11 +149,6 @@ export class LineChart extends BaseChart implements OnInit, OnChanges {
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();
     this.seriesDomain = this.getSeriesDomain();
-
-    // TODO: should sorting happen here?
-    // this.series = this.results.series[0].array.sort((a, b) => {
-    //   return this.results.d0Domain.indexOf(a.vals[0].label[0][0]) - this.results.d0Domain.indexOf(b.vals[0].label[0][0]);
-    // });
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();

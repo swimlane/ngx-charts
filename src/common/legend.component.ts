@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { trimLabel } from './trim-label.helper';
 
 @Component({
@@ -30,17 +30,13 @@ import { trimLabel } from './trim-label.helper';
     </div>
   `
 })
-export class Legend implements OnInit, OnChanges {
+export class Legend implements OnChanges {
   @Input() data;
   @Input() title;
   @Input() colors;
   @Input() height;
 
   legendItems: any;
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

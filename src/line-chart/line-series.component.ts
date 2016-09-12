@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import d3 from '../d3';
 import moment from 'moment';
 
@@ -12,7 +12,7 @@ import moment from 'moment';
     />
   `
 })
-export class LineSeries implements OnInit, OnChanges {
+export class LineSeries implements OnChanges {
 
   path: string;
 
@@ -21,10 +21,6 @@ export class LineSeries implements OnInit, OnChanges {
   @Input() yScale;
   @Input() color;
   @Input() scaleType;
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

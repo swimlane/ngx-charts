@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'g[svgRadialGradient]',
@@ -22,7 +22,7 @@ import { Component, Input, OnInit } from '@angular/core';
     </svg:radialGradient>
   `
 })
-export class SvgRadialGradient implements OnInit {
+export class SvgRadialGradient implements OnChanges {
   cx: number;
   cy: number;
   r: string;
@@ -32,7 +32,7 @@ export class SvgRadialGradient implements OnInit {
   @Input() startOpacity;
   @Input() endOpacity = 1;
 
-  ngOnInit() {
+  ngOnChanges() {
     this.cx = 0;
     this.cy = 0;
     this.r = "30%";

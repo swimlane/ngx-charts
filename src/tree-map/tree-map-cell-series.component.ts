@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'g[treeMapCellSeries]',
@@ -16,7 +16,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     />
   `
 })
-export class TreeMapCellSeries implements OnInit {
+export class TreeMapCellSeries implements OnChanges {
   cells: any[];
   @Input() data;
   @Input() dims;
@@ -24,7 +24,7 @@ export class TreeMapCellSeries implements OnInit {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
+  ngOnChanges() {
     this.cells = this.getCells();
   }
 

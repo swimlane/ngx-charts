@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -58,7 +58,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class PieGrid extends BaseChart implements OnInit, OnChanges {
+export class PieGrid extends BaseChart implements OnChanges {
   dims: ViewDimensions;
   data: any[];
   transform: string;
@@ -74,10 +74,6 @@ export class PieGrid extends BaseChart implements OnInit, OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
-    this.update();
-  }
-
   ngOnChanges() {
     this.update();
   }
@@ -86,13 +82,6 @@ export class PieGrid extends BaseChart implements OnInit, OnChanges {
     super.update();
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
     this.domain = this.getDomain();
-
-    // TODO
-    // sort data according to domain
-    // let sortedData = this.results.series[0];
-    // sortedData.array = sortedData.array.sort((a, b) => {
-    //   return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
-    // });
 
     this.data = gridLayout(this.dims, this.results, 150);
     this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
@@ -136,7 +125,7 @@ export class PieGrid extends BaseChart implements OnInit, OnChanges {
           data: {
             other: true,
             value: total - value,
-            name: 'other'
+            name: d.data.name
           }
         }]
       };

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -21,7 +21,7 @@ import { gridLayout } from '../common/grid-layout.helper';
     </chart>
   `
 })
-export class NumberCard extends BaseChart implements OnInit, OnChanges {
+export class NumberCard extends BaseChart implements OnChanges {
   dims: ViewDimensions;
   data: any[];
   colors: Function;
@@ -36,10 +36,6 @@ export class NumberCard extends BaseChart implements OnInit, OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnInit() {
-    this.update();
-  }
-
   ngOnChanges() {
     this.update();
   }
@@ -49,11 +45,6 @@ export class NumberCard extends BaseChart implements OnInit, OnChanges {
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
 
     this.domain = this.getDomain();
-
-    // let sortedData = this.results;
-    // sortedData.array = sortedData.sort((a, b) => {
-    //   return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
-    // });
 
     this.data = gridLayout(this.dims, this.results, 150);
 

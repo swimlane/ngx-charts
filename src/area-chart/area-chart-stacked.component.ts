@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -93,7 +93,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
+export class AreaChartStacked extends BaseChart implements OnChanges {
   element: HTMLElement;
   dims: ViewDimensions;
   scaleType: string;
@@ -127,10 +127,6 @@ export class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
   constructor(element: ElementRef) {
     super();
     this.element = element.nativeElement;
-  }
-
-  ngOnInit() {
-    this.update();
   }
 
   ngOnChanges() {

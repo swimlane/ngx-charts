@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import d3 from '../d3';
 
 @Component({
@@ -38,7 +38,7 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class PieSeries implements OnInit, OnChanges {
+export class PieSeries implements OnChanges {
   total: number;
   max: number;
   data: any;
@@ -53,10 +53,6 @@ export class PieSeries implements OnInit, OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

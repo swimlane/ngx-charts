@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
@@ -21,7 +21,7 @@ import { colorHelper } from '../utils/color-sets';
     </chart>
   `
 })
-export class TreeMap extends BaseChart implements OnInit {
+export class TreeMap extends BaseChart implements OnChanges {
   @Input() view;
   @Input() results;
   @Input() margin = [10, 10, 10, 10];
@@ -36,8 +36,7 @@ export class TreeMap extends BaseChart implements OnInit {
   treemap: any;
   data: any;
 
-
-  ngOnInit() {
+  ngOnChanges() {
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false, 12);
 
     let data = [];

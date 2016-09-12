@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
 
@@ -42,7 +42,7 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class Card implements OnInit {
+export class Card implements OnChanges {
   element: HTMLElement;
   transform: string;
   trimmedLabel: string;
@@ -65,7 +65,7 @@ export class Card implements OnInit {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.update();
   }
 

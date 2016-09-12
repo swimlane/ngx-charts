@@ -4,7 +4,6 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  OnInit,
   ElementRef,
   trigger,
   style,
@@ -34,18 +33,11 @@ import {
         animate(1000, style({
           strokeDashoffset: 0
         }))
-      ]),
-      // transition('* => void', [
-      //   style({
-      //     opacity: 1,
-      //     transform: '*',
-      //   }),
-      //   animate(500, style({opacity: 0, transform: 'scale(0)'}))
-      // ])
+      ])
     ])
   ]
 })
-export class Line implements OnChanges, OnInit {
+export class Line implements OnChanges {
   element: ElementRef;
 
   @Input() path;
@@ -59,10 +51,7 @@ export class Line implements OnChanges, OnInit {
 
   }
 
-  ngOnInit() {
-    // console.log(this.element.querySelector('path').getTotalLength());
-  }
-
   ngOnChanges() {
+    // add update animation
   }
 }

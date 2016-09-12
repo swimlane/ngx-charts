@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 // import { formatNumber } from 'common/utils/format';
 // todo fix missing "props"
 import d3 from '../d3';
@@ -30,7 +30,7 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class TreeMapCell implements OnInit {
+export class TreeMapCell implements OnChanges {
   element: HTMLElement;
   transform: string;
   formattedValue: string; // todo check string or number ?
@@ -49,7 +49,7 @@ export class TreeMapCell implements OnInit {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.transform = `translate(${this.x} , ${this.y})`;
     // todo fix this by adding props
     // this.formattedValue = formatNumber(props.value, props.valueType);

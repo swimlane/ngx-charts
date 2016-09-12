@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'chart',
@@ -29,7 +29,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
     </legend>
 `
 })
-export class Chart implements OnInit, OnChanges {
+export class Chart implements OnChanges {
   @Input() view;
   @Input() legend = false;
   @Input() data;
@@ -41,10 +41,6 @@ export class Chart implements OnInit, OnChanges {
   title: any;
   legendWidth: any;
   legendType: any;
-
-  ngOnInit() {
-    this.update();
-  }
 
   ngOnChanges() {
     this.update();

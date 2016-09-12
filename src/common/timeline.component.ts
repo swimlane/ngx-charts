@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import moment = require("moment");
 import { throttle } from "../utils/throttle";
 import d3 from '../d3';
@@ -21,7 +21,7 @@ import d3 from '../d3';
     </svg:g>
   `
 })
-export class Timeline implements OnInit {
+export class Timeline implements OnChanges {
   element: HTMLElement;
   dims: any;
   xScale: any;
@@ -45,7 +45,7 @@ export class Timeline implements OnInit {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.dims = this.calculateDims();
     let offsetY = this.view[1] - 150;
     let results = this.results;
