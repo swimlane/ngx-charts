@@ -10,9 +10,9 @@ export declare class BarHorizontalNormalized extends BaseChart implements OnChan
     yScale: any;
     transform: string;
     colors: Function;
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     legend: boolean;

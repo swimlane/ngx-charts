@@ -12,11 +12,12 @@ export declare class LineChart extends BaseChart implements OnChanges {
     scaleType: string;
     transform: string;
     clipPath: string;
+    clipPathId: string;
     series: any;
     areaPath: any;
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     legend: any;
     customColors: any;
@@ -39,6 +40,7 @@ export declare class LineChart extends BaseChart implements OnChanges {
     getYScale(): any;
     getScaleType(values: any): string;
     isDate(value: any): boolean;
+    updateDomain(domain: any): void;
     click(data: any, series: any): void;
     setColors(): void;
 }

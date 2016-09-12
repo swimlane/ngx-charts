@@ -480,7 +480,7 @@ var NgForm = (function (_super) {
 var content = __webpack_require__(898);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(555)(content, {});
+var update = __webpack_require__(556)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -507,7 +507,7 @@ if(false) {
 var content = __webpack_require__(899);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(555)(content, {});
+var update = __webpack_require__(556)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -532,10 +532,10 @@ if(false) {
 "use strict";
 var core_1 = __webpack_require__(0);
 var platform_browser_1 = __webpack_require__(90);
-var forms_1 = __webpack_require__(557);
+var forms_1 = __webpack_require__(558);
 var platform_browser_dynamic_1 = __webpack_require__(177);
-var app_1 = __webpack_require__(558);
-var ng2d3_1 = __webpack_require__(559);
+var app_1 = __webpack_require__(559);
+var ng2d3_1 = __webpack_require__(560);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -4719,6 +4719,27 @@ var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueT
 
 /***/ },
 
+/***/ 470:
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+function sortLinear(data, property, direction) {
+    if (direction === void 0) { direction = 'asc'; }
+    return data.sort(function (a, b) {
+        if (direction === 'asc') {
+            return a[property] - b[property];
+        }
+        else {
+            return b[property] - a[property];
+        }
+    });
+}
+exports.sortLinear = sortLinear;
+
+
+/***/ },
+
 /***/ 48:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -5256,7 +5277,7 @@ function _mergeErrors(arrayOfErrors) {
 
 /***/ },
 
-/***/ 499:
+/***/ 500:
 /***/ function(module, exports) {
 
 /*
@@ -5313,7 +5334,7 @@ module.exports = function() {
 
 /***/ },
 
-/***/ 555:
+/***/ 556:
 /***/ function(module, exports) {
 
 /*
@@ -5566,11 +5587,11 @@ function updateLink(linkElement, obj) {
 
 /***/ },
 
-/***/ 557:
+/***/ 558:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_forms__ = __webpack_require__(628);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_forms__ = __webpack_require__(629);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractControlDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["a"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractFormGroupDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "CheckboxControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["c"]; });
@@ -5622,20 +5643,21 @@ function updateLink(linkElement, obj) {
 
 /***/ },
 
-/***/ 558:
+/***/ 559:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var data_1 = __webpack_require__(648);
-var chartTypes_1 = __webpack_require__(647);
+var data_1 = __webpack_require__(649);
+var chartTypes_1 = __webpack_require__(648);
 __webpack_require__(1092);
 __webpack_require__(1091);
 var App = (function () {
     function App() {
         this.chartType = 'bar-vertical';
         this.realTimeData = false;
+        this.linearScale = false;
         this.view = [900, 400];
         this.showXAxis = true;
         this.showYAxis = true;
@@ -5652,7 +5674,9 @@ var App = (function () {
         this.explodeSlices = false;
         this.doughnut = false;
         this.autoScale = true;
+        this.timeline = false;
         Object.assign(this, { single: data_1.single, multi: data_1.multi, countries: data_1.countries, chartGroups: chartTypes_1.default });
+        this.dateData = data_1.generateData(5);
     }
     App.prototype.ngOnInit = function () {
         this.selectChart(this.chartType);
@@ -5698,6 +5722,10 @@ var App = (function () {
     };
     App.prototype.selectChart = function (chartSelector) {
         this.chartType = chartSelector;
+        this.linearScale = this.chartType === 'line-chart' ||
+            this.chartType === 'area-chart' ||
+            this.chartType === 'area-chart-normalized' ||
+            this.chartType === 'area-chart-stacked';
         for (var _i = 0, _a = this.chartGroups; _i < _a.length; _i++) {
             var group = _a[_i];
             for (var _b = 0, _c = group.charts; _b < _c.length; _b++) {
@@ -5715,7 +5743,7 @@ var App = (function () {
     App = __decorate([
         core_1.Component({
             selector: 'app',
-            template: "\n    <main>\n      <div class=\"chart-col\">\n        <div class=\"chart-view\">\n          <bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical>\n\n          <bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal>\n\n          <bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-2d>\n\n          <bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-2d>\n\n          <bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-stacked>\n\n          <bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-stacked>\n\n          <bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-normalized>\n\n          <bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-normalized>\n\n          <pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-chart>\n\n          <advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </advanced-pie-chart>\n\n          <pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-grid>\n\n          <line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            (clickHandler)=\"clickHandler($event)\">\n          </line-chart>\n\n          <area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart>\n\n          <area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-stacked>\n\n          <area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-normalized>\n\n          <heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </heat-map>\n\n          <number-card\n            *ngIf=\"chartType === 'number-card'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </number-card>\n        </div>\n      </div>\n\n      <div class=\"sidebar\">\n        <h1>\n          ng2<strong>d3</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n        <!--\n        <h3>Data</h3>\n        <select>\n          <option>Country</option>\n        </select>\n        -->\n\n        <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries'\">{{multi | json}}</pre>\n\n        <div>\n          <label>\n            <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n            Real-time\n          </label>\n        </div>\n\n        <h3>Options</h3>\n\n        <div *ngIf=\"chart.options.includes('showXAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n            Show X Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n            Show Y Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('gradient')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n            Use gradients\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLegend')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n            Show Legend\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n            Show X Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n          <label>X Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n            Show Y Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n          <label>Y Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLabels')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n            Show Labels\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('explodeSlices')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n            Explode Slices\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('doughnut')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n            Doughnut\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('autoScale')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n            Auto Scale\n          </label> <br />\n        </div>\n      </div>\n    </main>\n  "
+            template: "\n    <main>\n      <div class=\"chart-col\">\n        <div class=\"chart-view\">\n          <bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical>\n\n          <bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal>\n\n          <bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-2d>\n\n          <bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-2d>\n\n          <bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-stacked>\n\n          <bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-stacked>\n\n          <bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-normalized>\n\n          <bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-normalized>\n\n          <pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-chart>\n\n          <advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </advanced-pie-chart>\n\n          <pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-grid>\n\n          <line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            (clickHandler)=\"clickHandler($event)\">\n          </line-chart>\n\n          <area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart>\n\n          <area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-stacked>\n\n          <area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-normalized>\n\n          <heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </heat-map>\n\n          <number-card\n            *ngIf=\"chartType === 'number-card'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </number-card>\n        </div>\n      </div>\n\n      <div class=\"sidebar\">\n        <h1>\n          ng2<strong>d3</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n        <!--\n        <h3>Data</h3>\n        <select>\n          <option>Country</option>\n        </select>\n        -->\n\n        <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale\">{{dateData | json}}</pre>\n\n        <div>\n          <label>\n            <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n            Real-time\n          </label>\n        </div>\n\n        <h3>Options</h3>\n\n        <div *ngIf=\"chart.options.includes('showXAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n            Show X Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n            Show Y Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('gradient')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n            Use gradients\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLegend')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n            Show Legend\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n            Show X Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n          <label>X Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n            Show Y Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n          <label>Y Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLabels')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n            Show Labels\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('explodeSlices')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n            Explode Slices\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('doughnut')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n            Doughnut\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('autoScale')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n            Auto Scale\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('timeline')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n            Timeline\n          </label> <br />\n        </div>\n      </div>\n    </main>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], App);
@@ -5726,20 +5754,20 @@ exports.App = App;
 
 /***/ },
 
-/***/ 559:
+/***/ 560:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var area_chart_module_1 = __webpack_require__(652);
-var bar_chart_module_1 = __webpack_require__(654);
-var heat_map_module_1 = __webpack_require__(689);
-var line_chart_module_1 = __webpack_require__(691);
-var number_card_module_1 = __webpack_require__(697);
-var pie_chart_module_1 = __webpack_require__(701);
-var tree_map_module_1 = __webpack_require__(709);
+var area_chart_module_1 = __webpack_require__(653);
+var bar_chart_module_1 = __webpack_require__(655);
+var heat_map_module_1 = __webpack_require__(690);
+var line_chart_module_1 = __webpack_require__(692);
+var number_card_module_1 = __webpack_require__(698);
+var pie_chart_module_1 = __webpack_require__(702);
+var tree_map_module_1 = __webpack_require__(710);
 var NG2D3Module = (function () {
     function NG2D3Module() {
     }
@@ -5842,7 +5870,7 @@ exports.default = ObjectId;
 
 /***/ },
 
-/***/ 625:
+/***/ 626:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5978,7 +6006,7 @@ var InternalFormsSharedModule = (function () {
 
 /***/ },
 
-/***/ 626:
+/***/ 627:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6011,12 +6039,12 @@ function normalizeAsyncValidator(validator) {
 
 /***/ },
 
-/***/ 627:
+/***/ 628:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(625);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(626);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_radio_control_value_accessor__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(454);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormsModule; });
@@ -6072,7 +6100,7 @@ var ReactiveFormsModule = (function () {
 
 /***/ },
 
-/***/ 628:
+/***/ 629:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6097,7 +6125,7 @@ var ReactiveFormsModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__form_builder__ = __webpack_require__(454);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__model__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__form_providers__ = __webpack_require__(627);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__form_providers__ = __webpack_require__(628);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__["a"]; });
@@ -6179,7 +6207,7 @@ var ReactiveFormsModule = (function () {
 
 /***/ },
 
-/***/ 647:
+/***/ 648:
 /***/ function(module, exports) {
 
 "use strict";
@@ -6314,7 +6342,7 @@ exports.default = chartGroups;
 
 /***/ },
 
-/***/ 648:
+/***/ 649:
 /***/ function(module, exports) {
 
 "use strict";
@@ -6377,11 +6405,36 @@ exports.multi = [
 exports.countries = [
     "Abkhazia", "Afghanistan", "Akrotiri and Dhekelia", "Aland", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia", "Austria", "Azerbaijan", "Bahamas, The", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Africa Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Cote d'lvoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "Gabon", "Cambia, The", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guemsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, N", "Korea, S", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Nagorno-Karabakh", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Cyprus", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcaim Islands", "Poland", "Portugal", "Puerto Rico", "Qatar", "Romania", "Russia", "Rwanda", "Sahrawi Arab Democratic Republic", "Saint-Barthelemy", "Saint Helena", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin", "Saint Pierre and Miquelon", "Saint Vincent and Grenadines", "Samos", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "Somaliland", "South Africa", "South Ossetia", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard", "Swaziland", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", "Transnistria", "Trinidad and Tobago", "Tristan da Cunha", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands, British", "Virgin Islands, U.S.", "Wallis and Futuna", "Yemen", "Zambia", "Zimbabwe"
 ];
+function generateData(seriesLength) {
+    var results = [];
+    var domain = [];
+    for (var j = 0; j < 5; j++) {
+        domain.push(Math.floor(1473700105009 + Math.random() * 1000000000));
+    }
+    for (var i = 0; i < seriesLength; i++) {
+        var country = exports.countries[Math.floor(Math.random() * exports.countries.length)];
+        var series = {
+            name: country,
+            series: []
+        };
+        for (var j = 0; j < domain.length; j++) {
+            var value = Math.floor(2000 + Math.random() * 5000);
+            var name_1 = domain[j];
+            series.series.push({
+                value: value,
+                name: new Date(name_1)
+            });
+        }
+        results.push(series);
+    }
+    return results;
+}
+exports.generateData = generateData;
 
 
 /***/ },
 
-/***/ 649:
+/***/ 650:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6405,6 +6458,7 @@ var AreaChartNormalized = (function (_super) {
         this.update();
     };
     AreaChartNormalized.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
         this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
         if (this.timeline) {
@@ -6416,20 +6470,49 @@ var AreaChartNormalized = (function (_super) {
         this.xScale = this.getXScale();
         this.yScale = this.getYScale();
         var _loop_1 = function(i) {
-            var val = this_1.xDomain[i];
+            var val = this_1.xSet[i];
             var d0 = 0;
             var total = 0;
             for (var _i = 0, _a = this_1.results; _i < _a.length; _i++) {
                 var group = _a[_i];
-                var d = group.series.find(function (item) { return item.name === val; });
-                total += d.value;
+                var d = group.series.find(function (item) {
+                    var a = item.name;
+                    var b = val;
+                    if (_this.scaleType === 'time') {
+                        a = a.valueOf();
+                        b = b.valueOf();
+                    }
+                    return a === b;
+                });
+                if (d) {
+                    total += d.value;
+                }
             }
             for (var _b = 0, _c = this_1.results; _b < _c.length; _b++) {
                 var group = _c[_b];
-                var d = group.series.find(function (item) { return item.name === val; });
-                d.d0 = d0;
-                d.d1 = d0 + d.value;
-                d0 += d.value;
+                var d = group.series.find(function (item) {
+                    var a = item.name;
+                    var b = val;
+                    if (_this.scaleType === 'time') {
+                        a = a.valueOf();
+                        b = b.valueOf();
+                    }
+                    return a === b;
+                });
+                if (d) {
+                    d.d0 = d0;
+                    d.d1 = d0 + d.value;
+                    d0 += d.value;
+                }
+                else {
+                    d = {
+                        name: val,
+                        value: 0,
+                        d0: d0,
+                        d1: d0
+                    };
+                    group.series.push(d);
+                }
                 if (total > 0) {
                     d.d0 = (d.d0 * 100) / total;
                     d.d1 = (d.d1 * 100) / total;
@@ -6441,7 +6524,7 @@ var AreaChartNormalized = (function (_super) {
             }
         };
         var this_1 = this;
-        for (var i = 0; i < this.xDomain.length; i++) {
+        for (var i = 0; i < this.xSet.length; i++) {
             _loop_1(i);
         }
         this.setColors();
@@ -6467,7 +6550,7 @@ var AreaChartNormalized = (function (_super) {
             values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
-            domain = [min, max];
+            domain = [new Date(min), new Date(max)];
         }
         else if (this.scaleType === 'linear') {
             values = values.map(function (v) { return Number(v); });
@@ -6478,6 +6561,7 @@ var AreaChartNormalized = (function (_super) {
         else {
             domain = values;
         }
+        this.xSet = values;
         return domain;
     };
     AreaChartNormalized.prototype.getYDomain = function () {
@@ -6537,6 +6621,10 @@ var AreaChartNormalized = (function (_super) {
         }
         return false;
     };
+    AreaChartNormalized.prototype.updateDomain = function (domain) {
+        this.xDomain = domain;
+        this.xScale = this.getXScale();
+    };
     AreaChartNormalized.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -6555,10 +6643,6 @@ var AreaChartNormalized = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], AreaChartNormalized.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalized.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -6610,7 +6694,7 @@ var AreaChartNormalized = (function (_super) {
     AreaChartNormalized = __decorate([
         core_1.Component({
             selector: 'area-chart-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              chartType=\"area\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              chartType=\"area\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChartNormalized);
@@ -6621,7 +6705,7 @@ exports.AreaChartNormalized = AreaChartNormalized;
 
 /***/ },
 
-/***/ 650:
+/***/ 651:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6646,6 +6730,7 @@ var AreaChartStacked = (function (_super) {
         this.update();
     };
     AreaChartStacked.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
         this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
         if (this.timeline) {
@@ -6657,18 +6742,37 @@ var AreaChartStacked = (function (_super) {
         this.xScale = this.getXScale();
         this.yScale = this.getYScale();
         var _loop_1 = function(i) {
-            var val = this_1.xDomain[i];
+            var val = this_1.xSet[i];
             var d0 = 0;
             for (var _i = 0, _a = this_1.results; _i < _a.length; _i++) {
                 var group = _a[_i];
-                var d = group.series.find(function (item) { return item.name === val; });
-                d.d0 = d0;
-                d.d1 = d0 + d.value;
-                d0 += d.value;
+                var d = group.series.find(function (item) {
+                    var a = item.name;
+                    var b = val;
+                    if (_this.scaleType === 'time') {
+                        a = a.valueOf();
+                        b = b.valueOf();
+                    }
+                    return a === b;
+                });
+                if (d) {
+                    d.d0 = d0;
+                    d.d1 = d0 + d.value;
+                    d0 += d.value;
+                }
+                else {
+                    d = {
+                        name: val,
+                        value: 0,
+                        d0: d0,
+                        d1: d0
+                    };
+                    group.series.push(d);
+                }
             }
         };
         var this_1 = this;
-        for (var i = 0; i < this.xDomain.length; i++) {
+        for (var i = 0; i < this.xSet.length; i++) {
             _loop_1(i);
         }
         this.setColors();
@@ -6695,7 +6799,7 @@ var AreaChartStacked = (function (_super) {
             values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
-            domain = [min, max];
+            domain = [new Date(min), new Date(max)];
         }
         else if (this.scaleType === 'linear') {
             values = values.map(function (v) { return Number(v); });
@@ -6706,22 +6810,34 @@ var AreaChartStacked = (function (_super) {
         else {
             domain = values;
         }
+        this.xSet = values;
         return domain;
     };
     AreaChartStacked.prototype.getYDomain = function () {
+        var _this = this;
         var domain = [];
         var _loop_2 = function(i) {
-            var val = this_2.xDomain[i];
+            var val = this_2.xSet[i];
             var sum = 0;
             for (var _i = 0, _a = this_2.results; _i < _a.length; _i++) {
                 var group = _a[_i];
-                var d = group.series.find(function (item) { return item.name === val; });
-                sum += d.value;
+                var d = group.series.find(function (item) {
+                    var a = item.name;
+                    var b = val;
+                    if (_this.scaleType === 'time') {
+                        a = a.valueOf();
+                        b = b.valueOf();
+                    }
+                    return a === b;
+                });
+                if (d) {
+                    sum += d.value;
+                }
             }
             domain.push(sum);
         };
         var this_2 = this;
-        for (var i = 0; i < this.xDomain.length; i++) {
+        for (var i = 0; i < this.xSet.length; i++) {
             _loop_2(i);
         }
         var min = Math.min.apply(Math, [0].concat(domain));
@@ -6782,6 +6898,10 @@ var AreaChartStacked = (function (_super) {
         }
         return false;
     };
+    AreaChartStacked.prototype.updateDomain = function (domain) {
+        this.xDomain = domain;
+        this.xScale = this.getXScale();
+    };
     AreaChartStacked.prototype.addTooltip = function () {
     };
     AreaChartStacked.prototype.click = function (data, series) {
@@ -6802,10 +6922,6 @@ var AreaChartStacked = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], AreaChartStacked.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartStacked.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -6857,7 +6973,7 @@ var AreaChartStacked = (function (_super) {
     AreaChartStacked = __decorate([
         core_1.Component({
             selector: 'area-chart-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], AreaChartStacked);
@@ -6868,7 +6984,7 @@ exports.AreaChartStacked = AreaChartStacked;
 
 /***/ },
 
-/***/ 651:
+/***/ 652:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7009,6 +7125,10 @@ var AreaChart = (function (_super) {
         }
         return false;
     };
+    AreaChart.prototype.updateDomain = function (domain) {
+        this.xDomain = domain;
+        this.xScale = this.getXScale();
+    };
     AreaChart.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -7027,10 +7147,6 @@ var AreaChart = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], AreaChart.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChart.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -7090,7 +7206,7 @@ var AreaChart = (function (_super) {
     AreaChart = __decorate([
         core_1.Component({
             selector: 'area-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChart);
@@ -7101,16 +7217,16 @@ exports.AreaChart = AreaChart;
 
 /***/ },
 
-/***/ 652:
+/***/ 653:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var area_chart_component_1 = __webpack_require__(651);
-var area_chart_normalized_component_1 = __webpack_require__(649);
-var area_chart_stacked_component_1 = __webpack_require__(650);
-var area_series_component_1 = __webpack_require__(653);
+var area_chart_component_1 = __webpack_require__(652);
+var area_chart_normalized_component_1 = __webpack_require__(650);
+var area_chart_stacked_component_1 = __webpack_require__(651);
+var area_series_component_1 = __webpack_require__(654);
 var common_module_1 = __webpack_require__(71);
 var AreaChartModule = (function () {
     function AreaChartModule() {
@@ -7140,14 +7256,14 @@ exports.AreaChartModule = AreaChartModule;
 
 /***/ },
 
-/***/ 653:
+/***/ 654:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var moment = __webpack_require__(2);
+var sort_1 = __webpack_require__(470);
 var AreaSeries = (function () {
     function AreaSeries() {
         this.stacked = false;
@@ -7163,12 +7279,7 @@ var AreaSeries = (function () {
         var startingArea;
         var xProperty = function (d) {
             var label = d.name;
-            if (_this.scaleType === 'time') {
-                return _this.xScale(moment(label).toDate());
-            }
-            else {
-                return _this.xScale(label);
-            }
+            return _this.xScale(label);
         };
         if (this.stacked || this.normalized) {
             area = d3_1.default.area()
@@ -7191,8 +7302,12 @@ var AreaSeries = (function () {
                 .y1(function (d) { return _this.yScale.range()[0]; });
         }
         this.opacity = 1;
-        this.path = area(this.data.series);
-        this.startingPath = startingArea(this.data.series);
+        var data = this.data.series;
+        if (this.scaleType === 'time' || this.scaleType === 'linear') {
+            data = sort_1.sortLinear(data, 'name');
+        }
+        this.path = area(data);
+        this.startingPath = startingArea(data);
     };
     __decorate([
         core_1.Input(), 
@@ -7244,24 +7359,24 @@ exports.AreaSeries = AreaSeries;
 
 /***/ },
 
-/***/ 654:
+/***/ 655:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var bar_component_1 = __webpack_require__(663);
-var bar_horizontal_component_1 = __webpack_require__(658);
-var bar_horizontal_2d_component_1 = __webpack_require__(655);
-var bar_horizontal_normalized_component_1 = __webpack_require__(656);
-var bar_horizontal_stacked_component_1 = __webpack_require__(657);
-var bar_vertical_component_1 = __webpack_require__(662);
-var bar_vertical_2d_component_1 = __webpack_require__(659);
-var bar_vertical_normalized_component_1 = __webpack_require__(660);
-var bar_vertical_stacked_component_1 = __webpack_require__(661);
-var series_horizontal_component_1 = __webpack_require__(664);
-var series_vertical_component_1 = __webpack_require__(665);
+var bar_component_1 = __webpack_require__(664);
+var bar_horizontal_component_1 = __webpack_require__(659);
+var bar_horizontal_2d_component_1 = __webpack_require__(656);
+var bar_horizontal_normalized_component_1 = __webpack_require__(657);
+var bar_horizontal_stacked_component_1 = __webpack_require__(658);
+var bar_vertical_component_1 = __webpack_require__(663);
+var bar_vertical_2d_component_1 = __webpack_require__(660);
+var bar_vertical_normalized_component_1 = __webpack_require__(661);
+var bar_vertical_stacked_component_1 = __webpack_require__(662);
+var series_horizontal_component_1 = __webpack_require__(665);
+var series_vertical_component_1 = __webpack_require__(666);
 var BarChartModule = (function () {
     function BarChartModule() {
     }
@@ -7304,7 +7419,7 @@ exports.BarChartModule = BarChartModule;
 
 /***/ },
 
-/***/ 655:
+/***/ 656:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7418,10 +7533,6 @@ var BarHorizontal2D = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarHorizontal2D.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarHorizontal2D.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -7488,7 +7599,7 @@ exports.BarHorizontal2D = BarHorizontal2D;
 
 /***/ },
 
-/***/ 656:
+/***/ 657:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7582,10 +7693,6 @@ var BarHorizontalNormalized = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarHorizontalNormalized.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarHorizontalNormalized.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -7652,7 +7759,7 @@ exports.BarHorizontalNormalized = BarHorizontalNormalized;
 
 /***/ },
 
-/***/ 657:
+/***/ 658:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7758,10 +7865,6 @@ var BarHorizontalStacked = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarHorizontalStacked.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarHorizontalStacked.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -7828,7 +7931,7 @@ exports.BarHorizontalStacked = BarHorizontalStacked;
 
 /***/ },
 
-/***/ 658:
+/***/ 659:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7905,10 +8008,6 @@ var BarHorizontal = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarHorizontal.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarHorizontal.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -7964,7 +8063,7 @@ exports.BarHorizontal = BarHorizontal;
 
 /***/ },
 
-/***/ 659:
+/***/ 660:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8079,10 +8178,6 @@ var BarVertical2D = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarVertical2D.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarVertical2D.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -8153,7 +8248,7 @@ exports.BarVertical2D = BarVertical2D;
 
 /***/ },
 
-/***/ 660:
+/***/ 661:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8247,10 +8342,6 @@ var BarVerticalNormalized = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarVerticalNormalized.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarVerticalNormalized.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -8317,7 +8408,7 @@ exports.BarVerticalNormalized = BarVerticalNormalized;
 
 /***/ },
 
-/***/ 661:
+/***/ 662:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8423,10 +8514,6 @@ var BarVerticalStacked = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarVerticalStacked.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarVerticalStacked.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -8493,7 +8580,7 @@ exports.BarVerticalStacked = BarVerticalStacked;
 
 /***/ },
 
-/***/ 662:
+/***/ 663:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8625,7 +8712,7 @@ exports.BarVertical = BarVertical;
 
 /***/ },
 
-/***/ 663:
+/***/ 664:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8821,7 +8908,7 @@ exports.Bar = Bar;
 
 /***/ },
 
-/***/ 664:
+/***/ 665:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8950,7 +9037,7 @@ exports.SeriesHorizontal = SeriesHorizontal;
 
 /***/ },
 
-/***/ 665:
+/***/ 666:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9100,7 +9187,7 @@ exports.SeriesVertical = SeriesVertical;
 
 /***/ },
 
-/***/ 666:
+/***/ 667:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9196,17 +9283,17 @@ exports.Area = Area;
 
 /***/ },
 
-/***/ 667:
+/***/ 668:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var axis_label_component_1 = __webpack_require__(668);
-var x_axis_component_1 = __webpack_require__(670);
-var x_axis_ticks_component_1 = __webpack_require__(669);
-var y_axis_component_1 = __webpack_require__(672);
-var y_axis_ticks_component_1 = __webpack_require__(671);
+var axis_label_component_1 = __webpack_require__(669);
+var x_axis_component_1 = __webpack_require__(671);
+var x_axis_ticks_component_1 = __webpack_require__(670);
+var y_axis_component_1 = __webpack_require__(673);
+var y_axis_ticks_component_1 = __webpack_require__(672);
 var platform_browser_1 = __webpack_require__(90);
 var AxesModule = (function () {
     function AxesModule() {
@@ -9226,7 +9313,7 @@ exports.AxesModule = AxesModule;
 
 /***/ },
 
-/***/ 668:
+/***/ 669:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9298,7 +9385,7 @@ exports.AxisLabel = AxisLabel;
 
 /***/ },
 
-/***/ 669:
+/***/ 670:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9450,7 +9537,7 @@ exports.XAxisTicks = XAxisTicks;
 
 /***/ },
 
-/***/ 670:
+/***/ 671:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9522,7 +9609,7 @@ exports.XAxis = XAxis;
 
 /***/ },
 
-/***/ 671:
+/***/ 672:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9687,7 +9774,7 @@ exports.YAxisTicks = YAxisTicks;
 
 /***/ },
 
-/***/ 672:
+/***/ 673:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9765,7 +9852,7 @@ exports.YAxis = YAxis;
 
 /***/ },
 
-/***/ 673:
+/***/ 674:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9838,7 +9925,7 @@ exports.Chart = Chart;
 
 /***/ },
 
-/***/ 674:
+/***/ 675:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9942,7 +10029,7 @@ exports.CircleSeries = CircleSeries;
 
 /***/ },
 
-/***/ 675:
+/***/ 676:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10012,7 +10099,7 @@ exports.Circle = Circle;
 
 /***/ },
 
-/***/ 676:
+/***/ 677:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10101,7 +10188,7 @@ exports.GridPanelSeries = GridPanelSeries;
 
 /***/ },
 
-/***/ 677:
+/***/ 678:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10148,7 +10235,7 @@ exports.GridPanel = GridPanel;
 
 /***/ },
 
-/***/ 678:
+/***/ 679:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10205,7 +10292,7 @@ exports.Legend = Legend;
 
 /***/ },
 
-/***/ 679:
+/***/ 680:
 /***/ function(module, exports) {
 
 "use strict";
@@ -10291,7 +10378,7 @@ exports.PopoverRegistry = PopoverRegistry;
 
 /***/ },
 
-/***/ 680:
+/***/ 681:
 /***/ function(module, exports) {
 
 "use strict";
@@ -10409,14 +10496,14 @@ exports.PositionHelper = PositionHelper;
 
 /***/ },
 
-/***/ 681:
+/***/ 682:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var position_helper_1 = __webpack_require__(680);
-var popover_registry_service_1 = __webpack_require__(679);
+var position_helper_1 = __webpack_require__(681);
+var popover_registry_service_1 = __webpack_require__(680);
 var Popover = (function () {
     function Popover(element, renderer) {
         this.popoverPlacement = 'top';
@@ -10566,7 +10653,7 @@ exports.Popover = Popover;
 
 /***/ },
 
-/***/ 682:
+/***/ 683:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10613,7 +10700,7 @@ exports.ScaleLegend = ScaleLegend;
 
 /***/ },
 
-/***/ 683:
+/***/ 684:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10670,7 +10757,7 @@ exports.SvgLinearGradient = SvgLinearGradient;
 
 /***/ },
 
-/***/ 684:
+/***/ 685:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10715,50 +10802,96 @@ exports.SvgRadialGradient = SvgRadialGradient;
 
 /***/ },
 
-/***/ 685:
+/***/ 686:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var moment = __webpack_require__(2);
-var throttle_1 = __webpack_require__(710);
 var d3_1 = __webpack_require__(7);
 var Timeline = (function () {
     function Timeline(element) {
         this.margin = [10, 20, 70, 20];
+        this.initialized = false;
         this.clickHandler = new core_1.EventEmitter();
-        this.updateXDomain = new core_1.EventEmitter();
+        this.onDomainChange = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
     Timeline.prototype.ngOnChanges = function () {
-        this.dims = this.calculateDims();
-        var offsetY = this.view[1] - 150;
-        var results = this.results;
-        results.series[0] = results.series[0].sort(function (a, b) {
-            return results.d0Domain.indexOf(a.vals[0].label[0][0]) - results.d0Domain.indexOf(b.vals[0].label[0][0]);
-        });
-        var yScale = d3_1.default.scaleLinear()
-            .range([this.dims.height, 0])
-            .domain(results.m0Domain);
-        if (!this.autoScale) {
-            yScale.domain([0, results.m0Domain[1]]);
+        this.update();
+        if (!this.initialized) {
+            this.addBrush();
+            this.initialized = true;
         }
-        this.xScale = this.calculateXScale();
+    };
+    Timeline.prototype.update = function () {
+        this.dims = this.getDims();
+        var offsetY = this.view[1] - 150;
+        this.xDomain = this.getXDomain();
+        this.xScale = this.getXScale();
         this.transform = "translate(" + this.margin[3] + " , " + (this.margin[0] + offsetY) + ")";
-        this.addBrush();
+    };
+    Timeline.prototype.getXDomain = function () {
+        var values = [];
+        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
+            var results = _a[_i];
+            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
+                var d = _c[_b];
+                if (!values.includes(d.name)) {
+                    values.push(d.name);
+                }
+            }
+        }
+        var domain = [];
+        if (this.scaleType === 'time') {
+            values = values.map(function (v) { return moment(v).toDate(); });
+            var min = Math.min.apply(Math, values);
+            var max = Math.max.apply(Math, values);
+            domain = [min, max];
+        }
+        else if (this.scaleType === 'linear') {
+            values = values.map(function (v) { return Number(v); });
+            var min = Math.min.apply(Math, values);
+            var max = Math.max.apply(Math, values);
+            domain = [min, max];
+        }
+        else {
+            domain = values;
+        }
+        return domain;
+    };
+    Timeline.prototype.getYDomain = function () {
+    };
+    Timeline.prototype.getXScale = function () {
+        var scale;
+        if (this.scaleType === 'time') {
+            scale = d3_1.default.scaleTime()
+                .range([0, this.dims.width])
+                .domain(this.xDomain);
+        }
+        else if (this.scaleType === 'linear') {
+            scale = d3_1.default.scaleLinear()
+                .range([0, this.dims.width])
+                .domain(this.xDomain);
+        }
+        else if (this.scaleType === 'ordinal') {
+            scale = d3_1.default.scalePoint()
+                .range([0, this.dims.width])
+                .padding(0.1)
+                .domain(this.xDomain);
+        }
+        return scale;
+    };
+    Timeline.prototype.getYScale = function () {
+        d3_1.default.scaleLinear()
+            .range([this.dims.height, 0])
+            .domain(this.yDomain);
     };
     Timeline.prototype.addBrush = function () {
         var _this = this;
-        if (this.state.brush) {
-            this.brush = this.state.brush;
-        }
-        else {
-            this.brush = d3_1.default.brushX(this.state.xScale)
-                .on("brush", throttle_1.throttle(function () {
-                var newDomain = _this.brush.empty() ? _this.state.xScale.domain() : _this.brush.extent();
-                _this.updateXDomain.emit(newDomain);
-            }, 100));
+        if (this.brush) {
+            return;
         }
         var height = 150 - this.margin[0] - this.margin[2];
         var width = this.view[0];
@@ -10766,35 +10899,18 @@ var Timeline = (function () {
             width = width * 9 / 12.0;
         }
         width = width - this.margin[1] - this.margin[3];
+        this.brush = d3_1.default.brushX()
+            .extent([[0, 0], [width, height]])
+            .on("brush end", function () {
+            var selection = d3_1.default.selection.event.selection || _this.xScale.range();
+            var newDomain = selection.map(_this.xScale.invert);
+            _this.onDomainChange.emit(newDomain);
+        });
         d3_1.default.select(this.element)
             .select('.brush')
-            .call(this.brush)
-            .selectAll("rect")
-            .attr("y", 0)
-            .attr("height", height);
-        d3_1.default.select(this.element)
-            .selectAll('.background')
-            .attr('width', width);
+            .call(this.brush);
     };
-    Timeline.prototype.calculateXScale = function () {
-        var xScale;
-        var domain = d3_1.default.extent(this.results.d0Domain, function (d) {
-            return moment(d).toDate();
-        });
-        if (this.state.xScale) {
-            xScale = this.state.xScale;
-        }
-        else {
-            xScale = d3_1.default.scaleTime()
-                .range([0, this.dims.width])
-                .domain(domain);
-        }
-        if (xScale.domain() !== domain) {
-            xScale.domain(domain);
-        }
-        return xScale;
-    };
-    Timeline.prototype.calculateDims = function () {
+    Timeline.prototype.getDims = function () {
         var width = this.view[0];
         var height = 150;
         if (this.legend) {
@@ -10825,10 +10941,6 @@ var Timeline = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], Timeline.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], Timeline.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
@@ -10843,17 +10955,21 @@ var Timeline = (function () {
         __metadata('design:type', Object)
     ], Timeline.prototype, "autoScale", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Timeline.prototype, "scaleType", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], Timeline.prototype, "clickHandler", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
-    ], Timeline.prototype, "updateXDomain", void 0);
+    ], Timeline.prototype, "onDomainChange", void 0);
     Timeline = __decorate([
         core_1.Component({
             selector: 'g[timeline]',
-            template: "\n    <svg:g\n      [attr.transform]=\"transform\">\n\n      <svg:g xAxis\n        [xScale]=\"xScale\"\n        [dims]=\"dims\"\n        [showGridLines]=\"showGridLines\"\n      />\n\n      <svg:g class=\"x brush\">\n      </svg:g>\n\n    </svg:g>\n  "
+            template: "\n    <svg:g\n      [attr.transform]=\"transform\">\n\n      <svg:g xAxis\n        [xScale]=\"xScale\"\n        [dims]=\"dims\"\n        [showGridLines]=\"showGridLines\"\n      />\n\n      <svg:g class=\"brush\">\n      </svg:g>\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Timeline);
@@ -10864,7 +10980,7 @@ exports.Timeline = Timeline;
 
 /***/ },
 
-/***/ 686:
+/***/ 687:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10947,7 +11063,7 @@ exports.HeatCellSeries = HeatCellSeries;
 
 /***/ },
 
-/***/ 687:
+/***/ 688:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11033,7 +11149,7 @@ exports.HeatMapCell = HeatMapCell;
 
 /***/ },
 
-/***/ 688:
+/***/ 689:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11150,10 +11266,6 @@ var HeatMap = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], HeatMap.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], HeatMap.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -11209,16 +11321,16 @@ exports.HeatMap = HeatMap;
 
 /***/ },
 
-/***/ 689:
+/***/ 690:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var heat_map_cell_component_1 = __webpack_require__(687);
-var heat_map_cell_series_component_1 = __webpack_require__(686);
-var heat_map_component_1 = __webpack_require__(688);
+var heat_map_cell_component_1 = __webpack_require__(688);
+var heat_map_cell_series_component_1 = __webpack_require__(687);
+var heat_map_component_1 = __webpack_require__(689);
 var HeatMapModule = (function () {
     function HeatMapModule() {
     }
@@ -11245,7 +11357,7 @@ exports.HeatMapModule = HeatMapModule;
 
 /***/ },
 
-/***/ 690:
+/***/ 691:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11256,7 +11368,7 @@ var color_sets_1 = __webpack_require__(20);
 var base_chart_component_1 = __webpack_require__(18);
 var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
-var moment_1 = __webpack_require__(2);
+var moment = __webpack_require__(2);
 var LineChart = (function (_super) {
     __extends(LineChart, _super);
     function LineChart() {
@@ -11281,8 +11393,8 @@ var LineChart = (function (_super) {
         this.setColors();
         this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
         var pageUrl = window.location.href;
-        var clipPathId = 'clip' + object_id_1.default().toString();
-        this.clipPath = "url(" + pageUrl + "#" + clipPathId + ")";
+        this.clipPathId = 'clip' + object_id_1.default().toString();
+        this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
     };
     LineChart.prototype.getXDomain = function () {
         var values = [];
@@ -11298,7 +11410,7 @@ var LineChart = (function (_super) {
         this.scaleType = this.getScaleType(values);
         var domain = [];
         if (this.scaleType === 'time') {
-            values = values.map(function (v) { return moment_1.default(v).toDate(); });
+            values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
             domain = [min, max];
@@ -11386,6 +11498,10 @@ var LineChart = (function (_super) {
         }
         return false;
     };
+    LineChart.prototype.updateDomain = function (domain) {
+        this.xDomain = domain;
+        this.xScale = this.getXScale();
+    };
     LineChart.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -11401,10 +11517,6 @@ var LineChart = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], LineChart.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], LineChart.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -11460,7 +11572,7 @@ var LineChart = (function (_super) {
     LineChart = __decorate([
         core_1.Component({
             selector: 'line-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath id=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            transform=\"translate(-5, -5)\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n        <!--\n          <svg:g area\n            *ngIf=\"gradient\"\n            [fill]=\"colors('Line')\"\n            [path]=\"areaPath\"\n            [startingPath]=\"areaPath\"\n            [data]=\"series\"\n            startOpacity=\"0\"\n            endOpacity=\"0.2\"\n            [gradient]=\"gradient\"\n          />\n          -->\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n        <!--\n          <svg:g area\n            *ngIf=\"gradient\"\n            [fill]=\"colors('Line')\"\n            [path]=\"areaPath\"\n            [startingPath]=\"areaPath\"\n            [data]=\"series\"\n            startOpacity=\"0\"\n            endOpacity=\"0.2\"\n            [gradient]=\"gradient\"\n          />\n          -->\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], LineChart);
@@ -11471,16 +11583,16 @@ exports.LineChart = LineChart;
 
 /***/ },
 
-/***/ 691:
+/***/ 692:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var line_component_1 = __webpack_require__(693);
-var line_chart_component_1 = __webpack_require__(690);
-var line_series_component_1 = __webpack_require__(692);
+var line_component_1 = __webpack_require__(694);
+var line_chart_component_1 = __webpack_require__(691);
+var line_series_component_1 = __webpack_require__(693);
 var LineChartModule = (function () {
     function LineChartModule() {
     }
@@ -11507,14 +11619,15 @@ exports.LineChartModule = LineChartModule;
 
 /***/ },
 
-/***/ 692:
+/***/ 693:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var moment_1 = __webpack_require__(2);
+var moment = __webpack_require__(2);
+var sort_1 = __webpack_require__(470);
 var LineSeries = (function () {
     function LineSeries() {
     }
@@ -11528,7 +11641,7 @@ var LineSeries = (function () {
             var label = d.name;
             var value;
             if (_this.scaleType === 'time') {
-                value = _this.xScale(moment_1.default(label).toDate());
+                value = _this.xScale(moment(label).toDate());
             }
             else if (_this.scaleType === 'linear') {
                 value = _this.xScale(Number(label));
@@ -11540,6 +11653,10 @@ var LineSeries = (function () {
         })
             .y(function (d) { return _this.yScale(d.value); });
         var data = this.data.series;
+        if (this.scaleType === 'time' || this.scaleType === 'linear') {
+            data = sort_1.sortLinear(data, 'name');
+        }
+        console.log('data');
         this.path = line(data) || '';
     };
     __decorate([
@@ -11576,7 +11693,7 @@ exports.LineSeries = LineSeries;
 
 /***/ },
 
-/***/ 693:
+/***/ 694:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11632,7 +11749,7 @@ exports.Line = Line;
 
 /***/ },
 
-/***/ 694:
+/***/ 695:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11699,7 +11816,7 @@ exports.CardSeries = CardSeries;
 
 /***/ },
 
-/***/ 695:
+/***/ 696:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11807,7 +11924,7 @@ exports.Card = Card;
 
 /***/ },
 
-/***/ 696:
+/***/ 697:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11882,16 +11999,16 @@ exports.NumberCard = NumberCard;
 
 /***/ },
 
-/***/ 697:
+/***/ 698:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var card_component_1 = __webpack_require__(695);
-var card_series_component_1 = __webpack_require__(694);
-var number_card_component_1 = __webpack_require__(696);
+var card_component_1 = __webpack_require__(696);
+var card_series_component_1 = __webpack_require__(695);
+var number_card_component_1 = __webpack_require__(697);
 var NumberCardModule = (function () {
     function NumberCardModule() {
     }
@@ -11918,7 +12035,7 @@ exports.NumberCardModule = NumberCardModule;
 
 /***/ },
 
-/***/ 698:
+/***/ 699:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12022,157 +12139,6 @@ exports.AdvancedPieChart = AdvancedPieChart;
 
 /***/ },
 
-/***/ 699:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(7);
-var object_id_1 = __webpack_require__(62);
-var PieArc = (function () {
-    function PieArc(element) {
-        this.initialized = false;
-        this.gradient = false;
-        this.clickHandler = new core_1.EventEmitter();
-        this.element = element.nativeElement;
-    }
-    PieArc.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    PieArc.prototype.update = function () {
-        var arc = this.calculateArc();
-        this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
-        this.startOpacity = 0.3;
-        var pageUrl = window.location.href;
-        this.radialGradientId = 'linearGrad' + object_id_1.default().toString();
-        this.linearGradientId = 'radialGrad' + object_id_1.default().toString();
-        if (this.innerRadius !== 0) {
-            this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
-        }
-        else {
-            this.gradientFill = "url(" + pageUrl + "#" + this.linearGradientId + ")";
-        }
-        if (this.initialized) {
-            this.updateAnimation();
-        }
-        else {
-            this.loadAnimation();
-            this.initialized = true;
-        }
-    };
-    PieArc.prototype.calculateArc = function () {
-        var outerRadius = this.outerRadius;
-        if (this.explodeSlices && this.innerRadius === 0) {
-            outerRadius = this.outerRadius * this.value / this.max;
-        }
-        return d3_1.default.arc()
-            .innerRadius(this.innerRadius).outerRadius(outerRadius);
-    };
-    PieArc.prototype.loadAnimation = function () {
-        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
-        var arc = this.calculateArc();
-        node
-            .transition()
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var copyOfD = Object.assign({}, d);
-            copyOfD.endAngle = copyOfD.startAngle;
-            var interpolate = d3_1.default.interpolate(copyOfD, copyOfD);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        })
-            .transition().duration(750)
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var interpolate = d3_1.default.interpolate(this._current, d);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        });
-    };
-    PieArc.prototype.updateAnimation = function () {
-        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
-        var arc = this.calculateArc();
-        node
-            .transition().duration(750)
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var interpolate = d3_1.default.interpolate(this._current, d);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        });
-    };
-    PieArc.prototype.click = function () {
-        this.clickHandler.emit(this.data);
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "fill", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "startAngle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "endAngle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "innerRadius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "outerRadius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "value", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "total", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "max", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "explodeSlices", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PieArc.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "clickHandler", void 0);
-    PieArc = __decorate([
-        core_1.Component({
-            selector: 'g[pieArc]',
-            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n      />\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], PieArc);
-    return PieArc;
-}());
-exports.PieArc = PieArc;
-
-
-/***/ },
-
 /***/ 70:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -12182,7 +12148,7 @@ exports.PieArc = PieArc;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__checkbox_value_accessor__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__default_value_accessor__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__normalize_validator__ = __webpack_require__(626);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__normalize_validator__ = __webpack_require__(627);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__number_value_accessor__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__radio_control_value_accessor__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__select_control_value_accessor__ = __webpack_require__(148);
@@ -12347,6 +12313,157 @@ function selectValueAccessor(dir, valueAccessors) {
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
+var d3_1 = __webpack_require__(7);
+var object_id_1 = __webpack_require__(62);
+var PieArc = (function () {
+    function PieArc(element) {
+        this.initialized = false;
+        this.gradient = false;
+        this.clickHandler = new core_1.EventEmitter();
+        this.element = element.nativeElement;
+    }
+    PieArc.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    PieArc.prototype.update = function () {
+        var arc = this.calculateArc();
+        this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
+        this.startOpacity = 0.3;
+        var pageUrl = window.location.href;
+        this.radialGradientId = 'linearGrad' + object_id_1.default().toString();
+        this.linearGradientId = 'radialGrad' + object_id_1.default().toString();
+        if (this.innerRadius !== 0) {
+            this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
+        }
+        else {
+            this.gradientFill = "url(" + pageUrl + "#" + this.linearGradientId + ")";
+        }
+        if (this.initialized) {
+            this.updateAnimation();
+        }
+        else {
+            this.loadAnimation();
+            this.initialized = true;
+        }
+    };
+    PieArc.prototype.calculateArc = function () {
+        var outerRadius = this.outerRadius;
+        if (this.explodeSlices && this.innerRadius === 0) {
+            outerRadius = this.outerRadius * this.value / this.max;
+        }
+        return d3_1.default.arc()
+            .innerRadius(this.innerRadius).outerRadius(outerRadius);
+    };
+    PieArc.prototype.loadAnimation = function () {
+        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        var arc = this.calculateArc();
+        node
+            .transition()
+            .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var copyOfD = Object.assign({}, d);
+            copyOfD.endAngle = copyOfD.startAngle;
+            var interpolate = d3_1.default.interpolate(copyOfD, copyOfD);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        })
+            .transition().duration(750)
+            .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var interpolate = d3_1.default.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        });
+    };
+    PieArc.prototype.updateAnimation = function () {
+        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        var arc = this.calculateArc();
+        node
+            .transition().duration(750)
+            .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var interpolate = d3_1.default.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        });
+    };
+    PieArc.prototype.click = function () {
+        this.clickHandler.emit(this.data);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "fill", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "startAngle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "endAngle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "innerRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "outerRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "value", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "total", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "explodeSlices", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], PieArc.prototype, "gradient", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "clickHandler", void 0);
+    PieArc = __decorate([
+        core_1.Component({
+            selector: 'g[pieArc]',
+            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n      />\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [core_1.ElementRef])
+    ], PieArc);
+    return PieArc;
+}());
+exports.PieArc = PieArc;
+
+
+/***/ },
+
+/***/ 701:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(19);
 var color_sets_1 = __webpack_require__(20);
 var base_chart_component_1 = __webpack_require__(18);
@@ -12455,20 +12572,20 @@ exports.PieChart = PieChart;
 
 /***/ },
 
-/***/ 701:
+/***/ 702:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var advanced_pie_chart_component_1 = __webpack_require__(698);
-var pie_label_component_1 = __webpack_require__(704);
-var pie_arc_component_1 = __webpack_require__(699);
-var pie_chart_component_1 = __webpack_require__(700);
-var pie_grid_component_1 = __webpack_require__(703);
-var pie_grid_series_component_1 = __webpack_require__(702);
-var pie_series_component_1 = __webpack_require__(705);
+var advanced_pie_chart_component_1 = __webpack_require__(699);
+var pie_label_component_1 = __webpack_require__(705);
+var pie_arc_component_1 = __webpack_require__(700);
+var pie_chart_component_1 = __webpack_require__(701);
+var pie_grid_component_1 = __webpack_require__(704);
+var pie_grid_series_component_1 = __webpack_require__(703);
+var pie_series_component_1 = __webpack_require__(706);
 var PieChartModule = (function () {
     function PieChartModule() {
     }
@@ -12503,7 +12620,7 @@ exports.PieChartModule = PieChartModule;
 
 /***/ },
 
-/***/ 702:
+/***/ 703:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12628,7 +12745,7 @@ exports.PieGridSeries = PieGridSeries;
 
 /***/ },
 
-/***/ 703:
+/***/ 704:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12720,10 +12837,6 @@ var PieGrid = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], PieGrid.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], PieGrid.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -12747,7 +12860,7 @@ exports.PieGrid = PieGrid;
 
 /***/ },
 
-/***/ 704:
+/***/ 705:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12844,7 +12957,7 @@ exports.PieLabel = PieLabel;
 
 /***/ },
 
-/***/ 705:
+/***/ 706:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12976,7 +13089,7 @@ exports.PieSeries = PieSeries;
 
 /***/ },
 
-/***/ 706:
+/***/ 707:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13041,7 +13154,7 @@ exports.TreeMapCellSeries = TreeMapCellSeries;
 
 /***/ },
 
-/***/ 707:
+/***/ 708:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13121,7 +13234,7 @@ exports.TreeMapCell = TreeMapCell;
 
 /***/ },
 
-/***/ 708:
+/***/ 709:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13174,10 +13287,6 @@ var TreeMap = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], TreeMap.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], TreeMap.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
@@ -13201,62 +13310,26 @@ exports.TreeMap = TreeMap;
 
 /***/ },
 
-/***/ 709:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var tree_map_cell_component_1 = __webpack_require__(707);
-var tree_map_cell_series_component_1 = __webpack_require__(706);
-var tree_map_component_1 = __webpack_require__(708);
-var TreeMapModule = (function () {
-    function TreeMapModule() {
-    }
-    TreeMapModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                tree_map_cell_component_1.TreeMapCell,
-                tree_map_cell_series_component_1.TreeMapCellSeries,
-                tree_map_component_1.TreeMap
-            ],
-            exports: [
-                tree_map_cell_component_1.TreeMapCell,
-                tree_map_cell_series_component_1.TreeMapCellSeries,
-                tree_map_component_1.TreeMap
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TreeMapModule);
-    return TreeMapModule;
-}());
-exports.TreeMapModule = TreeMapModule;
-
-
-/***/ },
-
 /***/ 71:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var chart_component_1 = __webpack_require__(673);
-var legend_component_1 = __webpack_require__(678);
-var scale_legend_component_1 = __webpack_require__(682);
-var axes_module_component_1 = __webpack_require__(667);
-var sw_popover_component_1 = __webpack_require__(681);
-var circle_series_component_1 = __webpack_require__(674);
-var circle_component_1 = __webpack_require__(675);
-var grid_panel_component_1 = __webpack_require__(677);
-var grid_panel_series_component_1 = __webpack_require__(676);
-var svg_linear_gradient_component_1 = __webpack_require__(683);
-var svg_radial_gradient_component_1 = __webpack_require__(684);
-var timeline_component_1 = __webpack_require__(685);
+var chart_component_1 = __webpack_require__(674);
+var legend_component_1 = __webpack_require__(679);
+var scale_legend_component_1 = __webpack_require__(683);
+var axes_module_component_1 = __webpack_require__(668);
+var sw_popover_component_1 = __webpack_require__(682);
+var circle_series_component_1 = __webpack_require__(675);
+var circle_component_1 = __webpack_require__(676);
+var grid_panel_component_1 = __webpack_require__(678);
+var grid_panel_series_component_1 = __webpack_require__(677);
+var svg_linear_gradient_component_1 = __webpack_require__(684);
+var svg_radial_gradient_component_1 = __webpack_require__(685);
+var timeline_component_1 = __webpack_require__(686);
 var platform_browser_1 = __webpack_require__(90);
-var area_component_1 = __webpack_require__(666);
+var area_component_1 = __webpack_require__(667);
 var COMPONENTS = [
     area_component_1.Area,
     chart_component_1.Chart,
@@ -13296,104 +13369,37 @@ exports.CommonModule = CommonModule;
 /***/ },
 
 /***/ 710:
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-function debounce(func, wait, immediate) {
-    var timeout, args, context, timestamp, result;
-    return function () {
-        context = this;
-        args = arguments;
-        timestamp = new Date();
-        var later = function () {
-            var last = new Date().getTime() - timestamp;
-            if (last < wait) {
-                timeout = setTimeout(later, wait - last);
-            }
-            else {
-                timeout = null;
-                if (!immediate) {
-                    result = func.apply(context, args);
-                }
-            }
-        };
-        var callNow = immediate && !timeout;
-        if (!timeout) {
-            timeout = setTimeout(later, wait);
-        }
-        if (callNow) {
-            result = func.apply(context, args);
-        }
-        return result;
-    };
-}
-exports.debounce = debounce;
-function debounceable(duration, immediate) {
-    return function innerDecorator(target, key, descriptor) {
-        return {
-            configurable: true,
-            enumerable: descriptor.enumerable,
-            get: function getter() {
-                Object.defineProperty(this, key, {
-                    configurable: true,
-                    enumerable: descriptor.enumerable,
-                    value: debounce(descriptor.value, duration, immediate)
-                });
-                return this[key];
-            }
-        };
-    };
-}
-exports.debounceable = debounceable;
-function throttle(func, wait, options) {
-    if (options === void 0) { options = {}; }
-    var context, args, result;
-    var timeout = null;
-    var previous = 0;
-    var later = function () {
-        previous = options.leading === false ? 0 : new Date();
-        timeout = null;
-        result = func.apply(context, args);
-    };
-    return function () {
-        var now = new Date();
-        if (!previous && options.leading === false) {
-            previous = now;
-        }
-        var remaining = wait - (now.getTime() - previous);
-        context = this;
-        args = arguments;
-        if (remaining <= 0) {
-            clearTimeout(timeout);
-            timeout = null;
-            previous = now;
-            result = func.apply(context, args);
-        }
-        else if (!timeout && options.trailing !== false) {
-            timeout = setTimeout(later, remaining);
-        }
-        return result;
-    };
-}
-exports.throttle = throttle;
-function throttleable(duration, options) {
-    return function innerDecorator(target, key, descriptor) {
-        return {
-            configurable: true,
-            enumerable: descriptor.enumerable,
-            get: function getter() {
-                Object.defineProperty(this, key, {
-                    configurable: true,
-                    enumerable: descriptor.enumerable,
-                    value: throttle(descriptor.value, duration, options)
-                });
-                return this[key];
-            }
-        };
-    };
-}
-exports.throttleable = throttleable;
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(71);
+var tree_map_cell_component_1 = __webpack_require__(708);
+var tree_map_cell_series_component_1 = __webpack_require__(707);
+var tree_map_component_1 = __webpack_require__(709);
+var TreeMapModule = (function () {
+    function TreeMapModule() {
+    }
+    TreeMapModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                tree_map_cell_component_1.TreeMapCell,
+                tree_map_cell_series_component_1.TreeMapCellSeries,
+                tree_map_component_1.TreeMap
+            ],
+            exports: [
+                tree_map_cell_component_1.TreeMapCell,
+                tree_map_cell_series_component_1.TreeMapCellSeries,
+                tree_map_component_1.TreeMap
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TreeMapModule);
+    return TreeMapModule;
+}());
+exports.TreeMapModule = TreeMapModule;
 
 
 /***/ },
@@ -13487,7 +13493,7 @@ exports.trimLabel = trimLabel;
 /***/ 898:
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(499)();
+exports = module.exports = __webpack_require__(500)();
 // imports
 
 
@@ -13502,12 +13508,12 @@ exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n  font-family: 'Ro
 /***/ 899:
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(499)();
+exports = module.exports = __webpack_require__(500)();
 // imports
 
 
 // module
-exports.push([module.i, ".ng2d3 {\n  float: left; }\n  .ng2d3.bar:hover, .ng2d3.cell:hover, .ng2d3.arc:hover, .ng2d3.card:hover {\n    opacity: 0.8; }\n  .ng2d3.area {\n    opacity: 0.6; }\n  .ng2d3.circle:hover {\n    cursor: pointer; }\n  .ng2d3.treemap .cell {\n    cursor: pointer; }\n    .ng2d3.treemap .cell foreignObject {\n      pointer-events: none; }\n    .ng2d3.treemap .cell p {\n      text-align: center;\n      pointer-events: none; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none; }\n\n.gridline-path-shadow {\n  stroke: black; }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.brush .background {\n  visibility: visible !important;\n  fill: rgba(255, 255, 255, 0.03); }\n\n.brush .extent {\n  stroke: none;\n  fill-opacity: .3;\n  shape-rendering: 'crispEdges'; }\n\n.legend {\n  display: inline-block;\n  float: left; }\n  .legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .legend ul, .legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .legend .legend-wrap {\n    width: 90%; }\n  .legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px; }\n  .legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .legend .legend-label.active {\n      color: #FFF; }\n  .legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px; }\n  .legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%; }\n\n.advanced-pie {\n  float: left; }\n\n.advanced-pie-legend {\n  float: left; }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n", "", {"version":3,"sources":["/./src/src/ng2d3.scss"],"names":[],"mappings":"AAAA;EACE,YAAY,EAmCb;EApCD;IAQM,aAAa,EACd;EATL;IAaI,aAAa,EACd;EAdH;IAkBM,gBAAgB,EACjB;EAnBL;IAwBM,gBAAgB,EAUjB;IAlCL;MA2BQ,qBAAqB,EACtB;IA5BP;MA+BQ,mBAAmB;MACnB,qBAAqB,EACtB;;AAKP;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,iCAAY;EACZ,kBAAkB;EAClB,WAAW,EACZ;;AAED;EACE,cAAY,EACb;;AAED;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,+BAA+B;EAC/B,gCAAU,EACX;;AAJH;EAOI,aAAa;EACb,iBAAiB;EACjB,8BAA8B,EAC/B;;AAGH;EACE,sBAAsB;EACtB,YAAY,EAsEb;EAxED;IAKI,eAAe;IACf,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAVH;IAaI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAhBH;IAmBI,WAAW,EACZ;EApBH;IAuBI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB,EACpB;EA7BH;IAgCI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAKhB;IAxCH;MAsCM,YAAY,EACb;EAvCL;IA2CI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EAjDH;IAoDI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB,EACjB;EAxDH;IA2DI,eAAe;IACf,kBAAkB,EACnB;EA7DH;IAgEI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB;IACxB,WAAW,EACZ;;AAGH;EACE,YAAY,EACb;;AAED;EACE,YAAY,EAkDb;EAnDD;IAII,gBACD,EAAC;EALJ;IAQI,gBAAgB;IAChB,oBAAoB,EACrB;EAVH;IAaI,YAAY,EAqCb;IAlDH;MAgBM,oBAAoB;MACpB,eAAe,EAgChB;MAjDL;QAoBQ,mBAAmB;QACnB,sBAAsB,EA2BvB;QAhDP;UAwBU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA3BT;UA8BU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAlCT;UAqCU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAxCT;UA2CU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB","file":"ng2d3.scss","sourcesContent":[".ng2d3 {\n  float: left;\n\n  &.bar,\n  &.cell,\n  &.arc,\n  &.card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n  \n  &.area {\n    opacity: 0.6;\n  }\n\n  &.circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  &.treemap {\n    .cell {\n      cursor: pointer;\n\n      foreignObject {\n        pointer-events: none;\n      }\n\n      p {\n        text-align: center;\n        pointer-events: none;\n      }\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none;\n}\n\n.gridline-path-shadow {\n  stroke: rgba(0, 0, 0, 1);\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.brush {\n  .background {\n    visibility: visible !important;\n    fill: rgba(255, 255, 255, 0.03);\n  }\n\n  .extent {\n    stroke: none;\n    fill-opacity: .3;\n    shape-rendering: 'crispEdges';\n  }\n}\n\n.legend {\n  display: inline-block;\n  float: left;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%;\n  }\n}\n\n.advanced-pie {\n  float: left;\n}\n\n.advanced-pie-legend {\n  float: left;\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, ".ng2d3 {\n  float: left; }\n  .ng2d3.bar:hover, .ng2d3.cell:hover, .ng2d3.arc:hover, .ng2d3.card:hover {\n    opacity: 0.8; }\n  .ng2d3.area {\n    opacity: 0.6; }\n  .ng2d3.circle:hover {\n    cursor: pointer; }\n  .ng2d3.treemap .cell {\n    cursor: pointer; }\n    .ng2d3.treemap .cell foreignObject {\n      pointer-events: none; }\n    .ng2d3.treemap .cell p {\n      text-align: center;\n      pointer-events: none; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none; }\n\n.gridline-path-shadow {\n  stroke: black; }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.brush .overlay {\n  fill: rgba(0, 0, 0, 0.07); }\n\n.brush .selection {\n  stroke: none;\n  fill-opacity: .3;\n  shape-rendering: 'crispEdges'; }\n\n.brush .handle {\n  fill: #3f51b5; }\n\n.legend {\n  display: inline-block;\n  float: left; }\n  .legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .legend ul, .legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .legend .legend-wrap {\n    width: 90%; }\n  .legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px; }\n  .legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .legend .legend-label.active {\n      color: #FFF; }\n  .legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px; }\n  .legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%; }\n\n.advanced-pie {\n  float: left; }\n\n.advanced-pie-legend {\n  float: left; }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n", "", {"version":3,"sources":["/./src/src/ng2d3.scss"],"names":[],"mappings":"AAAA;EACE,YAAY,EAmCb;EApCD;IAQM,aAAa,EACd;EATL;IAaI,aAAa,EACd;EAdH;IAkBM,gBAAgB,EACjB;EAnBL;IAwBM,gBAAgB,EAUjB;IAlCL;MA2BQ,qBAAqB,EACtB;IA5BP;MA+BQ,mBAAmB;MACnB,qBAAqB,EACtB;;AAKP;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,iCAAY;EACZ,kBAAkB;EAClB,WAAW,EACZ;;AAED;EACE,cAAY,EACb;;AAED;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,0BAAU,EACX;;AAHH;EAMI,aAAa;EACb,iBAAiB;EACjB,8BAA8B,EAC/B;;AATH;EAYI,cAAc,EACf;;AAGH;EACE,sBAAsB;EACtB,YAAY,EAsEb;EAxED;IAKI,eAAe;IACf,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAVH;IAaI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAhBH;IAmBI,WAAW,EACZ;EApBH;IAuBI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB,EACpB;EA7BH;IAgCI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAKhB;IAxCH;MAsCM,YAAY,EACb;EAvCL;IA2CI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EAjDH;IAoDI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB,EACjB;EAxDH;IA2DI,eAAe;IACf,kBAAkB,EACnB;EA7DH;IAgEI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB;IACxB,WAAW,EACZ;;AAGH;EACE,YAAY,EACb;;AAED;EACE,YAAY,EAkDb;EAnDD;IAII,gBACD,EAAC;EALJ;IAQI,gBAAgB;IAChB,oBAAoB,EACrB;EAVH;IAaI,YAAY,EAqCb;IAlDH;MAgBM,oBAAoB;MACpB,eAAe,EAgChB;MAjDL;QAoBQ,mBAAmB;QACnB,sBAAsB,EA2BvB;QAhDP;UAwBU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA3BT;UA8BU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAlCT;UAqCU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAxCT;UA2CU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB","file":"ng2d3.scss","sourcesContent":[".ng2d3 {\n  float: left;\n\n  &.bar,\n  &.cell,\n  &.arc,\n  &.card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n\n  &.area {\n    opacity: 0.6;\n  }\n\n  &.circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  &.treemap {\n    .cell {\n      cursor: pointer;\n\n      foreignObject {\n        pointer-events: none;\n      }\n\n      p {\n        text-align: center;\n        pointer-events: none;\n      }\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none;\n}\n\n.gridline-path-shadow {\n  stroke: rgba(0, 0, 0, 1);\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.brush {\n  .overlay {\n    fill: rgba(0, 0, 0, 0.07);\n  }\n\n  .selection {\n    stroke: none;\n    fill-opacity: .3;\n    shape-rendering: 'crispEdges';\n  }\n\n  .handle {\n    fill: #3f51b5;\n  }\n}\n\n.legend {\n  display: inline-block;\n  float: left;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%;\n  }\n}\n\n.advanced-pie {\n  float: left;\n}\n\n.advanced-pie-legend {\n  float: left;\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -13638,4 +13644,4 @@ var EventEmitter = (function (_super) {
 /***/ }
 
 },[1093]);
-//# sourceMappingURL=app.6f442b6ccf35671a67e4.map
+//# sourceMappingURL=app.a7ce7d12ace3bfd9ede9.map

@@ -14,9 +14,9 @@ export declare class AreaChart extends BaseChart implements OnChanges {
     clipPath: string;
     scaleType: string;
     series: any;
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     legend: any;
     state: any;
@@ -40,6 +40,7 @@ export declare class AreaChart extends BaseChart implements OnChanges {
     getYScale(): any;
     getScaleType(values: any): string;
     isDate(value: any): boolean;
+    updateDomain(domain: any): void;
     click(data: any, series: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;

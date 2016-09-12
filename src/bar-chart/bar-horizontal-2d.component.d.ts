@@ -11,9 +11,9 @@ export declare class BarHorizontal2D extends BaseChart implements OnChanges {
     valueScale: any;
     transform: string;
     colors: Function;
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     legend: boolean;

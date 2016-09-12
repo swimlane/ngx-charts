@@ -9,6 +9,8 @@ export declare class App implements OnInit {
     countries: any[];
     single: any[];
     multi: any[];
+    dateData: any[];
+    linearScale: boolean;
     view: any[];
     showXAxis: boolean;
     showYAxis: boolean;
@@ -25,6 +27,7 @@ export declare class App implements OnInit {
     explodeSlices: boolean;
     doughnut: boolean;
     autoScale: boolean;
+    timeline: boolean;
     constructor();
     ngOnInit(): void;
     updateData(): void;

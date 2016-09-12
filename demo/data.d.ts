@@ -10,3 +10,4 @@ export declare var multi: {
     }[];
 }[];
 export declare var countries: string[];
+export declare function generateData(seriesLength: any): any[];

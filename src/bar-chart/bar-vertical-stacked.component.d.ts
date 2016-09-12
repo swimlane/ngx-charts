@@ -11,9 +11,9 @@ export declare class BarVerticalStacked extends BaseChart implements OnChanges {
     transform: string;
     tickFormatting: Function;
     colors: Function;
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     legend: boolean;

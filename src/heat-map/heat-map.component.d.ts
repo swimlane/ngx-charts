@@ -13,9 +13,9 @@ export declare class HeatMap extends BaseChart implements OnChanges {
     colorScale: any;
     transform: string;
     rects: any[];
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     legend: any;

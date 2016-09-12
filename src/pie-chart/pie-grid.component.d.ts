@@ -8,9 +8,9 @@ export declare class PieGrid extends BaseChart implements OnChanges {
     series: any[];
     domain: any[];
     colorScale: Function;
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     clickHandler: EventEmitter<{}>;

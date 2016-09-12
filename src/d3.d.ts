@@ -5,6 +5,7 @@ declare var _default: {
     brush: any;
     brushX: any;
     brushY: any;
+    event: any;
     extent: any;
     format: any;
     interpolate: any;
@@ -15,6 +16,7 @@ declare var _default: {
     pie: any;
     range: any;
     rgb: any;
+    selection: any;
     select: any;
     selectAll: any;
     scaleBand: any;
