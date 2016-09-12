@@ -18,7 +18,6 @@ export declare class PieChart extends BaseChart implements OnChanges {
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
     translation: string;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getDomain(): any;

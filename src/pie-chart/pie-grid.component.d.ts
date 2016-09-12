@@ -1,7 +1,7 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class PieGrid extends BaseChart implements OnInit, OnChanges {
+export declare class PieGrid extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     data: any[];
     transform: string;
@@ -14,7 +14,6 @@ export declare class PieGrid extends BaseChart implements OnInit, OnChanges {
     scheme: any;
     customColors: any;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getDomain(): any;

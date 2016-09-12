@@ -1,4 +1,4 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 export interface CardModel {
     x: any;
     y: any;
@@ -9,13 +9,12 @@ export interface CardModel {
     data: any;
     tooltipText: string;
 }
-export declare class CardSeries implements OnInit, OnChanges {
+export declare class CardSeries implements OnChanges {
     cards: CardModel[];
     data: any;
     dims: any;
     colors: any;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getCards(): any;

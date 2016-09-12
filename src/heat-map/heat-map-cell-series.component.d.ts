@@ -1,5 +1,5 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
-export declare class HeatCellSeries implements OnInit, OnChanges {
+import { EventEmitter, OnChanges } from '@angular/core';
+export declare class HeatCellSeries implements OnChanges {
     cells: any[];
     data: any;
     colors: any;
@@ -7,7 +7,6 @@ export declare class HeatCellSeries implements OnInit, OnChanges {
     yScale: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getCells(): any[];

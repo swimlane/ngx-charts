@@ -1,5 +1,5 @@
-import { EventEmitter, OnInit } from '@angular/core';
-export declare class Circle implements OnInit {
+import { EventEmitter, OnChanges } from '@angular/core';
+export declare class Circle implements OnChanges {
     cx: any;
     cy: any;
     r: any;
@@ -10,6 +10,6 @@ export declare class Circle implements OnInit {
     circleOpacity: any;
     pointerEvents: any;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
+    ngOnChanges(): void;
     click(): void;
 }

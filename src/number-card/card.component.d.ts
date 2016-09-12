@@ -1,5 +1,5 @@
-import { EventEmitter, ElementRef, OnInit } from '@angular/core';
-export declare class Card implements OnInit {
+import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+export declare class Card implements OnChanges {
     element: HTMLElement;
     transform: string;
     trimmedLabel: string;
@@ -16,7 +16,7 @@ export declare class Card implements OnInit {
     data: any;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef);
-    ngOnInit(): void;
+    ngOnChanges(): void;
     update(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;

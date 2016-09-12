@@ -1,5 +1,5 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
-export declare class PieSeries implements OnInit, OnChanges {
+import { EventEmitter, OnChanges } from '@angular/core';
+export declare class PieSeries implements OnChanges {
     total: number;
     max: number;
     data: any;
@@ -12,7 +12,6 @@ export declare class PieSeries implements OnInit, OnChanges {
     showLabels: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getTotal(): any;

@@ -1,5 +1,5 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
-export declare class CircleSeries implements OnInit, OnChanges {
+import { EventEmitter, OnChanges } from '@angular/core';
+export declare class CircleSeries implements OnChanges {
     areaPath: any;
     circles: any[];
     data: any;
@@ -10,7 +10,6 @@ export declare class CircleSeries implements OnInit, OnChanges {
     strokeColor: any;
     scaleType: any;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getCircles(): any;

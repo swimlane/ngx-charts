@@ -1,11 +1,11 @@
-import { OnInit, EventEmitter } from '@angular/core';
-export declare class TreeMapCellSeries implements OnInit {
+import { OnChanges, EventEmitter } from '@angular/core';
+export declare class TreeMapCellSeries implements OnChanges {
     cells: any[];
     data: any;
     dims: any;
     colors: any;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
+    ngOnChanges(): void;
     getCells(): any;
     click(data: any): void;
 }

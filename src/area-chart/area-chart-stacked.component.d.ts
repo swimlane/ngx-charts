@@ -1,7 +1,7 @@
-import { EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class AreaChartStacked extends BaseChart implements OnInit, OnChanges {
+export declare class AreaChartStacked extends BaseChart implements OnChanges {
     element: HTMLElement;
     dims: ViewDimensions;
     scaleType: string;
@@ -30,7 +30,6 @@ export declare class AreaChartStacked extends BaseChart implements OnInit, OnCha
     gradient: any;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef);
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getXDomain(): any[];
@@ -42,5 +41,6 @@ export declare class AreaChartStacked extends BaseChart implements OnInit, OnCha
     isDate(value: any): boolean;
     addTooltip(): void;
     click(data: any, series: any): void;
+    trackBy(index: any, item: any): any;
     setColors(): void;
 }

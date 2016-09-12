@@ -1,5 +1,5 @@
-import { OnInit, OnChanges } from '@angular/core';
-export declare class AxisLabel implements OnInit, OnChanges {
+import { ElementRef, OnChanges } from '@angular/core';
+export declare class AxisLabel implements OnChanges {
     orient: any;
     label: any;
     offset: any;
@@ -10,7 +10,8 @@ export declare class AxisLabel implements OnInit, OnChanges {
     transform: any;
     strokeWidth: any;
     textAnchor: any;
-    ngOnInit(): void;
+    element: ElementRef;
+    constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
 }

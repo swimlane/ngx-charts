@@ -1,5 +1,5 @@
-import { EventEmitter, ElementRef, OnInit } from '@angular/core';
-export declare class Timeline implements OnInit {
+import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+export declare class Timeline implements OnChanges {
     element: HTMLElement;
     dims: any;
     xScale: any;
@@ -17,7 +17,7 @@ export declare class Timeline implements OnInit {
     clickHandler: EventEmitter<{}>;
     updateXDomain: EventEmitter<{}>;
     constructor(element: ElementRef);
-    ngOnInit(): void;
+    ngOnChanges(): void;
     addBrush(): void;
     calculateXScale(): any;
     calculateDims(): {

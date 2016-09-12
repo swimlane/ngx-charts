@@ -82,7 +82,7 @@ var AbstractFormGroupDirective = (function (_super) {
 
 /***/ },
 
-/***/ 1082:
+/***/ 1081:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -210,18 +210,18 @@ function dispatchError(arg) {
 
 /***/ },
 
-/***/ 1083:
+/***/ 1082:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var PromiseObservable_1 = __webpack_require__(1082);
+var PromiseObservable_1 = __webpack_require__(1081);
 exports.fromPromise = PromiseObservable_1.PromiseObservable.create;
 //# sourceMappingURL=fromPromise.js.map
 
 /***/ },
 
-/***/ 1084:
+/***/ 1083:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -471,13 +471,13 @@ var NgForm = (function (_super) {
 
 /***/ },
 
-/***/ 1092:
+/***/ 1091:
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(899);
+var content = __webpack_require__(898);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(555)(content, {});
@@ -498,13 +498,13 @@ if(false) {
 
 /***/ },
 
-/***/ 1093:
+/***/ 1092:
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(900);
+var content = __webpack_require__(899);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(555)(content, {});
@@ -525,7 +525,7 @@ if(false) {
 
 /***/ },
 
-/***/ 1094:
+/***/ 1093:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1839,7 +1839,7 @@ var SELECT_DIRECTIVES = [SelectMultipleControlValueAccessor, NgSelectMultipleOpt
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__ = __webpack_require__(1083);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__ = __webpack_require__(1082);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_shared__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_async__ = __webpack_require__(94);
@@ -2674,7 +2674,7 @@ var FormArray = (function (_super) {
 
 /***/ },
 
-/***/ 17:
+/***/ 18:
 /***/ function(module, exports) {
 
 "use strict";
@@ -2715,7 +2715,7 @@ exports.BaseChart = BaseChart;
 
 /***/ },
 
-/***/ 18:
+/***/ 19:
 /***/ function(module, exports) {
 
 "use strict";
@@ -2746,7 +2746,7 @@ exports.calculateViewDimensions = calculateViewDimensions;
 
 /***/ },
 
-/***/ 19:
+/***/ 20:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5102,7 +5102,7 @@ var SetWrapper = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__ = __webpack_require__(1084);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__ = __webpack_require__(1083);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_lang__ = __webpack_require__(26);
@@ -5630,12 +5630,12 @@ function updateLink(linkElement, obj) {
 var core_1 = __webpack_require__(0);
 var data_1 = __webpack_require__(648);
 var chartTypes_1 = __webpack_require__(647);
-__webpack_require__(1093);
 __webpack_require__(1092);
+__webpack_require__(1091);
 var App = (function () {
     function App() {
-        this.chartType = 'bar-vertical';
-        this.realTimeData = false;
+        this.chartType = 'pie-grid';
+        this.realTimeData = true;
         this.view = [900, 400];
         this.showXAxis = true;
         this.showYAxis = true;
@@ -5715,7 +5715,7 @@ var App = (function () {
     App = __decorate([
         core_1.Component({
             selector: 'app',
-            template: "\n    <main>\n      <div class=\"chart-col\">\n        <div class=\"chart-view\">\n          <bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical>\n\n          <bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal>\n\n          <bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-2d>\n\n          <bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-2d>\n\n          <bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-stacked>\n\n          <bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-stacked>\n\n          <bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-normalized>\n\n          <bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-normalized>\n\n          <pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-chart>\n\n          <advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </advanced-pie-chart>\n\n          <pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-grid>\n\n          <line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            (clickHandler)=\"clickHandler($event)\">\n          </line-chart>\n\n          <area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart>\n\n          <area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-stacked>\n\n          <area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-normalized>\n\n          <heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </heat-map>\n\n          <number-card\n            *ngIf=\"chartType === 'number-card'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </number-card>\n        </div>\n      </div>\n\n      <div class=\"sidebar\">\n        <h1>\n          ng2<strong>d3</strong>\n          <small>Angular2 D3 Chart Framework</small>\n\n          <!-- Place this tag where you want the button to render. -->\n          \n        </h1>\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n        <!--\n        <h3>Data</h3>\n        <select>\n          <option>Country</option>\n        </select>\n        -->\n\n        <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries'\">{{multi | json}}</pre>\n\n        <div>\n          <label>\n            <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n            Real-time\n          </label>\n        </div>\n\n        <h3>Options</h3>\n\n        <div *ngIf=\"chart.options.includes('showXAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n            Show X Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n            Show Y Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('gradient')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n            Use gradients\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLegend')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n            Show Legend\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n            Show X Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n          <label>X Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n            Show Y Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n          <label>Y Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLabels')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n            Show Labels\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('explodeSlices')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n            Explode Slices\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('doughnut')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n            Doughnut\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('autoScale')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n            Auto Scale\n          </label> <br />\n        </div>\n      </div>\n    </main>\n  "
+            template: "\n    <main>\n      <div class=\"chart-col\">\n        <div class=\"chart-view\">\n          <bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical>\n\n          <bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal>\n\n          <bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-2d>\n\n          <bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-2d>\n\n          <bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-stacked>\n\n          <bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-stacked>\n\n          <bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-normalized>\n\n          <bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-normalized>\n\n          <pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-chart>\n\n          <advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </advanced-pie-chart>\n\n          <pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-grid>\n\n          <line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            (clickHandler)=\"clickHandler($event)\">\n          </line-chart>\n\n          <area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart>\n\n          <area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-stacked>\n\n          <area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-normalized>\n\n          <heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </heat-map>\n\n          <number-card\n            *ngIf=\"chartType === 'number-card'\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </number-card>\n        </div>\n      </div>\n\n      <div class=\"sidebar\">\n        <h1>\n          ng2<strong>d3</strong>\n          <small>Angular2 D3 Chart Framework</small>\n\n          <!-- Place this tag where you want the button to render. -->\n\n        </h1>\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n        <!--\n        <h3>Data</h3>\n        <select>\n          <option>Country</option>\n        </select>\n        -->\n\n        <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries'\">{{multi | json}}</pre>\n\n        <div>\n          <label>\n            <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n            Real-time\n          </label>\n        </div>\n\n        <h3>Options</h3>\n\n        <div *ngIf=\"chart.options.includes('showXAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n            Show X Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n            Show Y Axis\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('gradient')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n            Use gradients\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLegend')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n            Show Legend\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n            Show X Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n          <label>X Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n            Show Y Axis Label\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n          <label>Y Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('showLabels')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n            Show Labels\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('explodeSlices')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n            Explode Slices\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('doughnut')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n            Doughnut\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('autoScale')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n            Auto Scale\n          </label> <br />\n        </div>\n      </div>\n    </main>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], App);
@@ -5735,11 +5735,11 @@ var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
 var area_chart_module_1 = __webpack_require__(652);
 var bar_chart_module_1 = __webpack_require__(654);
-var heat_map_module_1 = __webpack_require__(690);
-var line_chart_module_1 = __webpack_require__(692);
-var number_card_module_1 = __webpack_require__(698);
-var pie_chart_module_1 = __webpack_require__(702);
-var tree_map_module_1 = __webpack_require__(710);
+var heat_map_module_1 = __webpack_require__(689);
+var line_chart_module_1 = __webpack_require__(691);
+var number_card_module_1 = __webpack_require__(697);
+var pie_chart_module_1 = __webpack_require__(701);
+var tree_map_module_1 = __webpack_require__(709);
 var NG2D3Module = (function () {
     function NG2D3Module() {
     }
@@ -6387,9 +6387,9 @@ exports.countries = [
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var d3_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
 var object_id_1 = __webpack_require__(62);
@@ -6401,9 +6401,6 @@ var AreaChartNormalized = (function (_super) {
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    AreaChartNormalized.prototype.ngOnInit = function () {
-        this.update();
-    };
     AreaChartNormalized.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -6544,6 +6541,9 @@ var AreaChartNormalized = (function (_super) {
         data.series = series.name;
         this.clickHandler.emit(data);
     };
+    AreaChartNormalized.prototype.trackBy = function (index, item) {
+        return item.name;
+    };
     AreaChartNormalized.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
@@ -6610,7 +6610,7 @@ var AreaChartNormalized = (function (_super) {
     AreaChartNormalized = __decorate([
         core_1.Component({
             selector: 'area-chart-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              chartType=\"area\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              chartType=\"area\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChartNormalized);
@@ -6627,9 +6627,9 @@ exports.AreaChartNormalized = AreaChartNormalized;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var moment = __webpack_require__(2);
 var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
@@ -6642,9 +6642,6 @@ var AreaChartStacked = (function (_super) {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    AreaChartStacked.prototype.ngOnInit = function () {
-        this.update();
-    };
     AreaChartStacked.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -6791,6 +6788,9 @@ var AreaChartStacked = (function (_super) {
         data.series = series.name;
         this.clickHandler.emit(data);
     };
+    AreaChartStacked.prototype.trackBy = function (index, item) {
+        return item.name;
+    };
     AreaChartStacked.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
@@ -6857,7 +6857,7 @@ var AreaChartStacked = (function (_super) {
     AreaChartStacked = __decorate([
         core_1.Component({
             selector: 'area-chart-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], AreaChartStacked);
@@ -6874,9 +6874,9 @@ exports.AreaChartStacked = AreaChartStacked;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var moment = __webpack_require__(2);
 var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
@@ -6887,9 +6887,6 @@ var AreaChart = (function (_super) {
         this.margin = [10, 20, 70, 70];
         this.clickHandler = new core_1.EventEmitter();
     }
-    AreaChart.prototype.ngOnInit = function () {
-        this.update();
-    };
     AreaChart.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -7016,6 +7013,9 @@ var AreaChart = (function (_super) {
         data.series = series.name;
         this.clickHandler.emit(data);
     };
+    AreaChart.prototype.trackBy = function (index, item) {
+        return item.name;
+    };
     AreaChart.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
@@ -7090,7 +7090,7 @@ var AreaChart = (function (_super) {
     AreaChart = __decorate([
         core_1.Component({
             selector: 'area-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChart);
@@ -7154,9 +7154,6 @@ var AreaSeries = (function () {
         this.normalized = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    AreaSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     AreaSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -7263,9 +7260,8 @@ var bar_vertical_component_1 = __webpack_require__(662);
 var bar_vertical_2d_component_1 = __webpack_require__(659);
 var bar_vertical_normalized_component_1 = __webpack_require__(660);
 var bar_vertical_stacked_component_1 = __webpack_require__(661);
-var date_bar_component_1 = __webpack_require__(664);
-var series_horizontal_component_1 = __webpack_require__(665);
-var series_vertical_component_1 = __webpack_require__(666);
+var series_horizontal_component_1 = __webpack_require__(664);
+var series_vertical_component_1 = __webpack_require__(665);
 var BarChartModule = (function () {
     function BarChartModule() {
     }
@@ -7282,7 +7278,6 @@ var BarChartModule = (function () {
                 bar_vertical_2d_component_1.BarVertical2D,
                 bar_vertical_normalized_component_1.BarVerticalNormalized,
                 bar_vertical_stacked_component_1.BarVerticalStacked,
-                date_bar_component_1.DateBar,
                 series_horizontal_component_1.SeriesHorizontal,
                 series_vertical_component_1.SeriesVertical
             ],
@@ -7296,7 +7291,6 @@ var BarChartModule = (function () {
                 bar_vertical_2d_component_1.BarVertical2D,
                 bar_vertical_normalized_component_1.BarVerticalNormalized,
                 bar_vertical_stacked_component_1.BarVerticalStacked,
-                date_bar_component_1.DateBar,
                 series_horizontal_component_1.SeriesHorizontal,
                 series_vertical_component_1.SeriesVertical
             ]
@@ -7316,9 +7310,9 @@ exports.BarChartModule = BarChartModule;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var d3_1 = __webpack_require__(7);
 var BarHorizontal2D = (function (_super) {
     __extends(BarHorizontal2D, _super);
@@ -7500,9 +7494,9 @@ exports.BarHorizontal2D = BarHorizontal2D;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var d3_1 = __webpack_require__(7);
 var BarHorizontalNormalized = (function (_super) {
     __extends(BarHorizontalNormalized, _super);
@@ -7664,9 +7658,9 @@ exports.BarHorizontalNormalized = BarHorizontalNormalized;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var d3_1 = __webpack_require__(7);
 var BarHorizontalStacked = (function (_super) {
     __extends(BarHorizontalStacked, _super);
@@ -7840,9 +7834,9 @@ exports.BarHorizontalStacked = BarHorizontalStacked;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var tick_format_helper_1 = __webpack_require__(469);
 var d3_1 = __webpack_require__(7);
 var BarHorizontal = (function (_super) {
@@ -7976,9 +7970,9 @@ exports.BarHorizontal = BarHorizontal;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var d3_1 = __webpack_require__(7);
 var BarVertical2D = (function (_super) {
     __extends(BarVertical2D, _super);
@@ -8165,9 +8159,9 @@ exports.BarVertical2D = BarVertical2D;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var d3_1 = __webpack_require__(7);
 var BarVerticalNormalized = (function (_super) {
     __extends(BarVerticalNormalized, _super);
@@ -8329,9 +8323,9 @@ exports.BarVerticalNormalized = BarVerticalNormalized;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var d3_1 = __webpack_require__(7);
 var BarVerticalStacked = (function (_super) {
     __extends(BarVerticalStacked, _super);
@@ -8505,9 +8499,9 @@ exports.BarVerticalStacked = BarVerticalStacked;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var tick_format_helper_1 = __webpack_require__(469);
 var d3_1 = __webpack_require__(7);
 var BarVertical = (function (_super) {
@@ -8833,114 +8827,6 @@ exports.Bar = Bar;
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
-var d3_1 = __webpack_require__(7);
-var DateBar = (function (_super) {
-    __extends(DateBar, _super);
-    function DateBar() {
-        _super.apply(this, arguments);
-        this.margin = [10, 20, 70, 100];
-        this.legend = false;
-        this.clickHandler = new core_1.EventEmitter();
-    }
-    DateBar.prototype.ngOnInit = function () {
-        var groupSpacing = 0.2;
-        this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
-        this.yScale = d3_1.default.scaleLinear()
-            .range([this.dims.height, 0])
-            .domain([0, this.results.m0Domain[1]]);
-        this.xScale = d3_1.default.scaleBand()
-            .rangeRound([0, this.dims.width], groupSpacing)
-            .domain(this.results.d0Domain);
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
-    };
-    DateBar.prototype.click = function (data) {
-        this.clickHandler.emit(data);
-    };
-    DateBar.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
-    };
-    DateBar.prototype.update = function () {
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "customColors", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "legend", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "xAxis", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "yAxis", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "showXAxisLabel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "showYAxisLabel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "xAxisLabel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "yAxisLabel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], DateBar.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], DateBar.prototype, "clickHandler", void 0);
-    DateBar = __decorate([
-        core_1.Component({
-            selector: 'date-bar',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"results.series[0]\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [xAxisTickInterval]=\"{unit: 'hour', interval: 2}\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          scaleType=\"time\"\n          [colors]=\"colors\"\n          [series]=\"results.series[0]\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], DateBar);
-    return DateBar;
-}(base_chart_component_1.BaseChart));
-exports.DateBar = DateBar;
-
-
-/***/ },
-
-/***/ 665:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var core_1 = __webpack_require__(0);
 var SeriesHorizontal = (function () {
     function SeriesHorizontal() {
         this.type = 'standard';
@@ -9064,7 +8950,7 @@ exports.SeriesHorizontal = SeriesHorizontal;
 
 /***/ },
 
-/***/ 666:
+/***/ 665:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9214,7 +9100,7 @@ exports.SeriesVertical = SeriesVertical;
 
 /***/ },
 
-/***/ 667:
+/***/ 666:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9224,6 +9110,7 @@ var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var Area = (function () {
     function Area(element) {
+        this.initialized = false;
         this.opacity = 1;
         this.startOpacity = 0.5;
         this.endOpacity = 1;
@@ -9231,23 +9118,24 @@ var Area = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    Area.prototype.ngOnInit = function () {
-        this.update();
-    };
     Area.prototype.ngOnChanges = function () {
-        this.update();
+        if (!this.initialized) {
+            this.loadAnimation();
+            this.initialized = true;
+        }
+        else {
+            this.update();
+        }
     };
     Area.prototype.update = function () {
         var pageUrl = window.location.href;
         this.gradientId = 'grad' + object_id_1.default().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
-        this.loadAnimation();
+        this.animateToCurrentForm();
     };
     Area.prototype.loadAnimation = function () {
-        var node = d3_1.default.select(this.element).select('.area');
-        node
-            .attr('d', this.startingPath);
-        this.animateToCurrentForm();
+        this.areaPath = this.startingPath;
+        setTimeout(this.update.bind(this), 100);
     };
     Area.prototype.animateToCurrentForm = function () {
         var node = d3_1.default.select(this.element).select('.area');
@@ -9297,7 +9185,7 @@ var Area = (function () {
     Area = __decorate([
         core_1.Component({
             selector: 'g[area]',
-            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n        [endOpacity]=\"endOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [attr.opacity]=\"opacity\"\n    />\n  "
+            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n        [endOpacity]=\"endOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [attr.opacity]=\"opacity\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Area);
@@ -9308,17 +9196,17 @@ exports.Area = Area;
 
 /***/ },
 
-/***/ 668:
+/***/ 667:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var axis_label_component_1 = __webpack_require__(669);
-var x_axis_component_1 = __webpack_require__(671);
-var x_axis_ticks_component_1 = __webpack_require__(670);
-var y_axis_component_1 = __webpack_require__(673);
-var y_axis_ticks_component_1 = __webpack_require__(672);
+var axis_label_component_1 = __webpack_require__(668);
+var x_axis_component_1 = __webpack_require__(670);
+var x_axis_ticks_component_1 = __webpack_require__(669);
+var y_axis_component_1 = __webpack_require__(672);
+var y_axis_ticks_component_1 = __webpack_require__(671);
 var platform_browser_1 = __webpack_require__(90);
 var AxesModule = (function () {
     function AxesModule() {
@@ -9338,18 +9226,16 @@ exports.AxesModule = AxesModule;
 
 /***/ },
 
-/***/ 669:
+/***/ 668:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var AxisLabel = (function () {
-    function AxisLabel() {
+    function AxisLabel(element) {
+        this.element = element.nativeElement;
     }
-    AxisLabel.prototype.ngOnInit = function () {
-        this.update();
-    };
     AxisLabel.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -9403,7 +9289,7 @@ var AxisLabel = (function () {
             selector: 'g[axisLabel]',
             template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [core_1.ElementRef])
     ], AxisLabel);
     return AxisLabel;
 }());
@@ -9412,7 +9298,7 @@ exports.AxisLabel = AxisLabel;
 
 /***/ },
 
-/***/ 670:
+/***/ 669:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9437,9 +9323,6 @@ var XAxisTicks = (function () {
             trimLabel: trim_label_helper_1.trimLabel
         });
     }
-    XAxisTicks.prototype.ngOnInit = function () {
-        this.update();
-    };
     XAxisTicks.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -9567,7 +9450,7 @@ exports.XAxisTicks = XAxisTicks;
 
 /***/ },
 
-/***/ 671:
+/***/ 670:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9586,9 +9469,6 @@ var XAxis = (function () {
             xAxisOffset: 5,
         });
     }
-    XAxis.prototype.ngOnInit = function () {
-        this.update();
-    };
     XAxis.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -9642,7 +9522,7 @@ exports.XAxis = XAxis;
 
 /***/ },
 
-/***/ 672:
+/***/ 671:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9665,9 +9545,6 @@ var YAxisTicks = (function () {
             trimLabel: trim_label_helper_1.trimLabel
         });
     }
-    YAxisTicks.prototype.ngOnInit = function () {
-        this.update();
-    };
     YAxisTicks.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -9810,7 +9687,7 @@ exports.YAxisTicks = YAxisTicks;
 
 /***/ },
 
-/***/ 673:
+/***/ 672:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9829,9 +9706,6 @@ var YAxis = (function () {
             yAxisOffset: -5,
         });
     }
-    YAxis.prototype.ngOnInit = function () {
-        this.update();
-    };
     YAxis.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -9891,7 +9765,7 @@ exports.YAxis = YAxis;
 
 /***/ },
 
-/***/ 674:
+/***/ 673:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9902,9 +9776,6 @@ var Chart = (function () {
         this.legend = false;
         this.legendTitle = 'Legend';
     }
-    Chart.prototype.ngOnInit = function () {
-        this.update();
-    };
     Chart.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -9967,7 +9838,7 @@ exports.Chart = Chart;
 
 /***/ },
 
-/***/ 675:
+/***/ 674:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9980,9 +9851,6 @@ var CircleSeries = (function () {
         this.type = 'standard';
         this.clickHandler = new core_1.EventEmitter();
     }
-    CircleSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     CircleSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -10074,7 +9942,7 @@ exports.CircleSeries = CircleSeries;
 
 /***/ },
 
-/***/ 676:
+/***/ 675:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10084,7 +9952,7 @@ var Circle = (function () {
     function Circle() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    Circle.prototype.ngOnInit = function () {
+    Circle.prototype.ngOnChanges = function () {
         this.classNames = this.classNames.join(' ') + 'circle';
     };
     Circle.prototype.click = function () {
@@ -10144,7 +10012,7 @@ exports.Circle = Circle;
 
 /***/ },
 
-/***/ 677:
+/***/ 676:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10153,7 +10021,10 @@ var core_1 = __webpack_require__(0);
 var GridPanelSeries = (function () {
     function GridPanelSeries() {
     }
-    GridPanelSeries.prototype.ngOnInit = function () {
+    GridPanelSeries.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    GridPanelSeries.prototype.update = function () {
         this.gridPanels = this.getGridPanels();
     };
     GridPanelSeries.prototype.getGridPanels = function () {
@@ -10230,7 +10101,7 @@ exports.GridPanelSeries = GridPanelSeries;
 
 /***/ },
 
-/***/ 678:
+/***/ 677:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10277,7 +10148,7 @@ exports.GridPanel = GridPanel;
 
 /***/ },
 
-/***/ 679:
+/***/ 678:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10287,9 +10158,6 @@ var trim_label_helper_1 = __webpack_require__(78);
 var Legend = (function () {
     function Legend() {
     }
-    Legend.prototype.ngOnInit = function () {
-        this.update();
-    };
     Legend.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -10337,7 +10205,7 @@ exports.Legend = Legend;
 
 /***/ },
 
-/***/ 680:
+/***/ 679:
 /***/ function(module, exports) {
 
 "use strict";
@@ -10423,7 +10291,7 @@ exports.PopoverRegistry = PopoverRegistry;
 
 /***/ },
 
-/***/ 681:
+/***/ 680:
 /***/ function(module, exports) {
 
 "use strict";
@@ -10541,14 +10409,14 @@ exports.PositionHelper = PositionHelper;
 
 /***/ },
 
-/***/ 682:
+/***/ 681:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var position_helper_1 = __webpack_require__(681);
-var popover_registry_service_1 = __webpack_require__(680);
+var position_helper_1 = __webpack_require__(680);
+var popover_registry_service_1 = __webpack_require__(679);
 var Popover = (function () {
     function Popover(element, renderer) {
         this.popoverPlacement = 'top';
@@ -10698,7 +10566,7 @@ exports.Popover = Popover;
 
 /***/ },
 
-/***/ 683:
+/***/ 682:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10707,7 +10575,7 @@ var core_1 = __webpack_require__(0);
 var ScaleLegend = (function () {
     function ScaleLegend() {
     }
-    ScaleLegend.prototype.ngOnInit = function () {
+    ScaleLegend.prototype.ngOnChanges = function () {
         var gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
         this.gradient = "linear-gradient(to bottom, " + gradientValues + ")";
     };
@@ -10745,7 +10613,7 @@ exports.ScaleLegend = ScaleLegend;
 
 /***/ },
 
-/***/ 684:
+/***/ 683:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10756,7 +10624,7 @@ var SvgLinearGradient = (function () {
         this.orientation = 'vertical';
         this.endOpacity = 1;
     }
-    SvgLinearGradient.prototype.ngOnInit = function () {
+    SvgLinearGradient.prototype.ngOnChanges = function () {
         this.x1 = '0%';
         this.x2 = '0%';
         this.y1 = '0%';
@@ -10802,7 +10670,7 @@ exports.SvgLinearGradient = SvgLinearGradient;
 
 /***/ },
 
-/***/ 685:
+/***/ 684:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10812,7 +10680,7 @@ var SvgRadialGradient = (function () {
     function SvgRadialGradient() {
         this.endOpacity = 1;
     }
-    SvgRadialGradient.prototype.ngOnInit = function () {
+    SvgRadialGradient.prototype.ngOnChanges = function () {
         this.cx = 0;
         this.cy = 0;
         this.r = "30%";
@@ -10847,14 +10715,14 @@ exports.SvgRadialGradient = SvgRadialGradient;
 
 /***/ },
 
-/***/ 686:
+/***/ 685:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var moment = __webpack_require__(2);
-var throttle_1 = __webpack_require__(711);
+var throttle_1 = __webpack_require__(710);
 var d3_1 = __webpack_require__(7);
 var Timeline = (function () {
     function Timeline(element) {
@@ -10863,7 +10731,7 @@ var Timeline = (function () {
         this.updateXDomain = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    Timeline.prototype.ngOnInit = function () {
+    Timeline.prototype.ngOnChanges = function () {
         this.dims = this.calculateDims();
         var offsetY = this.view[1] - 150;
         var results = this.results;
@@ -10996,7 +10864,7 @@ exports.Timeline = Timeline;
 
 /***/ },
 
-/***/ 687:
+/***/ 686:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11006,9 +10874,6 @@ var HeatCellSeries = (function () {
     function HeatCellSeries() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    HeatCellSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     HeatCellSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -11082,7 +10947,7 @@ exports.HeatCellSeries = HeatCellSeries;
 
 /***/ },
 
-/***/ 688:
+/***/ 687:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11096,7 +10961,7 @@ var HeatMapCell = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    HeatMapCell.prototype.ngOnInit = function () {
+    HeatMapCell.prototype.ngOnChanges = function () {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
         var pageUrl = window.location.href;
         this.startOpacity = 0.3;
@@ -11168,16 +11033,16 @@ exports.HeatMapCell = HeatMapCell;
 
 /***/ },
 
-/***/ 689:
+/***/ 688:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var base_chart_component_1 = __webpack_require__(17);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(18);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
 var HeatMap = (function (_super) {
     __extends(HeatMap, _super);
     function HeatMap() {
@@ -11185,9 +11050,6 @@ var HeatMap = (function (_super) {
         this.margin = [10, 20, 70, 100];
         this.clickHandler = new core_1.EventEmitter();
     }
-    HeatMap.prototype.ngOnInit = function () {
-        this.update();
-    };
     HeatMap.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -11347,16 +11209,16 @@ exports.HeatMap = HeatMap;
 
 /***/ },
 
-/***/ 690:
+/***/ 689:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var heat_map_cell_component_1 = __webpack_require__(688);
-var heat_map_cell_series_component_1 = __webpack_require__(687);
-var heat_map_component_1 = __webpack_require__(689);
+var heat_map_cell_component_1 = __webpack_require__(687);
+var heat_map_cell_series_component_1 = __webpack_require__(686);
+var heat_map_component_1 = __webpack_require__(688);
 var HeatMapModule = (function () {
     function HeatMapModule() {
     }
@@ -11383,15 +11245,15 @@ exports.HeatMapModule = HeatMapModule;
 
 /***/ },
 
-/***/ 691:
+/***/ 690:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var moment_1 = __webpack_require__(2);
@@ -11402,9 +11264,6 @@ var LineChart = (function (_super) {
         this.margin = [10, 20, 70, 70];
         this.clickHandler = new core_1.EventEmitter();
     }
-    LineChart.prototype.ngOnInit = function () {
-        this.update();
-    };
     LineChart.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -11612,16 +11471,16 @@ exports.LineChart = LineChart;
 
 /***/ },
 
-/***/ 692:
+/***/ 691:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var line_component_1 = __webpack_require__(694);
-var line_chart_component_1 = __webpack_require__(691);
-var line_series_component_1 = __webpack_require__(693);
+var line_component_1 = __webpack_require__(693);
+var line_chart_component_1 = __webpack_require__(690);
+var line_series_component_1 = __webpack_require__(692);
 var LineChartModule = (function () {
     function LineChartModule() {
     }
@@ -11648,7 +11507,7 @@ exports.LineChartModule = LineChartModule;
 
 /***/ },
 
-/***/ 693:
+/***/ 692:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11659,9 +11518,6 @@ var moment_1 = __webpack_require__(2);
 var LineSeries = (function () {
     function LineSeries() {
     }
-    LineSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     LineSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -11720,16 +11576,19 @@ exports.LineSeries = LineSeries;
 
 /***/ },
 
-/***/ 694:
+/***/ 693:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var Line = (function () {
-    function Line() {
+    function Line(element) {
         this.clickHandler = new core_1.EventEmitter();
+        this.element = element.nativeElement;
     }
+    Line.prototype.ngOnChanges = function () {
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -11749,9 +11608,22 @@ var Line = (function () {
     Line = __decorate([
         core_1.Component({
             selector: 'g[line]',
-            template: "\n    <svg:path\n      class=\"line\"\n      [attr.d]=\"path\"\n      fill=\"none\"\n      [attr.stroke]=\"stroke\"\n      stroke-width=\"1.5px\"\n      style=\"strokeDasharray: 2000; strokeDashoffset: 0\"\n    />\n  "
+            template: "\n    <svg:path\n      [@animationState]=\"'active'\"\n      class=\"line\"\n      [attr.d]=\"path\"\n      fill=\"none\"\n      [attr.stroke]=\"stroke\"\n      stroke-width=\"1.5px\"\n    />\n  ",
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('void => *', [
+                        core_1.style({
+                            strokeDasharray: 2000,
+                            strokeDashoffset: 2000,
+                        }),
+                        core_1.animate(1000, core_1.style({
+                            strokeDashoffset: 0
+                        }))
+                    ])
+                ])
+            ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [core_1.ElementRef])
     ], Line);
     return Line;
 }());
@@ -11760,7 +11632,7 @@ exports.Line = Line;
 
 /***/ },
 
-/***/ 695:
+/***/ 694:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11770,9 +11642,6 @@ var CardSeries = (function () {
     function CardSeries() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    CardSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     CardSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -11830,7 +11699,7 @@ exports.CardSeries = CardSeries;
 
 /***/ },
 
-/***/ 696:
+/***/ 695:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11843,7 +11712,7 @@ var Card = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    Card.prototype.ngOnInit = function () {
+    Card.prototype.ngOnChanges = function () {
         this.update();
     };
     Card.prototype.update = function () {
@@ -11938,15 +11807,15 @@ exports.Card = Card;
 
 /***/ },
 
-/***/ 697:
+/***/ 696:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var base_chart_component_1 = __webpack_require__(17);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(18);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
 var grid_layout_helper_1 = __webpack_require__(468);
 var NumberCard = (function (_super) {
     __extends(NumberCard, _super);
@@ -11955,9 +11824,6 @@ var NumberCard = (function (_super) {
         this.margin = [10, 10, 10, 10];
         this.clickHandler = new core_1.EventEmitter();
     }
-    NumberCard.prototype.ngOnInit = function () {
-        this.update();
-    };
     NumberCard.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -12016,16 +11882,16 @@ exports.NumberCard = NumberCard;
 
 /***/ },
 
-/***/ 698:
+/***/ 697:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var card_component_1 = __webpack_require__(696);
-var card_series_component_1 = __webpack_require__(695);
-var number_card_component_1 = __webpack_require__(697);
+var card_component_1 = __webpack_require__(695);
+var card_series_component_1 = __webpack_require__(694);
+var number_card_component_1 = __webpack_require__(696);
 var NumberCardModule = (function () {
     function NumberCardModule() {
     }
@@ -12052,15 +11918,15 @@ exports.NumberCardModule = NumberCardModule;
 
 /***/ },
 
-/***/ 699:
+/***/ 698:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var trim_label_helper_1 = __webpack_require__(78);
 var AdvancedPieChart = (function (_super) {
     __extends(AdvancedPieChart, _super);
@@ -12152,6 +12018,157 @@ var AdvancedPieChart = (function (_super) {
     return AdvancedPieChart;
 }(base_chart_component_1.BaseChart));
 exports.AdvancedPieChart = AdvancedPieChart;
+
+
+/***/ },
+
+/***/ 699:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var core_1 = __webpack_require__(0);
+var d3_1 = __webpack_require__(7);
+var object_id_1 = __webpack_require__(62);
+var PieArc = (function () {
+    function PieArc(element) {
+        this.initialized = false;
+        this.gradient = false;
+        this.clickHandler = new core_1.EventEmitter();
+        this.element = element.nativeElement;
+    }
+    PieArc.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    PieArc.prototype.update = function () {
+        var arc = this.calculateArc();
+        this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
+        this.startOpacity = 0.3;
+        var pageUrl = window.location.href;
+        this.radialGradientId = 'linearGrad' + object_id_1.default().toString();
+        this.linearGradientId = 'radialGrad' + object_id_1.default().toString();
+        if (this.innerRadius !== 0) {
+            this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
+        }
+        else {
+            this.gradientFill = "url(" + pageUrl + "#" + this.linearGradientId + ")";
+        }
+        if (this.initialized) {
+            this.updateAnimation();
+        }
+        else {
+            this.loadAnimation();
+            this.initialized = true;
+        }
+    };
+    PieArc.prototype.calculateArc = function () {
+        var outerRadius = this.outerRadius;
+        if (this.explodeSlices && this.innerRadius === 0) {
+            outerRadius = this.outerRadius * this.value / this.max;
+        }
+        return d3_1.default.arc()
+            .innerRadius(this.innerRadius).outerRadius(outerRadius);
+    };
+    PieArc.prototype.loadAnimation = function () {
+        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        var arc = this.calculateArc();
+        node
+            .transition()
+            .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var copyOfD = Object.assign({}, d);
+            copyOfD.endAngle = copyOfD.startAngle;
+            var interpolate = d3_1.default.interpolate(copyOfD, copyOfD);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        })
+            .transition().duration(750)
+            .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var interpolate = d3_1.default.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        });
+    };
+    PieArc.prototype.updateAnimation = function () {
+        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        var arc = this.calculateArc();
+        node
+            .transition().duration(750)
+            .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var interpolate = d3_1.default.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        });
+    };
+    PieArc.prototype.click = function () {
+        this.clickHandler.emit(this.data);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "fill", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "startAngle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "endAngle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "innerRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "outerRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "value", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "total", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "explodeSlices", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], PieArc.prototype, "gradient", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], PieArc.prototype, "clickHandler", void 0);
+    PieArc = __decorate([
+        core_1.Component({
+            selector: 'g[pieArc]',
+            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n      />\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [core_1.ElementRef])
+    ], PieArc);
+    return PieArc;
+}());
+exports.PieArc = PieArc;
 
 
 /***/ },
@@ -12330,160 +12347,9 @@ function selectValueAccessor(dir, valueAccessors) {
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(7);
-var object_id_1 = __webpack_require__(62);
-var PieArc = (function () {
-    function PieArc(element) {
-        this.initialized = false;
-        this.gradient = false;
-        this.clickHandler = new core_1.EventEmitter();
-        this.element = element.nativeElement;
-    }
-    PieArc.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    PieArc.prototype.update = function () {
-        var arc = this.calculateArc();
-        this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
-        this.startOpacity = 0.3;
-        var pageUrl = window.location.href;
-        this.radialGradientId = 'linearGrad' + object_id_1.default().toString();
-        this.linearGradientId = 'radialGrad' + object_id_1.default().toString();
-        if (this.innerRadius !== 0) {
-            this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
-        }
-        else {
-            this.gradientFill = "url(" + pageUrl + "#" + this.linearGradientId + ")";
-        }
-        if (this.initialized) {
-            this.updateAnimation();
-        }
-        else {
-            this.loadAnimation();
-            this.initialized = true;
-        }
-    };
-    PieArc.prototype.calculateArc = function () {
-        var outerRadius = this.outerRadius;
-        if (this.explodeSlices && this.innerRadius === 0) {
-            outerRadius = this.outerRadius * this.value / this.max;
-        }
-        return d3_1.default.arc()
-            .innerRadius(this.innerRadius).outerRadius(outerRadius);
-    };
-    PieArc.prototype.loadAnimation = function () {
-        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
-        var arc = this.calculateArc();
-        node
-            .transition()
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var copyOfD = Object.assign({}, d);
-            copyOfD.endAngle = copyOfD.startAngle;
-            var interpolate = d3_1.default.interpolate(copyOfD, copyOfD);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        })
-            .transition().duration(750)
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var interpolate = d3_1.default.interpolate(this._current, d);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        });
-    };
-    PieArc.prototype.updateAnimation = function () {
-        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
-        var arc = this.calculateArc();
-        node
-            .transition().duration(750)
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var interpolate = d3_1.default.interpolate(this._current, d);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        });
-    };
-    PieArc.prototype.click = function () {
-        this.clickHandler.emit(this.data);
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "fill", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "startAngle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "endAngle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "innerRadius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "outerRadius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "value", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "total", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "max", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "explodeSlices", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PieArc.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "clickHandler", void 0);
-    PieArc = __decorate([
-        core_1.Component({
-            selector: 'g[pieArc]',
-            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n      />\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], PieArc);
-    return PieArc;
-}());
-exports.PieArc = PieArc;
-
-
-/***/ },
-
-/***/ 701:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var PieChart = (function (_super) {
     __extends(PieChart, _super);
     function PieChart() {
@@ -12495,9 +12361,6 @@ var PieChart = (function (_super) {
         this.doughnut = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieChart.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieChart.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -12592,20 +12455,20 @@ exports.PieChart = PieChart;
 
 /***/ },
 
-/***/ 702:
+/***/ 701:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(71);
-var advanced_pie_chart_component_1 = __webpack_require__(699);
-var pie_label_component_1 = __webpack_require__(705);
-var pie_arc_component_1 = __webpack_require__(700);
-var pie_chart_component_1 = __webpack_require__(701);
-var pie_grid_component_1 = __webpack_require__(704);
-var pie_grid_series_component_1 = __webpack_require__(703);
-var pie_series_component_1 = __webpack_require__(706);
+var advanced_pie_chart_component_1 = __webpack_require__(698);
+var pie_label_component_1 = __webpack_require__(704);
+var pie_arc_component_1 = __webpack_require__(699);
+var pie_chart_component_1 = __webpack_require__(700);
+var pie_grid_component_1 = __webpack_require__(703);
+var pie_grid_series_component_1 = __webpack_require__(702);
+var pie_series_component_1 = __webpack_require__(705);
 var PieChartModule = (function () {
     function PieChartModule() {
     }
@@ -12640,7 +12503,7 @@ exports.PieChartModule = PieChartModule;
 
 /***/ },
 
-/***/ 703:
+/***/ 702:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12654,9 +12517,6 @@ var PieGridSeries = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    PieGridSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieGridSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -12664,6 +12524,7 @@ var PieGridSeries = (function () {
         this.layout = d3_1.default.pie()
             .value(function (d) { return d.data.value; }).sort(null);
         this.arcs = this.getArcs();
+        console.log('Arcs', this.arcs);
         this.loadAnimation();
     };
     PieGridSeries.prototype.getArcs = function () {
@@ -12677,11 +12538,14 @@ var PieGridSeries = (function () {
             var genArcPath = d3_1.default.arc()
                 .innerRadius(_this.innerRadius).outerRadius(_this.outerRadius)
                 .startAngle(arc.startAngle).endAngle(arc.endAngle);
+            var color = _this.colors(label);
+            color = _this.colors(label);
             return {
+                data: arc.data.data,
                 class: 'arc ' + 'arc' + index,
                 d: genArcPath(),
                 cursor: other ? 'auto' : 'pointer',
-                fill: _this.colors(label),
+                fill: color,
                 opacity: other ? 0.4 : 1
             };
         });
@@ -12727,6 +12591,9 @@ var PieGridSeries = (function () {
             value: this.data[0].data.value
         });
     };
+    PieGridSeries.prototype.trackBy = function (index, item) {
+        return item.data.name;
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -12750,7 +12617,7 @@ var PieGridSeries = (function () {
     PieGridSeries = __decorate([
         core_1.Component({
             selector: 'g[pieGridSeries]',
-            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:path *ngFor=\"let arc of arcs\"\n        [attr.class]=\"arc.class\"\n        [attr.d]=\"arc.d\"\n        [style.cursor]=\"arc.cursor\"\n        [style.opacity]=\"arc.opacity\"\n        [attr.fill]=\"arc.fill\"\n        (click)=\"click(arc.data)\"\n      />\n    </svg:g>\n  "
+            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:path *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [attr.d]=\"arc.d\"\n        [style.cursor]=\"arc.cursor\"\n        [style.opacity]=\"arc.opacity\"\n        [attr.fill]=\"arc.fill\"\n        (click)=\"click(arc.data)\"\n      />\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], PieGridSeries);
@@ -12761,15 +12628,15 @@ exports.PieGridSeries = PieGridSeries;
 
 /***/ },
 
-/***/ 704:
+/***/ 703:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
-var base_chart_component_1 = __webpack_require__(17);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
+var base_chart_component_1 = __webpack_require__(18);
 var trim_label_helper_1 = __webpack_require__(78);
 var grid_layout_helper_1 = __webpack_require__(468);
 var d3_1 = __webpack_require__(7);
@@ -12780,9 +12647,6 @@ var PieGrid = (function (_super) {
         this.margin = [20, 20, 20, 20];
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieGrid.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieGrid.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -12828,7 +12692,7 @@ var PieGrid = (function (_super) {
                         data: {
                             other: true,
                             value: total - value,
-                            name: 'other'
+                            name: d.data.name
                         }
                     }]
             };
@@ -12883,7 +12747,7 @@ exports.PieGrid = PieGrid;
 
 /***/ },
 
-/***/ 705:
+/***/ 704:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12896,9 +12760,6 @@ var PieLabel = (function () {
         this.element = element.nativeElement;
         this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    PieLabel.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieLabel.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -12983,7 +12844,7 @@ exports.PieLabel = PieLabel;
 
 /***/ },
 
-/***/ 706:
+/***/ 705:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12997,9 +12858,6 @@ var PieSeries = (function () {
         this.outerRadius = 80;
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -13118,7 +12976,7 @@ exports.PieSeries = PieSeries;
 
 /***/ },
 
-/***/ 707:
+/***/ 706:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13128,7 +12986,7 @@ var TreeMapCellSeries = (function () {
     function TreeMapCellSeries() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    TreeMapCellSeries.prototype.ngOnInit = function () {
+    TreeMapCellSeries.prototype.ngOnChanges = function () {
         this.cells = this.getCells();
     };
     TreeMapCellSeries.prototype.getCells = function () {
@@ -13183,7 +13041,7 @@ exports.TreeMapCellSeries = TreeMapCellSeries;
 
 /***/ },
 
-/***/ 708:
+/***/ 707:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13195,7 +13053,7 @@ var TreeMapCell = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    TreeMapCell.prototype.ngOnInit = function () {
+    TreeMapCell.prototype.ngOnChanges = function () {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
         this.loadAnimation();
     };
@@ -13263,16 +13121,16 @@ exports.TreeMapCell = TreeMapCell;
 
 /***/ },
 
-/***/ 709:
+/***/ 708:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var base_chart_component_1 = __webpack_require__(17);
-var view_dimensions_helper_1 = __webpack_require__(18);
-var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(18);
+var view_dimensions_helper_1 = __webpack_require__(19);
+var color_sets_1 = __webpack_require__(20);
 var TreeMap = (function (_super) {
     __extends(TreeMap, _super);
     function TreeMap() {
@@ -13280,7 +13138,7 @@ var TreeMap = (function (_super) {
         this.margin = [10, 10, 10, 10];
         this.clickHandler = new core_1.EventEmitter();
     }
-    TreeMap.prototype.ngOnInit = function () {
+    TreeMap.prototype.ngOnChanges = function () {
         this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, false, false, false, 12);
         var data = [];
         for (var i = 0; i < this.results.data.length; i++) {
@@ -13343,26 +13201,62 @@ exports.TreeMap = TreeMap;
 
 /***/ },
 
+/***/ 709:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(71);
+var tree_map_cell_component_1 = __webpack_require__(707);
+var tree_map_cell_series_component_1 = __webpack_require__(706);
+var tree_map_component_1 = __webpack_require__(708);
+var TreeMapModule = (function () {
+    function TreeMapModule() {
+    }
+    TreeMapModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                tree_map_cell_component_1.TreeMapCell,
+                tree_map_cell_series_component_1.TreeMapCellSeries,
+                tree_map_component_1.TreeMap
+            ],
+            exports: [
+                tree_map_cell_component_1.TreeMapCell,
+                tree_map_cell_series_component_1.TreeMapCellSeries,
+                tree_map_component_1.TreeMap
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TreeMapModule);
+    return TreeMapModule;
+}());
+exports.TreeMapModule = TreeMapModule;
+
+
+/***/ },
+
 /***/ 71:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
 var core_1 = __webpack_require__(0);
-var chart_component_1 = __webpack_require__(674);
-var legend_component_1 = __webpack_require__(679);
-var scale_legend_component_1 = __webpack_require__(683);
-var axes_module_component_1 = __webpack_require__(668);
-var sw_popover_component_1 = __webpack_require__(682);
-var circle_series_component_1 = __webpack_require__(675);
-var circle_component_1 = __webpack_require__(676);
-var grid_panel_component_1 = __webpack_require__(678);
-var grid_panel_series_component_1 = __webpack_require__(677);
-var svg_linear_gradient_component_1 = __webpack_require__(684);
-var svg_radial_gradient_component_1 = __webpack_require__(685);
-var timeline_component_1 = __webpack_require__(686);
+var chart_component_1 = __webpack_require__(673);
+var legend_component_1 = __webpack_require__(678);
+var scale_legend_component_1 = __webpack_require__(682);
+var axes_module_component_1 = __webpack_require__(667);
+var sw_popover_component_1 = __webpack_require__(681);
+var circle_series_component_1 = __webpack_require__(674);
+var circle_component_1 = __webpack_require__(675);
+var grid_panel_component_1 = __webpack_require__(677);
+var grid_panel_series_component_1 = __webpack_require__(676);
+var svg_linear_gradient_component_1 = __webpack_require__(683);
+var svg_radial_gradient_component_1 = __webpack_require__(684);
+var timeline_component_1 = __webpack_require__(685);
 var platform_browser_1 = __webpack_require__(90);
-var area_component_1 = __webpack_require__(667);
+var area_component_1 = __webpack_require__(666);
 var COMPONENTS = [
     area_component_1.Area,
     chart_component_1.Chart,
@@ -13402,42 +13296,6 @@ exports.CommonModule = CommonModule;
 /***/ },
 
 /***/ 710:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var tree_map_cell_component_1 = __webpack_require__(708);
-var tree_map_cell_series_component_1 = __webpack_require__(707);
-var tree_map_component_1 = __webpack_require__(709);
-var TreeMapModule = (function () {
-    function TreeMapModule() {
-    }
-    TreeMapModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                tree_map_cell_component_1.TreeMapCell,
-                tree_map_cell_series_component_1.TreeMapCellSeries,
-                tree_map_component_1.TreeMap
-            ],
-            exports: [
-                tree_map_cell_component_1.TreeMapCell,
-                tree_map_cell_series_component_1.TreeMapCellSeries,
-                tree_map_component_1.TreeMap
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TreeMapModule);
-    return TreeMapModule;
-}());
-exports.TreeMapModule = TreeMapModule;
-
-
-/***/ },
-
-/***/ 711:
 /***/ function(module, exports) {
 
 "use strict";
@@ -13626,7 +13484,7 @@ exports.trimLabel = trimLabel;
 
 /***/ },
 
-/***/ 899:
+/***/ 898:
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(499)();
@@ -13641,7 +13499,7 @@ exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n  font-family: 'Ro
 
 /***/ },
 
-/***/ 900:
+/***/ 899:
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(499)();
@@ -13779,5 +13637,5 @@ var EventEmitter = (function (_super) {
 
 /***/ }
 
-},[1094]);
-//# sourceMappingURL=app.7bf5444c3f98044825c7.map
+},[1093]);
+//# sourceMappingURL=app.d7fa4f89159b67186b24.map
