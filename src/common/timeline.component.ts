@@ -51,7 +51,7 @@ export class Timeline implements OnChanges {
   ngOnChanges() {
     this.update();
 
-    if (!this.initialized){
+    if (!this.initialized) {
       this.addBrush();
       this.initialized = true;
     }
@@ -146,7 +146,7 @@ export class Timeline implements OnChanges {
 
     d3.select(this.element)
       .select('.brush')
-      .call(this.brush)
+      .call(this.brush);
   }
 
   getDims() {
