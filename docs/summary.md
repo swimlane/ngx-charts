@@ -29,4 +29,5 @@
    * [Building](contributing/building.md)
    * [Guidelines](contributing/guidelines.md)
 * [Credits](credits.md)
+* [Changelog](changelog.md)
 * [License](license.md)
