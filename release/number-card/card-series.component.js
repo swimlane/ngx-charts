@@ -4,9 +4,6 @@ var CardSeries = (function () {
     function CardSeries() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    CardSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     CardSeries.prototype.ngOnChanges = function () {
         this.update();
     };

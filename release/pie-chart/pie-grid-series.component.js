@@ -8,9 +8,6 @@ var PieGridSeries = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    PieGridSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieGridSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -18,6 +15,7 @@ var PieGridSeries = (function () {
         this.layout = d3_1.default.pie()
             .value(function (d) { return d.data.value; }).sort(null);
         this.arcs = this.getArcs();
+        console.log('Arcs', this.arcs);
         this.loadAnimation();
     };
     PieGridSeries.prototype.getArcs = function () {
@@ -31,11 +29,14 @@ var PieGridSeries = (function () {
             var genArcPath = d3_1.default.arc()
                 .innerRadius(_this.innerRadius).outerRadius(_this.outerRadius)
                 .startAngle(arc.startAngle).endAngle(arc.endAngle);
+            var color = _this.colors(label);
+            color = _this.colors(label);
             return {
+                data: arc.data.data,
                 class: 'arc ' + 'arc' + index,
                 d: genArcPath(),
                 cursor: other ? 'auto' : 'pointer',
-                fill: _this.colors(label),
+                fill: color,
                 opacity: other ? 0.4 : 1
             };
         });
@@ -81,6 +82,9 @@ var PieGridSeries = (function () {
             value: this.data[0].data.value
         });
     };
+    PieGridSeries.prototype.trackBy = function (index, item) {
+        return item.data.name;
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -104,7 +108,7 @@ var PieGridSeries = (function () {
     PieGridSeries = __decorate([
         core_1.Component({
             selector: 'g[pieGridSeries]',
-            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:path *ngFor=\"let arc of arcs\"\n        [attr.class]=\"arc.class\"\n        [attr.d]=\"arc.d\"\n        [style.cursor]=\"arc.cursor\"\n        [style.opacity]=\"arc.opacity\"\n        [attr.fill]=\"arc.fill\"\n        (click)=\"click(arc.data)\"\n      />\n    </svg:g>\n  "
+            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:path *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [attr.d]=\"arc.d\"\n        [style.cursor]=\"arc.cursor\"\n        [style.opacity]=\"arc.opacity\"\n        [attr.fill]=\"arc.fill\"\n        (click)=\"click(arc.data)\"\n      />\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], PieGridSeries);

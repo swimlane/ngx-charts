@@ -1,6 +1,6 @@
 /// <reference types="core-js" />
-import { ElementRef, OnInit, OnChanges } from '@angular/core';
-export declare class PieLabel implements OnInit, OnChanges {
+import { ElementRef, OnChanges } from '@angular/core';
+export declare class PieLabel implements OnChanges {
     element: HTMLElement;
     trimLabel: Function;
     labelXY: any;
@@ -14,7 +14,6 @@ export declare class PieLabel implements OnInit, OnChanges {
     value: any;
     explodeSlices: any;
     constructor(element: ElementRef);
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     textAnchor(): string;

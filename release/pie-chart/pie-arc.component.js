@@ -4,11 +4,15 @@ var d3_1 = require('../d3');
 var object_id_1 = require("../utils/object-id");
 var PieArc = (function () {
     function PieArc(element) {
+        this.initialized = false;
         this.gradient = false;
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    PieArc.prototype.ngOnInit = function () {
+    PieArc.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    PieArc.prototype.update = function () {
         var arc = this.calculateArc();
         this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
         this.startOpacity = 0.3;
@@ -21,7 +25,13 @@ var PieArc = (function () {
         else {
             this.gradientFill = "url(" + pageUrl + "#" + this.linearGradientId + ")";
         }
-        this.loadAnimation();
+        if (this.initialized) {
+            this.updateAnimation();
+        }
+        else {
+            this.loadAnimation();
+            this.initialized = true;
+        }
     };
     PieArc.prototype.calculateArc = function () {
         var outerRadius = this.outerRadius;
@@ -46,6 +56,20 @@ var PieArc = (function () {
                 return arc(interpolate(t));
             };
         })
+            .transition().duration(750)
+            .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var interpolate = d3_1.default.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        });
+    };
+    PieArc.prototype.updateAnimation = function () {
+        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        var arc = this.calculateArc();
+        node
             .transition().duration(750)
             .attrTween("d", function (d) {
             this._current = this._current || d;

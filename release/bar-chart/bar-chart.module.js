@@ -10,7 +10,6 @@ var bar_vertical_component_1 = require("./bar-vertical.component");
 var bar_vertical_2d_component_1 = require("./bar-vertical-2d.component");
 var bar_vertical_normalized_component_1 = require("./bar-vertical-normalized.component");
 var bar_vertical_stacked_component_1 = require("./bar-vertical-stacked.component");
-var date_bar_component_1 = require("./date-bar.component");
 var series_horizontal_component_1 = require("./series-horizontal.component");
 var series_vertical_component_1 = require("./series-vertical.component");
 var BarChartModule = (function () {
@@ -29,7 +28,6 @@ var BarChartModule = (function () {
                 bar_vertical_2d_component_1.BarVertical2D,
                 bar_vertical_normalized_component_1.BarVerticalNormalized,
                 bar_vertical_stacked_component_1.BarVerticalStacked,
-                date_bar_component_1.DateBar,
                 series_horizontal_component_1.SeriesHorizontal,
                 series_vertical_component_1.SeriesVertical
             ],
@@ -43,7 +41,6 @@ var BarChartModule = (function () {
                 bar_vertical_2d_component_1.BarVertical2D,
                 bar_vertical_normalized_component_1.BarVerticalNormalized,
                 bar_vertical_stacked_component_1.BarVerticalStacked,
-                date_bar_component_1.DateBar,
                 series_horizontal_component_1.SeriesHorizontal,
                 series_vertical_component_1.SeriesVertical
             ]

@@ -7,7 +7,7 @@ var Card = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    Card.prototype.ngOnInit = function () {
+    Card.prototype.ngOnChanges = function () {
         this.update();
     };
     Card.prototype.update = function () {

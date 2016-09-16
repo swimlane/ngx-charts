@@ -6,7 +6,7 @@ var TreeMapCell = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    TreeMapCell.prototype.ngOnInit = function () {
+    TreeMapCell.prototype.ngOnChanges = function () {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
         this.loadAnimation();
     };

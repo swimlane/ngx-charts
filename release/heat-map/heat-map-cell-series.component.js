@@ -4,9 +4,6 @@ var HeatCellSeries = (function () {
     function HeatCellSeries() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    HeatCellSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     HeatCellSeries.prototype.ngOnChanges = function () {
         this.update();
     };

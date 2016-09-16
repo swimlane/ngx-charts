@@ -38,14 +38,16 @@
     color: #999;
     font-size: 32px; }
 
-.brush .background {
-  visibility: visible !important;
-  fill: rgba(255, 255, 255, 0.03); }
+.brush .overlay {
+  fill: rgba(0, 0, 0, 0.07); }
 
-.brush .extent {
+.brush .selection {
   stroke: none;
   fill-opacity: .3;
   shape-rendering: 'crispEdges'; }
+
+.brush .handle {
+  fill: #3f51b5; }
 
 .legend {
   display: inline-block;

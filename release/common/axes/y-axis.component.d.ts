@@ -1,5 +1,5 @@
-import { OnInit, OnChanges } from '@angular/core';
-export declare class YAxis implements OnInit, OnChanges {
+import { OnChanges } from '@angular/core';
+export declare class YAxis implements OnChanges {
     yScale: any;
     dims: any;
     tickFormatting: any;
@@ -14,7 +14,6 @@ export declare class YAxis implements OnInit, OnChanges {
     yAxisOffset: any;
     yOrient: any;
     constructor();
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
 }

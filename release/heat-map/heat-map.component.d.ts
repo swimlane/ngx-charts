@@ -1,8 +1,8 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-export declare class HeatMap extends BaseChart implements OnInit, OnChanges {
+export declare class HeatMap extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     xDomain: any[];
     yDomain: any[];
@@ -14,9 +14,9 @@ export declare class HeatMap extends BaseChart implements OnInit, OnChanges {
     colorScale: any;
     transform: string;
     rects: any[];
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     legend: any;
@@ -28,7 +28,6 @@ export declare class HeatMap extends BaseChart implements OnInit, OnChanges {
     yAxisLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getXDomain(): any[];

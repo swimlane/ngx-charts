@@ -7,9 +7,6 @@ var PieLabel = (function () {
         this.element = element.nativeElement;
         this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    PieLabel.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieLabel.prototype.ngOnChanges = function () {
         this.update();
     };

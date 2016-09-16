@@ -8,9 +8,6 @@ var PieSeries = (function () {
         this.outerRadius = 80;
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -73,6 +70,9 @@ var PieSeries = (function () {
     PieSeries.prototype.color = function (arc) {
         return this.colors(this.label(arc));
     };
+    PieSeries.prototype.trackBy = function (index, item) {
+        return item.data.name;
+    };
     PieSeries.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
@@ -115,7 +115,7 @@ var PieSeries = (function () {
     PieSeries = __decorate([
         core_1.Component({
             selector: 'g[pieSeries]',
-            template: "\n    <svg:g *ngFor=\"let arc of data\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n\n      <svg:g pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [total]=\"total\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"click($event)\"\n        sw-popover\n        [popoverSpacing]=\"15\"\n        [popoverText]=\"tooltipText(arc)\"\n        [popoverGroup]=\"'charts'\"\n        [gradient]=\"gradient\"\n      ></svg:g>\n\n    </svg:g>\n  "
+            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n\n      <svg:g pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [total]=\"total\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"click($event)\"\n        sw-popover\n        [popoverSpacing]=\"15\"\n        [popoverText]=\"tooltipText(arc)\"\n        [popoverGroup]=\"'charts'\"\n        [gradient]=\"gradient\"\n      ></svg:g>\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], PieSeries);

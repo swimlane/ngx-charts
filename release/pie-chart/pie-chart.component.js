@@ -14,9 +14,6 @@ var PieChart = (function (_super) {
         this.doughnut = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieChart.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieChart.prototype.ngOnChanges = function () {
         this.update();
     };

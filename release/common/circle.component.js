@@ -4,7 +4,7 @@ var Circle = (function () {
     function Circle() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    Circle.prototype.ngOnInit = function () {
+    Circle.prototype.ngOnChanges = function () {
         this.classNames = this.classNames.join(' ') + 'circle';
     };
     Circle.prototype.click = function () {

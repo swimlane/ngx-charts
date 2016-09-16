@@ -3,7 +3,10 @@ var core_1 = require('@angular/core');
 var GridPanelSeries = (function () {
     function GridPanelSeries() {
     }
-    GridPanelSeries.prototype.ngOnInit = function () {
+    GridPanelSeries.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    GridPanelSeries.prototype.update = function () {
         this.gridPanels = this.getGridPanels();
     };
     GridPanelSeries.prototype.getGridPanels = function () {

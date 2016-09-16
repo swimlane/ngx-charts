@@ -13,9 +13,6 @@ var BarVertical2D = (function (_super) {
         this.scaleType = 'ordinal';
         this.clickHandler = new core_1.EventEmitter();
     }
-    BarVertical2D.prototype.ngOnInit = function () {
-        this.update();
-    };
     BarVertical2D.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -95,6 +92,9 @@ var BarVertical2D = (function (_super) {
         data.series = group.name;
         this.clickHandler.emit(data);
     };
+    BarVertical2D.prototype.trackBy = function (index, item) {
+        return item.name;
+    };
     BarVertical2D.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
     };
@@ -106,10 +106,6 @@ var BarVertical2D = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], BarVertical2D.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVertical2D.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -161,7 +157,18 @@ var BarVertical2D = (function (_super) {
     BarVertical2D = __decorate([
         core_1.Component({
             selector: 'bar-vertical-2d',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            [xScale]=\"innerScale\"\n            [yScale]=\"valueScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n          <svg:g seriesVertical\n            *ngFor=\"let group of results; trackBy:trackBy\"\n            [@animationState]=\"'active'\"\n            [attr.transform]=\"groupTransform(group)\"\n\n            [xScale]=\"innerScale\"\n            [yScale]=\"valueScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n    </chart>\n  ",
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('* => void', [
+                        core_1.style({
+                            opacity: 1,
+                            transform: '*',
+                        }),
+                        core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], BarVertical2D);

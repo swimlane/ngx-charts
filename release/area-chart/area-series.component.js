@@ -1,16 +1,13 @@
 "use strict";
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
-var moment = require("moment");
+var sort_1 = require('../utils/sort');
 var AreaSeries = (function () {
     function AreaSeries() {
         this.stacked = false;
         this.normalized = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    AreaSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     AreaSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -20,12 +17,7 @@ var AreaSeries = (function () {
         var startingArea;
         var xProperty = function (d) {
             var label = d.name;
-            if (_this.scaleType === 'time') {
-                return _this.xScale(moment(label).toDate());
-            }
-            else {
-                return _this.xScale(label);
-            }
+            return _this.xScale(label);
         };
         if (this.stacked || this.normalized) {
             area = d3_1.default.area()
@@ -48,8 +40,12 @@ var AreaSeries = (function () {
                 .y1(function (d) { return _this.yScale.range()[0]; });
         }
         this.opacity = 1;
-        this.path = area(this.data.series);
-        this.startingPath = startingArea(this.data.series);
+        var data = this.data.series;
+        if (this.scaleType === 'time' || this.scaleType === 'linear') {
+            data = sort_1.sortLinear(data, 'name');
+        }
+        this.path = area(data);
+        this.startingPath = startingArea(data);
     };
     __decorate([
         core_1.Input(), 

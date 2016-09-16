@@ -11,9 +11,6 @@ var NumberCard = (function (_super) {
         this.margin = [10, 10, 10, 10];
         this.clickHandler = new core_1.EventEmitter();
     }
-    NumberCard.prototype.ngOnInit = function () {
-        this.update();
-    };
     NumberCard.prototype.ngOnChanges = function () {
         this.update();
     };

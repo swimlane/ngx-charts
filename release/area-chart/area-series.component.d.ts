@@ -1,5 +1,5 @@
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
-export declare class AreaSeries implements OnInit, OnChanges {
+import { EventEmitter, OnChanges } from '@angular/core';
+export declare class AreaSeries implements OnChanges {
     opacity: number;
     path: string;
     startingPath: string;
@@ -12,7 +12,6 @@ export declare class AreaSeries implements OnInit, OnChanges {
     normalized: boolean;
     gradient: any;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
 }

@@ -1,8 +1,10 @@
-import { EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
-export declare class Area implements OnInit, OnChanges {
+import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+export declare class Area implements OnChanges {
     element: HTMLElement;
     gradientId: string;
     gradientFill: string;
+    areaPath: string;
+    initialized: boolean;
     data: any;
     path: any;
     startingPath: any;
@@ -14,7 +16,6 @@ export declare class Area implements OnInit, OnChanges {
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef);
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     loadAnimation(): void;

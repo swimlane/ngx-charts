@@ -13,9 +13,6 @@ var XAxis = (function () {
             xAxisOffset: 5,
         });
     }
-    XAxis.prototype.ngOnInit = function () {
-        this.update();
-    };
     XAxis.prototype.ngOnChanges = function () {
         this.update();
     };

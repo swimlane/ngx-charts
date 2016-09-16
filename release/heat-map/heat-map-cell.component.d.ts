@@ -1,5 +1,5 @@
-import { EventEmitter, ElementRef, OnInit } from '@angular/core';
-export declare class HeatMapCell implements OnInit {
+import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+export declare class HeatMapCell implements OnChanges {
     element: HTMLElement;
     transform: string;
     activeRange: any[];
@@ -16,7 +16,7 @@ export declare class HeatMapCell implements OnInit {
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef);
-    ngOnInit(): void;
+    ngOnChanges(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;
     click(): void;

@@ -4,7 +4,7 @@ var TreeMapCellSeries = (function () {
     function TreeMapCellSeries() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    TreeMapCellSeries.prototype.ngOnInit = function () {
+    TreeMapCellSeries.prototype.ngOnChanges = function () {
         this.cells = this.getCells();
     };
     TreeMapCellSeries.prototype.getCells = function () {

@@ -4,7 +4,7 @@ var SvgRadialGradient = (function () {
     function SvgRadialGradient() {
         this.endOpacity = 1;
     }
-    SvgRadialGradient.prototype.ngOnInit = function () {
+    SvgRadialGradient.prototype.ngOnChanges = function () {
         this.cx = 0;
         this.cy = 0;
         this.r = "30%";

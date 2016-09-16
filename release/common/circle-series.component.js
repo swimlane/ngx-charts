@@ -1,15 +1,12 @@
 "use strict";
 var core_1 = require('@angular/core');
-var moment = require("moment");
+var moment = require('moment');
 var object_id_1 = require("../utils/object-id");
 var CircleSeries = (function () {
     function CircleSeries() {
         this.type = 'standard';
         this.clickHandler = new core_1.EventEmitter();
     }
-    CircleSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     CircleSeries.prototype.ngOnChanges = function () {
         this.update();
     };

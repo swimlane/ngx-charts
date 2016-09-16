@@ -11,9 +11,6 @@ var HeatMap = (function (_super) {
         this.margin = [10, 20, 70, 100];
         this.clickHandler = new core_1.EventEmitter();
     }
-    HeatMap.prototype.ngOnInit = function () {
-        this.update();
-    };
     HeatMap.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -111,10 +108,6 @@ var HeatMap = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], HeatMap.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], HeatMap.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

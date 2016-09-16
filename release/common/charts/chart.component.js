@@ -5,9 +5,6 @@ var Chart = (function () {
         this.legend = false;
         this.legendTitle = 'Legend';
     }
-    Chart.prototype.ngOnInit = function () {
-        this.update();
-    };
     Chart.prototype.ngOnChanges = function () {
         this.update();
     };

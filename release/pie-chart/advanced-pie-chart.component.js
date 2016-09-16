@@ -11,9 +11,6 @@ var AdvancedPieChart = (function (_super) {
         this.margin = [20, 20, 20, 20];
         this.clickHandler = new core_1.EventEmitter();
     }
-    AdvancedPieChart.prototype.ngOnInit = function () {
-        this.update();
-    };
     AdvancedPieChart.prototype.ngOnChanges = function () {
         this.update();
     };

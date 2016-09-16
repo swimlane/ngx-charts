@@ -3,7 +3,7 @@ var core_1 = require('@angular/core');
 var ScaleLegend = (function () {
     function ScaleLegend() {
     }
-    ScaleLegend.prototype.ngOnInit = function () {
+    ScaleLegend.prototype.ngOnChanges = function () {
         var gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
         this.gradient = "linear-gradient(to bottom, " + gradientValues + ")";
     };

@@ -77,6 +77,9 @@ var SeriesVertical = (function () {
             return bar;
         });
     };
+    SeriesVertical.prototype.trackBy = function (index, bar) {
+        return bar.label;
+    };
     SeriesVertical.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
@@ -119,7 +122,18 @@ var SeriesVertical = (function () {
     SeriesVertical = __decorate([
         core_1.Component({
             selector: 'g[seriesVertical]',
-            template: "\n    <svg:g bar *ngFor=\"let bar of bars\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"bar.tooltipText\"\n      [popoverGroup]=\"'charts'\">\n    </svg:g>\n  "
+            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"bar.tooltipText\"\n      [popoverGroup]=\"'charts'\">\n    </svg:g>\n  ",
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('* => void', [
+                        core_1.style({
+                            opacity: 1,
+                            transform: '*',
+                        }),
+                        core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], SeriesVertical);

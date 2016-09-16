@@ -11,7 +11,7 @@ var TreeMap = (function (_super) {
         this.margin = [10, 10, 10, 10];
         this.clickHandler = new core_1.EventEmitter();
     }
-    TreeMap.prototype.ngOnInit = function () {
+    TreeMap.prototype.ngOnChanges = function () {
         this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, false, false, false, 12);
         var data = [];
         for (var i = 0; i < this.results.data.length; i++) {
@@ -44,10 +44,6 @@ var TreeMap = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], TreeMap.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], TreeMap.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

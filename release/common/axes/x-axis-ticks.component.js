@@ -19,9 +19,6 @@ var XAxisTicks = (function () {
             trimLabel: trim_label_helper_1.trimLabel
         });
     }
-    XAxisTicks.prototype.ngOnInit = function () {
-        this.update();
-    };
     XAxisTicks.prototype.ngOnChanges = function () {
         this.update();
     };

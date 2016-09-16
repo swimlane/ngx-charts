@@ -12,9 +12,6 @@ var BarVerticalStacked = (function (_super) {
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    BarVerticalStacked.prototype.ngOnInit = function () {
-        this.update();
-    };
     BarVerticalStacked.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -86,6 +83,9 @@ var BarVerticalStacked = (function (_super) {
         data.series = group.name;
         this.clickHandler.emit(data);
     };
+    BarVerticalStacked.prototype.trackBy = function (index, item) {
+        return item.name;
+    };
     BarVerticalStacked.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
     };
@@ -97,10 +97,6 @@ var BarVerticalStacked = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], BarVerticalStacked.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStacked.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -148,7 +144,18 @@ var BarVerticalStacked = (function (_super) {
     BarVerticalStacked = __decorate([
         core_1.Component({
             selector: 'bar-vertical-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('* => void', [
+                        core_1.style({
+                            opacity: 1,
+                            transform: '*',
+                        }),
+                        core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], BarVerticalStacked);

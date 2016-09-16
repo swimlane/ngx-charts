@@ -1,5 +1,5 @@
-import { OnInit, OnChanges } from '@angular/core';
-export declare class XAxisTicks implements OnInit, OnChanges {
+import { OnChanges } from '@angular/core';
+export declare class XAxisTicks implements OnChanges {
     scale: any;
     orient: any;
     tickArguments: number[];
@@ -23,7 +23,6 @@ export declare class XAxisTicks implements OnInit, OnChanges {
     ticks: any;
     tickFormat: any;
     constructor();
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getRotationAngle(ticks: any): number;

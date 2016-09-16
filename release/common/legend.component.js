@@ -4,9 +4,6 @@ var trim_label_helper_1 = require('./trim-label.helper');
 var Legend = (function () {
     function Legend() {
     }
-    Legend.prototype.ngOnInit = function () {
-        this.update();
-    };
     Legend.prototype.ngOnChanges = function () {
         this.update();
     };

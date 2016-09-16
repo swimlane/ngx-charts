@@ -13,9 +13,6 @@ var YAxis = (function () {
             yAxisOffset: -5,
         });
     }
-    YAxis.prototype.ngOnInit = function () {
-        this.update();
-    };
     YAxis.prototype.ngOnChanges = function () {
         this.update();
     };

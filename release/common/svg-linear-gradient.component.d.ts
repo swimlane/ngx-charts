@@ -1,5 +1,5 @@
-import { OnInit } from '@angular/core';
-export declare class SvgLinearGradient implements OnInit {
+import { OnChanges } from '@angular/core';
+export declare class SvgLinearGradient implements OnChanges {
     orientation: string;
     color: any;
     name: any;
@@ -9,5 +9,5 @@ export declare class SvgLinearGradient implements OnInit {
     x2: any;
     y1: any;
     y2: any;
-    ngOnInit(): void;
+    ngOnChanges(): void;
 }

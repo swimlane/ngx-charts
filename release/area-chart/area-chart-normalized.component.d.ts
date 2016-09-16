@@ -1,11 +1,12 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class AreaChartNormalized extends BaseChart implements OnInit, OnChanges {
+export declare class AreaChartNormalized extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     scaleType: string;
     xDomain: any[];
+    xSet: any[];
     yDomain: any[];
     seriesDomain: any;
     xScale: any;
@@ -14,9 +15,9 @@ export declare class AreaChartNormalized extends BaseChart implements OnInit, On
     clipPathId: string;
     clipPath: string;
     colors: Function;
+    margin: number[];
     view: any;
     results: any;
-    margin: number[];
     scheme: any;
     customColors: any;
     legend: boolean;
@@ -29,7 +30,6 @@ export declare class AreaChartNormalized extends BaseChart implements OnInit, On
     timeline: any;
     gradient: any;
     clickHandler: EventEmitter<{}>;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getXDomain(): any[];
@@ -39,6 +39,8 @@ export declare class AreaChartNormalized extends BaseChart implements OnInit, On
     getYScale(): any;
     getScaleType(values: any): string;
     isDate(value: any): boolean;
+    updateDomain(domain: any): void;
     click(data: any, series: any): void;
+    trackBy(index: any, item: any): any;
     setColors(): void;
 }

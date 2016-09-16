@@ -1,5 +1,5 @@
-import { OnInit, OnChanges } from '@angular/core';
-export declare class XAxis implements OnInit, OnChanges {
+import { OnChanges } from '@angular/core';
+export declare class XAxis implements OnChanges {
     xScale: any;
     dims: any;
     tickFormatting: any;
@@ -14,7 +14,6 @@ export declare class XAxis implements OnInit, OnChanges {
     xAxisOffset: any;
     transform: any;
     constructor();
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
 }

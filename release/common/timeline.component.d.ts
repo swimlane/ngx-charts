@@ -1,26 +1,34 @@
-import { EventEmitter, ElementRef, OnInit } from '@angular/core';
-export declare class Timeline implements OnInit {
+import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+export declare class Timeline implements OnChanges {
     element: HTMLElement;
     dims: any;
+    xDomain: any[];
+    yDomain: any[];
     xScale: any;
     brush: any;
     transform: string;
+    margin: number[];
+    initialized: boolean;
     view: any;
     state: any;
     results: any;
     scheme: any;
-    margin: number[];
     customColors: any;
     legend: any;
     miniChart: any;
     autoScale: any;
+    scaleType: any;
     clickHandler: EventEmitter<{}>;
-    updateXDomain: EventEmitter<{}>;
+    onDomainChange: EventEmitter<{}>;
     constructor(element: ElementRef);
-    ngOnInit(): void;
+    ngOnChanges(): void;
+    update(): void;
+    getXDomain(): any[];
+    getYDomain(): void;
+    getXScale(): any;
+    getYScale(): void;
     addBrush(): void;
-    calculateXScale(): any;
-    calculateDims(): {
+    getDims(): {
         width: number;
         height: number;
     };

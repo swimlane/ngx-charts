@@ -1,5 +1,5 @@
-import { OnInit, OnChanges } from '@angular/core';
-export declare class Chart implements OnInit, OnChanges {
+import { OnChanges } from '@angular/core';
+export declare class Chart implements OnChanges {
     view: any;
     legend: boolean;
     data: any;
@@ -10,7 +10,6 @@ export declare class Chart implements OnInit, OnChanges {
     title: any;
     legendWidth: any;
     legendType: any;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getLegendType(): string;

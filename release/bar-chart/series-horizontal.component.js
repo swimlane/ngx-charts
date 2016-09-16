@@ -60,6 +60,9 @@ var SeriesHorizontal = (function () {
             return bar;
         });
     };
+    SeriesHorizontal.prototype.trackBy = function (index, bar) {
+        return bar.label;
+    };
     SeriesHorizontal.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
@@ -98,7 +101,18 @@ var SeriesHorizontal = (function () {
     SeriesHorizontal = __decorate([
         core_1.Component({
             selector: 'g[seriesHorizontal]',
-            template: "\n    <svg:g bar *ngFor=\"let bar of bars\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"bar.tooltipText\"\n      [popoverGroup]=\"'charts'\">\n    </svg:g>\n  "
+            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"bar.tooltipText\"\n      [popoverGroup]=\"'charts'\">\n    </svg:g>\n  ",
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('* => void', [
+                        core_1.style({
+                            opacity: 1,
+                            transform: '*',
+                        }),
+                        core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], SeriesHorizontal);

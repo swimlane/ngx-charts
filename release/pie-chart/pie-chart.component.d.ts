@@ -1,7 +1,7 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
-export declare class PieChart extends BaseChart implements OnInit, OnChanges {
+export declare class PieChart extends BaseChart implements OnChanges {
     outerRadius: number;
     innerRadius: number;
     data: any;
@@ -19,7 +19,6 @@ export declare class PieChart extends BaseChart implements OnInit, OnChanges {
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
     translation: string;
-    ngOnInit(): void;
     ngOnChanges(): void;
     update(): void;
     getDomain(): any;

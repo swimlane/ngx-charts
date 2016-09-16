@@ -1,11 +1,9 @@
 "use strict";
 var core_1 = require('@angular/core');
 var AxisLabel = (function () {
-    function AxisLabel() {
+    function AxisLabel(element) {
+        this.element = element.nativeElement;
     }
-    AxisLabel.prototype.ngOnInit = function () {
-        this.update();
-    };
     AxisLabel.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -59,7 +57,7 @@ var AxisLabel = (function () {
             selector: 'g[axisLabel]',
             template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [core_1.ElementRef])
     ], AxisLabel);
     return AxisLabel;
 }());

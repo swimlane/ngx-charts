@@ -17,9 +17,6 @@ var YAxisTicks = (function () {
             trimLabel: trim_label_helper_1.trimLabel
         });
     }
-    YAxisTicks.prototype.ngOnInit = function () {
-        this.update();
-    };
     YAxisTicks.prototype.ngOnChanges = function () {
         this.update();
     };

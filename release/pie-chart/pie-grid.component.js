@@ -13,9 +13,6 @@ var PieGrid = (function (_super) {
         this.margin = [20, 20, 20, 20];
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieGrid.prototype.ngOnInit = function () {
-        this.update();
-    };
     PieGrid.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -61,7 +58,7 @@ var PieGrid = (function (_super) {
                         data: {
                             other: true,
                             value: total - value,
-                            name: 'other'
+                            name: d.data.name
                         }
                     }]
             };
@@ -86,10 +83,6 @@ var PieGrid = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], PieGrid.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGrid.prototype, "margin", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

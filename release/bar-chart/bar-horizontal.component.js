@@ -71,10 +71,6 @@ var BarHorizontal = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], BarHorizontal.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], BarHorizontal.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 

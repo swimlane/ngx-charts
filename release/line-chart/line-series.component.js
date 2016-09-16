@@ -1,13 +1,11 @@
 "use strict";
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
-var moment_1 = require('moment');
+var moment = require('moment');
+var sort_1 = require('../utils/sort');
 var LineSeries = (function () {
     function LineSeries() {
     }
-    LineSeries.prototype.ngOnInit = function () {
-        this.update();
-    };
     LineSeries.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -18,7 +16,7 @@ var LineSeries = (function () {
             var label = d.name;
             var value;
             if (_this.scaleType === 'time') {
-                value = _this.xScale(moment_1.default(label).toDate());
+                value = _this.xScale(moment(label).toDate());
             }
             else if (_this.scaleType === 'linear') {
                 value = _this.xScale(Number(label));
@@ -30,6 +28,10 @@ var LineSeries = (function () {
         })
             .y(function (d) { return _this.yScale(d.value); });
         var data = this.data.series;
+        if (this.scaleType === 'time' || this.scaleType === 'linear') {
+            data = sort_1.sortLinear(data, 'name');
+        }
+        console.log('data');
         this.path = line(data) || '';
     };
     __decorate([
