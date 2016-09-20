@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { single, multi, countries, generateData } from './data';
 import chartGroups from './chartTypes';
+import {Popover} from '../src/common/popover/popover.directive'
 import '../src/ng2d3.scss';
 import './demo.scss';
 
 @Component({
   selector: 'app',
+  directives: [Popover],
   template: `
     <main>
+      <button
+        sw-popover
+        [popoverText]="'abe dek si'">Hello</button>
       <div class="chart-col">
         <div class="chart-view">
           <bar-vertical
