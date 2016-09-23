@@ -1,7 +1,8 @@
-import { OnInit } from '@angular/core';
+import { OnInit, ViewContainerRef } from '@angular/core';
 import '../src/ng2d3.scss';
 import './demo.scss';
 export declare class App implements OnInit {
+    viewContainerRef: ViewContainerRef;
     chartType: string;
     chartGroups: any[];
     chart: any;
@@ -28,7 +29,7 @@ export declare class App implements OnInit {
     doughnut: boolean;
     autoScale: boolean;
     timeline: boolean;
-    constructor();
+    constructor(viewContainerRef: ViewContainerRef);
     ngOnInit(): void;
     updateData(): void;
     selectChart(chartSelector: any): void;

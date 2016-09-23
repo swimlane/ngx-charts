@@ -8,12 +8,14 @@ export declare class TreeMap extends BaseChart implements OnChanges {
     customColors: any;
     clickHandler: EventEmitter<{}>;
     dims: any;
+    domain: any;
     transform: any;
     colors: any;
     treemap: any;
     data: any;
     ngOnChanges(): void;
+    update(): void;
+    getDomain(): any;
     click(data: any): void;
     setColors(): void;
-    update(): void;
 }
