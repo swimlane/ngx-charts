@@ -1,5 +1,5 @@
 "use strict";
-var caretOffset = 6;
+var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
     var result;
     if (alignment === 'top') {
@@ -39,13 +39,13 @@ var PositionHelper = (function () {
     PositionHelper.calculateVerticalCaret = function (elDimensions, popoverDimensions, caretDimensions, alignment) {
         var result;
         if (alignment === 'top') {
-            result = elDimensions.height / 2 - caretDimensions.height / 2 - 1 + caretOffset;
+            result = elDimensions.height / 2 - caretDimensions.height / 2 + caretOffset;
         }
         if (alignment === 'bottom') {
-            result = popoverDimensions.height - elDimensions.height / 2 - caretDimensions.height / 2 - 1 - caretOffset;
+            result = popoverDimensions.height - elDimensions.height / 2 - caretDimensions.height / 2 - caretOffset;
         }
         if (alignment === 'center') {
-            result = popoverDimensions.height / 2 - caretDimensions.height / 2 - 1;
+            result = popoverDimensions.height / 2 - caretDimensions.height / 2;
         }
         var popoverPosition = verticalPosition(elDimensions, popoverDimensions, alignment);
         if (popoverPosition + popoverDimensions.height > window.innerHeight) {
@@ -63,13 +63,13 @@ var PositionHelper = (function () {
     PositionHelper.calculateHorizontalCaret = function (elDimensions, popoverDimensions, caretDimensions, alignment) {
         var result;
         if (alignment === 'left') {
-            result = elDimensions.width / 2 - caretDimensions.width / 2 - 1 + caretOffset;
+            result = elDimensions.width / 2 - caretDimensions.width / 2 + caretOffset;
         }
         if (alignment === 'right') {
-            result = popoverDimensions.width - elDimensions.width / 2 - caretDimensions.width / 2 - 1 - caretOffset;
+            result = popoverDimensions.width - elDimensions.width / 2 - caretDimensions.width / 2 - caretOffset;
         }
         if (alignment === 'center') {
-            result = popoverDimensions.width / 2 - caretDimensions.width / 2 - 1;
+            result = popoverDimensions.width / 2 - caretDimensions.width / 2;
         }
         var popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
         if (popoverPosition + popoverDimensions.width > window.innerWidth) {

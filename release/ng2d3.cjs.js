@@ -1,5 +1,5 @@
 /**
- * ng2d3 v1.1.0 (https://github.com/swimlane/ng2d3)
+ * ng2d3 v1.2.0 (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -26,6 +26,10 @@ function __decorate(decorators, target, key, desc) {
 
 function __metadata(k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 }
 
 var Chart = (function () {
@@ -706,7 +710,101 @@ var AxesModule = (function () {
     return AxesModule;
 }());
 
-var caretOffset = 6;
+var InjectionService = (function () {
+    function InjectionService(applicationRef, componentFactoryResolver, injector) {
+        this.applicationRef = applicationRef;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.injector = injector;
+    }
+    InjectionService.prototype.getRootViewContainerRef = function () {
+        var comps = this.applicationRef.components;
+        if (!comps.length) {
+            throw new Error("ApplicationRef instance not found");
+        }
+        var appInstance = comps[0].instance;
+        if (!appInstance.viewContainerRef) {
+            var appName = this.applicationRef.componentTypes[0].name;
+            throw new Error("Missing 'viewContainerRef' declaration in " + appName + " constructor");
+        }
+        return appInstance.viewContainerRef;
+    };
+    InjectionService.prototype.appendNextToLocation = function (componentClass, location, providers) {
+        var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
+        var parentInjector = location.parentInjector;
+        var childInjector = parentInjector;
+        if (providers && providers.length) {
+            childInjector = _angular_core.ReflectiveInjector.fromResolvedProviders(providers, parentInjector);
+        }
+        return location.createComponent(componentFactory, location.length, childInjector);
+    };
+    InjectionService.prototype.appendNextToRoot = function (componentClass, componentOptionsClass, options) {
+        var providers;
+        var location = this.getRootViewContainerRef();
+        if (componentOptionsClass && options) {
+            providers = _angular_core.ReflectiveInjector.resolve([
+                { provide: componentOptionsClass, useValue: options }
+            ]);
+        }
+        return this.appendNextToLocation(componentClass, location, providers);
+    };
+    InjectionService = __decorate([
+        _angular_core.Injectable(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof _angular_core.ApplicationRef !== 'undefined' && _angular_core.ApplicationRef) === 'function' && _a) || Object, (typeof (_b = typeof _angular_core.ComponentFactoryResolver !== 'undefined' && _angular_core.ComponentFactoryResolver) === 'function' && _b) || Object, (typeof (_c = typeof _angular_core.Injector !== 'undefined' && _angular_core.Injector) === 'function' && _c) || Object])
+    ], InjectionService);
+    return InjectionService;
+    var _a, _b, _c;
+}());
+
+function throttle(func, wait, options) {
+    options = options || {};
+    var context;
+    var args;
+    var result;
+    var timeout = null;
+    var previous = 0;
+    function later() {
+        previous = options.leading === false ? 0 : +new Date();
+        timeout = null;
+        result = func.apply(context, args);
+    }
+    return function () {
+        var now = +new Date();
+        if (!previous && options.leading === false) {
+            previous = now;
+        }
+        var remaining = wait - (now - previous);
+        context = this;
+        args = arguments;
+        if (remaining <= 0) {
+            clearTimeout(timeout);
+            timeout = null;
+            previous = now;
+            result = func.apply(context, args);
+        }
+        else if (!timeout && options.trailing !== false) {
+            timeout = setTimeout(later, remaining);
+        }
+        return result;
+    };
+}
+function throttleable(duration, options) {
+    return function innerDecorator(target, key, descriptor) {
+        return {
+            configurable: true,
+            enumerable: descriptor.enumerable,
+            get: function getter() {
+                Object.defineProperty(this, key, {
+                    configurable: true,
+                    enumerable: descriptor.enumerable,
+                    value: throttle(descriptor.value, duration, options)
+                });
+                return this[key];
+            }
+        };
+    };
+}
+
+var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
     var result;
     if (alignment === 'top') {
@@ -746,13 +844,13 @@ var PositionHelper = (function () {
     PositionHelper.calculateVerticalCaret = function (elDimensions, popoverDimensions, caretDimensions, alignment) {
         var result;
         if (alignment === 'top') {
-            result = elDimensions.height / 2 - caretDimensions.height / 2 - 1 + caretOffset;
+            result = elDimensions.height / 2 - caretDimensions.height / 2 + caretOffset;
         }
         if (alignment === 'bottom') {
-            result = popoverDimensions.height - elDimensions.height / 2 - caretDimensions.height / 2 - 1 - caretOffset;
+            result = popoverDimensions.height - elDimensions.height / 2 - caretDimensions.height / 2 - caretOffset;
         }
         if (alignment === 'center') {
-            result = popoverDimensions.height / 2 - caretDimensions.height / 2 - 1;
+            result = popoverDimensions.height / 2 - caretDimensions.height / 2;
         }
         var popoverPosition = verticalPosition(elDimensions, popoverDimensions, alignment);
         if (popoverPosition + popoverDimensions.height > window.innerHeight) {
@@ -770,13 +868,13 @@ var PositionHelper = (function () {
     PositionHelper.calculateHorizontalCaret = function (elDimensions, popoverDimensions, caretDimensions, alignment) {
         var result;
         if (alignment === 'left') {
-            result = elDimensions.width / 2 - caretDimensions.width / 2 - 1 + caretOffset;
+            result = elDimensions.width / 2 - caretDimensions.width / 2 + caretOffset;
         }
         if (alignment === 'right') {
-            result = popoverDimensions.width - elDimensions.width / 2 - caretDimensions.width / 2 - 1 - caretOffset;
+            result = popoverDimensions.width - elDimensions.width / 2 - caretDimensions.width / 2 - caretOffset;
         }
         if (alignment === 'center') {
-            result = popoverDimensions.width / 2 - caretDimensions.width / 2 - 1;
+            result = popoverDimensions.width / 2 - caretDimensions.width / 2;
         }
         var popoverPosition = horizontalPosition(elDimensions, popoverDimensions, alignment);
         if (popoverPosition + popoverDimensions.width > window.innerWidth) {
@@ -815,227 +913,372 @@ var PositionHelper = (function () {
     return PositionHelper;
 }());
 
-var PopoverRegistry = (function () {
-    function PopoverRegistry() {
-        "ngInject";
-        if (PopoverRegistry._instance) {
-            throw new Error("Error: Instantiation failed: Use PopoverRegistry.getInstance() instead of new.");
-        }
-        PopoverRegistry._instance = this;
-        this.popovers = {};
-        setInterval(this.cleanUp.bind(this), 1000);
+var TooltipOptions = (function () {
+    function TooltipOptions(opts) {
+        Object.assign(this, opts);
     }
-    PopoverRegistry.getInstance = function () {
-        return PopoverRegistry._instance;
-    };
-    PopoverRegistry.prototype.add = function (id, object) {
-        this.popovers[id] = object;
-    };
-    PopoverRegistry.prototype.find = function (id) {
-        return this.popovers[id];
-    };
-    PopoverRegistry.prototype.remove = function (id) {
-        if (!this.popovers[id]) {
-            return;
-        }
-        if (this.popovers[id].popoverScope) {
-            this.popovers[id].popoverScope.$destroy();
-        }
-        if (this.popovers[id].popover) {
-            this.popovers[id].popover.remove();
-        }
-        delete this.popovers[id];
-    };
-    PopoverRegistry.prototype.removeGroup = function (group, currentId) {
-        var _this = this;
-        var ids = Object.keys(this.popovers);
-        var _loop_1 = function(id) {
-            var popoverOb = this_1.popovers[id];
-            if (!popoverOb) {
-                return "continue";
-            }
-            if (id === currentId) {
-                return { value: void 0 };
-            }
-            if (popoverOb.group && popoverOb.group === group) {
-                popoverOb.popover.removeClass('sw-popover-animation');
-                setTimeout(function () {
-                    popoverOb.popover.remove();
-                    if (popoverOb.popoverScope) {
-                        popoverOb.popoverScope.$destroy();
-                    }
-                    delete _this.popovers[id];
-                }, 50);
-            }
-        };
-        var this_1 = this;
-        for (var _i = 0, ids_1 = ids; _i < ids_1.length; _i++) {
-            var id = ids_1[_i];
-            var state_1 = _loop_1(id);
-            if (typeof state_1 === "object") return state_1.value;
-        }
-    };
-    PopoverRegistry.prototype.cleanUp = function () {
-        var ids = Object.keys(this.popovers);
-        for (var _i = 0, ids_2 = ids; _i < ids_2.length; _i++) {
-            var id = ids_2[_i];
-            var element = this.popovers[id].element;
-            if (element && element[0]) {
-                element = element[0];
-            }
-            if (element && !document.contains(element)) {
-                this.remove(id);
-            }
-        }
-    };
-    PopoverRegistry._instance = new PopoverRegistry();
-    return PopoverRegistry;
+    TooltipOptions = __decorate([
+        _angular_core.Injectable(), 
+        __metadata('design:paramtypes', [Object])
+    ], TooltipOptions);
+    return TooltipOptions;
 }());
 
-var Popover = (function () {
-    function Popover(element, renderer) {
-        this.popoverPlacement = 'top';
-        this.popoverAlignment = 'center';
-        this.popoverSpacing = 0;
-        this.showCaret = true;
-        this.element = element.nativeElement;
-        this.renderer = renderer;
-        if (this.mouseEnterListener) {
-            this.mouseEnterListener();
-        }
-        this.mouseEnterListener = this.renderer.listen(this.element, 'mouseenter', this.display.bind(this));
-        if (this.mouseLeaveListener) {
-            this.mouseLeaveListener();
-        }
-        this.mouseLeaveListener = this.renderer.listen(this.element, 'mouseleave', this.mouseOut.bind(this));
+var PlacementTypes;
+(function (PlacementTypes) {
+    PlacementTypes[PlacementTypes["top"] = 'top'] = "top";
+    PlacementTypes[PlacementTypes["bottom"] = 'bottom'] = "bottom";
+    PlacementTypes[PlacementTypes["left"] = 'left'] = "left";
+    PlacementTypes[PlacementTypes["right"] = 'right'] = "right";
+})(PlacementTypes || (PlacementTypes = {}));
+
+var TooltipContentComponent = (function () {
+    function TooltipContentComponent(element, options) {
+        this.element = element;
+        Object.assign(this, options);
     }
-    Popover.prototype.ngOnInit = function () {
-        this.popoverRegistry = PopoverRegistry.getInstance();
+    Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
+        get: function () {
+            var clz = 'swui-tooltip-content';
+            clz += " position-" + this.placement;
+            clz += " type-" + this.type;
+            clz += " " + this.cssClass;
+            return clz;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
+        get: function () {
+            return 'active';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TooltipContentComponent.prototype.ngAfterViewInit = function () {
+        this.position();
     };
-    Popover.prototype.mouseOut = function () {
-        this.exitTimeout = setTimeout(this.remove.bind(this), 200);
+    TooltipContentComponent.prototype.position = function () {
+        var nativeElm = this.element.nativeElement;
+        var hostDim = this.host.nativeElement.getBoundingClientRect();
+        var elmDim = nativeElm.getBoundingClientRect();
+        this.checkFlip(hostDim, elmDim);
+        this.positionContent(nativeElm, hostDim, elmDim);
+        if (this.showCaret)
+            this.positionCaret(hostDim, elmDim);
     };
-    ;
-    Popover.prototype.display = function () {
-    };
-    ;
-    Popover.prototype.remove = function () {
-        if (this.popover) {
-            this.popover.remove();
+    TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
+        var top = 0;
+        var left = 0;
+        if (this.placement === PlacementTypes.right) {
+            left = hostDim.left + hostDim.width + this.spacing;
+            top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
         }
-        this.popoverRegistry.remove(this.popoverId);
-        this.popover = undefined;
+        else if (this.placement === PlacementTypes.left) {
+            left = hostDim.left - elmDim.width - this.spacing;
+            top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
+        }
+        else if (this.placement === PlacementTypes.top) {
+            top = hostDim.top - elmDim.height - this.spacing;
+            left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
+        }
+        else if (this.placement === PlacementTypes.bottom) {
+            top = hostDim.top + hostDim.height + this.spacing;
+            left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
+        }
+        nativeElm.style['top'] = top + 'px';
+        nativeElm.style['left'] = left + 'px';
     };
-    ;
-    Popover.prototype.checkFlip = function (triggerElement, popover, options) {
-        var elDimensions = triggerElement.getBoundingClientRect(), popoverDimensions = popover[0].getBoundingClientRect();
-        if (PositionHelper.shouldFlip(elDimensions, popoverDimensions, options.placement, options.alignment, options.spacing)) {
-            if (options.placement === 'right') {
-                options.placement = 'left';
+    TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
+        var caretElm = this.caretElm.nativeElement;
+        var caretDimensions = caretElm.getBoundingClientRect();
+        var top = 0;
+        var left = 0;
+        if (this.placement === PlacementTypes.right) {
+            left = -7;
+            top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        else if (this.placement === PlacementTypes.left) {
+            left = elmDim.width;
+            top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        else if (this.placement === PlacementTypes.top) {
+            top = elmDim.height;
+            left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        else if (this.placement === PlacementTypes.bottom) {
+            top = -7;
+            left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        caretElm.style['top'] = top + 'px';
+        caretElm.style['left'] = left + 'px';
+    };
+    TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
+        var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
+        if (shouldFlip) {
+            if (this.placement === PlacementTypes.right) {
+                this.placement = PlacementTypes.left;
             }
-            else if (options.placement === 'left') {
-                options.placement = 'right';
+            else if (this.placement === PlacementTypes.left) {
+                this.placement = PlacementTypes.right;
             }
-            else if (options.placement === 'top') {
-                options.placement = 'bottom';
+            else if (this.placement === PlacementTypes.top) {
+                this.placement = PlacementTypes.bottom;
             }
-            else if (options.placement === 'bottom') {
-                options.placement = 'top';
+            else if (this.placement === PlacementTypes.bottom) {
+                this.placement = PlacementTypes.top;
             }
         }
     };
-    ;
-    Popover.prototype.positionPopover = function (triggerElement, popover, options) {
-        var elDimensions = triggerElement.getBoundingClientRect(), popoverDimensions = popover[0].getBoundingClientRect(), top, left;
-        if (options.placement === 'right') {
-            left = elDimensions.left + elDimensions.width + options.spacing;
-            top = PositionHelper.calculateVerticalAlignment(elDimensions, popoverDimensions, options.alignment);
-        }
-        if (options.placement === 'left') {
-            left = elDimensions.left - popoverDimensions.width - options.spacing;
-            top = PositionHelper.calculateVerticalAlignment(elDimensions, popoverDimensions, options.alignment);
-        }
-        if (options.placement === 'top') {
-            top = elDimensions.top - popoverDimensions.height - options.spacing;
-            left = PositionHelper.calculateHorizontalAlignment(elDimensions, popoverDimensions, options.alignment);
-        }
-        if (options.placement === 'bottom') {
-            top = elDimensions.top + elDimensions.height + options.spacing;
-            left = PositionHelper.calculateHorizontalAlignment(elDimensions, popoverDimensions, options.alignment);
-        }
-        popover.css({
-            top: top + 'px',
-            left: left + 'px'
-        });
-        if (this.options.showCaret) {
-            this.addCaret(this.popover, elDimensions, popoverDimensions);
-        }
-        this.popover.addClass('sw-popover-animation');
+    TooltipContentComponent.prototype.onMouseLeave = function (target) {
+        if (this.closeOnMouseLeave)
+            this.hide();
     };
-    ;
-    Popover.prototype.addCaret = function (popoverEl, elDimensions, popoverDimensions) {
+    TooltipContentComponent.prototype.onDocumentClick = function (target) {
+        if (this.closeOnClickOutside) {
+            var contains = this.element.nativeElement.contains(target);
+            if (!contains)
+                this.hide();
+        }
     };
-    ;
-    Popover.prototype.toBoolean = function (value) {
-        if (value && value.length !== 0) {
-            var v = ("" + value).toLowerCase();
-            value = (v === 'true');
+    TooltipContentComponent.prototype.onWindowResize = function () {
+        this.position();
+    };
+    __decorate([
+        _angular_core.ViewChild('caretElm'), 
+        __metadata('design:type', Object)
+    ], TooltipContentComponent.prototype, "caretElm", void 0);
+    __decorate([
+        _angular_core.HostBinding('class'), 
+        __metadata('design:type', Object)
+    ], TooltipContentComponent.prototype, "cssClasses", null);
+    __decorate([
+        _angular_core.HostBinding('@visibilityChanged'), 
+        __metadata('design:type', Object)
+    ], TooltipContentComponent.prototype, "visibilityChanged", null);
+    __decorate([
+        _angular_core.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], TooltipContentComponent.prototype, "onMouseLeave", null);
+    __decorate([
+        _angular_core.HostListener('document:click', ['$event.target']), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], TooltipContentComponent.prototype, "onDocumentClick", null);
+    __decorate([
+        _angular_core.HostListener('window:resize'),
+        throttleable(100), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipContentComponent.prototype, "onWindowResize", null);
+    TooltipContentComponent = __decorate([
+        _angular_core.Component({
+            selector: 'swui-tooltip-content',
+            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+            animations: [
+                _angular_core.trigger('visibilityChanged', [
+                    _angular_core.state('active', _angular_core.style({ opacity: 1, 'pointer-events': 'auto' })),
+                    _angular_core.transition('void => *', [
+                        _angular_core.style({
+                            opacity: 0,
+                            'pointer-events': 'none',
+                            transform: 'translate3d(0, 0, 0)'
+                        }),
+                        _angular_core.animate('0.3s ease-out')
+                    ]),
+                    _angular_core.transition('* => void', [
+                        _angular_core.style({ opacity: 1 }),
+                        _angular_core.animate('0.2s ease-out')
+                    ])
+                ])
+            ]
+        }),
+        __param(1, _angular_core.Inject(TooltipOptions)), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof _angular_core.ElementRef !== 'undefined' && _angular_core.ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof TooltipOptions !== 'undefined' && TooltipOptions) === 'function' && _b) || Object])
+    ], TooltipContentComponent);
+    return TooltipContentComponent;
+    var _a, _b;
+}());
+
+var StyleTypes;
+(function (StyleTypes) {
+    StyleTypes[StyleTypes["popover"] = 'popover'] = "popover";
+    StyleTypes[StyleTypes["tooltip"] = 'tooltip'] = "tooltip";
+})(StyleTypes || (StyleTypes = {}));
+
+var AlignmentTypes;
+(function (AlignmentTypes) {
+    AlignmentTypes[AlignmentTypes["left"] = 'left'] = "left";
+    AlignmentTypes[AlignmentTypes["center"] = 'center'] = "center";
+    AlignmentTypes[AlignmentTypes["right"] = 'right'] = "right";
+})(AlignmentTypes || (AlignmentTypes = {}));
+
+var TooltipDirective = (function () {
+    function TooltipDirective(viewContainerRef, injectionService) {
+        this.viewContainerRef = viewContainerRef;
+        this.injectionService = injectionService;
+        this.tooltipCssClass = '';
+        this.tooltipTitle = '';
+        this.tooltipAppendToBody = true;
+        this.tooltipSpacing = 0;
+        this.tooltipDisabled = false;
+        this.tooltipShowCaret = true;
+        this.tooltipPlacement = PlacementTypes.top;
+        this.tooltipAlignment = AlignmentTypes.center;
+        this.tooltipType = StyleTypes.popover;
+        this.tooltipCloseOnClickOutside = true;
+        this.tooltipCloseOnMouseLeave = true;
+        this.tooltipHideTimeout = 300;
+        this.tooltipShowTimeout = 100;
+        this.visible = false;
+    }
+    TooltipDirective.prototype.show = function () {
+        var _this = this;
+        if (this.visible || this.tooltipDisabled)
+            return;
+        this.visible = true;
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(function () {
+            return _this.injectComponent();
+        }, this.tooltipShowTimeout);
+    };
+    TooltipDirective.prototype.injectComponent = function () {
+        var options = this.createBoundOptions();
+        if (this.tooltipAppendToBody) {
+            this.tooltip = this.injectionService.appendNextToRoot(TooltipContentComponent, TooltipOptions, options);
         }
         else {
-            value = false;
+            var binding = _angular_core.ReflectiveInjector.resolve([
+                { provide: TooltipOptions, useValue: options }
+            ]);
+            this.tooltip = this.injectionService.appendNextToLocation(TooltipContentComponent, this.viewContainerRef, binding);
         }
-        return value;
     };
-    ;
-    Popover.prototype.ngOnDestroy = function () {
-        if (this.mouseEnterListener) {
-            this.mouseEnterListener();
-        }
-        if (this.mouseLeaveListener) {
-            this.mouseLeaveListener();
-        }
-        this.remove();
+    TooltipDirective.prototype.hide = function () {
+        var _this = this;
+        if (!this.visible)
+            return;
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(function () {
+            _this.visible = false;
+            if (_this.tooltip)
+                _this.tooltip.destroy();
+        }, this.tooltipHideTimeout);
+    };
+    TooltipDirective.prototype.createBoundOptions = function () {
+        return new TooltipOptions({
+            title: this.tooltipTitle,
+            template: this.tooltipTemplate,
+            host: this.viewContainerRef.element,
+            placement: this.tooltipPlacement,
+            alignment: this.tooltipAlignment,
+            type: this.tooltipType,
+            showCaret: this.tooltipShowCaret,
+            cssClass: this.tooltipCssClass,
+            hide: this.hide,
+            closeOnClickOutside: this.tooltipCloseOnClickOutside,
+            closeOnMouseLeave: this.tooltipCloseOnMouseLeave,
+            spacing: this.tooltipSpacing
+        });
     };
     __decorate([
-        _angular_core.ViewChild('parent', { read: _angular_core.ViewContainerRef }), 
-        __metadata('design:type', (typeof (_a = typeof _angular_core.ViewContainerRef !== 'undefined' && _angular_core.ViewContainerRef) === 'function' && _a) || Object)
-    ], Popover.prototype, "parent", void 0);
+        _angular_core.Input(), 
+        __metadata('design:type', String)
+    ], TooltipDirective.prototype, "tooltipCssClass", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', String)
+    ], TooltipDirective.prototype, "tooltipTitle", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Boolean)
+    ], TooltipDirective.prototype, "tooltipAppendToBody", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Number)
+    ], TooltipDirective.prototype, "tooltipSpacing", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Boolean)
+    ], TooltipDirective.prototype, "tooltipDisabled", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Boolean)
+    ], TooltipDirective.prototype, "tooltipShowCaret", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', (typeof (_a = typeof PlacementTypes !== 'undefined' && PlacementTypes) === 'function' && _a) || Object)
+    ], TooltipDirective.prototype, "tooltipPlacement", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', (typeof (_b = typeof AlignmentTypes !== 'undefined' && AlignmentTypes) === 'function' && _b) || Object)
+    ], TooltipDirective.prototype, "tooltipAlignment", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', (typeof (_c = typeof StyleTypes !== 'undefined' && StyleTypes) === 'function' && _c) || Object)
+    ], TooltipDirective.prototype, "tooltipType", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Boolean)
+    ], TooltipDirective.prototype, "tooltipCloseOnClickOutside", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Boolean)
+    ], TooltipDirective.prototype, "tooltipCloseOnMouseLeave", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Number)
+    ], TooltipDirective.prototype, "tooltipHideTimeout", void 0);
+    __decorate([
+        _angular_core.Input(), 
+        __metadata('design:type', Number)
+    ], TooltipDirective.prototype, "tooltipShowTimeout", void 0);
     __decorate([
         _angular_core.Input(), 
         __metadata('design:type', Object)
-    ], Popover.prototype, "popoverText", void 0);
+    ], TooltipDirective.prototype, "tooltipTemplate", void 0);
     __decorate([
-        _angular_core.Input(), 
-        __metadata('design:type', Object)
-    ], Popover.prototype, "popoverTemplate", void 0);
+        _angular_core.HostListener('focusin'),
+        _angular_core.HostListener('mouseenter'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "show", null);
     __decorate([
-        _angular_core.Input(), 
-        __metadata('design:type', Object)
-    ], Popover.prototype, "popoverPlacement", void 0);
-    __decorate([
-        _angular_core.Input(), 
-        __metadata('design:type', Object)
-    ], Popover.prototype, "popoverAlignment", void 0);
-    __decorate([
-        _angular_core.Input(), 
-        __metadata('design:type', Object)
-    ], Popover.prototype, "popoverGroup", void 0);
-    __decorate([
-        _angular_core.Input(), 
-        __metadata('design:type', Object)
-    ], Popover.prototype, "popoverSpacing", void 0);
-    __decorate([
-        _angular_core.Input(), 
-        __metadata('design:type', Object)
-    ], Popover.prototype, "showCaret", void 0);
-    Popover = __decorate([
+        _angular_core.HostListener('focusout'),
+        _angular_core.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "hide", null);
+    TooltipDirective = __decorate([
         _angular_core.Directive({
-            selector: '[sw-popover]'
+            selector: '[swui-tooltip]'
         }), 
-        __metadata('design:paramtypes', [(typeof (_b = typeof _angular_core.ElementRef !== 'undefined' && _angular_core.ElementRef) === 'function' && _b) || Object, (typeof (_c = typeof _angular_core.Renderer !== 'undefined' && _angular_core.Renderer) === 'function' && _c) || Object])
-    ], Popover);
-    return Popover;
-    var _a, _b, _c;
+        __metadata('design:paramtypes', [(typeof (_d = typeof _angular_core.ViewContainerRef !== 'undefined' && _angular_core.ViewContainerRef) === 'function' && _d) || Object, (typeof (_e = typeof InjectionService !== 'undefined' && InjectionService) === 'function' && _e) || Object])
+    ], TooltipDirective);
+    return TooltipDirective;
+    var _a, _b, _c, _d, _e;
+}());
+
+var TooltipModule = (function () {
+    function TooltipModule() {
+    }
+    TooltipModule = __decorate([
+        _angular_core.NgModule({
+            declarations: [TooltipContentComponent, TooltipDirective],
+            providers: [InjectionService],
+            exports: [TooltipContentComponent, TooltipDirective],
+            imports: [_angular_platformBrowser.BrowserModule],
+            entryComponents: [TooltipContentComponent]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TooltipModule);
+    return TooltipModule;
 }());
 
 var cache = {};
@@ -1410,6 +1653,7 @@ var interpolate = require("d3-interpolate");
 var scales = require("d3-scale");
 var selection = require("d3-selection");
 var shape = require("d3-shape");
+var hierarchy = require("d3-hierarchy");
 var d3 = {
     arc: shape.arc,
     area: shape.area,
@@ -1436,7 +1680,8 @@ var d3 = {
     scalePoint: scales.scalePoint,
     scaleQuantile: scales.scaleQuantile,
     scaleTime: scales.scaleTime,
-    treemap: shape.treemap
+    treemap: hierarchy.treemap,
+    stratify: hierarchy.stratify
 };
 
 var Timeline = (function () {
@@ -1697,7 +1942,6 @@ var COMPONENTS = [
     Legend,
     ScaleLegend,
     Circle,
-    Popover,
     CircleSeries,
     GridPanel,
     GridPanelSeries,
@@ -1712,12 +1956,14 @@ var CommonModule = (function () {
         _angular_core.NgModule({
             imports: [
                 _angular_platformBrowser.BrowserModule,
-                AxesModule
+                AxesModule,
+                TooltipModule
             ],
             declarations: COMPONENTS.slice(),
             exports: [
                 _angular_platformBrowser.BrowserModule,
-                AxesModule
+                AxesModule,
+                TooltipModule
             ].concat(COMPONENTS)
         }), 
         __metadata('design:paramtypes', [])
@@ -4236,7 +4482,7 @@ var SeriesHorizontal = (function () {
     SeriesHorizontal = __decorate([
         _angular_core.Component({
             selector: 'g[seriesHorizontal]',
-            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"bar.tooltipText\"\n      [popoverGroup]=\"'charts'\">\n    </svg:g>\n  ",
+            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
             animations: [
                 _angular_core.trigger('animationState', [
                     _angular_core.transition('* => void', [
@@ -4375,7 +4621,7 @@ var SeriesVertical = (function () {
     SeriesVertical = __decorate([
         _angular_core.Component({
             selector: 'g[seriesVertical]',
-            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"bar.tooltipText\"\n      [popoverGroup]=\"'charts'\">\n    </svg:g>\n  ",
+            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
             animations: [
                 _angular_core.trigger('animationState', [
                     _angular_core.transition('* => void', [
@@ -4572,7 +4818,7 @@ var HeatCellSeries = (function () {
     HeatCellSeries = __decorate([
         _angular_core.Component({
             selector: 'g[heatMapCellSeries]',
-            template: "\n    <svg:g heatMapCell *ngFor=\"let c of cells\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event, c.label, c.series)\"\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"c.tooltipText\"\n      [popoverGroup]=\"'charts'\"\n      [gradient]=\"gradient\"\n    />\n  "
+            template: "\n    <svg:g heatMapCell *ngFor=\"let c of cells\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], HeatCellSeries);
@@ -5044,7 +5290,6 @@ var LineSeries = (function () {
         if (this.scaleType === 'time' || this.scaleType === 'linear') {
             data = sortLinear(data, 'name');
         }
-        console.log('data');
         this.path = line(data) || '';
     };
     __decorate([
@@ -5246,7 +5491,7 @@ var CardSeries = (function () {
     CardSeries = __decorate([
         _angular_core.Component({
             selector: 'g[cardSeries]',
-            template: "\n    <svg:g card *ngFor=\"let c of cards\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n      sw-popover\n      [popoverSpacing]=\"15\"\n      [popoverText]=\"c.tooltipText\"\n      [popoverGroup]=\"'charts'\"\n    />\n  "
+            template: "\n    <svg:g card *ngFor=\"let c of cards\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], CardSeries);
@@ -5917,7 +6162,6 @@ var PieGridSeries = (function () {
         this.layout = d3.pie()
             .value(function (d) { return d.data.value; }).sort(null);
         this.arcs = this.getArcs();
-        console.log('Arcs', this.arcs);
         this.loadAnimation();
     };
     PieGridSeries.prototype.getArcs = function () {
@@ -6132,7 +6376,7 @@ var PieSeries = (function () {
     PieSeries = __decorate([
         _angular_core.Component({
             selector: 'g[pieSeries]',
-            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n\n      <svg:g pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [total]=\"total\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"click($event)\"\n        sw-popover\n        [popoverSpacing]=\"15\"\n        [popoverText]=\"tooltipText(arc)\"\n        [popoverGroup]=\"'charts'\"\n        [gradient]=\"gradient\"\n      ></svg:g>\n\n    </svg:g>\n  "
+            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n\n      <svg:g pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [total]=\"total\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"click($event)\"\n        [gradient]=\"gradient\"\n        \n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], PieSeries);
@@ -6248,18 +6492,18 @@ var TreeMapCellSeries = (function () {
     };
     TreeMapCellSeries.prototype.getCells = function () {
         var _this = this;
-        return this.data
+        return this.data.children
             .filter(function (d) {
             return d.depth === 1;
         })
             .map(function (d, index) {
             return {
-                x: d.x,
-                y: d.y,
-                width: d.dx,
-                height: d.dy,
-                fill: _this.colors(d.label),
-                label: d.label,
+                x: d.x0,
+                y: d.y0,
+                width: d.x1 - d.x0,
+                height: d.y1 - d.y0,
+                fill: _this.colors(d.id),
+                label: d.id,
                 value: d.value,
                 valueType: d.valueType
             };
@@ -6267,6 +6511,9 @@ var TreeMapCellSeries = (function () {
     };
     TreeMapCellSeries.prototype.click = function (data) {
         this.clickHandler.emit(data);
+    };
+    TreeMapCellSeries.prototype.trackBy = function (index, item) {
+        return item.label;
     };
     __decorate([
         _angular_core.Input(), 
@@ -6287,7 +6534,7 @@ var TreeMapCellSeries = (function () {
     TreeMapCellSeries = __decorate([
         _angular_core.Component({
             selector: 'g[treeMapCellSeries]',
-            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
+            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], TreeMapCellSeries);
@@ -6302,29 +6549,34 @@ var TreeMap = (function (_super) {
         this.clickHandler = new _angular_core.EventEmitter();
     }
     TreeMap.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    TreeMap.prototype.update = function () {
         this.dims = calculateViewDimensions(this.view, this.margin, false, false, false, 12);
-        var data = [];
-        for (var i = 0; i < this.results.data.length; i++) {
-            data[i] = {};
-            data[i].value = this.results.data[i].value;
-            data[i].valueType = this.results.data[i].valueType;
-            data[i].label = this.results.data[i].label;
-        }
+        this.domain = this.getDomain();
         this.treemap = d3.treemap()
-            .children(function (d) { return d; })
-            .size([this.dims.width, this.dims.height])
-            .sticky(true)
-            .value(function (d) { return d.value; });
-        this.data = this.treemap(data);
-        this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+            .size([this.dims.width, this.dims.height]);
+        var rootNode = {
+            name: 'root',
+            value: 0,
+            isRoot: true
+        };
+        var root = d3.stratify()
+            .id(function (d) { return d.name; })
+            .parentId(function (d) { return d.isRoot ? null : 'root'; })([rootNode].concat(this.results))
+            .sum(function (d) { return d.value; });
+        this.data = this.treemap(root);
+        this.setColors();
         this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
+    };
+    TreeMap.prototype.getDomain = function () {
+        return this.results.map(function (d) { return d.name; });
     };
     TreeMap.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
     TreeMap.prototype.setColors = function () {
-    };
-    TreeMap.prototype.update = function () {
+        this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
         _angular_core.Input(), 
@@ -6349,7 +6601,7 @@ var TreeMap = (function (_super) {
     TreeMap = __decorate([
         _angular_core.Component({
             selector: 'tree-map',
-            template: "\n    <chart\n      legend=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"treemap\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"treemap\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], TreeMap);

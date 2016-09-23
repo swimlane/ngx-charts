@@ -26,5 +26,6 @@ declare var _default: {
     scaleQuantile: any;
     scaleTime: any;
     treemap: any;
+    stratify: any;
 };
 export default _default;

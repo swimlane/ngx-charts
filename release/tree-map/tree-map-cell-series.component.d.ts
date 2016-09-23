@@ -8,4 +8,5 @@ export declare class TreeMapCellSeries implements OnChanges {
     ngOnChanges(): void;
     getCells(): any;
     click(data: any): void;
+    trackBy(index: any, item: any): any;
 }

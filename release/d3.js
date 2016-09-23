@@ -7,6 +7,7 @@ var interpolate = require("d3-interpolate");
 var scales = require("d3-scale");
 var selection = require("d3-selection");
 var shape = require("d3-shape");
+var hierarchy = require("d3-hierarchy");
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     arc: shape.arc,
@@ -34,6 +35,7 @@ exports.default = {
     scalePoint: scales.scalePoint,
     scaleQuantile: scales.scaleQuantile,
     scaleTime: scales.scaleTime,
-    treemap: shape.treemap
+    treemap: hierarchy.treemap,
+    stratify: hierarchy.stratify
 };
 //# sourceMappingURL=d3.js.map

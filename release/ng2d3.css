@@ -1,3 +1,75 @@
+.swui-tooltip-content {
+  position: absolute;
+  border-radius: 3px;
+  z-index: 5000;
+  display: block;
+  font-weight: normal;
+  opacity: 0; }
+  .swui-tooltip-content.type-popover {
+    background: #fff;
+    color: #060709;
+    border: 1px solid #72809b;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    font-size: 12px;
+    padding: 4px; }
+    .swui-tooltip-content.type-popover .tooltip-caret {
+      position: absolute;
+      z-index: 5001;
+      width: 0;
+      height: 0; }
+      .swui-tooltip-content.type-popover .tooltip-caret.position-left {
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 7px solid #fff; }
+      .swui-tooltip-content.type-popover .tooltip-caret.position-top {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 7px solid #fff; }
+      .swui-tooltip-content.type-popover .tooltip-caret.position-right {
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-right: 7px solid #fff; }
+      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #fff; }
+  .swui-tooltip-content.type-tooltip {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 12px;
+    padding: 4px;
+    text-align: center;
+    pointer-events: auto; }
+    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 7px solid rgba(0, 0, 0, 0.75); }
+    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid rgba(0, 0, 0, 0.75); }
+    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 7px solid rgba(0, 0, 0, 0.75); }
+    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }
+  .swui-tooltip-content .tooltip-caret {
+    position: absolute;
+    z-index: 5001;
+    width: 0;
+    height: 0; }
+  .swui-tooltip-content.position-right {
+    transform: translate3d(10px, 0, 0); }
+  .swui-tooltip-content.position-left {
+    transform: translate3d(-10px, 0, 0); }
+  .swui-tooltip-content.position-top {
+    transform: translate3d(0, -10px, 0); }
+  .swui-tooltip-content.position-bottom {
+    transform: translate3d(0, 10px, 0); }
+
 .ng2d3 {
   float: left; }
   .ng2d3.bar:hover, .ng2d3.cell:hover, .ng2d3.arc:hover, .ng2d3.card:hover {

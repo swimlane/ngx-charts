@@ -1,4 +1,18 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var base_chart_component_1 = require('../common/base-chart.component');
@@ -12,29 +26,34 @@ var TreeMap = (function (_super) {
         this.clickHandler = new core_1.EventEmitter();
     }
     TreeMap.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    TreeMap.prototype.update = function () {
         this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, false, false, false, 12);
-        var data = [];
-        for (var i = 0; i < this.results.data.length; i++) {
-            data[i] = {};
-            data[i].value = this.results.data[i].value;
-            data[i].valueType = this.results.data[i].valueType;
-            data[i].label = this.results.data[i].label;
-        }
+        this.domain = this.getDomain();
         this.treemap = d3_1.default.treemap()
-            .children(function (d) { return d; })
-            .size([this.dims.width, this.dims.height])
-            .sticky(true)
-            .value(function (d) { return d.value; });
-        this.data = this.treemap(data);
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+            .size([this.dims.width, this.dims.height]);
+        var rootNode = {
+            name: 'root',
+            value: 0,
+            isRoot: true
+        };
+        var root = d3_1.default.stratify()
+            .id(function (d) { return d.name; })
+            .parentId(function (d) { return d.isRoot ? null : 'root'; })([rootNode].concat(this.results))
+            .sum(function (d) { return d.value; });
+        this.data = this.treemap(root);
+        this.setColors();
         this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
+    };
+    TreeMap.prototype.getDomain = function () {
+        return this.results.map(function (d) { return d.name; });
     };
     TreeMap.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
     TreeMap.prototype.setColors = function () {
-    };
-    TreeMap.prototype.update = function () {
+        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
         core_1.Input(), 
@@ -59,7 +78,7 @@ var TreeMap = (function (_super) {
     TreeMap = __decorate([
         core_1.Component({
             selector: 'tree-map',
-            template: "\n    <chart\n      legend=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"treemap\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"treemap\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], TreeMap);

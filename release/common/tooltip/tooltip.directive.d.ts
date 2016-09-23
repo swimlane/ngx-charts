@@ -1,0 +1,31 @@
+import { ViewContainerRef } from '@angular/core';
+import { InjectionService } from '../../utils/injection.service';
+import { PlacementTypes } from './placement.type';
+import { StyleTypes } from './style.type';
+import { AlignmentTypes } from './alignment.type';
+export declare class TooltipDirective {
+    private viewContainerRef;
+    private injectionService;
+    tooltipCssClass: string;
+    tooltipTitle: string;
+    tooltipAppendToBody: boolean;
+    tooltipSpacing: number;
+    tooltipDisabled: boolean;
+    tooltipShowCaret: boolean;
+    tooltipPlacement: PlacementTypes;
+    tooltipAlignment: AlignmentTypes;
+    tooltipType: StyleTypes;
+    tooltipCloseOnClickOutside: boolean;
+    tooltipCloseOnMouseLeave: boolean;
+    tooltipHideTimeout: number;
+    tooltipShowTimeout: number;
+    tooltipTemplate: any;
+    private visible;
+    private tooltip;
+    private timeout;
+    constructor(viewContainerRef: ViewContainerRef, injectionService: InjectionService);
+    show(): void;
+    injectComponent(): void;
+    hide(): void;
+    private createBoundOptions();
+}
