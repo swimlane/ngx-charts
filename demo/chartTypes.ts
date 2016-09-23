@@ -114,6 +114,12 @@ let chartGroups = [
         options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel']
       },
       {
+        name: "Tree Map",
+        selector: 'tree-map',
+        inputFormat: 'singleSeries',
+        options: ['colorScheme']
+      },
+      {
         name: "Number Cards",
         selector: 'number-card',
         inputFormat: 'singleSeries',

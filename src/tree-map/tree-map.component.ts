@@ -8,7 +8,7 @@ import { colorHelper } from '../utils/color-sets';
   selector: 'tree-map',
   template: `
     <chart
-      legend="false"
+      [legend]="false"
       [view]="view">
       <svg:g [attr.transform]="transform" class="treemap">
         <svg:g treeMapCellSeries
@@ -32,34 +32,44 @@ export class TreeMap extends BaseChart implements OnChanges {
   @Output() clickHandler = new EventEmitter();
 
   dims: any;
+  domain: any;
   transform: any;
   colors: any;
   treemap: any;
   data: any;
 
   ngOnChanges() {
+    this.update();
+  }
+
+  update() {
     this.dims = calculateViewDimensions(this.view, this.margin, false, false, false, 12);
-
-    let data = [];
-
-    for (var i = 0; i < this.results.data.length; i++) {
-      data[i] = {};
-      data[i].value = this.results.data[i].value;
-      data[i].valueType = this.results.data[i].valueType;
-      data[i].label = this.results.data[i].label;
-    }
+    this.domain = this.getDomain();
 
     this.treemap = d3.treemap()
-      .children(d => d)
       .size([this.dims.width, this.dims.height])
-      .sticky(true)
-      .value(d => d.value); // todo check if value method exists ?
 
-    this.data = this.treemap(data);
+    let rootNode = {
+      name: 'root',
+      value: 0,
+      isRoot: true
+    };
 
-    this.colors = colorHelper(this.scheme, 'ordinal', this.results.d0Domain, this.customColors);
+    let root = d3.stratify()
+      .id(d => d.name)
+      .parentId(d => { return d.isRoot ? null : 'root' })
+      ([rootNode, ...this.results])
+      .sum(d => d.value)
+
+    this.data = this.treemap(root);
+
+    this.setColors();
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+  }
+
+  getDomain() {
+    return this.results.map(d => d.name);
   }
 
   click(data) {
@@ -67,9 +77,7 @@ export class TreeMap extends BaseChart implements OnChanges {
   }
 
   setColors() {
-  }
-
-  update() {
+    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

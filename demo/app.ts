@@ -254,6 +254,14 @@ import './demo.scss';
             (clickHandler)="clickHandler($event)">
           </heat-map>
 
+          <tree-map
+            *ngIf="chartType === 'tree-map'"
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="single"
+            (clickHandler)="clickHandler($event)">
+          </tree-map>
+
           <number-card
             *ngIf="chartType === 'number-card'"
             [view]="view"

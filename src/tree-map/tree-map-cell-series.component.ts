@@ -3,7 +3,7 @@ import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core
 @Component({
   selector: 'g[treeMapCellSeries]',
   template: `
-    <svg:g treeMapCell *ngFor="let c of cells"
+    <svg:g treeMapCell *ngFor="let c of cells; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -29,18 +29,18 @@ export class TreeMapCellSeries implements OnChanges {
   }
 
   getCells() {
-    return this.data
+    return this.data.children
       .filter((d) => {
         return d.depth === 1;
       })
       .map((d, index) => {
         return {
-          x: d.x,
-          y: d.y,
-          width: d.dx,
-          height: d.dy,
-          fill: this.colors(d.label),
-          label: d.label,
+          x: d.x0,
+          y: d.y0,
+          width: d.x1 - d.x0,
+          height: d.y1 - d.y0,
+          fill: this.colors(d.id),
+          label: d.id,
           value: d.value,
           valueType: d.valueType
         };
@@ -51,4 +51,7 @@ export class TreeMapCellSeries implements OnChanges {
     this.clickHandler.emit(data);
   }
 
+  trackBy(index, item) {
+    return item.label;
+  }
 }

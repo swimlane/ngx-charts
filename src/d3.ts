@@ -8,6 +8,7 @@ let interpolate = require("d3-interpolate");
 let scales = require("d3-scale");
 let selection = require("d3-selection");
 let shape = require("d3-shape");
+let hierarchy = require("d3-hierarchy");
 
 export default {
   arc: shape.arc,
@@ -35,5 +36,6 @@ export default {
   scalePoint: scales.scalePoint,
   scaleQuantile: scales.scaleQuantile,
   scaleTime: scales.scaleTime,
-  treemap: shape.treemap
+  treemap: hierarchy.treemap,
+  stratify: hierarchy.stratify
 };
