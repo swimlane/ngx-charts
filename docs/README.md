@@ -9,7 +9,10 @@ It was built for modern browsers using _TypeScript, CSS3, SVG, HTML5_ and Angula
 ## Testimonials
 
 >[“looks very cool!”](https://twitter.com/bradlygreen/status/774386597810712577)  
+
 Brad Green, Engineering Director at Google for Angular
 
+
 >[“this is dope”](https://twitter.com/robwormald/status/774337985701478401)  
+
 Rob Wormald, Developer Advocate for Angular
