@@ -11,11 +11,12 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
       [fill]="c.fill"
       [data]="c.data"
       (clickHandler)="click($event, c.label, c.series)"
-      sw-popover
-      [popoverSpacing]="15"
-      [popoverText]="c.tooltipText"
-      [popoverGroup]="'charts'"
       [gradient]="gradient"
+
+      swui-tooltip
+      [tooltipPlacement]="'top'"
+      [tooltipType]="'tooltip'"
+      [tooltipTitle]="c.tooltipText"
     />
   `
 })

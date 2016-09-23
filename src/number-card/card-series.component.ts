@@ -22,10 +22,11 @@ export interface CardModel {
       [color]="c.color"
       [data]="c.data"
       (clickHandler)="click($event)"
-      sw-popover
-      [popoverSpacing]="15"
-      [popoverText]="c.tooltipText"
-      [popoverGroup]="'charts'"
+
+      swui-tooltip
+      [tooltipPlacement]="'top'"
+      [tooltipType]="'tooltip'"
+      [tooltipTitle]="c.tooltipText"
     />
   `
 })

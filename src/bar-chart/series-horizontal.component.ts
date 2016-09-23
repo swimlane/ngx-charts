@@ -26,10 +26,10 @@ import {
       (clickHandler)="click($event)"
       [gradient]="gradient"
 
-      sw-popover
-      [popoverSpacing]="15"
-      [popoverText]="bar.tooltipText"
-      [popoverGroup]="'charts'">
+      swui-tooltip
+      [tooltipPlacement]="'top'"
+      [tooltipType]="'tooltip'"
+      [tooltipTitle]="bar.tooltipText">
     </svg:g>
   `,
   animations: [

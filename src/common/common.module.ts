@@ -2,8 +2,8 @@ import { NgModule } from "@angular/core";
 import { Chart } from "./charts/chart.component";
 import { Legend } from "./legend.component";
 import { ScaleLegend } from "./scale-legend.component";
-import { AxesModule } from "./axes/axes-module.component";
-import { Popover } from "./popover/sw-popover.component";
+import { AxesModule } from "./axes/axes.module";
+import { TooltipModule } from "./tooltip";
 import { CircleSeries } from "./circle-series.component";
 import { Circle } from "./circle.component";
 import { GridPanel } from "./grid-panel.component";
@@ -20,7 +20,6 @@ const COMPONENTS = [
   Legend,
   ScaleLegend,
   Circle,
-  Popover,
   CircleSeries,
   GridPanel,
   GridPanelSeries,
@@ -32,7 +31,8 @@ const COMPONENTS = [
 @NgModule({
   imports: [
     BrowserModule,
-    AxesModule
+    AxesModule,
+    TooltipModule
   ],
   declarations: [
     ...COMPONENTS
@@ -40,6 +40,7 @@ const COMPONENTS = [
   exports: [
     BrowserModule,
     AxesModule,
+    TooltipModule,
     ...COMPONENTS
   ]
 })

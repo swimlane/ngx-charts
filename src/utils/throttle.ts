@@ -52,23 +52,37 @@ export function debounceable(duration, immediate) {
   };
 }
 
-export function throttle(func, wait, options: any = {}) {
-  var context, args, result;
-  var timeout = null;
-  var previous: any = 0;
-  var later = function() {
-    previous = options.leading === false ? 0 : new Date();
+/**
+ * Throttle a function
+ * @param  {any}    func    function to execute
+ * @param  {number} wait    duration to wait
+ * @param  {any}    options options
+ */
+export function throttle(func: any, wait: number, options?: any) {
+  options = options || {};
+  let context;
+  let args;
+  let result;
+  let timeout = null;
+  let previous = 0;
+
+  function later() {
+    previous = options.leading === false ? 0 : +new Date();
     timeout = null;
     result = func.apply(context, args);
-  };
+  }
+
   return function() {
-    var now = new Date();
+    let now = +new Date();
+
     if (!previous && options.leading === false) {
       previous = now;
     }
-    var remaining: any = wait - (now.getTime() - previous);
+
+    let remaining = wait - (now - previous);
     context = this;
     args = arguments;
+
     if (remaining <= 0) {
       clearTimeout(timeout);
       timeout = null;
@@ -77,6 +91,7 @@ export function throttle(func, wait, options: any = {}) {
     } else if (!timeout && options.trailing !== false) {
       timeout = setTimeout(later, remaining);
     }
+
     return result;
   };
 }
@@ -89,12 +104,12 @@ export function throttle(func, wait, options: any = {}) {
  *    myFn() { ... }
  *  }
  */
-export function throttleable(duration, options) {
-  return function innerDecorator(target, key, descriptor) {
+export function throttleable (duration: number, options?: any) {
+  return function innerDecorator (target, key, descriptor) {
     return {
       configurable: true,
       enumerable: descriptor.enumerable,
-      get: function getter() {
+      get: function getter () {
         Object.defineProperty(this, key, {
           configurable: true,
           enumerable: descriptor.enumerable,

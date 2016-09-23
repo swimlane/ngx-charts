@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { single, multi, countries, generateData } from './data';
 import chartGroups from './chartTypes';
 import '../src/ng2d3.scss';
@@ -426,7 +426,7 @@ export class App implements OnInit {
   autoScale = true;
   timeline = false;
 
-  constructor() {
+  constructor(public viewContainerRef: ViewContainerRef) {
     Object.assign(this, {single, multi, countries, chartGroups});
 
     this.dateData = generateData(5);
