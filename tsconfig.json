@@ -5,7 +5,7 @@
     "declaration": true,
     "moduleResolution": "node",
     "removeComments": true,
-    "noEmitHelpers": true,
+    "noEmitHelpers": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
