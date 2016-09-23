@@ -24,6 +24,7 @@
       * [Stacked Area Chart](charts/area-chart-stacked.md)
       * [Normalized Area Chart](charts/area-chart-normalized.md)
    * [Heat Map Chart](charts/heat-map.md)
+   * [Tree Map Chart](charts/tree-map.md)
    * [Number Card Chart](charts/number-card.md)
 * Contributing
    * [Building](contributing/building.md)

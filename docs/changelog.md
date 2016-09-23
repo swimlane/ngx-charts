@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+- Added Tooltips to charts
+- Added TreeMap chart
+
 ## 1.1.0
 - Upgraded to Angular 2.0.0
 - Upgraded to TypeScript 2.0.2
