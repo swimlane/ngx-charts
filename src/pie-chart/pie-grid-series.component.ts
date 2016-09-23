@@ -42,7 +42,6 @@ export class PieGridSeries implements OnChanges {
 
     this.arcs = this.getArcs();
 
-    console.log('Arcs', this.arcs);
     this.loadAnimation();
   }
 

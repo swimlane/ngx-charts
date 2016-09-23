@@ -3,7 +3,7 @@ import { Chart } from "./charts/chart.component";
 import { Legend } from "./legend.component";
 import { ScaleLegend } from "./scale-legend.component";
 import { AxesModule } from "./axes/axes.module";
-import { PopoverModule } from "./popover/popover.module";
+import { TooltipModule } from "./tooltip";
 import { CircleSeries } from "./circle-series.component";
 import { Circle } from "./circle.component";
 import { GridPanel } from "./grid-panel.component";
@@ -32,7 +32,7 @@ const COMPONENTS = [
   imports: [
     BrowserModule,
     AxesModule,
-    PopoverModule
+    TooltipModule
   ],
   declarations: [
     ...COMPONENTS
@@ -40,7 +40,7 @@ const COMPONENTS = [
   exports: [
     BrowserModule,
     AxesModule,
-    PopoverModule,
+    TooltipModule,
     ...COMPONENTS
   ]
 })

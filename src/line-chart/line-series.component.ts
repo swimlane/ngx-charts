@@ -48,8 +48,6 @@ export class LineSeries implements OnChanges {
       data = sortLinear(data, 'name');
     }
 
-    console.log('data');
-
     this.path = line(data) || '';
   }
 }
