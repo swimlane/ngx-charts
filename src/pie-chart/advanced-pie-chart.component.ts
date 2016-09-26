@@ -13,7 +13,7 @@ export interface LegendItem {
 @Component({
   selector: 'advanced-pie-chart',
   template: `
-    <div class="advanced-pie"
+    <div class="advanced-pie chart"
       [style.width]="dims.width"
       [style.height]="view[1]">
 

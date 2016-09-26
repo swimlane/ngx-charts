@@ -12,7 +12,7 @@ import d3 from '../d3';
     <chart
       [legend]="false"
       [view]="view" >
-      <svg:g [attr.transform]="transform" class="pie-grid-chart">
+      <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g
           *ngFor="let series of series"
           class="pie-grid-item"

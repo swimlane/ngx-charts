@@ -12,7 +12,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
       [legendData]="colorScale"
       [data]="results.m0Domain"
       [view]="view">
-      <svg:g [attr.transform]="transform" class="numbercard">
+      <svg:g [attr.transform]="transform" class="heat-map chart">
 
         <svg:g xAxis
           *ngIf="xAxis"

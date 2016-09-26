@@ -24,7 +24,7 @@ import * as moment from 'moment';
         </svg:clipPath>
       </svg:defs>
 
-      <svg:g [attr.transform]="transform" class="line chart">
+      <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"

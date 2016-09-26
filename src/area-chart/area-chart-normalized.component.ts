@@ -24,7 +24,7 @@ import ObjectId from "../utils/object-id";
         </svg:clipPath>
       </svg:defs>
 
-      <svg:g [attr.transform]="transform" class="line chart">
+      <svg:g [attr.transform]="transform" class="area-chart chart">
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"

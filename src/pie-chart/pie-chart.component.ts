@@ -11,7 +11,7 @@ import { BaseChart } from '../common/base-chart.component';
       [legend]="legend"
       [view]="view"
       [legendData]="domain">
-      <svg:g [attr.transform]="translation" class="pie chart">
+      <svg:g [attr.transform]="translation" class="pie-chart chart">
         <svg:g pieSeries
           [colors]="colors"
           [showLabels]="labels"
