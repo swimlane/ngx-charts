@@ -29,6 +29,7 @@ export class Circle implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+
   ngOnChanges() {
     this.classNames = this.classNames.join(' ') + 'circle';
   }

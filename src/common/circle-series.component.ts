@@ -1,19 +1,20 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import * as moment from 'moment';
 import ObjectId from "../utils/object-id";
+import { Circle } from './circle.component';
 
 @Component({
   selector: 'g[circleSeries]',
   template: `
     <svg:g *ngFor="let circle of circles">
       <svg:rect
+        *ngIf="barVisible"
         [attr.x]="circle.cx - circle.radius"
         [attr.y]="circle.cy"
         [attr.width]="circle.radius * 2"
         [attr.height]="circle.height"
         [attr.fill]="color"
         class="tooltip-bar"
-        style="pointerEvents: 'none'; opacity: 0;"
       />
 
       <svg:g circle
@@ -27,6 +28,11 @@ import ObjectId from "../utils/object-id";
         [data]="circle.value"
         [classNames]="circle.classNames"
         (clickHandler)="click($event, circle.label)"
+
+        swui-tooltip
+        [tooltipPlacement]="'top'"
+        [tooltipType]="'tooltip'"
+        [tooltipTitle]="circle.tooltipText"
       />
     </svg:g>
   `
@@ -34,6 +40,7 @@ import ObjectId from "../utils/object-id";
 export class CircleSeries implements OnChanges {
   areaPath: any;
   circles: any[];
+  barVisible: boolean = false;
 
   @Input() data;
   @Input() type = 'standard';
@@ -73,9 +80,6 @@ export class CircleSeries implements OnChanges {
         let radius = 5;
         let height = this.yScale.range()[0] - cy;
 
-        // TODO: figure out if this is needed here
-        let gradientIdRect = 'grad' + ObjectId().toString();
-
         return {
           classNames: [`circle-data-${i}`],
           value: value,
@@ -84,7 +88,7 @@ export class CircleSeries implements OnChanges {
           cy: cy,
           radius: radius,
           height: height,
-          gradientIdRect: gradientIdRect
+          tooltipText: `${label}, ${value}`
         };
       }
     }).filter((circle) => circle !== undefined);

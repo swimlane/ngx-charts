@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, ViewChildren, Renderer } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -57,13 +57,13 @@ import ObjectId from "../utils/object-id";
             />
           </svg:g>
 
-          <svg:rect
-            class="tooltip-area"
-            [attr.width]="dims.width + 10"
-            [attr.height]="dims.height + 10"
-            x="-5"
-            y="-5"
-            style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
+          <svg:g areaTooltip
+            [xSet]="xSet"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [results]="results"
+            [height]="dims.height"
+            [colors]="colors"
           />
 
           <svg:g *ngFor="let series of results">
@@ -110,6 +110,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
   clipPath: string;
   colors: Function;
   margin = [10, 20, 70, 70];
+  tooltipAreas: any[];
 
   @Input() view;
   @Input() results;
@@ -206,7 +207,6 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
     let pageUrl = window.location.href;
     this.clipPathId = 'clip' + ObjectId().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
-
   }
 
   getXDomain() {

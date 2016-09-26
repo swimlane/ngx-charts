@@ -44,19 +44,6 @@ import * as moment from 'moment';
         </svg:g>
 
         <svg:g [attr.clip-path]="clipPath">
-        <!--
-          <svg:g area
-            *ngIf="gradient"
-            [fill]="colors('Line')"
-            [path]="areaPath"
-            [startingPath]="areaPath"
-            [data]="series"
-            startOpacity="0"
-            endOpacity="0.2"
-            [gradient]="gradient"
-          />
-          -->
-
           <svg:g *ngFor="let series of results">
             <svg:g lineSeries
               [xScale]="xScale"
@@ -67,13 +54,13 @@ import * as moment from 'moment';
             />
           </svg:g>
 
-          <svg:rect
-            class="tooltip-area"
-            [attr.width]="dims.width + 10"
-            [attr.height]="dims.height + 10"
-            x="-5"
-            y="-5"
-            style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
+          <svg:g areaTooltip
+            [xSet]="xSet"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [results]="results"
+            [height]="dims.height"
+            [colors]="colors"
           />
 
           <svg:g *ngFor="let series of results">
@@ -106,6 +93,7 @@ import * as moment from 'moment';
 })
 export class LineChart extends BaseChart implements OnChanges {
   dims: ViewDimensions;
+  xSet: any;
   xDomain: any;
   yDomain: any;
   seriesDomain: any;
@@ -205,6 +193,8 @@ export class LineChart extends BaseChart implements OnChanges {
     } else {
       domain = values;
     }
+
+    this.xSet = values;
     return domain;
   }
 

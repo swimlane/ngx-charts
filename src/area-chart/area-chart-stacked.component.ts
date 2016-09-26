@@ -57,13 +57,13 @@ import d3 from '../d3';
             />
           </svg:g>
 
-          <svg:rect
-            class="tooltip-area"
-            [attr.width]="dims.width + 10"
-            [attr.height]="dims.height + 10"
-            x="-5"
-            y="-5"
-            style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
+          <svg:g areaTooltip
+            [xSet]="xSet"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [results]="results"
+            [height]="dims.height"
+            [colors]="colors"
           />
 
           <svg:g *ngFor="let series of results; trackBy:trackBy">
@@ -187,8 +187,6 @@ export class AreaChartStacked extends BaseChart implements OnChanges {
     let pageUrl = window.location.href;
     this.clipPathId = 'clip' + ObjectId().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
-
-    this.addTooltip();
   }
 
   getXDomain() {
@@ -312,21 +310,6 @@ export class AreaChartStacked extends BaseChart implements OnChanges {
   updateDomain(domain) {
     this.xDomain = domain;
     this.xScale = this.getXScale();
-  }
-
-  addTooltip() {
-    // d3.select(this.element).select('.tooltip-area')
-    //   .on('mousemove', () => {
-    //     let el = d3.select(this.element).select('.tooltip-area')[0][0];
-    //     let chartEl = d3.select(this.element);
-    //     updateTooltip(el, chartEl, this);
-    //   })
-    //   .on('mouseenter', () => {
-    //     showTooltip(this);
-    //   })
-    //   .on('mouseout', () => {
-    //     hideTooltip(this)}
-    //   );
   }
 
   click(data, series) {

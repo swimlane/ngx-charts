@@ -80,6 +80,20 @@
   }
 }
 
+.tooltip-item{
+  text-align: left;
+  line-height: 1.2em;
+
+  .tooltip-item-color {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+    color: #5b646b;
+    border-radius: 3px;
+  }
+}
+
 .legend {
   display: inline-block;
   float: left;

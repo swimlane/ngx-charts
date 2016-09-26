@@ -13,9 +13,11 @@ import { SvgRadialGradient } from "./svg-radial-gradient.component";
 import { Timeline } from "./timeline.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { Area } from "./area.component";
+import { AreaTooltip } from "./area-tooltip.component";
 
 const COMPONENTS = [
   Area,
+  AreaTooltip,
   Chart,
   Legend,
   ScaleLegend,

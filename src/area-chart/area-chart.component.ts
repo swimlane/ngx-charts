@@ -56,13 +56,13 @@ import d3 from '../d3';
             />
           </svg:g>
 
-          <svg:rect
-            class="tooltip-area"
-            [attr.width]="dims.width + 10"
-            [attr.height]="dims.height + 10"
-            x="-5"
-            y="-5"
-            style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
+          <svg:g areaTooltip
+            [xSet]="xSet"
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [results]="results"
+            [height]="dims.height"
+            [colors]="colors"
           />
 
           <svg:g *ngFor="let series of results">
@@ -95,6 +95,7 @@ import d3 from '../d3';
 })
 export class AreaChart extends BaseChart implements OnChanges {
   dims: ViewDimensions;
+  xSet: any;
   xDomain: any;
   yDomain: any;
   seriesDomain: any;
@@ -178,6 +179,9 @@ export class AreaChart extends BaseChart implements OnChanges {
     } else {
       domain = values;
     }
+
+    this.xSet = values;
+
     return domain;
   }
 
