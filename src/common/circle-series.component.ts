@@ -1,7 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import * as moment from 'moment';
-import ObjectId from "../utils/object-id";
-import { Circle } from './circle.component';
 
 @Component({
   selector: 'g[circleSeries]',
@@ -28,6 +26,7 @@ import { Circle } from './circle.component';
         [data]="circle.value"
         [classNames]="circle.classNames"
         (clickHandler)="click($event, circle.label)"
+        [style.opacity]="circle.opacity"
 
         swui-tooltip
         [tooltipPlacement]="'top'"
@@ -49,6 +48,7 @@ export class CircleSeries implements OnChanges {
   @Input() color;
   @Input() strokeColor;
   @Input() scaleType;
+  @Input() visibleValue;
 
   @Output() clickHandler = new EventEmitter();
 
@@ -65,7 +65,6 @@ export class CircleSeries implements OnChanges {
       let value = d.value;
       let label = d.name;
 
-
       if (value) {
         let cx;
         if (this.scaleType === 'time') {
@@ -80,6 +79,11 @@ export class CircleSeries implements OnChanges {
         let radius = 5;
         let height = this.yScale.range()[0] - cy;
 
+        let opacity = 0;
+        if (label && this.visibleValue && label.toString() === this.visibleValue.toString()) {
+          opacity = 1;
+        }
+
         return {
           classNames: [`circle-data-${i}`],
           value: value,
@@ -88,7 +92,8 @@ export class CircleSeries implements OnChanges {
           cy: cy,
           radius: radius,
           height: height,
-          tooltipText: `${label}, ${value}`
+          tooltipText: `${label}, ${value}`,
+          opacity: opacity
         };
       }
     }).filter((circle) => circle !== undefined);

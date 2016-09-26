@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, OnChanges, ViewChildren, Renderer } from '@angular/core';
-import d3 from '../d3';
 
 @Component({
   selector: 'g[areaTooltip]',
@@ -63,7 +62,10 @@ export class AreaTooltip implements OnChanges {
   @Input() height;
   @Input() colors;
 
+  @Output() hover = new EventEmitter();
+
   @ViewChildren('tooltips') tooltips;
+
 
   constructor(private renderer:Renderer) {
   }
@@ -81,28 +83,28 @@ export class AreaTooltip implements OnChanges {
 
     uniqueSet = uniqueSet.sort((a, b) => {
       return this.xScale(a) - this.xScale(b);
-    })
+    });
 
     let results = [];
     for (let i = 0; i < uniqueSet.length; i++) {
       let val = uniqueSet[i];
-      let ob: any = {}
+      let ob: any = {};
       ob.tooltipAnchor = this.xScale(val);
 
-      if (i == 0) {
+      if (i === 0) {
         ob.x0 = this.xScale(val);
       } else {
         ob.x0 = (this.xScale(uniqueSet[i-1]) + this.xScale(uniqueSet[i])) / 2;
       }
 
-      if (i == uniqueSet.length - 1) {
+      if (i === uniqueSet.length - 1) {
         ob.x1 = this.xScale(uniqueSet[i]);
       } else {
         ob.x1 = (this.xScale(uniqueSet[i]) + this.xScale(uniqueSet[i+1])) / 2;
       }
 
       ob.width = ob.x1 - ob.x0;
-
+      ob.value = val;
       ob.values = this.getValues(val);
       results.push(ob);
 
@@ -117,12 +119,12 @@ export class AreaTooltip implements OnChanges {
     for (let group of this.results) {
       let item = group.series.find(d => d.name.toString() === xVal.toString());
 
-      if (item){
+      if (item) {
         results.push({
           value: item.value,
           name: item.name,
           series: group.name
-        })
+        });
       }
     }
 
@@ -139,7 +141,7 @@ export class AreaTooltip implements OnChanges {
         return v.toString() === val.toString();
       });
 
-      if (!exists){
+      if (!exists) {
         results.push(val);
       }
     }
@@ -152,6 +154,7 @@ export class AreaTooltip implements OnChanges {
     let event = new MouseEvent('mouseenter', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0.7;
+    this.hover.emit(this.tooltipAreas[index]);
   }
 
   hideTooltip(index) {

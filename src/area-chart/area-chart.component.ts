@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, HostListener} from '@angular/core';
 import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
 import {colorHelper} from '../utils/color-sets';
 import {BaseChart} from '../common/base-chart.component';
@@ -63,6 +63,7 @@ import d3 from '../d3';
             [results]="results"
             [height]="dims.height"
             [colors]="colors"
+            (hover)="updateHoveredVertical($event)"
           />
 
           <svg:g *ngFor="let series of results">
@@ -73,6 +74,7 @@ import d3 from '../d3';
               [strokeColor]="colors(series.name)"
               [data]="series"
               [scaleType]="scaleType"
+              [visibleValue]="hoveredVertical"
               (clickHandler)="click($event, series)"
             />
           </svg:g>
@@ -108,6 +110,7 @@ export class AreaChart extends BaseChart implements OnChanges {
   scaleType: string;
   series: any;
   margin = [10, 20, 70, 70];
+  hoveredVertical: any; // the value of the x axis that is hovered over
 
   @Input() view;
   @Input() results;
@@ -265,6 +268,15 @@ export class AreaChart extends BaseChart implements OnChanges {
   updateDomain(domain) {
     this.xDomain = domain;
     this.xScale = this.getXScale();
+  }
+
+  updateHoveredVertical(item) {
+    this.hoveredVertical = item.value;
+  }
+
+  @HostListener('mouseleave')
+  hideCircles() {
+    this.hoveredVertical = null;
   }
 
   click(data, series) {
