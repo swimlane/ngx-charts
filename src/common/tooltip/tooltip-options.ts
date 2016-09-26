@@ -7,19 +7,17 @@ import { AlignmentTypes } from './alignment.type';
 @Injectable()
 export class TooltipOptions {
 
+  id: string;
   title: string;
   template: any;
-  context: any;
   host: any;
   showCaret: boolean;
   type: StyleTypes;
   placement: PlacementTypes;
   alignment: AlignmentTypes;
-  closeOnClickOutside: boolean;
-  closeOnMouseLeave: boolean;
   spacing: number;
-  hide: any;
   cssClass: string;
+  context: any;
 
   constructor(opts) {
     Object.assign(this, opts);

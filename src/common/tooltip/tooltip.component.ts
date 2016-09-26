@@ -1,6 +1,6 @@
 import {
   Component, Inject, ElementRef, AfterViewInit,
-  HostListener, ViewChild, HostBinding,
+  HostListener, ViewChild, HostBinding, Renderer,
   trigger, state, transition, style, animate
 } from '@angular/core';
 
@@ -80,14 +80,13 @@ export class TooltipContentComponent implements AfterViewInit {
   private type: StyleTypes;
   private placement: PlacementTypes;
   private alignment: AlignmentTypes;
-  private closeOnClickOutside: boolean;
-  private closeOnMouseLeave: boolean;
-  private hide: any;
   private spacing: number;
   private cssClass: string;
+  private id: string;
 
   constructor(
-    private element: ElementRef,
+    public element: ElementRef,
+    private renderer: Renderer,
     @Inject(TooltipOptions) options: TooltipOptions) {
 
     Object.assign(this, options);
@@ -138,8 +137,8 @@ export class TooltipContentComponent implements AfterViewInit {
         this.alignment);
     }
 
-    nativeElm.style['top'] = top + 'px';
-    nativeElm.style['left'] = left + 'px';
+    this.renderer.setElementStyle(nativeElm, 'top', `${top}px`);
+    this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
   }
 
   positionCaret(hostDim, elmDim) {
@@ -179,8 +178,8 @@ export class TooltipContentComponent implements AfterViewInit {
         this.alignment);
     }
 
-    caretElm.style['top'] = top + 'px';
-    caretElm.style['left'] = left + 'px';
+    this.renderer.setElementStyle(caretElm, 'top', `${top}px`);
+    this.renderer.setElementStyle(caretElm, 'left', `${left}px`);
   }
 
   checkFlip(hostDim, elmDim) {
@@ -201,19 +200,6 @@ export class TooltipContentComponent implements AfterViewInit {
       } else if (this.placement === PlacementTypes.bottom) {
         this.placement = PlacementTypes.top;
       }
-    }
-  }
-
-  @HostListener('mouseleave')
-  onMouseLeave(target) {
-    if(this.closeOnMouseLeave) this.hide();
-  }
-
-  @HostListener('document:click', ['$event.target'])
-  onDocumentClick(target) {
-    if(this.closeOnClickOutside) {
-      const contains = this.element.nativeElement.contains(target);
-      if(!contains) this.hide();
     }
   }
 

@@ -21,7 +21,8 @@ export class InjectionService {
 
   getRootViewContainerRef(): ViewContainerRef {
     // The only way for now (by @mhevery)
-    // https://github.com/angular/angular/issues/6446#issuecomment-173459525
+    // https://github.com/angular/angular/issues/6446
+    // https://github.com/angular/angular/issues/9293
     // see: https://github.com/valor-software/ng2-bootstrap/components/utils/components-helper.service.ts
     const comps = this.applicationRef.components;
 
@@ -29,13 +30,7 @@ export class InjectionService {
       throw new Error(`ApplicationRef instance not found`);
     }
 
-    const appInstance = comps[0].instance;
-    if (!appInstance.viewContainerRef) {
-      const appName = this.applicationRef.componentTypes[0].name;
-      throw new Error(`Missing 'viewContainerRef' declaration in ${appName} constructor`);
-    }
-
-    return appInstance.viewContainerRef;
+    return this.applicationRef['_rootComponents'][0]['_hostElement'].vcRef;
   }
 
   appendNextToLocation<T>(

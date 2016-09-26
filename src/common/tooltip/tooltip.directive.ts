@@ -1,23 +1,29 @@
 import {
   Directive,
   Input,
+  Output,
+  EventEmitter,
   HostListener,
   ViewContainerRef,
   ReflectiveInjector,
-  ComponentRef
+  ComponentRef,
+  ElementRef,
+  Renderer
 } from '@angular/core';
 
 import { InjectionService } from '../../utils/injection.service';
-import { TooltipContentComponent } from './tooltip.component';
+import ObjectId from '../../utils/object-id';
 
 import { PlacementTypes } from './placement.type';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
-import { TooltipOptions } from './tooltip-options';
+import { ShowTypes } from './show.type';
 
-@Directive({
-  selector: '[swui-tooltip]'
-})
+import { TooltipContentComponent } from './tooltip.component';
+import { TooltipOptions } from './tooltip-options';
+import { TooltipService } from './tooltip.service';
+
+@Directive({ selector: '[swui-tooltip]' })
 export class TooltipDirective {
 
   @Input() tooltipCssClass: string = '';
@@ -34,35 +40,130 @@ export class TooltipDirective {
   @Input() tooltipHideTimeout: number = 300;
   @Input() tooltipShowTimeout: number = 100;
   @Input() tooltipTemplate: any;
+  @Input() tooltipShowEvent: ShowTypes = ShowTypes.all;
+  @Input() tooltipContext: any;
 
-  private visible: boolean = false;
-  private tooltip: ComponentRef<TooltipContentComponent>;
+  @Output() onShow = new EventEmitter();
+  @Output() onHide = new EventEmitter();
+
+  private componentId: string;
   private timeout: any;
 
+  private mouseLeaveEvent: any;
+  private focusOutEvent: any;
+  private mouseLeaveContentEvent: any;
+  private mouseEnterContentEvent: any;
+  private documentClickEvent: any;
+
   constructor(
+    private tooltipService: TooltipService,
     private viewContainerRef: ViewContainerRef,
-    private injectionService: InjectionService) {
+    private injectionService: InjectionService,
+    private elementRef: ElementRef,
+    private renderer: Renderer) {
+  }
+
+  ngOnDestroy() {
+    this.hide(true);
   }
 
   @HostListener('focusin')
-  @HostListener('mouseenter')
-  show() {
-    if (this.visible || this.tooltipDisabled) return;
-    this.visible = true;
-
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() =>
-      this.injectComponent(), this.tooltipShowTimeout);
+  onFocus() {
+    if(this.tooltipShowEvent === ShowTypes.all ||
+       this.tooltipShowEvent === ShowTypes.focus) {
+       this.show();
+     }
   }
 
-  injectComponent() {
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    if(this.tooltipShowEvent === ShowTypes.all ||
+       this.tooltipShowEvent === ShowTypes.mouseover) {
+       this.show();
+     }
+  }
+
+  show(immediate?: boolean) {
+    if (this.componentId || this.tooltipDisabled) return;
+    const time = immediate ? 0 : this.tooltipShowTimeout;
+
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      this.tooltipService.destroyAll();
+
+      this.componentId = ObjectId();
+
+      let tooltip = this.injectComponent();
+      this.tooltipService.register(
+        this.componentId, tooltip, this.hide.bind(this));
+
+      // add a tiny timeout to avoid event re-triggers
+      setTimeout(() => {
+        this.addHideListeners(tooltip.instance.element.nativeElement);
+      }, 10);
+
+      this.onShow.emit(true);
+    }, time);
+  }
+
+  addHideListeners(tooltip) {
+    // on mouse enter, cancel the hide triggered by the leave
+    let entered = false;
+    this.mouseEnterContentEvent = this.renderer.listen(tooltip, 'mouseenter', () => {
+      entered = true;
+      clearTimeout(this.timeout);
+    });
+
+    // content mouse leave listener
+    if(this.tooltipCloseOnMouseLeave) {
+      this.mouseLeaveContentEvent = this.renderer.listen(tooltip, 'mouseleave', () => {
+        entered = false;
+        this.hide();
+      });
+    }
+
+    // content close on click outside
+    if(this.tooltipCloseOnClickOutside) {
+      this.documentClickEvent = this.renderer.listen(document, 'click', (event) => {
+        const contains = tooltip.contains(event.target);
+        if(!contains) this.hide();
+      });
+    }
+
+    // native elm reference
+    let element = this.elementRef.nativeElement;
+
+    // mouse leave listener
+    const addLeaveListener =
+      this.tooltipShowEvent === ShowTypes.all ||
+      this.tooltipShowEvent === ShowTypes.mouseover;
+
+    if(addLeaveListener) {
+     this.mouseLeaveEvent = this.renderer.listen(element, 'mouseleave', () => {
+       if(!entered) this.hide();
+     });
+    }
+
+    // foucs leave listener
+    const addFocusListener =
+      this.tooltipShowEvent === ShowTypes.all ||
+      this.tooltipShowEvent === ShowTypes.focus;
+
+    if(addFocusListener) {
+     this.focusOutEvent = this.renderer.listen(element, 'blur', () => {
+       if(!entered) this.hide();
+     });
+    }
+  }
+
+  injectComponent(): ComponentRef<TooltipContentComponent> {
     const options = this.createBoundOptions();
 
     if(this.tooltipAppendToBody) {
       // append to the body, different arguments
       // since we need to bind the options to the
       // root component instead of this one
-      this.tooltip = this.injectionService.appendNextToRoot(
+      return this.injectionService.appendNextToRoot(
         TooltipContentComponent,
         TooltipOptions,
         options);
@@ -73,28 +174,39 @@ export class TooltipDirective {
       ]);
 
       // inject next to this component
-      this.tooltip = this.injectionService.appendNextToLocation(
+      return this.injectionService.appendNextToLocation(
         TooltipContentComponent,
         this.viewContainerRef,
         binding);
     }
   }
 
-  @HostListener('focusout')
-  @HostListener('mouseleave')
-  hide() {
-    if (!this.visible) return;
+  hide(immediate?: boolean) {
+    if(!this.componentId) return;
+
+    const time = immediate ? 0 : this.tooltipHideTimeout;
 
     clearTimeout(this.timeout);
-
     this.timeout = setTimeout(() => {
-      this.visible = false;
-      if(this.tooltip) this.tooltip.destroy();
-    }, this.tooltipHideTimeout);
+      // destroy component
+      this.tooltipService.destroy(this.componentId);
+
+      // remove events
+      if(this.mouseLeaveEvent) this.mouseLeaveEvent();
+      if(this.focusOutEvent) this.focusOutEvent();
+      if(this.mouseLeaveContentEvent) this.mouseLeaveContentEvent();
+      if(this.mouseEnterContentEvent) this.mouseEnterContentEvent();
+      if(this.documentClickEvent) this.documentClickEvent();
+
+      // emit events
+      this.onHide.emit(true);
+      this.componentId = undefined;
+    }, time);
   }
 
   private createBoundOptions(): TooltipOptions {
     return new TooltipOptions({
+      id: this.componentId,
       title: this.tooltipTitle,
       template: this.tooltipTemplate,
       host: this.viewContainerRef.element,
@@ -103,10 +215,8 @@ export class TooltipDirective {
       type: this.tooltipType,
       showCaret: this.tooltipShowCaret,
       cssClass: this.tooltipCssClass,
-      hide: this.hide,
-      closeOnClickOutside: this.tooltipCloseOnClickOutside,
-      closeOnMouseLeave: this.tooltipCloseOnMouseLeave,
-      spacing: this.tooltipSpacing
+      spacing: this.tooltipSpacing,
+      context: this.tooltipContext
     });
   }
 
