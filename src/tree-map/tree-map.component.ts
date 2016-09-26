@@ -47,7 +47,7 @@ export class TreeMap extends BaseChart implements OnChanges {
     this.domain = this.getDomain();
 
     this.treemap = d3.treemap()
-      .size([this.dims.width, this.dims.height])
+      .size([this.dims.width, this.dims.height]);
 
     let rootNode = {
       name: 'root',
@@ -57,9 +57,9 @@ export class TreeMap extends BaseChart implements OnChanges {
 
     let root = d3.stratify()
       .id(d => d.name)
-      .parentId(d => { return d.isRoot ? null : 'root' })
+      .parentId(d => { return d.isRoot ? null : 'root'; })
       ([rootNode, ...this.results])
-      .sum(d => d.value)
+      .sum(d => d.value);
 
     this.data = this.treemap(root);
 

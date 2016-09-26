@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 // import { formatNumber } from 'common/utils/format';
-// todo fix missing "props"
 import d3 from '../d3';
 
 @Component({
@@ -11,6 +10,7 @@ import d3 from '../d3';
         [attr.fill]="fill"
         [attr.width]="width"
         [attr.height]="height"
+        [style.cursor]="'pointer'"
         class="cell"
         (click)="click()"
       />
@@ -34,6 +34,7 @@ export class TreeMapCell implements OnChanges {
   element: HTMLElement;
   transform: string;
   formattedValue: string; // todo check string or number ?
+
   @Input() fill;
   @Input() x;
   @Input() y;
@@ -74,7 +75,10 @@ export class TreeMapCell implements OnChanges {
   }
 
   click() {
-    this.clickHandler.emit(this.label);
+    this.clickHandler.emit({
+      name: this.label,
+      value: this.value
+    });
   }
 
 
