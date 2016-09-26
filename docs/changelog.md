@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1
+- Added transition animation to TreeMap chart
+- Added tooltips to TreeMap, Line, Area, and Pie Grid charts
+- Fixed TreeMap click event
+- Updated TreeMap label positioning and style
+- Changed the starting opacity of bars in bar chart
+- Updated the circles behavior on Line and Area charts
+
 ## 1.2.0
 - Added Tooltips to charts
 - Added TreeMap chart

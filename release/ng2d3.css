@@ -10,7 +10,7 @@
     color: #060709;
     border: 1px solid #72809b;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
-    font-size: 12px;
+    font-size: 13px;
     padding: 4px; }
     .swui-tooltip-content.type-popover .tooltip-caret {
       position: absolute;
@@ -72,19 +72,20 @@
 
 .ng2d3 {
   float: left; }
-  .ng2d3.bar:hover, .ng2d3.cell:hover, .ng2d3.arc:hover, .ng2d3.card:hover {
+  .ng2d3 .bar:hover,
+  .ng2d3 .cell:hover,
+  .ng2d3 .arc:hover,
+  .ng2d3 .card:hover {
     opacity: 0.8; }
-  .ng2d3.area {
+  .ng2d3 .area {
     opacity: 0.6; }
-  .ng2d3.circle:hover {
+  .ng2d3 .circle:hover {
     cursor: pointer; }
-  .ng2d3.treemap .cell {
-    cursor: pointer; }
-    .ng2d3.treemap .cell foreignObject {
-      pointer-events: none; }
-    .ng2d3.treemap .cell p {
-      text-align: center;
-      pointer-events: none; }
+  .ng2d3 .tree-map .label p {
+    display: table-cell;
+    text-align: center;
+    line-height: 1.2em;
+    vertical-align: middle; }
 
 .label {
   font-size: 12px;
@@ -120,6 +121,17 @@
 
 .brush .handle {
   fill: #3f51b5; }
+
+.tooltip-item {
+  text-align: left;
+  line-height: 1.2em; }
+  .tooltip-item .tooltip-item-color {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+    color: #5b646b;
+    border-radius: 3px; }
 
 .legend {
   display: inline-block;

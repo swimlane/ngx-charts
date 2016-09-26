@@ -25,6 +25,7 @@ export declare class PieGrid extends BaseChart implements OnChanges {
         outerRadius: number;
         label: string;
         total: string;
+        value: any;
         percent: any;
         data: any[];
     }[];

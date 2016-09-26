@@ -20,12 +20,7 @@ var InjectionService = (function () {
         if (!comps.length) {
             throw new Error("ApplicationRef instance not found");
         }
-        var appInstance = comps[0].instance;
-        if (!appInstance.viewContainerRef) {
-            var appName = this.applicationRef.componentTypes[0].name;
-            throw new Error("Missing 'viewContainerRef' declaration in " + appName + " constructor");
-        }
-        return appInstance.viewContainerRef;
+        return this.applicationRef['_rootComponents'][0]['_hostElement'].vcRef;
     };
     InjectionService.prototype.appendNextToLocation = function (componentClass, location, providers) {
         var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);

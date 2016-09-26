@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var tooltip_directive_1 = require('./tooltip.directive');
 var tooltip_component_1 = require('./tooltip.component');
+var tooltip_service_1 = require('./tooltip.service');
 var injection_service_1 = require('../../utils/injection.service');
 var TooltipModule = (function () {
     function TooltipModule() {
@@ -19,7 +20,7 @@ var TooltipModule = (function () {
     TooltipModule = __decorate([
         core_1.NgModule({
             declarations: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
-            providers: [injection_service_1.InjectionService],
+            providers: [injection_service_1.InjectionService, tooltip_service_1.TooltipService],
             exports: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
             imports: [platform_browser_1.BrowserModule],
             entryComponents: [tooltip_component_1.TooltipContentComponent]

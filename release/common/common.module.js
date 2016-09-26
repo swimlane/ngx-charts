@@ -23,8 +23,10 @@ var svg_radial_gradient_component_1 = require("./svg-radial-gradient.component")
 var timeline_component_1 = require("./timeline.component");
 var platform_browser_1 = require("@angular/platform-browser");
 var area_component_1 = require("./area.component");
+var area_tooltip_component_1 = require("./area-tooltip.component");
 var COMPONENTS = [
     area_component_1.Area,
+    area_tooltip_component_1.AreaTooltip,
     chart_component_1.Chart,
     legend_component_1.Legend,
     scale_legend_component_1.ScaleLegend,

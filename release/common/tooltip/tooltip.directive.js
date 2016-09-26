@@ -10,15 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var injection_service_1 = require('../../utils/injection.service');
-var tooltip_component_1 = require('./tooltip.component');
+var object_id_1 = require('../../utils/object-id');
 var placement_type_1 = require('./placement.type');
 var style_type_1 = require('./style.type');
 var alignment_type_1 = require('./alignment.type');
+var show_type_1 = require('./show.type');
+var tooltip_component_1 = require('./tooltip.component');
 var tooltip_options_1 = require('./tooltip-options');
+var tooltip_service_1 = require('./tooltip.service');
 var TooltipDirective = (function () {
-    function TooltipDirective(viewContainerRef, injectionService) {
+    function TooltipDirective(tooltipService, viewContainerRef, injectionService, elementRef, renderer) {
+        this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.injectionService = injectionService;
+        this.elementRef = elementRef;
+        this.renderer = renderer;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -32,43 +38,127 @@ var TooltipDirective = (function () {
         this.tooltipCloseOnMouseLeave = true;
         this.tooltipHideTimeout = 300;
         this.tooltipShowTimeout = 100;
-        this.visible = false;
+        this.tooltipShowEvent = show_type_1.ShowTypes.all;
+        this.onShow = new core_1.EventEmitter();
+        this.onHide = new core_1.EventEmitter();
     }
-    TooltipDirective.prototype.show = function () {
+    TooltipDirective.prototype.ngOnDestroy = function () {
+        this.hide(true);
+    };
+    TooltipDirective.prototype.onFocus = function () {
+        if (this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.focus) {
+            this.show();
+        }
+    };
+    TooltipDirective.prototype.onMouseEnter = function () {
+        if (this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.mouseover) {
+            this.show();
+        }
+    };
+    TooltipDirective.prototype.show = function (immediate) {
         var _this = this;
-        if (this.visible || this.tooltipDisabled)
+        if (this.componentId || this.tooltipDisabled) {
             return;
-        this.visible = true;
+        }
+        var time = immediate ? 0 : this.tooltipShowTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
-            return _this.injectComponent();
-        }, this.tooltipShowTimeout);
+            _this.tooltipService.destroyAll();
+            _this.componentId = object_id_1.default();
+            var tooltip = _this.injectComponent();
+            _this.tooltipService.register(_this.componentId, tooltip, _this.hide.bind(_this));
+            setTimeout(function () {
+                _this.addHideListeners(tooltip.instance.element.nativeElement);
+            }, 10);
+            _this.onShow.emit(true);
+        }, time);
+    };
+    TooltipDirective.prototype.addHideListeners = function (tooltip) {
+        var _this = this;
+        var entered = false;
+        this.mouseEnterContentEvent = this.renderer.listen(tooltip, 'mouseenter', function () {
+            entered = true;
+            clearTimeout(_this.timeout);
+        });
+        if (this.tooltipCloseOnMouseLeave) {
+            this.mouseLeaveContentEvent = this.renderer.listen(tooltip, 'mouseleave', function () {
+                entered = false;
+                _this.hide();
+            });
+        }
+        if (this.tooltipCloseOnClickOutside) {
+            this.documentClickEvent = this.renderer.listen(document, 'click', function (event) {
+                var contains = tooltip.contains(event.target);
+                if (!contains) {
+                    _this.hide();
+                }
+            });
+        }
+        var element = this.elementRef.nativeElement;
+        var addLeaveListener = this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.mouseover;
+        if (addLeaveListener) {
+            this.mouseLeaveEvent = this.renderer.listen(element, 'mouseleave', function () {
+                if (!entered) {
+                    _this.hide();
+                }
+            });
+        }
+        var addFocusListener = this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.focus;
+        if (addFocusListener) {
+            this.focusOutEvent = this.renderer.listen(element, 'blur', function () {
+                if (!entered) {
+                    _this.hide();
+                }
+            });
+        }
     };
     TooltipDirective.prototype.injectComponent = function () {
         var options = this.createBoundOptions();
         if (this.tooltipAppendToBody) {
-            this.tooltip = this.injectionService.appendNextToRoot(tooltip_component_1.TooltipContentComponent, tooltip_options_1.TooltipOptions, options);
+            return this.injectionService.appendNextToRoot(tooltip_component_1.TooltipContentComponent, tooltip_options_1.TooltipOptions, options);
         }
         else {
             var binding = core_1.ReflectiveInjector.resolve([
                 { provide: tooltip_options_1.TooltipOptions, useValue: options }
             ]);
-            this.tooltip = this.injectionService.appendNextToLocation(tooltip_component_1.TooltipContentComponent, this.viewContainerRef, binding);
+            return this.injectionService.appendNextToLocation(tooltip_component_1.TooltipContentComponent, this.viewContainerRef, binding);
         }
     };
-    TooltipDirective.prototype.hide = function () {
+    TooltipDirective.prototype.hide = function (immediate) {
         var _this = this;
-        if (!this.visible)
+        if (!this.componentId) {
             return;
+        }
+        var time = immediate ? 0 : this.tooltipHideTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
-            _this.visible = false;
-            if (_this.tooltip)
-                _this.tooltip.destroy();
-        }, this.tooltipHideTimeout);
+            _this.tooltipService.destroy(_this.componentId);
+            if (_this.mouseLeaveEvent) {
+                _this.mouseLeaveEvent();
+            }
+            if (_this.focusOutEvent) {
+                _this.focusOutEvent();
+            }
+            if (_this.mouseLeaveContentEvent) {
+                _this.mouseLeaveContentEvent();
+            }
+            if (_this.mouseEnterContentEvent) {
+                _this.mouseEnterContentEvent();
+            }
+            if (_this.documentClickEvent) {
+                _this.documentClickEvent();
+            }
+            _this.onHide.emit(true);
+            _this.componentId = undefined;
+        }, time);
     };
     TooltipDirective.prototype.createBoundOptions = function () {
         return new tooltip_options_1.TooltipOptions({
+            id: this.componentId,
             title: this.tooltipTitle,
             template: this.tooltipTemplate,
             host: this.viewContainerRef.element,
@@ -77,10 +167,8 @@ var TooltipDirective = (function () {
             type: this.tooltipType,
             showCaret: this.tooltipShowCaret,
             cssClass: this.tooltipCssClass,
-            hide: this.hide,
-            closeOnClickOutside: this.tooltipCloseOnClickOutside,
-            closeOnMouseLeave: this.tooltipCloseOnMouseLeave,
-            spacing: this.tooltipSpacing
+            spacing: this.tooltipSpacing,
+            context: this.tooltipContext
         });
     };
     __decorate([
@@ -140,24 +228,36 @@ var TooltipDirective = (function () {
         __metadata('design:type', Object)
     ], TooltipDirective.prototype, "tooltipTemplate", void 0);
     __decorate([
-        core_1.HostListener('focusin'),
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], TooltipDirective.prototype, "tooltipShowEvent", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "tooltipContext", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "onShow", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "onHide", void 0);
+    __decorate([
+        core_1.HostListener('focusin'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "onFocus", null);
+    __decorate([
         core_1.HostListener('mouseenter'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], TooltipDirective.prototype, "show", null);
-    __decorate([
-        core_1.HostListener('focusout'),
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], TooltipDirective.prototype, "hide", null);
+    ], TooltipDirective.prototype, "onMouseEnter", null);
     TooltipDirective = __decorate([
-        core_1.Directive({
-            selector: '[swui-tooltip]'
-        }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef, injection_service_1.InjectionService])
+        core_1.Directive({ selector: '[swui-tooltip]' }), 
+        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, injection_service_1.InjectionService, core_1.ElementRef, core_1.Renderer])
     ], TooltipDirective);
     return TooltipDirective;
 }());

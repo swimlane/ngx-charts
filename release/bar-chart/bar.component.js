@@ -94,7 +94,7 @@ var Bar = (function () {
     };
     Bar.prototype.getStartOpacity = function () {
         if (this.roundEdges) {
-            return 0;
+            return 0.2;
         }
         else {
             return 0.5;

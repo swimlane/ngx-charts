@@ -1,9 +1,9 @@
 /**
- * ng2d3 v1.2.0 (https://github.com/swimlane/ng2d3)
+ * ng2d3 v1.2.1 (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
-import { NgModule, Component, Input, ElementRef, ViewContainerRef, Directive, HostListener, ReflectiveInjector, Injector, ComponentFactoryResolver, ApplicationRef, Injectable, Inject, animate, style, transition, state, trigger, HostBinding, ViewChild, Output, EventEmitter } from '@angular/core';
+import { NgModule, Component, Input, ElementRef, Renderer, ViewContainerRef, Directive, HostListener, Output, ReflectiveInjector, EventEmitter, Injector, ComponentFactoryResolver, ApplicationRef, Injectable, Inject, animate, style, transition, state, trigger, HostBinding, ViewChild, ViewChildren } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import * as moment from 'moment';
 
@@ -717,12 +717,7 @@ var InjectionService = (function () {
         if (!comps.length) {
             throw new Error("ApplicationRef instance not found");
         }
-        var appInstance = comps[0].instance;
-        if (!appInstance.viewContainerRef) {
-            var appName = this.applicationRef.componentTypes[0].name;
-            throw new Error("Missing 'viewContainerRef' declaration in " + appName + " constructor");
-        }
-        return appInstance.viewContainerRef;
+        return this.applicationRef['_rootComponents'][0]['_hostElement'].vcRef;
     };
     InjectionService.prototype.appendNextToLocation = function (componentClass, location, providers) {
         var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
@@ -750,6 +745,48 @@ var InjectionService = (function () {
     return InjectionService;
     var _a, _b, _c;
 }());
+
+var cache = {};
+function ObjectId() {
+    var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+    var id = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
+        return (Math.random() * 16 | 0).toString(16);
+    }).toLowerCase();
+    if (!cache[id]) {
+        cache[id] = true;
+        return id;
+    }
+    return ObjectId();
+}
+;
+
+var PlacementTypes;
+(function (PlacementTypes) {
+    PlacementTypes[PlacementTypes["top"] = 'top'] = "top";
+    PlacementTypes[PlacementTypes["bottom"] = 'bottom'] = "bottom";
+    PlacementTypes[PlacementTypes["left"] = 'left'] = "left";
+    PlacementTypes[PlacementTypes["right"] = 'right'] = "right";
+})(PlacementTypes || (PlacementTypes = {}));
+
+var StyleTypes;
+(function (StyleTypes) {
+    StyleTypes[StyleTypes["popover"] = 'popover'] = "popover";
+    StyleTypes[StyleTypes["tooltip"] = 'tooltip'] = "tooltip";
+})(StyleTypes || (StyleTypes = {}));
+
+var AlignmentTypes;
+(function (AlignmentTypes) {
+    AlignmentTypes[AlignmentTypes["left"] = 'left'] = "left";
+    AlignmentTypes[AlignmentTypes["center"] = 'center'] = "center";
+    AlignmentTypes[AlignmentTypes["right"] = 'right'] = "right";
+})(AlignmentTypes || (AlignmentTypes = {}));
+
+var ShowTypes;
+(function (ShowTypes) {
+    ShowTypes[ShowTypes["all"] = 'all'] = "all";
+    ShowTypes[ShowTypes["focus"] = 'focus'] = "focus";
+    ShowTypes[ShowTypes["mouseover"] = 'mouseover'] = "mouseover";
+})(ShowTypes || (ShowTypes = {}));
 
 function throttle(func, wait, options) {
     options = options || {};
@@ -920,17 +957,10 @@ var TooltipOptions = (function () {
     return TooltipOptions;
 }());
 
-var PlacementTypes;
-(function (PlacementTypes) {
-    PlacementTypes[PlacementTypes["top"] = 'top'] = "top";
-    PlacementTypes[PlacementTypes["bottom"] = 'bottom'] = "bottom";
-    PlacementTypes[PlacementTypes["left"] = 'left'] = "left";
-    PlacementTypes[PlacementTypes["right"] = 'right'] = "right";
-})(PlacementTypes || (PlacementTypes = {}));
-
 var TooltipContentComponent = (function () {
-    function TooltipContentComponent(element, options) {
+    function TooltipContentComponent(element, renderer, options) {
         this.element = element;
+        this.renderer = renderer;
         Object.assign(this, options);
     }
     Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
@@ -952,7 +982,7 @@ var TooltipContentComponent = (function () {
         configurable: true
     });
     TooltipContentComponent.prototype.ngAfterViewInit = function () {
-        this.position();
+        setTimeout(this.position.bind(this), 0);
     };
     TooltipContentComponent.prototype.position = function () {
         var nativeElm = this.element.nativeElement;
@@ -960,8 +990,9 @@ var TooltipContentComponent = (function () {
         var elmDim = nativeElm.getBoundingClientRect();
         this.checkFlip(hostDim, elmDim);
         this.positionContent(nativeElm, hostDim, elmDim);
-        if (this.showCaret)
+        if (this.showCaret) {
             this.positionCaret(hostDim, elmDim);
+        }
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
         var top = 0;
@@ -982,8 +1013,8 @@ var TooltipContentComponent = (function () {
             top = hostDim.top + hostDim.height + this.spacing;
             left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
         }
-        nativeElm.style['top'] = top + 'px';
-        nativeElm.style['left'] = left + 'px';
+        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
+        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
@@ -1006,8 +1037,8 @@ var TooltipContentComponent = (function () {
             top = -7;
             left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
         }
-        caretElm.style['top'] = top + 'px';
-        caretElm.style['left'] = left + 'px';
+        this.renderer.setElementStyle(caretElm, 'top', top + "px");
+        this.renderer.setElementStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
         var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
@@ -1026,17 +1057,6 @@ var TooltipContentComponent = (function () {
             }
         }
     };
-    TooltipContentComponent.prototype.onMouseLeave = function (target) {
-        if (this.closeOnMouseLeave)
-            this.hide();
-    };
-    TooltipContentComponent.prototype.onDocumentClick = function (target) {
-        if (this.closeOnClickOutside) {
-            var contains = this.element.nativeElement.contains(target);
-            if (!contains)
-                this.hide();
-        }
-    };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
     };
@@ -1052,18 +1072,6 @@ var TooltipContentComponent = (function () {
         HostBinding('@visibilityChanged'), 
         __metadata('design:type', Object)
     ], TooltipContentComponent.prototype, "visibilityChanged", null);
-    __decorate([
-        HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], TooltipContentComponent.prototype, "onMouseLeave", null);
-    __decorate([
-        HostListener('document:click', ['$event.target']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], TooltipContentComponent.prototype, "onDocumentClick", null);
     __decorate([
         HostListener('window:resize'),
         throttleable(100), 
@@ -1093,30 +1101,48 @@ var TooltipContentComponent = (function () {
                 ])
             ]
         }),
-        __param(1, Inject(TooltipOptions)), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof TooltipOptions !== 'undefined' && TooltipOptions) === 'function' && _b) || Object])
+        __param(2, Inject(TooltipOptions)), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof Renderer !== 'undefined' && Renderer) === 'function' && _b) || Object, (typeof (_c = typeof TooltipOptions !== 'undefined' && TooltipOptions) === 'function' && _c) || Object])
     ], TooltipContentComponent);
     return TooltipContentComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
-var StyleTypes;
-(function (StyleTypes) {
-    StyleTypes[StyleTypes["popover"] = 'popover'] = "popover";
-    StyleTypes[StyleTypes["tooltip"] = 'tooltip'] = "tooltip";
-})(StyleTypes || (StyleTypes = {}));
-
-var AlignmentTypes;
-(function (AlignmentTypes) {
-    AlignmentTypes[AlignmentTypes["left"] = 'left'] = "left";
-    AlignmentTypes[AlignmentTypes["center"] = 'center'] = "center";
-    AlignmentTypes[AlignmentTypes["right"] = 'right'] = "right";
-})(AlignmentTypes || (AlignmentTypes = {}));
+var TooltipService = (function () {
+    function TooltipService() {
+        this.components = new Map();
+    }
+    TooltipService.prototype.register = function (id, component, callback) {
+        this.components.set(id, { component: component, callback: callback });
+    };
+    TooltipService.prototype.destroy = function (id) {
+        var obj = this.components.get(id);
+        if (obj && obj.component) {
+            if (obj.callback) {
+                obj.callback(true);
+            }
+            obj.component.destroy();
+            this.components.delete(id);
+        }
+    };
+    TooltipService.prototype.destroyAll = function () {
+        var _this = this;
+        this.components.forEach(function (v, k) { return _this.destroy(k); });
+    };
+    TooltipService = __decorate([
+        Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], TooltipService);
+    return TooltipService;
+}());
 
 var TooltipDirective = (function () {
-    function TooltipDirective(viewContainerRef, injectionService) {
+    function TooltipDirective(tooltipService, viewContainerRef, injectionService, elementRef, renderer) {
+        this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.injectionService = injectionService;
+        this.elementRef = elementRef;
+        this.renderer = renderer;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -1130,43 +1156,127 @@ var TooltipDirective = (function () {
         this.tooltipCloseOnMouseLeave = true;
         this.tooltipHideTimeout = 300;
         this.tooltipShowTimeout = 100;
-        this.visible = false;
+        this.tooltipShowEvent = ShowTypes.all;
+        this.onShow = new EventEmitter();
+        this.onHide = new EventEmitter();
     }
-    TooltipDirective.prototype.show = function () {
+    TooltipDirective.prototype.ngOnDestroy = function () {
+        this.hide(true);
+    };
+    TooltipDirective.prototype.onFocus = function () {
+        if (this.tooltipShowEvent === ShowTypes.all ||
+            this.tooltipShowEvent === ShowTypes.focus) {
+            this.show();
+        }
+    };
+    TooltipDirective.prototype.onMouseEnter = function () {
+        if (this.tooltipShowEvent === ShowTypes.all ||
+            this.tooltipShowEvent === ShowTypes.mouseover) {
+            this.show();
+        }
+    };
+    TooltipDirective.prototype.show = function (immediate) {
         var _this = this;
-        if (this.visible || this.tooltipDisabled)
+        if (this.componentId || this.tooltipDisabled) {
             return;
-        this.visible = true;
+        }
+        var time = immediate ? 0 : this.tooltipShowTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
-            return _this.injectComponent();
-        }, this.tooltipShowTimeout);
+            _this.tooltipService.destroyAll();
+            _this.componentId = ObjectId();
+            var tooltip = _this.injectComponent();
+            _this.tooltipService.register(_this.componentId, tooltip, _this.hide.bind(_this));
+            setTimeout(function () {
+                _this.addHideListeners(tooltip.instance.element.nativeElement);
+            }, 10);
+            _this.onShow.emit(true);
+        }, time);
+    };
+    TooltipDirective.prototype.addHideListeners = function (tooltip) {
+        var _this = this;
+        var entered = false;
+        this.mouseEnterContentEvent = this.renderer.listen(tooltip, 'mouseenter', function () {
+            entered = true;
+            clearTimeout(_this.timeout);
+        });
+        if (this.tooltipCloseOnMouseLeave) {
+            this.mouseLeaveContentEvent = this.renderer.listen(tooltip, 'mouseleave', function () {
+                entered = false;
+                _this.hide();
+            });
+        }
+        if (this.tooltipCloseOnClickOutside) {
+            this.documentClickEvent = this.renderer.listen(document, 'click', function (event) {
+                var contains = tooltip.contains(event.target);
+                if (!contains) {
+                    _this.hide();
+                }
+            });
+        }
+        var element = this.elementRef.nativeElement;
+        var addLeaveListener = this.tooltipShowEvent === ShowTypes.all ||
+            this.tooltipShowEvent === ShowTypes.mouseover;
+        if (addLeaveListener) {
+            this.mouseLeaveEvent = this.renderer.listen(element, 'mouseleave', function () {
+                if (!entered) {
+                    _this.hide();
+                }
+            });
+        }
+        var addFocusListener = this.tooltipShowEvent === ShowTypes.all ||
+            this.tooltipShowEvent === ShowTypes.focus;
+        if (addFocusListener) {
+            this.focusOutEvent = this.renderer.listen(element, 'blur', function () {
+                if (!entered) {
+                    _this.hide();
+                }
+            });
+        }
     };
     TooltipDirective.prototype.injectComponent = function () {
         var options = this.createBoundOptions();
         if (this.tooltipAppendToBody) {
-            this.tooltip = this.injectionService.appendNextToRoot(TooltipContentComponent, TooltipOptions, options);
+            return this.injectionService.appendNextToRoot(TooltipContentComponent, TooltipOptions, options);
         }
         else {
             var binding = ReflectiveInjector.resolve([
                 { provide: TooltipOptions, useValue: options }
             ]);
-            this.tooltip = this.injectionService.appendNextToLocation(TooltipContentComponent, this.viewContainerRef, binding);
+            return this.injectionService.appendNextToLocation(TooltipContentComponent, this.viewContainerRef, binding);
         }
     };
-    TooltipDirective.prototype.hide = function () {
+    TooltipDirective.prototype.hide = function (immediate) {
         var _this = this;
-        if (!this.visible)
+        if (!this.componentId) {
             return;
+        }
+        var time = immediate ? 0 : this.tooltipHideTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
-            _this.visible = false;
-            if (_this.tooltip)
-                _this.tooltip.destroy();
-        }, this.tooltipHideTimeout);
+            _this.tooltipService.destroy(_this.componentId);
+            if (_this.mouseLeaveEvent) {
+                _this.mouseLeaveEvent();
+            }
+            if (_this.focusOutEvent) {
+                _this.focusOutEvent();
+            }
+            if (_this.mouseLeaveContentEvent) {
+                _this.mouseLeaveContentEvent();
+            }
+            if (_this.mouseEnterContentEvent) {
+                _this.mouseEnterContentEvent();
+            }
+            if (_this.documentClickEvent) {
+                _this.documentClickEvent();
+            }
+            _this.onHide.emit(true);
+            _this.componentId = undefined;
+        }, time);
     };
     TooltipDirective.prototype.createBoundOptions = function () {
         return new TooltipOptions({
+            id: this.componentId,
             title: this.tooltipTitle,
             template: this.tooltipTemplate,
             host: this.viewContainerRef.element,
@@ -1175,10 +1285,8 @@ var TooltipDirective = (function () {
             type: this.tooltipType,
             showCaret: this.tooltipShowCaret,
             cssClass: this.tooltipCssClass,
-            hide: this.hide,
-            closeOnClickOutside: this.tooltipCloseOnClickOutside,
-            closeOnMouseLeave: this.tooltipCloseOnMouseLeave,
-            spacing: this.tooltipSpacing
+            spacing: this.tooltipSpacing,
+            context: this.tooltipContext
         });
     };
     __decorate([
@@ -1238,27 +1346,39 @@ var TooltipDirective = (function () {
         __metadata('design:type', Object)
     ], TooltipDirective.prototype, "tooltipTemplate", void 0);
     __decorate([
-        HostListener('focusin'),
+        Input(), 
+        __metadata('design:type', (typeof (_d = typeof ShowTypes !== 'undefined' && ShowTypes) === 'function' && _d) || Object)
+    ], TooltipDirective.prototype, "tooltipShowEvent", void 0);
+    __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "tooltipContext", void 0);
+    __decorate([
+        Output(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "onShow", void 0);
+    __decorate([
+        Output(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "onHide", void 0);
+    __decorate([
+        HostListener('focusin'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "onFocus", null);
+    __decorate([
         HostListener('mouseenter'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], TooltipDirective.prototype, "show", null);
-    __decorate([
-        HostListener('focusout'),
-        HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], TooltipDirective.prototype, "hide", null);
+    ], TooltipDirective.prototype, "onMouseEnter", null);
     TooltipDirective = __decorate([
-        Directive({
-            selector: '[swui-tooltip]'
-        }), 
-        __metadata('design:paramtypes', [(typeof (_d = typeof ViewContainerRef !== 'undefined' && ViewContainerRef) === 'function' && _d) || Object, (typeof (_e = typeof InjectionService !== 'undefined' && InjectionService) === 'function' && _e) || Object])
+        Directive({ selector: '[swui-tooltip]' }), 
+        __metadata('design:paramtypes', [(typeof (_e = typeof TooltipService !== 'undefined' && TooltipService) === 'function' && _e) || Object, (typeof (_f = typeof ViewContainerRef !== 'undefined' && ViewContainerRef) === 'function' && _f) || Object, (typeof (_g = typeof InjectionService !== 'undefined' && InjectionService) === 'function' && _g) || Object, (typeof (_h = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _h) || Object, (typeof (_j = typeof Renderer !== 'undefined' && Renderer) === 'function' && _j) || Object])
     ], TooltipDirective);
     return TooltipDirective;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 var TooltipModule = (function () {
@@ -1267,7 +1387,7 @@ var TooltipModule = (function () {
     TooltipModule = __decorate([
         NgModule({
             declarations: [TooltipContentComponent, TooltipDirective],
-            providers: [InjectionService],
+            providers: [InjectionService, TooltipService],
             exports: [TooltipContentComponent, TooltipDirective],
             imports: [BrowserModule],
             entryComponents: [TooltipContentComponent]
@@ -1277,22 +1397,9 @@ var TooltipModule = (function () {
     return TooltipModule;
 }());
 
-var cache = {};
-function ObjectId() {
-    var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
-    var id = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
-        return (Math.random() * 16 | 0).toString(16);
-    }).toLowerCase();
-    if (!cache[id]) {
-        cache[id] = true;
-        return id;
-    }
-    return ObjectId();
-}
-;
-
 var CircleSeries = (function () {
     function CircleSeries() {
+        this.barVisible = false;
         this.type = 'standard';
         this.clickHandler = new EventEmitter();
     }
@@ -1321,7 +1428,10 @@ var CircleSeries = (function () {
                 var cy = _this.yScale(_this.type === 'standard' ? value : d.d1);
                 var radius = 5;
                 var height = _this.yScale.range()[0] - cy;
-                var gradientIdRect = 'grad' + ObjectId().toString();
+                var opacity = 0;
+                if (label && _this.visibleValue && label.toString() === _this.visibleValue.toString()) {
+                    opacity = 1;
+                }
                 return {
                     classNames: [("circle-data-" + i)],
                     value: value,
@@ -1330,7 +1440,8 @@ var CircleSeries = (function () {
                     cy: cy,
                     radius: radius,
                     height: height,
-                    gradientIdRect: gradientIdRect
+                    tooltipText: label + ", " + value,
+                    opacity: opacity
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
@@ -1370,13 +1481,17 @@ var CircleSeries = (function () {
         __metadata('design:type', Object)
     ], CircleSeries.prototype, "scaleType", void 0);
     __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "visibleValue", void 0);
+    __decorate([
         Output(), 
         __metadata('design:type', Object)
     ], CircleSeries.prototype, "clickHandler", void 0);
     CircleSeries = __decorate([
         Component({
             selector: 'g[circleSeries]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n        style=\"pointerEvents: 'none'; opacity: 0;\"\n      />\n\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"click($event, circle.label)\"\n      />\n    </svg:g>\n  "
+            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"click($event, circle.label)\"\n        [style.opacity]=\"circle.opacity\"\n        [style.cursor]=\"'pointer'\"\n        \n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"circle.tooltipText\"\n      />\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], CircleSeries);
@@ -1932,8 +2047,139 @@ var Area = (function () {
     var _a;
 }());
 
+var AreaTooltip = (function () {
+    function AreaTooltip(renderer) {
+        this.renderer = renderer;
+        this.anchorOpacity = new Array();
+        this.hover = new EventEmitter();
+    }
+    AreaTooltip.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    AreaTooltip.prototype.update = function () {
+        this.tooltipAreas = this.getTooltipAreas();
+    };
+    AreaTooltip.prototype.getTooltipAreas = function () {
+        var _this = this;
+        var uniqueSet = this.getUniqueValues(this.xSet);
+        uniqueSet = uniqueSet.sort(function (a, b) {
+            return _this.xScale(a) - _this.xScale(b);
+        });
+        var results = [];
+        for (var i = 0; i < uniqueSet.length; i++) {
+            var val = uniqueSet[i];
+            var ob = {};
+            ob.tooltipAnchor = this.xScale(val);
+            if (i === 0) {
+                ob.x0 = this.xScale(val);
+            }
+            else {
+                ob.x0 = (this.xScale(uniqueSet[i - 1]) + this.xScale(uniqueSet[i])) / 2;
+            }
+            if (i === uniqueSet.length - 1) {
+                ob.x1 = this.xScale(uniqueSet[i]);
+            }
+            else {
+                ob.x1 = (this.xScale(uniqueSet[i]) + this.xScale(uniqueSet[i + 1])) / 2;
+            }
+            ob.width = ob.x1 - ob.x0;
+            ob.value = val;
+            ob.values = this.getValues(val);
+            results.push(ob);
+            this.anchorOpacity[i] = 0;
+        }
+        return results;
+    };
+    AreaTooltip.prototype.getValues = function (xVal) {
+        var results = [];
+        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
+            var group = _a[_i];
+            var item = group.series.find(function (d) { return d.name.toString() === xVal.toString(); });
+            if (item) {
+                results.push({
+                    value: item.value,
+                    name: item.name,
+                    series: group.name
+                });
+            }
+        }
+        return results;
+    };
+    AreaTooltip.prototype.getUniqueValues = function (array) {
+        var results = [];
+        var _loop_1 = function(i) {
+            var val = array[i];
+            var exists = results.find(function (v) {
+                return v.toString() === val.toString();
+            });
+            if (!exists) {
+                results.push(val);
+            }
+        };
+        for (var i = 0; i < array.length; i++) {
+            _loop_1(i);
+        }
+        return results;
+    };
+    AreaTooltip.prototype.showTooltip = function (index) {
+        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+        var event = new MouseEvent('mouseenter', { bubbles: false });
+        this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
+        this.anchorOpacity[index] = 0.7;
+        this.hover.emit(this.tooltipAreas[index]);
+    };
+    AreaTooltip.prototype.hideTooltip = function (index) {
+        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+        var event = new MouseEvent('mouseleave', { bubbles: false });
+        this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
+        this.anchorOpacity[index] = 0;
+    };
+    __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "xSet", void 0);
+    __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "xScale", void 0);
+    __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "yScale", void 0);
+    __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "results", void 0);
+    __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "height", void 0);
+    __decorate([
+        Input(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "colors", void 0);
+    __decorate([
+        Output(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "hover", void 0);
+    __decorate([
+        ViewChildren('tooltips'), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "tooltips", void 0);
+    AreaTooltip = __decorate([
+        Component({
+            selector: 'g[areaTooltip]',
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div\n          *ngFor=\"let tooltipItem of tooltipArea.values\"\n          class=\"tooltip-item\">\n\n          <span\n            class=\"tooltip-item-color\"\n            [style.background-color]=\"colors(tooltipItem.series)\">\n          </span>\n\n          {{tooltipItem.series}}: {{tooltipItem.value}}\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof Renderer !== 'undefined' && Renderer) === 'function' && _a) || Object])
+    ], AreaTooltip);
+    return AreaTooltip;
+    var _a;
+}());
+
 var COMPONENTS = [
     Area,
+    AreaTooltip,
     Chart,
     Legend,
     ScaleLegend,
@@ -2193,6 +2439,7 @@ var AreaChart = (function (_super) {
         else {
             domain = values;
         }
+        this.xSet = values;
         return domain;
     };
     AreaChart.prototype.getYDomain = function () {
@@ -2271,6 +2518,12 @@ var AreaChart = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
+    AreaChart.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    AreaChart.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
+    };
     AreaChart.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -2345,10 +2598,16 @@ var AreaChart = (function (_super) {
         Output(), 
         __metadata('design:type', Object)
     ], AreaChart.prototype, "clickHandler", void 0);
+    __decorate([
+        HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], AreaChart.prototype, "hideCircles", null);
     AreaChart = __decorate([
         Component({
             selector: 'area-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChart);
@@ -2534,6 +2793,12 @@ var AreaChartNormalized = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
+    AreaChartNormalized.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    AreaChartNormalized.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
+    };
     AreaChartNormalized.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -2600,10 +2865,16 @@ var AreaChartNormalized = (function (_super) {
         Output(), 
         __metadata('design:type', Object)
     ], AreaChartNormalized.prototype, "clickHandler", void 0);
+    __decorate([
+        HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], AreaChartNormalized.prototype, "hideCircles", null);
     AreaChartNormalized = __decorate([
         Component({
             selector: 'area-chart-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              chartType=\"area\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChartNormalized);
@@ -2673,7 +2944,6 @@ var AreaChartStacked = (function (_super) {
         var pageUrl = window.location.href;
         this.clipPathId = 'clip' + ObjectId().toString();
         this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
-        this.addTooltip();
     };
     AreaChartStacked.prototype.getXDomain = function () {
         var values = [];
@@ -2795,7 +3065,11 @@ var AreaChartStacked = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
-    AreaChartStacked.prototype.addTooltip = function () {
+    AreaChartStacked.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    AreaChartStacked.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
     };
     AreaChartStacked.prototype.click = function (data, series) {
         data.series = series.name;
@@ -2863,10 +3137,16 @@ var AreaChartStacked = (function (_super) {
         Output(), 
         __metadata('design:type', Object)
     ], AreaChartStacked.prototype, "clickHandler", void 0);
+    __decorate([
+        HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], AreaChartStacked.prototype, "hideCircles", null);
     AreaChartStacked = __decorate([
         Component({
             selector: 'area-chart-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object])
     ], AreaChartStacked);
@@ -3084,7 +3364,7 @@ var Bar = (function () {
     };
     Bar.prototype.getStartOpacity = function () {
         if (this.roundEdges) {
-            return 0;
+            return 0.2;
         }
         else {
             return 0.5;
@@ -3308,7 +3588,7 @@ var BarHorizontal = (function (_super) {
     BarHorizontal = __decorate([
         Component({
             selector: 'bar-horizontal',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"yAxisTickFormatting()\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"yAxisTickFormatting()\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], BarHorizontal);
@@ -3463,7 +3743,7 @@ var BarHorizontal2D = (function (_super) {
     BarHorizontal2D = __decorate([
         Component({
             selector: 'bar-horizontal-2d',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            [xScale]=\"valueScale\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            [xScale]=\"valueScale\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
             animations: [
                 trigger('animationState', [
                     transition('* => void', [
@@ -3609,7 +3889,7 @@ var BarHorizontalNormalized = (function (_super) {
     BarHorizontalNormalized = __decorate([
         Component({
             selector: 'bar-horizontal-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
             animations: [
                 trigger('animationState', [
                     transition('* => void', [
@@ -3767,7 +4047,7 @@ var BarHorizontalStacked = (function (_super) {
     BarHorizontalStacked = __decorate([
         Component({
             selector: 'bar-horizontal-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
             animations: [
                 trigger('animationState', [
                     transition('* => void', [
@@ -3895,7 +4175,7 @@ var BarVertical = (function (_super) {
     BarVertical = __decorate([
         Component({
             selector: 'bar-vertical',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"xDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"xAxisTickFormatting()\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"xDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"xAxisTickFormatting()\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], BarVertical);
@@ -4055,7 +4335,7 @@ var BarVertical2D = (function (_super) {
     BarVertical2D = __decorate([
         Component({
             selector: 'bar-vertical-2d',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n          <svg:g seriesVertical\n            *ngFor=\"let group of results; trackBy:trackBy\"\n            [@animationState]=\"'active'\"\n            [attr.transform]=\"groupTransform(group)\"\n\n            [xScale]=\"innerScale\"\n            [yScale]=\"valueScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n          <svg:g seriesVertical\n            *ngFor=\"let group of results; trackBy:trackBy\"\n            [@animationState]=\"'active'\"\n            [attr.transform]=\"groupTransform(group)\"\n\n            [xScale]=\"innerScale\"\n            [yScale]=\"valueScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n    </chart>\n  ",
             animations: [
                 trigger('animationState', [
                     transition('* => void', [
@@ -4201,7 +4481,7 @@ var BarVerticalNormalized = (function (_super) {
     BarVerticalNormalized = __decorate([
         Component({
             selector: 'bar-vertical-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
             animations: [
                 trigger('animationState', [
                     transition('* => void', [
@@ -4359,7 +4639,7 @@ var BarVerticalStacked = (function (_super) {
     BarVerticalStacked = __decorate([
         Component({
             selector: 'bar-vertical-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
             animations: [
                 trigger('animationState', [
                     transition('* => void', [
@@ -4972,7 +5252,7 @@ var HeatMap = (function (_super) {
     HeatMap = __decorate([
         Component({
             selector: 'heat-map',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [legendData]=\"colorScale\"\n      [data]=\"results.m0Domain\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"numbercard\">\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [legendData]=\"colorScale\"\n      [data]=\"results.m0Domain\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], HeatMap);
@@ -5103,6 +5383,7 @@ var LineChart = (function (_super) {
         else {
             domain = values;
         }
+        this.xSet = values;
         return domain;
     };
     LineChart.prototype.getYDomain = function () {
@@ -5181,6 +5462,12 @@ var LineChart = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
+    LineChart.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    LineChart.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
+    };
     LineChart.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -5248,10 +5535,16 @@ var LineChart = (function (_super) {
         Output(), 
         __metadata('design:type', Object)
     ], LineChart.prototype, "clickHandler", void 0);
+    __decorate([
+        HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], LineChart.prototype, "hideCircles", null);
     LineChart = __decorate([
         Component({
             selector: 'line-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n        <!--\n          <svg:g area\n            *ngIf=\"gradient\"\n            [fill]=\"colors('Line')\"\n            [path]=\"areaPath\"\n            [startingPath]=\"areaPath\"\n            [data]=\"series\"\n            startOpacity=\"0\"\n            endOpacity=\"0.2\"\n            [gradient]=\"gradient\"\n          />\n          -->\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n            />\n          </svg:g>\n\n          <svg:rect\n            class=\"tooltip-area\"\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            x=\"-5\"\n            y=\"-5\"\n            style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], LineChart);
@@ -5599,7 +5892,7 @@ var NumberCard = (function (_super) {
     NumberCard = __decorate([
         Component({
             selector: 'number-card',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"numbercard\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], NumberCard);
@@ -5711,7 +6004,7 @@ var AdvancedPieChart = (function (_super) {
     AdvancedPieChart = __decorate([
         Component({
             selector: 'advanced-pie-chart',
-            template: "\n    <div class=\"advanced-pie\"\n      [style.width]=\"dims.width\"\n      [style.height]=\"view[1]\">\n\n      <chart\n        [colors]=\"colors\"\n        [view]=\"[dims.width, dims.height]\">\n\n        <svg:g\n          [attr.transform]=\"transform\"\n          class=\"pie chart\">\n          <svg:g pieSeries\n            [colors]=\"colors\"\n            [showLabels]=\"labels\"\n            [series]=\"results\"\n            [innerRadius]=\"innerRadius\"\n            [outerRadius]=\"outerRadius\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event)\">\n          </svg:g>\n        </svg:g>\n      </chart>\n    </div>\n\n    <div [style.width]=\"view[0] - dims.width\">\n      <div class=\"advanced-pie-legend\"\n        [style.margin-top]=\"(view[1] - 215)/2\">\n\n        <div class=\"total-value\">\n          {{roundedTotal}}\n        </div>\n        <div class=\"total-label\">\n          {{totalLabel}}\n        </div>\n\n        <div class=\"legend-items-container\">\n          <div class=\"legend-items\">\n            <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n              <div class=\"item-color\"\n                [style.background]=\"colors(legendItem.label)\">\n              </div>\n              <div class=\"item-value\">{{legendItem.value}}</div>\n              <div class=\"item-label\">{{legendItem.label}}</div>\n              <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n            </div>\n          </div>\n        </div>\n\n      </div>\n    </div>\n  "
+            template: "\n    <div class=\"advanced-pie chart\"\n      [style.width]=\"dims.width\"\n      [style.height]=\"view[1]\">\n\n      <chart\n        [colors]=\"colors\"\n        [view]=\"[dims.width, dims.height]\">\n\n        <svg:g\n          [attr.transform]=\"transform\"\n          class=\"pie chart\">\n          <svg:g pieSeries\n            [colors]=\"colors\"\n            [showLabels]=\"labels\"\n            [series]=\"results\"\n            [innerRadius]=\"innerRadius\"\n            [outerRadius]=\"outerRadius\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event)\">\n          </svg:g>\n        </svg:g>\n      </chart>\n    </div>\n\n    <div [style.width]=\"view[0] - dims.width\">\n      <div class=\"advanced-pie-legend\"\n        [style.margin-top]=\"(view[1] - 215)/2\">\n\n        <div class=\"total-value\">\n          {{roundedTotal}}\n        </div>\n        <div class=\"total-label\">\n          {{totalLabel}}\n        </div>\n\n        <div class=\"legend-items-container\">\n          <div class=\"legend-items\">\n            <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n              <div class=\"item-color\"\n                [style.background]=\"colors(legendItem.label)\">\n              </div>\n              <div class=\"item-value\">{{legendItem.value}}</div>\n              <div class=\"item-label\">{{legendItem.label}}</div>\n              <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n            </div>\n          </div>\n        </div>\n\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AdvancedPieChart);
@@ -6038,7 +6331,7 @@ var PieChart = (function (_super) {
     PieChart = __decorate([
         Component({
             selector: 'pie-chart',
-            template: "\n    <chart\n      [colors]=\"colors\"\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [colors]=\"colors\"\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], PieChart);
@@ -6092,6 +6385,7 @@ var PieGrid = (function (_super) {
                 outerRadius: radius,
                 label: trimLabel(label),
                 total: "Total: " + d3.format(".2f")(value),
+                value: value,
                 percent: d3.format(".1p")(d.data.percent),
                 data: [d, {
                         data: {
@@ -6137,7 +6431,7 @@ var PieGrid = (function (_super) {
     PieGrid = __decorate([
         Component({
             selector: 'pie-grid',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\" >\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid-chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"click($event)\"\n          />\n\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total}}\n          </svg:text>\n\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\" >\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"click($event)\"\n\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value\" \n          />\n\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total}}\n          </svg:text>\n\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], PieGrid);
@@ -6411,26 +6705,45 @@ var PieChartModule = (function () {
 
 var TreeMapCell = (function () {
     function TreeMapCell(element) {
+        this.initialized = false;
         this.clickHandler = new EventEmitter();
         this.element = element.nativeElement;
     }
     TreeMapCell.prototype.ngOnChanges = function () {
-        this.transform = "translate(" + this.x + " , " + this.y + ")";
-        this.loadAnimation();
+        this.update();
+    };
+    TreeMapCell.prototype.update = function () {
+        this.formattedValue = this.value;
+        if (this.initialized) {
+            this.animateToCurrentForm();
+        }
+        else {
+            this.loadAnimation();
+            this.initialized = true;
+        }
     };
     TreeMapCell.prototype.loadAnimation = function () {
         var node = d3.select(this.element).select('.cell');
         node
-            .attr('opacity', 0);
+            .attr('opacity', 0)
+            .attr('x', this.x)
+            .attr('y', this.y);
         this.animateToCurrentForm();
     };
     TreeMapCell.prototype.animateToCurrentForm = function () {
         var node = d3.select(this.element).select('.cell');
         node.transition().duration(750)
-            .attr('opacity', 1);
+            .attr('opacity', 1)
+            .attr('x', this.x)
+            .attr('y', this.y)
+            .attr('width', this.width)
+            .attr('height', this.height);
     };
     TreeMapCell.prototype.click = function () {
-        this.clickHandler.emit(this.label);
+        this.clickHandler.emit({
+            name: this.label,
+            value: this.value
+        });
     };
     __decorate([
         Input(), 
@@ -6471,7 +6784,7 @@ var TreeMapCell = (function () {
     TreeMapCell = __decorate([
         Component({
             selector: 'g[treeMapCell]',
-            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        (click)=\"click()\"\n      />\n\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        x=\"0\"\n        [attr.y]=\"height/2 - 15\"\n        [attr.width]=\"width\"\n        height=\"40\">\n        <xhtml:p>\n          <xhtml:b>{{label}}</xhtml:b>\n          <xhtml:br/>\n          {{formattedValue}}\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  "
+            template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"click()\"\n      />\n\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          {{label}}\n          <xhtml:br/>\n          {{formattedValue}}\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object])
     ], TreeMapCell);
@@ -6501,7 +6814,8 @@ var TreeMapCellSeries = (function () {
                 fill: _this.colors(d.id),
                 label: d.id,
                 value: d.value,
-                valueType: d.valueType
+                valueType: d.valueType,
+                tooltipText: d.id + ": " + d.value
             };
         });
     };
@@ -6530,7 +6844,7 @@ var TreeMapCellSeries = (function () {
     TreeMapCellSeries = __decorate([
         Component({
             selector: 'g[treeMapCellSeries]',
-            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
+            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"click($event)\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], TreeMapCellSeries);
@@ -6597,7 +6911,7 @@ var TreeMap = (function (_super) {
     TreeMap = __decorate([
         Component({
             selector: 'tree-map',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"treemap\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], TreeMap);

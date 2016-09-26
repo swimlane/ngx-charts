@@ -31,7 +31,8 @@ var TreeMapCellSeries = (function () {
                 fill: _this.colors(d.id),
                 label: d.id,
                 value: d.value,
-                valueType: d.valueType
+                valueType: d.valueType,
+                tooltipText: d.id + ": " + d.value
             };
         });
     };
@@ -60,7 +61,7 @@ var TreeMapCellSeries = (function () {
     TreeMapCellSeries = __decorate([
         core_1.Component({
             selector: 'g[treeMapCellSeries]',
-            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
+            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"click($event)\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], TreeMapCellSeries);

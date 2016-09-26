@@ -17,8 +17,9 @@ var position_helper_1 = require('./position.helper');
 var tooltip_options_1 = require('./tooltip-options');
 var placement_type_1 = require('./placement.type');
 var TooltipContentComponent = (function () {
-    function TooltipContentComponent(element, options) {
+    function TooltipContentComponent(element, renderer, options) {
         this.element = element;
+        this.renderer = renderer;
         Object.assign(this, options);
     }
     Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
@@ -40,7 +41,7 @@ var TooltipContentComponent = (function () {
         configurable: true
     });
     TooltipContentComponent.prototype.ngAfterViewInit = function () {
-        this.position();
+        setTimeout(this.position.bind(this), 0);
     };
     TooltipContentComponent.prototype.position = function () {
         var nativeElm = this.element.nativeElement;
@@ -48,8 +49,9 @@ var TooltipContentComponent = (function () {
         var elmDim = nativeElm.getBoundingClientRect();
         this.checkFlip(hostDim, elmDim);
         this.positionContent(nativeElm, hostDim, elmDim);
-        if (this.showCaret)
+        if (this.showCaret) {
             this.positionCaret(hostDim, elmDim);
+        }
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
         var top = 0;
@@ -70,8 +72,8 @@ var TooltipContentComponent = (function () {
             top = hostDim.top + hostDim.height + this.spacing;
             left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
         }
-        nativeElm.style['top'] = top + 'px';
-        nativeElm.style['left'] = left + 'px';
+        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
+        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
@@ -94,8 +96,8 @@ var TooltipContentComponent = (function () {
             top = -7;
             left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
         }
-        caretElm.style['top'] = top + 'px';
-        caretElm.style['left'] = left + 'px';
+        this.renderer.setElementStyle(caretElm, 'top', top + "px");
+        this.renderer.setElementStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
         var shouldFlip = position_helper_1.PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
@@ -114,17 +116,6 @@ var TooltipContentComponent = (function () {
             }
         }
     };
-    TooltipContentComponent.prototype.onMouseLeave = function (target) {
-        if (this.closeOnMouseLeave)
-            this.hide();
-    };
-    TooltipContentComponent.prototype.onDocumentClick = function (target) {
-        if (this.closeOnClickOutside) {
-            var contains = this.element.nativeElement.contains(target);
-            if (!contains)
-                this.hide();
-        }
-    };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
     };
@@ -140,18 +131,6 @@ var TooltipContentComponent = (function () {
         core_1.HostBinding('@visibilityChanged'), 
         __metadata('design:type', Object)
     ], TooltipContentComponent.prototype, "visibilityChanged", null);
-    __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], TooltipContentComponent.prototype, "onMouseLeave", null);
-    __decorate([
-        core_1.HostListener('document:click', ['$event.target']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], TooltipContentComponent.prototype, "onDocumentClick", null);
     __decorate([
         core_1.HostListener('window:resize'),
         throttle_1.throttleable(100), 
@@ -181,8 +160,8 @@ var TooltipContentComponent = (function () {
                 ])
             ]
         }),
-        __param(1, core_1.Inject(tooltip_options_1.TooltipOptions)), 
-        __metadata('design:paramtypes', [core_1.ElementRef, tooltip_options_1.TooltipOptions])
+        __param(2, core_1.Inject(tooltip_options_1.TooltipOptions)), 
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer, tooltip_options_1.TooltipOptions])
     ], TooltipContentComponent);
     return TooltipContentComponent;
 }());
