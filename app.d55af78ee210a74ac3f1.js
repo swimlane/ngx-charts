@@ -6427,7 +6427,7 @@ __webpack_require__(1125);
 var App = (function () {
     function App(viewContainerRef) {
         this.viewContainerRef = viewContainerRef;
-        this.chartType = 'area-chart-normalized';
+        this.chartType = 'bar-vertical';
         this.realTimeData = false;
         this.linearScale = false;
         this.view = [900, 400];
@@ -15310,4 +15310,4 @@ var EventEmitter = (function (_super) {
 /***/ }
 
 },[1128]);
-//# sourceMappingURL=app.46af3f57c2ccc8c2feb1.map
+//# sourceMappingURL=app.d55af78ee210a74ac3f1.map
