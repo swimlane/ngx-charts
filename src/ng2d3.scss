@@ -24,8 +24,6 @@
 
   &.treemap {
     .cell {
-      cursor: pointer;
-
       foreignObject {
         pointer-events: none;
       }

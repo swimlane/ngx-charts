@@ -5,7 +5,7 @@ import d3 from '../d3';
 @Component({
   selector: 'g[treeMapCell]',
   template: `
-    <svg:g [attr.transform]="transform" class="cell">
+    <svg:g>
       <svg:rect
         [attr.fill]="fill"
         [attr.width]="width"
@@ -17,8 +17,8 @@ import d3 from '../d3';
 
       <svg:foreignObject
         *ngIf="width >= 70 && height >= 35"
-        x="0"
-        [attr.y]="height/2 - 15"
+        [attr.x]="x"
+        [attr.y]="y + height/2 - 15"
         [attr.width]="width"
         height="40">
         <xhtml:p>
@@ -34,6 +34,7 @@ export class TreeMapCell implements OnChanges {
   element: HTMLElement;
   transform: string;
   formattedValue: string; // todo check string or number ?
+  initialized: boolean = false;
 
   @Input() fill;
   @Input() x;
@@ -51,18 +52,31 @@ export class TreeMapCell implements OnChanges {
   }
 
   ngOnChanges() {
-    this.transform = `translate(${this.x} , ${this.y})`;
+    this.update();
+
+  }
+
+  update() {
+    // this.transform = `translate(${this.x} , ${this.y})`;
     // todo fix this by adding props
     // this.formattedValue = formatNumber(props.value, props.valueType);
 
-    this.loadAnimation();
+    if (this.initialized) {
+      this.animateToCurrentForm();
+    } else {
+      this.loadAnimation();
+      this.initialized = true;
+    }
+
   }
 
   loadAnimation() {
     let node = d3.select(this.element).select('.cell');
 
     node
-      .attr('opacity', 0);
+      .attr('opacity', 0)
+      .attr('x', this.x)
+      .attr('y', this.y);
 
     this.animateToCurrentForm();
   }
@@ -71,7 +85,11 @@ export class TreeMapCell implements OnChanges {
     let node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
-      .attr('opacity', 1);
+      .attr('opacity', 1)
+      .attr('x', this.x)
+      .attr('y', this.y)
+      .attr('width', this.width)
+      .attr('height', this.height);
   }
 
   click() {
@@ -80,6 +98,4 @@ export class TreeMapCell implements OnChanges {
       value: this.value
     });
   }
-
-
 }
