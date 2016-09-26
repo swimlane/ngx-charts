@@ -27,7 +27,8 @@ import * as moment from 'moment';
         [classNames]="circle.classNames"
         (clickHandler)="click($event, circle.label)"
         [style.opacity]="circle.opacity"
-
+        [style.cursor]="'pointer'"
+        
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
