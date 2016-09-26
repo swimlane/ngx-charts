@@ -41,7 +41,6 @@ export declare class AreaChartStacked extends BaseChart implements OnChanges {
     getScaleType(values: any): string;
     isDate(value: any): boolean;
     updateDomain(domain: any): void;
-    addTooltip(): void;
     click(data: any, series: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;

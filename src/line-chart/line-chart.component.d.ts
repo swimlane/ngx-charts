@@ -3,6 +3,7 @@ import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
 export declare class LineChart extends BaseChart implements OnChanges {
     dims: ViewDimensions;
+    xSet: any;
     xDomain: any;
     yDomain: any;
     seriesDomain: any;

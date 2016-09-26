@@ -2,6 +2,7 @@ import { EventEmitter, OnChanges } from '@angular/core';
 export declare class CircleSeries implements OnChanges {
     areaPath: any;
     circles: any[];
+    barVisible: boolean;
     data: any;
     type: string;
     xScale: any;

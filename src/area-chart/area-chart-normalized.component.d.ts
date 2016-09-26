@@ -15,6 +15,7 @@ export declare class AreaChartNormalized extends BaseChart implements OnChanges 
     clipPath: string;
     colors: Function;
     margin: number[];
+    tooltipAreas: any[];
     view: any;
     results: any;
     scheme: any;

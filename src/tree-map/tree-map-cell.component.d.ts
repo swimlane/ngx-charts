@@ -3,6 +3,7 @@ export declare class TreeMapCell implements OnChanges {
     element: HTMLElement;
     transform: string;
     formattedValue: string;
+    initialized: boolean;
     fill: any;
     x: any;
     y: any;
@@ -14,6 +15,7 @@ export declare class TreeMapCell implements OnChanges {
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef);
     ngOnChanges(): void;
+    update(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;
     click(): void;
