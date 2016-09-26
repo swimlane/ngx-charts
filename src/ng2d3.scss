@@ -3,35 +3,31 @@
 .ng2d3 {
   float: left;
 
-  &.bar,
-  &.cell,
-  &.arc,
-  &.card {
+  .bar,
+  .cell,
+  .arc,
+  .card {
     &:hover {
       opacity: 0.8;
     }
   }
 
-  &.area {
+  .area {
     opacity: 0.6;
   }
 
-  &.circle {
+  .circle {
     &:hover {
       cursor: pointer;
     }
   }
 
-  &.treemap {
-    .cell {
-      foreignObject {
-        pointer-events: none;
-      }
-
-      p {
-        text-align: center;
-        pointer-events: none;
-      }
+  .treemap {
+    .label p {
+      display: table-cell;
+      text-align: center;
+      line-height: 1.2em;
+      vertical-align: middle;
     }
   }
 }

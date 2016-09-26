@@ -18,11 +18,15 @@ import d3 from '../d3';
       <svg:foreignObject
         *ngIf="width >= 70 && height >= 35"
         [attr.x]="x"
-        [attr.y]="y + height/2 - 15"
+        [attr.y]="y"
         [attr.width]="width"
-        height="40">
-        <xhtml:p>
-          <xhtml:b>{{label}}</xhtml:b>
+        [attr.height]="height"
+        class="label"
+        [style.pointer-events]="'none'">
+        <xhtml:p
+          [style.height]="height + 'px'"
+          [style.width]="width + 'px'">
+          {{label}}
           <xhtml:br/>
           {{formattedValue}}
         </xhtml:p>
@@ -61,6 +65,7 @@ export class TreeMapCell implements OnChanges {
     // todo fix this by adding props
     // this.formattedValue = formatNumber(props.value, props.valueType);
 
+    this.formattedValue = this.value;
     if (this.initialized) {
       this.animateToCurrentForm();
     } else {
