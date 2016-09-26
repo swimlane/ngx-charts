@@ -13,6 +13,11 @@ import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core
       [value]="c.value"
       [valueType]="c.valueType"
       (clickHandler)="click($event)"
+
+      swui-tooltip
+      [tooltipPlacement]="'top'"
+      [tooltipType]="'tooltip'"
+      [tooltipTitle]="c.tooltipText"
     />
   `
 })
@@ -42,7 +47,8 @@ export class TreeMapCellSeries implements OnChanges {
           fill: this.colors(d.id),
           label: d.id,
           value: d.value,
-          valueType: d.valueType
+          valueType: d.valueType,
+          tooltipText: `${d.id}: ${d.value}`
         };
       });
   }
