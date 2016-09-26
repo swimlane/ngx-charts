@@ -5643,7 +5643,7 @@ var TooltipContentComponent = (function () {
         configurable: true
     });
     TooltipContentComponent.prototype.ngAfterViewInit = function () {
-        this.position();
+        setTimeout(this.position.bind(this), 0);
     };
     TooltipContentComponent.prototype.position = function () {
         var nativeElm = this.element.nativeElement;
@@ -15556,4 +15556,4 @@ var EventEmitter = (function (_super) {
 /***/ }
 
 },[1132]);
-//# sourceMappingURL=app.627e056225d928dac75a.map
+//# sourceMappingURL=app.2025a244a2bc2d343f06.map
