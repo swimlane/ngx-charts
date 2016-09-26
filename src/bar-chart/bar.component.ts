@@ -138,7 +138,7 @@ export class Bar implements OnInit, OnChanges {
 
   getStartOpacity() {
     if (this.roundEdges) {
-      return 0;
+      return 0.2;
     } else {
       return 0.5;
     }
