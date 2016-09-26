@@ -72,9 +72,6 @@ export class TooltipContentComponent implements AfterViewInit {
     return 'active';
   }
 
-  private title: string;
-  private template: any;
-  private context: any;
   private host: any;
   private showCaret: boolean;
   private type: StyleTypes;
@@ -82,7 +79,6 @@ export class TooltipContentComponent implements AfterViewInit {
   private alignment: AlignmentTypes;
   private spacing: number;
   private cssClass: string;
-  private id: string;
 
   constructor(
     public element: ElementRef,
@@ -104,7 +100,9 @@ export class TooltipContentComponent implements AfterViewInit {
     this.checkFlip(hostDim, elmDim);
     this.positionContent(nativeElm, hostDim, elmDim);
 
-    if(this.showCaret) this.positionCaret(hostDim, elmDim);
+    if(this.showCaret) {
+      this.positionCaret(hostDim, elmDim);
+    }
   }
 
   positionContent(nativeElm, hostDim, elmDim) {

@@ -8,7 +8,8 @@ import {
   ReflectiveInjector,
   ComponentRef,
   ElementRef,
-  Renderer
+  Renderer,
+  OnDestroy
 } from '@angular/core';
 
 import { InjectionService } from '../../utils/injection.service';
@@ -24,7 +25,7 @@ import { TooltipOptions } from './tooltip-options';
 import { TooltipService } from './tooltip.service';
 
 @Directive({ selector: '[swui-tooltip]' })
-export class TooltipDirective {
+export class TooltipDirective implements OnDestroy {
 
   @Input() tooltipCssClass: string = '';
   @Input() tooltipTitle: string = '';
@@ -84,7 +85,9 @@ export class TooltipDirective {
   }
 
   show(immediate?: boolean) {
-    if (this.componentId || this.tooltipDisabled) return;
+    if (this.componentId || this.tooltipDisabled) {
+      return;
+    }
     const time = immediate ? 0 : this.tooltipShowTimeout;
 
     clearTimeout(this.timeout);
@@ -126,7 +129,9 @@ export class TooltipDirective {
     if(this.tooltipCloseOnClickOutside) {
       this.documentClickEvent = this.renderer.listen(document, 'click', (event) => {
         const contains = tooltip.contains(event.target);
-        if(!contains) this.hide();
+        if(!contains) {
+          this.hide();
+        }
       });
     }
 
@@ -140,7 +145,9 @@ export class TooltipDirective {
 
     if(addLeaveListener) {
      this.mouseLeaveEvent = this.renderer.listen(element, 'mouseleave', () => {
-       if(!entered) this.hide();
+       if(!entered) {
+         this.hide();
+       }
      });
     }
 
@@ -151,7 +158,9 @@ export class TooltipDirective {
 
     if(addFocusListener) {
      this.focusOutEvent = this.renderer.listen(element, 'blur', () => {
-       if(!entered) this.hide();
+       if(!entered) {
+         this.hide();
+       }
      });
     }
   }
@@ -182,7 +191,9 @@ export class TooltipDirective {
   }
 
   hide(immediate?: boolean) {
-    if(!this.componentId) return;
+    if(!this.componentId) {
+      return;
+    }
 
     const time = immediate ? 0 : this.tooltipHideTimeout;
 
@@ -192,11 +203,21 @@ export class TooltipDirective {
       this.tooltipService.destroy(this.componentId);
 
       // remove events
-      if(this.mouseLeaveEvent) this.mouseLeaveEvent();
-      if(this.focusOutEvent) this.focusOutEvent();
-      if(this.mouseLeaveContentEvent) this.mouseLeaveContentEvent();
-      if(this.mouseEnterContentEvent) this.mouseEnterContentEvent();
-      if(this.documentClickEvent) this.documentClickEvent();
+      if(this.mouseLeaveEvent) {
+        this.mouseLeaveEvent();
+      }
+      if(this.focusOutEvent) {
+        this.focusOutEvent();
+      }
+      if(this.mouseLeaveContentEvent) {
+        this.mouseLeaveContentEvent();
+      }
+      if(this.mouseEnterContentEvent) {
+        this.mouseEnterContentEvent();
+      }
+      if(this.documentClickEvent) {
+        this.documentClickEvent();
+      }
 
       // emit events
       this.onHide.emit(true);

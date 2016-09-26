@@ -1,4 +1,4 @@
-import { Injectable, ComponentRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TooltipService {
@@ -13,7 +13,9 @@ export class TooltipService {
     const obj: any = this.components.get(id);
 
     if(obj && obj.component) {
-      if(obj.callback) obj.callback(true);
+      if(obj.callback) {
+        obj.callback(true);
+      }
       obj.component.destroy();
       this.components.delete(id);
     }
