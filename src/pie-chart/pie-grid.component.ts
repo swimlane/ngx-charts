@@ -24,6 +24,11 @@ import d3 from '../d3';
             [innerRadius]="series.innerRadius"
             [outerRadius]="series.outerRadius"
             (clickHandler)="click($event)"
+
+            swui-tooltip
+            [tooltipPlacement]="'top'"
+            [tooltipType]="'tooltip'"
+            [tooltipTitle]="series.label + ': ' + series.value" 
           />
 
           <svg:text
@@ -120,6 +125,7 @@ export class PieGrid extends BaseChart implements OnChanges {
         outerRadius: radius,
         label: trimLabel(label),
         total: `Total: ${d3.format(".2f")(value)}`,
+        value: value,
         percent: d3.format(".1p")(d.data.percent),
         data: [d, {
           data: {
