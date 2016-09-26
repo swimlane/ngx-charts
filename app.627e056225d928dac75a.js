@@ -5,7 +5,7 @@ webpackJsonp([1],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared__ = __webpack_require__(69);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AbstractFormGroupDirective; });
 /**
  * @license
@@ -93,7 +93,7 @@ var AbstractFormGroupDirective = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(69);
 /* unused harmony export formDirectiveProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NgForm; });
 /**
@@ -279,7 +279,7 @@ var NgForm = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_container__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(69);
 /* unused harmony export formDirectiveProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormGroupDirective; });
 /**
@@ -478,7 +478,7 @@ var FormGroupDirective = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__form_group_directive__ = __webpack_require__(109);
 /* unused harmony export formGroupNameProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormGroupName; });
@@ -701,7 +701,7 @@ function _hasInvalidParent(parent) {
 
 /***/ },
 
-/***/ 1115:
+/***/ 1118:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -829,18 +829,18 @@ function dispatchError(arg) {
 
 /***/ },
 
-/***/ 1116:
+/***/ 1119:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var PromiseObservable_1 = __webpack_require__(1115);
+var PromiseObservable_1 = __webpack_require__(1118);
 exports.fromPromise = PromiseObservable_1.PromiseObservable.create;
 //# sourceMappingURL=fromPromise.js.map
 
 /***/ },
 
-/***/ 1117:
+/***/ 1120:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -875,16 +875,16 @@ exports.toPromise = toPromise;
 
 /***/ },
 
-/***/ 1125:
+/***/ 1128:
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(911);
+var content = __webpack_require__(913);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(557)(content, {});
+var update = __webpack_require__(387)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -902,16 +902,43 @@ if(false) {
 
 /***/ },
 
-/***/ 1126:
+/***/ 1129:
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(912);
+var content = __webpack_require__(914);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(557)(content, {});
+var update = __webpack_require__(387)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/postcss-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./tooltip.scss", function() {
+			var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/postcss-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./tooltip.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+
+/***/ 1130:
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(915);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(387)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -929,7 +956,7 @@ if(false) {
 
 /***/ },
 
-/***/ 1128:
+/***/ 1132:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -945,10 +972,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var platform_browser_1 = __webpack_require__(77);
-var forms_1 = __webpack_require__(559);
+var forms_1 = __webpack_require__(561);
 var platform_browser_dynamic_1 = __webpack_require__(177);
-var app_1 = __webpack_require__(560);
-var ng2d3_1 = __webpack_require__(561);
+var app_1 = __webpack_require__(562);
+var ng2d3_1 = __webpack_require__(563);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -1117,7 +1144,7 @@ var DefaultValueAccessor = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_form__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__ = __webpack_require__(444);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__ = __webpack_require__(447);
 /* unused harmony export modelGroupProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NgModelGroup; });
 /**
@@ -1354,7 +1381,7 @@ var RadioControlValueAccessor = (function () {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(443);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(446);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ReactiveErrors; });
 /**
  * @license
@@ -1783,9 +1810,9 @@ var SELECT_DIRECTIVES = [SelectMultipleControlValueAccessor, NgSelectMultipleOpt
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__ = __webpack_require__(1116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__ = __webpack_require__(1119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_shared__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_shared__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_async__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__facade_lang__ = __webpack_require__(31);
@@ -3576,8 +3603,8 @@ var NgControlStatusGroup = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_control__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_form__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_model_group__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__ = __webpack_require__(444);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__ = __webpack_require__(447);
 /* unused harmony export formControlBinding */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NgModel; });
 /**
@@ -3885,7 +3912,7 @@ var NumberValueAccessor = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_value_accessor__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ng_control__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(69);
 /* unused harmony export formControlBinding */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormControlDirective; });
 /**
@@ -4042,7 +4069,7 @@ var FormControlDirective = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_value_accessor__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ng_control__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__form_group_directive__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__form_group_name__ = __webpack_require__(110);
 /* unused harmony export controlNameBinding */
@@ -4458,6 +4485,110 @@ var PlacementTypes = exports.PlacementTypes;
 
 /***/ },
 
+/***/ 227:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var TooltipService = (function () {
+    function TooltipService() {
+        this.components = new Map();
+    }
+    TooltipService.prototype.register = function (id, component, callback) {
+        this.components.set(id, { component: component, callback: callback });
+    };
+    TooltipService.prototype.destroy = function (id) {
+        var obj = this.components.get(id);
+        if (obj && obj.component) {
+            if (obj.callback) {
+                obj.callback(true);
+            }
+            obj.component.destroy();
+            this.components.delete(id);
+        }
+    };
+    TooltipService.prototype.destroyAll = function () {
+        var _this = this;
+        this.components.forEach(function (v, k) { return _this.destroy(k); });
+    };
+    TooltipService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], TooltipService);
+    return TooltipService;
+}());
+exports.TooltipService = TooltipService;
+
+
+/***/ },
+
+/***/ 256:
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ },
+
 /***/ 31:
 /***/ function(module, exports, __webpack_require__) {
 
@@ -4858,7 +4989,260 @@ function escapeRegExp(s) {
 
 /***/ },
 
-/***/ 443:
+/***/ 387:
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+var stylesInDom = {},
+	memoize = function(fn) {
+		var memo;
+		return function () {
+			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+			return memo;
+		};
+	},
+	isOldIE = memoize(function() {
+		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+	}),
+	getHeadElement = memoize(function () {
+		return document.head || document.getElementsByTagName("head")[0];
+	}),
+	singletonElement = null,
+	singletonCounter = 0,
+	styleElementsInsertedAtTop = [];
+
+module.exports = function(list, options) {
+	if(typeof DEBUG !== "undefined" && DEBUG) {
+		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the bottom of <head>.
+	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+	var styles = listToStyles(list);
+	addStylesToDom(styles, options);
+
+	return function update(newList) {
+		var mayRemove = [];
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+		if(newList) {
+			var newStyles = listToStyles(newList);
+			addStylesToDom(newStyles, options);
+		}
+		for(var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+			if(domStyle.refs === 0) {
+				for(var j = 0; j < domStyle.parts.length; j++)
+					domStyle.parts[j]();
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+}
+
+function addStylesToDom(styles, options) {
+	for(var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+		if(domStyle) {
+			domStyle.refs++;
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles(list) {
+	var styles = [];
+	var newStyles = {};
+	for(var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+		if(!newStyles[id])
+			styles.push(newStyles[id] = {id: id, parts: [part]});
+		else
+			newStyles[id].parts.push(part);
+	}
+	return styles;
+}
+
+function insertStyleElement(options, styleElement) {
+	var head = getHeadElement();
+	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+	if (options.insertAt === "top") {
+		if(!lastStyleElementInsertedAtTop) {
+			head.insertBefore(styleElement, head.firstChild);
+		} else if(lastStyleElementInsertedAtTop.nextSibling) {
+			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			head.appendChild(styleElement);
+		}
+		styleElementsInsertedAtTop.push(styleElement);
+	} else if (options.insertAt === "bottom") {
+		head.appendChild(styleElement);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement(styleElement) {
+	styleElement.parentNode.removeChild(styleElement);
+	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+	if(idx >= 0) {
+		styleElementsInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement(options) {
+	var styleElement = document.createElement("style");
+	styleElement.type = "text/css";
+	insertStyleElement(options, styleElement);
+	return styleElement;
+}
+
+function createLinkElement(options) {
+	var linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	insertStyleElement(options, linkElement);
+	return linkElement;
+}
+
+function addStyle(obj, options) {
+	var styleElement, update, remove;
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+		styleElement = singletonElement || (singletonElement = createStyleElement(options));
+		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+	} else if(obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function") {
+		styleElement = createLinkElement(options);
+		update = updateLink.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+			if(styleElement.href)
+				URL.revokeObjectURL(styleElement.href);
+		};
+	} else {
+		styleElement = createStyleElement(options);
+		update = applyToTag.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle(newObj) {
+		if(newObj) {
+			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+				return;
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag(styleElement, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = styleElement.childNodes;
+		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+		if (childNodes.length) {
+			styleElement.insertBefore(cssNode, childNodes[index]);
+		} else {
+			styleElement.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag(styleElement, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		styleElement.setAttribute("media", media)
+	}
+
+	if(styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = css;
+	} else {
+		while(styleElement.firstChild) {
+			styleElement.removeChild(styleElement.firstChild);
+		}
+		styleElement.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink(linkElement, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	if(sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = linkElement.href;
+
+	linkElement.href = URL.createObjectURL(blob);
+
+	if(oldSrc)
+		URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ },
+
+/***/ 446:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4881,11 +5265,11 @@ var FormErrorExamples = {
 
 /***/ },
 
-/***/ 444:
+/***/ 447:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(443);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(446);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TemplateDrivenErrors; });
 /**
  * @license
@@ -4916,7 +5300,7 @@ var TemplateDrivenErrors = (function () {
 
 /***/ },
 
-/***/ 445:
+/***/ 448:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5032,7 +5416,7 @@ var FormBuilder = (function () {
 
 /***/ },
 
-/***/ 459:
+/***/ 462:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5055,7 +5439,7 @@ exports.reduceTicks = reduceTicks;
 
 /***/ },
 
-/***/ 460:
+/***/ 463:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5116,7 +5500,7 @@ function getTotal(results) {
 
 /***/ },
 
-/***/ 461:
+/***/ 464:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5138,7 +5522,7 @@ exports.tickFormat = tickFormat;
 
 /***/ },
 
-/***/ 462:
+/***/ 465:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5153,7 +5537,22 @@ var AlignmentTypes = exports.AlignmentTypes;
 
 /***/ },
 
-/***/ 463:
+/***/ 466:
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+(function (ShowTypes) {
+    ShowTypes[ShowTypes["all"] = 'all'] = "all";
+    ShowTypes[ShowTypes["focus"] = 'focus'] = "focus";
+    ShowTypes[ShowTypes["mouseover"] = 'mouseover'] = "mouseover";
+})(exports.ShowTypes || (exports.ShowTypes = {}));
+var ShowTypes = exports.ShowTypes;
+
+
+/***/ },
+
+/***/ 467:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5167,7 +5566,7 @@ var StyleTypes = exports.StyleTypes;
 
 /***/ },
 
-/***/ 464:
+/***/ 468:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5197,7 +5596,7 @@ exports.TooltipOptions = TooltipOptions;
 
 /***/ },
 
-/***/ 465:
+/***/ 469:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5215,13 +5614,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = __webpack_require__(0);
-var throttle_1 = __webpack_require__(723);
-var position_helper_1 = __webpack_require__(696);
-var tooltip_options_1 = __webpack_require__(464);
+var throttle_1 = __webpack_require__(725);
+var position_helper_1 = __webpack_require__(698);
+var tooltip_options_1 = __webpack_require__(468);
 var placement_type_1 = __webpack_require__(226);
 var TooltipContentComponent = (function () {
-    function TooltipContentComponent(element, options) {
+    function TooltipContentComponent(element, renderer, options) {
         this.element = element;
+        this.renderer = renderer;
         Object.assign(this, options);
     }
     Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
@@ -5251,8 +5651,9 @@ var TooltipContentComponent = (function () {
         var elmDim = nativeElm.getBoundingClientRect();
         this.checkFlip(hostDim, elmDim);
         this.positionContent(nativeElm, hostDim, elmDim);
-        if (this.showCaret)
+        if (this.showCaret) {
             this.positionCaret(hostDim, elmDim);
+        }
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
         var top = 0;
@@ -5273,8 +5674,8 @@ var TooltipContentComponent = (function () {
             top = hostDim.top + hostDim.height + this.spacing;
             left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
         }
-        nativeElm.style['top'] = top + 'px';
-        nativeElm.style['left'] = left + 'px';
+        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
+        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
@@ -5297,8 +5698,8 @@ var TooltipContentComponent = (function () {
             top = -7;
             left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
         }
-        caretElm.style['top'] = top + 'px';
-        caretElm.style['left'] = left + 'px';
+        this.renderer.setElementStyle(caretElm, 'top', top + "px");
+        this.renderer.setElementStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
         var shouldFlip = position_helper_1.PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
@@ -5317,17 +5718,6 @@ var TooltipContentComponent = (function () {
             }
         }
     };
-    TooltipContentComponent.prototype.onMouseLeave = function (target) {
-        if (this.closeOnMouseLeave)
-            this.hide();
-    };
-    TooltipContentComponent.prototype.onDocumentClick = function (target) {
-        if (this.closeOnClickOutside) {
-            var contains = this.element.nativeElement.contains(target);
-            if (!contains)
-                this.hide();
-        }
-    };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
     };
@@ -5343,18 +5733,6 @@ var TooltipContentComponent = (function () {
         core_1.HostBinding('@visibilityChanged'), 
         __metadata('design:type', Object)
     ], TooltipContentComponent.prototype, "visibilityChanged", null);
-    __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], TooltipContentComponent.prototype, "onMouseLeave", null);
-    __decorate([
-        core_1.HostListener('document:click', ['$event.target']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], TooltipContentComponent.prototype, "onDocumentClick", null);
     __decorate([
         core_1.HostListener('window:resize'),
         throttle_1.throttleable(100), 
@@ -5384,8 +5762,8 @@ var TooltipContentComponent = (function () {
                 ])
             ]
         }),
-        __param(1, core_1.Inject(tooltip_options_1.TooltipOptions)), 
-        __metadata('design:paramtypes', [core_1.ElementRef, tooltip_options_1.TooltipOptions])
+        __param(2, core_1.Inject(tooltip_options_1.TooltipOptions)), 
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer, tooltip_options_1.TooltipOptions])
     ], TooltipContentComponent);
     return TooltipContentComponent;
 }());
@@ -5394,7 +5772,32 @@ exports.TooltipContentComponent = TooltipContentComponent;
 
 /***/ },
 
-/***/ 466:
+/***/ 47:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NG_VALUE_ACCESSOR; });
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
+ * Used to provide a {@link ControlValueAccessor} for form controls.
+ *
+ * See {@link DefaultValueAccessor} for how to implement one.
+ * @stable
+ */
+var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValueAccessor');
+//# sourceMappingURL=control_value_accessor.js.map
+
+/***/ },
+
+/***/ 470:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5420,12 +5823,7 @@ var InjectionService = (function () {
         if (!comps.length) {
             throw new Error("ApplicationRef instance not found");
         }
-        var appInstance = comps[0].instance;
-        if (!appInstance.viewContainerRef) {
-            var appName = this.applicationRef.componentTypes[0].name;
-            throw new Error("Missing 'viewContainerRef' declaration in " + appName + " constructor");
-        }
-        return appInstance.viewContainerRef;
+        return this.applicationRef['_rootComponents'][0]['_hostElement'].vcRef;
     };
     InjectionService.prototype.appendNextToLocation = function (componentClass, location, providers) {
         var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
@@ -5457,7 +5855,7 @@ exports.InjectionService = InjectionService;
 
 /***/ },
 
-/***/ 467:
+/***/ 471:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5475,31 +5873,6 @@ function sortLinear(data, property, direction) {
 }
 exports.sortLinear = sortLinear;
 
-
-/***/ },
-
-/***/ 47:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NG_VALUE_ACCESSOR; });
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * Used to provide a {@link ControlValueAccessor} for form controls.
- *
- * See {@link DefaultValueAccessor} for how to implement one.
- * @stable
- */
-var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValueAccessor');
-//# sourceMappingURL=control_value_accessor.js.map
 
 /***/ },
 
@@ -5885,7 +6258,7 @@ var SetWrapper = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__ = __webpack_require__(1117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__ = __webpack_require__(1120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_lang__ = __webpack_require__(31);
@@ -6039,321 +6412,11 @@ function _mergeErrors(arrayOfErrors) {
 
 /***/ },
 
-/***/ 497:
-/***/ function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-
-/***/ },
-
-/***/ 557:
-/***/ function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-var stylesInDom = {},
-	memoize = function(fn) {
-		var memo;
-		return function () {
-			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-			return memo;
-		};
-	},
-	isOldIE = memoize(function() {
-		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-	}),
-	getHeadElement = memoize(function () {
-		return document.head || document.getElementsByTagName("head")[0];
-	}),
-	singletonElement = null,
-	singletonCounter = 0,
-	styleElementsInsertedAtTop = [];
-
-module.exports = function(list, options) {
-	if(typeof DEBUG !== "undefined" && DEBUG) {
-		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the bottom of <head>.
-	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-	var styles = listToStyles(list);
-	addStylesToDom(styles, options);
-
-	return function update(newList) {
-		var mayRemove = [];
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-		if(newList) {
-			var newStyles = listToStyles(newList);
-			addStylesToDom(newStyles, options);
-		}
-		for(var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-			if(domStyle.refs === 0) {
-				for(var j = 0; j < domStyle.parts.length; j++)
-					domStyle.parts[j]();
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-}
-
-function addStylesToDom(styles, options) {
-	for(var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-		if(domStyle) {
-			domStyle.refs++;
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles(list) {
-	var styles = [];
-	var newStyles = {};
-	for(var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-		if(!newStyles[id])
-			styles.push(newStyles[id] = {id: id, parts: [part]});
-		else
-			newStyles[id].parts.push(part);
-	}
-	return styles;
-}
-
-function insertStyleElement(options, styleElement) {
-	var head = getHeadElement();
-	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-	if (options.insertAt === "top") {
-		if(!lastStyleElementInsertedAtTop) {
-			head.insertBefore(styleElement, head.firstChild);
-		} else if(lastStyleElementInsertedAtTop.nextSibling) {
-			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			head.appendChild(styleElement);
-		}
-		styleElementsInsertedAtTop.push(styleElement);
-	} else if (options.insertAt === "bottom") {
-		head.appendChild(styleElement);
-	} else {
-		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-	}
-}
-
-function removeStyleElement(styleElement) {
-	styleElement.parentNode.removeChild(styleElement);
-	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-	if(idx >= 0) {
-		styleElementsInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement(options) {
-	var styleElement = document.createElement("style");
-	styleElement.type = "text/css";
-	insertStyleElement(options, styleElement);
-	return styleElement;
-}
-
-function createLinkElement(options) {
-	var linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	insertStyleElement(options, linkElement);
-	return linkElement;
-}
-
-function addStyle(obj, options) {
-	var styleElement, update, remove;
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-		styleElement = singletonElement || (singletonElement = createStyleElement(options));
-		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-	} else if(obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function") {
-		styleElement = createLinkElement(options);
-		update = updateLink.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-			if(styleElement.href)
-				URL.revokeObjectURL(styleElement.href);
-		};
-	} else {
-		styleElement = createStyleElement(options);
-		update = applyToTag.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle(newObj) {
-		if(newObj) {
-			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-				return;
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag(styleElement, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = styleElement.childNodes;
-		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-		if (childNodes.length) {
-			styleElement.insertBefore(cssNode, childNodes[index]);
-		} else {
-			styleElement.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag(styleElement, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		styleElement.setAttribute("media", media)
-	}
-
-	if(styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = css;
-	} else {
-		while(styleElement.firstChild) {
-			styleElement.removeChild(styleElement.firstChild);
-		}
-		styleElement.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink(linkElement, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	if(sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = linkElement.href;
-
-	linkElement.href = URL.createObjectURL(blob);
-
-	if(oldSrc)
-		URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ },
-
-/***/ 559:
+/***/ 561:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_forms__ = __webpack_require__(640);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_forms__ = __webpack_require__(642);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractControlDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["a"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractFormGroupDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "CheckboxControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["c"]; });
@@ -6405,7 +6468,7 @@ function updateLink(linkElement, obj) {
 
 /***/ },
 
-/***/ 560:
+/***/ 562:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6420,10 +6483,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var data_1 = __webpack_require__(659);
-var chartTypes_1 = __webpack_require__(658);
-__webpack_require__(1126);
-__webpack_require__(1125);
+var data_1 = __webpack_require__(661);
+var chartTypes_1 = __webpack_require__(660);
+__webpack_require__(1130);
+__webpack_require__(1128);
 var App = (function () {
     function App(viewContainerRef) {
         this.viewContainerRef = viewContainerRef;
@@ -6526,7 +6589,7 @@ exports.App = App;
 
 /***/ },
 
-/***/ 561:
+/***/ 563:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6541,14 +6604,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(70);
-var area_chart_module_1 = __webpack_require__(663);
-var bar_chart_module_1 = __webpack_require__(665);
-var heat_map_module_1 = __webpack_require__(702);
-var line_chart_module_1 = __webpack_require__(704);
-var number_card_module_1 = __webpack_require__(710);
-var pie_chart_module_1 = __webpack_require__(714);
-var tree_map_module_1 = __webpack_require__(722);
+var common_module_1 = __webpack_require__(71);
+var area_chart_module_1 = __webpack_require__(665);
+var bar_chart_module_1 = __webpack_require__(667);
+var heat_map_module_1 = __webpack_require__(704);
+var line_chart_module_1 = __webpack_require__(706);
+var number_card_module_1 = __webpack_require__(712);
+var pie_chart_module_1 = __webpack_require__(716);
+var tree_map_module_1 = __webpack_require__(724);
 var NG2D3Module = (function () {
     function NG2D3Module() {
     }
@@ -6627,7 +6690,31 @@ var ControlContainer = (function (_super) {
 
 /***/ },
 
-/***/ 637:
+/***/ 61:
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+var cache = {};
+function ObjectId() {
+    var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
+    var id = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
+        return (Math.random() * 16 | 0).toString(16);
+    }).toLowerCase();
+    if (!cache[id]) {
+        cache[id] = true;
+        return id;
+    }
+    return ObjectId();
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = ObjectId;
+;
+
+
+/***/ },
+
+/***/ 639:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6763,7 +6850,7 @@ var InternalFormsSharedModule = (function () {
 
 /***/ },
 
-/***/ 638:
+/***/ 640:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6796,14 +6883,14 @@ function normalizeAsyncValidator(validator) {
 
 /***/ },
 
-/***/ 639:
+/***/ 641:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(637);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(639);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_radio_control_value_accessor__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(445);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(448);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormsModule; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return ReactiveFormsModule; });
 /**
@@ -6857,7 +6944,7 @@ var ReactiveFormsModule = (function () {
 
 /***/ },
 
-/***/ 640:
+/***/ 642:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6879,10 +6966,10 @@ var ReactiveFormsModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__directives_select_control_value_accessor__ = __webpack_require__(147);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_select_multiple_control_value_accessor__ = __webpack_require__(148);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__directives_validators__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__form_builder__ = __webpack_require__(445);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__form_builder__ = __webpack_require__(448);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__model__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__form_providers__ = __webpack_require__(639);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__form_providers__ = __webpack_require__(641);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__["a"]; });
@@ -6964,7 +7051,7 @@ var ReactiveFormsModule = (function () {
 
 /***/ },
 
-/***/ 658:
+/***/ 660:
 /***/ function(module, exports) {
 
 "use strict";
@@ -7105,7 +7192,7 @@ exports.default = chartGroups;
 
 /***/ },
 
-/***/ 659:
+/***/ 661:
 /***/ function(module, exports) {
 
 "use strict";
@@ -7197,7 +7284,7 @@ exports.generateData = generateData;
 
 /***/ },
 
-/***/ 660:
+/***/ 662:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7222,7 +7309,7 @@ var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
 var d3_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var AreaChartNormalized = (function (_super) {
     __extends(AreaChartNormalized, _super);
     function AreaChartNormalized() {
@@ -7402,6 +7489,12 @@ var AreaChartNormalized = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
+    AreaChartNormalized.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    AreaChartNormalized.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
+    };
     AreaChartNormalized.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -7468,10 +7561,16 @@ var AreaChartNormalized = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], AreaChartNormalized.prototype, "clickHandler", void 0);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], AreaChartNormalized.prototype, "hideCircles", null);
     AreaChartNormalized = __decorate([
         core_1.Component({
             selector: 'area-chart-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              chartType=\"area\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChartNormalized);
@@ -7482,7 +7581,7 @@ exports.AreaChartNormalized = AreaChartNormalized;
 
 /***/ },
 
-/***/ 661:
+/***/ 663:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7506,7 +7605,7 @@ var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
 var moment = __webpack_require__(2);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var d3_1 = __webpack_require__(7);
 var AreaChartStacked = (function (_super) {
     __extends(AreaChartStacked, _super);
@@ -7692,6 +7791,12 @@ var AreaChartStacked = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
+    AreaChartStacked.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    AreaChartStacked.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
+    };
     AreaChartStacked.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -7758,10 +7863,16 @@ var AreaChartStacked = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], AreaChartStacked.prototype, "clickHandler", void 0);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], AreaChartStacked.prototype, "hideCircles", null);
     AreaChartStacked = __decorate([
         core_1.Component({
             selector: 'area-chart-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], AreaChartStacked);
@@ -7772,7 +7883,7 @@ exports.AreaChartStacked = AreaChartStacked;
 
 /***/ },
 
-/***/ 662:
+/***/ 664:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7796,7 +7907,7 @@ var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
 var moment = __webpack_require__(2);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var d3_1 = __webpack_require__(7);
 var AreaChart = (function (_super) {
     __extends(AreaChart, _super);
@@ -7932,6 +8043,12 @@ var AreaChart = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
+    AreaChart.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    AreaChart.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
+    };
     AreaChart.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -8006,10 +8123,16 @@ var AreaChart = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], AreaChart.prototype, "clickHandler", void 0);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], AreaChart.prototype, "hideCircles", null);
     AreaChart = __decorate([
         core_1.Component({
             selector: 'area-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChart);
@@ -8020,7 +8143,7 @@ exports.AreaChart = AreaChart;
 
 /***/ },
 
-/***/ 663:
+/***/ 665:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8035,11 +8158,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var area_chart_component_1 = __webpack_require__(662);
-var area_chart_normalized_component_1 = __webpack_require__(660);
-var area_chart_stacked_component_1 = __webpack_require__(661);
-var area_series_component_1 = __webpack_require__(664);
-var common_module_1 = __webpack_require__(70);
+var area_chart_component_1 = __webpack_require__(664);
+var area_chart_normalized_component_1 = __webpack_require__(662);
+var area_chart_stacked_component_1 = __webpack_require__(663);
+var area_series_component_1 = __webpack_require__(666);
+var common_module_1 = __webpack_require__(71);
 var AreaChartModule = (function () {
     function AreaChartModule() {
     }
@@ -8068,7 +8191,7 @@ exports.AreaChartModule = AreaChartModule;
 
 /***/ },
 
-/***/ 664:
+/***/ 666:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8084,7 +8207,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var sort_1 = __webpack_require__(467);
+var sort_1 = __webpack_require__(471);
 var AreaSeries = (function () {
     function AreaSeries() {
         this.stacked = false;
@@ -8180,7 +8303,7 @@ exports.AreaSeries = AreaSeries;
 
 /***/ },
 
-/***/ 665:
+/***/ 667:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8195,18 +8318,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(70);
-var bar_component_1 = __webpack_require__(674);
-var bar_horizontal_component_1 = __webpack_require__(669);
-var bar_horizontal_2d_component_1 = __webpack_require__(666);
-var bar_horizontal_normalized_component_1 = __webpack_require__(667);
-var bar_horizontal_stacked_component_1 = __webpack_require__(668);
-var bar_vertical_component_1 = __webpack_require__(673);
-var bar_vertical_2d_component_1 = __webpack_require__(670);
-var bar_vertical_normalized_component_1 = __webpack_require__(671);
-var bar_vertical_stacked_component_1 = __webpack_require__(672);
-var series_horizontal_component_1 = __webpack_require__(675);
-var series_vertical_component_1 = __webpack_require__(676);
+var common_module_1 = __webpack_require__(71);
+var bar_component_1 = __webpack_require__(676);
+var bar_horizontal_component_1 = __webpack_require__(671);
+var bar_horizontal_2d_component_1 = __webpack_require__(668);
+var bar_horizontal_normalized_component_1 = __webpack_require__(669);
+var bar_horizontal_stacked_component_1 = __webpack_require__(670);
+var bar_vertical_component_1 = __webpack_require__(675);
+var bar_vertical_2d_component_1 = __webpack_require__(672);
+var bar_vertical_normalized_component_1 = __webpack_require__(673);
+var bar_vertical_stacked_component_1 = __webpack_require__(674);
+var series_horizontal_component_1 = __webpack_require__(677);
+var series_vertical_component_1 = __webpack_require__(678);
 var BarChartModule = (function () {
     function BarChartModule() {
     }
@@ -8249,7 +8372,7 @@ exports.BarChartModule = BarChartModule;
 
 /***/ },
 
-/***/ 666:
+/***/ 668:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8443,7 +8566,7 @@ exports.BarHorizontal2D = BarHorizontal2D;
 
 /***/ },
 
-/***/ 667:
+/***/ 669:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8617,7 +8740,7 @@ exports.BarHorizontalNormalized = BarHorizontalNormalized;
 
 /***/ },
 
-/***/ 668:
+/***/ 670:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8803,7 +8926,7 @@ exports.BarHorizontalStacked = BarHorizontalStacked;
 
 /***/ },
 
-/***/ 669:
+/***/ 671:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8826,7 +8949,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var tick_format_helper_1 = __webpack_require__(461);
+var tick_format_helper_1 = __webpack_require__(464);
 var d3_1 = __webpack_require__(7);
 var BarHorizontal = (function (_super) {
     __extends(BarHorizontal, _super);
@@ -8949,7 +9072,7 @@ exports.BarHorizontal = BarHorizontal;
 
 /***/ },
 
-/***/ 670:
+/***/ 672:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9148,7 +9271,7 @@ exports.BarVertical2D = BarVertical2D;
 
 /***/ },
 
-/***/ 671:
+/***/ 673:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9322,7 +9445,7 @@ exports.BarVerticalNormalized = BarVerticalNormalized;
 
 /***/ },
 
-/***/ 672:
+/***/ 674:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9508,7 +9631,7 @@ exports.BarVerticalStacked = BarVerticalStacked;
 
 /***/ },
 
-/***/ 673:
+/***/ 675:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9531,7 +9654,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var tick_format_helper_1 = __webpack_require__(461);
+var tick_format_helper_1 = __webpack_require__(464);
 var d3_1 = __webpack_require__(7);
 var BarVertical = (function (_super) {
     __extends(BarVertical, _super);
@@ -9654,7 +9777,7 @@ exports.BarVertical = BarVertical;
 
 /***/ },
 
-/***/ 674:
+/***/ 676:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9669,7 +9792,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var d3_1 = __webpack_require__(7);
 var Bar = (function () {
     function Bar(element) {
@@ -9859,7 +9982,7 @@ exports.Bar = Bar;
 
 /***/ },
 
-/***/ 675:
+/***/ 677:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9997,7 +10120,7 @@ exports.SeriesHorizontal = SeriesHorizontal;
 
 /***/ },
 
-/***/ 676:
+/***/ 678:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10156,7 +10279,7 @@ exports.SeriesVertical = SeriesVertical;
 
 /***/ },
 
-/***/ 677:
+/***/ 679:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10175,6 +10298,7 @@ var AreaTooltip = (function () {
     function AreaTooltip(renderer) {
         this.renderer = renderer;
         this.anchorOpacity = new Array();
+        this.hover = new core_1.EventEmitter();
     }
     AreaTooltip.prototype.ngOnChanges = function () {
         this.update();
@@ -10193,19 +10317,20 @@ var AreaTooltip = (function () {
             var val = uniqueSet[i];
             var ob = {};
             ob.tooltipAnchor = this.xScale(val);
-            if (i == 0) {
+            if (i === 0) {
                 ob.x0 = this.xScale(val);
             }
             else {
                 ob.x0 = (this.xScale(uniqueSet[i - 1]) + this.xScale(uniqueSet[i])) / 2;
             }
-            if (i == uniqueSet.length - 1) {
+            if (i === uniqueSet.length - 1) {
                 ob.x1 = this.xScale(uniqueSet[i]);
             }
             else {
                 ob.x1 = (this.xScale(uniqueSet[i]) + this.xScale(uniqueSet[i + 1])) / 2;
             }
             ob.width = ob.x1 - ob.x0;
+            ob.value = val;
             ob.values = this.getValues(val);
             results.push(ob);
             this.anchorOpacity[i] = 0;
@@ -10248,6 +10373,7 @@ var AreaTooltip = (function () {
         var event = new MouseEvent('mouseenter', { bubbles: false });
         this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
         this.anchorOpacity[index] = 0.7;
+        this.hover.emit(this.tooltipAreas[index]);
     };
     AreaTooltip.prototype.hideTooltip = function (index) {
         var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
@@ -10280,6 +10406,10 @@ var AreaTooltip = (function () {
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "colors", void 0);
     __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], AreaTooltip.prototype, "hover", void 0);
+    __decorate([
         core_1.ViewChildren('tooltips'), 
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "tooltips", void 0);
@@ -10297,7 +10427,7 @@ exports.AreaTooltip = AreaTooltip;
 
 /***/ },
 
-/***/ 678:
+/***/ 680:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10312,7 +10442,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var d3_1 = __webpack_require__(7);
 var Area = (function () {
     function Area(element) {
@@ -10402,7 +10532,7 @@ exports.Area = Area;
 
 /***/ },
 
-/***/ 679:
+/***/ 681:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10417,11 +10547,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var axis_label_component_1 = __webpack_require__(680);
-var x_axis_component_1 = __webpack_require__(682);
-var x_axis_ticks_component_1 = __webpack_require__(681);
-var y_axis_component_1 = __webpack_require__(684);
-var y_axis_ticks_component_1 = __webpack_require__(683);
+var axis_label_component_1 = __webpack_require__(682);
+var x_axis_component_1 = __webpack_require__(684);
+var x_axis_ticks_component_1 = __webpack_require__(683);
+var y_axis_component_1 = __webpack_require__(686);
+var y_axis_ticks_component_1 = __webpack_require__(685);
 var platform_browser_1 = __webpack_require__(77);
 var AxesModule = (function () {
     function AxesModule() {
@@ -10441,7 +10571,873 @@ exports.AxesModule = AxesModule;
 
 /***/ },
 
-/***/ 68:
+/***/ 682:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var AxisLabel = (function () {
+    function AxisLabel(element) {
+        this.element = element.nativeElement;
+    }
+    AxisLabel.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    AxisLabel.prototype.update = function () {
+        this.strokeWidth = '0.01';
+        this.textAnchor = 'middle';
+        this.transform = '';
+        switch (this.orient) {
+            case 'top':
+                this.y = this.offset;
+                this.x = this.width / 2;
+                break;
+            case 'bottom':
+                this.y = this.offset;
+                this.x = this.width / 2;
+                break;
+            case 'left':
+                this.y = -this.offset;
+                this.x = -this.height / 2;
+                this.transform = "rotate(270)";
+                break;
+            case 'right':
+                this.y = this.offset;
+                this.x = -this.height / 2;
+                this.transform = "rotate(270)";
+                break;
+        }
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], AxisLabel.prototype, "orient", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], AxisLabel.prototype, "label", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], AxisLabel.prototype, "offset", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], AxisLabel.prototype, "width", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], AxisLabel.prototype, "height", void 0);
+    AxisLabel = __decorate([
+        core_1.Component({
+            selector: 'g[axisLabel]',
+            template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  "
+        }), 
+        __metadata('design:paramtypes', [core_1.ElementRef])
+    ], AxisLabel);
+    return AxisLabel;
+}());
+exports.AxisLabel = AxisLabel;
+
+
+/***/ },
+
+/***/ 683:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var trim_label_helper_1 = __webpack_require__(79);
+var ticks_helper_1 = __webpack_require__(462);
+var XAxisTicks = (function () {
+    function XAxisTicks() {
+        this.tickArguments = [5];
+        this.tickStroke = '#ccc';
+        this.showGridLines = false;
+        this.maxAllowedLength = 16;
+        Object.assign(this, {
+            innerTickSize: 6,
+            outerTickSize: 6,
+            tickPadding: 3,
+            rotateLabels: false,
+            verticalSpacing: 20,
+            textAnchor: 'middle',
+            maxTicksLength: 0,
+            trimLabel: trim_label_helper_1.trimLabel
+        });
+    }
+    XAxisTicks.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    XAxisTicks.prototype.update = function () {
+        var scale = this.scale;
+        this.ticks = this.getTicks();
+        if (this.tickFormatting) {
+            this.tickFormat = this.tickFormatting;
+        }
+        else if (scale.tickFormat) {
+            this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
+        }
+        else {
+            this.tickFormat = function (d) {
+                return d;
+            };
+        }
+        var angle = this.getRotationAngle(this.ticks);
+        this.adjustedScale = this.scale.bandwidth ? function (d) {
+            return this.scale(d) + this.scale.bandwidth() * 0.5;
+        } : this.scale;
+        this.textTransform = '';
+        if (angle !== 0) {
+            this.textTransform = "rotate(" + angle + ")";
+            this.textAnchor = 'end';
+            this.verticalSpacing = 10;
+        }
+    };
+    XAxisTicks.prototype.getRotationAngle = function (ticks) {
+        var angle = 0;
+        for (var i = 0; i < ticks.length; i++) {
+            var tick = ticks[i].toString();
+            if (tick.length > this.maxTicksLength) {
+                this.maxTicksLength = tick.length;
+            }
+        }
+        var len = Math.min(this.maxTicksLength, this.maxAllowedLength);
+        var charWidth = 8;
+        var wordWidth = len * charWidth;
+        var baseWidth = wordWidth;
+        var maxBaseWidth = Math.floor(this.width / ticks.length);
+        while (baseWidth > maxBaseWidth && angle > -90) {
+            angle -= 30;
+            baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
+        }
+        return angle;
+    };
+    XAxisTicks.prototype.getTicks = function () {
+        var ticks;
+        var maxTicks = this.getMaxTicks();
+        if (this.tickValues) {
+            ticks = this.tickValues;
+        }
+        else if (this.scale.ticks) {
+            ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
+            if (ticks.length > maxTicks) {
+                if (this.tickArguments) {
+                    this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
+                }
+                else {
+                    this.tickArguments = [maxTicks];
+                }
+                ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
+            }
+        }
+        else {
+            ticks = this.scale.domain();
+            ticks = ticks_helper_1.reduceTicks(ticks, maxTicks);
+        }
+        return ticks;
+    };
+    XAxisTicks.prototype.getMaxTicks = function () {
+        var tickWidth = 20;
+        return Math.floor(this.width / tickWidth);
+    };
+    XAxisTicks.prototype.tickTransform = function (tick) {
+        return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
+    };
+    XAxisTicks.prototype.gridLineTransform = function () {
+        return "translate(0," + (-this.verticalSpacing - 5) + ")";
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "scale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "orient", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "tickArguments", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "tickStroke", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "tickFormatting", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "showGridLines", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "gridLineHeight", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisTicks.prototype, "width", void 0);
+    XAxisTicks = __decorate([
+        core_1.Component({
+            selector: 'g[xAxisTicks]',
+            template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.text-anchor]=\"textAnchor\"\n        [attr.transform]=\"textTransform\"\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-vertical gridline-path-shadow\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          x1=\"1\"\n          x2=\"1\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], XAxisTicks);
+    return XAxisTicks;
+}());
+exports.XAxisTicks = XAxisTicks;
+
+
+/***/ },
+
+/***/ 684:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var XAxis = (function () {
+    function XAxis() {
+        this.showGridLines = false;
+        Object.assign(this, {
+            xAxisClassName: 'x axis',
+            xOrient: 'bottom',
+            fill: 'none',
+            stroke: 'none',
+            tickStroke: '#ccc',
+            strokeWidth: 'none',
+            xAxisOffset: 5,
+        });
+    }
+    XAxis.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    XAxis.prototype.update = function () {
+        this.transform = "translate(0," + (this.xAxisOffset + this.dims.height) + ")";
+        if (typeof this.xAxisTickCount !== 'undefined') {
+            this.tickArguments = [this.xAxisTickCount];
+        }
+        if (typeof this.xAxisTickInterval !== 'undefined') {
+        }
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxis.prototype, "xScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxis.prototype, "dims", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxis.prototype, "tickFormatting", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxis.prototype, "showGridLines", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxis.prototype, "showLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxis.prototype, "labelText", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxis.prototype, "xAxisTickInterval", void 0);
+    XAxis = __decorate([
+        core_1.Component({
+            selector: 'g[xAxis]',
+            template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g xAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"80\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], XAxis);
+    return XAxis;
+}());
+exports.XAxis = XAxis;
+
+
+/***/ },
+
+/***/ 685:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var trim_label_helper_1 = __webpack_require__(79);
+var ticks_helper_1 = __webpack_require__(462);
+var YAxisTicks = (function () {
+    function YAxisTicks() {
+        this.tickArguments = [5];
+        this.tickStroke = '#ccc';
+        this.showGridLines = false;
+        Object.assign(this, {
+            innerTickSize: 6,
+            outerTickSize: 6,
+            tickPadding: 3,
+            rotateLabels: false,
+            verticalSpacing: 20,
+            textAnchor: 'middle',
+            trimLabel: trim_label_helper_1.trimLabel
+        });
+    }
+    YAxisTicks.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    YAxisTicks.prototype.update = function () {
+        var scale;
+        var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
+        this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
+        scale = this.scale;
+        this.ticks = this.getTicks();
+        if (this.tickFormatting) {
+            this.tickFormat = this.tickFormatting;
+        }
+        else if (scale.tickFormat) {
+            this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
+        }
+        else {
+            this.tickFormat = function (d) {
+                return d;
+            };
+        }
+        this.adjustedScale = scale.bandwidth ? function (d) {
+            return scale(d) + scale.bandwidth() * 0.5;
+        } : scale;
+        switch (this.orient) {
+            case "top":
+                this.transform = function (tick) {
+                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                };
+                this.textAnchor = "middle";
+                this.y2 = this.innerTickSize * sign;
+                this.y1 = this.tickSpacing * sign;
+                this.dy = sign < 0 ? "0em" : ".71em";
+                break;
+            case "bottom":
+                this.transform = function (tick) {
+                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                };
+                this.textAnchor = "middle";
+                this.y2 = this.innerTickSize * sign;
+                this.y1 = this.tickSpacing * sign;
+                this.dy = sign < 0 ? "0em" : ".71em";
+                break;
+            case "left":
+                this.transform = function (tick) {
+                    return "translate(0," + this.adjustedScale(tick) + ")";
+                };
+                this.textAnchor = "end";
+                this.x2 = this.innerTickSize * -sign;
+                this.x1 = this.tickSpacing * -sign;
+                this.dy = ".32em";
+                break;
+            case "right":
+                this.transform = function (tick) {
+                    return "translate(0," + this.adjustedScale(tick) + ")";
+                };
+                this.textAnchor = "start";
+                this.x2 = this.innerTickSize * -sign;
+                this.x1 = this.tickSpacing * -sign;
+                this.dy = ".32em";
+                break;
+        }
+    };
+    YAxisTicks.prototype.getTicks = function () {
+        var ticks;
+        var maxTicks = this.getMaxTicks();
+        if (this.tickValues) {
+            ticks = this.tickValues;
+        }
+        else if (this.scale.ticks) {
+            ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
+            if (ticks.length > maxTicks) {
+                if (this.tickArguments) {
+                    this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
+                }
+                else {
+                    this.tickArguments = [maxTicks];
+                }
+                ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
+            }
+        }
+        else {
+            ticks = this.scale.domain();
+            ticks = ticks_helper_1.reduceTicks(ticks, maxTicks);
+        }
+        return ticks;
+    };
+    YAxisTicks.prototype.getMaxTicks = function () {
+        var tickHeight = 20;
+        return Math.floor(this.height / tickHeight);
+    };
+    YAxisTicks.prototype.tickTransform = function (tick) {
+        return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
+    };
+    YAxisTicks.prototype.gridLineTransform = function () {
+        return "translate(0," + this.verticalSpacing + ")";
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "scale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "orient", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "tickArguments", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "tickValues", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "tickStroke", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "tickFormatting", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "showGridLines", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisTicks.prototype, "height", void 0);
+    YAxisTicks = __decorate([
+        core_1.Component({
+            selector: 'g[yAxisTicks]',
+            template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"transform(tick)\" >\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.dy]=\"dy\"\n        [attr.x]=\"x1\"\n        [attr.y]=\"y1\"\n        [attr.text-anchor]=\"textAnchor\"\n\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal gridline-path-shadow\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\"\n          y1=\"1\"\n          y2=\"1\" />\n      </svg:g>\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], YAxisTicks);
+    return YAxisTicks;
+}());
+exports.YAxisTicks = YAxisTicks;
+
+
+/***/ },
+
+/***/ 686:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var YAxis = (function () {
+    function YAxis() {
+        this.showGridLines = false;
+        Object.assign(this, {
+            yAxisClassName: 'y axis',
+            yOrient: 'left',
+            fill: 'none',
+            stroke: '#ccc',
+            tickStroke: '#ccc',
+            strokeWidth: '1',
+            yAxisOffset: -5,
+        });
+    }
+    YAxis.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    YAxis.prototype.update = function () {
+        this.offset = this.yAxisOffset;
+        if (this.yOrient === 'right') {
+            this.transform = "translate(" + (this.offset + this.dims.width) + " , 0)";
+        }
+        else {
+            this.transform = "translate(" + this.offset + " , 0)";
+        }
+        if (this.yAxisTickCount !== undefined) {
+            this.tickArguments = [this.yAxisTickCount];
+        }
+        if (typeof this.yAxisTickInterval !== 'undefined') {
+        }
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxis.prototype, "yScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxis.prototype, "dims", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxis.prototype, "tickFormatting", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxis.prototype, "showGridLines", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxis.prototype, "showLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxis.prototype, "labelText", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxis.prototype, "yAxisTickInterval", void 0);
+    YAxis = __decorate([
+        core_1.Component({
+            selector: 'g[yAxis]',
+            template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g yAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [height]=\"dims.height\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"80\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], YAxis);
+    return YAxis;
+}());
+exports.YAxis = YAxis;
+
+
+/***/ },
+
+/***/ 687:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var Chart = (function () {
+    function Chart() {
+        this.legend = false;
+        this.legendTitle = 'Legend';
+    }
+    Chart.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    Chart.prototype.update = function () {
+        this.legendWidth = 0;
+        if (this.legend) {
+            this.legendType = this.getLegendType();
+            if (this.legendType === 'scaleLegend') {
+                this.legendWidth = 1;
+            }
+            else {
+                this.legendWidth = 3;
+            }
+        }
+        this.chartWidth = 12 - this.legendWidth;
+    };
+    Chart.prototype.getLegendType = function () {
+        if (typeof this.legendData === 'function') {
+            return 'scaleLegend';
+        }
+        else {
+            return 'legend';
+        }
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Chart.prototype, "view", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Chart.prototype, "legend", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Chart.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Chart.prototype, "legendData", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Chart.prototype, "legendTitle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Chart.prototype, "colors", void 0);
+    Chart = __decorate([
+        core_1.Component({
+            selector: 'chart',
+            template: "\n    <svg\n      class=\"ng2d3\"\n      [attr.width]=\"view[0] * chartWidth / 12.0\"\n      [attr.height]=\"view[1]\">\n\n      <ng-content></ng-content>\n    </svg>\n\n    <scale-legend\n      *ngIf=\"legend && legendType === 'scaleLegend'\"\n      class=\"legend\"\n      [valueRange]=\"data\"\n      [colors]=\"legendData\"\n      [height]=\"view[1]\">\n    </scale-legend>\n\n    <legend\n      *ngIf=\"legend && legendType === 'legend'\"\n      class=\"legend\"\n      [data]=\"legendData\"\n      [title]=\"legendTitle\"\n      [colors]=\"colors\"\n      [height]=\"view[1]\">\n    </legend>\n"
+        }), 
+        __metadata('design:paramtypes', [])
+    ], Chart);
+    return Chart;
+}());
+exports.Chart = Chart;
+
+
+/***/ },
+
+/***/ 688:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var moment = __webpack_require__(2);
+var CircleSeries = (function () {
+    function CircleSeries() {
+        this.barVisible = false;
+        this.type = 'standard';
+        this.clickHandler = new core_1.EventEmitter();
+    }
+    CircleSeries.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    CircleSeries.prototype.update = function () {
+        this.circles = this.getCircles();
+    };
+    CircleSeries.prototype.getCircles = function () {
+        var _this = this;
+        return this.data.series.map(function (d, i) {
+            var value = d.value;
+            var label = d.name;
+            if (value) {
+                var cx = void 0;
+                if (_this.scaleType === 'time') {
+                    cx = _this.xScale(moment(label).toDate());
+                }
+                else if (_this.scaleType === 'linear') {
+                    cx = _this.xScale(Number(label));
+                }
+                else {
+                    cx = _this.xScale(label);
+                }
+                var cy = _this.yScale(_this.type === 'standard' ? value : d.d1);
+                var radius = 5;
+                var height = _this.yScale.range()[0] - cy;
+                var opacity = 0;
+                if (label && _this.visibleValue && label.toString() === _this.visibleValue.toString()) {
+                    opacity = 1;
+                }
+                return {
+                    classNames: [("circle-data-" + i)],
+                    value: value,
+                    label: label,
+                    cx: cx,
+                    cy: cy,
+                    radius: radius,
+                    height: height,
+                    tooltipText: label + ", " + value,
+                    opacity: opacity
+                };
+            }
+        }).filter(function (circle) { return circle !== undefined; });
+    };
+    CircleSeries.prototype.click = function (value, label) {
+        this.clickHandler.emit({
+            name: label,
+            value: value
+        });
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "type", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "xScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "yScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "color", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "strokeColor", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "scaleType", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "visibleValue", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CircleSeries.prototype, "clickHandler", void 0);
+    CircleSeries = __decorate([
+        core_1.Component({
+            selector: 'g[circleSeries]',
+            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"click($event, circle.label)\"\n        [style.opacity]=\"circle.opacity\"\n        [style.cursor]=\"'pointer'\"\n        \n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"circle.tooltipText\"\n      />\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CircleSeries);
+    return CircleSeries;
+}());
+exports.CircleSeries = CircleSeries;
+
+
+/***/ },
+
+/***/ 689:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var Circle = (function () {
+    function Circle() {
+        this.clickHandler = new core_1.EventEmitter();
+    }
+    Circle.prototype.ngOnChanges = function () {
+        this.classNames = this.classNames.join(' ') + 'circle';
+    };
+    Circle.prototype.click = function () {
+        this.clickHandler.emit(this.data);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "cx", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "cy", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "r", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "fill", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "stroke", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "classNames", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "circleOpacity", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "pointerEvents", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], Circle.prototype, "clickHandler", void 0);
+    Circle = __decorate([
+        core_1.Component({
+            selector: 'g[circle]',
+            template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n      (click)=\"click()\"\n    />\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], Circle);
+    return Circle;
+}());
+exports.Circle = Circle;
+
+
+/***/ },
+
+/***/ 69:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10450,7 +11446,7 @@ exports.AxesModule = AxesModule;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__checkbox_value_accessor__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__default_value_accessor__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__normalize_validator__ = __webpack_require__(638);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__normalize_validator__ = __webpack_require__(640);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__number_value_accessor__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__radio_control_value_accessor__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__select_control_value_accessor__ = __webpack_require__(147);
@@ -10609,864 +11605,7 @@ function selectValueAccessor(dir, valueAccessors) {
 
 /***/ },
 
-/***/ 680:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var AxisLabel = (function () {
-    function AxisLabel(element) {
-        this.element = element.nativeElement;
-    }
-    AxisLabel.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    AxisLabel.prototype.update = function () {
-        this.strokeWidth = '0.01';
-        this.textAnchor = 'middle';
-        this.transform = '';
-        switch (this.orient) {
-            case 'top':
-                this.y = this.offset;
-                this.x = this.width / 2;
-                break;
-            case 'bottom':
-                this.y = this.offset;
-                this.x = this.width / 2;
-                break;
-            case 'left':
-                this.y = -this.offset;
-                this.x = -this.height / 2;
-                this.transform = "rotate(270)";
-                break;
-            case 'right':
-                this.y = this.offset;
-                this.x = -this.height / 2;
-                this.transform = "rotate(270)";
-                break;
-        }
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AxisLabel.prototype, "orient", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AxisLabel.prototype, "label", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AxisLabel.prototype, "offset", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AxisLabel.prototype, "width", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AxisLabel.prototype, "height", void 0);
-    AxisLabel = __decorate([
-        core_1.Component({
-            selector: 'g[axisLabel]',
-            template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], AxisLabel);
-    return AxisLabel;
-}());
-exports.AxisLabel = AxisLabel;
-
-
-/***/ },
-
-/***/ 681:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(79);
-var ticks_helper_1 = __webpack_require__(459);
-var XAxisTicks = (function () {
-    function XAxisTicks() {
-        this.tickArguments = [5];
-        this.tickStroke = '#ccc';
-        this.showGridLines = false;
-        this.maxAllowedLength = 16;
-        Object.assign(this, {
-            innerTickSize: 6,
-            outerTickSize: 6,
-            tickPadding: 3,
-            rotateLabels: false,
-            verticalSpacing: 20,
-            textAnchor: 'middle',
-            maxTicksLength: 0,
-            trimLabel: trim_label_helper_1.trimLabel
-        });
-    }
-    XAxisTicks.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    XAxisTicks.prototype.update = function () {
-        var scale = this.scale;
-        this.ticks = this.getTicks();
-        if (this.tickFormatting) {
-            this.tickFormat = this.tickFormatting;
-        }
-        else if (scale.tickFormat) {
-            this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
-        }
-        else {
-            this.tickFormat = function (d) {
-                return d;
-            };
-        }
-        var angle = this.getRotationAngle(this.ticks);
-        this.adjustedScale = this.scale.bandwidth ? function (d) {
-            return this.scale(d) + this.scale.bandwidth() * 0.5;
-        } : this.scale;
-        this.textTransform = '';
-        if (angle !== 0) {
-            this.textTransform = "rotate(" + angle + ")";
-            this.textAnchor = 'end';
-            this.verticalSpacing = 10;
-        }
-    };
-    XAxisTicks.prototype.getRotationAngle = function (ticks) {
-        var angle = 0;
-        for (var i = 0; i < ticks.length; i++) {
-            var tick = ticks[i].toString();
-            if (tick.length > this.maxTicksLength) {
-                this.maxTicksLength = tick.length;
-            }
-        }
-        var len = Math.min(this.maxTicksLength, this.maxAllowedLength);
-        var charWidth = 8;
-        var wordWidth = len * charWidth;
-        var baseWidth = wordWidth;
-        var maxBaseWidth = Math.floor(this.width / ticks.length);
-        while (baseWidth > maxBaseWidth && angle > -90) {
-            angle -= 30;
-            baseWidth = Math.cos(angle * (Math.PI / 180)) * wordWidth;
-        }
-        return angle;
-    };
-    XAxisTicks.prototype.getTicks = function () {
-        var ticks;
-        var maxTicks = this.getMaxTicks();
-        if (this.tickValues) {
-            ticks = this.tickValues;
-        }
-        else if (this.scale.ticks) {
-            ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            if (ticks.length > maxTicks) {
-                if (this.tickArguments) {
-                    this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-                }
-                else {
-                    this.tickArguments = [maxTicks];
-                }
-                ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            }
-        }
-        else {
-            ticks = this.scale.domain();
-            ticks = ticks_helper_1.reduceTicks(ticks, maxTicks);
-        }
-        return ticks;
-    };
-    XAxisTicks.prototype.getMaxTicks = function () {
-        var tickWidth = 20;
-        return Math.floor(this.width / tickWidth);
-    };
-    XAxisTicks.prototype.tickTransform = function (tick) {
-        return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
-    };
-    XAxisTicks.prototype.gridLineTransform = function () {
-        return "translate(0," + (-this.verticalSpacing - 5) + ")";
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "scale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "orient", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "tickArguments", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "tickStroke", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "tickFormatting", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "showGridLines", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "gridLineHeight", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "width", void 0);
-    XAxisTicks = __decorate([
-        core_1.Component({
-            selector: 'g[xAxisTicks]',
-            template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.text-anchor]=\"textAnchor\"\n        [attr.transform]=\"textTransform\"\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-vertical gridline-path-shadow\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          x1=\"1\"\n          x2=\"1\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], XAxisTicks);
-    return XAxisTicks;
-}());
-exports.XAxisTicks = XAxisTicks;
-
-
-/***/ },
-
-/***/ 682:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var XAxis = (function () {
-    function XAxis() {
-        this.showGridLines = false;
-        Object.assign(this, {
-            xAxisClassName: 'x axis',
-            xOrient: 'bottom',
-            fill: 'none',
-            stroke: 'none',
-            tickStroke: '#ccc',
-            strokeWidth: 'none',
-            xAxisOffset: 5,
-        });
-    }
-    XAxis.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    XAxis.prototype.update = function () {
-        this.transform = "translate(0," + (this.xAxisOffset + this.dims.height) + ")";
-        if (typeof this.xAxisTickCount !== 'undefined') {
-            this.tickArguments = [this.xAxisTickCount];
-        }
-        if (typeof this.xAxisTickInterval !== 'undefined') {
-        }
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxis.prototype, "xScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxis.prototype, "dims", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxis.prototype, "tickFormatting", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxis.prototype, "showGridLines", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxis.prototype, "showLabel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxis.prototype, "labelText", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxis.prototype, "xAxisTickInterval", void 0);
-    XAxis = __decorate([
-        core_1.Component({
-            selector: 'g[xAxis]',
-            template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g xAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"80\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], XAxis);
-    return XAxis;
-}());
-exports.XAxis = XAxis;
-
-
-/***/ },
-
-/***/ 683:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(79);
-var ticks_helper_1 = __webpack_require__(459);
-var YAxisTicks = (function () {
-    function YAxisTicks() {
-        this.tickArguments = [5];
-        this.tickStroke = '#ccc';
-        this.showGridLines = false;
-        Object.assign(this, {
-            innerTickSize: 6,
-            outerTickSize: 6,
-            tickPadding: 3,
-            rotateLabels: false,
-            verticalSpacing: 20,
-            textAnchor: 'middle',
-            trimLabel: trim_label_helper_1.trimLabel
-        });
-    }
-    YAxisTicks.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    YAxisTicks.prototype.update = function () {
-        var scale;
-        var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
-        this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
-        scale = this.scale;
-        this.ticks = this.getTicks();
-        if (this.tickFormatting) {
-            this.tickFormat = this.tickFormatting;
-        }
-        else if (scale.tickFormat) {
-            this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
-        }
-        else {
-            this.tickFormat = function (d) {
-                return d;
-            };
-        }
-        this.adjustedScale = scale.bandwidth ? function (d) {
-            return scale(d) + scale.bandwidth() * 0.5;
-        } : scale;
-        switch (this.orient) {
-            case "top":
-                this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
-                };
-                this.textAnchor = "middle";
-                this.y2 = this.innerTickSize * sign;
-                this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
-                break;
-            case "bottom":
-                this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
-                };
-                this.textAnchor = "middle";
-                this.y2 = this.innerTickSize * sign;
-                this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
-                break;
-            case "left":
-                this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
-                };
-                this.textAnchor = "end";
-                this.x2 = this.innerTickSize * -sign;
-                this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
-                break;
-            case "right":
-                this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
-                };
-                this.textAnchor = "start";
-                this.x2 = this.innerTickSize * -sign;
-                this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
-                break;
-        }
-    };
-    YAxisTicks.prototype.getTicks = function () {
-        var ticks;
-        var maxTicks = this.getMaxTicks();
-        if (this.tickValues) {
-            ticks = this.tickValues;
-        }
-        else if (this.scale.ticks) {
-            ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            if (ticks.length > maxTicks) {
-                if (this.tickArguments) {
-                    this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-                }
-                else {
-                    this.tickArguments = [maxTicks];
-                }
-                ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            }
-        }
-        else {
-            ticks = this.scale.domain();
-            ticks = ticks_helper_1.reduceTicks(ticks, maxTicks);
-        }
-        return ticks;
-    };
-    YAxisTicks.prototype.getMaxTicks = function () {
-        var tickHeight = 20;
-        return Math.floor(this.height / tickHeight);
-    };
-    YAxisTicks.prototype.tickTransform = function (tick) {
-        return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
-    };
-    YAxisTicks.prototype.gridLineTransform = function () {
-        return "translate(0," + this.verticalSpacing + ")";
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "scale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "orient", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickArguments", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickValues", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickStroke", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickFormatting", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "showGridLines", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "height", void 0);
-    YAxisTicks = __decorate([
-        core_1.Component({
-            selector: 'g[yAxisTicks]',
-            template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"transform(tick)\" >\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.dy]=\"dy\"\n        [attr.x]=\"x1\"\n        [attr.y]=\"y1\"\n        [attr.text-anchor]=\"textAnchor\"\n\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal gridline-path-shadow\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\"\n          y1=\"1\"\n          y2=\"1\" />\n      </svg:g>\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], YAxisTicks);
-    return YAxisTicks;
-}());
-exports.YAxisTicks = YAxisTicks;
-
-
-/***/ },
-
-/***/ 684:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var YAxis = (function () {
-    function YAxis() {
-        this.showGridLines = false;
-        Object.assign(this, {
-            yAxisClassName: 'y axis',
-            yOrient: 'left',
-            fill: 'none',
-            stroke: '#ccc',
-            tickStroke: '#ccc',
-            strokeWidth: '1',
-            yAxisOffset: -5,
-        });
-    }
-    YAxis.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    YAxis.prototype.update = function () {
-        this.offset = this.yAxisOffset;
-        if (this.yOrient === 'right') {
-            this.transform = "translate(" + (this.offset + this.dims.width) + " , 0)";
-        }
-        else {
-            this.transform = "translate(" + this.offset + " , 0)";
-        }
-        if (this.yAxisTickCount !== undefined) {
-            this.tickArguments = [this.yAxisTickCount];
-        }
-        if (typeof this.yAxisTickInterval !== 'undefined') {
-        }
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxis.prototype, "yScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxis.prototype, "dims", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxis.prototype, "tickFormatting", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxis.prototype, "showGridLines", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxis.prototype, "showLabel", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxis.prototype, "labelText", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxis.prototype, "yAxisTickInterval", void 0);
-    YAxis = __decorate([
-        core_1.Component({
-            selector: 'g[yAxis]',
-            template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g yAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [height]=\"dims.height\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"80\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], YAxis);
-    return YAxis;
-}());
-exports.YAxis = YAxis;
-
-
-/***/ },
-
-/***/ 685:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var Chart = (function () {
-    function Chart() {
-        this.legend = false;
-        this.legendTitle = 'Legend';
-    }
-    Chart.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    Chart.prototype.update = function () {
-        this.legendWidth = 0;
-        if (this.legend) {
-            this.legendType = this.getLegendType();
-            if (this.legendType === 'scaleLegend') {
-                this.legendWidth = 1;
-            }
-            else {
-                this.legendWidth = 3;
-            }
-        }
-        this.chartWidth = 12 - this.legendWidth;
-    };
-    Chart.prototype.getLegendType = function () {
-        if (typeof this.legendData === 'function') {
-            return 'scaleLegend';
-        }
-        else {
-            return 'legend';
-        }
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Chart.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Chart.prototype, "legend", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Chart.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Chart.prototype, "legendData", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Chart.prototype, "legendTitle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Chart.prototype, "colors", void 0);
-    Chart = __decorate([
-        core_1.Component({
-            selector: 'chart',
-            template: "\n    <svg\n      class=\"ng2d3\"\n      [attr.width]=\"view[0] * chartWidth / 12.0\"\n      [attr.height]=\"view[1]\">\n\n      <ng-content></ng-content>\n    </svg>\n\n    <scale-legend\n      *ngIf=\"legend && legendType === 'scaleLegend'\"\n      class=\"legend\"\n      [valueRange]=\"data\"\n      [colors]=\"legendData\"\n      [height]=\"view[1]\">\n    </scale-legend>\n\n    <legend\n      *ngIf=\"legend && legendType === 'legend'\"\n      class=\"legend\"\n      [data]=\"legendData\"\n      [title]=\"legendTitle\"\n      [colors]=\"colors\"\n      [height]=\"view[1]\">\n    </legend>\n"
-        }), 
-        __metadata('design:paramtypes', [])
-    ], Chart);
-    return Chart;
-}());
-exports.Chart = Chart;
-
-
-/***/ },
-
-/***/ 686:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var moment = __webpack_require__(2);
-var CircleSeries = (function () {
-    function CircleSeries() {
-        this.barVisible = false;
-        this.type = 'standard';
-        this.clickHandler = new core_1.EventEmitter();
-    }
-    CircleSeries.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    CircleSeries.prototype.update = function () {
-        this.circles = this.getCircles();
-    };
-    CircleSeries.prototype.getCircles = function () {
-        var _this = this;
-        return this.data.series.map(function (d, i) {
-            var value = d.value;
-            var label = d.name;
-            if (value) {
-                var cx = void 0;
-                if (_this.scaleType === 'time') {
-                    cx = _this.xScale(moment(label).toDate());
-                }
-                else if (_this.scaleType === 'linear') {
-                    cx = _this.xScale(Number(label));
-                }
-                else {
-                    cx = _this.xScale(label);
-                }
-                var cy = _this.yScale(_this.type === 'standard' ? value : d.d1);
-                var radius = 5;
-                var height = _this.yScale.range()[0] - cy;
-                return {
-                    classNames: [("circle-data-" + i)],
-                    value: value,
-                    label: label,
-                    cx: cx,
-                    cy: cy,
-                    radius: radius,
-                    height: height,
-                    tooltipText: label + ", " + value
-                };
-            }
-        }).filter(function (circle) { return circle !== undefined; });
-    };
-    CircleSeries.prototype.click = function (value, label) {
-        this.clickHandler.emit({
-            name: label,
-            value: value
-        });
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "type", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "xScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "yScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "color", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "strokeColor", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "scaleType", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], CircleSeries.prototype, "clickHandler", void 0);
-    CircleSeries = __decorate([
-        core_1.Component({
-            selector: 'g[circleSeries]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"click($event, circle.label)\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"circle.tooltipText\"\n      />\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], CircleSeries);
-    return CircleSeries;
-}());
-exports.CircleSeries = CircleSeries;
-
-
-/***/ },
-
-/***/ 687:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var Circle = (function () {
-    function Circle() {
-        this.clickHandler = new core_1.EventEmitter();
-    }
-    Circle.prototype.ngOnChanges = function () {
-        this.classNames = this.classNames.join(' ') + 'circle';
-    };
-    Circle.prototype.click = function () {
-        this.clickHandler.emit(this.data);
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "cx", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "cy", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "r", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "fill", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "stroke", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "classNames", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "circleOpacity", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "pointerEvents", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], Circle.prototype, "clickHandler", void 0);
-    Circle = __decorate([
-        core_1.Component({
-            selector: 'g[circle]',
-            template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n      (click)=\"click()\"\n    />\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], Circle);
-    return Circle;
-}());
-exports.Circle = Circle;
-
-
-/***/ },
-
-/***/ 688:
+/***/ 690:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11564,7 +11703,7 @@ exports.GridPanelSeries = GridPanelSeries;
 
 /***/ },
 
-/***/ 689:
+/***/ 691:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11620,7 +11759,7 @@ exports.GridPanel = GridPanel;
 
 /***/ },
 
-/***/ 690:
+/***/ 692:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11686,7 +11825,7 @@ exports.Legend = Legend;
 
 /***/ },
 
-/***/ 691:
+/***/ 693:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11742,7 +11881,7 @@ exports.ScaleLegend = ScaleLegend;
 
 /***/ },
 
-/***/ 692:
+/***/ 694:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11808,7 +11947,7 @@ exports.SvgLinearGradient = SvgLinearGradient;
 
 /***/ },
 
-/***/ 693:
+/***/ 695:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11862,7 +12001,7 @@ exports.SvgRadialGradient = SvgRadialGradient;
 
 /***/ },
 
-/***/ 694:
+/***/ 696:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12049,7 +12188,7 @@ exports.Timeline = Timeline;
 
 /***/ },
 
-/***/ 695:
+/***/ 697:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12057,15 +12196,18 @@ exports.Timeline = Timeline;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(698));
-__export(__webpack_require__(463));
+__export(__webpack_require__(700));
+__export(__webpack_require__(227));
+__export(__webpack_require__(467));
 __export(__webpack_require__(226));
-__export(__webpack_require__(462));
+__export(__webpack_require__(465));
+__export(__webpack_require__(466));
+__webpack_require__(1129);
 
 
 /***/ },
 
-/***/ 696:
+/***/ 698:
 /***/ function(module, exports) {
 
 "use strict";
@@ -12183,7 +12325,7 @@ exports.PositionHelper = PositionHelper;
 
 /***/ },
 
-/***/ 697:
+/***/ 699:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12198,16 +12340,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var injection_service_1 = __webpack_require__(466);
-var tooltip_component_1 = __webpack_require__(465);
+var injection_service_1 = __webpack_require__(470);
+var object_id_1 = __webpack_require__(61);
 var placement_type_1 = __webpack_require__(226);
-var style_type_1 = __webpack_require__(463);
-var alignment_type_1 = __webpack_require__(462);
-var tooltip_options_1 = __webpack_require__(464);
+var style_type_1 = __webpack_require__(467);
+var alignment_type_1 = __webpack_require__(465);
+var show_type_1 = __webpack_require__(466);
+var tooltip_component_1 = __webpack_require__(469);
+var tooltip_options_1 = __webpack_require__(468);
+var tooltip_service_1 = __webpack_require__(227);
 var TooltipDirective = (function () {
-    function TooltipDirective(viewContainerRef, injectionService) {
+    function TooltipDirective(tooltipService, viewContainerRef, injectionService, elementRef, renderer) {
+        this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.injectionService = injectionService;
+        this.elementRef = elementRef;
+        this.renderer = renderer;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -12221,43 +12369,127 @@ var TooltipDirective = (function () {
         this.tooltipCloseOnMouseLeave = true;
         this.tooltipHideTimeout = 300;
         this.tooltipShowTimeout = 100;
-        this.visible = false;
+        this.tooltipShowEvent = show_type_1.ShowTypes.all;
+        this.onShow = new core_1.EventEmitter();
+        this.onHide = new core_1.EventEmitter();
     }
-    TooltipDirective.prototype.show = function () {
+    TooltipDirective.prototype.ngOnDestroy = function () {
+        this.hide(true);
+    };
+    TooltipDirective.prototype.onFocus = function () {
+        if (this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.focus) {
+            this.show();
+        }
+    };
+    TooltipDirective.prototype.onMouseEnter = function () {
+        if (this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.mouseover) {
+            this.show();
+        }
+    };
+    TooltipDirective.prototype.show = function (immediate) {
         var _this = this;
-        if (this.visible || this.tooltipDisabled)
+        if (this.componentId || this.tooltipDisabled) {
             return;
-        this.visible = true;
+        }
+        var time = immediate ? 0 : this.tooltipShowTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
-            return _this.injectComponent();
-        }, this.tooltipShowTimeout);
+            _this.tooltipService.destroyAll();
+            _this.componentId = object_id_1.default();
+            var tooltip = _this.injectComponent();
+            _this.tooltipService.register(_this.componentId, tooltip, _this.hide.bind(_this));
+            setTimeout(function () {
+                _this.addHideListeners(tooltip.instance.element.nativeElement);
+            }, 10);
+            _this.onShow.emit(true);
+        }, time);
+    };
+    TooltipDirective.prototype.addHideListeners = function (tooltip) {
+        var _this = this;
+        var entered = false;
+        this.mouseEnterContentEvent = this.renderer.listen(tooltip, 'mouseenter', function () {
+            entered = true;
+            clearTimeout(_this.timeout);
+        });
+        if (this.tooltipCloseOnMouseLeave) {
+            this.mouseLeaveContentEvent = this.renderer.listen(tooltip, 'mouseleave', function () {
+                entered = false;
+                _this.hide();
+            });
+        }
+        if (this.tooltipCloseOnClickOutside) {
+            this.documentClickEvent = this.renderer.listen(document, 'click', function (event) {
+                var contains = tooltip.contains(event.target);
+                if (!contains) {
+                    _this.hide();
+                }
+            });
+        }
+        var element = this.elementRef.nativeElement;
+        var addLeaveListener = this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.mouseover;
+        if (addLeaveListener) {
+            this.mouseLeaveEvent = this.renderer.listen(element, 'mouseleave', function () {
+                if (!entered) {
+                    _this.hide();
+                }
+            });
+        }
+        var addFocusListener = this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+            this.tooltipShowEvent === show_type_1.ShowTypes.focus;
+        if (addFocusListener) {
+            this.focusOutEvent = this.renderer.listen(element, 'blur', function () {
+                if (!entered) {
+                    _this.hide();
+                }
+            });
+        }
     };
     TooltipDirective.prototype.injectComponent = function () {
         var options = this.createBoundOptions();
         if (this.tooltipAppendToBody) {
-            this.tooltip = this.injectionService.appendNextToRoot(tooltip_component_1.TooltipContentComponent, tooltip_options_1.TooltipOptions, options);
+            return this.injectionService.appendNextToRoot(tooltip_component_1.TooltipContentComponent, tooltip_options_1.TooltipOptions, options);
         }
         else {
             var binding = core_1.ReflectiveInjector.resolve([
                 { provide: tooltip_options_1.TooltipOptions, useValue: options }
             ]);
-            this.tooltip = this.injectionService.appendNextToLocation(tooltip_component_1.TooltipContentComponent, this.viewContainerRef, binding);
+            return this.injectionService.appendNextToLocation(tooltip_component_1.TooltipContentComponent, this.viewContainerRef, binding);
         }
     };
-    TooltipDirective.prototype.hide = function () {
+    TooltipDirective.prototype.hide = function (immediate) {
         var _this = this;
-        if (!this.visible)
+        if (!this.componentId) {
             return;
+        }
+        var time = immediate ? 0 : this.tooltipHideTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
-            _this.visible = false;
-            if (_this.tooltip)
-                _this.tooltip.destroy();
-        }, this.tooltipHideTimeout);
+            _this.tooltipService.destroy(_this.componentId);
+            if (_this.mouseLeaveEvent) {
+                _this.mouseLeaveEvent();
+            }
+            if (_this.focusOutEvent) {
+                _this.focusOutEvent();
+            }
+            if (_this.mouseLeaveContentEvent) {
+                _this.mouseLeaveContentEvent();
+            }
+            if (_this.mouseEnterContentEvent) {
+                _this.mouseEnterContentEvent();
+            }
+            if (_this.documentClickEvent) {
+                _this.documentClickEvent();
+            }
+            _this.onHide.emit(true);
+            _this.componentId = undefined;
+        }, time);
     };
     TooltipDirective.prototype.createBoundOptions = function () {
         return new tooltip_options_1.TooltipOptions({
+            id: this.componentId,
             title: this.tooltipTitle,
             template: this.tooltipTemplate,
             host: this.viewContainerRef.element,
@@ -12266,10 +12498,8 @@ var TooltipDirective = (function () {
             type: this.tooltipType,
             showCaret: this.tooltipShowCaret,
             cssClass: this.tooltipCssClass,
-            hide: this.hide,
-            closeOnClickOutside: this.tooltipCloseOnClickOutside,
-            closeOnMouseLeave: this.tooltipCloseOnMouseLeave,
-            spacing: this.tooltipSpacing
+            spacing: this.tooltipSpacing,
+            context: this.tooltipContext
         });
     };
     __decorate([
@@ -12329,24 +12559,36 @@ var TooltipDirective = (function () {
         __metadata('design:type', Object)
     ], TooltipDirective.prototype, "tooltipTemplate", void 0);
     __decorate([
-        core_1.HostListener('focusin'),
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], TooltipDirective.prototype, "tooltipShowEvent", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "tooltipContext", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "onShow", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], TooltipDirective.prototype, "onHide", void 0);
+    __decorate([
+        core_1.HostListener('focusin'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "onFocus", null);
+    __decorate([
         core_1.HostListener('mouseenter'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
-    ], TooltipDirective.prototype, "show", null);
-    __decorate([
-        core_1.HostListener('focusout'),
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], TooltipDirective.prototype, "hide", null);
+    ], TooltipDirective.prototype, "onMouseEnter", null);
     TooltipDirective = __decorate([
-        core_1.Directive({
-            selector: '[swui-tooltip]'
-        }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef, injection_service_1.InjectionService])
+        core_1.Directive({ selector: '[swui-tooltip]' }), 
+        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, injection_service_1.InjectionService, core_1.ElementRef, core_1.Renderer])
     ], TooltipDirective);
     return TooltipDirective;
 }());
@@ -12355,7 +12597,7 @@ exports.TooltipDirective = TooltipDirective;
 
 /***/ },
 
-/***/ 698:
+/***/ 700:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12371,16 +12613,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var platform_browser_1 = __webpack_require__(77);
-var tooltip_directive_1 = __webpack_require__(697);
-var tooltip_component_1 = __webpack_require__(465);
-var injection_service_1 = __webpack_require__(466);
+var tooltip_directive_1 = __webpack_require__(699);
+var tooltip_component_1 = __webpack_require__(469);
+var tooltip_service_1 = __webpack_require__(227);
+var injection_service_1 = __webpack_require__(470);
 var TooltipModule = (function () {
     function TooltipModule() {
     }
     TooltipModule = __decorate([
         core_1.NgModule({
             declarations: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
-            providers: [injection_service_1.InjectionService],
+            providers: [injection_service_1.InjectionService, tooltip_service_1.TooltipService],
             exports: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
             imports: [platform_browser_1.BrowserModule],
             entryComponents: [tooltip_component_1.TooltipContentComponent]
@@ -12394,7 +12637,7 @@ exports.TooltipModule = TooltipModule;
 
 /***/ },
 
-/***/ 699:
+/***/ 701:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12486,7 +12729,7 @@ exports.HeatCellSeries = HeatCellSeries;
 
 /***/ },
 
-/***/ 70:
+/***/ 702:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12501,77 +12744,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var chart_component_1 = __webpack_require__(685);
-var legend_component_1 = __webpack_require__(690);
-var scale_legend_component_1 = __webpack_require__(691);
-var axes_module_1 = __webpack_require__(679);
-var tooltip_1 = __webpack_require__(695);
-var circle_series_component_1 = __webpack_require__(686);
-var circle_component_1 = __webpack_require__(687);
-var grid_panel_component_1 = __webpack_require__(689);
-var grid_panel_series_component_1 = __webpack_require__(688);
-var svg_linear_gradient_component_1 = __webpack_require__(692);
-var svg_radial_gradient_component_1 = __webpack_require__(693);
-var timeline_component_1 = __webpack_require__(694);
-var platform_browser_1 = __webpack_require__(77);
-var area_component_1 = __webpack_require__(678);
-var area_tooltip_component_1 = __webpack_require__(677);
-var COMPONENTS = [
-    area_component_1.Area,
-    area_tooltip_component_1.AreaTooltip,
-    chart_component_1.Chart,
-    legend_component_1.Legend,
-    scale_legend_component_1.ScaleLegend,
-    circle_component_1.Circle,
-    circle_series_component_1.CircleSeries,
-    grid_panel_component_1.GridPanel,
-    grid_panel_series_component_1.GridPanelSeries,
-    svg_linear_gradient_component_1.SvgLinearGradient,
-    svg_radial_gradient_component_1.SvgRadialGradient,
-    timeline_component_1.Timeline
-];
-var CommonModule = (function () {
-    function CommonModule() {
-    }
-    CommonModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                platform_browser_1.BrowserModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ],
-            declarations: COMPONENTS.slice(),
-            exports: [
-                platform_browser_1.BrowserModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ].concat(COMPONENTS)
-        }), 
-        __metadata('design:paramtypes', [])
-    ], CommonModule);
-    return CommonModule;
-}());
-exports.CommonModule = CommonModule;
-
-
-/***/ },
-
-/***/ 700:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var d3_1 = __webpack_require__(7);
 var HeatMapCell = (function () {
     function HeatMapCell(element) {
@@ -12651,7 +12824,7 @@ exports.HeatMapCell = HeatMapCell;
 
 /***/ },
 
-/***/ 701:
+/***/ 703:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12837,7 +13010,7 @@ exports.HeatMap = HeatMap;
 
 /***/ },
 
-/***/ 702:
+/***/ 704:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12852,10 +13025,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(70);
-var heat_map_cell_component_1 = __webpack_require__(700);
-var heat_map_cell_series_component_1 = __webpack_require__(699);
-var heat_map_component_1 = __webpack_require__(701);
+var common_module_1 = __webpack_require__(71);
+var heat_map_cell_component_1 = __webpack_require__(702);
+var heat_map_cell_series_component_1 = __webpack_require__(701);
+var heat_map_component_1 = __webpack_require__(703);
 var HeatMapModule = (function () {
     function HeatMapModule() {
     }
@@ -12882,7 +13055,7 @@ exports.HeatMapModule = HeatMapModule;
 
 /***/ },
 
-/***/ 703:
+/***/ 705:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12905,7 +13078,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var d3_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
 var LineChart = (function (_super) {
@@ -13042,6 +13215,12 @@ var LineChart = (function (_super) {
         this.xDomain = domain;
         this.xScale = this.getXScale();
     };
+    LineChart.prototype.updateHoveredVertical = function (item) {
+        this.hoveredVertical = item.value;
+    };
+    LineChart.prototype.hideCircles = function () {
+        this.hoveredVertical = null;
+    };
     LineChart.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
@@ -13109,10 +13288,16 @@ var LineChart = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], LineChart.prototype, "clickHandler", void 0);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], LineChart.prototype, "hideCircles", null);
     LineChart = __decorate([
         core_1.Component({
             selector: 'line-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], LineChart);
@@ -13123,7 +13308,7 @@ exports.LineChart = LineChart;
 
 /***/ },
 
-/***/ 704:
+/***/ 706:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13138,10 +13323,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(70);
-var line_component_1 = __webpack_require__(706);
-var line_chart_component_1 = __webpack_require__(703);
-var line_series_component_1 = __webpack_require__(705);
+var common_module_1 = __webpack_require__(71);
+var line_component_1 = __webpack_require__(708);
+var line_chart_component_1 = __webpack_require__(705);
+var line_series_component_1 = __webpack_require__(707);
 var LineChartModule = (function () {
     function LineChartModule() {
     }
@@ -13168,7 +13353,7 @@ exports.LineChartModule = LineChartModule;
 
 /***/ },
 
-/***/ 705:
+/***/ 707:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13185,7 +13370,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
-var sort_1 = __webpack_require__(467);
+var sort_1 = __webpack_require__(471);
 var LineSeries = (function () {
     function LineSeries() {
     }
@@ -13250,7 +13435,7 @@ exports.LineSeries = LineSeries;
 
 /***/ },
 
-/***/ 706:
+/***/ 708:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13315,7 +13500,7 @@ exports.Line = Line;
 
 /***/ },
 
-/***/ 707:
+/***/ 709:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13391,7 +13576,77 @@ exports.CardSeries = CardSeries;
 
 /***/ },
 
-/***/ 708:
+/***/ 71:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var chart_component_1 = __webpack_require__(687);
+var legend_component_1 = __webpack_require__(692);
+var scale_legend_component_1 = __webpack_require__(693);
+var axes_module_1 = __webpack_require__(681);
+var tooltip_1 = __webpack_require__(697);
+var circle_series_component_1 = __webpack_require__(688);
+var circle_component_1 = __webpack_require__(689);
+var grid_panel_component_1 = __webpack_require__(691);
+var grid_panel_series_component_1 = __webpack_require__(690);
+var svg_linear_gradient_component_1 = __webpack_require__(694);
+var svg_radial_gradient_component_1 = __webpack_require__(695);
+var timeline_component_1 = __webpack_require__(696);
+var platform_browser_1 = __webpack_require__(77);
+var area_component_1 = __webpack_require__(680);
+var area_tooltip_component_1 = __webpack_require__(679);
+var COMPONENTS = [
+    area_component_1.Area,
+    area_tooltip_component_1.AreaTooltip,
+    chart_component_1.Chart,
+    legend_component_1.Legend,
+    scale_legend_component_1.ScaleLegend,
+    circle_component_1.Circle,
+    circle_series_component_1.CircleSeries,
+    grid_panel_component_1.GridPanel,
+    grid_panel_series_component_1.GridPanelSeries,
+    svg_linear_gradient_component_1.SvgLinearGradient,
+    svg_radial_gradient_component_1.SvgRadialGradient,
+    timeline_component_1.Timeline
+];
+var CommonModule = (function () {
+    function CommonModule() {
+    }
+    CommonModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                platform_browser_1.BrowserModule,
+                axes_module_1.AxesModule,
+                tooltip_1.TooltipModule
+            ],
+            declarations: COMPONENTS.slice(),
+            exports: [
+                platform_browser_1.BrowserModule,
+                axes_module_1.AxesModule,
+                tooltip_1.TooltipModule
+            ].concat(COMPONENTS)
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CommonModule);
+    return CommonModule;
+}());
+exports.CommonModule = CommonModule;
+
+
+/***/ },
+
+/***/ 710:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13508,7 +13763,7 @@ exports.Card = Card;
 
 /***/ },
 
-/***/ 709:
+/***/ 711:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13531,7 +13786,7 @@ var core_1 = __webpack_require__(0);
 var base_chart_component_1 = __webpack_require__(17);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
-var grid_layout_helper_1 = __webpack_require__(460);
+var grid_layout_helper_1 = __webpack_require__(463);
 var NumberCard = (function (_super) {
     __extends(NumberCard, _super);
     function NumberCard() {
@@ -13597,31 +13852,7 @@ exports.NumberCard = NumberCard;
 
 /***/ },
 
-/***/ 71:
-/***/ function(module, exports) {
-
-"use strict";
-"use strict";
-var cache = {};
-function ObjectId() {
-    var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
-    var id = timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
-        return (Math.random() * 16 | 0).toString(16);
-    }).toLowerCase();
-    if (!cache[id]) {
-        cache[id] = true;
-        return id;
-    }
-    return ObjectId();
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = ObjectId;
-;
-
-
-/***/ },
-
-/***/ 710:
+/***/ 712:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13636,10 +13867,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(70);
-var card_component_1 = __webpack_require__(708);
-var card_series_component_1 = __webpack_require__(707);
-var number_card_component_1 = __webpack_require__(709);
+var common_module_1 = __webpack_require__(71);
+var card_component_1 = __webpack_require__(710);
+var card_series_component_1 = __webpack_require__(709);
+var number_card_component_1 = __webpack_require__(711);
 var NumberCardModule = (function () {
     function NumberCardModule() {
     }
@@ -13666,7 +13897,7 @@ exports.NumberCardModule = NumberCardModule;
 
 /***/ },
 
-/***/ 711:
+/***/ 713:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13784,7 +14015,7 @@ exports.AdvancedPieChart = AdvancedPieChart;
 
 /***/ },
 
-/***/ 712:
+/***/ 714:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13800,7 +14031,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var object_id_1 = __webpack_require__(71);
+var object_id_1 = __webpack_require__(61);
 var PieArc = (function () {
     function PieArc(element) {
         this.initialized = false;
@@ -13944,7 +14175,7 @@ exports.PieArc = PieArc;
 
 /***/ },
 
-/***/ 713:
+/***/ 715:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14072,7 +14303,7 @@ exports.PieChart = PieChart;
 
 /***/ },
 
-/***/ 714:
+/***/ 716:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14087,14 +14318,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(70);
-var advanced_pie_chart_component_1 = __webpack_require__(711);
-var pie_label_component_1 = __webpack_require__(717);
-var pie_arc_component_1 = __webpack_require__(712);
-var pie_chart_component_1 = __webpack_require__(713);
-var pie_grid_component_1 = __webpack_require__(716);
-var pie_grid_series_component_1 = __webpack_require__(715);
-var pie_series_component_1 = __webpack_require__(718);
+var common_module_1 = __webpack_require__(71);
+var advanced_pie_chart_component_1 = __webpack_require__(713);
+var pie_label_component_1 = __webpack_require__(719);
+var pie_arc_component_1 = __webpack_require__(714);
+var pie_chart_component_1 = __webpack_require__(715);
+var pie_grid_component_1 = __webpack_require__(718);
+var pie_grid_series_component_1 = __webpack_require__(717);
+var pie_series_component_1 = __webpack_require__(720);
 var PieChartModule = (function () {
     function PieChartModule() {
     }
@@ -14129,7 +14360,7 @@ exports.PieChartModule = PieChartModule;
 
 /***/ },
 
-/***/ 715:
+/***/ 717:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14262,7 +14493,7 @@ exports.PieGridSeries = PieGridSeries;
 
 /***/ },
 
-/***/ 716:
+/***/ 718:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14286,7 +14517,7 @@ var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
 var trim_label_helper_1 = __webpack_require__(79);
-var grid_layout_helper_1 = __webpack_require__(460);
+var grid_layout_helper_1 = __webpack_require__(463);
 var d3_1 = __webpack_require__(7);
 var PieGrid = (function (_super) {
     __extends(PieGrid, _super);
@@ -14392,7 +14623,7 @@ exports.PieGrid = PieGrid;
 
 /***/ },
 
-/***/ 717:
+/***/ 719:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14498,7 +14729,7 @@ exports.PieLabel = PieLabel;
 
 /***/ },
 
-/***/ 718:
+/***/ 720:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14639,7 +14870,7 @@ exports.PieSeries = PieSeries;
 
 /***/ },
 
-/***/ 719:
+/***/ 721:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14717,7 +14948,7 @@ exports.TreeMapCellSeries = TreeMapCellSeries;
 
 /***/ },
 
-/***/ 720:
+/***/ 722:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14825,7 +15056,7 @@ exports.TreeMapCell = TreeMapCell;
 
 /***/ },
 
-/***/ 721:
+/***/ 723:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14920,7 +15151,7 @@ exports.TreeMap = TreeMap;
 
 /***/ },
 
-/***/ 722:
+/***/ 724:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14935,10 +15166,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(70);
-var tree_map_cell_component_1 = __webpack_require__(720);
-var tree_map_cell_series_component_1 = __webpack_require__(719);
-var tree_map_component_1 = __webpack_require__(721);
+var common_module_1 = __webpack_require__(71);
+var tree_map_cell_component_1 = __webpack_require__(722);
+var tree_map_cell_series_component_1 = __webpack_require__(721);
+var tree_map_component_1 = __webpack_require__(723);
 var TreeMapModule = (function () {
     function TreeMapModule() {
     }
@@ -14965,7 +15196,7 @@ exports.TreeMapModule = TreeMapModule;
 
 /***/ },
 
-/***/ 723:
+/***/ 725:
 /***/ function(module, exports) {
 
 "use strict";
@@ -15156,10 +15387,10 @@ exports.trimLabel = trimLabel;
 
 /***/ },
 
-/***/ 911:
+/***/ 913:
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(497)();
+exports = module.exports = __webpack_require__(256)();
 // imports
 
 
@@ -15171,15 +15402,30 @@ exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n  font-family: 'Ro
 
 /***/ },
 
-/***/ 912:
+/***/ 914:
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(497)();
+exports = module.exports = __webpack_require__(256)();
 // imports
 
 
 // module
-exports.push([module.i, ".swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 12px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    transform: translate3d(0, 10px, 0); }\n\n.ng2d3 {\n  float: left; }\n  .ng2d3 .bar:hover,\n  .ng2d3 .cell:hover,\n  .ng2d3 .arc:hover,\n  .ng2d3 .card:hover {\n    opacity: 0.8; }\n  .ng2d3 .area {\n    opacity: 0.6; }\n  .ng2d3 .circle:hover {\n    cursor: pointer; }\n  .ng2d3 .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none; }\n\n.gridline-path-shadow {\n  stroke: black; }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.brush .overlay {\n  fill: rgba(0, 0, 0, 0.07); }\n\n.brush .selection {\n  stroke: none;\n  fill-opacity: .3;\n  shape-rendering: 'crispEdges'; }\n\n.brush .handle {\n  fill: #3f51b5; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.legend {\n  display: inline-block;\n  float: left; }\n  .legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .legend ul, .legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .legend .legend-wrap {\n    width: 90%; }\n  .legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px; }\n  .legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .legend .legend-label.active {\n      color: #FFF; }\n  .legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px; }\n  .legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%; }\n\n.advanced-pie {\n  float: left; }\n\n.advanced-pie-legend {\n  float: left; }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.scss","/./src/src/ng2d3.scss"],"names":[],"mappings":"AAoBA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASI,iBAvBa;IAwBb,eAvBmB;IAwBnB,0BAtBoB;IAuBpB,gHAdgB;IAehB,gBAAgB;IAChB,aAAa,EAgCd;IA9CH;MAiBM,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CL;QAuBQ,kCAAkC;QAClC,qCAAqC;QACrC,4BAvCS,EAwCV;MA1BP;QA6BQ,mCAAmC;QACnC,oCAAoC;QACpC,2BA7CS,EA8CV;MAhCP;QAmCQ,kCAAkC;QAClC,qCAAqC;QACrC,6BAnDS,EAoDV;MAtCP;QAyCQ,mCAAmC;QACnC,oCAAoC;QACpC,8BAzDS,EA0DV;EA5CP;IAiDI,YApEgB;IAqEhB,gCAtEa;IAuEb,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,qBAAqB,EA2BtB;IAjFH;MA0DQ,kCAAkC;MAClC,qCAAqC;MACrC,2CAhFS,EAiFV;IA7DP;MAgEQ,mCAAmC;MACnC,oCAAoC;MACpC,0CAtFS,EAuFV;IAnEP;MAsEQ,kCAAkC;MAClC,qCAAqC;MACrC,4CA5FS,EA6FV;IAzEP;MA4EQ,mCAAmC;MACnC,oCAAoC;MACpC,6CAlGS,EAmGV;EA/EP;IAoFI,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACX;EAxFH;IA2FI,mCAAsB,EACvB;EA5FH;IA+FI,oCAAsB,EACvB;EAhGH;IAmGI,oCAAsB,EACvB;EApGH;IAuGI,mCAAsB,EACvB;;AC1HH;EACE,YAAY,EA6Bb;EA9BD;;;;IAQM,aAAa,EACd;EATL;IAaI,aAAa,EACd;EAdH;IAkBM,gBAAgB,EACjB;EAnBL;IAwBM,oBAAoB;IACpB,mBAAmB;IACnB,mBAAmB;IACnB,uBAAuB,EACxB;;AAIL;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,iCAAY;EACZ,kBAAkB;EAClB,WAAW,EACZ;;AAED;EACE,cAAY,EACb;;AAED;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,0BAAU,EACX;;AAHH;EAMI,aAAa;EACb,iBAAiB;EACjB,8BAA8B,EAC/B;;AATH;EAYI,cAAc,EACf;;AAGH;EACE,iBAAiB;EACjB,mBAAmB,EAUpB;EAZD;IAKI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;;AAGH;EACE,sBAAsB;EACtB,YAAY,EAsEb;EAxED;IAKI,eAAe;IACf,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAVH;IAaI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAhBH;IAmBI,WAAW,EACZ;EApBH;IAuBI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB,EACpB;EA7BH;IAgCI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAKhB;IAxCH;MAsCM,YAAY,EACb;EAvCL;IA2CI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EAjDH;IAoDI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB,EACjB;EAxDH;IA2DI,eAAe;IACf,kBAAkB,EACnB;EA7DH;IAgEI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB;IACxB,WAAW,EACZ;;AAGH;EACE,YAAY,EACb;;AAED;EACE,YAAY,EAkDb;EAnDD;IAII,gBACD,EAAC;EALJ;IAQI,gBAAgB;IAChB,oBAAoB,EACrB;EAVH;IAaI,YAAY,EAqCb;IAlDH;MAgBM,oBAAoB;MACpB,eAAe,EAgChB;MAjDL;QAoBQ,mBAAmB;QACnB,sBAAsB,EA2BvB;QAhDP;UAwBU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA3BT;UA8BU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAlCT;UAqCU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAxCT;UA2CU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB","file":"ng2d3.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n.swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n    background: $popover-bg;\n    color: $popover-color;\n    border: 1px solid $popover-border;\n    box-shadow: $shadow;\n    font-size: 12px;\n    padding: 4px;\n\n    .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0;\n\n      &.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid $popover-caret-bg;\n      }\n\n      &.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid $popover-caret-bg;\n      }\n\n      &.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid $popover-caret-bg;\n      }\n\n      &.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid $popover-caret-bg;\n      }\n    }\n  }\n\n  &.type-tooltip {\n    color: $tooltip-color;\n    background: $tooltip-bg;\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto;\n\n    .tooltip-caret {\n      &.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid $tooltip-caret-bg;\n      }\n\n      &.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid $tooltip-caret-bg;\n      }\n\n      &.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid $tooltip-caret-bg;\n      }\n\n      &.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid $tooltip-caret-bg;\n      }\n    }\n  }\n\n  .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0;\n  }\n\n  &.position-right {\n    transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n    transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n    transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n    transform: translate3d(0, 10px, 0);\n  }\n\n}\n","@import \"./common/tooltip/tooltip\";\n\n.ng2d3 {\n  float: left;\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none;\n}\n\n.gridline-path-shadow {\n  stroke: rgba(0, 0, 0, 1);\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.brush {\n  .overlay {\n    fill: rgba(0, 0, 0, 0.07);\n  }\n\n  .selection {\n    stroke: none;\n    fill-opacity: .3;\n    shape-rendering: 'crispEdges';\n  }\n\n  .handle {\n    fill: #3f51b5;\n  }\n}\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.legend {\n  display: inline-block;\n  float: left;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%;\n  }\n}\n\n.advanced-pie {\n  float: left;\n}\n\n.advanced-pie-legend {\n  float: left;\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, ".swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    transform: translate3d(0, 10px, 0); }\n", "", {"version":3,"sources":["/./src/common/tooltip/src/common/tooltip/tooltip.scss"],"names":[],"mappings":"AAqBA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,mCAAsB,EACtB;EA5FH;IA+FG,oCAAsB,EACtB;EAhGH;IAmGG,oCAAsB,EACtB;EApGH;IAuGG,mCAAsB,EACtB","file":"tooltip.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n"],"sourceRoot":"webpack://"}]);
+
+// exports
+
+
+/***/ },
+
+/***/ 915:
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(256)();
+// imports
+
+
+// module
+exports.push([module.i, ".swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    transform: translate3d(0, 10px, 0); }\n\n.ng2d3 {\n  float: left; }\n  .ng2d3 .bar:hover,\n  .ng2d3 .cell:hover,\n  .ng2d3 .arc:hover,\n  .ng2d3 .card:hover {\n    opacity: 0.8; }\n  .ng2d3 .area {\n    opacity: 0.6; }\n  .ng2d3 .circle:hover {\n    cursor: pointer; }\n  .ng2d3 .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none; }\n\n.gridline-path-shadow {\n  stroke: black; }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.brush .overlay {\n  fill: rgba(0, 0, 0, 0.07); }\n\n.brush .selection {\n  stroke: none;\n  fill-opacity: .3;\n  shape-rendering: 'crispEdges'; }\n\n.brush .handle {\n  fill: #3f51b5; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.legend {\n  display: inline-block;\n  float: left; }\n  .legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .legend ul, .legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .legend .legend-wrap {\n    width: 90%; }\n  .legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px; }\n  .legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .legend .legend-label.active {\n      color: #FFF; }\n  .legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px; }\n  .legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%; }\n\n.advanced-pie {\n  float: left; }\n\n.advanced-pie-legend {\n  float: left; }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.scss","/./src/src/ng2d3.scss"],"names":[],"mappings":"AAqBA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,mCAAsB,EACtB;EA5FH;IA+FG,oCAAsB,EACtB;EAhGH;IAmGG,oCAAsB,EACtB;EApGH;IAuGG,mCAAsB,EACtB;;AC3HH;EACE,YAAY,EA6Bb;EA9BD;;;;IAQM,aAAa,EACd;EATL;IAaI,aAAa,EACd;EAdH;IAkBM,gBAAgB,EACjB;EAnBL;IAwBM,oBAAoB;IACpB,mBAAmB;IACnB,mBAAmB;IACnB,uBAAuB,EACxB;;AAIL;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,iCAAY;EACZ,kBAAkB;EAClB,WAAW,EACZ;;AAED;EACE,cAAY,EACb;;AAED;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,0BAAU,EACX;;AAHH;EAMI,aAAa;EACb,iBAAiB;EACjB,8BAA8B,EAC/B;;AATH;EAYI,cAAc,EACf;;AAGH;EACE,iBAAiB;EACjB,mBAAmB,EAUpB;EAZD;IAKI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;;AAGH;EACE,sBAAsB;EACtB,YAAY,EAsEb;EAxED;IAKI,eAAe;IACf,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAVH;IAaI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAhBH;IAmBI,WAAW,EACZ;EApBH;IAuBI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB,EACpB;EA7BH;IAgCI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAKhB;IAxCH;MAsCM,YAAY,EACb;EAvCL;IA2CI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EAjDH;IAoDI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB,EACjB;EAxDH;IA2DI,eAAe;IACf,kBAAkB,EACnB;EA7DH;IAgEI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB;IACxB,WAAW,EACZ;;AAGH;EACE,YAAY,EACb;;AAED;EACE,YAAY,EAkDb;EAnDD;IAII,gBACD,EAAC;EALJ;IAQI,gBAAgB;IAChB,oBAAoB,EACrB;EAVH;IAaI,YAAY,EAqCb;IAlDH;MAgBM,oBAAoB;MACpB,eAAe,EAgChB;MAjDL;QAoBQ,mBAAmB;QACnB,sBAAsB,EA2BvB;QAhDP;UAwBU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA3BT;UA8BU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAlCT;UAqCU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAxCT;UA2CU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB","file":"ng2d3.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n","@import \"./common/tooltip/tooltip\";\n\n.ng2d3 {\n  float: left;\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none;\n}\n\n.gridline-path-shadow {\n  stroke: rgba(0, 0, 0, 1);\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.brush {\n  .overlay {\n    fill: rgba(0, 0, 0, 0.07);\n  }\n\n  .selection {\n    stroke: none;\n    fill-opacity: .3;\n    shape-rendering: 'crispEdges';\n  }\n\n  .handle {\n    fill: #3f51b5;\n  }\n}\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.legend {\n  display: inline-block;\n  float: left;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%;\n  }\n}\n\n.advanced-pie {\n  float: left;\n}\n\n.advanced-pie-legend {\n  float: left;\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -15309,5 +15555,5 @@ var EventEmitter = (function (_super) {
 
 /***/ }
 
-},[1128]);
-//# sourceMappingURL=app.d55af78ee210a74ac3f1.map
+},[1132]);
+//# sourceMappingURL=app.627e056225d928dac75a.map

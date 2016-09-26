@@ -16,6 +16,7 @@ export declare class AreaChartStacked extends BaseChart implements OnChanges {
     clipPath: string;
     colors: Function;
     margin: number[];
+    hoveredVertical: any;
     view: any;
     results: any;
     scheme: any;
@@ -41,6 +42,8 @@ export declare class AreaChartStacked extends BaseChart implements OnChanges {
     getScaleType(values: any): string;
     isDate(value: any): boolean;
     updateDomain(domain: any): void;
+    updateHoveredVertical(item: any): void;
+    hideCircles(): void;
     click(data: any, series: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;

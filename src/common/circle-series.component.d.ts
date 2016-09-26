@@ -10,6 +10,7 @@ export declare class CircleSeries implements OnChanges {
     color: any;
     strokeColor: any;
     scaleType: any;
+    visibleValue: any;
     clickHandler: EventEmitter<{}>;
     ngOnChanges(): void;
     update(): void;

@@ -1,11 +1,17 @@
-import { ViewContainerRef } from '@angular/core';
+import { EventEmitter, ViewContainerRef, ComponentRef, ElementRef, Renderer, OnDestroy } from '@angular/core';
 import { InjectionService } from '../../utils/injection.service';
 import { PlacementTypes } from './placement.type';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
-export declare class TooltipDirective {
+import { ShowTypes } from './show.type';
+import { TooltipContentComponent } from './tooltip.component';
+import { TooltipService } from './tooltip.service';
+export declare class TooltipDirective implements OnDestroy {
+    private tooltipService;
     private viewContainerRef;
     private injectionService;
+    private elementRef;
+    private renderer;
     tooltipCssClass: string;
     tooltipTitle: string;
     tooltipAppendToBody: boolean;
@@ -20,12 +26,24 @@ export declare class TooltipDirective {
     tooltipHideTimeout: number;
     tooltipShowTimeout: number;
     tooltipTemplate: any;
-    private visible;
-    private tooltip;
+    tooltipShowEvent: ShowTypes;
+    tooltipContext: any;
+    onShow: EventEmitter<{}>;
+    onHide: EventEmitter<{}>;
+    private componentId;
     private timeout;
-    constructor(viewContainerRef: ViewContainerRef, injectionService: InjectionService);
-    show(): void;
-    injectComponent(): void;
-    hide(): void;
+    private mouseLeaveEvent;
+    private focusOutEvent;
+    private mouseLeaveContentEvent;
+    private mouseEnterContentEvent;
+    private documentClickEvent;
+    constructor(tooltipService: TooltipService, viewContainerRef: ViewContainerRef, injectionService: InjectionService, elementRef: ElementRef, renderer: Renderer);
+    ngOnDestroy(): void;
+    onFocus(): void;
+    onMouseEnter(): void;
+    show(immediate?: boolean): void;
+    addHideListeners(tooltip: any): void;
+    injectComponent(): ComponentRef<TooltipContentComponent>;
+    hide(immediate?: boolean): void;
     private createBoundOptions();
 }
