@@ -4,10 +4,10 @@ import {XAxis} from "./x-axis.component";
 import {XAxisTicks} from "./x-axis-ticks.component";
 import {YAxis} from "./y-axis.component";
 import {YAxisTicks} from "./y-axis-ticks.component";
-import {BrowserModule} from "@angular/platform-browser";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
-  imports: [BrowserModule],
+  imports: [CommonModule],
   declarations: [AxisLabel, XAxis, XAxisTicks, YAxis, YAxisTicks],
   exports: [AxisLabel, XAxis, XAxisTicks, YAxis, YAxisTicks]
 })

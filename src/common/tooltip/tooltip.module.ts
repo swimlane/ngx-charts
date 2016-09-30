@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { TooltipDirective } from './tooltip.directive';
 import { TooltipContentComponent } from './tooltip.component';
@@ -11,7 +11,7 @@ import { InjectionService } from '../../utils/injection.service';
   declarations: [TooltipContentComponent, TooltipDirective],
   providers: [InjectionService, TooltipService],
   exports: [TooltipContentComponent, TooltipDirective],
-  imports: [BrowserModule],
+  imports: [CommonModule],
   entryComponents: [TooltipContentComponent]
 })
 export class TooltipModule { }
