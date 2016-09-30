@@ -11,7 +11,7 @@ import { GridPanelSeries } from "./grid-panel-series.component";
 import { SvgLinearGradient } from "./svg-linear-gradient.component";
 import { SvgRadialGradient } from "./svg-radial-gradient.component";
 import { Timeline } from "./timeline.component";
-import { BrowserModule } from "@angular/platform-browser";
+import { CommonModule as Ng2CommonModule } from "@angular/common";
 import { Area } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
 
@@ -32,7 +32,7 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [
-    BrowserModule,
+    Ng2CommonModule,
     AxesModule,
     TooltipModule
   ],
@@ -40,7 +40,7 @@ const COMPONENTS = [
     ...COMPONENTS
   ],
   exports: [
-    BrowserModule,
+    Ng2CommonModule,
     AxesModule,
     TooltipModule,
     ...COMPONENTS
