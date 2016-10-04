@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+- Added AOT compilation support
+- Fixed bug where BrowserModule was imported multiple times
+
 ## 1.2.1
 - Added transition animation to TreeMap chart
 - Added tooltips to TreeMap, Line, Area, and Pie Grid charts
