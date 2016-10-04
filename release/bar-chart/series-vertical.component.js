@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var moment = require('moment');
 var SeriesVertical = (function () {
@@ -92,60 +83,35 @@ var SeriesVertical = (function () {
     SeriesVertical.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "dims", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "type", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "series", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "xScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "yScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "colors", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "scaleType", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], SeriesVertical.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], SeriesVertical.prototype, "clickHandler", void 0);
-    SeriesVertical = __decorate([
-        core_1.Component({
-            selector: 'g[seriesVertical]',
-            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
-            animations: [
-                core_1.trigger('animationState', [
-                    core_1.transition('* => void', [
-                        core_1.style({
-                            opacity: 1,
-                            transform: '*',
-                        }),
-                        core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
-                    ])
-                ])
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], SeriesVertical);
+    SeriesVertical.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[seriesVertical]',
+                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    animations: [
+                        core_1.trigger('animationState', [
+                            core_1.transition('* => void', [
+                                core_1.style({
+                                    opacity: 1,
+                                    transform: '*',
+                                }),
+                                core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                            ])
+                        ])
+                    ]
+                },] },
+    ];
+    SeriesVertical.ctorParameters = [];
+    SeriesVertical.propDecorators = {
+        'dims': [{ type: core_1.Input },],
+        'type': [{ type: core_1.Input },],
+        'series': [{ type: core_1.Input },],
+        'xScale': [{ type: core_1.Input },],
+        'yScale': [{ type: core_1.Input },],
+        'colors': [{ type: core_1.Input },],
+        'scaleType': [{ type: core_1.Input },],
+        'gradient': [{ type: core_1.Input },],
+        'clickHandler': [{ type: core_1.Output },],
+    };
     return SeriesVertical;
 }());
 exports.SeriesVertical = SeriesVertical;

@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var core_1 = require('@angular/core');
 var throttle_1 = require('../../utils/throttle');
 var position_helper_1 = require('./position.helper');
@@ -119,50 +116,46 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
     };
+    TooltipContentComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'swui-tooltip-content',
+                    template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+                    animations: [
+                        core_1.trigger('visibilityChanged', [
+                            core_1.state('active', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
+                            core_1.transition('void => *', [
+                                core_1.style({
+                                    opacity: 0,
+                                    'pointer-events': 'none',
+                                    transform: 'translate3d(0, 0, 0)'
+                                }),
+                                core_1.animate('0.3s ease-out')
+                            ]),
+                            core_1.transition('* => void', [
+                                core_1.style({ opacity: 1 }),
+                                core_1.animate('0.2s ease-out')
+                            ])
+                        ])
+                    ]
+                },] },
+    ];
+    TooltipContentComponent.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+        { type: tooltip_options_1.TooltipOptions, decorators: [{ type: core_1.Inject, args: [tooltip_options_1.TooltipOptions,] },] },
+    ];
+    TooltipContentComponent.propDecorators = {
+        'caretElm': [{ type: core_1.ViewChild, args: ['caretElm',] },],
+        'cssClasses': [{ type: core_1.HostBinding, args: ['class',] },],
+        'visibilityChanged': [{ type: core_1.HostBinding, args: ['@visibilityChanged',] },],
+        'onWindowResize': [{ type: core_1.HostListener, args: ['window:resize',] },],
+    };
     __decorate([
-        core_1.ViewChild('caretElm'), 
-        __metadata('design:type', Object)
-    ], TooltipContentComponent.prototype, "caretElm", void 0);
-    __decorate([
-        core_1.HostBinding('class'), 
-        __metadata('design:type', Object)
-    ], TooltipContentComponent.prototype, "cssClasses", null);
-    __decorate([
-        core_1.HostBinding('@visibilityChanged'), 
-        __metadata('design:type', Object)
-    ], TooltipContentComponent.prototype, "visibilityChanged", null);
-    __decorate([
-        core_1.HostListener('window:resize'),
         throttle_1.throttleable(100), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
     ], TooltipContentComponent.prototype, "onWindowResize", null);
-    TooltipContentComponent = __decorate([
-        core_1.Component({
-            selector: 'swui-tooltip-content',
-            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
-            animations: [
-                core_1.trigger('visibilityChanged', [
-                    core_1.state('active', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
-                    core_1.transition('void => *', [
-                        core_1.style({
-                            opacity: 0,
-                            'pointer-events': 'none',
-                            transform: 'translate3d(0, 0, 0)'
-                        }),
-                        core_1.animate('0.3s ease-out')
-                    ]),
-                    core_1.transition('* => void', [
-                        core_1.style({ opacity: 1 }),
-                        core_1.animate('0.2s ease-out')
-                    ])
-                ])
-            ]
-        }),
-        __param(2, core_1.Inject(tooltip_options_1.TooltipOptions)), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer, tooltip_options_1.TooltipOptions])
-    ], TooltipContentComponent);
     return TooltipContentComponent;
 }());
 exports.TooltipContentComponent = TooltipContentComponent;

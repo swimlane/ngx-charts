@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var object_id_1 = require("../utils/object-id");
@@ -92,61 +83,29 @@ var PieArc = (function () {
     PieArc.prototype.click = function () {
         this.clickHandler.emit(this.data);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "fill", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "startAngle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "endAngle", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "innerRadius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "outerRadius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "value", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "total", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "max", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "explodeSlices", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], PieArc.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], PieArc.prototype, "clickHandler", void 0);
-    PieArc = __decorate([
-        core_1.Component({
-            selector: 'g[pieArc]',
-            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n      />\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], PieArc);
+    PieArc.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[pieArc]',
+                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n      />\n    </svg:g>\n  "
+                },] },
+    ];
+    PieArc.ctorParameters = [
+        { type: core_1.ElementRef, },
+    ];
+    PieArc.propDecorators = {
+        'fill': [{ type: core_1.Input },],
+        'startAngle': [{ type: core_1.Input },],
+        'endAngle': [{ type: core_1.Input },],
+        'innerRadius': [{ type: core_1.Input },],
+        'outerRadius': [{ type: core_1.Input },],
+        'value': [{ type: core_1.Input },],
+        'total': [{ type: core_1.Input },],
+        'max': [{ type: core_1.Input },],
+        'data': [{ type: core_1.Input },],
+        'explodeSlices': [{ type: core_1.Input },],
+        'gradient': [{ type: core_1.Input },],
+        'clickHandler': [{ type: core_1.Output },],
+    };
     return PieArc;
 }());
 exports.PieArc = PieArc;

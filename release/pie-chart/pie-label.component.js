@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var trim_label_helper_1 = require('../common/trim-label.helper');
 var d3_1 = require('../d3');
@@ -58,41 +49,24 @@ var PieLabel = (function () {
             .transition()
             .style('stroke-dasharray', 'none');
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieLabel.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieLabel.prototype, "radius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieLabel.prototype, "label", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieLabel.prototype, "color", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieLabel.prototype, "max", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieLabel.prototype, "value", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieLabel.prototype, "explodeSlices", void 0);
-    PieLabel = __decorate([
-        core_1.Component({
-            selector: 'g[pieLabel]',
-            template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], PieLabel);
+    PieLabel.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[pieLabel]',
+                    template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  "
+                },] },
+    ];
+    PieLabel.ctorParameters = [
+        { type: core_1.ElementRef, },
+    ];
+    PieLabel.propDecorators = {
+        'data': [{ type: core_1.Input },],
+        'radius': [{ type: core_1.Input },],
+        'label': [{ type: core_1.Input },],
+        'color': [{ type: core_1.Input },],
+        'max': [{ type: core_1.Input },],
+        'value': [{ type: core_1.Input },],
+        'explodeSlices': [{ type: core_1.Input },],
+    };
     return PieLabel;
 }());
 exports.PieLabel = PieLabel;

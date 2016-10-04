@@ -1,10 +1,10 @@
 /**
- * ng2d3 v1.2.1 (https://github.com/swimlane/ng2d3)
+ * ng2d3 v1.2.2 (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
 import { NgModule, Component, Input, ElementRef, Renderer, ViewContainerRef, Directive, HostListener, Output, ReflectiveInjector, EventEmitter, Injector, ComponentFactoryResolver, ApplicationRef, Injectable, Inject, animate, style, transition, state, trigger, HostBinding, ViewChild, ViewChildren } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import * as moment from 'moment';
 
 function __extends(d, b) {
@@ -697,7 +697,7 @@ var AxesModule = (function () {
     }
     AxesModule = __decorate([
         NgModule({
-            imports: [BrowserModule],
+            imports: [CommonModule],
             declarations: [AxisLabel, XAxis, XAxisTicks, YAxis, YAxisTicks],
             exports: [AxisLabel, XAxis, XAxisTicks, YAxis, YAxisTicks]
         }), 
@@ -1389,7 +1389,7 @@ var TooltipModule = (function () {
             declarations: [TooltipContentComponent, TooltipDirective],
             providers: [InjectionService, TooltipService],
             exports: [TooltipContentComponent, TooltipDirective],
-            imports: [BrowserModule],
+            imports: [CommonModule],
             entryComponents: [TooltipContentComponent]
         }), 
         __metadata('design:paramtypes', [])
@@ -2191,26 +2191,26 @@ var COMPONENTS = [
     SvgRadialGradient,
     Timeline
 ];
-var CommonModule = (function () {
-    function CommonModule() {
+var CommonModule$1 = (function () {
+    function CommonModule$$() {
     }
-    CommonModule = __decorate([
+    CommonModule$$ = __decorate([
         NgModule({
             imports: [
-                BrowserModule,
+                CommonModule,
                 AxesModule,
                 TooltipModule
             ],
             declarations: COMPONENTS.slice(),
             exports: [
-                BrowserModule,
+                CommonModule,
                 AxesModule,
                 TooltipModule
             ].concat(COMPONENTS)
         }), 
         __metadata('design:paramtypes', [])
-    ], CommonModule);
-    return CommonModule;
+    ], CommonModule$$);
+    return CommonModule$$;
 }());
 
 function calculateViewDimensions(view, margins, showXLabel, showYLabel, showLegend, columns) {
@@ -3262,7 +3262,7 @@ var AreaChartModule = (function () {
     }
     AreaChartModule = __decorate([
         NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 AreaChart,
                 AreaChartNormalized,
@@ -4920,7 +4920,7 @@ var BarChartModule = (function () {
     }
     BarChartModule = __decorate([
         NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 Bar,
                 BarHorizontal,
@@ -5264,7 +5264,7 @@ var HeatMapModule = (function () {
     }
     HeatMapModule = __decorate([
         NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 HeatMapCell,
                 HeatCellSeries,
@@ -5616,7 +5616,7 @@ var LineChartModule = (function () {
     }
     LineChartModule = __decorate([
         NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 Line,
                 LineChart,
@@ -5904,7 +5904,7 @@ var NumberCardModule = (function () {
     }
     NumberCardModule = __decorate([
         NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 Card,
                 CardSeries,
@@ -6678,7 +6678,7 @@ var PieChartModule = (function () {
     }
     PieChartModule = __decorate([
         NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 AdvancedPieChart,
                 PieLabel,
@@ -6923,7 +6923,7 @@ var TreeMapModule = (function () {
     }
     TreeMapModule = __decorate([
         NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 TreeMapCell,
                 TreeMapCellSeries,
@@ -6946,7 +6946,7 @@ var NG2D3Module = (function () {
     NG2D3Module = __decorate([
         NgModule({
             exports: [
-                CommonModule,
+                CommonModule$1,
                 AreaChartModule,
                 BarChartModule,
                 HeatMapModule,

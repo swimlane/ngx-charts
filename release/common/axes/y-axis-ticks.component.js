@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var trim_label_helper_1 = require('../trim-label.helper');
 var ticks_helper_1 = require('./ticks.helper');
@@ -122,45 +113,23 @@ var YAxisTicks = (function () {
     YAxisTicks.prototype.gridLineTransform = function () {
         return "translate(0," + this.verticalSpacing + ")";
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "scale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "orient", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickArguments", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickValues", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickStroke", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "tickFormatting", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "showGridLines", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], YAxisTicks.prototype, "height", void 0);
-    YAxisTicks = __decorate([
-        core_1.Component({
-            selector: 'g[yAxisTicks]',
-            template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"transform(tick)\" >\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.dy]=\"dy\"\n        [attr.x]=\"x1\"\n        [attr.y]=\"y1\"\n        [attr.text-anchor]=\"textAnchor\"\n\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal gridline-path-shadow\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\"\n          y1=\"1\"\n          y2=\"1\" />\n      </svg:g>\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], YAxisTicks);
+    YAxisTicks.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[yAxisTicks]',
+                    template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"transform(tick)\" >\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.dy]=\"dy\"\n        [attr.x]=\"x1\"\n        [attr.y]=\"y1\"\n        [attr.text-anchor]=\"textAnchor\"\n\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal gridline-path-shadow\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\"\n          y1=\"1\"\n          y2=\"1\" />\n      </svg:g>\n    </svg:g>\n  "
+                },] },
+    ];
+    YAxisTicks.ctorParameters = [];
+    YAxisTicks.propDecorators = {
+        'scale': [{ type: core_1.Input },],
+        'orient': [{ type: core_1.Input },],
+        'tickArguments': [{ type: core_1.Input },],
+        'tickValues': [{ type: core_1.Input },],
+        'tickStroke': [{ type: core_1.Input },],
+        'tickFormatting': [{ type: core_1.Input },],
+        'showGridLines': [{ type: core_1.Input },],
+        'height': [{ type: core_1.Input },],
+    };
     return YAxisTicks;
 }());
 exports.YAxisTicks = YAxisTicks;

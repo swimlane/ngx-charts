@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require("@angular/core");
 var chart_component_1 = require("./charts/chart.component");
 var legend_component_1 = require("./legend.component");
@@ -21,7 +12,7 @@ var grid_panel_series_component_1 = require("./grid-panel-series.component");
 var svg_linear_gradient_component_1 = require("./svg-linear-gradient.component");
 var svg_radial_gradient_component_1 = require("./svg-radial-gradient.component");
 var timeline_component_1 = require("./timeline.component");
-var platform_browser_1 = require("@angular/platform-browser");
+var common_1 = require("@angular/common");
 var area_component_1 = require("./area.component");
 var area_tooltip_component_1 = require("./area-tooltip.component");
 var COMPONENTS = [
@@ -41,22 +32,22 @@ var COMPONENTS = [
 var CommonModule = (function () {
     function CommonModule() {
     }
-    CommonModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                platform_browser_1.BrowserModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ],
-            declarations: COMPONENTS.slice(),
-            exports: [
-                platform_browser_1.BrowserModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ].concat(COMPONENTS)
-        }), 
-        __metadata('design:paramtypes', [])
-    ], CommonModule);
+    CommonModule.decorators = [
+        { type: core_1.NgModule, args: [{
+                    imports: [
+                        common_1.CommonModule,
+                        axes_module_1.AxesModule,
+                        tooltip_1.TooltipModule
+                    ],
+                    declarations: COMPONENTS.slice(),
+                    exports: [
+                        common_1.CommonModule,
+                        axes_module_1.AxesModule,
+                        tooltip_1.TooltipModule
+                    ].concat(COMPONENTS)
+                },] },
+    ];
+    CommonModule.ctorParameters = [];
     return CommonModule;
 }());
 exports.CommonModule = CommonModule;

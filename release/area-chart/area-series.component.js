@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var sort_1 = require('../utils/sort');
@@ -56,49 +47,24 @@ var AreaSeries = (function () {
         this.path = area(data);
         this.startingPath = startingArea(data);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "xScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "yScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "color", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "scaleType", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "stacked", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "normalized", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], AreaSeries.prototype, "clickHandler", void 0);
-    AreaSeries = __decorate([
-        core_1.Component({
-            selector: 'g[areaSeries]',
-            template: "\n    <svg:g area\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"color\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient\"\n    />\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AreaSeries);
+    AreaSeries.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[areaSeries]',
+                    template: "\n    <svg:g area\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"color\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient\"\n    />\n  "
+                },] },
+    ];
+    AreaSeries.ctorParameters = [];
+    AreaSeries.propDecorators = {
+        'data': [{ type: core_1.Input },],
+        'xScale': [{ type: core_1.Input },],
+        'yScale': [{ type: core_1.Input },],
+        'color': [{ type: core_1.Input },],
+        'scaleType': [{ type: core_1.Input },],
+        'stacked': [{ type: core_1.Input },],
+        'normalized': [{ type: core_1.Input },],
+        'gradient': [{ type: core_1.Input },],
+        'clickHandler': [{ type: core_1.Output },],
+    };
     return AreaSeries;
 }());
 exports.AreaSeries = AreaSeries;

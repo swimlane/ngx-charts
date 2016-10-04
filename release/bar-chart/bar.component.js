@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var object_id_1 = require('../utils/object-id');
 var d3_1 = require('../d3');
@@ -141,57 +132,28 @@ var Bar = (function () {
     Bar.prototype.click = function () {
         this.clickHandler.emit(this.data);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "fill", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "width", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "height", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "x", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "y", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "orientation", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], Bar.prototype, "roundEdges", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], Bar.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "offset", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], Bar.prototype, "clickHandler", void 0);
-    Bar = __decorate([
-        core_1.Component({
-            selector: 'g[bar]',
-            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.cursor]=\"'pointer'\"\n      (click)=\"click()\"\n    />\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], Bar);
+    Bar.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[bar]',
+                    template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.cursor]=\"'pointer'\"\n      (click)=\"click()\"\n    />\n  "
+                },] },
+    ];
+    Bar.ctorParameters = [
+        { type: core_1.ElementRef, },
+    ];
+    Bar.propDecorators = {
+        'fill': [{ type: core_1.Input },],
+        'data': [{ type: core_1.Input },],
+        'width': [{ type: core_1.Input },],
+        'height': [{ type: core_1.Input },],
+        'x': [{ type: core_1.Input },],
+        'y': [{ type: core_1.Input },],
+        'orientation': [{ type: core_1.Input },],
+        'roundEdges': [{ type: core_1.Input },],
+        'gradient': [{ type: core_1.Input },],
+        'offset': [{ type: core_1.Input },],
+        'clickHandler': [{ type: core_1.Output },],
+    };
     return Bar;
 }());
 exports.Bar = Bar;

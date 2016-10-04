@@ -1,13 +1,13 @@
 /**
- * ng2d3 v1.2.1 (https://github.com/swimlane/ng2d3)
+ * ng2d3 v1.2.2 (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/platform-browser'), require('moment')) :
-    typeof define === 'function' && define.amd ? define('ng2d3', ['exports', '@angular/core', '@angular/platform-browser', 'moment'], factory) :
-    (factory((global.ng2d3 = global.ng2d3 || {}),global.ng.core,global.ng.platformBrowser,global.moment));
-}(this, (function (exports,_angular_core,_angular_platformBrowser,moment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('moment')) :
+    typeof define === 'function' && define.amd ? define('ng2d3', ['exports', '@angular/core', '@angular/common', 'moment'], factory) :
+    (factory((global.ng2d3 = global.ng2d3 || {}),global.ng.core,global.ng.common,global.moment));
+}(this, (function (exports,_angular_core,_angular_common,moment) { 'use strict';
 
 function __extends(d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -699,7 +699,7 @@ var AxesModule = (function () {
     }
     AxesModule = __decorate([
         _angular_core.NgModule({
-            imports: [_angular_platformBrowser.BrowserModule],
+            imports: [_angular_common.CommonModule],
             declarations: [AxisLabel, XAxis, XAxisTicks, YAxis, YAxisTicks],
             exports: [AxisLabel, XAxis, XAxisTicks, YAxis, YAxisTicks]
         }), 
@@ -1391,7 +1391,7 @@ var TooltipModule = (function () {
             declarations: [TooltipContentComponent, TooltipDirective],
             providers: [InjectionService, TooltipService],
             exports: [TooltipContentComponent, TooltipDirective],
-            imports: [_angular_platformBrowser.BrowserModule],
+            imports: [_angular_common.CommonModule],
             entryComponents: [TooltipContentComponent]
         }), 
         __metadata('design:paramtypes', [])
@@ -2193,19 +2193,19 @@ var COMPONENTS = [
     SvgRadialGradient,
     Timeline
 ];
-var CommonModule = (function () {
+var CommonModule$1 = (function () {
     function CommonModule() {
     }
     CommonModule = __decorate([
         _angular_core.NgModule({
             imports: [
-                _angular_platformBrowser.BrowserModule,
+                _angular_common.CommonModule,
                 AxesModule,
                 TooltipModule
             ],
             declarations: COMPONENTS.slice(),
             exports: [
-                _angular_platformBrowser.BrowserModule,
+                _angular_common.CommonModule,
                 AxesModule,
                 TooltipModule
             ].concat(COMPONENTS)
@@ -3264,7 +3264,7 @@ var AreaChartModule = (function () {
     }
     AreaChartModule = __decorate([
         _angular_core.NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 AreaChart,
                 AreaChartNormalized,
@@ -4922,7 +4922,7 @@ var BarChartModule = (function () {
     }
     BarChartModule = __decorate([
         _angular_core.NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 Bar,
                 BarHorizontal,
@@ -5266,7 +5266,7 @@ var HeatMapModule = (function () {
     }
     HeatMapModule = __decorate([
         _angular_core.NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 HeatMapCell,
                 HeatCellSeries,
@@ -5618,7 +5618,7 @@ var LineChartModule = (function () {
     }
     LineChartModule = __decorate([
         _angular_core.NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 Line,
                 LineChart,
@@ -5906,7 +5906,7 @@ var NumberCardModule = (function () {
     }
     NumberCardModule = __decorate([
         _angular_core.NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 Card,
                 CardSeries,
@@ -6680,7 +6680,7 @@ var PieChartModule = (function () {
     }
     PieChartModule = __decorate([
         _angular_core.NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 AdvancedPieChart,
                 PieLabel,
@@ -6925,7 +6925,7 @@ var TreeMapModule = (function () {
     }
     TreeMapModule = __decorate([
         _angular_core.NgModule({
-            imports: [CommonModule],
+            imports: [CommonModule$1],
             declarations: [
                 TreeMapCell,
                 TreeMapCellSeries,
@@ -6948,7 +6948,7 @@ var NG2D3Module = (function () {
     NG2D3Module = __decorate([
         _angular_core.NgModule({
             exports: [
-                CommonModule,
+                CommonModule$1,
                 AreaChartModule,
                 BarChartModule,
                 HeatMapModule,

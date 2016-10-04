@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var PieGridSeries = (function () {
@@ -93,33 +84,22 @@ var PieGridSeries = (function () {
     PieGridSeries.prototype.trackBy = function (index, item) {
         return item.data.name;
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridSeries.prototype, "colors", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridSeries.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridSeries.prototype, "innerRadius", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridSeries.prototype, "outerRadius", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], PieGridSeries.prototype, "clickHandler", void 0);
-    PieGridSeries = __decorate([
-        core_1.Component({
-            selector: 'g[pieGridSeries]',
-            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:path *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [attr.d]=\"arc.d\"\n        [style.cursor]=\"arc.cursor\"\n        [style.opacity]=\"arc.opacity\"\n        [attr.fill]=\"arc.fill\"\n        (click)=\"click(arc.data)\"\n      />\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], PieGridSeries);
+    PieGridSeries.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[pieGridSeries]',
+                    template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:path *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [attr.d]=\"arc.d\"\n        [style.cursor]=\"arc.cursor\"\n        [style.opacity]=\"arc.opacity\"\n        [attr.fill]=\"arc.fill\"\n        (click)=\"click(arc.data)\"\n      />\n    </svg:g>\n  "
+                },] },
+    ];
+    PieGridSeries.ctorParameters = [
+        { type: core_1.ElementRef, },
+    ];
+    PieGridSeries.propDecorators = {
+        'colors': [{ type: core_1.Input },],
+        'data': [{ type: core_1.Input },],
+        'innerRadius': [{ type: core_1.Input },],
+        'outerRadius': [{ type: core_1.Input },],
+        'clickHandler': [{ type: core_1.Output },],
+    };
     return PieGridSeries;
 }());
 exports.PieGridSeries = PieGridSeries;

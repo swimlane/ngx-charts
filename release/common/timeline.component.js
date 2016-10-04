@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var moment = require('moment');
 var d3_1 = require('../d3');
@@ -123,57 +114,28 @@ var Timeline = (function () {
         };
         return dims;
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "state", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "customColors", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "legend", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "miniChart", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "autoScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "scaleType", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], Timeline.prototype, "onDomainChange", void 0);
-    Timeline = __decorate([
-        core_1.Component({
-            selector: 'g[timeline]',
-            template: "\n    <svg:g\n      [attr.transform]=\"transform\">\n\n      <svg:g xAxis\n        [xScale]=\"xScale\"\n        [dims]=\"dims\"\n        [showGridLines]=\"showGridLines\"\n      />\n\n      <svg:g class=\"brush\">\n      </svg:g>\n\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
-    ], Timeline);
+    Timeline.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[timeline]',
+                    template: "\n    <svg:g\n      [attr.transform]=\"transform\">\n\n      <svg:g xAxis\n        [xScale]=\"xScale\"\n        [dims]=\"dims\"\n        [showGridLines]=\"showGridLines\"\n      />\n\n      <svg:g class=\"brush\">\n      </svg:g>\n\n    </svg:g>\n  "
+                },] },
+    ];
+    Timeline.ctorParameters = [
+        { type: core_1.ElementRef, },
+    ];
+    Timeline.propDecorators = {
+        'view': [{ type: core_1.Input },],
+        'state': [{ type: core_1.Input },],
+        'results': [{ type: core_1.Input },],
+        'scheme': [{ type: core_1.Input },],
+        'customColors': [{ type: core_1.Input },],
+        'legend': [{ type: core_1.Input },],
+        'miniChart': [{ type: core_1.Input },],
+        'autoScale': [{ type: core_1.Input },],
+        'scaleType': [{ type: core_1.Input },],
+        'clickHandler': [{ type: core_1.Output },],
+        'onDomainChange': [{ type: core_1.Output },],
+    };
     return Timeline;
 }());
 exports.Timeline = Timeline;

@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var trim_label_helper_1 = require('../trim-label.helper');
 var ticks_helper_1 = require('./ticks.helper');
@@ -109,45 +100,23 @@ var XAxisTicks = (function () {
     XAxisTicks.prototype.gridLineTransform = function () {
         return "translate(0," + (-this.verticalSpacing - 5) + ")";
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "scale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "orient", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "tickArguments", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "tickStroke", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "tickFormatting", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "showGridLines", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "gridLineHeight", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], XAxisTicks.prototype, "width", void 0);
-    XAxisTicks = __decorate([
-        core_1.Component({
-            selector: 'g[xAxisTicks]',
-            template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.text-anchor]=\"textAnchor\"\n        [attr.transform]=\"textTransform\"\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-vertical gridline-path-shadow\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          x1=\"1\"\n          x2=\"1\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], XAxisTicks);
+    XAxisTicks.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[xAxisTicks]',
+                    template: "\n    <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <title>{{tickFormat(tick)}}</title>\n      <svg:text\n        stroke-width=\"0.01\"\n        [attr.text-anchor]=\"textAnchor\"\n        [attr.transform]=\"textTransform\"\n        [style.font-size]=\"'12px'\">\n        {{trimLabel(tickFormat(tick))}}\n      </svg:text>\n\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n\n        <svg:line\n          class=\"gridline-path gridline-path-vertical gridline-path-shadow\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          x1=\"1\"\n          x2=\"1\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  "
+                },] },
+    ];
+    XAxisTicks.ctorParameters = [];
+    XAxisTicks.propDecorators = {
+        'scale': [{ type: core_1.Input },],
+        'orient': [{ type: core_1.Input },],
+        'tickArguments': [{ type: core_1.Input },],
+        'tickStroke': [{ type: core_1.Input },],
+        'tickFormatting': [{ type: core_1.Input },],
+        'showGridLines': [{ type: core_1.Input },],
+        'gridLineHeight': [{ type: core_1.Input },],
+        'width': [{ type: core_1.Input },],
+    };
     return XAxisTicks;
 }());
 exports.XAxisTicks = XAxisTicks;
