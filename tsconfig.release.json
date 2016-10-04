@@ -20,7 +20,7 @@
     "allowSyntheticDefaultImports": true,
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist",
+    "outDir": "release",
     "baseUrl": "src"
   },
   "files": [
