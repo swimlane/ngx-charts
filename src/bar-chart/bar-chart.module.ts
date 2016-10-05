@@ -12,6 +12,9 @@ import {BarVerticalStacked} from "./bar-vertical-stacked.component";
 import {SeriesHorizontal} from "./series-horizontal.component";
 import {SeriesVertical} from "./series-vertical.component";
 
+export { Bar, BarHorizontal, BarHorizontal2D, BarHorizontalNormalized, BarHorizontalStacked, BarVertical, BarVertical2D,
+  BarVerticalNormalized, BarVerticalStacked, SeriesHorizontal, SeriesVertical };
+
 @NgModule({
   imports: [CommonModule],
   declarations: [

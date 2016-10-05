@@ -32,7 +32,7 @@ var TooltipContentComponent = (function () {
     });
     Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
         get: function () {
-            return 'active';
+            return true;
         },
         enumerable: true,
         configurable: true
@@ -119,10 +119,10 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'swui-tooltip-content',
-                    template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+                    template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
                     animations: [
                         core_1.trigger('visibilityChanged', [
-                            core_1.state('active', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
+                            core_1.state('*', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
                             core_1.transition('void => *', [
                                 core_1.style({
                                     opacity: 0,

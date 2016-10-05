@@ -15,6 +15,10 @@ import { CommonModule as Ng2CommonModule } from "@angular/common";
 import { Area } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
 
+export * from "./tooltip";
+export { Chart, Legend, ScaleLegend, CircleSeries, Circle, GridPanel, GridPanelSeries, SvgLinearGradient, SvgRadialGradient,
+  Timeline, Area, AreaTooltip };
+
 const COMPONENTS = [
   Area,
   AreaTooltip,

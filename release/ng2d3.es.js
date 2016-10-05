@@ -976,7 +976,7 @@ var TooltipContentComponent = (function () {
     });
     Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
         get: function () {
-            return 'active';
+            return true;
         },
         enumerable: true,
         configurable: true
@@ -1082,10 +1082,10 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent = __decorate([
         Component({
             selector: 'swui-tooltip-content',
-            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
             animations: [
                 trigger('visibilityChanged', [
-                    state('active', style({ opacity: 1, 'pointer-events': 'auto' })),
+                    state('*', style({ opacity: 1, 'pointer-events': 'auto' })),
                     transition('void => *', [
                         style({
                             opacity: 0,
@@ -6961,5 +6961,5 @@ var NG2D3Module = (function () {
     return NG2D3Module;
 }());
 
-export { NG2D3Module };
+export { NG2D3Module, AreaChart, AreaChartNormalized, AreaChartStacked, AreaSeries, AreaChartModule, Bar, BarHorizontal, BarHorizontal2D, BarHorizontalNormalized, BarHorizontalStacked, BarVertical, BarVertical2D, BarVerticalNormalized, BarVerticalStacked, SeriesHorizontal, SeriesVertical, BarChartModule, Chart, Legend, ScaleLegend, CircleSeries, Circle, GridPanel, GridPanelSeries, SvgLinearGradient, SvgRadialGradient, Timeline, Area, AreaTooltip, CommonModule$1 as CommonModule, TooltipModule, TooltipService, TooltipContentComponent, StyleTypes, PlacementTypes, AlignmentTypes, ShowTypes, HeatMapCell, HeatCellSeries, HeatMap, HeatMapModule, Line, LineChart, LineSeries, LineChartModule, Card, CardSeries, NumberCard, NumberCardModule, AdvancedPieChart, PieLabel, PieArc, PieChart, PieGrid, PieGridSeries, PieSeries, PieChartModule, TreeMapCell, TreeMapCellSeries, TreeMap, TreeMapModule };
 //# sourceMappingURL=ng2d3.es.js.map

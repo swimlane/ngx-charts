@@ -1,15 +1,19 @@
 import { ElementRef, AfterViewInit, Renderer } from '@angular/core';
 import { TooltipOptions } from './tooltip-options';
+import { PlacementTypes } from './placement.type';
 export declare class TooltipContentComponent implements AfterViewInit {
     element: ElementRef;
     private renderer;
     caretElm: any;
     readonly cssClasses: string;
-    readonly visibilityChanged: string;
+    readonly visibilityChanged: boolean;
     private host;
-    private showCaret;
+    context: any;
+    showCaret: boolean;
+    template: any;
+    title: string;
     private type;
-    private placement;
+    placement: PlacementTypes;
     private alignment;
     private spacing;
     private cssClass;
