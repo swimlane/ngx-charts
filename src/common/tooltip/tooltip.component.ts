@@ -37,7 +37,7 @@ import { AlignmentTypes } from './alignment.type';
   `,
   animations: [
     trigger('visibilityChanged', [
-      state('*', style({ opacity: 1, 'pointer-events': 'auto' })),
+      state('active', style({ opacity: 1, 'pointer-events': 'auto' })),
       transition('void => *', [
         style({
           opacity: 0,
@@ -69,7 +69,7 @@ export class TooltipContentComponent implements AfterViewInit {
 
   @HostBinding('@visibilityChanged')
   get visibilityChanged() {
-    return true;
+    return 'active';
   }
 
   private host: any;

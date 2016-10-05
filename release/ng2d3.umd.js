@@ -974,7 +974,7 @@ var TooltipContentComponent = (function () {
     });
     Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
         get: function () {
-            return true;
+            return 'active';
         },
         enumerable: true,
         configurable: true
@@ -1083,7 +1083,7 @@ var TooltipContentComponent = (function () {
             template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
             animations: [
                 _angular_core.trigger('visibilityChanged', [
-                    _angular_core.state('*', _angular_core.style({ opacity: 1, 'pointer-events': 'auto' })),
+                    _angular_core.state('active', _angular_core.style({ opacity: 1, 'pointer-events': 'auto' })),
                     _angular_core.transition('void => *', [
                         _angular_core.style({
                             opacity: 0,
