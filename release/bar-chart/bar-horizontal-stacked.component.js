@@ -11,12 +11,16 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
 var BarHorizontalStacked = (function (_super) {
     __extends(BarHorizontalStacked, _super);
-    function BarHorizontalStacked() {
-        _super.apply(this, arguments);
+    function BarHorizontalStacked(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
     }
+    BarHorizontalStacked.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarHorizontalStacked.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -111,7 +115,10 @@ var BarHorizontalStacked = (function (_super) {
                     ]
                 },] },
     ];
-    BarHorizontalStacked.ctorParameters = [];
+    BarHorizontalStacked.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+    ];
     BarHorizontalStacked.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],

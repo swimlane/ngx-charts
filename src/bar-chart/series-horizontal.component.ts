@@ -7,8 +7,8 @@ import {
   trigger,
   style,
   transition,
-  animate
- } from '@angular/core';
+  animate, NgZone, ElementRef
+} from '@angular/core';
 
 @Component({
   selector: 'g[seriesHorizontal]',

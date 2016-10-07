@@ -45,6 +45,8 @@ export class Area implements OnChanges {
     this.element = element.nativeElement;
   }
 
+
+
   ngOnChanges() {
     if (!this.initialized) {
       this.loadAnimation();

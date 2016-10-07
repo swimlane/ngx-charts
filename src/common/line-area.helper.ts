@@ -158,7 +158,7 @@ export function showTooltip(chart) {
   if (chart.tooltipPosition === undefined) {
     return;
   }
-  let el = d3.select(chart.element).select('.tooltip-area')[0][0];
+  let el = d3.select(chart.chartElement).select('.tooltip-area')[0][0];
   let tooltipData = getTooltipData(chart.results.series, chart.tooltipPosition);
   if (tooltipData.length) {
     chart.showLineAreaTooltip(el, tooltipData);
@@ -169,7 +169,7 @@ export function showTooltip(chart) {
  * Hides the tooltip on line/area charts
  */
 export function hideTooltip(chart) {
-  let chartEl = d3.select(chart.element);
+  let chartEl = d3.select(chart.chartElement);
   chartEl.selectAll('.circle')
     .style('opacity', 0);
   chart.handleMouseOut();

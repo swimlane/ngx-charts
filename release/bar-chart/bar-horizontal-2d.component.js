@@ -11,12 +11,16 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
 var BarHorizontal2D = (function (_super) {
     __extends(BarHorizontal2D, _super);
-    function BarHorizontal2D() {
-        _super.apply(this, arguments);
+    function BarHorizontal2D(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
     }
+    BarHorizontal2D.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarHorizontal2D.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -119,7 +123,10 @@ var BarHorizontal2D = (function (_super) {
                     ]
                 },] },
     ];
-    BarHorizontal2D.ctorParameters = [];
+    BarHorizontal2D.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+    ];
     BarHorizontal2D.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
