@@ -19,7 +19,7 @@ import { AlignmentTypes } from './alignment.type';
       <span
         #caretElm
         [hidden]="!showCaret"
-        class="tooltip-caret position-{{this.placement}}">
+        class="tooltip-caret position-{{placement}}">
       </span>
       <div class="tooltip-content">
         <span *ngIf="!title">
@@ -73,9 +73,12 @@ export class TooltipContentComponent implements AfterViewInit {
   }
 
   private host: any;
-  private showCaret: boolean;
+  public context: any;
+  public showCaret: boolean;
+  public template: any;
+  public title: string;
   private type: StyleTypes;
-  private placement: PlacementTypes;
+  public placement: PlacementTypes;
   private alignment: AlignmentTypes;
   private spacing: number;
   private cssClass: string;

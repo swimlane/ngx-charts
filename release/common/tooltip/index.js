@@ -4,6 +4,7 @@ function __export(m) {
 }
 __export(require('./tooltip.module'));
 __export(require('./tooltip.service'));
+__export(require('./tooltip.component'));
 __export(require('./style.type'));
 __export(require('./placement.type'));
 __export(require('./alignment.type'));

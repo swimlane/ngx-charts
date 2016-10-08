@@ -762,33 +762,29 @@ function ObjectId() {
 }
 ;
 
-var PlacementTypes;
 (function (PlacementTypes) {
     PlacementTypes[PlacementTypes["top"] = 'top'] = "top";
     PlacementTypes[PlacementTypes["bottom"] = 'bottom'] = "bottom";
     PlacementTypes[PlacementTypes["left"] = 'left'] = "left";
     PlacementTypes[PlacementTypes["right"] = 'right'] = "right";
-})(PlacementTypes || (PlacementTypes = {}));
+})(exports.PlacementTypes || (exports.PlacementTypes = {}));
 
-var StyleTypes;
 (function (StyleTypes) {
     StyleTypes[StyleTypes["popover"] = 'popover'] = "popover";
     StyleTypes[StyleTypes["tooltip"] = 'tooltip'] = "tooltip";
-})(StyleTypes || (StyleTypes = {}));
+})(exports.StyleTypes || (exports.StyleTypes = {}));
 
-var AlignmentTypes;
 (function (AlignmentTypes) {
     AlignmentTypes[AlignmentTypes["left"] = 'left'] = "left";
     AlignmentTypes[AlignmentTypes["center"] = 'center'] = "center";
     AlignmentTypes[AlignmentTypes["right"] = 'right'] = "right";
-})(AlignmentTypes || (AlignmentTypes = {}));
+})(exports.AlignmentTypes || (exports.AlignmentTypes = {}));
 
-var ShowTypes;
 (function (ShowTypes) {
     ShowTypes[ShowTypes["all"] = 'all'] = "all";
     ShowTypes[ShowTypes["focus"] = 'focus'] = "focus";
     ShowTypes[ShowTypes["mouseover"] = 'mouseover'] = "mouseover";
-})(ShowTypes || (ShowTypes = {}));
+})(exports.ShowTypes || (exports.ShowTypes = {}));
 
 function throttle(func, wait, options) {
     options = options || {};
@@ -999,19 +995,19 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
         var top = 0;
         var left = 0;
-        if (this.placement === PlacementTypes.right) {
+        if (this.placement === exports.PlacementTypes.right) {
             left = hostDim.left + hostDim.width + this.spacing;
             top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
         }
-        else if (this.placement === PlacementTypes.left) {
+        else if (this.placement === exports.PlacementTypes.left) {
             left = hostDim.left - elmDim.width - this.spacing;
             top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
         }
-        else if (this.placement === PlacementTypes.top) {
+        else if (this.placement === exports.PlacementTypes.top) {
             top = hostDim.top - elmDim.height - this.spacing;
             left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
         }
-        else if (this.placement === PlacementTypes.bottom) {
+        else if (this.placement === exports.PlacementTypes.bottom) {
             top = hostDim.top + hostDim.height + this.spacing;
             left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
         }
@@ -1023,19 +1019,19 @@ var TooltipContentComponent = (function () {
         var caretDimensions = caretElm.getBoundingClientRect();
         var top = 0;
         var left = 0;
-        if (this.placement === PlacementTypes.right) {
+        if (this.placement === exports.PlacementTypes.right) {
             left = -7;
             top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
         }
-        else if (this.placement === PlacementTypes.left) {
+        else if (this.placement === exports.PlacementTypes.left) {
             left = elmDim.width;
             top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
         }
-        else if (this.placement === PlacementTypes.top) {
+        else if (this.placement === exports.PlacementTypes.top) {
             top = elmDim.height;
             left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
         }
-        else if (this.placement === PlacementTypes.bottom) {
+        else if (this.placement === exports.PlacementTypes.bottom) {
             top = -7;
             left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
         }
@@ -1045,17 +1041,17 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
         var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
         if (shouldFlip) {
-            if (this.placement === PlacementTypes.right) {
-                this.placement = PlacementTypes.left;
+            if (this.placement === exports.PlacementTypes.right) {
+                this.placement = exports.PlacementTypes.left;
             }
-            else if (this.placement === PlacementTypes.left) {
-                this.placement = PlacementTypes.right;
+            else if (this.placement === exports.PlacementTypes.left) {
+                this.placement = exports.PlacementTypes.right;
             }
-            else if (this.placement === PlacementTypes.top) {
-                this.placement = PlacementTypes.bottom;
+            else if (this.placement === exports.PlacementTypes.top) {
+                this.placement = exports.PlacementTypes.bottom;
             }
-            else if (this.placement === PlacementTypes.bottom) {
-                this.placement = PlacementTypes.top;
+            else if (this.placement === exports.PlacementTypes.bottom) {
+                this.placement = exports.PlacementTypes.top;
             }
         }
     };
@@ -1084,7 +1080,7 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent = __decorate([
         _angular_core.Component({
             selector: 'swui-tooltip-content',
-            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
             animations: [
                 _angular_core.trigger('visibilityChanged', [
                     _angular_core.state('active', _angular_core.style({ opacity: 1, 'pointer-events': 'auto' })),
@@ -1151,14 +1147,14 @@ var TooltipDirective = (function () {
         this.tooltipSpacing = 0;
         this.tooltipDisabled = false;
         this.tooltipShowCaret = true;
-        this.tooltipPlacement = PlacementTypes.top;
-        this.tooltipAlignment = AlignmentTypes.center;
-        this.tooltipType = StyleTypes.popover;
+        this.tooltipPlacement = exports.PlacementTypes.top;
+        this.tooltipAlignment = exports.AlignmentTypes.center;
+        this.tooltipType = exports.StyleTypes.popover;
         this.tooltipCloseOnClickOutside = true;
         this.tooltipCloseOnMouseLeave = true;
         this.tooltipHideTimeout = 300;
         this.tooltipShowTimeout = 100;
-        this.tooltipShowEvent = ShowTypes.all;
+        this.tooltipShowEvent = exports.ShowTypes.all;
         this.onShow = new _angular_core.EventEmitter();
         this.onHide = new _angular_core.EventEmitter();
     }
@@ -1166,14 +1162,14 @@ var TooltipDirective = (function () {
         this.hide(true);
     };
     TooltipDirective.prototype.onFocus = function () {
-        if (this.tooltipShowEvent === ShowTypes.all ||
-            this.tooltipShowEvent === ShowTypes.focus) {
+        if (this.tooltipShowEvent === exports.ShowTypes.all ||
+            this.tooltipShowEvent === exports.ShowTypes.focus) {
             this.show();
         }
     };
     TooltipDirective.prototype.onMouseEnter = function () {
-        if (this.tooltipShowEvent === ShowTypes.all ||
-            this.tooltipShowEvent === ShowTypes.mouseover) {
+        if (this.tooltipShowEvent === exports.ShowTypes.all ||
+            this.tooltipShowEvent === exports.ShowTypes.mouseover) {
             this.show();
         }
     };
@@ -1217,8 +1213,8 @@ var TooltipDirective = (function () {
             });
         }
         var element = this.elementRef.nativeElement;
-        var addLeaveListener = this.tooltipShowEvent === ShowTypes.all ||
-            this.tooltipShowEvent === ShowTypes.mouseover;
+        var addLeaveListener = this.tooltipShowEvent === exports.ShowTypes.all ||
+            this.tooltipShowEvent === exports.ShowTypes.mouseover;
         if (addLeaveListener) {
             this.mouseLeaveEvent = this.renderer.listen(element, 'mouseleave', function () {
                 if (!entered) {
@@ -1226,8 +1222,8 @@ var TooltipDirective = (function () {
                 }
             });
         }
-        var addFocusListener = this.tooltipShowEvent === ShowTypes.all ||
-            this.tooltipShowEvent === ShowTypes.focus;
+        var addFocusListener = this.tooltipShowEvent === exports.ShowTypes.all ||
+            this.tooltipShowEvent === exports.ShowTypes.focus;
         if (addFocusListener) {
             this.focusOutEvent = this.renderer.listen(element, 'blur', function () {
                 if (!entered) {
@@ -1317,15 +1313,15 @@ var TooltipDirective = (function () {
     ], TooltipDirective.prototype, "tooltipShowCaret", void 0);
     __decorate([
         _angular_core.Input(), 
-        __metadata('design:type', (typeof (_a = typeof PlacementTypes !== 'undefined' && PlacementTypes) === 'function' && _a) || Object)
+        __metadata('design:type', (typeof (_a = typeof exports.PlacementTypes !== 'undefined' && exports.PlacementTypes) === 'function' && _a) || Object)
     ], TooltipDirective.prototype, "tooltipPlacement", void 0);
     __decorate([
         _angular_core.Input(), 
-        __metadata('design:type', (typeof (_b = typeof AlignmentTypes !== 'undefined' && AlignmentTypes) === 'function' && _b) || Object)
+        __metadata('design:type', (typeof (_b = typeof exports.AlignmentTypes !== 'undefined' && exports.AlignmentTypes) === 'function' && _b) || Object)
     ], TooltipDirective.prototype, "tooltipAlignment", void 0);
     __decorate([
         _angular_core.Input(), 
-        __metadata('design:type', (typeof (_c = typeof StyleTypes !== 'undefined' && StyleTypes) === 'function' && _c) || Object)
+        __metadata('design:type', (typeof (_c = typeof exports.StyleTypes !== 'undefined' && exports.StyleTypes) === 'function' && _c) || Object)
     ], TooltipDirective.prototype, "tooltipType", void 0);
     __decorate([
         _angular_core.Input(), 
@@ -1349,7 +1345,7 @@ var TooltipDirective = (function () {
     ], TooltipDirective.prototype, "tooltipTemplate", void 0);
     __decorate([
         _angular_core.Input(), 
-        __metadata('design:type', (typeof (_d = typeof ShowTypes !== 'undefined' && ShowTypes) === 'function' && _d) || Object)
+        __metadata('design:type', (typeof (_d = typeof exports.ShowTypes !== 'undefined' && exports.ShowTypes) === 'function' && _d) || Object)
     ], TooltipDirective.prototype, "tooltipShowEvent", void 0);
     __decorate([
         _angular_core.Input(), 
@@ -6964,6 +6960,63 @@ var NG2D3Module = (function () {
 }());
 
 exports.NG2D3Module = NG2D3Module;
+exports.AreaChart = AreaChart;
+exports.AreaChartNormalized = AreaChartNormalized;
+exports.AreaChartStacked = AreaChartStacked;
+exports.AreaSeries = AreaSeries;
+exports.AreaChartModule = AreaChartModule;
+exports.Bar = Bar;
+exports.BarHorizontal = BarHorizontal;
+exports.BarHorizontal2D = BarHorizontal2D;
+exports.BarHorizontalNormalized = BarHorizontalNormalized;
+exports.BarHorizontalStacked = BarHorizontalStacked;
+exports.BarVertical = BarVertical;
+exports.BarVertical2D = BarVertical2D;
+exports.BarVerticalNormalized = BarVerticalNormalized;
+exports.BarVerticalStacked = BarVerticalStacked;
+exports.SeriesHorizontal = SeriesHorizontal;
+exports.SeriesVertical = SeriesVertical;
+exports.BarChartModule = BarChartModule;
+exports.Chart = Chart;
+exports.Legend = Legend;
+exports.ScaleLegend = ScaleLegend;
+exports.CircleSeries = CircleSeries;
+exports.Circle = Circle;
+exports.GridPanel = GridPanel;
+exports.GridPanelSeries = GridPanelSeries;
+exports.SvgLinearGradient = SvgLinearGradient;
+exports.SvgRadialGradient = SvgRadialGradient;
+exports.Timeline = Timeline;
+exports.Area = Area;
+exports.AreaTooltip = AreaTooltip;
+exports.CommonModule = CommonModule$1;
+exports.TooltipModule = TooltipModule;
+exports.TooltipService = TooltipService;
+exports.TooltipContentComponent = TooltipContentComponent;
+exports.HeatMapCell = HeatMapCell;
+exports.HeatCellSeries = HeatCellSeries;
+exports.HeatMap = HeatMap;
+exports.HeatMapModule = HeatMapModule;
+exports.Line = Line;
+exports.LineChart = LineChart;
+exports.LineSeries = LineSeries;
+exports.LineChartModule = LineChartModule;
+exports.Card = Card;
+exports.CardSeries = CardSeries;
+exports.NumberCard = NumberCard;
+exports.NumberCardModule = NumberCardModule;
+exports.AdvancedPieChart = AdvancedPieChart;
+exports.PieLabel = PieLabel;
+exports.PieArc = PieArc;
+exports.PieChart = PieChart;
+exports.PieGrid = PieGrid;
+exports.PieGridSeries = PieGridSeries;
+exports.PieSeries = PieSeries;
+exports.PieChartModule = PieChartModule;
+exports.TreeMapCell = TreeMapCell;
+exports.TreeMapCellSeries = TreeMapCellSeries;
+exports.TreeMap = TreeMap;
+exports.TreeMapModule = TreeMapModule;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
