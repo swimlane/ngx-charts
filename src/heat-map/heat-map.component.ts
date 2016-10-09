@@ -8,9 +8,9 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
   selector: 'heat-map',
   template: `
     <chart
-      [legend]="false"
+      [legend]="legend"
       [legendData]="colorScale"
-      [data]="results.m0Domain"
+      [data]="valueDomain"
       [view]="view">
       <svg:g [attr.transform]="transform" class="heat-map chart">
 
