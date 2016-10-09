@@ -110,7 +110,7 @@ export class LineChart extends BaseChart implements OnChanges {
   areaPath: any;
   margin = [10, 20, 70, 70];
   hoveredVertical: any; // the value of the x axis that is hovered over
-  
+
   @Input() view;
   @Input() results;
   @Input() scheme;
@@ -148,22 +148,6 @@ export class LineChart extends BaseChart implements OnChanges {
     this.yScale = this.getYScale();
 
     this.setColors();
-
-    // let xProperty = (d) => {
-    //   let label = d.vals[0].label[0][0];
-    //   if (this.scaleType === 'time') {
-    //     return this.xScale(moment(label).toDate());
-    //   } else {
-    //     return this.xScale(label) + this.xScale.bandwidth() / 2;
-    //   }
-    // };
-    //
-    // let area = d3.area()
-    //   .x(xProperty)
-    //   .y0(() => this.yScale.range()[0])
-    //   .y1(d => this.yScale(d.vals[0].value));
-    //
-    // this.areaPath = area(this.series);
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;

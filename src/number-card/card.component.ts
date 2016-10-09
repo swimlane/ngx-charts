@@ -79,48 +79,6 @@ export class Card implements OnChanges {
     this.cardWidth = Math.max(0, this.width - 5);
     this.cardHeight = Math.max(0, this.height - 5);
     this.textWidth = Math.max(0, this.width - 15);
-
-    this.loadAnimation();
-  }
-
-  loadAnimation() {
-    // TODO: replace countup animation
-    // let node = d3.select(this.element).selectAll('.value-text');
-    //
-    // node.text('0');
-
-    this.animateToCurrentForm();
-  }
-
-  animateToCurrentForm() {
-    var options = {
-      useEasing: true,
-      useGrouping: true,
-      separator: ',',
-      decimal: '.',
-      prefix: '',
-      suffix: ''
-    };
-
-    var endValue = this.data.value;
-    if (this.data.valueType === 'currency') {
-      options.prefix = '$';
-    } else if (this.data.valueType === 'duration') {
-      if (endValue < 60) {
-        options.suffix = ' sec';
-      } else if (endValue < 3600) {
-        endValue = endValue / 60;
-        options.suffix = ' min';
-      } else {
-        endValue = endValue / 3600;
-        options.suffix = ' hours';
-      }
-    }
-
-    // TODO: replace countup animation
-    // let node = d3.select(this.element).selectAll('.value-text');
-    // var counter = new CountUp(node[0][0], 0, endValue, 0, 2.5, options);
-    // counter.start();
   }
 
   click() {

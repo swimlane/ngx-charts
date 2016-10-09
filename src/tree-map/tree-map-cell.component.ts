@@ -61,10 +61,6 @@ export class TreeMapCell implements OnChanges {
   }
 
   update() {
-    // this.transform = `translate(${this.x} , ${this.y})`;
-    // todo fix this by adding props
-    // this.formattedValue = formatNumber(props.value, props.valueType);
-
     this.formattedValue = this.value;
     if (this.initialized) {
       this.animateToCurrentForm();
