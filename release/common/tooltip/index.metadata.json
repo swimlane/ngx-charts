@@ -1,1 +1,0 @@
-{"__symbolic":"module","version":1,"metadata":{},"exports":[{"from":"./tooltip.module"},{"from":"./tooltip.service"},{"from":"./tooltip.component"},{"from":"./style.type"},{"from":"./placement.type"},{"from":"./alignment.type"},{"from":"./show.type"}]}
