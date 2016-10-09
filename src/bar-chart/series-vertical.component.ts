@@ -102,9 +102,13 @@ export class SeriesVertical implements OnChanges {
       };
 
       if (this.type === 'standard') {
-        bar.height = this.dims.height - this.yScale(value);
+        bar.height = Math.abs(this.yScale(value) - this.yScale(0));
         bar.x = this.xScale(label);
-        bar.y = this.yScale(value);
+        if (value < 0) {
+          bar.y = this.yScale(0);
+        } else {
+          bar.y = this.yScale(value);
+        }
       } else if (this.type === 'stacked') {
         let offset0 = d0;
         let offset1 = offset0 + value;

@@ -87,8 +87,12 @@ export class SeriesHorizontal implements OnChanges {
       bar.height = this.yScale.bandwidth();
 
       if (this.type === 'standard') {
-        bar.width = this.xScale(value);
-        bar.x = 0;
+        bar.width = Math.abs(this.xScale(value) - this.xScale(0));
+        if (value < 0) {
+          bar.x = this.xScale(value);
+        } else {
+          bar.x = this.xScale(0);
+        }
         bar.y = this.yScale(label);
       } else if (this.type === 'stacked') {
         let offset0 = d0;
