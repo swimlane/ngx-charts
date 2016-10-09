@@ -1,11 +1,11 @@
 webpackJsonp([1],{
 
-/***/ 107:
+/***/ 108:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared__ = __webpack_require__(70);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AbstractFormGroupDirective; });
 /**
  * @license
@@ -82,7 +82,7 @@ var AbstractFormGroupDirective = (function (_super) {
 
 /***/ },
 
-/***/ 108:
+/***/ 109:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -90,10 +90,10 @@ var AbstractFormGroupDirective = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_lang__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__model__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(70);
 /* unused harmony export formDirectiveProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NgForm; });
 /**
@@ -268,7 +268,7 @@ var NgForm = (function (_super) {
 
 /***/ },
 
-/***/ 109:
+/***/ 110:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -278,8 +278,8 @@ var NgForm = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_lang__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__reactive_errors__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(70);
 /* unused harmony export formDirectiveProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormGroupDirective; });
 /**
@@ -469,17 +469,17 @@ var FormGroupDirective = (function (_super) {
 
 /***/ },
 
-/***/ 110:
+/***/ 111:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__form_group_directive__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reactive_errors__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__form_group_directive__ = __webpack_require__(110);
 /* unused harmony export formGroupNameProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormGroupName; });
 /* unused harmony export formArrayNameProvider */
@@ -701,7 +701,7 @@ function _hasInvalidParent(parent) {
 
 /***/ },
 
-/***/ 1118:
+/***/ 1117:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -711,8 +711,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var root_1 = __webpack_require__(122);
-var Observable_1 = __webpack_require__(174);
+var root_1 = __webpack_require__(123);
+var Observable_1 = __webpack_require__(175);
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -829,23 +829,23 @@ function dispatchError(arg) {
 
 /***/ },
 
-/***/ 1119:
+/***/ 1118:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var PromiseObservable_1 = __webpack_require__(1118);
+var PromiseObservable_1 = __webpack_require__(1117);
 exports.fromPromise = PromiseObservable_1.PromiseObservable.create;
 //# sourceMappingURL=fromPromise.js.map
 
 /***/ },
 
-/***/ 1120:
+/***/ 1119:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
-var root_1 = __webpack_require__(122);
+var root_1 = __webpack_require__(123);
 /**
  * @param PromiseCtor
  * @return {Promise<T>}
@@ -875,7 +875,7 @@ exports.toPromise = toPromise;
 
 /***/ },
 
-/***/ 1128:
+/***/ 1127:
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -884,7 +884,7 @@ exports.toPromise = toPromise;
 var content = __webpack_require__(913);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(387)(content, {});
+var update = __webpack_require__(567)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -902,7 +902,7 @@ if(false) {
 
 /***/ },
 
-/***/ 1129:
+/***/ 1128:
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -911,34 +911,7 @@ if(false) {
 var content = __webpack_require__(914);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(387)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/postcss-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./tooltip.scss", function() {
-			var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/postcss-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./tooltip.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ },
-
-/***/ 1130:
-/***/ function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(915);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(387)(content, {});
+var update = __webpack_require__(567)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -956,7 +929,7 @@ if(false) {
 
 /***/ },
 
-/***/ 1132:
+/***/ 1130:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -971,11 +944,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var platform_browser_1 = __webpack_require__(77);
-var forms_1 = __webpack_require__(561);
+var platform_browser_1 = __webpack_require__(102);
+var forms_1 = __webpack_require__(569);
 var platform_browser_dynamic_1 = __webpack_require__(177);
-var app_1 = __webpack_require__(562);
-var ng2d3_1 = __webpack_require__(563);
+var app_1 = __webpack_require__(570);
+var ng2d3_1 = __webpack_require__(571);
 var AppModule = (function () {
     function AppModule() {
     }
@@ -998,7 +971,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ },
 
-/***/ 142:
+/***/ 143:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1063,7 +1036,7 @@ var CheckboxControlValueAccessor = (function () {
 
 /***/ },
 
-/***/ 143:
+/***/ 144:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1135,16 +1108,16 @@ var DefaultValueAccessor = (function () {
 
 /***/ },
 
-/***/ 144:
+/***/ 145:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_form__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__ = __webpack_require__(447);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ng_form__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__ = __webpack_require__(446);
 /* unused harmony export modelGroupProvider */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NgModelGroup; });
 /**
@@ -1226,14 +1199,14 @@ var NgModelGroup = (function (_super) {
 
 /***/ },
 
-/***/ 145:
+/***/ 146:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_value_accessor__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng_control__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng_control__ = __webpack_require__(77);
 /* unused harmony export RADIO_VALUE_ACCESSOR */
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return RadioControlRegistry; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RadioControlValueAccessor; });
@@ -1377,11 +1350,11 @@ var RadioControlValueAccessor = (function () {
 
 /***/ },
 
-/***/ 146:
+/***/ 147:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(446);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(445);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ReactiveErrors; });
 /**
  * @license
@@ -1418,7 +1391,7 @@ var ReactiveErrors = (function () {
 
 /***/ },
 
-/***/ 147:
+/***/ 148:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1592,7 +1565,7 @@ var NgSelectOption = (function () {
 
 /***/ },
 
-/***/ 148:
+/***/ 149:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1806,13 +1779,13 @@ var SELECT_DIRECTIVES = [SelectMultipleControlValueAccessor, NgSelectMultipleOpt
 
 /***/ },
 
-/***/ 149:
+/***/ 150:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__ = __webpack_require__(1119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__ = __webpack_require__(1118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_shared__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_shared__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_async__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__facade_lang__ = __webpack_require__(31);
@@ -3465,7 +3438,7 @@ var AbstractControlDirective = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_lang__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__control_container__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng_control__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ng_control__ = __webpack_require__(77);
 /* unused harmony export AbstractControlStatus */
 /* unused harmony export ngControlStatusHost */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NgControlStatus; });
@@ -3595,16 +3568,16 @@ var NgControlStatusGroup = (function (_super) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__model__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_form_group_directive__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_form_group_directive__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_container__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__control_value_accessor__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_control__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_form__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_model_group__ = __webpack_require__(144);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__ = __webpack_require__(447);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ng_control__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ng_form__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ng_model_group__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__shared__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__ = __webpack_require__(446);
 /* unused harmony export formControlBinding */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return NgModel; });
 /**
@@ -3910,9 +3883,9 @@ var NumberValueAccessor = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_value_accessor__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ng_control__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ng_control__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__reactive_errors__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared__ = __webpack_require__(70);
 /* unused harmony export formControlBinding */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormControlDirective; });
 /**
@@ -4064,14 +4037,14 @@ var FormControlDirective = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_async__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__abstract_form_group_directive__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__abstract_form_group_directive__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__control_container__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__control_value_accessor__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ng_control__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reactive_errors__ = __webpack_require__(146);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__form_group_directive__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__form_group_name__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ng_control__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__reactive_errors__ = __webpack_require__(147);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__form_group_directive__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__form_group_name__ = __webpack_require__(111);
 /* unused harmony export controlNameBinding */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormControlName; });
 /**
@@ -4499,6 +4472,182 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var core_1 = __webpack_require__(0);
+var throttle_1 = __webpack_require__(725);
+var position_helper_1 = __webpack_require__(703);
+var tooltip_options_1 = __webpack_require__(470);
+var placement_type_1 = __webpack_require__(226);
+var TooltipContentComponent = (function () {
+    function TooltipContentComponent(element, renderer, options) {
+        this.element = element;
+        this.renderer = renderer;
+        Object.assign(this, options);
+    }
+    Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
+        get: function () {
+            var clz = 'swui-tooltip-content';
+            clz += " position-" + this.placement;
+            clz += " type-" + this.type;
+            clz += " " + this.cssClass;
+            return clz;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
+        get: function () {
+            return 'active';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TooltipContentComponent.prototype.ngAfterViewInit = function () {
+        setTimeout(this.position.bind(this), 0);
+    };
+    TooltipContentComponent.prototype.position = function () {
+        var nativeElm = this.element.nativeElement;
+        var hostDim = this.host.nativeElement.getBoundingClientRect();
+        var elmDim = nativeElm.getBoundingClientRect();
+        this.checkFlip(hostDim, elmDim);
+        this.positionContent(nativeElm, hostDim, elmDim);
+        if (this.showCaret) {
+            this.positionCaret(hostDim, elmDim);
+        }
+    };
+    TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
+        var top = 0;
+        var left = 0;
+        if (this.placement === placement_type_1.PlacementTypes.right) {
+            left = hostDim.left + hostDim.width + this.spacing;
+            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
+        }
+        else if (this.placement === placement_type_1.PlacementTypes.left) {
+            left = hostDim.left - elmDim.width - this.spacing;
+            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
+        }
+        else if (this.placement === placement_type_1.PlacementTypes.top) {
+            top = hostDim.top - elmDim.height - this.spacing;
+            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
+        }
+        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
+            top = hostDim.top + hostDim.height + this.spacing;
+            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
+        }
+        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
+        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
+    };
+    TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
+        var caretElm = this.caretElm.nativeElement;
+        var caretDimensions = caretElm.getBoundingClientRect();
+        var top = 0;
+        var left = 0;
+        if (this.placement === placement_type_1.PlacementTypes.right) {
+            left = -7;
+            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        else if (this.placement === placement_type_1.PlacementTypes.left) {
+            left = elmDim.width;
+            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        else if (this.placement === placement_type_1.PlacementTypes.top) {
+            top = elmDim.height;
+            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
+            top = -7;
+            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
+        }
+        this.renderer.setElementStyle(caretElm, 'top', top + "px");
+        this.renderer.setElementStyle(caretElm, 'left', left + "px");
+    };
+    TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
+        var shouldFlip = position_helper_1.PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
+        if (shouldFlip) {
+            if (this.placement === placement_type_1.PlacementTypes.right) {
+                this.placement = placement_type_1.PlacementTypes.left;
+            }
+            else if (this.placement === placement_type_1.PlacementTypes.left) {
+                this.placement = placement_type_1.PlacementTypes.right;
+            }
+            else if (this.placement === placement_type_1.PlacementTypes.top) {
+                this.placement = placement_type_1.PlacementTypes.bottom;
+            }
+            else if (this.placement === placement_type_1.PlacementTypes.bottom) {
+                this.placement = placement_type_1.PlacementTypes.top;
+            }
+        }
+    };
+    TooltipContentComponent.prototype.onWindowResize = function () {
+        this.position();
+    };
+    __decorate([
+        core_1.ViewChild('caretElm'), 
+        __metadata('design:type', Object)
+    ], TooltipContentComponent.prototype, "caretElm", void 0);
+    __decorate([
+        core_1.HostBinding('class'), 
+        __metadata('design:type', Object)
+    ], TooltipContentComponent.prototype, "cssClasses", null);
+    __decorate([
+        core_1.HostBinding('@visibilityChanged'), 
+        __metadata('design:type', Object)
+    ], TooltipContentComponent.prototype, "visibilityChanged", null);
+    __decorate([
+        core_1.HostListener('window:resize'),
+        throttle_1.throttleable(100), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipContentComponent.prototype, "onWindowResize", null);
+    TooltipContentComponent = __decorate([
+        core_1.Component({
+            selector: 'swui-tooltip-content',
+            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+            animations: [
+                core_1.trigger('visibilityChanged', [
+                    core_1.state('active', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
+                    core_1.transition('void => *', [
+                        core_1.style({
+                            opacity: 0,
+                            'pointer-events': 'none',
+                            transform: 'translate3d(0, 0, 0)'
+                        }),
+                        core_1.animate('0.3s ease-out')
+                    ]),
+                    core_1.transition('* => void', [
+                        core_1.style({ opacity: 1 }),
+                        core_1.animate('0.2s ease-out')
+                    ])
+                ])
+            ]
+        }),
+        __param(2, core_1.Inject(tooltip_options_1.TooltipOptions)), 
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer, tooltip_options_1.TooltipOptions])
+    ], TooltipContentComponent);
+    return TooltipContentComponent;
+}());
+exports.TooltipContentComponent = TooltipContentComponent;
+
+
+/***/ },
+
+/***/ 228:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = __webpack_require__(0);
 var TooltipService = (function () {
     function TooltipService() {
@@ -4528,63 +4677,6 @@ var TooltipService = (function () {
     return TooltipService;
 }());
 exports.TooltipService = TooltipService;
-
-
-/***/ },
-
-/***/ 256:
-/***/ function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
 
 
 /***/ },
@@ -4989,260 +5081,7 @@ function escapeRegExp(s) {
 
 /***/ },
 
-/***/ 387:
-/***/ function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-var stylesInDom = {},
-	memoize = function(fn) {
-		var memo;
-		return function () {
-			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-			return memo;
-		};
-	},
-	isOldIE = memoize(function() {
-		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-	}),
-	getHeadElement = memoize(function () {
-		return document.head || document.getElementsByTagName("head")[0];
-	}),
-	singletonElement = null,
-	singletonCounter = 0,
-	styleElementsInsertedAtTop = [];
-
-module.exports = function(list, options) {
-	if(typeof DEBUG !== "undefined" && DEBUG) {
-		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the bottom of <head>.
-	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-	var styles = listToStyles(list);
-	addStylesToDom(styles, options);
-
-	return function update(newList) {
-		var mayRemove = [];
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-		if(newList) {
-			var newStyles = listToStyles(newList);
-			addStylesToDom(newStyles, options);
-		}
-		for(var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-			if(domStyle.refs === 0) {
-				for(var j = 0; j < domStyle.parts.length; j++)
-					domStyle.parts[j]();
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-}
-
-function addStylesToDom(styles, options) {
-	for(var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-		if(domStyle) {
-			domStyle.refs++;
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles(list) {
-	var styles = [];
-	var newStyles = {};
-	for(var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-		if(!newStyles[id])
-			styles.push(newStyles[id] = {id: id, parts: [part]});
-		else
-			newStyles[id].parts.push(part);
-	}
-	return styles;
-}
-
-function insertStyleElement(options, styleElement) {
-	var head = getHeadElement();
-	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-	if (options.insertAt === "top") {
-		if(!lastStyleElementInsertedAtTop) {
-			head.insertBefore(styleElement, head.firstChild);
-		} else if(lastStyleElementInsertedAtTop.nextSibling) {
-			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			head.appendChild(styleElement);
-		}
-		styleElementsInsertedAtTop.push(styleElement);
-	} else if (options.insertAt === "bottom") {
-		head.appendChild(styleElement);
-	} else {
-		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-	}
-}
-
-function removeStyleElement(styleElement) {
-	styleElement.parentNode.removeChild(styleElement);
-	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-	if(idx >= 0) {
-		styleElementsInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement(options) {
-	var styleElement = document.createElement("style");
-	styleElement.type = "text/css";
-	insertStyleElement(options, styleElement);
-	return styleElement;
-}
-
-function createLinkElement(options) {
-	var linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	insertStyleElement(options, linkElement);
-	return linkElement;
-}
-
-function addStyle(obj, options) {
-	var styleElement, update, remove;
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-		styleElement = singletonElement || (singletonElement = createStyleElement(options));
-		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-	} else if(obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function") {
-		styleElement = createLinkElement(options);
-		update = updateLink.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-			if(styleElement.href)
-				URL.revokeObjectURL(styleElement.href);
-		};
-	} else {
-		styleElement = createStyleElement(options);
-		update = applyToTag.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle(newObj) {
-		if(newObj) {
-			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-				return;
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag(styleElement, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = styleElement.childNodes;
-		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-		if (childNodes.length) {
-			styleElement.insertBefore(cssNode, childNodes[index]);
-		} else {
-			styleElement.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag(styleElement, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		styleElement.setAttribute("media", media)
-	}
-
-	if(styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = css;
-	} else {
-		while(styleElement.firstChild) {
-			styleElement.removeChild(styleElement.firstChild);
-		}
-		styleElement.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink(linkElement, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	if(sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = linkElement.href;
-
-	linkElement.href = URL.createObjectURL(blob);
-
-	if(oldSrc)
-		URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ },
-
-/***/ 446:
+/***/ 445:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5265,11 +5104,11 @@ var FormErrorExamples = {
 
 /***/ },
 
-/***/ 447:
+/***/ 446:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(446);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_examples__ = __webpack_require__(445);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TemplateDrivenErrors; });
 /**
  * @license
@@ -5300,14 +5139,14 @@ var TemplateDrivenErrors = (function () {
 
 /***/ },
 
-/***/ 448:
+/***/ 447:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_lang__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model__ = __webpack_require__(150);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormBuilder; });
 /**
  * @license
@@ -5416,7 +5255,139 @@ var FormBuilder = (function () {
 
 /***/ },
 
+/***/ 461:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var area_chart_component_1 = __webpack_require__(672);
+exports.AreaChart = area_chart_component_1.AreaChart;
+var area_chart_normalized_component_1 = __webpack_require__(670);
+exports.AreaChartNormalized = area_chart_normalized_component_1.AreaChartNormalized;
+var area_chart_stacked_component_1 = __webpack_require__(671);
+exports.AreaChartStacked = area_chart_stacked_component_1.AreaChartStacked;
+var area_series_component_1 = __webpack_require__(673);
+exports.AreaSeries = area_series_component_1.AreaSeries;
+var common_module_1 = __webpack_require__(61);
+var AreaChartModule = (function () {
+    function AreaChartModule() {
+    }
+    AreaChartModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                area_chart_component_1.AreaChart,
+                area_chart_normalized_component_1.AreaChartNormalized,
+                area_chart_stacked_component_1.AreaChartStacked,
+                area_series_component_1.AreaSeries
+            ],
+            exports: [
+                area_chart_component_1.AreaChart,
+                area_chart_normalized_component_1.AreaChartNormalized,
+                area_chart_stacked_component_1.AreaChartStacked,
+                area_series_component_1.AreaSeries
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AreaChartModule);
+    return AreaChartModule;
+}());
+exports.AreaChartModule = AreaChartModule;
+
+
+/***/ },
+
 /***/ 462:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(61);
+var bar_component_1 = __webpack_require__(682);
+exports.Bar = bar_component_1.Bar;
+var bar_horizontal_component_1 = __webpack_require__(677);
+exports.BarHorizontal = bar_horizontal_component_1.BarHorizontal;
+var bar_horizontal_2d_component_1 = __webpack_require__(674);
+exports.BarHorizontal2D = bar_horizontal_2d_component_1.BarHorizontal2D;
+var bar_horizontal_normalized_component_1 = __webpack_require__(675);
+exports.BarHorizontalNormalized = bar_horizontal_normalized_component_1.BarHorizontalNormalized;
+var bar_horizontal_stacked_component_1 = __webpack_require__(676);
+exports.BarHorizontalStacked = bar_horizontal_stacked_component_1.BarHorizontalStacked;
+var bar_vertical_component_1 = __webpack_require__(681);
+exports.BarVertical = bar_vertical_component_1.BarVertical;
+var bar_vertical_2d_component_1 = __webpack_require__(678);
+exports.BarVertical2D = bar_vertical_2d_component_1.BarVertical2D;
+var bar_vertical_normalized_component_1 = __webpack_require__(679);
+exports.BarVerticalNormalized = bar_vertical_normalized_component_1.BarVerticalNormalized;
+var bar_vertical_stacked_component_1 = __webpack_require__(680);
+exports.BarVerticalStacked = bar_vertical_stacked_component_1.BarVerticalStacked;
+var series_horizontal_component_1 = __webpack_require__(683);
+exports.SeriesHorizontal = series_horizontal_component_1.SeriesHorizontal;
+var series_vertical_component_1 = __webpack_require__(684);
+exports.SeriesVertical = series_vertical_component_1.SeriesVertical;
+var BarChartModule = (function () {
+    function BarChartModule() {
+    }
+    BarChartModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                bar_component_1.Bar,
+                bar_horizontal_component_1.BarHorizontal,
+                bar_horizontal_2d_component_1.BarHorizontal2D,
+                bar_horizontal_normalized_component_1.BarHorizontalNormalized,
+                bar_horizontal_stacked_component_1.BarHorizontalStacked,
+                bar_vertical_component_1.BarVertical,
+                bar_vertical_2d_component_1.BarVertical2D,
+                bar_vertical_normalized_component_1.BarVerticalNormalized,
+                bar_vertical_stacked_component_1.BarVerticalStacked,
+                series_horizontal_component_1.SeriesHorizontal,
+                series_vertical_component_1.SeriesVertical
+            ],
+            exports: [
+                bar_component_1.Bar,
+                bar_horizontal_component_1.BarHorizontal,
+                bar_horizontal_2d_component_1.BarHorizontal2D,
+                bar_horizontal_normalized_component_1.BarHorizontalNormalized,
+                bar_horizontal_stacked_component_1.BarHorizontalStacked,
+                bar_vertical_component_1.BarVertical,
+                bar_vertical_2d_component_1.BarVertical2D,
+                bar_vertical_normalized_component_1.BarVerticalNormalized,
+                bar_vertical_stacked_component_1.BarVerticalStacked,
+                series_horizontal_component_1.SeriesHorizontal,
+                series_vertical_component_1.SeriesVertical
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], BarChartModule);
+    return BarChartModule;
+}());
+exports.BarChartModule = BarChartModule;
+
+
+/***/ },
+
+/***/ 463:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5439,7 +5410,7 @@ exports.reduceTicks = reduceTicks;
 
 /***/ },
 
-/***/ 463:
+/***/ 464:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5500,7 +5471,7 @@ function getTotal(results) {
 
 /***/ },
 
-/***/ 464:
+/***/ 465:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5522,7 +5493,7 @@ exports.tickFormat = tickFormat;
 
 /***/ },
 
-/***/ 465:
+/***/ 466:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5537,7 +5508,26 @@ var AlignmentTypes = exports.AlignmentTypes;
 
 /***/ },
 
-/***/ 466:
+/***/ 467:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__(705));
+__export(__webpack_require__(228));
+__export(__webpack_require__(227));
+__export(__webpack_require__(469));
+__export(__webpack_require__(226));
+__export(__webpack_require__(466));
+__export(__webpack_require__(468));
+
+
+/***/ },
+
+/***/ 468:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5552,7 +5542,7 @@ var ShowTypes = exports.ShowTypes;
 
 /***/ },
 
-/***/ 467:
+/***/ 469:
 /***/ function(module, exports) {
 
 "use strict";
@@ -5562,212 +5552,6 @@ var ShowTypes = exports.ShowTypes;
     StyleTypes[StyleTypes["tooltip"] = 'tooltip'] = "tooltip";
 })(exports.StyleTypes || (exports.StyleTypes = {}));
 var StyleTypes = exports.StyleTypes;
-
-
-/***/ },
-
-/***/ 468:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var TooltipOptions = (function () {
-    function TooltipOptions(opts) {
-        Object.assign(this, opts);
-    }
-    TooltipOptions = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [Object])
-    ], TooltipOptions);
-    return TooltipOptions;
-}());
-exports.TooltipOptions = TooltipOptions;
-
-
-/***/ },
-
-/***/ 469:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var core_1 = __webpack_require__(0);
-var throttle_1 = __webpack_require__(725);
-var position_helper_1 = __webpack_require__(698);
-var tooltip_options_1 = __webpack_require__(468);
-var placement_type_1 = __webpack_require__(226);
-var TooltipContentComponent = (function () {
-    function TooltipContentComponent(element, renderer, options) {
-        this.element = element;
-        this.renderer = renderer;
-        Object.assign(this, options);
-    }
-    Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
-        get: function () {
-            var clz = 'swui-tooltip-content';
-            clz += " position-" + this.placement;
-            clz += " type-" + this.type;
-            clz += " " + this.cssClass;
-            return clz;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
-        get: function () {
-            return 'active';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TooltipContentComponent.prototype.ngAfterViewInit = function () {
-        setTimeout(this.position.bind(this), 0);
-    };
-    TooltipContentComponent.prototype.position = function () {
-        var nativeElm = this.element.nativeElement;
-        var hostDim = this.host.nativeElement.getBoundingClientRect();
-        var elmDim = nativeElm.getBoundingClientRect();
-        this.checkFlip(hostDim, elmDim);
-        this.positionContent(nativeElm, hostDim, elmDim);
-        if (this.showCaret) {
-            this.positionCaret(hostDim, elmDim);
-        }
-    };
-    TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
-        var top = 0;
-        var left = 0;
-        if (this.placement === placement_type_1.PlacementTypes.right) {
-            left = hostDim.left + hostDim.width + this.spacing;
-            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.left) {
-            left = hostDim.left - elmDim.width - this.spacing;
-            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.top) {
-            top = hostDim.top - elmDim.height - this.spacing;
-            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-            top = hostDim.top + hostDim.height + this.spacing;
-            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
-        }
-        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
-        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
-    };
-    TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
-        var caretElm = this.caretElm.nativeElement;
-        var caretDimensions = caretElm.getBoundingClientRect();
-        var top = 0;
-        var left = 0;
-        if (this.placement === placement_type_1.PlacementTypes.right) {
-            left = -7;
-            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.left) {
-            left = elmDim.width;
-            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.top) {
-            top = elmDim.height;
-            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-            top = -7;
-            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        this.renderer.setElementStyle(caretElm, 'top', top + "px");
-        this.renderer.setElementStyle(caretElm, 'left', left + "px");
-    };
-    TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
-        var shouldFlip = position_helper_1.PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
-        if (shouldFlip) {
-            if (this.placement === placement_type_1.PlacementTypes.right) {
-                this.placement = placement_type_1.PlacementTypes.left;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.left) {
-                this.placement = placement_type_1.PlacementTypes.right;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.top) {
-                this.placement = placement_type_1.PlacementTypes.bottom;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-                this.placement = placement_type_1.PlacementTypes.top;
-            }
-        }
-    };
-    TooltipContentComponent.prototype.onWindowResize = function () {
-        this.position();
-    };
-    __decorate([
-        core_1.ViewChild('caretElm'), 
-        __metadata('design:type', Object)
-    ], TooltipContentComponent.prototype, "caretElm", void 0);
-    __decorate([
-        core_1.HostBinding('class'), 
-        __metadata('design:type', Object)
-    ], TooltipContentComponent.prototype, "cssClasses", null);
-    __decorate([
-        core_1.HostBinding('@visibilityChanged'), 
-        __metadata('design:type', Object)
-    ], TooltipContentComponent.prototype, "visibilityChanged", null);
-    __decorate([
-        core_1.HostListener('window:resize'),
-        throttle_1.throttleable(100), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], TooltipContentComponent.prototype, "onWindowResize", null);
-    TooltipContentComponent = __decorate([
-        core_1.Component({
-            selector: 'swui-tooltip-content',
-            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
-            animations: [
-                core_1.trigger('visibilityChanged', [
-                    core_1.state('active', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
-                    core_1.transition('void => *', [
-                        core_1.style({
-                            opacity: 0,
-                            'pointer-events': 'none',
-                            transform: 'translate3d(0, 0, 0)'
-                        }),
-                        core_1.animate('0.3s ease-out')
-                    ]),
-                    core_1.transition('* => void', [
-                        core_1.style({ opacity: 1 }),
-                        core_1.animate('0.2s ease-out')
-                    ])
-                ])
-            ]
-        }),
-        __param(2, core_1.Inject(tooltip_options_1.TooltipOptions)), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer, tooltip_options_1.TooltipOptions])
-    ], TooltipContentComponent);
-    return TooltipContentComponent;
-}());
-exports.TooltipContentComponent = TooltipContentComponent;
 
 
 /***/ },
@@ -5798,6 +5582,292 @@ var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueT
 /***/ },
 
 /***/ 470:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var TooltipOptions = (function () {
+    function TooltipOptions(opts) {
+        Object.assign(this, opts);
+    }
+    TooltipOptions = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [Object])
+    ], TooltipOptions);
+    return TooltipOptions;
+}());
+exports.TooltipOptions = TooltipOptions;
+
+
+/***/ },
+
+/***/ 471:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(61);
+var heat_map_cell_component_1 = __webpack_require__(707);
+exports.HeatMapCell = heat_map_cell_component_1.HeatMapCell;
+var heat_map_cell_series_component_1 = __webpack_require__(706);
+exports.HeatCellSeries = heat_map_cell_series_component_1.HeatCellSeries;
+var heat_map_component_1 = __webpack_require__(708);
+exports.HeatMap = heat_map_component_1.HeatMap;
+var HeatMapModule = (function () {
+    function HeatMapModule() {
+    }
+    HeatMapModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                heat_map_cell_component_1.HeatMapCell,
+                heat_map_cell_series_component_1.HeatCellSeries,
+                heat_map_component_1.HeatMap
+            ],
+            exports: [
+                heat_map_cell_component_1.HeatMapCell,
+                heat_map_cell_series_component_1.HeatCellSeries,
+                heat_map_component_1.HeatMap
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], HeatMapModule);
+    return HeatMapModule;
+}());
+exports.HeatMapModule = HeatMapModule;
+
+
+/***/ },
+
+/***/ 472:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(61);
+var line_component_1 = __webpack_require__(711);
+exports.Line = line_component_1.Line;
+var line_chart_component_1 = __webpack_require__(709);
+exports.LineChart = line_chart_component_1.LineChart;
+var line_series_component_1 = __webpack_require__(710);
+exports.LineSeries = line_series_component_1.LineSeries;
+var LineChartModule = (function () {
+    function LineChartModule() {
+    }
+    LineChartModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                line_component_1.Line,
+                line_chart_component_1.LineChart,
+                line_series_component_1.LineSeries
+            ],
+            exports: [
+                line_component_1.Line,
+                line_chart_component_1.LineChart,
+                line_series_component_1.LineSeries
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], LineChartModule);
+    return LineChartModule;
+}());
+exports.LineChartModule = LineChartModule;
+
+
+/***/ },
+
+/***/ 473:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(61);
+var card_component_1 = __webpack_require__(713);
+exports.Card = card_component_1.Card;
+var card_series_component_1 = __webpack_require__(712);
+exports.CardSeries = card_series_component_1.CardSeries;
+var number_card_component_1 = __webpack_require__(714);
+exports.NumberCard = number_card_component_1.NumberCard;
+var NumberCardModule = (function () {
+    function NumberCardModule() {
+    }
+    NumberCardModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                card_component_1.Card,
+                card_series_component_1.CardSeries,
+                number_card_component_1.NumberCard
+            ],
+            exports: [
+                card_component_1.Card,
+                card_series_component_1.CardSeries,
+                number_card_component_1.NumberCard
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], NumberCardModule);
+    return NumberCardModule;
+}());
+exports.NumberCardModule = NumberCardModule;
+
+
+/***/ },
+
+/***/ 474:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(61);
+var advanced_pie_chart_component_1 = __webpack_require__(715);
+exports.AdvancedPieChart = advanced_pie_chart_component_1.AdvancedPieChart;
+var pie_label_component_1 = __webpack_require__(720);
+exports.PieLabel = pie_label_component_1.PieLabel;
+var pie_arc_component_1 = __webpack_require__(716);
+exports.PieArc = pie_arc_component_1.PieArc;
+var pie_chart_component_1 = __webpack_require__(717);
+exports.PieChart = pie_chart_component_1.PieChart;
+var pie_grid_component_1 = __webpack_require__(719);
+exports.PieGrid = pie_grid_component_1.PieGrid;
+var pie_grid_series_component_1 = __webpack_require__(718);
+exports.PieGridSeries = pie_grid_series_component_1.PieGridSeries;
+var pie_series_component_1 = __webpack_require__(721);
+exports.PieSeries = pie_series_component_1.PieSeries;
+var PieChartModule = (function () {
+    function PieChartModule() {
+    }
+    PieChartModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                advanced_pie_chart_component_1.AdvancedPieChart,
+                pie_label_component_1.PieLabel,
+                pie_arc_component_1.PieArc,
+                pie_chart_component_1.PieChart,
+                pie_grid_component_1.PieGrid,
+                pie_grid_series_component_1.PieGridSeries,
+                pie_series_component_1.PieSeries
+            ],
+            exports: [
+                advanced_pie_chart_component_1.AdvancedPieChart,
+                pie_label_component_1.PieLabel,
+                pie_arc_component_1.PieArc,
+                pie_chart_component_1.PieChart,
+                pie_grid_component_1.PieGrid,
+                pie_grid_series_component_1.PieGridSeries,
+                pie_series_component_1.PieSeries
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], PieChartModule);
+    return PieChartModule;
+}());
+exports.PieChartModule = PieChartModule;
+
+
+/***/ },
+
+/***/ 475:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(61);
+var tree_map_cell_component_1 = __webpack_require__(723);
+exports.TreeMapCell = tree_map_cell_component_1.TreeMapCell;
+var tree_map_cell_series_component_1 = __webpack_require__(722);
+exports.TreeMapCellSeries = tree_map_cell_series_component_1.TreeMapCellSeries;
+var tree_map_component_1 = __webpack_require__(724);
+exports.TreeMap = tree_map_component_1.TreeMap;
+var TreeMapModule = (function () {
+    function TreeMapModule() {
+    }
+    TreeMapModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                tree_map_cell_component_1.TreeMapCell,
+                tree_map_cell_series_component_1.TreeMapCellSeries,
+                tree_map_component_1.TreeMap
+            ],
+            exports: [
+                tree_map_cell_component_1.TreeMapCell,
+                tree_map_cell_series_component_1.TreeMapCellSeries,
+                tree_map_component_1.TreeMap
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TreeMapModule);
+    return TreeMapModule;
+}());
+exports.TreeMapModule = TreeMapModule;
+
+
+/***/ },
+
+/***/ 476:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5855,7 +5925,7 @@ exports.InjectionService = InjectionService;
 
 /***/ },
 
-/***/ 471:
+/***/ 477:
 /***/ function(module, exports) {
 
 "use strict";
@@ -6258,7 +6328,7 @@ var SetWrapper = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__ = __webpack_require__(1120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__ = __webpack_require__(1119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__facade_lang__ = __webpack_require__(31);
@@ -6412,11 +6482,321 @@ function _mergeErrors(arrayOfErrors) {
 
 /***/ },
 
-/***/ 561:
+/***/ 507:
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ },
+
+/***/ 567:
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+var stylesInDom = {},
+	memoize = function(fn) {
+		var memo;
+		return function () {
+			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+			return memo;
+		};
+	},
+	isOldIE = memoize(function() {
+		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+	}),
+	getHeadElement = memoize(function () {
+		return document.head || document.getElementsByTagName("head")[0];
+	}),
+	singletonElement = null,
+	singletonCounter = 0,
+	styleElementsInsertedAtTop = [];
+
+module.exports = function(list, options) {
+	if(typeof DEBUG !== "undefined" && DEBUG) {
+		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the bottom of <head>.
+	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+	var styles = listToStyles(list);
+	addStylesToDom(styles, options);
+
+	return function update(newList) {
+		var mayRemove = [];
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+		if(newList) {
+			var newStyles = listToStyles(newList);
+			addStylesToDom(newStyles, options);
+		}
+		for(var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+			if(domStyle.refs === 0) {
+				for(var j = 0; j < domStyle.parts.length; j++)
+					domStyle.parts[j]();
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+}
+
+function addStylesToDom(styles, options) {
+	for(var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+		if(domStyle) {
+			domStyle.refs++;
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles(list) {
+	var styles = [];
+	var newStyles = {};
+	for(var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+		if(!newStyles[id])
+			styles.push(newStyles[id] = {id: id, parts: [part]});
+		else
+			newStyles[id].parts.push(part);
+	}
+	return styles;
+}
+
+function insertStyleElement(options, styleElement) {
+	var head = getHeadElement();
+	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+	if (options.insertAt === "top") {
+		if(!lastStyleElementInsertedAtTop) {
+			head.insertBefore(styleElement, head.firstChild);
+		} else if(lastStyleElementInsertedAtTop.nextSibling) {
+			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			head.appendChild(styleElement);
+		}
+		styleElementsInsertedAtTop.push(styleElement);
+	} else if (options.insertAt === "bottom") {
+		head.appendChild(styleElement);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement(styleElement) {
+	styleElement.parentNode.removeChild(styleElement);
+	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+	if(idx >= 0) {
+		styleElementsInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement(options) {
+	var styleElement = document.createElement("style");
+	styleElement.type = "text/css";
+	insertStyleElement(options, styleElement);
+	return styleElement;
+}
+
+function createLinkElement(options) {
+	var linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	insertStyleElement(options, linkElement);
+	return linkElement;
+}
+
+function addStyle(obj, options) {
+	var styleElement, update, remove;
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+		styleElement = singletonElement || (singletonElement = createStyleElement(options));
+		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+	} else if(obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function") {
+		styleElement = createLinkElement(options);
+		update = updateLink.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+			if(styleElement.href)
+				URL.revokeObjectURL(styleElement.href);
+		};
+	} else {
+		styleElement = createStyleElement(options);
+		update = applyToTag.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle(newObj) {
+		if(newObj) {
+			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+				return;
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag(styleElement, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = styleElement.childNodes;
+		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+		if (childNodes.length) {
+			styleElement.insertBefore(cssNode, childNodes[index]);
+		} else {
+			styleElement.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag(styleElement, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		styleElement.setAttribute("media", media)
+	}
+
+	if(styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = css;
+	} else {
+		while(styleElement.firstChild) {
+			styleElement.removeChild(styleElement.firstChild);
+		}
+		styleElement.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink(linkElement, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	if(sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = linkElement.href;
+
+	linkElement.href = URL.createObjectURL(blob);
+
+	if(oldSrc)
+		URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ },
+
+/***/ 569:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_forms__ = __webpack_require__(642);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_forms__ = __webpack_require__(650);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractControlDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["a"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractFormGroupDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["b"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "CheckboxControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["c"]; });
@@ -6468,7 +6848,7 @@ function _mergeErrors(arrayOfErrors) {
 
 /***/ },
 
-/***/ 562:
+/***/ 570:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6483,10 +6863,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var data_1 = __webpack_require__(661);
-var chartTypes_1 = __webpack_require__(660);
-__webpack_require__(1130);
+var data_1 = __webpack_require__(669);
+var chartTypes_1 = __webpack_require__(668);
 __webpack_require__(1128);
+__webpack_require__(1127);
 var App = (function () {
     function App(viewContainerRef) {
         this.viewContainerRef = viewContainerRef;
@@ -6589,7 +6969,7 @@ exports.App = App;
 
 /***/ },
 
-/***/ 563:
+/***/ 571:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6603,15 +6983,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var area_chart_module_1 = __webpack_require__(665);
-var bar_chart_module_1 = __webpack_require__(667);
-var heat_map_module_1 = __webpack_require__(704);
-var line_chart_module_1 = __webpack_require__(706);
-var number_card_module_1 = __webpack_require__(712);
-var pie_chart_module_1 = __webpack_require__(716);
-var tree_map_module_1 = __webpack_require__(724);
+var common_module_1 = __webpack_require__(61);
+var area_chart_module_1 = __webpack_require__(461);
+var bar_chart_module_1 = __webpack_require__(462);
+var heat_map_module_1 = __webpack_require__(471);
+var line_chart_module_1 = __webpack_require__(472);
+var number_card_module_1 = __webpack_require__(473);
+var pie_chart_module_1 = __webpack_require__(474);
+var tree_map_module_1 = __webpack_require__(475);
+__export(__webpack_require__(461));
+__export(__webpack_require__(462));
+__export(__webpack_require__(61));
+__export(__webpack_require__(471));
+__export(__webpack_require__(472));
+__export(__webpack_require__(473));
+__export(__webpack_require__(474));
+__export(__webpack_require__(475));
 var NG2D3Module = (function () {
     function NG2D3Module() {
     }
@@ -6691,6 +7082,92 @@ var ControlContainer = (function (_super) {
 /***/ },
 
 /***/ 61:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+var core_1 = __webpack_require__(0);
+var chart_component_1 = __webpack_require__(693);
+exports.Chart = chart_component_1.Chart;
+var legend_component_1 = __webpack_require__(698);
+exports.Legend = legend_component_1.Legend;
+var scale_legend_component_1 = __webpack_require__(699);
+exports.ScaleLegend = scale_legend_component_1.ScaleLegend;
+var axes_module_1 = __webpack_require__(687);
+var tooltip_1 = __webpack_require__(467);
+var circle_series_component_1 = __webpack_require__(694);
+exports.CircleSeries = circle_series_component_1.CircleSeries;
+var circle_component_1 = __webpack_require__(695);
+exports.Circle = circle_component_1.Circle;
+var grid_panel_component_1 = __webpack_require__(697);
+exports.GridPanel = grid_panel_component_1.GridPanel;
+var grid_panel_series_component_1 = __webpack_require__(696);
+exports.GridPanelSeries = grid_panel_series_component_1.GridPanelSeries;
+var svg_linear_gradient_component_1 = __webpack_require__(700);
+exports.SvgLinearGradient = svg_linear_gradient_component_1.SvgLinearGradient;
+var svg_radial_gradient_component_1 = __webpack_require__(701);
+exports.SvgRadialGradient = svg_radial_gradient_component_1.SvgRadialGradient;
+var timeline_component_1 = __webpack_require__(702);
+exports.Timeline = timeline_component_1.Timeline;
+var common_1 = __webpack_require__(90);
+var area_component_1 = __webpack_require__(686);
+exports.Area = area_component_1.Area;
+var area_tooltip_component_1 = __webpack_require__(685);
+exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
+__export(__webpack_require__(467));
+var COMPONENTS = [
+    area_component_1.Area,
+    area_tooltip_component_1.AreaTooltip,
+    chart_component_1.Chart,
+    legend_component_1.Legend,
+    scale_legend_component_1.ScaleLegend,
+    circle_component_1.Circle,
+    circle_series_component_1.CircleSeries,
+    grid_panel_component_1.GridPanel,
+    grid_panel_series_component_1.GridPanelSeries,
+    svg_linear_gradient_component_1.SvgLinearGradient,
+    svg_radial_gradient_component_1.SvgRadialGradient,
+    timeline_component_1.Timeline
+];
+var CommonModule = (function () {
+    function CommonModule() {
+    }
+    CommonModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                common_1.CommonModule,
+                axes_module_1.AxesModule,
+                tooltip_1.TooltipModule
+            ],
+            declarations: COMPONENTS.slice(),
+            exports: [
+                common_1.CommonModule,
+                axes_module_1.AxesModule,
+                tooltip_1.TooltipModule
+            ].concat(COMPONENTS)
+        }), 
+        __metadata('design:paramtypes', [])
+    ], CommonModule);
+    return CommonModule;
+}());
+exports.CommonModule = CommonModule;
+
+
+/***/ },
+
+/***/ 62:
 /***/ function(module, exports) {
 
 "use strict";
@@ -6714,27 +7191,27 @@ exports.default = ObjectId;
 
 /***/ },
 
-/***/ 639:
+/***/ 647:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_checkbox_value_accessor__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_default_value_accessor__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_checkbox_value_accessor__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_default_value_accessor__ = __webpack_require__(144);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__directives_ng_control_status__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_ng_form__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_ng_form__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_ng_model__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__directives_ng_model_group__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__directives_ng_model_group__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__directives_number_value_accessor__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__directives_radio_control_value_accessor__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__directives_radio_control_value_accessor__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__directives_reactive_directives_form_control_directive__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__directives_reactive_directives_form_control_name__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_reactive_directives_form_group_directive__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_group_name__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_select_control_value_accessor__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__directives_select_multiple_control_value_accessor__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_reactive_directives_form_group_directive__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_group_name__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_select_control_value_accessor__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__directives_select_multiple_control_value_accessor__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__directives_validators__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_ng_control__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_ng_control__ = __webpack_require__(77);
 /* unused harmony export SHARED_FORM_DIRECTIVES */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TEMPLATE_DRIVEN_DIRECTIVES; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return REACTIVE_DRIVEN_DIRECTIVES; });
@@ -6850,7 +7327,7 @@ var InternalFormsSharedModule = (function () {
 
 /***/ },
 
-/***/ 640:
+/***/ 648:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6883,14 +7360,14 @@ function normalizeAsyncValidator(validator) {
 
 /***/ },
 
-/***/ 641:
+/***/ 649:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(639);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_radio_control_value_accessor__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(448);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives__ = __webpack_require__(647);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_radio_control_value_accessor__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__form_builder__ = __webpack_require__(447);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormsModule; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return ReactiveFormsModule; });
 /**
@@ -6944,32 +7421,32 @@ var ReactiveFormsModule = (function () {
 
 /***/ },
 
-/***/ 642:
+/***/ 650:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__directives_control_container__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__directives_control_value_accessor__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_default_value_accessor__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__directives_ng_control__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__directives_default_value_accessor__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__directives_ng_control__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__directives_ng_control_status__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__directives_ng_form__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__directives_ng_form__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__directives_ng_model__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__directives_ng_model_group__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__directives_ng_model_group__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__directives_reactive_directives_form_control_directive__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_control_name__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_directive__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__directives_reactive_directives_form_group_name__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__directives_select_control_value_accessor__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_select_multiple_control_value_accessor__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_directive__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__directives_reactive_directives_form_group_name__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__directives_select_control_value_accessor__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__directives_select_multiple_control_value_accessor__ = __webpack_require__(149);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__directives_validators__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__form_builder__ = __webpack_require__(448);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__model__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__form_builder__ = __webpack_require__(447);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__model__ = __webpack_require__(150);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__form_providers__ = __webpack_require__(641);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__form_providers__ = __webpack_require__(649);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__["a"]; });
@@ -7051,7 +7528,7 @@ var ReactiveFormsModule = (function () {
 
 /***/ },
 
-/***/ 660:
+/***/ 668:
 /***/ function(module, exports) {
 
 "use strict";
@@ -7192,7 +7669,7 @@ exports.default = chartGroups;
 
 /***/ },
 
-/***/ 661:
+/***/ 669:
 /***/ function(module, exports) {
 
 "use strict";
@@ -7284,7 +7761,7 @@ exports.generateData = generateData;
 
 /***/ },
 
-/***/ 662:
+/***/ 670:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7309,7 +7786,7 @@ var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
 var d3_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var AreaChartNormalized = (function (_super) {
     __extends(AreaChartNormalized, _super);
     function AreaChartNormalized() {
@@ -7581,7 +8058,7 @@ exports.AreaChartNormalized = AreaChartNormalized;
 
 /***/ },
 
-/***/ 663:
+/***/ 671:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7605,7 +8082,7 @@ var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
 var moment = __webpack_require__(2);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var AreaChartStacked = (function (_super) {
     __extends(AreaChartStacked, _super);
@@ -7883,7 +8360,7 @@ exports.AreaChartStacked = AreaChartStacked;
 
 /***/ },
 
-/***/ 664:
+/***/ 672:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7907,7 +8384,7 @@ var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
 var moment = __webpack_require__(2);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var AreaChart = (function (_super) {
     __extends(AreaChart, _super);
@@ -8143,55 +8620,7 @@ exports.AreaChart = AreaChart;
 
 /***/ },
 
-/***/ 665:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var area_chart_component_1 = __webpack_require__(664);
-var area_chart_normalized_component_1 = __webpack_require__(662);
-var area_chart_stacked_component_1 = __webpack_require__(663);
-var area_series_component_1 = __webpack_require__(666);
-var common_module_1 = __webpack_require__(71);
-var AreaChartModule = (function () {
-    function AreaChartModule() {
-    }
-    AreaChartModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                area_chart_component_1.AreaChart,
-                area_chart_normalized_component_1.AreaChartNormalized,
-                area_chart_stacked_component_1.AreaChartStacked,
-                area_series_component_1.AreaSeries
-            ],
-            exports: [
-                area_chart_component_1.AreaChart,
-                area_chart_normalized_component_1.AreaChartNormalized,
-                area_chart_stacked_component_1.AreaChartStacked,
-                area_series_component_1.AreaSeries
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AreaChartModule);
-    return AreaChartModule;
-}());
-exports.AreaChartModule = AreaChartModule;
-
-
-/***/ },
-
-/***/ 666:
+/***/ 673:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8207,7 +8636,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var sort_1 = __webpack_require__(471);
+var sort_1 = __webpack_require__(477);
 var AreaSeries = (function () {
     function AreaSeries() {
         this.stacked = false;
@@ -8303,76 +8732,7 @@ exports.AreaSeries = AreaSeries;
 
 /***/ },
 
-/***/ 667:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var bar_component_1 = __webpack_require__(676);
-var bar_horizontal_component_1 = __webpack_require__(671);
-var bar_horizontal_2d_component_1 = __webpack_require__(668);
-var bar_horizontal_normalized_component_1 = __webpack_require__(669);
-var bar_horizontal_stacked_component_1 = __webpack_require__(670);
-var bar_vertical_component_1 = __webpack_require__(675);
-var bar_vertical_2d_component_1 = __webpack_require__(672);
-var bar_vertical_normalized_component_1 = __webpack_require__(673);
-var bar_vertical_stacked_component_1 = __webpack_require__(674);
-var series_horizontal_component_1 = __webpack_require__(677);
-var series_vertical_component_1 = __webpack_require__(678);
-var BarChartModule = (function () {
-    function BarChartModule() {
-    }
-    BarChartModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                bar_component_1.Bar,
-                bar_horizontal_component_1.BarHorizontal,
-                bar_horizontal_2d_component_1.BarHorizontal2D,
-                bar_horizontal_normalized_component_1.BarHorizontalNormalized,
-                bar_horizontal_stacked_component_1.BarHorizontalStacked,
-                bar_vertical_component_1.BarVertical,
-                bar_vertical_2d_component_1.BarVertical2D,
-                bar_vertical_normalized_component_1.BarVerticalNormalized,
-                bar_vertical_stacked_component_1.BarVerticalStacked,
-                series_horizontal_component_1.SeriesHorizontal,
-                series_vertical_component_1.SeriesVertical
-            ],
-            exports: [
-                bar_component_1.Bar,
-                bar_horizontal_component_1.BarHorizontal,
-                bar_horizontal_2d_component_1.BarHorizontal2D,
-                bar_horizontal_normalized_component_1.BarHorizontalNormalized,
-                bar_horizontal_stacked_component_1.BarHorizontalStacked,
-                bar_vertical_component_1.BarVertical,
-                bar_vertical_2d_component_1.BarVertical2D,
-                bar_vertical_normalized_component_1.BarVerticalNormalized,
-                bar_vertical_stacked_component_1.BarVerticalStacked,
-                series_horizontal_component_1.SeriesHorizontal,
-                series_vertical_component_1.SeriesVertical
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], BarChartModule);
-    return BarChartModule;
-}());
-exports.BarChartModule = BarChartModule;
-
-
-/***/ },
-
-/***/ 668:
+/***/ 674:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8566,7 +8926,7 @@ exports.BarHorizontal2D = BarHorizontal2D;
 
 /***/ },
 
-/***/ 669:
+/***/ 675:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8740,7 +9100,7 @@ exports.BarHorizontalNormalized = BarHorizontalNormalized;
 
 /***/ },
 
-/***/ 670:
+/***/ 676:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8926,7 +9286,7 @@ exports.BarHorizontalStacked = BarHorizontalStacked;
 
 /***/ },
 
-/***/ 671:
+/***/ 677:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8949,7 +9309,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var tick_format_helper_1 = __webpack_require__(464);
+var tick_format_helper_1 = __webpack_require__(465);
 var d3_1 = __webpack_require__(7);
 var BarHorizontal = (function (_super) {
     __extends(BarHorizontal, _super);
@@ -9072,7 +9432,7 @@ exports.BarHorizontal = BarHorizontal;
 
 /***/ },
 
-/***/ 672:
+/***/ 678:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9271,7 +9631,7 @@ exports.BarVertical2D = BarVertical2D;
 
 /***/ },
 
-/***/ 673:
+/***/ 679:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9445,7 +9805,7 @@ exports.BarVerticalNormalized = BarVerticalNormalized;
 
 /***/ },
 
-/***/ 674:
+/***/ 680:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9631,7 +9991,7 @@ exports.BarVerticalStacked = BarVerticalStacked;
 
 /***/ },
 
-/***/ 675:
+/***/ 681:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9654,7 +10014,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var tick_format_helper_1 = __webpack_require__(464);
+var tick_format_helper_1 = __webpack_require__(465);
 var d3_1 = __webpack_require__(7);
 var BarVertical = (function (_super) {
     __extends(BarVertical, _super);
@@ -9777,7 +10137,7 @@ exports.BarVertical = BarVertical;
 
 /***/ },
 
-/***/ 676:
+/***/ 682:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9792,7 +10152,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var Bar = (function () {
     function Bar(element) {
@@ -9982,7 +10342,7 @@ exports.Bar = Bar;
 
 /***/ },
 
-/***/ 677:
+/***/ 683:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10026,8 +10386,13 @@ var SeriesHorizontal = (function () {
             };
             bar.height = _this.yScale.bandwidth();
             if (_this.type === 'standard') {
-                bar.width = _this.xScale(value);
-                bar.x = 0;
+                bar.width = Math.abs(_this.xScale(value) - _this.xScale(0));
+                if (value < 0) {
+                    bar.x = _this.xScale(value);
+                }
+                else {
+                    bar.x = _this.xScale(0);
+                }
                 bar.y = _this.yScale(label);
             }
             else if (_this.type === 'stacked') {
@@ -10120,7 +10485,7 @@ exports.SeriesHorizontal = SeriesHorizontal;
 
 /***/ },
 
-/***/ 678:
+/***/ 684:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10181,9 +10546,14 @@ var SeriesVertical = (function () {
                 y: 0
             };
             if (_this.type === 'standard') {
-                bar.height = _this.dims.height - _this.yScale(value);
+                bar.height = Math.abs(_this.yScale(value) - _this.yScale(0));
                 bar.x = _this.xScale(label);
-                bar.y = _this.yScale(value);
+                if (value < 0) {
+                    bar.y = _this.yScale(0);
+                }
+                else {
+                    bar.y = _this.yScale(value);
+                }
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -10279,7 +10649,7 @@ exports.SeriesVertical = SeriesVertical;
 
 /***/ },
 
-/***/ 679:
+/***/ 685:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10427,7 +10797,7 @@ exports.AreaTooltip = AreaTooltip;
 
 /***/ },
 
-/***/ 680:
+/***/ 686:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10442,7 +10812,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var Area = (function () {
     function Area(element) {
@@ -10532,7 +10902,7 @@ exports.Area = Area;
 
 /***/ },
 
-/***/ 681:
+/***/ 687:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10547,18 +10917,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var axis_label_component_1 = __webpack_require__(682);
-var x_axis_component_1 = __webpack_require__(684);
-var x_axis_ticks_component_1 = __webpack_require__(683);
-var y_axis_component_1 = __webpack_require__(686);
-var y_axis_ticks_component_1 = __webpack_require__(685);
-var platform_browser_1 = __webpack_require__(77);
+var axis_label_component_1 = __webpack_require__(688);
+var x_axis_component_1 = __webpack_require__(690);
+var x_axis_ticks_component_1 = __webpack_require__(689);
+var y_axis_component_1 = __webpack_require__(692);
+var y_axis_ticks_component_1 = __webpack_require__(691);
+var common_1 = __webpack_require__(90);
 var AxesModule = (function () {
     function AxesModule() {
     }
     AxesModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
+            imports: [common_1.CommonModule],
             declarations: [axis_label_component_1.AxisLabel, x_axis_component_1.XAxis, x_axis_ticks_component_1.XAxisTicks, y_axis_component_1.YAxis, y_axis_ticks_component_1.YAxisTicks],
             exports: [axis_label_component_1.AxisLabel, x_axis_component_1.XAxis, x_axis_ticks_component_1.XAxisTicks, y_axis_component_1.YAxis, y_axis_ticks_component_1.YAxisTicks]
         }), 
@@ -10571,7 +10941,7 @@ exports.AxesModule = AxesModule;
 
 /***/ },
 
-/***/ 682:
+/***/ 688:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10652,7 +11022,7 @@ exports.AxisLabel = AxisLabel;
 
 /***/ },
 
-/***/ 683:
+/***/ 689:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10667,8 +11037,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(79);
-var ticks_helper_1 = __webpack_require__(462);
+var trim_label_helper_1 = __webpack_require__(78);
+var ticks_helper_1 = __webpack_require__(463);
 var XAxisTicks = (function () {
     function XAxisTicks() {
         this.tickArguments = [5];
@@ -10813,7 +11183,7 @@ exports.XAxisTicks = XAxisTicks;
 
 /***/ },
 
-/***/ 684:
+/***/ 690:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10894,7 +11264,7 @@ exports.XAxis = XAxis;
 
 /***/ },
 
-/***/ 685:
+/***/ 691:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10909,8 +11279,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(79);
-var ticks_helper_1 = __webpack_require__(462);
+var trim_label_helper_1 = __webpack_require__(78);
+var ticks_helper_1 = __webpack_require__(463);
 var YAxisTicks = (function () {
     function YAxisTicks() {
         this.tickArguments = [5];
@@ -11068,7 +11438,7 @@ exports.YAxisTicks = YAxisTicks;
 
 /***/ },
 
-/***/ 686:
+/***/ 692:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11155,7 +11525,7 @@ exports.YAxis = YAxis;
 
 /***/ },
 
-/***/ 687:
+/***/ 693:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11226,7 +11596,7 @@ var Chart = (function () {
     Chart = __decorate([
         core_1.Component({
             selector: 'chart',
-            template: "\n    <svg\n      class=\"ng2d3\"\n      [attr.width]=\"view[0] * chartWidth / 12.0\"\n      [attr.height]=\"view[1]\">\n\n      <ng-content></ng-content>\n    </svg>\n\n    <scale-legend\n      *ngIf=\"legend && legendType === 'scaleLegend'\"\n      class=\"legend\"\n      [valueRange]=\"data\"\n      [colors]=\"legendData\"\n      [height]=\"view[1]\">\n    </scale-legend>\n\n    <legend\n      *ngIf=\"legend && legendType === 'legend'\"\n      class=\"legend\"\n      [data]=\"legendData\"\n      [title]=\"legendTitle\"\n      [colors]=\"colors\"\n      [height]=\"view[1]\">\n    </legend>\n"
+            template: "\n    <div [style.width]=\"view[0] + 'px'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n\n        <ng-content></ng-content>\n      </svg>\n\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </legend>\n    </div>\n"
         }), 
         __metadata('design:paramtypes', [])
     ], Chart);
@@ -11237,7 +11607,7 @@ exports.Chart = Chart;
 
 /***/ },
 
-/***/ 688:
+/***/ 694:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11358,7 +11728,7 @@ exports.CircleSeries = CircleSeries;
 
 /***/ },
 
-/***/ 689:
+/***/ 695:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11437,20 +11807,306 @@ exports.Circle = Circle;
 
 /***/ },
 
-/***/ 69:
+/***/ 696:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var GridPanelSeries = (function () {
+    function GridPanelSeries() {
+    }
+    GridPanelSeries.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    GridPanelSeries.prototype.update = function () {
+        this.gridPanels = this.getGridPanels();
+    };
+    GridPanelSeries.prototype.getGridPanels = function () {
+        var _this = this;
+        return this.data.map(function (d, i) {
+            var color = 'rgba(255,255,255,0.02)';
+            var offset, width, height, x, y;
+            if (_this.orient === 'vertical') {
+                var position = _this.xScale(d.name);
+                var positionIndex = _this.xScale.range().indexOf(position);
+                if (positionIndex % 2 === 1) {
+                    color = 'rgba(255,255,255,0)';
+                }
+                offset = _this.xScale.range()[0] / 2;
+                width = _this.xScale.bandwidth() + 2 * offset;
+                height = _this.dims.height;
+                x = _this.xScale(d.name) - offset;
+                y = 0;
+            }
+            else if (_this.orient === 'horizontal') {
+                var position = _this.yScale(d.name);
+                var positionIndex = _this.yScale.range().indexOf(position);
+                if (positionIndex % 2 === 1) {
+                    color = 'rgba(255,255,255,0)';
+                }
+                offset = _this.yScale.range()[0] / 2;
+                width = _this.dims.width;
+                height = _this.yScale.bandwidth() + 2 * offset;
+                x = 0;
+                y = _this.yScale(d.name) - offset;
+            }
+            return {
+                name: d.name,
+                color: color,
+                offset: offset,
+                height: height,
+                width: width,
+                x: x,
+                y: y
+            };
+        });
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanelSeries.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanelSeries.prototype, "dims", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanelSeries.prototype, "xScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanelSeries.prototype, "yScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanelSeries.prototype, "orient", void 0);
+    GridPanelSeries = __decorate([
+        core_1.Component({
+            selector: 'g[gridPanelSeries]',
+            template: "\n    <svg:g gridPanel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [fill]=\"gridPanel.color\">\n    </svg:g>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], GridPanelSeries);
+    return GridPanelSeries;
+}());
+exports.GridPanelSeries = GridPanelSeries;
+
+
+/***/ },
+
+/***/ 697:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var GridPanel = (function () {
+    function GridPanel() {
+    }
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanel.prototype, "path", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanel.prototype, "fill", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanel.prototype, "width", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanel.prototype, "height", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanel.prototype, "x", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GridPanel.prototype, "y", void 0);
+    GridPanel = __decorate([
+        core_1.Component({
+            selector: 'g[gridPanel]',
+            template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      [attr.fill]=\"fill\"\n      class=\"gridpanel\"\n    />\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], GridPanel);
+    return GridPanel;
+}());
+exports.GridPanel = GridPanel;
+
+
+/***/ },
+
+/***/ 698:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var trim_label_helper_1 = __webpack_require__(78);
+var Legend = (function () {
+    function Legend() {
+    }
+    Legend.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    Legend.prototype.update = function () {
+        this.legendItems = this.getLegendItems();
+    };
+    Legend.prototype.getLegendItems = function () {
+        var _this = this;
+        return this.data.map(function (label, index) {
+            return {
+                className: 'legend-label',
+                label: label,
+                trimmedLabel: trim_label_helper_1.trimLabel(label) || '(empty)',
+                backgroundColor: _this.colors(label)
+            };
+        });
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Legend.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Legend.prototype, "title", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Legend.prototype, "colors", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Legend.prototype, "height", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Legend.prototype, "width", void 0);
+    Legend = __decorate([
+        core_1.Component({
+            selector: 'legend',
+            template: "\n    <div [style.width]=\"width + 'px'\">\n      <header class=\"legend-title\"\n        style=\"white-space: nowrap; overflow: hidden;\">\n        <span class=\"legend-icon incon-eye-1\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\" style=\"white-space: nowrap;\">\n          <li *ngFor=\"let legendItem of legendItems\" [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"colors(legendItem.label)\">\n            </span>\n\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n\n          </li>\n        </ul>\n      </div>\n    </div>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], Legend);
+    return Legend;
+}());
+exports.Legend = Legend;
+
+
+/***/ },
+
+/***/ 699:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var platform_browser_1 = __webpack_require__(102);
+var ScaleLegend = (function () {
+    function ScaleLegend(sanitizer) {
+        this.sanitizer = sanitizer;
+    }
+    ScaleLegend.prototype.ngOnChanges = function () {
+        var gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
+        this.gradient = this.sanitizer.bypassSecurityTrustStyle("linear-gradient(to bottom, " + gradientValues + ")");
+    };
+    ScaleLegend.prototype.gradientString = function (colors, splits) {
+        splits.push(1);
+        var pairs = [];
+        colors.forEach(function (c, i) {
+            pairs.push(c + " " + Math.round(splits[i] * 100) + "%");
+        });
+        return pairs.join(', ');
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ScaleLegend.prototype, "valueRange", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ScaleLegend.prototype, "colors", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ScaleLegend.prototype, "height", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ScaleLegend.prototype, "width", void 0);
+    ScaleLegend = __decorate([
+        core_1.Component({
+            selector: 'scale-legend',
+            template: "\n    <div\n      class=\"scale-legend\"\n      [style.width]=\"width + 'px'\">\n      <div [style.height]=\"(height - 70) + 'px'\">\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toFixed() }}</span>\n        </div>\n\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toFixed() }}</span>\n        </div>\n      </div>\n    </div>\n  "
+        }), 
+        __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
+    ], ScaleLegend);
+    return ScaleLegend;
+}());
+exports.ScaleLegend = ScaleLegend;
+
+
+/***/ },
+
+/***/ 70:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__facade_collection__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__facade_lang__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validators__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__checkbox_value_accessor__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__default_value_accessor__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__normalize_validator__ = __webpack_require__(640);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__checkbox_value_accessor__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__default_value_accessor__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__normalize_validator__ = __webpack_require__(648);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__number_value_accessor__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__radio_control_value_accessor__ = __webpack_require__(145);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__select_control_value_accessor__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__select_multiple_control_value_accessor__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__radio_control_value_accessor__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__select_control_value_accessor__ = __webpack_require__(148);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__select_multiple_control_value_accessor__ = __webpack_require__(149);
 /* harmony export (immutable) */ exports["a"] = controlPath;
 /* harmony export (immutable) */ exports["d"] = setUpControl;
 /* harmony export (immutable) */ exports["h"] = cleanUpControl;
@@ -11605,283 +12261,7 @@ function selectValueAccessor(dir, valueAccessors) {
 
 /***/ },
 
-/***/ 690:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var GridPanelSeries = (function () {
-    function GridPanelSeries() {
-    }
-    GridPanelSeries.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    GridPanelSeries.prototype.update = function () {
-        this.gridPanels = this.getGridPanels();
-    };
-    GridPanelSeries.prototype.getGridPanels = function () {
-        var _this = this;
-        return this.data.map(function (d, i) {
-            var color = 'rgba(255,255,255,0.02)';
-            var offset, width, height, x, y;
-            if (_this.orient === 'vertical') {
-                var position = _this.xScale(d.name);
-                var positionIndex = _this.xScale.range().indexOf(position);
-                if (positionIndex % 2 === 1) {
-                    color = 'rgba(255,255,255,0)';
-                }
-                offset = _this.xScale.range()[0] / 2;
-                width = _this.xScale.bandwidth() + 2 * offset;
-                height = _this.dims.height;
-                x = _this.xScale(d.name) - offset;
-                y = 0;
-            }
-            else if (_this.orient === 'horizontal') {
-                var position = _this.yScale(d.name);
-                var positionIndex = _this.yScale.range().indexOf(position);
-                if (positionIndex % 2 === 1) {
-                    color = 'rgba(255,255,255,0)';
-                }
-                offset = _this.yScale.range()[0] / 2;
-                width = _this.dims.width;
-                height = _this.yScale.bandwidth() + 2 * offset;
-                x = 0;
-                y = _this.yScale(d.name) - offset;
-            }
-            return {
-                name: d.name,
-                color: color,
-                offset: offset,
-                height: height,
-                width: width,
-                x: x,
-                y: y
-            };
-        });
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanelSeries.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanelSeries.prototype, "dims", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanelSeries.prototype, "xScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanelSeries.prototype, "yScale", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanelSeries.prototype, "orient", void 0);
-    GridPanelSeries = __decorate([
-        core_1.Component({
-            selector: 'g[gridPanelSeries]',
-            template: "\n    <svg:g gridPanel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [fill]=\"gridPanel.color\">\n    </svg:g>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], GridPanelSeries);
-    return GridPanelSeries;
-}());
-exports.GridPanelSeries = GridPanelSeries;
-
-
-/***/ },
-
-/***/ 691:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var GridPanel = (function () {
-    function GridPanel() {
-    }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanel.prototype, "path", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanel.prototype, "fill", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanel.prototype, "width", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanel.prototype, "height", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanel.prototype, "x", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GridPanel.prototype, "y", void 0);
-    GridPanel = __decorate([
-        core_1.Component({
-            selector: 'g[gridPanel]',
-            template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      [attr.fill]=\"fill\"\n      class=\"gridpanel\"\n    />\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], GridPanel);
-    return GridPanel;
-}());
-exports.GridPanel = GridPanel;
-
-
-/***/ },
-
-/***/ 692:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(79);
-var Legend = (function () {
-    function Legend() {
-    }
-    Legend.prototype.ngOnChanges = function () {
-        this.update();
-    };
-    Legend.prototype.update = function () {
-        this.legendItems = this.getLegendItems();
-    };
-    Legend.prototype.getLegendItems = function () {
-        var _this = this;
-        return this.data.map(function (label, index) {
-            return {
-                className: 'legend-label',
-                label: label,
-                trimmedLabel: trim_label_helper_1.trimLabel(label) || '(empty)',
-                backgroundColor: _this.colors(label)
-            };
-        });
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Legend.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Legend.prototype, "title", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Legend.prototype, "colors", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], Legend.prototype, "height", void 0);
-    Legend = __decorate([
-        core_1.Component({
-            selector: 'legend',
-            template: "\n    <div >\n      <header class=\"legend-title\"\n        style=\"white-space: nowrap; overflow: hidden;\">\n        <span class=\"legend-icon incon-eye-1\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\" style=\"white-space: nowrap;\">\n          <li *ngFor=\"let legendItem of legendItems\" [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"colors(legendItem.label)\">\n            </span>\n\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n\n          </li>\n        </ul>\n      </div>\n    </div>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], Legend);
-    return Legend;
-}());
-exports.Legend = Legend;
-
-
-/***/ },
-
-/***/ 693:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var ScaleLegend = (function () {
-    function ScaleLegend() {
-    }
-    ScaleLegend.prototype.ngOnChanges = function () {
-        var gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
-        this.gradient = "linear-gradient(to bottom, " + gradientValues + ")";
-    };
-    ScaleLegend.prototype.gradientString = function (colors, splits) {
-        splits.push(1);
-        var pairs = [];
-        colors.forEach(function (c, i) {
-            pairs.push(c + " " + Math.round(splits[i] * 100) + "%");
-        });
-        return pairs.join(', ');
-    };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ScaleLegend.prototype, "valueRange", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ScaleLegend.prototype, "colors", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ScaleLegend.prototype, "height", void 0);
-    ScaleLegend = __decorate([
-        core_1.Component({
-            selector: 'scale-legend',
-            template: "\n    <div>\n      <div\n        style=\"padding: 10px 0px; width: 30px; text-align: center;\"\n        [style.height]=\"(height - 40) + 'px'\">\n\n        <div>\n          <span>{{valueRange[0]}}</span>\n        </div>\n\n        <div class=\"legend-wrap\"\n          style=\"height: 100%; width: 100%; border-radius: 5px;\"\n          [style.background]=\"gradient\">\n        </div>\n\n        <div>\n          <span>{{valueRange[1].toFixed()}}</span>\n        </div>\n      </div>\n    </div>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ScaleLegend);
-    return ScaleLegend;
-}());
-exports.ScaleLegend = ScaleLegend;
-
-
-/***/ },
-
-/***/ 694:
+/***/ 700:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11947,7 +12327,7 @@ exports.SvgLinearGradient = SvgLinearGradient;
 
 /***/ },
 
-/***/ 695:
+/***/ 701:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12001,7 +12381,7 @@ exports.SvgRadialGradient = SvgRadialGradient;
 
 /***/ },
 
-/***/ 696:
+/***/ 702:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12188,26 +12568,7 @@ exports.Timeline = Timeline;
 
 /***/ },
 
-/***/ 697:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(__webpack_require__(700));
-__export(__webpack_require__(227));
-__export(__webpack_require__(467));
-__export(__webpack_require__(226));
-__export(__webpack_require__(465));
-__export(__webpack_require__(466));
-__webpack_require__(1129);
-
-
-/***/ },
-
-/***/ 698:
+/***/ 703:
 /***/ function(module, exports) {
 
 "use strict";
@@ -12325,7 +12686,7 @@ exports.PositionHelper = PositionHelper;
 
 /***/ },
 
-/***/ 699:
+/***/ 704:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12340,15 +12701,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var injection_service_1 = __webpack_require__(470);
-var object_id_1 = __webpack_require__(61);
+var injection_service_1 = __webpack_require__(476);
+var object_id_1 = __webpack_require__(62);
 var placement_type_1 = __webpack_require__(226);
-var style_type_1 = __webpack_require__(467);
-var alignment_type_1 = __webpack_require__(465);
-var show_type_1 = __webpack_require__(466);
-var tooltip_component_1 = __webpack_require__(469);
-var tooltip_options_1 = __webpack_require__(468);
-var tooltip_service_1 = __webpack_require__(227);
+var style_type_1 = __webpack_require__(469);
+var alignment_type_1 = __webpack_require__(466);
+var show_type_1 = __webpack_require__(468);
+var tooltip_component_1 = __webpack_require__(227);
+var tooltip_options_1 = __webpack_require__(470);
+var tooltip_service_1 = __webpack_require__(228);
 var TooltipDirective = (function () {
     function TooltipDirective(tooltipService, viewContainerRef, injectionService, elementRef, renderer) {
         this.tooltipService = tooltipService;
@@ -12597,7 +12958,7 @@ exports.TooltipDirective = TooltipDirective;
 
 /***/ },
 
-/***/ 700:
+/***/ 705:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12612,11 +12973,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var platform_browser_1 = __webpack_require__(77);
-var tooltip_directive_1 = __webpack_require__(699);
-var tooltip_component_1 = __webpack_require__(469);
-var tooltip_service_1 = __webpack_require__(227);
-var injection_service_1 = __webpack_require__(470);
+var common_1 = __webpack_require__(90);
+var tooltip_directive_1 = __webpack_require__(704);
+var tooltip_component_1 = __webpack_require__(227);
+var tooltip_service_1 = __webpack_require__(228);
+var injection_service_1 = __webpack_require__(476);
 var TooltipModule = (function () {
     function TooltipModule() {
     }
@@ -12625,7 +12986,7 @@ var TooltipModule = (function () {
             declarations: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
             providers: [injection_service_1.InjectionService, tooltip_service_1.TooltipService],
             exports: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
-            imports: [platform_browser_1.BrowserModule],
+            imports: [common_1.CommonModule],
             entryComponents: [tooltip_component_1.TooltipContentComponent]
         }), 
         __metadata('design:paramtypes', [])
@@ -12637,7 +12998,7 @@ exports.TooltipModule = TooltipModule;
 
 /***/ },
 
-/***/ 701:
+/***/ 706:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12729,7 +13090,7 @@ exports.HeatCellSeries = HeatCellSeries;
 
 /***/ },
 
-/***/ 702:
+/***/ 707:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12744,7 +13105,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var HeatMapCell = (function () {
     function HeatMapCell(element) {
@@ -12824,7 +13185,7 @@ exports.HeatMapCell = HeatMapCell;
 
 /***/ },
 
-/***/ 703:
+/***/ 708:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12999,7 +13360,7 @@ var HeatMap = (function (_super) {
     HeatMap = __decorate([
         core_1.Component({
             selector: 'heat-map',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [legendData]=\"colorScale\"\n      [data]=\"results.m0Domain\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      [data]=\"valueDomain\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], HeatMap);
@@ -13010,52 +13371,7 @@ exports.HeatMap = HeatMap;
 
 /***/ },
 
-/***/ 704:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var heat_map_cell_component_1 = __webpack_require__(702);
-var heat_map_cell_series_component_1 = __webpack_require__(701);
-var heat_map_component_1 = __webpack_require__(703);
-var HeatMapModule = (function () {
-    function HeatMapModule() {
-    }
-    HeatMapModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                heat_map_cell_component_1.HeatMapCell,
-                heat_map_cell_series_component_1.HeatCellSeries,
-                heat_map_component_1.HeatMap
-            ],
-            exports: [
-                heat_map_cell_component_1.HeatMapCell,
-                heat_map_cell_series_component_1.HeatCellSeries,
-                heat_map_component_1.HeatMap
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], HeatMapModule);
-    return HeatMapModule;
-}());
-exports.HeatMapModule = HeatMapModule;
-
-
-/***/ },
-
-/***/ 705:
+/***/ 709:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13078,7 +13394,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var d3_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
 var LineChart = (function (_super) {
@@ -13308,52 +13624,7 @@ exports.LineChart = LineChart;
 
 /***/ },
 
-/***/ 706:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var line_component_1 = __webpack_require__(708);
-var line_chart_component_1 = __webpack_require__(705);
-var line_series_component_1 = __webpack_require__(707);
-var LineChartModule = (function () {
-    function LineChartModule() {
-    }
-    LineChartModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                line_component_1.Line,
-                line_chart_component_1.LineChart,
-                line_series_component_1.LineSeries
-            ],
-            exports: [
-                line_component_1.Line,
-                line_chart_component_1.LineChart,
-                line_series_component_1.LineSeries
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], LineChartModule);
-    return LineChartModule;
-}());
-exports.LineChartModule = LineChartModule;
-
-
-/***/ },
-
-/***/ 707:
+/***/ 710:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13370,7 +13641,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
 var moment = __webpack_require__(2);
-var sort_1 = __webpack_require__(471);
+var sort_1 = __webpack_require__(477);
 var LineSeries = (function () {
     function LineSeries() {
     }
@@ -13435,7 +13706,7 @@ exports.LineSeries = LineSeries;
 
 /***/ },
 
-/***/ 708:
+/***/ 711:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13500,7 +13771,7 @@ exports.Line = Line;
 
 /***/ },
 
-/***/ 709:
+/***/ 712:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13576,7 +13847,7 @@ exports.CardSeries = CardSeries;
 
 /***/ },
 
-/***/ 71:
+/***/ 713:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13591,77 +13862,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var chart_component_1 = __webpack_require__(687);
-var legend_component_1 = __webpack_require__(692);
-var scale_legend_component_1 = __webpack_require__(693);
-var axes_module_1 = __webpack_require__(681);
-var tooltip_1 = __webpack_require__(697);
-var circle_series_component_1 = __webpack_require__(688);
-var circle_component_1 = __webpack_require__(689);
-var grid_panel_component_1 = __webpack_require__(691);
-var grid_panel_series_component_1 = __webpack_require__(690);
-var svg_linear_gradient_component_1 = __webpack_require__(694);
-var svg_radial_gradient_component_1 = __webpack_require__(695);
-var timeline_component_1 = __webpack_require__(696);
-var platform_browser_1 = __webpack_require__(77);
-var area_component_1 = __webpack_require__(680);
-var area_tooltip_component_1 = __webpack_require__(679);
-var COMPONENTS = [
-    area_component_1.Area,
-    area_tooltip_component_1.AreaTooltip,
-    chart_component_1.Chart,
-    legend_component_1.Legend,
-    scale_legend_component_1.ScaleLegend,
-    circle_component_1.Circle,
-    circle_series_component_1.CircleSeries,
-    grid_panel_component_1.GridPanel,
-    grid_panel_series_component_1.GridPanelSeries,
-    svg_linear_gradient_component_1.SvgLinearGradient,
-    svg_radial_gradient_component_1.SvgRadialGradient,
-    timeline_component_1.Timeline
-];
-var CommonModule = (function () {
-    function CommonModule() {
-    }
-    CommonModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                platform_browser_1.BrowserModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ],
-            declarations: COMPONENTS.slice(),
-            exports: [
-                platform_browser_1.BrowserModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ].concat(COMPONENTS)
-        }), 
-        __metadata('design:paramtypes', [])
-    ], CommonModule);
-    return CommonModule;
-}());
-exports.CommonModule = CommonModule;
-
-
-/***/ },
-
-/***/ 710:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(79);
+var trim_label_helper_1 = __webpack_require__(78);
 var d3_1 = __webpack_require__(7);
 var Card = (function () {
     function Card(element) {
@@ -13679,37 +13880,6 @@ var Card = (function () {
         this.cardWidth = Math.max(0, this.width - 5);
         this.cardHeight = Math.max(0, this.height - 5);
         this.textWidth = Math.max(0, this.width - 15);
-        this.loadAnimation();
-    };
-    Card.prototype.loadAnimation = function () {
-        this.animateToCurrentForm();
-    };
-    Card.prototype.animateToCurrentForm = function () {
-        var options = {
-            useEasing: true,
-            useGrouping: true,
-            separator: ',',
-            decimal: '.',
-            prefix: '',
-            suffix: ''
-        };
-        var endValue = this.data.value;
-        if (this.data.valueType === 'currency') {
-            options.prefix = '$';
-        }
-        else if (this.data.valueType === 'duration') {
-            if (endValue < 60) {
-                options.suffix = ' sec';
-            }
-            else if (endValue < 3600) {
-                endValue = endValue / 60;
-                options.suffix = ' min';
-            }
-            else {
-                endValue = endValue / 3600;
-                options.suffix = ' hours';
-            }
-        }
     };
     Card.prototype.click = function () {
         this.clickHandler.emit({
@@ -13763,7 +13933,7 @@ exports.Card = Card;
 
 /***/ },
 
-/***/ 711:
+/***/ 714:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13786,7 +13956,7 @@ var core_1 = __webpack_require__(0);
 var base_chart_component_1 = __webpack_require__(17);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
-var grid_layout_helper_1 = __webpack_require__(463);
+var grid_layout_helper_1 = __webpack_require__(464);
 var NumberCard = (function (_super) {
     __extends(NumberCard, _super);
     function NumberCard() {
@@ -13852,52 +14022,7 @@ exports.NumberCard = NumberCard;
 
 /***/ },
 
-/***/ 712:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var card_component_1 = __webpack_require__(710);
-var card_series_component_1 = __webpack_require__(709);
-var number_card_component_1 = __webpack_require__(711);
-var NumberCardModule = (function () {
-    function NumberCardModule() {
-    }
-    NumberCardModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                card_component_1.Card,
-                card_series_component_1.CardSeries,
-                number_card_component_1.NumberCard
-            ],
-            exports: [
-                card_component_1.Card,
-                card_series_component_1.CardSeries,
-                number_card_component_1.NumberCard
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], NumberCardModule);
-    return NumberCardModule;
-}());
-exports.NumberCardModule = NumberCardModule;
-
-
-/***/ },
-
-/***/ 713:
+/***/ 715:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13920,7 +14045,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var trim_label_helper_1 = __webpack_require__(79);
+var trim_label_helper_1 = __webpack_require__(78);
 var AdvancedPieChart = (function (_super) {
     __extends(AdvancedPieChart, _super);
     function AdvancedPieChart() {
@@ -14015,7 +14140,7 @@ exports.AdvancedPieChart = AdvancedPieChart;
 
 /***/ },
 
-/***/ 714:
+/***/ 716:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14031,7 +14156,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(7);
-var object_id_1 = __webpack_require__(61);
+var object_id_1 = __webpack_require__(62);
 var PieArc = (function () {
     function PieArc(element) {
         this.initialized = false;
@@ -14175,7 +14300,7 @@ exports.PieArc = PieArc;
 
 /***/ },
 
-/***/ 715:
+/***/ 717:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14303,64 +14428,7 @@ exports.PieChart = PieChart;
 
 /***/ },
 
-/***/ 716:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var advanced_pie_chart_component_1 = __webpack_require__(713);
-var pie_label_component_1 = __webpack_require__(719);
-var pie_arc_component_1 = __webpack_require__(714);
-var pie_chart_component_1 = __webpack_require__(715);
-var pie_grid_component_1 = __webpack_require__(718);
-var pie_grid_series_component_1 = __webpack_require__(717);
-var pie_series_component_1 = __webpack_require__(720);
-var PieChartModule = (function () {
-    function PieChartModule() {
-    }
-    PieChartModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                advanced_pie_chart_component_1.AdvancedPieChart,
-                pie_label_component_1.PieLabel,
-                pie_arc_component_1.PieArc,
-                pie_chart_component_1.PieChart,
-                pie_grid_component_1.PieGrid,
-                pie_grid_series_component_1.PieGridSeries,
-                pie_series_component_1.PieSeries
-            ],
-            exports: [
-                advanced_pie_chart_component_1.AdvancedPieChart,
-                pie_label_component_1.PieLabel,
-                pie_arc_component_1.PieArc,
-                pie_chart_component_1.PieChart,
-                pie_grid_component_1.PieGrid,
-                pie_grid_series_component_1.PieGridSeries,
-                pie_series_component_1.PieSeries
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], PieChartModule);
-    return PieChartModule;
-}());
-exports.PieChartModule = PieChartModule;
-
-
-/***/ },
-
-/***/ 717:
+/***/ 718:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14493,7 +14561,7 @@ exports.PieGridSeries = PieGridSeries;
 
 /***/ },
 
-/***/ 718:
+/***/ 719:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14516,8 +14584,8 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(18);
 var color_sets_1 = __webpack_require__(19);
 var base_chart_component_1 = __webpack_require__(17);
-var trim_label_helper_1 = __webpack_require__(79);
-var grid_layout_helper_1 = __webpack_require__(463);
+var trim_label_helper_1 = __webpack_require__(78);
+var grid_layout_helper_1 = __webpack_require__(464);
 var d3_1 = __webpack_require__(7);
 var PieGrid = (function (_super) {
     __extends(PieGrid, _super);
@@ -14623,7 +14691,7 @@ exports.PieGrid = PieGrid;
 
 /***/ },
 
-/***/ 719:
+/***/ 720:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14638,7 +14706,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(79);
+var trim_label_helper_1 = __webpack_require__(78);
 var d3_1 = __webpack_require__(7);
 var PieLabel = (function () {
     function PieLabel(element) {
@@ -14729,7 +14797,7 @@ exports.PieLabel = PieLabel;
 
 /***/ },
 
-/***/ 720:
+/***/ 721:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14870,7 +14938,7 @@ exports.PieSeries = PieSeries;
 
 /***/ },
 
-/***/ 721:
+/***/ 722:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14948,7 +15016,7 @@ exports.TreeMapCellSeries = TreeMapCellSeries;
 
 /***/ },
 
-/***/ 722:
+/***/ 723:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15056,7 +15124,7 @@ exports.TreeMapCell = TreeMapCell;
 
 /***/ },
 
-/***/ 723:
+/***/ 724:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15147,51 +15215,6 @@ var TreeMap = (function (_super) {
     return TreeMap;
 }(base_chart_component_1.BaseChart));
 exports.TreeMap = TreeMap;
-
-
-/***/ },
-
-/***/ 724:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(71);
-var tree_map_cell_component_1 = __webpack_require__(722);
-var tree_map_cell_series_component_1 = __webpack_require__(721);
-var tree_map_component_1 = __webpack_require__(723);
-var TreeMapModule = (function () {
-    function TreeMapModule() {
-    }
-    TreeMapModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                tree_map_cell_component_1.TreeMapCell,
-                tree_map_cell_series_component_1.TreeMapCellSeries,
-                tree_map_component_1.TreeMap
-            ],
-            exports: [
-                tree_map_cell_component_1.TreeMapCell,
-                tree_map_cell_series_component_1.TreeMapCellSeries,
-                tree_map_component_1.TreeMap
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TreeMapModule);
-    return TreeMapModule;
-}());
-exports.TreeMapModule = TreeMapModule;
 
 
 /***/ },
@@ -15301,7 +15324,7 @@ exports.throttleable = throttleable;
 
 /***/ },
 
-/***/ 78:
+/***/ 77:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15360,7 +15383,7 @@ var NgControl = (function (_super) {
 
 /***/ },
 
-/***/ 79:
+/***/ 78:
 /***/ function(module, exports) {
 
 "use strict";
@@ -15390,7 +15413,7 @@ exports.trimLabel = trimLabel;
 /***/ 913:
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(256)();
+exports = module.exports = __webpack_require__(507)();
 // imports
 
 
@@ -15405,27 +15428,12 @@ exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n  font-family: 'Ro
 /***/ 914:
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(256)();
+exports = module.exports = __webpack_require__(507)();
 // imports
 
 
 // module
-exports.push([module.i, ".swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    transform: translate3d(0, 10px, 0); }\n", "", {"version":3,"sources":["/./src/common/tooltip/src/common/tooltip/tooltip.scss"],"names":[],"mappings":"AAqBA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,mCAAsB,EACtB;EA5FH;IA+FG,oCAAsB,EACtB;EAhGH;IAmGG,oCAAsB,EACtB;EApGH;IAuGG,mCAAsB,EACtB","file":"tooltip.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n"],"sourceRoot":"webpack://"}]);
-
-// exports
-
-
-/***/ },
-
-/***/ 915:
-/***/ function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(256)();
-// imports
-
-
-// module
-exports.push([module.i, ".swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    transform: translate3d(0, 10px, 0); }\n\n.ng2d3 {\n  float: left; }\n  .ng2d3 .bar:hover,\n  .ng2d3 .cell:hover,\n  .ng2d3 .arc:hover,\n  .ng2d3 .card:hover {\n    opacity: 0.8; }\n  .ng2d3 .area {\n    opacity: 0.6; }\n  .ng2d3 .circle:hover {\n    cursor: pointer; }\n  .ng2d3 .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none; }\n\n.gridline-path-shadow {\n  stroke: black; }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.brush .overlay {\n  fill: rgba(0, 0, 0, 0.07); }\n\n.brush .selection {\n  stroke: none;\n  fill-opacity: .3;\n  shape-rendering: 'crispEdges'; }\n\n.brush .handle {\n  fill: #3f51b5; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.legend {\n  display: inline-block;\n  float: left; }\n  .legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .legend ul, .legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .legend .legend-wrap {\n    width: 90%; }\n  .legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px; }\n  .legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .legend .legend-label.active {\n      color: #FFF; }\n  .legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px; }\n  .legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%; }\n\n.advanced-pie {\n  float: left; }\n\n.advanced-pie-legend {\n  float: left; }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.scss","/./src/src/ng2d3.scss"],"names":[],"mappings":"AAqBA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,mCAAsB,EACtB;EA5FH;IA+FG,oCAAsB,EACtB;EAhGH;IAmGG,oCAAsB,EACtB;EApGH;IAuGG,mCAAsB,EACtB;;AC3HH;EACE,YAAY,EA6Bb;EA9BD;;;;IAQM,aAAa,EACd;EATL;IAaI,aAAa,EACd;EAdH;IAkBM,gBAAgB,EACjB;EAnBL;IAwBM,oBAAoB;IACpB,mBAAmB;IACnB,mBAAmB;IACnB,uBAAuB,EACxB;;AAIL;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,iCAAY;EACZ,kBAAkB;EAClB,WAAW,EACZ;;AAED;EACE,cAAY,EACb;;AAED;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,0BAAU,EACX;;AAHH;EAMI,aAAa;EACb,iBAAiB;EACjB,8BAA8B,EAC/B;;AATH;EAYI,cAAc,EACf;;AAGH;EACE,iBAAiB;EACjB,mBAAmB,EAUpB;EAZD;IAKI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;;AAGH;EACE,sBAAsB;EACtB,YAAY,EAsEb;EAxED;IAKI,eAAe;IACf,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAVH;IAaI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAhBH;IAmBI,WAAW,EACZ;EApBH;IAuBI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB,EACpB;EA7BH;IAgCI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAKhB;IAxCH;MAsCM,YAAY,EACb;EAvCL;IA2CI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EAjDH;IAoDI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB,EACjB;EAxDH;IA2DI,eAAe;IACf,kBAAkB,EACnB;EA7DH;IAgEI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB;IACxB,WAAW,EACZ;;AAGH;EACE,YAAY,EACb;;AAED;EACE,YAAY,EAkDb;EAnDD;IAII,gBACD,EAAC;EALJ;IAQI,gBAAgB;IAChB,oBAAoB,EACrB;EAVH;IAaI,YAAY,EAqCb;IAlDH;MAgBM,oBAAoB;MACpB,eAAe,EAgChB;MAjDL;QAoBQ,mBAAmB;QACnB,sBAAsB,EA2BvB;QAhDP;UAwBU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA3BT;UA8BU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAlCT;UAqCU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAxCT;UA2CU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB","file":"ng2d3.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n","@import \"./common/tooltip/tooltip\";\n\n.ng2d3 {\n  float: left;\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none;\n}\n\n.gridline-path-shadow {\n  stroke: rgba(0, 0, 0, 1);\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.brush {\n  .overlay {\n    fill: rgba(0, 0, 0, 0.07);\n  }\n\n  .selection {\n    stroke: none;\n    fill-opacity: .3;\n    shape-rendering: 'crispEdges';\n  }\n\n  .handle {\n    fill: #3f51b5;\n  }\n}\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.legend {\n  display: inline-block;\n  float: left;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    width: 80%;\n  }\n}\n\n.advanced-pie {\n  float: left;\n}\n\n.advanced-pie-legend {\n  float: left;\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, ".swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    transform: translate3d(0, 10px, 0); }\n\n.ng2d3 {\n  float: left; }\n  .ng2d3 .bar:hover,\n  .ng2d3 .cell:hover,\n  .ng2d3 .arc:hover,\n  .ng2d3 .card:hover {\n    opacity: 0.8; }\n  .ng2d3 .area {\n    opacity: 0.6; }\n  .ng2d3 .circle:hover {\n    cursor: pointer; }\n  .ng2d3 .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none; }\n\n.gridline-path-shadow {\n  stroke: black; }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.brush .overlay {\n  fill: rgba(0, 0, 0, 0.07); }\n\n.brush .selection {\n  stroke: none;\n  fill-opacity: .3;\n  shape-rendering: 'crispEdges'; }\n\n.brush .handle {\n  fill: #3f51b5; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.legend {\n  display: inline-block;\n  padding: 0; }\n  .legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .legend ul, .legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .legend .legend-wrap {\n    width: 90%; }\n  .legend .scale-legend {\n    text-align: center; }\n  .legend .scale-legend-wrap {\n    display: inline-block;\n    height: 100%;\n    width: 30px;\n    border-radius: 5px; }\n  .legend .scale-legend-label {\n    font-size: 12px; }\n  .legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px; }\n  .legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .legend .legend-label.active {\n      color: #FFF; }\n  .legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px; }\n  .legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis; }\n\n.advanced-pie {\n  float: left; }\n\n.advanced-pie-legend {\n  float: left; }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.scss","/./src/src/ng2d3.scss"],"names":[],"mappings":"AAqBA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,mCAAsB,EACtB;EA5FH;IA+FG,oCAAsB,EACtB;EAhGH;IAmGG,oCAAsB,EACtB;EApGH;IAuGG,mCAAsB,EACtB;;AC3HH;EACE,YAAY,EA6Bb;EA9BD;;;;IAQM,aAAa,EACd;EATL;IAaI,aAAa,EACd;EAdH;IAkBM,gBAAgB,EACjB;EAnBL;IAwBM,oBAAoB;IACpB,mBAAmB;IACnB,mBAAmB;IACnB,uBAAuB,EACxB;;AAIL;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,iCAAY;EACZ,kBAAkB;EAClB,WAAW,EACZ;;AAED;EACE,cAAY,EACb;;AAED;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,0BAAU,EACX;;AAHH;EAMI,aAAa;EACb,iBAAiB;EACjB,8BAA8B,EAC/B;;AATH;EAYI,cAAc,EACf;;AAGH;EACE,iBAAiB;EACjB,mBAAmB,EAUpB;EAZD;IAKI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;;AAGH;EACE,sBAAsB;EACtB,WAAW,EAoFZ;EAtFD;IAKI,eAAe;IACf,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAVH;IAaI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAhBH;IAmBI,WAAW,EACZ;EApBH;IAuBI,mBAAmB,EACpB;EAxBH;IA2BI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,mBAAmB,EACpB;EA/BH;IAkCM,gBAAgB,EACnB;EAnCH;IAsCI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB,EACpB;EA5CH;IA+CI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAKhB;IAvDH;MAqDM,YAAY,EACb;EAtDL;IA0DI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EAhEH;IAmEI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB,EACjB;EAvEH;IA0EI,eAAe;IACf,kBAAkB,EACnB;EA5EH;IA+EI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB,EACzB;;AAGH;EACE,YAAY,EACb;;AAED;EACE,YAAY,EAkDb;EAnDD;IAII,gBACD,EAAC;EALJ;IAQI,gBAAgB;IAChB,oBAAoB,EACrB;EAVH;IAaI,YAAY,EAqCb;IAlDH;MAgBM,oBAAoB;MACpB,eAAe,EAgChB;MAjDL;QAoBQ,mBAAmB;QACnB,sBAAsB,EA2BvB;QAhDP;UAwBU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA3BT;UA8BU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAlCT;UAqCU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAxCT;UA2CU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB","file":"ng2d3.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: absolute;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n","@import \"./common/tooltip/tooltip\";\n\n.ng2d3 {\n  float: left;\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: rgba(200, 200, 200, 0.3);\n  stroke-width: 0.5;\n  fill: none;\n}\n\n.gridline-path-shadow {\n  stroke: rgba(0, 0, 0, 1);\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.brush {\n  .overlay {\n    fill: rgba(0, 0, 0, 0.07);\n  }\n\n  .selection {\n    stroke: none;\n    fill-opacity: .3;\n    shape-rendering: 'crispEdges';\n  }\n\n  .handle {\n    fill: #3f51b5;\n  }\n}\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.legend {\n  display: inline-block;\n  padding: 0;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .scale-legend {\n    text-align: center;\n  }\n\n  .scale-legend-wrap {\n    display: inline-block;\n    height: 100%;\n    width: 30px;\n    border-radius: 5px;\n  }\n\n  .scale-legend-label{\n      font-size: 12px;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n  }\n}\n\n.advanced-pie {\n  float: left;\n}\n\n.advanced-pie-legend {\n  float: left;\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -15436,9 +15444,9 @@ exports.push([module.i, ".swui-tooltip-content {\n  position: absolute;\n  borde
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Subject__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Subject__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_Subject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return EventEmitter; });
 /* unused harmony reexport Observable */
@@ -15555,5 +15563,5 @@ var EventEmitter = (function (_super) {
 
 /***/ }
 
-},[1132]);
-//# sourceMappingURL=app.2025a244a2bc2d343f06.map
+},[1130]);
+//# sourceMappingURL=app.e7973634829887629dc2.map

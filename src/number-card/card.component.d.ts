@@ -18,7 +18,5 @@ export declare class Card implements OnChanges {
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
-    loadAnimation(): void;
-    animateToCurrentForm(): void;
     click(): void;
 }
