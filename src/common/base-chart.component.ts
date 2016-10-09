@@ -35,15 +35,9 @@ export abstract class BaseChart {
     let width = hostElem.parentNode.clientWidth;
     let height = hostElem.parentNode.clientHeight;
 
-    console.log('container width', width);
-    console.log('container width', hostElem.parentNode);
-    console.log('container height', height);
-    console.log('container height', hostElem.parentNode);
-
     //setTimeout is used to trigger change detection
     setTimeout(() => {
       this.view = [width, height];
-      console.log('view', this.view);
       this.update();
     }, 0);
   }

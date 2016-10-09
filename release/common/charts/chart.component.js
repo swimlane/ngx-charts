@@ -1,19 +1,12 @@
 "use strict";
 var core_1 = require('@angular/core');
 var Chart = (function () {
-    function Chart(element, applicationRef) {
-        this.element = element;
-        this.applicationRef = applicationRef;
+    function Chart() {
         this.legend = false;
         this.legendTitle = 'Legend';
     }
-    Chart.prototype.ngOnInit = function () {
-        console.log(this);
-    };
     Chart.prototype.ngOnChanges = function () {
         this.update();
-    };
-    Chart.prototype.ngAfterViewInit = function () {
     };
     Chart.prototype.update = function () {
         this.legendWidth = 0;
@@ -23,7 +16,7 @@ var Chart = (function () {
                 this.legendWidth = 1;
             }
             else {
-                this.legendWidth = 2;
+                this.legendWidth = 3;
             }
         }
         this.chartWidth = 12 - this.legendWidth;
@@ -42,10 +35,7 @@ var Chart = (function () {
                     template: "\n    <svg\n      class=\"ng2d3\"\n      [attr.width]=\"view[0] * chartWidth / 12.0\"\n      [attr.height]=\"view[1]\">\n\n      <ng-content></ng-content>\n    </svg>\n\n    <scale-legend\n      *ngIf=\"legend && legendType === 'scaleLegend'\"\n      class=\"legend\"\n      [valueRange]=\"data\"\n      [colors]=\"legendData\"\n      [height]=\"view[1]\">\n    </scale-legend>\n\n    <legend\n      *ngIf=\"legend && legendType === 'legend'\"\n      class=\"legend\"\n      [data]=\"legendData\"\n      [title]=\"legendTitle\"\n      [colors]=\"colors\"\n      [height]=\"view[1]\">\n    </legend>\n"
                 },] },
     ];
-    Chart.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.ApplicationRef, },
-    ];
+    Chart.ctorParameters = [];
     Chart.propDecorators = {
         'view': [{ type: core_1.Input },],
         'legend': [{ type: core_1.Input },],

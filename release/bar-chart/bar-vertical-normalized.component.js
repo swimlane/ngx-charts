@@ -11,16 +11,12 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
 var BarVerticalNormalized = (function (_super) {
     __extends(BarVerticalNormalized, _super);
-    function BarVerticalNormalized(element, zone) {
-        _super.call(this, element, zone);
-        this.element = element;
+    function BarVerticalNormalized() {
+        _super.apply(this, arguments);
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    BarVerticalNormalized.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
     BarVerticalNormalized.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -103,10 +99,7 @@ var BarVerticalNormalized = (function (_super) {
                     ]
                 },] },
     ];
-    BarVerticalNormalized.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.NgZone, },
-    ];
+    BarVerticalNormalized.ctorParameters = [];
     BarVerticalNormalized.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],

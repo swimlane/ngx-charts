@@ -7,7 +7,7 @@ import {
   trigger,
   style,
   transition,
-  animate, NgZone, ElementRef
+  animate
 } from '@angular/core';
 
 @Component({
