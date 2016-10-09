@@ -116,6 +116,21 @@
     width: 90%;
   }
 
+  .scale-legend {
+    text-align: center;
+  }
+
+  .scale-legend-wrap {
+    display: inline-block;
+    height: 100%;
+    width: 30px;
+    border-radius: 5px;
+  }
+
+  .scale-legend-label{
+      font-size: 12px;
+  }
+
   .legend-labels {
     line-height: 85%;
     list-style: none;

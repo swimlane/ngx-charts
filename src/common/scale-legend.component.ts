@@ -1,24 +1,24 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'scale-legend',
   template: `
-    <div>
-      <div
-        style="padding: 10px 0px; width: 30px; text-align: center;"
-        [style.height]="(height - 40) + 'px'">
+    <div
+      class="scale-legend"
+      [style.width]="width + 'px'">
+      <div [style.height]="(height - 70) + 'px'">
 
-        <div>
-          <span>{{valueRange[0]}}</span>
+        <div class="scale-legend-label">
+          <span>{{ valueRange[0].toFixed() }}</span>
         </div>
 
-        <div class="legend-wrap"
-          style="height: 100%; width: 100%; border-radius: 5px;"
+        <div class="scale-legend-wrap"
           [style.background]="gradient">
         </div>
 
-        <div>
-          <span>{{valueRange[1].toFixed()}}</span>
+        <div class="scale-legend-label">
+          <span>{{ valueRange[1].toFixed() }}</span>
         </div>
       </div>
     </div>
@@ -28,12 +28,16 @@ export class ScaleLegend implements OnChanges {
   @Input() valueRange;
   @Input() colors;
   @Input() height;
+  @Input() width;
 
   gradient: any;
 
+  constructor(private sanitizer: DomSanitizer) {
+  }
+
   ngOnChanges() {
     let gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
-    this.gradient = `linear-gradient(to bottom, ${gradientValues})`;
+    this.gradient = this.sanitizer.bypassSecurityTrustStyle(`linear-gradient(to bottom, ${gradientValues})`);
   }
 
   /**
