@@ -4,7 +4,7 @@ import { trimLabel } from './trim-label.helper';
 @Component({
   selector: 'legend',
   template: `
-    <div >
+    <div [style.width]="width + 'px'">
       <header class="legend-title"
         style="white-space: nowrap; overflow: hidden;">
         <span class="legend-icon incon-eye-1"></span>
@@ -35,6 +35,7 @@ export class Legend implements OnChanges {
   @Input() title;
   @Input() colors;
   @Input() height;
+  @Input() width;
 
   legendItems: any;
 

@@ -96,7 +96,7 @@
 
 .legend {
   display: inline-block;
-  float: left;
+  padding: 0;
 
   .legend-title {
     color: #76818a;
@@ -164,7 +164,6 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 80%;
   }
 }
 
