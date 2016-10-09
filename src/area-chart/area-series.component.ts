@@ -31,6 +31,8 @@ export class AreaSeries implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+
+
   ngOnChanges() {
     this.update();
   }

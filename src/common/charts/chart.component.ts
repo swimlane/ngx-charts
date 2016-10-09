@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ElementRef, AfterViewInit, ApplicationRef} from '@angular/core';
 
 @Component({
   selector: 'chart',
@@ -33,21 +33,33 @@ import { Component, Input, OnChanges } from '@angular/core';
     </div>
 `
 })
-export class Chart implements OnChanges {
+export class Chart implements OnChanges, OnInit, AfterViewInit {
   @Input() view;
   @Input() legend = false;
   @Input() data;
   @Input() legendData;
   @Input() legendTitle = 'Legend';
   @Input() colors;
-
   chartWidth: any;
+
   title: any;
   legendWidth: any;
   legendType: any;
 
+
+  constructor(private element: ElementRef, private applicationRef: ApplicationRef) {
+
+  }
+
+  ngOnInit(): void {
+    console.log(this);
+  }
+
   ngOnChanges() {
     this.update();
+  }
+
+  ngAfterViewInit() {
   }
 
   update() {
@@ -59,7 +71,7 @@ export class Chart implements OnChanges {
       if (this.legendType === 'scaleLegend') {
         this.legendWidth = 1;
       } else {
-        this.legendWidth = 3;
+        this.legendWidth = 2;
       }
     }
 

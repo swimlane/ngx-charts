@@ -3,9 +3,13 @@
  * Copyright 2016
  * Licensed under MIT
  */
-import { NgModule, Component, Input, ElementRef, Renderer, ViewContainerRef, Directive, HostListener, Output, ReflectiveInjector, EventEmitter, Injector, ComponentFactoryResolver, ApplicationRef, Injectable, Inject, animate, style, transition, state, trigger, HostBinding, ViewChild, ViewChildren } from '@angular/core';
+import { NgModule, ApplicationRef, ElementRef, Component, Input, Renderer, ViewContainerRef, Directive, HostListener, Output, ReflectiveInjector, EventEmitter, Injector, ComponentFactoryResolver, Injectable, Inject, animate, style, transition, state, trigger, HostBinding, ViewChild, ViewChildren, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/observable/fromEvent';
 
 function __extends(d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -29,12 +33,19 @@ function __param(paramIndex, decorator) {
 }
 
 var Chart = (function () {
-    function Chart() {
+    function Chart(element, applicationRef) {
+        this.element = element;
+        this.applicationRef = applicationRef;
         this.legend = false;
         this.legendTitle = 'Legend';
     }
+    Chart.prototype.ngOnInit = function () {
+        console.log(this);
+    };
     Chart.prototype.ngOnChanges = function () {
         this.update();
+    };
+    Chart.prototype.ngAfterViewInit = function () {
     };
     Chart.prototype.update = function () {
         this.legendWidth = 0;
@@ -44,7 +55,7 @@ var Chart = (function () {
                 this.legendWidth = 1;
             }
             else {
-                this.legendWidth = 3;
+                this.legendWidth = 2;
             }
         }
         this.chartWidth = 12 - this.legendWidth;
@@ -86,9 +97,10 @@ var Chart = (function () {
             selector: 'chart',
             template: "\n    <svg\n      class=\"ng2d3\"\n      [attr.width]=\"view[0] * chartWidth / 12.0\"\n      [attr.height]=\"view[1]\">\n\n      <ng-content></ng-content>\n    </svg>\n\n    <scale-legend\n      *ngIf=\"legend && legendType === 'scaleLegend'\"\n      class=\"legend\"\n      [valueRange]=\"data\"\n      [colors]=\"legendData\"\n      [height]=\"view[1]\">\n    </scale-legend>\n\n    <legend\n      *ngIf=\"legend && legendType === 'legend'\"\n      class=\"legend\"\n      [data]=\"legendData\"\n      [title]=\"legendTitle\"\n      [colors]=\"colors\"\n      [height]=\"view[1]\">\n    </legend>\n"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof ApplicationRef !== 'undefined' && ApplicationRef) === 'function' && _b) || Object])
     ], Chart);
     return Chart;
+    var _a, _b;
 }());
 
 function trimLabel(s, max) {
@@ -2353,10 +2365,47 @@ function colorHelper(scheme, type, domain, customColors) {
 }
 
 var BaseChart = (function () {
-    function BaseChart() {
+    function BaseChart(chartElement, zone) {
+        this.chartElement = chartElement;
+        this.zone = zone;
     }
+    BaseChart.prototype.bindResizeEvents = function (view) {
+        var _this = this;
+        this.view = view;
+        this.zone.runOutsideAngular(function () {
+            Observable.fromEvent(window, 'load', null, null)
+                .subscribe(function (e) {
+                _this.setChartSizeBasedOnContainer();
+            });
+        });
+        this.bindWindowResizeEvent();
+    };
     BaseChart.prototype.update = function () {
         this.results = this.cloneData(this.results);
+    };
+    BaseChart.prototype.setChartSizeBasedOnContainer = function () {
+        var _this = this;
+        var hostElem = this.chartElement.nativeElement;
+        var width = hostElem.parentNode.clientWidth;
+        var height = hostElem.parentNode.clientHeight;
+        console.log('container width', width);
+        console.log('container width', hostElem.parentNode);
+        console.log('container height', height);
+        console.log('container height', hostElem.parentNode);
+        setTimeout(function () {
+            _this.view = [width, height];
+            console.log('view', _this.view);
+            _this.update();
+        }, 0);
+    };
+    BaseChart.prototype.bindWindowResizeEvent = function () {
+        var _this = this;
+        this.zone.runOutsideAngular(function () {
+            Observable.fromEvent(window, 'resize', null, null).debounceTime(100)
+                .subscribe(function (e) {
+                _this.setChartSizeBasedOnContainer();
+            });
+        });
     };
     BaseChart.prototype.cloneData = function (data) {
         var results = [];
@@ -2368,7 +2417,6 @@ var BaseChart = (function () {
             if (item['value']) {
                 copy['value'] = item['value'];
             }
-            ;
             if (item['series']) {
                 copy['series'] = [];
                 for (var _a = 0, _b = item['series']; _a < _b.length; _a++) {
@@ -2386,11 +2434,15 @@ var BaseChart = (function () {
 
 var AreaChart = (function (_super) {
     __extends(AreaChart, _super);
-    function AreaChart() {
-        _super.apply(this, arguments);
+    function AreaChart(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 70];
         this.clickHandler = new EventEmitter();
     }
+    AreaChart.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     AreaChart.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -2609,19 +2661,24 @@ var AreaChart = (function (_super) {
             selector: 'area-chart',
             template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], AreaChart);
     return AreaChart;
+    var _a, _b;
 }(BaseChart));
 
 var AreaChartNormalized = (function (_super) {
     __extends(AreaChartNormalized, _super);
-    function AreaChartNormalized() {
-        _super.apply(this, arguments);
+    function AreaChartNormalized(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 70];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    AreaChartNormalized.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     AreaChartNormalized.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -2876,20 +2933,24 @@ var AreaChartNormalized = (function (_super) {
             selector: 'area-chart-normalized',
             template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], AreaChartNormalized);
     return AreaChartNormalized;
+    var _a, _b;
 }(BaseChart));
 
 var AreaChartStacked = (function (_super) {
     __extends(AreaChartStacked, _super);
-    function AreaChartStacked(element) {
-        _super.call(this);
+    function AreaChartStacked(element, zone) {
+        _super.call(this, element, zone);
         this.margin = [10, 20, 70, 70];
         this.legend = false;
         this.clickHandler = new EventEmitter();
-        this.element = element.nativeElement;
+        this.chartElement = element.nativeElement;
     }
+    AreaChartStacked.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     AreaChartStacked.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -3148,10 +3209,10 @@ var AreaChartStacked = (function (_super) {
             selector: 'area-chart-stacked',
             template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"view\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], AreaChartStacked);
     return AreaChartStacked;
-    var _a;
+    var _a, _b;
 }(BaseChart));
 
 function sortLinear(data, property, direction) {
@@ -3480,12 +3541,16 @@ function tickFormat(fieldType, groupByType) {
 
 var BarHorizontal = (function (_super) {
     __extends(BarHorizontal, _super);
-    function BarHorizontal() {
-        _super.apply(this, arguments);
+    function BarHorizontal(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    BarHorizontal.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarHorizontal.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -3590,19 +3655,24 @@ var BarHorizontal = (function (_super) {
             selector: 'bar-horizontal',
             template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"yAxisTickFormatting()\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarHorizontal);
     return BarHorizontal;
+    var _a, _b;
 }(BaseChart));
 
 var BarHorizontal2D = (function (_super) {
     __extends(BarHorizontal2D, _super);
-    function BarHorizontal2D() {
-        _super.apply(this, arguments);
+    function BarHorizontal2D(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    BarHorizontal2D.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarHorizontal2D.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -3756,19 +3826,24 @@ var BarHorizontal2D = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarHorizontal2D);
     return BarHorizontal2D;
+    var _a, _b;
 }(BaseChart));
 
 var BarHorizontalNormalized = (function (_super) {
     __extends(BarHorizontalNormalized, _super);
-    function BarHorizontalNormalized() {
-        _super.apply(this, arguments);
+    function BarHorizontalNormalized(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    BarHorizontalNormalized.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarHorizontalNormalized.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -3902,19 +3977,24 @@ var BarHorizontalNormalized = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarHorizontalNormalized);
     return BarHorizontalNormalized;
+    var _a, _b;
 }(BaseChart));
 
 var BarHorizontalStacked = (function (_super) {
     __extends(BarHorizontalStacked, _super);
-    function BarHorizontalStacked() {
-        _super.apply(this, arguments);
+    function BarHorizontalStacked(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    BarHorizontalStacked.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarHorizontalStacked.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -4060,25 +4140,30 @@ var BarHorizontalStacked = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarHorizontalStacked);
     return BarHorizontalStacked;
+    var _a, _b;
 }(BaseChart));
 
 var BarVertical = (function (_super) {
     __extends(BarVertical, _super);
-    function BarVertical() {
-        _super.apply(this, arguments);
+    function BarVertical(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    BarVertical.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarVertical.prototype.ngOnChanges = function () {
         this.update();
     };
     BarVertical.prototype.update = function () {
         _super.prototype.update.call(this);
-        this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+        this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 10);
         this.xScale = this.getXScale();
         this.yScale = this.getYScale();
         this.setColors();
@@ -4175,22 +4260,27 @@ var BarVertical = (function (_super) {
     BarVertical = __decorate([
         Component({
             selector: 'bar-vertical',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"xDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"xAxisTickFormatting()\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"xDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"xAxisTickFormatting()\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarVertical);
     return BarVertical;
+    var _a, _b;
 }(BaseChart));
 
 var BarVertical2D = (function (_super) {
     __extends(BarVertical2D, _super);
-    function BarVertical2D() {
-        _super.apply(this, arguments);
+    function BarVertical2D(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.scaleType = 'ordinal';
         this.clickHandler = new EventEmitter();
     }
+    BarVertical2D.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarVertical2D.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -4348,19 +4438,24 @@ var BarVertical2D = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarVertical2D);
     return BarVertical2D;
+    var _a, _b;
 }(BaseChart));
 
 var BarVerticalNormalized = (function (_super) {
     __extends(BarVerticalNormalized, _super);
-    function BarVerticalNormalized() {
-        _super.apply(this, arguments);
+    function BarVerticalNormalized(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    BarVerticalNormalized.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarVerticalNormalized.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -4494,19 +4589,24 @@ var BarVerticalNormalized = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarVerticalNormalized);
     return BarVerticalNormalized;
+    var _a, _b;
 }(BaseChart));
 
 var BarVerticalStacked = (function (_super) {
     __extends(BarVerticalStacked, _super);
-    function BarVerticalStacked() {
-        _super.apply(this, arguments);
+    function BarVerticalStacked(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.clickHandler = new EventEmitter();
     }
+    BarVerticalStacked.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
     BarVerticalStacked.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -4652,9 +4752,10 @@ var BarVerticalStacked = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [(typeof (_a = typeof ElementRef !== 'undefined' && ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof NgZone !== 'undefined' && NgZone) === 'function' && _b) || Object])
     ], BarVerticalStacked);
     return BarVerticalStacked;
+    var _a, _b;
 }(BaseChart));
 
 var SeriesHorizontal = (function () {

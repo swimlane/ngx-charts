@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnChanges, HostListener} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, HostListener, NgZone, ElementRef, AfterViewInit} from '@angular/core';
 import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
 import {colorHelper} from '../utils/color-sets';
 import {BaseChart} from '../common/base-chart.component';
@@ -95,7 +95,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class AreaChart extends BaseChart implements OnChanges {
+export class AreaChart extends BaseChart implements OnChanges, AfterViewInit {
   dims: ViewDimensions;
   xSet: any;
   xDomain: any;
@@ -129,6 +129,14 @@ export class AreaChart extends BaseChart implements OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
+
+  constructor(private element: ElementRef, zone: NgZone) {
+    super(element,zone);
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
+  }
 
   ngOnChanges() {
     this.update();

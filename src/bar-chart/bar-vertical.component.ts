@@ -1,9 +1,14 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
-import { tickFormat } from '../common/tick-format.helper';
+import {Component, Input, Output, EventEmitter, OnChanges, AfterViewInit, ElementRef, NgZone} from '@angular/core';
+import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
+import {colorHelper} from '../utils/color-sets';
+import {BaseChart} from '../common/base-chart.component';
+import {tickFormat} from '../common/tick-format.helper';
 import d3 from '../d3';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/observable/fromEvent';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'bar-vertical',
@@ -43,9 +48,10 @@ import d3 from '../d3';
         </svg:g>
       </svg:g>
     </chart>
-  `
+  `,
+
 })
-export class BarVertical extends BaseChart implements OnChanges {
+export class BarVertical extends BaseChart implements OnChanges, AfterViewInit {
   dims: ViewDimensions;
   xScale: any;
   yScale: any;
@@ -54,10 +60,10 @@ export class BarVertical extends BaseChart implements OnChanges {
   transform: string;
   colors: Function;
   margin: any[] = [10, 20, 70, 100];
-
   @Input() view;
   @Input() results;
   @Input() scheme;
+
   @Input() customColors;
   @Input() legend = false;
   @Input() xAxis;
@@ -67,17 +73,26 @@ export class BarVertical extends BaseChart implements OnChanges {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
-
   @Output() clickHandler = new EventEmitter();
+
+  constructor(private element: ElementRef, zone: NgZone) {
+    super(element,zone);
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
+  }
 
   ngOnChanges() {
     this.update();
   }
 
+
   update() {
     super.update();
 
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 10);
+
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
@@ -116,7 +131,7 @@ export class BarVertical extends BaseChart implements OnChanges {
 
   xAxisTickFormatting() {
     let tickFormatting;
-    if(this.results.query && this.results.query.dimensions.length) {
+    if (this.results.query && this.results.query.dimensions.length) {
       tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
     }
     return tickFormatting;
