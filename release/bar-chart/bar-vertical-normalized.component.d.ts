@@ -1,9 +1,8 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnChanges, NgZone, ElementRef, AfterViewInit } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class BarVerticalNormalized extends BaseChart implements OnChanges, AfterViewInit {
-    private element;
+export declare class BarVerticalNormalized extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];
@@ -26,8 +25,6 @@ export declare class BarVerticalNormalized extends BaseChart implements OnChange
     yAxisLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    constructor(element: ElementRef, zone: NgZone);
-    ngAfterViewInit(): void;
     ngOnChanges(): void;
     update(): void;
     getGroupDomain(): any[];

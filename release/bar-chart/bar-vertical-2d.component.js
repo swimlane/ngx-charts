@@ -11,17 +11,13 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
 var BarVertical2D = (function (_super) {
     __extends(BarVertical2D, _super);
-    function BarVertical2D(element, zone) {
-        _super.call(this, element, zone);
-        this.element = element;
+    function BarVertical2D() {
+        _super.apply(this, arguments);
         this.margin = [10, 20, 70, 100];
         this.legend = false;
         this.scaleType = 'ordinal';
         this.clickHandler = new core_1.EventEmitter();
     }
-    BarVertical2D.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
     BarVertical2D.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -124,10 +120,7 @@ var BarVertical2D = (function (_super) {
                     ]
                 },] },
     ];
-    BarVertical2D.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.NgZone, },
-    ];
+    BarVertical2D.ctorParameters = [];
     BarVertical2D.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import d3 from '../d3';
 import {sortLinear} from '../utils/sort';
 
@@ -30,8 +30,6 @@ export class AreaSeries implements OnChanges {
   @Input() gradient;
 
   @Output() clickHandler = new EventEmitter();
-
-
 
   ngOnChanges() {
     this.update();

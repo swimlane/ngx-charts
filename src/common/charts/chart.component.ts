@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, ElementRef, AfterViewInit, ApplicationRef} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'chart',
@@ -33,7 +33,7 @@ import {Component, Input, OnChanges, OnInit, ElementRef, AfterViewInit, Applicat
     </div>
 `
 })
-export class Chart implements OnChanges, OnInit, AfterViewInit {
+export class Chart implements OnChanges {
   @Input() view;
   @Input() legend = false;
   @Input() data;
@@ -46,20 +46,8 @@ export class Chart implements OnChanges, OnInit, AfterViewInit {
   legendWidth: any;
   legendType: any;
 
-
-  constructor(private element: ElementRef, private applicationRef: ApplicationRef) {
-
-  }
-
-  ngOnInit(): void {
-    console.log(this);
-  }
-
   ngOnChanges() {
     this.update();
-  }
-
-  ngAfterViewInit() {
   }
 
   update() {

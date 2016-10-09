@@ -1,12 +1,8 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnChanges, AfterViewInit, ElementRef, NgZone } from '@angular/core';
+import { EventEmitter, OnChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/throttleTime';
-import 'rxjs/add/observable/fromEvent';
-export declare class BarVertical extends BaseChart implements OnChanges, AfterViewInit {
-    private element;
+export declare class BarVertical extends BaseChart implements OnChanges {
     dims: ViewDimensions;
     xScale: any;
     yScale: any;
@@ -28,8 +24,6 @@ export declare class BarVertical extends BaseChart implements OnChanges, AfterVi
     yAxisLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    constructor(element: ElementRef, zone: NgZone);
-    ngAfterViewInit(): void;
     ngOnChanges(): void;
     update(): void;
     getXScale(): any;

@@ -13,16 +13,13 @@ var object_id_1 = require("../utils/object-id");
 var d3_1 = require('../d3');
 var AreaChartStacked = (function (_super) {
     __extends(AreaChartStacked, _super);
-    function AreaChartStacked(element, zone) {
-        _super.call(this, element, zone);
+    function AreaChartStacked(element) {
+        _super.call(this);
         this.margin = [10, 20, 70, 70];
         this.legend = false;
         this.clickHandler = new core_1.EventEmitter();
-        this.chartElement = element.nativeElement;
+        this.element = element.nativeElement;
     }
-    AreaChartStacked.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
     AreaChartStacked.prototype.ngOnChanges = function () {
         this.update();
     };
@@ -222,7 +219,6 @@ var AreaChartStacked = (function (_super) {
     ];
     AreaChartStacked.ctorParameters = [
         { type: core_1.ElementRef, },
-        { type: core_1.NgZone, },
     ];
     AreaChartStacked.propDecorators = {
         'view': [{ type: core_1.Input },],
