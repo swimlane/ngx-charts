@@ -46,9 +46,14 @@ var SeriesVertical = (function () {
                 y: 0
             };
             if (_this.type === 'standard') {
-                bar.height = _this.dims.height - _this.yScale(value);
+                bar.height = Math.abs(_this.yScale(value) - _this.yScale(0));
                 bar.x = _this.xScale(label);
-                bar.y = _this.yScale(value);
+                if (value < 0) {
+                    bar.y = _this.yScale(0);
+                }
+                else {
+                    bar.y = _this.yScale(value);
+                }
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;

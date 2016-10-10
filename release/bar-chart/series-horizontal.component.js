@@ -29,8 +29,13 @@ var SeriesHorizontal = (function () {
             };
             bar.height = _this.yScale.bandwidth();
             if (_this.type === 'standard') {
-                bar.width = _this.xScale(value);
-                bar.x = 0;
+                bar.width = Math.abs(_this.xScale(value) - _this.xScale(0));
+                if (value < 0) {
+                    bar.x = _this.xScale(value);
+                }
+                else {
+                    bar.x = _this.xScale(0);
+                }
                 bar.y = _this.yScale(label);
             }
             else if (_this.type === 'stacked') {

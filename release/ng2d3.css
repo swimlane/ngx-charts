@@ -135,7 +135,7 @@
 
 .legend {
   display: inline-block;
-  float: left; }
+  padding: 0; }
   .legend .legend-title {
     color: #76818a;
     margin-left: 10px;
@@ -148,6 +148,15 @@
     list-style: none; }
   .legend .legend-wrap {
     width: 90%; }
+  .legend .scale-legend {
+    text-align: center; }
+  .legend .scale-legend-wrap {
+    display: inline-block;
+    height: 100%;
+    width: 30px;
+    border-radius: 5px; }
+  .legend .scale-legend-label {
+    font-size: 12px; }
   .legend .legend-labels {
     line-height: 85%;
     list-style: none;
@@ -183,8 +192,7 @@
     line-height: 16px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 80%; }
+    text-overflow: ellipsis; }
 
 .advanced-pie {
   float: left; }
