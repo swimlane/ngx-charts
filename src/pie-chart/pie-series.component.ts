@@ -29,7 +29,7 @@ import d3 from '../d3';
         [explodeSlices]="explodeSlices"
         (clickHandler)="click($event)"
         [gradient]="gradient"
-        
+
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
@@ -78,7 +78,7 @@ export class PieSeries implements OnChanges {
   getTotal() {
     return this.series
       .map(d => d.value)
-      .reduce((sum, val) => { return sum + val; } );
+      .reduce((sum, val) => { return sum + val; }, 0);
   }
 
   midAngle(d) {
