@@ -96,7 +96,7 @@ export class TooltipContentComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.position();
+    setTimeout(this.position.bind(this), 0);
   }
 
   position() {
