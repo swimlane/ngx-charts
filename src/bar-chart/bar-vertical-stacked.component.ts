@@ -35,7 +35,7 @@ import d3 from '../d3';
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
-          showGridLines="true"
+          [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel">
         </svg:g>
@@ -95,6 +95,7 @@ export class BarVerticalStacked extends BaseChart implements OnChanges {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
+  @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
 

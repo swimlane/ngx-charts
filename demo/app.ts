@@ -23,6 +23,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-vertical>
 
@@ -39,6 +40,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-horizontal>
 
@@ -55,6 +57,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-vertical-2d>
 
@@ -71,6 +74,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-horizontal-2d>
 
@@ -87,6 +91,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-vertical-stacked>
 
@@ -103,6 +108,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-horizontal-stacked>
 
@@ -119,6 +125,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-vertical-normalized>
 
@@ -135,6 +142,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-horizontal-normalized>
 
@@ -183,6 +191,7 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [autoScale]="autoScale"
             [timeline]="timeline"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </line-chart>
 
@@ -201,6 +210,7 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [autoScale]="autoScale"
             [timeline]="timeline"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </area-chart>
 
@@ -218,6 +228,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [timeline]="timeline"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </area-chart-stacked>
 
@@ -235,6 +246,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [timeline]="timeline"
+            [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </area-chart-normalized>
 
@@ -319,6 +331,13 @@ import './demo.scss';
           <label>
             <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked">
             Show Y Axis
+          </label> <br />
+        </div>
+
+        <div *ngIf="chart.options.includes('showGridLines')">
+          <label>
+            <input type="checkbox" [checked]="showGridLines" (change)="showGridLines = $event.target.checked">
+            Show Grid Lines
           </label> <br />
         </div>
 
@@ -420,6 +439,7 @@ export class App implements OnInit {
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'Population';
+  showGridLines = true;
 
   colorScheme = {
     domain: ['#F44336', '#3F51B5', '#8BC34A', '#2196F3', '#009688', '#FF5722', '#CDDC39', '#00BCD4', '#FFC107', '#795548', '#607D8B']

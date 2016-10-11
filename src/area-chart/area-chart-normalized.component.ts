@@ -29,7 +29,7 @@ import ObjectId from "../utils/object-id";
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
-          [showGridLines]="true"
+          [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel">
         </svg:g>
@@ -38,7 +38,7 @@ import ObjectId from "../utils/object-id";
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
-          [showGridLines]="true"
+          [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel">
         </svg:g>
@@ -127,6 +127,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges {
   @Input() yAxisLabel;
   @Input() timeline;
   @Input() gradient;
+  @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
 

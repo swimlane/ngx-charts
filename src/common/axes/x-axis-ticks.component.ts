@@ -21,13 +21,7 @@ import { reduceTicks } from './ticks.helper';
         [attr.transform]="gridLineTransform()">
 
         <svg:line
-          class="gridline-path gridline-path-vertical gridline-path-shadow"
-          [attr.y1]="-gridLineHeight"
-          y2="0" />
-        <svg:line
           class="gridline-path gridline-path-vertical"
-          x1="1"
-          x2="1"
           [attr.y1]="-gridLineHeight"
           y2="0" />
       </svg:g>
@@ -101,6 +95,8 @@ export class XAxisTicks implements OnChanges {
       this.textTransform = `rotate(${angle})`;
       this.textAnchor = 'end';
       this.verticalSpacing = 10;
+    } else {
+      this.textAnchor = 'middle';
     }
   }
 

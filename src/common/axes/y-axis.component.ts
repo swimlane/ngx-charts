@@ -13,6 +13,7 @@ import { Component, Input, OnChanges } from '@angular/core';
         [scale]="yScale"
         [orient]="yOrient"
         [showGridLines]="showGridLines"
+        [gridLineWidth]="dims.width"
         [height]="dims.height"
       />
 

@@ -27,7 +27,7 @@ import d3 from '../d3';
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
-          showGridLines="true"
+          [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel">
         </svg:g>
@@ -94,6 +94,7 @@ export class BarHorizontalStacked extends BaseChart implements  OnChanges {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
+  @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
 

@@ -24,15 +24,9 @@ import { reduceTicks } from './ticks.helper';
         [attr.transform]="gridLineTransform()">
 
         <svg:line
-          class="gridline-path gridline-path-horizontal gridline-path-shadow"
-          x1="0"
-          [attr.x2]="gridLineWidth" />
-        <svg:line
           class="gridline-path gridline-path-horizontal"
           x1="0"
-          [attr.x2]="gridLineWidth"
-          y1="1"
-          y2="1" />
+          [attr.x2]="gridLineWidth" />
       </svg:g>
     </svg:g>
   `
@@ -45,6 +39,7 @@ export class YAxisTicks implements OnChanges {
   @Input() tickStroke = '#ccc';
   @Input() tickFormatting;
   @Input() showGridLines = false;
+  @Input() gridLineWidth;
   @Input() height;
 
   innerTickSize: any;
@@ -161,7 +156,6 @@ export class YAxisTicks implements OnChanges {
       ticks = this.scale.domain();
       ticks = reduceTicks(ticks, maxTicks);
     }
-
     return ticks;
   }
 
@@ -175,7 +169,7 @@ export class YAxisTicks implements OnChanges {
   }
 
   gridLineTransform() {
-    return `translate(0,${this.verticalSpacing})`;
+    return `translate(5,0)`;
   }
 
 }

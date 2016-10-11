@@ -43,7 +43,7 @@ import d3 from '../d3';
           *ngIf="yAxis"
           [yScale]="valueScale"
           [dims]="dims"
-          showGridLines="true"
+          [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel">
         </svg:g>
@@ -101,6 +101,7 @@ export class BarVertical2D extends BaseChart implements OnChanges {
   @Input() yAxisLabel;
   @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
+  @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
 

@@ -29,7 +29,7 @@ import * as moment from 'moment';
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
-          [showGridLines]="true"
+          [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel">
         </svg:g>
@@ -38,7 +38,7 @@ import * as moment from 'moment';
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
-          [showGridLines]="true"
+          [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel">
         </svg:g>
@@ -125,6 +125,7 @@ export class LineChart extends BaseChart implements OnChanges {
   @Input() autoScale;
   @Input() timeline;
   @Input() gradient: boolean;
+  @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
 
