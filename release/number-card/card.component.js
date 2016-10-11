@@ -18,37 +18,6 @@ var Card = (function () {
         this.cardWidth = Math.max(0, this.width - 5);
         this.cardHeight = Math.max(0, this.height - 5);
         this.textWidth = Math.max(0, this.width - 15);
-        this.loadAnimation();
-    };
-    Card.prototype.loadAnimation = function () {
-        this.animateToCurrentForm();
-    };
-    Card.prototype.animateToCurrentForm = function () {
-        var options = {
-            useEasing: true,
-            useGrouping: true,
-            separator: ',',
-            decimal: '.',
-            prefix: '',
-            suffix: ''
-        };
-        var endValue = this.data.value;
-        if (this.data.valueType === 'currency') {
-            options.prefix = '$';
-        }
-        else if (this.data.valueType === 'duration') {
-            if (endValue < 60) {
-                options.suffix = ' sec';
-            }
-            else if (endValue < 3600) {
-                endValue = endValue / 60;
-                options.suffix = ' min';
-            }
-            else {
-                endValue = endValue / 3600;
-                options.suffix = ' hours';
-            }
-        }
     };
     Card.prototype.click = function () {
         this.clickHandler.emit({

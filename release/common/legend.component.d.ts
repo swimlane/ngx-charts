@@ -4,6 +4,7 @@ export declare class Legend implements OnChanges {
     title: any;
     colors: any;
     height: any;
+    width: any;
     legendItems: any;
     ngOnChanges(): void;
     update(): void;
