@@ -990,7 +990,7 @@ var TooltipContentComponent = (function () {
         configurable: true
     });
     TooltipContentComponent.prototype.ngAfterViewInit = function () {
-        setTimeout(this.position.bind(this), 0);
+        this.position();
     };
     TooltipContentComponent.prototype.position = function () {
         var nativeElm = this.element.nativeElement;
@@ -1021,8 +1021,9 @@ var TooltipContentComponent = (function () {
             top = hostDim.top + hostDim.height + this.spacing;
             left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
         }
-        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
-        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
+        var body = nativeElm.ownerDocument.body;
+        this.renderer.setElementStyle(nativeElm, 'top', (top + body.scrollTop) + "px");
+        this.renderer.setElementStyle(nativeElm, 'left', (left + body.scrollLeft) + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
@@ -1093,9 +1094,10 @@ var TooltipContentComponent = (function () {
             template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
             animations: [
                 _angular_core.trigger('visibilityChanged', [
-                    _angular_core.state('active', _angular_core.style({ opacity: 1, 'pointer-events': 'auto' })),
+                    _angular_core.state('active', _angular_core.style({ opacity: 1, display: 'block', 'pointer-events': 'auto' })),
                     _angular_core.transition('void => *', [
                         _angular_core.style({
+                            display: 'block',
                             opacity: 0,
                             'pointer-events': 'none',
                             transform: 'translate3d(0, 0, 0)'
@@ -1103,7 +1105,10 @@ var TooltipContentComponent = (function () {
                         _angular_core.animate('0.3s ease-out')
                     ]),
                     _angular_core.transition('* => void', [
-                        _angular_core.style({ opacity: 1 }),
+                        _angular_core.style({
+                            display: 'none',
+                            opacity: 1
+                        }),
                         _angular_core.animate('0.2s ease-out')
                     ])
                 ])

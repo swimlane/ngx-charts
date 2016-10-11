@@ -37,9 +37,10 @@ import { AlignmentTypes } from './alignment.type';
   `,
   animations: [
     trigger('visibilityChanged', [
-      state('active', style({ opacity: 1, 'pointer-events': 'auto' })),
+      state('active', style({ opacity: 1, display: 'block', 'pointer-events': 'auto' })),
       transition('void => *', [
         style({
+          display: 'block',
           opacity: 0,
           'pointer-events': 'none', // disable pointer events so there is no interference during animation
           // transform: 'translate3d(0, 0, 0) perspective(10px) rotateX(10deg)'
@@ -48,7 +49,10 @@ import { AlignmentTypes } from './alignment.type';
         animate('0.3s ease-out')
       ]),
       transition('* => void', [
-        style({ opacity: 1 }),
+        style({
+          display: 'none',
+          opacity: 1
+        }),
         animate('0.2s ease-out')
       ])
     ])
@@ -92,7 +96,7 @@ export class TooltipContentComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(this.position.bind(this), 0);
+    this.position();
   }
 
   position() {
@@ -138,8 +142,10 @@ export class TooltipContentComponent implements AfterViewInit {
         this.alignment);
     }
 
-    this.renderer.setElementStyle(nativeElm, 'top', `${top}px`);
-    this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
+    const { body } = nativeElm.ownerDocument;
+
+    this.renderer.setElementStyle(nativeElm, 'top', `${top + body.scrollTop}px`);
+    this.renderer.setElementStyle(nativeElm, 'left', `${left + body.scrollLeft}px`);
   }
 
   positionCaret(hostDim, elmDim) {
