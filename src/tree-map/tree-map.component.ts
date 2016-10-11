@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, NgZone} from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
@@ -37,6 +37,14 @@ export class TreeMap extends BaseChart implements OnChanges {
   colors: any;
   treemap: any;
   data: any;
+
+  constructor(private element: ElementRef, zone: NgZone) {
+    super(element,zone);
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
+  }
 
   ngOnChanges() {
     this.update();

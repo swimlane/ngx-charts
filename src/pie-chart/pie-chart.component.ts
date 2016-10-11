@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, NgZone, ElementRef} from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -47,6 +47,14 @@ export class PieChart extends BaseChart implements OnChanges {
   @Output() clickHandler = new EventEmitter();
 
   translation: string;
+
+  constructor(private element: ElementRef, zone: NgZone) {
+    super(element,zone);
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
+  }
 
   ngOnChanges() {
     this.update();

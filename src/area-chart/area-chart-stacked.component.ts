@@ -133,7 +133,7 @@ export class AreaChartStacked extends BaseChart implements OnChanges, AfterViewI
 
   constructor(element: ElementRef, zone: NgZone) {
     super(element, zone);
-    this.chartElement = element.nativeElement;
+    this.element = element.nativeElement;
   }
 
   ngAfterViewInit(): void {

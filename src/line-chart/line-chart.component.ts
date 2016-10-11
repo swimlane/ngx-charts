@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, HostListener } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, HostListener, ElementRef, NgZone} from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -127,6 +127,14 @@ export class LineChart extends BaseChart implements OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
+
+  constructor(private element: ElementRef, zone: NgZone) {
+    super(element,zone);
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
+  }
 
   ngOnChanges() {
     this.update();

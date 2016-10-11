@@ -31,15 +31,18 @@ export abstract class BaseChart {
   setChartSizeBasedOnContainer() {
     const hostElem = this.chartElement.nativeElement;
 
-    //Get the container dimensions
-    let width = hostElem.parentNode.clientWidth;
-    let height = hostElem.parentNode.clientHeight;
+    //Make sure the component is properly loaded, by making sure it has a container
+    if (hostElem.parentNode != null) {
+      //Get the container dimensions
+      let width = hostElem.parentNode.clientWidth;
+      let height = hostElem.parentNode.clientHeight;
 
-    //setTimeout is used to trigger change detection
-    setTimeout(() => {
-      this.view = [width, height];
-      this.update();
-    }, 0);
+      //setTimeout is used to trigger change detection
+      setTimeout(() => {
+        this.view = [width, height];
+        this.update();
+      }, 0);
+    }
   }
 
   private bindWindowResizeEvent() {
