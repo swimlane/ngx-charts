@@ -69,8 +69,9 @@ var TooltipContentComponent = (function () {
             top = hostDim.top + hostDim.height + this.spacing;
             left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
         }
-        this.renderer.setElementStyle(nativeElm, 'top', top + "px");
-        this.renderer.setElementStyle(nativeElm, 'left', left + "px");
+        var body = nativeElm.ownerDocument.body;
+        this.renderer.setElementStyle(nativeElm, 'top', (top + body.scrollTop) + "px");
+        this.renderer.setElementStyle(nativeElm, 'left', (left + body.scrollLeft) + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;

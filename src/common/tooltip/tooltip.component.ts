@@ -142,8 +142,10 @@ export class TooltipContentComponent implements AfterViewInit {
         this.alignment);
     }
 
-    this.renderer.setElementStyle(nativeElm, 'top', `${top}px`);
-    this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
+    const { body } = nativeElm.ownerDocument;
+
+    this.renderer.setElementStyle(nativeElm, 'top', `${top + body.scrollTop}px`);
+    this.renderer.setElementStyle(nativeElm, 'left', `${left + body.scrollLeft}px`);
   }
 
   positionCaret(hostDim, elmDim) {
