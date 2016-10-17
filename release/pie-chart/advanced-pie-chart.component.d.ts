@@ -1,5 +1,5 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, NgZone, ElementRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
 export interface LegendItem {
@@ -7,7 +7,8 @@ export interface LegendItem {
     label: string;
     percentage: number;
 }
-export declare class AdvancedPieChart extends BaseChart implements OnChanges {
+export declare class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+    private element;
     data: any;
     dims: ViewDimensions;
     domain: any[];
@@ -26,6 +27,9 @@ export declare class AdvancedPieChart extends BaseChart implements OnChanges {
     customColors: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
+    constructor(element: ElementRef, zone: NgZone);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
     ngOnChanges(): void;
     update(): void;
     getTotal(): any;

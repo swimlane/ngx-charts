@@ -16,7 +16,7 @@ var Chart = (function () {
                 this.legendWidth = 1;
             }
             else {
-                this.legendWidth = 3;
+                this.legendWidth = 2;
             }
         }
         this.chartWidth = 12 - this.legendWidth;

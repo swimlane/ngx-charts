@@ -10,6 +10,7 @@
 * legend
 * xAxis
 * yAxis
+* showGridLines
 * showXAxisLabel
 * showYAxisLabel
 * xAxisLabel

@@ -92,12 +92,9 @@
   font-weight: normal; }
 
 .gridline-path {
-  stroke: rgba(200, 200, 200, 0.3);
-  stroke-width: 0.5;
+  stroke: #ddd;
+  stroke-width: 1;
   fill: none; }
-
-.gridline-path-shadow {
-  stroke: black; }
 
 .a2d3-container {
   height: 100%; }

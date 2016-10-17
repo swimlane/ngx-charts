@@ -11,17 +11,24 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var trim_label_helper_1 = require('../common/trim-label.helper');
 var AdvancedPieChart = (function (_super) {
     __extends(AdvancedPieChart, _super);
-    function AdvancedPieChart() {
-        _super.apply(this, arguments);
+    function AdvancedPieChart(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [20, 20, 20, 20];
         this.clickHandler = new core_1.EventEmitter();
     }
+    AdvancedPieChart.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
+    AdvancedPieChart.prototype.ngOnDestroy = function () {
+        this.unbindEvents();
+    };
     AdvancedPieChart.prototype.ngOnChanges = function () {
         this.update();
     };
     AdvancedPieChart.prototype.update = function () {
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions([this.view[0] * 4 / 12.0, this.view[1]], this.margin, false, false, false);
+        this.dims = view_dimensions_helper_1.calculateViewDimensions(this.width * 4 / 12.0, this.height, this.margin, false, false, false);
         this.domain = this.getDomain();
         this.setColors();
         var xOffset = this.margin[3] + this.dims.width / 2;
@@ -64,10 +71,13 @@ var AdvancedPieChart = (function (_super) {
     AdvancedPieChart.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'advanced-pie-chart',
-                    template: "\n    <div class=\"advanced-pie chart\"\n      [style.width]=\"dims.width\"\n      [style.height]=\"view[1]\">\n\n      <chart\n        [colors]=\"colors\"\n        [view]=\"[dims.width, dims.height]\">\n\n        <svg:g\n          [attr.transform]=\"transform\"\n          class=\"pie chart\">\n          <svg:g pieSeries\n            [colors]=\"colors\"\n            [showLabels]=\"labels\"\n            [series]=\"results\"\n            [innerRadius]=\"innerRadius\"\n            [outerRadius]=\"outerRadius\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event)\">\n          </svg:g>\n        </svg:g>\n      </chart>\n    </div>\n\n    <div [style.width]=\"view[0] - dims.width\">\n      <div class=\"advanced-pie-legend\"\n        [style.margin-top]=\"(view[1] - 215)/2\">\n\n        <div class=\"total-value\">\n          {{roundedTotal}}\n        </div>\n        <div class=\"total-label\">\n          {{totalLabel}}\n        </div>\n\n        <div class=\"legend-items-container\">\n          <div class=\"legend-items\">\n            <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n              <div class=\"item-color\"\n                [style.background]=\"colors(legendItem.label)\">\n              </div>\n              <div class=\"item-value\">{{legendItem.value}}</div>\n              <div class=\"item-label\">{{legendItem.label}}</div>\n              <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n            </div>\n          </div>\n        </div>\n\n      </div>\n    </div>\n  "
+                    template: "\n    <div class=\"advanced-pie chart\"\n      [style.width]=\"dims.width\"\n      [style.height]=\"dims.height\">\n\n      <chart\n        [colors]=\"colors\"\n        [view]=\"[dims.width, dims.height]\">\n\n        <svg:g\n          [attr.transform]=\"transform\"\n          class=\"pie chart\">\n          <svg:g pieSeries\n            [colors]=\"colors\"\n            [showLabels]=\"labels\"\n            [series]=\"results\"\n            [innerRadius]=\"innerRadius\"\n            [outerRadius]=\"outerRadius\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event)\">\n          </svg:g>\n        </svg:g>\n      </chart>\n    </div>\n\n    <div [style.width]=\"width - dims.width\">\n      <div class=\"advanced-pie-legend\"\n        [style.margin-top]=\"(height - 215)/2\">\n\n        <div class=\"total-value\">\n          {{roundedTotal}}\n        </div>\n        <div class=\"total-label\">\n          {{totalLabel}}\n        </div>\n\n        <div class=\"legend-items-container\">\n          <div class=\"legend-items\">\n            <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n              <div class=\"item-color\"\n                [style.background]=\"colors(legendItem.label)\">\n              </div>\n              <div class=\"item-value\">{{legendItem.value}}</div>\n              <div class=\"item-label\">{{legendItem.label}}</div>\n              <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n            </div>\n          </div>\n        </div>\n\n      </div>\n    </div>\n  "
                 },] },
     ];
-    AdvancedPieChart.ctorParameters = [];
+    AdvancedPieChart.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+    ];
     AdvancedPieChart.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],

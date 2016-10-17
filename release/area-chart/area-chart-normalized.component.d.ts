@@ -1,8 +1,9 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, ElementRef, NgZone, AfterViewInit } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class AreaChartNormalized extends BaseChart implements OnChanges {
+export declare class AreaChartNormalized extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+    private element;
     dims: ViewDimensions;
     scaleType: string;
     xDomain: any[];
@@ -31,7 +32,11 @@ export declare class AreaChartNormalized extends BaseChart implements OnChanges 
     yAxisLabel: any;
     timeline: any;
     gradient: any;
+    showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
+    constructor(element: ElementRef, zone: NgZone);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
     ngOnChanges(): void;
     update(): void;
     getXDomain(): any[];

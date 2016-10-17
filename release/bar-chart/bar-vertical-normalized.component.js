@@ -11,18 +11,26 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
 var BarVerticalNormalized = (function (_super) {
     __extends(BarVerticalNormalized, _super);
-    function BarVerticalNormalized() {
-        _super.apply(this, arguments);
+    function BarVerticalNormalized(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 20, 70, 100];
         this.legend = false;
+        this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
     }
+    BarVerticalNormalized.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
+    BarVerticalNormalized.prototype.ngOnDestroy = function () {
+        this.unbindEvents();
+    };
     BarVerticalNormalized.prototype.ngOnChanges = function () {
         this.update();
     };
     BarVerticalNormalized.prototype.update = function () {
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+        this.dims = view_dimensions_helper_1.calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
         this.groupDomain = this.getGroupDomain();
         this.innerDomain = this.getInnerDomain();
         this.valueDomain = this.getValueDomain();
@@ -85,7 +93,7 @@ var BarVerticalNormalized = (function (_super) {
     BarVerticalNormalized.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'bar-vertical-normalized',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          showGridLines=\"true\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
                     animations: [
                         core_1.trigger('animationState', [
                             core_1.transition('* => void', [
@@ -99,7 +107,10 @@ var BarVerticalNormalized = (function (_super) {
                     ]
                 },] },
     ];
-    BarVerticalNormalized.ctorParameters = [];
+    BarVerticalNormalized.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+    ];
     BarVerticalNormalized.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
@@ -113,6 +124,7 @@ var BarVerticalNormalized = (function (_super) {
         'xAxisLabel': [{ type: core_1.Input },],
         'yAxisLabel': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
+        'showGridLines': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
     return BarVerticalNormalized;

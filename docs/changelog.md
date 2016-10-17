@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.0
+- Added option to resize charts to fit containers if `view` property is not set (#44)
+- Fixed legend size and positioning (#47)
+- Added scale legend to heat map chart
+- Added option to show/hide the grid lines on the chart (#53)
+- Added support for negative values in bar charts (#17)
+- Fixed bug with reduce call (#56)
+- Changed the tooltip to be hidden initially in order to avoid overflow and scrollbars. (#57)
+- Fixed AOT bugs (#46)
+
 ## 1.2.2
 - Added AOT compilation support
 - Fixed bug where BrowserModule was imported multiple times

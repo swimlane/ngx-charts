@@ -1,8 +1,6 @@
 "use strict";
-function calculateViewDimensions(view, margins, showXLabel, showYLabel, showLegend, columns) {
+function calculateViewDimensions(width, height, margins, showXLabel, showYLabel, showLegend, columns) {
     if (columns === void 0) { columns = 12; }
-    var width = view[0];
-    var height = view[1];
     var xOffset = margins[3];
     if (showLegend) {
         width = width * columns / 12;

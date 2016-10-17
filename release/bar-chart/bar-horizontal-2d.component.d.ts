@@ -1,8 +1,9 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, ElementRef, NgZone, AfterViewInit } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class BarHorizontal2D extends BaseChart implements OnChanges {
+export declare class BarHorizontal2D extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+    private element;
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];
@@ -25,7 +26,11 @@ export declare class BarHorizontal2D extends BaseChart implements OnChanges {
     xAxisLabel: any;
     yAxisLabel: any;
     gradient: boolean;
+    showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
+    constructor(element: ElementRef, zone: NgZone);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
     ngOnChanges(): void;
     update(): void;
     getGroupScale(): any;

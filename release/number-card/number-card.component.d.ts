@@ -1,8 +1,9 @@
 /// <reference types="core-js" />
-import { EventEmitter, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-export declare class NumberCard extends BaseChart implements OnChanges {
+export declare class NumberCard extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+    private element;
     dims: ViewDimensions;
     data: any[];
     colors: Function;
@@ -14,6 +15,9 @@ export declare class NumberCard extends BaseChart implements OnChanges {
     scheme: any;
     customColors: any;
     clickHandler: EventEmitter<{}>;
+    constructor(element: ElementRef, zone: NgZone);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
     ngOnChanges(): void;
     update(): void;
     getDomain(): any;

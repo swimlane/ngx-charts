@@ -11,16 +11,23 @@ var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var TreeMap = (function (_super) {
     __extends(TreeMap, _super);
-    function TreeMap() {
-        _super.apply(this, arguments);
+    function TreeMap(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [10, 10, 10, 10];
         this.clickHandler = new core_1.EventEmitter();
     }
+    TreeMap.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
+    TreeMap.prototype.ngOnDestroy = function () {
+        this.unbindEvents();
+    };
     TreeMap.prototype.ngOnChanges = function () {
         this.update();
     };
     TreeMap.prototype.update = function () {
-        this.dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, false, false, false, 12);
+        this.dims = view_dimensions_helper_1.calculateViewDimensions(this.width, this.height, this.margin, false, false, false, 12);
         this.domain = this.getDomain();
         this.treemap = d3_1.default.treemap()
             .size([this.dims.width, this.dims.height]);
@@ -49,10 +56,13 @@ var TreeMap = (function (_super) {
     TreeMap.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'tree-map',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"view\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+                    template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
                 },] },
     ];
-    TreeMap.ctorParameters = [];
+    TreeMap.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+    ];
     TreeMap.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],

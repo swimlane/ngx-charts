@@ -7,6 +7,7 @@ export declare class YAxisTicks implements OnChanges {
     tickStroke: string;
     tickFormatting: any;
     showGridLines: boolean;
+    gridLineWidth: any;
     height: any;
     innerTickSize: any;
     tickPadding: any;

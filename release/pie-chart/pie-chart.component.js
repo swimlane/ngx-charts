@@ -10,8 +10,9 @@ var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
 var PieChart = (function (_super) {
     __extends(PieChart, _super);
-    function PieChart() {
-        _super.apply(this, arguments);
+    function PieChart(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
         this.margin = [20, 20, 20, 20];
         this.labels = false;
         this.legend = false;
@@ -19,13 +20,19 @@ var PieChart = (function (_super) {
         this.doughnut = false;
         this.clickHandler = new core_1.EventEmitter();
     }
+    PieChart.prototype.ngAfterViewInit = function () {
+        this.bindResizeEvents(this.view);
+    };
+    PieChart.prototype.ngOnDestroy = function () {
+        this.unbindEvents();
+    };
     PieChart.prototype.ngOnChanges = function () {
         this.update();
     };
     PieChart.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
-        var dims = view_dimensions_helper_1.calculateViewDimensions(this.view, this.margin, false, false, this.legend, 9);
+        var dims = view_dimensions_helper_1.calculateViewDimensions(this.width, this.height, this.margin, false, false, this.legend, 9);
         var xOffset = this.margin[3] + dims.width / 2;
         var yOffset = this.margin[0] + dims.height / 2;
         this.translation = "translate(" + xOffset + ", " + yOffset + ")";
@@ -58,10 +65,13 @@ var PieChart = (function (_super) {
     PieChart.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'pie-chart',
-                    template: "\n    <chart\n      [colors]=\"colors\"\n      [legend]=\"legend\"\n      [view]=\"view\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
+                    template: "\n    <chart\n      [colors]=\"colors\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  "
                 },] },
     ];
-    PieChart.ctorParameters = [];
+    PieChart.ctorParameters = [
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+    ];
     PieChart.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],

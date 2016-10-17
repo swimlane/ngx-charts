@@ -1,8 +1,8 @@
 /// <reference types="core-js" />
-import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, OnDestroy, NgZone, AfterViewInit } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
-export declare class AreaChartStacked extends BaseChart implements OnChanges {
+export declare class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
     element: HTMLElement;
     dims: ViewDimensions;
     scaleType: string;
@@ -31,8 +31,11 @@ export declare class AreaChartStacked extends BaseChart implements OnChanges {
     yAxisLabel: any;
     timeline: any;
     gradient: any;
+    showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
-    constructor(element: ElementRef);
+    constructor(element: ElementRef, zone: NgZone);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
     ngOnChanges(): void;
     update(): void;
     getXDomain(): any[];
