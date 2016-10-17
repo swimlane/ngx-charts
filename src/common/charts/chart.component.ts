@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'chart',
@@ -40,8 +40,8 @@ export class Chart implements OnChanges {
   @Input() legendData;
   @Input() legendTitle = 'Legend';
   @Input() colors;
-
   chartWidth: any;
+
   title: any;
   legendWidth: any;
   legendType: any;
@@ -59,7 +59,7 @@ export class Chart implements OnChanges {
       if (this.legendType === 'scaleLegend') {
         this.legendWidth = 1;
       } else {
-        this.legendWidth = 3;
+        this.legendWidth = 2;
       }
     }
 

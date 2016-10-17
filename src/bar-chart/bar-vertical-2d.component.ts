@@ -7,7 +7,7 @@ import {
   trigger,
   style,
   transition,
-  animate
+  animate, NgZone, ElementRef, AfterViewInit
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -76,7 +76,7 @@ import d3 from '../d3';
     ])
   ]
 })
-export class BarVertical2D extends BaseChart implements OnChanges {
+export class BarVertical2D extends BaseChart implements OnChanges, AfterViewInit {
   dims: ViewDimensions;
   groupDomain: any[];
   innerDomain: any[];
@@ -104,6 +104,14 @@ export class BarVertical2D extends BaseChart implements OnChanges {
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+
+  constructor(private element: ElementRef, zone: NgZone) {
+    super(element, zone);
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
+  }
 
   ngOnChanges() {
     this.update();

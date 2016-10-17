@@ -7,11 +7,11 @@ import {
   trigger,
   style,
   transition,
-  animate
+  animate, ElementRef, NgZone, AfterViewInit
 } from '@angular/core';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
+import {colorHelper} from '../utils/color-sets';
+import {BaseChart} from '../common/base-chart.component';
 import d3 from '../d3';
 
 @Component({
@@ -78,7 +78,7 @@ import d3 from '../d3';
     ])
   ]
 })
-export class BarHorizontal2D extends BaseChart implements OnChanges {
+export class BarHorizontal2D extends BaseChart implements OnChanges, AfterViewInit {
   dims: ViewDimensions;
   groupDomain: any[];
   innerDomain: any[];
@@ -106,87 +106,96 @@ export class BarHorizontal2D extends BaseChart implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-    ngOnChanges() {
-      this.update();
+
+  constructor(private element: ElementRef, zone: NgZone) {
+    super(element, zone);
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
+  }
+
+  ngOnChanges() {
+    this.update();
+  }
+
+  update() {
+    super.update();
+    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+
+    this.groupDomain = this.getGroupDomain();
+    this.innerDomain = this.getInnerDomain();
+    this.valuesDomain = this.getValueDomain();
+
+    this.groupScale = this.getGroupScale();
+    this.innerScale = this.getInnerScale();
+    this.valueScale = this.getValueScale();
+
+    this.setColors();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+  }
+
+  getGroupScale() {
+    let spacing = 0.2;
+    return d3.scaleBand()
+      .rangeRound([this.dims.height, 0])
+      .paddingInner(spacing)
+      .domain(this.groupDomain);
+  }
+
+  getInnerScale() {
+    let spacing = 0.2;
+    return d3.scaleBand()
+      .rangeRound([0, this.groupScale.bandwidth()])
+      .paddingInner(spacing)
+      .domain(this.innerDomain);
+  }
+
+  getValueScale() {
+    return d3.scaleLinear()
+      .range([0, this.dims.width])
+      .domain(this.valuesDomain);
+  }
+
+  getGroupDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      if (!domain.includes(group.name)) {
+        domain.push(group.name);
+      }
     }
 
-    update() {
-      super.update();
-      this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    return domain;
+  }
 
-      this.groupDomain = this.getGroupDomain();
-      this.innerDomain = this.getInnerDomain();
-      this.valuesDomain = this.getValueDomain();
-
-      this.groupScale = this.getGroupScale();
-      this.innerScale = this.getInnerScale();
-      this.valueScale = this.getValueScale();
-
-      this.setColors();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-    }
-
-    getGroupScale() {
-      let spacing = 0.2;
-      return d3.scaleBand()
-        .rangeRound([this.dims.height, 0])
-        .paddingInner(spacing)
-        .domain(this.groupDomain);
-    }
-
-    getInnerScale() {
-      let spacing = 0.2;
-      return d3.scaleBand()
-        .rangeRound([0, this.groupScale.bandwidth()])
-        .paddingInner(spacing)
-        .domain(this.innerDomain);
-    }
-
-    getValueScale() {
-      return d3.scaleLinear()
-        .range([0, this.dims.width])
-        .domain(this.valuesDomain);
-    }
-
-    getGroupDomain() {
-      let domain = [];
-      for (let group of this.results) {
-        if (!domain.includes(group.name)) {
-          domain.push(group.name);
+  getInnerDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      for (let d of group.series) {
+        if (!domain.includes(d.name)) {
+          domain.push(d.name);
         }
       }
-
-      return domain;
     }
 
-    getInnerDomain() {
-      let domain = [];
-      for (let group of this.results) {
-        for (let d of group.series) {
-          if (!domain.includes(d.name)) {
-            domain.push(d.name);
-          }
+    return domain;
+  }
+
+  getValueDomain() {
+    let domain = [];
+    for (let group of this.results) {
+      for (let d of group.series) {
+        if (!domain.includes(d.value)) {
+          domain.push(d.value);
         }
       }
-
-      return domain;
     }
 
-    getValueDomain() {
-      let domain = [];
-      for (let group of this.results) {
-        for (let d of group.series) {
-          if (!domain.includes(d.value)) {
-            domain.push(d.value);
-          }
-        }
-      }
-
-      let min = Math.min(0, ...domain);
-      let max = Math.max(...domain);
-      return [min, max];
-    }
+    let min = Math.min(0, ...domain);
+    let max = Math.max(...domain);
+    return [min, max];
+  }
 
 
   groupTransform(group) {

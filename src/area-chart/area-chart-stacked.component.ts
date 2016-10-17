@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, HostListener } from '@angular/core';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import {Component, Input, Output, EventEmitter, ElementRef, OnChanges, HostListener, NgZone, AfterViewInit} from '@angular/core';
+import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
+import {colorHelper} from '../utils/color-sets';
+import {BaseChart} from '../common/base-chart.component';
 import * as moment from 'moment';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
@@ -97,7 +97,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class AreaChartStacked extends BaseChart implements OnChanges {
+export class AreaChartStacked extends BaseChart implements OnChanges, AfterViewInit {
   element: HTMLElement;
   dims: ViewDimensions;
   scaleType: string;
@@ -131,9 +131,14 @@ export class AreaChartStacked extends BaseChart implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef) {
-    super();
+
+  constructor(element: ElementRef, zone: NgZone) {
+    super(element, zone);
     this.element = element.nativeElement;
+  }
+
+  ngAfterViewInit(): void {
+    this.bindResizeEvents(this.view);
   }
 
   ngOnChanges() {
@@ -196,7 +201,7 @@ export class AreaChartStacked extends BaseChart implements OnChanges {
   getXDomain() {
     let values = [];
     for (let results of this.results) {
-      for (let d of results.series){
+      for (let d of results.series) {
         if (!values.includes(d.name)) {
           values.push(d.name);
         }

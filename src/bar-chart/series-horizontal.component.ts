@@ -8,7 +8,7 @@ import {
   style,
   transition,
   animate
- } from '@angular/core';
+} from '@angular/core';
 
 @Component({
   selector: 'g[seriesHorizontal]',
