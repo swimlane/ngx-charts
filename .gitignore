@@ -5,3 +5,4 @@ compiled/
 dist/
 coverage/
 .idea
+yarn.lock
