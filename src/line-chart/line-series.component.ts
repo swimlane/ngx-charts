@@ -1,7 +1,11 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges
+} from '@angular/core';
 import d3 from '../d3';
 import * as moment from 'moment';
-import {sortLinear} from '../utils/sort';
+import { sortLinear } from '../utils/sort';
 
 @Component({
   selector: 'g[lineSeries]',

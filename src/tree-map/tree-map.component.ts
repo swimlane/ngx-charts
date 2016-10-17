@@ -1,4 +1,14 @@
-import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, NgZone} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
+  NgZone
+} from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
@@ -9,7 +19,7 @@ import { colorHelper } from '../utils/color-sets';
   template: `
     <chart
       [legend]="false"
-      [view]="view">
+      [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g treeMapCellSeries
           [colors]="colors"
@@ -21,7 +31,7 @@ import { colorHelper } from '../utils/color-sets';
     </chart>
   `
 })
-export class TreeMap extends BaseChart implements OnChanges {
+export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   margin = [10, 10, 10, 10];
 
   @Input() view;
@@ -46,12 +56,16 @@ export class TreeMap extends BaseChart implements OnChanges {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
-    this.dims = calculateViewDimensions(this.view, this.margin, false, false, false, 12);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, false, false, false, 12);
     this.domain = this.getDomain();
 
     this.treemap = d3.treemap()

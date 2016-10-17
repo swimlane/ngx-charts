@@ -1,4 +1,14 @@
-import {Component, Input, Output, EventEmitter, OnChanges, NgZone, ElementRef} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  NgZone,
+  ElementRef
+} from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -15,7 +25,7 @@ export interface LegendItem {
   template: `
     <div class="advanced-pie chart"
       [style.width]="dims.width"
-      [style.height]="view[1]">
+      [style.height]="dims.height">
 
       <chart
         [colors]="colors"
@@ -37,9 +47,9 @@ export interface LegendItem {
       </chart>
     </div>
 
-    <div [style.width]="view[0] - dims.width">
+    <div [style.width]="width - dims.width">
       <div class="advanced-pie-legend"
-        [style.margin-top]="(view[1] - 215)/2">
+        [style.margin-top]="(height - 215)/2">
 
         <div class="total-value">
           {{roundedTotal}}
@@ -65,7 +75,7 @@ export interface LegendItem {
     </div>
   `
 })
-export class AdvancedPieChart extends BaseChart implements OnChanges {
+export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   data: any;
   dims: ViewDimensions;
   domain: any[];
@@ -95,22 +105,19 @@ export class AdvancedPieChart extends BaseChart implements OnChanges {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions([this.view[0] * 4 / 12.0, this.view[1]], this.margin, false, false, false);
+    this.dims = calculateViewDimensions(this.width * 4 / 12.0, this.height, this.margin, false, false, false);
     this.domain = this.getDomain();
     this.setColors();
-
-    // TODO
-    // sort data according to domain
-    // this.data = this.results.series[0];
-    // this.data.array = this.data.array.sort((a, b) => {
-    //   return this.results.d0Domain.indexOf(a.vals[0].label[1]) - this.results.d0Domain.indexOf(b.vals[0].label[1]);
-    // });
 
     let xOffset = this.margin[3] + this.dims.width / 2;
     let yOffset = this.margin[0] + this.dims.height / 2;

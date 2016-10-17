@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  OnDestroy,
   trigger,
   style,
   transition,
@@ -19,7 +20,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
-      [view]="view"
+      [view]="[width, height]"
       [colors]="colors"
       [legendData]="innerDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
@@ -76,7 +77,7 @@ import d3 from '../d3';
     ])
   ]
 })
-export class BarVertical2D extends BaseChart implements OnChanges, AfterViewInit {
+export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   groupDomain: any[];
   innerDomain: any[];
@@ -113,13 +114,17 @@ export class BarVertical2D extends BaseChart implements OnChanges, AfterViewInit
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     this.groupDomain = this.getGroupDomain();
     this.innerDomain = this.getInnerDomain();

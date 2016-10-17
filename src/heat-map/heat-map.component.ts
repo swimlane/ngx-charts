@@ -1,4 +1,14 @@
-import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, NgZone} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
+  NgZone
+} from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -11,7 +21,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
       [legend]="legend"
       [legendData]="colorScale"
       [data]="valueDomain"
-      [view]="view">
+      [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="heat-map chart">
 
         <svg:g xAxis
@@ -51,7 +61,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
     </chart>
   `
 })
-export class HeatMap extends BaseChart implements OnChanges {
+export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   xDomain: any[];
   yDomain: any[];
@@ -88,13 +98,17 @@ export class HeatMap extends BaseChart implements OnChanges {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 11);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 11);
 
     this.xDomain = this.getXDomain();
     this.yDomain = this.getYDomain();

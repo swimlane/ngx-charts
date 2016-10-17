@@ -1,11 +1,14 @@
-import {ElementRef, NgZone} from "@angular/core";
-import {Observable} from "rxjs";
+import { ElementRef, NgZone } from "@angular/core";
+import { Observable } from "rxjs";
+
 export abstract class BaseChart {
   results: any[];
   chartElement: ElementRef;
   zone: NgZone;
   view: number[];
-
+  width: number;
+  height: number;
+  resizeSubscription: any;
 
   constructor(chartElement: ElementRef, zone: NgZone) {
     this.chartElement = chartElement;
@@ -14,48 +17,51 @@ export abstract class BaseChart {
 
   protected bindResizeEvents(view: number[]): void {
     this.view = view;
-
-    this.zone.runOutsideAngular(() => {
-      Observable.fromEvent(window, 'load', null, null)
-        .subscribe(e => {
-          this.setChartSizeBasedOnContainer();
-        });
-    });
     this.bindWindowResizeEvent();
+  }
+
+  protected unbindEvents() {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
   }
 
   update() {
     this.results = this.cloneData(this.results);
+    if (this.view) {
+      this.width = this.view[0];
+      this.height = this.view[1];
+    } else {
+      let dims = this.getContainerDims();
+      this.width = dims.width;
+      this.height = dims.height;
+    }
   }
 
-  setChartSizeBasedOnContainer() {
+  getContainerDims() {
+    let width = 0;
+    let height = 0;
     const hostElem = this.chartElement.nativeElement;
-
-    //Make sure the component is properly loaded, by making sure it has a container
     if (hostElem.parentNode != null) {
       //Get the container dimensions
-      let width = hostElem.parentNode.clientWidth;
-      let height = hostElem.parentNode.clientHeight;
-
-      //setTimeout is used to trigger change detection
-      setTimeout(() => {
-        this.view = [width, height];
-        this.update();
-      }, 0);
+      width = hostElem.parentNode.clientWidth;
+      height = hostElem.parentNode.clientHeight;
     }
+    return {width, height};
   }
 
   private bindWindowResizeEvent() {
     this.zone.runOutsideAngular(() => {
-      Observable.fromEvent(window, 'resize', null, null).debounceTime(100)
-        .subscribe(e => {
-          this.setChartSizeBasedOnContainer();
-        });
+      let source = Observable.fromEvent(window, 'resize', null, null);
+      let subscription = source.debounceTime(200).subscribe(e => {
+        this.zone.run(() => { this.update(); });
+      });
+      this.zone.run(() => { this.resizeSubscription = subscription; });
     });
   }
 
   // Clones the data into a new object
-  cloneData(data) {
+  private cloneData(data) {
     let results = [];
 
     for (let item of data) {
@@ -82,6 +88,5 @@ export abstract class BaseChart {
   }
 
   abstract setColors()
-
   abstract click(data, group)
 }

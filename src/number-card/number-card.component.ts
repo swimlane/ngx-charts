@@ -1,4 +1,14 @@
-import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, NgZone} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
+  NgZone
+} from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -9,7 +19,7 @@ import { gridLayout } from '../common/grid-layout.helper';
   template: `
     <chart
       [legend]="false"
-      [view]="view">
+      [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="number-card chart">
         <svg:g cardSeries
           [colors]="colors"
@@ -21,7 +31,7 @@ import { gridLayout } from '../common/grid-layout.helper';
     </chart>
   `
 })
-export class NumberCard extends BaseChart implements OnChanges {
+export class NumberCard extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   data: any[];
   colors: Function;
@@ -44,13 +54,17 @@ export class NumberCard extends BaseChart implements OnChanges {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, false, false, false);
 
     this.domain = this.getDomain();
 

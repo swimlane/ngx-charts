@@ -7,7 +7,7 @@ import d3 from '../d3';
 import '../../config/testing-utils';
 
 import { CommonModule } from './common.module';
-import {colorHelper} from '../utils/color-sets';
+import { colorHelper } from '../utils/color-sets';
 
 // some test data (includes just enought data to run the tests)
 let seriesData = ['complete', 'not complete'];

@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnChanges, ViewChildren, Renderer } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  ViewChildren,
+  Renderer
+} from '@angular/core';
 
 @Component({
   selector: 'g[areaTooltip]',

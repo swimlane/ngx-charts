@@ -1,4 +1,14 @@
-import {Component, Input, Output, EventEmitter, OnChanges, ElementRef, NgZone} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
+  NgZone
+} from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -11,7 +21,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="false"
-      [view]="view" >
+      [view]="[width, height]" >
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g
           *ngFor="let series of series"
@@ -28,7 +38,7 @@ import d3 from '../d3';
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="series.label + ': ' + series.value" 
+            [tooltipTitle]="series.label + ': ' + series.value"
           />
 
           <svg:text
@@ -63,7 +73,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class PieGrid extends BaseChart implements OnChanges {
+export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   data: any[];
   transform: string;
@@ -87,13 +97,17 @@ export class PieGrid extends BaseChart implements OnChanges {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, false, false, false);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, false, false, false);
     this.domain = this.getDomain();
 
     this.data = gridLayout(this.dims, this.results, 150);

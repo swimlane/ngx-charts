@@ -4,9 +4,7 @@ export interface ViewDimensions {
   xOffset: number;
 }
 
-export function calculateViewDimensions(view, margins, showXLabel, showYLabel, showLegend, columns = 12): ViewDimensions {
-  let width = view[0];
-  let height = view[1];
+export function calculateViewDimensions(width, height, margins, showXLabel, showYLabel, showLegend, columns = 12): ViewDimensions {
   let xOffset = margins[3];
   // let yOffset = margins[0]; // unused
   if (showLegend) {

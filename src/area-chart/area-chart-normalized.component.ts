@@ -1,4 +1,15 @@
-import {Component, Input, Output, EventEmitter, OnChanges, HostListener, ElementRef, NgZone, AfterViewInit} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  HostListener,
+  ElementRef,
+  NgZone,
+  AfterViewInit
+} from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -11,7 +22,7 @@ import ObjectId from "../utils/object-id";
   template: `
     <chart
       [legend]="legend"
-      [view]="view"
+      [view]="[width, height]"
       [colors]="colors"
       [legendData]="seriesDomain">
 
@@ -87,7 +98,7 @@ import ObjectId from "../utils/object-id";
       <svg:g timeline
         *ngIf="timeline && scaleType === 'time'"
         [results]="results"
-        [view]="view"
+        [view]="[width, height]"
         [scheme]="scheme"
         [customColors]="customColors"
         [legend]="legend"
@@ -97,7 +108,7 @@ import ObjectId from "../utils/object-id";
     </chart>
   `
 })
-export class AreaChartNormalized extends BaseChart implements OnChanges, AfterViewInit {
+export class AreaChartNormalized extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   scaleType: string;
   xDomain: any[];
@@ -139,13 +150,17 @@ export class AreaChartNormalized extends BaseChart implements OnChanges, AfterVi
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     if (this.timeline) {
       this.dims.height -= 150;

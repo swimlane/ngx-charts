@@ -1,7 +1,18 @@
-import {Component, Input, Output, EventEmitter, ElementRef, OnChanges, HostListener, NgZone, AfterViewInit} from '@angular/core';
-import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
-import {colorHelper} from '../utils/color-sets';
-import {BaseChart} from '../common/base-chart.component';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  OnChanges,
+  OnDestroy,
+  HostListener,
+  NgZone,
+  AfterViewInit
+} from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { colorHelper } from '../utils/color-sets';
+import { BaseChart } from '../common/base-chart.component';
 import * as moment from 'moment';
 import ObjectId from "../utils/object-id";
 import d3 from '../d3';
@@ -11,7 +22,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
-      [view]="view"
+      [view]="[width, height]"
       [colors]="colors"
       [legendData]="seriesDomain">
 
@@ -87,7 +98,7 @@ import d3 from '../d3';
       <svg:g timeline
         *ngIf="timeline && scaleType === 'time'"
         [results]="results"
-        [view]="view"
+        [view]="[width, height]"
         [scheme]="scheme"
         [customColors]="customColors"
         [legend]="legend"
@@ -97,7 +108,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class AreaChartStacked extends BaseChart implements OnChanges, AfterViewInit {
+export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   element: HTMLElement;
   dims: ViewDimensions;
   scaleType: string;
@@ -131,7 +142,6 @@ export class AreaChartStacked extends BaseChart implements OnChanges, AfterViewI
 
   @Output() clickHandler = new EventEmitter();
 
-
   constructor(element: ElementRef, zone: NgZone) {
     super(element, zone);
     this.element = element.nativeElement;
@@ -141,13 +151,17 @@ export class AreaChartStacked extends BaseChart implements OnChanges, AfterViewI
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     if (this.timeline) {
       this.dims.height -= 150;

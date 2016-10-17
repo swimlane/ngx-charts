@@ -1,4 +1,15 @@
-import {Component, Input, Output, EventEmitter, OnChanges, HostListener, ElementRef, NgZone} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  HostListener,
+  ElementRef,
+  NgZone
+} from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -11,7 +22,7 @@ import * as moment from 'moment';
   template: `
     <chart
       [legend]="legend"
-      [view]="view"
+      [view]="[width, height]"
       [colors]="colors"
       [legendData]="seriesDomain">
 
@@ -83,7 +94,7 @@ import * as moment from 'moment';
       <svg:g timeline
         *ngIf="timeline && scaleType === 'time'"
         [results]="results"
-        [view]="view"
+        [view]="[width, height]"
         [scheme]="scheme"
         [customColors]="customColors"
         [scaleType]="scaleType"
@@ -93,7 +104,7 @@ import * as moment from 'moment';
     </chart>
   `
 })
-export class LineChart extends BaseChart implements OnChanges {
+export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   xSet: any;
   xDomain: any;
@@ -137,13 +148,17 @@ export class LineChart extends BaseChart implements OnChanges {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     if (this.timeline) {
       this.dims.height -= 150;

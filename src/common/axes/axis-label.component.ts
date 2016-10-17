@@ -1,4 +1,9 @@
-import { Component, Input, ElementRef, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  ElementRef,
+  OnChanges
+} from '@angular/core';
 
 @Component({
   selector: 'g[axisLabel]',

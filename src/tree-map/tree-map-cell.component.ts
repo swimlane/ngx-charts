@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  OnChanges
+} from '@angular/core';
 // import { formatNumber } from 'common/utils/format';
 import d3 from '../d3';
 

@@ -1,8 +1,10 @@
-body {
-  // background: #1b1e27;
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
 
+body {
   font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -23,19 +25,20 @@ body {
   box-sizing: border-box;
 }
 
+app {
+  height: 100%;
+}
+
 main {
   display: flex;
   flex: 1;
-  align-items: center;
   justify-content: center;
+  height: 100%;
 
   .chart-col {
-    border:1px solid black;
-    flex: 2;
-    max-height: 600px;
-    text-align: center;
-    margin: 20px auto;
-    width:80vh;
+    background: #fafafa;
+    width: 100%;
+    height: 100%;
   }
 
   .sidebar {

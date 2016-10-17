@@ -295,6 +295,22 @@ import './demo.scss';
           </label>
         </div>
         <h3>Options</h3>
+        <div>
+          <label><strong>Dimensions</strong></label><br />
+          <label>
+            <input type="checkbox" [checked]="fitContainer" (change)="toggleFitContainer($event.target.checked)">
+            Fit Container
+          </label> <br />
+          <div *ngIf="!fitContainer">
+            <label>Width:</label><br />
+            <input type="number" [(ngModel)]="width"><br />
+            <label>Height:</label><br />
+            <input type="number" [(ngModel)]="height"><br />
+            <button (click)="applyDimensions()">Apply dimensions</button>
+          </div>
+        </div>
+        <hr />
+
         <div *ngIf="chart.options.includes('showXAxis')">
           <label>
             <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
@@ -316,7 +332,7 @@ import './demo.scss';
         <div *ngIf="chart.options.includes('gradient')">
           <label>
             <input type="checkbox" [checked]="gradient" (change)="gradient = $event.target.checked">
-            Use gradients
+            Use Gradients
           </label> <br />
         </div>
         <div *ngIf="chart.options.includes('showLegend')">
@@ -375,15 +391,6 @@ import './demo.scss';
             Timeline
           </label> <br />
         </div>
-        <div>
-          <label>View Width</label><br /> <input type="number"
-          [(ngModel)]="width"><br />
-          </div>
-          <div>
-            <label>View Height</label><br /> <input type="number"
-          [(ngModel)]="height"><br />
-        </div>
-        <button (click)="setViewSize()">Set view size</button>
       </div>
     </main>
   `
@@ -400,10 +407,10 @@ export class App implements OnInit {
   dateData: any[];
   linearScale: boolean = false;
 
-  view: any[] = [900, 400];
-  width: number = 900;
-  height: number = 400;
-
+  view: any[];
+  width: number = 700;
+  height: number = 300;
+  fitContainer: boolean = true;
 
   // options
   showXAxis = true;
@@ -488,8 +495,18 @@ export class App implements OnInit {
     }
   }
 
-  setViewSize() {
+  applyDimensions() {
     this.view = [this.width, this.height];
+  }
+
+  toggleFitContainer(event) {
+    this.fitContainer = event;
+
+    if (this.fitContainer) {
+      this.view = undefined;
+    } else {
+      this.applyDimensions();
+    }
   }
 
   selectChart(chartSelector) {

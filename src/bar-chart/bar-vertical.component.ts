@@ -1,21 +1,26 @@
-import {Component, Input, Output, EventEmitter, OnChanges, AfterViewInit, ElementRef, NgZone} from '@angular/core';
-import {calculateViewDimensions, ViewDimensions} from '../common/view-dimensions.helper';
-import {colorHelper} from '../utils/color-sets';
-import {BaseChart} from '../common/base-chart.component';
-import {tickFormat} from '../common/tick-format.helper';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
+  NgZone
+} from '@angular/core';
+import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { colorHelper } from '../utils/color-sets';
+import { BaseChart } from '../common/base-chart.component';
+import { tickFormat } from '../common/tick-format.helper';
 import d3 from '../d3';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/throttleTime';
-import 'rxjs/add/observable/fromEvent';
-import {Subject} from "rxjs";
 
 @Component({
   selector: 'bar-vertical',
   template: `
     <chart
       [legend]="legend"
-      [view]="view"
+      [view]="[width, height]"
       [colors]="colors"
       [legendData]="xDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
@@ -51,7 +56,7 @@ import {Subject} from "rxjs";
   `,
 
 })
-export class BarVertical extends BaseChart implements OnChanges, AfterViewInit {
+export class BarVertical extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   xScale: any;
   yScale: any;
@@ -85,16 +90,18 @@ export class BarVertical extends BaseChart implements OnChanges, AfterViewInit {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
-
   update() {
     super.update();
 
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 10);
-
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 10);
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();

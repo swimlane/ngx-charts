@@ -1,4 +1,14 @@
-import {Component, Input, Output, EventEmitter, OnChanges, NgZone, ElementRef, AfterViewInit} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  NgZone,
+  ElementRef,
+  AfterViewInit
+} from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -10,7 +20,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
-      [view]="view"
+      [view]="[width, height]"
       [colors]="colors"
       [legendData]="yDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
@@ -45,7 +55,7 @@ import d3 from '../d3';
     </chart>
   `
 })
-export class BarHorizontal extends BaseChart implements OnChanges, AfterViewInit {
+export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
   yScale: any;
   xScale: any;
@@ -79,6 +89,9 @@ export class BarHorizontal extends BaseChart implements OnChanges, AfterViewInit
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
 
   ngOnChanges() {
     this.update();
@@ -86,7 +99,7 @@ export class BarHorizontal extends BaseChart implements OnChanges, AfterViewInit
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.view, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
+    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 9);
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();

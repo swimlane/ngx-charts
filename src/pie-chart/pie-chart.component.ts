@@ -1,4 +1,14 @@
-import {Component, Input, Output, EventEmitter, OnChanges, NgZone, ElementRef} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  AfterViewInit,
+  NgZone,
+  ElementRef
+} from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
@@ -9,7 +19,7 @@ import { BaseChart } from '../common/base-chart.component';
     <chart
       [colors]="colors"
       [legend]="legend"
-      [view]="view"
+      [view]="[width, height]"
       [legendData]="domain">
       <svg:g [attr.transform]="translation" class="pie-chart chart">
         <svg:g pieSeries
@@ -26,7 +36,7 @@ import { BaseChart } from '../common/base-chart.component';
     </chart>
   `
 })
-export class PieChart extends BaseChart implements OnChanges {
+export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   outerRadius: number;
   innerRadius: number;
   data: any;
@@ -56,13 +66,17 @@ export class PieChart extends BaseChart implements OnChanges {
     this.bindResizeEvents(this.view);
   }
 
+  ngOnDestroy() {
+    this.unbindEvents();
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
     super.update();
-    let dims = calculateViewDimensions(this.view, this.margin, false, false, this.legend, 9);
+    let dims = calculateViewDimensions(this.width, this.height, this.margin, false, false, this.legend, 9);
     let xOffset = this.margin[3] + dims.width / 2;
     let yOffset = this.margin[0] + dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;

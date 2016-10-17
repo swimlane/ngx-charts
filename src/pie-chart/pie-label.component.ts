@@ -1,4 +1,9 @@
-import { Component, Input, ElementRef, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  ElementRef,
+  OnChanges
+} from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
 

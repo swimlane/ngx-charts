@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges
+} from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -28,7 +34,7 @@ import * as moment from 'moment';
         (clickHandler)="click($event, circle.label)"
         [style.opacity]="circle.opacity"
         [style.cursor]="'pointer'"
-        
+
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
