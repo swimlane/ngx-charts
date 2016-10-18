@@ -1,8 +1,7 @@
-import { OnInit, ViewContainerRef } from '@angular/core';
+import { OnInit } from '@angular/core';
 import '../src/ng2d3.scss';
 import './demo.scss';
 export declare class App implements OnInit {
-    viewContainerRef: ViewContainerRef;
     chartType: string;
     chartGroups: any[];
     chart: any;
@@ -13,6 +12,9 @@ export declare class App implements OnInit {
     dateData: any[];
     linearScale: boolean;
     view: any[];
+    width: number;
+    height: number;
+    fitContainer: boolean;
     showXAxis: boolean;
     showYAxis: boolean;
     gradient: boolean;
@@ -21,6 +23,7 @@ export declare class App implements OnInit {
     xAxisLabel: string;
     showYAxisLabel: boolean;
     yAxisLabel: string;
+    showGridLines: boolean;
     colorScheme: {
         domain: string[];
     };
@@ -29,9 +32,11 @@ export declare class App implements OnInit {
     doughnut: boolean;
     autoScale: boolean;
     timeline: boolean;
-    constructor(viewContainerRef: ViewContainerRef);
+    constructor();
     ngOnInit(): void;
     updateData(): void;
+    applyDimensions(): void;
+    toggleFitContainer(event: any): void;
     selectChart(chartSelector: any): void;
     clickHandler(data: any): void;
 }
