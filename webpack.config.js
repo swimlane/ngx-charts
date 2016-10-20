@@ -15,124 +15,180 @@ function root(args) {
   return path.join.apply(path, [__dirname].concat(args));
 }
 
-module.exports = {
-  resolve: {
-    extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
-    root: root('demo'),
-    descriptionFiles: ['package.json'],
-    modules: [
-      root('demo'),
-      'node_modules'
-    ]
-  },
+var banner =
+`/**
+ * ng2d3 v${VERSION} (https://github.com/swimlane/ng2d3)
+ * Copyright 2016
+ * Licensed under MIT
+ */`;
 
-  // context: root(),
-  debug: true,
-  devtool: 'cheap-module-source-map',
+ function webpackConfig(options = {}) {
 
-  module: {
-    preLoaders: [
-      {
-        test: /\.js$/,
-        loader: 'source-map',
-        exclude: /(node_modules)/
-      },
-      {
-        test: /\.ts$/,
-        loader: 'tslint'
-      }
-    ],
-    loaders: [
-      {
-        test: /\.ts$/,
-        loader: 'awesome-typescript-loader',
-        exclude: /(node_modules)/
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
-          'style',
-          'css?sourceMap',
-          'postcss?sourceMap',
-          'sass?sourceMap'
-        ]
-      }
-    ]
-  },
-
-  entry: {
-    'app': './demo/bootstrap.ts',
-    'polyfills': './demo/polyfills.ts',
-    'vendor': './demo/vendor.ts'
-  },
-
-  devServer: {
-    outputPath: root('dist'),
-    watchOptions: {
-      poll: true
+   var config = {
+    resolve: {
+      extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
+      modules: [
+        root('demo'),
+        'node_modules'
+      ]
     },
-    port: 9999,
-    stats: {
-      modules: false,
-      cached: false,
-      colors: true,
-      chunks: false
-    }
-  },
 
-  output: {
-    path: root('dist'),
-    filename: '[name].[hash].js',
-    sourceMapFilename: '[name].[hash].map',
-    chunkFilename: '[id].[hash].chunk.js'
-  },
+    devtool: 'cheap-module-source-map',
 
-  postcss: [
-    autoprefixer({
-      browsers: ['last 2 version']
-    })
-  ],
+    module: {
+      exprContextCritical: false,
+      rules: [
+        {
+          enforce: 'pre',
+          test: /\.js$/,
+          loader: 'source-map',
+          exclude: /(node_modules)/
+        },
+        {
+          enforce: 'pre',
+          test: /\.ts$/,
+          loader: 'tslint',
+          exclude: /(node_modules|release|dist)/
+        },
+        {
+          test: /\.ts$/,
+          loader: 'awesome-typescript-loader',
+          exclude: /(node_modules)/
+        },
+        {
+          test: /\.scss$/,
+          loaders: [
+            'style',
+            'css?sourceMap',
+            'postcss?sourceMap',
+            'sass?sourceMap'
+          ]
+        }
+      ]
+    },
 
-  tslint: {
-    emitErrors: false,
-    failOnHint: false,
-    resourcePath: 'demo'
-  },
+    entry: {
+      'app': './demo/bootstrap.ts',
+      'polyfills': './demo/polyfills.ts',
+      'vendor': './demo/vendor.ts'
+    },
 
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'polyfills'],
-      minChunks: Infinity
-    }),
+    devServer: {
+      outputPath: root('dist'),
+      watchOptions: {
+        poll: true
+      },
+      port: 9999,
+      stats: {
+        modules: false,
+        cached: false,
+        colors: true,
+        chunks: false
+      }
+    },
 
-    // https://github.com/angular/angular/issues/11580#issuecomment-246880731
-    new webpack.ContextReplacementPlugin(
-      // The (\\|\/) piece accounts for path separators in *nix and Windows
-      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-      root('src') // location of your src
-    ),
+    output: {
+      path: root('dist'),
+      filename: '[name].js',
+      sourceMapFilename: '[name].map',
+      chunkFilename: '[id].chunk.js'
+    },
 
-    new webpack.DefinePlugin({
-      'ENV': JSON.stringify(ENV),
-      'IS_PRODUCTION': IS_PRODUCTION,
-      'APP_VERSION': VERSION
-    }),
+    plugins: [
+      new webpack.LoaderOptionsPlugin({
+        options: {
+          context: root(),
+          tslint: {
+            emitErrors: false,
+            failOnHint: false,
+            resourcePath: 'demo'
+          },
+          postcss: function() {
+            return [ autoprefixer ];
+          }
+        }
+      }),
 
-    new HtmlWebpackPlugin({
-      template: 'index.html',
-      chunksSortMode: 'dependency'
-    }),
+      // https://github.com/angular/angular/issues/11580#issuecomment-246880731
+      new webpack.ContextReplacementPlugin(
+        // The (\\|\/) piece accounts for path separators in *nix and Windows
+        /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+        root('src') // location of your src
+      ),
 
-    new WebpackNotifierPlugin({
-      excludeWarnings: true
-    }),
+      new webpack.DefinePlugin({
+        'ENV': JSON.stringify(ENV),
+        'IS_PRODUCTION': IS_PRODUCTION,
+        'APP_VERSION': VERSION
+      })
+    ]
+  };
 
-    new webpack.optimize.OccurrenceOrderPlugin(true),
+  if(IS_PRODUCTION) {
+    config.output.path = root('release');
 
-    new CleanWebpackPlugin(['dist'], {
+    config.output.libraryTarget = 'umd';
+    config.output.library = 'ng2d3';
+    config.output.umdNamedDefine = true;
+
+    config.entry = {
+      'ng2d3': './src/ng2d3.ts'
+    };
+
+    config.externals = {
+      '@angular/platform-browser-dynamic': '@angular/platform-browser-dynamic',
+      '@angular/platform-browser': '@angular/platform-browser',
+      '@angular/core': '@angular/core',
+      '@angular/common': '@angular/common',
+      '@angular/forms': '@angular/forms',
+      'core-js': 'core-js',
+      'core-js/es6': 'core-js/es6',
+      'core-js/es7/reflect': 'core-js/es7/reflect',
+      'rxjs': 'rxjs',
+      'rxjs/Rx': 'rxjs/Rx',
+      'rxjs/Subject': 'rxjs/Subject',
+      'rxjs/Subscription': 'rxjs/Subscription',
+      'rxjs/observable/PromiseObservable': 'rxjs/observable/PromiseObservable',
+      'rxjs/operator/toPromise': 'rxjs/operator/toPromise',
+      'rxjs/Observable': 'rxjs/Observable',
+      'zone.js/dist/zone': 'zone.js/dist/zone',
+      'moment': 'moment'
+    };
+
+    config.plugins.push(new webpack.BannerPlugin({
+      banner: banner,
+      raw: true,
+      entryOnly: true
+    }));
+
+    config.plugins.push(new CleanWebpackPlugin(['release'], {
       root: root(),
       verbose: false,
       dry: false
-    })
-  ]
+    }));
+  } else {
+    config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'polyfills'],
+      minChunks: Infinity
+    }));
+
+    config.plugins.push(new WebpackNotifierPlugin({
+      excludeWarnings: true
+    }));
+
+    config.plugins.push(new CleanWebpackPlugin(['dist'], {
+      root: root(),
+      verbose: false,
+      dry: false
+    }));
+
+    config.plugins.push(new HtmlWebpackPlugin({
+      template: 'index.html',
+      chunksSortMode: 'dependency'
+    }));
+  }
+
+  return config;
 };
+
+module.exports = webpackConfig;

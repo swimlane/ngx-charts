@@ -20,8 +20,8 @@
     "allowSyntheticDefaultImports": true,
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist",
-    "baseUrl": "src"
+    "declarationDir": "release",
+    "outDir": "dist"
   },
   "files": [
     "src/ng2d3.ts"
@@ -36,6 +36,7 @@
     "forkChecker": false
   },
   "angularCompilerOptions": {
+    "genDir": "aot",
     "genDir": "compiled"
   }
 }

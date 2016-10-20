@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0
+- Chore: Upgrade Webpack 2.25
+- Chore: Remove rollup in favor of webpack builds
+
 ## 1.3.0
 - Added option to resize charts to fit containers if `view` property is not set (#44)
 - Fixed legend size and positioning (#47)
