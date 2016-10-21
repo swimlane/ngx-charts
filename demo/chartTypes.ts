@@ -108,6 +108,12 @@ let chartGroups = [
     name: "Other Charts",
     charts: [
       {
+        name: "Force Directed Graph",
+        selector: 'force-directed-graph',
+        inputFormat: 'graph',
+        options: ['colorScheme', 'showLegend']
+      },
+      {
         name: "Heat Map",
         selector: 'heat-map',
         inputFormat: 'multiSeries',
