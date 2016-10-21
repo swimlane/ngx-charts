@@ -1,4 +1,4 @@
-/// <reference types="core-js" />
+
 import { ElementRef, OnChanges } from '@angular/core';
 export declare class PieLabel implements OnChanges {
     element: HTMLElement;
