@@ -28,7 +28,7 @@ import {
 
       <svg:g [attr.transform]="transform" class="force-directed-graph chart">
         <svg:g class="links">
-          <svg:g *ngFor="let link of links">
+          <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
             <template *ngIf="linkTemplate"
               [ngTemplateOutlet]="linkTemplate"
               [ngOutletContext]="{ $implicit: link }">
@@ -43,7 +43,7 @@ import {
           </svg:g>
         </svg:g>
         <svg:g class="nodes">
-          <svg:g *ngFor="let node of nodes"
+          <svg:g *ngFor="let node of nodes; trackBy:trackNodeBy"
             [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
             [attr.fill]="colors(groupResultsBy(node))"
             [attr.stroke]="colors(groupResultsBy(node))"
@@ -130,8 +130,12 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
       .sort();
   }
 
-  trackBy(index, item) {
-    return item.name;
+  trackLinkBy(index, link) {
+    return link.index;
+  }
+
+  trackNodeBy(index, node) {
+    return node.value;
   }
 
   setColors() {
