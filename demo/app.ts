@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {single, multi, countries, generateData} from './data';
+import {single, multi, countries, generateData, generateGraph} from './data';
 import chartGroups from './chartTypes';
 import '../src/ng2d3.scss';
 import './demo.scss';
@@ -182,6 +182,17 @@ import './demo.scss';
             [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </line-chart>
+
+          <force-directed-graph
+            *ngIf="chartType === 'force-directed-graph'"
+            [legend]="showLegend"
+            [links]="graph.links"
+            [nodes]="graph.nodes"
+            [scheme]="colorScheme"
+            [view]="view"
+            (clickHandler)="clickHandler($event)">
+          </force-directed-graph>
+
           <area-chart
             *ngIf="chartType === 'area-chart'"
             [view]="view"
@@ -405,6 +416,7 @@ export class App implements OnInit {
   single: any[];
   multi: any[];
   dateData: any[];
+  graph: { links: any[], nodes: any[] };
   linearScale: boolean = false;
 
   view: any[];
@@ -437,7 +449,7 @@ export class App implements OnInit {
   timeline = false;
 
   constructor() {
-    Object.assign(this, {single, multi, countries, chartGroups});
+    Object.assign(this, {single, multi, countries, chartGroups, graph: generateGraph(5) });
 
     this.dateData = generateData(5);
   }
@@ -469,6 +481,19 @@ export class App implements OnInit {
         this.multi.splice(index, 1);
         this.multi = [...this.multi];
       }
+
+      if (this.graph.nodes.length > 1) {
+        let index = Math.floor(Math.random() * this.graph.nodes.length);
+        let value = this.graph.nodes[index].value;
+        this.graph.nodes.splice(index, 1);
+        const nodes = [ ...this.graph.nodes ];
+
+        const links = this.graph.links.filter(link => {
+          return link.source !== value && link.source.value !== value &&
+            link.target !== value && link.target.value !== value;
+        });
+        this.graph = { links, nodes };
+      }
     }
 
     if (add) {
@@ -492,6 +517,16 @@ export class App implements OnInit {
       };
 
       this.multi = [...this.multi, multiEntry];
+
+      // graph
+      const node = { value: country };
+      const nodes = [ ...this.graph.nodes, node];
+      const link = {
+        source: country,
+        target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value,
+      };
+      const links = [ ...this.graph.links, link];
+      this.graph = { links, nodes };
     }
   }
 
