@@ -6,7 +6,7 @@ import {
   ElementRef,
   OnChanges
 } from '@angular/core';
-import ObjectId from "../utils/object-id";
+import { id } from "../utils/id";
 import d3 from '../d3';
 
 @Component({
@@ -63,7 +63,7 @@ export class Area implements OnChanges {
 
   update() {
     let pageUrl = window.location.href;
-    this.gradientId = 'grad' + ObjectId().toString();
+    this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 
     this.animateToCurrentForm();

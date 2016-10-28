@@ -15,7 +15,7 @@ import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
 import d3 from '../d3';
 import * as moment from 'moment';
-import ObjectId from "../utils/object-id";
+import { id } from "../utils/id";
 
 @Component({
   selector: 'area-chart-normalized',
@@ -231,7 +231,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges, OnDestr
     this.setColors();
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;
-    this.clipPathId = 'clip' + ObjectId().toString();
+    this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 

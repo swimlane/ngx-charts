@@ -7,7 +7,7 @@ import {
   OnChanges
 } from '@angular/core';
 import d3 from '../d3';
-import ObjectId from "../utils/object-id";
+import { id } from "../utils/id";
 
 @Component({
   selector: 'g[pieArc]',
@@ -74,8 +74,8 @@ export class PieArc implements OnChanges {
     this.startOpacity = 0.3;
 
     let pageUrl = window.location.href;
-    this.radialGradientId = 'linearGrad' + ObjectId().toString();
-    this.linearGradientId = 'radialGrad' + ObjectId().toString();
+    this.radialGradientId = 'linearGrad' + id().toString();
+    this.linearGradientId = 'radialGrad' + id().toString();
 
     if (this.innerRadius !== 0) {
       this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;

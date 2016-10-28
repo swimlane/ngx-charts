@@ -6,7 +6,7 @@ import {
   ElementRef,
   OnChanges
 } from '@angular/core';
-import ObjectId from "../utils/object-id";
+import { id } from "../utils/id";
 import d3 from '../d3';
 
 @Component({
@@ -62,7 +62,7 @@ export class HeatMapCell implements OnChanges {
     this.transform = `translate(${this.x} , ${this.y})`;
     let pageUrl = window.location.href;
     this.startOpacity = 0.3;
-    this.gradientId = 'grad' + ObjectId().toString();
+    this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
 
     this.loadAnimation();

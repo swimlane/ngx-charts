@@ -13,7 +13,7 @@ import {
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
-import ObjectId from "../utils/object-id";
+import { id } from "../utils/id";
 import d3 from '../d3';
 import * as moment from 'moment';
 
@@ -175,7 +175,7 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
 
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;
-    this.clipPathId = 'clip' + ObjectId().toString();
+    this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 

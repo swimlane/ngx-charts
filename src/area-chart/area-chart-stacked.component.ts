@@ -14,7 +14,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { colorHelper } from '../utils/color-sets';
 import { BaseChart } from '../common/base-chart.component';
 import * as moment from 'moment';
-import ObjectId from "../utils/object-id";
+import { id } from "../utils/id";
 import d3 from '../d3';
 
 @Component({
@@ -208,7 +208,7 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
     this.setColors();
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;
-    this.clipPathId = 'clip' + ObjectId().toString();
+    this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 
