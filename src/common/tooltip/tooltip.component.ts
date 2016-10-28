@@ -1,12 +1,11 @@
 import {
-  Component, Inject, ElementRef, AfterViewInit,
+  Input, Component, ElementRef, AfterViewInit,
   HostListener, ViewChild, HostBinding, Renderer,
   trigger, state, transition, style, animate
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
 import { PositionHelper } from './position.helper';
-import { TooltipOptions } from './tooltip-options';
 
 import { PlacementTypes } from './placement.type';
 import { StyleTypes } from './style.type';
@@ -19,7 +18,7 @@ import { AlignmentTypes } from './alignment.type';
       <span
         #caretElm
         [hidden]="!showCaret"
-        class="tooltip-caret position-{{placement}}">
+        class="tooltip-caret position-{{this.placement}}">
       </span>
       <div class="tooltip-content">
         <span *ngIf="!title">
@@ -37,10 +36,9 @@ import { AlignmentTypes } from './alignment.type';
   `,
   animations: [
     trigger('visibilityChanged', [
-      state('active', style({ opacity: 1, display: 'block', 'pointer-events': 'auto' })),
+      state('active', style({ opacity: 1, 'pointer-events': 'auto' })),
       transition('void => *', [
         style({
-          display: 'block',
           opacity: 0,
           'pointer-events': 'none', // disable pointer events so there is no interference during animation
           // transform: 'translate3d(0, 0, 0) perspective(10px) rotateX(10deg)'
@@ -49,10 +47,7 @@ import { AlignmentTypes } from './alignment.type';
         animate('0.3s ease-out')
       ]),
       transition('* => void', [
-        style({
-          display: 'none',
-          opacity: 1
-        }),
+        style({ opacity: 1 }),
         animate('0.2s ease-out')
       ])
     ])
@@ -60,10 +55,18 @@ import { AlignmentTypes } from './alignment.type';
 })
 export class TooltipContentComponent implements AfterViewInit {
 
+  @Input() host: any;
+  @Input() showCaret: boolean;
+  @Input() type: StyleTypes;
+  @Input() placement: PlacementTypes;
+  @Input() alignment: AlignmentTypes;
+  @Input() spacing: number;
+  @Input() cssClass: string;
+
   @ViewChild('caretElm') caretElm;
 
   @HostBinding('class')
-  get cssClasses() {
+  get cssClasses(): string {
     let clz = 'swui-tooltip-content';
     clz += ` position-${this.placement}`;
     clz += ` type-${this.type}`;
@@ -72,35 +75,21 @@ export class TooltipContentComponent implements AfterViewInit {
   }
 
   @HostBinding('@visibilityChanged')
-  get visibilityChanged() {
+  get visibilityChanged(): string {
     return 'active';
   }
 
-  private host: any;
-  public context: any;
-  public showCaret: boolean;
-  public template: any;
-  public title: string;
-  private type: StyleTypes;
-  public placement: PlacementTypes;
-  private alignment: AlignmentTypes;
-  private spacing: number;
-  private cssClass: string;
-
   constructor(
     public element: ElementRef,
-    private renderer: Renderer,
-    @Inject(TooltipOptions) options: TooltipOptions) {
-
-    Object.assign(this, options);
+    private renderer: Renderer) {
   }
 
   ngAfterViewInit() {
-    setTimeout(this.position.bind(this), 0);
+    setTimeout(this.position.bind(this));
   }
 
   position() {
-    let nativeElm = this.element.nativeElement;
+    const nativeElm = this.element.nativeElement;
     const hostDim = this.host.nativeElement.getBoundingClientRect();
     const elmDim = nativeElm.getBoundingClientRect();
 
@@ -142,10 +131,8 @@ export class TooltipContentComponent implements AfterViewInit {
         this.alignment);
     }
 
-    const { body } = nativeElm.ownerDocument;
-
-    this.renderer.setElementStyle(nativeElm, 'top', `${top + body.scrollTop}px`);
-    this.renderer.setElementStyle(nativeElm, 'left', `${left + body.scrollLeft}px`);
+    this.renderer.setElementStyle(nativeElm, 'top', `${top}px`);
+    this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
   }
 
   positionCaret(hostDim, elmDim) {

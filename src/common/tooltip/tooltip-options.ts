@@ -1,10 +1,7 @@
-import { Injectable } from '@angular/core';
-
 import { PlacementTypes } from './placement.type';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
 
-@Injectable()
 export class TooltipOptions {
 
   id: string;
