@@ -65,6 +65,7 @@ import d3 from '../d3';
               [scaleType]="scaleType"
               [gradient]="gradient"
               stacked="true"
+              [curve]="curve"
             />
           </svg:g>
 
@@ -139,6 +140,7 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
   @Input() timeline;
   @Input() gradient;
   @Input() showGridLines: boolean = true;
+  @Input() curve = d3.shape.curveLinear;
 
   @Output() clickHandler = new EventEmitter();
 

@@ -65,6 +65,7 @@ import { id } from "../utils/id";
               [scaleType]="scaleType"
               [gradient]="gradient"
               normalized="true"
+              [curve]="curve"
             />
           </svg:g>
 
@@ -139,6 +140,7 @@ export class AreaChartNormalized extends BaseChart implements OnChanges, OnDestr
   @Input() timeline;
   @Input() gradient;
   @Input() showGridLines: boolean = true;
+  @Input() curve = d3.shape.curveLinear;
 
   @Output() clickHandler = new EventEmitter();
 

@@ -82,25 +82,25 @@ let chartGroups = [
         name: "Line Chart",
         selector: 'line-chart',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines']
+        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
       {
         name: "Area Chart",
         selector: 'area-chart',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines']
+        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
       {
         name: "Stacked Area Chart",
         selector: 'area-chart-stacked',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines']
+        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
       {
         name: "Normalized Area Chart",
         selector: 'area-chart-normalized',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines']
+        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
     ]
   },

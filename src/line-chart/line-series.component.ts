@@ -26,6 +26,7 @@ export class LineSeries implements OnChanges {
   @Input() yScale;
   @Input() color;
   @Input() scaleType;
+  @Input() curve: string;
 
   ngOnChanges() {
     this.update();
@@ -45,7 +46,8 @@ export class LineSeries implements OnChanges {
         }
         return value;
       })
-      .y(d => this.yScale(d.value));
+      .y(d => this.yScale(d.value))
+      .curve(this.curve);
 
     let data = this.data.series;
     if (this.scaleType === 'time' || this.scaleType === 'linear') {

@@ -3,6 +3,7 @@ import {single, multi, countries, generateData, generateGraph} from './data';
 import chartGroups from './chartTypes';
 import '../src/ng2d3.scss';
 import './demo.scss';
+import d3 from '../src/d3';
 
 @Component({
   selector: 'app',
@@ -180,6 +181,7 @@ import './demo.scss';
             [autoScale]="autoScale"
             [timeline]="timeline"
             [showGridLines]="showGridLines"
+            [curve]="curve"
             (clickHandler)="clickHandler($event)">
           </line-chart>
 
@@ -209,6 +211,7 @@ import './demo.scss';
             [autoScale]="autoScale"
             [timeline]="timeline"
             [showGridLines]="showGridLines"
+            [curve]="curve"
             (clickHandler)="clickHandler($event)">
           </area-chart>
           <area-chart-stacked
@@ -226,6 +229,7 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [timeline]="timeline"
             [showGridLines]="showGridLines"
+            [curve]="curve"
             (clickHandler)="clickHandler($event)">
           </area-chart-stacked>
           <area-chart-normalized
@@ -243,6 +247,7 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [timeline]="timeline"
             [showGridLines]="showGridLines"
+            [curve]="curve"
             (clickHandler)="clickHandler($event)">
           </area-chart-normalized>
           <heat-map
@@ -402,6 +407,16 @@ import './demo.scss';
             Timeline
           </label> <br />
         </div>
+
+        <div *ngIf="chart.options.includes('curve')">
+          <label>Line Interpolation</label>
+          <select
+            [ngModel]="curveType"
+            (ngModelChange)="setInterpolationType($event)">
+            <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">{{interpolationType}}</option>
+          </select>
+        </div>
+
       </div>
     </main>
   `
@@ -434,6 +449,11 @@ export class App implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'Population';
   showGridLines = true;
+
+  // line interpolation
+  curveType: string = 'Linear';
+  curve = d3.shape.curveLinear;
+  interpolationTypes = ['Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X', 'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'];
 
   colorScheme = {
     domain: ['#F44336', '#3F51B5', '#8BC34A', '#2196F3', '#009688', '#FF5722', '#CDDC39', '#00BCD4', '#FFC107', '#795548', '#607D8B']
@@ -564,5 +584,42 @@ export class App implements OnInit {
 
   clickHandler(data) {
     console.log('Item clicked', data);
+  }
+
+  setInterpolationType(curveType) {
+    this.curveType = curveType;
+    if (curveType === 'Basis'){
+      this.curve = d3.shape.curveBasis;
+    }
+    if (curveType === 'Bundle'){
+      this.curve = d3.shape.curveBundle.beta(1);
+    }
+    if (curveType === 'Cardinal'){
+      this.curve = d3.shape.curveCardinal;
+    }
+    if (curveType === 'Catmull Rom'){
+      this.curve = d3.shape.curveCatmullRom;
+    }
+    if (curveType === 'Linear'){
+      this.curve = d3.shape.curveLinear;
+    }
+    if (curveType === 'Monotone X'){
+      this.curve = d3.shape.curveMonotoneX;
+    }
+    if (curveType === 'Monotone Y'){
+      this.curve = d3.shape.curveMonotoneY;
+    }
+    if (curveType === 'Natural'){
+      this.curve = d3.shape.curveNatural;
+    }
+    if (curveType === 'Step'){
+      this.curve = d3.shape.curveStep;
+    }
+    if (curveType === 'Step After'){
+      this.curve = d3.shape.curveStepAfter;
+    }
+    if (curveType === 'Step Before'){
+      this.curve = d3.shape.curveStepBefore;
+    }
   }
 }

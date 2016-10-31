@@ -62,6 +62,7 @@ import * as moment from 'moment';
               [color]="colors(series.name)"
               [data]="series"
               [scaleType]="scaleType"
+              [curve]="curve"
             />
           </svg:g>
 
@@ -137,6 +138,7 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
   @Input() timeline;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() curve = d3.shape.curveLinear;
 
   @Output() clickHandler = new EventEmitter();
 

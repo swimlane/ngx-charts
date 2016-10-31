@@ -64,6 +64,7 @@ import d3 from '../d3';
               [data]="series"
               [scaleType]="scaleType"
               [gradient]="gradient"
+              [curve]="curve"
             />
           </svg:g>
 
@@ -139,6 +140,7 @@ export class AreaChart extends BaseChart implements OnChanges, OnDestroy, AfterV
   @Input() timeline;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() curve = d3.shape.curveLinear;
 
   @Output() clickHandler = new EventEmitter();
 

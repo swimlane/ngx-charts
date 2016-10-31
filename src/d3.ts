@@ -43,6 +43,7 @@ export default {
   scalePoint: scales.scalePoint,
   scaleQuantile: scales.scaleQuantile,
   scaleTime: scales.scaleTime,
+  shape: shape,
   treemap: hierarchy.treemap,
   stratify: hierarchy.stratify
 };

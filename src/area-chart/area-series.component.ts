@@ -34,6 +34,7 @@ export class AreaSeries implements OnChanges {
   @Input() stacked = false;
   @Input() normalized = false;
   @Input() gradient;
+  @Input() curve;
 
   @Output() clickHandler = new EventEmitter();
 
@@ -72,6 +73,9 @@ export class AreaSeries implements OnChanges {
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);
     }
+
+    area.curve(this.curve);
+    startingArea.curve(this.curve);
 
     this.opacity = 1;
 
