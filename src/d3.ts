@@ -3,6 +3,7 @@
 let array = require("d3-array");
 let brush = require("d3-brush");
 let color = require("d3-color");
+let force = require("d3-force");
 let format = require("d3-format");
 let interpolate = require("d3-interpolate");
 let scales = require("d3-scale");
@@ -18,6 +19,12 @@ export default {
   brushY: brush.brushY,
   event: selection.event,
   extent: array.extent,
+  forceCollide: force.forceCollide,
+  forceLink: force.forceLink,
+  forceManyBody: force.forceManyBody,
+  forceSimulation: force.forceSimulation,
+  forceX: force.forceX,
+  forceY: force.forceY,
   format: format.format,
   interpolate: interpolate.interpolate,
   line: shape.line,

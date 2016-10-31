@@ -1,4 +1,4 @@
-/// <reference types="core-js" />
+
 import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, NgZone, ElementRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "./common/common.module";
 import { AreaChartModule } from "./area-chart/area-chart.module";
 import { BarChartModule } from "./bar-chart/bar-chart.module";
+import { ForceDirectedGraphModule } from "./force-directed-graph/force-directed-graph.module";
 import { HeatMapModule } from "./heat-map/heat-map.module";
 import { LineChartModule } from "./line-chart/line-chart.module";
 import { NumberCardModule } from "./number-card/number-card.module";
@@ -10,6 +11,7 @@ import { TreeMapModule } from "./tree-map/tree-map.module";
 
 export * from "./area-chart/area-chart.module";
 export * from "./bar-chart/bar-chart.module";
+export * from "./force-directed-graph/force-directed-graph.module";
 export * from "./common/common.module";
 export * from "./heat-map/heat-map.module";
 export * from "./line-chart/line-chart.module";
@@ -22,6 +24,7 @@ export * from "./tree-map/tree-map.module";
     CommonModule,
     AreaChartModule,
     BarChartModule,
+    ForceDirectedGraphModule,
     HeatMapModule,
     LineChartModule,
     NumberCardModule,

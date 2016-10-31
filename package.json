@@ -1,6 +1,6 @@
 {
   "name": "ng2d3",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Angular2 + D3 Charting Library",
   "main": "release/ng2d3.js",
   "typings": "release/ng2d3.d.ts",
@@ -13,7 +13,7 @@
     "test:watch": "npm run test -- --auto-watch --no-single-run",
     "build": "webpack --progress --profile",
     "build:release": "NODE_ENV=production npm run build",
-    "release": "npm-run-all -s clean:* release:css release:ts build:release release:replace -s release:minify",
+    "release": "npm-run-all -s build:release release:css release:ts release:replace release:minify",
     "release:ts": "ngc --outDir release",
     "release:replace": "node tasks/replace.js",
     "release:css": "node-sass -o release/ src/ng2d3.scss",
