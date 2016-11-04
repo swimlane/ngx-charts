@@ -42,6 +42,7 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
   data: any;
   colors: Function;
   domain: any;
+  dims: any;
 
   @Input() view;
   @Input() results;
@@ -76,11 +77,19 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
 
   update() {
     super.update();
-    let dims = calculateViewDimensions(this.width, this.height, this.margin, false, false, this.legend, 9);
-    let xOffset = this.margin[3] + dims.width / 2;
-    let yOffset = this.margin[0] + dims.height / 2;
+
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showLegend: this.legend,
+      columns: 9
+    });
+
+    let xOffset = this.margin[3] + this.dims.width / 2;
+    let yOffset = this.margin[0] + this.dims.height / 2;
     this.translation = `translate(${xOffset}, ${yOffset})`;
-    this.outerRadius = Math.min(dims.width, dims.height);
+    this.outerRadius = Math.min(this.dims.width, this.dims.height);
     if (this.labels) {
       // make room for labels
       this.outerRadius /= 3;

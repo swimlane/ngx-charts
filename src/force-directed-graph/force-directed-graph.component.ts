@@ -107,7 +107,13 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
     super.update();
 
     // center graph
-    this.dims = calculateViewDimensions(this.width, this.height, this.margin, false, false, this.legend, 9);
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showLegend: this.legend,
+      columns: 9
+    });
 
     this.seriesDomain = this.getSeriesDomain();
     this.setColors();

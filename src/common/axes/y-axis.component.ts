@@ -65,6 +65,7 @@ export class YAxis implements OnChanges {
   }
 
   update() {
+    console.log('dims', this.dims);
     this.offset = this.yAxisOffset;
     if (this.yOrient === 'right') {
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;

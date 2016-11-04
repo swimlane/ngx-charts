@@ -4,27 +4,38 @@ export interface ViewDimensions {
   xOffset: number;
 }
 
-export function calculateViewDimensions(width, height, margins, showXLabel, showYLabel, showLegend, columns = 12): ViewDimensions {
+export function calculateViewDimensions({width, height, margins, showXAxis = false, showYAxis = false, showXLabel = false, showYLabel = false, showLegend = false, columns = 12}): ViewDimensions {
   let xOffset = margins[3];
+  let chartWidth = width;
+  let chartHeight = height - margins[0] - margins[2];
+  let yAxisWidth = 0;
+  let xAxisHeight = 0;
+
+
   // let yOffset = margins[0]; // unused
   if (showLegend) {
-    width = width * columns / 12;
+    chartWidth = chartWidth * columns / 12;
   }
 
-  width = width - margins[1] - margins[3];
-  height = height - margins[0] - margins[2];
+  chartWidth = chartWidth - margins[1] - margins[3];
 
   if (showXLabel) {
-    height -= 40;
+    chartHeight -= 40;
   }
 
   if (showYLabel) {
-    width -= 60;
+    chartWidth -= 60;
     xOffset += 60;
   }
 
-  width = Math.max(0, width);
-  height = Math.max(0, height);
+  chartWidth = Math.max(0, chartWidth);
+  chartHeight = Math.max(0, chartHeight);
 
-  return {width: width, height: height, xOffset: xOffset};
+  return {
+    width: chartWidth,
+    height: chartHeight,
+    xOffset: xOffset,
+    yAxisWidth: yAxisWidth,
+    xAxisHeight: xAxisHeight
+  };
 }

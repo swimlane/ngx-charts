@@ -15,10 +15,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  display: flex;
   min-height: 100vh;
-  flex-direction: column;
-  overflow: hidden;
 }
 
 * {
@@ -30,15 +27,14 @@ app {
 }
 
 main {
-  display: flex;
-  flex: 1;
   justify-content: center;
   height: 100%;
 
   .chart-col {
     background: #fafafa;
-    width: 100%;
+    width: 75%;
     height: 100%;
+    float: left;
   }
 
   .sidebar {
@@ -49,7 +45,8 @@ main {
     background: #2f3646;
     color: #fff;
     font-size: .6em;
-    min-width: 280px;
+    float: right;
+    width: 25%;
 
     h1 {
       color: #1f89ff;

@@ -423,7 +423,7 @@ import d3 from '../src/d3';
 })
 
 export class App implements OnInit {
-  chartType = 'bar-vertical';
+  chartType = 'bar-horizontal';
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;
@@ -437,7 +437,7 @@ export class App implements OnInit {
   view: any[];
   width: number = 700;
   height: number = 300;
-  fitContainer: boolean = true;
+  fitContainer: boolean = false;
 
   // options
   showXAxis = true;
@@ -478,6 +478,10 @@ export class App implements OnInit {
     this.selectChart(this.chartType);
 
     setInterval(this.updateData.bind(this), 2000);
+
+    if (!this.fitContainer) {
+      this.applyDimensions();
+    }
   }
 
   updateData() {

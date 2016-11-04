@@ -101,7 +101,17 @@ export class BarVertical extends BaseChart implements OnChanges, OnDestroy, Afte
   update() {
     super.update();
 
-    this.dims = calculateViewDimensions(this.width, this.height, this.margin, this.showXAxisLabel, this.showYAxisLabel, this.legend, 10);
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      columns: 9
+    });
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();

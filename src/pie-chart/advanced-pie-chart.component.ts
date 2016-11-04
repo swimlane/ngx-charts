@@ -115,7 +115,12 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions(this.width * 4 / 12.0, this.height, this.margin, false, false, false);
+    this.dims = calculateViewDimensions({
+      width: this.width * 4 / 12.0,
+      height: this.height,
+      margins: this.margin
+    });
+
     this.domain = this.getDomain();
     this.setColors();
 

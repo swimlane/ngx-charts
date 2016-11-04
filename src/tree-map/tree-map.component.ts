@@ -65,7 +65,13 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   }
 
   update() {
-    this.dims = calculateViewDimensions(this.width, this.height, this.margin, false, false, false, 12);
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      columns: 12
+    });
+
     this.domain = this.getDomain();
 
     this.treemap = d3.treemap()

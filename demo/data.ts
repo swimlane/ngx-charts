@@ -8,7 +8,7 @@ export var single = [
     "value": 5000000
   },
   {
-    "name": "France",
+    "name": "Democratic People's Republic of North Korea",
     "value": 7200000
   }
 ];
