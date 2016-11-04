@@ -73,7 +73,7 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   colorScale: any;
   transform: string;
   rects: any[];
-  margin = [10, 20, 70, 100];
+  margin = [10, 20, 10, 20];
 
   @Input() view;
   @Input() results;

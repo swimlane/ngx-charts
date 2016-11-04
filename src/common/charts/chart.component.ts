@@ -53,7 +53,7 @@ export class Chart implements OnChanges {
   legendWidth: any;
   legendType: any;
 
-  constructor(private vcr: ViewContainerRef, private injectionService: InjectionService,) {
+  constructor(private vcr: ViewContainerRef, private injectionService: InjectionService) {
     this.injectionService.setRootViewContainerRef(vcr);
   }
 

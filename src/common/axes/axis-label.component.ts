@@ -32,6 +32,8 @@ export class AxisLabel implements OnChanges {
   strokeWidth: any;
   textAnchor: any;
   element: ElementRef;
+  textHeight = 25;
+  margin = 5;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -56,12 +58,12 @@ export class AxisLabel implements OnChanges {
         this.x = this.width / 2;
         break;
       case 'left':
-        this.y = -this.offset;
+        this.y = - (this.offset + this.textHeight + this.margin);
         this.x = -this.height / 2;
         this.transform = "rotate(270)";
         break;
       case 'right':
-        this.y = this.offset;
+        this.y = this.offset + this.margin;
         this.x = -this.height / 2;
         this.transform = "rotate(270)";
         break;

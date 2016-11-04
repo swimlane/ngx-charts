@@ -1,8 +1,12 @@
 import {
   Component,
   Input,
-  OnChanges
+  Output,
+  EventEmitter,
+  OnChanges,
+  ViewChild
 } from '@angular/core';
+import { YAxisTicks } from './y-axis-ticks.component';
 
 @Component({
   selector: 'g[yAxis]',
@@ -19,12 +23,13 @@ import {
         [showGridLines]="showGridLines"
         [gridLineWidth]="dims.width"
         [height]="dims.height"
+        (dimensionsChanged)="emitTicksWidth($event)"
       />
 
       <svg:g axisLabel
         *ngIf="showLabel"
         [label]="labelText"
-        [offset]="80"
+        [offset]="labelOffset"
         [orient]="yOrient"
         [height]="dims.height"
         [width]="dims.width">
@@ -41,12 +46,17 @@ export class YAxis implements OnChanges {
   @Input() labelText;
   @Input() yAxisTickInterval;
 
+  @Output() dimensionsChanged = new EventEmitter();
+
   yAxisTickCount: any;
   tickArguments: any;
   offset: any;
   transform: any;
   yAxisOffset: any;
   yOrient: any;
+  labelOffset: number = 80;
+
+  @ViewChild(YAxisTicks) ticksComponent: YAxisTicks;
 
   constructor() {
     Object.assign(this, {
@@ -56,7 +66,7 @@ export class YAxis implements OnChanges {
       stroke: '#ccc',
       tickStroke: '#ccc',
       strokeWidth: '1',
-      yAxisOffset: -5,
+      yAxisOffset: -5
     });
   }
 
@@ -65,7 +75,6 @@ export class YAxis implements OnChanges {
   }
 
   update() {
-    console.log('dims', this.dims);
     this.offset = this.yAxisOffset;
     if (this.yOrient === 'right') {
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
@@ -76,10 +85,12 @@ export class YAxis implements OnChanges {
     if (this.yAxisTickCount !== undefined) {
       this.tickArguments = [this.yAxisTickCount];
     }
+  }
 
-    if (typeof this.yAxisTickInterval !== 'undefined') {
-      // todo we need to change this, because the function names have changed: https://github.com/d3/d3/blob/master/CHANGES.md#time-intervals-d3-time
-      // this.tickArguments = [d3.time[this.yAxisTickInterval.unit], this.yAxisTickInterval.interval];
+  emitTicksWidth({width}) {
+    if (width !== this.labelOffset) {
+      this.labelOffset = width;
+      this.dimensionsChanged.emit({width: width});
     }
   }
 

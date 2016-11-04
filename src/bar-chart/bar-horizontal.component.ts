@@ -30,7 +30,8 @@ import d3 from '../d3';
           [dims]="dims"
           [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel">
+          [labelText]="xAxisLabel"
+          (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
 
         <svg:g yAxis
@@ -39,7 +40,8 @@ import d3 from '../d3';
           [dims]="dims"
           [tickFormatting]="yAxisTickFormatting()"
           [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel">
+          [labelText]="yAxisLabel"
+          (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
 
         <svg:g seriesHorizontal
@@ -63,7 +65,9 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
   yDomain: any;
   transform: string;
   colors: Function;
-  margin = [10, 20, 70, 100];
+  margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
@@ -105,6 +109,8 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
       margins: this.margin,
       showXAxis: this.xAxis,
       showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
@@ -160,5 +166,15 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
 
   setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.yDomain, this.customColors);
+  }
+
+  updateYAxisWidth({width}) {
+    this.yAxisWidth = width;
+    this.update();
+  }
+
+  updateXAxisHeight({height}) {
+    this.xAxisHeight = height;
+    this.update();
   }
 }

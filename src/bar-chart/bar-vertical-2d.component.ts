@@ -87,7 +87,7 @@ export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, Af
   valueScale: any;
   transform: string;
   colors: Function;
-  margin = [10, 20, 70, 100];
+  margin = [10, 20, 10, 20];
 
   @Input() view;
   @Input() results;

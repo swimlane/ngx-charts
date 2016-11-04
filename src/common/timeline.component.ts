@@ -35,7 +35,7 @@ export class Timeline implements OnChanges {
   xScale: any;
   brush: any;
   transform: string;
-  margin = [10, 20, 70, 20];
+  margin = [10, 20, 10, 20];
   initialized: boolean = false;
 
   @Input() view;

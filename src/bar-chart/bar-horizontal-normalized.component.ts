@@ -81,7 +81,7 @@ export class BarHorizontalNormalized extends BaseChart implements OnChanges, OnD
   yScale: any;
   transform: string;
   colors: Function;
-  margin = [10, 20, 70, 100];
+  margin = [10, 20, 10, 20];
 
   @Input() view;
   @Input() results;

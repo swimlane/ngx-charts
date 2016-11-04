@@ -82,7 +82,7 @@ export class BarVerticalStacked extends BaseChart implements OnChanges, OnDestro
   transform: string;
   tickFormatting: Function;
   colors: Function;
-  margin = [10, 20, 70, 100];
+  margin = [10, 20, 10, 20];
 
   @Input() view;
   @Input() results;

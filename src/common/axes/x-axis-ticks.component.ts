@@ -1,7 +1,12 @@
 import {
   Component,
   Input,
-  OnChanges
+  Output,
+  EventEmitter,
+  OnChanges,
+  ElementRef,
+  ViewChild,
+  DoCheck
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -9,21 +14,24 @@ import { reduceTicks } from './ticks.helper';
 @Component({
   selector: 'g[xAxisTicks]',
   template: `
-    <svg:g *ngFor="let tick of ticks" class="tick"
+    <svg:g #ticksel>
+      <svg:g *ngFor="let tick of ticks" class="tick"
+        [attr.transform]="tickTransform(tick)">
+        <title>{{tickFormat(tick)}}</title>
+        <svg:text
+          stroke-width="0.01"
+          [attr.text-anchor]="textAnchor"
+          [attr.transform]="textTransform"
+          [style.font-size]="'12px'">
+          {{trimLabel(tickFormat(tick))}}
+        </svg:text>
+      </svg:g>
+    </svg:g>
+
+    <svg:g *ngFor="let tick of ticks"
       [attr.transform]="tickTransform(tick)">
-      <title>{{tickFormat(tick)}}</title>
-      <svg:text
-        stroke-width="0.01"
-        [attr.text-anchor]="textAnchor"
-        [attr.transform]="textTransform"
-        [style.font-size]="'12px'">
-        {{trimLabel(tickFormat(tick))}}
-      </svg:text>
-
-      <svg:g
-        *ngIf="showGridLines"
+      <svg:g *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
-
         <svg:line
           class="gridline-path gridline-path-vertical"
           [attr.y1]="-gridLineHeight"
@@ -32,7 +40,7 @@ import { reduceTicks } from './ticks.helper';
     </svg:g>
   `
 })
-export class XAxisTicks implements OnChanges {
+export class XAxisTicks implements OnChanges, DoCheck {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -41,6 +49,8 @@ export class XAxisTicks implements OnChanges {
   @Input() showGridLines = false;
   @Input() gridLineHeight;
   @Input() width;
+
+  @Output() dimensionsChanged = new EventEmitter();
 
   verticalSpacing: any;
   rotateLabels: any;
@@ -56,6 +66,9 @@ export class XAxisTicks implements OnChanges {
   textTransform: any;
   ticks: any;
   tickFormat: any;
+  height: number = 0;
+
+  @ViewChild('ticksel') ticksElement: ElementRef;
 
   constructor() {
     Object.assign(this, {
@@ -72,6 +85,14 @@ export class XAxisTicks implements OnChanges {
 
   ngOnChanges() {
     this.update();
+  }
+
+  ngDoCheck() {
+    let newHeight = this.ticksElement.nativeElement.getBoundingClientRect().height;
+    if (newHeight !== this.height) {
+      this.height = newHeight;
+      this.dimensionsChanged.emit({height: this.height});
+    }
   }
 
   update() {

@@ -89,7 +89,7 @@ export class BarHorizontal2D extends BaseChart implements OnChanges, OnDestroy, 
   valueScale: any;
   transform: string;
   colors: Function;
-  margin = [10, 20, 70, 100];
+  margin = [10, 20, 10, 20];
 
   @Input() view;
   @Input() results;

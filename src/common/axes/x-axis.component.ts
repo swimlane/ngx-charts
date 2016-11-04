@@ -1,8 +1,13 @@
 import {
   Component,
   Input,
-  OnChanges
+  Output,
+  EventEmitter,
+  OnChanges,
+  ViewChild
 } from '@angular/core';
+
+import { XAxisTicks } from './x-axis-ticks.component';
 
 @Component({
   selector: 'g[xAxis]',
@@ -19,12 +24,13 @@ import {
         [showGridLines]="showGridLines"
         [gridLineHeight]="dims.height"
         [width]="dims.width"
+        (dimensionsChanged)="emitTicksHeight($event)"
       />
 
       <svg:g axisLabel
         *ngIf="showLabel"
         [label]="labelText"
-        [offset]="80"
+        [offset]="labelOffset"
         [orient]="'bottom'"
         [height]="dims.height"
         [width]="dims.width">
@@ -41,12 +47,17 @@ export class XAxis implements OnChanges {
   @Input() labelText;
   @Input() xAxisTickInterval;
 
+  @Output() dimensionsChanged = new EventEmitter();
+
   xAxisTickCount: any;
   xAxisClassName: any;
   xOrient: any;
   tickArguments: any;
   xAxisOffset: any;
   transform: any;
+  labelOffset: number = 80;
+
+  @ViewChild(XAxisTicks) ticksComponent: XAxisTicks;
 
   constructor() {
     Object.assign(this, {
@@ -70,10 +81,13 @@ export class XAxis implements OnChanges {
     if (typeof this.xAxisTickCount !== 'undefined') {
       this.tickArguments = [this.xAxisTickCount];
     }
+  }
 
-    if (typeof this.xAxisTickInterval !== 'undefined') {
-      // todo we need to change this, because the function names have changed: https://github.com/d3/d3/blob/master/CHANGES.md#time-intervals-d3-time
-      // this.tickArguments = [d3.time[this.xAxisTickInterval.unit], this.xAxisTickInterval.interval];
+  emitTicksHeight({height}) {
+    let newLabelOffset = height + 25 + 5;
+    if (newLabelOffset !== this.labelOffset) {
+      this.labelOffset = newLabelOffset;
+      this.dimensionsChanged.emit({height: height});
     }
   }
 

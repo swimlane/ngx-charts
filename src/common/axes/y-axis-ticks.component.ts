@@ -1,7 +1,12 @@
 import {
   Component,
   Input,
-  OnChanges
+  Output,
+  OnChanges,
+  ElementRef,
+  ViewChild,
+  EventEmitter,
+  DoCheck
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -9,20 +14,24 @@ import { reduceTicks } from './ticks.helper';
 @Component({
   selector: 'g[yAxisTicks]',
   template: `
-    <svg:g *ngFor="let tick of ticks" class="tick"
-      [attr.transform]="transform(tick)" >
-      <title>{{tickFormat(tick)}}</title>
-      <svg:text
-        stroke-width="0.01"
-        [attr.dy]="dy"
-        [attr.x]="x1"
-        [attr.y]="y1"
-        [attr.text-anchor]="textAnchor"
+    <svg:g #ticksel>
+      <svg:g *ngFor="let tick of ticks" class="tick"
+        [attr.transform]="transform(tick)" >
+        <title>{{tickFormat(tick)}}</title>
+        <svg:text
+          stroke-width="0.01"
+          [attr.dy]="dy"
+          [attr.x]="x1"
+          [attr.y]="y1"
+          [attr.text-anchor]="textAnchor"
 
-        [style.font-size]="'12px'">
-        {{trimLabel(tickFormat(tick))}}
-      </svg:text>
+          [style.font-size]="'12px'">
+          {{trimLabel(tickFormat(tick))}}
+        </svg:text>
+      </svg:g>
+    </svg:g>
 
+    <svg:g *ngFor="let tick of ticks">
       <svg:g
         *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
@@ -33,9 +42,10 @@ import { reduceTicks } from './ticks.helper';
           [attr.x2]="gridLineWidth" />
       </svg:g>
     </svg:g>
+
   `
 })
-export class YAxisTicks implements OnChanges {
+export class YAxisTicks implements OnChanges, DoCheck {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -45,6 +55,8 @@ export class YAxisTicks implements OnChanges {
   @Input() showGridLines = false;
   @Input() gridLineWidth;
   @Input() height;
+
+  @Output() dimensionsChanged = new EventEmitter();
 
   innerTickSize: any;
   tickPadding: any;
@@ -60,6 +72,9 @@ export class YAxisTicks implements OnChanges {
   transform: any;
   tickFormat: any;
   ticks: any;
+  width: number = 0;
+
+  @ViewChild('ticksel') ticksElement: ElementRef;
 
   constructor() {
     Object.assign(this, {
@@ -75,6 +90,14 @@ export class YAxisTicks implements OnChanges {
 
   ngOnChanges() {
     this.update();
+  }
+
+  ngDoCheck() {
+    let newWidth = this.ticksElement.nativeElement.getBoundingClientRect().width;
+    if (newWidth !== this.width) {
+      this.width = newWidth;
+      this.dimensionsChanged.emit({width: this.width});
+    }
   }
 
   update() {
