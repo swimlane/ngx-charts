@@ -83,7 +83,7 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
       height: this.height,
       margins: this.margin,
       showLegend: this.legend,
-      columns: 9
+      columns: 10
     });
 
     let xOffset = this.margin[3] + this.dims.width / 2;

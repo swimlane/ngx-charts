@@ -110,7 +110,7 @@ export class BarVertical extends BaseChart implements OnChanges, OnDestroy, Afte
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      columns: 9
+      columns: 10
     });
 
     this.xScale = this.getXScale();

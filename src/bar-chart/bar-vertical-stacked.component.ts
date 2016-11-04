@@ -127,7 +127,7 @@ export class BarVerticalStacked extends BaseChart implements OnChanges, OnDestro
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      columns: 9
+      columns: 10
     });
 
     this.groupDomain = this.getGroupDomain();

@@ -169,7 +169,7 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      columns: 9
+      columns: 10
     });
 
     if (this.timeline) {

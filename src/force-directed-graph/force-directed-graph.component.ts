@@ -112,7 +112,7 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
       height: this.height,
       margins: this.margin,
       showLegend: this.legend,
-      columns: 9
+      columns: 10
     });
 
     this.seriesDomain = this.getSeriesDomain();

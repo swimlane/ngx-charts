@@ -108,7 +108,7 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      columns: 9
+      columns: 10
     });
 
     this.xScale = this.getXScale();

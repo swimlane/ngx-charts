@@ -126,7 +126,7 @@ export class BarHorizontalNormalized extends BaseChart implements OnChanges, OnD
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
-      columns: 9
+      columns: 10
     });
 
     this.groupDomain = this.getGroupDomain();
