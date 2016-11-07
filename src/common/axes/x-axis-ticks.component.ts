@@ -6,7 +6,7 @@ import {
   OnChanges,
   ElementRef,
   ViewChild,
-  DoCheck
+  AfterViewInit
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -40,7 +40,7 @@ import { reduceTicks } from './ticks.helper';
     </svg:g>
   `
 })
-export class XAxisTicks implements OnChanges, DoCheck {
+export class XAxisTicks implements OnChanges, AfterViewInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -87,16 +87,21 @@ export class XAxisTicks implements OnChanges, DoCheck {
     this.update();
   }
 
-  ngDoCheck() {
-    let newHeight = this.ticksElement.nativeElement.getBoundingClientRect().height;
-    if (newHeight !== this.height) {
-      this.height = newHeight;
-      this.dimensionsChanged.emit({height: this.height});
+  ngAfterViewInit() {
+    setTimeout(() => this.updateDims());
+  }
+
+  updateDims() {
+    const { height } = this.ticksElement.nativeElement.getBoundingClientRect();
+    if (height !== this.height) {
+      this.height = height;
+      this.dimensionsChanged.emit({ height });
+      setTimeout(() => this.updateDims());
     }
   }
 
   update() {
-    var scale = this.scale;
+    let scale = this.scale;
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {
@@ -123,11 +128,13 @@ export class XAxisTicks implements OnChanges, DoCheck {
     } else {
       this.textAnchor = 'middle';
     }
+
+    setTimeout(() => this.updateDims());
   }
 
   getRotationAngle(ticks) {
     let angle = 0;
-    for (var i = 0; i < ticks.length; i++) {
+    for (let i = 0; i < ticks.length; i++) {
       let tick = ticks[i].toString();
       if (tick.length > this.maxTicksLength) {
         this.maxTicksLength = tick.length;

@@ -6,7 +6,7 @@ import {
   ElementRef,
   ViewChild,
   EventEmitter,
-  DoCheck
+  AfterViewInit
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -44,7 +44,7 @@ import { reduceTicks } from './ticks.helper';
     </svg:g>
   `
 })
-export class YAxisTicks implements OnChanges, DoCheck {
+export class YAxisTicks implements OnChanges, AfterViewInit {
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -57,8 +57,8 @@ export class YAxisTicks implements OnChanges, DoCheck {
 
   @Output() dimensionsChanged = new EventEmitter();
 
-  innerTickSize: any;
-  tickPadding: any;
+  innerTickSize: any = 6;
+  tickPadding: any = 3;
   tickSpacing: any;
   verticalSpacing: any;
   textAnchor: any;
@@ -83,7 +83,7 @@ export class YAxisTicks implements OnChanges, DoCheck {
       rotateLabels: false,
       verticalSpacing: 20,
       textAnchor: 'middle',
-      trimLabel: trimLabel
+      trimLabel
     });
   }
 
@@ -91,18 +91,23 @@ export class YAxisTicks implements OnChanges, DoCheck {
     this.update();
   }
 
-  ngDoCheck() {
-    let newWidth = this.ticksElement.nativeElement.getBoundingClientRect().width;
-    if (newWidth !== this.width) {
-      this.width = newWidth;
-      this.dimensionsChanged.emit({width: this.width});
+  ngAfterViewInit() {
+    setTimeout(() => this.updateDims());
+  }
+
+  updateDims() {
+    const { width } = this.ticksElement.nativeElement.getBoundingClientRect();
+    if (width !== this.width) {
+      this.width = width;
+      this.dimensionsChanged.emit({ width });
+      setTimeout(() => this.updateDims());
     }
   }
 
   update() {
-    var scale;
+    let scale;
 
-    var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
+    let sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
     this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 
     scale = this.scale;
@@ -160,6 +165,8 @@ export class YAxisTicks implements OnChanges, DoCheck {
         this.dy = ".32em";
         break;
     }
+
+    setTimeout(() => this.updateDims());
   }
 
   getTicks() {
