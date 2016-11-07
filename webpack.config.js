@@ -69,8 +69,7 @@ var banner =
 
     entry: {
       'app': './demo/bootstrap.ts',
-      'polyfills': './demo/polyfills.ts',
-      'vendor': './demo/vendor.ts'
+      'libs': './demo/libs.ts'
     },
 
     devServer: {
@@ -168,7 +167,7 @@ var banner =
     }));
   } else {
     config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'polyfills'],
+      name: ['libs'],
       minChunks: Infinity
     }));
 
