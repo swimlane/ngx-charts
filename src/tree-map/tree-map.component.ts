@@ -65,6 +65,8 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   }
 
   update() {
+    super.update();
+
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
