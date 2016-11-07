@@ -42,7 +42,8 @@ import d3 from '../d3';
           [dims]="dims"
           [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel">
+          [labelText]="xAxisLabel"
+          (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
 
         <svg:g yAxis
@@ -51,7 +52,8 @@ import d3 from '../d3';
           [dims]="dims"
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel">
+          [labelText]="yAxisLabel"
+          (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
 
         <svg:g [attr.clip-path]="clipPath">
@@ -123,8 +125,10 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
   clipPathId: string;
   clipPath: string;
   colors: Function;
-  margin = [10, 20, 70, 70];
+  margin = [10, 20, 10, 20];
   hoveredVertical: any; // the value of the x axis that is hovered over
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
@@ -169,6 +173,8 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
       margins: this.margin,
       showXAxis: this.xAxis,
       showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
@@ -369,4 +375,13 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
     this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
+  updateYAxisWidth({width}) {
+    this.yAxisWidth = width;
+    this.update();
+  }
+
+  updateXAxisHeight({height}) {
+    this.xAxisHeight = height;
+    this.update();
+  }
 }

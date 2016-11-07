@@ -29,7 +29,8 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [xScale]="xScale"
           [dims]="dims"
           [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel">
+          [labelText]="xAxisLabel"
+          (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
 
         <svg:g yAxis
@@ -37,7 +38,8 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [yScale]="yScale"
           [dims]="dims"
           [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel">
+          [labelText]="yAxisLabel"
+          (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
 
         <svg:rect *ngFor="let rect of rects"
@@ -74,6 +76,8 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   transform: string;
   rects: any[];
   margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
@@ -114,6 +118,8 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
       margins: this.margin,
       showXAxis: this.xAxis,
       showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
@@ -212,5 +218,15 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   setColors() {
     this.colors = colorHelper(this.scheme, 'linear', this.valueDomain);
     this.colorScale = generateColorScale(this.scheme, 'linear', this.valueDomain);
+  }
+
+  updateYAxisWidth({width}) {
+    this.yAxisWidth = width;
+    this.update();
+  }
+
+  updateXAxisHeight({height}) {
+    this.xAxisHeight = height;
+    this.update();
   }
 }

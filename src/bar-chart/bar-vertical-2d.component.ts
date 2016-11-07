@@ -37,7 +37,8 @@ import d3 from '../d3';
           [xScale]="groupScale"
           [dims]="dims"
           [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel">
+          [labelText]="xAxisLabel"
+          (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
 
         <svg:g yAxis
@@ -46,7 +47,8 @@ import d3 from '../d3';
           [dims]="dims"
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
-          [labelText]="yAxisLabel">
+          [labelText]="yAxisLabel"
+          (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
 
           <svg:g seriesVertical
@@ -88,6 +90,8 @@ export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, Af
   transform: string;
   colors: Function;
   margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
@@ -130,6 +134,8 @@ export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, Af
       margins: this.margin,
       showXAxis: this.xAxis,
       showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
       showXLabel: this.showXAxisLabel,
       showYLabel: this.showYAxisLabel,
       showLegend: this.legend,
@@ -225,5 +231,15 @@ export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, Af
 
   setColors() {
     this.colors = colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+  }
+
+  updateYAxisWidth({width}) {
+    this.yAxisWidth = width;
+    this.update();
+  }
+
+  updateXAxisHeight({height}) {
+    this.xAxisHeight = height;
+    this.update();
   }
 }

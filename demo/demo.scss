@@ -31,10 +31,14 @@ main {
   height: 100%;
 
   .chart-col {
-    background: #fafafa;
+    background: #fff;
     width: 75%;
     height: 100%;
     float: left;
+
+    svg {
+      background: #fafafa;
+    }
   }
 
   .sidebar {
@@ -93,5 +97,5 @@ main {
 iframe {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 30px;
 }

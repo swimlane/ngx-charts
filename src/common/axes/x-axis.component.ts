@@ -87,7 +87,9 @@ export class XAxis implements OnChanges {
     let newLabelOffset = height + 25 + 5;
     if (newLabelOffset !== this.labelOffset) {
       this.labelOffset = newLabelOffset;
-      this.dimensionsChanged.emit({height: height});
+      setTimeout(() => {
+        this.dimensionsChanged.emit({height: height});
+      }, 0);
     }
   }
 

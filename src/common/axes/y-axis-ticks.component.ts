@@ -31,18 +31,17 @@ import { reduceTicks } from './ticks.helper';
       </svg:g>
     </svg:g>
 
-    <svg:g *ngFor="let tick of ticks">
+    <svg:g *ngFor="let tick of ticks"
+      [attr.transform]="transform(tick)">
       <svg:g
         *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
-
         <svg:line
           class="gridline-path gridline-path-horizontal"
           x1="0"
           [attr.x2]="gridLineWidth" />
       </svg:g>
     </svg:g>
-
   `
 })
 export class YAxisTicks implements OnChanges, DoCheck {

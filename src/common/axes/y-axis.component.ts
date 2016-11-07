@@ -90,7 +90,9 @@ export class YAxis implements OnChanges {
   emitTicksWidth({width}) {
     if (width !== this.labelOffset) {
       this.labelOffset = width;
-      this.dimensionsChanged.emit({width: width});
+      setTimeout(() => {
+        this.dimensionsChanged.emit({width: width});
+      }, 0);
     }
   }
 
