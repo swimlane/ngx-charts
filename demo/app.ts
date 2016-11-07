@@ -423,7 +423,7 @@ import d3 from '../src/d3';
 })
 
 export class App implements OnInit {
-  chartType = 'bar-horizontal';
+  chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;
@@ -592,37 +592,37 @@ export class App implements OnInit {
 
   setInterpolationType(curveType) {
     this.curveType = curveType;
-    if (curveType === 'Basis'){
+    if (curveType === 'Basis') {
       this.curve = d3.shape.curveBasis;
     }
-    if (curveType === 'Bundle'){
+    if (curveType === 'Bundle') {
       this.curve = d3.shape.curveBundle.beta(1);
     }
-    if (curveType === 'Cardinal'){
+    if (curveType === 'Cardinal') {
       this.curve = d3.shape.curveCardinal;
     }
-    if (curveType === 'Catmull Rom'){
+    if (curveType === 'Catmull Rom') {
       this.curve = d3.shape.curveCatmullRom;
     }
-    if (curveType === 'Linear'){
+    if (curveType === 'Linear') {
       this.curve = d3.shape.curveLinear;
     }
-    if (curveType === 'Monotone X'){
+    if (curveType === 'Monotone X') {
       this.curve = d3.shape.curveMonotoneX;
     }
-    if (curveType === 'Monotone Y'){
+    if (curveType === 'Monotone Y') {
       this.curve = d3.shape.curveMonotoneY;
     }
-    if (curveType === 'Natural'){
+    if (curveType === 'Natural') {
       this.curve = d3.shape.curveNatural;
     }
-    if (curveType === 'Step'){
+    if (curveType === 'Step') {
       this.curve = d3.shape.curveStep;
     }
-    if (curveType === 'Step After'){
+    if (curveType === 'Step After') {
       this.curve = d3.shape.curveStepAfter;
     }
-    if (curveType === 'Step Before'){
+    if (curveType === 'Step Before') {
       this.curve = d3.shape.curveStepBefore;
     }
   }

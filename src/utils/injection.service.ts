@@ -4,9 +4,7 @@ import {
   ComponentRef,
   Injectable,
   Injector,
-  ReflectiveInjector,
   ViewContainerRef,
-  ResolvedReflectiveProvider,
   Type
 } from '@angular/core';
 

@@ -5,7 +5,6 @@ import {
   EventEmitter,
   HostListener,
   ViewContainerRef,
-  ReflectiveInjector,
   ComponentRef,
   ElementRef,
   Renderer,
