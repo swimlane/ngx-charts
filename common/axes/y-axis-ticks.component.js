@@ -8,6 +8,8 @@ var YAxisTicks = (function () {
         this.tickStroke = '#ccc';
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
+        this.innerTickSize = 6;
+        this.tickPadding = 3;
         this.width = 0;
         Object.assign(this, {
             innerTickSize: 6,
@@ -22,14 +24,21 @@ var YAxisTicks = (function () {
     YAxisTicks.prototype.ngOnChanges = function () {
         this.update();
     };
-    YAxisTicks.prototype.ngDoCheck = function () {
-        var newWidth = this.ticksElement.nativeElement.getBoundingClientRect().width;
-        if (newWidth !== this.width) {
-            this.width = newWidth;
-            this.dimensionsChanged.emit({ width: this.width });
+    YAxisTicks.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        setTimeout(function () { return _this.updateDims(); });
+    };
+    YAxisTicks.prototype.updateDims = function () {
+        var _this = this;
+        var width = this.ticksElement.nativeElement.getBoundingClientRect().width;
+        if (width !== this.width) {
+            this.width = width;
+            this.dimensionsChanged.emit({ width: width });
+            setTimeout(function () { return _this.updateDims(); });
         }
     };
     YAxisTicks.prototype.update = function () {
+        var _this = this;
         var scale;
         var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
         this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
@@ -87,6 +96,7 @@ var YAxisTicks = (function () {
                 this.dy = ".32em";
                 break;
         }
+        setTimeout(function () { return _this.updateDims(); });
     };
     YAxisTicks.prototype.getTicks = function () {
         var ticks;

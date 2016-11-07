@@ -24,14 +24,21 @@ var XAxisTicks = (function () {
     XAxisTicks.prototype.ngOnChanges = function () {
         this.update();
     };
-    XAxisTicks.prototype.ngDoCheck = function () {
-        var newHeight = this.ticksElement.nativeElement.getBoundingClientRect().height;
-        if (newHeight !== this.height) {
-            this.height = newHeight;
-            this.dimensionsChanged.emit({ height: this.height });
+    XAxisTicks.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        setTimeout(function () { return _this.updateDims(); });
+    };
+    XAxisTicks.prototype.updateDims = function () {
+        var _this = this;
+        var height = this.ticksElement.nativeElement.getBoundingClientRect().height;
+        if (height !== this.height) {
+            this.height = height;
+            this.dimensionsChanged.emit({ height: height });
+            setTimeout(function () { return _this.updateDims(); });
         }
     };
     XAxisTicks.prototype.update = function () {
+        var _this = this;
         var scale = this.scale;
         this.ticks = this.getTicks();
         if (this.tickFormatting) {
@@ -58,6 +65,7 @@ var XAxisTicks = (function () {
         else {
             this.textAnchor = 'middle';
         }
+        setTimeout(function () { return _this.updateDims(); });
     };
     XAxisTicks.prototype.getRotationAngle = function (ticks) {
         var angle = 0;
