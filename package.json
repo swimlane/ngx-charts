@@ -18,7 +18,7 @@
     "release:replace": "node tasks/replace.js",
     "release:css": "node-sass -o release/ src/ng2d3.scss",
     "release:minify": "uglifyjs release/ng2d3.js --source-map release/ng2d3.min.js.map --source-map-url release/ng2d3.js.map --compress --mangle --screw-ie8 --output release/ng2d3.min.js",
-    "deploy:demo": "npm run build:release && node ./tasks/deploy-gh-page.js"
+    "deploy:demo": "node ./tasks/deploy-gh-page.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,10 @@
     "charts",
     "charting",
     "angular",
-    "d3"
+    "d3",
+    "viz",
+    "graph",
+    "svg"
   ],
   "authors": [
     "Austin McDaniel",
