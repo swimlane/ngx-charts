@@ -12,6 +12,7 @@ import d3 from '../src/d3';
       <div class="chart-col">
           <bar-vertical
             *ngIf="chartType === 'bar-vertical'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
@@ -28,6 +29,7 @@ import d3 from '../src/d3';
           </bar-vertical>
           <bar-horizontal
             *ngIf="chartType === 'bar-horizontal'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
@@ -44,6 +46,7 @@ import d3 from '../src/d3';
           </bar-horizontal>
           <bar-vertical-2d
             *ngIf="chartType === 'bar-vertical-2d'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="multi"
@@ -60,6 +63,7 @@ import d3 from '../src/d3';
           </bar-vertical-2d>
           <bar-horizontal-2d
             *ngIf="chartType === 'bar-horizontal-2d'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="multi"
@@ -76,6 +80,7 @@ import d3 from '../src/d3';
           </bar-horizontal-2d>
           <bar-vertical-stacked
             *ngIf="chartType === 'bar-vertical-stacked'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="multi"
@@ -92,6 +97,7 @@ import d3 from '../src/d3';
           </bar-vertical-stacked>
           <bar-horizontal-stacked
             *ngIf="chartType === 'bar-horizontal-stacked'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="multi"
@@ -108,6 +114,7 @@ import d3 from '../src/d3';
           </bar-horizontal-stacked>
           <bar-vertical-normalized
             *ngIf="chartType === 'bar-vertical-normalized'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="multi"
@@ -124,6 +131,7 @@ import d3 from '../src/d3';
           </bar-vertical-normalized>
           <bar-horizontal-normalized
             *ngIf="chartType === 'bar-horizontal-normalized'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="multi"
@@ -140,6 +148,7 @@ import d3 from '../src/d3';
           </bar-horizontal-normalized>
           <pie-chart
             *ngIf="chartType === 'pie-chart'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
@@ -152,6 +161,7 @@ import d3 from '../src/d3';
           </pie-chart>
           <advanced-pie-chart
             *ngIf="chartType === 'advanced-pie-chart'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
@@ -160,6 +170,7 @@ import d3 from '../src/d3';
           </advanced-pie-chart>
           <pie-grid
             *ngIf="chartType === 'pie-grid'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
@@ -168,6 +179,7 @@ import d3 from '../src/d3';
           <line-chart
             *ngIf="chartType === 'line-chart'"
             [view]="view"
+            class="chart-container"
             [scheme]="colorScheme"
             [results]="dateData"
             [legend]="showLegend"
@@ -184,9 +196,9 @@ import d3 from '../src/d3';
             [curve]="curve"
             (clickHandler)="clickHandler($event)">
           </line-chart>
-
           <force-directed-graph
             *ngIf="chartType === 'force-directed-graph'"
+            class="chart-container"
             [legend]="showLegend"
             [links]="graph.links"
             [nodes]="graph.nodes"
@@ -194,9 +206,9 @@ import d3 from '../src/d3';
             [view]="view"
             (clickHandler)="clickHandler($event)">
           </force-directed-graph>
-
           <area-chart
             *ngIf="chartType === 'area-chart'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="dateData"
@@ -216,6 +228,7 @@ import d3 from '../src/d3';
           </area-chart>
           <area-chart-stacked
             *ngIf="chartType === 'area-chart-stacked'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="dateData"
@@ -234,6 +247,7 @@ import d3 from '../src/d3';
           </area-chart-stacked>
           <area-chart-normalized
             *ngIf="chartType === 'area-chart-normalized'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="dateData"
@@ -252,6 +266,7 @@ import d3 from '../src/d3';
           </area-chart-normalized>
           <heat-map
             *ngIf="chartType === 'heat-map'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="multi"
@@ -267,6 +282,7 @@ import d3 from '../src/d3';
           </heat-map>
           <tree-map
             *ngIf="chartType === 'tree-map'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
@@ -274,6 +290,7 @@ import d3 from '../src/d3';
           </tree-map>
           <number-card
             *ngIf="chartType === 'number-card'"
+            class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"

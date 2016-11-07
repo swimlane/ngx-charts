@@ -183,7 +183,7 @@ var banner =
     }));
 
     config.plugins.push(new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: 'demo/index.html',
       chunksSortMode: 'dependency'
     }));
   }
