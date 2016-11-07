@@ -16,6 +16,8 @@ export declare class HeatMap extends BaseChart implements OnChanges, OnDestroy, 
     transform: string;
     rects: any[];
     margin: number[];
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -42,4 +44,10 @@ export declare class HeatMap extends BaseChart implements OnChanges, OnDestroy, 
     getRects(): any[];
     click(data: any): void;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

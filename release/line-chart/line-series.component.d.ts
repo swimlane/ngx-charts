@@ -6,6 +6,7 @@ export declare class LineSeries implements OnChanges {
     yScale: any;
     color: any;
     scaleType: any;
+    curve: string;
     ngOnChanges(): void;
     update(): void;
 }

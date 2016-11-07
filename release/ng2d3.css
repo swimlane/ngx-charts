@@ -1,5 +1,5 @@
 .swui-tooltip-content {
-  position: absolute;
+  position: fixed;
   border-radius: 3px;
   z-index: 5000;
   display: block;

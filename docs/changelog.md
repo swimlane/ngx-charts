@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0
+- Added force directed graph chart (#64)
+- Fixed bug where tooltip would not work when library is used in an angular 1 application using ngUpgrade
+- Fixed tooltip positioning
+- Added line interpolation option for line and area charts (#52)
+- Updated view dimension calculation to properly take into account the width and height of the axis tick labels.
+- Various bug fixes and code style fixes
+
 ## 1.4.0
 - Chore: Upgrade Webpack 2.25
 - Chore: Remove rollup in favor of webpack builds

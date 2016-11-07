@@ -13,6 +13,8 @@ export declare class BarHorizontalStacked extends BaseChart implements OnChanges
     transform: string;
     colors: Function;
     margin: number[];
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -41,4 +43,10 @@ export declare class BarHorizontalStacked extends BaseChart implements OnChanges
     click(data: any, group: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

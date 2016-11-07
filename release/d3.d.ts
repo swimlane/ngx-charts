@@ -7,6 +7,12 @@ declare var _default: {
     brushY: any;
     event: any;
     extent: any;
+    forceCollide: any;
+    forceLink: any;
+    forceManyBody: any;
+    forceSimulation: any;
+    forceX: any;
+    forceY: any;
     format: any;
     interpolate: any;
     line: any;
@@ -25,6 +31,7 @@ declare var _default: {
     scalePoint: any;
     scaleQuantile: any;
     scaleTime: any;
+    shape: any;
     treemap: any;
     stratify: any;
 };

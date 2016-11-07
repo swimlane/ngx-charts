@@ -12,6 +12,8 @@ export declare class BarVertical extends BaseChart implements OnChanges, OnDestr
     transform: string;
     colors: Function;
     margin: any[];
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -38,4 +40,10 @@ export declare class BarVertical extends BaseChart implements OnChanges, OnDestr
     xAxisTickFormatting(): any;
     click(data: any): void;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

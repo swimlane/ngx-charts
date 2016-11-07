@@ -11,6 +11,7 @@ export declare class AreaSeries implements OnChanges {
     stacked: boolean;
     normalized: boolean;
     gradient: any;
+    curve: any;
     clickHandler: EventEmitter<{}>;
     ngOnChanges(): void;
     update(): void;

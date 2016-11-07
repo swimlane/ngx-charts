@@ -14,6 +14,8 @@ export declare class BarHorizontal2D extends BaseChart implements OnChanges, OnD
     transform: string;
     colors: Function;
     margin: number[];
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -43,4 +45,10 @@ export declare class BarHorizontal2D extends BaseChart implements OnChanges, OnD
     click(data: any, group: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

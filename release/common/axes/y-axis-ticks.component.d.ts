@@ -1,5 +1,5 @@
-import { OnChanges } from '@angular/core';
-export declare class YAxisTicks implements OnChanges {
+import { OnChanges, ElementRef, EventEmitter, AfterViewInit } from '@angular/core';
+export declare class YAxisTicks implements OnChanges, AfterViewInit {
     scale: any;
     orient: any;
     tickArguments: number[];
@@ -9,6 +9,7 @@ export declare class YAxisTicks implements OnChanges {
     showGridLines: boolean;
     gridLineWidth: any;
     height: any;
+    dimensionsChanged: EventEmitter<{}>;
     innerTickSize: any;
     tickPadding: any;
     tickSpacing: any;
@@ -23,8 +24,12 @@ export declare class YAxisTicks implements OnChanges {
     transform: any;
     tickFormat: any;
     ticks: any;
+    width: number;
+    ticksElement: ElementRef;
     constructor();
     ngOnChanges(): void;
+    ngAfterViewInit(): void;
+    updateDims(): void;
     update(): void;
     getTicks(): any;
     getMaxTicks(): number;

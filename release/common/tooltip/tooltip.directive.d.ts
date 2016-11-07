@@ -6,6 +6,7 @@ import { AlignmentTypes } from './alignment.type';
 import { ShowTypes } from './show.type';
 import { TooltipContentComponent } from './tooltip.component';
 import { TooltipService } from './tooltip.service';
+import './tooltip.scss';
 export declare class TooltipDirective implements OnDestroy {
     private tooltipService;
     private viewContainerRef;
@@ -28,8 +29,8 @@ export declare class TooltipDirective implements OnDestroy {
     tooltipTemplate: any;
     tooltipShowEvent: ShowTypes;
     tooltipContext: any;
-    onShow: EventEmitter<{}>;
-    onHide: EventEmitter<{}>;
+    show: EventEmitter<{}>;
+    hide: EventEmitter<{}>;
     private componentId;
     private timeout;
     private mouseLeaveEvent;
@@ -41,9 +42,9 @@ export declare class TooltipDirective implements OnDestroy {
     ngOnDestroy(): void;
     onFocus(): void;
     onMouseEnter(): void;
-    show(immediate?: boolean): void;
+    showTooltip(immediate?: boolean): void;
     addHideListeners(tooltip: any): void;
     injectComponent(): ComponentRef<TooltipContentComponent>;
-    hide(immediate?: boolean): void;
+    hideTooltip(immediate?: boolean): void;
     private createBoundOptions();
 }

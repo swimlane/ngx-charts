@@ -14,6 +14,8 @@ export declare class BarVerticalStacked extends BaseChart implements OnChanges, 
     tickFormatting: Function;
     colors: Function;
     margin: number[];
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -42,4 +44,10 @@ export declare class BarVerticalStacked extends BaseChart implements OnChanges, 
     click(data: any, group: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

@@ -19,6 +19,8 @@ export declare class AreaChartNormalized extends BaseChart implements OnChanges,
     margin: number[];
     tooltipAreas: any[];
     hoveredVertical: any;
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -33,6 +35,7 @@ export declare class AreaChartNormalized extends BaseChart implements OnChanges,
     timeline: any;
     gradient: any;
     showGridLines: boolean;
+    curve: any;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef, zone: NgZone);
     ngAfterViewInit(): void;
@@ -52,4 +55,10 @@ export declare class AreaChartNormalized extends BaseChart implements OnChanges,
     click(data: any, series: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

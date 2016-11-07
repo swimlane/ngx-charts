@@ -19,6 +19,8 @@ export declare class AreaChart extends BaseChart implements OnChanges, OnDestroy
     series: any;
     margin: number[];
     hoveredVertical: any;
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -35,6 +37,7 @@ export declare class AreaChart extends BaseChart implements OnChanges, OnDestroy
     timeline: any;
     gradient: boolean;
     showGridLines: boolean;
+    curve: any;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef, zone: NgZone);
     ngAfterViewInit(): void;
@@ -54,4 +57,10 @@ export declare class AreaChart extends BaseChart implements OnChanges, OnDestroy
     click(data: any, series: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

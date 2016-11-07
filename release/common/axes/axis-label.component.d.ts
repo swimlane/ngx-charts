@@ -11,6 +11,8 @@ export declare class AxisLabel implements OnChanges {
     strokeWidth: any;
     textAnchor: any;
     element: ElementRef;
+    textHeight: number;
+    margin: number;
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;

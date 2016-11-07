@@ -20,6 +20,8 @@ export declare class LineChart extends BaseChart implements OnChanges, OnDestroy
     areaPath: any;
     margin: number[];
     hoveredVertical: any;
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -35,6 +37,7 @@ export declare class LineChart extends BaseChart implements OnChanges, OnDestroy
     timeline: any;
     gradient: boolean;
     showGridLines: boolean;
+    curve: any;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef, zone: NgZone);
     ngAfterViewInit(): void;
@@ -53,4 +56,10 @@ export declare class LineChart extends BaseChart implements OnChanges, OnDestroy
     hideCircles(): void;
     click(data: any, series: any): void;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

@@ -18,6 +18,8 @@ export declare class AreaChartStacked extends BaseChart implements OnChanges, On
     colors: Function;
     margin: number[];
     hoveredVertical: any;
+    xAxisHeight: number;
+    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -32,6 +34,7 @@ export declare class AreaChartStacked extends BaseChart implements OnChanges, On
     timeline: any;
     gradient: any;
     showGridLines: boolean;
+    curve: any;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef, zone: NgZone);
     ngAfterViewInit(): void;
@@ -51,4 +54,10 @@ export declare class AreaChartStacked extends BaseChart implements OnChanges, On
     click(data: any, series: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;
+    updateYAxisWidth({width}: {
+        width: any;
+    }): void;
+    updateXAxisHeight({height}: {
+        height: any;
+    }): void;
 }

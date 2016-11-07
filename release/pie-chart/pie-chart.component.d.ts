@@ -8,6 +8,7 @@ export declare class PieChart extends BaseChart implements OnChanges, OnDestroy,
     data: any;
     colors: Function;
     domain: any;
+    dims: any;
     view: any;
     results: any;
     margin: number[];
