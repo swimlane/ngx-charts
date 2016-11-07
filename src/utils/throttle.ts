@@ -1,11 +1,11 @@
 ﻿export function debounce(func, wait, immediate) {
-  var timeout, args, context, timestamp, result;
+  let timeout, args, context, timestamp, result;
   return function() {
     context = this;
     args = arguments;
     timestamp = new Date();
-    var later = function() {
-      var last: any = new Date().getTime() - timestamp;
+    let later = function() {
+      let last: any = new Date().getTime() - timestamp;
       if (last < wait) {
         timeout = setTimeout(later, wait - last);
       } else {
@@ -15,7 +15,7 @@
         }
       }
     };
-    var callNow = immediate && !timeout;
+    let callNow = immediate && !timeout;
     if (!timeout) {
       timeout = setTimeout(later, wait);
     }

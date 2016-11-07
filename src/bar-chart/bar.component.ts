@@ -145,7 +145,7 @@ export class Bar implements OnInit, OnChanges {
   }
 
   roundedRect(x, y, w, h, r, tl, tr, bl, br) {
-    var retval;
+    let retval;
     retval = "M" + (x + r) + "," + y;
     retval += "h" + (w - 2 * r);
     if (tr) {

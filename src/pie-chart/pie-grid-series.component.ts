@@ -86,15 +86,15 @@ export class PieGridSeries implements OnChanges {
       startAngle: data[0].startAngle,
       endAngle: data[0].endAngle
     }]);
-    var arc = this.calculateArc(this.innerRadius, this.outerRadius);
+    let arc = this.calculateArc(this.innerRadius, this.outerRadius);
 
     node
       .transition()
       .attrTween("d", function(d) {
         this._current = this._current || d;
-        var copyOfD = Object.assign({}, d);
+        let copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
-        var interpolate = d3.interpolate(copyOfD, copyOfD);
+        let interpolate = d3.interpolate(copyOfD, copyOfD);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));
@@ -103,7 +103,7 @@ export class PieGridSeries implements OnChanges {
       .transition().duration(750)
       .attrTween("d", function(d) {
         this._current = this._current || d;
-        var interpolate = d3.interpolate(this._current, d);
+        let interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));

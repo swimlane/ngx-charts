@@ -20,10 +20,10 @@
 **Please tell us about your environment:**
 <!-- Operating system, IDE, package manager, HTTP server, ... -->
 
-* **Table version:** 0.7.x
-<!-- Check whether this is still an issue in the most recent table version -->
+* **ng2d3 version:** x.x.x
+<!-- Check whether this is still an issue in the most recent ng2d3 version -->
 
-* **Angular version:** 2.0.x
+* **Angular version:** 2.x.x
 <!-- Check whether this is still an issue in the most recent Angular version -->
 
 * **Browser:** [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]

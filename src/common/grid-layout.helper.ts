@@ -17,8 +17,8 @@ export function gridLayout(dims, data, minWidth) {
 
   let columns = dataLength;
 
-  var xDomain = [];
-  var yDomain = [];
+  let xDomain = [];
+  let yDomain = [];
   for (let i = 0; i < rows; i++) {
     yDomain.push(i);
   }

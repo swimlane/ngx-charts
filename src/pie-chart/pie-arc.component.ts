@@ -69,7 +69,7 @@ export class PieArc implements OnChanges {
   }
 
   update() {
-    var arc = this.calculateArc();
+    let arc = this.calculateArc();
     this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
     this.startOpacity = 0.3;
 
@@ -104,15 +104,15 @@ export class PieArc implements OnChanges {
 
   loadAnimation() {
     let node = d3.select(this.element).selectAll('.arc').data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
-    var arc = this.calculateArc();
+    let arc = this.calculateArc();
 
     node
       .transition()
       .attrTween("d", function(d) {
         this._current = this._current || d;
-        var copyOfD = Object.assign({}, d);
+        let copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
-        var interpolate = d3.interpolate(copyOfD, copyOfD);
+        let interpolate = d3.interpolate(copyOfD, copyOfD);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));
@@ -121,7 +121,7 @@ export class PieArc implements OnChanges {
       .transition().duration(750)
       .attrTween("d", function(d) {
         this._current = this._current || d;
-        var interpolate = d3.interpolate(this._current, d);
+        let interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));
@@ -131,13 +131,13 @@ export class PieArc implements OnChanges {
 
   updateAnimation() {
     let node = d3.select(this.element).selectAll('.arc').data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
-    var arc = this.calculateArc();
+    let arc = this.calculateArc();
 
     node
       .transition().duration(750)
       .attrTween("d", function(d) {
         this._current = this._current || d;
-        var interpolate = d3.interpolate(this._current, d);
+        let interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));
