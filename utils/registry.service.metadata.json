@@ -1,1 +1,0 @@
-{"__symbolic":"module","version":1,"metadata":{"RegistryService":{"__symbolic":"class","decorators":[{"__symbolic":"call","expression":{"__symbolic":"reference","module":"@angular/core","name":"Injectable"}}],"members":{"register":[{"__symbolic":"method"}],"get":[{"__symbolic":"method"}],"destroy":[{"__symbolic":"method"}],"destroyAll":[{"__symbolic":"method"}]}}}}
