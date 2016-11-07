@@ -129,7 +129,7 @@ export class PositionHelper {
 
     if (placement === 'top') {
       let popoverPosition = verticalPosition(elDimensions, popoverDimensions, alignment);
-      if (popoverPosition - spacing < 0) {
+      if (elDimensions.top - popoverDimensions.height - spacing < 0) {
         flip = true;
       }
     }
