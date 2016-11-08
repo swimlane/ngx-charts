@@ -16,7 +16,9 @@ import { trimLabel } from './trim-label.helper';
       </header>
 
       <div class="legend-wrap">
-        <ul class="legend-labels" style="white-space: nowrap;">
+        <ul class="legend-labels"
+          style="white-space: nowrap;"
+          [style.max-height]="height - 45 + 'px'">
           <li *ngFor="let legendItem of legendItems" [class]="legendItem.className">
             <span
               [title]="legendItem.label"
@@ -56,7 +58,7 @@ export class Legend implements OnChanges {
       return {
         className: 'legend-label',
         label: label,
-        trimmedLabel: trimLabel(label) || '(empty)',
+        trimmedLabel: label || '(empty)',
         backgroundColor: this.colors(label)
       };
     });

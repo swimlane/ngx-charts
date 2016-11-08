@@ -134,6 +134,9 @@
     float: left;
     width: 100%;
     border-radius: 3px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: rgba(0,0,0,0.05);
   }
 
   .legend-label {
@@ -166,7 +169,7 @@
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
-    padding-right: 17px;
+    padding-right: 20px;
   }
 
   .legend-icon {
