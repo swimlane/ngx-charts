@@ -94,14 +94,14 @@ export class Card implements OnChanges {
   countUp(current, max, step) {
     this.value = d3.format(",.0f")(current);
 
-    if (current >= max){
-      return
+    if (current >= max) {
+      return;
     }
     let newValue = Math.min(current + step, max);
 
     setTimeout(() => {
       this.countUp(newValue, max, step);
-    }, 16)
+    }, 16);
   }
 
   click() {

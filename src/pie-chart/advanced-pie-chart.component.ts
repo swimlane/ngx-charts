@@ -23,56 +23,61 @@ export interface LegendItem {
 @Component({
   selector: 'advanced-pie-chart',
   template: `
-    <div class="advanced-pie chart"
-      [style.width]="dims.width"
-      [style.height]="dims.height">
+    <div [style.width.px]="width"
+      [style.height.px]="height">
+      <div class="advanced-pie chart"
+        [style.width.px]="dims.width"
+        [style.height.px]="dims.height">
 
-      <chart
-        [colors]="colors"
-        [view]="[dims.width, dims.height]">
+        <chart
+          [colors]="colors"
+          [view]="[dims.width, dims.height]">
 
-        <svg:g
-          [attr.transform]="transform"
-          class="pie chart">
-          <svg:g pieSeries
-            [colors]="colors"
-            [showLabels]="labels"
-            [series]="results"
-            [innerRadius]="innerRadius"
-            [outerRadius]="outerRadius"
-            [gradient]="gradient"
-            (clickHandler)="click($event)">
+          <svg:g
+            [attr.transform]="transform"
+            class="pie chart">
+            <svg:g pieSeries
+              [colors]="colors"
+              [showLabels]="labels"
+              [series]="results"
+              [innerRadius]="innerRadius"
+              [outerRadius]="outerRadius"
+              [gradient]="gradient"
+              (clickHandler)="click($event)">
+            </svg:g>
           </svg:g>
-        </svg:g>
-      </chart>
-    </div>
+        </chart>
+      </div>
 
-    <div [style.width]="width - dims.width">
-      <div class="advanced-pie-legend"
-        [style.margin-top]="(height - 215)/2">
+      <div [style.width.px]="width - dims.width" class="advanced-pie-legend-wrapper">
+        <div class="advanced-pie-legend"
+          [style.margin-top]="(height - 215)/2"
+          [style.width.px]="width - dims.width - margin[1]">
 
-        <div class="total-value">
-          {{roundedTotal}}
-        </div>
-        <div class="total-label">
-          {{totalLabel}}
-        </div>
+          <div class="total-value">
+            {{roundedTotal}}
+          </div>
+          <div class="total-label">
+            {{totalLabel}}
+          </div>
 
-        <div class="legend-items-container">
-          <div class="legend-items">
-            <div *ngFor="let legendItem of legendItems" class="legend-item">
-              <div class="item-color"
-                [style.background]="colors(legendItem.label)">
+          <div class="legend-items-container">
+            <div class="legend-items">
+              <div *ngFor="let legendItem of legendItems" class="legend-item">
+                <div class="item-color"
+                  [style.background]="colors(legendItem.label)">
+                </div>
+                <div class="item-value">{{legendItem.value}}</div>
+                <div class="item-label">{{legendItem.label}}</div>
+                <div class="item-percent">{{legendItem.percentage}}%</div>
               </div>
-              <div class="item-value">{{legendItem.value}}</div>
-              <div class="item-label">{{legendItem.label}}</div>
-              <div class="item-percent">{{legendItem.percentage}}%</div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
+
   `
 })
 export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
@@ -87,6 +92,7 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
   totalLabel: string;
   legendItems: LegendItem;
   colors: Function;
+  legendWidth: number;
 
   @Input() view;
   @Input() results;
@@ -124,8 +130,9 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
     this.domain = this.getDomain();
     this.setColors();
 
-    let xOffset = this.margin[3] + this.dims.width / 2;
+    let xOffset = this.dims.width / 2;
     let yOffset = this.margin[0] + this.dims.height / 2;
+    this.legendWidth = this.width - this.dims.width - this.margin[1];
 
     this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
     this.innerRadius = this.outerRadius * 0.75;

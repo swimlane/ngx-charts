@@ -3,7 +3,6 @@ import {
   Input,
   OnChanges
  } from '@angular/core';
-import { trimLabel } from './trim-label.helper';
 
 @Component({
   selector: 'legend',

@@ -188,11 +188,19 @@
 }
 
 .advanced-pie {
+  display: inline-block;
   float: left;
+}
+
+.advanced-pie-legend-wrapper {
+  display: inline-block;
 }
 
 .advanced-pie-legend {
   float: left;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
 
   .total-value {
     font-size: 36px

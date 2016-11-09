@@ -104,8 +104,6 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
   update() {
     super.update();
 
-    console.log('updating');
-
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
@@ -172,13 +170,11 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
   }
 
   updateYAxisWidth({width}) {
-    console.log('width', width);
     this.yAxisWidth = width;
     this.update();
   }
 
   updateXAxisHeight({height}) {
-    console.log('height', height);
     this.xAxisHeight = height;
     this.update();
   }
