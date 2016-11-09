@@ -69,11 +69,11 @@ export abstract class BaseChart {
         name: item['name']
       };
 
-      if (item['value']) {
+      if (item['value'] !== undefined) {
         copy['value'] = item['value'];
       }
 
-      if (item['series']) {
+      if (item['series'] !== undefined) {
         copy['series'] = [];
         for (let seriesItem of item['series']) {
           let seriesItemCopy = Object.assign({}, seriesItem);

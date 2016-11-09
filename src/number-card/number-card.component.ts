@@ -67,7 +67,7 @@ export class NumberCard extends BaseChart implements OnChanges, OnDestroy, After
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
-      margins: this.margin    
+      margins: this.margin
     });
 
     this.domain = this.getDomain();

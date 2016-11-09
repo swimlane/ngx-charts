@@ -80,12 +80,28 @@ export class Card implements OnChanges {
     this.transform = `translate(${this.x} , ${this.y})`;
 
     this.label = this.data.name;
+
     this.trimmedLabel = trimLabel(this.label, 55);
-    this.value = d3.format(",.0f")(this.data.value);
+
+    let step = this.data.value / 100;
+    this.countUp(0, this.data.value, step);
 
     this.cardWidth = Math.max(0, this.width - 5);
     this.cardHeight = Math.max(0, this.height - 5);
     this.textWidth = Math.max(0, this.width - 15);
+  }
+
+  countUp(current, max, step) {
+    this.value = d3.format(",.0f")(current);
+
+    if (current >= max){
+      return
+    }
+    let newValue = Math.min(current + step, max);
+
+    setTimeout(() => {
+      this.countUp(newValue, max, step);
+    }, 16)
   }
 
   click() {
