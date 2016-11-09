@@ -8,7 +8,8 @@
         "theme-api",
         "include-codeblock",
         "versions",
-        "anchors"
+        "anchors",
+        "githubcontributors"
     ],
     "pluginsConfig": {
         "github": {
@@ -19,6 +20,10 @@
         },
         "versions": {
             "type": "tags"
+        },
+        "githubcontributors": {
+          "githubOwner": "Swimlane",
+          "githubRepository": "ng2d3"
         }
     }
 }
