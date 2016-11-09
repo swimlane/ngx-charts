@@ -22,7 +22,7 @@
             "type": "tags"
         },
         "githubcontributors": {
-          "githubOwner": "Swimlane",
+          "githubOwner": "swimlane",
           "githubRepository": "ng2d3"
         }
     }
