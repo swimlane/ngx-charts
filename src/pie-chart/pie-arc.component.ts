@@ -33,6 +33,7 @@ import { id } from "../utils/id";
         [style.cursor]="'pointer'"
         [attr.fill]="gradient ? gradientFill : fill"
         (click)="click()"
+        [style.pointer-events]="pointerEvents ? 'auto' : 'none'"
       />
     </svg:g>
   `
@@ -52,11 +53,12 @@ export class PieArc implements OnChanges {
   @Input() innerRadius;
   @Input() outerRadius;
   @Input() value;
-  @Input() total;
   @Input() max;
   @Input() data;
   @Input() explodeSlices;
   @Input() gradient: boolean = false;
+  @Input() animate: boolean = true;
+  @Input() pointerEvents: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
 
@@ -83,11 +85,13 @@ export class PieArc implements OnChanges {
       this.gradientFill = `url(${pageUrl}#${this.linearGradientId})`;
     }
 
-    if (this.initialized) {
-      this.updateAnimation();
-    } else {
-      this.loadAnimation();
-      this.initialized = true;
+    if (this.animate) {
+      if (this.initialized) {
+        this.updateAnimation();
+      } else {
+        this.loadAnimation();
+        this.initialized = true;
+      }
     }
 
   }

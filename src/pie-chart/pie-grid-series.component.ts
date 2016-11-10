@@ -12,17 +12,26 @@ import d3 from '../d3';
   selector: 'g[pieGridSeries]',
   template: `
     <svg:g class="pie-grid-arcs">
-      <svg:path *ngFor="let arc of arcs; trackBy:trackBy"
+      <svg:g pieArc *ngFor="let arc of arcs; trackBy:trackBy"
         [attr.class]="arc.class"
-        [attr.d]="arc.d"
-        [style.cursor]="arc.cursor"
-        [style.opacity]="arc.opacity"
-        [attr.fill]="arc.fill"
-        (click)="click(arc.data)"
-      />
+        [startAngle]="arc.startAngle"
+        [endAngle]="arc.endAngle"
+        [innerRadius]="innerRadius"
+        [outerRadius]="outerRadius"
+        [fill]="color(arc)"
+        [value]="arc.data.value"
+        [data]="arc.data"
+        [max]="max"
+        [gradient]="false"
+        [pointerEvents]="arc.pointerEvents"
+        [animate]="arc.animate"
+        (clickHandler)="click($event)">
+      </svg:g>
+
     </svg:g>
   `
 })
+
 export class PieGridSeries implements OnChanges {
   element: HTMLElement;
   layout: any;
@@ -48,8 +57,6 @@ export class PieGridSeries implements OnChanges {
       .value((d) => d.data.value).sort(null);
 
     this.arcs = this.getArcs();
-
-    this.loadAnimation();
   }
 
   getArcs() {
@@ -60,60 +67,18 @@ export class PieGridSeries implements OnChanges {
       if (index === 0) {
         arc.startAngle = 0;
       }
-      let genArcPath: any = d3.arc()
-        .innerRadius(this.innerRadius).outerRadius(this.outerRadius)
-        .startAngle(arc.startAngle).endAngle(arc.endAngle);
 
-        let color = this.colors(label);
-        color = this.colors(label);
+      let color = this.colors(label);
       return {
         data: arc.data.data,
         class: 'arc ' + 'arc' + index,
-        d: genArcPath(),
-        cursor: other ? 'auto' : 'pointer',
         fill: color,
-        opacity: other ? 0.4 : 1
+        startAngle: other ? 0 : arc.startAngle,
+        endAngle: arc.endAngle,
+        animate: !other,
+        pointerEvents: !other
       };
     });
-  }
-
-  loadAnimation() {
-    let layout = d3.pie()
-      .value((d) => d.data.value).sort(null);
-    let data = layout(this.data);
-
-    let node = d3.select(this.element).selectAll('.arc1').data([{
-      startAngle: data[0].startAngle,
-      endAngle: data[0].endAngle
-    }]);
-    let arc = this.calculateArc(this.innerRadius, this.outerRadius);
-
-    node
-      .transition()
-      .attrTween("d", function(d) {
-        this._current = this._current || d;
-        let copyOfD = Object.assign({}, d);
-        copyOfD.endAngle = copyOfD.startAngle;
-        let interpolate = d3.interpolate(copyOfD, copyOfD);
-        this._current = interpolate(0);
-        return function(t) {
-          return arc(interpolate(t));
-        };
-      })
-      .transition().duration(750)
-      .attrTween("d", function(d) {
-        this._current = this._current || d;
-        let interpolate = d3.interpolate(this._current, d);
-        this._current = interpolate(0);
-        return function(t) {
-          return arc(interpolate(t));
-        };
-      });
-  }
-
-  calculateArc(innerRadius, outerRadius) {
-    return d3.arc()
-      .innerRadius(innerRadius).outerRadius(outerRadius);
   }
 
   click(data) {
@@ -125,6 +90,14 @@ export class PieGridSeries implements OnChanges {
 
   trackBy(index, item) {
     return item.data.name;
+  }
+
+  label(arc) {
+    return arc.data.name;
+  }
+
+  color(arc) {
+    return this.colors(this.label(arc));
   }
 
 }

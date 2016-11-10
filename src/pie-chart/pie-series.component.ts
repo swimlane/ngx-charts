@@ -28,7 +28,6 @@ import d3 from '../d3';
         [innerRadius]="innerRadius"
         [outerRadius]="outerRadius"
         [fill]="color(arc)"
-        [total]="total"
         [value]="arc.data.value"
         [data]="arc.data"
         [max]="max"
@@ -46,7 +45,6 @@ import d3 from '../d3';
   `
 })
 export class PieSeries implements OnChanges {
-  total: number;
   max: number;
   data: any;
 
@@ -70,8 +68,6 @@ export class PieSeries implements OnChanges {
       .value((d) => d.value)
       .sort(null);
 
-    this.total = this.getTotal();
-
     let arcData = pie(this.series);
 
     this.max = d3.max(arcData, (d) => {
@@ -79,12 +75,6 @@ export class PieSeries implements OnChanges {
     });
 
     this.data = this.calculateLabelPositions(arcData);
-  }
-
-  getTotal() {
-    return this.series
-      .map(d => d.value)
-      .reduce((sum, val) => { return sum + val; }, 0);
   }
 
   midAngle(d) {
