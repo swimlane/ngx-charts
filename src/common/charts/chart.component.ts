@@ -2,7 +2,11 @@ import {
   Component,
   Input,
   OnChanges,
-  ViewContainerRef
+  ViewContainerRef,
+  trigger,
+  style,
+  transition,
+  animate
 } from '@angular/core';
 import { InjectionService } from '../../utils/injection.service';
 
@@ -10,7 +14,8 @@ import { InjectionService } from '../../utils/injection.service';
   providers: [InjectionService],
   selector: 'chart',
   template: `
-    <div [style.width]="view[0] + 'px'">
+    <div [style.width]="view[0] + 'px'"
+      [@animationState]="'active'">
       <svg
         class="ng2d3"
         [attr.width]="view[0] * chartWidth / 12.0"
@@ -38,7 +43,17 @@ import { InjectionService } from '../../utils/injection.service';
         [width]="view[0] * legendWidth / 12.0">
       </legend>
     </div>
-`
+  `,
+  animations: [
+    trigger('animationState', [
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate('500ms 100ms', style({opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class Chart implements OnChanges {
   @Input() view;
