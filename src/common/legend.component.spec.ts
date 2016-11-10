@@ -40,7 +40,6 @@ describe('<legend>', () => {
       set: {
         template: `
                 <legend
-                  class="col-sm-3 col-md-3 col-lg-3 legend"
                   [data]="seriesData"
                   [title]="legendTitle"
                   [colors]="colors"
@@ -78,21 +77,4 @@ describe('<legend>', () => {
 
     });
   }));
-
-  it('should trim long labels', async(() => {
-    TestBed.compileComponents().then(() => {
-      let fixture = TestBed.createComponent(TestComponent);
-      fixture.componentInstance.seriesData = ['a very long label that is trimmed'];
-      fixture.detectChanges();
-
-      let labelsElement = fixture.debugElement.nativeElement.querySelector('.legend-labels');
-
-      // not checking for the exact size to avoid breaking this test when the
-      // default length of the trim fn is changed. Let's test for the presence of the dots
-      // instead :)
-      expect(labelsElement.children[0]).toContainText('...');
-    });
-  }));
-
-
 });
