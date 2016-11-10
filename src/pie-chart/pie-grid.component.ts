@@ -130,9 +130,11 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
   getSeries() {
     let total = this.getTotal();
     return this.data.map((d) => {
+      const baselineLabelHeight = 20;
+      const padding = 10;
       let label = d.data.name;
       let value = d.data.value;
-      let radius = d3.min([d.width, d.height]) / 2.1;
+      let radius = d3.min([d.width -padding, d.height - baselineLabelHeight]) / 2;
       let innerRadius = radius * 0.75;
 
       let count = 0;
@@ -147,7 +149,7 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
       };
 
       return {
-        transform: `translate(${d.x + d.width / 2} , ${d.y + d.height / 2})`,
+        transform: `translate(${d.x + (d.width - padding) / 2} , ${d.y + (d.height - baselineLabelHeight) / 2 })`,
         colors: colors,
         innerRadius: innerRadius,
         outerRadius: radius,
