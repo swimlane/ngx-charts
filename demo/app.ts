@@ -486,7 +486,7 @@ export class App implements OnInit {
   timeline = false;
 
   constructor() {
-    Object.assign(this, {single, multi, countries, chartGroups, graph: generateGraph(5) });
+    Object.assign(this, {single, multi, countries, chartGroups, graph: generateGraph(50) });
 
     this.dateData = generateData(5);
   }

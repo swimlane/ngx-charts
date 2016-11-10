@@ -69,7 +69,7 @@ export function generateGraph(nodeCount: number) {
       value: country,
     });
     for (let j = 0; j < nodes.length - 1; j++) {
-      if (Math.random() < 0.5) {
+      if (Math.random() < 0.03) {
         links.push({
           source: country,
           target: nodes[j].value,

@@ -81,7 +81,7 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
     .force("collide", d3.forceCollide(5))
     .force("x", d3.forceX())
     .force("y", d3.forceY());
-  @Input() forceLink = d3.forceLink().distance(20).strength(1).id(node => node.value);
+  @Input() forceLink = d3.forceLink().id(node => node.value);
   @Input() groupResultsBy: (node: any) => string = node => node.value;
   @Input() legend: boolean;
   @Input() nodes: any[] = [];
