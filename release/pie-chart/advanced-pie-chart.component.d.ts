@@ -20,6 +20,7 @@ export declare class AdvancedPieChart extends BaseChart implements OnChanges, On
     totalLabel: string;
     legendItems: LegendItem;
     colors: Function;
+    legendWidth: number;
     view: any;
     results: any;
     margin: number[];

@@ -143,6 +143,7 @@ var banner =
       'core-js': 'core-js',
       'core-js/es6': 'core-js/es6',
       'core-js/es7/reflect': 'core-js/es7/reflect',
+      'd3': 'd3',
       'rxjs': 'rxjs',
       'rxjs/Rx': 'rxjs/Rx',
       'rxjs/Subject': 'rxjs/Subject',

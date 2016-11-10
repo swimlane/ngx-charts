@@ -1,6 +1,6 @@
 {
   "name": "ng2d3",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Angular2 + D3 Charting Library",
   "main": "release/ng2d3.js",
   "typings": "release/ng2d3.d.ts",
@@ -61,7 +61,7 @@
     "rimraf": "^2.5.2",
     "@angular/common": "~2.1.2",
     "@angular/compiler": "~2.1.2",
-    "@angular/compiler-cli": "~0.6.3",
+    "@angular/compiler-cli": "~2.1.2",
     "@angular/core": "~2.1.2",
     "@angular/forms": "~2.1.2",
     "@angular/platform-browser": "~2.1.2",

@@ -18,5 +18,6 @@ export declare class Card implements OnChanges {
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
+    countUp(current: any, max: any, step: any): void;
     click(): void;
 }

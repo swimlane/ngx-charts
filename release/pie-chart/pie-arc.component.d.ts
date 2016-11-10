@@ -13,11 +13,12 @@ export declare class PieArc implements OnChanges {
     innerRadius: any;
     outerRadius: any;
     value: any;
-    total: any;
     max: any;
     data: any;
     explodeSlices: any;
     gradient: boolean;
+    animate: boolean;
+    pointerEvents: boolean;
     clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef);
     ngOnChanges(): void;

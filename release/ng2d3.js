@@ -1,5 +1,5 @@
 /**
- * ng2d3 v"1.5.0" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.5.1" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -200,10 +200,10 @@ var BaseChart = (function () {
             var copy = {
                 name: item['name']
             };
-            if (item['value']) {
+            if (item['value'] !== undefined) {
                 copy['value'] = item['value'];
             }
-            if (item['series']) {
+            if (item['series'] !== undefined) {
                 copy['series'] = [];
                 for (var _a = 0, _b = item['series']; _a < _b.length; _a++) {
                     var seriesItem = _b[_a];
@@ -1279,6 +1279,19 @@ Transition.prototype = transition.prototype = {
 
 /***/ },
 /* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return map; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return slice; });
+var array = Array.prototype;
+
+var map = array.map;
+var slice = array.slice;
+
+
+/***/ },
+/* 20 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1301,19 +1314,6 @@ function trimLabel(s, max) {
     }
 }
 exports.trimLabel = trimLabel;
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return map; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return slice; });
-var array = Array.prototype;
-
-var map = array.map;
-var slice = array.slice;
 
 
 /***/ },
@@ -1685,7 +1685,7 @@ function tweenValue(transition, name, value) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_array__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_interpolate__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__array__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__array__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constant__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__number__ = __webpack_require__(133);
 /* harmony export (immutable) */ exports["b"] = deinterpolateLinear;
@@ -4331,7 +4331,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(19);
+var trim_label_helper_1 = __webpack_require__(20);
 var ticks_helper_1 = __webpack_require__(87);
 var XAxisTicks = (function () {
     function XAxisTicks() {
@@ -4361,7 +4361,7 @@ var XAxisTicks = (function () {
     };
     XAxisTicks.prototype.updateDims = function () {
         var _this = this;
-        var height = this.ticksElement.nativeElement.getBoundingClientRect().height;
+        var height = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().height, 10);
         if (height !== this.height) {
             this.height = height;
             this.dimensionsChanged.emit({ height: height });
@@ -4519,7 +4519,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(19);
+var trim_label_helper_1 = __webpack_require__(20);
 var ticks_helper_1 = __webpack_require__(87);
 var YAxisTicks = (function () {
     function YAxisTicks() {
@@ -4549,7 +4549,7 @@ var YAxisTicks = (function () {
     };
     YAxisTicks.prototype.updateDims = function () {
         var _this = this;
-        var width = this.ticksElement.nativeElement.getBoundingClientRect().width;
+        var width = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().width, 10);
         if (width !== this.width) {
             this.width = width;
             this.dimensionsChanged.emit({ width: width });
@@ -4849,7 +4849,7 @@ exports.gridLayout = gridLayout;
 function getTotal(results) {
     return results
         .map(function (d) { return d.value; })
-        .reduce(function (sum, val) { return sum + val; });
+        .reduce(function (sum, val) { return sum + val; }, 0);
 }
 
 
@@ -6719,7 +6719,7 @@ function one(b) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_collection__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(19);
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return implicit; });
 /* harmony export (immutable) */ exports["a"] = ordinal;
 
@@ -6779,7 +6779,7 @@ function ordinal(range) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_d3_interpolate__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_d3_time__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_d3_time_format__ = __webpack_require__(153);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__array__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__array__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__continuous__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__nice__ = __webpack_require__(132);
 /* harmony export (immutable) */ exports["b"] = calendar;
@@ -12322,7 +12322,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(19);
 var Legend = (function () {
     function Legend() {
     }
@@ -12338,7 +12337,7 @@ var Legend = (function () {
             return {
                 className: 'legend-label',
                 label: label,
-                trimmedLabel: trim_label_helper_1.trimLabel(label) || '(empty)',
+                trimmedLabel: label || '(empty)',
                 backgroundColor: _this.colors(label)
             };
         });
@@ -12366,7 +12365,7 @@ var Legend = (function () {
     Legend = __decorate([
         core_1.Component({
             selector: 'legend',
-            template: "\n    <div [style.width]=\"width + 'px'\">\n      <header class=\"legend-title\"\n        style=\"white-space: nowrap; overflow: hidden;\">\n        <span class=\"legend-icon incon-eye-1\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\" style=\"white-space: nowrap;\">\n          <li *ngFor=\"let legendItem of legendItems\" [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"colors(legendItem.label)\">\n            </span>\n\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n\n          </li>\n        </ul>\n      </div>\n    </div>\n  "
+            template: "\n    <div [style.width]=\"width + 'px'\">\n      <header class=\"legend-title\"\n        style=\"white-space: nowrap; overflow: hidden;\">\n        <span class=\"legend-icon incon-eye-1\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          style=\"white-space: nowrap;\"\n          [style.max-height]=\"height - 45 + 'px'\">\n          <li *ngFor=\"let legendItem of legendItems\" [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"colors(legendItem.label)\">\n            </span>\n\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n\n          </li>\n        </ul>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], Legend);
@@ -12948,7 +12947,7 @@ var ForceDirectedGraph = (function (_super) {
             .force("collide", d3_1.default.forceCollide(5))
             .force("x", d3_1.default.forceX())
             .force("y", d3_1.default.forceY());
-        this.forceLink = d3_1.default.forceLink().distance(20).strength(1).id(function (node) { return node.value; });
+        this.forceLink = d3_1.default.forceLink().id(function (node) { return node.value; });
         this.groupResultsBy = function (node) { return node.value; };
         this.nodes = [];
         this.links = [];
@@ -14027,7 +14026,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(19);
+var trim_label_helper_1 = __webpack_require__(20);
 var d3_1 = __webpack_require__(1);
 var Card = (function () {
     function Card(element) {
@@ -14041,10 +14040,22 @@ var Card = (function () {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
         this.label = this.data.name;
         this.trimmedLabel = trim_label_helper_1.trimLabel(this.label, 55);
-        this.value = d3_1.default.format(",.0f")(this.data.value);
+        var step = this.data.value / 100;
+        this.countUp(0, this.data.value, step);
         this.cardWidth = Math.max(0, this.width - 5);
         this.cardHeight = Math.max(0, this.height - 5);
         this.textWidth = Math.max(0, this.width - 15);
+    };
+    Card.prototype.countUp = function (current, max, step) {
+        var _this = this;
+        this.value = d3_1.default.format(",.0f")(current);
+        if (current >= max) {
+            return;
+        }
+        var newValue = Math.min(current + step, max);
+        setTimeout(function () {
+            _this.countUp(newValue, max, step);
+        }, 16);
     };
     Card.prototype.click = function () {
         this.clickHandler.emit({
@@ -14219,7 +14230,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
-var trim_label_helper_1 = __webpack_require__(19);
+var trim_label_helper_1 = __webpack_require__(20);
 var AdvancedPieChart = (function (_super) {
     __extends(AdvancedPieChart, _super);
     function AdvancedPieChart(element, zone) {
@@ -14246,8 +14257,9 @@ var AdvancedPieChart = (function (_super) {
         });
         this.domain = this.getDomain();
         this.setColors();
-        var xOffset = this.margin[3] + this.dims.width / 2;
+        var xOffset = this.dims.width / 2;
         var yOffset = this.margin[0] + this.dims.height / 2;
+        this.legendWidth = this.width - this.dims.width - this.margin[1];
         this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
         this.innerRadius = this.outerRadius * 0.75;
         this.transform = "translate(" + xOffset + " , " + yOffset + ")";
@@ -14314,7 +14326,7 @@ var AdvancedPieChart = (function (_super) {
     AdvancedPieChart = __decorate([
         core_1.Component({
             selector: 'advanced-pie-chart',
-            template: "\n    <div class=\"advanced-pie chart\"\n      [style.width]=\"dims.width\"\n      [style.height]=\"dims.height\">\n\n      <chart\n        [colors]=\"colors\"\n        [view]=\"[dims.width, dims.height]\">\n\n        <svg:g\n          [attr.transform]=\"transform\"\n          class=\"pie chart\">\n          <svg:g pieSeries\n            [colors]=\"colors\"\n            [showLabels]=\"labels\"\n            [series]=\"results\"\n            [innerRadius]=\"innerRadius\"\n            [outerRadius]=\"outerRadius\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event)\">\n          </svg:g>\n        </svg:g>\n      </chart>\n    </div>\n\n    <div [style.width]=\"width - dims.width\">\n      <div class=\"advanced-pie-legend\"\n        [style.margin-top]=\"(height - 215)/2\">\n\n        <div class=\"total-value\">\n          {{roundedTotal}}\n        </div>\n        <div class=\"total-label\">\n          {{totalLabel}}\n        </div>\n\n        <div class=\"legend-items-container\">\n          <div class=\"legend-items\">\n            <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n              <div class=\"item-color\"\n                [style.background]=\"colors(legendItem.label)\">\n              </div>\n              <div class=\"item-value\">{{legendItem.value}}</div>\n              <div class=\"item-label\">{{legendItem.label}}</div>\n              <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n            </div>\n          </div>\n        </div>\n\n      </div>\n    </div>\n  "
+            template: "\n    <div [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n\n        <chart\n          [colors]=\"colors\"\n          [view]=\"[dims.width, dims.height]\">\n\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"click($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.margin-top]=\"(height - 215)/2\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n\n          <div class=\"total-value\">\n            {{roundedTotal}}\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n                <div class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div class=\"item-value\">{{legendItem.value}}</div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n      </div>\n    </div>\n\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], AdvancedPieChart);
@@ -14345,6 +14357,8 @@ var PieArc = (function () {
     function PieArc(element) {
         this.initialized = false;
         this.gradient = false;
+        this.animate = true;
+        this.pointerEvents = true;
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
@@ -14364,12 +14378,14 @@ var PieArc = (function () {
         else {
             this.gradientFill = "url(" + pageUrl + "#" + this.linearGradientId + ")";
         }
-        if (this.initialized) {
-            this.updateAnimation();
-        }
-        else {
-            this.loadAnimation();
-            this.initialized = true;
+        if (this.animate) {
+            if (this.initialized) {
+                this.updateAnimation();
+            }
+            else {
+                this.loadAnimation();
+                this.initialized = true;
+            }
         }
     };
     PieArc.prototype.calculateArc = function () {
@@ -14449,10 +14465,6 @@ var PieArc = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], PieArc.prototype, "total", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], PieArc.prototype, "max", void 0);
     __decorate([
         core_1.Input(), 
@@ -14467,13 +14479,21 @@ var PieArc = (function () {
         __metadata('design:type', Boolean)
     ], PieArc.prototype, "gradient", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], PieArc.prototype, "animate", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], PieArc.prototype, "pointerEvents", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], PieArc.prototype, "clickHandler", void 0);
     PieArc = __decorate([
         core_1.Component({
             selector: 'g[pieArc]',
-            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n      />\n    </svg:g>\n  "
+            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], PieArc);
@@ -14653,7 +14673,6 @@ var PieGridSeries = (function () {
         this.layout = d3_1.default.pie()
             .value(function (d) { return d.data.value; }).sort(null);
         this.arcs = this.getArcs();
-        this.loadAnimation();
     };
     PieGridSeries.prototype.getArcs = function () {
         var _this = this;
@@ -14663,55 +14682,17 @@ var PieGridSeries = (function () {
             if (index === 0) {
                 arc.startAngle = 0;
             }
-            var genArcPath = d3_1.default.arc()
-                .innerRadius(_this.innerRadius).outerRadius(_this.outerRadius)
-                .startAngle(arc.startAngle).endAngle(arc.endAngle);
             var color = _this.colors(label);
-            color = _this.colors(label);
             return {
                 data: arc.data.data,
                 class: 'arc ' + 'arc' + index,
-                d: genArcPath(),
-                cursor: other ? 'auto' : 'pointer',
                 fill: color,
-                opacity: other ? 0.4 : 1
+                startAngle: other ? 0 : arc.startAngle,
+                endAngle: arc.endAngle,
+                animate: !other,
+                pointerEvents: !other
             };
         });
-    };
-    PieGridSeries.prototype.loadAnimation = function () {
-        var layout = d3_1.default.pie()
-            .value(function (d) { return d.data.value; }).sort(null);
-        var data = layout(this.data);
-        var node = d3_1.default.select(this.element).selectAll('.arc1').data([{
-                startAngle: data[0].startAngle,
-                endAngle: data[0].endAngle
-            }]);
-        var arc = this.calculateArc(this.innerRadius, this.outerRadius);
-        node
-            .transition()
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var copyOfD = Object.assign({}, d);
-            copyOfD.endAngle = copyOfD.startAngle;
-            var interpolate = d3_1.default.interpolate(copyOfD, copyOfD);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        })
-            .transition().duration(750)
-            .attrTween("d", function (d) {
-            this._current = this._current || d;
-            var interpolate = d3_1.default.interpolate(this._current, d);
-            this._current = interpolate(0);
-            return function (t) {
-                return arc(interpolate(t));
-            };
-        });
-    };
-    PieGridSeries.prototype.calculateArc = function (innerRadius, outerRadius) {
-        return d3_1.default.arc()
-            .innerRadius(innerRadius).outerRadius(outerRadius);
     };
     PieGridSeries.prototype.click = function (data) {
         this.clickHandler.emit({
@@ -14721,6 +14702,12 @@ var PieGridSeries = (function () {
     };
     PieGridSeries.prototype.trackBy = function (index, item) {
         return item.data.name;
+    };
+    PieGridSeries.prototype.label = function (arc) {
+        return arc.data.name;
+    };
+    PieGridSeries.prototype.color = function (arc) {
+        return this.colors(this.label(arc));
     };
     __decorate([
         core_1.Input(), 
@@ -14745,7 +14732,7 @@ var PieGridSeries = (function () {
     PieGridSeries = __decorate([
         core_1.Component({
             selector: 'g[pieGridSeries]',
-            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:path *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [attr.d]=\"arc.d\"\n        [style.cursor]=\"arc.cursor\"\n        [style.opacity]=\"arc.opacity\"\n        [attr.fill]=\"arc.fill\"\n        (click)=\"click(arc.data)\"\n      />\n    </svg:g>\n  "
+            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g pieArc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (clickHandler)=\"click($event)\">\n      </svg:g>\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], PieGridSeries);
@@ -14778,7 +14765,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
-var trim_label_helper_1 = __webpack_require__(19);
+var trim_label_helper_1 = __webpack_require__(20);
 var grid_layout_helper_1 = __webpack_require__(91);
 var d3_1 = __webpack_require__(1);
 var PieGrid = (function (_super) {
@@ -14818,9 +14805,11 @@ var PieGrid = (function (_super) {
         var _this = this;
         var total = this.getTotal();
         return this.data.map(function (d) {
+            var baselineLabelHeight = 20;
+            var padding = 10;
             var label = d.data.name;
             var value = d.data.value;
-            var radius = d3_1.default.min([d.width, d.height]) / 2.1;
+            var radius = d3_1.default.min([d.width - padding, d.height - baselineLabelHeight]) / 2;
             var innerRadius = radius * 0.75;
             var count = 0;
             var colors = function () {
@@ -14833,7 +14822,7 @@ var PieGrid = (function (_super) {
                 }
             };
             return {
-                transform: "translate(" + (d.x + d.width / 2) + " , " + (d.y + d.height / 2) + ")",
+                transform: "translate(" + (d.x + (d.width - padding) / 2) + " , " + (d.y + (d.height - baselineLabelHeight) / 2) + ")",
                 colors: colors,
                 innerRadius: innerRadius,
                 outerRadius: radius,
@@ -14910,7 +14899,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var trim_label_helper_1 = __webpack_require__(19);
+var trim_label_helper_1 = __webpack_require__(20);
 var d3_1 = __webpack_require__(1);
 var PieLabel = (function () {
     function PieLabel(element) {
@@ -15030,17 +15019,11 @@ var PieSeries = (function () {
         var pie = d3_1.default.pie()
             .value(function (d) { return d.value; })
             .sort(null);
-        this.total = this.getTotal();
         var arcData = pie(this.series);
         this.max = d3_1.default.max(arcData, function (d) {
             return d.value;
         });
         this.data = this.calculateLabelPositions(arcData);
-    };
-    PieSeries.prototype.getTotal = function () {
-        return this.series
-            .map(function (d) { return d.value; })
-            .reduce(function (sum, val) { return sum + val; }, 0);
     };
     PieSeries.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
@@ -15130,7 +15113,7 @@ var PieSeries = (function () {
     PieSeries = __decorate([
         core_1.Component({
             selector: 'g[pieSeries]',
-            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n\n      <svg:g pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [total]=\"total\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"click($event)\"\n        [gradient]=\"gradient\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n\n    </svg:g>\n  "
+            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n\n      <svg:g pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"click($event)\"\n        [gradient]=\"gradient\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], PieSeries);
@@ -15366,6 +15349,7 @@ var TreeMap = (function (_super) {
         this.update();
     };
     TreeMap.prototype.update = function () {
+        _super.prototype.update.call(this);
         this.dims = view_dimensions_helper_1.calculateViewDimensions({
             width: this.width,
             height: this.height,
@@ -21756,7 +21740,7 @@ function point() {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__array__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__array__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__linear__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__number__ = __webpack_require__(133);
 /* harmony export (immutable) */ exports["a"] = identity;
@@ -21982,7 +21966,7 @@ function sqrt() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_array__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(19);
 /* harmony export (immutable) */ exports["a"] = quantile;
 
 
@@ -22043,7 +22027,7 @@ function quantile() {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_array__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__linear__ = __webpack_require__(28);
 /* harmony export (immutable) */ exports["a"] = quantize;
 
@@ -22167,7 +22151,7 @@ function sequential(interpolator) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_d3_array__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__array__ = __webpack_require__(19);
 /* harmony export (immutable) */ exports["a"] = threshold;
 
 

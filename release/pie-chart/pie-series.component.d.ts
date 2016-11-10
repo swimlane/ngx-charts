@@ -1,6 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
 export declare class PieSeries implements OnChanges {
-    total: number;
     max: number;
     data: any;
     colors: any;
@@ -14,7 +13,6 @@ export declare class PieSeries implements OnChanges {
     clickHandler: EventEmitter<{}>;
     ngOnChanges(): void;
     update(): void;
-    getTotal(): any;
     midAngle(d: any): any;
     outerArc(): any;
     calculateLabelPositions(pieData: any): any;

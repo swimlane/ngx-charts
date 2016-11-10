@@ -12,8 +12,8 @@ export declare class PieGridSeries implements OnChanges {
     ngOnChanges(): void;
     update(): void;
     getArcs(): any;
-    loadAnimation(): void;
-    calculateArc(innerRadius: any, outerRadius: any): any;
     click(data: any): void;
     trackBy(index: any, item: any): any;
+    label(arc: any): any;
+    color(arc: any): any;
 }
