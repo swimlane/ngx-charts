@@ -257,3 +257,9 @@
     opacity: 0.4;
   }
 }
+
+.force-directed-graph {
+  .edge {
+    stroke: #333;
+  }
+}

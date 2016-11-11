@@ -34,7 +34,7 @@ import {
               [ngOutletContext]="{ $implicit: link }">
             </template>
             <svg:line *ngIf="!linkTemplate"
-              strokeWidth="1" stroke="black"
+              strokeWidth="1" class="edge"
               [attr.x1]="link.source.x"
               [attr.y1]="link.source.y"
               [attr.x2]="link.target.x"

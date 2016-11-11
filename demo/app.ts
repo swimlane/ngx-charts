@@ -8,7 +8,7 @@ import d3 from '../src/d3';
 @Component({
   selector: 'app',
   template: `
-    <main>
+    <main [class]="theme">
       <div class="chart-col">
           <bar-vertical
             *ngIf="chartType === 'bar-vertical'"
@@ -312,12 +312,13 @@ import d3 from '../src/d3';
             </optgroup>
           </template>
         </select>
-        <!--
-        <h3>Data</h3>
-        <select>
-          <option>Country</option>
+        <h3>Theme</h3>
+        <select
+          [ngModel]="theme"
+          (ngModelChange)="theme = $event">>
+          <option [value]="'dark'">Dark</option>
+          <option [value]="'light'">Light</option>
         </select>
-        -->
         <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>
@@ -440,6 +441,7 @@ import d3 from '../src/d3';
 })
 
 export class App implements OnInit {
+  theme = "dark";
   chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;

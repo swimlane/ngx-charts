@@ -31,7 +31,6 @@ main {
   height: 100%;
 
   .chart-col {
-    background: #fff;
     width: 75%;
     height: 100%;
     float: left;
@@ -102,4 +101,60 @@ iframe {
   position: absolute;
   top: 10px;
   right: 30px;
+}
+
+.dark {
+  /**
+   * Backgrounds
+   */
+  $color-bg-darkest: #13141b;
+  $color-bg-darker: #1b1e27;
+  $color-bg-dark: #232837;
+  $color-bg-med: #2f3646;
+  $color-bg-light: #455066;
+  $color-bg-lighter: #5b6882;
+
+  /**
+   * Text
+   */
+  $color-text-dark: #72809b;
+  $color-text-med-dark: #919db5;
+  $color-text-med: #a8b2c7;
+  $color-text-med-light: #d9dce1;
+  $color-text-light: #f0f1f6;
+  $color-text-lighter: #fff;
+
+  background: $color-bg-darker;
+
+  text {
+    fill: $color-text-med;
+  }
+
+  .gridline-path {
+    stroke: $color-bg-med;
+  }
+
+  .legend-labels {
+    background: rgba(255,255,255,0.05);
+  }
+
+  .scale-legend-label {
+    color: $color-text-med;
+  }
+
+  .advanced-pie-legend {
+    color: $color-text-med;
+  }
+
+  .force-directed-graph {
+    .edge {
+      stroke: $color-bg-light;
+    }
+  }
+
+  .number-card {
+    p {
+      color: $color-text-light;
+    }
+  }
 }
