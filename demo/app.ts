@@ -4,6 +4,7 @@ import chartGroups from './chartTypes';
 import '../src/ng2d3.scss';
 import './demo.scss';
 import d3 from '../src/d3';
+import {colorSets} from '../src/utils/color-sets';
 
 @Component({
   selector: 'app',
@@ -346,6 +347,13 @@ import d3 from '../src/d3';
           </div>
         </div>
         <hr />
+        <pre>{{colorScheme|json}}</pre>
+        <label>Color Scheme</label>
+        <select
+          [ngModel]="selectedColorScheme"
+          (ngModelChange)="setColorScheme($event)">
+          <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{scheme.name}}</option>
+        </select>
 
         <div *ngIf="chart.options.includes('showXAxis')">
           <label>
@@ -443,7 +451,7 @@ import d3 from '../src/d3';
 })
 
 export class App implements OnInit {
-  theme = "dark";
+  theme = "light";
   chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
@@ -476,9 +484,9 @@ export class App implements OnInit {
   curve = d3.shape.curveLinear;
   interpolationTypes = ['Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X', 'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'];
 
-  colorScheme = {
-    domain: ['#F44336', '#3F51B5', '#8BC34A', '#2196F3', '#009688', '#FF5722', '#CDDC39', '#00BCD4', '#FFC107', '#795548', '#607D8B']
-  };
+  colorSets: any;
+  colorScheme: any;
+  selectedColorScheme: string;
 
   // pie
   showLabels = true;
@@ -490,9 +498,17 @@ export class App implements OnInit {
   timeline = false;
 
   constructor() {
-    Object.assign(this, {single, multi, countries, chartGroups, graph: generateGraph(50) });
+    Object.assign(this, {
+      single,
+      multi,
+      countries,
+      chartGroups,
+      colorSets,
+      graph: generateGraph(50)
+    });
 
     this.dateData = generateData(5);
+    this.setColorScheme('cool');
   }
 
   ngOnInit() {
@@ -646,5 +662,10 @@ export class App implements OnInit {
     if (curveType === 'Step Before') {
       this.curve = d3.shape.curveStepBefore;
     }
+  }
+
+  setColorScheme(name) {
+    this.selectedColorScheme = name;
+    this.colorScheme = this.colorSets.find(s => s.name === name);
   }
 }
