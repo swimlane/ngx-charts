@@ -39,7 +39,7 @@ export class PieGridSeries implements OnChanges {
 
   @Input() colors;
   @Input() data;
-  @Input() innerRadius = 60;
+  @Input() innerRadius = 70;
   @Input() outerRadius = 80;
 
   @Output() clickHandler = new EventEmitter();
