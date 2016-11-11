@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.5.2
+- Added fade in animation to charts
+- Excluded d3 from the release bundle
+- Decreased the pie grid doughnut width
+
+## 1.5.1
+- Fixed bug where view dimension feedback would enter into a loop due to float decimals
+- Fixed bug where tree map would not call update on the base chart
+- Switched legend label truncation to css ellipsis
+- Added maximum height to legend, and scrollbars on overflow
+- Added a count up animation to number cards
+- Fixed advanced pie layout
+- Updated pie grid layout and padding
+- Refactored pie grid to use the pie arc component
+- Updated testing framework
+
 ## 1.5.0
 - Added force directed graph chart (#64)
 - Fixed bug where tooltip would not work when library is used in an angular 1 application using ngUpgrade
