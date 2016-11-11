@@ -1,5 +1,5 @@
 /**
- * ng2d3 v"1.5.1" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.5.2" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
