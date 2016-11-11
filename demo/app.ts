@@ -347,7 +347,6 @@ import {colorSets} from '../src/utils/color-sets';
           </div>
         </div>
         <hr />
-        <pre>{{colorScheme|json}}</pre>
         <label>Color Scheme</label>
         <select
           [ngModel]="selectedColorScheme"
