@@ -19964,7 +19964,7 @@ var core_1 = __webpack_require__(1);
 var d3_1 = __webpack_require__(11);
 var PieGridSeries = (function () {
     function PieGridSeries(element) {
-        this.innerRadius = 60;
+        this.innerRadius = 70;
         this.outerRadius = 80;
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
