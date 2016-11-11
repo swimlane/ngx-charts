@@ -162,6 +162,7 @@ export class BarHorizontal2D extends BaseChart implements OnChanges, OnDestroy, 
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
+      .paddingOuter(spacing / 2)
       .domain(this.groupDomain);
   }
 

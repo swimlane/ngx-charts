@@ -302,6 +302,14 @@ import d3 from '../src/d3';
           ng2<strong>d3</strong>
           <small>Angular2 D3 Chart Framework</small>
         </h1>
+        <h3>Theme</h3>
+        <select
+          [ngModel]="theme"
+          (ngModelChange)="theme = $event">>
+          <option [value]="'dark'">Dark</option>
+          <option [value]="'light'">Light</option>
+        </select>
+
         <h3>Chart Type</h3>
         <select
           [ngModel]="chartType"
@@ -312,13 +320,7 @@ import d3 from '../src/d3';
             </optgroup>
           </template>
         </select>
-        <h3>Theme</h3>
-        <select
-          [ngModel]="theme"
-          (ngModelChange)="theme = $event">>
-          <option [value]="'dark'">Dark</option>
-          <option [value]="'light'">Light</option>
-        </select>
+
         <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
         <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>

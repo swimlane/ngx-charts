@@ -160,6 +160,7 @@ export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, Af
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
+      .paddingOuter(spacing / 2)
       .domain(this.groupDomain);
   }
 

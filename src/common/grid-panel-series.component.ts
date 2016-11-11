@@ -39,33 +39,36 @@ export class GridPanelSeries implements OnChanges {
       let offset, width, height, x, y;
 
       if (this.orient === 'vertical') {
-        let position = this.xScale(d.name);
-        let positionIndex = this.xScale.range().indexOf(position);
+        let position: number = this.xScale(d.name);
+        let positionIndex = Number.parseInt((position / this.xScale.step()).toString());
+
         if (positionIndex % 2 === 1) {
           color = 'rgba(255,255,255,0)';
         }
-        offset = this.xScale.range()[0] / 2;
-        width = this.xScale.bandwidth() + 2 * offset;
+        offset = this.xScale.bandwidth() * this.xScale.paddingInner();
+        width = this.xScale.bandwidth() + offset;
         height = this.dims.height;
-        x = this.xScale(d.name) - offset;
+        x = this.xScale(d.name) - offset/2;
         y = 0;
       } else if (this.orient === 'horizontal') {
         let position = this.yScale(d.name);
-        let positionIndex = this.yScale.range().indexOf(position);
+        let positionIndex = Number.parseInt((position / this.yScale.step()).toString());
+
+        console.log('position', positionIndex);
         if (positionIndex % 2 === 1) {
           color = 'rgba(255,255,255,0)';
         }
-        offset = this.yScale.range()[0] / 2;
+        offset = this.yScale.bandwidth() * this.yScale.paddingInner();
+
         width = this.dims.width;
-        height = this.yScale.bandwidth() + 2 * offset;
+        height = this.yScale.bandwidth() + offset;
         x = 0;
-        y = this.yScale(d.name) - offset;
+        y = this.yScale(d.name) - offset/2;
       }
 
       return {
         name: d.name,
         color: color,
-        offset: offset,
         height: height,
         width: width,
         x: x,
