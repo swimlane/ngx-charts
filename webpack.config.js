@@ -89,7 +89,7 @@ var banner =
     output: {
       path: root('dist'),
       filename: '[name].js',
-      sourceMapFilename: '[name].map',
+      sourceMapFilename: '[name].js.map',
       chunkFilename: '[id].chunk.js'
     },
 
