@@ -132,8 +132,162 @@ exports.subscribeToResult = subscribeToResult;
 /* 16 */,
 /* 17 */,
 /* 18 */,
-/* 19 */,
-/* 20 */
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var d3_1 = __webpack_require__(11);
+exports.colorSets = [
+    {
+        'name': 'vivid',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#647c8a', '#3f51b5', '#2196f3', '#00b862', '#afdf0a', '#a7b61a', '#f3e562', '#ff9800', '#ff5722', '#ff4514']
+    },
+    {
+        'name': 'natural',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#bf9d76', '#e99450', '#d89f59', '#f2dfa7', '#a5d7c6', '#7794b1', '#afafaf', '#707160', '#ba9383', '#d9d5c3']
+    },
+    {
+        'name': 'cool',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
+    },
+    {
+        'name': 'fire',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#ff3d00', '#bf360c', '#ff8f00', '#ff6f00', '#ff5722', '#e65100', '#ffca28', '#ffab00']
+    },
+    {
+        'name': 'solar',
+        'selectable': true,
+        'group': 'Continuous',
+        'domain': ['#fff8e1', '#ffecb3', '#ffe082', '#ffd54f', '#ffca28', '#ffc107', '#ffb300', '#ffa000', '#ff8f00', '#ff6f00']
+    },
+    {
+        'name': 'air',
+        'selectable': true,
+        'group': 'Continuous',
+        'domain': ['#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4', '#039be5', '#0288d1', '#0277bd', '#01579b']
+    },
+    {
+        'name': 'aqua',
+        'selectable': true,
+        'group': 'Continuous',
+        'domain': ['#e0f7fa', '#b2ebf2', '#80deea', '#4dd0e1', '#26c6da', '#00bcd4', '#00acc1', '#0097a7', '#00838f', '#006064']
+    },
+    {
+        'name': 'flame',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ['#A10A28', '#D3342D', '#EF6D49', '#FAAD67', '#FDDE90', '#DBED91', '#A9D770', '#6CBA67', '#2C9653', '#146738']
+    },
+    {
+        'name': 'ocean',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ['#1D68FB', '#33C0FC', '#4AFFFE', '#AFFFFF', '#FFFC63', '#FDBD2D', '#FC8A25', '#FA4F1E', '#FA141B', '#BA38D1']
+    },
+    {
+        'name': 'forest',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ['#55C22D', '#C1F33D', '#3CC099', '#AFFFFF', '#8CFC9D', '#76CFFA', '#BA60FB', '#EE6490', '#C42A1C', '#FC9F32']
+    },
+    {
+        'name': 'horizon',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ['#2597FB', '#65EBFD', '#99FDD0', '#FCEE4B', '#FEFCFA', '#FDD6E3', '#FCB1A8', '#EF6F7B', '#CB96E8', '#EFDEE0']
+    },
+    {
+        'name': 'neons',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ['#FF3333', '#FF33FF', '#CC33FF', '#0000FF', '#33CCFF', '#33FFFF', '#33FF66', '#CCFF33', '#FFCC00', '#FF6600']
+    },
+    {
+        'name': 'picnic',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ['#FAC51D', '#66BD6D', '#FAA026', '#29BB9C', '#E96B56', '#55ACD2', '#B7332F', '#2C83C9', '#9166B8', '#92E7E8']
+    },
+    {
+        'name': 'night',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ["#2B1B5A", "#501356", "#183356", "#28203F", "#391B3C", "#1E2B3C", "#120634", "#2D0432", "#051932", "#453080", "#75267D", "#2C507D", "#4B3880", "#752F7D", "#35547D"]
+    },
+    {
+        'name': 'nightLights',
+        'selectable': false,
+        'group': 'Ordinal',
+        'domain': ["#4e31a5", "#9c25a7", "#3065ab", "#57468b", "#904497", "#46648b", "#32118d", "#a00fb3", "#1052a2", "#6e51bd", "#b63cc3", "#6c97cb", "#8671c1", "#b455be", "#7496c3"]
+    }
+];
+function generateColorScale(scheme, type, domain) {
+    if (typeof (scheme) === 'string') {
+        scheme = exports.colorSets.find(function (cs) {
+            return cs.name === scheme;
+        });
+    }
+    var colorScale;
+    if (type === 'quantile') {
+        colorScale = d3_1.default.scaleQuantile()
+            .range(scheme.domain)
+            .domain(domain);
+    }
+    else if (type === 'ordinal') {
+        colorScale = d3_1.default.scaleOrdinal()
+            .range(scheme.domain)
+            .domain(domain);
+    }
+    else if (type === 'linear') {
+        colorScale = d3_1.default.scaleLinear()
+            .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
+            .range(scheme.domain);
+    }
+    return colorScale;
+}
+exports.generateColorScale = generateColorScale;
+function colorHelper(scheme, type, domain, customColors) {
+    var colorScale = generateColorScale(scheme, type, domain);
+    var colorScaleFunction = function (value) {
+        if (type === 'linear') {
+            var valueScale = d3_1.default.scaleLinear()
+                .domain(domain)
+                .range([0, 1]);
+            return (colorScale(valueScale(value)));
+        }
+        else {
+            var formattedValue_1 = value.toString();
+            var found = undefined;
+            if (customColors && customColors.length > 0) {
+                found = customColors.find(function (mapping) {
+                    return mapping.name === formattedValue_1.toLowerCase();
+                });
+            }
+            if (found) {
+                return found.value;
+            }
+            else {
+                return colorScale(value);
+            }
+        }
+    };
+    return colorScaleFunction;
+}
+exports.colorHelper = colorHelper;
+
+
+/***/ },
+/* 20 */,
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -213,7 +367,7 @@ exports.BaseChart = BaseChart;
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -255,133 +409,6 @@ function calculateViewDimensions(_a) {
     };
 }
 exports.calculateViewDimensions = calculateViewDimensions;
-
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var d3_1 = __webpack_require__(11);
-exports.colorSets = [
-    {
-        'name': 'flame',
-        'base': '#590012',
-        'group': 'general',
-        'domain': ['#A10A28', '#D3342D', '#EF6D49', '#FAAD67', '#FDDE90', '#DBED91', '#A9D770', '#6CBA67', '#2C9653', '#146738']
-    },
-    {
-        'name': 'ocean',
-        'base': '#0340B9',
-        'group': 'general',
-        'domain': ['#1D68FB', '#33C0FC', '#4AFFFE', '#AFFFFF', '#FFFC63', '#FDBD2D', '#FC8A25', '#FA4F1E', '#FA141B', '#BA38D1']
-    },
-    {
-        'name': 'forest',
-        'base': '#258203',
-        'group': 'general',
-        'domain': ['#55C22D', '#C1F33D', '#3CC099', '#AFFFFF', '#8CFC9D', '#76CFFA', '#BA60FB', '#EE6490', '#C42A1C', '#FC9F32']
-    },
-    {
-        'name': 'horizon',
-        'base': '#026CCB',
-        'group': 'general',
-        'domain': ['#2597FB', '#65EBFD', '#99FDD0', '#FCEE4B', '#FEFCFA', '#FDD6E3', '#FCB1A8', '#EF6F7B', '#CB96E8', '#EFDEE0']
-    },
-    {
-        'name': 'neons',
-        'base': '#B20000',
-        'group': 'general',
-        'domain': ['#FF3333', '#FF33FF', '#CC33FF', '#0000FF', '#33CCFF', '#33FFFF', '#33FF66', '#CCFF33', '#FFCC00', '#FF6600']
-    },
-    {
-        'name': 'picnic',
-        'base': '#A37C00',
-        'group': 'general',
-        'domain': ['#FAC51D', '#66BD6D', '#FAA026', '#29BB9C', '#E96B56', '#55ACD2', '#B7332F', '#2C83C9', '#9166B8', '#92E7E8']
-    },
-    {
-        'name': 'night',
-        'base': '#48025F',
-        'group': 'general',
-        'domain': ["#2B1B5A", "#501356", "#183356", "#28203F", "#391B3C", "#1E2B3C", "#120634", "#2D0432", "#051932", "#453080", "#75267D", "#2C507D", "#4B3880", "#752F7D", "#35547D"]
-    },
-    {
-        'name': 'nightLights',
-        'base': '#4e31a5',
-        'group': 'general',
-        'domain': ["#4e31a5", "#9c25a7", "#3065ab", "#57468b", "#904497", "#46648b", "#32118d", "#a00fb3", "#1052a2", "#6e51bd", "#b63cc3", "#6c97cb", "#8671c1", "#b455be", "#7496c3"]
-    },
-    {
-        'name': 'yellowGreen',
-        'group': 'gradient',
-        'domain': ["#f7fcb9", "#addd8e", "#31a354"]
-    },
-    {
-        'name': 'purpleRed',
-        'group': 'gradient',
-        'domain': ["#e7e1ef", "#c994c7", "#dd1c77"]
-    },
-    {
-        'name': 'yellowGreenBlue',
-        'group': 'gradient',
-        'domain': ["#edf8b1", "#7fcdbb", "#2c7fb8"]
-    },
-];
-function generateColorScale(scheme, type, domain) {
-    if (typeof (scheme) === 'string') {
-        scheme = exports.colorSets.find(function (cs) {
-            return cs.name === scheme;
-        });
-    }
-    var colorScale;
-    if (type === 'quantile') {
-        colorScale = d3_1.default.scaleQuantile()
-            .range(scheme.domain)
-            .domain(domain);
-    }
-    else if (type === 'ordinal') {
-        colorScale = d3_1.default.scaleOrdinal()
-            .range(scheme.domain)
-            .domain(domain);
-    }
-    else if (type === 'linear') {
-        colorScale = d3_1.default.scaleLinear()
-            .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
-            .range(scheme.domain);
-    }
-    return colorScale;
-}
-exports.generateColorScale = generateColorScale;
-function colorHelper(scheme, type, domain, customColors) {
-    var colorScale = generateColorScale(scheme, type, domain);
-    var colorScaleFunction = function (value) {
-        if (type === 'linear') {
-            var valueScale = d3_1.default.scaleLinear()
-                .domain(domain)
-                .range([0, 1]);
-            return (colorScale(valueScale(value)));
-        }
-        else {
-            var formattedValue_1 = value.toString();
-            var found = undefined;
-            if (customColors && customColors.length > 0) {
-                found = customColors.find(function (mapping) {
-                    return mapping.name === formattedValue_1.toLowerCase();
-                });
-            }
-            if (found) {
-                return found.value;
-            }
-            else {
-                return colorScale(value);
-            }
-        }
-    };
-    return colorScaleFunction;
-}
-exports.colorHelper = colorHelper;
 
 
 /***/ },
@@ -12491,6 +12518,7 @@ var chartTypes_1 = __webpack_require__(745);
 __webpack_require__(1508);
 __webpack_require__(1506);
 var d3_1 = __webpack_require__(11);
+var color_sets_1 = __webpack_require__(19);
 var App = (function () {
     function App() {
         this.theme = "light";
@@ -12512,16 +12540,21 @@ var App = (function () {
         this.curveType = 'Linear';
         this.curve = d3_1.default.shape.curveLinear;
         this.interpolationTypes = ['Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X', 'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'];
-        this.colorScheme = {
-            domain: ['#F44336', '#3F51B5', '#8BC34A', '#2196F3', '#009688', '#FF5722', '#CDDC39', '#00BCD4', '#FFC107', '#795548', '#607D8B']
-        };
         this.showLabels = true;
         this.explodeSlices = false;
         this.doughnut = false;
         this.autoScale = true;
         this.timeline = false;
-        Object.assign(this, { single: data_1.single, multi: data_1.multi, countries: data_1.countries, chartGroups: chartTypes_1.default, graph: data_1.generateGraph(50) });
+        Object.assign(this, {
+            single: data_1.single,
+            multi: data_1.multi,
+            countries: data_1.countries,
+            chartGroups: chartTypes_1.default,
+            colorSets: color_sets_1.colorSets,
+            graph: data_1.generateGraph(50)
+        });
         this.dateData = data_1.generateData(5);
+        this.setColorScheme('cool');
     }
     App.prototype.ngOnInit = function () {
         this.selectChart(this.chartType);
@@ -12655,10 +12688,14 @@ var App = (function () {
             this.curve = d3_1.default.shape.curveStepBefore;
         }
     };
+    App.prototype.setColorScheme = function (name) {
+        this.selectedColorScheme = name;
+        this.colorScheme = this.colorSets.find(function (s) { return s.name === name; });
+    };
     App = __decorate([
         core_1.Component({
             selector: 'app',
-            template: "\n    <main [class]=\"theme\">\n      <div class=\"chart-col\">\n          <bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical>\n          <bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal>\n          <bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-2d>\n          <bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-2d>\n          <bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-stacked>\n          <bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-stacked>\n          <bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-normalized>\n          <bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-normalized>\n          <pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-chart>\n          <advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </advanced-pie-chart>\n          <pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-grid>\n          <line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            class=\"chart-container\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </line-chart>\n          <force-directed-graph\n            *ngIf=\"chartType === 'force-directed-graph'\"\n            class=\"chart-container\"\n            [legend]=\"showLegend\"\n            [links]=\"graph.links\"\n            [nodes]=\"graph.nodes\"\n            [scheme]=\"colorScheme\"\n            [view]=\"view\"\n            (clickHandler)=\"clickHandler($event)\">\n          </force-directed-graph>\n          <area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart>\n          <area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-stacked>\n          <area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-normalized>\n          <heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </heat-map>\n          <tree-map\n            *ngIf=\"chartType === 'tree-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </tree-map>\n          <number-card\n            *ngIf=\"chartType === 'number-card'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </number-card>\n      </div>\n      <div class=\"sidebar\">\n        <h1>\n          ng2<strong>d3</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n        <h3>Theme</h3>\n        <select\n          [ngModel]=\"theme\"\n          (ngModelChange)=\"theme = $event\">>\n          <option [value]=\"'dark'\">Dark</option>\n          <option [value]=\"'light'\">Light</option>\n        </select>\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n\n        <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale\">{{dateData | json}}</pre>\n        <div>\n          <label>\n            <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n            Real-time\n          </label>\n        </div>\n        <h3>Options</h3>\n        <div>\n          <label><strong>Dimensions</strong></label><br />\n          <label>\n            <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n            Fit Container\n          </label> <br />\n          <div *ngIf=\"!fitContainer\">\n            <label>Width:</label><br />\n            <input type=\"number\" [(ngModel)]=\"width\"><br />\n            <label>Height:</label><br />\n            <input type=\"number\" [(ngModel)]=\"height\"><br />\n            <button (click)=\"applyDimensions()\">Apply dimensions</button>\n          </div>\n        </div>\n        <hr />\n\n        <div *ngIf=\"chart.options.includes('showXAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n            Show X Axis\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showYAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n            Show Y Axis\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showGridLines')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n            Show Grid Lines\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('gradient')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n            Use Gradients\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showLegend')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n            Show Legend\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n            Show X Axis Label\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n          <label>X Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n            Show Y Axis Label\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n          <label>Y Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showLabels')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n            Show Labels\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('explodeSlices')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n            Explode Slices\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('doughnut')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n            Doughnut\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('autoScale')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n            Auto Scale\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('timeline')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n            Timeline\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('curve')\">\n          <label>Line Interpolation</label>\n          <select\n            [ngModel]=\"curveType\"\n            (ngModelChange)=\"setInterpolationType($event)\">\n            <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">{{interpolationType}}</option>\n          </select>\n        </div>\n\n      </div>\n    </main>\n  "
+            template: "\n    <main [class]=\"theme\">\n      <div class=\"chart-col\">\n          <bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical>\n          <bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal>\n          <bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-2d>\n          <bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-2d>\n          <bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-stacked>\n          <bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-stacked>\n          <bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-vertical-normalized>\n          <bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (clickHandler)=\"clickHandler($event)\">\n          </bar-horizontal-normalized>\n          <pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-chart>\n          <advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"clickHandler($event)\">\n          </advanced-pie-chart>\n          <pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </pie-grid>\n          <line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            class=\"chart-container\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </line-chart>\n          <force-directed-graph\n            *ngIf=\"chartType === 'force-directed-graph'\"\n            class=\"chart-container\"\n            [legend]=\"showLegend\"\n            [links]=\"graph.links\"\n            [nodes]=\"graph.nodes\"\n            [scheme]=\"colorScheme\"\n            [view]=\"view\"\n            (clickHandler)=\"clickHandler($event)\">\n          </force-directed-graph>\n          <area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart>\n          <area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-stacked>\n          <area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (clickHandler)=\"clickHandler($event)\">\n          </area-chart-normalized>\n          <heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (clickHandler)=\"clickHandler($event)\">\n          </heat-map>\n          <tree-map\n            *ngIf=\"chartType === 'tree-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </tree-map>\n          <number-card\n            *ngIf=\"chartType === 'number-card'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (clickHandler)=\"clickHandler($event)\">\n          </number-card>\n      </div>\n      <div class=\"sidebar\">\n        <h1>\n          ng2<strong>d3</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n        <h3>Theme</h3>\n        <select\n          [ngModel]=\"theme\"\n          (ngModelChange)=\"theme = $event\">>\n          <option [value]=\"'dark'\">Dark</option>\n          <option [value]=\"'light'\">Light</option>\n        </select>\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n\n        <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n        <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale\">{{dateData | json}}</pre>\n        <div>\n          <label>\n            <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n            Real-time\n          </label>\n        </div>\n        <h3>Options</h3>\n        <div>\n          <label><strong>Dimensions</strong></label><br />\n          <label>\n            <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n            Fit Container\n          </label> <br />\n          <div *ngIf=\"!fitContainer\">\n            <label>Width:</label><br />\n            <input type=\"number\" [(ngModel)]=\"width\"><br />\n            <label>Height:</label><br />\n            <input type=\"number\" [(ngModel)]=\"height\"><br />\n            <button (click)=\"applyDimensions()\">Apply dimensions</button>\n          </div>\n        </div>\n        <hr />\n        <label>Color Scheme</label>\n        <select\n          [ngModel]=\"selectedColorScheme\"\n          (ngModelChange)=\"setColorScheme($event)\">\n          <option *ngFor=\"let scheme of colorSets\" [value]=\"scheme.name\">{{scheme.name}}</option>\n        </select>\n\n        <div *ngIf=\"chart.options.includes('showXAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n            Show X Axis\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showYAxis')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n            Show Y Axis\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showGridLines')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n            Show Grid Lines\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('gradient')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n            Use Gradients\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showLegend')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n            Show Legend\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n            Show X Axis Label\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n          <label>X Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n            Show Y Axis Label\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n          <label>Y Axis Label:</label><br />\n          <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n        </div>\n        <div *ngIf=\"chart.options.includes('showLabels')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n            Show Labels\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('explodeSlices')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n            Explode Slices\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('doughnut')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n            Doughnut\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('autoScale')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n            Auto Scale\n          </label> <br />\n        </div>\n        <div *ngIf=\"chart.options.includes('timeline')\">\n          <label>\n            <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n            Timeline\n          </label> <br />\n        </div>\n\n        <div *ngIf=\"chart.options.includes('curve')\">\n          <label>Line Interpolation</label>\n          <select\n            [ngModel]=\"curveType\"\n            (ngModelChange)=\"setInterpolationType($event)\">\n            <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">{{interpolationType}}</option>\n          </select>\n        </div>\n\n      </div>\n    </main>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], App);
@@ -13416,9 +13453,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var d3_1 = __webpack_require__(11);
 var moment = __webpack_require__(3);
 var id_1 = __webpack_require__(73);
@@ -13753,9 +13790,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var moment = __webpack_require__(3);
 var id_1 = __webpack_require__(73);
 var d3_1 = __webpack_require__(11);
@@ -14094,9 +14131,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var moment = __webpack_require__(3);
 var id_1 = __webpack_require__(73);
 var d3_1 = __webpack_require__(11);
@@ -14511,9 +14548,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var d3_1 = __webpack_require__(11);
 var BarHorizontal2D = (function (_super) {
     __extends(BarHorizontal2D, _super);
@@ -14741,9 +14778,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var d3_1 = __webpack_require__(11);
 var BarHorizontalNormalized = (function (_super) {
     __extends(BarHorizontalNormalized, _super);
@@ -14950,9 +14987,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var d3_1 = __webpack_require__(11);
 var BarHorizontalStacked = (function (_super) {
     __extends(BarHorizontalStacked, _super);
@@ -15171,9 +15208,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var tick_format_helper_1 = __webpack_require__(419);
 var d3_1 = __webpack_require__(11);
 var BarHorizontal = (function (_super) {
@@ -15352,9 +15389,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var d3_1 = __webpack_require__(11);
 var BarVertical2D = (function (_super) {
     __extends(BarVertical2D, _super);
@@ -15587,9 +15624,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var d3_1 = __webpack_require__(11);
 var BarVerticalNormalized = (function (_super) {
     __extends(BarVerticalNormalized, _super);
@@ -15796,9 +15833,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var d3_1 = __webpack_require__(11);
 var BarVerticalStacked = (function (_super) {
     __extends(BarVerticalStacked, _super);
@@ -16017,9 +16054,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var tick_format_helper_1 = __webpack_require__(419);
 var d3_1 = __webpack_require__(11);
 var BarVertical = (function (_super) {
@@ -18231,10 +18268,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var chart_component_1 = __webpack_require__(417);
-var base_chart_component_1 = __webpack_require__(20);
-var view_dimensions_helper_1 = __webpack_require__(21);
+var base_chart_component_1 = __webpack_require__(21);
+var view_dimensions_helper_1 = __webpack_require__(22);
 var d3_1 = __webpack_require__(11);
-var color_sets_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
 var core_1 = __webpack_require__(1);
 var ForceDirectedGraph = (function (_super) {
     __extends(ForceDirectedGraph, _super);
@@ -18599,9 +18636,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(1);
 var d3_1 = __webpack_require__(11);
-var base_chart_component_1 = __webpack_require__(20);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
+var base_chart_component_1 = __webpack_require__(21);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
 var HeatMap = (function (_super) {
     __extends(HeatMap, _super);
     function HeatMap(element, zone) {
@@ -18814,9 +18851,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var id_1 = __webpack_require__(73);
 var d3_1 = __webpack_require__(11);
 var moment = __webpack_require__(3);
@@ -19429,9 +19466,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var base_chart_component_1 = __webpack_require__(20);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
+var base_chart_component_1 = __webpack_require__(21);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
 var grid_layout_helper_1 = __webpack_require__(418);
 var NumberCard = (function (_super) {
     __extends(NumberCard, _super);
@@ -19528,9 +19565,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var trim_label_helper_1 = __webpack_require__(112);
 var AdvancedPieChart = (function (_super) {
     __extends(AdvancedPieChart, _super);
@@ -19824,9 +19861,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var PieChart = (function (_super) {
     __extends(PieChart, _super);
     function PieChart(element, zone) {
@@ -20063,9 +20100,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(1);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
-var base_chart_component_1 = __webpack_require__(20);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
+var base_chart_component_1 = __webpack_require__(21);
 var trim_label_helper_1 = __webpack_require__(112);
 var grid_layout_helper_1 = __webpack_require__(418);
 var d3_1 = __webpack_require__(11);
@@ -20629,9 +20666,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(1);
 var d3_1 = __webpack_require__(11);
-var base_chart_component_1 = __webpack_require__(20);
-var view_dimensions_helper_1 = __webpack_require__(21);
-var color_sets_1 = __webpack_require__(22);
+var base_chart_component_1 = __webpack_require__(21);
+var view_dimensions_helper_1 = __webpack_require__(22);
+var color_sets_1 = __webpack_require__(19);
 var TreeMap = (function (_super) {
     __extends(TreeMap, _super);
     function TreeMap(element, zone) {
