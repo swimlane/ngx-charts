@@ -12,7 +12,9 @@ import {
       [width]="gridPanel.width"
       [x]="gridPanel.x"
       [y]="gridPanel.y"
-      [fill]="gridPanel.color">
+      [class.grid-panel]="true"
+      [class.odd]="gridPanel.class === 'odd'"
+      [class.even]="gridPanel.class === 'even'">
     </svg:g>
   `
 })
@@ -35,15 +37,15 @@ export class GridPanelSeries implements OnChanges {
 
   getGridPanels() {
     return this.data.map((d, i) => {
-      let color = 'rgba(255,255,255,0.02)';
-      let offset, width, height, x, y;
+      let offset, width, height, x, y, className;
+      className = 'odd';
 
       if (this.orient === 'vertical') {
         let position: number = this.xScale(d.name);
         let positionIndex = Number.parseInt((position / this.xScale.step()).toString());
 
         if (positionIndex % 2 === 1) {
-          color = 'rgba(255,255,255,0)';
+          className = 'even';
         }
         offset = this.xScale.bandwidth() * this.xScale.paddingInner();
         width = this.xScale.bandwidth() + offset;
@@ -54,9 +56,8 @@ export class GridPanelSeries implements OnChanges {
         let position = this.yScale(d.name);
         let positionIndex = Number.parseInt((position / this.yScale.step()).toString());
 
-        console.log('position', positionIndex);
         if (positionIndex % 2 === 1) {
-          color = 'rgba(255,255,255,0)';
+          className = 'even';
         }
         offset = this.yScale.bandwidth() * this.yScale.paddingInner();
 
@@ -68,7 +69,7 @@ export class GridPanelSeries implements OnChanges {
 
       return {
         name: d.name,
-        color: color,
+        class: className,
         height: height,
         width: width,
         x: x,

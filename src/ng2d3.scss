@@ -43,6 +43,18 @@
   fill: none;
 }
 
+.grid-panel {
+  rect {
+    fill: none;
+  }
+
+  &.odd {
+    rect {
+      fill: rgba(0,0,0,0.05);
+    }
+  }
+}
+
 .a2d3-container {
   height: 100%;
 
