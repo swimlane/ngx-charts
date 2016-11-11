@@ -18,6 +18,7 @@
 * autoScale
 * timeline
 * gradient
+* curve 
 
 # Outputs
 * clickHandler
