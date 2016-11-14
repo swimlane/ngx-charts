@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0
+- Added gauge chart
+- Fixed source map file name
+- Fixed bug where grid panels in grouped bar chart would have the wrong size and position
+
 ## 1.5.2
 - Added fade in animation to charts
 - Excluded d3 from the release bundle

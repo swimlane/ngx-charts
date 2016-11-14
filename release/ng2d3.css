@@ -96,6 +96,12 @@
   stroke-width: 1;
   fill: none; }
 
+.grid-panel rect {
+  fill: none; }
+
+.grid-panel.odd rect {
+  fill: rgba(0, 0, 0, 0.05); }
+
 .a2d3-container {
   height: 100%; }
   .a2d3-container .status-message {
@@ -246,3 +252,29 @@
 
 .pie-grid .arc1 {
   opacity: 0.4; }
+
+.force-directed-graph .edge {
+  stroke: #333; }
+
+.gauge .background-arc path {
+  fill: rgba(0, 0, 0, 0.05); }
+
+.gauge .gauge-tick path {
+  stroke: #999; }
+
+.gauge .gauge-tick text {
+  font-size: 12px;
+  fill: #999;
+  font-weight: bold; }
+
+.gauge .gauge-tick.highlighted path {
+  stroke: #666; }
+
+.gauge .gauge-tick.highlighted text {
+  fill: #666; }
+
+.gauge .gauge-tick-large path {
+  stroke-width: 2px; }
+
+.gauge .gauge-tick-small path {
+  stroke-width: 1px; }

@@ -8,14 +8,15 @@ export declare class PieArc implements OnChanges {
     gradientFill: string;
     initialized: boolean;
     fill: any;
-    startAngle: any;
-    endAngle: any;
+    startAngle: number;
+    endAngle: number;
     innerRadius: any;
     outerRadius: any;
+    cornerRadius: number;
     value: any;
     max: any;
     data: any;
-    explodeSlices: any;
+    explodeSlices: boolean;
     gradient: boolean;
     animate: boolean;
     pointerEvents: boolean;

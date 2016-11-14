@@ -7,5 +7,6 @@ export * from "./line-chart/line-chart.module";
 export * from "./number-card/number-card.module";
 export * from "./pie-chart/pie-chart.module";
 export * from "./tree-map/tree-map.module";
+export * from "./gauge/gauge.module";
 export declare class NG2D3Module {
 }

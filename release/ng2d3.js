@@ -1,5 +1,5 @@
 /**
- * ng2d3 v"1.5.2" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.6.0" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -12,7 +12,7 @@
 		exports["ng2d3"] = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs"));
 	else
 		root["ng2d3"] = factory(root["@angular/common"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["d3-force"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_23__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_93__, __WEBPACK_EXTERNAL_MODULE_94__, __WEBPACK_EXTERNAL_MODULE_95__, __WEBPACK_EXTERNAL_MODULE_96__, __WEBPACK_EXTERNAL_MODULE_97__, __WEBPACK_EXTERNAL_MODULE_98__, __WEBPACK_EXTERNAL_MODULE_99__, __WEBPACK_EXTERNAL_MODULE_100__, __WEBPACK_EXTERNAL_MODULE_101__, __WEBPACK_EXTERNAL_MODULE_102__, __WEBPACK_EXTERNAL_MODULE_103__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_104__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_24__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_95__, __WEBPACK_EXTERNAL_MODULE_96__, __WEBPACK_EXTERNAL_MODULE_97__, __WEBPACK_EXTERNAL_MODULE_98__, __WEBPACK_EXTERNAL_MODULE_99__, __WEBPACK_EXTERNAL_MODULE_100__, __WEBPACK_EXTERNAL_MODULE_101__, __WEBPACK_EXTERNAL_MODULE_102__, __WEBPACK_EXTERNAL_MODULE_103__, __WEBPACK_EXTERNAL_MODULE_104__, __WEBPACK_EXTERNAL_MODULE_105__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_106__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -76,7 +76,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 105);
+/******/ 	return __webpack_require__(__webpack_require__.s = 107);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,16 +91,16 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
 "use strict";
 "use strict";
-var array = __webpack_require__(94);
-var brush = __webpack_require__(95);
-var color = __webpack_require__(96);
-var force = __webpack_require__(97);
-var format = __webpack_require__(98);
-var interpolate = __webpack_require__(100);
-var scales = __webpack_require__(101);
-var selection = __webpack_require__(102);
-var shape = __webpack_require__(103);
-var hierarchy = __webpack_require__(99);
+var array = __webpack_require__(96);
+var brush = __webpack_require__(97);
+var color = __webpack_require__(98);
+var force = __webpack_require__(99);
+var format = __webpack_require__(100);
+var interpolate = __webpack_require__(102);
+var scales = __webpack_require__(103);
+var selection = __webpack_require__(104);
+var shape = __webpack_require__(105);
+var hierarchy = __webpack_require__(101);
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     arc: shape.arc,
@@ -146,7 +146,7 @@ exports.default = {
 
 "use strict";
 "use strict";
-var rxjs_1 = __webpack_require__(104);
+var rxjs_1 = __webpack_require__(106);
 var BaseChart = (function () {
     function BaseChart(chartElement, zone) {
         this.chartElement = chartElement;
@@ -162,7 +162,9 @@ var BaseChart = (function () {
         }
     };
     BaseChart.prototype.update = function () {
-        this.results = this.cloneData(this.results);
+        if (this.results) {
+            this.results = this.cloneData(this.results);
+        }
         if (this.view) {
             this.width = this.view[0];
             this.height = this.view[1];
@@ -274,68 +276,95 @@ exports.calculateViewDimensions = calculateViewDimensions;
 var d3_1 = __webpack_require__(1);
 exports.colorSets = [
     {
+        'name': 'vivid',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#647c8a', '#3f51b5', '#2196f3', '#00b862', '#afdf0a', '#a7b61a', '#f3e562', '#ff9800', '#ff5722', '#ff4514']
+    },
+    {
+        'name': 'natural',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#bf9d76', '#e99450', '#d89f59', '#f2dfa7', '#a5d7c6', '#7794b1', '#afafaf', '#707160', '#ba9383', '#d9d5c3']
+    },
+    {
+        'name': 'cool',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
+    },
+    {
+        'name': 'fire',
+        'selectable': true,
+        'group': 'Ordinal',
+        'domain': ['#ff3d00', '#bf360c', '#ff8f00', '#ff6f00', '#ff5722', '#e65100', '#ffca28', '#ffab00']
+    },
+    {
+        'name': 'solar',
+        'selectable': true,
+        'group': 'Continuous',
+        'domain': ['#fff8e1', '#ffecb3', '#ffe082', '#ffd54f', '#ffca28', '#ffc107', '#ffb300', '#ffa000', '#ff8f00', '#ff6f00']
+    },
+    {
+        'name': 'air',
+        'selectable': true,
+        'group': 'Continuous',
+        'domain': ['#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4', '#039be5', '#0288d1', '#0277bd', '#01579b']
+    },
+    {
+        'name': 'aqua',
+        'selectable': true,
+        'group': 'Continuous',
+        'domain': ['#e0f7fa', '#b2ebf2', '#80deea', '#4dd0e1', '#26c6da', '#00bcd4', '#00acc1', '#0097a7', '#00838f', '#006064']
+    },
+    {
         'name': 'flame',
-        'base': '#590012',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ['#A10A28', '#D3342D', '#EF6D49', '#FAAD67', '#FDDE90', '#DBED91', '#A9D770', '#6CBA67', '#2C9653', '#146738']
     },
     {
         'name': 'ocean',
-        'base': '#0340B9',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ['#1D68FB', '#33C0FC', '#4AFFFE', '#AFFFFF', '#FFFC63', '#FDBD2D', '#FC8A25', '#FA4F1E', '#FA141B', '#BA38D1']
     },
     {
         'name': 'forest',
-        'base': '#258203',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ['#55C22D', '#C1F33D', '#3CC099', '#AFFFFF', '#8CFC9D', '#76CFFA', '#BA60FB', '#EE6490', '#C42A1C', '#FC9F32']
     },
     {
         'name': 'horizon',
-        'base': '#026CCB',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ['#2597FB', '#65EBFD', '#99FDD0', '#FCEE4B', '#FEFCFA', '#FDD6E3', '#FCB1A8', '#EF6F7B', '#CB96E8', '#EFDEE0']
     },
     {
         'name': 'neons',
-        'base': '#B20000',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ['#FF3333', '#FF33FF', '#CC33FF', '#0000FF', '#33CCFF', '#33FFFF', '#33FF66', '#CCFF33', '#FFCC00', '#FF6600']
     },
     {
         'name': 'picnic',
-        'base': '#A37C00',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ['#FAC51D', '#66BD6D', '#FAA026', '#29BB9C', '#E96B56', '#55ACD2', '#B7332F', '#2C83C9', '#9166B8', '#92E7E8']
     },
     {
         'name': 'night',
-        'base': '#48025F',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ["#2B1B5A", "#501356", "#183356", "#28203F", "#391B3C", "#1E2B3C", "#120634", "#2D0432", "#051932", "#453080", "#75267D", "#2C507D", "#4B3880", "#752F7D", "#35547D"]
     },
     {
         'name': 'nightLights',
-        'base': '#4e31a5',
-        'group': 'general',
+        'selectable': false,
+        'group': 'Ordinal',
         'domain': ["#4e31a5", "#9c25a7", "#3065ab", "#57468b", "#904497", "#46648b", "#32118d", "#a00fb3", "#1052a2", "#6e51bd", "#b63cc3", "#6c97cb", "#8671c1", "#b455be", "#7496c3"]
-    },
-    {
-        'name': 'yellowGreen',
-        'group': 'gradient',
-        'domain': ["#f7fcb9", "#addd8e", "#31a354"]
-    },
-    {
-        'name': 'purpleRed',
-        'group': 'gradient',
-        'domain': ["#e7e1ef", "#c994c7", "#dd1c77"]
-    },
-    {
-        'name': 'yellowGreenBlue',
-        'group': 'gradient',
-        'domain': ["#edf8b1", "#7fcdbb", "#2c7fb8"]
-    },
+    }
 ];
 function generateColorScale(scheme, type, domain) {
     if (typeof (scheme) === 'string') {
@@ -411,34 +440,34 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 var core_1 = __webpack_require__(0);
-var chart_component_1 = __webpack_require__(27);
+var chart_component_1 = __webpack_require__(28);
 exports.Chart = chart_component_1.Chart;
-var legend_component_1 = __webpack_require__(59);
+var legend_component_1 = __webpack_require__(60);
 exports.Legend = legend_component_1.Legend;
-var scale_legend_component_1 = __webpack_require__(60);
+var scale_legend_component_1 = __webpack_require__(61);
 exports.ScaleLegend = scale_legend_component_1.ScaleLegend;
-var axes_module_1 = __webpack_require__(51);
-var tooltip_1 = __webpack_require__(30);
-var circle_series_component_1 = __webpack_require__(55);
+var axes_module_1 = __webpack_require__(52);
+var tooltip_1 = __webpack_require__(31);
+var circle_series_component_1 = __webpack_require__(56);
 exports.CircleSeries = circle_series_component_1.CircleSeries;
-var circle_component_1 = __webpack_require__(56);
+var circle_component_1 = __webpack_require__(57);
 exports.Circle = circle_component_1.Circle;
-var grid_panel_component_1 = __webpack_require__(58);
+var grid_panel_component_1 = __webpack_require__(59);
 exports.GridPanel = grid_panel_component_1.GridPanel;
-var grid_panel_series_component_1 = __webpack_require__(57);
+var grid_panel_series_component_1 = __webpack_require__(58);
 exports.GridPanelSeries = grid_panel_series_component_1.GridPanelSeries;
-var svg_linear_gradient_component_1 = __webpack_require__(61);
+var svg_linear_gradient_component_1 = __webpack_require__(62);
 exports.SvgLinearGradient = svg_linear_gradient_component_1.SvgLinearGradient;
-var svg_radial_gradient_component_1 = __webpack_require__(62);
+var svg_radial_gradient_component_1 = __webpack_require__(63);
 exports.SvgRadialGradient = svg_radial_gradient_component_1.SvgRadialGradient;
-var timeline_component_1 = __webpack_require__(63);
+var timeline_component_1 = __webpack_require__(64);
 exports.Timeline = timeline_component_1.Timeline;
-var common_1 = __webpack_require__(23);
-var area_component_1 = __webpack_require__(50);
+var common_1 = __webpack_require__(24);
+var area_component_1 = __webpack_require__(51);
 exports.Area = area_component_1.Area;
-var area_tooltip_component_1 = __webpack_require__(49);
+var area_tooltip_component_1 = __webpack_require__(50);
 exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
-__export(__webpack_require__(30));
+__export(__webpack_require__(31));
 var COMPONENTS = [
     area_component_1.Area,
     area_tooltip_component_1.AreaTooltip,
@@ -544,13 +573,76 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var area_chart_component_1 = __webpack_require__(36);
+var common_module_1 = __webpack_require__(5);
+var advanced_pie_chart_component_1 = __webpack_require__(79);
+exports.AdvancedPieChart = advanced_pie_chart_component_1.AdvancedPieChart;
+var pie_label_component_1 = __webpack_require__(84);
+exports.PieLabel = pie_label_component_1.PieLabel;
+var pie_arc_component_1 = __webpack_require__(80);
+exports.PieArc = pie_arc_component_1.PieArc;
+var pie_chart_component_1 = __webpack_require__(81);
+exports.PieChart = pie_chart_component_1.PieChart;
+var pie_grid_component_1 = __webpack_require__(83);
+exports.PieGrid = pie_grid_component_1.PieGrid;
+var pie_grid_series_component_1 = __webpack_require__(82);
+exports.PieGridSeries = pie_grid_series_component_1.PieGridSeries;
+var pie_series_component_1 = __webpack_require__(85);
+exports.PieSeries = pie_series_component_1.PieSeries;
+var PieChartModule = (function () {
+    function PieChartModule() {
+    }
+    PieChartModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule],
+            declarations: [
+                advanced_pie_chart_component_1.AdvancedPieChart,
+                pie_label_component_1.PieLabel,
+                pie_arc_component_1.PieArc,
+                pie_chart_component_1.PieChart,
+                pie_grid_component_1.PieGrid,
+                pie_grid_series_component_1.PieGridSeries,
+                pie_series_component_1.PieSeries
+            ],
+            exports: [
+                advanced_pie_chart_component_1.AdvancedPieChart,
+                pie_label_component_1.PieLabel,
+                pie_arc_component_1.PieArc,
+                pie_chart_component_1.PieChart,
+                pie_grid_component_1.PieGrid,
+                pie_grid_series_component_1.PieGridSeries,
+                pie_series_component_1.PieSeries
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], PieChartModule);
+    return PieChartModule;
+}());
+exports.PieChartModule = PieChartModule;
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var area_chart_component_1 = __webpack_require__(37);
 exports.AreaChart = area_chart_component_1.AreaChart;
-var area_chart_normalized_component_1 = __webpack_require__(34);
+var area_chart_normalized_component_1 = __webpack_require__(35);
 exports.AreaChartNormalized = area_chart_normalized_component_1.AreaChartNormalized;
-var area_chart_stacked_component_1 = __webpack_require__(35);
+var area_chart_stacked_component_1 = __webpack_require__(36);
 exports.AreaChartStacked = area_chart_stacked_component_1.AreaChartStacked;
-var area_series_component_1 = __webpack_require__(37);
+var area_series_component_1 = __webpack_require__(38);
 exports.AreaSeries = area_series_component_1.AreaSeries;
 var common_module_1 = __webpack_require__(5);
 var AreaChartModule = (function () {
@@ -580,7 +672,7 @@ exports.AreaChartModule = AreaChartModule;
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -596,27 +688,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(5);
-var bar_component_1 = __webpack_require__(46);
+var bar_component_1 = __webpack_require__(47);
 exports.Bar = bar_component_1.Bar;
-var bar_horizontal_component_1 = __webpack_require__(41);
+var bar_horizontal_component_1 = __webpack_require__(42);
 exports.BarHorizontal = bar_horizontal_component_1.BarHorizontal;
-var bar_horizontal_2d_component_1 = __webpack_require__(38);
+var bar_horizontal_2d_component_1 = __webpack_require__(39);
 exports.BarHorizontal2D = bar_horizontal_2d_component_1.BarHorizontal2D;
-var bar_horizontal_normalized_component_1 = __webpack_require__(39);
+var bar_horizontal_normalized_component_1 = __webpack_require__(40);
 exports.BarHorizontalNormalized = bar_horizontal_normalized_component_1.BarHorizontalNormalized;
-var bar_horizontal_stacked_component_1 = __webpack_require__(40);
+var bar_horizontal_stacked_component_1 = __webpack_require__(41);
 exports.BarHorizontalStacked = bar_horizontal_stacked_component_1.BarHorizontalStacked;
-var bar_vertical_component_1 = __webpack_require__(45);
+var bar_vertical_component_1 = __webpack_require__(46);
 exports.BarVertical = bar_vertical_component_1.BarVertical;
-var bar_vertical_2d_component_1 = __webpack_require__(42);
+var bar_vertical_2d_component_1 = __webpack_require__(43);
 exports.BarVertical2D = bar_vertical_2d_component_1.BarVertical2D;
-var bar_vertical_normalized_component_1 = __webpack_require__(43);
+var bar_vertical_normalized_component_1 = __webpack_require__(44);
 exports.BarVerticalNormalized = bar_vertical_normalized_component_1.BarVerticalNormalized;
-var bar_vertical_stacked_component_1 = __webpack_require__(44);
+var bar_vertical_stacked_component_1 = __webpack_require__(45);
 exports.BarVerticalStacked = bar_vertical_stacked_component_1.BarVerticalStacked;
-var series_horizontal_component_1 = __webpack_require__(47);
+var series_horizontal_component_1 = __webpack_require__(48);
 exports.SeriesHorizontal = series_horizontal_component_1.SeriesHorizontal;
-var series_vertical_component_1 = __webpack_require__(48);
+var series_vertical_component_1 = __webpack_require__(49);
 exports.SeriesVertical = series_vertical_component_1.SeriesVertical;
 var BarChartModule = (function () {
     function BarChartModule() {
@@ -659,7 +751,7 @@ exports.BarChartModule = BarChartModule;
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -674,7 +766,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var force_directed_graph_component_1 = __webpack_require__(67);
+var force_directed_graph_component_1 = __webpack_require__(68);
 exports.ForceDirectedGraph = force_directed_graph_component_1.ForceDirectedGraph;
 var common_module_1 = __webpack_require__(5);
 var ForceDirectedGraphModule = (function () {
@@ -698,7 +790,7 @@ exports.ForceDirectedGraphModule = ForceDirectedGraphModule;
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -714,11 +806,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(5);
-var heat_map_cell_component_1 = __webpack_require__(69);
+var gauge_component_1 = __webpack_require__(69);
+exports.Gauge = gauge_component_1.Gauge;
+var pie_chart_module_1 = __webpack_require__(9);
+var GaugeModule = (function () {
+    function GaugeModule() {
+    }
+    GaugeModule = __decorate([
+        core_1.NgModule({
+            imports: [common_module_1.CommonModule, pie_chart_module_1.PieChartModule],
+            declarations: [
+                gauge_component_1.Gauge
+            ],
+            exports: [
+                gauge_component_1.Gauge
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], GaugeModule);
+    return GaugeModule;
+}());
+exports.GaugeModule = GaugeModule;
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var common_module_1 = __webpack_require__(5);
+var heat_map_cell_component_1 = __webpack_require__(71);
 exports.HeatMapCell = heat_map_cell_component_1.HeatMapCell;
-var heat_map_cell_series_component_1 = __webpack_require__(68);
+var heat_map_cell_series_component_1 = __webpack_require__(70);
 exports.HeatCellSeries = heat_map_cell_series_component_1.HeatCellSeries;
-var heat_map_component_1 = __webpack_require__(70);
+var heat_map_component_1 = __webpack_require__(72);
 exports.HeatMap = heat_map_component_1.HeatMap;
 var HeatMapModule = (function () {
     function HeatMapModule() {
@@ -745,7 +877,7 @@ exports.HeatMapModule = HeatMapModule;
 
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -761,11 +893,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(5);
-var line_component_1 = __webpack_require__(73);
+var line_component_1 = __webpack_require__(75);
 exports.Line = line_component_1.Line;
-var line_chart_component_1 = __webpack_require__(71);
+var line_chart_component_1 = __webpack_require__(73);
 exports.LineChart = line_chart_component_1.LineChart;
-var line_series_component_1 = __webpack_require__(72);
+var line_series_component_1 = __webpack_require__(74);
 exports.LineSeries = line_series_component_1.LineSeries;
 var LineChartModule = (function () {
     function LineChartModule() {
@@ -792,7 +924,7 @@ exports.LineChartModule = LineChartModule;
 
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -808,11 +940,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(5);
-var card_component_1 = __webpack_require__(75);
+var card_component_1 = __webpack_require__(77);
 exports.Card = card_component_1.Card;
-var card_series_component_1 = __webpack_require__(74);
+var card_series_component_1 = __webpack_require__(76);
 exports.CardSeries = card_series_component_1.CardSeries;
-var number_card_component_1 = __webpack_require__(76);
+var number_card_component_1 = __webpack_require__(78);
 exports.NumberCard = number_card_component_1.NumberCard;
 var NumberCardModule = (function () {
     function NumberCardModule() {
@@ -839,7 +971,7 @@ exports.NumberCardModule = NumberCardModule;
 
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,74 +987,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(5);
-var advanced_pie_chart_component_1 = __webpack_require__(77);
-exports.AdvancedPieChart = advanced_pie_chart_component_1.AdvancedPieChart;
-var pie_label_component_1 = __webpack_require__(82);
-exports.PieLabel = pie_label_component_1.PieLabel;
-var pie_arc_component_1 = __webpack_require__(78);
-exports.PieArc = pie_arc_component_1.PieArc;
-var pie_chart_component_1 = __webpack_require__(79);
-exports.PieChart = pie_chart_component_1.PieChart;
-var pie_grid_component_1 = __webpack_require__(81);
-exports.PieGrid = pie_grid_component_1.PieGrid;
-var pie_grid_series_component_1 = __webpack_require__(80);
-exports.PieGridSeries = pie_grid_series_component_1.PieGridSeries;
-var pie_series_component_1 = __webpack_require__(83);
-exports.PieSeries = pie_series_component_1.PieSeries;
-var PieChartModule = (function () {
-    function PieChartModule() {
-    }
-    PieChartModule = __decorate([
-        core_1.NgModule({
-            imports: [common_module_1.CommonModule],
-            declarations: [
-                advanced_pie_chart_component_1.AdvancedPieChart,
-                pie_label_component_1.PieLabel,
-                pie_arc_component_1.PieArc,
-                pie_chart_component_1.PieChart,
-                pie_grid_component_1.PieGrid,
-                pie_grid_series_component_1.PieGridSeries,
-                pie_series_component_1.PieSeries
-            ],
-            exports: [
-                advanced_pie_chart_component_1.AdvancedPieChart,
-                pie_label_component_1.PieLabel,
-                pie_arc_component_1.PieArc,
-                pie_chart_component_1.PieChart,
-                pie_grid_component_1.PieGrid,
-                pie_grid_series_component_1.PieGridSeries,
-                pie_series_component_1.PieSeries
-            ]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], PieChartModule);
-    return PieChartModule;
-}());
-exports.PieChartModule = PieChartModule;
-
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__(5);
-var tree_map_cell_component_1 = __webpack_require__(85);
+var tree_map_cell_component_1 = __webpack_require__(87);
 exports.TreeMapCell = tree_map_cell_component_1.TreeMapCell;
-var tree_map_cell_series_component_1 = __webpack_require__(84);
+var tree_map_cell_series_component_1 = __webpack_require__(86);
 exports.TreeMapCellSeries = tree_map_cell_series_component_1.TreeMapCellSeries;
-var tree_map_component_1 = __webpack_require__(86);
+var tree_map_component_1 = __webpack_require__(88);
 exports.TreeMap = tree_map_component_1.TreeMap;
 var TreeMapModule = (function () {
     function TreeMapModule() {
@@ -949,7 +1018,7 @@ exports.TreeMapModule = TreeMapModule;
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -963,7 +1032,7 @@ var AlignmentTypes = exports.AlignmentTypes;
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -978,7 +1047,7 @@ var PlacementTypes = exports.PlacementTypes;
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -991,7 +1060,7 @@ var StyleTypes = exports.StyleTypes;
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1006,11 +1075,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var throttle_1 = __webpack_require__(88);
-var position_helper_1 = __webpack_require__(64);
-var placement_type_1 = __webpack_require__(18);
-var style_type_1 = __webpack_require__(19);
-var alignment_type_1 = __webpack_require__(17);
+var throttle_1 = __webpack_require__(90);
+var position_helper_1 = __webpack_require__(65);
+var placement_type_1 = __webpack_require__(19);
+var style_type_1 = __webpack_require__(20);
+var alignment_type_1 = __webpack_require__(18);
 var TooltipContentComponent = (function () {
     function TooltipContentComponent(element, renderer) {
         this.element = element;
@@ -1190,7 +1259,7 @@ exports.TooltipContentComponent = TooltipContentComponent;
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1210,7 +1279,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var registry_service_1 = __webpack_require__(87);
+var registry_service_1 = __webpack_require__(89);
 var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
     function TooltipService() {
@@ -1226,7 +1295,7 @@ exports.TooltipService = TooltipService;
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1288,13 +1357,13 @@ exports.InjectionService = InjectionService;
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_23__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_24__;
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1316,7 +1385,7 @@ exports.reduceTicks = reduceTicks;
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1332,7 +1401,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(8);
-var ticks_helper_1 = __webpack_require__(24);
+var ticks_helper_1 = __webpack_require__(25);
 var XAxisTicks = (function () {
     function XAxisTicks() {
         this.tickArguments = [5];
@@ -1504,7 +1573,7 @@ exports.XAxisTicks = XAxisTicks;
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1520,7 +1589,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(8);
-var ticks_helper_1 = __webpack_require__(24);
+var ticks_helper_1 = __webpack_require__(25);
 var YAxisTicks = (function () {
     function YAxisTicks() {
         this.tickArguments = [5];
@@ -1708,7 +1777,7 @@ exports.YAxisTicks = YAxisTicks;
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1723,7 +1792,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var injection_service_1 = __webpack_require__(22);
+var injection_service_1 = __webpack_require__(23);
 var Chart = (function () {
     function Chart(vcr, injectionService) {
         this.vcr = vcr;
@@ -1804,7 +1873,7 @@ exports.Chart = Chart;
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1864,7 +1933,7 @@ function getTotal(results) {
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1885,7 +1954,7 @@ exports.tickFormat = tickFormat;
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1893,18 +1962,18 @@ exports.tickFormat = tickFormat;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__(66));
+__export(__webpack_require__(67));
+__export(__webpack_require__(22));
 __export(__webpack_require__(21));
+__export(__webpack_require__(33));
 __export(__webpack_require__(20));
-__export(__webpack_require__(32));
 __export(__webpack_require__(19));
 __export(__webpack_require__(18));
-__export(__webpack_require__(17));
-__export(__webpack_require__(31));
+__export(__webpack_require__(32));
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1918,7 +1987,7 @@ var ShowTypes = exports.ShowTypes;
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1933,16 +2002,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var injection_service_1 = __webpack_require__(22);
+var injection_service_1 = __webpack_require__(23);
 var id_1 = __webpack_require__(6);
-var placement_type_1 = __webpack_require__(18);
-var style_type_1 = __webpack_require__(19);
-var alignment_type_1 = __webpack_require__(17);
-var show_type_1 = __webpack_require__(31);
-var tooltip_component_1 = __webpack_require__(20);
-var tooltip_options_1 = __webpack_require__(65);
-var tooltip_service_1 = __webpack_require__(21);
-__webpack_require__(92);
+var placement_type_1 = __webpack_require__(19);
+var style_type_1 = __webpack_require__(20);
+var alignment_type_1 = __webpack_require__(18);
+var show_type_1 = __webpack_require__(32);
+var tooltip_component_1 = __webpack_require__(21);
+var tooltip_options_1 = __webpack_require__(66);
+var tooltip_service_1 = __webpack_require__(22);
+__webpack_require__(94);
 var TooltipDirective = (function () {
     function TooltipDirective(tooltipService, viewContainerRef, injectionService, elementRef, renderer) {
         this.tooltipService = tooltipService;
@@ -2187,7 +2256,7 @@ exports.TooltipDirective = TooltipDirective;
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2207,7 +2276,7 @@ exports.sortLinear = sortLinear;
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2544,7 +2613,7 @@ exports.AreaChartNormalized = AreaChartNormalized;
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2885,7 +2954,7 @@ exports.AreaChartStacked = AreaChartStacked;
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3185,7 +3254,7 @@ exports.AreaChart = AreaChart;
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3201,7 +3270,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(1);
-var sort_1 = __webpack_require__(33);
+var sort_1 = __webpack_require__(34);
 var AreaSeries = (function () {
     function AreaSeries() {
         this.stacked = false;
@@ -3302,7 +3371,7 @@ exports.AreaSeries = AreaSeries;
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3376,6 +3445,7 @@ var BarHorizontal2D = (function (_super) {
         return d3_1.default.scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
+            .paddingOuter(spacing / 2)
             .domain(this.groupDomain);
     };
     BarHorizontal2D.prototype.getInnerScale = function () {
@@ -3531,7 +3601,7 @@ exports.BarHorizontal2D = BarHorizontal2D;
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3740,7 +3810,7 @@ exports.BarHorizontalNormalized = BarHorizontalNormalized;
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3961,7 +4031,7 @@ exports.BarHorizontalStacked = BarHorizontalStacked;
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3984,7 +4054,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
-var tick_format_helper_1 = __webpack_require__(29);
+var tick_format_helper_1 = __webpack_require__(30);
 var d3_1 = __webpack_require__(1);
 var BarHorizontal = (function (_super) {
     __extends(BarHorizontal, _super);
@@ -4142,7 +4212,7 @@ exports.BarHorizontal = BarHorizontal;
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4217,6 +4287,7 @@ var BarVertical2D = (function (_super) {
         return d3_1.default.scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(spacing)
+            .paddingOuter(spacing / 2)
             .domain(this.groupDomain);
     };
     BarVertical2D.prototype.getInnerScale = function () {
@@ -4376,7 +4447,7 @@ exports.BarVertical2D = BarVertical2D;
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4585,7 +4656,7 @@ exports.BarVerticalNormalized = BarVerticalNormalized;
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4806,7 +4877,7 @@ exports.BarVerticalStacked = BarVerticalStacked;
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4829,7 +4900,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
-var tick_format_helper_1 = __webpack_require__(29);
+var tick_format_helper_1 = __webpack_require__(30);
 var d3_1 = __webpack_require__(1);
 var BarVertical = (function (_super) {
     __extends(BarVertical, _super);
@@ -4987,7 +5058,7 @@ exports.BarVertical = BarVertical;
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5191,7 +5262,7 @@ exports.Bar = Bar;
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5333,7 +5404,7 @@ exports.SeriesHorizontal = SeriesHorizontal;
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5496,7 +5567,7 @@ exports.SeriesVertical = SeriesVertical;
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5643,7 +5714,7 @@ exports.AreaTooltip = AreaTooltip;
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5747,7 +5818,7 @@ exports.Area = Area;
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5762,12 +5833,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var axis_label_component_1 = __webpack_require__(52);
-var x_axis_component_1 = __webpack_require__(53);
-var x_axis_ticks_component_1 = __webpack_require__(25);
-var y_axis_component_1 = __webpack_require__(54);
-var y_axis_ticks_component_1 = __webpack_require__(26);
-var common_1 = __webpack_require__(23);
+var axis_label_component_1 = __webpack_require__(53);
+var x_axis_component_1 = __webpack_require__(54);
+var x_axis_ticks_component_1 = __webpack_require__(26);
+var y_axis_component_1 = __webpack_require__(55);
+var y_axis_ticks_component_1 = __webpack_require__(27);
+var common_1 = __webpack_require__(24);
 var AxesModule = (function () {
     function AxesModule() {
     }
@@ -5785,7 +5856,7 @@ exports.AxesModule = AxesModule;
 
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5867,7 +5938,7 @@ exports.AxisLabel = AxisLabel;
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5882,7 +5953,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var x_axis_ticks_component_1 = __webpack_require__(25);
+var x_axis_ticks_component_1 = __webpack_require__(26);
 var XAxis = (function () {
     function XAxis() {
         this.showGridLines = false;
@@ -5967,7 +6038,7 @@ exports.XAxis = XAxis;
 
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5982,7 +6053,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var y_axis_ticks_component_1 = __webpack_require__(26);
+var y_axis_ticks_component_1 = __webpack_require__(27);
 var YAxis = (function () {
     function YAxis() {
         this.showGridLines = false;
@@ -6072,7 +6143,7 @@ exports.YAxis = YAxis;
 
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6192,7 +6263,7 @@ exports.CircleSeries = CircleSeries;
 
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6270,7 +6341,7 @@ exports.Circle = Circle;
 
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6297,36 +6368,35 @@ var GridPanelSeries = (function () {
     GridPanelSeries.prototype.getGridPanels = function () {
         var _this = this;
         return this.data.map(function (d, i) {
-            var color = 'rgba(255,255,255,0.02)';
-            var offset, width, height, x, y;
+            var offset, width, height, x, y, className;
+            className = 'odd';
             if (_this.orient === 'vertical') {
                 var position = _this.xScale(d.name);
-                var positionIndex = _this.xScale.range().indexOf(position);
+                var positionIndex = Number.parseInt((position / _this.xScale.step()).toString());
                 if (positionIndex % 2 === 1) {
-                    color = 'rgba(255,255,255,0)';
+                    className = 'even';
                 }
-                offset = _this.xScale.range()[0] / 2;
-                width = _this.xScale.bandwidth() + 2 * offset;
+                offset = _this.xScale.bandwidth() * _this.xScale.paddingInner();
+                width = _this.xScale.bandwidth() + offset;
                 height = _this.dims.height;
-                x = _this.xScale(d.name) - offset;
+                x = _this.xScale(d.name) - offset / 2;
                 y = 0;
             }
             else if (_this.orient === 'horizontal') {
                 var position = _this.yScale(d.name);
-                var positionIndex = _this.yScale.range().indexOf(position);
+                var positionIndex = Number.parseInt((position / _this.yScale.step()).toString());
                 if (positionIndex % 2 === 1) {
-                    color = 'rgba(255,255,255,0)';
+                    className = 'even';
                 }
-                offset = _this.yScale.range()[0] / 2;
+                offset = _this.yScale.bandwidth() * _this.yScale.paddingInner();
                 width = _this.dims.width;
-                height = _this.yScale.bandwidth() + 2 * offset;
+                height = _this.yScale.bandwidth() + offset;
                 x = 0;
-                y = _this.yScale(d.name) - offset;
+                y = _this.yScale(d.name) - offset / 2;
             }
             return {
                 name: d.name,
-                color: color,
-                offset: offset,
+                class: className,
                 height: height,
                 width: width,
                 x: x,
@@ -6357,7 +6427,7 @@ var GridPanelSeries = (function () {
     GridPanelSeries = __decorate([
         core_1.Component({
             selector: 'g[gridPanelSeries]',
-            template: "\n    <svg:g gridPanel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [fill]=\"gridPanel.color\">\n    </svg:g>\n  "
+            template: "\n    <svg:g gridPanel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], GridPanelSeries);
@@ -6367,7 +6437,7 @@ exports.GridPanelSeries = GridPanelSeries;
 
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6392,10 +6462,6 @@ var GridPanel = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], GridPanel.prototype, "fill", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], GridPanel.prototype, "width", void 0);
     __decorate([
         core_1.Input(), 
@@ -6412,7 +6478,7 @@ var GridPanel = (function () {
     GridPanel = __decorate([
         core_1.Component({
             selector: 'g[gridPanel]',
-            template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      [attr.fill]=\"fill\"\n      class=\"gridpanel\"\n    />\n  "
+            template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      class=\"gridpanel\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], GridPanel);
@@ -6422,7 +6488,7 @@ exports.GridPanel = GridPanel;
 
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6490,7 +6556,7 @@ exports.Legend = Legend;
 
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6505,7 +6571,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var platform_browser_1 = __webpack_require__(93);
+var platform_browser_1 = __webpack_require__(95);
 var ScaleLegend = (function () {
     function ScaleLegend(sanitizer) {
         this.sanitizer = sanitizer;
@@ -6551,7 +6617,7 @@ exports.ScaleLegend = ScaleLegend;
 
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6616,7 +6682,7 @@ exports.SvgLinearGradient = SvgLinearGradient;
 
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6669,7 +6735,7 @@ exports.SvgRadialGradient = SvgRadialGradient;
 
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6855,7 +6921,7 @@ exports.Timeline = Timeline;
 
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -6971,7 +7037,7 @@ exports.PositionHelper = PositionHelper;
 
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -6986,7 +7052,7 @@ exports.TooltipOptions = TooltipOptions;
 
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7001,11 +7067,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_1 = __webpack_require__(23);
-var tooltip_directive_1 = __webpack_require__(32);
-var tooltip_component_1 = __webpack_require__(20);
-var tooltip_service_1 = __webpack_require__(21);
-var injection_service_1 = __webpack_require__(22);
+var common_1 = __webpack_require__(24);
+var tooltip_directive_1 = __webpack_require__(33);
+var tooltip_component_1 = __webpack_require__(21);
+var tooltip_service_1 = __webpack_require__(22);
+var injection_service_1 = __webpack_require__(23);
 var TooltipModule = (function () {
     function TooltipModule() {
     }
@@ -7025,7 +7091,7 @@ exports.TooltipModule = TooltipModule;
 
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7044,7 +7110,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var chart_component_1 = __webpack_require__(27);
+var chart_component_1 = __webpack_require__(28);
 var base_chart_component_1 = __webpack_require__(2);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var d3_1 = __webpack_require__(1);
@@ -7197,7 +7263,7 @@ var ForceDirectedGraph = (function (_super) {
     ForceDirectedGraph = __decorate([
         core_1.Component({
             selector: 'force-directed-graph',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" stroke=\"black\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors(groupResultsBy(node))\"\n            [attr.stroke]=\"colors(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"click($event, node)\"\n\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors(groupResultsBy(node))\"\n            [attr.stroke]=\"colors(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"click($event, node)\"\n\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], ForceDirectedGraph);
@@ -7207,7 +7273,248 @@ exports.ForceDirectedGraph = ForceDirectedGraph;
 
 
 /***/ },
-/* 68 */
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var d3_1 = __webpack_require__(1);
+var base_chart_component_1 = __webpack_require__(2);
+var view_dimensions_helper_1 = __webpack_require__(3);
+var color_sets_1 = __webpack_require__(4);
+var Gauge = (function (_super) {
+    __extends(Gauge, _super);
+    function Gauge(element, zone) {
+        _super.call(this, element, zone);
+        this.element = element;
+        this.margin = [40, 100, 40, 100];
+        this.angleSpan = 240;
+        this.resizeScale = 1;
+        this.textTransform = '';
+        this.value = 0;
+        this.min = 0;
+        this.max = 100;
+        this.bigSegments = 10;
+        this.smallSegments = 5;
+        this.clickHandler = new core_1.EventEmitter();
+    }
+    Gauge.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.bindResizeEvents(this.view);
+        setTimeout(function () { return _this.scaleText(); });
+    };
+    Gauge.prototype.ngOnDestroy = function () {
+        this.unbindEvents();
+    };
+    Gauge.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    Gauge.prototype.update = function () {
+        _super.prototype.update.call(this);
+        if (!this.value) {
+            this.value = 0;
+        }
+        this.dims = view_dimensions_helper_1.calculateViewDimensions({
+            width: this.width,
+            height: this.height,
+            margins: this.margin,
+            columns: 12
+        });
+        this.valueDomain = this.getValueDomain();
+        this.valueScale = this.getValueScale();
+        this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
+        this.innerRadius = this.outerRadius - 10;
+        this.backgroundArc = {
+            endAngle: this.angleSpan * Math.PI / 180,
+            innerRadius: this.innerRadius,
+            outerRadius: this.outerRadius,
+            cornerRadius: 10,
+            data: {
+                value: 100,
+                name: 'Value'
+            }
+        };
+        this.valueArc = {
+            endAngle: Math.min(this.valueScale(this.value), this.angleSpan) * Math.PI / 180,
+            innerRadius: this.innerRadius,
+            outerRadius: this.outerRadius,
+            cornerRadius: 10,
+            data: {
+                value: this.value,
+                name: 'Value'
+            }
+        };
+        this.setColors();
+        this.ticks = this.getTicks();
+        var xOffset = this.margin[3] + this.dims.width / 2;
+        var circleHeight = this.outerRadius / 2 + 20;
+        var yOffset = this.margin[0] + this.dims.height / 2 + circleHeight / 2;
+        this.transform = "translate(" + xOffset + ", " + yOffset + ") rotate(-" + this.angleSpan / 2 + ")";
+        this.scaleText();
+    };
+    Gauge.prototype.getValueDomain = function () {
+        return [this.min, this.max];
+    };
+    Gauge.prototype.getValueScale = function () {
+        return d3_1.default.scaleLinear()
+            .range([0, this.angleSpan])
+            .domain(this.valueDomain);
+    };
+    Gauge.prototype.getTicks = function () {
+        var bigTickSegment = this.angleSpan / this.bigSegments;
+        var smallTickSegment = bigTickSegment / (this.smallSegments);
+        var tickLength = 20;
+        var ticks = {
+            big: [],
+            small: []
+        };
+        var startDistance = this.outerRadius + 10;
+        var textDist = startDistance + tickLength + 10;
+        for (var i = 0; i <= this.bigSegments; i++) {
+            var angleDeg = i * bigTickSegment;
+            var angle = angleDeg * Math.PI / 180;
+            var textAnchor = 'middle';
+            if (angleDeg < 90) {
+                textAnchor = 'end';
+            }
+            else if (angleDeg >= 180) {
+                textAnchor = 'start';
+            }
+            ticks.big.push({
+                line: this.getTickPath(startDistance, tickLength, angle),
+                textAnchor: textAnchor,
+                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()),
+                textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(210)",
+                highlighted: this.valueScale.invert(angleDeg) <= this.value
+            });
+            if (i === this.bigSegments) {
+                continue;
+            }
+            for (var j = 1; j <= this.smallSegments; j++) {
+                var smallAngleDeg = angleDeg + j * smallTickSegment;
+                var smallAngle = smallAngleDeg * Math.PI / 180;
+                ticks.small.push({
+                    line: this.getTickPath(startDistance, tickLength / 2, smallAngle),
+                    highlighted: this.valueScale.invert(smallAngleDeg) <= this.value
+                });
+            }
+        }
+        return ticks;
+    };
+    Gauge.prototype.getTickPath = function (startDistance, tickLength, angle) {
+        var y1 = startDistance * Math.sin(angle);
+        var y2 = (startDistance + tickLength) * Math.sin(angle);
+        var x1 = startDistance * Math.cos(angle);
+        var x2 = (startDistance + tickLength) * Math.cos(angle);
+        var points = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+        var line = d3_1.default.line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
+        return line(points);
+    };
+    Gauge.prototype.displayValue = function () {
+        if (this.units) {
+            return this.value + " " + this.units;
+        }
+        else {
+            return this.value.toString();
+        }
+    };
+    Gauge.prototype.scaleText = function () {
+        var _this = this;
+        var width = this.textEl.nativeElement.getBoundingClientRect().width;
+        if (width === 0) {
+            return;
+        }
+        var oldScale = this.resizeScale;
+        var availableSpace = this.outerRadius;
+        this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+        if (this.resizeScale !== oldScale) {
+            this.textTransform = "scale(" + this.resizeScale + ", " + this.resizeScale + ")";
+            setTimeout(function () { _this.update(); });
+        }
+    };
+    Gauge.prototype.click = function (data) {
+        this.clickHandler.emit(data);
+    };
+    Gauge.prototype.setColors = function () {
+        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Gauge.prototype, "view", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Gauge.prototype, "scheme", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Gauge.prototype, "customColors", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], Gauge.prototype, "gradient", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Gauge.prototype, "value", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Gauge.prototype, "min", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Gauge.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], Gauge.prototype, "units", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Gauge.prototype, "bigSegments", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Gauge.prototype, "smallSegments", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], Gauge.prototype, "clickHandler", void 0);
+    __decorate([
+        core_1.ViewChild('textEl'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], Gauge.prototype, "textEl", void 0);
+    Gauge = __decorate([
+        core_1.Component({
+            selector: 'gauge',
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g pieArc\n          class=\"background-arc\"\n          [startAngle]=\"0\"\n          [endAngle]=\"backgroundArc.endAngle\"\n          [innerRadius]=\"backgroundArc.innerRadius\"\n          [outerRadius]=\"backgroundArc.outerRadius\"\n          [cornerRadius]=\"backgroundArc.cornerRadius\"\n          [data]=\"backgroundArc.data\"\n          [animate]=\"false\"\n          [pointerEvents]=\"false\">\n        </svg:g>\n\n        <svg:g pieArc\n          [startAngle]=\"0\"\n          [endAngle]=\"valueArc.endAngle\"\n          [innerRadius]=\"valueArc.innerRadius\"\n          [outerRadius]=\"valueArc.outerRadius\"\n          [cornerRadius]=\"valueArc.cornerRadius\"\n          [fill]=\"colors(value)\"\n          [data]=\"valueArc.data\"\n          [animate]=\"true\"\n          (clickHandler)=\"click($event)\">\n        </svg:g>\n\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [ngClass]=\"{'highlighted': tick.highlighted}\">\n          <svg:text\n            [style.textAnchor]=\"tick.textAnchor\"\n            [attr.transform]=\"tick.textTransform\"\n            alignment-baseline=\"central\">\n            {{tick.text}}\n          </svg:text>\n        </svg:g>\n\n        <svg:g *ngFor=\"let tick of ticks.small\"\n          class=\"gauge-tick gauge-tick-small\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n\n        <svg:g transform=\"rotate(120)\">\n          <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n            {{displayValue()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+        }), 
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
+    ], Gauge);
+    return Gauge;
+}(base_chart_component_1.BaseChart));
+exports.Gauge = Gauge;
+
+
+/***/ },
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7298,7 +7605,7 @@ exports.HeatCellSeries = HeatCellSeries;
 
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7392,7 +7699,7 @@ exports.HeatMapCell = HeatMapCell;
 
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7608,7 +7915,7 @@ exports.HeatMap = HeatMap;
 
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7901,7 +8208,7 @@ exports.LineChart = LineChart;
 
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7918,7 +8225,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__(1);
 var moment = __webpack_require__(7);
-var sort_1 = __webpack_require__(33);
+var sort_1 = __webpack_require__(34);
 var LineSeries = (function () {
     function LineSeries() {
     }
@@ -7987,7 +8294,7 @@ exports.LineSeries = LineSeries;
 
 
 /***/ },
-/* 73 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8051,7 +8358,7 @@ exports.Line = Line;
 
 
 /***/ },
-/* 74 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8116,7 +8423,7 @@ var CardSeries = (function () {
     CardSeries = __decorate([
         core_1.Component({
             selector: 'g[cardSeries]',
-            template: "\n    <svg:g card *ngFor=\"let c of cards\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  "
+            template: "\n    <svg:g card *ngFor=\"let c of cards\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], CardSeries);
@@ -8126,7 +8433,7 @@ exports.CardSeries = CardSeries;
 
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8223,7 +8530,7 @@ exports.Card = Card;
 
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8246,7 +8553,7 @@ var core_1 = __webpack_require__(0);
 var base_chart_component_1 = __webpack_require__(2);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
-var grid_layout_helper_1 = __webpack_require__(28);
+var grid_layout_helper_1 = __webpack_require__(29);
 var NumberCard = (function (_super) {
     __extends(NumberCard, _super);
     function NumberCard(element, zone) {
@@ -8322,7 +8629,7 @@ exports.NumberCard = NumberCard;
 
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8451,7 +8758,7 @@ exports.AdvancedPieChart = AdvancedPieChart;
 
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8471,6 +8778,10 @@ var id_1 = __webpack_require__(6);
 var PieArc = (function () {
     function PieArc(element) {
         this.initialized = false;
+        this.startAngle = 0;
+        this.endAngle = Math.PI * 2;
+        this.cornerRadius = 0;
+        this.explodeSlices = false;
         this.gradient = false;
         this.animate = true;
         this.pointerEvents = true;
@@ -8509,7 +8820,9 @@ var PieArc = (function () {
             outerRadius = this.outerRadius * this.value / this.max;
         }
         return d3_1.default.arc()
-            .innerRadius(this.innerRadius).outerRadius(outerRadius);
+            .innerRadius(this.innerRadius)
+            .outerRadius(outerRadius)
+            .cornerRadius(this.cornerRadius);
     };
     PieArc.prototype.loadAnimation = function () {
         var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
@@ -8559,11 +8872,11 @@ var PieArc = (function () {
     ], PieArc.prototype, "fill", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
+        __metadata('design:type', Number)
     ], PieArc.prototype, "startAngle", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
+        __metadata('design:type', Number)
     ], PieArc.prototype, "endAngle", void 0);
     __decorate([
         core_1.Input(), 
@@ -8573,6 +8886,10 @@ var PieArc = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], PieArc.prototype, "outerRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], PieArc.prototype, "cornerRadius", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -8587,7 +8904,7 @@ var PieArc = (function () {
     ], PieArc.prototype, "data", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
+        __metadata('design:type', Boolean)
     ], PieArc.prototype, "explodeSlices", void 0);
     __decorate([
         core_1.Input(), 
@@ -8618,7 +8935,7 @@ exports.PieArc = PieArc;
 
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8758,7 +9075,7 @@ exports.PieChart = PieChart;
 
 
 /***/ },
-/* 80 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8857,7 +9174,7 @@ exports.PieGridSeries = PieGridSeries;
 
 
 /***/ },
-/* 81 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8881,7 +9198,7 @@ var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
 var trim_label_helper_1 = __webpack_require__(8);
-var grid_layout_helper_1 = __webpack_require__(28);
+var grid_layout_helper_1 = __webpack_require__(29);
 var d3_1 = __webpack_require__(1);
 var PieGrid = (function (_super) {
     __extends(PieGrid, _super);
@@ -8999,7 +9316,7 @@ exports.PieGrid = PieGrid;
 
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9104,7 +9421,7 @@ exports.PieLabel = PieLabel;
 
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9238,7 +9555,7 @@ exports.PieSeries = PieSeries;
 
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9315,7 +9632,7 @@ exports.TreeMapCellSeries = TreeMapCellSeries;
 
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9422,7 +9739,7 @@ exports.TreeMapCell = TreeMapCell;
 
 
 /***/ },
-/* 86 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9529,7 +9846,7 @@ exports.TreeMap = TreeMap;
 
 
 /***/ },
-/* 87 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9581,7 +9898,7 @@ exports.RegistryService = RegistryService;
 
 
 /***/ },
-/* 88 */
+/* 90 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -9685,10 +10002,10 @@ exports.throttleable = throttleable;
 
 
 /***/ },
-/* 89 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(90)();
+exports = module.exports = __webpack_require__(92)();
 // imports
 
 
@@ -9699,7 +10016,7 @@ exports.push([module.i, ".swui-tooltip-content {\n  position: fixed;\n  border-r
 
 
 /***/ },
-/* 90 */
+/* 92 */
 /***/ function(module, exports) {
 
 /*
@@ -9755,7 +10072,7 @@ module.exports = function() {
 
 
 /***/ },
-/* 91 */
+/* 93 */
 /***/ function(module, exports) {
 
 /*
@@ -10007,16 +10324,16 @@ function updateLink(linkElement, obj) {
 
 
 /***/ },
-/* 92 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(89);
+var content = __webpack_require__(91);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(91)(content, {});
+var update = __webpack_require__(93)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -10031,18 +10348,6 @@ if(false) {
 	// When the module is disposed, remove the <style> tags
 	module.hot.dispose(function() { update(); });
 }
-
-/***/ },
-/* 93 */
-/***/ function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_93__;
-
-/***/ },
-/* 94 */
-/***/ function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_94__;
 
 /***/ },
 /* 95 */
@@ -10106,6 +10411,18 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_104__;
 
 /***/ },
 /* 105 */
+/***/ function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_105__;
+
+/***/ },
+/* 106 */
+/***/ function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_106__;
+
+/***/ },
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10124,23 +10441,25 @@ function __export(m) {
 }
 var core_1 = __webpack_require__(0);
 var common_module_1 = __webpack_require__(5);
-var area_chart_module_1 = __webpack_require__(9);
-var bar_chart_module_1 = __webpack_require__(10);
-var force_directed_graph_module_1 = __webpack_require__(11);
-var heat_map_module_1 = __webpack_require__(12);
-var line_chart_module_1 = __webpack_require__(13);
-var number_card_module_1 = __webpack_require__(14);
-var pie_chart_module_1 = __webpack_require__(15);
-var tree_map_module_1 = __webpack_require__(16);
-__export(__webpack_require__(9));
+var area_chart_module_1 = __webpack_require__(10);
+var bar_chart_module_1 = __webpack_require__(11);
+var force_directed_graph_module_1 = __webpack_require__(12);
+var heat_map_module_1 = __webpack_require__(14);
+var line_chart_module_1 = __webpack_require__(15);
+var number_card_module_1 = __webpack_require__(16);
+var pie_chart_module_1 = __webpack_require__(9);
+var tree_map_module_1 = __webpack_require__(17);
+var gauge_module_1 = __webpack_require__(13);
 __export(__webpack_require__(10));
 __export(__webpack_require__(11));
-__export(__webpack_require__(5));
 __export(__webpack_require__(12));
-__export(__webpack_require__(13));
+__export(__webpack_require__(5));
 __export(__webpack_require__(14));
 __export(__webpack_require__(15));
 __export(__webpack_require__(16));
+__export(__webpack_require__(9));
+__export(__webpack_require__(17));
+__export(__webpack_require__(13));
 var NG2D3Module = (function () {
     function NG2D3Module() {
     }
@@ -10155,7 +10474,8 @@ var NG2D3Module = (function () {
                 line_chart_module_1.LineChartModule,
                 number_card_module_1.NumberCardModule,
                 pie_chart_module_1.PieChartModule,
-                tree_map_module_1.TreeMapModule
+                tree_map_module_1.TreeMapModule,
+                gauge_module_1.GaugeModule
             ]
         }), 
         __metadata('design:paramtypes', [])
@@ -10169,4 +10489,4 @@ exports.NG2D3Module = NG2D3Module;
 /******/ ])
 });
 ;
-//# sourceMappingURL=ng2d3.map
+//# sourceMappingURL=ng2d3.js.map
