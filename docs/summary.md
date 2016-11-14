@@ -26,6 +26,7 @@
    * [Heat Map Chart](charts/heat-map.md)
    * [Tree Map Chart](charts/tree-map.md)
    * [Number Card Chart](charts/number-card.md)
+   * [Gauge Chart](charts/gauge.md)
 * Contributing
    * [Building](contributing/building.md)
    * [Guidelines](contributing/guidelines.md)
