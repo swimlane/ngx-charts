@@ -297,6 +297,20 @@ import {colorSets} from '../src/utils/color-sets';
             [results]="single"
             (clickHandler)="clickHandler($event)">
           </number-card>
+
+          <gauge
+            *ngIf="chartType === 'gauge'"
+            class="chart-container"
+            [view]="view"
+            [scheme]="colorScheme"
+            [value]="gaugeValue"
+            [min]="gaugeMin"
+            [max]="gaugeMax"
+            [units]="gaugeUnits"
+            [bigSegments]="gaugeLargeSegments"
+            [smallSegments]="gaugeSmallSegments"
+            (clickHandler)="clickHandler($event)">
+          </gauge>
       </div>
       <div class="sidebar">
         <h1>
@@ -444,6 +458,36 @@ import {colorSets} from '../src/utils/color-sets';
           </select>
         </div>
 
+        <div *ngIf="chart.options.includes('min')">
+          <label>Min value:</label><br />
+          <input type="number" [(ngModel)]="gaugeMin"><br />
+        </div>
+
+        <div *ngIf="chart.options.includes('max')">
+          <label>Max value:</label><br />
+          <input type="number" [(ngModel)]="gaugeMax"><br />
+        </div>
+
+        <div *ngIf="chart.options.includes('value')">
+          <label>Value:</label><br />
+          <input type="number" [(ngModel)]="gaugeValue"><br />
+        </div>
+
+        <div *ngIf="chart.options.includes('largeSegments')">
+          <label>Number of large segments:</label><br />
+          <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
+        </div>
+
+        <div *ngIf="chart.options.includes('smallSegments')">
+          <label>Number of small segments:</label><br />
+          <input type="number" [(ngModel)]="gaugeSmallSegments"><br />
+        </div>
+
+        <div *ngIf="chart.options.includes('units')">
+          <label>Units:</label><br />
+          <input type="text" [(ngModel)]="gaugeUnits"><br />
+        </div>
+
       </div>
     </main>
   `
@@ -496,6 +540,14 @@ export class App implements OnInit {
   autoScale = true;
   timeline = false;
 
+  // gauge
+  gaugeValue: number = 60;
+  gaugeMin: number = 0;
+  gaugeMax: number = 100;
+  gaugeLargeSegments: number = 10;
+  gaugeSmallSegments: number = 5;
+  gaugeUnits: string = 'alerts';
+
   constructor() {
     Object.assign(this, {
       single,
@@ -524,6 +576,8 @@ export class App implements OnInit {
     if (!this.realTimeData) {
       return;
     }
+
+    this.gaugeValue = this.gaugeMin + Math.ceil(Math.random() * this.gaugeMax);
 
     let country = this.countries[Math.floor(Math.random() * this.countries.length)];
     let add = Math.random() < 0.7;

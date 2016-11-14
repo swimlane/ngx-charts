@@ -28,11 +28,6 @@ export interface CardModel {
       [color]="c.color"
       [data]="c.data"
       (clickHandler)="click($event)"
-
-      swui-tooltip
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
-      [tooltipTitle]="c.tooltipText"
     />
   `
 })

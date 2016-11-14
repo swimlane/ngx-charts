@@ -16,6 +16,7 @@ body {
   text-rendering: optimizeLegibility;
 
   min-height: 100vh;
+  color: #666;
 }
 
 * {
@@ -163,6 +164,33 @@ iframe {
   .number-card {
     p {
       color: $color-text-light;
+    }
+  }
+
+  .gauge {
+    .background-arc {
+      path {
+        fill: $color-bg-med;
+      }
+    }
+    .gauge-tick {
+      path {
+        stroke: $color-bg-light;
+      }
+
+      text {
+        fill: $color-bg-light;
+      }
+
+      &.highlighted {
+        path {
+          stroke: #fff;
+        }
+
+        text {
+          fill: #fff;
+        }
+      }
     }
   }
 }

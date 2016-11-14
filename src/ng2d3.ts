@@ -8,6 +8,7 @@ import { LineChartModule } from "./line-chart/line-chart.module";
 import { NumberCardModule } from "./number-card/number-card.module";
 import { PieChartModule } from "./pie-chart/pie-chart.module";
 import { TreeMapModule } from "./tree-map/tree-map.module";
+import { GaugeModule } from "./gauge/gauge.module";
 
 export * from "./area-chart/area-chart.module";
 export * from "./bar-chart/bar-chart.module";
@@ -18,6 +19,7 @@ export * from "./line-chart/line-chart.module";
 export * from "./number-card/number-card.module";
 export * from "./pie-chart/pie-chart.module";
 export * from "./tree-map/tree-map.module";
+export * from "./gauge/gauge.module";
 
 @NgModule({
   exports: [
@@ -29,7 +31,8 @@ export * from "./tree-map/tree-map.module";
     LineChartModule,
     NumberCardModule,
     PieChartModule,
-    TreeMapModule
+    TreeMapModule,
+    GaugeModule
   ]
 })
 export class NG2D3Module {}

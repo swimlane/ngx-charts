@@ -275,3 +275,42 @@
     stroke: #333;
   }
 }
+
+.gauge {
+  .background-arc {
+    path {
+      fill: rgba(0,0,0,0.05);
+    }
+  }
+
+  text {
+  }
+
+  .gauge-tick {
+    path {
+      stroke: #999;
+    }
+
+    text {
+      font-size: 12px;
+      fill: #999;
+      font-weight: bold;
+    }
+
+    &.highlighted {
+      path {
+        stroke: #666;
+      }
+
+      text {
+        fill: #666;
+      }
+    }
+  }
+  .gauge-tick-large path {
+    stroke-width: 2px;
+  }
+  .gauge-tick-small path{
+    stroke-width: 1px;
+  }
+}

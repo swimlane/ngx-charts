@@ -27,7 +27,10 @@ export abstract class BaseChart {
   }
 
   update() {
-    this.results = this.cloneData(this.results);
+    if (this.results) {
+      this.results = this.cloneData(this.results);
+    }
+
     if (this.view) {
       this.width = this.view[0];
       this.height = this.view[1];

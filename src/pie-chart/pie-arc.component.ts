@@ -48,14 +48,15 @@ export class PieArc implements OnChanges {
   initialized: boolean = false;
 
   @Input() fill;
-  @Input() startAngle;
-  @Input() endAngle;
+  @Input() startAngle: number = 0;
+  @Input() endAngle: number = Math.PI * 2;
   @Input() innerRadius;
   @Input() outerRadius;
+  @Input() cornerRadius: number = 0;
   @Input() value;
   @Input() max;
   @Input() data;
-  @Input() explodeSlices;
+  @Input() explodeSlices: boolean = false;
   @Input() gradient: boolean = false;
   @Input() animate: boolean = true;
   @Input() pointerEvents: boolean = true;
@@ -103,7 +104,9 @@ export class PieArc implements OnChanges {
     }
 
     return d3.arc()
-      .innerRadius(this.innerRadius).outerRadius(outerRadius);
+      .innerRadius(this.innerRadius)
+      .outerRadius(outerRadius)
+      .cornerRadius(this.cornerRadius);
   }
 
   loadAnimation() {

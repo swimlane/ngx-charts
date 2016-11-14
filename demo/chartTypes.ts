@@ -130,6 +130,12 @@ let chartGroups = [
         selector: 'number-card',
         inputFormat: 'singleSeries',
         options: ['colorScheme']
+      },
+      {
+        name: "Gauge",
+        selector: 'gauge',
+        inputFormat: 'singleValue',
+        options: ['colorScheme', 'value', 'min', 'max', 'largeSegments', 'smallSegments', 'units']
       }
     ]
   }
