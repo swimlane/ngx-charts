@@ -53,9 +53,9 @@
     "@angular/platform-browser": "~2.2.1",
     "@angular/platform-browser-dynamic": "~2.2.1",
     "core-js": "2.4.1",
-    "d3": "4.2.2",
+    "d3": "4.3.0",
     "moment": "2.14.1",
-    "rxjs": "5.0.0-beta.12",
+    "rxjs": "5.0.0-rc.3",
     "zone.js": "0.6.26"
   },
   "devDependencies": {

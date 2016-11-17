@@ -73,7 +73,6 @@ var banner =
     },
 
     devServer: {
-      outputPath: root('dist'),
       watchOptions: {
         poll: true
       },

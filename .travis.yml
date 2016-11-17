@@ -14,6 +14,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - sleep 3
   - npm install
+  - npm i loader-utils
 addons:
     code_climate:
         repo_token: 354a61ebebb73e09b1dbabff55de0a1350575913e0b3b20dfbb3426647addc96

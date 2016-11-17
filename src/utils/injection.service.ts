@@ -4,7 +4,6 @@ import {
   ComponentRef,
   Injectable,
   Injector,
-  ViewContainerRef,
   EmbeddedViewRef,
   Type
 } from '@angular/core';
