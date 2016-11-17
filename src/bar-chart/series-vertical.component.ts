@@ -95,7 +95,6 @@ export class SeriesVertical implements OnChanges {
         roundEdges: roundEdges,
         data: d,
         width: width,
-        tooltipText: `${label}: ${value}`,
         height: 0,
         x: 0,
         y: 0
@@ -109,6 +108,7 @@ export class SeriesVertical implements OnChanges {
         } else {
           bar.y = this.yScale(value);
         }
+        bar.tooltipText = `${label}: ${value}`;
       } else if (this.type === 'stacked') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -117,6 +117,7 @@ export class SeriesVertical implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
+        bar.tooltipText = `${label}: ${value}`;
       } else if (this.type === 'normalized') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -133,6 +134,8 @@ export class SeriesVertical implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
+        let percentage = (offset1 - offset0).toFixed(2) + '%';
+        bar.tooltipText = `${label}: ${percentage}`;
       }
 
       return bar;
