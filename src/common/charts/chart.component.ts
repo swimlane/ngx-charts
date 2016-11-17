@@ -2,16 +2,13 @@ import {
   Component,
   Input,
   OnChanges,
-  ViewContainerRef,
   trigger,
   style,
   transition,
   animate
 } from '@angular/core';
-import { InjectionService } from '../../utils/injection.service';
 
 @Component({
-  providers: [InjectionService],
   selector: 'chart',
   template: `
     <div [style.width]="view[0] + 'px'"
@@ -67,10 +64,6 @@ export class Chart implements OnChanges {
   title: any;
   legendWidth: any;
   legendType: any;
-
-  constructor(private vcr: ViewContainerRef, private injectionService: InjectionService) {
-    this.injectionService.setRootViewContainerRef(vcr);
-  }
 
   ngOnChanges() {
     this.update();

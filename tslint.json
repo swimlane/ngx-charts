@@ -4,7 +4,7 @@
   ],
   "rules": {
     "class-name": true,
-    "curly": true,
+    "curly": false,
     "eofline": true,
     "jsdoc-format": true,
     "forin": true,
