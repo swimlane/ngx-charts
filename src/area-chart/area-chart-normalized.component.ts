@@ -78,6 +78,7 @@ import { id } from "../utils/id";
             [results]="results"
             [height]="dims.height"
             [colors]="colors"
+            [showPercentage]="true"
             (hover)="updateHoveredVertical($event)"
           />
 

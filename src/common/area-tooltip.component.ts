@@ -69,6 +69,7 @@ export class AreaTooltip implements OnChanges {
   @Input() results;
   @Input() height;
   @Input() colors;
+  @Input() showPercentage: boolean = false;
 
   @Output() hover = new EventEmitter();
 
@@ -128,8 +129,12 @@ export class AreaTooltip implements OnChanges {
       let item = group.series.find(d => d.name.toString() === xVal.toString());
 
       if (item) {
+        let val = item.value;
+        if (this.showPercentage) {
+          val = (item.d1 - item.d0).toFixed(2) + '%';
+        }
         results.push({
-          value: item.value,
+          value: val,
           name: item.name,
           series: group.name
         });
