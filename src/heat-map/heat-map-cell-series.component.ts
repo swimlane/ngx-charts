@@ -50,7 +50,12 @@ export class HeatCellSeries implements OnChanges {
     this.data.map((row) => {
       row.series.map((cell) => {
         let value = cell.value;
+
         let label = cell.name;
+        let tooltipLabel = label;
+        if (tooltipLabel.constructor.name === 'Date') {
+          tooltipLabel = tooltipLabel.toLocaleDateString();
+        }
         cells.push({
           x: this.xScale(row.name),
           y: this.yScale(cell.name),
@@ -60,7 +65,7 @@ export class HeatCellSeries implements OnChanges {
           data: value,
           label: label,
           series: row.name,
-          tooltipText: `${label}: ${value}`
+          tooltipText: `${tooltipLabel}: ${value.toLocaleString()}`
         });
       });
     });

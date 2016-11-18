@@ -35,7 +35,7 @@ import {
             [style.background-color]="colors(tooltipItem.series)">
           </span>
 
-          {{tooltipItem.series}}: {{tooltipItem.value}}
+          {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}
         </xhtml:div>
       </xhtml:template>
 

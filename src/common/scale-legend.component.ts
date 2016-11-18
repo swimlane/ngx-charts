@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
       <div [style.height]="(height - 70) + 'px'">
 
         <div class="scale-legend-label">
-          <span>{{ valueRange[0].toFixed() }}</span>
+          <span>{{ valueRange[0].toLocaleString() }}</span>
         </div>
 
         <div class="scale-legend-wrap"
@@ -22,7 +22,7 @@ import { DomSanitizer } from '@angular/platform-browser';
         </div>
 
         <div class="scale-legend-label">
-          <span>{{ valueRange[1].toFixed() }}</span>
+          <span>{{ valueRange[1].toLocaleString() }}</span>
         </div>
       </div>
     </div>

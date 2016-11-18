@@ -71,6 +71,10 @@ export class CircleSeries implements OnChanges {
     return this.data.series.map((d, i) => {
       let value = d.value;
       let label = d.name;
+      let tooltipLabel = label;
+      if (tooltipLabel.constructor.name === 'Date') {
+        tooltipLabel = tooltipLabel.toLocaleDateString();
+      }
 
       if (value) {
         let cx;
@@ -99,7 +103,7 @@ export class CircleSeries implements OnChanges {
           cy: cy,
           radius: radius,
           height: height,
-          tooltipText: `${label}, ${value}`,
+          tooltipText: `${tooltipLabel}: ${value.toLocaleString()}`,
           opacity: opacity
         };
       }

@@ -38,7 +38,7 @@ import d3 from '../d3';
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="series.label + ': ' + series.value"
+            [tooltipTitle]="series.label + ': ' + series.value.toLocaleString()"
           />
 
           <svg:text
@@ -65,7 +65,7 @@ import d3 from '../d3';
             x="0"
             [attr.y]="series.outerRadius"
             text-anchor="middle">
-            {{series.total}}
+            {{series.total.toLocaleString()}}
           </svg:text>
 
         </svg:g>
@@ -154,7 +154,7 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
         innerRadius: innerRadius,
         outerRadius: radius,
         label: trimLabel(label),
-        total: `Total: ${d3.format(".2f")(value)}`,
+        total: `Total: ${value.toLocaleString()}`,
         value: value,
         percent: d3.format(".1p")(d.data.percent),
         data: [d, {

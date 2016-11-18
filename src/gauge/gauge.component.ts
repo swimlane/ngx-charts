@@ -229,7 +229,7 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
       ticks.big.push({
         line: this.getTickPath(startDistance, tickLength, angle),
         textAnchor: textAnchor,
-        text: Number.parseInt(this.valueScale.invert(angleDeg).toString()),
+        text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
         textTransform: `translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(210)`,
         highlighted: this.valueScale.invert(angleDeg) <= this.value
       });
@@ -265,9 +265,9 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
 
   displayValue() {
     if (this.units) {
-      return `${this.value} ${this.units}`;
+      return `${this.value.toLocaleString()} ${this.units}`;
     } else {
-      return this.value.toString();
+      return this.value.toLocaleString();
     }
   }
 

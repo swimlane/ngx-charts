@@ -68,7 +68,7 @@ export class TreeMapCell implements OnChanges {
   }
 
   update() {
-    this.formattedValue = this.value;
+    this.formattedValue = this.value.toLocaleString();
     if (this.initialized) {
       this.animateToCurrentForm();
     } else {

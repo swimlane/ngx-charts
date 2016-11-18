@@ -54,7 +54,7 @@ export class TreeMapCellSeries implements OnChanges {
           label: d.id,
           value: d.value,
           valueType: d.valueType,
-          tooltipText: `${d.id}: ${d.value}`
+          tooltipText: `${d.id}: ${d.value.toLocaleString()}`
         };
       });
   }

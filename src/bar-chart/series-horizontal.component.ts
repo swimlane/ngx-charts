@@ -73,6 +73,10 @@ export class SeriesHorizontal implements OnChanges {
     this.bars = this.series.map((d, index) => {
       let value = d.value;
       let label = d.name;
+      let tooltipLabel = label;
+      if (tooltipLabel.constructor.name === 'Date') {
+        tooltipLabel = tooltipLabel.toLocaleDateString();
+      }
       let roundEdges = this.type === 'standard';
 
       let bar: any = {
@@ -93,7 +97,7 @@ export class SeriesHorizontal implements OnChanges {
           bar.x = this.xScale(0);
         }
         bar.y = this.yScale(label);
-        bar.tooltipText = `${label}: ${value}`;
+        bar.tooltipText = `${tooltipLabel}: ${value.toLocaleString()}`;
       } else if (this.type === 'stacked') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -102,7 +106,7 @@ export class SeriesHorizontal implements OnChanges {
         bar.width = this.xScale(offset1) - this.xScale(offset0);
         bar.x = this.xScale(offset0);
         bar.y = 0;
-        bar.tooltipText = `${label}: ${value}`;
+        bar.tooltipText = `${tooltipLabel}: ${value.toLocaleString()}`;
       } else if (this.type === 'normalized') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -120,7 +124,7 @@ export class SeriesHorizontal implements OnChanges {
         bar.x = this.xScale(offset0);
         bar.y = 0;
         let percentage = (offset1 - offset0).toFixed(2) + '%';
-        bar.tooltipText = `${label}: ${percentage}`;
+        bar.tooltipText = `${tooltipLabel}: ${percentage.toLocaleString()}`;
       }
 
       return bar;

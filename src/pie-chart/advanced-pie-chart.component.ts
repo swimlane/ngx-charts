@@ -55,7 +55,7 @@ export interface LegendItem {
           [style.width.px]="width - dims.width - margin[1]">
 
           <div class="total-value">
-            {{roundedTotal}}
+            {{roundedTotal.toLocaleString()}}
           </div>
           <div class="total-label">
             {{totalLabel}}
@@ -67,9 +67,9 @@ export interface LegendItem {
                 <div class="item-color"
                   [style.background]="colors(legendItem.label)">
                 </div>
-                <div class="item-value">{{legendItem.value}}</div>
+                <div class="item-value">{{legendItem.value.toLocaleString()}}</div>
                 <div class="item-label">{{legendItem.label}}</div>
-                <div class="item-percent">{{legendItem.percentage}}%</div>
+                <div class="item-percent">{{legendItem.percentage.toLocaleString()}}%</div>
               </div>
             </div>
           </div>
