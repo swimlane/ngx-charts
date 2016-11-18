@@ -231,7 +231,11 @@ export class AreaChart extends BaseChart implements OnChanges, OnDestroy, AfterV
 
   updateTimeline() {
     if (this.timeline) {
-      this.timelineWidth = (this.width * 10.0 / 12.0) - this.margin[3] - this.margin[1];
+      this.timelineWidth = this.width;
+      if (this.legend) {
+        this.timelineWidth = this.width * 10.0 / 12.0;
+      }
+      this.timelineWidth -= (this.margin[3] + this.margin[1]);
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
