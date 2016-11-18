@@ -100,13 +100,28 @@ import d3 from '../d3';
 
       <svg:g timeline
         *ngIf="timeline && scaleType === 'time'"
+        [attr.transform]="timelineTransform"
         [results]="results"
-        [view]="[width, height]"
+        [view]="[timelineWidth, height]"
+        [height]="timelineHeight"
         [scheme]="scheme"
         [customColors]="customColors"
         [legend]="legend"
         [scaleType]="scaleType"
         (onDomainChange)="updateDomain($event)">
+
+        <svg:g *ngFor="let series of results; trackBy:trackBy">
+          <svg:g areaSeries
+            [xScale]="timelineXScale"
+            [yScale]="timelineYScale"
+            [color]="colors(series.name)"
+            [data]="series"
+            [scaleType]="scaleType"
+            [gradient]="gradient"
+            stacked="true"
+            [curve]="curve"
+          />
+        </svg:g>
       </svg:g>
     </chart>
   `
@@ -129,6 +144,15 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
   hoveredVertical: any; // the value of the x axis that is hovered over
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+  filteredDomain: any;
+
+  timelineWidth: any;
+  timelineHeight: number = 50;
+  timelineXScale: any;
+  timelineYScale: any;
+  timelineXDomain: any;
+  timelineTransform: any;
+  timelinePadding: number = 10;
 
   @Input() view;
   @Input() results;
@@ -182,15 +206,19 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
     });
 
     if (this.timeline) {
-      this.dims.height -= 150;
+      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
     }
 
     this.xDomain = this.getXDomain();
+    if (this.filteredDomain) {
+      this.xDomain = this.filteredDomain;
+    }
+
     this.yDomain = this.getYDomain();
     this.seriesDomain = this.getSeriesDomain();
 
-    this.xScale = this.getXScale();
-    this.yScale = this.getYScale();
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.yScale = this.getYScale(this.yDomain, this.dims.height);
 
     for (let i = 0; i < this.xSet.length; i++) {
       let val = this.xSet[i];
@@ -223,11 +251,23 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
       }
     }
 
+    this.updateTimeline();
+
     this.setColors();
     this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     let pageUrl = window.location.href;
     this.clipPathId = 'clip' + id().toString();
     this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+  }
+
+  updateTimeline() {
+    if (this.timeline) {
+      this.timelineWidth = (this.width * 10.0 / 12.0) - this.margin[3] - this.margin[1];
+      this.timelineXDomain = this.getXDomain();
+      this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+      this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
+      this.timelineTransform = `translate(${ this.margin[3] }, ${ -this.margin[2] })`;
+    }
   }
 
   getXDomain() {
@@ -293,30 +333,30 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
     return this.results.map(d => d.name);
   }
 
-  getXScale() {
+  getXScale(domain, width) {
     let scale;
     if (this.scaleType === 'time') {
       scale = d3.scaleTime()
-        .range([0, this.dims.width])
-        .domain(this.xDomain);
+        .range([0, width])
+        .domain(domain);
     } else if (this.scaleType === 'linear') {
       scale = d3.scaleLinear()
-        .range([0, this.dims.width])
-        .domain(this.xDomain);
+        .range([0, width])
+        .domain(domain);
     } else if (this.scaleType === 'ordinal') {
       scale = d3.scalePoint()
-        .range([0, this.dims.width])
+        .range([0, width])
         .padding(0.1)
-        .domain(this.xDomain);
+        .domain(domain);
     }
 
     return scale;
   }
 
-  getYScale() {
+  getYScale(domain, height) {
     return d3.scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.yDomain);
+      .range([height, 0])
+      .domain(domain);
   }
 
   getScaleType(values) {
@@ -349,8 +389,9 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
   }
 
   updateDomain(domain) {
-    this.xDomain = domain;
-    this.xScale = this.getXScale();
+    this.filteredDomain = domain;
+    this.xDomain = this.filteredDomain;
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
   }
 
   updateHoveredVertical(item) {

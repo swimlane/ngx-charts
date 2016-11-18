@@ -8,18 +8,24 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import d3 from '../d3';
+import { id } from "../utils/id";
 
 @Component({
   selector: 'g[timeline]',
   template: `
     <svg:g
+      class="timeline"
       [attr.transform]="transform">
 
-      <svg:g xAxis
-        [xScale]="xScale"
-        [dims]="dims"
-        [showGridLines]="showGridLines"
-      />
+      <svg:filter [attr.id]="filterId">
+        <svg:feColorMatrix in="SourceGraphic"
+            type="matrix"
+            values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0" />
+      </svg:filter>
+
+      <svg:g [attr.filter]="filter" class="embedded-chart">
+        <ng-content></ng-content>
+      </svg:g>
 
       <svg:g class="brush">
       </svg:g>
@@ -31,12 +37,12 @@ export class Timeline implements OnChanges {
   element: HTMLElement;
   dims: any;
   xDomain: any[];
-  yDomain: any[];
   xScale: any;
   brush: any;
   transform: string;
-  margin = [10, 20, 10, 20];
   initialized: boolean = false;
+  filterId: any;
+  filter: any;
 
   @Input() view;
   @Input() state;
@@ -47,6 +53,7 @@ export class Timeline implements OnChanges {
   @Input() miniChart;
   @Input() autoScale;
   @Input() scaleType;
+  @Input() height: number = 50;
 
   @Output() clickHandler = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
@@ -66,12 +73,21 @@ export class Timeline implements OnChanges {
 
   update() {
     this.dims = this.getDims();
-    let offsetY = this.view[1] - 150;
+    this.height = this.dims.height;
+    let offsetY = this.view[1] - this.height;
 
     this.xDomain = this.getXDomain();
     this.xScale = this.getXScale();
 
-    this.transform = `translate(${ this.margin[3] } , ${ this.margin[0] + offsetY })`;
+    if (this.brush) {
+      this.updateBrush();
+    }
+
+    this.transform = `translate(0 , ${ offsetY })`;
+
+    let pageUrl = window.location.href;
+    this.filterId = 'filter' + id().toString();
+    this.filter = `url(${pageUrl}#${this.filterId})`;
   }
 
   getXDomain() {
@@ -101,10 +117,6 @@ export class Timeline implements OnChanges {
     return domain;
   }
 
-  getYDomain() {
-
-  }
-
   getXScale() {
     let scale;
     if (this.scaleType === 'time') {
@@ -125,23 +137,13 @@ export class Timeline implements OnChanges {
     return scale;
   }
 
-  getYScale() {
-    d3.scaleLinear()
-      .range([this.dims.height, 0])
-      .domain(this.yDomain);
-  }
-
   addBrush() {
     if (this.brush) {
       return;
     }
 
-    let height = 150 - this.margin[0] - this.margin[2];
+    let height = this.height;
     let width = this.view[0];
-    if (this.legend) {
-      width = width * 9 / 12.0;
-    }
-    width = width - this.margin[1] - this.margin[3];
 
     this.brush = d3.brushX()
       .extent([[0, 0], [width, height]])
@@ -156,17 +158,32 @@ export class Timeline implements OnChanges {
       .call(this.brush);
   }
 
-  getDims() {
-    let width = this.view[0];
-    let height = 150;
-
-    if (this.legend) {
-      width = width * 9 / 12.0;
+  updateBrush() {
+    if (!this.brush) {
+      return;
     }
 
+    let height = this.height;
+    let width = this.view[0];
+
+    this.brush.extent([[0, 0], [width, height]]);
+    d3.select(this.element)
+      .select('.brush')
+      .call(this.brush);
+
+    // clear hardcoded properties so they can be defined by CSS
+    d3.select(this.element).select('.selection')
+      .attr('fill', undefined)
+      .attr('stroke', undefined)
+      .attr('fill-opacity', undefined);
+  }
+
+  getDims() {
+    let width = this.view[0];
+
     let dims = {
-      width: width - this.margin[1] - this.margin[3],
-      height: height - this.margin[0] - this.margin[2]
+      width: width,
+      height: this.height
     };
     return dims;
   }

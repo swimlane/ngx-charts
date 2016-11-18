@@ -193,4 +193,17 @@ iframe {
       }
     }
   }
+
+  .timeline {
+    .brush {
+      .overlay {
+        fill: rgba(255,255,255,0.05);
+      }
+
+      .selection {
+        fill: rgba(255, 255, 255, 0.1);
+        stroke: #aaa;
+      }
+    }
+  }
 }
