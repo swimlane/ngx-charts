@@ -96,8 +96,10 @@ export class Bar implements OnInit, OnChanges {
 
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
+        radius = Math.min(this.height, radius);
         path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
       } else if (this.orientation === 'horizontal') {
+        radius = Math.min(this.width, radius);
         path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
       }
     } else {
@@ -117,8 +119,10 @@ export class Bar implements OnInit, OnChanges {
 
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
+        radius = Math.min(this.height, radius);
         path = this.roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
       } else if (this.orientation === 'horizontal') {
+        radius = Math.min(this.width, radius);
         path = this.roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
       }
     } else {
