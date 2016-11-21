@@ -20,7 +20,7 @@ export interface CardModel {
 @Component({
   selector: 'g[cardSeries]',
   template: `
-    <svg:g card *ngFor="let c of cards"
+    <svg:g card *ngFor="let c of cards; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -65,6 +65,10 @@ export class CardSeries implements OnChanges {
           tooltipText: `${label}: ${value}`
         };
       });
+  }
+
+  trackBy(index, card) {
+    return card.label;
   }
 
   click(data) {
