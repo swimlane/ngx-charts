@@ -8,7 +8,6 @@ import {
   ViewChild
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
-import d3 from '../d3';
 
 @Component({
   selector: 'g[card]',
@@ -104,7 +103,9 @@ export class Card implements OnChanges {
     this.trimmedLabel = trimLabel(this.label, 55);
 
     this.value = this.data.value.toLocaleString();
-    this.scaleText();
+    setTimeout(() => {
+      this.scaleText();
+    });
     if (!this.initialized) {
       setTimeout(() => {
         this.scaleText();
@@ -129,15 +130,18 @@ export class Card implements OnChanges {
   }
 
   scaleText() {
-    let width = this.textEl.nativeElement.getBoundingClientRect().width;
-
-    if (width === 0) {
+    let { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+    if (width === 0 || height === 0) {
       return;
     }
 
     let oldScale = this.resizeScale;
-    let availableSpace = this.cardWidth * 0.85;
-    this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+    let availableWidth = this.cardWidth * 0.85;
+    let availableHeight = this.cardHeight * 0.65;
+
+    let resizeScaleWidth = Math.floor((availableWidth / (width / this.resizeScale)) * 100) / 100;
+    let resizeScaleHeight = Math.floor((availableHeight / (height / this.resizeScale)) * 100) / 100;
+    this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
     if (this.resizeScale !== oldScale) {
       this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
     }
