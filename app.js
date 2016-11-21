@@ -136,7 +136,7 @@ exports.subscribeToResult = subscribeToResult;
 
 "use strict";
 "use strict";
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 exports.colorSets = [
     {
         'name': 'vivid',
@@ -9382,7 +9382,7 @@ var Chart = (function () {
     Chart = __decorate([
         core_1.Component({
             selector: 'chart',
-            template: "\n    <div [style.width]=\"view[0] + 'px'\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n\n        <ng-content></ng-content>\n      </svg>\n\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </legend>\n    </div>\n  ",
+            template: "\n    <div [style.width]=\"view[0] + 'px'\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n\n        <ng-content></ng-content>\n      </svg>\n\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </legend>\n    </div>\n  ",
             animations: [
                 core_1.trigger('animationState', [
                     core_1.transition('void => *', [
@@ -9407,7 +9407,7 @@ exports.Chart = Chart;
 
 "use strict";
 "use strict";
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 function gridLayout(dims, data, minWidth) {
     var rows = 1;
     var xScale = d3_1.default.scaleBand();
@@ -12579,7 +12579,7 @@ var data_1 = __webpack_require__(746);
 var chartTypes_1 = __webpack_require__(745);
 __webpack_require__(1509);
 __webpack_require__(1507);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var color_sets_1 = __webpack_require__(18);
 var App = (function () {
     function App() {
@@ -13529,7 +13529,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var moment = __webpack_require__(3);
 var id_1 = __webpack_require__(61);
 var AreaChartNormalized = (function (_super) {
@@ -13650,7 +13650,11 @@ var AreaChartNormalized = (function (_super) {
     };
     AreaChartNormalized.prototype.updateTimeline = function () {
         if (this.timeline) {
-            this.timelineWidth = (this.width * 10.0 / 12.0) - this.margin[3] - this.margin[1];
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
@@ -13884,7 +13888,7 @@ var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
 var moment = __webpack_require__(3);
 var id_1 = __webpack_require__(61);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var AreaChartStacked = (function (_super) {
     __extends(AreaChartStacked, _super);
     function AreaChartStacked(element, zone) {
@@ -13979,7 +13983,11 @@ var AreaChartStacked = (function (_super) {
     };
     AreaChartStacked.prototype.updateTimeline = function () {
         if (this.timeline) {
-            this.timelineWidth = (this.width * 10.0 / 12.0) - this.margin[3] - this.margin[1];
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
@@ -14241,7 +14249,7 @@ var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
 var moment = __webpack_require__(3);
 var id_1 = __webpack_require__(61);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var AreaChart = (function (_super) {
     __extends(AreaChart, _super);
     function AreaChart(element, zone) {
@@ -14300,7 +14308,11 @@ var AreaChart = (function (_super) {
     };
     AreaChart.prototype.updateTimeline = function () {
         if (this.timeline) {
-            this.timelineWidth = (this.width * 10.0 / 12.0) - this.margin[3] - this.margin[1];
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
@@ -14547,7 +14559,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var sort_1 = __webpack_require__(429);
 var AreaSeries = (function () {
     function AreaSeries() {
@@ -14672,7 +14684,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarHorizontal2D = (function (_super) {
     __extends(BarHorizontal2D, _super);
     function BarHorizontal2D(element, zone) {
@@ -14902,7 +14914,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarHorizontalNormalized = (function (_super) {
     __extends(BarHorizontalNormalized, _super);
     function BarHorizontalNormalized(element, zone) {
@@ -15111,7 +15123,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarHorizontalStacked = (function (_super) {
     __extends(BarHorizontalStacked, _super);
     function BarHorizontalStacked(element, zone) {
@@ -15333,7 +15345,7 @@ var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
 var tick_format_helper_1 = __webpack_require__(418);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarHorizontal = (function (_super) {
     __extends(BarHorizontal, _super);
     function BarHorizontal(element, zone) {
@@ -15513,7 +15525,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarVertical2D = (function (_super) {
     __extends(BarVertical2D, _super);
     function BarVertical2D(element, zone) {
@@ -15748,7 +15760,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarVerticalNormalized = (function (_super) {
     __extends(BarVerticalNormalized, _super);
     function BarVerticalNormalized(element, zone) {
@@ -15957,7 +15969,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarVerticalStacked = (function (_super) {
     __extends(BarVerticalStacked, _super);
     function BarVerticalStacked(element, zone) {
@@ -16179,7 +16191,7 @@ var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
 var tick_format_helper_1 = __webpack_require__(418);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var BarVertical = (function (_super) {
     __extends(BarVertical, _super);
     function BarVertical(element, zone) {
@@ -16352,7 +16364,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var id_1 = __webpack_require__(61);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var Bar = (function () {
     function Bar(element) {
         this.roundEdges = true;
@@ -16573,6 +16585,10 @@ var SeriesHorizontal = (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = d.name;
+            var tooltipLabel = label;
+            if (tooltipLabel.constructor.name === 'Date') {
+                tooltipLabel = tooltipLabel.toLocaleDateString();
+            }
             var roundEdges = _this.type === 'standard';
             var bar = {
                 value: value,
@@ -16591,7 +16607,7 @@ var SeriesHorizontal = (function () {
                     bar.x = _this.xScale(0);
                 }
                 bar.y = _this.yScale(label);
-                bar.tooltipText = label + ": " + value;
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -16600,7 +16616,7 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
-                bar.tooltipText = label + ": " + value;
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -16618,7 +16634,7 @@ var SeriesHorizontal = (function () {
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
                 var percentage = (offset1 - offset0).toFixed(2) + '%';
-                bar.tooltipText = label + ": " + percentage;
+                bar.tooltipText = tooltipLabel + ": " + percentage.toLocaleString();
             }
             return bar;
         });
@@ -16732,6 +16748,10 @@ var SeriesVertical = (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = d.name;
+            var tooltipLabel = label;
+            if (tooltipLabel.constructor.name === 'Date') {
+                tooltipLabel = tooltipLabel.toLocaleDateString();
+            }
             var roundEdges = _this.type === 'standard';
             var bar = {
                 value: value,
@@ -16753,7 +16773,7 @@ var SeriesVertical = (function () {
                 else {
                     bar.y = _this.yScale(value);
                 }
-                bar.tooltipText = label + ": " + value;
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -16762,7 +16782,7 @@ var SeriesVertical = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
-                bar.tooltipText = label + ": " + value;
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -16780,7 +16800,7 @@ var SeriesVertical = (function () {
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
                 var percentage = (offset1 - offset0).toFixed(2) + '%';
-                bar.tooltipText = label + ": " + percentage;
+                bar.tooltipText = tooltipLabel + ": " + percentage.toLocaleString();
             }
             return bar;
         });
@@ -16997,7 +17017,7 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[areaTooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div\n          *ngFor=\"let tooltipItem of tooltipArea.values\"\n          class=\"tooltip-item\">\n\n          <span\n            class=\"tooltip-item-color\"\n            [style.background-color]=\"colors(tooltipItem.series)\">\n          </span>\n\n          {{tooltipItem.series}}: {{tooltipItem.value}}\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  "
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div\n          *ngFor=\"let tooltipItem of tooltipArea.values\"\n          class=\"tooltip-item\">\n\n          <span\n            class=\"tooltip-item-color\"\n            [style.background-color]=\"colors(tooltipItem.series)\">\n          </span>\n\n          {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
     ], AreaTooltip);
@@ -17023,7 +17043,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var id_1 = __webpack_require__(61);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var Area = (function () {
     function Area(element) {
         this.initialized = false;
@@ -17469,6 +17489,10 @@ var CircleSeries = (function () {
         return this.data.series.map(function (d, i) {
             var value = d.value;
             var label = d.name;
+            var tooltipLabel = label;
+            if (tooltipLabel.constructor.name === 'Date') {
+                tooltipLabel = tooltipLabel.toLocaleDateString();
+            }
             if (value) {
                 var cx = void 0;
                 if (_this.scaleType === 'time') {
@@ -17495,7 +17519,7 @@ var CircleSeries = (function () {
                     cy: cy,
                     radius: radius,
                     height: height,
-                    tooltipText: label + ", " + value,
+                    tooltipText: tooltipLabel + ": " + value.toLocaleString(),
                     opacity: opacity
                 };
             }
@@ -17900,7 +17924,7 @@ var ScaleLegend = (function () {
     ScaleLegend = __decorate([
         core_1.Component({
             selector: 'scale-legend',
-            template: "\n    <div\n      class=\"scale-legend\"\n      [style.width]=\"width + 'px'\">\n      <div [style.height]=\"(height - 70) + 'px'\">\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toFixed() }}</span>\n        </div>\n\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toFixed() }}</span>\n        </div>\n      </div>\n    </div>\n  "
+            template: "\n    <div\n      class=\"scale-legend\"\n      [style.width]=\"width + 'px'\">\n      <div [style.height]=\"(height - 70) + 'px'\">\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toLocaleString() }}</span>\n        </div>\n\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toLocaleString() }}</span>\n        </div>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
     ], ScaleLegend);
@@ -18044,7 +18068,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var moment = __webpack_require__(3);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var id_1 = __webpack_require__(61);
 var Timeline = (function () {
     function Timeline(element) {
@@ -18418,7 +18442,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var chart_component_1 = __webpack_require__(416);
 var base_chart_component_1 = __webpack_require__(20);
 var view_dimensions_helper_1 = __webpack_require__(21);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var color_sets_1 = __webpack_require__(18);
 var core_1 = __webpack_require__(0);
 var ForceDirectedGraph = (function (_super) {
@@ -18598,7 +18622,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var base_chart_component_1 = __webpack_require__(20);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
@@ -18703,7 +18727,7 @@ var Gauge = (function (_super) {
             ticks.big.push({
                 line: this.getTickPath(startDistance, tickLength, angle),
                 textAnchor: textAnchor,
-                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()),
+                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
                 textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(210)",
                 highlighted: this.valueScale.invert(angleDeg) <= this.value
             });
@@ -18732,10 +18756,10 @@ var Gauge = (function (_super) {
     };
     Gauge.prototype.displayValue = function () {
         if (this.units) {
-            return this.value + " " + this.units;
+            return this.value.toLocaleString() + " " + this.units;
         }
         else {
-            return this.value.toString();
+            return this.value.toLocaleString();
         }
     };
     Gauge.prototype.scaleText = function () {
@@ -18851,6 +18875,10 @@ var HeatCellSeries = (function () {
             row.series.map(function (cell) {
                 var value = cell.value;
                 var label = cell.name;
+                var tooltipLabel = label;
+                if (tooltipLabel.constructor.name === 'Date') {
+                    tooltipLabel = tooltipLabel.toLocaleDateString();
+                }
                 cells.push({
                     x: _this.xScale(row.name),
                     y: _this.yScale(cell.name),
@@ -18860,7 +18888,7 @@ var HeatCellSeries = (function () {
                     data: value,
                     label: label,
                     series: row.name,
-                    tooltipText: label + ": " + value
+                    tooltipText: tooltipLabel + ": " + value.toLocaleString()
                 });
             });
         });
@@ -18926,7 +18954,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var id_1 = __webpack_require__(61);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var HeatMapCell = (function () {
     function HeatMapCell(element) {
         this.gradient = false;
@@ -19024,7 +19052,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var base_chart_component_1 = __webpack_require__(20);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
@@ -19244,7 +19272,7 @@ var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
 var id_1 = __webpack_require__(61);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var moment = __webpack_require__(3);
 var LineChart = (function (_super) {
     __extends(LineChart, _super);
@@ -19304,7 +19332,11 @@ var LineChart = (function (_super) {
     };
     LineChart.prototype.updateTimeline = function () {
         if (this.timeline) {
-            this.timelineWidth = (this.width * 10.0 / 12.0) - this.margin[3] - this.margin[1];
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
@@ -19547,7 +19579,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var moment = __webpack_require__(3);
 var sort_1 = __webpack_require__(429);
 var LineSeries = (function () {
@@ -19725,6 +19757,9 @@ var CardSeries = (function () {
             };
         });
     };
+    CardSeries.prototype.trackBy = function (index, card) {
+        return card.label;
+    };
     CardSeries.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
@@ -19747,7 +19782,7 @@ var CardSeries = (function () {
     CardSeries = __decorate([
         core_1.Component({
             selector: 'g[cardSeries]',
-            template: "\n    <svg:g card *ngFor=\"let c of cards\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
+            template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], CardSeries);
@@ -19773,9 +19808,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(113);
-var d3_1 = __webpack_require__(9);
 var Card = (function () {
     function Card(element) {
+        this.resizeScale = 1;
+        this.textFontSize = 35;
+        this.textTransform = '';
+        this.initialized = false;
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
@@ -19783,18 +19821,27 @@ var Card = (function () {
         this.update();
     };
     Card.prototype.update = function () {
+        var _this = this;
         this.transform = "translate(" + this.x + " , " + this.y + ")";
-        this.label = this.data.name;
-        this.trimmedLabel = trim_label_helper_1.trimLabel(this.label, 55);
-        var step = this.data.value / 100;
-        this.countUp(0, this.data.value, step);
+        this.textWidth = Math.max(0, this.width - 15);
         this.cardWidth = Math.max(0, this.width - 5);
         this.cardHeight = Math.max(0, this.height - 5);
-        this.textWidth = Math.max(0, this.width - 15);
+        this.label = this.data.name;
+        this.trimmedLabel = trim_label_helper_1.trimLabel(this.label, 55);
+        this.value = this.data.value.toLocaleString();
+        this.scaleText();
+        if (!this.initialized) {
+            setTimeout(function () {
+                _this.scaleText();
+                var step = _this.data.value / 100;
+                _this.countUp(0, _this.data.value, step);
+            });
+            this.initialized = true;
+        }
     };
     Card.prototype.countUp = function (current, max, step) {
         var _this = this;
-        this.value = d3_1.default.format(",.0f")(current);
+        this.value = Math.round(current).toLocaleString();
         if (current >= max) {
             return;
         }
@@ -19802,6 +19849,18 @@ var Card = (function () {
         setTimeout(function () {
             _this.countUp(newValue, max, step);
         }, 16);
+    };
+    Card.prototype.scaleText = function () {
+        var width = this.textEl.nativeElement.getBoundingClientRect().width;
+        if (width === 0) {
+            return;
+        }
+        var oldScale = this.resizeScale;
+        var availableSpace = this.cardWidth * 0.85;
+        this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+        if (this.resizeScale !== oldScale) {
+            this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+        }
     };
     Card.prototype.click = function () {
         this.clickHandler.emit({
@@ -19841,10 +19900,14 @@ var Card = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], Card.prototype, "clickHandler", void 0);
+    __decorate([
+        core_1.ViewChild('textEl'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], Card.prototype, "textEl", void 0);
     Card = __decorate([
         core_1.Component({
             selector: 'g[card]',
-            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\"\n      (click)=\"click()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer; stroke-width: 2px; stroke: #192024;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"fill: #fff; font-size: 12px; pointer-events: none; text-transform: uppercase; overflow: hidden; text-align: center;\">\n        <xhtml:p>\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n\n      <svg:text\n        [attr.x]=\"width / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy='.35em'\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        style=\"font-size: 46px; pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  "
+            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\"\n      (click)=\"click()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy='.35em'\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Card);
@@ -20072,7 +20135,7 @@ var AdvancedPieChart = (function (_super) {
     AdvancedPieChart = __decorate([
         core_1.Component({
             selector: 'advanced-pie-chart',
-            template: "\n    <div [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n\n        <chart\n          [colors]=\"colors\"\n          [view]=\"[dims.width, dims.height]\">\n\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"click($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.margin-top]=\"(height - 215)/2\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n\n          <div class=\"total-value\">\n            {{roundedTotal}}\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n                <div class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div class=\"item-value\">{{legendItem.value}}</div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n      </div>\n    </div>\n\n  "
+            template: "\n    <div [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n\n        <chart\n          [colors]=\"colors\"\n          [view]=\"[dims.width, dims.height]\">\n\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"click($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.margin-top]=\"(height - 215)/2\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n\n          <div class=\"total-value\">\n            {{roundedTotal.toLocaleString()}}\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n                <div class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div class=\"item-value\">{{legendItem.value.toLocaleString()}}</div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div class=\"item-percent\">{{legendItem.percentage.toLocaleString()}}%</div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n      </div>\n    </div>\n\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], AdvancedPieChart);
@@ -20097,7 +20160,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var id_1 = __webpack_require__(61);
 var PieArc = (function () {
     function PieArc(element) {
@@ -20414,7 +20477,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var PieGridSeries = (function () {
     function PieGridSeries(element) {
         this.innerRadius = 70;
@@ -20523,7 +20586,7 @@ var color_sets_1 = __webpack_require__(18);
 var base_chart_component_1 = __webpack_require__(20);
 var trim_label_helper_1 = __webpack_require__(113);
 var grid_layout_helper_1 = __webpack_require__(417);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var PieGrid = (function (_super) {
     __extends(PieGrid, _super);
     function PieGrid(element, zone) {
@@ -20583,7 +20646,7 @@ var PieGrid = (function (_super) {
                 innerRadius: innerRadius,
                 outerRadius: radius,
                 label: trim_label_helper_1.trimLabel(label),
-                total: "Total: " + d3_1.default.format(".2f")(value),
+                total: "Total: " + value.toLocaleString(),
                 value: value,
                 percent: d3_1.default.format(".1p")(d.data.percent),
                 data: [d, {
@@ -20630,7 +20693,7 @@ var PieGrid = (function (_super) {
     PieGrid = __decorate([
         core_1.Component({
             selector: 'pie-grid',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\" >\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"click($event)\"\n\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value\"\n          />\n\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total}}\n          </svg:text>\n\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\" >\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"click($event)\"\n\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value.toLocaleString()\"\n          />\n\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], PieGrid);
@@ -20656,7 +20719,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(113);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var PieLabel = (function () {
     function PieLabel(element) {
         this.element = element.nativeElement;
@@ -20760,7 +20823,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var PieSeries = (function () {
     function PieSeries() {
         this.series = [];
@@ -20816,10 +20879,14 @@ var PieSeries = (function () {
         return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
     };
     PieSeries.prototype.label = function (arc) {
+        var label = arc.data.name;
+        if (label.constructor.name === 'Date') {
+            label = label.toLocaleDateString();
+        }
         return arc.data.name;
     };
     PieSeries.prototype.tooltipText = function (arc) {
-        return this.label(arc) + ": " + arc.data.value;
+        return this.label(arc) + ": " + arc.data.value.toLocaleString();
     };
     PieSeries.prototype.color = function (arc) {
         return this.colors(this.label(arc));
@@ -20917,7 +20984,7 @@ var TreeMapCellSeries = (function () {
                 label: d.id,
                 value: d.value,
                 valueType: d.valueType,
-                tooltipText: d.id + ": " + d.value
+                tooltipText: d.id + ": " + d.value.toLocaleString()
             };
         });
     };
@@ -20971,7 +21038,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var TreeMapCell = (function () {
     function TreeMapCell(element) {
         this.initialized = false;
@@ -20982,7 +21049,7 @@ var TreeMapCell = (function () {
         this.update();
     };
     TreeMapCell.prototype.update = function () {
-        this.formattedValue = this.value;
+        this.formattedValue = this.value.toLocaleString();
         if (this.initialized) {
             this.animateToCurrentForm();
         }
@@ -21083,7 +21150,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var d3_1 = __webpack_require__(9);
+var d3_1 = __webpack_require__(11);
 var base_chart_component_1 = __webpack_require__(20);
 var view_dimensions_helper_1 = __webpack_require__(21);
 var color_sets_1 = __webpack_require__(18);
@@ -21549,7 +21616,7 @@ exports = module.exports = __webpack_require__(295)();
 
 
 // module
-exports.push([module.i, ".swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n\n.ng2d3 {\n  float: left; }\n  .ng2d3 .bar:hover,\n  .ng2d3 .cell:hover,\n  .ng2d3 .arc:hover,\n  .ng2d3 .card:hover {\n    opacity: 0.8; }\n  .ng2d3 .area {\n    opacity: 0.6; }\n  .ng2d3 .circle:hover {\n    cursor: pointer; }\n  .ng2d3 .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none; }\n\n.grid-panel rect {\n  fill: none; }\n\n.grid-panel.odd rect {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.timeline .brush .overlay {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.timeline .brush .selection {\n  fill: rgba(0, 0, 0, 0.1);\n  stroke-width: 1px;\n  stroke-dasharray: 10,5;\n  stroke: #888888; }\n\n.timeline .brush .handle {\n  fill-opacity: 0; }\n\n.timeline .embedded-chart {\n  opacity: 0.6; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.legend {\n  display: inline-block;\n  padding: 0; }\n  .legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .legend ul, .legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .legend .legend-wrap {\n    width: 90%; }\n  .legend .scale-legend {\n    text-align: center; }\n  .legend .scale-legend-wrap {\n    display: inline-block;\n    height: 100%;\n    width: 30px;\n    border-radius: 5px; }\n  .legend .scale-legend-label {\n    font-size: 12px; }\n  .legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    background: rgba(0, 0, 0, 0.05); }\n  .legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .legend .legend-label.active {\n      color: #FFF; }\n  .legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    display: inline-block;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px; }\n  .legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis; }\n\n.advanced-pie {\n  display: inline-block;\n  float: left; }\n\n.advanced-pie-legend-wrapper {\n  display: inline-block; }\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n\n.pie-grid .arc1 {\n  opacity: 0.4; }\n\n.force-directed-graph .edge {\n  stroke: #333; }\n\n.gauge .background-arc path {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.gauge .gauge-tick path {\n  stroke: #999; }\n\n.gauge .gauge-tick text {\n  font-size: 12px;\n  fill: #999;\n  font-weight: bold; }\n\n.gauge .gauge-tick.highlighted path {\n  stroke: #666; }\n\n.gauge .gauge-tick.highlighted text {\n  fill: #666; }\n\n.gauge .gauge-tick-large path {\n  stroke-width: 2px; }\n\n.gauge .gauge-tick-small path {\n  stroke-width: 1px; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.scss","/./src/src/ng2d3.scss"],"names":[],"mappings":"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","file":"ng2d3.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n","@import \"./common/tooltip/tooltip\";\n\n.ng2d3 {\n  float: left;\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none;\n}\n\n.grid-panel {\n  rect {\n    fill: none;\n  }\n\n  &.odd {\n    rect {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.timeline {\n  .brush {\n    .overlay {\n      fill: rgba(0,0,0,0.05);\n    }\n\n    .selection {\n      fill: rgba(0, 0, 0, 0.1);\n      stroke-width: 1px;\n      stroke-dasharray: 10,5;\n      stroke: #888888;\n    }\n\n    .handle {\n      fill-opacity: 0;\n    }\n  }\n\n  .embedded-chart {\n    opacity: 0.6;\n  }\n}\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.legend {\n  display: inline-block;\n  padding: 0;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .scale-legend {\n    text-align: center;\n  }\n\n  .scale-legend-wrap {\n    display: inline-block;\n    height: 100%;\n    width: 30px;\n    border-radius: 5px;\n  }\n\n  .scale-legend-label{\n      font-size: 12px;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    background: rgba(0,0,0,0.05);\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    display: inline-block;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n  }\n}\n\n.advanced-pie {\n  display: inline-block;\n  float: left;\n}\n\n.advanced-pie-legend-wrapper {\n  display: inline-block;\n}\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  transform: translate(0, -50%);\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n\n.pie-grid {\n  .arc1 {\n    opacity: 0.4;\n  }\n}\n\n.force-directed-graph {\n  .edge {\n    stroke: #333;\n  }\n}\n\n.gauge {\n  .background-arc {\n    path {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n\n  text {\n  }\n\n  .gauge-tick {\n    path {\n      stroke: #999;\n    }\n\n    text {\n      font-size: 12px;\n      fill: #999;\n      font-weight: bold;\n    }\n\n    &.highlighted {\n      path {\n        stroke: #666;\n      }\n\n      text {\n        fill: #666;\n      }\n    }\n  }\n  .gauge-tick-large path {\n    stroke-width: 2px;\n  }\n  .gauge-tick-small path{\n    stroke-width: 1px;\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, ".swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n\n.ng2d3 {\n  float: left; }\n  .ng2d3 .bar:hover,\n  .ng2d3 .cell:hover,\n  .ng2d3 .arc:hover,\n  .ng2d3 .card:hover {\n    opacity: 0.8; }\n  .ng2d3 .area {\n    opacity: 0.6; }\n  .ng2d3 .circle:hover {\n    cursor: pointer; }\n  .ng2d3 .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none; }\n\n.grid-panel rect {\n  fill: none; }\n\n.grid-panel.odd rect {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.timeline .brush .overlay {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.timeline .brush .selection {\n  fill: rgba(0, 0, 0, 0.1);\n  stroke-width: 1px;\n  stroke-dasharray: 10,5;\n  stroke: #888888; }\n\n.timeline .brush .handle {\n  fill-opacity: 0; }\n\n.timeline .embedded-chart {\n  opacity: 0.6; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.chart-legend {\n  display: inline-block;\n  padding: 0; }\n  .chart-legend .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .chart-legend ul, .chart-legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .chart-legend .legend-wrap {\n    width: 90%; }\n  .chart-legend .scale-legend {\n    text-align: center; }\n  .chart-legend .scale-legend-wrap {\n    display: inline-block;\n    height: 100%;\n    width: 30px;\n    border-radius: 5px; }\n  .chart-legend .scale-legend-label {\n    font-size: 12px; }\n  .chart-legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    background: rgba(0, 0, 0, 0.05); }\n  .chart-legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .chart-legend .legend-label.active {\n      color: #FFF; }\n  .chart-legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .chart-legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    display: inline-block;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px; }\n  .chart-legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .chart-legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis; }\n\n.advanced-pie {\n  display: inline-block;\n  float: left; }\n\n.advanced-pie-legend-wrapper {\n  display: inline-block; }\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n\n.pie-grid .arc1 {\n  opacity: 0.4; }\n\n.force-directed-graph .edge {\n  stroke: #333; }\n\n.gauge .background-arc path {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.gauge .gauge-tick path {\n  stroke: #999; }\n\n.gauge .gauge-tick text {\n  font-size: 12px;\n  fill: #999;\n  font-weight: bold; }\n\n.gauge .gauge-tick.highlighted path {\n  stroke: #666; }\n\n.gauge .gauge-tick.highlighted text {\n  fill: #666; }\n\n.gauge .gauge-tick-large path {\n  stroke-width: 2px; }\n\n.gauge .gauge-tick-small path {\n  stroke-width: 1px; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.scss","/./src/src/ng2d3.scss"],"names":[],"mappings":"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","file":"ng2d3.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n","@import \"./common/tooltip/tooltip\";\n\n.ng2d3 {\n  float: left;\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &:hover {\n      opacity: 0.8;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none;\n}\n\n.grid-panel {\n  rect {\n    fill: none;\n  }\n\n  &.odd {\n    rect {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.timeline {\n  .brush {\n    .overlay {\n      fill: rgba(0,0,0,0.05);\n    }\n\n    .selection {\n      fill: rgba(0, 0, 0, 0.1);\n      stroke-width: 1px;\n      stroke-dasharray: 10,5;\n      stroke: #888888;\n    }\n\n    .handle {\n      fill-opacity: 0;\n    }\n  }\n\n  .embedded-chart {\n    opacity: 0.6;\n  }\n}\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.chart-legend {\n  display: inline-block;\n  padding: 0;\n\n  .legend-title {\n    color: #76818a;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .scale-legend {\n    text-align: center;\n  }\n\n  .scale-legend-wrap {\n    display: inline-block;\n    height: 100%;\n    width: 30px;\n    border-radius: 5px;\n  }\n\n  .scale-legend-label{\n      font-size: 12px;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    background: rgba(0,0,0,0.05);\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    display: inline-block;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n  }\n}\n\n.advanced-pie {\n  display: inline-block;\n  float: left;\n}\n\n.advanced-pie-legend-wrapper {\n  display: inline-block;\n}\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  transform: translate(0, -50%);\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n\n.pie-grid {\n  .arc1 {\n    opacity: 0.4;\n  }\n}\n\n.force-directed-graph {\n  .edge {\n    stroke: #333;\n  }\n}\n\n.gauge {\n  .background-arc {\n    path {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n\n  text {\n  }\n\n  .gauge-tick {\n    path {\n      stroke: #999;\n    }\n\n    text {\n      font-size: 12px;\n      fill: #999;\n      font-weight: bold;\n    }\n\n    &.highlighted {\n      path {\n        stroke: #666;\n      }\n\n      text {\n        fill: #666;\n      }\n    }\n  }\n  .gauge-tick-large path {\n    stroke-width: 2px;\n  }\n  .gauge-tick-small path{\n    stroke-width: 1px;\n  }\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
