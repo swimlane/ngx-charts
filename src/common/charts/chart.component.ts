@@ -23,7 +23,7 @@ import {
 
       <scale-legend
         *ngIf="legend && legendType === 'scaleLegend'"
-        class="legend"
+        class="chart-legend"
         [valueRange]="data"
         [colors]="legendData"
         [height]="view[1]"
@@ -32,7 +32,7 @@ import {
 
       <legend
         *ngIf="legend && legendType === 'legend'"
-        class="legend"
+        class="chart-legend"
         [data]="legendData"
         [title]="legendTitle"
         [colors]="colors"
