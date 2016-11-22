@@ -22,6 +22,14 @@ export declare class LineChart extends BaseChart implements OnChanges, OnDestroy
     hoveredVertical: any;
     xAxisHeight: number;
     yAxisWidth: number;
+    filteredDomain: any;
+    timelineWidth: any;
+    timelineHeight: number;
+    timelineXScale: any;
+    timelineYScale: any;
+    timelineXDomain: any;
+    timelineTransform: any;
+    timelinePadding: number;
     view: any;
     results: any;
     scheme: any;
@@ -44,17 +52,19 @@ export declare class LineChart extends BaseChart implements OnChanges, OnDestroy
     ngOnDestroy(): void;
     ngOnChanges(): void;
     update(): void;
+    updateTimeline(): void;
     getXDomain(): any[];
     getYDomain(): number[];
     getSeriesDomain(): any;
-    getXScale(): any;
-    getYScale(): any;
+    getXScale(domain: any, width: any): any;
+    getYScale(domain: any, height: any): any;
     getScaleType(values: any): string;
     isDate(value: any): boolean;
     updateDomain(domain: any): void;
     updateHoveredVertical(item: any): void;
     hideCircles(): void;
     click(data: any, series: any): void;
+    trackBy(index: any, item: any): any;
     setColors(): void;
     updateYAxisWidth({width}: {
         width: any;

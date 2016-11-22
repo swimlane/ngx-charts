@@ -3,12 +3,12 @@ export declare class Timeline implements OnChanges {
     element: HTMLElement;
     dims: any;
     xDomain: any[];
-    yDomain: any[];
     xScale: any;
     brush: any;
     transform: string;
-    margin: number[];
     initialized: boolean;
+    filterId: any;
+    filter: any;
     view: any;
     state: any;
     results: any;
@@ -18,18 +18,18 @@ export declare class Timeline implements OnChanges {
     miniChart: any;
     autoScale: any;
     scaleType: any;
+    height: number;
     clickHandler: EventEmitter<{}>;
     onDomainChange: EventEmitter<{}>;
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
     getXDomain(): any[];
-    getYDomain(): void;
     getXScale(): any;
-    getYScale(): void;
     addBrush(): void;
+    updateBrush(): void;
     getDims(): {
-        width: number;
+        width: any;
         height: number;
     };
 }

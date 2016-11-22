@@ -18,5 +18,6 @@ export declare class CardSeries implements OnChanges {
     ngOnChanges(): void;
     update(): void;
     getCards(): any;
+    trackBy(index: any, card: any): any;
     click(data: any): void;
 }

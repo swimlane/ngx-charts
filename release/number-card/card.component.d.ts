@@ -7,6 +7,10 @@ export declare class Card implements OnChanges {
     cardWidth: number;
     cardHeight: number;
     textWidth: number;
+    resizeScale: number;
+    textFontSize: number;
+    textTransform: string;
+    initialized: boolean;
     color: any;
     x: any;
     y: any;
@@ -15,9 +19,11 @@ export declare class Card implements OnChanges {
     label: any;
     data: any;
     clickHandler: EventEmitter<{}>;
+    textEl: ElementRef;
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
     countUp(current: any, max: any, step: any): void;
+    scaleText(): void;
     click(): void;
 }

@@ -1,6 +1,6 @@
 {
   "name": "ng2d3",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Angular2 + D3 Charting Library",
   "main": "release/ng2d3.js",
   "typings": "release/ng2d3.d.ts",

@@ -1,5 +1,5 @@
 /**
- * ng2d3 v"1.6.0" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.6.1" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -12,7 +12,7 @@
 		exports["ng2d3"] = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs"));
 	else
 		root["ng2d3"] = factory(root["@angular/common"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["d3-force"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_24__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_95__, __WEBPACK_EXTERNAL_MODULE_96__, __WEBPACK_EXTERNAL_MODULE_97__, __WEBPACK_EXTERNAL_MODULE_98__, __WEBPACK_EXTERNAL_MODULE_99__, __WEBPACK_EXTERNAL_MODULE_100__, __WEBPACK_EXTERNAL_MODULE_101__, __WEBPACK_EXTERNAL_MODULE_102__, __WEBPACK_EXTERNAL_MODULE_103__, __WEBPACK_EXTERNAL_MODULE_104__, __WEBPACK_EXTERNAL_MODULE_105__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_106__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_23__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_95__, __WEBPACK_EXTERNAL_MODULE_96__, __WEBPACK_EXTERNAL_MODULE_97__, __WEBPACK_EXTERNAL_MODULE_98__, __WEBPACK_EXTERNAL_MODULE_99__, __WEBPACK_EXTERNAL_MODULE_100__, __WEBPACK_EXTERNAL_MODULE_101__, __WEBPACK_EXTERNAL_MODULE_102__, __WEBPACK_EXTERNAL_MODULE_103__, __WEBPACK_EXTERNAL_MODULE_104__, __WEBPACK_EXTERNAL_MODULE_105__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_106__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -440,14 +440,14 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 var core_1 = __webpack_require__(0);
-var chart_component_1 = __webpack_require__(28);
+var chart_component_1 = __webpack_require__(27);
 exports.Chart = chart_component_1.Chart;
 var legend_component_1 = __webpack_require__(60);
 exports.Legend = legend_component_1.Legend;
 var scale_legend_component_1 = __webpack_require__(61);
 exports.ScaleLegend = scale_legend_component_1.ScaleLegend;
 var axes_module_1 = __webpack_require__(52);
-var tooltip_1 = __webpack_require__(31);
+var tooltip_1 = __webpack_require__(30);
 var circle_series_component_1 = __webpack_require__(56);
 exports.CircleSeries = circle_series_component_1.CircleSeries;
 var circle_component_1 = __webpack_require__(57);
@@ -462,12 +462,12 @@ var svg_radial_gradient_component_1 = __webpack_require__(63);
 exports.SvgRadialGradient = svg_radial_gradient_component_1.SvgRadialGradient;
 var timeline_component_1 = __webpack_require__(64);
 exports.Timeline = timeline_component_1.Timeline;
-var common_1 = __webpack_require__(24);
+var common_1 = __webpack_require__(23);
 var area_component_1 = __webpack_require__(51);
 exports.Area = area_component_1.Area;
 var area_tooltip_component_1 = __webpack_require__(50);
 exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
-__export(__webpack_require__(31));
+__export(__webpack_require__(30));
 var COMPONENTS = [
     area_component_1.Area,
     area_tooltip_component_1.AreaTooltip,
@@ -1296,74 +1296,12 @@ exports.TooltipService = TooltipService;
 
 /***/ },
 /* 23 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var InjectionService = (function () {
-    function InjectionService(applicationRef, componentFactoryResolver, injector) {
-        this.applicationRef = applicationRef;
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.injector = injector;
-    }
-    InjectionService.prototype.getRootViewContainerRef = function () {
-        var rootComponents = this.applicationRef['_rootComponents'];
-        if (rootComponents.length) {
-            return rootComponents[0]['_hostElement'].vcRef;
-        }
-        return this.vcRef;
-    };
-    InjectionService.prototype.setRootViewContainerRef = function (vcRef) {
-        this.vcRef = vcRef;
-    };
-    InjectionService.prototype.appendNextToLocation = function (componentClass, location, options) {
-        var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
-        var parentInjector = location.parentInjector;
-        var childInjector = parentInjector;
-        var component = location.createComponent(componentFactory, location.length, childInjector);
-        return this.projectComponentInputs(component, options);
-    };
-    InjectionService.prototype.appendNextToRoot = function (componentClass, options) {
-        var location = this.getRootViewContainerRef();
-        return this.appendNextToLocation(componentClass, location, options);
-    };
-    InjectionService.prototype.projectComponentInputs = function (component, options) {
-        if (options) {
-            var props = Object.getOwnPropertyNames(options);
-            for (var _i = 0, props_1 = props; _i < props_1.length; _i++) {
-                var prop = props_1[_i];
-                component.instance[prop] = options[prop];
-            }
-        }
-        return component;
-    };
-    InjectionService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
-    ], InjectionService);
-    return InjectionService;
-}());
-exports.InjectionService = InjectionService;
-
+module.exports = __WEBPACK_EXTERNAL_MODULE_23__;
 
 /***/ },
 /* 24 */
-/***/ function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_24__;
-
-/***/ },
-/* 25 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1385,7 +1323,7 @@ exports.reduceTicks = reduceTicks;
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1401,7 +1339,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(8);
-var ticks_helper_1 = __webpack_require__(25);
+var ticks_helper_1 = __webpack_require__(24);
 var XAxisTicks = (function () {
     function XAxisTicks() {
         this.tickArguments = [5];
@@ -1573,7 +1511,7 @@ exports.XAxisTicks = XAxisTicks;
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1589,7 +1527,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(8);
-var ticks_helper_1 = __webpack_require__(25);
+var ticks_helper_1 = __webpack_require__(24);
 var YAxisTicks = (function () {
     function YAxisTicks() {
         this.tickArguments = [5];
@@ -1777,7 +1715,7 @@ exports.YAxisTicks = YAxisTicks;
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1792,14 +1730,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var injection_service_1 = __webpack_require__(23);
 var Chart = (function () {
-    function Chart(vcr, injectionService) {
-        this.vcr = vcr;
-        this.injectionService = injectionService;
+    function Chart() {
         this.legend = false;
         this.legendTitle = 'Legend';
-        this.injectionService.setRootViewContainerRef(vcr);
     }
     Chart.prototype.ngOnChanges = function () {
         this.update();
@@ -1851,9 +1785,8 @@ var Chart = (function () {
     ], Chart.prototype, "colors", void 0);
     Chart = __decorate([
         core_1.Component({
-            providers: [injection_service_1.InjectionService],
             selector: 'chart',
-            template: "\n    <div [style.width]=\"view[0] + 'px'\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n\n        <ng-content></ng-content>\n      </svg>\n\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </legend>\n    </div>\n  ",
+            template: "\n    <div [style.width]=\"view[0] + 'px'\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n\n        <ng-content></ng-content>\n      </svg>\n\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </legend>\n    </div>\n  ",
             animations: [
                 core_1.trigger('animationState', [
                     core_1.transition('void => *', [
@@ -1865,7 +1798,7 @@ var Chart = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef, injection_service_1.InjectionService])
+        __metadata('design:paramtypes', [])
     ], Chart);
     return Chart;
 }());
@@ -1873,7 +1806,7 @@ exports.Chart = Chart;
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1933,7 +1866,7 @@ function getTotal(results) {
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1954,7 +1887,7 @@ exports.tickFormat = tickFormat;
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1965,15 +1898,15 @@ function __export(m) {
 __export(__webpack_require__(67));
 __export(__webpack_require__(22));
 __export(__webpack_require__(21));
-__export(__webpack_require__(33));
+__export(__webpack_require__(32));
 __export(__webpack_require__(20));
 __export(__webpack_require__(19));
 __export(__webpack_require__(18));
-__export(__webpack_require__(32));
+__export(__webpack_require__(31));
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1987,7 +1920,7 @@ var ShowTypes = exports.ShowTypes;
 
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2002,23 +1935,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var injection_service_1 = __webpack_require__(23);
+var injection_service_1 = __webpack_require__(33);
 var id_1 = __webpack_require__(6);
 var placement_type_1 = __webpack_require__(19);
 var style_type_1 = __webpack_require__(20);
 var alignment_type_1 = __webpack_require__(18);
-var show_type_1 = __webpack_require__(32);
+var show_type_1 = __webpack_require__(31);
 var tooltip_component_1 = __webpack_require__(21);
 var tooltip_options_1 = __webpack_require__(66);
 var tooltip_service_1 = __webpack_require__(22);
 __webpack_require__(94);
 var TooltipDirective = (function () {
-    function TooltipDirective(tooltipService, viewContainerRef, injectionService, elementRef, renderer) {
+    function TooltipDirective(tooltipService, viewContainerRef, injectionService, renderer, element) {
         this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.injectionService = injectionService;
-        this.elementRef = elementRef;
         this.renderer = renderer;
+        this.element = element;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -2036,26 +1969,57 @@ var TooltipDirective = (function () {
         this.show = new core_1.EventEmitter();
         this.hide = new core_1.EventEmitter();
     }
+    Object.defineProperty(TooltipDirective.prototype, "listensForFocus", {
+        get: function () {
+            return this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+                this.tooltipShowEvent === show_type_1.ShowTypes.focus;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TooltipDirective.prototype, "listensForHover", {
+        get: function () {
+            return this.tooltipShowEvent === show_type_1.ShowTypes.all ||
+                this.tooltipShowEvent === show_type_1.ShowTypes.mouseover;
+        },
+        enumerable: true,
+        configurable: true
+    });
     TooltipDirective.prototype.ngOnDestroy = function () {
         this.hideTooltip(true);
     };
     TooltipDirective.prototype.onFocus = function () {
-        if (this.tooltipShowEvent === show_type_1.ShowTypes.all ||
-            this.tooltipShowEvent === show_type_1.ShowTypes.focus) {
+        if (this.listensForFocus) {
             this.showTooltip();
         }
     };
     TooltipDirective.prototype.onMouseEnter = function () {
-        if (this.tooltipShowEvent === show_type_1.ShowTypes.all ||
-            this.tooltipShowEvent === show_type_1.ShowTypes.mouseover) {
+        if (this.listensForHover) {
             this.showTooltip();
+        }
+    };
+    TooltipDirective.prototype.onBlur = function () {
+        if (this.listensForFocus) {
+            this.hideTooltip();
+        }
+    };
+    TooltipDirective.prototype.onMouseLeave = function (target) {
+        if (this.listensForHover && this.tooltipCloseOnMouseLeave) {
+            var tooltip = this.tooltipService.get(this.componentId);
+            if (tooltip) {
+                var contentDom = tooltip.instance.element.nativeElement;
+                var contains = contentDom.contains(target);
+                if (contains)
+                    return;
+            }
+            clearTimeout(this.timeout);
+            this.hideTooltip();
         }
     };
     TooltipDirective.prototype.showTooltip = function (immediate) {
         var _this = this;
-        if (this.componentId || this.tooltipDisabled) {
+        if (this.componentId || this.tooltipDisabled)
             return;
-        }
         var time = immediate ? 0 : this.tooltipShowTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
@@ -2071,78 +2035,41 @@ var TooltipDirective = (function () {
     };
     TooltipDirective.prototype.addHideListeners = function (tooltip) {
         var _this = this;
-        var entered = false;
         this.mouseEnterContentEvent = this.renderer.listen(tooltip, 'mouseenter', function () {
-            entered = true;
             clearTimeout(_this.timeout);
         });
         if (this.tooltipCloseOnMouseLeave) {
             this.mouseLeaveContentEvent = this.renderer.listen(tooltip, 'mouseleave', function () {
-                entered = false;
                 _this.hideTooltip();
             });
         }
         if (this.tooltipCloseOnClickOutside) {
             this.documentClickEvent = this.renderer.listen(document, 'click', function (event) {
                 var contains = tooltip.contains(event.target);
-                if (!contains) {
+                if (!contains)
                     _this.hideTooltip();
-                }
-            });
-        }
-        var element = this.elementRef.nativeElement;
-        var addLeaveListener = this.tooltipShowEvent === show_type_1.ShowTypes.all ||
-            this.tooltipShowEvent === show_type_1.ShowTypes.mouseover;
-        if (addLeaveListener) {
-            this.mouseLeaveEvent = this.renderer.listen(element, 'mouseleave', function () {
-                if (!entered) {
-                    _this.hideTooltip();
-                }
-            });
-        }
-        var addFocusListener = this.tooltipShowEvent === show_type_1.ShowTypes.all ||
-            this.tooltipShowEvent === show_type_1.ShowTypes.focus;
-        if (addFocusListener) {
-            this.focusOutEvent = this.renderer.listen(element, 'blur', function () {
-                if (!entered) {
-                    _this.hideTooltip();
-                }
             });
         }
     };
     TooltipDirective.prototype.injectComponent = function () {
         var options = this.createBoundOptions();
-        if (this.tooltipAppendToBody) {
-            return this.injectionService.appendNextToRoot(tooltip_component_1.TooltipContentComponent, options);
-        }
-        else {
-            return this.injectionService.appendNextToLocation(tooltip_component_1.TooltipContentComponent, this.viewContainerRef, options);
-        }
+        var location = this.tooltipAppendToBody ? undefined : this.element.nativeElement;
+        return this.injectionService.appendComponent(tooltip_component_1.TooltipContentComponent, options, location);
     };
     TooltipDirective.prototype.hideTooltip = function (immediate) {
         var _this = this;
-        if (!this.componentId) {
+        if (!this.componentId)
             return;
-        }
         var time = immediate ? 0 : this.tooltipHideTimeout;
         clearTimeout(this.timeout);
         this.timeout = setTimeout(function () {
             _this.tooltipService.destroy(_this.componentId);
-            if (_this.mouseLeaveEvent) {
-                _this.mouseLeaveEvent();
-            }
-            if (_this.focusOutEvent) {
-                _this.focusOutEvent();
-            }
-            if (_this.mouseLeaveContentEvent) {
+            if (_this.mouseLeaveContentEvent)
                 _this.mouseLeaveContentEvent();
-            }
-            if (_this.mouseEnterContentEvent) {
+            if (_this.mouseEnterContentEvent)
                 _this.mouseEnterContentEvent();
-            }
-            if (_this.documentClickEvent) {
+            if (_this.documentClickEvent)
                 _this.documentClickEvent();
-            }
             _this.hide.emit(true);
             _this.componentId = undefined;
         }, time);
@@ -2246,13 +2173,110 @@ var TooltipDirective = (function () {
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onMouseEnter", null);
+    __decorate([
+        core_1.HostListener('blur'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "onBlur", null);
+    __decorate([
+        core_1.HostListener('mouseleave', ['$event.target']), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "onMouseLeave", null);
     TooltipDirective = __decorate([
         core_1.Directive({ selector: '[swui-tooltip]' }), 
-        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, injection_service_1.InjectionService, core_1.ElementRef, core_1.Renderer])
+        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, injection_service_1.InjectionService, core_1.Renderer, core_1.ElementRef])
     ], TooltipDirective);
     return TooltipDirective;
 }());
 exports.TooltipDirective = TooltipDirective;
+
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var InjectionService = (function () {
+    function InjectionService(applicationRef, componentFactoryResolver, injector) {
+        this.applicationRef = applicationRef;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.injector = injector;
+    }
+    InjectionService.prototype.getRootViewContainer = function () {
+        if (this._container)
+            return this._container;
+        var rootComponents = this.applicationRef['_rootComponents'];
+        if (rootComponents.length)
+            return rootComponents[0];
+        throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
+    };
+    InjectionService.prototype.setRootViewContainer = function (container) {
+        this._container = container;
+    };
+    InjectionService.prototype.getComponentRootNode = function (componentRef) {
+        return componentRef.hostView.rootNodes[0];
+    };
+    InjectionService.prototype.getRootViewContainerNode = function () {
+        return this.getComponentRootNode(this.getRootViewContainer());
+    };
+    InjectionService.prototype.projectComponentInputs = function (component, options) {
+        if (options) {
+            var props = Object.getOwnPropertyNames(options);
+            for (var _i = 0, props_1 = props; _i < props_1.length; _i++) {
+                var prop = props_1[_i];
+                component.instance[prop] = options[prop];
+            }
+        }
+        return component;
+    };
+    InjectionService.prototype.appendComponent = function (componentClass, options, location) {
+        if (options === void 0) { options = {}; }
+        if (location === void 0) { location = this.getRootViewContainerNode(); }
+        var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
+        var componentRef = componentFactory.create(this.injector);
+        var appRef = this.applicationRef;
+        var componentRootNode = this.getComponentRootNode(componentRef);
+        this.projectComponentInputs(componentRef, options);
+        if (appRef['attachView']) {
+            appRef.attachView(componentRef.hostView);
+            componentRef.onDestroy(function () {
+                appRef.detachView(componentRef.hostView);
+            });
+        }
+        else {
+            var changeDetectorRef_1 = componentRef.changeDetectorRef;
+            appRef.registerChangeDetector(changeDetectorRef_1);
+            componentRef.onDestroy(function () {
+                appRef.unregisterChangeDetector(changeDetectorRef_1);
+                if (componentRootNode.parentNode) {
+                    componentRootNode.parentNode.removeChild(componentRootNode);
+                }
+            });
+        }
+        location.appendChild(componentRootNode);
+        return componentRef;
+    };
+    InjectionService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
+    ], InjectionService);
+    return InjectionService;
+}());
+exports.InjectionService = InjectionService;
 
 
 /***/ },
@@ -2310,6 +2334,8 @@ var AreaChartNormalized = (function (_super) {
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
+        this.timelineHeight = 50;
+        this.timelinePadding = 10;
         this.legend = false;
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
@@ -2341,13 +2367,16 @@ var AreaChartNormalized = (function (_super) {
             columns: 10
         });
         if (this.timeline) {
-            this.dims.height -= 150;
+            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
         }
         this.xDomain = this.getXDomain();
+        if (this.filteredDomain) {
+            this.xDomain = this.filteredDomain;
+        }
         this.yDomain = this.getYDomain();
         this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
+        this.yScale = this.getYScale(this.yDomain, this.dims.height);
         var _loop_1 = function(i) {
             var val = this_1.xSet[i];
             var d0 = 0;
@@ -2406,11 +2435,25 @@ var AreaChartNormalized = (function (_super) {
         for (var i = 0; i < this.xSet.length; i++) {
             _loop_1(i);
         }
+        this.updateTimeline();
         this.setColors();
         this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
         var pageUrl = window.location.href;
         this.clipPathId = 'clip' + id_1.id().toString();
         this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
+    };
+    AreaChartNormalized.prototype.updateTimeline = function () {
+        if (this.timeline) {
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
+            this.timelineXDomain = this.getXDomain();
+            this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+            this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
+            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+        }
     };
     AreaChartNormalized.prototype.getXDomain = function () {
         var values = [];
@@ -2449,30 +2492,30 @@ var AreaChartNormalized = (function (_super) {
     AreaChartNormalized.prototype.getSeriesDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    AreaChartNormalized.prototype.getXScale = function () {
+    AreaChartNormalized.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
             scale = d3_1.default.scaleTime()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'linear') {
             scale = d3_1.default.scaleLinear()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'ordinal') {
             scale = d3_1.default.scalePoint()
-                .range([0, this.dims.width])
+                .range([0, width])
                 .padding(0.1)
-                .domain(this.xDomain);
+                .domain(domain);
         }
         return scale;
     };
-    AreaChartNormalized.prototype.getYScale = function () {
+    AreaChartNormalized.prototype.getYScale = function (domain, height) {
         return d3_1.default.scaleLinear()
-            .range([this.dims.height, 0])
-            .domain(this.yDomain);
+            .range([height, 0])
+            .domain(domain);
     };
     AreaChartNormalized.prototype.getScaleType = function (values) {
         var date = true;
@@ -2501,8 +2544,9 @@ var AreaChartNormalized = (function (_super) {
         return false;
     };
     AreaChartNormalized.prototype.updateDomain = function (domain) {
-        this.xDomain = domain;
-        this.xScale = this.getXScale();
+        this.filteredDomain = domain;
+        this.xDomain = this.filteredDomain;
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
     };
     AreaChartNormalized.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
@@ -2603,7 +2647,7 @@ var AreaChartNormalized = (function (_super) {
     AreaChartNormalized = __decorate([
         core_1.Component({
             selector: 'area-chart-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"[width, height]\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], AreaChartNormalized);
@@ -2646,6 +2690,8 @@ var AreaChartStacked = (function (_super) {
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
+        this.timelineHeight = 50;
+        this.timelinePadding = 10;
         this.legend = false;
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
@@ -2678,13 +2724,16 @@ var AreaChartStacked = (function (_super) {
             columns: 10
         });
         if (this.timeline) {
-            this.dims.height -= 150;
+            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
         }
         this.xDomain = this.getXDomain();
+        if (this.filteredDomain) {
+            this.xDomain = this.filteredDomain;
+        }
         this.yDomain = this.getYDomain();
         this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
+        this.yScale = this.getYScale(this.yDomain, this.dims.height);
         var _loop_1 = function(i) {
             var val = this_1.xSet[i];
             var d0 = 0;
@@ -2719,11 +2768,25 @@ var AreaChartStacked = (function (_super) {
         for (var i = 0; i < this.xSet.length; i++) {
             _loop_1(i);
         }
+        this.updateTimeline();
         this.setColors();
         this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
         var pageUrl = window.location.href;
         this.clipPathId = 'clip' + id_1.id().toString();
         this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
+    };
+    AreaChartStacked.prototype.updateTimeline = function () {
+        if (this.timeline) {
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
+            this.timelineXDomain = this.getXDomain();
+            this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+            this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
+            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+        }
     };
     AreaChartStacked.prototype.getXDomain = function () {
         var values = [];
@@ -2790,30 +2853,30 @@ var AreaChartStacked = (function (_super) {
     AreaChartStacked.prototype.getSeriesDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    AreaChartStacked.prototype.getXScale = function () {
+    AreaChartStacked.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
             scale = d3_1.default.scaleTime()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'linear') {
             scale = d3_1.default.scaleLinear()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'ordinal') {
             scale = d3_1.default.scalePoint()
-                .range([0, this.dims.width])
+                .range([0, width])
                 .padding(0.1)
-                .domain(this.xDomain);
+                .domain(domain);
         }
         return scale;
     };
-    AreaChartStacked.prototype.getYScale = function () {
+    AreaChartStacked.prototype.getYScale = function (domain, height) {
         return d3_1.default.scaleLinear()
-            .range([this.dims.height, 0])
-            .domain(this.yDomain);
+            .range([height, 0])
+            .domain(domain);
     };
     AreaChartStacked.prototype.getScaleType = function (values) {
         var date = true;
@@ -2842,8 +2905,9 @@ var AreaChartStacked = (function (_super) {
         return false;
     };
     AreaChartStacked.prototype.updateDomain = function (domain) {
-        this.xDomain = domain;
-        this.xScale = this.getXScale();
+        this.filteredDomain = domain;
+        this.xDomain = this.filteredDomain;
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
     };
     AreaChartStacked.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
@@ -2944,7 +3008,7 @@ var AreaChartStacked = (function (_super) {
     AreaChartStacked = __decorate([
         core_1.Component({
             selector: 'area-chart-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"[width, height]\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], AreaChartStacked);
@@ -2988,6 +3052,8 @@ var AreaChart = (function (_super) {
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
+        this.timelineHeight = 50;
+        this.timelinePadding = 10;
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.clickHandler = new core_1.EventEmitter();
@@ -3017,18 +3083,35 @@ var AreaChart = (function (_super) {
             columns: 10
         });
         if (this.timeline) {
-            this.dims.height -= 150;
+            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
         }
         this.xDomain = this.getXDomain();
+        if (this.filteredDomain) {
+            this.xDomain = this.filteredDomain;
+        }
         this.yDomain = this.getYDomain();
         this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
+        this.yScale = this.getYScale(this.yDomain, this.dims.height);
+        this.updateTimeline();
         this.setColors();
         this.transform = "translate(" + this.dims.xOffset + ", " + this.margin[0] + ")";
         var pageUrl = window.location.href;
         this.clipPathId = 'clip' + id_1.id().toString();
         this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
+    };
+    AreaChart.prototype.updateTimeline = function () {
+        if (this.timeline) {
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
+            this.timelineXDomain = this.getXDomain();
+            this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+            this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
+            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+        }
     };
     AreaChart.prototype.getXDomain = function () {
         var values = [];
@@ -3082,30 +3165,30 @@ var AreaChart = (function (_super) {
     AreaChart.prototype.getSeriesDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    AreaChart.prototype.getXScale = function () {
+    AreaChart.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
             scale = d3_1.default.scaleTime()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'linear') {
             scale = d3_1.default.scaleLinear()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'ordinal') {
             scale = d3_1.default.scalePoint()
-                .range([0, this.dims.width])
+                .range([0, width])
                 .padding(0.1)
-                .domain(this.xDomain);
+                .domain(domain);
         }
         return scale;
     };
-    AreaChart.prototype.getYScale = function () {
+    AreaChart.prototype.getYScale = function (domain, height) {
         return d3_1.default.scaleLinear()
-            .range([this.dims.height, 0])
-            .domain(this.yDomain);
+            .range([height, 0])
+            .domain(domain);
     };
     AreaChart.prototype.getScaleType = function (values) {
         var date = true;
@@ -3134,8 +3217,9 @@ var AreaChart = (function (_super) {
         return false;
     };
     AreaChart.prototype.updateDomain = function (domain) {
-        this.xDomain = domain;
-        this.xScale = this.getXScale();
+        this.filteredDomain = domain;
+        this.xDomain = this.filteredDomain;
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
     };
     AreaChart.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
@@ -3244,7 +3328,7 @@ var AreaChart = (function (_super) {
     AreaChart = __decorate([
         core_1.Component({
             selector: 'area-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"[width, height]\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], AreaChart);
@@ -4054,7 +4138,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
-var tick_format_helper_1 = __webpack_require__(30);
+var tick_format_helper_1 = __webpack_require__(29);
 var d3_1 = __webpack_require__(1);
 var BarHorizontal = (function (_super) {
     __extends(BarHorizontal, _super);
@@ -4900,7 +4984,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
-var tick_format_helper_1 = __webpack_require__(30);
+var tick_format_helper_1 = __webpack_require__(29);
 var d3_1 = __webpack_require__(1);
 var BarVertical = (function (_super) {
     __extends(BarVertical, _super);
@@ -5117,9 +5201,11 @@ var Bar = (function () {
         var path;
         if (this.roundEdges) {
             if (this.orientation === 'vertical') {
+                radius = Math.min(this.height, radius);
                 path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
             }
             else if (this.orientation === 'horizontal') {
+                radius = Math.min(this.width, radius);
                 path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
             }
         }
@@ -5138,9 +5224,11 @@ var Bar = (function () {
         var path;
         if (this.roundEdges) {
             if (this.orientation === 'vertical') {
+                radius = Math.min(this.height, radius);
                 path = this.roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
             }
             else if (this.orientation === 'horizontal') {
+                radius = Math.min(this.width, radius);
                 path = this.roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
             }
         }
@@ -5295,14 +5383,17 @@ var SeriesHorizontal = (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = d.name;
+            var tooltipLabel = label;
+            if (tooltipLabel.constructor.name === 'Date') {
+                tooltipLabel = tooltipLabel.toLocaleDateString();
+            }
             var roundEdges = _this.type === 'standard';
             var bar = {
                 value: value,
                 label: label,
                 color: _this.colors(label),
                 roundEdges: roundEdges,
-                data: d,
-                tooltipText: label + ": " + value
+                data: d
             };
             bar.height = _this.yScale.bandwidth();
             if (_this.type === 'standard') {
@@ -5314,6 +5405,7 @@ var SeriesHorizontal = (function () {
                     bar.x = _this.xScale(0);
                 }
                 bar.y = _this.yScale(label);
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -5322,6 +5414,7 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -5338,6 +5431,8 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
+                var percentage = (offset1 - offset0).toFixed(2) + '%';
+                bar.tooltipText = tooltipLabel + ": " + percentage.toLocaleString();
             }
             return bar;
         });
@@ -5451,6 +5546,10 @@ var SeriesVertical = (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = d.name;
+            var tooltipLabel = label;
+            if (tooltipLabel.constructor.name === 'Date') {
+                tooltipLabel = tooltipLabel.toLocaleDateString();
+            }
             var roundEdges = _this.type === 'standard';
             var bar = {
                 value: value,
@@ -5459,7 +5558,6 @@ var SeriesVertical = (function () {
                 roundEdges: roundEdges,
                 data: d,
                 width: width,
-                tooltipText: label + ": " + value,
                 height: 0,
                 x: 0,
                 y: 0
@@ -5473,6 +5571,7 @@ var SeriesVertical = (function () {
                 else {
                     bar.y = _this.yScale(value);
                 }
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -5481,6 +5580,7 @@ var SeriesVertical = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
+                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -5497,6 +5597,8 @@ var SeriesVertical = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
+                var percentage = (offset1 - offset0).toFixed(2) + '%';
+                bar.tooltipText = tooltipLabel + ": " + percentage.toLocaleString();
             }
             return bar;
         });
@@ -5586,6 +5688,7 @@ var AreaTooltip = (function () {
     function AreaTooltip(renderer) {
         this.renderer = renderer;
         this.anchorOpacity = new Array();
+        this.showPercentage = false;
         this.hover = new core_1.EventEmitter();
     }
     AreaTooltip.prototype.ngOnChanges = function () {
@@ -5631,8 +5734,12 @@ var AreaTooltip = (function () {
             var group = _a[_i];
             var item = group.series.find(function (d) { return d.name.toString() === xVal.toString(); });
             if (item) {
+                var val = item.value;
+                if (this.showPercentage) {
+                    val = (item.d1 - item.d0).toFixed(2) + '%';
+                }
                 results.push({
-                    value: item.value,
+                    value: val,
                     name: item.name,
                     series: group.name
                 });
@@ -5694,6 +5801,10 @@ var AreaTooltip = (function () {
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "colors", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], AreaTooltip.prototype, "showPercentage", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "hover", void 0);
@@ -5704,7 +5815,7 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[areaTooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div\n          *ngFor=\"let tooltipItem of tooltipArea.values\"\n          class=\"tooltip-item\">\n\n          <span\n            class=\"tooltip-item-color\"\n            [style.background-color]=\"colors(tooltipItem.series)\">\n          </span>\n\n          {{tooltipItem.series}}: {{tooltipItem.value}}\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  "
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div\n          *ngFor=\"let tooltipItem of tooltipArea.values\"\n          class=\"tooltip-item\">\n\n          <span\n            class=\"tooltip-item-color\"\n            [style.background-color]=\"colors(tooltipItem.series)\">\n          </span>\n\n          {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
     ], AreaTooltip);
@@ -5835,10 +5946,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var axis_label_component_1 = __webpack_require__(53);
 var x_axis_component_1 = __webpack_require__(54);
-var x_axis_ticks_component_1 = __webpack_require__(26);
+var x_axis_ticks_component_1 = __webpack_require__(25);
 var y_axis_component_1 = __webpack_require__(55);
-var y_axis_ticks_component_1 = __webpack_require__(27);
-var common_1 = __webpack_require__(24);
+var y_axis_ticks_component_1 = __webpack_require__(26);
+var common_1 = __webpack_require__(23);
 var AxesModule = (function () {
     function AxesModule() {
     }
@@ -5953,7 +6064,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var x_axis_ticks_component_1 = __webpack_require__(26);
+var x_axis_ticks_component_1 = __webpack_require__(25);
 var XAxis = (function () {
     function XAxis() {
         this.showGridLines = false;
@@ -6053,7 +6164,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var y_axis_ticks_component_1 = __webpack_require__(27);
+var y_axis_ticks_component_1 = __webpack_require__(26);
 var YAxis = (function () {
     function YAxis() {
         this.showGridLines = false;
@@ -6176,6 +6287,10 @@ var CircleSeries = (function () {
         return this.data.series.map(function (d, i) {
             var value = d.value;
             var label = d.name;
+            var tooltipLabel = label;
+            if (tooltipLabel.constructor.name === 'Date') {
+                tooltipLabel = tooltipLabel.toLocaleDateString();
+            }
             if (value) {
                 var cx = void 0;
                 if (_this.scaleType === 'time') {
@@ -6202,7 +6317,7 @@ var CircleSeries = (function () {
                     cy: cy,
                     radius: radius,
                     height: height,
-                    tooltipText: label + ", " + value,
+                    tooltipText: tooltipLabel + ": " + value.toLocaleString(),
                     opacity: opacity
                 };
             }
@@ -6607,7 +6722,7 @@ var ScaleLegend = (function () {
     ScaleLegend = __decorate([
         core_1.Component({
             selector: 'scale-legend',
-            template: "\n    <div\n      class=\"scale-legend\"\n      [style.width]=\"width + 'px'\">\n      <div [style.height]=\"(height - 70) + 'px'\">\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toFixed() }}</span>\n        </div>\n\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toFixed() }}</span>\n        </div>\n      </div>\n    </div>\n  "
+            template: "\n    <div\n      class=\"scale-legend\"\n      [style.width]=\"width + 'px'\">\n      <div [style.height]=\"(height - 70) + 'px'\">\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toLocaleString() }}</span>\n        </div>\n\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toLocaleString() }}</span>\n        </div>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
     ], ScaleLegend);
@@ -6752,10 +6867,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var moment = __webpack_require__(7);
 var d3_1 = __webpack_require__(1);
+var id_1 = __webpack_require__(6);
 var Timeline = (function () {
     function Timeline(element) {
-        this.margin = [10, 20, 10, 20];
         this.initialized = false;
+        this.height = 50;
         this.clickHandler = new core_1.EventEmitter();
         this.onDomainChange = new core_1.EventEmitter();
         this.element = element.nativeElement;
@@ -6769,10 +6885,17 @@ var Timeline = (function () {
     };
     Timeline.prototype.update = function () {
         this.dims = this.getDims();
-        var offsetY = this.view[1] - 150;
+        this.height = this.dims.height;
+        var offsetY = this.view[1] - this.height;
         this.xDomain = this.getXDomain();
         this.xScale = this.getXScale();
-        this.transform = "translate(" + this.margin[3] + " , " + (this.margin[0] + offsetY) + ")";
+        if (this.brush) {
+            this.updateBrush();
+        }
+        this.transform = "translate(0 , " + offsetY + ")";
+        var pageUrl = window.location.href;
+        this.filterId = 'filter' + id_1.id().toString();
+        this.filter = "url(" + pageUrl + "#" + this.filterId + ")";
     };
     Timeline.prototype.getXDomain = function () {
         var values = [];
@@ -6803,8 +6926,6 @@ var Timeline = (function () {
         }
         return domain;
     };
-    Timeline.prototype.getYDomain = function () {
-    };
     Timeline.prototype.getXScale = function () {
         var scale;
         if (this.scaleType === 'time') {
@@ -6825,22 +6946,13 @@ var Timeline = (function () {
         }
         return scale;
     };
-    Timeline.prototype.getYScale = function () {
-        d3_1.default.scaleLinear()
-            .range([this.dims.height, 0])
-            .domain(this.yDomain);
-    };
     Timeline.prototype.addBrush = function () {
         var _this = this;
         if (this.brush) {
             return;
         }
-        var height = 150 - this.margin[0] - this.margin[2];
+        var height = this.height;
         var width = this.view[0];
-        if (this.legend) {
-            width = width * 9 / 12.0;
-        }
-        width = width - this.margin[1] - this.margin[3];
         this.brush = d3_1.default.brushX()
             .extent([[0, 0], [width, height]])
             .on("brush end", function () {
@@ -6852,15 +6964,26 @@ var Timeline = (function () {
             .select('.brush')
             .call(this.brush);
     };
+    Timeline.prototype.updateBrush = function () {
+        if (!this.brush) {
+            return;
+        }
+        var height = this.height;
+        var width = this.view[0];
+        this.brush.extent([[0, 0], [width, height]]);
+        d3_1.default.select(this.element)
+            .select('.brush')
+            .call(this.brush);
+        d3_1.default.select(this.element).select('.selection')
+            .attr('fill', undefined)
+            .attr('stroke', undefined)
+            .attr('fill-opacity', undefined);
+    };
     Timeline.prototype.getDims = function () {
         var width = this.view[0];
-        var height = 150;
-        if (this.legend) {
-            width = width * 9 / 12.0;
-        }
         var dims = {
-            width: width - this.margin[1] - this.margin[3],
-            height: height - this.margin[0] - this.margin[2]
+            width: width,
+            height: this.height
         };
         return dims;
     };
@@ -6901,6 +7024,10 @@ var Timeline = (function () {
         __metadata('design:type', Object)
     ], Timeline.prototype, "scaleType", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], Timeline.prototype, "height", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], Timeline.prototype, "clickHandler", void 0);
@@ -6911,7 +7038,7 @@ var Timeline = (function () {
     Timeline = __decorate([
         core_1.Component({
             selector: 'g[timeline]',
-            template: "\n    <svg:g\n      [attr.transform]=\"transform\">\n\n      <svg:g xAxis\n        [xScale]=\"xScale\"\n        [dims]=\"dims\"\n        [showGridLines]=\"showGridLines\"\n      />\n\n      <svg:g class=\"brush\">\n      </svg:g>\n\n    </svg:g>\n  "
+            template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n\n      <svg:g [attr.filter]=\"filter\" class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n\n      <svg:g class=\"brush\">\n      </svg:g>\n\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Timeline);
@@ -7067,11 +7194,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_1 = __webpack_require__(24);
-var tooltip_directive_1 = __webpack_require__(33);
+var common_1 = __webpack_require__(23);
+var tooltip_directive_1 = __webpack_require__(32);
 var tooltip_component_1 = __webpack_require__(21);
 var tooltip_service_1 = __webpack_require__(22);
-var injection_service_1 = __webpack_require__(23);
+var injection_service_1 = __webpack_require__(33);
 var TooltipModule = (function () {
     function TooltipModule() {
     }
@@ -7110,7 +7237,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var chart_component_1 = __webpack_require__(28);
+var chart_component_1 = __webpack_require__(27);
 var base_chart_component_1 = __webpack_require__(2);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var d3_1 = __webpack_require__(1);
@@ -7398,7 +7525,7 @@ var Gauge = (function (_super) {
             ticks.big.push({
                 line: this.getTickPath(startDistance, tickLength, angle),
                 textAnchor: textAnchor,
-                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()),
+                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
                 textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(210)",
                 highlighted: this.valueScale.invert(angleDeg) <= this.value
             });
@@ -7427,10 +7554,10 @@ var Gauge = (function (_super) {
     };
     Gauge.prototype.displayValue = function () {
         if (this.units) {
-            return this.value + " " + this.units;
+            return this.value.toLocaleString() + " " + this.units;
         }
         else {
-            return this.value.toString();
+            return this.value.toLocaleString();
         }
     };
     Gauge.prototype.scaleText = function () {
@@ -7546,6 +7673,10 @@ var HeatCellSeries = (function () {
             row.series.map(function (cell) {
                 var value = cell.value;
                 var label = cell.name;
+                var tooltipLabel = label;
+                if (tooltipLabel.constructor.name === 'Date') {
+                    tooltipLabel = tooltipLabel.toLocaleDateString();
+                }
                 cells.push({
                     x: _this.xScale(row.name),
                     y: _this.yScale(cell.name),
@@ -7555,7 +7686,7 @@ var HeatCellSeries = (function () {
                     data: value,
                     label: label,
                     series: row.name,
-                    tooltipText: label + ": " + value
+                    tooltipText: tooltipLabel + ": " + value.toLocaleString()
                 });
             });
         });
@@ -7949,6 +8080,8 @@ var LineChart = (function (_super) {
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
+        this.timelineHeight = 50;
+        this.timelinePadding = 10;
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.clickHandler = new core_1.EventEmitter();
@@ -7978,18 +8111,35 @@ var LineChart = (function (_super) {
             columns: 10
         });
         if (this.timeline) {
-            this.dims.height -= 150;
+            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
         }
         this.xDomain = this.getXDomain();
+        if (this.filteredDomain) {
+            this.xDomain = this.filteredDomain;
+        }
         this.yDomain = this.getYDomain();
         this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
+        this.yScale = this.getYScale(this.yDomain, this.dims.height);
+        this.updateTimeline();
         this.setColors();
         this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
         var pageUrl = window.location.href;
         this.clipPathId = 'clip' + id_1.id().toString();
         this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
+    };
+    LineChart.prototype.updateTimeline = function () {
+        if (this.timeline) {
+            this.timelineWidth = this.width;
+            if (this.legend) {
+                this.timelineWidth = this.width * 10.0 / 12.0;
+            }
+            this.timelineWidth -= (this.margin[3] + this.margin[1]);
+            this.timelineXDomain = this.getXDomain();
+            this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
+            this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
+            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+        }
     };
     LineChart.prototype.getXDomain = function () {
         var values = [];
@@ -8043,30 +8193,30 @@ var LineChart = (function (_super) {
     LineChart.prototype.getSeriesDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    LineChart.prototype.getXScale = function () {
+    LineChart.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
             scale = d3_1.default.scaleTime()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'linear') {
             scale = d3_1.default.scaleLinear()
-                .range([0, this.dims.width])
-                .domain(this.xDomain);
+                .range([0, width])
+                .domain(domain);
         }
         else if (this.scaleType === 'ordinal') {
             scale = d3_1.default.scalePoint()
-                .range([0, this.dims.width])
+                .range([0, width])
                 .padding(0.1)
-                .domain(this.xDomain);
+                .domain(domain);
         }
         return scale;
     };
-    LineChart.prototype.getYScale = function () {
+    LineChart.prototype.getYScale = function (domain, height) {
         return d3_1.default.scaleLinear()
-            .range([this.dims.height, 0])
-            .domain(this.yDomain);
+            .range([height, 0])
+            .domain(domain);
     };
     LineChart.prototype.getScaleType = function (values) {
         var date = true;
@@ -8095,8 +8245,9 @@ var LineChart = (function (_super) {
         return false;
     };
     LineChart.prototype.updateDomain = function (domain) {
-        this.xDomain = domain;
-        this.xScale = this.getXScale();
+        this.filteredDomain = domain;
+        this.xDomain = this.filteredDomain;
+        this.xScale = this.getXScale(this.xDomain, this.dims.width);
     };
     LineChart.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
@@ -8107,6 +8258,9 @@ var LineChart = (function (_super) {
     LineChart.prototype.click = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
+    };
+    LineChart.prototype.trackBy = function (index, item) {
+        return item.name;
     };
     LineChart.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
@@ -8198,7 +8352,7 @@ var LineChart = (function (_super) {
     LineChart = __decorate([
         core_1.Component({
             selector: 'line-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [results]=\"results\"\n        [view]=\"[width, height]\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n\n        </svg:g>\n      </svg:g>\n\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g lineSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], LineChart);
@@ -8401,6 +8555,9 @@ var CardSeries = (function () {
             };
         });
     };
+    CardSeries.prototype.trackBy = function (index, card) {
+        return card.label;
+    };
     CardSeries.prototype.click = function (data) {
         this.clickHandler.emit(data);
     };
@@ -8423,7 +8580,7 @@ var CardSeries = (function () {
     CardSeries = __decorate([
         core_1.Component({
             selector: 'g[cardSeries]',
-            template: "\n    <svg:g card *ngFor=\"let c of cards\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
+            template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n    />\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], CardSeries);
@@ -8449,9 +8606,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(8);
-var d3_1 = __webpack_require__(1);
 var Card = (function () {
     function Card(element) {
+        this.resizeScale = 1;
+        this.textFontSize = 35;
+        this.textTransform = '';
+        this.initialized = false;
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
@@ -8459,18 +8619,29 @@ var Card = (function () {
         this.update();
     };
     Card.prototype.update = function () {
+        var _this = this;
         this.transform = "translate(" + this.x + " , " + this.y + ")";
-        this.label = this.data.name;
-        this.trimmedLabel = trim_label_helper_1.trimLabel(this.label, 55);
-        var step = this.data.value / 100;
-        this.countUp(0, this.data.value, step);
+        this.textWidth = Math.max(0, this.width - 15);
         this.cardWidth = Math.max(0, this.width - 5);
         this.cardHeight = Math.max(0, this.height - 5);
-        this.textWidth = Math.max(0, this.width - 15);
+        this.label = this.data.name;
+        this.trimmedLabel = trim_label_helper_1.trimLabel(this.label, 55);
+        this.value = this.data.value.toLocaleString();
+        setTimeout(function () {
+            _this.scaleText();
+        });
+        if (!this.initialized) {
+            setTimeout(function () {
+                _this.scaleText();
+                var step = _this.data.value / 100;
+                _this.countUp(0, _this.data.value, step);
+            });
+            this.initialized = true;
+        }
     };
     Card.prototype.countUp = function (current, max, step) {
         var _this = this;
-        this.value = d3_1.default.format(",.0f")(current);
+        this.value = Math.round(current).toLocaleString();
         if (current >= max) {
             return;
         }
@@ -8478,6 +8649,21 @@ var Card = (function () {
         setTimeout(function () {
             _this.countUp(newValue, max, step);
         }, 16);
+    };
+    Card.prototype.scaleText = function () {
+        var _a = this.textEl.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
+        if (width === 0 || height === 0) {
+            return;
+        }
+        var oldScale = this.resizeScale;
+        var availableWidth = this.cardWidth * 0.85;
+        var availableHeight = this.cardHeight * 0.65;
+        var resizeScaleWidth = Math.floor((availableWidth / (width / this.resizeScale)) * 100) / 100;
+        var resizeScaleHeight = Math.floor((availableHeight / (height / this.resizeScale)) * 100) / 100;
+        this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+        if (this.resizeScale !== oldScale) {
+            this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+        }
     };
     Card.prototype.click = function () {
         this.clickHandler.emit({
@@ -8517,10 +8703,14 @@ var Card = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], Card.prototype, "clickHandler", void 0);
+    __decorate([
+        core_1.ViewChild('textEl'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], Card.prototype, "textEl", void 0);
     Card = __decorate([
         core_1.Component({
             selector: 'g[card]',
-            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\"\n      (click)=\"click()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer; stroke-width: 2px; stroke: #192024;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"fill: #fff; font-size: 12px; pointer-events: none; text-transform: uppercase; overflow: hidden; text-align: center;\">\n        <xhtml:p>\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n\n      <svg:text\n        [attr.x]=\"width / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy='.35em'\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        style=\"font-size: 46px; pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  "
+            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\"\n      (click)=\"click()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy='.35em'\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], Card);
@@ -8553,7 +8743,7 @@ var core_1 = __webpack_require__(0);
 var base_chart_component_1 = __webpack_require__(2);
 var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
-var grid_layout_helper_1 = __webpack_require__(29);
+var grid_layout_helper_1 = __webpack_require__(28);
 var NumberCard = (function (_super) {
     __extends(NumberCard, _super);
     function NumberCard(element, zone) {
@@ -8748,7 +8938,7 @@ var AdvancedPieChart = (function (_super) {
     AdvancedPieChart = __decorate([
         core_1.Component({
             selector: 'advanced-pie-chart',
-            template: "\n    <div [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n\n        <chart\n          [colors]=\"colors\"\n          [view]=\"[dims.width, dims.height]\">\n\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"click($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.margin-top]=\"(height - 215)/2\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n\n          <div class=\"total-value\">\n            {{roundedTotal}}\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n                <div class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div class=\"item-value\">{{legendItem.value}}</div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div class=\"item-percent\">{{legendItem.percentage}}%</div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n      </div>\n    </div>\n\n  "
+            template: "\n    <div [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n\n        <chart\n          [colors]=\"colors\"\n          [view]=\"[dims.width, dims.height]\">\n\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"click($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.margin-top]=\"(height - 215)/2\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n\n          <div class=\"total-value\">\n            {{roundedTotal.toLocaleString()}}\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div *ngFor=\"let legendItem of legendItems\" class=\"legend-item\">\n                <div class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div class=\"item-value\">{{legendItem.value.toLocaleString()}}</div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div class=\"item-percent\">{{legendItem.percentage.toLocaleString()}}%</div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n      </div>\n    </div>\n\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], AdvancedPieChart);
@@ -9198,7 +9388,7 @@ var view_dimensions_helper_1 = __webpack_require__(3);
 var color_sets_1 = __webpack_require__(4);
 var base_chart_component_1 = __webpack_require__(2);
 var trim_label_helper_1 = __webpack_require__(8);
-var grid_layout_helper_1 = __webpack_require__(29);
+var grid_layout_helper_1 = __webpack_require__(28);
 var d3_1 = __webpack_require__(1);
 var PieGrid = (function (_super) {
     __extends(PieGrid, _super);
@@ -9259,7 +9449,7 @@ var PieGrid = (function (_super) {
                 innerRadius: innerRadius,
                 outerRadius: radius,
                 label: trim_label_helper_1.trimLabel(label),
-                total: "Total: " + d3_1.default.format(".2f")(value),
+                total: "Total: " + value.toLocaleString(),
                 value: value,
                 percent: d3_1.default.format(".1p")(d.data.percent),
                 data: [d, {
@@ -9306,7 +9496,7 @@ var PieGrid = (function (_super) {
     PieGrid = __decorate([
         core_1.Component({
             selector: 'pie-grid',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\" >\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"click($event)\"\n\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value\"\n          />\n\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total}}\n          </svg:text>\n\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\" >\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"click($event)\"\n\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value.toLocaleString()\"\n          />\n\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n\n        </svg:g>\n      </svg:g>\n    </chart>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone])
     ], PieGrid);
@@ -9492,10 +9682,14 @@ var PieSeries = (function () {
         return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
     };
     PieSeries.prototype.label = function (arc) {
+        var label = arc.data.name;
+        if (label.constructor.name === 'Date') {
+            label = label.toLocaleDateString();
+        }
         return arc.data.name;
     };
     PieSeries.prototype.tooltipText = function (arc) {
-        return this.label(arc) + ": " + arc.data.value;
+        return this.label(arc) + ": " + arc.data.value.toLocaleString();
     };
     PieSeries.prototype.color = function (arc) {
         return this.colors(this.label(arc));
@@ -9593,7 +9787,7 @@ var TreeMapCellSeries = (function () {
                 label: d.id,
                 value: d.value,
                 valueType: d.valueType,
-                tooltipText: d.id + ": " + d.value
+                tooltipText: d.id + ": " + d.value.toLocaleString()
             };
         });
     };
@@ -9658,7 +9852,7 @@ var TreeMapCell = (function () {
         this.update();
     };
     TreeMapCell.prototype.update = function () {
-        this.formattedValue = this.value;
+        this.formattedValue = this.value.toLocaleString();
         if (this.initialized) {
             this.animateToCurrentForm();
         }

@@ -114,16 +114,20 @@
     color: #999;
     font-size: 32px; }
 
-.brush .overlay {
-  fill: rgba(0, 0, 0, 0.07); }
+.timeline .brush .overlay {
+  fill: rgba(0, 0, 0, 0.05); }
 
-.brush .selection {
-  stroke: none;
-  fill-opacity: .3;
-  shape-rendering: 'crispEdges'; }
+.timeline .brush .selection {
+  fill: rgba(0, 0, 0, 0.1);
+  stroke-width: 1px;
+  stroke-dasharray: 10,5;
+  stroke: #888888; }
 
-.brush .handle {
-  fill: #3f51b5; }
+.timeline .brush .handle {
+  fill-opacity: 0; }
+
+.timeline .embedded-chart {
+  opacity: 0.6; }
 
 .tooltip-item {
   text-align: left;
@@ -136,31 +140,31 @@
     color: #5b646b;
     border-radius: 3px; }
 
-.legend {
+.chart-legend {
   display: inline-block;
   padding: 0; }
-  .legend .legend-title {
+  .chart-legend .legend-title {
     color: #76818a;
     margin-left: 10px;
     margin-bottom: 5px;
     font-size: 14px;
     font-weight: bold; }
-  .legend ul, .legend li {
+  .chart-legend ul, .chart-legend li {
     padding: 0;
     margin: 0;
     list-style: none; }
-  .legend .legend-wrap {
+  .chart-legend .legend-wrap {
     width: 90%; }
-  .legend .scale-legend {
+  .chart-legend .scale-legend {
     text-align: center; }
-  .legend .scale-legend-wrap {
+  .chart-legend .scale-legend-wrap {
     display: inline-block;
     height: 100%;
     width: 30px;
     border-radius: 5px; }
-  .legend .scale-legend-label {
+  .chart-legend .scale-legend-label {
     font-size: 12px; }
-  .legend .legend-labels {
+  .chart-legend .legend-labels {
     line-height: 85%;
     list-style: none;
     text-align: left;
@@ -170,21 +174,21 @@
     overflow-y: auto;
     overflow-x: hidden;
     background: rgba(0, 0, 0, 0.05); }
-  .legend .legend-label {
+  .chart-legend .legend-label {
     cursor: pointer;
     font-size: 90%;
     margin: 8px;
     color: #76818a; }
-    .legend .legend-label.active {
+    .chart-legend .legend-label.active {
       color: #FFF; }
-  .legend .legend-label-color {
+  .chart-legend .legend-label-color {
     display: inline-block;
     height: 15px;
     width: 15px;
     margin-right: 5px;
     color: #5b646b;
     border-radius: 3px; }
-  .legend .legend-label-text {
+  .chart-legend .legend-label-text {
     display: inline-block;
     vertical-align: top;
     line-height: 15px;
@@ -195,10 +199,10 @@
     white-space: nowrap;
     overflow: hidden;
     padding-right: 20px; }
-  .legend .legend-icon {
+  .chart-legend .legend-icon {
     color: #4d9df6;
     margin-right: 5px; }
-  .legend .legend-title-text {
+  .chart-legend .legend-title-text {
     vertical-align: bottom;
     display: inline-block;
     line-height: 16px;
