@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 // import { formatNumber } from 'common/utils/format';
 import d3 from '../d3';
@@ -39,7 +40,8 @@ import d3 from '../d3';
         </xhtml:p>
       </svg:foreignObject>
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapCell implements OnChanges {
   element: HTMLElement;

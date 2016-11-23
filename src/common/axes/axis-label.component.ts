@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   ElementRef,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -17,7 +18,8 @@ import {
       [attr.transform]="transform">
       {{label}}
     </svg:text>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AxisLabel implements OnChanges {
   @Input() orient;

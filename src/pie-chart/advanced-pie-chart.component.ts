@@ -7,7 +7,9 @@ import {
   OnDestroy,
   AfterViewInit,
   NgZone,
-  ElementRef
+  ElementRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -77,8 +79,8 @@ export interface LegendItem {
         </div>
       </div>
     </div>
-
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   data: any;
@@ -103,8 +105,8 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(private element: ElementRef, zone: NgZone) {
-    super(element, zone);
+  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
+    super(element, zone, cd);
   }
 
   ngAfterViewInit(): void {

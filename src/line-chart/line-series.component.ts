@@ -1,7 +1,8 @@
 import {
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
 import * as moment from 'moment';
@@ -15,7 +16,8 @@ import { sortLinear } from '../utils/sort';
       [path]="path"
       [stroke]="color"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LineSeries implements OnChanges {
 

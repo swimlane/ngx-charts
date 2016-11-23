@@ -6,7 +6,8 @@ import {
   ElementRef,
   ViewChild,
   EventEmitter,
-  AfterViewInit
+  AfterViewInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -42,7 +43,8 @@ import { reduceTicks } from './ticks.helper';
           [attr.x2]="gridLineWidth" />
       </svg:g>
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisTicks implements OnChanges, AfterViewInit {
   @Input() scale;

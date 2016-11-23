@@ -6,7 +6,8 @@ import {
   OnChanges,
   ElementRef,
   ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -38,7 +39,8 @@ import { reduceTicks } from './ticks.helper';
           y2="0" />
       </svg:g>
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XAxisTicks implements OnChanges, AfterViewInit {
   @Input() scale;

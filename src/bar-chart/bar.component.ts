@@ -5,7 +5,8 @@ import {
   EventEmitter,
   ElementRef,
   OnInit,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
  } from '@angular/core';
 import { id } from '../utils/id';
 import d3 from '../d3';
@@ -29,7 +30,8 @@ import d3 from '../d3';
       [style.cursor]="'pointer'"
       (click)="click()"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Bar implements OnInit, OnChanges {
   @Input() fill;

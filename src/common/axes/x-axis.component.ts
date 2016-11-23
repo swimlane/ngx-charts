@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { XAxisTicks } from './x-axis-ticks.component';
@@ -36,7 +37,8 @@ import { XAxisTicks } from './x-axis-ticks.component';
         [width]="dims.width">
       </svg:g>
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XAxis implements OnChanges {
   @Input() xScale;

@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   ElementRef,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
@@ -28,7 +29,8 @@ import d3 from '../d3';
       [style.strokeDasharray]="2000"
       [style.strokeDashoffset]="0">
     </svg:path>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieLabel implements OnChanges {
   element: HTMLElement;

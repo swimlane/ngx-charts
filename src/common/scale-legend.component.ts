@@ -1,7 +1,8 @@
 import {
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -26,7 +27,8 @@ import { DomSanitizer } from '@angular/platform-browser';
         </div>
       </div>
     </div>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScaleLegend implements OnChanges {
   @Input() valueRange;

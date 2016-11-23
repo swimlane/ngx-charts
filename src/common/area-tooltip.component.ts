@@ -5,7 +5,8 @@ import {
   EventEmitter,
   OnChanges,
   ViewChildren,
-  Renderer
+  Renderer,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -57,7 +58,8 @@ import {
       />
 
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaTooltip implements OnChanges {
   tooltipAreas: any[];

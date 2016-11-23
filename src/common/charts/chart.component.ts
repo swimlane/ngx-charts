@@ -5,10 +5,14 @@ import {
   trigger,
   style,
   transition,
-  animate
+  animate,
+  ViewContainerRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
+import { InjectionService } from '../../utils/injection.service';
 
 @Component({
+  providers: [InjectionService],
   selector: 'chart',
   template: `
     <div [style.width]="view[0] + 'px'"
@@ -41,6 +45,7 @@ import {
       </legend>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
       transition('void => *', [
@@ -64,6 +69,13 @@ export class Chart implements OnChanges {
   title: any;
   legendWidth: any;
   legendType: any;
+
+  constructor(
+    private vcr: ViewContainerRef,
+    private injectionService: InjectionService
+  ) {
+    this.injectionService.setRootViewContainer(vcr);
+  }
 
   ngOnChanges() {
     this.update();

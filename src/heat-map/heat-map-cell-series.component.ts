@@ -3,13 +3,14 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'g[heatMapCellSeries]',
   template: `
-    <svg:g heatMapCell *ngFor="let c of cells"
+    <svg:g heatMapCell *ngFor="let c of cells; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -24,7 +25,8 @@ import {
       [tooltipType]="'tooltip'"
       [tooltipTitle]="c.tooltipText"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeatCellSeries implements OnChanges {
   cells: any[];
@@ -71,6 +73,10 @@ export class HeatCellSeries implements OnChanges {
     });
 
     return cells;
+  }
+
+  trackBy(index, item) {
+    return item.tooltipText;
   }
 
   click(value, label, series) {

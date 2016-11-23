@@ -7,7 +7,9 @@ import {
   trigger,
   style,
   transition,
-  animate } from '@angular/core';
+  animate,
+  ChangeDetectionStrategy
+ } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -32,6 +34,7 @@ import * as moment from 'moment';
       [tooltipTitle]="bar.tooltipText">
     </svg:g>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
       transition('* => void', [

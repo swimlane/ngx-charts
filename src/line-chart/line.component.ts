@@ -8,7 +8,8 @@ import {
   trigger,
   style,
   transition,
-  animate
+  animate,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -23,6 +24,7 @@ import {
       stroke-width="1.5px"
     />
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
       transition('void => *', [

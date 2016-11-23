@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import * as moment from 'moment';
 
@@ -41,7 +42,8 @@ import * as moment from 'moment';
         [tooltipTitle]="circle.tooltipText"
       />
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CircleSeries implements OnChanges {
   areaPath: any;

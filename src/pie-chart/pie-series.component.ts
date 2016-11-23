@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
 
@@ -42,7 +43,8 @@ import d3 from '../d3';
       </svg:g>
 
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieSeries implements OnChanges {
   max: number;

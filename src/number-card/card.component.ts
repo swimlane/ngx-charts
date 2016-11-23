@@ -5,7 +5,9 @@ import {
   EventEmitter,
   ElementRef,
   OnChanges,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 
@@ -57,7 +59,8 @@ import { trimLabel } from '../common/trim-label.helper';
         {{value}}
       </svg:text>
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Card implements OnChanges {
   element: HTMLElement;
@@ -84,7 +87,7 @@ export class Card implements OnChanges {
 
   @ViewChild('textEl') textEl: ElementRef;
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private cd: ChangeDetectorRef) {
     this.element = element.nativeElement;
   }
 
@@ -123,7 +126,7 @@ export class Card implements OnChanges {
       return;
     }
     let newValue = Math.min(current + step, max);
-
+    this.cd.markForCheck();
     setTimeout(() => {
       this.countUp(newValue, max, step);
     }, 16);
@@ -144,6 +147,7 @@ export class Card implements OnChanges {
     this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
     if (this.resizeScale !== oldScale) {
       this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+      this.cd.markForCheck();
     }
   }
 

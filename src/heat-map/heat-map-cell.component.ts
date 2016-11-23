@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { id } from "../utils/id";
 import d3 from '../d3';
@@ -33,7 +34,8 @@ import d3 from '../d3';
       />
 
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeatMapCell implements OnChanges {
   element: HTMLElement;

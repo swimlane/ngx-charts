@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { id } from "../utils/id";
 import d3 from '../d3';
@@ -27,7 +28,8 @@ import d3 from '../d3';
       [attr.fill]="gradient ? gradientFill : fill"
       [attr.opacity]="opacity"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Area implements OnChanges {
   element: HTMLElement;

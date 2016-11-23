@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import * as moment from 'moment';
 import d3 from '../d3';
@@ -31,7 +32,8 @@ import { id } from "../utils/id";
       </svg:g>
 
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Timeline implements OnChanges {
   element: HTMLElement;

@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
 import { sortLinear } from '../utils/sort';
@@ -19,7 +20,8 @@ import { sortLinear } from '../utils/sort';
       [opacity]="opacity"
       [gradient]="gradient"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaSeries implements OnChanges {
   opacity: number;

@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { YAxisTicks } from './y-axis-ticks.component';
 
@@ -35,7 +36,8 @@ import { YAxisTicks } from './y-axis-ticks.component';
         [width]="dims.width">
       </svg:g>
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxis implements OnChanges {
   @Input() yScale;

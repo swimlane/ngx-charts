@@ -14,7 +14,9 @@ import {
   OnChanges,
   Output,
   TemplateRef,
-  ViewChild
+  ViewChild,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -63,7 +65,8 @@ import {
         </svg:g>
       </svg:g>
     </chart>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForceDirectedGraph extends BaseChart implements OnChanges {
   colors: Function;
@@ -95,8 +98,8 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
   @ViewChild(Chart, { read: ElementRef }) chart: ElementRef;
 
-  constructor(private element: ElementRef, zone: NgZone) {
-    super(element, zone);
+  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
+    super(element, zone, cd);
   }
 
   ngOnChanges() {

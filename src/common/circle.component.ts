@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -20,7 +21,8 @@ import {
       [attr.pointer-events]="pointerEvents"
       (click)="click()"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Circle implements OnChanges {
   @Input() cx;

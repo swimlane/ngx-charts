@@ -7,7 +7,9 @@ import {
   OnDestroy,
   AfterViewInit,
   ElementRef,
-  NgZone
+  NgZone,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
@@ -61,7 +63,8 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
         />
       </svg:g>
     </chart>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   dims: ViewDimensions;
@@ -94,8 +97,8 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(private element: ElementRef, zone: NgZone) {
-    super(element, zone);
+  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
+    super(element, zone, cd);
   }
 
   ngAfterViewInit(): void {

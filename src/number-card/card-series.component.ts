@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 export interface CardModel {
@@ -29,7 +30,8 @@ export interface CardModel {
       [data]="c.data"
       (clickHandler)="click($event)"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardSeries implements OnChanges {
   cards: CardModel[];

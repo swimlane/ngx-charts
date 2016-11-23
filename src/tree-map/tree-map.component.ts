@@ -7,7 +7,9 @@ import {
   OnDestroy,
   AfterViewInit,
   ElementRef,
-  NgZone
+  NgZone,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import d3 from '../d3';
 import { BaseChart } from '../common/base-chart.component';
@@ -29,7 +31,8 @@ import { colorHelper } from '../utils/color-sets';
         />
       </svg:g>
     </chart>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   margin = [10, 10, 10, 10];
@@ -48,8 +51,8 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   treemap: any;
   data: any;
 
-  constructor(private element: ElementRef, zone: NgZone) {
-    super(element, zone);
+  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
+    super(element, zone, cd);
   }
 
   ngAfterViewInit(): void {

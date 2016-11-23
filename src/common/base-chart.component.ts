@@ -1,18 +1,20 @@
-import { ElementRef, NgZone } from "@angular/core";
+import { ElementRef, NgZone, ChangeDetectorRef } from "@angular/core";
 import { Observable } from "rxjs";
 
 export abstract class BaseChart {
   results: any[];
   chartElement: ElementRef;
   zone: NgZone;
+  changeDetector: ChangeDetectorRef;
   view: number[];
   width: number;
   height: number;
   resizeSubscription: any;
 
-  constructor(chartElement: ElementRef, zone: NgZone) {
+  constructor(chartElement: ElementRef, zone: NgZone, changeDetector: ChangeDetectorRef) {
     this.chartElement = chartElement;
     this.zone = zone;
+    this.changeDetector = changeDetector;
   }
 
   protected bindResizeEvents(view: number[]): void {
@@ -57,7 +59,12 @@ export abstract class BaseChart {
     this.zone.runOutsideAngular(() => {
       let source = Observable.fromEvent(window, 'resize', null, null);
       let subscription = source.debounceTime(200).subscribe(e => {
-        this.zone.run(() => { this.update(); });
+        this.zone.run(() => {
+          this.update();
+          if (this.changeDetector) {
+            this.changeDetector.markForCheck();
+          }
+         });
       });
       this.zone.run(() => { this.resizeSubscription = subscription; });
     });

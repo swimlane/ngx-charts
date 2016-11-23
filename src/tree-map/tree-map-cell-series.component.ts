@@ -3,7 +3,8 @@ import {
   OnChanges,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -25,7 +26,8 @@ import {
       [tooltipType]="'tooltip'"
       [tooltipTitle]="c.tooltipText"
     />
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMapCellSeries implements OnChanges {
   cells: any[];

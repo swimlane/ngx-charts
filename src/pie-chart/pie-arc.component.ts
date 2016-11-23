@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
 import { id } from "../utils/id";
@@ -36,7 +37,8 @@ import { id } from "../utils/id";
         [style.pointer-events]="pointerEvents ? 'auto' : 'none'"
       />
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieArc implements OnChanges {
   element: HTMLElement;

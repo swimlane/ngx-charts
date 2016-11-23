@@ -1,7 +1,8 @@
 import {
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
  } from '@angular/core';
 
 @Component({
@@ -33,7 +34,8 @@ import {
         </ul>
       </div>
     </div>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Legend implements OnChanges {
   @Input() data;

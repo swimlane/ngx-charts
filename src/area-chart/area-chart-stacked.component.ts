@@ -8,7 +8,9 @@ import {
   OnDestroy,
   HostListener,
   NgZone,
-  AfterViewInit
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -124,7 +126,8 @@ import d3 from '../d3';
         </svg:g>
       </svg:g>
     </chart>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
   element: HTMLElement;
@@ -172,8 +175,8 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(element: ElementRef, zone: NgZone) {
-    super(element, zone);
+  constructor(element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
+    super(element, zone, cd);
     this.element = element.nativeElement;
   }
 

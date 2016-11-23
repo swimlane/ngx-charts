@@ -1,7 +1,8 @@
 import {
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -24,7 +25,8 @@ import {
         [style.stop-opacity]="endOpacity"
       />
     </svg:radialGradient>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SvgRadialGradient implements OnChanges {
   cx: number;

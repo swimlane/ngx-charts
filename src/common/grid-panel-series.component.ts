@@ -1,7 +1,8 @@
 import {
   Component,
   Input,
-  OnChanges
+  OnChanges,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -16,7 +17,8 @@ import {
       [class.odd]="gridPanel.class === 'odd'"
       [class.even]="gridPanel.class === 'even'">
     </svg:g>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridPanelSeries implements OnChanges {
   gridPanels: any[];
