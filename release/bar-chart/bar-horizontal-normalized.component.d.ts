@@ -1,9 +1,10 @@
 
-import { EventEmitter, OnChanges, OnDestroy, ElementRef, NgZone, AfterViewInit } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, ElementRef, NgZone, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
 export declare class BarHorizontalNormalized extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
     private element;
+    private cd;
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];
@@ -29,7 +30,7 @@ export declare class BarHorizontalNormalized extends BaseChart implements OnChan
     gradient: boolean;
     showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
-    constructor(element: ElementRef, zone: NgZone);
+    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(): void;

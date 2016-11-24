@@ -10,7 +10,8 @@ import { SvgRadialGradient } from "./svg-radial-gradient.component";
 import { Timeline } from "./timeline.component";
 import { Area } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
+import { BaseChart } from "./base-chart.component";
 export * from "./tooltip";
-export { Chart, Legend, ScaleLegend, CircleSeries, Circle, GridPanel, GridPanelSeries, SvgLinearGradient, SvgRadialGradient, Timeline, Area, AreaTooltip };
+export { Chart, Legend, ScaleLegend, CircleSeries, Circle, GridPanel, GridPanelSeries, SvgLinearGradient, SvgRadialGradient, Timeline, Area, AreaTooltip, BaseChart };
 export declare class CommonModule {
 }

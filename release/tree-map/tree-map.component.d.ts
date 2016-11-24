@@ -1,7 +1,8 @@
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
 export declare class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
     private element;
+    private cd;
     margin: number[];
     view: any;
     results: any;
@@ -14,7 +15,7 @@ export declare class TreeMap extends BaseChart implements OnChanges, OnDestroy, 
     colors: any;
     treemap: any;
     data: any;
-    constructor(element: ElementRef, zone: NgZone);
+    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(): void;

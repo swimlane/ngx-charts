@@ -1,9 +1,10 @@
 
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 import { BaseChart } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 export declare class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
     private element;
+    private cd;
     dims: ViewDimensions;
     xDomain: any[];
     yDomain: any[];
@@ -31,7 +32,7 @@ export declare class HeatMap extends BaseChart implements OnChanges, OnDestroy, 
     yAxisLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    constructor(element: ElementRef, zone: NgZone);
+    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(): void;

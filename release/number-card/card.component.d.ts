@@ -1,5 +1,6 @@
-import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, ChangeDetectorRef } from '@angular/core';
 export declare class Card implements OnChanges {
+    private cd;
     element: HTMLElement;
     transform: string;
     trimmedLabel: string;
@@ -20,7 +21,7 @@ export declare class Card implements OnChanges {
     data: any;
     clickHandler: EventEmitter<{}>;
     textEl: ElementRef;
-    constructor(element: ElementRef);
+    constructor(element: ElementRef, cd: ChangeDetectorRef);
     ngOnChanges(): void;
     update(): void;
     countUp(current: any, max: any, step: any): void;

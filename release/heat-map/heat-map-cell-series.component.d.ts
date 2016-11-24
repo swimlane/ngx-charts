@@ -10,5 +10,6 @@ export declare class HeatCellSeries implements OnChanges {
     ngOnChanges(): void;
     update(): void;
     getCells(): any[];
+    trackBy(index: any, item: any): any;
     click(value: any, label: any, series: any): void;
 }

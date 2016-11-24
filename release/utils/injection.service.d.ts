@@ -7,7 +7,7 @@ export declare class InjectionService {
     constructor(applicationRef: ApplicationRef, componentFactoryResolver: ComponentFactoryResolver, injector: Injector);
     getRootViewContainer(): ComponentRef<any>;
     setRootViewContainer(container: any): void;
-    getComponentRootNode(componentRef: ComponentRef<any>): HTMLElement;
+    getComponentRootNode(componentRef: any): HTMLElement;
     getRootViewContainerNode(): HTMLElement;
     projectComponentInputs(component: ComponentRef<any>, options: any): ComponentRef<any>;
     appendComponent<T>(componentClass: Type<T>, options?: any, location?: Element): ComponentRef<any>;

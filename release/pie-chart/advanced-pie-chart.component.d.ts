@@ -1,5 +1,5 @@
 
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, NgZone, ElementRef } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, NgZone, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChart } from '../common/base-chart.component';
 export interface LegendItem {
@@ -9,6 +9,7 @@ export interface LegendItem {
 }
 export declare class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
     private element;
+    private cd;
     data: any;
     dims: ViewDimensions;
     domain: any[];
@@ -28,7 +29,7 @@ export declare class AdvancedPieChart extends BaseChart implements OnChanges, On
     customColors: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    constructor(element: ElementRef, zone: NgZone);
+    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(): void;

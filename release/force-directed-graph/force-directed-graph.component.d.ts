@@ -1,9 +1,10 @@
 
 import { BaseChart } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-import { ElementRef, EventEmitter, NgZone, OnChanges, TemplateRef } from '@angular/core';
+import { ElementRef, EventEmitter, NgZone, OnChanges, TemplateRef, ChangeDetectorRef } from '@angular/core';
 export declare class ForceDirectedGraph extends BaseChart implements OnChanges {
     private element;
+    private cd;
     colors: Function;
     dims: ViewDimensions;
     draggingNode: any;
@@ -31,7 +32,7 @@ export declare class ForceDirectedGraph extends BaseChart implements OnChanges {
     linkTemplate: TemplateRef<any>;
     nodeTemplate: TemplateRef<any>;
     chart: ElementRef;
-    constructor(element: ElementRef, zone: NgZone);
+    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(): void;
     update(): void;
     click($event: any, node: any): void;
