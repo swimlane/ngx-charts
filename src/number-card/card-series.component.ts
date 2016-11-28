@@ -4,7 +4,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  NgZone
 } from '@angular/core';
 
 export interface CardModel {
@@ -42,12 +43,18 @@ export class CardSeries implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+  constructor(private zone: NgZone) {
+
+  }
+
   ngOnChanges() {
     this.update();
   }
 
   update() {
-    this.cards = this.getCards();
+    this.zone.run(() => {
+      this.cards = this.getCards();
+    });
   }
 
   getCards() {

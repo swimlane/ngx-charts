@@ -67,18 +67,21 @@ export class NumberCard extends BaseChart implements OnChanges, OnDestroy, After
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin
+
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin
+      });
+
+      this.domain = this.getDomain();
+
+      this.data = gridLayout(this.dims, this.results, 150);
+
+      this.setColors();
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     });
-
-    this.domain = this.getDomain();
-
-    this.data = gridLayout(this.dims, this.results, 150);
-
-    this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getDomain() {
