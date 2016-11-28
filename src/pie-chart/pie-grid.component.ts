@@ -174,7 +174,7 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
   getTotal() {
     return this.results
       .map(d => d.value)
-      .reduce((sum, d) => sum + d);
+      .reduce((sum, d) => { return sum + d; }, 0);
   }
 
   click(data) {

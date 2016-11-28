@@ -119,7 +119,7 @@ export class Card implements OnChanges {
         });
         this.initialized = true;
       }
-    })
+    });
   }
 
   countUp(current, max, step) {
@@ -134,7 +134,7 @@ export class Card implements OnChanges {
       setTimeout(() => {
         this.countUp(newValue, max, step);
       }, 16);
-    })
+    });
   }
 
   scaleText() {
