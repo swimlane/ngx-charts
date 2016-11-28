@@ -30,6 +30,10 @@
       vertical-align: middle;
     }
   }
+
+  .swui-tooltip-content {
+    pointer-events: none !important;
+  }
 }
 
 .label {
@@ -95,9 +99,17 @@
   }
 }
 
+.area-tooltip-container {
+  padding: 5px 0px;
+  pointer-events: none;
+}
+
+
+
 .tooltip-item{
   text-align: left;
   line-height: 1.2em;
+  padding: 5px 0px;
 
   .tooltip-item-color {
     display: inline-block;

@@ -27,16 +27,18 @@ import {
       />
 
       <xhtml:template #tooltipTemplate>
-        <xhtml:div
-          *ngFor="let tooltipItem of tooltipArea.values"
-          class="tooltip-item">
+        <xhtml:div class="area-tooltip-container">
+          <xhtml:div
+            *ngFor="let tooltipItem of tooltipArea.values"
+            class="tooltip-item">
 
-          <span
-            class="tooltip-item-color"
-            [style.background-color]="colors(tooltipItem.series)">
-          </span>
+            <span
+              class="tooltip-item-color"
+              [style.background-color]="colors(tooltipItem.series)">
+            </span>
 
-          {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}
+            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}
+          </xhtml:div>
         </xhtml:div>
       </xhtml:template>
 
