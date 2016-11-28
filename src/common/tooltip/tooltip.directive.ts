@@ -8,7 +8,8 @@ import {
   ComponentRef,
   ElementRef,
   Renderer,
-  OnDestroy
+  OnDestroy,
+  NgZone
 } from '@angular/core';
 
 import { InjectionService } from '../../utils/injection.service';
@@ -67,7 +68,8 @@ export class TooltipDirective implements OnDestroy {
     private viewContainerRef: ViewContainerRef,
     private injectionService: InjectionService,
     private renderer: Renderer,
-    private element: ElementRef) {
+    private element: ElementRef,
+    private zone: NgZone) {
   }
 
   ngOnDestroy(): void {
@@ -112,27 +114,30 @@ export class TooltipDirective implements OnDestroy {
   }
 
   showTooltip(immediate?: boolean): void {
-    if (this.componentId || this.tooltipDisabled) return;
+    this.zone.run(() => {
+      if (this.componentId || this.tooltipDisabled) return;
 
-    const time = immediate ? 0 : this.tooltipShowTimeout;
+      const time = immediate ? 0 : this.tooltipShowTimeout;
 
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      this.tooltipService.destroyAll();
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        this.tooltipService.destroyAll();
 
-      this.componentId = id();
+        this.componentId = id();
 
-      let tooltip = this.injectComponent();
-      this.tooltipService.register(
-        this.componentId, tooltip, this.hideTooltip.bind(this));
+        let tooltip = this.injectComponent();
+        this.tooltipService.register(
+          this.componentId, tooltip, this.hideTooltip.bind(this));
 
-      // add a tiny timeout to avoid event re-triggers
-      setTimeout(() => {
-        this.addHideListeners(tooltip.instance.element.nativeElement);
-      }, 10);
+        // add a tiny timeout to avoid event re-triggers
+        setTimeout(() => {
+          this.addHideListeners(tooltip.instance.element.nativeElement);
+        }, 10);
 
-      this.show.emit(true);
-    }, time);
+        this.show.emit(true);
+      }, time);
+    });
+
   }
 
   addHideListeners(tooltip): void {

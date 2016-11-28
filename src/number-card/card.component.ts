@@ -7,7 +7,8 @@ import {
   OnChanges,
   ViewChild,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  NgZone
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 
@@ -87,7 +88,7 @@ export class Card implements OnChanges {
 
   @ViewChild('textEl') textEl: ElementRef;
 
-  constructor(element: ElementRef, private cd: ChangeDetectorRef) {
+  constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
   }
 
@@ -96,59 +97,65 @@ export class Card implements OnChanges {
   }
 
   update() {
-    this.transform = `translate(${this.x} , ${this.y})`;
+    this.zone.run(() => {
+      this.transform = `translate(${this.x} , ${this.y})`;
 
-    this.textWidth = Math.max(0, this.width - 15);
-    this.cardWidth = Math.max(0, this.width - 5);
-    this.cardHeight = Math.max(0, this.height - 5);
+      this.textWidth = Math.max(0, this.width - 15);
+      this.cardWidth = Math.max(0, this.width - 5);
+      this.cardHeight = Math.max(0, this.height - 5);
 
-    this.label = this.data.name;
-    this.trimmedLabel = trimLabel(this.label, 55);
+      this.label = this.data.name;
+      this.trimmedLabel = trimLabel(this.label, 55);
 
-    this.value = this.data.value.toLocaleString();
-    setTimeout(() => {
-      this.scaleText();
-    });
-    if (!this.initialized) {
+      this.value = this.data.value.toLocaleString();
       setTimeout(() => {
         this.scaleText();
-        let step = this.data.value / 100;
-        this.countUp(0, this.data.value, step);
       });
-      this.initialized = true;
-    }
+      if (!this.initialized) {
+        setTimeout(() => {
+          this.scaleText();
+          let step = this.data.value / 100;
+          this.countUp(0, this.data.value, step);
+        });
+        this.initialized = true;
+      }
+    })
   }
 
   countUp(current, max, step) {
-    this.value = Math.round(current).toLocaleString();
+    this.zone.run(() => {
+      this.value = Math.round(current).toLocaleString();
 
-    if (current >= max) {
-      return;
-    }
-    let newValue = Math.min(current + step, max);
-    this.cd.markForCheck();
-    setTimeout(() => {
-      this.countUp(newValue, max, step);
-    }, 16);
+      if (current >= max) {
+        return;
+      }
+      let newValue = Math.min(current + step, max);
+      this.cd.markForCheck();
+      setTimeout(() => {
+        this.countUp(newValue, max, step);
+      }, 16);
+    })
   }
 
   scaleText() {
-    let { width, height } = this.textEl.nativeElement.getBoundingClientRect();
-    if (width === 0 || height === 0) {
-      return;
-    }
+    this.zone.run(() => {
+      let { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+      if (width === 0 || height === 0) {
+        return;
+      }
 
-    let oldScale = this.resizeScale;
-    let availableWidth = this.cardWidth * 0.85;
-    let availableHeight = this.cardHeight * 0.65;
+      let oldScale = this.resizeScale;
+      let availableWidth = this.cardWidth * 0.85;
+      let availableHeight = this.cardHeight * 0.65;
 
-    let resizeScaleWidth = Math.floor((availableWidth / (width / this.resizeScale)) * 100) / 100;
-    let resizeScaleHeight = Math.floor((availableHeight / (height / this.resizeScale)) * 100) / 100;
-    this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-    if (this.resizeScale !== oldScale) {
-      this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
-      this.cd.markForCheck();
-    }
+      let resizeScaleWidth = Math.floor((availableWidth / (width / this.resizeScale)) * 100) / 100;
+      let resizeScaleHeight = Math.floor((availableHeight / (height / this.resizeScale)) * 100) / 100;
+      this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+      if (this.resizeScale !== oldScale) {
+        this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+        this.cd.markForCheck();
+      }
+    });
   }
 
   click() {

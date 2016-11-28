@@ -41,6 +41,10 @@ export abstract class BaseChart {
       this.width = dims.width;
       this.height = dims.height;
     }
+
+    if (this.changeDetector) {
+      this.changeDetector.markForCheck();
+    }
   }
 
   getContainerDims() {
@@ -56,17 +60,15 @@ export abstract class BaseChart {
   }
 
   private bindWindowResizeEvent() {
-    this.zone.runOutsideAngular(() => {
+    this.zone.run(() => {
       let source = Observable.fromEvent(window, 'resize', null, null);
       let subscription = source.debounceTime(200).subscribe(e => {
-        this.zone.run(() => {
-          this.update();
-          if (this.changeDetector) {
-            this.changeDetector.markForCheck();
-          }
-         });
+        this.update();
+        if (this.changeDetector) {
+          this.changeDetector.markForCheck();
+        }
       });
-      this.zone.run(() => { this.resizeSubscription = subscription; });
+      this.resizeSubscription = subscription;
     });
   }
 
