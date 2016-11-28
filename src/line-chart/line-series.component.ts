@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import d3 from '../d3';
 import * as moment from 'moment';
-import { sortLinear } from '../utils/sort';
+import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
   selector: 'g[lineSeries]',
@@ -52,8 +52,12 @@ export class LineSeries implements OnChanges {
       .curve(this.curve);
 
     let data = this.data.series;
-    if (this.scaleType === 'time' || this.scaleType === 'linear') {
+    if (this.scaleType === 'linear') {
       data = sortLinear(data, 'name');
+    } else if (this.scaleType === 'time') {
+      data = sortByTime(data, 'name');
+    } else {
+      data = sortByDomain(data, 'name', 'asc', this.xScale.domain());
     }
 
     this.path = line(data) || '';
