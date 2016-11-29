@@ -25,16 +25,16 @@ export interface LegendItem {
 @Component({
   selector: 'advanced-pie-chart',
   template: `
-    <div [style.width.px]="width"
+    <div 
+      [style.width.px]="width"
       [style.height.px]="height">
       <div class="advanced-pie chart"
         [style.width.px]="dims.width"
         [style.height.px]="dims.height">
-
         <chart
           [colors]="colors"
+          (legendLabelClick)="legendLabelClick.emit($event)"
           [view]="[dims.width, dims.height]">
-
           <svg:g
             [attr.transform]="transform"
             class="pie chart">
@@ -50,19 +50,16 @@ export interface LegendItem {
           </svg:g>
         </chart>
       </div>
-
       <div [style.width.px]="width - dims.width" class="advanced-pie-legend-wrapper">
         <div class="advanced-pie-legend"
           [style.margin-top]="(height - 215)/2"
           [style.width.px]="width - dims.width - margin[1]">
-
           <div class="total-value">
             {{roundedTotal.toLocaleString()}}
           </div>
           <div class="total-label">
             {{totalLabel}}
           </div>
-
           <div class="legend-items-container">
             <div class="legend-items">
               <div *ngFor="let legendItem of legendItems" class="legend-item">
@@ -75,7 +72,6 @@ export interface LegendItem {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -83,6 +79,17 @@ export interface LegendItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+  
+  @Input() view;
+  @Input() results;
+  @Input() margin = [20, 20, 20, 20];
+  @Input() scheme;
+  @Input() customColors;
+  @Input() gradient: boolean;
+
+  @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
   data: any;
   dims: ViewDimensions;
   domain: any[];
@@ -95,15 +102,6 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
   legendItems: LegendItem;
   colors: Function;
   legendWidth: number;
-
-  @Input() view;
-  @Input() results;
-  @Input() margin = [20, 20, 20, 20];
-  @Input() scheme;
-  @Input() customColors;
-  @Input() gradient: boolean;
-
-  @Output() clickHandler = new EventEmitter();
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

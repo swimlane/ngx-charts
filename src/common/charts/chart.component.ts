@@ -7,7 +7,9 @@ import {
   transition,
   animate,
   ViewContainerRef,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Output
 } from '@angular/core';
 import { InjectionService } from '../../utils/injection.service';
 
@@ -15,16 +17,14 @@ import { InjectionService } from '../../utils/injection.service';
   providers: [InjectionService],
   selector: 'chart',
   template: `
-    <div [style.width]="view[0] + 'px'"
+    <div [style.width.px]="view[0]"
       [@animationState]="'active'">
       <svg
         class="ng2d3"
         [attr.width]="view[0] * chartWidth / 12.0"
         [attr.height]="view[1]">
-
         <ng-content></ng-content>
       </svg>
-
       <scale-legend
         *ngIf="legend && legendType === 'scaleLegend'"
         class="chart-legend"
@@ -33,7 +33,6 @@ import { InjectionService } from '../../utils/injection.service';
         [height]="view[1]"
         [width]="view[0] * legendWidth / 12.0">
       </scale-legend>
-
       <legend
         *ngIf="legend && legendType === 'legend'"
         class="chart-legend"
@@ -41,7 +40,8 @@ import { InjectionService } from '../../utils/injection.service';
         [title]="legendTitle"
         [colors]="colors"
         [height]="view[1]"
-        [width]="view[0] * legendWidth / 12.0">
+        [width]="view[0] * legendWidth / 12.0"
+        (labelClick)="legendLabelClick.emit($event)">
       </legend>
     </div>
   `,
@@ -49,31 +49,31 @@ import { InjectionService } from '../../utils/injection.service';
   animations: [
     trigger('animationState', [
       transition('void => *', [
-        style({
-          opacity: 0,
-        }),
-        animate('500ms 100ms', style({opacity: 1}))
+        style({ opacity: 0 }),
+        animate('500ms 100ms', style({ opacity: 1 }))
       ])
     ])
   ]
 })
 export class Chart implements OnChanges {
+
   @Input() view;
   @Input() legend = false;
   @Input() data;
   @Input() legendData;
   @Input() legendTitle = 'Legend';
   @Input() colors;
-  chartWidth: any;
 
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  chartWidth: any;
   title: any;
   legendWidth: any;
   legendType: any;
 
   constructor(
     private vcr: ViewContainerRef,
-    private injectionService: InjectionService
-  ) {
+    private injectionService: InjectionService) {
     this.injectionService.setRootViewContainer(vcr);
   }
 

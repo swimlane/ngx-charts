@@ -27,6 +27,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="[width, height]"
       [colors]="colors"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [legendData]="innerDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g xAxis
@@ -81,18 +82,7 @@ import d3 from '../d3';
   ]
 })
 export class BarHorizontalStacked extends BaseChart implements  OnChanges, OnDestroy, AfterViewInit {
-  dims: ViewDimensions;
-  groupDomain: any[];
-  innerDomain: any[];
-  valueDomain: any[];
-  xScale: any;
-  yScale: any;
-  transform: string;
-  colors: Function;
-  margin = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
-
+  
   @Input() view;
   @Input() results;
   @Input() scheme;
@@ -108,6 +98,19 @@ export class BarHorizontalStacked extends BaseChart implements  OnChanges, OnDes
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  groupDomain: any[];
+  innerDomain: any[];
+  valueDomain: any[];
+  xScale: any;
+  yScale: any;
+  transform: string;
+  colors: Function;
+  margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

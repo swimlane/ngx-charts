@@ -22,8 +22,8 @@ import d3 from '../d3';
         [value]="arc.value"
         [explodeSlices]="explodeSlices">
       </svg:g>
-
-      <svg:g pieArc
+      <svg:g 
+        pieArc
         [startAngle]="arc.startAngle"
         [endAngle]="arc.endAngle"
         [innerRadius]="innerRadius"
@@ -33,22 +33,18 @@ import d3 from '../d3';
         [data]="arc.data"
         [max]="max"
         [explodeSlices]="explodeSlices"
-        (clickHandler)="click($event)"
-        [gradient]="gradient"
-
+        (clickHandler)="onClick($event)"
+        [gradient]="gradient" 
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="tooltipText(arc)">
       </svg:g>
-
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieSeries implements OnChanges {
-  max: number;
-  data: any;
 
   @Input() colors;
   @Input() series: any = [];
@@ -60,6 +56,9 @@ export class PieSeries implements OnChanges {
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
+
+  max: number;
+  data: any;
 
   ngOnChanges() {
     this.update();
@@ -146,7 +145,7 @@ export class PieSeries implements OnChanges {
     return item.data.name;
   }
 
-  click(data) {
+  onClick(data) {
     this.clickHandler.emit(data);
   }
 

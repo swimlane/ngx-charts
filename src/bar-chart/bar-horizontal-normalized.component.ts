@@ -26,6 +26,7 @@ import d3 from '../d3';
     <chart
       [legend]="legend"
       [view]="[width, height]"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [colors]="colors"
       [legendData]="innerDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
@@ -38,7 +39,6 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -47,7 +47,6 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:g
           *ngFor="let group of results; trackBy:trackBy"
           [@animationState]="'active'"
@@ -63,7 +62,6 @@ import d3 from '../d3';
             (clickHandler)="click($event, group)"
           />
         </svg:g>
-
       </svg:g>
     </chart>
   `,
@@ -81,17 +79,6 @@ import d3 from '../d3';
   ]
 })
 export class BarHorizontalNormalized extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  dims: ViewDimensions;
-  groupDomain: any[];
-  innerDomain: any[];
-  valueDomain: any[];
-  xScale: any;
-  yScale: any;
-  transform: string;
-  colors: Function;
-  margin = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
@@ -108,6 +95,19 @@ export class BarHorizontalNormalized extends BaseChart implements OnChanges, OnD
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  groupDomain: any[];
+  innerDomain: any[];
+  valueDomain: any[];
+  xScale: any;
+  yScale: any;
+  transform: string;
+  colors: Function;
+  margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

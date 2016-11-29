@@ -21,11 +21,11 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
   template: `
     <chart
       [legend]="legend"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [legendData]="colorScale"
       [data]="valueDomain"
       [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="heat-map chart">
-
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
@@ -34,7 +34,6 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -43,7 +42,6 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:rect *ngFor="let rect of rects"
           [attr.x]="rect.x"
           [attr.y]="rect.y"
@@ -52,7 +50,6 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
-
         <svg:g heatMapCellSeries
           [xScale]="xScale"
           [yScale]="yScale"
@@ -67,20 +64,6 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  dims: ViewDimensions;
-  xDomain: any[];
-  yDomain: any[];
-  valueDomain: any[];
-  xScale: any;
-  yScale: any;
-  color: any;
-  colors: Function;
-  colorScale: any;
-  transform: string;
-  rects: any[];
-  margin = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
@@ -96,6 +79,22 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  xDomain: any[];
+  yDomain: any[];
+  valueDomain: any[];
+  xScale: any;
+  yScale: any;
+  color: any;
+  colors: Function;
+  colorScale: any;
+  transform: string;
+  rects: any[];
+  margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

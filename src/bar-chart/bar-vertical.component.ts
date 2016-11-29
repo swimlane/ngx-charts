@@ -24,6 +24,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="[width, height]"
       [colors]="colors"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [legendData]="xDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g xAxis
@@ -35,7 +36,6 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -45,7 +45,6 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:g seriesVertical
           [xScale]="xScale"
           [yScale]="yScale"
@@ -61,21 +60,10 @@ import d3 from '../d3';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarVertical extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  dims: ViewDimensions;
-  xScale: any;
-  yScale: any;
-  xDomain: any;
-  yDomain: any;
-  transform: string;
-  colors: Function;
-  margin: any[] = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
   @Input() scheme;
-
   @Input() customColors;
   @Input() legend = false;
   @Input() xAxis;
@@ -88,6 +76,18 @@ export class BarVertical extends BaseChart implements OnChanges, OnDestroy, Afte
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  xScale: any;
+  yScale: any;
+  xDomain: any;
+  yDomain: any;
+  transform: string;
+  colors: Function;
+  margin: any[] = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

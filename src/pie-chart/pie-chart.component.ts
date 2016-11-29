@@ -20,6 +20,7 @@ import { BaseChart } from '../common/base-chart.component';
   template: `
     <chart
       [colors]="colors"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [legend]="legend"
       [view]="[width, height]"
       [legendData]="domain">
@@ -40,12 +41,6 @@ import { BaseChart } from '../common/base-chart.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  outerRadius: number;
-  innerRadius: number;
-  data: any;
-  colors: Function;
-  domain: any;
-  dims: any;
 
   @Input() view;
   @Input() results;
@@ -59,8 +54,15 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   translation: string;
+  outerRadius: number;
+  innerRadius: number;
+  data: any;
+  colors: Function;
+  domain: any;
+  dims: any;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

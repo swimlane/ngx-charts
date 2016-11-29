@@ -21,6 +21,7 @@ import { gridLayout } from '../common/grid-layout.helper';
   template: `
     <chart
       [legend]="false"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="number-card chart">
         <svg:g cardSeries
@@ -35,11 +36,6 @@ import { gridLayout } from '../common/grid-layout.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NumberCard extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  dims: ViewDimensions;
-  data: any[];
-  colors: Function;
-  transform: string;
-  domain: any[];
 
   @Input() view;
   @Input() results;
@@ -48,6 +44,13 @@ export class NumberCard extends BaseChart implements OnChanges, OnDestroy, After
   @Input() customColors;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  data: any[];
+  colors: Function;
+  transform: string;
+  domain: any[];
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

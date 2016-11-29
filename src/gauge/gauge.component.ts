@@ -23,9 +23,9 @@ import { colorHelper } from '../utils/color-sets';
     <chart
       [legend]="legend"
       [legendData]="colorScale"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [data]="valueDomain"
       [view]="[width, height]">
-
       <svg:g [attr.transform]="transform" class="gauge chart">
         <svg:g pieArc
           class="background-arc"
@@ -95,6 +95,23 @@ import { colorHelper } from '../utils/color-sets';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+
+  @Input() view;
+  @Input() scheme;
+  @Input() customColors;
+  @Input() gradient: boolean;
+  @Input() value: number = 0;
+  @Input() min: number = 0;
+  @Input() max: number = 100;
+  @Input() units: string;
+  @Input() bigSegments: number = 10;
+  @Input() smallSegments: number = 5;
+
+  @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+  
+  @ViewChild('textEl') textEl: ElementRef;
+
   dims: ViewDimensions;
   valueDomain: any;
   valueScale: any;
@@ -112,21 +129,6 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
   resizeScale: number = 1;
   textTransform: string = '';
   ticks: any;
-
-  @Input() view;
-  @Input() scheme;
-  @Input() customColors;
-  @Input() gradient: boolean;
-  @Input() value: number = 0;
-  @Input() min: number = 0;
-  @Input() max: number = 100;
-  @Input() units: string;
-  @Input() bigSegments: number = 10;
-  @Input() smallSegments: number = 5;
-
-  @Output() clickHandler = new EventEmitter();
-
-  @ViewChild('textEl') textEl: ElementRef;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

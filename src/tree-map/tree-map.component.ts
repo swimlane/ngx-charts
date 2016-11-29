@@ -21,7 +21,8 @@ import { colorHelper } from '../utils/color-sets';
   template: `
     <chart
       [legend]="false"
-      [view]="[width, height]">
+      [view]="[width, height]"
+      (legendLabelClick)="legendLabelClick.emit($event)">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g treeMapCellSeries
           [colors]="colors"
@@ -35,7 +36,6 @@ import { colorHelper } from '../utils/color-sets';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  margin = [10, 10, 10, 10];
 
   @Input() view;
   @Input() results;
@@ -43,6 +43,7 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   @Input() customColors;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: any;
   domain: any;
@@ -50,6 +51,7 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   colors: any;
   treemap: any;
   data: any;
+  margin = [10, 10, 10, 10];
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

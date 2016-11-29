@@ -25,9 +25,9 @@ import * as moment from 'moment';
     <chart
       [legend]="legend"
       [view]="[width, height]"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [colors]="colors"
       [legendData]="seriesDomain">
-
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
@@ -36,7 +36,6 @@ import * as moment from 'moment';
             [attr.transform]="'translate(-5, -5)'"/>
         </svg:clipPath>
       </svg:defs>
-
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g xAxis
           *ngIf="xAxis"
@@ -47,7 +46,6 @@ import * as moment from 'moment';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -57,7 +55,6 @@ import * as moment from 'moment';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy">
             <svg:g lineSeries
@@ -69,7 +66,6 @@ import * as moment from 'moment';
               [curve]="curve"
             />
           </svg:g>
-
           <svg:g areaTooltip
             [xSet]="xSet"
             [xScale]="xScale"
@@ -79,7 +75,6 @@ import * as moment from 'moment';
             [colors]="colors"
             (hover)="updateHoveredVertical($event)"
           />
-
           <svg:g *ngFor="let series of results">
             <svg:g circleSeries
               [xScale]="xScale"
@@ -92,11 +87,10 @@ import * as moment from 'moment';
               (clickHandler)="click($event, series)"
             />
           </svg:g>
-
         </svg:g>
       </svg:g>
-
-      <svg:g timeline
+      <svg:g 
+        timeline
         *ngIf="timeline && scaleType === 'time'"
         [attr.transform]="timelineTransform"
         [results]="results"
@@ -107,7 +101,6 @@ import * as moment from 'moment';
         [scaleType]="scaleType"
         [legend]="legend"
         (onDomainChange)="updateDomain($event)">
-
         <svg:g *ngFor="let series of results; trackBy:trackBy">
           <svg:g lineSeries
             [xScale]="timelineXScale"
@@ -124,6 +117,27 @@ import * as moment from 'moment';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+
+  @Input() view;
+  @Input() results;
+  @Input() scheme;
+  @Input() legend;
+  @Input() customColors;
+  @Input() xAxis;
+  @Input() yAxis;
+  @Input() showXAxisLabel;
+  @Input() showYAxisLabel;
+  @Input() xAxisLabel;
+  @Input() yAxisLabel;
+  @Input() autoScale;
+  @Input() timeline;
+  @Input() gradient: boolean;
+  @Input() showGridLines: boolean = true;
+  @Input() curve = d3.shape.curveLinear;
+
+  @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
   dims: ViewDimensions;
   xSet: any;
   xDomain: any;
@@ -151,25 +165,6 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
-
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
-  @Input() legend;
-  @Input() customColors;
-  @Input() xAxis;
-  @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
-  @Input() autoScale;
-  @Input() timeline;
-  @Input() gradient: boolean;
-  @Input() showGridLines: boolean = true;
-  @Input() curve = d3.shape.curveLinear;
-
-  @Output() clickHandler = new EventEmitter();
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

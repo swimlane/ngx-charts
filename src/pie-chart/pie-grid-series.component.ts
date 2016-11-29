@@ -28,7 +28,6 @@ import d3 from '../d3';
         [animate]="arc.animate"
         (clickHandler)="click($event)">
       </svg:g>
-
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

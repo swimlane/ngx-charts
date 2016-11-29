@@ -10,6 +10,10 @@
     &:hover {
       opacity: 0.8;
     }
+
+    &:focus {
+      outline: none;
+    }
   }
 
   .area {
@@ -126,6 +130,8 @@
   padding: 0;
 
   .legend-title {
+    white-space: nowrap; 
+    overflow: hidden;
     color: #76818a;
     margin-left: 10px;
     margin-bottom: 5px;
@@ -167,6 +173,7 @@
     border-radius: 3px;
     overflow-y: auto;
     overflow-x: hidden;
+    white-space: nowrap;
     background: rgba(0,0,0,0.05);
   }
 
@@ -175,6 +182,15 @@
     font-size: 90%;
     margin: 8px;
     color: #76818a;
+
+    &:hover {
+      color: #50585f;
+      font-weight: bold;
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -ms-transition: 0.5s;
+      transition: 0.5s;
+    }
 
     &.active {
       color: #FFF;

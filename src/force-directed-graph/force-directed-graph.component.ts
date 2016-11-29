@@ -24,10 +24,10 @@ import {
   template: `
     <chart
       [legend]="legend"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [view]="[width, height]"
       [colors]="colors"
       [legendData]="seriesDomain">
-
       <svg:g [attr.transform]="transform" class="force-directed-graph chart">
         <svg:g class="links">
           <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
@@ -51,7 +51,6 @@ import {
             [attr.stroke]="colors(groupResultsBy(node))"
             (mousedown)="onDragStart(node, $event)"
             (click)="click($event, node)"
-
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
@@ -69,6 +68,29 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForceDirectedGraph extends BaseChart implements OnChanges {
+
+  @Input() force = d3.forceSimulation()
+    .force("charge", d3.forceManyBody())
+    .force("collide", d3.forceCollide(5))
+    .force("x", d3.forceX())
+    .force("y", d3.forceY());
+
+  @Input() forceLink = d3.forceLink().id(node => node.value);
+  @Input() groupResultsBy: (node: any) => string = node => node.value;
+  @Input() legend: boolean;
+  @Input() nodes: any[] = [];
+  @Input() links: { source: any, target: any }[] = [];
+  @Input() scheme;
+  @Input() view;
+  @Input() customColors;
+
+  @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
+  @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
+  @ViewChild(Chart, { read: ElementRef }) chart: ElementRef;
+
   colors: Function;
   dims: ViewDimensions;
   draggingNode: any;
@@ -77,26 +99,6 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
   results = [];
   seriesDomain: any;
   transform: string;
-
-  @Input() customColors;
-  @Input() force = d3.forceSimulation()
-    .force("charge", d3.forceManyBody())
-    .force("collide", d3.forceCollide(5))
-    .force("x", d3.forceX())
-    .force("y", d3.forceY());
-  @Input() forceLink = d3.forceLink().id(node => node.value);
-  @Input() groupResultsBy: (node: any) => string = node => node.value;
-  @Input() legend: boolean;
-  @Input() nodes: any[] = [];
-  @Input() links: { source: any, target: any }[] = [];
-  @Input() scheme;
-  @Input() view;
-
-  @Output() clickHandler = new EventEmitter();
-
-  @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
-  @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
-  @ViewChild(Chart, { read: ElementRef }) chart: ElementRef;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

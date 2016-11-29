@@ -25,9 +25,9 @@ import { id } from "../utils/id";
     <chart
       [legend]="legend"
       [view]="[width, height]"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [colors]="colors"
       [legendData]="seriesDomain">
-
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
@@ -36,7 +36,6 @@ import { id } from "../utils/id";
             [attr.transform]="'translate(-5, -5)'"/>
         </svg:clipPath>
       </svg:defs>
-
       <svg:g [attr.transform]="transform" class="area-chart chart">
         <svg:g xAxis
           *ngIf="xAxis"
@@ -47,7 +46,6 @@ import { id } from "../utils/id";
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -57,9 +55,7 @@ import { id } from "../utils/id";
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:g [attr.clip-path]="clipPath">
-
           <svg:g *ngFor="let series of results; trackBy:trackBy">
             <svg:g areaSeries
               [xScale]="xScale"
@@ -72,7 +68,6 @@ import { id } from "../utils/id";
               [curve]="curve"
             />
           </svg:g>
-
           <svg:g areaTooltip
             [xSet]="xSet"
             [xScale]="xScale"
@@ -83,7 +78,6 @@ import { id } from "../utils/id";
             [showPercentage]="true"
             (hover)="updateHoveredVertical($event)"
           />
-
           <svg:g *ngFor="let series of results">
             <svg:g circleSeries
               type="stacked"
@@ -97,10 +91,8 @@ import { id } from "../utils/id";
               (clickHandler)="click($event, series)"
             />
           </svg:g>
-
         </svg:g>
       </svg:g>
-
       <svg:g timeline
         *ngIf="timeline && scaleType === 'time'"
         [attr.transform]="timelineTransform"
@@ -112,7 +104,6 @@ import { id } from "../utils/id";
         [legend]="legend"
         [scaleType]="scaleType"
         (onDomainChange)="updateDomain($event)">
-
         <svg:g *ngFor="let series of results; trackBy:trackBy">
           <svg:g areaSeries
             [xScale]="timelineXScale"
@@ -131,6 +122,26 @@ import { id } from "../utils/id";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaChartNormalized extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+
+  @Input() view;
+  @Input() results;
+  @Input() scheme;
+  @Input() customColors;
+  @Input() legend = false;
+  @Input() xAxis;
+  @Input() yAxis;
+  @Input() showXAxisLabel;
+  @Input() showYAxisLabel;
+  @Input() xAxisLabel;
+  @Input() yAxisLabel;
+  @Input() timeline;
+  @Input() gradient;
+  @Input() showGridLines: boolean = true;
+  @Input() curve = d3.shape.curveLinear;
+
+  @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
   dims: ViewDimensions;
   scaleType: string;
   xDomain: any[];
@@ -157,24 +168,6 @@ export class AreaChartNormalized extends BaseChart implements OnChanges, OnDestr
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
-
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
-  @Input() customColors;
-  @Input() legend = false;
-  @Input() xAxis;
-  @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
-  @Input() timeline;
-  @Input() gradient;
-  @Input() showGridLines: boolean = true;
-  @Input() curve = d3.shape.curveLinear;
-
-  @Output() clickHandler = new EventEmitter();
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

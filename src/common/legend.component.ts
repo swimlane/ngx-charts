@@ -2,34 +2,34 @@ import {
   Component,
   Input,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter
  } from '@angular/core';
 
 @Component({
   selector: 'legend',
   template: `
-    <div [style.width]="width + 'px'">
-      <header class="legend-title"
-        style="white-space: nowrap; overflow: hidden;">
-        <span class="legend-icon incon-eye-1"></span>
+    <div [style.width.px]="width">
+      <header class="legend-title">
+        <span class="legend-icon icon-eye"></span>
         <span class="legend-title-text">{{title}}</span>
       </header>
-
       <div class="legend-wrap">
         <ul class="legend-labels"
-          style="white-space: nowrap;"
-          [style.max-height]="height - 45 + 'px'">
-          <li *ngFor="let legendItem of legendItems" [class]="legendItem.className">
+          [style.max-height.px]="height - 45">
+          <li 
+            *ngFor="let legendItem of legendItems" 
+            (click)="labelClick.emit(legendItem)"
+            [class]="legendItem.className">
             <span
               [title]="legendItem.label"
               class="legend-label-color"
               [style.background-color]="colors(legendItem.label)">
             </span>
-
             <span [title]="legendItem.label" class="legend-label-text">
               {{legendItem.trimmedLabel}}
             </span>
-
           </li>
         </ul>
       </div>
@@ -38,23 +38,26 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Legend implements OnChanges {
+
   @Input() data;
   @Input() title;
   @Input() colors;
   @Input() height;
   @Input() width;
 
+  @Output() labelClick: EventEmitter<any> = new EventEmitter();
+
   legendItems: any;
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.legendItems = this.getLegendItems();
   }
 
-  getLegendItems() {
+  getLegendItems(): any[] {
     return this.data.map((label, index) => {
       if (label.constructor.name === 'Date') {
         label = label.toLocaleDateString();

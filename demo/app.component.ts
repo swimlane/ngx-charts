@@ -28,7 +28,8 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)">
+            (clickHandler)="clickHandler($event)"
+            (legendLabelClick)="onLegendLabelClick($event)">
           </bar-vertical>
           <bar-horizontal
             *ngIf="chartType === 'bar-horizontal'"
@@ -45,6 +46,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
+            (legendLabelClick)="onLegendLabelClick($event)"
             (clickHandler)="clickHandler($event)">
           </bar-horizontal>
           <bar-vertical-2d
@@ -61,6 +63,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-vertical-2d>
@@ -74,6 +77,7 @@ import './demo.scss';
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
             [legend]="showLegend"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
@@ -91,6 +95,7 @@ import './demo.scss';
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
             [legend]="showLegend"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
@@ -109,6 +114,7 @@ import './demo.scss';
             [yAxis]="showYAxis"
             [legend]="showLegend"
             [showXAxisLabel]="showXAxisLabel"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
@@ -126,6 +132,7 @@ import './demo.scss';
             [yAxis]="showYAxis"
             [legend]="showLegend"
             [showXAxisLabel]="showXAxisLabel"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
@@ -146,6 +153,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [showGridLines]="showGridLines"
             (clickHandler)="clickHandler($event)">
           </bar-horizontal-normalized>
@@ -159,6 +167,7 @@ import './demo.scss';
             [explodeSlices]="explodeSlices"
             [labels]="showLabels"
             [doughnut]="doughnut"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             (clickHandler)="clickHandler($event)">
           </pie-chart>
@@ -168,6 +177,7 @@ import './demo.scss';
             [view]="view"
             [scheme]="colorScheme"
             [results]="single"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             (clickHandler)="clickHandler($event)">
           </advanced-pie-chart>
@@ -176,6 +186,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [results]="single"
             (clickHandler)="clickHandler($event)">
           </pie-grid>
@@ -186,6 +197,7 @@ import './demo.scss';
             [scheme]="colorScheme"
             [results]="dateData"
             [legend]="showLegend"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
@@ -204,6 +216,7 @@ import './demo.scss';
             class="chart-container"
             [legend]="showLegend"
             [links]="graph.links"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [nodes]="graph.nodes"
             [scheme]="colorScheme"
             [view]="view"
@@ -216,6 +229,7 @@ import './demo.scss';
             [scheme]="colorScheme"
             [results]="dateData"
             [legend]="showLegend"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
@@ -239,6 +253,7 @@ import './demo.scss';
             [gradient]="gradient"
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
@@ -257,6 +272,7 @@ import './demo.scss';
             [legend]="showLegend"
             [gradient]="gradient"
             [xAxis]="showXAxis"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [yAxis]="showYAxis"
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
@@ -275,6 +291,7 @@ import './demo.scss';
             [results]="multi"
             [legend]="showLegend"
             [gradient]="gradient"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
             [showXAxisLabel]="showXAxisLabel"
@@ -287,6 +304,7 @@ import './demo.scss';
             *ngIf="chartType === 'tree-map'"
             class="chart-container"
             [view]="view"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [scheme]="colorScheme"
             [results]="single"
             (clickHandler)="clickHandler($event)">
@@ -295,15 +313,16 @@ import './demo.scss';
             *ngIf="chartType === 'number-card'"
             class="chart-container"
             [view]="view"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [scheme]="colorScheme"
             [results]="single"
             (clickHandler)="clickHandler($event)">
           </number-card>
-
           <gauge
             *ngIf="chartType === 'gauge'"
             class="chart-container"
             [view]="view"
+            (legendLabelClick)="onLegendLabelClick($event)"
             [scheme]="colorScheme"
             [value]="gaugeValue"
             [min]="gaugeMin"
@@ -723,5 +742,9 @@ export class AppComponent implements OnInit {
   setColorScheme(name) {
     this.selectedColorScheme = name;
     this.colorScheme = this.colorSets.find(s => s.name === name);
+  }
+
+  onLegendLabelClick(entry) {
+    console.log('Legend clicked', entry);
   }
 }

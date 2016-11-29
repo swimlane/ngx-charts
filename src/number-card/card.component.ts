@@ -15,8 +15,10 @@ import { trimLabel } from '../common/trim-label.helper';
 @Component({
   selector: 'g[card]',
   template: `
-    <svg:g [attr.transform]="transform" class="cell"
-      (click)="click()">
+    <svg:g 
+      [attr.transform]="transform" 
+      class="cell"
+      (click)="onClick()">
       <svg:rect
         class="card"
         [style.fill]="color"
@@ -47,7 +49,6 @@ import { trimLabel } from '../common/trim-label.helper';
           {{trimmedLabel}}
         </xhtml:p>
       </svg:foreignObject>
-
       <svg:text #textEl
         [attr.x]="cardWidth / 2"
         [attr.y]="height * 0.30"
@@ -64,17 +65,6 @@ import { trimLabel } from '../common/trim-label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Card implements OnChanges {
-  element: HTMLElement;
-  transform: string;
-  trimmedLabel: string;
-  value: string;
-  cardWidth: number;
-  cardHeight: number;
-  textWidth: number;
-  resizeScale: number = 1;
-  textFontSize: number = 35;
-  textTransform: string = '';
-  initialized: boolean = false;
 
   @Input() color;
   @Input() x;
@@ -87,6 +77,18 @@ export class Card implements OnChanges {
   @Output() clickHandler = new EventEmitter();
 
   @ViewChild('textEl') textEl: ElementRef;
+
+  element: HTMLElement;
+  transform: string;
+  trimmedLabel: string;
+  value: string;
+  cardWidth: number;
+  cardHeight: number;
+  textWidth: number;
+  resizeScale: number = 1;
+  textFontSize: number = 35;
+  textTransform: string = '';
+  initialized: boolean = false;
 
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
@@ -158,7 +160,7 @@ export class Card implements OnChanges {
     });
   }
 
-  click() {
+  onClick() {
     this.clickHandler.emit({
       name: this.data.name,
       value: this.data.value

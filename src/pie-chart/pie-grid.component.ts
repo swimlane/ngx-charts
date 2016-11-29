@@ -23,26 +23,24 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="false"
-      [view]="[width, height]" >
+      (legendLabelClick)="legendLabelClick.emit($event)"
+      [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g
           *ngFor="let series of series"
           class="pie-grid-item"
           [attr.transform]="series.transform">
-
           <svg:g pieGridSeries
             [colors]="series.colors"
             [data]="series.data"
             [innerRadius]="series.innerRadius"
             [outerRadius]="series.outerRadius"
             (clickHandler)="click($event)"
-
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="series.label + ': ' + series.value.toLocaleString()"
           />
-
           <svg:text
             class="label"
             dy="-0.5em"
@@ -51,7 +49,6 @@ import d3 from '../d3';
             text-anchor="middle">
             {{series.percent}}
           </svg:text>
-
           <svg:text
             class="label"
             dy="0.5em"
@@ -60,7 +57,6 @@ import d3 from '../d3';
             text-anchor="middle">
             {{series.label}}
           </svg:text>
-
           <svg:text
             class="label"
             dy="1.23em"
@@ -69,7 +65,6 @@ import d3 from '../d3';
             text-anchor="middle">
             {{series.total.toLocaleString()}}
           </svg:text>
-
         </svg:g>
       </svg:g>
     </chart>
@@ -91,6 +86,7 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
   @Input() customColors;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

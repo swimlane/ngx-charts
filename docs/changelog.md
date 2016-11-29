@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.7.0
+- Enhancement: Added `legendLabelClick` event
+- Enhancement: Properly format labels and numbers in axis, tooltips, and legends
+- Bug: Fix typo in legend eye class
+- Style: Hover styling for legend entries 
+- Chore: Upgrade to Angular 2.2.2
+- Chore: Better Webpack Config
+- Chore: Normalized exports
+
+## 1.6.3
+- Bug: Wrap all updates in zone.run to fix issue in hybrid apps
+- Perf: Add starting value to reduce calls
+- Bug: Fix sorting in line and area charts
+- Bug: Fix change detection in hybrid Angular applications
+- Style: Better tooltip styling
+
+## 1.6.2
+- Chore: Export BaseCharts
+- Perf: Switch change detection strategy to OnPush
+
+## 1.6.1
+- Bug: Don't do rounded edges on bars smaller than their radius
+- Bug: Scale number cards by height
+- Bug: Set text inside number cards to prevent overflow (#89)
+- Bug: Format numbers and dates according to locale
+- Bug: Fix timeline width when no legend is present
+- Bug: Embed charts into timeline; Restyle timeline
+- Bug: Show percentages in tooltips for normalized bar charts (#79)
+- Chore: Change legend class name to prevent style conflicts (#98)
+- Chore: Upgrade to Angular 2.2.1
+- Chore: Fix tooltips in hybrid apps
+
 ## 1.6.0
 - Added gauge chart
 - Fixed source map file name

@@ -21,6 +21,7 @@ import d3 from '../d3';
   selector: 'bar-horizontal',
   template: `
     <chart
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [legend]="legend"
       [view]="[width, height]"
       [colors]="colors"
@@ -35,7 +36,6 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -45,7 +45,6 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:g seriesHorizontal
           [xScale]="xScale"
           [yScale]="yScale"
@@ -61,6 +60,7 @@ import d3 from '../d3';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+
   dims: ViewDimensions;
   yScale: any;
   xScale: any;
@@ -87,6 +87,7 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
@@ -183,4 +184,5 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
     this.xAxisHeight = height;
     this.update();
   }
+  
 }

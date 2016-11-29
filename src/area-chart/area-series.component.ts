@@ -24,9 +24,6 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AreaSeries implements OnChanges {
-  opacity: number;
-  path: string;
-  startingPath: string;
 
   @Input() data;
   @Input() xScale;
@@ -39,6 +36,10 @@ export class AreaSeries implements OnChanges {
   @Input() curve;
 
   @Output() clickHandler = new EventEmitter();
+
+  opacity: number;
+  path: string;
+  startingPath: string;
 
   ngOnChanges() {
     this.update();

@@ -26,7 +26,6 @@ import {
       [roundEdges]="bar.roundEdges"
       (clickHandler)="click($event)"
       [gradient]="gradient"
-
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"

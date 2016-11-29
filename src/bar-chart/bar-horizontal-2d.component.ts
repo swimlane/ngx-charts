@@ -25,6 +25,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
+      (legendLabelClick)="legendLabelClick.emit($event)"
       [view]="[width, height]"
       [colors]="colors"
       [legendData]="innerDomain">
@@ -88,18 +89,6 @@ import d3 from '../d3';
   ]
 })
 export class BarHorizontal2D extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  dims: ViewDimensions;
-  groupDomain: any[];
-  innerDomain: any[];
-  valuesDomain: any[];
-  groupScale: any;
-  innerScale: any;
-  valueScale: any;
-  transform: string;
-  colors: Function;
-  margin = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
 
   @Input() view;
   @Input() results;
@@ -116,7 +105,20 @@ export class BarHorizontal2D extends BaseChart implements OnChanges, OnDestroy, 
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
+  dims: ViewDimensions;
+  groupDomain: any[];
+  innerDomain: any[];
+  valuesDomain: any[];
+  groupScale: any;
+  innerScale: any;
+  valueScale: any;
+  transform: string;
+  colors: Function;
+  margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
