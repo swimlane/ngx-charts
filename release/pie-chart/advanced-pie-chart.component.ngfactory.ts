@@ -403,7 +403,7 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     }
     const currVal_52:any = ((this.context.height - 215) / 2);
     if (import3.checkBinding(throwOnChange,this._expr_52,currVal_52)) {
-      this.renderer.setElementStyle(this._el_17,'margin-top',((this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52).toString()));
+      this.renderer.setElementStyle(this._el_17,'margin-top',((this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52).toString() + 'px')));
       this._expr_52 = currVal_52;
     }
     const currVal_53:any = ((this.context.width - this.context.dims.width) - this.context.margin[1]);
@@ -489,7 +489,7 @@ class View_AdvancedPieChart1 extends import2.AppView<any> {
     this._expr_17 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray2(2,'class','legend-item'),(null as any));
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'div',new import3.InlineArray4(4,'class','legend-item','tabindex','-1'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n                ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','item-color'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'\n                ',(null as any));
@@ -503,6 +503,7 @@ class View_AdvancedPieChart1 extends import2.AppView<any> {
     this._el_11 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray2(2,'class','item-percent'),(null as any));
     this._text_12 = this.renderer.createText(this._el_11,'',(null as any));
     this._text_13 = this.renderer.createText(this._el_0,'\n              ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -519,7 +520,7 @@ class View_AdvancedPieChart1 extends import2.AppView<any> {
       this._text_12,
       this._text_13
     ]
-    ),(null as any));
+    ),[disposable_0]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -546,5 +547,14 @@ class View_AdvancedPieChart1 extends import2.AppView<any> {
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'click')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.legendLabelClick.emit(this.context.$implicit)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
 }
