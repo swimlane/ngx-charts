@@ -128,8 +128,10 @@ export class PieSeries implements OnChanges {
     let label = arc.data.name;
     if (label.constructor.name === 'Date') {
       label = label.toLocaleDateString();
+    } else {
+      label = label.toLocaleString();
     }
-    return arc.data.name;
+    return label;
   }
 
   tooltipText(arc) {

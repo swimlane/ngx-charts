@@ -56,6 +56,11 @@ export class Legend implements OnChanges {
 
   getLegendItems() {
     return this.data.map((label, index) => {
+      if (label.constructor.name === 'Date') {
+        label = label.toLocaleDateString();
+      } else {
+        label = label.toLocaleString();
+      }
       return {
         className: 'legend-label',
         label: label,

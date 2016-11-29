@@ -47,16 +47,18 @@ export class TreeMapCellSeries implements OnChanges {
         return d.depth === 1;
       })
       .map((d, index) => {
+        let label = d.id;
+
         return {
           x: d.x0,
           y: d.y0,
           width: d.x1 - d.x0,
           height: d.y1 - d.y0,
-          fill: this.colors(d.id),
-          label: d.id,
+          fill: this.colors(label),
+          label: label,
           value: d.value,
           valueType: d.valueType,
-          tooltipText: `${d.id}: ${d.value.toLocaleString()}`
+          tooltipText: `${label}: ${d.value.toLocaleString()}`
         };
       });
   }

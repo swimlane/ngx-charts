@@ -138,6 +138,13 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
       const baselineLabelHeight = 20;
       const padding = 10;
       let label = d.data.name;
+
+      if (label.constructor.name === 'Date') {
+        label = label.toLocaleDateString();
+      } else {
+        label = label.toLocaleString();
+      }
+      
       let value = d.data.value;
       let radius = d3.min([d.width -padding, d.height - baselineLabelHeight]) / 2;
       let innerRadius = radius * 0.75;

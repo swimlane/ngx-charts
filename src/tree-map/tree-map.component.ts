@@ -90,7 +90,16 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
       };
 
       let root = d3.stratify()
-        .id(d => d.name)
+        .id(d => {
+          let label = d.name;
+
+          if (label.constructor.name === 'Date') {
+            label = label.toLocaleDateString();
+          } else {
+            label = label.toLocaleString();
+          }
+          return label;
+        })
         .parentId(d => { return d.isRoot ? null : 'root'; })
         ([rootNode, ...this.results])
         .sum(d => d.value);

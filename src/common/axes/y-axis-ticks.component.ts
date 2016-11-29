@@ -121,7 +121,10 @@ export class YAxisTicks implements OnChanges, AfterViewInit {
       this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
       this.tickFormat = function(d) {
-        return d;
+        if (d.constructor.name === 'Date') {
+          return d.toLocaleDateString();
+        }
+        return d.toLocaleString();
       };
     }
 

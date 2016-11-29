@@ -61,6 +61,12 @@ export class CardSeries implements OnChanges {
     return this.data
       .map((d, index) => {
         let label = d.data.name;
+        if (label.constructor.name === 'Date') {
+          label = label.toLocaleDateString();
+        } else {
+          label = label.toLocaleString();
+        }
+        d.data.name = label;
 
         let value = d.data.value;
         return {
@@ -69,7 +75,7 @@ export class CardSeries implements OnChanges {
           width: d.width,
           height: d.height,
           color: this.colors(label),
-          label: d.data.label,
+          label: label,
           data: d.data,
           tooltipText: `${label}: ${value}`
         };
