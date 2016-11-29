@@ -15,8 +15,8 @@ import { trimLabel } from '../common/trim-label.helper';
 @Component({
   selector: 'g[card]',
   template: `
-    <svg:g 
-      [attr.transform]="transform" 
+    <svg:g
+      [attr.transform]="transform"
       class="cell"
       (click)="onClick()">
       <svg:rect
@@ -89,6 +89,7 @@ export class Card implements OnChanges {
   textFontSize: number = 35;
   textTransform: string = '';
   initialized: boolean = false;
+  originalTextWidth: number;
 
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
@@ -115,7 +116,6 @@ export class Card implements OnChanges {
       });
       if (!this.initialized) {
         setTimeout(() => {
-          this.scaleText();
           let step = this.data.value / 100;
           this.countUp(0, this.data.value, step);
         });
@@ -146,7 +146,11 @@ export class Card implements OnChanges {
         return;
       }
 
-      let oldScale = this.resizeScale;
+      if (!this.originalTextWidth) {
+        this.originalTextWidth = width;
+      }
+
+      let oldScale = this.originalTextWidth / width;
       let availableWidth = this.cardWidth * 0.85;
       let availableHeight = this.cardHeight * 0.65;
 
