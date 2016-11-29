@@ -77,6 +77,11 @@
   .ng2d3 .arc:hover,
   .ng2d3 .card:hover {
     opacity: 0.8; }
+  .ng2d3 .bar:focus,
+  .ng2d3 .cell:focus,
+  .ng2d3 .arc:focus,
+  .ng2d3 .card:focus {
+    outline: none; }
   .ng2d3 .area {
     opacity: 0.6; }
   .ng2d3 .circle:hover {
@@ -151,6 +156,8 @@
   display: inline-block;
   padding: 0; }
   .chart-legend .legend-title {
+    white-space: nowrap;
+    overflow: hidden;
     color: #76818a;
     margin-left: 10px;
     margin-bottom: 5px;
@@ -180,12 +187,20 @@
     border-radius: 3px;
     overflow-y: auto;
     overflow-x: hidden;
+    white-space: nowrap;
     background: rgba(0, 0, 0, 0.05); }
   .chart-legend .legend-label {
     cursor: pointer;
     font-size: 90%;
     margin: 8px;
     color: #76818a; }
+    .chart-legend .legend-label:hover {
+      color: #50585f;
+      font-weight: bold;
+      -webkit-transition: 0.5s;
+      -moz-transition: 0.5s;
+      -ms-transition: 0.5s;
+      transition: 0.5s; }
     .chart-legend .legend-label.active {
       color: #FFF; }
   .chart-legend .legend-label-color {

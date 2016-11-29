@@ -40,6 +40,7 @@ export class Wrapper_PieGrid {
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
   subscription0:any;
+  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -54,6 +55,7 @@ export class Wrapper_PieGrid {
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -102,9 +104,10 @@ export class Wrapper_PieGrid {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_PieGrid_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -192,6 +195,8 @@ export class View_PieGrid0 extends import2.AppView<import0.PieGrid> {
     this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._Chart_1_6.context);
     this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -203,7 +208,7 @@ export class View_PieGrid0 extends import2.AppView<import0.PieGrid> {
       this._text_7,
       this._text_8
     ]
-    ),(null as any));
+    ),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -235,6 +240,7 @@ export class View_PieGrid0 extends import2.AppView<import0.PieGrid> {
     this._vc_1.destroyNestedViews();
     this._vc_5.destroyNestedViews();
     this.compView_1.destroy();
+    this._Chart_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -246,6 +252,15 @@ export class View_PieGrid0 extends import2.AppView<import0.PieGrid> {
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
     if ((nodeIndex == 5)) { return new View_PieGrid1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
     return (null as any);
+  }
+  handleEvent_1(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
 }
 class View_PieGrid1 extends import2.AppView<any> {
@@ -281,23 +296,23 @@ class View_PieGrid1 extends import2.AppView<any> {
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie-grid-item'),(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n\n          ',(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'pieGridSeries','','swui-tooltip',''),(null as any));
     this._vc_2 = new import10.ViewContainer(2,0,this,this._el_2);
     this.compView_2 = new import22.View_PieGridSeries0(this.viewUtils,this,2,this._el_2);
     this._TooltipDirective_2_5 = new import21.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import23.TooltipService,this.parentView.parentIndex),this._vc_2.vcRef,(<View_PieGrid0>this.parentView)._InjectionService_1_5,this.renderer,new import8.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import9.NgZone,this.parentView.parentIndex));
     this._PieGridSeries_2_6 = new import22.Wrapper_PieGridSeries(new import8.ElementRef(this._el_2));
     this.compView_2.create(this._PieGridSeries_2_6.context);
-    this._text_3 = this.renderer.createText(this._el_0,'\n\n          ',(null as any));
+    this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(10,'class','label','dy','-0.5em','text-anchor','middle','x','0','y','5'),(null as any));
     this._text_5 = this.renderer.createText(this._el_4,'',(null as any));
-    this._text_6 = this.renderer.createText(this._el_0,'\n\n          ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(10,'class','label','dy','0.5em','text-anchor','middle','x','0','y','5'),(null as any));
     this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
-    this._text_9 = this.renderer.createText(this._el_0,'\n\n          ',(null as any));
+    this._text_9 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray8(8,'class','label','dy','1.23em','text-anchor','middle','x','0'),(null as any));
     this._text_11 = this.renderer.createText(this._el_10,'',(null as any));
-    this._text_12 = this.renderer.createText(this._el_0,'\n\n        ',(null as any));
+    this._text_12 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_2));
     this._PieGridSeries_2_6.subscribe(this,this.eventHandler(this.handleEvent_2),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [

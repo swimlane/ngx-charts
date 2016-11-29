@@ -10,6 +10,14 @@ export interface LegendItem {
 export declare class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
     private element;
     private cd;
+    view: any;
+    results: any;
+    margin: number[];
+    scheme: any;
+    customColors: any;
+    gradient: boolean;
+    clickHandler: EventEmitter<{}>;
+    legendLabelClick: EventEmitter<any>;
     data: any;
     dims: ViewDimensions;
     domain: any[];
@@ -22,13 +30,6 @@ export declare class AdvancedPieChart extends BaseChart implements OnChanges, On
     legendItems: LegendItem;
     colors: Function;
     legendWidth: number;
-    view: any;
-    results: any;
-    margin: number[];
-    scheme: any;
-    customColors: any;
-    gradient: boolean;
-    clickHandler: EventEmitter<{}>;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;

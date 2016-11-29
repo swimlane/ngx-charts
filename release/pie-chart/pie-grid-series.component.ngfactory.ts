@@ -154,7 +154,7 @@ export class View_PieGridSeries0 extends import2.AppView<import0.PieGridSeries> 
     this._vc_3 = new import9.ViewContainer(3,1,this,this._anchor_3);
     this._TemplateRef_3_5 = new import11.TemplateRef_(this,3,this._anchor_3);
     this._NgFor_3_6 = new import10.Wrapper_NgFor(this._vc_3.vcRef,this._TemplateRef_3_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
-    this._text_4 = this.renderer.createText(this._el_1,'\n\n    ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_5 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,

@@ -29,6 +29,7 @@ export declare class BarHorizontal extends BaseChart implements OnChanges, OnDes
     gradient: boolean;
     showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
+    legendLabelClick: EventEmitter<any>;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;

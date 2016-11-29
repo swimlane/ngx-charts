@@ -17,6 +17,7 @@ export declare class PieGrid extends BaseChart implements OnChanges, OnDestroy, 
     scheme: any;
     customColors: any;
     clickHandler: EventEmitter<{}>;
+    legendLabelClick: EventEmitter<any>;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;

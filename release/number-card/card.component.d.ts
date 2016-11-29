@@ -2,6 +2,15 @@ import { EventEmitter, ElementRef, OnChanges, ChangeDetectorRef, NgZone } from '
 export declare class Card implements OnChanges {
     private cd;
     private zone;
+    color: any;
+    x: any;
+    y: any;
+    width: any;
+    height: any;
+    label: any;
+    data: any;
+    clickHandler: EventEmitter<{}>;
+    textEl: ElementRef;
     element: HTMLElement;
     transform: string;
     trimmedLabel: string;
@@ -13,19 +22,10 @@ export declare class Card implements OnChanges {
     textFontSize: number;
     textTransform: string;
     initialized: boolean;
-    color: any;
-    x: any;
-    y: any;
-    width: any;
-    height: any;
-    label: any;
-    data: any;
-    clickHandler: EventEmitter<{}>;
-    textEl: ElementRef;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(): void;
     update(): void;
     countUp(current: any, max: any, step: any): void;
     scaleText(): void;
-    click(): void;
+    onClick(): void;
 }

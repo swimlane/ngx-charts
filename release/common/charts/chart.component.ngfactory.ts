@@ -43,6 +43,7 @@ export class Wrapper_Chart {
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
+  subscription0:any;
   constructor(p0:any,p1:any) {
     this._changed = false;
     this._changes = {};
@@ -57,6 +58,7 @@ export class Wrapper_Chart {
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
+    (this.subscription0 && this.subscription0.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -121,8 +123,9 @@ export class Wrapper_Chart {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
+    if (emit0) { (this.subscription0 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_Chart_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -160,6 +163,7 @@ class View_Chart_Host0 extends import2.AppView<any> {
   destroyInternal():void {
     this._vc_0.destroyNestedViews();
     this.compView_0.destroy();
+    this._Chart_0_6.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._vc_0.nativeElement,ctx);
@@ -246,15 +250,15 @@ export class View_Chart0 extends import2.AppView<import0.Chart> {
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:svg',new import3.InlineArray2(2,'class','ng2d3'),(null as any));
-    this._text_4 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this.projectNodes(this._el_3,0);
     this._text_5 = this.renderer.createText(this._el_3,'\n      ',(null as any));
-    this._text_6 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
     this._vc_7 = new import6.ViewContainer(7,1,this,this._anchor_7);
     this._TemplateRef_7_5 = new import19.TemplateRef_(this,7,this._anchor_7);
     this._NgIf_7_6 = new import18.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
-    this._text_8 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._text_8 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._anchor_9 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
     this._vc_9 = new import6.ViewContainer(9,1,this,this._anchor_9);
     this._TemplateRef_9_5 = new import19.TemplateRef_(this,9,this._anchor_9);
@@ -301,9 +305,9 @@ export class View_Chart0 extends import2.AppView<import0.Chart> {
     this._NgIf_9_6.ngDoCheck(this,this._anchor_9,throwOnChange);
     this._vc_7.detectChangesInNestedViews(throwOnChange);
     this._vc_9.detectChangesInNestedViews(throwOnChange);
-    const currVal_18:any = (this.context.view[0] + 'px');
+    const currVal_18:any = this.context.view[0];
     if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_18) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_18).toString()));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_18) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_18).toString() + 'px')));
       this._expr_18 = currVal_18;
     }
     const currVal_20:any = ((this.context.view[0] * this.context.chartWidth) / 12);
@@ -390,11 +394,13 @@ class View_Chart2 extends import2.AppView<any> {
     this._Legend_0_3 = new import26.Wrapper_Legend();
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._Legend_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'labelClick',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._Legend_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
     ]
-    ),(null as any));
+    ),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -417,8 +423,18 @@ class View_Chart2 extends import2.AppView<any> {
   }
   destroyInternal():void {
     this.compView_0.destroy();
+    this._Legend_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'labelClick')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.legendLabelClick.emit($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
 }

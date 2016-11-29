@@ -253,7 +253,7 @@ class View_PieSeries1 extends import2.AppView<any> {
     this._vc_2 = new import8.ViewContainer(2,0,this,this._anchor_2);
     this._TemplateRef_2_5 = new import10.TemplateRef_(this,2,this._anchor_2);
     this._NgIf_2_6 = new import13.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
-    this._text_3 = this.renderer.createText(this._el_0,'\n\n      ',(null as any));
+    this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'pieArc','','swui-tooltip',''),(null as any));
     this._vc_4 = new import8.ViewContainer(4,0,this,this._el_4);
     this.compView_4 = new import16.View_PieArc0(this.viewUtils,this,4,this._el_4);
@@ -261,7 +261,7 @@ class View_PieSeries1 extends import2.AppView<any> {
     this._PieArc_4_6 = new import16.Wrapper_PieArc(new import19.ElementRef(this._el_4));
     this._text_5 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_4.create(this._PieArc_4_6.context);
-    this._text_6 = this.renderer.createText(this._el_0,'\n\n    ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_4,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_4));
     this._PieArc_4_6.subscribe(this,this.eventHandler(this.handleEvent_4),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -338,7 +338,7 @@ class View_PieSeries1 extends import2.AppView<any> {
     var result:boolean = true;
     result = (this._TooltipDirective_4_5.handleEvent(eventName,$event) && result);
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.click($event)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

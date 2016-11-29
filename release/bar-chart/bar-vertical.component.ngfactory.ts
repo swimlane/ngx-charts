@@ -49,6 +49,7 @@ export class Wrapper_BarVertical {
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
   subscription0:any;
+  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -72,6 +73,7 @@ export class Wrapper_BarVertical {
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -192,9 +194,10 @@ export class Wrapper_BarVertical {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_BarVertical_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -288,12 +291,12 @@ export class View_BarVertical0 extends import2.AppView<import0.BarVertical> {
     this._vc_5 = new import10.ViewContainer(5,3,this,this._anchor_5);
     this._TemplateRef_5_5 = new import19.TemplateRef_(this,5,this._anchor_5);
     this._NgIf_5_6 = new import14.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
-    this._text_6 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_7 = new import10.ViewContainer(7,3,this,this._anchor_7);
     this._TemplateRef_7_5 = new import19.TemplateRef_(this,7,this._anchor_7);
     this._NgIf_7_6 = new import14.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
-    this._text_8 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_8 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_9 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'seriesVertical',''),(null as any));
     this.compView_9 = new import16.View_SeriesVertical0(this.viewUtils,this,9,this._el_9);
     this._SeriesVertical_9_3 = new import16.Wrapper_SeriesVertical();
@@ -303,7 +306,9 @@ export class View_BarVertical0 extends import2.AppView<import0.BarVertical> {
     this._text_12 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._Chart_1_6.context);
     this._text_13 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
     this._SeriesVertical_9_3.subscribe(this,this.eventHandler(this.handleEvent_9),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -321,7 +326,11 @@ export class View_BarVertical0 extends import2.AppView<import0.BarVertical> {
       this._text_12,
       this._text_13
     ]
-    ),[disposable_0]);
+    ),[
+      disposable_0,
+      disposable_1
+    ]
+    );
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -381,6 +390,7 @@ export class View_BarVertical0 extends import2.AppView<import0.BarVertical> {
     this.compView_1.destroy();
     this.compView_9.destroy();
     this._SeriesVertical_9_3.ngOnDestroy();
+    this._Chart_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -393,6 +403,15 @@ export class View_BarVertical0 extends import2.AppView<import0.BarVertical> {
     if ((nodeIndex == 5)) { return new View_BarVertical1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
     if ((nodeIndex == 7)) { return new View_BarVertical2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
     return (null as any);
+  }
+  handleEvent_1(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
   handleEvent_9(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();

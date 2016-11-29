@@ -1,8 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
 export declare class AreaSeries implements OnChanges {
-    opacity: number;
-    path: string;
-    startingPath: string;
     data: any;
     xScale: any;
     yScale: any;
@@ -13,6 +10,9 @@ export declare class AreaSeries implements OnChanges {
     gradient: any;
     curve: any;
     clickHandler: EventEmitter<{}>;
+    opacity: number;
+    path: string;
+    startingPath: string;
     ngOnChanges(): void;
     update(): void;
 }

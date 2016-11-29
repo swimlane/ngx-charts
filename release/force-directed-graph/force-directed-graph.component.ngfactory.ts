@@ -48,6 +48,7 @@ export class Wrapper_ForceDirectedGraph {
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
   subscription0:any;
+  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -66,76 +67,77 @@ export class Wrapper_ForceDirectedGraph {
   }
   ngOnDestroy():void {
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
   }
-  check_customColors(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_force(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
       this._changed = true;
-      this.context.customColors = currValue;
-      this._changes['customColors'] = new import1.SimpleChange(this._expr_0,currValue);
+      this.context.force = currValue;
+      this._changes['force'] = new import1.SimpleChange(this._expr_0,currValue);
       this._expr_0 = currValue;
     }
   }
-  check_force(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_forceLink(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_1,currValue))) {
       this._changed = true;
-      this.context.force = currValue;
-      this._changes['force'] = new import1.SimpleChange(this._expr_1,currValue);
+      this.context.forceLink = currValue;
+      this._changes['forceLink'] = new import1.SimpleChange(this._expr_1,currValue);
       this._expr_1 = currValue;
     }
   }
-  check_forceLink(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_groupResultsBy(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_2,currValue))) {
       this._changed = true;
-      this.context.forceLink = currValue;
-      this._changes['forceLink'] = new import1.SimpleChange(this._expr_2,currValue);
+      this.context.groupResultsBy = currValue;
+      this._changes['groupResultsBy'] = new import1.SimpleChange(this._expr_2,currValue);
       this._expr_2 = currValue;
     }
   }
-  check_groupResultsBy(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_legend(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
       this._changed = true;
-      this.context.groupResultsBy = currValue;
-      this._changes['groupResultsBy'] = new import1.SimpleChange(this._expr_3,currValue);
+      this.context.legend = currValue;
+      this._changes['legend'] = new import1.SimpleChange(this._expr_3,currValue);
       this._expr_3 = currValue;
     }
   }
-  check_legend(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_nodes(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_4,currValue))) {
       this._changed = true;
-      this.context.legend = currValue;
-      this._changes['legend'] = new import1.SimpleChange(this._expr_4,currValue);
+      this.context.nodes = currValue;
+      this._changes['nodes'] = new import1.SimpleChange(this._expr_4,currValue);
       this._expr_4 = currValue;
     }
   }
-  check_nodes(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_links(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
       this._changed = true;
-      this.context.nodes = currValue;
-      this._changes['nodes'] = new import1.SimpleChange(this._expr_5,currValue);
+      this.context.links = currValue;
+      this._changes['links'] = new import1.SimpleChange(this._expr_5,currValue);
       this._expr_5 = currValue;
     }
   }
-  check_links(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_scheme(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_6,currValue))) {
       this._changed = true;
-      this.context.links = currValue;
-      this._changes['links'] = new import1.SimpleChange(this._expr_6,currValue);
+      this.context.scheme = currValue;
+      this._changes['scheme'] = new import1.SimpleChange(this._expr_6,currValue);
       this._expr_6 = currValue;
     }
   }
-  check_scheme(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_7,currValue))) {
       this._changed = true;
-      this.context.scheme = currValue;
-      this._changes['scheme'] = new import1.SimpleChange(this._expr_7,currValue);
+      this.context.view = currValue;
+      this._changes['view'] = new import1.SimpleChange(this._expr_7,currValue);
       this._expr_7 = currValue;
     }
   }
-  check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_customColors(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
       this._changed = true;
-      this.context.view = currValue;
-      this._changes['view'] = new import1.SimpleChange(this._expr_8,currValue);
+      this.context.customColors = currValue;
+      this._changes['customColors'] = new import1.SimpleChange(this._expr_8,currValue);
       this._expr_8 = currValue;
     }
   }
@@ -162,9 +164,10 @@ export class Wrapper_ForceDirectedGraph {
     }
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_ForceDirectedGraph_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -268,7 +271,7 @@ export class View_ForceDirectedGraph0 extends import2.AppView<import0.ForceDirec
     this.compView_1 = new import14.View_Chart0(this.viewUtils,this,1,this._el_1);
     this._InjectionService_1_5 = new import13.InjectionService(this.parentView.injectorGet(import16.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import17.ComponentFactoryResolver,this.parentIndex),this.injector(1));
     this._Chart_1_6 = new import14.Wrapper_Chart(this._vc_1.vcRef,this._InjectionService_1_5);
-    this._text_2 = this.renderer.createText((null as any),'\n\n      ',(null as any));
+    this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','force-directed-graph chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'class','links'),(null as any));
@@ -290,6 +293,8 @@ export class View_ForceDirectedGraph0 extends import2.AppView<import0.ForceDirec
     this._text_15 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._Chart_1_6.context);
     this._text_16 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
     this._viewQuery_Chart_0.reset([new import9.ElementRef(this._el_1)]);
     this.context.chart = this._viewQuery_Chart_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -311,7 +316,7 @@ export class View_ForceDirectedGraph0 extends import2.AppView<import0.ForceDirec
       this._text_15,
       this._text_16
     ]
-    ),(null as any));
+    ),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -358,6 +363,7 @@ export class View_ForceDirectedGraph0 extends import2.AppView<import0.ForceDirec
     this._vc_7.destroyNestedViews();
     this._vc_12.destroyNestedViews();
     this.compView_1.destroy();
+    this._Chart_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -370,6 +376,15 @@ export class View_ForceDirectedGraph0 extends import2.AppView<import0.ForceDirec
     if ((nodeIndex == 7)) { return new View_ForceDirectedGraph1(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
     if ((nodeIndex == 12)) { return new View_ForceDirectedGraph5(this.viewUtils,this,12,this._anchor_12,this._vc_12); }
     return (null as any);
+  }
+  handleEvent_1(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
 }
 class View_ForceDirectedGraph1 extends import2.AppView<any> {

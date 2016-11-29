@@ -17,6 +17,7 @@ var NumberCard = (function (_super) {
         this.cd = cd;
         this.margin = [10, 10, 10, 10];
         this.clickHandler = new core_1.EventEmitter();
+        this.legendLabelClick = new core_1.EventEmitter();
     }
     NumberCard.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
@@ -54,7 +55,7 @@ var NumberCard = (function (_super) {
     NumberCard.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'number-card',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
@@ -71,6 +72,7 @@ var NumberCard = (function (_super) {
         'scheme': [{ type: core_1.Input },],
         'customColors': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
+        'legendLabelClick': [{ type: core_1.Output },],
     };
     return NumberCard;
 }(base_chart_component_1.BaseChart));

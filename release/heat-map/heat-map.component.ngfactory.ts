@@ -51,6 +51,7 @@ export class Wrapper_HeatMap {
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   subscription0:any;
+  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -73,6 +74,7 @@ export class Wrapper_HeatMap {
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -185,9 +187,10 @@ export class Wrapper_HeatMap {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_HeatMap_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -280,22 +283,22 @@ export class View_HeatMap0 extends import2.AppView<import0.HeatMap> {
     this._Chart_1_6 = new import13.Wrapper_Chart(this._vc_1.vcRef,this._InjectionService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','heat-map chart'),(null as any));
-    this._text_4 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_5 = new import10.ViewContainer(5,3,this,this._anchor_5);
     this._TemplateRef_5_5 = new import20.TemplateRef_(this,5,this._anchor_5);
     this._NgIf_5_6 = new import14.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
-    this._text_6 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_7 = new import10.ViewContainer(7,3,this,this._anchor_7);
     this._TemplateRef_7_5 = new import20.TemplateRef_(this,7,this._anchor_7);
     this._NgIf_7_6 = new import14.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
-    this._text_8 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_8 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_9 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_9 = new import10.ViewContainer(9,3,this,this._anchor_9);
     this._TemplateRef_9_5 = new import20.TemplateRef_(this,9,this._anchor_9);
     this._NgFor_9_6 = new import15.Wrapper_NgFor(this._vc_9.vcRef,this._TemplateRef_9_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
-    this._text_10 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_10 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_11 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'heatMapCellSeries',''),(null as any));
     this.compView_11 = new import17.View_HeatCellSeries0(this.viewUtils,this,11,this._el_11);
     this._HeatCellSeries_11_3 = new import17.Wrapper_HeatCellSeries();
@@ -304,7 +307,9 @@ export class View_HeatMap0 extends import2.AppView<import0.HeatMap> {
     this._text_13 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._Chart_1_6.context);
     this._text_14 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_11,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_11));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_11,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_11));
     this._HeatCellSeries_11_3.subscribe(this,this.eventHandler(this.handleEvent_11),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -323,7 +328,11 @@ export class View_HeatMap0 extends import2.AppView<import0.HeatMap> {
       this._text_13,
       this._text_14
     ]
-    ),[disposable_0]);
+    ),[
+      disposable_0,
+      disposable_1
+    ]
+    );
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -388,6 +397,7 @@ export class View_HeatMap0 extends import2.AppView<import0.HeatMap> {
     this.compView_1.destroy();
     this.compView_11.destroy();
     this._HeatCellSeries_11_3.ngOnDestroy();
+    this._Chart_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -401,6 +411,15 @@ export class View_HeatMap0 extends import2.AppView<import0.HeatMap> {
     if ((nodeIndex == 7)) { return new View_HeatMap2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
     if ((nodeIndex == 9)) { return new View_HeatMap3(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
     return (null as any);
+  }
+  handleEvent_1(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
   handleEvent_11(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();

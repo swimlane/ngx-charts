@@ -60,6 +60,7 @@ export class Wrapper_AreaChartStacked {
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
   subscription0:any;
+  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -85,6 +86,7 @@ export class Wrapper_AreaChartStacked {
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -225,9 +227,10 @@ export class Wrapper_AreaChartStacked {
     }
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_AreaChartStacked_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -356,7 +359,7 @@ export class View_AreaChartStacked0 extends import2.AppView<import0.AreaChartSta
     this.compView_1 = new import13.View_Chart0(this.viewUtils,this,1,this._el_1);
     this._InjectionService_1_5 = new import12.InjectionService(this.parentView.injectorGet(import18.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import19.ComponentFactoryResolver,this.parentIndex),this.injector(1));
     this._Chart_1_6 = new import13.Wrapper_Chart(this._vc_1.vcRef,this._InjectionService_1_5);
-    this._text_2 = this.renderer.createText((null as any),'\n\n      ',(null as any));
+    this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:clipPath',import3.EMPTY_INLINE_ARRAY,(null as any));
@@ -364,38 +367,38 @@ export class View_AreaChartStacked0 extends import2.AppView<import0.AreaChartSta
     this._el_7 = import3.createRenderElement(this.renderer,this._el_5,':svg:rect',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_8 = this.renderer.createText(this._el_5,'\n        ',(null as any));
     this._text_9 = this.renderer.createText(this._el_3,'\n      ',(null as any));
-    this._text_10 = this.renderer.createText((null as any),'\n\n      ',(null as any));
+    this._text_10 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_11 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','area-chart chart'),(null as any));
     this._text_12 = this.renderer.createText(this._el_11,'\n        ',(null as any));
     this._anchor_13 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
     this._vc_13 = new import10.ViewContainer(13,11,this,this._anchor_13);
     this._TemplateRef_13_5 = new import20.TemplateRef_(this,13,this._anchor_13);
     this._NgIf_13_6 = new import14.Wrapper_NgIf(this._vc_13.vcRef,this._TemplateRef_13_5);
-    this._text_14 = this.renderer.createText(this._el_11,'\n\n        ',(null as any));
+    this._text_14 = this.renderer.createText(this._el_11,'\n        ',(null as any));
     this._anchor_15 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
     this._vc_15 = new import10.ViewContainer(15,11,this,this._anchor_15);
     this._TemplateRef_15_5 = new import20.TemplateRef_(this,15,this._anchor_15);
     this._NgIf_15_6 = new import14.Wrapper_NgIf(this._vc_15.vcRef,this._TemplateRef_15_5);
-    this._text_16 = this.renderer.createText(this._el_11,'\n\n        ',(null as any));
+    this._text_16 = this.renderer.createText(this._el_11,'\n        ',(null as any));
     this._el_17 = import3.createRenderElement(this.renderer,this._el_11,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_18 = this.renderer.createText(this._el_17,'\n\n          ',(null as any));
+    this._text_18 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._anchor_19 = this.renderer.createTemplateAnchor(this._el_17,(null as any));
     this._vc_19 = new import10.ViewContainer(19,17,this,this._anchor_19);
     this._TemplateRef_19_5 = new import20.TemplateRef_(this,19,this._anchor_19);
     this._NgFor_19_6 = new import15.Wrapper_NgFor(this._vc_19.vcRef,this._TemplateRef_19_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
-    this._text_20 = this.renderer.createText(this._el_17,'\n\n          ',(null as any));
+    this._text_20 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._el_21 = import3.createRenderElement(this.renderer,this._el_17,':svg:g',new import3.InlineArray2(2,'areaTooltip',''),(null as any));
     this.compView_21 = new import17.View_AreaTooltip0(this.viewUtils,this,21,this._el_21);
     this._AreaTooltip_21_3 = new import17.Wrapper_AreaTooltip(this.renderer);
     this.compView_21.create(this._AreaTooltip_21_3.context);
-    this._text_22 = this.renderer.createText(this._el_17,'\n\n          ',(null as any));
+    this._text_22 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._anchor_23 = this.renderer.createTemplateAnchor(this._el_17,(null as any));
     this._vc_23 = new import10.ViewContainer(23,17,this,this._anchor_23);
     this._TemplateRef_23_5 = new import20.TemplateRef_(this,23,this._anchor_23);
     this._NgFor_23_6 = new import15.Wrapper_NgFor(this._vc_23.vcRef,this._TemplateRef_23_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
-    this._text_24 = this.renderer.createText(this._el_17,'\n\n        ',(null as any));
+    this._text_24 = this.renderer.createText(this._el_17,'\n        ',(null as any));
     this._text_25 = this.renderer.createText(this._el_11,'\n      ',(null as any));
-    this._text_26 = this.renderer.createText((null as any),'\n\n      ',(null as any));
+    this._text_26 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._anchor_27 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this._vc_27 = new import10.ViewContainer(27,1,this,this._anchor_27);
     this._TemplateRef_27_5 = new import20.TemplateRef_(this,27,this._anchor_27);
@@ -403,7 +406,9 @@ export class View_AreaChartStacked0 extends import2.AppView<import0.AreaChartSta
     this._text_28 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._Chart_1_6.context);
     this._text_29 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_21,new import3.InlineArray2(2,'hover',(null as any)),this.eventHandler(this.handleEvent_21));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_21,new import3.InlineArray2(2,'hover',(null as any)),this.eventHandler(this.handleEvent_21));
     this._AreaTooltip_21_3.subscribe(this,this.eventHandler(this.handleEvent_21),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -437,7 +442,11 @@ export class View_AreaChartStacked0 extends import2.AppView<import0.AreaChartSta
       this._text_28,
       this._text_29
     ]
-    ),[disposable_0]);
+    ),[
+      disposable_0,
+      disposable_1
+    ]
+    );
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -547,6 +556,7 @@ export class View_AreaChartStacked0 extends import2.AppView<import0.AreaChartSta
     this.compView_1.destroy();
     this.compView_21.destroy();
     this._AreaTooltip_21_3.ngOnDestroy();
+    this._Chart_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -567,6 +577,15 @@ export class View_AreaChartStacked0 extends import2.AppView<import0.AreaChartSta
     if ((nodeIndex == 23)) { return new View_AreaChartStacked4(this.viewUtils,this,23,this._anchor_23,this._vc_23); }
     if ((nodeIndex == 27)) { return new View_AreaChartStacked5(this.viewUtils,this,27,this._anchor_27,this._vc_27); }
     return (null as any);
+  }
+  handleEvent_1(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
   handleEvent_21(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
@@ -850,7 +869,7 @@ class View_AreaChartStacked5 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'timeline',''),(null as any));
     this.compView_0 = new import33.View_Timeline0(this.viewUtils,this,0,this._el_0);
     this._Timeline_0_3 = new import33.Wrapper_Timeline(new import8.ElementRef(this._el_0));
-    this._text_1 = this.renderer.createText((null as any),'\n\n        ',(null as any));
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this._vc_2 = new import10.ViewContainer(2,0,this,this._anchor_2);
     this._TemplateRef_2_5 = new import20.TemplateRef_(this,2,this._anchor_2);

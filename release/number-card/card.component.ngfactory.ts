@@ -227,7 +227,7 @@ export class View_Card0 extends import2.AppView<import0.Card> {
     this._el_10 = import3.createRenderElement(this.renderer,this._el_8,':xhtml:p',new import3.InlineArray2(2,'style','overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;'),(null as any));
     this._text_11 = this.renderer.createText(this._el_10,'',(null as any));
     this._text_12 = this.renderer.createText(this._el_8,'\n      ',(null as any));
-    this._text_13 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._text_13 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_14 = import3.createRenderElement(this.renderer,this._el_1,':svg:text',new import3.InlineArray8(8,'class','value-text','dy','.35em','style','pointer-events: none;','text-anchor','middle'),(null as any));
     this._text_15 = this.renderer.createText(this._el_14,'',(null as any));
     this._text_16 = this.renderer.createText(this._el_1,'\n    ',(null as any));
@@ -339,7 +339,7 @@ export class View_Card0 extends import2.AppView<import0.Card> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.click()) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick()) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

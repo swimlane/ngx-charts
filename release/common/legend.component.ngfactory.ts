@@ -29,6 +29,7 @@ export class Wrapper_Legend {
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
+  subscription0:any;
   constructor() {
     this._changed = false;
     this._changes = {};
@@ -42,6 +43,7 @@ export class Wrapper_Legend {
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
+    (this.subscription0 && this.subscription0.unsubscribe());
   }
   check_data(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -98,8 +100,9 @@ export class Wrapper_Legend {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
+    if (emit0) { (this.subscription0 = this.context.labelClick.subscribe(_eventHandler.bind(view,'labelClick'))); }
   }
 }
 var renderType_Legend_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -128,6 +131,7 @@ class View_Legend_Host0 extends import2.AppView<any> {
   }
   destroyInternal():void {
     this.compView_0.destroy();
+    this._Legend_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -174,17 +178,17 @@ export class View_Legend0 extends import2.AppView<import0.Legend> {
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'header',new import3.InlineArray4(4,'class','legend-title','style','white-space: nowrap; overflow: hidden;'),(null as any));
+    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'header',new import3.InlineArray2(2,'class','legend-title'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'span',new import3.InlineArray2(2,'class','legend-icon incon-eye-1'),(null as any));
+    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'span',new import3.InlineArray2(2,'class','legend-icon icon-eye'),(null as any));
     this._text_6 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,this._el_3,'span',new import3.InlineArray2(2,'class','legend-title-text'),(null as any));
     this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
     this._text_9 = this.renderer.createText(this._el_3,'\n      ',(null as any));
-    this._text_10 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._text_10 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_11 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','legend-wrap'),(null as any));
     this._text_12 = this.renderer.createText(this._el_11,'\n        ',(null as any));
-    this._el_13 = import3.createRenderElement(this.renderer,this._el_11,'ul',new import3.InlineArray4(4,'class','legend-labels','style','white-space: nowrap;'),(null as any));
+    this._el_13 = import3.createRenderElement(this.renderer,this._el_11,'ul',new import3.InlineArray2(2,'class','legend-labels'),(null as any));
     this._text_14 = this.renderer.createText(this._el_13,'\n          ',(null as any));
     this._anchor_15 = this.renderer.createTemplateAnchor(this._el_13,(null as any));
     this._vc_15 = new import8.ViewContainer(15,13,this,this._anchor_15);
@@ -229,9 +233,9 @@ export class View_Legend0 extends import2.AppView<import0.Legend> {
     this._NgFor_15_6.check_ngForOf(currVal_15_0_0,throwOnChange,false);
     this._NgFor_15_6.ngDoCheck(this,this._anchor_15,throwOnChange);
     this._vc_15.detectChangesInNestedViews(throwOnChange);
-    const currVal_23:any = (this.context.width + 'px');
+    const currVal_23:any = this.context.width;
     if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_23) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_23).toString()));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_23) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_23).toString() + 'px')));
       this._expr_23 = currVal_23;
     }
     const currVal_24:any = import3.inlineInterpolate(1,'',this.context.title,'');
@@ -239,9 +243,9 @@ export class View_Legend0 extends import2.AppView<import0.Legend> {
       this.renderer.setText(this._text_8,currVal_24);
       this._expr_24 = currVal_24;
     }
-    const currVal_25:any = ((this.context.height - 45) + 'px');
+    const currVal_25:any = (this.context.height - 45);
     if (import3.checkBinding(throwOnChange,this._expr_25,currVal_25)) {
-      this.renderer.setElementStyle(this._el_13,'max-height',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_25) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_25).toString()));
+      this.renderer.setElementStyle(this._el_13,'max-height',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_25) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_25).toString() + 'px')));
       this._expr_25 = currVal_25;
     }
   }
@@ -280,10 +284,11 @@ class View_Legend1 extends import2.AppView<any> {
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'span',new import3.InlineArray2(2,'class','legend-label-color'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'\n            ',(null as any));
-    this._text_4 = this.renderer.createText(this._el_0,'\n\n            ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_0,'span',new import3.InlineArray2(2,'class','legend-label-text'),(null as any));
     this._text_6 = this.renderer.createText(this._el_5,'',(null as any));
-    this._text_7 = this.renderer.createText(this._el_0,'\n\n          ',(null as any));
+    this._text_7 = this.renderer.createText(this._el_0,'\n          ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -294,7 +299,7 @@ class View_Legend1 extends import2.AppView<any> {
       this._text_6,
       this._text_7
     ]
-    ),(null as any));
+    ),[disposable_0]);
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -326,5 +331,14 @@ class View_Legend1 extends import2.AppView<any> {
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'click')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.labelClick.emit(this.context.$implicit)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
 }

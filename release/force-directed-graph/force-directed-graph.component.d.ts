@@ -5,18 +5,6 @@ import { ElementRef, EventEmitter, NgZone, OnChanges, TemplateRef, ChangeDetecto
 export declare class ForceDirectedGraph extends BaseChart implements OnChanges {
     private element;
     private cd;
-    colors: Function;
-    dims: ViewDimensions;
-    draggingNode: any;
-    draggingStart: {
-        x: number;
-        y: number;
-    };
-    margin: number[];
-    results: any[];
-    seriesDomain: any;
-    transform: string;
-    customColors: any;
     force: any;
     forceLink: any;
     groupResultsBy: (node: any) => string;
@@ -28,10 +16,23 @@ export declare class ForceDirectedGraph extends BaseChart implements OnChanges {
     }[];
     scheme: any;
     view: any;
+    customColors: any;
     clickHandler: EventEmitter<{}>;
+    legendLabelClick: EventEmitter<any>;
     linkTemplate: TemplateRef<any>;
     nodeTemplate: TemplateRef<any>;
     chart: ElementRef;
+    colors: Function;
+    dims: ViewDimensions;
+    draggingNode: any;
+    draggingStart: {
+        x: number;
+        y: number;
+    };
+    margin: number[];
+    results: any[];
+    seriesDomain: any;
+    transform: string;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(): void;
     update(): void;

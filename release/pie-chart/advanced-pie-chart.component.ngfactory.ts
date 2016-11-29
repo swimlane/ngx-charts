@@ -40,6 +40,7 @@ export class Wrapper_AdvancedPieChart {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   subscription0:any;
+  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -56,6 +57,7 @@ export class Wrapper_AdvancedPieChart {
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -120,9 +122,10 @@ export class Wrapper_AdvancedPieChart {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_AdvancedPieChart_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -244,13 +247,13 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','advanced-pie chart'),(null as any));
-    this._text_4 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_5 = new import10.ViewContainer(5,3,this,this._el_5);
     this.compView_5 = new import13.View_Chart0(this.viewUtils,this,5,this._el_5);
     this._InjectionService_5_5 = new import12.InjectionService(this.parentView.injectorGet(import17.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import18.ComponentFactoryResolver,this.parentIndex),this.injector(5));
     this._Chart_5_6 = new import13.Wrapper_Chart(this._vc_5.vcRef,this._InjectionService_5_5);
-    this._text_6 = this.renderer.createText((null as any),'\n\n          ',(null as any));
+    this._text_6 = this.renderer.createText((null as any),'\n          ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie chart'),(null as any));
     this._text_8 = this.renderer.createText(this._el_7,'\n            ',(null as any));
     this._el_9 = import3.createRenderElement(this.renderer,this._el_7,':svg:g',new import3.InlineArray2(2,'pieSeries',''),(null as any));
@@ -262,17 +265,17 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this._text_12 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_5.create(this._Chart_5_6.context);
     this._text_13 = this.renderer.createText(this._el_3,'\n      ',(null as any));
-    this._text_14 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._text_14 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_15 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','advanced-pie-legend-wrapper'),(null as any));
     this._text_16 = this.renderer.createText(this._el_15,'\n        ',(null as any));
     this._el_17 = import3.createRenderElement(this.renderer,this._el_15,'div',new import3.InlineArray2(2,'class','advanced-pie-legend'),(null as any));
-    this._text_18 = this.renderer.createText(this._el_17,'\n\n          ',(null as any));
+    this._text_18 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._el_19 = import3.createRenderElement(this.renderer,this._el_17,'div',new import3.InlineArray2(2,'class','total-value'),(null as any));
     this._text_20 = this.renderer.createText(this._el_19,'',(null as any));
     this._text_21 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._el_22 = import3.createRenderElement(this.renderer,this._el_17,'div',new import3.InlineArray2(2,'class','total-label'),(null as any));
     this._text_23 = this.renderer.createText(this._el_22,'',(null as any));
-    this._text_24 = this.renderer.createText(this._el_17,'\n\n          ',(null as any));
+    this._text_24 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._el_25 = import3.createRenderElement(this.renderer,this._el_17,'div',new import3.InlineArray2(2,'class','legend-items-container'),(null as any));
     this._text_26 = this.renderer.createText(this._el_25,'\n            ',(null as any));
     this._el_27 = import3.createRenderElement(this.renderer,this._el_25,'div',new import3.InlineArray2(2,'class','legend-items'),(null as any));
@@ -283,11 +286,13 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this._NgFor_29_6 = new import16.Wrapper_NgFor(this._vc_29.vcRef,this._TemplateRef_29_5,this.parentView.injectorGet(import20.IterableDiffers,this.parentIndex),this.ref);
     this._text_30 = this.renderer.createText(this._el_27,'\n            ',(null as any));
     this._text_31 = this.renderer.createText(this._el_25,'\n          ',(null as any));
-    this._text_32 = this.renderer.createText(this._el_17,'\n\n        ',(null as any));
+    this._text_32 = this.renderer.createText(this._el_17,'\n        ',(null as any));
     this._text_33 = this.renderer.createText(this._el_15,'\n      ',(null as any));
     this._text_34 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_35 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_5));
+    this._Chart_5_6.subscribe(this,this.eventHandler(this.handleEvent_5),true);
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
     this._PieSeries_9_3.subscribe(this,this.eventHandler(this.handleEvent_9),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -327,7 +332,11 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
       this._text_34,
       this._text_35
     ]
-    ),[disposable_0]);
+    ),[
+      disposable_0,
+      disposable_1
+    ]
+    );
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -421,6 +430,7 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this.compView_5.destroy();
     this.compView_9.destroy();
     this._PieSeries_9_3.ngOnDestroy();
+    this._Chart_5_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 5) && (ngContentIndex == 0))) {
@@ -432,6 +442,15 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
     if ((nodeIndex == 29)) { return new View_AdvancedPieChart1(this.viewUtils,this,29,this._anchor_29,this._vc_29); }
     return (null as any);
+  }
+  handleEvent_5(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
   handleEvent_9(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
