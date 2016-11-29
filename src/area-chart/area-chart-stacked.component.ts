@@ -194,73 +194,76 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
-      xAxisHeight: this.xAxisHeight,
-      yAxisWidth: this.yAxisWidth,
-      showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
-      showLegend: this.legend,
-      columns: 10
-    });
 
-    if (this.timeline) {
-      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-    }
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showXAxis: this.xAxis,
+        showYAxis: this.yAxis,
+        xAxisHeight: this.xAxisHeight,
+        yAxisWidth: this.yAxisWidth,
+        showXLabel: this.showXAxisLabel,
+        showYLabel: this.showYAxisLabel,
+        showLegend: this.legend,
+        columns: 10
+      });
 
-    this.xDomain = this.getXDomain();
-    if (this.filteredDomain) {
-      this.xDomain = this.filteredDomain;
-    }
+      if (this.timeline) {
+        this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+      }
 
-    this.yDomain = this.getYDomain();
-    this.seriesDomain = this.getSeriesDomain();
+      this.xDomain = this.getXDomain();
+      if (this.filteredDomain) {
+        this.xDomain = this.filteredDomain;
+      }
 
-    this.xScale = this.getXScale(this.xDomain, this.dims.width);
-    this.yScale = this.getYScale(this.yDomain, this.dims.height);
+      this.yDomain = this.getYDomain();
+      this.seriesDomain = this.getSeriesDomain();
 
-    for (let i = 0; i < this.xSet.length; i++) {
-      let val = this.xSet[i];
-      let d0 = 0;
-      for (let group of this.results) {
+      this.xScale = this.getXScale(this.xDomain, this.dims.width);
+      this.yScale = this.getYScale(this.yDomain, this.dims.height);
 
-        let d = group.series.find(item => {
-          let a = item.name;
-          let b = val;
-          if (this.scaleType === 'time') {
-            a = a.valueOf();
-            b = b.valueOf();
+      for (let i = 0; i < this.xSet.length; i++) {
+        let val = this.xSet[i];
+        let d0 = 0;
+        for (let group of this.results) {
+
+          let d = group.series.find(item => {
+            let a = item.name;
+            let b = val;
+            if (this.scaleType === 'time') {
+              a = a.valueOf();
+              b = b.valueOf();
+            }
+            return a === b;
+          });
+
+          if (d) {
+            d.d0 = d0;
+            d.d1 = d0 + d.value;
+            d0 += d.value;
+          } else {
+            d = {
+              name: val,
+              value: 0,
+              d0: d0,
+              d1: d0
+            };
+            group.series.push(d);
           }
-          return a === b;
-        });
-
-        if (d) {
-          d.d0 = d0;
-          d.d1 = d0 + d.value;
-          d0 += d.value;
-        } else {
-          d = {
-            name: val,
-            value: 0,
-            d0: d0,
-            d1: d0
-          };
-          group.series.push(d);
         }
       }
-    }
 
-    this.updateTimeline();
+      this.updateTimeline();
 
-    this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-    let pageUrl = window.location.href;
-    this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+      this.setColors();
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+      let pageUrl = window.location.href;
+      this.clipPathId = 'clip' + id().toString();
+      this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    });
   }
 
   updateTimeline() {

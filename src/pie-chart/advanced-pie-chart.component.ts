@@ -123,30 +123,33 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions({
-      width: this.width * 4 / 12.0,
-      height: this.height,
-      margins: this.margin
+
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width * 4 / 12.0,
+        height: this.height,
+        margins: this.margin
+      });
+
+      this.domain = this.getDomain();
+      this.setColors();
+
+      let xOffset = this.dims.width / 2;
+      let yOffset = this.margin[0] + this.dims.height / 2;
+      this.legendWidth = this.width - this.dims.width - this.margin[1];
+
+      this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
+      this.innerRadius = this.outerRadius * 0.75;
+
+      this.transform = `translate(${xOffset} , ${yOffset})`;
+
+      this.total = this.getTotal();
+      this.roundedTotal = Math.round(this.total);
+
+      this.totalLabel = 'total';
+
+      this.legendItems = this.getLegendItems();
     });
-
-    this.domain = this.getDomain();
-    this.setColors();
-
-    let xOffset = this.dims.width / 2;
-    let yOffset = this.margin[0] + this.dims.height / 2;
-    this.legendWidth = this.width - this.dims.width - this.margin[1];
-
-    this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
-    this.innerRadius = this.outerRadius * 0.75;
-
-    this.transform = `translate(${xOffset} , ${yOffset})`;
-
-    this.total = this.getTotal();
-    this.roundedTotal = Math.round(this.total);
-
-    this.totalLabel = 'total';
-
-    this.legendItems = this.getLegendItems();
   }
 
   getTotal() {

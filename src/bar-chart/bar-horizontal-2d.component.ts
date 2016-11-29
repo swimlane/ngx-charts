@@ -136,31 +136,34 @@ export class BarHorizontal2D extends BaseChart implements OnChanges, OnDestroy, 
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
-      xAxisHeight: this.xAxisHeight,
-      yAxisWidth: this.yAxisWidth,
-      showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
-      showLegend: this.legend,
-      columns: 10
+
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showXAxis: this.xAxis,
+        showYAxis: this.yAxis,
+        xAxisHeight: this.xAxisHeight,
+        yAxisWidth: this.yAxisWidth,
+        showXLabel: this.showXAxisLabel,
+        showYLabel: this.showYAxisLabel,
+        showLegend: this.legend,
+        columns: 10
+      });
+
+      this.groupDomain = this.getGroupDomain();
+      this.innerDomain = this.getInnerDomain();
+      this.valuesDomain = this.getValueDomain();
+
+      this.groupScale = this.getGroupScale();
+      this.innerScale = this.getInnerScale();
+      this.valueScale = this.getValueScale();
+
+      this.setColors();
+
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     });
-
-    this.groupDomain = this.getGroupDomain();
-    this.innerDomain = this.getInnerDomain();
-    this.valuesDomain = this.getValueDomain();
-
-    this.groupScale = this.getGroupScale();
-    this.innerScale = this.getInnerScale();
-    this.valueScale = this.getValueScale();
-
-    this.setColors();
-
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getGroupScale() {

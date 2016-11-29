@@ -111,19 +111,21 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
   update() {
     super.update();
 
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin
+      });
+
+      this.domain = this.getDomain();
+
+      this.data = gridLayout(this.dims, this.results, 150);
+      this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
+
+      this.series = this.getSeries();
+      this.setColors();
     });
-
-    this.domain = this.getDomain();
-
-    this.data = gridLayout(this.dims, this.results, 150);
-    this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
-
-    this.series = this.getSeries();
-    this.setColors();
   }
 
   getDomain() {

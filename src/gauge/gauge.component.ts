@@ -148,53 +148,55 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
   update() {
     super.update();
 
-    if (!this.value) {
-      this.value = 0;
-    }
+    this.zone.run(() => {
+      if (!this.value) {
+        this.value = 0;
+      }
 
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      columns: 12
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        columns: 12
+      });
+
+      this.valueDomain = this.getValueDomain();
+      this.valueScale = this.getValueScale();
+
+      this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
+      this.innerRadius = this.outerRadius - 10;
+
+      this.backgroundArc = {
+        endAngle: this.angleSpan * Math.PI / 180,
+        innerRadius: this.innerRadius,
+        outerRadius: this.outerRadius,
+        cornerRadius: 10,
+        data: {
+          value: 100,
+          name: 'Value'
+        }
+      };
+
+      this.valueArc = {
+        endAngle: Math.min(this.valueScale(this.value), this.angleSpan) * Math.PI / 180,
+        innerRadius: this.innerRadius,
+        outerRadius: this.outerRadius,
+        cornerRadius: 10,
+        data: {
+          value: this.value,
+          name: 'Value'
+        }
+      };
+
+      this.setColors();
+      this.ticks = this.getTicks();
+
+      let xOffset = this.margin[3] + this.dims.width / 2;
+      let circleHeight = this.outerRadius / 2 + 20;
+      let yOffset = this.margin[0] + this.dims.height / 2 + circleHeight / 2;
+      this.transform = `translate(${xOffset}, ${yOffset}) rotate(-${this.angleSpan/2})`;
+      this.scaleText();
     });
-
-    this.valueDomain = this.getValueDomain();
-    this.valueScale = this.getValueScale();
-
-    this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
-    this.innerRadius = this.outerRadius - 10;
-
-    this.backgroundArc = {
-      endAngle: this.angleSpan * Math.PI / 180,
-      innerRadius: this.innerRadius,
-      outerRadius: this.outerRadius,
-      cornerRadius: 10,
-      data: {
-        value: 100,
-        name: 'Value'
-      }
-    };
-
-    this.valueArc = {
-      endAngle: Math.min(this.valueScale(this.value), this.angleSpan) * Math.PI / 180,
-      innerRadius: this.innerRadius,
-      outerRadius: this.outerRadius,
-      cornerRadius: 10,
-      data: {
-        value: this.value,
-        name: 'Value'
-      }
-    };
-
-    this.setColors();
-    this.ticks = this.getTicks();
-
-    let xOffset = this.margin[3] + this.dims.width / 2;
-    let circleHeight = this.outerRadius / 2 + 20;
-    let yOffset = this.margin[0] + this.dims.height / 2 + circleHeight / 2;
-    this.transform = `translate(${xOffset}, ${yOffset}) rotate(-${this.angleSpan/2})`;
-    this.scaleText();
   }
 
   getValueDomain() {

@@ -109,24 +109,26 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
   update() {
     super.update();
 
-    // center graph
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      showLegend: this.legend,
-      columns: 10
+    this.zone.run(() => {
+      // center graph
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showLegend: this.legend,
+        columns: 10
+      });
+
+      this.seriesDomain = this.getSeriesDomain();
+      this.setColors();
+
+      this.transform = `translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })`;
+      if(this.force) {
+        this.force.nodes(this.nodes)
+          .force("link", this.forceLink.links(this.links))
+          .alpha(0.5).restart();
+      }
     });
-
-    this.seriesDomain = this.getSeriesDomain();
-    this.setColors();
-
-    this.transform = `translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })`;
-    if(this.force) {
-      this.force.nodes(this.nodes)
-        .force("link", this.forceLink.links(this.links))
-        .alpha(0.5).restart();
-    }
   }
 
   click($event, node) {

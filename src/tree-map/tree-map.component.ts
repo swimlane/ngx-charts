@@ -70,35 +70,37 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
   update() {
     super.update();
 
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      columns: 12
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        columns: 12
+      });
+
+      this.domain = this.getDomain();
+
+      this.treemap = d3.treemap()
+        .size([this.dims.width, this.dims.height]);
+
+      let rootNode = {
+        name: 'root',
+        value: 0,
+        isRoot: true
+      };
+
+      let root = d3.stratify()
+        .id(d => d.name)
+        .parentId(d => { return d.isRoot ? null : 'root'; })
+        ([rootNode, ...this.results])
+        .sum(d => d.value);
+
+      this.data = this.treemap(root);
+
+      this.setColors();
+
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     });
-
-    this.domain = this.getDomain();
-
-    this.treemap = d3.treemap()
-      .size([this.dims.width, this.dims.height]);
-
-    let rootNode = {
-      name: 'root',
-      value: 0,
-      isRoot: true
-    };
-
-    let root = d3.stratify()
-      .id(d => d.name)
-      .parentId(d => { return d.isRoot ? null : 'root'; })
-      ([rootNode, ...this.results])
-      .sum(d => d.value);
-
-    this.data = this.treemap(root);
-
-    this.setColors();
-
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getDomain() {

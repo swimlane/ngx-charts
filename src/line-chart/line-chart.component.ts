@@ -189,43 +189,46 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
-      xAxisHeight: this.xAxisHeight,
-      yAxisWidth: this.yAxisWidth,
-      showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
-      showLegend: this.legend,
-      columns: 10
+
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showXAxis: this.xAxis,
+        showYAxis: this.yAxis,
+        xAxisHeight: this.xAxisHeight,
+        yAxisWidth: this.yAxisWidth,
+        showXLabel: this.showXAxisLabel,
+        showYLabel: this.showYAxisLabel,
+        showLegend: this.legend,
+        columns: 10
+      });
+
+      if (this.timeline) {
+        this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+      }
+
+      this.xDomain = this.getXDomain();
+      if (this.filteredDomain) {
+        this.xDomain = this.filteredDomain;
+      }
+
+      this.yDomain = this.getYDomain();
+      this.seriesDomain = this.getSeriesDomain();
+
+      this.xScale = this.getXScale(this.xDomain, this.dims.width);
+      this.yScale = this.getYScale(this.yDomain, this.dims.height);
+
+      this.updateTimeline();
+
+      this.setColors();
+
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+      let pageUrl = window.location.href;
+      this.clipPathId = 'clip' + id().toString();
+      this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
     });
-
-    if (this.timeline) {
-      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-    }
-
-    this.xDomain = this.getXDomain();
-    if (this.filteredDomain) {
-      this.xDomain = this.filteredDomain;
-    }
-
-    this.yDomain = this.getYDomain();
-    this.seriesDomain = this.getSeriesDomain();
-
-    this.xScale = this.getXScale(this.xDomain, this.dims.width);
-    this.yScale = this.getYScale(this.yDomain, this.dims.height);
-
-    this.updateTimeline();
-
-    this.setColors();
-
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-    let pageUrl = window.location.href;
-    this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 
   updateTimeline() {

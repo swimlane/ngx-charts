@@ -108,27 +108,29 @@ export class BarVertical extends BaseChart implements OnChanges, OnDestroy, Afte
   update() {
     super.update();
 
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
-      xAxisHeight: this.xAxisHeight,
-      yAxisWidth: this.yAxisWidth,
-      showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
-      showLegend: this.legend,
-      columns: 10
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showXAxis: this.xAxis,
+        showYAxis: this.yAxis,
+        xAxisHeight: this.xAxisHeight,
+        yAxisWidth: this.yAxisWidth,
+        showXLabel: this.showXAxisLabel,
+        showYLabel: this.showYAxisLabel,
+        showLegend: this.legend,
+        columns: 10
+      });
+
+      this.xScale = this.getXScale();
+      this.yScale = this.getYScale();
+
+      this.setColors();
+
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     });
-
-    this.xScale = this.getXScale();
-    this.yScale = this.getYScale();
-
-    this.setColors();
-
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-  }
+  }  
 
   getXScale() {
     const spacing = 0.2;

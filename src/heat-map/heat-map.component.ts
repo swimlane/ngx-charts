@@ -115,31 +115,34 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
 
   update() {
     super.update();
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      showXAxis: this.xAxis,
-      showYAxis: this.yAxis,
-      xAxisHeight: this.xAxisHeight,
-      yAxisWidth: this.yAxisWidth,
-      showXLabel: this.showXAxisLabel,
-      showYLabel: this.showYAxisLabel,
-      showLegend: this.legend,
-      columns: 11
+
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showXAxis: this.xAxis,
+        showYAxis: this.yAxis,
+        xAxisHeight: this.xAxisHeight,
+        yAxisWidth: this.yAxisWidth,
+        showXLabel: this.showXAxisLabel,
+        showYLabel: this.showYAxisLabel,
+        showLegend: this.legend,
+        columns: 11
+      });
+
+      this.xDomain = this.getXDomain();
+      this.yDomain = this.getYDomain();
+      this.valueDomain = this.getValueDomain();
+
+      this.xScale = this.getXScale();
+      this.yScale = this.getYScale();
+
+      this.setColors();
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+
+      this.rects = this.getRects();
     });
-
-    this.xDomain = this.getXDomain();
-    this.yDomain = this.getYDomain();
-    this.valueDomain = this.getValueDomain();
-
-    this.xScale = this.getXScale();
-    this.yScale = this.getYScale();
-
-    this.setColors();
-    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-
-    this.rects = this.getRects();
   }
 
   getXDomain() {

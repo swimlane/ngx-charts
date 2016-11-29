@@ -81,37 +81,39 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
   update() {
     super.update();
 
-    this.dims = calculateViewDimensions({
-      width: this.width,
-      height: this.height,
-      margins: this.margin,
-      showLegend: this.legend,
-      columns: 10
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showLegend: this.legend,
+        columns: 10
+      });
+
+      let xOffset = this.margin[3] + this.dims.width / 2;
+      let yOffset = this.margin[0] + this.dims.height / 2;
+      this.translation = `translate(${xOffset}, ${yOffset})`;
+      this.outerRadius = Math.min(this.dims.width, this.dims.height);
+      if (this.labels) {
+        // make room for labels
+        this.outerRadius /= 3;
+      } else {
+        this.outerRadius /= 2;
+      }
+      this.innerRadius = 0;
+      if (this.doughnut) {
+        this.innerRadius = this.outerRadius * 0.75;
+      }
+
+      this.domain = this.getDomain();
+
+      // sort data according to domain
+      this.data = this.results.sort((a, b) => {
+        return this.domain.indexOf(a.name) - this.domain.indexOf(b.name);
+      });
+
+      this.setColors();
     });
-
-    let xOffset = this.margin[3] + this.dims.width / 2;
-    let yOffset = this.margin[0] + this.dims.height / 2;
-    this.translation = `translate(${xOffset}, ${yOffset})`;
-    this.outerRadius = Math.min(this.dims.width, this.dims.height);
-    if (this.labels) {
-      // make room for labels
-      this.outerRadius /= 3;
-    } else {
-      this.outerRadius /= 2;
-    }
-    this.innerRadius = 0;
-    if (this.doughnut) {
-      this.innerRadius = this.outerRadius * 0.75;
-    }
-
-    this.domain = this.getDomain();
-
-    // sort data according to domain
-    this.data = this.results.sort((a, b) => {
-      return this.domain.indexOf(a.name) - this.domain.indexOf(b.name);
-    });
-
-    this.setColors();
   }
 
   getDomain() {
