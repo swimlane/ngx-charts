@@ -2,33 +2,30 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "declaration": true,
     "moduleResolution": "node",
-    "removeComments": true,
+    "declaration": true,
     "noEmitHelpers": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "pretty": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true,
     "noImplicitAny": false,
-    "noImplicitThis": false,
     "noImplicitReturns": false,
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": false,
     "allowSyntheticDefaultImports": true,
     "suppressExcessPropertyErrors": true,
     "suppressImplicitAnyIndexErrors": true,
-    "declarationDir": "release",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declarationDir": "release"
   },
   "files": [
-    "src/ng2d3.ts"
+    "src/index.ts"
   ],
   "exclude": [
-    "node_modules",
-    "*.spec.ts"
+    "node_modules"
   ],
   "compileOnSave": false,
   "buildOnSave": false,
@@ -36,7 +33,7 @@
     "forkChecker": false
   },
   "angularCompilerOptions": {
-    "genDir": "aot",
-    "genDir": "compiled"
+    "genDir": "release/",
+    "skipMetadataEmit": false
   }
 }

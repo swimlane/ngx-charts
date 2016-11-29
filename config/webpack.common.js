@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { ENV, IS_PRODUCTION, APP_VERSION, dir } = require('./helpers');
 
 module.exports = function(options = {}) {
@@ -13,9 +12,6 @@ module.exports = function(options = {}) {
         dir('src'),
         dir('demo')
       ]
-    },
-    entry: {
-      'app': './demo/bootstrap.ts'
     },
     output: {
       path: dir('dist'),

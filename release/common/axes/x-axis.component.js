@@ -1,0 +1,62 @@
+"use strict";
+var core_1 = require('@angular/core');
+var x_axis_ticks_component_1 = require('./x-axis-ticks.component');
+var XAxis = (function () {
+    function XAxis() {
+        this.showGridLines = false;
+        this.dimensionsChanged = new core_1.EventEmitter();
+        this.labelOffset = 80;
+        Object.assign(this, {
+            xAxisClassName: 'x axis',
+            xOrient: 'bottom',
+            fill: 'none',
+            stroke: 'none',
+            tickStroke: '#ccc',
+            strokeWidth: 'none',
+            xAxisOffset: 5,
+        });
+    }
+    XAxis.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    XAxis.prototype.update = function () {
+        this.transform = "translate(0," + (this.xAxisOffset + this.dims.height) + ")";
+        if (typeof this.xAxisTickCount !== 'undefined') {
+            this.tickArguments = [this.xAxisTickCount];
+        }
+    };
+    XAxis.prototype.emitTicksHeight = function (_a) {
+        var _this = this;
+        var height = _a.height;
+        var newLabelOffset = height + 25 + 5;
+        if (newLabelOffset !== this.labelOffset) {
+            this.labelOffset = newLabelOffset;
+            setTimeout(function () {
+                _this.dimensionsChanged.emit({ height: height });
+            }, 0);
+        }
+    };
+    XAxis.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[xAxis]',
+                    template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g xAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n        (dimensionsChanged)=\"emitTicksHeight($event)\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    XAxis.ctorParameters = [];
+    XAxis.propDecorators = {
+        'xScale': [{ type: core_1.Input },],
+        'dims': [{ type: core_1.Input },],
+        'tickFormatting': [{ type: core_1.Input },],
+        'showGridLines': [{ type: core_1.Input },],
+        'showLabel': [{ type: core_1.Input },],
+        'labelText': [{ type: core_1.Input },],
+        'xAxisTickInterval': [{ type: core_1.Input },],
+        'dimensionsChanged': [{ type: core_1.Output },],
+        'ticksComponent': [{ type: core_1.ViewChild, args: [x_axis_ticks_component_1.XAxisTicks,] },],
+    };
+    return XAxis;
+}());
+exports.XAxis = XAxis;
+//# sourceMappingURL=x-axis.component.js.map
