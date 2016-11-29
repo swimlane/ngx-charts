@@ -19,6 +19,7 @@ import {
         <ul class="legend-labels"
           [style.max-height.px]="height - 45">
           <li 
+            tabindex="-1"
             *ngFor="let legendItem of legendItems" 
             (click)="labelClick.emit(legendItem)"
             [class]="legendItem.className">
