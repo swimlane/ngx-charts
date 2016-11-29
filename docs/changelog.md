@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.1
+- Bug: Advanced Pie Legend not clickable
+- Bug: Date equality not scaling properly
+
 ## 1.7.0
 - Enhancement: Added `legendLabelClick` event
 - Enhancement: Properly format labels and numbers in axis, tooltips, and legends
