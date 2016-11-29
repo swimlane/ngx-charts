@@ -119,7 +119,22 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
   }
 
   getDomain() {
-    return this.results.map(d => d.name);
+    let items = [];
+    this.results.map(d => {
+      let label = d.name;
+      if (label.constructor.name === 'Date') {
+        label = label.toLocaleDateString();
+      } else {
+        label = label.toLocaleString();
+      }
+
+      if (items.indexOf(label) === -1){
+        items.push(label);
+      }
+    });
+
+    console.log('items', items);
+    return items;
   }
 
   click(data) {

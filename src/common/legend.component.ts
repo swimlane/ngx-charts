@@ -18,8 +18,8 @@ import {
       <div class="legend-wrap">
         <ul class="legend-labels"
           [style.max-height.px]="height - 45">
-          <li 
-            *ngFor="let legendItem of legendItems" 
+          <li
+            *ngFor="let legendItem of legendItems"
             (click)="labelClick.emit(legendItem)"
             [class]="legendItem.className">
             <span
@@ -58,18 +58,28 @@ export class Legend implements OnChanges {
   }
 
   getLegendItems(): any[] {
-    return this.data.map((label, index) => {
+    let items = [];
+    this.data.map((label, index) => {
       if (label.constructor.name === 'Date') {
         label = label.toLocaleDateString();
       } else {
         label = label.toLocaleString();
       }
-      return {
-        className: 'legend-label',
-        label: label,
-        trimmedLabel: label || '(empty)',
-        backgroundColor: this.colors(label)
+
+      let idx = items.findIndex((i) => {
+        return i.label === label;
+      });
+
+      if (idx === -1) {
+        items.push({
+          className: 'legend-label',
+          label: label,
+          trimmedLabel: label || '(empty)',
+          backgroundColor: this.colors(label)
+        });
       };
     });
+
+    return items;
   }
 }
