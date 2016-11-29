@@ -37,7 +37,7 @@
     color: #fff;
     background: rgba(0, 0, 0, 0.75);
     font-size: 12px;
-    padding: 4px;
+    padding: 0 10px;
     text-align: center;
     pointer-events: auto; }
     .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {
@@ -86,6 +86,8 @@
     text-align: center;
     line-height: 1.2em;
     vertical-align: middle; }
+  .ng2d3 .swui-tooltip-content {
+    pointer-events: none !important; }
 
 .label {
   font-size: 12px;
@@ -129,9 +131,14 @@
 .timeline .embedded-chart {
   opacity: 0.6; }
 
+.area-tooltip-container {
+  padding: 5px 0px;
+  pointer-events: none; }
+
 .tooltip-item {
   text-align: left;
-  line-height: 1.2em; }
+  line-height: 1.2em;
+  padding: 5px 0px; }
   .tooltip-item .tooltip-item-color {
     display: inline-block;
     height: 12px;

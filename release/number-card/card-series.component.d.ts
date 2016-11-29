@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, NgZone } from '@angular/core';
 export interface CardModel {
     x: any;
     y: any;
@@ -10,11 +10,13 @@ export interface CardModel {
     tooltipText: string;
 }
 export declare class CardSeries implements OnChanges {
+    private zone;
     cards: CardModel[];
     data: any;
     dims: any;
     colors: any;
     clickHandler: EventEmitter<{}>;
+    constructor(zone: NgZone);
     ngOnChanges(): void;
     update(): void;
     getCards(): any;

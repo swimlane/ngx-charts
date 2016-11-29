@@ -1,5 +1,5 @@
 /**
- * ng2d3 v"1.6.2" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.6.3" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -175,6 +175,9 @@ var BaseChart = (function () {
             this.width = dims.width;
             this.height = dims.height;
         }
+        if (this.changeDetector) {
+            this.changeDetector.markForCheck();
+        }
     };
     BaseChart.prototype.getContainerDims = function () {
         var width = 0;
@@ -188,17 +191,15 @@ var BaseChart = (function () {
     };
     BaseChart.prototype.bindWindowResizeEvent = function () {
         var _this = this;
-        this.zone.runOutsideAngular(function () {
+        this.zone.run(function () {
             var source = rxjs_1.Observable.fromEvent(window, 'resize', null, null);
             var subscription = source.debounceTime(200).subscribe(function (e) {
-                _this.zone.run(function () {
-                    _this.update();
-                    if (_this.changeDetector) {
-                        _this.changeDetector.markForCheck();
-                    }
-                });
+                _this.update();
+                if (_this.changeDetector) {
+                    _this.changeDetector.markForCheck();
+                }
             });
-            _this.zone.run(function () { _this.resizeSubscription = subscription; });
+            _this.resizeSubscription = subscription;
         });
     };
     BaseChart.prototype.cloneData = function (data) {
@@ -2052,12 +2053,13 @@ var tooltip_options_1 = __webpack_require__(66);
 var tooltip_service_1 = __webpack_require__(22);
 __webpack_require__(94);
 var TooltipDirective = (function () {
-    function TooltipDirective(tooltipService, viewContainerRef, injectionService, renderer, element) {
+    function TooltipDirective(tooltipService, viewContainerRef, injectionService, renderer, element, zone) {
         this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.injectionService = injectionService;
         this.renderer = renderer;
         this.element = element;
+        this.zone = zone;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -2124,20 +2126,22 @@ var TooltipDirective = (function () {
     };
     TooltipDirective.prototype.showTooltip = function (immediate) {
         var _this = this;
-        if (this.componentId || this.tooltipDisabled)
-            return;
-        var time = immediate ? 0 : this.tooltipShowTimeout;
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(function () {
-            _this.tooltipService.destroyAll();
-            _this.componentId = id_1.id();
-            var tooltip = _this.injectComponent();
-            _this.tooltipService.register(_this.componentId, tooltip, _this.hideTooltip.bind(_this));
-            setTimeout(function () {
-                _this.addHideListeners(tooltip.instance.element.nativeElement);
-            }, 10);
-            _this.show.emit(true);
-        }, time);
+        this.zone.run(function () {
+            if (_this.componentId || _this.tooltipDisabled)
+                return;
+            var time = immediate ? 0 : _this.tooltipShowTimeout;
+            clearTimeout(_this.timeout);
+            _this.timeout = setTimeout(function () {
+                _this.tooltipService.destroyAll();
+                _this.componentId = id_1.id();
+                var tooltip = _this.injectComponent();
+                _this.tooltipService.register(_this.componentId, tooltip, _this.hideTooltip.bind(_this));
+                setTimeout(function () {
+                    _this.addHideListeners(tooltip.instance.element.nativeElement);
+                }, 10);
+                _this.show.emit(true);
+            }, time);
+        });
     };
     TooltipDirective.prototype.addHideListeners = function (tooltip) {
         var _this = this;
@@ -2293,7 +2297,7 @@ var TooltipDirective = (function () {
     ], TooltipDirective.prototype, "onMouseLeave", null);
     TooltipDirective = __decorate([
         core_1.Directive({ selector: '[swui-tooltip]' }), 
-        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, injection_service_1.InjectionService, core_1.Renderer, core_1.ElementRef])
+        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, injection_service_1.InjectionService, core_1.Renderer, core_1.ElementRef, core_1.NgZone])
     ], TooltipDirective);
     return TooltipDirective;
 }());
@@ -2302,10 +2306,11 @@ exports.TooltipDirective = TooltipDirective;
 
 /***/ },
 /* 34 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
+var moment = __webpack_require__(7);
 function sortLinear(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
@@ -2318,6 +2323,44 @@ function sortLinear(data, property, direction) {
     });
 }
 exports.sortLinear = sortLinear;
+function sortByDomain(data, property, direction, domain) {
+    if (direction === void 0) { direction = 'asc'; }
+    return data.sort(function (a, b) {
+        var aVal = a[property];
+        var bVal = b[property];
+        var aIdx = domain.indexOf(aVal);
+        var bIdx = domain.indexOf(bVal);
+        if (direction === 'asc') {
+            return aIdx - bIdx;
+        }
+        else {
+            return bIdx - aIdx;
+        }
+    });
+}
+exports.sortByDomain = sortByDomain;
+function sortByTime(data, property, direction) {
+    if (direction === void 0) { direction = 'asc'; }
+    return data.sort(function (a, b) {
+        var aDate = moment(a[property]);
+        var bDate = moment(b[property]);
+        if (direction === 'asc') {
+            if (aDate.isAfter(bDate))
+                return 1;
+            if (bDate.isAfter(aDate))
+                return -1;
+            return 0;
+        }
+        else {
+            if (aDate.isAfter(bDate))
+                return -1;
+            if (bDate.isAfter(aDate))
+                return 1;
+            return 0;
+        }
+    });
+}
+exports.sortByTime = sortByTime;
 
 
 /***/ },
@@ -2375,94 +2418,95 @@ var AreaChartNormalized = (function (_super) {
     AreaChartNormalized.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            if (_this.timeline) {
+                _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
+            }
+            _this.xDomain = _this.getXDomain();
+            if (_this.filteredDomain) {
+                _this.xDomain = _this.filteredDomain;
+            }
+            _this.yDomain = _this.getYDomain();
+            _this.seriesDomain = _this.getSeriesDomain();
+            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
+            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
+            var _loop_1 = function(i) {
+                var val = _this.xSet[i];
+                var d0 = 0;
+                var total = 0;
+                for (var _i = 0, _a = _this.results; _i < _a.length; _i++) {
+                    var group = _a[_i];
+                    var d = group.series.find(function (item) {
+                        var a = item.name;
+                        var b = val;
+                        if (_this.scaleType === 'time') {
+                            a = a.valueOf();
+                            b = b.valueOf();
+                        }
+                        return a === b;
+                    });
+                    if (d) {
+                        total += d.value;
+                    }
+                }
+                for (var _b = 0, _c = _this.results; _b < _c.length; _b++) {
+                    var group = _c[_b];
+                    var d = group.series.find(function (item) {
+                        var a = item.name;
+                        var b = val;
+                        if (_this.scaleType === 'time') {
+                            a = a.valueOf();
+                            b = b.valueOf();
+                        }
+                        return a === b;
+                    });
+                    if (d) {
+                        d.d0 = d0;
+                        d.d1 = d0 + d.value;
+                        d0 += d.value;
+                    }
+                    else {
+                        d = {
+                            name: val,
+                            value: 0,
+                            d0: d0,
+                            d1: d0
+                        };
+                        group.series.push(d);
+                    }
+                    if (total > 0) {
+                        d.d0 = (d.d0 * 100) / total;
+                        d.d1 = (d.d1 * 100) / total;
+                    }
+                    else {
+                        d.d0 = 0;
+                        d.d1 = 0;
+                    }
+                }
+            };
+            for (var i = 0; i < _this.xSet.length; i++) {
+                _loop_1(i);
+            }
+            _this.updateTimeline();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
+            var pageUrl = window.location.href;
+            _this.clipPathId = 'clip' + id_1.id().toString();
+            _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
-        if (this.timeline) {
-            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-        }
-        this.xDomain = this.getXDomain();
-        if (this.filteredDomain) {
-            this.xDomain = this.filteredDomain;
-        }
-        this.yDomain = this.getYDomain();
-        this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale(this.xDomain, this.dims.width);
-        this.yScale = this.getYScale(this.yDomain, this.dims.height);
-        var _loop_1 = function(i) {
-            var val = this_1.xSet[i];
-            var d0 = 0;
-            var total = 0;
-            for (var _i = 0, _a = this_1.results; _i < _a.length; _i++) {
-                var group = _a[_i];
-                var d = group.series.find(function (item) {
-                    var a = item.name;
-                    var b = val;
-                    if (_this.scaleType === 'time') {
-                        a = a.valueOf();
-                        b = b.valueOf();
-                    }
-                    return a === b;
-                });
-                if (d) {
-                    total += d.value;
-                }
-            }
-            for (var _b = 0, _c = this_1.results; _b < _c.length; _b++) {
-                var group = _c[_b];
-                var d = group.series.find(function (item) {
-                    var a = item.name;
-                    var b = val;
-                    if (_this.scaleType === 'time') {
-                        a = a.valueOf();
-                        b = b.valueOf();
-                    }
-                    return a === b;
-                });
-                if (d) {
-                    d.d0 = d0;
-                    d.d1 = d0 + d.value;
-                    d0 += d.value;
-                }
-                else {
-                    d = {
-                        name: val,
-                        value: 0,
-                        d0: d0,
-                        d1: d0
-                    };
-                    group.series.push(d);
-                }
-                if (total > 0) {
-                    d.d0 = (d.d0 * 100) / total;
-                    d.d1 = (d.d1 * 100) / total;
-                }
-                else {
-                    d.d0 = 0;
-                    d.d1 = 0;
-                }
-            }
-        };
-        var this_1 = this;
-        for (var i = 0; i < this.xSet.length; i++) {
-            _loop_1(i);
-        }
-        this.updateTimeline();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
-        var pageUrl = window.location.href;
-        this.clipPathId = 'clip' + id_1.id().toString();
-        this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
     };
     AreaChartNormalized.prototype.updateTimeline = function () {
         if (this.timeline) {
@@ -2734,70 +2778,71 @@ var AreaChartStacked = (function (_super) {
     AreaChartStacked.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
-        });
-        if (this.timeline) {
-            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-        }
-        this.xDomain = this.getXDomain();
-        if (this.filteredDomain) {
-            this.xDomain = this.filteredDomain;
-        }
-        this.yDomain = this.getYDomain();
-        this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale(this.xDomain, this.dims.width);
-        this.yScale = this.getYScale(this.yDomain, this.dims.height);
-        var _loop_1 = function(i) {
-            var val = this_1.xSet[i];
-            var d0 = 0;
-            for (var _i = 0, _a = this_1.results; _i < _a.length; _i++) {
-                var group = _a[_i];
-                var d = group.series.find(function (item) {
-                    var a = item.name;
-                    var b = val;
-                    if (_this.scaleType === 'time') {
-                        a = a.valueOf();
-                        b = b.valueOf();
-                    }
-                    return a === b;
-                });
-                if (d) {
-                    d.d0 = d0;
-                    d.d1 = d0 + d.value;
-                    d0 += d.value;
-                }
-                else {
-                    d = {
-                        name: val,
-                        value: 0,
-                        d0: d0,
-                        d1: d0
-                    };
-                    group.series.push(d);
-                }
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            if (_this.timeline) {
+                _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
             }
-        };
-        var this_1 = this;
-        for (var i = 0; i < this.xSet.length; i++) {
-            _loop_1(i);
-        }
-        this.updateTimeline();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
-        var pageUrl = window.location.href;
-        this.clipPathId = 'clip' + id_1.id().toString();
-        this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
+            _this.xDomain = _this.getXDomain();
+            if (_this.filteredDomain) {
+                _this.xDomain = _this.filteredDomain;
+            }
+            _this.yDomain = _this.getYDomain();
+            _this.seriesDomain = _this.getSeriesDomain();
+            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
+            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
+            var _loop_1 = function(i) {
+                var val = _this.xSet[i];
+                var d0 = 0;
+                for (var _i = 0, _a = _this.results; _i < _a.length; _i++) {
+                    var group = _a[_i];
+                    var d = group.series.find(function (item) {
+                        var a = item.name;
+                        var b = val;
+                        if (_this.scaleType === 'time') {
+                            a = a.valueOf();
+                            b = b.valueOf();
+                        }
+                        return a === b;
+                    });
+                    if (d) {
+                        d.d0 = d0;
+                        d.d1 = d0 + d.value;
+                        d0 += d.value;
+                    }
+                    else {
+                        d = {
+                            name: val,
+                            value: 0,
+                            d0: d0,
+                            d1: d0
+                        };
+                        group.series.push(d);
+                    }
+                }
+            };
+            for (var i = 0; i < _this.xSet.length; i++) {
+                _loop_1(i);
+            }
+            _this.updateTimeline();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
+            var pageUrl = window.location.href;
+            _this.clipPathId = 'clip' + id_1.id().toString();
+            _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
+        });
     };
     AreaChartStacked.prototype.updateTimeline = function () {
         if (this.timeline) {
@@ -2847,9 +2892,9 @@ var AreaChartStacked = (function (_super) {
         var _this = this;
         var domain = [];
         var _loop_2 = function(i) {
-            var val = this_2.xSet[i];
+            var val = this_1.xSet[i];
             var sum = 0;
-            for (var _i = 0, _a = this_2.results; _i < _a.length; _i++) {
+            for (var _i = 0, _a = this_1.results; _i < _a.length; _i++) {
                 var group = _a[_i];
                 var d = group.series.find(function (item) {
                     var a = item.name;
@@ -2866,7 +2911,7 @@ var AreaChartStacked = (function (_super) {
             }
             domain.push(sum);
         };
-        var this_2 = this;
+        var this_1 = this;
         for (var i = 0; i < this.xSet.length; i++) {
             _loop_2(i);
         }
@@ -3094,37 +3139,40 @@ var AreaChart = (function (_super) {
         this.update();
     };
     AreaChart.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            if (_this.timeline) {
+                _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
+            }
+            _this.xDomain = _this.getXDomain();
+            if (_this.filteredDomain) {
+                _this.xDomain = _this.filteredDomain;
+            }
+            _this.yDomain = _this.getYDomain();
+            _this.seriesDomain = _this.getSeriesDomain();
+            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
+            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
+            _this.updateTimeline();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + ", " + _this.margin[0] + ")";
+            var pageUrl = window.location.href;
+            _this.clipPathId = 'clip' + id_1.id().toString();
+            _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
-        if (this.timeline) {
-            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-        }
-        this.xDomain = this.getXDomain();
-        if (this.filteredDomain) {
-            this.xDomain = this.filteredDomain;
-        }
-        this.yDomain = this.getYDomain();
-        this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale(this.xDomain, this.dims.width);
-        this.yScale = this.getYScale(this.yDomain, this.dims.height);
-        this.updateTimeline();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + ", " + this.margin[0] + ")";
-        var pageUrl = window.location.href;
-        this.clipPathId = 'clip' + id_1.id().toString();
-        this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
     };
     AreaChart.prototype.updateTimeline = function () {
         if (this.timeline) {
@@ -3423,8 +3471,14 @@ var AreaSeries = (function () {
         startingArea.curve(this.curve);
         this.opacity = 1;
         var data = this.data.series;
-        if (this.scaleType === 'time' || this.scaleType === 'linear') {
+        if (this.scaleType === 'linear') {
             data = sort_1.sortLinear(data, 'name');
+        }
+        else if (this.scaleType === 'time') {
+            data = sort_1.sortByTime(data, 'name');
+        }
+        else {
+            data = sort_1.sortByDomain(data, 'name', 'asc', this.xScale.domain());
         }
         this.path = area(data);
         this.startingPath = startingArea(data);
@@ -3530,28 +3584,31 @@ var BarHorizontal2D = (function (_super) {
         this.update();
     };
     BarHorizontal2D.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.groupDomain = _this.getGroupDomain();
+            _this.innerDomain = _this.getInnerDomain();
+            _this.valuesDomain = _this.getValueDomain();
+            _this.groupScale = _this.getGroupScale();
+            _this.innerScale = _this.getInnerScale();
+            _this.valueScale = _this.getValueScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.groupDomain = this.getGroupDomain();
-        this.innerDomain = this.getInnerDomain();
-        this.valuesDomain = this.getValueDomain();
-        this.groupScale = this.getGroupScale();
-        this.innerScale = this.getInnerScale();
-        this.valueScale = this.getValueScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarHorizontal2D.prototype.getGroupScale = function () {
         var spacing = 0.2;
@@ -3762,27 +3819,30 @@ var BarHorizontalNormalized = (function (_super) {
         this.update();
     };
     BarHorizontalNormalized.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.groupDomain = _this.getGroupDomain();
+            _this.innerDomain = _this.getInnerDomain();
+            _this.valueDomain = _this.getValueDomain();
+            _this.xScale = _this.getXScale();
+            _this.yScale = _this.getYScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.groupDomain = this.getGroupDomain();
-        this.innerDomain = this.getInnerDomain();
-        this.valueDomain = this.getValueDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarHorizontalNormalized.prototype.getGroupDomain = function () {
         var domain = [];
@@ -3973,27 +4033,30 @@ var BarHorizontalStacked = (function (_super) {
         this.update();
     };
     BarHorizontalStacked.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.groupDomain = _this.getGroupDomain();
+            _this.innerDomain = _this.getInnerDomain();
+            _this.valueDomain = _this.getValueDomain();
+            _this.xScale = _this.getXScale();
+            _this.yScale = _this.getYScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.groupDomain = this.getGroupDomain();
-        this.innerDomain = this.getInnerDomain();
-        this.valueDomain = this.getValueDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarHorizontalStacked.prototype.getGroupDomain = function () {
         var domain = [];
@@ -4197,24 +4260,27 @@ var BarHorizontal = (function (_super) {
         this.update();
     };
     BarHorizontal.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.xScale = _this.getXScale();
+            _this.yScale = _this.getYScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarHorizontal.prototype.getXScale = function () {
         this.xDomain = this.getXDomain();
@@ -4380,28 +4446,31 @@ var BarVertical2D = (function (_super) {
         this.update();
     };
     BarVertical2D.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.groupDomain = _this.getGroupDomain();
+            _this.innerDomain = _this.getInnerDomain();
+            _this.valuesDomain = _this.getValueDomain();
+            _this.groupScale = _this.getGroupScale();
+            _this.innerScale = _this.getInnerScale();
+            _this.valueScale = _this.getValueScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.groupDomain = this.getGroupDomain();
-        this.innerDomain = this.getInnerDomain();
-        this.valuesDomain = this.getValueDomain();
-        this.groupScale = this.getGroupScale();
-        this.innerScale = this.getInnerScale();
-        this.valueScale = this.getValueScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarVertical2D.prototype.getGroupScale = function () {
         var spacing = 0.2;
@@ -4616,27 +4685,30 @@ var BarVerticalNormalized = (function (_super) {
         this.update();
     };
     BarVerticalNormalized.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.groupDomain = _this.getGroupDomain();
+            _this.innerDomain = _this.getInnerDomain();
+            _this.valueDomain = _this.getValueDomain();
+            _this.xScale = _this.getXScale();
+            _this.yScale = _this.getYScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.groupDomain = this.getGroupDomain();
-        this.innerDomain = this.getInnerDomain();
-        this.valueDomain = this.getValueDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarVerticalNormalized.prototype.getGroupDomain = function () {
         var domain = [];
@@ -4827,27 +4899,30 @@ var BarVerticalStacked = (function (_super) {
         this.update();
     };
     BarVerticalStacked.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.groupDomain = _this.getGroupDomain();
+            _this.innerDomain = _this.getInnerDomain();
+            _this.valueDomain = _this.getValueDomain();
+            _this.xScale = _this.getXScale();
+            _this.yScale = _this.getYScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.groupDomain = this.getGroupDomain();
-        this.innerDomain = this.getInnerDomain();
-        this.valueDomain = this.getValueDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarVerticalStacked.prototype.getGroupDomain = function () {
         var domain = [];
@@ -5051,24 +5126,27 @@ var BarVertical = (function (_super) {
         this.update();
     };
     BarVertical.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.xScale = _this.getXScale();
+            _this.yScale = _this.getYScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarVertical.prototype.getXScale = function () {
         var spacing = 0.2;
@@ -5423,7 +5501,7 @@ var SeriesHorizontal = (function () {
         var d0 = 0;
         var total;
         if (this.type === 'normalized') {
-            total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; });
+            total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
         }
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
@@ -5587,7 +5665,7 @@ var SeriesVertical = (function () {
         var d0 = 0;
         var total;
         if (this.type === 'normalized') {
-            total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; });
+            total = this.series.map(function (d) { return d.value; }).reduce(function (sum, d) { return sum + d; }, 0);
         }
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
@@ -5862,7 +5940,7 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[areaTooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div\n          *ngFor=\"let tooltipItem of tooltipArea.values\"\n          class=\"tooltip-item\">\n\n          <span\n            class=\"tooltip-item-color\"\n            [style.background-color]=\"colors(tooltipItem.series)\">\n          </span>\n\n          {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"colors(tooltipItem.series)\">\n            </span>\n\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
@@ -7327,22 +7405,25 @@ var ForceDirectedGraph = (function (_super) {
         this.update();
     };
     ForceDirectedGraph.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            _this.seriesDomain = _this.getSeriesDomain();
+            _this.setColors();
+            _this.transform = "translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")";
+            if (_this.force) {
+                _this.force.nodes(_this.nodes)
+                    .force("link", _this.forceLink.links(_this.links))
+                    .alpha(0.5).restart();
+            }
         });
-        this.seriesDomain = this.getSeriesDomain();
-        this.setColors();
-        this.transform = "translate(" + (this.dims.xOffset + this.dims.width / 2) + ", " + (this.margin[0] + this.dims.height / 2) + ")";
-        if (this.force) {
-            this.force.nodes(this.nodes)
-                .force("link", this.forceLink.links(this.links))
-                .alpha(0.5).restart();
-        }
     };
     ForceDirectedGraph.prototype.click = function ($event, node) {
         this.clickHandler.emit(node);
@@ -7516,47 +7597,50 @@ var Gauge = (function (_super) {
         this.update();
     };
     Gauge.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        if (!this.value) {
-            this.value = 0;
-        }
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            columns: 12
+        this.zone.run(function () {
+            if (!_this.value) {
+                _this.value = 0;
+            }
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                columns: 12
+            });
+            _this.valueDomain = _this.getValueDomain();
+            _this.valueScale = _this.getValueScale();
+            _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2;
+            _this.innerRadius = _this.outerRadius - 10;
+            _this.backgroundArc = {
+                endAngle: _this.angleSpan * Math.PI / 180,
+                innerRadius: _this.innerRadius,
+                outerRadius: _this.outerRadius,
+                cornerRadius: 10,
+                data: {
+                    value: 100,
+                    name: 'Value'
+                }
+            };
+            _this.valueArc = {
+                endAngle: Math.min(_this.valueScale(_this.value), _this.angleSpan) * Math.PI / 180,
+                innerRadius: _this.innerRadius,
+                outerRadius: _this.outerRadius,
+                cornerRadius: 10,
+                data: {
+                    value: _this.value,
+                    name: 'Value'
+                }
+            };
+            _this.setColors();
+            _this.ticks = _this.getTicks();
+            var xOffset = _this.margin[3] + _this.dims.width / 2;
+            var circleHeight = _this.outerRadius / 2 + 20;
+            var yOffset = _this.margin[0] + _this.dims.height / 2 + circleHeight / 2;
+            _this.transform = "translate(" + xOffset + ", " + yOffset + ") rotate(-" + _this.angleSpan / 2 + ")";
+            _this.scaleText();
         });
-        this.valueDomain = this.getValueDomain();
-        this.valueScale = this.getValueScale();
-        this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
-        this.innerRadius = this.outerRadius - 10;
-        this.backgroundArc = {
-            endAngle: this.angleSpan * Math.PI / 180,
-            innerRadius: this.innerRadius,
-            outerRadius: this.outerRadius,
-            cornerRadius: 10,
-            data: {
-                value: 100,
-                name: 'Value'
-            }
-        };
-        this.valueArc = {
-            endAngle: Math.min(this.valueScale(this.value), this.angleSpan) * Math.PI / 180,
-            innerRadius: this.innerRadius,
-            outerRadius: this.outerRadius,
-            cornerRadius: 10,
-            data: {
-                value: this.value,
-                name: 'Value'
-            }
-        };
-        this.setColors();
-        this.ticks = this.getTicks();
-        var xOffset = this.margin[3] + this.dims.width / 2;
-        var circleHeight = this.outerRadius / 2 + 20;
-        var yOffset = this.margin[0] + this.dims.height / 2 + circleHeight / 2;
-        this.transform = "translate(" + xOffset + ", " + yOffset + ") rotate(-" + this.angleSpan / 2 + ")";
-        this.scaleText();
     };
     Gauge.prototype.getValueDomain = function () {
         return [this.min, this.max];
@@ -7946,28 +8030,31 @@ var HeatMap = (function (_super) {
         this.update();
     };
     HeatMap.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 11
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 11
+            });
+            _this.xDomain = _this.getXDomain();
+            _this.yDomain = _this.getYDomain();
+            _this.valueDomain = _this.getValueDomain();
+            _this.xScale = _this.getXScale();
+            _this.yScale = _this.getYScale();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
+            _this.rects = _this.getRects();
         });
-        this.xDomain = this.getXDomain();
-        this.yDomain = this.getYDomain();
-        this.valueDomain = this.getValueDomain();
-        this.xScale = this.getXScale();
-        this.yScale = this.getYScale();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
-        this.rects = this.getRects();
     };
     HeatMap.prototype.getXDomain = function () {
         var domain = [];
@@ -8170,37 +8257,40 @@ var LineChart = (function (_super) {
         this.update();
     };
     LineChart.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showXAxis: this.xAxis,
-            showYAxis: this.yAxis,
-            xAxisHeight: this.xAxisHeight,
-            yAxisWidth: this.yAxisWidth,
-            showXLabel: this.showXAxisLabel,
-            showYLabel: this.showYAxisLabel,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            if (_this.timeline) {
+                _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
+            }
+            _this.xDomain = _this.getXDomain();
+            if (_this.filteredDomain) {
+                _this.xDomain = _this.filteredDomain;
+            }
+            _this.yDomain = _this.getYDomain();
+            _this.seriesDomain = _this.getSeriesDomain();
+            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
+            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
+            _this.updateTimeline();
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
+            var pageUrl = window.location.href;
+            _this.clipPathId = 'clip' + id_1.id().toString();
+            _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
-        if (this.timeline) {
-            this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-        }
-        this.xDomain = this.getXDomain();
-        if (this.filteredDomain) {
-            this.xDomain = this.filteredDomain;
-        }
-        this.yDomain = this.getYDomain();
-        this.seriesDomain = this.getSeriesDomain();
-        this.xScale = this.getXScale(this.xDomain, this.dims.width);
-        this.yScale = this.getYScale(this.yDomain, this.dims.height);
-        this.updateTimeline();
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
-        var pageUrl = window.location.href;
-        this.clipPathId = 'clip' + id_1.id().toString();
-        this.clipPath = "url(" + pageUrl + "#" + this.clipPathId + ")";
     };
     LineChart.prototype.updateTimeline = function () {
         if (this.timeline) {
@@ -8481,8 +8571,14 @@ var LineSeries = (function () {
             .y(function (d) { return _this.yScale(d.value); })
             .curve(this.curve);
         var data = this.data.series;
-        if (this.scaleType === 'time' || this.scaleType === 'linear') {
+        if (this.scaleType === 'linear') {
             data = sort_1.sortLinear(data, 'name');
+        }
+        else if (this.scaleType === 'time') {
+            data = sort_1.sortByTime(data, 'name');
+        }
+        else {
+            data = sort_1.sortByDomain(data, 'name', 'asc', this.xScale.domain());
         }
         this.path = line(data) || '';
     };
@@ -8605,14 +8701,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var CardSeries = (function () {
-    function CardSeries() {
+    function CardSeries(zone) {
+        this.zone = zone;
         this.clickHandler = new core_1.EventEmitter();
     }
     CardSeries.prototype.ngOnChanges = function () {
         this.update();
     };
     CardSeries.prototype.update = function () {
-        this.cards = this.getCards();
+        var _this = this;
+        this.zone.run(function () {
+            _this.cards = _this.getCards();
+        });
     };
     CardSeries.prototype.getCards = function () {
         var _this = this;
@@ -8660,7 +8760,7 @@ var CardSeries = (function () {
             template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [core_1.NgZone])
     ], CardSeries);
     return CardSeries;
 }());
@@ -8685,8 +8785,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__(8);
 var Card = (function () {
-    function Card(element, cd) {
+    function Card(element, cd, zone) {
         this.cd = cd;
+        this.zone = zone;
         this.resizeScale = 1;
         this.textFontSize = 35;
         this.textTransform = '';
@@ -8699,52 +8800,59 @@ var Card = (function () {
     };
     Card.prototype.update = function () {
         var _this = this;
-        this.transform = "translate(" + this.x + " , " + this.y + ")";
-        this.textWidth = Math.max(0, this.width - 15);
-        this.cardWidth = Math.max(0, this.width - 5);
-        this.cardHeight = Math.max(0, this.height - 5);
-        this.label = this.data.name;
-        this.trimmedLabel = trim_label_helper_1.trimLabel(this.label, 55);
-        this.value = this.data.value.toLocaleString();
-        setTimeout(function () {
-            _this.scaleText();
-        });
-        if (!this.initialized) {
+        this.zone.run(function () {
+            _this.transform = "translate(" + _this.x + " , " + _this.y + ")";
+            _this.textWidth = Math.max(0, _this.width - 15);
+            _this.cardWidth = Math.max(0, _this.width - 5);
+            _this.cardHeight = Math.max(0, _this.height - 5);
+            _this.label = _this.data.name;
+            _this.trimmedLabel = trim_label_helper_1.trimLabel(_this.label, 55);
+            _this.value = _this.data.value.toLocaleString();
             setTimeout(function () {
                 _this.scaleText();
-                var step = _this.data.value / 100;
-                _this.countUp(0, _this.data.value, step);
             });
-            this.initialized = true;
-        }
+            if (!_this.initialized) {
+                setTimeout(function () {
+                    _this.scaleText();
+                    var step = _this.data.value / 100;
+                    _this.countUp(0, _this.data.value, step);
+                });
+                _this.initialized = true;
+            }
+        });
     };
     Card.prototype.countUp = function (current, max, step) {
         var _this = this;
-        this.value = Math.round(current).toLocaleString();
-        if (current >= max) {
-            return;
-        }
-        var newValue = Math.min(current + step, max);
-        this.cd.markForCheck();
-        setTimeout(function () {
-            _this.countUp(newValue, max, step);
-        }, 16);
+        this.zone.run(function () {
+            _this.value = Math.round(current).toLocaleString();
+            if (current >= max) {
+                return;
+            }
+            var newValue = Math.min(current + step, max);
+            _this.cd.markForCheck();
+            setTimeout(function () {
+                _this.countUp(newValue, max, step);
+            }, 16);
+        });
     };
     Card.prototype.scaleText = function () {
-        var _a = this.textEl.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
-        if (width === 0 || height === 0) {
-            return;
-        }
-        var oldScale = this.resizeScale;
-        var availableWidth = this.cardWidth * 0.85;
-        var availableHeight = this.cardHeight * 0.65;
-        var resizeScaleWidth = Math.floor((availableWidth / (width / this.resizeScale)) * 100) / 100;
-        var resizeScaleHeight = Math.floor((availableHeight / (height / this.resizeScale)) * 100) / 100;
-        this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-        if (this.resizeScale !== oldScale) {
-            this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
-            this.cd.markForCheck();
-        }
+        var _this = this;
+        this.zone.run(function () {
+            var _a = _this.textEl.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
+            if (width === 0 || height === 0) {
+                return;
+            }
+            var oldScale = _this.resizeScale;
+            var availableWidth = _this.cardWidth * 0.85;
+            var availableHeight = _this.cardHeight * 0.65;
+            var resizeScaleWidth = Math.floor((availableWidth / (width / _this.resizeScale)) * 100) / 100;
+            var resizeScaleHeight = Math.floor((availableHeight / (height / _this.resizeScale)) * 100) / 100;
+            _this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+            if (_this.resizeScale !== oldScale) {
+                _this.textFontSize = Number.parseInt((35 * _this.resizeScale).toString());
+                _this.cd.markForCheck();
+            }
+        });
     };
     Card.prototype.click = function () {
         this.clickHandler.emit({
@@ -8794,7 +8902,7 @@ var Card = (function () {
             template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\"\n      (click)=\"click()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy='.35em'\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef])
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
     ], Card);
     return Card;
 }());
@@ -8845,16 +8953,19 @@ var NumberCard = (function (_super) {
         this.update();
     };
     NumberCard.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin
+            });
+            _this.domain = _this.getDomain();
+            _this.data = grid_layout_helper_1.gridLayout(_this.dims, _this.results, 150);
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.domain = this.getDomain();
-        this.data = grid_layout_helper_1.gridLayout(this.dims, this.results, 150);
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     NumberCard.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
@@ -8946,29 +9057,32 @@ var AdvancedPieChart = (function (_super) {
         this.update();
     };
     AdvancedPieChart.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width * 4 / 12.0,
-            height: this.height,
-            margins: this.margin
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width * 4 / 12.0,
+                height: _this.height,
+                margins: _this.margin
+            });
+            _this.domain = _this.getDomain();
+            _this.setColors();
+            var xOffset = _this.dims.width / 2;
+            var yOffset = _this.margin[0] + _this.dims.height / 2;
+            _this.legendWidth = _this.width - _this.dims.width - _this.margin[1];
+            _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2.5;
+            _this.innerRadius = _this.outerRadius * 0.75;
+            _this.transform = "translate(" + xOffset + " , " + yOffset + ")";
+            _this.total = _this.getTotal();
+            _this.roundedTotal = Math.round(_this.total);
+            _this.totalLabel = 'total';
+            _this.legendItems = _this.getLegendItems();
         });
-        this.domain = this.getDomain();
-        this.setColors();
-        var xOffset = this.dims.width / 2;
-        var yOffset = this.margin[0] + this.dims.height / 2;
-        this.legendWidth = this.width - this.dims.width - this.margin[1];
-        this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
-        this.innerRadius = this.outerRadius * 0.75;
-        this.transform = "translate(" + xOffset + " , " + yOffset + ")";
-        this.total = this.getTotal();
-        this.roundedTotal = Math.round(this.total);
-        this.totalLabel = 'total';
-        this.legendItems = this.getLegendItems();
     };
     AdvancedPieChart.prototype.getTotal = function () {
         return this.results
             .map(function (d) { return d.value; })
-            .reduce(function (sum, d) { return sum + d; });
+            .reduce(function (sum, d) { return sum + d; }, 0);
     };
     AdvancedPieChart.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
@@ -9260,32 +9374,34 @@ var PieChart = (function (_super) {
     PieChart.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            showLegend: this.legend,
-            columns: 10
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showLegend: _this.legend,
+                columns: 10
+            });
+            var xOffset = _this.margin[3] + _this.dims.width / 2;
+            var yOffset = _this.margin[0] + _this.dims.height / 2;
+            _this.translation = "translate(" + xOffset + ", " + yOffset + ")";
+            _this.outerRadius = Math.min(_this.dims.width, _this.dims.height);
+            if (_this.labels) {
+                _this.outerRadius /= 3;
+            }
+            else {
+                _this.outerRadius /= 2;
+            }
+            _this.innerRadius = 0;
+            if (_this.doughnut) {
+                _this.innerRadius = _this.outerRadius * 0.75;
+            }
+            _this.domain = _this.getDomain();
+            _this.data = _this.results.sort(function (a, b) {
+                return _this.domain.indexOf(a.name) - _this.domain.indexOf(b.name);
+            });
+            _this.setColors();
         });
-        var xOffset = this.margin[3] + this.dims.width / 2;
-        var yOffset = this.margin[0] + this.dims.height / 2;
-        this.translation = "translate(" + xOffset + ", " + yOffset + ")";
-        this.outerRadius = Math.min(this.dims.width, this.dims.height);
-        if (this.labels) {
-            this.outerRadius /= 3;
-        }
-        else {
-            this.outerRadius /= 2;
-        }
-        this.innerRadius = 0;
-        if (this.doughnut) {
-            this.innerRadius = this.outerRadius * 0.75;
-        }
-        this.domain = this.getDomain();
-        this.data = this.results.sort(function (a, b) {
-            return _this.domain.indexOf(a.name) - _this.domain.indexOf(b.name);
-        });
-        this.setColors();
     };
     PieChart.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
@@ -9499,17 +9615,20 @@ var PieGrid = (function (_super) {
         this.update();
     };
     PieGrid.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin
+            });
+            _this.domain = _this.getDomain();
+            _this.data = grid_layout_helper_1.gridLayout(_this.dims, _this.results, 150);
+            _this.transform = "translate(" + _this.margin[3] + " , " + _this.margin[0] + ")";
+            _this.series = _this.getSeries();
+            _this.setColors();
         });
-        this.domain = this.getDomain();
-        this.data = grid_layout_helper_1.gridLayout(this.dims, this.results, 150);
-        this.transform = "translate(" + this.margin[3] + " , " + this.margin[0] + ")";
-        this.series = this.getSeries();
-        this.setColors();
     };
     PieGrid.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
@@ -9556,7 +9675,7 @@ var PieGrid = (function (_super) {
     PieGrid.prototype.getTotal = function () {
         return this.results
             .map(function (d) { return d.value; })
-            .reduce(function (sum, d) { return sum + d; });
+            .reduce(function (sum, d) { return sum + d; }, 0);
     };
     PieGrid.prototype.click = function (data) {
         this.clickHandler.emit(data);
@@ -10072,28 +10191,31 @@ var TreeMap = (function (_super) {
         this.update();
     };
     TreeMap.prototype.update = function () {
+        var _this = this;
         _super.prototype.update.call(this);
-        this.dims = view_dimensions_helper_1.calculateViewDimensions({
-            width: this.width,
-            height: this.height,
-            margins: this.margin,
-            columns: 12
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                columns: 12
+            });
+            _this.domain = _this.getDomain();
+            _this.treemap = d3_1.default.treemap()
+                .size([_this.dims.width, _this.dims.height]);
+            var rootNode = {
+                name: 'root',
+                value: 0,
+                isRoot: true
+            };
+            var root = d3_1.default.stratify()
+                .id(function (d) { return d.name; })
+                .parentId(function (d) { return d.isRoot ? null : 'root'; })([rootNode].concat(_this.results))
+                .sum(function (d) { return d.value; });
+            _this.data = _this.treemap(root);
+            _this.setColors();
+            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
-        this.domain = this.getDomain();
-        this.treemap = d3_1.default.treemap()
-            .size([this.dims.width, this.dims.height]);
-        var rootNode = {
-            name: 'root',
-            value: 0,
-            isRoot: true
-        };
-        var root = d3_1.default.stratify()
-            .id(function (d) { return d.name; })
-            .parentId(function (d) { return d.isRoot ? null : 'root'; })([rootNode].concat(this.results))
-            .sum(function (d) { return d.value; });
-        this.data = this.treemap(root);
-        this.setColors();
-        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     TreeMap.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
@@ -10302,7 +10424,7 @@ exports = module.exports = __webpack_require__(92)();
 
 
 // module
-exports.push([module.i, ".swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 4px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n", "", {"version":3,"sources":["/./src/common/tooltip/src/common/tooltip/tooltip.scss"],"names":[],"mappings":"AAqBA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,aAAa;IACb,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,2CAAsB;YAAtB,mCAAsB,EACtB;EA5FH;IA+FG,4CAAsB;YAAtB,oCAAsB,EACtB;EAhGH;IAmGG,4CAAsB;YAAtB,oCAAsB,EACtB;EApGH;IAuGG,2CAAsB;YAAtB,mCAAsB,EACtB","file":"tooltip.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 4px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, ".swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 0 10px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n", "", {"version":3,"sources":["/./src/common/tooltip/src/common/tooltip/tooltip.scss"],"names":[],"mappings":"AAqBA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,gBAAgB;IAChB,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,2CAAsB;YAAtB,mCAAsB,EACtB;EA5FH;IA+FG,4CAAsB;YAAtB,oCAAsB,EACtB;EAhGH;IAmGG,4CAAsB;YAAtB,oCAAsB,EACtB;EApGH;IAuGG,2CAAsB;YAAtB,mCAAsB,EACtB","file":"tooltip.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 0 10px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
