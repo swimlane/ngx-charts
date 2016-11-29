@@ -52,7 +52,7 @@ export interface LegendItem {
       </div>
       <div [style.width.px]="width - dims.width" class="advanced-pie-legend-wrapper">
         <div class="advanced-pie-legend"
-          [style.margin-top]="(height - 215)/2"
+          [style.margin-top.px]="(height - 215) / 2"
           [style.width.px]="width - dims.width - margin[1]">
           <div class="total-value">
             {{roundedTotal.toLocaleString()}}
@@ -62,8 +62,13 @@ export interface LegendItem {
           </div>
           <div class="legend-items-container">
             <div class="legend-items">
-              <div *ngFor="let legendItem of legendItems" class="legend-item">
-                <div class="item-color"
+              <div 
+                *ngFor="let legendItem of legendItems"
+                tabindex="-1"
+                (click)="legendLabelClick.emit(legendItem)"
+                class="legend-item">
+                <div 
+                  class="item-color"
                   [style.background]="colors(legendItem.label)">
                 </div>
                 <div class="item-value">{{legendItem.value.toLocaleString()}}</div>

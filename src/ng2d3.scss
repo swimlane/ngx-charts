@@ -186,10 +186,10 @@
     &:hover {
       color: #50585f;
       font-weight: bold;
-      -webkit-transition: 0.5s;
-      -moz-transition: 0.5s;
-      -ms-transition: 0.5s;
-      transition: 0.5s;
+      -webkit-transition: 0.2s;
+      -moz-transition: 0.2s;
+      -ms-transition: 0.2s;
+      transition: 0.2s;
     }
 
     &.active {
@@ -268,6 +268,20 @@
       .legend-item {
         margin-right: 20px;
         display: inline-block;
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover {
+          color: #50585f;
+          font-weight: bold;
+          -webkit-transition: 0.2s;
+          -moz-transition: 0.2s;
+          -ms-transition: 0.2s;
+          transition: 0.2s;
+        }
 
         .item-value {
           font-size: 24px;

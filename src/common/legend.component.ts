@@ -18,8 +18,9 @@ import {
       <div class="legend-wrap">
         <ul class="legend-labels"
           [style.max-height.px]="height - 45">
-          <li
-            *ngFor="let legendItem of legendItems"
+          <li 
+            tabindex="-1"
+            *ngFor="let legendItem of legendItems" 
             (click)="labelClick.emit(legendItem)"
             [class]="legendItem.className">
             <span
