@@ -25,7 +25,7 @@ export interface LegendItem {
 @Component({
   selector: 'advanced-pie-chart',
   template: `
-    <div 
+    <div
       [style.width.px]="width"
       [style.height.px]="height">
       <div class="advanced-pie chart"
@@ -52,7 +52,6 @@ export interface LegendItem {
       </div>
       <div [style.width.px]="width - dims.width" class="advanced-pie-legend-wrapper">
         <div class="advanced-pie-legend"
-          [style.margin-top.px]="(height - 215) / 2"
           [style.width.px]="width - dims.width - margin[1]">
           <div class="total-value">
             {{roundedTotal.toLocaleString()}}
@@ -62,12 +61,12 @@ export interface LegendItem {
           </div>
           <div class="legend-items-container">
             <div class="legend-items">
-              <div 
+              <div
                 *ngFor="let legendItem of legendItems"
                 tabindex="-1"
                 (click)="legendLabelClick.emit(legendItem)"
                 class="legend-item">
-                <div 
+                <div
                   class="item-color"
                   [style.background]="colors(legendItem.label)">
                 </div>
@@ -84,7 +83,7 @@ export interface LegendItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  
+
   @Input() view;
   @Input() results;
   @Input() margin = [20, 20, 20, 20];

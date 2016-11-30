@@ -109,7 +109,6 @@
 }
 
 
-
 .tooltip-item{
   text-align: left;
   line-height: 1.2em;
@@ -130,9 +129,8 @@
   padding: 0;
 
   .legend-title {
-    white-space: nowrap; 
+    white-space: nowrap;
     overflow: hidden;
-    color: #76818a;
     margin-left: 10px;
     margin-bottom: 5px;
     font-size: 14px;
@@ -184,8 +182,7 @@
     color: #76818a;
 
     &:hover {
-      color: #50585f;
-      font-weight: bold;
+      color: #000;
       -webkit-transition: 0.2s;
       -moz-transition: 0.2s;
       -ms-transition: 0.2s;
@@ -275,8 +272,7 @@
         }
 
         &:hover {
-          color: #50585f;
-          font-weight: bold;
+          color: #000;
           -webkit-transition: 0.2s;
           -moz-transition: 0.2s;
           -ms-transition: 0.2s;

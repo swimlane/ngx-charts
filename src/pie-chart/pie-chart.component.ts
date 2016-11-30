@@ -133,7 +133,6 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
       }
     });
 
-    console.log('items', items);
     return items;
   }
 
