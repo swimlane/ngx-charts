@@ -1,6 +1,6 @@
-import { Line } from "./line.component";
-import { LineChart } from "./line-chart.component";
-import { LineSeries } from "./line-series.component";
-export { Line, LineChart, LineSeries };
+import { LineComponent } from "./line.component";
+import { LineChartComponent } from "./line-chart.component";
+import { LineSeriesComponent } from "./line-series.component";
+export { LineComponent, LineChartComponent, LineSeriesComponent };
 export declare class LineChartModule {
 }

@@ -1,13 +1,13 @@
 "use strict";
 var core_1 = require('@angular/core');
-var TreeMapCellSeries = (function () {
-    function TreeMapCellSeries() {
+var TreeMapCellSeriesComponent = (function () {
+    function TreeMapCellSeriesComponent() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    TreeMapCellSeries.prototype.ngOnChanges = function () {
+    TreeMapCellSeriesComponent.prototype.ngOnChanges = function () {
         this.cells = this.getCells();
     };
-    TreeMapCellSeries.prototype.getCells = function () {
+    TreeMapCellSeriesComponent.prototype.getCells = function () {
         var _this = this;
         return this.data.children
             .filter(function (d) {
@@ -28,28 +28,28 @@ var TreeMapCellSeries = (function () {
             };
         });
     };
-    TreeMapCellSeries.prototype.click = function (data) {
+    TreeMapCellSeriesComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    TreeMapCellSeries.prototype.trackBy = function (index, item) {
+    TreeMapCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.label;
     };
-    TreeMapCellSeries.decorators = [
+    TreeMapCellSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[treeMapCellSeries]',
-                    template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"click($event)\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  ",
+                    template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    TreeMapCellSeries.ctorParameters = [];
-    TreeMapCellSeries.propDecorators = {
+    TreeMapCellSeriesComponent.ctorParameters = [];
+    TreeMapCellSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return TreeMapCellSeries;
+    return TreeMapCellSeriesComponent;
 }());
-exports.TreeMapCellSeries = TreeMapCellSeries;
+exports.TreeMapCellSeriesComponent = TreeMapCellSeriesComponent;
 //# sourceMappingURL=tree-map-cell-series.component.js.map

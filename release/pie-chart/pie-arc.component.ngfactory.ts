@@ -23,9 +23,9 @@ import * as import14 from '../../../src/common/svg-linear-gradient.component';
 import * as import15 from '../common/svg-linear-gradient.component.ngfactory';
 import * as import16 from '../../../src/common/svg-radial-gradient.component';
 import * as import17 from '../common/svg-radial-gradient.component.ngfactory';
-export class Wrapper_PieArc {
+export class Wrapper_PieArcComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.PieArc;
+  context:import0.PieArcComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -45,7 +45,7 @@ export class Wrapper_PieArc {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.PieArc(p0);
+    this.context = new import0.PieArcComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -189,42 +189,42 @@ export class Wrapper_PieArc {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_PieArc_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_PieArc_Host0 extends import2.AppView<any> {
+var renderType_PieArcComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_PieArcComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.PieArc>;
-  _PieArc_0_3:Wrapper_PieArc;
+  compView_0:import2.AppView<import0.PieArcComponent>;
+  _PieArcComponent_0_3:Wrapper_PieArcComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieArc_Host0,renderType_PieArc_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_PieArcComponent_Host0,renderType_PieArcComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'pieArc',''),rootSelector,(null as any));
-    this.compView_0 = new View_PieArc0(this.viewUtils,this,0,this._el_0);
-    this._PieArc_0_3 = new Wrapper_PieArc(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._PieArc_0_3.context);
+    this.compView_0 = new View_PieArcComponent0(this.viewUtils,this,0,this._el_0);
+    this._PieArcComponent_0_3 = new Wrapper_PieArcComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._PieArcComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._PieArc_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._PieArcComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.PieArc) && (0 === requestNodeIndex))) { return this._PieArc_0_3.context; }
+    if (((token === import0.PieArcComponent) && (0 === requestNodeIndex))) { return this._PieArcComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._PieArc_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._PieArcComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._PieArc_0_3.ngOnDestroy();
+    this._PieArcComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const PieArcNgFactory:import7.ComponentFactory<import0.PieArc> = new import7.ComponentFactory<import0.PieArc>('g[pieArc]',View_PieArc_Host0,import0.PieArc);
-const styles_PieArc:any[] = ([] as any[]);
-var renderType_PieArc:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieArc,{});
-export class View_PieArc0 extends import2.AppView<import0.PieArc> {
+export const PieArcComponentNgFactory:import7.ComponentFactory<import0.PieArcComponent> = new import7.ComponentFactory<import0.PieArcComponent>('g[pieArc]',View_PieArcComponent_Host0,import0.PieArcComponent);
+const styles_PieArcComponent:any[] = ([] as any[]);
+var renderType_PieArcComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieArcComponent,{});
+export class View_PieArcComponent0 extends import2.AppView<import0.PieArcComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -241,7 +241,7 @@ export class View_PieArc0 extends import2.AppView<import0.PieArc> {
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieArc0,renderType_PieArc,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_PieArcComponent0,renderType_PieArcComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
     this._expr_13 = import1.UNINITIALIZED;
@@ -309,45 +309,45 @@ export class View_PieArc0 extends import2.AppView<import0.PieArc> {
     this._vc_3.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 3)) { return new View_PieArc1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
+    if ((nodeIndex == 3)) { return new View_PieArcComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
     return (null as any);
   }
   handleEvent_5(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.click()) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick()) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_PieArc1 extends import2.AppView<any> {
+class View_PieArcComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import14.SvgLinearGradient>;
-  _SvgLinearGradient_2_3:import15.Wrapper_SvgLinearGradient;
+  compView_2:import2.AppView<import14.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_2_3:import15.Wrapper_SvgLinearGradientComponent;
   _text_3:any;
   _el_4:any;
-  compView_4:import2.AppView<import16.SvgRadialGradient>;
-  _SvgRadialGradient_4_3:import17.Wrapper_SvgRadialGradient;
+  compView_4:import2.AppView<import16.SvgRadialGradientComponent>;
+  _SvgRadialGradientComponent_4_3:import17.Wrapper_SvgRadialGradientComponent;
   _text_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_PieArc1,renderType_PieArc,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_PieArcComponent1,renderType_PieArcComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'orientation','vertical','svgLinearGradient',''),(null as any));
-    this.compView_2 = new import15.View_SvgLinearGradient0(this.viewUtils,this,2,this._el_2);
-    this._SvgLinearGradient_2_3 = new import15.Wrapper_SvgLinearGradient();
-    this.compView_2.create(this._SvgLinearGradient_2_3.context);
+    this.compView_2 = new import15.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
+    this._SvgLinearGradientComponent_2_3 = new import15.Wrapper_SvgLinearGradientComponent();
+    this.compView_2.create(this._SvgLinearGradientComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'orientation','vertical','svgRadialGradient',''),(null as any));
-    this.compView_4 = new import17.View_SvgRadialGradient0(this.viewUtils,this,4,this._el_4);
-    this._SvgRadialGradient_4_3 = new import17.Wrapper_SvgRadialGradient();
-    this.compView_4.create(this._SvgRadialGradient_4_3.context);
+    this.compView_4 = new import17.View_SvgRadialGradientComponent0(this.viewUtils,this,4,this._el_4);
+    this._SvgRadialGradientComponent_4_3 = new import17.Wrapper_SvgRadialGradientComponent();
+    this.compView_4.create(this._SvgRadialGradientComponent_4_3.context);
     this._text_5 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -361,27 +361,27 @@ class View_PieArc1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.SvgLinearGradient) && (2 === requestNodeIndex))) { return this._SvgLinearGradient_2_3.context; }
-    if (((token === import16.SvgRadialGradient) && (4 === requestNodeIndex))) { return this._SvgRadialGradient_4_3.context; }
+    if (((token === import14.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
+    if (((token === import16.SvgRadialGradientComponent) && (4 === requestNodeIndex))) { return this._SvgRadialGradientComponent_4_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = 'vertical';
-    this._SvgLinearGradient_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = this.parentView.context.fill;
-    this._SvgLinearGradient_2_3.check_color(currVal_2_0_1,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_color(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.context.linearGradientId;
-    this._SvgLinearGradient_2_3.check_name(currVal_2_0_2,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_name(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.startOpacity;
-    this._SvgLinearGradient_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
-    if (this._SvgLinearGradient_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._SvgLinearGradientComponent_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
+    if (this._SvgLinearGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     const currVal_4_0_0:any = this.parentView.context.fill;
-    this._SvgRadialGradient_4_3.check_color(currVal_4_0_0,throwOnChange,false);
+    this._SvgRadialGradientComponent_4_3.check_color(currVal_4_0_0,throwOnChange,false);
     const currVal_4_0_1:any = this.parentView.context.radialGradientId;
-    this._SvgRadialGradient_4_3.check_name(currVal_4_0_1,throwOnChange,false);
+    this._SvgRadialGradientComponent_4_3.check_name(currVal_4_0_1,throwOnChange,false);
     const currVal_4_0_2:any = this.parentView.context.startOpacity;
-    this._SvgRadialGradient_4_3.check_startOpacity(currVal_4_0_2,throwOnChange,false);
-    if (this._SvgRadialGradient_4_3.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
+    this._SvgRadialGradientComponent_4_3.check_startOpacity(currVal_4_0_2,throwOnChange,false);
+    if (this._SvgRadialGradientComponent_4_3.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
     this.compView_4.detectChanges(throwOnChange);
   }

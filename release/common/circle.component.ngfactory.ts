@@ -13,9 +13,9 @@ import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
-export class Wrapper_Circle {
+export class Wrapper_CircleComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Circle;
+  context:import0.CircleComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -31,7 +31,7 @@ export class Wrapper_Circle {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Circle();
+    this.context = new import0.CircleComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -139,42 +139,42 @@ export class Wrapper_Circle {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_Circle_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Circle_Host0 extends import2.AppView<any> {
+var renderType_CircleComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_CircleComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.Circle>;
-  _Circle_0_3:Wrapper_Circle;
+  compView_0:import2.AppView<import0.CircleComponent>;
+  _CircleComponent_0_3:Wrapper_CircleComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Circle_Host0,renderType_Circle_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CircleComponent_Host0,renderType_CircleComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'circle',''),rootSelector,(null as any));
-    this.compView_0 = new View_Circle0(this.viewUtils,this,0,this._el_0);
-    this._Circle_0_3 = new Wrapper_Circle();
-    this.compView_0.create(this._Circle_0_3.context);
+    this.compView_0 = new View_CircleComponent0(this.viewUtils,this,0,this._el_0);
+    this._CircleComponent_0_3 = new Wrapper_CircleComponent();
+    this.compView_0.create(this._CircleComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._Circle_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CircleComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.Circle) && (0 === requestNodeIndex))) { return this._Circle_0_3.context; }
+    if (((token === import0.CircleComponent) && (0 === requestNodeIndex))) { return this._CircleComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Circle_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._CircleComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Circle_0_3.ngOnDestroy();
+    this._CircleComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const CircleNgFactory:import7.ComponentFactory<import0.Circle> = new import7.ComponentFactory<import0.Circle>('g[circle]',View_Circle_Host0,import0.Circle);
-const styles_Circle:any[] = ([] as any[]);
-var renderType_Circle:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_Circle,{});
-export class View_Circle0 extends import2.AppView<import0.Circle> {
+export const CircleComponentNgFactory:import7.ComponentFactory<import0.CircleComponent> = new import7.ComponentFactory<import0.CircleComponent>('g[circle]',View_CircleComponent_Host0,import0.CircleComponent);
+const styles_CircleComponent:any[] = ([] as any[]);
+var renderType_CircleComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleComponent,{});
+export class View_CircleComponent0 extends import2.AppView<import0.CircleComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -187,7 +187,7 @@ export class View_Circle0 extends import2.AppView<import0.Circle> {
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Circle0,renderType_Circle,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_CircleComponent0,renderType_CircleComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
@@ -257,7 +257,7 @@ export class View_Circle0 extends import2.AppView<import0.Circle> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.click()) !== false);
+      const pd_sub_0:any = ((<any>this.context.clickHandler.emit(this.context.data)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

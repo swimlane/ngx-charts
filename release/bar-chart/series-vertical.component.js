@@ -1,16 +1,16 @@
 "use strict";
 var core_1 = require('@angular/core');
 var moment = require('moment');
-var SeriesVertical = (function () {
-    function SeriesVertical() {
+var SeriesVerticalComponent = (function () {
+    function SeriesVerticalComponent() {
         this.type = 'standard';
         this.scaleType = 'ordinal';
         this.clickHandler = new core_1.EventEmitter();
     }
-    SeriesVertical.prototype.ngOnChanges = function (changes) {
+    SeriesVerticalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
-    SeriesVertical.prototype.update = function () {
+    SeriesVerticalComponent.prototype.update = function () {
         var _this = this;
         var width;
         if (this.series.length) {
@@ -89,16 +89,16 @@ var SeriesVertical = (function () {
             return bar;
         });
     };
-    SeriesVertical.prototype.trackBy = function (index, bar) {
+    SeriesVerticalComponent.prototype.trackBy = function (index, bar) {
         return bar.label;
     };
-    SeriesVertical.prototype.click = function (data) {
+    SeriesVerticalComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    SeriesVertical.decorators = [
+    SeriesVerticalComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[seriesVertical]',
-                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"onClick($event)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -114,8 +114,8 @@ var SeriesVertical = (function () {
                 },] },
     ];
     /** @nocollapse */
-    SeriesVertical.ctorParameters = [];
-    SeriesVertical.propDecorators = {
+    SeriesVerticalComponent.ctorParameters = [];
+    SeriesVerticalComponent.propDecorators = {
         'dims': [{ type: core_1.Input },],
         'type': [{ type: core_1.Input },],
         'series': [{ type: core_1.Input },],
@@ -126,7 +126,7 @@ var SeriesVertical = (function () {
         'gradient': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return SeriesVertical;
+    return SeriesVerticalComponent;
 }());
-exports.SeriesVertical = SeriesVertical;
+exports.SeriesVerticalComponent = SeriesVerticalComponent;
 //# sourceMappingURL=series-vertical.component.js.map

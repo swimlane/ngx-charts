@@ -30,9 +30,9 @@ import * as import21 from '../../../src/common/axes/x-axis.component';
 import * as import22 from '../common/axes/x-axis.component.ngfactory';
 import * as import23 from '../../../src/common/axes/y-axis.component';
 import * as import24 from '../common/axes/y-axis.component.ngfactory';
-export class Wrapper_BarHorizontal {
+export class Wrapper_BarHorizontalComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.BarHorizontal;
+  context:import0.BarHorizontalComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -53,7 +53,7 @@ export class Wrapper_BarHorizontal {
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.BarHorizontal(p0,p1,p2);
+    this.context = new import0.BarHorizontalComponent(p0,p1,p2);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -200,49 +200,49 @@ export class Wrapper_BarHorizontal {
     if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
-var renderType_BarHorizontal_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_BarHorizontal_Host0 extends import2.AppView<any> {
+var renderType_BarHorizontalComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_BarHorizontalComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.BarHorizontal>;
-  _BarHorizontal_0_3:Wrapper_BarHorizontal;
+  compView_0:import2.AppView<import0.BarHorizontalComponent>;
+  _BarHorizontalComponent_0_3:Wrapper_BarHorizontalComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_BarHorizontal_Host0,renderType_BarHorizontal_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_BarHorizontalComponent_Host0,renderType_BarHorizontalComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'bar-horizontal',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_BarHorizontal0(this.viewUtils,this,0,this._el_0);
-    this._BarHorizontal_0_3 = new Wrapper_BarHorizontal(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
-    this.compView_0.create(this._BarHorizontal_0_3.context);
+    this.compView_0 = new View_BarHorizontalComponent0(this.viewUtils,this,0,this._el_0);
+    this._BarHorizontalComponent_0_3 = new Wrapper_BarHorizontalComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this.compView_0.create(this._BarHorizontalComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._BarHorizontal_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._BarHorizontalComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.BarHorizontal) && (0 === requestNodeIndex))) { return this._BarHorizontal_0_3.context; }
+    if (((token === import0.BarHorizontalComponent) && (0 === requestNodeIndex))) { return this._BarHorizontalComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._BarHorizontal_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._BarHorizontalComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._BarHorizontal_0_3.context.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._BarHorizontalComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._BarHorizontal_0_3.ngOnDestroy();
+    this._BarHorizontalComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const BarHorizontalNgFactory:import7.ComponentFactory<import0.BarHorizontal> = new import7.ComponentFactory<import0.BarHorizontal>('bar-horizontal',View_BarHorizontal_Host0,import0.BarHorizontal);
-const styles_BarHorizontal:any[] = ([] as any[]);
-var renderType_BarHorizontal:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarHorizontal,{});
-export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> {
+export const BarHorizontalComponentNgFactory:import7.ComponentFactory<import0.BarHorizontalComponent> = new import7.ComponentFactory<import0.BarHorizontalComponent>('bar-horizontal',View_BarHorizontalComponent_Host0,import0.BarHorizontalComponent);
+const styles_BarHorizontalComponent:any[] = ([] as any[]);
+var renderType_BarHorizontalComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarHorizontalComponent,{});
+export class View_BarHorizontalComponent0 extends import2.AppView<import0.BarHorizontalComponent> {
   _text_0:any;
   _el_1:any;
   /*private*/ _vc_1:import10.ViewContainer;
-  compView_1:import2.AppView<import11.Chart>;
+  compView_1:import2.AppView<import11.ChartComponent>;
   _InjectionService_1_5:import12.InjectionService;
-  _Chart_1_6:import13.Wrapper_Chart;
+  _ChartComponent_1_6:import13.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
@@ -265,7 +265,7 @@ export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> 
   _arr_25:any;
   /*private*/ _expr_26:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_BarHorizontal0,renderType_BarHorizontal,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_BarHorizontalComponent0,renderType_BarHorizontalComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._arr_25 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
         p0,
@@ -280,9 +280,9 @@ export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> 
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_1 = new import10.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import13.View_Chart0(this.viewUtils,this,1,this._el_1);
+    this.compView_1 = new import13.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
     this._InjectionService_1_5 = new import12.InjectionService(this.parentView.injectorGet(import17.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import18.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._Chart_1_6 = new import13.Wrapper_Chart(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._ChartComponent_1_6 = new import13.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','bar-chart chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
@@ -302,10 +302,10 @@ export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> 
     this.compView_9.create(this._SeriesHorizontal_9_3.context);
     this._text_10 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_11 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_1.create(this._Chart_1_6.context);
+    this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_12 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
     this._SeriesHorizontal_9_3.subscribe(this,this.eventHandler(this.handleEvent_9),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -337,19 +337,19 @@ export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> 
     if (((token === import20.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
     if (((token === import15.SeriesHorizontal) && (9 === requestNodeIndex))) { return this._SeriesHorizontal_9_3.context; }
     if (((token === import12.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._InjectionService_1_5; }
-    if (((token === import11.Chart) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._Chart_1_6.context; }
+    if (((token === import11.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this._arr_25(this.context.width,this.context.height);
-    this._Chart_1_6.check_view(currVal_1_0_0,throwOnChange,false);
+    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.legend;
-    this._Chart_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
+    this._ChartComponent_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
     const currVal_1_0_2:any = this.context.yDomain;
-    this._Chart_1_6.check_legendData(currVal_1_0_2,throwOnChange,false);
+    this._ChartComponent_1_6.check_legendData(currVal_1_0_2,throwOnChange,false);
     const currVal_1_0_3:any = this.context.colors;
-    this._Chart_1_6.check_colors(currVal_1_0_3,throwOnChange,false);
-    if (this._Chart_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    this._ChartComponent_1_6.check_colors(currVal_1_0_3,throwOnChange,false);
+    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_5_0_0:any = this.context.xAxis;
     this._NgIf_5_6.check_ngIf(currVal_5_0_0,throwOnChange,false);
     this._NgIf_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
@@ -387,7 +387,7 @@ export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> 
     this.compView_1.destroy();
     this.compView_9.destroy();
     this._SeriesHorizontal_9_3.ngOnDestroy();
-    this._Chart_1_6.ngOnDestroy();
+    this._ChartComponent_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -397,8 +397,8 @@ export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> 
     }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 5)) { return new View_BarHorizontal1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
-    if ((nodeIndex == 7)) { return new View_BarHorizontal2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
+    if ((nodeIndex == 5)) { return new View_BarHorizontalComponent1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
+    if ((nodeIndex == 7)) { return new View_BarHorizontalComponent2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
     return (null as any);
   }
   handleEvent_1(eventName:string,$event:any):boolean {
@@ -414,28 +414,28 @@ export class View_BarHorizontal0 extends import2.AppView<import0.BarHorizontal> 
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.context.click($event)) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_BarHorizontal1 extends import2.AppView<any> {
+class View_BarHorizontalComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import21.XAxis>;
-  _XAxis_0_3:import22.Wrapper_XAxis;
+  compView_0:import2.AppView<import21.XAxisComponent>;
+  _XAxisComponent_0_3:import22.Wrapper_XAxisComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_BarHorizontal1,renderType_BarHorizontal,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_BarHorizontalComponent1,renderType_BarHorizontalComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'xAxis',''),(null as any));
-    this.compView_0 = new import22.View_XAxis0(this.viewUtils,this,0,this._el_0);
-    this._XAxis_0_3 = new import22.Wrapper_XAxis();
+    this.compView_0 = new import22.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisComponent_0_3 = new import22.Wrapper_XAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._XAxis_0_3.context);
+    this.compView_0.create(this._XAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._XAxis_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -444,26 +444,26 @@ class View_BarHorizontal1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import21.XAxis) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxis_0_3.context; }
+    if (((token === import21.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.xScale;
-    this._XAxis_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
+    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.dims;
-    this._XAxis_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._XAxis_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    this._XAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.showXAxisLabel;
-    this._XAxis_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.xAxisLabel;
-    this._XAxis_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._XAxis_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._XAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._XAxis_0_3.ngOnDestroy();
+    this._XAxisComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -478,22 +478,22 @@ class View_BarHorizontal1 extends import2.AppView<any> {
     return result;
   }
 }
-class View_BarHorizontal2 extends import2.AppView<any> {
+class View_BarHorizontalComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import23.YAxis>;
-  _YAxis_0_3:import24.Wrapper_YAxis;
+  compView_0:import2.AppView<import23.YAxisComponent>;
+  _YAxisComponent_0_3:import24.Wrapper_YAxisComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_BarHorizontal2,renderType_BarHorizontal,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_BarHorizontalComponent2,renderType_BarHorizontalComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'yAxis',''),(null as any));
-    this.compView_0 = new import24.View_YAxis0(this.viewUtils,this,0,this._el_0);
-    this._YAxis_0_3 = new import24.Wrapper_YAxis();
+    this.compView_0 = new import24.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisComponent_0_3 = new import24.Wrapper_YAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._YAxis_0_3.context);
+    this.compView_0.create(this._YAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._YAxis_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -502,26 +502,26 @@ class View_BarHorizontal2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import23.YAxis) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxis_0_3.context; }
+    if (((token === import23.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.yScale;
-    this._YAxis_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
+    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.dims;
-    this._YAxis_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.yAxisTickFormatting();
-    this._YAxis_0_3.check_tickFormatting(currVal_0_0_2,throwOnChange,false);
+    this._YAxisComponent_0_3.check_tickFormatting(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.showYAxisLabel;
-    this._YAxis_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.yAxisLabel;
-    this._YAxis_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._YAxis_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._YAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._YAxis_0_3.ngOnDestroy();
+    this._YAxisComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);

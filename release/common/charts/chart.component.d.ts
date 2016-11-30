@@ -1,6 +1,6 @@
 import { OnChanges, ViewContainerRef, EventEmitter } from '@angular/core';
 import { InjectionService } from '../../utils/injection.service';
-export declare class Chart implements OnChanges {
+export declare class ChartComponent implements OnChanges {
     private vcr;
     private injectionService;
     view: any;

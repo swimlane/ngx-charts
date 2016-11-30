@@ -14,6 +14,7 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '@angular/core/src/linker/element_ref';
+import * as import9 from '@angular/core/src/zone/ng_zone';
 export class Wrapper_Timeline {
   /*private*/ _eventHandler:Function;
   context:import0.Timeline;
@@ -31,10 +32,10 @@ export class Wrapper_Timeline {
   /*private*/ _expr_9:any;
   subscription0:any;
   subscription1:any;
-  constructor(p0:any) {
+  constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Timeline(p0);
+    this.context = new import0.Timeline(p0,p1,p2);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -164,7 +165,7 @@ class View_Timeline_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'timeline',''),rootSelector,(null as any));
     this.compView_0 = new View_Timeline0(this.viewUtils,this,0,this._el_0);
-    this._Timeline_0_3 = new Wrapper_Timeline(new import8.ElementRef(this._el_0));
+    this._Timeline_0_3 = new Wrapper_Timeline(new import8.ElementRef(this._el_0),this.injectorGet(import9.NgZone,this.parentIndex),this.compView_0.ref);
     this.compView_0.create(this._Timeline_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._Timeline_0_3.context);
@@ -206,16 +207,20 @@ export class View_Timeline0 extends import2.AppView<import0.Timeline> {
   _text_11:any;
   _el_12:any;
   _text_13:any;
-  _text_14:any;
+  _el_14:any;
   _text_15:any;
-  /*private*/ _expr_16:any;
-  /*private*/ _expr_17:any;
+  _text_16:any;
+  _text_17:any;
   /*private*/ _expr_18:any;
+  /*private*/ _expr_19:any;
+  /*private*/ _expr_20:any;
+  /*private*/ _expr_21:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_Timeline0,renderType_Timeline,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
-    this._expr_16 = import1.UNINITIALIZED;
-    this._expr_17 = import1.UNINITIALIZED;
     this._expr_18 = import1.UNINITIALIZED;
+    this._expr_19 = import1.UNINITIALIZED;
+    this._expr_20 = import1.UNINITIALIZED;
+    this._expr_21 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -232,10 +237,12 @@ export class View_Timeline0 extends import2.AppView<import0.Timeline> {
     this.projectNodes(this._el_8,0);
     this._text_10 = this.renderer.createText(this._el_8,'\n      ',(null as any));
     this._text_11 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
-    this._el_12 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray2(2,'class','brush'),(null as any));
-    this._text_13 = this.renderer.createText(this._el_12,'\n      ',(null as any));
-    this._text_14 = this.renderer.createText(this._el_1,'\n\n    ',(null as any));
-    this._text_15 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this._el_12 = import3.createRenderElement(this.renderer,this._el_1,':svg:rect',new import3.InlineArray8(6,'class','brush-background','x','0','y','0'),(null as any));
+    this._text_13 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._el_14 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray2(2,'class','brush'),(null as any));
+    this._text_15 = this.renderer.createText(this._el_14,'\n      ',(null as any));
+    this._text_16 = this.renderer.createText(this._el_1,'\n\n    ',(null as any));
+    this._text_17 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -251,27 +258,34 @@ export class View_Timeline0 extends import2.AppView<import0.Timeline> {
       this._text_11,
       this._el_12,
       this._text_13,
-      this._text_14,
-      this._text_15
+      this._el_14,
+      this._text_15,
+      this._text_16,
+      this._text_17
     ]
     ),(null as any));
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_16:any = this.context.transform;
-    if (import3.checkBinding(throwOnChange,this._expr_16,currVal_16)) {
-      this.renderer.setElementAttribute(this._el_1,'transform',((currVal_16 == null)? (null as any): currVal_16.toString()));
-      this._expr_16 = currVal_16;
-    }
-    const currVal_17:any = this.context.filterId;
-    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
-      this.renderer.setElementAttribute(this._el_3,'id',((currVal_17 == null)? (null as any): currVal_17.toString()));
-      this._expr_17 = currVal_17;
-    }
-    const currVal_18:any = this.context.filter;
+    const currVal_18:any = this.context.transform;
     if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setElementAttribute(this._el_8,'filter',((currVal_18 == null)? (null as any): currVal_18.toString()));
+      this.renderer.setElementAttribute(this._el_1,'transform',((currVal_18 == null)? (null as any): currVal_18.toString()));
       this._expr_18 = currVal_18;
+    }
+    const currVal_19:any = this.context.filterId;
+    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
+      this.renderer.setElementAttribute(this._el_3,'id',((currVal_19 == null)? (null as any): currVal_19.toString()));
+      this._expr_19 = currVal_19;
+    }
+    const currVal_20:any = this.context.view[0];
+    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
+      this.renderer.setElementAttribute(this._el_12,'width',((currVal_20 == null)? (null as any): currVal_20.toString()));
+      this._expr_20 = currVal_20;
+    }
+    const currVal_21:any = this.context.height;
+    if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
+      this.renderer.setElementAttribute(this._el_12,'height',((currVal_21 == null)? (null as any): currVal_21.toString()));
+      this._expr_21 = currVal_21;
     }
   }
 }

@@ -23,9 +23,9 @@ import * as import14 from '@angular/common/src/directives/ng_for';
 import * as import15 from '@angular/core/src/security';
 import * as import16 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import17 from '@angular/common/src/directives/ng_if';
-export class Wrapper_YAxisTicks {
+export class Wrapper_YAxisTicksComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.YAxisTicks;
+  context:import0.YAxisTicksComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -41,7 +41,7 @@ export class Wrapper_YAxisTicks {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.YAxisTicks();
+    this.context = new import0.YAxisTicksComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -149,43 +149,43 @@ export class Wrapper_YAxisTicks {
     if (emit0) { (this.subscription0 = this.context.dimensionsChanged.subscribe(_eventHandler.bind(view,'dimensionsChanged'))); }
   }
 }
-var renderType_YAxisTicks_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_YAxisTicks_Host0 extends import2.AppView<any> {
+var renderType_YAxisTicksComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_YAxisTicksComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.YAxisTicks>;
-  _YAxisTicks_0_3:Wrapper_YAxisTicks;
+  compView_0:import2.AppView<import0.YAxisTicksComponent>;
+  _YAxisTicksComponent_0_3:Wrapper_YAxisTicksComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_YAxisTicks_Host0,renderType_YAxisTicks_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_YAxisTicksComponent_Host0,renderType_YAxisTicksComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'yAxisTicks',''),rootSelector,(null as any));
-    this.compView_0 = new View_YAxisTicks0(this.viewUtils,this,0,this._el_0);
-    this._YAxisTicks_0_3 = new Wrapper_YAxisTicks();
-    this.compView_0.create(this._YAxisTicks_0_3.context);
+    this.compView_0 = new View_YAxisTicksComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisTicksComponent_0_3 = new Wrapper_YAxisTicksComponent();
+    this.compView_0.create(this._YAxisTicksComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._YAxisTicks_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._YAxisTicksComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.YAxisTicks) && (0 === requestNodeIndex))) { return this._YAxisTicks_0_3.context; }
+    if (((token === import0.YAxisTicksComponent) && (0 === requestNodeIndex))) { return this._YAxisTicksComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._YAxisTicks_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._YAxisTicksComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._YAxisTicks_0_3.context.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._YAxisTicksComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._YAxisTicks_0_3.ngOnDestroy();
+    this._YAxisTicksComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const YAxisTicksNgFactory:import7.ComponentFactory<import0.YAxisTicks> = new import7.ComponentFactory<import0.YAxisTicks>('g[yAxisTicks]',View_YAxisTicks_Host0,import0.YAxisTicks);
-const styles_YAxisTicks:any[] = ([] as any[]);
-var renderType_YAxisTicks:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_YAxisTicks,{});
-export class View_YAxisTicks0 extends import2.AppView<import0.YAxisTicks> {
+export const YAxisTicksComponentNgFactory:import7.ComponentFactory<import0.YAxisTicksComponent> = new import7.ComponentFactory<import0.YAxisTicksComponent>('g[yAxisTicks]',View_YAxisTicksComponent_Host0,import0.YAxisTicksComponent);
+const styles_YAxisTicksComponent:any[] = ([] as any[]);
+var renderType_YAxisTicksComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_YAxisTicksComponent,{});
+export class View_YAxisTicksComponent0 extends import2.AppView<import0.YAxisTicksComponent> {
   _viewQuery_ticksel_0:import8.QueryList<any>;
   _text_0:any;
   _el_1:any;
@@ -202,7 +202,7 @@ export class View_YAxisTicks0 extends import2.AppView<import0.YAxisTicks> {
   _NgFor_6_6:import10.Wrapper_NgFor;
   _text_7:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_YAxisTicks0,renderType_YAxisTicks,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_YAxisTicksComponent0,renderType_YAxisTicksComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -215,7 +215,7 @@ export class View_YAxisTicks0 extends import2.AppView<import0.YAxisTicks> {
     this._TemplateRef_3_5 = new import11.TemplateRef_(this,3,this._anchor_3);
     this._NgFor_3_6 = new import10.Wrapper_NgFor(this._vc_3.vcRef,this._TemplateRef_3_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
     this._text_4 = this.renderer.createText(this._el_1,'\n    ',(null as any));
-    this._text_5 = this.renderer.createText(parentRenderNode,'\n\n    ',(null as any));
+    this._text_5 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._anchor_6 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
     this._vc_6 = new import9.ViewContainer(6,(null as any),this,this._anchor_6);
     this._TemplateRef_6_5 = new import11.TemplateRef_(this,6,this._anchor_6);
@@ -258,12 +258,12 @@ export class View_YAxisTicks0 extends import2.AppView<import0.YAxisTicks> {
     this._vc_6.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 3)) { return new View_YAxisTicks1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
-    if ((nodeIndex == 6)) { return new View_YAxisTicks2(this.viewUtils,this,6,this._anchor_6,this._vc_6); }
+    if ((nodeIndex == 3)) { return new View_YAxisTicksComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
+    if ((nodeIndex == 6)) { return new View_YAxisTicksComponent2(this.viewUtils,this,6,this._anchor_6,this._vc_6); }
     return (null as any);
   }
 }
-class View_YAxisTicks1 extends import2.AppView<any> {
+class View_YAxisTicksComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -281,7 +281,7 @@ class View_YAxisTicks1 extends import2.AppView<any> {
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_YAxisTicks1,renderType_YAxisTicks,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_YAxisTicksComponent1,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
@@ -359,7 +359,7 @@ class View_YAxisTicks1 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_YAxisTicks2 extends import2.AppView<any> {
+class View_YAxisTicksComponent2 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
@@ -369,7 +369,7 @@ class View_YAxisTicks2 extends import2.AppView<any> {
   _text_3:any;
   /*private*/ _expr_7:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_YAxisTicks2,renderType_YAxisTicks,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_YAxisTicksComponent2,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
@@ -412,11 +412,11 @@ class View_YAxisTicks2 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 2)) { return new View_YAxisTicks3(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
+    if ((nodeIndex == 2)) { return new View_YAxisTicksComponent3(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
     return (null as any);
   }
 }
-class View_YAxisTicks3 extends import2.AppView<any> {
+class View_YAxisTicksComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -424,7 +424,7 @@ class View_YAxisTicks3 extends import2.AppView<any> {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_YAxisTicks3,renderType_YAxisTicks,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_YAxisTicksComponent3,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
   }

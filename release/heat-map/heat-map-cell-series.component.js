@@ -1,16 +1,16 @@
 "use strict";
 var core_1 = require('@angular/core');
-var HeatCellSeries = (function () {
-    function HeatCellSeries() {
+var HeatCellSeriesComponent = (function () {
+    function HeatCellSeriesComponent() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    HeatCellSeries.prototype.ngOnChanges = function () {
+    HeatCellSeriesComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    HeatCellSeries.prototype.update = function () {
+    HeatCellSeriesComponent.prototype.update = function () {
         this.cells = this.getCells();
     };
-    HeatCellSeries.prototype.getCells = function () {
+    HeatCellSeriesComponent.prototype.getCells = function () {
         var _this = this;
         var cells = [];
         this.data.map(function (row) {
@@ -36,26 +36,26 @@ var HeatCellSeries = (function () {
         });
         return cells;
     };
-    HeatCellSeries.prototype.trackBy = function (index, item) {
+    HeatCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.tooltipText;
     };
-    HeatCellSeries.prototype.click = function (value, label, series) {
+    HeatCellSeriesComponent.prototype.onClick = function (value, label, series) {
         this.clickHandler.emit({
             name: label,
             value: value,
             series: series
         });
     };
-    HeatCellSeries.decorators = [
+    HeatCellSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[heatMapCellSeries]',
-                    template: "\n    <svg:g heatMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  ",
+                    template: "\n    <svg:g heatMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    HeatCellSeries.ctorParameters = [];
-    HeatCellSeries.propDecorators = {
+    HeatCellSeriesComponent.ctorParameters = [];
+    HeatCellSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
         'xScale': [{ type: core_1.Input },],
@@ -63,7 +63,7 @@ var HeatCellSeries = (function () {
         'gradient': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return HeatCellSeries;
+    return HeatCellSeriesComponent;
 }());
-exports.HeatCellSeries = HeatCellSeries;
+exports.HeatCellSeriesComponent = HeatCellSeriesComponent;
 //# sourceMappingURL=heat-map-cell-series.component.js.map

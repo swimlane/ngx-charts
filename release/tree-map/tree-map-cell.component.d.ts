@@ -1,9 +1,5 @@
 import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
-export declare class TreeMapCell implements OnChanges {
-    element: HTMLElement;
-    transform: string;
-    formattedValue: string;
-    initialized: boolean;
+export declare class TreeMapCellComponent implements OnChanges {
     fill: any;
     x: any;
     y: any;
@@ -13,10 +9,14 @@ export declare class TreeMapCell implements OnChanges {
     value: any;
     valueType: any;
     clickHandler: EventEmitter<{}>;
+    element: HTMLElement;
+    transform: string;
+    formattedValue: string;
+    initialized: boolean;
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;
-    click(): void;
+    onClick(): void;
 }

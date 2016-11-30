@@ -1,5 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
-export declare class PieSeries implements OnChanges {
+export declare class PieSeriesComponent implements OnChanges {
     colors: any;
     series: any;
     dims: any;
@@ -13,13 +13,13 @@ export declare class PieSeries implements OnChanges {
     data: any;
     ngOnChanges(): void;
     update(): void;
-    midAngle(d: any): any;
+    midAngle(d: any): number;
     outerArc(): any;
     calculateLabelPositions(pieData: any): any;
     labelVisible(arc: any): boolean;
-    label(arc: any): any;
+    label(arc: any): string;
     tooltipText(arc: any): string;
     color(arc: any): any;
-    trackBy(index: any, item: any): any;
+    trackBy(index: any, item: any): string;
     onClick(data: any): void;
 }

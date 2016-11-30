@@ -272,9 +272,9 @@ export class View_SeriesHorizontal0 extends import2.AppView<import0.SeriesHorizo
 class View_SeriesHorizontal1 extends import2.AppView<any> {
   _el_0:any;
   /*private*/ _vc_0:import14.ViewContainer;
-  compView_0:import2.AppView<import19.Bar>;
+  compView_0:import2.AppView<import19.BarComponent>;
   _TooltipDirective_0_5:import20.Wrapper_TooltipDirective;
-  _Bar_0_6:import21.Wrapper_Bar;
+  _BarComponent_0_6:import21.Wrapper_BarComponent;
   _text_1:any;
   _el_2:any;
   /*private*/ _expr_7:any;
@@ -285,14 +285,14 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'bar','','swui-tooltip',''),(null as any));
     this._vc_0 = new import14.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new import21.View_Bar0(this.viewUtils,this,0,this._el_0);
+    this.compView_0 = new import21.View_BarComponent0(this.viewUtils,this,0,this._el_0);
     this._TooltipDirective_0_5 = new import20.Wrapper_TooltipDirective(this.parentView.injectorGet(import22.TooltipService,this.parentIndex),this._vc_0.vcRef,this.parentView.injectorGet(import23.InjectionService,this.parentIndex),this.renderer,new import24.ElementRef(this._el_0),this.parentView.injectorGet(import25.NgZone,this.parentIndex));
-    this._Bar_0_6 = new import21.Wrapper_Bar(new import24.ElementRef(this._el_0));
+    this._BarComponent_0_6 = new import21.Wrapper_BarComponent(new import24.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_0.create(this._Bar_0_6.context);
+    this.compView_0.create(this._BarComponent_0_6.context);
     this._el_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._Bar_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._BarComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_2,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -302,7 +302,7 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import26.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
-    if (((token === import19.Bar) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._Bar_0_6.context; }
+    if (((token === import19.BarComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._BarComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -321,24 +321,24 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_2,throwOnChange,false);
     this._TooltipDirective_0_5.ngDoCheck(this,this._el_0,throwOnChange);
     const currVal_0_1_0:any = this.context.$implicit.color;
-    this._Bar_0_6.check_fill(currVal_0_1_0,throwOnChange,false);
+    this._BarComponent_0_6.check_fill(currVal_0_1_0,throwOnChange,false);
     const currVal_0_1_1:any = this.context.$implicit.data;
-    this._Bar_0_6.check_data(currVal_0_1_1,throwOnChange,false);
+    this._BarComponent_0_6.check_data(currVal_0_1_1,throwOnChange,false);
     const currVal_0_1_2:any = this.context.$implicit.width;
-    this._Bar_0_6.check_width(currVal_0_1_2,throwOnChange,false);
+    this._BarComponent_0_6.check_width(currVal_0_1_2,throwOnChange,false);
     const currVal_0_1_3:any = this.context.$implicit.height;
-    this._Bar_0_6.check_height(currVal_0_1_3,throwOnChange,false);
+    this._BarComponent_0_6.check_height(currVal_0_1_3,throwOnChange,false);
     const currVal_0_1_4:any = this.context.$implicit.x;
-    this._Bar_0_6.check_x(currVal_0_1_4,throwOnChange,false);
+    this._BarComponent_0_6.check_x(currVal_0_1_4,throwOnChange,false);
     const currVal_0_1_5:any = this.context.$implicit.y;
-    this._Bar_0_6.check_y(currVal_0_1_5,throwOnChange,false);
+    this._BarComponent_0_6.check_y(currVal_0_1_5,throwOnChange,false);
     const currVal_0_1_6:any = 'horizontal';
-    this._Bar_0_6.check_orientation(currVal_0_1_6,throwOnChange,false);
+    this._BarComponent_0_6.check_orientation(currVal_0_1_6,throwOnChange,false);
     const currVal_0_1_7:any = this.context.$implicit.roundEdges;
-    this._Bar_0_6.check_roundEdges(currVal_0_1_7,throwOnChange,false);
+    this._BarComponent_0_6.check_roundEdges(currVal_0_1_7,throwOnChange,false);
     const currVal_0_1_8:any = this.parentView.context.gradient;
-    this._Bar_0_6.check_gradient(currVal_0_1_8,throwOnChange,false);
-    if (this._Bar_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._BarComponent_0_6.check_gradient(currVal_0_1_8,throwOnChange,false);
+    if (this._BarComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
     this.compView_0.detectChanges(throwOnChange);
   }
@@ -346,7 +346,7 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     this._vc_0.destroyNestedViews();
     this.compView_0.destroy();
     this._TooltipDirective_0_5.ngOnDestroy();
-    this._Bar_0_6.ngOnDestroy();
+    this._BarComponent_0_6.ngOnDestroy();
   }
   detachInternal():void {
     var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,this._expr_7,'void');

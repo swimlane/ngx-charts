@@ -1,6 +1,6 @@
 import { EventEmitter, OnChanges } from '@angular/core';
-import { XAxisTicks } from './x-axis-ticks.component';
-export declare class XAxis implements OnChanges {
+import { XAxisTicksComponent } from './x-axis-ticks.component';
+export declare class XAxisComponent implements OnChanges {
     xScale: any;
     dims: any;
     tickFormatting: any;
@@ -16,7 +16,7 @@ export declare class XAxis implements OnChanges {
     xAxisOffset: any;
     transform: any;
     labelOffset: number;
-    ticksComponent: XAxisTicks;
+    ticksComponent: XAxisTicksComponent;
     constructor();
     ngOnChanges(): void;
     update(): void;

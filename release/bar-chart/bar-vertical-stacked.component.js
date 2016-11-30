@@ -9,9 +9,9 @@ var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
-var BarVerticalStacked = (function (_super) {
-    __extends(BarVerticalStacked, _super);
-    function BarVerticalStacked(element, cd, zone) {
+var BarVerticalStackedComponent = (function (_super) {
+    __extends(BarVerticalStackedComponent, _super);
+    function BarVerticalStackedComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -23,16 +23,16 @@ var BarVerticalStacked = (function (_super) {
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarVerticalStacked.prototype.ngAfterViewInit = function () {
+    BarVerticalStackedComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    BarVerticalStacked.prototype.ngOnDestroy = function () {
+    BarVerticalStackedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVerticalStacked.prototype.ngOnChanges = function () {
+    BarVerticalStackedComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    BarVerticalStacked.prototype.update = function () {
+    BarVerticalStackedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -58,7 +58,7 @@ var BarVerticalStacked = (function (_super) {
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
-    BarVerticalStacked.prototype.getGroupDomain = function () {
+    BarVerticalStackedComponent.prototype.getGroupDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -68,7 +68,7 @@ var BarVerticalStacked = (function (_super) {
         }
         return domain;
     };
-    BarVerticalStacked.prototype.getInnerDomain = function () {
+    BarVerticalStackedComponent.prototype.getInnerDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -81,7 +81,7 @@ var BarVerticalStacked = (function (_super) {
         }
         return domain;
     };
-    BarVerticalStacked.prototype.getValueDomain = function () {
+    BarVerticalStackedComponent.prototype.getValueDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -96,45 +96,45 @@ var BarVerticalStacked = (function (_super) {
         var max = Math.max.apply(Math, domain);
         return [min, max];
     };
-    BarVerticalStacked.prototype.getXScale = function () {
+    BarVerticalStackedComponent.prototype.getXScale = function () {
         var spacing = 0.1;
         return d3_1.default.scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
-    BarVerticalStacked.prototype.getYScale = function () {
+    BarVerticalStackedComponent.prototype.getYScale = function () {
         return d3_1.default.scaleLinear()
             .range([this.dims.height, 0])
             .domain(this.valueDomain);
     };
-    BarVerticalStacked.prototype.groupTransform = function (group) {
+    BarVerticalStackedComponent.prototype.groupTransform = function (group) {
         return "translate(" + this.xScale(group.name) + ", 0)";
     };
-    BarVerticalStacked.prototype.click = function (data, group) {
+    BarVerticalStackedComponent.prototype.onClick = function (data, group) {
         data.series = group.name;
         this.clickHandler.emit(data);
     };
-    BarVerticalStacked.prototype.trackBy = function (index, item) {
+    BarVerticalStackedComponent.prototype.trackBy = function (index, item) {
         return item.name;
     };
-    BarVerticalStacked.prototype.setColors = function () {
+    BarVerticalStackedComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
     };
-    BarVerticalStacked.prototype.updateYAxisWidth = function (_a) {
+    BarVerticalStackedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
         this.yAxisWidth = width;
         this.update();
     };
-    BarVerticalStacked.prototype.updateXAxisHeight = function (_a) {
+    BarVerticalStackedComponent.prototype.updateXAxisHeight = function (_a) {
         var height = _a.height;
         this.xAxisHeight = height;
         this.update();
     };
-    BarVerticalStacked.decorators = [
+    BarVerticalStackedComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'bar-vertical-stacked',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -150,12 +150,12 @@ var BarVerticalStacked = (function (_super) {
                 },] },
     ];
     /** @nocollapse */
-    BarVerticalStacked.ctorParameters = [
+    BarVerticalStackedComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    BarVerticalStacked.propDecorators = {
+    BarVerticalStackedComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
@@ -172,7 +172,7 @@ var BarVerticalStacked = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return BarVerticalStacked;
-}(base_chart_component_1.BaseChart));
-exports.BarVerticalStacked = BarVerticalStacked;
+    return BarVerticalStackedComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.BarVerticalStackedComponent = BarVerticalStackedComponent;
 //# sourceMappingURL=bar-vertical-stacked.component.js.map

@@ -14,9 +14,9 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '@angular/core/src/linker/element_ref';
-export class Wrapper_AxisLabel {
+export class Wrapper_AxisLabelComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.AxisLabel;
+  context:import0.AxisLabelComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -27,7 +27,7 @@ export class Wrapper_AxisLabel {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.AxisLabel(p0);
+    this.context = new import0.AxisLabelComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -97,28 +97,28 @@ export class Wrapper_AxisLabel {
     this._eventHandler = _eventHandler;
   }
 }
-var renderType_AxisLabel_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_AxisLabel_Host0 extends import2.AppView<any> {
+var renderType_AxisLabelComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_AxisLabelComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.AxisLabel>;
-  _AxisLabel_0_3:Wrapper_AxisLabel;
+  compView_0:import2.AppView<import0.AxisLabelComponent>;
+  _AxisLabelComponent_0_3:Wrapper_AxisLabelComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AxisLabel_Host0,renderType_AxisLabel_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_AxisLabelComponent_Host0,renderType_AxisLabelComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'axisLabel',''),rootSelector,(null as any));
-    this.compView_0 = new View_AxisLabel0(this.viewUtils,this,0,this._el_0);
-    this._AxisLabel_0_3 = new Wrapper_AxisLabel(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._AxisLabel_0_3.context);
+    this.compView_0 = new View_AxisLabelComponent0(this.viewUtils,this,0,this._el_0);
+    this._AxisLabelComponent_0_3 = new Wrapper_AxisLabelComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._AxisLabelComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AxisLabel_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AxisLabelComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.AxisLabel) && (0 === requestNodeIndex))) { return this._AxisLabel_0_3.context; }
+    if (((token === import0.AxisLabelComponent) && (0 === requestNodeIndex))) { return this._AxisLabelComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._AxisLabel_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._AxisLabelComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -128,10 +128,10 @@ class View_AxisLabel_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const AxisLabelNgFactory:import7.ComponentFactory<import0.AxisLabel> = new import7.ComponentFactory<import0.AxisLabel>('g[axisLabel]',View_AxisLabel_Host0,import0.AxisLabel);
-const styles_AxisLabel:any[] = ([] as any[]);
-var renderType_AxisLabel:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AxisLabel,{});
-export class View_AxisLabel0 extends import2.AppView<import0.AxisLabel> {
+export const AxisLabelComponentNgFactory:import7.ComponentFactory<import0.AxisLabelComponent> = new import7.ComponentFactory<import0.AxisLabelComponent>('g[axisLabel]',View_AxisLabelComponent_Host0,import0.AxisLabelComponent);
+const styles_AxisLabelComponent:any[] = ([] as any[]);
+var renderType_AxisLabelComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AxisLabelComponent,{});
+export class View_AxisLabelComponent0 extends import2.AppView<import0.AxisLabelComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -144,7 +144,7 @@ export class View_AxisLabel0 extends import2.AppView<import0.AxisLabel> {
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AxisLabel0,renderType_AxisLabel,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_AxisLabelComponent0,renderType_AxisLabelComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;

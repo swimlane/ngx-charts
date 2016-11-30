@@ -11,26 +11,26 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var trim_label_helper_1 = require('../common/trim-label.helper');
 var grid_layout_helper_1 = require('../common/grid-layout.helper');
 var d3_1 = require('../d3');
-var PieGrid = (function (_super) {
-    __extends(PieGrid, _super);
-    function PieGrid(element, cd, zone) {
+var PieGridComponent = (function (_super) {
+    __extends(PieGridComponent, _super);
+    function PieGridComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
-        this.margin = [20, 20, 20, 20];
         this.clickHandler = new core_1.EventEmitter();
         this.legendLabelClick = new core_1.EventEmitter();
+        this.margin = [20, 20, 20, 20];
     }
-    PieGrid.prototype.ngAfterViewInit = function () {
+    PieGridComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    PieGrid.prototype.ngOnDestroy = function () {
+    PieGridComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    PieGrid.prototype.ngOnChanges = function () {
+    PieGridComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    PieGrid.prototype.update = function () {
+    PieGridComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -46,10 +46,10 @@ var PieGrid = (function (_super) {
             _this.setColors();
         });
     };
-    PieGrid.prototype.getDomain = function () {
+    PieGridComponent.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    PieGrid.prototype.getSeries = function () {
+    PieGridComponent.prototype.getSeries = function () {
         var _this = this;
         var total = this.getTotal();
         return this.data.map(function (d) {
@@ -94,31 +94,31 @@ var PieGrid = (function (_super) {
             };
         });
     };
-    PieGrid.prototype.getTotal = function () {
+    PieGridComponent.prototype.getTotal = function () {
         return this.results
             .map(function (d) { return d.value; })
             .reduce(function (sum, d) { return sum + d; }, 0);
     };
-    PieGrid.prototype.click = function (data) {
+    PieGridComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    PieGrid.prototype.setColors = function () {
+    PieGridComponent.prototype.setColors = function () {
         this.colorScale = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    PieGrid.decorators = [
+    PieGridComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'pie-grid',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"click($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value.toLocaleString()\"\n          />\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value.toLocaleString()\"\n          />\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    PieGrid.ctorParameters = [
+    PieGridComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    PieGrid.propDecorators = {
+    PieGridComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
@@ -126,7 +126,7 @@ var PieGrid = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return PieGrid;
-}(base_chart_component_1.BaseChart));
-exports.PieGrid = PieGrid;
+    return PieGridComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.PieGridComponent = PieGridComponent;
 //# sourceMappingURL=pie-grid.component.js.map

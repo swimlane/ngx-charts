@@ -1,14 +1,14 @@
 "use strict";
 var core_1 = require('@angular/core');
-var Line = (function () {
-    function Line(element) {
+var LineComponent = (function () {
+    function LineComponent(element) {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    Line.prototype.ngOnChanges = function () {
+    LineComponent.prototype.ngOnChanges = function () {
         // add update animation
     };
-    Line.decorators = [
+    LineComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[line]',
                     template: "\n    <svg:path\n      [@animationState]=\"'active'\"\n      class=\"line\"\n      [attr.d]=\"path\"\n      fill=\"none\"\n      [attr.stroke]=\"stroke\"\n      stroke-width=\"1.5px\"\n    />\n  ",
@@ -29,16 +29,16 @@ var Line = (function () {
                 },] },
     ];
     /** @nocollapse */
-    Line.ctorParameters = [
+    LineComponent.ctorParameters = [
         { type: core_1.ElementRef, },
     ];
-    Line.propDecorators = {
+    LineComponent.propDecorators = {
         'path': [{ type: core_1.Input },],
         'stroke': [{ type: core_1.Input },],
         'data': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return Line;
+    return LineComponent;
 }());
-exports.Line = Line;
+exports.LineComponent = LineComponent;
 //# sourceMappingURL=line.component.js.map

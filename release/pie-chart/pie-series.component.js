@@ -1,17 +1,17 @@
 "use strict";
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
-var PieSeries = (function () {
-    function PieSeries() {
+var PieSeriesComponent = (function () {
+    function PieSeriesComponent() {
         this.series = [];
         this.innerRadius = 60;
         this.outerRadius = 80;
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieSeries.prototype.ngOnChanges = function () {
+    PieSeriesComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    PieSeries.prototype.update = function () {
+    PieSeriesComponent.prototype.update = function () {
         var pie = d3_1.default.pie()
             .value(function (d) { return d.value; })
             .sort(null);
@@ -21,16 +21,16 @@ var PieSeries = (function () {
         });
         this.data = this.calculateLabelPositions(arcData);
     };
-    PieSeries.prototype.midAngle = function (d) {
+    PieSeriesComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     };
-    PieSeries.prototype.outerArc = function () {
+    PieSeriesComponent.prototype.outerArc = function () {
         var factor = 1.5;
         return d3_1.default.arc()
             .innerRadius(this.outerRadius * factor)
             .outerRadius(this.outerRadius * factor);
     };
-    PieSeries.prototype.calculateLabelPositions = function (pieData) {
+    PieSeriesComponent.prototype.calculateLabelPositions = function (pieData) {
         var minDistance = 10;
         var chart = this;
         var labelPositions = pieData;
@@ -55,10 +55,10 @@ var PieSeries = (function () {
         }
         return labelPositions;
     };
-    PieSeries.prototype.labelVisible = function (arc) {
+    PieSeriesComponent.prototype.labelVisible = function (arc) {
         return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
     };
-    PieSeries.prototype.label = function (arc) {
+    PieSeriesComponent.prototype.label = function (arc) {
         var label = arc.data.name;
         if (label.constructor.name === 'Date') {
             label = label.toLocaleDateString();
@@ -68,19 +68,19 @@ var PieSeries = (function () {
         }
         return label;
     };
-    PieSeries.prototype.tooltipText = function (arc) {
+    PieSeriesComponent.prototype.tooltipText = function (arc) {
         return this.label(arc) + ": " + arc.data.value.toLocaleString();
     };
-    PieSeries.prototype.color = function (arc) {
+    PieSeriesComponent.prototype.color = function (arc) {
         return this.colors(this.label(arc));
     };
-    PieSeries.prototype.trackBy = function (index, item) {
+    PieSeriesComponent.prototype.trackBy = function (index, item) {
         return item.data.name;
     };
-    PieSeries.prototype.onClick = function (data) {
+    PieSeriesComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    PieSeries.decorators = [
+    PieSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[pieSeries]',
                     template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g \n        pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"onClick($event)\"\n        [gradient]=\"gradient\" \n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
@@ -88,8 +88,8 @@ var PieSeries = (function () {
                 },] },
     ];
     /** @nocollapse */
-    PieSeries.ctorParameters = [];
-    PieSeries.propDecorators = {
+    PieSeriesComponent.ctorParameters = [];
+    PieSeriesComponent.propDecorators = {
         'colors': [{ type: core_1.Input },],
         'series': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
@@ -100,7 +100,7 @@ var PieSeries = (function () {
         'gradient': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return PieSeries;
+    return PieSeriesComponent;
 }());
-exports.PieSeries = PieSeries;
+exports.PieSeriesComponent = PieSeriesComponent;
 //# sourceMappingURL=pie-series.component.js.map

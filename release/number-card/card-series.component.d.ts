@@ -9,17 +9,17 @@ export interface CardModel {
     data: any;
     tooltipText: string;
 }
-export declare class CardSeries implements OnChanges {
+export declare class CardSeriesComponent implements OnChanges {
     private zone;
-    cards: CardModel[];
     data: any;
     dims: any;
     colors: any;
     clickHandler: EventEmitter<{}>;
+    cards: CardModel[];
     constructor(zone: NgZone);
     ngOnChanges(): void;
     update(): void;
-    getCards(): any;
-    trackBy(index: any, card: any): any;
-    click(data: any): void;
+    getCards(): any[];
+    trackBy(index: any, card: any): string;
+    onClick(data: any): void;
 }

@@ -1,5 +1,5 @@
 import { EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
-export declare class Bar implements OnInit, OnChanges {
+export declare class BarComponent implements OnInit, OnChanges {
     fill: any;
     data: any;
     width: any;

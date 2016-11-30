@@ -13,9 +13,9 @@ import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
-export class Wrapper_GridPanel {
+export class Wrapper_GridPanelComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.GridPanel;
+  context:import0.GridPanelComponent;
   /*private*/ _changed:boolean;
   /*private*/ _expr_0:any;
   /*private*/ _expr_1:any;
@@ -24,7 +24,7 @@ export class Wrapper_GridPanel {
   /*private*/ _expr_4:any;
   constructor() {
     this._changed = false;
-    this.context = new import0.GridPanel();
+    this.context = new import0.GridPanelComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -85,28 +85,28 @@ export class Wrapper_GridPanel {
     this._eventHandler = _eventHandler;
   }
 }
-var renderType_GridPanel_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_GridPanel_Host0 extends import2.AppView<any> {
+var renderType_GridPanelComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_GridPanelComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.GridPanel>;
-  _GridPanel_0_3:Wrapper_GridPanel;
+  compView_0:import2.AppView<import0.GridPanelComponent>;
+  _GridPanelComponent_0_3:Wrapper_GridPanelComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_GridPanel_Host0,renderType_GridPanel_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_GridPanelComponent_Host0,renderType_GridPanelComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'gridPanel',''),rootSelector,(null as any));
-    this.compView_0 = new View_GridPanel0(this.viewUtils,this,0,this._el_0);
-    this._GridPanel_0_3 = new Wrapper_GridPanel();
-    this.compView_0.create(this._GridPanel_0_3.context);
+    this.compView_0 = new View_GridPanelComponent0(this.viewUtils,this,0,this._el_0);
+    this._GridPanelComponent_0_3 = new Wrapper_GridPanelComponent();
+    this.compView_0.create(this._GridPanelComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._GridPanel_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._GridPanelComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.GridPanel) && (0 === requestNodeIndex))) { return this._GridPanel_0_3.context; }
+    if (((token === import0.GridPanelComponent) && (0 === requestNodeIndex))) { return this._GridPanelComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._GridPanel_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._GridPanelComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -116,10 +116,10 @@ class View_GridPanel_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const GridPanelNgFactory:import7.ComponentFactory<import0.GridPanel> = new import7.ComponentFactory<import0.GridPanel>('g[gridPanel]',View_GridPanel_Host0,import0.GridPanel);
-const styles_GridPanel:any[] = ([] as any[]);
-var renderType_GridPanel:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_GridPanel,{});
-export class View_GridPanel0 extends import2.AppView<import0.GridPanel> {
+export const GridPanelComponentNgFactory:import7.ComponentFactory<import0.GridPanelComponent> = new import7.ComponentFactory<import0.GridPanelComponent>('g[gridPanel]',View_GridPanelComponent_Host0,import0.GridPanelComponent);
+const styles_GridPanelComponent:any[] = ([] as any[]);
+var renderType_GridPanelComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_GridPanelComponent,{});
+export class View_GridPanelComponent0 extends import2.AppView<import0.GridPanelComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -128,7 +128,7 @@ export class View_GridPanel0 extends import2.AppView<import0.GridPanel> {
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_GridPanel0,renderType_GridPanel,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_GridPanelComponent0,renderType_GridPanelComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;

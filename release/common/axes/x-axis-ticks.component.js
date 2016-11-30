@@ -2,8 +2,8 @@
 var core_1 = require('@angular/core');
 var trim_label_helper_1 = require('../trim-label.helper');
 var ticks_helper_1 = require('./ticks.helper');
-var XAxisTicks = (function () {
-    function XAxisTicks() {
+var XAxisTicksComponent = (function () {
+    function XAxisTicksComponent() {
         this.tickArguments = [5];
         this.tickStroke = '#ccc';
         this.showGridLines = false;
@@ -21,14 +21,14 @@ var XAxisTicks = (function () {
             trimLabel: trim_label_helper_1.trimLabel
         });
     }
-    XAxisTicks.prototype.ngOnChanges = function () {
+    XAxisTicksComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    XAxisTicks.prototype.ngAfterViewInit = function () {
+    XAxisTicksComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
         setTimeout(function () { return _this.updateDims(); });
     };
-    XAxisTicks.prototype.updateDims = function () {
+    XAxisTicksComponent.prototype.updateDims = function () {
         var _this = this;
         var height = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().height, 10);
         if (height !== this.height) {
@@ -37,7 +37,7 @@ var XAxisTicks = (function () {
             setTimeout(function () { return _this.updateDims(); });
         }
     };
-    XAxisTicks.prototype.update = function () {
+    XAxisTicksComponent.prototype.update = function () {
         var _this = this;
         var scale = this.scale;
         this.ticks = this.getTicks();
@@ -70,7 +70,7 @@ var XAxisTicks = (function () {
         }
         setTimeout(function () { return _this.updateDims(); });
     };
-    XAxisTicks.prototype.getRotationAngle = function (ticks) {
+    XAxisTicksComponent.prototype.getRotationAngle = function (ticks) {
         var angle = 0;
         for (var i = 0; i < ticks.length; i++) {
             var tick = ticks[i].toString();
@@ -90,7 +90,7 @@ var XAxisTicks = (function () {
         }
         return angle;
     };
-    XAxisTicks.prototype.getTicks = function () {
+    XAxisTicksComponent.prototype.getTicks = function () {
         var ticks;
         var maxTicks = this.getMaxTicks();
         if (this.tickValues) {
@@ -114,17 +114,17 @@ var XAxisTicks = (function () {
         }
         return ticks;
     };
-    XAxisTicks.prototype.getMaxTicks = function () {
+    XAxisTicksComponent.prototype.getMaxTicks = function () {
         var tickWidth = 20;
         return Math.floor(this.width / tickWidth);
     };
-    XAxisTicks.prototype.tickTransform = function (tick) {
+    XAxisTicksComponent.prototype.tickTransform = function (tick) {
         return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
     };
-    XAxisTicks.prototype.gridLineTransform = function () {
+    XAxisTicksComponent.prototype.gridLineTransform = function () {
         return "translate(0," + (-this.verticalSpacing - 5) + ")";
     };
-    XAxisTicks.decorators = [
+    XAxisTicksComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[xAxisTicks]',
                     template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"tickTransform(tick)\">\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.text-anchor]=\"textAnchor\"\n          [attr.transform]=\"textTransform\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <svg:g *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  ",
@@ -132,8 +132,8 @@ var XAxisTicks = (function () {
                 },] },
     ];
     /** @nocollapse */
-    XAxisTicks.ctorParameters = [];
-    XAxisTicks.propDecorators = {
+    XAxisTicksComponent.ctorParameters = [];
+    XAxisTicksComponent.propDecorators = {
         'scale': [{ type: core_1.Input },],
         'orient': [{ type: core_1.Input },],
         'tickArguments': [{ type: core_1.Input },],
@@ -145,7 +145,7 @@ var XAxisTicks = (function () {
         'dimensionsChanged': [{ type: core_1.Output },],
         'ticksElement': [{ type: core_1.ViewChild, args: ['ticksel',] },],
     };
-    return XAxisTicks;
+    return XAxisTicksComponent;
 }());
-exports.XAxisTicks = XAxisTicks;
+exports.XAxisTicksComponent = XAxisTicksComponent;
 //# sourceMappingURL=x-axis-ticks.component.js.map

@@ -1,5 +1,5 @@
 import { OnChanges, ElementRef, EventEmitter, AfterViewInit } from '@angular/core';
-export declare class YAxisTicks implements OnChanges, AfterViewInit {
+export declare class YAxisTicksComponent implements OnChanges, AfterViewInit {
     scale: any;
     orient: any;
     tickArguments: number[];
@@ -13,7 +13,7 @@ export declare class YAxisTicks implements OnChanges, AfterViewInit {
     innerTickSize: any;
     tickPadding: any;
     tickSpacing: any;
-    verticalSpacing: any;
+    verticalSpacing: number;
     textAnchor: any;
     dy: any;
     x1: any;
@@ -25,6 +25,9 @@ export declare class YAxisTicks implements OnChanges, AfterViewInit {
     tickFormat: any;
     ticks: any;
     width: number;
+    outerTickSize: number;
+    rotateLabels: boolean;
+    trimLabel: any;
     ticksElement: ElementRef;
     constructor();
     ngOnChanges(): void;

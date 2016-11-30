@@ -1,8 +1,8 @@
 
 import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-import { BaseChart } from '../common/base-chart.component';
-export declare class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+import { BaseChartComponent } from '../common/base-chart.component';
+export declare class LineChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
     private element;
     private cd;
     view: any;
@@ -56,8 +56,8 @@ export declare class LineChart extends BaseChart implements OnChanges, OnDestroy
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];
-    getYDomain(): number[];
-    getSeriesDomain(): any;
+    getYDomain(): any[];
+    getSeriesDomain(): any[];
     getXScale(domain: any, width: any): any;
     getYScale(domain: any, height: any): any;
     getScaleType(values: any): string;
@@ -65,8 +65,8 @@ export declare class LineChart extends BaseChart implements OnChanges, OnDestroy
     updateDomain(domain: any): void;
     updateHoveredVertical(item: any): void;
     hideCircles(): void;
-    click(data: any, series: any): void;
-    trackBy(index: any, item: any): any;
+    onClick(data: any, series: any): void;
+    trackBy(index: any, item: any): string;
     setColors(): void;
     updateYAxisWidth({width}: {
         width: any;

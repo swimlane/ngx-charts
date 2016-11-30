@@ -2,9 +2,8 @@
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var id_1 = require("../utils/id");
-var PieArc = (function () {
-    function PieArc(element) {
-        this.initialized = false;
+var PieArcComponent = (function () {
+    function PieArcComponent(element) {
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
         this.cornerRadius = 0;
@@ -13,12 +12,13 @@ var PieArc = (function () {
         this.animate = true;
         this.pointerEvents = true;
         this.clickHandler = new core_1.EventEmitter();
+        this.initialized = false;
         this.element = element.nativeElement;
     }
-    PieArc.prototype.ngOnChanges = function () {
+    PieArcComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    PieArc.prototype.update = function () {
+    PieArcComponent.prototype.update = function () {
         var arc = this.calculateArc();
         this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
         this.startOpacity = 0.3;
@@ -41,7 +41,7 @@ var PieArc = (function () {
             }
         }
     };
-    PieArc.prototype.calculateArc = function () {
+    PieArcComponent.prototype.calculateArc = function () {
         var outerRadius = this.outerRadius;
         if (this.explodeSlices && this.innerRadius === 0) {
             outerRadius = this.outerRadius * this.value / this.max;
@@ -51,7 +51,7 @@ var PieArc = (function () {
             .outerRadius(outerRadius)
             .cornerRadius(this.cornerRadius);
     };
-    PieArc.prototype.loadAnimation = function () {
+    PieArcComponent.prototype.loadAnimation = function () {
         var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
         var arc = this.calculateArc();
         node
@@ -76,7 +76,7 @@ var PieArc = (function () {
             };
         });
     };
-    PieArc.prototype.updateAnimation = function () {
+    PieArcComponent.prototype.updateAnimation = function () {
         var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
         var arc = this.calculateArc();
         node
@@ -90,21 +90,21 @@ var PieArc = (function () {
             };
         });
     };
-    PieArc.prototype.click = function () {
+    PieArcComponent.prototype.onClick = function () {
         this.clickHandler.emit(this.data);
     };
-    PieArc.decorators = [
+    PieArcComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[pieArc]',
-                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"click()\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
+                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    PieArc.ctorParameters = [
+    PieArcComponent.ctorParameters = [
         { type: core_1.ElementRef, },
     ];
-    PieArc.propDecorators = {
+    PieArcComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],
         'startAngle': [{ type: core_1.Input },],
         'endAngle': [{ type: core_1.Input },],
@@ -120,7 +120,7 @@ var PieArc = (function () {
         'pointerEvents': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return PieArc;
+    return PieArcComponent;
 }());
-exports.PieArc = PieArc;
+exports.PieArcComponent = PieArcComponent;
 //# sourceMappingURL=pie-arc.component.js.map

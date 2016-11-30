@@ -9,9 +9,9 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var grid_layout_helper_1 = require('../common/grid-layout.helper');
-var NumberCard = (function (_super) {
-    __extends(NumberCard, _super);
-    function NumberCard(element, cd, zone) {
+var NumberCardComponent = (function (_super) {
+    __extends(NumberCardComponent, _super);
+    function NumberCardComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -19,16 +19,16 @@ var NumberCard = (function (_super) {
         this.clickHandler = new core_1.EventEmitter();
         this.legendLabelClick = new core_1.EventEmitter();
     }
-    NumberCard.prototype.ngAfterViewInit = function () {
+    NumberCardComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    NumberCard.prototype.ngOnDestroy = function () {
+    NumberCardComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    NumberCard.prototype.ngOnChanges = function () {
+    NumberCardComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    NumberCard.prototype.update = function () {
+    NumberCardComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -43,29 +43,29 @@ var NumberCard = (function (_super) {
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
-    NumberCard.prototype.getDomain = function () {
+    NumberCardComponent.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    NumberCard.prototype.click = function (data) {
+    NumberCardComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    NumberCard.prototype.setColors = function () {
+    NumberCardComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    NumberCard.decorators = [
+    NumberCardComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'number-card',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    NumberCard.ctorParameters = [
+    NumberCardComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    NumberCard.propDecorators = {
+    NumberCardComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'margin': [{ type: core_1.Input },],
@@ -74,7 +74,7 @@ var NumberCard = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return NumberCard;
-}(base_chart_component_1.BaseChart));
-exports.NumberCard = NumberCard;
+    return NumberCardComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.NumberCardComponent = NumberCardComponent;
 //# sourceMappingURL=number-card.component.js.map

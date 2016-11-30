@@ -2,27 +2,27 @@
 var core_1 = require("@angular/core");
 var common_module_1 = require("../common/common.module");
 var bar_component_1 = require("./bar.component");
-exports.Bar = bar_component_1.Bar;
+exports.BarComponent = bar_component_1.BarComponent;
 var bar_horizontal_component_1 = require("./bar-horizontal.component");
-exports.BarHorizontal = bar_horizontal_component_1.BarHorizontal;
+exports.BarHorizontalComponent = bar_horizontal_component_1.BarHorizontalComponent;
 var bar_horizontal_2d_component_1 = require("./bar-horizontal-2d.component");
-exports.BarHorizontal2D = bar_horizontal_2d_component_1.BarHorizontal2D;
+exports.BarHorizontal2DComponent = bar_horizontal_2d_component_1.BarHorizontal2DComponent;
 var bar_horizontal_normalized_component_1 = require("./bar-horizontal-normalized.component");
-exports.BarHorizontalNormalized = bar_horizontal_normalized_component_1.BarHorizontalNormalized;
+exports.BarHorizontalNormalizedComponent = bar_horizontal_normalized_component_1.BarHorizontalNormalizedComponent;
 var bar_horizontal_stacked_component_1 = require("./bar-horizontal-stacked.component");
-exports.BarHorizontalStacked = bar_horizontal_stacked_component_1.BarHorizontalStacked;
+exports.BarHorizontalStackedComponent = bar_horizontal_stacked_component_1.BarHorizontalStackedComponent;
 var bar_vertical_component_1 = require("./bar-vertical.component");
-exports.BarVertical = bar_vertical_component_1.BarVertical;
+exports.BarVerticalComponent = bar_vertical_component_1.BarVerticalComponent;
 var bar_vertical_2d_component_1 = require("./bar-vertical-2d.component");
-exports.BarVertical2D = bar_vertical_2d_component_1.BarVertical2D;
+exports.BarVertical2DComponent = bar_vertical_2d_component_1.BarVertical2DComponent;
 var bar_vertical_normalized_component_1 = require("./bar-vertical-normalized.component");
-exports.BarVerticalNormalized = bar_vertical_normalized_component_1.BarVerticalNormalized;
+exports.BarVerticalNormalizedComponent = bar_vertical_normalized_component_1.BarVerticalNormalizedComponent;
 var bar_vertical_stacked_component_1 = require("./bar-vertical-stacked.component");
-exports.BarVerticalStacked = bar_vertical_stacked_component_1.BarVerticalStacked;
+exports.BarVerticalStackedComponent = bar_vertical_stacked_component_1.BarVerticalStackedComponent;
 var series_horizontal_component_1 = require("./series-horizontal.component");
 exports.SeriesHorizontal = series_horizontal_component_1.SeriesHorizontal;
 var series_vertical_component_1 = require("./series-vertical.component");
-exports.SeriesVertical = series_vertical_component_1.SeriesVertical;
+exports.SeriesVerticalComponent = series_vertical_component_1.SeriesVerticalComponent;
 var BarChartModule = (function () {
     function BarChartModule() {
     }
@@ -30,30 +30,30 @@ var BarChartModule = (function () {
         { type: core_1.NgModule, args: [{
                     imports: [common_module_1.CommonModule],
                     declarations: [
-                        bar_component_1.Bar,
-                        bar_horizontal_component_1.BarHorizontal,
-                        bar_horizontal_2d_component_1.BarHorizontal2D,
-                        bar_horizontal_normalized_component_1.BarHorizontalNormalized,
-                        bar_horizontal_stacked_component_1.BarHorizontalStacked,
-                        bar_vertical_component_1.BarVertical,
-                        bar_vertical_2d_component_1.BarVertical2D,
-                        bar_vertical_normalized_component_1.BarVerticalNormalized,
-                        bar_vertical_stacked_component_1.BarVerticalStacked,
+                        bar_component_1.BarComponent,
+                        bar_horizontal_component_1.BarHorizontalComponent,
+                        bar_horizontal_2d_component_1.BarHorizontal2DComponent,
+                        bar_horizontal_normalized_component_1.BarHorizontalNormalizedComponent,
+                        bar_horizontal_stacked_component_1.BarHorizontalStackedComponent,
+                        bar_vertical_component_1.BarVerticalComponent,
+                        bar_vertical_2d_component_1.BarVertical2DComponent,
+                        bar_vertical_normalized_component_1.BarVerticalNormalizedComponent,
+                        bar_vertical_stacked_component_1.BarVerticalStackedComponent,
                         series_horizontal_component_1.SeriesHorizontal,
-                        series_vertical_component_1.SeriesVertical
+                        series_vertical_component_1.SeriesVerticalComponent
                     ],
                     exports: [
-                        bar_component_1.Bar,
-                        bar_horizontal_component_1.BarHorizontal,
-                        bar_horizontal_2d_component_1.BarHorizontal2D,
-                        bar_horizontal_normalized_component_1.BarHorizontalNormalized,
-                        bar_horizontal_stacked_component_1.BarHorizontalStacked,
-                        bar_vertical_component_1.BarVertical,
-                        bar_vertical_2d_component_1.BarVertical2D,
-                        bar_vertical_normalized_component_1.BarVerticalNormalized,
-                        bar_vertical_stacked_component_1.BarVerticalStacked,
+                        bar_component_1.BarComponent,
+                        bar_horizontal_component_1.BarHorizontalComponent,
+                        bar_horizontal_2d_component_1.BarHorizontal2DComponent,
+                        bar_horizontal_normalized_component_1.BarHorizontalNormalizedComponent,
+                        bar_horizontal_stacked_component_1.BarHorizontalStackedComponent,
+                        bar_vertical_component_1.BarVerticalComponent,
+                        bar_vertical_2d_component_1.BarVertical2DComponent,
+                        bar_vertical_normalized_component_1.BarVerticalNormalizedComponent,
+                        bar_vertical_stacked_component_1.BarVerticalStackedComponent,
                         series_horizontal_component_1.SeriesHorizontal,
-                        series_vertical_component_1.SeriesVertical
+                        series_vertical_component_1.SeriesVerticalComponent
                     ]
                 },] },
     ];

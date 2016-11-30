@@ -32,9 +32,9 @@ import * as import23 from '@angular/core/src/security';
 import * as import24 from '../../node_modules/@angular/common/src/directives/ng_class.ngfactory';
 import * as import25 from '@angular/core/src/change_detection/differs/keyvalue_differs';
 import * as import26 from '@angular/common/src/directives/ng_class';
-export class Wrapper_Gauge {
+export class Wrapper_GaugeComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Gauge;
+  context:import0.GaugeComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -52,7 +52,7 @@ export class Wrapper_Gauge {
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Gauge(p0,p1,p2);
+    this.context = new import0.GaugeComponent(p0,p1,p2);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -172,61 +172,61 @@ export class Wrapper_Gauge {
     if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
-var renderType_Gauge_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Gauge_Host0 extends import2.AppView<any> {
+var renderType_GaugeComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_GaugeComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.Gauge>;
-  _Gauge_0_3:Wrapper_Gauge;
+  compView_0:import2.AppView<import0.GaugeComponent>;
+  _GaugeComponent_0_3:Wrapper_GaugeComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Gauge_Host0,renderType_Gauge_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_GaugeComponent_Host0,renderType_GaugeComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'gauge',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_Gauge0(this.viewUtils,this,0,this._el_0);
-    this._Gauge_0_3 = new Wrapper_Gauge(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
-    this.compView_0.create(this._Gauge_0_3.context);
+    this.compView_0 = new View_GaugeComponent0(this.viewUtils,this,0,this._el_0);
+    this._GaugeComponent_0_3 = new Wrapper_GaugeComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this.compView_0.create(this._GaugeComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._Gauge_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._GaugeComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.Gauge) && (0 === requestNodeIndex))) { return this._Gauge_0_3.context; }
+    if (((token === import0.GaugeComponent) && (0 === requestNodeIndex))) { return this._GaugeComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Gauge_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._GaugeComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Gauge_0_3.context.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._GaugeComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Gauge_0_3.ngOnDestroy();
+    this._GaugeComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const GaugeNgFactory:import7.ComponentFactory<import0.Gauge> = new import7.ComponentFactory<import0.Gauge>('gauge',View_Gauge_Host0,import0.Gauge);
-const styles_Gauge:any[] = ([] as any[]);
-var renderType_Gauge:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_Gauge,{});
-export class View_Gauge0 extends import2.AppView<import0.Gauge> {
+export const GaugeComponentNgFactory:import7.ComponentFactory<import0.GaugeComponent> = new import7.ComponentFactory<import0.GaugeComponent>('gauge',View_GaugeComponent_Host0,import0.GaugeComponent);
+const styles_GaugeComponent:any[] = ([] as any[]);
+var renderType_GaugeComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_GaugeComponent,{});
+export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent> {
   _viewQuery_textEl_0:import10.QueryList<any>;
   _text_0:any;
   _el_1:any;
   /*private*/ _vc_1:import11.ViewContainer;
-  compView_1:import2.AppView<import12.Chart>;
+  compView_1:import2.AppView<import12.ChartComponent>;
   _InjectionService_1_5:import13.InjectionService;
-  _Chart_1_6:import14.Wrapper_Chart;
+  _ChartComponent_1_6:import14.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import15.PieArc>;
-  _PieArc_5_3:import16.Wrapper_PieArc;
+  compView_5:import2.AppView<import15.PieArcComponent>;
+  _PieArcComponent_5_3:import16.Wrapper_PieArcComponent;
   _text_6:any;
   _text_7:any;
   _el_8:any;
-  compView_8:import2.AppView<import15.PieArc>;
-  _PieArc_8_3:import16.Wrapper_PieArc;
+  compView_8:import2.AppView<import15.PieArcComponent>;
+  _PieArcComponent_8_3:import16.Wrapper_PieArcComponent;
   _text_9:any;
   _text_10:any;
   _anchor_11:any;
@@ -258,7 +258,7 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
   /*private*/ _expr_46:any;
   /*private*/ _expr_47:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Gauge0,renderType_Gauge,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_GaugeComponent0,renderType_GaugeComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._arr_43 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
         p0,
@@ -277,39 +277,39 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_1 = new import11.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import14.View_Chart0(this.viewUtils,this,1,this._el_1);
+    this.compView_1 = new import14.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
     this._InjectionService_1_5 = new import13.InjectionService(this.parentView.injectorGet(import18.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import19.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._Chart_1_6 = new import14.Wrapper_Chart(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._ChartComponent_1_6 = new import14.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','gauge chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray4(4,'class','background-arc','pieArc',''),(null as any));
-    this.compView_5 = new import16.View_PieArc0(this.viewUtils,this,5,this._el_5);
-    this._PieArc_5_3 = new import16.Wrapper_PieArc(new import8.ElementRef(this._el_5));
+    this.compView_5 = new import16.View_PieArcComponent0(this.viewUtils,this,5,this._el_5);
+    this._PieArcComponent_5_3 = new import16.Wrapper_PieArcComponent(new import8.ElementRef(this._el_5));
     this._text_6 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_5.create(this._PieArc_5_3.context);
-    this._text_7 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this.compView_5.create(this._PieArcComponent_5_3.context);
+    this._text_7 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_8 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'pieArc',''),(null as any));
-    this.compView_8 = new import16.View_PieArc0(this.viewUtils,this,8,this._el_8);
-    this._PieArc_8_3 = new import16.Wrapper_PieArc(new import8.ElementRef(this._el_8));
+    this.compView_8 = new import16.View_PieArcComponent0(this.viewUtils,this,8,this._el_8);
+    this._PieArcComponent_8_3 = new import16.Wrapper_PieArcComponent(new import8.ElementRef(this._el_8));
     this._text_9 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_8.create(this._PieArc_8_3.context);
-    this._text_10 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this.compView_8.create(this._PieArcComponent_8_3.context);
+    this._text_10 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_11 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_11 = new import11.ViewContainer(11,3,this,this._anchor_11);
     this._TemplateRef_11_5 = new import20.TemplateRef_(this,11,this._anchor_11);
     this._NgFor_11_6 = new import17.Wrapper_NgFor(this._vc_11.vcRef,this._TemplateRef_11_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
-    this._text_12 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_12 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_13 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_13 = new import11.ViewContainer(13,3,this,this._anchor_13);
     this._TemplateRef_13_5 = new import20.TemplateRef_(this,13,this._anchor_13);
     this._NgFor_13_6 = new import17.Wrapper_NgFor(this._vc_13.vcRef,this._TemplateRef_13_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
-    this._text_14 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_14 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_15 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_15 = new import11.ViewContainer(15,3,this,this._anchor_15);
     this._TemplateRef_15_5 = new import20.TemplateRef_(this,15,this._anchor_15);
     this._NgFor_15_6 = new import17.Wrapper_NgFor(this._vc_15.vcRef,this._TemplateRef_15_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
-    this._text_16 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_16 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_17 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'transform','rotate(120)'),(null as any));
     this._text_18 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._el_19 = import3.createRenderElement(this.renderer,this._el_17,':svg:text',new import3.InlineArray2(2,'alignment-baseline','central'),(null as any));
@@ -317,12 +317,12 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
     this._text_21 = this.renderer.createText(this._el_17,'\n        ',(null as any));
     this._text_22 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_23 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_1.create(this._Chart_1_6.context);
+    this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_24 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_8,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_8));
-    this._PieArc_8_3.subscribe(this,this.eventHandler(this.handleEvent_8),true);
+    this._PieArcComponent_8_3.subscribe(this,this.eventHandler(this.handleEvent_8),true);
     this._viewQuery_textEl_0.reset([new import8.ElementRef(this._el_19)]);
     this.context.textEl = this._viewQuery_textEl_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -360,8 +360,8 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import15.PieArc) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._PieArc_5_3.context; }
-    if (((token === import15.PieArc) && ((8 <= requestNodeIndex) && (requestNodeIndex <= 9)))) { return this._PieArc_8_3.context; }
+    if (((token === import15.PieArcComponent) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._PieArcComponent_5_3.context; }
+    if (((token === import15.PieArcComponent) && ((8 <= requestNodeIndex) && (requestNodeIndex <= 9)))) { return this._PieArcComponent_8_3.context; }
     if (((token === import20.TemplateRef) && (11 === requestNodeIndex))) { return this._TemplateRef_11_5; }
     if (((token === import22.NgFor) && (11 === requestNodeIndex))) { return this._NgFor_11_6.context; }
     if (((token === import20.TemplateRef) && (13 === requestNodeIndex))) { return this._TemplateRef_13_5; }
@@ -369,53 +369,53 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
     if (((token === import20.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
     if (((token === import22.NgFor) && (15 === requestNodeIndex))) { return this._NgFor_15_6.context; }
     if (((token === import13.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 23)))) { return this._InjectionService_1_5; }
-    if (((token === import12.Chart) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 23)))) { return this._Chart_1_6.context; }
+    if (((token === import12.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 23)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this._arr_43(this.context.width,this.context.height);
-    this._Chart_1_6.check_view(currVal_1_0_0,throwOnChange,false);
+    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.legend;
-    this._Chart_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
+    this._ChartComponent_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
     const currVal_1_0_2:any = this.context.valueDomain;
-    this._Chart_1_6.check_data(currVal_1_0_2,throwOnChange,false);
+    this._ChartComponent_1_6.check_data(currVal_1_0_2,throwOnChange,false);
     const currVal_1_0_3:any = this.context.colorScale;
-    this._Chart_1_6.check_legendData(currVal_1_0_3,throwOnChange,false);
-    if (this._Chart_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    this._ChartComponent_1_6.check_legendData(currVal_1_0_3,throwOnChange,false);
+    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_5_0_0:any = 0;
-    this._PieArc_5_3.check_startAngle(currVal_5_0_0,throwOnChange,false);
+    this._PieArcComponent_5_3.check_startAngle(currVal_5_0_0,throwOnChange,false);
     const currVal_5_0_1:any = this.context.backgroundArc.endAngle;
-    this._PieArc_5_3.check_endAngle(currVal_5_0_1,throwOnChange,false);
+    this._PieArcComponent_5_3.check_endAngle(currVal_5_0_1,throwOnChange,false);
     const currVal_5_0_2:any = this.context.backgroundArc.innerRadius;
-    this._PieArc_5_3.check_innerRadius(currVal_5_0_2,throwOnChange,false);
+    this._PieArcComponent_5_3.check_innerRadius(currVal_5_0_2,throwOnChange,false);
     const currVal_5_0_3:any = this.context.backgroundArc.outerRadius;
-    this._PieArc_5_3.check_outerRadius(currVal_5_0_3,throwOnChange,false);
+    this._PieArcComponent_5_3.check_outerRadius(currVal_5_0_3,throwOnChange,false);
     const currVal_5_0_4:any = this.context.backgroundArc.cornerRadius;
-    this._PieArc_5_3.check_cornerRadius(currVal_5_0_4,throwOnChange,false);
+    this._PieArcComponent_5_3.check_cornerRadius(currVal_5_0_4,throwOnChange,false);
     const currVal_5_0_5:any = this.context.backgroundArc.data;
-    this._PieArc_5_3.check_data(currVal_5_0_5,throwOnChange,false);
+    this._PieArcComponent_5_3.check_data(currVal_5_0_5,throwOnChange,false);
     const currVal_5_0_6:any = false;
-    this._PieArc_5_3.check_animate(currVal_5_0_6,throwOnChange,false);
+    this._PieArcComponent_5_3.check_animate(currVal_5_0_6,throwOnChange,false);
     const currVal_5_0_7:any = false;
-    this._PieArc_5_3.check_pointerEvents(currVal_5_0_7,throwOnChange,false);
-    if (this._PieArc_5_3.ngDoCheck(this,this._el_5,throwOnChange)) { this.compView_5.markAsCheckOnce(); }
+    this._PieArcComponent_5_3.check_pointerEvents(currVal_5_0_7,throwOnChange,false);
+    if (this._PieArcComponent_5_3.ngDoCheck(this,this._el_5,throwOnChange)) { this.compView_5.markAsCheckOnce(); }
     const currVal_8_0_0:any = this.context.colors(this.context.value);
-    this._PieArc_8_3.check_fill(currVal_8_0_0,throwOnChange,false);
+    this._PieArcComponent_8_3.check_fill(currVal_8_0_0,throwOnChange,false);
     const currVal_8_0_1:any = 0;
-    this._PieArc_8_3.check_startAngle(currVal_8_0_1,throwOnChange,false);
+    this._PieArcComponent_8_3.check_startAngle(currVal_8_0_1,throwOnChange,false);
     const currVal_8_0_2:any = this.context.valueArc.endAngle;
-    this._PieArc_8_3.check_endAngle(currVal_8_0_2,throwOnChange,false);
+    this._PieArcComponent_8_3.check_endAngle(currVal_8_0_2,throwOnChange,false);
     const currVal_8_0_3:any = this.context.valueArc.innerRadius;
-    this._PieArc_8_3.check_innerRadius(currVal_8_0_3,throwOnChange,false);
+    this._PieArcComponent_8_3.check_innerRadius(currVal_8_0_3,throwOnChange,false);
     const currVal_8_0_4:any = this.context.valueArc.outerRadius;
-    this._PieArc_8_3.check_outerRadius(currVal_8_0_4,throwOnChange,false);
+    this._PieArcComponent_8_3.check_outerRadius(currVal_8_0_4,throwOnChange,false);
     const currVal_8_0_5:any = this.context.valueArc.cornerRadius;
-    this._PieArc_8_3.check_cornerRadius(currVal_8_0_5,throwOnChange,false);
+    this._PieArcComponent_8_3.check_cornerRadius(currVal_8_0_5,throwOnChange,false);
     const currVal_8_0_6:any = this.context.valueArc.data;
-    this._PieArc_8_3.check_data(currVal_8_0_6,throwOnChange,false);
+    this._PieArcComponent_8_3.check_data(currVal_8_0_6,throwOnChange,false);
     const currVal_8_0_7:any = true;
-    this._PieArc_8_3.check_animate(currVal_8_0_7,throwOnChange,false);
-    if (this._PieArc_8_3.ngDoCheck(this,this._el_8,throwOnChange)) { this.compView_8.markAsCheckOnce(); }
+    this._PieArcComponent_8_3.check_animate(currVal_8_0_7,throwOnChange,false);
+    if (this._PieArcComponent_8_3.ngDoCheck(this,this._el_8,throwOnChange)) { this.compView_8.markAsCheckOnce(); }
     const currVal_11_0_0:any = this.context.ticks.big;
     this._NgFor_11_6.check_ngForOf(currVal_11_0_0,throwOnChange,false);
     this._NgFor_11_6.ngDoCheck(this,this._anchor_11,throwOnChange);
@@ -461,9 +461,9 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
     this.compView_1.destroy();
     this.compView_5.destroy();
     this.compView_8.destroy();
-    this._PieArc_5_3.ngOnDestroy();
-    this._PieArc_8_3.ngOnDestroy();
-    this._Chart_1_6.ngOnDestroy();
+    this._PieArcComponent_5_3.ngOnDestroy();
+    this._PieArcComponent_8_3.ngOnDestroy();
+    this._ChartComponent_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -473,9 +473,9 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
     }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 11)) { return new View_Gauge1(this.viewUtils,this,11,this._anchor_11,this._vc_11); }
-    if ((nodeIndex == 13)) { return new View_Gauge2(this.viewUtils,this,13,this._anchor_13,this._vc_13); }
-    if ((nodeIndex == 15)) { return new View_Gauge3(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
+    if ((nodeIndex == 11)) { return new View_GaugeComponent1(this.viewUtils,this,11,this._anchor_11,this._vc_11); }
+    if ((nodeIndex == 13)) { return new View_GaugeComponent2(this.viewUtils,this,13,this._anchor_13,this._vc_13); }
+    if ((nodeIndex == 15)) { return new View_GaugeComponent3(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
     return (null as any);
   }
   handleEvent_1(eventName:string,$event:any):boolean {
@@ -491,13 +491,13 @@ export class View_Gauge0 extends import2.AppView<import0.Gauge> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.context.click($event)) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_Gauge1 extends import2.AppView<any> {
+class View_GaugeComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -505,7 +505,7 @@ class View_Gauge1 extends import2.AppView<any> {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
-    super(View_Gauge1,renderType_Gauge,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_GaugeComponent1,renderType_GaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
   }
@@ -539,7 +539,7 @@ class View_Gauge1 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_Gauge2 extends import2.AppView<any> {
+class View_GaugeComponent2 extends import2.AppView<any> {
   _el_0:any;
   _NgClass_0_3:import24.Wrapper_NgClass;
   _text_1:any;
@@ -551,7 +551,7 @@ class View_Gauge2 extends import2.AppView<any> {
   /*private*/ _expr_8:any;
   /*private*/ _expr_9:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
-    super(View_Gauge2,renderType_Gauge,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_GaugeComponent2,renderType_GaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._map_6 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {highlighted: p0};
     });
@@ -606,7 +606,7 @@ class View_Gauge2 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_Gauge3 extends import2.AppView<any> {
+class View_GaugeComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -614,7 +614,7 @@ class View_Gauge3 extends import2.AppView<any> {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
-    super(View_Gauge3,renderType_Gauge,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_GaugeComponent3,renderType_GaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
   }

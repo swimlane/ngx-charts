@@ -2,8 +2,8 @@
 var core_1 = require('@angular/core');
 var id_1 = require('../utils/id');
 var d3_1 = require('../d3');
-var Bar = (function () {
-    function Bar(element) {
+var BarComponent = (function () {
+    function BarComponent(element) {
         this.roundEdges = true;
         this.gradient = false;
         this.offset = 0;
@@ -11,13 +11,13 @@ var Bar = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    Bar.prototype.ngOnInit = function () {
+    BarComponent.prototype.ngOnInit = function () {
         var pageUrl = window.location.href;
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         this.startOpacity = this.getStartOpacity();
     };
-    Bar.prototype.ngOnChanges = function () {
+    BarComponent.prototype.ngOnChanges = function () {
         // ngOnInit gets called after ngOnChanges, so we need to do this here
         if (!this.initialized) {
             this.loadAnimation();
@@ -27,20 +27,20 @@ var Bar = (function () {
             this.update();
         }
     };
-    Bar.prototype.update = function () {
+    BarComponent.prototype.update = function () {
         this.animateToCurrentForm();
     };
-    Bar.prototype.loadAnimation = function () {
+    BarComponent.prototype.loadAnimation = function () {
         this.path = this.getStartingPath();
         setTimeout(this.update.bind(this), 100);
     };
-    Bar.prototype.animateToCurrentForm = function () {
+    BarComponent.prototype.animateToCurrentForm = function () {
         var node = d3_1.default.select(this.element).select('.bar');
         var path = this.getPath();
         node.transition().duration(750)
             .attr('d', path);
     };
-    Bar.prototype.getStartingPath = function () {
+    BarComponent.prototype.getStartingPath = function () {
         var radius = this.getRadius();
         var path;
         if (this.roundEdges) {
@@ -63,7 +63,7 @@ var Bar = (function () {
         }
         return path;
     };
-    Bar.prototype.getPath = function () {
+    BarComponent.prototype.getPath = function () {
         var radius = this.getRadius();
         var path;
         if (this.roundEdges) {
@@ -81,14 +81,14 @@ var Bar = (function () {
         }
         return path;
     };
-    Bar.prototype.getRadius = function () {
+    BarComponent.prototype.getRadius = function () {
         var radius = 0;
         if (this.roundEdges && this.height > radius && this.width > radius) {
             radius = 5;
         }
         return radius;
     };
-    Bar.prototype.getStartOpacity = function () {
+    BarComponent.prototype.getStartOpacity = function () {
         if (this.roundEdges) {
             return 0.2;
         }
@@ -96,7 +96,7 @@ var Bar = (function () {
             return 0.5;
         }
     };
-    Bar.prototype.roundedRect = function (x, y, w, h, r, tl, tr, bl, br) {
+    BarComponent.prototype.roundedRect = function (x, y, w, h, r, tl, tr, bl, br) {
         var retval;
         retval = "M" + (x + r) + "," + y;
         retval += "h" + (w - 2 * r);
@@ -134,10 +134,10 @@ var Bar = (function () {
         retval += "z";
         return retval;
     };
-    Bar.prototype.click = function () {
+    BarComponent.prototype.click = function () {
         this.clickHandler.emit(this.data);
     };
-    Bar.decorators = [
+    BarComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[bar]',
                     template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.cursor]=\"'pointer'\"\n      (click)=\"click()\"\n    />\n  ",
@@ -145,10 +145,10 @@ var Bar = (function () {
                 },] },
     ];
     /** @nocollapse */
-    Bar.ctorParameters = [
+    BarComponent.ctorParameters = [
         { type: core_1.ElementRef, },
     ];
-    Bar.propDecorators = {
+    BarComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],
         'data': [{ type: core_1.Input },],
         'width': [{ type: core_1.Input },],
@@ -161,7 +161,7 @@ var Bar = (function () {
         'offset': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return Bar;
+    return BarComponent;
 }());
-exports.Bar = Bar;
+exports.BarComponent = BarComponent;
 //# sourceMappingURL=bar.component.js.map

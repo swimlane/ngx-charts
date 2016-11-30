@@ -1,5 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
-export declare class Circle implements OnChanges {
+export declare class CircleComponent implements OnChanges {
     cx: any;
     cy: any;
     r: any;
@@ -11,5 +11,4 @@ export declare class Circle implements OnChanges {
     pointerEvents: any;
     clickHandler: EventEmitter<{}>;
     ngOnChanges(): void;
-    click(): void;
 }

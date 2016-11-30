@@ -20,9 +20,9 @@ import * as import11 from '@angular/core/src/animation/animation_styles';
 import * as import12 from '@angular/core/src/animation/animation_style_util';
 import * as import13 from '@angular/core/src/animation/animation_keyframe';
 import * as import14 from '@angular/core/src/animation/animation_player';
-export class Wrapper_Line {
+export class Wrapper_LineComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Line;
+  context:import0.LineComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -32,7 +32,7 @@ export class Wrapper_Line {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Line(p0);
+    this.context = new import0.LineComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -86,54 +86,54 @@ export class Wrapper_Line {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_Line_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Line_Host0 extends import2.AppView<any> {
+var renderType_LineComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_LineComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.Line>;
-  _Line_0_3:Wrapper_Line;
+  compView_0:import2.AppView<import0.LineComponent>;
+  _LineComponent_0_3:Wrapper_LineComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Line_Host0,renderType_Line_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_LineComponent_Host0,renderType_LineComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'line',''),rootSelector,(null as any));
-    this.compView_0 = new View_Line0(this.viewUtils,this,0,this._el_0);
-    this._Line_0_3 = new Wrapper_Line(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._Line_0_3.context);
+    this.compView_0 = new View_LineComponent0(this.viewUtils,this,0,this._el_0);
+    this._LineComponent_0_3 = new Wrapper_LineComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._LineComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._Line_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._LineComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.Line) && (0 === requestNodeIndex))) { return this._Line_0_3.context; }
+    if (((token === import0.LineComponent) && (0 === requestNodeIndex))) { return this._LineComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Line_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._LineComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Line_0_3.ngOnDestroy();
+    this._LineComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const LineNgFactory:import7.ComponentFactory<import0.Line> = new import7.ComponentFactory<import0.Line>('g[line]',View_Line_Host0,import0.Line);
-const styles_Line:any[] = ([] as any[]);
-var Line_animationState_states:any = {
+export const LineComponentNgFactory:import7.ComponentFactory<import0.LineComponent> = new import7.ComponentFactory<import0.LineComponent>('g[line]',View_LineComponent_Host0,import0.LineComponent);
+const styles_LineComponent:any[] = ([] as any[]);
+var LineComponent_animationState_states:any = {
   '*': {},
   void: {}
 }
 ;
-function Line_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import9.AnimationTransition {
+function LineComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import9.AnimationTransition {
   var previousPlayers:any = view.animationContext.getAnimationPlayers(element,'animationState',(nextState == 'void'));
   var collectedStyles:any = {};
   var player:any = (null as any);
   var totalTime:any = 0;
-  var defaultStateStyles:any = Line_animationState_states['*'];
-  var startStateStyles:any = Line_animationState_states[currentState];
+  var defaultStateStyles:any = LineComponent_animationState_states['*'];
+  var startStateStyles:any = LineComponent_animationState_states[currentState];
   if ((startStateStyles == (null as any))) { (startStateStyles = defaultStateStyles); }
-  var endStateStyles:any = Line_animationState_states[nextState];
+  var endStateStyles:any = LineComponent_animationState_states[nextState];
   if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
   if (((player == (null as any)) && ((currentState == 'void') && true))) {
       player = new import10.AnimationSequencePlayer([view.renderer.animate(element,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[
@@ -161,8 +161,8 @@ function Line_animationState_factory(view:import2.AppView<any>,element:any,curre
   view.animationContext.queueAnimation(element,'animationState',player);
   return new import9.AnimationTransition(player,currentState,nextState,totalTime);
 }
-var renderType_Line:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_Line,{animationState: Line_animationState_factory});
-export class View_Line0 extends import2.AppView<import0.Line> {
+var renderType_LineComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LineComponent,{animationState: LineComponent_animationState_factory});
+export class View_LineComponent0 extends import2.AppView<import0.LineComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -170,7 +170,7 @@ export class View_Line0 extends import2.AppView<import0.Line> {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Line0,renderType_Line,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_LineComponent0,renderType_LineComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;

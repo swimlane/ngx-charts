@@ -1,5 +1,5 @@
 import { EventEmitter, OnChanges, ElementRef, AfterViewInit } from '@angular/core';
-export declare class XAxisTicks implements OnChanges, AfterViewInit {
+export declare class XAxisTicksComponent implements OnChanges, AfterViewInit {
     scale: any;
     orient: any;
     tickArguments: number[];

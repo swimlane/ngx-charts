@@ -1,5 +1,5 @@
 import { OnChanges } from '@angular/core';
-export declare class GridPanelSeries implements OnChanges {
+export declare class GridPanelSeriesComponent implements OnChanges {
     gridPanels: any[];
     data: any;
     dims: any;
@@ -8,5 +8,5 @@ export declare class GridPanelSeries implements OnChanges {
     orient: any;
     ngOnChanges(): void;
     update(): void;
-    getGridPanels(): any;
+    getGridPanels(): any[];
 }

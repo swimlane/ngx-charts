@@ -21,9 +21,9 @@ import * as import12 from '@angular/common/src/directives/ng_if';
 import * as import13 from '@angular/core/src/security';
 import * as import14 from '../../../src/common/svg-linear-gradient.component';
 import * as import15 from '../common/svg-linear-gradient.component.ngfactory';
-export class Wrapper_Bar {
+export class Wrapper_BarComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Bar;
+  context:import0.BarComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -40,7 +40,7 @@ export class Wrapper_Bar {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Bar(p0);
+    this.context = new import0.BarComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -160,42 +160,42 @@ export class Wrapper_Bar {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_Bar_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Bar_Host0 extends import2.AppView<any> {
+var renderType_BarComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_BarComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.Bar>;
-  _Bar_0_3:Wrapper_Bar;
+  compView_0:import2.AppView<import0.BarComponent>;
+  _BarComponent_0_3:Wrapper_BarComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Bar_Host0,renderType_Bar_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_BarComponent_Host0,renderType_BarComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'bar',''),rootSelector,(null as any));
-    this.compView_0 = new View_Bar0(this.viewUtils,this,0,this._el_0);
-    this._Bar_0_3 = new Wrapper_Bar(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._Bar_0_3.context);
+    this.compView_0 = new View_BarComponent0(this.viewUtils,this,0,this._el_0);
+    this._BarComponent_0_3 = new Wrapper_BarComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._BarComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._Bar_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._BarComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.Bar) && (0 === requestNodeIndex))) { return this._Bar_0_3.context; }
+    if (((token === import0.BarComponent) && (0 === requestNodeIndex))) { return this._BarComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Bar_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._BarComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Bar_0_3.ngOnDestroy();
+    this._BarComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const BarNgFactory:import7.ComponentFactory<import0.Bar> = new import7.ComponentFactory<import0.Bar>('g[bar]',View_Bar_Host0,import0.Bar);
-const styles_Bar:any[] = ([] as any[]);
-var renderType_Bar:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_Bar,{});
-export class View_Bar0 extends import2.AppView<import0.Bar> {
+export const BarComponentNgFactory:import7.ComponentFactory<import0.BarComponent> = new import7.ComponentFactory<import0.BarComponent>('g[bar]',View_BarComponent_Host0,import0.BarComponent);
+const styles_BarComponent:any[] = ([] as any[]);
+var renderType_BarComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarComponent,{});
+export class View_BarComponent0 extends import2.AppView<import0.BarComponent> {
   _text_0:any;
   _anchor_1:any;
   /*private*/ _vc_1:import9.ViewContainer;
@@ -208,7 +208,7 @@ export class View_Bar0 extends import2.AppView<import0.Bar> {
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Bar0,renderType_Bar,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_BarComponent0,renderType_BarComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
@@ -264,7 +264,7 @@ export class View_Bar0 extends import2.AppView<import0.Bar> {
     this._vc_1.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 1)) { return new View_Bar1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
+    if ((nodeIndex == 1)) { return new View_BarComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
     return (null as any);
   }
   handleEvent_3(eventName:string,$event:any):boolean {
@@ -277,23 +277,23 @@ export class View_Bar0 extends import2.AppView<import0.Bar> {
     return result;
   }
 }
-class View_Bar1 extends import2.AppView<any> {
+class View_BarComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import14.SvgLinearGradient>;
-  _SvgLinearGradient_2_3:import15.Wrapper_SvgLinearGradient;
+  compView_2:import2.AppView<import14.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_2_3:import15.Wrapper_SvgLinearGradientComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_Bar1,renderType_Bar,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_BarComponent1,renderType_BarComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'svgLinearGradient',''),(null as any));
-    this.compView_2 = new import15.View_SvgLinearGradient0(this.viewUtils,this,2,this._el_2);
-    this._SvgLinearGradient_2_3 = new import15.Wrapper_SvgLinearGradient();
-    this.compView_2.create(this._SvgLinearGradient_2_3.context);
+    this.compView_2 = new import15.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
+    this._SvgLinearGradientComponent_2_3 = new import15.Wrapper_SvgLinearGradientComponent();
+    this.compView_2.create(this._SvgLinearGradientComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -305,19 +305,19 @@ class View_Bar1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.SvgLinearGradient) && (2 === requestNodeIndex))) { return this._SvgLinearGradient_2_3.context; }
+    if (((token === import14.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = this.parentView.context.orientation;
-    this._SvgLinearGradient_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = this.parentView.context.fill;
-    this._SvgLinearGradient_2_3.check_color(currVal_2_0_1,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_color(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.context.gradientId;
-    this._SvgLinearGradient_2_3.check_name(currVal_2_0_2,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_name(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.startOpacity;
-    this._SvgLinearGradient_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
-    if (this._SvgLinearGradient_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._SvgLinearGradientComponent_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
+    if (this._SvgLinearGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
   }
   destroyInternal():void {

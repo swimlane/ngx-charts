@@ -1,20 +1,10 @@
 
 import { EventEmitter, OnChanges, OnDestroy, NgZone, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-import { BaseChart } from '../common/base-chart.component';
-export declare class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+import { BaseChartComponent } from '../common/base-chart.component';
+export declare class BarHorizontalComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
     private element;
     private cd;
-    dims: ViewDimensions;
-    yScale: any;
-    xScale: any;
-    xDomain: any;
-    yDomain: any;
-    transform: string;
-    colors: Function;
-    margin: number[];
-    xAxisHeight: number;
-    yAxisWidth: number;
     view: any;
     results: any;
     scheme: any;
@@ -30,6 +20,16 @@ export declare class BarHorizontal extends BaseChart implements OnChanges, OnDes
     showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
     legendLabelClick: EventEmitter<any>;
+    dims: ViewDimensions;
+    yScale: any;
+    xScale: any;
+    xDomain: any;
+    yDomain: any;
+    transform: string;
+    colors: Function;
+    margin: number[];
+    xAxisHeight: number;
+    yAxisWidth: number;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
@@ -40,7 +40,7 @@ export declare class BarHorizontal extends BaseChart implements OnChanges, OnDes
     getXDomain(): number[];
     getYDomain(): any;
     yAxisTickFormatting(): any;
-    click(data: any): void;
+    onClick(data: any): void;
     setColors(): void;
     updateYAxisWidth({width}: {
         width: any;

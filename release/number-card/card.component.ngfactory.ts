@@ -17,9 +17,9 @@ import * as import8 from '@angular/core/src/linker/element_ref';
 import * as import9 from '@angular/core/src/zone/ng_zone';
 import * as import10 from '@angular/core/src/linker/query_list';
 import * as import11 from '@angular/core/src/security';
-export class Wrapper_Card {
+export class Wrapper_CardComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Card;
+  context:import0.CardComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -33,7 +33,7 @@ export class Wrapper_Card {
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Card(p0,p1,p2);
+    this.context = new import0.CardComponent(p0,p1,p2);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -123,42 +123,42 @@ export class Wrapper_Card {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_Card_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Card_Host0 extends import2.AppView<any> {
+var renderType_CardComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_CardComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.Card>;
-  _Card_0_3:Wrapper_Card;
+  compView_0:import2.AppView<import0.CardComponent>;
+  _CardComponent_0_3:Wrapper_CardComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Card_Host0,renderType_Card_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CardComponent_Host0,renderType_CardComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'card',''),rootSelector,(null as any));
-    this.compView_0 = new View_Card0(this.viewUtils,this,0,this._el_0);
-    this._Card_0_3 = new Wrapper_Card(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
-    this.compView_0.create(this._Card_0_3.context);
+    this.compView_0 = new View_CardComponent0(this.viewUtils,this,0,this._el_0);
+    this._CardComponent_0_3 = new Wrapper_CardComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this.compView_0.create(this._CardComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._Card_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CardComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.Card) && (0 === requestNodeIndex))) { return this._Card_0_3.context; }
+    if (((token === import0.CardComponent) && (0 === requestNodeIndex))) { return this._CardComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Card_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._CardComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Card_0_3.ngOnDestroy();
+    this._CardComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const CardNgFactory:import7.ComponentFactory<import0.Card> = new import7.ComponentFactory<import0.Card>('g[card]',View_Card_Host0,import0.Card);
-const styles_Card:any[] = ([] as any[]);
-var renderType_Card:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_Card,{});
-export class View_Card0 extends import2.AppView<import0.Card> {
+export const CardComponentNgFactory:import7.ComponentFactory<import0.CardComponent> = new import7.ComponentFactory<import0.CardComponent>('g[card]',View_CardComponent_Host0,import0.CardComponent);
+const styles_CardComponent:any[] = ([] as any[]);
+var renderType_CardComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CardComponent,{});
+export class View_CardComponent0 extends import2.AppView<import0.CardComponent> {
   _viewQuery_textEl_0:import10.QueryList<any>;
   _text_0:any;
   _el_1:any;
@@ -194,7 +194,7 @@ export class View_Card0 extends import2.AppView<import0.Card> {
   /*private*/ _expr_32:any;
   /*private*/ _expr_33:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Card0,renderType_Card,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_CardComponent0,renderType_CardComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_19 = import1.UNINITIALIZED;
     this._expr_20 = import1.UNINITIALIZED;
     this._expr_21 = import1.UNINITIALIZED;

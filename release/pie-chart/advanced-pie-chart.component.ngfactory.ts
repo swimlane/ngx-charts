@@ -28,9 +28,9 @@ import * as import19 from '@angular/core/src/linker/template_ref';
 import * as import20 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import21 from '@angular/common/src/directives/ng_for';
 import * as import22 from '@angular/core/src/security';
-export class Wrapper_AdvancedPieChart {
+export class Wrapper_AdvancedPieChartComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.AdvancedPieChart;
+  context:import0.AdvancedPieChartComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -44,7 +44,7 @@ export class Wrapper_AdvancedPieChart {
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.AdvancedPieChart(p0,p1,p2);
+    this.context = new import0.AdvancedPieChartComponent(p0,p1,p2);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -128,43 +128,43 @@ export class Wrapper_AdvancedPieChart {
     if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
-var renderType_AdvancedPieChart_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_AdvancedPieChart_Host0 extends import2.AppView<any> {
+var renderType_AdvancedPieChartComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_AdvancedPieChartComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.AdvancedPieChart>;
-  _AdvancedPieChart_0_3:Wrapper_AdvancedPieChart;
+  compView_0:import2.AppView<import0.AdvancedPieChartComponent>;
+  _AdvancedPieChartComponent_0_3:Wrapper_AdvancedPieChartComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AdvancedPieChart_Host0,renderType_AdvancedPieChart_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_AdvancedPieChartComponent_Host0,renderType_AdvancedPieChartComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'advanced-pie-chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_AdvancedPieChart0(this.viewUtils,this,0,this._el_0);
-    this._AdvancedPieChart_0_3 = new Wrapper_AdvancedPieChart(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
-    this.compView_0.create(this._AdvancedPieChart_0_3.context);
+    this.compView_0 = new View_AdvancedPieChartComponent0(this.viewUtils,this,0,this._el_0);
+    this._AdvancedPieChartComponent_0_3 = new Wrapper_AdvancedPieChartComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this.compView_0.create(this._AdvancedPieChartComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AdvancedPieChart_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AdvancedPieChartComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.AdvancedPieChart) && (0 === requestNodeIndex))) { return this._AdvancedPieChart_0_3.context; }
+    if (((token === import0.AdvancedPieChartComponent) && (0 === requestNodeIndex))) { return this._AdvancedPieChartComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._AdvancedPieChart_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._AdvancedPieChartComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._AdvancedPieChart_0_3.context.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._AdvancedPieChartComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._AdvancedPieChart_0_3.ngOnDestroy();
+    this._AdvancedPieChartComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const AdvancedPieChartNgFactory:import7.ComponentFactory<import0.AdvancedPieChart> = new import7.ComponentFactory<import0.AdvancedPieChart>('advanced-pie-chart',View_AdvancedPieChart_Host0,import0.AdvancedPieChart);
-const styles_AdvancedPieChart:any[] = ([] as any[]);
-var renderType_AdvancedPieChart:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AdvancedPieChart,{});
-export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieChart> {
+export const AdvancedPieChartComponentNgFactory:import7.ComponentFactory<import0.AdvancedPieChartComponent> = new import7.ComponentFactory<import0.AdvancedPieChartComponent>('advanced-pie-chart',View_AdvancedPieChartComponent_Host0,import0.AdvancedPieChartComponent);
+const styles_AdvancedPieChartComponent:any[] = ([] as any[]);
+var renderType_AdvancedPieChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AdvancedPieChartComponent,{});
+export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.AdvancedPieChartComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -172,15 +172,15 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
   _text_4:any;
   _el_5:any;
   /*private*/ _vc_5:import10.ViewContainer;
-  compView_5:import2.AppView<import11.Chart>;
+  compView_5:import2.AppView<import11.ChartComponent>;
   _InjectionService_5_5:import12.InjectionService;
-  _Chart_5_6:import13.Wrapper_Chart;
+  _ChartComponent_5_6:import13.Wrapper_ChartComponent;
   _text_6:any;
   _el_7:any;
   _text_8:any;
   _el_9:any;
-  compView_9:import2.AppView<import14.PieSeries>;
-  _PieSeries_9_3:import15.Wrapper_PieSeries;
+  compView_9:import2.AppView<import14.PieSeriesComponent>;
+  _PieSeriesComponent_9_3:import15.Wrapper_PieSeriesComponent;
   _text_10:any;
   _text_11:any;
   _text_12:any;
@@ -220,9 +220,8 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
   /*private*/ _expr_52:any;
   /*private*/ _expr_53:any;
   /*private*/ _expr_54:any;
-  /*private*/ _expr_55:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AdvancedPieChart0,renderType_AdvancedPieChart,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_AdvancedPieChartComponent0,renderType_AdvancedPieChartComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_45 = import1.UNINITIALIZED;
     this._expr_46 = import1.UNINITIALIZED;
     this._expr_47 = import1.UNINITIALIZED;
@@ -239,7 +238,6 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this._expr_52 = import1.UNINITIALIZED;
     this._expr_53 = import1.UNINITIALIZED;
     this._expr_54 = import1.UNINITIALIZED;
-    this._expr_55 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -250,20 +248,20 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_5 = new import10.ViewContainer(5,3,this,this._el_5);
-    this.compView_5 = new import13.View_Chart0(this.viewUtils,this,5,this._el_5);
+    this.compView_5 = new import13.View_ChartComponent0(this.viewUtils,this,5,this._el_5);
     this._InjectionService_5_5 = new import12.InjectionService(this.parentView.injectorGet(import17.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import18.ComponentFactoryResolver,this.parentIndex),this.injector(5));
-    this._Chart_5_6 = new import13.Wrapper_Chart(this._vc_5.vcRef,this._InjectionService_5_5);
+    this._ChartComponent_5_6 = new import13.Wrapper_ChartComponent(this._vc_5.vcRef,this._InjectionService_5_5);
     this._text_6 = this.renderer.createText((null as any),'\n          ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie chart'),(null as any));
     this._text_8 = this.renderer.createText(this._el_7,'\n            ',(null as any));
     this._el_9 = import3.createRenderElement(this.renderer,this._el_7,':svg:g',new import3.InlineArray2(2,'pieSeries',''),(null as any));
-    this.compView_9 = new import15.View_PieSeries0(this.viewUtils,this,9,this._el_9);
-    this._PieSeries_9_3 = new import15.Wrapper_PieSeries();
+    this.compView_9 = new import15.View_PieSeriesComponent0(this.viewUtils,this,9,this._el_9);
+    this._PieSeriesComponent_9_3 = new import15.Wrapper_PieSeriesComponent();
     this._text_10 = this.renderer.createText((null as any),'\n            ',(null as any));
-    this.compView_9.create(this._PieSeries_9_3.context);
+    this.compView_9.create(this._PieSeriesComponent_9_3.context);
     this._text_11 = this.renderer.createText(this._el_7,'\n          ',(null as any));
     this._text_12 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_5.create(this._Chart_5_6.context);
+    this.compView_5.create(this._ChartComponent_5_6.context);
     this._text_13 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_14 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_15 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','advanced-pie-legend-wrapper'),(null as any));
@@ -291,9 +289,9 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this._text_34 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_35 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_5));
-    this._Chart_5_6.subscribe(this,this.eventHandler(this.handleEvent_5),true);
+    this._ChartComponent_5_6.subscribe(this,this.eventHandler(this.handleEvent_5),true);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
-    this._PieSeries_9_3.subscribe(this,this.eventHandler(this.handleEvent_9),true);
+    this._PieSeriesComponent_9_3.subscribe(this,this.eventHandler(this.handleEvent_9),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -340,32 +338,32 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.PieSeries) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._PieSeries_9_3.context; }
+    if (((token === import14.PieSeriesComponent) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._PieSeriesComponent_9_3.context; }
     if (((token === import12.InjectionService) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._InjectionService_5_5; }
-    if (((token === import11.Chart) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._Chart_5_6.context; }
+    if (((token === import11.ChartComponent) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._ChartComponent_5_6.context; }
     if (((token === import19.TemplateRef) && (29 === requestNodeIndex))) { return this._TemplateRef_29_5; }
     if (((token === import21.NgFor) && (29 === requestNodeIndex))) { return this._NgFor_29_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_5_0_0:any = this._arr_49(this.context.dims.width,this.context.dims.height);
-    this._Chart_5_6.check_view(currVal_5_0_0,throwOnChange,false);
+    this._ChartComponent_5_6.check_view(currVal_5_0_0,throwOnChange,false);
     const currVal_5_0_1:any = this.context.colors;
-    this._Chart_5_6.check_colors(currVal_5_0_1,throwOnChange,false);
-    if (this._Chart_5_6.ngDoCheck(this,this._el_5,throwOnChange)) { this.compView_5.markAsCheckOnce(); }
+    this._ChartComponent_5_6.check_colors(currVal_5_0_1,throwOnChange,false);
+    if (this._ChartComponent_5_6.ngDoCheck(this,this._el_5,throwOnChange)) { this.compView_5.markAsCheckOnce(); }
     const currVal_9_0_0:any = this.context.colors;
-    this._PieSeries_9_3.check_colors(currVal_9_0_0,throwOnChange,false);
+    this._PieSeriesComponent_9_3.check_colors(currVal_9_0_0,throwOnChange,false);
     const currVal_9_0_1:any = this.context.results;
-    this._PieSeries_9_3.check_series(currVal_9_0_1,throwOnChange,false);
+    this._PieSeriesComponent_9_3.check_series(currVal_9_0_1,throwOnChange,false);
     const currVal_9_0_2:any = this.context.innerRadius;
-    this._PieSeries_9_3.check_innerRadius(currVal_9_0_2,throwOnChange,false);
+    this._PieSeriesComponent_9_3.check_innerRadius(currVal_9_0_2,throwOnChange,false);
     const currVal_9_0_3:any = this.context.outerRadius;
-    this._PieSeries_9_3.check_outerRadius(currVal_9_0_3,throwOnChange,false);
+    this._PieSeriesComponent_9_3.check_outerRadius(currVal_9_0_3,throwOnChange,false);
     const currVal_9_0_4:any = this.context.labels;
-    this._PieSeries_9_3.check_showLabels(currVal_9_0_4,throwOnChange,false);
+    this._PieSeriesComponent_9_3.check_showLabels(currVal_9_0_4,throwOnChange,false);
     const currVal_9_0_5:any = this.context.gradient;
-    this._PieSeries_9_3.check_gradient(currVal_9_0_5,throwOnChange,false);
-    if (this._PieSeries_9_3.ngDoCheck(this,this._el_9,throwOnChange)) { this.compView_9.markAsCheckOnce(); }
+    this._PieSeriesComponent_9_3.check_gradient(currVal_9_0_5,throwOnChange,false);
+    if (this._PieSeriesComponent_9_3.ngDoCheck(this,this._el_9,throwOnChange)) { this.compView_9.markAsCheckOnce(); }
     const currVal_29_0_0:any = this.context.legendItems;
     this._NgFor_29_6.check_ngForOf(currVal_29_0_0,throwOnChange,false);
     this._NgFor_29_6.ngDoCheck(this,this._anchor_29,throwOnChange);
@@ -401,25 +399,20 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
       this.renderer.setElementStyle(this._el_15,'width',((this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_51) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_51).toString() + 'px')));
       this._expr_51 = currVal_51;
     }
-    const currVal_52:any = ((this.context.height - 215) / 2);
+    const currVal_52:any = ((this.context.width - this.context.dims.width) - this.context.margin[1]);
     if (import3.checkBinding(throwOnChange,this._expr_52,currVal_52)) {
-      this.renderer.setElementStyle(this._el_17,'margin-top',((this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_17,'width',((this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_52).toString() + 'px')));
       this._expr_52 = currVal_52;
     }
-    const currVal_53:any = ((this.context.width - this.context.dims.width) - this.context.margin[1]);
+    const currVal_53:any = import3.inlineInterpolate(1,'\n            ',this.context.roundedTotal.toLocaleString(),'\n          ');
     if (import3.checkBinding(throwOnChange,this._expr_53,currVal_53)) {
-      this.renderer.setElementStyle(this._el_17,'width',((this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_53) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_53).toString() + 'px')));
+      this.renderer.setText(this._text_20,currVal_53);
       this._expr_53 = currVal_53;
     }
-    const currVal_54:any = import3.inlineInterpolate(1,'\n            ',this.context.roundedTotal.toLocaleString(),'\n          ');
+    const currVal_54:any = import3.inlineInterpolate(1,'\n            ',this.context.totalLabel,'\n          ');
     if (import3.checkBinding(throwOnChange,this._expr_54,currVal_54)) {
-      this.renderer.setText(this._text_20,currVal_54);
+      this.renderer.setText(this._text_23,currVal_54);
       this._expr_54 = currVal_54;
-    }
-    const currVal_55:any = import3.inlineInterpolate(1,'\n            ',this.context.totalLabel,'\n          ');
-    if (import3.checkBinding(throwOnChange,this._expr_55,currVal_55)) {
-      this.renderer.setText(this._text_23,currVal_55);
-      this._expr_55 = currVal_55;
     }
     this.compView_5.detectChanges(throwOnChange);
     this.compView_9.detectChanges(throwOnChange);
@@ -429,8 +422,8 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this._vc_29.destroyNestedViews();
     this.compView_5.destroy();
     this.compView_9.destroy();
-    this._PieSeries_9_3.ngOnDestroy();
-    this._Chart_5_6.ngOnDestroy();
+    this._PieSeriesComponent_9_3.ngOnDestroy();
+    this._ChartComponent_5_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 5) && (ngContentIndex == 0))) {
@@ -440,7 +433,7 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 29)) { return new View_AdvancedPieChart1(this.viewUtils,this,29,this._anchor_29,this._vc_29); }
+    if ((nodeIndex == 29)) { return new View_AdvancedPieChartComponent1(this.viewUtils,this,29,this._anchor_29,this._vc_29); }
     return (null as any);
   }
   handleEvent_5(eventName:string,$event:any):boolean {
@@ -456,13 +449,13 @@ export class View_AdvancedPieChart0 extends import2.AppView<import0.AdvancedPieC
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.context.click($event)) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_AdvancedPieChart1 extends import2.AppView<any> {
+class View_AdvancedPieChartComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -482,7 +475,7 @@ class View_AdvancedPieChart1 extends import2.AppView<any> {
   /*private*/ _expr_16:any;
   /*private*/ _expr_17:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_AdvancedPieChart1,renderType_AdvancedPieChart,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_AdvancedPieChartComponent1,renderType_AdvancedPieChartComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_14 = import1.UNINITIALIZED;
     this._expr_15 = import1.UNINITIALIZED;
     this._expr_16 = import1.UNINITIALIZED;

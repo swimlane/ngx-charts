@@ -1,11 +1,6 @@
 
 import { ElementRef, OnChanges } from '@angular/core';
-export declare class PieLabel implements OnChanges {
-    element: HTMLElement;
-    trimLabel: Function;
-    labelXY: any;
-    transform: string;
-    line: string;
+export declare class PieLabelComponent implements OnChanges {
     data: any;
     radius: any;
     label: any;
@@ -13,10 +8,15 @@ export declare class PieLabel implements OnChanges {
     max: any;
     value: any;
     explodeSlices: any;
+    element: HTMLElement;
+    trimLabel: Function;
+    labelXY: any;
+    transform: string;
+    line: string;
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;
-    textAnchor(): string;
-    midAngle(d: any): any;
+    textAnchor(): any;
+    midAngle(d: any): number;
     loadAnimation(): void;
 }

@@ -39,9 +39,9 @@ import * as import30 from '../../../src/common/axes/y-axis.component';
 import * as import31 from '../common/axes/y-axis.component.ngfactory';
 import * as import32 from '../../../src/bar-chart/series-vertical.component';
 import * as import33 from './series-vertical.component.ngfactory';
-export class Wrapper_BarVerticalStacked {
+export class Wrapper_BarVerticalStackedComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.BarVerticalStacked;
+  context:import0.BarVerticalStackedComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -62,7 +62,7 @@ export class Wrapper_BarVerticalStacked {
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.BarVerticalStacked(p0,p1,p2);
+    this.context = new import0.BarVerticalStackedComponent(p0,p1,p2);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -209,55 +209,55 @@ export class Wrapper_BarVerticalStacked {
     if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
-var renderType_BarVerticalStacked_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_BarVerticalStacked_Host0 extends import2.AppView<any> {
+var renderType_BarVerticalStackedComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_BarVerticalStackedComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.BarVerticalStacked>;
-  _BarVerticalStacked_0_3:Wrapper_BarVerticalStacked;
+  compView_0:import2.AppView<import0.BarVerticalStackedComponent>;
+  _BarVerticalStackedComponent_0_3:Wrapper_BarVerticalStackedComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_BarVerticalStacked_Host0,renderType_BarVerticalStacked_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_BarVerticalStackedComponent_Host0,renderType_BarVerticalStackedComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'bar-vertical-stacked',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_BarVerticalStacked0(this.viewUtils,this,0,this._el_0);
-    this._BarVerticalStacked_0_3 = new Wrapper_BarVerticalStacked(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
-    this.compView_0.create(this._BarVerticalStacked_0_3.context);
+    this.compView_0 = new View_BarVerticalStackedComponent0(this.viewUtils,this,0,this._el_0);
+    this._BarVerticalStackedComponent_0_3 = new Wrapper_BarVerticalStackedComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this.compView_0.create(this._BarVerticalStackedComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._BarVerticalStacked_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._BarVerticalStackedComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.BarVerticalStacked) && (0 === requestNodeIndex))) { return this._BarVerticalStacked_0_3.context; }
+    if (((token === import0.BarVerticalStackedComponent) && (0 === requestNodeIndex))) { return this._BarVerticalStackedComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._BarVerticalStacked_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._BarVerticalStackedComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._BarVerticalStacked_0_3.context.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._BarVerticalStackedComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._BarVerticalStacked_0_3.ngOnDestroy();
+    this._BarVerticalStackedComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const BarVerticalStackedNgFactory:import7.ComponentFactory<import0.BarVerticalStacked> = new import7.ComponentFactory<import0.BarVerticalStacked>('bar-vertical-stacked',View_BarVerticalStacked_Host0,import0.BarVerticalStacked);
-const styles_BarVerticalStacked:any[] = ([] as any[]);
-var BarVerticalStacked_animationState_states:any = {
+export const BarVerticalStackedComponentNgFactory:import7.ComponentFactory<import0.BarVerticalStackedComponent> = new import7.ComponentFactory<import0.BarVerticalStackedComponent>('bar-vertical-stacked',View_BarVerticalStackedComponent_Host0,import0.BarVerticalStackedComponent);
+const styles_BarVerticalStackedComponent:any[] = ([] as any[]);
+var BarVerticalStackedComponent_animationState_states:any = {
   '*': {},
   void: {}
 }
 ;
-function BarVerticalStacked_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import10.AnimationTransition {
+function BarVerticalStackedComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import10.AnimationTransition {
   var previousPlayers:any = view.animationContext.getAnimationPlayers(element,'animationState',(nextState == 'void'));
   var collectedStyles:any = {};
   var player:any = (null as any);
   var totalTime:any = 0;
-  var defaultStateStyles:any = BarVerticalStacked_animationState_states['*'];
-  var startStateStyles:any = BarVerticalStacked_animationState_states[currentState];
+  var defaultStateStyles:any = BarVerticalStackedComponent_animationState_states['*'];
+  var startStateStyles:any = BarVerticalStackedComponent_animationState_states[currentState];
   if ((startStateStyles == (null as any))) { (startStateStyles = defaultStateStyles); }
-  var endStateStyles:any = BarVerticalStacked_animationState_states[nextState];
+  var endStateStyles:any = BarVerticalStackedComponent_animationState_states[nextState];
   if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
   if (((player == (null as any)) && (true && (nextState == 'void')))) {
       player = new import11.AnimationSequencePlayer([view.renderer.animate(element,new import12.AnimationStyles(import13.collectAndResolveStyles(collectedStyles,[
@@ -293,14 +293,14 @@ function BarVerticalStacked_animationState_factory(view:import2.AppView<any>,ele
   view.animationContext.queueAnimation(element,'animationState',player);
   return new import10.AnimationTransition(player,currentState,nextState,totalTime);
 }
-var renderType_BarVerticalStacked:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarVerticalStacked,{animationState: BarVerticalStacked_animationState_factory});
-export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVerticalStacked> {
+var renderType_BarVerticalStackedComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarVerticalStackedComponent,{animationState: BarVerticalStackedComponent_animationState_factory});
+export class View_BarVerticalStackedComponent0 extends import2.AppView<import0.BarVerticalStackedComponent> {
   _text_0:any;
   _el_1:any;
   /*private*/ _vc_1:import16.ViewContainer;
-  compView_1:import2.AppView<import17.Chart>;
+  compView_1:import2.AppView<import17.ChartComponent>;
   _InjectionService_1_5:import18.InjectionService;
-  _Chart_1_6:import19.Wrapper_Chart;
+  _ChartComponent_1_6:import19.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
@@ -324,7 +324,7 @@ export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVertica
   _arr_26:any;
   /*private*/ _expr_27:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_BarVerticalStacked0,renderType_BarVerticalStacked,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_BarVerticalStackedComponent0,renderType_BarVerticalStackedComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._arr_26 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
         p0,
@@ -339,9 +339,9 @@ export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVertica
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_1 = new import16.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import19.View_Chart0(this.viewUtils,this,1,this._el_1);
+    this.compView_1 = new import19.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
     this._InjectionService_1_5 = new import18.InjectionService(this.parentView.injectorGet(import22.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import23.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._Chart_1_6 = new import19.Wrapper_Chart(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._ChartComponent_1_6 = new import19.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','bar-chart chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
@@ -361,10 +361,10 @@ export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVertica
     this._NgFor_9_6 = new import21.Wrapper_NgFor(this._vc_9.vcRef,this._TemplateRef_9_5,this.parentView.injectorGet(import25.IterableDiffers,this.parentIndex),this.ref);
     this._text_10 = this.renderer.createText(this._el_3,'\n\n      ',(null as any));
     this._text_11 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_1.create(this._Chart_1_6.context);
+    this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_12 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -391,19 +391,19 @@ export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVertica
     if (((token === import24.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
     if (((token === import27.NgFor) && (9 === requestNodeIndex))) { return this._NgFor_9_6.context; }
     if (((token === import18.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._InjectionService_1_5; }
-    if (((token === import17.Chart) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._Chart_1_6.context; }
+    if (((token === import17.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this._arr_26(this.context.width,this.context.height);
-    this._Chart_1_6.check_view(currVal_1_0_0,throwOnChange,false);
+    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.legend;
-    this._Chart_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
+    this._ChartComponent_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
     const currVal_1_0_2:any = this.context.innerDomain;
-    this._Chart_1_6.check_legendData(currVal_1_0_2,throwOnChange,false);
+    this._ChartComponent_1_6.check_legendData(currVal_1_0_2,throwOnChange,false);
     const currVal_1_0_3:any = this.context.colors;
-    this._Chart_1_6.check_colors(currVal_1_0_3,throwOnChange,false);
-    if (this._Chart_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    this._ChartComponent_1_6.check_colors(currVal_1_0_3,throwOnChange,false);
+    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_5_0_0:any = this.context.xAxis;
     this._NgIf_5_6.check_ngIf(currVal_5_0_0,throwOnChange,false);
     this._NgIf_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
@@ -432,7 +432,7 @@ export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVertica
     this._vc_7.destroyNestedViews();
     this._vc_9.destroyNestedViews();
     this.compView_1.destroy();
-    this._Chart_1_6.ngOnDestroy();
+    this._ChartComponent_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -442,9 +442,9 @@ export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVertica
     }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 5)) { return new View_BarVerticalStacked1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
-    if ((nodeIndex == 7)) { return new View_BarVerticalStacked2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
-    if ((nodeIndex == 9)) { return new View_BarVerticalStacked3(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
+    if ((nodeIndex == 5)) { return new View_BarVerticalStackedComponent1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
+    if ((nodeIndex == 7)) { return new View_BarVerticalStackedComponent2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
+    if ((nodeIndex == 9)) { return new View_BarVerticalStackedComponent3(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
     return (null as any);
   }
   handleEvent_1(eventName:string,$event:any):boolean {
@@ -457,22 +457,22 @@ export class View_BarVerticalStacked0 extends import2.AppView<import0.BarVertica
     return result;
   }
 }
-class View_BarVerticalStacked1 extends import2.AppView<any> {
+class View_BarVerticalStackedComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import28.XAxis>;
-  _XAxis_0_3:import29.Wrapper_XAxis;
+  compView_0:import2.AppView<import28.XAxisComponent>;
+  _XAxisComponent_0_3:import29.Wrapper_XAxisComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
-    super(View_BarVerticalStacked1,renderType_BarVerticalStacked,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_BarVerticalStackedComponent1,renderType_BarVerticalStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'xAxis',''),(null as any));
-    this.compView_0 = new import29.View_XAxis0(this.viewUtils,this,0,this._el_0);
-    this._XAxis_0_3 = new import29.Wrapper_XAxis();
+    this.compView_0 = new import29.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisComponent_0_3 = new import29.Wrapper_XAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._XAxis_0_3.context);
+    this.compView_0.create(this._XAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._XAxis_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -481,24 +481,24 @@ class View_BarVerticalStacked1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import28.XAxis) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxis_0_3.context; }
+    if (((token === import28.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.xScale;
-    this._XAxis_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
+    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.dims;
-    this._XAxis_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.showXAxisLabel;
-    this._XAxis_0_3.check_showLabel(currVal_0_0_2,throwOnChange,false);
+    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.xAxisLabel;
-    this._XAxis_0_3.check_labelText(currVal_0_0_3,throwOnChange,false);
-    if (this._XAxis_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._XAxisComponent_0_3.check_labelText(currVal_0_0_3,throwOnChange,false);
+    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._XAxis_0_3.ngOnDestroy();
+    this._XAxisComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -513,22 +513,22 @@ class View_BarVerticalStacked1 extends import2.AppView<any> {
     return result;
   }
 }
-class View_BarVerticalStacked2 extends import2.AppView<any> {
+class View_BarVerticalStackedComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import30.YAxis>;
-  _YAxis_0_3:import31.Wrapper_YAxis;
+  compView_0:import2.AppView<import30.YAxisComponent>;
+  _YAxisComponent_0_3:import31.Wrapper_YAxisComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
-    super(View_BarVerticalStacked2,renderType_BarVerticalStacked,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_BarVerticalStackedComponent2,renderType_BarVerticalStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'yAxis',''),(null as any));
-    this.compView_0 = new import31.View_YAxis0(this.viewUtils,this,0,this._el_0);
-    this._YAxis_0_3 = new import31.Wrapper_YAxis();
+    this.compView_0 = new import31.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisComponent_0_3 = new import31.Wrapper_YAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._YAxis_0_3.context);
+    this.compView_0.create(this._YAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._YAxis_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -537,26 +537,26 @@ class View_BarVerticalStacked2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import30.YAxis) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxis_0_3.context; }
+    if (((token === import30.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.yScale;
-    this._YAxis_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
+    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.dims;
-    this._YAxis_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._YAxis_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    this._YAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.showYAxisLabel;
-    this._YAxis_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.yAxisLabel;
-    this._YAxis_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._YAxis_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._YAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._YAxis_0_3.ngOnDestroy();
+    this._YAxisComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -571,17 +571,17 @@ class View_BarVerticalStacked2 extends import2.AppView<any> {
     return result;
   }
 }
-class View_BarVerticalStacked3 extends import2.AppView<any> {
+class View_BarVerticalStackedComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import32.SeriesVertical>;
-  _SeriesVertical_2_3:import33.Wrapper_SeriesVertical;
+  compView_2:import2.AppView<import32.SeriesVerticalComponent>;
+  _SeriesVerticalComponent_2_3:import33.Wrapper_SeriesVerticalComponent;
   _text_3:any;
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
-    super(View_BarVerticalStacked3,renderType_BarVerticalStacked,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_BarVerticalStackedComponent3,renderType_BarVerticalStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
   }
@@ -589,12 +589,12 @@ class View_BarVerticalStacked3 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'seriesVertical','','type','stacked'),(null as any));
-    this.compView_2 = new import33.View_SeriesVertical0(this.viewUtils,this,2,this._el_2);
-    this._SeriesVertical_2_3 = new import33.Wrapper_SeriesVertical();
-    this.compView_2.create(this._SeriesVertical_2_3.context);
+    this.compView_2 = new import33.View_SeriesVerticalComponent0(this.viewUtils,this,2,this._el_2);
+    this._SeriesVerticalComponent_2_3 = new import33.Wrapper_SeriesVerticalComponent();
+    this.compView_2.create(this._SeriesVerticalComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_2));
-    this._SeriesVertical_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true);
+    this._SeriesVerticalComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -605,7 +605,7 @@ class View_BarVerticalStacked3 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import32.SeriesVertical) && (2 === requestNodeIndex))) { return this._SeriesVertical_2_3.context; }
+    if (((token === import32.SeriesVerticalComponent) && (2 === requestNodeIndex))) { return this._SeriesVerticalComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -617,20 +617,20 @@ class View_BarVerticalStacked3 extends import2.AppView<any> {
       this._expr_6 = currVal_6;
     }
     const currVal_2_0_0:any = this.parentView.context.dims;
-    this._SeriesVertical_2_3.check_dims(currVal_2_0_0,throwOnChange,false);
+    this._SeriesVerticalComponent_2_3.check_dims(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = 'stacked';
-    this._SeriesVertical_2_3.check_type(currVal_2_0_1,throwOnChange,false);
+    this._SeriesVerticalComponent_2_3.check_type(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.context.$implicit.series;
-    this._SeriesVertical_2_3.check_series(currVal_2_0_2,throwOnChange,false);
+    this._SeriesVerticalComponent_2_3.check_series(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.xScale;
-    this._SeriesVertical_2_3.check_xScale(currVal_2_0_3,throwOnChange,false);
+    this._SeriesVerticalComponent_2_3.check_xScale(currVal_2_0_3,throwOnChange,false);
     const currVal_2_0_4:any = this.parentView.context.yScale;
-    this._SeriesVertical_2_3.check_yScale(currVal_2_0_4,throwOnChange,false);
+    this._SeriesVerticalComponent_2_3.check_yScale(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.context.colors;
-    this._SeriesVertical_2_3.check_colors(currVal_2_0_5,throwOnChange,false);
+    this._SeriesVerticalComponent_2_3.check_colors(currVal_2_0_5,throwOnChange,false);
     const currVal_2_0_6:any = this.parentView.context.gradient;
-    this._SeriesVertical_2_3.check_gradient(currVal_2_0_6,throwOnChange,false);
-    if (this._SeriesVertical_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._SeriesVerticalComponent_2_3.check_gradient(currVal_2_0_6,throwOnChange,false);
+    if (this._SeriesVerticalComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     const currVal_7:any = this.parentView.context.groupTransform(this.context.$implicit);
     if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
       this.renderer.setElementAttribute(this._el_0,'transform',((currVal_7 == null)? (null as any): currVal_7.toString()));
@@ -640,7 +640,7 @@ class View_BarVerticalStacked3 extends import2.AppView<any> {
   }
   destroyInternal():void {
     this.compView_2.destroy();
-    this._SeriesVertical_2_3.ngOnDestroy();
+    this._SeriesVerticalComponent_2_3.ngOnDestroy();
   }
   detachInternal():void {
     var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,this._expr_6,'void');
@@ -654,7 +654,7 @@ class View_BarVerticalStacked3 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.click($event,this.context.$implicit)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

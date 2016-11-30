@@ -20,9 +20,9 @@ import * as import11 from '@angular/core/src/linker/template_ref';
 import * as import12 from '@angular/common/src/directives/ng_if';
 import * as import13 from '../../../src/common/svg-linear-gradient.component';
 import * as import14 from '../common/svg-linear-gradient.component.ngfactory';
-export class Wrapper_HeatMapCell {
+export class Wrapper_HeatMapCellComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.HeatMapCell;
+  context:import0.HeatMapCellComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -37,7 +37,7 @@ export class Wrapper_HeatMapCell {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.HeatMapCell(p0);
+    this.context = new import0.HeatMapCellComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -136,42 +136,42 @@ export class Wrapper_HeatMapCell {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_HeatMapCell_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_HeatMapCell_Host0 extends import2.AppView<any> {
+var renderType_HeatMapCellComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_HeatMapCellComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.HeatMapCell>;
-  _HeatMapCell_0_3:Wrapper_HeatMapCell;
+  compView_0:import2.AppView<import0.HeatMapCellComponent>;
+  _HeatMapCellComponent_0_3:Wrapper_HeatMapCellComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_HeatMapCell_Host0,renderType_HeatMapCell_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_HeatMapCellComponent_Host0,renderType_HeatMapCellComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'heatMapCell',''),rootSelector,(null as any));
-    this.compView_0 = new View_HeatMapCell0(this.viewUtils,this,0,this._el_0);
-    this._HeatMapCell_0_3 = new Wrapper_HeatMapCell(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._HeatMapCell_0_3.context);
+    this.compView_0 = new View_HeatMapCellComponent0(this.viewUtils,this,0,this._el_0);
+    this._HeatMapCellComponent_0_3 = new Wrapper_HeatMapCellComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._HeatMapCellComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._HeatMapCell_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._HeatMapCellComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.HeatMapCell) && (0 === requestNodeIndex))) { return this._HeatMapCell_0_3.context; }
+    if (((token === import0.HeatMapCellComponent) && (0 === requestNodeIndex))) { return this._HeatMapCellComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._HeatMapCell_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._HeatMapCellComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._HeatMapCell_0_3.ngOnDestroy();
+    this._HeatMapCellComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const HeatMapCellNgFactory:import7.ComponentFactory<import0.HeatMapCell> = new import7.ComponentFactory<import0.HeatMapCell>('g[heatMapCell]',View_HeatMapCell_Host0,import0.HeatMapCell);
-const styles_HeatMapCell:any[] = ([] as any[]);
-var renderType_HeatMapCell:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_HeatMapCell,{});
-export class View_HeatMapCell0 extends import2.AppView<import0.HeatMapCell> {
+export const HeatMapCellComponentNgFactory:import7.ComponentFactory<import0.HeatMapCellComponent> = new import7.ComponentFactory<import0.HeatMapCellComponent>('g[heatMapCell]',View_HeatMapCellComponent_Host0,import0.HeatMapCellComponent);
+const styles_HeatMapCellComponent:any[] = ([] as any[]);
+var renderType_HeatMapCellComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_HeatMapCellComponent,{});
+export class View_HeatMapCellComponent0 extends import2.AppView<import0.HeatMapCellComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -188,7 +188,7 @@ export class View_HeatMapCell0 extends import2.AppView<import0.HeatMapCell> {
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_HeatMapCell0,renderType_HeatMapCell,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_HeatMapCellComponent0,renderType_HeatMapCellComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
     this._expr_13 = import1.UNINITIALIZED;
@@ -203,9 +203,9 @@ export class View_HeatMapCell0 extends import2.AppView<import0.HeatMapCell> {
     this._vc_3 = new import9.ViewContainer(3,1,this,this._anchor_3);
     this._TemplateRef_3_5 = new import11.TemplateRef_(this,3,this._anchor_3);
     this._NgIf_3_6 = new import10.Wrapper_NgIf(this._vc_3.vcRef,this._TemplateRef_3_5);
-    this._text_4 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_1,':svg:rect',new import3.InlineArray8(6,'class','cell','rx','3','style','cursor: pointer'),(null as any));
-    this._text_6 = this.renderer.createText(this._el_1,'\n\n    ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_7 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_5));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -256,36 +256,36 @@ export class View_HeatMapCell0 extends import2.AppView<import0.HeatMapCell> {
     this._vc_3.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 3)) { return new View_HeatMapCell1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
+    if ((nodeIndex == 3)) { return new View_HeatMapCellComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
     return (null as any);
   }
   handleEvent_5(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.click()) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick()) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_HeatMapCell1 extends import2.AppView<any> {
+class View_HeatMapCellComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import13.SvgLinearGradient>;
-  _SvgLinearGradient_2_3:import14.Wrapper_SvgLinearGradient;
+  compView_2:import2.AppView<import13.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_2_3:import14.Wrapper_SvgLinearGradientComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_HeatMapCell1,renderType_HeatMapCell,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_HeatMapCellComponent1,renderType_HeatMapCellComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'orientation','vertical','svgLinearGradient',''),(null as any));
-    this.compView_2 = new import14.View_SvgLinearGradient0(this.viewUtils,this,2,this._el_2);
-    this._SvgLinearGradient_2_3 = new import14.Wrapper_SvgLinearGradient();
-    this.compView_2.create(this._SvgLinearGradient_2_3.context);
+    this.compView_2 = new import14.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
+    this._SvgLinearGradientComponent_2_3 = new import14.Wrapper_SvgLinearGradientComponent();
+    this.compView_2.create(this._SvgLinearGradientComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -297,19 +297,19 @@ class View_HeatMapCell1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import13.SvgLinearGradient) && (2 === requestNodeIndex))) { return this._SvgLinearGradient_2_3.context; }
+    if (((token === import13.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = 'vertical';
-    this._SvgLinearGradient_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = this.parentView.context.fill;
-    this._SvgLinearGradient_2_3.check_color(currVal_2_0_1,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_color(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.context.gradientId;
-    this._SvgLinearGradient_2_3.check_name(currVal_2_0_2,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_name(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.startOpacity;
-    this._SvgLinearGradient_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
-    if (this._SvgLinearGradient_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._SvgLinearGradientComponent_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
+    if (this._SvgLinearGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
   }
   destroyInternal():void {

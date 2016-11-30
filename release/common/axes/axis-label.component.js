@@ -1,15 +1,15 @@
 "use strict";
 var core_1 = require('@angular/core');
-var AxisLabel = (function () {
-    function AxisLabel(element) {
+var AxisLabelComponent = (function () {
+    function AxisLabelComponent(element) {
         this.textHeight = 25;
         this.margin = 5;
         this.element = element.nativeElement;
     }
-    AxisLabel.prototype.ngOnChanges = function () {
+    AxisLabelComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    AxisLabel.prototype.update = function () {
+    AxisLabelComponent.prototype.update = function () {
         this.strokeWidth = '0.01';
         this.textAnchor = 'middle';
         this.transform = '';
@@ -34,7 +34,7 @@ var AxisLabel = (function () {
                 break;
         }
     };
-    AxisLabel.decorators = [
+    AxisLabelComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[axisLabel]',
                     template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  ",
@@ -42,17 +42,17 @@ var AxisLabel = (function () {
                 },] },
     ];
     /** @nocollapse */
-    AxisLabel.ctorParameters = [
+    AxisLabelComponent.ctorParameters = [
         { type: core_1.ElementRef, },
     ];
-    AxisLabel.propDecorators = {
+    AxisLabelComponent.propDecorators = {
         'orient': [{ type: core_1.Input },],
         'label': [{ type: core_1.Input },],
         'offset': [{ type: core_1.Input },],
         'width': [{ type: core_1.Input },],
         'height': [{ type: core_1.Input },],
     };
-    return AxisLabel;
+    return AxisLabelComponent;
 }());
-exports.AxisLabel = AxisLabel;
+exports.AxisLabelComponent = AxisLabelComponent;
 //# sourceMappingURL=axis-label.component.js.map

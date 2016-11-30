@@ -23,9 +23,9 @@ import * as import14 from '@angular/common/src/directives/ng_for';
 import * as import15 from '@angular/core/src/security';
 import * as import16 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import17 from '@angular/common/src/directives/ng_if';
-export class Wrapper_XAxisTicks {
+export class Wrapper_XAxisTicksComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.XAxisTicks;
+  context:import0.XAxisTicksComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -40,7 +40,7 @@ export class Wrapper_XAxisTicks {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.XAxisTicks();
+    this.context = new import0.XAxisTicksComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -139,43 +139,43 @@ export class Wrapper_XAxisTicks {
     if (emit0) { (this.subscription0 = this.context.dimensionsChanged.subscribe(_eventHandler.bind(view,'dimensionsChanged'))); }
   }
 }
-var renderType_XAxisTicks_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_XAxisTicks_Host0 extends import2.AppView<any> {
+var renderType_XAxisTicksComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_XAxisTicksComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.XAxisTicks>;
-  _XAxisTicks_0_3:Wrapper_XAxisTicks;
+  compView_0:import2.AppView<import0.XAxisTicksComponent>;
+  _XAxisTicksComponent_0_3:Wrapper_XAxisTicksComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_XAxisTicks_Host0,renderType_XAxisTicks_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_XAxisTicksComponent_Host0,renderType_XAxisTicksComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'xAxisTicks',''),rootSelector,(null as any));
-    this.compView_0 = new View_XAxisTicks0(this.viewUtils,this,0,this._el_0);
-    this._XAxisTicks_0_3 = new Wrapper_XAxisTicks();
-    this.compView_0.create(this._XAxisTicks_0_3.context);
+    this.compView_0 = new View_XAxisTicksComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisTicksComponent_0_3 = new Wrapper_XAxisTicksComponent();
+    this.compView_0.create(this._XAxisTicksComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._XAxisTicks_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._XAxisTicksComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.XAxisTicks) && (0 === requestNodeIndex))) { return this._XAxisTicks_0_3.context; }
+    if (((token === import0.XAxisTicksComponent) && (0 === requestNodeIndex))) { return this._XAxisTicksComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._XAxisTicks_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._XAxisTicksComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._XAxisTicks_0_3.context.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._XAxisTicksComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._XAxisTicks_0_3.ngOnDestroy();
+    this._XAxisTicksComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const XAxisTicksNgFactory:import7.ComponentFactory<import0.XAxisTicks> = new import7.ComponentFactory<import0.XAxisTicks>('g[xAxisTicks]',View_XAxisTicks_Host0,import0.XAxisTicks);
-const styles_XAxisTicks:any[] = ([] as any[]);
-var renderType_XAxisTicks:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_XAxisTicks,{});
-export class View_XAxisTicks0 extends import2.AppView<import0.XAxisTicks> {
+export const XAxisTicksComponentNgFactory:import7.ComponentFactory<import0.XAxisTicksComponent> = new import7.ComponentFactory<import0.XAxisTicksComponent>('g[xAxisTicks]',View_XAxisTicksComponent_Host0,import0.XAxisTicksComponent);
+const styles_XAxisTicksComponent:any[] = ([] as any[]);
+var renderType_XAxisTicksComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_XAxisTicksComponent,{});
+export class View_XAxisTicksComponent0 extends import2.AppView<import0.XAxisTicksComponent> {
   _viewQuery_ticksel_0:import8.QueryList<any>;
   _text_0:any;
   _el_1:any;
@@ -192,7 +192,7 @@ export class View_XAxisTicks0 extends import2.AppView<import0.XAxisTicks> {
   _NgFor_6_6:import10.Wrapper_NgFor;
   _text_7:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_XAxisTicks0,renderType_XAxisTicks,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_XAxisTicksComponent0,renderType_XAxisTicksComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -248,12 +248,12 @@ export class View_XAxisTicks0 extends import2.AppView<import0.XAxisTicks> {
     this._vc_6.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 3)) { return new View_XAxisTicks1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
-    if ((nodeIndex == 6)) { return new View_XAxisTicks2(this.viewUtils,this,6,this._anchor_6,this._vc_6); }
+    if ((nodeIndex == 3)) { return new View_XAxisTicksComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
+    if ((nodeIndex == 6)) { return new View_XAxisTicksComponent2(this.viewUtils,this,6,this._anchor_6,this._vc_6); }
     return (null as any);
   }
 }
-class View_XAxisTicks1 extends import2.AppView<any> {
+class View_XAxisTicksComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -269,7 +269,7 @@ class View_XAxisTicks1 extends import2.AppView<any> {
   /*private*/ _expr_12:any;
   /*private*/ _expr_13:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_XAxisTicks1,renderType_XAxisTicks,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_XAxisTicksComponent1,renderType_XAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
@@ -335,7 +335,7 @@ class View_XAxisTicks1 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_XAxisTicks2 extends import2.AppView<any> {
+class View_XAxisTicksComponent2 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
@@ -345,7 +345,7 @@ class View_XAxisTicks2 extends import2.AppView<any> {
   _text_3:any;
   /*private*/ _expr_7:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_XAxisTicks2,renderType_XAxisTicks,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_XAxisTicksComponent2,renderType_XAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
@@ -388,11 +388,11 @@ class View_XAxisTicks2 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 2)) { return new View_XAxisTicks3(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
+    if ((nodeIndex == 2)) { return new View_XAxisTicksComponent3(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
     return (null as any);
   }
 }
-class View_XAxisTicks3 extends import2.AppView<any> {
+class View_XAxisTicksComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -400,7 +400,7 @@ class View_XAxisTicks3 extends import2.AppView<any> {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_XAxisTicks3,renderType_XAxisTicks,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_XAxisTicksComponent3,renderType_XAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
   }

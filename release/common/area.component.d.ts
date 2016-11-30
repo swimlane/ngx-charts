@@ -1,10 +1,5 @@
 import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
-export declare class Area implements OnChanges {
-    element: HTMLElement;
-    gradientId: string;
-    gradientFill: string;
-    areaPath: string;
-    initialized: boolean;
+export declare class AreaComponent implements OnChanges {
     data: any;
     path: any;
     startingPath: any;
@@ -15,6 +10,11 @@ export declare class Area implements OnChanges {
     activeLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
+    element: HTMLElement;
+    gradientId: string;
+    gradientFill: string;
+    areaPath: string;
+    initialized: boolean;
     constructor(element: ElementRef);
     ngOnChanges(): void;
     update(): void;

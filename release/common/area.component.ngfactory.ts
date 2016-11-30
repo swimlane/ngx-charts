@@ -20,9 +20,9 @@ import * as import11 from '@angular/core/src/linker/template_ref';
 import * as import12 from '@angular/common/src/directives/ng_if';
 import * as import13 from '../../../src/common/svg-linear-gradient.component';
 import * as import14 from './svg-linear-gradient.component.ngfactory';
-export class Wrapper_Area {
+export class Wrapper_AreaComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Area;
+  context:import0.AreaComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -38,7 +38,7 @@ export class Wrapper_Area {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Area(p0);
+    this.context = new import0.AreaComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -146,42 +146,42 @@ export class Wrapper_Area {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_Area_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Area_Host0 extends import2.AppView<any> {
+var renderType_AreaComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_AreaComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.Area>;
-  _Area_0_3:Wrapper_Area;
+  compView_0:import2.AppView<import0.AreaComponent>;
+  _AreaComponent_0_3:Wrapper_AreaComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Area_Host0,renderType_Area_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_AreaComponent_Host0,renderType_AreaComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'area',''),rootSelector,(null as any));
-    this.compView_0 = new View_Area0(this.viewUtils,this,0,this._el_0);
-    this._Area_0_3 = new Wrapper_Area(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._Area_0_3.context);
+    this.compView_0 = new View_AreaComponent0(this.viewUtils,this,0,this._el_0);
+    this._AreaComponent_0_3 = new Wrapper_AreaComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._AreaComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._Area_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AreaComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.Area) && (0 === requestNodeIndex))) { return this._Area_0_3.context; }
+    if (((token === import0.AreaComponent) && (0 === requestNodeIndex))) { return this._AreaComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Area_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._AreaComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Area_0_3.ngOnDestroy();
+    this._AreaComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const AreaNgFactory:import7.ComponentFactory<import0.Area> = new import7.ComponentFactory<import0.Area>('g[area]',View_Area_Host0,import0.Area);
-const styles_Area:any[] = ([] as any[]);
-var renderType_Area:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_Area,{});
-export class View_Area0 extends import2.AppView<import0.Area> {
+export const AreaComponentNgFactory:import7.ComponentFactory<import0.AreaComponent> = new import7.ComponentFactory<import0.AreaComponent>('g[area]',View_AreaComponent_Host0,import0.AreaComponent);
+const styles_AreaComponent:any[] = ([] as any[]);
+var renderType_AreaComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AreaComponent,{});
+export class View_AreaComponent0 extends import2.AppView<import0.AreaComponent> {
   _text_0:any;
   _anchor_1:any;
   /*private*/ _vc_1:import9.ViewContainer;
@@ -194,7 +194,7 @@ export class View_Area0 extends import2.AppView<import0.Area> {
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Area0,renderType_Area,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_AreaComponent0,renderType_AreaComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
@@ -249,27 +249,27 @@ export class View_Area0 extends import2.AppView<import0.Area> {
     this._vc_1.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 1)) { return new View_Area1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
+    if ((nodeIndex == 1)) { return new View_AreaComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
     return (null as any);
   }
 }
-class View_Area1 extends import2.AppView<any> {
+class View_AreaComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import13.SvgLinearGradient>;
-  _SvgLinearGradient_2_3:import14.Wrapper_SvgLinearGradient;
+  compView_2:import2.AppView<import13.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_2_3:import14.Wrapper_SvgLinearGradientComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_Area1,renderType_Area,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_AreaComponent1,renderType_AreaComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'orientation','vertical','svgLinearGradient',''),(null as any));
-    this.compView_2 = new import14.View_SvgLinearGradient0(this.viewUtils,this,2,this._el_2);
-    this._SvgLinearGradient_2_3 = new import14.Wrapper_SvgLinearGradient();
-    this.compView_2.create(this._SvgLinearGradient_2_3.context);
+    this.compView_2 = new import14.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
+    this._SvgLinearGradientComponent_2_3 = new import14.Wrapper_SvgLinearGradientComponent();
+    this.compView_2.create(this._SvgLinearGradientComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -281,21 +281,21 @@ class View_Area1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import13.SvgLinearGradient) && (2 === requestNodeIndex))) { return this._SvgLinearGradient_2_3.context; }
+    if (((token === import13.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = 'vertical';
-    this._SvgLinearGradient_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = this.parentView.context.fill;
-    this._SvgLinearGradient_2_3.check_color(currVal_2_0_1,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_color(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.context.gradientId;
-    this._SvgLinearGradient_2_3.check_name(currVal_2_0_2,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_name(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.startOpacity;
-    this._SvgLinearGradient_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
+    this._SvgLinearGradientComponent_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
     const currVal_2_0_4:any = this.parentView.context.endOpacity;
-    this._SvgLinearGradient_2_3.check_endOpacity(currVal_2_0_4,throwOnChange,false);
-    if (this._SvgLinearGradient_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._SvgLinearGradientComponent_2_3.check_endOpacity(currVal_2_0_4,throwOnChange,false);
+    if (this._SvgLinearGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
   }
   destroyInternal():void {

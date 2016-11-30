@@ -9,9 +9,9 @@ var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
-var BarHorizontalNormalized = (function (_super) {
-    __extends(BarHorizontalNormalized, _super);
-    function BarHorizontalNormalized(element, cd, zone) {
+var BarHorizontalNormalizedComponent = (function (_super) {
+    __extends(BarHorizontalNormalizedComponent, _super);
+    function BarHorizontalNormalizedComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -23,16 +23,16 @@ var BarHorizontalNormalized = (function (_super) {
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarHorizontalNormalized.prototype.ngAfterViewInit = function () {
+    BarHorizontalNormalizedComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    BarHorizontalNormalized.prototype.ngOnDestroy = function () {
+    BarHorizontalNormalizedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontalNormalized.prototype.ngOnChanges = function () {
+    BarHorizontalNormalizedComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    BarHorizontalNormalized.prototype.update = function () {
+    BarHorizontalNormalizedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -58,7 +58,7 @@ var BarHorizontalNormalized = (function (_super) {
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
-    BarHorizontalNormalized.prototype.getGroupDomain = function () {
+    BarHorizontalNormalizedComponent.prototype.getGroupDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -68,7 +68,7 @@ var BarHorizontalNormalized = (function (_super) {
         }
         return domain;
     };
-    BarHorizontalNormalized.prototype.getInnerDomain = function () {
+    BarHorizontalNormalizedComponent.prototype.getInnerDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -81,48 +81,48 @@ var BarHorizontalNormalized = (function (_super) {
         }
         return domain;
     };
-    BarHorizontalNormalized.prototype.getValueDomain = function () {
+    BarHorizontalNormalizedComponent.prototype.getValueDomain = function () {
         return [0, 100];
     };
-    BarHorizontalNormalized.prototype.getYScale = function () {
+    BarHorizontalNormalizedComponent.prototype.getYScale = function () {
         var spacing = 0.1;
         return d3_1.default.scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
-    BarHorizontalNormalized.prototype.getXScale = function () {
+    BarHorizontalNormalizedComponent.prototype.getXScale = function () {
         return d3_1.default.scaleLinear()
             .range([0, this.dims.width])
             .domain(this.valueDomain);
     };
-    BarHorizontalNormalized.prototype.groupTransform = function (group) {
+    BarHorizontalNormalizedComponent.prototype.groupTransform = function (group) {
         return "translate(0, " + this.yScale(group.name) + ")";
     };
-    BarHorizontalNormalized.prototype.click = function (data, group) {
+    BarHorizontalNormalizedComponent.prototype.onClick = function (data, group) {
         data.series = group.name;
         this.clickHandler.emit(data);
     };
-    BarHorizontalNormalized.prototype.trackBy = function (index, item) {
+    BarHorizontalNormalizedComponent.prototype.trackBy = function (index, item) {
         return item.name;
     };
-    BarHorizontalNormalized.prototype.setColors = function () {
+    BarHorizontalNormalizedComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
     };
-    BarHorizontalNormalized.prototype.updateYAxisWidth = function (_a) {
+    BarHorizontalNormalizedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
         this.yAxisWidth = width;
         this.update();
     };
-    BarHorizontalNormalized.prototype.updateXAxisHeight = function (_a) {
+    BarHorizontalNormalizedComponent.prototype.updateXAxisHeight = function (_a) {
         var height = _a.height;
         this.xAxisHeight = height;
         this.update();
     };
-    BarHorizontalNormalized.decorators = [
+    BarHorizontalNormalizedComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'bar-horizontal-normalized',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"click($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -138,12 +138,12 @@ var BarHorizontalNormalized = (function (_super) {
                 },] },
     ];
     /** @nocollapse */
-    BarHorizontalNormalized.ctorParameters = [
+    BarHorizontalNormalizedComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    BarHorizontalNormalized.propDecorators = {
+    BarHorizontalNormalizedComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
@@ -160,7 +160,7 @@ var BarHorizontalNormalized = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return BarHorizontalNormalized;
-}(base_chart_component_1.BaseChart));
-exports.BarHorizontalNormalized = BarHorizontalNormalized;
+    return BarHorizontalNormalizedComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.BarHorizontalNormalizedComponent = BarHorizontalNormalizedComponent;
 //# sourceMappingURL=bar-horizontal-normalized.component.js.map

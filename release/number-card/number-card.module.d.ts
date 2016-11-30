@@ -1,6 +1,6 @@
-import { Card } from "./card.component";
-import { CardSeries } from "./card-series.component";
-import { NumberCard } from "./number-card.component";
-export { Card, CardSeries, NumberCard };
+import { CardComponent } from "./card.component";
+import { CardSeriesComponent } from "./card-series.component";
+import { NumberCardComponent } from "./number-card.component";
+export { CardComponent, CardSeriesComponent, NumberCardComponent };
 export declare class NumberCardModule {
 }

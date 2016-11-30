@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
 var injection_service_1 = require('../../utils/injection.service');
-var Chart = (function () {
-    function Chart(vcr, injectionService) {
+var ChartComponent = (function () {
+    function ChartComponent(vcr, injectionService) {
         this.vcr = vcr;
         this.injectionService = injectionService;
         this.legend = false;
@@ -10,10 +10,10 @@ var Chart = (function () {
         this.legendLabelClick = new core_1.EventEmitter();
         this.injectionService.setRootViewContainer(vcr);
     }
-    Chart.prototype.ngOnChanges = function () {
+    ChartComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    Chart.prototype.update = function () {
+    ChartComponent.prototype.update = function () {
         this.legendWidth = 0;
         if (this.legend) {
             this.legendType = this.getLegendType();
@@ -26,7 +26,7 @@ var Chart = (function () {
         }
         this.chartWidth = 12 - this.legendWidth;
     };
-    Chart.prototype.getLegendType = function () {
+    ChartComponent.prototype.getLegendType = function () {
         if (typeof this.legendData === 'function') {
             return 'scaleLegend';
         }
@@ -34,7 +34,7 @@ var Chart = (function () {
             return 'legend';
         }
     };
-    Chart.decorators = [
+    ChartComponent.decorators = [
         { type: core_1.Component, args: [{
                     providers: [injection_service_1.InjectionService],
                     selector: 'chart',
@@ -51,11 +51,11 @@ var Chart = (function () {
                 },] },
     ];
     /** @nocollapse */
-    Chart.ctorParameters = [
+    ChartComponent.ctorParameters = [
         { type: core_1.ViewContainerRef, },
         { type: injection_service_1.InjectionService, },
     ];
-    Chart.propDecorators = {
+    ChartComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'legend': [{ type: core_1.Input },],
         'data': [{ type: core_1.Input },],
@@ -64,7 +64,7 @@ var Chart = (function () {
         'colors': [{ type: core_1.Input },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return Chart;
+    return ChartComponent;
 }());
-exports.Chart = Chart;
+exports.ChartComponent = ChartComponent;
 //# sourceMappingURL=chart.component.js.map

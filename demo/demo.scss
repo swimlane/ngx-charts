@@ -229,12 +229,30 @@ main {
     background: rgba(255,255,255,0.05);
   }
 
+  .legend-item {
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .legend-label {
+    &:hover {
+      color: #fff !important;
+    }
+  }
+
   .scale-legend-label {
     color: $color-text-med;
   }
 
   .advanced-pie-legend {
     color: $color-text-med;
+
+    .legend-item {
+      &:hover {
+        color: #fff !important;
+      }
+    }
   }
 
   .force-directed-graph {
@@ -277,11 +295,11 @@ main {
   }
 
   .timeline {
+    .brush-background {
+      fill: rgba(255,255,255,0.05);
+    }
+    
     .brush {
-      .overlay {
-        fill: rgba(255,255,255,0.05);
-      }
-
       .selection {
         fill: rgba(255, 255, 255, 0.1);
         stroke: #aaa;

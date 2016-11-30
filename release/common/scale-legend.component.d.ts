@@ -1,6 +1,6 @@
 import { OnChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-export declare class ScaleLegend implements OnChanges {
+export declare class ScaleLegendComponent implements OnChanges {
     private sanitizer;
     valueRange: any;
     colors: any;
