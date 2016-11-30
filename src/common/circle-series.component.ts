@@ -21,7 +21,6 @@ import * as moment from 'moment';
         [attr.fill]="color"
         class="tooltip-bar"
       />
-
       <svg:g circle
         [attr.class]="className"
         [cx]="circle.cx"
@@ -32,10 +31,9 @@ import * as moment from 'moment';
         [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
-        (clickHandler)="click($event, circle.label)"
+        (clickHandler)="onClick($event, circle.label)"
         [style.opacity]="circle.opacity"
         [style.cursor]="'pointer'"
-
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
@@ -45,10 +43,7 @@ import * as moment from 'moment';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CircleSeries implements OnChanges {
-  areaPath: any;
-  circles: any[];
-  barVisible: boolean = false;
+export class CircleSeriesComponent implements OnChanges {
 
   @Input() data;
   @Input() type = 'standard';
@@ -61,15 +56,19 @@ export class CircleSeries implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnChanges() {
+  areaPath: any;
+  circles: any[];
+  barVisible: boolean = false;
+
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.circles = this.getCircles();
   }
 
-  getCircles() {
+  getCircles(): any[] {
     return this.data.series.map((d, i) => {
       let value = d.value;
       let label = d.name;
@@ -112,7 +111,7 @@ export class CircleSeries implements OnChanges {
     }).filter((circle) => circle !== undefined);
   }
 
-  click(value, label) {
+  onClick(value, label): void {
     this.clickHandler.emit({
       name: label,
       value: value

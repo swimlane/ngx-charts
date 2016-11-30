@@ -12,8 +12,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
+
 import d3 from '../d3';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 
@@ -38,7 +39,6 @@ import { colorHelper } from '../utils/color-sets';
           [animate]="false"
           [pointerEvents]="false">
         </svg:g>
-
         <svg:g pieArc
           [startAngle]="0"
           [endAngle]="valueArc.endAngle"
@@ -48,9 +48,8 @@ import { colorHelper } from '../utils/color-sets';
           [fill]="colors(value)"
           [data]="valueArc.data"
           [animate]="true"
-          (clickHandler)="click($event)">
+          (clickHandler)="onClick($event)">
         </svg:g>
-
         <svg:g *ngFor="let tick of ticks.big"
           class="gauge-tick gauge-tick-large"
           transform="rotate(-90)"
@@ -59,7 +58,6 @@ import { colorHelper } from '../utils/color-sets';
             [attr.d]="tick.line"
           />
         </svg:g>
-
         <svg:g *ngFor="let tick of ticks.big"
           class="gauge-tick gauge-tick-large"
           transform="rotate(-90)"
@@ -71,7 +69,6 @@ import { colorHelper } from '../utils/color-sets';
             {{tick.text}}
           </svg:text>
         </svg:g>
-
         <svg:g *ngFor="let tick of ticks.small"
           class="gauge-tick gauge-tick-small"
           transform="rotate(-90)"
@@ -80,7 +77,6 @@ import { colorHelper } from '../utils/color-sets';
             [attr.d]="tick.line"
           />
         </svg:g>
-
         <svg:g transform="rotate(120)">
           <svg:text #textEl
             [style.textAnchor]="'middle'"
@@ -94,7 +90,7 @@ import { colorHelper } from '../utils/color-sets';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class GaugeComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() scheme;
@@ -139,15 +135,15 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
     setTimeout(() => this.scaleText());
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -201,17 +197,17 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
     });
   }
 
-  getValueDomain() {
+  getValueDomain(): any[] {
     return [this.min, this.max];
   }
 
-  getValueScale() {
+  getValueScale(): any {
     return d3.scaleLinear()
       .range([0, this.angleSpan])
       .domain(this.valueDomain);
   }
 
-  getTicks() {
+  getTicks(): any {
     let bigTickSegment = this.angleSpan / this.bigSegments;
     let smallTickSegment = bigTickSegment / (this.smallSegments);
     let tickLength = 20;
@@ -259,7 +255,7 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
     return ticks;
   }
 
-  getTickPath(startDistance, tickLength, angle) {
+  getTickPath(startDistance, tickLength, angle): any {
     let y1 = startDistance * Math.sin(angle);
     let y2 = (startDistance + tickLength) * Math.sin(angle);
     let x1 = startDistance * Math.cos(angle);
@@ -270,7 +266,7 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
     return line(points);
   }
 
-  displayValue() {
+  displayValue(): string {
     if (this.units) {
       return `${this.value.toLocaleString()} ${this.units}`;
     } else {
@@ -278,14 +274,14 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  scaleText() {
-    let width = this.textEl.nativeElement.getBoundingClientRect().width;
-    if (width === 0) {
-      return;
-    }
-    let oldScale = this.resizeScale;
-    let availableSpace = this.outerRadius;
+  scaleText(): void {
+    const { width } = this.textEl.nativeElement.getBoundingClientRect();
+    if (width === 0) return;
+
+    const oldScale = this.resizeScale;
+    const availableSpace = this.outerRadius;
     this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+
     if (this.resizeScale !== oldScale) {
       this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
       this.cd.markForCheck();
@@ -293,11 +289,11 @@ export class Gauge extends BaseChart implements OnChanges, OnDestroy, AfterViewI
     }
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
   }
 }

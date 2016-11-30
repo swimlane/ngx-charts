@@ -25,13 +25,11 @@ import { reduceTicks } from './ticks.helper';
           [attr.x]="x1"
           [attr.y]="y1"
           [attr.text-anchor]="textAnchor"
-
           [style.font-size]="'12px'">
           {{trimLabel(tickFormat(tick))}}
         </svg:text>
       </svg:g>
     </svg:g>
-
     <svg:g *ngFor="let tick of ticks"
       [attr.transform]="transform(tick)">
       <svg:g
@@ -46,7 +44,8 @@ import { reduceTicks } from './ticks.helper';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YAxisTicks implements OnChanges, AfterViewInit {
+export class YAxisTicksComponent implements OnChanges, AfterViewInit {
+
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -62,8 +61,8 @@ export class YAxisTicks implements OnChanges, AfterViewInit {
   innerTickSize: any = 6;
   tickPadding: any = 3;
   tickSpacing: any;
-  verticalSpacing: any;
-  textAnchor: any;
+  verticalSpacing: number = 20;
+  textAnchor: any = 'middle';
   dy: any;
   x1: any;
   x2: any;
@@ -74,30 +73,25 @@ export class YAxisTicks implements OnChanges, AfterViewInit {
   tickFormat: any;
   ticks: any;
   width: number = 0;
+  outerTickSize: number = 6;
+  rotateLabels: boolean = false;
+  trimLabel: any;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
   constructor() {
-    Object.assign(this, {
-      innerTickSize: 6,
-      outerTickSize: 6,
-      tickPadding: 3,
-      rotateLabels: false,
-      verticalSpacing: 20,
-      textAnchor: 'middle',
-      trimLabel
-    });
+    this.trimLabel = trimLabel;
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     setTimeout(() => this.updateDims());
   }
 
-  updateDims() {
+  updateDims(): void {
     const width = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().width, 10);
     if (width !== this.width) {
       this.width = width;
@@ -106,7 +100,7 @@ export class YAxisTicks implements OnChanges, AfterViewInit {
     }
   }
 
-  update() {
+  update(): void {
     let scale;
 
     let sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
@@ -174,7 +168,7 @@ export class YAxisTicks implements OnChanges, AfterViewInit {
     setTimeout(() => this.updateDims());
   }
 
-  getTicks() {
+  getTicks(): any {
     let ticks;
     let maxTicks = this.getMaxTicks();
 
@@ -197,16 +191,16 @@ export class YAxisTicks implements OnChanges, AfterViewInit {
     return ticks;
   }
 
-  getMaxTicks() {
+  getMaxTicks(): number {
     let tickHeight = 20;
     return Math.floor(this.height / tickHeight);
   }
 
-  tickTransform(tick) {
+  tickTransform(tick): string {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
   }
 
-  gridLineTransform() {
+  gridLineTransform(): string {
     return `translate(5,0)`;
   }
 

@@ -104,7 +104,7 @@
 }
 
 .area-tooltip-container {
-  padding: 5px 0px;
+  padding: 5px 0;
   pointer-events: none;
 }
 
@@ -113,7 +113,7 @@
 .tooltip-item{
   text-align: left;
   line-height: 1.2em;
-  padding: 5px 0px;
+  padding: 5px 0;
 
   .tooltip-item-color {
     display: inline-block;
@@ -188,7 +188,6 @@
       font-weight: bold;
       -webkit-transition: 0.2s;
       -moz-transition: 0.2s;
-      -ms-transition: 0.2s;
       transition: 0.2s;
     }
 
@@ -213,7 +212,6 @@
     font-size: 12px;
     width: 100%;
     text-overflow: ellipsis;
-    display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     padding-right: 20px;
@@ -279,7 +277,6 @@
           font-weight: bold;
           -webkit-transition: 0.2s;
           -moz-transition: 0.2s;
-          -ms-transition: 0.2s;
           transition: 0.2s;
         }
 

@@ -55,7 +55,7 @@ import { InjectionService } from '../../utils/injection.service';
     ])
   ]
 })
-export class Chart implements OnChanges {
+export class ChartComponent implements OnChanges {
 
   @Input() view;
   @Input() legend = false;

@@ -1,16 +1,16 @@
-import {NgModule} from "@angular/core";
-import {ForceDirectedGraph} from "./force-directed-graph.component";
-import {CommonModule} from "../common/common.module";
+import { NgModule } from '@angular/core';
+import { ForceDirectedGraphComponent } from './force-directed-graph.component';
+import { CommonModule } from '../common/common.module';
 
-export {ForceDirectedGraph}
+export { ForceDirectedGraphComponent };
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    ForceDirectedGraph,
+    ForceDirectedGraphComponent,
   ],
   exports: [
-    ForceDirectedGraph,
+    ForceDirectedGraphComponent,
   ]
 })
 export class ForceDirectedGraphModule {}

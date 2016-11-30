@@ -1,7 +1,8 @@
 import { ElementRef, NgZone, ChangeDetectorRef } from "@angular/core";
 import { Observable } from "rxjs";
 
-export abstract class BaseChart {
+export abstract class BaseChartComponent {
+
   results: any[];
   chartElement: ElementRef;
   zone: NgZone;
@@ -22,13 +23,13 @@ export abstract class BaseChart {
     this.bindWindowResizeEvent();
   }
 
-  protected unbindEvents() {
+  protected unbindEvents(): void {
     if (this.resizeSubscription) {
       this.resizeSubscription.unsubscribe();
     }
   }
 
-  update() {
+  update(): void {
     if (this.results) {
       this.results = this.cloneData(this.results);
     }
@@ -47,7 +48,7 @@ export abstract class BaseChart {
     }
   }
 
-  getContainerDims() {
+  getContainerDims(): any {
     let width = 0;
     let height = 0;
     const hostElem = this.chartElement.nativeElement;
@@ -59,7 +60,7 @@ export abstract class BaseChart {
     return {width, height};
   }
 
-  private bindWindowResizeEvent() {
+  private bindWindowResizeEvent(): void {
     this.zone.run(() => {
       let source = Observable.fromEvent(window, 'resize', null, null);
       let subscription = source.debounceTime(200).subscribe(e => {
@@ -72,8 +73,16 @@ export abstract class BaseChart {
     });
   }
 
-  // Clones the data into a new object
-  private cloneData(data) {
+  /**
+   * Clones the data into a new object
+   * 
+   * @private
+   * @param {any} data
+   * @returns {*}
+   * 
+   * @memberOf BaseChart
+   */
+  private cloneData(data): any {
     let results = [];
 
     for (let item of data) {
@@ -99,6 +108,8 @@ export abstract class BaseChart {
     return results;
   }
 
-  abstract setColors()
-  abstract click(data, group)
+  abstract setColors(): void;
+  
+  abstract onClick(data, group): void;
+
 }

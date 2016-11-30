@@ -22,7 +22,6 @@ import d3 from '../d3';
           [startOpacity]="startOpacity"
         />
       </defs>
-
       <svg:rect
         [attr.fill]="gradient ? gradientUrl : fill"
         rx="3"
@@ -30,20 +29,13 @@ import d3 from '../d3';
         [attr.height]="height"
         class="cell"
         style="cursor: pointer"
-        (click)="click()"
+        (click)="onClick()"
       />
-
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeatMapCell implements OnChanges {
-  element: HTMLElement;
-  transform: string;
-  activeRange: any[];
-  startOpacity: number;
-  gradientId: string;
-  gradientUrl: string;
+export class HeatMapCellComponent implements OnChanges {
 
   @Input() fill;
   @Input() x;
@@ -56,11 +48,18 @@ export class HeatMapCell implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+  element: HTMLElement;
+  transform: string;
+  activeRange: any[];
+  startOpacity: number;
+  gradientId: string;
+  gradientUrl: string;
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.transform = `translate(${this.x} , ${this.y})`;
     let pageUrl = window.location.href;
     this.startOpacity = 0.3;
@@ -70,23 +69,20 @@ export class HeatMapCell implements OnChanges {
     this.loadAnimation();
   }
 
-  loadAnimation() {
+  loadAnimation(): void {
     let node = d3.select(this.element).select('.cell');
-
-    node
-      .attr('opacity', 0);
-
+    node.attr('opacity', 0);
     this.animateToCurrentForm();
   }
 
-  animateToCurrentForm() {
+  animateToCurrentForm(): void {
     let node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1);
   }
 
-  click() {
+  onClick() {
     this.clickHandler.emit(this.data);
   }
 

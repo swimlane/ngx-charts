@@ -7,7 +7,7 @@ import {
   ViewChild,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { YAxisTicks } from './y-axis-ticks.component';
+import { YAxisTicksComponent } from './y-axis-ticks.component';
 
 @Component({
   selector: 'g[yAxis]',
@@ -39,7 +39,8 @@ import { YAxisTicks } from './y-axis-ticks.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class YAxis implements OnChanges {
+export class YAxisComponent implements OnChanges {
+
   @Input() yScale;
   @Input() dims;
   @Input() tickFormatting;
@@ -58,7 +59,7 @@ export class YAxis implements OnChanges {
   yOrient: any;
   labelOffset: number = 80;
 
-  @ViewChild(YAxisTicks) ticksComponent: YAxisTicks;
+  @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
   constructor() {
     Object.assign(this, {

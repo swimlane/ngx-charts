@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import d3 from '../d3';
 
 @Component({
@@ -37,7 +37,6 @@ import d3 from '../d3';
           [dims]="dims"
           orient="vertical">
         </svg:g>
-
         <svg:g xAxis
           *ngIf="xAxis"
           [xScale]="groupScale"
@@ -46,7 +45,6 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="valueScale"
@@ -56,20 +54,18 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
-          <svg:g seriesVertical
-            *ngFor="let group of results; trackBy:trackBy"
-            [@animationState]="'active'"
-            [attr.transform]="groupTransform(group)"
-
-            [xScale]="innerScale"
-            [yScale]="valueScale"
-            [colors]="colors"
-            [series]="group.series"
-            [dims]="dims"
-            [gradient]="gradient"
-            (clickHandler)="click($event, group)"
-          />
+        <svg:g seriesVertical
+          *ngFor="let group of results; trackBy:trackBy"
+          [@animationState]="'active'"
+          [attr.transform]="groupTransform(group)"
+          [xScale]="innerScale"
+          [yScale]="valueScale"
+          [colors]="colors"
+          [series]="group.series"
+          [dims]="dims"
+          [gradient]="gradient"
+          (clickHandler)="onClick($event, group)"
+        />
         </svg:g>
     </chart>
   `,
@@ -86,7 +82,7 @@ import d3 from '../d3';
     ])
   ]
 })
-export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class BarVertical2DComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() results;
@@ -233,7 +229,7 @@ export class BarVertical2D extends BaseChart implements OnChanges, OnDestroy, Af
     return `translate(${this.groupScale(group.name)}, 0)`;
   }
 
-  click(data, group) {
+  onClick(data, group) {
     data.series = group.name;
     this.clickHandler.emit(data);
   }

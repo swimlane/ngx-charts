@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import d3 from '../d3';
 
 @Component({
@@ -61,7 +61,7 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
-            (clickHandler)="click($event, group)"
+            (clickHandler)="onClick($event, group)"
           />
         </svg:g>
 
@@ -81,7 +81,7 @@ import d3 from '../d3';
     ])
   ]
 })
-export class BarVerticalStacked extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class BarVerticalStackedComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
   
   @Input() view;
   @Input() results;
@@ -219,7 +219,7 @@ export class BarVerticalStacked extends BaseChart implements OnChanges, OnDestro
     return `translate(${this.xScale(group.name)}, 0)`;
   }
 
-  click(data, group) {
+  onClick(data, group) {
     data.series = group.name;
     this.clickHandler.emit(data);
   }

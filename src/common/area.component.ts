@@ -31,12 +31,7 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Area implements OnChanges {
-  element: HTMLElement;
-  gradientId: string;
-  gradientFill: string;
-  areaPath: string;
-  initialized: boolean = false;
+export class AreaComponent implements OnChanges {
 
   @Input() data;
   @Input() path;
@@ -50,11 +45,17 @@ export class Area implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+  element: HTMLElement;
+  gradientId: string;
+  gradientFill: string;
+  areaPath: string;
+  initialized: boolean = false;
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     if (!this.initialized) {
       this.loadAnimation();
       this.initialized = true;
@@ -63,7 +64,7 @@ export class Area implements OnChanges {
     }
   }
 
-  update() {
+  update(): void {
     let pageUrl = window.location.href;
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
@@ -71,12 +72,12 @@ export class Area implements OnChanges {
     this.animateToCurrentForm();
   }
 
-  loadAnimation() {
+  loadAnimation(): void {
     this.areaPath = this.startingPath;
     setTimeout(this.update.bind(this), 100);
   }
 
-  animateToCurrentForm() {
+  animateToCurrentForm(): void {
     let node = d3.select(this.element).select('.area');
 
     node.transition().duration(750)

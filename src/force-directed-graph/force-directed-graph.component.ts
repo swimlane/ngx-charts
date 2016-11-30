@@ -1,5 +1,5 @@
-import { Chart } from '../common/charts/chart.component';
-import { BaseChart } from '../common/base-chart.component';
+import { ChartComponent } from '../common/charts/chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import d3 from '../d3';
 import { colorHelper } from '../utils/color-sets';
@@ -67,7 +67,7 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ForceDirectedGraph extends BaseChart implements OnChanges {
+export class ForceDirectedGraphComponent extends BaseChartComponent implements OnChanges {
 
   @Input() force = d3.forceSimulation()
     .force("charge", d3.forceManyBody())
@@ -89,7 +89,7 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
 
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
-  @ViewChild(Chart, { read: ElementRef }) chart: ElementRef;
+  @ViewChild(ChartComponent, { read: ElementRef }) chart: ElementRef;
 
   colors: Function;
   dims: ViewDimensions;
@@ -104,11 +104,11 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
     super(element, zone, cd);
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -133,30 +133,30 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
     });
   }
 
-  click($event, node) {
+  onClick($event, node): void {
     this.clickHandler.emit(node);
   }
 
-  getSeriesDomain() {
+  getSeriesDomain(): any[] {
     return this.nodes.map(d => this.groupResultsBy(d))
       .reduce((nodes: any[], node): any[] => nodes.includes(node) ? nodes : nodes.concat([node]), [])
       .sort();
   }
 
-  trackLinkBy(index, link) {
+  trackLinkBy(index, link): any {
     return link.index;
   }
 
-  trackNodeBy(index, node) {
+  trackNodeBy(index, node): any {
     return node.value;
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
   // Easier to use Angular2 event management than use d3.drag
-  onDragStart(node, $event: MouseEvent) {
+  onDragStart(node, $event: MouseEvent): void {
     this.force.alphaTarget(0.3).restart();
     this.draggingNode = node;
     this.draggingStart = { x: $event.x - node.x, y: $event.y - node.y };
@@ -165,19 +165,17 @@ export class ForceDirectedGraph extends BaseChart implements OnChanges {
   }
 
   @HostListener('document:mousemove', ['$event'])
-  onDrag($event: MouseEvent) {
-    if (!this.draggingNode) {
-      return;
-    }
+  onDrag($event: MouseEvent): void {
+    if (!this.draggingNode) return;
+
     this.draggingNode.fx = $event.x - this.draggingStart.x;
     this.draggingNode.fy = $event.y - this.draggingStart.y;
   }
 
   @HostListener('document:mouseup')
-  onDragEnd(node, $event: MouseEvent) {
-    if (!this.draggingNode) {
-      return;
-    }
+  onDragEnd(node, $event: MouseEvent): void {
+    if (!this.draggingNode) return;
+
     this.force.alphaTarget(0);
     this.draggingNode.fx = undefined;
     this.draggingNode.fy = undefined;

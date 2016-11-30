@@ -29,13 +29,12 @@ export interface CardModel {
       [height]="c.height"
       [color]="c.color"
       [data]="c.data"
-      (clickHandler)="click($event)"
+      (clickHandler)="onClick($event)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardSeries implements OnChanges {
-  cards: CardModel[];
+export class CardSeriesComponent implements OnChanges {
 
   @Input() data;
   @Input() dims;
@@ -43,21 +42,21 @@ export class CardSeries implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  constructor(private zone: NgZone) {
+  cards: CardModel[];
 
-  }
+  constructor(private zone: NgZone) { }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.zone.run(() => {
       this.cards = this.getCards();
     });
   }
 
-  getCards() {
+  getCards(): any[] {
     return this.data
       .map((d, index) => {
         let label = d.data.name;
@@ -82,11 +81,11 @@ export class CardSeries implements OnChanges {
       });
   }
 
-  trackBy(index, card) {
+  trackBy(index, card): string {
     return card.label;
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 

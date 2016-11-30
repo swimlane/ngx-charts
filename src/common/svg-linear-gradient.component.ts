@@ -28,7 +28,8 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SvgLinearGradient implements OnChanges {
+export class SvgLinearGradientComponent implements OnChanges {
+  
   @Input() orientation = 'vertical';
   @Input() color;
   @Input() name;
@@ -40,7 +41,7 @@ export class SvgLinearGradient implements OnChanges {
   y1: any;
   y2: any;
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.x1 = '0%';
     this.x2 = '0%';
     this.y1 = '0%';

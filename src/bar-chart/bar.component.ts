@@ -33,7 +33,7 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Bar implements OnInit, OnChanges {
+export class BarComponent implements OnInit, OnChanges {
   
   @Input() fill;
   @Input() data;

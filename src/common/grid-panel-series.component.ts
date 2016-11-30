@@ -20,7 +20,7 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridPanelSeries implements OnChanges {
+export class GridPanelSeriesComponent implements OnChanges {
   gridPanels: any[];
 
   @Input() data;
@@ -29,15 +29,15 @@ export class GridPanelSeries implements OnChanges {
   @Input() yScale;
   @Input() orient;
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.gridPanels = this.getGridPanels();
   }
 
-  getGridPanels() {
+  getGridPanels(): any[] {
     return this.data.map((d, i) => {
       let offset, width, height, x, y, className;
       className = 'odd';

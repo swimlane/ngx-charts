@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from "../utils/id";
 import d3 from '../d3';
 import * as moment from 'moment';
@@ -84,7 +84,7 @@ import * as moment from 'moment';
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
-              (clickHandler)="click($event, series)"
+              (clickHandler)="onClick($event, series)"
             />
           </svg:g>
         </svg:g>
@@ -116,7 +116,7 @@ import * as moment from 'moment';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class LineChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() results;
@@ -174,15 +174,15 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -226,12 +226,14 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
     });
   }
 
-  updateTimeline() {
+  updateTimeline(): void {
     if (this.timeline) {
       this.timelineWidth = this.width;
+
       if (this.legend) {
         this.timelineWidth = this.width * 10.0 / 12.0;
       }
+
       this.timelineWidth -= (this.margin[3] + this.margin[1]);
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
@@ -240,8 +242,9 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
     }
   }
 
-  getXDomain() {
+  getXDomain(): any[] {
     let values = [];
+
     for (let results of this.results) {
       for (let d of results.series){
         if (!values.includes(d.name)) {
@@ -252,6 +255,7 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
+
     if (this.scaleType === 'time') {
       values = values.map(v => moment(v).toDate());
       let min = Math.min(...values);
@@ -270,8 +274,9 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
     return domain;
   }
 
-  getYDomain() {
+  getYDomain(): any[] {
     let domain = [];
+
     for (let results of this.results) {
       for (let d of results.series){
         if (!domain.includes(d.value)) {
@@ -285,15 +290,17 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
     if (!this.autoScale) {
       min = Math.min(0, min);
     }
+
     return [min, max];
   }
 
-  getSeriesDomain() {
+  getSeriesDomain(): any[] {
     return this.results.map(d => d.name);
   }
 
-  getXScale(domain, width) {
+  getXScale(domain, width): any {
     let scale;
+
     if (this.scaleType === 'time') {
       scale = d3.scaleTime()
         .range([0, width])
@@ -312,34 +319,32 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
     return scale;
   }
 
-  getYScale(domain, height) {
+  getYScale(domain, height): any {
     return d3.scaleLinear()
       .range([height, 0])
       .domain(domain);
   }
 
-  getScaleType(values) {
+  getScaleType(values): string {
     let date = true;
     let number = true;
+
     for (let value of values) {
       if (!this.isDate(value)) {
         date = false;
       }
+
       if (typeof value !== 'number') {
         number = false;
       }
     }
 
-    if (date) {
-      return 'time';
-    }
-    if (number) {
-      return 'linear';
-    }
+    if (date) return 'time';
+    if (number) return 'linear';
     return 'ordinal';
   }
 
-  isDate(value) {
+  isDate(value): boolean {
     if (value instanceof Date) {
       return true;
     }
@@ -347,41 +352,42 @@ export class LineChart extends BaseChart implements OnChanges, OnDestroy, AfterV
     return false;
   }
 
-  updateDomain(domain) {
+  updateDomain(domain): void {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
   }
 
-  updateHoveredVertical(item) {
+  updateHoveredVertical(item): void {
     this.hoveredVertical = item.value;
   }
 
   @HostListener('mouseleave')
-  hideCircles() {
+  hideCircles(): void {
     this.hoveredVertical = null;
   }
 
-  click(data, series) {
+  onClick(data, series): void {
     data.series = series.name;
     this.clickHandler.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.name;
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }
+
 }

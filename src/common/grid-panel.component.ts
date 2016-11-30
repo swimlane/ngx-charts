@@ -18,10 +18,12 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridPanel {
+export class GridPanelComponent {
+
   @Input() path;
   @Input() width;
   @Input() height;
   @Input() x;
   @Input() y;
+  
 }

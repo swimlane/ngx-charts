@@ -20,9 +20,8 @@ import d3 from '../d3';
         [attr.height]="height"
         [style.cursor]="'pointer'"
         class="cell"
-        (click)="click()"
+        (click)="onClick()"
       />
-
       <svg:foreignObject
         *ngIf="width >= 70 && height >= 35"
         [attr.x]="x"
@@ -43,11 +42,7 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeMapCell implements OnChanges {
-  element: HTMLElement;
-  transform: string;
-  formattedValue: string; // todo check string or number ?
-  initialized: boolean = false;
+export class TreeMapCellComponent implements OnChanges {
 
   @Input() fill;
   @Input() x;
@@ -60,16 +55,20 @@ export class TreeMapCell implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+  element: HTMLElement;
+  transform: string;
+  formattedValue: string; // todo check string or number ?
+  initialized: boolean = false;
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
-
   }
 
-  update() {
+  update(): void {
     this.formattedValue = this.value.toLocaleString();
     if (this.initialized) {
       this.animateToCurrentForm();
@@ -77,10 +76,9 @@ export class TreeMapCell implements OnChanges {
       this.loadAnimation();
       this.initialized = true;
     }
-
   }
 
-  loadAnimation() {
+  loadAnimation(): void {
     let node = d3.select(this.element).select('.cell');
 
     node
@@ -91,7 +89,7 @@ export class TreeMapCell implements OnChanges {
     this.animateToCurrentForm();
   }
 
-  animateToCurrentForm() {
+  animateToCurrentForm(): void {
     let node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
@@ -102,7 +100,7 @@ export class TreeMapCell implements OnChanges {
       .attr('height', this.height);
   }
 
-  click() {
+  onClick(): void {
     this.clickHandler.emit({
       name: this.label,
       value: this.value

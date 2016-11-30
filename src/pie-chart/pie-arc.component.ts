@@ -33,21 +33,14 @@ import { id } from "../utils/id";
         class="arc"
         [style.cursor]="'pointer'"
         [attr.fill]="gradient ? gradientFill : fill"
-        (click)="click()"
+        (click)="onClick()"
         [style.pointer-events]="pointerEvents ? 'auto' : 'none'"
       />
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PieArc implements OnChanges {
-  element: HTMLElement;
-  path: any;
-  startOpacity: number;
-  radialGradientId: string;
-  linearGradientId: string;
-  gradientFill: string;
-  initialized: boolean = false;
+export class PieArcComponent implements OnChanges {
 
   @Input() fill;
   @Input() startAngle: number = 0;
@@ -65,15 +58,23 @@ export class PieArc implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+  element: HTMLElement;
+  path: any;
+  startOpacity: number;
+  radialGradientId: string;
+  linearGradientId: string;
+  gradientFill: string;
+  initialized: boolean = false;
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     let arc = this.calculateArc();
     this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
     this.startOpacity = 0.3;
@@ -99,7 +100,7 @@ export class PieArc implements OnChanges {
 
   }
 
-  calculateArc() {
+  calculateArc(): any {
     let outerRadius = this.outerRadius;
     if (this.explodeSlices && this.innerRadius === 0) {
       outerRadius = this.outerRadius * this.value / this.max;
@@ -111,7 +112,7 @@ export class PieArc implements OnChanges {
       .cornerRadius(this.cornerRadius);
   }
 
-  loadAnimation() {
+  loadAnimation(): void {
     let node = d3.select(this.element).selectAll('.arc').data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
     let arc = this.calculateArc();
 
@@ -138,7 +139,7 @@ export class PieArc implements OnChanges {
       });
   }
 
-  updateAnimation() {
+  updateAnimation(): void {
     let node = d3.select(this.element).selectAll('.arc').data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
     let arc = this.calculateArc();
 
@@ -154,7 +155,7 @@ export class PieArc implements OnChanges {
       });
   }
 
-  click() {
+  onClick(): void {
     this.clickHandler.emit(this.data);
   }
 

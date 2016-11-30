@@ -39,8 +39,7 @@ import {
     ])
   ]
 })
-export class Line implements OnChanges {
-  element: ElementRef;
+export class LineComponent implements OnChanges {
 
   @Input() path;
   @Input() stroke;
@@ -48,12 +47,14 @@ export class Line implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+  element: ElementRef;
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
-
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     // add update animation
   }
+
 }

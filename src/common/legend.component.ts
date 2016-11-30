@@ -38,7 +38,7 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Legend implements OnChanges {
+export class LegendComponent implements OnChanges {
 
   @Input() data;
   @Input() title;

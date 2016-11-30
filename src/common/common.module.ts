@@ -1,37 +1,40 @@
 import { NgModule } from "@angular/core";
-import { Chart } from "./charts/chart.component";
-import { Legend } from "./legend.component";
-import { ScaleLegend } from "./scale-legend.component";
+import { ChartComponent } from "./charts/chart.component";
+import { LegendComponent } from "./legend.component";
+import { ScaleLegendComponent } from "./scale-legend.component";
 import { AxesModule } from "./axes/axes.module";
 import { TooltipModule } from "./tooltip";
-import { CircleSeries } from "./circle-series.component";
-import { Circle } from "./circle.component";
-import { GridPanel } from "./grid-panel.component";
-import { GridPanelSeries } from "./grid-panel-series.component";
-import { SvgLinearGradient } from "./svg-linear-gradient.component";
-import { SvgRadialGradient } from "./svg-radial-gradient.component";
+import { CircleSeriesComponent } from "./circle-series.component";
+import { CircleComponent } from "./circle.component";
+import { GridPanelComponent } from "./grid-panel.component";
+import { GridPanelSeriesComponent } from "./grid-panel-series.component";
+import { SvgLinearGradientComponent } from "./svg-linear-gradient.component";
+import { SvgRadialGradientComponent } from "./svg-radial-gradient.component";
 import { Timeline } from "./timeline.component";
 import { CommonModule as Ng2CommonModule } from "@angular/common";
-import { Area } from "./area.component";
+import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
-import { BaseChart } from "./base-chart.component";
+import { BaseChartComponent } from "./base-chart.component";
 
 export * from "./tooltip";
-export { Chart, Legend, ScaleLegend, CircleSeries, Circle, GridPanel, GridPanelSeries, SvgLinearGradient, SvgRadialGradient,
-  Timeline, Area, AreaTooltip, BaseChart };
+export { 
+  ChartComponent, LegendComponent, ScaleLegendComponent, CircleSeriesComponent, CircleComponent, GridPanelComponent, 
+  GridPanelSeriesComponent, SvgLinearGradientComponent, SvgRadialGradientComponent,
+  Timeline, AreaComponent, AreaTooltip, BaseChartComponent 
+};
 
 const COMPONENTS = [
-  Area,
+  AreaComponent,
   AreaTooltip,
-  Chart,
-  Legend,
-  ScaleLegend,
-  Circle,
-  CircleSeries,
-  GridPanel,
-  GridPanelSeries,
-  SvgLinearGradient,
-  SvgRadialGradient,
+  ChartComponent,
+  LegendComponent,
+  ScaleLegendComponent,
+  CircleComponent,
+  CircleSeriesComponent,
+  GridPanelComponent,
+  GridPanelSeriesComponent,
+  SvgLinearGradientComponent,
+  SvgRadialGradientComponent,
   Timeline
 ];
 

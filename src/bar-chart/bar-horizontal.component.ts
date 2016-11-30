@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { tickFormat } from '../common/tick-format.helper';
 import d3 from '../d3';
 
@@ -52,25 +52,15 @@ import d3 from '../d3';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
-          (clickHandler)="click($event)"
+  
+          (clickHandler)="onClick($event)"
         />
       </svg:g>
     </chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-
-  dims: ViewDimensions;
-  yScale: any;
-  xScale: any;
-  xDomain: any;
-  yDomain: any;
-  transform: string;
-  colors: Function;
-  margin = [10, 20, 10, 20];
-  xAxisHeight: number = 0;
-  yAxisWidth: number = 0;
+export class BarHorizontalComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() results;
@@ -88,6 +78,17 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
 
   @Output() clickHandler = new EventEmitter();
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  yScale: any;
+  xScale: any;
+  xDomain: any;
+  yDomain: any;
+  transform: string;
+  colors: Function;
+  margin = [10, 20, 10, 20];
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
@@ -167,7 +168,7 @@ export class BarHorizontal extends BaseChart implements OnChanges, OnDestroy, Af
     return tickFormatting;
   }
 
-  click(data) {
+  onClick(data) {
     this.clickHandler.emit(data);
   }
 

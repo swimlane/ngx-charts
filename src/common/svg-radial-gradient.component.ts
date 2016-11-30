@@ -28,10 +28,7 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SvgRadialGradient implements OnChanges {
-  cx: number;
-  cy: number;
-  r: string;
+export class SvgRadialGradientComponent implements OnChanges {
 
   @Input() color;
   @Input() name;
@@ -43,4 +40,9 @@ export class SvgRadialGradient implements OnChanges {
     this.cy = 0;
     this.r = "30%";
   }
+
+  cx: number;
+  cy: number;
+  r: string;
+  
 }

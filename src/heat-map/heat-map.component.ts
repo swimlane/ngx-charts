@@ -12,7 +12,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { generateColorScale, colorHelper } from '../utils/color-sets';
 
@@ -56,14 +56,14 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [colors]="colors"
           [data]="results"
           [gradient]="gradient"
-          (clickHandler)="click($event)"
+          (clickHandler)="onClick($event)"
         />
       </svg:g>
     </chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class HeatMapComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() results;
@@ -104,15 +104,15 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -144,7 +144,7 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
     });
   }
 
-  getXDomain() {
+  getXDomain(): any {
     let domain = [];
     for (let group of this.results) {
       if (!domain.includes(group.name)) {
@@ -155,8 +155,9 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
     return domain;
   }
 
-  getYDomain() {
+  getYDomain(): any[] {
     let domain = [];
+
     for (let group of this.results) {
       for (let d of group.series) {
         if (!domain.includes(d.name)) {
@@ -168,8 +169,9 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
     return domain;
   }
 
-  getValueDomain() {
+  getValueDomain(): any[] {
     let domain = [];
+
     for (let group of this.results) {
       for (let d of group.series) {
         if (!domain.includes(d.value)) {
@@ -180,24 +182,25 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
 
     let min = Math.min(0, ...domain);
     let max = Math.max(...domain);
+
     return [min, max];
   }
 
-  getXScale() {
+  getXScale(): any {
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(0.1)
       .domain(this.xDomain);
   }
 
-  getYScale() {
+  getYScale(): any {
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(0.1)
       .domain(this.yDomain);
   }
 
-  getRects() {
+  getRects(): any[] {
     let rects = [];
 
     this.xDomain.map((xVal) => {
@@ -216,22 +219,23 @@ export class HeatMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
     return rects;
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'linear', this.valueDomain);
     this.colorScale = generateColorScale(this.scheme, 'linear', this.valueDomain);
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }):void {
     this.xAxisHeight = height;
     this.update();
   }
+
 }

@@ -25,7 +25,7 @@ import * as moment from 'moment';
       [data]="bar.data"
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
-      (clickHandler)="click($event)"
+      (clickHandler)="onClick($event)"
       [gradient]="gradient"
       swui-tooltip
       [tooltipPlacement]="'top'"
@@ -46,10 +46,7 @@ import * as moment from 'moment';
     ])
   ]
 })
-export class SeriesVertical implements OnChanges {
-  bars: any;
-  x: any;
-  y: any;
+export class SeriesVerticalComponent implements OnChanges {
 
   @Input() dims;
   @Input() type = 'standard';
@@ -62,11 +59,15 @@ export class SeriesVertical implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnChanges(changes) {
+  bars: any;
+  x: any;
+  y: any;
+
+  ngOnChanges(changes): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     let width;
     if (this.series.length) {
       if (this.scaleType === 'time') {
@@ -148,11 +149,11 @@ export class SeriesVertical implements OnChanges {
     });
   }
 
-  trackBy(index, bar) {
+  trackBy(index, bar): string {
     return bar.label;
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 }

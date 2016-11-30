@@ -8,7 +8,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { XAxisTicks } from './x-axis-ticks.component';
+import { XAxisTicksComponent } from './x-axis-ticks.component';
 
 @Component({
   selector: 'g[xAxis]',
@@ -40,7 +40,8 @@ import { XAxisTicks } from './x-axis-ticks.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class XAxis implements OnChanges {
+export class XAxisComponent implements OnChanges {
+
   @Input() xScale;
   @Input() dims;
   @Input() tickFormatting;
@@ -59,7 +60,7 @@ export class XAxis implements OnChanges {
   transform: any;
   labelOffset: number = 80;
 
-  @ViewChild(XAxisTicks) ticksComponent: XAxisTicks;
+  @ViewChild(XAxisTicksComponent) ticksComponent: XAxisTicksComponent;
 
   constructor() {
     Object.assign(this, {

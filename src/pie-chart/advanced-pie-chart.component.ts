@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { trimLabel } from '../common/trim-label.helper';
 
 export interface LegendItem {
@@ -45,7 +45,7 @@ export interface LegendItem {
               [innerRadius]="innerRadius"
               [outerRadius]="outerRadius"
               [gradient]="gradient"
-              (clickHandler)="click($event)">
+              (clickHandler)="onClick($event)">
             </svg:g>
           </svg:g>
         </chart>
@@ -83,7 +83,7 @@ export interface LegendItem {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class AdvancedPieChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
   
   @Input() view;
   @Input() results;
@@ -116,15 +116,15 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -155,13 +155,13 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
     });
   }
 
-  getTotal() {
+  getTotal(): any {
     return this.results
       .map(d => d.value)
       .reduce((sum, d) => { return sum + d; }, 0);
   }
 
-  getDomain() {
+  getDomain(): any[] {
     return this.results.map(d => d.name);
   }
 
@@ -178,11 +178,11 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
     });
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 

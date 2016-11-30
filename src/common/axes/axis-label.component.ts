@@ -21,7 +21,8 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AxisLabel implements OnChanges {
+export class AxisLabelComponent implements OnChanges {
+  
   @Input() orient;
   @Input() label;
   @Input() offset;

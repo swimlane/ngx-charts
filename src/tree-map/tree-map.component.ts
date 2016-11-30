@@ -12,7 +12,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import d3 from '../d3';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 
@@ -28,14 +28,14 @@ import { colorHelper } from '../utils/color-sets';
           [colors]="colors"
           [data]="data"
           [dims]="dims"
-          (clickHandler)="click($event)"
+          (clickHandler)="onClick($event)"
         />
       </svg:g>
     </chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class TreeMapComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() results;
@@ -61,15 +61,15 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -114,15 +114,15 @@ export class TreeMap extends BaseChart implements OnChanges, OnDestroy, AfterVie
     });
   }
 
-  getDomain() {
+  getDomain(): any[] {
     return this.results.map(d => d.name);
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 

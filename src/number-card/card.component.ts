@@ -64,7 +64,7 @@ import { trimLabel } from '../common/trim-label.helper';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Card implements OnChanges {
+export class CardComponent implements OnChanges {
 
   @Input() color;
   @Input() x;

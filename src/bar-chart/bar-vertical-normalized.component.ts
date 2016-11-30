@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import d3 from '../d3';
 
 @Component({
@@ -38,7 +38,6 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -48,7 +47,6 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:g
           *ngFor="let group of results; trackBy:trackBy"
           [@animationState]="'active'"
@@ -61,10 +59,9 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
-            (clickHandler)="click($event, group)"
+            (clickHandler)="onClick($event, group)"
           />
         </svg:g>
-
       </svg:g>
     </chart>
   `,
@@ -81,7 +78,7 @@ import d3 from '../d3';
     ])
   ]
 })
-export class BarVerticalNormalized extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class BarVerticalNormalizedComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
   
   @Input() view;
   @Input() results;
@@ -205,7 +202,7 @@ export class BarVerticalNormalized extends BaseChart implements OnChanges, OnDes
     return `translate(${this.xScale(group.name)}, 0)`;
   }
 
-  click(data, group) {
+  onClick(data, group) {
     data.series = group.name;
     this.clickHandler.emit(data);
   }

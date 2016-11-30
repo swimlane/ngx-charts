@@ -11,17 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `
     <div
       class="scale-legend"
-      [style.width]="width + 'px'">
-      <div [style.height]="(height - 70) + 'px'">
-
+      [style.width.px]="width">
+      <div [style.height.px]="height - 70">
         <div class="scale-legend-label">
           <span>{{ valueRange[0].toLocaleString() }}</span>
         </div>
-
         <div class="scale-legend-wrap"
           [style.background]="gradient">
         </div>
-
         <div class="scale-legend-label">
           <span>{{ valueRange[1].toLocaleString() }}</span>
         </div>
@@ -30,7 +27,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ScaleLegend implements OnChanges {
+export class ScaleLegendComponent implements OnChanges {
+
   @Input() valueRange;
   @Input() colors;
   @Input() height;
@@ -38,10 +36,9 @@ export class ScaleLegend implements OnChanges {
 
   gradient: any;
 
-  constructor(private sanitizer: DomSanitizer) {
-  }
+  constructor(private sanitizer: DomSanitizer) { }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     let gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
     this.gradient = this.sanitizer.bypassSecurityTrustStyle(`linear-gradient(to bottom, ${gradientValues})`);
   }
@@ -52,7 +49,7 @@ export class ScaleLegend implements OnChanges {
    * @param  {array} splits array of splits on a scale of (0, 1)
    * @return {string}
    */
-  gradientString(colors, splits) {
+  gradientString(colors, splits): string {
     // add the 100%
     splits.push(1);
     let pairs = [];
@@ -62,4 +59,5 @@ export class ScaleLegend implements OnChanges {
 
     return pairs.join(', ');
   }
+
 }

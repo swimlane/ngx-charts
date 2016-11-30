@@ -1,25 +1,25 @@
 import { NgModule } from "@angular/core";
-import { AreaChart } from "./area-chart.component";
-import { AreaChartNormalized } from "./area-chart-normalized.component";
-import { AreaChartStacked } from "./area-chart-stacked.component";
-import { AreaSeries } from "./area-series.component";
+import { AreaChartComponent } from "./area-chart.component";
+import { AreaChartNormalizedComponent } from "./area-chart-normalized.component";
+import { AreaChartStackedComponent } from "./area-chart-stacked.component";
+import { AreaSeriesComponent } from "./area-series.component";
 import { CommonModule } from "../common/common.module";
 
-export { AreaChart, AreaChartNormalized, AreaChartStacked, AreaSeries }
+export { AreaChartComponent, AreaChartNormalizedComponent, AreaChartStackedComponent, AreaSeriesComponent }
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    AreaChart,
-    AreaChartNormalized,
-    AreaChartStacked,
-    AreaSeries
+    AreaChartComponent,
+    AreaChartNormalizedComponent,
+    AreaChartStackedComponent,
+    AreaSeriesComponent
   ],
   exports: [
-    AreaChart,
-    AreaChartNormalized,
-    AreaChartStacked,
-    AreaSeries
+    AreaChartComponent,
+    AreaChartNormalizedComponent,
+    AreaChartStackedComponent,
+    AreaSeriesComponent
   ]
 })
 export class AreaChartModule {}

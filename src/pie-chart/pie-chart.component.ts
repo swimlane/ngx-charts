@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 
 @Component({
   selector: 'pie-chart',
@@ -33,14 +33,14 @@ import { BaseChart } from '../common/base-chart.component';
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
           [gradient]="gradient"
-          (clickHandler)="click($event)"
+          (clickHandler)="onClick($event)"
         />
       </svg:g>
     </chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class PieChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() results;
@@ -137,7 +137,7 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
     return items;
   }
 
-  click(data) {
+  onClick(data) {
     this.clickHandler.emit(data);
   }
 

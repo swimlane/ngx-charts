@@ -17,9 +17,8 @@ import {
       [height]="c.height"
       [fill]="c.fill"
       [data]="c.data"
-      (clickHandler)="click($event, c.label, c.series)"
+      (clickHandler)="onClick($event, c.label, c.series)"
       [gradient]="gradient"
-
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -28,8 +27,7 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeatCellSeries implements OnChanges {
-  cells: any[];
+export class HeatCellSeriesComponent implements OnChanges {
 
   @Input() data;
   @Input() colors;
@@ -39,11 +37,13 @@ export class HeatCellSeries implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnChanges() {
+  cells: any[];
+
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.cells = this.getCells();
   }
 
@@ -75,11 +75,11 @@ export class HeatCellSeries implements OnChanges {
     return cells;
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.tooltipText;
   }
 
-  click(value, label, series) {
+  onClick(value, label, series): void {
     this.clickHandler.emit({
       name: label,
       value: value,

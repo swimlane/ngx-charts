@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import { trimLabel } from '../common/trim-label.helper';
 import { gridLayout } from '../common/grid-layout.helper';
 import d3 from '../d3';
@@ -35,7 +35,7 @@ import d3 from '../d3';
             [data]="series.data"
             [innerRadius]="series.innerRadius"
             [outerRadius]="series.outerRadius"
-            (clickHandler)="click($event)"
+            (clickHandler)="onClick($event)"
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
@@ -71,15 +71,8 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  dims: ViewDimensions;
-  data: any[];
-  transform: string;
-  series: any[];
-  domain: any[];
-  colorScale: Function;
-  margin = [20, 20, 20, 20];
-
+export class PieGridComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+  
   @Input() view;
   @Input() results;
   @Input() scheme;
@@ -87,6 +80,14 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
 
   @Output() clickHandler = new EventEmitter();
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  data: any[];
+  transform: string;
+  series: any[];
+  domain: any[];
+  colorScale: Function;
+  margin = [20, 20, 20, 20];
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
@@ -96,15 +97,15 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -124,12 +125,13 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
     });
   }
 
-  getDomain() {
+  getDomain(): any[] {
     return this.results.map(d => d.name);
   }
 
-  getSeries() {
+  getSeries(): any[] {
     let total = this.getTotal();
+
     return this.data.map((d) => {
       const baselineLabelHeight = 20;
       const padding = 10;
@@ -176,17 +178,17 @@ export class PieGrid extends BaseChart implements OnChanges, OnDestroy, AfterVie
     });
   }
 
-  getTotal() {
+  getTotal(): any {
     return this.results
       .map(d => d.value)
       .reduce((sum, d) => { return sum + d; }, 0);
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colorScale = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 

@@ -19,8 +19,7 @@ import {
       [label]="c.label"
       [value]="c.value"
       [valueType]="c.valueType"
-      (clickHandler)="click($event)"
-
+      (clickHandler)="onClick($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -29,19 +28,21 @@ import {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeMapCellSeries implements OnChanges {
-  cells: any[];
+export class TreeMapCellSeriesComponent implements OnChanges {
+
   @Input() data;
   @Input() dims;
   @Input() colors;
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnChanges() {
+  cells: any[];
+
+  ngOnChanges(): void {
     this.cells = this.getCells();
   }
 
-  getCells() {
+  getCells(): any[] {
     return this.data.children
       .filter((d) => {
         return d.depth === 1;
@@ -63,11 +64,11 @@ export class TreeMapCellSeries implements OnChanges {
       });
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.label;
   }
 }

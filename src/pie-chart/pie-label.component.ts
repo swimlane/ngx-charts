@@ -32,12 +32,7 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PieLabel implements OnChanges {
-  element: HTMLElement;
-  trimLabel: Function;
-  labelXY: any;
-  transform: string;
-  line: string;
+export class PieLabelComponent implements OnChanges {
 
   @Input() data;
   @Input() radius;
@@ -47,17 +42,23 @@ export class PieLabel implements OnChanges {
   @Input() value;
   @Input() explodeSlices;
 
+  element: HTMLElement;
+  trimLabel: Function;
+  labelXY: any;
+  transform: string;
+  line: string;
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
     this.trimLabel = trimLabel;
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
-    let factor = 1.5;
+  update(): void {
+    const factor = 1.5;
 
     let outerArc = d3.arc()
       .innerRadius(this.radius * factor)
@@ -82,15 +83,15 @@ export class PieLabel implements OnChanges {
     this.loadAnimation();
   }
 
-  textAnchor() {
+  textAnchor(): any {
     return this.midAngle(this.data) < Math.PI ? "start" : "end";
   }
 
-  midAngle(d) {
+  midAngle(d): number {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
   }
 
-  loadAnimation() {
+  loadAnimation(): void {
     let label = d3.select(this.element).select('.label');
     let line = d3.select(this.element).select('.line');
 

@@ -1,22 +1,22 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "../common/common.module";
-import { TreeMapCell } from "./tree-map-cell.component";
-import { TreeMapCellSeries } from "./tree-map-cell-series.component";
-import { TreeMap } from "./tree-map.component";
+import { TreeMapCellComponent } from "./tree-map-cell.component";
+import { TreeMapCellSeriesComponent } from "./tree-map-cell-series.component";
+import { TreeMapComponent } from "./tree-map.component";
 
-export { TreeMapCell, TreeMapCellSeries, TreeMap };
+export { TreeMapCellComponent, TreeMapCellSeriesComponent, TreeMapComponent };
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    TreeMapCell,
-    TreeMapCellSeries,
-    TreeMap
+    TreeMapCellComponent,
+    TreeMapCellSeriesComponent,
+    TreeMapComponent
   ],
   exports: [
-    TreeMapCell,
-    TreeMapCellSeries,
-    TreeMap
+    TreeMapCellComponent,
+    TreeMapCellSeriesComponent,
+    TreeMapComponent
   ]
 })
 export class TreeMapModule {}

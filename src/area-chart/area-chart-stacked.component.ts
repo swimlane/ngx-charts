@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
-import { BaseChart } from '../common/base-chart.component';
+import { BaseChartComponent } from '../common/base-chart.component';
 import * as moment from 'moment';
 import { id } from "../utils/id";
 import d3 from '../d3';
@@ -87,7 +87,7 @@ import d3 from '../d3';
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
-              (clickHandler)="click($event, series)"
+              (clickHandler)="onClick($event, series)"
             />
           </svg:g>
         </svg:g>
@@ -120,7 +120,7 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+export class AreaChartStackedComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   @Input() view;
   @Input() results;
@@ -406,7 +406,7 @@ export class AreaChartStacked extends BaseChart implements OnChanges, OnDestroy,
     this.hoveredVertical = null;
   }
 
-  click(data, series) {
+  onClick(data, series) {
     data.series = series.name;
     this.clickHandler.emit(data);
   }

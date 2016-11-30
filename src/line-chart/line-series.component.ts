@@ -19,9 +19,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LineSeries implements OnChanges {
-
-  path: string;
+export class LineSeriesComponent implements OnChanges {
 
   @Input() data;
   @Input() xScale;
@@ -30,11 +28,13 @@ export class LineSeries implements OnChanges {
   @Input() scaleType;
   @Input() curve: string;
 
-  ngOnChanges() {
+  path: string;
+
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     let line = d3.line()
       .x(d => {
         let label = d.name;
@@ -62,4 +62,5 @@ export class LineSeries implements OnChanges {
 
     this.path = line(data) || '';
   }
+  
 }

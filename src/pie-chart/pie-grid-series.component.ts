@@ -26,17 +26,14 @@ import d3 from '../d3';
         [gradient]="false"
         [pointerEvents]="arc.pointerEvents"
         [animate]="arc.animate"
-        (clickHandler)="click($event)">
+        (clickHandler)="onClick($event)">
       </svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class PieGridSeries implements OnChanges {
-  element: HTMLElement;
-  layout: any;
-  arcs: any;
+export class PieGridSeriesComponent implements OnChanges {
 
   @Input() colors;
   @Input() data;
@@ -45,22 +42,26 @@ export class PieGridSeries implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
+  element: HTMLElement;
+  layout: any;
+  arcs: any;
+
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.layout = d3.pie()
       .value((d) => d.data.value).sort(null);
 
     this.arcs = this.getArcs();
   }
 
-  getArcs() {
+  getArcs(): any[] {
     return this.layout(this.data).map((arc, index) => {
       let label = arc.data.data.name;
       let other = arc.data.data.other;
@@ -82,22 +83,22 @@ export class PieGridSeries implements OnChanges {
     });
   }
 
-  click(data) {
+  onClick(data): void {
     this.clickHandler.emit({
       name: this.data[0].data.name,
       value: this.data[0].data.value
     });
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.data.name;
   }
 
-  label(arc) {
+  label(arc): string {
     return arc.data.name;
   }
 
-  color(arc) {
+  color(arc): any {
     return this.colors(this.label(arc));
   }
 

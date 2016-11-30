@@ -44,7 +44,7 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PieSeries implements OnChanges {
+export class PieSeriesComponent implements OnChanges {
 
   @Input() colors;
   @Input() series: any = [];
@@ -60,11 +60,11 @@ export class PieSeries implements OnChanges {
   max: number;
   data: any;
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     let pie: any = d3.pie()
       .value((d) => d.value)
       .sort(null);
@@ -78,18 +78,18 @@ export class PieSeries implements OnChanges {
     this.data = this.calculateLabelPositions(arcData);
   }
 
-  midAngle(d) {
+  midAngle(d): number {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
   }
 
-  outerArc() {
+  outerArc(): any {
     let factor = 1.5;
     return d3.arc()
       .innerRadius(this.outerRadius * factor)
       .outerRadius(this.outerRadius * factor);
   }
 
-  calculateLabelPositions(pieData) {
+  calculateLabelPositions(pieData): any {
     let minDistance = 10;
     let chart = this;
     let labelPositions = pieData;
@@ -119,17 +119,19 @@ export class PieSeries implements OnChanges {
     return labelPositions;
   }
 
-  labelVisible(arc) {
+  labelVisible(arc): boolean {
     return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
   }
 
-  label(arc) {
+  label(arc): string {
     let label = arc.data.name;
+
     if (label.constructor.name === 'Date') {
       label = label.toLocaleDateString();
     } else {
       label = label.toLocaleString();
     }
+
     return label;
   }
 
@@ -137,15 +139,15 @@ export class PieSeries implements OnChanges {
     return `${this.label(arc)}: ${arc.data.value.toLocaleString()}`;
   }
 
-  color(arc) {
+  color(arc): any {
     return this.colors(this.label(arc));
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.data.name;
   }
 
-  onClick(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
