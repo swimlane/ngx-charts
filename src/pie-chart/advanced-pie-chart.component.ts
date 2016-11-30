@@ -11,6 +11,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -82,8 +83,8 @@ export interface LegendItem {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
-  
+export class AdvancedPieChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+
   @Input() view;
   @Input() results;
   @Input() margin = [20, 20, 20, 20];
@@ -154,7 +155,7 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
     });
   }
 
-  getTotal(): any {
+  getTotal(): number {
     return this.results
       .map(d => d.value)
       .reduce((sum, d) => { return sum + d; }, 0);
@@ -177,7 +178,7 @@ export class AdvancedPieChart extends BaseChart implements OnChanges, OnDestroy,
     });
   }
 
-  onClick(data): void {
+  onClick(data) {
     this.clickHandler.emit(data);
   }
 
