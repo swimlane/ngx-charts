@@ -29,9 +29,9 @@ import * as import20 from '@angular/core/src/zone/ng_zone';
 import * as import21 from '@angular/common/src/directives/ng_if';
 import * as import22 from '../../../src/common/tooltip/tooltip.directive';
 import * as import23 from '@angular/core/src/security';
-export class Wrapper_CircleSeries {
+export class Wrapper_CircleSeriesComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.CircleSeries;
+  context:import0.CircleSeriesComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -46,7 +46,7 @@ export class Wrapper_CircleSeries {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.CircleSeries();
+    this.context = new import0.CircleSeriesComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -145,42 +145,42 @@ export class Wrapper_CircleSeries {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_CircleSeries_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_CircleSeries_Host0 extends import2.AppView<any> {
+var renderType_CircleSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.CircleSeries>;
-  _CircleSeries_0_3:Wrapper_CircleSeries;
+  compView_0:import2.AppView<import0.CircleSeriesComponent>;
+  _CircleSeriesComponent_0_3:Wrapper_CircleSeriesComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CircleSeries_Host0,renderType_CircleSeries_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CircleSeriesComponent_Host0,renderType_CircleSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'circleSeries',''),rootSelector,(null as any));
-    this.compView_0 = new View_CircleSeries0(this.viewUtils,this,0,this._el_0);
-    this._CircleSeries_0_3 = new Wrapper_CircleSeries();
-    this.compView_0.create(this._CircleSeries_0_3.context);
+    this.compView_0 = new View_CircleSeriesComponent0(this.viewUtils,this,0,this._el_0);
+    this._CircleSeriesComponent_0_3 = new Wrapper_CircleSeriesComponent();
+    this.compView_0.create(this._CircleSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CircleSeries_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CircleSeriesComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.CircleSeries) && (0 === requestNodeIndex))) { return this._CircleSeries_0_3.context; }
+    if (((token === import0.CircleSeriesComponent) && (0 === requestNodeIndex))) { return this._CircleSeriesComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._CircleSeries_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._CircleSeriesComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._CircleSeries_0_3.ngOnDestroy();
+    this._CircleSeriesComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const CircleSeriesNgFactory:import7.ComponentFactory<import0.CircleSeries> = new import7.ComponentFactory<import0.CircleSeries>('g[circleSeries]',View_CircleSeries_Host0,import0.CircleSeries);
-const styles_CircleSeries:any[] = ([] as any[]);
-var renderType_CircleSeries:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeries,{});
-export class View_CircleSeries0 extends import2.AppView<import0.CircleSeries> {
+export const CircleSeriesComponentNgFactory:import7.ComponentFactory<import0.CircleSeriesComponent> = new import7.ComponentFactory<import0.CircleSeriesComponent>('g[circleSeries]',View_CircleSeriesComponent_Host0,import0.CircleSeriesComponent);
+const styles_CircleSeriesComponent:any[] = ([] as any[]);
+var renderType_CircleSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeriesComponent,{});
+export class View_CircleSeriesComponent0 extends import2.AppView<import0.CircleSeriesComponent> {
   _text_0:any;
   _anchor_1:any;
   /*private*/ _vc_1:import8.ViewContainer;
@@ -188,7 +188,7 @@ export class View_CircleSeries0 extends import2.AppView<import0.CircleSeries> {
   _NgFor_1_6:import9.Wrapper_NgFor;
   _text_2:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CircleSeries0,renderType_CircleSeries,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_CircleSeriesComponent0,renderType_CircleSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -221,11 +221,11 @@ export class View_CircleSeries0 extends import2.AppView<import0.CircleSeries> {
     this._vc_1.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 1)) { return new View_CircleSeries1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
+    if ((nodeIndex == 1)) { return new View_CircleSeriesComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
     return (null as any);
   }
 }
-class View_CircleSeries1 extends import2.AppView<any> {
+class View_CircleSeriesComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
@@ -235,15 +235,15 @@ class View_CircleSeries1 extends import2.AppView<any> {
   _text_3:any;
   _el_4:any;
   /*private*/ _vc_4:import8.ViewContainer;
-  compView_4:import2.AppView<import14.Circle>;
+  compView_4:import2.AppView<import14.CircleComponent>;
   _TooltipDirective_4_5:import15.Wrapper_TooltipDirective;
-  _Circle_4_6:import16.Wrapper_Circle;
+  _CircleComponent_4_6:import16.Wrapper_CircleComponent;
   _text_5:any;
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
-    super(View_CircleSeries1,renderType_CircleSeries,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_CircleSeriesComponent1,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_13 = import1.UNINITIALIZED;
     this._expr_14 = import1.UNINITIALIZED;
     this._expr_15 = import1.UNINITIALIZED;
@@ -255,16 +255,16 @@ class View_CircleSeries1 extends import2.AppView<any> {
     this._vc_2 = new import8.ViewContainer(2,0,this,this._anchor_2);
     this._TemplateRef_2_5 = new import10.TemplateRef_(this,2,this._anchor_2);
     this._NgIf_2_6 = new import13.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
-    this._text_3 = this.renderer.createText(this._el_0,'\n\n      ',(null as any));
+    this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'circle','','swui-tooltip',''),(null as any));
     this._vc_4 = new import8.ViewContainer(4,0,this,this._el_4);
-    this.compView_4 = new import16.View_Circle0(this.viewUtils,this,4,this._el_4);
+    this.compView_4 = new import16.View_CircleComponent0(this.viewUtils,this,4,this._el_4);
     this._TooltipDirective_4_5 = new import15.Wrapper_TooltipDirective(this.parentView.injectorGet(import17.TooltipService,this.parentIndex),this._vc_4.vcRef,this.parentView.injectorGet(import18.InjectionService,this.parentIndex),this.renderer,new import19.ElementRef(this._el_4),this.parentView.injectorGet(import20.NgZone,this.parentIndex));
-    this._Circle_4_6 = new import16.Wrapper_Circle();
-    this.compView_4.create(this._Circle_4_6.context);
+    this._CircleComponent_4_6 = new import16.Wrapper_CircleComponent();
+    this.compView_4.create(this._CircleComponent_4_6.context);
     this._text_5 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_4,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_4));
-    this._Circle_4_6.subscribe(this,this.eventHandler(this.handleEvent_4),true);
+    this._CircleComponent_4_6.subscribe(this,this.eventHandler(this.handleEvent_4),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -280,7 +280,7 @@ class View_CircleSeries1 extends import2.AppView<any> {
     if (((token === import10.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
     if (((token === import21.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
     if (((token === import22.TooltipDirective) && (4 === requestNodeIndex))) { return this._TooltipDirective_4_5.context; }
-    if (((token === import14.Circle) && (4 === requestNodeIndex))) { return this._Circle_4_6.context; }
+    if (((token === import14.CircleComponent) && (4 === requestNodeIndex))) { return this._CircleComponent_4_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -295,22 +295,22 @@ class View_CircleSeries1 extends import2.AppView<any> {
     this._TooltipDirective_4_5.check_tooltipType(currVal_4_0_2,throwOnChange,false);
     this._TooltipDirective_4_5.ngDoCheck(this,this._el_4,throwOnChange);
     const currVal_4_1_0:any = this.context.$implicit.cx;
-    this._Circle_4_6.check_cx(currVal_4_1_0,throwOnChange,false);
+    this._CircleComponent_4_6.check_cx(currVal_4_1_0,throwOnChange,false);
     const currVal_4_1_1:any = this.context.$implicit.cy;
-    this._Circle_4_6.check_cy(currVal_4_1_1,throwOnChange,false);
+    this._CircleComponent_4_6.check_cy(currVal_4_1_1,throwOnChange,false);
     const currVal_4_1_2:any = this.context.$implicit.radius;
-    this._Circle_4_6.check_r(currVal_4_1_2,throwOnChange,false);
+    this._CircleComponent_4_6.check_r(currVal_4_1_2,throwOnChange,false);
     const currVal_4_1_3:any = this.parentView.context.color;
-    this._Circle_4_6.check_fill(currVal_4_1_3,throwOnChange,false);
+    this._CircleComponent_4_6.check_fill(currVal_4_1_3,throwOnChange,false);
     const currVal_4_1_4:any = this.parentView.context.strokeColor;
-    this._Circle_4_6.check_stroke(currVal_4_1_4,throwOnChange,false);
+    this._CircleComponent_4_6.check_stroke(currVal_4_1_4,throwOnChange,false);
     const currVal_4_1_5:any = this.context.$implicit.value;
-    this._Circle_4_6.check_data(currVal_4_1_5,throwOnChange,false);
+    this._CircleComponent_4_6.check_data(currVal_4_1_5,throwOnChange,false);
     const currVal_4_1_6:any = this.context.$implicit.classNames;
-    this._Circle_4_6.check_classNames(currVal_4_1_6,throwOnChange,false);
+    this._CircleComponent_4_6.check_classNames(currVal_4_1_6,throwOnChange,false);
     const currVal_4_1_7:any = ((this.context.$implicit.value === 0)? 'none': 'all');
-    this._Circle_4_6.check_pointerEvents(currVal_4_1_7,throwOnChange,false);
-    if (this._Circle_4_6.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
+    this._CircleComponent_4_6.check_pointerEvents(currVal_4_1_7,throwOnChange,false);
+    if (this._CircleComponent_4_6.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
     this._vc_2.detectChangesInNestedViews(throwOnChange);
     this._vc_4.detectChangesInNestedViews(throwOnChange);
     const currVal_13:any = this.parentView.context.className;
@@ -335,13 +335,13 @@ class View_CircleSeries1 extends import2.AppView<any> {
     this._vc_4.destroyNestedViews();
     this.compView_4.destroy();
     this._TooltipDirective_4_5.ngOnDestroy();
-    this._Circle_4_6.ngOnDestroy();
+    this._CircleComponent_4_6.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 2)) { return new View_CircleSeries2(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
+    if ((nodeIndex == 2)) { return new View_CircleSeriesComponent2(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
     return (null as any);
   }
   handleEvent_4(eventName:string,$event:any):boolean {
@@ -349,13 +349,13 @@ class View_CircleSeries1 extends import2.AppView<any> {
     var result:boolean = true;
     result = (this._TooltipDirective_4_5.handleEvent(eventName,$event) && result);
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.click($event,this.context.$implicit.label)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit.label)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_CircleSeries2 extends import2.AppView<any> {
+class View_CircleSeriesComponent2 extends import2.AppView<any> {
   _el_0:any;
   /*private*/ _expr_1:any;
   /*private*/ _expr_2:any;
@@ -363,7 +363,7 @@ class View_CircleSeries2 extends import2.AppView<any> {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
-    super(View_CircleSeries2,renderType_CircleSeries,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_CircleSeriesComponent2,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;

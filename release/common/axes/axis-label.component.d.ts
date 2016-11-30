@@ -1,5 +1,5 @@
 import { ElementRef, OnChanges } from '@angular/core';
-export declare class AxisLabel implements OnChanges {
+export declare class AxisLabelComponent implements OnChanges {
     orient: any;
     label: any;
     offset: any;

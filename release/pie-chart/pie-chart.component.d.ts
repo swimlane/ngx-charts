@@ -1,7 +1,7 @@
 
 import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, NgZone, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { BaseChart } from '../common/base-chart.component';
-export declare class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+import { BaseChartComponent } from '../common/base-chart.component';
+export declare class PieChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
     private element;
     private cd;
     view: any;
@@ -28,7 +28,7 @@ export declare class PieChart extends BaseChart implements OnChanges, OnDestroy,
     ngOnDestroy(): void;
     ngOnChanges(): void;
     update(): void;
-    getDomain(): any;
-    click(data: any): void;
+    getDomain(): any[];
+    onClick(data: any): void;
     setColors(): void;
 }

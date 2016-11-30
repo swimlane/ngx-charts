@@ -39,9 +39,9 @@ import * as import30 from '../../../src/common/circle-series.component';
 import * as import31 from '../common/circle-series.component.ngfactory';
 import * as import32 from '../../../src/common/timeline.component';
 import * as import33 from '../common/timeline.component.ngfactory';
-export class Wrapper_LineChart {
+export class Wrapper_LineChartComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.LineChart;
+  context:import0.LineChartComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -65,7 +65,7 @@ export class Wrapper_LineChart {
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.LineChart(p0,p1,p2);
+    this.context = new import0.LineChartComponent(p0,p1,p2);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -243,35 +243,35 @@ export class Wrapper_LineChart {
     if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
-var renderType_LineChart_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_LineChart_Host0 extends import2.AppView<any> {
+var renderType_LineChartComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_LineChartComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.LineChart>;
-  _LineChart_0_3:Wrapper_LineChart;
+  compView_0:import2.AppView<import0.LineChartComponent>;
+  _LineChartComponent_0_3:Wrapper_LineChartComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_LineChart_Host0,renderType_LineChart_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_LineChartComponent_Host0,renderType_LineChartComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'line-chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_LineChart0(this.viewUtils,this,0,this._el_0);
-    this._LineChart_0_3 = new Wrapper_LineChart(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
-    this.compView_0.create(this._LineChart_0_3.context);
+    this.compView_0 = new View_LineChartComponent0(this.viewUtils,this,0,this._el_0);
+    this._LineChartComponent_0_3 = new Wrapper_LineChartComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this.compView_0.create(this._LineChartComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._LineChart_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._LineChartComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.LineChart) && (0 === requestNodeIndex))) { return this._LineChart_0_3.context; }
+    if (((token === import0.LineChartComponent) && (0 === requestNodeIndex))) { return this._LineChartComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._LineChart_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._LineChartComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
-    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._LineChart_0_3.context.ngAfterViewInit(); } }
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._LineChartComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._LineChart_0_3.ngOnDestroy();
+    this._LineChartComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -279,20 +279,20 @@ class View_LineChart_Host0 extends import2.AppView<any> {
   handleEvent_0(eventName:string,$event:any):boolean {
     this.compView_0.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    result = (this._LineChart_0_3.handleEvent(eventName,$event) && result);
+    result = (this._LineChartComponent_0_3.handleEvent(eventName,$event) && result);
     return result;
   }
 }
-export const LineChartNgFactory:import7.ComponentFactory<import0.LineChart> = new import7.ComponentFactory<import0.LineChart>('line-chart',View_LineChart_Host0,import0.LineChart);
-const styles_LineChart:any[] = ([] as any[]);
-var renderType_LineChart:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LineChart,{});
-export class View_LineChart0 extends import2.AppView<import0.LineChart> {
+export const LineChartComponentNgFactory:import7.ComponentFactory<import0.LineChartComponent> = new import7.ComponentFactory<import0.LineChartComponent>('line-chart',View_LineChartComponent_Host0,import0.LineChartComponent);
+const styles_LineChartComponent:any[] = ([] as any[]);
+var renderType_LineChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LineChartComponent,{});
+export class View_LineChartComponent0 extends import2.AppView<import0.LineChartComponent> {
   _text_0:any;
   _el_1:any;
   /*private*/ _vc_1:import10.ViewContainer;
-  compView_1:import2.AppView<import11.Chart>;
+  compView_1:import2.AppView<import11.ChartComponent>;
   _InjectionService_1_5:import12.InjectionService;
-  _Chart_1_6:import13.Wrapper_Chart;
+  _ChartComponent_1_6:import13.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
@@ -346,7 +346,7 @@ export class View_LineChart0 extends import2.AppView<import0.LineChart> {
   /*private*/ _expr_56:any;
   /*private*/ _expr_57:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_LineChart0,renderType_LineChart,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_LineChartComponent0,renderType_LineChartComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._arr_51 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
         p0,
@@ -366,9 +366,9 @@ export class View_LineChart0 extends import2.AppView<import0.LineChart> {
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_1 = new import10.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import13.View_Chart0(this.viewUtils,this,1,this._el_1);
+    this.compView_1 = new import13.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
     this._InjectionService_1_5 = new import12.InjectionService(this.parentView.injectorGet(import18.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import19.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._Chart_1_6 = new import13.Wrapper_Chart(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._ChartComponent_1_6 = new import13.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
@@ -414,10 +414,10 @@ export class View_LineChart0 extends import2.AppView<import0.LineChart> {
     this._TemplateRef_27_5 = new import20.TemplateRef_(this,27,this._anchor_27);
     this._NgIf_27_6 = new import14.Wrapper_NgIf(this._vc_27.vcRef,this._TemplateRef_27_5);
     this._text_28 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_1.create(this._Chart_1_6.context);
+    this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_29 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._Chart_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_21,new import3.InlineArray2(2,'hover',(null as any)),this.eventHandler(this.handleEvent_21));
     this._AreaTooltip_21_3.subscribe(this,this.eventHandler(this.handleEvent_21),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -472,19 +472,19 @@ export class View_LineChart0 extends import2.AppView<import0.LineChart> {
     if (((token === import20.TemplateRef) && (27 === requestNodeIndex))) { return this._TemplateRef_27_5; }
     if (((token === import22.NgIf) && (27 === requestNodeIndex))) { return this._NgIf_27_6.context; }
     if (((token === import12.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 28)))) { return this._InjectionService_1_5; }
-    if (((token === import11.Chart) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 28)))) { return this._Chart_1_6.context; }
+    if (((token === import11.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 28)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this._arr_51(this.context.width,this.context.height);
-    this._Chart_1_6.check_view(currVal_1_0_0,throwOnChange,false);
+    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.legend;
-    this._Chart_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
+    this._ChartComponent_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
     const currVal_1_0_2:any = this.context.seriesDomain;
-    this._Chart_1_6.check_legendData(currVal_1_0_2,throwOnChange,false);
+    this._ChartComponent_1_6.check_legendData(currVal_1_0_2,throwOnChange,false);
     const currVal_1_0_3:any = this.context.colors;
-    this._Chart_1_6.check_colors(currVal_1_0_3,throwOnChange,false);
-    if (this._Chart_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    this._ChartComponent_1_6.check_colors(currVal_1_0_3,throwOnChange,false);
+    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_13_0_0:any = this.context.xAxis;
     this._NgIf_13_6.check_ngIf(currVal_13_0_0,throwOnChange,false);
     this._NgIf_13_6.ngDoCheck(this,this._anchor_13,throwOnChange);
@@ -564,7 +564,7 @@ export class View_LineChart0 extends import2.AppView<import0.LineChart> {
     this.compView_1.destroy();
     this.compView_21.destroy();
     this._AreaTooltip_21_3.ngOnDestroy();
-    this._Chart_1_6.ngOnDestroy();
+    this._ChartComponent_1_6.ngOnDestroy();
   }
   visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
     if (((nodeIndex == 1) && (ngContentIndex == 0))) {
@@ -579,11 +579,11 @@ export class View_LineChart0 extends import2.AppView<import0.LineChart> {
     }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 13)) { return new View_LineChart1(this.viewUtils,this,13,this._anchor_13,this._vc_13); }
-    if ((nodeIndex == 15)) { return new View_LineChart2(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
-    if ((nodeIndex == 19)) { return new View_LineChart3(this.viewUtils,this,19,this._anchor_19,this._vc_19); }
-    if ((nodeIndex == 23)) { return new View_LineChart4(this.viewUtils,this,23,this._anchor_23,this._vc_23); }
-    if ((nodeIndex == 27)) { return new View_LineChart5(this.viewUtils,this,27,this._anchor_27,this._vc_27); }
+    if ((nodeIndex == 13)) { return new View_LineChartComponent1(this.viewUtils,this,13,this._anchor_13,this._vc_13); }
+    if ((nodeIndex == 15)) { return new View_LineChartComponent2(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
+    if ((nodeIndex == 19)) { return new View_LineChartComponent3(this.viewUtils,this,19,this._anchor_19,this._vc_19); }
+    if ((nodeIndex == 23)) { return new View_LineChartComponent4(this.viewUtils,this,23,this._anchor_23,this._vc_23); }
+    if ((nodeIndex == 27)) { return new View_LineChartComponent5(this.viewUtils,this,27,this._anchor_27,this._vc_27); }
     return (null as any);
   }
   handleEvent_1(eventName:string,$event:any):boolean {
@@ -605,22 +605,22 @@ export class View_LineChart0 extends import2.AppView<import0.LineChart> {
     return result;
   }
 }
-class View_LineChart1 extends import2.AppView<any> {
+class View_LineChartComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import24.XAxis>;
-  _XAxis_0_3:import25.Wrapper_XAxis;
+  compView_0:import2.AppView<import24.XAxisComponent>;
+  _XAxisComponent_0_3:import25.Wrapper_XAxisComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_LineChart1,renderType_LineChart,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_LineChartComponent1,renderType_LineChartComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'xAxis',''),(null as any));
-    this.compView_0 = new import25.View_XAxis0(this.viewUtils,this,0,this._el_0);
-    this._XAxis_0_3 = new import25.Wrapper_XAxis();
+    this.compView_0 = new import25.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisComponent_0_3 = new import25.Wrapper_XAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._XAxis_0_3.context);
+    this.compView_0.create(this._XAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._XAxis_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -629,26 +629,26 @@ class View_LineChart1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import24.XAxis) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxis_0_3.context; }
+    if (((token === import24.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.xScale;
-    this._XAxis_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
+    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.dims;
-    this._XAxis_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._XAxis_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    this._XAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.showXAxisLabel;
-    this._XAxis_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.xAxisLabel;
-    this._XAxis_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._XAxis_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._XAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._XAxis_0_3.ngOnDestroy();
+    this._XAxisComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -663,22 +663,22 @@ class View_LineChart1 extends import2.AppView<any> {
     return result;
   }
 }
-class View_LineChart2 extends import2.AppView<any> {
+class View_LineChartComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import26.YAxis>;
-  _YAxis_0_3:import27.Wrapper_YAxis;
+  compView_0:import2.AppView<import26.YAxisComponent>;
+  _YAxisComponent_0_3:import27.Wrapper_YAxisComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_LineChart2,renderType_LineChart,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_LineChartComponent2,renderType_LineChartComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'yAxis',''),(null as any));
-    this.compView_0 = new import27.View_YAxis0(this.viewUtils,this,0,this._el_0);
-    this._YAxis_0_3 = new import27.Wrapper_YAxis();
+    this.compView_0 = new import27.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisComponent_0_3 = new import27.Wrapper_YAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._YAxis_0_3.context);
+    this.compView_0.create(this._YAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._YAxis_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -687,26 +687,26 @@ class View_LineChart2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import26.YAxis) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxis_0_3.context; }
+    if (((token === import26.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.yScale;
-    this._YAxis_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
+    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.dims;
-    this._YAxis_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._YAxis_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    this._YAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.showYAxisLabel;
-    this._YAxis_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.yAxisLabel;
-    this._YAxis_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._YAxis_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._YAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._YAxis_0_3.ngOnDestroy();
+    this._YAxisComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -721,23 +721,23 @@ class View_LineChart2 extends import2.AppView<any> {
     return result;
   }
 }
-class View_LineChart3 extends import2.AppView<any> {
+class View_LineChartComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import28.LineSeries>;
-  _LineSeries_2_3:import29.Wrapper_LineSeries;
+  compView_2:import2.AppView<import28.LineSeriesComponent>;
+  _LineSeriesComponent_2_3:import29.Wrapper_LineSeriesComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_LineChart3,renderType_LineChart,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_LineChartComponent3,renderType_LineChartComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'lineSeries',''),(null as any));
-    this.compView_2 = new import29.View_LineSeries0(this.viewUtils,this,2,this._el_2);
-    this._LineSeries_2_3 = new import29.Wrapper_LineSeries();
-    this.compView_2.create(this._LineSeries_2_3.context);
+    this.compView_2 = new import29.View_LineSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._LineSeriesComponent_2_3 = new import29.Wrapper_LineSeriesComponent();
+    this.compView_2.create(this._LineSeriesComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -749,23 +749,23 @@ class View_LineChart3 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import28.LineSeries) && (2 === requestNodeIndex))) { return this._LineSeries_2_3.context; }
+    if (((token === import28.LineSeriesComponent) && (2 === requestNodeIndex))) { return this._LineSeriesComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = this.context.$implicit;
-    this._LineSeries_2_3.check_data(currVal_2_0_0,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = this.parentView.context.xScale;
-    this._LineSeries_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.context.yScale;
-    this._LineSeries_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.colors(this.context.$implicit.name);
-    this._LineSeries_2_3.check_color(currVal_2_0_3,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_color(currVal_2_0_3,throwOnChange,false);
     const currVal_2_0_4:any = this.parentView.context.scaleType;
-    this._LineSeries_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.context.curve;
-    this._LineSeries_2_3.check_curve(currVal_2_0_5,throwOnChange,false);
-    if (this._LineSeries_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._LineSeriesComponent_2_3.check_curve(currVal_2_0_5,throwOnChange,false);
+    if (this._LineSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -775,26 +775,26 @@ class View_LineChart3 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_LineChart4 extends import2.AppView<any> {
+class View_LineChartComponent4 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import30.CircleSeries>;
-  _CircleSeries_2_3:import31.Wrapper_CircleSeries;
+  compView_2:import2.AppView<import30.CircleSeriesComponent>;
+  _CircleSeriesComponent_2_3:import31.Wrapper_CircleSeriesComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_LineChart4,renderType_LineChart,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_LineChartComponent4,renderType_LineChartComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'circleSeries',''),(null as any));
-    this.compView_2 = new import31.View_CircleSeries0(this.viewUtils,this,2,this._el_2);
-    this._CircleSeries_2_3 = new import31.Wrapper_CircleSeries();
-    this.compView_2.create(this._CircleSeries_2_3.context);
+    this.compView_2 = new import31.View_CircleSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._CircleSeriesComponent_2_3 = new import31.Wrapper_CircleSeriesComponent();
+    this.compView_2.create(this._CircleSeriesComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_2));
-    this._CircleSeries_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true);
+    this._CircleSeriesComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -805,30 +805,30 @@ class View_LineChart4 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import30.CircleSeries) && (2 === requestNodeIndex))) { return this._CircleSeries_2_3.context; }
+    if (((token === import30.CircleSeriesComponent) && (2 === requestNodeIndex))) { return this._CircleSeriesComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = this.context.$implicit;
-    this._CircleSeries_2_3.check_data(currVal_2_0_0,throwOnChange,false);
+    this._CircleSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = this.parentView.context.xScale;
-    this._CircleSeries_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
+    this._CircleSeriesComponent_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.context.yScale;
-    this._CircleSeries_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
+    this._CircleSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.colors(this.context.$implicit.name);
-    this._CircleSeries_2_3.check_color(currVal_2_0_3,throwOnChange,false);
+    this._CircleSeriesComponent_2_3.check_color(currVal_2_0_3,throwOnChange,false);
     const currVal_2_0_4:any = this.parentView.context.colors(this.context.$implicit.name);
-    this._CircleSeries_2_3.check_strokeColor(currVal_2_0_4,throwOnChange,false);
+    this._CircleSeriesComponent_2_3.check_strokeColor(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.context.scaleType;
-    this._CircleSeries_2_3.check_scaleType(currVal_2_0_5,throwOnChange,false);
+    this._CircleSeriesComponent_2_3.check_scaleType(currVal_2_0_5,throwOnChange,false);
     const currVal_2_0_6:any = this.parentView.context.hoveredVertical;
-    this._CircleSeries_2_3.check_visibleValue(currVal_2_0_6,throwOnChange,false);
-    if (this._CircleSeries_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._CircleSeriesComponent_2_3.check_visibleValue(currVal_2_0_6,throwOnChange,false);
+    if (this._CircleSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_2.destroy();
-    this._CircleSeries_2_3.ngOnDestroy();
+    this._CircleSeriesComponent_2_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -837,13 +837,13 @@ class View_LineChart4 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.click($event,this.context.$implicit)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_LineChart5 extends import2.AppView<any> {
+class View_LineChartComponent5 extends import2.AppView<any> {
   _el_0:any;
   compView_0:import2.AppView<import32.Timeline>;
   _Timeline_0_3:import33.Wrapper_Timeline;
@@ -856,7 +856,7 @@ class View_LineChart5 extends import2.AppView<any> {
   /*private*/ _expr_9:any;
   _arr_10:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_LineChart5,renderType_LineChart,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_LineChartComponent5,renderType_LineChartComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_9 = import1.UNINITIALIZED;
     this._arr_10 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
@@ -869,7 +869,7 @@ class View_LineChart5 extends import2.AppView<any> {
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'timeline',''),(null as any));
     this.compView_0 = new import33.View_Timeline0(this.viewUtils,this,0,this._el_0);
-    this._Timeline_0_3 = new import33.Wrapper_Timeline(new import8.ElementRef(this._el_0));
+    this._Timeline_0_3 = new import33.Wrapper_Timeline(new import8.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import9.NgZone,this.parentView.parentIndex),this.compView_0.ref);
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this._vc_2 = new import10.ViewContainer(2,0,this,this._anchor_2);
@@ -940,7 +940,7 @@ class View_LineChart5 extends import2.AppView<any> {
     }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 2)) { return new View_LineChart6(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
+    if ((nodeIndex == 2)) { return new View_LineChartComponent6(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
     return (null as any);
   }
   handleEvent_0(eventName:string,$event:any):boolean {
@@ -953,23 +953,23 @@ class View_LineChart5 extends import2.AppView<any> {
     return result;
   }
 }
-class View_LineChart6 extends import2.AppView<any> {
+class View_LineChartComponent6 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import28.LineSeries>;
-  _LineSeries_2_3:import29.Wrapper_LineSeries;
+  compView_2:import2.AppView<import28.LineSeriesComponent>;
+  _LineSeriesComponent_2_3:import29.Wrapper_LineSeriesComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_LineChart6,renderType_LineChart,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_LineChartComponent6,renderType_LineChartComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'lineSeries',''),(null as any));
-    this.compView_2 = new import29.View_LineSeries0(this.viewUtils,this,2,this._el_2);
-    this._LineSeries_2_3 = new import29.Wrapper_LineSeries();
-    this.compView_2.create(this._LineSeries_2_3.context);
+    this.compView_2 = new import29.View_LineSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._LineSeriesComponent_2_3 = new import29.Wrapper_LineSeriesComponent();
+    this.compView_2.create(this._LineSeriesComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -981,23 +981,23 @@ class View_LineChart6 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import28.LineSeries) && (2 === requestNodeIndex))) { return this._LineSeries_2_3.context; }
+    if (((token === import28.LineSeriesComponent) && (2 === requestNodeIndex))) { return this._LineSeriesComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = this.context.$implicit;
-    this._LineSeries_2_3.check_data(currVal_2_0_0,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = this.parentView.parentView.context.timelineXScale;
-    this._LineSeries_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.parentView.context.timelineYScale;
-    this._LineSeries_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.parentView.context.colors(this.context.$implicit.name);
-    this._LineSeries_2_3.check_color(currVal_2_0_3,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_color(currVal_2_0_3,throwOnChange,false);
     const currVal_2_0_4:any = this.parentView.parentView.context.scaleType;
-    this._LineSeries_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
+    this._LineSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.parentView.context.curve;
-    this._LineSeries_2_3.check_curve(currVal_2_0_5,throwOnChange,false);
-    if (this._LineSeries_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this._LineSeriesComponent_2_3.check_curve(currVal_2_0_5,throwOnChange,false);
+    if (this._LineSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
   }
   destroyInternal():void {

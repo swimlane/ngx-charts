@@ -15,9 +15,9 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '@angular/platform-browser/src/security/dom_sanitization_service';
 import * as import9 from '@angular/core/src/security';
-export class Wrapper_ScaleLegend {
+export class Wrapper_ScaleLegendComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.ScaleLegend;
+  context:import0.ScaleLegendComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -27,7 +27,7 @@ export class Wrapper_ScaleLegend {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.ScaleLegend(p0);
+    this.context = new import0.ScaleLegendComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -88,28 +88,28 @@ export class Wrapper_ScaleLegend {
     this._eventHandler = _eventHandler;
   }
 }
-var renderType_ScaleLegend_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_ScaleLegend_Host0 extends import2.AppView<any> {
+var renderType_ScaleLegendComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_ScaleLegendComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.ScaleLegend>;
-  _ScaleLegend_0_3:Wrapper_ScaleLegend;
+  compView_0:import2.AppView<import0.ScaleLegendComponent>;
+  _ScaleLegendComponent_0_3:Wrapper_ScaleLegendComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_ScaleLegend_Host0,renderType_ScaleLegend_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_ScaleLegendComponent_Host0,renderType_ScaleLegendComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'scale-legend',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_ScaleLegend0(this.viewUtils,this,0,this._el_0);
-    this._ScaleLegend_0_3 = new Wrapper_ScaleLegend(this.injectorGet(import8.DomSanitizer,this.parentIndex));
-    this.compView_0.create(this._ScaleLegend_0_3.context);
+    this.compView_0 = new View_ScaleLegendComponent0(this.viewUtils,this,0,this._el_0);
+    this._ScaleLegendComponent_0_3 = new Wrapper_ScaleLegendComponent(this.injectorGet(import8.DomSanitizer,this.parentIndex));
+    this.compView_0.create(this._ScaleLegendComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._ScaleLegend_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._ScaleLegendComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.ScaleLegend) && (0 === requestNodeIndex))) { return this._ScaleLegend_0_3.context; }
+    if (((token === import0.ScaleLegendComponent) && (0 === requestNodeIndex))) { return this._ScaleLegendComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._ScaleLegend_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._ScaleLegendComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -119,10 +119,10 @@ class View_ScaleLegend_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const ScaleLegendNgFactory:import7.ComponentFactory<import0.ScaleLegend> = new import7.ComponentFactory<import0.ScaleLegend>('scale-legend',View_ScaleLegend_Host0,import0.ScaleLegend);
-const styles_ScaleLegend:any[] = ([] as any[]);
-var renderType_ScaleLegend:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_ScaleLegend,{});
-export class View_ScaleLegend0 extends import2.AppView<import0.ScaleLegend> {
+export const ScaleLegendComponentNgFactory:import7.ComponentFactory<import0.ScaleLegendComponent> = new import7.ComponentFactory<import0.ScaleLegendComponent>('scale-legend',View_ScaleLegendComponent_Host0,import0.ScaleLegendComponent);
+const styles_ScaleLegendComponent:any[] = ([] as any[]);
+var renderType_ScaleLegendComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_ScaleLegendComponent,{});
+export class View_ScaleLegendComponent0 extends import2.AppView<import0.ScaleLegendComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -151,7 +151,7 @@ export class View_ScaleLegend0 extends import2.AppView<import0.ScaleLegend> {
   /*private*/ _expr_25:any;
   /*private*/ _expr_26:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_ScaleLegend0,renderType_ScaleLegend,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_ScaleLegendComponent0,renderType_ScaleLegendComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_22 = import1.UNINITIALIZED;
     this._expr_23 = import1.UNINITIALIZED;
     this._expr_24 = import1.UNINITIALIZED;
@@ -164,16 +164,16 @@ export class View_ScaleLegend0 extends import2.AppView<import0.ScaleLegend> {
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',new import3.InlineArray2(2,'class','scale-legend'),(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_4 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','scale-legend-label'),(null as any));
     this._text_6 = this.renderer.createText(this._el_5,'\n          ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,this._el_5,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
     this._text_9 = this.renderer.createText(this._el_5,'\n        ',(null as any));
-    this._text_10 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_10 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_11 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','scale-legend-wrap'),(null as any));
     this._text_12 = this.renderer.createText(this._el_11,'\n        ',(null as any));
-    this._text_13 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_13 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_14 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','scale-legend-label'),(null as any));
     this._text_15 = this.renderer.createText(this._el_14,'\n          ',(null as any));
     this._el_16 = import3.createRenderElement(this.renderer,this._el_14,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
@@ -210,14 +210,14 @@ export class View_ScaleLegend0 extends import2.AppView<import0.ScaleLegend> {
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_22:any = (this.context.width + 'px');
+    const currVal_22:any = this.context.width;
     if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22).toString()));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22).toString() + 'px')));
       this._expr_22 = currVal_22;
     }
-    const currVal_23:any = ((this.context.height - 70) + 'px');
+    const currVal_23:any = (this.context.height - 70);
     if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
-      this.renderer.setElementStyle(this._el_3,'height',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_23) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_23).toString()));
+      this.renderer.setElementStyle(this._el_3,'height',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_23) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_23).toString() + 'px')));
       this._expr_23 = currVal_23;
     }
     const currVal_24:any = import3.inlineInterpolate(1,'',this.context.valueRange[0].toLocaleString(),'');

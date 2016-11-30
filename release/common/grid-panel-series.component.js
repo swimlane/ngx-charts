@@ -1,15 +1,15 @@
 "use strict";
 var core_1 = require('@angular/core');
-var GridPanelSeries = (function () {
-    function GridPanelSeries() {
+var GridPanelSeriesComponent = (function () {
+    function GridPanelSeriesComponent() {
     }
-    GridPanelSeries.prototype.ngOnChanges = function () {
+    GridPanelSeriesComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    GridPanelSeries.prototype.update = function () {
+    GridPanelSeriesComponent.prototype.update = function () {
         this.gridPanels = this.getGridPanels();
     };
-    GridPanelSeries.prototype.getGridPanels = function () {
+    GridPanelSeriesComponent.prototype.getGridPanels = function () {
         var _this = this;
         return this.data.map(function (d, i) {
             var offset, width, height, x, y, className;
@@ -48,7 +48,7 @@ var GridPanelSeries = (function () {
             };
         });
     };
-    GridPanelSeries.decorators = [
+    GridPanelSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[gridPanelSeries]',
                     template: "\n    <svg:g gridPanel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
@@ -56,15 +56,15 @@ var GridPanelSeries = (function () {
                 },] },
     ];
     /** @nocollapse */
-    GridPanelSeries.ctorParameters = [];
-    GridPanelSeries.propDecorators = {
+    GridPanelSeriesComponent.ctorParameters = [];
+    GridPanelSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
         'xScale': [{ type: core_1.Input },],
         'yScale': [{ type: core_1.Input },],
         'orient': [{ type: core_1.Input },],
     };
-    return GridPanelSeries;
+    return GridPanelSeriesComponent;
 }());
-exports.GridPanelSeries = GridPanelSeries;
+exports.GridPanelSeriesComponent = GridPanelSeriesComponent;
 //# sourceMappingURL=grid-panel-series.component.js.map

@@ -121,7 +121,7 @@
     color: #999;
     font-size: 32px; }
 
-.timeline .brush .overlay {
+.timeline .brush-background {
   fill: rgba(0, 0, 0, 0.05); }
 
 .timeline .brush .selection {
@@ -137,13 +137,13 @@
   opacity: 0.6; }
 
 .area-tooltip-container {
-  padding: 5px 0px;
+  padding: 5px 0;
   pointer-events: none; }
 
 .tooltip-item {
   text-align: left;
   line-height: 1.2em;
-  padding: 5px 0px; }
+  padding: 5px 0; }
   .tooltip-item .tooltip-item-color {
     display: inline-block;
     height: 12px;
@@ -158,7 +158,6 @@
   .chart-legend .legend-title {
     white-space: nowrap;
     overflow: hidden;
-    color: #76818a;
     margin-left: 10px;
     margin-bottom: 5px;
     font-size: 14px;
@@ -195,11 +194,9 @@
     margin: 8px;
     color: #76818a; }
     .chart-legend .legend-label:hover {
-      color: #50585f;
-      font-weight: bold;
+      color: #000;
       -webkit-transition: 0.2s;
       -moz-transition: 0.2s;
-      -ms-transition: 0.2s;
       transition: 0.2s; }
     .chart-legend .legend-label.active {
       color: #FFF; }
@@ -217,7 +214,6 @@
     font-size: 12px;
     width: 100%;
     text-overflow: ellipsis;
-    display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     padding-right: 20px; }
@@ -261,11 +257,9 @@
         .advanced-pie-legend .legend-items-container .legend-items .legend-item:focus {
           outline: none; }
         .advanced-pie-legend .legend-items-container .legend-items .legend-item:hover {
-          color: #50585f;
-          font-weight: bold;
+          color: #000;
           -webkit-transition: 0.2s;
           -moz-transition: 0.2s;
-          -ms-transition: 0.2s;
           transition: 0.2s; }
         .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {
           font-size: 24px;

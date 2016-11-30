@@ -1,13 +1,13 @@
 "use strict";
 var core_1 = require("@angular/core");
 var area_chart_component_1 = require("./area-chart.component");
-exports.AreaChart = area_chart_component_1.AreaChart;
+exports.AreaChartComponent = area_chart_component_1.AreaChartComponent;
 var area_chart_normalized_component_1 = require("./area-chart-normalized.component");
-exports.AreaChartNormalized = area_chart_normalized_component_1.AreaChartNormalized;
+exports.AreaChartNormalizedComponent = area_chart_normalized_component_1.AreaChartNormalizedComponent;
 var area_chart_stacked_component_1 = require("./area-chart-stacked.component");
-exports.AreaChartStacked = area_chart_stacked_component_1.AreaChartStacked;
+exports.AreaChartStackedComponent = area_chart_stacked_component_1.AreaChartStackedComponent;
 var area_series_component_1 = require("./area-series.component");
-exports.AreaSeries = area_series_component_1.AreaSeries;
+exports.AreaSeriesComponent = area_series_component_1.AreaSeriesComponent;
 var common_module_1 = require("../common/common.module");
 var AreaChartModule = (function () {
     function AreaChartModule() {
@@ -16,16 +16,16 @@ var AreaChartModule = (function () {
         { type: core_1.NgModule, args: [{
                     imports: [common_module_1.CommonModule],
                     declarations: [
-                        area_chart_component_1.AreaChart,
-                        area_chart_normalized_component_1.AreaChartNormalized,
-                        area_chart_stacked_component_1.AreaChartStacked,
-                        area_series_component_1.AreaSeries
+                        area_chart_component_1.AreaChartComponent,
+                        area_chart_normalized_component_1.AreaChartNormalizedComponent,
+                        area_chart_stacked_component_1.AreaChartStackedComponent,
+                        area_series_component_1.AreaSeriesComponent
                     ],
                     exports: [
-                        area_chart_component_1.AreaChart,
-                        area_chart_normalized_component_1.AreaChartNormalized,
-                        area_chart_stacked_component_1.AreaChartStacked,
-                        area_series_component_1.AreaSeries
+                        area_chart_component_1.AreaChartComponent,
+                        area_chart_normalized_component_1.AreaChartNormalizedComponent,
+                        area_chart_stacked_component_1.AreaChartStackedComponent,
+                        area_series_component_1.AreaSeriesComponent
                     ]
                 },] },
     ];

@@ -1,4 +1,4 @@
-import { ForceDirectedGraph } from "./force-directed-graph.component";
-export { ForceDirectedGraph };
+import { ForceDirectedGraphComponent } from './force-directed-graph.component';
+export { ForceDirectedGraphComponent };
 export declare class ForceDirectedGraphModule {
 }

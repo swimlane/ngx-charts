@@ -21,9 +21,9 @@ import * as import12 from '@angular/core/src/change_detection/differs/iterable_d
 import * as import13 from '@angular/common/src/directives/ng_for';
 import * as import14 from '../../../src/pie-chart/pie-arc.component';
 import * as import15 from './pie-arc.component.ngfactory';
-export class Wrapper_PieGridSeries {
+export class Wrapper_PieGridSeriesComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.PieGridSeries;
+  context:import0.PieGridSeriesComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -34,7 +34,7 @@ export class Wrapper_PieGridSeries {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.PieGridSeries(p0);
+    this.context = new import0.PieGridSeriesComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -97,42 +97,42 @@ export class Wrapper_PieGridSeries {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_PieGridSeries_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_PieGridSeries_Host0 extends import2.AppView<any> {
+var renderType_PieGridSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_PieGridSeriesComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.PieGridSeries>;
-  _PieGridSeries_0_3:Wrapper_PieGridSeries;
+  compView_0:import2.AppView<import0.PieGridSeriesComponent>;
+  _PieGridSeriesComponent_0_3:Wrapper_PieGridSeriesComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieGridSeries_Host0,renderType_PieGridSeries_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_PieGridSeriesComponent_Host0,renderType_PieGridSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'pieGridSeries',''),rootSelector,(null as any));
-    this.compView_0 = new View_PieGridSeries0(this.viewUtils,this,0,this._el_0);
-    this._PieGridSeries_0_3 = new Wrapper_PieGridSeries(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._PieGridSeries_0_3.context);
+    this.compView_0 = new View_PieGridSeriesComponent0(this.viewUtils,this,0,this._el_0);
+    this._PieGridSeriesComponent_0_3 = new Wrapper_PieGridSeriesComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._PieGridSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._PieGridSeries_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._PieGridSeriesComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.PieGridSeries) && (0 === requestNodeIndex))) { return this._PieGridSeries_0_3.context; }
+    if (((token === import0.PieGridSeriesComponent) && (0 === requestNodeIndex))) { return this._PieGridSeriesComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._PieGridSeries_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._PieGridSeriesComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._PieGridSeries_0_3.ngOnDestroy();
+    this._PieGridSeriesComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const PieGridSeriesNgFactory:import7.ComponentFactory<import0.PieGridSeries> = new import7.ComponentFactory<import0.PieGridSeries>('g[pieGridSeries]',View_PieGridSeries_Host0,import0.PieGridSeries);
-const styles_PieGridSeries:any[] = ([] as any[]);
-var renderType_PieGridSeries:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieGridSeries,{});
-export class View_PieGridSeries0 extends import2.AppView<import0.PieGridSeries> {
+export const PieGridSeriesComponentNgFactory:import7.ComponentFactory<import0.PieGridSeriesComponent> = new import7.ComponentFactory<import0.PieGridSeriesComponent>('g[pieGridSeries]',View_PieGridSeriesComponent_Host0,import0.PieGridSeriesComponent);
+const styles_PieGridSeriesComponent:any[] = ([] as any[]);
+var renderType_PieGridSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieGridSeriesComponent,{});
+export class View_PieGridSeriesComponent0 extends import2.AppView<import0.PieGridSeriesComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -143,7 +143,7 @@ export class View_PieGridSeries0 extends import2.AppView<import0.PieGridSeries> 
   _text_4:any;
   _text_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieGridSeries0,renderType_PieGridSeries,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_PieGridSeriesComponent0,renderType_PieGridSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -184,28 +184,28 @@ export class View_PieGridSeries0 extends import2.AppView<import0.PieGridSeries> 
     this._vc_3.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 3)) { return new View_PieGridSeries1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
+    if ((nodeIndex == 3)) { return new View_PieGridSeriesComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
     return (null as any);
   }
 }
-class View_PieGridSeries1 extends import2.AppView<any> {
+class View_PieGridSeriesComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import14.PieArc>;
-  _PieArc_0_3:import15.Wrapper_PieArc;
+  compView_0:import2.AppView<import14.PieArcComponent>;
+  _PieArcComponent_0_3:import15.Wrapper_PieArcComponent;
   _text_1:any;
   /*private*/ _expr_4:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_PieGridSeries1,renderType_PieGridSeries,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_PieGridSeriesComponent1,renderType_PieGridSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_4 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'pieArc',''),(null as any));
-    this.compView_0 = new import15.View_PieArc0(this.viewUtils,this,0,this._el_0);
-    this._PieArc_0_3 = new import15.Wrapper_PieArc(new import8.ElementRef(this._el_0));
+    this.compView_0 = new import15.View_PieArcComponent0(this.viewUtils,this,0,this._el_0);
+    this._PieArcComponent_0_3 = new import15.Wrapper_PieArcComponent(new import8.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this.compView_0.create(this._PieArc_0_3.context);
+    this.compView_0.create(this._PieArcComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._PieArc_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._PieArcComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -214,33 +214,33 @@ class View_PieGridSeries1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.PieArc) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._PieArc_0_3.context; }
+    if (((token === import14.PieArcComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._PieArcComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.color(this.context.$implicit);
-    this._PieArc_0_3.check_fill(currVal_0_0_0,throwOnChange,false);
+    this._PieArcComponent_0_3.check_fill(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.context.$implicit.startAngle;
-    this._PieArc_0_3.check_startAngle(currVal_0_0_1,throwOnChange,false);
+    this._PieArcComponent_0_3.check_startAngle(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.context.$implicit.endAngle;
-    this._PieArc_0_3.check_endAngle(currVal_0_0_2,throwOnChange,false);
+    this._PieArcComponent_0_3.check_endAngle(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.innerRadius;
-    this._PieArc_0_3.check_innerRadius(currVal_0_0_3,throwOnChange,false);
+    this._PieArcComponent_0_3.check_innerRadius(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.outerRadius;
-    this._PieArc_0_3.check_outerRadius(currVal_0_0_4,throwOnChange,false);
+    this._PieArcComponent_0_3.check_outerRadius(currVal_0_0_4,throwOnChange,false);
     const currVal_0_0_5:any = this.context.$implicit.data.value;
-    this._PieArc_0_3.check_value(currVal_0_0_5,throwOnChange,false);
+    this._PieArcComponent_0_3.check_value(currVal_0_0_5,throwOnChange,false);
     const currVal_0_0_6:any = this.parentView.context.max;
-    this._PieArc_0_3.check_max(currVal_0_0_6,throwOnChange,false);
+    this._PieArcComponent_0_3.check_max(currVal_0_0_6,throwOnChange,false);
     const currVal_0_0_7:any = this.context.$implicit.data;
-    this._PieArc_0_3.check_data(currVal_0_0_7,throwOnChange,false);
+    this._PieArcComponent_0_3.check_data(currVal_0_0_7,throwOnChange,false);
     const currVal_0_0_8:any = false;
-    this._PieArc_0_3.check_gradient(currVal_0_0_8,throwOnChange,false);
+    this._PieArcComponent_0_3.check_gradient(currVal_0_0_8,throwOnChange,false);
     const currVal_0_0_9:any = this.context.$implicit.animate;
-    this._PieArc_0_3.check_animate(currVal_0_0_9,throwOnChange,false);
+    this._PieArcComponent_0_3.check_animate(currVal_0_0_9,throwOnChange,false);
     const currVal_0_0_10:any = this.context.$implicit.pointerEvents;
-    this._PieArc_0_3.check_pointerEvents(currVal_0_0_10,throwOnChange,false);
-    if (this._PieArc_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._PieArcComponent_0_3.check_pointerEvents(currVal_0_0_10,throwOnChange,false);
+    if (this._PieArcComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     const currVal_4:any = this.context.$implicit.class;
     if (import3.checkBinding(throwOnChange,this._expr_4,currVal_4)) {
       this.renderer.setElementAttribute(this._el_0,'class',((currVal_4 == null)? (null as any): currVal_4.toString()));
@@ -250,7 +250,7 @@ class View_PieGridSeries1 extends import2.AppView<any> {
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._PieArc_0_3.ngOnDestroy();
+    this._PieArcComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -259,7 +259,7 @@ class View_PieGridSeries1 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.click($event)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

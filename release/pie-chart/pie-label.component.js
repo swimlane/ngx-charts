@@ -2,15 +2,15 @@
 var core_1 = require('@angular/core');
 var trim_label_helper_1 = require('../common/trim-label.helper');
 var d3_1 = require('../d3');
-var PieLabel = (function () {
-    function PieLabel(element) {
+var PieLabelComponent = (function () {
+    function PieLabelComponent(element) {
         this.element = element.nativeElement;
         this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    PieLabel.prototype.ngOnChanges = function () {
+    PieLabelComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    PieLabel.prototype.update = function () {
+    PieLabelComponent.prototype.update = function () {
         var factor = 1.5;
         var outerArc = d3_1.default.arc()
             .innerRadius(this.radius * factor)
@@ -29,13 +29,13 @@ var PieLabel = (function () {
         this.transform = "translate(" + this.labelXY + ")";
         this.loadAnimation();
     };
-    PieLabel.prototype.textAnchor = function () {
+    PieLabelComponent.prototype.textAnchor = function () {
         return this.midAngle(this.data) < Math.PI ? "start" : "end";
     };
-    PieLabel.prototype.midAngle = function (d) {
+    PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     };
-    PieLabel.prototype.loadAnimation = function () {
+    PieLabelComponent.prototype.loadAnimation = function () {
         var label = d3_1.default.select(this.element).select('.label');
         var line = d3_1.default.select(this.element).select('.line');
         label
@@ -49,7 +49,7 @@ var PieLabel = (function () {
             .transition()
             .style('stroke-dasharray', 'none');
     };
-    PieLabel.decorators = [
+    PieLabelComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[pieLabel]',
                     template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
@@ -57,10 +57,10 @@ var PieLabel = (function () {
                 },] },
     ];
     /** @nocollapse */
-    PieLabel.ctorParameters = [
+    PieLabelComponent.ctorParameters = [
         { type: core_1.ElementRef, },
     ];
-    PieLabel.propDecorators = {
+    PieLabelComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'radius': [{ type: core_1.Input },],
         'label': [{ type: core_1.Input },],
@@ -69,7 +69,7 @@ var PieLabel = (function () {
         'value': [{ type: core_1.Input },],
         'explodeSlices': [{ type: core_1.Input },],
     };
-    return PieLabel;
+    return PieLabelComponent;
 }());
-exports.PieLabel = PieLabel;
+exports.PieLabelComponent = PieLabelComponent;
 //# sourceMappingURL=pie-label.component.js.map

@@ -1,6 +1,6 @@
-import { TreeMapCell } from "./tree-map-cell.component";
-import { TreeMapCellSeries } from "./tree-map-cell-series.component";
-import { TreeMap } from "./tree-map.component";
-export { TreeMapCell, TreeMapCellSeries, TreeMap };
+import { TreeMapCellComponent } from "./tree-map-cell.component";
+import { TreeMapCellSeriesComponent } from "./tree-map-cell-series.component";
+import { TreeMapComponent } from "./tree-map.component";
+export { TreeMapCellComponent, TreeMapCellSeriesComponent, TreeMapComponent };
 export declare class TreeMapModule {
 }

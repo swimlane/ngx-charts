@@ -8,9 +8,9 @@ var core_1 = require('@angular/core');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
-var PieChart = (function (_super) {
-    __extends(PieChart, _super);
-    function PieChart(element, cd, zone) {
+var PieChartComponent = (function (_super) {
+    __extends(PieChartComponent, _super);
+    function PieChartComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -22,16 +22,16 @@ var PieChart = (function (_super) {
         this.clickHandler = new core_1.EventEmitter();
         this.legendLabelClick = new core_1.EventEmitter();
     }
-    PieChart.prototype.ngAfterViewInit = function () {
+    PieChartComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    PieChart.prototype.ngOnDestroy = function () {
+    PieChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    PieChart.prototype.ngOnChanges = function () {
+    PieChartComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    PieChart.prototype.update = function () {
+    PieChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -65,29 +65,42 @@ var PieChart = (function (_super) {
             _this.setColors();
         });
     };
-    PieChart.prototype.getDomain = function () {
-        return this.results.map(function (d) { return d.name; });
+    PieChartComponent.prototype.getDomain = function () {
+        var items = [];
+        this.results.map(function (d) {
+            var label = d.name;
+            if (label.constructor.name === 'Date') {
+                label = label.toLocaleDateString();
+            }
+            else {
+                label = label.toLocaleString();
+            }
+            if (items.indexOf(label) === -1) {
+                items.push(label);
+            }
+        });
+        return items;
     };
-    PieChart.prototype.click = function (data) {
+    PieChartComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    PieChart.prototype.setColors = function () {
+    PieChartComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    PieChart.decorators = [
+    PieChartComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'pie-chart',
-                    template: "\n    <chart\n      [colors]=\"colors\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [colors]=\"colors\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    PieChart.ctorParameters = [
+    PieChartComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    PieChart.propDecorators = {
+    PieChartComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'margin': [{ type: core_1.Input },],
@@ -101,7 +114,7 @@ var PieChart = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return PieChart;
-}(base_chart_component_1.BaseChart));
-exports.PieChart = PieChart;
+    return PieChartComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.PieChartComponent = PieChartComponent;
 //# sourceMappingURL=pie-chart.component.js.map

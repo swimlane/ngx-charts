@@ -2,11 +2,11 @@
 var core_1 = require("@angular/core");
 var common_module_1 = require("../common/common.module");
 var line_component_1 = require("./line.component");
-exports.Line = line_component_1.Line;
+exports.LineComponent = line_component_1.LineComponent;
 var line_chart_component_1 = require("./line-chart.component");
-exports.LineChart = line_chart_component_1.LineChart;
+exports.LineChartComponent = line_chart_component_1.LineChartComponent;
 var line_series_component_1 = require("./line-series.component");
-exports.LineSeries = line_series_component_1.LineSeries;
+exports.LineSeriesComponent = line_series_component_1.LineSeriesComponent;
 var LineChartModule = (function () {
     function LineChartModule() {
     }
@@ -14,14 +14,14 @@ var LineChartModule = (function () {
         { type: core_1.NgModule, args: [{
                     imports: [common_module_1.CommonModule],
                     declarations: [
-                        line_component_1.Line,
-                        line_chart_component_1.LineChart,
-                        line_series_component_1.LineSeries
+                        line_component_1.LineComponent,
+                        line_chart_component_1.LineChartComponent,
+                        line_series_component_1.LineSeriesComponent
                     ],
                     exports: [
-                        line_component_1.Line,
-                        line_chart_component_1.LineChart,
-                        line_series_component_1.LineSeries
+                        line_component_1.LineComponent,
+                        line_chart_component_1.LineChartComponent,
+                        line_series_component_1.LineSeriesComponent
                     ]
                 },] },
     ];

@@ -3,13 +3,13 @@ var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var moment = require('moment');
 var sort_1 = require('../utils/sort');
-var LineSeries = (function () {
-    function LineSeries() {
+var LineSeriesComponent = (function () {
+    function LineSeriesComponent() {
     }
-    LineSeries.prototype.ngOnChanges = function () {
+    LineSeriesComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    LineSeries.prototype.update = function () {
+    LineSeriesComponent.prototype.update = function () {
         var _this = this;
         var line = d3_1.default.line()
             .x(function (d) {
@@ -40,7 +40,7 @@ var LineSeries = (function () {
         }
         this.path = line(data) || '';
     };
-    LineSeries.decorators = [
+    LineSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[lineSeries]',
                     template: "\n    <svg:g line\n      [data]=\"data\"\n      [path]=\"path\"\n      [stroke]=\"color\"\n    />\n  ",
@@ -48,8 +48,8 @@ var LineSeries = (function () {
                 },] },
     ];
     /** @nocollapse */
-    LineSeries.ctorParameters = [];
-    LineSeries.propDecorators = {
+    LineSeriesComponent.ctorParameters = [];
+    LineSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'xScale': [{ type: core_1.Input },],
         'yScale': [{ type: core_1.Input },],
@@ -57,7 +57,7 @@ var LineSeries = (function () {
         'scaleType': [{ type: core_1.Input },],
         'curve': [{ type: core_1.Input },],
     };
-    return LineSeries;
+    return LineSeriesComponent;
 }());
-exports.LineSeries = LineSeries;
+exports.LineSeriesComponent = LineSeriesComponent;
 //# sourceMappingURL=line-series.component.js.map

@@ -9,9 +9,9 @@ var d3_1 = require('../d3');
 var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
-var Gauge = (function (_super) {
-    __extends(Gauge, _super);
-    function Gauge(element, cd, zone) {
+var GaugeComponent = (function (_super) {
+    __extends(GaugeComponent, _super);
+    function GaugeComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -27,18 +27,18 @@ var Gauge = (function (_super) {
         this.resizeScale = 1;
         this.textTransform = '';
     }
-    Gauge.prototype.ngAfterViewInit = function () {
+    GaugeComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
         this.bindResizeEvents(this.view);
         setTimeout(function () { return _this.scaleText(); });
     };
-    Gauge.prototype.ngOnDestroy = function () {
+    GaugeComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    Gauge.prototype.ngOnChanges = function () {
+    GaugeComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    Gauge.prototype.update = function () {
+    GaugeComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -84,15 +84,15 @@ var Gauge = (function (_super) {
             _this.scaleText();
         });
     };
-    Gauge.prototype.getValueDomain = function () {
+    GaugeComponent.prototype.getValueDomain = function () {
         return [this.min, this.max];
     };
-    Gauge.prototype.getValueScale = function () {
+    GaugeComponent.prototype.getValueScale = function () {
         return d3_1.default.scaleLinear()
             .range([0, this.angleSpan])
             .domain(this.valueDomain);
     };
-    Gauge.prototype.getTicks = function () {
+    GaugeComponent.prototype.getTicks = function () {
         var bigTickSegment = this.angleSpan / this.bigSegments;
         var smallTickSegment = bigTickSegment / (this.smallSegments);
         var tickLength = 20;
@@ -133,7 +133,7 @@ var Gauge = (function (_super) {
         }
         return ticks;
     };
-    Gauge.prototype.getTickPath = function (startDistance, tickLength, angle) {
+    GaugeComponent.prototype.getTickPath = function (startDistance, tickLength, angle) {
         var y1 = startDistance * Math.sin(angle);
         var y2 = (startDistance + tickLength) * Math.sin(angle);
         var x1 = startDistance * Math.cos(angle);
@@ -142,7 +142,7 @@ var Gauge = (function (_super) {
         var line = d3_1.default.line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
         return line(points);
     };
-    Gauge.prototype.displayValue = function () {
+    GaugeComponent.prototype.displayValue = function () {
         if (this.units) {
             return this.value.toLocaleString() + " " + this.units;
         }
@@ -150,12 +150,11 @@ var Gauge = (function (_super) {
             return this.value.toLocaleString();
         }
     };
-    Gauge.prototype.scaleText = function () {
+    GaugeComponent.prototype.scaleText = function () {
         var _this = this;
         var width = this.textEl.nativeElement.getBoundingClientRect().width;
-        if (width === 0) {
+        if (width === 0)
             return;
-        }
         var oldScale = this.resizeScale;
         var availableSpace = this.outerRadius;
         this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
@@ -165,26 +164,26 @@ var Gauge = (function (_super) {
             setTimeout(function () { _this.scaleText(); });
         }
     };
-    Gauge.prototype.click = function (data) {
+    GaugeComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    Gauge.prototype.setColors = function () {
+    GaugeComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
     };
-    Gauge.decorators = [
+    GaugeComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'gauge',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g pieArc\n          class=\"background-arc\"\n          [startAngle]=\"0\"\n          [endAngle]=\"backgroundArc.endAngle\"\n          [innerRadius]=\"backgroundArc.innerRadius\"\n          [outerRadius]=\"backgroundArc.outerRadius\"\n          [cornerRadius]=\"backgroundArc.cornerRadius\"\n          [data]=\"backgroundArc.data\"\n          [animate]=\"false\"\n          [pointerEvents]=\"false\">\n        </svg:g>\n\n        <svg:g pieArc\n          [startAngle]=\"0\"\n          [endAngle]=\"valueArc.endAngle\"\n          [innerRadius]=\"valueArc.innerRadius\"\n          [outerRadius]=\"valueArc.outerRadius\"\n          [cornerRadius]=\"valueArc.cornerRadius\"\n          [fill]=\"colors(value)\"\n          [data]=\"valueArc.data\"\n          [animate]=\"true\"\n          (clickHandler)=\"click($event)\">\n        </svg:g>\n\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [ngClass]=\"{'highlighted': tick.highlighted}\">\n          <svg:text\n            [style.textAnchor]=\"tick.textAnchor\"\n            [attr.transform]=\"tick.textTransform\"\n            alignment-baseline=\"central\">\n            {{tick.text}}\n          </svg:text>\n        </svg:g>\n\n        <svg:g *ngFor=\"let tick of ticks.small\"\n          class=\"gauge-tick gauge-tick-small\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n\n        <svg:g transform=\"rotate(120)\">\n          <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n            {{displayValue()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g pieArc\n          class=\"background-arc\"\n          [startAngle]=\"0\"\n          [endAngle]=\"backgroundArc.endAngle\"\n          [innerRadius]=\"backgroundArc.innerRadius\"\n          [outerRadius]=\"backgroundArc.outerRadius\"\n          [cornerRadius]=\"backgroundArc.cornerRadius\"\n          [data]=\"backgroundArc.data\"\n          [animate]=\"false\"\n          [pointerEvents]=\"false\">\n        </svg:g>\n        <svg:g pieArc\n          [startAngle]=\"0\"\n          [endAngle]=\"valueArc.endAngle\"\n          [innerRadius]=\"valueArc.innerRadius\"\n          [outerRadius]=\"valueArc.outerRadius\"\n          [cornerRadius]=\"valueArc.cornerRadius\"\n          [fill]=\"colors(value)\"\n          [data]=\"valueArc.data\"\n          [animate]=\"true\"\n          (clickHandler)=\"onClick($event)\">\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [ngClass]=\"{'highlighted': tick.highlighted}\">\n          <svg:text\n            [style.textAnchor]=\"tick.textAnchor\"\n            [attr.transform]=\"tick.textTransform\"\n            alignment-baseline=\"central\">\n            {{tick.text}}\n          </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n          class=\"gauge-tick gauge-tick-small\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g transform=\"rotate(120)\">\n          <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n            {{displayValue()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    Gauge.ctorParameters = [
+    GaugeComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    Gauge.propDecorators = {
+    GaugeComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
         'customColors': [{ type: core_1.Input },],
@@ -199,7 +198,7 @@ var Gauge = (function (_super) {
         'legendLabelClick': [{ type: core_1.Output },],
         'textEl': [{ type: core_1.ViewChild, args: ['textEl',] },],
     };
-    return Gauge;
-}(base_chart_component_1.BaseChart));
-exports.Gauge = Gauge;
+    return GaugeComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.GaugeComponent = GaugeComponent;
 //# sourceMappingURL=gauge.component.js.map

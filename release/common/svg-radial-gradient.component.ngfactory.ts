@@ -14,9 +14,9 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '@angular/core/src/security';
-export class Wrapper_SvgRadialGradient {
+export class Wrapper_SvgRadialGradientComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.SvgRadialGradient;
+  context:import0.SvgRadialGradientComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -26,7 +26,7 @@ export class Wrapper_SvgRadialGradient {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.SvgRadialGradient();
+    this.context = new import0.SvgRadialGradientComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -87,28 +87,28 @@ export class Wrapper_SvgRadialGradient {
     this._eventHandler = _eventHandler;
   }
 }
-var renderType_SvgRadialGradient_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_SvgRadialGradient_Host0 extends import2.AppView<any> {
+var renderType_SvgRadialGradientComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_SvgRadialGradientComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.SvgRadialGradient>;
-  _SvgRadialGradient_0_3:Wrapper_SvgRadialGradient;
+  compView_0:import2.AppView<import0.SvgRadialGradientComponent>;
+  _SvgRadialGradientComponent_0_3:Wrapper_SvgRadialGradientComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SvgRadialGradient_Host0,renderType_SvgRadialGradient_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_SvgRadialGradientComponent_Host0,renderType_SvgRadialGradientComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'svgRadialGradient',''),rootSelector,(null as any));
-    this.compView_0 = new View_SvgRadialGradient0(this.viewUtils,this,0,this._el_0);
-    this._SvgRadialGradient_0_3 = new Wrapper_SvgRadialGradient();
-    this.compView_0.create(this._SvgRadialGradient_0_3.context);
+    this.compView_0 = new View_SvgRadialGradientComponent0(this.viewUtils,this,0,this._el_0);
+    this._SvgRadialGradientComponent_0_3 = new Wrapper_SvgRadialGradientComponent();
+    this.compView_0.create(this._SvgRadialGradientComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._SvgRadialGradient_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._SvgRadialGradientComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.SvgRadialGradient) && (0 === requestNodeIndex))) { return this._SvgRadialGradient_0_3.context; }
+    if (((token === import0.SvgRadialGradientComponent) && (0 === requestNodeIndex))) { return this._SvgRadialGradientComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._SvgRadialGradient_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._SvgRadialGradientComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -118,10 +118,10 @@ class View_SvgRadialGradient_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const SvgRadialGradientNgFactory:import7.ComponentFactory<import0.SvgRadialGradient> = new import7.ComponentFactory<import0.SvgRadialGradient>('g[svgRadialGradient]',View_SvgRadialGradient_Host0,import0.SvgRadialGradient);
-const styles_SvgRadialGradient:any[] = ([] as any[]);
-var renderType_SvgRadialGradient:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SvgRadialGradient,{});
-export class View_SvgRadialGradient0 extends import2.AppView<import0.SvgRadialGradient> {
+export const SvgRadialGradientComponentNgFactory:import7.ComponentFactory<import0.SvgRadialGradientComponent> = new import7.ComponentFactory<import0.SvgRadialGradientComponent>('g[svgRadialGradient]',View_SvgRadialGradientComponent_Host0,import0.SvgRadialGradientComponent);
+const styles_SvgRadialGradientComponent:any[] = ([] as any[]);
+var renderType_SvgRadialGradientComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SvgRadialGradientComponent,{});
+export class View_SvgRadialGradientComponent0 extends import2.AppView<import0.SvgRadialGradientComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -139,7 +139,7 @@ export class View_SvgRadialGradient0 extends import2.AppView<import0.SvgRadialGr
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SvgRadialGradient0,renderType_SvgRadialGradient,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_SvgRadialGradientComponent0,renderType_SvgRadialGradientComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;

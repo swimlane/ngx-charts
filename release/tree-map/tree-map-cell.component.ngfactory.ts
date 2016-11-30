@@ -19,9 +19,9 @@ import * as import10 from '../../node_modules/@angular/common/src/directives/ng_
 import * as import11 from '@angular/core/src/linker/template_ref';
 import * as import12 from '@angular/common/src/directives/ng_if';
 import * as import13 from '@angular/core/src/security';
-export class Wrapper_TreeMapCell {
+export class Wrapper_TreeMapCellComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.TreeMapCell;
+  context:import0.TreeMapCellComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -36,7 +36,7 @@ export class Wrapper_TreeMapCell {
   constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.TreeMapCell(p0);
+    this.context = new import0.TreeMapCellComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -135,42 +135,42 @@ export class Wrapper_TreeMapCell {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_TreeMapCell_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_TreeMapCell_Host0 extends import2.AppView<any> {
+var renderType_TreeMapCellComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_TreeMapCellComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.TreeMapCell>;
-  _TreeMapCell_0_3:Wrapper_TreeMapCell;
+  compView_0:import2.AppView<import0.TreeMapCellComponent>;
+  _TreeMapCellComponent_0_3:Wrapper_TreeMapCellComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_TreeMapCell_Host0,renderType_TreeMapCell_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_TreeMapCellComponent_Host0,renderType_TreeMapCellComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'treeMapCell',''),rootSelector,(null as any));
-    this.compView_0 = new View_TreeMapCell0(this.viewUtils,this,0,this._el_0);
-    this._TreeMapCell_0_3 = new Wrapper_TreeMapCell(new import8.ElementRef(this._el_0));
-    this.compView_0.create(this._TreeMapCell_0_3.context);
+    this.compView_0 = new View_TreeMapCellComponent0(this.viewUtils,this,0,this._el_0);
+    this._TreeMapCellComponent_0_3 = new Wrapper_TreeMapCellComponent(new import8.ElementRef(this._el_0));
+    this.compView_0.create(this._TreeMapCellComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._TreeMapCell_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._TreeMapCellComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.TreeMapCell) && (0 === requestNodeIndex))) { return this._TreeMapCell_0_3.context; }
+    if (((token === import0.TreeMapCellComponent) && (0 === requestNodeIndex))) { return this._TreeMapCellComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._TreeMapCell_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._TreeMapCellComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._TreeMapCell_0_3.ngOnDestroy();
+    this._TreeMapCellComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const TreeMapCellNgFactory:import7.ComponentFactory<import0.TreeMapCell> = new import7.ComponentFactory<import0.TreeMapCell>('g[treeMapCell]',View_TreeMapCell_Host0,import0.TreeMapCell);
-const styles_TreeMapCell:any[] = ([] as any[]);
-var renderType_TreeMapCell:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TreeMapCell,{});
-export class View_TreeMapCell0 extends import2.AppView<import0.TreeMapCell> {
+export const TreeMapCellComponentNgFactory:import7.ComponentFactory<import0.TreeMapCellComponent> = new import7.ComponentFactory<import0.TreeMapCellComponent>('g[treeMapCell]',View_TreeMapCellComponent_Host0,import0.TreeMapCellComponent);
+const styles_TreeMapCellComponent:any[] = ([] as any[]);
+var renderType_TreeMapCellComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TreeMapCellComponent,{});
+export class View_TreeMapCellComponent0 extends import2.AppView<import0.TreeMapCellComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -187,7 +187,7 @@ export class View_TreeMapCell0 extends import2.AppView<import0.TreeMapCell> {
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_TreeMapCell0,renderType_TreeMapCell,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_TreeMapCellComponent0,renderType_TreeMapCellComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
     this._expr_13 = import1.UNINITIALIZED;
@@ -199,7 +199,7 @@ export class View_TreeMapCell0 extends import2.AppView<import0.TreeMapCell> {
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:rect',new import3.InlineArray2(2,'class','cell'),(null as any));
-    this._text_4 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
+    this._text_4 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
     this._vc_5 = new import9.ViewContainer(5,1,this,this._anchor_5);
     this._TemplateRef_5_5 = new import11.TemplateRef_(this,5,this._anchor_5);
@@ -255,20 +255,20 @@ export class View_TreeMapCell0 extends import2.AppView<import0.TreeMapCell> {
     this._vc_5.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 5)) { return new View_TreeMapCell1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
+    if ((nodeIndex == 5)) { return new View_TreeMapCellComponent1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
     return (null as any);
   }
   handleEvent_3(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.click()) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick()) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
   }
 }
-class View_TreeMapCell1 extends import2.AppView<any> {
+class View_TreeMapCellComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -286,7 +286,7 @@ class View_TreeMapCell1 extends import2.AppView<any> {
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_TreeMapCell1,renderType_TreeMapCell,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_TreeMapCellComponent1,renderType_TreeMapCellComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;

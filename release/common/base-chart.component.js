@@ -1,21 +1,21 @@
 "use strict";
 var rxjs_1 = require("rxjs");
-var BaseChart = (function () {
-    function BaseChart(chartElement, zone, changeDetector) {
+var BaseChartComponent = (function () {
+    function BaseChartComponent(chartElement, zone, changeDetector) {
         this.chartElement = chartElement;
         this.zone = zone;
         this.changeDetector = changeDetector;
     }
-    BaseChart.prototype.bindResizeEvents = function (view) {
+    BaseChartComponent.prototype.bindResizeEvents = function (view) {
         this.view = view;
         this.bindWindowResizeEvent();
     };
-    BaseChart.prototype.unbindEvents = function () {
+    BaseChartComponent.prototype.unbindEvents = function () {
         if (this.resizeSubscription) {
             this.resizeSubscription.unsubscribe();
         }
     };
-    BaseChart.prototype.update = function () {
+    BaseChartComponent.prototype.update = function () {
         if (this.results) {
             this.results = this.cloneData(this.results);
         }
@@ -32,7 +32,7 @@ var BaseChart = (function () {
             this.changeDetector.markForCheck();
         }
     };
-    BaseChart.prototype.getContainerDims = function () {
+    BaseChartComponent.prototype.getContainerDims = function () {
         var width = 0;
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
@@ -43,7 +43,7 @@ var BaseChart = (function () {
         }
         return { width: width, height: height };
     };
-    BaseChart.prototype.bindWindowResizeEvent = function () {
+    BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
         this.zone.run(function () {
             var source = rxjs_1.Observable.fromEvent(window, 'resize', null, null);
@@ -56,8 +56,16 @@ var BaseChart = (function () {
             _this.resizeSubscription = subscription;
         });
     };
-    // Clones the data into a new object
-    BaseChart.prototype.cloneData = function (data) {
+    /**
+     * Clones the data into a new object
+     *
+     * @private
+     * @param {any} data
+     * @returns {*}
+     *
+     * @memberOf BaseChart
+     */
+    BaseChartComponent.prototype.cloneData = function (data) {
         var results = [];
         for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
             var item = data_1[_i];
@@ -79,7 +87,7 @@ var BaseChart = (function () {
         }
         return results;
     };
-    return BaseChart;
+    return BaseChartComponent;
 }());
-exports.BaseChart = BaseChart;
+exports.BaseChartComponent = BaseChartComponent;
 //# sourceMappingURL=base-chart.component.js.map

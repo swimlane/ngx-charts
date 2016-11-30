@@ -2,11 +2,11 @@
 var core_1 = require("@angular/core");
 var common_module_1 = require("../common/common.module");
 var card_component_1 = require("./card.component");
-exports.Card = card_component_1.Card;
+exports.CardComponent = card_component_1.CardComponent;
 var card_series_component_1 = require("./card-series.component");
-exports.CardSeries = card_series_component_1.CardSeries;
+exports.CardSeriesComponent = card_series_component_1.CardSeriesComponent;
 var number_card_component_1 = require("./number-card.component");
-exports.NumberCard = number_card_component_1.NumberCard;
+exports.NumberCardComponent = number_card_component_1.NumberCardComponent;
 var NumberCardModule = (function () {
     function NumberCardModule() {
     }
@@ -14,14 +14,14 @@ var NumberCardModule = (function () {
         { type: core_1.NgModule, args: [{
                     imports: [common_module_1.CommonModule],
                     declarations: [
-                        card_component_1.Card,
-                        card_series_component_1.CardSeries,
-                        number_card_component_1.NumberCard
+                        card_component_1.CardComponent,
+                        card_series_component_1.CardSeriesComponent,
+                        number_card_component_1.NumberCardComponent
                     ],
                     exports: [
-                        card_component_1.Card,
-                        card_series_component_1.CardSeries,
-                        number_card_component_1.NumberCard
+                        card_component_1.CardComponent,
+                        card_series_component_1.CardSeriesComponent,
+                        number_card_component_1.NumberCardComponent
                     ]
                 },] },
     ];

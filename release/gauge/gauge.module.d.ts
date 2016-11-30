@@ -1,4 +1,4 @@
-import { Gauge } from "./gauge.component";
-export { Gauge };
+import { GaugeComponent } from "./gauge.component";
+export { GaugeComponent };
 export declare class GaugeModule {
 }

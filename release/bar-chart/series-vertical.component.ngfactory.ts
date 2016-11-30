@@ -32,9 +32,9 @@ import * as import23 from '../../../src/utils/injection.service';
 import * as import24 from '@angular/core/src/linker/element_ref';
 import * as import25 from '@angular/core/src/zone/ng_zone';
 import * as import26 from '../../../src/common/tooltip/tooltip.directive';
-export class Wrapper_SeriesVertical {
+export class Wrapper_SeriesVerticalComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.SeriesVertical;
+  context:import0.SeriesVerticalComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -49,7 +49,7 @@ export class Wrapper_SeriesVertical {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.SeriesVertical();
+    this.context = new import0.SeriesVerticalComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -148,54 +148,54 @@ export class Wrapper_SeriesVertical {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_SeriesVertical_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_SeriesVertical_Host0 extends import2.AppView<any> {
+var renderType_SeriesVerticalComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_SeriesVerticalComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.SeriesVertical>;
-  _SeriesVertical_0_3:Wrapper_SeriesVertical;
+  compView_0:import2.AppView<import0.SeriesVerticalComponent>;
+  _SeriesVerticalComponent_0_3:Wrapper_SeriesVerticalComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SeriesVertical_Host0,renderType_SeriesVertical_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_SeriesVerticalComponent_Host0,renderType_SeriesVerticalComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'seriesVertical',''),rootSelector,(null as any));
-    this.compView_0 = new View_SeriesVertical0(this.viewUtils,this,0,this._el_0);
-    this._SeriesVertical_0_3 = new Wrapper_SeriesVertical();
-    this.compView_0.create(this._SeriesVertical_0_3.context);
+    this.compView_0 = new View_SeriesVerticalComponent0(this.viewUtils,this,0,this._el_0);
+    this._SeriesVerticalComponent_0_3 = new Wrapper_SeriesVerticalComponent();
+    this.compView_0.create(this._SeriesVerticalComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._SeriesVertical_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._SeriesVerticalComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.SeriesVertical) && (0 === requestNodeIndex))) { return this._SeriesVertical_0_3.context; }
+    if (((token === import0.SeriesVerticalComponent) && (0 === requestNodeIndex))) { return this._SeriesVerticalComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._SeriesVertical_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._SeriesVerticalComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._SeriesVertical_0_3.ngOnDestroy();
+    this._SeriesVerticalComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const SeriesVerticalNgFactory:import7.ComponentFactory<import0.SeriesVertical> = new import7.ComponentFactory<import0.SeriesVertical>('g[seriesVertical]',View_SeriesVertical_Host0,import0.SeriesVertical);
-const styles_SeriesVertical:any[] = ([] as any[]);
-var SeriesVertical_animationState_states:any = {
+export const SeriesVerticalComponentNgFactory:import7.ComponentFactory<import0.SeriesVerticalComponent> = new import7.ComponentFactory<import0.SeriesVerticalComponent>('g[seriesVertical]',View_SeriesVerticalComponent_Host0,import0.SeriesVerticalComponent);
+const styles_SeriesVerticalComponent:any[] = ([] as any[]);
+var SeriesVerticalComponent_animationState_states:any = {
   '*': {},
   void: {}
 }
 ;
-function SeriesVertical_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import8.AnimationTransition {
+function SeriesVerticalComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import8.AnimationTransition {
   var previousPlayers:any = view.animationContext.getAnimationPlayers(element,'animationState',(nextState == 'void'));
   var collectedStyles:any = {};
   var player:any = (null as any);
   var totalTime:any = 0;
-  var defaultStateStyles:any = SeriesVertical_animationState_states['*'];
-  var startStateStyles:any = SeriesVertical_animationState_states[currentState];
+  var defaultStateStyles:any = SeriesVerticalComponent_animationState_states['*'];
+  var startStateStyles:any = SeriesVerticalComponent_animationState_states[currentState];
   if ((startStateStyles == (null as any))) { (startStateStyles = defaultStateStyles); }
-  var endStateStyles:any = SeriesVertical_animationState_states[nextState];
+  var endStateStyles:any = SeriesVerticalComponent_animationState_states[nextState];
   if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
   if (((player == (null as any)) && (true && (nextState == 'void')))) {
       player = new import9.AnimationSequencePlayer([view.renderer.animate(element,new import10.AnimationStyles(import11.collectAndResolveStyles(collectedStyles,[
@@ -231,8 +231,8 @@ function SeriesVertical_animationState_factory(view:import2.AppView<any>,element
   view.animationContext.queueAnimation(element,'animationState',player);
   return new import8.AnimationTransition(player,currentState,nextState,totalTime);
 }
-var renderType_SeriesVertical:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesVertical,{animationState: SeriesVertical_animationState_factory});
-export class View_SeriesVertical0 extends import2.AppView<import0.SeriesVertical> {
+var renderType_SeriesVerticalComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesVerticalComponent,{animationState: SeriesVerticalComponent_animationState_factory});
+export class View_SeriesVerticalComponent0 extends import2.AppView<import0.SeriesVerticalComponent> {
   _text_0:any;
   _anchor_1:any;
   /*private*/ _vc_1:import14.ViewContainer;
@@ -240,7 +240,7 @@ export class View_SeriesVertical0 extends import2.AppView<import0.SeriesVertical
   _NgFor_1_6:import15.Wrapper_NgFor;
   _text_2:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SeriesVertical0,renderType_SeriesVertical,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_SeriesVerticalComponent0,renderType_SeriesVerticalComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -275,34 +275,34 @@ export class View_SeriesVertical0 extends import2.AppView<import0.SeriesVertical
     this._vc_1.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 1)) { return new View_SeriesVertical1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
+    if ((nodeIndex == 1)) { return new View_SeriesVerticalComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
     return (null as any);
   }
 }
-class View_SeriesVertical1 extends import2.AppView<any> {
+class View_SeriesVerticalComponent1 extends import2.AppView<any> {
   _el_0:any;
   /*private*/ _vc_0:import14.ViewContainer;
-  compView_0:import2.AppView<import19.Bar>;
+  compView_0:import2.AppView<import19.BarComponent>;
   _TooltipDirective_0_5:import20.Wrapper_TooltipDirective;
-  _Bar_0_6:import21.Wrapper_Bar;
+  _BarComponent_0_6:import21.Wrapper_BarComponent;
   _text_1:any;
   _el_2:any;
   /*private*/ _expr_7:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
-    super(View_SeriesVertical1,renderType_SeriesVertical,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_SeriesVerticalComponent1,renderType_SeriesVerticalComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'bar','','swui-tooltip',''),(null as any));
     this._vc_0 = new import14.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new import21.View_Bar0(this.viewUtils,this,0,this._el_0);
+    this.compView_0 = new import21.View_BarComponent0(this.viewUtils,this,0,this._el_0);
     this._TooltipDirective_0_5 = new import20.Wrapper_TooltipDirective(this.parentView.injectorGet(import22.TooltipService,this.parentIndex),this._vc_0.vcRef,this.parentView.injectorGet(import23.InjectionService,this.parentIndex),this.renderer,new import24.ElementRef(this._el_0),this.parentView.injectorGet(import25.NgZone,this.parentIndex));
-    this._Bar_0_6 = new import21.Wrapper_Bar(new import24.ElementRef(this._el_0));
+    this._BarComponent_0_6 = new import21.Wrapper_BarComponent(new import24.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_0.create(this._Bar_0_6.context);
+    this.compView_0.create(this._BarComponent_0_6.context);
     this._el_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._Bar_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._BarComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_2,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -312,7 +312,7 @@ class View_SeriesVertical1 extends import2.AppView<any> {
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import26.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
-    if (((token === import19.Bar) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._Bar_0_6.context; }
+    if (((token === import19.BarComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._BarComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -331,24 +331,24 @@ class View_SeriesVertical1 extends import2.AppView<any> {
     this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_2,throwOnChange,false);
     this._TooltipDirective_0_5.ngDoCheck(this,this._el_0,throwOnChange);
     const currVal_0_1_0:any = this.context.$implicit.color;
-    this._Bar_0_6.check_fill(currVal_0_1_0,throwOnChange,false);
+    this._BarComponent_0_6.check_fill(currVal_0_1_0,throwOnChange,false);
     const currVal_0_1_1:any = this.context.$implicit.data;
-    this._Bar_0_6.check_data(currVal_0_1_1,throwOnChange,false);
+    this._BarComponent_0_6.check_data(currVal_0_1_1,throwOnChange,false);
     const currVal_0_1_2:any = this.context.$implicit.width;
-    this._Bar_0_6.check_width(currVal_0_1_2,throwOnChange,false);
+    this._BarComponent_0_6.check_width(currVal_0_1_2,throwOnChange,false);
     const currVal_0_1_3:any = this.context.$implicit.height;
-    this._Bar_0_6.check_height(currVal_0_1_3,throwOnChange,false);
+    this._BarComponent_0_6.check_height(currVal_0_1_3,throwOnChange,false);
     const currVal_0_1_4:any = this.context.$implicit.x;
-    this._Bar_0_6.check_x(currVal_0_1_4,throwOnChange,false);
+    this._BarComponent_0_6.check_x(currVal_0_1_4,throwOnChange,false);
     const currVal_0_1_5:any = this.context.$implicit.y;
-    this._Bar_0_6.check_y(currVal_0_1_5,throwOnChange,false);
+    this._BarComponent_0_6.check_y(currVal_0_1_5,throwOnChange,false);
     const currVal_0_1_6:any = 'vertical';
-    this._Bar_0_6.check_orientation(currVal_0_1_6,throwOnChange,false);
+    this._BarComponent_0_6.check_orientation(currVal_0_1_6,throwOnChange,false);
     const currVal_0_1_7:any = this.context.$implicit.roundEdges;
-    this._Bar_0_6.check_roundEdges(currVal_0_1_7,throwOnChange,false);
+    this._BarComponent_0_6.check_roundEdges(currVal_0_1_7,throwOnChange,false);
     const currVal_0_1_8:any = this.parentView.context.gradient;
-    this._Bar_0_6.check_gradient(currVal_0_1_8,throwOnChange,false);
-    if (this._Bar_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._BarComponent_0_6.check_gradient(currVal_0_1_8,throwOnChange,false);
+    if (this._BarComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
     this.compView_0.detectChanges(throwOnChange);
   }
@@ -356,7 +356,7 @@ class View_SeriesVertical1 extends import2.AppView<any> {
     this._vc_0.destroyNestedViews();
     this.compView_0.destroy();
     this._TooltipDirective_0_5.ngOnDestroy();
-    this._Bar_0_6.ngOnDestroy();
+    this._BarComponent_0_6.ngOnDestroy();
   }
   detachInternal():void {
     var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,this._expr_7,'void');
@@ -373,7 +373,7 @@ class View_SeriesVertical1 extends import2.AppView<any> {
     var result:boolean = true;
     result = (this._TooltipDirective_0_5.handleEvent(eventName,$event) && result);
     if ((eventName == 'clickHandler')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.click($event)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

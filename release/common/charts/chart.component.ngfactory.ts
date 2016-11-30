@@ -32,9 +32,9 @@ import * as import23 from '../scale-legend.component.ngfactory';
 import * as import24 from '@angular/platform-browser/src/security/dom_sanitization_service';
 import * as import25 from '../../../../src/common/legend.component';
 import * as import26 from '../legend.component.ngfactory';
-export class Wrapper_Chart {
+export class Wrapper_ChartComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Chart;
+  context:import0.ChartComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -47,7 +47,7 @@ export class Wrapper_Chart {
   constructor(p0:any,p1:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Chart(p0,p1);
+    this.context = new import0.ChartComponent(p0,p1);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -128,42 +128,42 @@ export class Wrapper_Chart {
     if (emit0) { (this.subscription0 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
-var renderType_Chart_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Chart_Host0 extends import2.AppView<any> {
+var renderType_ChartComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_ChartComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
   /*private*/ _vc_0:import6.ViewContainer;
-  compView_0:import2.AppView<import0.Chart>;
+  compView_0:import2.AppView<import0.ChartComponent>;
   _InjectionService_0_5:import7.InjectionService;
-  _Chart_0_6:Wrapper_Chart;
+  _ChartComponent_0_6:Wrapper_ChartComponent;
   _el_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Chart_Host0,renderType_Chart_Host,import8.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_ChartComponent_Host0,renderType_ChartComponent_Host,import8.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this._vc_0 = new import6.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new View_Chart0(this.viewUtils,this,0,this._el_0);
+    this.compView_0 = new View_ChartComponent0(this.viewUtils,this,0,this._el_0);
     this._InjectionService_0_5 = new import7.InjectionService(this.injectorGet(import10.ApplicationRef,this.parentIndex),this.injectorGet(import11.ComponentFactoryResolver,this.parentIndex),this.injector(0));
-    this._Chart_0_6 = new Wrapper_Chart(this._vc_0.vcRef,this._InjectionService_0_5);
-    this.compView_0.create(this._Chart_0_6.context);
+    this._ChartComponent_0_6 = new Wrapper_ChartComponent(this._vc_0.vcRef,this._InjectionService_0_5);
+    this.compView_0.create(this._ChartComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import9.ComponentRef_<any>(0,this,this._el_0,this._Chart_0_6.context);
+    return new import9.ComponentRef_<any>(0,this,this._el_0,this._ChartComponent_0_6.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import7.InjectionService) && (0 === requestNodeIndex))) { return this._InjectionService_0_5; }
-    if (((token === import0.Chart) && (0 === requestNodeIndex))) { return this._Chart_0_6.context; }
+    if (((token === import0.ChartComponent) && (0 === requestNodeIndex))) { return this._ChartComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Chart_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._ChartComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this._vc_0.destroyNestedViews();
     this.compView_0.destroy();
-    this._Chart_0_6.ngOnDestroy();
+    this._ChartComponent_0_6.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._vc_0.nativeElement,ctx);
@@ -174,22 +174,22 @@ class View_Chart_Host0 extends import2.AppView<any> {
     if (((nodeIndex == 0) && (ngContentIndex == 0))) {  }
   }
 }
-export const ChartNgFactory:import9.ComponentFactory<import0.Chart> = new import9.ComponentFactory<import0.Chart>('chart',View_Chart_Host0,import0.Chart);
-const styles_Chart:any[] = ([] as any[]);
-var Chart_animationState_states:any = {
+export const ChartComponentNgFactory:import9.ComponentFactory<import0.ChartComponent> = new import9.ComponentFactory<import0.ChartComponent>('chart',View_ChartComponent_Host0,import0.ChartComponent);
+const styles_ChartComponent:any[] = ([] as any[]);
+var ChartComponent_animationState_states:any = {
   '*': {},
   void: {}
 }
 ;
-function Chart_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import12.AnimationTransition {
+function ChartComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import12.AnimationTransition {
   var previousPlayers:any = view.animationContext.getAnimationPlayers(element,'animationState',(nextState == 'void'));
   var collectedStyles:any = {};
   var player:any = (null as any);
   var totalTime:any = 0;
-  var defaultStateStyles:any = Chart_animationState_states['*'];
-  var startStateStyles:any = Chart_animationState_states[currentState];
+  var defaultStateStyles:any = ChartComponent_animationState_states['*'];
+  var startStateStyles:any = ChartComponent_animationState_states[currentState];
   if ((startStateStyles == (null as any))) { (startStateStyles = defaultStateStyles); }
-  var endStateStyles:any = Chart_animationState_states[nextState];
+  var endStateStyles:any = ChartComponent_animationState_states[nextState];
   if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
   if (((player == (null as any)) && ((currentState == 'void') && true))) {
       player = new import13.AnimationSequencePlayer([view.renderer.animate(element,new import14.AnimationStyles(import15.collectAndResolveStyles(collectedStyles,[
@@ -213,8 +213,8 @@ function Chart_animationState_factory(view:import2.AppView<any>,element:any,curr
   view.animationContext.queueAnimation(element,'animationState',player);
   return new import12.AnimationTransition(player,currentState,nextState,totalTime);
 }
-var renderType_Chart:import4.RenderComponentType = import3.createRenderComponentType('',1,import5.ViewEncapsulation.None,styles_Chart,{animationState: Chart_animationState_factory});
-export class View_Chart0 extends import2.AppView<import0.Chart> {
+var renderType_ChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',1,import5.ViewEncapsulation.None,styles_ChartComponent,{animationState: ChartComponent_animationState_factory});
+export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -238,7 +238,7 @@ export class View_Chart0 extends import2.AppView<import0.Chart> {
   /*private*/ _expr_20:any;
   /*private*/ _expr_21:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Chart0,renderType_Chart,import8.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_ChartComponent0,renderType_ChartComponent,import8.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_18 = import1.UNINITIALIZED;
     this._expr_19 = import1.UNINITIALIZED;
     this._expr_20 = import1.UNINITIALIZED;
@@ -331,25 +331,25 @@ export class View_Chart0 extends import2.AppView<import0.Chart> {
     animationTransition_animationState.onDone(import3.noop.bind(this).bind(this,'@animationState.done'));
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 7)) { return new View_Chart1(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
-    if ((nodeIndex == 9)) { return new View_Chart2(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
+    if ((nodeIndex == 7)) { return new View_ChartComponent1(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
+    if ((nodeIndex == 9)) { return new View_ChartComponent2(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
     return (null as any);
   }
 }
-class View_Chart1 extends import2.AppView<any> {
+class View_ChartComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import22.ScaleLegend>;
-  _ScaleLegend_0_3:import23.Wrapper_ScaleLegend;
+  compView_0:import2.AppView<import22.ScaleLegendComponent>;
+  _ScaleLegendComponent_0_3:import23.Wrapper_ScaleLegendComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import6.ViewContainer) {
-    super(View_Chart1,renderType_Chart,import8.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_ChartComponent1,renderType_ChartComponent,import8.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'scale-legend',new import3.InlineArray2(2,'class','chart-legend'),(null as any));
-    this.compView_0 = new import23.View_ScaleLegend0(this.viewUtils,this,0,this._el_0);
-    this._ScaleLegend_0_3 = new import23.Wrapper_ScaleLegend(this.parentView.parentView.injectorGet(import24.DomSanitizer,this.parentView.parentIndex));
+    this.compView_0 = new import23.View_ScaleLegendComponent0(this.viewUtils,this,0,this._el_0);
+    this._ScaleLegendComponent_0_3 = new import23.Wrapper_ScaleLegendComponent(this.parentView.parentView.injectorGet(import24.DomSanitizer,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this.compView_0.create(this._ScaleLegend_0_3.context);
+    this.compView_0.create(this._ScaleLegendComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -358,19 +358,19 @@ class View_Chart1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import22.ScaleLegend) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._ScaleLegend_0_3.context; }
+    if (((token === import22.ScaleLegendComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._ScaleLegendComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.data;
-    this._ScaleLegend_0_3.check_valueRange(currVal_0_0_0,throwOnChange,false);
+    this._ScaleLegendComponent_0_3.check_valueRange(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.legendData;
-    this._ScaleLegend_0_3.check_colors(currVal_0_0_1,throwOnChange,false);
+    this._ScaleLegendComponent_0_3.check_colors(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.view[1];
-    this._ScaleLegend_0_3.check_height(currVal_0_0_2,throwOnChange,false);
+    this._ScaleLegendComponent_0_3.check_height(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = ((this.parentView.context.view[0] * this.parentView.context.legendWidth) / 12);
-    this._ScaleLegend_0_3.check_width(currVal_0_0_3,throwOnChange,false);
-    if (this._ScaleLegend_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._ScaleLegendComponent_0_3.check_width(currVal_0_0_3,throwOnChange,false);
+    if (this._ScaleLegendComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -380,22 +380,22 @@ class View_Chart1 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_Chart2 extends import2.AppView<any> {
+class View_ChartComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import25.Legend>;
-  _Legend_0_3:import26.Wrapper_Legend;
+  compView_0:import2.AppView<import25.LegendComponent>;
+  _LegendComponent_0_3:import26.Wrapper_LegendComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import6.ViewContainer) {
-    super(View_Chart2,renderType_Chart,import8.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_ChartComponent2,renderType_ChartComponent,import8.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'legend',new import3.InlineArray2(2,'class','chart-legend'),(null as any));
-    this.compView_0 = new import26.View_Legend0(this.viewUtils,this,0,this._el_0);
-    this._Legend_0_3 = new import26.Wrapper_Legend();
+    this.compView_0 = new import26.View_LegendComponent0(this.viewUtils,this,0,this._el_0);
+    this._LegendComponent_0_3 = new import26.Wrapper_LegendComponent();
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this.compView_0.create(this._Legend_0_3.context);
+    this.compView_0.create(this._LegendComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'labelClick',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._Legend_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this._LegendComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -404,26 +404,26 @@ class View_Chart2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import25.Legend) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._Legend_0_3.context; }
+    if (((token === import25.LegendComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._LegendComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.legendData;
-    this._Legend_0_3.check_data(currVal_0_0_0,throwOnChange,false);
+    this._LegendComponent_0_3.check_data(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.legendTitle;
-    this._Legend_0_3.check_title(currVal_0_0_1,throwOnChange,false);
+    this._LegendComponent_0_3.check_title(currVal_0_0_1,throwOnChange,false);
     const currVal_0_0_2:any = this.parentView.context.colors;
-    this._Legend_0_3.check_colors(currVal_0_0_2,throwOnChange,false);
+    this._LegendComponent_0_3.check_colors(currVal_0_0_2,throwOnChange,false);
     const currVal_0_0_3:any = this.parentView.context.view[1];
-    this._Legend_0_3.check_height(currVal_0_0_3,throwOnChange,false);
+    this._LegendComponent_0_3.check_height(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = ((this.parentView.context.view[0] * this.parentView.context.legendWidth) / 12);
-    this._Legend_0_3.check_width(currVal_0_0_4,throwOnChange,false);
-    if (this._Legend_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this._LegendComponent_0_3.check_width(currVal_0_0_4,throwOnChange,false);
+    if (this._LegendComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Legend_0_3.ngOnDestroy();
+    this._LegendComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);

@@ -10,9 +10,9 @@ var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var d3_1 = require('../d3');
 var color_sets_1 = require('../utils/color-sets');
 var core_1 = require('@angular/core');
-var ForceDirectedGraph = (function (_super) {
-    __extends(ForceDirectedGraph, _super);
-    function ForceDirectedGraph(element, cd, zone) {
+var ForceDirectedGraphComponent = (function (_super) {
+    __extends(ForceDirectedGraphComponent, _super);
+    function ForceDirectedGraphComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -30,10 +30,10 @@ var ForceDirectedGraph = (function (_super) {
         this.margin = [0, 0, 0, 0];
         this.results = [];
     }
-    ForceDirectedGraph.prototype.ngOnChanges = function () {
+    ForceDirectedGraphComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    ForceDirectedGraph.prototype.update = function () {
+    ForceDirectedGraphComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -55,49 +55,47 @@ var ForceDirectedGraph = (function (_super) {
             }
         });
     };
-    ForceDirectedGraph.prototype.click = function ($event, node) {
+    ForceDirectedGraphComponent.prototype.onClick = function ($event, node) {
         this.clickHandler.emit(node);
     };
-    ForceDirectedGraph.prototype.getSeriesDomain = function () {
+    ForceDirectedGraphComponent.prototype.getSeriesDomain = function () {
         var _this = this;
         return this.nodes.map(function (d) { return _this.groupResultsBy(d); })
             .reduce(function (nodes, node) { return nodes.includes(node) ? nodes : nodes.concat([node]); }, [])
             .sort();
     };
-    ForceDirectedGraph.prototype.trackLinkBy = function (index, link) {
+    ForceDirectedGraphComponent.prototype.trackLinkBy = function (index, link) {
         return link.index;
     };
-    ForceDirectedGraph.prototype.trackNodeBy = function (index, node) {
+    ForceDirectedGraphComponent.prototype.trackNodeBy = function (index, node) {
         return node.value;
     };
-    ForceDirectedGraph.prototype.setColors = function () {
+    ForceDirectedGraphComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
     // Easier to use Angular2 event management than use d3.drag
-    ForceDirectedGraph.prototype.onDragStart = function (node, $event) {
+    ForceDirectedGraphComponent.prototype.onDragStart = function (node, $event) {
         this.force.alphaTarget(0.3).restart();
         this.draggingNode = node;
         this.draggingStart = { x: $event.x - node.x, y: $event.y - node.y };
         this.draggingNode.fx = $event.x - this.draggingStart.x;
         this.draggingNode.fy = $event.y - this.draggingStart.y;
     };
-    ForceDirectedGraph.prototype.onDrag = function ($event) {
-        if (!this.draggingNode) {
+    ForceDirectedGraphComponent.prototype.onDrag = function ($event) {
+        if (!this.draggingNode)
             return;
-        }
         this.draggingNode.fx = $event.x - this.draggingStart.x;
         this.draggingNode.fy = $event.y - this.draggingStart.y;
     };
-    ForceDirectedGraph.prototype.onDragEnd = function (node, $event) {
-        if (!this.draggingNode) {
+    ForceDirectedGraphComponent.prototype.onDragEnd = function (node, $event) {
+        if (!this.draggingNode)
             return;
-        }
         this.force.alphaTarget(0);
         this.draggingNode.fx = undefined;
         this.draggingNode.fy = undefined;
         this.draggingNode = undefined;
     };
-    ForceDirectedGraph.decorators = [
+    ForceDirectedGraphComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'force-directed-graph',
                     template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors(groupResultsBy(node))\"\n            [attr.stroke]=\"colors(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"click($event, node)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
@@ -105,12 +103,12 @@ var ForceDirectedGraph = (function (_super) {
                 },] },
     ];
     /** @nocollapse */
-    ForceDirectedGraph.ctorParameters = [
+    ForceDirectedGraphComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    ForceDirectedGraph.propDecorators = {
+    ForceDirectedGraphComponent.propDecorators = {
         'force': [{ type: core_1.Input },],
         'forceLink': [{ type: core_1.Input },],
         'groupResultsBy': [{ type: core_1.Input },],
@@ -124,11 +122,11 @@ var ForceDirectedGraph = (function (_super) {
         'legendLabelClick': [{ type: core_1.Output },],
         'linkTemplate': [{ type: core_1.ContentChild, args: ['linkTemplate',] },],
         'nodeTemplate': [{ type: core_1.ContentChild, args: ['nodeTemplate',] },],
-        'chart': [{ type: core_1.ViewChild, args: [chart_component_1.Chart, { read: core_1.ElementRef },] },],
+        'chart': [{ type: core_1.ViewChild, args: [chart_component_1.ChartComponent, { read: core_1.ElementRef },] },],
         'onDrag': [{ type: core_1.HostListener, args: ['document:mousemove', ['$event'],] },],
         'onDragEnd': [{ type: core_1.HostListener, args: ['document:mouseup',] },],
     };
-    return ForceDirectedGraph;
-}(base_chart_component_1.BaseChart));
-exports.ForceDirectedGraph = ForceDirectedGraph;
+    return ForceDirectedGraphComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.ForceDirectedGraphComponent = ForceDirectedGraphComponent;
 //# sourceMappingURL=force-directed-graph.component.js.map

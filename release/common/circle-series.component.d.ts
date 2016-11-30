@@ -1,8 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
-export declare class CircleSeries implements OnChanges {
-    areaPath: any;
-    circles: any[];
-    barVisible: boolean;
+export declare class CircleSeriesComponent implements OnChanges {
     data: any;
     type: string;
     xScale: any;
@@ -12,8 +9,11 @@ export declare class CircleSeries implements OnChanges {
     scaleType: any;
     visibleValue: any;
     clickHandler: EventEmitter<{}>;
+    areaPath: any;
+    circles: any[];
+    barVisible: boolean;
     ngOnChanges(): void;
     update(): void;
-    getCircles(): any;
-    click(value: any, label: any): void;
+    getCircles(): any[];
+    onClick(value: any, label: any): void;
 }

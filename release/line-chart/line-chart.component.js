@@ -11,9 +11,9 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var id_1 = require("../utils/id");
 var d3_1 = require('../d3');
 var moment = require('moment');
-var LineChart = (function (_super) {
-    __extends(LineChart, _super);
-    function LineChart(element, cd, zone) {
+var LineChartComponent = (function (_super) {
+    __extends(LineChartComponent, _super);
+    function LineChartComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -27,16 +27,16 @@ var LineChart = (function (_super) {
         this.timelineHeight = 50;
         this.timelinePadding = 10;
     }
-    LineChart.prototype.ngAfterViewInit = function () {
+    LineChartComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    LineChart.prototype.ngOnDestroy = function () {
+    LineChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    LineChart.prototype.ngOnChanges = function () {
+    LineChartComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    LineChart.prototype.update = function () {
+    LineChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -72,7 +72,7 @@ var LineChart = (function (_super) {
             _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
     };
-    LineChart.prototype.updateTimeline = function () {
+    LineChartComponent.prototype.updateTimeline = function () {
         if (this.timeline) {
             this.timelineWidth = this.width;
             if (this.legend) {
@@ -85,7 +85,7 @@ var LineChart = (function (_super) {
             this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
         }
     };
-    LineChart.prototype.getXDomain = function () {
+    LineChartComponent.prototype.getXDomain = function () {
         var values = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var results = _a[_i];
@@ -116,7 +116,7 @@ var LineChart = (function (_super) {
         this.xSet = values;
         return domain;
     };
-    LineChart.prototype.getYDomain = function () {
+    LineChartComponent.prototype.getYDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var results = _a[_i];
@@ -134,10 +134,10 @@ var LineChart = (function (_super) {
         }
         return [min, max];
     };
-    LineChart.prototype.getSeriesDomain = function () {
+    LineChartComponent.prototype.getSeriesDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    LineChart.prototype.getXScale = function (domain, width) {
+    LineChartComponent.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
             scale = d3_1.default.scaleTime()
@@ -157,12 +157,12 @@ var LineChart = (function (_super) {
         }
         return scale;
     };
-    LineChart.prototype.getYScale = function (domain, height) {
+    LineChartComponent.prototype.getYScale = function (domain, height) {
         return d3_1.default.scaleLinear()
             .range([height, 0])
             .domain(domain);
     };
-    LineChart.prototype.getScaleType = function (values) {
+    LineChartComponent.prototype.getScaleType = function (values) {
         var date = true;
         var number = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
@@ -174,65 +174,63 @@ var LineChart = (function (_super) {
                 number = false;
             }
         }
-        if (date) {
+        if (date)
             return 'time';
-        }
-        if (number) {
+        if (number)
             return 'linear';
-        }
         return 'ordinal';
     };
-    LineChart.prototype.isDate = function (value) {
+    LineChartComponent.prototype.isDate = function (value) {
         if (value instanceof Date) {
             return true;
         }
         return false;
     };
-    LineChart.prototype.updateDomain = function (domain) {
+    LineChartComponent.prototype.updateDomain = function (domain) {
         this.filteredDomain = domain;
         this.xDomain = this.filteredDomain;
         this.xScale = this.getXScale(this.xDomain, this.dims.width);
     };
-    LineChart.prototype.updateHoveredVertical = function (item) {
+    LineChartComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
     };
-    LineChart.prototype.hideCircles = function () {
+    LineChartComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
     };
-    LineChart.prototype.click = function (data, series) {
+    LineChartComponent.prototype.onClick = function (data, series) {
         data.series = series.name;
         this.clickHandler.emit(data);
     };
-    LineChart.prototype.trackBy = function (index, item) {
+    LineChartComponent.prototype.trackBy = function (index, item) {
         return item.name;
     };
-    LineChart.prototype.setColors = function () {
+    LineChartComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
-    LineChart.prototype.updateYAxisWidth = function (_a) {
+    LineChartComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
         this.yAxisWidth = width;
         this.update();
     };
-    LineChart.prototype.updateXAxisHeight = function (_a) {
+    LineChartComponent.prototype.updateXAxisHeight = function (_a) {
         var height = _a.height;
         this.xAxisHeight = height;
         this.update();
     };
-    LineChart.decorators = [
+    LineChartComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'line-chart',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"click($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g \n        timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g lineSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g \n        timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g lineSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    LineChart.ctorParameters = [
+    LineChartComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    LineChart.propDecorators = {
+    LineChartComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
@@ -253,7 +251,7 @@ var LineChart = (function (_super) {
         'legendLabelClick': [{ type: core_1.Output },],
         'hideCircles': [{ type: core_1.HostListener, args: ['mouseleave',] },],
     };
-    return LineChart;
-}(base_chart_component_1.BaseChart));
-exports.LineChart = LineChart;
+    return LineChartComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.LineChartComponent = LineChartComponent;
 //# sourceMappingURL=line-chart.component.js.map

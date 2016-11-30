@@ -1,5 +1,5 @@
 import { ElementRef, NgZone, ChangeDetectorRef } from "@angular/core";
-export declare abstract class BaseChart {
+export declare abstract class BaseChartComponent {
     results: any[];
     chartElement: ElementRef;
     zone: NgZone;
@@ -12,12 +12,18 @@ export declare abstract class BaseChart {
     protected bindResizeEvents(view: number[]): void;
     protected unbindEvents(): void;
     update(): void;
-    getContainerDims(): {
-        width: number;
-        height: number;
-    };
+    getContainerDims(): any;
     private bindWindowResizeEvent();
+    /**
+     * Clones the data into a new object
+     *
+     * @private
+     * @param {any} data
+     * @returns {*}
+     *
+     * @memberOf BaseChart
+     */
     private cloneData(data);
-    abstract setColors(): any;
-    abstract click(data: any, group: any): any;
+    abstract setColors(): void;
+    abstract onClick(data: any, group: any): void;
 }

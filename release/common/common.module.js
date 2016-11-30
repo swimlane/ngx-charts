@@ -4,47 +4,47 @@ function __export(m) {
 }
 var core_1 = require("@angular/core");
 var chart_component_1 = require("./charts/chart.component");
-exports.Chart = chart_component_1.Chart;
+exports.ChartComponent = chart_component_1.ChartComponent;
 var legend_component_1 = require("./legend.component");
-exports.Legend = legend_component_1.Legend;
+exports.LegendComponent = legend_component_1.LegendComponent;
 var scale_legend_component_1 = require("./scale-legend.component");
-exports.ScaleLegend = scale_legend_component_1.ScaleLegend;
+exports.ScaleLegendComponent = scale_legend_component_1.ScaleLegendComponent;
 var axes_module_1 = require("./axes/axes.module");
 var tooltip_1 = require("./tooltip");
 var circle_series_component_1 = require("./circle-series.component");
-exports.CircleSeries = circle_series_component_1.CircleSeries;
+exports.CircleSeriesComponent = circle_series_component_1.CircleSeriesComponent;
 var circle_component_1 = require("./circle.component");
-exports.Circle = circle_component_1.Circle;
+exports.CircleComponent = circle_component_1.CircleComponent;
 var grid_panel_component_1 = require("./grid-panel.component");
-exports.GridPanel = grid_panel_component_1.GridPanel;
+exports.GridPanelComponent = grid_panel_component_1.GridPanelComponent;
 var grid_panel_series_component_1 = require("./grid-panel-series.component");
-exports.GridPanelSeries = grid_panel_series_component_1.GridPanelSeries;
+exports.GridPanelSeriesComponent = grid_panel_series_component_1.GridPanelSeriesComponent;
 var svg_linear_gradient_component_1 = require("./svg-linear-gradient.component");
-exports.SvgLinearGradient = svg_linear_gradient_component_1.SvgLinearGradient;
+exports.SvgLinearGradientComponent = svg_linear_gradient_component_1.SvgLinearGradientComponent;
 var svg_radial_gradient_component_1 = require("./svg-radial-gradient.component");
-exports.SvgRadialGradient = svg_radial_gradient_component_1.SvgRadialGradient;
+exports.SvgRadialGradientComponent = svg_radial_gradient_component_1.SvgRadialGradientComponent;
 var timeline_component_1 = require("./timeline.component");
 exports.Timeline = timeline_component_1.Timeline;
 var common_1 = require("@angular/common");
 var area_component_1 = require("./area.component");
-exports.Area = area_component_1.Area;
+exports.AreaComponent = area_component_1.AreaComponent;
 var area_tooltip_component_1 = require("./area-tooltip.component");
 exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
 var base_chart_component_1 = require("./base-chart.component");
-exports.BaseChart = base_chart_component_1.BaseChart;
+exports.BaseChartComponent = base_chart_component_1.BaseChartComponent;
 __export(require("./tooltip"));
 var COMPONENTS = [
-    area_component_1.Area,
+    area_component_1.AreaComponent,
     area_tooltip_component_1.AreaTooltip,
-    chart_component_1.Chart,
-    legend_component_1.Legend,
-    scale_legend_component_1.ScaleLegend,
-    circle_component_1.Circle,
-    circle_series_component_1.CircleSeries,
-    grid_panel_component_1.GridPanel,
-    grid_panel_series_component_1.GridPanelSeries,
-    svg_linear_gradient_component_1.SvgLinearGradient,
-    svg_radial_gradient_component_1.SvgRadialGradient,
+    chart_component_1.ChartComponent,
+    legend_component_1.LegendComponent,
+    scale_legend_component_1.ScaleLegendComponent,
+    circle_component_1.CircleComponent,
+    circle_series_component_1.CircleSeriesComponent,
+    grid_panel_component_1.GridPanelComponent,
+    grid_panel_series_component_1.GridPanelSeriesComponent,
+    svg_linear_gradient_component_1.SvgLinearGradientComponent,
+    svg_radial_gradient_component_1.SvgRadialGradientComponent,
     timeline_component_1.Timeline
 ];
 var CommonModule = (function () {

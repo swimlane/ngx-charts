@@ -16,9 +16,9 @@ import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../../src/common/area.component';
 import * as import9 from '../common/area.component.ngfactory';
 import * as import10 from '@angular/core/src/linker/element_ref';
-export class Wrapper_AreaSeries {
+export class Wrapper_AreaSeriesComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.AreaSeries;
+  context:import0.AreaSeriesComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -34,7 +34,7 @@ export class Wrapper_AreaSeries {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.AreaSeries();
+    this.context = new import0.AreaSeriesComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -142,57 +142,57 @@ export class Wrapper_AreaSeries {
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
   }
 }
-var renderType_AreaSeries_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_AreaSeries_Host0 extends import2.AppView<any> {
+var renderType_AreaSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_AreaSeriesComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.AreaSeries>;
-  _AreaSeries_0_3:Wrapper_AreaSeries;
+  compView_0:import2.AppView<import0.AreaSeriesComponent>;
+  _AreaSeriesComponent_0_3:Wrapper_AreaSeriesComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AreaSeries_Host0,renderType_AreaSeries_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_AreaSeriesComponent_Host0,renderType_AreaSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'areaSeries',''),rootSelector,(null as any));
-    this.compView_0 = new View_AreaSeries0(this.viewUtils,this,0,this._el_0);
-    this._AreaSeries_0_3 = new Wrapper_AreaSeries();
-    this.compView_0.create(this._AreaSeries_0_3.context);
+    this.compView_0 = new View_AreaSeriesComponent0(this.viewUtils,this,0,this._el_0);
+    this._AreaSeriesComponent_0_3 = new Wrapper_AreaSeriesComponent();
+    this.compView_0.create(this._AreaSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AreaSeries_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AreaSeriesComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.AreaSeries) && (0 === requestNodeIndex))) { return this._AreaSeries_0_3.context; }
+    if (((token === import0.AreaSeriesComponent) && (0 === requestNodeIndex))) { return this._AreaSeriesComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._AreaSeries_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._AreaSeriesComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._AreaSeries_0_3.ngOnDestroy();
+    this._AreaSeriesComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const AreaSeriesNgFactory:import7.ComponentFactory<import0.AreaSeries> = new import7.ComponentFactory<import0.AreaSeries>('g[areaSeries]',View_AreaSeries_Host0,import0.AreaSeries);
-const styles_AreaSeries:any[] = ([] as any[]);
-var renderType_AreaSeries:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AreaSeries,{});
-export class View_AreaSeries0 extends import2.AppView<import0.AreaSeries> {
+export const AreaSeriesComponentNgFactory:import7.ComponentFactory<import0.AreaSeriesComponent> = new import7.ComponentFactory<import0.AreaSeriesComponent>('g[areaSeries]',View_AreaSeriesComponent_Host0,import0.AreaSeriesComponent);
+const styles_AreaSeriesComponent:any[] = ([] as any[]);
+var renderType_AreaSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AreaSeriesComponent,{});
+export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSeriesComponent> {
   _text_0:any;
   _el_1:any;
-  compView_1:import2.AppView<import8.Area>;
-  _Area_1_3:import9.Wrapper_Area;
+  compView_1:import2.AppView<import8.AreaComponent>;
+  _AreaComponent_1_3:import9.Wrapper_AreaComponent;
   _text_2:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AreaSeries0,renderType_AreaSeries,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_AreaSeriesComponent0,renderType_AreaSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray2(2,'area',''),(null as any));
-    this.compView_1 = new import9.View_Area0(this.viewUtils,this,1,this._el_1);
-    this._Area_1_3 = new import9.Wrapper_Area(new import10.ElementRef(this._el_1));
-    this.compView_1.create(this._Area_1_3.context);
+    this.compView_1 = new import9.View_AreaComponent0(this.viewUtils,this,1,this._el_1);
+    this._AreaComponent_1_3 = new import9.Wrapper_AreaComponent(new import10.ElementRef(this._el_1));
+    this.compView_1.create(this._AreaComponent_1_3.context);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -203,27 +203,27 @@ export class View_AreaSeries0 extends import2.AppView<import0.AreaSeries> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import8.Area) && (1 === requestNodeIndex))) { return this._Area_1_3.context; }
+    if (((token === import8.AreaComponent) && (1 === requestNodeIndex))) { return this._AreaComponent_1_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this.context.data;
-    this._Area_1_3.check_data(currVal_1_0_0,throwOnChange,false);
+    this._AreaComponent_1_3.check_data(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.path;
-    this._Area_1_3.check_path(currVal_1_0_1,throwOnChange,false);
+    this._AreaComponent_1_3.check_path(currVal_1_0_1,throwOnChange,false);
     const currVal_1_0_2:any = this.context.startingPath;
-    this._Area_1_3.check_startingPath(currVal_1_0_2,throwOnChange,false);
+    this._AreaComponent_1_3.check_startingPath(currVal_1_0_2,throwOnChange,false);
     const currVal_1_0_3:any = this.context.color;
-    this._Area_1_3.check_fill(currVal_1_0_3,throwOnChange,false);
+    this._AreaComponent_1_3.check_fill(currVal_1_0_3,throwOnChange,false);
     const currVal_1_0_4:any = this.context.opacity;
-    this._Area_1_3.check_opacity(currVal_1_0_4,throwOnChange,false);
+    this._AreaComponent_1_3.check_opacity(currVal_1_0_4,throwOnChange,false);
     const currVal_1_0_5:any = this.context.gradient;
-    this._Area_1_3.check_gradient(currVal_1_0_5,throwOnChange,false);
-    if (this._Area_1_3.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    this._AreaComponent_1_3.check_gradient(currVal_1_0_5,throwOnChange,false);
+    if (this._AreaComponent_1_3.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     this.compView_1.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_1.destroy();
-    this._Area_1_3.ngOnDestroy();
+    this._AreaComponent_1_3.ngOnDestroy();
   }
 }

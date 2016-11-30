@@ -16,9 +16,9 @@ import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '../../../src/line-chart/line.component';
 import * as import9 from './line.component.ngfactory';
 import * as import10 from '@angular/core/src/linker/element_ref';
-export class Wrapper_LineSeries {
+export class Wrapper_LineSeriesComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.LineSeries;
+  context:import0.LineSeriesComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -30,7 +30,7 @@ export class Wrapper_LineSeries {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.LineSeries();
+    this.context = new import0.LineSeriesComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -109,28 +109,28 @@ export class Wrapper_LineSeries {
     this._eventHandler = _eventHandler;
   }
 }
-var renderType_LineSeries_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_LineSeries_Host0 extends import2.AppView<any> {
+var renderType_LineSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_LineSeriesComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.LineSeries>;
-  _LineSeries_0_3:Wrapper_LineSeries;
+  compView_0:import2.AppView<import0.LineSeriesComponent>;
+  _LineSeriesComponent_0_3:Wrapper_LineSeriesComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_LineSeries_Host0,renderType_LineSeries_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_LineSeriesComponent_Host0,renderType_LineSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'lineSeries',''),rootSelector,(null as any));
-    this.compView_0 = new View_LineSeries0(this.viewUtils,this,0,this._el_0);
-    this._LineSeries_0_3 = new Wrapper_LineSeries();
-    this.compView_0.create(this._LineSeries_0_3.context);
+    this.compView_0 = new View_LineSeriesComponent0(this.viewUtils,this,0,this._el_0);
+    this._LineSeriesComponent_0_3 = new Wrapper_LineSeriesComponent();
+    this.compView_0.create(this._LineSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._LineSeries_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._LineSeriesComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.LineSeries) && (0 === requestNodeIndex))) { return this._LineSeries_0_3.context; }
+    if (((token === import0.LineSeriesComponent) && (0 === requestNodeIndex))) { return this._LineSeriesComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._LineSeries_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._LineSeriesComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
@@ -140,25 +140,25 @@ class View_LineSeries_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const LineSeriesNgFactory:import7.ComponentFactory<import0.LineSeries> = new import7.ComponentFactory<import0.LineSeries>('g[lineSeries]',View_LineSeries_Host0,import0.LineSeries);
-const styles_LineSeries:any[] = ([] as any[]);
-var renderType_LineSeries:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LineSeries,{});
-export class View_LineSeries0 extends import2.AppView<import0.LineSeries> {
+export const LineSeriesComponentNgFactory:import7.ComponentFactory<import0.LineSeriesComponent> = new import7.ComponentFactory<import0.LineSeriesComponent>('g[lineSeries]',View_LineSeriesComponent_Host0,import0.LineSeriesComponent);
+const styles_LineSeriesComponent:any[] = ([] as any[]);
+var renderType_LineSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LineSeriesComponent,{});
+export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSeriesComponent> {
   _text_0:any;
   _el_1:any;
-  compView_1:import2.AppView<import8.Line>;
-  _Line_1_3:import9.Wrapper_Line;
+  compView_1:import2.AppView<import8.LineComponent>;
+  _LineComponent_1_3:import9.Wrapper_LineComponent;
   _text_2:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_LineSeries0,renderType_LineSeries,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_LineSeriesComponent0,renderType_LineSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray2(2,'line',''),(null as any));
-    this.compView_1 = new import9.View_Line0(this.viewUtils,this,1,this._el_1);
-    this._Line_1_3 = new import9.Wrapper_Line(new import10.ElementRef(this._el_1));
-    this.compView_1.create(this._Line_1_3.context);
+    this.compView_1 = new import9.View_LineComponent0(this.viewUtils,this,1,this._el_1);
+    this._LineComponent_1_3 = new import9.Wrapper_LineComponent(new import10.ElementRef(this._el_1));
+    this.compView_1.create(this._LineComponent_1_3.context);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -169,21 +169,21 @@ export class View_LineSeries0 extends import2.AppView<import0.LineSeries> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import8.Line) && (1 === requestNodeIndex))) { return this._Line_1_3.context; }
+    if (((token === import8.LineComponent) && (1 === requestNodeIndex))) { return this._LineComponent_1_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this.context.path;
-    this._Line_1_3.check_path(currVal_1_0_0,throwOnChange,false);
+    this._LineComponent_1_3.check_path(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.color;
-    this._Line_1_3.check_stroke(currVal_1_0_1,throwOnChange,false);
+    this._LineComponent_1_3.check_stroke(currVal_1_0_1,throwOnChange,false);
     const currVal_1_0_2:any = this.context.data;
-    this._Line_1_3.check_data(currVal_1_0_2,throwOnChange,false);
-    if (this._Line_1_3.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    this._LineComponent_1_3.check_data(currVal_1_0_2,throwOnChange,false);
+    if (this._LineComponent_1_3.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     this.compView_1.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_1.destroy();
-    this._Line_1_3.ngOnDestroy();
+    this._LineComponent_1_3.ngOnDestroy();
   }
 }

@@ -1,20 +1,20 @@
 "use strict";
 var core_1 = require('@angular/core');
-var CardSeries = (function () {
-    function CardSeries(zone) {
+var CardSeriesComponent = (function () {
+    function CardSeriesComponent(zone) {
         this.zone = zone;
         this.clickHandler = new core_1.EventEmitter();
     }
-    CardSeries.prototype.ngOnChanges = function () {
+    CardSeriesComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    CardSeries.prototype.update = function () {
+    CardSeriesComponent.prototype.update = function () {
         var _this = this;
         this.zone.run(function () {
             _this.cards = _this.getCards();
         });
     };
-    CardSeries.prototype.getCards = function () {
+    CardSeriesComponent.prototype.getCards = function () {
         var _this = this;
         return this.data
             .map(function (d, index) {
@@ -39,30 +39,30 @@ var CardSeries = (function () {
             };
         });
     };
-    CardSeries.prototype.trackBy = function (index, card) {
+    CardSeriesComponent.prototype.trackBy = function (index, card) {
         return card.label;
     };
-    CardSeries.prototype.click = function (data) {
+    CardSeriesComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    CardSeries.decorators = [
+    CardSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[cardSeries]',
-                    template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"click($event)\"\n    />\n  ",
+                    template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    CardSeries.ctorParameters = [
+    CardSeriesComponent.ctorParameters = [
         { type: core_1.NgZone, },
     ];
-    CardSeries.propDecorators = {
+    CardSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return CardSeries;
+    return CardSeriesComponent;
 }());
-exports.CardSeries = CardSeries;
+exports.CardSeriesComponent = CardSeriesComponent;
 //# sourceMappingURL=card-series.component.js.map

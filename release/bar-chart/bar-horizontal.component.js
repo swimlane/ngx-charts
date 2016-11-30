@@ -10,30 +10,30 @@ var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
 var tick_format_helper_1 = require('../common/tick-format.helper');
 var d3_1 = require('../d3');
-var BarHorizontal = (function (_super) {
-    __extends(BarHorizontal, _super);
-    function BarHorizontal(element, cd, zone) {
+var BarHorizontalComponent = (function (_super) {
+    __extends(BarHorizontalComponent, _super);
+    function BarHorizontalComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
         this.legendLabelClick = new core_1.EventEmitter();
+        this.margin = [10, 20, 10, 20];
+        this.xAxisHeight = 0;
+        this.yAxisWidth = 0;
     }
-    BarHorizontal.prototype.ngAfterViewInit = function () {
+    BarHorizontalComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    BarHorizontal.prototype.ngOnDestroy = function () {
+    BarHorizontalComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontal.prototype.ngOnChanges = function () {
+    BarHorizontalComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    BarHorizontal.prototype.update = function () {
+    BarHorizontalComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -56,13 +56,13 @@ var BarHorizontal = (function (_super) {
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
-    BarHorizontal.prototype.getXScale = function () {
+    BarHorizontalComponent.prototype.getXScale = function () {
         this.xDomain = this.getXDomain();
         return d3_1.default.scaleLinear()
             .range([0, this.dims.width])
             .domain(this.xDomain);
     };
-    BarHorizontal.prototype.getYScale = function () {
+    BarHorizontalComponent.prototype.getYScale = function () {
         var spacing = 0.2;
         this.yDomain = this.getYDomain();
         return d3_1.default.scaleBand()
@@ -70,52 +70,52 @@ var BarHorizontal = (function (_super) {
             .paddingInner(spacing)
             .domain(this.yDomain);
     };
-    BarHorizontal.prototype.getXDomain = function () {
+    BarHorizontalComponent.prototype.getXDomain = function () {
         var values = this.results.map(function (d) { return d.value; });
         var min = Math.min.apply(Math, [0].concat(values));
         var max = Math.max.apply(Math, values);
         return [min, max];
     };
-    BarHorizontal.prototype.getYDomain = function () {
+    BarHorizontalComponent.prototype.getYDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    BarHorizontal.prototype.yAxisTickFormatting = function () {
+    BarHorizontalComponent.prototype.yAxisTickFormatting = function () {
         var tickFormatting;
         if (this.results.query && this.results.query.dimensions.length) {
             tickFormatting = tick_format_helper_1.tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
         }
         return tickFormatting;
     };
-    BarHorizontal.prototype.click = function (data) {
+    BarHorizontalComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    BarHorizontal.prototype.setColors = function () {
+    BarHorizontalComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.yDomain, this.customColors);
     };
-    BarHorizontal.prototype.updateYAxisWidth = function (_a) {
+    BarHorizontalComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
         this.yAxisWidth = width;
         this.update();
     };
-    BarHorizontal.prototype.updateXAxisHeight = function (_a) {
+    BarHorizontalComponent.prototype.updateXAxisHeight = function (_a) {
         var height = _a.height;
         this.xAxisHeight = height;
         this.update();
     };
-    BarHorizontal.decorators = [
+    BarHorizontalComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'bar-horizontal',
-                    template: "\n    <chart\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"yAxisTickFormatting()\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"yAxisTickFormatting()\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n  \n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    BarHorizontal.ctorParameters = [
+    BarHorizontalComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    BarHorizontal.propDecorators = {
+    BarHorizontalComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
@@ -132,7 +132,7 @@ var BarHorizontal = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return BarHorizontal;
-}(base_chart_component_1.BaseChart));
-exports.BarHorizontal = BarHorizontal;
+    return BarHorizontalComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.BarHorizontalComponent = BarHorizontalComponent;
 //# sourceMappingURL=bar-horizontal.component.js.map

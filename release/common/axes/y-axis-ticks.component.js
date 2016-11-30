@@ -2,33 +2,29 @@
 var core_1 = require('@angular/core');
 var trim_label_helper_1 = require('../trim-label.helper');
 var ticks_helper_1 = require('./ticks.helper');
-var YAxisTicks = (function () {
-    function YAxisTicks() {
+var YAxisTicksComponent = (function () {
+    function YAxisTicksComponent() {
         this.tickArguments = [5];
         this.tickStroke = '#ccc';
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
         this.innerTickSize = 6;
         this.tickPadding = 3;
+        this.verticalSpacing = 20;
+        this.textAnchor = 'middle';
         this.width = 0;
-        Object.assign(this, {
-            innerTickSize: 6,
-            outerTickSize: 6,
-            tickPadding: 3,
-            rotateLabels: false,
-            verticalSpacing: 20,
-            textAnchor: 'middle',
-            trimLabel: trim_label_helper_1.trimLabel
-        });
+        this.outerTickSize = 6;
+        this.rotateLabels = false;
+        this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    YAxisTicks.prototype.ngOnChanges = function () {
+    YAxisTicksComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    YAxisTicks.prototype.ngAfterViewInit = function () {
+    YAxisTicksComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
         setTimeout(function () { return _this.updateDims(); });
     };
-    YAxisTicks.prototype.updateDims = function () {
+    YAxisTicksComponent.prototype.updateDims = function () {
         var _this = this;
         var width = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().width, 10);
         if (width !== this.width) {
@@ -37,7 +33,7 @@ var YAxisTicks = (function () {
             setTimeout(function () { return _this.updateDims(); });
         }
     };
-    YAxisTicks.prototype.update = function () {
+    YAxisTicksComponent.prototype.update = function () {
         var _this = this;
         var scale;
         var sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
@@ -101,7 +97,7 @@ var YAxisTicks = (function () {
         }
         setTimeout(function () { return _this.updateDims(); });
     };
-    YAxisTicks.prototype.getTicks = function () {
+    YAxisTicksComponent.prototype.getTicks = function () {
         var ticks;
         var maxTicks = this.getMaxTicks();
         if (this.tickValues) {
@@ -125,26 +121,26 @@ var YAxisTicks = (function () {
         }
         return ticks;
     };
-    YAxisTicks.prototype.getMaxTicks = function () {
+    YAxisTicksComponent.prototype.getMaxTicks = function () {
         var tickHeight = 20;
         return Math.floor(this.height / tickHeight);
     };
-    YAxisTicks.prototype.tickTransform = function (tick) {
+    YAxisTicksComponent.prototype.tickTransform = function (tick) {
         return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
     };
-    YAxisTicks.prototype.gridLineTransform = function () {
+    YAxisTicksComponent.prototype.gridLineTransform = function () {
         return "translate(5,0)";
     };
-    YAxisTicks.decorators = [
+    YAxisTicksComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[yAxisTicks]',
-                    template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
+                    template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    YAxisTicks.ctorParameters = [];
-    YAxisTicks.propDecorators = {
+    YAxisTicksComponent.ctorParameters = [];
+    YAxisTicksComponent.propDecorators = {
         'scale': [{ type: core_1.Input },],
         'orient': [{ type: core_1.Input },],
         'tickArguments': [{ type: core_1.Input },],
@@ -157,7 +153,7 @@ var YAxisTicks = (function () {
         'dimensionsChanged': [{ type: core_1.Output },],
         'ticksElement': [{ type: core_1.ViewChild, args: ['ticksel',] },],
     };
-    return YAxisTicks;
+    return YAxisTicksComponent;
 }());
-exports.YAxisTicks = YAxisTicks;
+exports.YAxisTicksComponent = YAxisTicksComponent;
 //# sourceMappingURL=y-axis-ticks.component.js.map

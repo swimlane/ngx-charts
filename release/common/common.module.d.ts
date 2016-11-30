@@ -1,17 +1,17 @@
-import { Chart } from "./charts/chart.component";
-import { Legend } from "./legend.component";
-import { ScaleLegend } from "./scale-legend.component";
-import { CircleSeries } from "./circle-series.component";
-import { Circle } from "./circle.component";
-import { GridPanel } from "./grid-panel.component";
-import { GridPanelSeries } from "./grid-panel-series.component";
-import { SvgLinearGradient } from "./svg-linear-gradient.component";
-import { SvgRadialGradient } from "./svg-radial-gradient.component";
+import { ChartComponent } from "./charts/chart.component";
+import { LegendComponent } from "./legend.component";
+import { ScaleLegendComponent } from "./scale-legend.component";
+import { CircleSeriesComponent } from "./circle-series.component";
+import { CircleComponent } from "./circle.component";
+import { GridPanelComponent } from "./grid-panel.component";
+import { GridPanelSeriesComponent } from "./grid-panel-series.component";
+import { SvgLinearGradientComponent } from "./svg-linear-gradient.component";
+import { SvgRadialGradientComponent } from "./svg-radial-gradient.component";
 import { Timeline } from "./timeline.component";
-import { Area } from "./area.component";
+import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
-import { BaseChart } from "./base-chart.component";
+import { BaseChartComponent } from "./base-chart.component";
 export * from "./tooltip";
-export { Chart, Legend, ScaleLegend, CircleSeries, Circle, GridPanel, GridPanelSeries, SvgLinearGradient, SvgRadialGradient, Timeline, Area, AreaTooltip, BaseChart };
+export { ChartComponent, LegendComponent, ScaleLegendComponent, CircleSeriesComponent, CircleComponent, GridPanelComponent, GridPanelSeriesComponent, SvgLinearGradientComponent, SvgRadialGradientComponent, Timeline, AreaComponent, AreaTooltip, BaseChartComponent };
 export declare class CommonModule {
 }

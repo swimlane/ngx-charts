@@ -9,9 +9,9 @@ var d3_1 = require('../d3');
 var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
-var HeatMap = (function (_super) {
-    __extends(HeatMap, _super);
-    function HeatMap(element, cd, zone) {
+var HeatMapComponent = (function (_super) {
+    __extends(HeatMapComponent, _super);
+    function HeatMapComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -21,16 +21,16 @@ var HeatMap = (function (_super) {
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    HeatMap.prototype.ngAfterViewInit = function () {
+    HeatMapComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    HeatMap.prototype.ngOnDestroy = function () {
+    HeatMapComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    HeatMap.prototype.ngOnChanges = function () {
+    HeatMapComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    HeatMap.prototype.update = function () {
+    HeatMapComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -57,7 +57,7 @@ var HeatMap = (function (_super) {
             _this.rects = _this.getRects();
         });
     };
-    HeatMap.prototype.getXDomain = function () {
+    HeatMapComponent.prototype.getXDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -67,7 +67,7 @@ var HeatMap = (function (_super) {
         }
         return domain;
     };
-    HeatMap.prototype.getYDomain = function () {
+    HeatMapComponent.prototype.getYDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -80,7 +80,7 @@ var HeatMap = (function (_super) {
         }
         return domain;
     };
-    HeatMap.prototype.getValueDomain = function () {
+    HeatMapComponent.prototype.getValueDomain = function () {
         var domain = [];
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
@@ -95,19 +95,19 @@ var HeatMap = (function (_super) {
         var max = Math.max.apply(Math, domain);
         return [min, max];
     };
-    HeatMap.prototype.getXScale = function () {
+    HeatMapComponent.prototype.getXScale = function () {
         return d3_1.default.scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(0.1)
             .domain(this.xDomain);
     };
-    HeatMap.prototype.getYScale = function () {
+    HeatMapComponent.prototype.getYScale = function () {
         return d3_1.default.scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(0.1)
             .domain(this.yDomain);
     };
-    HeatMap.prototype.getRects = function () {
+    HeatMapComponent.prototype.getRects = function () {
         var _this = this;
         var rects = [];
         this.xDomain.map(function (xVal) {
@@ -124,37 +124,37 @@ var HeatMap = (function (_super) {
         });
         return rects;
     };
-    HeatMap.prototype.click = function (data) {
+    HeatMapComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    HeatMap.prototype.setColors = function () {
+    HeatMapComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'linear', this.valueDomain);
         this.colorScale = color_sets_1.generateColorScale(this.scheme, 'linear', this.valueDomain);
     };
-    HeatMap.prototype.updateYAxisWidth = function (_a) {
+    HeatMapComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
         this.yAxisWidth = width;
         this.update();
     };
-    HeatMap.prototype.updateXAxisHeight = function (_a) {
+    HeatMapComponent.prototype.updateXAxisHeight = function (_a) {
         var height = _a.height;
         this.xAxisHeight = height;
         this.update();
     };
-    HeatMap.decorators = [
+    HeatMapComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'heat-map',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legendData]=\"colorScale\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legendData]=\"colorScale\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    HeatMap.ctorParameters = [
+    HeatMapComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    HeatMap.propDecorators = {
+    HeatMapComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
@@ -170,7 +170,7 @@ var HeatMap = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return HeatMap;
-}(base_chart_component_1.BaseChart));
-exports.HeatMap = HeatMap;
+    return HeatMapComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.HeatMapComponent = HeatMapComponent;
 //# sourceMappingURL=heat-map.component.js.map

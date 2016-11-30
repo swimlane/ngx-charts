@@ -2,19 +2,19 @@
 var core_1 = require("@angular/core");
 var common_module_1 = require("../common/common.module");
 var advanced_pie_chart_component_1 = require("./advanced-pie-chart.component");
-exports.AdvancedPieChart = advanced_pie_chart_component_1.AdvancedPieChart;
+exports.AdvancedPieChartComponent = advanced_pie_chart_component_1.AdvancedPieChartComponent;
 var pie_label_component_1 = require("./pie-label.component");
-exports.PieLabel = pie_label_component_1.PieLabel;
+exports.PieLabelComponent = pie_label_component_1.PieLabelComponent;
 var pie_arc_component_1 = require("./pie-arc.component");
-exports.PieArc = pie_arc_component_1.PieArc;
+exports.PieArcComponent = pie_arc_component_1.PieArcComponent;
 var pie_chart_component_1 = require("./pie-chart.component");
-exports.PieChart = pie_chart_component_1.PieChart;
+exports.PieChartComponent = pie_chart_component_1.PieChartComponent;
 var pie_grid_component_1 = require("./pie-grid.component");
-exports.PieGrid = pie_grid_component_1.PieGrid;
+exports.PieGridComponent = pie_grid_component_1.PieGridComponent;
 var pie_grid_series_component_1 = require("./pie-grid-series.component");
-exports.PieGridSeries = pie_grid_series_component_1.PieGridSeries;
+exports.PieGridSeriesComponent = pie_grid_series_component_1.PieGridSeriesComponent;
 var pie_series_component_1 = require("./pie-series.component");
-exports.PieSeries = pie_series_component_1.PieSeries;
+exports.PieSeriesComponent = pie_series_component_1.PieSeriesComponent;
 var PieChartModule = (function () {
     function PieChartModule() {
     }
@@ -22,22 +22,22 @@ var PieChartModule = (function () {
         { type: core_1.NgModule, args: [{
                     imports: [common_module_1.CommonModule],
                     declarations: [
-                        advanced_pie_chart_component_1.AdvancedPieChart,
-                        pie_label_component_1.PieLabel,
-                        pie_arc_component_1.PieArc,
-                        pie_chart_component_1.PieChart,
-                        pie_grid_component_1.PieGrid,
-                        pie_grid_series_component_1.PieGridSeries,
-                        pie_series_component_1.PieSeries
+                        advanced_pie_chart_component_1.AdvancedPieChartComponent,
+                        pie_label_component_1.PieLabelComponent,
+                        pie_arc_component_1.PieArcComponent,
+                        pie_chart_component_1.PieChartComponent,
+                        pie_grid_component_1.PieGridComponent,
+                        pie_grid_series_component_1.PieGridSeriesComponent,
+                        pie_series_component_1.PieSeriesComponent
                     ],
                     exports: [
-                        advanced_pie_chart_component_1.AdvancedPieChart,
-                        pie_label_component_1.PieLabel,
-                        pie_arc_component_1.PieArc,
-                        pie_chart_component_1.PieChart,
-                        pie_grid_component_1.PieGrid,
-                        pie_grid_series_component_1.PieGridSeries,
-                        pie_series_component_1.PieSeries
+                        advanced_pie_chart_component_1.AdvancedPieChartComponent,
+                        pie_label_component_1.PieLabelComponent,
+                        pie_arc_component_1.PieArcComponent,
+                        pie_chart_component_1.PieChartComponent,
+                        pie_grid_component_1.PieGridComponent,
+                        pie_grid_series_component_1.PieGridSeriesComponent,
+                        pie_series_component_1.PieSeriesComponent
                     ]
                 },] },
     ];

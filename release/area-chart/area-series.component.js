@@ -2,16 +2,16 @@
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var sort_1 = require('../utils/sort');
-var AreaSeries = (function () {
-    function AreaSeries() {
+var AreaSeriesComponent = (function () {
+    function AreaSeriesComponent() {
         this.stacked = false;
         this.normalized = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    AreaSeries.prototype.ngOnChanges = function () {
+    AreaSeriesComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    AreaSeries.prototype.update = function () {
+    AreaSeriesComponent.prototype.update = function () {
         var _this = this;
         var area;
         var startingArea;
@@ -55,7 +55,7 @@ var AreaSeries = (function () {
         this.path = area(data);
         this.startingPath = startingArea(data);
     };
-    AreaSeries.decorators = [
+    AreaSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[areaSeries]',
                     template: "\n    <svg:g area\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"color\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient\"\n    />\n  ",
@@ -63,8 +63,8 @@ var AreaSeries = (function () {
                 },] },
     ];
     /** @nocollapse */
-    AreaSeries.ctorParameters = [];
-    AreaSeries.propDecorators = {
+    AreaSeriesComponent.ctorParameters = [];
+    AreaSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'xScale': [{ type: core_1.Input },],
         'yScale': [{ type: core_1.Input },],
@@ -76,7 +76,7 @@ var AreaSeries = (function () {
         'curve': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
-    return AreaSeries;
+    return AreaSeriesComponent;
 }());
-exports.AreaSeries = AreaSeries;
+exports.AreaSeriesComponent = AreaSeriesComponent;
 //# sourceMappingURL=area-series.component.js.map

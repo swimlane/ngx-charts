@@ -1,5 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
-export declare class AreaSeries implements OnChanges {
+export declare class AreaSeriesComponent implements OnChanges {
     data: any;
     xScale: any;
     yScale: any;

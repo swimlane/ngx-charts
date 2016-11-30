@@ -1,5 +1,5 @@
 import { EventEmitter, ElementRef, OnChanges, ChangeDetectorRef, NgZone } from '@angular/core';
-export declare class Card implements OnChanges {
+export declare class CardComponent implements OnChanges {
     private cd;
     private zone;
     color: any;
@@ -22,6 +22,10 @@ export declare class Card implements OnChanges {
     textFontSize: number;
     textTransform: string;
     initialized: boolean;
+    originalWidth: number;
+    originalHeight: number;
+    originalWidthRatio: number;
+    originalHeightRatio: number;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(): void;
     update(): void;

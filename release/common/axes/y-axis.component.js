@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
 var y_axis_ticks_component_1 = require('./y-axis-ticks.component');
-var YAxis = (function () {
-    function YAxis() {
+var YAxisComponent = (function () {
+    function YAxisComponent() {
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
         this.labelOffset = 80;
@@ -16,10 +16,10 @@ var YAxis = (function () {
             yAxisOffset: -5
         });
     }
-    YAxis.prototype.ngOnChanges = function () {
+    YAxisComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    YAxis.prototype.update = function () {
+    YAxisComponent.prototype.update = function () {
         this.offset = this.yAxisOffset;
         if (this.yOrient === 'right') {
             this.transform = "translate(" + (this.offset + this.dims.width) + " , 0)";
@@ -31,7 +31,7 @@ var YAxis = (function () {
             this.tickArguments = [this.yAxisTickCount];
         }
     };
-    YAxis.prototype.emitTicksWidth = function (_a) {
+    YAxisComponent.prototype.emitTicksWidth = function (_a) {
         var _this = this;
         var width = _a.width;
         if (width !== this.labelOffset) {
@@ -41,7 +41,7 @@ var YAxis = (function () {
             }, 0);
         }
     };
-    YAxis.decorators = [
+    YAxisComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[yAxis]',
                     template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g yAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineWidth]=\"dims.width\"\n        [height]=\"dims.height\"\n        (dimensionsChanged)=\"emitTicksWidth($event)\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
@@ -49,8 +49,8 @@ var YAxis = (function () {
                 },] },
     ];
     /** @nocollapse */
-    YAxis.ctorParameters = [];
-    YAxis.propDecorators = {
+    YAxisComponent.ctorParameters = [];
+    YAxisComponent.propDecorators = {
         'yScale': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
         'tickFormatting': [{ type: core_1.Input },],
@@ -59,9 +59,9 @@ var YAxis = (function () {
         'labelText': [{ type: core_1.Input },],
         'yAxisTickInterval': [{ type: core_1.Input },],
         'dimensionsChanged': [{ type: core_1.Output },],
-        'ticksComponent': [{ type: core_1.ViewChild, args: [y_axis_ticks_component_1.YAxisTicks,] },],
+        'ticksComponent': [{ type: core_1.ViewChild, args: [y_axis_ticks_component_1.YAxisTicksComponent,] },],
     };
-    return YAxis;
+    return YAxisComponent;
 }());
-exports.YAxis = YAxis;
+exports.YAxisComponent = YAxisComponent;
 //# sourceMappingURL=y-axis.component.js.map

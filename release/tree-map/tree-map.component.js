@@ -9,9 +9,9 @@ var d3_1 = require('../d3');
 var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
-var TreeMap = (function (_super) {
-    __extends(TreeMap, _super);
-    function TreeMap(element, cd, zone) {
+var TreeMapComponent = (function (_super) {
+    __extends(TreeMapComponent, _super);
+    function TreeMapComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
@@ -19,16 +19,16 @@ var TreeMap = (function (_super) {
         this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 10, 10, 10];
     }
-    TreeMap.prototype.ngAfterViewInit = function () {
+    TreeMapComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
     };
-    TreeMap.prototype.ngOnDestroy = function () {
+    TreeMapComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    TreeMap.prototype.ngOnChanges = function () {
+    TreeMapComponent.prototype.ngOnChanges = function () {
         this.update();
     };
-    TreeMap.prototype.update = function () {
+    TreeMapComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
@@ -64,29 +64,29 @@ var TreeMap = (function (_super) {
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
-    TreeMap.prototype.getDomain = function () {
+    TreeMapComponent.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    TreeMap.prototype.click = function (data) {
+    TreeMapComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
-    TreeMap.prototype.setColors = function () {
+    TreeMapComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    TreeMap.decorators = [
+    TreeMapComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'tree-map',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"click($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    TreeMap.ctorParameters = [
+    TreeMapComponent.ctorParameters = [
         { type: core_1.ElementRef, },
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
     ];
-    TreeMap.propDecorators = {
+    TreeMapComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
@@ -94,7 +94,7 @@ var TreeMap = (function (_super) {
         'clickHandler': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
-    return TreeMap;
-}(base_chart_component_1.BaseChart));
-exports.TreeMap = TreeMap;
+    return TreeMapComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.TreeMapComponent = TreeMapComponent;
 //# sourceMappingURL=tree-map.component.js.map

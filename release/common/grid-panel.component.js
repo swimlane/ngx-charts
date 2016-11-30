@@ -1,9 +1,9 @@
 "use strict";
 var core_1 = require('@angular/core');
-var GridPanel = (function () {
-    function GridPanel() {
+var GridPanelComponent = (function () {
+    function GridPanelComponent() {
     }
-    GridPanel.decorators = [
+    GridPanelComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[gridPanel]',
                     template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      class=\"gridpanel\"\n    />\n  ",
@@ -11,15 +11,15 @@ var GridPanel = (function () {
                 },] },
     ];
     /** @nocollapse */
-    GridPanel.ctorParameters = [];
-    GridPanel.propDecorators = {
+    GridPanelComponent.ctorParameters = [];
+    GridPanelComponent.propDecorators = {
         'path': [{ type: core_1.Input },],
         'width': [{ type: core_1.Input },],
         'height': [{ type: core_1.Input },],
         'x': [{ type: core_1.Input },],
         'y': [{ type: core_1.Input },],
     };
-    return GridPanel;
+    return GridPanelComponent;
 }());
-exports.GridPanel = GridPanel;
+exports.GridPanelComponent = GridPanelComponent;
 //# sourceMappingURL=grid-panel.component.js.map

@@ -19,9 +19,9 @@ import * as import10 from '@angular/core/src/linker/template_ref';
 import * as import11 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import12 from '@angular/common/src/directives/ng_for';
 import * as import13 from '@angular/core/src/security';
-export class Wrapper_Legend {
+export class Wrapper_LegendComponent {
   /*private*/ _eventHandler:Function;
-  context:import0.Legend;
+  context:import0.LegendComponent;
   /*private*/ _changed:boolean;
   /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
@@ -33,7 +33,7 @@ export class Wrapper_Legend {
   constructor() {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Legend();
+    this.context = new import0.LegendComponent();
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -105,42 +105,42 @@ export class Wrapper_Legend {
     if (emit0) { (this.subscription0 = this.context.labelClick.subscribe(_eventHandler.bind(view,'labelClick'))); }
   }
 }
-var renderType_Legend_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
-class View_Legend_Host0 extends import2.AppView<any> {
+var renderType_LegendComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
+class View_LegendComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import0.Legend>;
-  _Legend_0_3:Wrapper_Legend;
+  compView_0:import2.AppView<import0.LegendComponent>;
+  _LegendComponent_0_3:Wrapper_LegendComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Legend_Host0,renderType_Legend_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_LegendComponent_Host0,renderType_LegendComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'legend',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
-    this.compView_0 = new View_Legend0(this.viewUtils,this,0,this._el_0);
-    this._Legend_0_3 = new Wrapper_Legend();
-    this.compView_0.create(this._Legend_0_3.context);
+    this.compView_0 = new View_LegendComponent0(this.viewUtils,this,0,this._el_0);
+    this._LegendComponent_0_3 = new Wrapper_LegendComponent();
+    this.compView_0.create(this._LegendComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._Legend_0_3.context);
+    return new import7.ComponentRef_<any>(0,this,this._el_0,this._LegendComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import0.Legend) && (0 === requestNodeIndex))) { return this._Legend_0_3.context; }
+    if (((token === import0.LegendComponent) && (0 === requestNodeIndex))) { return this._LegendComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    if (this._Legend_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    if (this._LegendComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
-    this._Legend_0_3.ngOnDestroy();
+    this._LegendComponent_0_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
 }
-export const LegendNgFactory:import7.ComponentFactory<import0.Legend> = new import7.ComponentFactory<import0.Legend>('legend',View_Legend_Host0,import0.Legend);
-const styles_Legend:any[] = ([] as any[]);
-var renderType_Legend:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_Legend,{});
-export class View_Legend0 extends import2.AppView<import0.Legend> {
+export const LegendComponentNgFactory:import7.ComponentFactory<import0.LegendComponent> = new import7.ComponentFactory<import0.LegendComponent>('legend',View_LegendComponent_Host0,import0.LegendComponent);
+const styles_LegendComponent:any[] = ([] as any[]);
+var renderType_LegendComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LegendComponent,{});
+export class View_LegendComponent0 extends import2.AppView<import0.LegendComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -168,7 +168,7 @@ export class View_Legend0 extends import2.AppView<import0.Legend> {
   /*private*/ _expr_24:any;
   /*private*/ _expr_25:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_Legend0,renderType_Legend,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_LegendComponent0,renderType_LegendComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
     this._expr_23 = import1.UNINITIALIZED;
     this._expr_24 = import1.UNINITIALIZED;
     this._expr_25 = import1.UNINITIALIZED;
@@ -253,11 +253,11 @@ export class View_Legend0 extends import2.AppView<import0.Legend> {
     this._vc_15.destroyNestedViews();
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 15)) { return new View_Legend1(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
+    if ((nodeIndex == 15)) { return new View_LegendComponent1(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
     return (null as any);
   }
 }
-class View_Legend1 extends import2.AppView<any> {
+class View_LegendComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
@@ -272,7 +272,7 @@ class View_Legend1 extends import2.AppView<any> {
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
-    super(View_Legend1,renderType_Legend,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_LegendComponent1,renderType_LegendComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;

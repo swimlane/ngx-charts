@@ -1,11 +1,5 @@
 import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
-export declare class HeatMapCell implements OnChanges {
-    element: HTMLElement;
-    transform: string;
-    activeRange: any[];
-    startOpacity: number;
-    gradientId: string;
-    gradientUrl: string;
+export declare class HeatMapCellComponent implements OnChanges {
     fill: any;
     x: any;
     y: any;
@@ -15,9 +9,15 @@ export declare class HeatMapCell implements OnChanges {
     label: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
+    element: HTMLElement;
+    transform: string;
+    activeRange: any[];
+    startOpacity: number;
+    gradientId: string;
+    gradientUrl: string;
     constructor(element: ElementRef);
     ngOnChanges(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;
-    click(): void;
+    onClick(): void;
 }

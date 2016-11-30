@@ -1,8 +1,8 @@
 
 import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-import { BaseChart } from '../common/base-chart.component';
-export declare class BarVertical extends BaseChart implements OnChanges, OnDestroy, AfterViewInit {
+import { BaseChartComponent } from '../common/base-chart.component';
+export declare class BarVerticalComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
     private element;
     private cd;
     view: any;
@@ -40,7 +40,7 @@ export declare class BarVertical extends BaseChart implements OnChanges, OnDestr
     getXDomain(): any;
     getYDomain(): number[];
     xAxisTickFormatting(): any;
-    click(data: any): void;
+    onClick(data: any): void;
     setColors(): void;
     updateYAxisWidth({width}: {
         width: any;

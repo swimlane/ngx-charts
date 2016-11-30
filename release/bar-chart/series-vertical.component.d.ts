@@ -1,8 +1,5 @@
 import { EventEmitter, OnChanges } from '@angular/core';
-export declare class SeriesVertical implements OnChanges {
-    bars: any;
-    x: any;
-    y: any;
+export declare class SeriesVerticalComponent implements OnChanges {
     dims: any;
     type: string;
     series: any;
@@ -12,8 +9,11 @@ export declare class SeriesVertical implements OnChanges {
     scaleType: string;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
+    bars: any;
+    x: any;
+    y: any;
     ngOnChanges(changes: any): void;
     update(): void;
-    trackBy(index: any, bar: any): any;
-    click(data: any): void;
+    trackBy(index: any, bar: any): string;
+    onClick(data: any): void;
 }

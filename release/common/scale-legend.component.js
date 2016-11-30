@@ -1,11 +1,11 @@
 "use strict";
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
-var ScaleLegend = (function () {
-    function ScaleLegend(sanitizer) {
+var ScaleLegendComponent = (function () {
+    function ScaleLegendComponent(sanitizer) {
         this.sanitizer = sanitizer;
     }
-    ScaleLegend.prototype.ngOnChanges = function () {
+    ScaleLegendComponent.prototype.ngOnChanges = function () {
         var gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
         this.gradient = this.sanitizer.bypassSecurityTrustStyle("linear-gradient(to bottom, " + gradientValues + ")");
     };
@@ -15,7 +15,7 @@ var ScaleLegend = (function () {
      * @param  {array} splits array of splits on a scale of (0, 1)
      * @return {string}
      */
-    ScaleLegend.prototype.gradientString = function (colors, splits) {
+    ScaleLegendComponent.prototype.gradientString = function (colors, splits) {
         // add the 100%
         splits.push(1);
         var pairs = [];
@@ -24,24 +24,24 @@ var ScaleLegend = (function () {
         });
         return pairs.join(', ');
     };
-    ScaleLegend.decorators = [
+    ScaleLegendComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'scale-legend',
-                    template: "\n    <div\n      class=\"scale-legend\"\n      [style.width]=\"width + 'px'\">\n      <div [style.height]=\"(height - 70) + 'px'\">\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toLocaleString() }}</span>\n        </div>\n\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toLocaleString() }}</span>\n        </div>\n      </div>\n    </div>\n  ",
+                    template: "\n    <div\n      class=\"scale-legend\"\n      [style.width.px]=\"width\">\n      <div [style.height.px]=\"height - 70\">\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toLocaleString() }}</span>\n        </div>\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toLocaleString() }}</span>\n        </div>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    ScaleLegend.ctorParameters = [
+    ScaleLegendComponent.ctorParameters = [
         { type: platform_browser_1.DomSanitizer, },
     ];
-    ScaleLegend.propDecorators = {
+    ScaleLegendComponent.propDecorators = {
         'valueRange': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
         'height': [{ type: core_1.Input },],
         'width': [{ type: core_1.Input },],
     };
-    return ScaleLegend;
+    return ScaleLegendComponent;
 }());
-exports.ScaleLegend = ScaleLegend;
+exports.ScaleLegendComponent = ScaleLegendComponent;
 //# sourceMappingURL=scale-legend.component.js.map
