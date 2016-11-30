@@ -128,7 +128,7 @@ export class PieChart extends BaseChart implements OnChanges, OnDestroy, AfterVi
         label = label.toLocaleString();
       }
 
-      if (items.indexOf(label) === -1){
+      if (items.indexOf(label) === -1) {
         items.push(label);
       }
     });

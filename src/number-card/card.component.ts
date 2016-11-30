@@ -89,7 +89,10 @@ export class Card implements OnChanges {
   textFontSize: number = 35;
   textTransform: string = '';
   initialized: boolean = false;
-  originalTextWidth: number;
+  originalWidth: number;
+  originalHeight: number;
+  originalWidthRatio: number;
+  originalHeightRatio: number;
 
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
@@ -118,7 +121,7 @@ export class Card implements OnChanges {
         setTimeout(() => {
           let step = this.data.value / 100;
           this.countUp(0, this.data.value, step);
-        });
+        }, 20);
         this.initialized = true;
       }
     });
@@ -146,21 +149,26 @@ export class Card implements OnChanges {
         return;
       }
 
-      if (!this.originalTextWidth) {
-        this.originalTextWidth = width;
-      }
-
-      let oldScale = this.originalTextWidth / width;
       let availableWidth = this.cardWidth * 0.85;
       let availableHeight = this.cardHeight * 0.65;
 
-      let resizeScaleWidth = Math.floor((availableWidth / (width / this.resizeScale)) * 100) / 100;
-      let resizeScaleHeight = Math.floor((availableHeight / (height / this.resizeScale)) * 100) / 100;
-      this.resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-      if (this.resizeScale !== oldScale) {
-        this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
-        this.cd.markForCheck();
+      if (!this.originalWidthRatio) {
+        this.originalWidthRatio = availableWidth / width;
+        this.originalWidth = availableWidth;
       }
+
+      if (!this.originalHeightRatio) {
+        this.originalHeightRatio = availableHeight / height;
+        this.originalHeight = availableHeight;
+      }
+
+      let newWidthRatio = (availableWidth / this.originalWidth) * this.originalWidthRatio;
+      let newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
+
+      this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
+
+      this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+      this.cd.markForCheck();
     });
   }
 
