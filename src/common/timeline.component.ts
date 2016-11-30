@@ -5,7 +5,9 @@ import {
   EventEmitter,
   ElementRef,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  NgZone,
+  ChangeDetectorRef
 } from '@angular/core';
 import * as moment from 'moment';
 import d3 from '../d3';
@@ -24,7 +26,7 @@ import { id } from "../utils/id";
             values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0" />
       </svg:filter>
 
-      <svg:g [attr.filter]="filter" class="embedded-chart">
+      <svg:g class="embedded-chart">
         <ng-content></ng-content>
       </svg:g>
 
@@ -60,7 +62,7 @@ export class Timeline implements OnChanges {
   @Output() clickHandler = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private zone: NgZone, private cd: ChangeDetectorRef) {
     this.element = element.nativeElement;
   }
 
@@ -74,22 +76,26 @@ export class Timeline implements OnChanges {
   }
 
   update() {
-    this.dims = this.getDims();
-    this.height = this.dims.height;
-    let offsetY = this.view[1] - this.height;
+    this.zone.run(() => {
+      this.dims = this.getDims();
+      this.height = this.dims.height;
+      let offsetY = this.view[1] - this.height;
 
-    this.xDomain = this.getXDomain();
-    this.xScale = this.getXScale();
+      this.xDomain = this.getXDomain();
+      this.xScale = this.getXScale();
 
-    if (this.brush) {
-      this.updateBrush();
-    }
+      if (this.brush) {
+        this.updateBrush();
+      }
 
-    this.transform = `translate(0 , ${ offsetY })`;
+      this.transform = `translate(0 , ${ offsetY })`;
 
-    let pageUrl = window.location.href;
-    this.filterId = 'filter' + id().toString();
-    this.filter = `url(${pageUrl}#${this.filterId})`;
+      let pageUrl = window.location.href;
+      this.filterId = 'filter' + id().toString();
+      this.filter = `url(${pageUrl}#${this.filterId})`;
+
+      this.cd.markForCheck();
+    });
   }
 
   getXDomain() {
@@ -150,9 +156,12 @@ export class Timeline implements OnChanges {
     this.brush = d3.brushX()
       .extent([[0, 0], [width, height]])
       .on("brush end", () => {
-        let selection = d3.selection.event.selection || this.xScale.range();
-        let newDomain = selection.map(this.xScale.invert);
-        this.onDomainChange.emit(newDomain);
+        this.zone.run(() => {
+          let selection = d3.selection.event.selection || this.xScale.range();
+          let newDomain = selection.map(this.xScale.invert);
+          this.onDomainChange.emit(newDomain);
+          this.cd.markForCheck();
+        });
       });
 
     d3.select(this.element)
@@ -168,16 +177,20 @@ export class Timeline implements OnChanges {
     let height = this.height;
     let width = this.view[0];
 
-    this.brush.extent([[0, 0], [width, height]]);
-    d3.select(this.element)
-      .select('.brush')
-      .call(this.brush);
+    this.zone.run(() => {
+      this.brush.extent([[0, 0], [width, height]]);
+      d3.select(this.element)
+        .select('.brush')
+        .call(this.brush);
 
-    // clear hardcoded properties so they can be defined by CSS
-    d3.select(this.element).select('.selection')
-      .attr('fill', undefined)
-      .attr('stroke', undefined)
-      .attr('fill-opacity', undefined);
+      // clear hardcoded properties so they can be defined by CSS
+      d3.select(this.element).select('.selection')
+        .attr('fill', undefined)
+        .attr('stroke', undefined)
+        .attr('fill-opacity', undefined);
+
+      this.cd.markForCheck();
+    });
   }
 
   getDims() {
