@@ -368,7 +368,7 @@ import './demo.scss';
           </span>
           <strong>Data</strong>
         </h3>
-        <div [hidden]="!dataVisable">
+        <div [hidden]="!dataVisable" style="margin-left: 10px;">
           <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
           <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
           <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>
@@ -387,7 +387,7 @@ import './demo.scss';
             </span>
             <strong>Dimensions</strong>
           </h3>
-          <div [hidden]="!dimVisiable">
+          <div [hidden]="!dimVisiable" style="margin-left: 10px;">
             <label>
               <input type="checkbox" [checked]="fitContainer" (change)="toggleFitContainer($event.target.checked)">
               Fit Container
@@ -410,6 +410,7 @@ import './demo.scss';
         </h3>
         <select
           [hidden]="!colorVisable"
+          style="margin-left: 10px;"
           [ngModel]="selectedColorScheme"
           (ngModelChange)="setColorScheme($event)">
           <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{scheme.name}}</option>
@@ -422,7 +423,7 @@ import './demo.scss';
           </span>
           <strong>Options</strong>
         </h3>
-        <div [hidden]="!optsVisible">
+        <div [hidden]="!optsVisible" style="margin-left: 10px;">
           <div *ngIf="chart.options.includes('showXAxis')">
             <label>
               <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
