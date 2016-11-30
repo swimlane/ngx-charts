@@ -133,7 +133,6 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
       }
     });
 
-    console.log('items', items);
     return items;
   }
 
