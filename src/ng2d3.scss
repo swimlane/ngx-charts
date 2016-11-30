@@ -81,11 +81,11 @@
 }
 
 .timeline {
-  .brush {
-    .overlay {
-      fill: rgba(0,0,0,0.05);
-    }
+  .brush-background {
+    fill: rgba(0,0,0,0.05);
+  }
 
+  .brush {
     .selection {
       fill: rgba(0, 0, 0, 0.1);
       stroke-width: 1px;
