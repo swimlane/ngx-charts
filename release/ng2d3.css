@@ -197,10 +197,10 @@
     .chart-legend .legend-label:hover {
       color: #50585f;
       font-weight: bold;
-      -webkit-transition: 0.5s;
-      -moz-transition: 0.5s;
-      -ms-transition: 0.5s;
-      transition: 0.5s; }
+      -webkit-transition: 0.2s;
+      -moz-transition: 0.2s;
+      -ms-transition: 0.2s;
+      transition: 0.2s; }
     .chart-legend .legend-label.active {
       color: #FFF; }
   .chart-legend .legend-label-color {
@@ -256,7 +256,17 @@
       overflow: auto; }
       .advanced-pie-legend .legend-items-container .legend-items .legend-item {
         margin-right: 20px;
-        display: inline-block; }
+        display: inline-block;
+        cursor: pointer; }
+        .advanced-pie-legend .legend-items-container .legend-items .legend-item:focus {
+          outline: none; }
+        .advanced-pie-legend .legend-items-container .legend-items .legend-item:hover {
+          color: #50585f;
+          font-weight: bold;
+          -webkit-transition: 0.2s;
+          -moz-transition: 0.2s;
+          -ms-transition: 0.2s;
+          transition: 0.2s; }
         .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {
           font-size: 24px;
           margin-top: -6px;

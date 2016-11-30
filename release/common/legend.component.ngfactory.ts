@@ -280,7 +280,7 @@ class View_Legend1 extends import2.AppView<any> {
     this._expr_12 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'li',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'li',new import3.InlineArray2(2,'tabindex','-1'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'span',new import3.InlineArray2(2,'class','legend-label-color'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'\n            ',(null as any));
