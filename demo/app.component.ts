@@ -13,6 +13,7 @@ import './demo.scss';
   template: `
     <main [class]="theme">
       <div class="chart-col">
+        <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;">
           <bar-vertical
             *ngIf="chartType === 'bar-vertical'"
             class="chart-container"
@@ -332,19 +333,14 @@ import './demo.scss';
             [smallSegments]="gaugeSmallSegments"
             (clickHandler)="clickHandler($event)">
           </gauge>
+        </div>
       </div>
       <div class="sidebar">
         <h1>
           ng2<strong>d3</strong>
           <small>Angular2 D3 Chart Framework</small>
         </h1>
-        <h3>Theme</h3>
-        <select
-          [ngModel]="theme"
-          (ngModelChange)="theme = $event">>
-          <option [value]="'dark'">Dark</option>
-          <option [value]="'light'">Light</option>
-        </select>
+        <div style="margin:20px">
 
         <h3>Chart Type</h3>
         <select
@@ -357,158 +353,198 @@ import './demo.scss';
           </template>
         </select>
 
-        <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
-        <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
-        <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>
-        <div>
-          <label>
-            <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
-            Real-time
-          </label>
-        </div>
-        <h3>Options</h3>
-        <div>
-          <label><strong>Dimensions</strong></label><br />
-          <label>
-            <input type="checkbox" [checked]="fitContainer" (change)="toggleFitContainer($event.target.checked)">
-            Fit Container
-          </label> <br />
-          <div *ngIf="!fitContainer">
-            <label>Width:</label><br />
-            <input type="number" [(ngModel)]="width"><br />
-            <label>Height:</label><br />
-            <input type="number" [(ngModel)]="height"><br />
-            <button (click)="applyDimensions()">Apply dimensions</button>
+        <h3>Theme</h3>
+        <select
+          [ngModel]="theme"
+          (ngModelChange)="theme = $event">>
+          <option [value]="'dark'">Dark</option>
+          <option [value]="'light'">Light</option>
+        </select>
+
+        <h3 (click)="dataVisable = !dataVisable" style="cursor: pointer">
+          <span 
+            [class.arrow-down]="dataVisable"
+            [class.arrow-right]="!dataVisable">
+          </span>
+          <strong>Data</strong>
+        </h3>
+        <div [hidden]="!dataVisable">
+          <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
+          <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
+          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>
+          <div>
+            <label>
+              <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
+              Real-time
+            </label>
           </div>
         </div>
-        <hr />
-        <label>Color Scheme</label>
+        <div>
+          <h3 (click)="dimVisiable = !dimVisiable" style="cursor: pointer">
+            <span 
+              [class.arrow-down]="dimVisiable"
+              [class.arrow-right]="!dimVisiable">
+            </span>
+            <strong>Dimensions</strong>
+          </h3>
+          <div [hidden]="!dimVisiable">
+            <label>
+              <input type="checkbox" [checked]="fitContainer" (change)="toggleFitContainer($event.target.checked)">
+              Fit Container
+            </label> <br />
+            <div *ngIf="!fitContainer">
+              <label>Width:</label><br />
+              <input type="number" [(ngModel)]="width"><br />
+              <label>Height:</label><br />
+              <input type="number" [(ngModel)]="height"><br />
+              <button (click)="applyDimensions()">Apply dimensions</button>
+            </div>
+          </div>
+        </div>
+        <h3 (click)="colorVisable = !colorVisable" style="cursor: pointer">
+          <span 
+            [class.arrow-down]="colorVisable"
+            [class.arrow-right]="!colorVisable">
+          </span>
+          <strong>Color Scheme</strong>
+        </h3>
         <select
+          [hidden]="!colorVisable"
           [ngModel]="selectedColorScheme"
           (ngModelChange)="setColorScheme($event)">
           <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{scheme.name}}</option>
         </select>
 
-        <div *ngIf="chart.options.includes('showXAxis')">
-          <label>
-            <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
-            Show X Axis
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('showYAxis')">
-          <label>
-            <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked">
-            Show Y Axis
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('showGridLines')">
-          <label>
-            <input type="checkbox" [checked]="showGridLines" (change)="showGridLines = $event.target.checked">
-            Show Grid Lines
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('gradient')">
-          <label>
-            <input type="checkbox" [checked]="gradient" (change)="gradient = $event.target.checked">
-            Use Gradients
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('showLegend')">
-          <label>
-            <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
-            Show Legend
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('showXAxisLabel')">
-          <label>
-            <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
-            Show X Axis Label
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('xAxisLabel')">
-          <label>X Axis Label:</label><br />
-          <input type="text" [(ngModel)]="xAxisLabel"><br />
-        </div>
-        <div *ngIf="chart.options.includes('showYAxisLabel')">
-          <label>
-            <input type="checkbox" [checked]="showYAxisLabel" (change)="showYAxisLabel = $event.target.checked">
-            Show Y Axis Label
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('yAxisLabel')">
-          <label>Y Axis Label:</label><br />
-          <input type="text" [(ngModel)]="yAxisLabel"><br />
-        </div>
-        <div *ngIf="chart.options.includes('showLabels')">
-          <label>
-            <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked">
-            Show Labels
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('explodeSlices')">
-          <label>
-            <input type="checkbox" [checked]="explodeSlices" (change)="explodeSlices = $event.target.checked">
-            Explode Slices
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('doughnut')">
-          <label>
-            <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked">
-            Doughnut
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('autoScale')">
-          <label>
-            <input type="checkbox" [checked]="autoScale" (change)="autoScale = $event.target.checked">
-            Auto Scale
-          </label> <br />
-        </div>
-        <div *ngIf="chart.options.includes('timeline')">
-          <label>
-            <input type="checkbox" [checked]="timeline" (change)="timeline = $event.target.checked">
-            Timeline
-          </label> <br />
-        </div>
+        <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
+          <span 
+            [class.arrow-down]="optsVisible"
+            [class.arrow-right]="!optsVisible">
+          </span>
+          <strong>Options</strong>
+        </h3>
+        <div [hidden]="!optsVisible">
+          <div *ngIf="chart.options.includes('showXAxis')">
+            <label>
+              <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
+              Show X Axis
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('showYAxis')">
+            <label>
+              <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked">
+              Show Y Axis
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('showGridLines')">
+            <label>
+              <input type="checkbox" [checked]="showGridLines" (change)="showGridLines = $event.target.checked">
+              Show Grid Lines
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('gradient')">
+            <label>
+              <input type="checkbox" [checked]="gradient" (change)="gradient = $event.target.checked">
+              Use Gradients
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('showLegend')">
+            <label>
+              <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
+              Show Legend
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('showXAxisLabel')">
+            <label>
+              <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
+              Show X Axis Label
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('xAxisLabel')">
+            <label>X Axis Label:</label><br />
+            <input type="text" [(ngModel)]="xAxisLabel"><br />
+          </div>
+          <div *ngIf="chart.options.includes('showYAxisLabel')">
+            <label>
+              <input type="checkbox" [checked]="showYAxisLabel" (change)="showYAxisLabel = $event.target.checked">
+              Show Y Axis Label
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('yAxisLabel')">
+            <label>Y Axis Label:</label><br />
+            <input type="text" [(ngModel)]="yAxisLabel"><br />
+          </div>
+          <div *ngIf="chart.options.includes('showLabels')">
+            <label>
+              <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked">
+              Show Labels
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('explodeSlices')">
+            <label>
+              <input type="checkbox" [checked]="explodeSlices" (change)="explodeSlices = $event.target.checked">
+              Explode Slices
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('doughnut')">
+            <label>
+              <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked">
+              Doughnut
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('autoScale')">
+            <label>
+              <input type="checkbox" [checked]="autoScale" (change)="autoScale = $event.target.checked">
+              Auto Scale
+            </label> <br />
+          </div>
+          <div *ngIf="chart.options.includes('timeline')">
+            <label>
+              <input type="checkbox" [checked]="timeline" (change)="timeline = $event.target.checked">
+              Timeline
+            </label> <br />
+          </div>
 
-        <div *ngIf="chart.options.includes('curve')">
-          <label>Line Interpolation</label>
-          <select
-            [ngModel]="curveType"
-            (ngModelChange)="setInterpolationType($event)">
-            <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">{{interpolationType}}</option>
-          </select>
-        </div>
+          <div *ngIf="chart.options.includes('curve')">
+            <label>Line Interpolation</label>
+            <select
+              [ngModel]="curveType"
+              (ngModelChange)="setInterpolationType($event)">
+              <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">{{interpolationType}}</option>
+            </select>
+          </div>
 
-        <div *ngIf="chart.options.includes('min')">
-          <label>Min value:</label><br />
-          <input type="number" [(ngModel)]="gaugeMin"><br />
-        </div>
+          <div *ngIf="chart.options.includes('min')">
+            <label>Min value:</label><br />
+            <input type="number" [(ngModel)]="gaugeMin"><br />
+          </div>
 
-        <div *ngIf="chart.options.includes('max')">
-          <label>Max value:</label><br />
-          <input type="number" [(ngModel)]="gaugeMax"><br />
-        </div>
+          <div *ngIf="chart.options.includes('max')">
+            <label>Max value:</label><br />
+            <input type="number" [(ngModel)]="gaugeMax"><br />
+          </div>
 
-        <div *ngIf="chart.options.includes('value')">
-          <label>Value:</label><br />
-          <input type="number" [(ngModel)]="gaugeValue"><br />
-        </div>
+          <div *ngIf="chart.options.includes('value')">
+            <label>Value:</label><br />
+            <input type="number" [(ngModel)]="gaugeValue"><br />
+          </div>
 
-        <div *ngIf="chart.options.includes('largeSegments')">
-          <label>Number of large segments:</label><br />
-          <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
-        </div>
+          <div *ngIf="chart.options.includes('largeSegments')">
+            <label>Number of large segments:</label><br />
+            <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
+          </div>
 
-        <div *ngIf="chart.options.includes('smallSegments')">
-          <label>Number of small segments:</label><br />
-          <input type="number" [(ngModel)]="gaugeSmallSegments"><br />
-        </div>
+          <div *ngIf="chart.options.includes('smallSegments')">
+            <label>Number of small segments:</label><br />
+            <input type="number" [(ngModel)]="gaugeSmallSegments"><br />
+          </div>
 
-        <div *ngIf="chart.options.includes('units')">
-          <label>Units:</label><br />
-          <input type="text" [(ngModel)]="gaugeUnits"><br />
+          <div *ngIf="chart.options.includes('units')">
+            <label>Units:</label><br />
+            <input type="text" [(ngModel)]="gaugeUnits"><br />
+          </div>
         </div>
-
+        <h3><a href="https://swimlane.gitbooks.io/ng2d3/content/" target="_blank">Documentation</a></h3>
+        </div>
       </div>
     </main>
   `

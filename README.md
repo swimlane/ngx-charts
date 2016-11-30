@@ -1,6 +1,6 @@
 # ng2d3 [![Join the chat at https://gitter.im/swimlane/ng2d3](https://badges.gitter.im/swimlane/ng2d3.svg)](https://gitter.im/swimlane/ng2d3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/swimlane/ng2d3.svg?branch=master)](https://travis-ci.org/swimlane/ng2d3) [![Code Climate](https://codeclimate.com/github/swimlane/ng2d3/badges/gpa.svg)](https://codeclimate.com/github/swimlane/ng2d3) [![Test Coverage](https://codeclimate.com/github/swimlane/ng2d3/badges/coverage.svg)](https://codeclimate.com/github/swimlane/ng2d3/coverage) [![Dependency Status](https://david-dm.org/swimlane/ng2d3.svg)](https://david-dm.org/swimlane/ng2d3) [![devDependency Status](https://david-dm.org/swimlane/ng2d3/dev-status.svg)](https://david-dm.org/swimlane/ng2d3#info=devDependencies) [![npm version](https://badge.fury.io/js/ng2d3.svg)](http://badge.fury.io/js/ng2d3) [![npm downloads](https://img.shields.io/npm/dm/ng2d3.svg)](https://npmjs.org/ng2d3)
 
-D3 + Angular2 Composable Re-usable Charting Framework. 
+Angular2 + D3js Composable Re-usable Charting Framework. 
 
 ng2d3 is unique because we don't merely wrap d3, nor any other chart engine for that matter. It is using Angular to render and animate the SVG elements with all of its binding and speed goodness, and uses d3 for the excellent math functions, scales, axis and shape generators, etc. By having Angular do all of the rendering it opens us up to endless possibilities the Angular platform provides such as AoT, Universal, etc. 
 
