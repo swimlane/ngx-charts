@@ -30,6 +30,8 @@ import { id } from "../utils/id";
         <ng-content></ng-content>
       </svg:g>
 
+      <svg:rect x="0" [attr.width]="view[0]" y="0" [attr.height]="height" class="brush-background" />
+
       <svg:g class="brush">
       </svg:g>
 
