@@ -35,6 +35,9 @@ var PieChartComponent = (function (_super) {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
+            if (_this.labels) {
+                _this.margin = [30, 80, 30, 80];
+            }
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,

@@ -1,5 +1,5 @@
 /**
- * ng2d3 v"1.7.2" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.7.3" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -4103,15 +4103,24 @@ var AreaTooltip = (function () {
         for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
             var group = _a[_i];
             var item = group.series.find(function (d) { return d.name.toString() === xVal.toString(); });
+            var groupName = group.name;
+            if (groupName instanceof Date) {
+                groupName = groupName.toLocaleDateString();
+            }
             if (item) {
+                var label = item.name;
+                if (label instanceof Date) {
+                    label = label.toLocaleDateString();
+                }
                 var val = item.value;
                 if (this.showPercentage) {
                     val = (item.d1 - item.d0).toFixed(2) + '%';
                 }
                 results.push({
                     value: val,
-                    name: item.name,
-                    series: group.name
+                    name: label,
+                    series: groupName,
+                    color: this.colors(group.name)
                 });
             }
         }
@@ -4185,7 +4194,7 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[areaTooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"colors(tooltipItem.series)\">\n            </span>\n\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
@@ -5790,20 +5799,21 @@ var LegendComponent = (function () {
         var _this = this;
         var items = [];
         this.data.map(function (label, index) {
-            if (label.constructor.name === 'Date') {
-                label = label.toLocaleDateString();
+            var formattedLabel = label;
+            if (formattedLabel.constructor.name === 'Date') {
+                formattedLabel = formattedLabel.toLocaleDateString();
             }
             else {
-                label = label.toLocaleString();
+                formattedLabel = formattedLabel.toLocaleString();
             }
             var idx = items.findIndex(function (i) {
-                return i.label === label;
+                return i.label === formattedLabel;
             });
             if (idx === -1) {
                 items.push({
                     className: 'legend-label',
-                    label: label,
-                    trimmedLabel: label || '(empty)',
+                    label: formattedLabel,
+                    trimmedLabel: formattedLabel || '(empty)',
                     backgroundColor: _this.colors(label)
                 });
             }
@@ -5838,7 +5848,7 @@ var LegendComponent = (function () {
     LegendComponent = __decorate([
         core_1.Component({
             selector: 'legend',
-            template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li \n            tabindex=\"-1\"\n            *ngFor=\"let legendItem of legendItems\" \n            (click)=\"labelClick.emit(legendItem)\"\n            [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"colors(legendItem.label)\">\n            </span>\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+            template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            tabindex=\"-1\"\n            *ngFor=\"let legendItem of legendItems\"\n            (click)=\"labelClick.emit(legendItem)\"\n            [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"legendItem.backgroundColor\">\n            </span>\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -8991,7 +9001,7 @@ var CardComponent = (function () {
                 return;
             }
             var availableWidth = _this.cardWidth * 0.85;
-            var availableHeight = _this.cardHeight * 0.65;
+            var availableHeight = _this.cardHeight * 0.60;
             if (!_this.originalWidthRatio) {
                 _this.originalWidthRatio = availableWidth / width;
                 _this.originalWidth = availableWidth;
@@ -9591,6 +9601,9 @@ var PieChartComponent = (function (_super) {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
+            if (_this.labels) {
+                _this.margin = [30, 80, 30, 80];
+            }
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
@@ -10125,7 +10138,7 @@ var PieLabelComponent = (function () {
     PieLabelComponent = __decorate([
         core_1.Component({
             selector: 'g[pieLabel]',
-            template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
+            template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])

@@ -59,7 +59,7 @@ var CardComponent = (function () {
                 return;
             }
             var availableWidth = _this.cardWidth * 0.85;
-            var availableHeight = _this.cardHeight * 0.65;
+            var availableHeight = _this.cardHeight * 0.60;
             if (!_this.originalWidthRatio) {
                 _this.originalWidthRatio = availableWidth / width;
                 _this.originalWidth = availableWidth;

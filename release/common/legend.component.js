@@ -14,20 +14,21 @@ var LegendComponent = (function () {
         var _this = this;
         var items = [];
         this.data.map(function (label, index) {
-            if (label.constructor.name === 'Date') {
-                label = label.toLocaleDateString();
+            var formattedLabel = label;
+            if (formattedLabel.constructor.name === 'Date') {
+                formattedLabel = formattedLabel.toLocaleDateString();
             }
             else {
-                label = label.toLocaleString();
+                formattedLabel = formattedLabel.toLocaleString();
             }
             var idx = items.findIndex(function (i) {
-                return i.label === label;
+                return i.label === formattedLabel;
             });
             if (idx === -1) {
                 items.push({
                     className: 'legend-label',
-                    label: label,
-                    trimmedLabel: label || '(empty)',
+                    label: formattedLabel,
+                    trimmedLabel: formattedLabel || '(empty)',
                     backgroundColor: _this.colors(label)
                 });
             }
@@ -38,7 +39,7 @@ var LegendComponent = (function () {
     LegendComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'legend',
-                    template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li \n            tabindex=\"-1\"\n            *ngFor=\"let legendItem of legendItems\" \n            (click)=\"labelClick.emit(legendItem)\"\n            [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"colors(legendItem.label)\">\n            </span>\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+                    template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            tabindex=\"-1\"\n            *ngFor=\"let legendItem of legendItems\"\n            (click)=\"labelClick.emit(legendItem)\"\n            [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"legendItem.backgroundColor\">\n            </span>\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];

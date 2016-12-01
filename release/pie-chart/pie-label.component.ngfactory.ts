@@ -192,7 +192,7 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'title',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'',(null as any));
     this._text_3 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_4 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:text',new import3.InlineArray4(4,'class','label','dy','.35em'),(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:text',new import3.InlineArray4(4,'class','pie-label','dy','.35em'),(null as any));
     this._text_5 = this.renderer.createText(this._el_4,'',(null as any));
     this._text_6 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:path',new import3.InlineArray4(4,'class','line','fill','none'),(null as any));
@@ -239,7 +239,7 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
       this.renderer.setElementStyle(this._el_4,'textTransform',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_14).toString()));
       this._expr_14 = currVal_14;
     }
-    const currVal_15:any = import3.inlineInterpolate(1,'\n      ',this.context.trimLabel(this.context.label),'\n    ');
+    const currVal_15:any = import3.inlineInterpolate(1,'\n      ',this.context.trimLabel(this.context.label,10),'\n    ');
     if (import3.checkBinding(throwOnChange,this._expr_15,currVal_15)) {
       this.renderer.setText(this._text_5,currVal_15);
       this._expr_15 = currVal_15;

@@ -313,7 +313,7 @@ class View_LegendComponent1 extends import2.AppView<any> {
       this.renderer.setElementProperty(this._el_2,'title',currVal_9);
       this._expr_9 = currVal_9;
     }
-    const currVal_10:any = this.parentView.context.colors(this.context.$implicit.label);
+    const currVal_10:any = this.context.$implicit.backgroundColor;
     if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
       this.renderer.setElementStyle(this._el_2,'background-color',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10).toString()));
       this._expr_10 = currVal_10;

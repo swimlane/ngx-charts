@@ -466,7 +466,7 @@ class View_AreaTooltip3 extends import2.AppView<any> {
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_5:any = this.parentView.parentView.parentView.context.colors(this.context.$implicit.series);
+    const currVal_5:any = this.context.$implicit.color;
     if (import3.checkBinding(throwOnChange,this._expr_5,currVal_5)) {
       this.renderer.setElementStyle(this._el_2,'background-color',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_5) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_5).toString()));
       this._expr_5 = currVal_5;
