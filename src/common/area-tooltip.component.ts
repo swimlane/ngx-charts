@@ -34,7 +34,7 @@ import {
 
             <span
               class="tooltip-item-color"
-              [style.background-color]="colors(tooltipItem.series)">
+              [style.background-color]="tooltipItem.color">
             </span>
 
             {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}
@@ -131,16 +131,25 @@ export class AreaTooltip implements OnChanges {
     let results = [];
     for (let group of this.results) {
       let item = group.series.find(d => d.name.toString() === xVal.toString());
+      let groupName = group.name;
+      if (groupName instanceof Date) {
+        groupName = groupName.toLocaleDateString();
+      }
 
       if (item) {
+        let label = item.name;
+        if (label instanceof Date) {
+          label = label.toLocaleDateString();
+        }
         let val = item.value;
         if (this.showPercentage) {
           val = (item.d1 - item.d0).toFixed(2) + '%';
         }
         results.push({
           value: val,
-          name: item.name,
-          series: group.name
+          name: label,
+          series: groupName,
+          color: this.colors(group.name)
         });
       }
     }

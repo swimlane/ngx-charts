@@ -18,15 +18,15 @@ import {
       <div class="legend-wrap">
         <ul class="legend-labels"
           [style.max-height.px]="height - 45">
-          <li 
+          <li
             tabindex="-1"
-            *ngFor="let legendItem of legendItems" 
+            *ngFor="let legendItem of legendItems"
             (click)="labelClick.emit(legendItem)"
             [class]="legendItem.className">
             <span
               [title]="legendItem.label"
               class="legend-label-color"
-              [style.background-color]="colors(legendItem.label)">
+              [style.background-color]="legendItem.backgroundColor">
             </span>
             <span [title]="legendItem.label" class="legend-label-text">
               {{legendItem.trimmedLabel}}
@@ -61,21 +61,22 @@ export class LegendComponent implements OnChanges {
   getLegendItems(): any[] {
     let items = [];
     this.data.map((label, index) => {
-      if (label.constructor.name === 'Date') {
-        label = label.toLocaleDateString();
+      let formattedLabel = label;
+      if (formattedLabel.constructor.name === 'Date') {
+        formattedLabel = formattedLabel.toLocaleDateString();
       } else {
-        label = label.toLocaleString();
+        formattedLabel = formattedLabel.toLocaleString();
       }
 
       let idx = items.findIndex((i) => {
-        return i.label === label;
+        return i.label === formattedLabel;
       });
 
       if (idx === -1) {
         items.push({
           className: 'legend-label',
-          label: label,
-          trimmedLabel: label || '(empty)',
+          label: formattedLabel,
+          trimmedLabel: formattedLabel || '(empty)',
           backgroundColor: this.colors(label)
         });
       };
