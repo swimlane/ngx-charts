@@ -84,6 +84,10 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
     super.update();
 
     this.zone.run(() => {
+      if (this.labels) {
+        this.margin = [30, 80, 30, 80];
+      }
+
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,

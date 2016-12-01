@@ -13,13 +13,13 @@ import d3 from '../d3';
   template: `
     <title>{{label}}</title>
     <svg:text
-      class="label"
+      class="pie-label"
       [attr.transform]="transform"
       dy=".35em"
       [style.textAnchor]="textAnchor()"
       [style.shapeRendering]="'crispEdges'"
       [style.textTransform]="'uppercase'">
-      {{trimLabel(label)}}
+      {{trimLabel(label, 10)}}
     </svg:text>
     <svg:path
       [attr.d]="line"
