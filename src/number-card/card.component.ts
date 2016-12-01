@@ -150,7 +150,7 @@ export class CardComponent implements OnChanges {
       }
 
       let availableWidth = this.cardWidth * 0.85;
-      let availableHeight = this.cardHeight * 0.65;
+      let availableHeight = this.cardHeight * 0.60;
 
       if (!this.originalWidthRatio) {
         this.originalWidthRatio = availableWidth / width;
