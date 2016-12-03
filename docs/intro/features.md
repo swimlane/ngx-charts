@@ -2,22 +2,29 @@
 Out of the box, we wanted to create a low level robust framework on which
 to build charts. Outside of the following chart types:
 
-- Bars
-- Pie
-- Heat
-- Line
-- Area
-- Cards
+### Chart Types
+- Horizontal & Vertical Bar Charts (Standard, Grouped, Stacked, Normalized)
+- Line 
+- Area (Standard, Stacked, Normalized)
+- Pie (Explodable, Grid, Custom legends)
+- Donut
+- Gauge
+- Force Directed Graph
+- Heatmap
 - Treemap
+- Number Cards
 
-it also has a lot of 'smarts' such as:
-
-- Label Rotation based on Collision
-- Label Truncation based on Collision
-- Tooltips
-- Click events
-- Linked Hover Actions
-- Smart Labels for Currency/Dates/etc
+### Customization
+- Autoscaling
+- Timeline Filtering
+- Line Interpolation
+- Configurable Axis Labels
+- Legends (Labels & Gradient)
+- Advanced Label Positioning
+- Real-time data support
+- Advanced Tooltips
+- Data point Event Handlers
+- Works with ngUpgrade
 
 ## Coming Soon
 - Responsive Layout
