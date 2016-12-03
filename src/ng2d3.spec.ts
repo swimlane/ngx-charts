@@ -1,6 +1,6 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 
-import { NG2D3Module } from './ng2d3';
+import { NG2D3Module } from '.';
 
 /*
   This file is to import the main module. By importing it into this
