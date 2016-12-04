@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "./common/common.module";
+import { ChartCommonModule } from "./common/chart-common.module";
 import { AreaChartModule } from "./area-chart/area-chart.module";
 import { BarChartModule } from "./bar-chart/bar-chart.module";
 import { ForceDirectedGraphModule } from "./force-directed-graph/force-directed-graph.module";
@@ -12,7 +12,7 @@ import { GaugeModule } from "./gauge/gauge.module";
 
 @NgModule({
   exports: [
-    CommonModule,
+    ChartCommonModule,
     AreaChartModule,
     BarChartModule,
     ForceDirectedGraphModule,

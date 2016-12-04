@@ -1,12 +1,12 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "../common/common.module";
+import { ChartCommonModule } from "../common/chart-common.module";
 import { GaugeComponent } from "./gauge.component";
 import { PieChartModule } from "../pie-chart/pie-chart.module";
 
 export { GaugeComponent };
 
 @NgModule({
-  imports: [CommonModule, PieChartModule],
+  imports: [ChartCommonModule, PieChartModule],
   declarations: [
     GaugeComponent
   ],
