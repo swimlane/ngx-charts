@@ -11,6 +11,7 @@ import {
   NgZone
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
+import { invertColor } from '../utils/color-utils';
 
 @Component({
   selector: 'g[card]',
@@ -22,7 +23,6 @@ import { trimLabel } from '../common/trim-label.helper';
       <svg:rect
         class="card"
         [style.fill]="color"
-        [style.opacity]="0.3"
         style="cursor: pointer;"
         [attr.width]="cardWidth"
         [attr.height]="cardHeight"
@@ -42,6 +42,7 @@ import { trimLabel } from '../common/trim-label.helper';
                text-align: center;
                line-height: 1em;">
         <xhtml:p
+          [style.color]="getTextColor(color)"
           style="overflow: hidden;
                  white-space: nowrap;
                  text-overflow: ellipsis;
@@ -54,7 +55,7 @@ import { trimLabel } from '../common/trim-label.helper';
         [attr.y]="height * 0.30"
         dy=".35em"
         class="value-text"
-        [style.fill]="color"
+        [style.fill]="getTextColor(color)"
         text-anchor="middle"
         [style.font-size.pt]="textFontSize"
         style="pointer-events: none;">
@@ -125,6 +126,10 @@ export class CardComponent implements OnChanges {
         this.initialized = true;
       }
     });
+  }
+
+  getTextColor(color): string {
+    return invertColor(color);
   }
 
   countUp(current, max, step) {

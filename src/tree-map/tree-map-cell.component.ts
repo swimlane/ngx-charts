@@ -7,8 +7,8 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-// import { formatNumber } from 'common/utils/format';
 import d3 from '../d3';
+import { invertColor } from '../utils/color-utils';
 
 @Component({
   selector: 'g[treeMapCell]',
@@ -31,6 +31,7 @@ import d3 from '../d3';
         class="label"
         [style.pointer-events]="'none'">
         <xhtml:p
+          [style.color]="getTextColor()"
           [style.height]="height + 'px'"
           [style.width]="width + 'px'">
           {{label}}
@@ -87,6 +88,10 @@ export class TreeMapCellComponent implements OnChanges {
       .attr('y', this.y);
 
     this.animateToCurrentForm();
+  }
+
+  getTextColor(): string {
+    return invertColor(this.fill);
   }
 
   animateToCurrentForm(): void {
