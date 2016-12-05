@@ -176,22 +176,26 @@ export class TooltipDirective implements OnDestroy {
   hideTooltip(immediate?: boolean): void {
     if(!this.componentId) return;
 
-    const time = immediate ? 0 : this.tooltipHideTimeout;
-
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      // destroy component
-      this.tooltipService.destroy(this.componentId);
-
+    const destroyFn = () => {
       // remove events
       if(this.mouseLeaveContentEvent) this.mouseLeaveContentEvent();
       if(this.mouseEnterContentEvent) this.mouseEnterContentEvent();
       if(this.documentClickEvent) this.documentClickEvent();
 
+      // destroy component
+      this.tooltipService.destroy(this.componentId);
+
       // emit events
       this.hide.emit(true);
       this.componentId = undefined;
-    }, time);
+    };
+
+    clearTimeout(this.timeout);
+    if(!immediate) {
+      this.timeout = setTimeout(destroyFn, this.tooltipHideTimeout);
+    } else {
+      destroyFn();
+    }
   }
 
   private createBoundOptions(): TooltipOptions {

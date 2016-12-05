@@ -3,12 +3,12 @@ import { AreaChartComponent } from "./area-chart.component";
 import { AreaChartNormalizedComponent } from "./area-chart-normalized.component";
 import { AreaChartStackedComponent } from "./area-chart-stacked.component";
 import { AreaSeriesComponent } from "./area-series.component";
-import { CommonModule } from "../common/common.module";
+import { ChartCommonModule } from "../common/chart-common.module";
 
 export { AreaChartComponent, AreaChartNormalizedComponent, AreaChartStackedComponent, AreaSeriesComponent }
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [ChartCommonModule],
   declarations: [
     AreaChartComponent,
     AreaChartNormalizedComponent,

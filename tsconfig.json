@@ -22,6 +22,7 @@
     "declarationDir": "release"
   },
   "files": [
+    "src/declarations.d.ts",
     "src/index.ts"
   ],
   "exclude": [

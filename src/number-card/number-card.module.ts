@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "../common/common.module";
+import { ChartCommonModule } from "../common/chart-common.module";
 import { CardComponent } from "./card.component";
 import { CardSeriesComponent } from "./card-series.component";
 import { NumberCardComponent } from "./number-card.component";
@@ -7,7 +7,7 @@ import { NumberCardComponent } from "./number-card.component";
 export { CardComponent, CardSeriesComponent, NumberCardComponent };
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [ChartCommonModule],
   declarations: [
     CardComponent,
     CardSeriesComponent,

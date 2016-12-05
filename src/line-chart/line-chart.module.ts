@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "../common/common.module";
+import { ChartCommonModule } from "../common/chart-common.module";
 import { LineComponent } from "./line.component";
 import { LineChartComponent } from "./line-chart.component";
 import { LineSeriesComponent } from "./line-series.component";
@@ -7,7 +7,7 @@ import { LineSeriesComponent } from "./line-series.component";
 export { LineComponent, LineChartComponent, LineSeriesComponent };
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [ChartCommonModule],
   declarations: [
     LineComponent,
     LineChartComponent,
