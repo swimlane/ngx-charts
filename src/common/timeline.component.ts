@@ -19,36 +19,26 @@ import { id } from "../utils/id";
     <svg:g
       class="timeline"
       [attr.transform]="transform">
-
       <svg:filter [attr.id]="filterId">
         <svg:feColorMatrix in="SourceGraphic"
             type="matrix"
             values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0" />
       </svg:filter>
-
       <svg:g class="embedded-chart">
         <ng-content></ng-content>
       </svg:g>
-
-      <svg:rect x="0" [attr.width]="view[0]" y="0" [attr.height]="height" class="brush-background" />
-
-      <svg:g class="brush">
-      </svg:g>
-
+      <svg:rect x="0" 
+        [attr.width]="view[0]" 
+        y="0" 
+        [attr.height]="height" 
+        class="brush-background" 
+      />
+      <svg:g class="brush"></svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Timeline implements OnChanges {
-  element: HTMLElement;
-  dims: any;
-  xDomain: any[];
-  xScale: any;
-  brush: any;
-  transform: string;
-  initialized: boolean = false;
-  filterId: any;
-  filter: any;
 
   @Input() view;
   @Input() state;
@@ -63,6 +53,16 @@ export class Timeline implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
+
+  element: HTMLElement;
+  dims: any;
+  xDomain: any[];
+  xScale: any;
+  brush: any;
+  transform: string;
+  initialized: boolean = false;
+  filterId: any;
+  filter: any;
 
   constructor(element: ElementRef, private zone: NgZone, private cd: ChangeDetectorRef) {
     this.element = element.nativeElement;

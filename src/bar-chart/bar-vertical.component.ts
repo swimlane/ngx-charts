@@ -160,9 +160,13 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
 
   xAxisTickFormatting() {
     let tickFormatting;
+
     if (this.results.query && this.results.query.dimensions.length) {
-      tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
+      tickFormatting = tickFormat(
+        this.results.query.dimensions[0].field.fieldType, 
+        this.results.query.dimensions[0].groupByType.value);
     }
+    
     return tickFormatting;
   }
 
