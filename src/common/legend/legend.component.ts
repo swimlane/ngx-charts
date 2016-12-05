@@ -1,10 +1,6 @@
 import {
-  Component,
-  Input,
-  OnChanges,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter
+  Component, Input, OnChanges, ChangeDetectionStrategy,
+  Output, EventEmitter, SimpleChanges
  } from '@angular/core';
 
 @Component({
@@ -50,7 +46,7 @@ export class LegendComponent implements OnChanges {
 
   legendItems: any;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

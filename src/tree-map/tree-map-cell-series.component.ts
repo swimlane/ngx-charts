@@ -3,6 +3,7 @@ import {
   OnChanges,
   Input,
   Output,
+  SimpleChanges,
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -38,7 +39,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
 
   cells: any[];
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.cells = this.getCells();
   }
 

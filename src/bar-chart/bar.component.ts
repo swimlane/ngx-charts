@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   ElementRef,
+  SimpleChanges,
   OnInit,
   OnChanges,
   ChangeDetectionStrategy
@@ -66,7 +67,7 @@ export class BarComponent implements OnInit, OnChanges {
     this.startOpacity = this.getStartOpacity();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     // ngOnInit gets called after ngOnChanges, so we need to do this here
     if (!this.initialized) {
       this.loadAnimation();
@@ -76,16 +77,16 @@ export class BarComponent implements OnInit, OnChanges {
     }
   }
 
-  update() {
+  update(): void {
     this.animateToCurrentForm();
   }
 
-  loadAnimation() {
+  loadAnimation(): void {
     this.path = this.getStartingPath();
     setTimeout(this.update.bind(this), 100);
   }
 
-  animateToCurrentForm() {
+  animateToCurrentForm(): void {
     let node = d3.select(this.element).select('.bar');
     let path = this.getPath();
 
@@ -186,7 +187,7 @@ export class BarComponent implements OnInit, OnChanges {
     return retval;
   }
 
-  click() {
+  click(): void {
     this.clickHandler.emit(this.data);
   }
 

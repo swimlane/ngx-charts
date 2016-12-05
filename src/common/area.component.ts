@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   Output,
+  SimpleChanges,
   EventEmitter,
   ElementRef,
   OnChanges,
@@ -55,7 +56,7 @@ export class AreaComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (!this.initialized) {
       this.loadAnimation();
       this.initialized = true;

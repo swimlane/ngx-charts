@@ -7,6 +7,7 @@ import {
   trigger,
   style,
   transition,
+  SimpleChanges,
   animate,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -60,11 +61,11 @@ export class SeriesHorizontal implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnChanges(changes) {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     let d0 = 0;
     let total;
     if (this.type === 'normalized') {
@@ -138,7 +139,7 @@ export class SeriesHorizontal implements OnChanges {
     return bar.label;
   }
 
-  click(data) {
+  click(data): void {
     this.clickHandler.emit(data);
   }
 }

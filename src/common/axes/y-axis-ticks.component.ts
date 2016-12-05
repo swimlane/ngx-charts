@@ -7,7 +7,8 @@ import {
   ViewChild,
   EventEmitter,
   AfterViewInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  SimpleChanges
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
@@ -83,7 +84,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     this.trimLabel = trimLabel;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

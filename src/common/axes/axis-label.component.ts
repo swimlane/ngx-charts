@@ -3,6 +3,7 @@ import {
   Input,
   ElementRef,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 
@@ -42,11 +43,11 @@ export class AxisLabelComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.strokeWidth = '0.01';
     this.textAnchor = 'middle';
     this.transform = '';

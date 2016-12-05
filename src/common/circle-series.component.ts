@@ -1,10 +1,6 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  ChangeDetectionStrategy
+  Component, Input, Output, SimpleChanges, EventEmitter,
+  OnChanges, ChangeDetectionStrategy
 } from '@angular/core';
 import * as moment from 'moment';
 
@@ -60,7 +56,7 @@ export class CircleSeriesComponent implements OnChanges {
   circles: any[];
   barVisible: boolean = false;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

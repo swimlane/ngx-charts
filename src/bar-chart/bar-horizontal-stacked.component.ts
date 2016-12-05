@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnChanges,
   OnDestroy,
+  SimpleChanges,
   trigger,
   style,
   transition,
@@ -116,11 +117,11 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

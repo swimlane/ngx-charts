@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  SimpleChanges,
   Output,
   EventEmitter,
   OnChanges,
@@ -53,32 +54,24 @@ export class XAxisComponent implements OnChanges {
   @Output() dimensionsChanged = new EventEmitter();
 
   xAxisTickCount: any;
-  xAxisClassName: any;
-  xOrient: any;
+  xAxisClassName: string = 'x axis';
+  xOrient: string = 'bottom';
   tickArguments: any;
-  xAxisOffset: any;
   transform: any;
   labelOffset: number = 80;
+  fill: string = 'none';
+  stroke: string = 'stroke';
+  tickStroke: string = '#ccc';
+  strokeWidth: string = 'none';
+  xAxisOffset: number = 5;
 
   @ViewChild(XAxisTicksComponent) ticksComponent: XAxisTicksComponent;
 
-  constructor() {
-    Object.assign(this, {
-      xAxisClassName: 'x axis',
-      xOrient: 'bottom',
-      fill: 'none',
-      stroke: 'none',
-      tickStroke: '#ccc',
-      strokeWidth: 'none',
-      xAxisOffset: 5,
-    });
-  }
-
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.transform = `translate(0,${this.xAxisOffset + this.dims.height})`;
 
     if (typeof this.xAxisTickCount !== 'undefined') {
@@ -86,7 +79,7 @@ export class XAxisComponent implements OnChanges {
     }
   }
 
-  emitTicksHeight({height}) {
+  emitTicksHeight({ height }): void {
     let newLabelOffset = height + 25 + 5;
     if (newLabelOffset !== this.labelOffset) {
       this.labelOffset = newLabelOffset;

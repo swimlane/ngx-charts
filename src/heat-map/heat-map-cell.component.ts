@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  SimpleChanges,
   ElementRef,
   OnChanges,
   ChangeDetectionStrategy
@@ -59,7 +60,7 @@ export class HeatMapCellComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.transform = `translate(${this.x} , ${this.y})`;
     let pageUrl = window.location.href;
     this.startOpacity = 0.3;

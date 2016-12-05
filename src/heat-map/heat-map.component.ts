@@ -9,6 +9,7 @@ import {
   ElementRef,
   NgZone,
   ChangeDetectorRef,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
@@ -107,7 +108,7 @@ export class HeatMapComponent extends BaseChartComponent implements OnChanges, O
     this.unbindEvents();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

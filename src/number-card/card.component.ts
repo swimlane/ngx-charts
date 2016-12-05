@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   ElementRef,
+  SimpleChanges,
   OnChanges,
   ViewChild,
   ChangeDetectionStrategy,
@@ -99,11 +100,11 @@ export class CardComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.zone.run(() => {
       this.transform = `translate(${this.x} , ${this.y})`;
 

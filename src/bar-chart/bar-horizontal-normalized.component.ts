@@ -9,6 +9,7 @@ import {
   style,
   transition,
   animate,
+  SimpleChanges,
   ElementRef,
   NgZone,
   AfterViewInit,
@@ -116,15 +117,15 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent impleme
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {

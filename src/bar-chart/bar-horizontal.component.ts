@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  SimpleChanges,
   OnDestroy,
   NgZone,
   ElementRef,
@@ -97,11 +98,11 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

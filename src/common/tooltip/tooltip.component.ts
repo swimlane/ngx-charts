@@ -1,7 +1,7 @@
 import {
   Input, Component, ElementRef, AfterViewInit,
   HostListener, ViewChild, HostBinding, Renderer,
-  trigger, state, transition, style, animate
+  trigger, state, transition, style, animate, TemplateRef
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
@@ -62,6 +62,8 @@ export class TooltipContentComponent implements AfterViewInit {
   @Input() alignment: AlignmentTypes;
   @Input() spacing: number;
   @Input() cssClass: string;
+  @Input() title: string;
+  @Input() template: TemplateRef<any>;
 
   @ViewChild('caretElm') caretElm;
 

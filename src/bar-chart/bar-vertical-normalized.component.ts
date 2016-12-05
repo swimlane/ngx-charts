@@ -7,6 +7,7 @@ import {
   OnDestroy,
   trigger,
   style,
+  SimpleChanges,
   transition,
   animate,
   NgZone,
@@ -116,15 +117,15 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent implement
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {

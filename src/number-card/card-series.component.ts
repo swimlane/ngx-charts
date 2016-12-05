@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy,
   NgZone
 } from '@angular/core';
@@ -46,7 +47,7 @@ export class CardSeriesComponent implements OnChanges {
 
   constructor(private zone: NgZone) { }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

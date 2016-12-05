@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  SimpleChanges,
   Output,
   EventEmitter,
   OnChanges,
@@ -38,7 +39,7 @@ export class CircleComponent implements OnChanges {
 
   @Output() clickHandler = new EventEmitter();
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.classNames = this.classNames.join(' ') + 'circle';
   }
 

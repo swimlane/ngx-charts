@@ -1,13 +1,7 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ElementRef,
-  OnChanges,
-  ChangeDetectionStrategy,
-  NgZone,
-  ChangeDetectorRef
+  Component, Input, Output, EventEmitter, ElementRef,
+  OnChanges, ChangeDetectionStrategy, NgZone,
+  ChangeDetectorRef, SimpleChanges
 } from '@angular/core';
 import * as moment from 'moment';
 import d3 from '../d3';
@@ -68,7 +62,7 @@ export class Timeline implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
 
     if (!this.initialized) {
@@ -77,7 +71,7 @@ export class Timeline implements OnChanges {
     }
   }
 
-  update() {
+  update(): void {
     this.zone.run(() => {
       this.dims = this.getDims();
       this.height = this.dims.height;

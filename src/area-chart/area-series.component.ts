@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
@@ -41,17 +42,16 @@ export class AreaSeriesComponent implements OnChanges {
   path: string;
   startingPath: string;
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     let area;
     let startingArea;
 
     let xProperty = (d) => {
-      let label = d.name;
-
+      const label = d.name;
       return this.xScale(label);
     };
 

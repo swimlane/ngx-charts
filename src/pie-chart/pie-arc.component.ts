@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   ElementRef,
+  SimpleChanges,
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -70,7 +71,7 @@ export class PieArcComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

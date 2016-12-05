@@ -1,8 +1,5 @@
 import {
-  Component,
-  Input,
-  OnChanges,
-  ChangeDetectionStrategy
+  Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges
 } from '@angular/core';
 
 @Component({
@@ -35,14 +32,14 @@ export class SvgRadialGradientComponent implements OnChanges {
   @Input() startOpacity;
   @Input() endOpacity = 1;
 
-  ngOnChanges() {
+  cx: number;
+  cy: number;
+  r: string;
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.cx = 0;
     this.cy = 0;
     this.r = "30%";
   }
-
-  cx: number;
-  cy: number;
-  r: string;
   
 }

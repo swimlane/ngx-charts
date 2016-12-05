@@ -8,6 +8,7 @@ import {
   HostListener,
   NgZone,
   ElementRef,
+  SimpleChanges,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef
@@ -174,11 +175,11 @@ export class AreaChartComponent extends BaseChartComponent implements OnChanges,
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

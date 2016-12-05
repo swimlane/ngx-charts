@@ -6,6 +6,7 @@ import {
   OnChanges,
   OnDestroy,
   AfterViewInit,
+  SimpleChanges,
   ElementRef,
   NgZone,
   ViewChild,
@@ -102,6 +103,7 @@ export class GaugeComponent extends BaseChartComponent implements OnChanges, OnD
   @Input() units: string;
   @Input() bigSegments: number = 10;
   @Input() smallSegments: number = 5;
+  @Input() legend;
 
   @Output() clickHandler = new EventEmitter();
   
@@ -138,7 +140,7 @@ export class GaugeComponent extends BaseChartComponent implements OnChanges, OnD
     this.unbindEvents();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

@@ -10,6 +10,7 @@ import {
   transition,
   animate,
   ElementRef,
+  SimpleChanges,
   NgZone,
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -120,15 +121,15 @@ export class BarVerticalStackedComponent extends BaseChartComponent implements O
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {

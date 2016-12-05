@@ -1,5 +1,6 @@
 import {
   Component,
+  SimpleChanges,
   Input,
   Output,
   EventEmitter,
@@ -60,7 +61,7 @@ export class PieSeriesComponent implements OnChanges {
   max: number;
   data: any;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

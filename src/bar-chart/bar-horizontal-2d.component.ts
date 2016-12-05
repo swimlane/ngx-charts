@@ -11,6 +11,7 @@ import {
   animate,
   ElementRef,
   NgZone,
+  SimpleChanges,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef
@@ -123,15 +124,15 @@ export class BarHorizontal2DComponent extends BaseChartComponent implements OnCh
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {

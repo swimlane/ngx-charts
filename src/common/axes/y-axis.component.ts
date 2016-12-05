@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnChanges,
   ViewChild,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import { YAxisTicksComponent } from './y-axis-ticks.component';
@@ -51,33 +52,26 @@ export class YAxisComponent implements OnChanges {
 
   @Output() dimensionsChanged = new EventEmitter();
 
+  yAxisClassName: string = 'y axis';
   yAxisTickCount: any;
   tickArguments: any;
   offset: any;
   transform: any;
-  yAxisOffset: any;
-  yOrient: any;
+  yAxisOffset: number = -5;
+  yOrient: string = 'left';
   labelOffset: number = 80;
+  fill: string = 'none';
+  stroke: string = '#CCC';
+  tickStroke: string = '#CCC';
+  strokeWidth: number = 1;
 
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
-  constructor() {
-    Object.assign(this, {
-      yAxisClassName: 'y axis',
-      yOrient: 'left',
-      fill: 'none',
-      stroke: '#ccc',
-      tickStroke: '#ccc',
-      strokeWidth: '1',
-      yAxisOffset: -5
-    });
-  }
-
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.offset = this.yAxisOffset;
     if (this.yOrient === 'right') {
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
@@ -90,7 +84,7 @@ export class YAxisComponent implements OnChanges {
     }
   }
 
-  emitTicksWidth({width}) {
+  emitTicksWidth({ width }): void {
     if (width !== this.labelOffset) {
       this.labelOffset = width;
       setTimeout(() => {

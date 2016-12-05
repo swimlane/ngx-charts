@@ -10,6 +10,7 @@ import {
   transition,
   animate,
   NgZone,
+  SimpleChanges,
   ElementRef,
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -122,15 +123,15 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {

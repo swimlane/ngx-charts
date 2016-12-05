@@ -7,6 +7,7 @@ import {
   OnDestroy,
   AfterViewInit,
   ElementRef,
+  SimpleChanges,
   NgZone,
   ChangeDetectionStrategy,
   ChangeDetectorRef
@@ -64,7 +65,7 @@ export class NumberCardComponent extends BaseChartComponent implements OnChanges
     this.unbindEvents();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

@@ -3,6 +3,7 @@ import {
   Input,
   ElementRef,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
@@ -53,7 +54,7 @@ export class PieLabelComponent implements OnChanges {
     this.trimLabel = trimLabel;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

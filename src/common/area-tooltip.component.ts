@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnChanges,
   ViewChildren,
+  SimpleChanges,
   Renderer,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -73,19 +74,17 @@ export class AreaTooltip implements OnChanges {
 
   @ViewChildren('tooltips') tooltips;
 
+  constructor(private renderer:Renderer) { }
 
-  constructor(private renderer:Renderer) {
-  }
-
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.tooltipAreas = this.getTooltipAreas();
   }
 
-  getTooltipAreas() {
+  getTooltipAreas(): any[] {
     let uniqueSet = this.getUniqueValues(this.xSet);
 
     uniqueSet = uniqueSet.sort((a, b) => {
@@ -121,8 +120,9 @@ export class AreaTooltip implements OnChanges {
     return results;
   }
 
-  getValues(xVal) {
+  getValues(xVal): any[] {
     let results = [];
+
     for (let group of this.results) {
       let item = group.series.find(d => d.name.toString() === xVal.toString());
       let groupName = group.name;
@@ -151,7 +151,7 @@ export class AreaTooltip implements OnChanges {
     return results;
   }
 
-  getUniqueValues(array) {
+  getUniqueValues(array): any[] {
     let results = [];
 
     for (let i = 0; i < array.length; i++) {
@@ -169,7 +169,7 @@ export class AreaTooltip implements OnChanges {
     return results;
   }
 
-  showTooltip(index) {
+  showTooltip(index): void {
     let tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
     let event = new MouseEvent('mouseenter', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
@@ -177,7 +177,7 @@ export class AreaTooltip implements OnChanges {
     this.hover.emit(this.tooltipAreas[index]);
   }
 
-  hideTooltip(index) {
+  hideTooltip(index): void {
     let tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
     let event = new MouseEvent('mouseleave', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);

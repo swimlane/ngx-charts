@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 
@@ -41,7 +42,7 @@ export class SvgLinearGradientComponent implements OnChanges {
   y1: any;
   y2: any;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.x1 = '0%';
     this.x2 = '0%';
     this.y1 = '0%';

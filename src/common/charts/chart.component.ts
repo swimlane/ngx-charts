@@ -1,15 +1,7 @@
 import {
-  Component,
-  Input,
-  OnChanges,
-  trigger,
-  style,
-  transition,
-  animate,
-  ViewContainerRef,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  Output
+  Component, Input, OnChanges, trigger, style, transition,
+  animate, ViewContainerRef, ChangeDetectionStrategy, EventEmitter,
+  Output, SimpleChanges
 } from '@angular/core';
 import { InjectionService } from '../../utils/injection.service';
 
@@ -77,11 +69,11 @@ export class ChartComponent implements OnChanges {
     this.injectionService.setRootViewContainer(vcr);
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  update() {
+  update(): void {
     this.legendWidth = 0;
 
     if (this.legend) {
@@ -97,7 +89,7 @@ export class ChartComponent implements OnChanges {
     this.chartWidth = 12 - this.legendWidth;
   }
 
-  getLegendType() {
+  getLegendType(): string {
     if (typeof this.legendData === 'function') {
       return 'scaleLegend';
     } else {
@@ -105,7 +97,7 @@ export class ChartComponent implements OnChanges {
     }
   }
 
-  onLegendLabelClick(name) {
+  onLegendLabelClick(name): void {
     this.legendLabelClick.emit({name: name});
   }
 }

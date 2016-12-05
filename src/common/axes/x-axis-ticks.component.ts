@@ -6,6 +6,7 @@ import {
   OnChanges,
   ElementRef,
   ViewChild,
+  SimpleChanges,
   AfterViewInit,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -55,13 +56,13 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   @Output() dimensionsChanged = new EventEmitter();
 
-  verticalSpacing: any;
-  rotateLabels: any;
-  innerTickSize: any;
-  outerTickSize: any;
-  tickPadding: any;
-  textAnchor: any;
-  maxTicksLength: any;
+  verticalSpacing: number = 20;
+  rotateLabels: boolean = false;
+  innerTickSize: number = 6;
+  outerTickSize: number = 6;
+  tickPadding: number = 3;
+  textAnchor: string = 'middle';
+  maxTicksLength: number = 0;
   maxAllowedLength: number = 16;
   trimLabel: any;
   adjustedScale: any;
@@ -74,27 +75,18 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   @ViewChild('ticksel') ticksElement: ElementRef;
 
   constructor() {
-    Object.assign(this, {
-      innerTickSize: 6,
-      outerTickSize: 6,
-      tickPadding: 3,
-      rotateLabels: false,
-      verticalSpacing: 20,
-      textAnchor: 'middle',
-      maxTicksLength: 0,
-      trimLabel: trimLabel
-    });
+    this.trimLabel = trimLabel;
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     setTimeout(() => this.updateDims());
   }
 
-  updateDims() {
+  updateDims(): void {
     const height = parseInt(this.ticksElement.nativeElement.getBoundingClientRect().height, 10);
     if (height !== this.height) {
       this.height = height;
@@ -103,7 +95,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  update() {
+  update(): void {
     let scale = this.scale;
     this.ticks = this.getTicks();
 
@@ -138,7 +130,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     setTimeout(() => this.updateDims());
   }
 
-  getRotationAngle(ticks) {
+  getRotationAngle(ticks): number {
     let angle = 0;
     for (let i = 0; i < ticks.length; i++) {
       let tick = ticks[i].toString();
@@ -183,19 +175,20 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       ticks = this.scale.domain();
       ticks = reduceTicks(ticks, maxTicks);
     }
+
     return ticks;
   }
 
-  getMaxTicks() {
+  getMaxTicks(): number {
     let tickWidth = 20;
     return Math.floor(this.width / tickWidth);
   }
 
-  tickTransform(tick) {
+  tickTransform(tick): string {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
   }
 
-  gridLineTransform() {
+  gridLineTransform(): string {
     return `translate(0,${-this.verticalSpacing - 5})`;
   }
 

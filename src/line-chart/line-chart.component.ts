@@ -7,6 +7,7 @@ import {
   OnDestroy,
   AfterViewInit,
   HostListener,
+  SimpleChanges,
   ElementRef,
   NgZone,
   ChangeDetectionStrategy,
@@ -177,7 +178,7 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
     this.unbindEvents();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

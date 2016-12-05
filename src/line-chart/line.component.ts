@@ -3,7 +3,6 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
   ElementRef,
   trigger,
   style,
@@ -39,7 +38,7 @@ import {
     ])
   ]
 })
-export class LineComponent implements OnChanges {
+export class LineComponent {
 
   @Input() path;
   @Input() stroke;
@@ -51,10 +50,6 @@ export class LineComponent implements OnChanges {
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
-  }
-
-  ngOnChanges(): void {
-    // add update animation
   }
 
 }

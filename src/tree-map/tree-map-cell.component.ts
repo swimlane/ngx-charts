@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ElementRef,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
@@ -65,7 +66,7 @@ export class TreeMapCellComponent implements OnChanges {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

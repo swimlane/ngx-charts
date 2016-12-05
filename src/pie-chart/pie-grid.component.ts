@@ -6,6 +6,7 @@ import {
   OnChanges,
   OnDestroy,
   AfterViewInit,
+  SimpleChanges,
   ElementRef,
   NgZone,
   ChangeDetectionStrategy,
@@ -101,7 +102,7 @@ export class PieGridComponent extends BaseChartComponent implements OnChanges, O
     this.unbindEvents();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

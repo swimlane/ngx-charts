@@ -1,5 +1,6 @@
 import {
   Component,
+  SimpleChanges,
   Input,
   OnChanges,
   ChangeDetectionStrategy
@@ -29,7 +30,7 @@ export class GridPanelSeriesComponent implements OnChanges {
   @Input() yScale;
   @Input() orient;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

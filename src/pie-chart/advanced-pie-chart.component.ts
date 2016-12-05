@@ -5,6 +5,7 @@ import {
   EventEmitter,
   OnChanges,
   OnDestroy,
+  SimpleChanges,
   AfterViewInit,
   NgZone,
   ElementRef,
@@ -119,7 +120,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
     this.unbindEvents();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

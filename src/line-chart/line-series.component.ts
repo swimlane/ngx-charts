@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
@@ -30,7 +31,7 @@ export class LineSeriesComponent implements OnChanges {
 
   path: string;
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

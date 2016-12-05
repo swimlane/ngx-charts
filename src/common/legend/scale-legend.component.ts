@@ -1,8 +1,5 @@
 import {
-  Component,
-  Input,
-  OnChanges,
-  ChangeDetectionStrategy
+  Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -38,7 +35,7 @@ export class ScaleLegendComponent implements OnChanges {
 
   constructor(private sanitizer: DomSanitizer) { }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     let gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
     this.gradient = this.sanitizer.bypassSecurityTrustStyle(`linear-gradient(to bottom, ${gradientValues})`);
   }

@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  SimpleChanges,
   Output,
   EventEmitter,
   OnChanges,
@@ -41,7 +42,7 @@ export class HeatCellSeriesComponent implements OnChanges {
 
   cells: any[];
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 

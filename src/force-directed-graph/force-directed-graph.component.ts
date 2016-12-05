@@ -1,23 +1,15 @@
+import {
+  Component, ContentChild, ElementRef, EventEmitter,
+  HostListener, Input, SimpleChanges, NgZone,
+  OnChanges, Output, TemplateRef, ViewChild,
+  ChangeDetectorRef, ChangeDetectionStrategy
+} from '@angular/core';
+
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import d3 from '../d3';
 import { colorHelper } from '../utils/color-sets';
-import {
-  Component,
-  ContentChild,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  NgZone,
-  OnChanges,
-  Output,
-  TemplateRef,
-  ViewChild,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy
-} from '@angular/core';
 
 @Component({
   selector: 'force-directed-graph',
@@ -103,7 +95,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent implements O
     super(element, zone, cd);
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
