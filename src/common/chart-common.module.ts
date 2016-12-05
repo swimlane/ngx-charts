@@ -14,6 +14,7 @@ import { CommonModule } from "@angular/common";
 import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
 import { BaseChartComponent } from "./base-chart.component";
+import "./rxjs-extensions";
 
 export { 
   ChartComponent, CircleSeriesComponent, CircleComponent, GridPanelComponent, 
