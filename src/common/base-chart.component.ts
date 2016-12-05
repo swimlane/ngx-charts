@@ -75,11 +75,11 @@ export abstract class BaseChartComponent {
 
   /**
    * Clones the data into a new object
-   * 
+   *
    * @private
    * @param {any} data
    * @returns {*}
-   * 
+   *
    * @memberOf BaseChart
    */
   private cloneData(data): any {
@@ -108,8 +108,27 @@ export abstract class BaseChartComponent {
     return results;
   }
 
+  // converts all date objects that appear as name into formatted date strings
+  formatDates() {
+    for (let i = 0; i < this.results.length; i++) {
+      let g = this.results[i];
+      if (g.name instanceof Date){
+        g.name = g.name.toLocaleDateString();
+      }
+
+      if (g.series) {
+        for (let j = 0; j < g.series.length; j++) {
+          let d = g.series[j];
+          if (d.name instanceof Date){
+            d.name = d.name.toLocaleDateString()
+          }
+        }
+      }
+    }
+  }
+
   abstract setColors(): void;
-  
+
   abstract onClick(data, group): void;
 
 }

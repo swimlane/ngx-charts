@@ -130,7 +130,7 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
 
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     });
-  }  
+  }
 
   getXScale() {
     const spacing = 0.2;

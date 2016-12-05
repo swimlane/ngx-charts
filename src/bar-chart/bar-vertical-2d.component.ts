@@ -149,6 +149,8 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
         columns: 10
       });
 
+      this.formatDates();
+
       this.groupDomain = this.getGroupDomain();
       this.innerDomain = this.getInnerDomain();
       this.valuesDomain = this.getValueDomain();

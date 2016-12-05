@@ -82,7 +82,7 @@ import d3 from '../d3';
   ]
 })
 export class BarVerticalStackedComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-  
+
   @Input() view;
   @Input() results;
   @Input() scheme;
@@ -146,6 +146,8 @@ export class BarVerticalStackedComponent extends BaseChartComponent implements O
         showLegend: this.legend,
         columns: 10
       });
+
+      this.formatDates();
 
       this.groupDomain = this.getGroupDomain();
       this.innerDomain = this.getInnerDomain();

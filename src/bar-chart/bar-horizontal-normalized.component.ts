@@ -143,6 +143,8 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent impleme
         columns: 10
       });
 
+      this.formatDates();
+
       this.groupDomain = this.getGroupDomain();
       this.innerDomain = this.getInnerDomain();
       this.valueDomain = this.getValueDomain();

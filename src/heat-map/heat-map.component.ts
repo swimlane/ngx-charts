@@ -130,6 +130,8 @@ export class HeatMapComponent extends BaseChartComponent implements OnChanges, O
         columns: 11
       });
 
+      this.formatDates();
+
       this.xDomain = this.getXDomain();
       this.yDomain = this.getYDomain();
       this.valueDomain = this.getValueDomain();
