@@ -52,7 +52,7 @@ import { trimLabel } from '../common/trim-label.helper';
       <svg:text #textEl
         [attr.x]="cardWidth / 2"
         [attr.y]="height * 0.30"
-        dy='.35em'
+        dy=".35em"
         class="value-text"
         [style.fill]="color"
         text-anchor="middle"
@@ -62,7 +62,7 @@ import { trimLabel } from '../common/trim-label.helper';
       </svg:text>
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnChanges {
 

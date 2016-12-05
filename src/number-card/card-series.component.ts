@@ -32,7 +32,7 @@ export interface CardModel {
       (clickHandler)="onClick($event)"
     />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardSeriesComponent implements OnChanges {
 

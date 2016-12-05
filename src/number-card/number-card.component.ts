@@ -33,7 +33,7 @@ import { gridLayout } from '../common/grid-layout.helper';
       </svg:g>
     </chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NumberCardComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
 
