@@ -336,14 +336,19 @@
   }
 }
 
+.tree-map {
+  .treemap-val {
+    font-size: 1.3em;
+    padding-top: 5px;
+    display: inline-block;
+  }
+}
+
 .gauge {
   .background-arc {
     path {
       fill: rgba(0,0,0,0.05);
     }
-  }
-
-  text {
   }
 
   .gauge-tick {
@@ -367,9 +372,11 @@
       }
     }
   }
+
   .gauge-tick-large path {
     stroke-width: 2px;
   }
+
   .gauge-tick-small path{
     stroke-width: 1px;
   }

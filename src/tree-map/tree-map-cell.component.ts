@@ -5,6 +5,8 @@ import {
   EventEmitter,
   ElementRef,
   OnChanges,
+  ChangeDetectorRef,
+  NgZone,
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -35,9 +37,13 @@ import { invertColor } from '../utils/color-utils';
           [style.color]="getTextColor()"
           [style.height]="height + 'px'"
           [style.width]="width + 'px'">
-          {{label}}
-          <xhtml:br/>
-          {{formattedValue}}
+          <xhtml:span class="treemap-label">
+            {{label}}
+          </xhtml:span>
+          <xhtml:br />
+          <xhtml:span class="treemap-val">
+            {{formattedValue}}
+          </xhtml:span>
         </xhtml:p>
       </svg:foreignObject>
     </svg:g>
@@ -62,7 +68,7 @@ export class TreeMapCellComponent implements OnChanges {
   formattedValue: string; // todo check string or number ?
   initialized: boolean = false;
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
   }
 
@@ -71,13 +77,19 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   update(): void {
-    this.formattedValue = this.value.toLocaleString();
+    // this.formattedValue = this.value.toLocaleString();
+    
     if (this.initialized) {
       this.animateToCurrentForm();
     } else {
       this.loadAnimation();
       this.initialized = true;
     }
+
+    setTimeout(() => {
+      let step = this.value / 100;
+      this.countUp(0, this.value, step);
+    }, 20);
   }
 
   loadAnimation(): void {
@@ -112,4 +124,20 @@ export class TreeMapCellComponent implements OnChanges {
       value: this.value
     });
   }
+
+  countUp(current, max, step) {
+    this.zone.run(() => {
+      this.formattedValue = Math.round(current).toLocaleString();
+      this.cd.markForCheck();
+
+      if (current >= max) return;
+
+      let newValue = Math.min(current + step, max);
+
+      setTimeout(() => {
+        this.countUp(newValue, max, step);
+      }, 16);
+    });
+  }
+
 }
