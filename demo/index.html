@@ -42,25 +42,31 @@
       [hidden] { 
         display: none !important; 
       }
-      iframe {
+      .social-toolbox {
         position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
         top: 10px;
-        right: 200px;
+        right: 0;
         z-index: 999;
+        width: 75%;
+      }
+      iframe {
+        margin-right: 5px;
       }
       .addthis_inline_share_toolbox {
-        position: absolute;
-        z-index: 999;
-        top: 10px;
-        right: 10px;
+        margin-top: 5px;
       }
     </style>
   </head>
 <body>
-  <a class="github-button" href="https://github.com/swimlane/ng2d3" data-style="mega" data-count-href="/swimlane/ng2d3/stargazers" data-count-api="/repos/swimlane/ng2d3#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star swimlane/ng2d3 on GitHub">Star</a>
-  <div class="addthis_inline_share_toolbox"></div>
+  <div class="social-toolbox">
+    <a class="github-button" href="https://github.com/swimlane/ng2d3" data-style="mega" data-count-href="/swimlane/ng2d3/stargazers" data-count-api="/repos/swimlane/ng2d3#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star swimlane/ng2d3 on GitHub" hidden>Star</a>
+    <div class="addthis_inline_share_toolbox"></div>
+  </div>
   <app>Loading...</app>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-583eec22a9881701"></script> 
-  <script src="https://buttons.github.io/buttons.js"></script>
+  <script async defer src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-583eec22a9881701"></script> 
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>
