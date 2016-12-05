@@ -5,18 +5,16 @@ var YAxisComponent = (function () {
     function YAxisComponent() {
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
+        this.yAxisClassName = 'y axis';
+        this.yAxisOffset = -5;
+        this.yOrient = 'left';
         this.labelOffset = 80;
-        Object.assign(this, {
-            yAxisClassName: 'y axis',
-            yOrient: 'left',
-            fill: 'none',
-            stroke: '#ccc',
-            tickStroke: '#ccc',
-            strokeWidth: '1',
-            yAxisOffset: -5
-        });
+        this.fill = 'none';
+        this.stroke = '#CCC';
+        this.tickStroke = '#CCC';
+        this.strokeWidth = 1;
     }
-    YAxisComponent.prototype.ngOnChanges = function () {
+    YAxisComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     YAxisComponent.prototype.update = function () {

@@ -17,7 +17,7 @@ var BarComponent = (function () {
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         this.startOpacity = this.getStartOpacity();
     };
-    BarComponent.prototype.ngOnChanges = function () {
+    BarComponent.prototype.ngOnChanges = function (changes) {
         // ngOnInit gets called after ngOnChanges, so we need to do this here
         if (!this.initialized) {
             this.loadAnimation();

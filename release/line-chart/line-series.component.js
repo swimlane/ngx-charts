@@ -6,7 +6,7 @@ var sort_1 = require('../utils/sort');
 var LineSeriesComponent = (function () {
     function LineSeriesComponent() {
     }
-    LineSeriesComponent.prototype.ngOnChanges = function () {
+    LineSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     LineSeriesComponent.prototype.update = function () {

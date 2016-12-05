@@ -1,11 +1,17 @@
 # Changelog
 
+## 1.8.1
+- Polish: Treemap/Number card label color improvements
+- Polish: Tooltip formatting improvements
+- Backlog: RxJS Import Optimized (#62)
+- Backlog: AoT fixes
+
 ## 1.8.0
 - Renamed CommonModule to ChartCommonModule to fix name conflicts with other frameworks #109
 - Converted date objets to formatted strings in some charts
 - Removed rounded corners on thin bars
 - Improved on destroy hooks in tooltips
-- Merged legendLabelClick output into clickHandler output
+- Merged `legendLabelClick` output into `clickHandler` output
 - Fixed legend click data format
 
 ## 1.7.3

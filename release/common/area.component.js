@@ -12,7 +12,7 @@ var AreaComponent = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    AreaComponent.prototype.ngOnChanges = function () {
+    AreaComponent.prototype.ngOnChanges = function (changes) {
         if (!this.initialized) {
             this.loadAnimation();
             this.initialized = true;

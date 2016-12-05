@@ -1,4 +1,4 @@
-import { EventEmitter, ElementRef, OnChanges, ChangeDetectorRef, NgZone } from '@angular/core';
+import { EventEmitter, ElementRef, SimpleChanges, OnChanges, ChangeDetectorRef, NgZone } from '@angular/core';
 export declare class CardComponent implements OnChanges {
     private cd;
     private zone;
@@ -27,8 +27,9 @@ export declare class CardComponent implements OnChanges {
     originalWidthRatio: number;
     originalHeightRatio: number;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
+    getTextColor(color: any): string;
     countUp(current: any, max: any, step: any): void;
     scaleText(): void;
     onClick(): void;

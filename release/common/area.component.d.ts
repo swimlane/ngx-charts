@@ -1,4 +1,4 @@
-import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+import { SimpleChanges, EventEmitter, ElementRef, OnChanges } from '@angular/core';
 export declare class AreaComponent implements OnChanges {
     data: any;
     path: any;
@@ -16,7 +16,7 @@ export declare class AreaComponent implements OnChanges {
     areaPath: string;
     initialized: boolean;
     constructor(element: ElementRef);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;

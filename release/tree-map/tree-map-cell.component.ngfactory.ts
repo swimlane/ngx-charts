@@ -285,6 +285,7 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
+  /*private*/ _expr_16:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
     super(View_TreeMapCellComponent1,renderType_TreeMapCellComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
@@ -296,6 +297,7 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
     this._expr_13 = import1.UNINITIALIZED;
     this._expr_14 = import1.UNINITIALIZED;
     this._expr_15 = import1.UNINITIALIZED;
+    this._expr_16 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:foreignObject',new import3.InlineArray2(2,'class','label'),(null as any));
@@ -343,25 +345,30 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
       this.renderer.setElementStyle(this._el_0,'pointer-events',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_11) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_11).toString()));
       this._expr_11 = currVal_11;
     }
-    const currVal_12:any = (this.parentView.context.height + 'px');
+    const currVal_12:any = this.parentView.context.getTextColor();
     if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setElementStyle(this._el_2,'height',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12).toString()));
+      this.renderer.setElementStyle(this._el_2,'color',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12).toString()));
       this._expr_12 = currVal_12;
     }
-    const currVal_13:any = (this.parentView.context.width + 'px');
+    const currVal_13:any = (this.parentView.context.height + 'px');
     if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
-      this.renderer.setElementStyle(this._el_2,'width',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_13) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_13).toString()));
+      this.renderer.setElementStyle(this._el_2,'height',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_13) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_13).toString()));
       this._expr_13 = currVal_13;
     }
-    const currVal_14:any = import3.inlineInterpolate(1,'\n          ',this.parentView.context.label,'\n          ');
+    const currVal_14:any = (this.parentView.context.width + 'px');
     if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setText(this._text_3,currVal_14);
+      this.renderer.setElementStyle(this._el_2,'width',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_14).toString()));
       this._expr_14 = currVal_14;
     }
-    const currVal_15:any = import3.inlineInterpolate(1,'\n          ',this.parentView.context.formattedValue,'\n        ');
+    const currVal_15:any = import3.inlineInterpolate(1,'\n          ',this.parentView.context.label,'\n          ');
     if (import3.checkBinding(throwOnChange,this._expr_15,currVal_15)) {
-      this.renderer.setText(this._text_5,currVal_15);
+      this.renderer.setText(this._text_3,currVal_15);
       this._expr_15 = currVal_15;
+    }
+    const currVal_16:any = import3.inlineInterpolate(1,'\n          ',this.parentView.context.formattedValue,'\n        ');
+    if (import3.checkBinding(throwOnChange,this._expr_16,currVal_16)) {
+      this.renderer.setText(this._text_5,currVal_16);
+      this._expr_16 = currVal_16;
     }
   }
   visitRootNodesInternal(cb:any,ctx:any):void {

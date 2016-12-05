@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges, ElementRef, AfterViewInit } from '@angular/core';
+import { EventEmitter, OnChanges, ElementRef, SimpleChanges, AfterViewInit } from '@angular/core';
 export declare class XAxisTicksComponent implements OnChanges, AfterViewInit {
     scale: any;
     orient: any;
@@ -9,13 +9,13 @@ export declare class XAxisTicksComponent implements OnChanges, AfterViewInit {
     gridLineHeight: any;
     width: any;
     dimensionsChanged: EventEmitter<{}>;
-    verticalSpacing: any;
-    rotateLabels: any;
-    innerTickSize: any;
-    outerTickSize: any;
-    tickPadding: any;
-    textAnchor: any;
-    maxTicksLength: any;
+    verticalSpacing: number;
+    rotateLabels: boolean;
+    innerTickSize: number;
+    outerTickSize: number;
+    tickPadding: number;
+    textAnchor: string;
+    maxTicksLength: number;
     maxAllowedLength: number;
     trimLabel: any;
     adjustedScale: any;
@@ -26,7 +26,7 @@ export declare class XAxisTicksComponent implements OnChanges, AfterViewInit {
     height: number;
     ticksElement: ElementRef;
     constructor();
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     ngAfterViewInit(): void;
     updateDims(): void;
     update(): void;

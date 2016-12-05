@@ -1,4 +1,4 @@
-import { OnChanges } from '@angular/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 export declare class ScaleLegendComponent implements OnChanges {
     private sanitizer;
@@ -8,7 +8,7 @@ export declare class ScaleLegendComponent implements OnChanges {
     width: any;
     gradient: any;
     constructor(sanitizer: DomSanitizer);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     /**
      * Generates the string used in the gradient stylesheet properties
      * @param  {array} colors array of colors

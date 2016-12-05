@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { YAxisTicksComponent } from './y-axis-ticks.component';
 export declare class YAxisComponent implements OnChanges {
     yScale: any;
@@ -9,16 +9,20 @@ export declare class YAxisComponent implements OnChanges {
     labelText: any;
     yAxisTickInterval: any;
     dimensionsChanged: EventEmitter<{}>;
+    yAxisClassName: string;
     yAxisTickCount: any;
     tickArguments: any;
     offset: any;
     transform: any;
-    yAxisOffset: any;
-    yOrient: any;
+    yAxisOffset: number;
+    yOrient: string;
     labelOffset: number;
+    fill: string;
+    stroke: string;
+    tickStroke: string;
+    strokeWidth: number;
     ticksComponent: YAxisTicksComponent;
-    constructor();
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     emitTicksWidth({width}: {
         width: any;

@@ -1,5 +1,5 @@
 
-import { EventEmitter, OnChanges, OnDestroy, NgZone, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, NgZone, SimpleChanges, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class BarVertical2DComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
@@ -35,7 +35,7 @@ export declare class BarVertical2DComponent extends BaseChartComponent implement
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getGroupScale(): any;
     getInnerScale(): any;

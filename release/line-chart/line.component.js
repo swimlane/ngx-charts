@@ -5,9 +5,6 @@ var LineComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    LineComponent.prototype.ngOnChanges = function () {
-        // add update animation
-    };
     LineComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[line]',

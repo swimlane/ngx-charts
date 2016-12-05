@@ -27,7 +27,7 @@ var PieChartComponent = (function (_super) {
     PieChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    PieChartComponent.prototype.ngOnChanges = function () {
+    PieChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieChartComponent.prototype.update = function () {

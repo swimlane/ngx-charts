@@ -25,7 +25,7 @@ var NumberCardComponent = (function (_super) {
     NumberCardComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    NumberCardComponent.prototype.ngOnChanges = function () {
+    NumberCardComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     NumberCardComponent.prototype.update = function () {

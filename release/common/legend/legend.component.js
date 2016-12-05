@@ -4,7 +4,7 @@ var LegendComponent = (function () {
     function LegendComponent() {
         this.labelClick = new core_1.EventEmitter();
     }
-    LegendComponent.prototype.ngOnChanges = function () {
+    LegendComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     LegendComponent.prototype.update = function () {

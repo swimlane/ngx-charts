@@ -339,7 +339,7 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_2_0_0:any = ((this.context.$implicit.label + ': ') + this.context.$implicit.value.toLocaleString());
+    const currVal_2_0_0:any = this.parentView.context.getTooltipText(this.context.$implicit.label,this.context.$implicit.value.toLocaleString());
     this._TooltipDirective_2_5.check_tooltipTitle(currVal_2_0_0,throwOnChange,false);
     const currVal_2_0_1:any = 'top';
     this._TooltipDirective_2_5.check_tooltipPlacement(currVal_2_0_1,throwOnChange,false);

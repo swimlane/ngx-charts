@@ -1,7 +1,7 @@
 
+import { ElementRef, EventEmitter, SimpleChanges, NgZone, OnChanges, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-import { ElementRef, EventEmitter, NgZone, OnChanges, TemplateRef, ChangeDetectorRef } from '@angular/core';
 export declare class ForceDirectedGraphComponent extends BaseChartComponent implements OnChanges {
     private element;
     private cd;
@@ -33,7 +33,7 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent impl
     seriesDomain: any;
     transform: string;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     onClick(data: any, node: any): void;
     getSeriesDomain(): any[];

@@ -3,7 +3,7 @@ var core_1 = require('@angular/core');
 var GridPanelSeriesComponent = (function () {
     function GridPanelSeriesComponent() {
     }
-    GridPanelSeriesComponent.prototype.ngOnChanges = function () {
+    GridPanelSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     GridPanelSeriesComponent.prototype.update = function () {

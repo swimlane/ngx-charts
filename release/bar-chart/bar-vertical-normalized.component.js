@@ -28,7 +28,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
     BarVerticalNormalizedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVerticalNormalizedComponent.prototype.ngOnChanges = function () {
+    BarVerticalNormalizedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarVerticalNormalizedComponent.prototype.update = function () {

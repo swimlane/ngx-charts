@@ -5,18 +5,16 @@ var XAxisComponent = (function () {
     function XAxisComponent() {
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
+        this.xAxisClassName = 'x axis';
+        this.xOrient = 'bottom';
         this.labelOffset = 80;
-        Object.assign(this, {
-            xAxisClassName: 'x axis',
-            xOrient: 'bottom',
-            fill: 'none',
-            stroke: 'none',
-            tickStroke: '#ccc',
-            strokeWidth: 'none',
-            xAxisOffset: 5,
-        });
+        this.fill = 'none';
+        this.stroke = 'stroke';
+        this.tickStroke = '#ccc';
+        this.strokeWidth = 'none';
+        this.xAxisOffset = 5;
     }
-    XAxisComponent.prototype.ngOnChanges = function () {
+    XAxisComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     XAxisComponent.prototype.update = function () {

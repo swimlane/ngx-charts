@@ -24,7 +24,7 @@ var TreeMapComponent = (function (_super) {
     TreeMapComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    TreeMapComponent.prototype.ngOnChanges = function () {
+    TreeMapComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     TreeMapComponent.prototype.update = function () {

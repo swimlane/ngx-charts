@@ -34,7 +34,7 @@ var GaugeComponent = (function (_super) {
     GaugeComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    GaugeComponent.prototype.ngOnChanges = function () {
+    GaugeComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     GaugeComponent.prototype.update = function () {
@@ -193,6 +193,7 @@ var GaugeComponent = (function (_super) {
         'units': [{ type: core_1.Input },],
         'bigSegments': [{ type: core_1.Input },],
         'smallSegments': [{ type: core_1.Input },],
+        'legend': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
         'textEl': [{ type: core_1.ViewChild, args: ['textEl',] },],
     };

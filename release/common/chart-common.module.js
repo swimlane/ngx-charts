@@ -26,6 +26,7 @@ var area_tooltip_component_1 = require("./area-tooltip.component");
 exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
 var base_chart_component_1 = require("./base-chart.component");
 exports.BaseChartComponent = base_chart_component_1.BaseChartComponent;
+require("./rxjs-extensions");
 var COMPONENTS = [
     area_component_1.AreaComponent,
     area_tooltip_component_1.AreaTooltip,

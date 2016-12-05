@@ -15,7 +15,7 @@ var PieArcComponent = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    PieArcComponent.prototype.ngOnChanges = function () {
+    PieArcComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieArcComponent.prototype.update = function () {

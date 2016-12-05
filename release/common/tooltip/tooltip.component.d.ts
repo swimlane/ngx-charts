@@ -1,4 +1,4 @@
-import { ElementRef, AfterViewInit, Renderer } from '@angular/core';
+import { ElementRef, AfterViewInit, Renderer, TemplateRef } from '@angular/core';
 import { PlacementTypes } from './placement.type';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
@@ -12,6 +12,8 @@ export declare class TooltipContentComponent implements AfterViewInit {
     alignment: AlignmentTypes;
     spacing: number;
     cssClass: string;
+    title: string;
+    template: TemplateRef<any>;
     caretElm: any;
     readonly cssClasses: string;
     readonly visibilityChanged: string;

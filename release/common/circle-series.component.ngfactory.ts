@@ -287,7 +287,7 @@ class View_CircleSeriesComponent1 extends import2.AppView<any> {
     const currVal_2_0_0:any = this.parentView.context.barVisible;
     this._NgIf_2_6.check_ngIf(currVal_2_0_0,throwOnChange,false);
     this._NgIf_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
-    const currVal_4_0_0:any = this.context.$implicit.tooltipText;
+    const currVal_4_0_0:any = this.parentView.context.getTooltipText(this.context.$implicit);
     this._TooltipDirective_4_5.check_tooltipTitle(currVal_4_0_0,throwOnChange,false);
     const currVal_4_0_1:any = 'top';
     this._TooltipDirective_4_5.check_tooltipPlacement(currVal_4_0_1,throwOnChange,false);

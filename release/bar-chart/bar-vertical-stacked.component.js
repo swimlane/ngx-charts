@@ -28,7 +28,7 @@ var BarVerticalStackedComponent = (function (_super) {
     BarVerticalStackedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVerticalStackedComponent.prototype.ngOnChanges = function () {
+    BarVerticalStackedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarVerticalStackedComponent.prototype.update = function () {

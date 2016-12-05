@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges, Renderer } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges, Renderer } from '@angular/core';
 export declare class AreaTooltip implements OnChanges {
     private renderer;
     tooltipAreas: any[];
@@ -13,7 +13,7 @@ export declare class AreaTooltip implements OnChanges {
     hover: EventEmitter<{}>;
     tooltips: any;
     constructor(renderer: Renderer);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getTooltipAreas(): any[];
     getValues(xVal: any): any[];

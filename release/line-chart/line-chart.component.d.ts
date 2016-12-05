@@ -1,5 +1,5 @@
 
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class LineChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
@@ -51,7 +51,7 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];

@@ -1,5 +1,5 @@
 
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, NgZone, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, SimpleChanges, AfterViewInit, NgZone, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export interface LegendItem {
@@ -32,7 +32,7 @@ export declare class AdvancedPieChartComponent extends BaseChartComponent implem
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getTotal(): number;
     getDomain(): any[];

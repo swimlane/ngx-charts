@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges } from '@angular/core';
+import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
 export declare class CircleSeriesComponent implements OnChanges {
     data: any;
     type: string;
@@ -12,8 +12,12 @@ export declare class CircleSeriesComponent implements OnChanges {
     areaPath: any;
     circles: any[];
     barVisible: boolean;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCircles(): any[];
+    getTooltipText({tooltipLabel, value}: {
+        tooltipLabel: any;
+        value: any;
+    }): string;
     onClick(value: any, label: any): void;
 }

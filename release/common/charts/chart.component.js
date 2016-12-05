@@ -10,7 +10,7 @@ var ChartComponent = (function () {
         this.legendLabelClick = new core_1.EventEmitter();
         this.injectionService.setRootViewContainer(vcr);
     }
-    ChartComponent.prototype.ngOnChanges = function () {
+    ChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     ChartComponent.prototype.update = function () {

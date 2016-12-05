@@ -8,7 +8,7 @@ var HeatMapCellComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    HeatMapCellComponent.prototype.ngOnChanges = function () {
+    HeatMapCellComponent.prototype.ngOnChanges = function (changes) {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
         var pageUrl = window.location.href;
         this.startOpacity = 0.3;

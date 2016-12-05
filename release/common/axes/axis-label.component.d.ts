@@ -1,4 +1,4 @@
-import { ElementRef, OnChanges } from '@angular/core';
+import { ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 export declare class AxisLabelComponent implements OnChanges {
     orient: any;
     label: any;
@@ -14,6 +14,6 @@ export declare class AxisLabelComponent implements OnChanges {
     textHeight: number;
     margin: number;
     constructor(element: ElementRef);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
 }

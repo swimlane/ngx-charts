@@ -28,7 +28,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
     BarHorizontalNormalizedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontalNormalizedComponent.prototype.ngOnChanges = function () {
+    BarHorizontalNormalizedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontalNormalizedComponent.prototype.update = function () {

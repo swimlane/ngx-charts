@@ -29,7 +29,7 @@ var BarVerticalComponent = (function (_super) {
     BarVerticalComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVerticalComponent.prototype.ngOnChanges = function () {
+    BarVerticalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarVerticalComponent.prototype.update = function () {

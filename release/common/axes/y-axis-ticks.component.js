@@ -17,7 +17,7 @@ var YAxisTicksComponent = (function () {
         this.rotateLabels = false;
         this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    YAxisTicksComponent.prototype.ngOnChanges = function () {
+    YAxisTicksComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     YAxisTicksComponent.prototype.ngAfterViewInit = function () {

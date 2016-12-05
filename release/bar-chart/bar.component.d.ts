@@ -1,4 +1,4 @@
-import { EventEmitter, ElementRef, OnInit, OnChanges } from '@angular/core';
+import { EventEmitter, ElementRef, SimpleChanges, OnInit, OnChanges } from '@angular/core';
 export declare class BarComponent implements OnInit, OnChanges {
     fill: any;
     data: any;
@@ -19,7 +19,7 @@ export declare class BarComponent implements OnInit, OnChanges {
     initialized: boolean;
     constructor(element: ElementRef);
     ngOnInit(): void;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;

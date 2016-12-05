@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges, NgZone } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges, NgZone } from '@angular/core';
 export interface CardModel {
     x: any;
     y: any;
@@ -17,7 +17,7 @@ export declare class CardSeriesComponent implements OnChanges {
     clickHandler: EventEmitter<{}>;
     cards: CardModel[];
     constructor(zone: NgZone);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCards(): any[];
     trackBy(index: any, card: any): string;

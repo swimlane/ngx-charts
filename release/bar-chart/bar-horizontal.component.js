@@ -29,7 +29,7 @@ var BarHorizontalComponent = (function (_super) {
     BarHorizontalComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontalComponent.prototype.ngOnChanges = function () {
+    BarHorizontalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontalComponent.prototype.update = function () {

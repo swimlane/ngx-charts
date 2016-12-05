@@ -1,4 +1,4 @@
-import { EventEmitter, ElementRef, OnChanges, NgZone, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, NgZone, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 export declare class Timeline implements OnChanges {
     private zone;
     private cd;
@@ -24,7 +24,7 @@ export declare class Timeline implements OnChanges {
     filterId: any;
     filter: any;
     constructor(element: ElementRef, zone: NgZone, cd: ChangeDetectorRef);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getXDomain(): any[];
     getXScale(): any;

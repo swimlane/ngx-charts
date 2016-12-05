@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges } from '@angular/core';
+import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
 export declare class CircleComponent implements OnChanges {
     cx: any;
     cy: any;
@@ -10,5 +10,5 @@ export declare class CircleComponent implements OnChanges {
     circleOpacity: any;
     pointerEvents: any;
     clickHandler: EventEmitter<{}>;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
 }

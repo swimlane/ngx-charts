@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges } from '@angular/core';
+import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
 export declare class PieSeriesComponent implements OnChanges {
     colors: any;
     series: any;
@@ -11,7 +11,7 @@ export declare class PieSeriesComponent implements OnChanges {
     clickHandler: EventEmitter<{}>;
     max: number;
     data: any;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     midAngle(d: any): number;
     outerArc(): any;

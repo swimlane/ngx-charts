@@ -4,7 +4,7 @@ var HeatCellSeriesComponent = (function () {
     function HeatCellSeriesComponent() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    HeatCellSeriesComponent.prototype.ngOnChanges = function () {
+    HeatCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     HeatCellSeriesComponent.prototype.update = function () {
@@ -29,12 +29,15 @@ var HeatCellSeriesComponent = (function () {
                     fill: _this.colors(value),
                     data: value,
                     label: label,
-                    series: row.name,
-                    tooltipText: tooltipLabel + ": " + value.toLocaleString()
+                    series: row.name
                 });
             });
         });
         return cells;
+    };
+    HeatCellSeriesComponent.prototype.getTooltipText = function (_a) {
+        var label = _a.label, data = _a.data;
+        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + data.toLocaleString() + "</span>\n    ";
     };
     HeatCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.tooltipText;
@@ -49,7 +52,7 @@ var HeatCellSeriesComponent = (function () {
     HeatCellSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[heatMapCellSeries]',
-                    template: "\n    <svg:g heatMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  ",
+                    template: "\n    <svg:g \n      heatMapCell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];

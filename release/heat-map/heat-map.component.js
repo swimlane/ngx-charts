@@ -26,7 +26,7 @@ var HeatMapComponent = (function (_super) {
     HeatMapComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    HeatMapComponent.prototype.ngOnChanges = function () {
+    HeatMapComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     HeatMapComponent.prototype.update = function () {

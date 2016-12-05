@@ -40,7 +40,6 @@ var SeriesHorizontal = (function () {
                     bar.x = _this.xScale(0);
                 }
                 bar.y = _this.yScale(label);
-                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -49,7 +48,6 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
-                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -66,9 +64,9 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
-                var percentage = (offset1 - offset0).toFixed(2) + '%';
-                bar.tooltipText = tooltipLabel + ": " + percentage.toLocaleString();
+                value = (offset1 - offset0).toFixed(2) + '%';
             }
+            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
     };

@@ -8,7 +8,7 @@ var AreaSeriesComponent = (function () {
         this.normalized = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    AreaSeriesComponent.prototype.ngOnChanges = function () {
+    AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaSeriesComponent.prototype.update = function () {

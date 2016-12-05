@@ -41,6 +41,8 @@ export class Wrapper_TooltipContentComponent {
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
+  /*private*/ _expr_9:any;
+  /*private*/ _expr_10:any;
   constructor(p0:any,p1:any) {
     this._changed = false;
     this.context = new import0.TooltipContentComponent(p0,p1);
@@ -53,9 +55,11 @@ export class Wrapper_TooltipContentComponent {
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
+    this._expr_9 = import1.UNINITIALIZED;
+    this._expr_10 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
-    var animationTransition_visibilityChanged:any = componentView.componentType.animations['visibilityChanged'](view,el,this._expr_8,'void');
+    var animationTransition_visibilityChanged:any = componentView.componentType.animations['visibilityChanged'](view,el,this._expr_10,'void');
     animationTransition_visibilityChanged.onStart((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.start'));
     animationTransition_visibilityChanged.onDone((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.done'));
   }
@@ -110,23 +114,37 @@ export class Wrapper_TooltipContentComponent {
       this._expr_6 = currValue;
     }
   }
+  check_title(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_7,currValue))) {
+      this._changed = true;
+      this.context.title = currValue;
+      this._expr_7 = currValue;
+    }
+  }
+  check_template(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
+      this._changed = true;
+      this.context.template = currValue;
+      this._expr_8 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
     return changed;
   }
   checkHost(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any,throwOnChange:boolean):void {
-    const currVal_7:any = this.context.cssClasses;
-    if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
-      view.renderer.setElementProperty(el,'className',currVal_7);
-      this._expr_7 = currVal_7;
+    const currVal_9:any = this.context.cssClasses;
+    if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
+      view.renderer.setElementProperty(el,'className',currVal_9);
+      this._expr_9 = currVal_9;
     }
-    const currVal_8:any = this.context.visibilityChanged;
-    if (import3.checkBinding(throwOnChange,this._expr_8,currVal_8)) {
-      var animationTransition_visibilityChanged:any = componentView.componentType.animations['visibilityChanged'](view,el,((this._expr_8 == import1.UNINITIALIZED)? 'void': this._expr_8),((currVal_8 == import1.UNINITIALIZED)? 'void': currVal_8));
+    const currVal_10:any = this.context.visibilityChanged;
+    if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
+      var animationTransition_visibilityChanged:any = componentView.componentType.animations['visibilityChanged'](view,el,((this._expr_10 == import1.UNINITIALIZED)? 'void': this._expr_10),((currVal_10 == import1.UNINITIALIZED)? 'void': currVal_10));
       animationTransition_visibilityChanged.onStart((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.start'));
       animationTransition_visibilityChanged.onDone((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.done'));
-      this._expr_8 = currVal_8;
+      this._expr_10 = currVal_10;
     }
   }
   handleEvent(eventName:string,$event:any):boolean {

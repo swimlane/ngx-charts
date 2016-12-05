@@ -8,7 +8,7 @@ var PieGridSeriesComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    PieGridSeriesComponent.prototype.ngOnChanges = function () {
+    PieGridSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieGridSeriesComponent.prototype.update = function () {

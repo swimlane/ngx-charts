@@ -1,4 +1,4 @@
-import { OnChanges } from '@angular/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 export declare class SvgLinearGradientComponent implements OnChanges {
     orientation: string;
     color: any;
@@ -9,5 +9,5 @@ export declare class SvgLinearGradientComponent implements OnChanges {
     x2: any;
     y1: any;
     y2: any;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
 }

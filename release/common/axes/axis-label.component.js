@@ -6,7 +6,7 @@ var AxisLabelComponent = (function () {
         this.margin = 5;
         this.element = element.nativeElement;
     }
-    AxisLabelComponent.prototype.ngOnChanges = function () {
+    AxisLabelComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AxisLabelComponent.prototype.update = function () {

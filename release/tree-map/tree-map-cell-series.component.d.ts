@@ -1,12 +1,16 @@
-import { OnChanges, EventEmitter } from '@angular/core';
+import { OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 export declare class TreeMapCellSeriesComponent implements OnChanges {
     data: any;
     dims: any;
     colors: any;
     clickHandler: EventEmitter<{}>;
     cells: any[];
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     getCells(): any[];
+    getTooltipText({label, value}: {
+        label: any;
+        value: any;
+    }): string;
     onClick(data: any): void;
     trackBy(index: any, item: any): string;
 }

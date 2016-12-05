@@ -13,7 +13,7 @@ var Timeline = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    Timeline.prototype.ngOnChanges = function () {
+    Timeline.prototype.ngOnChanges = function (changes) {
         this.update();
         if (!this.initialized) {
             this.addBrush();

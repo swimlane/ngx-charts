@@ -9,6 +9,7 @@ import { Timeline } from "./timeline.component";
 import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
 import { BaseChartComponent } from "./base-chart.component";
+import "./rxjs-extensions";
 export { ChartComponent, CircleSeriesComponent, CircleComponent, GridPanelComponent, GridPanelSeriesComponent, SvgLinearGradientComponent, SvgRadialGradientComponent, Timeline, AreaComponent, AreaTooltip, BaseChartComponent };
 export declare class ChartCommonModule {
 }

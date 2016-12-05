@@ -4,12 +4,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var core_1 = require('@angular/core');
 var chart_component_1 = require('../common/charts/chart.component');
 var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var d3_1 = require('../d3');
 var color_sets_1 = require('../utils/color-sets');
-var core_1 = require('@angular/core');
 var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
     function ForceDirectedGraphComponent(element, cd, zone) {
@@ -29,7 +29,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.margin = [0, 0, 0, 0];
         this.results = [];
     }
-    ForceDirectedGraphComponent.prototype.ngOnChanges = function () {
+    ForceDirectedGraphComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     ForceDirectedGraphComponent.prototype.update = function () {

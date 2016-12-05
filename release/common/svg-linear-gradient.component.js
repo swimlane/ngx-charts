@@ -5,7 +5,7 @@ var SvgLinearGradientComponent = (function () {
         this.orientation = 'vertical';
         this.endOpacity = 1;
     }
-    SvgLinearGradientComponent.prototype.ngOnChanges = function () {
+    SvgLinearGradientComponent.prototype.ngOnChanges = function (changes) {
         this.x1 = '0%';
         this.x2 = '0%';
         this.y1 = '0%';

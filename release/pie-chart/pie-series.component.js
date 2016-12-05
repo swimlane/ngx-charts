@@ -8,7 +8,7 @@ var PieSeriesComponent = (function () {
         this.outerRadius = 80;
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieSeriesComponent.prototype.ngOnChanges = function () {
+    PieSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieSeriesComponent.prototype.update = function () {
@@ -69,7 +69,9 @@ var PieSeriesComponent = (function () {
         return label;
     };
     PieSeriesComponent.prototype.tooltipText = function (arc) {
-        return this.label(arc) + ": " + arc.data.value.toLocaleString();
+        var label = this.label(arc);
+        var val = arc.data.value.toLocaleString();
+        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     PieSeriesComponent.prototype.color = function (arc) {
         return this.colors(this.label(arc));

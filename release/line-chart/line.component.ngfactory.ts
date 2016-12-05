@@ -24,14 +24,12 @@ export class Wrapper_LineComponent {
   /*private*/ _eventHandler:Function;
   context:import0.LineComponent;
   /*private*/ _changed:boolean;
-  /*private*/ _changes:{[key: string]:any};
   /*private*/ _expr_0:any;
   /*private*/ _expr_1:any;
   /*private*/ _expr_2:any;
   subscription0:any;
   constructor(p0:any) {
     this._changed = false;
-    this._changes = {};
     this.context = new import0.LineComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
@@ -46,7 +44,6 @@ export class Wrapper_LineComponent {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
       this._changed = true;
       this.context.path = currValue;
-      this._changes['path'] = new import1.SimpleChange(this._expr_0,currValue);
       this._expr_0 = currValue;
     }
   }
@@ -54,7 +51,6 @@ export class Wrapper_LineComponent {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_1,currValue))) {
       this._changed = true;
       this.context.stroke = currValue;
-      this._changes['stroke'] = new import1.SimpleChange(this._expr_1,currValue);
       this._expr_1 = currValue;
     }
   }
@@ -62,17 +58,12 @@ export class Wrapper_LineComponent {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_2,currValue))) {
       this._changed = true;
       this.context.data = currValue;
-      this._changes['data'] = new import1.SimpleChange(this._expr_2,currValue);
       this._expr_2 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
-    if (!throwOnChange) { if (changed) {
-      this.context.ngOnChanges(this._changes);
-      this._changes = {};
-    } }
     return changed;
   }
   checkHost(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any,throwOnChange:boolean):void {

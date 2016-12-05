@@ -1,5 +1,5 @@
 
-import { ElementRef, OnChanges } from '@angular/core';
+import { ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 export declare class PieLabelComponent implements OnChanges {
     data: any;
     radius: any;
@@ -14,7 +14,7 @@ export declare class PieLabelComponent implements OnChanges {
     transform: string;
     line: string;
     constructor(element: ElementRef);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     textAnchor(): any;
     midAngle(d: any): number;

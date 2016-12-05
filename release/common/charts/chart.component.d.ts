@@ -1,4 +1,4 @@
-import { OnChanges, ViewContainerRef, EventEmitter } from '@angular/core';
+import { OnChanges, ViewContainerRef, EventEmitter, SimpleChanges } from '@angular/core';
 import { InjectionService } from '../../utils/injection.service';
 export declare class ChartComponent implements OnChanges {
     private vcr;
@@ -15,7 +15,7 @@ export declare class ChartComponent implements OnChanges {
     legendWidth: any;
     legendType: any;
     constructor(vcr: ViewContainerRef, injectionService: InjectionService);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getLegendType(): string;
     onLegendLabelClick(name: any): void;

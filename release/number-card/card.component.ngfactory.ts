@@ -269,39 +269,39 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
       this.renderer.setElementStyle(this._el_3,'fill',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20).toString()));
       this._expr_20 = currVal_20;
     }
-    const currVal_21:any = 0.3;
+    const currVal_21:any = this.context.cardWidth;
     if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
-      this.renderer.setElementStyle(this._el_3,'opacity',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_21) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_21).toString()));
+      this.renderer.setElementAttribute(this._el_3,'width',((currVal_21 == null)? (null as any): currVal_21.toString()));
       this._expr_21 = currVal_21;
     }
-    const currVal_22:any = this.context.cardWidth;
+    const currVal_22:any = this.context.cardHeight;
     if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
-      this.renderer.setElementAttribute(this._el_3,'width',((currVal_22 == null)? (null as any): currVal_22.toString()));
+      this.renderer.setElementAttribute(this._el_3,'height',((currVal_22 == null)? (null as any): currVal_22.toString()));
       this._expr_22 = currVal_22;
     }
-    const currVal_23:any = this.context.cardHeight;
+    const currVal_23:any = import3.inlineInterpolate(1,'',this.context.label,'');
     if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
-      this.renderer.setElementAttribute(this._el_3,'height',((currVal_23 == null)? (null as any): currVal_23.toString()));
+      this.renderer.setText(this._text_6,currVal_23);
       this._expr_23 = currVal_23;
     }
-    const currVal_24:any = import3.inlineInterpolate(1,'',this.context.label,'');
+    const currVal_24:any = (this.context.height * 0.7);
     if (import3.checkBinding(throwOnChange,this._expr_24,currVal_24)) {
-      this.renderer.setText(this._text_6,currVal_24);
+      this.renderer.setElementAttribute(this._el_8,'y',((currVal_24 == null)? (null as any): currVal_24.toString()));
       this._expr_24 = currVal_24;
     }
-    const currVal_25:any = (this.context.height * 0.7);
+    const currVal_25:any = this.context.textWidth;
     if (import3.checkBinding(throwOnChange,this._expr_25,currVal_25)) {
-      this.renderer.setElementAttribute(this._el_8,'y',((currVal_25 == null)? (null as any): currVal_25.toString()));
+      this.renderer.setElementAttribute(this._el_8,'width',((currVal_25 == null)? (null as any): currVal_25.toString()));
       this._expr_25 = currVal_25;
     }
-    const currVal_26:any = this.context.textWidth;
+    const currVal_26:any = (this.context.height * 0.3);
     if (import3.checkBinding(throwOnChange,this._expr_26,currVal_26)) {
-      this.renderer.setElementAttribute(this._el_8,'width',((currVal_26 == null)? (null as any): currVal_26.toString()));
+      this.renderer.setElementAttribute(this._el_8,'height',((currVal_26 == null)? (null as any): currVal_26.toString()));
       this._expr_26 = currVal_26;
     }
-    const currVal_27:any = (this.context.height * 0.3);
+    const currVal_27:any = this.context.getTextColor(this.context.color);
     if (import3.checkBinding(throwOnChange,this._expr_27,currVal_27)) {
-      this.renderer.setElementAttribute(this._el_8,'height',((currVal_27 == null)? (null as any): currVal_27.toString()));
+      this.renderer.setElementStyle(this._el_10,'color',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_27) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_27).toString()));
       this._expr_27 = currVal_27;
     }
     const currVal_28:any = import3.inlineInterpolate(1,'\n          ',this.context.trimmedLabel,'\n        ');
@@ -319,7 +319,7 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
       this.renderer.setElementAttribute(this._el_14,'y',((currVal_30 == null)? (null as any): currVal_30.toString()));
       this._expr_30 = currVal_30;
     }
-    const currVal_31:any = this.context.color;
+    const currVal_31:any = this.context.getTextColor(this.context.color);
     if (import3.checkBinding(throwOnChange,this._expr_31,currVal_31)) {
       this.renderer.setElementStyle(this._el_14,'fill',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_31) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_31).toString()));
       this._expr_31 = currVal_31;

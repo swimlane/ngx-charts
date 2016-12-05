@@ -33,7 +33,7 @@ var AreaChartStackedComponent = (function (_super) {
     AreaChartStackedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    AreaChartStackedComponent.prototype.ngOnChanges = function () {
+    AreaChartStackedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaChartStackedComponent.prototype.update = function () {

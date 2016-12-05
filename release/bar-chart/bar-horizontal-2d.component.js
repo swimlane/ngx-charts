@@ -28,7 +28,7 @@ var BarHorizontal2DComponent = (function (_super) {
     BarHorizontal2DComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontal2DComponent.prototype.ngOnChanges = function () {
+    BarHorizontal2DComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontal2DComponent.prototype.update = function () {

@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges } from '@angular/core';
+import { EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 export declare class AreaSeriesComponent implements OnChanges {
     data: any;
     xScale: any;
@@ -13,6 +13,6 @@ export declare class AreaSeriesComponent implements OnChanges {
     opacity: number;
     path: string;
     startingPath: string;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
 }

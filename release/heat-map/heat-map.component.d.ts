@@ -1,5 +1,5 @@
 
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 export declare class HeatMapComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
@@ -35,7 +35,7 @@ export declare class HeatMapComponent extends BaseChartComponent implements OnCh
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getXDomain(): any;
     getYDomain(): any[];

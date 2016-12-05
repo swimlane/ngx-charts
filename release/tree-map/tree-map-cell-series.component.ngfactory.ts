@@ -203,7 +203,7 @@ class View_TreeMapCellSeriesComponent1 extends import2.AppView<any> {
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this.context.$implicit.tooltipText;
+    const currVal_0_0_0:any = this.parentView.context.getTooltipText(this.context.$implicit);
     this._TooltipDirective_0_5.check_tooltipTitle(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = 'top';
     this._TooltipDirective_0_5.check_tooltipPlacement(currVal_0_0_1,throwOnChange,false);

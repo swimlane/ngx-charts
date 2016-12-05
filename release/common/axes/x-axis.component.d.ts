@@ -1,4 +1,4 @@
-import { EventEmitter, OnChanges } from '@angular/core';
+import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
 import { XAxisTicksComponent } from './x-axis-ticks.component';
 export declare class XAxisComponent implements OnChanges {
     xScale: any;
@@ -10,15 +10,18 @@ export declare class XAxisComponent implements OnChanges {
     xAxisTickInterval: any;
     dimensionsChanged: EventEmitter<{}>;
     xAxisTickCount: any;
-    xAxisClassName: any;
-    xOrient: any;
+    xAxisClassName: string;
+    xOrient: string;
     tickArguments: any;
-    xAxisOffset: any;
     transform: any;
     labelOffset: number;
+    fill: string;
+    stroke: string;
+    tickStroke: string;
+    strokeWidth: string;
+    xAxisOffset: number;
     ticksComponent: XAxisTicksComponent;
-    constructor();
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     emitTicksHeight({height}: {
         height: any;

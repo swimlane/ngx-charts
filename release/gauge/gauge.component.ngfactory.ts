@@ -47,6 +47,7 @@ export class Wrapper_GaugeComponent {
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
   /*private*/ _expr_9:any;
+  /*private*/ _expr_10:any;
   subscription0:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
@@ -62,6 +63,7 @@ export class Wrapper_GaugeComponent {
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
+    this._expr_10 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -147,6 +149,14 @@ export class Wrapper_GaugeComponent {
       this.context.smallSegments = currValue;
       this._changes['smallSegments'] = new import1.SimpleChange(this._expr_9,currValue);
       this._expr_9 = currValue;
+    }
+  }
+  check_legend(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_10,currValue))) {
+      this._changed = true;
+      this.context.legend = currValue;
+      this._changes['legend'] = new import1.SimpleChange(this._expr_10,currValue);
+      this._expr_10 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {

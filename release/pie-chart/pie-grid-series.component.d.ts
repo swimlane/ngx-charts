@@ -1,4 +1,4 @@
-import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 export declare class PieGridSeriesComponent implements OnChanges {
     colors: any;
     data: any;
@@ -9,7 +9,7 @@ export declare class PieGridSeriesComponent implements OnChanges {
     layout: any;
     arcs: any;
     constructor(element: ElementRef);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getArcs(): any[];
     onClick(data: any): void;

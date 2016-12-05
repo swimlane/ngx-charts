@@ -1,4 +1,4 @@
-import { OnChanges } from '@angular/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 export declare class LineSeriesComponent implements OnChanges {
     data: any;
     xScale: any;
@@ -7,6 +7,6 @@ export declare class LineSeriesComponent implements OnChanges {
     scaleType: any;
     curve: string;
     path: string;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
 }

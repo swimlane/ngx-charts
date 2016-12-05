@@ -1,4 +1,4 @@
-import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 export declare class TreeMapCellComponent implements OnChanges {
     fill: any;
     x: any;
@@ -14,9 +14,10 @@ export declare class TreeMapCellComponent implements OnChanges {
     formattedValue: string;
     initialized: boolean;
     constructor(element: ElementRef);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     loadAnimation(): void;
+    getTextColor(): string;
     animateToCurrentForm(): void;
     onClick(): void;
 }

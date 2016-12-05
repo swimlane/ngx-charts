@@ -8,20 +8,18 @@ var XAxisTicksComponent = (function () {
         this.tickStroke = '#ccc';
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
+        this.verticalSpacing = 20;
+        this.rotateLabels = false;
+        this.innerTickSize = 6;
+        this.outerTickSize = 6;
+        this.tickPadding = 3;
+        this.textAnchor = 'middle';
+        this.maxTicksLength = 0;
         this.maxAllowedLength = 16;
         this.height = 0;
-        Object.assign(this, {
-            innerTickSize: 6,
-            outerTickSize: 6,
-            tickPadding: 3,
-            rotateLabels: false,
-            verticalSpacing: 20,
-            textAnchor: 'middle',
-            maxTicksLength: 0,
-            trimLabel: trim_label_helper_1.trimLabel
-        });
+        this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    XAxisTicksComponent.prototype.ngOnChanges = function () {
+    XAxisTicksComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     XAxisTicksComponent.prototype.ngAfterViewInit = function () {

@@ -151,6 +151,8 @@ var TooltipContentComponent = (function () {
         'alignment': [{ type: core_1.Input },],
         'spacing': [{ type: core_1.Input },],
         'cssClass': [{ type: core_1.Input },],
+        'title': [{ type: core_1.Input },],
+        'template': [{ type: core_1.Input },],
         'caretElm': [{ type: core_1.ViewChild, args: ['caretElm',] },],
         'cssClasses': [{ type: core_1.HostBinding, args: ['class',] },],
         'visibilityChanged': [{ type: core_1.HostBinding, args: ['@visibilityChanged',] },],

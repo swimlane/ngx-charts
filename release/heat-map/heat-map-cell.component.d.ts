@@ -1,4 +1,4 @@
-import { EventEmitter, ElementRef, OnChanges } from '@angular/core';
+import { EventEmitter, SimpleChanges, ElementRef, OnChanges } from '@angular/core';
 export declare class HeatMapCellComponent implements OnChanges {
     fill: any;
     x: any;
@@ -16,7 +16,7 @@ export declare class HeatMapCellComponent implements OnChanges {
     gradientId: string;
     gradientUrl: string;
     constructor(element: ElementRef);
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;
     onClick(): void;

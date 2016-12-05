@@ -32,7 +32,7 @@ var AreaChartComponent = (function (_super) {
     AreaChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    AreaChartComponent.prototype.ngOnChanges = function () {
+    AreaChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaChartComponent.prototype.update = function () {

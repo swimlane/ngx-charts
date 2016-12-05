@@ -32,7 +32,7 @@ var LineChartComponent = (function (_super) {
     LineChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    LineChartComponent.prototype.ngOnChanges = function () {
+    LineChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     LineChartComponent.prototype.update = function () {

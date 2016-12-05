@@ -7,7 +7,7 @@ var CircleSeriesComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.barVisible = false;
     }
-    CircleSeriesComponent.prototype.ngOnChanges = function () {
+    CircleSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     CircleSeriesComponent.prototype.update = function () {
@@ -48,11 +48,15 @@ var CircleSeriesComponent = (function () {
                     cy: cy,
                     radius: radius,
                     height: height,
-                    tooltipText: tooltipLabel + ": " + value.toLocaleString(),
+                    tooltipLabel: tooltipLabel,
                     opacity: opacity
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
+    };
+    CircleSeriesComponent.prototype.getTooltipText = function (_a) {
+        var tooltipLabel = _a.tooltipLabel, value = _a.value;
+        return "\n      <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     CircleSeriesComponent.prototype.onClick = function (value, label) {
         this.clickHandler.emit({
@@ -63,7 +67,7 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[circleSeries]',
-                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"onClick($event, circle.label)\"\n        [style.opacity]=\"circle.opacity\"\n        [style.cursor]=\"'pointer'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"circle.tooltipText\"\n      />\n    </svg:g>\n  ",
+                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"onClick($event, circle.label)\"\n        [style.opacity]=\"circle.opacity\"\n        [style.cursor]=\"'pointer'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];

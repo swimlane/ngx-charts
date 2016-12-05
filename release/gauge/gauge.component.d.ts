@@ -1,5 +1,5 @@
 
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 export declare class GaugeComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
@@ -15,6 +15,7 @@ export declare class GaugeComponent extends BaseChartComponent implements OnChan
     units: string;
     bigSegments: number;
     smallSegments: number;
+    legend: any;
     clickHandler: EventEmitter<{}>;
     textEl: ElementRef;
     dims: ViewDimensions;
@@ -36,7 +37,7 @@ export declare class GaugeComponent extends BaseChartComponent implements OnChan
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getValueDomain(): any[];
     getValueScale(): any;

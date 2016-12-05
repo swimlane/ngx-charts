@@ -5,7 +5,7 @@ var ScaleLegendComponent = (function () {
     function ScaleLegendComponent(sanitizer) {
         this.sanitizer = sanitizer;
     }
-    ScaleLegendComponent.prototype.ngOnChanges = function () {
+    ScaleLegendComponent.prototype.ngOnChanges = function (changes) {
         var gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
         this.gradient = this.sanitizer.bypassSecurityTrustStyle("linear-gradient(to bottom, " + gradientValues + ")");
     };

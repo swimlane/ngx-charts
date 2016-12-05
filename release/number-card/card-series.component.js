@@ -5,7 +5,7 @@ var CardSeriesComponent = (function () {
         this.zone = zone;
         this.clickHandler = new core_1.EventEmitter();
     }
-    CardSeriesComponent.prototype.ngOnChanges = function () {
+    CardSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     CardSeriesComponent.prototype.update = function () {

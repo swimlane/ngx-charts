@@ -24,7 +24,7 @@ var AdvancedPieChartComponent = (function (_super) {
     AdvancedPieChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    AdvancedPieChartComponent.prototype.ngOnChanges = function () {
+    AdvancedPieChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AdvancedPieChartComponent.prototype.update = function () {

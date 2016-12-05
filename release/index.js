@@ -1,17 +1,17 @@
 /**
- * ng2d3 v"1.8.0" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.8.1" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs"));
+		module.exports = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Observable"));
 	else if(typeof define === 'function' && define.amd)
-		define("ng2d3", ["@angular/common", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-color", "d3-force", "d3-format", "d3-hierarchy", "d3-interpolate", "d3-scale", "d3-selection", "d3-shape", "moment", "rxjs"], factory);
+		define("ng2d3", ["@angular/common", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-color", "d3-force", "d3-format", "d3-hierarchy", "d3-interpolate", "d3-scale", "d3-selection", "d3-shape", "moment", "rxjs/Observable"], factory);
 	else if(typeof exports === 'object')
-		exports["ng2d3"] = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs"));
+		exports["ng2d3"] = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Observable"));
 	else
-		root["ng2d3"] = factory(root["@angular/common"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["d3-force"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs"]);
+		root["ng2d3"] = factory(root["@angular/common"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["d3-force"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs/Observable"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_14__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -150,6 +150,1403 @@ module.exports = function() {
 	return list;
 };
 
+
+/***/ },
+
+/***/ "./node_modules/rxjs/Observable.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
+var toSubscriber_1 = __webpack_require__("./node_modules/rxjs/util/toSubscriber.js");
+var observable_1 = __webpack_require__("./node_modules/rxjs/symbol/observable.js");
+/**
+ * A representation of any set of values over any amount of time. This the most basic building block
+ * of RxJS.
+ *
+ * @class Observable<T>
+ */
+var Observable = (function () {
+    /**
+     * @constructor
+     * @param {Function} subscribe the function that is  called when the Observable is
+     * initially subscribed to. This function is given a Subscriber, to which new values
+     * can be `next`ed, or an `error` method can be called to raise an error, or
+     * `complete` can be called to notify of a successful completion.
+     */
+    function Observable(subscribe) {
+        this._isScalar = false;
+        if (subscribe) {
+            this._subscribe = subscribe;
+        }
+    }
+    /**
+     * Creates a new Observable, with this Observable as the source, and the passed
+     * operator defined as the new observable's operator.
+     * @method lift
+     * @param {Operator} operator the operator defining the operation to take on the observable
+     * @return {Observable} a new observable with the Operator applied
+     */
+    Observable.prototype.lift = function (operator) {
+        var observable = new Observable();
+        observable.source = this;
+        observable.operator = operator;
+        return observable;
+    };
+    /**
+     * Registers handlers for handling emitted values, error and completions from the observable, and
+     *  executes the observable's subscriber function, which will take action to set up the underlying data stream
+     * @method subscribe
+     * @param {PartialObserver|Function} observerOrNext (optional) either an observer defining all functions to be called,
+     *  or the first of three possible handlers, which is the handler for each value emitted from the observable.
+     * @param {Function} error (optional) a handler for a terminal event resulting from an error. If no error handler is provided,
+     *  the error will be thrown as unhandled
+     * @param {Function} complete (optional) a handler for a terminal event resulting from successful completion.
+     * @return {ISubscription} a subscription reference to the registered handlers
+     */
+    Observable.prototype.subscribe = function (observerOrNext, error, complete) {
+        var operator = this.operator;
+        var sink = toSubscriber_1.toSubscriber(observerOrNext, error, complete);
+        if (operator) {
+            operator.call(sink, this);
+        }
+        else {
+            sink.add(this._subscribe(sink));
+        }
+        if (sink.syncErrorThrowable) {
+            sink.syncErrorThrowable = false;
+            if (sink.syncErrorThrown) {
+                throw sink.syncErrorValue;
+            }
+        }
+        return sink;
+    };
+    /**
+     * @method forEach
+     * @param {Function} next a handler for each value emitted by the observable
+     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
+     * @return {Promise} a promise that either resolves on observable completion or
+     *  rejects with the handled error
+     */
+    Observable.prototype.forEach = function (next, PromiseCtor) {
+        var _this = this;
+        if (!PromiseCtor) {
+            if (root_1.root.Rx && root_1.root.Rx.config && root_1.root.Rx.config.Promise) {
+                PromiseCtor = root_1.root.Rx.config.Promise;
+            }
+            else if (root_1.root.Promise) {
+                PromiseCtor = root_1.root.Promise;
+            }
+        }
+        if (!PromiseCtor) {
+            throw new Error('no Promise impl found');
+        }
+        return new PromiseCtor(function (resolve, reject) {
+            var subscription = _this.subscribe(function (value) {
+                if (subscription) {
+                    // if there is a subscription, then we can surmise
+                    // the next handling is asynchronous. Any errors thrown
+                    // need to be rejected explicitly and unsubscribe must be
+                    // called manually
+                    try {
+                        next(value);
+                    }
+                    catch (err) {
+                        reject(err);
+                        subscription.unsubscribe();
+                    }
+                }
+                else {
+                    // if there is NO subscription, then we're getting a nexted
+                    // value synchronously during subscription. We can just call it.
+                    // If it errors, Observable's `subscribe` will ensure the
+                    // unsubscription logic is called, then synchronously rethrow the error.
+                    // After that, Promise will trap the error and send it
+                    // down the rejection path.
+                    next(value);
+                }
+            }, reject, resolve);
+        });
+    };
+    Observable.prototype._subscribe = function (subscriber) {
+        return this.source.subscribe(subscriber);
+    };
+    /**
+     * An interop point defined by the es7-observable spec https://github.com/zenparsing/es-observable
+     * @method Symbol.observable
+     * @return {Observable} this instance of the observable
+     */
+    Observable.prototype[observable_1.$$observable] = function () {
+        return this;
+    };
+    // HACK: Since TypeScript inherits static properties too, we have to
+    // fight against TypeScript here so Subject can have a different static create signature
+    /**
+     * Creates a new cold Observable by calling the Observable constructor
+     * @static true
+     * @owner Observable
+     * @method create
+     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
+     * @return {Observable} a new cold observable
+     */
+    Observable.create = function (subscribe) {
+        return new Observable(subscribe);
+    };
+    return Observable;
+}());
+exports.Observable = Observable;
+//# sourceMappingURL=Observable.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/Observer.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+exports.empty = {
+    closed: true,
+    next: function (value) { },
+    error: function (err) { throw err; },
+    complete: function () { }
+};
+//# sourceMappingURL=Observer.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/Scheduler.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+/**
+ * An execution context and a data structure to order tasks and schedule their
+ * execution. Provides a notion of (potentially virtual) time, through the
+ * `now()` getter method.
+ *
+ * Each unit of work in a Scheduler is called an {@link Action}.
+ *
+ * ```ts
+ * class Scheduler {
+ *   now(): number;
+ *   schedule(work, delay?, state?): Subscription;
+ * }
+ * ```
+ *
+ * @class Scheduler
+ */
+var Scheduler = (function () {
+    function Scheduler(SchedulerAction, now) {
+        if (now === void 0) { now = Scheduler.now; }
+        this.SchedulerAction = SchedulerAction;
+        this.now = now;
+    }
+    /**
+     * Schedules a function, `work`, for execution. May happen at some point in
+     * the future, according to the `delay` parameter, if specified. May be passed
+     * some context object, `state`, which will be passed to the `work` function.
+     *
+     * The given arguments will be processed an stored as an Action object in a
+     * queue of actions.
+     *
+     * @param {function(state: ?T): ?Subscription} work A function representing a
+     * task, or some unit of work to be executed by the Scheduler.
+     * @param {number} [delay] Time to wait before executing the work, where the
+     * time unit is implicit and defined by the Scheduler itself.
+     * @param {T} [state] Some contextual data that the `work` function uses when
+     * called by the Scheduler.
+     * @return {Subscription} A subscription in order to be able to unsubscribe
+     * the scheduled work.
+     */
+    Scheduler.prototype.schedule = function (work, delay, state) {
+        if (delay === void 0) { delay = 0; }
+        return new this.SchedulerAction(this, work).schedule(state, delay);
+    };
+    Scheduler.now = Date.now ? Date.now : function () { return +new Date(); };
+    return Scheduler;
+}());
+exports.Scheduler = Scheduler;
+//# sourceMappingURL=Scheduler.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/Subscriber.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var isFunction_1 = __webpack_require__("./node_modules/rxjs/util/isFunction.js");
+var Subscription_1 = __webpack_require__("./node_modules/rxjs/Subscription.js");
+var Observer_1 = __webpack_require__("./node_modules/rxjs/Observer.js");
+var rxSubscriber_1 = __webpack_require__("./node_modules/rxjs/symbol/rxSubscriber.js");
+/**
+ * Implements the {@link Observer} interface and extends the
+ * {@link Subscription} class. While the {@link Observer} is the public API for
+ * consuming the values of an {@link Observable}, all Observers get converted to
+ * a Subscriber, in order to provide Subscription-like capabilities such as
+ * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
+ * implementing operators, but it is rarely used as a public API.
+ *
+ * @class Subscriber<T>
+ */
+var Subscriber = (function (_super) {
+    __extends(Subscriber, _super);
+    /**
+     * @param {Observer|function(value: T): void} [destinationOrNext] A partially
+     * defined Observer or a `next` callback function.
+     * @param {function(e: ?any): void} [error] The `error` callback of an
+     * Observer.
+     * @param {function(): void} [complete] The `complete` callback of an
+     * Observer.
+     */
+    function Subscriber(destinationOrNext, error, complete) {
+        _super.call(this);
+        this.syncErrorValue = null;
+        this.syncErrorThrown = false;
+        this.syncErrorThrowable = false;
+        this.isStopped = false;
+        switch (arguments.length) {
+            case 0:
+                this.destination = Observer_1.empty;
+                break;
+            case 1:
+                if (!destinationOrNext) {
+                    this.destination = Observer_1.empty;
+                    break;
+                }
+                if (typeof destinationOrNext === 'object') {
+                    if (destinationOrNext instanceof Subscriber) {
+                        this.destination = destinationOrNext;
+                        this.destination.add(this);
+                    }
+                    else {
+                        this.syncErrorThrowable = true;
+                        this.destination = new SafeSubscriber(this, destinationOrNext);
+                    }
+                    break;
+                }
+            default:
+                this.syncErrorThrowable = true;
+                this.destination = new SafeSubscriber(this, destinationOrNext, error, complete);
+                break;
+        }
+    }
+    Subscriber.prototype[rxSubscriber_1.$$rxSubscriber] = function () { return this; };
+    /**
+     * A static factory for a Subscriber, given a (potentially partial) definition
+     * of an Observer.
+     * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
+     * @param {function(e: ?any): void} [error] The `error` callback of an
+     * Observer.
+     * @param {function(): void} [complete] The `complete` callback of an
+     * Observer.
+     * @return {Subscriber<T>} A Subscriber wrapping the (partially defined)
+     * Observer represented by the given arguments.
+     */
+    Subscriber.create = function (next, error, complete) {
+        var subscriber = new Subscriber(next, error, complete);
+        subscriber.syncErrorThrowable = false;
+        return subscriber;
+    };
+    /**
+     * The {@link Observer} callback to receive notifications of type `next` from
+     * the Observable, with a value. The Observable may call this method 0 or more
+     * times.
+     * @param {T} [value] The `next` value.
+     * @return {void}
+     */
+    Subscriber.prototype.next = function (value) {
+        if (!this.isStopped) {
+            this._next(value);
+        }
+    };
+    /**
+     * The {@link Observer} callback to receive notifications of type `error` from
+     * the Observable, with an attached {@link Error}. Notifies the Observer that
+     * the Observable has experienced an error condition.
+     * @param {any} [err] The `error` exception.
+     * @return {void}
+     */
+    Subscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._error(err);
+        }
+    };
+    /**
+     * The {@link Observer} callback to receive a valueless notification of type
+     * `complete` from the Observable. Notifies the Observer that the Observable
+     * has finished sending push-based notifications.
+     * @return {void}
+     */
+    Subscriber.prototype.complete = function () {
+        if (!this.isStopped) {
+            this.isStopped = true;
+            this._complete();
+        }
+    };
+    Subscriber.prototype.unsubscribe = function () {
+        if (this.closed) {
+            return;
+        }
+        this.isStopped = true;
+        _super.prototype.unsubscribe.call(this);
+    };
+    Subscriber.prototype._next = function (value) {
+        this.destination.next(value);
+    };
+    Subscriber.prototype._error = function (err) {
+        this.destination.error(err);
+        this.unsubscribe();
+    };
+    Subscriber.prototype._complete = function () {
+        this.destination.complete();
+        this.unsubscribe();
+    };
+    return Subscriber;
+}(Subscription_1.Subscription));
+exports.Subscriber = Subscriber;
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var SafeSubscriber = (function (_super) {
+    __extends(SafeSubscriber, _super);
+    function SafeSubscriber(_parent, observerOrNext, error, complete) {
+        _super.call(this);
+        this._parent = _parent;
+        var next;
+        var context = this;
+        if (isFunction_1.isFunction(observerOrNext)) {
+            next = observerOrNext;
+        }
+        else if (observerOrNext) {
+            context = observerOrNext;
+            next = observerOrNext.next;
+            error = observerOrNext.error;
+            complete = observerOrNext.complete;
+            if (isFunction_1.isFunction(context.unsubscribe)) {
+                this.add(context.unsubscribe.bind(context));
+            }
+            context.unsubscribe = this.unsubscribe.bind(this);
+        }
+        this._context = context;
+        this._next = next;
+        this._error = error;
+        this._complete = complete;
+    }
+    SafeSubscriber.prototype.next = function (value) {
+        if (!this.isStopped && this._next) {
+            var _parent = this._parent;
+            if (!_parent.syncErrorThrowable) {
+                this.__tryOrUnsub(this._next, value);
+            }
+            else if (this.__tryOrSetError(_parent, this._next, value)) {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.error = function (err) {
+        if (!this.isStopped) {
+            var _parent = this._parent;
+            if (this._error) {
+                if (!_parent.syncErrorThrowable) {
+                    this.__tryOrUnsub(this._error, err);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parent, this._error, err);
+                    this.unsubscribe();
+                }
+            }
+            else if (!_parent.syncErrorThrowable) {
+                this.unsubscribe();
+                throw err;
+            }
+            else {
+                _parent.syncErrorValue = err;
+                _parent.syncErrorThrown = true;
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.complete = function () {
+        if (!this.isStopped) {
+            var _parent = this._parent;
+            if (this._complete) {
+                if (!_parent.syncErrorThrowable) {
+                    this.__tryOrUnsub(this._complete);
+                    this.unsubscribe();
+                }
+                else {
+                    this.__tryOrSetError(_parent, this._complete);
+                    this.unsubscribe();
+                }
+            }
+            else {
+                this.unsubscribe();
+            }
+        }
+    };
+    SafeSubscriber.prototype.__tryOrUnsub = function (fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            this.unsubscribe();
+            throw err;
+        }
+    };
+    SafeSubscriber.prototype.__tryOrSetError = function (parent, fn, value) {
+        try {
+            fn.call(this._context, value);
+        }
+        catch (err) {
+            parent.syncErrorValue = err;
+            parent.syncErrorThrown = true;
+            return true;
+        }
+        return false;
+    };
+    SafeSubscriber.prototype._unsubscribe = function () {
+        var _parent = this._parent;
+        this._context = null;
+        this._parent = null;
+        _parent.unsubscribe();
+    };
+    return SafeSubscriber;
+}(Subscriber));
+//# sourceMappingURL=Subscriber.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/Subscription.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var isArray_1 = __webpack_require__("./node_modules/rxjs/util/isArray.js");
+var isObject_1 = __webpack_require__("./node_modules/rxjs/util/isObject.js");
+var isFunction_1 = __webpack_require__("./node_modules/rxjs/util/isFunction.js");
+var tryCatch_1 = __webpack_require__("./node_modules/rxjs/util/tryCatch.js");
+var errorObject_1 = __webpack_require__("./node_modules/rxjs/util/errorObject.js");
+var UnsubscriptionError_1 = __webpack_require__("./node_modules/rxjs/util/UnsubscriptionError.js");
+/**
+ * Represents a disposable resource, such as the execution of an Observable. A
+ * Subscription has one important method, `unsubscribe`, that takes no argument
+ * and just disposes the resource held by the subscription.
+ *
+ * Additionally, subscriptions may be grouped together through the `add()`
+ * method, which will attach a child Subscription to the current Subscription.
+ * When a Subscription is unsubscribed, all its children (and its grandchildren)
+ * will be unsubscribed as well.
+ *
+ * @class Subscription
+ */
+var Subscription = (function () {
+    /**
+     * @param {function(): void} [unsubscribe] A function describing how to
+     * perform the disposal of resources when the `unsubscribe` method is called.
+     */
+    function Subscription(unsubscribe) {
+        /**
+         * A flag to indicate whether this Subscription has already been unsubscribed.
+         * @type {boolean}
+         */
+        this.closed = false;
+        if (unsubscribe) {
+            this._unsubscribe = unsubscribe;
+        }
+    }
+    /**
+     * Disposes the resources held by the subscription. May, for instance, cancel
+     * an ongoing Observable execution or cancel any other type of work that
+     * started when the Subscription was created.
+     * @return {void}
+     */
+    Subscription.prototype.unsubscribe = function () {
+        var hasErrors = false;
+        var errors;
+        if (this.closed) {
+            return;
+        }
+        this.closed = true;
+        var _a = this, _unsubscribe = _a._unsubscribe, _subscriptions = _a._subscriptions;
+        this._subscriptions = null;
+        if (isFunction_1.isFunction(_unsubscribe)) {
+            var trial = tryCatch_1.tryCatch(_unsubscribe).call(this);
+            if (trial === errorObject_1.errorObject) {
+                hasErrors = true;
+                (errors = errors || []).push(errorObject_1.errorObject.e);
+            }
+        }
+        if (isArray_1.isArray(_subscriptions)) {
+            var index = -1;
+            var len = _subscriptions.length;
+            while (++index < len) {
+                var sub = _subscriptions[index];
+                if (isObject_1.isObject(sub)) {
+                    var trial = tryCatch_1.tryCatch(sub.unsubscribe).call(sub);
+                    if (trial === errorObject_1.errorObject) {
+                        hasErrors = true;
+                        errors = errors || [];
+                        var err = errorObject_1.errorObject.e;
+                        if (err instanceof UnsubscriptionError_1.UnsubscriptionError) {
+                            errors = errors.concat(err.errors);
+                        }
+                        else {
+                            errors.push(err);
+                        }
+                    }
+                }
+            }
+        }
+        if (hasErrors) {
+            throw new UnsubscriptionError_1.UnsubscriptionError(errors);
+        }
+    };
+    /**
+     * Adds a tear down to be called during the unsubscribe() of this
+     * Subscription.
+     *
+     * If the tear down being added is a subscription that is already
+     * unsubscribed, is the same reference `add` is being called on, or is
+     * `Subscription.EMPTY`, it will not be added.
+     *
+     * If this subscription is already in an `closed` state, the passed
+     * tear down logic will be executed immediately.
+     *
+     * @param {TeardownLogic} teardown The additional logic to execute on
+     * teardown.
+     * @return {Subscription} Returns the Subscription used or created to be
+     * added to the inner subscriptions list. This Subscription can be used with
+     * `remove()` to remove the passed teardown logic from the inner subscriptions
+     * list.
+     */
+    Subscription.prototype.add = function (teardown) {
+        if (!teardown || (teardown === Subscription.EMPTY)) {
+            return Subscription.EMPTY;
+        }
+        if (teardown === this) {
+            return this;
+        }
+        var sub = teardown;
+        switch (typeof teardown) {
+            case 'function':
+                sub = new Subscription(teardown);
+            case 'object':
+                if (sub.closed || typeof sub.unsubscribe !== 'function') {
+                    break;
+                }
+                else if (this.closed) {
+                    sub.unsubscribe();
+                }
+                else {
+                    (this._subscriptions || (this._subscriptions = [])).push(sub);
+                }
+                break;
+            default:
+                throw new Error('unrecognized teardown ' + teardown + ' added to Subscription.');
+        }
+        return sub;
+    };
+    /**
+     * Removes a Subscription from the internal list of subscriptions that will
+     * unsubscribe during the unsubscribe process of this Subscription.
+     * @param {Subscription} subscription The subscription to remove.
+     * @return {void}
+     */
+    Subscription.prototype.remove = function (subscription) {
+        // HACK: This might be redundant because of the logic in `add()`
+        if (subscription == null || (subscription === this) || (subscription === Subscription.EMPTY)) {
+            return;
+        }
+        var subscriptions = this._subscriptions;
+        if (subscriptions) {
+            var subscriptionIndex = subscriptions.indexOf(subscription);
+            if (subscriptionIndex !== -1) {
+                subscriptions.splice(subscriptionIndex, 1);
+            }
+        }
+    };
+    Subscription.EMPTY = (function (empty) {
+        empty.closed = true;
+        return empty;
+    }(new Subscription()));
+    return Subscription;
+}());
+exports.Subscription = Subscription;
+//# sourceMappingURL=Subscription.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/add/observable/fromEvent.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
+var fromEvent_1 = __webpack_require__("./node_modules/rxjs/observable/fromEvent.js");
+Observable_1.Observable.fromEvent = fromEvent_1.fromEvent;
+//# sourceMappingURL=fromEvent.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/add/operator/debounceTime.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
+var debounceTime_1 = __webpack_require__("./node_modules/rxjs/operator/debounceTime.js");
+Observable_1.Observable.prototype.debounceTime = debounceTime_1.debounceTime;
+//# sourceMappingURL=debounceTime.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/observable/FromEventObservable.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
+var tryCatch_1 = __webpack_require__("./node_modules/rxjs/util/tryCatch.js");
+var isFunction_1 = __webpack_require__("./node_modules/rxjs/util/isFunction.js");
+var errorObject_1 = __webpack_require__("./node_modules/rxjs/util/errorObject.js");
+var Subscription_1 = __webpack_require__("./node_modules/rxjs/Subscription.js");
+function isNodeStyleEventEmmitter(sourceObj) {
+    return !!sourceObj && typeof sourceObj.addListener === 'function' && typeof sourceObj.removeListener === 'function';
+}
+function isJQueryStyleEventEmitter(sourceObj) {
+    return !!sourceObj && typeof sourceObj.on === 'function' && typeof sourceObj.off === 'function';
+}
+function isNodeList(sourceObj) {
+    return !!sourceObj && sourceObj.toString() === '[object NodeList]';
+}
+function isHTMLCollection(sourceObj) {
+    return !!sourceObj && sourceObj.toString() === '[object HTMLCollection]';
+}
+function isEventTarget(sourceObj) {
+    return !!sourceObj && typeof sourceObj.addEventListener === 'function' && typeof sourceObj.removeEventListener === 'function';
+}
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @extends {Ignored}
+ * @hide true
+ */
+var FromEventObservable = (function (_super) {
+    __extends(FromEventObservable, _super);
+    function FromEventObservable(sourceObj, eventName, selector, options) {
+        _super.call(this);
+        this.sourceObj = sourceObj;
+        this.eventName = eventName;
+        this.selector = selector;
+        this.options = options;
+    }
+    /* tslint:enable:max-line-length */
+    /**
+     * Creates an Observable that emits events of a specific type coming from the
+     * given event target.
+     *
+     * <span class="informal">Creates an Observable from DOM events, or Node
+     * EventEmitter events or others.</span>
+     *
+     * <img src="./img/fromEvent.png" width="100%">
+     *
+     * Creates an Observable by attaching an event listener to an "event target",
+     * which may be an object with `addEventListener` and `removeEventListener`,
+     * a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the
+     * DOM, or an HTMLCollection from the DOM. The event handler is attached when
+     * the output Observable is subscribed, and removed when the Subscription is
+     * unsubscribed.
+     *
+     * @example <caption>Emits clicks happening on the DOM document</caption>
+     * var clicks = Rx.Observable.fromEvent(document, 'click');
+     * clicks.subscribe(x => console.log(x));
+     *
+     * @see {@link from}
+     * @see {@link fromEventPattern}
+     *
+     * @param {EventTargetLike} target The DOMElement, event target, Node.js
+     * EventEmitter, NodeList or HTMLCollection to attach the event handler to.
+     * @param {string} eventName The event name of interest, being emitted by the
+     * `target`.
+     * @parm {EventListenerOptions} [options] Options to pass through to addEventListener
+     * @param {SelectorMethodSignature<T>} [selector] An optional function to
+     * post-process results. It takes the arguments from the event handler and
+     * should return a single value.
+     * @return {Observable<T>}
+     * @static true
+     * @name fromEvent
+     * @owner Observable
+     */
+    FromEventObservable.create = function (target, eventName, options, selector) {
+        if (isFunction_1.isFunction(options)) {
+            selector = options;
+            options = undefined;
+        }
+        return new FromEventObservable(target, eventName, selector, options);
+    };
+    FromEventObservable.setupSubscription = function (sourceObj, eventName, handler, subscriber, options) {
+        var unsubscribe;
+        if (isNodeList(sourceObj) || isHTMLCollection(sourceObj)) {
+            for (var i = 0, len = sourceObj.length; i < len; i++) {
+                FromEventObservable.setupSubscription(sourceObj[i], eventName, handler, subscriber, options);
+            }
+        }
+        else if (isEventTarget(sourceObj)) {
+            var source_1 = sourceObj;
+            sourceObj.addEventListener(eventName, handler, options);
+            unsubscribe = function () { return source_1.removeEventListener(eventName, handler); };
+        }
+        else if (isJQueryStyleEventEmitter(sourceObj)) {
+            var source_2 = sourceObj;
+            sourceObj.on(eventName, handler);
+            unsubscribe = function () { return source_2.off(eventName, handler); };
+        }
+        else if (isNodeStyleEventEmmitter(sourceObj)) {
+            var source_3 = sourceObj;
+            sourceObj.addListener(eventName, handler);
+            unsubscribe = function () { return source_3.removeListener(eventName, handler); };
+        }
+        subscriber.add(new Subscription_1.Subscription(unsubscribe));
+    };
+    FromEventObservable.prototype._subscribe = function (subscriber) {
+        var sourceObj = this.sourceObj;
+        var eventName = this.eventName;
+        var options = this.options;
+        var selector = this.selector;
+        var handler = selector ? function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i - 0] = arguments[_i];
+            }
+            var result = tryCatch_1.tryCatch(selector).apply(void 0, args);
+            if (result === errorObject_1.errorObject) {
+                subscriber.error(errorObject_1.errorObject.e);
+            }
+            else {
+                subscriber.next(result);
+            }
+        } : function (e) { return subscriber.next(e); };
+        FromEventObservable.setupSubscription(sourceObj, eventName, handler, subscriber, options);
+    };
+    return FromEventObservable;
+}(Observable_1.Observable));
+exports.FromEventObservable = FromEventObservable;
+//# sourceMappingURL=FromEventObservable.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/observable/fromEvent.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var FromEventObservable_1 = __webpack_require__("./node_modules/rxjs/observable/FromEventObservable.js");
+exports.fromEvent = FromEventObservable_1.FromEventObservable.create;
+//# sourceMappingURL=fromEvent.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/operator/debounceTime.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+var async_1 = __webpack_require__("./node_modules/rxjs/scheduler/async.js");
+/**
+ * Emits a value from the source Observable only after a particular time span
+ * has passed without another source emission.
+ *
+ * <span class="informal">It's like {@link delay}, but passes only the most
+ * recent value from each burst of emissions.</span>
+ *
+ * <img src="./img/debounceTime.png" width="100%">
+ *
+ * `debounceTime` delays values emitted by the source Observable, but drops
+ * previous pending delayed emissions if a new value arrives on the source
+ * Observable. This operator keeps track of the most recent value from the
+ * source Observable, and emits that only when `dueTime` enough time has passed
+ * without any other value appearing on the source Observable. If a new value
+ * appears before `dueTime` silence occurs, the previous value will be dropped
+ * and will not be emitted on the output Observable.
+ *
+ * This is a rate-limiting operator, because it is impossible for more than one
+ * value to be emitted in any time window of duration `dueTime`, but it is also
+ * a delay-like operator since output emissions do not occur at the same time as
+ * they did on the source Observable. Optionally takes a {@link Scheduler} for
+ * managing timers.
+ *
+ * @example <caption>Emit the most recent click after a burst of clicks</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var result = clicks.debounceTime(1000);
+ * result.subscribe(x => console.log(x));
+ *
+ * @see {@link auditTime}
+ * @see {@link debounce}
+ * @see {@link delay}
+ * @see {@link sampleTime}
+ * @see {@link throttleTime}
+ *
+ * @param {number} dueTime The timeout duration in milliseconds (or the time
+ * unit determined internally by the optional `scheduler`) for the window of
+ * time required to wait for emission silence before emitting the most recent
+ * source value.
+ * @param {Scheduler} [scheduler=async] The {@link Scheduler} to use for
+ * managing the timers that handle the timeout for each value.
+ * @return {Observable} An Observable that delays the emissions of the source
+ * Observable by the specified `dueTime`, and may drop some values if they occur
+ * too frequently.
+ * @method debounceTime
+ * @owner Observable
+ */
+function debounceTime(dueTime, scheduler) {
+    if (scheduler === void 0) { scheduler = async_1.async; }
+    return this.lift(new DebounceTimeOperator(dueTime, scheduler));
+}
+exports.debounceTime = debounceTime;
+var DebounceTimeOperator = (function () {
+    function DebounceTimeOperator(dueTime, scheduler) {
+        this.dueTime = dueTime;
+        this.scheduler = scheduler;
+    }
+    DebounceTimeOperator.prototype.call = function (subscriber, source) {
+        return source._subscribe(new DebounceTimeSubscriber(subscriber, this.dueTime, this.scheduler));
+    };
+    return DebounceTimeOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var DebounceTimeSubscriber = (function (_super) {
+    __extends(DebounceTimeSubscriber, _super);
+    function DebounceTimeSubscriber(destination, dueTime, scheduler) {
+        _super.call(this, destination);
+        this.dueTime = dueTime;
+        this.scheduler = scheduler;
+        this.debouncedSubscription = null;
+        this.lastValue = null;
+        this.hasValue = false;
+    }
+    DebounceTimeSubscriber.prototype._next = function (value) {
+        this.clearDebounce();
+        this.lastValue = value;
+        this.hasValue = true;
+        this.add(this.debouncedSubscription = this.scheduler.schedule(dispatchNext, this.dueTime, this));
+    };
+    DebounceTimeSubscriber.prototype._complete = function () {
+        this.debouncedNext();
+        this.destination.complete();
+    };
+    DebounceTimeSubscriber.prototype.debouncedNext = function () {
+        this.clearDebounce();
+        if (this.hasValue) {
+            this.destination.next(this.lastValue);
+            this.lastValue = null;
+            this.hasValue = false;
+        }
+    };
+    DebounceTimeSubscriber.prototype.clearDebounce = function () {
+        var debouncedSubscription = this.debouncedSubscription;
+        if (debouncedSubscription !== null) {
+            this.remove(debouncedSubscription);
+            debouncedSubscription.unsubscribe();
+            this.debouncedSubscription = null;
+        }
+    };
+    return DebounceTimeSubscriber;
+}(Subscriber_1.Subscriber));
+function dispatchNext(subscriber) {
+    subscriber.debouncedNext();
+}
+//# sourceMappingURL=debounceTime.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/scheduler/Action.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscription_1 = __webpack_require__("./node_modules/rxjs/Subscription.js");
+/**
+ * A unit of work to be executed in a {@link Scheduler}. An action is typically
+ * created from within a Scheduler and an RxJS user does not need to concern
+ * themselves about creating and manipulating an Action.
+ *
+ * ```ts
+ * class Action<T> extends Subscription {
+ *   new (scheduler: Scheduler, work: (state?: T) => void);
+ *   schedule(state?: T, delay: number = 0): Subscription;
+ * }
+ * ```
+ *
+ * @class Action<T>
+ */
+var Action = (function (_super) {
+    __extends(Action, _super);
+    function Action(scheduler, work) {
+        _super.call(this);
+    }
+    /**
+     * Schedules this action on its parent Scheduler for execution. May be passed
+     * some context object, `state`. May happen at some point in the future,
+     * according to the `delay` parameter, if specified.
+     * @param {T} [state] Some contextual data that the `work` function uses when
+     * called by the Scheduler.
+     * @param {number} [delay] Time to wait before executing the work, where the
+     * time unit is implicit and defined by the Scheduler.
+     * @return {void}
+     */
+    Action.prototype.schedule = function (state, delay) {
+        if (delay === void 0) { delay = 0; }
+        return this;
+    };
+    return Action;
+}(Subscription_1.Subscription));
+exports.Action = Action;
+//# sourceMappingURL=Action.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/scheduler/AsyncAction.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
+var Action_1 = __webpack_require__("./node_modules/rxjs/scheduler/Action.js");
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var AsyncAction = (function (_super) {
+    __extends(AsyncAction, _super);
+    function AsyncAction(scheduler, work) {
+        _super.call(this, scheduler, work);
+        this.scheduler = scheduler;
+        this.work = work;
+        this.pending = false;
+    }
+    AsyncAction.prototype.schedule = function (state, delay) {
+        if (delay === void 0) { delay = 0; }
+        if (this.closed) {
+            return this;
+        }
+        // Always replace the current state with the new state.
+        this.state = state;
+        // Set the pending flag indicating that this action has been scheduled, or
+        // has recursively rescheduled itself.
+        this.pending = true;
+        var id = this.id;
+        var scheduler = this.scheduler;
+        //
+        // Important implementation note:
+        //
+        // Actions only execute once by default, unless rescheduled from within the
+        // scheduled callback. This allows us to implement single and repeat
+        // actions via the same code path, without adding API surface area, as well
+        // as mimic traditional recursion but across asynchronous boundaries.
+        //
+        // However, JS runtimes and timers distinguish between intervals achieved by
+        // serial `setTimeout` calls vs. a single `setInterval` call. An interval of
+        // serial `setTimeout` calls can be individually delayed, which delays
+        // scheduling the next `setTimeout`, and so on. `setInterval` attempts to
+        // guarantee the interval callback will be invoked more precisely to the
+        // interval period, regardless of load.
+        //
+        // Therefore, we use `setInterval` to schedule single and repeat actions.
+        // If the action reschedules itself with the same delay, the interval is not
+        // canceled. If the action doesn't reschedule, or reschedules with a
+        // different delay, the interval will be canceled after scheduled callback
+        // execution.
+        //
+        if (id != null) {
+            this.id = this.recycleAsyncId(scheduler, id, delay);
+        }
+        this.delay = delay;
+        // If this action has already an async Id, don't request a new one.
+        this.id = this.id || this.requestAsyncId(scheduler, this.id, delay);
+        return this;
+    };
+    AsyncAction.prototype.requestAsyncId = function (scheduler, id, delay) {
+        if (delay === void 0) { delay = 0; }
+        return root_1.root.setInterval(scheduler.flush.bind(scheduler, this), delay);
+    };
+    AsyncAction.prototype.recycleAsyncId = function (scheduler, id, delay) {
+        if (delay === void 0) { delay = 0; }
+        // If this action is rescheduled with the same delay time, don't clear the interval id.
+        if (delay !== null && this.delay === delay) {
+            return id;
+        }
+        // Otherwise, if the action's delay time is different from the current delay,
+        // clear the interval id
+        return root_1.root.clearInterval(id) && undefined || undefined;
+    };
+    /**
+     * Immediately executes this action and the `work` it contains.
+     * @return {any}
+     */
+    AsyncAction.prototype.execute = function (state, delay) {
+        if (this.closed) {
+            return new Error('executing a cancelled action');
+        }
+        this.pending = false;
+        var error = this._execute(state, delay);
+        if (error) {
+            return error;
+        }
+        else if (this.pending === false && this.id != null) {
+            // Dequeue if the action didn't reschedule itself. Don't call
+            // unsubscribe(), because the action could reschedule later.
+            // For example:
+            // ```
+            // scheduler.schedule(function doWork(counter) {
+            //   /* ... I'm a busy worker bee ... */
+            //   var originalAction = this;
+            //   /* wait 100ms before rescheduling the action */
+            //   setTimeout(function () {
+            //     originalAction.schedule(counter + 1);
+            //   }, 100);
+            // }, 1000);
+            // ```
+            this.id = this.recycleAsyncId(this.scheduler, this.id, null);
+        }
+    };
+    AsyncAction.prototype._execute = function (state, delay) {
+        var errored = false;
+        var errorValue = undefined;
+        try {
+            this.work(state);
+        }
+        catch (e) {
+            errored = true;
+            errorValue = !!e && e || new Error(e);
+        }
+        if (errored) {
+            this.unsubscribe();
+            return errorValue;
+        }
+    };
+    AsyncAction.prototype._unsubscribe = function () {
+        var id = this.id;
+        var scheduler = this.scheduler;
+        var actions = scheduler.actions;
+        var index = actions.indexOf(this);
+        this.work = null;
+        this.delay = null;
+        this.state = null;
+        this.pending = false;
+        this.scheduler = null;
+        if (index !== -1) {
+            actions.splice(index, 1);
+        }
+        if (id != null) {
+            this.id = this.recycleAsyncId(scheduler, id, null);
+        }
+    };
+    return AsyncAction;
+}(Action_1.Action));
+exports.AsyncAction = AsyncAction;
+//# sourceMappingURL=AsyncAction.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/scheduler/AsyncScheduler.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Scheduler_1 = __webpack_require__("./node_modules/rxjs/Scheduler.js");
+var AsyncScheduler = (function (_super) {
+    __extends(AsyncScheduler, _super);
+    function AsyncScheduler() {
+        _super.apply(this, arguments);
+        this.actions = [];
+        /**
+         * A flag to indicate whether the Scheduler is currently executing a batch of
+         * queued actions.
+         * @type {boolean}
+         */
+        this.active = false;
+        /**
+         * An internal ID used to track the latest asynchronous task such as those
+         * coming from `setTimeout`, `setInterval`, `requestAnimationFrame`, and
+         * others.
+         * @type {any}
+         */
+        this.scheduled = undefined;
+    }
+    AsyncScheduler.prototype.flush = function (action) {
+        var actions = this.actions;
+        if (this.active) {
+            actions.push(action);
+            return;
+        }
+        var error;
+        this.active = true;
+        do {
+            if (error = action.execute(action.state, action.delay)) {
+                break;
+            }
+        } while (action = actions.shift()); // exhaust the scheduler queue
+        this.active = false;
+        if (error) {
+            while (action = actions.shift()) {
+                action.unsubscribe();
+            }
+            throw error;
+        }
+    };
+    return AsyncScheduler;
+}(Scheduler_1.Scheduler));
+exports.AsyncScheduler = AsyncScheduler;
+//# sourceMappingURL=AsyncScheduler.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/scheduler/async.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var AsyncAction_1 = __webpack_require__("./node_modules/rxjs/scheduler/AsyncAction.js");
+var AsyncScheduler_1 = __webpack_require__("./node_modules/rxjs/scheduler/AsyncScheduler.js");
+exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
+//# sourceMappingURL=async.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/symbol/observable.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
+function getSymbolObservable(context) {
+    var $$observable;
+    var Symbol = context.Symbol;
+    if (typeof Symbol === 'function') {
+        if (Symbol.observable) {
+            $$observable = Symbol.observable;
+        }
+        else {
+            $$observable = Symbol('observable');
+            Symbol.observable = $$observable;
+        }
+    }
+    else {
+        $$observable = '@@observable';
+    }
+    return $$observable;
+}
+exports.getSymbolObservable = getSymbolObservable;
+exports.$$observable = getSymbolObservable(root_1.root);
+//# sourceMappingURL=observable.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/symbol/rxSubscriber.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
+var Symbol = root_1.root.Symbol;
+exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
+    Symbol.for('rxSubscriber') : '@@rxSubscriber';
+//# sourceMappingURL=rxSubscriber.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/UnsubscriptionError.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * An error thrown when one or more errors have occurred during the
+ * `unsubscribe` of a {@link Subscription}.
+ */
+var UnsubscriptionError = (function (_super) {
+    __extends(UnsubscriptionError, _super);
+    function UnsubscriptionError(errors) {
+        _super.call(this);
+        this.errors = errors;
+        var err = Error.call(this, errors ?
+            errors.length + " errors occurred during unsubscription:\n  " + errors.map(function (err, i) { return ((i + 1) + ") " + err.toString()); }).join('\n  ') : '');
+        this.name = err.name = 'UnsubscriptionError';
+        this.stack = err.stack;
+        this.message = err.message;
+    }
+    return UnsubscriptionError;
+}(Error));
+exports.UnsubscriptionError = UnsubscriptionError;
+//# sourceMappingURL=UnsubscriptionError.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/errorObject.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+// typeof any so that it we don't have to cast when comparing a result to the error object
+exports.errorObject = { e: {} };
+//# sourceMappingURL=errorObject.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/isArray.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+//# sourceMappingURL=isArray.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/isFunction.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+function isFunction(x) {
+    return typeof x === 'function';
+}
+exports.isFunction = isFunction;
+//# sourceMappingURL=isFunction.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/isObject.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+function isObject(x) {
+    return x != null && typeof x === 'object';
+}
+exports.isObject = isObject;
+//# sourceMappingURL=isObject.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/root.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {"use strict";
+var objectTypes = {
+    'boolean': false,
+    'function': true,
+    'object': true,
+    'number': false,
+    'string': false,
+    'undefined': false
+};
+exports.root = (objectTypes[typeof self] && self) || (objectTypes[typeof window] && window);
+var freeGlobal = objectTypes[typeof global] && global;
+if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === freeGlobal)) {
+    exports.root = freeGlobal;
+}
+//# sourceMappingURL=root.js.map
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/global.js")))
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/toSubscriber.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+var rxSubscriber_1 = __webpack_require__("./node_modules/rxjs/symbol/rxSubscriber.js");
+function toSubscriber(nextOrObserver, error, complete) {
+    if (nextOrObserver) {
+        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
+            return nextOrObserver;
+        }
+        if (nextOrObserver[rxSubscriber_1.$$rxSubscriber]) {
+            return nextOrObserver[rxSubscriber_1.$$rxSubscriber]();
+        }
+    }
+    if (!nextOrObserver && !error && !complete) {
+        return new Subscriber_1.Subscriber();
+    }
+    return new Subscriber_1.Subscriber(nextOrObserver, error, complete);
+}
+exports.toSubscriber = toSubscriber;
+//# sourceMappingURL=toSubscriber.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/tryCatch.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var errorObject_1 = __webpack_require__("./node_modules/rxjs/util/errorObject.js");
+var tryCatchTarget;
+function tryCatcher() {
+    try {
+        return tryCatchTarget.apply(this, arguments);
+    }
+    catch (e) {
+        errorObject_1.errorObject.e = e;
+        return errorObject_1.errorObject;
+    }
+}
+function tryCatch(fn) {
+    tryCatchTarget = fn;
+    return tryCatcher;
+}
+exports.tryCatch = tryCatch;
+;
+//# sourceMappingURL=tryCatch.js.map
 
 /***/ },
 
@@ -406,6 +1803,32 @@ function updateLink(linkElement, obj) {
 
 /***/ },
 
+/***/ "./node_modules/webpack/buildin/global.js":
+/***/ function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() { return this; })();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ },
+
 /***/ "./src/area-chart/area-chart-normalized.component.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -454,7 +1877,7 @@ var AreaChartNormalizedComponent = (function (_super) {
     AreaChartNormalizedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    AreaChartNormalizedComponent.prototype.ngOnChanges = function () {
+    AreaChartNormalizedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaChartNormalizedComponent.prototype.update = function () {
@@ -817,7 +2240,7 @@ var AreaChartStackedComponent = (function (_super) {
     AreaChartStackedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    AreaChartStackedComponent.prototype.ngOnChanges = function () {
+    AreaChartStackedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaChartStackedComponent.prototype.update = function () {
@@ -1183,7 +2606,7 @@ var AreaChartComponent = (function (_super) {
     AreaChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    AreaChartComponent.prototype.ngOnChanges = function () {
+    AreaChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaChartComponent.prototype.update = function () {
@@ -1539,7 +2962,7 @@ var AreaSeriesComponent = (function () {
         this.normalized = false;
         this.clickHandler = new core_1.EventEmitter();
     }
-    AreaSeriesComponent.prototype.ngOnChanges = function () {
+    AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaSeriesComponent.prototype.update = function () {
@@ -1781,7 +3204,7 @@ var BarHorizontal2DComponent = (function (_super) {
     BarHorizontal2DComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontal2DComponent.prototype.ngOnChanges = function () {
+    BarHorizontal2DComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontal2DComponent.prototype.update = function () {
@@ -2020,7 +3443,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
     BarHorizontalNormalizedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontalNormalizedComponent.prototype.ngOnChanges = function () {
+    BarHorizontalNormalizedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontalNormalizedComponent.prototype.update = function () {
@@ -2238,7 +3661,7 @@ var BarHorizontalStackedComponent = (function (_super) {
     BarHorizontalStackedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontalStackedComponent.prototype.ngOnChanges = function () {
+    BarHorizontalStackedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontalStackedComponent.prototype.update = function () {
@@ -2469,7 +3892,7 @@ var BarHorizontalComponent = (function (_super) {
     BarHorizontalComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontalComponent.prototype.ngOnChanges = function () {
+    BarHorizontalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontalComponent.prototype.update = function () {
@@ -2656,7 +4079,7 @@ var BarVertical2DComponent = (function (_super) {
     BarVertical2DComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVertical2DComponent.prototype.ngOnChanges = function () {
+    BarVertical2DComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarVertical2DComponent.prototype.update = function () {
@@ -2899,7 +4322,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
     BarVerticalNormalizedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVerticalNormalizedComponent.prototype.ngOnChanges = function () {
+    BarVerticalNormalizedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarVerticalNormalizedComponent.prototype.update = function () {
@@ -3117,7 +4540,7 @@ var BarVerticalStackedComponent = (function (_super) {
     BarVerticalStackedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVerticalStackedComponent.prototype.ngOnChanges = function () {
+    BarVerticalStackedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarVerticalStackedComponent.prototype.update = function () {
@@ -3348,7 +4771,7 @@ var BarVerticalComponent = (function (_super) {
     BarVerticalComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarVerticalComponent.prototype.ngOnChanges = function () {
+    BarVerticalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarVerticalComponent.prototype.update = function () {
@@ -3523,7 +4946,7 @@ var BarComponent = (function () {
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         this.startOpacity = this.getStartOpacity();
     };
-    BarComponent.prototype.ngOnChanges = function () {
+    BarComponent.prototype.ngOnChanges = function (changes) {
         // ngOnInit gets called after ngOnChanges, so we need to do this here
         if (!this.initialized) {
             this.loadAnimation();
@@ -3781,7 +5204,6 @@ var SeriesHorizontal = (function () {
                     bar.x = _this.xScale(0);
                 }
                 bar.y = _this.yScale(label);
-                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -3790,7 +5212,6 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
-                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -3807,9 +5228,9 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
-                var percentage = (offset1 - offset0).toFixed(2) + '%';
-                bar.tooltipText = tooltipLabel + ": " + percentage.toLocaleString();
+                value = (offset1 - offset0).toFixed(2) + '%';
             }
+            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
     };
@@ -3949,7 +5370,6 @@ var SeriesVerticalComponent = (function () {
                 else {
                     bar.y = _this.yScale(value);
                 }
-                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'stacked') {
                 var offset0 = d0;
@@ -3958,7 +5378,6 @@ var SeriesVerticalComponent = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
-                bar.tooltipText = tooltipLabel + ": " + value.toLocaleString();
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -3975,9 +5394,9 @@ var SeriesVerticalComponent = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
-                var percentage = (offset1 - offset0).toFixed(2) + '%';
-                bar.tooltipText = tooltipLabel + ": " + percentage.toLocaleString();
+                value = (offset1 - offset0).toFixed(2) + '%';
             }
+            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
     };
@@ -4071,7 +5490,7 @@ var AreaTooltip = (function () {
         this.showPercentage = false;
         this.hover = new core_1.EventEmitter();
     }
-    AreaTooltip.prototype.ngOnChanges = function () {
+    AreaTooltip.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AreaTooltip.prototype.update = function () {
@@ -4204,7 +5623,7 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[areaTooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
@@ -4243,7 +5662,7 @@ var AreaComponent = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    AreaComponent.prototype.ngOnChanges = function () {
+    AreaComponent.prototype.ngOnChanges = function (changes) {
         if (!this.initialized) {
             this.loadAnimation();
             this.initialized = true;
@@ -4382,7 +5801,7 @@ var AxisLabelComponent = (function () {
         this.margin = 5;
         this.element = element.nativeElement;
     }
-    AxisLabelComponent.prototype.ngOnChanges = function () {
+    AxisLabelComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AxisLabelComponent.prototype.update = function () {
@@ -4491,20 +5910,18 @@ var XAxisTicksComponent = (function () {
         this.tickStroke = '#ccc';
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
+        this.verticalSpacing = 20;
+        this.rotateLabels = false;
+        this.innerTickSize = 6;
+        this.outerTickSize = 6;
+        this.tickPadding = 3;
+        this.textAnchor = 'middle';
+        this.maxTicksLength = 0;
         this.maxAllowedLength = 16;
         this.height = 0;
-        Object.assign(this, {
-            innerTickSize: 6,
-            outerTickSize: 6,
-            tickPadding: 3,
-            rotateLabels: false,
-            verticalSpacing: 20,
-            textAnchor: 'middle',
-            maxTicksLength: 0,
-            trimLabel: trim_label_helper_1.trimLabel
-        });
+        this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    XAxisTicksComponent.prototype.ngOnChanges = function () {
+    XAxisTicksComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     XAxisTicksComponent.prototype.ngAfterViewInit = function () {
@@ -4682,18 +6099,16 @@ var XAxisComponent = (function () {
     function XAxisComponent() {
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
+        this.xAxisClassName = 'x axis';
+        this.xOrient = 'bottom';
         this.labelOffset = 80;
-        Object.assign(this, {
-            xAxisClassName: 'x axis',
-            xOrient: 'bottom',
-            fill: 'none',
-            stroke: 'none',
-            tickStroke: '#ccc',
-            strokeWidth: 'none',
-            xAxisOffset: 5,
-        });
+        this.fill = 'none';
+        this.stroke = 'stroke';
+        this.tickStroke = '#ccc';
+        this.strokeWidth = 'none';
+        this.xAxisOffset = 5;
     }
-    XAxisComponent.prototype.ngOnChanges = function () {
+    XAxisComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     XAxisComponent.prototype.update = function () {
@@ -4796,7 +6211,7 @@ var YAxisTicksComponent = (function () {
         this.rotateLabels = false;
         this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    YAxisTicksComponent.prototype.ngOnChanges = function () {
+    YAxisTicksComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     YAxisTicksComponent.prototype.ngAfterViewInit = function () {
@@ -4989,18 +6404,16 @@ var YAxisComponent = (function () {
     function YAxisComponent() {
         this.showGridLines = false;
         this.dimensionsChanged = new core_1.EventEmitter();
+        this.yAxisClassName = 'y axis';
+        this.yAxisOffset = -5;
+        this.yOrient = 'left';
         this.labelOffset = 80;
-        Object.assign(this, {
-            yAxisClassName: 'y axis',
-            yOrient: 'left',
-            fill: 'none',
-            stroke: '#ccc',
-            tickStroke: '#ccc',
-            strokeWidth: '1',
-            yAxisOffset: -5
-        });
+        this.fill = 'none';
+        this.stroke = '#CCC';
+        this.tickStroke = '#CCC';
+        this.strokeWidth = 1;
     }
-    YAxisComponent.prototype.ngOnChanges = function () {
+    YAxisComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     YAxisComponent.prototype.update = function () {
@@ -5081,7 +6494,7 @@ exports.YAxisComponent = YAxisComponent;
 
 "use strict";
 "use strict";
-var rxjs_1 = __webpack_require__(14);
+var Observable_1 = __webpack_require__(14);
 var BaseChartComponent = (function () {
     function BaseChartComponent(chartElement, zone, changeDetector) {
         this.chartElement = chartElement;
@@ -5128,7 +6541,7 @@ var BaseChartComponent = (function () {
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
         this.zone.run(function () {
-            var source = rxjs_1.Observable.fromEvent(window, 'resize', null, null);
+            var source = Observable_1.Observable.fromEvent(window, 'resize', null, null);
             var subscription = source.debounceTime(200).subscribe(function (e) {
                 _this.update();
                 if (_this.changeDetector) {
@@ -5234,6 +6647,7 @@ var area_tooltip_component_1 = __webpack_require__("./src/common/area-tooltip.co
 exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 exports.BaseChartComponent = base_chart_component_1.BaseChartComponent;
+__webpack_require__("./src/common/rxjs-extensions.ts");
 var COMPONENTS = [
     area_component_1.AreaComponent,
     area_tooltip_component_1.AreaTooltip,
@@ -5299,7 +6713,7 @@ var ChartComponent = (function () {
         this.legendLabelClick = new core_1.EventEmitter();
         this.injectionService.setRootViewContainer(vcr);
     }
-    ChartComponent.prototype.ngOnChanges = function () {
+    ChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     ChartComponent.prototype.update = function () {
@@ -5400,7 +6814,7 @@ var CircleSeriesComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.barVisible = false;
     }
-    CircleSeriesComponent.prototype.ngOnChanges = function () {
+    CircleSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     CircleSeriesComponent.prototype.update = function () {
@@ -5441,11 +6855,15 @@ var CircleSeriesComponent = (function () {
                     cy: cy,
                     radius: radius,
                     height: height,
-                    tooltipText: tooltipLabel + ": " + value.toLocaleString(),
+                    tooltipLabel: tooltipLabel,
                     opacity: opacity
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
+    };
+    CircleSeriesComponent.prototype.getTooltipText = function (_a) {
+        var tooltipLabel = _a.tooltipLabel, value = _a.value;
+        return "\n      <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     CircleSeriesComponent.prototype.onClick = function (value, label) {
         this.clickHandler.emit({
@@ -5492,7 +6910,7 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[circleSeries]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"onClick($event, circle.label)\"\n        [style.opacity]=\"circle.opacity\"\n        [style.cursor]=\"'pointer'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"circle.tooltipText\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"onClick($event, circle.label)\"\n        [style.opacity]=\"circle.opacity\"\n        [style.cursor]=\"'pointer'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -5523,7 +6941,7 @@ var CircleComponent = (function () {
     function CircleComponent() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    CircleComponent.prototype.ngOnChanges = function () {
+    CircleComponent.prototype.ngOnChanges = function (changes) {
         this.classNames = this.classNames.join(' ') + 'circle';
     };
     __decorate([
@@ -5660,7 +7078,7 @@ var core_1 = __webpack_require__(0);
 var GridPanelSeriesComponent = (function () {
     function GridPanelSeriesComponent() {
     }
-    GridPanelSeriesComponent.prototype.ngOnChanges = function () {
+    GridPanelSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     GridPanelSeriesComponent.prototype.update = function () {
@@ -5855,7 +7273,7 @@ var LegendComponent = (function () {
     function LegendComponent() {
         this.labelClick = new core_1.EventEmitter();
     }
-    LegendComponent.prototype.ngOnChanges = function () {
+    LegendComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     LegendComponent.prototype.update = function () {
@@ -5949,7 +7367,7 @@ var ScaleLegendComponent = (function () {
     function ScaleLegendComponent(sanitizer) {
         this.sanitizer = sanitizer;
     }
-    ScaleLegendComponent.prototype.ngOnChanges = function () {
+    ScaleLegendComponent.prototype.ngOnChanges = function (changes) {
         var gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
         this.gradient = this.sanitizer.bypassSecurityTrustStyle("linear-gradient(to bottom, " + gradientValues + ")");
     };
@@ -5999,6 +7417,21 @@ exports.ScaleLegendComponent = ScaleLegendComponent;
 
 /***/ },
 
+/***/ "./src/common/rxjs-extensions.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+// Import just the rxjs statics and operators needed for NG2D3
+// @credit John Papa"s https://git.io/v14aZ
+"use strict";
+// Observable class extensions
+__webpack_require__("./node_modules/rxjs/add/observable/fromEvent.js");
+// Observable operators
+__webpack_require__("./node_modules/rxjs/add/operator/debounceTime.js");
+
+
+/***/ },
+
 /***/ "./src/common/svg-linear-gradient.component.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -6019,7 +7452,7 @@ var SvgLinearGradientComponent = (function () {
         this.orientation = 'vertical';
         this.endOpacity = 1;
     }
-    SvgLinearGradientComponent.prototype.ngOnChanges = function () {
+    SvgLinearGradientComponent.prototype.ngOnChanges = function (changes) {
         this.x1 = '0%';
         this.x2 = '0%';
         this.y1 = '0%';
@@ -6085,7 +7518,7 @@ var SvgRadialGradientComponent = (function () {
     function SvgRadialGradientComponent() {
         this.endOpacity = 1;
     }
-    SvgRadialGradientComponent.prototype.ngOnChanges = function () {
+    SvgRadialGradientComponent.prototype.ngOnChanges = function (changes) {
         this.cx = 0;
         this.cy = 0;
         this.r = "30%";
@@ -6171,7 +7604,7 @@ var Timeline = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    Timeline.prototype.ngOnChanges = function () {
+    Timeline.prototype.ngOnChanges = function (changes) {
         this.update();
         if (!this.initialized) {
             this.addBrush();
@@ -6726,6 +8159,14 @@ var TooltipContentComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], TooltipContentComponent.prototype, "cssClass", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], TooltipContentComponent.prototype, "title", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', core_1.TemplateRef)
+    ], TooltipContentComponent.prototype, "template", void 0);
     __decorate([
         core_1.ViewChild('caretElm'), 
         __metadata('design:type', Object)
@@ -7324,12 +8765,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var core_1 = __webpack_require__(0);
 var chart_component_1 = __webpack_require__("./src/common/charts/chart.component.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
-var core_1 = __webpack_require__(0);
 var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
     function ForceDirectedGraphComponent(element, cd, zone) {
@@ -7349,7 +8790,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.margin = [0, 0, 0, 0];
         this.results = [];
     }
-    ForceDirectedGraphComponent.prototype.ngOnChanges = function () {
+    ForceDirectedGraphComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     ForceDirectedGraphComponent.prototype.update = function () {
@@ -7596,7 +9037,7 @@ var GaugeComponent = (function (_super) {
     GaugeComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    GaugeComponent.prototype.ngOnChanges = function () {
+    GaugeComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     GaugeComponent.prototype.update = function () {
@@ -7772,6 +9213,10 @@ var GaugeComponent = (function (_super) {
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "smallSegments", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeComponent.prototype, "legend", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], GaugeComponent.prototype, "clickHandler", void 0);
@@ -7868,7 +9313,7 @@ var HeatCellSeriesComponent = (function () {
     function HeatCellSeriesComponent() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    HeatCellSeriesComponent.prototype.ngOnChanges = function () {
+    HeatCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     HeatCellSeriesComponent.prototype.update = function () {
@@ -7893,12 +9338,15 @@ var HeatCellSeriesComponent = (function () {
                     fill: _this.colors(value),
                     data: value,
                     label: label,
-                    series: row.name,
-                    tooltipText: tooltipLabel + ": " + value.toLocaleString()
+                    series: row.name
                 });
             });
         });
         return cells;
+    };
+    HeatCellSeriesComponent.prototype.getTooltipText = function (_a) {
+        var label = _a.label, data = _a.data;
+        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + data.toLocaleString() + "</span>\n    ";
     };
     HeatCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.tooltipText;
@@ -7937,7 +9385,7 @@ var HeatCellSeriesComponent = (function () {
     HeatCellSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[heatMapCellSeries]',
-            template: "\n    <svg:g heatMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  ",
+            template: "\n    <svg:g \n      heatMapCell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -7972,7 +9420,7 @@ var HeatMapCellComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    HeatMapCellComponent.prototype.ngOnChanges = function () {
+    HeatMapCellComponent.prototype.ngOnChanges = function (changes) {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
         var pageUrl = window.location.href;
         this.startOpacity = 0.3;
@@ -8085,7 +9533,7 @@ var HeatMapComponent = (function (_super) {
     HeatMapComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    HeatMapComponent.prototype.ngOnChanges = function () {
+    HeatMapComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     HeatMapComponent.prototype.update = function () {
@@ -8417,7 +9865,7 @@ var LineChartComponent = (function (_super) {
     LineChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    LineChartComponent.prototype.ngOnChanges = function () {
+    LineChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     LineChartComponent.prototype.update = function () {
@@ -8761,7 +10209,7 @@ var sort_1 = __webpack_require__("./src/utils/sort.ts");
 var LineSeriesComponent = (function () {
     function LineSeriesComponent() {
     }
-    LineSeriesComponent.prototype.ngOnChanges = function () {
+    LineSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     LineSeriesComponent.prototype.update = function () {
@@ -8854,9 +10302,6 @@ var LineComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    LineComponent.prototype.ngOnChanges = function () {
-        // add update animation
-    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -8973,7 +10418,7 @@ var CardSeriesComponent = (function () {
         this.zone = zone;
         this.clickHandler = new core_1.EventEmitter();
     }
-    CardSeriesComponent.prototype.ngOnChanges = function () {
+    CardSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     CardSeriesComponent.prototype.update = function () {
@@ -9060,6 +10505,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var trim_label_helper_1 = __webpack_require__("./src/common/trim-label.helper.ts");
+var color_utils_1 = __webpack_require__("./src/utils/color-utils.ts");
 var CardComponent = (function () {
     function CardComponent(element, cd, zone) {
         this.cd = cd;
@@ -9071,7 +10517,7 @@ var CardComponent = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    CardComponent.prototype.ngOnChanges = function () {
+    CardComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     CardComponent.prototype.update = function () {
@@ -9095,6 +10541,9 @@ var CardComponent = (function () {
                 _this.initialized = true;
             }
         });
+    };
+    CardComponent.prototype.getTextColor = function (color) {
+        return color_utils_1.invertColor(color);
     };
     CardComponent.prototype.countUp = function (current, max, step) {
         var _this = this;
@@ -9179,7 +10628,7 @@ var CardComponent = (function () {
     CardComponent = __decorate([
         core_1.Component({
             selector: 'g[card]',
-            template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy=\".35em\"\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          [style.color]=\"getTextColor(color)\"\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy=\".35em\"\n        class=\"value-text\"\n        [style.fill]=\"getTextColor(color)\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -9247,7 +10696,7 @@ var NumberCardComponent = (function (_super) {
     NumberCardComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    NumberCardComponent.prototype.ngOnChanges = function () {
+    NumberCardComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     NumberCardComponent.prototype.update = function () {
@@ -9404,7 +10853,7 @@ var AdvancedPieChartComponent = (function (_super) {
     AdvancedPieChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    AdvancedPieChartComponent.prototype.ngOnChanges = function () {
+    AdvancedPieChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     AdvancedPieChartComponent.prototype.update = function () {
@@ -9553,7 +11002,7 @@ var PieArcComponent = (function () {
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    PieArcComponent.prototype.ngOnChanges = function () {
+    PieArcComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieArcComponent.prototype.update = function () {
@@ -9744,7 +11193,7 @@ var PieChartComponent = (function (_super) {
     PieChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    PieChartComponent.prototype.ngOnChanges = function () {
+    PieChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieChartComponent.prototype.update = function () {
@@ -9952,7 +11401,7 @@ var PieGridSeriesComponent = (function () {
         this.clickHandler = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
-    PieGridSeriesComponent.prototype.ngOnChanges = function () {
+    PieGridSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieGridSeriesComponent.prototype.update = function () {
@@ -10072,7 +11521,7 @@ var PieGridComponent = (function (_super) {
     PieGridComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    PieGridComponent.prototype.ngOnChanges = function () {
+    PieGridComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieGridComponent.prototype.update = function () {
@@ -10090,6 +11539,9 @@ var PieGridComponent = (function (_super) {
             _this.series = _this.getSeries();
             _this.setColors();
         });
+    };
+    PieGridComponent.prototype.getTooltipText = function (label, val) {
+        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     PieGridComponent.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
@@ -10177,7 +11629,7 @@ var PieGridComponent = (function (_super) {
     PieGridComponent = __decorate([
         core_1.Component({
             selector: 'pie-grid',
-            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value.toLocaleString()\"\n          />\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -10211,7 +11663,7 @@ var PieLabelComponent = (function () {
         this.element = element.nativeElement;
         this.trimLabel = trim_label_helper_1.trimLabel;
     }
-    PieLabelComponent.prototype.ngOnChanges = function () {
+    PieLabelComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieLabelComponent.prototype.update = function () {
@@ -10319,7 +11771,7 @@ var PieSeriesComponent = (function () {
         this.outerRadius = 80;
         this.clickHandler = new core_1.EventEmitter();
     }
-    PieSeriesComponent.prototype.ngOnChanges = function () {
+    PieSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     PieSeriesComponent.prototype.update = function () {
@@ -10380,7 +11832,9 @@ var PieSeriesComponent = (function () {
         return label;
     };
     PieSeriesComponent.prototype.tooltipText = function (arc) {
-        return this.label(arc) + ": " + arc.data.value.toLocaleString();
+        var label = this.label(arc);
+        var val = arc.data.value.toLocaleString();
+        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     PieSeriesComponent.prototype.color = function (arc) {
         return this.colors(this.label(arc));
@@ -10477,7 +11931,7 @@ var TreeMapCellSeriesComponent = (function () {
     function TreeMapCellSeriesComponent() {
         this.clickHandler = new core_1.EventEmitter();
     }
-    TreeMapCellSeriesComponent.prototype.ngOnChanges = function () {
+    TreeMapCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.cells = this.getCells();
     };
     TreeMapCellSeriesComponent.prototype.getCells = function () {
@@ -10496,10 +11950,13 @@ var TreeMapCellSeriesComponent = (function () {
                 fill: _this.colors(label),
                 label: label,
                 value: d.value,
-                valueType: d.valueType,
-                tooltipText: label + ": " + d.value.toLocaleString()
+                valueType: d.valueType
             };
         });
+    };
+    TreeMapCellSeriesComponent.prototype.getTooltipText = function (_a) {
+        var label = _a.label, value = _a.value;
+        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     TreeMapCellSeriesComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
@@ -10526,7 +11983,7 @@ var TreeMapCellSeriesComponent = (function () {
     TreeMapCellSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[treeMapCellSeries]',
-            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"c.tooltipText\"\n    />\n  ",
+            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -10553,15 +12010,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-// import { formatNumber } from 'common/utils/format';
 var d3_1 = __webpack_require__("./src/d3.ts");
+var color_utils_1 = __webpack_require__("./src/utils/color-utils.ts");
 var TreeMapCellComponent = (function () {
     function TreeMapCellComponent(element) {
         this.clickHandler = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
     }
-    TreeMapCellComponent.prototype.ngOnChanges = function () {
+    TreeMapCellComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     TreeMapCellComponent.prototype.update = function () {
@@ -10581,6 +12038,9 @@ var TreeMapCellComponent = (function () {
             .attr('x', this.x)
             .attr('y', this.y);
         this.animateToCurrentForm();
+    };
+    TreeMapCellComponent.prototype.getTextColor = function () {
+        return color_utils_1.invertColor(this.fill);
     };
     TreeMapCellComponent.prototype.animateToCurrentForm = function () {
         var node = d3_1.default.select(this.element).select('.cell');
@@ -10636,7 +12096,7 @@ var TreeMapCellComponent = (function () {
     TreeMapCellComponent = __decorate([
         core_1.Component({
             selector: 'g[treeMapCell]',
-            template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          {{label}}\n          <xhtml:br/>\n          {{formattedValue}}\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
+            template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          {{label}}\n          <xhtml:br/>\n          {{formattedValue}}\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
@@ -10687,7 +12147,7 @@ var TreeMapComponent = (function (_super) {
     TreeMapComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    TreeMapComponent.prototype.ngOnChanges = function () {
+    TreeMapComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     TreeMapComponent.prototype.update = function () {
@@ -10969,6 +12429,69 @@ function colorHelper(scheme, type, domain, customColors) {
     return colorScaleFunction;
 }
 exports.colorHelper = colorHelper;
+
+
+/***/ },
+
+/***/ "./src/utils/color-utils.ts":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+/**
+ * Converts a hex to RGB
+ * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+ *
+ * @export
+ * @param {string} hex
+ * @returns {*}
+ */
+function hexToRgb(hex) {
+    var result = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (m, r, g, b) { return '#' + r + r + g + g + b + b; })
+        .substring(1).match(/.{2}/g)
+        .map(function (x) { return parseInt(x, 16); });
+    return {
+        r: result[0],
+        g: result[1],
+        b: result[2]
+    };
+}
+exports.hexToRgb = hexToRgb;
+/**
+ * Accepts a hex color and returns a inverted hex color
+ * http://stackoverflow.com/questions/9600295/automatically-change-text-color-to-assure-readability
+ *
+ * @export
+ * @param {any} color
+ * @returns {string}
+ */
+function invertColor(hex) {
+    var _a = hexToRgb(hex), r = _a.r, g = _a.g, b = _a.b;
+    var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    var darken = (yiq >= 128);
+    var depth = darken ? -.7 : .7;
+    return shadeRGBColor({ r: r, g: g, b: b }, depth);
+}
+exports.invertColor = invertColor;
+/**
+ * Given a rgb, it will darken/lighten
+ * http://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
+ *
+ * @export
+ * @param {any} { r, g, b }
+ * @param {any} percent
+ * @returns
+ */
+function shadeRGBColor(_a, percent) {
+    var r = _a.r, g = _a.g, b = _a.b;
+    var t = percent < 0 ? 0 : 255;
+    var p = percent < 0 ? percent * -1 : percent;
+    r = (Math.round((t - r) * p) + r);
+    g = (Math.round((t - g) * p) + g);
+    b = (Math.round((t - b) * p) + b);
+    return "rgb(" + r + ", " + g + ", " + b + ")";
+}
+exports.shadeRGBColor = shadeRGBColor;
 
 
 /***/ },

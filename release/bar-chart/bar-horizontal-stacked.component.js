@@ -28,7 +28,7 @@ var BarHorizontalStackedComponent = (function (_super) {
     BarHorizontalStackedComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
     };
-    BarHorizontalStackedComponent.prototype.ngOnChanges = function () {
+    BarHorizontalStackedComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     BarHorizontalStackedComponent.prototype.update = function () {

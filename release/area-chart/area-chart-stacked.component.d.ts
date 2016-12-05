@@ -1,5 +1,5 @@
 
-import { EventEmitter, ElementRef, OnChanges, OnDestroy, NgZone, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter, ElementRef, OnChanges, OnDestroy, NgZone, AfterViewInit, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class AreaChartStackedComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
@@ -48,7 +48,7 @@ export declare class AreaChartStackedComponent extends BaseChartComponent implem
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];

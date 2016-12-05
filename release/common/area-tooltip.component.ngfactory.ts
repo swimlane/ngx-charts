@@ -257,15 +257,15 @@ class View_AreaTooltip1 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:rect',new import3.InlineArray8(6,'class','tooltip-area','style','fill: rgb(255, 0, 0); opacity: 0; cursor: \'auto\';','y','0'),(null as any));
-    this._text_3 = this.renderer.createText(this._el_0,'\n\n      ',(null as any));
+    this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
     this._vc_4 = new import9.ViewContainer(4,0,this,this._anchor_4);
     this._TemplateRef_4_4 = new import11.TemplateRef_(this,4,this._anchor_4);
-    this._text_5 = this.renderer.createText(this._el_0,'\n\n      ',(null as any));
+    this._text_5 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_6 = import3.createRenderElement(this.renderer,this._el_0,':svg:rect',new import3.InlineArray8(8,'class','tooltip-anchor','style','fill: rgb(255, 255, 255);','swui-tooltip','','y','0'),(null as any));
     this._vc_6 = new import9.ViewContainer(6,0,this,this._el_6);
     this._TooltipDirective_6_5 = new import15.Wrapper_TooltipDirective(this.parentView.injectorGet(import16.TooltipService,this.parentIndex),this._vc_6.vcRef,this.parentView.injectorGet(import17.InjectionService,this.parentIndex),this.renderer,new import14.ElementRef(this._el_6),this.parentView.injectorGet(import18.NgZone,this.parentIndex));
-    this._text_7 = this.renderer.createText(this._el_0,'\n\n    ',(null as any));
+    this._text_7 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray4(4,'mouseenter',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_2));
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_6,new import3.InlineArray8(8,'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_6));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -451,7 +451,7 @@ class View_AreaTooltip3 extends import2.AppView<any> {
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':xhtml:div',new import3.InlineArray2(2,'class','tooltip-item'),(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n\n            ',(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':xhtml:span',new import3.InlineArray2(2,'class','tooltip-item-color'),(null as any));
     this._text_3 = this.renderer.createText(this._el_2,'\n            ',(null as any));
     this._text_4 = this.renderer.createText(this._el_0,'',(null as any));
@@ -471,7 +471,7 @@ class View_AreaTooltip3 extends import2.AppView<any> {
       this.renderer.setElementStyle(this._el_2,'background-color',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_5) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_5).toString()));
       this._expr_5 = currVal_5;
     }
-    const currVal_6:any = import3.inlineInterpolate(2,'\n\n            ',this.context.$implicit.series,': ',this.context.$implicit.value.toLocaleString(),'\n          ');
+    const currVal_6:any = import3.inlineInterpolate(2,'\n            ',this.context.$implicit.series,': ',this.context.$implicit.value.toLocaleString(),'\n          ');
     if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
       this.renderer.setText(this._text_4,currVal_6);
       this._expr_6 = currVal_6;
