@@ -136,12 +136,11 @@ export class CardComponent implements OnChanges {
   countUp(current, max, step) {
     this.zone.run(() => {
       this.value = Math.round(current).toLocaleString();
-
-      if (current >= max) {
-        return;
-      }
-      let newValue = Math.min(current + step, max);
       this.cd.markForCheck();
+
+      if (current >= max) return;
+
+      let newValue = Math.min(current + step, max);
       setTimeout(() => {
         this.countUp(newValue, max, step);
       }, 16);
