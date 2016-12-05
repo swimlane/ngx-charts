@@ -37,7 +37,7 @@ import * as moment from 'moment';
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="circle.tooltipText"
+        [tooltipTitle]="getTooltipText(circle)"
       />
     </svg:g>
   `,
@@ -72,6 +72,7 @@ export class CircleSeriesComponent implements OnChanges {
     return this.data.series.map((d, i) => {
       let value = d.value;
       let label = d.name;
+      
       let tooltipLabel = label;
       if (tooltipLabel.constructor.name === 'Date') {
         tooltipLabel = tooltipLabel.toLocaleDateString();
@@ -104,11 +105,18 @@ export class CircleSeriesComponent implements OnChanges {
           cy: cy,
           radius: radius,
           height: height,
-          tooltipText: `${tooltipLabel}: ${value.toLocaleString()}`,
+          tooltipLabel: tooltipLabel,
           opacity: opacity
         };
       }
     }).filter((circle) => circle !== undefined);
+  }
+
+  getTooltipText({ tooltipLabel, value }): string {
+    return `
+      <span class="tooltip-label">${tooltipLabel}</span>
+      <span class="tooltip-val">${value.toLocaleString()}</span>
+    `;
   }
 
   onClick(value, label): void {

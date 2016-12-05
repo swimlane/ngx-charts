@@ -39,7 +39,7 @@ import d3 from '../d3';
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="series.label + ': ' + series.value.toLocaleString()"
+            [tooltipTitle]="getTooltipText(series.label, series.value.toLocaleString())"
           />
           <svg:text
             class="label"
@@ -123,6 +123,13 @@ export class PieGridComponent extends BaseChartComponent implements OnChanges, O
       this.series = this.getSeries();
       this.setColors();
     });
+  }
+
+  getTooltipText(label, val): string {
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">${val}</span>
+    `;
   }
 
   getDomain(): any[] {

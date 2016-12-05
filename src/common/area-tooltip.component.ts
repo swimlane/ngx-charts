@@ -25,23 +25,19 @@ import {
         (mouseenter)="showTooltip(i)"
         (mouseleave)="hideTooltip(i)"
       />
-
       <xhtml:template #tooltipTemplate>
         <xhtml:div class="area-tooltip-container">
           <xhtml:div
             *ngFor="let tooltipItem of tooltipArea.values"
             class="tooltip-item">
-
             <span
               class="tooltip-item-color"
               [style.background-color]="tooltipItem.color">
             </span>
-
             {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}
           </xhtml:div>
         </xhtml:div>
       </xhtml:template>
-
       <svg:rect
         class="tooltip-anchor"
         [attr.x]="tooltipArea.tooltipAnchor"
@@ -51,14 +47,12 @@ import {
         style="fill: rgb(255, 255, 255);"
         [style.opacity]="anchorOpacity[i]"
         [style.pointer-events]="'none'"
-
         swui-tooltip
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="5"
         [tooltipTemplate]="tooltipTemplate"
       />
-
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

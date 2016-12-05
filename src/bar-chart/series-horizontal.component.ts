@@ -98,7 +98,6 @@ export class SeriesHorizontal implements OnChanges {
           bar.x = this.xScale(0);
         }
         bar.y = this.yScale(label);
-        bar.tooltipText = `${tooltipLabel}: ${value.toLocaleString()}`;
       } else if (this.type === 'stacked') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -107,7 +106,6 @@ export class SeriesHorizontal implements OnChanges {
         bar.width = this.xScale(offset1) - this.xScale(offset0);
         bar.x = this.xScale(offset0);
         bar.y = 0;
-        bar.tooltipText = `${tooltipLabel}: ${value.toLocaleString()}`;
       } else if (this.type === 'normalized') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -124,9 +122,13 @@ export class SeriesHorizontal implements OnChanges {
         bar.width = this.xScale(offset1) - this.xScale(offset0);
         bar.x = this.xScale(offset0);
         bar.y = 0;
-        let percentage = (offset1 - offset0).toFixed(2) + '%';
-        bar.tooltipText = `${tooltipLabel}: ${percentage.toLocaleString()}`;
+        value = (offset1 - offset0).toFixed(2) + '%';
       }
+
+      bar.tooltipText = `
+        <span class="tooltip-label">${tooltipLabel}</span>
+        <span class="tooltip-val">${value.toLocaleString()}</span>
+      `;
 
       return bar;
     });

@@ -34,9 +34,23 @@
       vertical-align: middle;
     }
   }
+}
 
-  .swui-tooltip-content {
-    pointer-events: none !important;
+.swui-tooltip-content {
+  pointer-events: none !important;
+
+  .tooltip-label {
+    display: block;
+    line-height: 1em;
+    padding: 8px 5px 5px 5px;
+    font-size: 1em;
+  }
+
+  .tooltip-val {
+    display: block;
+    font-size: 1.3em;
+    line-height: 1em;
+    padding: 0 5px 8px 5px;
   }
 }
 

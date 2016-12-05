@@ -136,7 +136,13 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   tooltipText(arc) {
-    return `${this.label(arc)}: ${arc.data.value.toLocaleString()}`;
+    const label = this.label(arc);
+    const val = arc.data.value.toLocaleString();
+
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">${val}</span>
+    `;
   }
 
   color(arc): any {

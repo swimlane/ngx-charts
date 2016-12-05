@@ -110,12 +110,12 @@ export class SeriesVerticalComponent implements OnChanges {
       if (this.type === 'standard') {
         bar.height = Math.abs(this.yScale(value) - this.yScale(0));
         bar.x = this.xScale(label);
+
         if (value < 0) {
           bar.y = this.yScale(0);
         } else {
           bar.y = this.yScale(value);
         }
-        bar.tooltipText = `${tooltipLabel}: ${value.toLocaleString()}`;
       } else if (this.type === 'stacked') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -124,7 +124,6 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
-        bar.tooltipText = `${tooltipLabel}: ${value.toLocaleString()}`;
       } else if (this.type === 'normalized') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -141,9 +140,13 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
-        let percentage = (offset1 - offset0).toFixed(2) + '%';
-        bar.tooltipText = `${tooltipLabel}: ${percentage.toLocaleString()}`;
+        value = (offset1 - offset0).toFixed(2) + '%';
       }
+
+      bar.tooltipText = `
+        <span class="tooltip-label">${tooltipLabel}</span>
+        <span class="tooltip-val">${value.toLocaleString()}</span>
+      `;
 
       return bar;
     });

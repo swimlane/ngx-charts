@@ -10,7 +10,9 @@ import {
 @Component({
   selector: 'g[heatMapCellSeries]',
   template: `
-    <svg:g heatMapCell *ngFor="let c of cells; trackBy:trackBy"
+    <svg:g 
+      heatMapCell 
+      *ngFor="let c of cells; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -22,7 +24,7 @@ import {
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="c.tooltipText"
+      [tooltipTitle]="getTooltipText(c)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,13 +68,19 @@ export class HeatCellSeriesComponent implements OnChanges {
           fill: this.colors(value),
           data: value,
           label: label,
-          series: row.name,
-          tooltipText: `${tooltipLabel}: ${value.toLocaleString()}`
+          series: row.name
         });
       });
     });
 
     return cells;
+  }
+
+  getTooltipText({ label, data }): string {
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">${data.toLocaleString()}</span>
+    `;
   }
 
   trackBy(index, item): string {

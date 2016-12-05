@@ -23,7 +23,7 @@ import {
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="c.tooltipText"
+      [tooltipTitle]="getTooltipText(c)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -58,10 +58,16 @@ export class TreeMapCellSeriesComponent implements OnChanges {
           fill: this.colors(label),
           label: label,
           value: d.value,
-          valueType: d.valueType,
-          tooltipText: `${label}: ${d.value.toLocaleString()}`
+          valueType: d.valueType
         };
       });
+  }
+
+  getTooltipText({ label, value }): string {
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">${value.toLocaleString()}</span>
+    `;
   }
 
   onClick(data): void {
