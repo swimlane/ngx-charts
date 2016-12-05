@@ -21,7 +21,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
   template: `
     <chart
       [legend]="legend"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [legendData]="colorScale"
       [data]="valueDomain"
       [view]="[width, height]">
@@ -79,7 +79,6 @@ export class HeatMapComponent extends BaseChartComponent implements OnChanges, O
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   xDomain: any[];

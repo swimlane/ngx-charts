@@ -24,7 +24,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick({series: $event.name})"
       [view]="[width, height]"
       [colors]="colors"
       [legendData]="seriesDomain">
@@ -138,7 +138,6 @@ export class AreaChartComponent extends BaseChartComponent implements OnChanges,
   @Input() curve = d3.shape.curveLinear;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   xSet: any;
@@ -365,7 +364,9 @@ export class AreaChartComponent extends BaseChartComponent implements OnChanges,
   }
 
   onClick(data, series) {
-    data.series = series.name;
+    if (series) {
+      data.series = series.name;
+    }
     this.clickHandler.emit(data);
   }
 

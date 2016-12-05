@@ -23,7 +23,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="false"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g

@@ -34,7 +34,7 @@ export interface LegendItem {
         [style.height.px]="dims.height">
         <chart
           [colors]="colors"
-          (legendLabelClick)="legendLabelClick.emit($event)"
+          (legendLabelClick)="onClick($event)"
           [view]="[dims.width, dims.height]">
           <svg:g
             [attr.transform]="transform"
@@ -65,7 +65,7 @@ export interface LegendItem {
               <div
                 *ngFor="let legendItem of legendItems"
                 tabindex="-1"
-                (click)="legendLabelClick.emit(legendItem)"
+                (click)="onClick({name: legendItem.label, value: legendItem.value})"
                 class="legend-item">
                 <div
                   class="item-color"
@@ -93,7 +93,6 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   data: any;
   dims: ViewDimensions;
@@ -168,11 +167,15 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
   getLegendItems(): LegendItem {
     return this.results.map((d, index) => {
       let label = d.name;
+      if (label instanceof Date) {
+        label = label.toLocaleDateString();
+      }
       let value = d.value;
       let percentage = Math.round(value / this.total * 100);
       return {
         value: Math.round(value),
         label: trimLabel(label, 20),
+        originalLabel: d.name,
         percentage: percentage
       };
     });

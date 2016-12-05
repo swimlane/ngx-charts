@@ -25,7 +25,7 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [view]="[width, height]"
       [colors]="colors"
       [legendData]="innerDomain">
@@ -101,7 +101,6 @@ export class BarHorizontal2DComponent extends BaseChartComponent implements OnCh
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   groupDomain: any[];
@@ -234,7 +233,9 @@ export class BarHorizontal2DComponent extends BaseChartComponent implements OnCh
   }
 
   onClick(data, group) {
-    data.series = group.name;
+    if (group) {
+      data.series = group.name;
+    }
     this.clickHandler.emit(data);
   }
 

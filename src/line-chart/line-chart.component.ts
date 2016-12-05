@@ -25,7 +25,7 @@ import * as moment from 'moment';
     <chart
       [legend]="legend"
       [view]="[width, height]"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick({series: $event.name})"
       [colors]="colors"
       [legendData]="seriesDomain">
       <svg:defs>
@@ -89,7 +89,7 @@ import * as moment from 'moment';
           </svg:g>
         </svg:g>
       </svg:g>
-      <svg:g 
+      <svg:g
         timeline
         *ngIf="timeline && scaleType === 'time'"
         [attr.transform]="timelineTransform"
@@ -136,7 +136,6 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   @Input() curve = d3.shape.curveLinear;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   xSet: any;
@@ -368,7 +367,9 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   }
 
   onClick(data, series): void {
-    data.series = series.name;
+    if (series) {
+      data.series = series.name;
+    }
     this.clickHandler.emit(data);
   }
 

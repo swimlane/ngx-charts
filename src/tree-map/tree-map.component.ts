@@ -22,7 +22,7 @@ import { colorHelper } from '../utils/color-sets';
     <chart
       [legend]="false"
       [view]="[width, height]"
-      (legendLabelClick)="legendLabelClick.emit($event)">
+      (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g treeMapCellSeries
           [colors]="colors"
@@ -43,7 +43,6 @@ export class TreeMapComponent extends BaseChartComponent implements OnChanges, O
   @Input() customColors;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: any;
   domain: any;

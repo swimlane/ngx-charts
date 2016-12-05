@@ -20,7 +20,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
   template: `
     <chart
       [colors]="colors"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [legend]="legend"
       [view]="[width, height]"
       [legendData]="domain">
@@ -54,7 +54,6 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
   @Input() gradient: boolean;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   translation: string;
   outerRadius: number;

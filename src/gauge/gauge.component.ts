@@ -24,7 +24,7 @@ import { colorHelper } from '../utils/color-sets';
     <chart
       [legend]="legend"
       [legendData]="colorScale"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [data]="valueDomain"
       [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="gauge chart">
@@ -104,7 +104,6 @@ export class GaugeComponent extends BaseChartComponent implements OnChanges, OnD
   @Input() smallSegments: number = 5;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
   
   @ViewChild('textEl') textEl: ElementRef;
 

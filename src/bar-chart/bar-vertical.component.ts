@@ -24,7 +24,7 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="[width, height]"
       [colors]="colors"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [legendData]="xDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g xAxis
@@ -76,7 +76,6 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   xScale: any;

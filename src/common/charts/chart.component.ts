@@ -41,7 +41,7 @@ import { InjectionService } from '../../utils/injection.service';
         [colors]="colors"
         [height]="view[1]"
         [width]="view[0] * legendWidth / 12.0"
-        (labelClick)="legendLabelClick.emit($event)">
+        (labelClick)="onLegendLabelClick($event)">
       </legend>
     </div>
   `,
@@ -103,5 +103,9 @@ export class ChartComponent implements OnChanges {
     } else {
       return 'legend';
     }
+  }
+
+  onLegendLabelClick(name) {
+    this.legendLabelClick.emit({name: name});
   }
 }

@@ -21,7 +21,7 @@ import d3 from '../d3';
   selector: 'bar-horizontal',
   template: `
     <chart
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [legend]="legend"
       [view]="[width, height]"
       [colors]="colors"
@@ -52,7 +52,7 @@ import d3 from '../d3';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
-  
+
           (clickHandler)="onClick($event)"
         />
       </svg:g>
@@ -77,7 +77,6 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   yScale: any;
@@ -185,5 +184,5 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
     this.xAxisHeight = height;
     this.update();
   }
-  
+
 }

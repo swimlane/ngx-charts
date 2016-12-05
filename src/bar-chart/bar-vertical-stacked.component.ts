@@ -26,7 +26,7 @@ import d3 from '../d3';
     <chart
       [legend]="legend"
       [view]="[width, height]"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [colors]="colors"
       [legendData]="innerDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
@@ -98,7 +98,6 @@ export class BarVerticalStackedComponent extends BaseChartComponent implements O
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   groupDomain: any[];
@@ -222,7 +221,9 @@ export class BarVerticalStackedComponent extends BaseChartComponent implements O
   }
 
   onClick(data, group) {
-    data.series = group.name;
+    if (group) {
+      data.series = group.name;
+    }
     this.clickHandler.emit(data);
   }
 

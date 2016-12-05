@@ -21,7 +21,7 @@ import { gridLayout } from '../common/grid-layout.helper';
   template: `
     <chart
       [legend]="false"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="number-card chart">
         <svg:g cardSeries

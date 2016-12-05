@@ -24,7 +24,7 @@ import {
   template: `
     <chart
       [legend]="legend"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick($event)"
       [view]="[width, height]"
       [colors]="colors"
       [legendData]="seriesDomain">
@@ -50,7 +50,7 @@ import {
             [attr.fill]="colors(groupResultsBy(node))"
             [attr.stroke]="colors(groupResultsBy(node))"
             (mousedown)="onDragStart(node, $event)"
-            (click)="click($event, node)"
+            (click)="onClick({name: node.value})"
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
@@ -85,7 +85,6 @@ export class ForceDirectedGraphComponent extends BaseChartComponent implements O
   @Input() customColors;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
@@ -133,8 +132,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent implements O
     });
   }
 
-  onClick($event, node): void {
-    this.clickHandler.emit(node);
+  onClick(data, node): void {
+    this.clickHandler.emit(data);
   }
 
   getSeriesDomain(): any[] {

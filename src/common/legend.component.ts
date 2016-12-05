@@ -21,7 +21,7 @@ import {
           <li
             tabindex="-1"
             *ngFor="let legendItem of legendItems"
-            (click)="labelClick.emit(legendItem)"
+            (click)="clickLegendItem(legendItem)"
             [class]="legendItem.className">
             <span
               [title]="legendItem.label"
@@ -62,7 +62,7 @@ export class LegendComponent implements OnChanges {
     let items = [];
     this.data.map((label, index) => {
       let formattedLabel = label;
-      if (formattedLabel.constructor.name === 'Date') {
+      if (formattedLabel instanceof Date) {
         formattedLabel = formattedLabel.toLocaleDateString();
       } else {
         formattedLabel = formattedLabel.toLocaleString();
@@ -83,5 +83,9 @@ export class LegendComponent implements OnChanges {
     });
 
     return items;
+  }
+
+  clickLegendItem(legendItem) {
+    this.labelClick.emit(legendItem.label);
   }
 }

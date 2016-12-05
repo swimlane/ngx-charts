@@ -26,7 +26,7 @@ import { id } from "../utils/id";
     <chart
       [legend]="legend"
       [view]="[width, height]"
-      (legendLabelClick)="legendLabelClick.emit($event)"
+      (legendLabelClick)="onClick({series: $event.name})"
       [colors]="colors"
       [legendData]="seriesDomain">
       <svg:defs>
@@ -141,7 +141,6 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
   @Input() curve = d3.shape.curveLinear;
 
   @Output() clickHandler = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   scaleType: string;
@@ -406,7 +405,9 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
   }
 
   onClick(data, series) {
-    data.series = series.name;
+    if (series) {
+      data.series = series.name;
+    }
     this.clickHandler.emit(data);
   }
 
