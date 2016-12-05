@@ -18,7 +18,6 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent impl
     view: any;
     customColors: any;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     linkTemplate: TemplateRef<any>;
     nodeTemplate: TemplateRef<any>;
     chart: ElementRef;
@@ -36,7 +35,7 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent impl
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(): void;
     update(): void;
-    onClick($event: any, node: any): void;
+    onClick(data: any, node: any): void;
     getSeriesDomain(): any[];
     trackLinkBy(index: any, link: any): any;
     trackNodeBy(index: any, node: any): any;

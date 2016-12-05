@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/common/legend.component';
+import * as import0 from '../../../../src/common/legend/legend.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -14,7 +14,7 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '@angular/core/src/linker/view_container';
-import * as import9 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import9 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import10 from '@angular/core/src/linker/template_ref';
 import * as import11 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import12 from '@angular/common/src/directives/ng_for';
@@ -336,7 +336,7 @@ class View_LegendComponent1 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.labelClick.emit(this.context.$implicit)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.clickLegendItem(this.context.$implicit)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

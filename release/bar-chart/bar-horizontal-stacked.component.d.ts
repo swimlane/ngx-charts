@@ -19,7 +19,6 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent im
     gradient: boolean;
     showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];

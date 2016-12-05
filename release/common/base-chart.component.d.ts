@@ -24,6 +24,7 @@ export declare abstract class BaseChartComponent {
      * @memberOf BaseChart
      */
     private cloneData(data);
+    formatDates(): void;
     abstract setColors(): void;
     abstract onClick(data: any, group: any): void;
 }

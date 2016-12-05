@@ -1,5 +1,5 @@
 /**
- * ng2d3 v"1.7.3" (https://github.com/swimlane/ng2d3)
+ * ng2d3 v"1.8.0" (https://github.com/swimlane/ng2d3)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -442,7 +442,6 @@ var AreaChartNormalizedComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -664,7 +663,9 @@ var AreaChartNormalizedComponent = (function (_super) {
         this.hoveredVertical = null;
     };
     AreaChartNormalizedComponent.prototype.onClick = function (data, series) {
-        data.series = series.name;
+        if (series) {
+            data.series = series.name;
+        }
         this.clickHandler.emit(data);
     };
     AreaChartNormalizedComponent.prototype.trackBy = function (index, item) {
@@ -748,10 +749,6 @@ var AreaChartNormalizedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "clickHandler", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], AreaChartNormalizedComponent.prototype, "legendLabelClick", void 0);
-    __decorate([
         core_1.HostListener('mouseleave'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
@@ -760,7 +757,7 @@ var AreaChartNormalizedComponent = (function (_super) {
     AreaChartNormalizedComponent = __decorate([
         core_1.Component({
             selector: 'area-chart-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick({series: $event.name})\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -807,7 +804,6 @@ var AreaChartStackedComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -1034,7 +1030,9 @@ var AreaChartStackedComponent = (function (_super) {
         this.hoveredVertical = null;
     };
     AreaChartStackedComponent.prototype.onClick = function (data, series) {
-        data.series = series.name;
+        if (series) {
+            data.series = series.name;
+        }
         this.clickHandler.emit(data);
     };
     AreaChartStackedComponent.prototype.trackBy = function (index, item) {
@@ -1118,10 +1116,6 @@ var AreaChartStackedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "clickHandler", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], AreaChartStackedComponent.prototype, "legendLabelClick", void 0);
-    __decorate([
         core_1.HostListener('mouseleave'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
@@ -1130,7 +1124,7 @@ var AreaChartStackedComponent = (function (_super) {
     AreaChartStackedComponent = __decorate([
         core_1.Component({
             selector: 'area-chart-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick({series: $event.name})\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -1177,7 +1171,6 @@ var AreaChartComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -1357,7 +1350,9 @@ var AreaChartComponent = (function (_super) {
         this.hoveredVertical = null;
     };
     AreaChartComponent.prototype.onClick = function (data, series) {
-        data.series = series.name;
+        if (series) {
+            data.series = series.name;
+        }
         this.clickHandler.emit(data);
     };
     AreaChartComponent.prototype.trackBy = function (index, item) {
@@ -1449,10 +1444,6 @@ var AreaChartComponent = (function (_super) {
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "clickHandler", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], AreaChartComponent.prototype, "legendLabelClick", void 0);
-    __decorate([
         core_1.HostListener('mouseleave'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
@@ -1461,7 +1452,7 @@ var AreaChartComponent = (function (_super) {
     AreaChartComponent = __decorate([
         core_1.Component({
             selector: 'area-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick({series: $event.name})\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -1496,13 +1487,13 @@ var area_chart_stacked_component_1 = __webpack_require__("./src/area-chart/area-
 exports.AreaChartStackedComponent = area_chart_stacked_component_1.AreaChartStackedComponent;
 var area_series_component_1 = __webpack_require__("./src/area-chart/area-series.component.ts");
 exports.AreaSeriesComponent = area_series_component_1.AreaSeriesComponent;
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var AreaChartModule = (function () {
     function AreaChartModule() {
     }
     AreaChartModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 area_chart_component_1.AreaChartComponent,
                 area_chart_normalized_component_1.AreaChartNormalizedComponent,
@@ -1650,6 +1641,23 @@ exports.AreaSeriesComponent = AreaSeriesComponent;
 
 /***/ },
 
+/***/ "./src/area-chart/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/area-chart/area-chart.module.ts"));
+__export(__webpack_require__("./src/area-chart/area-chart.component.ts"));
+__export(__webpack_require__("./src/area-chart/area-chart-normalized.component.ts"));
+__export(__webpack_require__("./src/area-chart/area-chart-stacked.component.ts"));
+__export(__webpack_require__("./src/area-chart/area-series.component.ts"));
+
+
+/***/ },
+
 /***/ "./src/bar-chart/bar-chart.module.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -1665,7 +1673,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var bar_component_1 = __webpack_require__("./src/bar-chart/bar.component.ts");
 exports.BarComponent = bar_component_1.BarComponent;
 var bar_horizontal_component_1 = __webpack_require__("./src/bar-chart/bar-horizontal.component.ts");
@@ -1693,7 +1701,7 @@ var BarChartModule = (function () {
     }
     BarChartModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 bar_component_1.BarComponent,
                 bar_horizontal_component_1.BarHorizontalComponent,
@@ -1763,7 +1771,6 @@ var BarHorizontal2DComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -1794,6 +1801,7 @@ var BarHorizontal2DComponent = (function (_super) {
                 showLegend: _this.legend,
                 columns: 10
             });
+            _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
             _this.innerDomain = _this.getInnerDomain();
             _this.valuesDomain = _this.getValueDomain();
@@ -1866,7 +1874,9 @@ var BarHorizontal2DComponent = (function (_super) {
         return "translate(0, " + this.groupScale(group.name) + ")";
     };
     BarHorizontal2DComponent.prototype.onClick = function (data, group) {
-        data.series = group.name;
+        if (group) {
+            data.series = group.name;
+        }
         this.clickHandler.emit(data);
     };
     BarHorizontal2DComponent.prototype.trackBy = function (index, item) {
@@ -1941,14 +1951,10 @@ var BarHorizontal2DComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarHorizontal2DComponent.prototype, "legendLabelClick", void 0);
     BarHorizontal2DComponent = __decorate([
         core_1.Component({
             selector: 'bar-horizontal-2d',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            [xScale]=\"valueScale\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            [xScale]=\"valueScale\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -2004,7 +2010,6 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -2035,6 +2040,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
                 showLegend: _this.legend,
                 columns: 10
             });
+            _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
             _this.innerDomain = _this.getInnerDomain();
             _this.valueDomain = _this.getValueDomain();
@@ -2086,7 +2092,9 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         return "translate(0, " + this.yScale(group.name) + ")";
     };
     BarHorizontalNormalizedComponent.prototype.onClick = function (data, group) {
-        data.series = group.name;
+        if (group) {
+            data.series = group.name;
+        }
         this.clickHandler.emit(data);
     };
     BarHorizontalNormalizedComponent.prototype.trackBy = function (index, item) {
@@ -2161,14 +2169,10 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarHorizontalNormalizedComponent.prototype, "legendLabelClick", void 0);
     BarHorizontalNormalizedComponent = __decorate([
         core_1.Component({
             selector: 'bar-horizontal-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -2224,7 +2228,6 @@ var BarHorizontalStackedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -2255,6 +2258,7 @@ var BarHorizontalStackedComponent = (function (_super) {
                 showLegend: _this.legend,
                 columns: 10
             });
+            _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
             _this.innerDomain = _this.getInnerDomain();
             _this.valueDomain = _this.getValueDomain();
@@ -2318,7 +2322,9 @@ var BarHorizontalStackedComponent = (function (_super) {
         return "translate(0, " + this.yScale(group.name) + ")";
     };
     BarHorizontalStackedComponent.prototype.onClick = function (data, group) {
-        data.series = group.name;
+        if (group) {
+            data.series = group.name;
+        }
         this.clickHandler.emit(data);
     };
     BarHorizontalStackedComponent.prototype.trackBy = function (index, item) {
@@ -2393,14 +2399,10 @@ var BarHorizontalStackedComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarHorizontalStackedComponent.prototype, "legendLabelClick", void 0);
     BarHorizontalStackedComponent = __decorate([
         core_1.Component({
             selector: 'bar-horizontal-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      (legendLabelClick)=\"onClick($event)\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -2457,7 +2459,6 @@ var BarHorizontalComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -2596,14 +2597,10 @@ var BarHorizontalComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarHorizontalComponent.prototype, "legendLabelClick", void 0);
     BarHorizontalComponent = __decorate([
         core_1.Component({
             selector: 'bar-horizontal',
-            template: "\n    <chart\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"yAxisTickFormatting()\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n  \n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      (legendLabelClick)=\"onClick($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"yAxisTickFormatting()\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -2649,7 +2646,6 @@ var BarVertical2DComponent = (function (_super) {
         this.scaleType = 'ordinal';
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -2680,6 +2676,7 @@ var BarVertical2DComponent = (function (_super) {
                 showLegend: _this.legend,
                 columns: 10
             });
+            _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
             _this.innerDomain = _this.getInnerDomain();
             _this.valuesDomain = _this.getValueDomain();
@@ -2752,7 +2749,9 @@ var BarVertical2DComponent = (function (_super) {
         return "translate(" + this.groupScale(group.name) + ", 0)";
     };
     BarVertical2DComponent.prototype.onClick = function (data, group) {
-        data.series = group.name;
+        if (group) {
+            data.series = group.name;
+        }
         this.clickHandler.emit(data);
     };
     BarVertical2DComponent.prototype.trackBy = function (index, item) {
@@ -2831,14 +2830,10 @@ var BarVertical2DComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarVertical2DComponent.prototype, "legendLabelClick", void 0);
     BarVertical2DComponent = __decorate([
         core_1.Component({
             selector: 'bar-vertical-2d',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\"\n          [xScale]=\"innerScale\"\n          [yScale]=\"valueScale\"\n          [colors]=\"colors\"\n          [series]=\"group.series\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event, group)\"\n        />\n        </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\"\n          [xScale]=\"innerScale\"\n          [yScale]=\"valueScale\"\n          [colors]=\"colors\"\n          [series]=\"group.series\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event, group)\"\n        />\n        </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -2894,7 +2889,6 @@ var BarVerticalNormalizedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -2925,6 +2919,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
                 showLegend: _this.legend,
                 columns: 10
             });
+            _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
             _this.innerDomain = _this.getInnerDomain();
             _this.valueDomain = _this.getValueDomain();
@@ -2976,7 +2971,9 @@ var BarVerticalNormalizedComponent = (function (_super) {
         return "translate(" + this.xScale(group.name) + ", 0)";
     };
     BarVerticalNormalizedComponent.prototype.onClick = function (data, group) {
-        data.series = group.name;
+        if (group) {
+            data.series = group.name;
+        }
         this.clickHandler.emit(data);
     };
     BarVerticalNormalizedComponent.prototype.trackBy = function (index, item) {
@@ -3051,14 +3048,10 @@ var BarVerticalNormalizedComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarVerticalNormalizedComponent.prototype, "legendLabelClick", void 0);
     BarVerticalNormalizedComponent = __decorate([
         core_1.Component({
             selector: 'bar-vertical-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -3114,7 +3107,6 @@ var BarVerticalStackedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -3145,6 +3137,7 @@ var BarVerticalStackedComponent = (function (_super) {
                 showLegend: _this.legend,
                 columns: 10
             });
+            _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
             _this.innerDomain = _this.getInnerDomain();
             _this.valueDomain = _this.getValueDomain();
@@ -3208,7 +3201,9 @@ var BarVerticalStackedComponent = (function (_super) {
         return "translate(" + this.xScale(group.name) + ", 0)";
     };
     BarVerticalStackedComponent.prototype.onClick = function (data, group) {
-        data.series = group.name;
+        if (group) {
+            data.series = group.name;
+        }
         this.clickHandler.emit(data);
     };
     BarVerticalStackedComponent.prototype.trackBy = function (index, item) {
@@ -3283,14 +3278,10 @@ var BarVerticalStackedComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarVerticalStackedComponent.prototype, "legendLabelClick", void 0);
     BarVerticalStackedComponent = __decorate([
         core_1.Component({
             selector: 'bar-vertical-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -3347,7 +3338,6 @@ var BarVerticalComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -3486,14 +3476,10 @@ var BarVerticalComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], BarVerticalComponent.prototype, "legendLabelClick", void 0);
     BarVerticalComponent = __decorate([
         core_1.Component({
             selector: 'bar-vertical',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legendData]=\"xDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"xAxisTickFormatting()\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      (legendLabelClick)=\"onClick($event)\"\n      [legendData]=\"xDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"xAxisTickFormatting()\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -3603,7 +3589,7 @@ var BarComponent = (function () {
     };
     BarComponent.prototype.getRadius = function () {
         var radius = 0;
-        if (this.roundEdges && this.height > radius && this.width > radius) {
+        if (this.roundEdges && this.height > 5 && this.width > 5) {
             radius = 5;
         }
         return radius;
@@ -3712,6 +3698,30 @@ var BarComponent = (function () {
     return BarComponent;
 }());
 exports.BarComponent = BarComponent;
+
+
+/***/ },
+
+/***/ "./src/bar-chart/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/bar-chart/bar-chart.module.ts"));
+__export(__webpack_require__("./src/bar-chart/bar.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-horizontal.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-horizontal-2d.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-horizontal-normalized.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-horizontal-stacked.component.ts"));
+__export(__webpack_require__("./src/bar-chart/series-horizontal.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-vertical.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-vertical-2d.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-vertical-normalized.component.ts"));
+__export(__webpack_require__("./src/bar-chart/bar-vertical-stacked.component.ts"));
+__export(__webpack_require__("./src/bar-chart/series-vertical.component.ts"));
 
 
 /***/ },
@@ -5159,9 +5169,107 @@ var BaseChartComponent = (function () {
         }
         return results;
     };
+    // converts all date objects that appear as name into formatted date strings
+    BaseChartComponent.prototype.formatDates = function () {
+        for (var i = 0; i < this.results.length; i++) {
+            var g = this.results[i];
+            if (g.name instanceof Date) {
+                g.name = g.name.toLocaleDateString();
+            }
+            if (g.series) {
+                for (var j = 0; j < g.series.length; j++) {
+                    var d = g.series[j];
+                    if (d.name instanceof Date) {
+                        d.name = d.name.toLocaleDateString();
+                    }
+                }
+            }
+        }
+    };
     return BaseChartComponent;
 }());
 exports.BaseChartComponent = BaseChartComponent;
+
+
+/***/ },
+
+/***/ "./src/common/chart-common.module.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var chart_component_1 = __webpack_require__("./src/common/charts/chart.component.ts");
+exports.ChartComponent = chart_component_1.ChartComponent;
+var legend_1 = __webpack_require__("./src/common/legend/index.ts");
+var axes_module_1 = __webpack_require__("./src/common/axes/axes.module.ts");
+var tooltip_1 = __webpack_require__("./src/common/tooltip/index.ts");
+var circle_series_component_1 = __webpack_require__("./src/common/circle-series.component.ts");
+exports.CircleSeriesComponent = circle_series_component_1.CircleSeriesComponent;
+var circle_component_1 = __webpack_require__("./src/common/circle.component.ts");
+exports.CircleComponent = circle_component_1.CircleComponent;
+var grid_panel_component_1 = __webpack_require__("./src/common/grid-panel.component.ts");
+exports.GridPanelComponent = grid_panel_component_1.GridPanelComponent;
+var grid_panel_series_component_1 = __webpack_require__("./src/common/grid-panel-series.component.ts");
+exports.GridPanelSeriesComponent = grid_panel_series_component_1.GridPanelSeriesComponent;
+var svg_linear_gradient_component_1 = __webpack_require__("./src/common/svg-linear-gradient.component.ts");
+exports.SvgLinearGradientComponent = svg_linear_gradient_component_1.SvgLinearGradientComponent;
+var svg_radial_gradient_component_1 = __webpack_require__("./src/common/svg-radial-gradient.component.ts");
+exports.SvgRadialGradientComponent = svg_radial_gradient_component_1.SvgRadialGradientComponent;
+var timeline_component_1 = __webpack_require__("./src/common/timeline.component.ts");
+exports.Timeline = timeline_component_1.Timeline;
+var common_1 = __webpack_require__(2);
+var area_component_1 = __webpack_require__("./src/common/area.component.ts");
+exports.AreaComponent = area_component_1.AreaComponent;
+var area_tooltip_component_1 = __webpack_require__("./src/common/area-tooltip.component.ts");
+exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
+var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
+exports.BaseChartComponent = base_chart_component_1.BaseChartComponent;
+var COMPONENTS = [
+    area_component_1.AreaComponent,
+    area_tooltip_component_1.AreaTooltip,
+    chart_component_1.ChartComponent,
+    legend_1.LegendComponent,
+    legend_1.ScaleLegendComponent,
+    circle_component_1.CircleComponent,
+    circle_series_component_1.CircleSeriesComponent,
+    grid_panel_component_1.GridPanelComponent,
+    grid_panel_series_component_1.GridPanelSeriesComponent,
+    svg_linear_gradient_component_1.SvgLinearGradientComponent,
+    svg_radial_gradient_component_1.SvgRadialGradientComponent,
+    timeline_component_1.Timeline
+];
+var ChartCommonModule = (function () {
+    function ChartCommonModule() {
+    }
+    ChartCommonModule = __decorate([
+        core_1.NgModule({
+            imports: [
+                common_1.CommonModule,
+                axes_module_1.AxesModule,
+                tooltip_1.TooltipModule
+            ],
+            declarations: COMPONENTS.slice(),
+            exports: [
+                common_1.CommonModule,
+                axes_module_1.AxesModule,
+                tooltip_1.TooltipModule
+            ].concat(COMPONENTS)
+        }), 
+        __metadata('design:paramtypes', [])
+    ], ChartCommonModule);
+    return ChartCommonModule;
+}());
+exports.ChartCommonModule = ChartCommonModule;
 
 
 /***/ },
@@ -5215,6 +5323,9 @@ var ChartComponent = (function () {
             return 'legend';
         }
     };
+    ChartComponent.prototype.onLegendLabelClick = function (name) {
+        this.legendLabelClick.emit({ name: name });
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -5247,7 +5358,7 @@ var ChartComponent = (function () {
         core_1.Component({
             providers: [injection_service_1.InjectionService],
             selector: 'chart',
-            template: "\n    <div [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\"\n        (labelClick)=\"legendLabelClick.emit($event)\">\n      </legend>\n    </div>\n  ",
+            template: "\n    <div [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\"\n        (labelClick)=\"onLegendLabelClick($event)\">\n      </legend>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -5470,94 +5581,6 @@ exports.CircleComponent = CircleComponent;
 
 /***/ },
 
-/***/ "./src/common/common.module.ts":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-var core_1 = __webpack_require__(0);
-var chart_component_1 = __webpack_require__("./src/common/charts/chart.component.ts");
-exports.ChartComponent = chart_component_1.ChartComponent;
-var legend_component_1 = __webpack_require__("./src/common/legend.component.ts");
-exports.LegendComponent = legend_component_1.LegendComponent;
-var scale_legend_component_1 = __webpack_require__("./src/common/scale-legend.component.ts");
-exports.ScaleLegendComponent = scale_legend_component_1.ScaleLegendComponent;
-var axes_module_1 = __webpack_require__("./src/common/axes/axes.module.ts");
-var tooltip_1 = __webpack_require__("./src/common/tooltip/index.ts");
-var circle_series_component_1 = __webpack_require__("./src/common/circle-series.component.ts");
-exports.CircleSeriesComponent = circle_series_component_1.CircleSeriesComponent;
-var circle_component_1 = __webpack_require__("./src/common/circle.component.ts");
-exports.CircleComponent = circle_component_1.CircleComponent;
-var grid_panel_component_1 = __webpack_require__("./src/common/grid-panel.component.ts");
-exports.GridPanelComponent = grid_panel_component_1.GridPanelComponent;
-var grid_panel_series_component_1 = __webpack_require__("./src/common/grid-panel-series.component.ts");
-exports.GridPanelSeriesComponent = grid_panel_series_component_1.GridPanelSeriesComponent;
-var svg_linear_gradient_component_1 = __webpack_require__("./src/common/svg-linear-gradient.component.ts");
-exports.SvgLinearGradientComponent = svg_linear_gradient_component_1.SvgLinearGradientComponent;
-var svg_radial_gradient_component_1 = __webpack_require__("./src/common/svg-radial-gradient.component.ts");
-exports.SvgRadialGradientComponent = svg_radial_gradient_component_1.SvgRadialGradientComponent;
-var timeline_component_1 = __webpack_require__("./src/common/timeline.component.ts");
-exports.Timeline = timeline_component_1.Timeline;
-var common_1 = __webpack_require__(2);
-var area_component_1 = __webpack_require__("./src/common/area.component.ts");
-exports.AreaComponent = area_component_1.AreaComponent;
-var area_tooltip_component_1 = __webpack_require__("./src/common/area-tooltip.component.ts");
-exports.AreaTooltip = area_tooltip_component_1.AreaTooltip;
-var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
-exports.BaseChartComponent = base_chart_component_1.BaseChartComponent;
-__export(__webpack_require__("./src/common/tooltip/index.ts"));
-var COMPONENTS = [
-    area_component_1.AreaComponent,
-    area_tooltip_component_1.AreaTooltip,
-    chart_component_1.ChartComponent,
-    legend_component_1.LegendComponent,
-    scale_legend_component_1.ScaleLegendComponent,
-    circle_component_1.CircleComponent,
-    circle_series_component_1.CircleSeriesComponent,
-    grid_panel_component_1.GridPanelComponent,
-    grid_panel_series_component_1.GridPanelSeriesComponent,
-    svg_linear_gradient_component_1.SvgLinearGradientComponent,
-    svg_radial_gradient_component_1.SvgRadialGradientComponent,
-    timeline_component_1.Timeline
-];
-var CommonModule = (function () {
-    function CommonModule() {
-    }
-    CommonModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                common_1.CommonModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ],
-            declarations: COMPONENTS.slice(),
-            exports: [
-                common_1.CommonModule,
-                axes_module_1.AxesModule,
-                tooltip_1.TooltipModule
-            ].concat(COMPONENTS)
-        }), 
-        __metadata('design:paramtypes', [])
-    ], CommonModule);
-    return CommonModule;
-}());
-exports.CommonModule = CommonModule;
-
-
-/***/ },
-
 /***/ "./src/common/grid-layout.helper.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -5770,7 +5793,50 @@ exports.GridPanelComponent = GridPanelComponent;
 
 /***/ },
 
-/***/ "./src/common/legend.component.ts":
+/***/ "./src/common/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/common/chart-common.module.ts"));
+__export(__webpack_require__("./src/common/legend/index.ts"));
+__export(__webpack_require__("./src/common/tooltip/index.ts"));
+__export(__webpack_require__("./src/common/area.component.ts"));
+__export(__webpack_require__("./src/common/area-tooltip.component.ts"));
+__export(__webpack_require__("./src/common/base-chart.component.ts"));
+__export(__webpack_require__("./src/common/circle.component.ts"));
+__export(__webpack_require__("./src/common/circle-series.component.ts"));
+__export(__webpack_require__("./src/common/grid-layout.helper.ts"));
+__export(__webpack_require__("./src/common/grid-panel.component.ts"));
+__export(__webpack_require__("./src/common/grid-panel-series.component.ts"));
+__export(__webpack_require__("./src/common/svg-linear-gradient.component.ts"));
+__export(__webpack_require__("./src/common/svg-radial-gradient.component.ts"));
+__export(__webpack_require__("./src/common/tick-format.helper.ts"));
+__export(__webpack_require__("./src/common/timeline.component.ts"));
+__export(__webpack_require__("./src/common/trim-label.helper.ts"));
+__export(__webpack_require__("./src/common/view-dimensions.helper.ts"));
+
+
+/***/ },
+
+/***/ "./src/common/legend/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/common/legend/legend.component.ts"));
+__export(__webpack_require__("./src/common/legend/scale-legend.component.ts"));
+
+
+/***/ },
+
+/***/ "./src/common/legend/legend.component.ts":
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5800,7 +5866,7 @@ var LegendComponent = (function () {
         var items = [];
         this.data.map(function (label, index) {
             var formattedLabel = label;
-            if (formattedLabel.constructor.name === 'Date') {
+            if (formattedLabel instanceof Date) {
                 formattedLabel = formattedLabel.toLocaleDateString();
             }
             else {
@@ -5820,6 +5886,9 @@ var LegendComponent = (function () {
             ;
         });
         return items;
+    };
+    LegendComponent.prototype.clickLegendItem = function (legendItem) {
+        this.labelClick.emit(legendItem.label);
     };
     __decorate([
         core_1.Input(), 
@@ -5848,7 +5917,7 @@ var LegendComponent = (function () {
     LegendComponent = __decorate([
         core_1.Component({
             selector: 'legend',
-            template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            tabindex=\"-1\"\n            *ngFor=\"let legendItem of legendItems\"\n            (click)=\"labelClick.emit(legendItem)\"\n            [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"legendItem.backgroundColor\">\n            </span>\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+            template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            tabindex=\"-1\"\n            *ngFor=\"let legendItem of legendItems\"\n            (click)=\"clickLegendItem(legendItem)\"\n            [class]=\"legendItem.className\">\n            <span\n              [title]=\"legendItem.label\"\n              class=\"legend-label-color\"\n              [style.background-color]=\"legendItem.backgroundColor\">\n            </span>\n            <span [title]=\"legendItem.label\" class=\"legend-label-text\">\n              {{legendItem.trimmedLabel}}\n            </span>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -5860,7 +5929,7 @@ exports.LegendComponent = LegendComponent;
 
 /***/ },
 
-/***/ "./src/common/scale-legend.component.ts":
+/***/ "./src/common/legend/scale-legend.component.ts":
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6096,10 +6165,10 @@ var Timeline = (function () {
     function Timeline(element, zone, cd) {
         this.zone = zone;
         this.cd = cd;
-        this.initialized = false;
         this.height = 50;
         this.clickHandler = new core_1.EventEmitter();
         this.onDomainChange = new core_1.EventEmitter();
+        this.initialized = false;
         this.element = element.nativeElement;
     }
     Timeline.prototype.ngOnChanges = function () {
@@ -6276,7 +6345,7 @@ var Timeline = (function () {
     Timeline = __decorate([
         core_1.Component({
             selector: 'g[timeline]',
-            template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n\n      <svg:rect x=\"0\" [attr.width]=\"view[0]\" y=\"0\" [attr.height]=\"height\" class=\"brush-background\" />\n\n      <svg:g class=\"brush\">\n      </svg:g>\n\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\" \n        [attr.width]=\"view[0]\" \n        y=\"0\" \n        [attr.height]=\"height\" \n        class=\"brush-background\" \n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef])
@@ -6855,11 +6924,7 @@ var TooltipDirective = (function () {
         var _this = this;
         if (!this.componentId)
             return;
-        var time = immediate ? 0 : this.tooltipHideTimeout;
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(function () {
-            // destroy component
-            _this.tooltipService.destroy(_this.componentId);
+        var destroyFn = function () {
             // remove events
             if (_this.mouseLeaveContentEvent)
                 _this.mouseLeaveContentEvent();
@@ -6867,10 +6932,19 @@ var TooltipDirective = (function () {
                 _this.mouseEnterContentEvent();
             if (_this.documentClickEvent)
                 _this.documentClickEvent();
+            // destroy component
+            _this.tooltipService.destroy(_this.componentId);
             // emit events
             _this.hide.emit(true);
             _this.componentId = undefined;
-        }, time);
+        };
+        clearTimeout(this.timeout);
+        if (!immediate) {
+            this.timeout = setTimeout(destroyFn, this.tooltipHideTimeout);
+        }
+        else {
+            destroyFn();
+        }
     };
     TooltipDirective.prototype.createBoundOptions = function () {
         return new tooltip_options_1.TooltipOptions({
@@ -7272,7 +7346,6 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.nodes = [];
         this.links = [];
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [0, 0, 0, 0];
         this.results = [];
     }
@@ -7301,8 +7374,8 @@ var ForceDirectedGraphComponent = (function (_super) {
             }
         });
     };
-    ForceDirectedGraphComponent.prototype.onClick = function ($event, node) {
-        this.clickHandler.emit(node);
+    ForceDirectedGraphComponent.prototype.onClick = function (data, node) {
+        this.clickHandler.emit(data);
     };
     ForceDirectedGraphComponent.prototype.getSeriesDomain = function () {
         var _this = this;
@@ -7382,10 +7455,6 @@ var ForceDirectedGraphComponent = (function (_super) {
         __metadata('design:type', Object)
     ], ForceDirectedGraphComponent.prototype, "clickHandler", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], ForceDirectedGraphComponent.prototype, "legendLabelClick", void 0);
-    __decorate([
         core_1.ContentChild('linkTemplate'), 
         __metadata('design:type', core_1.TemplateRef)
     ], ForceDirectedGraphComponent.prototype, "linkTemplate", void 0);
@@ -7412,7 +7481,7 @@ var ForceDirectedGraphComponent = (function (_super) {
     ForceDirectedGraphComponent = __decorate([
         core_1.Component({
             selector: 'force-directed-graph',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors(groupResultsBy(node))\"\n            [attr.stroke]=\"colors(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"click($event, node)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors(groupResultsBy(node))\"\n            [attr.stroke]=\"colors(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -7441,13 +7510,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var force_directed_graph_component_1 = __webpack_require__("./src/force-directed-graph/force-directed-graph.component.ts");
 exports.ForceDirectedGraphComponent = force_directed_graph_component_1.ForceDirectedGraphComponent;
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var ForceDirectedGraphModule = (function () {
     function ForceDirectedGraphModule() {
     }
     ForceDirectedGraphModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 force_directed_graph_component_1.ForceDirectedGraphComponent,
             ],
@@ -7460,6 +7529,20 @@ var ForceDirectedGraphModule = (function () {
     return ForceDirectedGraphModule;
 }());
 exports.ForceDirectedGraphModule = ForceDirectedGraphModule;
+
+
+/***/ },
+
+/***/ "./src/force-directed-graph/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/force-directed-graph/force-directed-graph.module.ts"));
+__export(__webpack_require__("./src/force-directed-graph/force-directed-graph.component.ts"));
 
 
 /***/ },
@@ -7500,7 +7583,6 @@ var GaugeComponent = (function (_super) {
         this.bigSegments = 10;
         this.smallSegments = 5;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [40, 100, 40, 100];
         this.angleSpan = 240;
         this.resizeScale = 1;
@@ -7694,17 +7776,13 @@ var GaugeComponent = (function (_super) {
         __metadata('design:type', Object)
     ], GaugeComponent.prototype, "clickHandler", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], GaugeComponent.prototype, "legendLabelClick", void 0);
-    __decorate([
         core_1.ViewChild('textEl'), 
         __metadata('design:type', core_1.ElementRef)
     ], GaugeComponent.prototype, "textEl", void 0);
     GaugeComponent = __decorate([
         core_1.Component({
             selector: 'gauge',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g pieArc\n          class=\"background-arc\"\n          [startAngle]=\"0\"\n          [endAngle]=\"backgroundArc.endAngle\"\n          [innerRadius]=\"backgroundArc.innerRadius\"\n          [outerRadius]=\"backgroundArc.outerRadius\"\n          [cornerRadius]=\"backgroundArc.cornerRadius\"\n          [data]=\"backgroundArc.data\"\n          [animate]=\"false\"\n          [pointerEvents]=\"false\">\n        </svg:g>\n        <svg:g pieArc\n          [startAngle]=\"0\"\n          [endAngle]=\"valueArc.endAngle\"\n          [innerRadius]=\"valueArc.innerRadius\"\n          [outerRadius]=\"valueArc.outerRadius\"\n          [cornerRadius]=\"valueArc.cornerRadius\"\n          [fill]=\"colors(value)\"\n          [data]=\"valueArc.data\"\n          [animate]=\"true\"\n          (clickHandler)=\"onClick($event)\">\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [ngClass]=\"{'highlighted': tick.highlighted}\">\n          <svg:text\n            [style.textAnchor]=\"tick.textAnchor\"\n            [attr.transform]=\"tick.textTransform\"\n            alignment-baseline=\"central\">\n            {{tick.text}}\n          </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n          class=\"gauge-tick gauge-tick-small\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g transform=\"rotate(120)\">\n          <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n            {{displayValue()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      (legendLabelClick)=\"onClick($event)\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g pieArc\n          class=\"background-arc\"\n          [startAngle]=\"0\"\n          [endAngle]=\"backgroundArc.endAngle\"\n          [innerRadius]=\"backgroundArc.innerRadius\"\n          [outerRadius]=\"backgroundArc.outerRadius\"\n          [cornerRadius]=\"backgroundArc.cornerRadius\"\n          [data]=\"backgroundArc.data\"\n          [animate]=\"false\"\n          [pointerEvents]=\"false\">\n        </svg:g>\n        <svg:g pieArc\n          [startAngle]=\"0\"\n          [endAngle]=\"valueArc.endAngle\"\n          [innerRadius]=\"valueArc.innerRadius\"\n          [outerRadius]=\"valueArc.outerRadius\"\n          [cornerRadius]=\"valueArc.cornerRadius\"\n          [fill]=\"colors(value)\"\n          [data]=\"valueArc.data\"\n          [animate]=\"true\"\n          (clickHandler)=\"onClick($event)\">\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [ngClass]=\"{'highlighted': tick.highlighted}\">\n          <svg:text\n            [style.textAnchor]=\"tick.textAnchor\"\n            [attr.transform]=\"tick.textTransform\"\n            alignment-baseline=\"central\">\n            {{tick.text}}\n          </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n          class=\"gauge-tick gauge-tick-small\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g transform=\"rotate(120)\">\n          <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n            {{displayValue()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -7731,7 +7809,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var gauge_component_1 = __webpack_require__("./src/gauge/gauge.component.ts");
 exports.GaugeComponent = gauge_component_1.GaugeComponent;
 var pie_chart_module_1 = __webpack_require__("./src/pie-chart/pie-chart.module.ts");
@@ -7740,7 +7818,7 @@ var GaugeModule = (function () {
     }
     GaugeModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule, pie_chart_module_1.PieChartModule],
+            imports: [chart_common_module_1.ChartCommonModule, pie_chart_module_1.PieChartModule],
             declarations: [
                 gauge_component_1.GaugeComponent
             ],
@@ -7753,6 +7831,20 @@ var GaugeModule = (function () {
     return GaugeModule;
 }());
 exports.GaugeModule = GaugeModule;
+
+
+/***/ },
+
+/***/ "./src/gauge/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/gauge/gauge.module.ts"));
+__export(__webpack_require__("./src/gauge/gauge.component.ts"));
 
 
 /***/ },
@@ -7983,7 +8075,6 @@ var HeatMapComponent = (function (_super) {
         this.element = element;
         this.cd = cd;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -8014,6 +8105,7 @@ var HeatMapComponent = (function (_super) {
                 showLegend: _this.legend,
                 columns: 11
             });
+            _this.formatDates();
             _this.xDomain = _this.getXDomain();
             _this.yDomain = _this.getYDomain();
             _this.valueDomain = _this.getValueDomain();
@@ -8160,14 +8252,10 @@ var HeatMapComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], HeatMapComponent.prototype, "legendLabelClick", void 0);
     HeatMapComponent = __decorate([
         core_1.Component({
             selector: 'heat-map',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legendData]=\"colorScale\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      [legendData]=\"colorScale\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -8194,7 +8282,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var heat_map_cell_component_1 = __webpack_require__("./src/heat-map/heat-map-cell.component.ts");
 exports.HeatMapCellComponent = heat_map_cell_component_1.HeatMapCellComponent;
 var heat_map_cell_series_component_1 = __webpack_require__("./src/heat-map/heat-map-cell-series.component.ts");
@@ -8206,7 +8294,7 @@ var HeatMapModule = (function () {
     }
     HeatMapModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 heat_map_cell_component_1.HeatMapCellComponent,
                 heat_map_cell_series_component_1.HeatCellSeriesComponent,
@@ -8227,6 +8315,22 @@ exports.HeatMapModule = HeatMapModule;
 
 /***/ },
 
+/***/ "./src/heat-map/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/heat-map/heat-map.module.ts"));
+__export(__webpack_require__("./src/heat-map/heat-map.component.ts"));
+__export(__webpack_require__("./src/heat-map/heat-map-cell.component.ts"));
+__export(__webpack_require__("./src/heat-map/heat-map-cell-series.component.ts"));
+
+
+/***/ },
+
 /***/ "./src/index.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -8236,16 +8340,32 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 __export(__webpack_require__("./src/ng2d3.module.ts"));
-__export(__webpack_require__("./src/area-chart/area-chart.module.ts"));
-__export(__webpack_require__("./src/bar-chart/bar-chart.module.ts"));
-__export(__webpack_require__("./src/force-directed-graph/force-directed-graph.module.ts"));
-__export(__webpack_require__("./src/common/common.module.ts"));
-__export(__webpack_require__("./src/heat-map/heat-map.module.ts"));
+__export(__webpack_require__("./src/common/index.ts"));
+__export(__webpack_require__("./src/area-chart/index.ts"));
+__export(__webpack_require__("./src/bar-chart/index.ts"));
+__export(__webpack_require__("./src/force-directed-graph/index.ts"));
+__export(__webpack_require__("./src/heat-map/index.ts"));
+__export(__webpack_require__("./src/line-chart/index.ts"));
+__export(__webpack_require__("./src/number-card/index.ts"));
+__export(__webpack_require__("./src/pie-chart/index.ts"));
+__export(__webpack_require__("./src/tree-map/index.ts"));
+__export(__webpack_require__("./src/gauge/index.ts"));
+
+
+/***/ },
+
+/***/ "./src/line-chart/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 __export(__webpack_require__("./src/line-chart/line-chart.module.ts"));
-__export(__webpack_require__("./src/number-card/number-card.module.ts"));
-__export(__webpack_require__("./src/pie-chart/pie-chart.module.ts"));
-__export(__webpack_require__("./src/tree-map/tree-map.module.ts"));
-__export(__webpack_require__("./src/gauge/gauge.module.ts"));
+__export(__webpack_require__("./src/line-chart/line-chart.component.ts"));
+__export(__webpack_require__("./src/line-chart/line.component.ts"));
+__export(__webpack_require__("./src/line-chart/line-series.component.ts"));
 
 
 /***/ },
@@ -8285,7 +8405,6 @@ var LineChartComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -8463,7 +8582,9 @@ var LineChartComponent = (function (_super) {
         this.hoveredVertical = null;
     };
     LineChartComponent.prototype.onClick = function (data, series) {
-        data.series = series.name;
+        if (series) {
+            data.series = series.name;
+        }
         this.clickHandler.emit(data);
     };
     LineChartComponent.prototype.trackBy = function (index, item) {
@@ -8551,10 +8672,6 @@ var LineChartComponent = (function (_super) {
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "clickHandler", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], LineChartComponent.prototype, "legendLabelClick", void 0);
-    __decorate([
         core_1.HostListener('mouseleave'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
@@ -8563,7 +8680,7 @@ var LineChartComponent = (function (_super) {
     LineChartComponent = __decorate([
         core_1.Component({
             selector: 'line-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g \n        timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g lineSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick({series: $event.name})\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (clickHandler)=\"onClick($event, series)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g\n        timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g lineSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -8590,7 +8707,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var line_component_1 = __webpack_require__("./src/line-chart/line.component.ts");
 exports.LineComponent = line_component_1.LineComponent;
 var line_chart_component_1 = __webpack_require__("./src/line-chart/line-chart.component.ts");
@@ -8602,7 +8719,7 @@ var LineChartModule = (function () {
     }
     LineChartModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 line_component_1.LineComponent,
                 line_chart_component_1.LineChartComponent,
@@ -8799,7 +8916,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var area_chart_module_1 = __webpack_require__("./src/area-chart/area-chart.module.ts");
 var bar_chart_module_1 = __webpack_require__("./src/bar-chart/bar-chart.module.ts");
 var force_directed_graph_module_1 = __webpack_require__("./src/force-directed-graph/force-directed-graph.module.ts");
@@ -8815,7 +8932,7 @@ var NG2D3Module = (function () {
     NG2D3Module = __decorate([
         core_1.NgModule({
             exports: [
-                common_module_1.CommonModule,
+                chart_common_module_1.ChartCommonModule,
                 area_chart_module_1.AreaChartModule,
                 bar_chart_module_1.BarChartModule,
                 force_directed_graph_module_1.ForceDirectedGraphModule,
@@ -8916,7 +9033,7 @@ var CardSeriesComponent = (function () {
         core_1.Component({
             selector: 'g[cardSeries]',
             template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event)\"\n    />\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.NgZone])
     ], CardSeriesComponent);
@@ -9062,14 +9179,30 @@ var CardComponent = (function () {
     CardComponent = __decorate([
         core_1.Component({
             selector: 'g[card]',
-            template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy='.35em'\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [style.opacity]=\"0.3\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy=\".35em\"\n        class=\"value-text\"\n        [style.fill]=\"color\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
     ], CardComponent);
     return CardComponent;
 }());
 exports.CardComponent = CardComponent;
+
+
+/***/ },
+
+/***/ "./src/number-card/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/number-card/number-card.module.ts"));
+__export(__webpack_require__("./src/number-card/number-card.component.ts"));
+__export(__webpack_require__("./src/number-card/card.component.ts"));
+__export(__webpack_require__("./src/number-card/card-series.component.ts"));
 
 
 /***/ },
@@ -9172,8 +9305,8 @@ var NumberCardComponent = (function (_super) {
     NumberCardComponent = __decorate([
         core_1.Component({
             selector: 'number-card',
-            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
     ], NumberCardComponent);
@@ -9199,7 +9332,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var card_component_1 = __webpack_require__("./src/number-card/card.component.ts");
 exports.CardComponent = card_component_1.CardComponent;
 var card_series_component_1 = __webpack_require__("./src/number-card/card-series.component.ts");
@@ -9211,7 +9344,7 @@ var NumberCardModule = (function () {
     }
     NumberCardModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 card_component_1.CardComponent,
                 card_series_component_1.CardSeriesComponent,
@@ -9264,7 +9397,6 @@ var AdvancedPieChartComponent = (function (_super) {
         this.cd = cd;
         this.margin = [20, 20, 20, 20];
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
     }
     AdvancedPieChartComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
@@ -9310,11 +9442,15 @@ var AdvancedPieChartComponent = (function (_super) {
         var _this = this;
         return this.results.map(function (d, index) {
             var label = d.name;
+            if (label instanceof Date) {
+                label = label.toLocaleDateString();
+            }
             var value = d.value;
             var percentage = Math.round(value / _this.total * 100);
             return {
                 value: Math.round(value),
                 label: trim_label_helper_1.trimLabel(label, 20),
+                originalLabel: d.name,
                 percentage: percentage
             };
         });
@@ -9353,14 +9489,10 @@ var AdvancedPieChartComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], AdvancedPieChartComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], AdvancedPieChartComponent.prototype, "legendLabelClick", void 0);
     AdvancedPieChartComponent = __decorate([
         core_1.Component({
             selector: 'advanced-pie-chart',
-            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          (legendLabelClick)=\"legendLabelClick.emit($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n          <div class=\"total-value\">\n            {{roundedTotal.toLocaleString()}}\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div\n                *ngFor=\"let legendItem of legendItems\"\n                tabindex=\"-1\"\n                (click)=\"legendLabelClick.emit(legendItem)\"\n                class=\"legend-item\">\n                <div\n                  class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div class=\"item-value\">{{legendItem.value.toLocaleString()}}</div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div class=\"item-percent\">{{legendItem.percentage.toLocaleString()}}%</div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
+            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          (legendLabelClick)=\"onClick($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n          <div class=\"total-value\">\n            {{roundedTotal.toLocaleString()}}\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div\n                *ngFor=\"let legendItem of legendItems\"\n                tabindex=\"-1\"\n                (click)=\"onClick({name: legendItem.label, value: legendItem.value})\"\n                class=\"legend-item\">\n                <div\n                  class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div class=\"item-value\">{{legendItem.value.toLocaleString()}}</div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div class=\"item-percent\">{{legendItem.percentage.toLocaleString()}}%</div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -9368,6 +9500,25 @@ var AdvancedPieChartComponent = (function (_super) {
     return AdvancedPieChartComponent;
 }(base_chart_component_1.BaseChartComponent));
 exports.AdvancedPieChartComponent = AdvancedPieChartComponent;
+
+
+/***/ },
+
+/***/ "./src/pie-chart/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/pie-chart/pie-chart.module.ts"));
+__export(__webpack_require__("./src/pie-chart/pie-chart.component.ts"));
+__export(__webpack_require__("./src/pie-chart/pie-arc.component.ts"));
+__export(__webpack_require__("./src/pie-chart/pie-grid.component.ts"));
+__export(__webpack_require__("./src/pie-chart/pie-series.component.ts"));
+__export(__webpack_require__("./src/pie-chart/pie-label.component.ts"));
+__export(__webpack_require__("./src/pie-chart/pie-series.component.ts"));
 
 
 /***/ },
@@ -9586,7 +9737,6 @@ var PieChartComponent = (function (_super) {
         this.explodeSlices = false;
         this.doughnut = false;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
     }
     PieChartComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
@@ -9700,14 +9850,10 @@ var PieChartComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], PieChartComponent.prototype, "legendLabelClick", void 0);
     PieChartComponent = __decorate([
         core_1.Component({
             selector: 'pie-chart',
-            template: "\n    <chart\n      [colors]=\"colors\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [colors]=\"colors\"\n      (legendLabelClick)=\"onClick($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -9734,7 +9880,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var advanced_pie_chart_component_1 = __webpack_require__("./src/pie-chart/advanced-pie-chart.component.ts");
 exports.AdvancedPieChartComponent = advanced_pie_chart_component_1.AdvancedPieChartComponent;
 var pie_label_component_1 = __webpack_require__("./src/pie-chart/pie-label.component.ts");
@@ -9754,7 +9900,7 @@ var PieChartModule = (function () {
     }
     PieChartModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 advanced_pie_chart_component_1.AdvancedPieChartComponent,
                 pie_label_component_1.PieLabelComponent,
@@ -10031,7 +10177,7 @@ var PieGridComponent = (function (_super) {
     PieGridComponent = __decorate([
         core_1.Component({
             selector: 'pie-grid',
-            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value.toLocaleString()\"\n          />\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"series.label + ': ' + series.value.toLocaleString()\"\n          />\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.percent}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\">\n            {{series.total.toLocaleString()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -10296,6 +10442,22 @@ exports.PieSeriesComponent = PieSeriesComponent;
 
 /***/ },
 
+/***/ "./src/tree-map/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/tree-map/tree-map.module.ts"));
+__export(__webpack_require__("./src/tree-map/tree-map.component.ts"));
+__export(__webpack_require__("./src/tree-map/tree-map-cell.component.ts"));
+__export(__webpack_require__("./src/tree-map/tree-map-cell-series.component.ts"));
+
+
+/***/ },
+
 /***/ "./src/tree-map/tree-map-cell-series.component.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -10517,7 +10679,6 @@ var TreeMapComponent = (function (_super) {
         this.element = element;
         this.cd = cd;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 10, 10, 10];
     }
     TreeMapComponent.prototype.ngAfterViewInit = function () {
@@ -10594,14 +10755,10 @@ var TreeMapComponent = (function (_super) {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], TreeMapComponent.prototype, "clickHandler", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], TreeMapComponent.prototype, "legendLabelClick", void 0);
     TreeMapComponent = __decorate([
         core_1.Component({
             selector: 'tree-map',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
@@ -10628,7 +10785,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_module_1 = __webpack_require__("./src/common/common.module.ts");
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var tree_map_cell_component_1 = __webpack_require__("./src/tree-map/tree-map-cell.component.ts");
 exports.TreeMapCellComponent = tree_map_cell_component_1.TreeMapCellComponent;
 var tree_map_cell_series_component_1 = __webpack_require__("./src/tree-map/tree-map-cell-series.component.ts");
@@ -10640,7 +10797,7 @@ var TreeMapModule = (function () {
     }
     TreeMapModule = __decorate([
         core_1.NgModule({
-            imports: [common_module_1.CommonModule],
+            imports: [chart_common_module_1.ChartCommonModule],
             declarations: [
                 tree_map_cell_component_1.TreeMapCellComponent,
                 tree_map_cell_series_component_1.TreeMapCellSeriesComponent,
@@ -10826,11 +10983,11 @@ var cache = {};
  * Generates a short id.
  *
  * Description:
- * 	A 4-character alphanumeric sequence (364 = 1.6 million)
- * 	This should only be used for JavaScript specific models.
- * 	http://stackoverflow.com/questions/6248666/how-to-generate-short-uid-like-ax4j9z-in-js
+ *   A 4-character alphanumeric sequence (364 = 1.6 million)
+ *   This should only be used for JavaScript specific models.
+ *   http://stackoverflow.com/questions/6248666/how-to-generate-short-uid-like-ax4j9z-in-js
  *
- * 	Example: `ebgf`
+ *   Example: `ebgf`
  */
 function id() {
     var newId = ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4);
@@ -11037,11 +11194,11 @@ var RegistryService = (function () {
     RegistryService.prototype.destroy = function (id) {
         var obj = this.components.get(id);
         if (obj && obj.component) {
+            this.components.delete(id);
             if (obj.callback) {
                 obj.callback(true);
             }
             obj.component.destroy();
-            this.components.delete(id);
         }
     };
     RegistryService.prototype.destroyAll = function () {
@@ -11124,66 +11281,15 @@ exports.sortByTime = sortByTime;
 
 "use strict";
 "use strict";
-function debounce(func, wait, immediate) {
-    var timeout, args, context, timestamp, result;
-    return function () {
-        context = this;
-        args = arguments;
-        timestamp = new Date();
-        var later = function () {
-            var last = new Date().getTime() - timestamp;
-            if (last < wait) {
-                timeout = setTimeout(later, wait - last);
-            }
-            else {
-                timeout = null;
-                if (!immediate) {
-                    result = func.apply(context, args);
-                }
-            }
-        };
-        var callNow = immediate && !timeout;
-        if (!timeout) {
-            timeout = setTimeout(later, wait);
-        }
-        if (callNow) {
-            result = func.apply(context, args);
-        }
-        return result;
-    };
-}
-exports.debounce = debounce;
 /**
- * Debounce decorator
- *
- *  class MyClass {
- *    debounceable(10)
- *    myFn() { ... }
- *  }
- */
-function debounceable(duration, immediate) {
-    return function innerDecorator(target, key, descriptor) {
-        return {
-            configurable: true,
-            enumerable: descriptor.enumerable,
-            get: function getter() {
-                Object.defineProperty(this, key, {
-                    configurable: true,
-                    enumerable: descriptor.enumerable,
-                    value: debounce(descriptor.value, duration, immediate)
-                });
-                return this[key];
-            }
-        };
-    };
-}
-exports.debounceable = debounceable;
-/**
- * Throttle a function
- * @param  {any}    func    function to execute
- * @param  {number} wait    duration to wait
- * @param  {any}    options options
- */
+* Throttle a function
+*
+* @export
+* @param {*} func
+* @param {number} wait
+* @param {*} [options]
+* @returns
+*/
 function throttle(func, wait, options) {
     options = options || {};
     var context;
@@ -11224,6 +11330,11 @@ exports.throttle = throttle;
  *    throttleable(10)
  *    myFn() { ... }
  *  }
+ *
+ * @export
+ * @param {number} duration
+ * @param {*} [options]
+ * @returns
  */
 function throttleable(duration, options) {
     return function innerDecorator(target, key, descriptor) {

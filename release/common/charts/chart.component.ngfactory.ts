@@ -27,11 +27,11 @@ import * as import18 from '../../../node_modules/@angular/common/src/directives/
 import * as import19 from '@angular/core/src/linker/template_ref';
 import * as import20 from '@angular/common/src/directives/ng_if';
 import * as import21 from '@angular/core/src/security';
-import * as import22 from '../../../../src/common/scale-legend.component';
-import * as import23 from '../scale-legend.component.ngfactory';
+import * as import22 from '../../../../src/common/legend/scale-legend.component';
+import * as import23 from '../legend/scale-legend.component.ngfactory';
 import * as import24 from '@angular/platform-browser/src/security/dom_sanitization_service';
-import * as import25 from '../../../../src/common/legend.component';
-import * as import26 from '../legend.component.ngfactory';
+import * as import25 from '../../../../src/common/legend/legend.component';
+import * as import26 from '../legend/legend.component.ngfactory';
 export class Wrapper_ChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.ChartComponent;
@@ -432,7 +432,7 @@ class View_ChartComponent2 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'labelClick')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.legendLabelClick.emit($event)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.onLegendLabelClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

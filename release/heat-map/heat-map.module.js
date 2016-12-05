@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common_module_1 = require("../common/common.module");
+var chart_common_module_1 = require("../common/chart-common.module");
 var heat_map_cell_component_1 = require("./heat-map-cell.component");
 exports.HeatMapCellComponent = heat_map_cell_component_1.HeatMapCellComponent;
 var heat_map_cell_series_component_1 = require("./heat-map-cell-series.component");
@@ -12,7 +12,7 @@ var HeatMapModule = (function () {
     }
     HeatMapModule.decorators = [
         { type: core_1.NgModule, args: [{
-                    imports: [common_module_1.CommonModule],
+                    imports: [chart_common_module_1.ChartCommonModule],
                     declarations: [
                         heat_map_cell_component_1.HeatMapCellComponent,
                         heat_map_cell_series_component_1.HeatCellSeriesComponent,

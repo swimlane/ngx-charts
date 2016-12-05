@@ -10,7 +10,7 @@ import * as import1 from '../../../src/line-chart/line-chart.module';
 import * as import2 from '@angular/common/src/common_module';
 import * as import3 from '../../../src/common/axes/axes.module';
 import * as import4 from '../../../src/common/tooltip/tooltip.module';
-import * as import5 from '../../../src/common/common.module';
+import * as import5 from '../../../src/common/chart-common.module';
 import * as import6 from '@angular/common/src/localization';
 import * as import7 from '../../../src/utils/injection.service';
 import * as import8 from '../../../src/common/tooltip/tooltip.service';
@@ -22,7 +22,7 @@ class LineChartModuleInjector extends import0.NgModuleInjector<import1.LineChart
   _CommonModule_0:import2.CommonModule;
   _AxesModule_1:import3.AxesModule;
   _TooltipModule_2:import4.TooltipModule;
-  _CommonModule_3:import5.CommonModule;
+  _ChartCommonModule_3:import5.ChartCommonModule;
   _LineChartModule_4:import1.LineChartModule;
   __NgLocalization_5:import6.NgLocaleLocalization;
   __InjectionService_6:import7.InjectionService;
@@ -46,7 +46,7 @@ class LineChartModuleInjector extends import0.NgModuleInjector<import1.LineChart
     this._CommonModule_0 = new import2.CommonModule();
     this._AxesModule_1 = new import3.AxesModule();
     this._TooltipModule_2 = new import4.TooltipModule();
-    this._CommonModule_3 = new import5.CommonModule();
+    this._ChartCommonModule_3 = new import5.ChartCommonModule();
     this._LineChartModule_4 = new import1.LineChartModule();
     return this._LineChartModule_4;
   }
@@ -54,7 +54,7 @@ class LineChartModuleInjector extends import0.NgModuleInjector<import1.LineChart
     if ((token === import2.CommonModule)) { return this._CommonModule_0; }
     if ((token === import3.AxesModule)) { return this._AxesModule_1; }
     if ((token === import4.TooltipModule)) { return this._TooltipModule_2; }
-    if ((token === import5.CommonModule)) { return this._CommonModule_3; }
+    if ((token === import5.ChartCommonModule)) { return this._ChartCommonModule_3; }
     if ((token === import1.LineChartModule)) { return this._LineChartModule_4; }
     if ((token === import6.NgLocalization)) { return this._NgLocalization_5; }
     if ((token === import7.InjectionService)) { return this._InjectionService_6; }

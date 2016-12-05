@@ -132,11 +132,7 @@ var TooltipDirective = (function () {
         var _this = this;
         if (!this.componentId)
             return;
-        var time = immediate ? 0 : this.tooltipHideTimeout;
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(function () {
-            // destroy component
-            _this.tooltipService.destroy(_this.componentId);
+        var destroyFn = function () {
             // remove events
             if (_this.mouseLeaveContentEvent)
                 _this.mouseLeaveContentEvent();
@@ -144,10 +140,19 @@ var TooltipDirective = (function () {
                 _this.mouseEnterContentEvent();
             if (_this.documentClickEvent)
                 _this.documentClickEvent();
+            // destroy component
+            _this.tooltipService.destroy(_this.componentId);
             // emit events
             _this.hide.emit(true);
             _this.componentId = undefined;
-        }, time);
+        };
+        clearTimeout(this.timeout);
+        if (!immediate) {
+            this.timeout = setTimeout(destroyFn, this.tooltipHideTimeout);
+        }
+        else {
+            destroyFn();
+        }
     };
     TooltipDirective.prototype.createBoundOptions = function () {
         return new tooltip_options_1.TooltipOptions({

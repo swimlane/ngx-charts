@@ -87,6 +87,23 @@ var BaseChartComponent = (function () {
         }
         return results;
     };
+    // converts all date objects that appear as name into formatted date strings
+    BaseChartComponent.prototype.formatDates = function () {
+        for (var i = 0; i < this.results.length; i++) {
+            var g = this.results[i];
+            if (g.name instanceof Date) {
+                g.name = g.name.toLocaleDateString();
+            }
+            if (g.series) {
+                for (var j = 0; j < g.series.length; j++) {
+                    var d = g.series[j];
+                    if (d.name instanceof Date) {
+                        d.name = d.name.toLocaleDateString();
+                    }
+                }
+            }
+        }
+    };
     return BaseChartComponent;
 }());
 exports.BaseChartComponent = BaseChartComponent;

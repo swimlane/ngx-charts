@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common_module_1 = require("../common/common.module");
+var chart_common_module_1 = require("../common/chart-common.module");
 var advanced_pie_chart_component_1 = require("./advanced-pie-chart.component");
 exports.AdvancedPieChartComponent = advanced_pie_chart_component_1.AdvancedPieChartComponent;
 var pie_label_component_1 = require("./pie-label.component");
@@ -20,7 +20,7 @@ var PieChartModule = (function () {
     }
     PieChartModule.decorators = [
         { type: core_1.NgModule, args: [{
-                    imports: [common_module_1.CommonModule],
+                    imports: [chart_common_module_1.ChartCommonModule],
                     declarations: [
                         advanced_pie_chart_component_1.AdvancedPieChartComponent,
                         pie_label_component_1.PieLabelComponent,

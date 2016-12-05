@@ -18,4 +18,5 @@ export declare class ChartComponent implements OnChanges {
     ngOnChanges(): void;
     update(): void;
     getLegendType(): string;
+    onLegendLabelClick(name: any): void;
 }

@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common_module_1 = require("../common/common.module");
+var chart_common_module_1 = require("../common/chart-common.module");
 var bar_component_1 = require("./bar.component");
 exports.BarComponent = bar_component_1.BarComponent;
 var bar_horizontal_component_1 = require("./bar-horizontal.component");
@@ -28,7 +28,7 @@ var BarChartModule = (function () {
     }
     BarChartModule.decorators = [
         { type: core_1.NgModule, args: [{
-                    imports: [common_module_1.CommonModule],
+                    imports: [chart_common_module_1.ChartCommonModule],
                     declarations: [
                         bar_component_1.BarComponent,
                         bar_horizontal_component_1.BarHorizontalComponent,

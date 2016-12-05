@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common_module_1 = require("../common/common.module");
+var chart_common_module_1 = require("../common/chart-common.module");
 var line_component_1 = require("./line.component");
 exports.LineComponent = line_component_1.LineComponent;
 var line_chart_component_1 = require("./line-chart.component");
@@ -12,7 +12,7 @@ var LineChartModule = (function () {
     }
     LineChartModule.decorators = [
         { type: core_1.NgModule, args: [{
-                    imports: [common_module_1.CommonModule],
+                    imports: [chart_common_module_1.ChartCommonModule],
                     declarations: [
                         line_component_1.LineComponent,
                         line_chart_component_1.LineChartComponent,

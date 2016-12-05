@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.8.0
+- Renamed CommonModule to ChartCommonModule to fix name conflicts with other frameworks #109
+- Converted date objets to formatted strings in some charts
+- Removed rounded corners on thin bars
+- Improved on destroy hooks in tooltips
+- Merged legendLabelClick output into clickHandler output
+- Fixed legend click data format
+
+## 1.7.3
+- Fixed pie chart labels going out of bounds
+- Updated area tooltip formatting and legend colors for dates
+- Updated numbercard height scale max size
+
+## 1.7.2
+- Bug: Fix number card text scaling
+- Added custom timeline background element
+- Wrapped timeline updates in zone.run
+- Style updates
+
 ## 1.7.1
 - Bug: Advanced Pie Legend not clickable
 - Bug: Date equality not scaling properly

@@ -16,7 +16,6 @@ export declare class GaugeComponent extends BaseChartComponent implements OnChan
     bigSegments: number;
     smallSegments: number;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     textEl: ElementRef;
     dims: ViewDimensions;
     valueDomain: any;

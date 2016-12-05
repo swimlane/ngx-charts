@@ -19,7 +19,6 @@ export declare class BarVerticalComponent extends BaseChartComponent implements 
     gradient: boolean;
     showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     xScale: any;
     yScale: any;

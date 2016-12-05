@@ -16,11 +16,11 @@ var RegistryService = (function () {
     RegistryService.prototype.destroy = function (id) {
         var obj = this.components.get(id);
         if (obj && obj.component) {
+            this.components.delete(id);
             if (obj.callback) {
                 obj.callback(true);
             }
             obj.component.destroy();
-            this.components.delete(id);
         }
     };
     RegistryService.prototype.destroyAll = function () {
