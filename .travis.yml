@@ -10,6 +10,10 @@ before_install:
 
 install:
   - npm install
+  - npm install codeclimate-test-reporter
+
+after_script:
+  - codeclimate-test-reporter < coverage/lcov.info
 
 addons:
   code_climate:
