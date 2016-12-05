@@ -20,12 +20,13 @@ export class RegistryService {
     const obj: any = this.components.get(id);
 
     if(obj && obj.component) {
+      this.components.delete(id);
+      
       if(obj.callback) {
         obj.callback(true);
       }
 
       obj.component.destroy();
-      this.components.delete(id);
     }
   }
 
