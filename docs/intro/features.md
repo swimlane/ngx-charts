@@ -41,10 +41,13 @@ Chart frameworks are a dime a dozen nowadays. Not many of them existed 2+
 years ago when we started this project internally and many of them still don't really work well with Angular. Here's a recent list
 we compiled during our effort to open-source this:
 
-- [recharts](http://recharts.org/)
-- [Vega](http://vega.github.io/)
-- [C3](http://c3js.org/)
-- [Plotly](https://plot.ly/)
-- [Highcharts](http://www.highcharts.com/)
-- [eCharts](http://echarts.baidu.com/demo.htm)
-- [dc.js](http://dc-js.github.io/dc.js)
+- [ng2-nvd3](https://github.com/krispo/ng2-nvd3) - Open-source wrapper for nvd3 using Angular2 Components
+- [ng2-charts](http://valor-software.com/ng2-charts/) - Open-source Angular2 wrapper directives for Chart.js
+- [angular2-highcharts](https://www.npmjs.com/package/angular2-highcharts) - Open-source Angular2 wrapper for HighCharts
+- [recharts](http://recharts.org/) - Open-source composable charting library built on React components
+- [Vega](http://vega.github.io/) - Open-source Canvas/SVG viz framework
+- [C3](http://c3js.org/) - Open-source D3-based reusable chart library
+- [Plotly](https://plot.ly/) - Commercial business intelligence and data science.
+- [Highcharts](http://www.highcharts.com/) - Commercial chart framework
+- [eCharts](http://echarts.baidu.com/demo.htm) - Open-source JavaScript chart framework
+- [dc.js](http://dc-js.github.io/dc.js) - Open-source JavaScript charting library
