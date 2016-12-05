@@ -257,7 +257,7 @@ export class View_PieGridComponent0 extends import2.AppView<import0.PieGridCompo
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'legendLabelClick')) {
-      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

@@ -83,7 +83,7 @@ var BarComponent = (function () {
     };
     BarComponent.prototype.getRadius = function () {
         var radius = 0;
-        if (this.roundEdges && this.height > radius && this.width > radius) {
+        if (this.roundEdges && this.height > 5 && this.width > 5) {
             radius = 5;
         }
         return radius;

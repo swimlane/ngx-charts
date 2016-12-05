@@ -15,7 +15,6 @@ export declare class PieChartComponent extends BaseChartComponent implements OnC
     doughnut: boolean;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     translation: string;
     outerRadius: number;
     innerRadius: number;

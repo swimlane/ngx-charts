@@ -17,7 +17,6 @@ export declare class AdvancedPieChartComponent extends BaseChartComponent implem
     customColors: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     data: any;
     dims: ViewDimensions;
     domain: any[];

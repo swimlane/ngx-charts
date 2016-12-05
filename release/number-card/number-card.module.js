@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common_module_1 = require("../common/common.module");
+var chart_common_module_1 = require("../common/chart-common.module");
 var card_component_1 = require("./card.component");
 exports.CardComponent = card_component_1.CardComponent;
 var card_series_component_1 = require("./card-series.component");
@@ -12,7 +12,7 @@ var NumberCardModule = (function () {
     }
     NumberCardModule.decorators = [
         { type: core_1.NgModule, args: [{
-                    imports: [common_module_1.CommonModule],
+                    imports: [chart_common_module_1.ChartCommonModule],
                     declarations: [
                         card_component_1.CardComponent,
                         card_series_component_1.CardSeriesComponent,

@@ -18,7 +18,6 @@ export declare class HeatMapComponent extends BaseChartComponent implements OnCh
     yAxisLabel: any;
     gradient: boolean;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     xDomain: any[];
     yDomain: any[];

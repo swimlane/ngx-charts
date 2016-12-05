@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common_module_1 = require("../common/common.module");
+var chart_common_module_1 = require("../common/chart-common.module");
 var gauge_component_1 = require("./gauge.component");
 exports.GaugeComponent = gauge_component_1.GaugeComponent;
 var pie_chart_module_1 = require("../pie-chart/pie-chart.module");
@@ -9,7 +9,7 @@ var GaugeModule = (function () {
     }
     GaugeModule.decorators = [
         { type: core_1.NgModule, args: [{
-                    imports: [common_module_1.CommonModule, pie_chart_module_1.PieChartModule],
+                    imports: [chart_common_module_1.ChartCommonModule, pie_chart_module_1.PieChartModule],
                     declarations: [
                         gauge_component_1.GaugeComponent
                     ],

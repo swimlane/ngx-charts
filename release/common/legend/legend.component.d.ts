@@ -10,4 +10,5 @@ export declare class LegendComponent implements OnChanges {
     ngOnChanges(): void;
     update(): void;
     getLegendItems(): any[];
+    clickLegendItem(legendItem: any): void;
 }

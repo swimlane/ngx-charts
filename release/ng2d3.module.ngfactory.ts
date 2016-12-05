@@ -10,7 +10,7 @@ import * as import1 from '../../src/ng2d3.module';
 import * as import2 from '@angular/common/src/common_module';
 import * as import3 from '../../src/common/axes/axes.module';
 import * as import4 from '../../src/common/tooltip/tooltip.module';
-import * as import5 from '../../src/common/common.module';
+import * as import5 from '../../src/common/chart-common.module';
 import * as import6 from '../../src/area-chart/area-chart.module';
 import * as import7 from '../../src/bar-chart/bar-chart.module';
 import * as import8 from '../../src/force-directed-graph/force-directed-graph.module';
@@ -31,7 +31,7 @@ class NG2D3ModuleInjector extends import0.NgModuleInjector<import1.NG2D3Module> 
   _CommonModule_0:import2.CommonModule;
   _AxesModule_1:import3.AxesModule;
   _TooltipModule_2:import4.TooltipModule;
-  _CommonModule_3:import5.CommonModule;
+  _ChartCommonModule_3:import5.ChartCommonModule;
   _AreaChartModule_4:import6.AreaChartModule;
   _BarChartModule_5:import7.BarChartModule;
   _ForceDirectedGraphModule_6:import8.ForceDirectedGraphModule;
@@ -64,7 +64,7 @@ class NG2D3ModuleInjector extends import0.NgModuleInjector<import1.NG2D3Module> 
     this._CommonModule_0 = new import2.CommonModule();
     this._AxesModule_1 = new import3.AxesModule();
     this._TooltipModule_2 = new import4.TooltipModule();
-    this._CommonModule_3 = new import5.CommonModule();
+    this._ChartCommonModule_3 = new import5.ChartCommonModule();
     this._AreaChartModule_4 = new import6.AreaChartModule();
     this._BarChartModule_5 = new import7.BarChartModule();
     this._ForceDirectedGraphModule_6 = new import8.ForceDirectedGraphModule();
@@ -81,7 +81,7 @@ class NG2D3ModuleInjector extends import0.NgModuleInjector<import1.NG2D3Module> 
     if ((token === import2.CommonModule)) { return this._CommonModule_0; }
     if ((token === import3.AxesModule)) { return this._AxesModule_1; }
     if ((token === import4.TooltipModule)) { return this._TooltipModule_2; }
-    if ((token === import5.CommonModule)) { return this._CommonModule_3; }
+    if ((token === import5.ChartCommonModule)) { return this._ChartCommonModule_3; }
     if ((token === import6.AreaChartModule)) { return this._AreaChartModule_4; }
     if ((token === import7.BarChartModule)) { return this._BarChartModule_5; }
     if ((token === import8.ForceDirectedGraphModule)) { return this._ForceDirectedGraphModule_6; }

@@ -16,7 +16,6 @@ var TreeMapComponent = (function (_super) {
         this.element = element;
         this.cd = cd;
         this.clickHandler = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [10, 10, 10, 10];
     }
     TreeMapComponent.prototype.ngAfterViewInit = function () {
@@ -76,7 +75,7 @@ var TreeMapComponent = (function (_super) {
     TreeMapComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'tree-map',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"legendLabelClick.emit($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -92,7 +91,6 @@ var TreeMapComponent = (function (_super) {
         'scheme': [{ type: core_1.Input },],
         'customColors': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
-        'legendLabelClick': [{ type: core_1.Output },],
     };
     return TreeMapComponent;
 }(base_chart_component_1.BaseChartComponent));

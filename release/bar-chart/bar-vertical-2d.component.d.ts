@@ -20,7 +20,6 @@ export declare class BarVertical2DComponent extends BaseChartComponent implement
     gradient: boolean;
     showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];

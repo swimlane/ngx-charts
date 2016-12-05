@@ -23,7 +23,6 @@ export declare class AreaChartComponent extends BaseChartComponent implements On
     showGridLines: boolean;
     curve: any;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     xSet: any;
     xDomain: any;

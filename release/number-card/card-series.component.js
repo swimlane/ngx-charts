@@ -49,7 +49,7 @@ var CardSeriesComponent = (function () {
         { type: core_1.Component, args: [{
                     selector: 'g[cardSeries]',
                     template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event)\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */

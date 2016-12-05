@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require("@angular/core");
-var common_module_1 = require("./common/common.module");
+var chart_common_module_1 = require("./common/chart-common.module");
 var area_chart_module_1 = require("./area-chart/area-chart.module");
 var bar_chart_module_1 = require("./bar-chart/bar-chart.module");
 var force_directed_graph_module_1 = require("./force-directed-graph/force-directed-graph.module");
@@ -16,7 +16,7 @@ var NG2D3Module = (function () {
     NG2D3Module.decorators = [
         { type: core_1.NgModule, args: [{
                     exports: [
-                        common_module_1.CommonModule,
+                        chart_common_module_1.ChartCommonModule,
                         area_chart_module_1.AreaChartModule,
                         bar_chart_module_1.BarChartModule,
                         force_directed_graph_module_1.ForceDirectedGraphModule,

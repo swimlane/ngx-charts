@@ -7,10 +7,10 @@ var Timeline = (function () {
     function Timeline(element, zone, cd) {
         this.zone = zone;
         this.cd = cd;
-        this.initialized = false;
         this.height = 50;
         this.clickHandler = new core_1.EventEmitter();
         this.onDomainChange = new core_1.EventEmitter();
+        this.initialized = false;
         this.element = element.nativeElement;
     }
     Timeline.prototype.ngOnChanges = function () {
@@ -139,7 +139,7 @@ var Timeline = (function () {
     Timeline.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[timeline]',
-                    template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n\n      <svg:rect x=\"0\" [attr.width]=\"view[0]\" y=\"0\" [attr.height]=\"height\" class=\"brush-background\" />\n\n      <svg:g class=\"brush\">\n      </svg:g>\n\n    </svg:g>\n  ",
+                    template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\" \n        [attr.width]=\"view[0]\" \n        y=\"0\" \n        [attr.height]=\"height\" \n        class=\"brush-background\" \n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];

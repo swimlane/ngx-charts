@@ -19,7 +19,6 @@ export declare class BarHorizontalNormalizedComponent extends BaseChartComponent
     gradient: boolean;
     showGridLines: boolean;
     clickHandler: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];

@@ -58,7 +58,6 @@ export class Wrapper_BarHorizontalStackedComponent {
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
   subscription0:any;
-  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -82,7 +81,6 @@ export class Wrapper_BarHorizontalStackedComponent {
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
-    (this.subscription1 && this.subscription1.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -203,10 +201,9 @@ export class Wrapper_BarHorizontalStackedComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
-    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_BarHorizontalStackedComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -451,7 +448,7 @@ export class View_BarHorizontalStackedComponent0 extends import2.AppView<import0
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'legendLabelClick')) {
-      const pd_sub_0:any = ((<any>this.context.legendLabelClick.emit($event)) !== false);
+      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
