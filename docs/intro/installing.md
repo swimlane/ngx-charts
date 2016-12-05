@@ -6,14 +6,9 @@ You can grab the latest release from the [Releases Page](https://github.com/swim
 
 Also, the release code is checked in and resides [here](https://github.com/swimlane/ng2d3/tree/master/release).
 
-### Module Versions
-We don't discriminate against module loaders and package in `UMD`, `ES6` and `CJS`.
-
-- `release/ng2d3.js` - Multi-file ES5 Build
-- `release/ng2d3.umd.js` - UMD Version
-- `release/ng2d3.umd.min.js` - UMD Version Minified
-- `release/ng2d3cjs.js` - CommonJS Version
-- `release/ng2d3.es.js` - ES6 Version
+### JavaScript
+- `release/index.js` - UMD Version
+- `release/index.min.js` - UMD Version Minified
 
 ### CSS
 Additionally, you will need to include `./release/ng2d3.css`.
@@ -23,4 +18,4 @@ If you want to run the demos locally, just do:
 
 - `npm i`
 - `npm start`
-- Browse to `http://localhost:9999`
+- Browse to [http://localhost:9999](http://localhost:9999)
