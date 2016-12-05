@@ -4,7 +4,7 @@ import {
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
 import d3 from '../../d3';
-import '../config/testing-utils';
+import '../../../config/testing-utils';
 
 import { ChartCommonModule } from '../chart-common.module';
 import { colorHelper } from '../../utils/color-sets';
