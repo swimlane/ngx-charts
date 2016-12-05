@@ -2,7 +2,7 @@
 // @credit John Papa"s https://git.io/v14aZ
 
 // Observable class extensions
-import "rxjs/add/observable/fromevent";
+import "rxjs/add/observable/fromEvent";
 
 // Observable operators
 import "rxjs/add/operator/debounceTime";
