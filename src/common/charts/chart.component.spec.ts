@@ -6,7 +6,7 @@ import { Component  } from '@angular/core';
 import d3 from '../../d3';
 import '../../../config/testing-utils';
 
-import { CommonModule } from '../common.module';
+import { ChartCommonModule } from '../chart-common.module';
 
 @Component({
   selector: 'test-component',
@@ -24,7 +24,7 @@ describe('<chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [CommonModule]
+      imports: [ChartCommonModule]
     });
 
   });

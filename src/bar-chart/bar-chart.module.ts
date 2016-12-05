@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "../common/common.module";
+import { ChartCommonModule } from "../common/chart-common.module";
 import { BarComponent } from "./bar.component";
 import { BarHorizontalComponent } from "./bar-horizontal.component";
 import { BarHorizontal2DComponent } from "./bar-horizontal-2d.component";
@@ -16,7 +16,7 @@ export { BarComponent, BarHorizontalComponent, BarHorizontal2DComponent, BarHori
   BarVerticalNormalizedComponent, BarVerticalStackedComponent, SeriesHorizontal, SeriesVerticalComponent };
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [ChartCommonModule],
   declarations: [
     BarComponent,
     BarHorizontalComponent,

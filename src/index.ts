@@ -2,7 +2,7 @@ export * from './ng2d3.module';
 export * from "./area-chart/area-chart.module";
 export * from "./bar-chart/bar-chart.module";
 export * from "./force-directed-graph/force-directed-graph.module";
-export * from "./common/common.module";
+export * from "./common/chart-common.module";
 export * from "./heat-map/heat-map.module";
 export * from "./line-chart/line-chart.module";
 export * from "./number-card/number-card.module";

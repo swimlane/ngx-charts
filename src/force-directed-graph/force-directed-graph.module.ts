@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ForceDirectedGraphComponent } from './force-directed-graph.component';
-import { CommonModule } from '../common/common.module';
+import { ChartCommonModule } from '../common/chart-common.module';
 
 export { ForceDirectedGraphComponent };
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [ChartCommonModule],
   declarations: [
     ForceDirectedGraphComponent,
   ],

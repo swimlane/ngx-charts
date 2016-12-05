@@ -6,7 +6,7 @@ import { Component  } from '@angular/core';
 import d3 from '../d3';
 import '../../config/testing-utils';
 
-import { CommonModule } from './common.module';
+import { ChartCommonModule } from './chart-common.module';
 import { colorHelper } from '../utils/color-sets';
 
 // some test data (includes just enought data to run the tests)
@@ -33,7 +33,7 @@ describe('<legend>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [CommonModule]
+      imports: [ChartCommonModule]
     });
 
     TestBed.overrideComponent(TestComponent, {
