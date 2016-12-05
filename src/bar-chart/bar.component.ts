@@ -34,7 +34,7 @@ import d3 from '../d3';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarComponent implements OnInit, OnChanges {
-  
+
   @Input() fill;
   @Input() data;
   @Input() width;
@@ -137,7 +137,7 @@ export class BarComponent implements OnInit, OnChanges {
 
   getRadius() {
     let radius = 0;
-    if (this.roundEdges && this.height > radius && this.width > radius) {
+    if (this.roundEdges && this.height > 5 && this.width > 5) {
       radius = 5;
     }
     return radius;

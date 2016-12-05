@@ -112,15 +112,15 @@ export abstract class BaseChartComponent {
   formatDates() {
     for (let i = 0; i < this.results.length; i++) {
       let g = this.results[i];
-      if (g.name instanceof Date){
+      if (g.name instanceof Date) {
         g.name = g.name.toLocaleDateString();
       }
 
       if (g.series) {
         for (let j = 0; j < g.series.length; j++) {
           let d = g.series[j];
-          if (d.name instanceof Date){
-            d.name = d.name.toLocaleDateString()
+          if (d.name instanceof Date) {
+            d.name = d.name.toLocaleDateString();
           }
         }
       }
