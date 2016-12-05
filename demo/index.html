@@ -44,25 +44,26 @@
       }
       .social-toolbox {
         position: absolute;
+        top: 5px;
+        right: 10px;
+        z-index: 999;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        top: 10px;
-        right: 0;
-        z-index: 999;
         width: 75%;
+        width: calc(75% - 10px);
       }
-      iframe {
+      .social-toolbox iframe {
         margin-right: 5px;
       }
-      .addthis_inline_share_toolbox {
+      .social-toolbox .addthis_inline_share_toolbox {
         margin-top: 5px;
       }
     </style>
   </head>
 <body>
   <div class="social-toolbox">
-    <a class="github-button" href="https://github.com/swimlane/ng2d3" data-style="mega" data-count-href="/swimlane/ng2d3/stargazers" data-count-api="/repos/swimlane/ng2d3#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star swimlane/ng2d3 on GitHub" hidden>Star</a>
+    <a class="github-button" href="https://github.com/swimlane/ng2d3" data-style="mega" data-count-href="/swimlane/ng2d3/stargazers" data-count-api="/repos/swimlane/ng2d3#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star swimlane/ng2d3 on GitHub">Star</a>
     <div class="addthis_inline_share_toolbox"></div>
   </div>
   <app>Loading...</app>
