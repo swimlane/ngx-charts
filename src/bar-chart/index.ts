@@ -1,5 +1,5 @@
 export * from './bar-chart.module';
-export * from './bar-chart.component';
+export * from './bar.component';
 export * from './bar-horizontal.component';
 export * from './bar-horizontal-2d.component';
 export * from './bar-horizontal-normalized.component';

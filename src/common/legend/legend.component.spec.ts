@@ -3,11 +3,11 @@ import {
   async
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
-import d3 from '../d3';
+import d3 from '../../d3';
 import '../../config/testing-utils';
 
-import { ChartCommonModule } from './chart-common.module';
-import { colorHelper } from '../utils/color-sets';
+import { ChartCommonModule } from '../chart-common.module';
+import { colorHelper } from '../../utils/color-sets';
 
 // some test data (includes just enought data to run the tests)
 let seriesData = ['complete', 'not complete'];

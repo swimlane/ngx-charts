@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ChartComponent } from "./charts/chart.component";
-import { LegendComponent } from "./legend.component";
-import { ScaleLegendComponent } from "./scale-legend.component";
+import { ScaleLegendComponent, LegendComponent } from "./legend";
 import { AxesModule } from "./axes/axes.module";
 import { TooltipModule } from "./tooltip";
 import { CircleSeriesComponent } from "./circle-series.component";
@@ -16,9 +15,8 @@ import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
 import { BaseChartComponent } from "./base-chart.component";
 
-export * from "./tooltip";
 export { 
-  ChartComponent, LegendComponent, ScaleLegendComponent, CircleSeriesComponent, CircleComponent, GridPanelComponent, 
+  ChartComponent, CircleSeriesComponent, CircleComponent, GridPanelComponent, 
   GridPanelSeriesComponent, SvgLinearGradientComponent, SvgRadialGradientComponent,
   Timeline, AreaComponent, AreaTooltip, BaseChartComponent 
 };
