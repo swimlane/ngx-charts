@@ -15,7 +15,6 @@ import {
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { tickFormat } from '../common/tick-format.helper';
 import d3 from '../d3';
 
 @Component({
@@ -32,7 +31,6 @@ import d3 from '../d3';
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
-          [tickFormatting]="xAxisTickFormatting()"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
@@ -157,18 +155,6 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
     let min = Math.min(0, ...values);
     let max = Math.max(...values);
     return [min, max];
-  }
-
-  xAxisTickFormatting() {
-    let tickFormatting;
-
-    if (this.results.query && this.results.query.dimensions.length) {
-      tickFormatting = tickFormat(
-        this.results.query.dimensions[0].field.fieldType, 
-        this.results.query.dimensions[0].groupByType.value);
-    }
-    
-    return tickFormatting;
   }
 
   onClick(data) {

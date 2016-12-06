@@ -15,7 +15,6 @@ import {
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { tickFormat } from '../common/tick-format.helper';
 import d3 from '../d3';
 
 @Component({
@@ -41,7 +40,6 @@ import d3 from '../d3';
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
-          [tickFormatting]="yAxisTickFormatting()"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
@@ -158,14 +156,6 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
 
   getYDomain() {
     return this.results.map(d => d.name);
-  }
-
-  yAxisTickFormatting() {
-    let tickFormatting;
-    if (this.results.query && this.results.query.dimensions.length) {
-      tickFormatting = tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
-    }
-    return tickFormatting;
   }
 
   onClick(data) {
