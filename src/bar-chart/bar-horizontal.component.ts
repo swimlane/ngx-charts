@@ -23,6 +23,8 @@ import d3 from '../d3';
   template: `
     <chart
       (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       [legend]="legend"
       [view]="[width, height]"
       [colors]="colors"
@@ -53,7 +55,7 @@ import d3 from '../d3';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
-
+          [activeEntries]="activeEntries"
           (clickHandler)="onClick($event)"
         />
       </svg:g>
@@ -78,6 +80,8 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   yScale: any;
@@ -89,6 +93,7 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+  activeEntries: any[] = [];
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
@@ -186,4 +191,19 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
     this.update();
   }
 
+  onActivate(event) {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event) {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+  
 }

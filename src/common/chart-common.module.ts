@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 
 import { ChartComponent } from "./charts/chart.component";
-import { ScaleLegendComponent, LegendComponent } from "./legend";
+import { ScaleLegendComponent, LegendComponent, LegendEntryComponent } from "./legend";
 import { AxesModule } from "./axes/axes.module";
 import { TooltipModule } from "./tooltip";
 import { CircleSeriesComponent } from "./circle-series.component";
@@ -22,6 +22,7 @@ const COMPONENTS = [
   AreaTooltip,
   ChartComponent,
   LegendComponent,
+  LegendEntryComponent,
   ScaleLegendComponent,
   CircleComponent,
   CircleSeriesComponent,

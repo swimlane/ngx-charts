@@ -9,7 +9,8 @@ import { InjectionService } from '../../utils/injection.service';
   providers: [InjectionService],
   selector: 'chart',
   template: `
-    <div [style.width.px]="view[0]"
+    <div 
+      [style.width.px]="view[0]"
       [@animationState]="'active'">
       <svg
         class="ng2d3"
@@ -33,7 +34,9 @@ import { InjectionService } from '../../utils/injection.service';
         [colors]="colors"
         [height]="view[1]"
         [width]="view[0] * legendWidth / 12.0"
-        (labelClick)="onLegendLabelClick($event)">
+        (labelClick)="legendLabelClick.emit($event)"
+        (labelActivate)="legendLabelActivate.emit($event)"
+        (labelDeactivate)="legendLabelDeactivate.emit($event)">
       </legend>
     </div>
   `,
@@ -57,6 +60,8 @@ export class ChartComponent implements OnChanges {
   @Input() colors;
 
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+  @Output() legendLabelActivate: EventEmitter<any> = new EventEmitter();
+  @Output() legendLabelDeactivate: EventEmitter<any> = new EventEmitter();
 
   chartWidth: any;
   title: any;
@@ -97,7 +102,4 @@ export class ChartComponent implements OnChanges {
     }
   }
 
-  onLegendLabelClick(name): void {
-    this.legendLabelClick.emit({name: name});
-  }
 }

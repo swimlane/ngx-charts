@@ -11,11 +11,12 @@ import {
   ChangeDetectionStrategy
  } from '@angular/core';
 import * as moment from 'moment';
+ import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[seriesVertical]',
   template: `
-    <svg:g bar *ngFor="let bar of bars; trackBy:trackBy"
+    <svg:g bar *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
@@ -25,8 +26,9 @@ import * as moment from 'moment';
       [data]="bar.data"
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
-      (clickHandler)="onClick($event)"
       [gradient]="gradient"
+      [isActive]="isActive(bar.formattedLabel)"
+      (clickHandler)="onClick($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -56,6 +58,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() colors;
   @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
+  @Input() activeEntries: any[];
 
   @Output() clickHandler = new EventEmitter();
 
@@ -89,19 +92,17 @@ export class SeriesVerticalComponent implements OnChanges {
     this.bars = this.series.map((d, index) => {
       let value = d.value;
       let label = d.name;
-      let tooltipLabel = label;
-      if (tooltipLabel.constructor.name === 'Date') {
-        tooltipLabel = tooltipLabel.toLocaleDateString();
-      }
-      let roundEdges = this.type === 'standard';
+      const formattedLabel = formatLabel(label);
+      const roundEdges = this.type === 'standard';
 
       let bar: any = {
-        value: value,
-        label: label,
+        value,
+        label,
         color: this.colors(label),
         roundEdges: roundEdges,
         data: d,
-        width: width,
+        width,
+        formattedLabel,
         height: 0,
         x: 0,
         y: 0
@@ -144,7 +145,7 @@ export class SeriesVerticalComponent implements OnChanges {
       }
 
       bar.tooltipText = `
-        <span class="tooltip-label">${tooltipLabel}</span>
+        <span class="tooltip-label">${formattedLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
@@ -152,11 +153,16 @@ export class SeriesVerticalComponent implements OnChanges {
     });
   }
 
-  trackBy(index, bar): string {
-    return bar.label;
+  isActive(entry): boolean {
+    return this.activeEntries.indexOf(entry) > -1;
   }
 
   onClick(data): void {
     this.clickHandler.emit(data);
   }
+
+  trackBy(index, bar): string {
+    return bar.label;
+  }
+
 }

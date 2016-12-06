@@ -1,7 +1,7 @@
 import {
-  Component, Input, OnChanges, ChangeDetectionStrategy,
-  Output, EventEmitter, SimpleChanges
+  Component, Input, ChangeDetectionStrategy, Output, EventEmitter, SimpleChanges, OnChanges
  } from '@angular/core';
+ import { formatLabel } from '../label.helper';
 
 @Component({
   selector: 'legend',
@@ -15,24 +15,22 @@ import {
         <ul class="legend-labels"
           [style.max-height.px]="height - 45">
           <li
-            tabindex="-1"
-            *ngFor="let legendItem of legendItems"
-            (click)="clickLegendItem(legendItem)"
-            [class]="legendItem.className">
-            <span
-              [title]="legendItem.label"
-              class="legend-label-color"
-              [style.background-color]="legendItem.backgroundColor">
-            </span>
-            <span [title]="legendItem.label" class="legend-label-text">
-              {{legendItem.trimmedLabel}}
-            </span>
+            *ngFor="let entry of legendEntries; trackBy: entry?.formattedLabel"
+            class="legend-label">
+            <legend-entry
+              [label]="entry.label"
+              [formattedLabel]="entry.formattedLabel"
+              [color]="entry.color"
+              (select)="labelClick.emit($event)"
+              (activate)="labelActivate.emit($event)"
+              (deactivate)="labelDeactivate.emit($event)">
+            </legend-entry>
           </li>
         </ul>
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LegendComponent implements OnChanges {
 
@@ -43,26 +41,24 @@ export class LegendComponent implements OnChanges {
   @Input() width;
 
   @Output() labelClick: EventEmitter<any> = new EventEmitter();
+  @Output() labelActivate: EventEmitter<any> = new EventEmitter();
+  @Output() labelDeactivate: EventEmitter<any> = new EventEmitter();
 
-  legendItems: any;
+  legendEntries: any[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
-    this.legendItems = this.getLegendItems();
+    this.legendEntries = this.getLegendEntries();
   }
 
-  getLegendItems(): any[] {
+  getLegendEntries(): any[] {
     let items = [];
-    this.data.map((label, index) => {
-      let formattedLabel = label;
-      if (formattedLabel instanceof Date) {
-        formattedLabel = formattedLabel.toLocaleDateString();
-      } else {
-        formattedLabel = formattedLabel.toLocaleString();
-      }
+
+    for(const label of this.data) {
+      const formattedLabel = formatLabel(label);
 
       let idx = items.findIndex((i) => {
         return i.label === formattedLabel;
@@ -70,18 +66,14 @@ export class LegendComponent implements OnChanges {
 
       if (idx === -1) {
         items.push({
-          className: 'legend-label',
-          label: formattedLabel,
-          trimmedLabel: formattedLabel || '(empty)',
-          backgroundColor: this.colors(label)
+          label,
+          formattedLabel,
+          color: this.colors(label)
         });
-      };
-    });
+      }
+    }
 
     return items;
   }
 
-  clickLegendItem(legendItem) {
-    this.labelClick.emit(legendItem.label);
-  }
 }

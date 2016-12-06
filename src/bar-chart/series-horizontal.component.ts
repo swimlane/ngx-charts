@@ -11,11 +11,13 @@ import {
   animate,
   ChangeDetectionStrategy
 } from '@angular/core';
+ import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[seriesHorizontal]',
   template: `
-    <svg:g bar *ngFor="let bar of bars; trackBy:trackBy"
+    <svg:g bar 
+      *ngFor="let bar of bars; trackBy:trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
@@ -27,6 +29,7 @@ import {
       [roundEdges]="bar.roundEdges"
       (clickHandler)="click($event)"
       [gradient]="gradient"
+      [isActive]="isActive(bar.formattedLabel)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -58,6 +61,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() yScale;
   @Input() colors;
   @Input() gradient: boolean;
+  @Input() activeEntries: any[];
 
   @Output() clickHandler = new EventEmitter();
 
@@ -75,18 +79,16 @@ export class SeriesHorizontal implements OnChanges {
     this.bars = this.series.map((d, index) => {
       let value = d.value;
       let label = d.name;
-      let tooltipLabel = label;
-      if (tooltipLabel.constructor.name === 'Date') {
-        tooltipLabel = tooltipLabel.toLocaleDateString();
-      }
-      let roundEdges = this.type === 'standard';
+      const formattedLabel = formatLabel(label);
+      const roundEdges = this.type === 'standard';
 
       let bar: any = {
-        value: value,
-        label: label,
+        value,
+        label,
         color: this.colors(label),
-        roundEdges: roundEdges,
-        data: d
+        roundEdges,
+        data: d,
+        formattedLabel
       };
 
       bar.height = this.yScale.bandwidth();
@@ -127,12 +129,16 @@ export class SeriesHorizontal implements OnChanges {
       }
 
       bar.tooltipText = `
-        <span class="tooltip-label">${tooltipLabel}</span>
+        <span class="tooltip-label">${formattedLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
       return bar;
     });
+  }
+
+  isActive(entry): boolean {
+    return this.activeEntries.indexOf(entry) > -1;
   }
 
   trackBy(index, bar) {
