@@ -28,8 +28,10 @@ import * as import19 from '@angular/common/src/directives/ng_for';
 import * as import20 from '../../../src/pie-chart/pie-grid-series.component';
 import * as import21 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import22 from './pie-grid-series.component.ngfactory';
-import * as import23 from '../../../src/common/tooltip/tooltip.service';
-import * as import24 from '../../../src/common/tooltip/tooltip.directive';
+import * as import23 from '../../../src/common/count.directive';
+import * as import24 from '../common/count.directive.ngfactory';
+import * as import25 from '../../../src/common/tooltip/tooltip.service';
+import * as import26 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_PieGridComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieGridComponent;
@@ -273,26 +275,26 @@ class View_PieGridComponent1 extends import2.AppView<any> {
   _PieGridSeriesComponent_2_6:import22.Wrapper_PieGridSeriesComponent;
   _text_3:any;
   _el_4:any;
+  compView_4:import2.AppView<import23.CountUpDirective>;
+  _CountUpDirective_4_3:import24.Wrapper_CountUpDirective;
   _text_5:any;
   _text_6:any;
   _el_7:any;
   _text_8:any;
   _text_9:any;
   _el_10:any;
+  compView_10:import2.AppView<import23.CountUpDirective>;
+  _CountUpDirective_10_3:import24.Wrapper_CountUpDirective;
   _text_11:any;
   _text_12:any;
-  /*private*/ _expr_17:any;
-  /*private*/ _expr_18:any;
-  /*private*/ _expr_19:any;
-  /*private*/ _expr_20:any;
   /*private*/ _expr_21:any;
+  /*private*/ _expr_22:any;
+  /*private*/ _expr_23:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
     super(View_PieGridComponent1,renderType_PieGridComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_17 = import1.UNINITIALIZED;
-    this._expr_18 = import1.UNINITIALIZED;
-    this._expr_19 = import1.UNINITIALIZED;
-    this._expr_20 = import1.UNINITIALIZED;
     this._expr_21 = import1.UNINITIALIZED;
+    this._expr_22 = import1.UNINITIALIZED;
+    this._expr_23 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie-grid-item'),(null as any));
@@ -300,18 +302,24 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'pieGridSeries','','swui-tooltip',''),(null as any));
     this._vc_2 = new import10.ViewContainer(2,0,this,this._el_2);
     this.compView_2 = new import22.View_PieGridSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._TooltipDirective_2_5 = new import21.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import23.TooltipService,this.parentView.parentIndex),this._vc_2.vcRef,(<View_PieGridComponent0>this.parentView)._InjectionService_1_5,this.renderer,new import8.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import9.NgZone,this.parentView.parentIndex));
+    this._TooltipDirective_2_5 = new import21.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import25.TooltipService,this.parentView.parentIndex),this._vc_2.vcRef,(<View_PieGridComponent0>this.parentView)._InjectionService_1_5,this.renderer,new import8.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import9.NgZone,this.parentView.parentIndex));
     this._PieGridSeriesComponent_2_6 = new import22.Wrapper_PieGridSeriesComponent(new import8.ElementRef(this._el_2));
     this.compView_2.create(this._PieGridSeriesComponent_2_6.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(10,'class','label','dy','-0.5em','text-anchor','middle','x','0','y','5'),(null as any));
-    this._text_5 = this.renderer.createText(this._el_4,'',(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(12,'class','label','count-up','','dy','-0.5em','text-anchor','middle','x','0','y','5'),(null as any));
+    this.compView_4 = new import24.View_CountUpDirective0(this.viewUtils,this,4,this._el_4);
+    this._CountUpDirective_4_3 = new import24.Wrapper_CountUpDirective(this.compView_4.ref,this.parentView.parentView.injectorGet(import9.NgZone,this.parentView.parentIndex),new import8.ElementRef(this._el_4));
+    this._text_5 = this.renderer.createText((null as any),'\n          ',(null as any));
+    this.compView_4.create(this._CountUpDirective_4_3.context);
     this._text_6 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(10,'class','label','dy','0.5em','text-anchor','middle','x','0','y','5'),(null as any));
     this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
     this._text_9 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    this._el_10 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray8(8,'class','label','dy','1.23em','text-anchor','middle','x','0'),(null as any));
-    this._text_11 = this.renderer.createText(this._el_10,'',(null as any));
+    this._el_10 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(10,'class','label','count-up','','dy','1.23em','text-anchor','middle','x','0'),(null as any));
+    this.compView_10 = new import24.View_CountUpDirective0(this.viewUtils,this,10,this._el_10);
+    this._CountUpDirective_10_3 = new import24.Wrapper_CountUpDirective(this.compView_10.ref,this.parentView.parentView.injectorGet(import9.NgZone,this.parentView.parentIndex),new import8.ElementRef(this._el_10));
+    this._text_11 = this.renderer.createText((null as any),'\n          ',(null as any));
+    this.compView_10.create(this._CountUpDirective_10_3.context);
     this._text_12 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_2));
     this._PieGridSeriesComponent_2_6.subscribe(this,this.eventHandler(this.handleEvent_2),true);
@@ -334,8 +342,10 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import24.TooltipDirective) && (2 === requestNodeIndex))) { return this._TooltipDirective_2_5.context; }
+    if (((token === import26.TooltipDirective) && (2 === requestNodeIndex))) { return this._TooltipDirective_2_5.context; }
     if (((token === import20.PieGridSeriesComponent) && (2 === requestNodeIndex))) { return this._PieGridSeriesComponent_2_6.context; }
+    if (((token === import23.CountUpDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._CountUpDirective_4_3.context; }
+    if (((token === import23.CountUpDirective) && ((10 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._CountUpDirective_10_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -355,39 +365,45 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     const currVal_2_1_3:any = this.context.$implicit.outerRadius;
     this._PieGridSeriesComponent_2_6.check_outerRadius(currVal_2_1_3,throwOnChange,false);
     if (this._PieGridSeriesComponent_2_6.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    const currVal_4_0_0:any = '%';
+    this._CountUpDirective_4_3.check_countSuffix(currVal_4_0_0,throwOnChange,false);
+    const currVal_4_0_1:any = this.context.$implicit.percent;
+    this._CountUpDirective_4_3.check_countTo(currVal_4_0_1,throwOnChange,false);
+    this._CountUpDirective_4_3.ngDoCheck(this,this._el_4,throwOnChange);
+    const currVal_10_0_0:any = 'Total: ';
+    this._CountUpDirective_10_3.check_countPrefix(currVal_10_0_0,throwOnChange,false);
+    const currVal_10_0_1:any = this.context.$implicit.total;
+    this._CountUpDirective_10_3.check_countTo(currVal_10_0_1,throwOnChange,false);
+    this._CountUpDirective_10_3.ngDoCheck(this,this._el_10,throwOnChange);
     this._vc_2.detectChangesInNestedViews(throwOnChange);
-    const currVal_17:any = this.context.$implicit.transform;
-    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
-      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_17 == null)? (null as any): currVal_17.toString()));
-      this._expr_17 = currVal_17;
-    }
-    const currVal_18:any = import3.inlineInterpolate(1,'\n            ',this.context.$implicit.percent,'\n          ');
-    if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setText(this._text_5,currVal_18);
-      this._expr_18 = currVal_18;
-    }
-    const currVal_19:any = import3.inlineInterpolate(1,'\n            ',this.context.$implicit.label,'\n          ');
-    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
-      this.renderer.setText(this._text_8,currVal_19);
-      this._expr_19 = currVal_19;
-    }
-    const currVal_20:any = this.context.$implicit.outerRadius;
-    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
-      this.renderer.setElementAttribute(this._el_10,'y',((currVal_20 == null)? (null as any): currVal_20.toString()));
-      this._expr_20 = currVal_20;
-    }
-    const currVal_21:any = import3.inlineInterpolate(1,'\n            ',this.context.$implicit.total.toLocaleString(),'\n          ');
+    const currVal_21:any = this.context.$implicit.transform;
     if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
-      this.renderer.setText(this._text_11,currVal_21);
+      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_21 == null)? (null as any): currVal_21.toString()));
       this._expr_21 = currVal_21;
     }
+    const currVal_22:any = import3.inlineInterpolate(1,'\n            ',this.context.$implicit.label,'\n          ');
+    if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
+      this.renderer.setText(this._text_8,currVal_22);
+      this._expr_22 = currVal_22;
+    }
+    const currVal_23:any = this.context.$implicit.outerRadius;
+    if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
+      this.renderer.setElementAttribute(this._el_10,'y',((currVal_23 == null)? (null as any): currVal_23.toString()));
+      this._expr_23 = currVal_23;
+    }
     this.compView_2.detectChanges(throwOnChange);
+    this.compView_4.detectChanges(throwOnChange);
+    this.compView_10.detectChanges(throwOnChange);
   }
   destroyInternal():void {
     this._vc_2.destroyNestedViews();
     this.compView_2.destroy();
+    this.compView_4.destroy();
+    this.compView_10.destroy();
     this._TooltipDirective_2_5.ngOnDestroy();
     this._PieGridSeriesComponent_2_6.ngOnDestroy();
+    this._CountUpDirective_4_3.ngOnDestroy();
+    this._CountUpDirective_10_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);

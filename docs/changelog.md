@@ -1,11 +1,12 @@
 # Changelog
 
-## Master
+## 1.8.2
 - Bug: Fix for number cards not updating to last value
 - Bug: Revert RxJS Import Optimized (#62) due to (#119)
-- Polish: Added animation on treemap values
+- Polish: Added animation on treemap
 - Polish: Better formatting for treemap values
-- Polish: Added animation on advanced pie values
+- Polish: Added animation on advanced pie
+- Polish: Added animation on pie grid
 
 ## 1.8.1
 - Polish: Treemap/Number card label color improvements
