@@ -1,15 +1,27 @@
 export var single = [
   {
     "name": "Germany",
-    "value": 8940000
+    "value": 46268
   },
   {
     "name": "USA",
-    "value": 5000000
+    "value": 53041
   },
   {
     "name": "France",
-    "value": 7200000
+    "value": 42503
+  },
+  {
+    "name": "United Kingdom",
+    "value": 41787
+  },
+  {
+    "name": "Spain",
+    "value": 29863
+  },
+  {
+    "name": "Italy",
+    "value": 35925
   }
 ];
 
@@ -19,11 +31,15 @@ export var multi = [
     "series": [
       {
         "name": "2010",
-        "value": 7300000
+        "value": 46268
       },
       {
-        "name": "2011",
-        "value": 8940000
+        "name": "2000",
+        "value": 23685
+      },
+      {
+        "name": "1990",
+        "value": 22219
       }
     ]
   },
@@ -33,11 +49,15 @@ export var multi = [
     "series": [
       {
         "name": "2010",
-        "value": 7870000
+        "value": 48377
       },
       {
-        "name": "2011",
-        "value": 8270000
+        "name": "2000",
+        "value": 36449
+      },
+      {
+        "name": "1990",
+        "value": 23954
       }
     ]
   },
@@ -47,11 +67,33 @@ export var multi = [
     "series": [
       {
         "name": "2010",
-        "value": 5000002
+        "value": 42503
       },
       {
-        "name": "2011",
-        "value": 5800000
+        "name": "2000",
+        "value": 22466
+      },
+      {
+        "name": "1990",
+        "value": 21833
+      }
+    ]
+  },
+
+  {
+    "name": "United Kingdom",
+    "series": [
+      {
+        "name": "2010",
+        "value": 38363
+      },
+      {
+        "name": "2000",
+        "value": 26296
+      },
+      {
+        "name": "1990",
+        "value": 18632
       }
     ]
   }

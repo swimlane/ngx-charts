@@ -362,7 +362,7 @@ import './demo.scss';
         </select>
 
         <h3 (click)="dataVisable = !dataVisable" style="cursor: pointer">
-          <span 
+          <span
             [class.arrow-down]="dataVisable"
             [class.arrow-right]="!dataVisable">
           </span>
@@ -381,7 +381,7 @@ import './demo.scss';
         </div>
         <div>
           <h3 (click)="dimVisiable = !dimVisiable" style="cursor: pointer">
-            <span 
+            <span
               [class.arrow-down]="dimVisiable"
               [class.arrow-right]="!dimVisiable">
             </span>
@@ -402,7 +402,7 @@ import './demo.scss';
           </div>
         </div>
         <h3 (click)="colorVisable = !colorVisable" style="cursor: pointer">
-          <span 
+          <span
             [class.arrow-down]="colorVisable"
             [class.arrow-right]="!colorVisable">
           </span>
@@ -417,7 +417,7 @@ import './demo.scss';
         </select>
 
         <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
-          <span 
+          <span
             [class.arrow-down]="optsVisible"
             [class.arrow-right]="!optsVisible">
           </span>
@@ -552,7 +552,7 @@ import './demo.scss';
 })
 
 export class AppComponent implements OnInit {
-  
+
   theme = "light";
   chartType = 'bar-vertical';
   chartGroups: any[];
@@ -578,7 +578,7 @@ export class AppComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'GDP Per Capita';
   showGridLines = true;
 
   // line interpolation
@@ -673,7 +673,7 @@ export class AppComponent implements OnInit {
       // single
       let entry = {
         name: country,
-        value: Math.floor(1000000 + Math.random() * 20000000)
+        value: Math.floor(10000 + Math.random() * 50000)
       };
       this.single = [...this.single, entry];
 
