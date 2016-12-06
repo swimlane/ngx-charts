@@ -1,5 +1,6 @@
 import {
-  Component, Input, Output, EventEmitter, ChangeDetectorRef, NgZone, OnDestroy
+  Component, Input, Output, EventEmitter, 
+  ChangeDetectorRef, NgZone, OnDestroy, ElementRef
 } from '@angular/core';
 
 // Robert Penner's easeOutExpo
@@ -19,12 +20,14 @@ function easeOutExpo(t, b, c, d) {
  */
 @Component({
   selector: '[count-up]',
-  template: `<span>{{value.toLocaleString()}}</span>`
+  template: `{{value}}`
 })
 export class CountUpDirective implements OnDestroy {
 
   @Input() countDecimals: number = 0;
   @Input() countDuration: number = 1;
+  @Input() countPrefix: string = '';
+  @Input() countSuffix: string = '';
 
   @Input()
   set countTo(val) {
@@ -41,6 +44,8 @@ export class CountUpDirective implements OnDestroy {
   @Output() countChange = new EventEmitter();
   @Output() countFinish = new EventEmitter();
 
+  nativeElement: any;
+
   private value: any = '';
   private animationReq: any;
   private startTime: any;
@@ -48,7 +53,9 @@ export class CountUpDirective implements OnDestroy {
   private _countTo: number = 0;
   private _countFrom: number = 0;
 
-  constructor(private cd: ChangeDetectorRef, private zone: NgZone) { }
+  constructor(private cd: ChangeDetectorRef, private zone: NgZone, element: ElementRef) {
+    this.nativeElement = element.nativeElement;
+  }
 
   ngOnDestroy(): void {
     cancelAnimationFrame(this.animationReq);
@@ -88,7 +95,7 @@ export class CountUpDirective implements OnDestroy {
     frameVal = Math.round(frameVal * dec) / dec;
 
     this.zone.run(() => {
-      this.value = frameVal;
+      this.value = `${this.countPrefix}${frameVal.toLocaleString()}${this.countSuffix}`;
       this.cd.markForCheck();
       this.countChange.emit({ value: frameVal, progress });
     });

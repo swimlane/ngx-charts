@@ -47,8 +47,10 @@ import d3 from '../d3';
             dy="-0.5em"
             x="0"
             y="5"
+            count-up 
+            [countTo]="series.percent"
+            [countSuffix]="'%'"
             text-anchor="middle">
-            {{series.percent}}
           </svg:text>
           <svg:text
             class="label"
@@ -63,8 +65,10 @@ import d3 from '../d3';
             dy="1.23em"
             x="0"
             [attr.y]="series.outerRadius"
-            text-anchor="middle">
-            {{series.total.toLocaleString()}}
+            text-anchor="middle"
+            count-up 
+            [countTo]="series.total"
+            [countPrefix]="'Total: '">
           </svg:text>
         </svg:g>
       </svg:g>
@@ -172,7 +176,7 @@ export class PieGridComponent extends BaseChartComponent implements OnChanges, O
         innerRadius: innerRadius,
         outerRadius: radius,
         label: trimLabel(label),
-        total: `Total: ${value.toLocaleString()}`,
+        total: value,
         value: value,
         percent: d3.format(".1p")(d.data.percent),
         data: [d, {

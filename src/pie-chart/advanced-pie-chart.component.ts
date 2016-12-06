@@ -80,8 +80,11 @@ export interface LegendItem {
                   [countTo]="legendItem.value">
                 </div>
                 <div class="item-label">{{legendItem.label}}</div>
-                <div class="item-percent">
-                  <span count-up [countTo]="legendItem.percentage"></span>%
+                <div 
+                  class="item-percent" 
+                  count-up
+                  [countTo]="legendItem.percentage"
+                  [countSuffix]="'%'">
                 </div>
               </div>
             </div>
