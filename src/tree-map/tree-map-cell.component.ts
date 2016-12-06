@@ -1,14 +1,6 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ElementRef,
-  OnChanges,
-  ChangeDetectorRef,
-  NgZone,
-  SimpleChanges,
-  ChangeDetectionStrategy
+  Component, Input, Output, EventEmitter, ElementRef,
+  OnChanges, SimpleChanges, ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
 import { invertColor } from '../utils/color-utils';
@@ -41,8 +33,10 @@ import { invertColor } from '../utils/color-utils';
             {{label}}
           </xhtml:span>
           <xhtml:br />
-          <xhtml:span class="treemap-val">
-            {{formattedValue}}
+          <xhtml:span 
+            class="treemap-val" 
+            count-up 
+            [countTo]="value">
           </xhtml:span>
         </xhtml:p>
       </svg:foreignObject>
@@ -68,7 +62,7 @@ export class TreeMapCellComponent implements OnChanges {
   formattedValue: string; // todo check string or number ?
   initialized: boolean = false;
 
-  constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
+  constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
@@ -77,19 +71,12 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   update(): void {
-    // this.formattedValue = this.value.toLocaleString();
-    
     if (this.initialized) {
       this.animateToCurrentForm();
     } else {
       this.loadAnimation();
       this.initialized = true;
     }
-
-    setTimeout(() => {
-      let step = this.value / 100;
-      this.countUp(0, this.value, step);
-    }, 20);
   }
 
   loadAnimation(): void {
@@ -122,21 +109,6 @@ export class TreeMapCellComponent implements OnChanges {
     this.clickHandler.emit({
       name: this.label,
       value: this.value
-    });
-  }
-
-  countUp(current, max, step) {
-    this.zone.run(() => {
-      this.formattedValue = Math.round(current).toLocaleString();
-      this.cd.markForCheck();
-
-      if (current >= max) return;
-
-      let newValue = Math.min(current + step, max);
-
-      setTimeout(() => {
-        this.countUp(newValue, max, step);
-      }, 16);
     });
   }
 

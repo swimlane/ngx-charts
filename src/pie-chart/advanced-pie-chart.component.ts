@@ -55,8 +55,10 @@ export interface LegendItem {
       <div [style.width.px]="width - dims.width" class="advanced-pie-legend-wrapper">
         <div class="advanced-pie-legend"
           [style.width.px]="width - dims.width - margin[1]">
-          <div class="total-value">
-            {{roundedTotal.toLocaleString()}}
+          <div 
+            class="total-value" 
+            count-up 
+            [countTo]="roundedTotal">
           </div>
           <div class="total-label">
             {{totalLabel}}
@@ -72,9 +74,15 @@ export interface LegendItem {
                   class="item-color"
                   [style.background]="colors(legendItem.label)">
                 </div>
-                <div class="item-value">{{legendItem.value.toLocaleString()}}</div>
+                <div 
+                  class="item-value" 
+                  count-up 
+                  [countTo]="legendItem.value">
+                </div>
                 <div class="item-label">{{legendItem.label}}</div>
-                <div class="item-percent">{{legendItem.percentage.toLocaleString()}}%</div>
+                <div class="item-percent">
+                  <span count-up [countTo]="legendItem.percentage"></span>%
+                </div>
               </div>
             </div>
           </div>

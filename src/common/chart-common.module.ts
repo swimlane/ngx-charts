@@ -1,4 +1,6 @@
 import { NgModule } from "@angular/core";
+import "./rxjs-extensions";
+
 import { ChartComponent } from "./charts/chart.component";
 import { ScaleLegendComponent, LegendComponent } from "./legend";
 import { AxesModule } from "./axes/axes.module";
@@ -13,17 +15,11 @@ import { Timeline } from "./timeline.component";
 import { CommonModule } from "@angular/common";
 import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
-import { BaseChartComponent } from "./base-chart.component";
-import "./rxjs-extensions";
-
-export { 
-  ChartComponent, CircleSeriesComponent, CircleComponent, GridPanelComponent, 
-  GridPanelSeriesComponent, SvgLinearGradientComponent, SvgRadialGradientComponent,
-  Timeline, AreaComponent, AreaTooltip, BaseChartComponent 
-};
+import { CountUpDirective } from './count.directive';
 
 const COMPONENTS = [
   AreaComponent,
+  CountUpDirective,
   AreaTooltip,
   ChartComponent,
   LegendComponent,
