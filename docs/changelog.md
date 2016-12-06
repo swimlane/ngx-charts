@@ -2,6 +2,7 @@
 
 ## Master
 - Bug: Fix for number cards not updating to last value
+- Bug: Revert RxJS Import Optimized (#62) due to (#119)
 - Polish: Added animation on treemap values
 - Polish: Better formatting for treemap values
 - Polish: Added animation on advanced pie values
