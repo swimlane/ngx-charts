@@ -138,6 +138,7 @@ export class SeriesHorizontal implements OnChanges {
   }
 
   isActive(entry): boolean {
+    if(!this.activeEntries) return false;
     return this.activeEntries.indexOf(entry) > -1;
   }
 

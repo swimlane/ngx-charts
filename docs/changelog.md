@@ -1,5 +1,8 @@
 # Changelog
 
+## Master
+- Enhancement: Hover of legend doesn't highlight bar (#73)
+
 ## 1.8.2
 - Bug: Fix for number cards not updating to last value
 - Bug: Revert RxJS Import Optimized (#62) due to (#119)
