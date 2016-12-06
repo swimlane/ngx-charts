@@ -4,6 +4,7 @@
 - Bug: Fix for number cards not updating to last value
 - Polish: Added animation on treemap values
 - Polish: Better formatting for treemap values
+- Polish: Added animation on advanced pie values
 
 ## 1.8.1
 - Polish: Treemap/Number card label color improvements
