@@ -24,8 +24,10 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="[width, height]"
       [colors]="colors"
+      [legendData]="xDomain"
       (legendLabelClick)="onClick($event)"
-      [legendData]="xDomain">
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g xAxis
           *ngIf="xAxis"
@@ -51,6 +53,7 @@ import d3 from '../d3';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
+          [activeEntries]="activeEntries"
           (clickHandler)="onClick($event)">
         </svg:g>
       </svg:g>
@@ -75,6 +78,8 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
   @Input() showGridLines: boolean = true;
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   xScale: any;
@@ -86,6 +91,7 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
   margin: any[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+  activeEntries: any[] = [];
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
@@ -146,7 +152,7 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
       .domain(this.yDomain);
   }
 
-  getXDomain() {
+  getXDomain(): any[] {
     return this.results.map(d => d.name);
   }
 
@@ -161,17 +167,33 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.xDomain, this.customColors);
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }
+
+  onActivate(event) {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event) {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+
 }

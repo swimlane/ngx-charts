@@ -1,109 +1,112 @@
 import {
-  Component, Input, Output, EventEmitter, ChangeDetectorRef, NgZone
+  Component, Input, Output, EventEmitter, 
+  ChangeDetectorRef, NgZone, OnDestroy, ElementRef
 } from '@angular/core';
+
+// Robert Penner's easeOutExpo
+function easeOutExpo(t, b, c, d) {
+  return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
+}
 
 /**
  * Count up component
- * Loosely inspired by: https://github.com/izupet/angular2-counto
+ * 
+ * Loosely inspired by: 
+ *  - https://github.com/izupet/angular2-counto
+ *  - https://inorganik.github.io/countUp.js/
  * 
  * @export
  * @class CountUpDirective
  */
 @Component({
   selector: '[count-up]',
-  template: `<span>{{value.toLocaleString()}}</span>`
+  template: `{{value}}`
 })
-export class CountUpDirective {
+export class CountUpDirective implements OnDestroy {
+
+  @Input() countDecimals: number = 0;
+  @Input() countDuration: number = 1;
+  @Input() countPrefix: string = '';
+  @Input() countSuffix: string = '';
 
   @Input()
-  set duration(duration) {
-    this._duration = parseFloat(duration);
-    this.run();
+  set countTo(val) {
+    this._countTo = parseFloat(val);
+    this.start();
   }
 
   @Input()
-  set countTo(countTo) {
-    this._countTo = parseFloat(countTo);
-    this.run();
-  }
-
-  @Input()
-  set countFrom(countFrom) {
-    this._countFrom = parseFloat(countFrom);
-    this.run();
-  }
-
-  @Input()
-  set step(step) {
-    this._step = parseFloat(step);
-    this.run();
+  set countFrom(val) {
+    this._countFrom = parseFloat(val);
+    this.start();
   }
 
   @Output() countChange = new EventEmitter();
+  @Output() countFinish = new EventEmitter();
 
-  private timer: any;
+  nativeElement: any;
+
   private value: any = '';
+  private animationReq: any;
+  private startTime: any;
 
-  private _duration: number = .5;
-  private _countTo: number;
+  private _countTo: number = 0;
   private _countFrom: number = 0;
-  private _step: number = 1;
 
-  constructor(private cd: ChangeDetectorRef, private zone: NgZone) { }
+  constructor(private cd: ChangeDetectorRef, private zone: NgZone, element: ElementRef) {
+    this.nativeElement = element.nativeElement;
+  }
 
-  run(): void {
-    clearInterval(this.timer);
+  ngOnDestroy(): void {
+    cancelAnimationFrame(this.animationReq);
+  }
 
-    if (isNaN(this._duration)) return;
-    if (isNaN(this._step)) return;
-    if (isNaN(this._countFrom)) return;
-    if (isNaN(this._countTo)) return;
-    if (this._step <= 0) throw new Error('Step must be greater than 0.');
-    if (this._duration <= 0) throw new Error('Duration must be greater than 0.');
-    if (this._step > this._duration * 1000) throw new Error('Step must be equal or smaller than duration.');
+  start(): void {
+    const startVal = Number(this._countFrom);
+    const endVal = Number(this._countTo);
+    const countDown = (startVal > endVal);
+    const decimals = Math.max(0, this.countDecimals);
+    const dec = Math.pow(10, decimals);
+    const duration = Number(this.countDuration) * 1000;
 
-    let intermediate = this._countFrom;
-    let increment = Math.abs(this._countTo - this._countFrom) / ((this._duration * 1000) / this._step);
+    cancelAnimationFrame(this.animationReq);
+    requestAnimationFrame((val) => 
+      this.count(startVal, endVal, dec, duration, countDown, val));
+  }
 
-    this.value = intermediate;
-    this.cd.markForCheck();
-    this.countChange.emit(intermediate);
+  count(startVal, endVal, dec, duration, countDown, timestamp) {
+    if (!this.startTime) this.startTime = timestamp;
 
-    this.timer = setInterval(() => {
-      this.zone.run(() => {
-        if (this._countTo < this._countFrom) {
-          if (intermediate <= this._countTo) {
-            clearInterval(this.timer);
+    let frameVal;
+    const progress = timestamp - this.startTime;
 
-            this.value = this._countTo;
-            this.cd.markForCheck();
+    if (countDown) {
+      frameVal = startVal - easeOutExpo(progress, 0, startVal - endVal, duration);
+    } else {
+      frameVal = easeOutExpo(progress, startVal, endVal - startVal, duration);
+    }
 
-            this.countChange.emit(this._countTo);
-          } else {
-            this.value = intermediate;
-            this.cd.markForCheck();
-            
-            this.countChange.emit(intermediate);
-            intermediate -= increment;
-          }
-        } else {
-          if (intermediate >= this._countTo) {
-            clearInterval(this.timer);
+    if (countDown) {
+      frameVal = (frameVal < endVal) ? endVal : frameVal;
+    } else {
+      frameVal = (frameVal > endVal) ? endVal : frameVal;
+    }
 
-            this.value = this._countTo;
-            this.cd.markForCheck();
+    frameVal = Math.round(frameVal * dec) / dec;
 
-            this.countChange.emit(this._countTo);
-          } else {
-            this.value = intermediate;
-            this.cd.markForCheck();
+    this.zone.run(() => {
+      this.value = `${this.countPrefix}${frameVal.toLocaleString()}${this.countSuffix}`;
+      this.cd.markForCheck();
+      this.countChange.emit({ value: frameVal, progress });
+    });
 
-            this.countChange.emit(intermediate);
-            intermediate += increment;
-          }
-        }
-      });
-    }, this._step);
+    if (progress < duration) {
+      this.animationReq = requestAnimationFrame((val) => 
+        this.count(startVal, endVal, dec, duration, countDown, val));
+    } else {
+      this.startTime = undefined;
+      this.countFinish.emit(true);
+    }
   }
 
 }

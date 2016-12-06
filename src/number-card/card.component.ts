@@ -59,8 +59,9 @@ import { invertColor } from '../utils/color-utils';
         [style.fill]="getTextColor(color)"
         text-anchor="middle"
         [style.font-size.pt]="textFontSize"
+        count-up 
+        [countTo]="data.value"
         style="pointer-events: none;">
-        {{value}}
       </svg:text>
     </svg:g>
   `,
@@ -90,7 +91,6 @@ export class CardComponent implements OnChanges {
   resizeScale: number = 1;
   textFontSize: number = 35;
   textTransform: string = '';
-  initialized: boolean = false;
   originalWidth: number;
   originalHeight: number;
   originalWidthRatio: number;
@@ -116,35 +116,12 @@ export class CardComponent implements OnChanges {
       this.trimmedLabel = trimLabel(this.label, 55);
 
       this.value = this.data.value.toLocaleString();
-      setTimeout(() => {
-        this.scaleText();
-      });
-      if (!this.initialized) {
-        setTimeout(() => {
-          let step = this.data.value / 100;
-          this.countUp(0, this.data.value, step);
-        }, 20);
-        this.initialized = true;
-      }
+      setTimeout(() => this.scaleText());
     });
   }
 
   getTextColor(color): string {
     return invertColor(color);
-  }
-
-  countUp(current, max, step) {
-    this.zone.run(() => {
-      this.value = Math.round(current).toLocaleString();
-      this.cd.markForCheck();
-
-      if (current >= max) return;
-
-      let newValue = Math.min(current + step, max);
-      setTimeout(() => {
-        this.countUp(newValue, max, step);
-      }, 16);
-    });
   }
 
   scaleText() {

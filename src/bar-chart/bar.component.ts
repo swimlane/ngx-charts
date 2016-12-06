@@ -26,6 +26,7 @@ import d3 from '../d3';
     <svg:path
       class="bar"
       stroke="none"
+      [class.active]="isActive"
       [attr.d]="path"
       [attr.fill]="gradient ? gradientFill : fill"
       [style.cursor]="'pointer'"
@@ -46,6 +47,7 @@ export class BarComponent implements OnInit, OnChanges {
   @Input() roundEdges: boolean = true;
   @Input() gradient: boolean = false;
   @Input() offset = 0;
+  @Input() isActive: boolean = false;
 
   @Output() clickHandler = new EventEmitter();
 

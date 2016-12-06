@@ -19,6 +19,9 @@ import * as import10 from '../../node_modules/@angular/common/src/directives/ng_
 import * as import11 from '@angular/core/src/linker/template_ref';
 import * as import12 from '@angular/common/src/directives/ng_if';
 import * as import13 from '@angular/core/src/security';
+import * as import14 from '../../../src/common/count.directive';
+import * as import15 from '../common/count.directive.ngfactory';
+import * as import16 from '@angular/core/src/zone/ng_zone';
 export class Wrapper_TreeMapCellComponent {
   /*private*/ _eventHandler:Function;
   context:import0.TreeMapCellComponent;
@@ -276,37 +279,52 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
   _el_4:any;
   _text_5:any;
   _text_6:any;
-  /*private*/ _expr_7:any;
-  /*private*/ _expr_8:any;
-  /*private*/ _expr_9:any;
-  /*private*/ _expr_10:any;
-  /*private*/ _expr_11:any;
-  /*private*/ _expr_12:any;
-  /*private*/ _expr_13:any;
-  /*private*/ _expr_14:any;
+  _el_7:any;
+  _text_8:any;
+  _el_9:any;
+  compView_9:import2.AppView<import14.CountUpDirective>;
+  _CountUpDirective_9_3:import15.Wrapper_CountUpDirective;
+  _text_10:any;
+  _text_11:any;
+  _text_12:any;
   /*private*/ _expr_15:any;
   /*private*/ _expr_16:any;
+  /*private*/ _expr_17:any;
+  /*private*/ _expr_18:any;
+  /*private*/ _expr_19:any;
+  /*private*/ _expr_20:any;
+  /*private*/ _expr_21:any;
+  /*private*/ _expr_22:any;
+  /*private*/ _expr_23:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
     super(View_TreeMapCellComponent1,renderType_TreeMapCellComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_7 = import1.UNINITIALIZED;
-    this._expr_8 = import1.UNINITIALIZED;
-    this._expr_9 = import1.UNINITIALIZED;
-    this._expr_10 = import1.UNINITIALIZED;
-    this._expr_11 = import1.UNINITIALIZED;
-    this._expr_12 = import1.UNINITIALIZED;
-    this._expr_13 = import1.UNINITIALIZED;
-    this._expr_14 = import1.UNINITIALIZED;
     this._expr_15 = import1.UNINITIALIZED;
     this._expr_16 = import1.UNINITIALIZED;
+    this._expr_17 = import1.UNINITIALIZED;
+    this._expr_18 = import1.UNINITIALIZED;
+    this._expr_19 = import1.UNINITIALIZED;
+    this._expr_20 = import1.UNINITIALIZED;
+    this._expr_21 = import1.UNINITIALIZED;
+    this._expr_22 = import1.UNINITIALIZED;
+    this._expr_23 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:foreignObject',new import3.InlineArray2(2,'class','label'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':xhtml:p',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_3 = this.renderer.createText(this._el_2,'',(null as any));
-    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,':xhtml:br',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_5 = this.renderer.createText(this._el_2,'',(null as any));
-    this._text_6 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    this._text_3 = this.renderer.createText(this._el_2,'\n          ',(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,':xhtml:span',new import3.InlineArray2(2,'class','treemap-label'),(null as any));
+    this._text_5 = this.renderer.createText(this._el_4,'',(null as any));
+    this._text_6 = this.renderer.createText(this._el_2,'\n          ',(null as any));
+    this._el_7 = import3.createRenderElement(this.renderer,this._el_2,':xhtml:br',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_8 = this.renderer.createText(this._el_2,'\n          ',(null as any));
+    this._el_9 = import3.createRenderElement(this.renderer,this._el_2,':xhtml:span',new import3.InlineArray4(4,'class','treemap-val','count-up',''),(null as any));
+    this.compView_9 = new import15.View_CountUpDirective0(this.viewUtils,this,9,this._el_9);
+    this._CountUpDirective_9_3 = new import15.Wrapper_CountUpDirective(this.compView_9.ref,this.parentView.parentView.injectorGet(import16.NgZone,this.parentView.parentIndex),new import8.ElementRef(this._el_9));
+    this._text_10 = this.renderer.createText((null as any),'\n          ',(null as any));
+    this.compView_9.create(this._CountUpDirective_9_3.context);
+    this._text_11 = this.renderer.createText(this._el_2,'\n        ',(null as any));
+    this._text_12 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -314,62 +332,75 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
       this._text_3,
       this._el_4,
       this._text_5,
-      this._text_6
+      this._text_6,
+      this._el_7,
+      this._text_8,
+      this._el_9,
+      this._text_10,
+      this._text_11,
+      this._text_12
     ]
     ),(null as any));
     return (null as any);
   }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import14.CountUpDirective) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._CountUpDirective_9_3.context; }
+    return notFoundResult;
+  }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_7:any = this.parentView.context.x;
-    if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
-      this.renderer.setElementAttribute(this._el_0,'x',((currVal_7 == null)? (null as any): currVal_7.toString()));
-      this._expr_7 = currVal_7;
-    }
-    const currVal_8:any = this.parentView.context.y;
-    if (import3.checkBinding(throwOnChange,this._expr_8,currVal_8)) {
-      this.renderer.setElementAttribute(this._el_0,'y',((currVal_8 == null)? (null as any): currVal_8.toString()));
-      this._expr_8 = currVal_8;
-    }
-    const currVal_9:any = this.parentView.context.width;
-    if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
-      this.renderer.setElementAttribute(this._el_0,'width',((currVal_9 == null)? (null as any): currVal_9.toString()));
-      this._expr_9 = currVal_9;
-    }
-    const currVal_10:any = this.parentView.context.height;
-    if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
-      this.renderer.setElementAttribute(this._el_0,'height',((currVal_10 == null)? (null as any): currVal_10.toString()));
-      this._expr_10 = currVal_10;
-    }
-    const currVal_11:any = 'none';
-    if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
-      this.renderer.setElementStyle(this._el_0,'pointer-events',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_11) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_11).toString()));
-      this._expr_11 = currVal_11;
-    }
-    const currVal_12:any = this.parentView.context.getTextColor();
-    if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setElementStyle(this._el_2,'color',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12).toString()));
-      this._expr_12 = currVal_12;
-    }
-    const currVal_13:any = (this.parentView.context.height + 'px');
-    if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
-      this.renderer.setElementStyle(this._el_2,'height',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_13) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_13).toString()));
-      this._expr_13 = currVal_13;
-    }
-    const currVal_14:any = (this.parentView.context.width + 'px');
-    if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setElementStyle(this._el_2,'width',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_14).toString()));
-      this._expr_14 = currVal_14;
-    }
-    const currVal_15:any = import3.inlineInterpolate(1,'\n          ',this.parentView.context.label,'\n          ');
+    const currVal_9_0_0:any = this.parentView.context.value;
+    this._CountUpDirective_9_3.check_countTo(currVal_9_0_0,throwOnChange,false);
+    this._CountUpDirective_9_3.ngDoCheck(this,this._el_9,throwOnChange);
+    const currVal_15:any = this.parentView.context.x;
     if (import3.checkBinding(throwOnChange,this._expr_15,currVal_15)) {
-      this.renderer.setText(this._text_3,currVal_15);
+      this.renderer.setElementAttribute(this._el_0,'x',((currVal_15 == null)? (null as any): currVal_15.toString()));
       this._expr_15 = currVal_15;
     }
-    const currVal_16:any = import3.inlineInterpolate(1,'\n          ',this.parentView.context.formattedValue,'\n        ');
+    const currVal_16:any = this.parentView.context.y;
     if (import3.checkBinding(throwOnChange,this._expr_16,currVal_16)) {
-      this.renderer.setText(this._text_5,currVal_16);
+      this.renderer.setElementAttribute(this._el_0,'y',((currVal_16 == null)? (null as any): currVal_16.toString()));
       this._expr_16 = currVal_16;
     }
+    const currVal_17:any = this.parentView.context.width;
+    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
+      this.renderer.setElementAttribute(this._el_0,'width',((currVal_17 == null)? (null as any): currVal_17.toString()));
+      this._expr_17 = currVal_17;
+    }
+    const currVal_18:any = this.parentView.context.height;
+    if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
+      this.renderer.setElementAttribute(this._el_0,'height',((currVal_18 == null)? (null as any): currVal_18.toString()));
+      this._expr_18 = currVal_18;
+    }
+    const currVal_19:any = 'none';
+    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
+      this.renderer.setElementStyle(this._el_0,'pointer-events',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_19) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_19).toString()));
+      this._expr_19 = currVal_19;
+    }
+    const currVal_20:any = this.parentView.context.getTextColor();
+    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
+      this.renderer.setElementStyle(this._el_2,'color',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_20) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_20).toString()));
+      this._expr_20 = currVal_20;
+    }
+    const currVal_21:any = (this.parentView.context.height + 'px');
+    if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
+      this.renderer.setElementStyle(this._el_2,'height',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_21) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_21).toString()));
+      this._expr_21 = currVal_21;
+    }
+    const currVal_22:any = (this.parentView.context.width + 'px');
+    if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
+      this.renderer.setElementStyle(this._el_2,'width',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_22) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_22).toString()));
+      this._expr_22 = currVal_22;
+    }
+    const currVal_23:any = import3.inlineInterpolate(1,'\n            ',this.parentView.context.label,'\n          ');
+    if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
+      this.renderer.setText(this._text_5,currVal_23);
+      this._expr_23 = currVal_23;
+    }
+    this.compView_9.detectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_9.destroy();
+    this._CountUpDirective_9_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);

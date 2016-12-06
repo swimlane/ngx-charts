@@ -10,7 +10,6 @@ var CardComponent = (function () {
         this.resizeScale = 1;
         this.textFontSize = 35;
         this.textTransform = '';
-        this.initialized = false;
         this.element = element.nativeElement;
     }
     CardComponent.prototype.ngOnChanges = function (changes) {
@@ -26,34 +25,11 @@ var CardComponent = (function () {
             _this.label = _this.data.name;
             _this.trimmedLabel = trim_label_helper_1.trimLabel(_this.label, 55);
             _this.value = _this.data.value.toLocaleString();
-            setTimeout(function () {
-                _this.scaleText();
-            });
-            if (!_this.initialized) {
-                setTimeout(function () {
-                    var step = _this.data.value / 100;
-                    _this.countUp(0, _this.data.value, step);
-                }, 20);
-                _this.initialized = true;
-            }
+            setTimeout(function () { return _this.scaleText(); });
         });
     };
     CardComponent.prototype.getTextColor = function (color) {
         return color_utils_1.invertColor(color);
-    };
-    CardComponent.prototype.countUp = function (current, max, step) {
-        var _this = this;
-        this.zone.run(function () {
-            _this.value = Math.round(current).toLocaleString();
-            if (current >= max) {
-                return;
-            }
-            var newValue = Math.min(current + step, max);
-            _this.cd.markForCheck();
-            setTimeout(function () {
-                _this.countUp(newValue, max, step);
-            }, 16);
-        });
     };
     CardComponent.prototype.scaleText = function () {
         var _this = this;
@@ -88,7 +64,7 @@ var CardComponent = (function () {
     CardComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[card]',
-                    template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          [style.color]=\"getTextColor(color)\"\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy=\".35em\"\n        class=\"value-text\"\n        [style.fill]=\"getTextColor(color)\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
+                    template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          [style.color]=\"getTextColor(color)\"\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy=\".35em\"\n        class=\"value-text\"\n        [style.fill]=\"getTextColor(color)\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        count-up \n        [countTo]=\"data.value\"\n        style=\"pointer-events: none;\">\n      </svg:text>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];

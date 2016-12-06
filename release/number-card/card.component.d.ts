@@ -21,7 +21,6 @@ export declare class CardComponent implements OnChanges {
     resizeScale: number;
     textFontSize: number;
     textTransform: string;
-    initialized: boolean;
     originalWidth: number;
     originalHeight: number;
     originalWidthRatio: number;
@@ -30,7 +29,6 @@ export declare class CardComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getTextColor(color: any): string;
-    countUp(current: any, max: any, step: any): void;
     scaleText(): void;
     onClick(): void;
 }

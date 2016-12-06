@@ -5,6 +5,7 @@ function __export(m) {
 __export(require('./chart-common.module'));
 __export(require('./legend'));
 __export(require("./tooltip"));
+__export(require('./count.directive'));
 __export(require('./area.component'));
 __export(require('./area-tooltip.component'));
 __export(require('./base-chart.component'));

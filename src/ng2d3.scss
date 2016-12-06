@@ -7,6 +7,7 @@
   .cell,
   .arc,
   .card {
+    &.active,
     &:hover {
       opacity: 0.8;
     }
