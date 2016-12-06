@@ -19,3 +19,11 @@ Brad Green, Engineering Director at Google for Angular
 >[“this is dope”](https://twitter.com/robwormald/status/774337985701478401)  
 
 Rob Wormald, Developer Advocate for Angular
+
+## In the news
+
+### AngularAir Esp 91
+{% youtube %}https://www.youtube.com/watch?v=FlpxvsJsIpk{% endyoutube %}
+
+The project was featured on [AngularAir](https://angularair.com/) where [@amcdnl](https://github.com/amcdnl) 
+and [@marjan-georgiev](https://github.com/marjan-georgiev) spoke about the project, challenges and whats to come.
