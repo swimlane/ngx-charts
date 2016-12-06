@@ -52,6 +52,7 @@ export class HeatCellSeriesComponent implements OnChanges {
 
   getCells() {
     let cells = [];
+    
     this.data.map((row) => {
       row.series.map((cell) => {
         let value = cell.value;
@@ -61,6 +62,7 @@ export class HeatCellSeriesComponent implements OnChanges {
         if (tooltipLabel.constructor.name === 'Date') {
           tooltipLabel = tooltipLabel.toLocaleDateString();
         }
+        
         cells.push({
           x: this.xScale(row.name),
           y: this.yScale(cell.name),
@@ -68,7 +70,7 @@ export class HeatCellSeriesComponent implements OnChanges {
           height: this.yScale.bandwidth(),
           fill: this.colors(value),
           data: value,
-          label: label,
+          label,
           series: row.name
         });
       });
@@ -77,9 +79,9 @@ export class HeatCellSeriesComponent implements OnChanges {
     return cells;
   }
 
-  getTooltipText({ label, data }): string {
+  getTooltipText({ label, data, series }): string {
     return `
-      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-label">${series} • ${label}</span>
       <span class="tooltip-val">${data.toLocaleString()}</span>
     `;
   }

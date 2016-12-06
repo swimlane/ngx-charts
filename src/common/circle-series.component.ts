@@ -65,10 +65,12 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   getCircles(): any[] {
+    const seriesName = this.data.name;
+
     return this.data.series.map((d, i) => {
       let value = d.value;
       let label = d.name;
-      
+
       let tooltipLabel = label;
       if (tooltipLabel.constructor.name === 'Date') {
         tooltipLabel = tooltipLabel.toLocaleDateString();
@@ -95,22 +97,23 @@ export class CircleSeriesComponent implements OnChanges {
 
         return {
           classNames: [`circle-data-${i}`],
-          value: value,
-          label: label,
-          cx: cx,
-          cy: cy,
-          radius: radius,
-          height: height,
-          tooltipLabel: tooltipLabel,
-          opacity: opacity
+          value,
+          label,
+          cx,
+          cy,
+          radius,
+          height,
+          tooltipLabel,
+          opacity,
+          seriesName
         };
       }
     }).filter((circle) => circle !== undefined);
   }
 
-  getTooltipText({ tooltipLabel, value }): string {
+  getTooltipText({ tooltipLabel, value, seriesName }): string {
     return `
-      <span class="tooltip-label">${tooltipLabel}</span>
+      <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>
     `;
   }
