@@ -14,7 +14,7 @@ import { Timeline } from "./timeline.component";
 import { CommonModule } from "@angular/common";
 import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
-import { CountUpDirective } from './count.directive';
+import { CountUpDirective } from './count';
 
 const COMPONENTS = [
   AreaComponent,

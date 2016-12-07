@@ -1,18 +1,11 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ElementRef,
-  SimpleChanges,
-  OnChanges,
-  ViewChild,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  NgZone
+  Component, Input, Output, EventEmitter, ElementRef,
+  SimpleChanges, OnChanges, ViewChild, ChangeDetectionStrategy,
+  ChangeDetectorRef, NgZone, OnDestroy
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { invertColor } from '../utils/color-utils';
+import { count, decimalChecker } from '../common/count';
 
 @Component({
   selector: 'g[card]',
@@ -59,15 +52,14 @@ import { invertColor } from '../utils/color-utils';
         [style.fill]="getTextColor(color)"
         text-anchor="middle"
         [style.font-size.pt]="textFontSize"
-        count-up 
-        [countTo]="data.value"
         style="pointer-events: none;">
+        {{value}}
       </svg:text>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnChanges {
+export class CardComponent implements OnChanges, OnDestroy {
 
   @Input() color;
   @Input() x;
@@ -82,9 +74,9 @@ export class CardComponent implements OnChanges {
   @ViewChild('textEl') textEl: ElementRef;
 
   element: HTMLElement;
+  value: string = '';
   transform: string;
   trimmedLabel: string;
-  value: string;
   cardWidth: number;
   cardHeight: number;
   textWidth: number;
@@ -95,6 +87,8 @@ export class CardComponent implements OnChanges {
   originalHeight: number;
   originalWidthRatio: number;
   originalHeightRatio: number;
+  initialized: boolean = false;
+  animationReq: any;
 
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
@@ -102,6 +96,10 @@ export class CardComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
+  }
+
+  ngOnDestroy(): void {
+    cancelAnimationFrame(this.animationReq);
   }
 
   update(): void {
@@ -114,9 +112,10 @@ export class CardComponent implements OnChanges {
 
       this.label = this.data.name;
       this.trimmedLabel = trimLabel(this.label, 55);
-
       this.value = this.data.value.toLocaleString();
+      
       setTimeout(() => this.scaleText());
+      setTimeout(() => this.startCount(), 20);
     });
   }
 
@@ -124,7 +123,26 @@ export class CardComponent implements OnChanges {
     return invertColor(color);
   }
 
-  scaleText() {
+  startCount(): void {
+    if (!this.initialized) {
+      cancelAnimationFrame(this.animationReq);
+
+      const value = this.data.value;
+      const decs = decimalChecker(value);
+
+      const callback = ({ value }) => {
+        this.zone.run(() => {
+          this.value = value.toLocaleString();
+          this.cd.markForCheck();
+        });
+      };
+
+      this.animationReq = count(0, value, decs, 1, callback);
+      this.initialized = true;
+    }
+  }
+
+  scaleText(): void {
     this.zone.run(() => {
       let { width, height } = this.textEl.nativeElement.getBoundingClientRect();
       if (width === 0 || height === 0) {
@@ -154,10 +172,11 @@ export class CardComponent implements OnChanges {
     });
   }
 
-  onClick() {
+  onClick(): void {
     this.clickHandler.emit({
       name: this.data.name,
       value: this.data.value
     });
   }
+
 }
