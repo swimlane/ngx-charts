@@ -1,5 +1,5 @@
 import {
-  Component, Input, Output, EventEmitter, 
+  Component, Input, Output, EventEmitter,
   ChangeDetectorRef, NgZone, OnDestroy, ElementRef
 } from '@angular/core';
 
@@ -10,11 +10,11 @@ function easeOutExpo(t, b, c, d) {
 
 /**
  * Count up component
- * 
- * Loosely inspired by: 
+ *
+ * Loosely inspired by:
  *  - https://github.com/izupet/angular2-counto
  *  - https://inorganik.github.io/countUp.js/
- * 
+ *
  * @export
  * @class CountUpDirective
  */
@@ -24,10 +24,25 @@ function easeOutExpo(t, b, c, d) {
 })
 export class CountUpDirective implements OnDestroy {
 
-  @Input() countDecimals: number = 0;
   @Input() countDuration: number = 1;
   @Input() countPrefix: string = '';
   @Input() countSuffix: string = '';
+
+  @Input()
+  set countDecimals(val: number) {
+    this._countDecimals = val;
+  }
+
+  get countDecimals(): number {
+    if(this._countDecimals) return this._countDecimals;
+
+    const endVal = Number(this._countTo);
+    if(endVal % 1 !== 0 && Math.abs(endVal) <= 10) {
+      return 2;
+    }
+
+    return 0;
+  }
 
   @Input()
   set countTo(val) {
@@ -50,6 +65,7 @@ export class CountUpDirective implements OnDestroy {
   private animationReq: any;
   private startTime: any;
 
+  private _countDecimals: number = 0;
   private _countTo: number = 0;
   private _countFrom: number = 0;
 
@@ -70,7 +86,7 @@ export class CountUpDirective implements OnDestroy {
     const duration = Number(this.countDuration) * 1000;
 
     cancelAnimationFrame(this.animationReq);
-    requestAnimationFrame((val) => 
+    requestAnimationFrame((val) =>
       this.count(startVal, endVal, dec, duration, countDown, val));
   }
 
@@ -101,7 +117,7 @@ export class CountUpDirective implements OnDestroy {
     });
 
     if (progress < duration) {
-      this.animationReq = requestAnimationFrame((val) => 
+      this.animationReq = requestAnimationFrame((val) =>
         this.count(startVal, endVal, dec, duration, countDown, val));
     } else {
       this.startTime = undefined;

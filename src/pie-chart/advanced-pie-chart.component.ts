@@ -55,9 +55,9 @@ export interface LegendItem {
       <div [style.width.px]="width - dims.width" class="advanced-pie-legend-wrapper">
         <div class="advanced-pie-legend"
           [style.width.px]="width - dims.width - margin[1]">
-          <div 
-            class="total-value" 
-            count-up 
+          <div
+            class="total-value"
+            count-up
             [countTo]="roundedTotal">
           </div>
           <div class="total-label">
@@ -74,14 +74,14 @@ export interface LegendItem {
                   class="item-color"
                   [style.background]="colors(legendItem.label)">
                 </div>
-                <div 
-                  class="item-value" 
-                  count-up 
+                <div
+                  class="item-value"
+                  count-up
                   [countTo]="legendItem.value">
                 </div>
                 <div class="item-label">{{legendItem.label}}</div>
-                <div 
-                  class="item-percent" 
+                <div
+                  class="item-percent"
                   count-up
                   [countTo]="legendItem.percentage"
                   [countSuffix]="'%'">
@@ -158,7 +158,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
       this.transform = `translate(${xOffset} , ${yOffset})`;
 
       this.total = this.getTotal();
-      this.roundedTotal = Math.round(this.total);
+      this.roundedTotal = this.total;
 
       this.totalLabel = 'total';
 
@@ -183,9 +183,9 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
         label = label.toLocaleDateString();
       }
       let value = d.value;
-      let percentage = Math.round(value / this.total * 100);
+      let percentage = value / this.total * 100;
       return {
-        value: Math.round(value),
+        value: value,
         label: trimLabel(label, 20),
         originalLabel: d.name,
         percentage: percentage
