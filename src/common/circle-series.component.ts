@@ -18,6 +18,7 @@ import * as moment from 'moment';
         class="tooltip-bar"
       />
       <svg:g circle
+        *ngIf="circle.opacity"
         [attr.class]="className"
         [cx]="circle.cx"
         [cy]="circle.cy"
@@ -28,7 +29,6 @@ import * as moment from 'moment';
         [data]="circle.value"
         [classNames]="circle.classNames"
         (clickHandler)="onClick($event, circle.label)"
-        [style.opacity]="circle.opacity"
         [style.cursor]="'pointer'"
         swui-tooltip
         [tooltipPlacement]="'top'"

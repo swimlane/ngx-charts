@@ -11,7 +11,7 @@ import {
   ChangeDetectionStrategy
  } from '@angular/core';
 import * as moment from 'moment';
- import { formatLabel } from '../common/label.helper';
+import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[seriesVertical]',
