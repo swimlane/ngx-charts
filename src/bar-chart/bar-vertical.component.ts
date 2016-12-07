@@ -76,6 +76,7 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -91,7 +92,6 @@ export class BarVerticalComponent extends BaseChartComponent implements OnChange
   margin: any[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  activeEntries: any[] = [];
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);

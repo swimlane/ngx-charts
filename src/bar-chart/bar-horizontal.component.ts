@@ -76,6 +76,7 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -91,7 +92,6 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-  activeEntries: any[] = [];
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
@@ -109,7 +109,7 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -138,6 +138,7 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
 
   getXScale() {
     this.xDomain = this.getXDomain();
+
     return d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.xDomain);
@@ -146,48 +147,51 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   getYScale() {
     const spacing = 0.2;
     this.yDomain = this.getYDomain();
+
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
       .domain(this.yDomain);
   }
 
-  getXDomain() {
-    let values = this.results.map(d => d.value);
-    let min = Math.min(0, ...values);
-    let max = Math.max(...values);
-    return [min, max];
+  getXDomain(): any[] {
+    const values = this.results.map(d => d.value);
+
+    const min = Math.min(0, ...values);
+    const max = Math.max(...values);
+
+    return [ min, max ];
   }
 
-  getYDomain() {
+  getYDomain(): any[] {
     return this.results.map(d => d.name);
   }
 
-  onClick(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.yDomain, this.customColors);
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(event) {
+  onActivate(event): void {
     if(this.activeEntries.indexOf(event) > -1) return;
     this.activeEntries = [ event, ...this.activeEntries ];
     this.activate.emit({ value: event, entries: this.activeEntries });
   }
 
-  onDeactivate(event) {
+  onDeactivate(event): void {
     const idx = this.activeEntries.indexOf(event);
 
     this.activeEntries.splice(idx, 1);

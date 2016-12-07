@@ -29,6 +29,8 @@ import d3 from '../d3';
       [view]="[width, height]"
       [colors]="colors"
       (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       [legendData]="innerDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g xAxis
@@ -58,6 +60,7 @@ import d3 from '../d3';
             [yScale]="yScale"
             [colors]="colors"
             [series]="group.series"
+            [activeEntries]="activeEntries"
             [dims]="dims"
             [gradient]="gradient"
             (clickHandler)="onClick($event, group)"
@@ -94,9 +97,12 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
-
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  
   dims: ViewDimensions;
   groupDomain: any[];
   innerDomain: any[];
@@ -125,7 +131,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -158,8 +164,9 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
     });
   }
 
-  getGroupDomain() {
+  getGroupDomain(): any[] {
     let domain = [];
+
     for (let group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
@@ -169,8 +176,9 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
     return domain;
   }
 
-  getInnerDomain() {
+  getInnerDomain(): any[] {
     let domain = [];
+
     for (let group of this.results) {
       for (let d of group.series) {
         if (!domain.includes(d.name)) {
@@ -182,8 +190,9 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
     return domain;
   }
 
-  getValueDomain() {
+  getValueDomain(): any[] {
     let domain = [];
+
     for (let group of this.results) {
       let sum = 0;
       for (let d of group.series) {
@@ -193,13 +202,15 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
       domain.push(sum);
     }
 
-    let min = Math.min(0, ...domain);
-    let max = Math.max(...domain);
-    return [min, max];
+    const min = Math.min(0, ...domain);
+    const max = Math.max(...domain);
+
+    return [ min, max ];
   }
 
   getYScale() {
-    let spacing = 0.1;
+    const spacing = 0.1;
+
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
@@ -213,32 +224,49 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
 
   }
 
-  groupTransform(group) {
+  groupTransform(group): string {
     return `translate(0, ${this.yScale(group.name)})`;
   }
 
-  onClick(data, group) {
+  onClick(data, group): void {
     if (group) {
       data.series = group.name;
     }
+
     this.clickHandler.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.name;
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }
+
+  onActivate(event): void {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event): void {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+
 }

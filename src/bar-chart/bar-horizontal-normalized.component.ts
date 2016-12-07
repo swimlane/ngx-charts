@@ -28,6 +28,8 @@ import d3 from '../d3';
       [legend]="legend"
       [view]="[width, height]"
       (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       [colors]="colors"
       [legendData]="innerDomain">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
@@ -56,6 +58,7 @@ import d3 from '../d3';
             type="normalized"
             [xScale]="xScale"
             [yScale]="yScale"
+            [activeEntries]="activeEntries"
             [colors]="colors"
             [series]="group.series"
             [dims]="dims"
@@ -94,9 +97,12 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent impleme
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
-
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  
   dims: ViewDimensions;
   groupDomain: any[];
   innerDomain: any[];
@@ -158,8 +164,9 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent impleme
     });
   }
 
-  getGroupDomain() {
+  getGroupDomain(): any[] {
     let domain = [];
+
     for (let group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
@@ -169,8 +176,9 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent impleme
     return domain;
   }
 
-  getInnerDomain() {
+  getInnerDomain(): any[] {
     let domain = [];
+
     for (let group of this.results) {
       for (let d of group.series) {
         if (!domain.includes(d.name)) {
@@ -182,12 +190,13 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent impleme
     return domain;
   }
 
-  getValueDomain() {
+  getValueDomain(): any[] {
     return [0, 100];
   }
 
   getYScale() {
-    let spacing = 0.1;
+    const spacing = 0.1;
+
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
@@ -198,36 +207,51 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent impleme
     return d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valueDomain);
-
   }
 
-  groupTransform(group) {
+  groupTransform(group): string {
     return `translate(0, ${this.yScale(group.name)})`;
   }
 
-  onClick(data, group) {
+  onClick(data, group): void {
     if (group) {
       data.series = group.name;
     }
+
     this.clickHandler.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.name;
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
+  }
+
+  onActivate(event): void {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event): void {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
   }
 
 }

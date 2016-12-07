@@ -26,6 +26,8 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)"
       [view]="[width, height]"
       [colors]="colors"
@@ -56,6 +58,7 @@ import d3 from '../d3';
             type="normalized"
             [xScale]="xScale"
             [yScale]="yScale"
+            [activeEntries]="activeEntries"
             [colors]="colors"
             [series]="group.series"
             [dims]="dims"
@@ -94,8 +97,11 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent implement
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   groupDomain: any[];
@@ -228,4 +234,19 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent implement
     this.xAxisHeight = height;
     this.update();
   }
+    onActivate(event) {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event) {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+  
 }

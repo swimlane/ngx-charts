@@ -26,6 +26,8 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)"
       [view]="[width, height]"
       [colors]="colors"
@@ -59,6 +61,7 @@ import d3 from '../d3';
           *ngFor="let group of results; trackBy:trackBy"
           [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"
+          [activeEntries]="activeEntries"
           [xScale]="innerScale"
           [yScale]="valueScale"
           [colors]="colors"
@@ -99,8 +102,11 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
   @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   groupDomain: any[];
@@ -255,4 +261,20 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
     this.xAxisHeight = height;
     this.update();
   }
+
+  onActivate(event) {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event) {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+
 }

@@ -26,6 +26,8 @@ import d3 from '../d3';
   template: `
     <chart
       [legend]="legend"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       [view]="[width, height]"
       (legendLabelClick)="onClick($event)"
       [colors]="colors"
@@ -39,7 +41,6 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-
         <svg:g yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
@@ -49,7 +50,6 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-
         <svg:g
           *ngFor="let group of results; trackBy:trackBy"
           [@animationState]="'active'"
@@ -58,6 +58,7 @@ import d3 from '../d3';
             type="stacked"
             [xScale]="xScale"
             [yScale]="yScale"
+            [activeEntries]="activeEntries"
             [colors]="colors"
             [series]="group.series"
             [dims]="dims"
@@ -65,7 +66,6 @@ import d3 from '../d3';
             (clickHandler)="onClick($event, group)"
           />
         </svg:g>
-
       </svg:g>
     </chart>
   `,
@@ -97,8 +97,11 @@ export class BarVerticalStackedComponent extends BaseChartComponent implements O
   @Input() yAxisLabel;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   groupDomain: any[];
@@ -245,4 +248,20 @@ export class BarVerticalStackedComponent extends BaseChartComponent implements O
     this.xAxisHeight = height;
     this.update();
   }
+
+  onActivate(event) {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event) {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+  
 }
