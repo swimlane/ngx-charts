@@ -9,7 +9,9 @@
         "include-codeblock",
         "versions",
         "anchors",
-        "githubcontributors"
+        "githubcontributors",
+        "collapsible-chapters",
+        "youtube"
     ],
     "pluginsConfig": {
         "github": {
