@@ -29,8 +29,7 @@ import d3 from '../d3';
       [class.active]="isActive"
       [attr.d]="path"
       [attr.fill]="gradient ? gradientFill : fill"
-      [style.cursor]="'pointer'"
-      (click)="click()"
+      (click)="clickHandler.emit(data)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -187,10 +186,6 @@ export class BarComponent implements OnInit, OnChanges {
     }
     retval += "z";
     return retval;
-  }
-
-  click(): void {
-    this.clickHandler.emit(this.data);
   }
 
 }

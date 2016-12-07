@@ -3,6 +3,10 @@
 .ng2d3 {
   float: left;
 
+  .bar {
+    cursor: pointer;
+  }
+
   .bar,
   .cell,
   .arc,
