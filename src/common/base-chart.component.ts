@@ -1,5 +1,5 @@
-import { ElementRef, NgZone, ChangeDetectorRef } from "@angular/core";
-import { Observable } from "rxjs";
+import { ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 export abstract class BaseChartComponent {
 
