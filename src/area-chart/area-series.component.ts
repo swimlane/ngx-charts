@@ -40,7 +40,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() curve;
   @Input() activeEntries: any[];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   opacity: number;
   path: string;

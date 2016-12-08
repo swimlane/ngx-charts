@@ -58,7 +58,7 @@ export class PieArcComponent implements OnChanges {
   @Input() pointerEvents: boolean = true;
   @Input() isActive: boolean = false;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   element: HTMLElement;
   path: any;
@@ -154,7 +154,7 @@ export class PieArcComponent implements OnChanges {
   }
 
   onClick(): void {
-    this.clickHandler.emit(this.data);
+    this.select.emit(this.data);
   }
 
 }

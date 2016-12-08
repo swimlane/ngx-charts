@@ -20,7 +20,7 @@ import {
       [attr.opacity]="circleOpacity"
       [attr.class]="classNames"
       [attr.pointer-events]="pointerEvents"
-      (click)="clickHandler.emit(data)"
+      (click)="select.emit(data)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,7 +37,7 @@ export class CircleComponent implements OnChanges {
   @Input() circleOpacity;
   @Input() pointerEvents;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
     this.classNames = this.classNames.join(' ') + 'circle';

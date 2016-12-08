@@ -48,7 +48,7 @@ export interface LegendItem {
               [activeEntries]="activeEntries"
               [outerRadius]="outerRadius"
               [gradient]="gradient"
-              (clickHandler)="onClick($event)">
+              (select)="onClick($event)">
             </svg:g>
           </svg:g>
         </chart>
@@ -108,7 +108,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -200,7 +200,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
   }
 
   onClick(data) {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

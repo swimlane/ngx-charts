@@ -29,7 +29,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)"
+            (select)="select($event)"
             (legendLabelClick)="onLegendLabelClick($event)">
           </bar-vertical>
           <bar-horizontal
@@ -48,7 +48,7 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
             (legendLabelClick)="onLegendLabelClick($event)"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </bar-horizontal>
           <bar-vertical-2d
             *ngIf="chartType === 'bar-vertical-2d'"
@@ -66,7 +66,7 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             (legendLabelClick)="onLegendLabelClick($event)"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </bar-vertical-2d>
           <bar-horizontal-2d
             *ngIf="chartType === 'bar-horizontal-2d'"
@@ -84,7 +84,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </bar-horizontal-2d>
           <bar-vertical-stacked
             *ngIf="chartType === 'bar-vertical-stacked'"
@@ -102,7 +102,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </bar-vertical-stacked>
           <bar-horizontal-stacked
             *ngIf="chartType === 'bar-horizontal-stacked'"
@@ -120,7 +120,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </bar-horizontal-stacked>
           <bar-vertical-normalized
             *ngIf="chartType === 'bar-vertical-normalized'"
@@ -138,7 +138,7 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </bar-vertical-normalized>
           <bar-horizontal-normalized
             *ngIf="chartType === 'bar-horizontal-normalized'"
@@ -156,7 +156,7 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             (legendLabelClick)="onLegendLabelClick($event)"
             [showGridLines]="showGridLines"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </bar-horizontal-normalized>
           <pie-chart
             *ngIf="chartType === 'pie-chart'"
@@ -170,7 +170,7 @@ import './demo.scss';
             [doughnut]="doughnut"
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </pie-chart>
           <advanced-pie-chart
             *ngIf="chartType === 'advanced-pie-chart'"
@@ -180,7 +180,7 @@ import './demo.scss';
             [results]="single"
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </advanced-pie-chart>
           <pie-grid
             *ngIf="chartType === 'pie-grid'"
@@ -189,7 +189,7 @@ import './demo.scss';
             [scheme]="colorScheme"
             (legendLabelClick)="onLegendLabelClick($event)"
             [results]="single"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </pie-grid>
           <line-chart
             *ngIf="chartType === 'line-chart'"
@@ -210,7 +210,7 @@ import './demo.scss';
             [timeline]="timeline"
             [showGridLines]="showGridLines"
             [curve]="curve"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </line-chart>
           <force-directed-graph
             *ngIf="chartType === 'force-directed-graph'"
@@ -221,7 +221,7 @@ import './demo.scss';
             [nodes]="graph.nodes"
             [scheme]="colorScheme"
             [view]="view"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </force-directed-graph>
           <area-chart
             *ngIf="chartType === 'area-chart'"
@@ -242,7 +242,7 @@ import './demo.scss';
             [timeline]="timeline"
             [showGridLines]="showGridLines"
             [curve]="curve"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </area-chart>
           <area-chart-stacked
             *ngIf="chartType === 'area-chart-stacked'"
@@ -262,7 +262,7 @@ import './demo.scss';
             [timeline]="timeline"
             [showGridLines]="showGridLines"
             [curve]="curve"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </area-chart-stacked>
           <area-chart-normalized
             *ngIf="chartType === 'area-chart-normalized'"
@@ -282,7 +282,7 @@ import './demo.scss';
             [timeline]="timeline"
             [showGridLines]="showGridLines"
             [curve]="curve"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </area-chart-normalized>
           <heat-map
             *ngIf="chartType === 'heat-map'"
@@ -299,7 +299,7 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </heat-map>
           <tree-map
             *ngIf="chartType === 'tree-map'"
@@ -308,7 +308,7 @@ import './demo.scss';
             (legendLabelClick)="onLegendLabelClick($event)"
             [scheme]="colorScheme"
             [results]="single"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </tree-map>
           <number-card
             *ngIf="chartType === 'number-card'"
@@ -317,7 +317,7 @@ import './demo.scss';
             (legendLabelClick)="onLegendLabelClick($event)"
             [scheme]="colorScheme"
             [results]="single"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </number-card>
           <gauge
             *ngIf="chartType === 'gauge'"
@@ -331,7 +331,7 @@ import './demo.scss';
             [units]="gaugeUnits"
             [bigSegments]="gaugeLargeSegments"
             [smallSegments]="gaugeSmallSegments"
-            (clickHandler)="clickHandler($event)">
+            (select)="select($event)">
           </gauge>
         </div>
       </div>
@@ -735,7 +735,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  clickHandler(data) {
+  select(data) {
     console.log('Item clicked', data);
   }
 

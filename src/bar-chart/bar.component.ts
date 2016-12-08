@@ -29,7 +29,7 @@ import d3 from '../d3';
       [class.active]="isActive"
       [attr.d]="path"
       [attr.fill]="gradient ? gradientFill : fill"
-      (click)="clickHandler.emit(data)"
+      (click)="select.emit(data)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -48,7 +48,7 @@ export class BarComponent implements OnInit, OnChanges {
   @Input() offset = 0;
   @Input() isActive: boolean = false;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   element: any;
   path: any;

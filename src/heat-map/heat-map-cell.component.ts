@@ -47,7 +47,7 @@ export class HeatMapCellComponent implements OnChanges {
   @Input() label;
   @Input() gradient: boolean = false;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   element: HTMLElement;
   transform: string;
@@ -84,7 +84,7 @@ export class HeatMapCellComponent implements OnChanges {
   }
 
   onClick() {
-    this.clickHandler.emit(this.data);
+    this.select.emit(this.data);
   }
 
 }

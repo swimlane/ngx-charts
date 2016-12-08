@@ -37,7 +37,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
           [gradient]="gradient"
-          (clickHandler)="onClick($event)"
+          (select)="onClick($event)"
         />
       </svg:g>
     </chart>
@@ -58,7 +58,7 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -148,7 +148,7 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

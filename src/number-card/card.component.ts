@@ -69,7 +69,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   @Input() label;
   @Input() data;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   @ViewChild('textEl') textEl: ElementRef;
 
@@ -173,7 +173,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   onClick(): void {
-    this.clickHandler.emit({
+    this.select.emit({
       name: this.data.name,
       value: this.data.value
     });

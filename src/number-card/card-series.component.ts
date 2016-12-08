@@ -30,7 +30,7 @@ export interface CardModel {
       [height]="c.height"
       [color]="c.color"
       [data]="c.data"
-      (clickHandler)="onClick($event)"
+      (select)="onClick($event)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -41,7 +41,7 @@ export class CardSeriesComponent implements OnChanges {
   @Input() dims;
   @Input() colors;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   cards: CardModel[];
 
@@ -87,7 +87,7 @@ export class CardSeriesComponent implements OnChanges {
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
 }

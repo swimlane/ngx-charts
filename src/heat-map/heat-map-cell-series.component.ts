@@ -20,7 +20,7 @@ import {
       [height]="c.height"
       [fill]="c.fill"
       [data]="c.data"
-      (clickHandler)="onClick($event, c.label, c.series)"
+      (select)="onClick($event, c.label, c.series)"
       [gradient]="gradient"
       swui-tooltip
       [tooltipPlacement]="'top'"
@@ -38,7 +38,7 @@ export class HeatCellSeriesComponent implements OnChanges {
   @Input() yScale;
   @Input() gradient: boolean;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   cells: any[];
 
@@ -91,7 +91,7 @@ export class HeatCellSeriesComponent implements OnChanges {
   }
 
   onClick(value, label, series): void {
-    this.clickHandler.emit({
+    this.select.emit({
       name: label,
       value: value,
       series: series

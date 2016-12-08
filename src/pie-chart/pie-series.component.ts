@@ -36,7 +36,7 @@ import { formatLabel } from '../common/label.helper';
         [max]="max"
         [explodeSlices]="explodeSlices"
         [isActive]="isActive(arc)"
-        (clickHandler)="onClick($event)"
+        (select)="onClick($event)"
         [gradient]="gradient" 
         swui-tooltip
         [tooltipPlacement]="'top'"
@@ -59,7 +59,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   max: number;
   data: any;
@@ -150,7 +150,7 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   isActive(entry): boolean {

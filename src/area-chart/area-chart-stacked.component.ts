@@ -92,7 +92,7 @@ import d3 from '../d3';
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
-              (clickHandler)="onClick($event, series)"
+              (select)="onClick($event, series)"
             />
           </svg:g>
         </svg:g>
@@ -144,7 +144,7 @@ export class AreaChartStackedComponent extends BaseChartComponent implements OnC
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -427,7 +427,7 @@ export class AreaChartStackedComponent extends BaseChartComponent implements OnC
       data.series = series.name;
     }
 
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   trackBy(index, item): string {

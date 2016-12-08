@@ -68,7 +68,7 @@ import d3 from '../d3';
           [series]="group.series"
           [dims]="dims"
           [gradient]="gradient"
-          (clickHandler)="onClick($event, group)"
+          (select)="onClick($event, group)"
         />
         </svg:g>
     </chart>
@@ -104,7 +104,7 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -241,7 +241,7 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
     if (group) {
       data.series = group.name;
     }
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   trackBy(index, item) {

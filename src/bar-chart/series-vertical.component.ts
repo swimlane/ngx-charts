@@ -28,7 +28,7 @@ import { formatLabel } from '../common/label.helper';
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
       [isActive]="isActive(bar.formattedLabel)"
-      (clickHandler)="onClick($event)"
+      (select)="onClick($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -60,7 +60,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   bars: any;
   x: any;
@@ -159,7 +159,7 @@ export class SeriesVerticalComponent implements OnChanges {
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   trackBy(index, bar): string {

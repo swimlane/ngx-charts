@@ -1,6 +1,7 @@
 # Changelog
 
 ## Master
+- BREAKING: Renamed `clickHandler` to `select` (#120)
 - Polish: Make pie grid less ugly (#90)
 - Polish: Highlighting a line/area chart in legend, defocuses others
 - Polish: Radial gradients on pie charts vs linear

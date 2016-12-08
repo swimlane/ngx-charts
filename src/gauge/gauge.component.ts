@@ -49,7 +49,7 @@ import { colorHelper } from '../utils/color-sets';
           [fill]="colors(value)"
           [data]="valueArc.data"
           [animate]="true"
-          (clickHandler)="onClick($event)">
+          (select)="onClick($event)">
         </svg:g>
         <svg:g *ngFor="let tick of ticks.big"
           class="gauge-tick gauge-tick-large"
@@ -105,7 +105,7 @@ export class GaugeComponent extends BaseChartComponent implements OnChanges, OnD
   @Input() smallSegments: number = 5;
   @Input() legend;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   
   @ViewChild('textEl') textEl: ElementRef;
 
@@ -291,7 +291,7 @@ export class GaugeComponent extends BaseChartComponent implements OnChanges, OnD
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

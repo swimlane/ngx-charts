@@ -54,7 +54,7 @@ import d3 from '../d3';
           [dims]="dims"
           [gradient]="gradient"
           [activeEntries]="activeEntries"
-          (clickHandler)="onClick($event)"
+          (select)="onClick($event)"
         />
       </svg:g>
     </chart>
@@ -78,7 +78,7 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -168,7 +168,7 @@ export class BarHorizontalComponent extends BaseChartComponent implements OnChan
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

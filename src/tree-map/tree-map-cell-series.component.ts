@@ -20,7 +20,7 @@ import {
       [label]="c.label"
       [value]="c.value"
       [valueType]="c.valueType"
-      (clickHandler)="onClick($event)"
+      (select)="onClick($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -35,7 +35,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() dims;
   @Input() colors;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   cells: any[];
 
@@ -72,7 +72,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   trackBy(index, item): string {

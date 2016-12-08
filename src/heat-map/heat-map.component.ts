@@ -57,7 +57,7 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
           [colors]="colors"
           [data]="results"
           [gradient]="gradient"
-          (clickHandler)="onClick($event)"
+          (select)="onClick($event)"
         />
       </svg:g>
     </chart>
@@ -79,7 +79,7 @@ export class HeatMapComponent extends BaseChartComponent implements OnChanges, O
   @Input() yAxisLabel;
   @Input() gradient: boolean;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -222,7 +222,7 @@ export class HeatMapComponent extends BaseChartComponent implements OnChanges, O
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

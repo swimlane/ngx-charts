@@ -38,7 +38,7 @@ import { formatLabel } from '../common/label.helper';
             [data]="series.data"
             [innerRadius]="series.innerRadius"
             [outerRadius]="series.outerRadius"
-            (clickHandler)="onClick($event)"
+            (select)="onClick($event)"
             swui-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
@@ -85,7 +85,7 @@ export class PieGridComponent extends BaseChartComponent implements OnChanges, O
   @Input() scheme;
   @Input() customColors;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
@@ -194,7 +194,7 @@ export class PieGridComponent extends BaseChartComponent implements OnChanges, O
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

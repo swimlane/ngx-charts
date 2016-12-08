@@ -45,7 +45,7 @@ export class Timeline implements OnChanges {
   @Input() scaleType;
   @Input() height: number = 50;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() onDomainChange = new EventEmitter();
 
   element: HTMLElement;

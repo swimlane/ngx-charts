@@ -76,7 +76,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent implements O
   @Input() view;
   @Input() customColors;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
@@ -125,7 +125,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent implements O
   }
 
   onClick(data, node): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   getSeriesDomain(): any[] {

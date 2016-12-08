@@ -29,7 +29,7 @@ import { gridLayout } from '../common/grid-layout.helper';
           [colors]="colors"
           [data]="data"
           [dims]="dims"
-          (clickHandler)="onClick($event)"
+          (select)="onClick($event)"
         />
       </svg:g>
     </chart>
@@ -44,7 +44,7 @@ export class NumberCardComponent extends BaseChartComponent implements OnChanges
   @Input() scheme;
   @Input() customColors;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
@@ -93,7 +93,7 @@ export class NumberCardComponent extends BaseChartComponent implements OnChanges
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

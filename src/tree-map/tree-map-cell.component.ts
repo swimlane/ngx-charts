@@ -55,7 +55,7 @@ export class TreeMapCellComponent implements OnChanges {
   @Input() value;
   @Input() valueType;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   element: HTMLElement;
   transform: string;
@@ -106,7 +106,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   onClick(): void {
-    this.clickHandler.emit({
+    this.select.emit({
       name: this.label,
       value: this.value
     });

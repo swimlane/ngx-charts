@@ -27,7 +27,7 @@ import {
       [data]="bar.data"
       [orientation]="'horizontal'"
       [roundEdges]="bar.roundEdges"
-      (clickHandler)="click($event)"
+      (select)="click($event)"
       [gradient]="gradient"
       [isActive]="isActive(bar.formattedLabel)"
       swui-tooltip
@@ -63,7 +63,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -147,6 +147,6 @@ export class SeriesHorizontal implements OnChanges {
   }
 
   click(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 }

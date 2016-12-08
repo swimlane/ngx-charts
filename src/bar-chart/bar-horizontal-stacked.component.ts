@@ -63,7 +63,7 @@ import d3 from '../d3';
             [activeEntries]="activeEntries"
             [dims]="dims"
             [gradient]="gradient"
-            (clickHandler)="onClick($event, group)"
+            (select)="onClick($event, group)"
           />
         </svg:g>
       </svg:g>
@@ -99,7 +99,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
   
@@ -233,7 +233,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent implements
       data.series = group.name;
     }
 
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   trackBy(index, item): string {

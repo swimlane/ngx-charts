@@ -44,7 +44,7 @@ export class LineComponent {
   @Input() stroke;
   @Input() data;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   element: ElementRef;
 

@@ -94,7 +94,7 @@ import { id } from "../utils/id";
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
-              (clickHandler)="onClick($event, series)"
+              (select)="onClick($event, series)"
             />
           </svg:g>
         </svg:g>
@@ -146,7 +146,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -427,7 +427,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
       data.series = series.name;
     }
 
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   trackBy(index, item): string {

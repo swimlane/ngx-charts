@@ -30,7 +30,7 @@ import { formatLabel } from '../common/label.helper';
         [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
-        (clickHandler)="onClick($event, circle.label)"
+        (select)="onClick($event, circle.label)"
         [style.cursor]="'pointer'"
         swui-tooltip
         [tooltipPlacement]="'top'"
@@ -53,7 +53,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() visibleValue;
   @Input() activeEntries: any[];
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   areaPath: any;
   circles: any[];
@@ -118,7 +118,7 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   onClick(value, label): void {
-    this.clickHandler.emit({
+    this.select.emit({
       name: label,
       value: value
     });

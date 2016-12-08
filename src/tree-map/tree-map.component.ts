@@ -29,7 +29,7 @@ import { colorHelper } from '../utils/color-sets';
           [colors]="colors"
           [data]="data"
           [dims]="dims"
-          (clickHandler)="onClick($event)"
+          (select)="onClick($event)"
         />
       </svg:g>
     </chart>
@@ -43,7 +43,7 @@ export class TreeMapComponent extends BaseChartComponent implements OnChanges, O
   @Input() scheme;
   @Input() customColors;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   dims: any;
   domain: any;
@@ -119,7 +119,7 @@ export class TreeMapComponent extends BaseChartComponent implements OnChanges, O
   }
 
   onClick(data): void {
-    this.clickHandler.emit(data);
+    this.select.emit(data);
   }
 
   setColors(): void {

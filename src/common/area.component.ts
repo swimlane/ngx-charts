@@ -44,7 +44,7 @@ export class AreaComponent implements OnChanges {
   @Input() activeLabel;
   @Input() gradient: boolean = false;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   element: HTMLElement;
   gradientId: string;

@@ -27,7 +27,7 @@ import d3 from '../d3';
         [gradient]="false"
         [pointerEvents]="arc.pointerEvents"
         [animate]="arc.animate"
-        (clickHandler)="onClick($event)">
+        (select)="onClick($event)">
       </svg:g>
     </svg:g>
   `,
@@ -41,7 +41,7 @@ export class PieGridSeriesComponent implements OnChanges {
   @Input() innerRadius = 70;
   @Input() outerRadius = 80;
 
-  @Output() clickHandler = new EventEmitter();
+  @Output() select = new EventEmitter();
 
   element: HTMLElement;
   layout: any;
@@ -85,7 +85,7 @@ export class PieGridSeriesComponent implements OnChanges {
   }
 
   onClick(data): void {
-    this.clickHandler.emit({
+    this.select.emit({
       name: this.data[0].data.name,
       value: this.data[0].data.value
     });
