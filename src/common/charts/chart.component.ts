@@ -58,6 +58,7 @@ export class ChartComponent implements OnChanges {
   @Input() legendData;
   @Input() legendTitle = 'Legend';
   @Input() colors;
+  @Input() legendType: any;
 
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
   @Output() legendLabelActivate: EventEmitter<any> = new EventEmitter();
@@ -66,7 +67,6 @@ export class ChartComponent implements OnChanges {
   chartWidth: any;
   title: any;
   legendWidth: any;
-  legendType: any;
 
   constructor(
     private vcr: ViewContainerRef,

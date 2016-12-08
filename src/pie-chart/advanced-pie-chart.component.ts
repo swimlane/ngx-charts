@@ -16,13 +16,6 @@ import {
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { trimLabel } from '../common/trim-label.helper';
-
-export interface LegendItem {
-  value: number;
-  label: string;
-  percentage: number;
-}
 
 @Component({
   selector: 'advanced-pie-chart',
@@ -35,7 +28,11 @@ export interface LegendItem {
         [style.height.px]="dims.height">
         <chart
           [colors]="colors"
+          [legend]="legend"
+          [legendData]="domain"
           (legendLabelClick)="onClick($event)"
+          (legendLabelActivate)="onActivate($event)"
+          (legendLabelDeactivate)="onDeactivate($event)"
           [view]="[dims.width, dims.height]">
           <svg:g
             [attr.transform]="transform"
@@ -53,46 +50,17 @@ export interface LegendItem {
           </svg:g>
         </chart>
       </div>
-      <div [style.width.px]="width - dims.width" class="advanced-pie-legend-wrapper">
-        <div class="advanced-pie-legend"
-          [style.width.px]="width - dims.width - margin[1]">
-          <div
-            class="total-value"
-            count-up
-            [countTo]="roundedTotal">
-          </div>
-          <div class="total-label">
-            {{totalLabel}}
-          </div>
-          <div class="legend-items-container">
-            <div class="legend-items">
-              <div
-                *ngFor="let legendItem of legendItems"
-                tabindex="-1"
-                (mouseenter)="onActivate(legendItem.label)"
-                (mouseleave)="onDeactivate(legendItem.label)"
-                (click)="onClick({ name: legendItem.label, value: legendItem.value })"
-                class="legend-item">
-                <div
-                  class="item-color"
-                  [style.background]="colors(legendItem.label)">
-                </div>
-                <div
-                  class="item-value"
-                  count-up
-                  [countTo]="legendItem.value">
-                </div>
-                <div class="item-label">{{legendItem.label}}</div>
-                <div
-                  class="item-percent"
-                  count-up
-                  [countTo]="legendItem.percentage"
-                  [countSuffix]="'%'">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div 
+        class="advanced-pie-legend-wrapper"
+        [style.width.px]="width - dims.width">
+        <advanced-legend
+          [data]="results"
+          [colors]="colors"
+          [width]="width - dims.width - margin[1]"
+          (select)="onClick($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)">
+        </advanced-legend>
       </div>
     </div>
   `,
@@ -118,10 +86,6 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
   outerRadius: number;
   innerRadius: number;
   transform: string;
-  total: number;
-  roundedTotal: number;
-  totalLabel: string;
-  legendItems: LegendItem;
   colors: Function;
   legendWidth: number;
 
@@ -162,41 +126,11 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
       this.innerRadius = this.outerRadius * 0.75;
 
       this.transform = `translate(${xOffset} , ${yOffset})`;
-
-      this.total = this.getTotal();
-      this.roundedTotal = this.total;
-
-      this.totalLabel = 'total';
-
-      this.legendItems = this.getLegendItems();
     });
-  }
-
-  getTotal(): number {
-    return this.results
-      .map(d => d.value)
-      .reduce((sum, d) => { return sum + d; }, 0);
   }
 
   getDomain(): any[] {
     return this.results.map(d => d.name);
-  }
-
-  getLegendItems(): LegendItem {
-    return this.results.map((d, index) => {
-      let label = d.name;
-      if (label instanceof Date) {
-        label = label.toLocaleDateString();
-      }
-      let value = d.value;
-      let percentage = value / this.total * 100;
-      return {
-        value: value,
-        label: trimLabel(label, 20),
-        originalLabel: d.name,
-        percentage: percentage
-      };
-    });
   }
 
   onClick(data) {
