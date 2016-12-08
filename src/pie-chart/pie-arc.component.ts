@@ -79,17 +79,13 @@ export class PieArcComponent implements OnChanges {
   update(): void {
     let arc = this.calculateArc();
     this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
-    this.startOpacity = 0.3;
+    this.startOpacity = 0.5;
 
     let pageUrl = window.location.href;
     this.radialGradientId = 'linearGrad' + id().toString();
     this.linearGradientId = 'radialGrad' + id().toString();
 
-    if (this.innerRadius !== 0) {
-      this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;
-    } else {
-      this.gradientFill = `url(${pageUrl}#${this.linearGradientId})`;
-    }
+    this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;
 
     if (this.animate) {
       if (this.initialized) {

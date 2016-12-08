@@ -10,7 +10,7 @@ import {
       [attr.cx]="cx"
       [attr.cy]="cy"
       [attr.r]="r"
-      gradient-units="userSpaceOnUse">
+      gradientUnits="userSpaceOnUse">
       <svg:stop
         offset="0%"
         [style.stop-color]="color"
@@ -31,15 +31,13 @@ export class SvgRadialGradientComponent implements OnChanges {
   @Input() name;
   @Input() startOpacity;
   @Input() endOpacity = 1;
+  @Input() cx: number = 0;
+  @Input() cy: number = 0;
 
-  cx: number;
-  cy: number;
   r: string;
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.cx = 0;
-    this.cy = 0;
     this.r = "30%";
   }
-  
+
 }
