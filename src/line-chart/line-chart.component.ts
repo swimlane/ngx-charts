@@ -26,7 +26,9 @@ import * as moment from 'moment';
     <chart
       [legend]="legend"
       [view]="[width, height]"
-      (legendLabelClick)="onClick({series: $event.name})"
+      (legendLabelClick)="onClick({ series: $event.name })"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       [colors]="colors"
       [legendData]="seriesDomain">
       <svg:defs>
@@ -85,6 +87,7 @@ import * as moment from 'moment';
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
+              [activeEntries]="activeEntries"
               (clickHandler)="onClick($event, series)"
             />
           </svg:g>
@@ -135,9 +138,12 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() curve = d3.shape.curveLinear;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
-
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+  
   dims: ViewDimensions;
   xSet: any;
   xDomain: any;
@@ -390,6 +396,21 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
+  }
+
+  onActivate(event): void {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event): void {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
   }
 
 }

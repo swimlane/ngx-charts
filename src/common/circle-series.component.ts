@@ -3,6 +3,7 @@ import {
   OnChanges, ChangeDetectionStrategy
 } from '@angular/core';
 import * as moment from 'moment';
+import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[circleSeries]',
@@ -18,12 +19,13 @@ import * as moment from 'moment';
         class="tooltip-bar"
       />
       <svg:g circle
-        *ngIf="circle.opacity"
+        *ngIf="isVisible(circle)"
         [attr.class]="className"
         [cx]="circle.cx"
         [cy]="circle.cy"
         [r]="circle.radius"
         [fill]="color"
+        [class.active]="isActive(circle.label)"
         [stroke]="strokeColor"
         [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
@@ -49,6 +51,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() strokeColor;
   @Input() scaleType;
   @Input() visibleValue;
+  @Input() activeEntries: any[];
 
   @Output() clickHandler = new EventEmitter();
 
@@ -68,13 +71,9 @@ export class CircleSeriesComponent implements OnChanges {
     const seriesName = this.data.name;
 
     return this.data.series.map((d, i) => {
-      let value = d.value;
-      let label = d.name;
-
-      let tooltipLabel = label;
-      if (tooltipLabel.constructor.name === 'Date') {
-        tooltipLabel = tooltipLabel.toLocaleDateString();
-      }
+      const value = d.value;
+      const label = d.name;
+      const tooltipLabel = formatLabel(label);
 
       if (value) {
         let cx;
@@ -86,9 +85,9 @@ export class CircleSeriesComponent implements OnChanges {
           cx = this.xScale(label);
         }
 
-        let cy = this.yScale(this.type === 'standard' ? value : d.d1);
-        let radius = 5;
-        let height = this.yScale.range()[0] - cy;
+        const cy = this.yScale(this.type === 'standard' ? value : d.d1);
+        const radius = 5;
+        const height = this.yScale.range()[0] - cy;
 
         let opacity = 0;
         if (label && this.visibleValue && label.toString() === this.visibleValue.toString()) {
@@ -124,4 +123,14 @@ export class CircleSeriesComponent implements OnChanges {
       value: value
     });
   }
+
+  isActive(entry): boolean {
+    if(!this.activeEntries) return false;
+    return this.activeEntries.indexOf(entry) > -1;
+  }
+
+  isVisible(circle): boolean {
+    return circle.opacity || this.isActive(circle.seriesName);
+  }
+
 }

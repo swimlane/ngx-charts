@@ -28,6 +28,8 @@ import { id } from "../utils/id";
       [legend]="legend"
       [view]="[width, height]"
       (legendLabelClick)="onClick({series: $event.name})"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       [colors]="colors"
       [legendData]="seriesDomain">
       <svg:defs>
@@ -87,6 +89,7 @@ import { id } from "../utils/id";
               [yScale]="yScale"
               [color]="colors(series.name)"
               [strokeColor]="colors(series.name)"
+              [activeEntries]="activeEntries"
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
@@ -140,8 +143,11 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
   @Input() gradient;
   @Input() showGridLines: boolean = true;
   @Input() curve = d3.shape.curveLinear;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   dims: ViewDimensions;
   scaleType: string;
@@ -186,7 +192,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -284,12 +290,14 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
     });
   }
 
-  updateTimeline() {
+  updateTimeline(): void {
     if (this.timeline) {
       this.timelineWidth = this.width;
+
       if (this.legend) {
         this.timelineWidth = this.width * 10.0 / 12.0;
       }
+
       this.timelineWidth -= (this.margin[3] + this.margin[1]);
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
@@ -298,8 +306,9 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
     }
   }
 
-  getXDomain() {
+  getXDomain(): any[] {
     let values = [];
+
     for (let results of this.results) {
       for (let d of results.series) {
         if (!values.includes(d.name)) {
@@ -310,6 +319,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
 
     this.scaleType = this.getScaleType(values);
     let domain = [];
+
     if (this.scaleType === 'time') {
       values = values.map(v => moment(v).toDate());
       let min = Math.min(...values);
@@ -323,20 +333,23 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
     } else {
       domain = values;
     }
+
     this.xSet = values;
+
     return domain;
   }
 
-  getYDomain() {
-    return [0, 100];
+  getYDomain(): any[] {
+    return [ 0, 100 ];
   }
 
-  getSeriesDomain() {
+  getSeriesDomain(): any[] {
     return this.results.map(d => d.name);
   }
 
   getXScale(domain, width) {
     let scale;
+
     if (this.scaleType === 'time') {
       scale = d3.scaleTime()
         .range([0, width])
@@ -361,9 +374,10 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
       .domain(domain);
   }
 
-  getScaleType(values) {
+  getScaleType(values): string {
     let date = true;
     let number = true;
+
     for (let value of values) {
       if (!this.isDate(value)) {
         date = false;
@@ -376,13 +390,15 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
     if (date) {
       return 'time';
     }
+
     if (number) {
       return 'linear';
     }
+
     return 'ordinal';
   }
 
-  isDate(value) {
+  isDate(value): boolean {
     if (value instanceof Date) {
       return true;
     }
@@ -390,43 +406,60 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
     return false;
   }
 
-  updateDomain(domain) {
+  updateDomain(domain): void {
     this.filteredDomain = domain;
     this.xDomain = this.filteredDomain;
     this.xScale = this.getXScale(this.xDomain, this.dims.width);
   }
 
-  updateHoveredVertical(item) {
+  updateHoveredVertical(item): void {
     this.hoveredVertical = item.value;
   }
 
   @HostListener('mouseleave')
-  hideCircles() {
+  hideCircles(): void {
     this.hoveredVertical = null;
   }
 
-  onClick(data, series) {
+  onClick(data, series): void {
     if (series) {
       data.series = series.name;
     }
+
     this.clickHandler.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.name;
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }
+
+  onActivate(event): void {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event): void {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+
 }
