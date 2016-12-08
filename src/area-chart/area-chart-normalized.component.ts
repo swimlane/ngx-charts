@@ -67,6 +67,7 @@ import { id } from "../utils/id";
               [color]="colors(series.name)"
               [data]="series"
               [scaleType]="scaleType"
+              [activeEntries]="activeEntries"
               [gradient]="gradient"
               normalized="true"
               [curve]="curve"

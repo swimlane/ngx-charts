@@ -94,8 +94,9 @@ export class Timeline implements OnChanges {
     });
   }
 
-  getXDomain() {
+  getXDomain(): any[] {
     let values = [];
+
     for (let results of this.results) {
       for (let d of results.series){
         if (!values.includes(d.name)) {
@@ -118,11 +119,13 @@ export class Timeline implements OnChanges {
     } else {
       domain = values;
     }
+
     return domain;
   }
 
   getXScale() {
     let scale;
+
     if (this.scaleType === 'time') {
       scale = d3.scaleTime()
         .range([0, this.dims.width])
@@ -141,20 +144,19 @@ export class Timeline implements OnChanges {
     return scale;
   }
 
-  addBrush() {
-    if (this.brush) {
-      return;
-    }
+  addBrush(): void {
+    if (this.brush) return;
 
-    let height = this.height;
-    let width = this.view[0];
+    const height = this.height;
+    const width = this.view[0];
 
     this.brush = d3.brushX()
       .extent([[0, 0], [width, height]])
       .on("brush end", () => {
         this.zone.run(() => {
-          let selection = d3.selection.event.selection || this.xScale.range();
-          let newDomain = selection.map(this.xScale.invert);
+          const selection = d3.selection.event.selection || this.xScale.range();
+          const newDomain = selection.map(this.xScale.invert);
+
           this.onDomainChange.emit(newDomain);
           this.cd.markForCheck();
         });
@@ -165,13 +167,11 @@ export class Timeline implements OnChanges {
       .call(this.brush);
   }
 
-  updateBrush() {
-    if (!this.brush) {
-      return;
-    }
+  updateBrush(): void {
+    if (!this.brush) return;
 
-    let height = this.height;
-    let width = this.view[0];
+    const height = this.height;
+    const width = this.view[0];
 
     this.zone.run(() => {
       this.brush.extent([[0, 0], [width, height]]);
@@ -189,13 +189,14 @@ export class Timeline implements OnChanges {
     });
   }
 
-  getDims() {
+  getDims(): any {
     let width = this.view[0];
 
     let dims = {
       width: width,
       height: this.height
     };
+
     return dims;
   }
 

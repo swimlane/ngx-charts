@@ -14,12 +14,15 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   selector: 'g[areaSeries]',
   template: `
     <svg:g area
+      class="area-series"
       [data]="data"
       [path]="path"
       [fill]="color"
       [startingPath]="startingPath"
       [opacity]="opacity"
       [gradient]="gradient"
+      [class.active]="isActive(data)"
+      [class.inactive]="isInactive(data)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -31,10 +34,11 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() yScale;
   @Input() color;
   @Input() scaleType;
-  @Input() stacked = false;
-  @Input() normalized = false;
+  @Input() stacked: boolean = false;
+  @Input() normalized: boolean = false;
   @Input() gradient;
   @Input() curve;
+  @Input() activeEntries: any[];
 
   @Output() clickHandler = new EventEmitter();
 
@@ -94,4 +98,16 @@ export class AreaSeriesComponent implements OnChanges {
     this.path = area(data);
     this.startingPath = startingArea(data);
   }
+
+  isActive(entry): boolean {
+    if(!this.activeEntries) return false;
+    return this.activeEntries.indexOf(entry.name) > -1;
+  }
+
+  isInactive(entry): boolean {
+    return this.activeEntries && 
+      this.activeEntries.length &&
+      this.activeEntries.indexOf(entry.name) === -1;
+  }
+  
 }

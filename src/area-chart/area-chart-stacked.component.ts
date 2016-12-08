@@ -67,6 +67,7 @@ import d3 from '../d3';
               [data]="series"
               [scaleType]="scaleType"
               [gradient]="gradient"
+              [activeEntries]="activeEntries"
               stacked="true"
               [curve]="curve"
             />

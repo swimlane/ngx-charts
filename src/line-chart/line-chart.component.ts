@@ -65,6 +65,7 @@ import * as moment from 'moment';
               [yScale]="yScale"
               [color]="colors(series.name)"
               [data]="series"
+              [activeEntries]="activeEntries"
               [scaleType]="scaleType"
               [curve]="curve"
             />

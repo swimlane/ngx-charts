@@ -13,9 +13,12 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   selector: 'g[lineSeries]',
   template: `
     <svg:g line
+      class="line-series"
       [data]="data"
       [path]="path"
       [stroke]="color"
+      [class.active]="isActive(data)"
+      [class.inactive]="isInactive(data)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,6 +31,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() color;
   @Input() scaleType;
   @Input() curve: string;
+  @Input() activeEntries: any[];
 
   path: string;
 
@@ -62,6 +66,17 @@ export class LineSeriesComponent implements OnChanges {
     }
 
     this.path = line(data) || '';
+  }
+
+  isActive(entry): boolean {
+    if(!this.activeEntries) return false;
+    return this.activeEntries.indexOf(entry.name) > -1;
+  }
+
+  isInactive(entry): boolean {
+    return this.activeEntries && 
+      this.activeEntries.length &&
+      this.activeEntries.indexOf(entry.name) === -1;
   }
   
 }

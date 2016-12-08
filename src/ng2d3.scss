@@ -15,10 +15,19 @@
     &.active,
     &:hover {
       opacity: 0.8;
+      transition: opacity 100ms ease-in-out;
     }
 
     &:focus {
       outline: none;
+    }
+  }
+
+  .line-series,
+  .area-series {
+    &.inactive {
+      transition: opacity 100ms ease-in-out;
+      opacity: .4
     }
   }
 
@@ -109,7 +118,6 @@
     .selection {
       fill: rgba(0, 0, 0, 0.1);
       stroke-width: 1px;
-      stroke-dasharray: 10,5;
       stroke: #888888;
     }
 

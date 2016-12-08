@@ -65,6 +65,7 @@ import d3 from '../d3';
               [yScale]="yScale"
               [color]="colors(series.name)"
               [data]="series"
+              [activeEntries]="activeEntries"
               [scaleType]="scaleType"
               [gradient]="gradient"
               [curve]="curve"
