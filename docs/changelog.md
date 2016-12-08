@@ -35,7 +35,7 @@
 - Converted date objets to formatted strings in some charts
 - Removed rounded corners on thin bars
 - Improved on destroy hooks in tooltips
-- Merged `legendLabelClick` output into `clickHandler` output
+- Merged `legendLabelClick` output into `select` output
 - Fixed legend click data format
 
 ## 1.7.3

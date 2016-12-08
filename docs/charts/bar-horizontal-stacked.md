@@ -18,7 +18,7 @@
 * gradient
 
 # Outputs
-* clickHandler
+* select
 
 # Data Format
 The data format is multi series:

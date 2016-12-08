@@ -14,4 +14,4 @@
 * units
 
 # Outputs
-* clickHandler
+* select
