@@ -22,6 +22,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
     <chart
       [colors]="colors"
       (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
       [legend]="legend"
       [view]="[width, height]"
       [legendData]="domain">
@@ -30,6 +32,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [colors]="colors"
           [showLabels]="labels"
           [series]="data"
+          [activeEntries]="activeEntries"
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
@@ -53,8 +56,11 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
   @Input() explodeSlices = false;
   @Input() doughnut = false;
   @Input() gradient: boolean;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   translation: string;
   outerRadius: number;
@@ -72,7 +78,7 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
     this.bindResizeEvents(this.view);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unbindEvents();
   }
 
@@ -80,7 +86,7 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
     this.update();
   }
 
-  update() {
+  update(): void {
     super.update();
 
     this.zone.run(() => {
@@ -122,8 +128,9 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
     });
   }
 
-  getDomain() {
+  getDomain(): any[] {
     let items = [];
+
     this.results.map(d => {
       let label = d.name;
       if (label.constructor.name === 'Date') {
@@ -140,12 +147,27 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
     return items;
   }
 
-  onClick(data) {
+  onClick(data): void {
     this.clickHandler.emit(data);
   }
 
-  setColors() {
+  setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+  }
+
+  onActivate(event): void {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event): void {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
   }
 
 }

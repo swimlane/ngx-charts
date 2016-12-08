@@ -45,6 +45,7 @@ export interface LegendItem {
               [showLabels]="labels"
               [series]="results"
               [innerRadius]="innerRadius"
+              [activeEntries]="activeEntries"
               [outerRadius]="outerRadius"
               [gradient]="gradient"
               (clickHandler)="onClick($event)">
@@ -68,7 +69,9 @@ export interface LegendItem {
               <div
                 *ngFor="let legendItem of legendItems"
                 tabindex="-1"
-                (click)="onClick({name: legendItem.label, value: legendItem.value})"
+                (mouseenter)="onActivate(legendItem.label)"
+                (mouseleave)="onDeactivate(legendItem.label)"
+                (click)="onClick({ name: legendItem.label, value: legendItem.value })"
                 class="legend-item">
                 <div
                   class="item-color"
@@ -103,8 +106,11 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
   @Input() scheme;
   @Input() customColors;
   @Input() gradient: boolean;
+  @Input() activeEntries: any[] = [];
 
   @Output() clickHandler = new EventEmitter();
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   data: any;
   dims: ViewDimensions;
@@ -199,6 +205,21 @@ export class AdvancedPieChartComponent extends BaseChartComponent implements OnC
 
   setColors(): void {
     this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+  }
+
+  onActivate(event): void {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event): void {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
   }
 
 }

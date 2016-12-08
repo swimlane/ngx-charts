@@ -32,7 +32,7 @@ import { id } from "../utils/id";
       <svg:path
         [attr.d]="path"
         class="arc"
-        [style.cursor]="'pointer'"
+        [class.active]="isActive"
         [attr.fill]="gradient ? gradientFill : fill"
         (click)="onClick()"
         [style.pointer-events]="pointerEvents ? 'auto' : 'none'"
@@ -56,6 +56,7 @@ export class PieArcComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() animate: boolean = true;
   @Input() pointerEvents: boolean = true;
+  @Input() isActive: boolean = false;
 
   @Output() clickHandler = new EventEmitter();
 

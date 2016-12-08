@@ -8,6 +8,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
+import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[pieSeries]',
@@ -34,6 +35,7 @@ import d3 from '../d3';
         [data]="arc.data"
         [max]="max"
         [explodeSlices]="explodeSlices"
+        [isActive]="isActive(arc)"
         (clickHandler)="onClick($event)"
         [gradient]="gradient" 
         swui-tooltip
@@ -55,6 +57,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() explodeSlices;
   @Input() showLabels;
   @Input() gradient: boolean;
+  @Input() activeEntries: any[];
 
   @Output() clickHandler = new EventEmitter();
 
@@ -70,7 +73,7 @@ export class PieSeriesComponent implements OnChanges {
       .value((d) => d.value)
       .sort(null);
 
-    let arcData = pie(this.series);
+    const arcData = pie(this.series);
 
     this.max = d3.max(arcData, (d) => {
       return d.value;
@@ -84,20 +87,20 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   outerArc(): any {
-    let factor = 1.5;
+    const factor = 1.5;
+
     return d3.arc()
       .innerRadius(this.outerRadius * factor)
       .outerRadius(this.outerRadius * factor);
   }
 
   calculateLabelPositions(pieData): any {
-    let minDistance = 10;
-    let chart = this;
+    const minDistance = 10;
     let labelPositions = pieData;
 
-    labelPositions.forEach(function(d) {
-      d.pos = chart.outerArc().centroid(d);
-      d.pos[0] = chart.outerRadius * (chart.midAngle(d) < Math.PI ? 1 : -1);
+    labelPositions.forEach((d) => {
+      d.pos = this.outerArc().centroid(d);
+      d.pos[0] = this.outerRadius * (this.midAngle(d) < Math.PI ? 1 : -1);
     });
 
     for (let i = 0; i < labelPositions.length - 1; i++) {
@@ -125,20 +128,12 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   label(arc): string {
-    let label = arc.data.name;
-
-    if (label.constructor.name === 'Date') {
-      label = label.toLocaleDateString();
-    } else {
-      label = label.toLocaleString();
-    }
-
-    return label;
+    return formatLabel(arc.data.name);
   }
 
   tooltipText(arc) {
     const label = this.label(arc);
-    const val = arc.data.value.toLocaleString();
+    const val = formatLabel(arc.data.value);
 
     return `
       <span class="tooltip-label">${label}</span>
@@ -156,6 +151,13 @@ export class PieSeriesComponent implements OnChanges {
 
   onClick(data): void {
     this.clickHandler.emit(data);
+  }
+
+  isActive(entry): boolean {
+    if(!this.activeEntries) return false;
+    
+    const label = this.label(entry);
+    return this.activeEntries.indexOf(label) > -1;
   }
 
 }
