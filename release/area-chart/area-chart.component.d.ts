@@ -22,7 +22,10 @@ export declare class AreaChartComponent extends BaseChartComponent implements On
     gradient: boolean;
     showGridLines: boolean;
     curve: any;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     dims: ViewDimensions;
     xSet: any;
     xDomain: any;
@@ -55,8 +58,8 @@ export declare class AreaChartComponent extends BaseChartComponent implements On
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];
-    getYDomain(): number[];
-    getSeriesDomain(): any;
+    getYDomain(): any[];
+    getSeriesDomain(): any[];
     getXScale(domain: any, width: any): any;
     getYScale(domain: any, height: any): any;
     getScaleType(values: any): string;
@@ -65,7 +68,7 @@ export declare class AreaChartComponent extends BaseChartComponent implements On
     updateHoveredVertical(item: any): void;
     hideCircles(): void;
     onClick(data: any, series: any): void;
-    trackBy(index: any, item: any): any;
+    trackBy(index: any, item: any): string;
     setColors(): void;
     updateYAxisWidth({width}: {
         width: any;
@@ -73,4 +76,6 @@ export declare class AreaChartComponent extends BaseChartComponent implements On
     updateXAxisHeight({height}: {
         height: any;
     }): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }

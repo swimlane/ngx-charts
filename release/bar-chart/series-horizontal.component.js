@@ -1,5 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
+var label_helper_1 = require('../common/label.helper');
 var SeriesHorizontal = (function () {
     function SeriesHorizontal() {
         this.type = 'standard';
@@ -18,17 +19,15 @@ var SeriesHorizontal = (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = d.name;
-            var tooltipLabel = label;
-            if (tooltipLabel.constructor.name === 'Date') {
-                tooltipLabel = tooltipLabel.toLocaleDateString();
-            }
+            var formattedLabel = label_helper_1.formatLabel(label);
             var roundEdges = _this.type === 'standard';
             var bar = {
                 value: value,
                 label: label,
                 color: _this.colors(label),
                 roundEdges: roundEdges,
-                data: d
+                data: d,
+                formattedLabel: formattedLabel
             };
             bar.height = _this.yScale.bandwidth();
             if (_this.type === 'standard') {
@@ -66,9 +65,14 @@ var SeriesHorizontal = (function () {
                 bar.y = 0;
                 value = (offset1 - offset0).toFixed(2) + '%';
             }
-            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + formattedLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
+    };
+    SeriesHorizontal.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        return this.activeEntries.indexOf(entry) > -1;
     };
     SeriesHorizontal.prototype.trackBy = function (index, bar) {
         return bar.label;
@@ -79,7 +83,7 @@ var SeriesHorizontal = (function () {
     SeriesHorizontal.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[seriesHorizontal]',
-                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    template: "\n    <svg:g bar \n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -104,6 +108,7 @@ var SeriesHorizontal = (function () {
         'yScale': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
     return SeriesHorizontal;

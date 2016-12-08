@@ -43,6 +43,7 @@ export class Wrapper_PieSeriesComponent {
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
+  /*private*/ _expr_8:any;
   subscription0:any;
   constructor() {
     this._changed = false;
@@ -56,6 +57,7 @@ export class Wrapper_PieSeriesComponent {
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
+    this._expr_8 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -124,6 +126,14 @@ export class Wrapper_PieSeriesComponent {
       this.context.gradient = currValue;
       this._changes['gradient'] = new import1.SimpleChange(this._expr_7,currValue);
       this._expr_7 = currValue;
+    }
+  }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_8,currValue);
+      this._expr_8 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -314,6 +324,8 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
     this._PieArcComponent_4_6.check_explodeSlices(currVal_4_1_8,throwOnChange,false);
     const currVal_4_1_9:any = this.parentView.context.gradient;
     this._PieArcComponent_4_6.check_gradient(currVal_4_1_9,throwOnChange,false);
+    const currVal_4_1_10:any = this.parentView.context.isActive(this.context.$implicit);
+    this._PieArcComponent_4_6.check_isActive(currVal_4_1_10,throwOnChange,false);
     if (this._PieArcComponent_4_6.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
     this._vc_2.detectChangesInNestedViews(throwOnChange);
     this._vc_4.detectChangesInNestedViews(throwOnChange);

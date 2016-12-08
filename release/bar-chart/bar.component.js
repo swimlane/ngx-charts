@@ -7,6 +7,7 @@ var BarComponent = (function () {
         this.roundEdges = true;
         this.gradient = false;
         this.offset = 0;
+        this.isActive = false;
         this.clickHandler = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
@@ -134,13 +135,10 @@ var BarComponent = (function () {
         retval += "z";
         return retval;
     };
-    BarComponent.prototype.click = function () {
-        this.clickHandler.emit(this.data);
-    };
     BarComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[bar]',
-                    template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.cursor]=\"'pointer'\"\n      (click)=\"click()\"\n    />\n  ",
+                    template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      (click)=\"clickHandler.emit(data)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -159,6 +157,7 @@ var BarComponent = (function () {
         'roundEdges': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'offset': [{ type: core_1.Input },],
+        'isActive': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
     return BarComponent;

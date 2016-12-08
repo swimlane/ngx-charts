@@ -36,8 +36,8 @@ var HeatCellSeriesComponent = (function () {
         return cells;
     };
     HeatCellSeriesComponent.prototype.getTooltipText = function (_a) {
-        var label = _a.label, data = _a.data;
-        return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + data.toLocaleString() + "</span>\n    ";
+        var label = _a.label, data = _a.data, series = _a.series;
+        return "\n      <span class=\"tooltip-label\">" + series + " \u2022 " + label + "</span>\n      <span class=\"tooltip-val\">" + data.toLocaleString() + "</span>\n    ";
     };
     HeatCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.tooltipText;

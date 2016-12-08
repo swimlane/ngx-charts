@@ -18,7 +18,10 @@ export declare class BarVerticalComponent extends BaseChartComponent implements 
     yAxisLabel: any;
     gradient: boolean;
     showGridLines: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     dims: ViewDimensions;
     xScale: any;
     yScale: any;
@@ -36,9 +39,8 @@ export declare class BarVerticalComponent extends BaseChartComponent implements 
     update(): void;
     getXScale(): any;
     getYScale(): any;
-    getXDomain(): any;
+    getXDomain(): any[];
     getYDomain(): number[];
-    xAxisTickFormatting(): any;
     onClick(data: any): void;
     setColors(): void;
     updateYAxisWidth({width}: {
@@ -47,4 +49,6 @@ export declare class BarVerticalComponent extends BaseChartComponent implements 
     updateXAxisHeight({height}: {
         height: any;
     }): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }

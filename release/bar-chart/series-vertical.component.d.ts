@@ -8,12 +8,14 @@ export declare class SeriesVerticalComponent implements OnChanges {
     colors: any;
     scaleType: string;
     gradient: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
     bars: any;
     x: any;
     y: any;
     ngOnChanges(changes: any): void;
     update(): void;
-    trackBy(index: any, bar: any): string;
+    isActive(entry: any): boolean;
     onClick(data: any): void;
+    trackBy(index: any, bar: any): string;
 }

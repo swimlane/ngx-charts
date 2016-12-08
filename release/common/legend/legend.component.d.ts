@@ -1,4 +1,4 @@
-import { OnChanges, EventEmitter, SimpleChanges } from '@angular/core';
+import { EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 export declare class LegendComponent implements OnChanges {
     data: any;
     title: any;
@@ -6,9 +6,10 @@ export declare class LegendComponent implements OnChanges {
     height: any;
     width: any;
     labelClick: EventEmitter<any>;
-    legendItems: any;
+    labelActivate: EventEmitter<any>;
+    labelDeactivate: EventEmitter<any>;
+    legendEntries: any[];
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
-    getLegendItems(): any[];
-    clickLegendItem(legendItem: any): void;
+    getLegendEntries(): any[];
 }

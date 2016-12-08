@@ -198,7 +198,7 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,false,false);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_5));
     this._CardSeriesComponent_5_3.subscribe(this,this.eventHandler(this.handleEvent_5),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [

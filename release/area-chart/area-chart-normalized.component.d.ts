@@ -20,7 +20,10 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent imp
     gradient: any;
     showGridLines: boolean;
     curve: any;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     dims: ViewDimensions;
     scaleType: string;
     xDomain: any[];
@@ -53,8 +56,8 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent imp
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];
-    getYDomain(): number[];
-    getSeriesDomain(): any;
+    getYDomain(): any[];
+    getSeriesDomain(): any[];
     getXScale(domain: any, width: any): any;
     getYScale(domain: any, height: any): any;
     getScaleType(values: any): string;
@@ -63,7 +66,7 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent imp
     updateHoveredVertical(item: any): void;
     hideCircles(): void;
     onClick(data: any, series: any): void;
-    trackBy(index: any, item: any): any;
+    trackBy(index: any, item: any): string;
     setColors(): void;
     updateYAxisWidth({width}: {
         width: any;
@@ -71,4 +74,6 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent imp
     updateXAxisHeight({height}: {
         height: any;
     }): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }

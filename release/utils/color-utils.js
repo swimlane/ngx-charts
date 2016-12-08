@@ -30,7 +30,7 @@ function invertColor(hex) {
     var _a = hexToRgb(hex), r = _a.r, g = _a.g, b = _a.b;
     var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
     var darken = (yiq >= 128);
-    var depth = darken ? -.7 : .7;
+    var depth = darken ? -.8 : .8;
     return shadeRGBColor({ r: r, g: g, b: b }, depth);
 }
 exports.invertColor = invertColor;

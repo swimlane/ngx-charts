@@ -41,6 +41,7 @@ export class Wrapper_PieArcComponent {
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
   subscription0:any;
   constructor(p0:any) {
     this._changed = false;
@@ -59,6 +60,7 @@ export class Wrapper_PieArcComponent {
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
+    this._expr_13 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -167,6 +169,14 @@ export class Wrapper_PieArcComponent {
       this.context.pointerEvents = currValue;
       this._changes['pointerEvents'] = new import1.SimpleChange(this._expr_12,currValue);
       this._expr_12 = currValue;
+    }
+  }
+  check_isActive(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
+      this._changed = true;
+      this.context.isActive = currValue;
+      this._changes['isActive'] = new import1.SimpleChange(this._expr_13,currValue);
+      this._expr_13 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -289,9 +299,9 @@ export class View_PieArcComponent0 extends import2.AppView<import0.PieArcCompone
       this.renderer.setElementAttribute(this._el_5,'d',((currVal_11 == null)? (null as any): currVal_11.toString()));
       this._expr_11 = currVal_11;
     }
-    const currVal_12:any = 'pointer';
+    const currVal_12:any = this.context.isActive;
     if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setElementStyle(this._el_5,'cursor',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_12).toString()));
+      this.renderer.setElementClass(this._el_5,'active',currVal_12);
       this._expr_12 = currVal_12;
     }
     const currVal_13:any = (this.context.gradient? this.context.gradientFill: this.context.fill);

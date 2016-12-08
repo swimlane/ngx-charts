@@ -21,7 +21,10 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     gradient: boolean;
     showGridLines: boolean;
     curve: any;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     dims: ViewDimensions;
     xSet: any;
     xDomain: any;
@@ -73,4 +76,6 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     updateXAxisHeight({height}: {
         height: any;
     }): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }

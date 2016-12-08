@@ -1,7 +1,14 @@
 # Changelog
 
-## Master
+## 1.9.0
 - Enhancement: Hover of legend doesn't highlight bar (#73)
+- API: Added `activate` and `deactivate` events to chart for hovers
+- Bug: Fix number card positioning due to count up
+- Bug: Fix decimal places on advanced pie legend
+- Chore: Fix rx mapping (#123)
+- Polish: Tweak label color bg
+- Polish: Tweak circle / heat map tooltip titles
+- Perf: Improve perf of circles using ngIf
 
 ## 1.8.2
 - Bug: Fix for number cards not updating to last value

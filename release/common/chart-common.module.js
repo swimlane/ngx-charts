@@ -14,13 +14,14 @@ var timeline_component_1 = require("./timeline.component");
 var common_1 = require("@angular/common");
 var area_component_1 = require("./area.component");
 var area_tooltip_component_1 = require("./area-tooltip.component");
-var count_directive_1 = require('./count.directive');
+var count_1 = require('./count');
 var COMPONENTS = [
     area_component_1.AreaComponent,
-    count_directive_1.CountUpDirective,
+    count_1.CountUpDirective,
     area_tooltip_component_1.AreaTooltip,
     chart_component_1.ChartComponent,
     legend_1.LegendComponent,
+    legend_1.LegendEntryComponent,
     legend_1.ScaleLegendComponent,
     circle_component_1.CircleComponent,
     circle_series_component_1.CircleSeriesComponent,

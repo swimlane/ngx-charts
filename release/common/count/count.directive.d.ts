@@ -12,10 +12,10 @@ import { EventEmitter, ChangeDetectorRef, NgZone, OnDestroy, ElementRef } from '
 export declare class CountUpDirective implements OnDestroy {
     private cd;
     private zone;
-    countDecimals: number;
     countDuration: number;
     countPrefix: string;
     countSuffix: string;
+    countDecimals: number;
     countTo: any;
     countFrom: any;
     countChange: EventEmitter<{}>;
@@ -23,11 +23,10 @@ export declare class CountUpDirective implements OnDestroy {
     nativeElement: any;
     private value;
     private animationReq;
-    private startTime;
+    private _countDecimals;
     private _countTo;
     private _countFrom;
     constructor(cd: ChangeDetectorRef, zone: NgZone, element: ElementRef);
     ngOnDestroy(): void;
     start(): void;
-    count(startVal: any, endVal: any, dec: any, duration: any, countDown: any, timestamp: any): void;
 }

@@ -72,9 +72,15 @@
 
 .ng2d3 {
   float: left; }
-  .ng2d3 .bar:hover,
+  .ng2d3 .bar,
+  .ng2d3 .arc {
+    cursor: pointer; }
+  .ng2d3 .bar.active, .ng2d3 .bar:hover,
+  .ng2d3 .cell.active,
   .ng2d3 .cell:hover,
+  .ng2d3 .arc.active,
   .ng2d3 .arc:hover,
+  .ng2d3 .card.active,
   .ng2d3 .card:hover {
     opacity: 0.8; }
   .ng2d3 .bar:focus,

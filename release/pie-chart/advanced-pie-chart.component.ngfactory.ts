@@ -21,8 +21,8 @@ import * as import12 from '../../../src/utils/injection.service';
 import * as import13 from '../common/charts/chart.component.ngfactory';
 import * as import14 from '../../../src/pie-chart/pie-series.component';
 import * as import15 from './pie-series.component.ngfactory';
-import * as import16 from '../../../src/common/count.directive';
-import * as import17 from '../common/count.directive.ngfactory';
+import * as import16 from '../../../src/common/count/count.directive';
+import * as import17 from '../common/count/count.directive.ngfactory';
 import * as import18 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import19 from '@angular/core/src/application_ref';
 import * as import20 from '@angular/core/src/linker/component_factory_resolver';
@@ -41,7 +41,10 @@ export class Wrapper_AdvancedPieChartComponent {
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
+  /*private*/ _expr_6:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -52,12 +55,15 @@ export class Wrapper_AdvancedPieChartComponent {
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
+    this._expr_6 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -107,6 +113,14 @@ export class Wrapper_AdvancedPieChartComponent {
       this._expr_5 = currValue;
     }
   }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_6,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_6,currValue);
+      this._expr_6 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -122,9 +136,11 @@ export class Wrapper_AdvancedPieChartComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
+    if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
 }
 var renderType_AdvancedPieChartComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -291,7 +307,7 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
     this._text_34 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_35 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_5));
-    this._ChartComponent_5_6.subscribe(this,this.eventHandler(this.handleEvent_5),true);
+    this._ChartComponent_5_6.subscribe(this,this.eventHandler(this.handleEvent_5),true,false,false);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
     this._PieSeriesComponent_9_3.subscribe(this,this.eventHandler(this.handleEvent_9),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -366,6 +382,8 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
     this._PieSeriesComponent_9_3.check_showLabels(currVal_9_0_4,throwOnChange,false);
     const currVal_9_0_5:any = this.context.gradient;
     this._PieSeriesComponent_9_3.check_gradient(currVal_9_0_5,throwOnChange,false);
+    const currVal_9_0_6:any = this.context.activeEntries;
+    this._PieSeriesComponent_9_3.check_activeEntries(currVal_9_0_6,throwOnChange,false);
     if (this._PieSeriesComponent_9_3.ngDoCheck(this,this._el_9,throwOnChange)) { this.compView_9.markAsCheckOnce(); }
     const currVal_19_0_0:any = this.context.roundedTotal;
     this._CountUpDirective_19_3.check_countTo(currVal_19_0_0,throwOnChange,false);
@@ -506,7 +524,7 @@ class View_AdvancedPieChartComponent1 extends import2.AppView<any> {
     this._text_12 = this.renderer.createText((null as any),'\n                ',(null as any));
     this.compView_11.create(this._CountUpDirective_11_3.context);
     this._text_13 = this.renderer.createText(this._el_0,'\n              ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_0));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'mouseenter',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -565,13 +583,21 @@ class View_AdvancedPieChartComponent1 extends import2.AppView<any> {
   handleEvent_0(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
+    if ((eventName == 'mouseenter')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.onActivate(this.context.$implicit.label)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'mouseleave')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.onDeactivate(this.context.$implicit.label)) !== false);
+      result = (pd_sub_1 && result);
+    }
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.onClick({
+      const pd_sub_2:any = ((<any>this.parentView.context.onClick({
         name: this.context.$implicit.label,
         value: this.context.$implicit.value
       }
       )) !== false);
-      result = (pd_sub_0 && result);
+      result = (pd_sub_2 && result);
     }
     return result;
   }

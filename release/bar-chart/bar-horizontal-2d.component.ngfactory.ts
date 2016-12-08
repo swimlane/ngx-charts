@@ -59,7 +59,10 @@ export class Wrapper_BarHorizontal2DComponent {
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -77,12 +80,15 @@ export class Wrapper_BarHorizontal2DComponent {
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
+    this._expr_13 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -188,6 +194,14 @@ export class Wrapper_BarHorizontal2DComponent {
       this._expr_12 = currValue;
     }
   }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_13,currValue);
+      this._expr_13 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -203,9 +217,11 @@ export class Wrapper_BarHorizontal2DComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
+    if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
 }
 var renderType_BarHorizontal2DComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -373,8 +389,8 @@ export class View_BarHorizontal2DComponent0 extends import2.AppView<import0.BarH
     this._text_14 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_15 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -480,6 +496,14 @@ export class View_BarHorizontal2DComponent0 extends import2.AppView<import0.BarH
     if ((eventName == 'legendLabelClick')) {
       const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'legendLabelActivate')) {
+      const pd_sub_1:any = ((<any>this.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'legendLabelDeactivate')) {
+      const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }
@@ -655,6 +679,8 @@ class View_BarHorizontal2DComponent3 extends import2.AppView<any> {
     this._SeriesHorizontal_2_3.check_colors(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.context.gradient;
     this._SeriesHorizontal_2_3.check_gradient(currVal_2_0_5,throwOnChange,false);
+    const currVal_2_0_6:any = this.parentView.context.activeEntries;
+    this._SeriesHorizontal_2_3.check_activeEntries(currVal_2_0_6,throwOnChange,false);
     if (this._SeriesHorizontal_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     const currVal_7:any = this.parentView.context.groupTransform(this.context.$implicit);
     if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {

@@ -8,6 +8,8 @@ var ChartComponent = (function () {
         this.legend = false;
         this.legendTitle = 'Legend';
         this.legendLabelClick = new core_1.EventEmitter();
+        this.legendLabelActivate = new core_1.EventEmitter();
+        this.legendLabelDeactivate = new core_1.EventEmitter();
         this.injectionService.setRootViewContainer(vcr);
     }
     ChartComponent.prototype.ngOnChanges = function (changes) {
@@ -34,14 +36,11 @@ var ChartComponent = (function () {
             return 'legend';
         }
     };
-    ChartComponent.prototype.onLegendLabelClick = function (name) {
-        this.legendLabelClick.emit({ name: name });
-    };
     ChartComponent.decorators = [
         { type: core_1.Component, args: [{
                     providers: [injection_service_1.InjectionService],
                     selector: 'chart',
-                    template: "\n    <div [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\"\n        (labelClick)=\"onLegendLabelClick($event)\">\n      </legend>\n    </div>\n  ",
+                    template: "\n    <div \n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </legend>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -66,6 +65,8 @@ var ChartComponent = (function () {
         'legendTitle': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
         'legendLabelClick': [{ type: core_1.Output },],
+        'legendLabelActivate': [{ type: core_1.Output },],
+        'legendLabelDeactivate': [{ type: core_1.Output },],
     };
     return ChartComponent;
 }());

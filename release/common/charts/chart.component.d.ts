@@ -10,6 +10,8 @@ export declare class ChartComponent implements OnChanges {
     legendTitle: string;
     colors: any;
     legendLabelClick: EventEmitter<any>;
+    legendLabelActivate: EventEmitter<any>;
+    legendLabelDeactivate: EventEmitter<any>;
     chartWidth: any;
     title: any;
     legendWidth: any;
@@ -18,5 +20,4 @@ export declare class ChartComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getLegendType(): string;
-    onLegendLabelClick(name: any): void;
 }

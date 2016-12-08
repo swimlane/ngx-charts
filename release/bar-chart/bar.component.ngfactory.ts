@@ -18,9 +18,8 @@ import * as import9 from '@angular/core/src/linker/view_container';
 import * as import10 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import11 from '@angular/core/src/linker/template_ref';
 import * as import12 from '@angular/common/src/directives/ng_if';
-import * as import13 from '@angular/core/src/security';
-import * as import14 from '../../../src/common/svg-linear-gradient.component';
-import * as import15 from '../common/svg-linear-gradient.component.ngfactory';
+import * as import13 from '../../../src/common/svg-linear-gradient.component';
+import * as import14 from '../common/svg-linear-gradient.component.ngfactory';
 export class Wrapper_BarComponent {
   /*private*/ _eventHandler:Function;
   context:import0.BarComponent;
@@ -36,6 +35,7 @@ export class Wrapper_BarComponent {
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
   /*private*/ _expr_9:any;
+  /*private*/ _expr_10:any;
   subscription0:any;
   constructor(p0:any) {
     this._changed = false;
@@ -51,6 +51,7 @@ export class Wrapper_BarComponent {
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
+    this._expr_10 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -135,6 +136,14 @@ export class Wrapper_BarComponent {
       this.context.offset = currValue;
       this._changes['offset'] = new import1.SimpleChange(this._expr_9,currValue);
       this._expr_9 = currValue;
+    }
+  }
+  check_isActive(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_10,currValue))) {
+      this._changed = true;
+      this.context.isActive = currValue;
+      this._changes['isActive'] = new import1.SimpleChange(this._expr_10,currValue);
+      this._expr_10 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -244,19 +253,19 @@ export class View_BarComponent0 extends import2.AppView<import0.BarComponent> {
     this._NgIf_1_6.check_ngIf(currVal_1_0_0,throwOnChange,false);
     this._NgIf_1_6.ngDoCheck(this,this._anchor_1,throwOnChange);
     this._vc_1.detectChangesInNestedViews(throwOnChange);
-    const currVal_8:any = this.context.path;
+    const currVal_8:any = this.context.isActive;
     if (import3.checkBinding(throwOnChange,this._expr_8,currVal_8)) {
-      this.renderer.setElementAttribute(this._el_3,'d',((currVal_8 == null)? (null as any): currVal_8.toString()));
+      this.renderer.setElementClass(this._el_3,'active',currVal_8);
       this._expr_8 = currVal_8;
     }
-    const currVal_9:any = (this.context.gradient? this.context.gradientFill: this.context.fill);
+    const currVal_9:any = this.context.path;
     if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
-      this.renderer.setElementAttribute(this._el_3,'fill',((currVal_9 == null)? (null as any): currVal_9.toString()));
+      this.renderer.setElementAttribute(this._el_3,'d',((currVal_9 == null)? (null as any): currVal_9.toString()));
       this._expr_9 = currVal_9;
     }
-    const currVal_10:any = 'pointer';
+    const currVal_10:any = (this.context.gradient? this.context.gradientFill: this.context.fill);
     if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
-      this.renderer.setElementStyle(this._el_3,'cursor',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10).toString()));
+      this.renderer.setElementAttribute(this._el_3,'fill',((currVal_10 == null)? (null as any): currVal_10.toString()));
       this._expr_10 = currVal_10;
     }
   }
@@ -271,7 +280,7 @@ export class View_BarComponent0 extends import2.AppView<import0.BarComponent> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.click()) !== false);
+      const pd_sub_0:any = ((<any>this.context.clickHandler.emit(this.context.data)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;
@@ -281,8 +290,8 @@ class View_BarComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import14.SvgLinearGradientComponent>;
-  _SvgLinearGradientComponent_2_3:import15.Wrapper_SvgLinearGradientComponent;
+  compView_2:import2.AppView<import13.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_2_3:import14.Wrapper_SvgLinearGradientComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
     super(View_BarComponent1,renderType_BarComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
@@ -291,8 +300,8 @@ class View_BarComponent1 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'svgLinearGradient',''),(null as any));
-    this.compView_2 = new import15.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
-    this._SvgLinearGradientComponent_2_3 = new import15.Wrapper_SvgLinearGradientComponent();
+    this.compView_2 = new import14.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
+    this._SvgLinearGradientComponent_2_3 = new import14.Wrapper_SvgLinearGradientComponent();
     this.compView_2.create(this._SvgLinearGradientComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -305,7 +314,7 @@ class View_BarComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
+    if (((token === import13.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

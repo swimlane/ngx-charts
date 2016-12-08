@@ -19,6 +19,8 @@ import * as import10 from '@angular/core/src/linker/template_ref';
 import * as import11 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import12 from '@angular/common/src/directives/ng_for';
 import * as import13 from '@angular/core/src/security';
+import * as import14 from '../../../../src/common/legend/legend-entry.component';
+import * as import15 from './legend-entry.component.ngfactory';
 export class Wrapper_LegendComponent {
   /*private*/ _eventHandler:Function;
   context:import0.LegendComponent;
@@ -30,6 +32,8 @@ export class Wrapper_LegendComponent {
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor() {
     this._changed = false;
     this._changes = {};
@@ -44,6 +48,8 @@ export class Wrapper_LegendComponent {
   }
   ngOnDestroy():void {
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_data(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -100,9 +106,11 @@ export class Wrapper_LegendComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.labelClick.subscribe(_eventHandler.bind(view,'labelClick'))); }
+    if (emit1) { (this.subscription1 = this.context.labelActivate.subscribe(_eventHandler.bind(view,'labelActivate'))); }
+    if (emit2) { (this.subscription2 = this.context.labelDeactivate.subscribe(_eventHandler.bind(view,'labelDeactivate'))); }
   }
 }
 var renderType_LegendComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -229,8 +237,10 @@ export class View_LegendComponent0 extends import2.AppView<import0.LegendCompone
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_15_0_0:any = this.context.legendItems;
+    const currVal_15_0_0:any = this.context.legendEntries;
     this._NgFor_15_6.check_ngForOf(currVal_15_0_0,throwOnChange,false);
+    const currVal_15_0_1:any = ((this.context.entry == null)? (null as any): this.context.entry.formattedLabel);
+    this._NgFor_15_6.check_ngForTrackBy(currVal_15_0_1,throwOnChange,false);
     this._NgFor_15_6.ngDoCheck(this,this._anchor_15,throwOnChange);
     this._vc_15.detectChangesInNestedViews(throwOnChange);
     const currVal_23:any = this.context.width;
@@ -261,83 +271,69 @@ class View_LegendComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
+  compView_2:import2.AppView<import14.LegendEntryComponent>;
+  _LegendEntryComponent_2_3:import15.Wrapper_LegendEntryComponent;
   _text_3:any;
   _text_4:any;
-  _el_5:any;
-  _text_6:any;
-  _text_7:any;
-  /*private*/ _expr_8:any;
-  /*private*/ _expr_9:any;
-  /*private*/ _expr_10:any;
-  /*private*/ _expr_11:any;
-  /*private*/ _expr_12:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
     super(View_LegendComponent1,renderType_LegendComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_8 = import1.UNINITIALIZED;
-    this._expr_9 = import1.UNINITIALIZED;
-    this._expr_10 = import1.UNINITIALIZED;
-    this._expr_11 = import1.UNINITIALIZED;
-    this._expr_12 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'li',new import3.InlineArray2(2,'tabindex','-1'),(null as any));
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),'li',new import3.InlineArray2(2,'class','legend-label'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'span',new import3.InlineArray2(2,'class','legend-label-color'),(null as any));
-    this._text_3 = this.renderer.createText(this._el_2,'\n            ',(null as any));
-    this._text_4 = this.renderer.createText(this._el_0,'\n            ',(null as any));
-    this._el_5 = import3.createRenderElement(this.renderer,this._el_0,'span',new import3.InlineArray2(2,'class','legend-label-text'),(null as any));
-    this._text_6 = this.renderer.createText(this._el_5,'',(null as any));
-    this._text_7 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'legend-entry',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this.compView_2 = new import15.View_LegendEntryComponent0(this.viewUtils,this,2,this._el_2);
+    this._LegendEntryComponent_2_3 = new import15.Wrapper_LegendEntryComponent();
+    this._text_3 = this.renderer.createText((null as any),'\n            ',(null as any));
+    this.compView_2.create(this._LegendEntryComponent_2_3.context);
+    this._text_4 = this.renderer.createText(this._el_0,'\n          ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
+    this._LegendEntryComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true,true,true,false);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
       this._el_2,
       this._text_3,
-      this._text_4,
-      this._el_5,
-      this._text_6,
-      this._text_7
+      this._text_4
     ]
     ),[disposable_0]);
     return (null as any);
   }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import14.LegendEntryComponent) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._LegendEntryComponent_2_3.context; }
+    return notFoundResult;
+  }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_8:any = this.context.$implicit.className;
-    if (import3.checkBinding(throwOnChange,this._expr_8,currVal_8)) {
-      this.renderer.setElementProperty(this._el_0,'className',currVal_8);
-      this._expr_8 = currVal_8;
-    }
-    const currVal_9:any = this.context.$implicit.label;
-    if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
-      this.renderer.setElementProperty(this._el_2,'title',currVal_9);
-      this._expr_9 = currVal_9;
-    }
-    const currVal_10:any = this.context.$implicit.backgroundColor;
-    if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
-      this.renderer.setElementStyle(this._el_2,'background-color',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10).toString()));
-      this._expr_10 = currVal_10;
-    }
-    const currVal_11:any = this.context.$implicit.label;
-    if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
-      this.renderer.setElementProperty(this._el_5,'title',currVal_11);
-      this._expr_11 = currVal_11;
-    }
-    const currVal_12:any = import3.inlineInterpolate(1,'\n              ',this.context.$implicit.trimmedLabel,'\n            ');
-    if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setText(this._text_6,currVal_12);
-      this._expr_12 = currVal_12;
-    }
+    const currVal_2_0_0:any = this.context.$implicit.color;
+    this._LegendEntryComponent_2_3.check_color(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = this.context.$implicit.label;
+    this._LegendEntryComponent_2_3.check_label(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = this.context.$implicit.formattedLabel;
+    this._LegendEntryComponent_2_3.check_formattedLabel(currVal_2_0_2,throwOnChange,false);
+    if (this._LegendEntryComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this.compView_2.detectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_2.destroy();
+    this._LegendEntryComponent_2_3.ngOnDestroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
-  handleEvent_0(eventName:string,$event:any):boolean {
+  handleEvent_2(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.clickLegendItem(this.context.$implicit)) !== false);
+    if ((eventName == 'select')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.labelClick.emit($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'activate')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.labelActivate.emit($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'deactivate')) {
+      const pd_sub_2:any = ((<any>this.parentView.context.labelDeactivate.emit($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }

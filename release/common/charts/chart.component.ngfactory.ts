@@ -44,6 +44,8 @@ export class Wrapper_ChartComponent {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor(p0:any,p1:any) {
     this._changed = false;
     this._changes = {};
@@ -59,6 +61,8 @@ export class Wrapper_ChartComponent {
   }
   ngOnDestroy():void {
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -123,9 +127,11 @@ export class Wrapper_ChartComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
+    if (emit1) { (this.subscription1 = this.context.legendLabelActivate.subscribe(_eventHandler.bind(view,'legendLabelActivate'))); }
+    if (emit2) { (this.subscription2 = this.context.legendLabelDeactivate.subscribe(_eventHandler.bind(view,'legendLabelDeactivate'))); }
   }
 }
 var renderType_ChartComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -394,8 +400,8 @@ class View_ChartComponent2 extends import2.AppView<any> {
     this._LegendComponent_0_3 = new import26.Wrapper_LegendComponent();
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._LegendComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'labelClick',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._LegendComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'labelClick',(null as any),'labelActivate',(null as any),'labelDeactivate',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._LegendComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true,true,true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -432,8 +438,16 @@ class View_ChartComponent2 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'labelClick')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.onLegendLabelClick($event)) !== false);
+      const pd_sub_0:any = ((<any>this.parentView.context.legendLabelClick.emit($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'labelActivate')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.legendLabelActivate.emit($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'labelDeactivate')) {
+      const pd_sub_2:any = ((<any>this.parentView.context.legendLabelDeactivate.emit($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }

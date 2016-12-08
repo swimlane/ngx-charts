@@ -48,7 +48,10 @@ export class Wrapper_BarVerticalComponent {
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -66,12 +69,15 @@ export class Wrapper_BarVerticalComponent {
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
+    this._expr_13 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -177,6 +183,14 @@ export class Wrapper_BarVerticalComponent {
       this._expr_12 = currValue;
     }
   }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_13,currValue);
+      this._expr_13 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -192,9 +206,11 @@ export class Wrapper_BarVerticalComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
+    if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
 }
 var renderType_BarVerticalComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -303,8 +319,8 @@ export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerti
     this._text_12 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_13 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_9,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_9));
     this._SeriesVerticalComponent_9_3.subscribe(this,this.eventHandler(this.handleEvent_9),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -368,6 +384,8 @@ export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerti
     this._SeriesVerticalComponent_9_3.check_colors(currVal_9_0_4,throwOnChange,false);
     const currVal_9_0_5:any = this.context.gradient;
     this._SeriesVerticalComponent_9_3.check_gradient(currVal_9_0_5,throwOnChange,false);
+    const currVal_9_0_6:any = this.context.activeEntries;
+    this._SeriesVerticalComponent_9_3.check_activeEntries(currVal_9_0_6,throwOnChange,false);
     if (this._SeriesVerticalComponent_9_3.ngDoCheck(this,this._el_9,throwOnChange)) { this.compView_9.markAsCheckOnce(); }
     this._vc_1.detectChangesInNestedViews(throwOnChange);
     this._vc_5.detectChangesInNestedViews(throwOnChange);
@@ -407,6 +425,14 @@ export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerti
     if ((eventName == 'legendLabelClick')) {
       const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'legendLabelActivate')) {
+      const pd_sub_1:any = ((<any>this.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'legendLabelDeactivate')) {
+      const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }
@@ -452,12 +478,10 @@ class View_BarVerticalComponent1 extends import2.AppView<any> {
     this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
     const currVal_0_0_1:any = this.parentView.context.dims;
     this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.xAxisTickFormatting();
-    this._XAxisComponent_0_3.check_tickFormatting(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.showXAxisLabel;
-    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
-    const currVal_0_0_4:any = this.parentView.context.xAxisLabel;
-    this._XAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.showXAxisLabel;
+    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.xAxisLabel;
+    this._XAxisComponent_0_3.check_labelText(currVal_0_0_3,throwOnChange,false);
     if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this.compView_0.detectChanges(throwOnChange);
   }

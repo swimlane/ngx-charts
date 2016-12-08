@@ -1,6 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
+var label_helper_1 = require('../common/label.helper');
 var PieSeriesComponent = (function () {
     function PieSeriesComponent() {
         this.series = [];
@@ -31,12 +32,12 @@ var PieSeriesComponent = (function () {
             .outerRadius(this.outerRadius * factor);
     };
     PieSeriesComponent.prototype.calculateLabelPositions = function (pieData) {
+        var _this = this;
         var minDistance = 10;
-        var chart = this;
         var labelPositions = pieData;
         labelPositions.forEach(function (d) {
-            d.pos = chart.outerArc().centroid(d);
-            d.pos[0] = chart.outerRadius * (chart.midAngle(d) < Math.PI ? 1 : -1);
+            d.pos = _this.outerArc().centroid(d);
+            d.pos[0] = _this.outerRadius * (_this.midAngle(d) < Math.PI ? 1 : -1);
         });
         for (var i = 0; i < labelPositions.length - 1; i++) {
             var a = labelPositions[i];
@@ -59,18 +60,11 @@ var PieSeriesComponent = (function () {
         return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
     };
     PieSeriesComponent.prototype.label = function (arc) {
-        var label = arc.data.name;
-        if (label.constructor.name === 'Date') {
-            label = label.toLocaleDateString();
-        }
-        else {
-            label = label.toLocaleString();
-        }
-        return label;
+        return label_helper_1.formatLabel(arc.data.name);
     };
     PieSeriesComponent.prototype.tooltipText = function (arc) {
         var label = this.label(arc);
-        var val = arc.data.value.toLocaleString();
+        var val = label_helper_1.formatLabel(arc.data.value);
         return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     PieSeriesComponent.prototype.color = function (arc) {
@@ -82,10 +76,16 @@ var PieSeriesComponent = (function () {
     PieSeriesComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
+    PieSeriesComponent.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        var label = this.label(entry);
+        return this.activeEntries.indexOf(label) > -1;
+    };
     PieSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[pieSeries]',
-                    template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g \n        pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        (clickHandler)=\"onClick($event)\"\n        [gradient]=\"gradient\" \n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
+                    template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g \n        pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc)\"\n        (clickHandler)=\"onClick($event)\"\n        [gradient]=\"gradient\" \n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
@@ -100,6 +100,7 @@ var PieSeriesComponent = (function () {
         'explodeSlices': [{ type: core_1.Input },],
         'showLabels': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
     return PieSeriesComponent;

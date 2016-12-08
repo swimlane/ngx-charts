@@ -10,9 +10,10 @@ export declare class HeatCellSeriesComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCells(): any[];
-    getTooltipText({label, data}: {
+    getTooltipText({label, data, series}: {
         label: any;
         data: any;
+        series: any;
     }): string;
     trackBy(index: any, item: any): string;
     onClick(value: any, label: any, series: any): void;

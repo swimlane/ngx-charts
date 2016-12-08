@@ -4,4 +4,5 @@ function __export(m) {
 }
 __export(require('./legend.component'));
 __export(require('./scale-legend.component'));
+__export(require('./legend-entry.component'));
 //# sourceMappingURL=index.js.map

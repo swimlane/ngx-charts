@@ -10,6 +10,7 @@ export declare class BarComponent implements OnInit, OnChanges {
     roundEdges: boolean;
     gradient: boolean;
     offset: number;
+    isActive: boolean;
     clickHandler: EventEmitter<{}>;
     element: any;
     path: any;
@@ -28,5 +29,4 @@ export declare class BarComponent implements OnInit, OnChanges {
     getRadius(): number;
     getStartOpacity(): number;
     roundedRect(x: any, y: any, w: any, h: any, r: any, tl: any, tr: any, bl: any, br: any): any;
-    click(): void;
 }

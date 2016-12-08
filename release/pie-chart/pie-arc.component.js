@@ -11,6 +11,7 @@ var PieArcComponent = (function () {
         this.gradient = false;
         this.animate = true;
         this.pointerEvents = true;
+        this.isActive = false;
         this.clickHandler = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
@@ -96,7 +97,7 @@ var PieArcComponent = (function () {
     PieArcComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[pieArc]',
-                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [style.cursor]=\"'pointer'\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
+                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
@@ -118,6 +119,7 @@ var PieArcComponent = (function () {
         'gradient': [{ type: core_1.Input },],
         'animate': [{ type: core_1.Input },],
         'pointerEvents': [{ type: core_1.Input },],
+        'isActive': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
     return PieArcComponent;

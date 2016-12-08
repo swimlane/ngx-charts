@@ -1,6 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var moment = require('moment');
+var label_helper_1 = require('../common/label.helper');
 var CircleSeriesComponent = (function () {
     function CircleSeriesComponent() {
         this.type = 'standard';
@@ -15,13 +16,11 @@ var CircleSeriesComponent = (function () {
     };
     CircleSeriesComponent.prototype.getCircles = function () {
         var _this = this;
+        var seriesName = this.data.name;
         return this.data.series.map(function (d, i) {
             var value = d.value;
             var label = d.name;
-            var tooltipLabel = label;
-            if (tooltipLabel.constructor.name === 'Date') {
-                tooltipLabel = tooltipLabel.toLocaleDateString();
-            }
+            var tooltipLabel = label_helper_1.formatLabel(label);
             if (value) {
                 var cx = void 0;
                 if (_this.scaleType === 'time') {
@@ -49,14 +48,15 @@ var CircleSeriesComponent = (function () {
                     radius: radius,
                     height: height,
                     tooltipLabel: tooltipLabel,
-                    opacity: opacity
+                    opacity: opacity,
+                    seriesName: seriesName
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
     };
     CircleSeriesComponent.prototype.getTooltipText = function (_a) {
-        var tooltipLabel = _a.tooltipLabel, value = _a.value;
-        return "\n      <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+        var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName;
+        return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     CircleSeriesComponent.prototype.onClick = function (value, label) {
         this.clickHandler.emit({
@@ -64,10 +64,18 @@ var CircleSeriesComponent = (function () {
             value: value
         });
     };
+    CircleSeriesComponent.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        return this.activeEntries.indexOf(entry) > -1;
+    };
+    CircleSeriesComponent.prototype.isVisible = function (circle) {
+        return circle.opacity || this.isActive(circle.seriesName);
+    };
     CircleSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[circleSeries]',
-                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g circle\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"onClick($event, circle.label)\"\n        [style.opacity]=\"circle.opacity\"\n        [style.cursor]=\"'pointer'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:rect\n        *ngIf=\"barVisible\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"color\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g circle\n        *ngIf=\"isVisible(circle)\"\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [class.active]=\"isActive(circle.label)\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (clickHandler)=\"onClick($event, circle.label)\"\n        [style.cursor]=\"'pointer'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -82,6 +90,7 @@ var CircleSeriesComponent = (function () {
         'strokeColor': [{ type: core_1.Input },],
         'scaleType': [{ type: core_1.Input },],
         'visibleValue': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
     return CircleSeriesComponent;

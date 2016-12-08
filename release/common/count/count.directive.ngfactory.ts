@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/common/count.directive';
+import * as import0 from '../../../../src/common/count/count.directive';
 import * as import1 from '@angular/core/src/change_detection/change_detection';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -44,31 +44,31 @@ export class Wrapper_CountUpDirective {
     (this.subscription0 && this.subscription0.unsubscribe());
     (this.subscription1 && this.subscription1.unsubscribe());
   }
-  check_countDecimals(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_countDuration(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
       this._changed = true;
-      this.context.countDecimals = currValue;
+      this.context.countDuration = currValue;
       this._expr_0 = currValue;
     }
   }
-  check_countDuration(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_countPrefix(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_1,currValue))) {
       this._changed = true;
-      this.context.countDuration = currValue;
+      this.context.countPrefix = currValue;
       this._expr_1 = currValue;
     }
   }
-  check_countPrefix(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_countSuffix(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_2,currValue))) {
       this._changed = true;
-      this.context.countPrefix = currValue;
+      this.context.countSuffix = currValue;
       this._expr_2 = currValue;
     }
   }
-  check_countSuffix(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_countDecimals(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
       this._changed = true;
-      this.context.countSuffix = currValue;
+      this.context.countDecimals = currValue;
       this._expr_3 = currValue;
     }
   }

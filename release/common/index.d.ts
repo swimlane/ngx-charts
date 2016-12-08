@@ -1,7 +1,7 @@
 export * from './chart-common.module';
 export * from './legend';
 export * from "./tooltip";
-export * from './count.directive';
+export * from './count';
 export * from './area.component';
 export * from './area-tooltip.component';
 export * from './base-chart.component';
@@ -16,3 +16,4 @@ export * from './tick-format.helper';
 export * from './timeline.component';
 export * from './trim-label.helper';
 export * from './view-dimensions.helper';
+export * from './label.helper';

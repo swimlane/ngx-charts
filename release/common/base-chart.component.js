@@ -1,5 +1,5 @@
 "use strict";
-var rxjs_1 = require("rxjs");
+var Rx_1 = require('rxjs/Rx');
 var BaseChartComponent = (function () {
     function BaseChartComponent(chartElement, zone, changeDetector) {
         this.chartElement = chartElement;
@@ -46,7 +46,7 @@ var BaseChartComponent = (function () {
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
         this.zone.run(function () {
-            var source = rxjs_1.Observable.fromEvent(window, 'resize', null, null);
+            var source = Rx_1.Observable.fromEvent(window, 'resize', null, null);
             var subscription = source.debounceTime(200).subscribe(function (e) {
                 _this.update();
                 if (_this.changeDetector) {

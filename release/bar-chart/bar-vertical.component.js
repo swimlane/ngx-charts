@@ -8,7 +8,6 @@ var core_1 = require('@angular/core');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
-var tick_format_helper_1 = require('../common/tick-format.helper');
 var d3_1 = require('../d3');
 var BarVerticalComponent = (function (_super) {
     __extends(BarVerticalComponent, _super);
@@ -18,7 +17,10 @@ var BarVerticalComponent = (function (_super) {
         this.cd = cd;
         this.legend = false;
         this.showGridLines = true;
+        this.activeEntries = [];
         this.clickHandler = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
@@ -78,13 +80,6 @@ var BarVerticalComponent = (function (_super) {
         var max = Math.max.apply(Math, values);
         return [min, max];
     };
-    BarVerticalComponent.prototype.xAxisTickFormatting = function () {
-        var tickFormatting;
-        if (this.results.query && this.results.query.dimensions.length) {
-            tickFormatting = tick_format_helper_1.tickFormat(this.results.query.dimensions[0].field.fieldType, this.results.query.dimensions[0].groupByType.value);
-        }
-        return tickFormatting;
-    };
     BarVerticalComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
@@ -101,10 +96,22 @@ var BarVerticalComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
+    BarVerticalComponent.prototype.onActivate = function (event) {
+        if (this.activeEntries.indexOf(event) > -1)
+            return;
+        this.activeEntries = [event].concat(this.activeEntries);
+        this.activate.emit({ value: event, entries: this.activeEntries });
+    };
+    BarVerticalComponent.prototype.onDeactivate = function (event) {
+        var idx = this.activeEntries.indexOf(event);
+        this.activeEntries.splice(idx, 1);
+        this.activeEntries = this.activeEntries.slice();
+        this.deactivate.emit({ value: event, entries: this.activeEntries });
+    };
     BarVerticalComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'bar-vertical',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      (legendLabelClick)=\"onClick($event)\"\n      [legendData]=\"xDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [tickFormatting]=\"xAxisTickFormatting()\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (clickHandler)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"xDomain\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (clickHandler)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -128,7 +135,10 @@ var BarVerticalComponent = (function (_super) {
         'yAxisLabel': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'showGridLines': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
     };
     return BarVerticalComponent;
 }(base_chart_component_1.BaseChartComponent));

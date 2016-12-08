@@ -57,7 +57,10 @@ export class Wrapper_BarVerticalStackedComponent {
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -75,12 +78,15 @@ export class Wrapper_BarVerticalStackedComponent {
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
+    this._expr_13 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -186,6 +192,14 @@ export class Wrapper_BarVerticalStackedComponent {
       this._expr_12 = currValue;
     }
   }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_13,currValue);
+      this._expr_13 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -201,9 +215,11 @@ export class Wrapper_BarVerticalStackedComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
+    if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
 }
 var renderType_BarVerticalStackedComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -346,22 +362,22 @@ export class View_BarVerticalStackedComponent0 extends import2.AppView<import0.B
     this._vc_5 = new import16.ViewContainer(5,3,this,this._anchor_5);
     this._TemplateRef_5_5 = new import24.TemplateRef_(this,5,this._anchor_5);
     this._NgIf_5_6 = new import20.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
-    this._text_6 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_7 = new import16.ViewContainer(7,3,this,this._anchor_7);
     this._TemplateRef_7_5 = new import24.TemplateRef_(this,7,this._anchor_7);
     this._NgIf_7_6 = new import20.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
-    this._text_8 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
+    this._text_8 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_9 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_9 = new import16.ViewContainer(9,3,this,this._anchor_9);
     this._TemplateRef_9_5 = new import24.TemplateRef_(this,9,this._anchor_9);
     this._NgFor_9_6 = new import21.Wrapper_NgFor(this._vc_9.vcRef,this._TemplateRef_9_5,this.parentView.injectorGet(import25.IterableDiffers,this.parentIndex),this.ref);
-    this._text_10 = this.renderer.createText(this._el_3,'\n\n      ',(null as any));
+    this._text_10 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_11 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_12 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any),'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -447,9 +463,17 @@ export class View_BarVerticalStackedComponent0 extends import2.AppView<import0.B
   handleEvent_1(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'legendLabelClick')) {
-      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
+    if ((eventName == 'legendLabelActivate')) {
+      const pd_sub_0:any = ((<any>this.context.onActivate($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'legendLabelDeactivate')) {
+      const pd_sub_1:any = ((<any>this.context.onDeactivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_2:any = ((<any>this.context.onClick($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }
@@ -627,6 +651,8 @@ class View_BarVerticalStackedComponent3 extends import2.AppView<any> {
     this._SeriesVerticalComponent_2_3.check_colors(currVal_2_0_5,throwOnChange,false);
     const currVal_2_0_6:any = this.parentView.context.gradient;
     this._SeriesVerticalComponent_2_3.check_gradient(currVal_2_0_6,throwOnChange,false);
+    const currVal_2_0_7:any = this.parentView.context.activeEntries;
+    this._SeriesVerticalComponent_2_3.check_activeEntries(currVal_2_0_7,throwOnChange,false);
     if (this._SeriesVerticalComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     const currVal_7:any = this.parentView.context.groupTransform(this.context.$implicit);
     if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {

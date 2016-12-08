@@ -16,9 +16,7 @@ import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '@angular/core/src/linker/element_ref';
 import * as import9 from '@angular/core/src/zone/ng_zone';
 import * as import10 from '@angular/core/src/linker/query_list';
-import * as import11 from '../../../src/common/count.directive';
-import * as import12 from '../common/count.directive.ngfactory';
-import * as import13 from '@angular/core/src/security';
+import * as import11 from '@angular/core/src/security';
 export class Wrapper_CardComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CardComponent;
@@ -47,6 +45,7 @@ export class Wrapper_CardComponent {
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
+    this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
   }
   check_color(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
@@ -177,11 +176,11 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
   _text_12:any;
   _text_13:any;
   _el_14:any;
-  compView_14:import2.AppView<import11.CountUpDirective>;
-  _CountUpDirective_14_3:import12.Wrapper_CountUpDirective;
   _text_15:any;
   _text_16:any;
   _text_17:any;
+  /*private*/ _expr_19:any;
+  /*private*/ _expr_20:any;
   /*private*/ _expr_21:any;
   /*private*/ _expr_22:any;
   /*private*/ _expr_23:any;
@@ -195,9 +194,10 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
   /*private*/ _expr_31:any;
   /*private*/ _expr_32:any;
   /*private*/ _expr_33:any;
-  /*private*/ _expr_34:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_CardComponent0,renderType_CardComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    this._expr_19 = import1.UNINITIALIZED;
+    this._expr_20 = import1.UNINITIALIZED;
     this._expr_21 = import1.UNINITIALIZED;
     this._expr_22 = import1.UNINITIALIZED;
     this._expr_23 = import1.UNINITIALIZED;
@@ -211,7 +211,6 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     this._expr_31 = import1.UNINITIALIZED;
     this._expr_32 = import1.UNINITIALIZED;
     this._expr_33 = import1.UNINITIALIZED;
-    this._expr_34 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -230,15 +229,12 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     this._text_11 = this.renderer.createText(this._el_10,'',(null as any));
     this._text_12 = this.renderer.createText(this._el_8,'\n      ',(null as any));
     this._text_13 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._el_14 = import3.createRenderElement(this.renderer,this._el_1,':svg:text',new import3.InlineArray16(10,'class','value-text','count-up','','dy','.35em','style','pointer-events: none;','text-anchor','middle'),(null as any));
-    this.compView_14 = new import12.View_CountUpDirective0(this.viewUtils,this,14,this._el_14);
-    this._CountUpDirective_14_3 = new import12.Wrapper_CountUpDirective(this.compView_14.ref,this.parentView.injectorGet(import9.NgZone,this.parentIndex),new import8.ElementRef(this._el_14));
-    this._text_15 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this.compView_14.create(this._CountUpDirective_14_3.context);
+    this._el_14 = import3.createRenderElement(this.renderer,this._el_1,':svg:text',new import3.InlineArray8(8,'class','value-text','dy','.35em','style','pointer-events: none;','text-anchor','middle'),(null as any));
+    this._text_15 = this.renderer.createText(this._el_14,'',(null as any));
     this._text_16 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_17 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._viewQuery_textEl_0.reset([this._CountUpDirective_14_3.context]);
+    this._viewQuery_textEl_0.reset([new import8.ElementRef(this._el_14)]);
     this.context.textEl = this._viewQuery_textEl_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -263,89 +259,82 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     ),[disposable_0]);
     return (null as any);
   }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import11.CountUpDirective) && ((14 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._CountUpDirective_14_3.context; }
-    return notFoundResult;
-  }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_14_0_0:any = this.context.data.value;
-    this._CountUpDirective_14_3.check_countTo(currVal_14_0_0,throwOnChange,false);
-    this._CountUpDirective_14_3.ngDoCheck(this,this._el_14,throwOnChange);
-    const currVal_21:any = this.context.transform;
+    const currVal_19:any = this.context.transform;
+    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
+      this.renderer.setElementAttribute(this._el_1,'transform',((currVal_19 == null)? (null as any): currVal_19.toString()));
+      this._expr_19 = currVal_19;
+    }
+    const currVal_20:any = this.context.color;
+    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
+      this.renderer.setElementStyle(this._el_3,'fill',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20).toString()));
+      this._expr_20 = currVal_20;
+    }
+    const currVal_21:any = this.context.cardWidth;
     if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
-      this.renderer.setElementAttribute(this._el_1,'transform',((currVal_21 == null)? (null as any): currVal_21.toString()));
+      this.renderer.setElementAttribute(this._el_3,'width',((currVal_21 == null)? (null as any): currVal_21.toString()));
       this._expr_21 = currVal_21;
     }
-    const currVal_22:any = this.context.color;
+    const currVal_22:any = this.context.cardHeight;
     if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
-      this.renderer.setElementStyle(this._el_3,'fill',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_22) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_22).toString()));
+      this.renderer.setElementAttribute(this._el_3,'height',((currVal_22 == null)? (null as any): currVal_22.toString()));
       this._expr_22 = currVal_22;
     }
-    const currVal_23:any = this.context.cardWidth;
+    const currVal_23:any = import3.inlineInterpolate(1,'',this.context.label,'');
     if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
-      this.renderer.setElementAttribute(this._el_3,'width',((currVal_23 == null)? (null as any): currVal_23.toString()));
+      this.renderer.setText(this._text_6,currVal_23);
       this._expr_23 = currVal_23;
     }
-    const currVal_24:any = this.context.cardHeight;
+    const currVal_24:any = (this.context.height * 0.7);
     if (import3.checkBinding(throwOnChange,this._expr_24,currVal_24)) {
-      this.renderer.setElementAttribute(this._el_3,'height',((currVal_24 == null)? (null as any): currVal_24.toString()));
+      this.renderer.setElementAttribute(this._el_8,'y',((currVal_24 == null)? (null as any): currVal_24.toString()));
       this._expr_24 = currVal_24;
     }
-    const currVal_25:any = import3.inlineInterpolate(1,'',this.context.label,'');
+    const currVal_25:any = this.context.textWidth;
     if (import3.checkBinding(throwOnChange,this._expr_25,currVal_25)) {
-      this.renderer.setText(this._text_6,currVal_25);
+      this.renderer.setElementAttribute(this._el_8,'width',((currVal_25 == null)? (null as any): currVal_25.toString()));
       this._expr_25 = currVal_25;
     }
-    const currVal_26:any = (this.context.height * 0.7);
+    const currVal_26:any = (this.context.height * 0.3);
     if (import3.checkBinding(throwOnChange,this._expr_26,currVal_26)) {
-      this.renderer.setElementAttribute(this._el_8,'y',((currVal_26 == null)? (null as any): currVal_26.toString()));
+      this.renderer.setElementAttribute(this._el_8,'height',((currVal_26 == null)? (null as any): currVal_26.toString()));
       this._expr_26 = currVal_26;
     }
-    const currVal_27:any = this.context.textWidth;
+    const currVal_27:any = this.context.getTextColor(this.context.color);
     if (import3.checkBinding(throwOnChange,this._expr_27,currVal_27)) {
-      this.renderer.setElementAttribute(this._el_8,'width',((currVal_27 == null)? (null as any): currVal_27.toString()));
+      this.renderer.setElementStyle(this._el_10,'color',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_27) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_27).toString()));
       this._expr_27 = currVal_27;
     }
-    const currVal_28:any = (this.context.height * 0.3);
+    const currVal_28:any = import3.inlineInterpolate(1,'\n          ',this.context.trimmedLabel,'\n        ');
     if (import3.checkBinding(throwOnChange,this._expr_28,currVal_28)) {
-      this.renderer.setElementAttribute(this._el_8,'height',((currVal_28 == null)? (null as any): currVal_28.toString()));
+      this.renderer.setText(this._text_11,currVal_28);
       this._expr_28 = currVal_28;
     }
-    const currVal_29:any = this.context.getTextColor(this.context.color);
+    const currVal_29:any = (this.context.cardWidth / 2);
     if (import3.checkBinding(throwOnChange,this._expr_29,currVal_29)) {
-      this.renderer.setElementStyle(this._el_10,'color',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_29) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_29).toString()));
+      this.renderer.setElementAttribute(this._el_14,'x',((currVal_29 == null)? (null as any): currVal_29.toString()));
       this._expr_29 = currVal_29;
     }
-    const currVal_30:any = import3.inlineInterpolate(1,'\n          ',this.context.trimmedLabel,'\n        ');
+    const currVal_30:any = (this.context.height * 0.3);
     if (import3.checkBinding(throwOnChange,this._expr_30,currVal_30)) {
-      this.renderer.setText(this._text_11,currVal_30);
+      this.renderer.setElementAttribute(this._el_14,'y',((currVal_30 == null)? (null as any): currVal_30.toString()));
       this._expr_30 = currVal_30;
     }
-    const currVal_31:any = (this.context.cardWidth / 2);
+    const currVal_31:any = this.context.getTextColor(this.context.color);
     if (import3.checkBinding(throwOnChange,this._expr_31,currVal_31)) {
-      this.renderer.setElementAttribute(this._el_14,'x',((currVal_31 == null)? (null as any): currVal_31.toString()));
+      this.renderer.setElementStyle(this._el_14,'fill',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_31) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_31).toString()));
       this._expr_31 = currVal_31;
     }
-    const currVal_32:any = (this.context.height * 0.3);
+    const currVal_32:any = this.context.textFontSize;
     if (import3.checkBinding(throwOnChange,this._expr_32,currVal_32)) {
-      this.renderer.setElementAttribute(this._el_14,'y',((currVal_32 == null)? (null as any): currVal_32.toString()));
+      this.renderer.setElementStyle(this._el_14,'font-size',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_32) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_32).toString() + 'pt')));
       this._expr_32 = currVal_32;
     }
-    const currVal_33:any = this.context.getTextColor(this.context.color);
+    const currVal_33:any = import3.inlineInterpolate(1,'\n        ',this.context.value,'\n      ');
     if (import3.checkBinding(throwOnChange,this._expr_33,currVal_33)) {
-      this.renderer.setElementStyle(this._el_14,'fill',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_33) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_33).toString()));
+      this.renderer.setText(this._text_15,currVal_33);
       this._expr_33 = currVal_33;
     }
-    const currVal_34:any = this.context.textFontSize;
-    if (import3.checkBinding(throwOnChange,this._expr_34,currVal_34)) {
-      this.renderer.setElementStyle(this._el_14,'font-size',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_34) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_34).toString() + 'pt')));
-      this._expr_34 = currVal_34;
-    }
-    this.compView_14.detectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_14.destroy();
-    this._CountUpDirective_14_3.ngOnDestroy();
   }
   handleEvent_1(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();

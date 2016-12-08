@@ -1,4 +1,4 @@
-import { ElementRef, NgZone, ChangeDetectorRef } from "@angular/core";
+import { ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 export declare abstract class BaseChartComponent {
     results: any[];
     chartElement: ElementRef;

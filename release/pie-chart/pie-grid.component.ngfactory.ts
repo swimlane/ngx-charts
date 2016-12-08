@@ -28,8 +28,8 @@ import * as import19 from '@angular/common/src/directives/ng_for';
 import * as import20 from '../../../src/pie-chart/pie-grid-series.component';
 import * as import21 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import22 from './pie-grid-series.component.ngfactory';
-import * as import23 from '../../../src/common/count.directive';
-import * as import24 from '../common/count.directive.ngfactory';
+import * as import23 from '../../../src/common/count/count.directive';
+import * as import24 from '../common/count/count.directive.ngfactory';
 import * as import25 from '../../../src/common/tooltip/tooltip.service';
 import * as import26 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_PieGridComponent {
@@ -198,7 +198,7 @@ export class View_PieGridComponent0 extends import2.AppView<import0.PieGridCompo
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,false,false);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,

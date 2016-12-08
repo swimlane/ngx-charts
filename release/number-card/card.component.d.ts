@@ -1,5 +1,5 @@
-import { EventEmitter, ElementRef, SimpleChanges, OnChanges, ChangeDetectorRef, NgZone } from '@angular/core';
-export declare class CardComponent implements OnChanges {
+import { EventEmitter, ElementRef, SimpleChanges, OnChanges, ChangeDetectorRef, NgZone, OnDestroy } from '@angular/core';
+export declare class CardComponent implements OnChanges, OnDestroy {
     private cd;
     private zone;
     color: any;
@@ -12,9 +12,9 @@ export declare class CardComponent implements OnChanges {
     clickHandler: EventEmitter<{}>;
     textEl: ElementRef;
     element: HTMLElement;
+    value: string;
     transform: string;
     trimmedLabel: string;
-    value: string;
     cardWidth: number;
     cardHeight: number;
     textWidth: number;
@@ -25,10 +25,14 @@ export declare class CardComponent implements OnChanges {
     originalHeight: number;
     originalWidthRatio: number;
     originalHeightRatio: number;
+    initialized: boolean;
+    animationReq: any;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(changes: SimpleChanges): void;
+    ngOnDestroy(): void;
     update(): void;
     getTextColor(color: any): string;
+    startCount(): void;
     scaleText(): void;
     onClick(): void;
 }

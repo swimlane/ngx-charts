@@ -45,6 +45,7 @@ export class Wrapper_SeriesVerticalComponent {
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
+  /*private*/ _expr_8:any;
   subscription0:any;
   constructor() {
     this._changed = false;
@@ -58,6 +59,7 @@ export class Wrapper_SeriesVerticalComponent {
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
+    this._expr_8 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -126,6 +128,14 @@ export class Wrapper_SeriesVerticalComponent {
       this.context.gradient = currValue;
       this._changes['gradient'] = new import1.SimpleChange(this._expr_7,currValue);
       this._expr_7 = currValue;
+    }
+  }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_8,currValue);
+      this._expr_8 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -348,6 +358,8 @@ class View_SeriesVerticalComponent1 extends import2.AppView<any> {
     this._BarComponent_0_6.check_roundEdges(currVal_0_1_7,throwOnChange,false);
     const currVal_0_1_8:any = this.parentView.context.gradient;
     this._BarComponent_0_6.check_gradient(currVal_0_1_8,throwOnChange,false);
+    const currVal_0_1_9:any = this.parentView.context.isActive(this.context.$implicit.formattedLabel);
+    this._BarComponent_0_6.check_isActive(currVal_0_1_9,throwOnChange,false);
     if (this._BarComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
     this.compView_0.detectChanges(throwOnChange);

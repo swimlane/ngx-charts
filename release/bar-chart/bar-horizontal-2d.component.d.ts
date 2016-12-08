@@ -18,7 +18,10 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent impleme
     yAxisLabel: any;
     gradient: boolean;
     showGridLines: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];
@@ -41,10 +44,10 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent impleme
     getValueScale(): any;
     getGroupDomain(): any[];
     getInnerDomain(): any[];
-    getValueDomain(): number[];
+    getValueDomain(): any[];
     groupTransform(group: any): string;
     onClick(data: any, group: any): void;
-    trackBy(index: any, item: any): any;
+    trackBy(index: any, item: any): string;
     setColors(): void;
     updateYAxisWidth({width}: {
         width: any;
@@ -52,4 +55,6 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent impleme
     updateXAxisHeight({height}: {
         height: any;
     }): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }

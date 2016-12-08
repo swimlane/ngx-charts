@@ -327,7 +327,7 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_24 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,false,false);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_8,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_8));
     this._PieArcComponent_8_3.subscribe(this,this.eventHandler(this.handleEvent_8),true);
     this._viewQuery_textEl_0.reset([new import8.ElementRef(this._el_19)]);

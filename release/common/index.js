@@ -5,7 +5,7 @@ function __export(m) {
 __export(require('./chart-common.module'));
 __export(require('./legend'));
 __export(require("./tooltip"));
-__export(require('./count.directive'));
+__export(require('./count'));
 __export(require('./area.component'));
 __export(require('./area-tooltip.component'));
 __export(require('./base-chart.component'));
@@ -20,4 +20,5 @@ __export(require('./tick-format.helper'));
 __export(require('./timeline.component'));
 __export(require('./trim-label.helper'));
 __export(require('./view-dimensions.helper'));
+__export(require('./label.helper'));
 //# sourceMappingURL=index.js.map

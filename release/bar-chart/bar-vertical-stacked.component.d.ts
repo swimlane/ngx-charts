@@ -18,7 +18,10 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent impl
     yAxisLabel: any;
     gradient: boolean;
     showGridLines: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     dims: ViewDimensions;
     groupDomain: any[];
     innerDomain: any[];
@@ -51,4 +54,6 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent impl
     updateXAxisHeight({height}: {
         height: any;
     }): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }

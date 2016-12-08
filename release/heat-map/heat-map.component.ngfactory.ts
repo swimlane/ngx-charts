@@ -305,7 +305,7 @@ export class View_HeatMapComponent0 extends import2.AppView<import0.HeatMapCompo
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_14 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,false,false);
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_11,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_11));
     this._HeatCellSeriesComponent_11_3.subscribe(this,this.eventHandler(this.handleEvent_11),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [

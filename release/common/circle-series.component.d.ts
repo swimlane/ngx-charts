@@ -8,6 +8,7 @@ export declare class CircleSeriesComponent implements OnChanges {
     strokeColor: any;
     scaleType: any;
     visibleValue: any;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
     areaPath: any;
     circles: any[];
@@ -15,9 +16,12 @@ export declare class CircleSeriesComponent implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCircles(): any[];
-    getTooltipText({tooltipLabel, value}: {
+    getTooltipText({tooltipLabel, value, seriesName}: {
         tooltipLabel: any;
         value: any;
+        seriesName: any;
     }): string;
     onClick(value: any, label: any): void;
+    isActive(entry: any): boolean;
+    isVisible(circle: any): boolean;
 }

@@ -291,7 +291,7 @@ export class View_ForceDirectedGraphComponent0 extends import2.AppView<import0.F
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_16 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true);
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,false,false);
     this._viewQuery_ChartComponent_0.reset([new import9.ElementRef(this._el_1)]);
     this.context.chart = this._viewQuery_ChartComponent_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [

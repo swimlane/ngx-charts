@@ -13,6 +13,7 @@ export declare class PieArcComponent implements OnChanges {
     gradient: boolean;
     animate: boolean;
     pointerEvents: boolean;
+    isActive: boolean;
     clickHandler: EventEmitter<{}>;
     element: HTMLElement;
     path: any;

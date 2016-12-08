@@ -8,6 +8,7 @@ export declare class PieSeriesComponent implements OnChanges {
     explodeSlices: any;
     showLabels: any;
     gradient: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
     max: number;
     data: any;
@@ -22,4 +23,5 @@ export declare class PieSeriesComponent implements OnChanges {
     color(arc: any): any;
     trackBy(index: any, item: any): string;
     onClick(data: any): void;
+    isActive(entry: any): boolean;
 }

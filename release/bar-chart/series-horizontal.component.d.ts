@@ -10,9 +10,11 @@ export declare class SeriesHorizontal implements OnChanges {
     yScale: any;
     colors: any;
     gradient: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
+    isActive(entry: any): boolean;
     trackBy(index: any, bar: any): any;
     click(data: any): void;
 }

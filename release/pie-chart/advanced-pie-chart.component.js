@@ -16,7 +16,10 @@ var AdvancedPieChartComponent = (function (_super) {
         this.element = element;
         this.cd = cd;
         this.margin = [20, 20, 20, 20];
+        this.activeEntries = [];
         this.clickHandler = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
     }
     AdvancedPieChartComponent.prototype.ngAfterViewInit = function () {
         this.bindResizeEvents(this.view);
@@ -45,7 +48,7 @@ var AdvancedPieChartComponent = (function (_super) {
             _this.innerRadius = _this.outerRadius * 0.75;
             _this.transform = "translate(" + xOffset + " , " + yOffset + ")";
             _this.total = _this.getTotal();
-            _this.roundedTotal = Math.round(_this.total);
+            _this.roundedTotal = _this.total;
             _this.totalLabel = 'total';
             _this.legendItems = _this.getLegendItems();
         });
@@ -66,9 +69,9 @@ var AdvancedPieChartComponent = (function (_super) {
                 label = label.toLocaleDateString();
             }
             var value = d.value;
-            var percentage = Math.round(value / _this.total * 100);
+            var percentage = value / _this.total * 100;
             return {
-                value: Math.round(value),
+                value: value,
                 label: trim_label_helper_1.trimLabel(label, 20),
                 originalLabel: d.name,
                 percentage: percentage
@@ -81,10 +84,22 @@ var AdvancedPieChartComponent = (function (_super) {
     AdvancedPieChartComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
+    AdvancedPieChartComponent.prototype.onActivate = function (event) {
+        if (this.activeEntries.indexOf(event) > -1)
+            return;
+        this.activeEntries = [event].concat(this.activeEntries);
+        this.activate.emit({ value: event, entries: this.activeEntries });
+    };
+    AdvancedPieChartComponent.prototype.onDeactivate = function (event) {
+        var idx = this.activeEntries.indexOf(event);
+        this.activeEntries.splice(idx, 1);
+        this.activeEntries = this.activeEntries.slice();
+        this.deactivate.emit({ value: event, entries: this.activeEntries });
+    };
     AdvancedPieChartComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'advanced-pie-chart',
-                    template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          (legendLabelClick)=\"onClick($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n          <div \n            class=\"total-value\" \n            count-up \n            [countTo]=\"roundedTotal\">\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div\n                *ngFor=\"let legendItem of legendItems\"\n                tabindex=\"-1\"\n                (click)=\"onClick({name: legendItem.label, value: legendItem.value})\"\n                class=\"legend-item\">\n                <div\n                  class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div \n                  class=\"item-value\" \n                  count-up \n                  [countTo]=\"legendItem.value\">\n                </div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div \n                  class=\"item-percent\" \n                  count-up\n                  [countTo]=\"legendItem.percentage\"\n                  [countSuffix]=\"'%'\">\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
+                    template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          (legendLabelClick)=\"onClick($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n          <div\n            class=\"total-value\"\n            count-up\n            [countTo]=\"roundedTotal\">\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div\n                *ngFor=\"let legendItem of legendItems\"\n                tabindex=\"-1\"\n                (mouseenter)=\"onActivate(legendItem.label)\"\n                (mouseleave)=\"onDeactivate(legendItem.label)\"\n                (click)=\"onClick({ name: legendItem.label, value: legendItem.value })\"\n                class=\"legend-item\">\n                <div\n                  class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div\n                  class=\"item-value\"\n                  count-up\n                  [countTo]=\"legendItem.value\">\n                </div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div\n                  class=\"item-percent\"\n                  count-up\n                  [countTo]=\"legendItem.percentage\"\n                  [countSuffix]=\"'%'\">\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -101,7 +116,10 @@ var AdvancedPieChartComponent = (function (_super) {
         'scheme': [{ type: core_1.Input },],
         'customColors': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
     };
     return AdvancedPieChartComponent;
 }(base_chart_component_1.BaseChartComponent));

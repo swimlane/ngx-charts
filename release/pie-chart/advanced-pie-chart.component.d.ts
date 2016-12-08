@@ -16,7 +16,10 @@ export declare class AdvancedPieChartComponent extends BaseChartComponent implem
     scheme: any;
     customColors: any;
     gradient: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     data: any;
     dims: ViewDimensions;
     domain: any[];
@@ -39,4 +42,6 @@ export declare class AdvancedPieChartComponent extends BaseChartComponent implem
     getLegendItems(): LegendItem;
     onClick(data: any): void;
     setColors(): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }

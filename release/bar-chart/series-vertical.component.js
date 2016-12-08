@@ -1,6 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var moment = require('moment');
+var label_helper_1 = require('../common/label.helper');
 var SeriesVerticalComponent = (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
@@ -32,10 +33,7 @@ var SeriesVerticalComponent = (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = d.name;
-            var tooltipLabel = label;
-            if (tooltipLabel.constructor.name === 'Date') {
-                tooltipLabel = tooltipLabel.toLocaleDateString();
-            }
+            var formattedLabel = label_helper_1.formatLabel(label);
             var roundEdges = _this.type === 'standard';
             var bar = {
                 value: value,
@@ -44,6 +42,7 @@ var SeriesVerticalComponent = (function () {
                 roundEdges: roundEdges,
                 data: d,
                 width: width,
+                formattedLabel: formattedLabel,
                 height: 0,
                 x: 0,
                 y: 0
@@ -83,20 +82,25 @@ var SeriesVerticalComponent = (function () {
                 bar.y = _this.yScale(offset1);
                 value = (offset1 - offset0).toFixed(2) + '%';
             }
-            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + formattedLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
     };
-    SeriesVerticalComponent.prototype.trackBy = function (index, bar) {
-        return bar.label;
+    SeriesVerticalComponent.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        return this.activeEntries.indexOf(entry) > -1;
     };
     SeriesVerticalComponent.prototype.onClick = function (data) {
         this.clickHandler.emit(data);
     };
+    SeriesVerticalComponent.prototype.trackBy = function (index, bar) {
+        return bar.label;
+    };
     SeriesVerticalComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[seriesVertical]',
-                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"onClick($event)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      (clickHandler)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -122,6 +126,7 @@ var SeriesVerticalComponent = (function () {
         'colors': [{ type: core_1.Input },],
         'scaleType': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
         'clickHandler': [{ type: core_1.Output },],
     };
     return SeriesVerticalComponent;

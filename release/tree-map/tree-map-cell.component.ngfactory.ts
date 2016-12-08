@@ -19,8 +19,8 @@ import * as import10 from '../../node_modules/@angular/common/src/directives/ng_
 import * as import11 from '@angular/core/src/linker/template_ref';
 import * as import12 from '@angular/common/src/directives/ng_if';
 import * as import13 from '@angular/core/src/security';
-import * as import14 from '../../../src/common/count.directive';
-import * as import15 from '../common/count.directive.ngfactory';
+import * as import14 from '../../../src/common/count/count.directive';
+import * as import15 from '../common/count/count.directive.ngfactory';
 import * as import16 from '@angular/core/src/zone/ng_zone';
 export class Wrapper_TreeMapCellComponent {
   /*private*/ _eventHandler:Function;

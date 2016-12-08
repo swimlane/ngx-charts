@@ -14,7 +14,10 @@ export declare class PieChartComponent extends BaseChartComponent implements OnC
     explodeSlices: boolean;
     doughnut: boolean;
     gradient: boolean;
+    activeEntries: any[];
     clickHandler: EventEmitter<{}>;
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     translation: string;
     outerRadius: number;
     innerRadius: number;
@@ -30,4 +33,6 @@ export declare class PieChartComponent extends BaseChartComponent implements OnC
     getDomain(): any[];
     onClick(data: any): void;
     setColors(): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
 }
