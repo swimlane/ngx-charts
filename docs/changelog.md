@@ -1,5 +1,8 @@
 # Changelog
 
+## Master
+- Polish: Make pie grid less ugly (#90)
+
 ## 1.9.0
 - Enhancement: Hover of legend doesn't highlight bar (#73)
 - API: Added `activate` and `deactivate` events to chart for hovers
