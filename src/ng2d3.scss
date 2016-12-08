@@ -177,17 +177,20 @@
 
   .scale-legend {
     text-align: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .scale-legend-wrap {
     display: inline-block;
-    height: 100%;
+    flex: 1;
     width: 30px;
     border-radius: 5px;
+    margin: 0 auto;
   }
 
   .scale-legend-label{
-      font-size: 12px;
+    font-size: 12px;
   }
 
   .legend-labels {

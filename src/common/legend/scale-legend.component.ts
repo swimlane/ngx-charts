@@ -8,17 +8,17 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `
     <div
       class="scale-legend"
+      [style.height.px]="height"
       [style.width.px]="width">
-      <div [style.height.px]="height - 70">
-        <div class="scale-legend-label">
-          <span>{{ valueRange[0].toLocaleString() }}</span>
-        </div>
-        <div class="scale-legend-wrap"
-          [style.background]="gradient">
-        </div>
-        <div class="scale-legend-label">
-          <span>{{ valueRange[1].toLocaleString() }}</span>
-        </div>
+      <div class="scale-legend-label">
+        <span>{{ valueRange[0].toLocaleString() }}</span>
+      </div>
+      <div 
+        class="scale-legend-wrap"
+        [style.background]="gradient">
+      </div>
+      <div class="scale-legend-label">
+        <span>{{ valueRange[1].toLocaleString() }}</span>
       </div>
     </div>
   `,
@@ -36,7 +36,7 @@ export class ScaleLegendComponent implements OnChanges {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
+    const gradientValues = this.gradientString(this.colors.range(), this.colors.domain());
     this.gradient = this.sanitizer.bypassSecurityTrustStyle(`linear-gradient(to bottom, ${gradientValues})`);
   }
 
