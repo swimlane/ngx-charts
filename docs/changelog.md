@@ -5,6 +5,7 @@
 - Polish: Make pie grid less ugly (#90)
 - Polish: Highlighting a line/area chart in legend, defocuses others
 - Polish: Radial gradients on pie charts vs linear
+- Polish: Better sizing for heatmap legends
 
 ## 1.9.0
 - Enhancement: Hover of legend doesn't highlight bar (#73)
