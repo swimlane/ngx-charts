@@ -5,7 +5,7 @@ var PieGridSeriesComponent = (function () {
     function PieGridSeriesComponent(element) {
         this.innerRadius = 70;
         this.outerRadius = 80;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
     PieGridSeriesComponent.prototype.ngOnChanges = function (changes) {
@@ -37,7 +37,7 @@ var PieGridSeriesComponent = (function () {
         });
     };
     PieGridSeriesComponent.prototype.onClick = function (data) {
-        this.clickHandler.emit({
+        this.select.emit({
             name: this.data[0].data.name,
             value: this.data[0].data.value
         });
@@ -54,7 +54,7 @@ var PieGridSeriesComponent = (function () {
     PieGridSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[pieGridSeries]',
-                    template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g pieArc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (clickHandler)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
+                    template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g pieArc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
@@ -67,7 +67,7 @@ var PieGridSeriesComponent = (function () {
         'data': [{ type: core_1.Input },],
         'innerRadius': [{ type: core_1.Input },],
         'outerRadius': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return PieGridSeriesComponent;
 }());

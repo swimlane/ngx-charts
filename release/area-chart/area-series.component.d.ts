@@ -9,10 +9,13 @@ export declare class AreaSeriesComponent implements OnChanges {
     normalized: boolean;
     gradient: any;
     curve: any;
-    clickHandler: EventEmitter<{}>;
+    activeEntries: any[];
+    select: EventEmitter<{}>;
     opacity: number;
     path: string;
     startingPath: string;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
+    isActive(entry: any): boolean;
+    isInactive(entry: any): boolean;
 }

@@ -5,19 +5,20 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
+var d3_1 = require('../d3');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
 var trim_label_helper_1 = require('../common/trim-label.helper');
 var grid_layout_helper_1 = require('../common/grid-layout.helper');
-var d3_1 = require('../d3');
+var label_helper_1 = require('../common/label.helper');
 var PieGridComponent = (function (_super) {
     __extends(PieGridComponent, _super);
     function PieGridComponent(element, cd, zone) {
         _super.call(this, element, zone, cd);
         this.element = element;
         this.cd = cd;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.legendLabelClick = new core_1.EventEmitter();
         this.margin = [20, 20, 20, 20];
     }
@@ -58,16 +59,10 @@ var PieGridComponent = (function (_super) {
         return this.data.map(function (d) {
             var baselineLabelHeight = 20;
             var padding = 10;
-            var label = d.data.name;
-            if (label.constructor.name === 'Date') {
-                label = label.toLocaleDateString();
-            }
-            else {
-                label = label.toLocaleString();
-            }
+            var label = label_helper_1.formatLabel(d.data.name);
             var value = d.data.value;
-            var radius = d3_1.default.min([d.width - padding, d.height - baselineLabelHeight]) / 2;
-            var innerRadius = radius * 0.75;
+            var radius = (d3_1.default.min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
+            var innerRadius = radius * 0.9;
             var count = 0;
             var colors = function () {
                 count += 1;
@@ -78,8 +73,10 @@ var PieGridComponent = (function (_super) {
                     return _this.colorScale(label);
                 }
             };
+            var xPos = d.x + (d.width - padding) / 2;
+            var yPos = d.y + (d.height - baselineLabelHeight) / 2;
             return {
-                transform: "translate(" + (d.x + (d.width - padding) / 2) + " , " + (d.y + (d.height - baselineLabelHeight) / 2) + ")",
+                transform: "translate(" + xPos + ", " + yPos + ")",
                 colors: colors,
                 innerRadius: innerRadius,
                 outerRadius: radius,
@@ -103,7 +100,7 @@ var PieGridComponent = (function (_super) {
             .reduce(function (sum, d) { return sum + d; }, 0);
     };
     PieGridComponent.prototype.onClick = function (data) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     PieGridComponent.prototype.setColors = function () {
         this.colorScale = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
@@ -111,7 +108,7 @@ var PieGridComponent = (function (_super) {
     PieGridComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'pie-grid',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (clickHandler)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
@@ -126,7 +123,7 @@ var PieGridComponent = (function (_super) {
         'results': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
         'customColors': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
     return PieGridComponent;

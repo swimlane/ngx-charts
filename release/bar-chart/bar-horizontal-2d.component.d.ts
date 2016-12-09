@@ -19,7 +19,7 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent impleme
     gradient: boolean;
     showGridLines: boolean;
     activeEntries: any[];
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;

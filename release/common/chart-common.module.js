@@ -29,7 +29,8 @@ var COMPONENTS = [
     grid_panel_series_component_1.GridPanelSeriesComponent,
     svg_linear_gradient_component_1.SvgLinearGradientComponent,
     svg_radial_gradient_component_1.SvgRadialGradientComponent,
-    timeline_component_1.Timeline
+    timeline_component_1.Timeline,
+    legend_1.AdvancedLegendComponent
 ];
 var ChartCommonModule = (function () {
     function ChartCommonModule() {

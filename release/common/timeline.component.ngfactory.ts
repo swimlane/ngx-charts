@@ -150,7 +150,7 @@ export class Wrapper_Timeline {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
     if (emit1) { (this.subscription1 = this.context.onDomainChange.subscribe(_eventHandler.bind(view,'onDomainChange'))); }
   }
 }

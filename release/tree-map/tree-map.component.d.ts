@@ -7,7 +7,7 @@ export declare class TreeMapComponent extends BaseChartComponent implements OnCh
     results: any;
     scheme: any;
     customColors: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     dims: any;
     domain: any;
     transform: any;

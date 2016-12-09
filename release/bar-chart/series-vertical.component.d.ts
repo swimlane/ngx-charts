@@ -9,7 +9,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     scaleType: string;
     gradient: boolean;
     activeEntries: any[];
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     bars: any;
     x: any;
     y: any;

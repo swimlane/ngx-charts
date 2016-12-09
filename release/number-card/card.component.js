@@ -7,7 +7,7 @@ var CardComponent = (function () {
     function CardComponent(element, cd, zone) {
         this.cd = cd;
         this.zone = zone;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.value = '';
         this.resizeScale = 1;
         this.textFontSize = 35;
@@ -80,7 +80,7 @@ var CardComponent = (function () {
         });
     };
     CardComponent.prototype.onClick = function () {
-        this.clickHandler.emit({
+        this.select.emit({
             name: this.data.name,
             value: this.data.value
         });
@@ -106,7 +106,7 @@ var CardComponent = (function () {
         'height': [{ type: core_1.Input },],
         'label': [{ type: core_1.Input },],
         'data': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
         'textEl': [{ type: core_1.ViewChild, args: ['textEl',] },],
     };
     return CardComponent;

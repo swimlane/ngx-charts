@@ -133,7 +133,7 @@ export class Wrapper_HeatMapCellComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_HeatMapCellComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});

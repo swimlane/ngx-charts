@@ -32,6 +32,7 @@ import * as import23 from '../legend/scale-legend.component.ngfactory';
 import * as import24 from '@angular/platform-browser/src/security/dom_sanitization_service';
 import * as import25 from '../../../../src/common/legend/legend.component';
 import * as import26 from '../legend/legend.component.ngfactory';
+import * as import27 from '@angular/core/src/zone/ng_zone';
 export class Wrapper_ChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.ChartComponent;
@@ -43,6 +44,7 @@ export class Wrapper_ChartComponent {
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
+  /*private*/ _expr_6:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -56,6 +58,7 @@ export class Wrapper_ChartComponent {
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
+    this._expr_6 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -110,6 +113,14 @@ export class Wrapper_ChartComponent {
       this.context.colors = currValue;
       this._changes['colors'] = new import1.SimpleChange(this._expr_5,currValue);
       this._expr_5 = currValue;
+    }
+  }
+  check_legendType(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_6,currValue))) {
+      this._changed = true;
+      this.context.legendType = currValue;
+      this._changes['legendType'] = new import1.SimpleChange(this._expr_6,currValue);
+      this._expr_6 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -397,7 +408,7 @@ class View_ChartComponent2 extends import2.AppView<any> {
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'legend',new import3.InlineArray2(2,'class','chart-legend'),(null as any));
     this.compView_0 = new import26.View_LegendComponent0(this.viewUtils,this,0,this._el_0);
-    this._LegendComponent_0_3 = new import26.Wrapper_LegendComponent();
+    this._LegendComponent_0_3 = new import26.Wrapper_LegendComponent(this.compView_0.ref,this.parentView.parentView.injectorGet(import27.NgZone,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._LegendComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'labelClick',(null as any),'labelActivate',(null as any),'labelDeactivate',(null as any)),this.eventHandler(this.handleEvent_0));

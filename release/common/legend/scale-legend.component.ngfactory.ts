@@ -130,58 +130,52 @@ export class View_ScaleLegendComponent0 extends import2.AppView<import0.ScaleLeg
   _text_4:any;
   _el_5:any;
   _text_6:any;
-  _el_7:any;
+  _text_7:any;
   _text_8:any;
-  _text_9:any;
+  _el_9:any;
   _text_10:any;
-  _el_11:any;
-  _text_12:any;
+  _text_11:any;
+  _el_12:any;
   _text_13:any;
   _el_14:any;
   _text_15:any;
-  _el_16:any;
+  _text_16:any;
   _text_17:any;
   _text_18:any;
-  _text_19:any;
-  _text_20:any;
-  _text_21:any;
+  /*private*/ _expr_19:any;
+  /*private*/ _expr_20:any;
+  /*private*/ _expr_21:any;
   /*private*/ _expr_22:any;
   /*private*/ _expr_23:any;
-  /*private*/ _expr_24:any;
-  /*private*/ _expr_25:any;
-  /*private*/ _expr_26:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_ScaleLegendComponent0,renderType_ScaleLegendComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    this._expr_19 = import1.UNINITIALIZED;
+    this._expr_20 = import1.UNINITIALIZED;
+    this._expr_21 = import1.UNINITIALIZED;
     this._expr_22 = import1.UNINITIALIZED;
     this._expr_23 = import1.UNINITIALIZED;
-    this._expr_24 = import1.UNINITIALIZED;
-    this._expr_25 = import1.UNINITIALIZED;
-    this._expr_26 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',new import3.InlineArray2(2,'class','scale-legend'),(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','scale-legend-label'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','scale-legend-label'),(null as any));
-    this._text_6 = this.renderer.createText(this._el_5,'\n          ',(null as any));
-    this._el_7 = import3.createRenderElement(this.renderer,this._el_5,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
-    this._text_9 = this.renderer.createText(this._el_5,'\n        ',(null as any));
-    this._text_10 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_11 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','scale-legend-wrap'),(null as any));
-    this._text_12 = this.renderer.createText(this._el_11,'\n        ',(null as any));
-    this._text_13 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_14 = import3.createRenderElement(this.renderer,this._el_3,'div',new import3.InlineArray2(2,'class','scale-legend-label'),(null as any));
-    this._text_15 = this.renderer.createText(this._el_14,'\n          ',(null as any));
-    this._el_16 = import3.createRenderElement(this.renderer,this._el_14,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_17 = this.renderer.createText(this._el_16,'',(null as any));
-    this._text_18 = this.renderer.createText(this._el_14,'\n        ',(null as any));
-    this._text_19 = this.renderer.createText(this._el_3,'\n      ',(null as any));
-    this._text_20 = this.renderer.createText(this._el_1,'\n    ',(null as any));
-    this._text_21 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_6 = this.renderer.createText(this._el_5,'',(null as any));
+    this._text_7 = this.renderer.createText(this._el_3,'\n      ',(null as any));
+    this._text_8 = this.renderer.createText(this._el_1,'\n      ',(null as any));
+    this._el_9 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','scale-legend-wrap'),(null as any));
+    this._text_10 = this.renderer.createText(this._el_9,'\n      ',(null as any));
+    this._text_11 = this.renderer.createText(this._el_1,'\n      ',(null as any));
+    this._el_12 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','scale-legend-label'),(null as any));
+    this._text_13 = this.renderer.createText(this._el_12,'\n        ',(null as any));
+    this._el_14 = import3.createRenderElement(this.renderer,this._el_12,'span',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_15 = this.renderer.createText(this._el_14,'',(null as any));
+    this._text_16 = this.renderer.createText(this._el_12,'\n      ',(null as any));
+    this._text_17 = this.renderer.createText(this._el_1,'\n    ',(null as any));
+    this._text_18 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -190,50 +184,47 @@ export class View_ScaleLegendComponent0 extends import2.AppView<import0.ScaleLeg
       this._text_4,
       this._el_5,
       this._text_6,
-      this._el_7,
+      this._text_7,
       this._text_8,
-      this._text_9,
+      this._el_9,
       this._text_10,
-      this._el_11,
-      this._text_12,
+      this._text_11,
+      this._el_12,
       this._text_13,
       this._el_14,
       this._text_15,
-      this._el_16,
+      this._text_16,
       this._text_17,
-      this._text_18,
-      this._text_19,
-      this._text_20,
-      this._text_21
+      this._text_18
     ]
     ),(null as any));
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_22:any = this.context.width;
+    const currVal_19:any = this.context.height;
+    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
+      this.renderer.setElementStyle(this._el_1,'height',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_19) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_19).toString() + 'px')));
+      this._expr_19 = currVal_19;
+    }
+    const currVal_20:any = this.context.width;
+    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_20) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_20).toString() + 'px')));
+      this._expr_20 = currVal_20;
+    }
+    const currVal_21:any = import3.inlineInterpolate(1,'',this.context.valueRange[0].toLocaleString(),'');
+    if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
+      this.renderer.setText(this._text_6,currVal_21);
+      this._expr_21 = currVal_21;
+    }
+    const currVal_22:any = this.context.gradient;
     if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_9,'background',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_22).toString()));
       this._expr_22 = currVal_22;
     }
-    const currVal_23:any = (this.context.height - 70);
+    const currVal_23:any = import3.inlineInterpolate(1,'',this.context.valueRange[1].toLocaleString(),'');
     if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
-      this.renderer.setElementStyle(this._el_3,'height',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_23) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_23).toString() + 'px')));
+      this.renderer.setText(this._text_15,currVal_23);
       this._expr_23 = currVal_23;
-    }
-    const currVal_24:any = import3.inlineInterpolate(1,'',this.context.valueRange[0].toLocaleString(),'');
-    if (import3.checkBinding(throwOnChange,this._expr_24,currVal_24)) {
-      this.renderer.setText(this._text_8,currVal_24);
-      this._expr_24 = currVal_24;
-    }
-    const currVal_25:any = this.context.gradient;
-    if (import3.checkBinding(throwOnChange,this._expr_25,currVal_25)) {
-      this.renderer.setElementStyle(this._el_11,'background',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_25) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_25).toString()));
-      this._expr_25 = currVal_25;
-    }
-    const currVal_26:any = import3.inlineInterpolate(1,'',this.context.valueRange[1].toLocaleString(),'');
-    if (import3.checkBinding(throwOnChange,this._expr_26,currVal_26)) {
-      this.renderer.setText(this._text_17,currVal_26);
-      this._expr_26 = currVal_26;
     }
   }
 }

@@ -11,7 +11,7 @@ export declare class BarComponent implements OnInit, OnChanges {
     gradient: boolean;
     offset: number;
     isActive: boolean;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     element: any;
     path: any;
     gradientId: any;

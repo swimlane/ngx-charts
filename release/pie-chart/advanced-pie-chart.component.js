@@ -8,7 +8,6 @@ var core_1 = require('@angular/core');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
-var trim_label_helper_1 = require('../common/trim-label.helper');
 var AdvancedPieChartComponent = (function (_super) {
     __extends(AdvancedPieChartComponent, _super);
     function AdvancedPieChartComponent(element, cd, zone) {
@@ -17,7 +16,7 @@ var AdvancedPieChartComponent = (function (_super) {
         this.cd = cd;
         this.margin = [20, 20, 20, 20];
         this.activeEntries = [];
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
     }
@@ -47,39 +46,13 @@ var AdvancedPieChartComponent = (function (_super) {
             _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2.5;
             _this.innerRadius = _this.outerRadius * 0.75;
             _this.transform = "translate(" + xOffset + " , " + yOffset + ")";
-            _this.total = _this.getTotal();
-            _this.roundedTotal = _this.total;
-            _this.totalLabel = 'total';
-            _this.legendItems = _this.getLegendItems();
         });
-    };
-    AdvancedPieChartComponent.prototype.getTotal = function () {
-        return this.results
-            .map(function (d) { return d.value; })
-            .reduce(function (sum, d) { return sum + d; }, 0);
     };
     AdvancedPieChartComponent.prototype.getDomain = function () {
         return this.results.map(function (d) { return d.name; });
     };
-    AdvancedPieChartComponent.prototype.getLegendItems = function () {
-        var _this = this;
-        return this.results.map(function (d, index) {
-            var label = d.name;
-            if (label instanceof Date) {
-                label = label.toLocaleDateString();
-            }
-            var value = d.value;
-            var percentage = value / _this.total * 100;
-            return {
-                value: value,
-                label: trim_label_helper_1.trimLabel(label, 20),
-                originalLabel: d.name,
-                percentage: percentage
-            };
-        });
-    };
     AdvancedPieChartComponent.prototype.onClick = function (data) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     AdvancedPieChartComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
@@ -99,7 +72,7 @@ var AdvancedPieChartComponent = (function (_super) {
     AdvancedPieChartComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'advanced-pie-chart',
-                    template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          (legendLabelClick)=\"onClick($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (clickHandler)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div [style.width.px]=\"width - dims.width\" class=\"advanced-pie-legend-wrapper\">\n        <div class=\"advanced-pie-legend\"\n          [style.width.px]=\"width - dims.width - margin[1]\">\n          <div\n            class=\"total-value\"\n            count-up\n            [countTo]=\"roundedTotal\">\n          </div>\n          <div class=\"total-label\">\n            {{totalLabel}}\n          </div>\n          <div class=\"legend-items-container\">\n            <div class=\"legend-items\">\n              <div\n                *ngFor=\"let legendItem of legendItems\"\n                tabindex=\"-1\"\n                (mouseenter)=\"onActivate(legendItem.label)\"\n                (mouseleave)=\"onDeactivate(legendItem.label)\"\n                (click)=\"onClick({ name: legendItem.label, value: legendItem.value })\"\n                class=\"legend-item\">\n                <div\n                  class=\"item-color\"\n                  [style.background]=\"colors(legendItem.label)\">\n                </div>\n                <div\n                  class=\"item-value\"\n                  count-up\n                  [countTo]=\"legendItem.value\">\n                </div>\n                <div class=\"item-label\">{{legendItem.label}}</div>\n                <div\n                  class=\"item-percent\"\n                  count-up\n                  [countTo]=\"legendItem.percentage\"\n                  [countSuffix]=\"'%'\">\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
+                    template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          [legend]=\"legend\"\n          [legendData]=\"domain\"\n          (legendLabelClick)=\"onClick($event)\"\n          (legendLabelActivate)=\"onActivate($event)\"\n          (legendLabelDeactivate)=\"onDeactivate($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div \n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\">\n        <advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </advanced-legend>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -117,7 +90,7 @@ var AdvancedPieChartComponent = (function (_super) {
         'customColors': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],
     };

@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var TreeMapCellSeriesComponent = (function () {
     function TreeMapCellSeriesComponent() {
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
     }
     TreeMapCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.cells = this.getCells();
@@ -32,7 +32,7 @@ var TreeMapCellSeriesComponent = (function () {
         return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
     };
     TreeMapCellSeriesComponent.prototype.onClick = function (data) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     TreeMapCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.label;
@@ -40,7 +40,7 @@ var TreeMapCellSeriesComponent = (function () {
     TreeMapCellSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[treeMapCellSeries]',
-                    template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (clickHandler)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+                    template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -50,7 +50,7 @@ var TreeMapCellSeriesComponent = (function () {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return TreeMapCellSeriesComponent;
 }());

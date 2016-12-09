@@ -153,7 +153,7 @@ export class Wrapper_PieSeriesComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_PieSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -272,7 +272,7 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
     this._text_5 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_4.create(this._PieArcComponent_4_6.context);
     this._text_6 = this.renderer.createText(this._el_0,'\n    ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_4,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_4));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_4,new import3.InlineArray16(10,'select',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_4));
     this._PieArcComponent_4_6.subscribe(this,this.eventHandler(this.handleEvent_4),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -349,7 +349,7 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     result = (this._TooltipDirective_4_5.handleEvent(eventName,$event) && result);
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }

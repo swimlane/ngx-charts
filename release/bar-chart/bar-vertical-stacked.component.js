@@ -18,7 +18,7 @@ var BarVerticalStackedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -118,7 +118,7 @@ var BarVerticalStackedComponent = (function (_super) {
         if (group) {
             data.series = group.name;
         }
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     BarVerticalStackedComponent.prototype.trackBy = function (index, item) {
         return item.name;
@@ -151,7 +151,7 @@ var BarVerticalStackedComponent = (function (_super) {
     BarVerticalStackedComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'bar-vertical-stacked',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (clickHandler)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -187,7 +187,7 @@ var BarVerticalStackedComponent = (function (_super) {
         'gradient': [{ type: core_1.Input },],
         'showGridLines': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],
     };

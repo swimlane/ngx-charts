@@ -9,7 +9,7 @@ export declare class PieGridComponent extends BaseChartComponent implements OnCh
     results: any;
     scheme: any;
     customColors: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     data: any[];

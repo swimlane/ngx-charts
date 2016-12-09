@@ -21,7 +21,7 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent imp
     showGridLines: boolean;
     curve: any;
     activeEntries: any[];
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;

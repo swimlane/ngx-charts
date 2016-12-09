@@ -23,6 +23,8 @@ export class Wrapper_SvgRadialGradientComponent {
   /*private*/ _expr_1:any;
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
+  /*private*/ _expr_4:any;
+  /*private*/ _expr_5:any;
   constructor() {
     this._changed = false;
     this._changes = {};
@@ -31,6 +33,8 @@ export class Wrapper_SvgRadialGradientComponent {
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
+    this._expr_4 = import1.UNINITIALIZED;
+    this._expr_5 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -66,6 +70,22 @@ export class Wrapper_SvgRadialGradientComponent {
       this.context.endOpacity = currValue;
       this._changes['endOpacity'] = new import1.SimpleChange(this._expr_3,currValue);
       this._expr_3 = currValue;
+    }
+  }
+  check_cx(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_4,currValue))) {
+      this._changed = true;
+      this.context.cx = currValue;
+      this._changes['cx'] = new import1.SimpleChange(this._expr_4,currValue);
+      this._expr_4 = currValue;
+    }
+  }
+  check_cy(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
+      this._changed = true;
+      this.context.cy = currValue;
+      this._changes['cy'] = new import1.SimpleChange(this._expr_5,currValue);
+      this._expr_5 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -152,7 +172,7 @@ export class View_SvgRadialGradientComponent0 extends import2.AppView<import0.Sv
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:radialGradient',new import3.InlineArray2(2,'gradient-units','userSpaceOnUse'),(null as any));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:radialGradient',new import3.InlineArray2(2,'gradientUnits','userSpaceOnUse'),(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:stop',new import3.InlineArray2(2,'offset','0%'),(null as any));
     this._text_4 = this.renderer.createText(this._el_1,'\n      ',(null as any));

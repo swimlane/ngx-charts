@@ -166,7 +166,7 @@ export class Wrapper_BarComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_BarComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -280,7 +280,7 @@ export class View_BarComponent0 extends import2.AppView<import0.BarComponent> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.clickHandler.emit(this.context.data)) !== false);
+      const pd_sub_0:any = ((<any>this.context.select.emit(this.context.data)) !== false);
       result = (pd_sub_0 && result);
     }
     return result;

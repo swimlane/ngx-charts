@@ -12,7 +12,7 @@ var PieArcComponent = (function () {
         this.animate = true;
         this.pointerEvents = true;
         this.isActive = false;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
     }
@@ -22,16 +22,11 @@ var PieArcComponent = (function () {
     PieArcComponent.prototype.update = function () {
         var arc = this.calculateArc();
         this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
-        this.startOpacity = 0.3;
+        this.startOpacity = 0.5;
         var pageUrl = window.location.href;
         this.radialGradientId = 'linearGrad' + id_1.id().toString();
         this.linearGradientId = 'radialGrad' + id_1.id().toString();
-        if (this.innerRadius !== 0) {
-            this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
-        }
-        else {
-            this.gradientFill = "url(" + pageUrl + "#" + this.linearGradientId + ")";
-        }
+        this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
         if (this.animate) {
             if (this.initialized) {
                 this.updateAnimation();
@@ -92,7 +87,7 @@ var PieArcComponent = (function () {
         });
     };
     PieArcComponent.prototype.onClick = function () {
-        this.clickHandler.emit(this.data);
+        this.select.emit(this.data);
     };
     PieArcComponent.decorators = [
         { type: core_1.Component, args: [{
@@ -120,7 +115,7 @@ var PieArcComponent = (function () {
         'animate': [{ type: core_1.Input },],
         'pointerEvents': [{ type: core_1.Input },],
         'isActive': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return PieArcComponent;
 }());

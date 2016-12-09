@@ -8,7 +8,7 @@ var AreaComponent = (function () {
         this.startOpacity = 0.5;
         this.endOpacity = 1;
         this.gradient = false;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
     }
@@ -39,7 +39,7 @@ var AreaComponent = (function () {
     AreaComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[area]',
-                    template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n        [endOpacity]=\"endOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [attr.opacity]=\"opacity\"\n    />\n  ",
+                    template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n        [endOpacity]=\"endOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -57,7 +57,7 @@ var AreaComponent = (function () {
         'endOpacity': [{ type: core_1.Input },],
         'activeLabel': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return AreaComponent;
 }());

@@ -8,7 +8,7 @@ export declare class TreeMapCellComponent implements OnChanges {
     label: any;
     value: any;
     valueType: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     element: HTMLElement;
     transform: string;
     formattedValue: string;

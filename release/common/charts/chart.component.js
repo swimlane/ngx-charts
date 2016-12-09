@@ -64,6 +64,7 @@ var ChartComponent = (function () {
         'legendData': [{ type: core_1.Input },],
         'legendTitle': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
+        'legendType': [{ type: core_1.Input },],
         'legendLabelClick': [{ type: core_1.Output },],
         'legendLabelActivate': [{ type: core_1.Output },],
         'legendLabelDeactivate': [{ type: core_1.Output },],

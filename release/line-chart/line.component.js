@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var LineComponent = (function () {
     function LineComponent(element) {
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
     LineComponent.decorators = [
@@ -33,7 +33,7 @@ var LineComponent = (function () {
         'path': [{ type: core_1.Input },],
         'stroke': [{ type: core_1.Input },],
         'data': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return LineComponent;
 }());

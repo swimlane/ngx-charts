@@ -5,7 +5,7 @@ var d3_1 = require('../d3');
 var HeatMapCellComponent = (function () {
     function HeatMapCellComponent(element) {
         this.gradient = false;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
     HeatMapCellComponent.prototype.ngOnChanges = function (changes) {
@@ -27,7 +27,7 @@ var HeatMapCellComponent = (function () {
             .attr('opacity', 1);
     };
     HeatMapCellComponent.prototype.onClick = function () {
-        this.clickHandler.emit(this.data);
+        this.select.emit(this.data);
     };
     HeatMapCellComponent.decorators = [
         { type: core_1.Component, args: [{
@@ -49,7 +49,7 @@ var HeatMapCellComponent = (function () {
         'data': [{ type: core_1.Input },],
         'label': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return HeatMapCellComponent;
 }());

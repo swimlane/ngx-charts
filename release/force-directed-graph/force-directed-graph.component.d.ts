@@ -17,7 +17,7 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent impl
     scheme: any;
     view: any;
     customColors: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     linkTemplate: TemplateRef<any>;
     nodeTemplate: TemplateRef<any>;
     chart: ElementRef;

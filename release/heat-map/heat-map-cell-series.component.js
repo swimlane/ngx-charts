@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var HeatCellSeriesComponent = (function () {
     function HeatCellSeriesComponent() {
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
     }
     HeatCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -43,7 +43,7 @@ var HeatCellSeriesComponent = (function () {
         return item.tooltipText;
     };
     HeatCellSeriesComponent.prototype.onClick = function (value, label, series) {
-        this.clickHandler.emit({
+        this.select.emit({
             name: label,
             value: value,
             series: series
@@ -52,7 +52,7 @@ var HeatCellSeriesComponent = (function () {
     HeatCellSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[heatMapCellSeries]',
-                    template: "\n    <svg:g \n      heatMapCell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+                    template: "\n    <svg:g \n      heatMapCell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
@@ -64,7 +64,7 @@ var HeatCellSeriesComponent = (function () {
         'xScale': [{ type: core_1.Input },],
         'yScale': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return HeatCellSeriesComponent;
 }());

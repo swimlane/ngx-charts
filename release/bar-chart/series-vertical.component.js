@@ -6,7 +6,7 @@ var SeriesVerticalComponent = (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
         this.scaleType = 'ordinal';
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
     }
     SeriesVerticalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -92,7 +92,7 @@ var SeriesVerticalComponent = (function () {
         return this.activeEntries.indexOf(entry) > -1;
     };
     SeriesVerticalComponent.prototype.onClick = function (data) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     SeriesVerticalComponent.prototype.trackBy = function (index, bar) {
         return bar.label;
@@ -100,7 +100,7 @@ var SeriesVerticalComponent = (function () {
     SeriesVerticalComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[seriesVertical]',
-                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      (clickHandler)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      (select)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -127,7 +127,7 @@ var SeriesVerticalComponent = (function () {
         'scaleType': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return SeriesVerticalComponent;
 }());

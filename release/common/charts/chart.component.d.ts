@@ -9,13 +9,13 @@ export declare class ChartComponent implements OnChanges {
     legendData: any;
     legendTitle: string;
     colors: any;
+    legendType: any;
     legendLabelClick: EventEmitter<any>;
     legendLabelActivate: EventEmitter<any>;
     legendLabelDeactivate: EventEmitter<any>;
     chartWidth: any;
     title: any;
     legendWidth: any;
-    legendType: any;
     constructor(vcr: ViewContainerRef, injectionService: InjectionService);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;

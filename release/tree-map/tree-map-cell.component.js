@@ -4,7 +4,7 @@ var d3_1 = require('../d3');
 var color_utils_1 = require('../utils/color-utils');
 var TreeMapCellComponent = (function () {
     function TreeMapCellComponent(element) {
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
     }
@@ -41,7 +41,7 @@ var TreeMapCellComponent = (function () {
             .attr('height', this.height);
     };
     TreeMapCellComponent.prototype.onClick = function () {
-        this.clickHandler.emit({
+        this.select.emit({
             name: this.label,
             value: this.value
         });
@@ -66,7 +66,7 @@ var TreeMapCellComponent = (function () {
         'label': [{ type: core_1.Input },],
         'value': [{ type: core_1.Input },],
         'valueType': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return TreeMapCellComponent;
 }());

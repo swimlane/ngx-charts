@@ -4,7 +4,7 @@ export declare class PieGridSeriesComponent implements OnChanges {
     data: any;
     innerRadius: number;
     outerRadius: number;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     element: HTMLElement;
     layout: any;
     arcs: any;

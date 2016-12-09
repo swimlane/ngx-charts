@@ -109,7 +109,7 @@ export class Wrapper_HeatCellSeriesComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_HeatCellSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -212,7 +212,7 @@ class View_HeatCellSeriesComponent1 extends import2.AppView<any> {
     this._HeatMapCellComponent_0_6 = new import15.Wrapper_HeatMapCellComponent(new import18.ElementRef(this._el_0));
     this.compView_0.create(this._HeatMapCellComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(10,'select',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
     this._HeatMapCellComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return (null as any);
@@ -263,7 +263,7 @@ class View_HeatCellSeriesComponent1 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     result = (this._TooltipDirective_0_5.handleEvent(eventName,$event) && result);
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit.label,this.context.$implicit.series)) !== false);
       result = (pd_sub_0 && result);
     }

@@ -8,7 +8,7 @@ export declare class HeatMapCellComponent implements OnChanges {
     data: any;
     label: any;
     gradient: boolean;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     element: HTMLElement;
     transform: string;
     activeRange: any[];

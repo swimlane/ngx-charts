@@ -6,7 +6,7 @@ var AreaSeriesComponent = (function () {
     function AreaSeriesComponent() {
         this.stacked = false;
         this.normalized = false;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
     }
     AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -55,10 +55,20 @@ var AreaSeriesComponent = (function () {
         this.path = area(data);
         this.startingPath = startingArea(data);
     };
+    AreaSeriesComponent.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        return this.activeEntries.indexOf(entry.name) > -1;
+    };
+    AreaSeriesComponent.prototype.isInactive = function (entry) {
+        return this.activeEntries &&
+            this.activeEntries.length &&
+            this.activeEntries.indexOf(entry.name) === -1;
+    };
     AreaSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[areaSeries]',
-                    template: "\n    <svg:g area\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"color\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient\"\n    />\n  ",
+                    template: "\n    <svg:g area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"color\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -74,7 +84,8 @@ var AreaSeriesComponent = (function () {
         'normalized': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'curve': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'activeEntries': [{ type: core_1.Input },],
+        'select': [{ type: core_1.Output },],
     };
     return AreaSeriesComponent;
 }());

@@ -11,7 +11,7 @@ export declare class SeriesHorizontal implements OnChanges {
     colors: any;
     gradient: boolean;
     activeEntries: any[];
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     isActive(entry: any): boolean;

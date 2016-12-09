@@ -27,7 +27,7 @@ var ScaleLegendComponent = (function () {
     ScaleLegendComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'scale-legend',
-                    template: "\n    <div\n      class=\"scale-legend\"\n      [style.width.px]=\"width\">\n      <div [style.height.px]=\"height - 70\">\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[0].toLocaleString() }}</span>\n        </div>\n        <div class=\"scale-legend-wrap\"\n          [style.background]=\"gradient\">\n        </div>\n        <div class=\"scale-legend-label\">\n          <span>{{ valueRange[1].toLocaleString() }}</span>\n        </div>\n      </div>\n    </div>\n  ",
+                    template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n      <div \n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];

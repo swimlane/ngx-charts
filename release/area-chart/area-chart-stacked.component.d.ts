@@ -20,7 +20,7 @@ export declare class AreaChartStackedComponent extends BaseChartComponent implem
     showGridLines: boolean;
     curve: any;
     activeEntries: any[];
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     element: HTMLElement;

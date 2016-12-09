@@ -187,7 +187,7 @@ export class Wrapper_HeatMapComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_HeatMapComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -306,7 +306,7 @@ export class View_HeatMapComponent0 extends import2.AppView<import0.HeatMapCompo
     this._text_14 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
     this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,false,false);
-    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_11,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_11));
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_11,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_11));
     this._HeatCellSeriesComponent_11_3.subscribe(this,this.eventHandler(this.handleEvent_11),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -421,7 +421,7 @@ export class View_HeatMapComponent0 extends import2.AppView<import0.HeatMapCompo
   handleEvent_11(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }

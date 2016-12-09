@@ -9,7 +9,7 @@ export declare class PieSeriesComponent implements OnChanges {
     showLabels: any;
     gradient: boolean;
     activeEntries: any[];
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     max: number;
     data: any;
     ngOnChanges(changes: SimpleChanges): void;

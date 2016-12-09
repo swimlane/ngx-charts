@@ -4,7 +4,7 @@ var label_helper_1 = require('../common/label.helper');
 var SeriesHorizontal = (function () {
     function SeriesHorizontal() {
         this.type = 'standard';
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
     }
     SeriesHorizontal.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -78,12 +78,12 @@ var SeriesHorizontal = (function () {
         return bar.label;
     };
     SeriesHorizontal.prototype.click = function (data) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     SeriesHorizontal.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[seriesHorizontal]',
-                    template: "\n    <svg:g bar \n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (clickHandler)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    template: "\n    <svg:g bar \n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -109,7 +109,7 @@ var SeriesHorizontal = (function () {
         'colors': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return SeriesHorizontal;
 }());

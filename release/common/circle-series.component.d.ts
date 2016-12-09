@@ -9,10 +9,11 @@ export declare class CircleSeriesComponent implements OnChanges {
     scaleType: any;
     visibleValue: any;
     activeEntries: any[];
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
     areaPath: any;
     circles: any[];
-    barVisible: boolean;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCircles(): any[];
@@ -24,4 +25,6 @@ export declare class CircleSeriesComponent implements OnChanges {
     onClick(value: any, label: any): void;
     isActive(entry: any): boolean;
     isVisible(circle: any): boolean;
+    activateCircle(circle: any): void;
+    deactivateCircle(circle: any): void;
 }

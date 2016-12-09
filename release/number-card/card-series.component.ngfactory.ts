@@ -85,7 +85,7 @@ export class Wrapper_CardSeriesComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_CardSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -182,7 +182,7 @@ class View_CardSeriesComponent1 extends import2.AppView<any> {
     this.compView_0 = new import15.View_CardComponent0(this.viewUtils,this,0,this._el_0);
     this._CardComponent_0_3 = new import15.Wrapper_CardComponent(new import16.ElementRef(this._el_0),this.compView_0.ref,this.parentView.injectorGet(import8.NgZone,this.parentIndex));
     this.compView_0.create(this._CardComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_0));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_0));
     this._CardComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return (null as any);
@@ -217,7 +217,7 @@ class View_CardSeriesComponent1 extends import2.AppView<any> {
   handleEvent_0(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }

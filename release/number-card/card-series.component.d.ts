@@ -14,7 +14,7 @@ export declare class CardSeriesComponent implements OnChanges {
     data: any;
     dims: any;
     colors: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     cards: CardModel[];
     constructor(zone: NgZone);
     ngOnChanges(changes: SimpleChanges): void;

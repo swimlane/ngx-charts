@@ -3,7 +3,7 @@ export declare class LineComponent {
     path: any;
     stroke: any;
     data: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     element: ElementRef;
     constructor(element: ElementRef);
 }

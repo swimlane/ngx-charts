@@ -25,7 +25,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.groupResultsBy = function (node) { return node.value; };
         this.nodes = [];
         this.links = [];
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.margin = [0, 0, 0, 0];
         this.results = [];
     }
@@ -55,7 +55,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         });
     };
     ForceDirectedGraphComponent.prototype.onClick = function (data, node) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     ForceDirectedGraphComponent.prototype.getSeriesDomain = function () {
         var _this = this;
@@ -117,7 +117,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         'scheme': [{ type: core_1.Input },],
         'view': [{ type: core_1.Input },],
         'customColors': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
         'linkTemplate': [{ type: core_1.ContentChild, args: ['linkTemplate',] },],
         'nodeTemplate': [{ type: core_1.ContentChild, args: ['nodeTemplate',] },],
         'chart': [{ type: core_1.ViewChild, args: [chart_component_1.ChartComponent, { read: core_1.ElementRef },] },],

@@ -108,7 +108,7 @@ export class Wrapper_PieGridComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
     if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
@@ -306,7 +306,7 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this._PieGridSeriesComponent_2_6 = new import22.Wrapper_PieGridSeriesComponent(new import8.ElementRef(this._el_2));
     this.compView_2.create(this._PieGridSeriesComponent_2_6.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(12,'class','label','count-up','','dy','-0.5em','text-anchor','middle','x','0','y','5'),(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(12,'class','label percent-label','count-up','','dy','-0.5em','text-anchor','middle','x','0','y','5'),(null as any));
     this.compView_4 = new import24.View_CountUpDirective0(this.viewUtils,this,4,this._el_4);
     this._CountUpDirective_4_3 = new import24.Wrapper_CountUpDirective(this.compView_4.ref,this.parentView.parentView.injectorGet(import9.NgZone,this.parentView.parentIndex),new import8.ElementRef(this._el_4));
     this._text_5 = this.renderer.createText((null as any),'\n          ',(null as any));
@@ -321,7 +321,7 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this._text_11 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_10.create(this._CountUpDirective_10_3.context);
     this._text_12 = this.renderer.createText(this._el_0,'\n        ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray16(10,'clickHandler',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_2));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray16(10,'select',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_2));
     this._PieGridSeriesComponent_2_6.subscribe(this,this.eventHandler(this.handleEvent_2),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -412,7 +412,7 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
     result = (this._TooltipDirective_2_5.handleEvent(eventName,$event) && result);
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }

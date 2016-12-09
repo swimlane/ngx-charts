@@ -12,7 +12,7 @@ export declare class Timeline implements OnChanges {
     autoScale: any;
     scaleType: any;
     height: number;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     onDomainChange: EventEmitter<{}>;
     element: HTMLElement;
     dims: any;
@@ -30,8 +30,5 @@ export declare class Timeline implements OnChanges {
     getXScale(): any;
     addBrush(): void;
     updateBrush(): void;
-    getDims(): {
-        width: any;
-        height: number;
-    };
+    getDims(): any;
 }

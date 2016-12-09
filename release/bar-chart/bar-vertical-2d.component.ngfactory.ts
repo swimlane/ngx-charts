@@ -229,7 +229,7 @@ export class Wrapper_BarVertical2DComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
     if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
     if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
@@ -648,7 +648,7 @@ class View_BarVertical2DComponent3 extends import2.AppView<any> {
     this.compView_0 = new import35.View_SeriesVerticalComponent0(this.viewUtils,this,0,this._el_0);
     this._SeriesVerticalComponent_0_3 = new import35.Wrapper_SeriesVerticalComponent();
     this.compView_0.create(this._SeriesVerticalComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_0));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_0));
     this._SeriesVerticalComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return (null as any);
@@ -702,7 +702,7 @@ class View_BarVertical2DComponent3 extends import2.AppView<any> {
   handleEvent_0(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
       result = (pd_sub_0 && result);
     }

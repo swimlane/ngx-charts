@@ -6,7 +6,14 @@ export declare class LineSeriesComponent implements OnChanges {
     color: any;
     scaleType: any;
     curve: string;
+    activeEntries: any[];
     path: string;
+    areaPath: string;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
+    getLineGenerator(): any;
+    getAreaGenerator(): any;
+    sortData(data: any): any;
+    isActive(entry: any): boolean;
+    isInactive(entry: any): boolean;
 }

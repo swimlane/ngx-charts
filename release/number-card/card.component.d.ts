@@ -9,7 +9,7 @@ export declare class CardComponent implements OnChanges, OnDestroy {
     height: any;
     label: any;
     data: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     textEl: ElementRef;
     element: HTMLElement;
     value: string;

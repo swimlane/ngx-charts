@@ -8,7 +8,7 @@ var Timeline = (function () {
         this.zone = zone;
         this.cd = cd;
         this.height = 50;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.onDomainChange = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
@@ -89,9 +89,8 @@ var Timeline = (function () {
     };
     Timeline.prototype.addBrush = function () {
         var _this = this;
-        if (this.brush) {
+        if (this.brush)
             return;
-        }
         var height = this.height;
         var width = this.view[0];
         this.brush = d3_1.default.brushX()
@@ -110,9 +109,8 @@ var Timeline = (function () {
     };
     Timeline.prototype.updateBrush = function () {
         var _this = this;
-        if (!this.brush) {
+        if (!this.brush)
             return;
-        }
         var height = this.height;
         var width = this.view[0];
         this.zone.run(function () {
@@ -160,7 +158,7 @@ var Timeline = (function () {
         'autoScale': [{ type: core_1.Input },],
         'scaleType': [{ type: core_1.Input },],
         'height': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
         'onDomainChange': [{ type: core_1.Output },],
     };
     return Timeline;

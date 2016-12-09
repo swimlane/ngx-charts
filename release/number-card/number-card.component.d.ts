@@ -10,7 +10,7 @@ export declare class NumberCardComponent extends BaseChartComponent implements O
     margin: number[];
     scheme: any;
     customColors: any;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     legendLabelClick: EventEmitter<any>;
     dims: ViewDimensions;
     data: any[];

@@ -5,7 +5,7 @@ export declare class HeatCellSeriesComponent implements OnChanges {
     xScale: any;
     yScale: any;
     gradient: boolean;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     cells: any[];
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;

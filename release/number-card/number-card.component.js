@@ -16,7 +16,7 @@ var NumberCardComponent = (function (_super) {
         this.element = element;
         this.cd = cd;
         this.margin = [10, 10, 10, 10];
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this.legendLabelClick = new core_1.EventEmitter();
     }
     NumberCardComponent.prototype.ngAfterViewInit = function () {
@@ -47,7 +47,7 @@ var NumberCardComponent = (function (_super) {
         return this.results.map(function (d) { return d.name; });
     };
     NumberCardComponent.prototype.onClick = function (data) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     NumberCardComponent.prototype.setColors = function () {
         this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
@@ -55,7 +55,7 @@ var NumberCardComponent = (function (_super) {
     NumberCardComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'number-card',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (clickHandler)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -71,7 +71,7 @@ var NumberCardComponent = (function (_super) {
         'margin': [{ type: core_1.Input },],
         'scheme': [{ type: core_1.Input },],
         'customColors': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
         'legendLabelClick': [{ type: core_1.Output },],
     };
     return NumberCardComponent;

@@ -171,7 +171,7 @@ export class Wrapper_PieChartComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
     if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
     if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
@@ -262,7 +262,7 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
     this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
     this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
-    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_5));
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_5));
     this._PieSeriesComponent_5_3.subscribe(this,this.eventHandler(this.handleEvent_5),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -358,7 +358,7 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
   handleEvent_5(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
     }

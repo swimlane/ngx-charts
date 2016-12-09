@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var CircleComponent = (function () {
     function CircleComponent() {
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
     }
     CircleComponent.prototype.ngOnChanges = function (changes) {
         this.classNames = this.classNames.join(' ') + 'circle';
@@ -10,7 +10,7 @@ var CircleComponent = (function () {
     CircleComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[circle]',
-                    template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n      (click)=\"clickHandler.emit(data)\"\n    />\n  ",
+                    template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -26,7 +26,7 @@ var CircleComponent = (function () {
         'classNames': [{ type: core_1.Input },],
         'circleOpacity': [{ type: core_1.Input },],
         'pointerEvents': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return CircleComponent;
 }());

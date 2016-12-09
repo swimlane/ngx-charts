@@ -30,6 +30,7 @@ export class Wrapper_AreaSeriesComponent {
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
+  /*private*/ _expr_9:any;
   subscription0:any;
   constructor() {
     this._changed = false;
@@ -44,6 +45,7 @@ export class Wrapper_AreaSeriesComponent {
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
+    this._expr_9 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -122,6 +124,14 @@ export class Wrapper_AreaSeriesComponent {
       this._expr_8 = currValue;
     }
   }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_9,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_9,currValue);
+      this._expr_9 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -139,7 +149,7 @@ export class Wrapper_AreaSeriesComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_AreaSeriesComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -183,13 +193,17 @@ export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSerie
   compView_1:import2.AppView<import8.AreaComponent>;
   _AreaComponent_1_3:import9.Wrapper_AreaComponent;
   _text_2:any;
+  /*private*/ _expr_5:any;
+  /*private*/ _expr_6:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_AreaSeriesComponent0,renderType_AreaSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    this._expr_5 = import1.UNINITIALIZED;
+    this._expr_6 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray2(2,'area',''),(null as any));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray4(4,'area','','class','area-series'),(null as any));
     this.compView_1 = new import9.View_AreaComponent0(this.viewUtils,this,1,this._el_1);
     this._AreaComponent_1_3 = new import9.Wrapper_AreaComponent(new import10.ElementRef(this._el_1));
     this.compView_1.create(this._AreaComponent_1_3.context);
@@ -220,6 +234,16 @@ export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSerie
     const currVal_1_0_5:any = this.context.gradient;
     this._AreaComponent_1_3.check_gradient(currVal_1_0_5,throwOnChange,false);
     if (this._AreaComponent_1_3.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    const currVal_5:any = this.context.isActive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_5,currVal_5)) {
+      this.renderer.setElementClass(this._el_1,'active',currVal_5);
+      this._expr_5 = currVal_5;
+    }
+    const currVal_6:any = this.context.isInactive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
+      this.renderer.setElementClass(this._el_1,'inactive',currVal_6);
+      this._expr_6 = currVal_6;
+    }
     this.compView_1.detectChanges(throwOnChange);
   }
   destroyInternal():void {

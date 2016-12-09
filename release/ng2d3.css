@@ -82,12 +82,23 @@
   .ng2d3 .arc:hover,
   .ng2d3 .card.active,
   .ng2d3 .card:hover {
-    opacity: 0.8; }
+    opacity: 0.8;
+    transition: opacity 100ms ease-in-out; }
   .ng2d3 .bar:focus,
   .ng2d3 .cell:focus,
   .ng2d3 .arc:focus,
   .ng2d3 .card:focus {
     outline: none; }
+  .ng2d3 g:focus {
+    outline: none; }
+  .ng2d3 .line-series.inactive,
+  .ng2d3 .area-series.inactive {
+    transition: opacity 100ms ease-in-out;
+    opacity: .2; }
+  .ng2d3 .line-highlight {
+    display: none; }
+    .ng2d3 .line-highlight.active {
+      display: block; }
   .ng2d3 .area {
     opacity: 0.6; }
   .ng2d3 .circle:hover {
@@ -144,7 +155,6 @@
 .timeline .brush .selection {
   fill: rgba(0, 0, 0, 0.1);
   stroke-width: 1px;
-  stroke-dasharray: 10,5;
   stroke: #888888; }
 
 .timeline .brush .handle {
@@ -186,12 +196,15 @@
   .chart-legend .legend-wrap {
     width: 90%; }
   .chart-legend .scale-legend {
-    text-align: center; }
+    text-align: center;
+    display: flex;
+    flex-direction: column; }
   .chart-legend .scale-legend-wrap {
     display: inline-block;
-    height: 100%;
+    flex: 1;
     width: 30px;
-    border-radius: 5px; }
+    border-radius: 5px;
+    margin: 0 auto; }
   .chart-legend .scale-legend-label {
     font-size: 12px; }
   .chart-legend .legend-labels {
@@ -302,6 +315,10 @@
 
 .pie-grid .arc1 {
   opacity: 0.4; }
+
+.pie-grid .percent-label {
+  font-size: 16px;
+  font-weight: 400; }
 
 .force-directed-graph .edge {
   stroke: #333; }

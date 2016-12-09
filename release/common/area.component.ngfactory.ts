@@ -18,8 +18,9 @@ import * as import9 from '@angular/core/src/linker/view_container';
 import * as import10 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import11 from '@angular/core/src/linker/template_ref';
 import * as import12 from '@angular/common/src/directives/ng_if';
-import * as import13 from '../../../src/common/svg-linear-gradient.component';
-import * as import14 from './svg-linear-gradient.component.ngfactory';
+import * as import13 from '@angular/core/src/security';
+import * as import14 from '../../../src/common/svg-linear-gradient.component';
+import * as import15 from './svg-linear-gradient.component.ngfactory';
 export class Wrapper_AreaComponent {
   /*private*/ _eventHandler:Function;
   context:import0.AreaComponent;
@@ -143,7 +144,7 @@ export class Wrapper_AreaComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
   }
 }
 var renderType_AreaComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -241,7 +242,7 @@ export class View_AreaComponent0 extends import2.AppView<import0.AreaComponent> 
     }
     const currVal_10:any = this.context.opacity;
     if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
-      this.renderer.setElementAttribute(this._el_3,'opacity',((currVal_10 == null)? (null as any): currVal_10.toString()));
+      this.renderer.setElementStyle(this._el_3,'opacity',((this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import13.SecurityContext.STYLE,currVal_10).toString()));
       this._expr_10 = currVal_10;
     }
   }
@@ -257,8 +258,8 @@ class View_AreaComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import13.SvgLinearGradientComponent>;
-  _SvgLinearGradientComponent_2_3:import14.Wrapper_SvgLinearGradientComponent;
+  compView_2:import2.AppView<import14.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_2_3:import15.Wrapper_SvgLinearGradientComponent;
   _text_3:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
     super(View_AreaComponent1,renderType_AreaComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
@@ -267,8 +268,8 @@ class View_AreaComponent1 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'orientation','vertical','svgLinearGradient',''),(null as any));
-    this.compView_2 = new import14.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
-    this._SvgLinearGradientComponent_2_3 = new import14.Wrapper_SvgLinearGradientComponent();
+    this.compView_2 = new import15.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
+    this._SvgLinearGradientComponent_2_3 = new import15.Wrapper_SvgLinearGradientComponent();
     this.compView_2.create(this._SvgLinearGradientComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -281,7 +282,7 @@ class View_AreaComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import13.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
+    if (((token === import14.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

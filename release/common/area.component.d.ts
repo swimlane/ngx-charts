@@ -9,7 +9,7 @@ export declare class AreaComponent implements OnChanges {
     endOpacity: number;
     activeLabel: any;
     gradient: boolean;
-    clickHandler: EventEmitter<{}>;
+    select: EventEmitter<{}>;
     element: HTMLElement;
     gradientId: string;
     gradientFill: string;

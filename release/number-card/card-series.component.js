@@ -3,7 +3,7 @@ var core_1 = require('@angular/core');
 var CardSeriesComponent = (function () {
     function CardSeriesComponent(zone) {
         this.zone = zone;
-        this.clickHandler = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
     }
     CardSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -43,12 +43,12 @@ var CardSeriesComponent = (function () {
         return card.label;
     };
     CardSeriesComponent.prototype.onClick = function (data) {
-        this.clickHandler.emit(data);
+        this.select.emit(data);
     };
     CardSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[cardSeries]',
-                    template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (clickHandler)=\"onClick($event)\"\n    />\n  ",
+                    template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -60,7 +60,7 @@ var CardSeriesComponent = (function () {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
-        'clickHandler': [{ type: core_1.Output },],
+        'select': [{ type: core_1.Output },],
     };
     return CardSeriesComponent;
 }());

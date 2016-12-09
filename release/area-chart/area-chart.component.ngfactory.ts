@@ -261,7 +261,7 @@ export class Wrapper_AreaChartComponent {
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
-    if (emit0) { (this.subscription0 = this.context.clickHandler.subscribe(_eventHandler.bind(view,'clickHandler'))); }
+    if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
     if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
     if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
@@ -798,6 +798,8 @@ class View_AreaChartComponent3 extends import2.AppView<any> {
     this._AreaSeriesComponent_2_3.check_gradient(currVal_2_0_5,throwOnChange,false);
     const currVal_2_0_6:any = this.parentView.context.curve;
     this._AreaSeriesComponent_2_3.check_curve(currVal_2_0_6,throwOnChange,false);
+    const currVal_2_0_7:any = this.parentView.context.activeEntries;
+    this._AreaSeriesComponent_2_3.check_activeEntries(currVal_2_0_7,throwOnChange,false);
     if (this._AreaSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.detectChanges(throwOnChange);
   }
@@ -827,8 +829,8 @@ class View_AreaChartComponent4 extends import2.AppView<any> {
     this._CircleSeriesComponent_2_3 = new import31.Wrapper_CircleSeriesComponent();
     this.compView_2.create(this._CircleSeriesComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'clickHandler',(null as any)),this.eventHandler(this.handleEvent_2));
-    this._CircleSeriesComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
+    this._CircleSeriesComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true,true,true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -872,9 +874,17 @@ class View_AreaChartComponent4 extends import2.AppView<any> {
   handleEvent_2(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'clickHandler')) {
+    if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'activate')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'deactivate')) {
+      const pd_sub_2:any = ((<any>this.parentView.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }
