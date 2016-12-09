@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  HostListener
 } from '@angular/core';
 
 @Component({
@@ -20,7 +21,6 @@ import {
       [attr.opacity]="circleOpacity"
       [attr.class]="classNames"
       [attr.pointer-events]="pointerEvents"
-      (click)="select.emit(data)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -38,6 +38,23 @@ export class CircleComponent implements OnChanges {
   @Input() pointerEvents;
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
+
+  @HostListener('click')
+  onClick() {
+    this.select.emit(this.data);
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.activate.emit(this.data);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.deactivate.emit(this.data);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.classNames = this.classNames.join(' ') + 'circle';

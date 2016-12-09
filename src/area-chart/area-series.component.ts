@@ -84,7 +84,7 @@ export class AreaSeriesComponent implements OnChanges {
     area.curve(this.curve);
     startingArea.curve(this.curve);
 
-    this.opacity = 1;
+    this.opacity = .8;
 
     let data = this.data.series;
     if (this.scaleType === 'linear') {

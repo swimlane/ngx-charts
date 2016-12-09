@@ -26,10 +26,9 @@ import { id } from "../utils/id";
         [attr.fill]="circle.gradientFill"
         class="tooltip-bar"
       />
-
       <svg:g circle
         *ngIf="isVisible(circle)"
-        [attr.class]="className"
+        class="circle"
         [cx]="circle.cx"
         [cy]="circle.cy"
         [r]="circle.radius"
@@ -40,9 +39,8 @@ import { id } from "../utils/id";
         [data]="circle.value"
         [classNames]="circle.classNames"
         (select)="onClick($event, circle.label)"
-        [style.cursor]="'pointer'"
-        (mouseover)="activateCircle(circle)"
-        (mouseout)="deactivateCircle(circle)"
+        (activate)="activateCircle(circle)"
+        (deactivate)="deactivateCircle(circle)"
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
@@ -81,7 +79,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   getCircles(): any[] {
     const seriesName = this.data.name;
-    let pageUrl = window.location.href;
+    const pageUrl = window.location.href;
 
     return this.data.series.map((d, i) => {
       const value = d.value;
@@ -107,8 +105,8 @@ export class CircleSeriesComponent implements OnChanges {
           opacity = 1;
         }
 
-        let gradientId = 'grad' + id().toString();
-        let gradientFill = `url(${pageUrl}#${gradientId})`;
+        const gradientId = 'grad' + id().toString();
+        const gradientFill = `url(${pageUrl}#${gradientId})`;
 
         return {
           classNames: [`circle-data-${i}`],
@@ -139,7 +137,7 @@ export class CircleSeriesComponent implements OnChanges {
   onClick(value, label): void {
     this.select.emit({
       name: label,
-      value: value
+      value
     });
   }
 
@@ -152,15 +150,16 @@ export class CircleSeriesComponent implements OnChanges {
     if (this.activeEntries.length > 0) {
       return this.isActive(circle.seriesName);
     }
+
     return circle.opacity !== 0;
   }
 
-  activateCircle(circle) {
+  activateCircle(circle): void {
     circle.barVisible = true;
     this.activate.emit(this.data.name);
   }
 
-  deactivateCircle(circle) {
+  deactivateCircle(circle): void {
     circle.barVisible = false;
     this.deactivate.emit(this.data.name);
   }
