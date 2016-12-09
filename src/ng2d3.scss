@@ -23,6 +23,12 @@
     }
   }
 
+  g {
+    &:focus {
+      outline: none;
+    }
+  }
+
   .line-series,
   .area-series {
     &.inactive {

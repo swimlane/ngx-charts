@@ -45,9 +45,13 @@ module.exports = function(env) {
         minChunks: Infinity
       }),
       new HtmlWebpackPlugin({
-        template: 'demo/index.html',
+        template: 'demo/index.ejs',
         chunksSortMode: 'dependency',
-        title: 'ng2d3'
+        title: 'ng2d3',
+        googleAnalytics: {
+          trackingId: 'UA-57474611-3',
+          pageViewOnLoad: true
+        }
       }),
       new CleanWebpackPlugin(['dist'], {
         root: dir(),
