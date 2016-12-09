@@ -7,6 +7,7 @@
 - Polish: Radial gradients on pie charts vs linear
 - Polish: Better sizing for heatmap legends
 - Chore: Refactor Advanced Legend (#125)
+- Chore: Webpack html templates for Google Analytics
 
 ## 1.9.0
 - Enhancement: Hover of legend doesn't highlight bar (#73)

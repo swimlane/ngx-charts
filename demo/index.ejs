@@ -69,5 +69,18 @@
   <app>Loading...</app>
   <script async defer src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-583eec22a9881701"></script> 
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <% if (htmlWebpackPlugin.options.googleAnalytics) { %>
+    <script type="text/javascript">
+      window.GoogleAnalyticsObject='ga';window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      <% if (htmlWebpackPlugin.options.googleAnalytics.trackingId) { %>
+      ga('create','<%= htmlWebpackPlugin.options.googleAnalytics.trackingId %>','auto');
+      <% } else { throw new Error("html-webpack-template requires googleAnalytics.trackingId config"); } %>
+      <% if (htmlWebpackPlugin.options.googleAnalytics.pageViewOnLoad) { %>
+      ga('send','pageview')
+      <% } %>
+    </script>
+    <script async defer src="https://www.google-analytics.com/analytics.js" type="text/javascript"></script>
+  <% } %>
 </body>
 </html>
