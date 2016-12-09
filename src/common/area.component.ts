@@ -27,7 +27,7 @@ import d3 from '../d3';
       class="area"
       [attr.d]="areaPath"
       [attr.fill]="gradient ? gradientFill : fill"
-      [attr.opacity]="opacity"
+      [style.opacity]="opacity"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -90,6 +90,8 @@ import * as moment from 'moment';
               [visibleValue]="hoveredVertical"
               [activeEntries]="activeEntries"
               (select)="onClick($event, series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
             />
           </svg:g>
         </svg:g>
@@ -144,7 +146,7 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
-  
+
   dims: ViewDimensions;
   xSet: any;
   xDomain: any;

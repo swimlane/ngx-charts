@@ -27,7 +27,15 @@
   .area-series {
     &.inactive {
       transition: opacity 100ms ease-in-out;
-      opacity: .4
+      opacity: .2
+    }
+  }
+
+  .line-highlight {
+    display: none;
+
+    &.active {
+      display: block;
     }
   }
 

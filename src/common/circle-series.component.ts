@@ -4,20 +4,29 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import { formatLabel } from '../common/label.helper';
+import { id } from "../utils/id";
 
 @Component({
   selector: 'g[circleSeries]',
   template: `
     <svg:g *ngFor="let circle of circles">
+      <svg:g svgLinearGradient
+        [color]="color"
+        orientation="vertical"
+        [name]="circle.gradientId"
+        [startOpacity]="0.2"
+        [endOpacity]="1"
+      />
       <svg:rect
-        *ngIf="barVisible"
+        *ngIf="circle.barVisible && type === 'standard'"
         [attr.x]="circle.cx - circle.radius"
         [attr.y]="circle.cy"
         [attr.width]="circle.radius * 2"
         [attr.height]="circle.height"
-        [attr.fill]="color"
+        [attr.fill]="circle.gradientFill"
         class="tooltip-bar"
       />
+
       <svg:g circle
         *ngIf="isVisible(circle)"
         [attr.class]="className"
@@ -32,6 +41,8 @@ import { formatLabel } from '../common/label.helper';
         [classNames]="circle.classNames"
         (select)="onClick($event, circle.label)"
         [style.cursor]="'pointer'"
+        (mouseover)="activateCircle(circle)"
+        (mouseout)="deactivateCircle(circle)"
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
@@ -54,10 +65,11 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   areaPath: any;
   circles: any[];
-  barVisible: boolean = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -69,6 +81,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   getCircles(): any[] {
     const seriesName = this.data.name;
+    let pageUrl = window.location.href;
 
     return this.data.series.map((d, i) => {
       const value = d.value;
@@ -94,6 +107,9 @@ export class CircleSeriesComponent implements OnChanges {
           opacity = 1;
         }
 
+        let gradientId = 'grad' + id().toString();
+        let gradientFill = `url(${pageUrl}#${gradientId})`;
+
         return {
           classNames: [`circle-data-${i}`],
           value,
@@ -104,7 +120,10 @@ export class CircleSeriesComponent implements OnChanges {
           height,
           tooltipLabel,
           opacity,
-          seriesName
+          seriesName,
+          barVisible: false,
+          gradientId,
+          gradientFill
         };
       }
     }).filter((circle) => circle !== undefined);
@@ -130,7 +149,20 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   isVisible(circle): boolean {
-    return circle.opacity || this.isActive(circle.seriesName);
+    if (this.activeEntries.length > 0) {
+      return this.isActive(circle.seriesName);
+    }
+    return circle.opacity !== 0;
+  }
+
+  activateCircle(circle) {
+    circle.barVisible = true;
+    this.activate.emit(this.data.name);
+  }
+
+  deactivateCircle(circle) {
+    circle.barVisible = false;
+    this.deactivate.emit(this.data.name);
   }
 
 }

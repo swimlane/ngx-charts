@@ -95,6 +95,8 @@ import { id } from "../utils/id";
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
               (select)="onClick($event, series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
             />
           </svg:g>
         </svg:g>

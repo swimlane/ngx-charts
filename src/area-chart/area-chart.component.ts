@@ -91,6 +91,8 @@ import d3 from '../d3';
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
               (select)="onClick($event, series)"
+              (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)"
             />
           </svg:g>
         </svg:g>
