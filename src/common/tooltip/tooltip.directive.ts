@@ -30,7 +30,7 @@ export class TooltipDirective implements OnDestroy {
   @Input() tooltipCssClass: string = '';
   @Input() tooltipTitle: string = '';
   @Input() tooltipAppendToBody: boolean = true;
-  @Input() tooltipSpacing: number = 0;
+  @Input() tooltipSpacing: number = 10;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipShowCaret: boolean = true;
   @Input() tooltipPlacement: PlacementTypes = PlacementTypes.top;

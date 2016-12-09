@@ -14,9 +14,9 @@ $shadow-key-umbra-opacity: 0.2;
 $shadow-key-penumbra-opacity: 0.14;
 $shadow-ambient-shadow-opacity: 0.12;
 $shadow:
- 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),
- 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),
- 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);
+  0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),
+  0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),
+  0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);
 
 
 .swui-tooltip-content {
@@ -26,14 +26,15 @@ $shadow:
   display: block;
   font-weight: normal;
   opacity: 0;
+  pointer-events: none;
 
   &.type-popover {
-   background: $popover-bg;
-   color: $popover-color;
-   border: 1px solid $popover-border;
-   box-shadow: $shadow;
-   font-size: 13px;
-   padding: 4px;
+    background: $popover-bg;
+    color: $popover-color;
+    border: 1px solid $popover-border;
+    box-shadow: $shadow;
+    font-size: 13px;
+    padding: 4px;
 
    .tooltip-caret {
      position: absolute;
@@ -103,10 +104,10 @@ $shadow:
   }
 
   .tooltip-caret {
-   position: absolute;
-   z-index: 5001;
-   width: 0;
-   height: 0;
+    position: absolute;
+    z-index: 5001;
+    width: 0;
+    height: 0;
   }
 
   &.position-right {
@@ -123,6 +124,13 @@ $shadow:
 
   &.position-bottom {
    transform: translate3d(0, 10px, 0);
+  }
+
+  &.animate {
+    opacity: 1;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
   }
 
 }

@@ -1,7 +1,6 @@
 import {
   Input, Component, ElementRef, AfterViewInit,
-  HostListener, ViewChild, HostBinding, Renderer,
-  trigger, state, transition, style, animate, TemplateRef
+  HostListener, ViewChild, HostBinding, Renderer, TemplateRef
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
@@ -33,25 +32,7 @@ import { AlignmentTypes } from './alignment.type';
         </span>
       </div>
     </div>
-  `,
-  animations: [
-    trigger('visibilityChanged', [
-      state('active', style({ opacity: 1, 'pointer-events': 'auto' })),
-      transition('void => *', [
-        style({
-          opacity: 0,
-          'pointer-events': 'none', // disable pointer events so there is no interference during animation
-          // transform: 'translate3d(0, 0, 0) perspective(10px) rotateX(10deg)'
-          transform: 'translate3d(0, 0, 0)'
-        }),
-        animate('0.3s ease-out')
-      ]),
-      transition('* => void', [
-        style({ opacity: 1 }),
-        animate('0.2s ease-out')
-      ])
-    ])
-  ]
+  `
 })
 export class TooltipContentComponent implements AfterViewInit {
 
@@ -60,7 +41,7 @@ export class TooltipContentComponent implements AfterViewInit {
   @Input() type: StyleTypes;
   @Input() placement: PlacementTypes;
   @Input() alignment: AlignmentTypes;
-  @Input() spacing: number;
+  @Input() spacing: number = 0;
   @Input() cssClass: string;
   @Input() title: string;
   @Input() template: TemplateRef<any>;
@@ -76,34 +57,35 @@ export class TooltipContentComponent implements AfterViewInit {
     return clz;
   }
 
-  @HostBinding('@visibilityChanged')
-  get visibilityChanged(): string {
-    return 'active';
-  }
-
   constructor(
     public element: ElementRef,
     private renderer: Renderer) {
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     setTimeout(this.position.bind(this));
   }
 
-  position() {
+  position(): void {
     const nativeElm = this.element.nativeElement;
     const hostDim = this.host.nativeElement.getBoundingClientRect();
-    const elmDim = nativeElm.getBoundingClientRect();
 
+    // if no dims were found, never show
+    if(!hostDim.height && !hostDim.width) return;
+
+    const elmDim = nativeElm.getBoundingClientRect();
     this.checkFlip(hostDim, elmDim);
     this.positionContent(nativeElm, hostDim, elmDim);
 
     if(this.showCaret) {
       this.positionCaret(hostDim, elmDim);
     }
+
+    // animate its entry
+    setTimeout(() => this.renderer.setElementClass(nativeElm, 'animate', true), 1);
   }
 
-  positionContent(nativeElm, hostDim, elmDim) {
+  positionContent(nativeElm, hostDim, elmDim): void {
     let top = 0;
     let left = 0;
 
@@ -137,7 +119,7 @@ export class TooltipContentComponent implements AfterViewInit {
     this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
   }
 
-  positionCaret(hostDim, elmDim) {
+  positionCaret(hostDim, elmDim): void {
     let caretElm = this.caretElm.nativeElement;
     const caretDimensions = caretElm.getBoundingClientRect();
 
@@ -178,7 +160,7 @@ export class TooltipContentComponent implements AfterViewInit {
     this.renderer.setElementStyle(caretElm, 'left', `${left}px`);
   }
 
-  checkFlip(hostDim, elmDim) {
+  checkFlip(hostDim, elmDim): void {
     const shouldFlip = PositionHelper.shouldFlip(
       hostDim,
       elmDim,
@@ -201,7 +183,7 @@ export class TooltipContentComponent implements AfterViewInit {
 
   @HostListener('window:resize')
   @throttleable(100)
-  onWindowResize() {
+  onWindowResize(): void {
     this.position();
   }
 
