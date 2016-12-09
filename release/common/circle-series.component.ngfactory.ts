@@ -30,7 +30,6 @@ import * as import21 from '../../../src/utils/injection.service';
 import * as import22 from '@angular/core/src/linker/element_ref';
 import * as import23 from '@angular/core/src/zone/ng_zone';
 import * as import24 from '../../../src/common/tooltip/tooltip.directive';
-import * as import25 from '@angular/core/src/security';
 export class Wrapper_CircleSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CircleSeriesComponent;
@@ -275,7 +274,7 @@ class View_CircleSeriesComponent1 extends import2.AppView<any> {
     this._vc_4 = new import8.ViewContainer(4,0,this,this._anchor_4);
     this._TemplateRef_4_5 = new import10.TemplateRef_(this,4,this._anchor_4);
     this._NgIf_4_6 = new import15.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
-    this._text_5 = this.renderer.createText(this._el_0,'\n\n      ',(null as any));
+    this._text_5 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._anchor_6 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
     this._vc_6 = new import8.ViewContainer(6,0,this,this._anchor_6);
     this._TemplateRef_6_5 = new import10.TemplateRef_(this,6,this._anchor_6);
@@ -397,24 +396,20 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
   _CircleComponent_0_6:import19.Wrapper_CircleComponent;
   _el_1:any;
   /*private*/ _expr_6:any;
-  /*private*/ _expr_7:any;
-  /*private*/ _expr_8:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
     super(View_CircleSeriesComponent3,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_6 = import1.UNINITIALIZED;
-    this._expr_7 = import1.UNINITIALIZED;
-    this._expr_8 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'circle','','swui-tooltip',''),(null as any));
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray8(6,'circle','','class','circle','swui-tooltip',''),(null as any));
     this._vc_0 = new import8.ViewContainer(0,(null as any),this,this._el_0);
     this.compView_0 = new import19.View_CircleComponent0(this.viewUtils,this,0,this._el_0);
     this._TooltipDirective_0_5 = new import18.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import20.TooltipService,this.parentView.parentIndex),this._vc_0.vcRef,this.parentView.parentView.injectorGet(import21.InjectionService,this.parentView.parentIndex),this.renderer,new import22.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import23.NgZone,this.parentView.parentIndex));
     this._CircleComponent_0_6 = new import19.Wrapper_CircleComponent();
     this.compView_0.create(this._CircleComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(14,'select',(null as any),'mouseover',(null as any),'mouseout',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._CircleComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(16,'select',(null as any),'activate',(null as any),'deactivate',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._CircleComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true,true,true);
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return (null as any);
   }
@@ -449,20 +444,10 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
     this._CircleComponent_0_6.check_pointerEvents(currVal_0_1_7,throwOnChange,false);
     if (this._CircleComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
-    const currVal_6:any = this.parentView.parentView.context.className;
+    const currVal_6:any = this.parentView.parentView.context.isActive(this.parentView.context.$implicit.label);
     if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
-      this.renderer.setElementAttribute(this._el_0,'class',((currVal_6 == null)? (null as any): currVal_6.toString()));
+      this.renderer.setElementClass(this._el_0,'active',currVal_6);
       this._expr_6 = currVal_6;
-    }
-    const currVal_7:any = this.parentView.parentView.context.isActive(this.parentView.context.$implicit.label);
-    if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
-      this.renderer.setElementClass(this._el_0,'active',currVal_7);
-      this._expr_7 = currVal_7;
-    }
-    const currVal_8:any = 'pointer';
-    if (import3.checkBinding(throwOnChange,this._expr_8,currVal_8)) {
-      this.renderer.setElementStyle(this._el_0,'cursor',((this.viewUtils.sanitizer.sanitize(import25.SecurityContext.STYLE,currVal_8) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import25.SecurityContext.STYLE,currVal_8).toString()));
-      this._expr_8 = currVal_8;
     }
     this.compView_0.detectChanges(throwOnChange);
   }
@@ -478,18 +463,19 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
     cb(this._el_1,ctx);
   }
   handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
+    this.compView_0.markPathToRootAsCheckOnce();
     var result:boolean = true;
     result = (this._TooltipDirective_0_5.handleEvent(eventName,$event) && result);
+    result = (this._CircleComponent_0_6.handleEvent(eventName,$event) && result);
     if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.parentView.context.onClick($event,this.parentView.context.$implicit.label)) !== false);
       result = (pd_sub_0 && result);
     }
-    if ((eventName == 'mouseover')) {
+    if ((eventName == 'activate')) {
       const pd_sub_1:any = ((<any>this.parentView.parentView.context.activateCircle(this.parentView.context.$implicit)) !== false);
       result = (pd_sub_1 && result);
     }
-    if ((eventName == 'mouseout')) {
+    if ((eventName == 'deactivate')) {
       const pd_sub_2:any = ((<any>this.parentView.parentView.context.deactivateCircle(this.parentView.context.$implicit)) !== false);
       result = (pd_sub_2 && result);
     }

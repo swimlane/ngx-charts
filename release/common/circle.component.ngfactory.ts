@@ -28,6 +28,8 @@ export class Wrapper_CircleComponent {
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor() {
     this._changed = false;
     this._changes = {};
@@ -46,6 +48,8 @@ export class Wrapper_CircleComponent {
   }
   ngOnDestroy():void {
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_cx(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -132,11 +136,25 @@ export class Wrapper_CircleComponent {
   }
   handleEvent(eventName:string,$event:any):boolean {
     var result:boolean = true;
+    if ((eventName == 'click')) {
+      const pd_sub_0:any = ((<any>this.context.onClick()) !== false);
+      result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'mouseenter')) {
+      const pd_sub_1:any = ((<any>this.context.onMouseEnter()) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'mouseleave')) {
+      const pd_sub_2:any = ((<any>this.context.onMouseLeave()) !== false);
+      result = (pd_sub_2 && result);
+    }
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
+    if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
+    if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
 }
 var renderType_CircleComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -152,7 +170,8 @@ class View_CircleComponent_Host0 extends import2.AppView<any> {
     this.compView_0 = new View_CircleComponent0(this.viewUtils,this,0,this._el_0);
     this._CircleComponent_0_3 = new Wrapper_CircleComponent();
     this.compView_0.create(this._CircleComponent_0_3.context);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'click',(null as any),'mouseenter',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._CircleComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -169,6 +188,12 @@ class View_CircleComponent_Host0 extends import2.AppView<any> {
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.compView_0.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._CircleComponent_0_3.handleEvent(eventName,$event) && result);
+    return result;
   }
 }
 export const CircleComponentNgFactory:import7.ComponentFactory<import0.CircleComponent> = new import7.ComponentFactory<import0.CircleComponent>('g[circle]',View_CircleComponent_Host0,import0.CircleComponent);
@@ -202,13 +227,12 @@ export class View_CircleComponent0 extends import2.AppView<import0.CircleCompone
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:circle',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_1));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
       this._text_2
     ]
-    ),[disposable_0]);
+    ),(null as any));
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -252,14 +276,5 @@ export class View_CircleComponent0 extends import2.AppView<import0.CircleCompone
       this.renderer.setElementAttribute(this._el_1,'pointer-events',((currVal_10 == null)? (null as any): currVal_10.toString()));
       this._expr_10 = currVal_10;
     }
-  }
-  handleEvent_1(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.select.emit(this.context.data)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
   }
 }

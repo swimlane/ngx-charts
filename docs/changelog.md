@@ -1,7 +1,11 @@
 # Changelog
 
-## Master
+## 2.0.0
 - BREAKING: Renamed `clickHandler` to `select` (#120)
+- Bug: Tooltips show up in top left corner sometimes
+- Polish: Tooltips have animation entry now
+- Polish: Add highight gradient and column when hovering a circle
+- Polish: Remove outline on focus (#106)
 - Polish: Make pie grid less ugly (#90)
 - Polish: Highlighting a line/area chart in legend, defocuses others
 - Polish: Radial gradients on pie charts vs linear

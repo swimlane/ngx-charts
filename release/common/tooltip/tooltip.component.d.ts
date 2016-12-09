@@ -16,7 +16,6 @@ export declare class TooltipContentComponent implements AfterViewInit {
     template: TemplateRef<any>;
     caretElm: any;
     readonly cssClasses: string;
-    readonly visibilityChanged: string;
     constructor(element: ElementRef, renderer: Renderer);
     ngAfterViewInit(): void;
     position(): void;

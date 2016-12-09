@@ -16,6 +16,7 @@ var TooltipContentComponent = (function () {
     function TooltipContentComponent(element, renderer) {
         this.element = element;
         this.renderer = renderer;
+        this.spacing = 0;
     }
     Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
         get: function () {
@@ -28,25 +29,24 @@ var TooltipContentComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
-        get: function () {
-            return 'active';
-        },
-        enumerable: true,
-        configurable: true
-    });
     TooltipContentComponent.prototype.ngAfterViewInit = function () {
         setTimeout(this.position.bind(this));
     };
     TooltipContentComponent.prototype.position = function () {
+        var _this = this;
         var nativeElm = this.element.nativeElement;
         var hostDim = this.host.nativeElement.getBoundingClientRect();
+        // if no dims were found, never show
+        if (!hostDim.height && !hostDim.width)
+            return;
         var elmDim = nativeElm.getBoundingClientRect();
         this.checkFlip(hostDim, elmDim);
         this.positionContent(nativeElm, hostDim, elmDim);
         if (this.showCaret) {
             this.positionCaret(hostDim, elmDim);
         }
+        // animate its entry
+        setTimeout(function () { return _this.renderer.setElementClass(nativeElm, 'animate', true); }, 1);
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
         var top = 0;
@@ -117,25 +117,7 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'swui-tooltip-content',
-                    template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
-                    animations: [
-                        core_1.trigger('visibilityChanged', [
-                            core_1.state('active', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
-                            core_1.transition('void => *', [
-                                core_1.style({
-                                    opacity: 0,
-                                    'pointer-events': 'none',
-                                    // transform: 'translate3d(0, 0, 0) perspective(10px) rotateX(10deg)'
-                                    transform: 'translate3d(0, 0, 0)'
-                                }),
-                                core_1.animate('0.3s ease-out')
-                            ]),
-                            core_1.transition('* => void', [
-                                core_1.style({ opacity: 1 }),
-                                core_1.animate('0.2s ease-out')
-                            ])
-                        ])
-                    ]
+                    template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  "
                 },] },
     ];
     /** @nocollapse */
@@ -155,7 +137,6 @@ var TooltipContentComponent = (function () {
         'template': [{ type: core_1.Input },],
         'caretElm': [{ type: core_1.ViewChild, args: ['caretElm',] },],
         'cssClasses': [{ type: core_1.HostBinding, args: ['class',] },],
-        'visibilityChanged': [{ type: core_1.HostBinding, args: ['@visibilityChanged',] },],
         'onWindowResize': [{ type: core_1.HostListener, args: ['window:resize',] },],
     };
     __decorate([

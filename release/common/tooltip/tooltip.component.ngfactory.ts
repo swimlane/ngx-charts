@@ -14,20 +14,14 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/linker/component_factory';
 import * as import8 from '@angular/core/src/linker/element_ref';
-import * as import9 from '@angular/core/src/animation/animation_transition';
-import * as import10 from '@angular/core/src/animation/animation_sequence_player';
-import * as import11 from '@angular/core/src/animation/animation_styles';
-import * as import12 from '@angular/core/src/animation/animation_style_util';
-import * as import13 from '@angular/core/src/animation/animation_keyframe';
-import * as import14 from '@angular/core/src/animation/animation_player';
-import * as import15 from '@angular/core/src/linker/query_list';
-import * as import16 from '@angular/core/src/linker/view_container';
-import * as import17 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import18 from '@angular/core/src/linker/template_ref';
-import * as import19 from '@angular/common/src/directives/ng_if';
-import * as import20 from '../../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
-import * as import21 from '@angular/common/src/directives/ng_template_outlet';
-import * as import22 from '@angular/core/src/security';
+import * as import9 from '@angular/core/src/linker/query_list';
+import * as import10 from '@angular/core/src/linker/view_container';
+import * as import11 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import12 from '@angular/core/src/linker/template_ref';
+import * as import13 from '@angular/common/src/directives/ng_if';
+import * as import14 from '../../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
+import * as import15 from '@angular/common/src/directives/ng_template_outlet';
+import * as import16 from '@angular/core/src/security';
 export class Wrapper_TooltipContentComponent {
   /*private*/ _eventHandler:Function;
   context:import0.TooltipContentComponent;
@@ -42,7 +36,6 @@ export class Wrapper_TooltipContentComponent {
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
   /*private*/ _expr_9:any;
-  /*private*/ _expr_10:any;
   constructor(p0:any,p1:any) {
     this._changed = false;
     this.context = new import0.TooltipContentComponent(p0,p1);
@@ -56,12 +49,8 @@ export class Wrapper_TooltipContentComponent {
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
-    this._expr_10 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
-    var animationTransition_visibilityChanged:any = componentView.componentType.animations['visibilityChanged'](view,el,this._expr_10,'void');
-    animationTransition_visibilityChanged.onStart((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.start'));
-    animationTransition_visibilityChanged.onDone((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.done'));
   }
   ngOnDestroy():void {
   }
@@ -139,13 +128,6 @@ export class Wrapper_TooltipContentComponent {
       view.renderer.setElementProperty(el,'className',currVal_9);
       this._expr_9 = currVal_9;
     }
-    const currVal_10:any = this.context.visibilityChanged;
-    if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
-      var animationTransition_visibilityChanged:any = componentView.componentType.animations['visibilityChanged'](view,el,((this._expr_10 == import1.UNINITIALIZED)? 'void': this._expr_10),((currVal_10 == import1.UNINITIALIZED)? 'void': currVal_10));
-      animationTransition_visibilityChanged.onStart((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.start'));
-      animationTransition_visibilityChanged.onDone((this._eventHandler || import3.noop).bind(view,'@visibilityChanged.done'));
-      this._expr_10 = currVal_10;
-    }
   }
   handleEvent(eventName:string,$event:any):boolean {
     var result:boolean = true;
@@ -173,7 +155,6 @@ class View_TooltipContentComponent_Host0 extends import2.AppView<any> {
     this._TooltipContentComponent_0_3 = new Wrapper_TooltipContentComponent(new import8.ElementRef(this._el_0),this.renderer);
     this.compView_0.create(this._TooltipContentComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'resize','window'),this.eventHandler(this.handleEvent_0));
-    this._TooltipContentComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return new import7.ComponentRef_<any>(0,this,this._el_0,this._TooltipContentComponent_0_3.context);
   }
@@ -190,9 +171,6 @@ class View_TooltipContentComponent_Host0 extends import2.AppView<any> {
   destroyInternal():void {
     this.compView_0.destroy();
   }
-  detachInternal():void {
-    this._TooltipContentComponent_0_3.ngOnDetach(this,this.compView_0,this._el_0);
-  }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
@@ -205,68 +183,9 @@ class View_TooltipContentComponent_Host0 extends import2.AppView<any> {
 }
 export const TooltipContentComponentNgFactory:import7.ComponentFactory<import0.TooltipContentComponent> = new import7.ComponentFactory<import0.TooltipContentComponent>('swui-tooltip-content',View_TooltipContentComponent_Host0,import0.TooltipContentComponent);
 const styles_TooltipContentComponent:any[] = ([] as any[]);
-var TooltipContentComponent_visibilityChanged_states:any = {
-  active: {
-    opacity: '1',
-    pointerEvents: 'auto'
-  }
-  ,
-  '*': {},
-  void: {}
-}
-;
-function TooltipContentComponent_visibilityChanged_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import9.AnimationTransition {
-  var previousPlayers:any = view.animationContext.getAnimationPlayers(element,'visibilityChanged',(nextState == 'void'));
-  var collectedStyles:any = {};
-  var player:any = (null as any);
-  var totalTime:any = 0;
-  var defaultStateStyles:any = TooltipContentComponent_visibilityChanged_states['*'];
-  var startStateStyles:any = TooltipContentComponent_visibilityChanged_states[currentState];
-  if ((startStateStyles == (null as any))) { (startStateStyles = defaultStateStyles); }
-  var endStateStyles:any = TooltipContentComponent_visibilityChanged_states[nextState];
-  if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
-  if (((player == (null as any)) && ((currentState == 'void') && true))) {
-      player = new import10.AnimationSequencePlayer([view.renderer.animate(element,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[
-        startStateStyles,
-        {
-          opacity: '0',
-          pointerEvents: 'none',
-          transform: 'translate3d(0, 0, 0)'
-        }
-
-      ]
-      )),import12.balanceAnimationKeyframes(collectedStyles,endStateStyles,[
-        new import13.AnimationKeyframe(0,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[{}]))),
-        new import13.AnimationKeyframe(1,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[{}])))
-      ]
-    ),300,0,'ease-out',previousPlayers)]);
-    totalTime = 300;
-  }
-  if (((player == (null as any)) && (true && (nextState == 'void')))) {
-      player = new import10.AnimationSequencePlayer([view.renderer.animate(element,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[
-        startStateStyles,
-        {opacity: '1'}
-      ]
-      )),import12.balanceAnimationKeyframes(collectedStyles,endStateStyles,[
-        new import13.AnimationKeyframe(0,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[{}]))),
-        new import13.AnimationKeyframe(1,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[{}])))
-      ]
-    ),200,0,'ease-out',previousPlayers)]);
-    totalTime = 200;
-  }
-  if ((player == (null as any))) { (player = new import14.NoOpAnimationPlayer()); }
-  player.onDone(():void => {
-    player.destroy();
-    import12.renderStyles(element,view.renderer,import12.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
-  });
-  new import10.AnimationSequencePlayer(previousPlayers).destroy();
-  import12.renderStyles(element,view.renderer,import12.clearStyles(startStateStyles));
-  view.animationContext.queueAnimation(element,'visibilityChanged',player);
-  return new import9.AnimationTransition(player,currentState,nextState,totalTime);
-}
-var renderType_TooltipContentComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TooltipContentComponent,{visibilityChanged: TooltipContentComponent_visibilityChanged_factory});
+var renderType_TooltipContentComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TooltipContentComponent,{});
 export class View_TooltipContentComponent0 extends import2.AppView<import0.TooltipContentComponent> {
-  _viewQuery_caretElm_0:import15.QueryList<any>;
+  _viewQuery_caretElm_0:import9.QueryList<any>;
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -276,14 +195,14 @@ export class View_TooltipContentComponent0 extends import2.AppView<import0.Toolt
   _el_6:any;
   _text_7:any;
   _anchor_8:any;
-  /*private*/ _vc_8:import16.ViewContainer;
+  /*private*/ _vc_8:import10.ViewContainer;
   _TemplateRef_8_5:any;
-  _NgIf_8_6:import17.Wrapper_NgIf;
+  _NgIf_8_6:import11.Wrapper_NgIf;
   _text_9:any;
   _anchor_10:any;
-  /*private*/ _vc_10:import16.ViewContainer;
+  /*private*/ _vc_10:import10.ViewContainer;
   _TemplateRef_10_5:any;
-  _NgIf_10_6:import17.Wrapper_NgIf;
+  _NgIf_10_6:import11.Wrapper_NgIf;
   _text_11:any;
   _text_12:any;
   _text_13:any;
@@ -296,7 +215,7 @@ export class View_TooltipContentComponent0 extends import2.AppView<import0.Toolt
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_caretElm_0 = new import15.QueryList<any>();
+    this._viewQuery_caretElm_0 = new import9.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
@@ -306,14 +225,14 @@ export class View_TooltipContentComponent0 extends import2.AppView<import0.Toolt
     this._el_6 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','tooltip-content'),(null as any));
     this._text_7 = this.renderer.createText(this._el_6,'\n        ',(null as any));
     this._anchor_8 = this.renderer.createTemplateAnchor(this._el_6,(null as any));
-    this._vc_8 = new import16.ViewContainer(8,6,this,this._anchor_8);
-    this._TemplateRef_8_5 = new import18.TemplateRef_(this,8,this._anchor_8);
-    this._NgIf_8_6 = new import17.Wrapper_NgIf(this._vc_8.vcRef,this._TemplateRef_8_5);
+    this._vc_8 = new import10.ViewContainer(8,6,this,this._anchor_8);
+    this._TemplateRef_8_5 = new import12.TemplateRef_(this,8,this._anchor_8);
+    this._NgIf_8_6 = new import11.Wrapper_NgIf(this._vc_8.vcRef,this._TemplateRef_8_5);
     this._text_9 = this.renderer.createText(this._el_6,'\n        ',(null as any));
     this._anchor_10 = this.renderer.createTemplateAnchor(this._el_6,(null as any));
-    this._vc_10 = new import16.ViewContainer(10,6,this,this._anchor_10);
-    this._TemplateRef_10_5 = new import18.TemplateRef_(this,10,this._anchor_10);
-    this._NgIf_10_6 = new import17.Wrapper_NgIf(this._vc_10.vcRef,this._TemplateRef_10_5);
+    this._vc_10 = new import10.ViewContainer(10,6,this,this._anchor_10);
+    this._TemplateRef_10_5 = new import12.TemplateRef_(this,10,this._anchor_10);
+    this._NgIf_10_6 = new import11.Wrapper_NgIf(this._vc_10.vcRef,this._TemplateRef_10_5);
     this._text_11 = this.renderer.createText(this._el_6,'\n      ',(null as any));
     this._text_12 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_13 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
@@ -339,10 +258,10 @@ export class View_TooltipContentComponent0 extends import2.AppView<import0.Toolt
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (8 === requestNodeIndex))) { return this._TemplateRef_8_5; }
-    if (((token === import19.NgIf) && (8 === requestNodeIndex))) { return this._NgIf_8_6.context; }
-    if (((token === import18.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
-    if (((token === import19.NgIf) && (10 === requestNodeIndex))) { return this._NgIf_10_6.context; }
+    if (((token === import12.TemplateRef) && (8 === requestNodeIndex))) { return this._TemplateRef_8_5; }
+    if (((token === import13.NgIf) && (8 === requestNodeIndex))) { return this._NgIf_8_6.context; }
+    if (((token === import12.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
+    if (((token === import13.NgIf) && (10 === requestNodeIndex))) { return this._NgIf_10_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -379,12 +298,12 @@ class View_TooltipContentComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
-  /*private*/ _vc_2:import16.ViewContainer;
+  /*private*/ _vc_2:import10.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgTemplateOutlet_2_6:import20.Wrapper_NgTemplateOutlet;
+  _NgTemplateOutlet_2_6:import14.Wrapper_NgTemplateOutlet;
   _text_3:any;
   _map_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
     super(View_TooltipContentComponent1,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._map_7 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {model: p0};
@@ -394,9 +313,9 @@ class View_TooltipContentComponent1 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import16.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import18.TemplateRef_(this,2,this._anchor_2);
-    this._NgTemplateOutlet_2_6 = new import20.Wrapper_NgTemplateOutlet(this._vc_2.vcRef);
+    this._vc_2 = new import10.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import12.TemplateRef_(this,2,this._anchor_2);
+    this._NgTemplateOutlet_2_6 = new import14.Wrapper_NgTemplateOutlet(this._vc_2.vcRef);
     this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -408,8 +327,8 @@ class View_TooltipContentComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import21.NgTemplateOutlet) && (2 === requestNodeIndex))) { return this._NgTemplateOutlet_2_6.context; }
+    if (((token === import12.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import15.NgTemplateOutlet) && (2 === requestNodeIndex))) { return this._NgTemplateOutlet_2_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -433,7 +352,7 @@ class View_TooltipContentComponent1 extends import2.AppView<any> {
 }
 class View_TooltipContentComponent2 extends import2.AppView<any> {
   _text_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
     super(View_TooltipContentComponent2,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import7.ComponentRef<any> {
@@ -449,7 +368,7 @@ class View_TooltipContentComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   /*private*/ _expr_2:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
     super(View_TooltipContentComponent3,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_2 = import1.UNINITIALIZED;
   }
@@ -466,7 +385,7 @@ class View_TooltipContentComponent3 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2:any = this.parentView.context.title;
     if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
-      this.renderer.setElementProperty(this._el_0,'innerHTML',this.viewUtils.sanitizer.sanitize(import22.SecurityContext.HTML,currVal_2));
+      this.renderer.setElementProperty(this._el_0,'innerHTML',this.viewUtils.sanitizer.sanitize(import16.SecurityContext.HTML,currVal_2));
       this._expr_2 = currVal_2;
     }
   }

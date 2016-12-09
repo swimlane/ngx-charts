@@ -41,7 +41,7 @@ var AreaSeriesComponent = (function () {
         }
         area.curve(this.curve);
         startingArea.curve(this.curve);
-        this.opacity = 1;
+        this.opacity = .8;
         var data = this.data.series;
         if (this.scaleType === 'linear') {
             data = sort_1.sortLinear(data, 'name');

@@ -10,5 +10,10 @@ export declare class CircleComponent implements OnChanges {
     circleOpacity: any;
     pointerEvents: any;
     select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
+    onClick(): void;
+    onMouseEnter(): void;
+    onMouseLeave(): void;
     ngOnChanges(changes: SimpleChanges): void;
 }

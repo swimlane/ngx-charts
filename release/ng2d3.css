@@ -4,7 +4,8 @@
   z-index: 5000;
   display: block;
   font-weight: normal;
-  opacity: 0; }
+  opacity: 0;
+  pointer-events: none; }
   .swui-tooltip-content.type-popover {
     background: #fff;
     color: #060709;
@@ -69,9 +70,15 @@
     transform: translate3d(0, -10px, 0); }
   .swui-tooltip-content.position-bottom {
     transform: translate3d(0, 10px, 0); }
+  .swui-tooltip-content.animate {
+    opacity: 1;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto; }
 
 .ng2d3 {
   float: left; }
+  .ng2d3 .circle,
   .ng2d3 .bar,
   .ng2d3 .arc {
     cursor: pointer; }
