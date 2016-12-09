@@ -1,5 +1,13 @@
 import {
-  Component, Input, ChangeDetectionStrategy, Output, EventEmitter, SimpleChanges, OnChanges
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+  ChangeDetectorRef,
+  NgZone
  } from '@angular/core';
  import { formatLabel } from '../label.helper';
 
@@ -22,8 +30,8 @@ import {
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
               (select)="labelClick.emit($event)"
-              (activate)="labelActivate.emit($event)"
-              (deactivate)="labelDeactivate.emit($event)">
+              (activate)="activate($event)"
+              (deactivate)="deactivate($event)">
             </legend-entry>
           </li>
         </ul>
@@ -46,12 +54,17 @@ export class LegendComponent implements OnChanges {
 
   legendEntries: any[] = [];
 
+  constructor(private cd: ChangeDetectorRef, private zone: NgZone) { }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
-    this.legendEntries = this.getLegendEntries();
+    this.zone.run(() => {
+      this.cd.markForCheck();
+      this.legendEntries = this.getLegendEntries();
+    });
   }
 
   getLegendEntries(): any[] {
@@ -74,6 +87,18 @@ export class LegendComponent implements OnChanges {
     }
 
     return items;
+  }
+
+  activate(item) {
+    this.zone.run(() => {
+      this.labelActivate.emit(item);
+    });
+  }
+
+  deactivate(item) {
+    this.zone.run(() => {
+      this.labelDeactivate.emit(item);
+    });
   }
 
 }
