@@ -24,6 +24,12 @@
     }
   }
 
+  .tick {
+    text {
+      font-size: 12;
+    }
+  }
+
   g {
     &:focus {
       outline: none;
@@ -143,6 +149,12 @@
 
   .embedded-chart {
     opacity: 0.6;
+  }
+
+  .tick {
+    text {
+      font-size: 11px;
+    }
   }
 }
 

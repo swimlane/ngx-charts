@@ -41,7 +41,7 @@ import * as moment from 'moment';
       </svg:defs>
       <svg:g [attr.transform]="transform" class="line-chart chart">
         <svg:g xAxis
-          *ngIf="xAxis"
+          *ngIf="xAxis && (!timeline || scaleType !== 'time')"
           [xScale]="xScale"
           [dims]="dims"
           [showGridLines]="showGridLines"
@@ -58,6 +58,39 @@ import * as moment from 'moment';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
+
+        <svg:g
+          timeline
+          *ngIf="timeline && scaleType === 'time'"
+          [attr.transform]="timelineTransform"
+          [results]="results"
+          [view]="[timelineWidth, height]"
+          [height]="timelineHeight"
+          [scheme]="scheme"
+          [customColors]="customColors"
+          [scaleType]="scaleType"
+          [legend]="legend"
+          (onDomainChange)="updateDomain($event)">
+          <svg:g *ngFor="let series of results; trackBy:trackBy">
+            <svg:g xAxis
+              [xScale]="timelineXScale"
+              [dims]="timelineAxisDims"
+              [showGridLines]="false"
+              [tickCount]="timelineTickCount"
+              [showLabel]="false">
+            </svg:g>
+
+            <svg:g lineSeries
+              [xScale]="timelineXScale"
+              [yScale]="timelineYScale"
+              [color]="colors(series.name)"
+              [data]="series"
+              [scaleType]="scaleType"
+              [curve]="curve"
+            />
+          </svg:g>
+        </svg:g>
+
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy">
             <svg:g lineSeries
@@ -96,29 +129,7 @@ import * as moment from 'moment';
           </svg:g>
         </svg:g>
       </svg:g>
-      <svg:g
-        timeline
-        *ngIf="timeline && scaleType === 'time'"
-        [attr.transform]="timelineTransform"
-        [results]="results"
-        [view]="[timelineWidth, height]"
-        [height]="timelineHeight"
-        [scheme]="scheme"
-        [customColors]="customColors"
-        [scaleType]="scaleType"
-        [legend]="legend"
-        (onDomainChange)="updateDomain($event)">
-        <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g lineSeries
-            [xScale]="timelineXScale"
-            [yScale]="timelineYScale"
-            [color]="colors(series.name)"
-            [data]="series"
-            [scaleType]="scaleType"
-            [curve]="curve"
-          />
-        </svg:g>
-      </svg:g>
+
     </chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -171,9 +182,11 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   timelineHeight: number = 50;
   timelineXScale: any;
   timelineYScale: any;
+  timelineTickCount: number = 4;
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
+  timelineAxisDims: any;
 
   constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
     super(element, zone, cd);
@@ -195,6 +208,12 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
     super.update();
 
     this.zone.run(() => {
+      this.xDomain = this.getXDomain();
+
+      if (this.timeline && this.scaleType === 'time') {
+        this.xAxis = false;
+      }
+
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
@@ -213,7 +232,7 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
         this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
       }
 
-      this.xDomain = this.getXDomain();
+
       if (this.filteredDomain) {
         this.xDomain = this.filteredDomain;
       }
@@ -240,14 +259,19 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
       this.timelineWidth = this.width;
 
       if (this.legend) {
-        this.timelineWidth = this.width * 10.0 / 12.0;
+        this.timelineWidth = this.dims.width;
       }
 
-      this.timelineWidth -= (this.margin[3] + this.margin[1]);
+      // this.timelineWidth -= (this.margin[3] + this.margin[1]);
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.margin[3] }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(0, ${ -this.margin[0] - this.margin[3] - this.timelinePadding + 5 })`;
+      this.timelineAxisDims = {
+        width: this.timelineWidth,
+        height: this.timelineHeight - 20
+      };
+      this.timelineTickCount = Math.floor(this.timelineWidth / 130);
     }
   }
 

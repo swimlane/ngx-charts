@@ -18,14 +18,15 @@ import { id } from "../utils/id";
             type="matrix"
             values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0" />
       </svg:filter>
+
       <svg:g class="embedded-chart">
         <ng-content></ng-content>
       </svg:g>
-      <svg:rect x="0" 
-        [attr.width]="view[0]" 
-        y="0" 
-        [attr.height]="height" 
-        class="brush-background" 
+      <svg:rect x="0"
+        [attr.width]="view[0]"
+        y="0"
+        [attr.height]="height"
+        class="brush-background"
       />
       <svg:g class="brush"></svg:g>
     </svg:g>

@@ -23,8 +23,7 @@ import { reduceTicks } from './ticks.helper';
         <svg:text
           stroke-width="0.01"
           [attr.text-anchor]="textAnchor"
-          [attr.transform]="textTransform"
-          [style.font-size]="'12px'">
+          [attr.transform]="textTransform">
           {{trimLabel(tickFormat(tick))}}
         </svg:text>
       </svg:g>
@@ -44,10 +43,10 @@ import { reduceTicks } from './ticks.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XAxisTicksComponent implements OnChanges, AfterViewInit {
-  
+
   @Input() scale;
   @Input() orient;
-  @Input() tickArguments = [5];
+  @Input() tickCount: number;
   @Input() tickStroke = '#ccc';
   @Input() tickFormatting;
   @Input() showGridLines = false;
@@ -96,13 +95,10 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   update(): void {
-    let scale = this.scale;
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {
       this.tickFormat = this.tickFormatting;
-    } else if (scale.tickFormat) {
-      this.tickFormat = scale.tickFormat.apply(scale, this.tickArguments);
     } else {
       this.tickFormat = function(d) {
         if (d.constructor.name === 'Date') {
@@ -140,7 +136,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     }
 
     let len = Math.min(this.maxTicksLength, this.maxAllowedLength);
-    let charWidth = 8; // need to measure this
+    let charWidth = 6.6; // need to measure this
     let wordWidth = len * charWidth;
 
     let baseWidth = wordWidth;
@@ -158,18 +154,12 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   getTicks() {
     let ticks;
     let maxTicks = this.getMaxTicks();
-
     if (this.tickValues) {
       ticks = this.tickValues;
-    } else if (this.scale.ticks) {
-      ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-      if (ticks.length > maxTicks) {
-        if (this.tickArguments) {
-          this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-        } else {
-          this.tickArguments = [maxTicks];
-        }
-        ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
+    } else if (this.tickCount) {
+      ticks = this.scale.ticks();
+      if (ticks.length > Math.min(maxTicks, this.tickCount)) {
+        ticks = reduceTicks(ticks, Math.min(maxTicks, this.tickCount));
       }
     } else {
       ticks = this.scale.domain();

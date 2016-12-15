@@ -19,7 +19,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
       [attr.transform]="transform">
       <svg:g xAxisTicks
         [tickFormatting]="tickFormatting"
-        [tickArguments]="tickArguments"
+        [tickCount]="tickCount"
         [tickStroke]="tickStroke"
         [scale]="xScale"
         [orient]="xOrient"
@@ -49,11 +49,10 @@ export class XAxisComponent implements OnChanges {
   @Input() showGridLines = false;
   @Input() showLabel;
   @Input() labelText;
-  @Input() xAxisTickInterval;
+  @Input() tickCount;
 
   @Output() dimensionsChanged = new EventEmitter();
 
-  xAxisTickCount: any;
   xAxisClassName: string = 'x axis';
   xOrient: string = 'bottom';
   tickArguments: any;
@@ -73,10 +72,6 @@ export class XAxisComponent implements OnChanges {
 
   update(): void {
     this.transform = `translate(0,${this.xAxisOffset + this.dims.height})`;
-
-    if (typeof this.xAxisTickCount !== 'undefined') {
-      this.tickArguments = [this.xAxisTickCount];
-    }
   }
 
   emitTicksHeight({ height }): void {
