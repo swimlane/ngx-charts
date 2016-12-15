@@ -1,26 +1,47 @@
-import { ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
+import { 
+  ElementRef, 
+  NgZone, 
+  ChangeDetectorRef, 
+  Component, 
+  Input, 
+  Output,
+  EventEmitter,
+  AfterViewInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-export abstract class BaseChartComponent {
+@Component({
+  selector: 'base-chart',
+  template: ``
+})
+export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+  @Input() results: any;
+  @Input() view: number[];
+  @Input() scheme: any;
+  @Input() customColors: any;
 
-  results: any[];
-  chartElement: ElementRef;
-  zone: NgZone;
-  changeDetector: ChangeDetectorRef;
-  view: number[];
+  @Output() select = new EventEmitter();
+
   width: number;
   height: number;
   resizeSubscription: any;
 
-  constructor(chartElement: ElementRef, zone: NgZone, changeDetector: ChangeDetectorRef) {
-    this.chartElement = chartElement;
-    this.zone = zone;
-    this.changeDetector = changeDetector;
+  constructor(protected chartElement: ElementRef, protected zone: NgZone, protected cd: ChangeDetectorRef) {
   }
 
-  protected bindResizeEvents(view: number[]): void {
-    this.view = view;
+  ngAfterViewInit(): void {
     this.bindWindowResizeEvent();
+  }
+
+  ngOnDestroy(): void {
+    this.unbindEvents();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.update();
   }
 
   protected unbindEvents(): void {
@@ -43,8 +64,8 @@ export abstract class BaseChartComponent {
       this.height = dims.height;
     }
 
-    if (this.changeDetector) {
-      this.changeDetector.markForCheck();
+    if (this.cd) {
+      this.cd.markForCheck();
     }
   }
 
@@ -65,8 +86,8 @@ export abstract class BaseChartComponent {
       let source = Observable.fromEvent(window, 'resize', null, null);
       let subscription = source.debounceTime(200).subscribe(e => {
         this.update();
-        if (this.changeDetector) {
-          this.changeDetector.markForCheck();
+        if (this.cd) {
+          this.cd.markForCheck();
         }
       });
       this.resizeSubscription = subscription;
@@ -126,9 +147,5 @@ export abstract class BaseChartComponent {
       }
     }
   }
-
-  abstract setColors(): void;
-
-  abstract onClick(data, group): void;
 
 }

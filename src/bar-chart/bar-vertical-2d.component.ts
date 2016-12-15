@@ -3,18 +3,11 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
-  OnDestroy,
   trigger,
   style,
   transition,
   animate,
-  NgZone,
-  SimpleChanges,
-  ElementRef,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -86,12 +79,8 @@ import d3 from '../d3';
     ])
   ]
 })
-export class BarVertical2DComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class BarVertical2DComponent extends BaseChartComponent {
 
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
-  @Input() customColors;
   @Input() legend = false;
   @Input() xAxis;
   @Input() yAxis;
@@ -104,7 +93,6 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
 
-  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -120,22 +108,6 @@ export class BarVertical2DComponent extends BaseChartComponent implements OnChan
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();

@@ -3,15 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
-  OnDestroy,
   HostListener,
-  NgZone,
-  ElementRef,
-  SimpleChanges,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -124,14 +117,10 @@ import d3 from '../d3';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AreaChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class AreaChartComponent extends BaseChartComponent {
 
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
   @Input() legend;
   @Input() state;
-  @Input() customColors;
   @Input() xAxis;
   @Input() yAxis;
   @Input() autoScale;
@@ -145,7 +134,6 @@ export class AreaChartComponent extends BaseChartComponent implements OnChanges,
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
 
-  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -175,22 +163,6 @@ export class AreaChartComponent extends BaseChartComponent implements OnChanges,
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();

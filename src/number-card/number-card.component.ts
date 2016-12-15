@@ -1,16 +1,6 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  OnDestroy,
-  AfterViewInit,
-  ElementRef,
-  SimpleChanges,
-  NgZone,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -22,7 +12,6 @@ import { gridLayout } from '../common/grid-layout.helper';
   template: `
     <chart
       [legend]="false"
-      (legendLabelClick)="onClick($event)"
       [view]="[width, height]">
       <svg:g [attr.transform]="transform" class="number-card chart">
         <svg:g cardSeries
@@ -36,38 +25,14 @@ import { gridLayout } from '../common/grid-layout.helper';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NumberCardComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-
-  @Input() view;
-  @Input() results;
-  @Input() margin = [10, 10, 10, 10];
-  @Input() scheme;
-  @Input() customColors;
-
-  @Output() select = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
+export class NumberCardComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   data: any[];
   colors: Function;
   transform: string;
   domain: any[];
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
+  margin = [10, 10, 10, 10];
 
   update(): void {
     super.update();

@@ -1,15 +1,6 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  OnDestroy,
-  AfterViewInit,
-  ElementRef,
-  NgZone,
-  ChangeDetectorRef,
-  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
@@ -64,12 +55,8 @@ import { generateColorScale, colorHelper } from '../utils/color-sets';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeatMapComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class HeatMapComponent extends BaseChartComponent {
 
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
-  @Input() customColors;
   @Input() legend;
   @Input() xAxis;
   @Input() yAxis;
@@ -78,8 +65,6 @@ export class HeatMapComponent extends BaseChartComponent implements OnChanges, O
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
-
-  @Output() select = new EventEmitter();
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -95,22 +80,6 @@ export class HeatMapComponent extends BaseChartComponent implements OnChanges, O
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();

@@ -3,15 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
-  OnDestroy,
-  AfterViewInit,
   HostListener,
-  SimpleChanges,
-  ElementRef,
-  NgZone,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -123,13 +116,9 @@ import * as moment from 'moment';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LineChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class LineChartComponent extends BaseChartComponent {
 
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
   @Input() legend;
-  @Input() customColors;
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -143,7 +132,6 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
 
-  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -174,22 +162,6 @@ export class LineChartComponent extends BaseChartComponent implements OnChanges,
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();

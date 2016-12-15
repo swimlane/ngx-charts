@@ -3,14 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
-  OnDestroy,
-  AfterViewInit,
-  NgZone,
-  SimpleChanges,
-  ElementRef,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { colorHelper } from '../utils/color-sets';
@@ -44,13 +37,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PieChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class PieChartComponent extends BaseChartComponent {
 
-  @Input() view;
-  @Input() results;
-  @Input() margin = [20, 20, 20, 20];
-  @Input() scheme;
-  @Input() customColors;
   @Input() labels = false;
   @Input() legend = false;
   @Input() explodeSlices = false;
@@ -69,22 +57,7 @@ export class PieChartComponent extends BaseChartComponent implements OnChanges, 
   colors: Function;
   domain: any;
   dims: any;
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
+  margin = [20, 20, 20, 20];
 
   update(): void {
     super.update();

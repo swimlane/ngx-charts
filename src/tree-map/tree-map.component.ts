@@ -3,14 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
-  OnDestroy,
-  AfterViewInit,
-  SimpleChanges,
-  ElementRef,
-  NgZone,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -36,12 +29,9 @@ import { colorHelper } from '../utils/color-sets';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeMapComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class TreeMapComponent extends BaseChartComponent {
 
-  @Input() view;
   @Input() results;
-  @Input() scheme;
-  @Input() customColors;
 
   @Output() select = new EventEmitter();
 
@@ -52,22 +42,6 @@ export class TreeMapComponent extends BaseChartComponent implements OnChanges, O
   treemap: any;
   data: any;
   margin = [10, 10, 10, 10];
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();

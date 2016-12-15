@@ -3,15 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnChanges,
-  OnDestroy,
   HostListener,
-  ElementRef,
-  NgZone,
-  SimpleChanges,
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import d3 from '../d3';
@@ -129,12 +122,8 @@ import { id } from "../utils/id";
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AreaChartNormalizedComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class AreaChartNormalizedComponent extends BaseChartComponent {
 
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
-  @Input() customColors;
   @Input() legend = false;
   @Input() xAxis;
   @Input() yAxis;
@@ -148,7 +137,6 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
 
-  @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -178,22 +166,6 @@ export class AreaChartNormalizedComponent extends BaseChartComponent implements 
   timelineXDomain: any;
   timelineTransform: any;
   timelinePadding: number = 10;
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();

@@ -1,17 +1,10 @@
 import {
   Component,
   Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  OnDestroy,
-  AfterViewInit,
-  SimpleChanges,
   ElementRef,
-  NgZone,
   ViewChild,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  AfterViewInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import d3 from '../d3';
@@ -91,11 +84,8 @@ import { colorHelper } from '../utils/color-sets';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GaugeComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
 
-  @Input() view;
-  @Input() scheme;
-  @Input() customColors;
   @Input() gradient: boolean;
   @Input() value: number = 0;
   @Input() min: number = 0;
@@ -105,8 +95,6 @@ export class GaugeComponent extends BaseChartComponent implements OnChanges, OnD
   @Input() smallSegments: number = 5;
   @Input() legend;
 
-  @Output() select = new EventEmitter();
-  
   @ViewChild('textEl') textEl: ElementRef;
 
   dims: ViewDimensions;
@@ -127,21 +115,9 @@ export class GaugeComponent extends BaseChartComponent implements OnChanges, OnD
   textTransform: string = '';
   ticks: any;
 
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
   ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
+    super.ngAfterViewInit();
     setTimeout(() => this.scaleText());
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
   }
 
   update(): void {

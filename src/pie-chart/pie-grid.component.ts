@@ -1,16 +1,6 @@
 import {
   Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  OnDestroy,
-  AfterViewInit,
-  SimpleChanges,
-  ElementRef,
-  NgZone,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import d3 from '../d3';
@@ -78,16 +68,8 @@ import { formatLabel } from '../common/label.helper';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PieGridComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
+export class PieGridComponent extends BaseChartComponent {
   
-  @Input() view;
-  @Input() results;
-  @Input() scheme;
-  @Input() customColors;
-
-  @Output() select = new EventEmitter();
-  @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
-
   dims: ViewDimensions;
   data: any[];
   transform: string;
@@ -95,22 +77,6 @@ export class PieGridComponent extends BaseChartComponent implements OnChanges, O
   domain: any[];
   colorScale: Function;
   margin = [20, 20, 20, 20];
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngAfterViewInit(): void {
-    this.bindResizeEvents(this.view);
-  }
-
-  ngOnDestroy(): void {
-    this.unbindEvents();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();

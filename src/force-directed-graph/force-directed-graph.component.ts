@@ -1,8 +1,12 @@
 import {
-  Component, ContentChild, ElementRef, EventEmitter,
-  HostListener, Input, SimpleChanges, NgZone,
-  OnChanges, Output, TemplateRef, ViewChild,
-  ChangeDetectorRef, ChangeDetectionStrategy
+  Component, 
+  ContentChild, 
+  ElementRef, 
+  HostListener, 
+  Input, 
+  TemplateRef, 
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { ChartComponent } from '../common/charts/chart.component';
@@ -59,7 +63,7 @@ import { colorHelper } from '../utils/color-sets';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ForceDirectedGraphComponent extends BaseChartComponent implements OnChanges {
+export class ForceDirectedGraphComponent extends BaseChartComponent {
 
   @Input() force = d3.forceSimulation()
     .force("charge", d3.forceManyBody())
@@ -72,11 +76,6 @@ export class ForceDirectedGraphComponent extends BaseChartComponent implements O
   @Input() legend: boolean;
   @Input() nodes: any[] = [];
   @Input() links: { source: any, target: any }[] = [];
-  @Input() scheme;
-  @Input() view;
-  @Input() customColors;
-
-  @Output() select = new EventEmitter();
 
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
@@ -90,14 +89,6 @@ export class ForceDirectedGraphComponent extends BaseChartComponent implements O
   results = [];
   seriesDomain: any;
   transform: string;
-
-  constructor(private element: ElementRef, private cd: ChangeDetectorRef, zone: NgZone) {
-    super(element, zone, cd);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update();
-  }
 
   update(): void {
     super.update();
