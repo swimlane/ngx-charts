@@ -16,12 +16,6 @@ import { id } from "../utils/id";
   template: `
     <svg:g class="arc-group">
       <svg:defs *ngIf="gradient">
-        <svg:g svgLinearGradient
-          [color]="fill"
-          orientation="vertical"
-          [name]="linearGradientId"
-          [startOpacity]="startOpacity"
-        />
         <svg:g svgRadialGradient
           [color]="fill"
           orientation="vertical"
@@ -83,7 +77,6 @@ export class PieArcComponent implements OnChanges {
 
     let pageUrl = window.location.href;
     this.radialGradientId = 'linearGrad' + id().toString();
-    this.linearGradientId = 'radialGrad' + id().toString();
 
     this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;
 

@@ -10,13 +10,14 @@ import { id } from "../utils/id";
   selector: 'g[circleSeries]',
   template: `
     <svg:g *ngFor="let circle of circles">
-      <svg:g svgLinearGradient
-        [color]="color"
-        orientation="vertical"
-        [name]="circle.gradientId"
-        [startOpacity]="0.2"
-        [endOpacity]="1"
-      />
+      <defs>
+        <svg:g svgLinearGradient
+          [color]="color"
+          orientation="vertical"
+          [name]="circle.gradientId"
+          [stops]="circle.gradientStops"
+        />
+      </defs>
       <svg:rect
         *ngIf="circle.barVisible && type === 'standard'"
         [attr.x]="circle.cx - circle.radius"
@@ -121,7 +122,8 @@ export class CircleSeriesComponent implements OnChanges {
           seriesName,
           barVisible: false,
           gradientId,
-          gradientFill
+          gradientFill,
+          gradientStops: this.getGradientStops()
         };
       }
     }).filter((circle) => circle !== undefined);
@@ -132,6 +134,20 @@ export class CircleSeriesComponent implements OnChanges {
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>
     `;
+  }
+
+  getGradientStops() {
+    return [
+      {
+        offset: 0,
+        color: this.color,
+        opacity: 0.2
+      },
+      {
+        offset: 100,
+        color: this.color,
+        opacity: 1
+    }];
   }
 
   onClick(value, label): void {

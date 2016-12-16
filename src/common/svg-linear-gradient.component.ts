@@ -29,8 +29,6 @@ export class SvgLinearGradientComponent implements OnChanges {
   @Input() orientation = 'vertical';
   @Input() color;
   @Input() name;
-  @Input() startOpacity;
-  @Input() endOpacity = 1;
   @Input() stops: any[];
 
   x1: any;

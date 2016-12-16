@@ -20,7 +20,6 @@ import d3 from '../d3';
         [orientation]="orientation"
         [name]="gradientId"
         [stops]="gradientStops"
-        [startOpacity]="startOpacity"
       />
     </svg:defs>
     <svg:path

@@ -19,8 +19,7 @@ import d3 from '../d3';
         [color]="fill"
         orientation="vertical"
         [name]="gradientId"
-        [startOpacity]="startOpacity"
-        [endOpacity]="endOpacity"
+        [stops]="gradientStops"
       />
     </svg:defs>
     <svg:path
@@ -43,6 +42,7 @@ export class AreaComponent implements OnChanges {
   @Input() endOpacity = 1;
   @Input() activeLabel;
   @Input() gradient: boolean = false;
+  @Input() stops: any[];
 
   @Output() select = new EventEmitter();
 
@@ -51,6 +51,8 @@ export class AreaComponent implements OnChanges {
   gradientFill: string;
   areaPath: string;
   initialized: boolean = false;
+  gradientStops: any[];
+  hasGradient: boolean = false;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -70,6 +72,13 @@ export class AreaComponent implements OnChanges {
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 
+    if (this.gradient || this.stops) {
+      this.gradientStops = this.getGradient();
+      this.hasGradient = true;
+    } else {
+      this.hasGradient = false;
+    }
+
     this.animateToCurrentForm();
   }
 
@@ -83,5 +92,23 @@ export class AreaComponent implements OnChanges {
 
     node.transition().duration(750)
       .attr('d', this.path);
+  }
+
+  getGradient() {
+    if (this.stops) {
+      return this.stops;
+    }
+    
+    return [
+      {
+        offset: 0,
+        color: this.fill,
+        opacity: this.startOpacity
+      },
+      {
+        offset: 100,
+        color: this.fill,
+        opacity: this.endOpacity
+    }];
   }
 }
