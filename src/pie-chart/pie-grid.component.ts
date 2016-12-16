@@ -5,7 +5,7 @@ import {
 
 import d3 from '../d3';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { trimLabel } from '../common/trim-label.helper';
 import { gridLayout } from '../common/grid-layout.helper';
@@ -75,7 +75,7 @@ export class PieGridComponent extends BaseChartComponent {
   transform: string;
   series: any[];
   domain: any[];
-  colorScale: Function;
+  colorScale: ColorHelper;
   margin = [20, 20, 20, 20];
 
   update(): void {
@@ -126,7 +126,7 @@ export class PieGridComponent extends BaseChartComponent {
         if (count === 1) {
           return 'rgba(100,100,100,0.3)';
         } else {
-          return this.colorScale(label);
+          return this.colorScale.getColor(label);
         }
       };
 
@@ -164,7 +164,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colorScale = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colorScale = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

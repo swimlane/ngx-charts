@@ -10,7 +10,7 @@ import {
 import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 
 @Component({
   selector: 'gauge',
@@ -39,7 +39,7 @@ import { colorHelper } from '../utils/color-sets';
           [innerRadius]="valueArc.innerRadius"
           [outerRadius]="valueArc.outerRadius"
           [cornerRadius]="valueArc.cornerRadius"
-          [fill]="colors(value)"
+          [fill]="colors.getColor(value)"
           [data]="valueArc.data"
           [animate]="true"
           (select)="onClick($event)">
@@ -86,14 +86,12 @@ import { colorHelper } from '../utils/color-sets';
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
 
-  @Input() gradient: boolean;
   @Input() value: number = 0;
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() units: string;
   @Input() bigSegments: number = 10;
   @Input() smallSegments: number = 5;
-  @Input() legend;
 
   @ViewChild('textEl') textEl: ElementRef;
 
@@ -101,9 +99,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   valueDomain: any;
   valueScale: any;
 
-  color: any;
-  colors: Function;
-  colorScale: any;
+  colors: ColorHelper;
   transform: string;
   margin = [40, 100, 40, 100];
   backgroundArc: any;
@@ -271,6 +267,6 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
   }
 }

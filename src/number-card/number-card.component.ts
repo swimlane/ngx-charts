@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { gridLayout } from '../common/grid-layout.helper';
 
 @Component({
@@ -29,7 +29,7 @@ export class NumberCardComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   data: any[];
-  colors: Function;
+  colors: ColorHelper;
   transform: string;
   domain: any[];
   margin = [10, 10, 10, 10];
@@ -62,7 +62,7 @@ export class NumberCardComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

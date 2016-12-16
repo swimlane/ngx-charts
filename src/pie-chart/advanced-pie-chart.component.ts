@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 
 @Component({
@@ -73,7 +73,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   outerRadius: number;
   innerRadius: number;
   transform: string;
-  colors: Function;
+  colors: ColorHelper;
   legendWidth: number;
   margin = [20, 20, 20, 20];
 
@@ -110,7 +110,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
   onActivate(event): void {

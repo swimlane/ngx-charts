@@ -15,16 +15,11 @@ import {
       [attr.y1]="y1"
       [attr.x2]="x2"
       [attr.y2]="y2">
-      <svg:stop
-        [attr.offset]="'0%'"
-        [style.stop-color]="color"
-        [style.stop-opacity]="startOpacity"
-      />
-      <svg:stop
-        [attr.offset]="'100%'"
-        [style.stop-color]="color"
-        [style.stop-opacity]="endOpacity"
-      />
+      <svg:stop *ngFor="let stop of stops"
+        [attr.offset]="stop.offset + '%'"
+        [style.stop-color]="stop.color"
+        [style.stop-opacity]="stop.opacity"
+      />     
     </svg:linearGradient>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -36,6 +31,7 @@ export class SvgLinearGradientComponent implements OnChanges {
   @Input() name;
   @Input() startOpacity;
   @Input() endOpacity = 1;
+  @Input() stops: any[];
 
   x1: any;
   x2: any;

@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 
 @Component({
@@ -54,7 +54,7 @@ export class PieChartComponent extends BaseChartComponent {
   outerRadius: number;
   innerRadius: number;
   data: any;
-  colors: Function;
+  colors: ColorHelper;
   domain: any;
   dims: any;
   margin = [20, 20, 20, 20];
@@ -125,7 +125,8 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+  }
   }
 
   onActivate(event): void {

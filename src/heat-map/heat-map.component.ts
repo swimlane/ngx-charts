@@ -6,7 +6,7 @@ import {
 import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { generateColorScale, colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 
 @Component({
   selector: 'heat-map',
@@ -73,7 +73,7 @@ export class HeatMapComponent extends BaseChartComponent {
   xScale: any;
   yScale: any;
   color: any;
-  colors: Function;
+  colors: ColorHelper;
   colorScale: any;
   transform: string;
   rects: any[];
@@ -195,8 +195,8 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'linear', this.valueDomain);
-    this.colorScale = generateColorScale(this.scheme, 'linear', this.valueDomain);
+    this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
+  }
   }
 
   updateYAxisWidth({ width }): void {

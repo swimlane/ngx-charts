@@ -8,7 +8,7 @@ import {
 import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 
 @Component({
   selector: 'tree-map',
@@ -38,7 +38,7 @@ export class TreeMapComponent extends BaseChartComponent {
   dims: any;
   domain: any;
   transform: any;
-  colors: any;
+  colors: ColorHelper;
   treemap: any;
   data: any;
   margin = [10, 10, 10, 10];
@@ -97,7 +97,7 @@ export class TreeMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

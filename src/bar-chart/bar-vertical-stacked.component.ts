@@ -10,7 +10,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 import d3 from '../d3';
 
@@ -99,10 +99,11 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   yScale: any;
   transform: string;
   tickFormatting: Function;
-  colors: Function;
+  colors: ColorHelper;
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+  legendOptions: any;
 
   update(): void {
     super.update();
@@ -207,8 +208,17 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     return item.name;
   }
 
-  setColors() {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+  setColors(): void {
+    let domain;
+    if (this.schemeType === 'ordinal') {
+      domain = this.innerDomain; 
+    } else {
+      domain = this.valueDomain;
+    }
+
+    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+  }
+
   }
 
   updateYAxisWidth({width}) {

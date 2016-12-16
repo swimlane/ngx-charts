@@ -92,7 +92,7 @@ export class AdvancedLegendComponent implements OnChanges  {
       const label = formatLabel(d.name);
       const value = d.value;
       const percentage = value / this.total * 100;
-      const color = this.colors(label);
+      const color = this.colors.getColor(label);
       
       return {
         value,

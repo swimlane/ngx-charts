@@ -10,7 +10,6 @@ import {
   animate,
   ChangeDetectionStrategy
  } from '@angular/core';
-import * as moment from 'moment';
 import { formatLabel } from '../common/label.helper';
 
 @Component({
@@ -23,6 +22,7 @@ import { formatLabel } from '../common/label.helper';
       [x]="bar.x"
       [y]="bar.y"
       [fill]="bar.color"
+      [stops]="bar.gradientStops"
       [data]="bar.data"
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
@@ -56,7 +56,6 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
-  @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
 
@@ -73,14 +72,7 @@ export class SeriesVerticalComponent implements OnChanges {
   update(): void {
     let width;
     if (this.series.length) {
-      if (this.scaleType === 'time') {
-        let count = this.series.array[0].vals[0].label[0].length;
-        let firstDate = this.series.array[0].vals[0].label[0][count - 1];
-        let secondDate = moment(firstDate).add(1, 'hours');
-        width = Math.abs(this.xScale(secondDate) - this.xScale(firstDate)) * 0.8;
-      } else {
-        width = this.xScale.bandwidth();
-      }
+      width = this.xScale.bandwidth();
     }
 
     let d0 = 0;
@@ -94,11 +86,10 @@ export class SeriesVerticalComponent implements OnChanges {
       let label = d.name;
       const formattedLabel = formatLabel(label);
       const roundEdges = this.type === 'standard';
-
+      
       let bar: any = {
         value,
         label,
-        color: this.colors(label),
         roundEdges: roundEdges,
         data: d,
         width,
@@ -107,6 +98,13 @@ export class SeriesVerticalComponent implements OnChanges {
         x: 0,
         y: 0
       };
+
+      if (this.colors.scaleType === 'ordinal') {
+        bar.color = this.colors.getColor(label);
+      } else {
+        bar.color = this.colors.getColor(value);
+        bar.gradientStops = this.colors.getLinearGradientStops(value);
+      }
 
       if (this.type === 'standard') {
         bar.height = Math.abs(this.yScale(value) - this.yScale(0));

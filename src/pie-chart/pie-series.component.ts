@@ -142,7 +142,7 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   color(arc): any {
-    return this.colors(this.label(arc));
+    return this.colors.getColor(this.label(arc));
   }
 
   trackBy(index, item): string {

@@ -24,6 +24,7 @@ import {
       [x]="bar.x"
       [y]="bar.y"
       [fill]="bar.color"
+      [stops]="bar.gradientStops"
       [data]="bar.data"
       [orientation]="'horizontal'"
       [roundEdges]="bar.roundEdges"
@@ -85,11 +86,17 @@ export class SeriesHorizontal implements OnChanges {
       let bar: any = {
         value,
         label,
-        color: this.colors(label),
         roundEdges,
         data: d,
         formattedLabel
       };
+
+      if (this.colors.scaleType === 'ordinal') {
+        bar.color = this.colors.getColor(label);
+      } else {
+        bar.color = this.colors.getColor(value);
+        bar.gradientStops = this.colors.getLinearGradientStops(value);
+      }
 
       bar.height = this.yScale.bandwidth();
 

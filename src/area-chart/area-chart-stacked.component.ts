@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 import * as moment from 'moment';
 import { id } from "../utils/id";
@@ -56,7 +56,7 @@ import d3 from '../d3';
             <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors(series.name)"
+              [color]="colors.getColor(series.name)"
               [data]="series"
               [scaleType]="scaleType"
               [gradient]="gradient"
@@ -79,8 +79,8 @@ import d3 from '../d3';
               type="stacked"
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors(series.name)"
-              [strokeColor]="colors(series.name)"
+              [color]="colors.getColor(series.name)"
+              [strokeColor]="colors.getColor(series.name)"
               [activeEntries]="activeEntries"
               [data]="series"
               [scaleType]="scaleType"
@@ -107,7 +107,7 @@ import d3 from '../d3';
           <svg:g areaSeries
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
-            [color]="colors(series.name)"
+            [color]="colors.getColor(series.name)"
             [data]="series"
             [scaleType]="scaleType"
             [gradient]="gradient"
@@ -134,6 +134,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
+  @Input() schemeType: string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -149,7 +150,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   transform: string;
   clipPathId: string;
   clipPath: string;
-  colors: Function;
+  colors: ColorHelper;
   margin = [10, 20, 10, 20];
   hoveredVertical: any; // the value of the x axis that is hovered over
   xAxisHeight: number = 0;
@@ -407,7 +408,15 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+    let domain;
+    if (this.schemeType === 'ordinal') {
+      domain = this.seriesDomain; 
+    } else {
+      domain = this.seriesDomain;
+    }
+
+    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+  }
   }
 
   updateYAxisWidth({ width }): void {

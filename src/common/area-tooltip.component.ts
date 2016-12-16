@@ -143,7 +143,7 @@ export class AreaTooltip implements OnChanges {
           value: val,
           name: label,
           series: groupName,
-          color: this.colors(group.name)
+          color: this.colors.getColor(group.name)
         });
       }
     }

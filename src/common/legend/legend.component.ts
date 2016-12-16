@@ -81,7 +81,7 @@ export class LegendComponent implements OnChanges {
         items.push({
           label,
           formattedLabel,
-          color: this.colors(label)
+          color: this.colors.getColor(label)
         });
       }
     }
