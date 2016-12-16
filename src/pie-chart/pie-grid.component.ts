@@ -15,9 +15,8 @@ import { formatLabel } from '../common/label.helper';
   selector: 'pie-grid',
   template: `
     <chart
-      [legend]="false"
-      (legendLabelClick)="onClick($event)"
-      [view]="[width, height]">
+      [view]="[width, height]"
+      [showLegend]="false">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g
           *ngFor="let series of series"

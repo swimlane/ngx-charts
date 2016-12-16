@@ -20,13 +20,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
         [style.width.px]="dims.width"
         [style.height.px]="dims.height">
         <chart
-          [colors]="colors"
-          [legend]="legend"
-          [legendData]="domain"
-          (legendLabelClick)="onClick($event)"
-          (legendLabelActivate)="onActivate($event)"
-          (legendLabelDeactivate)="onDeactivate($event)"
-          [view]="[dims.width, dims.height]">
+          [view]="[width, height]"
+          [showLegend]="false">
           <svg:g
             [attr.transform]="transform"
             class="pie chart">

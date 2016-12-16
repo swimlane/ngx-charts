@@ -11,14 +11,14 @@ import { DomSanitizer } from '@angular/platform-browser';
       [style.height.px]="height"
       [style.width.px]="width">
       <div class="scale-legend-label">
-        <span>{{ valueRange[0].toLocaleString() }}</span>
+        <span>{{ valueRange[1].toLocaleString() }}</span>
       </div>
       <div 
         class="scale-legend-wrap"
         [style.background]="gradient">
       </div>
       <div class="scale-legend-label">
-        <span>{{ valueRange[1].toLocaleString() }}</span>
+        <span>{{ valueRange[0].toLocaleString() }}</span>
       </div>
     </div>
   `,
@@ -50,7 +50,7 @@ export class ScaleLegendComponent implements OnChanges {
     // add the 100%
     splits.push(1);
     let pairs = [];
-    colors.forEach((c, i) => {
+    colors.reverse().forEach((c, i) => {
       pairs.push(`${c} ${Math.round(splits[i] * 100)}%`);
     });
 

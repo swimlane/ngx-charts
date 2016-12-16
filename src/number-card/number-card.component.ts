@@ -11,8 +11,8 @@ import { gridLayout } from '../common/grid-layout.helper';
   selector: 'number-card',
   template: `
     <chart
-      [legend]="false"
-      [view]="[width, height]">
+      [view]="[width, height]"
+      [showLegend]="false">
       <svg:g [attr.transform]="transform" class="number-card chart">
         <svg:g cardSeries
           [colors]="colors"

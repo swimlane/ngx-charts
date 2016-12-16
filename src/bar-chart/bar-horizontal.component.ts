@@ -14,13 +14,12 @@ import d3 from '../d3';
   selector: 'bar-horizontal',
   template: `
     <chart
+      [view]="[width, height]"
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)"
-      [legend]="legend"
-      [view]="[width, height]"
-      [colors]="colors"
-      [legendData]="yDomain">
+      (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
         <svg:g xAxis
           *ngIf="xAxis"
@@ -66,6 +65,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
+  @Input() schemeType: string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -80,6 +80,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+  legendOptions: any;
 
   update(): void {
     super.update();
@@ -96,13 +97,14 @@ export class BarHorizontalComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        columns: 10
+        legendType: this.schemeType
       });
 
       this.xScale = this.getXScale();
       this.yScale = this.getYScale();
 
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     });
@@ -154,6 +156,21 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
+  getLegendOptions() {
+    let opts = {
+      scaleType: this.schemeType,
+      colors: undefined,
+      domain: []
+    };
+    if (opts.scaleType === 'ordinal') {
+      opts.domain = this.yDomain;
+      opts.colors = this.colors;
+    } else {
+      opts.domain = this.xDomain;
+      opts.colors = this.colors.scale;
+    }
+
+    return opts;
   }
 
   updateYAxisWidth({ width }): void {

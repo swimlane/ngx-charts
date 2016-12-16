@@ -18,13 +18,12 @@ import { id } from "../utils/id";
   selector: 'area-chart-normalized',
   template: `
     <chart
-      [legend]="legend"
       [view]="[width, height]"
-      (legendLabelClick)="onClick({series: $event.name})"
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)"
-      [colors]="colors"
-      [legendData]="seriesDomain">
+      (legendLabelDeactivate)="onDeactivate($event)">
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
@@ -159,6 +158,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   filteredDomain: any;
+  legendOptions: any;
 
   timelineWidth: any;
   timelineHeight: number = 50;
@@ -183,7 +183,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        columns: 10
+        legendType: this.schemeType
       });
 
       if (this.timeline) {
@@ -259,6 +259,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
       this.updateTimeline();
 
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
+      
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
       let pageUrl = window.location.href;
       this.clipPathId = 'clip' + id().toString();
@@ -420,6 +422,20 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
+  getLegendOptions() {
+    let opts = {
+      scaleType: this.schemeType,
+      colors: undefined,
+      domain: []
+    };
+    if (opts.scaleType === 'ordinal') {
+      opts.domain = this.seriesDomain;
+      opts.colors = this.colors;
+    } else {
+      opts.domain = this.yDomain;
+      opts.colors = this.colors.scale;
+    }
+    return opts;
   }
 
   updateYAxisWidth({ width }): void {

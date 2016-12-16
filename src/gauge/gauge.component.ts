@@ -16,11 +16,8 @@ import { ColorHelper } from '../utils/color-sets';
   selector: 'gauge',
   template: `
     <chart
-      [legend]="legend"
-      [legendData]="colorScale"
-      (legendLabelClick)="onClick($event)"
-      [data]="valueDomain"
-      [view]="[width, height]">
+      [view]="[width, height]"
+      [showLegend]="false">
       <svg:g [attr.transform]="transform" class="gauge chart">
         <svg:g pieArc
           class="background-arc"
@@ -127,8 +124,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
-        margins: this.margin,
-        columns: 12
+        margins: this.margin
       });
 
       this.valueDomain = this.getValueDomain();

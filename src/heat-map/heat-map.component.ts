@@ -12,11 +12,12 @@ import { ColorHelper } from '../utils/color-sets';
   selector: 'heat-map',
   template: `
     <chart
-      [legend]="legend"
-      (legendLabelClick)="onClick($event)"
-      [legendData]="colorScale"
-      [data]="valueDomain"
-      [view]="[width, height]">
+      [view]="[width, height]"
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)"
+      (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="heat-map chart">
         <svg:g xAxis
           *ngIf="xAxis"
@@ -80,6 +81,7 @@ export class HeatMapComponent extends BaseChartComponent {
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+  legendOptions: any;
 
   update(): void {
     super.update();
@@ -96,7 +98,7 @@ export class HeatMapComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        columns: 11
+        legendType: 'linear'
       });
 
       this.formatDates();
@@ -109,8 +111,9 @@ export class HeatMapComponent extends BaseChartComponent {
       this.yScale = this.getYScale();
 
       this.setColors();
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+      this.legendOptions = this.getLegendOptions();
 
+      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
       this.rects = this.getRects();
     });
   }
@@ -197,6 +200,14 @@ export class HeatMapComponent extends BaseChartComponent {
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
   }
+
+
+  getLegendOptions() {
+    return {
+      scaleType: 'linear',
+      domain: this.valueDomain,
+      colors: this.colors.scale
+    };
   }
 
   updateYAxisWidth({ width }): void {

@@ -96,6 +96,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   results = [];
   seriesDomain: any;
   transform: string;
+  legendOptions: any;
 
   update(): void {
     super.update();
@@ -107,11 +108,11 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
         height: this.height,
         margins: this.margin,
         showLegend: this.legend,
-        columns: 10
       });
 
       this.seriesDomain = this.getSeriesDomain();
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })`;
       if(this.force) {
@@ -158,6 +159,13 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
+
+  getLegendOptions() {
+    return {
+      scaleType: 'ordinal',
+      domain: this.seriesDomain,
+      colors: this.colors
+    };
   }
 
   // Easier to use Angular2 event management than use d3.drag

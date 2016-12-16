@@ -13,13 +13,12 @@ import { BaseChartComponent } from '../common/base-chart.component';
   selector: 'pie-chart',
   template: `
     <chart
-      [colors]="colors"
-      (legendLabelClick)="onClick($event)"
+      [view]="[width, height]"
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
-      [legend]="legend"
-      [view]="[width, height]"
-      [legendData]="domain">
+      (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="translation" class="pie-chart chart">
         <svg:g pieSeries
           [colors]="colors"
@@ -58,6 +57,7 @@ export class PieChartComponent extends BaseChartComponent {
   domain: any;
   dims: any;
   margin = [20, 20, 20, 20];
+  legendOptions: any;
 
   update(): void {
     super.update();
@@ -98,6 +98,7 @@ export class PieChartComponent extends BaseChartComponent {
       });
 
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
     });
   }
 
@@ -127,6 +128,13 @@ export class PieChartComponent extends BaseChartComponent {
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
+
+  getLegendOptions() {
+    return {
+      scaleType: 'ordinal',
+      domain: this.domain,
+      colors: this.colors
+    };
   }
 
   onActivate(event): void {

@@ -14,9 +14,8 @@ import { ColorHelper } from '../utils/color-sets';
   selector: 'tree-map',
   template: `
     <chart
-      [legend]="false"
       [view]="[width, height]"
-      (legendLabelClick)="onClick($event)">
+      [showLegend]="false">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g treeMapCellSeries
           [colors]="colors"
@@ -50,8 +49,7 @@ export class TreeMapComponent extends BaseChartComponent {
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
-        margins: this.margin,
-        columns: 12
+        margins: this.margin
       });
 
       this.domain = this.getDomain();
