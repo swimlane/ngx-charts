@@ -19,6 +19,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="single"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -37,6 +38,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="single"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -55,6 +57,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -73,6 +76,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -91,6 +95,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -109,6 +114,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -127,6 +133,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -145,6 +152,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -196,6 +204,7 @@ import './demo.scss';
             [view]="view"
             class="chart-container"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             (legendLabelClick)="onLegendLabelClick($event)"
@@ -228,6 +237,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             (legendLabelClick)="onLegendLabelClick($event)"
@@ -249,6 +259,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
@@ -269,6 +280,7 @@ import './demo.scss';
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
@@ -414,6 +426,15 @@ import './demo.scss';
           [ngModel]="selectedColorScheme"
           (ngModelChange)="setColorScheme($event)">
           <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{scheme.name}}</option>
+        </select>
+
+        <select
+          [hidden]="!colorVisable"
+          style="margin-left: 10px;"
+          [ngModel]="schemeType"
+          (ngModelChange)="schemeType = $event">
+          <option value="ordinal">Ordinal</option>
+          <option value="linear">Linear</option>
         </select>
 
         <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
@@ -588,6 +609,7 @@ export class AppComponent implements OnInit {
 
   colorSets: any;
   colorScheme: any;
+  schemeType: string = 'ordinal';
   selectedColorScheme: string;
 
   // pie
