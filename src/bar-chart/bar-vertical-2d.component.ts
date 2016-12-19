@@ -15,9 +15,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import d3 from '../d3';
 
 @Component({
-  selector: 'bar-vertical-2d',
+  selector: 'ngx-charts-bar-vertical-2d',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
@@ -25,14 +25,14 @@ import d3 from '../d3';
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g gridPanelSeries
+        <svg:g ngx-charts-gridPanelSeries
           [xScale]="groupScale"
           [yScale]="valueScale"
           [data]="results"
           [dims]="dims"
           orient="vertical">
         </svg:g>
-        <svg:g xAxis
+        <svg:g ngx-charts-xAxis
           *ngIf="xAxis"
           [xScale]="groupScale"
           [dims]="dims"
@@ -40,7 +40,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g yAxis
+        <svg:g ngx-charts-yAxis
           *ngIf="yAxis"
           [yScale]="valueScale"
           [dims]="dims"
@@ -49,7 +49,7 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g seriesVertical
+        <svg:g ngx-charts-seriesVertical
           *ngFor="let group of results; trackBy:trackBy"
           [@animationState]="'active'"
           [attr.transform]="groupTransform(group)"
@@ -63,7 +63,7 @@ import d3 from '../d3';
           (select)="onClick($event, group)"
         />
         </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [

@@ -11,10 +11,10 @@ import d3 from '../d3';
 import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'g[pieSeries]',
+  selector: 'g[ngx-charts-pieSeries]',
   template: `
     <svg:g *ngFor="let arc of data; trackBy:trackBy">
-      <svg:g pieLabel
+      <svg:g ngx-charts-pieLabel
         *ngIf="labelVisible(arc)"
         [data]="arc"
         [radius]="outerRadius"
@@ -25,7 +25,7 @@ import { formatLabel } from '../common/label.helper';
         [explodeSlices]="explodeSlices">
       </svg:g>
       <svg:g 
-        pieArc
+        ngx-charts-pieArc
         [startAngle]="arc.startAngle"
         [endAngle]="arc.endAngle"
         [innerRadius]="innerRadius"

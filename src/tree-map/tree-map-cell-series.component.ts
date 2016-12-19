@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[treeMapCellSeries]',
+  selector: 'g[ngx-charts-treeMapCellSeries]',
   template: `
-    <svg:g treeMapCell *ngFor="let c of cells; trackBy:trackBy"
+    <svg:g ngx-charts-treeMapCell *ngFor="let c of cells; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"

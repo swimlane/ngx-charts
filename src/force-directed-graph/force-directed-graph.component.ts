@@ -18,9 +18,9 @@ import d3 from '../d3';
 import { ColorHelper } from '../utils/color-sets';
 
 @Component({
-  selector: 'force-directed-graph',
+  selector: 'ngx-charts-force-directed-graph',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
@@ -62,7 +62,7 @@ import { ColorHelper } from '../utils/color-sets';
           </svg:g>
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

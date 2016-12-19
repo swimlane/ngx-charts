@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[areaTooltip]',
+  selector: 'g[ngx-charts-areaTooltip]',
   template: `
     <svg:g
       #tooltips

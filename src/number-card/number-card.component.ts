@@ -8,20 +8,20 @@ import { ColorHelper } from '../utils/color-sets';
 import { gridLayout } from '../common/grid-layout.helper';
 
 @Component({
-  selector: 'number-card',
+  selector: 'ngx-charts-number-card',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="number-card chart">
-        <svg:g cardSeries
+        <svg:g ngx-charts-cardSeries
           [colors]="colors"
           [data]="data"
           [dims]="dims"
           (select)="onClick($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -10,9 +10,9 @@ import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 
 @Component({
-  selector: 'pie-chart',
+  selector: 'ngx-charts-pie-chart',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
@@ -20,7 +20,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="translation" class="pie-chart chart">
-        <svg:g pieSeries
+        <svg:g ngx-charts-pieSeries
           [colors]="colors"
           [showLabels]="labels"
           [series]="data"
@@ -32,7 +32,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           (select)="onClick($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

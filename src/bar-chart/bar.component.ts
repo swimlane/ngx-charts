@@ -12,10 +12,10 @@ import { id } from '../utils/id';
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[bar]',
+  selector: 'g[ngx-charts-bar]',
   template: `
     <svg:defs *ngIf="hasGradient">
-      <svg:g svgLinearGradient
+      <svg:g ngx-charts-svgLinearGradient
         [color]="fill"
         [orientation]="orientation"
         [name]="gradientId"

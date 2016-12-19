@@ -1,5 +1,5 @@
 {
-  "name": "ng2d3",
+  "name": "ngx-charts",
   "version": "2.0.0",
   "description": "Angular2 + D3 Charting Library",
   "main": "release/index.js",
@@ -31,14 +31,14 @@
     "package:ts": "tsc --outDir release",
     "package:aot": "ngc -p tsconfig-aot.json",
     "package:replace": "node ./config/replace.js",
-    "package:css": "node-sass -o release/ src/ng2d3.scss",
+    "package:css": "node-sass -o release/ src/ngx-charts.scss",
     "package:minify": "uglifyjs release/index.js --source-map release/index.min.js.map --source-map-url release/index.js.map --compress --mangle --screw-ie8 --output release/index.min.js",
     "deploy": "node ./config/deploy.js",
     "profile": "NODE_ENV=production webpack --profile --json > dist/stats.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swimlane/ng2d3.git"
+    "url": "git+https://github.com/swimlane/ngx-charts.git"
   },
   "keywords": [
     "angular2",
@@ -64,9 +64,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/swimlane/ng2d3/issues"
+    "url": "https://github.com/swimlane/ngx-charts/issues"
   },
-  "homepage": "https://github.com/swimlane/ng2d3#readme",
+  "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
     "@angular/common": "~2.3.0",
     "@angular/compiler": "~2.3.0",

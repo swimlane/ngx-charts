@@ -24,4 +24,4 @@ import { GaugeModule } from "./gauge/gauge.module";
     GaugeModule
   ]
 })
-export class NG2D3Module {}
+export class NgxChartsModule {}

@@ -19,7 +19,7 @@ class TestComponent {
   }
 }
 
-describe('<chart>', () => {
+describe('<ngx-charts-chart>', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,11 +36,11 @@ describe('<chart>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-                    <chart
+                    <ngx-charts-chart
                         [view]="[400,800]"
                         >
-                        <p>ng2d3 is cool!</p>
-                    </chart>
+                        <p>ngx-charts is cool!</p>
+                    </ngx-charts-chart>
                 `
         }
       });
@@ -69,7 +69,7 @@ describe('<chart>', () => {
         let svg = d3.select(compiled.querySelectorAll('svg')[0]);
 
         let textNode = svg.select('p');
-        expect(textNode.text()).toEqual('ng2d3 is cool!');
+        expect(textNode.text()).toEqual('ngx-charts is cool!');
 
       });
     }));

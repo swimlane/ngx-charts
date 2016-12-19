@@ -8,7 +8,7 @@ import d3 from '../d3';
 import { id } from "../utils/id";
 
 @Component({
-  selector: 'g[timeline]',
+  selector: 'g[ngx-charts-timeline]',
   template: `
     <svg:g
       class="timeline"

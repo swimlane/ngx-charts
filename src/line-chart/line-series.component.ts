@@ -11,18 +11,18 @@ import { id } from "../utils/id";
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
-  selector: 'g[lineSeries]',
+  selector: 'g[ngx-charts-lineSeries]',
   template: `
     <svg:g>
       <defs>
-        <svg:g svgLinearGradient ng-if="hasGradient"
+        <svg:g ngx-charts-svgLinearGradient ng-if="hasGradient"
           [color]="colors.getColor(data.name)"
           orientation="vertical"
           [name]="gradientId"
           [stops]="gradientStops"
         />
       </defs>
-      <svg:g area
+      <svg:g ngx-charts-area
         class="line-highlight"
         [data]="data"
         [path]="areaPath"
@@ -34,7 +34,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />    
-      <svg:g line
+      <svg:g ngx-charts-line
         class="line-series"
         [data]="data"
         [path]="path"

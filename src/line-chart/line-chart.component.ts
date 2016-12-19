@@ -14,9 +14,9 @@ import d3 from '../d3';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'line-chart',
+  selector: 'ngx-charts-line-chart',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
@@ -32,7 +32,7 @@ import * as moment from 'moment';
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="line-chart chart">
-        <svg:g xAxis
+        <svg:g ngx-charts-xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -41,7 +41,7 @@ import * as moment from 'moment';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g yAxis
+        <svg:g ngx-charts-yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -52,7 +52,7 @@ import * as moment from 'moment';
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy">
-            <svg:g lineSeries
+            <svg:g ngx-charts-lineSeries
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -62,7 +62,7 @@ import * as moment from 'moment';
               [curve]="curve"
             />
           </svg:g>
-          <svg:g areaTooltip
+          <svg:g ngx-charts-areaTooltip
             [xSet]="xSet"
             [xScale]="xScale"
             [yScale]="yScale"
@@ -72,7 +72,7 @@ import * as moment from 'moment';
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
-            <svg:g circleSeries
+            <svg:g ngx-charts-circleSeries
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -87,8 +87,7 @@ import * as moment from 'moment';
           </svg:g>
         </svg:g>
       </svg:g>
-      <svg:g
-        timeline
+      <svg:g ngx-charts-timeline
         *ngIf="timeline && scaleType === 'time'"
         [attr.transform]="timelineTransform"
         [results]="results"
@@ -100,7 +99,7 @@ import * as moment from 'moment';
         [legend]="legend"
         (onDomainChange)="updateDomain($event)">
         <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g lineSeries
+          <svg:g ngx-charts-lineSeries
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
             [colors]="colors"
@@ -110,7 +109,7 @@ import * as moment from 'moment';
           />
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

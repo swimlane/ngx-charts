@@ -3,7 +3,7 @@ import {
  } from '@angular/core';
 
 @Component({
-  selector: 'legend-entry',
+  selector: 'ngx-charts-legend-entry',
   template: `
     <span 
       [title]="formattedLabel"

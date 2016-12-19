@@ -11,9 +11,9 @@ import d3 from '../d3';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
-  selector: 'g[areaSeries]',
+  selector: 'g[ngx-charts-areaSeries]',
   template: `
-    <svg:g area
+    <svg:g ngx-charts-area
       class="area-series"
       [data]="data"
       [path]="path"

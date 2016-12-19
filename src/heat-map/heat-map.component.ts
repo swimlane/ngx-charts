@@ -9,9 +9,9 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../utils/color-sets';
 
 @Component({
-  selector: 'heat-map',
+  selector: 'ngx-charts-heat-map',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
@@ -19,7 +19,7 @@ import { ColorHelper } from '../utils/color-sets';
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="heat-map chart">
-        <svg:g xAxis
+        <svg:g ngx-charts-xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -27,7 +27,7 @@ import { ColorHelper } from '../utils/color-sets';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g yAxis
+        <svg:g ngx-charts-yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -43,7 +43,7 @@ import { ColorHelper } from '../utils/color-sets';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
-        <svg:g heatMapCellSeries
+        <svg:g ngx-charts-heatMapCellSeries
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -52,7 +52,7 @@ import { ColorHelper } from '../utils/color-sets';
           (select)="onClick($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

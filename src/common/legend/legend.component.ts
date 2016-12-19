@@ -12,7 +12,7 @@ import {
  import { formatLabel } from '../label.helper';
 
 @Component({
-  selector: 'legend',
+  selector: 'ngx-charts-legend',
   template: `
     <div [style.width.px]="width">
       <header class="legend-title">
@@ -25,14 +25,14 @@ import {
           <li
             *ngFor="let entry of legendEntries; trackBy: entry?.formattedLabel"
             class="legend-label">
-            <legend-entry
+            <ngx-charts-legend-entry
               [label]="entry.label"
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
               (deactivate)="deactivate($event)">
-            </legend-entry>
+            </ngx-charts-legend-entry>
           </li>
         </ul>
       </div>

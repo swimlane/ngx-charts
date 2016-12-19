@@ -11,13 +11,13 @@ import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
 
 @Component({
-  selector: 'advanced-legend',
+  selector: 'ngx-charts-advanced-legend',
   template: `
     <div class="advanced-pie-legend"
       [style.width.px]="width">
       <div
         class="total-value"
-        count-up
+        ngx-charts-count-up
         [countTo]="roundedTotal">
       </div>
       <div class="total-label">
@@ -38,13 +38,13 @@ import { formatLabel } from '../label.helper';
             </div>
             <div
               class="item-value"
-              count-up
+              ngx-charts-count-up
               [countTo]="legendItem.value">
             </div>
             <div class="item-label">{{legendItem.label}}</div>
             <div
               class="item-percent"
-              count-up
+              ngx-charts-count-up
               [countTo]="legendItem.percentage"
               [countSuffix]="'%'">
             </div>

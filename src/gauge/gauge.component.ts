@@ -13,13 +13,13 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../utils/color-sets';
 
 @Component({
-  selector: 'gauge',
+  selector: 'ngx-charts-gauge',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="gauge chart">
-        <svg:g pieArc
+        <svg:g ngx-charts-pieArc
           class="background-arc"
           [startAngle]="0"
           [endAngle]="backgroundArc.endAngle"
@@ -30,7 +30,7 @@ import { ColorHelper } from '../utils/color-sets';
           [animate]="false"
           [pointerEvents]="false">
         </svg:g>
-        <svg:g pieArc
+        <svg:g ngx-charts-pieArc
           [startAngle]="0"
           [endAngle]="valueArc.endAngle"
           [innerRadius]="valueArc.innerRadius"
@@ -77,7 +77,7 @@ import { ColorHelper } from '../utils/color-sets';
           </svg:text>
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

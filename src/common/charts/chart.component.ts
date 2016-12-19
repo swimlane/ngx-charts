@@ -7,26 +7,26 @@ import { InjectionService } from '../../utils/injection.service';
 
 @Component({
   providers: [InjectionService],
-  selector: 'chart',
+  selector: 'ngx-charts-chart',
   template: `
     <div 
       [style.width.px]="view[0]"
       [@animationState]="'active'">
       <svg
-        class="ng2d3"
+        class="ngx-charts"
         [attr.width]="chartWidth"
         [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
-      <scale-legend
+      <ngx-charts-scale-legend
         *ngIf="showLegend && legendType === 'scaleLegend'"
         class="chart-legend"
         [valueRange]="legendOptions.domain"
         [colors]="legendOptions.colors"
         [height]="view[1]"
         [width]="legendWidth">
-      </scale-legend>
-      <legend
+      </ngx-charts-scale-legend>
+      <ngx-charts-legend
         *ngIf="showLegend && legendType === 'legend'"
         class="chart-legend"
         [data]="legendOptions.domain"
@@ -37,7 +37,7 @@ import { InjectionService } from '../../utils/injection.service';
         (labelClick)="legendLabelClick.emit($event)"
         (labelActivate)="legendLabelActivate.emit($event)"
         (labelDeactivate)="legendLabelDeactivate.emit($event)">
-      </legend>
+      </ngx-charts-legend>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

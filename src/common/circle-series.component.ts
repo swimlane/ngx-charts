@@ -7,11 +7,11 @@ import { formatLabel } from '../common/label.helper';
 import { id } from "../utils/id";
 
 @Component({
-  selector: 'g[circleSeries]',
+  selector: 'g[ngx-charts-circleSeries]',
   template: `
     <svg:g *ngFor="let circle of circles">
       <defs>
-        <svg:g svgLinearGradient
+        <svg:g ngx-charts-svgLinearGradient
           [color]="color"
           orientation="vertical"
           [name]="circle.gradientId"
@@ -27,7 +27,7 @@ import { id } from "../utils/id";
         [attr.fill]="circle.gradientFill"
         class="tooltip-bar"
       />
-      <svg:g circle
+      <svg:g ngx-charts-circle
         *ngIf="isVisible(circle)"
         class="circle"
         [cx]="circle.cx"

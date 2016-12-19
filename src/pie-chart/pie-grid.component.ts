@@ -12,9 +12,9 @@ import { gridLayout } from '../common/grid-layout.helper';
 import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'pie-grid',
+  selector: 'ngx-charts-pie-grid',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
@@ -22,7 +22,7 @@ import { formatLabel } from '../common/label.helper';
           *ngFor="let series of series"
           class="pie-grid-item"
           [attr.transform]="series.transform">
-          <svg:g pieGridSeries
+          <svg:g ngx-charts-pieGridSeries
             [colors]="series.colors"
             [data]="series.data"
             [innerRadius]="series.innerRadius"
@@ -38,7 +38,7 @@ import { formatLabel } from '../common/label.helper';
             dy="-0.5em"
             x="0"
             y="5"
-            count-up 
+            ngx-charts-count-up 
             [countTo]="series.percent"
             [countSuffix]="'%'"
             text-anchor="middle">
@@ -57,13 +57,13 @@ import { formatLabel } from '../common/label.helper';
             x="0"
             [attr.y]="series.outerRadius"
             text-anchor="middle"
-            count-up 
+            ngx-charts-count-up 
             [countTo]="series.total"
             [countPrefix]="'Total: '">
           </svg:text>
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

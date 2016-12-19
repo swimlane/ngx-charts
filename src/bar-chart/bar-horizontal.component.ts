@@ -11,9 +11,9 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import d3 from '../d3';
 
 @Component({
-  selector: 'bar-horizontal',
+  selector: 'ngx-charts-bar-horizontal',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
@@ -21,7 +21,7 @@ import d3 from '../d3';
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g xAxis
+        <svg:g ngx-charts-xAxis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -30,7 +30,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g yAxis
+        <svg:g ngx-charts-yAxis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -38,7 +38,7 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g seriesHorizontal
+        <svg:g ngx-charts-seriesHorizontal
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -49,7 +49,7 @@ import d3 from '../d3';
           (select)="onClick($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

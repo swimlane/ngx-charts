@@ -4,7 +4,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'scale-legend',
+  selector: 'ngx-charts-scale-legend',
   template: `
     <div
       class="scale-legend"

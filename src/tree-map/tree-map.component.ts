@@ -11,20 +11,20 @@ import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../utils/color-sets';
 
 @Component({
-  selector: 'tree-map',
+  selector: 'ngx-charts-tree-map',
   template: `
-    <chart
+    <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="tree-map chart">
-        <svg:g treeMapCellSeries
+        <svg:g ngx-charts-treeMapCellSeries
           [colors]="colors"
           [data]="data"
           [dims]="dims"
           (select)="onClick($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
