@@ -108,7 +108,6 @@ export class AreaSeriesComponent implements OnChanges {
   updateGradient() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-      console.log('stacked', this.stacked);
       if (this.stacked || this.normalized) {        
         let d0values = this.data.series.map(d => d.d0);
         let d1values = this.data.series.map(d => d.d1);
