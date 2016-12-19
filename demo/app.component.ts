@@ -413,15 +413,15 @@ import './demo.scss';
             </div>
           </div>
         </div>
-        <h3 (click)="colorVisable = !colorVisable" style="cursor: pointer">
+        <h3 (click)="colorVisible = !colorVisible" style="cursor: pointer">
           <span
-            [class.arrow-down]="colorVisable"
-            [class.arrow-right]="!colorVisable">
+            [class.arrow-down]="colorVisible"
+            [class.arrow-right]="!colorVisible">
           </span>
           <strong>Color Scheme</strong>
         </h3>
         <select
-          [hidden]="!colorVisable"
+          [hidden]="!colorVisible"
           style="margin-left: 10px;"
           [ngModel]="selectedColorScheme"
           (ngModelChange)="setColorScheme($event)">
@@ -429,7 +429,8 @@ import './demo.scss';
         </select>
 
         <select
-          [hidden]="!colorVisable"
+          *ngIf="chart.options.includes('schemeType')"
+          [hidden]="!colorVisible"
           style="margin-left: 10px;"
           [ngModel]="schemeType"
           (ngModelChange)="schemeType = $event">

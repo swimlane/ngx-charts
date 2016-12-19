@@ -6,49 +6,49 @@ let chartGroups = [
         name: "Vertical Bar Chart",
         selector: 'bar-vertical',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       },
       {
         name: "Horizontal Bar Chart",
         selector: 'bar-horizontal',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       },
       {
         name: "Grouped Vertical Bar Chart",
         selector: 'bar-vertical-2d',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       },
       {
         name: "Grouped Horizontal Bar Chart",
         selector: 'bar-horizontal-2d',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       },
       {
         name: "Stacked Vertical Bar Chart",
         selector: 'bar-vertical-stacked',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       },
       {
         name: "Stacked Horizontal Bar Chart",
         selector: 'bar-horizontal-stacked',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       },
       {
         name: "Normalized Vertical Bar Chart",
         selector: 'bar-vertical-normalized',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       },
       {
         name: "Normalized Horizontal Bar Chart",
         selector: 'bar-horizontal-normalized',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
       }
     ]
   },
@@ -82,25 +82,25 @@ let chartGroups = [
         name: "Line Chart",
         selector: 'line-chart',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
       {
         name: "Area Chart",
         selector: 'area-chart',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
       {
         name: "Stacked Area Chart",
         selector: 'area-chart-stacked',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
       {
         name: "Normalized Area Chart",
         selector: 'area-chart-normalized',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
       },
     ]
   },
