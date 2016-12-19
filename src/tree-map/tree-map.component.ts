@@ -17,7 +17,7 @@ import { ColorHelper } from '../utils/color-sets';
       [view]="[width, height]"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="tree-map chart">
-        <svg:g ngx-charts-treeMapCellSeries
+        <svg:g ngx-charts-tree-map-cell-series
           [colors]="colors"
           [data]="data"
           [dims]="dims"

@@ -19,7 +19,7 @@ import { ColorHelper } from '../utils/color-sets';
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="heat-map chart">
-        <svg:g ngx-charts-xAxis
+        <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -27,7 +27,7 @@ import { ColorHelper } from '../utils/color-sets';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-yAxis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -43,7 +43,7 @@ import { ColorHelper } from '../utils/color-sets';
           [attr.height]="rect.height"
           [attr.fill]="rect.fill"
         />
-        <svg:g ngx-charts-heatMapCellSeries
+        <svg:g ngx-charts-heat-map-cell-series
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"

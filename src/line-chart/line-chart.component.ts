@@ -32,7 +32,7 @@ import * as moment from 'moment';
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="line-chart chart">
-        <svg:g ngx-charts-xAxis
+        <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -41,7 +41,7 @@ import * as moment from 'moment';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-yAxis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -52,7 +52,7 @@ import * as moment from 'moment';
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy">
-            <svg:g ngx-charts-lineSeries
+            <svg:g ngx-charts-line-series
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -62,7 +62,7 @@ import * as moment from 'moment';
               [curve]="curve"
             />
           </svg:g>
-          <svg:g ngx-charts-areaTooltip
+          <svg:g ngx-charts-area-tooltip
             [xSet]="xSet"
             [xScale]="xScale"
             [yScale]="yScale"
@@ -72,7 +72,7 @@ import * as moment from 'moment';
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
-            <svg:g ngx-charts-circleSeries
+            <svg:g ngx-charts-circle-ceries
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -99,7 +99,7 @@ import * as moment from 'moment';
         [legend]="legend"
         (onDomainChange)="updateDomain($event)">
         <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g ngx-charts-lineSeries
+          <svg:g ngx-charts-line-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
             [colors]="colors"

@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[ngx-charts-heatMapCellSeries]',
+  selector: 'g[ngx-charts-heat-map-cell-series]',
   template: `
     <svg:g 
-      ngx-charts-heatMapCell 
+      ngx-charts-heat-map-cell 
       *ngFor="let c of cells; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"

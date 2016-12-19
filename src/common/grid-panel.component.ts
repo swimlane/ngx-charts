@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[ngx-charts-gridPanel]',
+  selector: 'g[ngx-charts-grid-panel]',
   template: `
     <svg:rect
       [attr.height]="height"

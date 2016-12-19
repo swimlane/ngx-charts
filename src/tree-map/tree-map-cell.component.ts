@@ -6,7 +6,7 @@ import d3 from '../d3';
 import { invertColor } from '../utils/color-utils';
 
 @Component({
-  selector: 'g[ngx-charts-treeMapCell]',
+  selector: 'g[ngx-charts-tree-map-cell]',
   template: `
     <svg:g>
       <svg:rect

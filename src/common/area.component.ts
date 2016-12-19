@@ -15,7 +15,7 @@ import d3 from '../d3';
   selector: 'g[ngx-charts-area]',
   template: `
     <svg:defs *ngIf="gradient">
-      <svg:g ngx-charts-svgLinearGradient
+      <svg:g ngx-charts-svg-linear-gradient
         [color]="fill"
         orientation="vertical"
         [name]="gradientId"

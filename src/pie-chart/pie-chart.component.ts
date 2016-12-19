@@ -20,7 +20,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="translation" class="pie-chart chart">
-        <svg:g ngx-charts-pieSeries
+        <svg:g ngx-charts-pie-series
           [colors]="colors"
           [showLabels]="labels"
           [series]="data"

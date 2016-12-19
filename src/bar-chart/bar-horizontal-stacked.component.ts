@@ -25,7 +25,7 @@ import d3 from '../d3';
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g ngx-charts-xAxis
+        <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -34,7 +34,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-yAxis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -46,7 +46,7 @@ import d3 from '../d3';
           *ngFor="let group of results; trackBy:trackBy"
           [@animationState]="'active'"
           [attr.transform]="groupTransform(group)">
-          <svg:g ngx-charts-seriesHorizontal
+          <svg:g ngx-charts-series-horizontal
             type="stacked"
             [xScale]="xScale"
             [yScale]="yScale"

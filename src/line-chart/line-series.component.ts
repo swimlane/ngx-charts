@@ -11,11 +11,11 @@ import { id } from "../utils/id";
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
-  selector: 'g[ngx-charts-lineSeries]',
+  selector: 'g[ngx-charts-line-series]',
   template: `
     <svg:g>
       <defs>
-        <svg:g ngx-charts-svgLinearGradient ng-if="hasGradient"
+        <svg:g ngx-charts-svg-linear-gradient ng-if="hasGradient"
           [color]="colors.getColor(data.name)"
           orientation="vertical"
           [name]="gradientId"

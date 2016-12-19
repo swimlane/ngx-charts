@@ -12,11 +12,11 @@ import { id } from "../utils/id";
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[ngx-charts-heatMapCell]',
+  selector: 'g[ngx-charts-heat-map-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
-        <svg:g ngx-charts-svgLinearGradient
+        <svg:g ngx-charts-svg-linear-gradient
           [color]="fill"
           orientation="vertical"
           [name]="gradientId"

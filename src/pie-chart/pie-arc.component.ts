@@ -12,11 +12,11 @@ import d3 from '../d3';
 import { id } from "../utils/id";
 
 @Component({
-  selector: 'g[ngx-charts-pieArc]',
+  selector: 'g[ngx-charts-pie-arc]',
   template: `
     <svg:g class="arc-group">
       <svg:defs *ngIf="gradient">
-        <svg:g ngx-charts-svgRadialGradient
+        <svg:g ngx-charts-svg-radial-gradient
           [color]="fill"
           orientation="vertical"
           [name]="radialGradientId"

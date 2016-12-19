@@ -33,7 +33,7 @@ import { id } from "../utils/id";
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="area-chart chart">
-        <svg:g ngx-charts-xAxis
+        <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -42,7 +42,7 @@ import { id } from "../utils/id";
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-yAxis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -53,7 +53,7 @@ import { id } from "../utils/id";
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy">
-            <svg:g ngx-charts-areaSeries
+            <svg:g ngx-charts-area-series
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -65,7 +65,7 @@ import { id } from "../utils/id";
               [curve]="curve"
             />
           </svg:g>
-          <svg:g ngx-charts-areaTooltip
+          <svg:g ngx-charts-area-tooltip
             [xSet]="xSet"
             [xScale]="xScale"
             [yScale]="yScale"
@@ -76,7 +76,7 @@ import { id } from "../utils/id";
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
-            <svg:g ngx-charts-circleSeries
+            <svg:g ngx-charts-circle-ceries
               type="stacked"
               [xScale]="xScale"
               [yScale]="yScale"
@@ -104,7 +104,7 @@ import { id } from "../utils/id";
         [scaleType]="scaleType"
         (onDomainChange)="updateDomain($event)">
         <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g ngx-charts-areaSeries
+          <svg:g ngx-charts-area-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
             [colors]="colors"

@@ -11,10 +11,10 @@ import {
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[ngx-charts-pieGridSeries]',
+  selector: 'g[ngx-charts-pie-grid-series]',
   template: `
     <svg:g class="pie-grid-arcs">
-      <svg:g ngx-charts-pieArc *ngFor="let arc of arcs; trackBy:trackBy"
+      <svg:g ngx-charts-pie-arc *ngFor="let arc of arcs; trackBy:trackBy"
         [attr.class]="arc.class"
         [startAngle]="arc.startAngle"
         [endAngle]="arc.endAngle"

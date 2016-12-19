@@ -12,12 +12,12 @@ import {
 import { XAxisTicksComponent } from './x-axis-ticks.component';
 
 @Component({
-  selector: 'g[ngx-charts-xAxis]',
+  selector: 'g[ngx-charts-x-axis]',
   template: `
     <svg:g
       [attr.class]="xAxisClassName"
       [attr.transform]="transform">
-      <svg:g ngx-charts-xAxisTicks
+      <svg:g ngx-charts-x-axis-ticks
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
@@ -29,7 +29,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         (dimensionsChanged)="emitTicksHeight($event)"
       />
 
-      <svg:g ngx-charts-axisLabel
+      <svg:g ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
         [offset]="labelOffset"

@@ -10,7 +10,7 @@ import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[ngx-charts-pieLabel]',
+  selector: 'g[ngx-charts-pie-label]',
   template: `
     <title>{{label}}</title>
     <svg:text

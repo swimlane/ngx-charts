@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[ngx-charts-svgLinearGradient]',
+  selector: 'g[ngx-charts-svg-linear-gradient]',
   template: `
     <svg:linearGradient
       [id]="name"
