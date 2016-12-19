@@ -55,7 +55,7 @@ import d3 from '../d3';
             <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors.getColor(series.name)"
+              [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
               [scaleType]="scaleType"
@@ -76,8 +76,7 @@ import d3 from '../d3';
             <svg:g circleSeries
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors.getColor(series.name)"
-              [strokeColor]="colors.getColor(series.name)"
+              [colors]="colors"
               [activeEntries]="activeEntries"
               [data]="series"
               [scaleType]="scaleType"
@@ -104,7 +103,7 @@ import d3 from '../d3';
           <svg:g areaSeries
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
-            [color]="colors.getColor(series.name)"
+            [colors]="colors"
             [data]="series"
             [scaleType]="scaleType"
             [gradient]="gradient"
@@ -372,7 +371,7 @@ export class AreaChartComponent extends BaseChartComponent {
     if (this.schemeType === 'ordinal') {
       domain = this.seriesDomain; 
     } else {
-      domain = this.seriesDomain;
+      domain = this.yDomain;
     }
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);

@@ -56,7 +56,7 @@ import { id } from "../utils/id";
             <svg:g areaSeries
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors.getColor(series.name)"
+              [colors]="colors"
               [data]="series"
               [scaleType]="scaleType"
               [activeEntries]="activeEntries"
@@ -80,8 +80,7 @@ import { id } from "../utils/id";
               type="stacked"
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors.getColor(series.name)"
-              [strokeColor]="colors.getColor(series.name)"
+              [colors]="colors"
               [activeEntries]="activeEntries"
               [data]="series"
               [scaleType]="scaleType"
@@ -108,7 +107,7 @@ import { id } from "../utils/id";
           <svg:g areaSeries
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
-            [color]="colors.getColor(series.name)"
+            [colors]="colors"
             [data]="series"
             [scaleType]="scaleType"
             [gradient]="gradient"
@@ -318,7 +317,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    return [ 0, 100 ];
+    return [0, 100];
   }
 
   getSeriesDomain(): any[] {
@@ -416,7 +415,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     if (this.schemeType === 'ordinal') {
       domain = this.seriesDomain; 
     } else {
-      domain = this.seriesDomain;
+      domain = this.yDomain;
     }
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);

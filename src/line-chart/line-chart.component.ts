@@ -55,7 +55,7 @@ import * as moment from 'moment';
             <svg:g lineSeries
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors.getColor(series.name)"
+              [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
               [scaleType]="scaleType"
@@ -75,8 +75,7 @@ import * as moment from 'moment';
             <svg:g circleSeries
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors.getColor(series.name)"
-              [strokeColor]="colors.getColor(series.name)"
+              [colors]="colors"
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
@@ -104,7 +103,7 @@ import * as moment from 'moment';
           <svg:g lineSeries
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
-            [color]="colors.getColor(series.name)"
+            [colors]="colors"
             [data]="series"
             [scaleType]="scaleType"
             [curve]="curve"
@@ -366,7 +365,7 @@ export class LineChartComponent extends BaseChartComponent {
     if (this.schemeType === 'ordinal') {
       domain = this.seriesDomain; 
     } else {
-      domain = this.seriesDomain;
+      domain = this.yDomain;
     }
 
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);

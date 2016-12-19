@@ -17,10 +17,11 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       class="area-series"
       [data]="data"
       [path]="path"
-      [fill]="color"
+      [fill]="colors.getColor(data.name)"
+      [stops]="gradientStops"
       [startingPath]="startingPath"
       [opacity]="opacity"
-      [gradient]="gradient"
+      [gradient]="gradient || hasGradient"
       [class.active]="isActive(data)"
       [class.inactive]="isInactive(data)"
     />
@@ -32,7 +33,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() data;
   @Input() xScale;
   @Input() yScale;
-  @Input() color;
+  @Input() colors;
   @Input() scaleType;
   @Input() stacked: boolean = false;
   @Input() normalized: boolean = false;
@@ -46,11 +47,16 @@ export class AreaSeriesComponent implements OnChanges {
   path: string;
   startingPath: string;
 
+  hasGradient: boolean;
+  gradientStops: any[];
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
+    this.updateGradient();
+
     let area;
     let startingArea;
 
@@ -97,6 +103,27 @@ export class AreaSeriesComponent implements OnChanges {
 
     this.path = area(data);
     this.startingPath = startingArea(data);
+  }
+
+  updateGradient() {
+    if (this.colors.scaleType === 'linear') {
+      this.hasGradient = true;
+      console.log('stacked', this.stacked);
+      if (this.stacked || this.normalized) {        
+        let d0values = this.data.series.map(d => d.d0);
+        let d1values = this.data.series.map(d => d.d1);
+        let max = Math.max(...d1values);
+        let min = Math.min(...d0values);
+        this.gradientStops = this.colors.getLinearGradientStops(max, min);
+      } else {
+        let values = this.data.series.map(d => d.value);
+        let max = Math.max(...values);
+        this.gradientStops = this.colors.getLinearGradientStops(max);
+      }
+    } else {
+      this.hasGradient = false;
+      this.gradientStops = undefined;
+    }
   }
 
   isActive(entry): boolean {

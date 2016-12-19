@@ -163,7 +163,11 @@ export class ColorHelper {
     }
   }
 
-  getLinearGradientStops(value) {
+  getLinearGradientStops(value, start) {
+    if (!start) {
+      start = this.domain[0];
+    }
+
     let valueScale = d3.scaleLinear()
       .domain(this.domain)
       .range([0, 1]);
@@ -173,15 +177,28 @@ export class ColorHelper {
       .range([0, 1]);
 
     let endColor = this.getColor(value);
-
+    
     // generate the stops
-    let currentVal = 0;
+    let startVal = valueScale(start);
+    let startColor = this.getColor(start);
+
     let endVal = valueScale(value);
     let i = 0;
+    let currentVal = startVal;
     let stops = [];
+    stops.push({
+      color: startColor,
+      offset: 0,
+      opacity: 1
+    });
+
     while (currentVal < endVal && i < this.colorDomain.length) {
       let color = this.colorDomain[i];
       let offset = colorValueScale(color);
+      if (offset <= startVal) {
+        i++;
+        continue;
+      }
       if (offset >= endVal) {
         break;
       }
@@ -202,9 +219,8 @@ export class ColorHelper {
     });
 
     // normalize the offsets into percentages
-    let normalizer = 1 / endVal;
     for (let s of stops) {
-      s.offset = Math.floor(s.offset * normalizer * 100);
+      s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
     }
     
     return stops;

@@ -33,9 +33,8 @@ import { id } from "../utils/id";
         [cx]="circle.cx"
         [cy]="circle.cy"
         [r]="circle.radius"
-        [fill]="color"
+        [fill]="circle.color"
         [class.active]="isActive(circle.label)"
-        [stroke]="strokeColor"
         [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
@@ -57,8 +56,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() type = 'standard';
   @Input() xScale;
   @Input() yScale;
-  @Input() color;
-  @Input() strokeColor;
+  @Input() colors;
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
@@ -108,6 +106,18 @@ export class CircleSeriesComponent implements OnChanges {
 
         const gradientId = 'grad' + id().toString();
         const gradientFill = `url(${pageUrl}#${gradientId})`;
+        
+        
+        let color;
+        if (this.colors.scaleType === 'linear') {
+          if (this.type === 'standard') {
+            color = this.colors.getColor(value);
+          } else {
+            color = this.colors.getColor(d.d1);
+          }
+        } else {
+          color = this.colors.getColor(seriesName);
+        }
 
         return {
           classNames: [`circle-data-${i}`],
@@ -118,12 +128,13 @@ export class CircleSeriesComponent implements OnChanges {
           radius,
           height,
           tooltipLabel,
+          color,
           opacity,
           seriesName,
-          barVisible: false,
+          barVisible: false,          
           gradientId,
-          gradientFill,
-          gradientStops: this.getGradientStops()
+          gradientFill,          
+          gradientStops: this.getGradientStops(color)
         };
       }
     }).filter((circle) => circle !== undefined);
@@ -136,16 +147,16 @@ export class CircleSeriesComponent implements OnChanges {
     `;
   }
 
-  getGradientStops() {
+  getGradientStops(color) {
     return [
       {
         offset: 0,
-        color: this.color,
+        color: color,
         opacity: 0.2
       },
       {
         offset: 100,
-        color: this.color,
+        color: color,
         opacity: 1
     }];
   }

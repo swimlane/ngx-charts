@@ -99,13 +99,6 @@ export class SeriesVerticalComponent implements OnChanges {
         y: 0
       };
 
-      if (this.colors.scaleType === 'ordinal') {
-        bar.color = this.colors.getColor(label);
-      } else {
-        bar.color = this.colors.getColor(value);
-        bar.gradientStops = this.colors.getLinearGradientStops(value);
-      }
-
       if (this.type === 'standard') {
         bar.height = Math.abs(this.yScale(value) - this.yScale(0));
         bar.x = this.xScale(label);
@@ -123,6 +116,8 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
+        bar.offset0 = offset0;
+        bar.offset1 = offset1;
       } else if (this.type === 'normalized') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -139,7 +134,21 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
+        bar.offset0 = offset0;
+        bar.offset1 = offset1;
         value = (offset1 - offset0).toFixed(2) + '%';
+      }
+
+      if (this.colors.scaleType === 'ordinal') {
+        bar.color = this.colors.getColor(label);
+      } else {
+        if (this.type === 'standard') {
+          bar.color = this.colors.getColor(value);
+          bar.gradientStops = this.colors.getLinearGradientStops(value);
+        } else {
+          bar.color = this.colors.getColor(bar.offset1);
+          bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+        }
       }
 
       bar.tooltipText = `
