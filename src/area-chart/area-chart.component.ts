@@ -214,14 +214,13 @@ export class AreaChartComponent extends BaseChartComponent {
       this.timelineWidth = this.width;
 
       if (this.legend) {
-        this.timelineWidth = this.width * 10.0 / 12.0;
+        this.timelineWidth = this.dims.width;
       }
 
-      this.timelineWidth -= (this.margin[3] + this.margin[1]);
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.margin[3] }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
     }
   }
 
