@@ -335,15 +335,18 @@ import './demo.scss';
             *ngIf="chartType === 'gauge'"
             class="chart-container"
             [view]="view"
-            (legendLabelClick)="onLegendLabelClick($event)"
+            [results]="single"
             [scheme]="colorScheme"
-            [value]="gaugeValue"
             [min]="gaugeMin"
             [max]="gaugeMax"
             [units]="gaugeUnits"
+            [angleSpan]="gaugeAngleSpan"
+            [startAngle]="gaugeStartAngle"
+            [showAxis]="gaugeShowAxis"
             [bigSegments]="gaugeLargeSegments"
             [smallSegments]="gaugeSmallSegments"
-            (select)="select($event)">
+            (select)="select($event)"
+            (legendLabelClick)="onLegendLabelClick($event)">
           </ngx-charts-gauge>
         </div>
       </div>
@@ -546,9 +549,21 @@ import './demo.scss';
             <input type="number" [(ngModel)]="gaugeMax"><br />
           </div>
 
-          <div *ngIf="chart.options.includes('value')">
-            <label>Value:</label><br />
-            <input type="number" [(ngModel)]="gaugeValue"><br />
+          <div *ngIf="chart.options.includes('angleSpan')">
+            <label>Angle span:</label><br />
+            <input type="number" [(ngModel)]="gaugeAngleSpan"><br />
+          </div>
+
+          <div *ngIf="chart.options.includes('startAngle')">
+            <label>Start Angle:</label><br />
+            <input type="number" [(ngModel)]="gaugeStartAngle"><br />
+          </div>
+
+          <div *ngIf="chart.options.includes('showAxis')">
+            <label>
+              <input type="checkbox" [checked]="gaugeShowAxis" (change)="gaugeShowAxis = $event.target.checked">
+              Show Axis
+            </label> <br />
           </div>
 
           <div *ngIf="chart.options.includes('largeSegments')">
@@ -575,7 +590,7 @@ import './demo.scss';
 
 export class AppComponent implements OnInit {
 
-  theme = "light";
+  theme = "dark";
   chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
@@ -623,12 +638,14 @@ export class AppComponent implements OnInit {
   timeline = false;
 
   // gauge
-  gaugeValue: number = 60;
   gaugeMin: number = 0;
   gaugeMax: number = 100;
   gaugeLargeSegments: number = 10;
   gaugeSmallSegments: number = 5;
   gaugeUnits: string = 'alerts';
+  gaugeAngleSpan: number = 240;
+  gaugeStartAngle: number = -120;
+  gaugeShowAxis: boolean = true;
 
   constructor() {
     Object.assign(this, {
@@ -658,8 +675,6 @@ export class AppComponent implements OnInit {
     if (!this.realTimeData) {
       return;
     }
-
-    this.gaugeValue = this.gaugeMin + Math.ceil(Math.random() * this.gaugeMax);
 
     let country = this.countries[Math.floor(Math.random() * this.countries.length)];
     let add = Math.random() < 0.7;

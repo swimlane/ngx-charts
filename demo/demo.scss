@@ -275,21 +275,10 @@ main {
     }
     .gauge-tick {
       path {
-        stroke: $color-bg-light;
+        stroke: $color-text-med;
       }
-
       text {
-        fill: $color-bg-light;
-      }
-
-      &.highlighted {
-        path {
-          stroke: #fff;
-        }
-
-        text {
-          fill: #fff;
-        }
+        fill: $color-text-med;
       }
     }
   }

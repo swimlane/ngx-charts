@@ -134,8 +134,8 @@ let chartGroups = [
       {
         name: "Gauge",
         selector: 'gauge',
-        inputFormat: 'singleValue',
-        options: ['colorScheme', 'value', 'min', 'max', 'largeSegments', 'smallSegments', 'units']
+        inputFormat: 'singleSeries',
+        options: ['colorScheme', 'value', 'min', 'max', 'largeSegments', 'smallSegments', 'units', 'angleSpan', 'startAngle', 'showAxis']
       }
     ]
   }

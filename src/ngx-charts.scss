@@ -389,23 +389,13 @@
 
   .gauge-tick {
     path {
-      stroke: #999;
+      stroke: #666;
     }
 
     text {
       font-size: 12px;
-      fill: #999;
+      fill: #666;
       font-weight: bold;
-    }
-
-    &.highlighted {
-      path {
-        stroke: #666;
-      }
-
-      text {
-        fill: #666;
-      }
     }
   }
 
