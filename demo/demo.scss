@@ -268,11 +268,16 @@ main {
   }
 
   .gauge {
-    .background-arc {
+    .background-arc, .background-bar {
       path {
         fill: $color-bg-med;
       }
     }
+
+    .units {
+      fill: $color-text-dark;
+    }
+
     .gauge-tick {
       path {
         stroke: $color-text-med;

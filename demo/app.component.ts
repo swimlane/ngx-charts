@@ -348,6 +348,17 @@ import './demo.scss';
             (select)="select($event)"
             (legendLabelClick)="onLegendLabelClick($event)">
           </ngx-charts-gauge>
+          <ngx-charts-linear-gauge
+            *ngIf="chartType === 'linear-gauge'"
+            class="chart-container"
+            [view]="view"
+            [scheme]="colorScheme"
+            [min]="gaugeMin"
+            [max]="gaugeMax"
+            [value]="gaugeValue"
+            [units]="gaugeUnits"
+            (select)="select($event)">
+          </ngx-charts-linear-gauge>
         </div>
       </div>
       <div class="sidebar">
@@ -549,6 +560,11 @@ import './demo.scss';
             <input type="number" [(ngModel)]="gaugeMax"><br />
           </div>
 
+          <div *ngIf="chart.options.includes('value')">
+            <label>Value:</label><br />
+            <input type="number" [(ngModel)]="gaugeValue"><br />
+          </div>
+
           <div *ngIf="chart.options.includes('angleSpan')">
             <label>Angle span:</label><br />
             <input type="number" [(ngModel)]="gaugeAngleSpan"><br />
@@ -646,6 +662,7 @@ export class AppComponent implements OnInit {
   gaugeAngleSpan: number = 240;
   gaugeStartAngle: number = -120;
   gaugeShowAxis: boolean = true;
+  gaugeValue: number = 50; // linear gauge value
 
   constructor() {
     Object.assign(this, {
@@ -675,6 +692,8 @@ export class AppComponent implements OnInit {
     if (!this.realTimeData) {
       return;
     }
+
+    this.gaugeValue = this.gaugeMin + Math.floor(Math.random() * (this.gaugeMax - this.gaugeMin));
 
     let country = this.countries[Math.floor(Math.random() * this.countries.length)];
     let add = Math.random() < 0.7;

@@ -1,0 +1,182 @@
+import {
+  Component,
+  Input,
+  ElementRef,
+  ViewChild,
+  AfterViewInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
+
+import d3 from '../d3';
+import { BaseChartComponent } from '../common/base-chart.component';
+import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { ColorHelper } from '../utils/color-sets';
+
+@Component({
+  selector: 'ngx-charts-linear-gauge',
+  template: `
+    <ngx-charts-chart
+      [view]="[width, height]"
+      [showLegend]="false">
+      <svg:g class="gauge chart">
+        <svg:g ngx-charts-bar 
+          class="background-bar"
+          [width]="dims.width"
+          [height]="3"
+          [x]="margin[3]"
+          [y]="dims.height / 2 + margin[0] - 2"
+          [data]="{}"
+          [orientation]="'horizontal'"
+          [roundEdges]="true"
+          (select)="click($event)">
+        </svg:g>
+        <svg:g ngx-charts-bar 
+          [width]="valueScale(value)"
+          [height]="3"
+          [x]="margin[3]"
+          [y]="dims.height / 2 + margin[0] - 2"
+          [fill]="colors.getColor(units)"
+          [data]="{}"
+          [orientation]="'horizontal'"
+          [roundEdges]="true"
+          (select)="click($event)">
+        </svg:g>
+        <svg:g [attr.transform]="transform">        
+          <svg:text #valueTextEl
+            class="value"
+            [style.textAnchor]="'middle'"
+            [attr.transform]="valueTextTransform"          
+            alignment-baseline="after-edge">
+            {{displayValue}}
+          </svg:text>        
+        </svg:g>
+        <svg:g [attr.transform]="transform">        
+          <svg:text #unitsTextEl
+            class="units"
+            [style.textAnchor]="'middle'"
+            [attr.transform]="unitsTextTransform"          
+            alignment-baseline="before-edge">
+            {{units}}
+          </svg:text>        
+        </svg:g>
+      </svg:g>
+    </ngx-charts-chart>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
+
+  @Input() min: number = 0;
+  @Input() max: number = 100;
+  @Input() value: number;
+  @Input() units: string;
+
+  @ViewChild('valueTextEl') valueTextEl: ElementRef;
+  @ViewChild('unitsTextEl') unitsTextEl: ElementRef;
+
+  dims: ViewDimensions;
+  valueDomain: any;
+  valueScale: any;
+
+  colors: ColorHelper;
+  transform: string;
+  margin: any[] = [10, 20, 10, 20];
+  
+  valueResizeScale: number = 1;
+  unitsResizeScale: number = 1;
+  valueTextTransform: string = '';
+  unitsTextTransform: string = '';
+  displayValue: string;
+
+  ngAfterViewInit(): void {
+    super.ngAfterViewInit();
+    setTimeout(() => {
+      this.scaleText('value');
+      this.scaleText('units');
+    });
+  }
+
+  update(): void {
+    super.update();
+
+    this.zone.run(() => {
+      this.max = Math.max(this.max, this.value);
+      this.min = Math.min(this.min, this.value);
+
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin
+      });
+
+      this.valueDomain = this.getValueDomain();
+      this.valueScale = this.getValueScale();
+      this.displayValue = this.getDisplayValue();
+
+      this.setColors();
+ 
+      let xOffset = this.margin[3] + this.dims.width / 2;
+      let yOffset = this.margin[0] + this.dims.height / 2;
+
+      this.transform = `translate(${ xOffset }, ${ yOffset })`;
+      this.scaleText('value');
+      this.scaleText('units');
+    });
+  }
+
+  getValueDomain(): any[] {
+    return [this.min, this.max];
+  }
+
+  getValueScale(): any {
+    return d3.scaleLinear()
+      .range([0, this.dims.width])
+      .domain(this.valueDomain);
+  }
+
+  getDisplayValue(): string {
+    return this.value.toLocaleString();
+  }
+
+  scaleText(element): void {
+    let el;
+    let resizeScale;
+    if (element === 'value') {
+      el = this.valueTextEl;
+      resizeScale = this.valueResizeScale;
+    } else {
+      el = this.unitsTextEl;
+      resizeScale = this.unitsResizeScale;
+    }
+
+    const { width, height } = el.nativeElement.getBoundingClientRect();
+    if (width === 0 || height === 0) return;
+    const oldScale = resizeScale;
+    const availableWidth = this.dims.width;
+    const availableHeight = this.dims.height / 2;
+    let resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+    let resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+    resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+    
+    if (resizeScale !== oldScale) {
+      if (element === 'value') {
+        this.valueResizeScale = resizeScale;
+        this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+      } else {
+        this.unitsResizeScale = resizeScale;
+        this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+      }
+      
+      this.cd.markForCheck();
+      setTimeout(() => { this.scaleText(element); });
+    }
+  }
+
+  onClick(data): void {
+    this.select.emit(data);
+  }
+
+  setColors(): void {
+    this.colors = new ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+  }
+}
