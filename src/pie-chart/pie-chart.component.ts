@@ -16,6 +16,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [activeEntries]="activeEntries"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
@@ -30,6 +31,8 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [explodeSlices]="explodeSlices"
           [gradient]="gradient"
           (select)="onClick($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
         />
       </svg:g>
     </ngx-charts-chart>
@@ -137,14 +140,22 @@ export class PieChartComponent extends BaseChartComponent {
     };
   }
 
-  onActivate(event): void {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
-    this.activate.emit({ value: event, entries: this.activeEntries });
+  onActivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
+    if (idx > -1) {
+      return;
+    }
+    
+    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event): void {
-    const idx = this.activeEntries.indexOf(event);
+  onDeactivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
 
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];

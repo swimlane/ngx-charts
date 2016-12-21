@@ -27,8 +27,10 @@ import { formatLabel } from '../common/label.helper';
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
-      [isActive]="isActive(bar.formattedLabel)"
+      [isActive]="isActive(bar.data)"
       (select)="onClick($event)"
+      (activate)="activate.emit($event)"
+      (deactivate)="deactivate.emit($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -60,6 +62,8 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() activeEntries: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   bars: any;
   x: any;
@@ -162,7 +166,10 @@ export class SeriesVerticalComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    return this.activeEntries.indexOf(entry) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name && entry.series === d.series;
+    });
+    return item !== undefined;
   }
 
   onClick(data): void {

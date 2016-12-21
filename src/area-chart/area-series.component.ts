@@ -127,13 +127,18 @@ export class AreaSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    return this.activeEntries.indexOf(entry.name) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item !== undefined;
   }
 
   isInactive(entry): boolean {
-    return this.activeEntries && 
-      this.activeEntries.length &&
-      this.activeEntries.indexOf(entry.name) === -1;
+    if(!this.activeEntries || this.activeEntries.length === 0) return false;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item === undefined;
   }
   
 }

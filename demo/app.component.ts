@@ -603,7 +603,6 @@ import './demo.scss';
     </main>
   `
 })
-
 export class AppComponent implements OnInit {
 
   theme = "dark";

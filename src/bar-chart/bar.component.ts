@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  HostListener,
   ElementRef,
   SimpleChanges,
   OnChanges,
@@ -49,6 +50,8 @@ export class BarComponent implements OnChanges {
   @Input() stops: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   element: any;
   path: any;
@@ -221,6 +224,17 @@ export class BarComponent implements OnChanges {
     retval += "z";
 
     return retval;
+  }
+
+
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.activate.emit(this.data);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.deactivate.emit(this.data);
   }
 
 }

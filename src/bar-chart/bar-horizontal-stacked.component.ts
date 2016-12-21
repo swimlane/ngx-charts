@@ -21,6 +21,7 @@ import d3 from '../d3';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
+      [activeEntries]="activeEntries"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
@@ -56,6 +57,8 @@ import d3 from '../d3';
             [dims]="dims"
             [gradient]="gradient"
             (select)="onClick($event, group)"
+            (activate)="onActivate($event, group)"
+            (deactivate)="onDeactivate($event, group)"
           />
         </svg:g>
       </svg:g>
@@ -252,14 +255,32 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(event): void {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
-    this.activate.emit({ value: event, entries: this.activeEntries });
+  onActivate(event, group) {
+    let item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
+    }
+
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value && d.series === item.series;
+    });
+    if (idx > -1) {
+      return;
+    }
+    
+    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event): void {
-    const idx = this.activeEntries.indexOf(event);
+  onDeactivate(event, group) {
+    let item = Object.assign({}, event);
+    if (group) {
+      item.series = group.name;
+    }
+
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value && d.series === item.series;
+    });
 
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];

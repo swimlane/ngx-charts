@@ -34,6 +34,7 @@ import { InjectionService } from '../../utils/injection.service';
         [colors]="legendOptions.colors"
         [height]="view[1]"
         [width]="legendWidth"
+        [activeEntries]="activeEntries"
         (labelClick)="legendLabelClick.emit($event)"
         (labelActivate)="legendLabelActivate.emit($event)"
         (labelDeactivate)="legendLabelDeactivate.emit($event)">
@@ -62,6 +63,7 @@ export class ChartComponent implements OnChanges {
   @Input() legendType: any;
   @Input() legendTitle = 'Legend';
   @Input() colors: any;
+  @Input() activeEntries: any[];
 
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
   @Output() legendLabelActivate: EventEmitter<any> = new EventEmitter();

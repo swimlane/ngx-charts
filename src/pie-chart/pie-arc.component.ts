@@ -29,6 +29,8 @@ import { id } from "../utils/id";
         [class.active]="isActive"
         [attr.fill]="gradient ? gradientFill : fill"
         (click)="onClick()"
+        (mouseenter)="activate.emit(data)"
+        (mouseleave)="deactivate.emit(data)"
         [style.pointer-events]="pointerEvents ? 'auto' : 'none'"
       />
     </svg:g>
@@ -53,6 +55,8 @@ export class PieArcComponent implements OnChanges {
   @Input() isActive: boolean = false;
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   element: HTMLElement;
   path: any;

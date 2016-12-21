@@ -239,6 +239,12 @@ main {
     &:hover {
       color: #fff !important;
     }
+
+    .active {
+      .legend-label-text {
+        color: #fff !important;
+      }
+    }
   }
 
   .scale-legend-label {
@@ -251,7 +257,7 @@ main {
     .legend-item {
       &:hover {
         color: #fff !important;
-      }
+      }     
     }
   }
 

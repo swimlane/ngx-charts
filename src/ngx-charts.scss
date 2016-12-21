@@ -234,8 +234,10 @@
       transition: 0.2s;
     }
 
-    &.active {
-      color: #FFF;
+    .active {
+      .legend-label-text {
+        color: #000;
+      }
     }
   }
 

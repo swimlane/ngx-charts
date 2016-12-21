@@ -30,7 +30,9 @@ import {
       [roundEdges]="bar.roundEdges"
       (select)="click($event)"
       [gradient]="gradient"
-      [isActive]="isActive(bar.formattedLabel)"
+      [isActive]="isActive(bar.data)"
+      (activate)="activate.emit($event)"
+      (deactivate)="deactivate.emit($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -65,6 +67,8 @@ export class SeriesHorizontal implements OnChanges {
   @Input() activeEntries: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -155,7 +159,10 @@ export class SeriesHorizontal implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    return this.activeEntries.indexOf(entry) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name && entry.series === d.series;
+    });
+    return item !== undefined;
   }
 
   trackBy(index, bar) {

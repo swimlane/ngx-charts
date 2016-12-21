@@ -1,5 +1,10 @@
 import {
-  Component, Input, ChangeDetectionStrategy, Output, EventEmitter
+  Component, 
+  Input, 
+  Output, 
+  ChangeDetectionStrategy,   
+  HostListener,
+  EventEmitter
  } from '@angular/core';
 
 @Component({
@@ -8,8 +13,7 @@ import {
     <span 
       [title]="formattedLabel"
       tabindex="-1"
-      (mouseenter)="activate.emit(formattedLabel)"
-      (mouseleave)="deactivate.emit(formattedLabel)"
+      [class.active]="isActive"
       (click)="select.emit(formattedLabel)">
       <span
         class="legend-label-color"
@@ -28,6 +32,7 @@ export class LegendEntryComponent {
   @Input() color: string;
   @Input() label: any;
   @Input() formattedLabel: string;
+  @Input() isActive: boolean = false;
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -36,6 +41,16 @@ export class LegendEntryComponent {
 
   get trimmedLabel(): string {
     return this.formattedLabel || '(empty)';
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.activate.emit({name: this.label});
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.deactivate.emit({name: this.label});
   }
 
 }

@@ -32,12 +32,14 @@ import { formatLabel } from '../common/label.helper';
         [outerRadius]="outerRadius"
         [fill]="color(arc)"
         [value]="arc.data.value"
+        [gradient]="gradient" 
         [data]="arc.data"
         [max]="max"
         [explodeSlices]="explodeSlices"
-        [isActive]="isActive(arc)"
+        [isActive]="isActive(arc.data)"
         (select)="onClick($event)"
-        [gradient]="gradient" 
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"        
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
@@ -60,6 +62,8 @@ export class PieSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   max: number;
   data: any;
@@ -155,9 +159,10 @@ export class PieSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    
-    const label = this.label(entry);
-    return this.activeEntries.indexOf(label) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name && entry.series === d.series;
+    });
+    return item !== undefined;
   }
 
 }

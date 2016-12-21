@@ -34,7 +34,7 @@ import { id } from "../utils/id";
         [cy]="circle.cy"
         [r]="circle.radius"
         [fill]="circle.color"
-        [class.active]="isActive(circle.label)"
+        [class.active]="isActive({name: circle.seriesName})"
         [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
@@ -170,12 +170,15 @@ export class CircleSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    return this.activeEntries.indexOf(entry) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item !== undefined;
   }
-
+  
   isVisible(circle): boolean {
     if (this.activeEntries.length > 0) {
-      return this.isActive(circle.seriesName);
+      return this.isActive({name: circle.seriesName});
     }
 
     return circle.opacity !== 0;
@@ -183,12 +186,12 @@ export class CircleSeriesComponent implements OnChanges {
 
   activateCircle(circle): void {
     circle.barVisible = true;
-    this.activate.emit(this.data.name);
+    this.activate.emit({name: this.data.name});
   }
 
   deactivateCircle(circle): void {
     circle.barVisible = false;
-    this.deactivate.emit(this.data.name);
+    this.deactivate.emit({name: this.data.name});
   }
 
 }

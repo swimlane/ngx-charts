@@ -23,12 +23,13 @@ import {
         <ul class="legend-labels"
           [style.max-height.px]="height - 45">
           <li
-            *ngFor="let entry of legendEntries; trackBy: entry?.formattedLabel"
+            *ngFor="let entry of legendEntries; trackBy: trackBy"
             class="legend-label">
             <ngx-charts-legend-entry
               [label]="entry.label"
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
+              [isActive]="isActive(entry)"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
               (deactivate)="deactivate($event)">
@@ -47,6 +48,7 @@ export class LegendComponent implements OnChanges {
   @Input() colors;
   @Input() height;
   @Input() width;
+  @Input() activeEntries;
 
   @Output() labelClick: EventEmitter<any> = new EventEmitter();
   @Output() labelActivate: EventEmitter<any> = new EventEmitter();
@@ -89,6 +91,14 @@ export class LegendComponent implements OnChanges {
     return items;
   }
 
+  isActive(entry): boolean {
+    if(!this.activeEntries) return false;
+    let item = this.activeEntries.find(d => {      
+      return entry.label === d.name;
+    });
+    return item !== undefined;
+  }
+
   activate(item) {
     this.zone.run(() => {
       this.labelActivate.emit(item);
@@ -99,6 +109,10 @@ export class LegendComponent implements OnChanges {
     this.zone.run(() => {
       this.labelDeactivate.emit(item);
     });
+  }
+
+  trackBy(index, item): string {
+    return item.label;
   }
 
 }
