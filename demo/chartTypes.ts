@@ -141,7 +141,7 @@ let chartGroups = [
         name: "Linear Gauge",
         selector: 'linear-gauge',
         inputFormat: 'single',
-        options: ['colorScheme', 'value', 'min', 'max', 'units']
+        options: ['colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
       }
     ]
   }

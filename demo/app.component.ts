@@ -356,6 +356,7 @@ import './demo.scss';
             [min]="gaugeMin"
             [max]="gaugeMax"
             [value]="gaugeValue"
+            [previousValue]="gaugePreviousValue"
             [units]="gaugeUnits"
             (select)="select($event)">
           </ngx-charts-linear-gauge>
@@ -565,6 +566,11 @@ import './demo.scss';
             <input type="number" [(ngModel)]="gaugeValue"><br />
           </div>
 
+          <div *ngIf="chart.options.includes('previousValue')">
+            <label>Previous value:</label><br />
+            <input type="number" [(ngModel)]="gaugePreviousValue"><br />
+          </div>
+
           <div *ngIf="chart.options.includes('angleSpan')">
             <label>Angle span:</label><br />
             <input type="number" [(ngModel)]="gaugeAngleSpan"><br />
@@ -662,6 +668,7 @@ export class AppComponent implements OnInit {
   gaugeStartAngle: number = -120;
   gaugeShowAxis: boolean = true;
   gaugeValue: number = 50; // linear gauge value
+  gaugePreviousValue: number = 70;
 
   constructor() {
     Object.assign(this, {

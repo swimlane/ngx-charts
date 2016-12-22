@@ -41,23 +41,47 @@ import { ColorHelper } from '../utils/color-sets';
           [roundEdges]="true"
           (select)="click($event)">
         </svg:g>
+
+        <svg:line 
+          *ngIf="hasPreviousValue"
+          [attr.transform]="transformLine"
+          x1="0"
+          y1="5" 
+          x2="0"
+          y2="15"
+          [attr.stroke]="colors.getColor(units)"          
+        />
+
+        <svg:line 
+          *ngIf="hasPreviousValue"
+          [attr.transform]="transformLine"
+          x1="0"
+          y1="-5" 
+          x2="0"
+          y2="-15"
+          [attr.stroke]="colors.getColor(units)"          
+        />
+        
         <svg:g [attr.transform]="transform">        
-          <svg:text #valueTextEl
-            class="value"
-            [style.textAnchor]="'middle'"
-            [attr.transform]="valueTextTransform"          
-            alignment-baseline="after-edge">
-            {{displayValue}}
-          </svg:text>        
-        </svg:g>
-        <svg:g [attr.transform]="transform">        
-          <svg:text #unitsTextEl
-            class="units"
-            [style.textAnchor]="'middle'"
-            [attr.transform]="unitsTextTransform"          
-            alignment-baseline="before-edge">
-            {{units}}
-          </svg:text>        
+          <svg:g [attr.transform]="valueTranslate">
+            <svg:text #valueTextEl
+              class="value"
+              [style.textAnchor]="'middle'"
+              [attr.transform]="valueTextTransform"          
+              alignment-baseline="after-edge">
+              {{displayValue}}
+            </svg:text>        
+          </svg:g>
+          
+          <svg:g [attr.transform]="unitsTranslate">
+            <svg:text #unitsTextEl
+              class="units"
+              [style.textAnchor]="'middle'"
+              [attr.transform]="unitsTextTransform"          
+              alignment-baseline="before-edge">
+              {{units}}
+            </svg:text>        
+          </svg:g>
         </svg:g>
       </svg:g>
     </ngx-charts-chart>
@@ -68,8 +92,9 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
 
   @Input() min: number = 0;
   @Input() max: number = 100;
-  @Input() value: number;
+  @Input() value: number = 0;
   @Input() units: string;
+  @Input() previousValue;
 
   @ViewChild('valueTextEl') valueTextEl: ElementRef;
   @ViewChild('unitsTextEl') unitsTextEl: ElementRef;
@@ -81,12 +106,16 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   colors: ColorHelper;
   transform: string;
   margin: any[] = [10, 20, 10, 20];
+  transformLine: string;
   
   valueResizeScale: number = 1;
   unitsResizeScale: number = 1;
   valueTextTransform: string = '';
+  valueTranslate: string= '';
   unitsTextTransform: string = '';
+  unitsTranslate: string = '';
   displayValue: string;
+  hasPreviousValue: boolean;
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
@@ -100,6 +129,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     super.update();
 
     this.zone.run(() => {
+      this.hasPreviousValue = this.previousValue !== undefined;
       this.max = Math.max(this.max, this.value);
       this.min = Math.min(this.min, this.value);
 
@@ -119,6 +149,9 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
       let yOffset = this.margin[0] + this.dims.height / 2;
 
       this.transform = `translate(${ xOffset }, ${ yOffset })`;
+      this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
+      this.valueTranslate = `translate(0, -15)`;
+      this.unitsTranslate = `translate(0, 15)`;
       this.scaleText('value');
       this.scaleText('units');
     });
@@ -153,7 +186,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     if (width === 0 || height === 0) return;
     const oldScale = resizeScale;
     const availableWidth = this.dims.width;
-    const availableHeight = this.dims.height / 2;
+    const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
     let resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
     let resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
     resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
