@@ -170,6 +170,7 @@
 .chart-legend {
   display: inline-block;
   padding: 0;
+  width: auto !important;
 
   .legend-title {
     white-space: nowrap;

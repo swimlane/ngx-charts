@@ -9,8 +9,6 @@ import { PositionHelper, PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
 
-import './tooltip.component.scss';
-
 @Component({
   selector: 'ngx-tooltip-content',
   template: `
