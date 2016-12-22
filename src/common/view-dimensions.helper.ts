@@ -6,16 +6,21 @@ export interface ViewDimensions {
 
 export function calculateViewDimensions({ 
   width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0, 
-  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false, columns = 12
+  yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false, legendType = 'ordinal', columns = 12
 }): ViewDimensions {
   let xOffset = margins[3];
   let chartWidth = width;
   let chartHeight = height - margins[0] - margins[2];
 
-  // let yOffset = margins[0]; // unused
   if (showLegend) {
-    chartWidth = chartWidth * columns / 12;
+    if (legendType === 'ordinal') {
+      columns -= 2;
+    } else {
+      columns -= 1;
+    }
   }
+
+  chartWidth = chartWidth * columns / 12;
 
   chartWidth = chartWidth - margins[1] - margins[3];
 

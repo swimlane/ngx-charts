@@ -21,9 +21,9 @@ export interface CardModel {
 }
 
 @Component({
-  selector: 'g[cardSeries]',
+  selector: 'g[ngx-charts-card-series]',
   template: `
-    <svg:g card *ngFor="let c of cards; trackBy:trackBy"
+    <svg:g ngx-charts-card *ngFor="let c of cards; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -74,7 +74,7 @@ export class CardSeriesComponent implements OnChanges {
           y: d.y,
           width: d.width,
           height: d.height,
-          color: this.colors(label),
+          color: this.colors.getColor(label),
           label: label,
           data: d.data,
           tooltipText: `${label}: ${value}`

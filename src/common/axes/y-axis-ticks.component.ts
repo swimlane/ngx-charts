@@ -14,7 +14,7 @@ import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
 
 @Component({
-  selector: 'g[yAxisTicks]',
+  selector: 'g[ngx-charts-y-axis-ticks]',
   template: `
     <svg:g #ticksel>
       <svg:g *ngFor="let tick of ticks" class="tick"

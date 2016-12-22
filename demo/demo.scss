@@ -239,6 +239,12 @@ main {
     &:hover {
       color: #fff !important;
     }
+
+    .active {
+      .legend-label-text {
+        color: #fff !important;
+      }
+    }
   }
 
   .scale-legend-label {
@@ -251,7 +257,7 @@ main {
     .legend-item {
       &:hover {
         color: #fff !important;
-      }
+      }     
     }
   }
 
@@ -268,29 +274,31 @@ main {
   }
 
   .gauge {
-    .background-arc {
+    .background-arc{
       path {
         fill: $color-bg-med;
       }
     }
+
     .gauge-tick {
       path {
-        stroke: $color-bg-light;
+        stroke: $color-text-med;
       }
-
       text {
-        fill: $color-bg-light;
+        fill: $color-text-med;
       }
+    }
+  }
 
-      &.highlighted {
-        path {
-          stroke: #fff;
-        }
-
-        text {
-          fill: #fff;
-        }
+  .linear-gauge {
+    .background-bar {
+      path {
+        fill: $color-bg-med;
       }
+    }
+
+    .units {
+      fill: $color-text-dark;
     }
   }
 

@@ -14,9 +14,9 @@ import {
  import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'g[seriesHorizontal]',
+  selector: 'g[ngx-charts-series-horizontal]',
   template: `
-    <svg:g bar 
+    <svg:g ngx-charts-bar 
       *ngFor="let bar of bars; trackBy:trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
@@ -24,12 +24,15 @@ import {
       [x]="bar.x"
       [y]="bar.y"
       [fill]="bar.color"
+      [stops]="bar.gradientStops"
       [data]="bar.data"
       [orientation]="'horizontal'"
       [roundEdges]="bar.roundEdges"
       (select)="click($event)"
       [gradient]="gradient"
-      [isActive]="isActive(bar.formattedLabel)"
+      [isActive]="isActive(bar.data)"
+      (activate)="activate.emit($event)"
+      (deactivate)="deactivate.emit($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -64,6 +67,8 @@ export class SeriesHorizontal implements OnChanges {
   @Input() activeEntries: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -85,7 +90,6 @@ export class SeriesHorizontal implements OnChanges {
       let bar: any = {
         value,
         label,
-        color: this.colors(label),
         roundEdges,
         data: d,
         formattedLabel
@@ -109,6 +113,8 @@ export class SeriesHorizontal implements OnChanges {
         bar.width = this.xScale(offset1) - this.xScale(offset0);
         bar.x = this.xScale(offset0);
         bar.y = 0;
+        bar.offset0 = offset0;
+        bar.offset1 = offset1;
       } else if (this.type === 'normalized') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -125,7 +131,21 @@ export class SeriesHorizontal implements OnChanges {
         bar.width = this.xScale(offset1) - this.xScale(offset0);
         bar.x = this.xScale(offset0);
         bar.y = 0;
+        bar.offset0 = offset0;
+        bar.offset1 = offset1;
         value = (offset1 - offset0).toFixed(2) + '%';
+      }
+
+      if (this.colors.scaleType === 'ordinal') {
+        bar.color = this.colors.getColor(label);
+      } else {
+        if (this.type === 'standard') {
+          bar.color = this.colors.getColor(value);
+          bar.gradientStops = this.colors.getLinearGradientStops(value);
+        } else {
+          bar.color = this.colors.getColor(bar.offset1);
+          bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+        }
       }
 
       bar.tooltipText = `
@@ -139,7 +159,10 @@ export class SeriesHorizontal implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    return this.activeEntries.indexOf(entry) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name && entry.series === d.series;
+    });
+    return item !== undefined;
   }
 
   trackBy(index, bar) {

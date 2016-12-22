@@ -30,9 +30,19 @@ module.exports = function(env) {
         },
         {
           test: /\.scss$/,
+          exclude: /\.component.scss$/,
           loaders: [
             'style-loader',
             'css-loader?sourceMap',
+            'postcss-loader?sourceMap',
+            'sass-loader?sourceMap'
+          ]
+        },
+        {
+          test: /\.component.scss$/,
+          loaders: [
+            'to-string-loader',
+            'css-loader',
             'postcss-loader?sourceMap',
             'sass-loader?sourceMap'
           ]
@@ -47,7 +57,7 @@ module.exports = function(env) {
       new HtmlWebpackPlugin({
         template: 'demo/index.ejs',
         chunksSortMode: 'dependency',
-        title: 'ng2d3',
+        title: 'ngx-charts',
         googleAnalytics: {
           trackingId: 'UA-57474611-3',
           pageViewOnLoad: true

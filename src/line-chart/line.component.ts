@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[line]',
+  selector: 'g[ngx-charts-line]',
   template: `
     <svg:path
       [@animationState]="'active'"

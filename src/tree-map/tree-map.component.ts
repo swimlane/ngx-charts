@@ -8,24 +8,23 @@ import {
 import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 
 @Component({
-  selector: 'tree-map',
+  selector: 'ngx-charts-tree-map',
   template: `
-    <chart
-      [legend]="false"
+    <ngx-charts-chart
       [view]="[width, height]"
-      (legendLabelClick)="onClick($event)">
+      [showLegend]="false">
       <svg:g [attr.transform]="transform" class="tree-map chart">
-        <svg:g treeMapCellSeries
+        <svg:g ngx-charts-tree-map-cell-series
           [colors]="colors"
           [data]="data"
           [dims]="dims"
           (select)="onClick($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -38,7 +37,7 @@ export class TreeMapComponent extends BaseChartComponent {
   dims: any;
   domain: any;
   transform: any;
-  colors: any;
+  colors: ColorHelper;
   treemap: any;
   data: any;
   margin = [10, 10, 10, 10];
@@ -50,8 +49,7 @@ export class TreeMapComponent extends BaseChartComponent {
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
-        margins: this.margin,
-        columns: 12
+        margins: this.margin
       });
 
       this.domain = this.getDomain();
@@ -97,7 +95,7 @@ export class TreeMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

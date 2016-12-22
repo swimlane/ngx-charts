@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[heatMapCellSeries]',
+  selector: 'g[ngx-charts-heat-map-cell-series]',
   template: `
     <svg:g 
-      heatMapCell 
+      ngx-charts-heat-map-cell 
       *ngFor="let c of cells; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
@@ -68,7 +68,7 @@ export class HeatCellSeriesComponent implements OnChanges {
           y: this.yScale(cell.name),
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
-          fill: this.colors(value),
+          fill: this.colors.getColor(value),
           data: value,
           label,
           series: row.name

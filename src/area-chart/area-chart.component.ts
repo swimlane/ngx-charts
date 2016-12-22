@@ -7,23 +7,23 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 import * as moment from 'moment';
 import { id } from "../utils/id";
 import d3 from '../d3';
 
 @Component({
-  selector: 'area-chart',
+  selector: 'ngx-charts-area-chart',
   template: `
-    <chart
-      [legend]="legend"
-      (legendLabelClick)="onClick({series: $event.name})"
-      (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)"
+    <ngx-charts-chart
       [view]="[width, height]"
-      [colors]="colors"
-      [legendData]="seriesDomain">
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      [activeEntries]="activeEntries"
+      (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)">
       <svg:defs>
         <svg:clipPath [attr.id]="clipPathId">
           <svg:rect
@@ -33,7 +33,7 @@ import d3 from '../d3';
         </svg:clipPath>
       </svg:defs>
       <svg:g [attr.transform]="transform" class="area-chart chart">
-        <svg:g xAxis
+        <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -42,7 +42,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g yAxis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -53,10 +53,10 @@ import d3 from '../d3';
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
           <svg:g *ngFor="let series of results; trackBy:trackBy">
-            <svg:g areaSeries
+            <svg:g ngx-charts-area-series
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors(series.name)"
+              [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
               [scaleType]="scaleType"
@@ -64,7 +64,7 @@ import d3 from '../d3';
               [curve]="curve"
             />
           </svg:g>
-          <svg:g areaTooltip
+          <svg:g ngx-charts-area-tooltip
             [xSet]="xSet"
             [xScale]="xScale"
             [yScale]="yScale"
@@ -74,11 +74,10 @@ import d3 from '../d3';
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
-            <svg:g circleSeries
+            <svg:g ngx-charts-circle-ceries
               [xScale]="xScale"
               [yScale]="yScale"
-              [color]="colors(series.name)"
-              [strokeColor]="colors(series.name)"
+              [colors]="colors"
               [activeEntries]="activeEntries"
               [data]="series"
               [scaleType]="scaleType"
@@ -90,7 +89,7 @@ import d3 from '../d3';
           </svg:g>
         </svg:g>
       </svg:g>
-      <svg:g timeline
+      <svg:g ngx-charts-timeline
         *ngIf="timeline && scaleType === 'time'"
         [attr.transform]="timelineTransform"
         [results]="results"
@@ -102,10 +101,10 @@ import d3 from '../d3';
         [scaleType]="scaleType"
         (onDomainChange)="updateDomain($event)">
         <svg:g *ngFor="let series of results; trackBy:trackBy">
-          <svg:g areaSeries
+          <svg:g ngx-charts-area-series
             [xScale]="timelineXScale"
             [yScale]="timelineYScale"
-            [color]="colors(series.name)"
+            [colors]="colors"
             [data]="series"
             [scaleType]="scaleType"
             [gradient]="gradient"
@@ -113,7 +112,7 @@ import d3 from '../d3';
           />
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -133,6 +132,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
+  @Input() schemeType: string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -145,7 +145,7 @@ export class AreaChartComponent extends BaseChartComponent {
   xScale: any;
   yScale: any;
   transform: string;
-  colors: Function;
+  colors: ColorHelper;
   clipPathId: string;
   clipPath: string;
   scaleType: string;
@@ -155,6 +155,7 @@ export class AreaChartComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   filteredDomain: any;
+  legendOptions: any;
 
   timelineWidth: any;
   timelineHeight: number = 50;
@@ -179,7 +180,7 @@ export class AreaChartComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        columns: 10
+        legendType: this.schemeType
       });
 
       if (this.timeline) {
@@ -200,6 +201,7 @@ export class AreaChartComponent extends BaseChartComponent {
       this.updateTimeline();
 
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
       let pageUrl = window.location.href;
@@ -213,14 +215,13 @@ export class AreaChartComponent extends BaseChartComponent {
       this.timelineWidth = this.width;
 
       if (this.legend) {
-        this.timelineWidth = this.width * 10.0 / 12.0;
+        this.timelineWidth = this.dims.width;
       }
 
-      this.timelineWidth -= (this.margin[3] + this.margin[1]);
       this.timelineXDomain = this.getXDomain();
       this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
       this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-      this.timelineTransform = `translate(${ this.margin[3] }, ${ -this.margin[2] })`;
+      this.timelineTransform = `translate(${ this.dims.xOffset }, ${ -this.margin[2] })`;
     }
   }
 
@@ -366,7 +367,30 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+    let domain;
+    if (this.schemeType === 'ordinal') {
+      domain = this.seriesDomain; 
+    } else {
+      domain = this.yDomain;
+    }
+
+    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+  }
+
+  getLegendOptions() {
+    let opts = {
+      scaleType: this.schemeType,
+      colors: undefined,
+      domain: []
+    };
+    if (opts.scaleType === 'ordinal') {
+      opts.domain = this.seriesDomain;
+      opts.colors = this.colors;
+    } else {
+      opts.domain = this.yDomain;
+      opts.colors = this.colors.scale;
+    }
+    return opts;
   }
 
   updateYAxisWidth({ width }): void {
@@ -379,14 +403,22 @@ export class AreaChartComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(event): void {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
-    this.activate.emit({ value: event, entries: this.activeEntries });
+  onActivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
+    if (idx > -1) {
+      return;
+    }
+    
+    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event): void {
-    const idx = this.activeEntries.indexOf(event);
+  onDeactivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
 
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];

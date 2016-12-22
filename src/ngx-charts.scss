@@ -1,6 +1,6 @@
-@import "./common/tooltip/tooltip";
+@import "./common/tooltip/tooltip.component";
 
-.ng2d3 {
+.ngx-charts {
   float: left;
 
   .circle,
@@ -234,8 +234,10 @@
       transition: 0.2s;
     }
 
-    &.active {
-      color: #FFF;
+    .active {
+      .legend-label-text {
+        color: #000;
+      }
     }
   }
 
@@ -389,23 +391,13 @@
 
   .gauge-tick {
     path {
-      stroke: #999;
+      stroke: #666;
     }
 
     text {
       font-size: 12px;
-      fill: #999;
+      fill: #666;
       font-weight: bold;
-    }
-
-    &.highlighted {
-      path {
-        stroke: #666;
-      }
-
-      text {
-        fill: #666;
-      }
     }
   }
 
@@ -415,5 +407,19 @@
 
   .gauge-tick-small path{
     stroke-width: 1px;
+  }
+}
+
+.linear-gauge {
+  cursor: pointer;
+  
+  .background-bar {
+    path {
+      fill: rgba(0,0,0,0.05);
+    }
+  }
+
+  .units {
+    fill: #666;
   }
 }

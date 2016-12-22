@@ -1,5 +1,5 @@
 {
-  "name": "ng2d3",
+  "name": "ngx-charts",
   "version": "2.0.0",
   "description": "Angular2 + D3 Charting Library",
   "main": "release/index.js",
@@ -31,14 +31,14 @@
     "package:ts": "tsc --outDir release",
     "package:aot": "ngc -p tsconfig-aot.json",
     "package:replace": "node ./config/replace.js",
-    "package:css": "node-sass -o release/ src/ng2d3.scss",
+    "package:css": "node-sass -o release/ src/ngx-charts.scss",
     "package:minify": "uglifyjs release/index.js --source-map release/index.min.js.map --source-map-url release/index.js.map --compress --mangle --screw-ie8 --output release/index.min.js",
     "deploy": "node ./config/deploy.js",
     "profile": "NODE_ENV=production webpack --profile --json > dist/stats.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/swimlane/ng2d3.git"
+    "url": "git+https://github.com/swimlane/ngx-charts.git"
   },
   "keywords": [
     "angular2",
@@ -64,15 +64,15 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/swimlane/ng2d3/issues"
+    "url": "https://github.com/swimlane/ngx-charts/issues"
   },
-  "homepage": "https://github.com/swimlane/ng2d3#readme",
+  "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
-    "@angular/common": "~2.3.0",
-    "@angular/compiler": "~2.3.0",
-    "@angular/core": "~2.3.0",
-    "@angular/platform-browser": "~2.3.0",
-    "@angular/platform-browser-dynamic": "~2.3.0",
+    "@angular/common": "~2.4.1",
+    "@angular/compiler": "~2.4.1",
+    "@angular/core": "~2.4.1",
+    "@angular/platform-browser": "~2.4.1",
+    "@angular/platform-browser-dynamic": "~2.4.1",
     "core-js": "2.4.1",
     "d3": "4.4.0",
     "moment": "2.17.1",
@@ -80,14 +80,14 @@
     "zone.js": "0.7.2"
   },
   "devDependencies": {
-    "@angular/common": "~2.3.0",
-    "@angular/compiler": "~2.3.0",
-    "@angular/compiler-cli": "~2.3.0",
-    "@angular/core": "~2.3.0",
-    "@angular/forms": "~2.3.0",
-    "@angular/platform-browser": "~2.3.0",
-    "@angular/platform-browser-dynamic": "~2.3.0",
-    "@angular/platform-server": "~2.3.0",
+    "@angular/common": "~2.4.1",
+    "@angular/compiler": "~2.4.1",
+    "@angular/compiler-cli": "~2.4.1",
+    "@angular/core": "~2.4.1",
+    "@angular/forms": "~2.4.1",
+    "@angular/platform-browser": "~2.4.1",
+    "@angular/platform-browser-dynamic": "~2.4.1",
+    "@angular/platform-server": "~2.4.1",
     "@types/core-js": "0.9.32",
     "@types/d3-array": "0.0.3",
     "@types/d3-brush": "0.0.3",
@@ -134,6 +134,7 @@
     "sass-loader": "^4.0.1",
     "source-map-loader": "0.1.5",
     "style-loader": "0.13.1",
+    "to-string-loader": "^1.1.5",
     "ts-helpers": "1.1.1",
     "tslint": "3.15.1",
     "tslint-loader": "2.1.5",

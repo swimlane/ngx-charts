@@ -11,10 +11,10 @@ import d3 from '../d3';
 import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'g[pieSeries]',
+  selector: 'g[ngx-charts-pie-series]',
   template: `
     <svg:g *ngFor="let arc of data; trackBy:trackBy">
-      <svg:g pieLabel
+      <svg:g ngx-charts-pie-label
         *ngIf="labelVisible(arc)"
         [data]="arc"
         [radius]="outerRadius"
@@ -25,19 +25,21 @@ import { formatLabel } from '../common/label.helper';
         [explodeSlices]="explodeSlices">
       </svg:g>
       <svg:g 
-        pieArc
+        ngx-charts-pie-arc
         [startAngle]="arc.startAngle"
         [endAngle]="arc.endAngle"
         [innerRadius]="innerRadius"
         [outerRadius]="outerRadius"
         [fill]="color(arc)"
         [value]="arc.data.value"
+        [gradient]="gradient" 
         [data]="arc.data"
         [max]="max"
         [explodeSlices]="explodeSlices"
-        [isActive]="isActive(arc)"
+        [isActive]="isActive(arc.data)"
         (select)="onClick($event)"
-        [gradient]="gradient" 
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)"        
         swui-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
@@ -60,6 +62,8 @@ export class PieSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   max: number;
   data: any;
@@ -142,7 +146,7 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   color(arc): any {
-    return this.colors(this.label(arc));
+    return this.colors.getColor(this.label(arc));
   }
 
   trackBy(index, item): string {
@@ -155,9 +159,10 @@ export class PieSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    
-    const label = this.label(entry);
-    return this.activeEntries.indexOf(label) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name && entry.series === d.series;
+    });
+    return item !== undefined;
   }
 
 }

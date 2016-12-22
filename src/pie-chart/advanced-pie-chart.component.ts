@@ -7,11 +7,11 @@ import {
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 
 @Component({
-  selector: 'advanced-pie-chart',
+  selector: 'ngx-charts-advanced-pie-chart',
   template: `
     <div
       [style.width.px]="width"
@@ -19,18 +19,13 @@ import { BaseChartComponent } from '../common/base-chart.component';
       <div class="advanced-pie chart"
         [style.width.px]="dims.width"
         [style.height.px]="dims.height">
-        <chart
-          [colors]="colors"
-          [legend]="legend"
-          [legendData]="domain"
-          (legendLabelClick)="onClick($event)"
-          (legendLabelActivate)="onActivate($event)"
-          (legendLabelDeactivate)="onDeactivate($event)"
-          [view]="[dims.width, dims.height]">
+        <ngx-charts-chart
+          [view]="[width, height]"
+          [showLegend]="false">
           <svg:g
             [attr.transform]="transform"
             class="pie chart">
-            <svg:g pieSeries
+            <svg:g ngx-charts-pie-series
               [colors]="colors"
               [showLabels]="labels"
               [series]="results"
@@ -41,19 +36,19 @@ import { BaseChartComponent } from '../common/base-chart.component';
               (select)="onClick($event)">
             </svg:g>
           </svg:g>
-        </chart>
+        </ngx-charts-chart>
       </div>
       <div 
         class="advanced-pie-legend-wrapper"
         [style.width.px]="width - dims.width">
-        <advanced-legend
+        <ngx-charts-advanced-legend
           [data]="results"
           [colors]="colors"
           [width]="width - dims.width - margin[1]"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
-        </advanced-legend>
+        </ngx-charts-advanced-legend>
       </div>
     </div>
   `,
@@ -73,7 +68,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   outerRadius: number;
   innerRadius: number;
   transform: string;
-  colors: Function;
+  colors: ColorHelper;
   legendWidth: number;
   margin = [20, 20, 20, 20];
 
@@ -110,7 +105,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
   onActivate(event): void {

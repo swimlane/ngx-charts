@@ -49,9 +49,19 @@ module.exports = function(options) {
         },
         {
           test: /\.scss$/,
+          exclude: /\.component.scss$/,
           loaders: [
             'style-loader',
             'css-loader?sourceMap',
+            'postcss-loader?sourceMap',
+            'sass-loader?sourceMap'
+          ]
+        },
+        {
+          test: /\.component.scss$/,
+          loaders: [
+            'to-string-loader',
+            'css-loader',
             'postcss-loader?sourceMap',
             'sass-loader?sourceMap'
           ]
@@ -68,7 +78,7 @@ module.exports = function(options) {
       new HtmlWebpackPlugin({
         template: 'demo/index.ejs',
         chunksSortMode: 'dependency',
-        title: 'ng2d3'
+        title: 'ngx-charts'
       }),
       new WebpackNotifierPlugin({
         excludeWarnings: true

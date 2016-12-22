@@ -5,25 +5,24 @@ import {
 
 import d3 from '../d3';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { trimLabel } from '../common/trim-label.helper';
 import { gridLayout } from '../common/grid-layout.helper';
 import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'pie-grid',
+  selector: 'ngx-charts-pie-grid',
   template: `
-    <chart
-      [legend]="false"
-      (legendLabelClick)="onClick($event)"
-      [view]="[width, height]">
+    <ngx-charts-chart
+      [view]="[width, height]"
+      [showLegend]="false">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g
           *ngFor="let series of series"
           class="pie-grid-item"
           [attr.transform]="series.transform">
-          <svg:g pieGridSeries
+          <svg:g ngx-charts-pie-grid-series
             [colors]="series.colors"
             [data]="series.data"
             [innerRadius]="series.innerRadius"
@@ -39,7 +38,7 @@ import { formatLabel } from '../common/label.helper';
             dy="-0.5em"
             x="0"
             y="5"
-            count-up 
+            ngx-charts-count-up 
             [countTo]="series.percent"
             [countSuffix]="'%'"
             text-anchor="middle">
@@ -58,13 +57,13 @@ import { formatLabel } from '../common/label.helper';
             x="0"
             [attr.y]="series.outerRadius"
             text-anchor="middle"
-            count-up 
+            ngx-charts-count-up 
             [countTo]="series.total"
             [countPrefix]="'Total: '">
           </svg:text>
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -75,7 +74,7 @@ export class PieGridComponent extends BaseChartComponent {
   transform: string;
   series: any[];
   domain: any[];
-  colorScale: Function;
+  colorScale: ColorHelper;
   margin = [20, 20, 20, 20];
 
   update(): void {
@@ -126,7 +125,7 @@ export class PieGridComponent extends BaseChartComponent {
         if (count === 1) {
           return 'rgba(100,100,100,0.3)';
         } else {
-          return this.colorScale(label);
+          return this.colorScale.getColor(label);
         }
       };
 
@@ -164,7 +163,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colorScale = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colorScale = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

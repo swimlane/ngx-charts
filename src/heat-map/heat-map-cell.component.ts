@@ -12,15 +12,15 @@ import { id } from "../utils/id";
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[heatMapCell]',
+  selector: 'g[ngx-charts-heat-map-cell]',
   template: `
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
-        <svg:g svgLinearGradient
+        <svg:g ngx-charts-svg-linear-gradient
           [color]="fill"
           orientation="vertical"
           [name]="gradientId"
-          [startOpacity]="startOpacity"
+          [stops]="circle.gradientStops"
         />
       </defs>
       <svg:rect
@@ -55,6 +55,7 @@ export class HeatMapCellComponent implements OnChanges {
   startOpacity: number;
   gradientId: string;
   gradientUrl: string;
+  gradientStops: any[];
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
@@ -66,8 +67,23 @@ export class HeatMapCellComponent implements OnChanges {
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+    this.gradientStops = this.getGradientStops();
 
     this.loadAnimation();
+  }
+
+  getGradientStops() {
+    return [
+      {
+        offset: 0,
+        color: this.fill,
+        opacity: this.startOpacity
+      },
+      {
+        offset: 100,
+        color: this.fill,
+        opacity: 1
+    }];
   }
 
   loadAnimation(): void {

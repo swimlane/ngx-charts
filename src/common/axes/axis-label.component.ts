@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[axisLabel]',
+  selector: 'g[ngx-charts-axis-label]',
   template: `
     <svg:text
       [attr.stroke-width]="strokeWidth"

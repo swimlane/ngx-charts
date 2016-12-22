@@ -7,16 +7,17 @@ import { formatLabel } from '../common/label.helper';
 import { id } from "../utils/id";
 
 @Component({
-  selector: 'g[circleSeries]',
+  selector: 'g[ngx-charts-circle-ceries]',
   template: `
     <svg:g *ngFor="let circle of circles">
-      <svg:g svgLinearGradient
-        [color]="color"
-        orientation="vertical"
-        [name]="circle.gradientId"
-        [startOpacity]="0.2"
-        [endOpacity]="1"
-      />
+      <defs>
+        <svg:g ngx-charts-svg-linear-gradient
+          [color]="color"
+          orientation="vertical"
+          [name]="circle.gradientId"
+          [stops]="circle.gradientStops"
+        />
+      </defs>
       <svg:rect
         *ngIf="circle.barVisible && type === 'standard'"
         [attr.x]="circle.cx - circle.radius"
@@ -26,15 +27,14 @@ import { id } from "../utils/id";
         [attr.fill]="circle.gradientFill"
         class="tooltip-bar"
       />
-      <svg:g circle
+      <svg:g ngx-charts-circle
         *ngIf="isVisible(circle)"
         class="circle"
         [cx]="circle.cx"
         [cy]="circle.cy"
         [r]="circle.radius"
-        [fill]="color"
-        [class.active]="isActive(circle.label)"
-        [stroke]="strokeColor"
+        [fill]="circle.color"
+        [class.active]="isActive({name: circle.seriesName})"
         [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
@@ -56,8 +56,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() type = 'standard';
   @Input() xScale;
   @Input() yScale;
-  @Input() color;
-  @Input() strokeColor;
+  @Input() colors;
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
@@ -107,6 +106,18 @@ export class CircleSeriesComponent implements OnChanges {
 
         const gradientId = 'grad' + id().toString();
         const gradientFill = `url(${pageUrl}#${gradientId})`;
+        
+        
+        let color;
+        if (this.colors.scaleType === 'linear') {
+          if (this.type === 'standard') {
+            color = this.colors.getColor(value);
+          } else {
+            color = this.colors.getColor(d.d1);
+          }
+        } else {
+          color = this.colors.getColor(seriesName);
+        }
 
         return {
           classNames: [`circle-data-${i}`],
@@ -117,11 +128,13 @@ export class CircleSeriesComponent implements OnChanges {
           radius,
           height,
           tooltipLabel,
+          color,
           opacity,
           seriesName,
-          barVisible: false,
+          barVisible: false,          
           gradientId,
-          gradientFill
+          gradientFill,          
+          gradientStops: this.getGradientStops(color)
         };
       }
     }).filter((circle) => circle !== undefined);
@@ -134,6 +147,20 @@ export class CircleSeriesComponent implements OnChanges {
     `;
   }
 
+  getGradientStops(color) {
+    return [
+      {
+        offset: 0,
+        color: color,
+        opacity: 0.2
+      },
+      {
+        offset: 100,
+        color: color,
+        opacity: 1
+    }];
+  }
+
   onClick(value, label): void {
     this.select.emit({
       name: label,
@@ -143,12 +170,15 @@ export class CircleSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    return this.activeEntries.indexOf(entry) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name;
+    });
+    return item !== undefined;
   }
-
+  
   isVisible(circle): boolean {
     if (this.activeEntries.length > 0) {
-      return this.isActive(circle.seriesName);
+      return this.isActive({name: circle.seriesName});
     }
 
     return circle.opacity !== 0;
@@ -156,12 +186,12 @@ export class CircleSeriesComponent implements OnChanges {
 
   activateCircle(circle): void {
     circle.barVisible = true;
-    this.activate.emit(this.data.name);
+    this.activate.emit({name: this.data.name});
   }
 
   deactivateCircle(circle): void {
     circle.barVisible = false;
-    this.deactivate.emit(this.data.name);
+    this.deactivate.emit({name: this.data.name});
   }
 
 }

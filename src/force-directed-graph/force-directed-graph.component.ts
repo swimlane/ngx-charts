@@ -6,6 +6,8 @@ import {
   Input, 
   TemplateRef, 
   ViewChild,
+  Output,
+  EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
 
@@ -13,17 +15,18 @@ import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import d3 from '../d3';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 
 @Component({
-  selector: 'force-directed-graph',
+  selector: 'ngx-charts-force-directed-graph',
   template: `
-    <chart
-      [legend]="legend"
-      (legendLabelClick)="onClick($event)"
+    <ngx-charts-chart
       [view]="[width, height]"
-      [colors]="colors"
-      [legendData]="seriesDomain">
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="force-directed-graph chart">
         <svg:g class="links">
           <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
@@ -43,8 +46,8 @@ import { colorHelper } from '../utils/color-sets';
         <svg:g class="nodes">
           <svg:g *ngFor="let node of nodes; trackBy:trackNodeBy"
             [attr.transform]="'translate(' + node.x + ',' + node.y + ')'"
-            [attr.fill]="colors(groupResultsBy(node))"
-            [attr.stroke]="colors(groupResultsBy(node))"
+            [attr.fill]="colors.getColor(groupResultsBy(node))"
+            [attr.stroke]="colors.getColor(groupResultsBy(node))"
             (mousedown)="onDragStart(node, $event)"
             (click)="onClick({name: node.value})"
             swui-tooltip
@@ -59,7 +62,7 @@ import { colorHelper } from '../utils/color-sets';
           </svg:g>
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -76,12 +79,16 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Input() legend: boolean;
   @Input() nodes: any[] = [];
   @Input() links: { source: any, target: any }[] = [];
+  @Input() activeEntries: any[] = [];
+
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
   @ViewChild(ChartComponent, { read: ElementRef }) chart: ElementRef;
 
-  colors: Function;
+  colors: ColorHelper;
   dims: ViewDimensions;
   draggingNode: any;
   draggingStart: { x: number, y: number };
@@ -89,6 +96,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   results = [];
   seriesDomain: any;
   transform: string;
+  legendOptions: any;
 
   update(): void {
     super.update();
@@ -100,11 +108,11 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
         height: this.height,
         margins: this.margin,
         showLegend: this.legend,
-        columns: 10
       });
 
       this.seriesDomain = this.getSeriesDomain();
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })`;
       if(this.force) {
@@ -117,6 +125,21 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
 
   onClick(data, node): void {
     this.select.emit(data);
+  }
+
+  onActivate(event): void {
+    if(this.activeEntries.indexOf(event) > -1) return;
+    this.activeEntries = [ event, ...this.activeEntries ];
+    this.activate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  onDeactivate(event): void {
+    const idx = this.activeEntries.indexOf(event);
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
   }
 
   getSeriesDomain(): any[] {
@@ -134,7 +157,15 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+  }
+
+  getLegendOptions() {
+    return {
+      scaleType: 'ordinal',
+      domain: this.seriesDomain,
+      colors: this.colors
+    };
   }
 
   // Easier to use Angular2 event management than use d3.drag

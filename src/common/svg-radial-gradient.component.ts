@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[svgRadialGradient]',
+  selector: 'g[ngx-charts-svg-radial-gradient]',
   template: `
     <svg:radialGradient
       [id]="name"

@@ -8,7 +8,7 @@ import { invertColor } from '../utils/color-utils';
 import { count, decimalChecker } from '../common/count';
 
 @Component({
-  selector: 'g[card]',
+  selector: 'g[ngx-charts-card]',
   template: `
     <svg:g
       [attr.transform]="transform"

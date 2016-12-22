@@ -8,7 +8,7 @@ const { ENV, dir, APP_VERSION } = require('./helpers');
 
 const banner =
 `/**
- * ng2d3 v${APP_VERSION} (https://github.com/swimlane/ng2d3)
+ * ngx-charts v${APP_VERSION} (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */`;
@@ -28,9 +28,19 @@ module.exports = function(env) {
         },
         {
           test: /\.scss$/,
+          exclude: /\.component.scss$/,
           loaders: [
             'style-loader',
             'css-loader?sourceMap',
+            'postcss-loader?sourceMap',
+            'sass-loader?sourceMap'
+          ]
+        },
+        {
+          test: /\.component.scss$/,
+          loaders: [
+            'to-string-loader',
+            'css-loader',
             'postcss-loader?sourceMap',
             'sass-loader?sourceMap'
           ]
@@ -43,7 +53,7 @@ module.exports = function(env) {
     output: {
       path: dir('release'),
       libraryTarget: 'umd',
-      library: 'ng2d3',
+      library: 'ngx-charts',
       umdNamedDefine: true
     },
     externals: {
@@ -85,7 +95,7 @@ module.exports = function(env) {
       new ngtools.AotPlugin({
         tsConfigPath: 'tsconfig-aot.json',
         baseDir: dir()
-        entryModule: dir('ng2d3.ts') + '#NG2D3Module'
+        entryModule: dir('ngx-charts.ts') + '#NgxChartsModule'
       }),
       new CleanWebpackPlugin(['release'], {
         root: dir(),

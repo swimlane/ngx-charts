@@ -11,13 +11,13 @@ import { trimLabel } from '../trim-label.helper';
 import { formatLabel } from '../label.helper';
 
 @Component({
-  selector: 'advanced-legend',
+  selector: 'ngx-charts-advanced-legend',
   template: `
     <div class="advanced-pie-legend"
       [style.width.px]="width">
       <div
         class="total-value"
-        count-up
+        ngx-charts-count-up
         [countTo]="roundedTotal">
       </div>
       <div class="total-label">
@@ -26,7 +26,7 @@ import { formatLabel } from '../label.helper';
       <div class="legend-items-container">
         <div class="legend-items">
           <div
-            *ngFor="let legendItem of legendItems; trackBy: entry?.formattedLabel"
+            *ngFor="let legendItem of legendItems; trackBy:trackBy"
             tabindex="-1"
             class="legend-item"
             (mouseenter)="activate.emit(legendItem.label)"
@@ -38,13 +38,13 @@ import { formatLabel } from '../label.helper';
             </div>
             <div
               class="item-value"
-              count-up
+              ngx-charts-count-up
               [countTo]="legendItem.value">
             </div>
             <div class="item-label">{{legendItem.label}}</div>
             <div
               class="item-percent"
-              count-up
+              ngx-charts-count-up
               [countTo]="legendItem.percentage"
               [countSuffix]="'%'">
             </div>
@@ -92,7 +92,7 @@ export class AdvancedLegendComponent implements OnChanges  {
       const label = formatLabel(d.name);
       const value = d.value;
       const percentage = value / this.total * 100;
-      const color = this.colors(label);
+      const color = this.colors.getColor(label);
       
       return {
         value,
@@ -102,6 +102,10 @@ export class AdvancedLegendComponent implements OnChanges  {
         percentage
       };
     });
+  }
+
+  trackBy(item) {
+    return item.formattedLabel;
   }
 
 }

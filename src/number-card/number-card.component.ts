@@ -4,24 +4,24 @@ import {
 } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { gridLayout } from '../common/grid-layout.helper';
 
 @Component({
-  selector: 'number-card',
+  selector: 'ngx-charts-number-card',
   template: `
-    <chart
-      [legend]="false"
-      [view]="[width, height]">
+    <ngx-charts-chart
+      [view]="[width, height]"
+      [showLegend]="false">
       <svg:g [attr.transform]="transform" class="number-card chart">
-        <svg:g cardSeries
+        <svg:g ngx-charts-card-series
           [colors]="colors"
           [data]="data"
           [dims]="dims"
           (select)="onClick($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -29,7 +29,7 @@ export class NumberCardComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   data: any[];
-  colors: Function;
+  colors: ColorHelper;
   transform: string;
   domain: any[];
   margin = [10, 10, 10, 10];
@@ -62,7 +62,7 @@ export class NumberCardComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
 }

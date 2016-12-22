@@ -20,8 +20,8 @@
 **Please tell us about your environment:**
 <!-- Operating system, IDE, package manager, HTTP server, ... -->
 
-* **ng2d3 version:** x.x.x
-<!-- Check whether this is still an issue in the most recent ng2d3 version -->
+* **ngx-charts version:** x.x.x
+<!-- Check whether this is still an issue in the most recent ngx-charts version -->
 
 * **Angular version:** 2.x.x
 <!-- Check whether this is still an issue in the most recent Angular version -->

@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { NG2D3Module } from "../src";
+import { NgxChartsModule } from "../src";
 
 @NgModule({
-  imports: [NG2D3Module, BrowserModule, FormsModule],
+  imports: [NgxChartsModule, BrowserModule, FormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
 })

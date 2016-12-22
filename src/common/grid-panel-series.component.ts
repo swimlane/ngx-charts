@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[gridPanelSeries]',
+  selector: 'g[ngx-charts-grid-panel-series]',
   template: `
-    <svg:g gridPanel *ngFor="let gridPanel of gridPanels"
+    <svg:g ngx-charts-grid-panel *ngFor="let gridPanel of gridPanels"
       [height]="gridPanel.height"
       [width]="gridPanel.width"
       [x]="gridPanel.x"

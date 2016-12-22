@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'g[circle]',
+  selector: 'g[ngx-charts-circle]',
   template: `
     <svg:circle
       [attr.cx]="cx"

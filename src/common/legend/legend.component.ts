@@ -12,7 +12,7 @@ import {
  import { formatLabel } from '../label.helper';
 
 @Component({
-  selector: 'legend',
+  selector: 'ngx-charts-legend',
   template: `
     <div [style.width.px]="width">
       <header class="legend-title">
@@ -23,16 +23,17 @@ import {
         <ul class="legend-labels"
           [style.max-height.px]="height - 45">
           <li
-            *ngFor="let entry of legendEntries; trackBy: entry?.formattedLabel"
+            *ngFor="let entry of legendEntries; trackBy: trackBy"
             class="legend-label">
-            <legend-entry
+            <ngx-charts-legend-entry
               [label]="entry.label"
               [formattedLabel]="entry.formattedLabel"
               [color]="entry.color"
+              [isActive]="isActive(entry)"
               (select)="labelClick.emit($event)"
               (activate)="activate($event)"
               (deactivate)="deactivate($event)">
-            </legend-entry>
+            </ngx-charts-legend-entry>
           </li>
         </ul>
       </div>
@@ -47,6 +48,7 @@ export class LegendComponent implements OnChanges {
   @Input() colors;
   @Input() height;
   @Input() width;
+  @Input() activeEntries;
 
   @Output() labelClick: EventEmitter<any> = new EventEmitter();
   @Output() labelActivate: EventEmitter<any> = new EventEmitter();
@@ -81,12 +83,20 @@ export class LegendComponent implements OnChanges {
         items.push({
           label,
           formattedLabel,
-          color: this.colors(label)
+          color: this.colors.getColor(label)
         });
       }
     }
 
     return items;
+  }
+
+  isActive(entry): boolean {
+    if(!this.activeEntries) return false;
+    let item = this.activeEntries.find(d => {      
+      return entry.label === d.name;
+    });
+    return item !== undefined;
   }
 
   activate(item) {
@@ -99,6 +109,10 @@ export class LegendComponent implements OnChanges {
     this.zone.run(() => {
       this.labelDeactivate.emit(item);
     });
+  }
+
+  trackBy(index, item): string {
+    return item.label;
   }
 
 }

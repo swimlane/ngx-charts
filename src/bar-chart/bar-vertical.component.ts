@@ -6,23 +6,23 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 import d3 from '../d3';
 
 @Component({
-  selector: 'bar-vertical',
+  selector: 'ngx-charts-bar-vertical',
   template: `
-    <chart
-      [legend]="legend"
+    <ngx-charts-chart
       [view]="[width, height]"
-      [colors]="colors"
-      [legendData]="xDomain"
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      [activeEntries]="activeEntries"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="bar-chart chart">
-        <svg:g xAxis
+        <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [xScale]="xScale"
           [dims]="dims"
@@ -30,7 +30,7 @@ import d3 from '../d3';
           [labelText]="xAxisLabel"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g yAxis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -39,7 +39,7 @@ import d3 from '../d3';
           [labelText]="yAxisLabel"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g seriesVertical
+        <svg:g ngx-charts-series-vertical
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -47,10 +47,12 @@ import d3 from '../d3';
           [dims]="dims"
           [gradient]="gradient"
           [activeEntries]="activeEntries"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
           (select)="onClick($event)">
         </svg:g>
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -66,6 +68,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
+  @Input() schemeType: string;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -76,14 +79,15 @@ export class BarVerticalComponent extends BaseChartComponent {
   xDomain: any;
   yDomain: any;
   transform: string;
-  colors: Function;
+  colors: ColorHelper;
   margin: any[] = [10, 20, 10, 20];
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
+  legendOptions: any;
 
   update(): void {
     super.update();
-
+    
     this.zone.run(() => {
       this.dims = calculateViewDimensions({
         width: this.width,
@@ -95,14 +99,15 @@ export class BarVerticalComponent extends BaseChartComponent {
         yAxisWidth: this.yAxisWidth,
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        columns: 10
+        showLegend: this.legend,        
+        legendType: this.schemeType
       });
 
       this.xScale = this.getXScale();
       this.yScale = this.getYScale();
 
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
     });
@@ -140,7 +145,30 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.xDomain, this.customColors);
+    let domain;
+    if (this.schemeType === 'ordinal') {
+      domain = this.xDomain; 
+    } else {
+      domain = this.yDomain;
+    }
+
+    this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+  }
+
+  getLegendOptions() {
+    let opts = {
+      scaleType: this.schemeType,
+      colors: undefined,
+      domain: []
+    };
+    if (opts.scaleType === 'ordinal') {
+      opts.domain = this.xDomain;
+      opts.colors = this.colors;
+    } else {
+      opts.domain = this.yDomain;
+      opts.colors = this.colors.scale;
+    }
+    return opts;
   }
 
   updateYAxisWidth({ width }): void {
@@ -152,15 +180,24 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.xAxisHeight = height;
     this.update();
   }
+  
 
-  onActivate(event) {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
-    this.activate.emit({ value: event, entries: this.activeEntries });
+  onActivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value && d.series === item.series;
+    });
+    if (idx > -1) {
+      return;
+    }
+    
+    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event) {
-    const idx = this.activeEntries.indexOf(event);
+  onDeactivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value && d.series === item.series;
+    });
 
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];

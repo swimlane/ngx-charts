@@ -6,22 +6,22 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
-import { colorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
 
 @Component({
-  selector: 'pie-chart',
+  selector: 'ngx-charts-pie-chart',
   template: `
-    <chart
-      [colors]="colors"
-      (legendLabelClick)="onClick($event)"
+    <ngx-charts-chart
+      [view]="[width, height]"
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      [activeEntries]="activeEntries"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
-      [legend]="legend"
-      [view]="[width, height]"
-      [legendData]="domain">
+      (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="translation" class="pie-chart chart">
-        <svg:g pieSeries
+        <svg:g ngx-charts-pie-series
           [colors]="colors"
           [showLabels]="labels"
           [series]="data"
@@ -31,9 +31,11 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [explodeSlices]="explodeSlices"
           [gradient]="gradient"
           (select)="onClick($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
         />
       </svg:g>
-    </chart>
+    </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -54,10 +56,11 @@ export class PieChartComponent extends BaseChartComponent {
   outerRadius: number;
   innerRadius: number;
   data: any;
-  colors: Function;
+  colors: ColorHelper;
   domain: any;
   dims: any;
   margin = [20, 20, 20, 20];
+  legendOptions: any;
 
   update(): void {
     super.update();
@@ -98,6 +101,7 @@ export class PieChartComponent extends BaseChartComponent {
       });
 
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
     });
   }
 
@@ -125,17 +129,33 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
-  onActivate(event): void {
-    if(this.activeEntries.indexOf(event) > -1) return;
-    this.activeEntries = [ event, ...this.activeEntries ];
-    this.activate.emit({ value: event, entries: this.activeEntries });
+  getLegendOptions() {
+    return {
+      scaleType: 'ordinal',
+      domain: this.domain,
+      colors: this.colors
+    };
   }
 
-  onDeactivate(event): void {
-    const idx = this.activeEntries.indexOf(event);
+  onActivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
+    if (idx > -1) {
+      return;
+    }
+    
+    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activate.emit({ value: item, entries: this.activeEntries });
+  }
+
+  onDeactivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
 
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];

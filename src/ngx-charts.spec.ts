@@ -1,6 +1,6 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 
-import { NG2D3Module } from '.';
+import { NgxChartsModule } from '.';
 
 /*
   This file is to import the main module. By importing it into this
@@ -8,10 +8,10 @@ import { NG2D3Module } from '.';
   in the code coverage stats.
 */
 
-describe('ng2d3 Module', () => {
+describe('ngx-charts Module', () => {
 
   it('should load', () => {
-    expect(NG2D3Module).toBeDefined();
+    expect(NgxChartsModule).toBeDefined();
   });
 
 });

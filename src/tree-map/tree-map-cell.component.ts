@@ -6,7 +6,7 @@ import d3 from '../d3';
 import { invertColor } from '../utils/color-utils';
 
 @Component({
-  selector: 'g[treeMapCell]',
+  selector: 'g[ngx-charts-tree-map-cell]',
   template: `
     <svg:g>
       <svg:rect
@@ -35,7 +35,7 @@ import { invertColor } from '../utils/color-utils';
           <xhtml:br />
           <xhtml:span 
             class="treemap-val" 
-            count-up 
+            ngx-charts-count-up 
             [countTo]="value">
           </xhtml:span>
         </xhtml:p>

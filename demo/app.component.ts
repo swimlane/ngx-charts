@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import d3 from '../src/d3';
 
 import { colorSets } from '../src/utils/color-sets';
-import '../src/ng2d3.scss';
+import '../src/ngx-charts.scss';
 
 import {single, multi, countries, generateData, generateGraph} from './data';
 import chartGroups from './chartTypes';
@@ -14,11 +14,12 @@ import './demo.scss';
     <main [class]="theme">
       <div class="chart-col">
         <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;">
-          <bar-vertical
+          <ngx-charts-bar-vertical
             *ngIf="chartType === 'bar-vertical'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="single"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -31,12 +32,13 @@ import './demo.scss';
             [showGridLines]="showGridLines"
             (select)="select($event)"
             (legendLabelClick)="onLegendLabelClick($event)">
-          </bar-vertical>
-          <bar-horizontal
+          </ngx-charts-bar-vertical>
+          <ngx-charts-bar-horizontal
             *ngIf="chartType === 'bar-horizontal'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="single"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -49,12 +51,13 @@ import './demo.scss';
             [showGridLines]="showGridLines"
             (legendLabelClick)="onLegendLabelClick($event)"
             (select)="select($event)">
-          </bar-horizontal>
-          <bar-vertical-2d
+          </ngx-charts-bar-horizontal>
+          <ngx-charts-bar-vertical-2d
             *ngIf="chartType === 'bar-vertical-2d'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -67,12 +70,13 @@ import './demo.scss';
             (legendLabelClick)="onLegendLabelClick($event)"
             [showGridLines]="showGridLines"
             (select)="select($event)">
-          </bar-vertical-2d>
-          <bar-horizontal-2d
+          </ngx-charts-bar-vertical-2d>
+          <ngx-charts-bar-horizontal-2d
             *ngIf="chartType === 'bar-horizontal-2d'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -85,12 +89,13 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
             (select)="select($event)">
-          </bar-horizontal-2d>
-          <bar-vertical-stacked
+          </ngx-charts-bar-horizontal-2d>
+          <ngx-charts-bar-vertical-stacked
             *ngIf="chartType === 'bar-vertical-stacked'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -103,12 +108,13 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
             (select)="select($event)">
-          </bar-vertical-stacked>
-          <bar-horizontal-stacked
+          </ngx-charts-bar-vertical-stacked>
+          <ngx-charts-bar-horizontal-stacked
             *ngIf="chartType === 'bar-horizontal-stacked'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -121,12 +127,13 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
             (select)="select($event)">
-          </bar-horizontal-stacked>
-          <bar-vertical-normalized
+          </ngx-charts-bar-horizontal-stacked>
+          <ngx-charts-bar-vertical-normalized
             *ngIf="chartType === 'bar-vertical-normalized'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -139,12 +146,13 @@ import './demo.scss';
             [yAxisLabel]="yAxisLabel"
             [showGridLines]="showGridLines"
             (select)="select($event)">
-          </bar-vertical-normalized>
-          <bar-horizontal-normalized
+          </ngx-charts-bar-vertical-normalized>
+          <ngx-charts-bar-horizontal-normalized
             *ngIf="chartType === 'bar-horizontal-normalized'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="multi"
             [gradient]="gradient"
             [xAxis]="showXAxis"
@@ -157,8 +165,8 @@ import './demo.scss';
             (legendLabelClick)="onLegendLabelClick($event)"
             [showGridLines]="showGridLines"
             (select)="select($event)">
-          </bar-horizontal-normalized>
-          <pie-chart
+          </ngx-charts-bar-horizontal-normalized>
+          <ngx-charts-pie-chart
             *ngIf="chartType === 'pie-chart'"
             class="chart-container"
             [view]="view"
@@ -171,8 +179,8 @@ import './demo.scss';
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             (select)="select($event)">
-          </pie-chart>
-          <advanced-pie-chart
+          </ngx-charts-pie-chart>
+          <ngx-charts-advanced-pie-chart
             *ngIf="chartType === 'advanced-pie-chart'"
             class="chart-container"
             [view]="view"
@@ -181,8 +189,8 @@ import './demo.scss';
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             (select)="select($event)">
-          </advanced-pie-chart>
-          <pie-grid
+          </ngx-charts-advanced-pie-chart>
+          <ngx-charts-pie-grid
             *ngIf="chartType === 'pie-grid'"
             class="chart-container"
             [view]="view"
@@ -190,12 +198,13 @@ import './demo.scss';
             (legendLabelClick)="onLegendLabelClick($event)"
             [results]="single"
             (select)="select($event)">
-          </pie-grid>
-          <line-chart
+          </ngx-charts-pie-grid>
+          <ngx-charts-line-chart
             *ngIf="chartType === 'line-chart'"
             [view]="view"
             class="chart-container"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             (legendLabelClick)="onLegendLabelClick($event)"
@@ -211,8 +220,8 @@ import './demo.scss';
             [showGridLines]="showGridLines"
             [curve]="curve"
             (select)="select($event)">
-          </line-chart>
-          <force-directed-graph
+          </ngx-charts-line-chart>
+          <ngx-charts-force-directed-graph
             *ngIf="chartType === 'force-directed-graph'"
             class="chart-container"
             [legend]="showLegend"
@@ -222,12 +231,13 @@ import './demo.scss';
             [scheme]="colorScheme"
             [view]="view"
             (select)="select($event)">
-          </force-directed-graph>
-          <area-chart
+          </ngx-charts-force-directed-graph>
+          <ngx-charts-area-chart
             *ngIf="chartType === 'area-chart'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             (legendLabelClick)="onLegendLabelClick($event)"
@@ -243,12 +253,13 @@ import './demo.scss';
             [showGridLines]="showGridLines"
             [curve]="curve"
             (select)="select($event)">
-          </area-chart>
-          <area-chart-stacked
+          </ngx-charts-area-chart>
+          <ngx-charts-area-chart-stacked
             *ngIf="chartType === 'area-chart-stacked'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
@@ -263,12 +274,13 @@ import './demo.scss';
             [showGridLines]="showGridLines"
             [curve]="curve"
             (select)="select($event)">
-          </area-chart-stacked>
-          <area-chart-normalized
+          </ngx-charts-area-chart-stacked>
+          <ngx-charts-area-chart-normalized
             *ngIf="chartType === 'area-chart-normalized'"
             class="chart-container"
             [view]="view"
             [scheme]="colorScheme"
+            [schemeType]="schemeType"
             [results]="dateData"
             [legend]="showLegend"
             [gradient]="gradient"
@@ -283,8 +295,8 @@ import './demo.scss';
             [showGridLines]="showGridLines"
             [curve]="curve"
             (select)="select($event)">
-          </area-chart-normalized>
-          <heat-map
+          </ngx-charts-area-chart-normalized>
+          <ngx-charts-heat-map
             *ngIf="chartType === 'heat-map'"
             class="chart-container"
             [view]="view"
@@ -300,8 +312,8 @@ import './demo.scss';
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
             (select)="select($event)">
-          </heat-map>
-          <tree-map
+          </ngx-charts-heat-map>
+          <ngx-charts-tree-map
             *ngIf="chartType === 'tree-map'"
             class="chart-container"
             [view]="view"
@@ -309,8 +321,8 @@ import './demo.scss';
             [scheme]="colorScheme"
             [results]="single"
             (select)="select($event)">
-          </tree-map>
-          <number-card
+          </ngx-charts-tree-map>
+          <ngx-charts-number-card
             *ngIf="chartType === 'number-card'"
             class="chart-container"
             [view]="view"
@@ -318,26 +330,41 @@ import './demo.scss';
             [scheme]="colorScheme"
             [results]="single"
             (select)="select($event)">
-          </number-card>
-          <gauge
+          </ngx-charts-number-card>
+          <ngx-charts-gauge
             *ngIf="chartType === 'gauge'"
             class="chart-container"
             [view]="view"
-            (legendLabelClick)="onLegendLabelClick($event)"
+            [results]="single"
             [scheme]="colorScheme"
-            [value]="gaugeValue"
             [min]="gaugeMin"
             [max]="gaugeMax"
             [units]="gaugeUnits"
+            [angleSpan]="gaugeAngleSpan"
+            [startAngle]="gaugeStartAngle"
+            [showAxis]="gaugeShowAxis"
             [bigSegments]="gaugeLargeSegments"
             [smallSegments]="gaugeSmallSegments"
+            (select)="select($event)"
+            (legendLabelClick)="onLegendLabelClick($event)">
+          </ngx-charts-gauge>
+          <ngx-charts-linear-gauge
+            *ngIf="chartType === 'linear-gauge'"
+            class="chart-container"
+            [view]="view"
+            [scheme]="colorScheme"
+            [min]="gaugeMin"
+            [max]="gaugeMax"
+            [value]="gaugeValue"
+            [previousValue]="gaugePreviousValue"
+            [units]="gaugeUnits"
             (select)="select($event)">
-          </gauge>
+          </ngx-charts-linear-gauge>
         </div>
       </div>
       <div class="sidebar">
         <h1>
-          ng2<strong>d3</strong>
+          Ngx-<strong>Charts</strong>
           <small>Angular2 D3 Chart Framework</small>
         </h1>
         <div style="margin:20px">
@@ -401,19 +428,29 @@ import './demo.scss';
             </div>
           </div>
         </div>
-        <h3 (click)="colorVisable = !colorVisable" style="cursor: pointer">
+        <h3 (click)="colorVisible = !colorVisible" style="cursor: pointer">
           <span
-            [class.arrow-down]="colorVisable"
-            [class.arrow-right]="!colorVisable">
+            [class.arrow-down]="colorVisible"
+            [class.arrow-right]="!colorVisible">
           </span>
           <strong>Color Scheme</strong>
         </h3>
         <select
-          [hidden]="!colorVisable"
+          [hidden]="!colorVisible"
           style="margin-left: 10px;"
           [ngModel]="selectedColorScheme"
           (ngModelChange)="setColorScheme($event)">
           <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{scheme.name}}</option>
+        </select>
+
+        <select
+          *ngIf="chart.options.includes('schemeType')"
+          [hidden]="!colorVisible"
+          style="margin-left: 10px;"
+          [ngModel]="schemeType"
+          (ngModelChange)="schemeType = $event">
+          <option value="ordinal">Ordinal</option>
+          <option value="linear">Linear</option>
         </select>
 
         <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
@@ -529,6 +566,28 @@ import './demo.scss';
             <input type="number" [(ngModel)]="gaugeValue"><br />
           </div>
 
+          <div *ngIf="chart.options.includes('previousValue')">
+            <label>Previous value:</label><br />
+            <input type="number" [(ngModel)]="gaugePreviousValue"><br />
+          </div>
+
+          <div *ngIf="chart.options.includes('angleSpan')">
+            <label>Angle span:</label><br />
+            <input type="number" [(ngModel)]="gaugeAngleSpan"><br />
+          </div>
+
+          <div *ngIf="chart.options.includes('startAngle')">
+            <label>Start Angle:</label><br />
+            <input type="number" [(ngModel)]="gaugeStartAngle"><br />
+          </div>
+
+          <div *ngIf="chart.options.includes('showAxis')">
+            <label>
+              <input type="checkbox" [checked]="gaugeShowAxis" (change)="gaugeShowAxis = $event.target.checked">
+              Show Axis
+            </label> <br />
+          </div>
+
           <div *ngIf="chart.options.includes('largeSegments')">
             <label>Number of large segments:</label><br />
             <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
@@ -544,16 +603,15 @@ import './demo.scss';
             <input type="text" [(ngModel)]="gaugeUnits"><br />
           </div>
         </div>
-        <h3><a href="https://swimlane.gitbooks.io/ng2d3/content/" target="_blank">Documentation</a></h3>
+        <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
         </div>
       </div>
     </main>
   `
 })
-
 export class AppComponent implements OnInit {
 
-  theme = "light";
+  theme = "dark";
   chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
@@ -588,6 +646,7 @@ export class AppComponent implements OnInit {
 
   colorSets: any;
   colorScheme: any;
+  schemeType: string = 'ordinal';
   selectedColorScheme: string;
 
   // pie
@@ -600,12 +659,16 @@ export class AppComponent implements OnInit {
   timeline = false;
 
   // gauge
-  gaugeValue: number = 60;
   gaugeMin: number = 0;
   gaugeMax: number = 100;
   gaugeLargeSegments: number = 10;
   gaugeSmallSegments: number = 5;
   gaugeUnits: string = 'alerts';
+  gaugeAngleSpan: number = 240;
+  gaugeStartAngle: number = -120;
+  gaugeShowAxis: boolean = true;
+  gaugeValue: number = 50; // linear gauge value
+  gaugePreviousValue: number = 70;
 
   constructor() {
     Object.assign(this, {
@@ -636,7 +699,7 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.gaugeValue = this.gaugeMin + Math.ceil(Math.random() * this.gaugeMax);
+    this.gaugeValue = this.gaugeMin + Math.floor(Math.random() * (this.gaugeMax - this.gaugeMin));
 
     let country = this.countries[Math.floor(Math.random() * this.countries.length)];
     let add = Math.random() < 0.7;

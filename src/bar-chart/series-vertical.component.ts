@@ -10,25 +10,27 @@ import {
   animate,
   ChangeDetectionStrategy
  } from '@angular/core';
-import * as moment from 'moment';
 import { formatLabel } from '../common/label.helper';
 
 @Component({
-  selector: 'g[seriesVertical]',
+  selector: 'g[ngx-charts-series-vertical]',
   template: `
-    <svg:g bar *ngFor="let bar of bars; trackBy: trackBy"
+    <svg:g ngx-charts-bar *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
       [x]="bar.x"
       [y]="bar.y"
       [fill]="bar.color"
+      [stops]="bar.gradientStops"
       [data]="bar.data"
       [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
       [gradient]="gradient"
-      [isActive]="isActive(bar.formattedLabel)"
+      [isActive]="isActive(bar.data)"
       (select)="onClick($event)"
+      (activate)="activate.emit($event)"
+      (deactivate)="deactivate.emit($event)"
       swui-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
@@ -56,11 +58,12 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
-  @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   bars: any;
   x: any;
@@ -73,14 +76,7 @@ export class SeriesVerticalComponent implements OnChanges {
   update(): void {
     let width;
     if (this.series.length) {
-      if (this.scaleType === 'time') {
-        let count = this.series.array[0].vals[0].label[0].length;
-        let firstDate = this.series.array[0].vals[0].label[0][count - 1];
-        let secondDate = moment(firstDate).add(1, 'hours');
-        width = Math.abs(this.xScale(secondDate) - this.xScale(firstDate)) * 0.8;
-      } else {
-        width = this.xScale.bandwidth();
-      }
+      width = this.xScale.bandwidth();
     }
 
     let d0 = 0;
@@ -94,11 +90,10 @@ export class SeriesVerticalComponent implements OnChanges {
       let label = d.name;
       const formattedLabel = formatLabel(label);
       const roundEdges = this.type === 'standard';
-
+      
       let bar: any = {
         value,
         label,
-        color: this.colors(label),
         roundEdges: roundEdges,
         data: d,
         width,
@@ -125,6 +120,8 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
+        bar.offset0 = offset0;
+        bar.offset1 = offset1;
       } else if (this.type === 'normalized') {
         let offset0 = d0;
         let offset1 = offset0 + value;
@@ -141,7 +138,21 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.height = this.yScale(offset0) - this.yScale(offset1);
         bar.x = 0;
         bar.y = this.yScale(offset1);
+        bar.offset0 = offset0;
+        bar.offset1 = offset1;
         value = (offset1 - offset0).toFixed(2) + '%';
+      }
+
+      if (this.colors.scaleType === 'ordinal') {
+        bar.color = this.colors.getColor(label);
+      } else {
+        if (this.type === 'standard') {
+          bar.color = this.colors.getColor(value);
+          bar.gradientStops = this.colors.getLinearGradientStops(value);
+        } else {
+          bar.color = this.colors.getColor(bar.offset1);
+          bar.gradientStops = this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+        }
       }
 
       bar.tooltipText = `
@@ -155,7 +166,10 @@ export class SeriesVerticalComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    return this.activeEntries.indexOf(entry) > -1;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name && entry.series === d.series;
+    });
+    return item !== undefined;
   }
 
   onClick(data): void {

@@ -7,37 +7,38 @@ import { InjectionService } from '../../utils/injection.service';
 
 @Component({
   providers: [InjectionService],
-  selector: 'chart',
+  selector: 'ngx-charts-chart',
   template: `
     <div 
       [style.width.px]="view[0]"
       [@animationState]="'active'">
       <svg
-        class="ng2d3"
-        [attr.width]="view[0] * chartWidth / 12.0"
+        class="ngx-charts"
+        [attr.width]="chartWidth"
         [attr.height]="view[1]">
         <ng-content></ng-content>
       </svg>
-      <scale-legend
-        *ngIf="legend && legendType === 'scaleLegend'"
+      <ngx-charts-scale-legend
+        *ngIf="showLegend && legendType === 'scaleLegend'"
         class="chart-legend"
-        [valueRange]="data"
-        [colors]="legendData"
+        [valueRange]="legendOptions.domain"
+        [colors]="legendOptions.colors"
         [height]="view[1]"
-        [width]="view[0] * legendWidth / 12.0">
-      </scale-legend>
-      <legend
-        *ngIf="legend && legendType === 'legend'"
+        [width]="legendWidth">
+      </ngx-charts-scale-legend>
+      <ngx-charts-legend
+        *ngIf="showLegend && legendType === 'legend'"
         class="chart-legend"
-        [data]="legendData"
+        [data]="legendOptions.domain"
         [title]="legendTitle"
-        [colors]="colors"
+        [colors]="legendOptions.colors"
         [height]="view[1]"
-        [width]="view[0] * legendWidth / 12.0"
+        [width]="legendWidth"
+        [activeEntries]="activeEntries"
         (labelClick)="legendLabelClick.emit($event)"
         (labelActivate)="legendLabelActivate.emit($event)"
         (labelDeactivate)="legendLabelDeactivate.emit($event)">
-      </legend>
+      </ngx-charts-legend>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,12 +54,16 @@ import { InjectionService } from '../../utils/injection.service';
 export class ChartComponent implements OnChanges {
 
   @Input() view;
-  @Input() legend = false;
+  @Input() showLegend = false;
+  @Input() legendOptions: any;
+
+  // remove
   @Input() data;
-  @Input() legendData;
-  @Input() legendTitle = 'Legend';
-  @Input() colors;
+  @Input() legendData;  
   @Input() legendType: any;
+  @Input() legendTitle = 'Legend';
+  @Input() colors: any;
+  @Input() activeEntries: any[];
 
   @Output() legendLabelClick: EventEmitter<any> = new EventEmitter();
   @Output() legendLabelActivate: EventEmitter<any> = new EventEmitter();
@@ -79,23 +84,25 @@ export class ChartComponent implements OnChanges {
   }
 
   update(): void {
-    this.legendWidth = 0;
-
-    if (this.legend) {
+    let legendColumns = 0;
+    if (this.showLegend) {
       this.legendType = this.getLegendType();
 
-      if (this.legendType === 'scaleLegend') {
-        this.legendWidth = 1;
+      if (this.legendType === 'scaleLegend') {        
+        legendColumns = 1;
       } else {
-        this.legendWidth = 2;
+        legendColumns = 2;
       }
     }
 
-    this.chartWidth = 12 - this.legendWidth;
+    let chartColumns = 12 - legendColumns;
+
+    this.chartWidth = this.view[0] * chartColumns / 12.0;
+    this.legendWidth = this.view[0] * legendColumns / 12.0;
   }
 
   getLegendType(): string {
-    if (typeof this.legendData === 'function') {
+    if (this.legendOptions.scaleType === 'linear') {
       return 'scaleLegend';
     } else {
       return 'legend';

@@ -12,17 +12,11 @@ import d3 from '../d3';
 import { id } from "../utils/id";
 
 @Component({
-  selector: 'g[pieArc]',
+  selector: 'g[ngx-charts-pie-arc]',
   template: `
     <svg:g class="arc-group">
       <svg:defs *ngIf="gradient">
-        <svg:g svgLinearGradient
-          [color]="fill"
-          orientation="vertical"
-          [name]="linearGradientId"
-          [startOpacity]="startOpacity"
-        />
-        <svg:g svgRadialGradient
+        <svg:g ngx-charts-svg-radial-gradient
           [color]="fill"
           orientation="vertical"
           [name]="radialGradientId"
@@ -35,6 +29,8 @@ import { id } from "../utils/id";
         [class.active]="isActive"
         [attr.fill]="gradient ? gradientFill : fill"
         (click)="onClick()"
+        (mouseenter)="activate.emit(data)"
+        (mouseleave)="deactivate.emit(data)"
         [style.pointer-events]="pointerEvents ? 'auto' : 'none'"
       />
     </svg:g>
@@ -59,6 +55,8 @@ export class PieArcComponent implements OnChanges {
   @Input() isActive: boolean = false;
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   element: HTMLElement;
   path: any;
@@ -83,7 +81,6 @@ export class PieArcComponent implements OnChanges {
 
     let pageUrl = window.location.href;
     this.radialGradientId = 'linearGrad' + id().toString();
-    this.linearGradientId = 'radialGrad' + id().toString();
 
     this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;
 

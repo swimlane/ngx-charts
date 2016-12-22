@@ -3,9 +3,9 @@ import {
   Input,
   Output,
   EventEmitter,
+  HostListener,
   ElementRef,
   SimpleChanges,
-  OnInit,
   OnChanges,
   ChangeDetectionStrategy
  } from '@angular/core';
@@ -13,14 +13,14 @@ import { id } from '../utils/id';
 import d3 from '../d3';
 
 @Component({
-  selector: 'g[bar]',
+  selector: 'g[ngx-charts-bar]',
   template: `
-    <svg:defs *ngIf="gradient">
-      <svg:g svgLinearGradient
+    <svg:defs *ngIf="hasGradient">
+      <svg:g ngx-charts-svg-linear-gradient
         [color]="fill"
         [orientation]="orientation"
         [name]="gradientId"
-        [startOpacity]="startOpacity"
+        [stops]="gradientStops"
       />
     </svg:defs>
     <svg:path
@@ -28,13 +28,13 @@ import d3 from '../d3';
       stroke="none"
       [class.active]="isActive"
       [attr.d]="path"
-      [attr.fill]="gradient ? gradientFill : fill"
+      [attr.fill]="hasGradient ? gradientFill : fill"
       (click)="select.emit(data)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BarComponent implements OnInit, OnChanges {
+export class BarComponent implements OnChanges {
 
   @Input() fill;
   @Input() data;
@@ -47,8 +47,11 @@ export class BarComponent implements OnInit, OnChanges {
   @Input() gradient: boolean = false;
   @Input() offset = 0;
   @Input() isActive: boolean = false;
+  @Input() stops: any[];
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 
   element: any;
   path: any;
@@ -56,20 +59,14 @@ export class BarComponent implements OnInit, OnChanges {
   gradientFill: any;
   startOpacity: any;
   initialized: boolean = false;
+  gradientStops: any[];
+  hasGradient: boolean = false;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnInit() {
-    let pageUrl = window.location.href;
-    this.gradientId = 'grad' + id().toString();
-    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
-    this.startOpacity = this.getStartOpacity();
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    // ngOnInit gets called after ngOnChanges, so we need to do this here
     if (!this.initialized) {
       this.loadAnimation();
       this.initialized = true;
@@ -79,6 +76,17 @@ export class BarComponent implements OnInit, OnChanges {
   }
 
   update(): void {
+    let pageUrl = window.location.href;
+    this.gradientId = 'grad' + id().toString();
+    this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
+
+    if (this.gradient || this.stops) {
+      this.gradientStops = this.getGradient();
+      this.hasGradient = true;
+    } else {
+      this.hasGradient = false;
+    }
+
     this.animateToCurrentForm();
   }
 
@@ -93,6 +101,24 @@ export class BarComponent implements OnInit, OnChanges {
 
     node.transition().duration(750)
       .attr('d', path);
+  }
+
+  getGradient() {
+    if (this.stops) {
+      return this.stops;
+    }
+    
+    return [
+      {
+        offset: 0,
+        color: this.fill,
+        opacity: this.getStartOpacity()
+      },
+      {
+        offset: 100,
+        color: this.fill,
+        opacity: 1
+    }];
   }
 
   getStartingPath() {
@@ -141,7 +167,7 @@ export class BarComponent implements OnInit, OnChanges {
     let radius = 0;
 
     if (this.roundEdges && this.height > 5 && this.width > 5) {
-      radius = 5;
+      radius = Math.floor(Math.min(5, this.height / 2, this.width / 2));
     }
     
     return radius;
@@ -198,6 +224,17 @@ export class BarComponent implements OnInit, OnChanges {
     retval += "z";
 
     return retval;
+  }
+
+
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.activate.emit(this.data);
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.deactivate.emit(this.data);
   }
 
 }
