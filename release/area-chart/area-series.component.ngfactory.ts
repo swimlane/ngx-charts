@@ -6,16 +6,17 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/area-chart/area-series.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '../../../src/common/area.component';
-import * as import9 from '../common/area.component.ngfactory';
-import * as import10 from '@angular/core/src/linker/element_ref';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '../../../src/common/area.component';
+import * as import10 from '../common/area.component.ngfactory';
+import * as import11 from '@angular/core/src/linker/element_ref';
 export class Wrapper_AreaSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.AreaSeriesComponent;
@@ -76,11 +77,11 @@ export class Wrapper_AreaSeriesComponent {
       this._expr_2 = currValue;
     }
   }
-  check_color(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_colors(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
       this._changed = true;
-      this.context.color = currValue;
-      this._changes['color'] = new import1.SimpleChange(this._expr_3,currValue);
+      this.context.colors = currValue;
+      this._changes['colors'] = new import1.SimpleChange(this._expr_3,currValue);
       this._expr_3 = currValue;
     }
   }
@@ -158,15 +159,15 @@ class View_AreaSeriesComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.AreaSeriesComponent>;
   _AreaSeriesComponent_0_3:Wrapper_AreaSeriesComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AreaSeriesComponent_Host0,renderType_AreaSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_AreaSeriesComponent_Host0,renderType_AreaSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'areaSeries',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-area-series',''),rootSelector,(null as any));
     this.compView_0 = new View_AreaSeriesComponent0(this.viewUtils,this,0,this._el_0);
     this._AreaSeriesComponent_0_3 = new Wrapper_AreaSeriesComponent();
     this.compView_0.create(this._AreaSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._AreaSeriesComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._AreaSeriesComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.AreaSeriesComponent) && (0 === requestNodeIndex))) { return this._AreaSeriesComponent_0_3.context; }
@@ -174,7 +175,7 @@ class View_AreaSeriesComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._AreaSeriesComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -184,28 +185,28 @@ class View_AreaSeriesComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const AreaSeriesComponentNgFactory:import7.ComponentFactory<import0.AreaSeriesComponent> = new import7.ComponentFactory<import0.AreaSeriesComponent>('g[areaSeries]',View_AreaSeriesComponent_Host0,import0.AreaSeriesComponent);
+export const AreaSeriesComponentNgFactory:import8.ComponentFactory<import0.AreaSeriesComponent> = new import8.ComponentFactory<import0.AreaSeriesComponent>('g[ngx-charts-area-series]',View_AreaSeriesComponent_Host0,import0.AreaSeriesComponent);
 const styles_AreaSeriesComponent:any[] = ([] as any[]);
 var renderType_AreaSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AreaSeriesComponent,{});
 export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSeriesComponent> {
   _text_0:any;
   _el_1:any;
-  compView_1:import2.AppView<import8.AreaComponent>;
-  _AreaComponent_1_3:import9.Wrapper_AreaComponent;
+  compView_1:import2.AppView<import9.AreaComponent>;
+  _AreaComponent_1_3:import10.Wrapper_AreaComponent;
   _text_2:any;
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_AreaSeriesComponent0,renderType_AreaSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_AreaSeriesComponent0,renderType_AreaSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray4(4,'area','','class','area-series'),(null as any));
-    this.compView_1 = new import9.View_AreaComponent0(this.viewUtils,this,1,this._el_1);
-    this._AreaComponent_1_3 = new import9.Wrapper_AreaComponent(new import10.ElementRef(this._el_1));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray4(4,'class','area-series','ngx-charts-area',''),(null as any));
+    this.compView_1 = new import10.View_AreaComponent0(this.viewUtils,this,1,this._el_1);
+    this._AreaComponent_1_3 = new import10.Wrapper_AreaComponent(new import11.ElementRef(this._el_1));
     this.compView_1.create(this._AreaComponent_1_3.context);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -217,7 +218,7 @@ export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSerie
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import8.AreaComponent) && (1 === requestNodeIndex))) { return this._AreaComponent_1_3.context; }
+    if (((token === import9.AreaComponent) && (1 === requestNodeIndex))) { return this._AreaComponent_1_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -227,12 +228,14 @@ export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSerie
     this._AreaComponent_1_3.check_path(currVal_1_0_1,throwOnChange,false);
     const currVal_1_0_2:any = this.context.startingPath;
     this._AreaComponent_1_3.check_startingPath(currVal_1_0_2,throwOnChange,false);
-    const currVal_1_0_3:any = this.context.color;
+    const currVal_1_0_3:any = this.context.colors.getColor(this.context.data.name);
     this._AreaComponent_1_3.check_fill(currVal_1_0_3,throwOnChange,false);
     const currVal_1_0_4:any = this.context.opacity;
     this._AreaComponent_1_3.check_opacity(currVal_1_0_4,throwOnChange,false);
-    const currVal_1_0_5:any = this.context.gradient;
+    const currVal_1_0_5:any = (this.context.gradient || this.context.hasGradient);
     this._AreaComponent_1_3.check_gradient(currVal_1_0_5,throwOnChange,false);
+    const currVal_1_0_6:any = this.context.gradientStops;
+    this._AreaComponent_1_3.check_stops(currVal_1_0_6,throwOnChange,false);
     if (this._AreaComponent_1_3.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_5:any = this.context.isActive(this.context.data);
     if (import3.checkBinding(throwOnChange,this._expr_5,currVal_5)) {
@@ -244,7 +247,7 @@ export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSerie
       this.renderer.setElementClass(this._el_1,'inactive',currVal_6);
       this._expr_6 = currVal_6;
     }
-    this.compView_1.detectChanges(throwOnChange);
+    this.compView_1.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_1.destroy();

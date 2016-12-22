@@ -30,7 +30,7 @@ var AreaChartModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    AreaChartModule.ctorParameters = [];
+    AreaChartModule.ctorParameters = function () { return []; };
     return AreaChartModule;
 }());
 exports.AreaChartModule = AreaChartModule;

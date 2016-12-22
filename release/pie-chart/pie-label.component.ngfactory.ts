@@ -6,15 +6,16 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/pie-chart/pie-label.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/element_ref';
-import * as import9 from '@angular/core/src/security';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/element_ref';
+import * as import10 from '@angular/core/src/security';
 export class Wrapper_PieLabelComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieLabelComponent;
@@ -124,15 +125,15 @@ class View_PieLabelComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.PieLabelComponent>;
   _PieLabelComponent_0_3:Wrapper_PieLabelComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieLabelComponent_Host0,renderType_PieLabelComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_PieLabelComponent_Host0,renderType_PieLabelComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'pieLabel',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-pie-label',''),rootSelector,(null as any));
     this.compView_0 = new View_PieLabelComponent0(this.viewUtils,this,0,this._el_0);
-    this._PieLabelComponent_0_3 = new Wrapper_PieLabelComponent(new import8.ElementRef(this._el_0));
+    this._PieLabelComponent_0_3 = new Wrapper_PieLabelComponent(new import9.ElementRef(this._el_0));
     this.compView_0.create(this._PieLabelComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._PieLabelComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._PieLabelComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.PieLabelComponent) && (0 === requestNodeIndex))) { return this._PieLabelComponent_0_3.context; }
@@ -140,7 +141,7 @@ class View_PieLabelComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._PieLabelComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -149,7 +150,7 @@ class View_PieLabelComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const PieLabelComponentNgFactory:import7.ComponentFactory<import0.PieLabelComponent> = new import7.ComponentFactory<import0.PieLabelComponent>('g[pieLabel]',View_PieLabelComponent_Host0,import0.PieLabelComponent);
+export const PieLabelComponentNgFactory:import8.ComponentFactory<import0.PieLabelComponent> = new import8.ComponentFactory<import0.PieLabelComponent>('g[ngx-charts-pie-label]',View_PieLabelComponent_Host0,import0.PieLabelComponent);
 const styles_PieLabelComponent:any[] = ([] as any[]);
 var renderType_PieLabelComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieLabelComponent,{});
 export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelComponent> {
@@ -174,7 +175,7 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
   /*private*/ _expr_18:any;
   /*private*/ _expr_19:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieLabelComponent0,renderType_PieLabelComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_PieLabelComponent0,renderType_PieLabelComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
@@ -186,7 +187,7 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
     this._expr_18 = import1.UNINITIALIZED;
     this._expr_19 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'title',import3.EMPTY_INLINE_ARRAY,(null as any));
@@ -226,17 +227,17 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
     }
     const currVal_12:any = this.context.textAnchor();
     if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setElementStyle(this._el_4,'textAnchor',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_12).toString()));
+      this.renderer.setElementStyle(this._el_4,'textAnchor',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_12).toString()));
       this._expr_12 = currVal_12;
     }
     const currVal_13:any = 'crispEdges';
     if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
-      this.renderer.setElementStyle(this._el_4,'shapeRendering',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_13) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_13).toString()));
+      this.renderer.setElementStyle(this._el_4,'shapeRendering',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_13) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_13).toString()));
       this._expr_13 = currVal_13;
     }
     const currVal_14:any = 'uppercase';
     if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setElementStyle(this._el_4,'textTransform',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_14).toString()));
+      this.renderer.setElementStyle(this._el_4,'textTransform',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_14).toString()));
       this._expr_14 = currVal_14;
     }
     const currVal_15:any = import3.inlineInterpolate(1,'\n      ',this.context.trimLabel(this.context.label,10),'\n    ');
@@ -256,12 +257,12 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
     }
     const currVal_18:any = 2000;
     if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setElementStyle(this._el_7,'strokeDasharray',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_18) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_18).toString()));
+      this.renderer.setElementStyle(this._el_7,'strokeDasharray',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_18) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_18).toString()));
       this._expr_18 = currVal_18;
     }
     const currVal_19:any = 0;
     if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
-      this.renderer.setElementStyle(this._el_7,'strokeDashoffset',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_19) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_19).toString()));
+      this.renderer.setElementStyle(this._el_7,'strokeDashoffset',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_19) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_19).toString()));
       this._expr_19 = currVal_19;
     }
   }

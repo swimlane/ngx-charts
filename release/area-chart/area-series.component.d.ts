@@ -3,7 +3,7 @@ export declare class AreaSeriesComponent implements OnChanges {
     data: any;
     xScale: any;
     yScale: any;
-    color: any;
+    colors: any;
     scaleType: any;
     stacked: boolean;
     normalized: boolean;
@@ -14,8 +14,11 @@ export declare class AreaSeriesComponent implements OnChanges {
     opacity: number;
     path: string;
     startingPath: string;
+    hasGradient: boolean;
+    gradientStops: any[];
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
+    updateGradient(): void;
     isActive(entry: any): boolean;
     isInactive(entry: any): boolean;
 }

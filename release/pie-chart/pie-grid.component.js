@@ -14,23 +14,10 @@ var grid_layout_helper_1 = require('../common/grid-layout.helper');
 var label_helper_1 = require('../common/label.helper');
 var PieGridComponent = (function (_super) {
     __extends(PieGridComponent, _super);
-    function PieGridComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.select = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
+    function PieGridComponent() {
+        _super.apply(this, arguments);
         this.margin = [20, 20, 20, 20];
     }
-    PieGridComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    PieGridComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    PieGridComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     PieGridComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -70,7 +57,7 @@ var PieGridComponent = (function (_super) {
                     return 'rgba(100,100,100,0.3)';
                 }
                 else {
-                    return _this.colorScale(label);
+                    return _this.colorScale.getColor(label);
                 }
             };
             var xPos = d.x + (d.width - padding) / 2;
@@ -103,29 +90,17 @@ var PieGridComponent = (function (_super) {
         this.select.emit(data);
     };
     PieGridComponent.prototype.setColors = function () {
-        this.colorScale = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colorScale = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     PieGridComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'pie-grid',
-                    template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    selector: 'ngx-charts-pie-grid',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    PieGridComponent.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.ChangeDetectorRef, },
-        { type: core_1.NgZone, },
-    ];
-    PieGridComponent.propDecorators = {
-        'view': [{ type: core_1.Input },],
-        'results': [{ type: core_1.Input },],
-        'scheme': [{ type: core_1.Input },],
-        'customColors': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-        'legendLabelClick': [{ type: core_1.Output },],
-    };
+    PieGridComponent.ctorParameters = function () { return []; };
     return PieGridComponent;
 }(base_chart_component_1.BaseChartComponent));
 exports.PieGridComponent = PieGridComponent;

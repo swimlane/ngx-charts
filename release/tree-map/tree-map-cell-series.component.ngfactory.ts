@@ -6,26 +6,25 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/tree-map/tree-map-cell-series.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/view_container';
-import * as import9 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import10 from '@angular/core/src/linker/template_ref';
-import * as import11 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import12 from '@angular/common/src/directives/ng_for';
-import * as import13 from '../../../src/tree-map/tree-map-cell.component';
-import * as import14 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import15 from './tree-map-cell.component.ngfactory';
-import * as import16 from '../../../src/common/tooltip/tooltip.service';
-import * as import17 from '../../../src/utils/injection.service';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/view_container';
+import * as import10 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import11 from '@angular/core/src/linker/template_ref';
+import * as import12 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import13 from '@angular/common/src/directives/ng_for';
+import * as import14 from '../../../src/tree-map/tree-map-cell.component';
+import * as import15 from '../common/tooltip/tooltip.directive.ngfactory';
+import * as import16 from './tree-map-cell.component.ngfactory';
+import * as import17 from '../../../src/common/tooltip/tooltip.service';
 import * as import18 from '@angular/core/src/linker/element_ref';
-import * as import19 from '@angular/core/src/zone/ng_zone';
-import * as import20 from '../../../src/common/tooltip/tooltip.directive';
+import * as import19 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_TreeMapCellSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.TreeMapCellSeriesComponent;
@@ -98,15 +97,15 @@ class View_TreeMapCellSeriesComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.TreeMapCellSeriesComponent>;
   _TreeMapCellSeriesComponent_0_3:Wrapper_TreeMapCellSeriesComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_TreeMapCellSeriesComponent_Host0,renderType_TreeMapCellSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_TreeMapCellSeriesComponent_Host0,renderType_TreeMapCellSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'treeMapCellSeries',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-tree-map-cell-series',''),rootSelector,(null as any));
     this.compView_0 = new View_TreeMapCellSeriesComponent0(this.viewUtils,this,0,this._el_0);
     this._TreeMapCellSeriesComponent_0_3 = new Wrapper_TreeMapCellSeriesComponent();
     this.compView_0.create(this._TreeMapCellSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._TreeMapCellSeriesComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._TreeMapCellSeriesComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.TreeMapCellSeriesComponent) && (0 === requestNodeIndex))) { return this._TreeMapCellSeriesComponent_0_3.context; }
@@ -114,7 +113,7 @@ class View_TreeMapCellSeriesComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._TreeMapCellSeriesComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -124,26 +123,26 @@ class View_TreeMapCellSeriesComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const TreeMapCellSeriesComponentNgFactory:import7.ComponentFactory<import0.TreeMapCellSeriesComponent> = new import7.ComponentFactory<import0.TreeMapCellSeriesComponent>('g[treeMapCellSeries]',View_TreeMapCellSeriesComponent_Host0,import0.TreeMapCellSeriesComponent);
+export const TreeMapCellSeriesComponentNgFactory:import8.ComponentFactory<import0.TreeMapCellSeriesComponent> = new import8.ComponentFactory<import0.TreeMapCellSeriesComponent>('g[ngx-charts-tree-map-cell-series]',View_TreeMapCellSeriesComponent_Host0,import0.TreeMapCellSeriesComponent);
 const styles_TreeMapCellSeriesComponent:any[] = ([] as any[]);
 var renderType_TreeMapCellSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TreeMapCellSeriesComponent,{});
 export class View_TreeMapCellSeriesComponent0 extends import2.AppView<import0.TreeMapCellSeriesComponent> {
   _text_0:any;
   _anchor_1:any;
-  /*private*/ _vc_1:import8.ViewContainer;
+  /*private*/ _vc_1:import9.ViewContainer;
   _TemplateRef_1_5:any;
-  _NgFor_1_6:import9.Wrapper_NgFor;
+  _NgFor_1_6:import10.Wrapper_NgFor;
   _text_2:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_TreeMapCellSeriesComponent0,renderType_TreeMapCellSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_TreeMapCellSeriesComponent0,renderType_TreeMapCellSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
-    this._vc_1 = new import8.ViewContainer(1,(null as any),this,this._anchor_1);
-    this._TemplateRef_1_5 = new import10.TemplateRef_(this,1,this._anchor_1);
-    this._NgFor_1_6 = new import9.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import11.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_1 = new import9.ViewContainer(1,(null as any),this,this._anchor_1);
+    this._TemplateRef_1_5 = new import11.TemplateRef_(this,1,this._anchor_1);
+    this._NgFor_1_6 = new import10.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -154,8 +153,8 @@ export class View_TreeMapCellSeriesComponent0 extends import2.AppView<import0.Tr
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import10.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
-    if (((token === import12.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
+    if (((token === import11.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
+    if (((token === import13.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -176,30 +175,30 @@ export class View_TreeMapCellSeriesComponent0 extends import2.AppView<import0.Tr
 }
 class View_TreeMapCellSeriesComponent1 extends import2.AppView<any> {
   _el_0:any;
-  /*private*/ _vc_0:import8.ViewContainer;
-  compView_0:import2.AppView<import13.TreeMapCellComponent>;
-  _TooltipDirective_0_5:import14.Wrapper_TooltipDirective;
-  _TreeMapCellComponent_0_6:import15.Wrapper_TreeMapCellComponent;
+  /*private*/ _vc_0:import9.ViewContainer;
+  compView_0:import2.AppView<import14.TreeMapCellComponent>;
+  _TooltipDirective_0_5:import15.Wrapper_TooltipDirective;
+  _TreeMapCellComponent_0_6:import16.Wrapper_TreeMapCellComponent;
   _el_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
-    super(View_TreeMapCellSeriesComponent1,renderType_TreeMapCellSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+    super(View_TreeMapCellSeriesComponent1,renderType_TreeMapCellSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'swui-tooltip','','treeMapCell',''),(null as any));
-    this._vc_0 = new import8.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new import15.View_TreeMapCellComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import14.Wrapper_TooltipDirective(this.parentView.injectorGet(import16.TooltipService,this.parentIndex),this._vc_0.vcRef,this.parentView.injectorGet(import17.InjectionService,this.parentIndex),this.renderer,new import18.ElementRef(this._el_0),this.parentView.injectorGet(import19.NgZone,this.parentIndex));
-    this._TreeMapCellComponent_0_6 = new import15.Wrapper_TreeMapCellComponent(new import18.ElementRef(this._el_0));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'ngx-charts-tree-map-cell','','ngx-tooltip',''),(null as any));
+    this._vc_0 = new import9.ViewContainer(0,(null as any),this,this._el_0);
+    this.compView_0 = new import16.View_TreeMapCellComponent0(this.viewUtils,this,0,this._el_0);
+    this._TooltipDirective_0_5 = new import15.Wrapper_TooltipDirective(this.parentView.injectorGet(import17.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import18.ElementRef(this._el_0));
+    this._TreeMapCellComponent_0_6 = new import16.Wrapper_TreeMapCellComponent(new import18.ElementRef(this._el_0));
     this.compView_0.create(this._TreeMapCellComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(10,'select',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(12,'select',(null as any),'focusin',(null as any),'blur',(null as any),'mouseenter',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
     this._TreeMapCellComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import20.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
-    if (((token === import13.TreeMapCellComponent) && (0 === requestNodeIndex))) { return this._TreeMapCellComponent_0_6.context; }
+    if (((token === import19.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import14.TreeMapCellComponent) && (0 === requestNodeIndex))) { return this._TreeMapCellComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -228,7 +227,7 @@ class View_TreeMapCellSeriesComponent1 extends import2.AppView<any> {
     this._TreeMapCellComponent_0_6.check_valueType(currVal_0_1_7,throwOnChange,false);
     if (this._TreeMapCellComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this._vc_0.destroyNestedViews();

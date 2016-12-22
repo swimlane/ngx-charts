@@ -26,7 +26,7 @@ var HeatMapModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    HeatMapModule.ctorParameters = [];
+    HeatMapModule.ctorParameters = function () { return []; };
     return HeatMapModule;
 }());
 exports.HeatMapModule = HeatMapModule;

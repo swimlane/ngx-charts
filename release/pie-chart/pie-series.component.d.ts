@@ -10,6 +10,8 @@ export declare class PieSeriesComponent implements OnChanges {
     gradient: boolean;
     activeEntries: any[];
     select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
     max: number;
     data: any;
     ngOnChanges(changes: SimpleChanges): void;

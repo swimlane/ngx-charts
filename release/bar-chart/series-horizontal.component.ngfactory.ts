@@ -6,32 +6,31 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/bar-chart/series-horizontal.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/animation/animation_transition';
-import * as import9 from '@angular/core/src/animation/animation_sequence_player';
-import * as import10 from '@angular/core/src/animation/animation_styles';
-import * as import11 from '@angular/core/src/animation/animation_style_util';
-import * as import12 from '@angular/core/src/animation/animation_keyframe';
-import * as import13 from '@angular/core/src/animation/animation_player';
-import * as import14 from '@angular/core/src/linker/view_container';
-import * as import15 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import16 from '@angular/core/src/linker/template_ref';
-import * as import17 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import18 from '@angular/common/src/directives/ng_for';
-import * as import19 from '../../../src/bar-chart/bar.component';
-import * as import20 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import21 from './bar.component.ngfactory';
-import * as import22 from '../../../src/common/tooltip/tooltip.service';
-import * as import23 from '../../../src/utils/injection.service';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/animation/animation_transition';
+import * as import10 from '@angular/core/src/animation/animation_sequence_player';
+import * as import11 from '@angular/core/src/animation/animation_styles';
+import * as import12 from '@angular/core/src/animation/animation_style_util';
+import * as import13 from '@angular/core/src/animation/animation_keyframe';
+import * as import14 from '@angular/core/src/animation/animation_player';
+import * as import15 from '@angular/core/src/linker/view_container';
+import * as import16 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import17 from '@angular/core/src/linker/template_ref';
+import * as import18 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import19 from '@angular/common/src/directives/ng_for';
+import * as import20 from '../../../src/bar-chart/bar.component';
+import * as import21 from '../common/tooltip/tooltip.directive.ngfactory';
+import * as import22 from './bar.component.ngfactory';
+import * as import23 from '../../../src/common/tooltip/tooltip.service';
 import * as import24 from '@angular/core/src/linker/element_ref';
-import * as import25 from '@angular/core/src/zone/ng_zone';
-import * as import26 from '../../../src/common/tooltip/tooltip.directive';
+import * as import25 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_SeriesHorizontal {
   /*private*/ _eventHandler:Function;
   context:import0.SeriesHorizontal;
@@ -46,6 +45,8 @@ export class Wrapper_SeriesHorizontal {
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor() {
     this._changed = false;
     this._changes = {};
@@ -63,6 +64,8 @@ export class Wrapper_SeriesHorizontal {
   }
   ngOnDestroy():void {
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_dims(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -143,9 +146,11 @@ export class Wrapper_SeriesHorizontal {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
+    if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
+    if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
 }
 var renderType_SeriesHorizontal_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -154,15 +159,15 @@ class View_SeriesHorizontal_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.SeriesHorizontal>;
   _SeriesHorizontal_0_3:Wrapper_SeriesHorizontal;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SeriesHorizontal_Host0,renderType_SeriesHorizontal_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_SeriesHorizontal_Host0,renderType_SeriesHorizontal_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'seriesHorizontal',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-series-horizontal',''),rootSelector,(null as any));
     this.compView_0 = new View_SeriesHorizontal0(this.viewUtils,this,0,this._el_0);
     this._SeriesHorizontal_0_3 = new Wrapper_SeriesHorizontal();
     this.compView_0.create(this._SeriesHorizontal_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._SeriesHorizontal_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._SeriesHorizontal_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.SeriesHorizontal) && (0 === requestNodeIndex))) { return this._SeriesHorizontal_0_3.context; }
@@ -170,7 +175,7 @@ class View_SeriesHorizontal_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._SeriesHorizontal_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -180,15 +185,15 @@ class View_SeriesHorizontal_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const SeriesHorizontalNgFactory:import7.ComponentFactory<import0.SeriesHorizontal> = new import7.ComponentFactory<import0.SeriesHorizontal>('g[seriesHorizontal]',View_SeriesHorizontal_Host0,import0.SeriesHorizontal);
+export const SeriesHorizontalNgFactory:import8.ComponentFactory<import0.SeriesHorizontal> = new import8.ComponentFactory<import0.SeriesHorizontal>('g[ngx-charts-series-horizontal]',View_SeriesHorizontal_Host0,import0.SeriesHorizontal);
 const styles_SeriesHorizontal:any[] = ([] as any[]);
 var SeriesHorizontal_animationState_states:any = {
   '*': {},
-  void: {}
+  'void': {}
 }
 ;
-function SeriesHorizontal_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import8.AnimationTransition {
-  var previousPlayers:any = view.animationContext.getAnimationPlayers(element,'animationState',(nextState == 'void'));
+function SeriesHorizontal_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import9.AnimationTransition {
+  var previousPlayers:any = view.animationContext.getAnimationPlayers(element,((nextState == 'void')? (null as any): 'animationState'));
   var collectedStyles:any = {};
   var player:any = (null as any);
   var totalTime:any = 0;
@@ -198,57 +203,57 @@ function SeriesHorizontal_animationState_factory(view:import2.AppView<any>,eleme
   var endStateStyles:any = SeriesHorizontal_animationState_states[nextState];
   if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
   if (((player == (null as any)) && (true && (nextState == 'void')))) {
-      player = new import9.AnimationSequencePlayer([view.renderer.animate(element,new import10.AnimationStyles(import11.collectAndResolveStyles(collectedStyles,[
+      player = new import10.AnimationSequencePlayer([view.renderer.animate(element,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[
         startStateStyles,
         {
-          opacity: '1',
-          transform: '*'
+          'opacity': '1',
+          'transform': '*'
         }
 
       ]
       )),[
-          new import12.AnimationKeyframe(0,new import10.AnimationStyles(import11.collectAndResolveStyles(collectedStyles,[{
-            opacity: '1',
-            transform: '*'
+          new import13.AnimationKeyframe(0,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[{
+            'opacity': '1',
+            'transform': '*'
           }
         ]))),
-          new import12.AnimationKeyframe(1,new import10.AnimationStyles(import11.collectAndResolveStyles(collectedStyles,[{
-            opacity: '0',
-            transform: 'scale(0)'
+          new import13.AnimationKeyframe(1,new import11.AnimationStyles(import12.collectAndResolveStyles(collectedStyles,[{
+            'opacity': '0',
+            'transform': 'scale(0)'
           }
         ])))
       ]
     ,500,0,(null as any),previousPlayers)]);
     totalTime = 500;
   }
-  if ((player == (null as any))) { (player = new import13.NoOpAnimationPlayer()); }
+  if ((player == (null as any))) { (player = new import14.NoOpAnimationPlayer()); }
   player.onDone(():void => {
     player.destroy();
-    import11.renderStyles(element,view.renderer,import11.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
+    import12.renderStyles(element,view.renderer,import12.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
   });
-  new import9.AnimationSequencePlayer(previousPlayers).destroy();
-  import11.renderStyles(element,view.renderer,import11.clearStyles(startStateStyles));
+  new import10.AnimationSequencePlayer(previousPlayers).destroy();
+  import12.renderStyles(element,view.renderer,import12.clearStyles(startStateStyles));
   view.animationContext.queueAnimation(element,'animationState',player);
-  return new import8.AnimationTransition(player,currentState,nextState,totalTime);
+  return new import9.AnimationTransition(player,currentState,nextState,totalTime);
 }
 var renderType_SeriesHorizontal:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesHorizontal,{animationState: SeriesHorizontal_animationState_factory});
 export class View_SeriesHorizontal0 extends import2.AppView<import0.SeriesHorizontal> {
   _text_0:any;
   _anchor_1:any;
-  /*private*/ _vc_1:import14.ViewContainer;
+  /*private*/ _vc_1:import15.ViewContainer;
   _TemplateRef_1_5:any;
-  _NgFor_1_6:import15.Wrapper_NgFor;
+  _NgFor_1_6:import16.Wrapper_NgFor;
   _text_2:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SeriesHorizontal0,renderType_SeriesHorizontal,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_SeriesHorizontal0,renderType_SeriesHorizontal,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
-    this._vc_1 = new import14.ViewContainer(1,(null as any),this,this._anchor_1);
-    this._TemplateRef_1_5 = new import16.TemplateRef_(this,1,this._anchor_1);
-    this._NgFor_1_6 = new import15.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import17.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_1 = new import15.ViewContainer(1,(null as any),this,this._anchor_1);
+    this._TemplateRef_1_5 = new import17.TemplateRef_(this,1,this._anchor_1);
+    this._NgFor_1_6 = new import16.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import18.IterableDiffers,this.parentIndex),this.ref);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -259,8 +264,8 @@ export class View_SeriesHorizontal0 extends import2.AppView<import0.SeriesHorizo
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import16.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
-    if (((token === import18.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
+    if (((token === import17.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
+    if (((token === import19.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -281,28 +286,28 @@ export class View_SeriesHorizontal0 extends import2.AppView<import0.SeriesHorizo
 }
 class View_SeriesHorizontal1 extends import2.AppView<any> {
   _el_0:any;
-  /*private*/ _vc_0:import14.ViewContainer;
-  compView_0:import2.AppView<import19.BarComponent>;
-  _TooltipDirective_0_5:import20.Wrapper_TooltipDirective;
-  _BarComponent_0_6:import21.Wrapper_BarComponent;
+  /*private*/ _vc_0:import15.ViewContainer;
+  compView_0:import2.AppView<import20.BarComponent>;
+  _TooltipDirective_0_5:import21.Wrapper_TooltipDirective;
+  _BarComponent_0_6:import22.Wrapper_BarComponent;
   _text_1:any;
   _el_2:any;
   /*private*/ _expr_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
-    super(View_SeriesHorizontal1,renderType_SeriesHorizontal,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import15.ViewContainer) {
+    super(View_SeriesHorizontal1,renderType_SeriesHorizontal,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'bar','','swui-tooltip',''),(null as any));
-    this._vc_0 = new import14.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new import21.View_BarComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import20.Wrapper_TooltipDirective(this.parentView.injectorGet(import22.TooltipService,this.parentIndex),this._vc_0.vcRef,this.parentView.injectorGet(import23.InjectionService,this.parentIndex),this.renderer,new import24.ElementRef(this._el_0),this.parentView.injectorGet(import25.NgZone,this.parentIndex));
-    this._BarComponent_0_6 = new import21.Wrapper_BarComponent(new import24.ElementRef(this._el_0));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'ngx-charts-bar','','ngx-tooltip',''),(null as any));
+    this._vc_0 = new import15.ViewContainer(0,(null as any),this,this._el_0);
+    this.compView_0 = new import22.View_BarComponent0(this.viewUtils,this,0,this._el_0);
+    this._TooltipDirective_0_5 = new import21.Wrapper_TooltipDirective(this.parentView.injectorGet(import23.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import24.ElementRef(this._el_0));
+    this._BarComponent_0_6 = new import22.Wrapper_BarComponent(new import24.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_0.create(this._BarComponent_0_6.context);
     this._el_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(10,'select',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._BarComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(16,'select',(null as any),'activate',(null as any),'deactivate',(null as any),'focusin',(null as any),'blur',(null as any),'mouseenter',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._BarComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true,true,true);
     this.init(this._el_2,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1
@@ -311,16 +316,14 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import26.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
-    if (((token === import19.BarComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._BarComponent_0_6.context; }
+    if (((token === import25.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import20.BarComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._BarComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_7:any = 'active';
     if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
       var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,((this._expr_7 == import1.UNINITIALIZED)? 'void': this._expr_7),((currVal_7 == import1.UNINITIALIZED)? 'void': currVal_7));
-      animationTransition_animationState.onStart(this.handleEvent_0.bind(this).bind(this,'@animationState.start'));
-      animationTransition_animationState.onDone(this.handleEvent_0.bind(this).bind(this,'@animationState.done'));
       this._expr_7 = currVal_7;
     }
     const currVal_0_0_0:any = this.context.$implicit.tooltipText;
@@ -348,11 +351,13 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     this._BarComponent_0_6.check_roundEdges(currVal_0_1_7,throwOnChange,false);
     const currVal_0_1_8:any = this.parentView.context.gradient;
     this._BarComponent_0_6.check_gradient(currVal_0_1_8,throwOnChange,false);
-    const currVal_0_1_9:any = this.parentView.context.isActive(this.context.$implicit.formattedLabel);
+    const currVal_0_1_9:any = this.parentView.context.isActive(this.context.$implicit.data);
     this._BarComponent_0_6.check_isActive(currVal_0_1_9,throwOnChange,false);
+    const currVal_0_1_10:any = this.context.$implicit.gradientStops;
+    this._BarComponent_0_6.check_stops(currVal_0_1_10,throwOnChange,false);
     if (this._BarComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this._vc_0.destroyNestedViews();
@@ -362,8 +367,6 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
   }
   detachInternal():void {
     var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,this._expr_7,'void');
-    animationTransition_animationState.onStart(this.handleEvent_0.bind(this).bind(this,'@animationState.start'));
-    animationTransition_animationState.onDone(this.handleEvent_0.bind(this).bind(this,'@animationState.done'));
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._vc_0.nativeElement,ctx);
@@ -371,12 +374,21 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     cb(this._el_2,ctx);
   }
   handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
+    this.compView_0.markPathToRootAsCheckOnce();
     var result:boolean = true;
     result = (this._TooltipDirective_0_5.handleEvent(eventName,$event) && result);
+    result = (this._BarComponent_0_6.handleEvent(eventName,$event) && result);
     if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.click($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'activate')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.activate.emit($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'deactivate')) {
+      const pd_sub_2:any = ((<any>this.parentView.context.deactivate.emit($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }

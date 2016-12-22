@@ -18,7 +18,7 @@ var ForceDirectedGraphModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    ForceDirectedGraphModule.ctorParameters = [];
+    ForceDirectedGraphModule.ctorParameters = function () { return []; };
     return ForceDirectedGraphModule;
 }());
 exports.ForceDirectedGraphModule = ForceDirectedGraphModule;

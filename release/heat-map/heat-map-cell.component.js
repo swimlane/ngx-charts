@@ -14,7 +14,21 @@ var HeatMapCellComponent = (function () {
         this.startOpacity = 0.3;
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
+        this.gradientStops = this.getGradientStops();
         this.loadAnimation();
+    };
+    HeatMapCellComponent.prototype.getGradientStops = function () {
+        return [
+            {
+                offset: 0,
+                color: this.fill,
+                opacity: this.startOpacity
+            },
+            {
+                offset: 100,
+                color: this.fill,
+                opacity: 1
+            }];
     };
     HeatMapCellComponent.prototype.loadAnimation = function () {
         var node = d3_1.default.select(this.element).select('.cell');
@@ -31,15 +45,15 @@ var HeatMapCellComponent = (function () {
     };
     HeatMapCellComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[heatMapCell]',
-                    template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
+                    selector: 'g[ngx-charts-heat-map-cell]',
+                    template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    HeatMapCellComponent.ctorParameters = [
+    HeatMapCellComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-    ];
+    ]; };
     HeatMapCellComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],
         'x': [{ type: core_1.Input },],

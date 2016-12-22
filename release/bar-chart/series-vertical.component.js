@@ -1,12 +1,12 @@
 "use strict";
 var core_1 = require('@angular/core');
-var moment = require('moment');
 var label_helper_1 = require('../common/label.helper');
 var SeriesVerticalComponent = (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
-        this.scaleType = 'ordinal';
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
     }
     SeriesVerticalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -15,15 +15,7 @@ var SeriesVerticalComponent = (function () {
         var _this = this;
         var width;
         if (this.series.length) {
-            if (this.scaleType === 'time') {
-                var count = this.series.array[0].vals[0].label[0].length;
-                var firstDate = this.series.array[0].vals[0].label[0][count - 1];
-                var secondDate = moment(firstDate).add(1, 'hours');
-                width = Math.abs(this.xScale(secondDate) - this.xScale(firstDate)) * 0.8;
-            }
-            else {
-                width = this.xScale.bandwidth();
-            }
+            width = this.xScale.bandwidth();
         }
         var d0 = 0;
         var total;
@@ -38,7 +30,6 @@ var SeriesVerticalComponent = (function () {
             var bar = {
                 value: value,
                 label: label,
-                color: _this.colors(label),
                 roundEdges: roundEdges,
                 data: d,
                 width: width,
@@ -64,6 +55,8 @@ var SeriesVerticalComponent = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
+                bar.offset0 = offset0;
+                bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -80,7 +73,22 @@ var SeriesVerticalComponent = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
+                bar.offset0 = offset0;
+                bar.offset1 = offset1;
                 value = (offset1 - offset0).toFixed(2) + '%';
+            }
+            if (_this.colors.scaleType === 'ordinal') {
+                bar.color = _this.colors.getColor(label);
+            }
+            else {
+                if (_this.type === 'standard') {
+                    bar.color = _this.colors.getColor(value);
+                    bar.gradientStops = _this.colors.getLinearGradientStops(value);
+                }
+                else {
+                    bar.color = _this.colors.getColor(bar.offset1);
+                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                }
             }
             bar.tooltipText = "\n        <span class=\"tooltip-label\">" + formattedLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
@@ -89,7 +97,10 @@ var SeriesVerticalComponent = (function () {
     SeriesVerticalComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name && entry.series === d.series;
+        });
+        return item !== undefined;
     };
     SeriesVerticalComponent.prototype.onClick = function (data) {
         this.select.emit(data);
@@ -99,8 +110,8 @@ var SeriesVerticalComponent = (function () {
     };
     SeriesVerticalComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[seriesVertical]',
-                    template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      (select)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    selector: 'g[ngx-charts-series-vertical]',
+                    template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -116,7 +127,7 @@ var SeriesVerticalComponent = (function () {
                 },] },
     ];
     /** @nocollapse */
-    SeriesVerticalComponent.ctorParameters = [];
+    SeriesVerticalComponent.ctorParameters = function () { return []; };
     SeriesVerticalComponent.propDecorators = {
         'dims': [{ type: core_1.Input },],
         'type': [{ type: core_1.Input },],
@@ -124,10 +135,11 @@ var SeriesVerticalComponent = (function () {
         'xScale': [{ type: core_1.Input },],
         'yScale': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
-        'scaleType': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
         'select': [{ type: core_1.Output },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
     };
     return SeriesVerticalComponent;
 }());

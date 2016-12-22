@@ -1,15 +1,9 @@
-
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-export declare class LineChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-    private element;
-    private cd;
-    view: any;
-    results: any;
-    scheme: any;
+export declare class LineChartComponent extends BaseChartComponent {
     legend: any;
-    customColors: any;
     xAxis: any;
     yAxis: any;
     showXAxisLabel: any;
@@ -22,7 +16,7 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     showGridLines: boolean;
     curve: any;
     activeEntries: any[];
-    select: EventEmitter<{}>;
+    schemeType: string;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;
@@ -32,7 +26,7 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     seriesDomain: any;
     yScale: any;
     xScale: any;
-    colors: Function;
+    colors: ColorHelper;
     scaleType: string;
     transform: string;
     clipPath: string;
@@ -44,6 +38,7 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     xAxisHeight: number;
     yAxisWidth: number;
     filteredDomain: any;
+    legendOptions: any;
     timelineWidth: any;
     timelineHeight: number;
     timelineXScale: any;
@@ -51,10 +46,6 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     timelineXDomain: any;
     timelineTransform: any;
     timelinePadding: number;
-    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngAfterViewInit(): void;
-    ngOnDestroy(): void;
-    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];
@@ -70,12 +61,17 @@ export declare class LineChartComponent extends BaseChartComponent implements On
     onClick(data: any, series: any): void;
     trackBy(index: any, item: any): string;
     setColors(): void;
+    getLegendOptions(): {
+        scaleType: string;
+        colors: any;
+        domain: any[];
+    };
     updateYAxisWidth({width}: {
         width: any;
     }): void;
     updateXAxisHeight({height}: {
         height: any;
     }): void;
-    onActivate(event: any): void;
-    onDeactivate(event: any): void;
+    onActivate(item: any): void;
+    onDeactivate(item: any): void;
 }

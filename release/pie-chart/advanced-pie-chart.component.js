@@ -10,25 +10,13 @@ var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
 var AdvancedPieChartComponent = (function (_super) {
     __extends(AdvancedPieChartComponent, _super);
-    function AdvancedPieChartComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.margin = [20, 20, 20, 20];
+    function AdvancedPieChartComponent() {
+        _super.apply(this, arguments);
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
+        this.margin = [20, 20, 20, 20];
     }
-    AdvancedPieChartComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    AdvancedPieChartComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    AdvancedPieChartComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     AdvancedPieChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -55,7 +43,7 @@ var AdvancedPieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     AdvancedPieChartComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     AdvancedPieChartComponent.prototype.onActivate = function (event) {
         if (this.activeEntries.indexOf(event) > -1)
@@ -71,26 +59,16 @@ var AdvancedPieChartComponent = (function (_super) {
     };
     AdvancedPieChartComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'advanced-pie-chart',
-                    template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          [legend]=\"legend\"\n          [legendData]=\"domain\"\n          (legendLabelClick)=\"onClick($event)\"\n          (legendLabelActivate)=\"onActivate($event)\"\n          (legendLabelDeactivate)=\"onDeactivate($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div \n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\">\n        <advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </advanced-legend>\n      </div>\n    </div>\n  ",
+                    selector: 'ngx-charts-advanced-pie-chart',
+                    template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <ngx-charts-chart\n          [view]=\"[width, height]\"\n          [showLegend]=\"false\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g ngx-charts-pie-series\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </ngx-charts-chart>\n      </div>\n      <div \n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\">\n        <ngx-charts-advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </ngx-charts-advanced-legend>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    AdvancedPieChartComponent.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.ChangeDetectorRef, },
-        { type: core_1.NgZone, },
-    ];
+    AdvancedPieChartComponent.ctorParameters = function () { return []; };
     AdvancedPieChartComponent.propDecorators = {
-        'view': [{ type: core_1.Input },],
-        'results': [{ type: core_1.Input },],
-        'margin': [{ type: core_1.Input },],
-        'scheme': [{ type: core_1.Input },],
-        'customColors': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],
     };

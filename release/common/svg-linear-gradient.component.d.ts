@@ -3,8 +3,7 @@ export declare class SvgLinearGradientComponent implements OnChanges {
     orientation: string;
     color: any;
     name: any;
-    startOpacity: any;
-    endOpacity: number;
+    stops: any[];
     x1: any;
     x2: any;
     y1: any;

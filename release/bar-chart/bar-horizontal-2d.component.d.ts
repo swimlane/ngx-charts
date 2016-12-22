@@ -1,14 +1,8 @@
-
-import { EventEmitter, OnChanges, OnDestroy, ElementRef, NgZone, SimpleChanges, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-export declare class BarHorizontal2DComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-    private element;
-    private cd;
-    view: any;
-    results: any;
-    scheme: any;
-    customColors: any;
+export declare class BarHorizontal2DComponent extends BaseChartComponent {
     legend: boolean;
     xAxis: any;
     yAxis: any;
@@ -19,7 +13,7 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent impleme
     gradient: boolean;
     showGridLines: boolean;
     activeEntries: any[];
-    select: EventEmitter<{}>;
+    schemeType: string;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;
@@ -30,14 +24,11 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent impleme
     innerScale: any;
     valueScale: any;
     transform: string;
-    colors: Function;
+    colors: ColorHelper;
     margin: number[];
     xAxisHeight: number;
     yAxisWidth: number;
-    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngAfterViewInit(): void;
-    ngOnDestroy(): void;
-    ngOnChanges(changes: SimpleChanges): void;
+    legendOptions: any;
     update(): void;
     getGroupScale(): any;
     getInnerScale(): any;
@@ -49,12 +40,17 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent impleme
     onClick(data: any, group: any): void;
     trackBy(index: any, item: any): string;
     setColors(): void;
+    getLegendOptions(): {
+        scaleType: string;
+        colors: any;
+        domain: any[];
+    };
     updateYAxisWidth({width}: {
         width: any;
     }): void;
     updateXAxisHeight({height}: {
         height: any;
     }): void;
-    onActivate(event: any): void;
-    onDeactivate(event: any): void;
+    onActivate(event: any, group: any): void;
+    onDeactivate(event: any, group: any): void;
 }

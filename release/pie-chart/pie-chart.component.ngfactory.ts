@@ -6,23 +6,24 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/pie-chart/pie-chart.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/element_ref';
-import * as import9 from '@angular/core/src/zone/ng_zone';
-import * as import10 from '@angular/core/src/linker/view_container';
-import * as import11 from '../../../src/common/charts/chart.component';
-import * as import12 from '../../../src/utils/injection.service';
-import * as import13 from '../common/charts/chart.component.ngfactory';
-import * as import14 from '../../../src/pie-chart/pie-series.component';
-import * as import15 from './pie-series.component.ngfactory';
-import * as import16 from '@angular/core/src/application_ref';
-import * as import17 from '@angular/core/src/linker/component_factory_resolver';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/element_ref';
+import * as import10 from '@angular/core/src/zone/ng_zone';
+import * as import11 from '@angular/core/src/linker/view_container';
+import * as import12 from '../../../src/common/charts/chart.component';
+import * as import13 from '../../../src/services/injection.service';
+import * as import14 from '../common/charts/chart.component.ngfactory';
+import * as import15 from '../../../src/pie-chart/pie-series.component';
+import * as import16 from './pie-series.component.ngfactory';
+import * as import17 from '@angular/core/src/application_ref';
+import * as import18 from '@angular/core/src/linker/component_factory_resolver';
 export class Wrapper_PieChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieChartComponent;
@@ -66,35 +67,35 @@ export class Wrapper_PieChartComponent {
     (this.subscription1 && this.subscription1.unsubscribe());
     (this.subscription2 && this.subscription2.unsubscribe());
   }
-  check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_results(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
       this._changed = true;
-      this.context.view = currValue;
-      this._changes['view'] = new import1.SimpleChange(this._expr_0,currValue);
+      this.context.results = currValue;
+      this._changes['results'] = new import1.SimpleChange(this._expr_0,currValue);
       this._expr_0 = currValue;
     }
   }
-  check_results(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_1,currValue))) {
       this._changed = true;
-      this.context.results = currValue;
-      this._changes['results'] = new import1.SimpleChange(this._expr_1,currValue);
+      this.context.view = currValue;
+      this._changes['view'] = new import1.SimpleChange(this._expr_1,currValue);
       this._expr_1 = currValue;
     }
   }
-  check_margin(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_scheme(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_2,currValue))) {
       this._changed = true;
-      this.context.margin = currValue;
-      this._changes['margin'] = new import1.SimpleChange(this._expr_2,currValue);
+      this.context.scheme = currValue;
+      this._changes['scheme'] = new import1.SimpleChange(this._expr_2,currValue);
       this._expr_2 = currValue;
     }
   }
-  check_scheme(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_schemeType(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
       this._changed = true;
-      this.context.scheme = currValue;
-      this._changes['scheme'] = new import1.SimpleChange(this._expr_3,currValue);
+      this.context.schemeType = currValue;
+      this._changes['schemeType'] = new import1.SimpleChange(this._expr_3,currValue);
       this._expr_3 = currValue;
     }
   }
@@ -182,15 +183,15 @@ class View_PieChartComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.PieChartComponent>;
   _PieChartComponent_0_3:Wrapper_PieChartComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieChartComponent_Host0,renderType_PieChartComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_PieChartComponent_Host0,renderType_PieChartComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'pie-chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-pie-chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_PieChartComponent0(this.viewUtils,this,0,this._el_0);
-    this._PieChartComponent_0_3 = new Wrapper_PieChartComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this._PieChartComponent_0_3 = new Wrapper_PieChartComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref);
     this.compView_0.create(this._PieChartComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._PieChartComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._PieChartComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.PieChartComponent) && (0 === requestNodeIndex))) { return this._PieChartComponent_0_3.context; }
@@ -198,7 +199,7 @@ class View_PieChartComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._PieChartComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
     if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._PieChartComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
@@ -209,29 +210,29 @@ class View_PieChartComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const PieChartComponentNgFactory:import7.ComponentFactory<import0.PieChartComponent> = new import7.ComponentFactory<import0.PieChartComponent>('pie-chart',View_PieChartComponent_Host0,import0.PieChartComponent);
+export const PieChartComponentNgFactory:import8.ComponentFactory<import0.PieChartComponent> = new import8.ComponentFactory<import0.PieChartComponent>('ngx-charts-pie-chart',View_PieChartComponent_Host0,import0.PieChartComponent);
 const styles_PieChartComponent:any[] = ([] as any[]);
 var renderType_PieChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieChartComponent,{});
 export class View_PieChartComponent0 extends import2.AppView<import0.PieChartComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import10.ViewContainer;
-  compView_1:import2.AppView<import11.ChartComponent>;
-  _InjectionService_1_5:import12.InjectionService;
-  _ChartComponent_1_6:import13.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import11.ViewContainer;
+  compView_1:import2.AppView<import12.ChartComponent>;
+  _InjectionService_1_5:import13.InjectionService;
+  _ChartComponent_1_6:import14.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import14.PieSeriesComponent>;
-  _PieSeriesComponent_5_3:import15.Wrapper_PieSeriesComponent;
+  compView_5:import2.AppView<import15.PieSeriesComponent>;
+  _PieSeriesComponent_5_3:import16.Wrapper_PieSeriesComponent;
   _text_6:any;
   _text_7:any;
   _text_8:any;
   _arr_15:any;
   /*private*/ _expr_16:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieChartComponent0,renderType_PieChartComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_PieChartComponent0,renderType_PieChartComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._arr_15 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
         p0,
@@ -241,29 +242,29 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
     });
     this._expr_16 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import10.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import13.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._InjectionService_1_5 = new import12.InjectionService(this.parentView.injectorGet(import16.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import17.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._ChartComponent_1_6 = new import13.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._vc_1 = new import11.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import14.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._InjectionService_1_5 = new import13.InjectionService(this.parentView.injectorGet(import17.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import18.ComponentFactoryResolver,this.parentIndex),this.injector(1));
+    this._ChartComponent_1_6 = new import14.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie-chart chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'pieSeries',''),(null as any));
-    this.compView_5 = new import15.View_PieSeriesComponent0(this.viewUtils,this,5,this._el_5);
-    this._PieSeriesComponent_5_3 = new import15.Wrapper_PieSeriesComponent();
+    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'ngx-charts-pie-series',''),(null as any));
+    this.compView_5 = new import16.View_PieSeriesComponent0(this.viewUtils,this,5,this._el_5);
+    this._PieSeriesComponent_5_3 = new import16.Wrapper_PieSeriesComponent();
     this.compView_5.create(this._PieSeriesComponent_5_3.context);
     this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any),'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
     this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
-    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_5));
-    this._PieSeriesComponent_5_3.subscribe(this,this.eventHandler(this.handleEvent_5),true);
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_5));
+    this._PieSeriesComponent_5_3.subscribe(this,this.eventHandler(this.handleEvent_5),true,true,true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -283,20 +284,20 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.PieSeriesComponent) && (5 === requestNodeIndex))) { return this._PieSeriesComponent_5_3.context; }
-    if (((token === import12.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._InjectionService_1_5; }
-    if (((token === import11.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import15.PieSeriesComponent) && (5 === requestNodeIndex))) { return this._PieSeriesComponent_5_3.context; }
+    if (((token === import13.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._InjectionService_1_5; }
+    if (((token === import12.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this._arr_15(this.context.width,this.context.height);
     this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.legend;
-    this._ChartComponent_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
-    const currVal_1_0_2:any = this.context.domain;
-    this._ChartComponent_1_6.check_legendData(currVal_1_0_2,throwOnChange,false);
-    const currVal_1_0_3:any = this.context.colors;
-    this._ChartComponent_1_6.check_colors(currVal_1_0_3,throwOnChange,false);
+    this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
+    const currVal_1_0_2:any = this.context.legendOptions;
+    this._ChartComponent_1_6.check_legendOptions(currVal_1_0_2,throwOnChange,false);
+    const currVal_1_0_3:any = this.context.activeEntries;
+    this._ChartComponent_1_6.check_activeEntries(currVal_1_0_3,throwOnChange,false);
     if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_5_0_0:any = this.context.colors;
     this._PieSeriesComponent_5_3.check_colors(currVal_5_0_0,throwOnChange,false);
@@ -321,8 +322,8 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
       this.renderer.setElementAttribute(this._el_3,'transform',((currVal_16 == null)? (null as any): currVal_16.toString()));
       this._expr_16 = currVal_16;
     }
-    this.compView_1.detectChanges(throwOnChange);
-    this.compView_5.detectChanges(throwOnChange);
+    this.compView_1.internalDetectChanges(throwOnChange);
+    this.compView_5.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this._vc_1.destroyNestedViews();
@@ -341,16 +342,16 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
   handleEvent_1(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'legendLabelClick')) {
-      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
+    if ((eventName == 'legendLabelActivate')) {
+      const pd_sub_0:any = ((<any>this.context.onActivate($event)) !== false);
       result = (pd_sub_0 && result);
     }
-    if ((eventName == 'legendLabelActivate')) {
-      const pd_sub_1:any = ((<any>this.context.onActivate($event)) !== false);
+    if ((eventName == 'legendLabelDeactivate')) {
+      const pd_sub_1:any = ((<any>this.context.onDeactivate($event)) !== false);
       result = (pd_sub_1 && result);
     }
-    if ((eventName == 'legendLabelDeactivate')) {
-      const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_2:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_2 && result);
     }
     return result;
@@ -361,6 +362,14 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
     if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'activate')) {
+      const pd_sub_1:any = ((<any>this.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'deactivate')) {
+      const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }

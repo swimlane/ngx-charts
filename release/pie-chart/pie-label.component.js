@@ -51,15 +51,15 @@ var PieLabelComponent = (function () {
     };
     PieLabelComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[pieLabel]',
+                    selector: 'g[ngx-charts-pie-label]',
                     template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    PieLabelComponent.ctorParameters = [
+    PieLabelComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-    ];
+    ]; };
     PieLabelComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'radius': [{ type: core_1.Input },],

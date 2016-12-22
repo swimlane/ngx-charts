@@ -6,7 +6,7 @@
  /* tslint:disable */
 
 import * as import0 from '../../../../src/common/tooltip/tooltip.directive';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 export class Wrapper_TooltipDirective {
@@ -31,9 +31,9 @@ export class Wrapper_TooltipDirective {
   /*private*/ _expr_15:any;
   subscription0:any;
   subscription1:any;
-  constructor(p0:any,p1:any,p2:any,p3:any,p4:any,p5:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
-    this.context = new import0.TooltipDirective(p0,p1,p2,p3,p4,p5);
+    this.context = new import0.TooltipDirective(p0,p1,p2,p3);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -183,17 +183,21 @@ export class Wrapper_TooltipDirective {
       const pd_sub_0:any = ((<any>this.context.onFocus()) !== false);
       result = (pd_sub_0 && result);
     }
-    if ((eventName == 'mouseenter')) {
-      const pd_sub_1:any = ((<any>this.context.onMouseEnter()) !== false);
+    if ((eventName == 'blur')) {
+      const pd_sub_1:any = ((<any>this.context.onBlur()) !== false);
       result = (pd_sub_1 && result);
     }
-    if ((eventName == 'blur')) {
-      const pd_sub_2:any = ((<any>this.context.onBlur()) !== false);
+    if ((eventName == 'mouseenter')) {
+      const pd_sub_2:any = ((<any>this.context.onMouseEnter()) !== false);
       result = (pd_sub_2 && result);
     }
     if ((eventName == 'mouseleave')) {
       const pd_sub_3:any = ((<any>this.context.onMouseLeave($event.target)) !== false);
       result = (pd_sub_3 && result);
+    }
+    if ((eventName == 'click')) {
+      const pd_sub_4:any = ((<any>this.context.onMouseClick()) !== false);
+      result = (pd_sub_4 && result);
     }
     return result;
   }

@@ -6,23 +6,24 @@
  /* tslint:disable */
 
 import * as import0 from '../../../../src/common/axes/y-axis.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/query_list';
-import * as import9 from '../../../../src/common/axes/y-axis-ticks.component';
-import * as import10 from './y-axis-ticks.component.ngfactory';
-import * as import11 from '@angular/core/src/linker/view_container';
-import * as import12 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import13 from '@angular/core/src/linker/template_ref';
-import * as import14 from '@angular/common/src/directives/ng_if';
-import * as import15 from '../../../../src/common/axes/axis-label.component';
-import * as import16 from './axis-label.component.ngfactory';
-import * as import17 from '@angular/core/src/linker/element_ref';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/query_list';
+import * as import10 from '../../../../src/common/axes/y-axis-ticks.component';
+import * as import11 from './y-axis-ticks.component.ngfactory';
+import * as import12 from '@angular/core/src/linker/view_container';
+import * as import13 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import14 from '@angular/core/src/linker/template_ref';
+import * as import15 from '@angular/common/src/directives/ng_if';
+import * as import16 from '../../../../src/common/axes/axis-label.component';
+import * as import17 from './axis-label.component.ngfactory';
+import * as import18 from '@angular/core/src/linker/element_ref';
 export class Wrapper_YAxisComponent {
   /*private*/ _eventHandler:Function;
   context:import0.YAxisComponent;
@@ -135,15 +136,15 @@ class View_YAxisComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.YAxisComponent>;
   _YAxisComponent_0_3:Wrapper_YAxisComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_YAxisComponent_Host0,renderType_YAxisComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_YAxisComponent_Host0,renderType_YAxisComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'yAxis',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),rootSelector,(null as any));
     this.compView_0 = new View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
     this._YAxisComponent_0_3 = new Wrapper_YAxisComponent();
     this.compView_0.create(this._YAxisComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._YAxisComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._YAxisComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.YAxisComponent) && (0 === requestNodeIndex))) { return this._YAxisComponent_0_3.context; }
@@ -151,7 +152,7 @@ class View_YAxisComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -161,46 +162,46 @@ class View_YAxisComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const YAxisComponentNgFactory:import7.ComponentFactory<import0.YAxisComponent> = new import7.ComponentFactory<import0.YAxisComponent>('g[yAxis]',View_YAxisComponent_Host0,import0.YAxisComponent);
+export const YAxisComponentNgFactory:import8.ComponentFactory<import0.YAxisComponent> = new import8.ComponentFactory<import0.YAxisComponent>('g[ngx-charts-y-axis]',View_YAxisComponent_Host0,import0.YAxisComponent);
 const styles_YAxisComponent:any[] = ([] as any[]);
 var renderType_YAxisComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_YAxisComponent,{});
 export class View_YAxisComponent0 extends import2.AppView<import0.YAxisComponent> {
-  _viewQuery_YAxisTicksComponent_0:import8.QueryList<any>;
+  _viewQuery_YAxisTicksComponent_0:import9.QueryList<any>;
   _text_0:any;
   _el_1:any;
   _text_2:any;
   _el_3:any;
-  compView_3:import2.AppView<import9.YAxisTicksComponent>;
-  _YAxisTicksComponent_3_3:import10.Wrapper_YAxisTicksComponent;
+  compView_3:import2.AppView<import10.YAxisTicksComponent>;
+  _YAxisTicksComponent_3_3:import11.Wrapper_YAxisTicksComponent;
   _text_4:any;
   _anchor_5:any;
-  /*private*/ _vc_5:import11.ViewContainer;
+  /*private*/ _vc_5:import12.ViewContainer;
   _TemplateRef_5_5:any;
-  _NgIf_5_6:import12.Wrapper_NgIf;
+  _NgIf_5_6:import13.Wrapper_NgIf;
   _text_6:any;
   _text_7:any;
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_YAxisComponent0,renderType_YAxisComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_YAxisComponent0,renderType_YAxisComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_14 = import1.UNINITIALIZED;
     this._expr_15 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_YAxisTicksComponent_0 = new import8.QueryList<any>();
+    this._viewQuery_YAxisTicksComponent_0 = new import9.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray2(2,'yAxisTicks',''),(null as any));
-    this.compView_3 = new import10.View_YAxisTicksComponent0(this.viewUtils,this,3,this._el_3);
-    this._YAxisTicksComponent_3_3 = new import10.Wrapper_YAxisTicksComponent();
+    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis-ticks',''),(null as any));
+    this.compView_3 = new import11.View_YAxisTicksComponent0(this.viewUtils,this,3,this._el_3);
+    this._YAxisTicksComponent_3_3 = new import11.Wrapper_YAxisTicksComponent();
     this.compView_3.create(this._YAxisTicksComponent_3_3.context);
     this._text_4 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_5 = new import11.ViewContainer(5,1,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import13.TemplateRef_(this,5,this._anchor_5);
-    this._NgIf_5_6 = new import12.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
+    this._vc_5 = new import12.ViewContainer(5,1,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import14.TemplateRef_(this,5,this._anchor_5);
+    this._NgIf_5_6 = new import13.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
     this._text_6 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_7 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_3,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_3));
@@ -221,9 +222,9 @@ export class View_YAxisComponent0 extends import2.AppView<import0.YAxisComponent
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import9.YAxisTicksComponent) && (3 === requestNodeIndex))) { return this._YAxisTicksComponent_3_3.context; }
-    if (((token === import13.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import14.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
+    if (((token === import10.YAxisTicksComponent) && (3 === requestNodeIndex))) { return this._YAxisTicksComponent_3_3.context; }
+    if (((token === import14.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import15.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -258,7 +259,7 @@ export class View_YAxisComponent0 extends import2.AppView<import0.YAxisComponent
       this.renderer.setElementAttribute(this._el_1,'transform',((currVal_15 == null)? (null as any): currVal_15.toString()));
       this._expr_15 = currVal_15;
     }
-    this.compView_3.detectChanges(throwOnChange);
+    this.compView_3.internalDetectChanges(throwOnChange);
     if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._YAxisTicksComponent_3_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
@@ -282,16 +283,16 @@ export class View_YAxisComponent0 extends import2.AppView<import0.YAxisComponent
 }
 class View_YAxisComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import15.AxisLabelComponent>;
-  _AxisLabelComponent_0_3:import16.Wrapper_AxisLabelComponent;
+  compView_0:import2.AppView<import16.AxisLabelComponent>;
+  _AxisLabelComponent_0_3:import17.Wrapper_AxisLabelComponent;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
-    super(View_YAxisComponent1,renderType_YAxisComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+    super(View_YAxisComponent1,renderType_YAxisComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'axisLabel',''),(null as any));
-    this.compView_0 = new import16.View_AxisLabelComponent0(this.viewUtils,this,0,this._el_0);
-    this._AxisLabelComponent_0_3 = new import16.Wrapper_AxisLabelComponent(new import17.ElementRef(this._el_0));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-axis-label',''),(null as any));
+    this.compView_0 = new import17.View_AxisLabelComponent0(this.viewUtils,this,0,this._el_0);
+    this._AxisLabelComponent_0_3 = new import17.Wrapper_AxisLabelComponent(new import18.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._AxisLabelComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -302,7 +303,7 @@ class View_YAxisComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import15.AxisLabelComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._AxisLabelComponent_0_3.context; }
+    if (((token === import16.AxisLabelComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._AxisLabelComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -317,7 +318,7 @@ class View_YAxisComponent1 extends import2.AppView<any> {
     const currVal_0_0_4:any = this.parentView.context.dims.height;
     this._AxisLabelComponent_0_3.check_height(currVal_0_0_4,throwOnChange,false);
     if (this._AxisLabelComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();

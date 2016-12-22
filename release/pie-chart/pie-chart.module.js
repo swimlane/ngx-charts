@@ -42,7 +42,7 @@ var PieChartModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    PieChartModule.ctorParameters = [];
+    PieChartModule.ctorParameters = function () { return []; };
     return PieChartModule;
 }());
 exports.PieChartModule = PieChartModule;

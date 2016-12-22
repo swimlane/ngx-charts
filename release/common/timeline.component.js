@@ -136,17 +136,17 @@ var Timeline = (function () {
     };
     Timeline.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[timeline]',
+                    selector: 'g[ngx-charts-timeline]',
                     template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\" \n        [attr.width]=\"view[0]\" \n        y=\"0\" \n        [attr.height]=\"height\" \n        class=\"brush-background\" \n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    Timeline.ctorParameters = [
+    Timeline.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
         { type: core_1.NgZone, },
         { type: core_1.ChangeDetectorRef, },
-    ];
+    ]; };
     Timeline.propDecorators = {
         'view': [{ type: core_1.Input },],
         'state': [{ type: core_1.Input },],

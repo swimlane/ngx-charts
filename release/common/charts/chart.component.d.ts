@@ -1,15 +1,17 @@
 import { OnChanges, ViewContainerRef, EventEmitter, SimpleChanges } from '@angular/core';
-import { InjectionService } from '../../utils/injection.service';
+import { InjectionService } from '../../services';
 export declare class ChartComponent implements OnChanges {
     private vcr;
     private injectionService;
     view: any;
-    legend: boolean;
+    showLegend: boolean;
+    legendOptions: any;
     data: any;
     legendData: any;
+    legendType: any;
     legendTitle: string;
     colors: any;
-    legendType: any;
+    activeEntries: any[];
     legendLabelClick: EventEmitter<any>;
     legendLabelActivate: EventEmitter<any>;
     legendLabelDeactivate: EventEmitter<any>;

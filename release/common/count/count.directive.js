@@ -81,16 +81,16 @@ var CountUpDirective = (function () {
     };
     CountUpDirective.decorators = [
         { type: core_1.Component, args: [{
-                    selector: '[count-up]',
+                    selector: '[ngx-charts-count-up]',
                     template: "{{value}}"
                 },] },
     ];
     /** @nocollapse */
-    CountUpDirective.ctorParameters = [
+    CountUpDirective.ctorParameters = function () { return [
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
         { type: core_1.ElementRef, },
-    ];
+    ]; };
     CountUpDirective.propDecorators = {
         'countDuration': [{ type: core_1.Input },],
         'countPrefix': [{ type: core_1.Input },],

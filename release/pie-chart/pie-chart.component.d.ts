@@ -1,14 +1,7 @@
-
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, NgZone, SimpleChanges, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-export declare class PieChartComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-    private element;
-    private cd;
-    view: any;
-    results: any;
-    margin: number[];
-    scheme: any;
-    customColors: any;
+export declare class PieChartComponent extends BaseChartComponent {
     labels: boolean;
     legend: boolean;
     explodeSlices: boolean;
@@ -22,17 +15,20 @@ export declare class PieChartComponent extends BaseChartComponent implements OnC
     outerRadius: number;
     innerRadius: number;
     data: any;
-    colors: Function;
+    colors: ColorHelper;
     domain: any;
     dims: any;
-    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngAfterViewInit(): void;
-    ngOnDestroy(): void;
-    ngOnChanges(changes: SimpleChanges): void;
+    margin: number[];
+    legendOptions: any;
     update(): void;
     getDomain(): any[];
     onClick(data: any): void;
     setColors(): void;
-    onActivate(event: any): void;
-    onDeactivate(event: any): void;
+    getLegendOptions(): {
+        scaleType: string;
+        domain: any;
+        colors: ColorHelper;
+    };
+    onActivate(item: any): void;
+    onDeactivate(item: any): void;
 }

@@ -1,14 +1,7 @@
-
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, ElementRef, NgZone, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-export declare class HeatMapComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-    private element;
-    private cd;
-    view: any;
-    results: any;
-    scheme: any;
-    customColors: any;
+import { ColorHelper } from '../utils/color-sets';
+export declare class HeatMapComponent extends BaseChartComponent {
     legend: any;
     xAxis: any;
     yAxis: any;
@@ -17,7 +10,6 @@ export declare class HeatMapComponent extends BaseChartComponent implements OnCh
     xAxisLabel: any;
     yAxisLabel: any;
     gradient: boolean;
-    select: EventEmitter<{}>;
     dims: ViewDimensions;
     xDomain: any[];
     yDomain: any[];
@@ -25,17 +17,14 @@ export declare class HeatMapComponent extends BaseChartComponent implements OnCh
     xScale: any;
     yScale: any;
     color: any;
-    colors: Function;
+    colors: ColorHelper;
     colorScale: any;
     transform: string;
     rects: any[];
     margin: number[];
     xAxisHeight: number;
     yAxisWidth: number;
-    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngAfterViewInit(): void;
-    ngOnDestroy(): void;
-    ngOnChanges(changes: SimpleChanges): void;
+    legendOptions: any;
     update(): void;
     getXDomain(): any;
     getYDomain(): any[];
@@ -45,6 +34,11 @@ export declare class HeatMapComponent extends BaseChartComponent implements OnCh
     getRects(): any[];
     onClick(data: any): void;
     setColors(): void;
+    getLegendOptions(): {
+        scaleType: string;
+        domain: any[];
+        colors: any;
+    };
     updateYAxisWidth({width}: {
         width: any;
     }): void;

@@ -17,7 +17,7 @@ var AxesModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    AxesModule.ctorParameters = [];
+    AxesModule.ctorParameters = function () { return []; };
     return AxesModule;
 }());
 exports.AxesModule = AxesModule;

@@ -1,7 +1,8 @@
-import { ElementRef, AfterViewInit, Renderer, TemplateRef } from '@angular/core';
-import { PlacementTypes } from './placement.type';
+import { ElementRef, AfterViewInit, Renderer } from '@angular/core';
+import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
+import './tooltip.component.scss';
 export declare class TooltipContentComponent implements AfterViewInit {
     element: ElementRef;
     private renderer;
@@ -13,7 +14,6 @@ export declare class TooltipContentComponent implements AfterViewInit {
     spacing: number;
     cssClass: string;
     title: string;
-    template: TemplateRef<any>;
     caretElm: any;
     readonly cssClasses: string;
     constructor(element: ElementRef, renderer: Renderer);

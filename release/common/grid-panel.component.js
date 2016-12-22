@@ -5,13 +5,13 @@ var GridPanelComponent = (function () {
     }
     GridPanelComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[gridPanel]',
+                    selector: 'g[ngx-charts-grid-panel]',
                     template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      class=\"gridpanel\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    GridPanelComponent.ctorParameters = [];
+    GridPanelComponent.ctorParameters = function () { return []; };
     GridPanelComponent.propDecorators = {
         'path': [{ type: core_1.Input },],
         'width': [{ type: core_1.Input },],

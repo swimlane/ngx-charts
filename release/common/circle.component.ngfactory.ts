@@ -6,13 +6,14 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/common/circle.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
 export class Wrapper_CircleComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CircleComponent;
@@ -163,16 +164,16 @@ class View_CircleComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.CircleComponent>;
   _CircleComponent_0_3:Wrapper_CircleComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CircleComponent_Host0,renderType_CircleComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CircleComponent_Host0,renderType_CircleComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'circle',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-circle',''),rootSelector,(null as any));
     this.compView_0 = new View_CircleComponent0(this.viewUtils,this,0,this._el_0);
     this._CircleComponent_0_3 = new Wrapper_CircleComponent();
     this.compView_0.create(this._CircleComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'click',(null as any),'mouseenter',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CircleComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._CircleComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.CircleComponent) && (0 === requestNodeIndex))) { return this._CircleComponent_0_3.context; }
@@ -180,7 +181,7 @@ class View_CircleComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._CircleComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -196,7 +197,7 @@ class View_CircleComponent_Host0 extends import2.AppView<any> {
     return result;
   }
 }
-export const CircleComponentNgFactory:import7.ComponentFactory<import0.CircleComponent> = new import7.ComponentFactory<import0.CircleComponent>('g[circle]',View_CircleComponent_Host0,import0.CircleComponent);
+export const CircleComponentNgFactory:import8.ComponentFactory<import0.CircleComponent> = new import8.ComponentFactory<import0.CircleComponent>('g[ngx-charts-circle]',View_CircleComponent_Host0,import0.CircleComponent);
 const styles_CircleComponent:any[] = ([] as any[]);
 var renderType_CircleComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleComponent,{});
 export class View_CircleComponent0 extends import2.AppView<import0.CircleComponent> {
@@ -212,7 +213,7 @@ export class View_CircleComponent0 extends import2.AppView<import0.CircleCompone
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CircleComponent0,renderType_CircleComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_CircleComponent0,renderType_CircleComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
@@ -222,7 +223,7 @@ export class View_CircleComponent0 extends import2.AppView<import0.CircleCompone
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:circle',import3.EMPTY_INLINE_ARRAY,(null as any));

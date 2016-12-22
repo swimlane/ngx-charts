@@ -6,17 +6,18 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/number-card/card.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/element_ref';
-import * as import9 from '@angular/core/src/zone/ng_zone';
-import * as import10 from '@angular/core/src/linker/query_list';
-import * as import11 from '@angular/core/src/security';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/element_ref';
+import * as import10 from '@angular/core/src/zone/ng_zone';
+import * as import11 from '@angular/core/src/linker/query_list';
+import * as import12 from '@angular/core/src/security';
 export class Wrapper_CardComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CardComponent;
@@ -130,15 +131,15 @@ class View_CardComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.CardComponent>;
   _CardComponent_0_3:Wrapper_CardComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CardComponent_Host0,renderType_CardComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CardComponent_Host0,renderType_CardComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'card',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-card',''),rootSelector,(null as any));
     this.compView_0 = new View_CardComponent0(this.viewUtils,this,0,this._el_0);
-    this._CardComponent_0_3 = new Wrapper_CardComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this._CardComponent_0_3 = new Wrapper_CardComponent(new import9.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import10.NgZone,this.parentIndex));
     this.compView_0.create(this._CardComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CardComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._CardComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.CardComponent) && (0 === requestNodeIndex))) { return this._CardComponent_0_3.context; }
@@ -146,7 +147,7 @@ class View_CardComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._CardComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -156,11 +157,11 @@ class View_CardComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const CardComponentNgFactory:import7.ComponentFactory<import0.CardComponent> = new import7.ComponentFactory<import0.CardComponent>('g[card]',View_CardComponent_Host0,import0.CardComponent);
+export const CardComponentNgFactory:import8.ComponentFactory<import0.CardComponent> = new import8.ComponentFactory<import0.CardComponent>('g[ngx-charts-card]',View_CardComponent_Host0,import0.CardComponent);
 const styles_CardComponent:any[] = ([] as any[]);
 var renderType_CardComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CardComponent,{});
 export class View_CardComponent0 extends import2.AppView<import0.CardComponent> {
-  _viewQuery_textEl_0:import10.QueryList<any>;
+  _viewQuery_textEl_0:import11.QueryList<any>;
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -195,7 +196,7 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
   /*private*/ _expr_32:any;
   /*private*/ _expr_33:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CardComponent0,renderType_CardComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_CardComponent0,renderType_CardComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_19 = import1.UNINITIALIZED;
     this._expr_20 = import1.UNINITIALIZED;
     this._expr_21 = import1.UNINITIALIZED;
@@ -212,9 +213,9 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     this._expr_32 = import1.UNINITIALIZED;
     this._expr_33 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_textEl_0 = new import10.QueryList<any>();
+    this._viewQuery_textEl_0 = new import11.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray2(2,'class','cell'),(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
@@ -234,7 +235,7 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     this._text_16 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_17 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._viewQuery_textEl_0.reset([new import8.ElementRef(this._el_14)]);
+    this._viewQuery_textEl_0.reset([new import9.ElementRef(this._el_14)]);
     this.context.textEl = this._viewQuery_textEl_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -267,7 +268,7 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     }
     const currVal_20:any = this.context.color;
     if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
-      this.renderer.setElementStyle(this._el_3,'fill',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20).toString()));
+      this.renderer.setElementStyle(this._el_3,'fill',((this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_20) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_20).toString()));
       this._expr_20 = currVal_20;
     }
     const currVal_21:any = this.context.cardWidth;
@@ -302,7 +303,7 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     }
     const currVal_27:any = this.context.getTextColor(this.context.color);
     if (import3.checkBinding(throwOnChange,this._expr_27,currVal_27)) {
-      this.renderer.setElementStyle(this._el_10,'color',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_27) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_27).toString()));
+      this.renderer.setElementStyle(this._el_10,'color',((this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_27) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_27).toString()));
       this._expr_27 = currVal_27;
     }
     const currVal_28:any = import3.inlineInterpolate(1,'\n          ',this.context.trimmedLabel,'\n        ');
@@ -322,12 +323,12 @@ export class View_CardComponent0 extends import2.AppView<import0.CardComponent> 
     }
     const currVal_31:any = this.context.getTextColor(this.context.color);
     if (import3.checkBinding(throwOnChange,this._expr_31,currVal_31)) {
-      this.renderer.setElementStyle(this._el_14,'fill',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_31) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_31).toString()));
+      this.renderer.setElementStyle(this._el_14,'fill',((this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_31) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_31).toString()));
       this._expr_31 = currVal_31;
     }
     const currVal_32:any = this.context.textFontSize;
     if (import3.checkBinding(throwOnChange,this._expr_32,currVal_32)) {
-      this.renderer.setElementStyle(this._el_14,'font-size',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_32) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_32).toString() + 'pt')));
+      this.renderer.setElementStyle(this._el_14,'font-size',((this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_32) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import12.SecurityContext.STYLE,currVal_32).toString() + 'pt')));
       this._expr_32 = currVal_32;
     }
     const currVal_33:any = import3.inlineInterpolate(1,'\n        ',this.context.value,'\n      ');

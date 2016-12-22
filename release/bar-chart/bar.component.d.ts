@@ -1,5 +1,5 @@
-import { EventEmitter, ElementRef, SimpleChanges, OnInit, OnChanges } from '@angular/core';
-export declare class BarComponent implements OnInit, OnChanges {
+import { EventEmitter, ElementRef, SimpleChanges, OnChanges } from '@angular/core';
+export declare class BarComponent implements OnChanges {
     fill: any;
     data: any;
     width: any;
@@ -11,22 +11,29 @@ export declare class BarComponent implements OnInit, OnChanges {
     gradient: boolean;
     offset: number;
     isActive: boolean;
+    stops: any[];
     select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
     element: any;
     path: any;
     gradientId: any;
     gradientFill: any;
     startOpacity: any;
     initialized: boolean;
+    gradientStops: any[];
+    hasGradient: boolean;
     constructor(element: ElementRef);
-    ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     loadAnimation(): void;
     animateToCurrentForm(): void;
+    getGradient(): any[];
     getStartingPath(): any;
     getPath(): any;
     getRadius(): number;
     getStartOpacity(): number;
     roundedRect(x: any, y: any, w: any, h: any, r: any, tl: any, tr: any, bl: any, br: any): any;
+    onMouseEnter(): void;
+    onMouseLeave(): void;
 }

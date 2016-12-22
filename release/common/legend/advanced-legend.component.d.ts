@@ -14,4 +14,5 @@ export declare class AdvancedLegendComponent implements OnChanges {
     getTotal(): number;
     update(): void;
     getLegendItems(): any;
+    trackBy(item: any): any;
 }

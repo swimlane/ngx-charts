@@ -2,6 +2,7 @@
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var moment = require('moment');
+var id_1 = require("../utils/id");
 var sort_1 = require('../utils/sort');
 var LineSeriesComponent = (function () {
     function LineSeriesComponent() {
@@ -10,6 +11,7 @@ var LineSeriesComponent = (function () {
         this.update();
     };
     LineSeriesComponent.prototype.update = function () {
+        this.updateGradients();
         var line = this.getLineGenerator();
         var area = this.getAreaGenerator();
         var data = this.sortData(this.data.series);
@@ -60,30 +62,54 @@ var LineSeriesComponent = (function () {
         }
         return data;
     };
+    LineSeriesComponent.prototype.updateGradients = function () {
+        if (this.colors.scaleType === 'linear') {
+            this.hasGradient = true;
+            var pageUrl = window.location.href;
+            this.gradientId = 'grad' + id_1.id().toString();
+            this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
+            var values = this.data.series.map(function (d) { return d.value; });
+            var max = Math.max.apply(Math, values);
+            var min = Math.min.apply(Math, values);
+            this.gradientStops = this.colors.getLinearGradientStops(max, min);
+            this.areaGradientStops = this.colors.getLinearGradientStops(max);
+        }
+        else {
+            this.hasGradient = false;
+            this.gradientStops = undefined;
+            this.areaGradientStops = undefined;
+        }
+    };
     LineSeriesComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry.name) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item !== undefined;
     };
     LineSeriesComponent.prototype.isInactive = function (entry) {
-        return this.activeEntries &&
-            this.activeEntries.length !== 0 &&
-            this.activeEntries.indexOf(entry.name) === -1;
+        if (!this.activeEntries || this.activeEntries.length === 0)
+            return false;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item === undefined;
     };
     LineSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[lineSeries]',
-                    template: "\n    <svg:g area\n      class=\"line-highlight\"\n      [data]=\"data\"\n      [path]=\"areaPath\"\n      [fill]=\"color\"\n      [opacity]=\"0.25\"\n      [startOpacity]=\"0\"\n      [gradient]=\"true\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n    <svg:g line\n      class=\"line-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [stroke]=\"color\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
+                    selector: 'g[ngx-charts-line-series]',
+                    template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />    \n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    LineSeriesComponent.ctorParameters = [];
+    LineSeriesComponent.ctorParameters = function () { return []; };
     LineSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'xScale': [{ type: core_1.Input },],
         'yScale': [{ type: core_1.Input },],
-        'color': [{ type: core_1.Input },],
+        'colors': [{ type: core_1.Input },],
         'scaleType': [{ type: core_1.Input },],
         'curve': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],

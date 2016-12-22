@@ -13,6 +13,8 @@ var PieArcComponent = (function () {
         this.pointerEvents = true;
         this.isActive = false;
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
     }
@@ -25,7 +27,6 @@ var PieArcComponent = (function () {
         this.startOpacity = 0.5;
         var pageUrl = window.location.href;
         this.radialGradientId = 'linearGrad' + id_1.id().toString();
-        this.linearGradientId = 'radialGrad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
         if (this.animate) {
             if (this.initialized) {
@@ -91,15 +92,15 @@ var PieArcComponent = (function () {
     };
     PieArcComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[pieArc]',
-                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
+                    selector: 'g[ngx-charts-pie-arc]',
+                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    PieArcComponent.ctorParameters = [
+    PieArcComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-    ];
+    ]; };
     PieArcComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],
         'startAngle': [{ type: core_1.Input },],
@@ -116,6 +117,8 @@ var PieArcComponent = (function () {
         'pointerEvents': [{ type: core_1.Input },],
         'isActive': [{ type: core_1.Input },],
         'select': [{ type: core_1.Output },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
     };
     return PieArcComponent;
 }());

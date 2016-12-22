@@ -3,7 +3,7 @@ export interface ViewDimensions {
     height: number;
     xOffset: number;
 }
-export declare function calculateViewDimensions({width, height, margins, showXAxis, showYAxis, xAxisHeight, yAxisWidth, showXLabel, showYLabel, showLegend, columns}: {
+export declare function calculateViewDimensions({width, height, margins, showXAxis, showYAxis, xAxisHeight, yAxisWidth, showXLabel, showYLabel, showLegend, legendType, columns}: {
     width: any;
     height: any;
     margins: any;
@@ -14,5 +14,6 @@ export declare function calculateViewDimensions({width, height, margins, showXAx
     showXLabel?: boolean;
     showYLabel?: boolean;
     showLegend?: boolean;
+    legendType?: string;
     columns?: number;
 }): ViewDimensions;

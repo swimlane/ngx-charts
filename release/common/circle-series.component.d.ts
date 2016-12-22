@@ -4,8 +4,7 @@ export declare class CircleSeriesComponent implements OnChanges {
     type: string;
     xScale: any;
     yScale: any;
-    color: any;
-    strokeColor: any;
+    colors: any;
     scaleType: any;
     visibleValue: any;
     activeEntries: any[];
@@ -22,6 +21,11 @@ export declare class CircleSeriesComponent implements OnChanges {
         value: any;
         seriesName: any;
     }): string;
+    getGradientStops(color: any): {
+        offset: number;
+        color: any;
+        opacity: number;
+    }[];
     onClick(value: any, label: any): void;
     isActive(entry: any): boolean;
     isVisible(circle: any): boolean;

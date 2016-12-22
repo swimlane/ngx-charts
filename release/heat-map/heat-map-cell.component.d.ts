@@ -15,8 +15,14 @@ export declare class HeatMapCellComponent implements OnChanges {
     startOpacity: number;
     gradientId: string;
     gradientUrl: string;
+    gradientStops: any[];
     constructor(element: ElementRef);
     ngOnChanges(changes: SimpleChanges): void;
+    getGradientStops(): {
+        offset: number;
+        color: any;
+        opacity: number;
+    }[];
     loadAnimation(): void;
     animateToCurrentForm(): void;
     onClick(): void;

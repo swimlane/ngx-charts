@@ -31,7 +31,7 @@ var LegendComponent = (function () {
                 items.push({
                     label: label,
                     formattedLabel: formattedLabel,
-                    color: this_1.colors(label)
+                    color: this_1.colors.getColor(label)
                 });
             }
         };
@@ -41,6 +41,14 @@ var LegendComponent = (function () {
             _loop_1(label);
         }
         return items;
+    };
+    LegendComponent.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        var item = this.activeEntries.find(function (d) {
+            return entry.label === d.name;
+        });
+        return item !== undefined;
     };
     LegendComponent.prototype.activate = function (item) {
         var _this = this;
@@ -54,24 +62,28 @@ var LegendComponent = (function () {
             _this.labelDeactivate.emit(item);
         });
     };
+    LegendComponent.prototype.trackBy = function (index, item) {
+        return item.label;
+    };
     LegendComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'legend',
-                    template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: entry?.formattedLabel\"\n            class=\"legend-label\">\n            <legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+                    selector: 'ngx-charts-legend',
+                    template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    LegendComponent.ctorParameters = [
+    LegendComponent.ctorParameters = function () { return [
         { type: core_1.ChangeDetectorRef, },
         { type: core_1.NgZone, },
-    ];
+    ]; };
     LegendComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'title': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],
         'height': [{ type: core_1.Input },],
         'width': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
         'labelClick': [{ type: core_1.Output },],
         'labelActivate': [{ type: core_1.Output },],
         'labelDeactivate': [{ type: core_1.Output },],

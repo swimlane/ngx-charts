@@ -11,79 +11,117 @@ var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_sets_1 = require('../utils/color-sets');
 var GaugeComponent = (function (_super) {
     __extends(GaugeComponent, _super);
-    function GaugeComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.value = 0;
+    function GaugeComponent() {
+        _super.apply(this, arguments);
         this.min = 0;
         this.max = 100;
         this.bigSegments = 10;
         this.smallSegments = 5;
-        this.select = new core_1.EventEmitter();
-        this.margin = [40, 100, 40, 100];
+        this.showAxis = true;
+        this.startAngle = -120;
         this.angleSpan = 240;
+        this.schemeType = 'ordinal';
         this.resizeScale = 1;
+        this.rotation = '';
         this.textTransform = '';
+        this.cornerRadius = 10;
     }
     GaugeComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this.bindResizeEvents(this.view);
+        _super.prototype.ngAfterViewInit.call(this);
         setTimeout(function () { return _this.scaleText(); });
-    };
-    GaugeComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    GaugeComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
     };
     GaugeComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
-            if (!_this.value) {
-                _this.value = 0;
+            if (!_this.showAxis) {
+                _this.margin = [10, 20, 10, 20];
+            }
+            else {
+                _this.margin = [60, 100, 60, 100];
+            }
+            // make the starting angle positive
+            if (_this.startAngle < 0) {
+                _this.startAngle = (_this.startAngle % 360) + 360;
             }
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
-                margins: _this.margin,
-                columns: 12
+                margins: _this.margin
             });
+            _this.domain = _this.getDomain();
             _this.valueDomain = _this.getValueDomain();
             _this.valueScale = _this.getValueScale();
+            _this.displayValue = _this.getDisplayValue();
             _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2;
-            _this.innerRadius = _this.outerRadius - 10;
-            _this.backgroundArc = {
-                endAngle: _this.angleSpan * Math.PI / 180,
-                innerRadius: _this.innerRadius,
-                outerRadius: _this.outerRadius,
-                cornerRadius: 10,
-                data: {
-                    value: 100,
-                    name: 'Value'
-                }
-            };
-            _this.valueArc = {
-                endAngle: Math.min(_this.valueScale(_this.value), _this.angleSpan) * Math.PI / 180,
-                innerRadius: _this.innerRadius,
-                outerRadius: _this.outerRadius,
-                cornerRadius: 10,
-                data: {
-                    value: _this.value,
-                    name: 'Value'
-                }
-            };
+            _this.arcs = _this.getArcs();
             _this.setColors();
-            _this.ticks = _this.getTicks();
             var xOffset = _this.margin[3] + _this.dims.width / 2;
-            var circleHeight = _this.outerRadius / 2 + 20;
-            var yOffset = _this.margin[0] + _this.dims.height / 2 + circleHeight / 2;
-            _this.transform = "translate(" + xOffset + ", " + yOffset + ") rotate(-" + _this.angleSpan / 2 + ")";
+            var yOffset = _this.margin[0] + _this.dims.height / 2;
+            _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
+            _this.rotation = "rotate(" + _this.startAngle + ")";
             _this.scaleText();
         });
     };
+    GaugeComponent.prototype.getArcs = function () {
+        var arcs = [];
+        var availableRadius = this.outerRadius * 0.7;
+        var radiusPerArc = Math.min(availableRadius / this.results.length, 10);
+        var arcWidth = radiusPerArc * 0.7;
+        this.textRadius = this.outerRadius - this.results.length * radiusPerArc;
+        this.cornerRadius = Math.floor(arcWidth / 2);
+        var i = 0;
+        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
+            var d = _a[_i];
+            var outerRadius = this.outerRadius - (i * radiusPerArc);
+            var innerRadius = outerRadius - arcWidth;
+            var backgroundArc = {
+                endAngle: this.angleSpan * Math.PI / 180,
+                innerRadius: innerRadius,
+                outerRadius: outerRadius,
+                data: {
+                    value: this.max,
+                    name: d.name
+                }
+            };
+            var valueArc = {
+                endAngle: Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI / 180,
+                innerRadius: innerRadius,
+                outerRadius: outerRadius,
+                data: {
+                    value: d.value,
+                    name: d.name
+                }
+            };
+            var arc = {
+                backgroundArc: backgroundArc,
+                valueArc: valueArc
+            };
+            arcs.push(arc);
+            i++;
+        }
+        return arcs;
+    };
+    GaugeComponent.prototype.getDomain = function () {
+        return this.results.map(function (d) { return d.name; });
+    };
     GaugeComponent.prototype.getValueDomain = function () {
+        var values = this.results.map(function (d) { return d.value; });
+        var dataMin = Math.min.apply(Math, values);
+        var dataMax = Math.max.apply(Math, values);
+        if (this.min !== undefined) {
+            this.min = Math.min(this.min, dataMin);
+        }
+        else {
+            this.min = dataMin;
+        }
+        if (this.max !== undefined) {
+            this.max = Math.max(this.max, dataMax);
+        }
+        else {
+            this.max = dataMax;
+        }
         return [this.min, this.max];
     };
     GaugeComponent.prototype.getValueScale = function () {
@@ -91,63 +129,9 @@ var GaugeComponent = (function (_super) {
             .range([0, this.angleSpan])
             .domain(this.valueDomain);
     };
-    GaugeComponent.prototype.getTicks = function () {
-        var bigTickSegment = this.angleSpan / this.bigSegments;
-        var smallTickSegment = bigTickSegment / (this.smallSegments);
-        var tickLength = 20;
-        var ticks = {
-            big: [],
-            small: []
-        };
-        var startDistance = this.outerRadius + 10;
-        var textDist = startDistance + tickLength + 10;
-        for (var i = 0; i <= this.bigSegments; i++) {
-            var angleDeg = i * bigTickSegment;
-            var angle = angleDeg * Math.PI / 180;
-            var textAnchor = 'middle';
-            if (angleDeg < 90) {
-                textAnchor = 'end';
-            }
-            else if (angleDeg >= 180) {
-                textAnchor = 'start';
-            }
-            ticks.big.push({
-                line: this.getTickPath(startDistance, tickLength, angle),
-                textAnchor: textAnchor,
-                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-                textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(210)",
-                highlighted: this.valueScale.invert(angleDeg) <= this.value
-            });
-            if (i === this.bigSegments) {
-                continue;
-            }
-            for (var j = 1; j <= this.smallSegments; j++) {
-                var smallAngleDeg = angleDeg + j * smallTickSegment;
-                var smallAngle = smallAngleDeg * Math.PI / 180;
-                ticks.small.push({
-                    line: this.getTickPath(startDistance, tickLength / 2, smallAngle),
-                    highlighted: this.valueScale.invert(smallAngleDeg) <= this.value
-                });
-            }
-        }
-        return ticks;
-    };
-    GaugeComponent.prototype.getTickPath = function (startDistance, tickLength, angle) {
-        var y1 = startDistance * Math.sin(angle);
-        var y2 = (startDistance + tickLength) * Math.sin(angle);
-        var x1 = startDistance * Math.cos(angle);
-        var x2 = (startDistance + tickLength) * Math.cos(angle);
-        var points = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
-        var line = d3_1.default.line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
-        return line(points);
-    };
-    GaugeComponent.prototype.displayValue = function () {
-        if (this.units) {
-            return this.value.toLocaleString() + " " + this.units;
-        }
-        else {
-            return this.value.toLocaleString();
-        }
+    GaugeComponent.prototype.getDisplayValue = function () {
+        var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
+        return value.toLocaleString();
     };
     GaugeComponent.prototype.scaleText = function () {
         var _this = this;
@@ -155,7 +139,7 @@ var GaugeComponent = (function (_super) {
         if (width === 0)
             return;
         var oldScale = this.resizeScale;
-        var availableSpace = this.outerRadius;
+        var availableSpace = this.textRadius;
         this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
         if (this.resizeScale !== oldScale) {
             this.textTransform = "scale(" + this.resizeScale + ", " + this.resizeScale + ")";
@@ -167,34 +151,28 @@ var GaugeComponent = (function (_super) {
         this.select.emit(data);
     };
     GaugeComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     GaugeComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'gauge',
-                    template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      (legendLabelClick)=\"onClick($event)\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g pieArc\n          class=\"background-arc\"\n          [startAngle]=\"0\"\n          [endAngle]=\"backgroundArc.endAngle\"\n          [innerRadius]=\"backgroundArc.innerRadius\"\n          [outerRadius]=\"backgroundArc.outerRadius\"\n          [cornerRadius]=\"backgroundArc.cornerRadius\"\n          [data]=\"backgroundArc.data\"\n          [animate]=\"false\"\n          [pointerEvents]=\"false\">\n        </svg:g>\n        <svg:g pieArc\n          [startAngle]=\"0\"\n          [endAngle]=\"valueArc.endAngle\"\n          [innerRadius]=\"valueArc.innerRadius\"\n          [outerRadius]=\"valueArc.outerRadius\"\n          [cornerRadius]=\"valueArc.cornerRadius\"\n          [fill]=\"colors(value)\"\n          [data]=\"valueArc.data\"\n          [animate]=\"true\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [ngClass]=\"{'highlighted': tick.highlighted}\">\n          <svg:text\n            [style.textAnchor]=\"tick.textAnchor\"\n            [attr.transform]=\"tick.textTransform\"\n            alignment-baseline=\"central\">\n            {{tick.text}}\n          </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n          class=\"gauge-tick gauge-tick-small\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g transform=\"rotate(120)\">\n          <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n            {{displayValue()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+                    selector: 'ngx-charts-gauge',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            (select)=\"onClick($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n        \n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
-    GaugeComponent.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.ChangeDetectorRef, },
-        { type: core_1.NgZone, },
-    ];
+    GaugeComponent.ctorParameters = function () { return []; };
     GaugeComponent.propDecorators = {
-        'view': [{ type: core_1.Input },],
-        'scheme': [{ type: core_1.Input },],
-        'customColors': [{ type: core_1.Input },],
-        'gradient': [{ type: core_1.Input },],
-        'value': [{ type: core_1.Input },],
         'min': [{ type: core_1.Input },],
         'max': [{ type: core_1.Input },],
         'units': [{ type: core_1.Input },],
         'bigSegments': [{ type: core_1.Input },],
         'smallSegments': [{ type: core_1.Input },],
-        'legend': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
+        'results': [{ type: core_1.Input },],
+        'showAxis': [{ type: core_1.Input },],
+        'startAngle': [{ type: core_1.Input },],
+        'angleSpan': [{ type: core_1.Input },],
+        'schemeType': [{ type: core_1.Input },],
         'textEl': [{ type: core_1.ViewChild, args: ['textEl',] },],
     };
     return GaugeComponent;

@@ -11,29 +11,17 @@ var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
 var BarHorizontalComponent = (function (_super) {
     __extends(BarHorizontalComponent, _super);
-    function BarHorizontalComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarHorizontalComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarHorizontalComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarHorizontalComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarHorizontalComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarHorizontalComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -49,11 +37,12 @@ var BarHorizontalComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -84,7 +73,30 @@ var BarHorizontalComponent = (function (_super) {
         this.select.emit(data);
     };
     BarHorizontalComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.yDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.yDomain;
+        }
+        else {
+            domain = this.xDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarHorizontalComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.yDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.xDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarHorizontalComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -96,36 +108,34 @@ var BarHorizontalComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarHorizontalComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarHorizontalComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarHorizontalComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarHorizontalComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
     BarHorizontalComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'bar-horizontal',
-                    template: "\n    <chart\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    selector: 'ngx-charts-bar-horizontal',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-horizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    BarHorizontalComponent.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.ChangeDetectorRef, },
-        { type: core_1.NgZone, },
-    ];
+    BarHorizontalComponent.ctorParameters = function () { return []; };
     BarHorizontalComponent.propDecorators = {
-        'view': [{ type: core_1.Input },],
-        'results': [{ type: core_1.Input },],
-        'scheme': [{ type: core_1.Input },],
-        'customColors': [{ type: core_1.Input },],
         'legend': [{ type: core_1.Input },],
         'xAxis': [{ type: core_1.Input },],
         'yAxis': [{ type: core_1.Input },],
@@ -136,7 +146,7 @@ var BarHorizontalComponent = (function (_super) {
         'gradient': [{ type: core_1.Input },],
         'showGridLines': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
+        'schemeType': [{ type: core_1.Input },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],
     };

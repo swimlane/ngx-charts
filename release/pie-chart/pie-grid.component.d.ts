@@ -1,27 +1,14 @@
-
-import { EventEmitter, OnChanges, OnDestroy, AfterViewInit, SimpleChanges, ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-export declare class PieGridComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-    private element;
-    private cd;
-    view: any;
-    results: any;
-    scheme: any;
-    customColors: any;
-    select: EventEmitter<{}>;
-    legendLabelClick: EventEmitter<any>;
+export declare class PieGridComponent extends BaseChartComponent {
     dims: ViewDimensions;
     data: any[];
     transform: string;
     series: any[];
     domain: any[];
-    colorScale: Function;
+    colorScale: ColorHelper;
     margin: number[];
-    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngAfterViewInit(): void;
-    ngOnDestroy(): void;
-    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getTooltipText(label: any, val: any): string;
     getDomain(): any[];

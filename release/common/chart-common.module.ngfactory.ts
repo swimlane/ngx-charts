@@ -11,7 +11,7 @@ import * as import2 from '@angular/common/src/common_module';
 import * as import3 from '../../../src/common/axes/axes.module';
 import * as import4 from '../../../src/common/tooltip/tooltip.module';
 import * as import5 from '@angular/common/src/localization';
-import * as import6 from '../../../src/utils/injection.service';
+import * as import6 from '../../../src/services/injection.service';
 import * as import7 from '../../../src/common/tooltip/tooltip.service';
 import * as import8 from '@angular/core/src/di/injector';
 import * as import9 from './tooltip/tooltip.component.ngfactory';
@@ -37,7 +37,7 @@ class ChartCommonModuleInjector extends import0.NgModuleInjector<import1.ChartCo
     return this.__InjectionService_5;
   }
   get _TooltipService_6():import7.TooltipService {
-    if ((this.__TooltipService_6 == null)) { (this.__TooltipService_6 = new import7.TooltipService()); }
+    if ((this.__TooltipService_6 == null)) { (this.__TooltipService_6 = new import7.TooltipService(this._InjectionService_5)); }
     return this.__TooltipService_6;
   }
   createInternal():import1.ChartCommonModule {

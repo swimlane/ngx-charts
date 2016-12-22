@@ -12,7 +12,7 @@ import * as import3 from '../../../src/common/axes/axes.module';
 import * as import4 from '../../../src/common/tooltip/tooltip.module';
 import * as import5 from '../../../src/common/chart-common.module';
 import * as import6 from '@angular/common/src/localization';
-import * as import7 from '../../../src/utils/injection.service';
+import * as import7 from '../../../src/services/injection.service';
 import * as import8 from '../../../src/common/tooltip/tooltip.service';
 import * as import9 from '@angular/core/src/di/injector';
 import * as import10 from '../common/tooltip/tooltip.component.ngfactory';
@@ -39,7 +39,7 @@ class HeatMapModuleInjector extends import0.NgModuleInjector<import1.HeatMapModu
     return this.__InjectionService_6;
   }
   get _TooltipService_7():import8.TooltipService {
-    if ((this.__TooltipService_7 == null)) { (this.__TooltipService_7 = new import8.TooltipService()); }
+    if ((this.__TooltipService_7 == null)) { (this.__TooltipService_7 = new import8.TooltipService(this._InjectionService_6)); }
     return this.__TooltipService_7;
   }
   createInternal():import1.HeatMapModule {

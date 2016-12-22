@@ -9,17 +9,13 @@ var BarComponent = (function () {
         this.offset = 0;
         this.isActive = false;
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
         this.initialized = false;
+        this.hasGradient = false;
         this.element = element.nativeElement;
     }
-    BarComponent.prototype.ngOnInit = function () {
-        var pageUrl = window.location.href;
-        this.gradientId = 'grad' + id_1.id().toString();
-        this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
-        this.startOpacity = this.getStartOpacity();
-    };
     BarComponent.prototype.ngOnChanges = function (changes) {
-        // ngOnInit gets called after ngOnChanges, so we need to do this here
         if (!this.initialized) {
             this.loadAnimation();
             this.initialized = true;
@@ -29,6 +25,16 @@ var BarComponent = (function () {
         }
     };
     BarComponent.prototype.update = function () {
+        var pageUrl = window.location.href;
+        this.gradientId = 'grad' + id_1.id().toString();
+        this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
+        if (this.gradient || this.stops) {
+            this.gradientStops = this.getGradient();
+            this.hasGradient = true;
+        }
+        else {
+            this.hasGradient = false;
+        }
         this.animateToCurrentForm();
     };
     BarComponent.prototype.loadAnimation = function () {
@@ -40,6 +46,22 @@ var BarComponent = (function () {
         var path = this.getPath();
         node.transition().duration(750)
             .attr('d', path);
+    };
+    BarComponent.prototype.getGradient = function () {
+        if (this.stops) {
+            return this.stops;
+        }
+        return [
+            {
+                offset: 0,
+                color: this.fill,
+                opacity: this.getStartOpacity()
+            },
+            {
+                offset: 100,
+                color: this.fill,
+                opacity: 1
+            }];
     };
     BarComponent.prototype.getStartingPath = function () {
         var radius = this.getRadius();
@@ -85,7 +107,7 @@ var BarComponent = (function () {
     BarComponent.prototype.getRadius = function () {
         var radius = 0;
         if (this.roundEdges && this.height > 5 && this.width > 5) {
-            radius = 5;
+            radius = Math.floor(Math.min(5, this.height / 2, this.width / 2));
         }
         return radius;
     };
@@ -135,17 +157,23 @@ var BarComponent = (function () {
         retval += "z";
         return retval;
     };
+    BarComponent.prototype.onMouseEnter = function () {
+        this.activate.emit(this.data);
+    };
+    BarComponent.prototype.onMouseLeave = function () {
+        this.deactivate.emit(this.data);
+    };
     BarComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[bar]',
-                    template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+                    selector: 'g[ngx-charts-bar]',
+                    template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    BarComponent.ctorParameters = [
+    BarComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-    ];
+    ]; };
     BarComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],
         'data': [{ type: core_1.Input },],
@@ -158,7 +186,12 @@ var BarComponent = (function () {
         'gradient': [{ type: core_1.Input },],
         'offset': [{ type: core_1.Input },],
         'isActive': [{ type: core_1.Input },],
+        'stops': [{ type: core_1.Input },],
         'select': [{ type: core_1.Output },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
+        'onMouseEnter': [{ type: core_1.HostListener, args: ['mouseenter',] },],
+        'onMouseLeave': [{ type: core_1.HostListener, args: ['mouseleave',] },],
     };
     return BarComponent;
 }());

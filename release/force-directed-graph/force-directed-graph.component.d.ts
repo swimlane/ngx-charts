@@ -1,10 +1,8 @@
-
-import { ElementRef, EventEmitter, SimpleChanges, NgZone, OnChanges, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { ElementRef, TemplateRef, EventEmitter } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-export declare class ForceDirectedGraphComponent extends BaseChartComponent implements OnChanges {
-    private element;
-    private cd;
+import { ColorHelper } from '../utils/color-sets';
+export declare class ForceDirectedGraphComponent extends BaseChartComponent {
     force: any;
     forceLink: any;
     groupResultsBy: (node: any) => string;
@@ -14,14 +12,13 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent impl
         source: any;
         target: any;
     }[];
-    scheme: any;
-    view: any;
-    customColors: any;
-    select: EventEmitter<{}>;
+    activeEntries: any[];
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     linkTemplate: TemplateRef<any>;
     nodeTemplate: TemplateRef<any>;
     chart: ElementRef;
-    colors: Function;
+    colors: ColorHelper;
     dims: ViewDimensions;
     draggingNode: any;
     draggingStart: {
@@ -32,14 +29,20 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent impl
     results: any[];
     seriesDomain: any;
     transform: string;
-    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngOnChanges(changes: SimpleChanges): void;
+    legendOptions: any;
     update(): void;
     onClick(data: any, node: any): void;
+    onActivate(event: any): void;
+    onDeactivate(event: any): void;
     getSeriesDomain(): any[];
     trackLinkBy(index: any, link: any): any;
     trackNodeBy(index: any, node: any): any;
     setColors(): void;
+    getLegendOptions(): {
+        scaleType: string;
+        domain: any;
+        colors: ColorHelper;
+    };
     onDragStart(node: any, $event: MouseEvent): void;
     onDrag($event: MouseEvent): void;
     onDragEnd(node: any, $event: MouseEvent): void;

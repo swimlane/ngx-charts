@@ -50,13 +50,13 @@ var GridPanelSeriesComponent = (function () {
     };
     GridPanelSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[gridPanelSeries]',
-                    template: "\n    <svg:g gridPanel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
+                    selector: 'g[ngx-charts-grid-panel-series]',
+                    template: "\n    <svg:g ngx-charts-grid-panel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    GridPanelSeriesComponent.ctorParameters = [];
+    GridPanelSeriesComponent.ctorParameters = function () { return []; };
     GridPanelSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],

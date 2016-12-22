@@ -10,17 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var throttle_1 = require('../../utils/throttle');
-var position_helper_1 = require('./position.helper');
-var placement_type_1 = require('./placement.type');
+var position_1 = require('./position');
+require('./tooltip.component.scss');
 var TooltipContentComponent = (function () {
     function TooltipContentComponent(element, renderer) {
         this.element = element;
         this.renderer = renderer;
-        this.spacing = 0;
     }
     Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
         get: function () {
-            var clz = 'swui-tooltip-content';
+            var clz = 'ngx-tooltip-content';
             clz += " position-" + this.placement;
             clz += " type-" + this.type;
             clz += " " + this.cssClass;
@@ -49,82 +48,34 @@ var TooltipContentComponent = (function () {
         setTimeout(function () { return _this.renderer.setElementClass(nativeElm, 'animate', true); }, 1);
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
-        var top = 0;
-        var left = 0;
-        if (this.placement === placement_type_1.PlacementTypes.right) {
-            left = hostDim.left + hostDim.width + this.spacing;
-            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.left) {
-            left = hostDim.left - elmDim.width - this.spacing;
-            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.top) {
-            top = hostDim.top - elmDim.height - this.spacing;
-            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-            top = hostDim.top + hostDim.height + this.spacing;
-            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
-        }
+        var _a = position_1.PositionHelper.positionContent(this.placement, elmDim, hostDim, this.spacing, this.alignment), top = _a.top, left = _a.left;
         this.renderer.setElementStyle(nativeElm, 'top', top + "px");
         this.renderer.setElementStyle(nativeElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
         var caretDimensions = caretElm.getBoundingClientRect();
-        var top = 0;
-        var left = 0;
-        if (this.placement === placement_type_1.PlacementTypes.right) {
-            left = -7;
-            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.left) {
-            left = elmDim.width;
-            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.top) {
-            top = elmDim.height;
-            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-            top = -7;
-            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
+        var _a = position_1.PositionHelper.positionCaret(this.placement, elmDim, hostDim, caretDimensions, this.alignment), top = _a.top, left = _a.left;
         this.renderer.setElementStyle(caretElm, 'top', top + "px");
         this.renderer.setElementStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
-        var shouldFlip = position_helper_1.PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
-        if (shouldFlip) {
-            if (this.placement === placement_type_1.PlacementTypes.right) {
-                this.placement = placement_type_1.PlacementTypes.left;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.left) {
-                this.placement = placement_type_1.PlacementTypes.right;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.top) {
-                this.placement = placement_type_1.PlacementTypes.bottom;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-                this.placement = placement_type_1.PlacementTypes.top;
-            }
-        }
+        this.placement = position_1.PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing, this.alignment);
     };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
     };
     TooltipContentComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'swui-tooltip-content',
+                    selector: 'ngx-tooltip-content',
                     template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  "
                 },] },
     ];
     /** @nocollapse */
-    TooltipContentComponent.ctorParameters = [
+    TooltipContentComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
         { type: core_1.Renderer, },
-    ];
+    ]; };
     TooltipContentComponent.propDecorators = {
         'host': [{ type: core_1.Input },],
         'showCaret': [{ type: core_1.Input },],
@@ -134,7 +85,6 @@ var TooltipContentComponent = (function () {
         'spacing': [{ type: core_1.Input },],
         'cssClass': [{ type: core_1.Input },],
         'title': [{ type: core_1.Input },],
-        'template': [{ type: core_1.Input },],
         'caretElm': [{ type: core_1.ViewChild, args: ['caretElm',] },],
         'cssClasses': [{ type: core_1.HostBinding, args: ['class',] },],
         'onWindowResize': [{ type: core_1.HostListener, args: ['window:resize',] },],
