@@ -17,13 +17,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
-__webpack_require__("./src/ng2d3.scss");
+__webpack_require__("./src/ngx-charts.scss");
 var data_1 = __webpack_require__("./demo/data.ts");
 var chartTypes_1 = __webpack_require__("./demo/chartTypes.ts");
 __webpack_require__("./demo/demo.scss");
 var AppComponent = (function () {
     function AppComponent() {
-        this.theme = "light";
+        this.theme = "dark";
         this.chartType = 'bar-vertical';
         this.realTimeData = false;
         this.linearScale = false;
@@ -44,6 +44,7 @@ var AppComponent = (function () {
         this.curveType = 'Linear';
         this.curve = d3_1.default.shape.curveLinear;
         this.interpolationTypes = ['Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X', 'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'];
+        this.schemeType = 'ordinal';
         // pie
         this.showLabels = true;
         this.explodeSlices = false;
@@ -52,12 +53,16 @@ var AppComponent = (function () {
         this.autoScale = true;
         this.timeline = false;
         // gauge
-        this.gaugeValue = 60;
         this.gaugeMin = 0;
         this.gaugeMax = 100;
         this.gaugeLargeSegments = 10;
         this.gaugeSmallSegments = 5;
         this.gaugeUnits = 'alerts';
+        this.gaugeAngleSpan = 240;
+        this.gaugeStartAngle = -120;
+        this.gaugeShowAxis = true;
+        this.gaugeValue = 50; // linear gauge value
+        this.gaugePreviousValue = 70;
         Object.assign(this, {
             single: data_1.single,
             multi: data_1.multi,
@@ -80,7 +85,7 @@ var AppComponent = (function () {
         if (!this.realTimeData) {
             return;
         }
-        this.gaugeValue = this.gaugeMin + Math.ceil(Math.random() * this.gaugeMax);
+        this.gaugeValue = this.gaugeMin + Math.floor(Math.random() * (this.gaugeMax - this.gaugeMin));
         var country = this.countries[Math.floor(Math.random() * this.countries.length)];
         var add = Math.random() < 0.7;
         var remove = Math.random() < 0.5;
@@ -215,7 +220,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
-            template: "\n    <main [class]=\"theme\">\n      <div class=\"chart-col\">\n        <div style=\"position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;\">\n          <bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </bar-vertical>\n          <bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            (select)=\"select($event)\">\n          </bar-horizontal>\n          <bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </bar-vertical-2d>\n          <bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </bar-horizontal-2d>\n          <bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </bar-vertical-stacked>\n          <bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </bar-horizontal-stacked>\n          <bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </bar-vertical-normalized>\n          <bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </bar-horizontal-normalized>\n          <pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </pie-chart>\n          <advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </advanced-pie-chart>\n          <pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </pie-grid>\n          <line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            class=\"chart-container\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </line-chart>\n          <force-directed-graph\n            *ngIf=\"chartType === 'force-directed-graph'\"\n            class=\"chart-container\"\n            [legend]=\"showLegend\"\n            [links]=\"graph.links\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [nodes]=\"graph.nodes\"\n            [scheme]=\"colorScheme\"\n            [view]=\"view\"\n            (select)=\"select($event)\">\n          </force-directed-graph>\n          <area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </area-chart>\n          <area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </area-chart-stacked>\n          <area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </area-chart-normalized>\n          <heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (select)=\"select($event)\">\n          </heat-map>\n          <tree-map\n            *ngIf=\"chartType === 'tree-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </tree-map>\n          <number-card\n            *ngIf=\"chartType === 'number-card'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </number-card>\n          <gauge\n            *ngIf=\"chartType === 'gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [value]=\"gaugeValue\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [units]=\"gaugeUnits\"\n            [bigSegments]=\"gaugeLargeSegments\"\n            [smallSegments]=\"gaugeSmallSegments\"\n            (select)=\"select($event)\">\n          </gauge>\n        </div>\n      </div>\n      <div class=\"sidebar\">\n        <h1>\n          ng2<strong>d3</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n        <div style=\"margin:20px\">\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n\n        <h3>Theme</h3>\n        <select\n          [ngModel]=\"theme\"\n          (ngModelChange)=\"theme = $event\">>\n          <option [value]=\"'dark'\">Dark</option>\n          <option [value]=\"'light'\">Light</option>\n        </select>\n\n        <h3 (click)=\"dataVisable = !dataVisable\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"dataVisable\"\n            [class.arrow-right]=\"!dataVisable\">\n          </span>\n          <strong>Data</strong>\n        </h3>\n        <div [hidden]=\"!dataVisable\" style=\"margin-left: 10px;\">\n          <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale\">{{dateData | json}}</pre>\n          <div>\n            <label>\n              <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n              Real-time\n            </label>\n          </div>\n        </div>\n        <div>\n          <h3 (click)=\"dimVisiable = !dimVisiable\" style=\"cursor: pointer\">\n            <span\n              [class.arrow-down]=\"dimVisiable\"\n              [class.arrow-right]=\"!dimVisiable\">\n            </span>\n            <strong>Dimensions</strong>\n          </h3>\n          <div [hidden]=\"!dimVisiable\" style=\"margin-left: 10px;\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n              Fit Container\n            </label> <br />\n            <div *ngIf=\"!fitContainer\">\n              <label>Width:</label><br />\n              <input type=\"number\" [(ngModel)]=\"width\"><br />\n              <label>Height:</label><br />\n              <input type=\"number\" [(ngModel)]=\"height\"><br />\n              <button (click)=\"applyDimensions()\">Apply dimensions</button>\n            </div>\n          </div>\n        </div>\n        <h3 (click)=\"colorVisable = !colorVisable\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"colorVisable\"\n            [class.arrow-right]=\"!colorVisable\">\n          </span>\n          <strong>Color Scheme</strong>\n        </h3>\n        <select\n          [hidden]=\"!colorVisable\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"selectedColorScheme\"\n          (ngModelChange)=\"setColorScheme($event)\">\n          <option *ngFor=\"let scheme of colorSets\" [value]=\"scheme.name\">{{scheme.name}}</option>\n        </select>\n\n        <h3 (click)=\"optsVisible = !optsVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"optsVisible\"\n            [class.arrow-right]=\"!optsVisible\">\n          </span>\n          <strong>Options</strong>\n        </h3>\n        <div [hidden]=\"!optsVisible\" style=\"margin-left: 10px;\">\n          <div *ngIf=\"chart.options.includes('showXAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n              Show X Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n              Show Y Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showGridLines')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n              Show Grid Lines\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('gradient')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n              Use Gradients\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLegend')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n              Show Legend\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n              Show X Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n            <label>X Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n              Show Y Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n            <label>Y Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLabels')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n              Show Labels\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('explodeSlices')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n              Explode Slices\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('doughnut')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n              Doughnut\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('autoScale')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n              Auto Scale\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('timeline')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n              Timeline\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('curve')\">\n            <label>Line Interpolation</label>\n            <select\n              [ngModel]=\"curveType\"\n              (ngModelChange)=\"setInterpolationType($event)\">\n              <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">{{interpolationType}}</option>\n            </select>\n          </div>\n\n          <div *ngIf=\"chart.options.includes('min')\">\n            <label>Min value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMin\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('max')\">\n            <label>Max value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMax\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('value')\">\n            <label>Value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('largeSegments')\">\n            <label>Number of large segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeLargeSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('smallSegments')\">\n            <label>Number of small segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeSmallSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('units')\">\n            <label>Units:</label><br />\n            <input type=\"text\" [(ngModel)]=\"gaugeUnits\"><br />\n          </div>\n        </div>\n        <h3><a href=\"https://swimlane.gitbooks.io/ng2d3/content/\" target=\"_blank\">Documentation</a></h3>\n        </div>\n      </div>\n    </main>\n  "
+            template: "\n    <main [class]=\"theme\">\n      <div class=\"chart-col\">\n        <div style=\"position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;\">\n          <ngx-charts-bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-bar-vertical>\n          <ngx-charts-bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal>\n          <ngx-charts-bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-2d>\n          <ngx-charts-bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-2d>\n          <ngx-charts-bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-stacked>\n          <ngx-charts-bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-stacked>\n          <ngx-charts-bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-normalized>\n          <ngx-charts-bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-normalized>\n          <ngx-charts-pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-chart>\n          <ngx-charts-advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-advanced-pie-chart>\n          <ngx-charts-pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-grid>\n          <ngx-charts-line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            class=\"chart-container\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-line-chart>\n          <ngx-charts-force-directed-graph\n            *ngIf=\"chartType === 'force-directed-graph'\"\n            class=\"chart-container\"\n            [legend]=\"showLegend\"\n            [links]=\"graph.links\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [nodes]=\"graph.nodes\"\n            [scheme]=\"colorScheme\"\n            [view]=\"view\"\n            (select)=\"select($event)\">\n          </ngx-charts-force-directed-graph>\n          <ngx-charts-area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart>\n          <ngx-charts-area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-stacked>\n          <ngx-charts-area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-normalized>\n          <ngx-charts-heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (select)=\"select($event)\">\n          </ngx-charts-heat-map>\n          <ngx-charts-tree-map\n            *ngIf=\"chartType === 'tree-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-tree-map>\n          <ngx-charts-number-card\n            *ngIf=\"chartType === 'number-card'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-number-card>\n          <ngx-charts-gauge\n            *ngIf=\"chartType === 'gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [results]=\"single\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [units]=\"gaugeUnits\"\n            [angleSpan]=\"gaugeAngleSpan\"\n            [startAngle]=\"gaugeStartAngle\"\n            [showAxis]=\"gaugeShowAxis\"\n            [bigSegments]=\"gaugeLargeSegments\"\n            [smallSegments]=\"gaugeSmallSegments\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-gauge>\n          <ngx-charts-linear-gauge\n            *ngIf=\"chartType === 'linear-gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [value]=\"gaugeValue\"\n            [previousValue]=\"gaugePreviousValue\"\n            [units]=\"gaugeUnits\"\n            (select)=\"select($event)\">\n          </ngx-charts-linear-gauge>\n        </div>\n      </div>\n      <div class=\"sidebar\">\n        <h1>\n          Ngx-<strong>Charts</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n        <div style=\"margin:20px\">\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n\n        <h3>Theme</h3>\n        <select\n          [ngModel]=\"theme\"\n          (ngModelChange)=\"theme = $event\">>\n          <option [value]=\"'dark'\">Dark</option>\n          <option [value]=\"'light'\">Light</option>\n        </select>\n\n        <h3 (click)=\"dataVisable = !dataVisable\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"dataVisable\"\n            [class.arrow-right]=\"!dataVisable\">\n          </span>\n          <strong>Data</strong>\n        </h3>\n        <div [hidden]=\"!dataVisable\" style=\"margin-left: 10px;\">\n          <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale\">{{dateData | json}}</pre>\n          <div>\n            <label>\n              <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n              Real-time\n            </label>\n          </div>\n        </div>\n        <div>\n          <h3 (click)=\"dimVisiable = !dimVisiable\" style=\"cursor: pointer\">\n            <span\n              [class.arrow-down]=\"dimVisiable\"\n              [class.arrow-right]=\"!dimVisiable\">\n            </span>\n            <strong>Dimensions</strong>\n          </h3>\n          <div [hidden]=\"!dimVisiable\" style=\"margin-left: 10px;\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n              Fit Container\n            </label> <br />\n            <div *ngIf=\"!fitContainer\">\n              <label>Width:</label><br />\n              <input type=\"number\" [(ngModel)]=\"width\"><br />\n              <label>Height:</label><br />\n              <input type=\"number\" [(ngModel)]=\"height\"><br />\n              <button (click)=\"applyDimensions()\">Apply dimensions</button>\n            </div>\n          </div>\n        </div>\n        <h3 (click)=\"colorVisible = !colorVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"colorVisible\"\n            [class.arrow-right]=\"!colorVisible\">\n          </span>\n          <strong>Color Scheme</strong>\n        </h3>\n        <select\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"selectedColorScheme\"\n          (ngModelChange)=\"setColorScheme($event)\">\n          <option *ngFor=\"let scheme of colorSets\" [value]=\"scheme.name\">{{scheme.name}}</option>\n        </select>\n\n        <select\n          *ngIf=\"chart.options.includes('schemeType')\"\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"schemeType\"\n          (ngModelChange)=\"schemeType = $event\">\n          <option value=\"ordinal\">Ordinal</option>\n          <option value=\"linear\">Linear</option>\n        </select>\n\n        <h3 (click)=\"optsVisible = !optsVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"optsVisible\"\n            [class.arrow-right]=\"!optsVisible\">\n          </span>\n          <strong>Options</strong>\n        </h3>\n        <div [hidden]=\"!optsVisible\" style=\"margin-left: 10px;\">\n          <div *ngIf=\"chart.options.includes('showXAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n              Show X Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n              Show Y Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showGridLines')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n              Show Grid Lines\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('gradient')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n              Use Gradients\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLegend')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n              Show Legend\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n              Show X Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n            <label>X Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n              Show Y Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n            <label>Y Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLabels')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n              Show Labels\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('explodeSlices')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n              Explode Slices\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('doughnut')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n              Doughnut\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('autoScale')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n              Auto Scale\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('timeline')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n              Timeline\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('curve')\">\n            <label>Line Interpolation</label>\n            <select\n              [ngModel]=\"curveType\"\n              (ngModelChange)=\"setInterpolationType($event)\">\n              <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">{{interpolationType}}</option>\n            </select>\n          </div>\n\n          <div *ngIf=\"chart.options.includes('min')\">\n            <label>Min value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMin\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('max')\">\n            <label>Max value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMax\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('value')\">\n            <label>Value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('previousValue')\">\n            <label>Previous value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugePreviousValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('angleSpan')\">\n            <label>Angle span:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeAngleSpan\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('startAngle')\">\n            <label>Start Angle:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeStartAngle\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('showAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gaugeShowAxis\" (change)=\"gaugeShowAxis = $event.target.checked\">\n              Show Axis\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('largeSegments')\">\n            <label>Number of large segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeLargeSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('smallSegments')\">\n            <label>Number of small segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeSmallSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('units')\">\n            <label>Units:</label><br />\n            <input type=\"text\" [(ngModel)]=\"gaugeUnits\"><br />\n          </div>\n        </div>\n        <h3><a href=\"https://swimlane.gitbooks.io/ngx-charts/content/\" target=\"_blank\">Documentation</a></h3>\n        </div>\n      </div>\n    </main>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -250,7 +255,7 @@ var AppModule = (function () {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [src_1.NG2D3Module, platform_browser_1.BrowserModule, forms_1.FormsModule],
+            imports: [src_1.NgxChartsModule, platform_browser_1.BrowserModule, forms_1.FormsModule],
             declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
@@ -292,49 +297,49 @@ var chartGroups = [
                 name: "Vertical Bar Chart",
                 selector: 'bar-vertical',
                 inputFormat: 'singleSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             },
             {
                 name: "Horizontal Bar Chart",
                 selector: 'bar-horizontal',
                 inputFormat: 'singleSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             },
             {
                 name: "Grouped Vertical Bar Chart",
                 selector: 'bar-vertical-2d',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             },
             {
                 name: "Grouped Horizontal Bar Chart",
                 selector: 'bar-horizontal-2d',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             },
             {
                 name: "Stacked Vertical Bar Chart",
                 selector: 'bar-vertical-stacked',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             },
             {
                 name: "Stacked Horizontal Bar Chart",
                 selector: 'bar-horizontal-stacked',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             },
             {
                 name: "Normalized Vertical Bar Chart",
                 selector: 'bar-vertical-normalized',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             },
             {
                 name: "Normalized Horizontal Bar Chart",
                 selector: 'bar-horizontal-normalized',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
             }
         ]
     },
@@ -368,25 +373,25 @@ var chartGroups = [
                 name: "Line Chart",
                 selector: 'line-chart',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
             },
             {
                 name: "Area Chart",
                 selector: 'area-chart',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
             },
             {
                 name: "Stacked Area Chart",
                 selector: 'area-chart-stacked',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
             },
             {
                 name: "Normalized Area Chart",
                 selector: 'area-chart-normalized',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
             },
         ]
     },
@@ -420,8 +425,14 @@ var chartGroups = [
             {
                 name: "Gauge",
                 selector: 'gauge',
-                inputFormat: 'singleValue',
-                options: ['colorScheme', 'value', 'min', 'max', 'largeSegments', 'smallSegments', 'units']
+                inputFormat: 'singleSeries',
+                options: ['colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units', 'angleSpan', 'startAngle', 'showAxis']
+            },
+            {
+                name: "Linear Gauge",
+                selector: 'linear-gauge',
+                inputFormat: 'single',
+                options: ['colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
             }
         ]
     }
@@ -617,41 +628,43 @@ if(false) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_forms__ = __webpack_require__("./node_modules/@angular/forms/src/forms.js");
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractControlDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractFormGroupDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "CheckboxControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "ControlContainer", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NG_VALUE_ACCESSOR", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "DefaultValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NgControl", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NgControlStatus", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["h"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NgControlStatusGroup", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["i"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NgForm", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["j"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NgModel", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["k"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NgModelGroup", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["l"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "RadioControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["m"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormControlDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["n"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormControlName", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["o"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormGroupDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["p"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormArrayName", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["q"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormGroupName", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["r"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NgSelectOption", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["s"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "SelectControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["t"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "SelectMultipleControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["u"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "MaxLengthValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["v"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "MinLengthValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["w"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "PatternValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["x"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "RequiredValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["y"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormBuilder", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["z"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "AbstractControl", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["A"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormArray", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["B"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormControl", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["C"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormGroup", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["D"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NG_ASYNC_VALIDATORS", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["E"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "NG_VALIDATORS", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["F"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "Validators", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["G"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "FormsModule", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["H"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(exports, "ReactiveFormsModule", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["I"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NgSelectOption", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "AbstractFormGroupDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "CheckboxControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "ControlContainer", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["d"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NG_VALUE_ACCESSOR", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["e"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "DefaultValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["f"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NgControl", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["g"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NgControlStatus", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["h"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NgControlStatusGroup", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["i"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NgForm", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["j"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NgModel", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["k"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NgModelGroup", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["l"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "RadioControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["m"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormControlDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["n"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormControlName", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["o"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormGroupDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["p"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormArrayName", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["q"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormGroupName", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["r"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "AbstractControlDirective", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["s"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "SelectControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["t"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "SelectMultipleControlValueAccessor", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["u"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "CheckboxRequiredValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["v"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "MaxLengthValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["w"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "MinLengthValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["x"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "PatternValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["y"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "RequiredValidator", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["z"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormBuilder", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["A"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "AbstractControl", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["B"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormArray", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["C"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormControl", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["D"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormGroup", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["E"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NG_ASYNC_VALIDATORS", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["F"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "NG_VALIDATORS", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["G"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "Validators", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["H"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "VERSION", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["I"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "FormsModule", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["J"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "ReactiveFormsModule", function() { return __WEBPACK_IMPORTED_MODULE_0__src_forms__["K"]; });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -698,8 +711,8 @@ if(false) {
 /* unused harmony reexport CheckboxControlValueAccessor */
 /* unused harmony reexport DefaultValueAccessor */
 /* unused harmony reexport NgControl */
-/* unused harmony reexport NgControlStatusGroup */
 /* unused harmony reexport NgControlStatus */
+/* unused harmony reexport NgControlStatusGroup */
 /* unused harmony reexport NgForm */
 /* unused harmony reexport NgModel */
 /* unused harmony reexport NgModelGroup */
@@ -713,12 +726,8 @@ if(false) {
 /* unused harmony reexport FormGroupName */
 /* unused harmony reexport NgSelectOption */
 /* unused harmony reexport SelectControlValueAccessor */
-/* unused harmony reexport SelectMultipleControlValueAccessor */
 /* unused harmony reexport NgSelectMultipleOption */
-/* unused harmony reexport MinLengthValidator */
-/* unused harmony reexport PatternValidator */
-/* unused harmony reexport RequiredValidator */
-/* unused harmony reexport MaxLengthValidator */
+/* unused harmony reexport SelectMultipleControlValueAccessor */
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -759,17 +768,28 @@ if(false) {
 
 
 
-
-var SHARED_FORM_DIRECTIVES = [
-    __WEBPACK_IMPORTED_MODULE_14__directives_select_control_value_accessor__["b" /* NgSelectOption */], __WEBPACK_IMPORTED_MODULE_15__directives_select_multiple_control_value_accessor__["b" /* NgSelectMultipleOption */], __WEBPACK_IMPORTED_MODULE_2__directives_default_value_accessor__["a" /* DefaultValueAccessor */], __WEBPACK_IMPORTED_MODULE_7__directives_number_value_accessor__["a" /* NumberValueAccessor */],
-    __WEBPACK_IMPORTED_MODULE_9__directives_range_value_accessor__["a" /* RangeValueAccessor */], __WEBPACK_IMPORTED_MODULE_1__directives_checkbox_value_accessor__["a" /* CheckboxControlValueAccessor */], __WEBPACK_IMPORTED_MODULE_14__directives_select_control_value_accessor__["a" /* SelectControlValueAccessor */],
-    __WEBPACK_IMPORTED_MODULE_15__directives_select_multiple_control_value_accessor__["a" /* SelectMultipleControlValueAccessor */], __WEBPACK_IMPORTED_MODULE_8__directives_radio_control_value_accessor__["a" /* RadioControlValueAccessor */], __WEBPACK_IMPORTED_MODULE_3__directives_ng_control_status__["a" /* NgControlStatus */],
-    __WEBPACK_IMPORTED_MODULE_3__directives_ng_control_status__["b" /* NgControlStatusGroup */], __WEBPACK_IMPORTED_MODULE_16__directives_validators__["a" /* RequiredValidator */], __WEBPACK_IMPORTED_MODULE_16__directives_validators__["b" /* MinLengthValidator */], __WEBPACK_IMPORTED_MODULE_16__directives_validators__["c" /* MaxLengthValidator */], __WEBPACK_IMPORTED_MODULE_16__directives_validators__["d" /* PatternValidator */]
+var /** @type {?} */ SHARED_FORM_DIRECTIVES = [
+    __WEBPACK_IMPORTED_MODULE_14__directives_select_control_value_accessor__["b" /* NgSelectOption */],
+    __WEBPACK_IMPORTED_MODULE_15__directives_select_multiple_control_value_accessor__["b" /* NgSelectMultipleOption */],
+    __WEBPACK_IMPORTED_MODULE_2__directives_default_value_accessor__["a" /* DefaultValueAccessor */],
+    __WEBPACK_IMPORTED_MODULE_7__directives_number_value_accessor__["a" /* NumberValueAccessor */],
+    __WEBPACK_IMPORTED_MODULE_9__directives_range_value_accessor__["a" /* RangeValueAccessor */],
+    __WEBPACK_IMPORTED_MODULE_1__directives_checkbox_value_accessor__["a" /* CheckboxControlValueAccessor */],
+    __WEBPACK_IMPORTED_MODULE_14__directives_select_control_value_accessor__["a" /* SelectControlValueAccessor */],
+    __WEBPACK_IMPORTED_MODULE_15__directives_select_multiple_control_value_accessor__["a" /* SelectMultipleControlValueAccessor */],
+    __WEBPACK_IMPORTED_MODULE_8__directives_radio_control_value_accessor__["a" /* RadioControlValueAccessor */],
+    __WEBPACK_IMPORTED_MODULE_3__directives_ng_control_status__["a" /* NgControlStatus */],
+    __WEBPACK_IMPORTED_MODULE_3__directives_ng_control_status__["b" /* NgControlStatusGroup */],
+    __WEBPACK_IMPORTED_MODULE_16__directives_validators__["a" /* RequiredValidator */],
+    __WEBPACK_IMPORTED_MODULE_16__directives_validators__["b" /* MinLengthValidator */],
+    __WEBPACK_IMPORTED_MODULE_16__directives_validators__["c" /* MaxLengthValidator */],
+    __WEBPACK_IMPORTED_MODULE_16__directives_validators__["d" /* PatternValidator */],
+    __WEBPACK_IMPORTED_MODULE_16__directives_validators__["e" /* CheckboxRequiredValidator */],
 ];
-var TEMPLATE_DRIVEN_DIRECTIVES = [__WEBPACK_IMPORTED_MODULE_5__directives_ng_model__["a" /* NgModel */], __WEBPACK_IMPORTED_MODULE_6__directives_ng_model_group__["a" /* NgModelGroup */], __WEBPACK_IMPORTED_MODULE_4__directives_ng_form__["a" /* NgForm */]];
-var REACTIVE_DRIVEN_DIRECTIVES = [__WEBPACK_IMPORTED_MODULE_10__directives_reactive_directives_form_control_directive__["a" /* FormControlDirective */], __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_group_directive__["a" /* FormGroupDirective */], __WEBPACK_IMPORTED_MODULE_11__directives_reactive_directives_form_control_name__["a" /* FormControlName */], __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_name__["a" /* FormGroupName */], __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_name__["b" /* FormArrayName */]];
+var /** @type {?} */ TEMPLATE_DRIVEN_DIRECTIVES = [__WEBPACK_IMPORTED_MODULE_5__directives_ng_model__["a" /* NgModel */], __WEBPACK_IMPORTED_MODULE_6__directives_ng_model_group__["a" /* NgModelGroup */], __WEBPACK_IMPORTED_MODULE_4__directives_ng_form__["a" /* NgForm */]];
+var /** @type {?} */ REACTIVE_DRIVEN_DIRECTIVES = [__WEBPACK_IMPORTED_MODULE_10__directives_reactive_directives_form_control_directive__["a" /* FormControlDirective */], __WEBPACK_IMPORTED_MODULE_12__directives_reactive_directives_form_group_directive__["a" /* FormGroupDirective */], __WEBPACK_IMPORTED_MODULE_11__directives_reactive_directives_form_control_name__["a" /* FormControlName */], __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_name__["a" /* FormGroupName */], __WEBPACK_IMPORTED_MODULE_13__directives_reactive_directives_form_group_name__["b" /* FormArrayName */]];
 /**
- * Internal module used for sharing directives between FormsModule and ReactiveFormsModule
+ *  Internal module used for sharing directives between FormsModule and ReactiveFormsModule
  */
 var InternalFormsSharedModule = (function () {
     function InternalFormsSharedModule() {
@@ -781,9 +801,18 @@ var InternalFormsSharedModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    InternalFormsSharedModule.ctorParameters = [];
+    InternalFormsSharedModule.ctorParameters = function () { return []; };
     return InternalFormsSharedModule;
 }());
+function InternalFormsSharedModule_tsickle_Closure_declarations() {
+    /** @type {?} */
+    InternalFormsSharedModule.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    InternalFormsSharedModule.ctorParameters;
+}
 //# sourceMappingURL=directives.js.map
 
 /***/ },
@@ -801,99 +830,158 @@ var InternalFormsSharedModule = (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Base class for control directives.
- *
- * Only used internally in the forms module.
- *
- * @stable
+ *  Base class for control directives.
+  * *
+  * Only used internally in the forms module.
+  * *
+ * @abstract
  */
 var AbstractControlDirective = (function () {
     function AbstractControlDirective() {
     }
     Object.defineProperty(AbstractControlDirective.prototype, "control", {
+        /**
+         * @return {?}
+         */
         get: function () { throw new Error('unimplemented'); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "value", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.value : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "valid", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.valid : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "invalid", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.invalid : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "pending", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.pending : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "errors", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.errors : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "pristine", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.pristine : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "dirty", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.dirty : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "touched", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.touched : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "untouched", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.untouched : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "disabled", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.disabled : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "enabled", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.enabled : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "statusChanges", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.statusChanges : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "valueChanges", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.control ? this.control.valueChanges : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlDirective.prototype, "path", {
+        /**
+         * @return {?}
+         */
         get: function () { return null; },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?=} value
+     * @return {?}
+     */
     AbstractControlDirective.prototype.reset = function (value) {
         if (value === void 0) { value = undefined; }
         if (this.control)
             this.control.reset(value);
     };
+    /**
+     * @param {?} errorCode
+     * @param {?=} path
+     * @return {?}
+     */
     AbstractControlDirective.prototype.hasError = function (errorCode, path) {
         if (path === void 0) { path = null; }
         return this.control ? this.control.hasError(errorCode, path) : false;
     };
+    /**
+     * @param {?} errorCode
+     * @param {?=} path
+     * @return {?}
+     */
     AbstractControlDirective.prototype.getError = function (errorCode, path) {
         if (path === void 0) { path = null; }
         return this.control ? this.control.getError(errorCode, path) : null;
@@ -926,19 +1014,24 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 /**
- * This is a base class for code shared between {@link NgModelGroup} and {@link FormGroupName}.
- *
- * @stable
+ *  This is a base class for code shared between {@link NgModelGroup} and {@link FormGroupName}.
+  * *
  */
 var AbstractFormGroupDirective = (function (_super) {
     __extends(AbstractFormGroupDirective, _super);
     function AbstractFormGroupDirective() {
         _super.apply(this, arguments);
     }
+    /**
+     * @return {?}
+     */
     AbstractFormGroupDirective.prototype.ngOnInit = function () {
         this._checkParentType();
         this.formDirective.addFormGroup(this);
     };
+    /**
+     * @return {?}
+     */
     AbstractFormGroupDirective.prototype.ngOnDestroy = function () {
         if (this.formDirective) {
             this.formDirective.removeFormGroup(this);
@@ -946,7 +1039,8 @@ var AbstractFormGroupDirective = (function (_super) {
     };
     Object.defineProperty(AbstractFormGroupDirective.prototype, "control", {
         /**
-         * Get the {@link FormGroup} backing this binding.
+         *  Get the {@link FormGroup} backing this binding.
+         * @return {?}
          */
         get: function () { return this.formDirective.getFormGroup(this); },
         enumerable: true,
@@ -954,7 +1048,8 @@ var AbstractFormGroupDirective = (function (_super) {
     });
     Object.defineProperty(AbstractFormGroupDirective.prototype, "path", {
         /**
-         * Get the path to this control group.
+         *  Get the path to this control group.
+         * @return {?}
          */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__shared__["a" /* controlPath */])(this.name, this._parent); },
         enumerable: true,
@@ -962,26 +1057,43 @@ var AbstractFormGroupDirective = (function (_super) {
     });
     Object.defineProperty(AbstractFormGroupDirective.prototype, "formDirective", {
         /**
-         * Get the {@link Form} to which this group belongs.
+         *  Get the {@link Form} to which this group belongs.
+         * @return {?}
          */
         get: function () { return this._parent ? this._parent.formDirective : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractFormGroupDirective.prototype, "validator", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__shared__["b" /* composeValidators */])(this._validators); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractFormGroupDirective.prototype, "asyncValidator", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__shared__["c" /* composeAsyncValidators */])(this._asyncValidators); },
         enumerable: true,
         configurable: true
     });
-    /** @internal */
+    /**
+     * @return {?}
+     */
     AbstractFormGroupDirective.prototype._checkParentType = function () { };
     return AbstractFormGroupDirective;
 }(__WEBPACK_IMPORTED_MODULE_0__control_container__["a" /* ControlContainer */]));
+function AbstractFormGroupDirective_tsickle_Closure_declarations() {
+    /** @type {?} */
+    AbstractFormGroupDirective.prototype._parent;
+    /** @type {?} */
+    AbstractFormGroupDirective.prototype._validators;
+    /** @type {?} */
+    AbstractFormGroupDirective.prototype._asyncValidators;
+}
 //# sourceMappingURL=abstract_form_group_directive.js.map
 
 /***/ },
@@ -1003,33 +1115,53 @@ var AbstractFormGroupDirective = (function (_super) {
  */
 
 
-var CHECKBOX_VALUE_ACCESSOR = {
+var /** @type {?} */ CHECKBOX_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return CheckboxControlValueAccessor; }),
     multi: true,
 };
 /**
- * The accessor for writing a value and listening to changes on a checkbox input element.
- *
- *  ### Example
- *  ```
- *  <input type="checkbox" name="rememberLogin" ngModel>
- *  ```
- *
- *  @stable
+ *  The accessor for writing a value and listening to changes on a checkbox input element.
+  * *
+  * ### Example
+  * ```
+  * <input type="checkbox" name="rememberLogin" ngModel>
+  * ```
+  * *
+  * @stable
  */
 var CheckboxControlValueAccessor = (function () {
+    /**
+     * @param {?} _renderer
+     * @param {?} _elementRef
+     */
     function CheckboxControlValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
         this.onChange = function (_) { };
         this.onTouched = function () { };
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     CheckboxControlValueAccessor.prototype.writeValue = function (value) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'checked', value);
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     CheckboxControlValueAccessor.prototype.registerOnChange = function (fn) { this.onChange = fn; };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     CheckboxControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     CheckboxControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
@@ -1041,12 +1173,29 @@ var CheckboxControlValueAccessor = (function () {
                 },] },
     ];
     /** @nocollapse */
-    CheckboxControlValueAccessor.ctorParameters = [
+    CheckboxControlValueAccessor.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
-    ];
+    ]; };
     return CheckboxControlValueAccessor;
 }());
+function CheckboxControlValueAccessor_tsickle_Closure_declarations() {
+    /** @type {?} */
+    CheckboxControlValueAccessor.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    CheckboxControlValueAccessor.ctorParameters;
+    /** @type {?} */
+    CheckboxControlValueAccessor.prototype.onChange;
+    /** @type {?} */
+    CheckboxControlValueAccessor.prototype.onTouched;
+    /** @type {?} */
+    CheckboxControlValueAccessor.prototype._renderer;
+    /** @type {?} */
+    CheckboxControlValueAccessor.prototype._elementRef;
+}
 //# sourceMappingURL=checkbox_value_accessor.js.map
 
 /***/ },
@@ -1071,11 +1220,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 
 /**
- * A directive that contains multiple {@link NgControl}s.
- *
- * Only used by the forms module.
- *
- * @stable
+ *  A directive that contains multiple {@link NgControl}s.
+  * *
+  * Only used by the forms module.
+  * *
  */
 var ControlContainer = (function (_super) {
     __extends(ControlContainer, _super);
@@ -1084,7 +1232,8 @@ var ControlContainer = (function (_super) {
     }
     Object.defineProperty(ControlContainer.prototype, "formDirective", {
         /**
-         * Get the form to which this container belongs.
+         *  Get the form to which this container belongs.
+         * @return {?}
          */
         get: function () { return null; },
         enumerable: true,
@@ -1092,7 +1241,8 @@ var ControlContainer = (function (_super) {
     });
     Object.defineProperty(ControlContainer.prototype, "path", {
         /**
-         * Get the path to this container.
+         *  Get the path to this container.
+         * @return {?}
          */
         get: function () { return null; },
         enumerable: true,
@@ -1100,6 +1250,10 @@ var ControlContainer = (function (_super) {
     });
     return ControlContainer;
 }(__WEBPACK_IMPORTED_MODULE_0__abstract_control_directive__["a" /* AbstractControlDirective */]));
+function ControlContainer_tsickle_Closure_declarations() {
+    /** @type {?} */
+    ControlContainer.prototype.name;
+}
 //# sourceMappingURL=control_container.js.map
 
 /***/ },
@@ -1124,7 +1278,7 @@ var ControlContainer = (function (_super) {
  * See {@link DefaultValueAccessor} for how to implement one.
  * @stable
  */
-var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValueAccessor');
+var /** @type {?} */ NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValueAccessor');
 //# sourceMappingURL=control_value_accessor.js.map
 
 /***/ },
@@ -1146,35 +1300,55 @@ var NG_VALUE_ACCESSOR = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueT
  */
 
 
-var DEFAULT_VALUE_ACCESSOR = {
+var /** @type {?} */ DEFAULT_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return DefaultValueAccessor; }),
     multi: true
 };
 /**
- * The default accessor for writing a value and listening to changes that is used by the
- * {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName} directives.
- *
- *  ### Example
- *  ```
- *  <input type="text" name="searchQuery" ngModel>
- *  ```
- *
- *  @stable
+ *  The default accessor for writing a value and listening to changes that is used by the
+  * {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName} directives.
+  * *
+  * ### Example
+  * ```
+  * <input type="text" name="searchQuery" ngModel>
+  * ```
+  * *
+  * @stable
  */
 var DefaultValueAccessor = (function () {
+    /**
+     * @param {?} _renderer
+     * @param {?} _elementRef
+     */
     function DefaultValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
         this.onChange = function (_) { };
         this.onTouched = function () { };
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     DefaultValueAccessor.prototype.writeValue = function (value) {
-        var normalizedValue = value == null ? '' : value;
+        var /** @type {?} */ normalizedValue = value == null ? '' : value;
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', normalizedValue);
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     DefaultValueAccessor.prototype.registerOnChange = function (fn) { this.onChange = fn; };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     DefaultValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     DefaultValueAccessor.prototype.setDisabledState = function (isDisabled) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
@@ -1189,12 +1363,29 @@ var DefaultValueAccessor = (function () {
                 },] },
     ];
     /** @nocollapse */
-    DefaultValueAccessor.ctorParameters = [
+    DefaultValueAccessor.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
-    ];
+    ]; };
     return DefaultValueAccessor;
 }());
+function DefaultValueAccessor_tsickle_Closure_declarations() {
+    /** @type {?} */
+    DefaultValueAccessor.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    DefaultValueAccessor.ctorParameters;
+    /** @type {?} */
+    DefaultValueAccessor.prototype.onChange;
+    /** @type {?} */
+    DefaultValueAccessor.prototype.onTouched;
+    /** @type {?} */
+    DefaultValueAccessor.prototype._renderer;
+    /** @type {?} */
+    DefaultValueAccessor.prototype._elementRef;
+}
 //# sourceMappingURL=default_value_accessor.js.map
 
 /***/ },
@@ -1211,7 +1402,7 @@ var DefaultValueAccessor = (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var FormErrorExamples = {
+var /** @type {?} */ FormErrorExamples = {
     formControlName: "\n    <div [formGroup]=\"myGroup\">\n      <input formControlName=\"firstName\">\n    </div>\n\n    In your class:\n\n    this.myGroup = new FormGroup({\n       firstName: new FormControl()\n    });",
     formGroupName: "\n    <div [formGroup]=\"myGroup\">\n       <div formGroupName=\"person\">\n          <input formControlName=\"firstName\">\n       </div>\n    </div>\n\n    In your class:\n\n    this.myGroup = new FormGroup({\n       person: new FormGroup({ firstName: new FormControl() })\n    });",
     formArrayName: "\n    <div [formGroup]=\"myGroup\">\n      <div formArrayName=\"cities\">\n        <div *ngFor=\"let city of cityArray.controls; let i=index\">\n          <input [formControlName]=\"i\">\n        </div>\n      </div>\n    </div>\n\n    In your class:\n\n    this.cityArray = new FormArray([new FormControl('SF')]);\n    this.myGroup = new FormGroup({\n      cities: this.cityArray\n    });",
@@ -1241,16 +1432,19 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 
+/**
+ * @return {?}
+ */
 function unimplemented() {
     throw new Error('unimplemented');
 }
 /**
- * A base class that all control directive extend.
- * It binds a {@link FormControl} object to a DOM element.
- *
- * Used internally by Angular forms.
- *
- * @stable
+ *  A base class that all control directive extend.
+  * It binds a {@link FormControl} object to a DOM element.
+  * *
+  * Used internally by Angular forms.
+  * *
+ * @abstract
  */
 var NgControl = (function (_super) {
     __extends(NgControl, _super);
@@ -1266,17 +1460,41 @@ var NgControl = (function (_super) {
         this._rawAsyncValidators = [];
     }
     Object.defineProperty(NgControl.prototype, "validator", {
-        get: function () { return unimplemented(); },
+        /**
+         * @return {?}
+         */
+        get: function () { return (unimplemented()); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgControl.prototype, "asyncValidator", {
-        get: function () { return unimplemented(); },
+        /**
+         * @return {?}
+         */
+        get: function () { return (unimplemented()); },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @abstract
+     * @param {?} newValue
+     * @return {?}
+     */
+    NgControl.prototype.viewToModelUpdate = function (newValue) { };
     return NgControl;
 }(__WEBPACK_IMPORTED_MODULE_0__abstract_control_directive__["a" /* AbstractControlDirective */]));
+function NgControl_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgControl.prototype._parent;
+    /** @type {?} */
+    NgControl.prototype.name;
+    /** @type {?} */
+    NgControl.prototype.valueAccessor;
+    /** @type {?} */
+    NgControl.prototype._rawValidators;
+    /** @type {?} */
+    NgControl.prototype._rawAsyncValidators;
+}
 //# sourceMappingURL=ng_control.js.map
 
 /***/ },
@@ -1308,47 +1526,75 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 var AbstractControlStatus = (function () {
+    /**
+     * @param {?} cd
+     */
     function AbstractControlStatus(cd) {
         this._cd = cd;
     }
     Object.defineProperty(AbstractControlStatus.prototype, "ngClassUntouched", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._cd.control ? this._cd.control.untouched : false; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlStatus.prototype, "ngClassTouched", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._cd.control ? this._cd.control.touched : false; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlStatus.prototype, "ngClassPristine", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._cd.control ? this._cd.control.pristine : false; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlStatus.prototype, "ngClassDirty", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._cd.control ? this._cd.control.dirty : false; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlStatus.prototype, "ngClassValid", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._cd.control ? this._cd.control.valid : false; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlStatus.prototype, "ngClassInvalid", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._cd.control ? this._cd.control.invalid : false; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControlStatus.prototype, "ngClassPending", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._cd.control ? this._cd.control.pending : false; },
         enumerable: true,
         configurable: true
     });
     return AbstractControlStatus;
 }());
-var ngControlStatusHost = {
+function AbstractControlStatus_tsickle_Closure_declarations() {
+    /** @type {?} */
+    AbstractControlStatus.prototype._cd;
+}
+var /** @type {?} */ ngControlStatusHost = {
     '[class.ng-untouched]': 'ngClassUntouched',
     '[class.ng-touched]': 'ngClassTouched',
     '[class.ng-pristine]': 'ngClassPristine',
@@ -1358,13 +1604,15 @@ var ngControlStatusHost = {
     '[class.ng-pending]': 'ngClassPending',
 };
 /**
- * Directive automatically applied to Angular form controls that sets CSS classes
- * based on control status (valid/invalid/dirty/etc).
- *
- * @stable
+ *  Directive automatically applied to Angular form controls that sets CSS classes
+  * based on control status (valid/invalid/dirty/etc).
+  * *
  */
 var NgControlStatus = (function (_super) {
     __extends(NgControlStatus, _super);
+    /**
+     * @param {?} cd
+     */
     function NgControlStatus(cd) {
         _super.call(this, cd);
     }
@@ -1372,19 +1620,30 @@ var NgControlStatus = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[formControlName],[ngModel],[formControl]', host: ngControlStatusHost },] },
     ];
     /** @nocollapse */
-    NgControlStatus.ctorParameters = [
+    NgControlStatus.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_2__ng_control__["a" /* NgControl */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] },] },
-    ];
+    ]; };
     return NgControlStatus;
 }(AbstractControlStatus));
+function NgControlStatus_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgControlStatus.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NgControlStatus.ctorParameters;
+}
 /**
- * Directive automatically applied to Angular form groups that sets CSS classes
- * based on control status (valid/invalid/dirty/etc).
- *
- * @stable
+ *  Directive automatically applied to Angular form groups that sets CSS classes
+  * based on control status (valid/invalid/dirty/etc).
+  * *
  */
 var NgControlStatusGroup = (function (_super) {
     __extends(NgControlStatusGroup, _super);
+    /**
+     * @param {?} cd
+     */
     function NgControlStatusGroup(cd) {
         _super.call(this, cd);
     }
@@ -1395,11 +1654,20 @@ var NgControlStatusGroup = (function (_super) {
                 },] },
     ];
     /** @nocollapse */
-    NgControlStatusGroup.ctorParameters = [
+    NgControlStatusGroup.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_1__control_container__["a" /* ControlContainer */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] },] },
-    ];
+    ]; };
     return NgControlStatusGroup;
 }(AbstractControlStatus));
+function NgControlStatusGroup_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgControlStatusGroup.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NgControlStatusGroup.ctorParameters;
+}
 //# sourceMappingURL=ng_control_status.js.map
 
 /***/ },
@@ -1434,44 +1702,46 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 
-var formDirectiveProvider = {
+var /** @type {?} */ formDirectiveProvider = {
     provide: __WEBPACK_IMPORTED_MODULE_4__control_container__["a" /* ControlContainer */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return NgForm; })
 };
-var resolvedPromise = Promise.resolve(null);
+var /** @type {?} */ resolvedPromise = Promise.resolve(null);
 /**
- * @whatItDoes Creates a top-level {@link FormGroup} instance and binds it to a form
- * to track aggregate form value and validation status.
- *
- * @howToUse
- *
- * As soon as you import the `FormsModule`, this directive becomes active by default on
- * all `<form>` tags.  You don't need to add a special selector.
- *
- * You can export the directive into a local template variable using `ngForm` as the key
- * (ex: `#myForm="ngForm"`). This is optional, but useful.  Many properties from the underlying
- * {@link FormGroup} instance are duplicated on the directive itself, so a reference to it
- * will give you access to the aggregate value and validity status of the form, as well as
- * user interaction properties like `dirty` and `touched`.
- *
- * To register child controls with the form, you'll want to use {@link NgModel} with a
- * `name` attribute.  You can also use {@link NgModelGroup} if you'd like to create
- * sub-groups within the form.
- *
- * You can listen to the directive's `ngSubmit` event to be notified when the user has
- * triggered a form submission. The `ngSubmit` event will be emitted with the original form
- * submission event.
- *
- * {@example forms/ts/simpleForm/simple_form_example.ts region='Component'}
- *
- * * **npm package**: `@angular/forms`
- *
- * * **NgModule**: `FormsModule`
- *
- *  @stable
+ *  to track aggregate form value and validation status.
+  * *
+  * *
+  * As soon as you import the `FormsModule`, this directive becomes active by default on
+  * all `<form>` tags.  You don't need to add a special selector.
+  * *
+  * You can export the directive into a local template variable using `ngForm` as the key
+  * (ex: `#myForm="ngForm"`). This is optional, but useful.  Many properties from the underlying
+  * {@link FormGroup} instance are duplicated on the directive itself, so a reference to it
+  * will give you access to the aggregate value and validity status of the form, as well as
+  * user interaction properties like `dirty` and `touched`.
+  * *
+  * To register child controls with the form, you'll want to use {@link NgModel} with a
+  * `name` attribute.  You can also use {@link NgModelGroup} if you'd like to create
+  * sub-groups within the form.
+  * *
+  * You can listen to the directive's `ngSubmit` event to be notified when the user has
+  * triggered a form submission. The `ngSubmit` event will be emitted with the original form
+  * submission event.
+  * *
+  * {@example forms/ts/simpleForm/simple_form_example.ts region='Component'}
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
+  * * **NgModule**: `FormsModule`
+  * *
+  * @stable
  */
 var NgForm = (function (_super) {
     __extends(NgForm, _super);
+    /**
+     * @param {?} validators
+     * @param {?} asyncValidators
+     */
     function NgForm(validators, asyncValidators) {
         _super.call(this);
         this._submitted = false;
@@ -1480,92 +1750,154 @@ var NgForm = (function (_super) {
             new __WEBPACK_IMPORTED_MODULE_2__model__["a" /* FormGroup */]({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared__["b" /* composeValidators */])(validators), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared__["c" /* composeAsyncValidators */])(asyncValidators));
     }
     Object.defineProperty(NgForm.prototype, "submitted", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._submitted; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForm.prototype, "formDirective", {
+        /**
+         * @return {?}
+         */
         get: function () { return this; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForm.prototype, "control", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.form; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForm.prototype, "path", {
+        /**
+         * @return {?}
+         */
         get: function () { return []; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgForm.prototype, "controls", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.form.controls; },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     NgForm.prototype.addControl = function (dir) {
         var _this = this;
         resolvedPromise.then(function () {
-            var container = _this._findContainer(dir.path);
-            dir._control = container.registerControl(dir.name, dir.control);
+            var /** @type {?} */ container = _this._findContainer(dir.path);
+            dir._control = (container.registerControl(dir.name, dir.control));
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared__["d" /* setUpControl */])(dir.control, dir);
             dir.control.updateValueAndValidity({ emitEvent: false });
         });
     };
-    NgForm.prototype.getControl = function (dir) { return this.form.get(dir.path); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
+    NgForm.prototype.getControl = function (dir) { return (this.form.get(dir.path)); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     NgForm.prototype.removeControl = function (dir) {
         var _this = this;
         resolvedPromise.then(function () {
-            var container = _this._findContainer(dir.path);
+            var /** @type {?} */ container = _this._findContainer(dir.path);
             if (container) {
                 container.removeControl(dir.name);
             }
         });
     };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     NgForm.prototype.addFormGroup = function (dir) {
         var _this = this;
         resolvedPromise.then(function () {
-            var container = _this._findContainer(dir.path);
-            var group = new __WEBPACK_IMPORTED_MODULE_2__model__["a" /* FormGroup */]({});
+            var /** @type {?} */ container = _this._findContainer(dir.path);
+            var /** @type {?} */ group = new __WEBPACK_IMPORTED_MODULE_2__model__["a" /* FormGroup */]({});
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared__["e" /* setUpFormContainer */])(group, dir);
             container.registerControl(dir.name, group);
             group.updateValueAndValidity({ emitEvent: false });
         });
     };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     NgForm.prototype.removeFormGroup = function (dir) {
         var _this = this;
         resolvedPromise.then(function () {
-            var container = _this._findContainer(dir.path);
+            var /** @type {?} */ container = _this._findContainer(dir.path);
             if (container) {
                 container.removeControl(dir.name);
             }
         });
     };
-    NgForm.prototype.getFormGroup = function (dir) { return this.form.get(dir.path); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
+    NgForm.prototype.getFormGroup = function (dir) { return (this.form.get(dir.path)); };
+    /**
+     * @param {?} dir
+     * @param {?} value
+     * @return {?}
+     */
     NgForm.prototype.updateModel = function (dir, value) {
         var _this = this;
         resolvedPromise.then(function () {
-            var ctrl = _this.form.get(dir.path);
+            var /** @type {?} */ ctrl = (_this.form.get(dir.path));
             ctrl.setValue(value);
         });
     };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     NgForm.prototype.setValue = function (value) { this.control.setValue(value); };
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
     NgForm.prototype.onSubmit = function ($event) {
         this._submitted = true;
         this.ngSubmit.emit($event);
         return false;
     };
+    /**
+     * @return {?}
+     */
     NgForm.prototype.onReset = function () { this.resetForm(); };
+    /**
+     * @param {?=} value
+     * @return {?}
+     */
     NgForm.prototype.resetForm = function (value) {
         if (value === void 0) { value = undefined; }
         this.form.reset(value);
         this._submitted = false;
     };
-    /** @internal */
+    /**
+     * @param {?} path
+     * @return {?}
+     */
     NgForm.prototype._findContainer = function (path) {
         path.pop();
-        return path.length ? this.form.get(path) : this.form;
+        return path.length ? (this.form.get(path)) : this.form;
     };
     NgForm.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{
@@ -1577,12 +1909,27 @@ var NgForm = (function (_super) {
                 },] },
     ];
     /** @nocollapse */
-    NgForm.ctorParameters = [
+    NgForm.ctorParameters = function () { return [
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_3__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_3__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
-    ];
+    ]; };
     return NgForm;
 }(__WEBPACK_IMPORTED_MODULE_4__control_container__["a" /* ControlContainer */]));
+function NgForm_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgForm.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NgForm.ctorParameters;
+    /** @type {?} */
+    NgForm.prototype._submitted;
+    /** @type {?} */
+    NgForm.prototype.form;
+    /** @type {?} */
+    NgForm.prototype.ngSubmit;
+}
 //# sourceMappingURL=ng_form.js.map
 
 /***/ },
@@ -1629,7 +1976,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 
-var formControlBinding = {
+var /** @type {?} */ formControlBinding = {
     provide: __WEBPACK_IMPORTED_MODULE_7__ng_control__["a" /* NgControl */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return NgModel; })
 };
@@ -1650,67 +1997,71 @@ var formControlBinding = {
  * - this is just one extra run no matter how many `ngModel` have been changed.
  * - this is a general problem when using `exportAs` for directives!
  */
-var resolvedPromise = Promise.resolve(null);
+var /** @type {?} */ resolvedPromise = Promise.resolve(null);
 /**
- * @whatItDoes Creates a {@link FormControl} instance from a domain model and binds it
- * to a form control element.
- *
- * The {@link FormControl} instance will track the value, user interaction, and
- * validation status of the control and keep the view synced with the model. If used
- * within a parent form, the directive will also register itself with the form as a child
- * control.
- *
- * @howToUse
- *
- * This directive can be used by itself or as part of a larger form. All you need is the
- * `ngModel` selector to activate it.
- *
- * It accepts a domain model as an optional {@link @Input}. If you have a one-way binding
- * to `ngModel` with `[]` syntax, changing the value of the domain model in the component
- * class will set the value in the view. If you have a two-way binding with `[()]` syntax
- * (also known as 'banana-box syntax'), the value in the UI will always be synced back to
- * the domain model in your class as well.
- *
- * If you wish to inspect the properties of the associated {@link FormControl} (like
- * validity state), you can also export the directive into a local template variable using
- * `ngModel` as the key (ex: `#myVar="ngModel"`). You can then access the control using the
- * directive's `control` property, but most properties you'll need (like `valid` and `dirty`)
- * will fall through to the control anyway, so you can access them directly. You can see a
- * full list of properties directly available in {@link AbstractControlDirective}.
- *
- * The following is an example of a simple standalone control using `ngModel`:
- *
- * {@example forms/ts/simpleNgModel/simple_ng_model_example.ts region='Component'}
- *
- * When using the `ngModel` within `<form>` tags, you'll also need to supply a `name` attribute
- * so that the control can be registered with the parent form under that name.
- *
- * It's worth noting that in the context of a parent form, you often can skip one-way or
- * two-way binding because the parent form will sync the value for you. You can access
- * its properties by exporting it into a local template variable using `ngForm` (ex:
- * `#f="ngForm"`). Then you can pass it where it needs to go on submit.
- *
- * If you do need to populate initial values into your form, using a one-way binding for
- * `ngModel` tends to be sufficient as long as you use the exported form's value rather
- * than the domain model's value on submit.
- *
- * Take a look at an example of using `ngModel` within a form:
- *
- * {@example forms/ts/simpleForm/simple_form_example.ts region='Component'}
- *
- * To see `ngModel` examples with different form control types, see:
- *
- * * Radio buttons: {@link RadioControlValueAccessor}
- * * Selects: {@link SelectControlValueAccessor}
- *
- * **npm package**: `@angular/forms`
- *
- * **NgModule**: `FormsModule`
- *
- *  @stable
+ *  to a form control element.
+  * *
+  * The {@link FormControl} instance will track the value, user interaction, and
+  * validation status of the control and keep the view synced with the model. If used
+  * within a parent form, the directive will also register itself with the form as a child
+  * control.
+  * *
+  * *
+  * This directive can be used by itself or as part of a larger form. All you need is the
+  * `ngModel` selector to activate it.
+  * *
+  * It accepts a domain model as an optional {@link @Input}. If you have a one-way binding
+  * to `ngModel` with `[]` syntax, changing the value of the domain model in the component
+  * class will set the value in the view. If you have a two-way binding with `[()]` syntax
+  * (also known as 'banana-box syntax'), the value in the UI will always be synced back to
+  * the domain model in your class as well.
+  * *
+  * If you wish to inspect the properties of the associated {@link FormControl} (like
+  * validity state), you can also export the directive into a local template variable using
+  * `ngModel` as the key (ex: `#myVar="ngModel"`). You can then access the control using the
+  * directive's `control` property, but most properties you'll need (like `valid` and `dirty`)
+  * will fall through to the control anyway, so you can access them directly. You can see a
+  * full list of properties directly available in {@link AbstractControlDirective}.
+  * *
+  * The following is an example of a simple standalone control using `ngModel`:
+  * *
+  * {@example forms/ts/simpleNgModel/simple_ng_model_example.ts region='Component'}
+  * *
+  * When using the `ngModel` within `<form>` tags, you'll also need to supply a `name` attribute
+  * so that the control can be registered with the parent form under that name.
+  * *
+  * It's worth noting that in the context of a parent form, you often can skip one-way or
+  * two-way binding because the parent form will sync the value for you. You can access
+  * its properties by exporting it into a local template variable using `ngForm` (ex:
+  * `#f="ngForm"`). Then you can pass it where it needs to go on submit.
+  * *
+  * If you do need to populate initial values into your form, using a one-way binding for
+  * `ngModel` tends to be sufficient as long as you use the exported form's value rather
+  * than the domain model's value on submit.
+  * *
+  * Take a look at an example of using `ngModel` within a form:
+  * *
+  * {@example forms/ts/simpleForm/simple_form_example.ts region='Component'}
+  * *
+  * To see `ngModel` examples with different form control types, see:
+  * *
+  * * Radio buttons: {@link RadioControlValueAccessor}
+  * * Selects: {@link SelectControlValueAccessor}
+  * *
+  * **npm package**: `@angular/forms`
+  * *
+  * **NgModule**: `FormsModule`
+  * *
+  * @stable
  */
 var NgModel = (function (_super) {
     __extends(NgModel, _super);
+    /**
+     * @param {?} parent
+     * @param {?} validators
+     * @param {?} asyncValidators
+     * @param {?} valueAccessors
+     */
     function NgModel(parent, validators, asyncValidators, valueAccessors) {
         _super.call(this);
         /** @internal */
@@ -1723,6 +2074,10 @@ var NgModel = (function (_super) {
         this._rawAsyncValidators = asyncValidators || [];
         this.valueAccessor = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__shared__["f" /* selectValueAccessor */])(this, valueAccessors);
     }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     NgModel.prototype.ngOnChanges = function (changes) {
         this._checkForErrors();
         if (!this._registered)
@@ -1735,13 +2090,22 @@ var NgModel = (function (_super) {
             this.viewModel = this.model;
         }
     };
+    /**
+     * @return {?}
+     */
     NgModel.prototype.ngOnDestroy = function () { this.formDirective && this.formDirective.removeControl(this); };
     Object.defineProperty(NgModel.prototype, "control", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._control; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgModel.prototype, "path", {
+        /**
+         * @return {?}
+         */
         get: function () {
             return this._parent ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__shared__["a" /* controlPath */])(this.name, this._parent) : [this.name];
         },
@@ -1749,44 +2113,72 @@ var NgModel = (function (_super) {
         configurable: true
     });
     Object.defineProperty(NgModel.prototype, "formDirective", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._parent ? this._parent.formDirective : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgModel.prototype, "validator", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__shared__["b" /* composeValidators */])(this._rawValidators); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(NgModel.prototype, "asyncValidator", {
+        /**
+         * @return {?}
+         */
         get: function () {
             return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__shared__["c" /* composeAsyncValidators */])(this._rawAsyncValidators);
         },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} newValue
+     * @return {?}
+     */
     NgModel.prototype.viewToModelUpdate = function (newValue) {
         this.viewModel = newValue;
         this.update.emit(newValue);
     };
+    /**
+     * @return {?}
+     */
     NgModel.prototype._setUpControl = function () {
         this._isStandalone() ? this._setUpStandalone() :
             this.formDirective.addControl(this);
         this._registered = true;
     };
+    /**
+     * @return {?}
+     */
     NgModel.prototype._isStandalone = function () {
         return !this._parent || (this.options && this.options.standalone);
     };
+    /**
+     * @return {?}
+     */
     NgModel.prototype._setUpStandalone = function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__shared__["d" /* setUpControl */])(this._control, this);
         this._control.updateValueAndValidity({ emitEvent: false });
     };
+    /**
+     * @return {?}
+     */
     NgModel.prototype._checkForErrors = function () {
         if (!this._isStandalone()) {
             this._checkParentType();
         }
         this._checkName();
     };
+    /**
+     * @return {?}
+     */
     NgModel.prototype._checkParentType = function () {
         if (!(this._parent instanceof __WEBPACK_IMPORTED_MODULE_9__ng_model_group__["a" /* NgModelGroup */]) &&
             this._parent instanceof __WEBPACK_IMPORTED_MODULE_4__abstract_form_group_directive__["a" /* AbstractFormGroupDirective */]) {
@@ -1796,6 +2188,9 @@ var NgModel = (function (_super) {
             __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__["a" /* TemplateDrivenErrors */].modelParentException();
         }
     };
+    /**
+     * @return {?}
+     */
     NgModel.prototype._checkName = function () {
         if (this.options && this.options.name)
             this.name = this.options.name;
@@ -1803,14 +2198,22 @@ var NgModel = (function (_super) {
             __WEBPACK_IMPORTED_MODULE_11__template_driven_errors__["a" /* TemplateDrivenErrors */].missingNameException();
         }
     };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     NgModel.prototype._updateValue = function (value) {
         var _this = this;
         resolvedPromise.then(function () { _this.control.setValue(value, { emitViewToModelChange: false }); });
     };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     NgModel.prototype._updateDisabled = function (changes) {
         var _this = this;
-        var disabledValue = changes['isDisabled'].currentValue;
-        var isDisabled = disabledValue === '' || (disabledValue && disabledValue !== 'false');
+        var /** @type {?} */ disabledValue = changes['isDisabled'].currentValue;
+        var /** @type {?} */ isDisabled = disabledValue === '' || (disabledValue && disabledValue !== 'false');
         resolvedPromise.then(function () {
             if (isDisabled && !_this.control.disabled) {
                 _this.control.disable();
@@ -1828,12 +2231,12 @@ var NgModel = (function (_super) {
                 },] },
     ];
     /** @nocollapse */
-    NgModel.ctorParameters = [
+    NgModel.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_5__control_container__["a" /* ControlContainer */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Host"] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_3__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_3__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_6__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],] },] },
-    ];
+    ]; };
     NgModel.propDecorators = {
         'name': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'isDisabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['disabled',] },],
@@ -1843,6 +2246,33 @@ var NgModel = (function (_super) {
     };
     return NgModel;
 }(__WEBPACK_IMPORTED_MODULE_7__ng_control__["a" /* NgControl */]));
+function NgModel_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgModel.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NgModel.ctorParameters;
+    /** @type {?} */
+    NgModel.propDecorators;
+    /** @type {?} */
+    NgModel.prototype._control;
+    /** @type {?} */
+    NgModel.prototype._registered;
+    /** @type {?} */
+    NgModel.prototype.viewModel;
+    /** @type {?} */
+    NgModel.prototype.name;
+    /** @type {?} */
+    NgModel.prototype.isDisabled;
+    /** @type {?} */
+    NgModel.prototype.model;
+    /** @type {?} */
+    NgModel.prototype.options;
+    /** @type {?} */
+    NgModel.prototype.update;
+}
 //# sourceMappingURL=ng_model.js.map
 
 /***/ },
@@ -1877,44 +2307,48 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 
-var modelGroupProvider = {
+var /** @type {?} */ modelGroupProvider = {
     provide: __WEBPACK_IMPORTED_MODULE_3__control_container__["a" /* ControlContainer */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return NgModelGroup; })
 };
 /**
- * @whatItDoes Creates and binds a {@link FormGroup} instance to a DOM element.
- *
- * @howToUse
- *
- * This directive can only be used as a child of {@link NgForm} (or in other words,
- * within `<form>` tags).
- *
- * Use this directive if you'd like to create a sub-group within a form. This can
- * come in handy if you want to validate a sub-group of your form separately from
- * the rest of your form, or if some values in your domain model make more sense to
- * consume together in a nested object.
- *
- * Pass in the name you'd like this sub-group to have and it will become the key
- * for the sub-group in the form's full value. You can also export the directive into
- * a local template variable using `ngModelGroup` (ex: `#myGroup="ngModelGroup"`).
- *
- * {@example forms/ts/ngModelGroup/ng_model_group_example.ts region='Component'}
- *
- * * **npm package**: `@angular/forms`
- *
- * * **NgModule**: `FormsModule`
- *
- * @stable
+ *  *
+  * *
+  * This directive can only be used as a child of {@link NgForm} (or in other words,
+  * within `<form>` tags).
+  * *
+  * Use this directive if you'd like to create a sub-group within a form. This can
+  * come in handy if you want to validate a sub-group of your form separately from
+  * the rest of your form, or if some values in your domain model make more sense to
+  * consume together in a nested object.
+  * *
+  * Pass in the name you'd like this sub-group to have and it will become the key
+  * for the sub-group in the form's full value. You can also export the directive into
+  * a local template variable using `ngModelGroup` (ex: `#myGroup="ngModelGroup"`).
+  * *
+  * {@example forms/ts/ngModelGroup/ng_model_group_example.ts region='Component'}
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
+  * * **NgModule**: `FormsModule`
+  * *
  */
 var NgModelGroup = (function (_super) {
     __extends(NgModelGroup, _super);
+    /**
+     * @param {?} parent
+     * @param {?} validators
+     * @param {?} asyncValidators
+     */
     function NgModelGroup(parent, validators, asyncValidators) {
         _super.call(this);
         this._parent = parent;
         this._validators = validators;
         this._asyncValidators = asyncValidators;
     }
-    /** @internal */
+    /**
+     * @return {?}
+     */
     NgModelGroup.prototype._checkParentType = function () {
         if (!(this._parent instanceof NgModelGroup) && !(this._parent instanceof __WEBPACK_IMPORTED_MODULE_4__ng_form__["a" /* NgForm */])) {
             __WEBPACK_IMPORTED_MODULE_5__template_driven_errors__["a" /* TemplateDrivenErrors */].modelGroupParentException();
@@ -1924,16 +2358,29 @@ var NgModelGroup = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[ngModelGroup]', providers: [modelGroupProvider], exportAs: 'ngModelGroup' },] },
     ];
     /** @nocollapse */
-    NgModelGroup.ctorParameters = [
+    NgModelGroup.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_3__control_container__["a" /* ControlContainer */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Host"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["SkipSelf"] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_1__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
-    ];
+    ]; };
     NgModelGroup.propDecorators = {
         'name': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['ngModelGroup',] },],
     };
     return NgModelGroup;
 }(__WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__["a" /* AbstractFormGroupDirective */]));
+function NgModelGroup_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgModelGroup.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NgModelGroup.ctorParameters;
+    /** @type {?} */
+    NgModelGroup.propDecorators;
+    /** @type {?} */
+    NgModelGroup.prototype.name;
+}
 //# sourceMappingURL=ng_model_group.js.map
 
 /***/ },
@@ -1951,20 +2398,28 @@ var NgModelGroup = (function (_super) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * @param {?} validator
+ * @return {?}
+ */
 function normalizeValidator(validator) {
-    if (validator.validate) {
-        return function (c) { return validator.validate(c); };
+    if (((validator)).validate) {
+        return function (c) { return ((validator)).validate(c); };
     }
     else {
-        return validator;
+        return (validator);
     }
 }
+/**
+ * @param {?} validator
+ * @return {?}
+ */
 function normalizeAsyncValidator(validator) {
-    if (validator.validate) {
-        return function (c) { return validator.validate(c); };
+    if (((validator)).validate) {
+        return function (c) { return ((validator)).validate(c); };
     }
     else {
-        return validator;
+        return (validator);
     }
 }
 //# sourceMappingURL=normalize_validator.js.map
@@ -1988,36 +2443,56 @@ function normalizeAsyncValidator(validator) {
  */
 
 
-var NUMBER_VALUE_ACCESSOR = {
+var /** @type {?} */ NUMBER_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return NumberValueAccessor; }),
     multi: true
 };
 /**
- * The accessor for writing a number value and listening to changes that is used by the
- * {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName} directives.
- *
- *  ### Example
- *  ```
- *  <input type="number" [(ngModel)]="age">
- *  ```
+ *  The accessor for writing a number value and listening to changes that is used by the
+  * {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName} directives.
+  * *
+  * ### Example
+  * ```
+  * <input type="number" [(ngModel)]="age">
+  * ```
  */
 var NumberValueAccessor = (function () {
+    /**
+     * @param {?} _renderer
+     * @param {?} _elementRef
+     */
     function NumberValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
         this.onChange = function (_) { };
         this.onTouched = function () { };
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     NumberValueAccessor.prototype.writeValue = function (value) {
         // The value needs to be normalized for IE9, otherwise it is set to 'null' when null
-        var normalizedValue = value == null ? '' : value;
+        var /** @type {?} */ normalizedValue = value == null ? '' : value;
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', normalizedValue);
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     NumberValueAccessor.prototype.registerOnChange = function (fn) {
         this.onChange = function (value) { fn(value == '' ? null : parseFloat(value)); };
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     NumberValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     NumberValueAccessor.prototype.setDisabledState = function (isDisabled) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
@@ -2033,12 +2508,29 @@ var NumberValueAccessor = (function () {
                 },] },
     ];
     /** @nocollapse */
-    NumberValueAccessor.ctorParameters = [
+    NumberValueAccessor.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
-    ];
+    ]; };
     return NumberValueAccessor;
 }());
+function NumberValueAccessor_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NumberValueAccessor.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NumberValueAccessor.ctorParameters;
+    /** @type {?} */
+    NumberValueAccessor.prototype.onChange;
+    /** @type {?} */
+    NumberValueAccessor.prototype.onTouched;
+    /** @type {?} */
+    NumberValueAccessor.prototype._renderer;
+    /** @type {?} */
+    NumberValueAccessor.prototype._elementRef;
+}
 //# sourceMappingURL=number_value_accessor.js.map
 
 /***/ },
@@ -2063,29 +2555,42 @@ var NumberValueAccessor = (function () {
 
 
 
-var RADIO_VALUE_ACCESSOR = {
+var /** @type {?} */ RADIO_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return RadioControlValueAccessor; }),
     multi: true
 };
 /**
- * Internal class used by Angular to uncheck radio buttons with the matching name.
+ *  Internal class used by Angular to uncheck radio buttons with the matching name.
  */
 var RadioControlRegistry = (function () {
     function RadioControlRegistry() {
         this._accessors = [];
     }
+    /**
+     * @param {?} control
+     * @param {?} accessor
+     * @return {?}
+     */
     RadioControlRegistry.prototype.add = function (control, accessor) {
         this._accessors.push([control, accessor]);
     };
+    /**
+     * @param {?} accessor
+     * @return {?}
+     */
     RadioControlRegistry.prototype.remove = function (accessor) {
-        for (var i = this._accessors.length - 1; i >= 0; --i) {
+        for (var /** @type {?} */ i = this._accessors.length - 1; i >= 0; --i) {
             if (this._accessors[i][1] === accessor) {
                 this._accessors.splice(i, 1);
                 return;
             }
         }
     };
+    /**
+     * @param {?} accessor
+     * @return {?}
+     */
     RadioControlRegistry.prototype.select = function (accessor) {
         var _this = this;
         this._accessors.forEach(function (c) {
@@ -2094,6 +2599,11 @@ var RadioControlRegistry = (function () {
             }
         });
     };
+    /**
+     * @param {?} controlPair
+     * @param {?} accessor
+     * @return {?}
+     */
     RadioControlRegistry.prototype._isSameGroup = function (controlPair, accessor) {
         if (!controlPair[0].control)
             return false;
@@ -2104,39 +2614,54 @@ var RadioControlRegistry = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
     ];
     /** @nocollapse */
-    RadioControlRegistry.ctorParameters = [];
+    RadioControlRegistry.ctorParameters = function () { return []; };
     return RadioControlRegistry;
 }());
+function RadioControlRegistry_tsickle_Closure_declarations() {
+    /** @type {?} */
+    RadioControlRegistry.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    RadioControlRegistry.ctorParameters;
+    /** @type {?} */
+    RadioControlRegistry.prototype._accessors;
+}
 /**
- * @whatItDoes  Writes radio control values and listens to radio control changes.
- *
- * Used by {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName}
- * to keep the view synced with the {@link FormControl} model.
- *
- * @howToUse
- *
- * If you have imported the {@link FormsModule} or the {@link ReactiveFormsModule}, this
- * value accessor will be active on any radio control that has a form directive. You do
- * **not** need to add a special selector to activate it.
- *
- * ### How to use radio buttons with form directives
- *
- * To use radio buttons in a template-driven form, you'll want to ensure that radio buttons
- * in the same group have the same `name` attribute.  Radio buttons with different `name`
- * attributes do not affect each other.
- *
- * {@example forms/ts/radioButtons/radio_button_example.ts region='TemplateDriven'}
- *
- * When using radio buttons in a reactive form, radio buttons in the same group should have the
- * same `formControlName`. You can also add a `name` attribute, but it's optional.
- *
- * {@example forms/ts/reactiveRadioButtons/reactive_radio_button_example.ts region='Reactive'}
- *
- *  * **npm package**: `@angular/forms`
- *
- *  @stable
+ *  *
+  * Used by {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName}
+  * to keep the view synced with the {@link FormControl} model.
+  * *
+  * *
+  * If you have imported the {@link FormsModule} or the {@link ReactiveFormsModule}, this
+  * value accessor will be active on any radio control that has a form directive. You do
+  * **not** need to add a special selector to activate it.
+  * *
+  * ### How to use radio buttons with form directives
+  * *
+  * To use radio buttons in a template-driven form, you'll want to ensure that radio buttons
+  * in the same group have the same `name` attribute.  Radio buttons with different `name`
+  * attributes do not affect each other.
+  * *
+  * {@example forms/ts/radioButtons/radio_button_example.ts region='TemplateDriven'}
+  * *
+  * When using radio buttons in a reactive form, radio buttons in the same group should have the
+  * same `formControlName`. You can also add a `name` attribute, but it's optional.
+  * *
+  * {@example forms/ts/reactiveRadioButtons/reactive_radio_button_example.ts region='Reactive'}
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
+  * @stable
  */
 var RadioControlValueAccessor = (function () {
+    /**
+     * @param {?} _renderer
+     * @param {?} _elementRef
+     * @param {?} _registry
+     * @param {?} _injector
+     */
     function RadioControlValueAccessor(_renderer, _elementRef, _registry, _injector) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -2145,16 +2670,30 @@ var RadioControlValueAccessor = (function () {
         this.onChange = function () { };
         this.onTouched = function () { };
     }
+    /**
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype.ngOnInit = function () {
         this._control = this._injector.get(__WEBPACK_IMPORTED_MODULE_2__ng_control__["a" /* NgControl */]);
         this._checkName();
         this._registry.add(this._control, this);
     };
+    /**
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype.ngOnDestroy = function () { this._registry.remove(this); };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype.writeValue = function (value) {
         this._state = value === this.value;
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'checked', this._state);
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype.registerOnChange = function (fn) {
         var _this = this;
         this._fn = fn;
@@ -2163,11 +2702,26 @@ var RadioControlValueAccessor = (function () {
             _this._registry.select(_this);
         };
     };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype.fireUncheck = function (value) { this.writeValue(value); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
+    /**
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype._checkName = function () {
         if (this.name && this.formControlName && this.name !== this.formControlName) {
             this._throwNameError();
@@ -2175,6 +2729,9 @@ var RadioControlValueAccessor = (function () {
         if (!this.name && this.formControlName)
             this.name = this.formControlName;
     };
+    /**
+     * @return {?}
+     */
     RadioControlValueAccessor.prototype._throwNameError = function () {
         throw new Error("\n      If you define both a name and a formControlName attribute on your radio button, their values\n      must match. Ex: <input type=\"radio\" formControlName=\"food\" name=\"food\">\n    ");
     };
@@ -2186,12 +2743,12 @@ var RadioControlValueAccessor = (function () {
                 },] },
     ];
     /** @nocollapse */
-    RadioControlValueAccessor.ctorParameters = [
+    RadioControlValueAccessor.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
         { type: RadioControlRegistry, },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"], },
-    ];
+    ]; };
     RadioControlValueAccessor.propDecorators = {
         'name': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
         'formControlName': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
@@ -2199,6 +2756,41 @@ var RadioControlValueAccessor = (function () {
     };
     return RadioControlValueAccessor;
 }());
+function RadioControlValueAccessor_tsickle_Closure_declarations() {
+    /** @type {?} */
+    RadioControlValueAccessor.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    RadioControlValueAccessor.ctorParameters;
+    /** @type {?} */
+    RadioControlValueAccessor.propDecorators;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype._state;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype._control;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype._fn;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype.onChange;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype.onTouched;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype.name;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype.formControlName;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype.value;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype._renderer;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype._elementRef;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype._registry;
+    /** @type {?} */
+    RadioControlValueAccessor.prototype._injector;
+}
 //# sourceMappingURL=radio_control_value_accessor.js.map
 
 /***/ },
@@ -2220,34 +2812,54 @@ var RadioControlValueAccessor = (function () {
  */
 
 
-var RANGE_VALUE_ACCESSOR = {
+var /** @type {?} */ RANGE_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return RangeValueAccessor; }),
     multi: true
 };
 /**
- * The accessor for writing a range value and listening to changes that is used by the
- * {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName} directives.
- *
- *  ### Example
- *  ```
- *  <input type="range" [(ngModel)]="age" >
- *  ```
+ *  The accessor for writing a range value and listening to changes that is used by the
+  * {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName} directives.
+  * *
+  * ### Example
+  * ```
+  * <input type="range" [(ngModel)]="age" >
+  * ```
  */
 var RangeValueAccessor = (function () {
+    /**
+     * @param {?} _renderer
+     * @param {?} _elementRef
+     */
     function RangeValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
         this.onChange = function (_) { };
         this.onTouched = function () { };
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     RangeValueAccessor.prototype.writeValue = function (value) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', parseFloat(value));
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     RangeValueAccessor.prototype.registerOnChange = function (fn) {
         this.onChange = function (value) { fn(value == '' ? null : parseFloat(value)); };
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     RangeValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     RangeValueAccessor.prototype.setDisabledState = function (isDisabled) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
@@ -2263,12 +2875,29 @@ var RangeValueAccessor = (function () {
                 },] },
     ];
     /** @nocollapse */
-    RangeValueAccessor.ctorParameters = [
+    RangeValueAccessor.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
-    ];
+    ]; };
     return RangeValueAccessor;
 }());
+function RangeValueAccessor_tsickle_Closure_declarations() {
+    /** @type {?} */
+    RangeValueAccessor.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    RangeValueAccessor.ctorParameters;
+    /** @type {?} */
+    RangeValueAccessor.prototype.onChange;
+    /** @type {?} */
+    RangeValueAccessor.prototype.onTouched;
+    /** @type {?} */
+    RangeValueAccessor.prototype._renderer;
+    /** @type {?} */
+    RangeValueAccessor.prototype._elementRef;
+}
 //# sourceMappingURL=range_value_accessor.js.map
 
 /***/ },
@@ -2305,54 +2934,57 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 
-var formControlBinding = {
+var /** @type {?} */ formControlBinding = {
     provide: __WEBPACK_IMPORTED_MODULE_4__ng_control__["a" /* NgControl */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return FormControlDirective; })
 };
 /**
- * @whatItDoes Syncs a standalone {@link FormControl} instance to a form control element.
- *
- * In other words, this directive ensures that any values written to the {@link FormControl}
- * instance programmatically will be written to the DOM element (model -> view). Conversely,
- * any values written to the DOM element through user input will be reflected in the
- * {@link FormControl} instance (view -> model).
- *
- * @howToUse
- *
- * Use this directive if you'd like to create and manage a {@link FormControl} instance directly.
- * Simply create a {@link FormControl}, save it to your component class, and pass it into the
- * {@link FormControlDirective}.
- *
- * This directive is designed to be used as a standalone control.  Unlike {@link FormControlName},
- * it does not require that your {@link FormControl} instance be part of any parent
- * {@link FormGroup}, and it won't be registered to any {@link FormGroupDirective} that
- * exists above it.
- *
- * **Get the value**: the `value` property is always synced and available on the
- * {@link FormControl} instance. See a full list of available properties in
- * {@link AbstractControl}.
- *
- * **Set the value**: You can pass in an initial value when instantiating the {@link FormControl},
- * or you can set it programmatically later using {@link AbstractControl.setValue} or
- * {@link AbstractControl.patchValue}.
- *
- * **Listen to value**: If you want to listen to changes in the value of the control, you can
- * subscribe to the {@link AbstractControl.valueChanges} event.  You can also listen to
- * {@link AbstractControl.statusChanges} to be notified when the validation status is
- * re-calculated.
- *
- * ### Example
- *
- * {@example forms/ts/simpleFormControl/simple_form_control_example.ts region='Component'}
- *
- * * **npm package**: `@angular/forms`
- *
- * * **NgModule**: `ReactiveFormsModule`
- *
- *  @stable
+ *  *
+  * In other words, this directive ensures that any values written to the {@link FormControl}
+  * instance programmatically will be written to the DOM element (model -> view). Conversely,
+  * any values written to the DOM element through user input will be reflected in the
+  * {@link FormControl} instance (view -> model).
+  * *
+  * *
+  * Use this directive if you'd like to create and manage a {@link FormControl} instance directly.
+  * Simply create a {@link FormControl}, save it to your component class, and pass it into the
+  * {@link FormControlDirective}.
+  * *
+  * This directive is designed to be used as a standalone control.  Unlike {@link FormControlName},
+  * it does not require that your {@link FormControl} instance be part of any parent
+  * {@link FormGroup}, and it won't be registered to any {@link FormGroupDirective} that
+  * exists above it.
+  * *
+  * **Get the value**: the `value` property is always synced and available on the
+  * {@link FormControl} instance. See a full list of available properties in
+  * {@link AbstractControl}.
+  * *
+  * **Set the value**: You can pass in an initial value when instantiating the {@link FormControl},
+  * or you can set it programmatically later using {@link AbstractControl.setValue} or
+  * {@link AbstractControl.patchValue}.
+  * *
+  * **Listen to value**: If you want to listen to changes in the value of the control, you can
+  * subscribe to the {@link AbstractControl.valueChanges} event.  You can also listen to
+  * {@link AbstractControl.statusChanges} to be notified when the validation status is
+  * re-calculated.
+  * *
+  * ### Example
+  * *
+  * {@example forms/ts/simpleFormControl/simple_form_control_example.ts region='Component'}
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
+  * * **NgModule**: `ReactiveFormsModule`
+  * *
+  * @stable
  */
 var FormControlDirective = (function (_super) {
     __extends(FormControlDirective, _super);
+    /**
+     * @param {?} validators
+     * @param {?} asyncValidators
+     * @param {?} valueAccessors
+     */
     function FormControlDirective(validators, asyncValidators, valueAccessors) {
         _super.call(this);
         this.update = new __WEBPACK_IMPORTED_MODULE_1__facade_async__["a" /* EventEmitter */]();
@@ -2361,10 +2993,18 @@ var FormControlDirective = (function (_super) {
         this.valueAccessor = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["f" /* selectValueAccessor */])(this, valueAccessors);
     }
     Object.defineProperty(FormControlDirective.prototype, "isDisabled", {
+        /**
+         * @param {?} isDisabled
+         * @return {?}
+         */
         set: function (isDisabled) { __WEBPACK_IMPORTED_MODULE_5__reactive_errors__["a" /* ReactiveErrors */].disabledAttrWarning(); },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     FormControlDirective.prototype.ngOnChanges = function (changes) {
         if (this._isControlChanged(changes)) {
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["d" /* setUpControl */])(this.form, this);
@@ -2379,16 +3019,25 @@ var FormControlDirective = (function (_super) {
         }
     };
     Object.defineProperty(FormControlDirective.prototype, "path", {
+        /**
+         * @return {?}
+         */
         get: function () { return []; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormControlDirective.prototype, "validator", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["b" /* composeValidators */])(this._rawValidators); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormControlDirective.prototype, "asyncValidator", {
+        /**
+         * @return {?}
+         */
         get: function () {
             return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["c" /* composeAsyncValidators */])(this._rawAsyncValidators);
         },
@@ -2396,14 +3045,25 @@ var FormControlDirective = (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormControlDirective.prototype, "control", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.form; },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} newValue
+     * @return {?}
+     */
     FormControlDirective.prototype.viewToModelUpdate = function (newValue) {
         this.viewModel = newValue;
         this.update.emit(newValue);
     };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     FormControlDirective.prototype._isControlChanged = function (changes) {
         return changes.hasOwnProperty('form');
     };
@@ -2411,11 +3071,11 @@ var FormControlDirective = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[formControl]', providers: [formControlBinding], exportAs: 'ngForm' },] },
     ];
     /** @nocollapse */
-    FormControlDirective.ctorParameters = [
+    FormControlDirective.ctorParameters = function () { return [
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_2__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_2__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_3__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],] },] },
-    ];
+    ]; };
     FormControlDirective.propDecorators = {
         'form': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['formControl',] },],
         'model': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['ngModel',] },],
@@ -2424,6 +3084,25 @@ var FormControlDirective = (function (_super) {
     };
     return FormControlDirective;
 }(__WEBPACK_IMPORTED_MODULE_4__ng_control__["a" /* NgControl */]));
+function FormControlDirective_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormControlDirective.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    FormControlDirective.ctorParameters;
+    /** @type {?} */
+    FormControlDirective.propDecorators;
+    /** @type {?} */
+    FormControlDirective.prototype.viewModel;
+    /** @type {?} */
+    FormControlDirective.prototype.form;
+    /** @type {?} */
+    FormControlDirective.prototype.model;
+    /** @type {?} */
+    FormControlDirective.prototype.update;
+}
 //# sourceMappingURL=form_control_directive.js.map
 
 /***/ },
@@ -2468,63 +3147,67 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 
-var controlNameBinding = {
+var /** @type {?} */ controlNameBinding = {
     provide: __WEBPACK_IMPORTED_MODULE_6__ng_control__["a" /* NgControl */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return FormControlName; })
 };
 /**
- * @whatItDoes  Syncs a {@link FormControl} in an existing {@link FormGroup} to a form control
- * element by name.
- *
- * In other words, this directive ensures that any values written to the {@link FormControl}
- * instance programmatically will be written to the DOM element (model -> view). Conversely,
- * any values written to the DOM element through user input will be reflected in the
- * {@link FormControl} instance (view -> model).
- *
- * @howToUse
- *
- * This directive is designed to be used with a parent {@link FormGroupDirective} (selector:
- * `[formGroup]`).
- *
- * It accepts the string name of the {@link FormControl} instance you want to
- * link, and will look for a {@link FormControl} registered with that name in the
- * closest {@link FormGroup} or {@link FormArray} above it.
- *
- * **Access the control**: You can access the {@link FormControl} associated with
- * this directive by using the {@link AbstractControl.get} method.
- * Ex: `this.form.get('first');`
- *
- * **Get value**: the `value` property is always synced and available on the {@link FormControl}.
- * See a full list of available properties in {@link AbstractControl}.
- *
- *  **Set value**: You can set an initial value for the control when instantiating the
- *  {@link FormControl}, or you can set it programmatically later using
- *  {@link AbstractControl.setValue} or {@link AbstractControl.patchValue}.
- *
- * **Listen to value**: If you want to listen to changes in the value of the control, you can
- * subscribe to the {@link AbstractControl.valueChanges} event.  You can also listen to
- * {@link AbstractControl.statusChanges} to be notified when the validation status is
- * re-calculated.
- *
- * ### Example
- *
- * In this example, we create form controls for first name and last name.
- *
- * {@example forms/ts/simpleFormGroup/simple_form_group_example.ts region='Component'}
- *
- * To see `formControlName` examples with different form control types, see:
- *
- * * Radio buttons: {@link RadioControlValueAccessor}
- * * Selects: {@link SelectControlValueAccessor}
- *
- * **npm package**: `@angular/forms`
- *
- * **NgModule**: {@link ReactiveFormsModule}
- *
- *  @stable
+ *  element by name.
+  * *
+  * In other words, this directive ensures that any values written to the {@link FormControl}
+  * instance programmatically will be written to the DOM element (model -> view). Conversely,
+  * any values written to the DOM element through user input will be reflected in the
+  * {@link FormControl} instance (view -> model).
+  * *
+  * *
+  * This directive is designed to be used with a parent {@link FormGroupDirective} (selector:
+  * `[formGroup]`).
+  * *
+  * It accepts the string name of the {@link FormControl} instance you want to
+  * link, and will look for a {@link FormControl} registered with that name in the
+  * closest {@link FormGroup} or {@link FormArray} above it.
+  * *
+  * **Access the control**: You can access the {@link FormControl} associated with
+  * this directive by using the {@link AbstractControl.get} method.
+  * Ex: `this.form.get('first');`
+  * *
+  * **Get value**: the `value` property is always synced and available on the {@link FormControl}.
+  * See a full list of available properties in {@link AbstractControl}.
+  * *
+  * **Set value**: You can set an initial value for the control when instantiating the
+  * {@link FormControl}, or you can set it programmatically later using
+  * {@link AbstractControl.setValue} or {@link AbstractControl.patchValue}.
+  * *
+  * **Listen to value**: If you want to listen to changes in the value of the control, you can
+  * subscribe to the {@link AbstractControl.valueChanges} event.  You can also listen to
+  * {@link AbstractControl.statusChanges} to be notified when the validation status is
+  * re-calculated.
+  * *
+  * ### Example
+  * *
+  * In this example, we create form controls for first name and last name.
+  * *
+  * {@example forms/ts/simpleFormGroup/simple_form_group_example.ts region='Component'}
+  * *
+  * To see `formControlName` examples with different form control types, see:
+  * *
+  * * Radio buttons: {@link RadioControlValueAccessor}
+  * * Selects: {@link SelectControlValueAccessor}
+  * *
+  * **npm package**: `@angular/forms`
+  * *
+  * **NgModule**: {@link ReactiveFormsModule}
+  * *
+  * @stable
  */
 var FormControlName = (function (_super) {
     __extends(FormControlName, _super);
+    /**
+     * @param {?} parent
+     * @param {?} validators
+     * @param {?} asyncValidators
+     * @param {?} valueAccessors
+     */
     function FormControlName(parent, validators, asyncValidators, valueAccessors) {
         _super.call(this);
         this._added = false;
@@ -2535,10 +3218,18 @@ var FormControlName = (function (_super) {
         this.valueAccessor = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__shared__["f" /* selectValueAccessor */])(this, valueAccessors);
     }
     Object.defineProperty(FormControlName.prototype, "isDisabled", {
+        /**
+         * @param {?} isDisabled
+         * @return {?}
+         */
         set: function (isDisabled) { __WEBPACK_IMPORTED_MODULE_7__reactive_errors__["a" /* ReactiveErrors */].disabledAttrWarning(); },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     FormControlName.prototype.ngOnChanges = function (changes) {
         if (!this._added)
             this._setUpControl();
@@ -2547,31 +3238,50 @@ var FormControlName = (function (_super) {
             this.formDirective.updateModel(this, this.model);
         }
     };
+    /**
+     * @return {?}
+     */
     FormControlName.prototype.ngOnDestroy = function () {
         if (this.formDirective) {
             this.formDirective.removeControl(this);
         }
     };
+    /**
+     * @param {?} newValue
+     * @return {?}
+     */
     FormControlName.prototype.viewToModelUpdate = function (newValue) {
         this.viewModel = newValue;
         this.update.emit(newValue);
     };
     Object.defineProperty(FormControlName.prototype, "path", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__shared__["a" /* controlPath */])(this.name, this._parent); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormControlName.prototype, "formDirective", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._parent ? this._parent.formDirective : null; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormControlName.prototype, "validator", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__shared__["b" /* composeValidators */])(this._rawValidators); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormControlName.prototype, "asyncValidator", {
+        /**
+         * @return {?}
+         */
         get: function () {
             return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__shared__["c" /* composeAsyncValidators */])(this._rawAsyncValidators);
         },
@@ -2579,10 +3289,16 @@ var FormControlName = (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormControlName.prototype, "control", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._control; },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @return {?}
+     */
     FormControlName.prototype._checkParentType = function () {
         if (!(this._parent instanceof __WEBPACK_IMPORTED_MODULE_10__form_group_name__["a" /* FormGroupName */]) &&
             this._parent instanceof __WEBPACK_IMPORTED_MODULE_3__abstract_form_group_directive__["a" /* AbstractFormGroupDirective */]) {
@@ -2593,6 +3309,9 @@ var FormControlName = (function (_super) {
             __WEBPACK_IMPORTED_MODULE_7__reactive_errors__["a" /* ReactiveErrors */].controlParentException();
         }
     };
+    /**
+     * @return {?}
+     */
     FormControlName.prototype._setUpControl = function () {
         this._checkParentType();
         this._control = this.formDirective.addControl(this);
@@ -2605,12 +3324,12 @@ var FormControlName = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[formControlName]', providers: [controlNameBinding] },] },
     ];
     /** @nocollapse */
-    FormControlName.ctorParameters = [
+    FormControlName.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_4__control_container__["a" /* ControlContainer */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Host"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["SkipSelf"] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_2__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_2__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_5__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],] },] },
-    ];
+    ]; };
     FormControlName.propDecorators = {
         'name': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['formControlName',] },],
         'model': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['ngModel',] },],
@@ -2619,6 +3338,29 @@ var FormControlName = (function (_super) {
     };
     return FormControlName;
 }(__WEBPACK_IMPORTED_MODULE_6__ng_control__["a" /* NgControl */]));
+function FormControlName_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormControlName.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    FormControlName.ctorParameters;
+    /** @type {?} */
+    FormControlName.propDecorators;
+    /** @type {?} */
+    FormControlName.prototype._added;
+    /** @type {?} */
+    FormControlName.prototype.viewModel;
+    /** @type {?} */
+    FormControlName.prototype._control;
+    /** @type {?} */
+    FormControlName.prototype.name;
+    /** @type {?} */
+    FormControlName.prototype.model;
+    /** @type {?} */
+    FormControlName.prototype.update;
+}
 //# sourceMappingURL=form_control_name.js.map
 
 /***/ },
@@ -2655,47 +3397,49 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 
-var formDirectiveProvider = {
+var /** @type {?} */ formDirectiveProvider = {
     provide: __WEBPACK_IMPORTED_MODULE_4__control_container__["a" /* ControlContainer */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return FormGroupDirective; })
 };
 /**
- * @whatItDoes Binds an existing {@link FormGroup} to a DOM element.
- *
- * @howToUse
- *
- * This directive accepts an existing {@link FormGroup} instance. It will then use this
- * {@link FormGroup} instance to match any child {@link FormControl}, {@link FormGroup},
- * and {@link FormArray} instances to child {@link FormControlName}, {@link FormGroupName},
- * and {@link FormArrayName} directives.
- *
- * **Set value**: You can set the form's initial value when instantiating the
- * {@link FormGroup}, or you can set it programmatically later using the {@link FormGroup}'s
- * {@link AbstractControl.setValue} or {@link AbstractControl.patchValue} methods.
- *
- * **Listen to value**: If you want to listen to changes in the value of the form, you can subscribe
- * to the {@link FormGroup}'s {@link AbstractControl.valueChanges} event.  You can also listen to
- * its {@link AbstractControl.statusChanges} event to be notified when the validation status is
- * re-calculated.
- *
- * Furthermore, you can listen to the directive's `ngSubmit` event to be notified when the user has
- * triggered a form submission. The `ngSubmit` event will be emitted with the original form
- * submission event.
- *
- * ### Example
- *
- * In this example, we create form controls for first name and last name.
- *
- * {@example forms/ts/simpleFormGroup/simple_form_group_example.ts region='Component'}
- *
- * **npm package**: `@angular/forms`
- *
- * **NgModule**: {@link ReactiveFormsModule}
- *
- *  @stable
+ *  *
+  * *
+  * This directive accepts an existing {@link FormGroup} instance. It will then use this
+  * {@link FormGroup} instance to match any child {@link FormControl}, {@link FormGroup},
+  * and {@link FormArray} instances to child {@link FormControlName}, {@link FormGroupName},
+  * and {@link FormArrayName} directives.
+  * *
+  * **Set value**: You can set the form's initial value when instantiating the
+  * {@link FormGroup}, or you can set it programmatically later using the {@link FormGroup}'s
+  * {@link AbstractControl.setValue} or {@link AbstractControl.patchValue} methods.
+  * *
+  * **Listen to value**: If you want to listen to changes in the value of the form, you can subscribe
+  * to the {@link FormGroup}'s {@link AbstractControl.valueChanges} event.  You can also listen to
+  * its {@link AbstractControl.statusChanges} event to be notified when the validation status is
+  * re-calculated.
+  * *
+  * Furthermore, you can listen to the directive's `ngSubmit` event to be notified when the user has
+  * triggered a form submission. The `ngSubmit` event will be emitted with the original form
+  * submission event.
+  * *
+  * ### Example
+  * *
+  * In this example, we create form controls for first name and last name.
+  * *
+  * {@example forms/ts/simpleFormGroup/simple_form_group_example.ts region='Component'}
+  * *
+  * **npm package**: `@angular/forms`
+  * *
+  * **NgModule**: {@link ReactiveFormsModule}
+  * *
+  * @stable
  */
 var FormGroupDirective = (function (_super) {
     __extends(FormGroupDirective, _super);
+    /**
+     * @param {?} _validators
+     * @param {?} _asyncValidators
+     */
     function FormGroupDirective(_validators, _asyncValidators) {
         _super.call(this);
         this._validators = _validators;
@@ -2705,6 +3449,10 @@ var FormGroupDirective = (function (_super) {
         this.form = null;
         this.ngSubmit = new __WEBPACK_IMPORTED_MODULE_1__facade_async__["a" /* EventEmitter */]();
     }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     FormGroupDirective.prototype.ngOnChanges = function (changes) {
         this._checkFormPresent();
         if (changes.hasOwnProperty('form')) {
@@ -2714,68 +3462,134 @@ var FormGroupDirective = (function (_super) {
         }
     };
     Object.defineProperty(FormGroupDirective.prototype, "submitted", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._submitted; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormGroupDirective.prototype, "formDirective", {
+        /**
+         * @return {?}
+         */
         get: function () { return this; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormGroupDirective.prototype, "control", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.form; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormGroupDirective.prototype, "path", {
+        /**
+         * @return {?}
+         */
         get: function () { return []; },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     FormGroupDirective.prototype.addControl = function (dir) {
-        var ctrl = this.form.get(dir.path);
+        var /** @type {?} */ ctrl = this.form.get(dir.path);
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["d" /* setUpControl */])(ctrl, dir);
         ctrl.updateValueAndValidity({ emitEvent: false });
         this.directives.push(dir);
         return ctrl;
     };
-    FormGroupDirective.prototype.getControl = function (dir) { return this.form.get(dir.path); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
+    FormGroupDirective.prototype.getControl = function (dir) { return (this.form.get(dir.path)); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     FormGroupDirective.prototype.removeControl = function (dir) { __WEBPACK_IMPORTED_MODULE_2__facade_collection__["b" /* ListWrapper */].remove(this.directives, dir); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     FormGroupDirective.prototype.addFormGroup = function (dir) {
-        var ctrl = this.form.get(dir.path);
+        var /** @type {?} */ ctrl = this.form.get(dir.path);
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["e" /* setUpFormContainer */])(ctrl, dir);
         ctrl.updateValueAndValidity({ emitEvent: false });
     };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     FormGroupDirective.prototype.removeFormGroup = function (dir) { };
-    FormGroupDirective.prototype.getFormGroup = function (dir) { return this.form.get(dir.path); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
+    FormGroupDirective.prototype.getFormGroup = function (dir) { return (this.form.get(dir.path)); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     FormGroupDirective.prototype.addFormArray = function (dir) {
-        var ctrl = this.form.get(dir.path);
+        var /** @type {?} */ ctrl = this.form.get(dir.path);
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["e" /* setUpFormContainer */])(ctrl, dir);
         ctrl.updateValueAndValidity({ emitEvent: false });
     };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
     FormGroupDirective.prototype.removeFormArray = function (dir) { };
-    FormGroupDirective.prototype.getFormArray = function (dir) { return this.form.get(dir.path); };
+    /**
+     * @param {?} dir
+     * @return {?}
+     */
+    FormGroupDirective.prototype.getFormArray = function (dir) { return (this.form.get(dir.path)); };
+    /**
+     * @param {?} dir
+     * @param {?} value
+     * @return {?}
+     */
     FormGroupDirective.prototype.updateModel = function (dir, value) {
-        var ctrl = this.form.get(dir.path);
+        var /** @type {?} */ ctrl = (this.form.get(dir.path));
         ctrl.setValue(value);
     };
+    /**
+     * @param {?} $event
+     * @return {?}
+     */
     FormGroupDirective.prototype.onSubmit = function ($event) {
         this._submitted = true;
         this.ngSubmit.emit($event);
         return false;
     };
+    /**
+     * @return {?}
+     */
     FormGroupDirective.prototype.onReset = function () { this.resetForm(); };
+    /**
+     * @param {?=} value
+     * @return {?}
+     */
     FormGroupDirective.prototype.resetForm = function (value) {
         if (value === void 0) { value = undefined; }
         this.form.reset(value);
         this._submitted = false;
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormGroupDirective.prototype._updateDomValue = function () {
         var _this = this;
         this.directives.forEach(function (dir) {
-            var newCtrl = _this.form.get(dir.path);
+            var /** @type {?} */ newCtrl = _this.form.get(dir.path);
             if (dir._control !== newCtrl) {
                 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["h" /* cleanUpControl */])(dir._control, dir);
                 if (newCtrl)
@@ -2785,6 +3599,9 @@ var FormGroupDirective = (function (_super) {
         });
         this.form._updateTreeValidity({ emitEvent: false });
     };
+    /**
+     * @return {?}
+     */
     FormGroupDirective.prototype._updateRegistrations = function () {
         var _this = this;
         this.form._registerOnCollectionChange(function () { return _this._updateDomValue(); });
@@ -2792,12 +3609,18 @@ var FormGroupDirective = (function (_super) {
             this._oldForm._registerOnCollectionChange(function () { });
         this._oldForm = this.form;
     };
+    /**
+     * @return {?}
+     */
     FormGroupDirective.prototype._updateValidators = function () {
-        var sync = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["b" /* composeValidators */])(this._validators);
+        var /** @type {?} */ sync = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["b" /* composeValidators */])(this._validators);
         this.form.validator = __WEBPACK_IMPORTED_MODULE_3__validators__["a" /* Validators */].compose([this.form.validator, sync]);
-        var async = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["c" /* composeAsyncValidators */])(this._asyncValidators);
+        var /** @type {?} */ async = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6__shared__["c" /* composeAsyncValidators */])(this._asyncValidators);
         this.form.asyncValidator = __WEBPACK_IMPORTED_MODULE_3__validators__["a" /* Validators */].composeAsync([this.form.asyncValidator, async]);
     };
+    /**
+     * @return {?}
+     */
     FormGroupDirective.prototype._checkFormPresent = function () {
         if (!this.form) {
             __WEBPACK_IMPORTED_MODULE_5__reactive_errors__["a" /* ReactiveErrors */].missingFormException();
@@ -2812,16 +3635,41 @@ var FormGroupDirective = (function (_super) {
                 },] },
     ];
     /** @nocollapse */
-    FormGroupDirective.ctorParameters = [
+    FormGroupDirective.ctorParameters = function () { return [
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_3__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_3__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
-    ];
+    ]; };
     FormGroupDirective.propDecorators = {
         'form': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['formGroup',] },],
         'ngSubmit': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
     };
     return FormGroupDirective;
 }(__WEBPACK_IMPORTED_MODULE_4__control_container__["a" /* ControlContainer */]));
+function FormGroupDirective_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormGroupDirective.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    FormGroupDirective.ctorParameters;
+    /** @type {?} */
+    FormGroupDirective.propDecorators;
+    /** @type {?} */
+    FormGroupDirective.prototype._submitted;
+    /** @type {?} */
+    FormGroupDirective.prototype._oldForm;
+    /** @type {?} */
+    FormGroupDirective.prototype.directives;
+    /** @type {?} */
+    FormGroupDirective.prototype.form;
+    /** @type {?} */
+    FormGroupDirective.prototype.ngSubmit;
+    /** @type {?} */
+    FormGroupDirective.prototype._validators;
+    /** @type {?} */
+    FormGroupDirective.prototype._asyncValidators;
+}
 //# sourceMappingURL=form_group_directive.js.map
 
 /***/ },
@@ -2860,63 +3708,67 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 
-var formGroupNameProvider = {
+var /** @type {?} */ formGroupNameProvider = {
     provide: __WEBPACK_IMPORTED_MODULE_3__control_container__["a" /* ControlContainer */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return FormGroupName; })
 };
 /**
- * @whatItDoes Syncs a nested {@link FormGroup} to a DOM element.
- *
- * @howToUse
- *
- * This directive can only be used with a parent {@link FormGroupDirective} (selector:
- * `[formGroup]`).
- *
- * It accepts the string name of the nested {@link FormGroup} you want to link, and
- * will look for a {@link FormGroup} registered with that name in the parent
- * {@link FormGroup} instance you passed into {@link FormGroupDirective}.
- *
- * Nested form groups can come in handy when you want to validate a sub-group of a
- * form separately from the rest or when you'd like to group the values of certain
- * controls into their own nested object.
- *
- * **Access the group**: You can access the associated {@link FormGroup} using the
- * {@link AbstractControl.get} method. Ex: `this.form.get('name')`.
- *
- * You can also access individual controls within the group using dot syntax.
- * Ex: `this.form.get('name.first')`
- *
- * **Get the value**: the `value` property is always synced and available on the
- * {@link FormGroup}. See a full list of available properties in {@link AbstractControl}.
- *
- * **Set the value**: You can set an initial value for each child control when instantiating
- * the {@link FormGroup}, or you can set it programmatically later using
- * {@link AbstractControl.setValue} or {@link AbstractControl.patchValue}.
- *
- * **Listen to value**: If you want to listen to changes in the value of the group, you can
- * subscribe to the {@link AbstractControl.valueChanges} event.  You can also listen to
- * {@link AbstractControl.statusChanges} to be notified when the validation status is
- * re-calculated.
- *
- * ### Example
- *
- * {@example forms/ts/nestedFormGroup/nested_form_group_example.ts region='Component'}
- *
- * * **npm package**: `@angular/forms`
- *
- * * **NgModule**: `ReactiveFormsModule`
- *
- * @stable
+ *  *
+  * *
+  * This directive can only be used with a parent {@link FormGroupDirective} (selector:
+  * `[formGroup]`).
+  * *
+  * It accepts the string name of the nested {@link FormGroup} you want to link, and
+  * will look for a {@link FormGroup} registered with that name in the parent
+  * {@link FormGroup} instance you passed into {@link FormGroupDirective}.
+  * *
+  * Nested form groups can come in handy when you want to validate a sub-group of a
+  * form separately from the rest or when you'd like to group the values of certain
+  * controls into their own nested object.
+  * *
+  * **Access the group**: You can access the associated {@link FormGroup} using the
+  * {@link AbstractControl.get} method. Ex: `this.form.get('name')`.
+  * *
+  * You can also access individual controls within the group using dot syntax.
+  * Ex: `this.form.get('name.first')`
+  * *
+  * **Get the value**: the `value` property is always synced and available on the
+  * {@link FormGroup}. See a full list of available properties in {@link AbstractControl}.
+  * *
+  * **Set the value**: You can set an initial value for each child control when instantiating
+  * the {@link FormGroup}, or you can set it programmatically later using
+  * {@link AbstractControl.setValue} or {@link AbstractControl.patchValue}.
+  * *
+  * **Listen to value**: If you want to listen to changes in the value of the group, you can
+  * subscribe to the {@link AbstractControl.valueChanges} event.  You can also listen to
+  * {@link AbstractControl.statusChanges} to be notified when the validation status is
+  * re-calculated.
+  * *
+  * ### Example
+  * *
+  * {@example forms/ts/nestedFormGroup/nested_form_group_example.ts region='Component'}
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
+  * * **NgModule**: `ReactiveFormsModule`
+  * *
  */
 var FormGroupName = (function (_super) {
     __extends(FormGroupName, _super);
+    /**
+     * @param {?} parent
+     * @param {?} validators
+     * @param {?} asyncValidators
+     */
     function FormGroupName(parent, validators, asyncValidators) {
         _super.call(this);
         this._parent = parent;
         this._validators = validators;
         this._asyncValidators = asyncValidators;
     }
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormGroupName.prototype._checkParentType = function () {
         if (_hasInvalidParent(this._parent)) {
             __WEBPACK_IMPORTED_MODULE_4__reactive_errors__["a" /* ReactiveErrors */].groupParentException();
@@ -2926,111 +3778,150 @@ var FormGroupName = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[formGroupName]', providers: [formGroupNameProvider] },] },
     ];
     /** @nocollapse */
-    FormGroupName.ctorParameters = [
+    FormGroupName.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_3__control_container__["a" /* ControlContainer */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Host"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["SkipSelf"] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_1__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
-    ];
+    ]; };
     FormGroupName.propDecorators = {
         'name': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['formGroupName',] },],
     };
     return FormGroupName;
 }(__WEBPACK_IMPORTED_MODULE_2__abstract_form_group_directive__["a" /* AbstractFormGroupDirective */]));
-var formArrayNameProvider = {
+function FormGroupName_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormGroupName.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    FormGroupName.ctorParameters;
+    /** @type {?} */
+    FormGroupName.propDecorators;
+    /** @type {?} */
+    FormGroupName.prototype.name;
+}
+var /** @type {?} */ formArrayNameProvider = {
     provide: __WEBPACK_IMPORTED_MODULE_3__control_container__["a" /* ControlContainer */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return FormArrayName; })
 };
 /**
- * @whatItDoes Syncs a nested {@link FormArray} to a DOM element.
- *
- * @howToUse
- *
- * This directive is designed to be used with a parent {@link FormGroupDirective} (selector:
- * `[formGroup]`).
- *
- * It accepts the string name of the nested {@link FormArray} you want to link, and
- * will look for a {@link FormArray} registered with that name in the parent
- * {@link FormGroup} instance you passed into {@link FormGroupDirective}.
- *
- * Nested form arrays can come in handy when you have a group of form controls but
- * you're not sure how many there will be. Form arrays allow you to create new
- * form controls dynamically.
- *
- * **Access the array**: You can access the associated {@link FormArray} using the
- * {@link AbstractControl.get} method on the parent {@link FormGroup}.
- * Ex: `this.form.get('cities')`.
- *
- * **Get the value**: the `value` property is always synced and available on the
- * {@link FormArray}. See a full list of available properties in {@link AbstractControl}.
- *
- * **Set the value**: You can set an initial value for each child control when instantiating
- * the {@link FormArray}, or you can set the value programmatically later using the
- * {@link FormArray}'s {@link AbstractControl.setValue} or {@link AbstractControl.patchValue}
- * methods.
- *
- * **Listen to value**: If you want to listen to changes in the value of the array, you can
- * subscribe to the {@link FormArray}'s {@link AbstractControl.valueChanges} event.  You can also
- * listen to its {@link AbstractControl.statusChanges} event to be notified when the validation
- * status is re-calculated.
- *
- * **Add new controls**: You can add new controls to the {@link FormArray} dynamically by
- * calling its {@link FormArray.push} method.
- *  Ex: `this.form.get('cities').push(new FormControl());`
- *
- * ### Example
- *
- * {@example forms/ts/nestedFormArray/nested_form_array_example.ts region='Component'}
- *
- * * **npm package**: `@angular/forms`
- *
- * * **NgModule**: `ReactiveFormsModule`
- *
- * @stable
+ *  *
+  * *
+  * This directive is designed to be used with a parent {@link FormGroupDirective} (selector:
+  * `[formGroup]`).
+  * *
+  * It accepts the string name of the nested {@link FormArray} you want to link, and
+  * will look for a {@link FormArray} registered with that name in the parent
+  * {@link FormGroup} instance you passed into {@link FormGroupDirective}.
+  * *
+  * Nested form arrays can come in handy when you have a group of form controls but
+  * you're not sure how many there will be. Form arrays allow you to create new
+  * form controls dynamically.
+  * *
+  * **Access the array**: You can access the associated {@link FormArray} using the
+  * {@link AbstractControl.get} method on the parent {@link FormGroup}.
+  * Ex: `this.form.get('cities')`.
+  * *
+  * **Get the value**: the `value` property is always synced and available on the
+  * {@link FormArray}. See a full list of available properties in {@link AbstractControl}.
+  * *
+  * **Set the value**: You can set an initial value for each child control when instantiating
+  * the {@link FormArray}, or you can set the value programmatically later using the
+  * {@link FormArray}'s {@link AbstractControl.setValue} or {@link AbstractControl.patchValue}
+  * methods.
+  * *
+  * **Listen to value**: If you want to listen to changes in the value of the array, you can
+  * subscribe to the {@link FormArray}'s {@link AbstractControl.valueChanges} event.  You can also
+  * listen to its {@link AbstractControl.statusChanges} event to be notified when the validation
+  * status is re-calculated.
+  * *
+  * **Add new controls**: You can add new controls to the {@link FormArray} dynamically by
+  * calling its {@link FormArray.push} method.
+  * Ex: `this.form.get('cities').push(new FormControl());`
+  * *
+  * ### Example
+  * *
+  * {@example forms/ts/nestedFormArray/nested_form_array_example.ts region='Component'}
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
+  * * **NgModule**: `ReactiveFormsModule`
+  * *
  */
 var FormArrayName = (function (_super) {
     __extends(FormArrayName, _super);
+    /**
+     * @param {?} parent
+     * @param {?} validators
+     * @param {?} asyncValidators
+     */
     function FormArrayName(parent, validators, asyncValidators) {
         _super.call(this);
         this._parent = parent;
         this._validators = validators;
         this._asyncValidators = asyncValidators;
     }
+    /**
+     * @return {?}
+     */
     FormArrayName.prototype.ngOnInit = function () {
         this._checkParentType();
         this.formDirective.addFormArray(this);
     };
+    /**
+     * @return {?}
+     */
     FormArrayName.prototype.ngOnDestroy = function () {
         if (this.formDirective) {
             this.formDirective.removeFormArray(this);
         }
     };
     Object.defineProperty(FormArrayName.prototype, "control", {
+        /**
+         * @return {?}
+         */
         get: function () { return this.formDirective.getFormArray(this); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormArrayName.prototype, "formDirective", {
+        /**
+         * @return {?}
+         */
         get: function () {
-            return this._parent ? this._parent.formDirective : null;
+            return this._parent ? (this._parent.formDirective) : null;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormArrayName.prototype, "path", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared__["a" /* controlPath */])(this.name, this._parent); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormArrayName.prototype, "validator", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared__["b" /* composeValidators */])(this._validators); },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FormArrayName.prototype, "asyncValidator", {
+        /**
+         * @return {?}
+         */
         get: function () { return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__shared__["c" /* composeAsyncValidators */])(this._asyncValidators); },
         enumerable: true,
         configurable: true
     });
+    /**
+     * @return {?}
+     */
     FormArrayName.prototype._checkParentType = function () {
         if (_hasInvalidParent(this._parent)) {
             __WEBPACK_IMPORTED_MODULE_4__reactive_errors__["a" /* ReactiveErrors */].arrayParentException();
@@ -3040,16 +3931,39 @@ var FormArrayName = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[formArrayName]', providers: [formArrayNameProvider] },] },
     ];
     /** @nocollapse */
-    FormArrayName.ctorParameters = [
+    FormArrayName.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_3__control_container__["a" /* ControlContainer */], decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Host"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["SkipSelf"] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],] },] },
         { type: Array, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Self"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"], args: [__WEBPACK_IMPORTED_MODULE_1__validators__["c" /* NG_ASYNC_VALIDATORS */],] },] },
-    ];
+    ]; };
     FormArrayName.propDecorators = {
         'name': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['formArrayName',] },],
     };
     return FormArrayName;
 }(__WEBPACK_IMPORTED_MODULE_3__control_container__["a" /* ControlContainer */]));
+function FormArrayName_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormArrayName.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    FormArrayName.ctorParameters;
+    /** @type {?} */
+    FormArrayName.propDecorators;
+    /** @type {?} */
+    FormArrayName.prototype._parent;
+    /** @type {?} */
+    FormArrayName.prototype._validators;
+    /** @type {?} */
+    FormArrayName.prototype._asyncValidators;
+    /** @type {?} */
+    FormArrayName.prototype.name;
+}
+/**
+ * @param {?} parent
+ * @return {?}
+ */
 function _hasInvalidParent(parent) {
     return !(parent instanceof FormGroupName) && !(parent instanceof __WEBPACK_IMPORTED_MODULE_6__form_group_directive__["a" /* FormGroupDirective */]) &&
         !(parent instanceof FormArrayName);
@@ -3075,21 +3989,39 @@ function _hasInvalidParent(parent) {
 var ReactiveErrors = (function () {
     function ReactiveErrors() {
     }
+    /**
+     * @return {?}
+     */
     ReactiveErrors.controlParentException = function () {
         throw new Error("formControlName must be used with a parent formGroup directive.  You'll want to add a formGroup\n       directive and pass it an existing FormGroup instance (you can create one in your class).\n\n      Example:\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formControlName);
     };
+    /**
+     * @return {?}
+     */
     ReactiveErrors.ngModelGroupException = function () {
         throw new Error("formControlName cannot be used with an ngModelGroup parent. It is only compatible with parents\n       that also have a \"form\" prefix: formGroupName, formArrayName, or formGroup.\n\n       Option 1:  Update the parent to be formGroupName (reactive form strategy)\n\n        " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formGroupName + "\n\n        Option 2: Use ngModel instead of formControlName (template-driven strategy)\n\n        " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].ngModelGroup);
     };
+    /**
+     * @return {?}
+     */
     ReactiveErrors.missingFormException = function () {
         throw new Error("formGroup expects a FormGroup instance. Please pass one in.\n\n       Example:\n\n       " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formControlName);
     };
+    /**
+     * @return {?}
+     */
     ReactiveErrors.groupParentException = function () {
         throw new Error("formGroupName must be used with a parent formGroup directive.  You'll want to add a formGroup\n      directive and pass it an existing FormGroup instance (you can create one in your class).\n\n      Example:\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formGroupName);
     };
+    /**
+     * @return {?}
+     */
     ReactiveErrors.arrayParentException = function () {
         throw new Error("formArrayName must be used with a parent formGroup directive.  You'll want to add a formGroup\n       directive and pass it an existing FormGroup instance (you can create one in your class).\n\n        Example:\n\n        " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formArrayName);
     };
+    /**
+     * @return {?}
+     */
     ReactiveErrors.disabledAttrWarning = function () {
         console.warn("\n      It looks like you're using the disabled attribute with a reactive form directive. If you set disabled to true\n      when you set up this control in your component class, the disabled attribute will actually be set in the DOM for\n      you. We recommend using this approach to avoid 'changed after checked' errors.\n       \n      Example: \n      form = new FormGroup({\n        first: new FormControl({value: 'Nancy', disabled: true}, Validators.required),\n        last: new FormControl('Drew', Validators.required)\n      });\n    ");
     };
@@ -3119,11 +4051,16 @@ var ReactiveErrors = (function () {
 
 
 
-var SELECT_VALUE_ACCESSOR = {
+var /** @type {?} */ SELECT_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_2__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return SelectControlValueAccessor; }),
     multi: true
 };
+/**
+ * @param {?} id
+ * @param {?} value
+ * @return {?}
+ */
 function _buildValueString(id, value) {
     if (id == null)
         return "" + value;
@@ -3131,48 +4068,53 @@ function _buildValueString(id, value) {
         value = 'Object';
     return (id + ": " + value).slice(0, 50);
 }
+/**
+ * @param {?} valueString
+ * @return {?}
+ */
 function _extractId(valueString) {
     return valueString.split(':')[0];
 }
 /**
- * @whatItDoes Writes values and listens to changes on a select element.
- *
- * Used by {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName}
- * to keep the view synced with the {@link FormControl} model.
- *
- * @howToUse
- *
- * If you have imported the {@link FormsModule} or the {@link ReactiveFormsModule}, this
- * value accessor will be active on any select control that has a form directive. You do
- * **not** need to add a special selector to activate it.
- *
- * ### How to use select controls with form directives
- *
- * To use a select in a template-driven form, simply add an `ngModel` and a `name`
- * attribute to the main `<select>` tag.
- *
- * If your option values are simple strings, you can bind to the normal `value` property
- * on the option.  If your option values happen to be objects (and you'd like to save the
- * selection in your form as an object), use `ngValue` instead:
- *
- * {@example forms/ts/selectControl/select_control_example.ts region='Component'}
- *
- * In reactive forms, you'll also want to add your form directive (`formControlName` or
- * `formControl`) on the main `<select>` tag. Like in the former example, you have the
- * choice of binding to the  `value` or `ngValue` property on the select's options.
- *
- * {@example forms/ts/reactiveSelectControl/reactive_select_control_example.ts region='Component'}
- *
- * Note: We listen to the 'change' event because 'input' events aren't fired
- * for selects in Firefox and IE:
- * https://bugzilla.mozilla.org/show_bug.cgi?id=1024350
- * https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/4660045/
- *
- * * **npm package**: `@angular/forms`
- *
- * @stable
+ *  *
+  * Used by {@link NgModel}, {@link FormControlDirective}, and {@link FormControlName}
+  * to keep the view synced with the {@link FormControl} model.
+  * *
+  * *
+  * If you have imported the {@link FormsModule} or the {@link ReactiveFormsModule}, this
+  * value accessor will be active on any select control that has a form directive. You do
+  * **not** need to add a special selector to activate it.
+  * *
+  * ### How to use select controls with form directives
+  * *
+  * To use a select in a template-driven form, simply add an `ngModel` and a `name`
+  * attribute to the main `<select>` tag.
+  * *
+  * If your option values are simple strings, you can bind to the normal `value` property
+  * on the option.  If your option values happen to be objects (and you'd like to save the
+  * selection in your form as an object), use `ngValue` instead:
+  * *
+  * {@example forms/ts/selectControl/select_control_example.ts region='Component'}
+  * *
+  * In reactive forms, you'll also want to add your form directive (`formControlName` or
+  * `formControl`) on the main `<select>` tag. Like in the former example, you have the
+  * choice of binding to the  `value` or `ngValue` property on the select's options.
+  * *
+  * {@example forms/ts/reactiveSelectControl/reactive_select_control_example.ts region='Component'}
+  * *
+  * Note: We listen to the 'change' event because 'input' events aren't fired
+  * for selects in Firefox and IE:
+  * https://bugzilla.mozilla.org/show_bug.cgi?id=1024350
+  * https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/4660045/
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
  */
 var SelectControlValueAccessor = (function () {
+    /**
+     * @param {?} _renderer
+     * @param {?} _elementRef
+     */
     function SelectControlValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -3183,11 +4125,19 @@ var SelectControlValueAccessor = (function () {
         this.onChange = function (_) { };
         this.onTouched = function () { };
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     SelectControlValueAccessor.prototype.writeValue = function (value) {
         this.value = value;
-        var valueString = _buildValueString(this._getOptionId(value), value);
+        var /** @type {?} */ valueString = _buildValueString(this._getOptionId(value), value);
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'value', valueString);
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     SelectControlValueAccessor.prototype.registerOnChange = function (fn) {
         var _this = this;
         this.onChange = function (valueString) {
@@ -3195,13 +4145,26 @@ var SelectControlValueAccessor = (function () {
             fn(_this._getOptionValue(valueString));
         };
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     SelectControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     SelectControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     SelectControlValueAccessor.prototype._registerOption = function () { return (this._idCounter++).toString(); };
-    /** @internal */
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     SelectControlValueAccessor.prototype._getOptionId = function (value) {
         for (var _i = 0, _a = Array.from(this._optionMap.keys()); _i < _a.length; _i++) {
             var id = _a[_i];
@@ -3210,9 +4173,12 @@ var SelectControlValueAccessor = (function () {
         }
         return null;
     };
-    /** @internal */
+    /**
+     * @param {?} valueString
+     * @return {?}
+     */
     SelectControlValueAccessor.prototype._getOptionValue = function (valueString) {
-        var id = _extractId(valueString);
+        var /** @type {?} */ id = _extractId(valueString);
         return this._optionMap.has(id) ? this._optionMap.get(id) : valueString;
     };
     SelectControlValueAccessor.decorators = [
@@ -3223,22 +4189,47 @@ var SelectControlValueAccessor = (function () {
                 },] },
     ];
     /** @nocollapse */
-    SelectControlValueAccessor.ctorParameters = [
+    SelectControlValueAccessor.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
-    ];
+    ]; };
     return SelectControlValueAccessor;
 }());
+function SelectControlValueAccessor_tsickle_Closure_declarations() {
+    /** @type {?} */
+    SelectControlValueAccessor.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    SelectControlValueAccessor.ctorParameters;
+    /** @type {?} */
+    SelectControlValueAccessor.prototype.value;
+    /** @type {?} */
+    SelectControlValueAccessor.prototype._optionMap;
+    /** @type {?} */
+    SelectControlValueAccessor.prototype._idCounter;
+    /** @type {?} */
+    SelectControlValueAccessor.prototype.onChange;
+    /** @type {?} */
+    SelectControlValueAccessor.prototype.onTouched;
+    /** @type {?} */
+    SelectControlValueAccessor.prototype._renderer;
+    /** @type {?} */
+    SelectControlValueAccessor.prototype._elementRef;
+}
 /**
- * @whatItDoes Marks `<option>` as dynamic, so Angular can be notified when options change.
- *
- * @howToUse
- *
- * See docs for {@link SelectControlValueAccessor} for usage examples.
- *
- * @stable
+ *  *
+  * *
+  * See docs for {@link SelectControlValueAccessor} for usage examples.
+  * *
  */
 var NgSelectOption = (function () {
+    /**
+     * @param {?} _element
+     * @param {?} _renderer
+     * @param {?} _select
+     */
     function NgSelectOption(_element, _renderer, _select) {
         this._element = _element;
         this._renderer = _renderer;
@@ -3247,6 +4238,10 @@ var NgSelectOption = (function () {
             this.id = this._select._registerOption();
     }
     Object.defineProperty(NgSelectOption.prototype, "ngValue", {
+        /**
+         * @param {?} value
+         * @return {?}
+         */
         set: function (value) {
             if (this._select == null)
                 return;
@@ -3258,6 +4253,10 @@ var NgSelectOption = (function () {
         configurable: true
     });
     Object.defineProperty(NgSelectOption.prototype, "value", {
+        /**
+         * @param {?} value
+         * @return {?}
+         */
         set: function (value) {
             this._setElementValue(value);
             if (this._select)
@@ -3266,10 +4265,16 @@ var NgSelectOption = (function () {
         enumerable: true,
         configurable: true
     });
-    /** @internal */
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     NgSelectOption.prototype._setElementValue = function (value) {
         this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
     };
+    /**
+     * @return {?}
+     */
     NgSelectOption.prototype.ngOnDestroy = function () {
         if (this._select) {
             this._select._optionMap.delete(this.id);
@@ -3280,17 +4285,36 @@ var NgSelectOption = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: 'option' },] },
     ];
     /** @nocollapse */
-    NgSelectOption.ctorParameters = [
+    NgSelectOption.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: SelectControlValueAccessor, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Host"] },] },
-    ];
+    ]; };
     NgSelectOption.propDecorators = {
         'ngValue': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['ngValue',] },],
         'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['value',] },],
     };
     return NgSelectOption;
 }());
+function NgSelectOption_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgSelectOption.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NgSelectOption.ctorParameters;
+    /** @type {?} */
+    NgSelectOption.propDecorators;
+    /** @type {?} */
+    NgSelectOption.prototype.id;
+    /** @type {?} */
+    NgSelectOption.prototype._element;
+    /** @type {?} */
+    NgSelectOption.prototype._renderer;
+    /** @type {?} */
+    NgSelectOption.prototype._select;
+}
 //# sourceMappingURL=select_control_value_accessor.js.map
 
 /***/ },
@@ -3315,11 +4339,16 @@ var NgSelectOption = (function () {
 
 
 
-var SELECT_MULTIPLE_VALUE_ACCESSOR = {
+var /** @type {?} */ SELECT_MULTIPLE_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_2__control_value_accessor__["a" /* NG_VALUE_ACCESSOR */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return SelectMultipleControlValueAccessor; }),
     multi: true
 };
+/**
+ * @param {?} id
+ * @param {?} value
+ * @return {?}
+ */
 function _buildValueString(id, value) {
     if (id == null)
         return "" + value;
@@ -3329,21 +4358,41 @@ function _buildValueString(id, value) {
         value = 'Object';
     return (id + ": " + value).slice(0, 50);
 }
+/**
+ * @param {?} valueString
+ * @return {?}
+ */
 function _extractId(valueString) {
     return valueString.split(':')[0];
 }
-/** Mock interface for HTMLCollection */
+/**
+ *  Mock interface for HTMLCollection
+ * @abstract
+ */
 var HTMLCollection = (function () {
     function HTMLCollection() {
     }
+    /**
+     * @abstract
+     * @param {?} _
+     * @return {?}
+     */
+    HTMLCollection.prototype.item = function (_) { };
     return HTMLCollection;
 }());
+function HTMLCollection_tsickle_Closure_declarations() {
+    /** @type {?} */
+    HTMLCollection.prototype.length;
+}
 /**
- * The accessor for writing a value and listening to changes on a select element.
- *
- * @stable
+ *  The accessor for writing a value and listening to changes on a select element.
+  * *
  */
 var SelectMultipleControlValueAccessor = (function () {
+    /**
+     * @param {?} _renderer
+     * @param {?} _elementRef
+     */
     function SelectMultipleControlValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -3354,52 +4403,79 @@ var SelectMultipleControlValueAccessor = (function () {
         this.onChange = function (_) { };
         this.onTouched = function () { };
     }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     SelectMultipleControlValueAccessor.prototype.writeValue = function (value) {
         var _this = this;
         this.value = value;
-        if (value == null)
-            return;
-        var values = value;
-        // convert values to ids
-        var ids = values.map(function (v) { return _this._getOptionId(v); });
-        this._optionMap.forEach(function (opt, o) { opt._setSelected(ids.indexOf(o.toString()) > -1); });
+        var /** @type {?} */ optionSelectedStateSetter;
+        if (Array.isArray(value)) {
+            // convert values to ids
+            var /** @type {?} */ ids_1 = value.map(function (v) { return _this._getOptionId(v); });
+            optionSelectedStateSetter = function (opt, o) { opt._setSelected(ids_1.indexOf(o.toString()) > -1); };
+        }
+        else {
+            optionSelectedStateSetter = function (opt, o) { opt._setSelected(false); };
+        }
+        this._optionMap.forEach(optionSelectedStateSetter);
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     SelectMultipleControlValueAccessor.prototype.registerOnChange = function (fn) {
         var _this = this;
         this.onChange = function (_) {
-            var selected = [];
+            var /** @type {?} */ selected = [];
             if (_.hasOwnProperty('selectedOptions')) {
-                var options = _.selectedOptions;
-                for (var i = 0; i < options.length; i++) {
-                    var opt = options.item(i);
-                    var val = _this._getOptionValue(opt.value);
+                var /** @type {?} */ options = _.selectedOptions;
+                for (var /** @type {?} */ i = 0; i < options.length; i++) {
+                    var /** @type {?} */ opt = options.item(i);
+                    var /** @type {?} */ val = _this._getOptionValue(opt.value);
                     selected.push(val);
                 }
             }
             else {
-                var options = _.options;
-                for (var i = 0; i < options.length; i++) {
-                    var opt = options.item(i);
+                var /** @type {?} */ options = (_.options);
+                for (var /** @type {?} */ i = 0; i < options.length; i++) {
+                    var /** @type {?} */ opt = options.item(i);
                     if (opt.selected) {
-                        var val = _this._getOptionValue(opt.value);
+                        var /** @type {?} */ val = _this._getOptionValue(opt.value);
                         selected.push(val);
                     }
                 }
             }
+            _this.value = selected;
             fn(selected);
         };
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     SelectMultipleControlValueAccessor.prototype.registerOnTouched = function (fn) { this.onTouched = fn; };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
     SelectMultipleControlValueAccessor.prototype.setDisabledState = function (isDisabled) {
         this._renderer.setElementProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
     };
-    /** @internal */
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     SelectMultipleControlValueAccessor.prototype._registerOption = function (value) {
-        var id = (this._idCounter++).toString();
+        var /** @type {?} */ id = (this._idCounter++).toString();
         this._optionMap.set(id, value);
         return id;
     };
-    /** @internal */
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     SelectMultipleControlValueAccessor.prototype._getOptionId = function (value) {
         for (var _i = 0, _a = Array.from(this._optionMap.keys()); _i < _a.length; _i++) {
             var id = _a[_i];
@@ -3408,9 +4484,12 @@ var SelectMultipleControlValueAccessor = (function () {
         }
         return null;
     };
-    /** @internal */
+    /**
+     * @param {?} valueString
+     * @return {?}
+     */
     SelectMultipleControlValueAccessor.prototype._getOptionValue = function (valueString) {
-        var id = _extractId(valueString);
+        var /** @type {?} */ id = _extractId(valueString);
         return this._optionMap.has(id) ? this._optionMap.get(id)._value : valueString;
     };
     SelectMultipleControlValueAccessor.decorators = [
@@ -3421,24 +4500,52 @@ var SelectMultipleControlValueAccessor = (function () {
                 },] },
     ];
     /** @nocollapse */
-    SelectMultipleControlValueAccessor.ctorParameters = [
+    SelectMultipleControlValueAccessor.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
-    ];
+    ]; };
     return SelectMultipleControlValueAccessor;
 }());
+function SelectMultipleControlValueAccessor_tsickle_Closure_declarations() {
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    SelectMultipleControlValueAccessor.ctorParameters;
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.prototype.value;
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.prototype._optionMap;
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.prototype._idCounter;
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.prototype.onChange;
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.prototype.onTouched;
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.prototype._renderer;
+    /** @type {?} */
+    SelectMultipleControlValueAccessor.prototype._elementRef;
+}
 /**
- * Marks `<option>` as dynamic, so Angular can be notified when options change.
- *
- * ### Example
- *
- * ```
- * <select multiple name="city" ngModel>
- *   <option *ngFor="let c of cities" [value]="c"></option>
- * </select>
- * ```
+ *  Marks `<option>` as dynamic, so Angular can be notified when options change.
+  * *
+  * ### Example
+  * *
+  * ```
+  * <select multiple name="city" ngModel>
+  * <option *ngFor="let c of cities" [value]="c"></option>
+  * </select>
+  * ```
  */
 var NgSelectMultipleOption = (function () {
+    /**
+     * @param {?} _element
+     * @param {?} _renderer
+     * @param {?} _select
+     */
     function NgSelectMultipleOption(_element, _renderer, _select) {
         this._element = _element;
         this._renderer = _renderer;
@@ -3448,6 +4555,10 @@ var NgSelectMultipleOption = (function () {
         }
     }
     Object.defineProperty(NgSelectMultipleOption.prototype, "ngValue", {
+        /**
+         * @param {?} value
+         * @return {?}
+         */
         set: function (value) {
             if (this._select == null)
                 return;
@@ -3459,6 +4570,10 @@ var NgSelectMultipleOption = (function () {
         configurable: true
     });
     Object.defineProperty(NgSelectMultipleOption.prototype, "value", {
+        /**
+         * @param {?} value
+         * @return {?}
+         */
         set: function (value) {
             if (this._select) {
                 this._value = value;
@@ -3472,14 +4587,23 @@ var NgSelectMultipleOption = (function () {
         enumerable: true,
         configurable: true
     });
-    /** @internal */
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     NgSelectMultipleOption.prototype._setElementValue = function (value) {
         this._renderer.setElementProperty(this._element.nativeElement, 'value', value);
     };
-    /** @internal */
+    /**
+     * @param {?} selected
+     * @return {?}
+     */
     NgSelectMultipleOption.prototype._setSelected = function (selected) {
         this._renderer.setElementProperty(this._element.nativeElement, 'selected', selected);
     };
+    /**
+     * @return {?}
+     */
     NgSelectMultipleOption.prototype.ngOnDestroy = function () {
         if (this._select) {
             this._select._optionMap.delete(this.id);
@@ -3490,17 +4614,38 @@ var NgSelectMultipleOption = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: 'option' },] },
     ];
     /** @nocollapse */
-    NgSelectMultipleOption.ctorParameters = [
+    NgSelectMultipleOption.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
         { type: SelectMultipleControlValueAccessor, decorators: [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Optional"] }, { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Host"] },] },
-    ];
+    ]; };
     NgSelectMultipleOption.propDecorators = {
         'ngValue': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['ngValue',] },],
         'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"], args: ['value',] },],
     };
     return NgSelectMultipleOption;
 }());
+function NgSelectMultipleOption_tsickle_Closure_declarations() {
+    /** @type {?} */
+    NgSelectMultipleOption.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    NgSelectMultipleOption.ctorParameters;
+    /** @type {?} */
+    NgSelectMultipleOption.propDecorators;
+    /** @type {?} */
+    NgSelectMultipleOption.prototype.id;
+    /** @type {?} */
+    NgSelectMultipleOption.prototype._value;
+    /** @type {?} */
+    NgSelectMultipleOption.prototype._element;
+    /** @type {?} */
+    NgSelectMultipleOption.prototype._renderer;
+    /** @type {?} */
+    NgSelectMultipleOption.prototype._select;
+}
 //# sourceMappingURL=select_multiple_control_value_accessor.js.map
 
 /***/ },
@@ -3545,9 +4690,19 @@ var NgSelectMultipleOption = (function () {
 
 
 
+/**
+ * @param {?} name
+ * @param {?} parent
+ * @return {?}
+ */
 function controlPath(name, parent) {
     return parent.path.concat([name]);
 }
+/**
+ * @param {?} control
+ * @param {?} dir
+ * @return {?}
+ */
 function setUpControl(control, dir) {
     if (!control)
         _throwError(dir, 'Cannot find control with');
@@ -3576,14 +4731,19 @@ function setUpControl(control, dir) {
     }
     // re-run validation when validator binding changes, e.g. minlength=3 -> minlength=4
     dir._rawValidators.forEach(function (validator) {
-        if (validator.registerOnValidatorChange)
-            validator.registerOnValidatorChange(function () { return control.updateValueAndValidity(); });
+        if (((validator)).registerOnValidatorChange)
+            ((validator)).registerOnValidatorChange(function () { return control.updateValueAndValidity(); });
     });
     dir._rawAsyncValidators.forEach(function (validator) {
-        if (validator.registerOnValidatorChange)
-            validator.registerOnValidatorChange(function () { return control.updateValueAndValidity(); });
+        if (((validator)).registerOnValidatorChange)
+            ((validator)).registerOnValidatorChange(function () { return control.updateValueAndValidity(); });
     });
 }
+/**
+ * @param {?} control
+ * @param {?} dir
+ * @return {?}
+ */
 function cleanUpControl(control, dir) {
     dir.valueAccessor.registerOnChange(function () { return _noControlError(dir); });
     dir.valueAccessor.registerOnTouched(function () { return _noControlError(dir); });
@@ -3600,17 +4760,31 @@ function cleanUpControl(control, dir) {
     if (control)
         control._clearChangeFns();
 }
+/**
+ * @param {?} control
+ * @param {?} dir
+ * @return {?}
+ */
 function setUpFormContainer(control, dir) {
     if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__facade_lang__["f" /* isBlank */])(control))
         _throwError(dir, 'Cannot find control with');
     control.validator = __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].compose([control.validator, dir.validator]);
     control.asyncValidator = __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].composeAsync([control.asyncValidator, dir.asyncValidator]);
 }
+/**
+ * @param {?} dir
+ * @return {?}
+ */
 function _noControlError(dir) {
     return _throwError(dir, 'There is no FormControl instance attached to form control element with');
 }
+/**
+ * @param {?} dir
+ * @param {?} message
+ * @return {?}
+ */
 function _throwError(dir, message) {
-    var messageEnd;
+    var /** @type {?} */ messageEnd;
     if (dir.path.length > 1) {
         messageEnd = "path: '" + dir.path.join(' -> ') + "'";
     }
@@ -3622,22 +4796,35 @@ function _throwError(dir, message) {
     }
     throw new Error(message + " " + messageEnd);
 }
+/**
+ * @param {?} validators
+ * @return {?}
+ */
 function composeValidators(validators) {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__facade_lang__["c" /* isPresent */])(validators) ? __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].compose(validators.map(__WEBPACK_IMPORTED_MODULE_4__normalize_validator__["a" /* normalizeValidator */])) : null;
 }
+/**
+ * @param {?} validators
+ * @return {?}
+ */
 function composeAsyncValidators(validators) {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__facade_lang__["c" /* isPresent */])(validators) ? __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].composeAsync(validators.map(__WEBPACK_IMPORTED_MODULE_4__normalize_validator__["b" /* normalizeAsyncValidator */])) :
         null;
 }
+/**
+ * @param {?} changes
+ * @param {?} viewModel
+ * @return {?}
+ */
 function isPropertyUpdated(changes, viewModel) {
     if (!changes.hasOwnProperty('model'))
         return false;
-    var change = changes['model'];
+    var /** @type {?} */ change = changes['model'];
     if (change.isFirstChange())
         return true;
     return !__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__facade_lang__["e" /* looseIdentical */])(viewModel, change.currentValue);
 }
-var BUILTIN_ACCESSORS = [
+var /** @type {?} */ BUILTIN_ACCESSORS = [
     __WEBPACK_IMPORTED_MODULE_2__checkbox_value_accessor__["a" /* CheckboxControlValueAccessor */],
     __WEBPACK_IMPORTED_MODULE_7__range_value_accessor__["a" /* RangeValueAccessor */],
     __WEBPACK_IMPORTED_MODULE_5__number_value_accessor__["a" /* NumberValueAccessor */],
@@ -3645,16 +4832,24 @@ var BUILTIN_ACCESSORS = [
     __WEBPACK_IMPORTED_MODULE_9__select_multiple_control_value_accessor__["a" /* SelectMultipleControlValueAccessor */],
     __WEBPACK_IMPORTED_MODULE_6__radio_control_value_accessor__["a" /* RadioControlValueAccessor */],
 ];
+/**
+ * @param {?} valueAccessor
+ * @return {?}
+ */
 function isBuiltInAccessor(valueAccessor) {
     return BUILTIN_ACCESSORS.some(function (a) { return valueAccessor.constructor === a; });
 }
-// TODO: vsavkin remove it once https://github.com/angular/angular/issues/3011 is implemented
+/**
+ * @param {?} dir
+ * @param {?} valueAccessors
+ * @return {?}
+ */
 function selectValueAccessor(dir, valueAccessors) {
     if (!valueAccessors)
         return null;
-    var defaultAccessor;
-    var builtinAccessor;
-    var customAccessor;
+    var /** @type {?} */ defaultAccessor;
+    var /** @type {?} */ builtinAccessor;
+    var /** @type {?} */ customAccessor;
     valueAccessors.forEach(function (v) {
         if (v.constructor === __WEBPACK_IMPORTED_MODULE_3__default_value_accessor__["a" /* DefaultValueAccessor */]) {
             defaultAccessor = v;
@@ -3700,15 +4895,27 @@ function selectValueAccessor(dir, valueAccessors) {
 var TemplateDrivenErrors = (function () {
     function TemplateDrivenErrors() {
     }
+    /**
+     * @return {?}
+     */
     TemplateDrivenErrors.modelParentException = function () {
         throw new Error("\n      ngModel cannot be used to register form controls with a parent formGroup directive.  Try using\n      formGroup's partner directive \"formControlName\" instead.  Example:\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formControlName + "\n\n      Or, if you'd like to avoid registering this form control, indicate that it's standalone in ngModelOptions:\n\n      Example:\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].ngModelWithFormGroup);
     };
+    /**
+     * @return {?}
+     */
     TemplateDrivenErrors.formGroupNameException = function () {
         throw new Error("\n      ngModel cannot be used to register form controls with a parent formGroupName or formArrayName directive.\n\n      Option 1: Use formControlName instead of ngModel (reactive strategy):\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formGroupName + "\n\n      Option 2:  Update ngModel's parent be ngModelGroup (template-driven strategy):\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].ngModelGroup);
     };
+    /**
+     * @return {?}
+     */
     TemplateDrivenErrors.missingNameException = function () {
         throw new Error("If ngModel is used within a form tag, either the name attribute must be set or the form\n      control must be defined as 'standalone' in ngModelOptions.\n\n      Example 1: <input [(ngModel)]=\"person.firstName\" name=\"first\">\n      Example 2: <input [(ngModel)]=\"person.firstName\" [ngModelOptions]=\"{standalone: true}\">");
     };
+    /**
+     * @return {?}
+     */
     TemplateDrivenErrors.modelGroupParentException = function () {
         throw new Error("\n      ngModelGroup cannot be used with a parent formGroup directive.\n\n      Option 1: Use formGroupName instead of ngModelGroup (reactive strategy):\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].formGroupName + "\n\n      Option 2:  Use a regular form tag instead of the formGroup directive (template-driven strategy):\n\n      " + __WEBPACK_IMPORTED_MODULE_0__error_examples__["a" /* FormErrorExamples */].ngModelGroup);
     };
@@ -3725,37 +4932,55 @@ var TemplateDrivenErrors = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validators__ = __webpack_require__("./node_modules/@angular/forms/src/validators.js");
 /* unused harmony export REQUIRED_VALIDATOR */
+/* unused harmony export CHECKBOX_REQUIRED_VALIDATOR */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RequiredValidator; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "e", function() { return CheckboxRequiredValidator; });
 /* unused harmony export MIN_LENGTH_VALIDATOR */
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return MinLengthValidator; });
 /* unused harmony export MAX_LENGTH_VALIDATOR */
 /* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return MaxLengthValidator; });
 /* unused harmony export PATTERN_VALIDATOR */
 /* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return PatternValidator; });
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 
 
-var REQUIRED_VALIDATOR = {
+var /** @type {?} */ REQUIRED_VALIDATOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return RequiredValidator; }),
     multi: true
 };
+var /** @type {?} */ CHECKBOX_REQUIRED_VALIDATOR = {
+    provide: __WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],
+    useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return CheckboxRequiredValidator; }),
+    multi: true
+};
 /**
- * A Directive that adds the `required` validator to any controls marked with the
- * `required` attribute, via the {@link NG_VALIDATORS} binding.
- *
- * ### Example
- *
- * ```
- * <input name="fullName" ngModel required>
- * ```
- *
- * @stable
+ *  A Directive that adds the `required` validator to any controls marked with the
+  * `required` attribute, via the {@link NG_VALIDATORS} binding.
+  * *
+  * ### Example
+  * *
+  * ```
+  * <input name="fullName" ngModel required>
+  * ```
+  * *
  */
 var RequiredValidator = (function () {
     function RequiredValidator() {
     }
     Object.defineProperty(RequiredValidator.prototype, "required", {
+        /**
+         * @return {?}
+         */
         get: function () { return this._required; },
+        /**
+         * @param {?} value
+         * @return {?}
+         */
         set: function (value) {
             this._required = value != null && value !== false && "" + value !== 'false';
             if (this._onChange)
@@ -3764,24 +4989,90 @@ var RequiredValidator = (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @param {?} c
+     * @return {?}
+     */
     RequiredValidator.prototype.validate = function (c) {
         return this.required ? __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].required(c) : null;
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     RequiredValidator.prototype.registerOnValidatorChange = function (fn) { this._onChange = fn; };
     RequiredValidator.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{
-                    selector: '[required][formControlName],[required][formControl],[required][ngModel]',
+                    selector: ':not([type=checkbox])[required][formControlName],:not([type=checkbox])[required][formControl],:not([type=checkbox])[required][ngModel]',
                     providers: [REQUIRED_VALIDATOR],
                     host: { '[attr.required]': 'required ? "" : null' }
                 },] },
     ];
     /** @nocollapse */
-    RequiredValidator.ctorParameters = [];
+    RequiredValidator.ctorParameters = function () { return []; };
     RequiredValidator.propDecorators = {
         'required': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
     };
     return RequiredValidator;
 }());
+function RequiredValidator_tsickle_Closure_declarations() {
+    /** @type {?} */
+    RequiredValidator.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    RequiredValidator.ctorParameters;
+    /** @type {?} */
+    RequiredValidator.propDecorators;
+    /** @type {?} */
+    RequiredValidator.prototype._required;
+    /** @type {?} */
+    RequiredValidator.prototype._onChange;
+}
+/**
+ *  A Directive that adds the `required` validator to checkbox controls marked with the
+  * `required` attribute, via the {@link NG_VALIDATORS} binding.
+  * *
+  * ### Example
+  * *
+  * ```
+  * <input type="checkbox" name="active" ngModel required>
+  * ```
+  * *
+ */
+var CheckboxRequiredValidator = (function (_super) {
+    __extends(CheckboxRequiredValidator, _super);
+    function CheckboxRequiredValidator() {
+        _super.apply(this, arguments);
+    }
+    /**
+     * @param {?} c
+     * @return {?}
+     */
+    CheckboxRequiredValidator.prototype.validate = function (c) {
+        return this.required ? __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].requiredTrue(c) : null;
+    };
+    CheckboxRequiredValidator.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{
+                    selector: 'input[type=checkbox][required][formControlName],input[type=checkbox][required][formControl],input[type=checkbox][required][ngModel]',
+                    providers: [CHECKBOX_REQUIRED_VALIDATOR],
+                    host: { '[attr.required]': 'required ? "" : null' }
+                },] },
+    ];
+    /** @nocollapse */
+    CheckboxRequiredValidator.ctorParameters = function () { return []; };
+    return CheckboxRequiredValidator;
+}(RequiredValidator));
+function CheckboxRequiredValidator_tsickle_Closure_declarations() {
+    /** @type {?} */
+    CheckboxRequiredValidator.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    CheckboxRequiredValidator.ctorParameters;
+}
 /**
  * Provider which adds {@link MinLengthValidator} to {@link NG_VALIDATORS}.
  *
@@ -3789,20 +5080,23 @@ var RequiredValidator = (function () {
  *
  * {@example common/forms/ts/validators/validators.ts region='min'}
  */
-var MIN_LENGTH_VALIDATOR = {
+var /** @type {?} */ MIN_LENGTH_VALIDATOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return MinLengthValidator; }),
     multi: true
 };
 /**
- * A directive which installs the {@link MinLengthValidator} for any `formControlName`,
- * `formControl`, or control with `ngModel` that also has a `minlength` attribute.
- *
- * @stable
+ *  A directive which installs the {@link MinLengthValidator} for any `formControlName`,
+  * `formControl`, or control with `ngModel` that also has a `minlength` attribute.
+  * *
  */
 var MinLengthValidator = (function () {
     function MinLengthValidator() {
     }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     MinLengthValidator.prototype.ngOnChanges = function (changes) {
         if ('minlength' in changes) {
             this._createValidator();
@@ -3810,10 +5104,21 @@ var MinLengthValidator = (function () {
                 this._onChange();
         }
     };
+    /**
+     * @param {?} c
+     * @return {?}
+     */
     MinLengthValidator.prototype.validate = function (c) {
         return this.minlength == null ? null : this._validator(c);
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     MinLengthValidator.prototype.registerOnValidatorChange = function (fn) { this._onChange = fn; };
+    /**
+     * @return {?}
+     */
     MinLengthValidator.prototype._createValidator = function () {
         this._validator = __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].minLength(parseInt(this.minlength, 10));
     };
@@ -3825,12 +5130,29 @@ var MinLengthValidator = (function () {
                 },] },
     ];
     /** @nocollapse */
-    MinLengthValidator.ctorParameters = [];
+    MinLengthValidator.ctorParameters = function () { return []; };
     MinLengthValidator.propDecorators = {
         'minlength': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
     };
     return MinLengthValidator;
 }());
+function MinLengthValidator_tsickle_Closure_declarations() {
+    /** @type {?} */
+    MinLengthValidator.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    MinLengthValidator.ctorParameters;
+    /** @type {?} */
+    MinLengthValidator.propDecorators;
+    /** @type {?} */
+    MinLengthValidator.prototype._validator;
+    /** @type {?} */
+    MinLengthValidator.prototype._onChange;
+    /** @type {?} */
+    MinLengthValidator.prototype.minlength;
+}
 /**
  * Provider which adds {@link MaxLengthValidator} to {@link NG_VALIDATORS}.
  *
@@ -3838,21 +5160,24 @@ var MinLengthValidator = (function () {
  *
  * {@example common/forms/ts/validators/validators.ts region='max'}
  */
-var MAX_LENGTH_VALIDATOR = {
+var /** @type {?} */ MAX_LENGTH_VALIDATOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return MaxLengthValidator; }),
     multi: true
 };
 /**
- * A directive which installs the {@link MaxLengthValidator} for any `formControlName,
- * `formControl`,
- * or control with `ngModel` that also has a `maxlength` attribute.
- *
- * @stable
+ *  A directive which installs the {@link MaxLengthValidator} for any `formControlName,
+  * `formControl`,
+  * or control with `ngModel` that also has a `maxlength` attribute.
+  * *
  */
 var MaxLengthValidator = (function () {
     function MaxLengthValidator() {
     }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     MaxLengthValidator.prototype.ngOnChanges = function (changes) {
         if ('maxlength' in changes) {
             this._createValidator();
@@ -3860,10 +5185,21 @@ var MaxLengthValidator = (function () {
                 this._onChange();
         }
     };
+    /**
+     * @param {?} c
+     * @return {?}
+     */
     MaxLengthValidator.prototype.validate = function (c) {
         return this.maxlength != null ? this._validator(c) : null;
     };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     MaxLengthValidator.prototype.registerOnValidatorChange = function (fn) { this._onChange = fn; };
+    /**
+     * @return {?}
+     */
     MaxLengthValidator.prototype._createValidator = function () {
         this._validator = __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].maxLength(parseInt(this.maxlength, 10));
     };
@@ -3875,33 +5211,53 @@ var MaxLengthValidator = (function () {
                 },] },
     ];
     /** @nocollapse */
-    MaxLengthValidator.ctorParameters = [];
+    MaxLengthValidator.ctorParameters = function () { return []; };
     MaxLengthValidator.propDecorators = {
         'maxlength': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
     };
     return MaxLengthValidator;
 }());
-var PATTERN_VALIDATOR = {
+function MaxLengthValidator_tsickle_Closure_declarations() {
+    /** @type {?} */
+    MaxLengthValidator.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    MaxLengthValidator.ctorParameters;
+    /** @type {?} */
+    MaxLengthValidator.propDecorators;
+    /** @type {?} */
+    MaxLengthValidator.prototype._validator;
+    /** @type {?} */
+    MaxLengthValidator.prototype._onChange;
+    /** @type {?} */
+    MaxLengthValidator.prototype.maxlength;
+}
+var /** @type {?} */ PATTERN_VALIDATOR = {
     provide: __WEBPACK_IMPORTED_MODULE_1__validators__["b" /* NG_VALIDATORS */],
     useExisting: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["forwardRef"])(function () { return PatternValidator; }),
     multi: true
 };
 /**
- * A Directive that adds the `pattern` validator to any controls marked with the
- * `pattern` attribute, via the {@link NG_VALIDATORS} binding. Uses attribute value
- * as the regex to validate Control value against.  Follows pattern attribute
- * semantics; i.e. regex must match entire Control value.
- *
- * ### Example
- *
- * ```
- * <input [name]="fullName" pattern="[a-zA-Z ]*" ngModel>
- * ```
- * @stable
+ *  A Directive that adds the `pattern` validator to any controls marked with the
+  * `pattern` attribute, via the {@link NG_VALIDATORS} binding. Uses attribute value
+  * as the regex to validate Control value against.  Follows pattern attribute
+  * semantics; i.e. regex must match entire Control value.
+  * *
+  * ### Example
+  * *
+  * ```
+  * <input [name]="fullName" pattern="[a-zA-Z ]*" ngModel>
+  * ```
  */
 var PatternValidator = (function () {
     function PatternValidator() {
     }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
     PatternValidator.prototype.ngOnChanges = function (changes) {
         if ('pattern' in changes) {
             this._createValidator();
@@ -3909,8 +5265,19 @@ var PatternValidator = (function () {
                 this._onChange();
         }
     };
+    /**
+     * @param {?} c
+     * @return {?}
+     */
     PatternValidator.prototype.validate = function (c) { return this._validator(c); };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     PatternValidator.prototype.registerOnValidatorChange = function (fn) { this._onChange = fn; };
+    /**
+     * @return {?}
+     */
     PatternValidator.prototype._createValidator = function () { this._validator = __WEBPACK_IMPORTED_MODULE_1__validators__["a" /* Validators */].pattern(this.pattern); };
     PatternValidator.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{
@@ -3920,12 +5287,29 @@ var PatternValidator = (function () {
                 },] },
     ];
     /** @nocollapse */
-    PatternValidator.ctorParameters = [];
+    PatternValidator.ctorParameters = function () { return []; };
     PatternValidator.propDecorators = {
         'pattern': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
     };
     return PatternValidator;
 }());
+function PatternValidator_tsickle_Closure_declarations() {
+    /** @type {?} */
+    PatternValidator.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    PatternValidator.ctorParameters;
+    /** @type {?} */
+    PatternValidator.propDecorators;
+    /** @type {?} */
+    PatternValidator.prototype._validator;
+    /** @type {?} */
+    PatternValidator.prototype._onChange;
+    /** @type {?} */
+    PatternValidator.prototype.pattern;
+}
 //# sourceMappingURL=validators.js.map
 
 /***/ },
@@ -3957,68 +5341,77 @@ var __extends = (this && this.__extends) || function (d, b) {
 
 
 /**
- * Use by directives and components to emit custom Events.
- *
- * ### Examples
- *
- * In the following example, `Zippy` alternatively emits `open` and `close` events when its
- * title gets clicked:
- *
- * ```
- * @Component({
- *   selector: 'zippy',
- *   template: `
- *   <div class="zippy">
- *     <div (click)="toggle()">Toggle</div>
- *     <div [hidden]="!visible">
- *       <ng-content></ng-content>
- *     </div>
- *  </div>`})
- * export class Zippy {
- *   visible: boolean = true;
- *   @Output() open: EventEmitter<any> = new EventEmitter();
- *   @Output() close: EventEmitter<any> = new EventEmitter();
- *
- *   toggle() {
- *     this.visible = !this.visible;
- *     if (this.visible) {
- *       this.open.emit(null);
- *     } else {
- *       this.close.emit(null);
- *     }
- *   }
- * }
- * ```
- *
- * The events payload can be accessed by the parameter `$event` on the components output event
- * handler:
- *
- * ```
- * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
- * ```
- *
- * Uses Rx.Observable but provides an adapter to make it work as specified here:
- * https://github.com/jhusain/observable-spec
- *
- * Once a reference implementation of the spec is available, switch to it.
- * @stable
+ *  Use by directives and components to emit custom Events.
+  * *
+  * ### Examples
+  * *
+  * In the following example, `Zippy` alternatively emits `open` and `close` events when its
+  * title gets clicked:
+  * *
+  * ```
+  * selector: 'zippy',
+  * template: `
+  * <div class="zippy">
+  * <div (click)="toggle()">Toggle</div>
+  * <div [hidden]="!visible">
+  * <ng-content></ng-content>
+  * </div>
+  * </div>`})
+  * export class Zippy {
+  * visible: boolean = true;
+  * @Output() open: EventEmitter<any> = new EventEmitter();
+  * @Output() close: EventEmitter<any> = new EventEmitter();
+  * *
+  * toggle() {
+  * this.visible = !this.visible;
+  * if (this.visible) {
+  * this.open.emit(null);
+  * } else {
+  * this.close.emit(null);
+  * }
+  * }
+  * }
+  * ```
+  * *
+  * The events payload can be accessed by the parameter `$event` on the components output event
+  * handler:
+  * *
+  * ```
+  * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
+  * ```
+  * *
+  * Uses Rx.Observable but provides an adapter to make it work as specified here:
+  * https://github.com/jhusain/observable-spec
+  * *
+  * Once a reference implementation of the spec is available, switch to it.
  */
 var EventEmitter = (function (_super) {
     __extends(EventEmitter, _super);
     /**
-     * Creates an instance of [EventEmitter], which depending on [isAsync],
-     * delivers events synchronously or asynchronously.
+     *  Creates an instance of [EventEmitter], which depending on [isAsync],
+      * delivers events synchronously or asynchronously.
+     * @param {?=} isAsync
      */
     function EventEmitter(isAsync) {
         if (isAsync === void 0) { isAsync = false; }
         _super.call(this);
         this.__isAsync = isAsync;
     }
+    /**
+     * @param {?=} value
+     * @return {?}
+     */
     EventEmitter.prototype.emit = function (value) { _super.prototype.next.call(this, value); };
+    /**
+     * @param {?=} generatorOrNext
+     * @param {?=} error
+     * @param {?=} complete
+     * @return {?}
+     */
     EventEmitter.prototype.subscribe = function (generatorOrNext, error, complete) {
-        var schedulerFn;
-        var errorFn = function (err) { return null; };
-        var completeFn = function () { return null; };
+        var /** @type {?} */ schedulerFn;
+        var /** @type {?} */ errorFn = function (err) { return null; };
+        var /** @type {?} */ completeFn = function () { return null; };
         if (generatorOrNext && typeof generatorOrNext === 'object') {
             schedulerFn = this.__isAsync ? function (value) {
                 setTimeout(function () { return generatorOrNext.next(value); });
@@ -4048,6 +5441,10 @@ var EventEmitter = (function (_super) {
     };
     return EventEmitter;
 }(__WEBPACK_IMPORTED_MODULE_0_rxjs_Subject__["Subject"]));
+function EventEmitter_tsickle_Closure_declarations() {
+    /** @type {?} */
+    EventEmitter.prototype.__isAsync;
+}
 //# sourceMappingURL=async.js.map
 
 /***/ },
@@ -4071,13 +5468,18 @@ var EventEmitter = (function (_super) {
  */
 
 /**
- * Wraps Javascript Objects
+ *  Wraps Javascript Objects
  */
 var StringMapWrapper = (function () {
     function StringMapWrapper() {
     }
+    /**
+     * @param {?} m1
+     * @param {?} m2
+     * @return {?}
+     */
     StringMapWrapper.merge = function (m1, m2) {
-        var m = {};
+        var /** @type {?} */ m = {};
         for (var _i = 0, _a = Object.keys(m1); _i < _a.length; _i++) {
             var k = _a[_i];
             m[k] = m1[k];
@@ -4088,14 +5490,19 @@ var StringMapWrapper = (function () {
         }
         return m;
     };
+    /**
+     * @param {?} m1
+     * @param {?} m2
+     * @return {?}
+     */
     StringMapWrapper.equals = function (m1, m2) {
-        var k1 = Object.keys(m1);
-        var k2 = Object.keys(m2);
+        var /** @type {?} */ k1 = Object.keys(m1);
+        var /** @type {?} */ k2 = Object.keys(m2);
         if (k1.length != k2.length) {
             return false;
         }
-        for (var i = 0; i < k1.length; i++) {
-            var key = k1[i];
+        for (var /** @type {?} */ i = 0; i < k1.length; i++) {
+            var /** @type {?} */ key = k1[i];
             if (m1[key] !== m2[key]) {
                 return false;
             }
@@ -4107,39 +5514,75 @@ var StringMapWrapper = (function () {
 var ListWrapper = (function () {
     function ListWrapper() {
     }
+    /**
+     * @param {?} arr
+     * @param {?} condition
+     * @return {?}
+     */
+    ListWrapper.findLast = function (arr, condition) {
+        for (var /** @type {?} */ i = arr.length - 1; i >= 0; i--) {
+            if (condition(arr[i])) {
+                return arr[i];
+            }
+        }
+        return null;
+    };
+    /**
+     * @param {?} list
+     * @param {?} items
+     * @return {?}
+     */
     ListWrapper.removeAll = function (list, items) {
-        for (var i = 0; i < items.length; ++i) {
-            var index = list.indexOf(items[i]);
+        for (var /** @type {?} */ i = 0; i < items.length; ++i) {
+            var /** @type {?} */ index = list.indexOf(items[i]);
             if (index > -1) {
                 list.splice(index, 1);
             }
         }
     };
+    /**
+     * @param {?} list
+     * @param {?} el
+     * @return {?}
+     */
     ListWrapper.remove = function (list, el) {
-        var index = list.indexOf(el);
+        var /** @type {?} */ index = list.indexOf(el);
         if (index > -1) {
             list.splice(index, 1);
             return true;
         }
         return false;
     };
+    /**
+     * @param {?} a
+     * @param {?} b
+     * @return {?}
+     */
     ListWrapper.equals = function (a, b) {
         if (a.length != b.length)
             return false;
-        for (var i = 0; i < a.length; ++i) {
+        for (var /** @type {?} */ i = 0; i < a.length; ++i) {
             if (a[i] !== b[i])
                 return false;
         }
         return true;
     };
+    /**
+     * @param {?} list
+     * @return {?}
+     */
     ListWrapper.flatten = function (list) {
         return list.reduce(function (flat, item) {
-            var flatItem = Array.isArray(item) ? ListWrapper.flatten(item) : item;
-            return flat.concat(flatItem);
+            var /** @type {?} */ flatItem = Array.isArray(item) ? ListWrapper.flatten(item) : item;
+            return ((flat)).concat(flatItem);
         }, []);
     };
     return ListWrapper;
 }());
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function isListLikeIterable(obj) {
     if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["a" /* isJsObject */])(obj))
         return false;
@@ -4147,12 +5590,18 @@ function isListLikeIterable(obj) {
         (!(obj instanceof Map) &&
             __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["b" /* getSymbolIterator */])() in obj); // JS Iterable have a Symbol.iterator prop
 }
+/**
+ * @param {?} a
+ * @param {?} b
+ * @param {?} comparator
+ * @return {?}
+ */
 function areIterablesEqual(a, b, comparator) {
-    var iterator1 = a[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["b" /* getSymbolIterator */])()]();
-    var iterator2 = b[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["b" /* getSymbolIterator */])()]();
+    var /** @type {?} */ iterator1 = a[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["b" /* getSymbolIterator */])()]();
+    var /** @type {?} */ iterator2 = b[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["b" /* getSymbolIterator */])()]();
     while (true) {
-        var item1 = iterator1.next();
-        var item2 = iterator2.next();
+        var /** @type {?} */ item1 = iterator1.next();
+        var /** @type {?} */ item2 = iterator2.next();
         if (item1.done && item2.done)
             return true;
         if (item1.done || item2.done)
@@ -4161,15 +5610,20 @@ function areIterablesEqual(a, b, comparator) {
             return false;
     }
 }
+/**
+ * @param {?} obj
+ * @param {?} fn
+ * @return {?}
+ */
 function iterateListLike(obj, fn) {
     if (Array.isArray(obj)) {
-        for (var i = 0; i < obj.length; i++) {
+        for (var /** @type {?} */ i = 0; i < obj.length; i++) {
             fn(obj[i]);
         }
     }
     else {
-        var iterator = obj[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["b" /* getSymbolIterator */])()]();
-        var item = void 0;
+        var /** @type {?} */ iterator = obj[__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lang__["b" /* getSymbolIterator */])()]();
+        var /** @type {?} */ item = void 0;
         while (!((item = iterator.next()).done)) {
             fn(item.value);
         }
@@ -4207,26 +5661,34 @@ function iterateListLike(obj, fn) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var globalScope;
+var /** @type {?} */ globalScope;
 if (typeof window === 'undefined') {
     if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
         // TODO: Replace any with WorkerGlobalScope from lib.webworker.d.ts #3492
-        globalScope = self;
+        globalScope = (self);
     }
     else {
-        globalScope = global;
+        globalScope = (global);
     }
 }
 else {
-    globalScope = window;
+    globalScope = (window);
 }
+/**
+ * @param {?} fn
+ * @return {?}
+ */
 function scheduleMicroTask(fn) {
     Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
 }
 // Need to declare a new variable for global here since TypeScript
 // exports the original value of the symbol.
-var _global = globalScope;
+var /** @type {?} */ _global = globalScope;
 
+/**
+ * @param {?} type
+ * @return {?}
+ */
 function getTypeNameForDebugging(type) {
     return type['name'] || typeof type;
 }
@@ -4236,19 +5698,39 @@ function getTypeNameForDebugging(type) {
 _global.assert = function assert(condition) {
     // TODO: to be fixed properly via #2830, noop for now
 };
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function isPresent(obj) {
     return obj != null;
 }
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function isBlank(obj) {
     return obj == null;
 }
-var STRING_MAP_PROTO = Object.getPrototypeOf({});
+var /** @type {?} */ STRING_MAP_PROTO = Object.getPrototypeOf({});
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function isStrictStringMap(obj) {
     return typeof obj === 'object' && obj !== null && Object.getPrototypeOf(obj) === STRING_MAP_PROTO;
 }
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function isDate(obj) {
     return obj instanceof Date && !isNaN(obj.valueOf());
 }
+/**
+ * @param {?} token
+ * @return {?}
+ */
 function stringify(token) {
     if (typeof token === 'string') {
         return token;
@@ -4257,47 +5739,77 @@ function stringify(token) {
         return '' + token;
     }
     if (token.overriddenName) {
-        return token.overriddenName;
+        return "" + token.overriddenName;
     }
     if (token.name) {
-        return token.name;
+        return "" + token.name;
     }
-    var res = token.toString();
-    var newLineIndex = res.indexOf('\n');
+    var /** @type {?} */ res = token.toString();
+    var /** @type {?} */ newLineIndex = res.indexOf('\n');
     return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
 }
 var NumberWrapper = (function () {
     function NumberWrapper() {
     }
+    /**
+     * @param {?} text
+     * @return {?}
+     */
     NumberWrapper.parseIntAutoRadix = function (text) {
-        var result = parseInt(text);
+        var /** @type {?} */ result = parseInt(text);
         if (isNaN(result)) {
             throw new Error('Invalid integer literal when parsing ' + text);
         }
         return result;
     };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
     return NumberWrapper;
 }());
-// JS has NaN !== NaN
+/**
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
 function looseIdentical(a, b) {
     return a === b || typeof a === 'number' && typeof b === 'number' && isNaN(a) && isNaN(b);
 }
+/**
+ * @param {?} o
+ * @return {?}
+ */
 function isJsObject(o) {
     return o !== null && (typeof o === 'function' || typeof o === 'object');
 }
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function print(obj) {
     // tslint:disable-next-line:no-console
     console.log(obj);
 }
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function warn(obj) {
     console.warn(obj);
 }
+/**
+ * @param {?} global
+ * @param {?} path
+ * @param {?} value
+ * @return {?}
+ */
 function setValueOnPath(global, path, value) {
-    var parts = path.split('.');
-    var obj = global;
+    var /** @type {?} */ parts = path.split('.');
+    var /** @type {?} */ obj = global;
     while (parts.length > 1) {
-        var name_1 = parts.shift();
+        var /** @type {?} */ name_1 = parts.shift();
         if (obj.hasOwnProperty(name_1) && obj[name_1] != null) {
             obj = obj[name_1];
         }
@@ -4310,19 +5822,22 @@ function setValueOnPath(global, path, value) {
     }
     obj[parts.shift()] = value;
 }
-var _symbolIterator = null;
+var /** @type {?} */ _symbolIterator = null;
+/**
+ * @return {?}
+ */
 function getSymbolIterator() {
     if (!_symbolIterator) {
-        if (globalScope.Symbol && Symbol.iterator) {
+        if (((globalScope)).Symbol && Symbol.iterator) {
             _symbolIterator = Symbol.iterator;
         }
         else {
             // es6-shim specific logic
-            var keys = Object.getOwnPropertyNames(Map.prototype);
-            for (var i = 0; i < keys.length; ++i) {
-                var key = keys[i];
+            var /** @type {?} */ keys = Object.getOwnPropertyNames(Map.prototype);
+            for (var /** @type {?} */ i = 0; i < keys.length; ++i) {
+                var /** @type {?} */ key = keys[i];
                 if (key !== 'entries' && key !== 'size' &&
-                    Map.prototype[key] === Map.prototype['entries']) {
+                    ((Map)).prototype[key] === Map.prototype['entries']) {
                     _symbolIterator = key;
                 }
             }
@@ -4330,9 +5845,17 @@ function getSymbolIterator() {
     }
     return _symbolIterator;
 }
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function isPrimitive(obj) {
     return !isJsObject(obj);
 }
+/**
+ * @param {?} s
+ * @return {?}
+ */
 function escapeRegExp(s) {
     return s.replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
 }
@@ -4360,48 +5883,52 @@ function escapeRegExp(s) {
 
 
 /**
- * @whatItDoes Creates an {@link AbstractControl} from a user-specified configuration.
- *
- * It is essentially syntactic sugar that shortens the `new FormGroup()`,
- * `new FormControl()`, and `new FormArray()` boilerplate that can build up in larger
- * forms.
- *
- * @howToUse
- *
- * To use, inject `FormBuilder` into your component class. You can then call its methods
- * directly.
- *
- * {@example forms/ts/formBuilder/form_builder_example.ts region='Component'}
- *
- *  * **npm package**: `@angular/forms`
- *
- *  * **NgModule**: {@link ReactiveFormsModule}
- *
- * @stable
+ *  *
+  * It is essentially syntactic sugar that shortens the `new FormGroup()`,
+  * `new FormControl()`, and `new FormArray()` boilerplate that can build up in larger
+  * forms.
+  * *
+  * *
+  * To use, inject `FormBuilder` into your component class. You can then call its methods
+  * directly.
+  * *
+  * {@example forms/ts/formBuilder/form_builder_example.ts region='Component'}
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
+  * * **NgModule**: {@link ReactiveFormsModule}
+  * *
  */
 var FormBuilder = (function () {
     function FormBuilder() {
     }
     /**
-     * Construct a new {@link FormGroup} with the given map of configuration.
-     * Valid keys for the `extra` parameter map are `validator` and `asyncValidator`.
-     *
-     * See the {@link FormGroup} constructor for more details.
+     *  Construct a new {@link FormGroup} with the given map of configuration.
+      * Valid keys for the `extra` parameter map are `validator` and `asyncValidator`.
+      * *
+      * See the {@link FormGroup} constructor for more details.
+     * @param {?} controlsConfig
+     * @param {?=} extra
+     * @return {?}
      */
     FormBuilder.prototype.group = function (controlsConfig, extra) {
         if (extra === void 0) { extra = null; }
-        var controls = this._reduceControls(controlsConfig);
-        var validator = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__facade_lang__["c" /* isPresent */])(extra) ? extra['validator'] : null;
-        var asyncValidator = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__facade_lang__["c" /* isPresent */])(extra) ? extra['asyncValidator'] : null;
+        var /** @type {?} */ controls = this._reduceControls(controlsConfig);
+        var /** @type {?} */ validator = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__facade_lang__["c" /* isPresent */])(extra) ? extra['validator'] : null;
+        var /** @type {?} */ asyncValidator = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__facade_lang__["c" /* isPresent */])(extra) ? extra['asyncValidator'] : null;
         return new __WEBPACK_IMPORTED_MODULE_2__model__["a" /* FormGroup */](controls, validator, asyncValidator);
     };
     /**
-     * Construct a new {@link FormControl} with the given `formState`,`validator`, and
-     * `asyncValidator`.
-     *
-     * `formState` can either be a standalone value for the form control or an object
-     * that contains both a value and a disabled status.
-     *
+     *  Construct a new {@link FormControl} with the given `formState`,`validator`, and
+      * `asyncValidator`.
+      * *
+      * `formState` can either be a standalone value for the form control or an object
+      * that contains both a value and a disabled status.
+      * *
+     * @param {?} formState
+     * @param {?=} validator
+     * @param {?=} asyncValidator
+     * @return {?}
      */
     FormBuilder.prototype.control = function (formState, validator, asyncValidator) {
         if (validator === void 0) { validator = null; }
@@ -4409,35 +5936,45 @@ var FormBuilder = (function () {
         return new __WEBPACK_IMPORTED_MODULE_2__model__["b" /* FormControl */](formState, validator, asyncValidator);
     };
     /**
-     * Construct a {@link FormArray} from the given `controlsConfig` array of
-     * configuration, with the given optional `validator` and `asyncValidator`.
+     *  Construct a {@link FormArray} from the given `controlsConfig` array of
+      * configuration, with the given optional `validator` and `asyncValidator`.
+     * @param {?} controlsConfig
+     * @param {?=} validator
+     * @param {?=} asyncValidator
+     * @return {?}
      */
     FormBuilder.prototype.array = function (controlsConfig, validator, asyncValidator) {
         var _this = this;
         if (validator === void 0) { validator = null; }
         if (asyncValidator === void 0) { asyncValidator = null; }
-        var controls = controlsConfig.map(function (c) { return _this._createControl(c); });
+        var /** @type {?} */ controls = controlsConfig.map(function (c) { return _this._createControl(c); });
         return new __WEBPACK_IMPORTED_MODULE_2__model__["c" /* FormArray */](controls, validator, asyncValidator);
     };
-    /** @internal */
+    /**
+     * @param {?} controlsConfig
+     * @return {?}
+     */
     FormBuilder.prototype._reduceControls = function (controlsConfig) {
         var _this = this;
-        var controls = {};
+        var /** @type {?} */ controls = {};
         Object.keys(controlsConfig).forEach(function (controlName) {
             controls[controlName] = _this._createControl(controlsConfig[controlName]);
         });
         return controls;
     };
-    /** @internal */
+    /**
+     * @param {?} controlConfig
+     * @return {?}
+     */
     FormBuilder.prototype._createControl = function (controlConfig) {
         if (controlConfig instanceof __WEBPACK_IMPORTED_MODULE_2__model__["b" /* FormControl */] || controlConfig instanceof __WEBPACK_IMPORTED_MODULE_2__model__["a" /* FormGroup */] ||
             controlConfig instanceof __WEBPACK_IMPORTED_MODULE_2__model__["c" /* FormArray */]) {
             return controlConfig;
         }
         else if (Array.isArray(controlConfig)) {
-            var value = controlConfig[0];
-            var validator = controlConfig.length > 1 ? controlConfig[1] : null;
-            var asyncValidator = controlConfig.length > 2 ? controlConfig[2] : null;
+            var /** @type {?} */ value = controlConfig[0];
+            var /** @type {?} */ validator = controlConfig.length > 1 ? controlConfig[1] : null;
+            var /** @type {?} */ asyncValidator = controlConfig.length > 2 ? controlConfig[2] : null;
             return this.control(value, validator, asyncValidator);
         }
         else {
@@ -4448,9 +5985,18 @@ var FormBuilder = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
     ];
     /** @nocollapse */
-    FormBuilder.ctorParameters = [];
+    FormBuilder.ctorParameters = function () { return []; };
     return FormBuilder;
 }());
+function FormBuilder_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormBuilder.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    FormBuilder.ctorParameters;
+}
 //# sourceMappingURL=form_builder.js.map
 
 /***/ },
@@ -4477,8 +6023,7 @@ var FormBuilder = (function () {
 
 
 /**
- * The ng module for forms.
- * @stable
+ *  The ng module for forms.
  */
 var FormsModule = (function () {
     function FormsModule() {
@@ -4491,12 +6036,20 @@ var FormsModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    FormsModule.ctorParameters = [];
+    FormsModule.ctorParameters = function () { return []; };
     return FormsModule;
 }());
+function FormsModule_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormsModule.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    FormsModule.ctorParameters;
+}
 /**
- * The ng module for reactive forms.
- * @stable
+ *  The ng module for reactive forms.
  */
 var ReactiveFormsModule = (function () {
     function ReactiveFormsModule() {
@@ -4509,9 +6062,18 @@ var ReactiveFormsModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    ReactiveFormsModule.ctorParameters = [];
+    ReactiveFormsModule.ctorParameters = function () { return []; };
     return ReactiveFormsModule;
 }());
+function ReactiveFormsModule_tsickle_Closure_declarations() {
+    /** @type {?} */
+    ReactiveFormsModule.decorators;
+    /**
+     * @nocollapse
+     * @type {?}
+     */
+    ReactiveFormsModule.ctorParameters;
+}
 //# sourceMappingURL=form_providers.js.map
 
 /***/ },
@@ -4542,8 +6104,9 @@ var ReactiveFormsModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__form_builder__ = __webpack_require__("./node_modules/@angular/forms/src/form_builder.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__model__ = __webpack_require__("./node_modules/@angular/forms/src/model.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__validators__ = __webpack_require__("./node_modules/@angular/forms/src/validators.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__form_providers__ = __webpack_require__("./node_modules/@angular/forms/src/form_providers.js");
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__version__ = __webpack_require__("./node_modules/@angular/forms/src/version.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__form_providers__ = __webpack_require__("./node_modules/@angular/forms/src/form_providers.js");
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "s", function() { return __WEBPACK_IMPORTED_MODULE_0__directives_abstract_control_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__directives_abstract_form_group_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__directives_checkbox_value_accessor__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "d", function() { return __WEBPACK_IMPORTED_MODULE_3__directives_control_container__["a"]; });
@@ -4561,23 +6124,25 @@ var ReactiveFormsModule = (function () {
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "p", function() { return __WEBPACK_IMPORTED_MODULE_14__directives_reactive_directives_form_group_directive__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "q", function() { return __WEBPACK_IMPORTED_MODULE_15__directives_reactive_directives_form_group_name__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "r", function() { return __WEBPACK_IMPORTED_MODULE_15__directives_reactive_directives_form_group_name__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "s", function() { return __WEBPACK_IMPORTED_MODULE_16__directives_select_control_value_accessor__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_16__directives_select_control_value_accessor__["b"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "t", function() { return __WEBPACK_IMPORTED_MODULE_16__directives_select_control_value_accessor__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "u", function() { return __WEBPACK_IMPORTED_MODULE_17__directives_select_multiple_control_value_accessor__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "v", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["c"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "w", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "x", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["d"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "y", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "z", function() { return __WEBPACK_IMPORTED_MODULE_19__form_builder__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "A", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["d"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "B", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["c"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "C", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "D", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "E", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["c"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "F", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(exports, "G", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "H", function() { return __WEBPACK_IMPORTED_MODULE_22__form_providers__["a"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "I", function() { return __WEBPACK_IMPORTED_MODULE_22__form_providers__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "w", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "x", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "y", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["d"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "z", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "v", function() { return __WEBPACK_IMPORTED_MODULE_18__directives_validators__["e"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "A", function() { return __WEBPACK_IMPORTED_MODULE_19__form_builder__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "C", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "D", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "E", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "B", function() { return __WEBPACK_IMPORTED_MODULE_20__model__["d"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "F", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "G", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "H", function() { return __WEBPACK_IMPORTED_MODULE_21__validators__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "I", function() { return __WEBPACK_IMPORTED_MODULE_22__version__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "J", function() { return __WEBPACK_IMPORTED_MODULE_23__form_providers__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "K", function() { return __WEBPACK_IMPORTED_MODULE_23__form_providers__["b"]; });
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -4619,6 +6184,7 @@ var ReactiveFormsModule = (function () {
 
 
 
+
 //# sourceMappingURL=forms.js.map
 
 /***/ },
@@ -4636,7 +6202,6 @@ var ReactiveFormsModule = (function () {
 /* unused harmony export INVALID */
 /* unused harmony export PENDING */
 /* unused harmony export DISABLED */
-/* unused harmony export isControl */
 /* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return AbstractControl; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return FormControl; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormGroup; });
@@ -4660,63 +6225,81 @@ var __extends = (this && this.__extends) || function (d, b) {
 /**
  * Indicates that a FormControl is valid, i.e. that no errors exist in the input value.
  */
-var VALID = 'VALID';
+var /** @type {?} */ VALID = 'VALID';
 /**
  * Indicates that a FormControl is invalid, i.e. that an error exists in the input value.
  */
-var INVALID = 'INVALID';
+var /** @type {?} */ INVALID = 'INVALID';
 /**
  * Indicates that a FormControl is pending, i.e. that async validation is occurring and
  * errors are not yet available for the input value.
  */
-var PENDING = 'PENDING';
+var /** @type {?} */ PENDING = 'PENDING';
 /**
  * Indicates that a FormControl is disabled, i.e. that the control is exempt from ancestor
  * calculations of validity or value.
  */
-var DISABLED = 'DISABLED';
-function isControl(control) {
-    return control instanceof AbstractControl;
-}
+var /** @type {?} */ DISABLED = 'DISABLED';
+/**
+ * @param {?} control
+ * @param {?} path
+ * @param {?} delimiter
+ * @return {?}
+ */
 function _find(control, path, delimiter) {
     if (path == null)
         return null;
     if (!(path instanceof Array)) {
-        path = path.split(delimiter);
+        path = ((path)).split(delimiter);
     }
     if (path instanceof Array && (path.length === 0))
         return null;
-    return path.reduce(function (v, name) {
+    return ((path)).reduce(function (v, name) {
         if (v instanceof FormGroup) {
             return v.controls[name] || null;
         }
         if (v instanceof FormArray) {
-            return v.at(name) || null;
+            return v.at(/** @type {?} */ (name)) || null;
         }
         return null;
     }, control);
 }
+/**
+ * @param {?} r
+ * @return {?}
+ */
 function toObservable(r) {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__private_import_core__["a" /* isPromise */])(r) ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_rxjs_observable_fromPromise__["fromPromise"])(r) : r;
 }
+/**
+ * @param {?} validator
+ * @return {?}
+ */
 function coerceToValidator(validator) {
     return Array.isArray(validator) ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__directives_shared__["b" /* composeValidators */])(validator) : validator;
 }
+/**
+ * @param {?} asyncValidator
+ * @return {?}
+ */
 function coerceToAsyncValidator(asyncValidator) {
     return Array.isArray(asyncValidator) ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__directives_shared__["c" /* composeAsyncValidators */])(asyncValidator) : asyncValidator;
 }
 /**
- * @whatItDoes This is the base class for {@link FormControl}, {@link FormGroup}, and
- * {@link FormArray}.
- *
- * It provides some of the shared behavior that all controls and groups of controls have, like
- * running validators, calculating status, and resetting state. It also defines the properties
- * that are shared between all sub-classes, like `value`, `valid`, and `dirty`. It shouldn't be
- * instantiated directly.
- *
- * @stable
+ *  {@link FormArray}.
+  * *
+  * It provides some of the shared behavior that all controls and groups of controls have, like
+  * running validators, calculating status, and resetting state. It also defines the properties
+  * that are shared between all sub-classes, like `value`, `valid`, and `dirty`. It shouldn't be
+  * instantiated directly.
+  * *
+ * @abstract
  */
 var AbstractControl = (function () {
+    /**
+     * @param {?} validator
+     * @param {?} asyncValidator
+     */
     function AbstractControl(validator, asyncValidator) {
         this.validator = validator;
         this.asyncValidator = asyncValidator;
@@ -4729,7 +6312,8 @@ var AbstractControl = (function () {
     }
     Object.defineProperty(AbstractControl.prototype, "value", {
         /**
-         * The value of the control.
+         *  The value of the control.
+         * @return {?}
          */
         get: function () { return this._value; },
         enumerable: true,
@@ -4737,7 +6321,8 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "parent", {
         /**
-         * The parent control.
+         *  The parent control.
+         * @return {?}
          */
         get: function () { return this._parent; },
         enumerable: true,
@@ -4745,16 +6330,17 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "status", {
         /**
-         * The validation status of the control. There are four possible
-         * validation statuses:
-         *
-         * * **VALID**:  control has passed all validation checks
-         * * **INVALID**: control has failed at least one validation check
-         * * **PENDING**: control is in the midst of conducting a validation check
-         * * **DISABLED**: control is exempt from validation checks
-         *
-         * These statuses are mutually exclusive, so a control cannot be
-         * both valid AND invalid or invalid AND disabled.
+         *  The validation status of the control. There are four possible
+          * validation statuses:
+          * *
+          * * **VALID**:  control has passed all validation checks
+          * * **INVALID**: control has failed at least one validation check
+          * * **PENDING**: control is in the midst of conducting a validation check
+          * * **DISABLED**: control is exempt from validation checks
+          * *
+          * These statuses are mutually exclusive, so a control cannot be
+          * both valid AND invalid or invalid AND disabled.
+         * @return {?}
          */
         get: function () { return this._status; },
         enumerable: true,
@@ -4762,10 +6348,11 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "valid", {
         /**
-         * A control is `valid` when its `status === VALID`.
-         *
-         * In order to have this status, the control must have passed all its
-         * validation checks.
+         *  A control is `valid` when its `status === VALID`.
+          * *
+          * In order to have this status, the control must have passed all its
+          * validation checks.
+         * @return {?}
          */
         get: function () { return this._status === VALID; },
         enumerable: true,
@@ -4773,10 +6360,11 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "invalid", {
         /**
-         * A control is `invalid` when its `status === INVALID`.
-         *
-         * In order to have this status, the control must have failed
-         * at least one of its validation checks.
+         *  A control is `invalid` when its `status === INVALID`.
+          * *
+          * In order to have this status, the control must have failed
+          * at least one of its validation checks.
+         * @return {?}
          */
         get: function () { return this._status === INVALID; },
         enumerable: true,
@@ -4784,10 +6372,11 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "pending", {
         /**
-         * A control is `pending` when its `status === PENDING`.
-         *
-         * In order to have this status, the control must be in the
-         * middle of conducting a validation check.
+         *  A control is `pending` when its `status === PENDING`.
+          * *
+          * In order to have this status, the control must be in the
+          * middle of conducting a validation check.
+         * @return {?}
          */
         get: function () { return this._status == PENDING; },
         enumerable: true,
@@ -4795,11 +6384,12 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "disabled", {
         /**
-         * A control is `disabled` when its `status === DISABLED`.
-         *
-         * Disabled controls are exempt from validation checks and
-         * are not included in the aggregate value of their ancestor
-         * controls.
+         *  A control is `disabled` when its `status === DISABLED`.
+          * *
+          * Disabled controls are exempt from validation checks and
+          * are not included in the aggregate value of their ancestor
+          * controls.
+         * @return {?}
          */
         get: function () { return this._status === DISABLED; },
         enumerable: true,
@@ -4807,10 +6397,11 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "enabled", {
         /**
-         * A control is `enabled` as long as its `status !== DISABLED`.
-         *
-         * In other words, it has a status of `VALID`, `INVALID`, or
-         * `PENDING`.
+         *  A control is `enabled` as long as its `status !== DISABLED`.
+          * *
+          * In other words, it has a status of `VALID`, `INVALID`, or
+          * `PENDING`.
+         * @return {?}
          */
         get: function () { return this._status !== DISABLED; },
         enumerable: true,
@@ -4818,8 +6409,9 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "errors", {
         /**
-         * Returns any errors generated by failing validation. If there
-         * are no errors, it will return null.
+         *  Returns any errors generated by failing validation. If there
+          * are no errors, it will return null.
+         * @return {?}
          */
         get: function () { return this._errors; },
         enumerable: true,
@@ -4827,11 +6419,12 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "pristine", {
         /**
-         * A control is `pristine` if the user has not yet changed
-         * the value in the UI.
-         *
-         * Note that programmatic changes to a control's value will
-         * *not* mark it dirty.
+         *  A control is `pristine` if the user has not yet changed
+          * the value in the UI.
+          * *
+          * Note that programmatic changes to a control's value will
+          * *not* mark it dirty.
+         * @return {?}
          */
         get: function () { return this._pristine; },
         enumerable: true,
@@ -4839,11 +6432,12 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "dirty", {
         /**
-         * A control is `dirty` if the user has changed the value
-         * in the UI.
-         *
-         * Note that programmatic changes to a control's value will
-         * *not* mark it dirty.
+         *  A control is `dirty` if the user has changed the value
+          * in the UI.
+          * *
+          * Note that programmatic changes to a control's value will
+          * *not* mark it dirty.
+         * @return {?}
          */
         get: function () { return !this.pristine; },
         enumerable: true,
@@ -4851,17 +6445,19 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "touched", {
         /**
-        * A control is marked `touched` once the user has triggered
-        * a `blur` event on it.
-        */
+         *  A control is marked `touched` once the user has triggered
+          * a `blur` event on it.
+         * @return {?}
+         */
         get: function () { return this._touched; },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(AbstractControl.prototype, "untouched", {
         /**
-         * A control is `untouched` if the user has not yet triggered
-         * a `blur` event on it.
+         *  A control is `untouched` if the user has not yet triggered
+          * a `blur` event on it.
+         * @return {?}
          */
         get: function () { return !this._touched; },
         enumerable: true,
@@ -4869,8 +6465,9 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "valueChanges", {
         /**
-         * Emits an event every time the value of the control changes, in
-         * the UI or programmatically.
+         *  Emits an event every time the value of the control changes, in
+          * the UI or programmatically.
+         * @return {?}
          */
         get: function () { return this._valueChanges; },
         enumerable: true,
@@ -4878,40 +6475,49 @@ var AbstractControl = (function () {
     });
     Object.defineProperty(AbstractControl.prototype, "statusChanges", {
         /**
-         * Emits an event every time the validation status of the control
-         * is re-calculated.
+         *  Emits an event every time the validation status of the control
+          * is re-calculated.
+         * @return {?}
          */
         get: function () { return this._statusChanges; },
         enumerable: true,
         configurable: true
     });
     /**
-     * Sets the synchronous validators that are active on this control.  Calling
-     * this will overwrite any existing sync validators.
+     *  Sets the synchronous validators that are active on this control.  Calling
+      * this will overwrite any existing sync validators.
+     * @param {?} newValidator
+     * @return {?}
      */
     AbstractControl.prototype.setValidators = function (newValidator) {
         this.validator = coerceToValidator(newValidator);
     };
     /**
-     * Sets the async validators that are active on this control. Calling this
-     * will overwrite any existing async validators.
+     *  Sets the async validators that are active on this control. Calling this
+      * will overwrite any existing async validators.
+     * @param {?} newValidator
+     * @return {?}
      */
     AbstractControl.prototype.setAsyncValidators = function (newValidator) {
         this.asyncValidator = coerceToAsyncValidator(newValidator);
     };
     /**
-     * Empties out the sync validator list.
+     *  Empties out the sync validator list.
+     * @return {?}
      */
     AbstractControl.prototype.clearValidators = function () { this.validator = null; };
     /**
-     * Empties out the async validator list.
+     *  Empties out the async validator list.
+     * @return {?}
      */
     AbstractControl.prototype.clearAsyncValidators = function () { this.asyncValidator = null; };
     /**
-     * Marks the control as `touched`.
-     *
-     * This will also mark all direct ancestors as `touched` to maintain
-     * the model.
+     *  Marks the control as `touched`.
+      * *
+      * This will also mark all direct ancestors as `touched` to maintain
+      * the model.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.markAsTouched = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
@@ -4921,11 +6527,13 @@ var AbstractControl = (function () {
         }
     };
     /**
-     * Marks the control as `untouched`.
-     *
-     * If the control has any children, it will also mark all children as `untouched`
-     * to maintain the model, and re-calculate the `touched` status of all parent
-     * controls.
+     *  Marks the control as `untouched`.
+      * *
+      * If the control has any children, it will also mark all children as `untouched`
+      * to maintain the model, and re-calculate the `touched` status of all parent
+      * controls.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.markAsUntouched = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
@@ -4936,10 +6544,12 @@ var AbstractControl = (function () {
         }
     };
     /**
-     * Marks the control as `dirty`.
-     *
-     * This will also mark all direct ancestors as `dirty` to maintain
-     * the model.
+     *  Marks the control as `dirty`.
+      * *
+      * This will also mark all direct ancestors as `dirty` to maintain
+      * the model.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.markAsDirty = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
@@ -4949,11 +6559,13 @@ var AbstractControl = (function () {
         }
     };
     /**
-     * Marks the control as `pristine`.
-     *
-     * If the control has any children, it will also mark all children as `pristine`
-     * to maintain the model, and re-calculate the `pristine` status of all parent
-     * controls.
+     *  Marks the control as `pristine`.
+      * *
+      * If the control has any children, it will also mark all children as `pristine`
+      * to maintain the model, and re-calculate the `pristine` status of all parent
+      * controls.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.markAsPristine = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
@@ -4964,7 +6576,9 @@ var AbstractControl = (function () {
         }
     };
     /**
-     * Marks the control as `pending`.
+     *  Marks the control as `pending`.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.markAsPending = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
@@ -4974,10 +6588,12 @@ var AbstractControl = (function () {
         }
     };
     /**
-     * Disables the control. This means the control will be exempt from validation checks and
-     * excluded from the aggregate value of any parent. Its status is `DISABLED`.
-     *
-     * If the control has children, all children will be disabled to maintain the model.
+     *  Disables the control. This means the control will be exempt from validation checks and
+      * excluded from the aggregate value of any parent. Its status is `DISABLED`.
+      * *
+      * If the control has children, all children will be disabled to maintain the model.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.disable = function (_a) {
         var _b = _a === void 0 ? {} : _a, onlySelf = _b.onlySelf, emitEvent = _b.emitEvent;
@@ -4993,11 +6609,13 @@ var AbstractControl = (function () {
         this._onDisabledChange.forEach(function (changeFn) { return changeFn(true); });
     };
     /**
-     * Enables the control. This means the control will be included in validation checks and
-     * the aggregate value of its parent. Its status is re-calculated based on its value and
-     * its validators.
-     *
-     * If the control has children, all children will be enabled.
+     *  Enables the control. This means the control will be included in validation checks and
+      * the aggregate value of its parent. Its status is re-calculated based on its value and
+      * its validators.
+      * *
+      * If the control has children, all children will be enabled.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.enable = function (_a) {
         var _b = _a === void 0 ? {} : _a, onlySelf = _b.onlySelf, emitEvent = _b.emitEvent;
@@ -5007,6 +6625,10 @@ var AbstractControl = (function () {
         this._updateAncestors(onlySelf);
         this._onDisabledChange.forEach(function (changeFn) { return changeFn(false); });
     };
+    /**
+     * @param {?} onlySelf
+     * @return {?}
+     */
     AbstractControl.prototype._updateAncestors = function (onlySelf) {
         if (this._parent && !onlySelf) {
             this._parent.updateValueAndValidity();
@@ -5014,11 +6636,41 @@ var AbstractControl = (function () {
             this._parent._updateTouched();
         }
     };
+    /**
+     * @param {?} parent
+     * @return {?}
+     */
     AbstractControl.prototype.setParent = function (parent) { this._parent = parent; };
     /**
-     * Re-calculates the value and validation status of the control.
-     *
-     * By default, it will also update the value and validity of its ancestors.
+     *  Sets the value of the control. Abstract method (implemented in sub-classes).
+     * @abstract
+     * @param {?} value
+     * @param {?=} options
+     * @return {?}
+     */
+    AbstractControl.prototype.setValue = function (value, options) { };
+    /**
+     *  Patches the value of the control. Abstract method (implemented in sub-classes).
+     * @abstract
+     * @param {?} value
+     * @param {?=} options
+     * @return {?}
+     */
+    AbstractControl.prototype.patchValue = function (value, options) { };
+    /**
+     *  Resets the control. Abstract method (implemented in sub-classes).
+     * @abstract
+     * @param {?=} value
+     * @param {?=} options
+     * @return {?}
+     */
+    AbstractControl.prototype.reset = function (value, options) { };
+    /**
+     *  Re-calculates the value and validation status of the control.
+      * *
+      * By default, it will also update the value and validity of its ancestors.
+     * @param {?=} __0
+     * @return {?}
      */
     AbstractControl.prototype.updateValueAndValidity = function (_a) {
         var _b = _a === void 0 ? {} : _a, onlySelf = _b.onlySelf, emitEvent = _b.emitEvent;
@@ -5039,53 +6691,72 @@ var AbstractControl = (function () {
             this._parent.updateValueAndValidity({ onlySelf: onlySelf, emitEvent: emitEvent });
         }
     };
-    /** @internal */
+    /**
+     * @param {?=} __0
+     * @return {?}
+     */
     AbstractControl.prototype._updateTreeValidity = function (_a) {
         var emitEvent = (_a === void 0 ? { emitEvent: true } : _a).emitEvent;
         this._forEachChild(function (ctrl) { return ctrl._updateTreeValidity({ emitEvent: emitEvent }); });
         this.updateValueAndValidity({ onlySelf: true, emitEvent: emitEvent });
     };
+    /**
+     * @return {?}
+     */
     AbstractControl.prototype._setInitialStatus = function () { this._status = this._allControlsDisabled() ? DISABLED : VALID; };
+    /**
+     * @return {?}
+     */
     AbstractControl.prototype._runValidator = function () {
         return this.validator ? this.validator(this) : null;
     };
+    /**
+     * @param {?} emitEvent
+     * @return {?}
+     */
     AbstractControl.prototype._runAsyncValidator = function (emitEvent) {
         var _this = this;
         if (this.asyncValidator) {
             this._status = PENDING;
             this._cancelExistingSubscription();
-            var obs = toObservable(this.asyncValidator(this));
+            var /** @type {?} */ obs = toObservable(this.asyncValidator(this));
             this._asyncValidationSubscription =
                 obs.subscribe({ next: function (res) { return _this.setErrors(res, { emitEvent: emitEvent }); } });
         }
     };
+    /**
+     * @return {?}
+     */
     AbstractControl.prototype._cancelExistingSubscription = function () {
         if (this._asyncValidationSubscription) {
             this._asyncValidationSubscription.unsubscribe();
         }
     };
     /**
-     * Sets errors on a form control.
-     *
-     * This is used when validations are run manually by the user, rather than automatically.
-     *
-     * Calling `setErrors` will also update the validity of the parent control.
-     *
-     * ### Example
-     *
-     * ```
-     * const login = new FormControl("someLogin");
-     * login.setErrors({
-     *   "notUnique": true
-     * });
-     *
-     * expect(login.valid).toEqual(false);
-     * expect(login.errors).toEqual({"notUnique": true});
-     *
-     * login.setValue("someOtherLogin");
-     *
-     * expect(login.valid).toEqual(true);
-     * ```
+     *  Sets errors on a form control.
+      * *
+      * This is used when validations are run manually by the user, rather than automatically.
+      * *
+      * Calling `setErrors` will also update the validity of the parent control.
+      * *
+      * ### Example
+      * *
+      * ```
+      * const login = new FormControl("someLogin");
+      * login.setErrors({
+      * "notUnique": true
+      * });
+      * *
+      * expect(login.valid).toEqual(false);
+      * expect(login.errors).toEqual({"notUnique": true});
+      * *
+      * login.setValue("someOtherLogin");
+      * *
+      * expect(login.valid).toEqual(true);
+      * ```
+     * @param {?} errors
+     * @param {?=} __1
+     * @return {?}
      */
     AbstractControl.prototype.setErrors = function (errors, _a) {
         var emitEvent = (_a === void 0 ? {} : _a).emitEvent;
@@ -5093,35 +6764,43 @@ var AbstractControl = (function () {
         this._updateControlsErrors(emitEvent !== false);
     };
     /**
-     * Retrieves a child control given the control's name or path.
-     *
-     * Paths can be passed in as an array or a string delimited by a dot.
-     *
-     * To get a control nested within a `person` sub-group:
-     *
-     * * `this.form.get('person.name');`
-     *
-     * -OR-
-     *
-     * * `this.form.get(['person', 'name']);`
+     *  Retrieves a child control given the control's name or path.
+      * *
+      * Paths can be passed in as an array or a string delimited by a dot.
+      * *
+      * To get a control nested within a `person` sub-group:
+      * *
+      * * `this.form.get('person.name');`
+      * *
+      * -OR-
+      * *
+      * * `this.form.get(['person', 'name']);`
+     * @param {?} path
+     * @return {?}
      */
     AbstractControl.prototype.get = function (path) { return _find(this, path, '.'); };
     /**
-     * Returns true if the control with the given path has the error specified. Otherwise
-     * returns null or undefined.
-     *
-     * If no path is given, it checks for the error on the present control.
+     *  Returns true if the control with the given path has the error specified. Otherwise
+      * returns null or undefined.
+      * *
+      * If no path is given, it checks for the error on the present control.
+     * @param {?} errorCode
+     * @param {?=} path
+     * @return {?}
      */
     AbstractControl.prototype.getError = function (errorCode, path) {
         if (path === void 0) { path = null; }
-        var control = path ? this.get(path) : this;
+        var /** @type {?} */ control = path ? this.get(path) : this;
         return control && control._errors ? control._errors[errorCode] : null;
     };
     /**
-     * Returns true if the control with the given path has the error specified. Otherwise
-     * returns false.
-     *
-     * If no path is given, it checks for the error on the present control.
+     *  Returns true if the control with the given path has the error specified. Otherwise
+      * returns false.
+      * *
+      * If no path is given, it checks for the error on the present control.
+     * @param {?} errorCode
+     * @param {?=} path
+     * @return {?}
      */
     AbstractControl.prototype.hasError = function (errorCode, path) {
         if (path === void 0) { path = null; }
@@ -5129,10 +6808,11 @@ var AbstractControl = (function () {
     };
     Object.defineProperty(AbstractControl.prototype, "root", {
         /**
-         * Retrieves the top-level ancestor of this control.
+         *  Retrieves the top-level ancestor of this control.
+         * @return {?}
          */
         get: function () {
-            var x = this;
+            var /** @type {?} */ x = this;
             while (x._parent) {
                 x = x._parent;
             }
@@ -5141,7 +6821,10 @@ var AbstractControl = (function () {
         enumerable: true,
         configurable: true
     });
-    /** @internal */
+    /**
+     * @param {?} emitEvent
+     * @return {?}
+     */
     AbstractControl.prototype._updateControlsErrors = function (emitEvent) {
         this._status = this._calculateStatus();
         if (emitEvent) {
@@ -5151,11 +6834,16 @@ var AbstractControl = (function () {
             this._parent._updateControlsErrors(emitEvent);
         }
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     AbstractControl.prototype._initObservables = function () {
         this._valueChanges = new __WEBPACK_IMPORTED_MODULE_2__facade_async__["a" /* EventEmitter */]();
         this._statusChanges = new __WEBPACK_IMPORTED_MODULE_2__facade_async__["a" /* EventEmitter */]();
     };
+    /**
+     * @return {?}
+     */
     AbstractControl.prototype._calculateStatus = function () {
         if (this._allControlsDisabled())
             return DISABLED;
@@ -5167,19 +6855,51 @@ var AbstractControl = (function () {
             return INVALID;
         return VALID;
     };
-    /** @internal */
+    /**
+     * @abstract
+     * @return {?}
+     */
+    AbstractControl.prototype._updateValue = function () { };
+    /**
+     * @abstract
+     * @param {?} cb
+     * @return {?}
+     */
+    AbstractControl.prototype._forEachChild = function (cb) { };
+    /**
+     * @abstract
+     * @param {?} condition
+     * @return {?}
+     */
+    AbstractControl.prototype._anyControls = function (condition) { };
+    /**
+     * @abstract
+     * @return {?}
+     */
+    AbstractControl.prototype._allControlsDisabled = function () { };
+    /**
+     * @param {?} status
+     * @return {?}
+     */
     AbstractControl.prototype._anyControlsHaveStatus = function (status) {
         return this._anyControls(function (control) { return control.status === status; });
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     AbstractControl.prototype._anyControlsDirty = function () {
         return this._anyControls(function (control) { return control.dirty; });
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     AbstractControl.prototype._anyControlsTouched = function () {
         return this._anyControls(function (control) { return control.touched; });
     };
-    /** @internal */
+    /**
+     * @param {?=} __0
+     * @return {?}
+     */
     AbstractControl.prototype._updatePristine = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
         this._pristine = !this._anyControlsDirty();
@@ -5187,7 +6907,10 @@ var AbstractControl = (function () {
             this._parent._updatePristine({ onlySelf: onlySelf });
         }
     };
-    /** @internal */
+    /**
+     * @param {?=} __0
+     * @return {?}
+     */
     AbstractControl.prototype._updateTouched = function (_a) {
         var onlySelf = (_a === void 0 ? {} : _a).onlySelf;
         this._touched = this._anyControlsTouched();
@@ -5195,60 +6918,96 @@ var AbstractControl = (function () {
             this._parent._updateTouched({ onlySelf: onlySelf });
         }
     };
-    /** @internal */
+    /**
+     * @param {?} formState
+     * @return {?}
+     */
     AbstractControl.prototype._isBoxedValue = function (formState) {
         return typeof formState === 'object' && formState !== null &&
             Object.keys(formState).length === 2 && 'value' in formState && 'disabled' in formState;
     };
-    /** @internal */
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
     AbstractControl.prototype._registerOnCollectionChange = function (fn) { this._onCollectionChange = fn; };
     return AbstractControl;
 }());
+function AbstractControl_tsickle_Closure_declarations() {
+    /** @type {?} */
+    AbstractControl.prototype._value;
+    /** @type {?} */
+    AbstractControl.prototype._onCollectionChange;
+    /** @type {?} */
+    AbstractControl.prototype._valueChanges;
+    /** @type {?} */
+    AbstractControl.prototype._statusChanges;
+    /** @type {?} */
+    AbstractControl.prototype._status;
+    /** @type {?} */
+    AbstractControl.prototype._errors;
+    /** @type {?} */
+    AbstractControl.prototype._pristine;
+    /** @type {?} */
+    AbstractControl.prototype._touched;
+    /** @type {?} */
+    AbstractControl.prototype._parent;
+    /** @type {?} */
+    AbstractControl.prototype._asyncValidationSubscription;
+    /** @type {?} */
+    AbstractControl.prototype._onDisabledChange;
+    /** @type {?} */
+    AbstractControl.prototype.validator;
+    /** @type {?} */
+    AbstractControl.prototype.asyncValidator;
+}
 /**
- * @whatItDoes Tracks the value and validation status of an individual form control.
- *
- * It is one of the three fundamental building blocks of Angular forms, along with
- * {@link FormGroup} and {@link FormArray}.
- *
- * @howToUse
- *
- * When instantiating a {@link FormControl}, you can pass in an initial value as the
- * first argument. Example:
- *
- * ```ts
- * const ctrl = new FormControl('some value');
- * console.log(ctrl.value);     // 'some value'
- *```
- *
- * You can also initialize the control with a form state object on instantiation,
- * which includes both the value and whether or not the control is disabled.
- * You can't use the value key without the disabled key; both are required
- * to use this way of initialization.
- *
- * ```ts
- * const ctrl = new FormControl({value: 'n/a', disabled: true});
- * console.log(ctrl.value);     // 'n/a'
- * console.log(ctrl.status);   // 'DISABLED'
- * ```
- *
- * To include a sync validator (or an array of sync validators) with the control,
- * pass it in as the second argument. Async validators are also supported, but
- * have to be passed in separately as the third arg.
- *
- * ```ts
- * const ctrl = new FormControl('', Validators.required);
- * console.log(ctrl.value);     // ''
- * console.log(ctrl.status);   // 'INVALID'
- * ```
- *
- * See its superclass, {@link AbstractControl}, for more properties and methods.
- *
- * * **npm package**: `@angular/forms`
- *
- * @stable
+ *  *
+  * It is one of the three fundamental building blocks of Angular forms, along with
+  * {@link FormGroup} and {@link FormArray}.
+  * *
+  * *
+  * When instantiating a {@link FormControl}, you can pass in an initial value as the
+  * first argument. Example:
+  * *
+  * ```ts
+  * const ctrl = new FormControl('some value');
+  * console.log(ctrl.value);     // 'some value'
+  * *```
+  * *
+  * You can also initialize the control with a form state object on instantiation,
+  * which includes both the value and whether or not the control is disabled.
+  * You can't use the value key without the disabled key; both are required
+  * to use this way of initialization.
+  * *
+  * ```ts
+  * const ctrl = new FormControl({value: 'n/a', disabled: true});
+  * console.log(ctrl.value);     // 'n/a'
+  * console.log(ctrl.status);   // 'DISABLED'
+  * ```
+  * *
+  * To include a sync validator (or an array of sync validators) with the control,
+  * pass it in as the second argument. Async validators are also supported, but
+  * have to be passed in separately as the third arg.
+  * *
+  * ```ts
+  * const ctrl = new FormControl('', Validators.required);
+  * console.log(ctrl.value);     // ''
+  * console.log(ctrl.status);   // 'INVALID'
+  * ```
+  * *
+  * See its superclass, {@link AbstractControl}, for more properties and methods.
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
  */
 var FormControl = (function (_super) {
     __extends(FormControl, _super);
+    /**
+     * @param {?=} formState
+     * @param {?=} validator
+     * @param {?=} asyncValidator
+     */
     function FormControl(formState, validator, asyncValidator) {
         if (formState === void 0) { formState = null; }
         if (validator === void 0) { validator = null; }
@@ -5261,21 +7020,24 @@ var FormControl = (function (_super) {
         this._initObservables();
     }
     /**
-     * Set the value of the form control to `value`.
-     *
-     * If `onlySelf` is `true`, this change will only affect the validation of this `FormControl`
-     * and not its parent component. This defaults to false.
-     *
-     * If `emitEvent` is `true`, this
-     * change will cause a `valueChanges` event on the `FormControl` to be emitted. This defaults
-     * to true (as it falls through to `updateValueAndValidity`).
-     *
-     * If `emitModelToViewChange` is `true`, the view will be notified about the new value
-     * via an `onChange` event. This is the default behavior if `emitModelToViewChange` is not
-     * specified.
-     *
-     * If `emitViewToModelChange` is `true`, an ngModelChange event will be fired to update the
-     * model.  This is the default behavior if `emitViewToModelChange` is not specified.
+     *  Set the value of the form control to `value`.
+      * *
+      * If `onlySelf` is `true`, this change will only affect the validation of this `FormControl`
+      * and not its parent component. This defaults to false.
+      * *
+      * If `emitEvent` is `true`, this
+      * change will cause a `valueChanges` event on the `FormControl` to be emitted. This defaults
+      * to true (as it falls through to `updateValueAndValidity`).
+      * *
+      * If `emitModelToViewChange` is `true`, the view will be notified about the new value
+      * via an `onChange` event. This is the default behavior if `emitModelToViewChange` is not
+      * specified.
+      * *
+      * If `emitViewToModelChange` is `true`, an ngModelChange event will be fired to update the
+      * model.  This is the default behavior if `emitViewToModelChange` is not specified.
+     * @param {?} value
+     * @param {?=} __1
+     * @return {?}
      */
     FormControl.prototype.setValue = function (value, _a) {
         var _this = this;
@@ -5287,43 +7049,49 @@ var FormControl = (function (_super) {
         this.updateValueAndValidity({ onlySelf: onlySelf, emitEvent: emitEvent });
     };
     /**
-     * Patches the value of a control.
-     *
-     * This function is functionally the same as {@link FormControl.setValue} at this level.
-     * It exists for symmetry with {@link FormGroup.patchValue} on `FormGroups` and `FormArrays`,
-     * where it does behave differently.
+     *  Patches the value of a control.
+      * *
+      * This function is functionally the same as {@link FormControl.setValue} at this level.
+      * It exists for symmetry with {@link FormGroup.patchValue} on `FormGroups` and `FormArrays`,
+      * where it does behave differently.
+     * @param {?} value
+     * @param {?=} options
+     * @return {?}
      */
     FormControl.prototype.patchValue = function (value, options) {
         if (options === void 0) { options = {}; }
         this.setValue(value, options);
     };
     /**
-     * Resets the form control. This means by default:
-     *
-     * * it is marked as `pristine`
-     * * it is marked as `untouched`
-     * * value is set to null
-     *
-     * You can also reset to a specific form state by passing through a standalone
-     * value or a form state object that contains both a value and a disabled state
-     * (these are the only two properties that cannot be calculated).
-     *
-     * Ex:
-     *
-     * ```ts
-     * this.control.reset('Nancy');
-     *
-     * console.log(this.control.value);  // 'Nancy'
-     * ```
-     *
-     * OR
-     *
-     * ```
-     * this.control.reset({value: 'Nancy', disabled: true});
-     *
-     * console.log(this.control.value);  // 'Nancy'
-     * console.log(this.control.status);  // 'DISABLED'
-     * ```
+     *  Resets the form control. This means by default:
+      * *
+      * * it is marked as `pristine`
+      * * it is marked as `untouched`
+      * * value is set to null
+      * *
+      * You can also reset to a specific form state by passing through a standalone
+      * value or a form state object that contains both a value and a disabled state
+      * (these are the only two properties that cannot be calculated).
+      * *
+      * Ex:
+      * *
+      * ```ts
+      * this.control.reset('Nancy');
+      * *
+      * console.log(this.control.value);  // 'Nancy'
+      * ```
+      * *
+      * OR
+      * *
+      * ```
+      * this.control.reset({value: 'Nancy', disabled: true});
+      * *
+      * console.log(this.control.value);  // 'Nancy'
+      * console.log(this.control.status);  // 'DISABLED'
+      * ```
+     * @param {?=} formState
+     * @param {?=} __1
+     * @return {?}
      */
     FormControl.prototype.reset = function (formState, _a) {
         if (formState === void 0) { formState = null; }
@@ -5334,23 +7102,26 @@ var FormControl = (function (_super) {
         this.setValue(this._value, { onlySelf: onlySelf, emitEvent: emitEvent });
     };
     /**
-     * @internal
+     * @return {?}
      */
     FormControl.prototype._updateValue = function () { };
     /**
-     * @internal
+     * @param {?} condition
+     * @return {?}
      */
     FormControl.prototype._anyControls = function (condition) { return false; };
     /**
-     * @internal
+     * @return {?}
      */
     FormControl.prototype._allControlsDisabled = function () { return this.disabled; };
     /**
-     * Register a listener for change events.
+     *  Register a listener for change events.
+     * @param {?} fn
+     * @return {?}
      */
     FormControl.prototype.registerOnChange = function (fn) { this._onChange.push(fn); };
     /**
-     * @internal
+     * @return {?}
      */
     FormControl.prototype._clearChangeFns = function () {
         this._onChange = [];
@@ -5358,15 +7129,22 @@ var FormControl = (function (_super) {
         this._onCollectionChange = function () { };
     };
     /**
-     * Register a listener for disabled events.
+     *  Register a listener for disabled events.
+     * @param {?} fn
+     * @return {?}
      */
     FormControl.prototype.registerOnDisabledChange = function (fn) {
         this._onDisabledChange.push(fn);
     };
     /**
-     * @internal
+     * @param {?} cb
+     * @return {?}
      */
     FormControl.prototype._forEachChild = function (cb) { };
+    /**
+     * @param {?} formState
+     * @return {?}
+     */
     FormControl.prototype._applyFormState = function (formState) {
         if (this._isBoxedValue(formState)) {
             this._value = formState.value;
@@ -5379,60 +7157,66 @@ var FormControl = (function (_super) {
     };
     return FormControl;
 }(AbstractControl));
+function FormControl_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormControl.prototype._onChange;
+}
 /**
- * @whatItDoes Tracks the value and validity state of a group of {@link FormControl}
- * instances.
- *
- * A `FormGroup` aggregates the values of each child {@link FormControl} into one object,
- * with each control name as the key.  It calculates its status by reducing the statuses
- * of its children. For example, if one of the controls in a group is invalid, the entire
- * group becomes invalid.
- *
- * `FormGroup` is one of the three fundamental building blocks used to define forms in Angular,
- * along with {@link FormControl} and {@link FormArray}.
- *
- * @howToUse
- *
- * When instantiating a {@link FormGroup}, pass in a collection of child controls as the first
- * argument. The key for each child will be the name under which it is registered.
- *
- * ### Example
- *
- * ```
- * const form = new FormGroup({
- *   first: new FormControl('Nancy', Validators.minLength(2)),
- *   last: new FormControl('Drew'),
- * });
- *
- * console.log(form.value);   // {first: 'Nancy', last; 'Drew'}
- * console.log(form.status);  // 'VALID'
- * ```
- *
- * You can also include group-level validators as the second arg, or group-level async
- * validators as the third arg. These come in handy when you want to perform validation
- * that considers the value of more than one child control.
- *
- * ### Example
- *
- * ```
- * const form = new FormGroup({
- *   password: new FormControl('', Validators.minLength(2)),
- *   passwordConfirm: new FormControl('', Validators.minLength(2)),
- * }, passwordMatchValidator);
- *
- *
- * function passwordMatchValidator(g: FormGroup) {
- *    return g.get('password').value === g.get('passwordConfirm').value
- *       ? null : {'mismatch': true};
- * }
- * ```
- *
- * * **npm package**: `@angular/forms`
- *
- * @stable
+ *  instances.
+  * *
+  * A `FormGroup` aggregates the values of each child {@link FormControl} into one object,
+  * with each control name as the key.  It calculates its status by reducing the statuses
+  * of its children. For example, if one of the controls in a group is invalid, the entire
+  * group becomes invalid.
+  * *
+  * `FormGroup` is one of the three fundamental building blocks used to define forms in Angular,
+  * along with {@link FormControl} and {@link FormArray}.
+  * *
+  * *
+  * When instantiating a {@link FormGroup}, pass in a collection of child controls as the first
+  * argument. The key for each child will be the name under which it is registered.
+  * *
+  * ### Example
+  * *
+  * ```
+  * const form = new FormGroup({
+  * first: new FormControl('Nancy', Validators.minLength(2)),
+  * last: new FormControl('Drew'),
+  * });
+  * *
+  * console.log(form.value);   // {first: 'Nancy', last; 'Drew'}
+  * console.log(form.status);  // 'VALID'
+  * ```
+  * *
+  * You can also include group-level validators as the second arg, or group-level async
+  * validators as the third arg. These come in handy when you want to perform validation
+  * that considers the value of more than one child control.
+  * *
+  * ### Example
+  * *
+  * ```
+  * const form = new FormGroup({
+  * password: new FormControl('', Validators.minLength(2)),
+  * passwordConfirm: new FormControl('', Validators.minLength(2)),
+  * }, passwordMatchValidator);
+  * *
+  * *
+  * function passwordMatchValidator(g: FormGroup) {
+  * return g.get('password').value === g.get('passwordConfirm').value
+  * ? null : {'mismatch': true};
+  * }
+  * ```
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
  */
 var FormGroup = (function (_super) {
     __extends(FormGroup, _super);
+    /**
+     * @param {?} controls
+     * @param {?=} validator
+     * @param {?=} asyncValidator
+     */
     function FormGroup(controls, validator, asyncValidator) {
         if (validator === void 0) { validator = null; }
         if (asyncValidator === void 0) { asyncValidator = null; }
@@ -5443,10 +7227,13 @@ var FormGroup = (function (_super) {
         this.updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
     /**
-     * Registers a control with the group's list of controls.
-     *
-     * This method does not update value or validity of the control, so for
-     * most cases you'll want to use {@link FormGroup.addControl} instead.
+     *  Registers a control with the group's list of controls.
+      * *
+      * This method does not update value or validity of the control, so for
+      * most cases you'll want to use {@link FormGroup.addControl} instead.
+     * @param {?} name
+     * @param {?} control
+     * @return {?}
      */
     FormGroup.prototype.registerControl = function (name, control) {
         if (this.controls[name])
@@ -5457,7 +7244,10 @@ var FormGroup = (function (_super) {
         return control;
     };
     /**
-     * Add a control to this group.
+     *  Add a control to this group.
+     * @param {?} name
+     * @param {?} control
+     * @return {?}
      */
     FormGroup.prototype.addControl = function (name, control) {
         this.registerControl(name, control);
@@ -5465,7 +7255,9 @@ var FormGroup = (function (_super) {
         this._onCollectionChange();
     };
     /**
-     * Remove a control from this group.
+     *  Remove a control from this group.
+     * @param {?} name
+     * @return {?}
      */
     FormGroup.prototype.removeControl = function (name) {
         if (this.controls[name])
@@ -5475,7 +7267,10 @@ var FormGroup = (function (_super) {
         this._onCollectionChange();
     };
     /**
-     * Replace an existing control.
+     *  Replace an existing control.
+     * @param {?} name
+     * @param {?} control
+     * @return {?}
      */
     FormGroup.prototype.setControl = function (name, control) {
         if (this.controls[name])
@@ -5487,35 +7282,40 @@ var FormGroup = (function (_super) {
         this._onCollectionChange();
     };
     /**
-     * Check whether there is an enabled control with the given name in the group.
-     *
-     * It will return false for disabled controls. If you'd like to check for
-     * existence in the group only, use {@link AbstractControl.get} instead.
+     *  Check whether there is an enabled control with the given name in the group.
+      * *
+      * It will return false for disabled controls. If you'd like to check for
+      * existence in the group only, use {@link AbstractControl.get} instead.
+     * @param {?} controlName
+     * @return {?}
      */
     FormGroup.prototype.contains = function (controlName) {
         return this.controls.hasOwnProperty(controlName) && this.controls[controlName].enabled;
     };
     /**
      *  Sets the value of the {@link FormGroup}. It accepts an object that matches
-     *  the structure of the group, with control names as keys.
-     *
-     * This method performs strict checks, so it will throw an error if you try
-     * to set the value of a control that doesn't exist or if you exclude the
-     * value of a control.
-     *
-     *  ### Example
-     *
-     *  ```
-     *  const form = new FormGroup({
-     *     first: new FormControl(),
-     *     last: new FormControl()
-     *  });
-     *  console.log(form.value);   // {first: null, last: null}
-     *
-     *  form.setValue({first: 'Nancy', last: 'Drew'});
-     *  console.log(form.value);   // {first: 'Nancy', last: 'Drew'}
-     *
-     *  ```
+      * the structure of the group, with control names as keys.
+      * *
+      * This method performs strict checks, so it will throw an error if you try
+      * to set the value of a control that doesn't exist or if you exclude the
+      * value of a control.
+      * *
+      * ### Example
+      * *
+      * ```
+      * const form = new FormGroup({
+      * first: new FormControl(),
+      * last: new FormControl()
+      * });
+      * console.log(form.value);   // {first: null, last: null}
+      * *
+      * form.setValue({first: 'Nancy', last: 'Drew'});
+      * console.log(form.value);   // {first: 'Nancy', last: 'Drew'}
+      * *
+      * ```
+     * @param {?} value
+     * @param {?=} __1
+     * @return {?}
      */
     FormGroup.prototype.setValue = function (value, _a) {
         var _this = this;
@@ -5529,24 +7329,27 @@ var FormGroup = (function (_super) {
     };
     /**
      *  Patches the value of the {@link FormGroup}. It accepts an object with control
-     *  names as keys, and will do its best to match the values to the correct controls
-     *  in the group.
-     *
-     *  It accepts both super-sets and sub-sets of the group without throwing an error.
-     *
-     *  ### Example
-     *
-     *  ```
-     *  const form = new FormGroup({
-     *     first: new FormControl(),
-     *     last: new FormControl()
-     *  });
-     *  console.log(form.value);   // {first: null, last: null}
-     *
-     *  form.patchValue({first: 'Nancy'});
-     *  console.log(form.value);   // {first: 'Nancy', last: null}
-     *
-     *  ```
+      * names as keys, and will do its best to match the values to the correct controls
+      * in the group.
+      * *
+      * It accepts both super-sets and sub-sets of the group without throwing an error.
+      * *
+      * ### Example
+      * *
+      * ```
+      * const form = new FormGroup({
+      * first: new FormControl(),
+      * last: new FormControl()
+      * });
+      * console.log(form.value);   // {first: null, last: null}
+      * *
+      * form.patchValue({first: 'Nancy'});
+      * console.log(form.value);   // {first: 'Nancy', last: null}
+      * *
+      * ```
+     * @param {?} value
+     * @param {?=} __1
+     * @return {?}
      */
     FormGroup.prototype.patchValue = function (value, _a) {
         var _this = this;
@@ -5559,36 +7362,39 @@ var FormGroup = (function (_super) {
         this.updateValueAndValidity({ onlySelf: onlySelf, emitEvent: emitEvent });
     };
     /**
-     * Resets the {@link FormGroup}. This means by default:
-     *
-     * * The group and all descendants are marked `pristine`
-     * * The group and all descendants are marked `untouched`
-     * * The value of all descendants will be null or null maps
-     *
-     * You can also reset to a specific form state by passing in a map of states
-     * that matches the structure of your form, with control names as keys. The state
-     * can be a standalone value or a form state object with both a value and a disabled
-     * status.
-     *
-     * ### Example
-     *
-     * ```ts
-     * this.form.reset({first: 'name', last: 'last name'});
-     *
-     * console.log(this.form.value);  // {first: 'name', last: 'last name'}
-     * ```
-     *
-     * - OR -
-     *
-     * ```
-     * this.form.reset({
-     *   first: {value: 'name', disabled: true},
-     *   last: 'last'
-     * });
-     *
-     * console.log(this.form.value);  // {first: 'name', last: 'last name'}
-     * console.log(this.form.get('first').status);  // 'DISABLED'
-     * ```
+     *  Resets the {@link FormGroup}. This means by default:
+      * *
+      * * The group and all descendants are marked `pristine`
+      * * The group and all descendants are marked `untouched`
+      * * The value of all descendants will be null or null maps
+      * *
+      * You can also reset to a specific form state by passing in a map of states
+      * that matches the structure of your form, with control names as keys. The state
+      * can be a standalone value or a form state object with both a value and a disabled
+      * status.
+      * *
+      * ### Example
+      * *
+      * ```ts
+      * this.form.reset({first: 'name', last: 'last name'});
+      * *
+      * console.log(this.form.value);  // {first: 'name', last: 'last name'}
+      * ```
+      * *
+      * - OR -
+      * *
+      * ```
+      * this.form.reset({
+      * first: {value: 'name', disabled: true},
+      * last: 'last'
+      * });
+      * *
+      * console.log(this.form.value);  // {first: 'name', last: 'last name'}
+      * console.log(this.form.get('first').status);  // 'DISABLED'
+      * ```
+     * @param {?=} value
+     * @param {?=} __1
+     * @return {?}
      */
     FormGroup.prototype.reset = function (value, _a) {
         if (value === void 0) { value = {}; }
@@ -5601,10 +7407,11 @@ var FormGroup = (function (_super) {
         this._updateTouched({ onlySelf: onlySelf });
     };
     /**
-     * The aggregate value of the {@link FormGroup}, including any disabled controls.
-     *
-     * If you'd like to include all values regardless of disabled status, use this method.
-     * Otherwise, the `value` property is the best way to get the value of the group.
+     *  The aggregate value of the {@link FormGroup}, including any disabled controls.
+      * *
+      * If you'd like to include all values regardless of disabled status, use this method.
+      * Otherwise, the `value` property is the best way to get the value of the group.
+     * @return {?}
      */
     FormGroup.prototype.getRawValue = function () {
         return this._reduceChildren({}, function (acc, control, name) {
@@ -5612,7 +7419,10 @@ var FormGroup = (function (_super) {
             return acc;
         });
     };
-    /** @internal */
+    /**
+     * @param {?} name
+     * @return {?}
+     */
     FormGroup.prototype._throwIfControlMissing = function (name) {
         if (!Object.keys(this.controls).length) {
             throw new Error("\n        There are no form controls registered with this group yet.  If you're using ngModel,\n        you may want to check next tick (e.g. use setTimeout).\n      ");
@@ -5621,12 +7431,17 @@ var FormGroup = (function (_super) {
             throw new Error("Cannot find form control with name: " + name + ".");
         }
     };
-    /** @internal */
+    /**
+     * @param {?} cb
+     * @return {?}
+     */
     FormGroup.prototype._forEachChild = function (cb) {
         var _this = this;
         Object.keys(this.controls).forEach(function (k) { return cb(_this.controls[k], k); });
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormGroup.prototype._setUpControls = function () {
         var _this = this;
         this._forEachChild(function (control) {
@@ -5634,18 +7449,25 @@ var FormGroup = (function (_super) {
             control._registerOnCollectionChange(_this._onCollectionChange);
         });
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormGroup.prototype._updateValue = function () { this._value = this._reduceValue(); };
-    /** @internal */
+    /**
+     * @param {?} condition
+     * @return {?}
+     */
     FormGroup.prototype._anyControls = function (condition) {
         var _this = this;
-        var res = false;
+        var /** @type {?} */ res = false;
         this._forEachChild(function (control, name) {
             res = res || (_this.contains(name) && condition(control));
         });
         return res;
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormGroup.prototype._reduceValue = function () {
         var _this = this;
         return this._reduceChildren({}, function (acc, control, name) {
@@ -5655,13 +7477,19 @@ var FormGroup = (function (_super) {
             return acc;
         });
     };
-    /** @internal */
+    /**
+     * @param {?} initValue
+     * @param {?} fn
+     * @return {?}
+     */
     FormGroup.prototype._reduceChildren = function (initValue, fn) {
-        var res = initValue;
+        var /** @type {?} */ res = initValue;
         this._forEachChild(function (control, name) { res = fn(res, control, name); });
         return res;
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormGroup.prototype._allControlsDisabled = function () {
         for (var _i = 0, _a = Object.keys(this.controls); _i < _a.length; _i++) {
             var controlName = _a[_i];
@@ -5671,7 +7499,10 @@ var FormGroup = (function (_super) {
         }
         return Object.keys(this.controls).length > 0 || this.disabled;
     };
-    /** @internal */
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     FormGroup.prototype._checkAllValuesPresent = function (value) {
         this._forEachChild(function (control, name) {
             if (value[name] === undefined) {
@@ -5681,52 +7512,58 @@ var FormGroup = (function (_super) {
     };
     return FormGroup;
 }(AbstractControl));
+function FormGroup_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormGroup.prototype.controls;
+}
 /**
- * @whatItDoes Tracks the value and validity state of an array of {@link FormControl}
- * instances.
- *
- * A `FormArray` aggregates the values of each child {@link FormControl} into an array.
- * It calculates its status by reducing the statuses of its children. For example, if one of
- * the controls in a `FormArray` is invalid, the entire array becomes invalid.
- *
- * `FormArray` is one of the three fundamental building blocks used to define forms in Angular,
- * along with {@link FormControl} and {@link FormGroup}.
- *
- * @howToUse
- *
- * When instantiating a {@link FormArray}, pass in an array of child controls as the first
- * argument.
- *
- * ### Example
- *
- * ```
- * const arr = new FormArray([
- *   new FormControl('Nancy', Validators.minLength(2)),
- *   new FormControl('Drew'),
- * ]);
- *
- * console.log(arr.value);   // ['Nancy', 'Drew']
- * console.log(arr.status);  // 'VALID'
- * ```
- *
- * You can also include array-level validators as the second arg, or array-level async
- * validators as the third arg. These come in handy when you want to perform validation
- * that considers the value of more than one child control.
- *
- * ### Adding or removing controls
- *
- * To change the controls in the array, use the `push`, `insert`, or `removeAt` methods
- * in `FormArray` itself. These methods ensure the controls are properly tracked in the
- * form's hierarchy. Do not modify the array of `AbstractControl`s used to instantiate
- * the `FormArray` directly, as that will result in strange and unexpected behavior such
- * as broken change detection.
- *
- * * **npm package**: `@angular/forms`
- *
- * @stable
+ *  instances.
+  * *
+  * A `FormArray` aggregates the values of each child {@link FormControl} into an array.
+  * It calculates its status by reducing the statuses of its children. For example, if one of
+  * the controls in a `FormArray` is invalid, the entire array becomes invalid.
+  * *
+  * `FormArray` is one of the three fundamental building blocks used to define forms in Angular,
+  * along with {@link FormControl} and {@link FormGroup}.
+  * *
+  * *
+  * When instantiating a {@link FormArray}, pass in an array of child controls as the first
+  * argument.
+  * *
+  * ### Example
+  * *
+  * ```
+  * const arr = new FormArray([
+  * new FormControl('Nancy', Validators.minLength(2)),
+  * new FormControl('Drew'),
+  * ]);
+  * *
+  * console.log(arr.value);   // ['Nancy', 'Drew']
+  * console.log(arr.status);  // 'VALID'
+  * ```
+  * *
+  * You can also include array-level validators as the second arg, or array-level async
+  * validators as the third arg. These come in handy when you want to perform validation
+  * that considers the value of more than one child control.
+  * *
+  * ### Adding or removing controls
+  * *
+  * To change the controls in the array, use the `push`, `insert`, or `removeAt` methods
+  * in `FormArray` itself. These methods ensure the controls are properly tracked in the
+  * form's hierarchy. Do not modify the array of `AbstractControl`s used to instantiate
+  * the `FormArray` directly, as that will result in strange and unexpected behavior such
+  * as broken change detection.
+  * *
+  * * **npm package**: `@angular/forms`
+  * *
  */
 var FormArray = (function (_super) {
     __extends(FormArray, _super);
+    /**
+     * @param {?} controls
+     * @param {?=} validator
+     * @param {?=} asyncValidator
+     */
     function FormArray(controls, validator, asyncValidator) {
         if (validator === void 0) { validator = null; }
         if (asyncValidator === void 0) { asyncValidator = null; }
@@ -5737,11 +7574,15 @@ var FormArray = (function (_super) {
         this.updateValueAndValidity({ onlySelf: true, emitEvent: false });
     }
     /**
-     * Get the {@link AbstractControl} at the given `index` in the array.
+     *  Get the {@link AbstractControl} at the given `index` in the array.
+     * @param {?} index
+     * @return {?}
      */
     FormArray.prototype.at = function (index) { return this.controls[index]; };
     /**
-     * Insert a new {@link AbstractControl} at the end of the array.
+     *  Insert a new {@link AbstractControl} at the end of the array.
+     * @param {?} control
+     * @return {?}
      */
     FormArray.prototype.push = function (control) {
         this.controls.push(control);
@@ -5750,7 +7591,10 @@ var FormArray = (function (_super) {
         this._onCollectionChange();
     };
     /**
-     * Insert a new {@link AbstractControl} at the given `index` in the array.
+     *  Insert a new {@link AbstractControl} at the given `index` in the array.
+     * @param {?} index
+     * @param {?} control
+     * @return {?}
      */
     FormArray.prototype.insert = function (index, control) {
         this.controls.splice(index, 0, control);
@@ -5759,7 +7603,9 @@ var FormArray = (function (_super) {
         this._onCollectionChange();
     };
     /**
-     * Remove the control at the given `index` in the array.
+     *  Remove the control at the given `index` in the array.
+     * @param {?} index
+     * @return {?}
      */
     FormArray.prototype.removeAt = function (index) {
         if (this.controls[index])
@@ -5769,7 +7615,10 @@ var FormArray = (function (_super) {
         this._onCollectionChange();
     };
     /**
-     * Replace an existing control.
+     *  Replace an existing control.
+     * @param {?} index
+     * @param {?} control
+     * @return {?}
      */
     FormArray.prototype.setControl = function (index, control) {
         if (this.controls[index])
@@ -5784,7 +7633,8 @@ var FormArray = (function (_super) {
     };
     Object.defineProperty(FormArray.prototype, "length", {
         /**
-         * Length of the control array.
+         *  Length of the control array.
+         * @return {?}
          */
         get: function () { return this.controls.length; },
         enumerable: true,
@@ -5792,24 +7642,27 @@ var FormArray = (function (_super) {
     });
     /**
      *  Sets the value of the {@link FormArray}. It accepts an array that matches
-     *  the structure of the control.
-     *
-     * This method performs strict checks, so it will throw an error if you try
-     * to set the value of a control that doesn't exist or if you exclude the
-     * value of a control.
-     *
-     *  ### Example
-     *
-     *  ```
-     *  const arr = new FormArray([
-     *     new FormControl(),
-     *     new FormControl()
-     *  ]);
-     *  console.log(arr.value);   // [null, null]
-     *
-     *  arr.setValue(['Nancy', 'Drew']);
-     *  console.log(arr.value);   // ['Nancy', 'Drew']
-     *  ```
+      * the structure of the control.
+      * *
+      * This method performs strict checks, so it will throw an error if you try
+      * to set the value of a control that doesn't exist or if you exclude the
+      * value of a control.
+      * *
+      * ### Example
+      * *
+      * ```
+      * const arr = new FormArray([
+      * new FormControl(),
+      * new FormControl()
+      * ]);
+      * console.log(arr.value);   // [null, null]
+      * *
+      * arr.setValue(['Nancy', 'Drew']);
+      * console.log(arr.value);   // ['Nancy', 'Drew']
+      * ```
+     * @param {?} value
+     * @param {?=} __1
+     * @return {?}
      */
     FormArray.prototype.setValue = function (value, _a) {
         var _this = this;
@@ -5823,23 +7676,26 @@ var FormArray = (function (_super) {
     };
     /**
      *  Patches the value of the {@link FormArray}. It accepts an array that matches the
-     *  structure of the control, and will do its best to match the values to the correct
-     *  controls in the group.
-     *
-     *  It accepts both super-sets and sub-sets of the array without throwing an error.
-     *
-     *  ### Example
-     *
-     *  ```
-     *  const arr = new FormArray([
-     *     new FormControl(),
-     *     new FormControl()
-     *  ]);
-     *  console.log(arr.value);   // [null, null]
-     *
-     *  arr.patchValue(['Nancy']);
-     *  console.log(arr.value);   // ['Nancy', null]
-     *  ```
+      * structure of the control, and will do its best to match the values to the correct
+      * controls in the group.
+      * *
+      * It accepts both super-sets and sub-sets of the array without throwing an error.
+      * *
+      * ### Example
+      * *
+      * ```
+      * const arr = new FormArray([
+      * new FormControl(),
+      * new FormControl()
+      * ]);
+      * console.log(arr.value);   // [null, null]
+      * *
+      * arr.patchValue(['Nancy']);
+      * console.log(arr.value);   // ['Nancy', null]
+      * ```
+     * @param {?} value
+     * @param {?=} __1
+     * @return {?}
      */
     FormArray.prototype.patchValue = function (value, _a) {
         var _this = this;
@@ -5852,35 +7708,38 @@ var FormArray = (function (_super) {
         this.updateValueAndValidity({ onlySelf: onlySelf, emitEvent: emitEvent });
     };
     /**
-     * Resets the {@link FormArray}. This means by default:
-     *
-     * * The array and all descendants are marked `pristine`
-     * * The array and all descendants are marked `untouched`
-     * * The value of all descendants will be null or null maps
-     *
-     * You can also reset to a specific form state by passing in an array of states
-     * that matches the structure of the control. The state can be a standalone value
-     * or a form state object with both a value and a disabled status.
-     *
-     * ### Example
-     *
-     * ```ts
-     * this.arr.reset(['name', 'last name']);
-     *
-     * console.log(this.arr.value);  // ['name', 'last name']
-     * ```
-     *
-     * - OR -
-     *
-     * ```
-     * this.arr.reset([
-     *   {value: 'name', disabled: true},
-     *   'last'
-     * ]);
-     *
-     * console.log(this.arr.value);  // ['name', 'last name']
-     * console.log(this.arr.get(0).status);  // 'DISABLED'
-     * ```
+     *  Resets the {@link FormArray}. This means by default:
+      * *
+      * * The array and all descendants are marked `pristine`
+      * * The array and all descendants are marked `untouched`
+      * * The value of all descendants will be null or null maps
+      * *
+      * You can also reset to a specific form state by passing in an array of states
+      * that matches the structure of the control. The state can be a standalone value
+      * or a form state object with both a value and a disabled status.
+      * *
+      * ### Example
+      * *
+      * ```ts
+      * this.arr.reset(['name', 'last name']);
+      * *
+      * console.log(this.arr.value);  // ['name', 'last name']
+      * ```
+      * *
+      * - OR -
+      * *
+      * ```
+      * this.arr.reset([
+      * {value: 'name', disabled: true},
+      * 'last'
+      * ]);
+      * *
+      * console.log(this.arr.value);  // ['name', 'last name']
+      * console.log(this.arr.get(0).status);  // 'DISABLED'
+      * ```
+     * @param {?=} value
+     * @param {?=} __1
+     * @return {?}
      */
     FormArray.prototype.reset = function (value, _a) {
         if (value === void 0) { value = []; }
@@ -5893,13 +7752,17 @@ var FormArray = (function (_super) {
         this._updateTouched({ onlySelf: onlySelf });
     };
     /**
-     * The aggregate value of the array, including any disabled controls.
-     *
-     * If you'd like to include all values regardless of disabled status, use this method.
-     * Otherwise, the `value` property is the best way to get the value of the array.
+     *  The aggregate value of the array, including any disabled controls.
+      * *
+      * If you'd like to include all values regardless of disabled status, use this method.
+      * Otherwise, the `value` property is the best way to get the value of the array.
+     * @return {?}
      */
     FormArray.prototype.getRawValue = function () { return this.controls.map(function (control) { return control.value; }); };
-    /** @internal */
+    /**
+     * @param {?} index
+     * @return {?}
+     */
     FormArray.prototype._throwIfControlMissing = function (index) {
         if (!this.controls.length) {
             throw new Error("\n        There are no form controls registered with this array yet.  If you're using ngModel,\n        you may want to check next tick (e.g. use setTimeout).\n      ");
@@ -5908,26 +7771,39 @@ var FormArray = (function (_super) {
             throw new Error("Cannot find form control at index " + index);
         }
     };
-    /** @internal */
+    /**
+     * @param {?} cb
+     * @return {?}
+     */
     FormArray.prototype._forEachChild = function (cb) {
         this.controls.forEach(function (control, index) { cb(control, index); });
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormArray.prototype._updateValue = function () {
         var _this = this;
         this._value = this.controls.filter(function (control) { return control.enabled || _this.disabled; })
             .map(function (control) { return control.value; });
     };
-    /** @internal */
+    /**
+     * @param {?} condition
+     * @return {?}
+     */
     FormArray.prototype._anyControls = function (condition) {
         return this.controls.some(function (control) { return control.enabled && condition(control); });
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormArray.prototype._setUpControls = function () {
         var _this = this;
         this._forEachChild(function (control) { return _this._registerControl(control); });
     };
-    /** @internal */
+    /**
+     * @param {?} value
+     * @return {?}
+     */
     FormArray.prototype._checkAllValuesPresent = function (value) {
         this._forEachChild(function (control, i) {
             if (value[i] === undefined) {
@@ -5935,7 +7811,9 @@ var FormArray = (function (_super) {
             }
         });
     };
-    /** @internal */
+    /**
+     * @return {?}
+     */
     FormArray.prototype._allControlsDisabled = function () {
         for (var _i = 0, _a = this.controls; _i < _a.length; _i++) {
             var control = _a[_i];
@@ -5944,12 +7822,20 @@ var FormArray = (function (_super) {
         }
         return this.controls.length > 0 || this.disabled;
     };
+    /**
+     * @param {?} control
+     * @return {?}
+     */
     FormArray.prototype._registerControl = function (control) {
         control.setParent(this);
         control._registerOnCollectionChange(this._onCollectionChange);
     };
     return FormArray;
 }(AbstractControl));
+function FormArray_tsickle_Closure_declarations() {
+    /** @type {?} */
+    FormArray.prototype.controls;
+}
 //# sourceMappingURL=model.js.map
 
 /***/ },
@@ -5968,7 +7854,7 @@ var FormArray = (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 
-var isPromise = __WEBPACK_IMPORTED_MODULE_0__angular_core__["__core_private__"].isPromise;
+var /** @type {?} */ isPromise = __WEBPACK_IMPORTED_MODULE_0__angular_core__["__core_private__"].isPromise;
 //# sourceMappingURL=private_import_core.js.map
 
 /***/ },
@@ -5998,6 +7884,10 @@ var isPromise = __WEBPACK_IMPORTED_MODULE_0__angular_core__["__core_private__"].
 
 
 
+/**
+ * @param {?} value
+ * @return {?}
+ */
 function isEmptyInputValue(value) {
     return value == null || typeof value === 'string' && value.length === 0;
 }
@@ -6011,7 +7901,7 @@ function isEmptyInputValue(value) {
  * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
  * @stable
  */
-var NG_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValidators');
+var /** @type {?} */ NG_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgValidators');
 /**
  * Providers for asynchronous validators to be used for {@link FormControl}s
  * in a form.
@@ -6022,63 +7912,78 @@ var NG_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken
  *
  * @stable
  */
-var NG_ASYNC_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgAsyncValidators');
+var /** @type {?} */ NG_ASYNC_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('NgAsyncValidators');
 /**
- * Provides a set of validators used by form controls.
- *
- * A validator is a function that processes a {@link FormControl} or collection of
- * controls and returns a map of errors. A null map means that validation has passed.
- *
- * ### Example
- *
- * ```typescript
- * var loginControl = new FormControl("", Validators.required)
- * ```
- *
- * @stable
+ *  Provides a set of validators used by form controls.
+  * *
+  * A validator is a function that processes a {@link FormControl} or collection of
+  * controls and returns a map of errors. A null map means that validation has passed.
+  * *
+  * ### Example
+  * *
+  * ```typescript
+  * var loginControl = new FormControl("", Validators.required)
+  * ```
+  * *
  */
 var Validators = (function () {
     function Validators() {
     }
     /**
-     * Validator that requires controls to have a non-empty value.
+     *  Validator that requires controls to have a non-empty value.
+     * @param {?} control
+     * @return {?}
      */
     Validators.required = function (control) {
         return isEmptyInputValue(control.value) ? { 'required': true } : null;
     };
     /**
-     * Validator that requires controls to have a value of a minimum length.
+     *  Validator that requires control value to be true.
+     * @param {?} control
+     * @return {?}
+     */
+    Validators.requiredTrue = function (control) {
+        return control.value === true ? null : { 'required': true };
+    };
+    /**
+     *  Validator that requires controls to have a value of a minimum length.
+     * @param {?} minLength
+     * @return {?}
      */
     Validators.minLength = function (minLength) {
         return function (control) {
             if (isEmptyInputValue(control.value)) {
                 return null; // don't validate empty values to allow optional controls
             }
-            var length = typeof control.value === 'string' ? control.value.length : 0;
+            var /** @type {?} */ length = control.value ? control.value.length : 0;
             return length < minLength ?
                 { 'minlength': { 'requiredLength': minLength, 'actualLength': length } } :
                 null;
         };
     };
     /**
-     * Validator that requires controls to have a value of a maximum length.
+     *  Validator that requires controls to have a value of a maximum length.
+     * @param {?} maxLength
+     * @return {?}
      */
     Validators.maxLength = function (maxLength) {
         return function (control) {
-            var length = typeof control.value === 'string' ? control.value.length : 0;
+            var /** @type {?} */ length = control.value ? control.value.length : 0;
             return length > maxLength ?
                 { 'maxlength': { 'requiredLength': maxLength, 'actualLength': length } } :
                 null;
         };
     };
     /**
-     * Validator that requires a control to match a regex to its value.
+     *  Validator that requires a control to match a regex to its value.
+     * @param {?} pattern
+     * @return {?}
      */
     Validators.pattern = function (pattern) {
         if (!pattern)
             return Validators.nullValidator;
-        var regex;
-        var regexStr;
+        var /** @type {?} */ regex;
+        var /** @type {?} */ regexStr;
         if (typeof pattern === 'string') {
             regexStr = "^" + pattern + "$";
             regex = new RegExp(regexStr);
@@ -6091,58 +7996,106 @@ var Validators = (function () {
             if (isEmptyInputValue(control.value)) {
                 return null; // don't validate empty values to allow optional controls
             }
-            var value = control.value;
+            var /** @type {?} */ value = control.value;
             return regex.test(value) ? null :
                 { 'pattern': { 'requiredPattern': regexStr, 'actualValue': value } };
         };
     };
     /**
-     * No-op validator.
+     *  No-op validator.
+     * @param {?} c
+     * @return {?}
      */
     Validators.nullValidator = function (c) { return null; };
     /**
-     * Compose multiple validators into a single function that returns the union
-     * of the individual error maps.
+     *  Compose multiple validators into a single function that returns the union
+      * of the individual error maps.
+     * @param {?} validators
+     * @return {?}
      */
     Validators.compose = function (validators) {
         if (!validators)
             return null;
-        var presentValidators = validators.filter(__WEBPACK_IMPORTED_MODULE_3__facade_lang__["c" /* isPresent */]);
+        var /** @type {?} */ presentValidators = validators.filter(__WEBPACK_IMPORTED_MODULE_3__facade_lang__["c" /* isPresent */]);
         if (presentValidators.length == 0)
             return null;
         return function (control) {
             return _mergeErrors(_executeValidators(control, presentValidators));
         };
     };
+    /**
+     * @param {?} validators
+     * @return {?}
+     */
     Validators.composeAsync = function (validators) {
         if (!validators)
             return null;
-        var presentValidators = validators.filter(__WEBPACK_IMPORTED_MODULE_3__facade_lang__["c" /* isPresent */]);
+        var /** @type {?} */ presentValidators = validators.filter(__WEBPACK_IMPORTED_MODULE_3__facade_lang__["c" /* isPresent */]);
         if (presentValidators.length == 0)
             return null;
         return function (control) {
-            var promises = _executeAsyncValidators(control, presentValidators).map(_convertToPromise);
+            var /** @type {?} */ promises = _executeAsyncValidators(control, presentValidators).map(_convertToPromise);
             return Promise.all(promises).then(_mergeErrors);
         };
     };
     return Validators;
 }());
+/**
+ * @param {?} obj
+ * @return {?}
+ */
 function _convertToPromise(obj) {
     return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__private_import_core__["a" /* isPromise */])(obj) ? obj : __WEBPACK_IMPORTED_MODULE_1_rxjs_operator_toPromise__["toPromise"].call(obj);
 }
+/**
+ * @param {?} control
+ * @param {?} validators
+ * @return {?}
+ */
 function _executeValidators(control, validators) {
     return validators.map(function (v) { return v(control); });
 }
+/**
+ * @param {?} control
+ * @param {?} validators
+ * @return {?}
+ */
 function _executeAsyncValidators(control, validators) {
     return validators.map(function (v) { return v(control); });
 }
+/**
+ * @param {?} arrayOfErrors
+ * @return {?}
+ */
 function _mergeErrors(arrayOfErrors) {
-    var res = arrayOfErrors.reduce(function (res, errors) {
+    var /** @type {?} */ res = arrayOfErrors.reduce(function (res, errors) {
         return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__facade_lang__["c" /* isPresent */])(errors) ? __WEBPACK_IMPORTED_MODULE_2__facade_collection__["a" /* StringMapWrapper */].merge(res, errors) : res;
     }, {});
     return Object.keys(res).length === 0 ? null : res;
 }
 //# sourceMappingURL=validators.js.map
+
+/***/ },
+
+/***/ "./node_modules/@angular/forms/src/version.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/index.js");
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return VERSION; });
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+/**
+ * @stable
+ */
+var /** @type {?} */ VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["Version"]('2.4.1');
+//# sourceMappingURL=version.js.map
 
 /***/ },
 
@@ -6154,14 +8107,14 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%; }\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  min-height: 100vh;\n  color: #666; }\n\n* {\n  box-sizing: border-box; }\n\napp {\n  height: 100%; }\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n  button:hover {\n    outline: none;\n    background: #1483ff; }\n  button:focus, button:active {\n    outline: none;\n    background: #097dff; }\n\n.arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px; }\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0;\n  height: 0;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff; }\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE; }\n\ninput:focus {\n  outline: none; }\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0; }\n\nmain {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 100%; }\n  main .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 25%;\n    bottom: 0; }\n    main .chart-col .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n  main .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em; }\n    main .sidebar h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px; }\n      main .sidebar h1 strong {\n        font-weight: 700; }\n      main .sidebar h1 small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white; }\n    main .sidebar input[type=text],\n    main .sidebar select {\n      width: 100%; }\n    main .sidebar h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      -webkit-user-select: none;\n         -moz-user-select: none;\n          -ms-user-select: none;\n              user-select: none; }\n      main .sidebar h3 a {\n        color: #a8b2c7;\n        text-decoration: none; }\n    main .sidebar pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px; }\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  /**\n   * Text\n   */\n  background: #1b1e27; }\n  .dark text {\n    fill: #a8b2c7; }\n  .dark .gridline-path {\n    stroke: #2f3646; }\n  .dark .grid-panel.odd rect {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .legend-labels {\n    background: rgba(255, 255, 255, 0.05); }\n  .dark .legend-item:hover {\n    color: #fff; }\n  .dark .legend-label:hover {\n    color: #fff !important; }\n  .dark .scale-legend-label {\n    color: #a8b2c7; }\n  .dark .advanced-pie-legend {\n    color: #a8b2c7; }\n    .dark .advanced-pie-legend .legend-item:hover {\n      color: #fff !important; }\n  .dark .force-directed-graph .edge {\n    stroke: #455066; }\n  .dark .number-card p {\n    color: #f0f1f6; }\n  .dark .gauge .background-arc path {\n    fill: #2f3646; }\n  .dark .gauge .gauge-tick path {\n    stroke: #455066; }\n  .dark .gauge .gauge-tick text {\n    fill: #455066; }\n  .dark .gauge .gauge-tick.highlighted path {\n    stroke: #fff; }\n  .dark .gauge .gauge-tick.highlighted text {\n    fill: #fff; }\n  .dark .timeline .brush-background {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .timeline .brush .selection {\n    fill: rgba(255, 255, 255, 0.1);\n    stroke: #aaa; }\n", "", {"version":3,"sources":["/./demo/demo/demo.scss"],"names":[],"mappings":"AAAA;EACE,UAAU;EACV,WAAW;EACX,aAAa,EACd;;AAED;EACE,qFAAqF;EACrF,mBAAmB;EACnB,iBAAiB;EACjB,kBAAkB;EAClB,kBAAkB;EAClB,wBAAwB;EACxB,oCAAoC;EACpC,mCAAmC;EACnC,mCAAmC;EAEnC,kBAAkB;EAClB,YAAY,EACb;;AAED;EACE,uBAAuB,EACxB;;AAED;EACE,aAAa,EACd;;AAED;EACE,sBAAsB;EACtB,iBAAiB;EACjB,iBAAiB;EACjB,oBAAoB;EACpB,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,0BAA0B;EAC1B,gBAAgB;EAChB,mBAAmB;EACnB,mBAAmB;EACnB,iBAAiB;EACjB,gBAAgB;EAChB,aAAa;EACb,cAAc,EAYf;EA5BD;IAmBI,cAAc;IACd,oBAAoB,EACrB;EArBH;IAyBI,cAAc;IACd,oBAAoB,EACrB;;AAGH;EACE,SAAS;EACT,UAAU;EACV,mCAAmC;EACnC,oCAAoC;EACpC,2BAA2B;EAC3B,sBAAsB;EACtB,kBAAkB,EACnB;;AAED;EACE,kBAAkB;EAClB,sBAAsB;EACtB,SAAS;EACT,UAAU;EACV,kCAAkC;EAClC,qCAAqC;EACrC,4BAA4B,EAC7B;;AAED;;EAEE,gBAAgB;EAChB,yBAAyB;EACzB,eAAe;EACf,wBAAwB;EACxB,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,iCAAiC,EAClC;;AAED;EACE,cAAc,EACf;;AAED;EACE,YAAY;EACZ,aAAa;EACb,cAAc,EACf;;AAED;EACE,yBAAwB;MAAxB,sBAAwB;UAAxB,wBAAwB;EACxB,aAAa,EAmFd;EArFD;IAKI,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,SAAS;IACT,UAAU;IACV,UAAU,EAQX;IAnBH;MAcM,mBAAmB;MACnB,SAAS;MACT,UAAU;MACV,yCAAoB;cAApB,iCAAoB,EACrB;EAlBL;IAsBI,iBAAiB;IACjB,uHAA6F;IAE7F,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,WAAW;IACX,QAAQ;IACR,UAAU;IAEV,oBAAoB;IACpB,YAAY;IACZ,gBAAgB,EAiDjB;IApFH;MAsCM,YAAY;MACZ,iBAAiB;MACjB,0BAA0B;MAC1B,eAAe;MACf,UAAU;MACV,oBAAoB;MACpB,cAAc,EAYf;MAxDL;QA+CQ,iBAAiB,EAClB;MAhDP;QAmDQ,eAAe;QACf,gBAAgB;QAChB,mBAAmB;QACnB,aAAa,EACd;IAvDP;;MA4DM,YAAY,EACb;IA7DL;MAgEM,WAAW;MACX,mBAAmB;MACnB,0BAA0B;MAC1B,eAAe;MACf,0BAAkB;SAAlB,uBAAkB;UAAlB,sBAAkB;cAAlB,kBAAkB,EAMnB;MA1EL;QAuEQ,eAAe;QACf,sBAAsB,EACvB;IAzEP;MA6EM,oBAAoB;MACpB,gBAAgB;MAChB,iBAAiB;MACjB,kBAAkB;MAClB,eAAe;MACf,cAAc,EACf;;AAIL;EACE;;KAEG;EAQH;;KAEG;EAQH,oBAhByB,EAmH1B;EAxHD;IAwBI,cARsB,EASvB;EAzBH;IA4BI,gBArBoB,EAsBrB;EA7BH;IAkCQ,gCAAU,EACX;EAnCP;IAwCI,sCAAgB,EACjB;EAzCH;IA6CM,YAAY,EACb;EA9CL;IAmDM,uBAAuB,EACxB;EApDL;IAwDI,eAxCsB,EAyCvB;EAzDH;IA4DI,eA5CsB,EAmDvB;IAnEH;MAgEQ,uBAAuB,EACxB;EAjEP;IAuEM,gBA/DoB,EAgErB;EAxEL;IA6EM,eA3DsB,EA4DvB;EA9EL;IAoFQ,cA7EgB,EA8EjB;EArFP;IAyFQ,gBAjFkB,EAkFnB;EA1FP;IA6FQ,cArFkB,EAsFnB;EA9FP;IAkGU,aAAa,EACd;EAnGT;IAsGU,WAAW,EACZ;EAvGT;IA8GM,gCAAU,EACX;EA/GL;IAmHQ,+BAAU;IACV,aAAa,EACd","file":"demo.scss","sourcesContent":["html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n}\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n\n  min-height: 100vh;\n  color: #666;\n}\n\n* {\n  box-sizing: border-box;\n}\n\napp {\n  height: 100%;\n}\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none;\n\n  &:hover {\n    outline: none;\n    background: #1483ff;\n  }\n\n  &:focus,\n  &:active {\n    outline: none;\n    background: #097dff;\n  }\n}\n\n.arrow-down {\n  width: 0; \n  height: 0; \n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px;\n}\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0; \n  height: 0; \n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff;\n}\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE;\n}\n\ninput:focus {\n  outline: none;\n}\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0;\n}\n\nmain {\n  justify-content: center;\n  height: 100%;\n\n  .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 0;\n    left: 25%;\n    bottom: 0;\n\n    .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n    }\n  }\n\n  .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 13px 19px 2px rgba(0,0,0,.14),0 5px 24px 4px rgba(0,0,0,.12);\n\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em;\n\n    h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px;\n\n      strong {\n        font-weight: 700;\n      }\n\n      small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white;\n      }\n    }\n\n    input[type=text],\n    select {\n      width: 100%;\n    }\n\n    h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      user-select: none;\n      \n      a {\n        color: #a8b2c7;\n        text-decoration: none;\n      }\n    }\n\n    pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px;\n    }\n  }\n}\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  $color-bg-darkest: #13141b;\n  $color-bg-darker: #1b1e27;\n  $color-bg-dark: #232837;\n  $color-bg-med: #2f3646;\n  $color-bg-light: #455066;\n  $color-bg-lighter: #5b6882;\n\n  /**\n   * Text\n   */\n  $color-text-dark: #72809b;\n  $color-text-med-dark: #919db5;\n  $color-text-med: #a8b2c7;\n  $color-text-med-light: #d9dce1;\n  $color-text-light: #f0f1f6;\n  $color-text-lighter: #fff;\n\n  background: $color-bg-darker;\n\n  text {\n    fill: $color-text-med;\n  }\n\n  .gridline-path {\n    stroke: $color-bg-med;\n  }\n\n  .grid-panel {\n    &.odd {\n      rect {\n        fill: rgba(255,255,255,0.05);\n      }\n    }\n  }\n\n  .legend-labels {\n    background: rgba(255,255,255,0.05);\n  }\n\n  .legend-item {\n    &:hover {\n      color: #fff;\n    }\n  }\n\n  .legend-label {\n    &:hover {\n      color: #fff !important;\n    }\n  }\n\n  .scale-legend-label {\n    color: $color-text-med;\n  }\n\n  .advanced-pie-legend {\n    color: $color-text-med;\n\n    .legend-item {\n      &:hover {\n        color: #fff !important;\n      }\n    }\n  }\n\n  .force-directed-graph {\n    .edge {\n      stroke: $color-bg-light;\n    }\n  }\n\n  .number-card {\n    p {\n      color: $color-text-light;\n    }\n  }\n\n  .gauge {\n    .background-arc {\n      path {\n        fill: $color-bg-med;\n      }\n    }\n    .gauge-tick {\n      path {\n        stroke: $color-bg-light;\n      }\n\n      text {\n        fill: $color-bg-light;\n      }\n\n      &.highlighted {\n        path {\n          stroke: #fff;\n        }\n\n        text {\n          fill: #fff;\n        }\n      }\n    }\n  }\n\n  .timeline {\n    .brush-background {\n      fill: rgba(255,255,255,0.05);\n    }\n    \n    .brush {\n      .selection {\n        fill: rgba(255, 255, 255, 0.1);\n        stroke: #aaa;\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%; }\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  min-height: 100vh;\n  color: #666; }\n\n* {\n  box-sizing: border-box; }\n\napp {\n  height: 100%; }\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n  button:hover {\n    outline: none;\n    background: #1483ff; }\n  button:focus, button:active {\n    outline: none;\n    background: #097dff; }\n\n.arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px; }\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0;\n  height: 0;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff; }\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE; }\n\ninput:focus {\n  outline: none; }\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0; }\n\nmain {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 100%; }\n  main .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 25%;\n    bottom: 0; }\n    main .chart-col .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n  main .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em; }\n    main .sidebar h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px; }\n      main .sidebar h1 strong {\n        font-weight: 700; }\n      main .sidebar h1 small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white; }\n    main .sidebar input[type=text],\n    main .sidebar select {\n      width: 100%; }\n    main .sidebar h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      -webkit-user-select: none;\n         -moz-user-select: none;\n          -ms-user-select: none;\n              user-select: none; }\n      main .sidebar h3 a {\n        color: #a8b2c7;\n        text-decoration: none; }\n    main .sidebar pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px; }\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  /**\n   * Text\n   */\n  background: #1b1e27; }\n  .dark text {\n    fill: #a8b2c7; }\n  .dark .gridline-path {\n    stroke: #2f3646; }\n  .dark .grid-panel.odd rect {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .legend-labels {\n    background: rgba(255, 255, 255, 0.05); }\n  .dark .legend-item:hover {\n    color: #fff; }\n  .dark .legend-label:hover {\n    color: #fff !important; }\n  .dark .legend-label .active .legend-label-text {\n    color: #fff !important; }\n  .dark .scale-legend-label {\n    color: #a8b2c7; }\n  .dark .advanced-pie-legend {\n    color: #a8b2c7; }\n    .dark .advanced-pie-legend .legend-item:hover {\n      color: #fff !important; }\n  .dark .force-directed-graph .edge {\n    stroke: #455066; }\n  .dark .number-card p {\n    color: #f0f1f6; }\n  .dark .gauge .background-arc path {\n    fill: #2f3646; }\n  .dark .gauge .gauge-tick path {\n    stroke: #a8b2c7; }\n  .dark .gauge .gauge-tick text {\n    fill: #a8b2c7; }\n  .dark .linear-gauge .background-bar path {\n    fill: #2f3646; }\n  .dark .linear-gauge .units {\n    fill: #72809b; }\n  .dark .timeline .brush-background {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .timeline .brush .selection {\n    fill: rgba(255, 255, 255, 0.1);\n    stroke: #aaa; }\n", "", {"version":3,"sources":["/./demo/demo/demo.scss"],"names":[],"mappings":"AAAA;EACE,UAAU;EACV,WAAW;EACX,aAAa,EACd;;AAED;EACE,qFAAqF;EACrF,mBAAmB;EACnB,iBAAiB;EACjB,kBAAkB;EAClB,kBAAkB;EAClB,wBAAwB;EACxB,oCAAoC;EACpC,mCAAmC;EACnC,mCAAmC;EAEnC,kBAAkB;EAClB,YAAY,EACb;;AAED;EACE,uBAAuB,EACxB;;AAED;EACE,aAAa,EACd;;AAED;EACE,sBAAsB;EACtB,iBAAiB;EACjB,iBAAiB;EACjB,oBAAoB;EACpB,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,0BAA0B;EAC1B,gBAAgB;EAChB,mBAAmB;EACnB,mBAAmB;EACnB,iBAAiB;EACjB,gBAAgB;EAChB,aAAa;EACb,cAAc,EAYf;EA5BD;IAmBI,cAAc;IACd,oBAAoB,EACrB;EArBH;IAyBI,cAAc;IACd,oBAAoB,EACrB;;AAGH;EACE,SAAS;EACT,UAAU;EACV,mCAAmC;EACnC,oCAAoC;EACpC,2BAA2B;EAC3B,sBAAsB;EACtB,kBAAkB,EACnB;;AAED;EACE,kBAAkB;EAClB,sBAAsB;EACtB,SAAS;EACT,UAAU;EACV,kCAAkC;EAClC,qCAAqC;EACrC,4BAA4B,EAC7B;;AAED;;EAEE,gBAAgB;EAChB,yBAAyB;EACzB,eAAe;EACf,wBAAwB;EACxB,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,iCAAiC,EAClC;;AAED;EACE,cAAc,EACf;;AAED;EACE,YAAY;EACZ,aAAa;EACb,cAAc,EACf;;AAED;EACE,yBAAwB;MAAxB,sBAAwB;UAAxB,wBAAwB;EACxB,aAAa,EAmFd;EArFD;IAKI,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,SAAS;IACT,UAAU;IACV,UAAU,EAQX;IAnBH;MAcM,mBAAmB;MACnB,SAAS;MACT,UAAU;MACV,yCAAoB;cAApB,iCAAoB,EACrB;EAlBL;IAsBI,iBAAiB;IACjB,uHAA6F;IAE7F,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,WAAW;IACX,QAAQ;IACR,UAAU;IAEV,oBAAoB;IACpB,YAAY;IACZ,gBAAgB,EAiDjB;IApFH;MAsCM,YAAY;MACZ,iBAAiB;MACjB,0BAA0B;MAC1B,eAAe;MACf,UAAU;MACV,oBAAoB;MACpB,cAAc,EAYf;MAxDL;QA+CQ,iBAAiB,EAClB;MAhDP;QAmDQ,eAAe;QACf,gBAAgB;QAChB,mBAAmB;QACnB,aAAa,EACd;IAvDP;;MA4DM,YAAY,EACb;IA7DL;MAgEM,WAAW;MACX,mBAAmB;MACnB,0BAA0B;MAC1B,eAAe;MACf,0BAAkB;SAAlB,uBAAkB;UAAlB,sBAAkB;cAAlB,kBAAkB,EAMnB;MA1EL;QAuEQ,eAAe;QACf,sBAAsB,EACvB;IAzEP;MA6EM,oBAAoB;MACpB,gBAAgB;MAChB,iBAAiB;MACjB,kBAAkB;MAClB,eAAe;MACf,cAAc,EACf;;AAIL;EACE;;KAEG;EAQH;;KAEG;EAQH,oBAhByB,EA2H1B;EAhID;IAwBI,cARsB,EASvB;EAzBH;IA4BI,gBArBoB,EAsBrB;EA7BH;IAkCQ,gCAAU,EACX;EAnCP;IAwCI,sCAAgB,EACjB;EAzCH;IA6CM,YAAY,EACb;EA9CL;IAmDM,uBAAuB,EACxB;EApDL;IAwDQ,uBAAuB,EACxB;EAzDP;IA8DI,eA9CsB,EA+CvB;EA/DH;IAkEI,eAlDsB,EAyDvB;IAzEH;MAsEQ,uBAAuB,EACxB;EAvEP;IA6EM,gBArEoB,EAsErB;EA9EL;IAmFM,eAjEsB,EAkEvB;EApFL;IA0FQ,cAnFgB,EAoFjB;EA3FP;IAgGQ,gBAhFkB,EAiFnB;EAjGP;IAmGQ,cAnFkB,EAoFnB;EApGP;IA2GQ,cApGgB,EAqGjB;EA5GP;IAgHM,cAlGqB,EAmGtB;EAjHL;IAsHM,gCAAU,EACX;EAvHL;IA2HQ,+BAAU;IACV,aAAa,EACd","file":"demo.scss","sourcesContent":["html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n}\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n\n  min-height: 100vh;\n  color: #666;\n}\n\n* {\n  box-sizing: border-box;\n}\n\napp {\n  height: 100%;\n}\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none;\n\n  &:hover {\n    outline: none;\n    background: #1483ff;\n  }\n\n  &:focus,\n  &:active {\n    outline: none;\n    background: #097dff;\n  }\n}\n\n.arrow-down {\n  width: 0; \n  height: 0; \n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px;\n}\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0; \n  height: 0; \n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff;\n}\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE;\n}\n\ninput:focus {\n  outline: none;\n}\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0;\n}\n\nmain {\n  justify-content: center;\n  height: 100%;\n\n  .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 0;\n    left: 25%;\n    bottom: 0;\n\n    .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n    }\n  }\n\n  .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 13px 19px 2px rgba(0,0,0,.14),0 5px 24px 4px rgba(0,0,0,.12);\n\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em;\n\n    h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px;\n\n      strong {\n        font-weight: 700;\n      }\n\n      small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white;\n      }\n    }\n\n    input[type=text],\n    select {\n      width: 100%;\n    }\n\n    h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      user-select: none;\n      \n      a {\n        color: #a8b2c7;\n        text-decoration: none;\n      }\n    }\n\n    pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px;\n    }\n  }\n}\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  $color-bg-darkest: #13141b;\n  $color-bg-darker: #1b1e27;\n  $color-bg-dark: #232837;\n  $color-bg-med: #2f3646;\n  $color-bg-light: #455066;\n  $color-bg-lighter: #5b6882;\n\n  /**\n   * Text\n   */\n  $color-text-dark: #72809b;\n  $color-text-med-dark: #919db5;\n  $color-text-med: #a8b2c7;\n  $color-text-med-light: #d9dce1;\n  $color-text-light: #f0f1f6;\n  $color-text-lighter: #fff;\n\n  background: $color-bg-darker;\n\n  text {\n    fill: $color-text-med;\n  }\n\n  .gridline-path {\n    stroke: $color-bg-med;\n  }\n\n  .grid-panel {\n    &.odd {\n      rect {\n        fill: rgba(255,255,255,0.05);\n      }\n    }\n  }\n\n  .legend-labels {\n    background: rgba(255,255,255,0.05);\n  }\n\n  .legend-item {\n    &:hover {\n      color: #fff;\n    }\n  }\n\n  .legend-label {\n    &:hover {\n      color: #fff !important;\n    }\n\n    .active {\n      .legend-label-text {\n        color: #fff !important;\n      }\n    }\n  }\n\n  .scale-legend-label {\n    color: $color-text-med;\n  }\n\n  .advanced-pie-legend {\n    color: $color-text-med;\n\n    .legend-item {\n      &:hover {\n        color: #fff !important;\n      }     \n    }\n  }\n\n  .force-directed-graph {\n    .edge {\n      stroke: $color-bg-light;\n    }\n  }\n\n  .number-card {\n    p {\n      color: $color-text-light;\n    }\n  }\n\n  .gauge {\n    .background-arc{\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .gauge-tick {\n      path {\n        stroke: $color-text-med;\n      }\n      text {\n        fill: $color-text-med;\n      }\n    }\n  }\n\n  .linear-gauge {\n    .background-bar {\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .units {\n      fill: $color-text-dark;\n    }\n  }\n\n  .timeline {\n    .brush-background {\n      fill: rgba(255,255,255,0.05);\n    }\n    \n    .brush {\n      .selection {\n        fill: rgba(255, 255, 255, 0.1);\n        stroke: #aaa;\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
 
 /***/ },
 
-/***/ "./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/tooltip/tooltip.scss":
+/***/ "./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/ngx-charts.scss":
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
@@ -6169,22 +8122,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, ".swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 0 10px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n", "", {"version":3,"sources":["/./src/common/tooltip/src/common/tooltip/tooltip.scss"],"names":[],"mappings":"AAqBA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,gBAAgB;IAChB,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,2CAAsB;YAAtB,mCAAsB,EACtB;EA5FH;IA+FG,4CAAsB;YAAtB,oCAAsB,EACtB;EAhGH;IAmGG,4CAAsB;YAAtB,oCAAsB,EACtB;EApGH;IAuGG,2CAAsB;YAAtB,mCAAsB,EACtB","file":"tooltip.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 0 10px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n"],"sourceRoot":"webpack://"}]);
-
-// exports
-
-
-/***/ },
-
-/***/ "./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/ng2d3.scss":
-/***/ function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, ".swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0; }\n  .swui-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .swui-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .swui-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .swui-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 0 10px;\n    text-align: center;\n    pointer-events: auto; }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .swui-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .swui-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .swui-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .swui-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .swui-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .swui-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n\n.ng2d3 {\n  float: left; }\n  .ng2d3 .bar,\n  .ng2d3 .arc {\n    cursor: pointer; }\n  .ng2d3 .bar.active, .ng2d3 .bar:hover,\n  .ng2d3 .cell.active,\n  .ng2d3 .cell:hover,\n  .ng2d3 .arc.active,\n  .ng2d3 .arc:hover,\n  .ng2d3 .card.active,\n  .ng2d3 .card:hover {\n    opacity: 0.8;\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out; }\n  .ng2d3 .bar:focus,\n  .ng2d3 .cell:focus,\n  .ng2d3 .arc:focus,\n  .ng2d3 .card:focus {\n    outline: none; }\n  .ng2d3 g:focus {\n    outline: none; }\n  .ng2d3 .line-series.inactive,\n  .ng2d3 .area-series.inactive {\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out;\n    opacity: .2; }\n  .ng2d3 .line-highlight {\n    display: none; }\n    .ng2d3 .line-highlight.active {\n      display: block; }\n  .ng2d3 .area {\n    opacity: 0.6; }\n  .ng2d3 .circle:hover {\n    cursor: pointer; }\n  .ng2d3 .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.swui-tooltip-content {\n  pointer-events: none !important; }\n  .swui-tooltip-content .tooltip-label {\n    display: block;\n    line-height: 1em;\n    padding: 8px 5px 5px 5px;\n    font-size: 1em; }\n  .swui-tooltip-content .tooltip-val {\n    display: block;\n    font-size: 1.3em;\n    line-height: 1em;\n    padding: 0 5px 8px 5px; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none; }\n\n.grid-panel rect {\n  fill: none; }\n\n.grid-panel.odd rect {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.timeline .brush-background {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.timeline .brush .selection {\n  fill: rgba(0, 0, 0, 0.1);\n  stroke-width: 1px;\n  stroke: #888888; }\n\n.timeline .brush .handle {\n  fill-opacity: 0; }\n\n.timeline .embedded-chart {\n  opacity: 0.6; }\n\n.area-tooltip-container {\n  padding: 5px 0;\n  pointer-events: none; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em;\n  padding: 5px 0; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.chart-legend {\n  display: inline-block;\n  padding: 0; }\n  .chart-legend .legend-title {\n    white-space: nowrap;\n    overflow: hidden;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .chart-legend ul, .chart-legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .chart-legend .legend-wrap {\n    width: 90%; }\n  .chart-legend .scale-legend {\n    text-align: center;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column; }\n  .chart-legend .scale-legend-wrap {\n    display: inline-block;\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    width: 30px;\n    border-radius: 5px;\n    margin: 0 auto; }\n  .chart-legend .scale-legend-label {\n    font-size: 12px; }\n  .chart-legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    white-space: nowrap;\n    background: rgba(0, 0, 0, 0.05); }\n  .chart-legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .chart-legend .legend-label:hover {\n      color: #000;\n      -webkit-transition: 0.2s;\n      transition: 0.2s; }\n    .chart-legend .legend-label.active {\n      color: #FFF; }\n  .chart-legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .chart-legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px; }\n  .chart-legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .chart-legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis; }\n\n.advanced-pie {\n  display: inline-block;\n  float: left; }\n\n.advanced-pie-legend-wrapper {\n  display: inline-block; }\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n        cursor: pointer; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item:focus {\n          outline: none; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item:hover {\n          color: #000;\n          -webkit-transition: 0.2s;\n          transition: 0.2s; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n\n.pie-label {\n  font-size: 11px; }\n\n.pie-grid .arc1 {\n  opacity: 0.4; }\n\n.pie-grid .percent-label {\n  font-size: 16px;\n  font-weight: 400; }\n\n.force-directed-graph .edge {\n  stroke: #333; }\n\n.tree-map .treemap-val {\n  font-size: 1.3em;\n  padding-top: 5px;\n  display: inline-block; }\n\n.gauge .background-arc path {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.gauge .gauge-tick path {\n  stroke: #999; }\n\n.gauge .gauge-tick text {\n  font-size: 12px;\n  fill: #999;\n  font-weight: bold; }\n\n.gauge .gauge-tick.highlighted path {\n  stroke: #666; }\n\n.gauge .gauge-tick.highlighted text {\n  fill: #666; }\n\n.gauge .gauge-tick-large path {\n  stroke-width: 2px; }\n\n.gauge .gauge-tick-small path {\n  stroke-width: 1px; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.scss","/./src/src/ng2d3.scss"],"names":[],"mappings":"AAqBA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW,EAoGZ;EA1GD;IASG,iBAxBc;IAyBd,eAxBoB;IAyBpB,0BAvBqB;IAwBrB,gHAfiB;IAgBjB,gBAAgB;IAChB,aAAa,EAgCb;IA9CH;MAiBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA7CJ;QAuBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAxCU,EAyCX;MA1BN;QA6BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA9CU,EA+CX;MAhCN;QAmCO,kCAAkC;QAClC,qCAAqC;QACrC,6BApDU,EAqDX;MAtCN;QAyCO,mCAAmC;QACnC,oCAAoC;QACpC,8BA1DU,EA2DX;EA5CN;IAiDG,YArEiB;IAsEjB,gCAvEc;IAwEd,gBAAgB;IAChB,gBAAgB;IAChB,mBAAmB;IACnB,qBAAqB,EA2BrB;IAjFH;MA0DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAjFU,EAkFX;IA7DN;MAgEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAvFU,EAwFX;IAnEN;MAsEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA7FU,EA8FX;IAzEN;MA4EO,mCAAmC;MACnC,oCAAoC;MACpC,6CAnGU,EAoGX;EA/EN;IAoFG,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACV;EAxFH;IA2FG,2CAAsB;YAAtB,mCAAsB,EACtB;EA5FH;IA+FG,4CAAsB;YAAtB,oCAAsB,EACtB;EAhGH;IAmGG,4CAAsB;YAAtB,oCAAsB,EACtB;EApGH;IAuGG,2CAAsB;YAAtB,mCAAsB,EACtB;;AC3HH;EACE,YAAY,EA8Db;EA/DD;;IAKI,gBAAgB,EACjB;EANH;;;;;;;IAcM,aAAa;IACb,8CAAsC;IAAtC,sCAAsC,EACvC;EAhBL;;;;IAmBM,cAAc,EACf;EApBL;IAyBM,cAAc,EACf;EA1BL;;IAgCM,8CAAsC;IAAtC,sCAAsC;IACtC,YACD,EAAC;EAlCN;IAsCI,cAAc,EAKf;IA3CH;MAyCM,eAAe,EAChB;EA1CL;IA8CI,aAAa,EACd;EA/CH;IAmDM,gBAAgB,EACjB;EApDL;IAyDM,oBAAoB;IACpB,mBAAmB;IACnB,mBAAmB;IACnB,uBAAuB,EACxB;;AAIL;EACE,gCAAgC,EAejC;EAhBD;IAII,eAAe;IACf,iBAAiB;IACjB,yBAAyB;IACzB,eAAe,EAChB;EARH;IAWI,eAAe;IACf,iBAAiB;IACjB,iBAAiB;IACjB,uBAAuB,EACxB;;AAGH;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,aAAa;EACb,gBAAgB;EAChB,WAAW,EACZ;;AAED;EAEI,WAAW,EACZ;;AAHH;EAOM,0BAAU,EACX;;AAIL;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,0BAAU,EACX;;AAHH;EAOM,yBAAU;EACV,kBAAkB;EAClB,gBAAgB,EACjB;;AAVL;EAaM,gBAAgB,EACjB;;AAdL;EAkBI,aAAa,EACd;;AAGH;EACE,eAAe;EACf,qBAAqB,EACtB;;AAGD;EACE,iBAAiB;EACjB,mBAAmB;EACnB,eAAe,EAUhB;EAbD;IAMI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;;AAGH;EACE,sBAAsB;EACtB,WAAW,EAwGZ;EA1GD;IAKI,oBAAoB;IACpB,iBAAiB;IACjB,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAXH;IAcI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAjBH;IAoBI,WAAW,EACZ;EArBH;IAwBI,mBAAmB;IACnB,qBAAc;IAAd,qBAAc;IAAd,cAAc;IACd,6BAAuB;IAAvB,8BAAuB;QAAvB,2BAAuB;YAAvB,uBAAuB,EACxB;EA3BH;IA8BI,sBAAsB;IACtB,oBAAQ;QAAR,YAAQ;YAAR,QAAQ;IACR,YAAY;IACZ,mBAAmB;IACnB,eAAe,EAChB;EAnCH;IAsCI,gBAAgB,EACjB;EAvCH;IA0CI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB;IACnB,iBAAiB;IACjB,mBAAmB;IACnB,oBAAoB;IACpB,gCAAgB,EACjB;EApDH;IAuDI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAYhB;IAtEH;MA6DM,YAAY;MACZ,yBAAyB;MAEzB,iBAAiB,EAClB;IAjEL;MAoEM,YAAY,EACb;EArEL;IAyEI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EA/EH;IAkFI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB;IAChB,YAAY;IACZ,wBAAwB;IACxB,oBAAoB;IACpB,iBAAiB;IACjB,oBAAoB,EACrB;EA3FH;IA8FI,eAAe;IACf,kBAAkB,EACnB;EAhGH;IAmGI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB,EACzB;;AAGH;EACE,sBAAsB;EACtB,YAAY,EACb;;AAED;EACE,sBAAsB,EACvB;;AAED;EACE,YAAY;EACZ,mBAAmB;EACnB,SAAS;EACT,sCAAoB;UAApB,8BAAoB,EA8DrB;EAlED;IAOI,gBACD,EAAC;EARJ;IAWI,gBAAgB;IAChB,oBAAoB,EACrB;EAbH;IAgBI,YAAY,EAiDb;IAjEH;MAmBM,oBAAoB;MACpB,eAAe,EA4ChB;MAhEL;QAuBQ,mBAAmB;QACnB,sBAAsB;QACtB,gBAAgB,EAsCjB;QA/DP;UA4BU,cAAc,EACf;QA7BT;UAgCU,YAAY;UACZ,yBAAyB;UAEzB,iBAAiB,EAClB;QApCT;UAuCU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA1CT;UA6CU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAjDT;UAoDU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAvDT;UA0DU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB;;AAMT;EACE,gBAAgB,EACjB;;AAED;EAEI,aAAa,EACd;;AAHH;EAKI,gBAAgB;EAChB,iBAAiB,EAClB;;AAGH;EAEI,aAAa,EACd;;AAGH;EAEI,iBAAiB;EACjB,iBAAiB;EACjB,sBAAsB,EACvB;;AAGH;EAGM,0BAAU,EACX;;AAJL;EASM,aAAa,EACd;;AAVL;EAaM,gBAAgB;EAChB,WAAW;EACX,kBAAkB,EACnB;;AAhBL;EAoBQ,aAAa,EACd;;AArBP;EAwBQ,WAAW,EACZ;;AAzBP;EA8BI,kBAAkB,EACnB;;AA/BH;EAkCI,kBAAkB,EACnB","file":"ng2d3.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n 0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n 0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n 0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.swui-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n\n  &.type-popover {\n   background: $popover-bg;\n   color: $popover-color;\n   border: 1px solid $popover-border;\n   box-shadow: $shadow;\n   font-size: 13px;\n   padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 0 10px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n   position: absolute;\n   z-index: 5001;\n   width: 0;\n   height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n}\n","@import \"./common/tooltip/tooltip\";\n\n.ng2d3 {\n  float: left;\n\n  .bar,\n  .arc {\n    cursor: pointer;\n  }\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &.active,\n    &:hover {\n      opacity: 0.8;\n      transition: opacity 100ms ease-in-out;\n    }\n\n    &:focus {\n      outline: none;\n    }\n  }\n\n  g {\n    &:focus {\n      outline: none;\n    }\n  }\n\n  .line-series,\n  .area-series {\n    &.inactive {\n      transition: opacity 100ms ease-in-out;\n      opacity: .2\n    }\n  }\n\n  .line-highlight {\n    display: none;\n\n    &.active {\n      display: block;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.swui-tooltip-content {\n  pointer-events: none !important;\n\n  .tooltip-label {\n    display: block;\n    line-height: 1em;\n    padding: 8px 5px 5px 5px;\n    font-size: 1em;\n  }\n\n  .tooltip-val {\n    display: block;\n    font-size: 1.3em;\n    line-height: 1em;\n    padding: 0 5px 8px 5px;\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none;\n}\n\n.grid-panel {\n  rect {\n    fill: none;\n  }\n\n  &.odd {\n    rect {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.timeline {\n  .brush-background {\n    fill: rgba(0,0,0,0.05);\n  }\n\n  .brush {\n    .selection {\n      fill: rgba(0, 0, 0, 0.1);\n      stroke-width: 1px;\n      stroke: #888888;\n    }\n\n    .handle {\n      fill-opacity: 0;\n    }\n  }\n\n  .embedded-chart {\n    opacity: 0.6;\n  }\n}\n\n.area-tooltip-container {\n  padding: 5px 0;\n  pointer-events: none;\n}\n\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n  padding: 5px 0;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.chart-legend {\n  display: inline-block;\n  padding: 0;\n\n  .legend-title {\n    white-space: nowrap;\n    overflow: hidden;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .scale-legend {\n    text-align: center;\n    display: flex;\n    flex-direction: column;\n  }\n\n  .scale-legend-wrap {\n    display: inline-block;\n    flex: 1;\n    width: 30px;\n    border-radius: 5px;\n    margin: 0 auto;\n  }\n\n  .scale-legend-label{\n    font-size: 12px;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    white-space: nowrap;\n    background: rgba(0,0,0,0.05);\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &:hover {\n      color: #000;\n      -webkit-transition: 0.2s;\n      -moz-transition: 0.2s;\n      transition: 0.2s;\n    }\n\n    &.active {\n      color: #FFF;\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n  }\n}\n\n.advanced-pie {\n  display: inline-block;\n  float: left;\n}\n\n.advanced-pie-legend-wrapper {\n  display: inline-block;\n}\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  transform: translate(0, -50%);\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n        cursor: pointer;\n\n        &:focus {\n          outline: none;\n        }\n\n        &:hover {\n          color: #000;\n          -webkit-transition: 0.2s;\n          -moz-transition: 0.2s;\n          transition: 0.2s;\n        }\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n\n.pie-label {\n  font-size: 11px;\n}\n\n.pie-grid {\n  .arc1 {\n    opacity: 0.4;\n  }\n  .percent-label {\n    font-size: 16px;\n    font-weight: 400;\n  }\n}\n\n.force-directed-graph {\n  .edge {\n    stroke: #333;\n  }\n}\n\n.tree-map {\n  .treemap-val {\n    font-size: 1.3em;\n    padding-top: 5px;\n    display: inline-block;\n  }\n}\n\n.gauge {\n  .background-arc {\n    path {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n\n  .gauge-tick {\n    path {\n      stroke: #999;\n    }\n\n    text {\n      font-size: 12px;\n      fill: #999;\n      font-weight: bold;\n    }\n\n    &.highlighted {\n      path {\n        stroke: #666;\n      }\n\n      text {\n        fill: #666;\n      }\n    }\n  }\n\n  .gauge-tick-large path {\n    stroke-width: 2px;\n  }\n\n  .gauge-tick-small path{\n    stroke-width: 1px;\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, ".ngx-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n  pointer-events: none; }\n  .ngx-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .ngx-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .ngx-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 0 10px;\n    text-align: center;\n    pointer-events: auto; }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .ngx-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .ngx-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .ngx-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .ngx-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .ngx-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n  .ngx-tooltip-content.animate {\n    opacity: 1;\n    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;\n    transition: opacity 0.3s, -webkit-transform 0.3s;\n    transition: opacity 0.3s, transform 0.3s;\n    transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0);\n    pointer-events: auto; }\n\n.ngx-charts {\n  float: left; }\n  .ngx-charts .circle,\n  .ngx-charts .bar,\n  .ngx-charts .arc {\n    cursor: pointer; }\n  .ngx-charts .bar.active, .ngx-charts .bar:hover,\n  .ngx-charts .cell.active,\n  .ngx-charts .cell:hover,\n  .ngx-charts .arc.active,\n  .ngx-charts .arc:hover,\n  .ngx-charts .card.active,\n  .ngx-charts .card:hover {\n    opacity: 0.8;\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out; }\n  .ngx-charts .bar:focus,\n  .ngx-charts .cell:focus,\n  .ngx-charts .arc:focus,\n  .ngx-charts .card:focus {\n    outline: none; }\n  .ngx-charts g:focus {\n    outline: none; }\n  .ngx-charts .line-series.inactive,\n  .ngx-charts .area-series.inactive {\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out;\n    opacity: .2; }\n  .ngx-charts .line-highlight {\n    display: none; }\n    .ngx-charts .line-highlight.active {\n      display: block; }\n  .ngx-charts .area {\n    opacity: 0.6; }\n  .ngx-charts .circle:hover {\n    cursor: pointer; }\n  .ngx-charts .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.ngx-tooltip-content {\n  pointer-events: none !important; }\n  .ngx-tooltip-content .tooltip-label {\n    display: block;\n    line-height: 1em;\n    padding: 8px 5px 5px 5px;\n    font-size: 1em; }\n  .ngx-tooltip-content .tooltip-val {\n    display: block;\n    font-size: 1.3em;\n    line-height: 1em;\n    padding: 0 5px 8px 5px; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none; }\n\n.grid-panel rect {\n  fill: none; }\n\n.grid-panel.odd rect {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.timeline .brush-background {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.timeline .brush .selection {\n  fill: rgba(0, 0, 0, 0.1);\n  stroke-width: 1px;\n  stroke: #888888; }\n\n.timeline .brush .handle {\n  fill-opacity: 0; }\n\n.timeline .embedded-chart {\n  opacity: 0.6; }\n\n.area-tooltip-container {\n  padding: 5px 0;\n  pointer-events: none; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em;\n  padding: 5px 0; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.chart-legend {\n  display: inline-block;\n  padding: 0;\n  width: auto !important; }\n  .chart-legend .legend-title {\n    white-space: nowrap;\n    overflow: hidden;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .chart-legend ul, .chart-legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .chart-legend .legend-wrap {\n    width: 90%; }\n  .chart-legend .scale-legend {\n    text-align: center;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column; }\n  .chart-legend .scale-legend-wrap {\n    display: inline-block;\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    width: 30px;\n    border-radius: 5px;\n    margin: 0 auto; }\n  .chart-legend .scale-legend-label {\n    font-size: 12px; }\n  .chart-legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    white-space: nowrap;\n    background: rgba(0, 0, 0, 0.05); }\n  .chart-legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .chart-legend .legend-label:hover {\n      color: #000;\n      -webkit-transition: 0.2s;\n      transition: 0.2s; }\n    .chart-legend .legend-label .active .legend-label-text {\n      color: #000; }\n  .chart-legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .chart-legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px; }\n  .chart-legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .chart-legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis; }\n\n.advanced-pie {\n  display: inline-block;\n  float: left; }\n\n.advanced-pie-legend-wrapper {\n  display: inline-block; }\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n        cursor: pointer; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item:focus {\n          outline: none; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item:hover {\n          color: #000;\n          -webkit-transition: 0.2s;\n          transition: 0.2s; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n\n.pie-label {\n  font-size: 11px; }\n\n.pie-grid .arc1 {\n  opacity: 0.4; }\n\n.pie-grid .percent-label {\n  font-size: 16px;\n  font-weight: 400; }\n\n.force-directed-graph .edge {\n  stroke: #333; }\n\n.tree-map .treemap-val {\n  font-size: 1.3em;\n  padding-top: 5px;\n  display: inline-block; }\n\n.gauge .background-arc path {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.gauge .gauge-tick path {\n  stroke: #666; }\n\n.gauge .gauge-tick text {\n  font-size: 12px;\n  fill: #666;\n  font-weight: bold; }\n\n.gauge .gauge-tick-large path {\n  stroke-width: 2px; }\n\n.gauge .gauge-tick-small path {\n  stroke-width: 1px; }\n\n.linear-gauge {\n  cursor: pointer; }\n  .linear-gauge .background-bar path {\n    fill: rgba(0, 0, 0, 0.05); }\n  .linear-gauge .units {\n    fill: #666; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.component.scss","/./src/src/ngx-charts.scss"],"names":[],"mappings":"AAqBA;EACE,gBAAgB;EAChB,mBAAmB;EACnB,cAAc;EACd,eAAe;EACf,oBAAoB;EACpB,WAAW;EACX,qBAAqB,EA2GtB;EAlHD;IAUI,iBAzBa;IA0Bb,eAzBmB;IA0BnB,0BAxBoB;IAyBpB,gHAhBiB;IAiBjB,gBAAgB;IAChB,aAAa,EAgCd;IA/CH;MAkBK,mBAAmB;MACnB,cAAc;MACd,SAAS;MACT,UAAU,EAyBX;MA9CJ;QAwBO,kCAAkC;QAClC,qCAAqC;QACrC,4BAzCU,EA0CX;MA3BN;QA8BO,mCAAmC;QACnC,oCAAoC;QACpC,2BA/CU,EAgDX;MAjCN;QAoCO,kCAAkC;QAClC,qCAAqC;QACrC,6BArDU,EAsDX;MAvCN;QA0CO,mCAAmC;QACnC,oCAAoC;QACpC,8BA3DU,EA4DX;EA7CN;IAkDG,YAtEiB;IAuEjB,gCAxEc;IAyEd,gBAAgB;IAChB,gBAAgB;IAChB,mBAAmB;IACnB,qBAAqB,EA2BrB;IAlFH;MA2DO,kCAAkC;MAClC,qCAAqC;MACrC,2CAlFU,EAmFX;IA9DN;MAiEO,mCAAmC;MACnC,oCAAoC;MACpC,0CAxFU,EAyFX;IApEN;MAuEO,kCAAkC;MAClC,qCAAqC;MACrC,4CA9FU,EA+FX;IA1EN;MA6EO,mCAAmC;MACnC,oCAAoC;MACpC,6CApGU,EAqGX;EAhFN;IAqFI,mBAAmB;IACnB,cAAc;IACd,SAAS;IACT,UAAU,EACX;EAzFH;IA4FG,2CAAsB;YAAtB,mCAAsB,EACtB;EA7FH;IAgGG,4CAAsB;YAAtB,oCAAsB,EACtB;EAjGH;IAoGG,4CAAsB;YAAtB,oCAAsB,EACtB;EArGH;IAwGG,2CAAsB;YAAtB,mCAAsB,EACtB;EAzGH;IA4GI,WAAW;IACX,yDAAyC;IAAzC,iDAAyC;IAAzC,yCAAyC;IAAzC,iEAAyC;IACzC,wCAAsB;YAAtB,gCAAsB;IACtB,qBAAqB,EACtB;;ACnIH;EACE,YAAY,EA+Db;EAhED;;;IAMI,gBAAgB,EACjB;EAPH;;;;;;;IAeM,aAAa;IACb,8CAAsC;IAAtC,sCAAsC,EACvC;EAjBL;;;;IAoBM,cAAc,EACf;EArBL;IA0BM,cAAc,EACf;EA3BL;;IAiCM,8CAAsC;IAAtC,sCAAsC;IACtC,YACD,EAAC;EAnCN;IAuCI,cAAc,EAKf;IA5CH;MA0CM,eAAe,EAChB;EA3CL;IA+CI,aAAa,EACd;EAhDH;IAoDM,gBAAgB,EACjB;EArDL;IA0DM,oBAAoB;IACpB,mBAAmB;IACnB,mBAAmB;IACnB,uBAAuB,EACxB;;AAIL;EACE,gCAAgC,EAejC;EAhBD;IAII,eAAe;IACf,iBAAiB;IACjB,yBAAyB;IACzB,eAAe,EAChB;EARH;IAWI,eAAe;IACf,iBAAiB;IACjB,iBAAiB;IACjB,uBAAuB,EACxB;;AAGH;EACE,gBAAgB;EAChB,oBAAoB,EACrB;;AAED;EACE,aAAa;EACb,gBAAgB;EAChB,WAAW,EACZ;;AAED;EAEI,WAAW,EACZ;;AAHH;EAOM,0BAAU,EACX;;AAIL;EACE,aAAa,EAcd;EAfD;IAII,gBAAgB;IAChB,mBAAmB;IACnB,mBAAmB;IACnB,SAAS;IACT,YAAY,EACb;EATH;IAYI,YAAY;IACZ,gBAAgB,EACjB;;AAGH;EAEI,0BAAU,EACX;;AAHH;EAOM,yBAAU;EACV,kBAAkB;EAClB,gBAAgB,EACjB;;AAVL;EAaM,gBAAgB,EACjB;;AAdL;EAkBI,aAAa,EACd;;AAGH;EACE,eAAe;EACf,qBAAqB,EACtB;;AAGD;EACE,iBAAiB;EACjB,mBAAmB;EACnB,eAAe,EAUhB;EAbD;IAMI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;;AAGH;EACE,sBAAsB;EACtB,WAAW;EACX,uBAAuB,EA0GxB;EA7GD;IAMI,oBAAoB;IACpB,iBAAiB;IACjB,kBAAkB;IAClB,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB,EACnB;EAZH;IAeI,WAAW;IACX,UAAU;IACV,iBAAiB,EAClB;EAlBH;IAqBI,WAAW,EACZ;EAtBH;IAyBI,mBAAmB;IACnB,qBAAc;IAAd,qBAAc;IAAd,cAAc;IACd,6BAAuB;IAAvB,8BAAuB;QAAvB,2BAAuB;YAAvB,uBAAuB,EACxB;EA5BH;IA+BI,sBAAsB;IACtB,oBAAQ;QAAR,YAAQ;YAAR,QAAQ;IACR,YAAY;IACZ,mBAAmB;IACnB,eAAe,EAChB;EApCH;IAuCI,gBAAgB,EACjB;EAxCH;IA2CI,iBAAiB;IACjB,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,YAAY;IACZ,mBAAmB;IACnB,iBAAiB;IACjB,mBAAmB;IACnB,oBAAoB;IACpB,gCAAgB,EACjB;EArDH;IAwDI,gBAAgB;IAChB,eAAe;IACf,YAAY;IACZ,eAAe,EAchB;IAzEH;MA8DM,YAAY;MACZ,yBAAyB;MAEzB,iBAAiB,EAClB;IAlEL;MAsEQ,YAAY,EACb;EAvEP;IA4EI,sBAAsB;IACtB,aAAa;IACb,YAAY;IACZ,kBAAkB;IAClB,eAAe;IACf,mBAAmB,EACpB;EAlFH;IAqFI,sBAAsB;IACtB,oBAAoB;IACpB,kBAAkB;IAClB,gBAAgB;IAChB,YAAY;IACZ,wBAAwB;IACxB,oBAAoB;IACpB,iBAAiB;IACjB,oBAAoB,EACrB;EA9FH;IAiGI,eAAe;IACf,kBAAkB,EACnB;EAnGH;IAsGI,uBAAuB;IACvB,sBAAsB;IACtB,kBAAkB;IAClB,iBAAiB;IACjB,oBAAoB;IACpB,wBAAwB,EACzB;;AAGH;EACE,sBAAsB;EACtB,YAAY,EACb;;AAED;EACE,sBAAsB,EACvB;;AAED;EACE,YAAY;EACZ,mBAAmB;EACnB,SAAS;EACT,sCAAoB;UAApB,8BAAoB,EA8DrB;EAlED;IAOI,gBACD,EAAC;EARJ;IAWI,gBAAgB;IAChB,oBAAoB,EACrB;EAbH;IAgBI,YAAY,EAiDb;IAjEH;MAmBM,oBAAoB;MACpB,eAAe,EA4ChB;MAhEL;QAuBQ,mBAAmB;QACnB,sBAAsB;QACtB,gBAAgB,EAsCjB;QA/DP;UA4BU,cAAc,EACf;QA7BT;UAgCU,YAAY;UACZ,yBAAyB;UAEzB,iBAAiB,EAClB;QApCT;UAuCU,gBAAgB;UAChB,iBAAiB;UACjB,kBAAkB,EACnB;QA1CT;UA6CU,gBAAgB;UAChB,aAAa;UACb,kBAAkB;UAClB,iBAAiB,EAClB;QAjDT;UAoDU,gBAAgB;UAChB,aAAa;UACb,kBAAkB,EACnB;QAvDT;UA0DU,WAAW;UACX,aAAa;UACb,YAAY;UACZ,kBAAkB,EACnB;;AAMT;EACE,gBAAgB,EACjB;;AAED;EAEI,aAAa,EACd;;AAHH;EAKI,gBAAgB;EAChB,iBAAiB,EAClB;;AAGH;EAEI,aAAa,EACd;;AAGH;EAEI,iBAAiB;EACjB,iBAAiB;EACjB,sBAAsB,EACvB;;AAGH;EAGM,0BAAU,EACX;;AAJL;EASM,aAAa,EACd;;AAVL;EAaM,gBAAgB;EAChB,WAAW;EACX,kBAAkB,EACnB;;AAhBL;EAoBI,kBAAkB,EACnB;;AArBH;EAwBI,kBAAkB,EACnB;;AAGH;EACE,gBAAgB,EAWjB;EAZD;IAKM,0BAAU,EACX;EANL;IAUI,WAAW,EACZ","file":"ngx-charts.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n  0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n  0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n  0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.ngx-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n  pointer-events: none;\n\n  &.type-popover {\n    background: $popover-bg;\n    color: $popover-color;\n    border: 1px solid $popover-border;\n    box-shadow: $shadow;\n    font-size: 13px;\n    padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 0 10px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n  &.animate {\n    opacity: 1;\n    transition: opacity 0.3s, transform 0.3s;\n    transform: translate3d(0, 0, 0);\n    pointer-events: auto;\n  }\n\n}\n","@import \"./common/tooltip/tooltip.component\";\n\n.ngx-charts {\n  float: left;\n\n  .circle,\n  .bar,\n  .arc {\n    cursor: pointer;\n  }\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &.active,\n    &:hover {\n      opacity: 0.8;\n      transition: opacity 100ms ease-in-out;\n    }\n\n    &:focus {\n      outline: none;\n    }\n  }\n\n  g {\n    &:focus {\n      outline: none;\n    }\n  }\n\n  .line-series,\n  .area-series {\n    &.inactive {\n      transition: opacity 100ms ease-in-out;\n      opacity: .2\n    }\n  }\n\n  .line-highlight {\n    display: none;\n\n    &.active {\n      display: block;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.ngx-tooltip-content {\n  pointer-events: none !important;\n\n  .tooltip-label {\n    display: block;\n    line-height: 1em;\n    padding: 8px 5px 5px 5px;\n    font-size: 1em;\n  }\n\n  .tooltip-val {\n    display: block;\n    font-size: 1.3em;\n    line-height: 1em;\n    padding: 0 5px 8px 5px;\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none;\n}\n\n.grid-panel {\n  rect {\n    fill: none;\n  }\n\n  &.odd {\n    rect {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.timeline {\n  .brush-background {\n    fill: rgba(0,0,0,0.05);\n  }\n\n  .brush {\n    .selection {\n      fill: rgba(0, 0, 0, 0.1);\n      stroke-width: 1px;\n      stroke: #888888;\n    }\n\n    .handle {\n      fill-opacity: 0;\n    }\n  }\n\n  .embedded-chart {\n    opacity: 0.6;\n  }\n}\n\n.area-tooltip-container {\n  padding: 5px 0;\n  pointer-events: none;\n}\n\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n  padding: 5px 0;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.chart-legend {\n  display: inline-block;\n  padding: 0;\n  width: auto !important;\n\n  .legend-title {\n    white-space: nowrap;\n    overflow: hidden;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .scale-legend {\n    text-align: center;\n    display: flex;\n    flex-direction: column;\n  }\n\n  .scale-legend-wrap {\n    display: inline-block;\n    flex: 1;\n    width: 30px;\n    border-radius: 5px;\n    margin: 0 auto;\n  }\n\n  .scale-legend-label{\n    font-size: 12px;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    white-space: nowrap;\n    background: rgba(0,0,0,0.05);\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &:hover {\n      color: #000;\n      -webkit-transition: 0.2s;\n      -moz-transition: 0.2s;\n      transition: 0.2s;\n    }\n\n    .active {\n      .legend-label-text {\n        color: #000;\n      }\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n  }\n}\n\n.advanced-pie {\n  display: inline-block;\n  float: left;\n}\n\n.advanced-pie-legend-wrapper {\n  display: inline-block;\n}\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  transform: translate(0, -50%);\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n        cursor: pointer;\n\n        &:focus {\n          outline: none;\n        }\n\n        &:hover {\n          color: #000;\n          -webkit-transition: 0.2s;\n          -moz-transition: 0.2s;\n          transition: 0.2s;\n        }\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n\n.pie-label {\n  font-size: 11px;\n}\n\n.pie-grid {\n  .arc1 {\n    opacity: 0.4;\n  }\n  .percent-label {\n    font-size: 16px;\n    font-weight: 400;\n  }\n}\n\n.force-directed-graph {\n  .edge {\n    stroke: #333;\n  }\n}\n\n.tree-map {\n  .treemap-val {\n    font-size: 1.3em;\n    padding-top: 5px;\n    display: inline-block;\n  }\n}\n\n.gauge {\n  .background-arc {\n    path {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n\n  .gauge-tick {\n    path {\n      stroke: #666;\n    }\n\n    text {\n      font-size: 12px;\n      fill: #666;\n      font-weight: bold;\n    }\n  }\n\n  .gauge-tick-large path {\n    stroke-width: 2px;\n  }\n\n  .gauge-tick-small path{\n    stroke-width: 1px;\n  }\n}\n\n.linear-gauge {\n  cursor: pointer;\n  \n  .background-bar {\n    path {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n\n  .units {\n    fill: #666;\n  }\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -24240,15 +26178,12 @@ var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var AreaChartNormalizedComponent = (function (_super) {
     __extends(AreaChartNormalizedComponent, _super);
-    function AreaChartNormalizedComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function AreaChartNormalizedComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -24257,15 +26192,6 @@ var AreaChartNormalizedComponent = (function (_super) {
         this.timelineHeight = 50;
         this.timelinePadding = 10;
     }
-    AreaChartNormalizedComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    AreaChartNormalizedComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    AreaChartNormalizedComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     AreaChartNormalizedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -24281,7 +26207,7 @@ var AreaChartNormalizedComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             if (_this.timeline) {
                 _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
@@ -24353,6 +26279,7 @@ var AreaChartNormalizedComponent = (function (_super) {
             }
             _this.updateTimeline();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
             var pageUrl = window.location.href;
             _this.clipPathId = 'clip' + id_1.id().toString();
@@ -24363,13 +26290,12 @@ var AreaChartNormalizedComponent = (function (_super) {
         if (this.timeline) {
             this.timelineWidth = this.width;
             if (this.legend) {
-                this.timelineWidth = this.width * 10.0 / 12.0;
+                this.timelineWidth = this.dims.width;
             }
-            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+            this.timelineTransform = "translate(" + this.dims.xOffset + ", " + -this.margin[2] + ")";
         }
     };
     AreaChartNormalizedComponent.prototype.getXDomain = function () {
@@ -24481,7 +26407,30 @@ var AreaChartNormalizedComponent = (function (_super) {
         return item.name;
     };
     AreaChartNormalizedComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.seriesDomain;
+        }
+        else {
+            domain = this.yDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    AreaChartNormalizedComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.seriesDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.yDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     AreaChartNormalizedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -24493,34 +26442,24 @@ var AreaChartNormalizedComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    AreaChartNormalizedComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    AreaChartNormalizedComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    AreaChartNormalizedComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    AreaChartNormalizedComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -24570,9 +26509,9 @@ var AreaChartNormalizedComponent = (function (_super) {
         __metadata('design:type', Array)
     ], AreaChartNormalizedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], AreaChartNormalizedComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], AreaChartNormalizedComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -24589,11 +26528,11 @@ var AreaChartNormalizedComponent = (function (_super) {
     ], AreaChartNormalizedComponent.prototype, "hideCircles", null);
     AreaChartNormalizedComponent = __decorate([
         core_1.Component({
-            selector: 'area-chart-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick({series: $event.name})\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-area-chart-normalized',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-ceries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], AreaChartNormalizedComponent);
     return AreaChartNormalizedComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -24630,14 +26569,12 @@ var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var AreaChartStackedComponent = (function (_super) {
     __extends(AreaChartStackedComponent, _super);
-    function AreaChartStackedComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.cd = cd;
+    function AreaChartStackedComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -24645,17 +26582,7 @@ var AreaChartStackedComponent = (function (_super) {
         this.yAxisWidth = 0;
         this.timelineHeight = 50;
         this.timelinePadding = 10;
-        this.element = element.nativeElement;
     }
-    AreaChartStackedComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    AreaChartStackedComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    AreaChartStackedComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     AreaChartStackedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -24671,7 +26598,7 @@ var AreaChartStackedComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             if (_this.timeline) {
                 _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
@@ -24719,6 +26646,7 @@ var AreaChartStackedComponent = (function (_super) {
             }
             _this.updateTimeline();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
             var pageUrl = window.location.href;
             _this.clipPathId = 'clip' + id_1.id().toString();
@@ -24729,13 +26657,12 @@ var AreaChartStackedComponent = (function (_super) {
         if (this.timeline) {
             this.timelineWidth = this.width;
             if (this.legend) {
-                this.timelineWidth = this.width * 10.0 / 12.0;
+                this.timelineWidth = this.dims.width;
             }
-            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+            this.timelineTransform = "translate(" + this.dims.xOffset + ", " + -this.margin[2] + ")";
         }
     };
     AreaChartStackedComponent.prototype.getXDomain = function () {
@@ -24875,7 +26802,30 @@ var AreaChartStackedComponent = (function (_super) {
         return item.name;
     };
     AreaChartStackedComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.seriesDomain;
+        }
+        else {
+            domain = this.yDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    AreaChartStackedComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.seriesDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.yDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     AreaChartStackedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -24887,34 +26837,24 @@ var AreaChartStackedComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    AreaChartStackedComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    AreaChartStackedComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    AreaChartStackedComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    AreaChartStackedComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -24964,9 +26904,9 @@ var AreaChartStackedComponent = (function (_super) {
         __metadata('design:type', Array)
     ], AreaChartStackedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], AreaChartStackedComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], AreaChartStackedComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -24983,11 +26923,11 @@ var AreaChartStackedComponent = (function (_super) {
     ], AreaChartStackedComponent.prototype, "hideCircles", null);
     AreaChartStackedComponent = __decorate([
         core_1.Component({
-            selector: 'area-chart-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick({series: $event.name})\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [activeEntries]=\"activeEntries\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g circleSeries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-area-chart-stacked',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [activeEntries]=\"activeEntries\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-circle-ceries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], AreaChartStackedComponent);
     return AreaChartStackedComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -25024,14 +26964,11 @@ var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var AreaChartComponent = (function (_super) {
     __extends(AreaChartComponent, _super);
-    function AreaChartComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function AreaChartComponent() {
+        _super.apply(this, arguments);
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -25040,15 +26977,6 @@ var AreaChartComponent = (function (_super) {
         this.timelineHeight = 50;
         this.timelinePadding = 10;
     }
-    AreaChartComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    AreaChartComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    AreaChartComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     AreaChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -25064,7 +26992,7 @@ var AreaChartComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             if (_this.timeline) {
                 _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
@@ -25079,6 +27007,7 @@ var AreaChartComponent = (function (_super) {
             _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
             _this.updateTimeline();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + ", " + _this.margin[0] + ")";
             var pageUrl = window.location.href;
             _this.clipPathId = 'clip' + id_1.id().toString();
@@ -25089,13 +27018,12 @@ var AreaChartComponent = (function (_super) {
         if (this.timeline) {
             this.timelineWidth = this.width;
             if (this.legend) {
-                this.timelineWidth = this.width * 10.0 / 12.0;
+                this.timelineWidth = this.dims.width;
             }
-            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+            this.timelineTransform = "translate(" + this.dims.xOffset + ", " + -this.margin[2] + ")";
         }
     };
     AreaChartComponent.prototype.getXDomain = function () {
@@ -25222,7 +27150,30 @@ var AreaChartComponent = (function (_super) {
         return item.name;
     };
     AreaChartComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.seriesDomain;
+        }
+        else {
+            domain = this.yDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    AreaChartComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.seriesDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.yDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     AreaChartComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -25234,30 +27185,24 @@ var AreaChartComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    AreaChartComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    AreaChartComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    AreaChartComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    AreaChartComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "scheme", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -25266,10 +27211,6 @@ var AreaChartComponent = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "state", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -25319,9 +27260,9 @@ var AreaChartComponent = (function (_super) {
         __metadata('design:type', Array)
     ], AreaChartComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], AreaChartComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], AreaChartComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -25338,11 +27279,11 @@ var AreaChartComponent = (function (_super) {
     ], AreaChartComponent.prototype, "hideCircles", null);
     AreaChartComponent = __decorate([
         core_1.Component({
-            selector: 'area-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick({series: $event.name})\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g areaSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g areaSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-area-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-ceries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], AreaChartComponent);
     return AreaChartComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -25431,6 +27372,7 @@ var AreaSeriesComponent = (function () {
     };
     AreaSeriesComponent.prototype.update = function () {
         var _this = this;
+        this.updateGradient();
         var area;
         var startingArea;
         var xProperty = function (d) {
@@ -25459,7 +27401,7 @@ var AreaSeriesComponent = (function () {
         }
         area.curve(this.curve);
         startingArea.curve(this.curve);
-        this.opacity = 1;
+        this.opacity = .8;
         var data = this.data.series;
         if (this.scaleType === 'linear') {
             data = sort_1.sortLinear(data, 'name');
@@ -25473,15 +27415,42 @@ var AreaSeriesComponent = (function () {
         this.path = area(data);
         this.startingPath = startingArea(data);
     };
+    AreaSeriesComponent.prototype.updateGradient = function () {
+        if (this.colors.scaleType === 'linear') {
+            this.hasGradient = true;
+            if (this.stacked || this.normalized) {
+                var d0values = this.data.series.map(function (d) { return d.d0; });
+                var d1values = this.data.series.map(function (d) { return d.d1; });
+                var max = Math.max.apply(Math, d1values);
+                var min = Math.min.apply(Math, d0values);
+                this.gradientStops = this.colors.getLinearGradientStops(max, min);
+            }
+            else {
+                var values = this.data.series.map(function (d) { return d.value; });
+                var max = Math.max.apply(Math, values);
+                this.gradientStops = this.colors.getLinearGradientStops(max);
+            }
+        }
+        else {
+            this.hasGradient = false;
+            this.gradientStops = undefined;
+        }
+    };
     AreaSeriesComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry.name) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item !== undefined;
     };
     AreaSeriesComponent.prototype.isInactive = function (entry) {
-        return this.activeEntries &&
-            this.activeEntries.length &&
-            this.activeEntries.indexOf(entry.name) === -1;
+        if (!this.activeEntries || this.activeEntries.length === 0)
+            return false;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item === undefined;
     };
     __decorate([
         core_1.Input(), 
@@ -25498,7 +27467,7 @@ var AreaSeriesComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], AreaSeriesComponent.prototype, "color", void 0);
+    ], AreaSeriesComponent.prototype, "colors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -25529,8 +27498,8 @@ var AreaSeriesComponent = (function () {
     ], AreaSeriesComponent.prototype, "select", void 0);
     AreaSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[areaSeries]',
-            template: "\n    <svg:g area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"color\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
+            selector: 'g[ngx-charts-area-series]',
+            template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -25665,29 +27634,17 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontal2DComponent = (function (_super) {
     __extends(BarHorizontal2DComponent, _super);
-    function BarHorizontal2DComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarHorizontal2DComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarHorizontal2DComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarHorizontal2DComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarHorizontal2DComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarHorizontal2DComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -25703,7 +27660,7 @@ var BarHorizontal2DComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
@@ -25713,6 +27670,7 @@ var BarHorizontal2DComponent = (function (_super) {
             _this.innerScale = _this.getInnerScale();
             _this.valueScale = _this.getValueScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -25787,7 +27745,30 @@ var BarHorizontal2DComponent = (function (_super) {
         return item.name;
     };
     BarHorizontal2DComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.innerDomain;
+        }
+        else {
+            domain = this.valuesDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarHorizontal2DComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.innerDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.valuesDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarHorizontal2DComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -25799,34 +27780,32 @@ var BarHorizontal2DComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarHorizontal2DComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarHorizontal2DComponent.prototype.onActivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarHorizontal2DComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarHorizontal2DComponent.prototype.onDeactivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -25868,9 +27847,9 @@ var BarHorizontal2DComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarHorizontal2DComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarHorizontal2DComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarHorizontal2DComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -25881,8 +27860,8 @@ var BarHorizontal2DComponent = (function (_super) {
     ], BarHorizontal2DComponent.prototype, "deactivate", void 0);
     BarHorizontal2DComponent = __decorate([
         core_1.Component({
-            selector: 'bar-horizontal-2d',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            [xScale]=\"valueScale\"\n            [activeEntries]=\"activeEntries\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-horizontal-2d',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            [xScale]=\"valueScale\"\n            [activeEntries]=\"activeEntries\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -25896,7 +27875,7 @@ var BarHorizontal2DComponent = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarHorizontal2DComponent);
     return BarHorizontal2DComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -25931,29 +27910,17 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalNormalizedComponent = (function (_super) {
     __extends(BarHorizontalNormalizedComponent, _super);
-    function BarHorizontalNormalizedComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarHorizontalNormalizedComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarHorizontalNormalizedComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarHorizontalNormalizedComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarHorizontalNormalizedComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarHorizontalNormalizedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -25969,7 +27936,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
@@ -25978,6 +27945,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -26032,7 +28000,30 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         return item.name;
     };
     BarHorizontalNormalizedComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.innerDomain;
+        }
+        else {
+            domain = this.valueDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarHorizontalNormalizedComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.innerDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.valueDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarHorizontalNormalizedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -26044,34 +28035,32 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarHorizontalNormalizedComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarHorizontalNormalizedComponent.prototype.onActivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarHorizontalNormalizedComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarHorizontalNormalizedComponent.prototype.onDeactivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -26113,9 +28102,9 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarHorizontalNormalizedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalNormalizedComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarHorizontalNormalizedComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -26126,8 +28115,8 @@ var BarHorizontalNormalizedComponent = (function (_super) {
     ], BarHorizontalNormalizedComponent.prototype, "deactivate", void 0);
     BarHorizontalNormalizedComponent = __decorate([
         core_1.Component({
-            selector: 'bar-horizontal-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-horizontal-normalized',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -26141,7 +28130,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarHorizontalNormalizedComponent);
     return BarHorizontalNormalizedComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -26176,29 +28165,17 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalStackedComponent = (function (_super) {
     __extends(BarHorizontalStackedComponent, _super);
-    function BarHorizontalStackedComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarHorizontalStackedComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarHorizontalStackedComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarHorizontalStackedComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarHorizontalStackedComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarHorizontalStackedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -26214,7 +28191,7 @@ var BarHorizontalStackedComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
@@ -26223,6 +28200,7 @@ var BarHorizontalStackedComponent = (function (_super) {
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -26289,7 +28267,30 @@ var BarHorizontalStackedComponent = (function (_super) {
         return item.name;
     };
     BarHorizontalStackedComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.innerDomain;
+        }
+        else {
+            domain = this.valueDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarHorizontalStackedComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.innerDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.valueDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarHorizontalStackedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -26301,34 +28302,32 @@ var BarHorizontalStackedComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarHorizontalStackedComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarHorizontalStackedComponent.prototype.onActivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarHorizontalStackedComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarHorizontalStackedComponent.prototype.onDeactivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -26370,9 +28369,9 @@ var BarHorizontalStackedComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarHorizontalStackedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalStackedComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarHorizontalStackedComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -26383,8 +28382,8 @@ var BarHorizontalStackedComponent = (function (_super) {
     ], BarHorizontalStackedComponent.prototype, "deactivate", void 0);
     BarHorizontalStackedComponent = __decorate([
         core_1.Component({
-            selector: 'bar-horizontal-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesHorizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [activeEntries]=\"activeEntries\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-horizontal-stacked',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [activeEntries]=\"activeEntries\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -26398,7 +28397,7 @@ var BarHorizontalStackedComponent = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarHorizontalStackedComponent);
     return BarHorizontalStackedComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -26433,29 +28432,17 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalComponent = (function (_super) {
     __extends(BarHorizontalComponent, _super);
-    function BarHorizontalComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarHorizontalComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarHorizontalComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarHorizontalComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarHorizontalComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarHorizontalComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -26471,11 +28458,12 @@ var BarHorizontalComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -26506,7 +28494,30 @@ var BarHorizontalComponent = (function (_super) {
         this.select.emit(data);
     };
     BarHorizontalComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.yDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.yDomain;
+        }
+        else {
+            domain = this.xDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarHorizontalComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.yDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.xDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarHorizontalComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -26518,34 +28529,24 @@ var BarHorizontalComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarHorizontalComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarHorizontalComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarHorizontalComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarHorizontalComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -26587,9 +28588,9 @@ var BarHorizontalComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarHorizontalComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarHorizontalComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarHorizontalComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -26600,11 +28601,11 @@ var BarHorizontalComponent = (function (_super) {
     ], BarHorizontalComponent.prototype, "deactivate", void 0);
     BarHorizontalComponent = __decorate([
         core_1.Component({
-            selector: 'bar-horizontal',
-            template: "\n    <chart\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"yDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesHorizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-horizontal',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-horizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarHorizontalComponent);
     return BarHorizontalComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -26639,30 +28640,18 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVertical2DComponent = (function (_super) {
     __extends(BarVertical2DComponent, _super);
-    function BarVertical2DComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarVertical2DComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.scaleType = 'ordinal';
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarVertical2DComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarVertical2DComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarVertical2DComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarVertical2DComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -26678,7 +28667,7 @@ var BarVertical2DComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
@@ -26688,6 +28677,7 @@ var BarVertical2DComponent = (function (_super) {
             _this.innerScale = _this.getInnerScale();
             _this.valueScale = _this.getValueScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -26762,7 +28752,30 @@ var BarVertical2DComponent = (function (_super) {
         return item.name;
     };
     BarVertical2DComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.innerDomain;
+        }
+        else {
+            domain = this.valuesDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarVertical2DComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.innerDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.valuesDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarVertical2DComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -26774,34 +28787,32 @@ var BarVertical2DComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarVertical2DComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarVertical2DComponent.prototype.onActivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarVertical2DComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarVertical2DComponent.prototype.onDeactivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -26847,9 +28858,9 @@ var BarVertical2DComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarVertical2DComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarVertical2DComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarVertical2DComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -26860,8 +28871,8 @@ var BarVertical2DComponent = (function (_super) {
     ], BarVertical2DComponent.prototype, "deactivate", void 0);
     BarVertical2DComponent = __decorate([
         core_1.Component({
-            selector: 'bar-vertical-2d',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g gridPanelSeries\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\"\n          [activeEntries]=\"activeEntries\"\n          [xScale]=\"innerScale\"\n          [yScale]=\"valueScale\"\n          [colors]=\"colors\"\n          [series]=\"group.series\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event, group)\"\n        />\n        </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-vertical-2d',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\"\n          [activeEntries]=\"activeEntries\"\n          [xScale]=\"innerScale\"\n          [yScale]=\"valueScale\"\n          [colors]=\"colors\"\n          [series]=\"group.series\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event, group)\"\n          (activate)=\"onActivate($event, group)\"\n          (deactivate)=\"onDeactivate($event, group)\"\n        />\n        </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -26875,7 +28886,7 @@ var BarVertical2DComponent = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarVertical2DComponent);
     return BarVertical2DComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -26910,29 +28921,17 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalNormalizedComponent = (function (_super) {
     __extends(BarVerticalNormalizedComponent, _super);
-    function BarVerticalNormalizedComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarVerticalNormalizedComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarVerticalNormalizedComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarVerticalNormalizedComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarVerticalNormalizedComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarVerticalNormalizedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -26948,7 +28947,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
@@ -26957,6 +28956,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -27011,7 +29011,30 @@ var BarVerticalNormalizedComponent = (function (_super) {
         return item.name;
     };
     BarVerticalNormalizedComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.innerDomain;
+        }
+        else {
+            domain = this.valueDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarVerticalNormalizedComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.innerDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.valueDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarVerticalNormalizedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -27023,34 +29046,32 @@ var BarVerticalNormalizedComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarVerticalNormalizedComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarVerticalNormalizedComponent.prototype.onActivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarVerticalNormalizedComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarVerticalNormalizedComponent.prototype.onDeactivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -27092,9 +29113,9 @@ var BarVerticalNormalizedComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarVerticalNormalizedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarVerticalNormalizedComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarVerticalNormalizedComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -27105,8 +29126,8 @@ var BarVerticalNormalizedComponent = (function (_super) {
     ], BarVerticalNormalizedComponent.prototype, "deactivate", void 0);
     BarVerticalNormalizedComponent = __decorate([
         core_1.Component({
-            selector: 'bar-vertical-normalized',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-vertical-normalized',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -27120,7 +29141,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarVerticalNormalizedComponent);
     return BarVerticalNormalizedComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -27155,29 +29176,17 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalStackedComponent = (function (_super) {
     __extends(BarVerticalStackedComponent, _super);
-    function BarVerticalStackedComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarVerticalStackedComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarVerticalStackedComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarVerticalStackedComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarVerticalStackedComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarVerticalStackedComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -27193,7 +29202,7 @@ var BarVerticalStackedComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.formatDates();
             _this.groupDomain = _this.getGroupDomain();
@@ -27202,6 +29211,7 @@ var BarVerticalStackedComponent = (function (_super) {
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -27268,7 +29278,30 @@ var BarVerticalStackedComponent = (function (_super) {
         return item.name;
     };
     BarVerticalStackedComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.innerDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.innerDomain;
+        }
+        else {
+            domain = this.valueDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarVerticalStackedComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.innerDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.valueDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarVerticalStackedComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -27280,34 +29313,32 @@ var BarVerticalStackedComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarVerticalStackedComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarVerticalStackedComponent.prototype.onActivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarVerticalStackedComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarVerticalStackedComponent.prototype.onDeactivate = function (event, group) {
+        var item = Object.assign({}, event);
+        if (group) {
+            item.series = group.name;
+        }
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -27349,9 +29380,9 @@ var BarVerticalStackedComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarVerticalStackedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarVerticalStackedComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarVerticalStackedComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -27362,8 +29393,8 @@ var BarVerticalStackedComponent = (function (_super) {
     ], BarVerticalStackedComponent.prototype, "deactivate", void 0);
     BarVerticalStackedComponent = __decorate([
         core_1.Component({
-            selector: 'bar-vertical-stacked',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"innerDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g seriesVertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-vertical-stacked',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -27377,7 +29408,7 @@ var BarVerticalStackedComponent = (function (_super) {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarVerticalStackedComponent);
     return BarVerticalStackedComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -27412,29 +29443,17 @@ var base_chart_component_1 = __webpack_require__("./src/common/base-chart.compon
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalComponent = (function (_super) {
     __extends(BarVerticalComponent, _super);
-    function BarVerticalComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function BarVerticalComponent() {
+        _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    BarVerticalComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    BarVerticalComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    BarVerticalComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     BarVerticalComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -27450,11 +29469,12 @@ var BarVerticalComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
         });
     };
@@ -27485,7 +29505,30 @@ var BarVerticalComponent = (function (_super) {
         this.select.emit(data);
     };
     BarVerticalComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.xDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.xDomain;
+        }
+        else {
+            domain = this.yDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    BarVerticalComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.xDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.yDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     BarVerticalComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -27497,34 +29540,24 @@ var BarVerticalComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    BarVerticalComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    BarVerticalComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    BarVerticalComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    BarVerticalComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value && d.series === item.series;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -27566,9 +29599,9 @@ var BarVerticalComponent = (function (_super) {
         __metadata('design:type', Array)
     ], BarVerticalComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], BarVerticalComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BarVerticalComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -27579,11 +29612,11 @@ var BarVerticalComponent = (function (_super) {
     ], BarVerticalComponent.prototype, "deactivate", void 0);
     BarVerticalComponent = __decorate([
         core_1.Component({
-            selector: 'bar-vertical',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"xDomain\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g seriesVertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-bar-vertical',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], BarVerticalComponent);
     return BarVerticalComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -27616,17 +29649,13 @@ var BarComponent = (function () {
         this.offset = 0;
         this.isActive = false;
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
         this.initialized = false;
+        this.hasGradient = false;
         this.element = element.nativeElement;
     }
-    BarComponent.prototype.ngOnInit = function () {
-        var pageUrl = window.location.href;
-        this.gradientId = 'grad' + id_1.id().toString();
-        this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
-        this.startOpacity = this.getStartOpacity();
-    };
     BarComponent.prototype.ngOnChanges = function (changes) {
-        // ngOnInit gets called after ngOnChanges, so we need to do this here
         if (!this.initialized) {
             this.loadAnimation();
             this.initialized = true;
@@ -27636,6 +29665,16 @@ var BarComponent = (function () {
         }
     };
     BarComponent.prototype.update = function () {
+        var pageUrl = window.location.href;
+        this.gradientId = 'grad' + id_1.id().toString();
+        this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
+        if (this.gradient || this.stops) {
+            this.gradientStops = this.getGradient();
+            this.hasGradient = true;
+        }
+        else {
+            this.hasGradient = false;
+        }
         this.animateToCurrentForm();
     };
     BarComponent.prototype.loadAnimation = function () {
@@ -27647,6 +29686,22 @@ var BarComponent = (function () {
         var path = this.getPath();
         node.transition().duration(750)
             .attr('d', path);
+    };
+    BarComponent.prototype.getGradient = function () {
+        if (this.stops) {
+            return this.stops;
+        }
+        return [
+            {
+                offset: 0,
+                color: this.fill,
+                opacity: this.getStartOpacity()
+            },
+            {
+                offset: 100,
+                color: this.fill,
+                opacity: 1
+            }];
     };
     BarComponent.prototype.getStartingPath = function () {
         var radius = this.getRadius();
@@ -27692,7 +29747,7 @@ var BarComponent = (function () {
     BarComponent.prototype.getRadius = function () {
         var radius = 0;
         if (this.roundEdges && this.height > 5 && this.width > 5) {
-            radius = 5;
+            radius = Math.floor(Math.min(5, this.height / 2, this.width / 2));
         }
         return radius;
     };
@@ -27742,6 +29797,12 @@ var BarComponent = (function () {
         retval += "z";
         return retval;
     };
+    BarComponent.prototype.onMouseEnter = function () {
+        this.activate.emit(this.data);
+    };
+    BarComponent.prototype.onMouseLeave = function () {
+        this.deactivate.emit(this.data);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -27787,13 +29848,37 @@ var BarComponent = (function () {
         __metadata('design:type', Boolean)
     ], BarComponent.prototype, "isActive", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BarComponent.prototype, "stops", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], BarComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], BarComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], BarComponent.prototype, "deactivate", void 0);
+    __decorate([
+        core_1.HostListener('mouseenter'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], BarComponent.prototype, "onMouseEnter", null);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], BarComponent.prototype, "onMouseLeave", null);
     BarComponent = __decorate([
         core_1.Component({
-            selector: 'g[bar]',
-            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+            selector: 'g[ngx-charts-bar]',
+            template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
@@ -27849,6 +29934,8 @@ var SeriesHorizontal = (function () {
     function SeriesHorizontal() {
         this.type = 'standard';
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
     }
     SeriesHorizontal.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -27868,7 +29955,6 @@ var SeriesHorizontal = (function () {
             var bar = {
                 value: value,
                 label: label,
-                color: _this.colors(label),
                 roundEdges: roundEdges,
                 data: d,
                 formattedLabel: formattedLabel
@@ -27891,6 +29977,8 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
+                bar.offset0 = offset0;
+                bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -27907,7 +29995,22 @@ var SeriesHorizontal = (function () {
                 bar.width = _this.xScale(offset1) - _this.xScale(offset0);
                 bar.x = _this.xScale(offset0);
                 bar.y = 0;
+                bar.offset0 = offset0;
+                bar.offset1 = offset1;
                 value = (offset1 - offset0).toFixed(2) + '%';
+            }
+            if (_this.colors.scaleType === 'ordinal') {
+                bar.color = _this.colors.getColor(label);
+            }
+            else {
+                if (_this.type === 'standard') {
+                    bar.color = _this.colors.getColor(value);
+                    bar.gradientStops = _this.colors.getLinearGradientStops(value);
+                }
+                else {
+                    bar.color = _this.colors.getColor(bar.offset1);
+                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                }
             }
             bar.tooltipText = "\n        <span class=\"tooltip-label\">" + formattedLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
@@ -27916,7 +30019,10 @@ var SeriesHorizontal = (function () {
     SeriesHorizontal.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name && entry.series === d.series;
+        });
+        return item !== undefined;
     };
     SeriesHorizontal.prototype.trackBy = function (index, bar) {
         return bar.label;
@@ -27960,10 +30066,18 @@ var SeriesHorizontal = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], SeriesHorizontal.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], SeriesHorizontal.prototype, "deactivate", void 0);
     SeriesHorizontal = __decorate([
         core_1.Component({
-            selector: 'g[seriesHorizontal]',
-            template: "\n    <svg:g bar \n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-series-horizontal]',
+            template: "\n    <svg:g ngx-charts-bar \n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -28001,13 +30115,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var label_helper_1 = __webpack_require__("./src/common/label.helper.ts");
 var SeriesVerticalComponent = (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
-        this.scaleType = 'ordinal';
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
     }
     SeriesVerticalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -28016,15 +30130,7 @@ var SeriesVerticalComponent = (function () {
         var _this = this;
         var width;
         if (this.series.length) {
-            if (this.scaleType === 'time') {
-                var count = this.series.array[0].vals[0].label[0].length;
-                var firstDate = this.series.array[0].vals[0].label[0][count - 1];
-                var secondDate = moment(firstDate).add(1, 'hours');
-                width = Math.abs(this.xScale(secondDate) - this.xScale(firstDate)) * 0.8;
-            }
-            else {
-                width = this.xScale.bandwidth();
-            }
+            width = this.xScale.bandwidth();
         }
         var d0 = 0;
         var total;
@@ -28039,7 +30145,6 @@ var SeriesVerticalComponent = (function () {
             var bar = {
                 value: value,
                 label: label,
-                color: _this.colors(label),
                 roundEdges: roundEdges,
                 data: d,
                 width: width,
@@ -28065,6 +30170,8 @@ var SeriesVerticalComponent = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
+                bar.offset0 = offset0;
+                bar.offset1 = offset1;
             }
             else if (_this.type === 'normalized') {
                 var offset0 = d0;
@@ -28081,7 +30188,22 @@ var SeriesVerticalComponent = (function () {
                 bar.height = _this.yScale(offset0) - _this.yScale(offset1);
                 bar.x = 0;
                 bar.y = _this.yScale(offset1);
+                bar.offset0 = offset0;
+                bar.offset1 = offset1;
                 value = (offset1 - offset0).toFixed(2) + '%';
+            }
+            if (_this.colors.scaleType === 'ordinal') {
+                bar.color = _this.colors.getColor(label);
+            }
+            else {
+                if (_this.type === 'standard') {
+                    bar.color = _this.colors.getColor(value);
+                    bar.gradientStops = _this.colors.getLinearGradientStops(value);
+                }
+                else {
+                    bar.color = _this.colors.getColor(bar.offset1);
+                    bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
+                }
             }
             bar.tooltipText = "\n        <span class=\"tooltip-label\">" + formattedLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
@@ -28090,7 +30212,10 @@ var SeriesVerticalComponent = (function () {
     SeriesVerticalComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name && entry.series === d.series;
+        });
+        return item !== undefined;
     };
     SeriesVerticalComponent.prototype.onClick = function (data) {
         this.select.emit(data);
@@ -28124,10 +30249,6 @@ var SeriesVerticalComponent = (function () {
     ], SeriesVerticalComponent.prototype, "colors", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SeriesVerticalComponent.prototype, "scaleType", void 0);
-    __decorate([
-        core_1.Input(), 
         __metadata('design:type', Boolean)
     ], SeriesVerticalComponent.prototype, "gradient", void 0);
     __decorate([
@@ -28138,10 +30259,18 @@ var SeriesVerticalComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], SeriesVerticalComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], SeriesVerticalComponent.prototype, "deactivate", void 0);
     SeriesVerticalComponent = __decorate([
         core_1.Component({
-            selector: 'g[seriesVertical]',
-            template: "\n    <svg:g bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.formattedLabel)\"\n      (select)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-series-vertical]',
+            template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -28241,11 +30370,22 @@ var AreaTooltip = (function () {
                 if (this.showPercentage) {
                     val = (item.d1 - item.d0).toFixed(2) + '%';
                 }
+                var color = void 0;
+                if (this.colors.scaleType === 'linear') {
+                    var v = val;
+                    if (item.d1) {
+                        v = item.d1;
+                    }
+                    color = this.colors.getColor(v);
+                }
+                else {
+                    color = this.colors.getColor(group.name);
+                }
                 results.push({
                     value: val,
                     name: label,
                     series: groupName,
-                    color: this.colors(group.name)
+                    color: color
                 });
             }
         }
@@ -28318,8 +30458,8 @@ var AreaTooltip = (function () {
     ], AreaTooltip.prototype, "tooltips", void 0);
     AreaTooltip = __decorate([
         core_1.Component({
-            selector: 'g[areaTooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        swui-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-area-tooltip]',
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
@@ -28356,6 +30496,7 @@ var AreaComponent = (function () {
         this.gradient = false;
         this.select = new core_1.EventEmitter();
         this.initialized = false;
+        this.hasGradient = false;
         this.element = element.nativeElement;
     }
     AreaComponent.prototype.ngOnChanges = function (changes) {
@@ -28371,6 +30512,13 @@ var AreaComponent = (function () {
         var pageUrl = window.location.href;
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
+        if (this.gradient || this.stops) {
+            this.gradientStops = this.getGradient();
+            this.hasGradient = true;
+        }
+        else {
+            this.hasGradient = false;
+        }
         this.animateToCurrentForm();
     };
     AreaComponent.prototype.loadAnimation = function () {
@@ -28381,6 +30529,22 @@ var AreaComponent = (function () {
         var node = d3_1.default.select(this.element).select('.area');
         node.transition().duration(750)
             .attr('d', this.path);
+    };
+    AreaComponent.prototype.getGradient = function () {
+        if (this.stops) {
+            return this.stops;
+        }
+        return [
+            {
+                offset: 0,
+                color: this.fill,
+                opacity: this.startOpacity
+            },
+            {
+                offset: 100,
+                color: this.fill,
+                opacity: this.endOpacity
+            }];
     };
     __decorate([
         core_1.Input(), 
@@ -28419,13 +30583,17 @@ var AreaComponent = (function () {
         __metadata('design:type', Boolean)
     ], AreaComponent.prototype, "gradient", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], AreaComponent.prototype, "stops", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "select", void 0);
     AreaComponent = __decorate([
         core_1.Component({
-            selector: 'g[area]',
-            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g svgLinearGradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [startOpacity]=\"startOpacity\"\n        [endOpacity]=\"endOpacity\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
+            selector: 'g[ngx-charts-area]',
+            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
@@ -28547,7 +30715,7 @@ var AxisLabelComponent = (function () {
     ], AxisLabelComponent.prototype, "height", void 0);
     AxisLabelComponent = __decorate([
         core_1.Component({
-            selector: 'g[axisLabel]',
+            selector: 'g[ngx-charts-axis-label]',
             template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -28762,7 +30930,7 @@ var XAxisTicksComponent = (function () {
     ], XAxisTicksComponent.prototype, "ticksElement", void 0);
     XAxisTicksComponent = __decorate([
         core_1.Component({
-            selector: 'g[xAxisTicks]',
+            selector: 'g[ngx-charts-x-axis-ticks]',
             template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"tickTransform(tick)\">\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.text-anchor]=\"textAnchor\"\n          [attr.transform]=\"textTransform\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <svg:g *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -28862,8 +31030,8 @@ var XAxisComponent = (function () {
     ], XAxisComponent.prototype, "ticksComponent", void 0);
     XAxisComponent = __decorate([
         core_1.Component({
-            selector: 'g[xAxis]',
-            template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g xAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n        (dimensionsChanged)=\"emitTicksHeight($event)\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-x-axis]',
+            template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-x-axis-ticks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n        (dimensionsChanged)=\"emitTicksHeight($event)\"\n      />\n\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -29067,7 +31235,7 @@ var YAxisTicksComponent = (function () {
     ], YAxisTicksComponent.prototype, "ticksElement", void 0);
     YAxisTicksComponent = __decorate([
         core_1.Component({
-            selector: 'g[yAxisTicks]',
+            selector: 'g[ngx-charts-y-axis-ticks]',
             template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -29172,8 +31340,8 @@ var YAxisComponent = (function () {
     ], YAxisComponent.prototype, "ticksComponent", void 0);
     YAxisComponent = __decorate([
         core_1.Component({
-            selector: 'g[yAxis]',
-            template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g yAxisTicks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineWidth]=\"dims.width\"\n        [height]=\"dims.height\"\n        (dimensionsChanged)=\"emitTicksWidth($event)\"\n      />\n\n      <svg:g axisLabel\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-y-axis]',
+            template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-y-axis-ticks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineWidth]=\"dims.width\"\n        [height]=\"dims.height\"\n        (dimensionsChanged)=\"emitTicksWidth($event)\"\n      />\n\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -29190,16 +31358,33 @@ exports.YAxisComponent = YAxisComponent;
 
 "use strict";
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var Rx_1 = __webpack_require__("./node_modules/rxjs/Rx.js");
 var BaseChartComponent = (function () {
-    function BaseChartComponent(chartElement, zone, changeDetector) {
+    function BaseChartComponent(chartElement, zone, cd) {
         this.chartElement = chartElement;
         this.zone = zone;
-        this.changeDetector = changeDetector;
+        this.cd = cd;
+        this.schemeType = 'ordinal';
+        this.select = new core_1.EventEmitter();
     }
-    BaseChartComponent.prototype.bindResizeEvents = function (view) {
-        this.view = view;
+    BaseChartComponent.prototype.ngAfterViewInit = function () {
         this.bindWindowResizeEvent();
+    };
+    BaseChartComponent.prototype.ngOnDestroy = function () {
+        this.unbindEvents();
+    };
+    BaseChartComponent.prototype.ngOnChanges = function (changes) {
+        this.update();
     };
     BaseChartComponent.prototype.unbindEvents = function () {
         if (this.resizeSubscription) {
@@ -29219,8 +31404,8 @@ var BaseChartComponent = (function () {
             this.width = dims.width;
             this.height = dims.height;
         }
-        if (this.changeDetector) {
-            this.changeDetector.markForCheck();
+        if (this.cd) {
+            this.cd.markForCheck();
         }
     };
     BaseChartComponent.prototype.getContainerDims = function () {
@@ -29240,8 +31425,8 @@ var BaseChartComponent = (function () {
             var source = Rx_1.Observable.fromEvent(window, 'resize', null, null);
             var subscription = source.debounceTime(200).subscribe(function (e) {
                 _this.update();
-                if (_this.changeDetector) {
-                    _this.changeDetector.markForCheck();
+                if (_this.cd) {
+                    _this.cd.markForCheck();
                 }
             });
             _this.resizeSubscription = subscription;
@@ -29295,6 +31480,37 @@ var BaseChartComponent = (function () {
             }
         }
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BaseChartComponent.prototype, "results", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BaseChartComponent.prototype, "view", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BaseChartComponent.prototype, "scheme", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BaseChartComponent.prototype, "schemeType", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BaseChartComponent.prototype, "customColors", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], BaseChartComponent.prototype, "select", void 0);
+    BaseChartComponent = __decorate([
+        core_1.Component({
+            selector: 'base-chart',
+            template: ""
+        }), 
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef])
+    ], BaseChartComponent);
     return BaseChartComponent;
 }());
 exports.BaseChartComponent = BaseChartComponent;
@@ -29319,6 +31535,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var chart_component_1 = __webpack_require__("./src/common/charts/chart.component.ts");
 var legend_1 = __webpack_require__("./src/common/legend/index.ts");
+var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var axes_module_1 = __webpack_require__("./src/common/axes/axes.module.ts");
 var tooltip_1 = __webpack_require__("./src/common/tooltip/index.ts");
 var circle_series_component_1 = __webpack_require__("./src/common/circle-series.component.ts");
@@ -29334,6 +31551,7 @@ var area_tooltip_component_1 = __webpack_require__("./src/common/area-tooltip.co
 var count_1 = __webpack_require__("./src/common/count/index.ts");
 var COMPONENTS = [
     area_component_1.AreaComponent,
+    base_chart_component_1.BaseChartComponent,
     count_1.CountUpDirective,
     area_tooltip_component_1.AreaTooltip,
     chart_component_1.ChartComponent,
@@ -29390,12 +31608,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var injection_service_1 = __webpack_require__("./src/utils/injection.service.ts");
+var services_1 = __webpack_require__("./src/services/index.ts");
 var ChartComponent = (function () {
     function ChartComponent(vcr, injectionService) {
         this.vcr = vcr;
         this.injectionService = injectionService;
-        this.legend = false;
+        this.showLegend = false;
         this.legendTitle = 'Legend';
         this.legendLabelClick = new core_1.EventEmitter();
         this.legendLabelActivate = new core_1.EventEmitter();
@@ -29406,20 +31624,22 @@ var ChartComponent = (function () {
         this.update();
     };
     ChartComponent.prototype.update = function () {
-        this.legendWidth = 0;
-        if (this.legend) {
+        var legendColumns = 0;
+        if (this.showLegend) {
             this.legendType = this.getLegendType();
             if (this.legendType === 'scaleLegend') {
-                this.legendWidth = 1;
+                legendColumns = 1;
             }
             else {
-                this.legendWidth = 2;
+                legendColumns = 2;
             }
         }
-        this.chartWidth = 12 - this.legendWidth;
+        var chartColumns = 12 - legendColumns;
+        this.chartWidth = this.view[0] * chartColumns / 12.0;
+        this.legendWidth = this.view[0] * legendColumns / 12.0;
     };
     ChartComponent.prototype.getLegendType = function () {
-        if (typeof this.legendData === 'function') {
+        if (this.legendOptions.scaleType === 'linear') {
             return 'scaleLegend';
         }
         else {
@@ -29433,7 +31653,11 @@ var ChartComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], ChartComponent.prototype, "legend", void 0);
+    ], ChartComponent.prototype, "showLegend", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ChartComponent.prototype, "legendOptions", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -29445,6 +31669,10 @@ var ChartComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
+    ], ChartComponent.prototype, "legendType", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
     ], ChartComponent.prototype, "legendTitle", void 0);
     __decorate([
         core_1.Input(), 
@@ -29452,8 +31680,8 @@ var ChartComponent = (function () {
     ], ChartComponent.prototype, "colors", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ChartComponent.prototype, "legendType", void 0);
+        __metadata('design:type', Array)
+    ], ChartComponent.prototype, "activeEntries", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -29468,9 +31696,9 @@ var ChartComponent = (function () {
     ], ChartComponent.prototype, "legendLabelDeactivate", void 0);
     ChartComponent = __decorate([
         core_1.Component({
-            providers: [injection_service_1.InjectionService],
-            selector: 'chart',
-            template: "\n    <div \n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ng2d3\"\n        [attr.width]=\"view[0] * chartWidth / 12.0\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <scale-legend\n        *ngIf=\"legend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"data\"\n        [colors]=\"legendData\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\">\n      </scale-legend>\n      <legend\n        *ngIf=\"legend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendData\"\n        [title]=\"legendTitle\"\n        [colors]=\"colors\"\n        [height]=\"view[1]\"\n        [width]=\"view[0] * legendWidth / 12.0\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </legend>\n    </div>\n  ",
+            providers: [services_1.InjectionService],
+            selector: 'ngx-charts-chart',
+            template: "\n    <div \n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -29481,7 +31709,7 @@ var ChartComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef, injection_service_1.InjectionService])
+        __metadata('design:paramtypes', [core_1.ViewContainerRef, services_1.InjectionService])
     ], ChartComponent);
     return ChartComponent;
 }());
@@ -29549,6 +31777,18 @@ var CircleSeriesComponent = (function () {
                 }
                 var gradientId = 'grad' + id_1.id().toString();
                 var gradientFill = "url(" + pageUrl + "#" + gradientId + ")";
+                var color = void 0;
+                if (_this.colors.scaleType === 'linear') {
+                    if (_this.type === 'standard') {
+                        color = _this.colors.getColor(value);
+                    }
+                    else {
+                        color = _this.colors.getColor(d.d1);
+                    }
+                }
+                else {
+                    color = _this.colors.getColor(seriesName);
+                }
                 return {
                     classNames: [("circle-data-" + i)],
                     value: value,
@@ -29558,11 +31798,13 @@ var CircleSeriesComponent = (function () {
                     radius: radius,
                     height: height,
                     tooltipLabel: tooltipLabel,
+                    color: color,
                     opacity: opacity,
                     seriesName: seriesName,
                     barVisible: false,
                     gradientId: gradientId,
-                    gradientFill: gradientFill
+                    gradientFill: gradientFill,
+                    gradientStops: _this.getGradientStops(color)
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
@@ -29570,6 +31812,19 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.prototype.getTooltipText = function (_a) {
         var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName;
         return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+    };
+    CircleSeriesComponent.prototype.getGradientStops = function (color) {
+        return [
+            {
+                offset: 0,
+                color: color,
+                opacity: 0.2
+            },
+            {
+                offset: 100,
+                color: color,
+                opacity: 1
+            }];
     };
     CircleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({
@@ -29580,21 +31835,24 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item !== undefined;
     };
     CircleSeriesComponent.prototype.isVisible = function (circle) {
         if (this.activeEntries.length > 0) {
-            return this.isActive(circle.seriesName);
+            return this.isActive({ name: circle.seriesName });
         }
         return circle.opacity !== 0;
     };
     CircleSeriesComponent.prototype.activateCircle = function (circle) {
         circle.barVisible = true;
-        this.activate.emit(this.data.name);
+        this.activate.emit({ name: this.data.name });
     };
     CircleSeriesComponent.prototype.deactivateCircle = function (circle) {
         circle.barVisible = false;
-        this.deactivate.emit(this.data.name);
+        this.deactivate.emit({ name: this.data.name });
     };
     __decorate([
         core_1.Input(), 
@@ -29615,11 +31873,7 @@ var CircleSeriesComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], CircleSeriesComponent.prototype, "color", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CircleSeriesComponent.prototype, "strokeColor", void 0);
+    ], CircleSeriesComponent.prototype, "colors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -29646,8 +31900,8 @@ var CircleSeriesComponent = (function () {
     ], CircleSeriesComponent.prototype, "deactivate", void 0);
     CircleSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[circleSeries]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g svgLinearGradient\n        [color]=\"color\"\n        orientation=\"vertical\"\n        [name]=\"circle.gradientId\"\n        [startOpacity]=\"0.2\"\n        [endOpacity]=\"1\"\n      />\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n\n      <svg:g circle\n        *ngIf=\"isVisible(circle)\"\n        [attr.class]=\"className\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [class.active]=\"isActive(circle.label)\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        [style.cursor]=\"'pointer'\"\n        (mouseover)=\"activateCircle(circle)\"\n        (mouseout)=\"deactivateCircle(circle)\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-circle-ceries]',
+            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -29677,7 +31931,18 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var CircleComponent = (function () {
     function CircleComponent() {
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
     }
+    CircleComponent.prototype.onClick = function () {
+        this.select.emit(this.data);
+    };
+    CircleComponent.prototype.onMouseEnter = function () {
+        this.activate.emit(this.data);
+    };
+    CircleComponent.prototype.onMouseLeave = function () {
+        this.deactivate.emit(this.data);
+    };
     CircleComponent.prototype.ngOnChanges = function (changes) {
         this.classNames = this.classNames.join(' ') + 'circle';
     };
@@ -29721,10 +31986,36 @@ var CircleComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CircleComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], CircleComponent.prototype, "deactivate", void 0);
+    __decorate([
+        core_1.HostListener('click'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], CircleComponent.prototype, "onClick", null);
+    __decorate([
+        core_1.HostListener('mouseenter'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], CircleComponent.prototype, "onMouseEnter", null);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], CircleComponent.prototype, "onMouseLeave", null);
     CircleComponent = __decorate([
         core_1.Component({
-            selector: 'g[circle]',
-            template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+            selector: 'g[ngx-charts-circle]',
+            template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -29867,7 +32158,7 @@ var CountUpDirective = (function () {
     ], CountUpDirective.prototype, "countFinish", void 0);
     CountUpDirective = __decorate([
         core_1.Component({
-            selector: '[count-up]',
+            selector: '[ngx-charts-count-up]',
             template: "{{value}}"
         }), 
         __metadata('design:paramtypes', [core_1.ChangeDetectorRef, core_1.NgZone, core_1.ElementRef])
@@ -30119,8 +32410,8 @@ var GridPanelSeriesComponent = (function () {
     ], GridPanelSeriesComponent.prototype, "orient", void 0);
     GridPanelSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[gridPanelSeries]',
-            template: "\n    <svg:g gridPanel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-grid-panel-series]',
+            template: "\n    <svg:g ngx-charts-grid-panel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -30172,7 +32463,7 @@ var GridPanelComponent = (function () {
     ], GridPanelComponent.prototype, "y", void 0);
     GridPanelComponent = __decorate([
         core_1.Component({
-            selector: 'g[gridPanel]',
+            selector: 'g[ngx-charts-grid-panel]',
             template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      class=\"gridpanel\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -30286,7 +32577,7 @@ var AdvancedLegendComponent = (function () {
             var label = label_helper_1.formatLabel(d.name);
             var value = d.value;
             var percentage = value / _this.total * 100;
-            var color = _this.colors(label);
+            var color = _this.colors.getColor(label);
             return {
                 value: value,
                 color: color,
@@ -30295,6 +32586,9 @@ var AdvancedLegendComponent = (function () {
                 percentage: percentage
             };
         });
+    };
+    AdvancedLegendComponent.prototype.trackBy = function (item) {
+        return item.formattedLabel;
     };
     __decorate([
         core_1.Input(), 
@@ -30322,8 +32616,8 @@ var AdvancedLegendComponent = (function () {
     ], AdvancedLegendComponent.prototype, "deactivate", void 0);
     AdvancedLegendComponent = __decorate([
         core_1.Component({
-            selector: 'advanced-legend',
-            template: "\n    <div class=\"advanced-pie-legend\"\n      [style.width.px]=\"width\">\n      <div\n        class=\"total-value\"\n        count-up\n        [countTo]=\"roundedTotal\">\n      </div>\n      <div class=\"total-label\">\n        {{totalLabel}}\n      </div>\n      <div class=\"legend-items-container\">\n        <div class=\"legend-items\">\n          <div\n            *ngFor=\"let legendItem of legendItems; trackBy: entry?.formattedLabel\"\n            tabindex=\"-1\"\n            class=\"legend-item\"\n            (mouseenter)=\"activate.emit(legendItem.label)\"\n            (mouseleave)=\"deactivate.emit(legendItem.label)\"\n            (click)=\"select.emit({ name: legendItem.label, value: legendItem.value })\">\n            <div\n              class=\"item-color\"\n              [style.background]=\"legendItem.color\">\n            </div>\n            <div\n              class=\"item-value\"\n              count-up\n              [countTo]=\"legendItem.value\">\n            </div>\n            <div class=\"item-label\">{{legendItem.label}}</div>\n            <div\n              class=\"item-percent\"\n              count-up\n              [countTo]=\"legendItem.percentage\"\n              [countSuffix]=\"'%'\">\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
+            selector: 'ngx-charts-advanced-legend',
+            template: "\n    <div class=\"advanced-pie-legend\"\n      [style.width.px]=\"width\">\n      <div\n        class=\"total-value\"\n        ngx-charts-count-up\n        [countTo]=\"roundedTotal\">\n      </div>\n      <div class=\"total-label\">\n        {{totalLabel}}\n      </div>\n      <div class=\"legend-items-container\">\n        <div class=\"legend-items\">\n          <div\n            *ngFor=\"let legendItem of legendItems; trackBy:trackBy\"\n            tabindex=\"-1\"\n            class=\"legend-item\"\n            (mouseenter)=\"activate.emit(legendItem.label)\"\n            (mouseleave)=\"deactivate.emit(legendItem.label)\"\n            (click)=\"select.emit({ name: legendItem.label, value: legendItem.value })\">\n            <div\n              class=\"item-color\"\n              [style.background]=\"legendItem.color\">\n            </div>\n            <div\n              class=\"item-value\"\n              ngx-charts-count-up\n              [countTo]=\"legendItem.value\">\n            </div>\n            <div class=\"item-label\">{{legendItem.label}}</div>\n            <div\n              class=\"item-percent\"\n              ngx-charts-count-up\n              [countTo]=\"legendItem.percentage\"\n              [countSuffix]=\"'%'\">\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -30368,6 +32662,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var LegendEntryComponent = (function () {
     function LegendEntryComponent() {
+        this.isActive = false;
         this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
@@ -30380,6 +32675,12 @@ var LegendEntryComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    LegendEntryComponent.prototype.onMouseEnter = function () {
+        this.activate.emit({ name: this.label });
+    };
+    LegendEntryComponent.prototype.onMouseLeave = function () {
+        this.deactivate.emit({ name: this.label });
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)
@@ -30392,6 +32693,10 @@ var LegendEntryComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', String)
     ], LegendEntryComponent.prototype, "formattedLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], LegendEntryComponent.prototype, "isActive", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -30408,10 +32713,22 @@ var LegendEntryComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], LegendEntryComponent.prototype, "toggle", void 0);
+    __decorate([
+        core_1.HostListener('mouseenter'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], LegendEntryComponent.prototype, "onMouseEnter", null);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], LegendEntryComponent.prototype, "onMouseLeave", null);
     LegendEntryComponent = __decorate([
         core_1.Component({
-            selector: 'legend-entry',
-            template: "\n    <span \n      [title]=\"formattedLabel\"\n      tabindex=\"-1\"\n      (mouseenter)=\"activate.emit(formattedLabel)\"\n      (mouseleave)=\"deactivate.emit(formattedLabel)\"\n      (click)=\"select.emit(formattedLabel)\">\n      <span\n        class=\"legend-label-color\"\n        [style.background-color]=\"color\"\n        (click)=\"toggle.emit(formattedLabel)\">\n      </span>\n      <span class=\"legend-label-text\">\n        {{trimmedLabel}}\n      </span>\n    </span>\n  ",
+            selector: 'ngx-charts-legend-entry',
+            template: "\n    <span \n      [title]=\"formattedLabel\"\n      tabindex=\"-1\"\n      [class.active]=\"isActive\"\n      (click)=\"select.emit(formattedLabel)\">\n      <span\n        class=\"legend-label-color\"\n        [style.background-color]=\"color\"\n        (click)=\"toggle.emit(formattedLabel)\">\n      </span>\n      <span class=\"legend-label-text\">\n        {{trimmedLabel}}\n      </span>\n    </span>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -30469,7 +32786,7 @@ var LegendComponent = (function () {
                 items.push({
                     label: label,
                     formattedLabel: formattedLabel,
-                    color: this_1.colors(label)
+                    color: this_1.colors.getColor(label)
                 });
             }
         };
@@ -30479,6 +32796,14 @@ var LegendComponent = (function () {
             _loop_1(label);
         }
         return items;
+    };
+    LegendComponent.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        var item = this.activeEntries.find(function (d) {
+            return entry.label === d.name;
+        });
+        return item !== undefined;
     };
     LegendComponent.prototype.activate = function (item) {
         var _this = this;
@@ -30491,6 +32816,9 @@ var LegendComponent = (function () {
         this.zone.run(function () {
             _this.labelDeactivate.emit(item);
         });
+    };
+    LegendComponent.prototype.trackBy = function (index, item) {
+        return item.label;
     };
     __decorate([
         core_1.Input(), 
@@ -30513,6 +32841,10 @@ var LegendComponent = (function () {
         __metadata('design:type', Object)
     ], LegendComponent.prototype, "width", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], LegendComponent.prototype, "activeEntries", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], LegendComponent.prototype, "labelClick", void 0);
@@ -30526,8 +32858,8 @@ var LegendComponent = (function () {
     ], LegendComponent.prototype, "labelDeactivate", void 0);
     LegendComponent = __decorate([
         core_1.Component({
-            selector: 'legend',
-            template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: entry?.formattedLabel\"\n            class=\"legend-label\">\n            <legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+            selector: 'ngx-charts-legend',
+            template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ChangeDetectorRef, core_1.NgZone])
@@ -30573,7 +32905,7 @@ var ScaleLegendComponent = (function () {
         // add the 100%
         splits.push(1);
         var pairs = [];
-        colors.forEach(function (c, i) {
+        colors.reverse().forEach(function (c, i) {
             pairs.push(c + " " + Math.round(splits[i] * 100) + "%");
         });
         return pairs.join(', ');
@@ -30596,8 +32928,8 @@ var ScaleLegendComponent = (function () {
     ], ScaleLegendComponent.prototype, "width", void 0);
     ScaleLegendComponent = __decorate([
         core_1.Component({
-            selector: 'scale-legend',
-            template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n      <div \n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
+            selector: 'ngx-charts-scale-legend',
+            template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n      <div \n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
@@ -30627,7 +32959,6 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var SvgLinearGradientComponent = (function () {
     function SvgLinearGradientComponent() {
         this.orientation = 'vertical';
-        this.endOpacity = 1;
     }
     SvgLinearGradientComponent.prototype.ngOnChanges = function (changes) {
         this.x1 = '0%';
@@ -30655,16 +32986,12 @@ var SvgLinearGradientComponent = (function () {
     ], SvgLinearGradientComponent.prototype, "name", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SvgLinearGradientComponent.prototype, "startOpacity", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], SvgLinearGradientComponent.prototype, "endOpacity", void 0);
+        __metadata('design:type', Array)
+    ], SvgLinearGradientComponent.prototype, "stops", void 0);
     SvgLinearGradientComponent = __decorate([
         core_1.Component({
-            selector: 'g[svgLinearGradient]',
-            template: "\n    <svg:linearGradient\n      [id]=\"name\"\n      [attr.x1]=\"x1\"\n      [attr.y1]=\"y1\"\n      [attr.x2]=\"x2\"\n      [attr.y2]=\"y2\">\n      <svg:stop\n        [attr.offset]=\"'0%'\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"startOpacity\"\n      />\n      <svg:stop\n        [attr.offset]=\"'100%'\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"endOpacity\"\n      />\n    </svg:linearGradient>\n  ",
+            selector: 'g[ngx-charts-svg-linear-gradient]',
+            template: "\n    <svg:linearGradient\n      [id]=\"name\"\n      [attr.x1]=\"x1\"\n      [attr.y1]=\"y1\"\n      [attr.x2]=\"x2\"\n      [attr.y2]=\"y2\">\n      <svg:stop *ngFor=\"let stop of stops\"\n        [attr.offset]=\"stop.offset + '%'\"\n        [style.stop-color]=\"stop.color\"\n        [style.stop-opacity]=\"stop.opacity\"\n      />     \n    </svg:linearGradient>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -30726,7 +33053,7 @@ var SvgRadialGradientComponent = (function () {
     ], SvgRadialGradientComponent.prototype, "cy", void 0);
     SvgRadialGradientComponent = __decorate([
         core_1.Component({
-            selector: 'g[svgRadialGradient]',
+            selector: 'g[ngx-charts-svg-radial-gradient]',
             template: "\n    <svg:radialGradient\n      [id]=\"name\"\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      gradientUnits=\"userSpaceOnUse\">\n      <svg:stop\n        offset=\"0%\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"startOpacity\"\n      />\n      <svg:stop\n        offset=\"100%\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"endOpacity\"\n      />\n    </svg:radialGradient>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -30960,7 +33287,7 @@ var Timeline = (function () {
     ], Timeline.prototype, "onDomainChange", void 0);
     Timeline = __decorate([
         core_1.Component({
-            selector: 'g[timeline]',
+            selector: 'g[ngx-charts-timeline]',
             template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\" \n        [attr.width]=\"view[0]\" \n        y=\"0\" \n        [attr.height]=\"height\" \n        class=\"brush-background\" \n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -31001,14 +33328,27 @@ __export(__webpack_require__("./src/common/tooltip/tooltip.service.ts"));
 __export(__webpack_require__("./src/common/tooltip/tooltip.component.ts"));
 __export(__webpack_require__("./src/common/tooltip/tooltip.directive.ts"));
 __export(__webpack_require__("./src/common/tooltip/style.type.ts"));
-__export(__webpack_require__("./src/common/tooltip/placement.type.ts"));
 __export(__webpack_require__("./src/common/tooltip/alignment.type.ts"));
 __export(__webpack_require__("./src/common/tooltip/show.type.ts"));
 
 
 /***/ },
 
-/***/ "./src/common/tooltip/placement.type.ts":
+/***/ "./src/common/tooltip/position/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/common/tooltip/position/placement.type.ts"));
+__export(__webpack_require__("./src/common/tooltip/position/position.ts"));
+
+
+/***/ },
+
+/***/ "./src/common/tooltip/position/placement.type.ts":
 /***/ function(module, exports) {
 
 "use strict";
@@ -31024,11 +33364,12 @@ var PlacementTypes = exports.PlacementTypes;
 
 /***/ },
 
-/***/ "./src/common/tooltip/position.helper.ts":
-/***/ function(module, exports) {
+/***/ "./src/common/tooltip/position/position.ts":
+/***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 "use strict";
+var placement_type_1 = __webpack_require__("./src/common/tooltip/position/placement.type.ts");
 var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
     var result;
@@ -31058,10 +33399,24 @@ function horizontalPosition(elDimensions, popoverDimensions, alignment) {
 }
 /**
  * Position helper for the popover directive.
+ *
+ * @export
+ * @class PositionHelper
  */
 var PositionHelper = (function () {
     function PositionHelper() {
     }
+    /**
+     * Calculate vertical alignment position
+     *
+     * @static
+     * @param {any} elDimensions
+     * @param {any} popoverDimensions
+     * @param {any} alignment
+     * @returns {number}
+     *
+     * @memberOf PositionHelper
+     */
     PositionHelper.calculateVerticalAlignment = function (elDimensions, popoverDimensions, alignment) {
         var result = verticalPosition(elDimensions, popoverDimensions, alignment);
         if (result + popoverDimensions.height > window.innerHeight) {
@@ -31069,6 +33424,18 @@ var PositionHelper = (function () {
         }
         return result;
     };
+    /**
+     * Calculate vertical caret position
+     *
+     * @static
+     * @param {any} elDimensions
+     * @param {any} popoverDimensions
+     * @param {any} caretDimensions
+     * @param {any} alignment
+     * @returns {number}
+     *
+     * @memberOf PositionHelper
+     */
     PositionHelper.calculateVerticalCaret = function (elDimensions, popoverDimensions, caretDimensions, alignment) {
         var result;
         if (alignment === 'top') {
@@ -31086,6 +33453,17 @@ var PositionHelper = (function () {
         }
         return result;
     };
+    /**
+     * Calculate horz alignment position
+     *
+     * @static
+     * @param {any} elDimensions
+     * @param {any} popoverDimensions
+     * @param {any} alignment
+     * @returns {number}
+     *
+     * @memberOf PositionHelper
+     */
     PositionHelper.calculateHorizontalAlignment = function (elDimensions, popoverDimensions, alignment) {
         var result = horizontalPosition(elDimensions, popoverDimensions, alignment);
         if (result + popoverDimensions.width > window.innerWidth) {
@@ -31093,6 +33471,18 @@ var PositionHelper = (function () {
         }
         return result;
     };
+    /**
+     * Calculate horz caret position
+     *
+     * @static
+     * @param {any} elDimensions
+     * @param {any} popoverDimensions
+     * @param {any} caretDimensions
+     * @param {any} alignment
+     * @returns {number}
+     *
+     * @memberOf PositionHelper
+     */
     PositionHelper.calculateHorizontalCaret = function (elDimensions, popoverDimensions, caretDimensions, alignment) {
         var result;
         if (alignment === 'left') {
@@ -31112,6 +33502,16 @@ var PositionHelper = (function () {
     };
     /**
      * Checks if the element's position should be flipped
+     *
+     * @static
+     * @param {any} elDimensions
+     * @param {any} popoverDimensions
+     * @param {any} placement
+     * @param {any} alignment
+     * @param {any} spacing
+     * @returns {boolean}
+     *
+     * @memberOf PositionHelper
      */
     PositionHelper.shouldFlip = function (elDimensions, popoverDimensions, placement, alignment, spacing) {
         var flip = false;
@@ -31139,6 +33539,105 @@ var PositionHelper = (function () {
             }
         }
         return flip;
+    };
+    /**
+     * Position caret
+     *
+     * @static
+     * @param {any} placement
+     * @param {any} elmDim
+     * @param {any} hostDim
+     * @param {any} caretDimensions
+     * @param {any} alignment
+     * @returns {*}
+     *
+     * @memberOf PositionHelper
+     */
+    PositionHelper.positionCaret = function (placement, elmDim, hostDim, caretDimensions, alignment) {
+        var top = 0;
+        var left = 0;
+        if (placement === placement_type_1.PlacementTypes.right) {
+            left = -7;
+            top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, alignment);
+        }
+        else if (placement === placement_type_1.PlacementTypes.left) {
+            left = elmDim.width;
+            top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, alignment);
+        }
+        else if (placement === placement_type_1.PlacementTypes.top) {
+            top = elmDim.height;
+            left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, alignment);
+        }
+        else if (placement === placement_type_1.PlacementTypes.bottom) {
+            top = -7;
+            left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, alignment);
+        }
+        return { top: top, left: left };
+    };
+    /**
+     * Position content
+     *
+     * @static
+     * @param {any} placement
+     * @param {any} elmDim
+     * @param {any} hostDim
+     * @param {any} spacing
+     * @param {any} alignment
+     * @returns {*}
+     *
+     * @memberOf PositionHelper
+     */
+    PositionHelper.positionContent = function (placement, elmDim, hostDim, spacing, alignment) {
+        var top = 0;
+        var left = 0;
+        if (placement === placement_type_1.PlacementTypes.right) {
+            left = hostDim.left + hostDim.width + spacing;
+            top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, alignment);
+        }
+        else if (placement === placement_type_1.PlacementTypes.left) {
+            left = hostDim.left - elmDim.width - spacing;
+            top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, alignment);
+        }
+        else if (placement === placement_type_1.PlacementTypes.top) {
+            top = hostDim.top - elmDim.height - spacing;
+            left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, alignment);
+        }
+        else if (placement === placement_type_1.PlacementTypes.bottom) {
+            top = hostDim.top + hostDim.height + spacing;
+            left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, alignment);
+        }
+        return { top: top, left: left };
+    };
+    /**
+     * Determine placement based on flip
+     *
+     * @static
+     * @param {any} placement
+     * @param {any} elmDim
+     * @param {any} hostDim
+     * @param {any} spacing
+     * @param {any} alignment
+     * @returns {*}
+     *
+     * @memberOf PositionHelper
+     */
+    PositionHelper.determinePlacement = function (placement, elmDim, hostDim, spacing, alignment) {
+        var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, placement, alignment, spacing);
+        if (shouldFlip) {
+            if (placement === placement_type_1.PlacementTypes.right) {
+                return placement_type_1.PlacementTypes.left;
+            }
+            else if (placement === placement_type_1.PlacementTypes.left) {
+                return placement_type_1.PlacementTypes.right;
+            }
+            else if (placement === placement_type_1.PlacementTypes.top) {
+                return placement_type_1.PlacementTypes.bottom;
+            }
+            else if (placement === placement_type_1.PlacementTypes.bottom) {
+                return placement_type_1.PlacementTypes.top;
+            }
+        }
+        return placement;
     };
     return PositionHelper;
 }());
@@ -31176,22 +33675,6 @@ var StyleTypes = exports.StyleTypes;
 
 /***/ },
 
-/***/ "./src/common/tooltip/tooltip-options.ts":
-/***/ function(module, exports) {
-
-"use strict";
-"use strict";
-var TooltipOptions = (function () {
-    function TooltipOptions(opts) {
-        Object.assign(this, opts);
-    }
-    return TooltipOptions;
-}());
-exports.TooltipOptions = TooltipOptions;
-
-
-/***/ },
-
 /***/ "./src/common/tooltip/tooltip.component.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31208,8 +33691,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var throttle_1 = __webpack_require__("./src/utils/throttle.ts");
-var position_helper_1 = __webpack_require__("./src/common/tooltip/position.helper.ts");
-var placement_type_1 = __webpack_require__("./src/common/tooltip/placement.type.ts");
+var position_1 = __webpack_require__("./src/common/tooltip/position/index.ts");
 var style_type_1 = __webpack_require__("./src/common/tooltip/style.type.ts");
 var alignment_type_1 = __webpack_require__("./src/common/tooltip/alignment.type.ts");
 var TooltipContentComponent = (function () {
@@ -31219,7 +33701,7 @@ var TooltipContentComponent = (function () {
     }
     Object.defineProperty(TooltipContentComponent.prototype, "cssClasses", {
         get: function () {
-            var clz = 'swui-tooltip-content';
+            var clz = 'ngx-tooltip-content';
             clz += " position-" + this.placement;
             clz += " type-" + this.type;
             clz += " " + this.cssClass;
@@ -31228,88 +33710,39 @@ var TooltipContentComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(TooltipContentComponent.prototype, "visibilityChanged", {
-        get: function () {
-            return 'active';
-        },
-        enumerable: true,
-        configurable: true
-    });
     TooltipContentComponent.prototype.ngAfterViewInit = function () {
         setTimeout(this.position.bind(this));
     };
     TooltipContentComponent.prototype.position = function () {
+        var _this = this;
         var nativeElm = this.element.nativeElement;
         var hostDim = this.host.nativeElement.getBoundingClientRect();
+        // if no dims were found, never show
+        if (!hostDim.height && !hostDim.width)
+            return;
         var elmDim = nativeElm.getBoundingClientRect();
         this.checkFlip(hostDim, elmDim);
         this.positionContent(nativeElm, hostDim, elmDim);
         if (this.showCaret) {
             this.positionCaret(hostDim, elmDim);
         }
+        // animate its entry
+        setTimeout(function () { return _this.renderer.setElementClass(nativeElm, 'animate', true); }, 1);
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
-        var top = 0;
-        var left = 0;
-        if (this.placement === placement_type_1.PlacementTypes.right) {
-            left = hostDim.left + hostDim.width + this.spacing;
-            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.left) {
-            left = hostDim.left - elmDim.width - this.spacing;
-            top = position_helper_1.PositionHelper.calculateVerticalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.top) {
-            top = hostDim.top - elmDim.height - this.spacing;
-            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-            top = hostDim.top + hostDim.height + this.spacing;
-            left = position_helper_1.PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, this.alignment);
-        }
+        var _a = position_1.PositionHelper.positionContent(this.placement, elmDim, hostDim, this.spacing, this.alignment), top = _a.top, left = _a.left;
         this.renderer.setElementStyle(nativeElm, 'top', top + "px");
         this.renderer.setElementStyle(nativeElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
         var caretDimensions = caretElm.getBoundingClientRect();
-        var top = 0;
-        var left = 0;
-        if (this.placement === placement_type_1.PlacementTypes.right) {
-            left = -7;
-            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.left) {
-            left = elmDim.width;
-            top = position_helper_1.PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.top) {
-            top = elmDim.height;
-            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
-        else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-            top = -7;
-            left = position_helper_1.PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, this.alignment);
-        }
+        var _a = position_1.PositionHelper.positionCaret(this.placement, elmDim, hostDim, caretDimensions, this.alignment), top = _a.top, left = _a.left;
         this.renderer.setElementStyle(caretElm, 'top', top + "px");
         this.renderer.setElementStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
-        var shouldFlip = position_helper_1.PositionHelper.shouldFlip(hostDim, elmDim, this.placement, this.alignment, this.spacing);
-        if (shouldFlip) {
-            if (this.placement === placement_type_1.PlacementTypes.right) {
-                this.placement = placement_type_1.PlacementTypes.left;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.left) {
-                this.placement = placement_type_1.PlacementTypes.right;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.top) {
-                this.placement = placement_type_1.PlacementTypes.bottom;
-            }
-            else if (this.placement === placement_type_1.PlacementTypes.bottom) {
-                this.placement = placement_type_1.PlacementTypes.top;
-            }
-        }
+        this.placement = position_1.PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing, this.alignment);
     };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
@@ -31347,10 +33780,6 @@ var TooltipContentComponent = (function () {
         __metadata('design:type', String)
     ], TooltipContentComponent.prototype, "title", void 0);
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', core_1.TemplateRef)
-    ], TooltipContentComponent.prototype, "template", void 0);
-    __decorate([
         core_1.ViewChild('caretElm'), 
         __metadata('design:type', Object)
     ], TooltipContentComponent.prototype, "caretElm", void 0);
@@ -31358,10 +33787,6 @@ var TooltipContentComponent = (function () {
         core_1.HostBinding('class'), 
         __metadata('design:type', String)
     ], TooltipContentComponent.prototype, "cssClasses", null);
-    __decorate([
-        core_1.HostBinding('@visibilityChanged'), 
-        __metadata('design:type', String)
-    ], TooltipContentComponent.prototype, "visibilityChanged", null);
     __decorate([
         core_1.HostListener('window:resize'),
         throttle_1.throttleable(100), 
@@ -31371,26 +33796,8 @@ var TooltipContentComponent = (function () {
     ], TooltipContentComponent.prototype, "onWindowResize", null);
     TooltipContentComponent = __decorate([
         core_1.Component({
-            selector: 'swui-tooltip-content',
-            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
-            animations: [
-                core_1.trigger('visibilityChanged', [
-                    core_1.state('active', core_1.style({ opacity: 1, 'pointer-events': 'auto' })),
-                    core_1.transition('void => *', [
-                        core_1.style({
-                            opacity: 0,
-                            'pointer-events': 'none',
-                            // transform: 'translate3d(0, 0, 0) perspective(10px) rotateX(10deg)'
-                            transform: 'translate3d(0, 0, 0)'
-                        }),
-                        core_1.animate('0.3s ease-out')
-                    ]),
-                    core_1.transition('* => void', [
-                        core_1.style({ opacity: 1 }),
-                        core_1.animate('0.2s ease-out')
-                    ])
-                ])
-            ]
+            selector: 'ngx-tooltip-content',
+            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
     ], TooltipContentComponent);
@@ -31416,31 +33823,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var injection_service_1 = __webpack_require__("./src/utils/injection.service.ts");
-var id_1 = __webpack_require__("./src/utils/id.ts");
-var placement_type_1 = __webpack_require__("./src/common/tooltip/placement.type.ts");
+var position_1 = __webpack_require__("./src/common/tooltip/position/index.ts");
 var style_type_1 = __webpack_require__("./src/common/tooltip/style.type.ts");
 var alignment_type_1 = __webpack_require__("./src/common/tooltip/alignment.type.ts");
 var show_type_1 = __webpack_require__("./src/common/tooltip/show.type.ts");
-var tooltip_component_1 = __webpack_require__("./src/common/tooltip/tooltip.component.ts");
-var tooltip_options_1 = __webpack_require__("./src/common/tooltip/tooltip-options.ts");
 var tooltip_service_1 = __webpack_require__("./src/common/tooltip/tooltip.service.ts");
-__webpack_require__("./src/common/tooltip/tooltip.scss");
 var TooltipDirective = (function () {
-    function TooltipDirective(tooltipService, viewContainerRef, injectionService, renderer, element, zone) {
+    function TooltipDirective(tooltipService, viewContainerRef, renderer, element) {
         this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
-        this.injectionService = injectionService;
         this.renderer = renderer;
         this.element = element;
-        this.zone = zone;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
-        this.tooltipSpacing = 0;
+        this.tooltipSpacing = 10;
         this.tooltipDisabled = false;
         this.tooltipShowCaret = true;
-        this.tooltipPlacement = placement_type_1.PlacementTypes.top;
+        this.tooltipPlacement = position_1.PlacementTypes.top;
         this.tooltipAlignment = alignment_type_1.AlignmentTypes.center;
         this.tooltipType = style_type_1.StyleTypes.popover;
         this.tooltipCloseOnClickOutside = true;
@@ -31475,48 +33875,49 @@ var TooltipDirective = (function () {
             this.showTooltip();
         }
     };
+    TooltipDirective.prototype.onBlur = function () {
+        if (this.listensForFocus) {
+            this.hideTooltip(true);
+        }
+    };
     TooltipDirective.prototype.onMouseEnter = function () {
         if (this.listensForHover) {
             this.showTooltip();
         }
     };
-    TooltipDirective.prototype.onBlur = function () {
-        if (this.listensForFocus) {
-            this.hideTooltip();
-        }
-    };
     TooltipDirective.prototype.onMouseLeave = function (target) {
         if (this.listensForHover && this.tooltipCloseOnMouseLeave) {
-            var tooltip = this.tooltipService.get(this.componentId);
-            if (tooltip) {
-                var contentDom = tooltip.instance.element.nativeElement;
+            clearTimeout(this.timeout);
+            if (this.component) {
+                var contentDom = this.component.instance.element.nativeElement;
                 var contains = contentDom.contains(target);
                 if (contains)
                     return;
             }
-            clearTimeout(this.timeout);
             this.hideTooltip();
+        }
+    };
+    TooltipDirective.prototype.onMouseClick = function () {
+        if (this.listensForHover) {
+            this.hideTooltip(true);
         }
     };
     TooltipDirective.prototype.showTooltip = function (immediate) {
         var _this = this;
-        this.zone.run(function () {
-            if (_this.componentId || _this.tooltipDisabled)
-                return;
-            var time = immediate ? 0 : _this.tooltipShowTimeout;
-            clearTimeout(_this.timeout);
-            _this.timeout = setTimeout(function () {
-                _this.tooltipService.destroyAll();
-                _this.componentId = id_1.id();
-                var tooltip = _this.injectComponent();
-                _this.tooltipService.register(_this.componentId, tooltip, _this.hideTooltip.bind(_this));
-                // add a tiny timeout to avoid event re-triggers
-                setTimeout(function () {
-                    _this.addHideListeners(tooltip.instance.element.nativeElement);
-                }, 10);
-                _this.show.emit(true);
-            }, time);
-        });
+        if (this.component || this.tooltipDisabled)
+            return;
+        var time = immediate ? 0 : this.tooltipShowTimeout;
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(function () {
+            _this.tooltipService.destroyAll();
+            var options = _this.createBoundOptions();
+            _this.component = _this.tooltipService.create(options);
+            // add a tiny timeout to avoid event re-triggers
+            setTimeout(function () {
+                _this.addHideListeners(_this.component.instance.element.nativeElement);
+            }, 10);
+            _this.show.emit(true);
+        }, time);
     };
     TooltipDirective.prototype.addHideListeners = function (tooltip) {
         var _this = this;
@@ -31539,14 +33940,9 @@ var TooltipDirective = (function () {
             });
         }
     };
-    TooltipDirective.prototype.injectComponent = function () {
-        var options = this.createBoundOptions();
-        var location = this.tooltipAppendToBody ? undefined : this.element.nativeElement;
-        return this.injectionService.appendComponent(tooltip_component_1.TooltipContentComponent, options, location);
-    };
     TooltipDirective.prototype.hideTooltip = function (immediate) {
         var _this = this;
-        if (!this.componentId)
+        if (!this.component)
             return;
         var destroyFn = function () {
             // remove events
@@ -31556,11 +33952,11 @@ var TooltipDirective = (function () {
                 _this.mouseEnterContentEvent();
             if (_this.documentClickEvent)
                 _this.documentClickEvent();
-            // destroy component
-            _this.tooltipService.destroy(_this.componentId);
             // emit events
             _this.hide.emit(true);
-            _this.componentId = undefined;
+            // destroy component
+            _this.tooltipService.destroy(_this.component);
+            _this.component = undefined;
         };
         clearTimeout(this.timeout);
         if (!immediate) {
@@ -31571,8 +33967,7 @@ var TooltipDirective = (function () {
         }
     };
     TooltipDirective.prototype.createBoundOptions = function () {
-        return new tooltip_options_1.TooltipOptions({
-            id: this.componentId,
+        return {
             title: this.tooltipTitle,
             template: this.tooltipTemplate,
             host: this.viewContainerRef.element,
@@ -31583,7 +33978,7 @@ var TooltipDirective = (function () {
             cssClass: this.tooltipCssClass,
             spacing: this.tooltipSpacing,
             context: this.tooltipContext
-        });
+        };
     };
     __decorate([
         core_1.Input(), 
@@ -31664,26 +34059,32 @@ var TooltipDirective = (function () {
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onFocus", null);
     __decorate([
-        core_1.HostListener('mouseenter'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], TooltipDirective.prototype, "onMouseEnter", null);
-    __decorate([
         core_1.HostListener('blur'), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onBlur", null);
     __decorate([
+        core_1.HostListener('mouseenter'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "onMouseEnter", null);
+    __decorate([
         core_1.HostListener('mouseleave', ['$event.target']), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', [Object]), 
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onMouseLeave", null);
+    __decorate([
+        core_1.HostListener('click'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipDirective.prototype, "onMouseClick", null);
     TooltipDirective = __decorate([
-        core_1.Directive({ selector: '[swui-tooltip]' }), 
-        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, injection_service_1.InjectionService, core_1.Renderer, core_1.ElementRef, core_1.NgZone])
+        core_1.Directive({ selector: '[ngx-tooltip]' }), 
+        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, core_1.Renderer, core_1.ElementRef])
     ], TooltipDirective);
     return TooltipDirective;
 }());
@@ -31711,14 +34112,14 @@ var common_1 = __webpack_require__("./node_modules/@angular/common/index.js");
 var tooltip_directive_1 = __webpack_require__("./src/common/tooltip/tooltip.directive.ts");
 var tooltip_component_1 = __webpack_require__("./src/common/tooltip/tooltip.component.ts");
 var tooltip_service_1 = __webpack_require__("./src/common/tooltip/tooltip.service.ts");
-var injection_service_1 = __webpack_require__("./src/utils/injection.service.ts");
+var services_1 = __webpack_require__("./src/services/index.ts");
 var TooltipModule = (function () {
     function TooltipModule() {
     }
     TooltipModule = __decorate([
         core_1.NgModule({
             declarations: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
-            providers: [injection_service_1.InjectionService, tooltip_service_1.TooltipService],
+            providers: [services_1.InjectionService, tooltip_service_1.TooltipService],
             exports: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
             imports: [common_1.CommonModule],
             entryComponents: [tooltip_component_1.TooltipContentComponent]
@@ -31729,33 +34130,6 @@ var TooltipModule = (function () {
 }());
 exports.TooltipModule = TooltipModule;
 
-
-/***/ },
-
-/***/ "./src/common/tooltip/tooltip.scss":
-/***/ function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/common/tooltip/tooltip.scss");
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/style-loader/addStyles.js")(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/postcss-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./tooltip.scss", function() {
-			var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/postcss-loader/index.js?sourceMap!./../../../node_modules/sass-loader/index.js?sourceMap!./tooltip.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
 
 /***/ },
 
@@ -31779,18 +34153,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var registry_service_1 = __webpack_require__("./src/utils/registry.service.ts");
+var services_1 = __webpack_require__("./src/services/index.ts");
+var _1 = __webpack_require__("./src/common/tooltip/index.ts");
 var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
-    function TooltipService() {
-        _super.apply(this, arguments);
+    function TooltipService(injectionService) {
+        _super.call(this, injectionService);
+        this.type = _1.TooltipContentComponent;
     }
     TooltipService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [services_1.InjectionService])
     ], TooltipService);
     return TooltipService;
-}(registry_service_1.RegistryService));
+}(services_1.InjectionRegistery));
 exports.TooltipService = TooltipService;
 
 
@@ -31829,14 +34205,19 @@ exports.trimLabel = trimLabel;
 "use strict";
 "use strict";
 function calculateViewDimensions(_a) {
-    var width = _a.width, height = _a.height, margins = _a.margins, _b = _a.showXAxis, showXAxis = _b === void 0 ? false : _b, _c = _a.showYAxis, showYAxis = _c === void 0 ? false : _c, _d = _a.xAxisHeight, xAxisHeight = _d === void 0 ? 0 : _d, _e = _a.yAxisWidth, yAxisWidth = _e === void 0 ? 0 : _e, _f = _a.showXLabel, showXLabel = _f === void 0 ? false : _f, _g = _a.showYLabel, showYLabel = _g === void 0 ? false : _g, _h = _a.showLegend, showLegend = _h === void 0 ? false : _h, _j = _a.columns, columns = _j === void 0 ? 12 : _j;
+    var width = _a.width, height = _a.height, margins = _a.margins, _b = _a.showXAxis, showXAxis = _b === void 0 ? false : _b, _c = _a.showYAxis, showYAxis = _c === void 0 ? false : _c, _d = _a.xAxisHeight, xAxisHeight = _d === void 0 ? 0 : _d, _e = _a.yAxisWidth, yAxisWidth = _e === void 0 ? 0 : _e, _f = _a.showXLabel, showXLabel = _f === void 0 ? false : _f, _g = _a.showYLabel, showYLabel = _g === void 0 ? false : _g, _h = _a.showLegend, showLegend = _h === void 0 ? false : _h, _j = _a.legendType, legendType = _j === void 0 ? 'ordinal' : _j, _k = _a.columns, columns = _k === void 0 ? 12 : _k;
     var xOffset = margins[3];
     var chartWidth = width;
     var chartHeight = height - margins[0] - margins[2];
-    // let yOffset = margins[0]; // unused
     if (showLegend) {
-        chartWidth = chartWidth * columns / 12;
+        if (legendType === 'ordinal') {
+            columns -= 2;
+        }
+        else {
+            columns -= 1;
+        }
     }
+    chartWidth = chartWidth * columns / 12;
     chartWidth = chartWidth - margins[1] - margins[3];
     if (showXAxis) {
         chartHeight -= 5;
@@ -31899,10 +34280,8 @@ var d3_1 = __webpack_require__("./src/d3.ts");
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
-    function ForceDirectedGraphComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function ForceDirectedGraphComponent() {
+        _super.apply(this, arguments);
         this.force = d3_1.default.forceSimulation()
             .force("charge", d3_1.default.forceManyBody())
             .force("collide", d3_1.default.forceCollide(5))
@@ -31912,13 +34291,12 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.groupResultsBy = function (node) { return node.value; };
         this.nodes = [];
         this.links = [];
-        this.select = new core_1.EventEmitter();
+        this.activeEntries = [];
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
         this.margin = [0, 0, 0, 0];
         this.results = [];
     }
-    ForceDirectedGraphComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     ForceDirectedGraphComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -31929,10 +34307,10 @@ var ForceDirectedGraphComponent = (function (_super) {
                 height: _this.height,
                 margins: _this.margin,
                 showLegend: _this.legend,
-                columns: 10
             });
             _this.seriesDomain = _this.getSeriesDomain();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")";
             if (_this.force) {
                 _this.force.nodes(_this.nodes)
@@ -31943,6 +34321,18 @@ var ForceDirectedGraphComponent = (function (_super) {
     };
     ForceDirectedGraphComponent.prototype.onClick = function (data, node) {
         this.select.emit(data);
+    };
+    ForceDirectedGraphComponent.prototype.onActivate = function (event) {
+        if (this.activeEntries.indexOf(event) > -1)
+            return;
+        this.activeEntries = [event].concat(this.activeEntries);
+        this.activate.emit({ value: event, entries: this.activeEntries });
+    };
+    ForceDirectedGraphComponent.prototype.onDeactivate = function (event) {
+        var idx = this.activeEntries.indexOf(event);
+        this.activeEntries.splice(idx, 1);
+        this.activeEntries = this.activeEntries.slice();
+        this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
     ForceDirectedGraphComponent.prototype.getSeriesDomain = function () {
         var _this = this;
@@ -31957,7 +34347,14 @@ var ForceDirectedGraphComponent = (function (_super) {
         return node.value;
     };
     ForceDirectedGraphComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+    };
+    ForceDirectedGraphComponent.prototype.getLegendOptions = function () {
+        return {
+            scaleType: 'ordinal',
+            domain: this.seriesDomain,
+            colors: this.colors
+        };
     };
     // Easier to use Angular2 event management than use d3.drag
     ForceDirectedGraphComponent.prototype.onDragStart = function (node, $event) {
@@ -32007,20 +34404,16 @@ var ForceDirectedGraphComponent = (function (_super) {
     ], ForceDirectedGraphComponent.prototype, "links", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ForceDirectedGraphComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ForceDirectedGraphComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ForceDirectedGraphComponent.prototype, "customColors", void 0);
+        __metadata('design:type', Array)
+    ], ForceDirectedGraphComponent.prototype, "activeEntries", void 0);
     __decorate([
         core_1.Output(), 
-        __metadata('design:type', Object)
-    ], ForceDirectedGraphComponent.prototype, "select", void 0);
+        __metadata('design:type', core_1.EventEmitter)
+    ], ForceDirectedGraphComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], ForceDirectedGraphComponent.prototype, "deactivate", void 0);
     __decorate([
         core_1.ContentChild('linkTemplate'), 
         __metadata('design:type', core_1.TemplateRef)
@@ -32047,11 +34440,11 @@ var ForceDirectedGraphComponent = (function (_super) {
     ], ForceDirectedGraphComponent.prototype, "onDragEnd", null);
     ForceDirectedGraphComponent = __decorate([
         core_1.Component({
-            selector: 'force-directed-graph',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors(groupResultsBy(node))\"\n            [attr.stroke]=\"colors(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-force-directed-graph',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], ForceDirectedGraphComponent);
     return ForceDirectedGraphComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -32114,6 +34507,193 @@ __export(__webpack_require__("./src/force-directed-graph/force-directed-graph.co
 
 /***/ },
 
+/***/ "./src/gauge/gauge-arc.component.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
+var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var GaugeArcComponent = (function () {
+    function GaugeArcComponent() {
+        this.select = new core_1.EventEmitter();
+    }
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeArcComponent.prototype, "backgroundArc", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeArcComponent.prototype, "valueArc", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeArcComponent.prototype, "cornerRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', color_sets_1.ColorHelper)
+    ], GaugeArcComponent.prototype, "colors", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], GaugeArcComponent.prototype, "select", void 0);
+    GaugeArcComponent = __decorate([
+        core_1.Component({
+            selector: 'g[ngx-charts-gauge-arc]',
+            template: "\n    <svg:g ngx-charts-pie-arc\n        class=\"background-arc\"\n        [startAngle]=\"0\"\n        [endAngle]=\"backgroundArc.endAngle\"\n        [innerRadius]=\"backgroundArc.innerRadius\"\n        [outerRadius]=\"backgroundArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [data]=\"backgroundArc.data\"\n        [animate]=\"false\"\n        [pointerEvents]=\"false\">\n    </svg:g>\n    <svg:g ngx-charts-pie-arc\n        [startAngle]=\"0\"\n        [endAngle]=\"valueArc.endAngle\"\n        [innerRadius]=\"valueArc.innerRadius\"\n        [outerRadius]=\"valueArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [fill]=\"colors.getColor(valueArc.data.value)\"\n        [data]=\"valueArc.data\"\n        [animate]=\"true\"\n        (select)=\"select.emit($event)\">\n    </svg:g>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        }), 
+        __metadata('design:paramtypes', [])
+    ], GaugeArcComponent);
+    return GaugeArcComponent;
+}());
+exports.GaugeArcComponent = GaugeArcComponent;
+
+
+/***/ },
+
+/***/ "./src/gauge/gauge-axis.component.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
+var d3_1 = __webpack_require__("./src/d3.ts");
+var GaugeAxisComponent = (function () {
+    function GaugeAxisComponent() {
+        this.rotate = '';
+    }
+    GaugeAxisComponent.prototype.ngOnChanges = function () {
+        this.update();
+    };
+    GaugeAxisComponent.prototype.update = function () {
+        this.rotationAngle = -90 + this.startAngle;
+        this.rotate = "rotate(" + this.rotationAngle + ")";
+        this.ticks = this.getTicks();
+    };
+    GaugeAxisComponent.prototype.getTicks = function () {
+        var bigTickSegment = this.angleSpan / this.bigSegments;
+        var smallTickSegment = bigTickSegment / (this.smallSegments);
+        var tickLength = 20;
+        var ticks = {
+            big: [],
+            small: []
+        };
+        var startDistance = this.radius + 10;
+        var textDist = startDistance + tickLength + 10;
+        for (var i = 0; i <= this.bigSegments; i++) {
+            var angleDeg = i * bigTickSegment;
+            var angle = angleDeg * Math.PI / 180;
+            var textAnchor = this.getTextAnchor(angleDeg);
+            ticks.big.push({
+                line: this.getTickPath(startDistance, tickLength, angle),
+                textAnchor: textAnchor,
+                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
+                textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")"
+            });
+            if (i === this.bigSegments) {
+                continue;
+            }
+            for (var j = 1; j <= this.smallSegments; j++) {
+                var smallAngleDeg = angleDeg + j * smallTickSegment;
+                var smallAngle = smallAngleDeg * Math.PI / 180;
+                ticks.small.push({
+                    line: this.getTickPath(startDistance, tickLength / 2, smallAngle)
+                });
+            }
+        }
+        return ticks;
+    };
+    GaugeAxisComponent.prototype.getTextAnchor = function (angle) {
+        // [0, 45] = 'middle';
+        // [46, 135] = 'start';
+        // [136, 225] = 'middle';
+        // [226, 315] = 'end';
+        angle = (this.startAngle + angle) % 360;
+        var textAnchor = 'middle';
+        if (angle > 45 && angle <= 135) {
+            textAnchor = 'start';
+        }
+        else if (angle > 225 && angle <= 315) {
+            textAnchor = 'end';
+        }
+        return textAnchor;
+    };
+    GaugeAxisComponent.prototype.getTickPath = function (startDistance, tickLength, angle) {
+        var y1 = startDistance * Math.sin(angle);
+        var y2 = (startDistance + tickLength) * Math.sin(angle);
+        var x1 = startDistance * Math.cos(angle);
+        var x2 = (startDistance + tickLength) * Math.cos(angle);
+        var points = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+        var line = d3_1.default.line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
+        return line(points);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeAxisComponent.prototype, "bigSegments", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeAxisComponent.prototype, "smallSegments", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeAxisComponent.prototype, "min", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeAxisComponent.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], GaugeAxisComponent.prototype, "angleSpan", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], GaugeAxisComponent.prototype, "startAngle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeAxisComponent.prototype, "radius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], GaugeAxisComponent.prototype, "valueScale", void 0);
+    GaugeAxisComponent = __decorate([
+        core_1.Component({
+            selector: 'g[ngx-charts-gauge-axis]',
+            template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"            \n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+        }), 
+        __metadata('design:paramtypes', [])
+    ], GaugeAxisComponent);
+    return GaugeAxisComponent;
+}());
+exports.GaugeAxisComponent = GaugeAxisComponent;
+
+
+/***/ },
+
 /***/ "./src/gauge/gauge.component.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32140,79 +34720,117 @@ var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var GaugeComponent = (function (_super) {
     __extends(GaugeComponent, _super);
-    function GaugeComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.value = 0;
+    function GaugeComponent() {
+        _super.apply(this, arguments);
         this.min = 0;
         this.max = 100;
         this.bigSegments = 10;
         this.smallSegments = 5;
-        this.select = new core_1.EventEmitter();
-        this.margin = [40, 100, 40, 100];
+        this.showAxis = true;
+        this.startAngle = -120;
         this.angleSpan = 240;
+        this.schemeType = 'ordinal';
         this.resizeScale = 1;
+        this.rotation = '';
         this.textTransform = '';
+        this.cornerRadius = 10;
     }
     GaugeComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this.bindResizeEvents(this.view);
+        _super.prototype.ngAfterViewInit.call(this);
         setTimeout(function () { return _this.scaleText(); });
-    };
-    GaugeComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    GaugeComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
     };
     GaugeComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
-            if (!_this.value) {
-                _this.value = 0;
+            if (!_this.showAxis) {
+                _this.margin = [10, 20, 10, 20];
+            }
+            else {
+                _this.margin = [60, 100, 60, 100];
+            }
+            // make the starting angle positive
+            if (_this.startAngle < 0) {
+                _this.startAngle = (_this.startAngle % 360) + 360;
             }
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
-                margins: _this.margin,
-                columns: 12
+                margins: _this.margin
             });
+            _this.domain = _this.getDomain();
             _this.valueDomain = _this.getValueDomain();
             _this.valueScale = _this.getValueScale();
+            _this.displayValue = _this.getDisplayValue();
             _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2;
-            _this.innerRadius = _this.outerRadius - 10;
-            _this.backgroundArc = {
-                endAngle: _this.angleSpan * Math.PI / 180,
-                innerRadius: _this.innerRadius,
-                outerRadius: _this.outerRadius,
-                cornerRadius: 10,
-                data: {
-                    value: 100,
-                    name: 'Value'
-                }
-            };
-            _this.valueArc = {
-                endAngle: Math.min(_this.valueScale(_this.value), _this.angleSpan) * Math.PI / 180,
-                innerRadius: _this.innerRadius,
-                outerRadius: _this.outerRadius,
-                cornerRadius: 10,
-                data: {
-                    value: _this.value,
-                    name: 'Value'
-                }
-            };
+            _this.arcs = _this.getArcs();
             _this.setColors();
-            _this.ticks = _this.getTicks();
             var xOffset = _this.margin[3] + _this.dims.width / 2;
-            var circleHeight = _this.outerRadius / 2 + 20;
-            var yOffset = _this.margin[0] + _this.dims.height / 2 + circleHeight / 2;
-            _this.transform = "translate(" + xOffset + ", " + yOffset + ") rotate(-" + _this.angleSpan / 2 + ")";
+            var yOffset = _this.margin[0] + _this.dims.height / 2;
+            _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
+            _this.rotation = "rotate(" + _this.startAngle + ")";
             _this.scaleText();
         });
     };
+    GaugeComponent.prototype.getArcs = function () {
+        var arcs = [];
+        var availableRadius = this.outerRadius * 0.7;
+        var radiusPerArc = Math.min(availableRadius / this.results.length, 10);
+        var arcWidth = radiusPerArc * 0.7;
+        this.textRadius = this.outerRadius - this.results.length * radiusPerArc;
+        this.cornerRadius = Math.floor(arcWidth / 2);
+        var i = 0;
+        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
+            var d = _a[_i];
+            var outerRadius = this.outerRadius - (i * radiusPerArc);
+            var innerRadius = outerRadius - arcWidth;
+            var backgroundArc = {
+                endAngle: this.angleSpan * Math.PI / 180,
+                innerRadius: innerRadius,
+                outerRadius: outerRadius,
+                data: {
+                    value: this.max,
+                    name: d.name
+                }
+            };
+            var valueArc = {
+                endAngle: Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI / 180,
+                innerRadius: innerRadius,
+                outerRadius: outerRadius,
+                data: {
+                    value: d.value,
+                    name: d.name
+                }
+            };
+            var arc = {
+                backgroundArc: backgroundArc,
+                valueArc: valueArc
+            };
+            arcs.push(arc);
+            i++;
+        }
+        return arcs;
+    };
+    GaugeComponent.prototype.getDomain = function () {
+        return this.results.map(function (d) { return d.name; });
+    };
     GaugeComponent.prototype.getValueDomain = function () {
+        var values = this.results.map(function (d) { return d.value; });
+        var dataMin = Math.min.apply(Math, values);
+        var dataMax = Math.max.apply(Math, values);
+        if (this.min !== undefined) {
+            this.min = Math.min(this.min, dataMin);
+        }
+        else {
+            this.min = dataMin;
+        }
+        if (this.max !== undefined) {
+            this.max = Math.max(this.max, dataMax);
+        }
+        else {
+            this.max = dataMax;
+        }
         return [this.min, this.max];
     };
     GaugeComponent.prototype.getValueScale = function () {
@@ -32220,63 +34838,9 @@ var GaugeComponent = (function (_super) {
             .range([0, this.angleSpan])
             .domain(this.valueDomain);
     };
-    GaugeComponent.prototype.getTicks = function () {
-        var bigTickSegment = this.angleSpan / this.bigSegments;
-        var smallTickSegment = bigTickSegment / (this.smallSegments);
-        var tickLength = 20;
-        var ticks = {
-            big: [],
-            small: []
-        };
-        var startDistance = this.outerRadius + 10;
-        var textDist = startDistance + tickLength + 10;
-        for (var i = 0; i <= this.bigSegments; i++) {
-            var angleDeg = i * bigTickSegment;
-            var angle = angleDeg * Math.PI / 180;
-            var textAnchor = 'middle';
-            if (angleDeg < 90) {
-                textAnchor = 'end';
-            }
-            else if (angleDeg >= 180) {
-                textAnchor = 'start';
-            }
-            ticks.big.push({
-                line: this.getTickPath(startDistance, tickLength, angle),
-                textAnchor: textAnchor,
-                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-                textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(210)",
-                highlighted: this.valueScale.invert(angleDeg) <= this.value
-            });
-            if (i === this.bigSegments) {
-                continue;
-            }
-            for (var j = 1; j <= this.smallSegments; j++) {
-                var smallAngleDeg = angleDeg + j * smallTickSegment;
-                var smallAngle = smallAngleDeg * Math.PI / 180;
-                ticks.small.push({
-                    line: this.getTickPath(startDistance, tickLength / 2, smallAngle),
-                    highlighted: this.valueScale.invert(smallAngleDeg) <= this.value
-                });
-            }
-        }
-        return ticks;
-    };
-    GaugeComponent.prototype.getTickPath = function (startDistance, tickLength, angle) {
-        var y1 = startDistance * Math.sin(angle);
-        var y2 = (startDistance + tickLength) * Math.sin(angle);
-        var x1 = startDistance * Math.cos(angle);
-        var x2 = (startDistance + tickLength) * Math.cos(angle);
-        var points = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
-        var line = d3_1.default.line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
-        return line(points);
-    };
-    GaugeComponent.prototype.displayValue = function () {
-        if (this.units) {
-            return this.value.toLocaleString() + " " + this.units;
-        }
-        else {
-            return this.value.toLocaleString();
-        }
+    GaugeComponent.prototype.getDisplayValue = function () {
+        var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
+        return value.toLocaleString();
     };
     GaugeComponent.prototype.scaleText = function () {
         var _this = this;
@@ -32284,7 +34848,7 @@ var GaugeComponent = (function (_super) {
         if (width === 0)
             return;
         var oldScale = this.resizeScale;
-        var availableSpace = this.outerRadius;
+        var availableSpace = this.textRadius;
         this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
         if (this.resizeScale !== oldScale) {
             this.textTransform = "scale(" + this.resizeScale + ", " + this.resizeScale + ")";
@@ -32296,28 +34860,8 @@ var GaugeComponent = (function (_super) {
         this.select.emit(data);
     };
     GaugeComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GaugeComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GaugeComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GaugeComponent.prototype, "customColors", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], GaugeComponent.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], GaugeComponent.prototype, "value", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Number)
@@ -32340,23 +34884,35 @@ var GaugeComponent = (function (_super) {
     ], GaugeComponent.prototype, "smallSegments", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
-    ], GaugeComponent.prototype, "legend", void 0);
+        __metadata('design:type', Array)
+    ], GaugeComponent.prototype, "results", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], GaugeComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], GaugeComponent.prototype, "showAxis", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], GaugeComponent.prototype, "startAngle", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], GaugeComponent.prototype, "angleSpan", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], GaugeComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.ViewChild('textEl'), 
         __metadata('design:type', core_1.ElementRef)
     ], GaugeComponent.prototype, "textEl", void 0);
     GaugeComponent = __decorate([
         core_1.Component({
-            selector: 'gauge',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [legendData]=\"colorScale\"\n      (legendLabelClick)=\"onClick($event)\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g pieArc\n          class=\"background-arc\"\n          [startAngle]=\"0\"\n          [endAngle]=\"backgroundArc.endAngle\"\n          [innerRadius]=\"backgroundArc.innerRadius\"\n          [outerRadius]=\"backgroundArc.outerRadius\"\n          [cornerRadius]=\"backgroundArc.cornerRadius\"\n          [data]=\"backgroundArc.data\"\n          [animate]=\"false\"\n          [pointerEvents]=\"false\">\n        </svg:g>\n        <svg:g pieArc\n          [startAngle]=\"0\"\n          [endAngle]=\"valueArc.endAngle\"\n          [innerRadius]=\"valueArc.innerRadius\"\n          [outerRadius]=\"valueArc.outerRadius\"\n          [cornerRadius]=\"valueArc.cornerRadius\"\n          [fill]=\"colors(value)\"\n          [data]=\"valueArc.data\"\n          [animate]=\"true\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n          class=\"gauge-tick gauge-tick-large\"\n          transform=\"rotate(-90)\"\n          [ngClass]=\"{'highlighted': tick.highlighted}\">\n          <svg:text\n            [style.textAnchor]=\"tick.textAnchor\"\n            [attr.transform]=\"tick.textTransform\"\n            alignment-baseline=\"central\">\n            {{tick.text}}\n          </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n          class=\"gauge-tick gauge-tick-small\"\n          transform=\"rotate(-90)\"\n          [class.highlighted]=\"tick.highlighted\">\n          <svg:path\n            [attr.d]=\"tick.line\"\n          />\n        </svg:g>\n        <svg:g transform=\"rotate(120)\">\n          <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n            {{displayValue()}}\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-gauge',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            (select)=\"onClick($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n        \n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], GaugeComponent);
     return GaugeComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -32381,20 +34937,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
+var linear_gauge_component_1 = __webpack_require__("./src/gauge/linear-gauge.component.ts");
+exports.LinearGaugeComponent = linear_gauge_component_1.LinearGaugeComponent;
 var gauge_component_1 = __webpack_require__("./src/gauge/gauge.component.ts");
 exports.GaugeComponent = gauge_component_1.GaugeComponent;
+var gauge_arc_component_1 = __webpack_require__("./src/gauge/gauge-arc.component.ts");
+exports.GaugeArcComponent = gauge_arc_component_1.GaugeArcComponent;
+var gauge_axis_component_1 = __webpack_require__("./src/gauge/gauge-axis.component.ts");
+exports.GaugeAxisComponent = gauge_axis_component_1.GaugeAxisComponent;
 var pie_chart_module_1 = __webpack_require__("./src/pie-chart/pie-chart.module.ts");
+var bar_chart_module_1 = __webpack_require__("./src/bar-chart/bar-chart.module.ts");
 var GaugeModule = (function () {
     function GaugeModule() {
     }
     GaugeModule = __decorate([
         core_1.NgModule({
-            imports: [chart_common_module_1.ChartCommonModule, pie_chart_module_1.PieChartModule],
+            imports: [chart_common_module_1.ChartCommonModule, pie_chart_module_1.PieChartModule, bar_chart_module_1.BarChartModule],
             declarations: [
-                gauge_component_1.GaugeComponent
+                linear_gauge_component_1.LinearGaugeComponent,
+                gauge_component_1.GaugeComponent,
+                gauge_arc_component_1.GaugeArcComponent,
+                gauge_axis_component_1.GaugeAxisComponent
             ],
             exports: [
-                gauge_component_1.GaugeComponent
+                linear_gauge_component_1.LinearGaugeComponent,
+                gauge_component_1.GaugeComponent,
+                gauge_arc_component_1.GaugeArcComponent,
+                gauge_axis_component_1.GaugeAxisComponent
             ]
         }), 
         __metadata('design:paramtypes', [])
@@ -32416,6 +34985,180 @@ function __export(m) {
 }
 __export(__webpack_require__("./src/gauge/gauge.module.ts"));
 __export(__webpack_require__("./src/gauge/gauge.component.ts"));
+
+
+/***/ },
+
+/***/ "./src/gauge/linear-gauge.component.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
+var d3_1 = __webpack_require__("./src/d3.ts");
+var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
+var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
+var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var LinearGaugeComponent = (function (_super) {
+    __extends(LinearGaugeComponent, _super);
+    function LinearGaugeComponent() {
+        _super.apply(this, arguments);
+        this.min = 0;
+        this.max = 100;
+        this.value = 0;
+        this.margin = [10, 20, 10, 20];
+        this.valueResizeScale = 1;
+        this.unitsResizeScale = 1;
+        this.valueTextTransform = '';
+        this.valueTranslate = '';
+        this.unitsTextTransform = '';
+        this.unitsTranslate = '';
+    }
+    LinearGaugeComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        _super.prototype.ngAfterViewInit.call(this);
+        setTimeout(function () {
+            _this.scaleText('value');
+            _this.scaleText('units');
+        });
+    };
+    LinearGaugeComponent.prototype.update = function () {
+        var _this = this;
+        _super.prototype.update.call(this);
+        this.zone.run(function () {
+            _this.hasPreviousValue = _this.previousValue !== undefined;
+            _this.max = Math.max(_this.max, _this.value);
+            _this.min = Math.min(_this.min, _this.value);
+            if (_this.hasPreviousValue) {
+                _this.max = Math.max(_this.max, _this.previousValue);
+                _this.min = Math.min(_this.min, _this.previousValue);
+            }
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin
+            });
+            _this.valueDomain = _this.getValueDomain();
+            _this.valueScale = _this.getValueScale();
+            _this.displayValue = _this.getDisplayValue();
+            _this.setColors();
+            var xOffset = _this.margin[3] + _this.dims.width / 2;
+            var yOffset = _this.margin[0] + _this.dims.height / 2;
+            _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
+            _this.transformLine = "translate(" + (_this.margin[3] + _this.valueScale(_this.previousValue)) + ", " + yOffset + ")";
+            _this.valueTranslate = "translate(0, -15)";
+            _this.unitsTranslate = "translate(0, 15)";
+            _this.scaleText('value');
+            _this.scaleText('units');
+        });
+    };
+    LinearGaugeComponent.prototype.getValueDomain = function () {
+        return [this.min, this.max];
+    };
+    LinearGaugeComponent.prototype.getValueScale = function () {
+        return d3_1.default.scaleLinear()
+            .range([0, this.dims.width])
+            .domain(this.valueDomain);
+    };
+    LinearGaugeComponent.prototype.getDisplayValue = function () {
+        return this.value.toLocaleString();
+    };
+    LinearGaugeComponent.prototype.scaleText = function (element) {
+        var _this = this;
+        var el;
+        var resizeScale;
+        if (element === 'value') {
+            el = this.valueTextEl;
+            resizeScale = this.valueResizeScale;
+        }
+        else {
+            el = this.unitsTextEl;
+            resizeScale = this.unitsResizeScale;
+        }
+        var _a = el.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
+        if (width === 0 || height === 0)
+            return;
+        var oldScale = resizeScale;
+        var availableWidth = this.dims.width;
+        var availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+        var resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+        var resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+        resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+        if (resizeScale !== oldScale) {
+            if (element === 'value') {
+                this.valueResizeScale = resizeScale;
+                this.valueTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
+            }
+            else {
+                this.unitsResizeScale = resizeScale;
+                this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
+            }
+            this.cd.markForCheck();
+            setTimeout(function () { _this.scaleText(element); });
+        }
+    };
+    LinearGaugeComponent.prototype.onClick = function () {
+        this.select.emit({
+            name: 'Value',
+            value: this.value
+        });
+    };
+    LinearGaugeComponent.prototype.setColors = function () {
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], LinearGaugeComponent.prototype, "min", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], LinearGaugeComponent.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], LinearGaugeComponent.prototype, "value", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], LinearGaugeComponent.prototype, "units", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], LinearGaugeComponent.prototype, "previousValue", void 0);
+    __decorate([
+        core_1.ViewChild('valueTextEl'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], LinearGaugeComponent.prototype, "valueTextEl", void 0);
+    __decorate([
+        core_1.ViewChild('unitsTextEl'), 
+        __metadata('design:type', core_1.ElementRef)
+    ], LinearGaugeComponent.prototype, "unitsTextEl", void 0);
+    LinearGaugeComponent = __decorate([
+        core_1.Component({
+            selector: 'ngx-charts-linear-gauge',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      (click)=\"onClick()\">\n      <svg:g class=\"linear-gauge chart\">\n        <svg:g ngx-charts-bar \n          class=\"background-bar\"\n          [width]=\"dims.width\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n        <svg:g ngx-charts-bar \n          [width]=\"valueScale(value)\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [fill]=\"colors.getColor(units)\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"5\" \n          x2=\"0\"\n          y2=\"15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"-5\" \n          x2=\"0\"\n          y2=\"-15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n        \n        <svg:g [attr.transform]=\"transform\">        \n          <svg:g [attr.transform]=\"valueTranslate\">\n            <svg:text #valueTextEl\n              class=\"value\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"valueTextTransform\"          \n              alignment-baseline=\"after-edge\">\n              {{displayValue}}\n            </svg:text>        \n          </svg:g>\n          \n          <svg:g [attr.transform]=\"unitsTranslate\">\n            <svg:text #unitsTextEl\n              class=\"units\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"unitsTextTransform\"          \n              alignment-baseline=\"before-edge\">\n              {{units}}\n            </svg:text>        \n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        }), 
+        __metadata('design:paramtypes', [])
+    ], LinearGaugeComponent);
+    return LinearGaugeComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.LinearGaugeComponent = LinearGaugeComponent;
 
 
 /***/ },
@@ -32461,7 +35204,7 @@ var HeatCellSeriesComponent = (function () {
                     y: _this.yScale(cell.name),
                     width: _this.xScale.bandwidth(),
                     height: _this.yScale.bandwidth(),
-                    fill: _this.colors(value),
+                    fill: _this.colors.getColor(value),
                     data: value,
                     label: label,
                     series: row.name
@@ -32510,8 +35253,8 @@ var HeatCellSeriesComponent = (function () {
     ], HeatCellSeriesComponent.prototype, "select", void 0);
     HeatCellSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[heatMapCellSeries]',
-            template: "\n    <svg:g \n      heatMapCell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+            selector: 'g[ngx-charts-heat-map-cell-series]',
+            template: "\n    <svg:g \n      ngx-charts-heat-map-cell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -32552,7 +35295,21 @@ var HeatMapCellComponent = (function () {
         this.startOpacity = 0.3;
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
+        this.gradientStops = this.getGradientStops();
         this.loadAnimation();
+    };
+    HeatMapCellComponent.prototype.getGradientStops = function () {
+        return [
+            {
+                offset: 0,
+                color: this.fill,
+                opacity: this.startOpacity
+            },
+            {
+                offset: 100,
+                color: this.fill,
+                opacity: 1
+            }];
     };
     HeatMapCellComponent.prototype.loadAnimation = function () {
         var node = d3_1.default.select(this.element).select('.cell');
@@ -32605,8 +35362,8 @@ var HeatMapCellComponent = (function () {
     ], HeatMapCellComponent.prototype, "select", void 0);
     HeatMapCellComponent = __decorate([
         core_1.Component({
-            selector: 'g[heatMapCell]',
-            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-heat-map-cell]',
+            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
@@ -32644,24 +35401,12 @@ var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var HeatMapComponent = (function (_super) {
     __extends(HeatMapComponent, _super);
-    function HeatMapComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.select = new core_1.EventEmitter();
+    function HeatMapComponent() {
+        _super.apply(this, arguments);
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
     }
-    HeatMapComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    HeatMapComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    HeatMapComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     HeatMapComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -32677,7 +35422,7 @@ var HeatMapComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 11
+                legendType: 'linear'
             });
             _this.formatDates();
             _this.xDomain = _this.getXDomain();
@@ -32686,6 +35431,7 @@ var HeatMapComponent = (function (_super) {
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
             _this.rects = _this.getRects();
         });
@@ -32761,8 +35507,14 @@ var HeatMapComponent = (function (_super) {
         this.select.emit(data);
     };
     HeatMapComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'linear', this.valueDomain);
-        this.colorScale = color_sets_1.generateColorScale(this.scheme, 'linear', this.valueDomain);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'linear', this.valueDomain);
+    };
+    HeatMapComponent.prototype.getLegendOptions = function () {
+        return {
+            scaleType: 'linear',
+            domain: this.valueDomain,
+            colors: this.colors.scale
+        };
     };
     HeatMapComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -32774,22 +35526,6 @@ var HeatMapComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -32822,17 +35558,13 @@ var HeatMapComponent = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Boolean)
     ], HeatMapComponent.prototype, "gradient", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], HeatMapComponent.prototype, "select", void 0);
     HeatMapComponent = __decorate([
         core_1.Component({
-            selector: 'heat-map',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      (legendLabelClick)=\"onClick($event)\"\n      [legendData]=\"colorScale\"\n      [data]=\"valueDomain\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g heatMapCellSeries\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-heat-map',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], HeatMapComponent);
     return HeatMapComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -32913,7 +35645,7 @@ __export(__webpack_require__("./src/heat-map/heat-map-cell-series.component.ts")
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(__webpack_require__("./src/ng2d3.module.ts"));
+__export(__webpack_require__("./src/ngx-charts.module.ts"));
 __export(__webpack_require__("./src/common/index.ts"));
 __export(__webpack_require__("./src/area-chart/index.ts"));
 __export(__webpack_require__("./src/bar-chart/index.ts"));
@@ -32972,14 +35704,11 @@ var d3_1 = __webpack_require__("./src/d3.ts");
 var moment = __webpack_require__("./node_modules/moment/moment.js");
 var LineChartComponent = (function (_super) {
     __extends(LineChartComponent, _super);
-    function LineChartComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function LineChartComponent() {
+        _super.apply(this, arguments);
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -32988,15 +35717,6 @@ var LineChartComponent = (function (_super) {
         this.timelineHeight = 50;
         this.timelinePadding = 10;
     }
-    LineChartComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    LineChartComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    LineChartComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     LineChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -33012,7 +35732,7 @@ var LineChartComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                columns: 10
+                legendType: _this.schemeType
             });
             if (_this.timeline) {
                 _this.dims.height -= (_this.timelineHeight + _this.margin[2] + _this.timelinePadding);
@@ -33027,6 +35747,7 @@ var LineChartComponent = (function (_super) {
             _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
             _this.updateTimeline();
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
             var pageUrl = window.location.href;
             _this.clipPathId = 'clip' + id_1.id().toString();
@@ -33037,13 +35758,12 @@ var LineChartComponent = (function (_super) {
         if (this.timeline) {
             this.timelineWidth = this.width;
             if (this.legend) {
-                this.timelineWidth = this.width * 10.0 / 12.0;
+                this.timelineWidth = this.dims.width;
             }
-            this.timelineWidth -= (this.margin[3] + this.margin[1]);
             this.timelineXDomain = this.getXDomain();
             this.timelineXScale = this.getXScale(this.timelineXDomain, this.timelineWidth);
             this.timelineYScale = this.getYScale(this.yDomain, this.timelineHeight);
-            this.timelineTransform = "translate(" + this.margin[3] + ", " + -this.margin[2] + ")";
+            this.timelineTransform = "translate(" + this.dims.xOffset + ", " + -this.margin[2] + ")";
         }
     };
     LineChartComponent.prototype.getXDomain = function () {
@@ -33168,7 +35888,30 @@ var LineChartComponent = (function (_super) {
         return item.name;
     };
     LineChartComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        var domain;
+        if (this.schemeType === 'ordinal') {
+            domain = this.seriesDomain;
+        }
+        else {
+            domain = this.yDomain;
+        }
+        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+    };
+    LineChartComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.seriesDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.yDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
     };
     LineChartComponent.prototype.updateYAxisWidth = function (_a) {
         var width = _a.width;
@@ -33180,14 +35923,20 @@ var LineChartComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
-    LineChartComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    LineChartComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    LineChartComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    LineChartComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
@@ -33195,23 +35944,7 @@ var LineChartComponent = (function (_super) {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], LineChartComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], LineChartComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], LineChartComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], LineChartComponent.prototype, "legend", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], LineChartComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -33261,9 +35994,9 @@ var LineChartComponent = (function (_super) {
         __metadata('design:type', Array)
     ], LineChartComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], LineChartComponent.prototype, "select", void 0);
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], LineChartComponent.prototype, "schemeType", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -33280,11 +36013,11 @@ var LineChartComponent = (function (_super) {
     ], LineChartComponent.prototype, "hideCircles", null);
     LineChartComponent = __decorate([
         core_1.Component({
-            selector: 'line-chart',
-            template: "\n    <chart\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick({ series: $event.name })\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [colors]=\"colors\"\n      [legendData]=\"seriesDomain\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g xAxis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g yAxis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g lineSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g areaTooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g circleSeries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [color]=\"colors(series.name)\"\n              [strokeColor]=\"colors(series.name)\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [activeEntries]=\"activeEntries\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g\n        timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g lineSeries\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [color]=\"colors(series.name)\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-line-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-line-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-ceries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [activeEntries]=\"activeEntries\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-line-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], LineChartComponent);
     return LineChartComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -33358,6 +36091,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var moment = __webpack_require__("./node_modules/moment/moment.js");
+var id_1 = __webpack_require__("./src/utils/id.ts");
 var sort_1 = __webpack_require__("./src/utils/sort.ts");
 var LineSeriesComponent = (function () {
     function LineSeriesComponent() {
@@ -33366,6 +36100,7 @@ var LineSeriesComponent = (function () {
         this.update();
     };
     LineSeriesComponent.prototype.update = function () {
+        this.updateGradients();
         var line = this.getLineGenerator();
         var area = this.getAreaGenerator();
         var data = this.sortData(this.data.series);
@@ -33416,15 +36151,39 @@ var LineSeriesComponent = (function () {
         }
         return data;
     };
+    LineSeriesComponent.prototype.updateGradients = function () {
+        if (this.colors.scaleType === 'linear') {
+            this.hasGradient = true;
+            var pageUrl = window.location.href;
+            this.gradientId = 'grad' + id_1.id().toString();
+            this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
+            var values = this.data.series.map(function (d) { return d.value; });
+            var max = Math.max.apply(Math, values);
+            var min = Math.min.apply(Math, values);
+            this.gradientStops = this.colors.getLinearGradientStops(max, min);
+            this.areaGradientStops = this.colors.getLinearGradientStops(max);
+        }
+        else {
+            this.hasGradient = false;
+            this.gradientStops = undefined;
+            this.areaGradientStops = undefined;
+        }
+    };
     LineSeriesComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry.name) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item !== undefined;
     };
     LineSeriesComponent.prototype.isInactive = function (entry) {
-        return this.activeEntries &&
-            this.activeEntries.length !== 0 &&
-            this.activeEntries.indexOf(entry.name) === -1;
+        if (!this.activeEntries || this.activeEntries.length === 0)
+            return false;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item === undefined;
     };
     __decorate([
         core_1.Input(), 
@@ -33441,7 +36200,7 @@ var LineSeriesComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], LineSeriesComponent.prototype, "color", void 0);
+    ], LineSeriesComponent.prototype, "colors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -33456,8 +36215,8 @@ var LineSeriesComponent = (function () {
     ], LineSeriesComponent.prototype, "activeEntries", void 0);
     LineSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[lineSeries]',
-            template: "\n    <svg:g area\n      class=\"line-highlight\"\n      [data]=\"data\"\n      [path]=\"areaPath\"\n      [fill]=\"color\"\n      [opacity]=\"0.25\"\n      [startOpacity]=\"0\"\n      [gradient]=\"true\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n    <svg:g line\n      class=\"line-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [stroke]=\"color\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
+            selector: 'g[ngx-charts-line-series]',
+            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />    \n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -33507,7 +36266,7 @@ var LineComponent = (function () {
     ], LineComponent.prototype, "select", void 0);
     LineComponent = __decorate([
         core_1.Component({
-            selector: 'g[line]',
+            selector: 'g[ngx-charts-line]',
             template: "\n    <svg:path\n      [@animationState]=\"'active'\"\n      class=\"line\"\n      [attr.d]=\"path\"\n      fill=\"none\"\n      [attr.stroke]=\"stroke\"\n      stroke-width=\"1.5px\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
@@ -33533,7 +36292,7 @@ exports.LineComponent = LineComponent;
 
 /***/ },
 
-/***/ "./src/ng2d3.module.ts":
+/***/ "./src/ngx-charts.module.ts":
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33558,10 +36317,10 @@ var number_card_module_1 = __webpack_require__("./src/number-card/number-card.mo
 var pie_chart_module_1 = __webpack_require__("./src/pie-chart/pie-chart.module.ts");
 var tree_map_module_1 = __webpack_require__("./src/tree-map/tree-map.module.ts");
 var gauge_module_1 = __webpack_require__("./src/gauge/gauge.module.ts");
-var NG2D3Module = (function () {
-    function NG2D3Module() {
+var NgxChartsModule = (function () {
+    function NgxChartsModule() {
     }
-    NG2D3Module = __decorate([
+    NgxChartsModule = __decorate([
         core_1.NgModule({
             exports: [
                 chart_common_module_1.ChartCommonModule,
@@ -33577,21 +36336,21 @@ var NG2D3Module = (function () {
             ]
         }), 
         __metadata('design:paramtypes', [])
-    ], NG2D3Module);
-    return NG2D3Module;
+    ], NgxChartsModule);
+    return NgxChartsModule;
 }());
-exports.NG2D3Module = NG2D3Module;
+exports.NgxChartsModule = NgxChartsModule;
 
 
 /***/ },
 
-/***/ "./src/ng2d3.scss":
+/***/ "./src/ngx-charts.scss":
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/ng2d3.scss");
+var content = __webpack_require__("./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/ngx-charts.scss");
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__("./node_modules/style-loader/addStyles.js")(content, {});
@@ -33600,8 +36359,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./ng2d3.scss", function() {
-			var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./ng2d3.scss");
+		module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./ngx-charts.scss", function() {
+			var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./ngx-charts.scss");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -33659,7 +36418,7 @@ var CardSeriesComponent = (function () {
                 y: d.y,
                 width: d.width,
                 height: d.height,
-                color: _this.colors(label),
+                color: _this.colors.getColor(label),
                 label: label,
                 data: d.data,
                 tooltipText: label + ": " + value
@@ -33690,8 +36449,8 @@ var CardSeriesComponent = (function () {
     ], CardSeriesComponent.prototype, "select", void 0);
     CardSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[cardSeries]',
-            template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event)\"\n    />\n  ",
+            selector: 'g[ngx-charts-card-series]',
+            template: "\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.NgZone])
@@ -33841,7 +36600,7 @@ var CardComponent = (function () {
     ], CardComponent.prototype, "textEl", void 0);
     CardComponent = __decorate([
         core_1.Component({
-            selector: 'g[card]',
+            selector: 'g[ngx-charts-card]',
             template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          [style.color]=\"getTextColor(color)\"\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy=\".35em\"\n        class=\"value-text\"\n        [style.fill]=\"getTextColor(color)\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
@@ -33896,23 +36655,10 @@ var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var grid_layout_helper_1 = __webpack_require__("./src/common/grid-layout.helper.ts");
 var NumberCardComponent = (function (_super) {
     __extends(NumberCardComponent, _super);
-    function NumberCardComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function NumberCardComponent() {
+        _super.apply(this, arguments);
         this.margin = [10, 10, 10, 10];
-        this.select = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
     }
-    NumberCardComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    NumberCardComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    NumberCardComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     NumberCardComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -33935,43 +36681,15 @@ var NumberCardComponent = (function (_super) {
         this.select.emit(data);
     };
     NumberCardComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], NumberCardComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], NumberCardComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], NumberCardComponent.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], NumberCardComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], NumberCardComponent.prototype, "customColors", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], NumberCardComponent.prototype, "select", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], NumberCardComponent.prototype, "legendLabelClick", void 0);
     NumberCardComponent = __decorate([
         core_1.Component({
-            selector: 'number-card',
-            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g cardSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-number-card',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], NumberCardComponent);
     return NumberCardComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -34053,25 +36771,13 @@ var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var AdvancedPieChartComponent = (function (_super) {
     __extends(AdvancedPieChartComponent, _super);
-    function AdvancedPieChartComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.margin = [20, 20, 20, 20];
+    function AdvancedPieChartComponent() {
+        _super.apply(this, arguments);
         this.activeEntries = [];
-        this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
+        this.margin = [20, 20, 20, 20];
     }
-    AdvancedPieChartComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    AdvancedPieChartComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    AdvancedPieChartComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     AdvancedPieChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -34098,7 +36804,7 @@ var AdvancedPieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     AdvancedPieChartComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     AdvancedPieChartComponent.prototype.onActivate = function (event) {
         if (this.activeEntries.indexOf(event) > -1)
@@ -34114,36 +36820,12 @@ var AdvancedPieChartComponent = (function (_super) {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AdvancedPieChartComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AdvancedPieChartComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AdvancedPieChartComponent.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AdvancedPieChartComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], AdvancedPieChartComponent.prototype, "customColors", void 0);
-    __decorate([
-        core_1.Input(), 
         __metadata('design:type', Boolean)
     ], AdvancedPieChartComponent.prototype, "gradient", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Array)
     ], AdvancedPieChartComponent.prototype, "activeEntries", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], AdvancedPieChartComponent.prototype, "select", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
@@ -34154,11 +36836,11 @@ var AdvancedPieChartComponent = (function (_super) {
     ], AdvancedPieChartComponent.prototype, "deactivate", void 0);
     AdvancedPieChartComponent = __decorate([
         core_1.Component({
-            selector: 'advanced-pie-chart',
-            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <chart\n          [colors]=\"colors\"\n          [legend]=\"legend\"\n          [legendData]=\"domain\"\n          (legendLabelClick)=\"onClick($event)\"\n          (legendLabelActivate)=\"onActivate($event)\"\n          (legendLabelDeactivate)=\"onDeactivate($event)\"\n          [view]=\"[dims.width, dims.height]\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g pieSeries\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </chart>\n      </div>\n      <div \n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\">\n        <advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </advanced-legend>\n      </div>\n    </div>\n  ",
+            selector: 'ngx-charts-advanced-pie-chart',
+            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <ngx-charts-chart\n          [view]=\"[width, height]\"\n          [showLegend]=\"false\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g ngx-charts-pie-series\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </ngx-charts-chart>\n      </div>\n      <div \n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\">\n        <ngx-charts-advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </ngx-charts-advanced-legend>\n      </div>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], AdvancedPieChartComponent);
     return AdvancedPieChartComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -34214,6 +36896,8 @@ var PieArcComponent = (function () {
         this.pointerEvents = true;
         this.isActive = false;
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
     }
@@ -34226,7 +36910,6 @@ var PieArcComponent = (function () {
         this.startOpacity = 0.5;
         var pageUrl = window.location.href;
         this.radialGradientId = 'linearGrad' + id_1.id().toString();
-        this.linearGradientId = 'radialGrad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
         if (this.animate) {
             if (this.initialized) {
@@ -34350,10 +37033,18 @@ var PieArcComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], PieArcComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], PieArcComponent.prototype, "deactivate", void 0);
     PieArcComponent = __decorate([
         core_1.Component({
-            selector: 'g[pieArc]',
-            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g svgLinearGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"linearGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n        <svg:g svgRadialGradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-pie-arc]',
+            template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
@@ -34390,11 +37081,8 @@ var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var PieChartComponent = (function (_super) {
     __extends(PieChartComponent, _super);
-    function PieChartComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.margin = [20, 20, 20, 20];
+    function PieChartComponent() {
+        _super.apply(this, arguments);
         this.labels = false;
         this.legend = false;
         this.explodeSlices = false;
@@ -34403,16 +37091,8 @@ var PieChartComponent = (function (_super) {
         this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
+        this.margin = [20, 20, 20, 20];
     }
-    PieChartComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    PieChartComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    PieChartComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     PieChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -34448,6 +37128,7 @@ var PieChartComponent = (function (_super) {
                 return _this.domain.indexOf(a.name) - _this.domain.indexOf(b.name);
             });
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
         });
     };
     PieChartComponent.prototype.getDomain = function () {
@@ -34470,40 +37151,33 @@ var PieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     PieChartComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    PieChartComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    PieChartComponent.prototype.getLegendOptions = function () {
+        return {
+            scaleType: 'ordinal',
+            domain: this.domain,
+            colors: this.colors
+        };
+    };
+    PieChartComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    PieChartComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    PieChartComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieChartComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieChartComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieChartComponent.prototype, "margin", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieChartComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieChartComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
@@ -34542,11 +37216,11 @@ var PieChartComponent = (function (_super) {
     ], PieChartComponent.prototype, "deactivate", void 0);
     PieChartComponent = __decorate([
         core_1.Component({
-            selector: 'pie-chart',
-            template: "\n    <chart\n      [colors]=\"colors\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-pie-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], PieChartComponent);
     return PieChartComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -34707,8 +37381,8 @@ var PieGridSeriesComponent = (function () {
     ], PieGridSeriesComponent.prototype, "select", void 0);
     PieGridSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[pieGridSeries]',
-            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g pieArc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-pie-grid-series]',
+            template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g ngx-charts-pie-arc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
@@ -34749,23 +37423,10 @@ var grid_layout_helper_1 = __webpack_require__("./src/common/grid-layout.helper.
 var label_helper_1 = __webpack_require__("./src/common/label.helper.ts");
 var PieGridComponent = (function (_super) {
     __extends(PieGridComponent, _super);
-    function PieGridComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.select = new core_1.EventEmitter();
-        this.legendLabelClick = new core_1.EventEmitter();
+    function PieGridComponent() {
+        _super.apply(this, arguments);
         this.margin = [20, 20, 20, 20];
     }
-    PieGridComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    PieGridComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    PieGridComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     PieGridComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -34805,7 +37466,7 @@ var PieGridComponent = (function (_super) {
                     return 'rgba(100,100,100,0.3)';
                 }
                 else {
-                    return _this.colorScale(label);
+                    return _this.colorScale.getColor(label);
                 }
             };
             var xPos = d.x + (d.width - padding) / 2;
@@ -34838,39 +37499,15 @@ var PieGridComponent = (function (_super) {
         this.select.emit(data);
     };
     PieGridComponent.prototype.setColors = function () {
-        this.colorScale = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colorScale = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PieGridComponent.prototype, "customColors", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', Object)
-    ], PieGridComponent.prototype, "select", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], PieGridComponent.prototype, "legendLabelClick", void 0);
     PieGridComponent = __decorate([
         core_1.Component({
-            selector: 'pie-grid',
-            template: "\n    <chart\n      [legend]=\"false\"\n      (legendLabelClick)=\"onClick($event)\"\n      [view]=\"[width, height]\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g pieGridSeries\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            swui-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-pie-grid',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], PieGridComponent);
     return PieGridComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -34973,7 +37610,7 @@ var PieLabelComponent = (function () {
     ], PieLabelComponent.prototype, "explodeSlices", void 0);
     PieLabelComponent = __decorate([
         core_1.Component({
-            selector: 'g[pieLabel]',
+            selector: 'g[ngx-charts-pie-label]',
             template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
@@ -35009,6 +37646,8 @@ var PieSeriesComponent = (function () {
         this.innerRadius = 60;
         this.outerRadius = 80;
         this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
     }
     PieSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -35069,7 +37708,7 @@ var PieSeriesComponent = (function () {
         return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     PieSeriesComponent.prototype.color = function (arc) {
-        return this.colors(this.label(arc));
+        return this.colors.getColor(this.label(arc));
     };
     PieSeriesComponent.prototype.trackBy = function (index, item) {
         return item.data.name;
@@ -35080,8 +37719,10 @@ var PieSeriesComponent = (function () {
     PieSeriesComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        var label = this.label(entry);
-        return this.activeEntries.indexOf(label) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name && entry.series === d.series;
+        });
+        return item !== undefined;
     };
     __decorate([
         core_1.Input(), 
@@ -35123,10 +37764,18 @@ var PieSeriesComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], PieSeriesComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], PieSeriesComponent.prototype, "deactivate", void 0);
     PieSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[pieSeries]',
-            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g pieLabel\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g \n        pieArc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc)\"\n        (select)=\"onClick($event)\"\n        [gradient]=\"gradient\" \n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-pie-series]',
+            template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g \n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\" \n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"        \n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -35134,6 +37783,254 @@ var PieSeriesComponent = (function () {
     return PieSeriesComponent;
 }());
 exports.PieSeriesComponent = PieSeriesComponent;
+
+
+/***/ },
+
+/***/ "./src/services/index.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/services/injection.service.ts"));
+__export(__webpack_require__("./src/services/injection-registery.service.ts"));
+
+
+/***/ },
+
+/***/ "./src/services/injection-registery.service.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
+var _1 = __webpack_require__("./src/services/index.ts");
+var InjectionRegistery = (function () {
+    function InjectionRegistery(injectionService) {
+        this.injectionService = injectionService;
+        this.defaults = {};
+        this.components = new Map();
+    }
+    InjectionRegistery.prototype.getByType = function (type) {
+        if (type === void 0) { type = this.type; }
+        return this.components.get(type);
+    };
+    InjectionRegistery.prototype.create = function (bindings) {
+        return this.createByType(this.type, bindings);
+    };
+    InjectionRegistery.prototype.createByType = function (type, bindings) {
+        bindings = this.assignDefaults(bindings);
+        var component = this.injectComponent(type, bindings);
+        this.register(type, component);
+        return component;
+    };
+    InjectionRegistery.prototype.destroy = function (instance) {
+        var compsByType = this.components.get(instance.componentType);
+        if (compsByType) {
+            var idx = compsByType.indexOf(instance);
+            if (idx > -1) {
+                var component = compsByType[idx];
+                component.destroy();
+                compsByType.splice(idx, 1);
+            }
+        }
+    };
+    InjectionRegistery.prototype.destroyAll = function () {
+        this.destroyByType(this.type);
+    };
+    InjectionRegistery.prototype.destroyByType = function (type) {
+        var comps = this.components.get(type);
+        if (comps) {
+            for (var _i = 0, comps_1 = comps; _i < comps_1.length; _i++) {
+                var comp = comps_1[_i];
+                this.destroy(comp);
+            }
+        }
+    };
+    InjectionRegistery.prototype.assignDefaults = function (bindings) {
+        var _a = this.defaults, inputs = _a.inputs, outputs = _a.outputs;
+        if (!bindings.inputs && !bindings.outputs) {
+            bindings = { inputs: bindings };
+        }
+        if (inputs) {
+            bindings.inputs = Object.assign(inputs, bindings.inputs);
+        }
+        if (outputs) {
+            bindings.outputs = Object.assign(outputs, bindings.outputs);
+        }
+        return bindings;
+    };
+    InjectionRegistery.prototype.injectComponent = function (type, bindings) {
+        return this.injectionService.appendComponent(type, bindings);
+    };
+    InjectionRegistery.prototype.register = function (type, component) {
+        if (!this.components.has(type)) {
+            this.components.set(type, []);
+        }
+        var types = this.components.get(type);
+        types.push(component);
+    };
+    InjectionRegistery = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [_1.InjectionService])
+    ], InjectionRegistery);
+    return InjectionRegistery;
+}());
+exports.InjectionRegistery = InjectionRegistery;
+
+
+/***/ },
+
+/***/ "./src/services/injection.service.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
+/**
+ * Injection service is a helper to append components
+ * dynamically to a known location in the DOM, most
+ * noteably for dialogs/tooltips appending to body.
+ *
+ * @export
+ * @class InjectionService
+ */
+var InjectionService = (function () {
+    function InjectionService(applicationRef, componentFactoryResolver, injector) {
+        this.applicationRef = applicationRef;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.injector = injector;
+    }
+    /**
+     * Gets the root view container to inject the component to.
+     *
+     * @returns {ComponentRef<any>}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.getRootViewContainer = function () {
+        if (this._container)
+            return this._container;
+        var rootComponents = this.applicationRef['_rootComponents'];
+        if (rootComponents.length)
+            return rootComponents[0];
+        throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
+    };
+    /**
+     * Overrides the default root view container. This is useful for
+     * things like ngUpgrade that doesn't have a ApplicationRef root.
+     *
+     * @param {any} container
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.setRootViewContainer = function (container) {
+        this._container = container;
+    };
+    /**
+     * Gets the html element for a component ref.
+     *
+     * @param {ComponentRef<any>} componentRef
+     * @returns {HTMLElement}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.getComponentRootNode = function (componentRef) {
+        return componentRef.hostView.rootNodes[0];
+    };
+    /**
+     * Gets the root component container html element.
+     *
+     * @returns {HTMLElement}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.getRootViewContainerNode = function () {
+        return this.getComponentRootNode(this.getRootViewContainer());
+    };
+    /**
+     * Projects the bindings onto the component
+     *
+     * @param {ComponentRef<any>} component
+     * @param {*} options
+     * @returns {ComponentRef<any>}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.projectComponentBindings = function (component, bindings) {
+        if (bindings) {
+            if (bindings.inputs !== undefined) {
+                var bindingKeys = Object.getOwnPropertyNames(bindings.inputs);
+                for (var _i = 0, bindingKeys_1 = bindingKeys; _i < bindingKeys_1.length; _i++) {
+                    var bindingName = bindingKeys_1[_i];
+                    component.instance[bindingName] = bindings.inputs[bindingName];
+                }
+            }
+            if (bindings.outputs !== undefined) {
+                var eventKeys = Object.getOwnPropertyNames(bindings.outputs);
+                for (var _a = 0, eventKeys_1 = eventKeys; _a < eventKeys_1.length; _a++) {
+                    var eventName = eventKeys_1[_a];
+                    component.instance[eventName] = bindings.outputs[eventName];
+                }
+            }
+        }
+        return component;
+    };
+    /**
+     * Appends a component to a adjacent location
+     *
+     * @template T
+     * @param {Type<T>} componentClass
+     * @param {*} [options={}]
+     * @param {Element} [location=this.getRootViewContainerNode()]
+     * @returns {ComponentRef<any>}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.appendComponent = function (componentClass, bindings, location) {
+        if (bindings === void 0) { bindings = {}; }
+        if (location === void 0) { location = this.getRootViewContainerNode(); }
+        var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
+        var componentRef = componentFactory.create(this.injector);
+        var appRef = this.applicationRef;
+        var componentRootNode = this.getComponentRootNode(componentRef);
+        // project the options passed to the component instance
+        this.projectComponentBindings(componentRef, bindings);
+        appRef.attachView(componentRef.hostView);
+        componentRef.onDestroy(function () {
+            appRef.detachView(componentRef.hostView);
+        });
+        location.appendChild(componentRootNode);
+        return componentRef;
+    };
+    InjectionService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
+    ], InjectionService);
+    return InjectionService;
+}());
+exports.InjectionService = InjectionService;
 
 
 /***/ },
@@ -35189,7 +38086,7 @@ var TreeMapCellSeriesComponent = (function () {
                 y: d.y0,
                 width: d.x1 - d.x0,
                 height: d.y1 - d.y0,
-                fill: _this.colors(label),
+                fill: _this.colors.getColor(label),
                 label: label,
                 value: d.value,
                 valueType: d.valueType
@@ -35224,8 +38121,8 @@ var TreeMapCellSeriesComponent = (function () {
     ], TreeMapCellSeriesComponent.prototype, "select", void 0);
     TreeMapCellSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[treeMapCellSeries]',
-            template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+            selector: 'g[ngx-charts-tree-map-cell-series]',
+            template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -35336,8 +38233,8 @@ var TreeMapCellComponent = (function () {
     ], TreeMapCellComponent.prototype, "select", void 0);
     TreeMapCellComponent = __decorate([
         core_1.Component({
-            selector: 'g[treeMapCell]',
-            template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\">\n            {{label}}\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span \n            class=\"treemap-val\" \n            count-up \n            [countTo]=\"value\">\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
+            selector: 'g[ngx-charts-tree-map-cell]',
+            template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\">\n            {{label}}\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span \n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\">\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
@@ -35375,22 +38272,11 @@ var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var TreeMapComponent = (function (_super) {
     __extends(TreeMapComponent, _super);
-    function TreeMapComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
+    function TreeMapComponent() {
+        _super.apply(this, arguments);
         this.select = new core_1.EventEmitter();
         this.margin = [10, 10, 10, 10];
     }
-    TreeMapComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    TreeMapComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    TreeMapComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     TreeMapComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -35398,8 +38284,7 @@ var TreeMapComponent = (function (_super) {
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
-                margins: _this.margin,
-                columns: 12
+                margins: _this.margin
             });
             _this.domain = _this.getDomain();
             _this.treemap = d3_1.default.treemap()
@@ -35434,35 +38319,23 @@ var TreeMapComponent = (function (_super) {
         this.select.emit(data);
     };
     TreeMapComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
-    ], TreeMapComponent.prototype, "view", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
     ], TreeMapComponent.prototype, "results", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], TreeMapComponent.prototype, "scheme", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], TreeMapComponent.prototype, "customColors", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], TreeMapComponent.prototype, "select", void 0);
     TreeMapComponent = __decorate([
         core_1.Component({
-            selector: 'tree-map',
-            template: "\n    <chart\n      [legend]=\"false\"\n      [view]=\"[width, height]\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g treeMapCellSeries\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+            selector: 'ngx-charts-tree-map',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g ngx-charts-tree-map-cell-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
+        __metadata('design:paramtypes', [])
     ], TreeMapComponent);
     return TreeMapComponent;
 }(base_chart_component_1.BaseChartComponent));
@@ -35617,45 +38490,54 @@ exports.colorSets = [
         'domain': ["#4e31a5", "#9c25a7", "#3065ab", "#57468b", "#904497", "#46648b", "#32118d", "#a00fb3", "#1052a2", "#6e51bd", "#b63cc3", "#6c97cb", "#8671c1", "#b455be", "#7496c3"]
     }
 ];
-function generateColorScale(scheme, type, domain) {
-    if (typeof (scheme) === 'string') {
-        scheme = exports.colorSets.find(function (cs) {
-            return cs.name === scheme;
-        });
+var ColorHelper = (function () {
+    function ColorHelper(scheme, type, domain, customColors) {
+        if (typeof (scheme) === 'string') {
+            scheme = exports.colorSets.find(function (cs) {
+                return cs.name === scheme;
+            });
+        }
+        this.colorDomain = scheme.domain;
+        this.scaleType = type;
+        this.domain = domain;
+        this.scale = this.generateColorScheme(scheme, type, domain);
     }
-    var colorScale;
-    if (type === 'quantile') {
-        colorScale = d3_1.default.scaleQuantile()
-            .range(scheme.domain)
-            .domain(domain);
-    }
-    else if (type === 'ordinal') {
-        colorScale = d3_1.default.scaleOrdinal()
-            .range(scheme.domain)
-            .domain(domain);
-    }
-    else if (type === 'linear') {
-        colorScale = d3_1.default.scaleLinear()
-            .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
-            .range(scheme.domain);
-    }
-    return colorScale;
-}
-exports.generateColorScale = generateColorScale;
-function colorHelper(scheme, type, domain, customColors) {
-    var colorScale = generateColorScale(scheme, type, domain);
-    var colorScaleFunction = function (value) {
-        if (type === 'linear') {
+    ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
+        if (typeof (scheme) === 'string') {
+            scheme = exports.colorSets.find(function (cs) {
+                return cs.name === scheme;
+            });
+        }
+        var colorScale;
+        if (type === 'quantile') {
+            colorScale = d3_1.default.scaleQuantile()
+                .range(scheme.domain)
+                .domain(domain);
+        }
+        else if (type === 'ordinal') {
+            colorScale = d3_1.default.scaleOrdinal()
+                .range(scheme.domain)
+                .domain(domain);
+        }
+        else if (type === 'linear') {
+            colorScale = d3_1.default.scaleLinear()
+                .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
+                .range(scheme.domain);
+        }
+        return colorScale;
+    };
+    ColorHelper.prototype.getColor = function (value) {
+        if (this.scaleType === 'linear') {
             var valueScale = d3_1.default.scaleLinear()
-                .domain(domain)
+                .domain(this.domain)
                 .range([0, 1]);
-            return (colorScale(valueScale(value)));
+            return (this.scale(valueScale(value)));
         }
         else {
             var formattedValue_1 = value.toString();
             var found = undefined; // todo type customColors
-            if (customColors && customColors.length > 0) {
-                found = customColors.find(function (mapping) {
+            if (this.customColors && this.customColors.length > 0) {
+                found = this.customColors.find(function (mapping) {
                     return mapping.name === formattedValue_1.toLowerCase();
                 });
             }
@@ -35663,13 +38545,66 @@ function colorHelper(scheme, type, domain, customColors) {
                 return found.value;
             }
             else {
-                return colorScale(value);
+                return this.scale(value);
             }
         }
     };
-    return colorScaleFunction;
-}
-exports.colorHelper = colorHelper;
+    ColorHelper.prototype.getLinearGradientStops = function (value, start) {
+        if (!start) {
+            start = this.domain[0];
+        }
+        var valueScale = d3_1.default.scaleLinear()
+            .domain(this.domain)
+            .range([0, 1]);
+        var colorValueScale = d3_1.default.scaleBand()
+            .domain(this.colorDomain)
+            .range([0, 1]);
+        var endColor = this.getColor(value);
+        // generate the stops
+        var startVal = valueScale(start);
+        var startColor = this.getColor(start);
+        var endVal = valueScale(value);
+        var i = 0;
+        var currentVal = startVal;
+        var stops = [];
+        stops.push({
+            color: startColor,
+            offset: 0,
+            opacity: 1
+        });
+        while (currentVal < endVal && i < this.colorDomain.length) {
+            var color = this.colorDomain[i];
+            var offset = colorValueScale(color);
+            if (offset <= startVal) {
+                i++;
+                continue;
+            }
+            if (offset >= endVal) {
+                break;
+            }
+            stops.push({
+                color: color,
+                offset: offset,
+                opacity: 1
+            });
+            currentVal = offset;
+            i++;
+        }
+        stops.push({
+            color: endColor,
+            offset: endVal,
+            opacity: 1
+        });
+        // normalize the offsets into percentages
+        for (var _i = 0, stops_1 = stops; _i < stops_1.length; _i++) {
+            var s = stops_1[_i];
+            s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
+        }
+        return stops;
+    };
+    return ColorHelper;
+}());
+exports.ColorHelper = ColorHelper;
 
 
 /***/ },
@@ -35765,217 +38700,6 @@ function id() {
     return id();
 }
 exports.id = id;
-
-
-/***/ },
-
-/***/ "./src/utils/injection.service.ts":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-/**
- * Injection service is a helper to append components
- * dynamically to a known location in the DOM, most
- * noteably for dialogs/tooltips appending to body.
- *
- * @export
- * @class InjectionService
- */
-var InjectionService = (function () {
-    function InjectionService(applicationRef, componentFactoryResolver, injector) {
-        this.applicationRef = applicationRef;
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.injector = injector;
-    }
-    /**
-     * Gets the root view container to inject the component to.
-     *
-     * @returns {ComponentRef<any>}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.getRootViewContainer = function () {
-        var rootComponents = this.applicationRef['_rootComponents'];
-        if (rootComponents.length)
-            return rootComponents[0];
-        if (this._container)
-            return this._container;
-        throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
-    };
-    /**
-     * Overrides the default root view container. This is useful for
-     * things like ngUpgrade that doesn't have a ApplicationRef root.
-     *
-     * @param {any} container
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.setRootViewContainer = function (container) {
-        this._container = container;
-    };
-    /**
-     * Gets the html element for a component ref.
-     *
-     * @param {ComponentRef<any>} componentRef
-     * @returns {HTMLElement}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.getComponentRootNode = function (componentRef) {
-        if (componentRef.hostView) {
-            return componentRef.hostView.rootNodes[0];
-        }
-        else {
-            return componentRef.element.nativeElement;
-        }
-    };
-    /**
-     * Gets the root component container html element.
-     *
-     * @returns {HTMLElement}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.getRootViewContainerNode = function () {
-        return this.getComponentRootNode(this.getRootViewContainer());
-    };
-    /**
-     * Projects the inputs onto the component
-     *
-     * @param {ComponentRef<any>} component
-     * @param {*} options
-     * @returns {ComponentRef<any>}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.projectComponentInputs = function (component, options) {
-        if (options) {
-            var props = Object.getOwnPropertyNames(options);
-            for (var _i = 0, props_1 = props; _i < props_1.length; _i++) {
-                var prop = props_1[_i];
-                component.instance[prop] = options[prop];
-            }
-        }
-        return component;
-    };
-    /**
-     * Appends a component to a adjacent location
-     *
-     * @template T
-     * @param {Type<T>} componentClass
-     * @param {*} [options={}]
-     * @param {Element} [location=this.getRootViewContainerNode()]
-     * @returns {ComponentRef<any>}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.appendComponent = function (componentClass, options, location) {
-        if (options === void 0) { options = {}; }
-        if (location === void 0) { location = this.getRootViewContainerNode(); }
-        var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
-        var componentRef = componentFactory.create(this.injector);
-        var appRef = this.applicationRef;
-        var componentRootNode = this.getComponentRootNode(componentRef);
-        // project the options passed to the component instance
-        this.projectComponentInputs(componentRef, options);
-        // ApplicationRef's attachView and detachView methods are in Angular ^2.2.1 but not before.
-        // The `else` clause here can be removed once 2.2.1 is released.
-        if (appRef['attachView']) {
-            appRef.attachView(componentRef.hostView);
-            componentRef.onDestroy(function () {
-                appRef.detachView(componentRef.hostView);
-            });
-        }
-        else {
-            // When creating a component outside of a ViewContainer, we need to manually register
-            // its ChangeDetector with the application. This API is unfortunately not published
-            // in Angular <= 2.2.0. The change detector must also be deregistered when the component
-            // is destroyed to prevent memory leaks.
-            var changeDetectorRef_1 = componentRef.changeDetectorRef;
-            appRef.registerChangeDetector(changeDetectorRef_1);
-            componentRef.onDestroy(function () {
-                appRef.unregisterChangeDetector(changeDetectorRef_1);
-                // Normally the ViewContainer will remove the component's nodes from the DOM.
-                // Without a ViewContainer, we need to manually remove the nodes.
-                if (componentRootNode.parentNode) {
-                    componentRootNode.parentNode.removeChild(componentRootNode);
-                }
-            });
-        }
-        location.appendChild(componentRootNode);
-        return componentRef;
-    };
-    InjectionService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
-    ], InjectionService);
-    return InjectionService;
-}());
-exports.InjectionService = InjectionService;
-
-
-/***/ },
-
-/***/ "./src/utils/registry.service.ts":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var RegistryService = (function () {
-    function RegistryService() {
-        this.components = new Map();
-    }
-    RegistryService.prototype.register = function (id, component, callback) {
-        this.components.set(id, { component: component, callback: callback });
-    };
-    RegistryService.prototype.get = function (id) {
-        var obj = this.components.get(id);
-        if (obj) {
-            return obj.component;
-        }
-    };
-    RegistryService.prototype.destroy = function (id) {
-        var obj = this.components.get(id);
-        if (obj && obj.component) {
-            this.components.delete(id);
-            if (obj.callback) {
-                obj.callback(true);
-            }
-            obj.component.destroy();
-        }
-    };
-    RegistryService.prototype.destroyAll = function () {
-        var _this = this;
-        this.components.forEach(function (v, k) { return _this.destroy(k); });
-    };
-    RegistryService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], RegistryService);
-    return RegistryService;
-}());
-exports.RegistryService = RegistryService;
 
 
 /***/ },
