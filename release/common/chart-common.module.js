@@ -2,6 +2,7 @@
 var core_1 = require("@angular/core");
 var chart_component_1 = require("./charts/chart.component");
 var legend_1 = require("./legend");
+var base_chart_component_1 = require("./base-chart.component");
 var axes_module_1 = require("./axes/axes.module");
 var tooltip_1 = require("./tooltip");
 var circle_series_component_1 = require("./circle-series.component");
@@ -17,6 +18,7 @@ var area_tooltip_component_1 = require("./area-tooltip.component");
 var count_1 = require('./count');
 var COMPONENTS = [
     area_component_1.AreaComponent,
+    base_chart_component_1.BaseChartComponent,
     count_1.CountUpDirective,
     area_tooltip_component_1.AreaTooltip,
     chart_component_1.ChartComponent,
@@ -51,7 +53,7 @@ var ChartCommonModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    ChartCommonModule.ctorParameters = [];
+    ChartCommonModule.ctorParameters = function () { return []; };
     return ChartCommonModule;
 }());
 exports.ChartCommonModule = ChartCommonModule;

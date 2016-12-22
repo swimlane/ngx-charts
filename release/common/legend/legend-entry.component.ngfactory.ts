@@ -6,14 +6,15 @@
  /* tslint:disable */
 
 import * as import0 from '../../../../src/common/legend/legend-entry.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/security';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/security';
 export class Wrapper_LegendEntryComponent {
   /*private*/ _eventHandler:Function;
   context:import0.LegendEntryComponent;
@@ -21,6 +22,7 @@ export class Wrapper_LegendEntryComponent {
   /*private*/ _expr_0:any;
   /*private*/ _expr_1:any;
   /*private*/ _expr_2:any;
+  /*private*/ _expr_3:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -31,6 +33,7 @@ export class Wrapper_LegendEntryComponent {
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
+    this._expr_3 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -61,6 +64,13 @@ export class Wrapper_LegendEntryComponent {
       this._expr_2 = currValue;
     }
   }
+  check_isActive(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
+      this._changed = true;
+      this.context.isActive = currValue;
+      this._expr_3 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -70,6 +80,14 @@ export class Wrapper_LegendEntryComponent {
   }
   handleEvent(eventName:string,$event:any):boolean {
     var result:boolean = true;
+    if ((eventName == 'mouseenter')) {
+      const pd_sub_0:any = ((<any>this.context.onMouseEnter()) !== false);
+      result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'mouseleave')) {
+      const pd_sub_1:any = ((<any>this.context.onMouseLeave()) !== false);
+      result = (pd_sub_1 && result);
+    }
     return result;
   }
   subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean,emit3:boolean):void {
@@ -86,15 +104,16 @@ class View_LegendEntryComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.LegendEntryComponent>;
   _LegendEntryComponent_0_3:Wrapper_LegendEntryComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_LegendEntryComponent_Host0,renderType_LegendEntryComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_LegendEntryComponent_Host0,renderType_LegendEntryComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'legend-entry',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-legend-entry',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_LegendEntryComponent0(this.viewUtils,this,0,this._el_0);
     this._LegendEntryComponent_0_3 = new Wrapper_LegendEntryComponent();
     this.compView_0.create(this._LegendEntryComponent_0_3.context);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._LegendEntryComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray4(4,'mouseenter',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._LegendEntryComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.LegendEntryComponent) && (0 === requestNodeIndex))) { return this._LegendEntryComponent_0_3.context; }
@@ -102,7 +121,7 @@ class View_LegendEntryComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._LegendEntryComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -111,8 +130,14 @@ class View_LegendEntryComponent_Host0 extends import2.AppView<any> {
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.compView_0.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    result = (this._LegendEntryComponent_0_3.handleEvent(eventName,$event) && result);
+    return result;
+  }
 }
-export const LegendEntryComponentNgFactory:import7.ComponentFactory<import0.LegendEntryComponent> = new import7.ComponentFactory<import0.LegendEntryComponent>('legend-entry',View_LegendEntryComponent_Host0,import0.LegendEntryComponent);
+export const LegendEntryComponentNgFactory:import8.ComponentFactory<import0.LegendEntryComponent> = new import8.ComponentFactory<import0.LegendEntryComponent>('ngx-charts-legend-entry',View_LegendEntryComponent_Host0,import0.LegendEntryComponent);
 const styles_LegendEntryComponent:any[] = ([] as any[]);
 var renderType_LegendEntryComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LegendEntryComponent,{});
 export class View_LegendEntryComponent0 extends import2.AppView<import0.LegendEntryComponent> {
@@ -129,13 +154,15 @@ export class View_LegendEntryComponent0 extends import2.AppView<import0.LegendEn
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_LegendEntryComponent0,renderType_LegendEntryComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_LegendEntryComponent0,renderType_LegendEntryComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
+    this._expr_13 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'span',new import3.InlineArray2(2,'tabindex','-1'),(null as any));
@@ -147,7 +174,7 @@ export class View_LegendEntryComponent0 extends import2.AppView<import0.LegendEn
     this._text_7 = this.renderer.createText(this._el_6,'',(null as any));
     this._text_8 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_9 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'mouseenter',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_1));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_1));
     var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_3,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_3));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -174,31 +201,28 @@ export class View_LegendEntryComponent0 extends import2.AppView<import0.LegendEn
       this.renderer.setElementProperty(this._el_1,'title',currVal_10);
       this._expr_10 = currVal_10;
     }
-    const currVal_11:any = this.context.color;
+    const currVal_11:any = this.context.isActive;
     if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
-      this.renderer.setElementStyle(this._el_3,'background-color',((this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_11) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_11).toString()));
+      this.renderer.setElementClass(this._el_1,'active',currVal_11);
       this._expr_11 = currVal_11;
     }
-    const currVal_12:any = import3.inlineInterpolate(1,'\n        ',this.context.trimmedLabel,'\n      ');
+    const currVal_12:any = this.context.color;
     if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setText(this._text_7,currVal_12);
+      this.renderer.setElementStyle(this._el_3,'background-color',((this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import9.SecurityContext.STYLE,currVal_12).toString()));
       this._expr_12 = currVal_12;
+    }
+    const currVal_13:any = import3.inlineInterpolate(1,'\n        ',this.context.trimmedLabel,'\n      ');
+    if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
+      this.renderer.setText(this._text_7,currVal_13);
+      this._expr_13 = currVal_13;
     }
   }
   handleEvent_1(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();
     var result:boolean = true;
-    if ((eventName == 'mouseenter')) {
-      const pd_sub_0:any = ((<any>this.context.activate.emit(this.context.formattedLabel)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    if ((eventName == 'mouseleave')) {
-      const pd_sub_1:any = ((<any>this.context.deactivate.emit(this.context.formattedLabel)) !== false);
-      result = (pd_sub_1 && result);
-    }
     if ((eventName == 'click')) {
-      const pd_sub_2:any = ((<any>this.context.select.emit(this.context.formattedLabel)) !== false);
-      result = (pd_sub_2 && result);
+      const pd_sub_0:any = ((<any>this.context.select.emit(this.context.formattedLabel)) !== false);
+      result = (pd_sub_0 && result);
     }
     return result;
   }

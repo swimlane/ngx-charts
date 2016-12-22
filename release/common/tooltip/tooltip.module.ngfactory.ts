@@ -9,7 +9,7 @@ import * as import0 from '@angular/core/src/linker/ng_module_factory';
 import * as import1 from '../../../../src/common/tooltip/tooltip.module';
 import * as import2 from '@angular/common/src/common_module';
 import * as import3 from '@angular/common/src/localization';
-import * as import4 from '../../../../src/utils/injection.service';
+import * as import4 from '../../../../src/services/injection.service';
 import * as import5 from '../../../../src/common/tooltip/tooltip.service';
 import * as import6 from '@angular/core/src/di/injector';
 import * as import7 from './tooltip.component.ngfactory';
@@ -33,7 +33,7 @@ class TooltipModuleInjector extends import0.NgModuleInjector<import1.TooltipModu
     return this.__InjectionService_3;
   }
   get _TooltipService_4():import5.TooltipService {
-    if ((this.__TooltipService_4 == null)) { (this.__TooltipService_4 = new import5.TooltipService()); }
+    if ((this.__TooltipService_4 == null)) { (this.__TooltipService_4 = new import5.TooltipService(this._InjectionService_3)); }
     return this.__TooltipService_4;
   }
   createInternal():import1.TooltipModule {

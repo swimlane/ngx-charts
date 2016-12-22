@@ -48,7 +48,7 @@ import {
         style="fill: rgb(255, 255, 255);"
         [style.opacity]="anchorOpacity[i]"
         [style.pointer-events]="'none'"
-        swui-tooltip
+        ngx-tooltip
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="5"

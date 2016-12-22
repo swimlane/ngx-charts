@@ -1,13 +1,8 @@
-
-import { EventEmitter, ElementRef, OnChanges, OnDestroy, NgZone, AfterViewInit, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
+import { ColorHelper } from '../utils/color-sets';
 import { BaseChartComponent } from '../common/base-chart.component';
-export declare class AreaChartStackedComponent extends BaseChartComponent implements OnChanges, OnDestroy, AfterViewInit {
-    private cd;
-    view: any;
-    results: any;
-    scheme: any;
-    customColors: any;
+export declare class AreaChartStackedComponent extends BaseChartComponent {
     legend: boolean;
     xAxis: any;
     yAxis: any;
@@ -20,10 +15,9 @@ export declare class AreaChartStackedComponent extends BaseChartComponent implem
     showGridLines: boolean;
     curve: any;
     activeEntries: any[];
-    select: EventEmitter<{}>;
+    schemeType: string;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
-    element: HTMLElement;
     dims: ViewDimensions;
     scaleType: string;
     xDomain: any[];
@@ -35,12 +29,13 @@ export declare class AreaChartStackedComponent extends BaseChartComponent implem
     transform: string;
     clipPathId: string;
     clipPath: string;
-    colors: Function;
+    colors: ColorHelper;
     margin: number[];
     hoveredVertical: any;
     xAxisHeight: number;
     yAxisWidth: number;
     filteredDomain: any;
+    legendOptions: any;
     timelineWidth: any;
     timelineHeight: number;
     timelineXScale: any;
@@ -48,10 +43,6 @@ export declare class AreaChartStackedComponent extends BaseChartComponent implem
     timelineXDomain: any;
     timelineTransform: any;
     timelinePadding: number;
-    constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
-    ngAfterViewInit(): void;
-    ngOnDestroy(): void;
-    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     updateTimeline(): void;
     getXDomain(): any[];
@@ -67,12 +58,17 @@ export declare class AreaChartStackedComponent extends BaseChartComponent implem
     onClick(data: any, series: any): void;
     trackBy(index: any, item: any): string;
     setColors(): void;
+    getLegendOptions(): {
+        scaleType: string;
+        colors: any;
+        domain: any[];
+    };
     updateYAxisWidth({width}: {
         width: any;
     }): void;
     updateXAxisHeight({height}: {
         height: any;
     }): void;
-    onActivate(event: any): void;
-    onDeactivate(event: any): void;
+    onActivate(item: any): void;
+    onDeactivate(item: any): void;
 }

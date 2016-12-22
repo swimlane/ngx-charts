@@ -6,15 +6,16 @@
  /* tslint:disable */
 
 import * as import0 from '../../../../src/common/count/count.directive';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/zone/ng_zone';
-import * as import9 from '@angular/core/src/linker/element_ref';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/zone/ng_zone';
+import * as import10 from '@angular/core/src/linker/element_ref';
 export class Wrapper_CountUpDirective {
   /*private*/ _eventHandler:Function;
   context:import0.CountUpDirective;
@@ -109,15 +110,15 @@ class View_CountUpDirective_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.CountUpDirective>;
   _CountUpDirective_0_3:Wrapper_CountUpDirective;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CountUpDirective_Host0,renderType_CountUpDirective_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CountUpDirective_Host0,renderType_CountUpDirective_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'div',new import3.InlineArray2(2,'count-up',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'div',new import3.InlineArray2(2,'ngx-charts-count-up',''),rootSelector,(null as any));
     this.compView_0 = new View_CountUpDirective0(this.viewUtils,this,0,this._el_0);
-    this._CountUpDirective_0_3 = new Wrapper_CountUpDirective(this.compView_0.ref,this.injectorGet(import8.NgZone,this.parentIndex),new import9.ElementRef(this._el_0));
+    this._CountUpDirective_0_3 = new Wrapper_CountUpDirective(this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex),new import10.ElementRef(this._el_0));
     this.compView_0.create(this._CountUpDirective_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CountUpDirective_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._CountUpDirective_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.CountUpDirective) && (0 === requestNodeIndex))) { return this._CountUpDirective_0_3.context; }
@@ -125,7 +126,7 @@ class View_CountUpDirective_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     this._CountUpDirective_0_3.ngDoCheck(this,this._el_0,throwOnChange);
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -135,17 +136,17 @@ class View_CountUpDirective_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const CountUpDirectiveNgFactory:import7.ComponentFactory<import0.CountUpDirective> = new import7.ComponentFactory<import0.CountUpDirective>('[count-up]',View_CountUpDirective_Host0,import0.CountUpDirective);
+export const CountUpDirectiveNgFactory:import8.ComponentFactory<import0.CountUpDirective> = new import8.ComponentFactory<import0.CountUpDirective>('[ngx-charts-count-up]',View_CountUpDirective_Host0,import0.CountUpDirective);
 const styles_CountUpDirective:any[] = ([] as any[]);
 var renderType_CountUpDirective:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CountUpDirective,{});
 export class View_CountUpDirective0 extends import2.AppView<import0.CountUpDirective> {
   _text_0:any;
   /*private*/ _expr_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CountUpDirective0,renderType_CountUpDirective,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CountUpDirective0,renderType_CountUpDirective,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
     this._expr_1 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [this._text_0]),(null as any));

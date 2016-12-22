@@ -32,7 +32,7 @@ var CardSeriesComponent = (function () {
                 y: d.y,
                 width: d.width,
                 height: d.height,
-                color: _this.colors(label),
+                color: _this.colors.getColor(label),
                 label: label,
                 data: d.data,
                 tooltipText: label + ": " + value
@@ -47,15 +47,15 @@ var CardSeriesComponent = (function () {
     };
     CardSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[cardSeries]',
-                    template: "\n    <svg:g card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event)\"\n    />\n  ",
+                    selector: 'g[ngx-charts-card-series]',
+                    template: "\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    CardSeriesComponent.ctorParameters = [
+    CardSeriesComponent.ctorParameters = function () { return [
         { type: core_1.NgZone, },
-    ];
+    ]; };
     CardSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],

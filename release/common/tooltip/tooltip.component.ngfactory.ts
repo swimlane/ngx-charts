@@ -6,22 +6,23 @@
  /* tslint:disable */
 
 import * as import0 from '../../../../src/common/tooltip/tooltip.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/element_ref';
-import * as import9 from '@angular/core/src/linker/query_list';
-import * as import10 from '@angular/core/src/linker/view_container';
-import * as import11 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import12 from '@angular/core/src/linker/template_ref';
-import * as import13 from '@angular/common/src/directives/ng_if';
-import * as import14 from '../../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
-import * as import15 from '@angular/common/src/directives/ng_template_outlet';
-import * as import16 from '@angular/core/src/security';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/element_ref';
+import * as import10 from '@angular/core/src/linker/query_list';
+import * as import11 from '@angular/core/src/linker/view_container';
+import * as import12 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import13 from '@angular/core/src/linker/template_ref';
+import * as import14 from '@angular/common/src/directives/ng_if';
+import * as import15 from '../../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
+import * as import16 from '@angular/common/src/directives/ng_template_outlet';
+import * as import17 from '@angular/core/src/security';
 export class Wrapper_TooltipContentComponent {
   /*private*/ _eventHandler:Function;
   context:import0.TooltipContentComponent;
@@ -35,7 +36,6 @@ export class Wrapper_TooltipContentComponent {
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
-  /*private*/ _expr_9:any;
   constructor(p0:any,p1:any) {
     this._changed = false;
     this.context = new import0.TooltipContentComponent(p0,p1);
@@ -48,7 +48,6 @@ export class Wrapper_TooltipContentComponent {
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
-    this._expr_9 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -110,23 +109,16 @@ export class Wrapper_TooltipContentComponent {
       this._expr_7 = currValue;
     }
   }
-  check_template(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
-    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
-      this._changed = true;
-      this.context.template = currValue;
-      this._expr_8 = currValue;
-    }
-  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
     return changed;
   }
   checkHost(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any,throwOnChange:boolean):void {
-    const currVal_9:any = this.context.cssClasses;
-    if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
-      view.renderer.setElementProperty(el,'className',currVal_9);
-      this._expr_9 = currVal_9;
+    const currVal_8:any = this.context.cssClasses;
+    if (import3.checkBinding(throwOnChange,this._expr_8,currVal_8)) {
+      view.renderer.setElementProperty(el,'className',currVal_8);
+      this._expr_8 = currVal_8;
     }
   }
   handleEvent(eventName:string,$event:any):boolean {
@@ -147,16 +139,16 @@ class View_TooltipContentComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.TooltipContentComponent>;
   _TooltipContentComponent_0_3:Wrapper_TooltipContentComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_TooltipContentComponent_Host0,renderType_TooltipContentComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_TooltipContentComponent_Host0,renderType_TooltipContentComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'swui-tooltip-content',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-tooltip-content',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_TooltipContentComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipContentComponent_0_3 = new Wrapper_TooltipContentComponent(new import8.ElementRef(this._el_0),this.renderer);
+    this._TooltipContentComponent_0_3 = new Wrapper_TooltipContentComponent(new import9.ElementRef(this._el_0),this.renderer);
     this.compView_0.create(this._TooltipContentComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'resize','window'),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._TooltipContentComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._TooltipContentComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.TooltipContentComponent) && (0 === requestNodeIndex))) { return this._TooltipContentComponent_0_3.context; }
@@ -165,7 +157,7 @@ class View_TooltipContentComponent_Host0 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     this._TooltipContentComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange);
     this._TooltipContentComponent_0_3.checkHost(this,this.compView_0,this._el_0,throwOnChange);
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
     if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._TooltipContentComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
@@ -181,11 +173,11 @@ class View_TooltipContentComponent_Host0 extends import2.AppView<any> {
     return result;
   }
 }
-export const TooltipContentComponentNgFactory:import7.ComponentFactory<import0.TooltipContentComponent> = new import7.ComponentFactory<import0.TooltipContentComponent>('swui-tooltip-content',View_TooltipContentComponent_Host0,import0.TooltipContentComponent);
+export const TooltipContentComponentNgFactory:import8.ComponentFactory<import0.TooltipContentComponent> = new import8.ComponentFactory<import0.TooltipContentComponent>('ngx-tooltip-content',View_TooltipContentComponent_Host0,import0.TooltipContentComponent);
 const styles_TooltipContentComponent:any[] = ([] as any[]);
 var renderType_TooltipContentComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TooltipContentComponent,{});
 export class View_TooltipContentComponent0 extends import2.AppView<import0.TooltipContentComponent> {
-  _viewQuery_caretElm_0:import9.QueryList<any>;
+  _viewQuery_caretElm_0:import10.QueryList<any>;
   _text_0:any;
   _el_1:any;
   _text_2:any;
@@ -195,27 +187,27 @@ export class View_TooltipContentComponent0 extends import2.AppView<import0.Toolt
   _el_6:any;
   _text_7:any;
   _anchor_8:any;
-  /*private*/ _vc_8:import10.ViewContainer;
+  /*private*/ _vc_8:import11.ViewContainer;
   _TemplateRef_8_5:any;
-  _NgIf_8_6:import11.Wrapper_NgIf;
+  _NgIf_8_6:import12.Wrapper_NgIf;
   _text_9:any;
   _anchor_10:any;
-  /*private*/ _vc_10:import10.ViewContainer;
+  /*private*/ _vc_10:import11.ViewContainer;
   _TemplateRef_10_5:any;
-  _NgIf_10_6:import11.Wrapper_NgIf;
+  _NgIf_10_6:import12.Wrapper_NgIf;
   _text_11:any;
   _text_12:any;
   _text_13:any;
   /*private*/ _expr_21:any;
   /*private*/ _expr_22:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_TooltipContentComponent0,renderType_TooltipContentComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_TooltipContentComponent0,renderType_TooltipContentComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
     this._expr_21 = import1.UNINITIALIZED;
     this._expr_22 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_caretElm_0 = new import9.QueryList<any>();
+    this._viewQuery_caretElm_0 = new import10.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
@@ -225,18 +217,18 @@ export class View_TooltipContentComponent0 extends import2.AppView<import0.Toolt
     this._el_6 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray2(2,'class','tooltip-content'),(null as any));
     this._text_7 = this.renderer.createText(this._el_6,'\n        ',(null as any));
     this._anchor_8 = this.renderer.createTemplateAnchor(this._el_6,(null as any));
-    this._vc_8 = new import10.ViewContainer(8,6,this,this._anchor_8);
-    this._TemplateRef_8_5 = new import12.TemplateRef_(this,8,this._anchor_8);
-    this._NgIf_8_6 = new import11.Wrapper_NgIf(this._vc_8.vcRef,this._TemplateRef_8_5);
+    this._vc_8 = new import11.ViewContainer(8,6,this,this._anchor_8);
+    this._TemplateRef_8_5 = new import13.TemplateRef_(this,8,this._anchor_8);
+    this._NgIf_8_6 = new import12.Wrapper_NgIf(this._vc_8.vcRef,this._TemplateRef_8_5);
     this._text_9 = this.renderer.createText(this._el_6,'\n        ',(null as any));
     this._anchor_10 = this.renderer.createTemplateAnchor(this._el_6,(null as any));
-    this._vc_10 = new import10.ViewContainer(10,6,this,this._anchor_10);
-    this._TemplateRef_10_5 = new import12.TemplateRef_(this,10,this._anchor_10);
-    this._NgIf_10_6 = new import11.Wrapper_NgIf(this._vc_10.vcRef,this._TemplateRef_10_5);
+    this._vc_10 = new import11.ViewContainer(10,6,this,this._anchor_10);
+    this._TemplateRef_10_5 = new import13.TemplateRef_(this,10,this._anchor_10);
+    this._NgIf_10_6 = new import12.Wrapper_NgIf(this._vc_10.vcRef,this._TemplateRef_10_5);
     this._text_11 = this.renderer.createText(this._el_6,'\n      ',(null as any));
     this._text_12 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_13 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    this._viewQuery_caretElm_0.reset([new import8.ElementRef(this._el_3)]);
+    this._viewQuery_caretElm_0.reset([new import9.ElementRef(this._el_3)]);
     this.context.caretElm = this._viewQuery_caretElm_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -258,10 +250,10 @@ export class View_TooltipContentComponent0 extends import2.AppView<import0.Toolt
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import12.TemplateRef) && (8 === requestNodeIndex))) { return this._TemplateRef_8_5; }
-    if (((token === import13.NgIf) && (8 === requestNodeIndex))) { return this._NgIf_8_6.context; }
-    if (((token === import12.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
-    if (((token === import13.NgIf) && (10 === requestNodeIndex))) { return this._NgIf_10_6.context; }
+    if (((token === import13.TemplateRef) && (8 === requestNodeIndex))) { return this._TemplateRef_8_5; }
+    if (((token === import14.NgIf) && (8 === requestNodeIndex))) { return this._NgIf_8_6.context; }
+    if (((token === import13.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
+    if (((token === import14.NgIf) && (10 === requestNodeIndex))) { return this._NgIf_10_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -298,24 +290,24 @@ class View_TooltipContentComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
-  /*private*/ _vc_2:import10.ViewContainer;
+  /*private*/ _vc_2:import11.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgTemplateOutlet_2_6:import14.Wrapper_NgTemplateOutlet;
+  _NgTemplateOutlet_2_6:import15.Wrapper_NgTemplateOutlet;
   _text_3:any;
   _map_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_TooltipContentComponent1,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+    super(View_TooltipContentComponent1,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._map_7 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {model: p0};
     });
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import10.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import12.TemplateRef_(this,2,this._anchor_2);
-    this._NgTemplateOutlet_2_6 = new import14.Wrapper_NgTemplateOutlet(this._vc_2.vcRef);
+    this._vc_2 = new import11.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import13.TemplateRef_(this,2,this._anchor_2);
+    this._NgTemplateOutlet_2_6 = new import15.Wrapper_NgTemplateOutlet(this._vc_2.vcRef);
     this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -327,8 +319,8 @@ class View_TooltipContentComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import12.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import15.NgTemplateOutlet) && (2 === requestNodeIndex))) { return this._NgTemplateOutlet_2_6.context; }
+    if (((token === import13.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import16.NgTemplateOutlet) && (2 === requestNodeIndex))) { return this._NgTemplateOutlet_2_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -352,10 +344,10 @@ class View_TooltipContentComponent1 extends import2.AppView<any> {
 }
 class View_TooltipContentComponent2 extends import2.AppView<any> {
   _text_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_TooltipContentComponent2,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+    super(View_TooltipContentComponent2,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._text_0 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.init(this._text_0,((<any>this.renderer).directRenderer? (null as any): [this._text_0]),(null as any));
     return (null as any);
@@ -368,11 +360,11 @@ class View_TooltipContentComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   /*private*/ _expr_2:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
-    super(View_TooltipContentComponent3,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+    super(View_TooltipContentComponent3,renderType_TooltipContentComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_2 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'span',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -385,7 +377,7 @@ class View_TooltipContentComponent3 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2:any = this.parentView.context.title;
     if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
-      this.renderer.setElementProperty(this._el_0,'innerHTML',this.viewUtils.sanitizer.sanitize(import16.SecurityContext.HTML,currVal_2));
+      this.renderer.setElementProperty(this._el_0,'innerHTML',this.viewUtils.sanitizer.sanitize(import17.SecurityContext.HTML,currVal_2));
       this._expr_2 = currVal_2;
     }
   }

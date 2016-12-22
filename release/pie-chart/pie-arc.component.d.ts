@@ -15,6 +15,8 @@ export declare class PieArcComponent implements OnChanges {
     pointerEvents: boolean;
     isActive: boolean;
     select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
     element: HTMLElement;
     path: any;
     startOpacity: number;

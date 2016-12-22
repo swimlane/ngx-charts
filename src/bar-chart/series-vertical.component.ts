@@ -31,7 +31,7 @@ import { formatLabel } from '../common/label.helper';
       (select)="onClick($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
-      swui-tooltip
+      ngx-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="bar.tooltipText">

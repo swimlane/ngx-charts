@@ -19,22 +19,22 @@ var ScaleLegendComponent = (function () {
         // add the 100%
         splits.push(1);
         var pairs = [];
-        colors.forEach(function (c, i) {
+        colors.reverse().forEach(function (c, i) {
             pairs.push(c + " " + Math.round(splits[i] * 100) + "%");
         });
         return pairs.join(', ');
     };
     ScaleLegendComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'scale-legend',
-                    template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n      <div \n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
+                    selector: 'ngx-charts-scale-legend',
+                    template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n      <div \n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    ScaleLegendComponent.ctorParameters = [
+    ScaleLegendComponent.ctorParameters = function () { return [
         { type: platform_browser_1.DomSanitizer, },
-    ];
+    ]; };
     ScaleLegendComponent.propDecorators = {
         'valueRange': [{ type: core_1.Input },],
         'colors': [{ type: core_1.Input },],

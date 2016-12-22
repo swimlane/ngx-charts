@@ -6,23 +6,24 @@
  /* tslint:disable */
 
 import * as import0 from '../../../../src/common/axes/y-axis-ticks.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/query_list';
-import * as import9 from '@angular/core/src/linker/view_container';
-import * as import10 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import11 from '@angular/core/src/linker/template_ref';
-import * as import12 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import13 from '@angular/core/src/linker/element_ref';
-import * as import14 from '@angular/common/src/directives/ng_for';
-import * as import15 from '@angular/core/src/security';
-import * as import16 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import17 from '@angular/common/src/directives/ng_if';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/query_list';
+import * as import10 from '@angular/core/src/linker/view_container';
+import * as import11 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import12 from '@angular/core/src/linker/template_ref';
+import * as import13 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import14 from '@angular/core/src/linker/element_ref';
+import * as import15 from '@angular/common/src/directives/ng_for';
+import * as import16 from '@angular/core/src/security';
+import * as import17 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import18 from '@angular/common/src/directives/ng_if';
 export class Wrapper_YAxisTicksComponent {
   /*private*/ _eventHandler:Function;
   context:import0.YAxisTicksComponent;
@@ -155,15 +156,15 @@ class View_YAxisTicksComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.YAxisTicksComponent>;
   _YAxisTicksComponent_0_3:Wrapper_YAxisTicksComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_YAxisTicksComponent_Host0,renderType_YAxisTicksComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_YAxisTicksComponent_Host0,renderType_YAxisTicksComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'yAxisTicks',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-y-axis-ticks',''),rootSelector,(null as any));
     this.compView_0 = new View_YAxisTicksComponent0(this.viewUtils,this,0,this._el_0);
     this._YAxisTicksComponent_0_3 = new Wrapper_YAxisTicksComponent();
     this.compView_0.create(this._YAxisTicksComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._YAxisTicksComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._YAxisTicksComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.YAxisTicksComponent) && (0 === requestNodeIndex))) { return this._YAxisTicksComponent_0_3.context; }
@@ -171,7 +172,7 @@ class View_YAxisTicksComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._YAxisTicksComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
     if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._YAxisTicksComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
@@ -182,46 +183,46 @@ class View_YAxisTicksComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const YAxisTicksComponentNgFactory:import7.ComponentFactory<import0.YAxisTicksComponent> = new import7.ComponentFactory<import0.YAxisTicksComponent>('g[yAxisTicks]',View_YAxisTicksComponent_Host0,import0.YAxisTicksComponent);
+export const YAxisTicksComponentNgFactory:import8.ComponentFactory<import0.YAxisTicksComponent> = new import8.ComponentFactory<import0.YAxisTicksComponent>('g[ngx-charts-y-axis-ticks]',View_YAxisTicksComponent_Host0,import0.YAxisTicksComponent);
 const styles_YAxisTicksComponent:any[] = ([] as any[]);
 var renderType_YAxisTicksComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_YAxisTicksComponent,{});
 export class View_YAxisTicksComponent0 extends import2.AppView<import0.YAxisTicksComponent> {
-  _viewQuery_ticksel_0:import8.QueryList<any>;
+  _viewQuery_ticksel_0:import9.QueryList<any>;
   _text_0:any;
   _el_1:any;
   _text_2:any;
   _anchor_3:any;
-  /*private*/ _vc_3:import9.ViewContainer;
+  /*private*/ _vc_3:import10.ViewContainer;
   _TemplateRef_3_5:any;
-  _NgFor_3_6:import10.Wrapper_NgFor;
+  _NgFor_3_6:import11.Wrapper_NgFor;
   _text_4:any;
   _text_5:any;
   _anchor_6:any;
-  /*private*/ _vc_6:import9.ViewContainer;
+  /*private*/ _vc_6:import10.ViewContainer;
   _TemplateRef_6_5:any;
-  _NgFor_6_6:import10.Wrapper_NgFor;
+  _NgFor_6_6:import11.Wrapper_NgFor;
   _text_7:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_YAxisTicksComponent0,renderType_YAxisTicksComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_YAxisTicksComponent0,renderType_YAxisTicksComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_ticksel_0 = new import8.QueryList<any>();
+    this._viewQuery_ticksel_0 = new import9.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._anchor_3 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_3 = new import9.ViewContainer(3,1,this,this._anchor_3);
-    this._TemplateRef_3_5 = new import11.TemplateRef_(this,3,this._anchor_3);
-    this._NgFor_3_6 = new import10.Wrapper_NgFor(this._vc_3.vcRef,this._TemplateRef_3_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_3 = new import10.ViewContainer(3,1,this,this._anchor_3);
+    this._TemplateRef_3_5 = new import12.TemplateRef_(this,3,this._anchor_3);
+    this._NgFor_3_6 = new import11.Wrapper_NgFor(this._vc_3.vcRef,this._TemplateRef_3_5,this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.ref);
     this._text_4 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_5 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._anchor_6 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
-    this._vc_6 = new import9.ViewContainer(6,(null as any),this,this._anchor_6);
-    this._TemplateRef_6_5 = new import11.TemplateRef_(this,6,this._anchor_6);
-    this._NgFor_6_6 = new import10.Wrapper_NgFor(this._vc_6.vcRef,this._TemplateRef_6_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_6 = new import10.ViewContainer(6,(null as any),this,this._anchor_6);
+    this._TemplateRef_6_5 = new import12.TemplateRef_(this,6,this._anchor_6);
+    this._NgFor_6_6 = new import11.Wrapper_NgFor(this._vc_6.vcRef,this._TemplateRef_6_5,this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.ref);
     this._text_7 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    this._viewQuery_ticksel_0.reset([new import13.ElementRef(this._el_1)]);
+    this._viewQuery_ticksel_0.reset([new import14.ElementRef(this._el_1)]);
     this.context.ticksElement = this._viewQuery_ticksel_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -237,10 +238,10 @@ export class View_YAxisTicksComponent0 extends import2.AppView<import0.YAxisTick
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import11.TemplateRef) && (3 === requestNodeIndex))) { return this._TemplateRef_3_5; }
-    if (((token === import14.NgFor) && (3 === requestNodeIndex))) { return this._NgFor_3_6.context; }
-    if (((token === import11.TemplateRef) && (6 === requestNodeIndex))) { return this._TemplateRef_6_5; }
-    if (((token === import14.NgFor) && (6 === requestNodeIndex))) { return this._NgFor_6_6.context; }
+    if (((token === import12.TemplateRef) && (3 === requestNodeIndex))) { return this._TemplateRef_3_5; }
+    if (((token === import15.NgFor) && (3 === requestNodeIndex))) { return this._NgFor_3_6.context; }
+    if (((token === import12.TemplateRef) && (6 === requestNodeIndex))) { return this._TemplateRef_6_5; }
+    if (((token === import15.NgFor) && (6 === requestNodeIndex))) { return this._NgFor_6_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -280,8 +281,8 @@ class View_YAxisTicksComponent1 extends import2.AppView<any> {
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_YAxisTicksComponent1,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
+    super(View_YAxisTicksComponent1,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
@@ -291,7 +292,7 @@ class View_YAxisTicksComponent1 extends import2.AppView<any> {
     this._expr_14 = import1.UNINITIALIZED;
     this._expr_15 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','tick'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:title',import3.EMPTY_INLINE_ARRAY,(null as any));
@@ -346,7 +347,7 @@ class View_YAxisTicksComponent1 extends import2.AppView<any> {
     }
     const currVal_14:any = '12px';
     if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setElementStyle(this._el_5,'font-size',((this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_14).toString()));
+      this.renderer.setElementStyle(this._el_5,'font-size',((this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_14).toString()));
       this._expr_14 = currVal_14;
     }
     const currVal_15:any = import3.inlineInterpolate(1,'\n          ',this.parentView.context.trimLabel(this.parentView.context.tickFormat(this.context.$implicit)),'\n        ');
@@ -363,22 +364,22 @@ class View_YAxisTicksComponent2 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
-  /*private*/ _vc_2:import9.ViewContainer;
+  /*private*/ _vc_2:import10.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgIf_2_6:import16.Wrapper_NgIf;
+  _NgIf_2_6:import17.Wrapper_NgIf;
   _text_3:any;
   /*private*/ _expr_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_YAxisTicksComponent2,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
+    super(View_YAxisTicksComponent2,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import9.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import11.TemplateRef_(this,2,this._anchor_2);
-    this._NgIf_2_6 = new import16.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
+    this._vc_2 = new import10.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import12.TemplateRef_(this,2,this._anchor_2);
+    this._NgIf_2_6 = new import17.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
     this._text_3 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -390,8 +391,8 @@ class View_YAxisTicksComponent2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import11.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import17.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
+    if (((token === import12.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import18.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -423,12 +424,12 @@ class View_YAxisTicksComponent3 extends import2.AppView<any> {
   _text_3:any;
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_YAxisTicksComponent3,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
+    super(View_YAxisTicksComponent3,renderType_YAxisTicksComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:line',new import3.InlineArray4(4,'class','gridline-path gridline-path-horizontal','x1','0'),(null as any));

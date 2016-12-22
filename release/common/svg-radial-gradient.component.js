@@ -11,13 +11,13 @@ var SvgRadialGradientComponent = (function () {
     };
     SvgRadialGradientComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[svgRadialGradient]',
+                    selector: 'g[ngx-charts-svg-radial-gradient]',
                     template: "\n    <svg:radialGradient\n      [id]=\"name\"\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      gradientUnits=\"userSpaceOnUse\">\n      <svg:stop\n        offset=\"0%\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"startOpacity\"\n      />\n      <svg:stop\n        offset=\"100%\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"endOpacity\"\n      />\n    </svg:radialGradient>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    SvgRadialGradientComponent.ctorParameters = [];
+    SvgRadialGradientComponent.ctorParameters = function () { return []; };
     SvgRadialGradientComponent.propDecorators = {
         'color': [{ type: core_1.Input },],
         'name': [{ type: core_1.Input },],

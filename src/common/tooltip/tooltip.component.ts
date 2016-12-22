@@ -1,17 +1,18 @@
 import {
   Input, Component, ElementRef, AfterViewInit,
-  HostListener, ViewChild, HostBinding, Renderer, TemplateRef
+  HostListener, ViewChild, HostBinding, Renderer
 } from '@angular/core';
 
 import { throttleable } from '../../utils/throttle';
-import { PositionHelper } from './position.helper';
+import { PositionHelper, PlacementTypes } from './position';
 
-import { PlacementTypes } from './placement.type';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
 
+import './tooltip.component.scss';
+
 @Component({
-  selector: 'swui-tooltip-content',
+  selector: 'ngx-tooltip-content',
   template: `
     <div>
       <span
@@ -41,16 +42,15 @@ export class TooltipContentComponent implements AfterViewInit {
   @Input() type: StyleTypes;
   @Input() placement: PlacementTypes;
   @Input() alignment: AlignmentTypes;
-  @Input() spacing: number = 0;
+  @Input() spacing: number;
   @Input() cssClass: string;
   @Input() title: string;
-  @Input() template: TemplateRef<any>;
 
   @ViewChild('caretElm') caretElm;
 
   @HostBinding('class')
   get cssClasses(): string {
-    let clz = 'swui-tooltip-content';
+    let clz = 'ngx-tooltip-content';
     clz += ` position-${this.placement}`;
     clz += ` type-${this.type}`;
     clz += ` ${this.cssClass}`;
@@ -86,99 +86,26 @@ export class TooltipContentComponent implements AfterViewInit {
   }
 
   positionContent(nativeElm, hostDim, elmDim): void {
-    let top = 0;
-    let left = 0;
-
-    if (this.placement === PlacementTypes.right) {
-      left = hostDim.left + hostDim.width + this.spacing;
-      top = PositionHelper.calculateVerticalAlignment(
-        hostDim,
-        elmDim,
-        this.alignment);
-    } else if (this.placement === PlacementTypes.left) {
-      left = hostDim.left - elmDim.width - this.spacing;
-      top = PositionHelper.calculateVerticalAlignment(
-        hostDim,
-        elmDim,
-        this.alignment);
-    } else if (this.placement === PlacementTypes.top) {
-      top = hostDim.top - elmDim.height - this.spacing;
-      left = PositionHelper.calculateHorizontalAlignment(
-        hostDim,
-        elmDim,
-        this.alignment);
-    } else if (this.placement === PlacementTypes.bottom) {
-      top = hostDim.top + hostDim.height + this.spacing;
-      left = PositionHelper.calculateHorizontalAlignment(
-        hostDim,
-        elmDim,
-        this.alignment);
-    }
+    const { top, left } = PositionHelper.positionContent(
+      this.placement, elmDim, hostDim, this.spacing, this.alignment);
 
     this.renderer.setElementStyle(nativeElm, 'top', `${top}px`);
     this.renderer.setElementStyle(nativeElm, 'left', `${left}px`);
   }
 
   positionCaret(hostDim, elmDim): void {
-    let caretElm = this.caretElm.nativeElement;
+    const caretElm = this.caretElm.nativeElement;
     const caretDimensions = caretElm.getBoundingClientRect();
-
-    let top = 0;
-    let left = 0;
-
-    if (this.placement === PlacementTypes.right) {
-      left = -7;
-      top = PositionHelper.calculateVerticalCaret(
-        hostDim,
-        elmDim,
-        caretDimensions,
-        this.alignment);
-    } else if (this.placement === PlacementTypes.left) {
-      left = elmDim.width;
-      top = PositionHelper.calculateVerticalCaret(
-        hostDim,
-        elmDim,
-        caretDimensions,
-        this.alignment);
-    } else if (this.placement === PlacementTypes.top) {
-      top = elmDim.height;
-      left = PositionHelper.calculateHorizontalCaret(
-        hostDim,
-        elmDim,
-        caretDimensions,
-        this.alignment);
-    } else if (this.placement === PlacementTypes.bottom) {
-      top = -7;
-      left = PositionHelper.calculateHorizontalCaret(
-        hostDim,
-        elmDim,
-        caretDimensions,
-        this.alignment);
-    }
+    const { top, left } = PositionHelper.positionCaret(
+      this.placement, elmDim, hostDim, caretDimensions, this.alignment);
 
     this.renderer.setElementStyle(caretElm, 'top', `${top}px`);
     this.renderer.setElementStyle(caretElm, 'left', `${left}px`);
   }
 
   checkFlip(hostDim, elmDim): void {
-    const shouldFlip = PositionHelper.shouldFlip(
-      hostDim,
-      elmDim,
-      this.placement,
-      this.alignment,
-      this.spacing);
-
-    if(shouldFlip) {
-      if (this.placement === PlacementTypes.right) {
-        this.placement = PlacementTypes.left;
-      } else if (this.placement === PlacementTypes.left) {
-        this.placement = PlacementTypes.right;
-      } else if (this.placement === PlacementTypes.top) {
-        this.placement = PlacementTypes.bottom;
-      } else if (this.placement === PlacementTypes.bottom) {
-        this.placement = PlacementTypes.top;
-      }
-    }
+    this.placement = PositionHelper.determinePlacement(
+      this.placement, elmDim, hostDim, this.spacing, this.alignment);
   }
 
   @HostListener('window:resize')

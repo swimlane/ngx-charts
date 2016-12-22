@@ -21,7 +21,7 @@ import {
       [value]="c.value"
       [valueType]="c.valueType"
       (select)="onClick($event)"
-      swui-tooltip
+      ngx-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="getTooltipText(c)"

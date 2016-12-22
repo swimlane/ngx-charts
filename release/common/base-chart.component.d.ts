@@ -1,15 +1,21 @@
-import { ElementRef, NgZone, ChangeDetectorRef } from '@angular/core';
-export declare abstract class BaseChartComponent {
-    results: any[];
-    chartElement: ElementRef;
-    zone: NgZone;
-    changeDetector: ChangeDetectorRef;
+import { ElementRef, NgZone, ChangeDetectorRef, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+    protected chartElement: ElementRef;
+    protected zone: NgZone;
+    protected cd: ChangeDetectorRef;
+    results: any;
     view: number[];
+    scheme: any;
+    schemeType: string;
+    customColors: any;
+    select: EventEmitter<{}>;
     width: number;
     height: number;
     resizeSubscription: any;
-    constructor(chartElement: ElementRef, zone: NgZone, changeDetector: ChangeDetectorRef);
-    protected bindResizeEvents(view: number[]): void;
+    constructor(chartElement: ElementRef, zone: NgZone, cd: ChangeDetectorRef);
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     protected unbindEvents(): void;
     update(): void;
     getContainerDims(): any;
@@ -25,6 +31,4 @@ export declare abstract class BaseChartComponent {
      */
     private cloneData(data);
     formatDates(): void;
-    abstract setColors(): void;
-    abstract onClick(data: any, group: any): void;
 }

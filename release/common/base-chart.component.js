@@ -1,14 +1,22 @@
 "use strict";
+var core_1 = require('@angular/core');
 var Rx_1 = require('rxjs/Rx');
 var BaseChartComponent = (function () {
-    function BaseChartComponent(chartElement, zone, changeDetector) {
+    function BaseChartComponent(chartElement, zone, cd) {
         this.chartElement = chartElement;
         this.zone = zone;
-        this.changeDetector = changeDetector;
+        this.cd = cd;
+        this.schemeType = 'ordinal';
+        this.select = new core_1.EventEmitter();
     }
-    BaseChartComponent.prototype.bindResizeEvents = function (view) {
-        this.view = view;
+    BaseChartComponent.prototype.ngAfterViewInit = function () {
         this.bindWindowResizeEvent();
+    };
+    BaseChartComponent.prototype.ngOnDestroy = function () {
+        this.unbindEvents();
+    };
+    BaseChartComponent.prototype.ngOnChanges = function (changes) {
+        this.update();
     };
     BaseChartComponent.prototype.unbindEvents = function () {
         if (this.resizeSubscription) {
@@ -28,8 +36,8 @@ var BaseChartComponent = (function () {
             this.width = dims.width;
             this.height = dims.height;
         }
-        if (this.changeDetector) {
-            this.changeDetector.markForCheck();
+        if (this.cd) {
+            this.cd.markForCheck();
         }
     };
     BaseChartComponent.prototype.getContainerDims = function () {
@@ -49,8 +57,8 @@ var BaseChartComponent = (function () {
             var source = Rx_1.Observable.fromEvent(window, 'resize', null, null);
             var subscription = source.debounceTime(200).subscribe(function (e) {
                 _this.update();
-                if (_this.changeDetector) {
-                    _this.changeDetector.markForCheck();
+                if (_this.cd) {
+                    _this.cd.markForCheck();
                 }
             });
             _this.resizeSubscription = subscription;
@@ -103,6 +111,26 @@ var BaseChartComponent = (function () {
                 }
             }
         }
+    };
+    BaseChartComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'base-chart',
+                    template: ""
+                },] },
+    ];
+    /** @nocollapse */
+    BaseChartComponent.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
+        { type: core_1.ChangeDetectorRef, },
+    ]; };
+    BaseChartComponent.propDecorators = {
+        'results': [{ type: core_1.Input },],
+        'view': [{ type: core_1.Input },],
+        'scheme': [{ type: core_1.Input },],
+        'schemeType': [{ type: core_1.Input },],
+        'customColors': [{ type: core_1.Input },],
+        'select': [{ type: core_1.Output },],
     };
     return BaseChartComponent;
 }());

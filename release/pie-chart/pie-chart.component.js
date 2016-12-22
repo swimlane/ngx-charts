@@ -10,11 +10,8 @@ var color_sets_1 = require('../utils/color-sets');
 var base_chart_component_1 = require('../common/base-chart.component');
 var PieChartComponent = (function (_super) {
     __extends(PieChartComponent, _super);
-    function PieChartComponent(element, cd, zone) {
-        _super.call(this, element, zone, cd);
-        this.element = element;
-        this.cd = cd;
-        this.margin = [20, 20, 20, 20];
+    function PieChartComponent() {
+        _super.apply(this, arguments);
         this.labels = false;
         this.legend = false;
         this.explodeSlices = false;
@@ -23,16 +20,8 @@ var PieChartComponent = (function (_super) {
         this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
+        this.margin = [20, 20, 20, 20];
     }
-    PieChartComponent.prototype.ngAfterViewInit = function () {
-        this.bindResizeEvents(this.view);
-    };
-    PieChartComponent.prototype.ngOnDestroy = function () {
-        this.unbindEvents();
-    };
-    PieChartComponent.prototype.ngOnChanges = function (changes) {
-        this.update();
-    };
     PieChartComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
@@ -68,6 +57,7 @@ var PieChartComponent = (function (_super) {
                 return _this.domain.indexOf(a.name) - _this.domain.indexOf(b.name);
             });
             _this.setColors();
+            _this.legendOptions = _this.getLegendOptions();
         });
     };
     PieChartComponent.prototype.getDomain = function () {
@@ -90,39 +80,43 @@ var PieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     PieChartComponent.prototype.setColors = function () {
-        this.colors = color_sets_1.colorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    PieChartComponent.prototype.onActivate = function (event) {
-        if (this.activeEntries.indexOf(event) > -1)
+    PieChartComponent.prototype.getLegendOptions = function () {
+        return {
+            scaleType: 'ordinal',
+            domain: this.domain,
+            colors: this.colors
+        };
+    };
+    PieChartComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
+        if (idx > -1) {
             return;
-        this.activeEntries = [event].concat(this.activeEntries);
-        this.activate.emit({ value: event, entries: this.activeEntries });
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
     };
-    PieChartComponent.prototype.onDeactivate = function (event) {
-        var idx = this.activeEntries.indexOf(event);
+    PieChartComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name && d.value === item.value;
+        });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
     PieChartComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'pie-chart',
-                    template: "\n    <chart\n      [colors]=\"colors\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      [legend]=\"legend\"\n      [view]=\"[width, height]\"\n      [legendData]=\"domain\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g pieSeries\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </chart>\n  ",
+                    selector: 'ngx-charts-pie-chart',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    PieChartComponent.ctorParameters = [
-        { type: core_1.ElementRef, },
-        { type: core_1.ChangeDetectorRef, },
-        { type: core_1.NgZone, },
-    ];
+    PieChartComponent.ctorParameters = function () { return []; };
     PieChartComponent.propDecorators = {
-        'view': [{ type: core_1.Input },],
-        'results': [{ type: core_1.Input },],
-        'margin': [{ type: core_1.Input },],
-        'scheme': [{ type: core_1.Input },],
-        'customColors': [{ type: core_1.Input },],
         'labels': [{ type: core_1.Input },],
         'legend': [{ type: core_1.Input },],
         'explodeSlices': [{ type: core_1.Input },],

@@ -26,7 +26,7 @@ var TreeMapModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    TreeMapModule.ctorParameters = [];
+    TreeMapModule.ctorParameters = function () { return []; };
     return TreeMapModule;
 }());
 exports.TreeMapModule = TreeMapModule;

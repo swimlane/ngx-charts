@@ -124,13 +124,13 @@ var XAxisTicksComponent = (function () {
     };
     XAxisTicksComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[xAxisTicks]',
+                    selector: 'g[ngx-charts-x-axis-ticks]',
                     template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"tickTransform(tick)\">\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.text-anchor]=\"textAnchor\"\n          [attr.transform]=\"textTransform\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <svg:g *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    XAxisTicksComponent.ctorParameters = [];
+    XAxisTicksComponent.ctorParameters = function () { return []; };
     XAxisTicksComponent.propDecorators = {
         'scale': [{ type: core_1.Input },],
         'orient': [{ type: core_1.Input },],

@@ -36,15 +36,15 @@ var AxisLabelComponent = (function () {
     };
     AxisLabelComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[axisLabel]',
+                    selector: 'g[ngx-charts-axis-label]',
                     template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    AxisLabelComponent.ctorParameters = [
+    AxisLabelComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
-    ];
+    ]; };
     AxisLabelComponent.propDecorators = {
         'orient': [{ type: core_1.Input },],
         'label': [{ type: core_1.Input },],

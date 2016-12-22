@@ -6,23 +6,24 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/number-card/number-card.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/element_ref';
-import * as import9 from '@angular/core/src/zone/ng_zone';
-import * as import10 from '@angular/core/src/linker/view_container';
-import * as import11 from '../../../src/common/charts/chart.component';
-import * as import12 from '../../../src/utils/injection.service';
-import * as import13 from '../common/charts/chart.component.ngfactory';
-import * as import14 from '../../../src/number-card/card-series.component';
-import * as import15 from './card-series.component.ngfactory';
-import * as import16 from '@angular/core/src/application_ref';
-import * as import17 from '@angular/core/src/linker/component_factory_resolver';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/element_ref';
+import * as import10 from '@angular/core/src/zone/ng_zone';
+import * as import11 from '@angular/core/src/linker/view_container';
+import * as import12 from '../../../src/common/charts/chart.component';
+import * as import13 from '../../../src/services/injection.service';
+import * as import14 from '../common/charts/chart.component.ngfactory';
+import * as import15 from '../../../src/number-card/card-series.component';
+import * as import16 from './card-series.component.ngfactory';
+import * as import17 from '@angular/core/src/application_ref';
+import * as import18 from '@angular/core/src/linker/component_factory_resolver';
 export class Wrapper_NumberCardComponent {
   /*private*/ _eventHandler:Function;
   context:import0.NumberCardComponent;
@@ -34,7 +35,6 @@ export class Wrapper_NumberCardComponent {
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
   subscription0:any;
-  subscription1:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -50,37 +50,36 @@ export class Wrapper_NumberCardComponent {
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
-    (this.subscription1 && this.subscription1.unsubscribe());
   }
-  check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_results(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
       this._changed = true;
-      this.context.view = currValue;
-      this._changes['view'] = new import1.SimpleChange(this._expr_0,currValue);
+      this.context.results = currValue;
+      this._changes['results'] = new import1.SimpleChange(this._expr_0,currValue);
       this._expr_0 = currValue;
     }
   }
-  check_results(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_view(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_1,currValue))) {
       this._changed = true;
-      this.context.results = currValue;
-      this._changes['results'] = new import1.SimpleChange(this._expr_1,currValue);
+      this.context.view = currValue;
+      this._changes['view'] = new import1.SimpleChange(this._expr_1,currValue);
       this._expr_1 = currValue;
     }
   }
-  check_margin(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_scheme(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_2,currValue))) {
       this._changed = true;
-      this.context.margin = currValue;
-      this._changes['margin'] = new import1.SimpleChange(this._expr_2,currValue);
+      this.context.scheme = currValue;
+      this._changes['scheme'] = new import1.SimpleChange(this._expr_2,currValue);
       this._expr_2 = currValue;
     }
   }
-  check_scheme(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_schemeType(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
       this._changed = true;
-      this.context.scheme = currValue;
-      this._changes['scheme'] = new import1.SimpleChange(this._expr_3,currValue);
+      this.context.schemeType = currValue;
+      this._changes['schemeType'] = new import1.SimpleChange(this._expr_3,currValue);
       this._expr_3 = currValue;
     }
   }
@@ -107,10 +106,9 @@ export class Wrapper_NumberCardComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
-    if (emit1) { (this.subscription1 = this.context.legendLabelClick.subscribe(_eventHandler.bind(view,'legendLabelClick'))); }
   }
 }
 var renderType_NumberCardComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -119,15 +117,15 @@ class View_NumberCardComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.NumberCardComponent>;
   _NumberCardComponent_0_3:Wrapper_NumberCardComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_NumberCardComponent_Host0,renderType_NumberCardComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_NumberCardComponent_Host0,renderType_NumberCardComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'number-card',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-number-card',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_NumberCardComponent0(this.viewUtils,this,0,this._el_0);
-    this._NumberCardComponent_0_3 = new Wrapper_NumberCardComponent(new import8.ElementRef(this._el_0),this.compView_0.ref,this.injectorGet(import9.NgZone,this.parentIndex));
+    this._NumberCardComponent_0_3 = new Wrapper_NumberCardComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref);
     this.compView_0.create(this._NumberCardComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._NumberCardComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._NumberCardComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.NumberCardComponent) && (0 === requestNodeIndex))) { return this._NumberCardComponent_0_3.context; }
@@ -135,7 +133,7 @@ class View_NumberCardComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._NumberCardComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
     if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._NumberCardComponent_0_3.context.ngAfterViewInit(); } }
   }
   destroyInternal():void {
@@ -146,29 +144,29 @@ class View_NumberCardComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const NumberCardComponentNgFactory:import7.ComponentFactory<import0.NumberCardComponent> = new import7.ComponentFactory<import0.NumberCardComponent>('number-card',View_NumberCardComponent_Host0,import0.NumberCardComponent);
+export const NumberCardComponentNgFactory:import8.ComponentFactory<import0.NumberCardComponent> = new import8.ComponentFactory<import0.NumberCardComponent>('ngx-charts-number-card',View_NumberCardComponent_Host0,import0.NumberCardComponent);
 const styles_NumberCardComponent:any[] = ([] as any[]);
 var renderType_NumberCardComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_NumberCardComponent,{});
 export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCardComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import10.ViewContainer;
-  compView_1:import2.AppView<import11.ChartComponent>;
-  _InjectionService_1_5:import12.InjectionService;
-  _ChartComponent_1_6:import13.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import11.ViewContainer;
+  compView_1:import2.AppView<import12.ChartComponent>;
+  _InjectionService_1_5:import13.InjectionService;
+  _ChartComponent_1_6:import14.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import14.CardSeriesComponent>;
-  _CardSeriesComponent_5_3:import15.Wrapper_CardSeriesComponent;
+  compView_5:import2.AppView<import15.CardSeriesComponent>;
+  _CardSeriesComponent_5_3:import16.Wrapper_CardSeriesComponent;
   _text_6:any;
   _text_7:any;
   _text_8:any;
   _arr_15:any;
   /*private*/ _expr_16:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_NumberCardComponent0,renderType_NumberCardComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_NumberCardComponent0,renderType_NumberCardComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._arr_15 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
         p0,
@@ -178,28 +176,26 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
     });
     this._expr_16 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import10.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import13.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._InjectionService_1_5 = new import12.InjectionService(this.parentView.injectorGet(import16.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import17.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._ChartComponent_1_6 = new import13.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._vc_1 = new import11.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import14.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._InjectionService_1_5 = new import13.InjectionService(this.parentView.injectorGet(import17.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import18.ComponentFactoryResolver,this.parentIndex),this.injector(1));
+    this._ChartComponent_1_6 = new import14.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','number-card chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'cardSeries',''),(null as any));
-    this.compView_5 = new import15.View_CardSeriesComponent0(this.viewUtils,this,5,this._el_5);
-    this._CardSeriesComponent_5_3 = new import15.Wrapper_CardSeriesComponent(this.parentView.injectorGet(import9.NgZone,this.parentIndex));
+    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'ngx-charts-card-series',''),(null as any));
+    this.compView_5 = new import16.View_CardSeriesComponent0(this.viewUtils,this,5,this._el_5);
+    this._CardSeriesComponent_5_3 = new import16.Wrapper_CardSeriesComponent(this.parentView.injectorGet(import10.NgZone,this.parentIndex));
     this.compView_5.create(this._CardSeriesComponent_5_3.context);
     this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray2(2,'legendLabelClick',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,false,false);
-    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_5));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_5,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_5));
     this._CardSeriesComponent_5_3.subscribe(this,this.eventHandler(this.handleEvent_5),true);
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -212,24 +208,20 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
       this._text_7,
       this._text_8
     ]
-    ),[
-      disposable_0,
-      disposable_1
-    ]
-    );
+    ),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.CardSeriesComponent) && (5 === requestNodeIndex))) { return this._CardSeriesComponent_5_3.context; }
-    if (((token === import12.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._InjectionService_1_5; }
-    if (((token === import11.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import15.CardSeriesComponent) && (5 === requestNodeIndex))) { return this._CardSeriesComponent_5_3.context; }
+    if (((token === import13.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._InjectionService_1_5; }
+    if (((token === import12.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this._arr_15(this.context.width,this.context.height);
     this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = false;
-    this._ChartComponent_1_6.check_legend(currVal_1_0_1,throwOnChange,false);
+    this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
     if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_5_0_0:any = this.context.data;
     this._CardSeriesComponent_5_3.check_data(currVal_5_0_0,throwOnChange,false);
@@ -244,8 +236,8 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
       this.renderer.setElementAttribute(this._el_3,'transform',((currVal_16 == null)? (null as any): currVal_16.toString()));
       this._expr_16 = currVal_16;
     }
-    this.compView_1.detectChanges(throwOnChange);
-    this.compView_5.detectChanges(throwOnChange);
+    this.compView_1.internalDetectChanges(throwOnChange);
+    this.compView_5.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this._vc_1.destroyNestedViews();
@@ -260,15 +252,6 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
       cb(this._el_3,ctx);
       cb(this._text_7,ctx);
     }
-  }
-  handleEvent_1(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'legendLabelClick')) {
-      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
   }
   handleEvent_5(eventName:string,$event:any):boolean {
     this.markPathToRootAsCheckOnce();

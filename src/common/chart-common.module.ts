@@ -4,6 +4,7 @@ import { ChartComponent } from "./charts/chart.component";
 import { 
   ScaleLegendComponent, LegendComponent, LegendEntryComponent, AdvancedLegendComponent 
 } from "./legend";
+import { BaseChartComponent } from "./base-chart.component";
 import { AxesModule } from "./axes/axes.module";
 import { TooltipModule } from "./tooltip";
 import { CircleSeriesComponent } from "./circle-series.component";
@@ -18,8 +19,9 @@ import { AreaComponent } from "./area.component";
 import { AreaTooltip } from "./area-tooltip.component";
 import { CountUpDirective } from './count';
 
-const COMPONENTS = [
+const COMPONENTS = [  
   AreaComponent,
+  BaseChartComponent,
   CountUpDirective,
   AreaTooltip,
   ChartComponent,

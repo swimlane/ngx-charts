@@ -26,7 +26,7 @@ var NumberCardModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    NumberCardModule.ctorParameters = [];
+    NumberCardModule.ctorParameters = function () { return []; };
     return NumberCardModule;
 }());
 exports.NumberCardModule = NumberCardModule;

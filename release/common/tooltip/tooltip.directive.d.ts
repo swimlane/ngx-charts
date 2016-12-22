@@ -1,19 +1,14 @@
-import { EventEmitter, ViewContainerRef, ComponentRef, ElementRef, Renderer, OnDestroy, NgZone } from '@angular/core';
-import { InjectionService } from '../../utils/injection.service';
-import { PlacementTypes } from './placement.type';
+import { EventEmitter, ViewContainerRef, ElementRef, Renderer, OnDestroy } from '@angular/core';
+import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
 import { ShowTypes } from './show.type';
-import { TooltipContentComponent } from './tooltip.component';
 import { TooltipService } from './tooltip.service';
-import './tooltip.scss';
 export declare class TooltipDirective implements OnDestroy {
     private tooltipService;
     private viewContainerRef;
-    private injectionService;
     private renderer;
     private element;
-    private zone;
     tooltipCssClass: string;
     tooltipTitle: string;
     tooltipAppendToBody: boolean;
@@ -34,20 +29,20 @@ export declare class TooltipDirective implements OnDestroy {
     hide: EventEmitter<{}>;
     private readonly listensForFocus;
     private readonly listensForHover;
-    private componentId;
+    private component;
     private timeout;
     private mouseLeaveContentEvent;
     private mouseEnterContentEvent;
     private documentClickEvent;
-    constructor(tooltipService: TooltipService, viewContainerRef: ViewContainerRef, injectionService: InjectionService, renderer: Renderer, element: ElementRef, zone: NgZone);
+    constructor(tooltipService: TooltipService, viewContainerRef: ViewContainerRef, renderer: Renderer, element: ElementRef);
     ngOnDestroy(): void;
     onFocus(): void;
-    onMouseEnter(): void;
     onBlur(): void;
+    onMouseEnter(): void;
     onMouseLeave(target: any): void;
+    onMouseClick(): void;
     showTooltip(immediate?: boolean): void;
     addHideListeners(tooltip: any): void;
-    injectComponent(): ComponentRef<TooltipContentComponent>;
     hideTooltip(immediate?: boolean): void;
     private createBoundOptions();
 }

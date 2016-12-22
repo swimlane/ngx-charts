@@ -133,13 +133,13 @@ var YAxisTicksComponent = (function () {
     };
     YAxisTicksComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[yAxisTicks]',
+                    selector: 'g[ngx-charts-y-axis-ticks]',
                     template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    YAxisTicksComponent.ctorParameters = [];
+    YAxisTicksComponent.ctorParameters = function () { return []; };
     YAxisTicksComponent.propDecorators = {
         'scale': [{ type: core_1.Input },],
         'orient': [{ type: core_1.Input },],

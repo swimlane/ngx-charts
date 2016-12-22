@@ -58,7 +58,7 @@ var BarChartModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    BarChartModule.ctorParameters = [];
+    BarChartModule.ctorParameters = function () { return []; };
     return BarChartModule;
 }());
 exports.BarChartModule = BarChartModule;

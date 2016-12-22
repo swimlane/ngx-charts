@@ -26,7 +26,7 @@ var LineChartModule = (function () {
                 },] },
     ];
     /** @nocollapse */
-    LineChartModule.ctorParameters = [];
+    LineChartModule.ctorParameters = function () { return []; };
     return LineChartModule;
 }());
 exports.LineChartModule = LineChartModule;

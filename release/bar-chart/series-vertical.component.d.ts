@@ -6,10 +6,11 @@ export declare class SeriesVerticalComponent implements OnChanges {
     xScale: any;
     yScale: any;
     colors: any;
-    scaleType: string;
     gradient: boolean;
     activeEntries: any[];
     select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
     bars: any;
     x: any;
     y: any;

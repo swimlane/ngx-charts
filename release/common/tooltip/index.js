@@ -7,7 +7,6 @@ __export(require('./tooltip.service'));
 __export(require('./tooltip.component'));
 __export(require('./tooltip.directive'));
 __export(require('./style.type'));
-__export(require('./placement.type'));
 __export(require('./alignment.type'));
 __export(require('./show.type'));
 //# sourceMappingURL=index.js.map

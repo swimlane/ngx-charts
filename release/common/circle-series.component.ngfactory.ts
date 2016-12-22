@@ -6,30 +6,29 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/common/circle-series.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/linker/view_container';
-import * as import9 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import10 from '@angular/core/src/linker/template_ref';
-import * as import11 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import12 from '@angular/common/src/directives/ng_for';
-import * as import13 from '../../../src/common/svg-linear-gradient.component';
-import * as import14 from './svg-linear-gradient.component.ngfactory';
-import * as import15 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import16 from '@angular/common/src/directives/ng_if';
-import * as import17 from '../../../src/common/circle.component';
-import * as import18 from './tooltip/tooltip.directive.ngfactory';
-import * as import19 from './circle.component.ngfactory';
-import * as import20 from '../../../src/common/tooltip/tooltip.service';
-import * as import21 from '../../../src/utils/injection.service';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/view_container';
+import * as import10 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import11 from '@angular/core/src/linker/template_ref';
+import * as import12 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import13 from '@angular/common/src/directives/ng_for';
+import * as import14 from '../../../src/common/svg-linear-gradient.component';
+import * as import15 from './svg-linear-gradient.component.ngfactory';
+import * as import16 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import17 from '@angular/common/src/directives/ng_if';
+import * as import18 from '../../../src/common/circle.component';
+import * as import19 from './tooltip/tooltip.directive.ngfactory';
+import * as import20 from './circle.component.ngfactory';
+import * as import21 from '../../../src/common/tooltip/tooltip.service';
 import * as import22 from '@angular/core/src/linker/element_ref';
-import * as import23 from '@angular/core/src/zone/ng_zone';
-import * as import24 from '../../../src/common/tooltip/tooltip.directive';
+import * as import23 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_CircleSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CircleSeriesComponent;
@@ -43,7 +42,6 @@ export class Wrapper_CircleSeriesComponent {
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
-  /*private*/ _expr_8:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -59,7 +57,6 @@ export class Wrapper_CircleSeriesComponent {
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
-    this._expr_8 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -100,44 +97,36 @@ export class Wrapper_CircleSeriesComponent {
       this._expr_3 = currValue;
     }
   }
-  check_color(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_colors(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_4,currValue))) {
       this._changed = true;
-      this.context.color = currValue;
-      this._changes['color'] = new import1.SimpleChange(this._expr_4,currValue);
+      this.context.colors = currValue;
+      this._changes['colors'] = new import1.SimpleChange(this._expr_4,currValue);
       this._expr_4 = currValue;
     }
   }
-  check_strokeColor(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_scaleType(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
       this._changed = true;
-      this.context.strokeColor = currValue;
-      this._changes['strokeColor'] = new import1.SimpleChange(this._expr_5,currValue);
+      this.context.scaleType = currValue;
+      this._changes['scaleType'] = new import1.SimpleChange(this._expr_5,currValue);
       this._expr_5 = currValue;
     }
   }
-  check_scaleType(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_visibleValue(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_6,currValue))) {
       this._changed = true;
-      this.context.scaleType = currValue;
-      this._changes['scaleType'] = new import1.SimpleChange(this._expr_6,currValue);
+      this.context.visibleValue = currValue;
+      this._changes['visibleValue'] = new import1.SimpleChange(this._expr_6,currValue);
       this._expr_6 = currValue;
     }
   }
-  check_visibleValue(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_7,currValue))) {
       this._changed = true;
-      this.context.visibleValue = currValue;
-      this._changes['visibleValue'] = new import1.SimpleChange(this._expr_7,currValue);
-      this._expr_7 = currValue;
-    }
-  }
-  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
-    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
-      this._changed = true;
       this.context.activeEntries = currValue;
-      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_8,currValue);
-      this._expr_8 = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_7,currValue);
+      this._expr_7 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -168,15 +157,15 @@ class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.CircleSeriesComponent>;
   _CircleSeriesComponent_0_3:Wrapper_CircleSeriesComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CircleSeriesComponent_Host0,renderType_CircleSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_CircleSeriesComponent_Host0,renderType_CircleSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'circleSeries',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-circle-ceries',''),rootSelector,(null as any));
     this.compView_0 = new View_CircleSeriesComponent0(this.viewUtils,this,0,this._el_0);
     this._CircleSeriesComponent_0_3 = new Wrapper_CircleSeriesComponent();
     this.compView_0.create(this._CircleSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._CircleSeriesComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._CircleSeriesComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.CircleSeriesComponent) && (0 === requestNodeIndex))) { return this._CircleSeriesComponent_0_3.context; }
@@ -184,7 +173,7 @@ class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._CircleSeriesComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -194,26 +183,26 @@ class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const CircleSeriesComponentNgFactory:import7.ComponentFactory<import0.CircleSeriesComponent> = new import7.ComponentFactory<import0.CircleSeriesComponent>('g[circleSeries]',View_CircleSeriesComponent_Host0,import0.CircleSeriesComponent);
+export const CircleSeriesComponentNgFactory:import8.ComponentFactory<import0.CircleSeriesComponent> = new import8.ComponentFactory<import0.CircleSeriesComponent>('g[ngx-charts-circle-ceries]',View_CircleSeriesComponent_Host0,import0.CircleSeriesComponent);
 const styles_CircleSeriesComponent:any[] = ([] as any[]);
 var renderType_CircleSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeriesComponent,{});
 export class View_CircleSeriesComponent0 extends import2.AppView<import0.CircleSeriesComponent> {
   _text_0:any;
   _anchor_1:any;
-  /*private*/ _vc_1:import8.ViewContainer;
+  /*private*/ _vc_1:import9.ViewContainer;
   _TemplateRef_1_5:any;
-  _NgFor_1_6:import9.Wrapper_NgFor;
+  _NgFor_1_6:import10.Wrapper_NgFor;
   _text_2:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CircleSeriesComponent0,renderType_CircleSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
+    super(View_CircleSeriesComponent0,renderType_CircleSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
-    this._vc_1 = new import8.ViewContainer(1,(null as any),this,this._anchor_1);
-    this._TemplateRef_1_5 = new import10.TemplateRef_(this,1,this._anchor_1);
-    this._NgFor_1_6 = new import9.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import11.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_1 = new import9.ViewContainer(1,(null as any),this,this._anchor_1);
+    this._TemplateRef_1_5 = new import11.TemplateRef_(this,1,this._anchor_1);
+    this._NgFor_1_6 = new import10.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
@@ -224,8 +213,8 @@ export class View_CircleSeriesComponent0 extends import2.AppView<import0.CircleS
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import10.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
-    if (((token === import12.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
+    if (((token === import11.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
+    if (((token === import13.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -246,94 +235,101 @@ class View_CircleSeriesComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import13.SvgLinearGradientComponent>;
-  _SvgLinearGradientComponent_2_3:import14.Wrapper_SvgLinearGradientComponent;
   _text_3:any;
-  _anchor_4:any;
-  /*private*/ _vc_4:import8.ViewContainer;
-  _TemplateRef_4_5:any;
-  _NgIf_4_6:import15.Wrapper_NgIf;
+  _el_4:any;
+  compView_4:import2.AppView<import14.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_4_3:import15.Wrapper_SvgLinearGradientComponent;
   _text_5:any;
-  _anchor_6:any;
-  /*private*/ _vc_6:import8.ViewContainer;
-  _TemplateRef_6_5:any;
-  _NgIf_6_6:import15.Wrapper_NgIf;
-  _text_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
-    super(View_CircleSeriesComponent1,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  _text_6:any;
+  _anchor_7:any;
+  /*private*/ _vc_7:import9.ViewContainer;
+  _TemplateRef_7_5:any;
+  _NgIf_7_6:import16.Wrapper_NgIf;
+  _text_8:any;
+  _anchor_9:any;
+  /*private*/ _vc_9:import9.ViewContainer;
+  _TemplateRef_9_5:any;
+  _NgIf_9_6:import16.Wrapper_NgIf;
+  _text_10:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+    super(View_CircleSeriesComponent1,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'orientation','vertical','svgLinearGradient',''),(null as any));
-    this.compView_2 = new import14.View_SvgLinearGradientComponent0(this.viewUtils,this,2,this._el_2);
-    this._SvgLinearGradientComponent_2_3 = new import14.Wrapper_SvgLinearGradientComponent();
-    this.compView_2.create(this._SvgLinearGradientComponent_2_3.context);
-    this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_4 = new import8.ViewContainer(4,0,this,this._anchor_4);
-    this._TemplateRef_4_5 = new import10.TemplateRef_(this,4,this._anchor_4);
-    this._NgIf_4_6 = new import15.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
-    this._text_5 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._anchor_6 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_6 = new import8.ViewContainer(6,0,this,this._anchor_6);
-    this._TemplateRef_6_5 = new import10.TemplateRef_(this,6,this._anchor_6);
-    this._NgIf_6_6 = new import15.Wrapper_NgIf(this._vc_6.vcRef,this._TemplateRef_6_5);
-    this._text_7 = this.renderer.createText(this._el_0,'\n    ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_3 = this.renderer.createText(this._el_2,'\n        ',(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,':svg:g',new import3.InlineArray4(4,'ngx-charts-svg-linear-gradient','','orientation','vertical'),(null as any));
+    this.compView_4 = new import15.View_SvgLinearGradientComponent0(this.viewUtils,this,4,this._el_4);
+    this._SvgLinearGradientComponent_4_3 = new import15.Wrapper_SvgLinearGradientComponent();
+    this.compView_4.create(this._SvgLinearGradientComponent_4_3.context);
+    this._text_5 = this.renderer.createText(this._el_2,'\n      ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    this._anchor_7 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_7 = new import9.ViewContainer(7,0,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import11.TemplateRef_(this,7,this._anchor_7);
+    this._NgIf_7_6 = new import16.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
+    this._text_8 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    this._anchor_9 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_9 = new import9.ViewContainer(9,0,this,this._anchor_9);
+    this._TemplateRef_9_5 = new import11.TemplateRef_(this,9,this._anchor_9);
+    this._NgIf_9_6 = new import16.Wrapper_NgIf(this._vc_9.vcRef,this._TemplateRef_9_5);
+    this._text_10 = this.renderer.createText(this._el_0,'\n    ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
       this._el_2,
       this._text_3,
-      this._anchor_4,
+      this._el_4,
       this._text_5,
-      this._anchor_6,
-      this._text_7
+      this._text_6,
+      this._anchor_7,
+      this._text_8,
+      this._anchor_9,
+      this._text_10
     ]
     ),(null as any));
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import13.SvgLinearGradientComponent) && (2 === requestNodeIndex))) { return this._SvgLinearGradientComponent_2_3.context; }
-    if (((token === import10.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
-    if (((token === import16.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
-    if (((token === import10.TemplateRef) && (6 === requestNodeIndex))) { return this._TemplateRef_6_5; }
-    if (((token === import16.NgIf) && (6 === requestNodeIndex))) { return this._NgIf_6_6.context; }
+    if (((token === import14.SvgLinearGradientComponent) && (4 === requestNodeIndex))) { return this._SvgLinearGradientComponent_4_3.context; }
+    if (((token === import11.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import17.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
+    if (((token === import11.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
+    if (((token === import17.NgIf) && (9 === requestNodeIndex))) { return this._NgIf_9_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_2_0_0:any = 'vertical';
-    this._SvgLinearGradientComponent_2_3.check_orientation(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = this.parentView.context.color;
-    this._SvgLinearGradientComponent_2_3.check_color(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = this.context.$implicit.gradientId;
-    this._SvgLinearGradientComponent_2_3.check_name(currVal_2_0_2,throwOnChange,false);
-    const currVal_2_0_3:any = 0.2;
-    this._SvgLinearGradientComponent_2_3.check_startOpacity(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = 1;
-    this._SvgLinearGradientComponent_2_3.check_endOpacity(currVal_2_0_4,throwOnChange,false);
-    if (this._SvgLinearGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
-    const currVal_4_0_0:any = (this.context.$implicit.barVisible && (this.parentView.context.type === 'standard'));
-    this._NgIf_4_6.check_ngIf(currVal_4_0_0,throwOnChange,false);
-    this._NgIf_4_6.ngDoCheck(this,this._anchor_4,throwOnChange);
-    const currVal_6_0_0:any = this.parentView.context.isVisible(this.context.$implicit);
-    this._NgIf_6_6.check_ngIf(currVal_6_0_0,throwOnChange,false);
-    this._NgIf_6_6.ngDoCheck(this,this._anchor_6,throwOnChange);
-    this._vc_4.detectChangesInNestedViews(throwOnChange);
-    this._vc_6.detectChangesInNestedViews(throwOnChange);
-    this.compView_2.detectChanges(throwOnChange);
+    const currVal_4_0_0:any = 'vertical';
+    this._SvgLinearGradientComponent_4_3.check_orientation(currVal_4_0_0,throwOnChange,false);
+    const currVal_4_0_1:any = this.parentView.context.color;
+    this._SvgLinearGradientComponent_4_3.check_color(currVal_4_0_1,throwOnChange,false);
+    const currVal_4_0_2:any = this.context.$implicit.gradientId;
+    this._SvgLinearGradientComponent_4_3.check_name(currVal_4_0_2,throwOnChange,false);
+    const currVal_4_0_3:any = this.context.$implicit.gradientStops;
+    this._SvgLinearGradientComponent_4_3.check_stops(currVal_4_0_3,throwOnChange,false);
+    if (this._SvgLinearGradientComponent_4_3.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
+    const currVal_7_0_0:any = (this.context.$implicit.barVisible && (this.parentView.context.type === 'standard'));
+    this._NgIf_7_6.check_ngIf(currVal_7_0_0,throwOnChange,false);
+    this._NgIf_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
+    const currVal_9_0_0:any = this.parentView.context.isVisible(this.context.$implicit);
+    this._NgIf_9_6.check_ngIf(currVal_9_0_0,throwOnChange,false);
+    this._NgIf_9_6.ngDoCheck(this,this._anchor_9,throwOnChange);
+    this._vc_7.detectChangesInNestedViews(throwOnChange);
+    this._vc_9.detectChangesInNestedViews(throwOnChange);
+    this.compView_4.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
-    this._vc_4.destroyNestedViews();
-    this._vc_6.destroyNestedViews();
-    this.compView_2.destroy();
+    this._vc_7.destroyNestedViews();
+    this._vc_9.destroyNestedViews();
+    this.compView_4.destroy();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 4)) { return new View_CircleSeriesComponent2(this.viewUtils,this,4,this._anchor_4,this._vc_4); }
-    if ((nodeIndex == 6)) { return new View_CircleSeriesComponent3(this.viewUtils,this,6,this._anchor_6,this._vc_6); }
+    if ((nodeIndex == 7)) { return new View_CircleSeriesComponent2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
+    if ((nodeIndex == 9)) { return new View_CircleSeriesComponent3(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
     return (null as any);
   }
 }
@@ -344,15 +340,15 @@ class View_CircleSeriesComponent2 extends import2.AppView<any> {
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
-    super(View_CircleSeriesComponent2,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+    super(View_CircleSeriesComponent2,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:rect',new import3.InlineArray2(2,'class','tooltip-bar'),(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return (null as any);
@@ -390,32 +386,36 @@ class View_CircleSeriesComponent2 extends import2.AppView<any> {
 }
 class View_CircleSeriesComponent3 extends import2.AppView<any> {
   _el_0:any;
-  /*private*/ _vc_0:import8.ViewContainer;
-  compView_0:import2.AppView<import17.CircleComponent>;
-  _TooltipDirective_0_5:import18.Wrapper_TooltipDirective;
-  _CircleComponent_0_6:import19.Wrapper_CircleComponent;
+  /*private*/ _vc_0:import9.ViewContainer;
+  compView_0:import2.AppView<import18.CircleComponent>;
+  _TooltipDirective_0_5:import19.Wrapper_TooltipDirective;
+  _CircleComponent_0_6:import20.Wrapper_CircleComponent;
   _el_1:any;
   /*private*/ _expr_6:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import8.ViewContainer) {
-    super(View_CircleSeriesComponent3,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  _map_7:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+    super(View_CircleSeriesComponent3,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_6 = import1.UNINITIALIZED;
+    this._map_7 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {name: p0};
+    });
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray8(6,'circle','','class','circle','swui-tooltip',''),(null as any));
-    this._vc_0 = new import8.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new import19.View_CircleComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import18.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import20.TooltipService,this.parentView.parentIndex),this._vc_0.vcRef,this.parentView.parentView.injectorGet(import21.InjectionService,this.parentView.parentIndex),this.renderer,new import22.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import23.NgZone,this.parentView.parentIndex));
-    this._CircleComponent_0_6 = new import19.Wrapper_CircleComponent();
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray8(6,'class','circle','ngx-charts-circle','','ngx-tooltip',''),(null as any));
+    this._vc_0 = new import9.ViewContainer(0,(null as any),this,this._el_0);
+    this.compView_0 = new import20.View_CircleComponent0(this.viewUtils,this,0,this._el_0);
+    this._TooltipDirective_0_5 = new import19.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import21.TooltipService,this.parentView.parentIndex),this._vc_0.vcRef,this.renderer,new import22.ElementRef(this._el_0));
+    this._CircleComponent_0_6 = new import20.Wrapper_CircleComponent();
     this.compView_0.create(this._CircleComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(16,'select',(null as any),'activate',(null as any),'deactivate',(null as any),'focusin',(null as any),'mouseenter',(null as any),'blur',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(16,'select',(null as any),'activate',(null as any),'deactivate',(null as any),'focusin',(null as any),'blur',(null as any),'mouseenter',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
     this._CircleComponent_0_6.subscribe(this,this.eventHandler(this.handleEvent_0),true,true,true);
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import24.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
-    if (((token === import17.CircleComponent) && (0 === requestNodeIndex))) { return this._CircleComponent_0_6.context; }
+    if (((token === import23.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import18.CircleComponent) && (0 === requestNodeIndex))) { return this._CircleComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -432,24 +432,22 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
     this._CircleComponent_0_6.check_cy(currVal_0_1_1,throwOnChange,false);
     const currVal_0_1_2:any = this.parentView.context.$implicit.radius;
     this._CircleComponent_0_6.check_r(currVal_0_1_2,throwOnChange,false);
-    const currVal_0_1_3:any = this.parentView.parentView.context.color;
+    const currVal_0_1_3:any = this.parentView.context.$implicit.color;
     this._CircleComponent_0_6.check_fill(currVal_0_1_3,throwOnChange,false);
-    const currVal_0_1_4:any = this.parentView.parentView.context.strokeColor;
-    this._CircleComponent_0_6.check_stroke(currVal_0_1_4,throwOnChange,false);
-    const currVal_0_1_5:any = this.parentView.context.$implicit.value;
-    this._CircleComponent_0_6.check_data(currVal_0_1_5,throwOnChange,false);
-    const currVal_0_1_6:any = this.parentView.context.$implicit.classNames;
-    this._CircleComponent_0_6.check_classNames(currVal_0_1_6,throwOnChange,false);
-    const currVal_0_1_7:any = ((this.parentView.context.$implicit.value === 0)? 'none': 'all');
-    this._CircleComponent_0_6.check_pointerEvents(currVal_0_1_7,throwOnChange,false);
+    const currVal_0_1_4:any = this.parentView.context.$implicit.value;
+    this._CircleComponent_0_6.check_data(currVal_0_1_4,throwOnChange,false);
+    const currVal_0_1_5:any = this.parentView.context.$implicit.classNames;
+    this._CircleComponent_0_6.check_classNames(currVal_0_1_5,throwOnChange,false);
+    const currVal_0_1_6:any = ((this.parentView.context.$implicit.value === 0)? 'none': 'all');
+    this._CircleComponent_0_6.check_pointerEvents(currVal_0_1_6,throwOnChange,false);
     if (this._CircleComponent_0_6.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     this._vc_0.detectChangesInNestedViews(throwOnChange);
-    const currVal_6:any = this.parentView.parentView.context.isActive(this.parentView.context.$implicit.label);
+    const currVal_6:any = this.parentView.parentView.context.isActive(this._map_7(this.parentView.context.$implicit.seriesName));
     if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
       this.renderer.setElementClass(this._el_0,'active',currVal_6);
       this._expr_6 = currVal_6;
     }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this._vc_0.destroyNestedViews();

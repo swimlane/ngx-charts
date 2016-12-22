@@ -28,7 +28,7 @@ import { formatLabel } from '../common/label.helper';
             [innerRadius]="series.innerRadius"
             [outerRadius]="series.outerRadius"
             (select)="onClick($event)"
-            swui-tooltip
+            ngx-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="getTooltipText(series.label, series.value.toLocaleString())"

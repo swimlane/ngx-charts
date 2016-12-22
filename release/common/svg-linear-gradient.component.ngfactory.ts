@@ -6,14 +6,20 @@
  /* tslint:disable */
 
 import * as import0 from '../../../src/common/svg-linear-gradient.component';
-import * as import1 from '@angular/core/src/change_detection/change_detection';
+import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
-import * as import7 from '@angular/core/src/linker/component_factory';
-import * as import8 from '@angular/core/src/security';
+import * as import7 from '@angular/core/src/change_detection/constants';
+import * as import8 from '@angular/core/src/linker/component_factory';
+import * as import9 from '@angular/core/src/linker/view_container';
+import * as import10 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import11 from '@angular/core/src/linker/template_ref';
+import * as import12 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import13 from '@angular/common/src/directives/ng_for';
+import * as import14 from '@angular/core/src/security';
 export class Wrapper_SvgLinearGradientComponent {
   /*private*/ _eventHandler:Function;
   context:import0.SvgLinearGradientComponent;
@@ -23,7 +29,6 @@ export class Wrapper_SvgLinearGradientComponent {
   /*private*/ _expr_1:any;
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
-  /*private*/ _expr_4:any;
   constructor() {
     this._changed = false;
     this._changes = {};
@@ -32,7 +37,6 @@ export class Wrapper_SvgLinearGradientComponent {
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
-    this._expr_4 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -62,20 +66,12 @@ export class Wrapper_SvgLinearGradientComponent {
       this._expr_2 = currValue;
     }
   }
-  check_startOpacity(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_stops(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
       this._changed = true;
-      this.context.startOpacity = currValue;
-      this._changes['startOpacity'] = new import1.SimpleChange(this._expr_3,currValue);
+      this.context.stops = currValue;
+      this._changes['stops'] = new import1.SimpleChange(this._expr_3,currValue);
       this._expr_3 = currValue;
-    }
-  }
-  check_endOpacity(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
-    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_4,currValue))) {
-      this._changed = true;
-      this.context.endOpacity = currValue;
-      this._changes['endOpacity'] = new import1.SimpleChange(this._expr_4,currValue);
-      this._expr_4 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -103,15 +99,15 @@ class View_SvgLinearGradientComponent_Host0 extends import2.AppView<any> {
   compView_0:import2.AppView<import0.SvgLinearGradientComponent>;
   _SvgLinearGradientComponent_0_3:Wrapper_SvgLinearGradientComponent;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SvgLinearGradientComponent_Host0,renderType_SvgLinearGradientComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckAlways);
+    super(View_SvgLinearGradientComponent_Host0,renderType_SvgLinearGradientComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'svgLinearGradient',''),rootSelector,(null as any));
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-svg-linear-gradient',''),rootSelector,(null as any));
     this.compView_0 = new View_SvgLinearGradientComponent0(this.viewUtils,this,0,this._el_0);
     this._SvgLinearGradientComponent_0_3 = new Wrapper_SvgLinearGradientComponent();
     this.compView_0.create(this._SvgLinearGradientComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return new import7.ComponentRef_<any>(0,this,this._el_0,this._SvgLinearGradientComponent_0_3.context);
+    return new import8.ComponentRef_<any>(0,this,this._el_0,this._SvgLinearGradientComponent_0_3.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import0.SvgLinearGradientComponent) && (0 === requestNodeIndex))) { return this._SvgLinearGradientComponent_0_3.context; }
@@ -119,7 +115,7 @@ class View_SvgLinearGradientComponent_Host0 extends import2.AppView<any> {
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._SvgLinearGradientComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.detectChanges(throwOnChange);
+    this.compView_0.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_0.destroy();
@@ -128,121 +124,132 @@ class View_SvgLinearGradientComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const SvgLinearGradientComponentNgFactory:import7.ComponentFactory<import0.SvgLinearGradientComponent> = new import7.ComponentFactory<import0.SvgLinearGradientComponent>('g[svgLinearGradient]',View_SvgLinearGradientComponent_Host0,import0.SvgLinearGradientComponent);
+export const SvgLinearGradientComponentNgFactory:import8.ComponentFactory<import0.SvgLinearGradientComponent> = new import8.ComponentFactory<import0.SvgLinearGradientComponent>('g[ngx-charts-svg-linear-gradient]',View_SvgLinearGradientComponent_Host0,import0.SvgLinearGradientComponent);
 const styles_SvgLinearGradientComponent:any[] = ([] as any[]);
 var renderType_SvgLinearGradientComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SvgLinearGradientComponent,{});
 export class View_SvgLinearGradientComponent0 extends import2.AppView<import0.SvgLinearGradientComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
-  _el_3:any;
+  _anchor_3:any;
+  /*private*/ _vc_3:import9.ViewContainer;
+  _TemplateRef_3_5:any;
+  _NgFor_3_6:import10.Wrapper_NgFor;
   _text_4:any;
-  _el_5:any;
-  _text_6:any;
-  _text_7:any;
-  /*private*/ _expr_8:any;
+  _text_5:any;
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
   /*private*/ _expr_13:any;
-  /*private*/ _expr_14:any;
-  /*private*/ _expr_15:any;
-  /*private*/ _expr_16:any;
-  /*private*/ _expr_17:any;
-  /*private*/ _expr_18:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SvgLinearGradientComponent0,renderType_SvgLinearGradientComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import1.ChangeDetectorStatus.CheckOnce);
-    this._expr_8 = import1.UNINITIALIZED;
+    super(View_SvgLinearGradientComponent0,renderType_SvgLinearGradientComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
     this._expr_13 = import1.UNINITIALIZED;
-    this._expr_14 = import1.UNINITIALIZED;
-    this._expr_15 = import1.UNINITIALIZED;
-    this._expr_16 = import1.UNINITIALIZED;
-    this._expr_17 = import1.UNINITIALIZED;
-    this._expr_18 = import1.UNINITIALIZED;
   }
-  createInternal(rootSelector:string):import7.ComponentRef<any> {
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:linearGradient',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:stop',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_4 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._el_5 = import3.createRenderElement(this.renderer,this._el_1,':svg:stop',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_6 = this.renderer.createText(this._el_1,'\n    ',(null as any));
-    this._text_7 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this._anchor_3 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
+    this._vc_3 = new import9.ViewContainer(3,1,this,this._anchor_3);
+    this._TemplateRef_3_5 = new import11.TemplateRef_(this,3,this._anchor_3);
+    this._NgFor_3_6 = new import10.Wrapper_NgFor(this._vc_3.vcRef,this._TemplateRef_3_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
+    this._text_4 = this.renderer.createText(this._el_1,'     \n    ',(null as any));
+    this._text_5 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
       this._text_2,
-      this._el_3,
+      this._anchor_3,
       this._text_4,
-      this._el_5,
-      this._text_6,
-      this._text_7
+      this._text_5
     ]
     ),(null as any));
     return (null as any);
   }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import11.TemplateRef) && (3 === requestNodeIndex))) { return this._TemplateRef_3_5; }
+    if (((token === import13.NgFor) && (3 === requestNodeIndex))) { return this._NgFor_3_6.context; }
+    return notFoundResult;
+  }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_8:any = this.context.name;
-    if (import3.checkBinding(throwOnChange,this._expr_8,currVal_8)) {
-      this.renderer.setElementProperty(this._el_1,'id',currVal_8);
-      this._expr_8 = currVal_8;
-    }
-    const currVal_9:any = this.context.x1;
+    const currVal_3_0_0:any = this.context.stops;
+    this._NgFor_3_6.check_ngForOf(currVal_3_0_0,throwOnChange,false);
+    this._NgFor_3_6.ngDoCheck(this,this._anchor_3,throwOnChange);
+    this._vc_3.detectChangesInNestedViews(throwOnChange);
+    const currVal_9:any = this.context.name;
     if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
-      this.renderer.setElementAttribute(this._el_1,'x1',((currVal_9 == null)? (null as any): currVal_9.toString()));
+      this.renderer.setElementProperty(this._el_1,'id',currVal_9);
       this._expr_9 = currVal_9;
     }
-    const currVal_10:any = this.context.y1;
+    const currVal_10:any = this.context.x1;
     if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
-      this.renderer.setElementAttribute(this._el_1,'y1',((currVal_10 == null)? (null as any): currVal_10.toString()));
+      this.renderer.setElementAttribute(this._el_1,'x1',((currVal_10 == null)? (null as any): currVal_10.toString()));
       this._expr_10 = currVal_10;
     }
-    const currVal_11:any = this.context.x2;
+    const currVal_11:any = this.context.y1;
     if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
-      this.renderer.setElementAttribute(this._el_1,'x2',((currVal_11 == null)? (null as any): currVal_11.toString()));
+      this.renderer.setElementAttribute(this._el_1,'y1',((currVal_11 == null)? (null as any): currVal_11.toString()));
       this._expr_11 = currVal_11;
     }
-    const currVal_12:any = this.context.y2;
+    const currVal_12:any = this.context.x2;
     if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setElementAttribute(this._el_1,'y2',((currVal_12 == null)? (null as any): currVal_12.toString()));
+      this.renderer.setElementAttribute(this._el_1,'x2',((currVal_12 == null)? (null as any): currVal_12.toString()));
       this._expr_12 = currVal_12;
     }
-    const currVal_13:any = '0%';
+    const currVal_13:any = this.context.y2;
     if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
-      this.renderer.setElementAttribute(this._el_3,'offset',((currVal_13 == null)? (null as any): currVal_13.toString()));
+      this.renderer.setElementAttribute(this._el_1,'y2',((currVal_13 == null)? (null as any): currVal_13.toString()));
       this._expr_13 = currVal_13;
     }
-    const currVal_14:any = this.context.color;
-    if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setElementStyle(this._el_3,'stop-color',((this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_14).toString()));
-      this._expr_14 = currVal_14;
+  }
+  destroyInternal():void {
+    this._vc_3.destroyNestedViews();
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 3)) { return new View_SvgLinearGradientComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
+    return (null as any);
+  }
+}
+class View_SvgLinearGradientComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  /*private*/ _expr_1:any;
+  /*private*/ _expr_2:any;
+  /*private*/ _expr_3:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+    super(View_SvgLinearGradientComponent1,renderType_SvgLinearGradientComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_1 = import1.UNINITIALIZED;
+    this._expr_2 = import1.UNINITIALIZED;
+    this._expr_3 = import1.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:stop',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
+    return (null as any);
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_1:any = (this.context.$implicit.offset + '%');
+    if (import3.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
+      this.renderer.setElementAttribute(this._el_0,'offset',((currVal_1 == null)? (null as any): currVal_1.toString()));
+      this._expr_1 = currVal_1;
     }
-    const currVal_15:any = this.context.startOpacity;
-    if (import3.checkBinding(throwOnChange,this._expr_15,currVal_15)) {
-      this.renderer.setElementStyle(this._el_3,'stop-opacity',((this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_15) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_15).toString()));
-      this._expr_15 = currVal_15;
+    const currVal_2:any = this.context.$implicit.color;
+    if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
+      this.renderer.setElementStyle(this._el_0,'stop-color',((this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_2) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_2).toString()));
+      this._expr_2 = currVal_2;
     }
-    const currVal_16:any = '100%';
-    if (import3.checkBinding(throwOnChange,this._expr_16,currVal_16)) {
-      this.renderer.setElementAttribute(this._el_5,'offset',((currVal_16 == null)? (null as any): currVal_16.toString()));
-      this._expr_16 = currVal_16;
+    const currVal_3:any = this.context.$implicit.opacity;
+    if (import3.checkBinding(throwOnChange,this._expr_3,currVal_3)) {
+      this.renderer.setElementStyle(this._el_0,'stop-opacity',((this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_3) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_3).toString()));
+      this._expr_3 = currVal_3;
     }
-    const currVal_17:any = this.context.color;
-    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
-      this.renderer.setElementStyle(this._el_5,'stop-color',((this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_17) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_17).toString()));
-      this._expr_17 = currVal_17;
-    }
-    const currVal_18:any = this.context.endOpacity;
-    if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setElementStyle(this._el_5,'stop-opacity',((this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_18) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import8.SecurityContext.STYLE,currVal_18).toString()));
-      this._expr_18 = currVal_18;
-    }
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
   }
 }

@@ -44,6 +44,18 @@ var CircleSeriesComponent = (function () {
                 }
                 var gradientId = 'grad' + id_1.id().toString();
                 var gradientFill = "url(" + pageUrl + "#" + gradientId + ")";
+                var color = void 0;
+                if (_this.colors.scaleType === 'linear') {
+                    if (_this.type === 'standard') {
+                        color = _this.colors.getColor(value);
+                    }
+                    else {
+                        color = _this.colors.getColor(d.d1);
+                    }
+                }
+                else {
+                    color = _this.colors.getColor(seriesName);
+                }
                 return {
                     classNames: [("circle-data-" + i)],
                     value: value,
@@ -53,11 +65,13 @@ var CircleSeriesComponent = (function () {
                     radius: radius,
                     height: height,
                     tooltipLabel: tooltipLabel,
+                    color: color,
                     opacity: opacity,
                     seriesName: seriesName,
                     barVisible: false,
                     gradientId: gradientId,
-                    gradientFill: gradientFill
+                    gradientFill: gradientFill,
+                    gradientStops: _this.getGradientStops(color)
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
@@ -65,6 +79,19 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.prototype.getTooltipText = function (_a) {
         var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName;
         return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+    };
+    CircleSeriesComponent.prototype.getGradientStops = function (color) {
+        return [
+            {
+                offset: 0,
+                color: color,
+                opacity: 0.2
+            },
+            {
+                offset: 100,
+                color: color,
+                opacity: 1
+            }];
     };
     CircleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({
@@ -75,38 +102,40 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.prototype.isActive = function (entry) {
         if (!this.activeEntries)
             return false;
-        return this.activeEntries.indexOf(entry) > -1;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item !== undefined;
     };
     CircleSeriesComponent.prototype.isVisible = function (circle) {
         if (this.activeEntries.length > 0) {
-            return this.isActive(circle.seriesName);
+            return this.isActive({ name: circle.seriesName });
         }
         return circle.opacity !== 0;
     };
     CircleSeriesComponent.prototype.activateCircle = function (circle) {
         circle.barVisible = true;
-        this.activate.emit(this.data.name);
+        this.activate.emit({ name: this.data.name });
     };
     CircleSeriesComponent.prototype.deactivateCircle = function (circle) {
         circle.barVisible = false;
-        this.deactivate.emit(this.data.name);
+        this.deactivate.emit({ name: this.data.name });
     };
     CircleSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[circleSeries]',
-                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g svgLinearGradient\n        [color]=\"color\"\n        orientation=\"vertical\"\n        [name]=\"circle.gradientId\"\n        [startOpacity]=\"0.2\"\n        [endOpacity]=\"1\"\n      />\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"color\"\n        [class.active]=\"isActive(circle.label)\"\n        [stroke]=\"strokeColor\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        swui-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+                    selector: 'g[ngx-charts-circle-ceries]',
+                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    CircleSeriesComponent.ctorParameters = [];
+    CircleSeriesComponent.ctorParameters = function () { return []; };
     CircleSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'type': [{ type: core_1.Input },],
         'xScale': [{ type: core_1.Input },],
         'yScale': [{ type: core_1.Input },],
-        'color': [{ type: core_1.Input },],
-        'strokeColor': [{ type: core_1.Input },],
+        'colors': [{ type: core_1.Input },],
         'scaleType': [{ type: core_1.Input },],
         'visibleValue': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],

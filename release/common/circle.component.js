@@ -20,13 +20,13 @@ var CircleComponent = (function () {
     };
     CircleComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[circle]',
+                    selector: 'g[ngx-charts-circle]',
                     template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    CircleComponent.ctorParameters = [];
+    CircleComponent.ctorParameters = function () { return []; };
     CircleComponent.propDecorators = {
         'cx': [{ type: core_1.Input },],
         'cy': [{ type: core_1.Input },],

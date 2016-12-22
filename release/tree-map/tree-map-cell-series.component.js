@@ -20,7 +20,7 @@ var TreeMapCellSeriesComponent = (function () {
                 y: d.y0,
                 width: d.x1 - d.x0,
                 height: d.y1 - d.y0,
-                fill: _this.colors(label),
+                fill: _this.colors.getColor(label),
                 label: label,
                 value: d.value,
                 valueType: d.valueType
@@ -39,13 +39,13 @@ var TreeMapCellSeriesComponent = (function () {
     };
     TreeMapCellSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
-                    selector: 'g[treeMapCellSeries]',
-                    template: "\n    <svg:g treeMapCell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      swui-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+                    selector: 'g[ngx-charts-tree-map-cell-series]',
+                    template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
-    TreeMapCellSeriesComponent.ctorParameters = [];
+    TreeMapCellSeriesComponent.ctorParameters = function () { return []; };
     TreeMapCellSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'dims': [{ type: core_1.Input },],
