@@ -1,5 +1,5 @@
 # ngx-charts
-Angular2 + D3js Composable Re-usable Charting Framework. 
+Declarative Charting Framework for Angular2 and beyond!
 
 ngx-charts is unique because we don't merely wrap d3, nor any other chart engine for that matter. It is using Angular to render and animate the SVG elements with all of its binding and speed goodness, and uses d3 for the excellent math functions, scales, axis and shape generators, etc. By having Angular do all of the rendering it opens us up to endless possibilities the Angular platform provides such as AoT, Universal, etc. 
 
