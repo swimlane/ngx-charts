@@ -1,7 +1,7 @@
 {
-  "name": "ngx-charts",
-  "version": "3.0.2",
-  "description": "Angular2 + D3 Charting Library",
+  "name": "@swimlane/ngx-charts",
+  "version": "3.0.3",
+  "description": "Declarative Charting Framework for Angular2 and beyond!",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
   "scripts": {
@@ -55,7 +55,7 @@
     "graph",
     "d3.js",
     "d3js",
-    "angular"
+    "angular4"
   ],
   "authors": [
     "Austin McDaniel",

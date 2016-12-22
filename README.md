@@ -1,4 +1,4 @@
-# ngx-charts (ng2d3)
+# ngx-charts (f.k.a. ng2d3)
 [![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts) 
 [![Code Climate](https://codeclimate.com/github/swimlane/ngx-charts/badges/gpa.svg)](https://codeclimate.com/github/swimlane/ngx-charts)
@@ -38,6 +38,13 @@ For more info, check out the [documentation](https://swimlane.gitbooks.io/ngx-ch
 - Advanced Tooltips
 - Data point Event Handlers
 - Works with ngUpgrade
+
+## Install
+To use ngx-charts in your project install it via [npm](https://www.npmjs.com/package/@swimlane/ngx-charts):
+
+```
+npm i @swimlane/ngx-datatable --save
+```
 
 ## Credits
 `ngx-charts` is a [Swimlane](http://swimlane.com) open-source project; we believe in giving back to the open-source community by sharing some of the projects we build for our application. Swimlane is an automated cyber security operations and incident response platform that enables cyber security teams to leverage threat intelligence, speed up incident response and automate security operations.
