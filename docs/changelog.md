@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.0.3
+- Namespaced the project to swimlane organization
+
+## 3.0.2
+- Exported ColorHelper class
+
+## 3.0.1
+- Updated tooltips to latest version from ngx-ui
+
+## 3.0.0
+- Renamed project to ngx-charts
+- Prefixed component selectors with ngx-charts-
+- Upgraded angular to 2.4.1
+- Implemented BaseChartComponent as an angular component and set up proper component inheritance
+- Converted color helper to a class
+- Implemented linear color schemes for bar, line and area charts and added schemeType input
+- Added support for multiple values in gague chart
+- Implemented linear gauge chart
+- Implemented triggering legend item activation when chart items are being hovered
+
 ## 2.0.0
 - BREAKING: Renamed `clickHandler` to `select` (#120)
 - Bug: Tooltips show up in top left corner sometimes
