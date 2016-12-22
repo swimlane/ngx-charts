@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var throttle_1 = require('../../utils/throttle');
 var position_1 = require('./position');
-require('./tooltip.component.scss');
 var TooltipContentComponent = (function () {
     function TooltipContentComponent(element, renderer) {
         this.element = element;

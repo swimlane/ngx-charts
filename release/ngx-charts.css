@@ -188,7 +188,8 @@
 
 .chart-legend {
   display: inline-block;
-  padding: 0; }
+  padding: 0;
+  width: auto !important; }
   .chart-legend .legend-title {
     white-space: nowrap;
     overflow: hidden;

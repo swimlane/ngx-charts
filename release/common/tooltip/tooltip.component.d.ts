@@ -2,7 +2,6 @@ import { ElementRef, AfterViewInit, Renderer } from '@angular/core';
 import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
-import './tooltip.component.scss';
 export declare class TooltipContentComponent implements AfterViewInit {
     element: ElementRef;
     private renderer;
