@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var core_1 = require('@angular/core');
 var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_sets_1 = require('../utils/color-sets');
+var color_helper_1 = require('../common/color.helper');
 var grid_layout_helper_1 = require('../common/grid-layout.helper');
 var NumberCardComponent = (function (_super) {
     __extends(NumberCardComponent, _super);
@@ -37,7 +37,7 @@ var NumberCardComponent = (function (_super) {
         this.select.emit(data);
     };
     NumberCardComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     NumberCardComponent.decorators = [
         { type: core_1.Component, args: [{

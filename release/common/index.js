@@ -6,6 +6,7 @@ __export(require('./chart-common.module'));
 __export(require('./legend'));
 __export(require("./tooltip"));
 __export(require('./count'));
+__export(require('./color.helper'));
 __export(require('./area.component'));
 __export(require('./area-tooltip.component'));
 __export(require('./base-chart.component'));

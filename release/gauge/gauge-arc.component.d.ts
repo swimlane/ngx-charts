@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { ColorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../common/color.helper';
 export declare class GaugeArcComponent {
     backgroundArc: any;
     valueArc: any;

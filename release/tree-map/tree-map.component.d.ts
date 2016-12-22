@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { ColorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../common/color.helper';
 export declare class TreeMapComponent extends BaseChartComponent {
     results: any;
     select: EventEmitter<{}>;

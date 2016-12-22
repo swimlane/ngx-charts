@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core_1 = require('@angular/core');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_sets_1 = require('../utils/color-sets');
+var color_helper_1 = require('../common/color.helper');
 var base_chart_component_1 = require('../common/base-chart.component');
 var d3_1 = require('../d3');
 var BarVertical2DComponent = (function (_super) {
@@ -130,7 +130,7 @@ var BarVertical2DComponent = (function (_super) {
         else {
             domain = this.valuesDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVertical2DComponent.prototype.getLegendOptions = function () {
         var opts = {

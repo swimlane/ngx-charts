@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core_1 = require('@angular/core');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_sets_1 = require('../utils/color-sets');
+var color_helper_1 = require('../common/color.helper');
 var base_chart_component_1 = require('../common/base-chart.component');
 var PieChartComponent = (function (_super) {
     __extends(PieChartComponent, _super);
@@ -80,7 +80,7 @@ var PieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     PieChartComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     PieChartComponent.prototype.getLegendOptions = function () {
         return {

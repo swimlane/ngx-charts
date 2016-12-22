@@ -1,6 +1,6 @@
 {
   "name": "ngx-charts",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Angular2 + D3 Charting Library",
   "main": "release/index.js",
   "typings": "release/index.d.ts",

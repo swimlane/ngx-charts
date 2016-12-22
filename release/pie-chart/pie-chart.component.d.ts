@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { ColorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class PieChartComponent extends BaseChartComponent {
     labels: boolean;

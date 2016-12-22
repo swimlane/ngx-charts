@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"3.0.1" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"3.0.2" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -103,7 +103,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var moment = __webpack_require__(1);
 var id_1 = __webpack_require__("./src/utils/id.ts");
@@ -345,7 +345,7 @@ var AreaChartNormalizedComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     AreaChartNormalizedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -493,7 +493,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var moment = __webpack_require__(1);
 var id_1 = __webpack_require__("./src/utils/id.ts");
@@ -740,7 +740,7 @@ var AreaChartStackedComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     AreaChartStackedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -888,7 +888,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var moment = __webpack_require__(1);
 var id_1 = __webpack_require__("./src/utils/id.ts");
@@ -1088,7 +1088,7 @@ var AreaChartComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     AreaChartComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -1560,7 +1560,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontal2DComponent = (function (_super) {
@@ -1683,7 +1683,7 @@ var BarHorizontal2DComponent = (function (_super) {
         else {
             domain = this.valuesDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontal2DComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -1836,7 +1836,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalNormalizedComponent = (function (_super) {
@@ -1938,7 +1938,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontalNormalizedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -2091,7 +2091,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalStackedComponent = (function (_super) {
@@ -2205,7 +2205,7 @@ var BarHorizontalStackedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontalStackedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -2358,7 +2358,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalComponent = (function (_super) {
@@ -2432,7 +2432,7 @@ var BarHorizontalComponent = (function (_super) {
         else {
             domain = this.xDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontalComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -2566,7 +2566,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVertical2DComponent = (function (_super) {
@@ -2690,7 +2690,7 @@ var BarVertical2DComponent = (function (_super) {
         else {
             domain = this.valuesDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVertical2DComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -2847,7 +2847,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalNormalizedComponent = (function (_super) {
@@ -2949,7 +2949,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVerticalNormalizedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -3102,7 +3102,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalStackedComponent = (function (_super) {
@@ -3216,7 +3216,7 @@ var BarVerticalStackedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVerticalStackedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -3369,7 +3369,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalComponent = (function (_super) {
@@ -3443,7 +3443,7 @@ var BarVerticalComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVerticalComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -5958,6 +5958,132 @@ exports.CircleComponent = CircleComponent;
 
 /***/ },
 
+/***/ "./src/common/color.helper.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var d3_1 = __webpack_require__("./src/d3.ts");
+var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var ColorHelper = (function () {
+    function ColorHelper(scheme, type, domain, customColors) {
+        if (typeof (scheme) === 'string') {
+            scheme = color_sets_1.colorSets.find(function (cs) {
+                return cs.name === scheme;
+            });
+        }
+        this.colorDomain = scheme.domain;
+        this.scaleType = type;
+        this.domain = domain;
+        this.scale = this.generateColorScheme(scheme, type, domain);
+    }
+    ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
+        if (typeof (scheme) === 'string') {
+            scheme = color_sets_1.colorSets.find(function (cs) {
+                return cs.name === scheme;
+            });
+        }
+        var colorScale;
+        if (type === 'quantile') {
+            colorScale = d3_1.default.scaleQuantile()
+                .range(scheme.domain)
+                .domain(domain);
+        }
+        else if (type === 'ordinal') {
+            colorScale = d3_1.default.scaleOrdinal()
+                .range(scheme.domain)
+                .domain(domain);
+        }
+        else if (type === 'linear') {
+            colorScale = d3_1.default.scaleLinear()
+                .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
+                .range(scheme.domain);
+        }
+        return colorScale;
+    };
+    ColorHelper.prototype.getColor = function (value) {
+        if (this.scaleType === 'linear') {
+            var valueScale = d3_1.default.scaleLinear()
+                .domain(this.domain)
+                .range([0, 1]);
+            return (this.scale(valueScale(value)));
+        }
+        else {
+            var formattedValue_1 = value.toString();
+            var found = undefined; // todo type customColors
+            if (this.customColors && this.customColors.length > 0) {
+                found = this.customColors.find(function (mapping) {
+                    return mapping.name === formattedValue_1.toLowerCase();
+                });
+            }
+            if (found) {
+                return found.value;
+            }
+            else {
+                return this.scale(value);
+            }
+        }
+    };
+    ColorHelper.prototype.getLinearGradientStops = function (value, start) {
+        if (!start) {
+            start = this.domain[0];
+        }
+        var valueScale = d3_1.default.scaleLinear()
+            .domain(this.domain)
+            .range([0, 1]);
+        var colorValueScale = d3_1.default.scaleBand()
+            .domain(this.colorDomain)
+            .range([0, 1]);
+        var endColor = this.getColor(value);
+        // generate the stops
+        var startVal = valueScale(start);
+        var startColor = this.getColor(start);
+        var endVal = valueScale(value);
+        var i = 0;
+        var currentVal = startVal;
+        var stops = [];
+        stops.push({
+            color: startColor,
+            offset: 0,
+            opacity: 1
+        });
+        while (currentVal < endVal && i < this.colorDomain.length) {
+            var color = this.colorDomain[i];
+            var offset = colorValueScale(color);
+            if (offset <= startVal) {
+                i++;
+                continue;
+            }
+            if (offset >= endVal) {
+                break;
+            }
+            stops.push({
+                color: color,
+                offset: offset,
+                opacity: 1
+            });
+            currentVal = offset;
+            i++;
+        }
+        stops.push({
+            color: endColor,
+            offset: endVal,
+            opacity: 1
+        });
+        // normalize the offsets into percentages
+        for (var _i = 0, stops_1 = stops; _i < stops_1.length; _i++) {
+            var s = stops_1[_i];
+            s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
+        }
+        return stops;
+    };
+    return ColorHelper;
+}());
+exports.ColorHelper = ColorHelper;
+
+
+/***/ },
+
 /***/ "./src/common/count/count.directive.ts":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -6419,6 +6545,7 @@ __export(__webpack_require__("./src/common/chart-common.module.ts"));
 __export(__webpack_require__("./src/common/legend/index.ts"));
 __export(__webpack_require__("./src/common/tooltip/index.ts"));
 __export(__webpack_require__("./src/common/count/index.ts"));
+__export(__webpack_require__("./src/common/color.helper.ts"));
 __export(__webpack_require__("./src/common/area.component.ts"));
 __export(__webpack_require__("./src/common/area-tooltip.component.ts"));
 __export(__webpack_require__("./src/common/base-chart.component.ts"));
@@ -8265,7 +8392,7 @@ var chart_component_1 = __webpack_require__("./src/common/charts/chart.component
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
     function ForceDirectedGraphComponent() {
@@ -8335,7 +8462,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         return node.value;
     };
     ForceDirectedGraphComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
     ForceDirectedGraphComponent.prototype.getLegendOptions = function () {
         return {
@@ -8510,7 +8637,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var GaugeArcComponent = (function () {
     function GaugeArcComponent() {
         this.select = new core_1.EventEmitter();
@@ -8529,7 +8656,7 @@ var GaugeArcComponent = (function () {
     ], GaugeArcComponent.prototype, "cornerRadius", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', color_sets_1.ColorHelper)
+        __metadata('design:type', color_helper_1.ColorHelper)
     ], GaugeArcComponent.prototype, "colors", void 0);
     __decorate([
         core_1.Output(), 
@@ -8705,7 +8832,7 @@ var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var GaugeComponent = (function (_super) {
     __extends(GaugeComponent, _super);
     function GaugeComponent() {
@@ -8848,7 +8975,7 @@ var GaugeComponent = (function (_super) {
         this.select.emit(data);
     };
     GaugeComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
         core_1.Input(), 
@@ -9000,7 +9127,7 @@ var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var LinearGaugeComponent = (function (_super) {
     __extends(LinearGaugeComponent, _super);
     function LinearGaugeComponent() {
@@ -9106,7 +9233,7 @@ var LinearGaugeComponent = (function (_super) {
         });
     };
     LinearGaugeComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
     };
     __decorate([
         core_1.Input(), 
@@ -9386,7 +9513,7 @@ var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var HeatMapComponent = (function (_super) {
     __extends(HeatMapComponent, _super);
     function HeatMapComponent() {
@@ -9495,7 +9622,7 @@ var HeatMapComponent = (function (_super) {
         this.select.emit(data);
     };
     HeatMapComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'linear', this.valueDomain);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'linear', this.valueDomain);
     };
     HeatMapComponent.prototype.getLegendOptions = function () {
         return {
@@ -9685,7 +9812,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
@@ -9883,7 +10010,7 @@ var LineChartComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     LineChartComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -10612,7 +10739,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var grid_layout_helper_1 = __webpack_require__("./src/common/grid-layout.helper.ts");
 var NumberCardComponent = (function (_super) {
     __extends(NumberCardComponent, _super);
@@ -10642,7 +10769,7 @@ var NumberCardComponent = (function (_super) {
         this.select.emit(data);
     };
     NumberCardComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     NumberCardComponent = __decorate([
         core_1.Component({
@@ -10728,7 +10855,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var AdvancedPieChartComponent = (function (_super) {
     __extends(AdvancedPieChartComponent, _super);
@@ -10765,7 +10892,7 @@ var AdvancedPieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     AdvancedPieChartComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     AdvancedPieChartComponent.prototype.onActivate = function (event) {
         if (this.activeEntries.indexOf(event) > -1)
@@ -11038,7 +11165,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var PieChartComponent = (function (_super) {
     __extends(PieChartComponent, _super);
@@ -11112,7 +11239,7 @@ var PieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     PieChartComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     PieChartComponent.prototype.getLegendOptions = function () {
         return {
@@ -11377,7 +11504,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var trim_label_helper_1 = __webpack_require__("./src/common/trim-label.helper.ts");
 var grid_layout_helper_1 = __webpack_require__("./src/common/grid-layout.helper.ts");
@@ -11460,7 +11587,7 @@ var PieGridComponent = (function (_super) {
         this.select.emit(data);
     };
     PieGridComponent.prototype.setColors = function () {
-        this.colorScale = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colorScale = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     PieGridComponent = __decorate([
         core_1.Component({
@@ -12230,7 +12357,7 @@ var core_1 = __webpack_require__(0);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var TreeMapComponent = (function (_super) {
     __extends(TreeMapComponent, _super);
     function TreeMapComponent() {
@@ -12280,7 +12407,7 @@ var TreeMapComponent = (function (_super) {
         this.select.emit(data);
     };
     TreeMapComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
         core_1.Input(), 
@@ -12354,11 +12481,10 @@ exports.TreeMapModule = TreeMapModule;
 /***/ },
 
 /***/ "./src/utils/color-sets.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 "use strict";
 "use strict";
-var d3_1 = __webpack_require__("./src/d3.ts");
 exports.colorSets = [
     {
         'name': 'vivid',
@@ -12451,121 +12577,6 @@ exports.colorSets = [
         'domain': ["#4e31a5", "#9c25a7", "#3065ab", "#57468b", "#904497", "#46648b", "#32118d", "#a00fb3", "#1052a2", "#6e51bd", "#b63cc3", "#6c97cb", "#8671c1", "#b455be", "#7496c3"]
     }
 ];
-var ColorHelper = (function () {
-    function ColorHelper(scheme, type, domain, customColors) {
-        if (typeof (scheme) === 'string') {
-            scheme = exports.colorSets.find(function (cs) {
-                return cs.name === scheme;
-            });
-        }
-        this.colorDomain = scheme.domain;
-        this.scaleType = type;
-        this.domain = domain;
-        this.scale = this.generateColorScheme(scheme, type, domain);
-    }
-    ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
-        if (typeof (scheme) === 'string') {
-            scheme = exports.colorSets.find(function (cs) {
-                return cs.name === scheme;
-            });
-        }
-        var colorScale;
-        if (type === 'quantile') {
-            colorScale = d3_1.default.scaleQuantile()
-                .range(scheme.domain)
-                .domain(domain);
-        }
-        else if (type === 'ordinal') {
-            colorScale = d3_1.default.scaleOrdinal()
-                .range(scheme.domain)
-                .domain(domain);
-        }
-        else if (type === 'linear') {
-            colorScale = d3_1.default.scaleLinear()
-                .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
-                .range(scheme.domain);
-        }
-        return colorScale;
-    };
-    ColorHelper.prototype.getColor = function (value) {
-        if (this.scaleType === 'linear') {
-            var valueScale = d3_1.default.scaleLinear()
-                .domain(this.domain)
-                .range([0, 1]);
-            return (this.scale(valueScale(value)));
-        }
-        else {
-            var formattedValue_1 = value.toString();
-            var found = undefined; // todo type customColors
-            if (this.customColors && this.customColors.length > 0) {
-                found = this.customColors.find(function (mapping) {
-                    return mapping.name === formattedValue_1.toLowerCase();
-                });
-            }
-            if (found) {
-                return found.value;
-            }
-            else {
-                return this.scale(value);
-            }
-        }
-    };
-    ColorHelper.prototype.getLinearGradientStops = function (value, start) {
-        if (!start) {
-            start = this.domain[0];
-        }
-        var valueScale = d3_1.default.scaleLinear()
-            .domain(this.domain)
-            .range([0, 1]);
-        var colorValueScale = d3_1.default.scaleBand()
-            .domain(this.colorDomain)
-            .range([0, 1]);
-        var endColor = this.getColor(value);
-        // generate the stops
-        var startVal = valueScale(start);
-        var startColor = this.getColor(start);
-        var endVal = valueScale(value);
-        var i = 0;
-        var currentVal = startVal;
-        var stops = [];
-        stops.push({
-            color: startColor,
-            offset: 0,
-            opacity: 1
-        });
-        while (currentVal < endVal && i < this.colorDomain.length) {
-            var color = this.colorDomain[i];
-            var offset = colorValueScale(color);
-            if (offset <= startVal) {
-                i++;
-                continue;
-            }
-            if (offset >= endVal) {
-                break;
-            }
-            stops.push({
-                color: color,
-                offset: offset,
-                opacity: 1
-            });
-            currentVal = offset;
-            i++;
-        }
-        stops.push({
-            color: endColor,
-            offset: endVal,
-            opacity: 1
-        });
-        // normalize the offsets into percentages
-        for (var _i = 0, stops_1 = stops; _i < stops_1.length; _i++) {
-            var s = stops_1[_i];
-            s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
-        }
-        return stops;
-    };
-    return ColorHelper;
-}());
-exports.ColorHelper = ColorHelper;
 
 
 /***/ },

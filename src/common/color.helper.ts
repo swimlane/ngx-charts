@@ -1,5 +1,5 @@
 import d3 from '../d3';
-import { colorSets } from '../utils/color-sets.ts';
+import { colorSets } from '../utils/color-sets';
 
 export class ColorHelper {
   scale: any;

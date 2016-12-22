@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-import { ColorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class BarHorizontalStackedComponent extends BaseChartComponent {
     legend: boolean;

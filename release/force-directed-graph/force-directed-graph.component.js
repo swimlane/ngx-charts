@@ -9,7 +9,7 @@ var chart_component_1 = require('../common/charts/chart.component');
 var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var d3_1 = require('../d3');
-var color_sets_1 = require('../utils/color-sets');
+var color_helper_1 = require('../common/color.helper');
 var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
     function ForceDirectedGraphComponent() {
@@ -79,7 +79,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         return node.value;
     };
     ForceDirectedGraphComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
     ForceDirectedGraphComponent.prototype.getLegendOptions = function () {
         return {

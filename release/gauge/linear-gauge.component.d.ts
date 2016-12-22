@@ -1,7 +1,7 @@
 import { ElementRef, AfterViewInit } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
-import { ColorHelper } from '../utils/color-sets';
+import { ColorHelper } from '../common/color.helper';
 export declare class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
     min: number;
     max: number;

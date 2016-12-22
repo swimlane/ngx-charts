@@ -8,7 +8,7 @@ var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var base_chart_component_1 = require('../common/base-chart.component');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_sets_1 = require('../utils/color-sets');
+var color_helper_1 = require('../common/color.helper');
 var GaugeComponent = (function (_super) {
     __extends(GaugeComponent, _super);
     function GaugeComponent() {
@@ -151,7 +151,7 @@ var GaugeComponent = (function (_super) {
         this.select.emit(data);
     };
     GaugeComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     GaugeComponent.decorators = [
         { type: core_1.Component, args: [{

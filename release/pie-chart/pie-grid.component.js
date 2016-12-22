@@ -7,7 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_sets_1 = require('../utils/color-sets');
+var color_helper_1 = require('../common/color.helper');
 var base_chart_component_1 = require('../common/base-chart.component');
 var trim_label_helper_1 = require('../common/trim-label.helper');
 var grid_layout_helper_1 = require('../common/grid-layout.helper');
@@ -90,7 +90,7 @@ var PieGridComponent = (function (_super) {
         this.select.emit(data);
     };
     PieGridComponent.prototype.setColors = function () {
-        this.colorScale = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colorScale = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     PieGridComponent.decorators = [
         { type: core_1.Component, args: [{
