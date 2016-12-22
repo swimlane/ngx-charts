@@ -22,7 +22,7 @@ describe('trimLabel', () => {
   it('returns the same string in case it is <= max length', () => {
     let text = 'Hi, try ngx-charts';
 
-    expect(trimLabel(text, 13)).toEqual(text);
+    expect(trimLabel(text, 18)).toEqual(text);
   });
 
   it('should trim down to 16 chars by default', () => {
@@ -36,7 +36,7 @@ describe('trimLabel', () => {
     let text = 'Hi, ngx-charts is cool!';
 
     let trimmedText = trimLabel(text, 8);
-    expect(trimmedText).toEqual(`Hi, ng2d...`);
+    expect(trimmedText).toEqual(`Hi, ngx-...`);
   });
 
 });

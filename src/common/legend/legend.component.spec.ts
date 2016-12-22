@@ -7,7 +7,7 @@ import d3 from '../../d3';
 import '../../../config/testing-utils';
 
 import { ChartCommonModule } from '../chart-common.module';
-import { colorHelper } from '../../utils/color-sets';
+import { ColorHelper } from '../color.helper';
 
 // some test data (includes just enought data to run the tests)
 let seriesData = ['complete', 'not complete'];
@@ -24,11 +24,11 @@ class TestComponent {
 
   constructor() {
     let scheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] };
-    this.colors = colorHelper(scheme, 'ordinal', [], null);
+    this.colors = new ColorHelper(scheme, 'ordinal', [], null);
   }
 }
 
-describe('<legend>', () => {
+describe('<ngx-charts-legend>', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -39,27 +39,16 @@ describe('<legend>', () => {
     TestBed.overrideComponent(TestComponent, {
       set: {
         template: `
-                <legend
-                  [data]="seriesData"
+                <ngx-charts-legend                
                   [title]="legendTitle"
                   [colors]="colors"
+                  [data]="seriesData"
                   [height]="legendHeight">
-                </legend>
+                </ngx-charts-legend>
             `
       }
     });
   });
-
-  it('should set the legend title', async(() => {
-    TestBed.compileComponents().then(() => {
-      let fixture = TestBed.createComponent(TestComponent);
-      fixture.detectChanges();
-
-      let legendTitle = fixture.debugElement.nativeElement.querySelector('.legend-title-text');
-
-      expect(legendTitle).toHaveText('Test legend title');
-    });
-  }));
 
   it('should set the legend labels', async(() => {
     TestBed.compileComponents().then(() => {
