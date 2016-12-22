@@ -49,9 +49,19 @@ module.exports = function(options) {
         },
         {
           test: /\.scss$/,
+          exclude: /\.component.scss$/,
           loaders: [
             'style-loader',
             'css-loader?sourceMap',
+            'postcss-loader?sourceMap',
+            'sass-loader?sourceMap'
+          ]
+        },
+        {
+          test: /\.component.scss$/,
+          loaders: [
+            'to-string-loader',
+            'css-loader',
             'postcss-loader?sourceMap',
             'sass-loader?sourceMap'
           ]
