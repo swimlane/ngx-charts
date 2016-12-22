@@ -9,8 +9,7 @@ import {
   ElementRef,
   Renderer,
   OnDestroy,
-  NgZone,
-  ViewEncapsulation
+  NgZone
 } from '@angular/core';
 
 import { InjectionService } from '../../utils/injection.service';
@@ -23,12 +22,9 @@ import { ShowTypes } from './show.type';
 import { TooltipContentComponent } from './tooltip.component';
 import { TooltipOptions } from './tooltip-options';
 import { TooltipService } from './tooltip.service';
+import './tooltip.scss';
 
-@Directive({ 
-  selector: '[swui-tooltip]',
-  encapsulation: ViewEncapsulation.None,
-  styles: [require('./tooltip.component.scss')]
-})
+@Directive({ selector: '[swui-tooltip]' })
 export class TooltipDirective implements OnDestroy {
 
   @Input() tooltipCssClass: string = '';

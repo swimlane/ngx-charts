@@ -134,7 +134,6 @@
     "sass-loader": "^4.0.1",
     "source-map-loader": "0.1.5",
     "style-loader": "0.13.1",
-    "to-string-loader": "^1.1.5",
     "ts-helpers": "1.1.1",
     "tslint": "3.15.1",
     "tslint-loader": "2.1.5",
