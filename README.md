@@ -1,6 +1,10 @@
-# ngx-charts [![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts) [![Code Climate](https://codeclimate.com/github/swimlane/ngx-charts/badges/gpa.svg)](https://codeclimate.com/github/swimlane/ngx-charts) [![Test Coverage](https://codeclimate.com/github/swimlane/ngx-charts/badges/coverage.svg)](https://codeclimate.com/github/swimlane/ngx-charts/coverage) [![Dependency Status](https://david-dm.org/swimlane/ngx-charts.svg)](https://david-dm.org/swimlane/ngx-charts) [![devDependency Status](https://david-dm.org/swimlane/ngx-charts/dev-status.svg)](https://david-dm.org/swimlane/ngx-charts#info=devDependencies) [![npm version](https://badge.fury.io/js/ngx-charts.svg)](http://badge.fury.io/js/ngx-charts) [![npm downloads](https://img.shields.io/npm/dm/ngx-charts.svg)](https://npmjs.org/ngx-charts)
+# ngx-charts 
+[![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
+[![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts) 
+[![Code Climate](https://codeclimate.com/github/swimlane/ngx-charts/badges/gpa.svg)](https://codeclimate.com/github/swimlane/ngx-charts) 
+[![Test Coverage](https://codeclimate.com/github/swimlane/ngx-charts/badges/coverage.svg)](https://codeclimate.com/github/swimlane/ngx-charts/coverage)
 
-Angular2 + D3js Composable Re-usable Charting Framework. 
+Declarative Charting Framework for Angular2 and beyond!
 
 ngx-charts is unique because we don't merely wrap d3, nor any other chart engine for that matter. It is using Angular to render and animate the SVG elements with all of its binding and speed goodness, and uses d3 for the excellent math functions, scales, axis and shape generators, etc. By having Angular do all of the rendering it opens us up to endless possibilities the Angular platform provides such as AoT, Universal, etc. 
 
