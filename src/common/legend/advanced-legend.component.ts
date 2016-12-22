@@ -26,7 +26,7 @@ import { formatLabel } from '../label.helper';
       <div class="legend-items-container">
         <div class="legend-items">
           <div
-            *ngFor="let legendItem of legendItems; trackBy: entry?.formattedLabel"
+            *ngFor="let legendItem of legendItems; trackBy:trackBy"
             tabindex="-1"
             class="legend-item"
             (mouseenter)="activate.emit(legendItem.label)"
@@ -102,6 +102,10 @@ export class AdvancedLegendComponent implements OnChanges  {
         percentage
       };
     });
+  }
+
+  trackBy(item) {
+    return item.formattedLabel;
   }
 
 }
