@@ -383,14 +383,10 @@
 }
 
 .gauge {
-  .background-arc, .background-bar {
+  .background-arc {
     path {
       fill: rgba(0,0,0,0.05);
     }
-  }
-
-  .units {
-    fill: #666;
   }
 
   .gauge-tick {
@@ -411,5 +407,19 @@
 
   .gauge-tick-small path{
     stroke-width: 1px;
+  }
+}
+
+.linear-gauge {
+  cursor: pointer;
+  
+  .background-bar {
+    path {
+      fill: rgba(0,0,0,0.05);
+    }
+  }
+
+  .units {
+    fill: #666;
   }
 }

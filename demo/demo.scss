@@ -274,14 +274,10 @@ main {
   }
 
   .gauge {
-    .background-arc, .background-bar {
+    .background-arc{
       path {
         fill: $color-bg-med;
       }
-    }
-
-    .units {
-      fill: $color-text-dark;
     }
 
     .gauge-tick {
@@ -291,6 +287,18 @@ main {
       text {
         fill: $color-text-med;
       }
+    }
+  }
+
+  .linear-gauge {
+    .background-bar {
+      path {
+        fill: $color-bg-med;
+      }
+    }
+
+    .units {
+      fill: $color-text-dark;
     }
   }
 

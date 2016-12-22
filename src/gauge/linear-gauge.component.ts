@@ -17,8 +17,9 @@ import { ColorHelper } from '../utils/color-sets';
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
-      [showLegend]="false">
-      <svg:g class="gauge chart">
+      [showLegend]="false"
+      (click)="onClick()">
+      <svg:g class="linear-gauge chart">
         <svg:g ngx-charts-bar 
           class="background-bar"
           [width]="dims.width"
@@ -27,8 +28,7 @@ import { ColorHelper } from '../utils/color-sets';
           [y]="dims.height / 2 + margin[0] - 2"
           [data]="{}"
           [orientation]="'horizontal'"
-          [roundEdges]="true"
-          (select)="click($event)">
+          [roundEdges]="true">
         </svg:g>
         <svg:g ngx-charts-bar 
           [width]="valueScale(value)"
@@ -38,8 +38,7 @@ import { ColorHelper } from '../utils/color-sets';
           [fill]="colors.getColor(units)"
           [data]="{}"
           [orientation]="'horizontal'"
-          [roundEdges]="true"
-          (select)="click($event)">
+          [roundEdges]="true">
         </svg:g>
 
         <svg:line 
@@ -132,6 +131,10 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
       this.hasPreviousValue = this.previousValue !== undefined;
       this.max = Math.max(this.max, this.value);
       this.min = Math.min(this.min, this.value);
+      if (this.hasPreviousValue) {
+        this.max = Math.max(this.max, this.previousValue);
+        this.min = Math.min(this.min, this.previousValue);
+      }
 
       this.dims = calculateViewDimensions({
         width: this.width,
@@ -205,8 +208,11 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     }
   }
 
-  onClick(data): void {
-    this.select.emit(data);
+  onClick(): void {
+    this.select.emit({
+      name: 'Value',
+      value: this.value  
+    });
   }
 
   setColors(): void {
