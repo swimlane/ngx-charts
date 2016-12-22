@@ -3,7 +3,7 @@ import {
   animate, ViewContainerRef, ChangeDetectionStrategy, EventEmitter,
   Output, SimpleChanges
 } from '@angular/core';
-import { InjectionService } from '../../utils/injection.service';
+import { InjectionService } from '../../services';
 
 @Component({
   providers: [InjectionService],

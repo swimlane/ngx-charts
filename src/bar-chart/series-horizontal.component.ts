@@ -33,7 +33,7 @@ import {
       [isActive]="isActive(bar.data)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
-      swui-tooltip
+      ngx-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="bar.tooltipText">

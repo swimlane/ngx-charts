@@ -22,7 +22,7 @@ import {
       [data]="c.data"
       (select)="onClick($event, c.label, c.series)"
       [gradient]="gradient"
-      swui-tooltip
+      ngx-tooltip
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="getTooltipText(c)"

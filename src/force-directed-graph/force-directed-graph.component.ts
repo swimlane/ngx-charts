@@ -50,7 +50,7 @@ import { ColorHelper } from '../utils/color-sets';
             [attr.stroke]="colors.getColor(groupResultsBy(node))"
             (mousedown)="onDragStart(node, $event)"
             (click)="onClick({name: node.value})"
-            swui-tooltip
+            ngx-tooltip
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="node.value">

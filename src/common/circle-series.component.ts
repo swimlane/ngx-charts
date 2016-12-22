@@ -41,7 +41,7 @@ import { id } from "../utils/id";
         (select)="onClick($event, circle.label)"
         (activate)="activateCircle(circle)"
         (deactivate)="deactivateCircle(circle)"
-        swui-tooltip
+        ngx-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="getTooltipText(circle)"
