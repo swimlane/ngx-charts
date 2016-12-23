@@ -127,17 +127,17 @@ export class CardComponent implements OnChanges, OnDestroy {
     if (!this.initialized) {
       cancelAnimationFrame(this.animationReq);
 
-      const value = this.data.value;
-      const decs = decimalChecker(value);
+      const val = this.data.value;
+      const decs = decimalChecker(val);
 
-      const callback = ({ val }) => {
+      const callback = ({ value }) => {
         this.zone.run(() => {
-          this.value = val.toLocaleString();
+          this.value = value.toLocaleString();
           this.cd.markForCheck();
         });
       };
 
-      this.animationReq = count(0, value, decs, 1, callback);
+      this.animationReq = count(0, val, decs, 1, callback);
       this.initialized = true;
     }
   }
