@@ -90,11 +90,11 @@ export class SeriesVerticalComponent implements OnChanges {
       let label = d.name;
       const formattedLabel = formatLabel(label);
       const roundEdges = this.type === 'standard';
-      
+
       let bar: any = {
         value,
         label,
-        roundEdges: roundEdges,
+        roundEdges,
         data: d,
         width,
         formattedLabel,
@@ -129,7 +129,7 @@ export class SeriesVerticalComponent implements OnChanges {
 
         if (total > 0) {
           offset0 = (offset0 * 100) / total;
-          offset1 = (offset1 * 100) /total;
+          offset1 = (offset1 * 100) / total;
         } else {
           offset0 = 0;
           offset1 = 0;

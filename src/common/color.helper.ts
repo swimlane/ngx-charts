@@ -9,7 +9,7 @@ export class ColorHelper {
   customColors: any;
 
   constructor(scheme, type, domain, customColors?) {
-     if (typeof(scheme) === 'string') {
+    if (typeof(scheme) === 'string') {
       scheme = colorSets.find(cs => {
         return cs.name === scheme;
       });
@@ -85,7 +85,7 @@ export class ColorHelper {
       .range([0, 1]);
 
     let endColor = this.getColor(value);
-    
+
     // generate the stops
     let startVal = valueScale(start);
     let startColor = this.getColor(start);
@@ -112,8 +112,8 @@ export class ColorHelper {
       }
 
       stops.push({
-        color: color,
-        offset: offset,
+        color,
+        offset,
         opacity: 1
       });
       currentVal = offset;
@@ -130,7 +130,7 @@ export class ColorHelper {
     for (let s of stops) {
       s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
     }
-    
+
     return stops;
   }
 }

@@ -74,7 +74,7 @@ export class AreaTooltip implements OnChanges {
 
   @ViewChildren('tooltips') tooltips;
 
-  constructor(private renderer:Renderer) { }
+  constructor(private renderer: Renderer) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -100,13 +100,13 @@ export class AreaTooltip implements OnChanges {
       if (i === 0) {
         ob.x0 = this.xScale(val);
       } else {
-        ob.x0 = (this.xScale(uniqueSet[i-1]) + this.xScale(uniqueSet[i])) / 2;
+        ob.x0 = (this.xScale(uniqueSet[i - 1]) + this.xScale(uniqueSet[i])) / 2;
       }
 
       if (i === uniqueSet.length - 1) {
         ob.x1 = this.xScale(uniqueSet[i]);
       } else {
-        ob.x1 = (this.xScale(uniqueSet[i]) + this.xScale(uniqueSet[i+1])) / 2;
+        ob.x1 = (this.xScale(uniqueSet[i]) + this.xScale(uniqueSet[i + 1])) / 2;
       }
 
       ob.width = ob.x1 - ob.x0;

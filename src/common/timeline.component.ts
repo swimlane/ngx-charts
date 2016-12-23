@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import d3 from '../d3';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 
 @Component({
   selector: 'g[ngx-charts-timeline]',
@@ -21,11 +21,11 @@ import { id } from "../utils/id";
       <svg:g class="embedded-chart">
         <ng-content></ng-content>
       </svg:g>
-      <svg:rect x="0" 
-        [attr.width]="view[0]" 
-        y="0" 
-        [attr.height]="height" 
-        class="brush-background" 
+      <svg:rect x="0"
+        [attr.width]="view[0]"
+        y="0"
+        [attr.height]="height"
+        class="brush-background"
       />
       <svg:g class="brush"></svg:g>
     </svg:g>
@@ -152,7 +152,7 @@ export class Timeline implements OnChanges {
 
     this.brush = d3.brushX()
       .extent([[0, 0], [width, height]])
-      .on("brush end", () => {
+      .on('brush end', () => {
         this.zone.run(() => {
           const selection = d3.selection.event.selection || this.xScale.range();
           const newDomain = selection.map(this.xScale.invert);
@@ -193,7 +193,7 @@ export class Timeline implements OnChanges {
     let width = this.view[0];
 
     let dims = {
-      width: width,
+      width,
       height: this.height
     };
 

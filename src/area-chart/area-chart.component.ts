@@ -10,7 +10,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import * as moment from 'moment';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 import d3 from '../d3';
 
 @Component({
@@ -311,13 +311,13 @@ export class AreaChartComponent extends BaseChartComponent {
 
   getScaleType(values): string {
     let date = true;
-    let number = true;
+    let num = true;
     for (let value of values) {
       if (!this.isDate(value)) {
         date = false;
       }
       if (typeof value !== 'number') {
-        number = false;
+        num = false;
       }
     }
 
@@ -325,7 +325,7 @@ export class AreaChartComponent extends BaseChartComponent {
       return 'time';
     }
 
-    if (number) {
+    if (num) {
       return 'linear';
     }
 
@@ -369,7 +369,7 @@ export class AreaChartComponent extends BaseChartComponent {
   setColors(): void {
     let domain;
     if (this.schemeType === 'ordinal') {
-      domain = this.seriesDomain; 
+      domain = this.seriesDomain;
     } else {
       domain = this.yDomain;
     }
@@ -410,7 +410,7 @@ export class AreaChartComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }

@@ -24,7 +24,7 @@ import d3 from '../d3';
                 {{tick.text}}
             </svg:text>
         </svg:g>
-        <svg:g *ngFor="let tick of ticks.small"            
+        <svg:g *ngFor="let tick of ticks.small"
             class="gauge-tick gauge-tick-small">
             <svg:path [attr.d]="tick.line" />
         </svg:g>
@@ -76,9 +76,11 @@ export class GaugeAxisComponent implements OnChanges {
 
       ticks.big.push({
         line: this.getTickPath(startDistance, tickLength, angle),
-        textAnchor: textAnchor,
+        textAnchor,
         text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-        textTransform: `translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(${ -this.rotationAngle })`
+        textTransform: `
+          translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(${ -this.rotationAngle })
+        `
       });
 
       if (i === this.bigSegments) {
@@ -87,10 +89,10 @@ export class GaugeAxisComponent implements OnChanges {
 
       for (let j = 1; j <= this.smallSegments; j++) {
         let smallAngleDeg = angleDeg + j * smallTickSegment;
-        let smallAngle = smallAngleDeg * Math.PI / 180;        
+        let smallAngle = smallAngleDeg * Math.PI / 180;
 
         ticks.small.push({
-          line: this.getTickPath(startDistance, tickLength/2, smallAngle)
+          line: this.getTickPath(startDistance, tickLength / 2, smallAngle)
         });
       }
     }

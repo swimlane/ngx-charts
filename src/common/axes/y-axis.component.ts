@@ -88,7 +88,7 @@ export class YAxisComponent implements OnChanges {
     if (width !== this.labelOffset) {
       this.labelOffset = width;
       setTimeout(() => {
-        this.dimensionsChanged.emit({width: width});
+        this.dimensionsChanged.emit({width});
       }, 0);
     }
   }

@@ -23,7 +23,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AxisLabelComponent implements OnChanges {
-  
+
   @Input() orient;
   @Input() label;
   @Input() offset;
@@ -64,13 +64,14 @@ export class AxisLabelComponent implements OnChanges {
       case 'left':
         this.y = - (this.offset + this.textHeight + this.margin);
         this.x = -this.height / 2;
-        this.transform = "rotate(270)";
+        this.transform = 'rotate(270)';
         break;
       case 'right':
         this.y = this.offset + this.margin;
         this.x = -this.height / 2;
-        this.transform = "rotate(270)";
+        this.transform = 'rotate(270)';
         break;
+      default:
     }
   }
 

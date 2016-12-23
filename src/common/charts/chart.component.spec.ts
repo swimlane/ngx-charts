@@ -14,9 +14,6 @@ import { ChartCommonModule } from '../chart-common.module';
 })
 class TestComponent {
   barData: any;
-
-  constructor() {
-  }
 }
 
 describe('<ngx-charts-chart>', () => {

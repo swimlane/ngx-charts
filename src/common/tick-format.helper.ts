@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import * as moment from 'moment';
 
 export function tickFormat(fieldType, groupByType): Function {
   return function(label: string): string {
@@ -6,7 +6,7 @@ export function tickFormat(fieldType, groupByType): Function {
       return label;
     }
     if (fieldType === 'date' && groupByType === 'groupBy') {
-      return moment(label).format("MM/DD/YYYY");
+      return moment(label).format('MM/DD/YYYY');
     }
 
     return label.toString();

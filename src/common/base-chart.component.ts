@@ -1,9 +1,9 @@
-import { 
-  ElementRef, 
-  NgZone, 
-  ChangeDetectorRef, 
-  Component, 
-  Input, 
+import {
+  ElementRef,
+  NgZone,
+  ChangeDetectorRef,
+  Component,
+  Input,
   Output,
   EventEmitter,
   AfterViewInit,
@@ -45,12 +45,6 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.update();
   }
 
-  protected unbindEvents(): void {
-    if (this.resizeSubscription) {
-      this.resizeSubscription.unsubscribe();
-    }
-  }
-
   update(): void {
     if (this.results) {
       this.results = this.cloneData(this.results);
@@ -75,11 +69,36 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     let height = 0;
     const hostElem = this.chartElement.nativeElement;
     if (hostElem.parentNode != null) {
-      //Get the container dimensions
+      // Get the container dimensions
       width = hostElem.parentNode.clientWidth;
       height = hostElem.parentNode.clientHeight;
     }
     return {width, height};
+  }
+
+  // converts all date objects that appear as name into formatted date strings
+  formatDates() {
+    for (let i = 0; i < this.results.length; i++) {
+      let g = this.results[i];
+      if (g.name instanceof Date) {
+        g.name = g.name.toLocaleDateString();
+      }
+
+      if (g.series) {
+        for (let j = 0; j < g.series.length; j++) {
+          let d = g.series[j];
+          if (d.name instanceof Date) {
+            d.name = d.name.toLocaleDateString();
+          }
+        }
+      }
+    }
+  }
+
+  protected unbindEvents(): void {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
   }
 
   private bindWindowResizeEvent(): void {
@@ -128,25 +147,6 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     return results;
-  }
-
-  // converts all date objects that appear as name into formatted date strings
-  formatDates() {
-    for (let i = 0; i < this.results.length; i++) {
-      let g = this.results[i];
-      if (g.name instanceof Date) {
-        g.name = g.name.toLocaleDateString();
-      }
-
-      if (g.series) {
-        for (let j = 0; j < g.series.length; j++) {
-          let d = g.series[j];
-          if (d.name instanceof Date) {
-            d.name = d.name.toLocaleDateString();
-          }
-        }
-      }
-    }
   }
 
 }

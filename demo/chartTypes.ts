@@ -1,74 +1,98 @@
 let chartGroups = [
   {
-    name: "Bar Charts",
+    name: 'Bar Charts',
     charts: [
       {
-        name: "Vertical Bar Chart",
+        name: 'Vertical Bar Chart',
         selector: 'bar-vertical',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       },
       {
-        name: "Horizontal Bar Chart",
+        name: 'Horizontal Bar Chart',
         selector: 'bar-horizontal',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       },
       {
-        name: "Grouped Vertical Bar Chart",
+        name: 'Grouped Vertical Bar Chart',
         selector: 'bar-vertical-2d',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       },
       {
-        name: "Grouped Horizontal Bar Chart",
+        name: 'Grouped Horizontal Bar Chart',
         selector: 'bar-horizontal-2d',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       },
       {
-        name: "Stacked Vertical Bar Chart",
+        name: 'Stacked Vertical Bar Chart',
         selector: 'bar-vertical-stacked',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       },
       {
-        name: "Stacked Horizontal Bar Chart",
+        name: 'Stacked Horizontal Bar Chart',
         selector: 'bar-horizontal-stacked',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       },
       {
-        name: "Normalized Vertical Bar Chart",
+        name: 'Normalized Vertical Bar Chart',
         selector: 'bar-vertical-normalized',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       },
       {
-        name: "Normalized Horizontal Bar Chart",
+        name: 'Normalized Horizontal Bar Chart',
         selector: 'bar-horizontal-normalized',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+        ]
       }
     ]
   },
   {
-    name: "Pie Charts",
+    name: 'Pie Charts',
     charts: [
       {
-        name: "Pie Chart",
+        name: 'Pie Chart',
         selector: 'pie-chart',
         inputFormat: 'singleSeries',
         options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'explodeSlices', 'showLabels']
       },
       {
-        name: "Advanced Pie Chart",
+        name: 'Advanced Pie Chart',
         selector: 'advanced-pie-chart',
         inputFormat: 'singleSeries',
         options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'showLabels']
       },
       {
-        name: "Pie Grid",
+        name: 'Pie Grid',
         selector: 'pie-grid',
         inputFormat: 'singleSeries',
         options: ['colorScheme']
@@ -76,69 +100,91 @@ let chartGroups = [
     ]
   },
   {
-    name: "Line/Area Charts",
+    name: 'Line/Area Charts',
     charts: [
       {
-        name: "Line Chart",
+        name: 'Line Chart',
         selector: 'line-chart',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+        ]
       },
       {
-        name: "Area Chart",
+        name: 'Area Chart',
         selector: 'area-chart',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+        ]
       },
       {
-        name: "Stacked Area Chart",
+        name: 'Stacked Area Chart',
         selector: 'area-chart-stacked',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+        ]
       },
       {
-        name: "Normalized Area Chart",
+        name: 'Normalized Area Chart',
         selector: 'area-chart-normalized',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+        ]
       },
     ]
   },
   {
-    name: "Other Charts",
+    name: 'Other Charts',
     charts: [
       {
-        name: "Force Directed Graph",
+        name: 'Force Directed Graph',
         selector: 'force-directed-graph',
         inputFormat: 'graph',
         options: ['colorScheme', 'showLegend']
       },
       {
-        name: "Heat Map",
+        name: 'Heat Map',
         selector: 'heat-map',
         inputFormat: 'multiSeries',
-        options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel']
+        options: [
+          'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+          'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel'
+        ]
       },
       {
-        name: "Tree Map",
+        name: 'Tree Map',
         selector: 'tree-map',
         inputFormat: 'singleSeries',
         options: ['colorScheme']
       },
       {
-        name: "Number Cards",
+        name: 'Number Cards',
         selector: 'number-card',
         inputFormat: 'singleSeries',
         options: ['colorScheme']
       },
       {
-        name: "Gauge",
+        name: 'Gauge',
         selector: 'gauge',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units', 'angleSpan', 'startAngle', 'showAxis']
+        options: [
+          'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
+          'angleSpan', 'startAngle', 'showAxis'
+        ]
       },
       {
-        name: "Linear Gauge",
+        name: 'Linear Gauge',
         selector: 'linear-gauge',
         inputFormat: 'single',
         options: ['colorScheme', 'value', 'previousValue', 'min', 'max', 'units']

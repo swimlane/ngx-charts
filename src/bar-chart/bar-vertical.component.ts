@@ -87,7 +87,7 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-    
+
     this.zone.run(() => {
       this.dims = calculateViewDimensions({
         width: this.width,
@@ -99,7 +99,7 @@ export class BarVerticalComponent extends BaseChartComponent {
         yAxisWidth: this.yAxisWidth,
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,        
+        showLegend: this.legend,
         legendType: this.schemeType
       });
 
@@ -147,7 +147,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   setColors(): void {
     let domain;
     if (this.schemeType === 'ordinal') {
-      domain = this.xDomain; 
+      domain = this.xDomain;
     } else {
       domain = this.yDomain;
     }
@@ -181,7 +181,6 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.update();
   }
   
-
   onActivate(item) {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
@@ -189,7 +188,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }

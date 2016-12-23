@@ -37,7 +37,7 @@ export class SvgRadialGradientComponent implements OnChanges {
   r: string;
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.r = "30%";
+    this.r = '30%';
   }
 
 }

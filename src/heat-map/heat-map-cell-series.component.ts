@@ -11,8 +11,8 @@ import {
 @Component({
   selector: 'g[ngx-charts-heat-map-cell-series]',
   template: `
-    <svg:g 
-      ngx-charts-heat-map-cell 
+    <svg:g
+      ngx-charts-heat-map-cell
       *ngFor="let c of cells; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
@@ -52,7 +52,7 @@ export class HeatCellSeriesComponent implements OnChanges {
 
   getCells() {
     let cells = [];
-    
+
     this.data.map((row) => {
       row.series.map((cell) => {
         let value = cell.value;
@@ -62,7 +62,7 @@ export class HeatCellSeriesComponent implements OnChanges {
         if (tooltipLabel.constructor.name === 'Date') {
           tooltipLabel = tooltipLabel.toLocaleDateString();
         }
-        
+
         cells.push({
           x: this.xScale(row.name),
           y: this.yScale(cell.name),
@@ -93,8 +93,8 @@ export class HeatCellSeriesComponent implements OnChanges {
   onClick(value, label, series): void {
     this.select.emit({
       name: label,
-      value: value,
-      series: series
+      value,
+      series
     });
   }
 

@@ -57,7 +57,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
           width: d.x1 - d.x0,
           height: d.y1 - d.y0,
           fill: this.colors.getColor(label),
-          label: label,
+          label,
           value: d.value,
           valueType: d.valueType
         };

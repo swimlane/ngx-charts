@@ -8,7 +8,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 import d3 from '../d3';
 
 @Component({

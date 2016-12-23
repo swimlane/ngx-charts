@@ -1,10 +1,10 @@
 import {
-  Component, 
-  ContentChild, 
-  ElementRef, 
-  HostListener, 
-  Input, 
-  TemplateRef, 
+  Component,
+  ContentChild,
+  ElementRef,
+  HostListener,
+  Input,
+  TemplateRef,
   ViewChild,
   Output,
   EventEmitter,
@@ -69,16 +69,15 @@ import { ColorHelper } from '../common/color.helper';
 export class ForceDirectedGraphComponent extends BaseChartComponent {
 
   @Input() force = d3.forceSimulation()
-    .force("charge", d3.forceManyBody())
-    .force("collide", d3.forceCollide(5))
-    .force("x", d3.forceX())
-    .force("y", d3.forceY());
+    .force('charge', d3.forceManyBody())
+    .force('collide', d3.forceCollide(5))
+    .force('x', d3.forceX())
+    .force('y', d3.forceY());
 
   @Input() forceLink = d3.forceLink().id(node => node.value);
-  @Input() groupResultsBy: (node: any) => string = node => node.value;
   @Input() legend: boolean;
   @Input() nodes: any[] = [];
-  @Input() links: { source: any, target: any }[] = [];
+  @Input() links: Array<{ source: any, target: any }> = [];
   @Input() activeEntries: any[] = [];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -98,6 +97,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   transform: string;
   legendOptions: any;
 
+  @Input() groupResultsBy: (node: any) => string = node => node.value;
+
   update(): void {
     super.update();
 
@@ -114,10 +115,12 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
       this.setColors();
       this.legendOptions = this.getLegendOptions();
 
-      this.transform = `translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })`;
+      this.transform = `
+        translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })
+      `;
       if(this.force) {
         this.force.nodes(this.nodes)
-          .force("link", this.forceLink.links(this.links))
+          .force('link', this.forceLink.links(this.links))
           .alpha(0.5).restart();
       }
     });

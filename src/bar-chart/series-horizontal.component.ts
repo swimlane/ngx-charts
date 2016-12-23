@@ -16,7 +16,7 @@ import {
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
   template: `
-    <svg:g ngx-charts-bar 
+    <svg:g ngx-charts-bar
       *ngFor="let bar of bars; trackBy:trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
@@ -122,7 +122,7 @@ export class SeriesHorizontal implements OnChanges {
 
         if (total > 0) {
           offset0 = (offset0 * 100) / total;
-          offset1 = (offset1 * 100) /total;
+          offset1 = (offset1 * 100) / total;
         } else {
           offset0 = 0;
           offset1 = 0;

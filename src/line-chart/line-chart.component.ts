@@ -9,7 +9,7 @@ import {
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 import d3 from '../d3';
 import * as moment from 'moment';
 
@@ -308,7 +308,7 @@ export class LineChartComponent extends BaseChartComponent {
 
   getScaleType(values): string {
     let date = true;
-    let number = true;
+    let num = true;
 
     for (let value of values) {
       if (!this.isDate(value)) {
@@ -316,12 +316,12 @@ export class LineChartComponent extends BaseChartComponent {
       }
 
       if (typeof value !== 'number') {
-        number = false;
+        num = false;
       }
     }
 
     if (date) return 'time';
-    if (number) return 'linear';
+    if (num) return 'linear';
     return 'ordinal';
   }
 
@@ -362,7 +362,7 @@ export class LineChartComponent extends BaseChartComponent {
   setColors(): void {
     let domain;
     if (this.schemeType === 'ordinal') {
-      domain = this.seriesDomain; 
+      domain = this.seriesDomain;
     } else {
       domain = this.yDomain;
     }
@@ -403,7 +403,7 @@ export class LineChartComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
