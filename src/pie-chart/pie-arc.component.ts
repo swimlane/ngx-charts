@@ -9,7 +9,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 
 @Component({
   selector: 'g[ngx-charts-pie-arc]',
@@ -113,7 +113,7 @@ export class PieArcComponent implements OnChanges {
 
     node
       .transition()
-      .attrTween("d", function(d) {
+      .attrTween('d', function(d) {
         this._current = this._current || d;
         let copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
@@ -124,7 +124,7 @@ export class PieArcComponent implements OnChanges {
         };
       })
       .transition().duration(750)
-      .attrTween("d", function(d) {
+      .attrTween('d', function(d) {
         this._current = this._current || d;
         let interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
@@ -140,7 +140,7 @@ export class PieArcComponent implements OnChanges {
 
     node
       .transition().duration(750)
-      .attrTween("d", function(d) {
+      .attrTween('d', function(d) {
         this._current = this._current || d;
         let interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);

@@ -10,7 +10,7 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import * as moment from 'moment';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 import d3 from '../d3';
 
 @Component({
@@ -221,7 +221,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
             d = {
               name: val,
               value: 0,
-              d0: d0,
+              d0,
               d1: d0
             };
             group.series.push(d);
@@ -233,7 +233,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
 
       this.setColors();
       this.legendOptions = this.getLegendOptions();
-      
+
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
       let pageUrl = window.location.href;
       this.clipPathId = 'clip' + id().toString();
@@ -351,14 +351,14 @@ export class AreaChartStackedComponent extends BaseChartComponent {
 
   getScaleType(values): string {
     let date = true;
-    let number = true;
+    let num = true;
 
     for (let value of values) {
       if (!this.isDate(value)) {
         date = false;
       }
       if (typeof value !== 'number') {
-        number = false;
+        num = false;
       }
     }
 
@@ -366,7 +366,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       return 'time';
     }
 
-    if (number) {
+    if (num) {
       return 'linear';
     }
 
@@ -411,7 +411,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   setColors(): void {
     let domain;
     if (this.schemeType === 'ordinal') {
-      domain = this.seriesDomain; 
+      domain = this.seriesDomain;
     } else {
       domain = this.yDomain;
     }
@@ -452,7 +452,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }

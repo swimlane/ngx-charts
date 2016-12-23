@@ -113,7 +113,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.label = this.data.name;
       this.trimmedLabel = trimLabel(this.label, 55);
       this.value = this.data.value.toLocaleString();
-      
+
       setTimeout(() => this.scaleText());
       setTimeout(() => this.startCount(), 20);
     });
@@ -130,9 +130,9 @@ export class CardComponent implements OnChanges, OnDestroy {
       const value = this.data.value;
       const decs = decimalChecker(value);
 
-      const callback = ({ value }) => {
+      const callback = ({ val }) => {
         this.zone.run(() => {
-          this.value = value.toLocaleString();
+          this.value = val.toLocaleString();
           this.cd.markForCheck();
         });
       };

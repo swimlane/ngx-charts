@@ -39,7 +39,7 @@ describe('<ngx-charts-legend>', () => {
     TestBed.overrideComponent(TestComponent, {
       set: {
         template: `
-                <ngx-charts-legend                
+                <ngx-charts-legend
                   [title]="legendTitle"
                   [colors]="colors"
                   [data]="seriesData"
@@ -59,7 +59,6 @@ describe('<ngx-charts-legend>', () => {
 
       expect(labelsElement).toBeDefined();
       expect(labelsElement.childElementCount).toEqual(2); // 2 legend labels
-
 
       expect(labelsElement.children[0]).toContainText('complete');
       expect(labelsElement.children[1]).toContainText('not complete');

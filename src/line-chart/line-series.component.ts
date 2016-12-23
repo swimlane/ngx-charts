@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import d3 from '../d3';
 import * as moment from 'moment';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({

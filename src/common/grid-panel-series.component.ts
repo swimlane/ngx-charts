@@ -40,8 +40,12 @@ export class GridPanelSeriesComponent implements OnChanges {
 
   getGridPanels(): any[] {
     return this.data.map((d, i) => {
-      let offset, width, height, x, y, className;
-      className = 'odd';
+      let offset;
+      let width;
+      let height;
+      let x;
+      let y;
+      let className = 'odd';
 
       if (this.orient === 'vertical') {
         let position: number = this.xScale(d.name);
@@ -53,7 +57,7 @@ export class GridPanelSeriesComponent implements OnChanges {
         offset = this.xScale.bandwidth() * this.xScale.paddingInner();
         width = this.xScale.bandwidth() + offset;
         height = this.dims.height;
-        x = this.xScale(d.name) - offset/2;
+        x = this.xScale(d.name) - offset / 2;
         y = 0;
       } else if (this.orient === 'horizontal') {
         let position = this.yScale(d.name);
@@ -67,16 +71,16 @@ export class GridPanelSeriesComponent implements OnChanges {
         width = this.dims.width;
         height = this.yScale.bandwidth() + offset;
         x = 0;
-        y = this.yScale(d.name) - offset/2;
+        y = this.yScale(d.name) - offset / 2;
       }
 
       return {
         name: d.name,
         class: className,
-        height: height,
-        width: width,
-        x: x,
-        y: y
+        height,
+        width,
+        x,
+        y
       };
     });
   }

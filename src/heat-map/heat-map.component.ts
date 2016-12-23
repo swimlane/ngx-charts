@@ -201,7 +201,6 @@ export class HeatMapComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
   }
 
-
   getLegendOptions() {
     return {
       scaleType: 'linear',
@@ -215,7 +214,7 @@ export class HeatMapComponent extends BaseChartComponent {
     this.update();
   }
 
-  updateXAxisHeight({ height }):void {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }

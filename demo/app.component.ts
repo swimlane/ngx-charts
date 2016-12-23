@@ -547,7 +547,9 @@ import './demo.scss';
             <select
               [ngModel]="curveType"
               (ngModelChange)="setInterpolationType($event)">
-              <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">{{interpolationType}}</option>
+              <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">
+                {{interpolationType}}
+              </option>
             </select>
           </div>
 
@@ -611,7 +613,7 @@ import './demo.scss';
 })
 export class AppComponent implements OnInit {
 
-  theme = "dark";
+  theme = 'dark';
   chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
@@ -642,7 +644,10 @@ export class AppComponent implements OnInit {
   // line interpolation
   curveType: string = 'Linear';
   curve = d3.shape.curveLinear;
-  interpolationTypes = ['Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X', 'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'];
+  interpolationTypes = [
+    'Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X',
+    'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'
+  ];
 
   colorSets: any;
   colorScheme: any;
@@ -744,10 +749,10 @@ export class AppComponent implements OnInit {
       let multiEntry = {
         name: country,
         series: [{
-          name: "2010",
+          name: '2010',
           value: Math.floor(1000000 + Math.random() * 20000000)
         }, {
-          name: "2011",
+          name: '2011',
           value: Math.floor(1000000 + Math.random() * 20000000)
         }]
       };

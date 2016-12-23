@@ -4,8 +4,8 @@ export interface ViewDimensions {
   xOffset: number;
 }
 
-export function calculateViewDimensions({ 
-  width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0, 
+export function calculateViewDimensions({
+  width, height, margins, showXAxis = false, showYAxis = false, xAxisHeight = 0,
   yAxisWidth = 0, showXLabel = false, showYLabel = false, showLegend = false, legendType = 'ordinal', columns = 12
 }): ViewDimensions {
   let xOffset = margins[3];
@@ -55,6 +55,6 @@ export function calculateViewDimensions({
   return {
     width: chartWidth,
     height: chartHeight,
-    xOffset: xOffset
+    xOffset
   };
 }

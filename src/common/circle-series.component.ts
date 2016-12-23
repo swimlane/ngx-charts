@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import { formatLabel } from '../common/label.helper';
-import { id } from "../utils/id";
+import { id } from '../utils/id';
 
 @Component({
   selector: 'g[ngx-charts-circle-ceries]',
@@ -106,8 +106,7 @@ export class CircleSeriesComponent implements OnChanges {
 
         const gradientId = 'grad' + id().toString();
         const gradientFill = `url(${pageUrl}#${gradientId})`;
-        
-        
+
         let color;
         if (this.colors.scaleType === 'linear') {
           if (this.type === 'standard') {
@@ -131,9 +130,9 @@ export class CircleSeriesComponent implements OnChanges {
           color,
           opacity,
           seriesName,
-          barVisible: false,          
+          barVisible: false,
           gradientId,
-          gradientFill,          
+          gradientFill,
           gradientStops: this.getGradientStops(color)
         };
       }
@@ -151,12 +150,12 @@ export class CircleSeriesComponent implements OnChanges {
     return [
       {
         offset: 0,
-        color: color,
+        color,
         opacity: 0.2
       },
       {
         offset: 100,
-        color: color,
+        color,
         opacity: 1
     }];
   }
@@ -175,7 +174,7 @@ export class CircleSeriesComponent implements OnChanges {
     });
     return item !== undefined;
   }
-  
+
   isVisible(circle): boolean {
     if (this.activeEntries.length > 0) {
       return this.isActive({name: circle.seriesName});

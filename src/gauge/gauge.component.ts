@@ -48,7 +48,7 @@ import { ColorHelper } from '../common/color.helper';
           <tspan x="0" dy="0">{{displayValue}}</tspan>
           <tspan x="0" dy="1.2em">{{units}}</tspan>
         </svg:text>
-        
+
       </svg:g>
     </ngx-charts-chart>
   `,
@@ -77,7 +77,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   colors: ColorHelper;
   transform: string;
   margin: any[];
-  
+
   outerRadius: number;
   textRadius: number; // max available radius for the text
   resizeScale: number = 1;
@@ -123,7 +123,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       this.arcs = this.getArcs();
 
       this.setColors();
- 
+
       let xOffset = this.margin[3] + this.dims.width / 2;
       let yOffset = this.margin[0] + this.dims.height / 2;
 
@@ -150,8 +150,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
       let backgroundArc = {
         endAngle: this.angleSpan * Math.PI / 180,
-        innerRadius: innerRadius,
-        outerRadius: outerRadius,
+        innerRadius,
+        outerRadius,
         data: {
           value: this.max,
           name: d.name
@@ -160,8 +160,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
       let valueArc = {
         endAngle: Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI / 180,
-        innerRadius: innerRadius,
-        outerRadius: outerRadius,
+        innerRadius,
+        outerRadius,
         data: {
           value: d.value,
           name: d.name
@@ -188,7 +188,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     let values = this.results.map(d => d.value);
     let dataMin = Math.min(...values);
     let dataMax = Math.max(...values);
-    
+
     if (this.min !== undefined) {
       this.min = Math.min(this.min, dataMin);
     } else {

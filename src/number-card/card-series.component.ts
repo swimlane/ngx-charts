@@ -75,7 +75,7 @@ export class CardSeriesComponent implements OnChanges {
           width: d.width,
           height: d.height,
           color: this.colors.getColor(label),
-          label: label,
+          label,
           data: d.data,
           tooltipText: `${label}: ${value}`
         };

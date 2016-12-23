@@ -4,14 +4,14 @@ import { trimLabel } from './trim-label.helper';
 describe('trimLabel', () => {
 
   it('converts a number to a string when passed', () => {
-    let number = 15;
+    let num = 15;
 
-    expect(trimLabel(number)).toEqual('15');
+    expect(trimLabel(num)).toEqual('15');
   });
 
   // hmm..not sure this is desired, but it's the currently implemented behavior
   it('returns empty string when untrimmable datatype is passed', () => {
-    expect(trimLabel(() => {})).toEqual('');
+    expect(trimLabel(() => false)).toEqual('');
   });
 
   it('returns empty string when pssing null or undefined', () => {
