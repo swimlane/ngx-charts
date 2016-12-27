@@ -23,7 +23,7 @@ var chartTypes_1 = __webpack_require__("./demo/chartTypes.ts");
 __webpack_require__("./demo/demo.scss");
 var AppComponent = (function () {
     function AppComponent() {
-        this.theme = "dark";
+        this.theme = 'dark';
         this.chartType = 'bar-vertical';
         this.realTimeData = false;
         this.linearScale = false;
@@ -43,7 +43,10 @@ var AppComponent = (function () {
         // line interpolation
         this.curveType = 'Linear';
         this.curve = d3_1.default.shape.curveLinear;
-        this.interpolationTypes = ['Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X', 'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'];
+        this.interpolationTypes = [
+            'Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X',
+            'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'
+        ];
         this.schemeType = 'ordinal';
         // pie
         this.showLabels = true;
@@ -123,10 +126,10 @@ var AppComponent = (function () {
             var multiEntry = {
                 name: country,
                 series: [{
-                        name: "2010",
+                        name: '2010',
                         value: Math.floor(1000000 + Math.random() * 20000000)
                     }, {
-                        name: "2011",
+                        name: '2011',
                         value: Math.floor(1000000 + Math.random() * 20000000)
                     }]
             };
@@ -220,7 +223,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
-            template: "\n    <main [class]=\"theme\">\n      <div class=\"chart-col\">\n        <div style=\"position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;\">\n          <ngx-charts-bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-bar-vertical>\n          <ngx-charts-bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal>\n          <ngx-charts-bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-2d>\n          <ngx-charts-bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-2d>\n          <ngx-charts-bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-stacked>\n          <ngx-charts-bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-stacked>\n          <ngx-charts-bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-normalized>\n          <ngx-charts-bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-normalized>\n          <ngx-charts-pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-chart>\n          <ngx-charts-advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-advanced-pie-chart>\n          <ngx-charts-pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-grid>\n          <ngx-charts-line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            class=\"chart-container\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-line-chart>\n          <ngx-charts-force-directed-graph\n            *ngIf=\"chartType === 'force-directed-graph'\"\n            class=\"chart-container\"\n            [legend]=\"showLegend\"\n            [links]=\"graph.links\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [nodes]=\"graph.nodes\"\n            [scheme]=\"colorScheme\"\n            [view]=\"view\"\n            (select)=\"select($event)\">\n          </ngx-charts-force-directed-graph>\n          <ngx-charts-area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart>\n          <ngx-charts-area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-stacked>\n          <ngx-charts-area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-normalized>\n          <ngx-charts-heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (select)=\"select($event)\">\n          </ngx-charts-heat-map>\n          <ngx-charts-tree-map\n            *ngIf=\"chartType === 'tree-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-tree-map>\n          <ngx-charts-number-card\n            *ngIf=\"chartType === 'number-card'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-number-card>\n          <ngx-charts-gauge\n            *ngIf=\"chartType === 'gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [results]=\"single\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [units]=\"gaugeUnits\"\n            [angleSpan]=\"gaugeAngleSpan\"\n            [startAngle]=\"gaugeStartAngle\"\n            [showAxis]=\"gaugeShowAxis\"\n            [bigSegments]=\"gaugeLargeSegments\"\n            [smallSegments]=\"gaugeSmallSegments\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-gauge>\n          <ngx-charts-linear-gauge\n            *ngIf=\"chartType === 'linear-gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [value]=\"gaugeValue\"\n            [previousValue]=\"gaugePreviousValue\"\n            [units]=\"gaugeUnits\"\n            (select)=\"select($event)\">\n          </ngx-charts-linear-gauge>\n        </div>\n      </div>\n      <div class=\"sidebar\">\n        <h1>\n          Ngx-<strong>Charts</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n        <div style=\"margin:20px\">\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n\n        <h3>Theme</h3>\n        <select\n          [ngModel]=\"theme\"\n          (ngModelChange)=\"theme = $event\">>\n          <option [value]=\"'dark'\">Dark</option>\n          <option [value]=\"'light'\">Light</option>\n        </select>\n\n        <h3 (click)=\"dataVisable = !dataVisable\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"dataVisable\"\n            [class.arrow-right]=\"!dataVisable\">\n          </span>\n          <strong>Data</strong>\n        </h3>\n        <div [hidden]=\"!dataVisable\" style=\"margin-left: 10px;\">\n          <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale\">{{dateData | json}}</pre>\n          <div>\n            <label>\n              <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n              Real-time\n            </label>\n          </div>\n        </div>\n        <div>\n          <h3 (click)=\"dimVisiable = !dimVisiable\" style=\"cursor: pointer\">\n            <span\n              [class.arrow-down]=\"dimVisiable\"\n              [class.arrow-right]=\"!dimVisiable\">\n            </span>\n            <strong>Dimensions</strong>\n          </h3>\n          <div [hidden]=\"!dimVisiable\" style=\"margin-left: 10px;\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n              Fit Container\n            </label> <br />\n            <div *ngIf=\"!fitContainer\">\n              <label>Width:</label><br />\n              <input type=\"number\" [(ngModel)]=\"width\"><br />\n              <label>Height:</label><br />\n              <input type=\"number\" [(ngModel)]=\"height\"><br />\n              <button (click)=\"applyDimensions()\">Apply dimensions</button>\n            </div>\n          </div>\n        </div>\n        <h3 (click)=\"colorVisible = !colorVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"colorVisible\"\n            [class.arrow-right]=\"!colorVisible\">\n          </span>\n          <strong>Color Scheme</strong>\n        </h3>\n        <select\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"selectedColorScheme\"\n          (ngModelChange)=\"setColorScheme($event)\">\n          <option *ngFor=\"let scheme of colorSets\" [value]=\"scheme.name\">{{scheme.name}}</option>\n        </select>\n\n        <select\n          *ngIf=\"chart.options.includes('schemeType')\"\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"schemeType\"\n          (ngModelChange)=\"schemeType = $event\">\n          <option value=\"ordinal\">Ordinal</option>\n          <option value=\"linear\">Linear</option>\n        </select>\n\n        <h3 (click)=\"optsVisible = !optsVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"optsVisible\"\n            [class.arrow-right]=\"!optsVisible\">\n          </span>\n          <strong>Options</strong>\n        </h3>\n        <div [hidden]=\"!optsVisible\" style=\"margin-left: 10px;\">\n          <div *ngIf=\"chart.options.includes('showXAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n              Show X Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n              Show Y Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showGridLines')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n              Show Grid Lines\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('gradient')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n              Use Gradients\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLegend')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n              Show Legend\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n              Show X Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n            <label>X Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n              Show Y Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n            <label>Y Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLabels')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n              Show Labels\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('explodeSlices')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n              Explode Slices\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('doughnut')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n              Doughnut\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('autoScale')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n              Auto Scale\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('timeline')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n              Timeline\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('curve')\">\n            <label>Line Interpolation</label>\n            <select\n              [ngModel]=\"curveType\"\n              (ngModelChange)=\"setInterpolationType($event)\">\n              <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">{{interpolationType}}</option>\n            </select>\n          </div>\n\n          <div *ngIf=\"chart.options.includes('min')\">\n            <label>Min value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMin\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('max')\">\n            <label>Max value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMax\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('value')\">\n            <label>Value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('previousValue')\">\n            <label>Previous value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugePreviousValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('angleSpan')\">\n            <label>Angle span:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeAngleSpan\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('startAngle')\">\n            <label>Start Angle:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeStartAngle\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('showAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gaugeShowAxis\" (change)=\"gaugeShowAxis = $event.target.checked\">\n              Show Axis\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('largeSegments')\">\n            <label>Number of large segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeLargeSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('smallSegments')\">\n            <label>Number of small segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeSmallSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('units')\">\n            <label>Units:</label><br />\n            <input type=\"text\" [(ngModel)]=\"gaugeUnits\"><br />\n          </div>\n        </div>\n        <h3><a href=\"https://swimlane.gitbooks.io/ngx-charts/content/\" target=\"_blank\">Documentation</a></h3>\n        </div>\n      </div>\n    </main>\n  "
+            template: "\n    <main [class]=\"theme\">\n      <div class=\"chart-col\">\n        <div style=\"position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;\">\n          <ngx-charts-bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-bar-vertical>\n          <ngx-charts-bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal>\n          <ngx-charts-bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-2d>\n          <ngx-charts-bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-2d>\n          <ngx-charts-bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-stacked>\n          <ngx-charts-bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-stacked>\n          <ngx-charts-bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-normalized>\n          <ngx-charts-bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-normalized>\n          <ngx-charts-pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-chart>\n          <ngx-charts-advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-advanced-pie-chart>\n          <ngx-charts-pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-grid>\n          <ngx-charts-line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            class=\"chart-container\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-line-chart>\n          <ngx-charts-force-directed-graph\n            *ngIf=\"chartType === 'force-directed-graph'\"\n            class=\"chart-container\"\n            [legend]=\"showLegend\"\n            [links]=\"graph.links\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [nodes]=\"graph.nodes\"\n            [scheme]=\"colorScheme\"\n            [view]=\"view\"\n            (select)=\"select($event)\">\n          </ngx-charts-force-directed-graph>\n          <ngx-charts-area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart>\n          <ngx-charts-area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-stacked>\n          <ngx-charts-area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-normalized>\n          <ngx-charts-heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (select)=\"select($event)\">\n          </ngx-charts-heat-map>\n          <ngx-charts-tree-map\n            *ngIf=\"chartType === 'tree-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-tree-map>\n          <ngx-charts-number-card\n            *ngIf=\"chartType === 'number-card'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-number-card>\n          <ngx-charts-gauge\n            *ngIf=\"chartType === 'gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [results]=\"single\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [units]=\"gaugeUnits\"\n            [angleSpan]=\"gaugeAngleSpan\"\n            [startAngle]=\"gaugeStartAngle\"\n            [showAxis]=\"gaugeShowAxis\"\n            [bigSegments]=\"gaugeLargeSegments\"\n            [smallSegments]=\"gaugeSmallSegments\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-gauge>\n          <ngx-charts-linear-gauge\n            *ngIf=\"chartType === 'linear-gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [value]=\"gaugeValue\"\n            [previousValue]=\"gaugePreviousValue\"\n            [units]=\"gaugeUnits\"\n            (select)=\"select($event)\">\n          </ngx-charts-linear-gauge>\n        </div>\n      </div>\n      <div class=\"sidebar\">\n        <h1>\n          Ngx-<strong>Charts</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n        <div style=\"margin:20px\">\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n\n        <h3>Theme</h3>\n        <select\n          [ngModel]=\"theme\"\n          (ngModelChange)=\"theme = $event\">>\n          <option [value]=\"'dark'\">Dark</option>\n          <option [value]=\"'light'\">Light</option>\n        </select>\n\n        <h3 (click)=\"dataVisable = !dataVisable\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"dataVisable\"\n            [class.arrow-right]=\"!dataVisable\">\n          </span>\n          <strong>Data</strong>\n        </h3>\n        <div [hidden]=\"!dataVisable\" style=\"margin-left: 10px;\">\n          <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale\">{{dateData | json}}</pre>\n          <div>\n            <label>\n              <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n              Real-time\n            </label>\n          </div>\n        </div>\n        <div>\n          <h3 (click)=\"dimVisiable = !dimVisiable\" style=\"cursor: pointer\">\n            <span\n              [class.arrow-down]=\"dimVisiable\"\n              [class.arrow-right]=\"!dimVisiable\">\n            </span>\n            <strong>Dimensions</strong>\n          </h3>\n          <div [hidden]=\"!dimVisiable\" style=\"margin-left: 10px;\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n              Fit Container\n            </label> <br />\n            <div *ngIf=\"!fitContainer\">\n              <label>Width:</label><br />\n              <input type=\"number\" [(ngModel)]=\"width\"><br />\n              <label>Height:</label><br />\n              <input type=\"number\" [(ngModel)]=\"height\"><br />\n              <button (click)=\"applyDimensions()\">Apply dimensions</button>\n            </div>\n          </div>\n        </div>\n        <h3 (click)=\"colorVisible = !colorVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"colorVisible\"\n            [class.arrow-right]=\"!colorVisible\">\n          </span>\n          <strong>Color Scheme</strong>\n        </h3>\n        <select\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"selectedColorScheme\"\n          (ngModelChange)=\"setColorScheme($event)\">\n          <option *ngFor=\"let scheme of colorSets\" [value]=\"scheme.name\">{{scheme.name}}</option>\n        </select>\n\n        <select\n          *ngIf=\"chart.options.includes('schemeType')\"\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"schemeType\"\n          (ngModelChange)=\"schemeType = $event\">\n          <option value=\"ordinal\">Ordinal</option>\n          <option value=\"linear\">Linear</option>\n        </select>\n\n        <h3 (click)=\"optsVisible = !optsVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"optsVisible\"\n            [class.arrow-right]=\"!optsVisible\">\n          </span>\n          <strong>Options</strong>\n        </h3>\n        <div [hidden]=\"!optsVisible\" style=\"margin-left: 10px;\">\n          <div *ngIf=\"chart.options.includes('showXAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n              Show X Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n              Show Y Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showGridLines')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n              Show Grid Lines\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('gradient')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n              Use Gradients\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLegend')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n              Show Legend\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n              Show X Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n            <label>X Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n              Show Y Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n            <label>Y Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLabels')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n              Show Labels\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('explodeSlices')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n              Explode Slices\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('doughnut')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n              Doughnut\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('autoScale')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n              Auto Scale\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('timeline')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n              Timeline\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('curve')\">\n            <label>Line Interpolation</label>\n            <select\n              [ngModel]=\"curveType\"\n              (ngModelChange)=\"setInterpolationType($event)\">\n              <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">\n                {{interpolationType}}\n              </option>\n            </select>\n          </div>\n\n          <div *ngIf=\"chart.options.includes('min')\">\n            <label>Min value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMin\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('max')\">\n            <label>Max value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMax\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('value')\">\n            <label>Value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('previousValue')\">\n            <label>Previous value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugePreviousValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('angleSpan')\">\n            <label>Angle span:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeAngleSpan\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('startAngle')\">\n            <label>Start Angle:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeStartAngle\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('showAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gaugeShowAxis\" (change)=\"gaugeShowAxis = $event.target.checked\">\n              Show Axis\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('largeSegments')\">\n            <label>Number of large segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeLargeSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('smallSegments')\">\n            <label>Number of small segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeSmallSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('units')\">\n            <label>Units:</label><br />\n            <input type=\"text\" [(ngModel)]=\"gaugeUnits\"><br />\n          </div>\n        </div>\n        <h3><a href=\"https://swimlane.gitbooks.io/ngx-charts/content/\" target=\"_blank\">Documentation</a></h3>\n        </div>\n      </div>\n    </main>\n  "
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -291,75 +294,99 @@ document.addEventListener('DOMContentLoaded', function () {
 "use strict";
 var chartGroups = [
     {
-        name: "Bar Charts",
+        name: 'Bar Charts',
         charts: [
             {
-                name: "Vertical Bar Chart",
+                name: 'Vertical Bar Chart',
                 selector: 'bar-vertical',
                 inputFormat: 'singleSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             },
             {
-                name: "Horizontal Bar Chart",
+                name: 'Horizontal Bar Chart',
                 selector: 'bar-horizontal',
                 inputFormat: 'singleSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             },
             {
-                name: "Grouped Vertical Bar Chart",
+                name: 'Grouped Vertical Bar Chart',
                 selector: 'bar-vertical-2d',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             },
             {
-                name: "Grouped Horizontal Bar Chart",
+                name: 'Grouped Horizontal Bar Chart',
                 selector: 'bar-horizontal-2d',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             },
             {
-                name: "Stacked Vertical Bar Chart",
+                name: 'Stacked Vertical Bar Chart',
                 selector: 'bar-vertical-stacked',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             },
             {
-                name: "Stacked Horizontal Bar Chart",
+                name: 'Stacked Horizontal Bar Chart',
                 selector: 'bar-horizontal-stacked',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             },
             {
-                name: "Normalized Vertical Bar Chart",
+                name: 'Normalized Vertical Bar Chart',
                 selector: 'bar-vertical-normalized',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             },
             {
-                name: "Normalized Horizontal Bar Chart",
+                name: 'Normalized Horizontal Bar Chart',
                 selector: 'bar-horizontal-normalized',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                ]
             }
         ]
     },
     {
-        name: "Pie Charts",
+        name: 'Pie Charts',
         charts: [
             {
-                name: "Pie Chart",
+                name: 'Pie Chart',
                 selector: 'pie-chart',
                 inputFormat: 'singleSeries',
                 options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'explodeSlices', 'showLabels']
             },
             {
-                name: "Advanced Pie Chart",
+                name: 'Advanced Pie Chart',
                 selector: 'advanced-pie-chart',
                 inputFormat: 'singleSeries',
                 options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'showLabels']
             },
             {
-                name: "Pie Grid",
+                name: 'Pie Grid',
                 selector: 'pie-grid',
                 inputFormat: 'singleSeries',
                 options: ['colorScheme']
@@ -367,69 +394,91 @@ var chartGroups = [
         ]
     },
     {
-        name: "Line/Area Charts",
+        name: 'Line/Area Charts',
         charts: [
             {
-                name: "Line Chart",
+                name: 'Line Chart',
                 selector: 'line-chart',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+                ]
             },
             {
-                name: "Area Chart",
+                name: 'Area Chart',
                 selector: 'area-chart',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+                ]
             },
             {
-                name: "Stacked Area Chart",
+                name: 'Stacked Area Chart',
                 selector: 'area-chart-stacked',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+                ]
             },
             {
-                name: "Normalized Area Chart",
+                name: 'Normalized Area Chart',
                 selector: 'area-chart-normalized',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve']
+                options: [
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+                ]
             },
         ]
     },
     {
-        name: "Other Charts",
+        name: 'Other Charts',
         charts: [
             {
-                name: "Force Directed Graph",
+                name: 'Force Directed Graph',
                 selector: 'force-directed-graph',
                 inputFormat: 'graph',
                 options: ['colorScheme', 'showLegend']
             },
             {
-                name: "Heat Map",
+                name: 'Heat Map',
                 selector: 'heat-map',
                 inputFormat: 'multiSeries',
-                options: ['colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel']
+                options: [
+                    'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+                    'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel'
+                ]
             },
             {
-                name: "Tree Map",
+                name: 'Tree Map',
                 selector: 'tree-map',
                 inputFormat: 'singleSeries',
                 options: ['colorScheme']
             },
             {
-                name: "Number Cards",
+                name: 'Number Cards',
                 selector: 'number-card',
                 inputFormat: 'singleSeries',
                 options: ['colorScheme']
             },
             {
-                name: "Gauge",
+                name: 'Gauge',
                 selector: 'gauge',
                 inputFormat: 'singleSeries',
-                options: ['colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units', 'angleSpan', 'startAngle', 'showAxis']
+                options: [
+                    'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
+                    'angleSpan', 'startAngle', 'showAxis'
+                ]
             },
             {
-                name: "Linear Gauge",
+                name: 'Linear Gauge',
                 selector: 'linear-gauge',
                 inputFormat: 'single',
                 options: ['colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
@@ -450,105 +499,150 @@ exports.default = chartGroups;
 "use strict";
 exports.single = [
     {
-        "name": "Germany",
-        "value": 46268
+        name: 'Germany',
+        value: 46268
     },
     {
-        "name": "USA",
-        "value": 53041
+        name: 'USA',
+        value: 53041
     },
     {
-        "name": "France",
-        "value": 42503
+        name: 'France',
+        value: 42503
     },
     {
-        "name": "United Kingdom",
-        "value": 41787
+        name: 'United Kingdom',
+        value: 41787
     },
     {
-        "name": "Spain",
-        "value": 29863
+        name: 'Spain',
+        value: 29863
     },
     {
-        "name": "Italy",
-        "value": 35925
+        name: 'Italy',
+        value: 35925
     }
 ];
 exports.multi = [
     {
-        "name": "Germany",
-        "series": [
+        name: 'Germany',
+        series: [
             {
-                "name": "2010",
-                "value": 46268
+                name: '2010',
+                value: 46268
             },
             {
-                "name": "2000",
-                "value": 23685
+                name: '2000',
+                value: 23685
             },
             {
-                "name": "1990",
-                "value": 22219
+                name: '1990',
+                value: 22219
             }
         ]
     },
     {
-        "name": "USA",
-        "series": [
+        name: 'USA',
+        series: [
             {
-                "name": "2010",
-                "value": 48377
+                name: '2010',
+                value: 48377
             },
             {
-                "name": "2000",
-                "value": 36449
+                name: '2000',
+                value: 36449
             },
             {
-                "name": "1990",
-                "value": 23954
+                name: '1990',
+                value: 23954
             }
         ]
     },
     {
-        "name": "France",
-        "series": [
+        name: 'France',
+        series: [
             {
-                "name": "2010",
-                "value": 42503
+                name: '2010',
+                value: 42503
             },
             {
-                "name": "2000",
-                "value": 22466
+                name: '2000',
+                value: 22466
             },
             {
-                "name": "1990",
-                "value": 21833
+                name: '1990',
+                value: 21833
             }
         ]
     },
     {
-        "name": "United Kingdom",
-        "series": [
+        name: 'United Kingdom',
+        series: [
             {
-                "name": "2010",
-                "value": 38363
+                name: '2010',
+                value: 38363
             },
             {
-                "name": "2000",
-                "value": 26296
+                name: '2000',
+                value: 26296
             },
             {
-                "name": "1990",
-                "value": 18632
+                name: '1990',
+                value: 18632
             }
         ]
     }
 ];
 exports.countries = [
-    "Abkhazia", "Afghanistan", "Akrotiri and Dhekelia", "Aland", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Ascension Island", "Australia", "Austria", "Azerbaijan", "Bahamas, The", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Africa Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Cote d'lvoire", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "Gabon", "Cambia, The", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guemsey", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, N", "Korea, S", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Nagorno-Karabakh", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfolk Island", "Northern Cyprus", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcaim Islands", "Poland", "Portugal", "Puerto Rico", "Qatar", "Romania", "Russia", "Rwanda", "Sahrawi Arab Democratic Republic", "Saint-Barthelemy", "Saint Helena", "Saint Kitts and Nevis", "Saint Lucia", "Saint Martin", "Saint Pierre and Miquelon", "Saint Vincent and Grenadines", "Samos", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "Somaliland", "South Africa", "South Ossetia", "Spain", "Sri Lanka", "Sudan", "Suriname", "Svalbard", "Swaziland", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tokelau", "Tonga", "Transnistria", "Trinidad and Tobago", "Tristan da Cunha", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands, British", "Virgin Islands, U.S.", "Wallis and Futuna", "Yemen", "Zambia", "Zimbabwe"
+    'Abkhazia', 'Afghanistan', 'Akrotiri and Dhekelia', 'Aland', 'Albania',
+    'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla',
+    'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Ascension Island',
+    'Australia', 'Austria', 'Azerbaijan', 'Bahamas, The', 'Bahrain', 'Bangladesh',
+    'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan',
+    'Bolivia', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'Brunei',
+    'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada',
+    'Cape Verde', 'Cayman Islands', 'Central Africa Republic', 'Chad', 'Chile',
+    'China', 'Christmas Island', 'Cocos (Keeling) Islands', 'Colombia', 'Comoros',
+    'Congo', 'Cook Islands', 'Costa Rica', 'Cote d\'lvoire', 'Croatia', 'Cuba',
+    'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica',
+    'Dominican Republic', 'East Timor Ecuador', 'Egypt', 'El Salvador',
+    'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Falkland Islands',
+    'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Polynesia', 'Gabon',
+    'Cambia, The', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece',
+    'Greenland', 'Grenada', 'Guam', 'Guatemala', 'Guemsey', 'Guinea',
+    'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary',
+    'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man',
+    'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan',
+    'Kenya', 'Kiribati', 'Korea, N', 'Korea, S', 'Kosovo', 'Kuwait', 'Kyrgyzstan',
+    'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein',
+    'Lithuania', 'Luxembourg', 'Macao', 'Macedonia', 'Madagascar', 'Malawi',
+    'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania',
+    'Mauritius', 'Mayotte', 'Mexico', 'Micronesia', 'Moldova', 'Monaco',
+    'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Myanmar',
+    'Nagorno-Karabakh', 'Namibia', 'Nauru', 'Nepal', 'Netherlands',
+    'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger',
+    'Nigeria', 'Niue', 'Norfolk Island', 'Northern Cyprus',
+    'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palau',
+    'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines',
+    'Pitcaim Islands', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Romania',
+    'Russia', 'Rwanda', 'Sahrawi Arab Democratic Republic', 'Saint-Barthelemy',
+    'Saint Helena', 'Saint Kitts and Nevis', 'Saint Lucia', 'Saint Martin',
+    'Saint Pierre and Miquelon', 'Saint Vincent and Grenadines', 'Samos',
+    'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia',
+    'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia',
+    'Solomon Islands', 'Somalia', 'Somaliland', 'South Africa', 'South Ossetia',
+    'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Svalbard', 'Swaziland', 'Sweden',
+    'Switzerland', 'Syria', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo',
+    'Tokelau', 'Tonga', 'Transnistria', 'Trinidad and Tobago', 'Tristan da Cunha',
+    'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu',
+    'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom',
+    'United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City',
+    'Venezuela', 'Vietnam', 'Virgin Islands, British', 'Virgin Islands, U.S.',
+    'Wallis and Futuna', 'Yemen', 'Zambia', 'Zimbabwe'
 ];
 function generateGraph(nodeCount) {
-    var nodes = [], links = [];
+    var nodes = [];
+    var links = [];
     for (var i = 0; i < nodeCount; i++) {
         var country = exports.countries[Math.floor(Math.random() * exports.countries.length)];
         nodes.push({
@@ -8107,7 +8201,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%; }\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  min-height: 100vh;\n  color: #666; }\n\n* {\n  box-sizing: border-box; }\n\napp {\n  height: 100%; }\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n  button:hover {\n    outline: none;\n    background: #1483ff; }\n  button:focus, button:active {\n    outline: none;\n    background: #097dff; }\n\n.arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px; }\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0;\n  height: 0;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff; }\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE; }\n\ninput:focus {\n  outline: none; }\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0; }\n\nmain {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 100%; }\n  main .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 25%;\n    bottom: 0; }\n    main .chart-col .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n  main .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em; }\n    main .sidebar h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px; }\n      main .sidebar h1 strong {\n        font-weight: 700; }\n      main .sidebar h1 small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white; }\n    main .sidebar input[type=text],\n    main .sidebar select {\n      width: 100%; }\n    main .sidebar h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      -webkit-user-select: none;\n         -moz-user-select: none;\n          -ms-user-select: none;\n              user-select: none; }\n      main .sidebar h3 a {\n        color: #a8b2c7;\n        text-decoration: none; }\n    main .sidebar pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px; }\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  /**\n   * Text\n   */\n  background: #1b1e27; }\n  .dark text {\n    fill: #a8b2c7; }\n  .dark .gridline-path {\n    stroke: #2f3646; }\n  .dark .grid-panel.odd rect {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .legend-labels {\n    background: rgba(255, 255, 255, 0.05); }\n  .dark .legend-item:hover {\n    color: #fff; }\n  .dark .legend-label:hover {\n    color: #fff !important; }\n  .dark .legend-label .active .legend-label-text {\n    color: #fff !important; }\n  .dark .scale-legend-label {\n    color: #a8b2c7; }\n  .dark .advanced-pie-legend {\n    color: #a8b2c7; }\n    .dark .advanced-pie-legend .legend-item:hover {\n      color: #fff !important; }\n  .dark .force-directed-graph .edge {\n    stroke: #455066; }\n  .dark .number-card p {\n    color: #f0f1f6; }\n  .dark .gauge .background-arc path {\n    fill: #2f3646; }\n  .dark .gauge .gauge-tick path {\n    stroke: #a8b2c7; }\n  .dark .gauge .gauge-tick text {\n    fill: #a8b2c7; }\n  .dark .linear-gauge .background-bar path {\n    fill: #2f3646; }\n  .dark .linear-gauge .units {\n    fill: #72809b; }\n  .dark .timeline .brush-background {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .timeline .brush .selection {\n    fill: rgba(255, 255, 255, 0.1);\n    stroke: #aaa; }\n", "", {"version":3,"sources":["/./demo/demo/demo.scss"],"names":[],"mappings":"AAAA;EACE,UAAU;EACV,WAAW;EACX,aAAa,EACd;;AAED;EACE,qFAAqF;EACrF,mBAAmB;EACnB,iBAAiB;EACjB,kBAAkB;EAClB,kBAAkB;EAClB,wBAAwB;EACxB,oCAAoC;EACpC,mCAAmC;EACnC,mCAAmC;EAEnC,kBAAkB;EAClB,YAAY,EACb;;AAED;EACE,uBAAuB,EACxB;;AAED;EACE,aAAa,EACd;;AAED;EACE,sBAAsB;EACtB,iBAAiB;EACjB,iBAAiB;EACjB,oBAAoB;EACpB,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,0BAA0B;EAC1B,gBAAgB;EAChB,mBAAmB;EACnB,mBAAmB;EACnB,iBAAiB;EACjB,gBAAgB;EAChB,aAAa;EACb,cAAc,EAYf;EA5BD;IAmBI,cAAc;IACd,oBAAoB,EACrB;EArBH;IAyBI,cAAc;IACd,oBAAoB,EACrB;;AAGH;EACE,SAAS;EACT,UAAU;EACV,mCAAmC;EACnC,oCAAoC;EACpC,2BAA2B;EAC3B,sBAAsB;EACtB,kBAAkB,EACnB;;AAED;EACE,kBAAkB;EAClB,sBAAsB;EACtB,SAAS;EACT,UAAU;EACV,kCAAkC;EAClC,qCAAqC;EACrC,4BAA4B,EAC7B;;AAED;;EAEE,gBAAgB;EAChB,yBAAyB;EACzB,eAAe;EACf,wBAAwB;EACxB,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,iCAAiC,EAClC;;AAED;EACE,cAAc,EACf;;AAED;EACE,YAAY;EACZ,aAAa;EACb,cAAc,EACf;;AAED;EACE,yBAAwB;MAAxB,sBAAwB;UAAxB,wBAAwB;EACxB,aAAa,EAmFd;EArFD;IAKI,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,SAAS;IACT,UAAU;IACV,UAAU,EAQX;IAnBH;MAcM,mBAAmB;MACnB,SAAS;MACT,UAAU;MACV,yCAAoB;cAApB,iCAAoB,EACrB;EAlBL;IAsBI,iBAAiB;IACjB,uHAA6F;IAE7F,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,WAAW;IACX,QAAQ;IACR,UAAU;IAEV,oBAAoB;IACpB,YAAY;IACZ,gBAAgB,EAiDjB;IApFH;MAsCM,YAAY;MACZ,iBAAiB;MACjB,0BAA0B;MAC1B,eAAe;MACf,UAAU;MACV,oBAAoB;MACpB,cAAc,EAYf;MAxDL;QA+CQ,iBAAiB,EAClB;MAhDP;QAmDQ,eAAe;QACf,gBAAgB;QAChB,mBAAmB;QACnB,aAAa,EACd;IAvDP;;MA4DM,YAAY,EACb;IA7DL;MAgEM,WAAW;MACX,mBAAmB;MACnB,0BAA0B;MAC1B,eAAe;MACf,0BAAkB;SAAlB,uBAAkB;UAAlB,sBAAkB;cAAlB,kBAAkB,EAMnB;MA1EL;QAuEQ,eAAe;QACf,sBAAsB,EACvB;IAzEP;MA6EM,oBAAoB;MACpB,gBAAgB;MAChB,iBAAiB;MACjB,kBAAkB;MAClB,eAAe;MACf,cAAc,EACf;;AAIL;EACE;;KAEG;EAQH;;KAEG;EAQH,oBAhByB,EA2H1B;EAhID;IAwBI,cARsB,EASvB;EAzBH;IA4BI,gBArBoB,EAsBrB;EA7BH;IAkCQ,gCAAU,EACX;EAnCP;IAwCI,sCAAgB,EACjB;EAzCH;IA6CM,YAAY,EACb;EA9CL;IAmDM,uBAAuB,EACxB;EApDL;IAwDQ,uBAAuB,EACxB;EAzDP;IA8DI,eA9CsB,EA+CvB;EA/DH;IAkEI,eAlDsB,EAyDvB;IAzEH;MAsEQ,uBAAuB,EACxB;EAvEP;IA6EM,gBArEoB,EAsErB;EA9EL;IAmFM,eAjEsB,EAkEvB;EApFL;IA0FQ,cAnFgB,EAoFjB;EA3FP;IAgGQ,gBAhFkB,EAiFnB;EAjGP;IAmGQ,cAnFkB,EAoFnB;EApGP;IA2GQ,cApGgB,EAqGjB;EA5GP;IAgHM,cAlGqB,EAmGtB;EAjHL;IAsHM,gCAAU,EACX;EAvHL;IA2HQ,+BAAU;IACV,aAAa,EACd","file":"demo.scss","sourcesContent":["html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n}\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n\n  min-height: 100vh;\n  color: #666;\n}\n\n* {\n  box-sizing: border-box;\n}\n\napp {\n  height: 100%;\n}\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none;\n\n  &:hover {\n    outline: none;\n    background: #1483ff;\n  }\n\n  &:focus,\n  &:active {\n    outline: none;\n    background: #097dff;\n  }\n}\n\n.arrow-down {\n  width: 0; \n  height: 0; \n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px;\n}\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0; \n  height: 0; \n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff;\n}\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE;\n}\n\ninput:focus {\n  outline: none;\n}\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0;\n}\n\nmain {\n  justify-content: center;\n  height: 100%;\n\n  .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 0;\n    left: 25%;\n    bottom: 0;\n\n    .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n    }\n  }\n\n  .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 13px 19px 2px rgba(0,0,0,.14),0 5px 24px 4px rgba(0,0,0,.12);\n\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em;\n\n    h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px;\n\n      strong {\n        font-weight: 700;\n      }\n\n      small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white;\n      }\n    }\n\n    input[type=text],\n    select {\n      width: 100%;\n    }\n\n    h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      user-select: none;\n      \n      a {\n        color: #a8b2c7;\n        text-decoration: none;\n      }\n    }\n\n    pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px;\n    }\n  }\n}\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  $color-bg-darkest: #13141b;\n  $color-bg-darker: #1b1e27;\n  $color-bg-dark: #232837;\n  $color-bg-med: #2f3646;\n  $color-bg-light: #455066;\n  $color-bg-lighter: #5b6882;\n\n  /**\n   * Text\n   */\n  $color-text-dark: #72809b;\n  $color-text-med-dark: #919db5;\n  $color-text-med: #a8b2c7;\n  $color-text-med-light: #d9dce1;\n  $color-text-light: #f0f1f6;\n  $color-text-lighter: #fff;\n\n  background: $color-bg-darker;\n\n  text {\n    fill: $color-text-med;\n  }\n\n  .gridline-path {\n    stroke: $color-bg-med;\n  }\n\n  .grid-panel {\n    &.odd {\n      rect {\n        fill: rgba(255,255,255,0.05);\n      }\n    }\n  }\n\n  .legend-labels {\n    background: rgba(255,255,255,0.05);\n  }\n\n  .legend-item {\n    &:hover {\n      color: #fff;\n    }\n  }\n\n  .legend-label {\n    &:hover {\n      color: #fff !important;\n    }\n\n    .active {\n      .legend-label-text {\n        color: #fff !important;\n      }\n    }\n  }\n\n  .scale-legend-label {\n    color: $color-text-med;\n  }\n\n  .advanced-pie-legend {\n    color: $color-text-med;\n\n    .legend-item {\n      &:hover {\n        color: #fff !important;\n      }     \n    }\n  }\n\n  .force-directed-graph {\n    .edge {\n      stroke: $color-bg-light;\n    }\n  }\n\n  .number-card {\n    p {\n      color: $color-text-light;\n    }\n  }\n\n  .gauge {\n    .background-arc{\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .gauge-tick {\n      path {\n        stroke: $color-text-med;\n      }\n      text {\n        fill: $color-text-med;\n      }\n    }\n  }\n\n  .linear-gauge {\n    .background-bar {\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .units {\n      fill: $color-text-dark;\n    }\n  }\n\n  .timeline {\n    .brush-background {\n      fill: rgba(255,255,255,0.05);\n    }\n    \n    .brush {\n      .selection {\n        fill: rgba(255, 255, 255, 0.1);\n        stroke: #aaa;\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
+exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%; }\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  min-height: 100vh;\n  color: #666; }\n\n* {\n  box-sizing: border-box; }\n\napp {\n  height: 100%; }\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n  button:hover {\n    outline: none;\n    background: #1483ff; }\n  button:focus, button:active {\n    outline: none;\n    background: #097dff; }\n\n.arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px; }\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0;\n  height: 0;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff; }\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE; }\n\ninput:focus {\n  outline: none; }\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0; }\n\nmain {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 100%; }\n  main .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 25%;\n    bottom: 0; }\n    main .chart-col .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n  main .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em; }\n    main .sidebar h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px; }\n      main .sidebar h1 strong {\n        font-weight: 700; }\n      main .sidebar h1 small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white; }\n    main .sidebar input[type=text],\n    main .sidebar select {\n      width: 100%; }\n    main .sidebar h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      -webkit-user-select: none;\n         -moz-user-select: none;\n          -ms-user-select: none;\n              user-select: none; }\n      main .sidebar h3 a {\n        color: #a8b2c7;\n        text-decoration: none; }\n    main .sidebar pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px; }\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  /**\n   * Text\n   */\n  background: #1b1e27; }\n  .dark text {\n    fill: #a8b2c7; }\n  .dark .gridline-path {\n    stroke: #2f3646; }\n  .dark .grid-panel.odd rect {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .legend-labels {\n    background: rgba(255, 255, 255, 0.05); }\n  .dark .legend-item:hover {\n    color: #fff; }\n  .dark .legend-label:hover {\n    color: #fff !important; }\n  .dark .legend-label .active .legend-label-text {\n    color: #fff !important; }\n  .dark .scale-legend-label {\n    color: #a8b2c7; }\n  .dark .advanced-pie-legend {\n    color: #a8b2c7; }\n    .dark .advanced-pie-legend .legend-item:hover {\n      color: #fff !important; }\n  .dark .force-directed-graph .edge {\n    stroke: #455066; }\n  .dark .number-card p {\n    color: #f0f1f6; }\n  .dark .gauge .background-arc path {\n    fill: #2f3646; }\n  .dark .gauge .gauge-tick path {\n    stroke: #a8b2c7; }\n  .dark .gauge .gauge-tick text {\n    fill: #a8b2c7; }\n  .dark .linear-gauge .background-bar path {\n    fill: #2f3646; }\n  .dark .linear-gauge .units {\n    fill: #72809b; }\n  .dark .timeline .brush-background {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .timeline .brush .selection {\n    fill: rgba(255, 255, 255, 0.1);\n    stroke: #aaa; }\n", "", {"version":3,"sources":["/./demo/demo/demo.scss"],"names":[],"mappings":"AAAA;EACE,UAAU;EACV,WAAW;EACX,aAAa,EACd;;AAED;EACE,qFAAqF;EACrF,mBAAmB;EACnB,iBAAiB;EACjB,kBAAkB;EAClB,kBAAkB;EAClB,wBAAwB;EACxB,oCAAoC;EACpC,mCAAmC;EACnC,mCAAmC;EAEnC,kBAAkB;EAClB,YAAY,EACb;;AAED;EACE,uBAAuB,EACxB;;AAED;EACE,aAAa,EACd;;AAED;EACE,sBAAsB;EACtB,iBAAiB;EACjB,iBAAiB;EACjB,oBAAoB;EACpB,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,0BAA0B;EAC1B,gBAAgB;EAChB,mBAAmB;EACnB,mBAAmB;EACnB,iBAAiB;EACjB,gBAAgB;EAChB,aAAa;EACb,cAAc,EAYf;EA5BD;IAmBI,cAAc;IACd,oBAAoB,EACrB;EArBH;IAyBI,cAAc;IACd,oBAAoB,EACrB;;AAGH;EACE,SAAS;EACT,UAAU;EACV,mCAAmC;EACnC,oCAAoC;EACpC,2BAA2B;EAC3B,sBAAsB;EACtB,kBAAkB,EACnB;;AAED;EACE,kBAAkB;EAClB,sBAAsB;EACtB,SAAS;EACT,UAAU;EACV,kCAAkC;EAClC,qCAAqC;EACrC,4BAA4B,EAC7B;;AAED;;EAEE,gBAAgB;EAChB,yBAAyB;EACzB,eAAe;EACf,wBAAwB;EACxB,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,iCAAiC,EAClC;;AAED;EACE,cAAc,EACf;;AAED;EACE,YAAY;EACZ,aAAa;EACb,cAAc,EACf;;AAED;EACE,yBAAwB;MAAxB,sBAAwB;UAAxB,wBAAwB;EACxB,aAAa,EAmFd;EArFD;IAKI,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,SAAS;IACT,UAAU;IACV,UAAU,EAQX;IAnBH;MAcM,mBAAmB;MACnB,SAAS;MACT,UAAU;MACV,yCAAoB;cAApB,iCAAoB,EACrB;EAlBL;IAsBI,iBAAiB;IACjB,uHAA6F;IAE7F,WAAW;IACX,cAAc;IACd,mBAAmB;IACnB,OAAM;IACN,WAAW;IACX,QAAQ;IACR,UAAU;IAEV,oBAAoB;IACpB,YAAY;IACZ,gBAAgB,EAiDjB;IApFH;MAsCM,YAAY;MACZ,iBAAiB;MACjB,0BAA0B;MAC1B,eAAe;MACf,UAAU;MACV,oBAAoB;MACpB,cAAc,EAYf;MAxDL;QA+CQ,iBAAiB,EAClB;MAhDP;QAmDQ,eAAe;QACf,gBAAgB;QAChB,mBAAmB;QACnB,aAAa,EACd;IAvDP;;MA4DM,YAAY,EACb;IA7DL;MAgEM,WAAW;MACX,mBAAmB;MACnB,0BAA0B;MAC1B,eAAe;MACf,0BAAkB;SAAlB,uBAAkB;UAAlB,sBAAkB;cAAlB,kBAAkB,EAMnB;MA1EL;QAuEQ,eAAe;QACf,sBAAsB,EACvB;IAzEP;MA6EM,oBAAoB;MACpB,gBAAgB;MAChB,iBAAiB;MACjB,kBAAkB;MAClB,eAAe;MACf,cAAc,EACf;;AAIL;EACE;;KAEG;EAQH;;KAEG;EAQH,oBAhByB,EA2H1B;EAhID;IAwBI,cARsB,EASvB;EAzBH;IA4BI,gBArBoB,EAsBrB;EA7BH;IAkCQ,gCAAU,EACX;EAnCP;IAwCI,sCAAgB,EACjB;EAzCH;IA6CM,YAAY,EACb;EA9CL;IAmDM,uBAAuB,EACxB;EApDL;IAwDQ,uBAAuB,EACxB;EAzDP;IA8DI,eA9CsB,EA+CvB;EA/DH;IAkEI,eAlDsB,EAyDvB;IAzEH;MAsEQ,uBAAuB,EACxB;EAvEP;IA6EM,gBArEoB,EAsErB;EA9EL;IAmFM,eAjEsB,EAkEvB;EApFL;IA0FQ,cAnFgB,EAoFjB;EA3FP;IAgGQ,gBAhFkB,EAiFnB;EAjGP;IAmGQ,cAnFkB,EAoFnB;EApGP;IA2GQ,cApGgB,EAqGjB;EA5GP;IAgHM,cAlGqB,EAmGtB;EAjHL;IAsHM,gCAAU,EACX;EAvHL;IA2HQ,+BAAU;IACV,aAAa,EACd","file":"demo.scss","sourcesContent":["html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n}\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n\n  min-height: 100vh;\n  color: #666;\n}\n\n* {\n  box-sizing: border-box;\n}\n\napp {\n  height: 100%;\n}\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none;\n\n  &:hover {\n    outline: none;\n    background: #1483ff;\n  }\n\n  &:focus,\n  &:active {\n    outline: none;\n    background: #097dff;\n  }\n}\n\n.arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px;\n}\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0;\n  height: 0;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff;\n}\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE;\n}\n\ninput:focus {\n  outline: none;\n}\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0;\n}\n\nmain {\n  justify-content: center;\n  height: 100%;\n\n  .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 0;\n    left: 25%;\n    bottom: 0;\n\n    .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n    }\n  }\n\n  .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 13px 19px 2px rgba(0,0,0,.14),0 5px 24px 4px rgba(0,0,0,.12);\n\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em;\n\n    h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px;\n\n      strong {\n        font-weight: 700;\n      }\n\n      small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white;\n      }\n    }\n\n    input[type=text],\n    select {\n      width: 100%;\n    }\n\n    h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      user-select: none;\n\n      a {\n        color: #a8b2c7;\n        text-decoration: none;\n      }\n    }\n\n    pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px;\n    }\n  }\n}\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  $color-bg-darkest: #13141b;\n  $color-bg-darker: #1b1e27;\n  $color-bg-dark: #232837;\n  $color-bg-med: #2f3646;\n  $color-bg-light: #455066;\n  $color-bg-lighter: #5b6882;\n\n  /**\n   * Text\n   */\n  $color-text-dark: #72809b;\n  $color-text-med-dark: #919db5;\n  $color-text-med: #a8b2c7;\n  $color-text-med-light: #d9dce1;\n  $color-text-light: #f0f1f6;\n  $color-text-lighter: #fff;\n\n  background: $color-bg-darker;\n\n  text {\n    fill: $color-text-med;\n  }\n\n  .gridline-path {\n    stroke: $color-bg-med;\n  }\n\n  .grid-panel {\n    &.odd {\n      rect {\n        fill: rgba(255,255,255,0.05);\n      }\n    }\n  }\n\n  .legend-labels {\n    background: rgba(255,255,255,0.05);\n  }\n\n  .legend-item {\n    &:hover {\n      color: #fff;\n    }\n  }\n\n  .legend-label {\n    &:hover {\n      color: #fff !important;\n    }\n\n    .active {\n      .legend-label-text {\n        color: #fff !important;\n      }\n    }\n  }\n\n  .scale-legend-label {\n    color: $color-text-med;\n  }\n\n  .advanced-pie-legend {\n    color: $color-text-med;\n\n    .legend-item {\n      &:hover {\n        color: #fff !important;\n      }\n    }\n  }\n\n  .force-directed-graph {\n    .edge {\n      stroke: $color-bg-light;\n    }\n  }\n\n  .number-card {\n    p {\n      color: $color-text-light;\n    }\n  }\n\n  .gauge {\n    .background-arc{\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .gauge-tick {\n      path {\n        stroke: $color-text-med;\n      }\n      text {\n        fill: $color-text-med;\n      }\n    }\n  }\n\n  .linear-gauge {\n    .background-bar {\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .units {\n      fill: $color-text-dark;\n    }\n  }\n\n  .timeline {\n    .brush-background {\n      fill: rgba(255,255,255,0.05);\n    }\n\n    .brush {\n      .selection {\n        fill: rgba(255, 255, 255, 0.1);\n        stroke: #aaa;\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
 
 // exports
 
@@ -8361,10 +8455,10 @@ var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
  * @class Notification<T>
  */
 var Notification = (function () {
-    function Notification(kind, value, exception) {
+    function Notification(kind, value, error) {
         this.kind = kind;
         this.value = value;
-        this.exception = exception;
+        this.error = error;
         this.hasValue = kind === 'N';
     }
     /**
@@ -8377,7 +8471,7 @@ var Notification = (function () {
             case 'N':
                 return observer.next && observer.next(this.value);
             case 'E':
-                return observer.error && observer.error(this.exception);
+                return observer.error && observer.error(this.error);
             case 'C':
                 return observer.complete && observer.complete();
         }
@@ -8396,7 +8490,7 @@ var Notification = (function () {
             case 'N':
                 return next && next(this.value);
             case 'E':
-                return error && error(this.exception);
+                return error && error(this.error);
             case 'C':
                 return complete && complete();
         }
@@ -8429,7 +8523,7 @@ var Notification = (function () {
             case 'N':
                 return Observable_1.Observable.of(this.value);
             case 'E':
-                return Observable_1.Observable.throw(this.exception);
+                return Observable_1.Observable.throw(this.error);
             case 'C':
                 return Observable_1.Observable.empty();
         }
@@ -8451,7 +8545,7 @@ var Notification = (function () {
     /**
      * A shortcut to create a Notification instance of the type `error` from a
      * given error.
-     * @param {any} [err] The `error` exception.
+     * @param {any} [err] The `error` error.
      * @return {Notification<T>} The "error" Notification representing the
      * argument.
      */
@@ -8523,7 +8617,10 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Subject_1 = __webpack_require__("./node_modules/rxjs/Subject.js");
 var queue_1 = __webpack_require__("./node_modules/rxjs/scheduler/queue.js");
+var Subscription_1 = __webpack_require__("./node_modules/rxjs/Subscription.js");
 var observeOn_1 = __webpack_require__("./node_modules/rxjs/operator/observeOn.js");
+var ObjectUnsubscribedError_1 = __webpack_require__("./node_modules/rxjs/util/ObjectUnsubscribedError.js");
+var SubjectSubscription_1 = __webpack_require__("./node_modules/rxjs/SubjectSubscription.js");
 /**
  * @class ReplaySubject<T>
  */
@@ -8547,6 +8644,20 @@ var ReplaySubject = (function (_super) {
     ReplaySubject.prototype._subscribe = function (subscriber) {
         var _events = this._trimBufferThenGetEvents();
         var scheduler = this.scheduler;
+        var subscription;
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        else if (this.hasError) {
+            subscription = Subscription_1.Subscription.EMPTY;
+        }
+        else if (this.isStopped) {
+            subscription = Subscription_1.Subscription.EMPTY;
+        }
+        else {
+            this.observers.push(subscriber);
+            subscription = new SubjectSubscription_1.SubjectSubscription(this, subscriber);
+        }
         if (scheduler) {
             subscriber.add(subscriber = new observeOn_1.ObserveOnSubscriber(subscriber, scheduler));
         }
@@ -8554,7 +8665,13 @@ var ReplaySubject = (function (_super) {
         for (var i = 0; i < len && !subscriber.closed; i++) {
             subscriber.next(_events[i].value);
         }
-        return _super.prototype._subscribe.call(this, subscriber);
+        if (this.hasError) {
+            subscriber.error(this.thrownError);
+        }
+        else if (this.isStopped) {
+            subscriber.complete();
+        }
+        return subscription;
     };
     ReplaySubject.prototype._getNow = function () {
         return (this.scheduler || queue_1.queue).now();
@@ -8608,6 +8725,7 @@ var ReplayEvent = (function () {
 // definition
 var Subject_1 = __webpack_require__("./node_modules/rxjs/Subject.js");
 exports.Subject = Subject_1.Subject;
+exports.AnonymousSubject = Subject_1.AnonymousSubject;
 /* tslint:enable:no-unused-variable */
 var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
 exports.Observable = Observable_1.Observable;
@@ -8647,7 +8765,6 @@ __webpack_require__("./node_modules/rxjs/add/operator/bufferCount.js");
 __webpack_require__("./node_modules/rxjs/add/operator/bufferTime.js");
 __webpack_require__("./node_modules/rxjs/add/operator/bufferToggle.js");
 __webpack_require__("./node_modules/rxjs/add/operator/bufferWhen.js");
-__webpack_require__("./node_modules/rxjs/add/operator/cache.js");
 __webpack_require__("./node_modules/rxjs/add/operator/catch.js");
 __webpack_require__("./node_modules/rxjs/add/operator/combineAll.js");
 __webpack_require__("./node_modules/rxjs/add/operator/combineLatest.js");
@@ -8663,7 +8780,6 @@ __webpack_require__("./node_modules/rxjs/add/operator/defaultIfEmpty.js");
 __webpack_require__("./node_modules/rxjs/add/operator/delay.js");
 __webpack_require__("./node_modules/rxjs/add/operator/delayWhen.js");
 __webpack_require__("./node_modules/rxjs/add/operator/distinct.js");
-__webpack_require__("./node_modules/rxjs/add/operator/distinctKey.js");
 __webpack_require__("./node_modules/rxjs/add/operator/distinctUntilChanged.js");
 __webpack_require__("./node_modules/rxjs/add/operator/distinctUntilKeyChanged.js");
 __webpack_require__("./node_modules/rxjs/add/operator/do.js");
@@ -8755,8 +8871,6 @@ var ReplaySubject_1 = __webpack_require__("./node_modules/rxjs/ReplaySubject.js"
 exports.ReplaySubject = ReplaySubject_1.ReplaySubject;
 var BehaviorSubject_1 = __webpack_require__("./node_modules/rxjs/BehaviorSubject.js");
 exports.BehaviorSubject = BehaviorSubject_1.BehaviorSubject;
-var MulticastObservable_1 = __webpack_require__("./node_modules/rxjs/observable/MulticastObservable.js");
-exports.MulticastObservable = MulticastObservable_1.MulticastObservable;
 var ConnectableObservable_1 = __webpack_require__("./node_modules/rxjs/observable/ConnectableObservable.js");
 exports.ConnectableObservable = ConnectableObservable_1.ConnectableObservable;
 var Notification_1 = __webpack_require__("./node_modules/rxjs/Notification.js");
@@ -8767,6 +8881,8 @@ var ArgumentOutOfRangeError_1 = __webpack_require__("./node_modules/rxjs/util/Ar
 exports.ArgumentOutOfRangeError = ArgumentOutOfRangeError_1.ArgumentOutOfRangeError;
 var ObjectUnsubscribedError_1 = __webpack_require__("./node_modules/rxjs/util/ObjectUnsubscribedError.js");
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError_1.ObjectUnsubscribedError;
+var TimeoutError_1 = __webpack_require__("./node_modules/rxjs/util/TimeoutError.js");
+exports.TimeoutError = TimeoutError_1.TimeoutError;
 var UnsubscriptionError_1 = __webpack_require__("./node_modules/rxjs/util/UnsubscriptionError.js");
 exports.UnsubscriptionError = UnsubscriptionError_1.UnsubscriptionError;
 var timeInterval_1 = __webpack_require__("./node_modules/rxjs/operator/timeInterval.js");
@@ -9296,18 +9412,6 @@ Observable_1.Observable.prototype.bufferWhen = bufferWhen_1.bufferWhen;
 
 /***/ },
 
-/***/ "./node_modules/rxjs/add/operator/cache.js":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
-var cache_1 = __webpack_require__("./node_modules/rxjs/operator/cache.js");
-Observable_1.Observable.prototype.cache = cache_1.cache;
-//# sourceMappingURL=cache.js.map
-
-/***/ },
-
 /***/ "./node_modules/rxjs/add/operator/catch.js":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -9486,18 +9590,6 @@ var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
 var distinct_1 = __webpack_require__("./node_modules/rxjs/operator/distinct.js");
 Observable_1.Observable.prototype.distinct = distinct_1.distinct;
 //# sourceMappingURL=distinct.js.map
-
-/***/ },
-
-/***/ "./node_modules/rxjs/add/operator/distinctKey.js":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
-var distinctKey_1 = __webpack_require__("./node_modules/rxjs/operator/distinctKey.js");
-Observable_1.Observable.prototype.distinctKey = distinctKey_1.distinctKey;
-//# sourceMappingURL=distinctKey.js.map
 
 /***/ },
 
@@ -10704,7 +10796,7 @@ var BoundCallbackObservable = (function (_super) {
      * @see {@link fromPromise}
      *
      * @param {function} func Function with a callback as the last parameter.
-     * @param {function} selector A function which takes the arguments from the
+     * @param {function} [selector] A function which takes the arguments from the
      * callback and maps those a value to emit on the output Observable.
      * @param {Scheduler} [scheduler] The scheduler on which to schedule the
      * callbacks.
@@ -10877,7 +10969,7 @@ var BoundNodeCallbackObservable = (function (_super) {
      * @see {@link fromPromise}
      *
      * @param {function} func Function with a callback as the last parameter.
-     * @param {function} selector A function which takes the arguments from the
+     * @param {function} [selector] A function which takes the arguments from the
      * callback and maps those a value to emit on the output Observable.
      * @param {Scheduler} [scheduler] The scheduler on which to schedule the
      * callbacks.
@@ -11060,6 +11152,14 @@ var ConnectableObservable = (function (_super) {
     return ConnectableObservable;
 }(Observable_1.Observable));
 exports.ConnectableObservable = ConnectableObservable;
+exports.connectableObservableDescriptor = {
+    operator: { value: null },
+    _refCount: { value: 0, writable: true },
+    _subscribe: { value: ConnectableObservable.prototype._subscribe },
+    getSubject: { value: ConnectableObservable.prototype.getSubject },
+    connect: { value: ConnectableObservable.prototype.connect },
+    refCount: { value: ConnectableObservable.prototype.refCount }
+};
 var ConnectableSubscriber = (function (_super) {
     __extends(ConnectableSubscriber, _super);
     function ConnectableSubscriber(destination, connectable) {
@@ -11097,7 +11197,7 @@ var RefCountOperator = (function () {
         var connectable = this.connectable;
         connectable._refCount++;
         var refCounter = new RefCountSubscriber(subscriber, connectable);
-        var subscription = source._subscribe(refCounter);
+        var subscription = source.subscribe(refCounter);
         if (!refCounter.closed) {
             refCounter.connection = connectable.connect();
         }
@@ -11132,7 +11232,7 @@ var RefCountSubscriber = (function (_super) {
         // Compare the local RefCountSubscriber's connection Subscription to the
         // connection Subscription on the shared ConnectableObservable. In cases
         // where the ConnectableObservable source synchronously emits values, and
-        // the RefCountSubscriber's dowstream Observers synchronously unsubscribe,
+        // the RefCountSubscriber's downstream Observers synchronously unsubscribe,
         // execution continues to here before the RefCountOperator has a chance to
         // supply the RefCountSubscriber with the shared connection Subscription.
         // For example:
@@ -11215,6 +11315,12 @@ var DeferObservable = (function (_super) {
      *   }
      * });
      * clicksOrInterval.subscribe(x => console.log(x));
+     *
+     * // Results in the following behavior:
+     * // If the result of Math.random() is greater than 0.5 it will listen
+     * // for clicks anywhere on the "document"; when document is clicked it
+     * // will log a MouseEvent object to the console. If the result is less
+     * // than 0.5 it will emit ascending numbers, one every second(1000ms).
      *
      * @see {@link create}
      *
@@ -11309,6 +11415,12 @@ var EmptyObservable = (function (_super) {
      *   x % 2 === 1 ? Rx.Observable.of('a', 'b', 'c') : Rx.Observable.empty()
      * );
      * result.subscribe(x => console.log(x));
+     *
+     * // Results in the following to the console:
+     * // x is equal to the count on the interval eg(0,1,2,3,...)
+     * // x will occur every 1000ms
+     * // if x % 2 is equal to 1 print abc
+     * // if x % 2 is not equal to 1 nothing will be output
      *
      * @see {@link create}
      * @see {@link never}
@@ -11569,6 +11681,7 @@ var tryCatch_1 = __webpack_require__("./node_modules/rxjs/util/tryCatch.js");
 var isFunction_1 = __webpack_require__("./node_modules/rxjs/util/isFunction.js");
 var errorObject_1 = __webpack_require__("./node_modules/rxjs/util/errorObject.js");
 var Subscription_1 = __webpack_require__("./node_modules/rxjs/Subscription.js");
+var toString = Object.prototype.toString;
 function isNodeStyleEventEmmitter(sourceObj) {
     return !!sourceObj && typeof sourceObj.addListener === 'function' && typeof sourceObj.removeListener === 'function';
 }
@@ -11576,10 +11689,10 @@ function isJQueryStyleEventEmitter(sourceObj) {
     return !!sourceObj && typeof sourceObj.on === 'function' && typeof sourceObj.off === 'function';
 }
 function isNodeList(sourceObj) {
-    return !!sourceObj && sourceObj.toString() === '[object NodeList]';
+    return !!sourceObj && toString.call(sourceObj) === '[object NodeList]';
 }
 function isHTMLCollection(sourceObj) {
-    return !!sourceObj && sourceObj.toString() === '[object HTMLCollection]';
+    return !!sourceObj && toString.call(sourceObj) === '[object HTMLCollection]';
 }
 function isEventTarget(sourceObj) {
     return !!sourceObj && typeof sourceObj.addEventListener === 'function' && typeof sourceObj.removeEventListener === 'function';
@@ -11619,6 +11732,10 @@ var FromEventObservable = (function (_super) {
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * clicks.subscribe(x => console.log(x));
      *
+     * // Results in:
+     * // MouseEvent object logged to console everytime a click
+     * // occurs on the document.
+     *
      * @see {@link from}
      * @see {@link fromEventPattern}
      *
@@ -11626,7 +11743,7 @@ var FromEventObservable = (function (_super) {
      * EventEmitter, NodeList or HTMLCollection to attach the event handler to.
      * @param {string} eventName The event name of interest, being emitted by the
      * `target`.
-     * @parm {EventListenerOptions} [options] Options to pass through to addEventListener
+     * @param {EventListenerOptions} [options] Options to pass through to addEventListener
      * @param {SelectorMethodSignature<T>} [selector] An optional function to
      * post-process results. It takes the arguments from the event handler and
      * should return a single value.
@@ -11663,6 +11780,9 @@ var FromEventObservable = (function (_super) {
             var source_3 = sourceObj;
             sourceObj.addListener(eventName, handler);
             unsubscribe = function () { return source_3.removeListener(eventName, handler); };
+        }
+        else {
+            throw new TypeError('Invalid event target');
         }
         subscriber.add(new Subscription_1.Subscription(unsubscribe));
     };
@@ -11862,6 +11982,9 @@ var FromObservable = (function (_super) {
      * var result = Rx.Observable.from(array);
      * result.subscribe(x => console.log(x));
      *
+     * // Results in the following:
+     * // 10 20 30
+     *
      * @example <caption>Convert an infinite iterable (from a generator) to an Observable</caption>
      * function* generateDoubles(seed) {
      *   var i = seed;
@@ -11874,6 +11997,9 @@ var FromObservable = (function (_super) {
      * var iterator = generateDoubles(3);
      * var result = Rx.Observable.from(iterator).take(10);
      * result.subscribe(x => console.log(x));
+     *
+     * // Results in the following:
+     * // 3 6 12 24 48 96 192 384 768 1536
      *
      * @see {@link create}
      * @see {@link fromEvent}
@@ -12281,6 +12407,9 @@ var IteratorObservable = (function (_super) {
         subscriber.next(result.value);
         state.index = index + 1;
         if (subscriber.closed) {
+            if (typeof iterator.return === 'function') {
+                iterator.return();
+            }
             return;
         }
         this.schedule(state);
@@ -12304,6 +12433,9 @@ var IteratorObservable = (function (_super) {
                     subscriber.next(result.value);
                 }
                 if (subscriber.closed) {
+                    if (typeof iterator.return === 'function') {
+                        iterator.return();
+                    }
                     break;
                 }
             } while (true);
@@ -12397,40 +12529,6 @@ function sign(value) {
     return valueAsNumber < 0 ? -1 : 1;
 }
 //# sourceMappingURL=IteratorObservable.js.map
-
-/***/ },
-
-/***/ "./node_modules/rxjs/observable/MulticastObservable.js":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
-var ConnectableObservable_1 = __webpack_require__("./node_modules/rxjs/observable/ConnectableObservable.js");
-var MulticastObservable = (function (_super) {
-    __extends(MulticastObservable, _super);
-    function MulticastObservable(source, subjectFactory, selector) {
-        _super.call(this);
-        this.source = source;
-        this.subjectFactory = subjectFactory;
-        this.selector = selector;
-    }
-    MulticastObservable.prototype._subscribe = function (subscriber) {
-        var _a = this, selector = _a.selector, source = _a.source;
-        var connectable = new ConnectableObservable_1.ConnectableObservable(source, this.subjectFactory);
-        var subscription = selector(connectable).subscribe(subscriber);
-        subscription.add(connectable.connect());
-        return subscription;
-    };
-    return MulticastObservable;
-}(Observable_1.Observable));
-exports.MulticastObservable = MulticastObservable;
-//# sourceMappingURL=MulticastObservable.js.map
 
 /***/ },
 
@@ -12929,7 +13027,7 @@ var SubscribeOnObservable = (function (_super) {
     };
     SubscribeOnObservable.dispatch = function (arg) {
         var source = arg.source, subscriber = arg.subscriber;
-        return source.subscribe(subscriber);
+        return this.add(source.subscribe(subscriber));
     };
     SubscribeOnObservable.prototype._subscribe = function (subscriber) {
         var delay = this.delayTime;
@@ -13183,6 +13281,11 @@ var combineLatest_1 = __webpack_require__("./node_modules/rxjs/operator/combineL
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));
  * bmi.subscribe(x => console.log('BMI is ' + x));
+ *
+ * // With output to console:
+ * // BMI is 24.212293388429753
+ * // BMI is 23.93948099205209
+ * // BMI is 23.671253629592222
  *
  * @see {@link combineAll}
  * @see {@link merge}
@@ -13448,7 +13551,12 @@ var AjaxSubscriber = (function (_super) {
         }
         else {
             this.xhr = xhr;
-            // open XHR first
+            // set up the events before open XHR
+            // https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
+            // You need to add the event listeners before calling open() on the request.
+            // Otherwise the progress events will not fire.
+            this.setupEvents(xhr, request);
+            // open XHR
             var result = void 0;
             if (user) {
                 result = tryCatch_1.tryCatch(xhr.open).call(xhr, method, url, async, user, password);
@@ -13465,14 +13573,11 @@ var AjaxSubscriber = (function (_super) {
             xhr.responseType = request.responseType;
             // set headers
             this.setHeaders(xhr, headers);
-            // now set up the events
-            this.setupEvents(xhr, request);
             // finally send the request
-            if (body) {
-                xhr.send(body);
-            }
-            else {
-                xhr.send();
+            result = body ? tryCatch_1.tryCatch(xhr.send).call(xhr, body) : tryCatch_1.tryCatch(xhr.send).call(xhr);
+            if (result === errorObject_1.errorObject) {
+                this.error(errorObject_1.errorObject.e);
+                return null;
             }
         }
         return xhr;
@@ -13508,36 +13613,47 @@ var AjaxSubscriber = (function (_super) {
     };
     AjaxSubscriber.prototype.setupEvents = function (xhr, request) {
         var progressSubscriber = request.progressSubscriber;
-        xhr.ontimeout = function xhrTimeout(e) {
+        function xhrTimeout(e) {
             var _a = xhrTimeout, subscriber = _a.subscriber, progressSubscriber = _a.progressSubscriber, request = _a.request;
             if (progressSubscriber) {
                 progressSubscriber.error(e);
             }
             subscriber.error(new AjaxTimeoutError(this, request)); //TODO: Make betterer.
-        };
-        xhr.ontimeout.request = request;
-        xhr.ontimeout.subscriber = this;
-        xhr.ontimeout.progressSubscriber = progressSubscriber;
-        if (xhr.upload && 'withCredentials' in xhr && root_1.root.XDomainRequest) {
+        }
+        ;
+        xhr.ontimeout = xhrTimeout;
+        xhrTimeout.request = request;
+        xhrTimeout.subscriber = this;
+        xhrTimeout.progressSubscriber = progressSubscriber;
+        if (xhr.upload && 'withCredentials' in xhr) {
             if (progressSubscriber) {
-                xhr.onprogress = function xhrProgress(e) {
-                    var progressSubscriber = xhrProgress.progressSubscriber;
+                var xhrProgress_1;
+                xhrProgress_1 = function (e) {
+                    var progressSubscriber = xhrProgress_1.progressSubscriber;
                     progressSubscriber.next(e);
                 };
-                xhr.onprogress.progressSubscriber = progressSubscriber;
+                if (root_1.root.XDomainRequest) {
+                    xhr.onprogress = xhrProgress_1;
+                }
+                else {
+                    xhr.upload.onprogress = xhrProgress_1;
+                }
+                xhrProgress_1.progressSubscriber = progressSubscriber;
             }
-            xhr.onerror = function xhrError(e) {
-                var _a = xhrError, progressSubscriber = _a.progressSubscriber, subscriber = _a.subscriber, request = _a.request;
+            var xhrError_1;
+            xhrError_1 = function (e) {
+                var _a = xhrError_1, progressSubscriber = _a.progressSubscriber, subscriber = _a.subscriber, request = _a.request;
                 if (progressSubscriber) {
                     progressSubscriber.error(e);
                 }
                 subscriber.error(new AjaxError('ajax error', this, request));
             };
-            xhr.onerror.request = request;
-            xhr.onerror.subscriber = this;
-            xhr.onerror.progressSubscriber = progressSubscriber;
+            xhr.onerror = xhrError_1;
+            xhrError_1.request = request;
+            xhrError_1.subscriber = this;
+            xhrError_1.progressSubscriber = progressSubscriber;
         }
-        xhr.onreadystatechange = function xhrReadyStateChange(e) {
+        function xhrReadyStateChange(e) {
             var _a = xhrReadyStateChange, subscriber = _a.subscriber, progressSubscriber = _a.progressSubscriber, request = _a.request;
             if (this.readyState === 4) {
                 // normalize IE9 bug (http://bugs.jquery.com/ticket/1450)
@@ -13563,14 +13679,16 @@ var AjaxSubscriber = (function (_super) {
                     subscriber.error(new AjaxError('ajax error ' + status_1, this, request));
                 }
             }
-        };
-        xhr.onreadystatechange.subscriber = this;
-        xhr.onreadystatechange.progressSubscriber = progressSubscriber;
-        xhr.onreadystatechange.request = request;
+        }
+        ;
+        xhr.onreadystatechange = xhrReadyStateChange;
+        xhrReadyStateChange.subscriber = this;
+        xhrReadyStateChange.progressSubscriber = progressSubscriber;
+        xhrReadyStateChange.request = request;
     };
     AjaxSubscriber.prototype.unsubscribe = function () {
         var _a = this, done = _a.done, xhr = _a.xhr;
-        if (!done && xhr && xhr.readyState !== 4) {
+        if (!done && xhr && xhr.readyState !== 4 && typeof xhr.abort === 'function') {
             xhr.abort();
         }
         _super.prototype.unsubscribe.call(this);
@@ -13715,6 +13833,13 @@ var WebSocketSubject = (function (_super) {
         sock.operator = operator;
         return sock;
     };
+    WebSocketSubject.prototype._resetState = function () {
+        this.socket = null;
+        if (!this.source) {
+            this.destination = new ReplaySubject_1.ReplaySubject();
+        }
+        this._output = new Subject_1.Subject();
+    };
     // TODO: factor this out to be a proper Operator/Subscriber implementation and eliminate closures
     WebSocketSubject.prototype.multiplex = function (subMsg, unsubMsg, messageFilter) {
         var self = this;
@@ -13786,23 +13911,25 @@ var WebSocketSubject = (function (_super) {
                     observer.error(new TypeError('WebSocketSubject.error must be called with an object with an error code, ' +
                         'and an optional reason: { code: number, reason: string }'));
                 }
-                _this.destination = new ReplaySubject_1.ReplaySubject();
-                _this.socket = null;
+                _this._resetState();
             }, function () {
                 var closingObserver = _this.closingObserver;
                 if (closingObserver) {
                     closingObserver.next(undefined);
                 }
                 socket.close();
-                _this.destination = new ReplaySubject_1.ReplaySubject();
-                _this.socket = null;
+                _this._resetState();
             });
             if (queue && queue instanceof ReplaySubject_1.ReplaySubject) {
                 subscription.add(queue.subscribe(_this.destination));
             }
         };
-        socket.onerror = function (e) { return observer.error(e); };
+        socket.onerror = function (e) {
+            _this._resetState();
+            observer.error(e);
+        };
         socket.onclose = function (e) {
+            _this._resetState();
             var closeObserver = _this.closeObserver;
             if (closeObserver) {
                 closeObserver.next(e);
@@ -13837,9 +13964,11 @@ var WebSocketSubject = (function (_super) {
         subscription.add(this._output.subscribe(subscriber));
         subscription.add(function () {
             var socket = _this.socket;
-            if (_this._output.observers.length === 0 && socket && socket.readyState === 1) {
-                socket.close();
-                _this.socket = null;
+            if (_this._output.observers.length === 0) {
+                if (socket && socket.readyState === 1) {
+                    socket.close();
+                }
+                _this._resetState();
             }
         });
         return subscription;
@@ -13848,7 +13977,7 @@ var WebSocketSubject = (function (_super) {
         var _a = this, source = _a.source, socket = _a.socket;
         if (socket && socket.readyState === 1) {
             socket.close();
-            this.socket = null;
+            this._resetState();
         }
         _super.prototype.unsubscribe.call(this);
         if (!source) {
@@ -14134,7 +14263,7 @@ var AuditOperator = (function () {
         this.durationSelector = durationSelector;
     }
     AuditOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new AuditSubscriber(subscriber, this.durationSelector));
+        return source.subscribe(new AuditSubscriber(subscriber, this.durationSelector));
     };
     return AuditOperator;
 }());
@@ -14253,7 +14382,7 @@ var AuditTimeOperator = (function () {
         this.scheduler = scheduler;
     }
     AuditTimeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new AuditTimeSubscriber(subscriber, this.duration, this.scheduler));
+        return source.subscribe(new AuditTimeSubscriber(subscriber, this.duration, this.scheduler));
     };
     return AuditTimeOperator;
 }());
@@ -14352,7 +14481,7 @@ var BufferOperator = (function () {
         this.closingNotifier = closingNotifier;
     }
     BufferOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new BufferSubscriber(subscriber, this.closingNotifier));
+        return source.subscribe(new BufferSubscriber(subscriber, this.closingNotifier));
     };
     return BufferOperator;
 }());
@@ -14445,7 +14574,7 @@ var BufferCountOperator = (function () {
         this.startBufferEvery = startBufferEvery;
     }
     BufferCountOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new BufferCountSubscriber(subscriber, this.bufferSize, this.startBufferEvery));
+        return source.subscribe(new BufferCountSubscriber(subscriber, this.bufferSize, this.startBufferEvery));
     };
     return BufferCountOperator;
 }());
@@ -14460,30 +14589,23 @@ var BufferCountSubscriber = (function (_super) {
         _super.call(this, destination);
         this.bufferSize = bufferSize;
         this.startBufferEvery = startBufferEvery;
-        this.buffers = [[]];
+        this.buffers = [];
         this.count = 0;
     }
     BufferCountSubscriber.prototype._next = function (value) {
-        var count = (this.count += 1);
-        var destination = this.destination;
-        var bufferSize = this.bufferSize;
-        var startBufferEvery = (this.startBufferEvery == null) ? bufferSize : this.startBufferEvery;
-        var buffers = this.buffers;
-        var len = buffers.length;
-        var remove = -1;
-        if (count % startBufferEvery === 0) {
+        var count = this.count++;
+        var _a = this, destination = _a.destination, bufferSize = _a.bufferSize, startBufferEvery = _a.startBufferEvery, buffers = _a.buffers;
+        var startOn = (startBufferEvery == null) ? bufferSize : startBufferEvery;
+        if (count % startOn === 0) {
             buffers.push([]);
         }
-        for (var i = 0; i < len; i++) {
+        for (var i = buffers.length; i--;) {
             var buffer = buffers[i];
             buffer.push(value);
             if (buffer.length === bufferSize) {
-                remove = i;
+                buffers.splice(i, 1);
                 destination.next(buffer);
             }
-        }
-        if (remove !== -1) {
-            buffers.splice(remove, 1);
         }
     };
     BufferCountSubscriber.prototype._complete = function () {
@@ -14516,6 +14638,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var async_1 = __webpack_require__("./node_modules/rxjs/scheduler/async.js");
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
 var isScheduler_1 = __webpack_require__("./node_modules/rxjs/util/isScheduler.js");
+/* tslint:disable:max-line-length */
 /**
  * Buffers the source Observable values for a specific time period.
  *
@@ -14585,7 +14708,7 @@ var BufferTimeOperator = (function () {
         this.scheduler = scheduler;
     }
     BufferTimeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new BufferTimeSubscriber(subscriber, this.bufferTimeSpan, this.bufferCreationInterval, this.maxBufferSize, this.scheduler));
+        return source.subscribe(new BufferTimeSubscriber(subscriber, this.bufferTimeSpan, this.bufferCreationInterval, this.maxBufferSize, this.scheduler));
     };
     return BufferTimeOperator;
 }());
@@ -14658,7 +14781,7 @@ var BufferTimeSubscriber = (function (_super) {
         var closeAction = context.closeAction;
         closeAction.unsubscribe();
         this.remove(closeAction);
-        if (this.timespanOnly) {
+        if (!this.closed && this.timespanOnly) {
             context = this.openContext();
             var bufferTimeSpan = this.bufferTimeSpan;
             var timeSpanOnlyState = { subscriber: this, context: context, bufferTimeSpan: bufferTimeSpan };
@@ -14769,7 +14892,7 @@ var BufferToggleOperator = (function () {
         this.closingSelector = closingSelector;
     }
     BufferToggleOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new BufferToggleSubscriber(subscriber, this.openings, this.closingSelector));
+        return source.subscribe(new BufferToggleSubscriber(subscriber, this.openings, this.closingSelector));
     };
     return BufferToggleOperator;
 }());
@@ -14924,7 +15047,7 @@ var BufferWhenOperator = (function () {
         this.closingSelector = closingSelector;
     }
     BufferWhenOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new BufferWhenSubscriber(subscriber, this.closingSelector));
+        return source.subscribe(new BufferWhenSubscriber(subscriber, this.closingSelector));
     };
     return BufferWhenOperator;
 }());
@@ -14996,62 +15119,6 @@ var BufferWhenSubscriber = (function (_super) {
 
 /***/ },
 
-/***/ "./node_modules/rxjs/operator/cache.js":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
-var ReplaySubject_1 = __webpack_require__("./node_modules/rxjs/ReplaySubject.js");
-/**
- * @param bufferSize
- * @param windowTime
- * @param scheduler
- * @return {Observable<any>}
- * @method cache
- * @owner Observable
- */
-function cache(bufferSize, windowTime, scheduler) {
-    if (bufferSize === void 0) { bufferSize = Number.POSITIVE_INFINITY; }
-    if (windowTime === void 0) { windowTime = Number.POSITIVE_INFINITY; }
-    var subject;
-    var source = this;
-    var refs = 0;
-    var outerSub;
-    var getSubject = function () {
-        subject = new ReplaySubject_1.ReplaySubject(bufferSize, windowTime, scheduler);
-        return subject;
-    };
-    return new Observable_1.Observable(function (observer) {
-        if (!subject) {
-            subject = getSubject();
-            outerSub = source.subscribe(function (value) { return subject.next(value); }, function (err) {
-                var s = subject;
-                subject = null;
-                s.error(err);
-            }, function () { return subject.complete(); });
-        }
-        refs++;
-        if (!subject) {
-            subject = getSubject();
-        }
-        var innerSub = subject.subscribe(observer);
-        return function () {
-            refs--;
-            if (innerSub) {
-                innerSub.unsubscribe();
-            }
-            if (refs === 0) {
-                outerSub.unsubscribe();
-            }
-        };
-    });
-}
-exports.cache = cache;
-//# sourceMappingURL=cache.js.map
-
-/***/ },
-
 /***/ "./node_modules/rxjs/operator/catch.js":
 /***/ function(module, exports, __webpack_require__) {
 
@@ -15072,6 +15139,7 @@ var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscrib
  * @return {Observable} an observable that originates from either the source or the observable returned by the
  *  catch `selector` function.
  * @method catch
+ * @name catch
  * @owner Observable
  */
 function _catch(selector) {
@@ -15085,7 +15153,7 @@ var CatchOperator = (function () {
         this.selector = selector;
     }
     CatchOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new CatchSubscriber(subscriber, this.selector, this.caught));
+        return source.subscribe(new CatchSubscriber(subscriber, this.selector, this.caught));
     };
     return CatchOperator;
 }());
@@ -15193,6 +15261,7 @@ var isArray_1 = __webpack_require__("./node_modules/rxjs/util/isArray.js");
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
 var none = {};
+/* tslint:disable:max-line-length */
 /**
  * Combines multiple Observables to create an Observable whose values are
  * calculated from the latest values of each of its input Observables.
@@ -15216,6 +15285,11 @@ var none = {};
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
  * bmi.subscribe(x => console.log('BMI is ' + x));
+ *
+ * // With output to console:
+ * // BMI is 24.212293388429753
+ * // BMI is 23.93948099205209
+ * // BMI is 23.671253629592222
  *
  * @see {@link combineAll}
  * @see {@link merge}
@@ -15246,16 +15320,15 @@ function combineLatest() {
         observables = observables[0];
     }
     observables.unshift(this);
-    return new ArrayObservable_1.ArrayObservable(observables).lift(new CombineLatestOperator(project));
+    return this.lift.call(new ArrayObservable_1.ArrayObservable(observables), new CombineLatestOperator(project));
 }
 exports.combineLatest = combineLatest;
-/* tslint:enable:max-line-length */
 var CombineLatestOperator = (function () {
     function CombineLatestOperator(project) {
         this.project = project;
     }
     CombineLatestOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new CombineLatestSubscriber(subscriber, this.project));
+        return source.subscribe(new CombineLatestSubscriber(subscriber, this.project));
     };
     return CombineLatestOperator;
 }());
@@ -15340,6 +15413,7 @@ exports.CombineLatestSubscriber = CombineLatestSubscriber;
 var isScheduler_1 = __webpack_require__("./node_modules/rxjs/util/isScheduler.js");
 var ArrayObservable_1 = __webpack_require__("./node_modules/rxjs/observable/ArrayObservable.js");
 var mergeAll_1 = __webpack_require__("./node_modules/rxjs/operator/mergeAll.js");
+/* tslint:disable:max-line-length */
 /**
  * Creates an output Observable which sequentially emits all values from every
  * given input Observable after the current Observable.
@@ -15360,12 +15434,21 @@ var mergeAll_1 = __webpack_require__("./node_modules/rxjs/operator/mergeAll.js")
  * var result = timer.concat(sequence);
  * result.subscribe(x => console.log(x));
  *
+ * // results in:
+ * // 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
+ *
  * @example <caption>Concatenate 3 Observables</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var result = timer1.concat(timer2, timer3);
  * result.subscribe(x => console.log(x));
+ *
+ * // results in the following:
+ * // (Prints to console sequentially)
+ * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
+ * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
+ * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
  *
  * @see {@link concatAll}
  * @see {@link concatMap}
@@ -15385,7 +15468,7 @@ function concat() {
     for (var _i = 0; _i < arguments.length; _i++) {
         observables[_i - 0] = arguments[_i];
     }
-    return concatStatic.apply(void 0, [this].concat(observables));
+    return this.lift.call(concatStatic.apply(void 0, [this].concat(observables)));
 }
 exports.concat = concat;
 /* tslint:enable:max-line-length */
@@ -15408,12 +15491,21 @@ exports.concat = concat;
  * var result = Rx.Observable.concat(timer, sequence);
  * result.subscribe(x => console.log(x));
  *
+ * // results in:
+ * // 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
+ *
  * @example <caption>Concatenate 3 Observables</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
  * var result = Rx.Observable.concat(timer1, timer2, timer3);
  * result.subscribe(x => console.log(x));
+ *
+ * // results in the following:
+ * // (Prints to console sequentially)
+ * // -1000ms-> 0 -1000ms-> 1 -1000ms-> ... 9
+ * // -2000ms-> 0 -2000ms-> 1 -2000ms-> ... 5
+ * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
  *
  * @see {@link concatAll}
  * @see {@link concatMap}
@@ -15440,6 +15532,9 @@ function concatStatic() {
     if (isScheduler_1.isScheduler(args[observables.length - 1])) {
         scheduler = args.pop();
     }
+    if (scheduler === null && observables.length === 1) {
+        return observables[0];
+    }
     return new ArrayObservable_1.ArrayObservable(observables, scheduler).lift(new mergeAll_1.MergeAllOperator(1));
 }
 exports.concatStatic = concatStatic;
@@ -15453,6 +15548,7 @@ exports.concatStatic = concatStatic;
 "use strict";
 "use strict";
 var mergeAll_1 = __webpack_require__("./node_modules/rxjs/operator/mergeAll.js");
+/* tslint:disable:max-line-length */
 /**
  * Converts a higher-order Observable into a first-order Observable by
  * concatenating the inner Observables in order.
@@ -15480,6 +15576,12 @@ var mergeAll_1 = __webpack_require__("./node_modules/rxjs/operator/mergeAll.js")
  * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
  * var firstOrder = higherOrder.concatAll();
  * firstOrder.subscribe(x => console.log(x));
+ *
+ * // Results in the following:
+ * // (results are not concurrent)
+ * // For every click on the "document" it will emit values 0 to 3 spaced
+ * // on a 1000ms interval
+ * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link combineAll}
  * @see {@link concat}
@@ -15509,6 +15611,7 @@ exports.concatAll = concatAll;
 "use strict";
 "use strict";
 var mergeMap_1 = __webpack_require__("./node_modules/rxjs/operator/mergeMap.js");
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to an Observable which is merged in the output
  * Observable, in a serialized fashion waiting for each one to complete before
@@ -15536,6 +15639,12 @@ var mergeMap_1 = __webpack_require__("./node_modules/rxjs/operator/mergeMap.js")
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
  * result.subscribe(x => console.log(x));
+ *
+ * // Results in the following:
+ * // (results are not concurrent)
+ * // For every click on the "document" it will emit values 0 to 3 spaced
+ * // on a 1000ms interval
+ * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link concat}
  * @see {@link concatAll}
@@ -15579,6 +15688,7 @@ exports.concatMap = concatMap;
 "use strict";
 "use strict";
 var mergeMapTo_1 = __webpack_require__("./node_modules/rxjs/operator/mergeMapTo.js");
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to the same Observable which is merged multiple
  * times in a serialized fashion on the output Observable.
@@ -15606,6 +15716,12 @@ var mergeMapTo_1 = __webpack_require__("./node_modules/rxjs/operator/mergeMapTo.
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMapTo(Rx.Observable.interval(1000).take(4));
  * result.subscribe(x => console.log(x));
+ *
+ * // Results in the following:
+ * // (results are not concurrent)
+ * // For every click on the "document" it will emit values 0 to 3 spaced
+ * // on a 1000ms interval
+ * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link concat}
  * @see {@link concatAll}
@@ -15678,6 +15794,9 @@ var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
  * var result = numbers.count(i => i % 2 === 1);
  * result.subscribe(x => console.log(x));
  *
+ * // Results in:
+ * // 4
+ *
  * @see {@link max}
  * @see {@link min}
  * @see {@link reduce}
@@ -15703,7 +15822,7 @@ var CountOperator = (function () {
         this.source = source;
     }
     CountOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new CountSubscriber(subscriber, this.predicate, this.source));
+        return source.subscribe(new CountSubscriber(subscriber, this.predicate, this.source));
     };
     return CountOperator;
 }());
@@ -15815,7 +15934,7 @@ var DebounceOperator = (function () {
         this.durationSelector = durationSelector;
     }
     DebounceOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DebounceSubscriber(subscriber, this.durationSelector));
+        return source.subscribe(new DebounceSubscriber(subscriber, this.durationSelector));
     };
     return DebounceOperator;
 }());
@@ -15955,7 +16074,7 @@ var DebounceTimeOperator = (function () {
         this.scheduler = scheduler;
     }
     DebounceTimeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DebounceTimeSubscriber(subscriber, this.dueTime, this.scheduler));
+        return source.subscribe(new DebounceTimeSubscriber(subscriber, this.dueTime, this.scheduler));
     };
     return DebounceTimeOperator;
 }());
@@ -16020,6 +16139,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+/* tslint:disable:max-line-length */
 /**
  * Emits a given value if the source Observable completes without emitting any
  * `next` value, otherwise mirrors the source Observable.
@@ -16060,7 +16180,7 @@ var DefaultIfEmptyOperator = (function () {
         this.defaultValue = defaultValue;
     }
     DefaultIfEmptyOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DefaultIfEmptySubscriber(subscriber, this.defaultValue));
+        return source.subscribe(new DefaultIfEmptySubscriber(subscriber, this.defaultValue));
     };
     return DefaultIfEmptyOperator;
 }());
@@ -16158,7 +16278,7 @@ var DelayOperator = (function () {
         this.scheduler = scheduler;
     }
     DelayOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DelaySubscriber(subscriber, this.delay, this.scheduler));
+        return source.subscribe(new DelaySubscriber(subscriber, this.delay, this.scheduler));
     };
     return DelayOperator;
 }());
@@ -16306,7 +16426,7 @@ var DelayWhenOperator = (function () {
         this.delayDurationSelector = delayDurationSelector;
     }
     DelayWhenOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DelayWhenSubscriber(subscriber, this.delayDurationSelector));
+        return source.subscribe(new DelayWhenSubscriber(subscriber, this.delayDurationSelector));
     };
     return DelayWhenOperator;
 }());
@@ -16469,6 +16589,11 @@ var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
  * var upperCase = materialized.dematerialize();
  * upperCase.subscribe(x => console.log(x), e => console.error(e));
  *
+ * // Results in:
+ * // A
+ * // B
+ * // TypeError: x.toUpperCase is not a function
+ *
  * @see {@link Notification}
  * @see {@link materialize}
  *
@@ -16485,7 +16610,7 @@ var DeMaterializeOperator = (function () {
     function DeMaterializeOperator() {
     }
     DeMaterializeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DeMaterializeSubscriber(subscriber));
+        return source.subscribe(new DeMaterializeSubscriber(subscriber));
     };
     return DeMaterializeOperator;
 }());
@@ -16520,29 +16645,34 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+var Set_1 = __webpack_require__("./node_modules/rxjs/util/Set.js");
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from previous items.
- * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
- * If a comparator function is not provided, an equality check is used by default.
- * As the internal HashSet of this operator grows larger and larger, care should be taken in the domain of inputs this operator may see.
- * An optional parameter is also provided such that an Observable can be provided to queue the internal HashSet to flush the values it holds.
- * @param {function} [compare] optional comparison function called to test if an item is distinct from previous items in the source.
+ * If a keySelector function is provided, then it will project each value from the source observable into a new value that it will
+ * check for equality with previously projected values. If a keySelector function is not provided, it will use each value from the
+ * source observable directly with an equality check against previous values.
+ * In JavaScript runtimes that support `Set`, this operator will use a `Set` to improve performance of the distinct value checking.
+ * In other runtimes, this operator will use a minimal implementation of `Set` that relies on an `Array` and `indexOf` under the
+ * hood, so performance will degrade as more values are checked for distinction. Even in newer browsers, a long-running `distinct`
+ * use might result in memory leaks. To help alleviate this in some scenarios, an optional `flushes` parameter is also provided so
+ * that the internal `Set` can be "flushed", basically clearing it of values.
+ * @param {function} [keySelector] optional function to select which value you want to check as distinct.
  * @param {Observable} [flushes] optional Observable for flushing the internal HashSet of the operator.
  * @return {Observable} an Observable that emits items from the source Observable with distinct values.
  * @method distinct
  * @owner Observable
  */
-function distinct(compare, flushes) {
-    return this.lift(new DistinctOperator(compare, flushes));
+function distinct(keySelector, flushes) {
+    return this.lift(new DistinctOperator(keySelector, flushes));
 }
 exports.distinct = distinct;
 var DistinctOperator = (function () {
-    function DistinctOperator(compare, flushes) {
-        this.compare = compare;
+    function DistinctOperator(keySelector, flushes) {
+        this.keySelector = keySelector;
         this.flushes = flushes;
     }
     DistinctOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DistinctSubscriber(subscriber, this.compare, this.flushes));
+        return source.subscribe(new DistinctSubscriber(subscriber, this.keySelector, this.flushes));
     };
     return DistinctOperator;
 }());
@@ -16553,81 +16683,51 @@ var DistinctOperator = (function () {
  */
 var DistinctSubscriber = (function (_super) {
     __extends(DistinctSubscriber, _super);
-    function DistinctSubscriber(destination, compare, flushes) {
+    function DistinctSubscriber(destination, keySelector, flushes) {
         _super.call(this, destination);
-        this.values = [];
-        if (typeof compare === 'function') {
-            this.compare = compare;
-        }
+        this.keySelector = keySelector;
+        this.values = new Set_1.Set();
         if (flushes) {
             this.add(subscribeToResult_1.subscribeToResult(this, flushes));
         }
     }
     DistinctSubscriber.prototype.notifyNext = function (outerValue, innerValue, outerIndex, innerIndex, innerSub) {
-        this.values.length = 0;
+        this.values.clear();
     };
     DistinctSubscriber.prototype.notifyError = function (error, innerSub) {
         this._error(error);
     };
     DistinctSubscriber.prototype._next = function (value) {
-        var found = false;
-        var values = this.values;
-        var len = values.length;
+        if (this.keySelector) {
+            this._useKeySelector(value);
+        }
+        else {
+            this._finalizeNext(value, value);
+        }
+    };
+    DistinctSubscriber.prototype._useKeySelector = function (value) {
+        var key;
+        var destination = this.destination;
         try {
-            for (var i = 0; i < len; i++) {
-                if (this.compare(values[i], value)) {
-                    found = true;
-                    return;
-                }
-            }
+            key = this.keySelector(value);
         }
         catch (err) {
-            this.destination.error(err);
+            destination.error(err);
             return;
         }
-        this.values.push(value);
-        this.destination.next(value);
+        this._finalizeNext(key, value);
     };
-    DistinctSubscriber.prototype.compare = function (x, y) {
-        return x === y;
+    DistinctSubscriber.prototype._finalizeNext = function (key, value) {
+        var values = this.values;
+        if (!values.has(key)) {
+            values.add(key);
+            this.destination.next(value);
+        }
     };
     return DistinctSubscriber;
 }(OuterSubscriber_1.OuterSubscriber));
 exports.DistinctSubscriber = DistinctSubscriber;
 //# sourceMappingURL=distinct.js.map
-
-/***/ },
-
-/***/ "./node_modules/rxjs/operator/distinctKey.js":
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-var distinct_1 = __webpack_require__("./node_modules/rxjs/operator/distinct.js");
-/**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from previous items,
- * using a property accessed by using the key provided to check if the two items are distinct.
- * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
- * If a comparator function is not provided, an equality check is used by default.
- * As the internal HashSet of this operator grows larger and larger, care should be taken in the domain of inputs this operator may see.
- * An optional parameter is also provided such that an Observable can be provided to queue the internal HashSet to flush the values it holds.
- * @param {string} key string key for object property lookup on each item.
- * @param {function} [compare] optional comparison function called to test if an item is distinct from previous items in the source.
- * @param {Observable} [flushes] optional Observable for flushing the internal HashSet of the operator.
- * @return {Observable} an Observable that emits items from the source Observable with distinct values.
- * @method distinctKey
- * @owner Observable
- */
-function distinctKey(key, compare, flushes) {
-    return distinct_1.distinct.call(this, function (x, y) {
-        if (compare) {
-            return compare(x[key], y[key]);
-        }
-        return x[key] === y[key];
-    }, flushes);
-}
-exports.distinctKey = distinctKey;
-//# sourceMappingURL=distinctKey.js.map
 
 /***/ },
 
@@ -16644,6 +16744,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
 var tryCatch_1 = __webpack_require__("./node_modules/rxjs/util/tryCatch.js");
 var errorObject_1 = __webpack_require__("./node_modules/rxjs/util/errorObject.js");
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item.
  * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
@@ -16663,7 +16764,7 @@ var DistinctUntilChangedOperator = (function () {
         this.keySelector = keySelector;
     }
     DistinctUntilChangedOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DistinctUntilChangedSubscriber(subscriber, this.compare, this.keySelector));
+        return source.subscribe(new DistinctUntilChangedSubscriber(subscriber, this.compare, this.keySelector));
     };
     return DistinctUntilChangedOperator;
 }());
@@ -16721,6 +16822,7 @@ var DistinctUntilChangedSubscriber = (function (_super) {
 "use strict";
 "use strict";
 var distinctUntilChanged_1 = __webpack_require__("./node_modules/rxjs/operator/distinctUntilChanged.js");
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item,
  * using a property accessed by using the key provided to check if the two items are distinct.
@@ -16756,6 +16858,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+/* tslint:disable:max-line-length */
 /**
  * Perform a side effect for every emission on the source Observable, but return
  * an Observable that is identical to the source.
@@ -16810,7 +16913,7 @@ var DoOperator = (function () {
         this.complete = complete;
     }
     DoOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new DoSubscriber(subscriber, this.nextOrObserver, this.error, this.complete));
+        return source.subscribe(new DoSubscriber(subscriber, this.nextOrObserver, this.error, this.complete));
     };
     return DoOperator;
 }());
@@ -16895,6 +16998,11 @@ var ArgumentOutOfRangeError_1 = __webpack_require__("./node_modules/rxjs/util/Ar
  * var result = clicks.elementAt(2);
  * result.subscribe(x => console.log(x));
  *
+ * // Results in:
+ * // click 1 = nothing
+ * // click 2 = nothing
+ * // click 3 = MouseEvent object logged to console
+ *
  * @see {@link first}
  * @see {@link last}
  * @see {@link skip}
@@ -16926,7 +17034,7 @@ var ElementAtOperator = (function () {
         }
     }
     ElementAtOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ElementAtSubscriber(subscriber, this.index, this.defaultValue));
+        return source.subscribe(new ElementAtSubscriber(subscriber, this.index, this.defaultValue));
     };
     return ElementAtOperator;
 }());
@@ -16996,7 +17104,7 @@ var EveryOperator = (function () {
         this.source = source;
     }
     EveryOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new EverySubscriber(observer, this.predicate, this.thisArg, this.source));
+        return source.subscribe(new EverySubscriber(observer, this.predicate, this.thisArg, this.source));
     };
     return EveryOperator;
 }());
@@ -17097,7 +17205,7 @@ var SwitchFirstOperator = (function () {
     function SwitchFirstOperator() {
     }
     SwitchFirstOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SwitchFirstSubscriber(subscriber));
+        return source.subscribe(new SwitchFirstSubscriber(subscriber));
     };
     return SwitchFirstOperator;
 }());
@@ -17150,6 +17258,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to an Observable which is merged in the output
  * Observable only if the previous projected Observable has completed.
@@ -17205,7 +17314,7 @@ var SwitchFirstMapOperator = (function () {
         this.resultSelector = resultSelector;
     }
     SwitchFirstMapOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SwitchFirstMapSubscriber(subscriber, this.project, this.resultSelector));
+        return source.subscribe(new SwitchFirstMapSubscriber(subscriber, this.project, this.resultSelector));
     };
     return SwitchFirstMapOperator;
 }());
@@ -17296,6 +17405,7 @@ var tryCatch_1 = __webpack_require__("./node_modules/rxjs/util/tryCatch.js");
 var errorObject_1 = __webpack_require__("./node_modules/rxjs/util/errorObject.js");
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * Recursively projects each source value to an Observable which is merged in
  * the output Observable.
@@ -17355,7 +17465,7 @@ var ExpandOperator = (function () {
         this.scheduler = scheduler;
     }
     ExpandOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ExpandSubscriber(subscriber, this.project, this.concurrent, this.scheduler));
+        return source.subscribe(new ExpandSubscriber(subscriber, this.project, this.concurrent, this.scheduler));
     };
     return ExpandOperator;
 }());
@@ -17450,6 +17560,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+/* tslint:disable:max-line-length */
 /**
  * Filter items emitted by the source Observable by only emitting those that
  * satisfy a specified predicate.
@@ -17470,7 +17581,6 @@ var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
  * clicksOnDivs.subscribe(x => console.log(x));
  *
  * @see {@link distinct}
- * @see {@link distinctKey}
  * @see {@link distinctUntilChanged}
  * @see {@link distinctUntilKeyChanged}
  * @see {@link ignoreElements}
@@ -17500,7 +17610,7 @@ var FilterOperator = (function () {
         this.thisArg = thisArg;
     }
     FilterOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new FilterSubscriber(subscriber, this.predicate, this.thisArg));
+        return source.subscribe(new FilterSubscriber(subscriber, this.predicate, this.thisArg));
     };
     return FilterOperator;
 }());
@@ -17568,7 +17678,7 @@ var FinallyOperator = (function () {
         this.callback = callback;
     }
     FinallyOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new FinallySubscriber(subscriber, this.callback));
+        return source.subscribe(new FinallySubscriber(subscriber, this.callback));
     };
     return FinallyOperator;
 }());
@@ -17600,6 +17710,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+/* tslint:disable:max-line-length */
 /**
  * Emits only the first value emitted by the source Observable that meets some
  * condition.
@@ -17648,7 +17759,7 @@ var FindValueOperator = (function () {
         this.thisArg = thisArg;
     }
     FindValueOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new FindValueSubscriber(observer, this.predicate, this.source, this.yieldIndex, this.thisArg));
+        return source.subscribe(new FindValueSubscriber(observer, this.predicate, this.source, this.yieldIndex, this.thisArg));
     };
     return FindValueOperator;
 }());
@@ -17817,7 +17928,7 @@ var FirstOperator = (function () {
         this.source = source;
     }
     FirstOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new FirstSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
+        return source.subscribe(new FirstSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
     };
     return FirstOperator;
 }());
@@ -17836,6 +17947,7 @@ var FirstSubscriber = (function (_super) {
         this.source = source;
         this.index = 0;
         this.hasCompleted = false;
+        this._emitted = false;
     }
     FirstSubscriber.prototype._next = function (value) {
         var index = this.index++;
@@ -17879,9 +17991,12 @@ var FirstSubscriber = (function (_super) {
     };
     FirstSubscriber.prototype._emitFinal = function (value) {
         var destination = this.destination;
-        destination.next(value);
-        destination.complete();
-        this.hasCompleted = true;
+        if (!this._emitted) {
+            this._emitted = true;
+            destination.next(value);
+            destination.complete();
+            this.hasCompleted = true;
+        }
     };
     FirstSubscriber.prototype._complete = function () {
         var destination = this.destination;
@@ -17915,6 +18030,7 @@ var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
 var Subject_1 = __webpack_require__("./node_modules/rxjs/Subject.js");
 var Map_1 = __webpack_require__("./node_modules/rxjs/util/Map.js");
 var FastMap_1 = __webpack_require__("./node_modules/rxjs/util/FastMap.js");
+/* tslint:disable:max-line-length */
 /**
  * Groups the items emitted by an Observable according to a specified criterion,
  * and emits these grouped items as `GroupedObservables`, one
@@ -17936,19 +18052,19 @@ var FastMap_1 = __webpack_require__("./node_modules/rxjs/util/FastMap.js");
  * @method groupBy
  * @owner Observable
  */
-function groupBy(keySelector, elementSelector, durationSelector) {
-    return this.lift(new GroupByOperator(this, keySelector, elementSelector, durationSelector));
+function groupBy(keySelector, elementSelector, durationSelector, subjectSelector) {
+    return this.lift(new GroupByOperator(keySelector, elementSelector, durationSelector, subjectSelector));
 }
 exports.groupBy = groupBy;
 var GroupByOperator = (function () {
-    function GroupByOperator(source, keySelector, elementSelector, durationSelector) {
-        this.source = source;
+    function GroupByOperator(keySelector, elementSelector, durationSelector, subjectSelector) {
         this.keySelector = keySelector;
         this.elementSelector = elementSelector;
         this.durationSelector = durationSelector;
+        this.subjectSelector = subjectSelector;
     }
     GroupByOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new GroupBySubscriber(subscriber, this.keySelector, this.elementSelector, this.durationSelector));
+        return source.subscribe(new GroupBySubscriber(subscriber, this.keySelector, this.elementSelector, this.durationSelector, this.subjectSelector));
     };
     return GroupByOperator;
 }());
@@ -17959,11 +18075,12 @@ var GroupByOperator = (function () {
  */
 var GroupBySubscriber = (function (_super) {
     __extends(GroupBySubscriber, _super);
-    function GroupBySubscriber(destination, keySelector, elementSelector, durationSelector) {
+    function GroupBySubscriber(destination, keySelector, elementSelector, durationSelector, subjectSelector) {
         _super.call(this, destination);
         this.keySelector = keySelector;
         this.elementSelector = elementSelector;
         this.durationSelector = durationSelector;
+        this.subjectSelector = subjectSelector;
         this.groups = null;
         this.attemptedToUnsubscribe = false;
         this.count = 0;
@@ -17998,7 +18115,8 @@ var GroupBySubscriber = (function (_super) {
             element = value;
         }
         if (!group) {
-            groups.set(key, group = new Subject_1.Subject());
+            group = this.subjectSelector ? this.subjectSelector() : new Subject_1.Subject();
+            groups.set(key, group);
             var groupedObservable = new GroupedObservable(key, group, this);
             this.destination.next(groupedObservable);
             if (this.durationSelector) {
@@ -18041,7 +18159,7 @@ var GroupBySubscriber = (function (_super) {
         this.groups.delete(key);
     };
     GroupBySubscriber.prototype.unsubscribe = function () {
-        if (!this.closed && !this.attemptedToUnsubscribe) {
+        if (!this.closed) {
             this.attemptedToUnsubscribe = true;
             if (this.count === 0) {
                 _super.prototype.unsubscribe.call(this);
@@ -18169,7 +18287,7 @@ var IgnoreElementsOperator = (function () {
     function IgnoreElementsOperator() {
     }
     IgnoreElementsOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new IgnoreElementsSubscriber(subscriber));
+        return source.subscribe(new IgnoreElementsSubscriber(subscriber));
     };
     return IgnoreElementsOperator;
 }());
@@ -18220,7 +18338,7 @@ var IsEmptyOperator = (function () {
     function IsEmptyOperator() {
     }
     IsEmptyOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new IsEmptySubscriber(observer));
+        return source.subscribe(new IsEmptySubscriber(observer));
     };
     return IsEmptyOperator;
 }());
@@ -18263,6 +18381,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
 var EmptyError_1 = __webpack_require__("./node_modules/rxjs/util/EmptyError.js");
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits only the last item emitted by the source Observable.
  * It optionally takes a predicate function as a parameter, in which case, rather than emitting
@@ -18292,7 +18411,7 @@ var LastOperator = (function () {
         this.source = source;
     }
     LastOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new LastSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
+        return source.subscribe(new LastSubscriber(observer, this.predicate, this.resultSelector, this.defaultValue, this.source));
     };
     return LastOperator;
 }());
@@ -18452,7 +18571,7 @@ var MapOperator = (function () {
         this.thisArg = thisArg;
     }
     MapOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
+        return source.subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
     };
     return MapOperator;
 }());
@@ -18535,7 +18654,7 @@ var MapToOperator = (function () {
         this.value = value;
     }
     MapToOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new MapToSubscriber(subscriber, this.value));
+        return source.subscribe(new MapToSubscriber(subscriber, this.value));
     };
     return MapToOperator;
 }());
@@ -18599,6 +18718,13 @@ var Notification_1 = __webpack_require__("./node_modules/rxjs/Notification.js");
  * var materialized = upperCase.materialize();
  * materialized.subscribe(x => console.log(x));
  *
+ * // Results in the following:
+ * // - Notification {kind: "N", value: "A", error: undefined, hasValue: true}
+ * // - Notification {kind: "N", value: "B", error: undefined, hasValue: true}
+ * // - Notification {kind: "E", value: undefined, error: TypeError:
+ * //   x.toUpperCase is not a function at MapSubscriber.letters.map.x
+ * //   [as project] (http://1…, hasValue: false}
+ *
  * @see {@link Notification}
  * @see {@link dematerialize}
  *
@@ -18616,7 +18742,7 @@ var MaterializeOperator = (function () {
     function MaterializeOperator() {
     }
     MaterializeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new MaterializeSubscriber(subscriber));
+        return source.subscribe(new MaterializeSubscriber(subscriber));
     };
     return MaterializeOperator;
 }());
@@ -18686,6 +18812,7 @@ exports.max = max;
 var ArrayObservable_1 = __webpack_require__("./node_modules/rxjs/observable/ArrayObservable.js");
 var mergeAll_1 = __webpack_require__("./node_modules/rxjs/operator/mergeAll.js");
 var isScheduler_1 = __webpack_require__("./node_modules/rxjs/util/isScheduler.js");
+/* tslint:disable:max-line-length */
 /**
  * Creates an output Observable which concurrently emits all values from every
  * given input Observable.
@@ -18737,8 +18864,7 @@ function merge() {
     for (var _i = 0; _i < arguments.length; _i++) {
         observables[_i - 0] = arguments[_i];
     }
-    observables.unshift(this);
-    return mergeStatic.apply(this, observables);
+    return this.lift.call(mergeStatic.apply(void 0, [this].concat(observables)));
 }
 exports.merge = merge;
 /* tslint:enable:max-line-length */
@@ -18763,6 +18889,12 @@ exports.merge = merge;
  * var clicksOrTimer = Rx.Observable.merge(clicks, timer);
  * clicksOrTimer.subscribe(x => console.log(x));
  *
+ * // Results in the following:
+ * // timer will emit ascending values, one every second(1000ms) to console
+ * // clicks logs MouseEvents to console everytime the "document" is clicked
+ * // Since the two streams are merged you see these happening
+ * // as they occur.
+ *
  * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
@@ -18771,13 +18903,21 @@ exports.merge = merge;
  * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);
  * merged.subscribe(x => console.log(x));
  *
+ * // Results in the following:
+ * // - First timer1 and timer2 will run concurrently
+ * // - timer1 will emit a value every 1000ms for 10 iterations
+ * // - timer2 will emit a value every 2000ms for 6 iterations
+ * // - after timer1 hits it's max iteration, timer2 will
+ * //   continue, and timer3 will start to run concurrently with timer2
+ * // - when timer2 hits it's max iteration it terminates, and
+ * //   timer3 will continue to emit a value every 500ms until it is complete
+ *
  * @see {@link mergeAll}
  * @see {@link mergeMap}
  * @see {@link mergeMapTo}
  * @see {@link mergeScan}
  *
- * @param {Observable} input1 An input Observable to merge with others.
- * @param {Observable} input2 An input Observable to merge with others.
+ * @param {...Observable} observables Input Observables to merge together.
  * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
  * Observables being subscribed to concurrently.
  * @param {Scheduler} [scheduler=null] The Scheduler to use for managing
@@ -18805,7 +18945,7 @@ function mergeStatic() {
     else if (typeof last === 'number') {
         concurrent = observables.pop();
     }
-    if (observables.length === 1) {
+    if (scheduler === null && observables.length === 1) {
         return observables[0];
     }
     return new ArrayObservable_1.ArrayObservable(observables, scheduler).lift(new mergeAll_1.MergeAllOperator(concurrent));
@@ -18881,7 +19021,7 @@ var MergeAllOperator = (function () {
         this.concurrent = concurrent;
     }
     MergeAllOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new MergeAllSubscriber(observer, this.concurrent));
+        return source.subscribe(new MergeAllSubscriber(observer, this.concurrent));
     };
     return MergeAllOperator;
 }());
@@ -18945,6 +19085,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to an Observable which is merged in the output
  * Observable.
@@ -18965,6 +19106,15 @@ var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber
  *   Rx.Observable.interval(1000).map(i => x+i)
  * );
  * result.subscribe(x => console.log(x));
+ *
+ * // Results in the following:
+ * // a0
+ * // b0
+ * // c0
+ * // a1
+ * // b1
+ * // c1
+ * // continues to list a,b,c with respective ascending integers
  *
  * @see {@link concatMap}
  * @see {@link exhaustMap}
@@ -19011,7 +19161,7 @@ var MergeMapOperator = (function () {
         this.concurrent = concurrent;
     }
     MergeMapOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new MergeMapSubscriber(observer, this.project, this.resultSelector, this.concurrent));
+        return source.subscribe(new MergeMapSubscriber(observer, this.project, this.resultSelector, this.concurrent));
     };
     return MergeMapOperator;
 }());
@@ -19113,6 +19263,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to the same Observable which is merged multiple
  * times in the output Observable.
@@ -19175,7 +19326,7 @@ var MergeMapToOperator = (function () {
         this.concurrent = concurrent;
     }
     MergeMapToOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new MergeMapToSubscriber(observer, this.ish, this.resultSelector, this.concurrent));
+        return source.subscribe(new MergeMapToSubscriber(observer, this.ish, this.resultSelector, this.concurrent));
     };
     return MergeMapToOperator;
 }());
@@ -19296,7 +19447,7 @@ var MergeScanOperator = (function () {
         this.concurrent = concurrent;
     }
     MergeScanOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new MergeScanSubscriber(subscriber, this.project, this.seed, this.concurrent));
+        return source.subscribe(new MergeScanSubscriber(subscriber, this.project, this.seed, this.concurrent));
     };
     return MergeScanOperator;
 }());
@@ -19408,8 +19559,8 @@ exports.min = min;
 
 "use strict";
 "use strict";
-var MulticastObservable_1 = __webpack_require__("./node_modules/rxjs/observable/MulticastObservable.js");
 var ConnectableObservable_1 = __webpack_require__("./node_modules/rxjs/observable/ConnectableObservable.js");
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits the results of invoking a specified selector on items
  * emitted by a ConnectableObservable that shares a single subscription to the underlying stream.
@@ -19439,11 +19590,30 @@ function multicast(subjectOrSubjectFactory, selector) {
             return subjectOrSubjectFactory;
         };
     }
-    return !selector ?
-        new ConnectableObservable_1.ConnectableObservable(this, subjectFactory) :
-        new MulticastObservable_1.MulticastObservable(this, subjectFactory, selector);
+    if (typeof selector === 'function') {
+        return this.lift(new MulticastOperator(subjectFactory, selector));
+    }
+    var connectable = Object.create(this, ConnectableObservable_1.connectableObservableDescriptor);
+    connectable.source = this;
+    connectable.subjectFactory = subjectFactory;
+    return connectable;
 }
 exports.multicast = multicast;
+var MulticastOperator = (function () {
+    function MulticastOperator(subjectFactory, selector) {
+        this.subjectFactory = subjectFactory;
+        this.selector = selector;
+    }
+    MulticastOperator.prototype.call = function (subscriber, source) {
+        var selector = this.selector;
+        var subject = this.subjectFactory();
+        var subscription = selector(subject).subscribe(subscriber);
+        subscription.add(source.subscribe(subject));
+        return subscription;
+    };
+    return MulticastOperator;
+}());
+exports.MulticastOperator = MulticastOperator;
 //# sourceMappingURL=multicast.js.map
 
 /***/ },
@@ -19481,7 +19651,7 @@ var ObserveOnOperator = (function () {
         this.delay = delay;
     }
     ObserveOnOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ObserveOnSubscriber(subscriber, this.scheduler, this.delay));
+        return source.subscribe(new ObserveOnSubscriber(subscriber, this.scheduler, this.delay));
     };
     return ObserveOnOperator;
 }());
@@ -19544,6 +19714,7 @@ var FromObservable_1 = __webpack_require__("./node_modules/rxjs/observable/FromO
 var isArray_1 = __webpack_require__("./node_modules/rxjs/util/isArray.js");
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 function onErrorResumeNext() {
     var nextSources = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -19574,7 +19745,7 @@ var OnErrorResumeNextOperator = (function () {
         this.nextSources = nextSources;
     }
     OnErrorResumeNextOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new OnErrorResumeNextSubscriber(subscriber, this.nextSources));
+        return source.subscribe(new OnErrorResumeNextSubscriber(subscriber, this.nextSources));
     };
     return OnErrorResumeNextOperator;
 }());
@@ -19666,7 +19837,7 @@ var PairwiseOperator = (function () {
     function PairwiseOperator() {
     }
     PairwiseOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new PairwiseSubscriber(subscriber));
+        return source.subscribe(new PairwiseSubscriber(subscriber));
     };
     return PairwiseOperator;
 }());
@@ -19746,7 +19917,7 @@ var filter_1 = __webpack_require__("./node_modules/rxjs/operator/filter.js");
  */
 function partition(predicate, thisArg) {
     return [
-        filter_1.filter.call(this, predicate),
+        filter_1.filter.call(this, predicate, thisArg),
         filter_1.filter.call(this, not_1.not(predicate, thisArg))
     ];
 }
@@ -19827,6 +19998,7 @@ function plucker(props, length) {
 "use strict";
 var Subject_1 = __webpack_require__("./node_modules/rxjs/Subject.js");
 var multicast_1 = __webpack_require__("./node_modules/rxjs/operator/multicast.js");
+/* tslint:disable:max-line-length */
 /**
  * Returns a ConnectableObservable, which is a variety of Observable that waits until its connect method is called
  * before it begins emitting items to those Observers that have subscribed to it.
@@ -19929,6 +20101,7 @@ var isArray_1 = __webpack_require__("./node_modules/rxjs/util/isArray.js");
 var ArrayObservable_1 = __webpack_require__("./node_modules/rxjs/observable/ArrayObservable.js");
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that mirrors the first source Observable to emit an item
  * from the combination of this Observable and supplied Observables
@@ -19947,8 +20120,7 @@ function race() {
     if (observables.length === 1 && isArray_1.isArray(observables[0])) {
         observables = observables[0];
     }
-    observables.unshift(this);
-    return raceStatic.apply(this, observables);
+    return this.lift.call(raceStatic.apply(void 0, [this].concat(observables)));
 }
 exports.race = race;
 function raceStatic() {
@@ -19973,7 +20145,7 @@ var RaceOperator = (function () {
     function RaceOperator() {
     }
     RaceOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new RaceSubscriber(subscriber));
+        return source.subscribe(new RaceSubscriber(subscriber));
     };
     return RaceOperator;
 }());
@@ -20001,13 +20173,13 @@ var RaceSubscriber = (function (_super) {
             this.destination.complete();
         }
         else {
-            for (var i = 0; i < len; i++) {
+            for (var i = 0; i < len && !this.hasFirst; i++) {
                 var observable = observables[i];
                 var subscription = subscribeToResult_1.subscribeToResult(this, observable, observable, i);
                 if (this.subscriptions) {
                     this.subscriptions.push(subscription);
-                    this.add(subscription);
                 }
+                this.add(subscription);
             }
             this.observables = null;
         }
@@ -20044,6 +20216,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+/* tslint:disable:max-line-length */
 /**
  * Applies an accumulator function over the source Observable, and returns the
  * accumulated result when the source completes, given an optional seed value.
@@ -20090,16 +20263,27 @@ var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
  * @owner Observable
  */
 function reduce(accumulator, seed) {
-    return this.lift(new ReduceOperator(accumulator, seed));
+    var hasSeed = false;
+    // providing a seed of `undefined` *should* be valid and trigger
+    // hasSeed! so don't use `seed !== undefined` checks!
+    // For this reason, we have to check it here at the original call site
+    // otherwise inside Operator/Subscriber we won't know if `undefined`
+    // means they didn't provide anything or if they literally provided `undefined`
+    if (arguments.length >= 2) {
+        hasSeed = true;
+    }
+    return this.lift(new ReduceOperator(accumulator, seed, hasSeed));
 }
 exports.reduce = reduce;
 var ReduceOperator = (function () {
-    function ReduceOperator(accumulator, seed) {
+    function ReduceOperator(accumulator, seed, hasSeed) {
+        if (hasSeed === void 0) { hasSeed = false; }
         this.accumulator = accumulator;
         this.seed = seed;
+        this.hasSeed = hasSeed;
     }
     ReduceOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ReduceSubscriber(subscriber, this.accumulator, this.seed));
+        return source.subscribe(new ReduceSubscriber(subscriber, this.accumulator, this.seed, this.hasSeed));
     };
     return ReduceOperator;
 }());
@@ -20111,13 +20295,12 @@ exports.ReduceOperator = ReduceOperator;
  */
 var ReduceSubscriber = (function (_super) {
     __extends(ReduceSubscriber, _super);
-    function ReduceSubscriber(destination, accumulator, seed) {
+    function ReduceSubscriber(destination, accumulator, seed, hasSeed) {
         _super.call(this, destination);
         this.accumulator = accumulator;
+        this.hasSeed = hasSeed;
         this.hasValue = false;
         this.acc = seed;
-        this.accumulator = accumulator;
-        this.hasSeed = typeof seed !== 'undefined';
     }
     ReduceSubscriber.prototype._next = function (value) {
         if (this.hasValue || (this.hasValue = this.hasSeed)) {
@@ -20197,7 +20380,7 @@ var RepeatOperator = (function () {
         this.source = source;
     }
     RepeatOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new RepeatSubscriber(subscriber, this.count, this.source));
+        return source.subscribe(new RepeatSubscriber(subscriber, this.count, this.source));
     };
     return RepeatOperator;
 }());
@@ -20275,7 +20458,7 @@ var RepeatWhenOperator = (function () {
         this.source = source;
     }
     RepeatWhenOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new RepeatWhenSubscriber(subscriber, this.notifier, this.source));
+        return source.subscribe(new RepeatWhenSubscriber(subscriber, this.notifier, this.source));
     };
     return RepeatWhenOperator;
 }());
@@ -20386,7 +20569,7 @@ var RetryOperator = (function () {
         this.source = source;
     }
     RetryOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new RetrySubscriber(subscriber, this.count, this.source));
+        return source.subscribe(new RetrySubscriber(subscriber, this.count, this.source));
     };
     return RetryOperator;
 }());
@@ -20464,7 +20647,7 @@ var RetryWhenOperator = (function () {
         this.source = source;
     }
     RetryWhenOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new RetryWhenSubscriber(subscriber, this.notifier, this.source));
+        return source.subscribe(new RetryWhenSubscriber(subscriber, this.notifier, this.source));
     };
     return RetryWhenOperator;
 }());
@@ -20591,7 +20774,10 @@ var SampleOperator = (function () {
         this.notifier = notifier;
     }
     SampleOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SampleSubscriber(subscriber, this.notifier));
+        var sampleSubscriber = new SampleSubscriber(subscriber);
+        var subscription = source.subscribe(sampleSubscriber);
+        subscription.add(subscribeToResult_1.subscribeToResult(sampleSubscriber, this.notifier));
+        return subscription;
     };
     return SampleOperator;
 }());
@@ -20602,10 +20788,9 @@ var SampleOperator = (function () {
  */
 var SampleSubscriber = (function (_super) {
     __extends(SampleSubscriber, _super);
-    function SampleSubscriber(destination, notifier) {
-        _super.call(this, destination);
+    function SampleSubscriber() {
+        _super.apply(this, arguments);
         this.hasValue = false;
-        this.add(subscribeToResult_1.subscribeToResult(this, notifier));
     }
     SampleSubscriber.prototype._next = function (value) {
         this.value = value;
@@ -20688,7 +20873,7 @@ var SampleTimeOperator = (function () {
         this.scheduler = scheduler;
     }
     SampleTimeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SampleTimeSubscriber(subscriber, this.period, this.scheduler));
+        return source.subscribe(new SampleTimeSubscriber(subscriber, this.period, this.scheduler));
     };
     return SampleTimeOperator;
 }());
@@ -20738,6 +20923,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+/* tslint:disable:max-line-length */
 /**
  * Applies an accumulator function over the source Observable, and returns each
  * intermediate result, with an optional seed value.
@@ -20776,16 +20962,27 @@ var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
  * @owner Observable
  */
 function scan(accumulator, seed) {
-    return this.lift(new ScanOperator(accumulator, seed));
+    var hasSeed = false;
+    // providing a seed of `undefined` *should* be valid and trigger
+    // hasSeed! so don't use `seed !== undefined` checks!
+    // For this reason, we have to check it here at the original call site
+    // otherwise inside Operator/Subscriber we won't know if `undefined`
+    // means they didn't provide anything or if they literally provided `undefined`
+    if (arguments.length >= 2) {
+        hasSeed = true;
+    }
+    return this.lift(new ScanOperator(accumulator, seed, hasSeed));
 }
 exports.scan = scan;
 var ScanOperator = (function () {
-    function ScanOperator(accumulator, seed) {
+    function ScanOperator(accumulator, seed, hasSeed) {
+        if (hasSeed === void 0) { hasSeed = false; }
         this.accumulator = accumulator;
         this.seed = seed;
+        this.hasSeed = hasSeed;
     }
     ScanOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ScanSubscriber(subscriber, this.accumulator, this.seed));
+        return source.subscribe(new ScanSubscriber(subscriber, this.accumulator, this.seed, this.hasSeed));
     };
     return ScanOperator;
 }());
@@ -20796,27 +20993,26 @@ var ScanOperator = (function () {
  */
 var ScanSubscriber = (function (_super) {
     __extends(ScanSubscriber, _super);
-    function ScanSubscriber(destination, accumulator, seed) {
+    function ScanSubscriber(destination, accumulator, _seed, hasSeed) {
         _super.call(this, destination);
         this.accumulator = accumulator;
+        this._seed = _seed;
+        this.hasSeed = hasSeed;
         this.index = 0;
-        this.accumulatorSet = false;
-        this.seed = seed;
-        this.accumulatorSet = typeof seed !== 'undefined';
     }
     Object.defineProperty(ScanSubscriber.prototype, "seed", {
         get: function () {
             return this._seed;
         },
         set: function (value) {
-            this.accumulatorSet = true;
+            this.hasSeed = true;
             this._seed = value;
         },
         enumerable: true,
         configurable: true
     });
     ScanSubscriber.prototype._next = function (value) {
-        if (!this.accumulatorSet) {
+        if (!this.hasSeed) {
             this.seed = value;
             this.destination.next(value);
         }
@@ -20872,7 +21068,7 @@ var errorObject_1 = __webpack_require__("./node_modules/rxjs/util/errorObject.js
  * completes or emits after the other complets, the returned observable will never complete.
  *
  * @example <caption>figure out if the Konami code matches</caption>
- * var code = Observable.from([
+ * var code = Rx.Observable.from([
  *  "ArrowUp",
  *  "ArrowUp",
  *  "ArrowDown",
@@ -20917,7 +21113,7 @@ var SequenceEqualOperator = (function () {
         this.comparor = comparor;
     }
     SequenceEqualOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SequenceEqualSubscriber(subscriber, this.compareTo, this.comparor));
+        return source.subscribe(new SequenceEqualSubscriber(subscriber, this.compareTo, this.comparor));
     };
     return SequenceEqualOperator;
 }());
@@ -21082,7 +21278,7 @@ var SingleOperator = (function () {
         this.source = source;
     }
     SingleOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SingleSubscriber(subscriber, this.predicate, this.source));
+        return source.subscribe(new SingleSubscriber(subscriber, this.predicate, this.source));
     };
     return SingleOperator;
 }());
@@ -21177,7 +21373,7 @@ var SkipOperator = (function () {
         this.total = total;
     }
     SkipOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SkipSubscriber(subscriber, this.total));
+        return source.subscribe(new SkipSubscriber(subscriber, this.total));
     };
     return SkipOperator;
 }());
@@ -21237,7 +21433,7 @@ var SkipUntilOperator = (function () {
         this.notifier = notifier;
     }
     SkipUntilOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SkipUntilSubscriber(subscriber, this.notifier));
+        return source.subscribe(new SkipUntilSubscriber(subscriber, this.notifier));
     };
     return SkipUntilOperator;
 }());
@@ -21314,7 +21510,7 @@ var SkipWhileOperator = (function () {
         this.predicate = predicate;
     }
     SkipWhileOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SkipWhileSubscriber(subscriber, this.predicate));
+        return source.subscribe(new SkipWhileSubscriber(subscriber, this.predicate));
     };
     return SkipWhileOperator;
 }());
@@ -21365,6 +21561,7 @@ var ScalarObservable_1 = __webpack_require__("./node_modules/rxjs/observable/Sca
 var EmptyObservable_1 = __webpack_require__("./node_modules/rxjs/observable/EmptyObservable.js");
 var concat_1 = __webpack_require__("./node_modules/rxjs/operator/concat.js");
 var isScheduler_1 = __webpack_require__("./node_modules/rxjs/util/isScheduler.js");
+/* tslint:disable:max-line-length */
 /**
  * Returns an Observable that emits the items in a specified Iterable before it begins to emit items emitted by the
  * source Observable.
@@ -21424,9 +21621,19 @@ var SubscribeOnObservable_1 = __webpack_require__("./node_modules/rxjs/observabl
  */
 function subscribeOn(scheduler, delay) {
     if (delay === void 0) { delay = 0; }
-    return new SubscribeOnObservable_1.SubscribeOnObservable(this, delay, scheduler);
+    return this.lift(new SubscribeOnOperator(scheduler, delay));
 }
 exports.subscribeOn = subscribeOn;
+var SubscribeOnOperator = (function () {
+    function SubscribeOnOperator(scheduler, delay) {
+        this.scheduler = scheduler;
+        this.delay = delay;
+    }
+    SubscribeOnOperator.prototype.call = function (subscriber, source) {
+        return new SubscribeOnObservable_1.SubscribeOnObservable(source, this.delay, this.scheduler).subscribe(subscriber);
+    };
+    return SubscribeOnOperator;
+}());
 //# sourceMappingURL=subscribeOn.js.map
 
 /***/ },
@@ -21493,7 +21700,7 @@ var SwitchOperator = (function () {
     function SwitchOperator() {
     }
     SwitchOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SwitchSubscriber(subscriber));
+        return source.subscribe(new SwitchSubscriber(subscriber));
     };
     return SwitchOperator;
 }());
@@ -21558,6 +21765,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to an Observable which is merged in the output
  * Observable, emitting values only from the most recently projected Observable.
@@ -21615,7 +21823,7 @@ var SwitchMapOperator = (function () {
         this.resultSelector = resultSelector;
     }
     SwitchMapOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SwitchMapSubscriber(subscriber, this.project, this.resultSelector));
+        return source.subscribe(new SwitchMapSubscriber(subscriber, this.project, this.resultSelector));
     };
     return SwitchMapOperator;
 }());
@@ -21704,6 +21912,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * Projects each source value to the same Observable which is flattened multiple
  * times with {@link switch} in the output Observable.
@@ -21758,7 +21967,7 @@ var SwitchMapToOperator = (function () {
         this.resultSelector = resultSelector;
     }
     SwitchMapToOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new SwitchMapToSubscriber(subscriber, this.observable, this.resultSelector));
+        return source.subscribe(new SwitchMapToSubscriber(subscriber, this.observable, this.resultSelector));
     };
     return SwitchMapToOperator;
 }());
@@ -21888,7 +22097,7 @@ var TakeOperator = (function () {
         }
     }
     TakeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new TakeSubscriber(subscriber, this.total));
+        return source.subscribe(new TakeSubscriber(subscriber, this.total));
     };
     return TakeOperator;
 }());
@@ -21906,9 +22115,10 @@ var TakeSubscriber = (function (_super) {
     }
     TakeSubscriber.prototype._next = function (value) {
         var total = this.total;
-        if (++this.count <= total) {
+        var count = ++this.count;
+        if (count <= total) {
             this.destination.next(value);
-            if (this.count === total) {
+            if (count === total) {
                 this.destination.complete();
                 this.unsubscribe();
             }
@@ -21986,7 +22196,7 @@ var TakeLastOperator = (function () {
         }
     }
     TakeLastOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new TakeLastSubscriber(subscriber, this.total));
+        return source.subscribe(new TakeLastSubscriber(subscriber, this.total));
     };
     return TakeLastOperator;
 }());
@@ -22088,7 +22298,7 @@ var TakeUntilOperator = (function () {
         this.notifier = notifier;
     }
     TakeUntilOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new TakeUntilSubscriber(subscriber, this.notifier));
+        return source.subscribe(new TakeUntilSubscriber(subscriber, this.notifier));
     };
     return TakeUntilOperator;
 }());
@@ -22172,7 +22382,7 @@ var TakeWhileOperator = (function () {
         this.predicate = predicate;
     }
     TakeWhileOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new TakeWhileSubscriber(subscriber, this.predicate));
+        return source.subscribe(new TakeWhileSubscriber(subscriber, this.predicate));
     };
     return TakeWhileOperator;
 }());
@@ -22274,7 +22484,7 @@ var ThrottleOperator = (function () {
         this.durationSelector = durationSelector;
     }
     ThrottleOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ThrottleSubscriber(subscriber, this.durationSelector));
+        return source.subscribe(new ThrottleSubscriber(subscriber, this.durationSelector));
     };
     return ThrottleOperator;
 }());
@@ -22392,7 +22602,7 @@ var ThrottleTimeOperator = (function () {
         this.scheduler = scheduler;
     }
     ThrottleTimeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ThrottleTimeSubscriber(subscriber, this.duration, this.scheduler));
+        return source.subscribe(new ThrottleTimeSubscriber(subscriber, this.duration, this.scheduler));
     };
     return ThrottleTimeOperator;
 }());
@@ -22469,7 +22679,7 @@ var TimeIntervalOperator = (function () {
         this.scheduler = scheduler;
     }
     TimeIntervalOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new TimeIntervalSubscriber(observer, this.scheduler));
+        return source.subscribe(new TimeIntervalSubscriber(observer, this.scheduler));
     };
     return TimeIntervalOperator;
 }());
@@ -22511,31 +22721,30 @@ var __extends = (this && this.__extends) || function (d, b) {
 var async_1 = __webpack_require__("./node_modules/rxjs/scheduler/async.js");
 var isDate_1 = __webpack_require__("./node_modules/rxjs/util/isDate.js");
 var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
+var TimeoutError_1 = __webpack_require__("./node_modules/rxjs/util/TimeoutError.js");
 /**
- * @param due
- * @param errorToSend
- * @param scheduler
+ * @param {number} due
+ * @param {Scheduler} [scheduler]
  * @return {Observable<R>|WebSocketSubject<T>|Observable<T>}
  * @method timeout
  * @owner Observable
  */
-function timeout(due, errorToSend, scheduler) {
-    if (errorToSend === void 0) { errorToSend = null; }
+function timeout(due, scheduler) {
     if (scheduler === void 0) { scheduler = async_1.async; }
     var absoluteTimeout = isDate_1.isDate(due);
     var waitFor = absoluteTimeout ? (+due - scheduler.now()) : Math.abs(due);
-    return this.lift(new TimeoutOperator(waitFor, absoluteTimeout, errorToSend, scheduler));
+    return this.lift(new TimeoutOperator(waitFor, absoluteTimeout, scheduler, new TimeoutError_1.TimeoutError()));
 }
 exports.timeout = timeout;
 var TimeoutOperator = (function () {
-    function TimeoutOperator(waitFor, absoluteTimeout, errorToSend, scheduler) {
+    function TimeoutOperator(waitFor, absoluteTimeout, scheduler, errorInstance) {
         this.waitFor = waitFor;
         this.absoluteTimeout = absoluteTimeout;
-        this.errorToSend = errorToSend;
         this.scheduler = scheduler;
+        this.errorInstance = errorInstance;
     }
     TimeoutOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new TimeoutSubscriber(subscriber, this.absoluteTimeout, this.waitFor, this.errorToSend, this.scheduler));
+        return source.subscribe(new TimeoutSubscriber(subscriber, this.absoluteTimeout, this.waitFor, this.scheduler, this.errorInstance));
     };
     return TimeoutOperator;
 }());
@@ -22546,12 +22755,12 @@ var TimeoutOperator = (function () {
  */
 var TimeoutSubscriber = (function (_super) {
     __extends(TimeoutSubscriber, _super);
-    function TimeoutSubscriber(destination, absoluteTimeout, waitFor, errorToSend, scheduler) {
+    function TimeoutSubscriber(destination, absoluteTimeout, waitFor, scheduler, errorInstance) {
         _super.call(this, destination);
         this.absoluteTimeout = absoluteTimeout;
         this.waitFor = waitFor;
-        this.errorToSend = errorToSend;
         this.scheduler = scheduler;
+        this.errorInstance = errorInstance;
         this.index = 0;
         this._previousIndex = 0;
         this._hasCompleted = false;
@@ -22599,7 +22808,7 @@ var TimeoutSubscriber = (function (_super) {
         this._hasCompleted = true;
     };
     TimeoutSubscriber.prototype.notifyTimeout = function () {
-        this.error(this.errorToSend || new Error('timeout'));
+        this.error(this.errorInstance);
     };
     return TimeoutSubscriber;
 }(Subscriber_1.Subscriber));
@@ -22621,6 +22830,7 @@ var async_1 = __webpack_require__("./node_modules/rxjs/scheduler/async.js");
 var isDate_1 = __webpack_require__("./node_modules/rxjs/util/isDate.js");
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * @param due
  * @param withObservable
@@ -22644,7 +22854,7 @@ var TimeoutWithOperator = (function () {
         this.scheduler = scheduler;
     }
     TimeoutWithOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new TimeoutWithSubscriber(subscriber, this.absoluteTimeout, this.waitFor, this.withObservable, this.scheduler));
+        return source.subscribe(new TimeoutWithSubscriber(subscriber, this.absoluteTimeout, this.waitFor, this.withObservable, this.scheduler));
     };
     return TimeoutWithOperator;
 }());
@@ -22761,7 +22971,7 @@ var TimestampOperator = (function () {
         this.scheduler = scheduler;
     }
     TimestampOperator.prototype.call = function (observer, source) {
-        return source._subscribe(new TimestampSubscriber(observer, this.scheduler));
+        return source.subscribe(new TimestampSubscriber(observer, this.scheduler));
     };
     return TimestampOperator;
 }());
@@ -22805,7 +23015,7 @@ var ToArrayOperator = (function () {
     function ToArrayOperator() {
     }
     ToArrayOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ToArraySubscriber(subscriber));
+        return source.subscribe(new ToArraySubscriber(subscriber));
     };
     return ToArrayOperator;
 }());
@@ -22839,6 +23049,7 @@ var ToArraySubscriber = (function (_super) {
 "use strict";
 "use strict";
 var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
+/* tslint:disable:max-line-length */
 /**
  * @param PromiseCtor
  * @return {Promise<T>}
@@ -22927,7 +23138,7 @@ var WindowOperator = (function () {
     }
     WindowOperator.prototype.call = function (subscriber, source) {
         var windowSubscriber = new WindowSubscriber(subscriber);
-        var sourceSubscription = source._subscribe(windowSubscriber);
+        var sourceSubscription = source.subscribe(windowSubscriber);
         if (!sourceSubscription.closed) {
             windowSubscriber.add(subscribeToResult_1.subscribeToResult(windowSubscriber, this.windowBoundaries));
         }
@@ -23056,7 +23267,7 @@ var WindowCountOperator = (function () {
         this.startWindowEvery = startWindowEvery;
     }
     WindowCountOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new WindowCountSubscriber(subscriber, this.windowSize, this.startWindowEvery));
+        return source.subscribe(new WindowCountSubscriber(subscriber, this.windowSize, this.startWindowEvery));
     };
     return WindowCountOperator;
 }());
@@ -23198,7 +23409,7 @@ var WindowTimeOperator = (function () {
         this.scheduler = scheduler;
     }
     WindowTimeOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new WindowTimeSubscriber(subscriber, this.windowTimeSpan, this.windowCreationInterval, this.scheduler));
+        return source.subscribe(new WindowTimeSubscriber(subscriber, this.windowTimeSpan, this.windowCreationInterval, this.scheduler));
     };
     return WindowTimeOperator;
 }());
@@ -23366,7 +23577,7 @@ var WindowToggleOperator = (function () {
         this.closingSelector = closingSelector;
     }
     WindowToggleOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new WindowToggleSubscriber(subscriber, this.openings, this.closingSelector));
+        return source.subscribe(new WindowToggleSubscriber(subscriber, this.openings, this.closingSelector));
     };
     return WindowToggleOperator;
 }());
@@ -23548,7 +23759,7 @@ var WindowOperator = (function () {
         this.closingSelector = closingSelector;
     }
     WindowOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new WindowSubscriber(subscriber, this.closingSelector));
+        return source.subscribe(new WindowSubscriber(subscriber, this.closingSelector));
     };
     return WindowOperator;
 }());
@@ -23632,6 +23843,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
+/* tslint:disable:max-line-length */
 /**
  * Combines the source Observable with other Observables to create an Observable
  * whose values are calculated from the latest values of each, only when the
@@ -23683,14 +23895,13 @@ function withLatestFrom() {
     return this.lift(new WithLatestFromOperator(observables, project));
 }
 exports.withLatestFrom = withLatestFrom;
-/* tslint:enable:max-line-length */
 var WithLatestFromOperator = (function () {
     function WithLatestFromOperator(observables, project) {
         this.observables = observables;
         this.project = project;
     }
     WithLatestFromOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new WithLatestFromSubscriber(subscriber, this.observables, this.project));
+        return source.subscribe(new WithLatestFromSubscriber(subscriber, this.observables, this.project));
     };
     return WithLatestFromOperator;
 }());
@@ -23773,6 +23984,7 @@ var Subscriber_1 = __webpack_require__("./node_modules/rxjs/Subscriber.js");
 var OuterSubscriber_1 = __webpack_require__("./node_modules/rxjs/OuterSubscriber.js");
 var subscribeToResult_1 = __webpack_require__("./node_modules/rxjs/util/subscribeToResult.js");
 var iterator_1 = __webpack_require__("./node_modules/rxjs/symbol/iterator.js");
+/* tslint:disable:max-line-length */
 /**
  * @param observables
  * @return {Observable<R>}
@@ -23784,8 +23996,7 @@ function zipProto() {
     for (var _i = 0; _i < arguments.length; _i++) {
         observables[_i - 0] = arguments[_i];
     }
-    observables.unshift(this);
-    return zipStatic.apply(this, observables);
+    return this.lift.call(zipStatic.apply(void 0, [this].concat(observables)));
 }
 exports.zipProto = zipProto;
 /* tslint:enable:max-line-length */
@@ -23813,7 +24024,7 @@ var ZipOperator = (function () {
         this.project = project;
     }
     ZipOperator.prototype.call = function (subscriber, source) {
-        return source._subscribe(new ZipSubscriber(subscriber, this.project));
+        return source.subscribe(new ZipSubscriber(subscriber, this.project));
     };
     return ZipOperator;
 }());
@@ -23828,7 +24039,6 @@ var ZipSubscriber = (function (_super) {
     function ZipSubscriber(destination, project, values) {
         if (values === void 0) { values = Object.create(null); }
         _super.call(this, destination);
-        this.index = 0;
         this.iterators = [];
         this.active = 0;
         this.project = (typeof project === 'function') ? project : null;
@@ -23836,7 +24046,6 @@ var ZipSubscriber = (function (_super) {
     }
     ZipSubscriber.prototype._next = function (value) {
         var iterators = this.iterators;
-        var index = this.index++;
         if (isArray_1.isArray(value)) {
             iterators.push(new StaticArrayIterator(value));
         }
@@ -23844,7 +24053,7 @@ var ZipSubscriber = (function (_super) {
             iterators.push(new StaticIterator(value[iterator_1.$$iterator]()));
         }
         else {
-            iterators.push(new ZipBufferIterator(this.destination, this, value, index));
+            iterators.push(new ZipBufferIterator(this.destination, this, value));
         }
     };
     ZipSubscriber.prototype._complete = function () {
@@ -23967,11 +24176,10 @@ var StaticArrayIterator = (function () {
  */
 var ZipBufferIterator = (function (_super) {
     __extends(ZipBufferIterator, _super);
-    function ZipBufferIterator(destination, parent, observable, index) {
+    function ZipBufferIterator(destination, parent, observable) {
         _super.call(this, destination);
         this.parent = parent;
         this.observable = observable;
-        this.index = index;
         this.stillUnsubscribed = true;
         this.buffer = [];
         this.isComplete = false;
@@ -24128,8 +24336,10 @@ var AnimationFrameAction = (function (_super) {
     };
     AnimationFrameAction.prototype.recycleAsyncId = function (scheduler, id, delay) {
         if (delay === void 0) { delay = 0; }
-        // If delay exists and is greater than 0, recycle as an async action.
-        if (delay !== null && delay > 0) {
+        // If delay exists and is greater than 0, or if the delay is null (the
+        // action wasn't rescheduled) but was originally scheduled as an async
+        // action, then recycle as an async action.
+        if ((delay !== null && delay > 0) || (delay === null && this.delay > 0)) {
             return _super.prototype.recycleAsyncId.call(this, scheduler, id, delay);
         }
         // If the scheduler queue is empty, cancel the requested animation frame and
@@ -24165,14 +24375,14 @@ var AnimationFrameScheduler = (function (_super) {
     function AnimationFrameScheduler() {
         _super.apply(this, arguments);
     }
-    AnimationFrameScheduler.prototype.flush = function () {
+    AnimationFrameScheduler.prototype.flush = function (action) {
         this.active = true;
         this.scheduled = undefined;
         var actions = this.actions;
         var error;
         var index = -1;
         var count = actions.length;
-        var action = actions.shift();
+        action = action || actions.shift();
         do {
             if (error = action.execute(action.state, action.delay)) {
                 break;
@@ -24232,8 +24442,10 @@ var AsapAction = (function (_super) {
     };
     AsapAction.prototype.recycleAsyncId = function (scheduler, id, delay) {
         if (delay === void 0) { delay = 0; }
-        // If delay exists and is greater than 0, recycle as an async action.
-        if (delay !== null && delay > 0) {
+        // If delay exists and is greater than 0, or if the delay is null (the
+        // action wasn't rescheduled) but was originally scheduled as an async
+        // action, then recycle as an async action.
+        if ((delay !== null && delay > 0) || (delay === null && this.delay > 0)) {
             return _super.prototype.recycleAsyncId.call(this, scheduler, id, delay);
         }
         // If the scheduler queue is empty, cancel the requested microtask and
@@ -24269,14 +24481,14 @@ var AsapScheduler = (function (_super) {
     function AsapScheduler() {
         _super.apply(this, arguments);
     }
-    AsapScheduler.prototype.flush = function () {
+    AsapScheduler.prototype.flush = function (action) {
         this.active = true;
         this.scheduled = undefined;
         var actions = this.actions;
         var error;
         var index = -1;
         var count = actions.length;
-        var action = actions.shift();
+        action = action || actions.shift();
         do {
             if (error = action.execute(action.state, action.delay)) {
                 break;
@@ -24544,8 +24756,10 @@ var QueueAction = (function (_super) {
     };
     QueueAction.prototype.requestAsyncId = function (scheduler, id, delay) {
         if (delay === void 0) { delay = 0; }
-        // If delay is greater than 0, enqueue as an async action.
-        if (delay !== null && delay > 0) {
+        // If delay exists and is greater than 0, or if the delay is null (the
+        // action wasn't rescheduled) but was originally scheduled as an async
+        // action, then recycle as an async action.
+        if ((delay !== null && delay > 0) || (delay === null && this.delay > 0)) {
             return _super.prototype.requestAsyncId.call(this, scheduler, id, delay);
         }
         // Otherwise flush the scheduler starting with this action.
@@ -24740,35 +24954,37 @@ exports.queue = new QueueScheduler_1.QueueScheduler(QueueAction_1.QueueAction);
 "use strict";
 "use strict";
 var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
-var Symbol = root_1.root.Symbol;
-if (typeof Symbol === 'function') {
-    if (Symbol.iterator) {
-        exports.$$iterator = Symbol.iterator;
-    }
-    else if (typeof Symbol.for === 'function') {
-        exports.$$iterator = Symbol.for('iterator');
-    }
-}
-else {
-    if (root_1.root.Set && typeof new root_1.root.Set()['@@iterator'] === 'function') {
-        // Bug for mozilla version
-        exports.$$iterator = '@@iterator';
-    }
-    else if (root_1.root.Map) {
-        // es6-shim specific logic
-        var keys = Object.getOwnPropertyNames(root_1.root.Map.prototype);
-        for (var i = 0; i < keys.length; ++i) {
-            var key = keys[i];
-            if (key !== 'entries' && key !== 'size' && root_1.root.Map.prototype[key] === root_1.root.Map.prototype['entries']) {
-                exports.$$iterator = key;
-                break;
-            }
+function symbolIteratorPonyfill(root) {
+    var Symbol = root.Symbol;
+    if (typeof Symbol === 'function') {
+        if (!Symbol.iterator) {
+            Symbol.iterator = Symbol('iterator polyfill');
         }
+        return Symbol.iterator;
     }
     else {
-        exports.$$iterator = '@@iterator';
+        // [for Mozilla Gecko 27-35:](https://mzl.la/2ewE1zC)
+        var Set_1 = root.Set;
+        if (Set_1 && typeof new Set_1()['@@iterator'] === 'function') {
+            return '@@iterator';
+        }
+        var Map_1 = root.Map;
+        // required for compatability with es6-shim
+        if (Map_1) {
+            var keys = Object.getOwnPropertyNames(Map_1.prototype);
+            for (var i = 0; i < keys.length; ++i) {
+                var key = keys[i];
+                // according to spec, Map.prototype[@@iterator] and Map.orototype.entries must be equal.
+                if (key !== 'entries' && key !== 'size' && Map_1.prototype[key] === Map_1.prototype['entries']) {
+                    return key;
+                }
+            }
+        }
+        return '@@iterator';
     }
 }
+exports.symbolIteratorPonyfill = symbolIteratorPonyfill;
+exports.$$iterator = symbolIteratorPonyfill(root_1.root);
 //# sourceMappingURL=iterator.js.map
 
 /***/ },
@@ -25587,6 +25803,78 @@ exports.MapPolyfill = MapPolyfill;
 
 /***/ },
 
+/***/ "./node_modules/rxjs/util/Set.js":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
+function minimalSetImpl() {
+    // THIS IS NOT a full impl of Set, this is just the minimum
+    // bits of functionality we need for this library.
+    return (function () {
+        function MinimalSet() {
+            this._values = [];
+        }
+        MinimalSet.prototype.add = function (value) {
+            if (!this.has(value)) {
+                this._values.push(value);
+            }
+        };
+        MinimalSet.prototype.has = function (value) {
+            return this._values.indexOf(value) !== -1;
+        };
+        Object.defineProperty(MinimalSet.prototype, "size", {
+            get: function () {
+                return this._values.length;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        MinimalSet.prototype.clear = function () {
+            this._values.length = 0;
+        };
+        return MinimalSet;
+    }());
+}
+exports.minimalSetImpl = minimalSetImpl;
+exports.Set = root_1.root.Set || minimalSetImpl();
+//# sourceMappingURL=Set.js.map
+
+/***/ },
+
+/***/ "./node_modules/rxjs/util/TimeoutError.js":
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/**
+ * An error thrown when duetime elapses.
+ *
+ * @see {@link timeout}
+ *
+ * @class TimeoutError
+ */
+var TimeoutError = (function (_super) {
+    __extends(TimeoutError, _super);
+    function TimeoutError() {
+        var err = _super.call(this, 'Timeout has occurred');
+        this.name = err.name = 'TimeoutError';
+        this.stack = err.stack;
+        this.message = err.message;
+    }
+    return TimeoutError;
+}(Error));
+exports.TimeoutError = TimeoutError;
+//# sourceMappingURL=TimeoutError.js.map
+
+/***/ },
+
 /***/ "./node_modules/rxjs/util/applyMixins.js":
 /***/ function(module, exports) {
 
@@ -25613,34 +25901,29 @@ exports.applyMixins = applyMixins;
 "use strict";
 "use strict";
 var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
-var Object = root_1.root.Object;
-if (typeof Object.assign != 'function') {
-    (function () {
-        Object.assign = function assignPolyfill(target) {
-            var sources = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                sources[_i - 1] = arguments[_i];
+function assignImpl(target) {
+    var sources = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        sources[_i - 1] = arguments[_i];
+    }
+    var len = sources.length;
+    for (var i = 0; i < len; i++) {
+        var source = sources[i];
+        for (var k in source) {
+            if (source.hasOwnProperty(k)) {
+                target[k] = source[k];
             }
-            if (target === undefined || target === null) {
-                throw new TypeError('cannot convert undefined or null to object');
-            }
-            var output = Object(target);
-            var len = sources.length;
-            for (var index = 0; index < len; index++) {
-                var source = sources[index];
-                if (source !== undefined && source !== null) {
-                    for (var key in source) {
-                        if (source.hasOwnProperty(key)) {
-                            output[key] = source[key];
-                        }
-                    }
-                }
-            }
-            return output;
-        };
-    })();
+        }
+    }
+    return target;
 }
-exports.assign = Object.assign;
+exports.assignImpl = assignImpl;
+;
+function getAssign(root) {
+    return root.Object.assign || assignImpl;
+}
+exports.getAssign = getAssign;
+exports.assign = getAssign(root_1.root);
 //# sourceMappingURL=assign.js.map
 
 /***/ },
@@ -25741,6 +26024,7 @@ exports.not = not;
 var root_1 = __webpack_require__("./node_modules/rxjs/util/root.js");
 var isArray_1 = __webpack_require__("./node_modules/rxjs/util/isArray.js");
 var isPromise_1 = __webpack_require__("./node_modules/rxjs/util/isPromise.js");
+var isObject_1 = __webpack_require__("./node_modules/rxjs/util/isObject.js");
 var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
 var iterator_1 = __webpack_require__("./node_modules/rxjs/symbol/iterator.js");
 var InnerSubscriber_1 = __webpack_require__("./node_modules/rxjs/InnerSubscriber.js");
@@ -25760,7 +26044,7 @@ function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
             return result.subscribe(destination);
         }
     }
-    if (isArray_1.isArray(result)) {
+    else if (isArray_1.isArray(result)) {
         for (var i = 0, len = result.length; i < len && !destination.closed; i++) {
             destination.next(result[i]);
         }
@@ -25781,7 +26065,7 @@ function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
         });
         return destination;
     }
-    else if (typeof result[iterator_1.$$iterator] === 'function') {
+    else if (result && typeof result[iterator_1.$$iterator] === 'function') {
         var iterator = result[iterator_1.$$iterator]();
         do {
             var item = iterator.next();
@@ -25795,17 +26079,20 @@ function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
             }
         } while (true);
     }
-    else if (typeof result[observable_1.$$observable] === 'function') {
+    else if (result && typeof result[observable_1.$$observable] === 'function') {
         var obs = result[observable_1.$$observable]();
         if (typeof obs.subscribe !== 'function') {
-            destination.error(new Error('invalid observable'));
+            destination.error(new TypeError('Provided object does not correctly implement Symbol.observable'));
         }
         else {
             return obs.subscribe(new InnerSubscriber_1.InnerSubscriber(outerSubscriber, outerValue, outerIndex));
         }
     }
     else {
-        destination.error(new TypeError('unknown type returned'));
+        var value = isObject_1.isObject(result) ? 'an invalid object' : "'" + result + "'";
+        var msg = ("You provided " + value + " where a stream was expected.")
+            + ' You can provide an Observable, Promise, Array, or Iterable.';
+        destination.error(new TypeError(msg));
     }
     return null;
 }
@@ -26172,7 +26459,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
@@ -26362,20 +26649,20 @@ var AreaChartNormalizedComponent = (function (_super) {
     };
     AreaChartNormalizedComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date) {
             return 'time';
         }
-        if (number) {
+        if (num) {
             return 'linear';
         }
         return 'ordinal';
@@ -26414,7 +26701,7 @@ var AreaChartNormalizedComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     AreaChartNormalizedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -26562,7 +26849,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
@@ -26757,20 +27044,20 @@ var AreaChartStackedComponent = (function (_super) {
     };
     AreaChartStackedComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date) {
             return 'time';
         }
-        if (number) {
+        if (num) {
             return 'linear';
         }
         return 'ordinal';
@@ -26809,7 +27096,7 @@ var AreaChartStackedComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     AreaChartStackedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -26957,7 +27244,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
@@ -27105,20 +27392,20 @@ var AreaChartComponent = (function (_super) {
     };
     AreaChartComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date) {
             return 'time';
         }
-        if (number) {
+        if (num) {
             return 'linear';
         }
         return 'ordinal';
@@ -27157,7 +27444,7 @@ var AreaChartComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     AreaChartComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -27629,7 +27916,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontal2DComponent = (function (_super) {
@@ -27752,7 +28039,7 @@ var BarHorizontal2DComponent = (function (_super) {
         else {
             domain = this.valuesDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontal2DComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -27905,7 +28192,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalNormalizedComponent = (function (_super) {
@@ -28007,7 +28294,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontalNormalizedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -28160,7 +28447,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalStackedComponent = (function (_super) {
@@ -28274,7 +28561,7 @@ var BarHorizontalStackedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontalStackedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -28427,7 +28714,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarHorizontalComponent = (function (_super) {
@@ -28501,7 +28788,7 @@ var BarHorizontalComponent = (function (_super) {
         else {
             domain = this.xDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarHorizontalComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -28635,7 +28922,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVertical2DComponent = (function (_super) {
@@ -28759,7 +29046,7 @@ var BarVertical2DComponent = (function (_super) {
         else {
             domain = this.valuesDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVertical2DComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -28916,7 +29203,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalNormalizedComponent = (function (_super) {
@@ -29018,7 +29305,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVerticalNormalizedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -29171,7 +29458,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalStackedComponent = (function (_super) {
@@ -29285,7 +29572,7 @@ var BarVerticalStackedComponent = (function (_super) {
         else {
             domain = this.valueDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVerticalStackedComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -29438,7 +29725,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarVerticalComponent = (function (_super) {
@@ -29512,7 +29799,7 @@ var BarVerticalComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     BarVerticalComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -29761,40 +30048,40 @@ var BarComponent = (function () {
     };
     BarComponent.prototype.roundedRect = function (x, y, w, h, r, tl, tr, bl, br) {
         var retval;
-        retval = "M" + (x + r) + "," + y;
-        retval += "h" + (w - 2 * r);
+        retval = 'M' + (x + r) + ',' + y;
+        retval += 'h' + (w - 2 * r);
         if (tr) {
-            retval += "a" + r + "," + r + " 0 0 1 " + r + "," + r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r;
         }
         else {
-            retval += "h" + r;
-            retval += "v" + r;
+            retval += 'h' + r;
+            retval += 'v' + r;
         }
-        retval += "v" + (h - 2 * r);
+        retval += 'v' + (h - 2 * r);
         if (br) {
-            retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + r;
         }
         else {
-            retval += "v" + r;
-            retval += "h" + -r;
+            retval += 'v' + r;
+            retval += 'h' + -r;
         }
-        retval += "h" + (2 * r - w);
+        retval += 'h' + (2 * r - w);
         if (bl) {
-            retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + -r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + -r;
         }
         else {
-            retval += "h" + -r;
-            retval += "v" + -r;
+            retval += 'h' + -r;
+            retval += 'v' + -r;
         }
-        retval += "v" + (2 * r - h);
+        retval += 'v' + (2 * r - h);
         if (tl) {
-            retval += "a" + r + "," + r + " 0 0 1 " + r + "," + -r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + -r;
         }
         else {
-            retval += "v" + -r;
-            retval += "h" + r;
+            retval += 'v' + -r;
+            retval += 'h' + r;
         }
-        retval += "z";
+        retval += 'z';
         return retval;
     };
     BarComponent.prototype.onMouseEnter = function () {
@@ -30077,7 +30364,7 @@ var SeriesHorizontal = (function () {
     SeriesHorizontal = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-series-horizontal]',
-            template: "\n    <svg:g ngx-charts-bar \n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -30684,13 +30971,14 @@ var AxisLabelComponent = (function () {
             case 'left':
                 this.y = -(this.offset + this.textHeight + this.margin);
                 this.x = -this.height / 2;
-                this.transform = "rotate(270)";
+                this.transform = 'rotate(270)';
                 break;
             case 'right':
                 this.y = this.offset + this.margin;
                 this.x = -this.height / 2;
-                this.transform = "rotate(270)";
+                this.transform = 'rotate(270)';
                 break;
+            default:
         }
     };
     __decorate([
@@ -31116,42 +31404,43 @@ var YAxisTicksComponent = (function () {
             return scale(d) + scale.bandwidth() * 0.5;
         } : scale;
         switch (this.orient) {
-            case "top":
+            case 'top':
                 this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                    return 'translate(' + this.adjustedScale(tick) + ',0)';
                 };
-                this.textAnchor = "middle";
+                this.textAnchor = 'middle';
                 this.y2 = this.innerTickSize * sign;
                 this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
+                this.dy = sign < 0 ? '0em' : '.71em';
                 break;
-            case "bottom":
+            case 'bottom':
                 this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                    return 'translate(' + this.adjustedScale(tick) + ',0)';
                 };
-                this.textAnchor = "middle";
+                this.textAnchor = 'middle';
                 this.y2 = this.innerTickSize * sign;
                 this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
+                this.dy = sign < 0 ? '0em' : '.71em';
                 break;
-            case "left":
+            case 'left':
                 this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
+                    return 'translate(0,' + this.adjustedScale(tick) + ')';
                 };
-                this.textAnchor = "end";
+                this.textAnchor = 'end';
                 this.x2 = this.innerTickSize * -sign;
                 this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
+                this.dy = '.32em';
                 break;
-            case "right":
+            case 'right':
                 this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
+                    return 'translate(0,' + this.adjustedScale(tick) + ')';
                 };
-                this.textAnchor = "start";
+                this.textAnchor = 'start';
                 this.x2 = this.innerTickSize * -sign;
                 this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
+                this.dy = '.32em';
                 break;
+            default:
         }
         setTimeout(function () { return _this.updateDims(); });
     };
@@ -31386,11 +31675,6 @@ var BaseChartComponent = (function () {
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
-    BaseChartComponent.prototype.unbindEvents = function () {
-        if (this.resizeSubscription) {
-            this.resizeSubscription.unsubscribe();
-        }
-    };
     BaseChartComponent.prototype.update = function () {
         if (this.results) {
             this.results = this.cloneData(this.results);
@@ -31413,11 +31697,33 @@ var BaseChartComponent = (function () {
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
         if (hostElem.parentNode != null) {
-            //Get the container dimensions
+            // Get the container dimensions
             width = hostElem.parentNode.clientWidth;
             height = hostElem.parentNode.clientHeight;
         }
         return { width: width, height: height };
+    };
+    // converts all date objects that appear as name into formatted date strings
+    BaseChartComponent.prototype.formatDates = function () {
+        for (var i = 0; i < this.results.length; i++) {
+            var g = this.results[i];
+            if (g.name instanceof Date) {
+                g.name = g.name.toLocaleDateString();
+            }
+            if (g.series) {
+                for (var j = 0; j < g.series.length; j++) {
+                    var d = g.series[j];
+                    if (d.name instanceof Date) {
+                        d.name = d.name.toLocaleDateString();
+                    }
+                }
+            }
+        }
+    };
+    BaseChartComponent.prototype.unbindEvents = function () {
+        if (this.resizeSubscription) {
+            this.resizeSubscription.unsubscribe();
+        }
     };
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
@@ -31462,23 +31768,6 @@ var BaseChartComponent = (function () {
             results.push(copy);
         }
         return results;
-    };
-    // converts all date objects that appear as name into formatted date strings
-    BaseChartComponent.prototype.formatDates = function () {
-        for (var i = 0; i < this.results.length; i++) {
-            var g = this.results[i];
-            if (g.name instanceof Date) {
-                g.name = g.name.toLocaleDateString();
-            }
-            if (g.series) {
-                for (var j = 0; j < g.series.length; j++) {
-                    var d = g.series[j];
-                    if (d.name instanceof Date) {
-                        d.name = d.name.toLocaleDateString();
-                    }
-                }
-            }
-        }
     };
     __decorate([
         core_1.Input(), 
@@ -31608,17 +31897,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var services_1 = __webpack_require__("./src/services/index.ts");
+var tooltip_1 = __webpack_require__("./src/common/tooltip/index.ts");
 var ChartComponent = (function () {
-    function ChartComponent(vcr, injectionService) {
+    function ChartComponent(vcr, tooltipService) {
         this.vcr = vcr;
-        this.injectionService = injectionService;
+        this.tooltipService = tooltipService;
         this.showLegend = false;
         this.legendTitle = 'Legend';
         this.legendLabelClick = new core_1.EventEmitter();
         this.legendLabelActivate = new core_1.EventEmitter();
         this.legendLabelDeactivate = new core_1.EventEmitter();
-        this.injectionService.setRootViewContainer(vcr);
+        this.tooltipService.injectionService.setRootViewContainer(vcr);
     }
     ChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -31696,9 +31985,9 @@ var ChartComponent = (function () {
     ], ChartComponent.prototype, "legendLabelDeactivate", void 0);
     ChartComponent = __decorate([
         core_1.Component({
-            providers: [services_1.InjectionService],
+            providers: [tooltip_1.TooltipService],
             selector: 'ngx-charts-chart',
-            template: "\n    <div \n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
+            template: "\n    <div\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -31709,7 +31998,7 @@ var ChartComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef, services_1.InjectionService])
+        __metadata('design:paramtypes', [core_1.ViewContainerRef, tooltip_1.TooltipService])
     ], ChartComponent);
     return ChartComponent;
 }());
@@ -32023,6 +32312,132 @@ var CircleComponent = (function () {
     return CircleComponent;
 }());
 exports.CircleComponent = CircleComponent;
+
+
+/***/ },
+
+/***/ "./src/common/color.helper.ts":
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+"use strict";
+var d3_1 = __webpack_require__("./src/d3.ts");
+var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var ColorHelper = (function () {
+    function ColorHelper(scheme, type, domain, customColors) {
+        if (typeof (scheme) === 'string') {
+            scheme = color_sets_1.colorSets.find(function (cs) {
+                return cs.name === scheme;
+            });
+        }
+        this.colorDomain = scheme.domain;
+        this.scaleType = type;
+        this.domain = domain;
+        this.scale = this.generateColorScheme(scheme, type, domain);
+    }
+    ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
+        if (typeof (scheme) === 'string') {
+            scheme = color_sets_1.colorSets.find(function (cs) {
+                return cs.name === scheme;
+            });
+        }
+        var colorScale;
+        if (type === 'quantile') {
+            colorScale = d3_1.default.scaleQuantile()
+                .range(scheme.domain)
+                .domain(domain);
+        }
+        else if (type === 'ordinal') {
+            colorScale = d3_1.default.scaleOrdinal()
+                .range(scheme.domain)
+                .domain(domain);
+        }
+        else if (type === 'linear') {
+            colorScale = d3_1.default.scaleLinear()
+                .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
+                .range(scheme.domain);
+        }
+        return colorScale;
+    };
+    ColorHelper.prototype.getColor = function (value) {
+        if (this.scaleType === 'linear') {
+            var valueScale = d3_1.default.scaleLinear()
+                .domain(this.domain)
+                .range([0, 1]);
+            return (this.scale(valueScale(value)));
+        }
+        else {
+            var formattedValue_1 = value.toString();
+            var found = undefined; // todo type customColors
+            if (this.customColors && this.customColors.length > 0) {
+                found = this.customColors.find(function (mapping) {
+                    return mapping.name === formattedValue_1.toLowerCase();
+                });
+            }
+            if (found) {
+                return found.value;
+            }
+            else {
+                return this.scale(value);
+            }
+        }
+    };
+    ColorHelper.prototype.getLinearGradientStops = function (value, start) {
+        if (!start) {
+            start = this.domain[0];
+        }
+        var valueScale = d3_1.default.scaleLinear()
+            .domain(this.domain)
+            .range([0, 1]);
+        var colorValueScale = d3_1.default.scaleBand()
+            .domain(this.colorDomain)
+            .range([0, 1]);
+        var endColor = this.getColor(value);
+        // generate the stops
+        var startVal = valueScale(start);
+        var startColor = this.getColor(start);
+        var endVal = valueScale(value);
+        var i = 0;
+        var currentVal = startVal;
+        var stops = [];
+        stops.push({
+            color: startColor,
+            offset: 0,
+            opacity: 1
+        });
+        while (currentVal < endVal && i < this.colorDomain.length) {
+            var color = this.colorDomain[i];
+            var offset = colorValueScale(color);
+            if (offset <= startVal) {
+                i++;
+                continue;
+            }
+            if (offset >= endVal) {
+                break;
+            }
+            stops.push({
+                color: color,
+                offset: offset,
+                opacity: 1
+            });
+            currentVal = offset;
+            i++;
+        }
+        stops.push({
+            color: endColor,
+            offset: endVal,
+            opacity: 1
+        });
+        // normalize the offsets into percentages
+        for (var _i = 0, stops_1 = stops; _i < stops_1.length; _i++) {
+            var s = stops_1[_i];
+            s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
+        }
+        return stops;
+    };
+    return ColorHelper;
+}());
+exports.ColorHelper = ColorHelper;
 
 
 /***/ },
@@ -32352,8 +32767,12 @@ var GridPanelSeriesComponent = (function () {
     GridPanelSeriesComponent.prototype.getGridPanels = function () {
         var _this = this;
         return this.data.map(function (d, i) {
-            var offset, width, height, x, y, className;
-            className = 'odd';
+            var offset;
+            var width;
+            var height;
+            var x;
+            var y;
+            var className = 'odd';
             if (_this.orient === 'vertical') {
                 var position = _this.xScale(d.name);
                 var positionIndex = Number.parseInt((position / _this.xScale.step()).toString());
@@ -32488,6 +32907,7 @@ __export(__webpack_require__("./src/common/chart-common.module.ts"));
 __export(__webpack_require__("./src/common/legend/index.ts"));
 __export(__webpack_require__("./src/common/tooltip/index.ts"));
 __export(__webpack_require__("./src/common/count/index.ts"));
+__export(__webpack_require__("./src/common/color.helper.ts"));
 __export(__webpack_require__("./src/common/area.component.ts"));
 __export(__webpack_require__("./src/common/area-tooltip.component.ts"));
 __export(__webpack_require__("./src/common/base-chart.component.ts"));
@@ -33025,7 +33445,7 @@ var SvgRadialGradientComponent = (function () {
         this.cy = 0;
     }
     SvgRadialGradientComponent.prototype.ngOnChanges = function (changes) {
-        this.r = "30%";
+        this.r = '30%';
     };
     __decorate([
         core_1.Input(), 
@@ -33078,7 +33498,7 @@ function tickFormat(fieldType, groupByType) {
             return label;
         }
         if (fieldType === 'date' && groupByType === 'groupBy') {
-            return moment(label).format("MM/DD/YYYY");
+            return moment(label).format('MM/DD/YYYY');
         }
         return label.toString();
     };
@@ -33198,7 +33618,7 @@ var Timeline = (function () {
         var width = this.view[0];
         this.brush = d3_1.default.brushX()
             .extent([[0, 0], [width, height]])
-            .on("brush end", function () {
+            .on('brush end', function () {
             _this.zone.run(function () {
                 var selection = d3_1.default.selection.event.selection || _this.xScale.range();
                 var newDomain = selection.map(_this.xScale.invert);
@@ -33288,7 +33708,7 @@ var Timeline = (function () {
     Timeline = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-timeline]',
-            template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\" \n        [attr.width]=\"view[0]\" \n        y=\"0\" \n        [attr.height]=\"height\" \n        class=\"brush-background\" \n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef])
@@ -33829,11 +34249,12 @@ var alignment_type_1 = __webpack_require__("./src/common/tooltip/alignment.type.
 var show_type_1 = __webpack_require__("./src/common/tooltip/show.type.ts");
 var tooltip_service_1 = __webpack_require__("./src/common/tooltip/tooltip.service.ts");
 var TooltipDirective = (function () {
-    function TooltipDirective(tooltipService, viewContainerRef, renderer, element) {
+    function TooltipDirective(tooltipService, viewContainerRef, renderer, element, zone) {
         this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.renderer = renderer;
         this.element = element;
+        this.zone = zone;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -33904,20 +34325,22 @@ var TooltipDirective = (function () {
     };
     TooltipDirective.prototype.showTooltip = function (immediate) {
         var _this = this;
-        if (this.component || this.tooltipDisabled)
-            return;
-        var time = immediate ? 0 : this.tooltipShowTimeout;
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(function () {
-            _this.tooltipService.destroyAll();
-            var options = _this.createBoundOptions();
-            _this.component = _this.tooltipService.create(options);
-            // add a tiny timeout to avoid event re-triggers
-            setTimeout(function () {
-                _this.addHideListeners(_this.component.instance.element.nativeElement);
-            }, 10);
-            _this.show.emit(true);
-        }, time);
+        this.zone.run(function () {
+            if (_this.component || _this.tooltipDisabled)
+                return;
+            var time = immediate ? 0 : _this.tooltipShowTimeout;
+            clearTimeout(_this.timeout);
+            _this.timeout = setTimeout(function () {
+                _this.tooltipService.destroyAll();
+                var options = _this.createBoundOptions();
+                _this.component = _this.tooltipService.create(options);
+                // add a tiny timeout to avoid event re-triggers
+                setTimeout(function () {
+                    _this.addHideListeners(_this.component.instance.element.nativeElement);
+                }, 10);
+                _this.show.emit(true);
+            }, time);
+        });
     };
     TooltipDirective.prototype.addHideListeners = function (tooltip) {
         var _this = this;
@@ -34084,7 +34507,7 @@ var TooltipDirective = (function () {
     ], TooltipDirective.prototype, "onMouseClick", null);
     TooltipDirective = __decorate([
         core_1.Directive({ selector: '[ngx-tooltip]' }), 
-        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, core_1.Renderer, core_1.ElementRef])
+        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, core_1.Renderer, core_1.ElementRef, core_1.NgZone])
     ], TooltipDirective);
     return TooltipDirective;
 }());
@@ -34159,6 +34582,7 @@ var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
     function TooltipService(injectionService) {
         _super.call(this, injectionService);
+        this.injectionService = injectionService;
         this.type = _1.TooltipContentComponent;
     }
     TooltipService = __decorate([
@@ -34277,18 +34701,17 @@ var chart_component_1 = __webpack_require__("./src/common/charts/chart.component
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
     function ForceDirectedGraphComponent() {
         _super.apply(this, arguments);
         this.force = d3_1.default.forceSimulation()
-            .force("charge", d3_1.default.forceManyBody())
-            .force("collide", d3_1.default.forceCollide(5))
-            .force("x", d3_1.default.forceX())
-            .force("y", d3_1.default.forceY());
+            .force('charge', d3_1.default.forceManyBody())
+            .force('collide', d3_1.default.forceCollide(5))
+            .force('x', d3_1.default.forceX())
+            .force('y', d3_1.default.forceY());
         this.forceLink = d3_1.default.forceLink().id(function (node) { return node.value; });
-        this.groupResultsBy = function (node) { return node.value; };
         this.nodes = [];
         this.links = [];
         this.activeEntries = [];
@@ -34296,6 +34719,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.deactivate = new core_1.EventEmitter();
         this.margin = [0, 0, 0, 0];
         this.results = [];
+        this.groupResultsBy = function (node) { return node.value; };
     }
     ForceDirectedGraphComponent.prototype.update = function () {
         var _this = this;
@@ -34311,10 +34735,10 @@ var ForceDirectedGraphComponent = (function (_super) {
             _this.seriesDomain = _this.getSeriesDomain();
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")";
+            _this.transform = "\n        translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")\n      ";
             if (_this.force) {
                 _this.force.nodes(_this.nodes)
-                    .force("link", _this.forceLink.links(_this.links))
+                    .force('link', _this.forceLink.links(_this.links))
                     .alpha(0.5).restart();
             }
         });
@@ -34347,7 +34771,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         return node.value;
     };
     ForceDirectedGraphComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
     };
     ForceDirectedGraphComponent.prototype.getLegendOptions = function () {
         return {
@@ -34388,10 +34812,6 @@ var ForceDirectedGraphComponent = (function (_super) {
     ], ForceDirectedGraphComponent.prototype, "forceLink", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Function)
-    ], ForceDirectedGraphComponent.prototype, "groupResultsBy", void 0);
-    __decorate([
-        core_1.Input(), 
         __metadata('design:type', Boolean)
     ], ForceDirectedGraphComponent.prototype, "legend", void 0);
     __decorate([
@@ -34426,6 +34846,10 @@ var ForceDirectedGraphComponent = (function (_super) {
         core_1.ViewChild(chart_component_1.ChartComponent, { read: core_1.ElementRef }), 
         __metadata('design:type', core_1.ElementRef)
     ], ForceDirectedGraphComponent.prototype, "chart", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Function)
+    ], ForceDirectedGraphComponent.prototype, "groupResultsBy", void 0);
     __decorate([
         core_1.HostListener('document:mousemove', ['$event']), 
         __metadata('design:type', Function), 
@@ -34522,7 +34946,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var GaugeArcComponent = (function () {
     function GaugeArcComponent() {
         this.select = new core_1.EventEmitter();
@@ -34541,7 +34965,7 @@ var GaugeArcComponent = (function () {
     ], GaugeArcComponent.prototype, "cornerRadius", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', color_sets_1.ColorHelper)
+        __metadata('design:type', color_helper_1.ColorHelper)
     ], GaugeArcComponent.prototype, "colors", void 0);
     __decorate([
         core_1.Output(), 
@@ -34608,7 +35032,7 @@ var GaugeAxisComponent = (function () {
                 line: this.getTickPath(startDistance, tickLength, angle),
                 textAnchor: textAnchor,
                 text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-                textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")"
+                textTransform: "\n          translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n        "
             });
             if (i === this.bigSegments) {
                 continue;
@@ -34682,7 +35106,7 @@ var GaugeAxisComponent = (function () {
     GaugeAxisComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-gauge-axis]',
-            template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"            \n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
+            template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -34717,7 +35141,7 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var GaugeComponent = (function (_super) {
     __extends(GaugeComponent, _super);
     function GaugeComponent() {
@@ -34860,7 +35284,7 @@ var GaugeComponent = (function (_super) {
         this.select.emit(data);
     };
     GaugeComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
         core_1.Input(), 
@@ -34909,7 +35333,7 @@ var GaugeComponent = (function (_super) {
     GaugeComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-gauge',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            (select)=\"onClick($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n        \n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            (select)=\"onClick($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -35012,7 +35436,7 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var LinearGaugeComponent = (function (_super) {
     __extends(LinearGaugeComponent, _super);
     function LinearGaugeComponent() {
@@ -35118,7 +35542,7 @@ var LinearGaugeComponent = (function (_super) {
         });
     };
     LinearGaugeComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
     };
     __decorate([
         core_1.Input(), 
@@ -35254,7 +35678,7 @@ var HeatCellSeriesComponent = (function () {
     HeatCellSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-heat-map-cell-series]',
-            template: "\n    <svg:g \n      ngx-charts-heat-map-cell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+            template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -35398,7 +35822,7 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var HeatMapComponent = (function (_super) {
     __extends(HeatMapComponent, _super);
     function HeatMapComponent() {
@@ -35507,7 +35931,7 @@ var HeatMapComponent = (function (_super) {
         this.select.emit(data);
     };
     HeatMapComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'linear', this.valueDomain);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'linear', this.valueDomain);
     };
     HeatMapComponent.prototype.getLegendOptions = function () {
         return {
@@ -35697,7 +36121,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
@@ -35845,19 +36269,19 @@ var LineChartComponent = (function (_super) {
     };
     LineChartComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date)
             return 'time';
-        if (number)
+        if (num)
             return 'linear';
         return 'ordinal';
     };
@@ -35895,7 +36319,7 @@ var LineChartComponent = (function (_super) {
         else {
             domain = this.yDomain;
         }
-        this.colors = new color_sets_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
     };
     LineChartComponent.prototype.getLegendOptions = function () {
         var opts = {
@@ -36519,8 +36943,8 @@ var CardComponent = (function () {
         var _this = this;
         if (!this.initialized) {
             cancelAnimationFrame(this.animationReq);
-            var value = this.data.value;
-            var decs = count_1.decimalChecker(value);
+            var val = this.data.value;
+            var decs = count_1.decimalChecker(val);
             var callback = function (_a) {
                 var value = _a.value;
                 _this.zone.run(function () {
@@ -36528,7 +36952,7 @@ var CardComponent = (function () {
                     _this.cd.markForCheck();
                 });
             };
-            this.animationReq = count_1.count(0, value, decs, 1, callback);
+            this.animationReq = count_1.count(0, val, decs, 1, callback);
             this.initialized = true;
         }
     };
@@ -36651,7 +37075,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var grid_layout_helper_1 = __webpack_require__("./src/common/grid-layout.helper.ts");
 var NumberCardComponent = (function (_super) {
     __extends(NumberCardComponent, _super);
@@ -36681,7 +37105,7 @@ var NumberCardComponent = (function (_super) {
         this.select.emit(data);
     };
     NumberCardComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     NumberCardComponent = __decorate([
         core_1.Component({
@@ -36767,7 +37191,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var AdvancedPieChartComponent = (function (_super) {
     __extends(AdvancedPieChartComponent, _super);
@@ -36804,7 +37228,7 @@ var AdvancedPieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     AdvancedPieChartComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     AdvancedPieChartComponent.prototype.onActivate = function (event) {
         if (this.activeEntries.indexOf(event) > -1)
@@ -36936,7 +37360,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         node
             .transition()
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var copyOfD = Object.assign({}, d);
             copyOfD.endAngle = copyOfD.startAngle;
@@ -36947,7 +37371,7 @@ var PieArcComponent = (function () {
             };
         })
             .transition().duration(750)
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolate = d3_1.default.interpolate(this._current, d);
             this._current = interpolate(0);
@@ -36961,7 +37385,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         node
             .transition().duration(750)
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolate = d3_1.default.interpolate(this._current, d);
             this._current = interpolate(0);
@@ -37077,7 +37501,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var PieChartComponent = (function (_super) {
     __extends(PieChartComponent, _super);
@@ -37151,7 +37575,7 @@ var PieChartComponent = (function (_super) {
         this.select.emit(data);
     };
     PieChartComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     PieChartComponent.prototype.getLegendOptions = function () {
         return {
@@ -37416,7 +37840,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var trim_label_helper_1 = __webpack_require__("./src/common/trim-label.helper.ts");
 var grid_layout_helper_1 = __webpack_require__("./src/common/grid-layout.helper.ts");
@@ -37479,7 +37903,7 @@ var PieGridComponent = (function (_super) {
                 label: trim_label_helper_1.trimLabel(label),
                 total: value,
                 value: value,
-                percent: d3_1.default.format(".1p")(d.data.percent),
+                percent: d3_1.default.format('.1p')(d.data.percent),
                 data: [d, {
                         data: {
                             other: true,
@@ -37499,7 +37923,7 @@ var PieGridComponent = (function (_super) {
         this.select.emit(data);
     };
     PieGridComponent.prototype.setColors = function () {
-        this.colorScale = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colorScale = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     PieGridComponent = __decorate([
         core_1.Component({
@@ -37561,7 +37985,7 @@ var PieLabelComponent = (function () {
         this.loadAnimation();
     };
     PieLabelComponent.prototype.textAnchor = function () {
-        return this.midAngle(this.data) < Math.PI ? "start" : "end";
+        return this.midAngle(this.data) < Math.PI ? 'start' : 'end';
     };
     PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
@@ -37802,21 +38226,10 @@ __export(__webpack_require__("./src/services/injection-registery.service.ts"));
 /***/ },
 
 /***/ "./src/services/injection-registery.service.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 "use strict";
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
-var _1 = __webpack_require__("./src/services/index.ts");
 var InjectionRegistery = (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
@@ -37882,10 +38295,6 @@ var InjectionRegistery = (function () {
         var types = this.components.get(type);
         types.push(component);
     };
-    InjectionRegistery = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [_1.InjectionService])
-    ], InjectionRegistery);
     return InjectionRegistery;
 }());
 exports.InjectionRegistery = InjectionRegistery;
@@ -37930,11 +38339,11 @@ var InjectionService = (function () {
      * @memberOf InjectionService
      */
     InjectionService.prototype.getRootViewContainer = function () {
-        if (this._container)
-            return this._container;
         var rootComponents = this.applicationRef['_rootComponents'];
         if (rootComponents.length)
             return rootComponents[0];
+        if (this._container)
+            return this._container;
         throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
     };
     /**
@@ -37957,6 +38366,9 @@ var InjectionService = (function () {
      * @memberOf InjectionService
      */
     InjectionService.prototype.getComponentRootNode = function (componentRef) {
+        // the top most component root node has no `hostView`
+        if (!componentRef.hostView)
+            return componentRef.element.nativeElement;
         return componentRef.hostView.rootNodes[0];
     };
     /**
@@ -38269,7 +38681,7 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
-var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var TreeMapComponent = (function (_super) {
     __extends(TreeMapComponent, _super);
     function TreeMapComponent() {
@@ -38319,7 +38731,7 @@ var TreeMapComponent = (function (_super) {
         this.select.emit(data);
     };
     TreeMapComponent.prototype.setColors = function () {
-        this.colors = new color_sets_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
         core_1.Input(), 
@@ -38393,218 +38805,134 @@ exports.TreeMapModule = TreeMapModule;
 /***/ },
 
 /***/ "./src/utils/color-sets.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 "use strict";
 "use strict";
-var d3_1 = __webpack_require__("./src/d3.ts");
 exports.colorSets = [
     {
-        'name': 'vivid',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#647c8a', '#3f51b5', '#2196f3', '#00b862', '#afdf0a', '#a7b61a', '#f3e562', '#ff9800', '#ff5722', '#ff4514']
+        name: 'vivid',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#647c8a', '#3f51b5', '#2196f3', '#00b862', '#afdf0a', '#a7b61a', '#f3e562', '#ff9800', '#ff5722', '#ff4514'
+        ]
     },
     {
-        'name': 'natural',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#bf9d76', '#e99450', '#d89f59', '#f2dfa7', '#a5d7c6', '#7794b1', '#afafaf', '#707160', '#ba9383', '#d9d5c3']
+        name: 'natural',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#bf9d76', '#e99450', '#d89f59', '#f2dfa7', '#a5d7c6', '#7794b1', '#afafaf', '#707160', '#ba9383', '#d9d5c3'
+        ]
     },
     {
-        'name': 'cool',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
+        name: 'cool',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886'
+        ]
     },
     {
-        'name': 'fire',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#ff3d00', '#bf360c', '#ff8f00', '#ff6f00', '#ff5722', '#e65100', '#ffca28', '#ffab00']
+        name: 'fire',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#ff3d00', '#bf360c', '#ff8f00', '#ff6f00', '#ff5722', '#e65100', '#ffca28', '#ffab00'
+        ]
     },
     {
-        'name': 'solar',
-        'selectable': true,
-        'group': 'Continuous',
-        'domain': ['#fff8e1', '#ffecb3', '#ffe082', '#ffd54f', '#ffca28', '#ffc107', '#ffb300', '#ffa000', '#ff8f00', '#ff6f00']
+        name: 'solar',
+        selectable: true,
+        group: 'Continuous',
+        domain: [
+            '#fff8e1', '#ffecb3', '#ffe082', '#ffd54f', '#ffca28', '#ffc107', '#ffb300', '#ffa000', '#ff8f00', '#ff6f00'
+        ]
     },
     {
-        'name': 'air',
-        'selectable': true,
-        'group': 'Continuous',
-        'domain': ['#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4', '#039be5', '#0288d1', '#0277bd', '#01579b']
+        name: 'air',
+        selectable: true,
+        group: 'Continuous',
+        domain: [
+            '#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4', '#039be5', '#0288d1', '#0277bd', '#01579b'
+        ]
     },
     {
-        'name': 'aqua',
-        'selectable': true,
-        'group': 'Continuous',
-        'domain': ['#e0f7fa', '#b2ebf2', '#80deea', '#4dd0e1', '#26c6da', '#00bcd4', '#00acc1', '#0097a7', '#00838f', '#006064']
+        name: 'aqua',
+        selectable: true,
+        group: 'Continuous',
+        domain: [
+            '#e0f7fa', '#b2ebf2', '#80deea', '#4dd0e1', '#26c6da', '#00bcd4', '#00acc1', '#0097a7', '#00838f', '#006064'
+        ]
     },
     {
-        'name': 'flame',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#A10A28', '#D3342D', '#EF6D49', '#FAAD67', '#FDDE90', '#DBED91', '#A9D770', '#6CBA67', '#2C9653', '#146738']
+        name: 'flame',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#A10A28', '#D3342D', '#EF6D49', '#FAAD67', '#FDDE90', '#DBED91', '#A9D770', '#6CBA67', '#2C9653', '#146738'
+        ]
     },
     {
-        'name': 'ocean',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#1D68FB', '#33C0FC', '#4AFFFE', '#AFFFFF', '#FFFC63', '#FDBD2D', '#FC8A25', '#FA4F1E', '#FA141B', '#BA38D1']
+        name: 'ocean',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#1D68FB', '#33C0FC', '#4AFFFE', '#AFFFFF', '#FFFC63', '#FDBD2D', '#FC8A25', '#FA4F1E', '#FA141B', '#BA38D1'
+        ]
     },
     {
-        'name': 'forest',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#55C22D', '#C1F33D', '#3CC099', '#AFFFFF', '#8CFC9D', '#76CFFA', '#BA60FB', '#EE6490', '#C42A1C', '#FC9F32']
+        name: 'forest',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#55C22D', '#C1F33D', '#3CC099', '#AFFFFF', '#8CFC9D', '#76CFFA', '#BA60FB', '#EE6490', '#C42A1C', '#FC9F32'
+        ]
     },
     {
-        'name': 'horizon',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#2597FB', '#65EBFD', '#99FDD0', '#FCEE4B', '#FEFCFA', '#FDD6E3', '#FCB1A8', '#EF6F7B', '#CB96E8', '#EFDEE0']
+        name: 'horizon',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#2597FB', '#65EBFD', '#99FDD0', '#FCEE4B', '#FEFCFA', '#FDD6E3', '#FCB1A8', '#EF6F7B', '#CB96E8', '#EFDEE0'
+        ]
     },
     {
-        'name': 'neons',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#FF3333', '#FF33FF', '#CC33FF', '#0000FF', '#33CCFF', '#33FFFF', '#33FF66', '#CCFF33', '#FFCC00', '#FF6600']
+        name: 'neons',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#FF3333', '#FF33FF', '#CC33FF', '#0000FF', '#33CCFF', '#33FFFF', '#33FF66', '#CCFF33', '#FFCC00', '#FF6600'
+        ]
     },
     {
-        'name': 'picnic',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#FAC51D', '#66BD6D', '#FAA026', '#29BB9C', '#E96B56', '#55ACD2', '#B7332F', '#2C83C9', '#9166B8', '#92E7E8']
+        name: 'picnic',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#FAC51D', '#66BD6D', '#FAA026', '#29BB9C', '#E96B56', '#55ACD2', '#B7332F', '#2C83C9', '#9166B8', '#92E7E8'
+        ]
     },
     {
-        'name': 'night',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ["#2B1B5A", "#501356", "#183356", "#28203F", "#391B3C", "#1E2B3C", "#120634", "#2D0432", "#051932", "#453080", "#75267D", "#2C507D", "#4B3880", "#752F7D", "#35547D"]
+        name: 'night',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#2B1B5A', '#501356', '#183356', '#28203F', '#391B3C', '#1E2B3C', '#120634',
+            '#2D0432', '#051932', '#453080', '#75267D', '#2C507D', '#4B3880', '#752F7D', '#35547D'
+        ]
     },
     {
-        'name': 'nightLights',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ["#4e31a5", "#9c25a7", "#3065ab", "#57468b", "#904497", "#46648b", "#32118d", "#a00fb3", "#1052a2", "#6e51bd", "#b63cc3", "#6c97cb", "#8671c1", "#b455be", "#7496c3"]
+        name: 'nightLights',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#4e31a5', '#9c25a7', '#3065ab', '#57468b', '#904497', '#46648b',
+            '#32118d', '#a00fb3', '#1052a2', '#6e51bd', '#b63cc3', '#6c97cb', '#8671c1', '#b455be', '#7496c3'
+        ]
     }
 ];
-var ColorHelper = (function () {
-    function ColorHelper(scheme, type, domain, customColors) {
-        if (typeof (scheme) === 'string') {
-            scheme = exports.colorSets.find(function (cs) {
-                return cs.name === scheme;
-            });
-        }
-        this.colorDomain = scheme.domain;
-        this.scaleType = type;
-        this.domain = domain;
-        this.scale = this.generateColorScheme(scheme, type, domain);
-    }
-    ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
-        if (typeof (scheme) === 'string') {
-            scheme = exports.colorSets.find(function (cs) {
-                return cs.name === scheme;
-            });
-        }
-        var colorScale;
-        if (type === 'quantile') {
-            colorScale = d3_1.default.scaleQuantile()
-                .range(scheme.domain)
-                .domain(domain);
-        }
-        else if (type === 'ordinal') {
-            colorScale = d3_1.default.scaleOrdinal()
-                .range(scheme.domain)
-                .domain(domain);
-        }
-        else if (type === 'linear') {
-            colorScale = d3_1.default.scaleLinear()
-                .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
-                .range(scheme.domain);
-        }
-        return colorScale;
-    };
-    ColorHelper.prototype.getColor = function (value) {
-        if (this.scaleType === 'linear') {
-            var valueScale = d3_1.default.scaleLinear()
-                .domain(this.domain)
-                .range([0, 1]);
-            return (this.scale(valueScale(value)));
-        }
-        else {
-            var formattedValue_1 = value.toString();
-            var found = undefined; // todo type customColors
-            if (this.customColors && this.customColors.length > 0) {
-                found = this.customColors.find(function (mapping) {
-                    return mapping.name === formattedValue_1.toLowerCase();
-                });
-            }
-            if (found) {
-                return found.value;
-            }
-            else {
-                return this.scale(value);
-            }
-        }
-    };
-    ColorHelper.prototype.getLinearGradientStops = function (value, start) {
-        if (!start) {
-            start = this.domain[0];
-        }
-        var valueScale = d3_1.default.scaleLinear()
-            .domain(this.domain)
-            .range([0, 1]);
-        var colorValueScale = d3_1.default.scaleBand()
-            .domain(this.colorDomain)
-            .range([0, 1]);
-        var endColor = this.getColor(value);
-        // generate the stops
-        var startVal = valueScale(start);
-        var startColor = this.getColor(start);
-        var endVal = valueScale(value);
-        var i = 0;
-        var currentVal = startVal;
-        var stops = [];
-        stops.push({
-            color: startColor,
-            offset: 0,
-            opacity: 1
-        });
-        while (currentVal < endVal && i < this.colorDomain.length) {
-            var color = this.colorDomain[i];
-            var offset = colorValueScale(color);
-            if (offset <= startVal) {
-                i++;
-                continue;
-            }
-            if (offset >= endVal) {
-                break;
-            }
-            stops.push({
-                color: color,
-                offset: offset,
-                opacity: 1
-            });
-            currentVal = offset;
-            i++;
-        }
-        stops.push({
-            color: endColor,
-            offset: endVal,
-            opacity: 1
-        });
-        // normalize the offsets into percentages
-        for (var _i = 0, stops_1 = stops; _i < stops_1.length; _i++) {
-            var s = stops_1[_i];
-            s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
-        }
-        return stops;
-    };
-    return ColorHelper;
-}());
-exports.ColorHelper = ColorHelper;
 
 
 /***/ },
@@ -38770,14 +39098,14 @@ exports.sortByTime = sortByTime;
 "use strict";
 "use strict";
 /**
-* Throttle a function
-*
-* @export
-* @param {*} func
-* @param {number} wait
-* @param {*} [options]
-* @returns
-*/
+ * Throttle a function
+ *
+ * @export
+ * @param {*}      func
+ * @param {number} wait
+ * @param {*}      [options]
+ * @returns
+ */
 function throttle(func, wait, options) {
     options = options || {};
     var context;
