@@ -6,6 +6,13 @@ You can grab the latest release from the [Releases Page](https://github.com/swim
 
 Also, the release code is checked in and resides [here](https://github.com/swimlane/ngx-charts/tree/master/release).
 
+You will also need to install the peer dependencies of the project:
+
+* `npm install d3 --save`
+* `npm install moment --save`
+
+Check the `package.json` file for the required versions of these dependencies.
+
 ### JavaScript
 - `release/index.js` - UMD Version
 - `release/index.min.js` - UMD Version Minified
