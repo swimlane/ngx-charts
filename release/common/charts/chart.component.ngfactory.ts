@@ -12,28 +12,27 @@ import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_container';
-import * as import7 from '../../../../src/services/injection.service';
+import * as import7 from '../../../../src/common/tooltip/tooltip.service';
 import * as import8 from '@angular/core/src/linker/view_type';
 import * as import9 from '@angular/core/src/change_detection/constants';
 import * as import10 from '@angular/core/src/linker/component_factory';
-import * as import11 from '@angular/core/src/application_ref';
-import * as import12 from '@angular/core/src/linker/component_factory_resolver';
-import * as import13 from '@angular/core/src/animation/animation_transition';
-import * as import14 from '@angular/core/src/animation/animation_sequence_player';
-import * as import15 from '@angular/core/src/animation/animation_styles';
-import * as import16 from '@angular/core/src/animation/animation_style_util';
-import * as import17 from '@angular/core/src/animation/animation_keyframe';
-import * as import18 from '@angular/core/src/animation/animation_player';
-import * as import19 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import20 from '@angular/core/src/linker/template_ref';
-import * as import21 from '@angular/common/src/directives/ng_if';
-import * as import22 from '@angular/core/src/security';
-import * as import23 from '../../../../src/common/legend/scale-legend.component';
-import * as import24 from '../legend/scale-legend.component.ngfactory';
-import * as import25 from '@angular/platform-browser/src/security/dom_sanitization_service';
-import * as import26 from '../../../../src/common/legend/legend.component';
-import * as import27 from '../legend/legend.component.ngfactory';
-import * as import28 from '@angular/core/src/zone/ng_zone';
+import * as import11 from '../../../../src/services/injection.service';
+import * as import12 from '@angular/core/src/animation/animation_transition';
+import * as import13 from '@angular/core/src/animation/animation_sequence_player';
+import * as import14 from '@angular/core/src/animation/animation_styles';
+import * as import15 from '@angular/core/src/animation/animation_style_util';
+import * as import16 from '@angular/core/src/animation/animation_keyframe';
+import * as import17 from '@angular/core/src/animation/animation_player';
+import * as import18 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import19 from '@angular/core/src/linker/template_ref';
+import * as import20 from '@angular/common/src/directives/ng_if';
+import * as import21 from '@angular/core/src/security';
+import * as import22 from '../../../../src/common/legend/scale-legend.component';
+import * as import23 from '../legend/scale-legend.component.ngfactory';
+import * as import24 from '@angular/platform-browser/src/security/dom_sanitization_service';
+import * as import25 from '../../../../src/common/legend/legend.component';
+import * as import26 from '../legend/legend.component.ngfactory';
+import * as import27 from '@angular/core/src/zone/ng_zone';
 export class Wrapper_ChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.ChartComponent;
@@ -171,7 +170,7 @@ class View_ChartComponent_Host0 extends import2.AppView<any> {
   _el_0:any;
   /*private*/ _vc_0:import6.ViewContainer;
   compView_0:import2.AppView<import0.ChartComponent>;
-  _InjectionService_0_5:import7.InjectionService;
+  _TooltipService_0_5:import7.TooltipService;
   _ChartComponent_0_6:Wrapper_ChartComponent;
   _el_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
@@ -181,15 +180,15 @@ class View_ChartComponent_Host0 extends import2.AppView<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this._vc_0 = new import6.ViewContainer(0,(null as any),this,this._el_0);
     this.compView_0 = new View_ChartComponent0(this.viewUtils,this,0,this._el_0);
-    this._InjectionService_0_5 = new import7.InjectionService(this.injectorGet(import11.ApplicationRef,this.parentIndex),this.injectorGet(import12.ComponentFactoryResolver,this.parentIndex),this.injector(0));
-    this._ChartComponent_0_6 = new Wrapper_ChartComponent(this._vc_0.vcRef,this._InjectionService_0_5);
+    this._TooltipService_0_5 = new import7.TooltipService(this.injectorGet(import11.InjectionService,this.parentIndex));
+    this._ChartComponent_0_6 = new Wrapper_ChartComponent(this._vc_0.vcRef,this._TooltipService_0_5);
     this.compView_0.create(this._ChartComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import10.ComponentRef_<any>(0,this,this._el_0,this._ChartComponent_0_6.context);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import7.InjectionService) && (0 === requestNodeIndex))) { return this._InjectionService_0_5; }
+    if (((token === import7.TooltipService) && (0 === requestNodeIndex))) { return this._TooltipService_0_5; }
     if (((token === import0.ChartComponent) && (0 === requestNodeIndex))) { return this._ChartComponent_0_6.context; }
     return notFoundResult;
   }
@@ -219,7 +218,7 @@ var ChartComponent_animationState_states:any = {
   'void': {}
 }
 ;
-function ChartComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import13.AnimationTransition {
+function ChartComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import12.AnimationTransition {
   var previousPlayers:any = view.animationContext.getAnimationPlayers(element,((nextState == 'void')? (null as any): 'animationState'));
   var collectedStyles:any = {};
   var player:any = (null as any);
@@ -230,26 +229,26 @@ function ChartComponent_animationState_factory(view:import2.AppView<any>,element
   var endStateStyles:any = ChartComponent_animationState_states[nextState];
   if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
   if (((player == (null as any)) && ((currentState == 'void') && true))) {
-      player = new import14.AnimationSequencePlayer([view.renderer.animate(element,new import15.AnimationStyles(import16.collectAndResolveStyles(collectedStyles,[
+      player = new import13.AnimationSequencePlayer([view.renderer.animate(element,new import14.AnimationStyles(import15.collectAndResolveStyles(collectedStyles,[
         startStateStyles,
         {'opacity': '0'}
       ]
       )),[
-        new import17.AnimationKeyframe(0,new import15.AnimationStyles(import16.collectAndResolveStyles(collectedStyles,[{'opacity': '0'}]))),
-        new import17.AnimationKeyframe(1,new import15.AnimationStyles(import16.collectAndResolveStyles(collectedStyles,[{'opacity': '1'}])))
+        new import16.AnimationKeyframe(0,new import14.AnimationStyles(import15.collectAndResolveStyles(collectedStyles,[{'opacity': '0'}]))),
+        new import16.AnimationKeyframe(1,new import14.AnimationStyles(import15.collectAndResolveStyles(collectedStyles,[{'opacity': '1'}])))
       ]
     ,500,100,(null as any),previousPlayers)]);
     totalTime = 600;
   }
-  if ((player == (null as any))) { (player = new import18.NoOpAnimationPlayer()); }
+  if ((player == (null as any))) { (player = new import17.NoOpAnimationPlayer()); }
   player.onDone(():void => {
     player.destroy();
-    import16.renderStyles(element,view.renderer,import16.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
+    import15.renderStyles(element,view.renderer,import15.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
   });
-  new import14.AnimationSequencePlayer(previousPlayers).destroy();
-  import16.renderStyles(element,view.renderer,import16.clearStyles(startStateStyles));
+  new import13.AnimationSequencePlayer(previousPlayers).destroy();
+  import15.renderStyles(element,view.renderer,import15.clearStyles(startStateStyles));
   view.animationContext.queueAnimation(element,'animationState',player);
-  return new import13.AnimationTransition(player,currentState,nextState,totalTime);
+  return new import12.AnimationTransition(player,currentState,nextState,totalTime);
 }
 var renderType_ChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',1,import5.ViewEncapsulation.None,styles_ChartComponent,{animationState: ChartComponent_animationState_factory});
 export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent> {
@@ -263,12 +262,12 @@ export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent
   _anchor_7:any;
   /*private*/ _vc_7:import6.ViewContainer;
   _TemplateRef_7_5:any;
-  _NgIf_7_6:import19.Wrapper_NgIf;
+  _NgIf_7_6:import18.Wrapper_NgIf;
   _text_8:any;
   _anchor_9:any;
   /*private*/ _vc_9:import6.ViewContainer;
   _TemplateRef_9_5:any;
-  _NgIf_9_6:import19.Wrapper_NgIf;
+  _NgIf_9_6:import18.Wrapper_NgIf;
   _text_10:any;
   _text_11:any;
   /*private*/ _expr_18:any;
@@ -294,13 +293,13 @@ export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent
     this._text_6 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
     this._vc_7 = new import6.ViewContainer(7,1,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import20.TemplateRef_(this,7,this._anchor_7);
-    this._NgIf_7_6 = new import19.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
+    this._TemplateRef_7_5 = new import19.TemplateRef_(this,7,this._anchor_7);
+    this._NgIf_7_6 = new import18.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
     this._text_8 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._anchor_9 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
     this._vc_9 = new import6.ViewContainer(9,1,this,this._anchor_9);
-    this._TemplateRef_9_5 = new import20.TemplateRef_(this,9,this._anchor_9);
-    this._NgIf_9_6 = new import19.Wrapper_NgIf(this._vc_9.vcRef,this._TemplateRef_9_5);
+    this._TemplateRef_9_5 = new import19.TemplateRef_(this,9,this._anchor_9);
+    this._NgIf_9_6 = new import18.Wrapper_NgIf(this._vc_9.vcRef,this._TemplateRef_9_5);
     this._text_10 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_11 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -321,10 +320,10 @@ export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import20.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import21.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
-    if (((token === import20.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
-    if (((token === import21.NgIf) && (9 === requestNodeIndex))) { return this._NgIf_9_6.context; }
+    if (((token === import19.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import20.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
+    if (((token === import19.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
+    if (((token === import20.NgIf) && (9 === requestNodeIndex))) { return this._NgIf_9_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -343,7 +342,7 @@ export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent
     this._vc_9.detectChangesInNestedViews(throwOnChange);
     const currVal_18:any = this.context.view[0];
     if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_18) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import22.SecurityContext.STYLE,currVal_18).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_18) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_18).toString() + 'px')));
       this._expr_18 = currVal_18;
     }
     const currVal_20:any = this.context.chartWidth;
@@ -372,16 +371,16 @@ export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent
 }
 class View_ChartComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import23.ScaleLegendComponent>;
-  _ScaleLegendComponent_0_3:import24.Wrapper_ScaleLegendComponent;
+  compView_0:import2.AppView<import22.ScaleLegendComponent>;
+  _ScaleLegendComponent_0_3:import23.Wrapper_ScaleLegendComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import6.ViewContainer) {
     super(View_ChartComponent1,renderType_ChartComponent,import8.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import9.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import10.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'ngx-charts-scale-legend',new import3.InlineArray2(2,'class','chart-legend'),(null as any));
-    this.compView_0 = new import24.View_ScaleLegendComponent0(this.viewUtils,this,0,this._el_0);
-    this._ScaleLegendComponent_0_3 = new import24.Wrapper_ScaleLegendComponent(this.parentView.parentView.injectorGet(import25.DomSanitizer,this.parentView.parentIndex));
+    this.compView_0 = new import23.View_ScaleLegendComponent0(this.viewUtils,this,0,this._el_0);
+    this._ScaleLegendComponent_0_3 = new import23.Wrapper_ScaleLegendComponent(this.parentView.parentView.injectorGet(import24.DomSanitizer,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._ScaleLegendComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -392,7 +391,7 @@ class View_ChartComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import23.ScaleLegendComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._ScaleLegendComponent_0_3.context; }
+    if (((token === import22.ScaleLegendComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._ScaleLegendComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -416,16 +415,16 @@ class View_ChartComponent1 extends import2.AppView<any> {
 }
 class View_ChartComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import26.LegendComponent>;
-  _LegendComponent_0_3:import27.Wrapper_LegendComponent;
+  compView_0:import2.AppView<import25.LegendComponent>;
+  _LegendComponent_0_3:import26.Wrapper_LegendComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import6.ViewContainer) {
     super(View_ChartComponent2,renderType_ChartComponent,import8.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import9.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import10.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'ngx-charts-legend',new import3.InlineArray2(2,'class','chart-legend'),(null as any));
-    this.compView_0 = new import27.View_LegendComponent0(this.viewUtils,this,0,this._el_0);
-    this._LegendComponent_0_3 = new import27.Wrapper_LegendComponent(this.compView_0.ref,this.parentView.parentView.injectorGet(import28.NgZone,this.parentView.parentIndex));
+    this.compView_0 = new import26.View_LegendComponent0(this.viewUtils,this,0,this._el_0);
+    this._LegendComponent_0_3 = new import26.Wrapper_LegendComponent(this.compView_0.ref,this.parentView.parentView.injectorGet(import27.NgZone,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._LegendComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray8(6,'labelClick',(null as any),'labelActivate',(null as any),'labelDeactivate',(null as any)),this.eventHandler(this.handleEvent_0));
@@ -438,7 +437,7 @@ class View_ChartComponent2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import26.LegendComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._LegendComponent_0_3.context; }
+    if (((token === import25.LegendComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._LegendComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

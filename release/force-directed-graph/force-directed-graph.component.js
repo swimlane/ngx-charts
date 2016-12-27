@@ -15,12 +15,11 @@ var ForceDirectedGraphComponent = (function (_super) {
     function ForceDirectedGraphComponent() {
         _super.apply(this, arguments);
         this.force = d3_1.default.forceSimulation()
-            .force("charge", d3_1.default.forceManyBody())
-            .force("collide", d3_1.default.forceCollide(5))
-            .force("x", d3_1.default.forceX())
-            .force("y", d3_1.default.forceY());
+            .force('charge', d3_1.default.forceManyBody())
+            .force('collide', d3_1.default.forceCollide(5))
+            .force('x', d3_1.default.forceX())
+            .force('y', d3_1.default.forceY());
         this.forceLink = d3_1.default.forceLink().id(function (node) { return node.value; });
-        this.groupResultsBy = function (node) { return node.value; };
         this.nodes = [];
         this.links = [];
         this.activeEntries = [];
@@ -28,6 +27,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.deactivate = new core_1.EventEmitter();
         this.margin = [0, 0, 0, 0];
         this.results = [];
+        this.groupResultsBy = function (node) { return node.value; };
     }
     ForceDirectedGraphComponent.prototype.update = function () {
         var _this = this;
@@ -43,10 +43,10 @@ var ForceDirectedGraphComponent = (function (_super) {
             _this.seriesDomain = _this.getSeriesDomain();
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")";
+            _this.transform = "\n        translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")\n      ";
             if (_this.force) {
                 _this.force.nodes(_this.nodes)
-                    .force("link", _this.forceLink.links(_this.links))
+                    .force('link', _this.forceLink.links(_this.links))
                     .alpha(0.5).restart();
             }
         });
@@ -122,7 +122,6 @@ var ForceDirectedGraphComponent = (function (_super) {
     ForceDirectedGraphComponent.propDecorators = {
         'force': [{ type: core_1.Input },],
         'forceLink': [{ type: core_1.Input },],
-        'groupResultsBy': [{ type: core_1.Input },],
         'legend': [{ type: core_1.Input },],
         'nodes': [{ type: core_1.Input },],
         'links': [{ type: core_1.Input },],
@@ -132,6 +131,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         'linkTemplate': [{ type: core_1.ContentChild, args: ['linkTemplate',] },],
         'nodeTemplate': [{ type: core_1.ContentChild, args: ['nodeTemplate',] },],
         'chart': [{ type: core_1.ViewChild, args: [chart_component_1.ChartComponent, { read: core_1.ElementRef },] },],
+        'groupResultsBy': [{ type: core_1.Input },],
         'onDrag': [{ type: core_1.HostListener, args: ['document:mousemove', ['$event'],] },],
         'onDragEnd': [{ type: core_1.HostListener, args: ['document:mouseup',] },],
     };

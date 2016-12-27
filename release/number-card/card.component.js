@@ -42,8 +42,8 @@ var CardComponent = (function () {
         var _this = this;
         if (!this.initialized) {
             cancelAnimationFrame(this.animationReq);
-            var value = this.data.value;
-            var decs = count_1.decimalChecker(value);
+            var val = this.data.value;
+            var decs = count_1.decimalChecker(val);
             var callback = function (_a) {
                 var value = _a.value;
                 _this.zone.run(function () {
@@ -51,7 +51,7 @@ var CardComponent = (function () {
                     _this.cd.markForCheck();
                 });
             };
-            this.animationReq = count_1.count(0, value, decs, 1, callback);
+            this.animationReq = count_1.count(0, val, decs, 1, callback);
             this.initialized = true;
         }
     };

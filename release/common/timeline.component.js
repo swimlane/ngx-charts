@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var moment = require('moment');
 var d3_1 = require('../d3');
-var id_1 = require("../utils/id");
+var id_1 = require('../utils/id');
 var Timeline = (function () {
     function Timeline(element, zone, cd) {
         this.zone = zone;
@@ -95,7 +95,7 @@ var Timeline = (function () {
         var width = this.view[0];
         this.brush = d3_1.default.brushX()
             .extent([[0, 0], [width, height]])
-            .on("brush end", function () {
+            .on('brush end', function () {
             _this.zone.run(function () {
                 var selection = d3_1.default.selection.event.selection || _this.xScale.range();
                 var newDomain = selection.map(_this.xScale.invert);
@@ -137,7 +137,7 @@ var Timeline = (function () {
     Timeline.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[ngx-charts-timeline]',
-                    template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\" \n        [attr.width]=\"view[0]\" \n        y=\"0\" \n        [attr.height]=\"height\" \n        class=\"brush-background\" \n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
+                    template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];

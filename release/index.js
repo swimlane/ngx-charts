@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"3.0.3" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"3.0.4" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -293,20 +293,20 @@ var AreaChartNormalizedComponent = (function (_super) {
     };
     AreaChartNormalizedComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date) {
             return 'time';
         }
-        if (number) {
+        if (num) {
             return 'linear';
         }
         return 'ordinal';
@@ -688,20 +688,20 @@ var AreaChartStackedComponent = (function (_super) {
     };
     AreaChartStackedComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date) {
             return 'time';
         }
-        if (number) {
+        if (num) {
             return 'linear';
         }
         return 'ordinal';
@@ -1036,20 +1036,20 @@ var AreaChartComponent = (function (_super) {
     };
     AreaChartComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date) {
             return 'time';
         }
-        if (number) {
+        if (num) {
             return 'linear';
         }
         return 'ordinal';
@@ -3692,40 +3692,40 @@ var BarComponent = (function () {
     };
     BarComponent.prototype.roundedRect = function (x, y, w, h, r, tl, tr, bl, br) {
         var retval;
-        retval = "M" + (x + r) + "," + y;
-        retval += "h" + (w - 2 * r);
+        retval = 'M' + (x + r) + ',' + y;
+        retval += 'h' + (w - 2 * r);
         if (tr) {
-            retval += "a" + r + "," + r + " 0 0 1 " + r + "," + r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r;
         }
         else {
-            retval += "h" + r;
-            retval += "v" + r;
+            retval += 'h' + r;
+            retval += 'v' + r;
         }
-        retval += "v" + (h - 2 * r);
+        retval += 'v' + (h - 2 * r);
         if (br) {
-            retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + r;
         }
         else {
-            retval += "v" + r;
-            retval += "h" + -r;
+            retval += 'v' + r;
+            retval += 'h' + -r;
         }
-        retval += "h" + (2 * r - w);
+        retval += 'h' + (2 * r - w);
         if (bl) {
-            retval += "a" + r + "," + r + " 0 0 1 " + -r + "," + -r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + -r;
         }
         else {
-            retval += "h" + -r;
-            retval += "v" + -r;
+            retval += 'h' + -r;
+            retval += 'v' + -r;
         }
-        retval += "v" + (2 * r - h);
+        retval += 'v' + (2 * r - h);
         if (tl) {
-            retval += "a" + r + "," + r + " 0 0 1 " + r + "," + -r;
+            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + -r;
         }
         else {
-            retval += "v" + -r;
-            retval += "h" + r;
+            retval += 'v' + -r;
+            retval += 'h' + r;
         }
-        retval += "z";
+        retval += 'z';
         return retval;
     };
     BarComponent.prototype.onMouseEnter = function () {
@@ -4008,7 +4008,7 @@ var SeriesHorizontal = (function () {
     SeriesHorizontal = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-series-horizontal]',
-            template: "\n    <svg:g ngx-charts-bar \n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+            template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -4615,13 +4615,14 @@ var AxisLabelComponent = (function () {
             case 'left':
                 this.y = -(this.offset + this.textHeight + this.margin);
                 this.x = -this.height / 2;
-                this.transform = "rotate(270)";
+                this.transform = 'rotate(270)';
                 break;
             case 'right':
                 this.y = this.offset + this.margin;
                 this.x = -this.height / 2;
-                this.transform = "rotate(270)";
+                this.transform = 'rotate(270)';
                 break;
+            default:
         }
     };
     __decorate([
@@ -5047,42 +5048,43 @@ var YAxisTicksComponent = (function () {
             return scale(d) + scale.bandwidth() * 0.5;
         } : scale;
         switch (this.orient) {
-            case "top":
+            case 'top':
                 this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                    return 'translate(' + this.adjustedScale(tick) + ',0)';
                 };
-                this.textAnchor = "middle";
+                this.textAnchor = 'middle';
                 this.y2 = this.innerTickSize * sign;
                 this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
+                this.dy = sign < 0 ? '0em' : '.71em';
                 break;
-            case "bottom":
+            case 'bottom':
                 this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                    return 'translate(' + this.adjustedScale(tick) + ',0)';
                 };
-                this.textAnchor = "middle";
+                this.textAnchor = 'middle';
                 this.y2 = this.innerTickSize * sign;
                 this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
+                this.dy = sign < 0 ? '0em' : '.71em';
                 break;
-            case "left":
+            case 'left':
                 this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
+                    return 'translate(0,' + this.adjustedScale(tick) + ')';
                 };
-                this.textAnchor = "end";
+                this.textAnchor = 'end';
                 this.x2 = this.innerTickSize * -sign;
                 this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
+                this.dy = '.32em';
                 break;
-            case "right":
+            case 'right':
                 this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
+                    return 'translate(0,' + this.adjustedScale(tick) + ')';
                 };
-                this.textAnchor = "start";
+                this.textAnchor = 'start';
                 this.x2 = this.innerTickSize * -sign;
                 this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
+                this.dy = '.32em';
                 break;
+            default:
         }
         setTimeout(function () { return _this.updateDims(); });
     };
@@ -5317,11 +5319,6 @@ var BaseChartComponent = (function () {
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
-    BaseChartComponent.prototype.unbindEvents = function () {
-        if (this.resizeSubscription) {
-            this.resizeSubscription.unsubscribe();
-        }
-    };
     BaseChartComponent.prototype.update = function () {
         if (this.results) {
             this.results = this.cloneData(this.results);
@@ -5344,11 +5341,33 @@ var BaseChartComponent = (function () {
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
         if (hostElem.parentNode != null) {
-            //Get the container dimensions
+            // Get the container dimensions
             width = hostElem.parentNode.clientWidth;
             height = hostElem.parentNode.clientHeight;
         }
         return { width: width, height: height };
+    };
+    // converts all date objects that appear as name into formatted date strings
+    BaseChartComponent.prototype.formatDates = function () {
+        for (var i = 0; i < this.results.length; i++) {
+            var g = this.results[i];
+            if (g.name instanceof Date) {
+                g.name = g.name.toLocaleDateString();
+            }
+            if (g.series) {
+                for (var j = 0; j < g.series.length; j++) {
+                    var d = g.series[j];
+                    if (d.name instanceof Date) {
+                        d.name = d.name.toLocaleDateString();
+                    }
+                }
+            }
+        }
+    };
+    BaseChartComponent.prototype.unbindEvents = function () {
+        if (this.resizeSubscription) {
+            this.resizeSubscription.unsubscribe();
+        }
     };
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
@@ -5393,23 +5412,6 @@ var BaseChartComponent = (function () {
             results.push(copy);
         }
         return results;
-    };
-    // converts all date objects that appear as name into formatted date strings
-    BaseChartComponent.prototype.formatDates = function () {
-        for (var i = 0; i < this.results.length; i++) {
-            var g = this.results[i];
-            if (g.name instanceof Date) {
-                g.name = g.name.toLocaleDateString();
-            }
-            if (g.series) {
-                for (var j = 0; j < g.series.length; j++) {
-                    var d = g.series[j];
-                    if (d.name instanceof Date) {
-                        d.name = d.name.toLocaleDateString();
-                    }
-                }
-            }
-        }
     };
     __decorate([
         core_1.Input(), 
@@ -5539,17 +5541,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var services_1 = __webpack_require__("./src/services/index.ts");
+var tooltip_1 = __webpack_require__("./src/common/tooltip/index.ts");
 var ChartComponent = (function () {
-    function ChartComponent(vcr, injectionService) {
+    function ChartComponent(vcr, tooltipService) {
         this.vcr = vcr;
-        this.injectionService = injectionService;
+        this.tooltipService = tooltipService;
         this.showLegend = false;
         this.legendTitle = 'Legend';
         this.legendLabelClick = new core_1.EventEmitter();
         this.legendLabelActivate = new core_1.EventEmitter();
         this.legendLabelDeactivate = new core_1.EventEmitter();
-        this.injectionService.setRootViewContainer(vcr);
+        this.tooltipService.injectionService.setRootViewContainer(vcr);
     }
     ChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -5627,9 +5629,9 @@ var ChartComponent = (function () {
     ], ChartComponent.prototype, "legendLabelDeactivate", void 0);
     ChartComponent = __decorate([
         core_1.Component({
-            providers: [services_1.InjectionService],
+            providers: [tooltip_1.TooltipService],
             selector: 'ngx-charts-chart',
-            template: "\n    <div \n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
+            template: "\n    <div\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -5640,7 +5642,7 @@ var ChartComponent = (function () {
                 ])
             ]
         }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef, services_1.InjectionService])
+        __metadata('design:paramtypes', [core_1.ViewContainerRef, tooltip_1.TooltipService])
     ], ChartComponent);
     return ChartComponent;
 }());
@@ -6409,8 +6411,12 @@ var GridPanelSeriesComponent = (function () {
     GridPanelSeriesComponent.prototype.getGridPanels = function () {
         var _this = this;
         return this.data.map(function (d, i) {
-            var offset, width, height, x, y, className;
-            className = 'odd';
+            var offset;
+            var width;
+            var height;
+            var x;
+            var y;
+            var className = 'odd';
             if (_this.orient === 'vertical') {
                 var position = _this.xScale(d.name);
                 var positionIndex = Number.parseInt((position / _this.xScale.step()).toString());
@@ -7083,7 +7089,7 @@ var SvgRadialGradientComponent = (function () {
         this.cy = 0;
     }
     SvgRadialGradientComponent.prototype.ngOnChanges = function (changes) {
-        this.r = "30%";
+        this.r = '30%';
     };
     __decorate([
         core_1.Input(), 
@@ -7136,7 +7142,7 @@ function tickFormat(fieldType, groupByType) {
             return label;
         }
         if (fieldType === 'date' && groupByType === 'groupBy') {
-            return moment(label).format("MM/DD/YYYY");
+            return moment(label).format('MM/DD/YYYY');
         }
         return label.toString();
     };
@@ -7256,7 +7262,7 @@ var Timeline = (function () {
         var width = this.view[0];
         this.brush = d3_1.default.brushX()
             .extent([[0, 0], [width, height]])
-            .on("brush end", function () {
+            .on('brush end', function () {
             _this.zone.run(function () {
                 var selection = d3_1.default.selection.event.selection || _this.xScale.range();
                 var newDomain = selection.map(_this.xScale.invert);
@@ -7346,7 +7352,7 @@ var Timeline = (function () {
     Timeline = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-timeline]',
-            template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\" \n        [attr.width]=\"view[0]\" \n        y=\"0\" \n        [attr.height]=\"height\" \n        class=\"brush-background\" \n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef])
@@ -7887,11 +7893,12 @@ var alignment_type_1 = __webpack_require__("./src/common/tooltip/alignment.type.
 var show_type_1 = __webpack_require__("./src/common/tooltip/show.type.ts");
 var tooltip_service_1 = __webpack_require__("./src/common/tooltip/tooltip.service.ts");
 var TooltipDirective = (function () {
-    function TooltipDirective(tooltipService, viewContainerRef, renderer, element) {
+    function TooltipDirective(tooltipService, viewContainerRef, renderer, element, zone) {
         this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.renderer = renderer;
         this.element = element;
+        this.zone = zone;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -7962,20 +7969,22 @@ var TooltipDirective = (function () {
     };
     TooltipDirective.prototype.showTooltip = function (immediate) {
         var _this = this;
-        if (this.component || this.tooltipDisabled)
-            return;
-        var time = immediate ? 0 : this.tooltipShowTimeout;
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(function () {
-            _this.tooltipService.destroyAll();
-            var options = _this.createBoundOptions();
-            _this.component = _this.tooltipService.create(options);
-            // add a tiny timeout to avoid event re-triggers
-            setTimeout(function () {
-                _this.addHideListeners(_this.component.instance.element.nativeElement);
-            }, 10);
-            _this.show.emit(true);
-        }, time);
+        this.zone.run(function () {
+            if (_this.component || _this.tooltipDisabled)
+                return;
+            var time = immediate ? 0 : _this.tooltipShowTimeout;
+            clearTimeout(_this.timeout);
+            _this.timeout = setTimeout(function () {
+                _this.tooltipService.destroyAll();
+                var options = _this.createBoundOptions();
+                _this.component = _this.tooltipService.create(options);
+                // add a tiny timeout to avoid event re-triggers
+                setTimeout(function () {
+                    _this.addHideListeners(_this.component.instance.element.nativeElement);
+                }, 10);
+                _this.show.emit(true);
+            }, time);
+        });
     };
     TooltipDirective.prototype.addHideListeners = function (tooltip) {
         var _this = this;
@@ -8142,7 +8151,7 @@ var TooltipDirective = (function () {
     ], TooltipDirective.prototype, "onMouseClick", null);
     TooltipDirective = __decorate([
         core_1.Directive({ selector: '[ngx-tooltip]' }), 
-        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, core_1.Renderer, core_1.ElementRef])
+        __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, core_1.Renderer, core_1.ElementRef, core_1.NgZone])
     ], TooltipDirective);
     return TooltipDirective;
 }());
@@ -8217,6 +8226,7 @@ var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
     function TooltipService(injectionService) {
         _super.call(this, injectionService);
+        this.injectionService = injectionService;
         this.type = _1.TooltipContentComponent;
     }
     TooltipService = __decorate([
@@ -8398,12 +8408,11 @@ var ForceDirectedGraphComponent = (function (_super) {
     function ForceDirectedGraphComponent() {
         _super.apply(this, arguments);
         this.force = d3_1.default.forceSimulation()
-            .force("charge", d3_1.default.forceManyBody())
-            .force("collide", d3_1.default.forceCollide(5))
-            .force("x", d3_1.default.forceX())
-            .force("y", d3_1.default.forceY());
+            .force('charge', d3_1.default.forceManyBody())
+            .force('collide', d3_1.default.forceCollide(5))
+            .force('x', d3_1.default.forceX())
+            .force('y', d3_1.default.forceY());
         this.forceLink = d3_1.default.forceLink().id(function (node) { return node.value; });
-        this.groupResultsBy = function (node) { return node.value; };
         this.nodes = [];
         this.links = [];
         this.activeEntries = [];
@@ -8411,6 +8420,7 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.deactivate = new core_1.EventEmitter();
         this.margin = [0, 0, 0, 0];
         this.results = [];
+        this.groupResultsBy = function (node) { return node.value; };
     }
     ForceDirectedGraphComponent.prototype.update = function () {
         var _this = this;
@@ -8426,10 +8436,10 @@ var ForceDirectedGraphComponent = (function (_super) {
             _this.seriesDomain = _this.getSeriesDomain();
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")";
+            _this.transform = "\n        translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")\n      ";
             if (_this.force) {
                 _this.force.nodes(_this.nodes)
-                    .force("link", _this.forceLink.links(_this.links))
+                    .force('link', _this.forceLink.links(_this.links))
                     .alpha(0.5).restart();
             }
         });
@@ -8503,10 +8513,6 @@ var ForceDirectedGraphComponent = (function (_super) {
     ], ForceDirectedGraphComponent.prototype, "forceLink", void 0);
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', Function)
-    ], ForceDirectedGraphComponent.prototype, "groupResultsBy", void 0);
-    __decorate([
-        core_1.Input(), 
         __metadata('design:type', Boolean)
     ], ForceDirectedGraphComponent.prototype, "legend", void 0);
     __decorate([
@@ -8541,6 +8547,10 @@ var ForceDirectedGraphComponent = (function (_super) {
         core_1.ViewChild(chart_component_1.ChartComponent, { read: core_1.ElementRef }), 
         __metadata('design:type', core_1.ElementRef)
     ], ForceDirectedGraphComponent.prototype, "chart", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Function)
+    ], ForceDirectedGraphComponent.prototype, "groupResultsBy", void 0);
     __decorate([
         core_1.HostListener('document:mousemove', ['$event']), 
         __metadata('design:type', Function), 
@@ -8723,7 +8733,7 @@ var GaugeAxisComponent = (function () {
                 line: this.getTickPath(startDistance, tickLength, angle),
                 textAnchor: textAnchor,
                 text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-                textTransform: "translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")"
+                textTransform: "\n          translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n        "
             });
             if (i === this.bigSegments) {
                 continue;
@@ -8797,7 +8807,7 @@ var GaugeAxisComponent = (function () {
     GaugeAxisComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-gauge-axis]',
-            template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"            \n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
+            template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -9024,7 +9034,7 @@ var GaugeComponent = (function (_super) {
     GaugeComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-gauge',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            (select)=\"onClick($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n        \n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            (select)=\"onClick($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -9369,7 +9379,7 @@ var HeatCellSeriesComponent = (function () {
     HeatCellSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-heat-map-cell-series]',
-            template: "\n    <svg:g \n      ngx-charts-heat-map-cell \n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+            template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -9960,19 +9970,19 @@ var LineChartComponent = (function (_super) {
     };
     LineChartComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date)
             return 'time';
-        if (number)
+        if (num)
             return 'linear';
         return 'ordinal';
     };
@@ -10607,8 +10617,8 @@ var CardComponent = (function () {
         var _this = this;
         if (!this.initialized) {
             cancelAnimationFrame(this.animationReq);
-            var value = this.data.value;
-            var decs = count_1.decimalChecker(value);
+            var val = this.data.value;
+            var decs = count_1.decimalChecker(val);
             var callback = function (_a) {
                 var value = _a.value;
                 _this.zone.run(function () {
@@ -10616,7 +10626,7 @@ var CardComponent = (function () {
                     _this.cd.markForCheck();
                 });
             };
-            this.animationReq = count_1.count(0, value, decs, 1, callback);
+            this.animationReq = count_1.count(0, val, decs, 1, callback);
             this.initialized = true;
         }
     };
@@ -11024,7 +11034,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         node
             .transition()
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var copyOfD = Object.assign({}, d);
             copyOfD.endAngle = copyOfD.startAngle;
@@ -11035,7 +11045,7 @@ var PieArcComponent = (function () {
             };
         })
             .transition().duration(750)
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolate = d3_1.default.interpolate(this._current, d);
             this._current = interpolate(0);
@@ -11049,7 +11059,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         node
             .transition().duration(750)
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolate = d3_1.default.interpolate(this._current, d);
             this._current = interpolate(0);
@@ -11567,7 +11577,7 @@ var PieGridComponent = (function (_super) {
                 label: trim_label_helper_1.trimLabel(label),
                 total: value,
                 value: value,
-                percent: d3_1.default.format(".1p")(d.data.percent),
+                percent: d3_1.default.format('.1p')(d.data.percent),
                 data: [d, {
                         data: {
                             other: true,
@@ -11649,7 +11659,7 @@ var PieLabelComponent = (function () {
         this.loadAnimation();
     };
     PieLabelComponent.prototype.textAnchor = function () {
-        return this.midAngle(this.data) < Math.PI ? "start" : "end";
+        return this.midAngle(this.data) < Math.PI ? 'start' : 'end';
     };
     PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
@@ -11890,21 +11900,10 @@ __export(__webpack_require__("./src/services/injection-registery.service.ts"));
 /***/ },
 
 /***/ "./src/services/injection-registery.service.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 "use strict";
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-var _1 = __webpack_require__("./src/services/index.ts");
 var InjectionRegistery = (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
@@ -11970,10 +11969,6 @@ var InjectionRegistery = (function () {
         var types = this.components.get(type);
         types.push(component);
     };
-    InjectionRegistery = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [_1.InjectionService])
-    ], InjectionRegistery);
     return InjectionRegistery;
 }());
 exports.InjectionRegistery = InjectionRegistery;
@@ -12018,11 +12013,11 @@ var InjectionService = (function () {
      * @memberOf InjectionService
      */
     InjectionService.prototype.getRootViewContainer = function () {
-        if (this._container)
-            return this._container;
         var rootComponents = this.applicationRef['_rootComponents'];
         if (rootComponents.length)
             return rootComponents[0];
+        if (this._container)
+            return this._container;
         throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
     };
     /**
@@ -12045,6 +12040,9 @@ var InjectionService = (function () {
      * @memberOf InjectionService
      */
     InjectionService.prototype.getComponentRootNode = function (componentRef) {
+        // the top most component root node has no `hostView`
+        if (!componentRef.hostView)
+            return componentRef.element.nativeElement;
         return componentRef.hostView.rootNodes[0];
     };
     /**
@@ -12487,94 +12485,126 @@ exports.TreeMapModule = TreeMapModule;
 "use strict";
 exports.colorSets = [
     {
-        'name': 'vivid',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#647c8a', '#3f51b5', '#2196f3', '#00b862', '#afdf0a', '#a7b61a', '#f3e562', '#ff9800', '#ff5722', '#ff4514']
+        name: 'vivid',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#647c8a', '#3f51b5', '#2196f3', '#00b862', '#afdf0a', '#a7b61a', '#f3e562', '#ff9800', '#ff5722', '#ff4514'
+        ]
     },
     {
-        'name': 'natural',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#bf9d76', '#e99450', '#d89f59', '#f2dfa7', '#a5d7c6', '#7794b1', '#afafaf', '#707160', '#ba9383', '#d9d5c3']
+        name: 'natural',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#bf9d76', '#e99450', '#d89f59', '#f2dfa7', '#a5d7c6', '#7794b1', '#afafaf', '#707160', '#ba9383', '#d9d5c3'
+        ]
     },
     {
-        'name': 'cool',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886']
+        name: 'cool',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#a8385d', '#7aa3e5', '#a27ea8', '#aae3f5', '#adcded', '#a95963', '#8796c0', '#7ed3ed', '#50abcc', '#ad6886'
+        ]
     },
     {
-        'name': 'fire',
-        'selectable': true,
-        'group': 'Ordinal',
-        'domain': ['#ff3d00', '#bf360c', '#ff8f00', '#ff6f00', '#ff5722', '#e65100', '#ffca28', '#ffab00']
+        name: 'fire',
+        selectable: true,
+        group: 'Ordinal',
+        domain: [
+            '#ff3d00', '#bf360c', '#ff8f00', '#ff6f00', '#ff5722', '#e65100', '#ffca28', '#ffab00'
+        ]
     },
     {
-        'name': 'solar',
-        'selectable': true,
-        'group': 'Continuous',
-        'domain': ['#fff8e1', '#ffecb3', '#ffe082', '#ffd54f', '#ffca28', '#ffc107', '#ffb300', '#ffa000', '#ff8f00', '#ff6f00']
+        name: 'solar',
+        selectable: true,
+        group: 'Continuous',
+        domain: [
+            '#fff8e1', '#ffecb3', '#ffe082', '#ffd54f', '#ffca28', '#ffc107', '#ffb300', '#ffa000', '#ff8f00', '#ff6f00'
+        ]
     },
     {
-        'name': 'air',
-        'selectable': true,
-        'group': 'Continuous',
-        'domain': ['#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4', '#039be5', '#0288d1', '#0277bd', '#01579b']
+        name: 'air',
+        selectable: true,
+        group: 'Continuous',
+        domain: [
+            '#e1f5fe', '#b3e5fc', '#81d4fa', '#4fc3f7', '#29b6f6', '#03a9f4', '#039be5', '#0288d1', '#0277bd', '#01579b'
+        ]
     },
     {
-        'name': 'aqua',
-        'selectable': true,
-        'group': 'Continuous',
-        'domain': ['#e0f7fa', '#b2ebf2', '#80deea', '#4dd0e1', '#26c6da', '#00bcd4', '#00acc1', '#0097a7', '#00838f', '#006064']
+        name: 'aqua',
+        selectable: true,
+        group: 'Continuous',
+        domain: [
+            '#e0f7fa', '#b2ebf2', '#80deea', '#4dd0e1', '#26c6da', '#00bcd4', '#00acc1', '#0097a7', '#00838f', '#006064'
+        ]
     },
     {
-        'name': 'flame',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#A10A28', '#D3342D', '#EF6D49', '#FAAD67', '#FDDE90', '#DBED91', '#A9D770', '#6CBA67', '#2C9653', '#146738']
+        name: 'flame',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#A10A28', '#D3342D', '#EF6D49', '#FAAD67', '#FDDE90', '#DBED91', '#A9D770', '#6CBA67', '#2C9653', '#146738'
+        ]
     },
     {
-        'name': 'ocean',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#1D68FB', '#33C0FC', '#4AFFFE', '#AFFFFF', '#FFFC63', '#FDBD2D', '#FC8A25', '#FA4F1E', '#FA141B', '#BA38D1']
+        name: 'ocean',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#1D68FB', '#33C0FC', '#4AFFFE', '#AFFFFF', '#FFFC63', '#FDBD2D', '#FC8A25', '#FA4F1E', '#FA141B', '#BA38D1'
+        ]
     },
     {
-        'name': 'forest',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#55C22D', '#C1F33D', '#3CC099', '#AFFFFF', '#8CFC9D', '#76CFFA', '#BA60FB', '#EE6490', '#C42A1C', '#FC9F32']
+        name: 'forest',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#55C22D', '#C1F33D', '#3CC099', '#AFFFFF', '#8CFC9D', '#76CFFA', '#BA60FB', '#EE6490', '#C42A1C', '#FC9F32'
+        ]
     },
     {
-        'name': 'horizon',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#2597FB', '#65EBFD', '#99FDD0', '#FCEE4B', '#FEFCFA', '#FDD6E3', '#FCB1A8', '#EF6F7B', '#CB96E8', '#EFDEE0']
+        name: 'horizon',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#2597FB', '#65EBFD', '#99FDD0', '#FCEE4B', '#FEFCFA', '#FDD6E3', '#FCB1A8', '#EF6F7B', '#CB96E8', '#EFDEE0'
+        ]
     },
     {
-        'name': 'neons',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#FF3333', '#FF33FF', '#CC33FF', '#0000FF', '#33CCFF', '#33FFFF', '#33FF66', '#CCFF33', '#FFCC00', '#FF6600']
+        name: 'neons',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#FF3333', '#FF33FF', '#CC33FF', '#0000FF', '#33CCFF', '#33FFFF', '#33FF66', '#CCFF33', '#FFCC00', '#FF6600'
+        ]
     },
     {
-        'name': 'picnic',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ['#FAC51D', '#66BD6D', '#FAA026', '#29BB9C', '#E96B56', '#55ACD2', '#B7332F', '#2C83C9', '#9166B8', '#92E7E8']
+        name: 'picnic',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#FAC51D', '#66BD6D', '#FAA026', '#29BB9C', '#E96B56', '#55ACD2', '#B7332F', '#2C83C9', '#9166B8', '#92E7E8'
+        ]
     },
     {
-        'name': 'night',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ["#2B1B5A", "#501356", "#183356", "#28203F", "#391B3C", "#1E2B3C", "#120634", "#2D0432", "#051932", "#453080", "#75267D", "#2C507D", "#4B3880", "#752F7D", "#35547D"]
+        name: 'night',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#2B1B5A', '#501356', '#183356', '#28203F', '#391B3C', '#1E2B3C', '#120634',
+            '#2D0432', '#051932', '#453080', '#75267D', '#2C507D', '#4B3880', '#752F7D', '#35547D'
+        ]
     },
     {
-        'name': 'nightLights',
-        'selectable': false,
-        'group': 'Ordinal',
-        'domain': ["#4e31a5", "#9c25a7", "#3065ab", "#57468b", "#904497", "#46648b", "#32118d", "#a00fb3", "#1052a2", "#6e51bd", "#b63cc3", "#6c97cb", "#8671c1", "#b455be", "#7496c3"]
+        name: 'nightLights',
+        selectable: false,
+        group: 'Ordinal',
+        domain: [
+            '#4e31a5', '#9c25a7', '#3065ab', '#57468b', '#904497', '#46648b',
+            '#32118d', '#a00fb3', '#1052a2', '#6e51bd', '#b63cc3', '#6c97cb', '#8671c1', '#b455be', '#7496c3'
+        ]
     }
 ];
 
@@ -12742,14 +12772,14 @@ exports.sortByTime = sortByTime;
 "use strict";
 "use strict";
 /**
-* Throttle a function
-*
-* @export
-* @param {*} func
-* @param {number} wait
-* @param {*} [options]
-* @returns
-*/
+ * Throttle a function
+ *
+ * @export
+ * @param {*}      func
+ * @param {number} wait
+ * @param {*}      [options]
+ * @returns
+ */
 function throttle(func, wait, options) {
     options = options || {};
     var context;

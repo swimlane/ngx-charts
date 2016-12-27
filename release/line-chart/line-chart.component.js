@@ -8,7 +8,7 @@ var core_1 = require('@angular/core');
 var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
 var color_helper_1 = require('../common/color.helper');
 var base_chart_component_1 = require('../common/base-chart.component');
-var id_1 = require("../utils/id");
+var id_1 = require('../utils/id');
 var d3_1 = require('../d3');
 var moment = require('moment');
 var LineChartComponent = (function (_super) {
@@ -154,19 +154,19 @@ var LineChartComponent = (function (_super) {
     };
     LineChartComponent.prototype.getScaleType = function (values) {
         var date = true;
-        var number = true;
+        var num = true;
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var value = values_1[_i];
             if (!this.isDate(value)) {
                 date = false;
             }
             if (typeof value !== 'number') {
-                number = false;
+                num = false;
             }
         }
         if (date)
             return 'time';
-        if (number)
+        if (num)
             return 'linear';
         return 'ordinal';
     };

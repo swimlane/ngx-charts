@@ -30,7 +30,7 @@ var PieLabelComponent = (function () {
         this.loadAnimation();
     };
     PieLabelComponent.prototype.textAnchor = function () {
-        return this.midAngle(this.data) < Math.PI ? "start" : "end";
+        return this.midAngle(this.data) < Math.PI ? 'start' : 'end';
     };
     PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;

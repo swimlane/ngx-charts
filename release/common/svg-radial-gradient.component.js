@@ -7,7 +7,7 @@ var SvgRadialGradientComponent = (function () {
         this.cy = 0;
     }
     SvgRadialGradientComponent.prototype.ngOnChanges = function (changes) {
-        this.r = "30%";
+        this.r = '30%';
     };
     SvgRadialGradientComponent.decorators = [
         { type: core_1.Component, args: [{

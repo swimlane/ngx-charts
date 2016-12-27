@@ -38,7 +38,7 @@ export declare class InjectionService {
      *
      * @memberOf InjectionService
      */
-    getComponentRootNode(componentRef: ComponentRef<any>): HTMLElement;
+    getComponentRootNode(componentRef: any): HTMLElement;
     /**
      * Gets the root component container html element.
      *

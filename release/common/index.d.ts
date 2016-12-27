@@ -1,6 +1,6 @@
 export * from './chart-common.module';
 export * from './legend';
-export * from "./tooltip";
+export * from './tooltip';
 export * from './count';
 export * from './color.helper';
 export * from './area.component';

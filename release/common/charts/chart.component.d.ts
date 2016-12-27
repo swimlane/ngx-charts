@@ -1,8 +1,8 @@
 import { OnChanges, ViewContainerRef, EventEmitter, SimpleChanges } from '@angular/core';
-import { InjectionService } from '../../services';
+import { TooltipService } from '../tooltip';
 export declare class ChartComponent implements OnChanges {
     private vcr;
-    private injectionService;
+    private tooltipService;
     view: any;
     showLegend: boolean;
     legendOptions: any;
@@ -18,7 +18,7 @@ export declare class ChartComponent implements OnChanges {
     chartWidth: any;
     title: any;
     legendWidth: any;
-    constructor(vcr: ViewContainerRef, injectionService: InjectionService);
+    constructor(vcr: ViewContainerRef, tooltipService: TooltipService);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getLegendType(): string;

@@ -31,9 +31,9 @@ export class Wrapper_TooltipDirective {
   /*private*/ _expr_15:any;
   subscription0:any;
   subscription1:any;
-  constructor(p0:any,p1:any,p2:any,p3:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any,p4:any) {
     this._changed = false;
-    this.context = new import0.TooltipDirective(p0,p1,p2,p3);
+    this.context = new import0.TooltipDirective(p0,p1,p2,p3,p4);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;

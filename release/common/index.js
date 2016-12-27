@@ -4,7 +4,7 @@ function __export(m) {
 }
 __export(require('./chart-common.module'));
 __export(require('./legend'));
-__export(require("./tooltip"));
+__export(require('./tooltip'));
 __export(require('./count'));
 __export(require('./color.helper'));
 __export(require('./area.component'));

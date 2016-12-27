@@ -2,9 +2,9 @@
  * Throttle a function
  *
  * @export
- * @param {*} func
+ * @param {*}      func
  * @param {number} wait
- * @param {*} [options]
+ * @param {*}      [options]
  * @returns
  */
 export declare function throttle(func: any, wait: number, options?: any): () => any;

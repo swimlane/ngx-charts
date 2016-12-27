@@ -18,21 +18,19 @@ import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/core/src/linker/view_container';
 import * as import12 from '../../../src/common/charts/chart.component';
-import * as import13 from '../../../src/services/injection.service';
+import * as import13 from '../../../src/common/tooltip/tooltip.service';
 import * as import14 from '../common/charts/chart.component.ngfactory';
 import * as import15 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import16 from '@angular/core/src/application_ref';
-import * as import17 from '@angular/core/src/linker/component_factory_resolver';
-import * as import18 from '@angular/core/src/linker/template_ref';
-import * as import19 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import20 from '@angular/common/src/directives/ng_for';
-import * as import21 from '../../../src/pie-chart/pie-grid-series.component';
-import * as import22 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import23 from './pie-grid-series.component.ngfactory';
-import * as import24 from '../../../src/common/count/count.directive';
-import * as import25 from '../common/count/count.directive.ngfactory';
-import * as import26 from '../../../src/common/tooltip/tooltip.service';
-import * as import27 from '../../../src/common/tooltip/tooltip.directive';
+import * as import16 from '../../../src/services/injection.service';
+import * as import17 from '@angular/core/src/linker/template_ref';
+import * as import18 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import19 from '@angular/common/src/directives/ng_for';
+import * as import20 from '../../../src/pie-chart/pie-grid-series.component';
+import * as import21 from '../common/tooltip/tooltip.directive.ngfactory';
+import * as import22 from './pie-grid-series.component.ngfactory';
+import * as import23 from '../../../src/common/count/count.directive';
+import * as import24 from '../common/count/count.directive.ngfactory';
+import * as import25 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_PieGridComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieGridComponent;
@@ -161,7 +159,7 @@ export class View_PieGridComponent0 extends import2.AppView<import0.PieGridCompo
   _el_1:any;
   /*private*/ _vc_1:import11.ViewContainer;
   compView_1:import2.AppView<import12.ChartComponent>;
-  _InjectionService_1_5:import13.InjectionService;
+  _TooltipService_1_5:import13.TooltipService;
   _ChartComponent_1_6:import14.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
@@ -192,15 +190,15 @@ export class View_PieGridComponent0 extends import2.AppView<import0.PieGridCompo
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_1 = new import11.ViewContainer(1,(null as any),this,this._el_1);
     this.compView_1 = new import14.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._InjectionService_1_5 = new import13.InjectionService(this.parentView.injectorGet(import16.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import17.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._ChartComponent_1_6 = new import14.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._TooltipService_1_5 = new import13.TooltipService(this.parentView.injectorGet(import16.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import14.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie-grid chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
     this._vc_5 = new import11.ViewContainer(5,3,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import18.TemplateRef_(this,5,this._anchor_5);
-    this._NgFor_5_6 = new import15.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._TemplateRef_5_5 = new import17.TemplateRef_(this,5,this._anchor_5);
+    this._NgFor_5_6 = new import15.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import18.IterableDiffers,this.parentIndex),this.ref);
     this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
@@ -220,9 +218,9 @@ export class View_PieGridComponent0 extends import2.AppView<import0.PieGridCompo
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import20.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
-    if (((token === import13.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._InjectionService_1_5; }
+    if (((token === import17.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import19.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
+    if (((token === import13.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
     if (((token === import12.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
@@ -267,21 +265,21 @@ class View_PieGridComponent1 extends import2.AppView<any> {
   _text_1:any;
   _el_2:any;
   /*private*/ _vc_2:import11.ViewContainer;
-  compView_2:import2.AppView<import21.PieGridSeriesComponent>;
-  _TooltipDirective_2_5:import22.Wrapper_TooltipDirective;
-  _PieGridSeriesComponent_2_6:import23.Wrapper_PieGridSeriesComponent;
+  compView_2:import2.AppView<import20.PieGridSeriesComponent>;
+  _TooltipDirective_2_5:import21.Wrapper_TooltipDirective;
+  _PieGridSeriesComponent_2_6:import22.Wrapper_PieGridSeriesComponent;
   _text_3:any;
   _el_4:any;
-  compView_4:import2.AppView<import24.CountUpDirective>;
-  _CountUpDirective_4_3:import25.Wrapper_CountUpDirective;
+  compView_4:import2.AppView<import23.CountUpDirective>;
+  _CountUpDirective_4_3:import24.Wrapper_CountUpDirective;
   _text_5:any;
   _text_6:any;
   _el_7:any;
   _text_8:any;
   _text_9:any;
   _el_10:any;
-  compView_10:import2.AppView<import24.CountUpDirective>;
-  _CountUpDirective_10_3:import25.Wrapper_CountUpDirective;
+  compView_10:import2.AppView<import23.CountUpDirective>;
+  _CountUpDirective_10_3:import24.Wrapper_CountUpDirective;
   _text_11:any;
   _text_12:any;
   /*private*/ _expr_21:any;
@@ -298,14 +296,14 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-pie-grid-series','','ngx-tooltip',''),(null as any));
     this._vc_2 = new import11.ViewContainer(2,0,this,this._el_2);
-    this.compView_2 = new import23.View_PieGridSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._TooltipDirective_2_5 = new import22.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import26.TooltipService,this.parentView.parentIndex),this._vc_2.vcRef,this.renderer,new import9.ElementRef(this._el_2));
-    this._PieGridSeriesComponent_2_6 = new import23.Wrapper_PieGridSeriesComponent(new import9.ElementRef(this._el_2));
+    this.compView_2 = new import22.View_PieGridSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._TooltipDirective_2_5 = new import21.Wrapper_TooltipDirective((<View_PieGridComponent0>this.parentView)._TooltipService_1_5,this._vc_2.vcRef,this.renderer,new import9.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex));
+    this._PieGridSeriesComponent_2_6 = new import22.Wrapper_PieGridSeriesComponent(new import9.ElementRef(this._el_2));
     this.compView_2.create(this._PieGridSeriesComponent_2_6.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(12,'class','label percent-label','dy','-0.5em','ngx-charts-count-up','','text-anchor','middle','x','0','y','5'),(null as any));
-    this.compView_4 = new import25.View_CountUpDirective0(this.viewUtils,this,4,this._el_4);
-    this._CountUpDirective_4_3 = new import25.Wrapper_CountUpDirective(this.compView_4.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_4));
+    this.compView_4 = new import24.View_CountUpDirective0(this.viewUtils,this,4,this._el_4);
+    this._CountUpDirective_4_3 = new import24.Wrapper_CountUpDirective(this.compView_4.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_4));
     this._text_5 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_4.create(this._CountUpDirective_4_3.context);
     this._text_6 = this.renderer.createText(this._el_0,'\n          ',(null as any));
@@ -313,8 +311,8 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
     this._text_9 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(10,'class','label','dy','1.23em','ngx-charts-count-up','','text-anchor','middle','x','0'),(null as any));
-    this.compView_10 = new import25.View_CountUpDirective0(this.viewUtils,this,10,this._el_10);
-    this._CountUpDirective_10_3 = new import25.Wrapper_CountUpDirective(this.compView_10.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_10));
+    this.compView_10 = new import24.View_CountUpDirective0(this.viewUtils,this,10,this._el_10);
+    this._CountUpDirective_10_3 = new import24.Wrapper_CountUpDirective(this.compView_10.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_10));
     this._text_11 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_10.create(this._CountUpDirective_10_3.context);
     this._text_12 = this.renderer.createText(this._el_0,'\n        ',(null as any));
@@ -339,10 +337,10 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import27.TooltipDirective) && (2 === requestNodeIndex))) { return this._TooltipDirective_2_5.context; }
-    if (((token === import21.PieGridSeriesComponent) && (2 === requestNodeIndex))) { return this._PieGridSeriesComponent_2_6.context; }
-    if (((token === import24.CountUpDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._CountUpDirective_4_3.context; }
-    if (((token === import24.CountUpDirective) && ((10 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._CountUpDirective_10_3.context; }
+    if (((token === import25.TooltipDirective) && (2 === requestNodeIndex))) { return this._TooltipDirective_2_5.context; }
+    if (((token === import20.PieGridSeriesComponent) && (2 === requestNodeIndex))) { return this._PieGridSeriesComponent_2_6.context; }
+    if (((token === import23.CountUpDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._CountUpDirective_4_3.context; }
+    if (((token === import23.CountUpDirective) && ((10 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._CountUpDirective_10_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

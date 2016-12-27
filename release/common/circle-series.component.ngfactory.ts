@@ -28,7 +28,8 @@ import * as import19 from './tooltip/tooltip.directive.ngfactory';
 import * as import20 from './circle.component.ngfactory';
 import * as import21 from '../../../src/common/tooltip/tooltip.service';
 import * as import22 from '@angular/core/src/linker/element_ref';
-import * as import23 from '../../../src/common/tooltip/tooltip.directive';
+import * as import23 from '@angular/core/src/zone/ng_zone';
+import * as import24 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_CircleSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CircleSeriesComponent;
@@ -404,7 +405,7 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray8(6,'class','circle','ngx-charts-circle','','ngx-tooltip',''),(null as any));
     this._vc_0 = new import9.ViewContainer(0,(null as any),this,this._el_0);
     this.compView_0 = new import20.View_CircleComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import19.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import21.TooltipService,this.parentView.parentIndex),this._vc_0.vcRef,this.renderer,new import22.ElementRef(this._el_0));
+    this._TooltipDirective_0_5 = new import19.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import21.TooltipService,this.parentView.parentIndex),this._vc_0.vcRef,this.renderer,new import22.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import23.NgZone,this.parentView.parentIndex));
     this._CircleComponent_0_6 = new import20.Wrapper_CircleComponent();
     this.compView_0.create(this._CircleComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
@@ -414,7 +415,7 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import23.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import24.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
     if (((token === import18.CircleComponent) && (0 === requestNodeIndex))) { return this._CircleComponent_0_6.context; }
     return notFoundResult;
   }

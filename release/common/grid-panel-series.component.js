@@ -12,8 +12,12 @@ var GridPanelSeriesComponent = (function () {
     GridPanelSeriesComponent.prototype.getGridPanels = function () {
         var _this = this;
         return this.data.map(function (d, i) {
-            var offset, width, height, x, y, className;
-            className = 'odd';
+            var offset;
+            var width;
+            var height;
+            var x;
+            var y;
+            var className = 'odd';
             if (_this.orient === 'vertical') {
                 var position = _this.xScale(d.name);
                 var positionIndex = Number.parseInt((position / _this.xScale.step()).toString());

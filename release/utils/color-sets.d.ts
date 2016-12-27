@@ -1,6 +1,6 @@
-export declare var colorSets: {
-    'name': string;
-    'selectable': boolean;
-    'group': string;
-    'domain': string[];
+export declare let colorSets: {
+    name: string;
+    selectable: boolean;
+    group: string;
+    domain: string[];
 }[];

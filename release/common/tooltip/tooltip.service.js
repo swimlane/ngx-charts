@@ -11,6 +11,7 @@ var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
     function TooltipService(injectionService) {
         _super.call(this, injectionService);
+        this.injectionService = injectionService;
         this.type = _1.TooltipContentComponent;
     }
     TooltipService.decorators = [

@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
 var moment = require('moment');
-var id_1 = require("../utils/id");
+var id_1 = require('../utils/id');
 var sort_1 = require('../utils/sort');
 var LineSeriesComponent = (function () {
     function LineSeriesComponent() {

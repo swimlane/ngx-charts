@@ -1,3 +1,4 @@
+
 import { ElementRef, TemplateRef, EventEmitter } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
@@ -5,13 +6,12 @@ import { ColorHelper } from '../common/color.helper';
 export declare class ForceDirectedGraphComponent extends BaseChartComponent {
     force: any;
     forceLink: any;
-    groupResultsBy: (node: any) => string;
     legend: boolean;
     nodes: any[];
-    links: {
+    links: Array<{
         source: any;
         target: any;
-    }[];
+    }>;
     activeEntries: any[];
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
@@ -30,6 +30,7 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent {
     seriesDomain: any;
     transform: string;
     legendOptions: any;
+    groupResultsBy: (node: any) => string;
     update(): void;
     onClick(data: any, node: any): void;
     onActivate(event: any): void;

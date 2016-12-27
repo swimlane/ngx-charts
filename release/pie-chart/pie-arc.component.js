@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
 var d3_1 = require('../d3');
-var id_1 = require("../utils/id");
+var id_1 = require('../utils/id');
 var PieArcComponent = (function () {
     function PieArcComponent(element) {
         this.startAngle = 0;
@@ -53,7 +53,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         node
             .transition()
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var copyOfD = Object.assign({}, d);
             copyOfD.endAngle = copyOfD.startAngle;
@@ -64,7 +64,7 @@ var PieArcComponent = (function () {
             };
         })
             .transition().duration(750)
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolate = d3_1.default.interpolate(this._current, d);
             this._current = interpolate(0);
@@ -78,7 +78,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         node
             .transition().duration(750)
-            .attrTween("d", function (d) {
+            .attrTween('d', function (d) {
             this._current = this._current || d;
             var interpolate = d3_1.default.interpolate(this._current, d);
             this._current = interpolate(0);

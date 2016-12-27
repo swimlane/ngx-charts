@@ -18,12 +18,11 @@ import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/core/src/linker/view_container';
 import * as import12 from '../../../src/common/charts/chart.component';
-import * as import13 from '../../../src/services/injection.service';
+import * as import13 from '../../../src/common/tooltip/tooltip.service';
 import * as import14 from '../common/charts/chart.component.ngfactory';
 import * as import15 from '../../../src/number-card/card-series.component';
 import * as import16 from './card-series.component.ngfactory';
-import * as import17 from '@angular/core/src/application_ref';
-import * as import18 from '@angular/core/src/linker/component_factory_resolver';
+import * as import17 from '../../../src/services/injection.service';
 export class Wrapper_NumberCardComponent {
   /*private*/ _eventHandler:Function;
   context:import0.NumberCardComponent;
@@ -152,7 +151,7 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
   _el_1:any;
   /*private*/ _vc_1:import11.ViewContainer;
   compView_1:import2.AppView<import12.ChartComponent>;
-  _InjectionService_1_5:import13.InjectionService;
+  _TooltipService_1_5:import13.TooltipService;
   _ChartComponent_1_6:import14.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
@@ -182,8 +181,8 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_1 = new import11.ViewContainer(1,(null as any),this,this._el_1);
     this.compView_1 = new import14.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._InjectionService_1_5 = new import13.InjectionService(this.parentView.injectorGet(import17.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import18.ComponentFactoryResolver,this.parentIndex),this.injector(1));
-    this._ChartComponent_1_6 = new import14.Wrapper_ChartComponent(this._vc_1.vcRef,this._InjectionService_1_5);
+    this._TooltipService_1_5 = new import13.TooltipService(this.parentView.injectorGet(import17.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import14.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','number-card chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
@@ -213,7 +212,7 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import15.CardSeriesComponent) && (5 === requestNodeIndex))) { return this._CardSeriesComponent_5_3.context; }
-    if (((token === import13.InjectionService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._InjectionService_1_5; }
+    if (((token === import13.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
     if (((token === import12.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }

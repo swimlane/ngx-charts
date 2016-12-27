@@ -30,7 +30,8 @@ import * as import21 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import22 from './bar.component.ngfactory';
 import * as import23 from '../../../src/common/tooltip/tooltip.service';
 import * as import24 from '@angular/core/src/linker/element_ref';
-import * as import25 from '../../../src/common/tooltip/tooltip.directive';
+import * as import25 from '@angular/core/src/zone/ng_zone';
+import * as import26 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_SeriesHorizontal {
   /*private*/ _eventHandler:Function;
   context:import0.SeriesHorizontal;
@@ -301,7 +302,7 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'ngx-charts-bar','','ngx-tooltip',''),(null as any));
     this._vc_0 = new import15.ViewContainer(0,(null as any),this,this._el_0);
     this.compView_0 = new import22.View_BarComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import21.Wrapper_TooltipDirective(this.parentView.injectorGet(import23.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import24.ElementRef(this._el_0));
+    this._TooltipDirective_0_5 = new import21.Wrapper_TooltipDirective(this.parentView.injectorGet(import23.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import24.ElementRef(this._el_0),this.parentView.injectorGet(import25.NgZone,this.parentIndex));
     this._BarComponent_0_6 = new import22.Wrapper_BarComponent(new import24.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_0.create(this._BarComponent_0_6.context);
@@ -316,7 +317,7 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import25.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import26.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
     if (((token === import20.BarComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._BarComponent_0_6.context; }
     return notFoundResult;
   }

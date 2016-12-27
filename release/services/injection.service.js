@@ -22,11 +22,11 @@ var InjectionService = (function () {
      * @memberOf InjectionService
      */
     InjectionService.prototype.getRootViewContainer = function () {
-        if (this._container)
-            return this._container;
         var rootComponents = this.applicationRef['_rootComponents'];
         if (rootComponents.length)
             return rootComponents[0];
+        if (this._container)
+            return this._container;
         throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
     };
     /**
@@ -49,6 +49,9 @@ var InjectionService = (function () {
      * @memberOf InjectionService
      */
     InjectionService.prototype.getComponentRootNode = function (componentRef) {
+        // the top most component root node has no `hostView`
+        if (!componentRef.hostView)
+            return componentRef.element.nativeElement;
         return componentRef.hostView.rootNodes[0];
     };
     /**

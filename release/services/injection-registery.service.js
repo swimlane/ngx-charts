@@ -1,6 +1,4 @@
 "use strict";
-var core_1 = require('@angular/core');
-var _1 = require('.');
 var InjectionRegistery = (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
@@ -66,13 +64,6 @@ var InjectionRegistery = (function () {
         var types = this.components.get(type);
         types.push(component);
     };
-    InjectionRegistery.decorators = [
-        { type: core_1.Injectable },
-    ];
-    /** @nocollapse */
-    InjectionRegistery.ctorParameters = function () { return [
-        { type: _1.InjectionService, },
-    ]; };
     return InjectionRegistery;
 }());
 exports.InjectionRegistery = InjectionRegistery;

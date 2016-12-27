@@ -58,42 +58,43 @@ var YAxisTicksComponent = (function () {
             return scale(d) + scale.bandwidth() * 0.5;
         } : scale;
         switch (this.orient) {
-            case "top":
+            case 'top':
                 this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                    return 'translate(' + this.adjustedScale(tick) + ',0)';
                 };
-                this.textAnchor = "middle";
+                this.textAnchor = 'middle';
                 this.y2 = this.innerTickSize * sign;
                 this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
+                this.dy = sign < 0 ? '0em' : '.71em';
                 break;
-            case "bottom":
+            case 'bottom':
                 this.transform = function (tick) {
-                    return "translate(" + this.adjustedScale(tick) + ",0)";
+                    return 'translate(' + this.adjustedScale(tick) + ',0)';
                 };
-                this.textAnchor = "middle";
+                this.textAnchor = 'middle';
                 this.y2 = this.innerTickSize * sign;
                 this.y1 = this.tickSpacing * sign;
-                this.dy = sign < 0 ? "0em" : ".71em";
+                this.dy = sign < 0 ? '0em' : '.71em';
                 break;
-            case "left":
+            case 'left':
                 this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
+                    return 'translate(0,' + this.adjustedScale(tick) + ')';
                 };
-                this.textAnchor = "end";
+                this.textAnchor = 'end';
                 this.x2 = this.innerTickSize * -sign;
                 this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
+                this.dy = '.32em';
                 break;
-            case "right":
+            case 'right':
                 this.transform = function (tick) {
-                    return "translate(0," + this.adjustedScale(tick) + ")";
+                    return 'translate(0,' + this.adjustedScale(tick) + ')';
                 };
-                this.textAnchor = "start";
+                this.textAnchor = 'start';
                 this.x2 = this.innerTickSize * -sign;
                 this.x1 = this.tickSpacing * -sign;
-                this.dy = ".32em";
+                this.dy = '.32em';
                 break;
+            default:
         }
         setTimeout(function () { return _this.updateDims(); });
     };

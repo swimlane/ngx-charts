@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
-var id_1 = require("../utils/id");
+var id_1 = require('../utils/id');
 var d3_1 = require('../d3');
 var HeatMapCellComponent = (function () {
     function HeatMapCellComponent(element) {

@@ -6,11 +6,12 @@ var alignment_type_1 = require('./alignment.type');
 var show_type_1 = require('./show.type');
 var tooltip_service_1 = require('./tooltip.service');
 var TooltipDirective = (function () {
-    function TooltipDirective(tooltipService, viewContainerRef, renderer, element) {
+    function TooltipDirective(tooltipService, viewContainerRef, renderer, element, zone) {
         this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
         this.renderer = renderer;
         this.element = element;
+        this.zone = zone;
         this.tooltipCssClass = '';
         this.tooltipTitle = '';
         this.tooltipAppendToBody = true;
@@ -81,20 +82,22 @@ var TooltipDirective = (function () {
     };
     TooltipDirective.prototype.showTooltip = function (immediate) {
         var _this = this;
-        if (this.component || this.tooltipDisabled)
-            return;
-        var time = immediate ? 0 : this.tooltipShowTimeout;
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(function () {
-            _this.tooltipService.destroyAll();
-            var options = _this.createBoundOptions();
-            _this.component = _this.tooltipService.create(options);
-            // add a tiny timeout to avoid event re-triggers
-            setTimeout(function () {
-                _this.addHideListeners(_this.component.instance.element.nativeElement);
-            }, 10);
-            _this.show.emit(true);
-        }, time);
+        this.zone.run(function () {
+            if (_this.component || _this.tooltipDisabled)
+                return;
+            var time = immediate ? 0 : _this.tooltipShowTimeout;
+            clearTimeout(_this.timeout);
+            _this.timeout = setTimeout(function () {
+                _this.tooltipService.destroyAll();
+                var options = _this.createBoundOptions();
+                _this.component = _this.tooltipService.create(options);
+                // add a tiny timeout to avoid event re-triggers
+                setTimeout(function () {
+                    _this.addHideListeners(_this.component.instance.element.nativeElement);
+                }, 10);
+                _this.show.emit(true);
+            }, time);
+        });
     };
     TooltipDirective.prototype.addHideListeners = function (tooltip) {
         var _this = this;
@@ -166,6 +169,7 @@ var TooltipDirective = (function () {
         { type: core_1.ViewContainerRef, },
         { type: core_1.Renderer, },
         { type: core_1.ElementRef, },
+        { type: core_1.NgZone, },
     ]; };
     TooltipDirective.propDecorators = {
         'tooltipCssClass': [{ type: core_1.Input },],

@@ -18,15 +18,14 @@ import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/core/src/linker/view_container';
 import * as import12 from '../../../src/common/charts/chart.component';
-import * as import13 from '../../../src/services/injection.service';
+import * as import13 from '../../../src/common/tooltip/tooltip.service';
 import * as import14 from '../common/charts/chart.component.ngfactory';
 import * as import15 from '../../../src/pie-chart/pie-series.component';
 import * as import16 from './pie-series.component.ngfactory';
 import * as import17 from '../../../src/common/legend/advanced-legend.component';
 import * as import18 from '../common/legend/advanced-legend.component.ngfactory';
-import * as import19 from '@angular/core/src/application_ref';
-import * as import20 from '@angular/core/src/linker/component_factory_resolver';
-import * as import21 from '@angular/core/src/security';
+import * as import19 from '../../../src/services/injection.service';
+import * as import20 from '@angular/core/src/security';
 export class Wrapper_AdvancedPieChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.AdvancedPieChartComponent;
@@ -185,7 +184,7 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
   _el_5:any;
   /*private*/ _vc_5:import11.ViewContainer;
   compView_5:import2.AppView<import12.ChartComponent>;
-  _InjectionService_5_5:import13.InjectionService;
+  _TooltipService_5_5:import13.TooltipService;
   _ChartComponent_5_6:import14.Wrapper_ChartComponent;
   _text_6:any;
   _el_7:any;
@@ -240,8 +239,8 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._vc_5 = new import11.ViewContainer(5,3,this,this._el_5);
     this.compView_5 = new import14.View_ChartComponent0(this.viewUtils,this,5,this._el_5);
-    this._InjectionService_5_5 = new import13.InjectionService(this.parentView.injectorGet(import19.ApplicationRef,this.parentIndex),this.parentView.injectorGet(import20.ComponentFactoryResolver,this.parentIndex),this.injector(5));
-    this._ChartComponent_5_6 = new import14.Wrapper_ChartComponent(this._vc_5.vcRef,this._InjectionService_5_5);
+    this._TooltipService_5_5 = new import13.TooltipService(this.parentView.injectorGet(import19.InjectionService,this.parentIndex));
+    this._ChartComponent_5_6 = new import14.Wrapper_ChartComponent(this._vc_5.vcRef,this._TooltipService_5_5);
     this._text_6 = this.renderer.createText((null as any),'\n          ',(null as any));
     this._el_7 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie chart'),(null as any));
     this._text_8 = this.renderer.createText(this._el_7,'\n            ',(null as any));
@@ -302,7 +301,7 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import15.PieSeriesComponent) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._PieSeriesComponent_9_3.context; }
-    if (((token === import13.InjectionService) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._InjectionService_5_5; }
+    if (((token === import13.TooltipService) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._TooltipService_5_5; }
     if (((token === import12.ChartComponent) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._ChartComponent_5_6.context; }
     if (((token === import17.AdvancedLegendComponent) && ((17 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._AdvancedLegendComponent_17_3.context; }
     return notFoundResult;
@@ -338,22 +337,22 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
     this._vc_5.detectChangesInNestedViews(throwOnChange);
     const currVal_30:any = this.context.width;
     if (import3.checkBinding(throwOnChange,this._expr_30,currVal_30)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_30) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_30).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_30) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_30).toString() + 'px')));
       this._expr_30 = currVal_30;
     }
     const currVal_31:any = this.context.height;
     if (import3.checkBinding(throwOnChange,this._expr_31,currVal_31)) {
-      this.renderer.setElementStyle(this._el_1,'height',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_31) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_31).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_1,'height',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_31) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_31).toString() + 'px')));
       this._expr_31 = currVal_31;
     }
     const currVal_32:any = this.context.dims.width;
     if (import3.checkBinding(throwOnChange,this._expr_32,currVal_32)) {
-      this.renderer.setElementStyle(this._el_3,'width',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_32) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_32).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_3,'width',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_32) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_32).toString() + 'px')));
       this._expr_32 = currVal_32;
     }
     const currVal_33:any = this.context.dims.height;
     if (import3.checkBinding(throwOnChange,this._expr_33,currVal_33)) {
-      this.renderer.setElementStyle(this._el_3,'height',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_33) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_33).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_3,'height',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_33) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_33).toString() + 'px')));
       this._expr_33 = currVal_33;
     }
     const currVal_35:any = this.context.transform;
@@ -363,7 +362,7 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
     }
     const currVal_36:any = (this.context.width - this.context.dims.width);
     if (import3.checkBinding(throwOnChange,this._expr_36,currVal_36)) {
-      this.renderer.setElementStyle(this._el_15,'width',((this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_36) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import21.SecurityContext.STYLE,currVal_36).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_15,'width',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_36) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_36).toString() + 'px')));
       this._expr_36 = currVal_36;
     }
     this.compView_5.internalDetectChanges(throwOnChange);

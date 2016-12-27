@@ -1,4 +1,4 @@
-import { EventEmitter, ViewContainerRef, ElementRef, Renderer, OnDestroy } from '@angular/core';
+import { EventEmitter, ViewContainerRef, ElementRef, Renderer, OnDestroy, NgZone } from '@angular/core';
 import { PlacementTypes } from './position';
 import { StyleTypes } from './style.type';
 import { AlignmentTypes } from './alignment.type';
@@ -9,6 +9,7 @@ export declare class TooltipDirective implements OnDestroy {
     private viewContainerRef;
     private renderer;
     private element;
+    private zone;
     tooltipCssClass: string;
     tooltipTitle: string;
     tooltipAppendToBody: boolean;
@@ -34,7 +35,7 @@ export declare class TooltipDirective implements OnDestroy {
     private mouseLeaveContentEvent;
     private mouseEnterContentEvent;
     private documentClickEvent;
-    constructor(tooltipService: TooltipService, viewContainerRef: ViewContainerRef, renderer: Renderer, element: ElementRef);
+    constructor(tooltipService: TooltipService, viewContainerRef: ViewContainerRef, renderer: Renderer, element: ElementRef, zone: NgZone);
     ngOnDestroy(): void;
     onFocus(): void;
     onBlur(): void;

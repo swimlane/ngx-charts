@@ -18,11 +18,6 @@ var BaseChartComponent = (function () {
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
-    BaseChartComponent.prototype.unbindEvents = function () {
-        if (this.resizeSubscription) {
-            this.resizeSubscription.unsubscribe();
-        }
-    };
     BaseChartComponent.prototype.update = function () {
         if (this.results) {
             this.results = this.cloneData(this.results);
@@ -45,11 +40,33 @@ var BaseChartComponent = (function () {
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
         if (hostElem.parentNode != null) {
-            //Get the container dimensions
+            // Get the container dimensions
             width = hostElem.parentNode.clientWidth;
             height = hostElem.parentNode.clientHeight;
         }
         return { width: width, height: height };
+    };
+    // converts all date objects that appear as name into formatted date strings
+    BaseChartComponent.prototype.formatDates = function () {
+        for (var i = 0; i < this.results.length; i++) {
+            var g = this.results[i];
+            if (g.name instanceof Date) {
+                g.name = g.name.toLocaleDateString();
+            }
+            if (g.series) {
+                for (var j = 0; j < g.series.length; j++) {
+                    var d = g.series[j];
+                    if (d.name instanceof Date) {
+                        d.name = d.name.toLocaleDateString();
+                    }
+                }
+            }
+        }
+    };
+    BaseChartComponent.prototype.unbindEvents = function () {
+        if (this.resizeSubscription) {
+            this.resizeSubscription.unsubscribe();
+        }
     };
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
@@ -94,23 +111,6 @@ var BaseChartComponent = (function () {
             results.push(copy);
         }
         return results;
-    };
-    // converts all date objects that appear as name into formatted date strings
-    BaseChartComponent.prototype.formatDates = function () {
-        for (var i = 0; i < this.results.length; i++) {
-            var g = this.results[i];
-            if (g.name instanceof Date) {
-                g.name = g.name.toLocaleDateString();
-            }
-            if (g.series) {
-                for (var j = 0; j < g.series.length; j++) {
-                    var d = g.series[j];
-                    if (d.name instanceof Date) {
-                        d.name = d.name.toLocaleDateString();
-                    }
-                }
-            }
-        }
     };
     BaseChartComponent.decorators = [
         { type: core_1.Component, args: [{

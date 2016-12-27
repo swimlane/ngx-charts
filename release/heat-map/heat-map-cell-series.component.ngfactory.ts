@@ -24,7 +24,8 @@ import * as import15 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import16 from './heat-map-cell.component.ngfactory';
 import * as import17 from '../../../src/common/tooltip/tooltip.service';
 import * as import18 from '@angular/core/src/linker/element_ref';
-import * as import19 from '../../../src/common/tooltip/tooltip.directive';
+import * as import19 from '@angular/core/src/zone/ng_zone';
+import * as import20 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_HeatCellSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.HeatCellSeriesComponent;
@@ -207,7 +208,7 @@ class View_HeatCellSeriesComponent1 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'ngx-charts-heat-map-cell','','ngx-tooltip',''),(null as any));
     this._vc_0 = new import9.ViewContainer(0,(null as any),this,this._el_0);
     this.compView_0 = new import16.View_HeatMapCellComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import15.Wrapper_TooltipDirective(this.parentView.injectorGet(import17.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import18.ElementRef(this._el_0));
+    this._TooltipDirective_0_5 = new import15.Wrapper_TooltipDirective(this.parentView.injectorGet(import17.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import18.ElementRef(this._el_0),this.parentView.injectorGet(import19.NgZone,this.parentIndex));
     this._HeatMapCellComponent_0_6 = new import16.Wrapper_HeatMapCellComponent(new import18.ElementRef(this._el_0));
     this.compView_0.create(this._HeatMapCellComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
@@ -217,7 +218,7 @@ class View_HeatCellSeriesComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import20.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
     if (((token === import14.HeatMapCellComponent) && (0 === requestNodeIndex))) { return this._HeatMapCellComponent_0_6.context; }
     return notFoundResult;
   }

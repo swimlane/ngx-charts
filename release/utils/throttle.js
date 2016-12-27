@@ -3,9 +3,9 @@
  * Throttle a function
  *
  * @export
- * @param {*} func
+ * @param {*}      func
  * @param {number} wait
- * @param {*} [options]
+ * @param {*}      [options]
  * @returns
  */
 function throttle(func, wait, options) {

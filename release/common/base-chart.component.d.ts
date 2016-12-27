@@ -16,9 +16,10 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    protected unbindEvents(): void;
     update(): void;
     getContainerDims(): any;
+    formatDates(): void;
+    protected unbindEvents(): void;
     private bindWindowResizeEvent();
     /**
      * Clones the data into a new object
@@ -30,5 +31,4 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
      * @memberOf BaseChart
      */
     private cloneData(data);
-    formatDates(): void;
 }

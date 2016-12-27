@@ -2,7 +2,7 @@
 var core_1 = require('@angular/core');
 var moment = require('moment');
 var label_helper_1 = require('../common/label.helper');
-var id_1 = require("../utils/id");
+var id_1 = require('../utils/id');
 var CircleSeriesComponent = (function () {
     function CircleSeriesComponent() {
         this.type = 'standard';

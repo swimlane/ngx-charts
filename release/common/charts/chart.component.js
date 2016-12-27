@@ -1,16 +1,16 @@
 "use strict";
 var core_1 = require('@angular/core');
-var services_1 = require('../../services');
+var tooltip_1 = require('../tooltip');
 var ChartComponent = (function () {
-    function ChartComponent(vcr, injectionService) {
+    function ChartComponent(vcr, tooltipService) {
         this.vcr = vcr;
-        this.injectionService = injectionService;
+        this.tooltipService = tooltipService;
         this.showLegend = false;
         this.legendTitle = 'Legend';
         this.legendLabelClick = new core_1.EventEmitter();
         this.legendLabelActivate = new core_1.EventEmitter();
         this.legendLabelDeactivate = new core_1.EventEmitter();
-        this.injectionService.setRootViewContainer(vcr);
+        this.tooltipService.injectionService.setRootViewContainer(vcr);
     }
     ChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -40,9 +40,9 @@ var ChartComponent = (function () {
     };
     ChartComponent.decorators = [
         { type: core_1.Component, args: [{
-                    providers: [services_1.InjectionService],
+                    providers: [tooltip_1.TooltipService],
                     selector: 'ngx-charts-chart',
-                    template: "\n    <div \n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
+                    template: "\n    <div\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [
@@ -57,7 +57,7 @@ var ChartComponent = (function () {
     /** @nocollapse */
     ChartComponent.ctorParameters = function () { return [
         { type: core_1.ViewContainerRef, },
-        { type: services_1.InjectionService, },
+        { type: tooltip_1.TooltipService, },
     ]; };
     ChartComponent.propDecorators = {
         'view': [{ type: core_1.Input },],
