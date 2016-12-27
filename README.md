@@ -43,7 +43,7 @@ For more info, check out the [documentation](https://swimlane.gitbooks.io/ngx-ch
 To use ngx-charts in your project install it via [npm](https://www.npmjs.com/package/@swimlane/ngx-charts):
 
 ```
-npm i @swimlane/ngx-datatable --save
+npm i @swimlane/ngx-charts --save
 ```
 
 ## Credits
