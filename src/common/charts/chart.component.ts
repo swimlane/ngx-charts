@@ -3,13 +3,13 @@ import {
   animate, ViewContainerRef, ChangeDetectionStrategy, EventEmitter,
   Output, SimpleChanges
 } from '@angular/core';
-import { InjectionService } from '../../services';
+import { TooltipService } from '../tooltip';
 
 @Component({
-  providers: [InjectionService],
+  providers: [TooltipService],
   selector: 'ngx-charts-chart',
   template: `
-    <div 
+    <div
       [style.width.px]="view[0]"
       [@animationState]="'active'">
       <svg
@@ -59,7 +59,7 @@ export class ChartComponent implements OnChanges {
 
   // remove
   @Input() data;
-  @Input() legendData;  
+  @Input() legendData;
   @Input() legendType: any;
   @Input() legendTitle = 'Legend';
   @Input() colors: any;
@@ -75,8 +75,8 @@ export class ChartComponent implements OnChanges {
 
   constructor(
     private vcr: ViewContainerRef,
-    private injectionService: InjectionService) {
-    this.injectionService.setRootViewContainer(vcr);
+    private tooltipService: TooltipService) {
+    this.tooltipService.injectionService.setRootViewContainer(vcr);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -88,7 +88,7 @@ export class ChartComponent implements OnChanges {
     if (this.showLegend) {
       this.legendType = this.getLegendType();
 
-      if (this.legendType === 'scaleLegend') {        
+      if (this.legendType === 'scaleLegend') {
         legendColumns = 1;
       } else {
         legendColumns = 2;

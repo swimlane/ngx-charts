@@ -1,7 +1,6 @@
 import { Injectable, ComponentRef } from '@angular/core';
 import { InjectionService } from '.';
 
-@Injectable()
 export abstract class InjectionRegistery {
 
   protected abstract type: any;
@@ -9,7 +8,7 @@ export abstract class InjectionRegistery {
   protected defaults: any = {};
   protected components: Map<any, any> = new Map();
 
-  constructor(protected injectionService: InjectionService) { }
+  constructor(public injectionService: InjectionService) { }
 
   getByType(type: any = this.type) {
     return this.components.get(type);
@@ -48,7 +47,7 @@ export abstract class InjectionRegistery {
 
   destroyByType(type): void {
     let comps = this.components.get(type);
-    
+
     if(comps) {
       for(let comp of comps) {
         this.destroy(comp);

@@ -7,7 +7,7 @@ export class TooltipService extends InjectionRegistery {
 
   type: any = TooltipContentComponent;
 
-  constructor(injectionService: InjectionService) {
+  constructor(public injectionService: InjectionService) {
     super(injectionService);
   }
 

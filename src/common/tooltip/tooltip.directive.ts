@@ -1,7 +1,7 @@
 import {
   Directive, Input, Output, EventEmitter, HostListener,
   ViewContainerRef,
-  ElementRef, Renderer, OnDestroy
+  ElementRef, Renderer, OnDestroy, NgZone
 } from '@angular/core';
 
 import { PlacementTypes } from './position';
@@ -54,7 +54,8 @@ export class TooltipDirective implements OnDestroy {
     private tooltipService: TooltipService,
     private viewContainerRef: ViewContainerRef,
     private renderer: Renderer,
-    private element: ElementRef) {
+    private element: ElementRef,
+    private zone: NgZone) {
   }
 
   ngOnDestroy(): void {
@@ -86,7 +87,7 @@ export class TooltipDirective implements OnDestroy {
   onMouseLeave(target): void {
     if(this.listensForHover && this.tooltipCloseOnMouseLeave) {
       clearTimeout(this.timeout);
-      
+
       if(this.component) {
         const contentDom = this.component.instance.element.nativeElement;
         const contains = contentDom.contains(target);
@@ -105,24 +106,26 @@ export class TooltipDirective implements OnDestroy {
   }
 
   showTooltip(immediate?: boolean): void {
-    if (this.component || this.tooltipDisabled) return;
-    
-    const time = immediate ? 0 : this.tooltipShowTimeout;
+    this.zone.run(() => {
+      if (this.component || this.tooltipDisabled) return;
 
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      this.tooltipService.destroyAll();
+      const time = immediate ? 0 : this.tooltipShowTimeout;
 
-      const options = this.createBoundOptions();
-      this.component = this.tooltipService.create(options);
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        this.tooltipService.destroyAll();
 
-      // add a tiny timeout to avoid event re-triggers
-      setTimeout(() => {
-        this.addHideListeners(this.component.instance.element.nativeElement);
-      }, 10);
+        const options = this.createBoundOptions();
+        this.component = this.tooltipService.create(options);
 
-      this.show.emit(true);
-    }, time);
+        // add a tiny timeout to avoid event re-triggers
+        setTimeout(() => {
+          this.addHideListeners(this.component.instance.element.nativeElement);
+        }, 10);
+
+        this.show.emit(true);
+      }, time);
+    });
   }
 
   addHideListeners(tooltip): void {

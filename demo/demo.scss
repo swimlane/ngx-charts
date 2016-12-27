@@ -58,8 +58,8 @@ button {
 }
 
 .arrow-down {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid #fff;
@@ -70,8 +70,8 @@ button {
 .arrow-right {
   margin-right: 5px;
   display: inline-block;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 5px solid #fff;
@@ -168,7 +168,7 @@ main {
       text-transform: uppercase;
       color: #a8b2c7;
       user-select: none;
-      
+
       a {
         color: #a8b2c7;
         text-decoration: none;
@@ -257,7 +257,7 @@ main {
     .legend-item {
       &:hover {
         color: #fff !important;
-      }     
+      }
     }
   }
 
@@ -306,7 +306,7 @@ main {
     .brush-background {
       fill: rgba(255,255,255,0.05);
     }
-    
+
     .brush {
       .selection {
         fill: rgba(255, 255, 255, 0.1);
