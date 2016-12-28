@@ -56,6 +56,7 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
+            [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -93,7 +94,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
-  
+
   dims: ViewDimensions;
   groupDomain: any[];
   innerDomain: any[];
@@ -205,7 +206,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   setColors(): void {
     let domain;
     if (this.schemeType === 'ordinal') {
-      domain = this.innerDomain; 
+      domain = this.innerDomain;
     } else {
       domain = this.valueDomain;
     }
@@ -252,7 +253,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }

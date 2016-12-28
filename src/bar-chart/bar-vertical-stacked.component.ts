@@ -56,6 +56,7 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
+            [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -215,7 +216,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   setColors(): void {
     let domain;
     if (this.schemeType === 'ordinal') {
-      domain = this.innerDomain; 
+      domain = this.innerDomain;
     } else {
       domain = this.valueDomain;
     }
@@ -262,7 +263,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
@@ -282,5 +283,5 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
 
     this.deactivate.emit({ value: event, entries: this.activeEntries });
   }
-  
+
 }

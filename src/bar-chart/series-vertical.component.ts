@@ -60,6 +60,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() colors;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
+  @Input() seriesName: string;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -155,8 +156,13 @@ export class SeriesVerticalComponent implements OnChanges {
         }
       }
 
+      let tooltipLabel = formattedLabel;
+      if (this.seriesName) {
+        tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
+      }
+
       bar.tooltipText = `
-        <span class="tooltip-label">${formattedLabel}</span>
+        <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
