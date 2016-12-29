@@ -335,6 +335,7 @@ import './demo.scss';
             *ngIf="chartType === 'gauge'"
             class="chart-container"
             [view]="view"
+            [legend]="showLegend"
             [results]="single"
             [scheme]="colorScheme"
             [min]="gaugeMin"

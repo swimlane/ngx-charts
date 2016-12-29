@@ -179,7 +179,7 @@ let chartGroups = [
         selector: 'gauge',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
+          'showLegend', 'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
           'angleSpan', 'startAngle', 'showAxis'
         ]
       },

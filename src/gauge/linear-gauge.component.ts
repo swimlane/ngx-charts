@@ -175,37 +175,39 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   scaleText(element): void {
-    let el;
-    let resizeScale;
-    if (element === 'value') {
-      el = this.valueTextEl;
-      resizeScale = this.valueResizeScale;
-    } else {
-      el = this.unitsTextEl;
-      resizeScale = this.unitsResizeScale;
-    }
-
-    const { width, height } = el.nativeElement.getBoundingClientRect();
-    if (width === 0 || height === 0) return;
-    const oldScale = resizeScale;
-    const availableWidth = this.dims.width;
-    const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-    let resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-    let resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
-    resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-    
-    if (resizeScale !== oldScale) {
+    this.zone.run(() => {
+      let el;
+      let resizeScale;
       if (element === 'value') {
-        this.valueResizeScale = resizeScale;
-        this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+        el = this.valueTextEl;
+        resizeScale = this.valueResizeScale;
       } else {
-        this.unitsResizeScale = resizeScale;
-        this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+        el = this.unitsTextEl;
+        resizeScale = this.unitsResizeScale;
       }
+
+      const { width, height } = el.nativeElement.getBoundingClientRect();
+      if (width === 0 || height === 0) return;
+      const oldScale = resizeScale;
+      const availableWidth = this.dims.width;
+      const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+      let resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+      let resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+      resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
       
-      this.cd.markForCheck();
-      setTimeout(() => { this.scaleText(element); });
-    }
+      if (resizeScale !== oldScale) {
+        if (element === 'value') {
+          this.valueResizeScale = resizeScale;
+          this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+        } else {
+          this.unitsResizeScale = resizeScale;
+          this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+        }
+        
+        this.cd.markForCheck();
+        setTimeout(() => { this.scaleText(element); });
+      }
+    });
   }
 
   onClick(): void {

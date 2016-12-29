@@ -31,7 +31,10 @@ import { ColorHelper } from '../common/color.helper';
         [fill]="colors.getColor(valueArc.data.value)"
         [data]="valueArc.data"
         [animate]="true"
-        (select)="select.emit($event)">
+        [isActive]="isActive"
+        (select)="select.emit($event)"
+        (activate)="activate.emit($event)"
+        (deactivate)="deactivate.emit($event)" >
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,6 +45,9 @@ export class GaugeArcComponent {
   @Input() valueArc: any;
   @Input() cornerRadius: any;
   @Input() colors: ColorHelper;
+  @Input() isActive: boolean = false;
 
   @Output() select = new EventEmitter();
+  @Output() activate = new EventEmitter();
+  @Output() deactivate = new EventEmitter();
 }

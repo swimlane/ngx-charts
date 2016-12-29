@@ -4,7 +4,9 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter
 } from '@angular/core';
 
 import d3 from '../d3';
@@ -17,7 +19,12 @@ import { ColorHelper } from '../common/color.helper';
   template: `
     <ngx-charts-chart
       [view]="[width, height]"
-      [showLegend]="false">
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      [activeEntries]="activeEntries"
+      (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)">
       <svg:g [attr.transform]="transform" class="gauge chart">
         <svg:g *ngFor="let arc of arcs" [attr.transform]="rotation">
           <svg:g ngx-charts-gauge-arc
@@ -25,7 +32,10 @@ import { ColorHelper } from '../common/color.helper';
             [valueArc]="arc.valueArc"
             [cornerRadius]="cornerRadius"
             [colors]="colors"
-            (select)="onClick($event)">
+            [isActive]="isActive(arc.valueArc.data)"
+            (select)="onClick($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)">
           </svg:g>
         </svg:g>
 
@@ -56,6 +66,7 @@ import { ColorHelper } from '../common/color.helper';
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
 
+  @Input() legend = false;
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() units: string;
@@ -65,7 +76,10 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() showAxis: boolean = true;
   @Input() startAngle: number = -120;
   @Input() angleSpan: number = 240;
-  @Input() schemeType: string = 'ordinal';
+  @Input() activeEntries: any[] = [];
+
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('textEl') textEl: ElementRef;
 
@@ -86,6 +100,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   cornerRadius: number = 10;
   arcs: any[];
   displayValue: string;
+  legendOptions: any;
 
   ngAfterViewInit(): void {
     super.ngAfterViewInit();
@@ -110,7 +125,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
-        margins: this.margin
+        margins: this.margin,
+        showLegend: this.legend
       });
 
       this.domain = this.getDomain();
@@ -123,6 +139,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       this.arcs = this.getArcs();
 
       this.setColors();
+      this.legendOptions = this.getLegendOptions();
 
       let xOffset = this.margin[3] + this.dims.width / 2;
       let yOffset = this.margin[0] + this.dims.height / 2;
@@ -216,25 +233,66 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   scaleText(): void {
-    const { width } = this.textEl.nativeElement.getBoundingClientRect();
-    if (width === 0) return;
+    this.zone.run(() => {
+      const { width } = this.textEl.nativeElement.getBoundingClientRect();
+      if (width === 0) return;
 
-    const oldScale = this.resizeScale;
-    const availableSpace = this.textRadius;
-    this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+      const oldScale = this.resizeScale;
+      const availableSpace = this.textRadius;
+      this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
 
-    if (this.resizeScale !== oldScale) {
-      this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
-      this.cd.markForCheck();
-      setTimeout(() => { this.scaleText(); });
-    }
+      if (this.resizeScale !== oldScale) {
+        this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
+        this.cd.markForCheck();
+        setTimeout(() => { this.scaleText(); });
+      }
+    });
   }
 
   onClick(data): void {
     this.select.emit(data);
   }
 
+  getLegendOptions() {
+    return {
+      scaleType: 'ordinal',
+      colors: this.colors,
+      domain: this.domain
+    };    
+  }
+
   setColors(): void {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+  }
+
+  onActivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
+    if (idx > -1) {
+      return;
+    }
+
+    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activate.emit({ value: item, entries: this.activeEntries });
+  }
+
+  onDeactivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: event, entries: this.activeEntries });
+  }
+
+  isActive(entry): boolean {
+    if(!this.activeEntries) return false;
+    let item = this.activeEntries.find(d => {
+      return entry.name === d.name && entry.series === d.series;
+    });
+    return item !== undefined;
   }
 }
