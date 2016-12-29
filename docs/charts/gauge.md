@@ -9,6 +9,7 @@
 | results       | object[] |               | the chart data                                                                                                  |
 | scheme        | object   |               | the color scheme of the chart                                                                                   |
 | customColors  | object   |               | custom colors for the chart. Used to override a color for a specific value                                      |
+| legend        | boolean  | false         | show or hide the legend                                                                                         |
 | min           | number   | 0             | starting point of the scale                                                                                     |
 | max           | number   | 100           | ending point of the scale                                                                                       |
 | units         | string   |               | text to display under the value                                                                                 |
@@ -22,6 +23,8 @@
 | Property     | Description                              |
 |--------------|------------------------------------------|
 | select       | click event                              |
+| activate     | element activation event (mouse enter)   |
+| deactivate   | element deactivation event (mouse leave) |
 
 # Data Format
 The data format is single series:

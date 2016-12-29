@@ -5,7 +5,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
-
+import { formatLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -34,7 +34,11 @@ import { ColorHelper } from '../common/color.helper';
         [isActive]="isActive"
         (select)="select.emit($event)"
         (activate)="activate.emit($event)"
-        (deactivate)="deactivate.emit($event)" >
+        (deactivate)="deactivate.emit($event)"
+        ngx-tooltip
+        [tooltipPlacement]="'top'"
+        [tooltipType]="'tooltip'"
+        [tooltipTitle]="tooltipText(valueArc)">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -50,4 +54,14 @@ export class GaugeArcComponent {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+
+  tooltipText(arc) {
+    const label = formatLabel(arc.data.name);
+    const val = formatLabel(arc.data.value);
+
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">${val}</span>
+    `;
+  }
 }
