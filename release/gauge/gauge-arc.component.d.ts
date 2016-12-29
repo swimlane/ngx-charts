@@ -5,5 +5,9 @@ export declare class GaugeArcComponent {
     valueArc: any;
     cornerRadius: any;
     colors: ColorHelper;
+    isActive: boolean;
     select: EventEmitter<{}>;
+    activate: EventEmitter<{}>;
+    deactivate: EventEmitter<{}>;
+    tooltipText(arc: any): string;
 }

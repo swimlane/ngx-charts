@@ -45,6 +45,7 @@ export class Wrapper_SeriesHorizontal {
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
+  /*private*/ _expr_8:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -60,6 +61,7 @@ export class Wrapper_SeriesHorizontal {
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
+    this._expr_8 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -130,6 +132,14 @@ export class Wrapper_SeriesHorizontal {
       this.context.activeEntries = currValue;
       this._changes['activeEntries'] = new import1.SimpleChange(this._expr_7,currValue);
       this._expr_7 = currValue;
+    }
+  }
+  check_seriesName(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
+      this._changed = true;
+      this.context.seriesName = currValue;
+      this._changes['seriesName'] = new import1.SimpleChange(this._expr_8,currValue);
+      this._expr_8 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {

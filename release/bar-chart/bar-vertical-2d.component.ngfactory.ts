@@ -687,6 +687,8 @@ class View_BarVertical2DComponent3 extends import2.AppView<any> {
     this._SeriesVerticalComponent_0_3.check_gradient(currVal_0_0_5,throwOnChange,false);
     const currVal_0_0_6:any = this.parentView.context.activeEntries;
     this._SeriesVerticalComponent_0_3.check_activeEntries(currVal_0_0_6,throwOnChange,false);
+    const currVal_0_0_7:any = this.context.$implicit.name;
+    this._SeriesVerticalComponent_0_3.check_seriesName(currVal_0_0_7,throwOnChange,false);
     if (this._SeriesVerticalComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     const currVal_4:any = this.parentView.context.groupTransform(this.context.$implicit);
     if (import3.checkBinding(throwOnChange,this._expr_4,currVal_4)) {

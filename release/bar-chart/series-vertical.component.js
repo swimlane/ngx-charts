@@ -90,7 +90,11 @@ var SeriesVerticalComponent = (function () {
                     bar.gradientStops = _this.colors.getLinearGradientStops(bar.offset1, bar.offset0);
                 }
             }
-            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + formattedLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
+            var tooltipLabel = formattedLabel;
+            if (_this.seriesName) {
+                tooltipLabel = _this.seriesName + " \u2022 " + formattedLabel;
+            }
+            bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
         });
     };
@@ -137,6 +141,7 @@ var SeriesVerticalComponent = (function () {
         'colors': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
+        'seriesName': [{ type: core_1.Input },],
         'select': [{ type: core_1.Output },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],

@@ -75,37 +75,39 @@ var LinearGaugeComponent = (function (_super) {
     };
     LinearGaugeComponent.prototype.scaleText = function (element) {
         var _this = this;
-        var el;
-        var resizeScale;
-        if (element === 'value') {
-            el = this.valueTextEl;
-            resizeScale = this.valueResizeScale;
-        }
-        else {
-            el = this.unitsTextEl;
-            resizeScale = this.unitsResizeScale;
-        }
-        var _a = el.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
-        if (width === 0 || height === 0)
-            return;
-        var oldScale = resizeScale;
-        var availableWidth = this.dims.width;
-        var availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-        var resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-        var resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
-        resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-        if (resizeScale !== oldScale) {
+        this.zone.run(function () {
+            var el;
+            var resizeScale;
             if (element === 'value') {
-                this.valueResizeScale = resizeScale;
-                this.valueTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
+                el = _this.valueTextEl;
+                resizeScale = _this.valueResizeScale;
             }
             else {
-                this.unitsResizeScale = resizeScale;
-                this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
+                el = _this.unitsTextEl;
+                resizeScale = _this.unitsResizeScale;
             }
-            this.cd.markForCheck();
-            setTimeout(function () { _this.scaleText(element); });
-        }
+            var _a = el.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
+            if (width === 0 || height === 0)
+                return;
+            var oldScale = resizeScale;
+            var availableWidth = _this.dims.width;
+            var availableHeight = Math.max(_this.dims.height / 2 - 15, 0);
+            var resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+            var resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+            resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+            if (resizeScale !== oldScale) {
+                if (element === 'value') {
+                    _this.valueResizeScale = resizeScale;
+                    _this.valueTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
+                }
+                else {
+                    _this.unitsResizeScale = resizeScale;
+                    _this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
+                }
+                _this.cd.markForCheck();
+                setTimeout(function () { _this.scaleText(element); });
+            }
+        });
     };
     LinearGaugeComponent.prototype.onClick = function () {
         this.select.emit({

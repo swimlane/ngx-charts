@@ -51,7 +51,11 @@ export class Wrapper_GaugeComponent {
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
   /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
+  /*private*/ _expr_14:any;
   subscription0:any;
+  subscription1:any;
+  subscription2:any;
   constructor(p0:any,p1:any,p2:any) {
     this._changed = false;
     this._changes = {};
@@ -69,12 +73,16 @@ export class Wrapper_GaugeComponent {
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
     this._expr_12 = import1.UNINITIALIZED;
+    this._expr_13 = import1.UNINITIALIZED;
+    this._expr_14 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
   ngOnDestroy():void {
     this.context.ngOnDestroy();
     (this.subscription0 && this.subscription0.unsubscribe());
+    (this.subscription1 && this.subscription1.unsubscribe());
+    (this.subscription2 && this.subscription2.unsubscribe());
   }
   check_results(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_0,currValue))) {
@@ -116,68 +124,84 @@ export class Wrapper_GaugeComponent {
       this._expr_4 = currValue;
     }
   }
-  check_min(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_legend(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
       this._changed = true;
-      this.context.min = currValue;
-      this._changes['min'] = new import1.SimpleChange(this._expr_5,currValue);
+      this.context.legend = currValue;
+      this._changes['legend'] = new import1.SimpleChange(this._expr_5,currValue);
       this._expr_5 = currValue;
     }
   }
-  check_max(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_min(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_6,currValue))) {
       this._changed = true;
-      this.context.max = currValue;
-      this._changes['max'] = new import1.SimpleChange(this._expr_6,currValue);
+      this.context.min = currValue;
+      this._changes['min'] = new import1.SimpleChange(this._expr_6,currValue);
       this._expr_6 = currValue;
     }
   }
-  check_units(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_max(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_7,currValue))) {
       this._changed = true;
-      this.context.units = currValue;
-      this._changes['units'] = new import1.SimpleChange(this._expr_7,currValue);
+      this.context.max = currValue;
+      this._changes['max'] = new import1.SimpleChange(this._expr_7,currValue);
       this._expr_7 = currValue;
     }
   }
-  check_bigSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_units(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
       this._changed = true;
-      this.context.bigSegments = currValue;
-      this._changes['bigSegments'] = new import1.SimpleChange(this._expr_8,currValue);
+      this.context.units = currValue;
+      this._changes['units'] = new import1.SimpleChange(this._expr_8,currValue);
       this._expr_8 = currValue;
     }
   }
-  check_smallSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_bigSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_9,currValue))) {
       this._changed = true;
-      this.context.smallSegments = currValue;
-      this._changes['smallSegments'] = new import1.SimpleChange(this._expr_9,currValue);
+      this.context.bigSegments = currValue;
+      this._changes['bigSegments'] = new import1.SimpleChange(this._expr_9,currValue);
       this._expr_9 = currValue;
     }
   }
-  check_showAxis(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_smallSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_10,currValue))) {
       this._changed = true;
-      this.context.showAxis = currValue;
-      this._changes['showAxis'] = new import1.SimpleChange(this._expr_10,currValue);
+      this.context.smallSegments = currValue;
+      this._changes['smallSegments'] = new import1.SimpleChange(this._expr_10,currValue);
       this._expr_10 = currValue;
     }
   }
-  check_startAngle(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_showAxis(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_11,currValue))) {
       this._changed = true;
-      this.context.startAngle = currValue;
-      this._changes['startAngle'] = new import1.SimpleChange(this._expr_11,currValue);
+      this.context.showAxis = currValue;
+      this._changes['showAxis'] = new import1.SimpleChange(this._expr_11,currValue);
       this._expr_11 = currValue;
     }
   }
-  check_angleSpan(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_startAngle(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_12,currValue))) {
       this._changed = true;
-      this.context.angleSpan = currValue;
-      this._changes['angleSpan'] = new import1.SimpleChange(this._expr_12,currValue);
+      this.context.startAngle = currValue;
+      this._changes['startAngle'] = new import1.SimpleChange(this._expr_12,currValue);
       this._expr_12 = currValue;
+    }
+  }
+  check_angleSpan(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
+      this._changed = true;
+      this.context.angleSpan = currValue;
+      this._changes['angleSpan'] = new import1.SimpleChange(this._expr_13,currValue);
+      this._expr_13 = currValue;
+    }
+  }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_14,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_14,currValue);
+      this._expr_14 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -195,9 +219,11 @@ export class Wrapper_GaugeComponent {
     var result:boolean = true;
     return result;
   }
-  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean):void {
+  subscribe(view:import2.AppView<any>,_eventHandler:any,emit0:boolean,emit1:boolean,emit2:boolean):void {
     this._eventHandler = _eventHandler;
     if (emit0) { (this.subscription0 = this.context.select.subscribe(_eventHandler.bind(view,'select'))); }
+    if (emit1) { (this.subscription1 = this.context.activate.subscribe(_eventHandler.bind(view,'activate'))); }
+    if (emit2) { (this.subscription2 = this.context.deactivate.subscribe(_eventHandler.bind(view,'deactivate'))); }
   }
 }
 var renderType_GaugeComponent_Host:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,([] as any[]),{});
@@ -323,6 +349,8 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
     this._text_18 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_19 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
     this._viewQuery_textEl_0.reset([new import9.ElementRef(this._el_9)]);
     this.context.textEl = this._viewQuery_textEl_0.first;
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
@@ -347,7 +375,7 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
       this._text_18,
       this._text_19
     ]
-    ),(null as any));
+    ),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -362,8 +390,12 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_1_0_0:any = this._arr_31(this.context.width,this.context.height);
     this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
-    const currVal_1_0_1:any = false;
+    const currVal_1_0_1:any = this.context.legend;
     this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
+    const currVal_1_0_2:any = this.context.legendOptions;
+    this._ChartComponent_1_6.check_legendOptions(currVal_1_0_2,throwOnChange,false);
+    const currVal_1_0_3:any = this.context.activeEntries;
+    this._ChartComponent_1_6.check_activeEntries(currVal_1_0_3,throwOnChange,false);
     if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_5_0_0:any = this.context.arcs;
     this._NgFor_5_6.check_ngForOf(currVal_5_0_0,throwOnChange,false);
@@ -420,6 +452,23 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
     if ((nodeIndex == 7)) { return new View_GaugeComponent2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
     return (null as any);
   }
+  handleEvent_1(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'legendLabelActivate')) {
+      const pd_sub_1:any = ((<any>this.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'legendLabelDeactivate')) {
+      const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
+    }
+    return result;
+  }
 }
 class View_GaugeComponent1 extends import2.AppView<any> {
   _el_0:any;
@@ -443,8 +492,8 @@ class View_GaugeComponent1 extends import2.AppView<any> {
     this._text_3 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_2.create(this._GaugeArcComponent_2_3.context);
     this._text_4 = this.renderer.createText(this._el_0,'\n        ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_2));
-    this._GaugeArcComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
+    this._GaugeArcComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true,true,true);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
       this._text_1,
@@ -468,6 +517,8 @@ class View_GaugeComponent1 extends import2.AppView<any> {
     this._GaugeArcComponent_2_3.check_cornerRadius(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.colors;
     this._GaugeArcComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
+    const currVal_2_0_4:any = this.parentView.context.isActive(this.context.$implicit.valueArc.data);
+    this._GaugeArcComponent_2_3.check_isActive(currVal_2_0_4,throwOnChange,false);
     if (this._GaugeArcComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     const currVal_7:any = this.parentView.context.rotation;
     if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
@@ -489,6 +540,14 @@ class View_GaugeComponent1 extends import2.AppView<any> {
     if ((eventName == 'select')) {
       const pd_sub_0:any = ((<any>this.parentView.context.onClick($event)) !== false);
       result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'activate')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'deactivate')) {
+      const pd_sub_2:any = ((<any>this.parentView.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
     }
     return result;
   }

@@ -1,8 +1,9 @@
-import { ElementRef, AfterViewInit } from '@angular/core';
+import { ElementRef, AfterViewInit, EventEmitter } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 export declare class GaugeComponent extends BaseChartComponent implements AfterViewInit {
+    legend: boolean;
     min: number;
     max: number;
     units: string;
@@ -12,7 +13,9 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     showAxis: boolean;
     startAngle: number;
     angleSpan: number;
-    schemeType: string;
+    activeEntries: any[];
+    activate: EventEmitter<any>;
+    deactivate: EventEmitter<any>;
     textEl: ElementRef;
     dims: ViewDimensions;
     domain: any[];
@@ -29,6 +32,7 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     cornerRadius: number;
     arcs: any[];
     displayValue: string;
+    legendOptions: any;
     ngAfterViewInit(): void;
     update(): void;
     getArcs(): any[];
@@ -38,5 +42,13 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     getDisplayValue(): string;
     scaleText(): void;
     onClick(data: any): void;
+    getLegendOptions(): {
+        scaleType: string;
+        colors: ColorHelper;
+        domain: any[];
+    };
     setColors(): void;
+    onActivate(item: any): void;
+    onDeactivate(item: any): void;
+    isActive(entry: any): boolean;
 }
