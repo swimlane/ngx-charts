@@ -7,7 +7,7 @@ import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
 @Component({
-  selector: 'g[ngx-charts-circle-ceries]',
+  selector: 'g[ngx-charts-circle-series]',
   template: `
     <svg:g *ngFor="let circle of circles">
       <defs>

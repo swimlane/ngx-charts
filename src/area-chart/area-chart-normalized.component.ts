@@ -77,7 +77,7 @@ import { id } from '../utils/id';
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
-            <svg:g ngx-charts-circle-ceries
+            <svg:g ngx-charts-circle-series
               type="stacked"
               [xScale]="xScale"
               [yScale]="yScale"
