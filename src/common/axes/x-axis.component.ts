@@ -50,10 +50,10 @@ export class XAxisComponent implements OnChanges {
   @Input() showLabel;
   @Input() labelText;
   @Input() xAxisTickInterval;
+  @Input() xAxisTickCount: any;
 
   @Output() dimensionsChanged = new EventEmitter();
 
-  xAxisTickCount: any;
   xAxisClassName: string = 'x axis';
   xOrient: string = 'bottom';
   tickArguments: any;

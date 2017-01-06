@@ -49,11 +49,10 @@ export class YAxisComponent implements OnChanges {
   @Input() showLabel;
   @Input() labelText;
   @Input() yAxisTickInterval;
-
+  @Input() yAxisTickCount: any;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
-  yAxisTickCount: any;
   tickArguments: any;
   offset: any;
   transform: any;
