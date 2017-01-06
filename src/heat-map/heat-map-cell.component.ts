@@ -20,7 +20,7 @@ import d3 from '../d3';
           [color]="fill"
           orientation="vertical"
           [name]="gradientId"
-          [stops]="circle.gradientStops"
+          [stops]="gradientStops"
         />
       </defs>
       <svg:rect
