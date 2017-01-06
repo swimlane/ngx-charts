@@ -311,6 +311,8 @@ import './demo.scss';
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
             [yAxisLabel]="yAxisLabel"
+            [xInnerPadding]="xInnerPadding"
+            [yInnerPadding]="yInnerPadding"
             (select)="select($event)">
           </ngx-charts-heat-map>
           <ngx-charts-tree-map
@@ -564,6 +566,16 @@ import './demo.scss';
             <input type="number" [(ngModel)]="gaugeMax"><br />
           </div>
 
+          <div *ngIf="chart.options.includes('xInnerPadding')">
+            <label>X Inner padding value:</label><br />
+            <input type="number" [(ngModel)]="xInnerPadding" max="1" min="0" step="0.1"><br />
+          </div>
+
+          <div *ngIf="chart.options.includes('yInnerPadding')">
+            <label>Y innrer padding value:</label><br />
+            <input type="number" [(ngModel)]="yInnerPadding" max="1" min="0" step="0.1"><br />
+          </div>
+
           <div *ngIf="chart.options.includes('value')">
             <label>Value:</label><br />
             <input type="number" [(ngModel)]="gaugeValue"><br />
@@ -641,6 +653,8 @@ export class AppComponent implements OnInit {
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';
   showGridLines = true;
+  xInnerPadding = 0.1;
+  yInnerPadding = 0.1;
 
   // line interpolation
   curveType: string = 'Linear';

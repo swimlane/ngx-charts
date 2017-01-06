@@ -66,6 +66,8 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
+  @Input() xInnerPadding: number = 0.1;
+  @Input() yInnerPadding: number = 0.1;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -163,14 +165,14 @@ export class HeatMapComponent extends BaseChartComponent {
   getXScale(): any {
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
-      .paddingInner(0.1)
+      .paddingInner(this.xInnerPadding)
       .domain(this.xDomain);
   }
 
   getYScale(): any {
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
-      .paddingInner(0.1)
+      .paddingInner(this.yInnerPadding)
       .domain(this.yDomain);
   }
 

@@ -16,6 +16,8 @@
 | xAxisLabel    | string   |               | the x axis label text                                                                                           |
 | yAxisLabel    | string   |               | the y axis label text                                                                                           |
 | gradient      | boolean  | false         | fill elements with a gradient instead of a solid color                                                          |
+| xInnerPadding | number   | 0.1           | the x axis inner padding                                                                                           |
+| yInnerPadding | number   | 0.1           | the y axis inner padding                                                                                           |
 
 # Outputs
 | Property     | Description                              |
