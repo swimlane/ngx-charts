@@ -74,7 +74,7 @@ import d3 from '../d3';
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
-            <svg:g ngx-charts-circle-ceries
+            <svg:g ngx-charts-circle-series
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
