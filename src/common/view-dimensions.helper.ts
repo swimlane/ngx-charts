@@ -18,9 +18,8 @@ export function calculateViewDimensions({
     } else {
       columns -= 1;
     }
+    chartWidth = chartWidth * columns / 12;
   }
-
-  chartWidth = chartWidth * columns / 12;
 
   chartWidth = chartWidth - margins[1] - margins[3];
 
