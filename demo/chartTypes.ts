@@ -83,7 +83,10 @@ let chartGroups = [
         name: 'Pie Chart',
         selector: 'pie-chart',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'explodeSlices', 'showLabels']
+        options: [
+          'colorScheme', 'gradient', 'showLegend', 'doughnut', 'innerRadiusFraction',
+          'explodeSlices', 'showLabels'
+        ]
       },
       {
         name: 'Advanced Pie Chart',
