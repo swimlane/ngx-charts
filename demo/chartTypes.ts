@@ -113,6 +113,16 @@ let chartGroups = [
         ]
       },
       {
+        name: 'Line Chart with Ranges',
+        selector: 'line-chart-with-ranges',
+        inputFormat: 'multiSeries',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+        ]
+      },
+      {
         name: 'Area Chart',
         selector: 'area-chart',
         inputFormat: 'multiSeries',

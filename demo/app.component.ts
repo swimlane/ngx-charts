@@ -221,6 +221,28 @@ import './demo.scss';
             [curve]="curve"
             (select)="select($event)">
           </ngx-charts-line-chart>
+          <ngx-charts-line-chart
+            *ngIf="chartType === 'line-chart-with-ranges'"
+            [view]="view"
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="dateDataWithRange"
+            [legend]="showLegend"
+            (legendLabelClick)="onLegendLabelClick($event)"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [autoScale]="autoScale"
+            [timeline]="timeline"
+            [showGridLines]="showGridLines"
+            [curve]="curve"
+            (select)="select($event)">
+          </ngx-charts-line-chart>          
           <ngx-charts-force-directed-graph
             *ngIf="chartType === 'force-directed-graph'"
             class="chart-container"
@@ -399,7 +421,8 @@ import './demo.scss';
         <div [hidden]="!dataVisable" style="margin-left: 10px;">
           <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
           <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
-          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>
+          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
+          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
           <div>
             <label>
               <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
@@ -623,8 +646,10 @@ export class AppComponent implements OnInit {
   single: any[];
   multi: any[];
   dateData: any[];
+  dateDataWithRange: any[];
   graph: { links: any[], nodes: any[] };
   linearScale: boolean = false;
+  range: boolean = false;
 
   view: any[];
   width: number = 700;
@@ -686,7 +711,8 @@ export class AppComponent implements OnInit {
       graph: generateGraph(50)
     });
 
-    this.dateData = generateData(5);
+    this.dateData = generateData(5, false);
+    this.dateDataWithRange = generateData(5, true);
     this.setColorScheme('cool');
   }
 
@@ -790,9 +816,12 @@ export class AppComponent implements OnInit {
     this.chartType = chartSelector;
 
     this.linearScale = this.chartType === 'line-chart' ||
+      this.chartType === 'line-chart-with-ranges' ||
       this.chartType === 'area-chart' ||
       this.chartType === 'area-chart-normalized' ||
       this.chartType === 'area-chart-stacked';
+
+    this.range = chartSelector.indexOf('range') >= 0;
 
     for (let group of this.chartGroups) {
       for (let chart of group.charts) {

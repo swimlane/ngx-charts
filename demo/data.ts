@@ -167,13 +167,14 @@ export function generateGraph(nodeCount: number) {
   return { links, nodes };
 }
 
-export function generateData(seriesLength) {
+export function generateData(seriesLength: number, includeMinMaxRange: boolean): any[] {
   let results = [];
 
-  let domain = [];
+  let domain: Date[] = []; // array of time stamps in milliseconds
 
   for (let j = 0; j < 5; j++) {
-    domain.push(Math.floor(1473700105009 + Math.random() * 1000000000));
+    // random dates between Sep 12, 2016 and Sep 24, 2016
+    domain.push(new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)));
   }
 
   for (let i = 0; i < seriesLength; i++) {
@@ -185,12 +186,23 @@ export function generateData(seriesLength) {
 
     for (let j = 0; j < domain.length; j++) {
       let value = Math.floor(2000 + Math.random() * 5000);
-      // let name = Math.floor(1473700105009 + Math.random() * 1000000000);
-      let name = domain[j];
-      series.series.push({
-        value,
-        name: new Date(name)
-      });
+      // let timestamp = Math.floor(1473700105009 + Math.random() * 1000000000);
+      let timestamp = domain[j];
+      if (includeMinMaxRange) {
+        const errorMargin = 0.02 + Math.random()*0.08;
+
+        series.series.push({
+          value,
+          name: timestamp,
+          min: Math.floor(value * (1-errorMargin)),
+          max: Math.ceil(value * (1+errorMargin))
+        });
+    } else {
+        series.series.push({
+          value,
+          name: timestamp
+        });
+      }
     }
 
     results.push(series);

@@ -21,7 +21,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
           [name]="gradientId"
           [stops]="gradientStops"
         />
-      </defs>
+      </defs>ngx-charts-line
       <svg:g ngx-charts-area
         class="line-highlight"
         [data]="data"
@@ -42,6 +42,15 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />
+     <svg:g ngx-charts-line
+        class="line-series"
+        [data]="data"
+        [path]="outerPath"
+        [fill]="hasGradient ? gradientUrl : colors.getColor(data.name)"
+        [class.active]="isActive(data)"
+        [class.inactive]="isInactive(data)"
+        fillOpacity="0.25"
+      />
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -57,6 +66,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
 
   path: string;
+  outerPath: string;
   areaPath: string;
   gradientId: string;
   gradientUrl: string;
@@ -73,10 +83,17 @@ export class LineSeriesComponent implements OnChanges {
 
     let line = this.getLineGenerator();
     let area = this.getAreaGenerator();
+    let range = this.getRangeGenerator();
 
     let data = this.sortData(this.data.series);
 
+//    debugger;
+    let minMax = data.filter(d => d.min || d.max);
+
+    let isRangeChart =
+
     this.path = line(data) || '';
+    this.outerPath = range(data) || '';
     this.areaPath = area(data) || '';
   }
 
@@ -97,6 +114,27 @@ export class LineSeriesComponent implements OnChanges {
       .y(d => this.yScale(d.value))
       .curve(this.curve);
   }
+
+  getRangeGenerator() {
+    console.log('Range Hit!!!');
+    return d3.area()
+        .x(d => {
+          let label = d.name;
+          let value;
+          if (this.scaleType === 'time') {
+            value = this.xScale(moment(label).toDate());
+          } else if (this.scaleType === 'linear') {
+            value = this.xScale(Number(label));
+          } else {
+            value = this.xScale(label);
+          }
+          return value;
+        })
+        .y0(d => this.yScale(d.min ? d.min : d.value))
+        .y1(d => this.yScale(d.max ? d.max : d.value))
+        .curve(this.curve);
+  }
+
 
   getAreaGenerator() {
     let xProperty = (d) => {
