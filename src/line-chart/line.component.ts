@@ -18,9 +18,10 @@ import {
       [@animationState]="'active'"
       class="line"
       [attr.d]="path"
-      fill="none"
+      [attr.fill]="fill"
       [attr.stroke]="stroke"
       stroke-width="1.5px"
+      [attr.fill-opacity]="fillOpacity"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,6 +44,8 @@ export class LineComponent {
   @Input() path;
   @Input() stroke;
   @Input() data;
+  @Input() fill;
+  @Input() fillOpacity = 0.0;
 
   @Output() select = new EventEmitter();
 

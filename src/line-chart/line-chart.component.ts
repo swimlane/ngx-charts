@@ -260,8 +260,18 @@ export class LineChartComponent extends BaseChartComponent {
 
     for (let results of this.results) {
       for (let d of results.series){
-        if (!domain.includes(d.value)) {
+        if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
+        }
+        if (d.min) {
+          if (domain.indexOf(d.min) < 0) {
+            domain.push(d.min);
+          }
+        }
+        if (d.max) {
+          if (domain.indexOf(d.max) < 0) {
+            domain.push(d.max);
+          }
         }
       }
     }
