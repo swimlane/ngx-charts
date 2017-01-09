@@ -174,7 +174,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     return this.value.toLocaleString();
   }
 
-  scaleText(element): void {
+  scaleText(element, repeat: boolean = true): void {
     this.zone.run(() => {
       let el;
       let resizeScale;
@@ -204,6 +204,9 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
           this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
         }
         this.cd.markForCheck();        
+        if (repeat) {
+          setTimeout(() => { this.scaleText(element, false); }, 50); 
+        }
       }
     });
   }

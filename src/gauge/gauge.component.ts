@@ -232,7 +232,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     return value.toLocaleString();
   }
 
-  scaleText(): void {
+  scaleText(repeat: boolean = true): void {
     this.zone.run(() => {
       const { width } = this.textEl.nativeElement.getBoundingClientRect();
       const oldScale = this.resizeScale;
@@ -247,6 +247,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       if (this.resizeScale !== oldScale) {
         this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
         this.cd.markForCheck();
+        if (repeat) {
+          setTimeout(() => this.scaleText(false), 50);
+        }
       }
     });
   }
