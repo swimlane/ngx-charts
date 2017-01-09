@@ -346,6 +346,7 @@ import './demo.scss';
             [showAxis]="gaugeShowAxis"
             [bigSegments]="gaugeLargeSegments"
             [smallSegments]="gaugeSmallSegments"
+            [margin]="gaugeMargin ? [Number(gaugeMarginLeft), Number(gaugeMarginTop), Number(gaugeMarginRight), Number(gaugeMarginBottom)] : null"
             (select)="select($event)"
             (legendLabelClick)="onLegendLabelClick($event)">
           </ngx-charts-gauge>
@@ -605,6 +606,20 @@ import './demo.scss';
             <label>Units:</label><br />
             <input type="text" [(ngModel)]="gaugeUnits"><br />
           </div>
+
+          <div *ngIf="chart.options.includes('margin')">
+            <label>
+              <input type="checkbox" [checked]="gaugeMargin" (change)="gaugeMargin = $event.target.checked">
+              Show Margin
+            </label> <br />
+          </div>
+
+          <div *ngIf="chart.options.includes('margin') && gaugeMargin">
+            <label>Left</label><input type="text" [(ngModel)]="gaugeMarginLeft"><br />
+            <label>Top:</label><input type="text" [(ngModel)]="gaugeMarginTop"><br />
+            <label>Right</label><input type="text" [(ngModel)]="gaugeMarginRight"><br />
+            <label>Left:</label><input type="text" [(ngModel)]="gaugeMarginBottom"><br />
+          </div>
         </div>
         <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
         </div>
@@ -675,6 +690,11 @@ export class AppComponent implements OnInit {
   gaugeShowAxis: boolean = true;
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
+  gaugeMargin: boolean = false;
+  gaugeMarginLeft: number = 40;
+  gaugeMarginRight: number = 40;
+  gaugeMarginTop: number = 40;
+  gaugeMarginBottom: number = 40;
 
   constructor() {
     Object.assign(this, {
@@ -853,4 +873,9 @@ export class AppComponent implements OnInit {
   onLegendLabelClick(entry) {
     console.log('Legend clicked', entry);
   }
+
+  Number(value: any):  number {
+    return Number(value)
+  }
+
 }
