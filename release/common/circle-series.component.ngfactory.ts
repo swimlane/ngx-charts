@@ -161,7 +161,7 @@ class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
     super(View_CircleSeriesComponent_Host0,renderType_CircleSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-circle-ceries',''),rootSelector,(null as any));
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-circle-series',''),rootSelector,(null as any));
     this.compView_0 = new View_CircleSeriesComponent0(this.viewUtils,this,0,this._el_0);
     this._CircleSeriesComponent_0_3 = new Wrapper_CircleSeriesComponent();
     this.compView_0.create(this._CircleSeriesComponent_0_3.context);
@@ -184,7 +184,7 @@ class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const CircleSeriesComponentNgFactory:import8.ComponentFactory<import0.CircleSeriesComponent> = new import8.ComponentFactory<import0.CircleSeriesComponent>('g[ngx-charts-circle-ceries]',View_CircleSeriesComponent_Host0,import0.CircleSeriesComponent);
+export const CircleSeriesComponentNgFactory:import8.ComponentFactory<import0.CircleSeriesComponent> = new import8.ComponentFactory<import0.CircleSeriesComponent>('g[ngx-charts-circle-series]',View_CircleSeriesComponent_Host0,import0.CircleSeriesComponent);
 const styles_CircleSeriesComponent:any[] = ([] as any[]);
 var renderType_CircleSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeriesComponent,{});
 export class View_CircleSeriesComponent0 extends import2.AppView<import0.CircleSeriesComponent> {

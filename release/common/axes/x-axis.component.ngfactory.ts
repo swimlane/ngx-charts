@@ -36,6 +36,7 @@ export class Wrapper_XAxisComponent {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
+  /*private*/ _expr_7:any;
   subscription0:any;
   constructor() {
     this._changed = false;
@@ -48,6 +49,7 @@ export class Wrapper_XAxisComponent {
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
+    this._expr_7 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -108,6 +110,14 @@ export class Wrapper_XAxisComponent {
       this.context.xAxisTickInterval = currValue;
       this._changes['xAxisTickInterval'] = new import1.SimpleChange(this._expr_6,currValue);
       this._expr_6 = currValue;
+    }
+  }
+  check_xAxisTickCount(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_7,currValue))) {
+      this._changed = true;
+      this.context.xAxisTickCount = currValue;
+      this._changes['xAxisTickCount'] = new import1.SimpleChange(this._expr_7,currValue);
+      this._expr_7 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {

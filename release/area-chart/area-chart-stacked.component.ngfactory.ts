@@ -818,7 +818,7 @@ class View_AreaChartStackedComponent4 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-circle-ceries','','type','stacked'),(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-circle-series','','type','stacked'),(null as any));
     this.compView_2 = new import31.View_CircleSeriesComponent0(this.viewUtils,this,2,this._el_2);
     this._CircleSeriesComponent_2_3 = new import31.Wrapper_CircleSeriesComponent();
     this.compView_2.create(this._CircleSeriesComponent_2_3.context);

@@ -58,8 +58,8 @@ var LinearGaugeComponent = (function (_super) {
             _this.transformLine = "translate(" + (_this.margin[3] + _this.valueScale(_this.previousValue)) + ", " + yOffset + ")";
             _this.valueTranslate = "translate(0, -15)";
             _this.unitsTranslate = "translate(0, 15)";
-            _this.scaleText('value');
-            _this.scaleText('units');
+            setTimeout(function () { return _this.scaleText('value'); }, 50);
+            setTimeout(function () { return _this.scaleText('units'); }, 50);
         });
     };
     LinearGaugeComponent.prototype.getValueDomain = function () {
@@ -105,7 +105,6 @@ var LinearGaugeComponent = (function (_super) {
                     _this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
                 }
                 _this.cd.markForCheck();
-                setTimeout(function () { _this.scaleText(element); });
             }
         });
     };

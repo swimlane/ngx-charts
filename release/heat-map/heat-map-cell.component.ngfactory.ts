@@ -308,7 +308,7 @@ class View_HeatMapCellComponent1 extends import2.AppView<any> {
     this._SvgLinearGradientComponent_2_3.check_color(currVal_2_0_1,throwOnChange,false);
     const currVal_2_0_2:any = this.parentView.context.gradientId;
     this._SvgLinearGradientComponent_2_3.check_name(currVal_2_0_2,throwOnChange,false);
-    const currVal_2_0_3:any = this.parentView.context.circle.gradientStops;
+    const currVal_2_0_3:any = this.parentView.context.gradientStops;
     this._SvgLinearGradientComponent_2_3.check_stops(currVal_2_0_3,throwOnChange,false);
     if (this._SvgLinearGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.internalDetectChanges(throwOnChange);

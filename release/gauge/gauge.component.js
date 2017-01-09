@@ -26,7 +26,7 @@ var GaugeComponent = (function (_super) {
         this.deactivate = new core_1.EventEmitter();
         this.resizeScale = 1;
         this.rotation = '';
-        this.textTransform = '';
+        this.textTransform = 'scale(1, 1)';
         this.cornerRadius = 10;
     }
     GaugeComponent.prototype.ngAfterViewInit = function () {
@@ -66,7 +66,7 @@ var GaugeComponent = (function (_super) {
             var yOffset = _this.margin[0] + _this.dims.height / 2;
             _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
             _this.rotation = "rotate(" + _this.startAngle + ")";
-            _this.scaleText();
+            setTimeout(function () { return _this.scaleText(); }, 50);
         });
     };
     GaugeComponent.prototype.getArcs = function () {
@@ -142,15 +142,17 @@ var GaugeComponent = (function (_super) {
         var _this = this;
         this.zone.run(function () {
             var width = _this.textEl.nativeElement.getBoundingClientRect().width;
-            if (width === 0)
-                return;
             var oldScale = _this.resizeScale;
-            var availableSpace = _this.textRadius;
-            _this.resizeScale = Math.floor((availableSpace / (width / _this.resizeScale)) * 100) / 100;
+            if (width === 0) {
+                _this.resizeScale = 1;
+            }
+            else {
+                var availableSpace = _this.textRadius;
+                _this.resizeScale = Math.floor((availableSpace / (width / _this.resizeScale)) * 100) / 100;
+            }
             if (_this.resizeScale !== oldScale) {
                 _this.textTransform = "scale(" + _this.resizeScale + ", " + _this.resizeScale + ")";
                 _this.cd.markForCheck();
-                setTimeout(function () { _this.scaleText(); });
             }
         });
     };
