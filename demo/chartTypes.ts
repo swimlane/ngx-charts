@@ -160,7 +160,7 @@ let chartGroups = [
         options: [
           'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'xInnerPadding', 'yInnerPadding'
+          'innerPadding'
         ]
       },
       {
