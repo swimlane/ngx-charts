@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"3.0.6" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"3.0.7" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -8720,7 +8720,7 @@ var GaugeArcComponent = (function () {
     GaugeArcComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-gauge-arc]',
-            template: "\n    <svg:g ngx-charts-pie-arc\n        class=\"background-arc\"\n        [startAngle]=\"0\"\n        [endAngle]=\"backgroundArc.endAngle\"\n        [innerRadius]=\"backgroundArc.innerRadius\"\n        [outerRadius]=\"backgroundArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [data]=\"backgroundArc.data\"\n        [animate]=\"false\"\n        [pointerEvents]=\"false\">\n    </svg:g>\n    <svg:g ngx-charts-pie-arc\n        [startAngle]=\"0\"\n        [endAngle]=\"valueArc.endAngle\"\n        [innerRadius]=\"valueArc.innerRadius\"\n        [outerRadius]=\"valueArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [fill]=\"colors.getColor(valueArc.data.value)\"\n        [data]=\"valueArc.data\"\n        [animate]=\"true\"\n        [isActive]=\"isActive\"\n        (select)=\"select.emit($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(valueArc)\">\n    </svg:g>\n  ",
+            template: "\n    <svg:g ngx-charts-pie-arc\n        class=\"background-arc\"\n        [startAngle]=\"0\"\n        [endAngle]=\"backgroundArc.endAngle\"\n        [innerRadius]=\"backgroundArc.innerRadius\"\n        [outerRadius]=\"backgroundArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [data]=\"backgroundArc.data\"\n        [animate]=\"false\"\n        [pointerEvents]=\"false\">\n    </svg:g>\n    <svg:g ngx-charts-pie-arc\n        [startAngle]=\"0\"\n        [endAngle]=\"valueArc.endAngle\"\n        [innerRadius]=\"valueArc.innerRadius\"\n        [outerRadius]=\"valueArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [fill]=\"colors.getColor(valueArc.data.name)\"\n        [data]=\"valueArc.data\"\n        [animate]=\"true\"\n        [isActive]=\"isActive\"\n        (select)=\"select.emit($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(valueArc)\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -9017,8 +9017,9 @@ var GaugeComponent = (function (_super) {
         var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
         return value.toLocaleString();
     };
-    GaugeComponent.prototype.scaleText = function () {
+    GaugeComponent.prototype.scaleText = function (repeat) {
         var _this = this;
+        if (repeat === void 0) { repeat = true; }
         this.zone.run(function () {
             var width = _this.textEl.nativeElement.getBoundingClientRect().width;
             var oldScale = _this.resizeScale;
@@ -9032,6 +9033,9 @@ var GaugeComponent = (function (_super) {
             if (_this.resizeScale !== oldScale) {
                 _this.textTransform = "scale(" + _this.resizeScale + ", " + _this.resizeScale + ")";
                 _this.cd.markForCheck();
+                if (repeat) {
+                    setTimeout(function () { return _this.scaleText(false); }, 50);
+                }
             }
         });
     };
@@ -9301,8 +9305,9 @@ var LinearGaugeComponent = (function (_super) {
     LinearGaugeComponent.prototype.getDisplayValue = function () {
         return this.value.toLocaleString();
     };
-    LinearGaugeComponent.prototype.scaleText = function (element) {
+    LinearGaugeComponent.prototype.scaleText = function (element, repeat) {
         var _this = this;
+        if (repeat === void 0) { repeat = true; }
         this.zone.run(function () {
             var el;
             var resizeScale;
@@ -9333,6 +9338,9 @@ var LinearGaugeComponent = (function (_super) {
                     _this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
                 }
                 _this.cd.markForCheck();
+                if (repeat) {
+                    setTimeout(function () { _this.scaleText(element, false); }, 50);
+                }
             }
         });
     };

@@ -73,8 +73,9 @@ var LinearGaugeComponent = (function (_super) {
     LinearGaugeComponent.prototype.getDisplayValue = function () {
         return this.value.toLocaleString();
     };
-    LinearGaugeComponent.prototype.scaleText = function (element) {
+    LinearGaugeComponent.prototype.scaleText = function (element, repeat) {
         var _this = this;
+        if (repeat === void 0) { repeat = true; }
         this.zone.run(function () {
             var el;
             var resizeScale;
@@ -105,6 +106,9 @@ var LinearGaugeComponent = (function (_super) {
                     _this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
                 }
                 _this.cd.markForCheck();
+                if (repeat) {
+                    setTimeout(function () { _this.scaleText(element, false); }, 50);
+                }
             }
         });
     };

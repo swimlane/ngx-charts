@@ -138,8 +138,9 @@ var GaugeComponent = (function (_super) {
         var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
         return value.toLocaleString();
     };
-    GaugeComponent.prototype.scaleText = function () {
+    GaugeComponent.prototype.scaleText = function (repeat) {
         var _this = this;
+        if (repeat === void 0) { repeat = true; }
         this.zone.run(function () {
             var width = _this.textEl.nativeElement.getBoundingClientRect().width;
             var oldScale = _this.resizeScale;
@@ -153,6 +154,9 @@ var GaugeComponent = (function (_super) {
             if (_this.resizeScale !== oldScale) {
                 _this.textTransform = "scale(" + _this.resizeScale + ", " + _this.resizeScale + ")";
                 _this.cd.markForCheck();
+                if (repeat) {
+                    setTimeout(function () { return _this.scaleText(false); }, 50);
+                }
             }
         });
     };

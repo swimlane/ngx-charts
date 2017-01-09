@@ -217,7 +217,7 @@ export class View_GaugeArcComponent0 extends import2.AppView<import0.GaugeArcCom
     const currVal_4_0_2:any = 'tooltip';
     this._TooltipDirective_4_5.check_tooltipType(currVal_4_0_2,throwOnChange,false);
     this._TooltipDirective_4_5.ngDoCheck(this,this._el_4,throwOnChange);
-    const currVal_4_1_0:any = this.context.colors.getColor(this.context.valueArc.data.value);
+    const currVal_4_1_0:any = this.context.colors.getColor(this.context.valueArc.data.name);
     this._PieArcComponent_4_6.check_fill(currVal_4_1_0,throwOnChange,false);
     const currVal_4_1_1:any = 0;
     this._PieArcComponent_4_6.check_startAngle(currVal_4_1_1,throwOnChange,false);

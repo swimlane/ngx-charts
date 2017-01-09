@@ -40,7 +40,7 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     getValueDomain(): any[];
     getValueScale(): any;
     getDisplayValue(): string;
-    scaleText(): void;
+    scaleText(repeat?: boolean): void;
     onClick(data: any): void;
     getLegendOptions(): {
         scaleType: string;

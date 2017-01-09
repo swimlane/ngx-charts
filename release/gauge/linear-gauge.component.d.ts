@@ -30,7 +30,7 @@ export declare class LinearGaugeComponent extends BaseChartComponent implements 
     getValueDomain(): any[];
     getValueScale(): any;
     getDisplayValue(): string;
-    scaleText(element: any): void;
+    scaleText(element: any, repeat?: boolean): void;
     onClick(): void;
     setColors(): void;
 }
