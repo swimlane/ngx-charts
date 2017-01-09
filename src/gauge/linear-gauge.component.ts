@@ -155,8 +155,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
       this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
       this.valueTranslate = `translate(0, -15)`;
       this.unitsTranslate = `translate(0, 15)`;
-      this.scaleText('value');
-      this.scaleText('units');
+      setTimeout(() => this.scaleText('value'), 50);
+      setTimeout(() => this.scaleText('units'), 50);      
     });
   }
 
@@ -203,9 +203,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
           this.unitsResizeScale = resizeScale;
           this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
         }
-        
-        this.cd.markForCheck();
-        setTimeout(() => { this.scaleText(element); });
+        this.cd.markForCheck();        
       }
     });
   }

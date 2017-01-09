@@ -96,7 +96,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   textRadius: number; // max available radius for the text
   resizeScale: number = 1;
   rotation: string = '';
-  textTransform: string = '';
+  textTransform: string = 'scale(1, 1)';
   cornerRadius: number = 10;
   arcs: any[];
   displayValue: string;
@@ -146,7 +146,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
       this.transform = `translate(${ xOffset }, ${ yOffset })`;
       this.rotation = `rotate(${ this.startAngle })`;
-      this.scaleText();
+      setTimeout(() => this.scaleText(), 50);
     });
   }
 
@@ -235,16 +235,18 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   scaleText(): void {
     this.zone.run(() => {
       const { width } = this.textEl.nativeElement.getBoundingClientRect();
-      if (width === 0) return;
-
       const oldScale = this.resizeScale;
-      const availableSpace = this.textRadius;
-      this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+
+      if (width === 0) {
+        this.resizeScale = 1;
+      } else {        
+        const availableSpace = this.textRadius;
+        this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+      }
 
       if (this.resizeScale !== oldScale) {
         this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
         this.cd.markForCheck();
-        setTimeout(() => { this.scaleText(); });
       }
     });
   }
