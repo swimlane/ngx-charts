@@ -44,7 +44,7 @@ import { id } from '../utils/id';
         ngx-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="getTooltipText(circle)"
+        [tooltipTitle]="getTooltipText(circle, circle.min, circle.max)"
       />
     </svg:g>
   `,
@@ -133,17 +133,43 @@ export class CircleSeriesComponent implements OnChanges {
           barVisible: false,
           gradientId,
           gradientFill,
-          gradientStops: this.getGradientStops(color)
+          gradientStops: this.getGradientStops(color),
+          min: d.min,
+          max: d.max
         };
       }
     }).filter((circle) => circle !== undefined);
   }
 
-  getTooltipText({ tooltipLabel, value, seriesName }): string {
+  getTooltipText({ tooltipLabel, value, seriesName }, min: any, max: any): string {
     return `
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
-      <span class="tooltip-val">${value.toLocaleString()}</span>
+      <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
     `;
+  }
+
+  getTooltipMinMaxText(min: any, max: any) {
+    if (min || max) {
+      let result = ' (';
+      if (min) {
+        if (!max) {
+          result += '≥';
+        }
+        result += min.toLocaleString();
+        if (max) {
+          result +=' - ';
+        }
+      } else if (max) {
+        result += '≤';
+      }
+      if (max) {
+        result += max.toLocaleString();
+      }
+      result += ')';
+      return result;
+    } else {
+      return '';
+    }
   }
 
   getGradientStops(color) {
