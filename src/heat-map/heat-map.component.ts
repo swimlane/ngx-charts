@@ -162,16 +162,18 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getXScale(): any {
+    const innerPadding = typeof this.innerPadding === 'Number' ? this.innerPadding : this.innerPadding[0];
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
-      .paddingInner(this.innerPadding / this.dims.width)
+      .paddingInner(innerPadding / this.dims.width)
       .domain(this.xDomain);
   }
 
   getYScale(): any {
+    const innerPadding = typeof this.innerPadding === 'Number' ? this.innerPadding : this.innerPadding[1];
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
-      .paddingInner(this.innerPadding / this.dims.height)
+      .paddingInner(innerPadding / this.dims.height)
       .domain(this.yDomain);
   }
 
