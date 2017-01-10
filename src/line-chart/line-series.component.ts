@@ -49,7 +49,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [fill]="hasGradient ? gradientUrl : colors.getColor(data.name)"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
-        fillOpacity="0.25"
+        [fillOpacity]="rangeFillOpacity"
       />
     </svg:g>
   `,
@@ -64,6 +64,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() scaleType;
   @Input() curve: string;
   @Input() activeEntries: any[];
+  @Input() rangeFillOpacity: number;
 
   path: string;
   outerPath: string;

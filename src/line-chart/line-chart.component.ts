@@ -61,6 +61,7 @@ import * as moment from 'moment';
               [activeEntries]="activeEntries"
               [scaleType]="scaleType"
               [curve]="curve"
+              [rangeFillOpacity]="rangeFillOpacity"
             />
           </svg:g>
           <svg:g ngx-charts-area-tooltip
@@ -130,6 +131,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
+  @Input() rangeFillOpacity: number;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

@@ -241,6 +241,7 @@ import './demo.scss';
             [timeline]="timeline"
             [showGridLines]="showGridLines"
             [curve]="curve"
+            [rangeFillOpacity]="rangeFillOpacity"
             (select)="select($event)">
           </ngx-charts-line-chart>          
           <ngx-charts-force-directed-graph
@@ -476,6 +477,14 @@ import './demo.scss';
           <option value="ordinal">Ordinal</option>
           <option value="linear">Linear</option>
         </select>
+ 
+        <div [hidden]="(!colorVisible) || (!range)" style="margin-left: 10px;">
+           <div>
+            <label>Range fill color opacity (0.0 - 1.0):</label><br />
+            <input type="number" [(ngModel)]="rangeFillOpacity"><br />
+          </div>
+        </div>
+
 
         <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
           <span
@@ -679,6 +688,7 @@ export class AppComponent implements OnInit {
   colorScheme: any;
   schemeType: string = 'ordinal';
   selectedColorScheme: string;
+  rangeFillOpacity: number=0.15;
 
   // pie
   showLabels = true;
@@ -712,7 +722,7 @@ export class AppComponent implements OnInit {
     });
 
     this.dateData = generateData(5, false);
-    this.dateDataWithRange = generateData(5, true);
+    this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
   }
 
