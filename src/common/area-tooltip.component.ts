@@ -35,7 +35,7 @@ import {
               class="tooltip-item-color"
               [style.background-color]="tooltipItem.color">
             </span>
-            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}
+            {{getToolTipText(tooltipItem)}}
           </xhtml:div>
         </xhtml:div>
       </xhtml:template>
@@ -154,6 +154,8 @@ export class AreaTooltip implements OnChanges {
           value: val,
           name: label,
           series: groupName,
+          min: item.min,
+          max: item.max,
           color
         });
       }
@@ -193,6 +195,31 @@ export class AreaTooltip implements OnChanges {
     let event = new MouseEvent('mouseleave', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0;
+  }
+
+  /** This is a more flexible version of the original template "{{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}" */
+  getToolTipText(tooltipItem: any): string {
+    let result: string = "";
+    if (tooltipItem.series) {
+      result += tooltipItem.series;
+    } else {
+      result += "???";
+    }
+    result += ": ";
+    if (tooltipItem.value) {
+      result += tooltipItem.value.toLocaleString();
+    }
+    if (tooltipItem.min || tooltipItem.max) {
+      result += " (";
+      if (tooltipItem.min) {
+        result += tooltipItem.min.toLocaleString();
+      }
+      result += " - ";
+      if (tooltipItem.max) {
+        result += tooltipItem.max.toLocaleString();
+      }
+    }
+    return result;
   }
 
 }
