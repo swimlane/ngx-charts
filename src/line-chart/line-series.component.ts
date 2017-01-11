@@ -42,14 +42,14 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />
-     <svg:g ngx-charts-line
-        class="line-series"
+     <svg:g ngx-charts-area
+        class="line-series-range"
         [data]="data"
         [path]="outerPath"
         [fill]="hasGradient ? gradientUrl : colors.getColor(data.name)"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
-        [fillOpacity]="rangeFillOpacity"
+        [opacity]="rangeFillOpacity"
       />
     </svg:g>
   `,
