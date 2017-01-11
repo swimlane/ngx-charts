@@ -68,7 +68,7 @@ export class AreaComponent implements OnChanges {
   }
 
   update(): void {
-    let pageUrl = window.location.href;
+    const pageUrl = window.location.href;
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 
@@ -88,7 +88,7 @@ export class AreaComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    let node = d3.select(this.element).select('.area');
+    const node = d3.select(this.element).select('.area');
 
     node.transition().duration(750)
       .attr('d', this.path);

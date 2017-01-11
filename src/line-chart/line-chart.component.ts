@@ -204,7 +204,7 @@ export class LineChartComponent extends BaseChartComponent {
       this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-      let pageUrl = window.location.href;
+      const pageUrl = window.location.href;
       this.clipPathId = 'clip' + id().toString();
       this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
     });
@@ -228,8 +228,8 @@ export class LineChartComponent extends BaseChartComponent {
   getXDomain(): any[] {
     let values = [];
 
-    for (let results of this.results) {
-      for (let d of results.series){
+    for (const results of this.results) {
+      for (const d of results.series){
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -241,13 +241,13 @@ export class LineChartComponent extends BaseChartComponent {
 
     if (this.scaleType === 'time') {
       values = values.map(v => moment(v).toDate());
-      let min = Math.min(...values);
-      let max = Math.max(...values);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
       domain = [min, max];
     } else if (this.scaleType === 'linear') {
       values = values.map(v => Number(v));
-      let min = Math.min(...values);
-      let max = Math.max(...values);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
       domain = [min, max];
     } else {
       domain = values;
@@ -258,19 +258,19 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let results of this.results) {
-      for (let d of results.series){
+    for (const results of this.results) {
+      for (const d of results.series){
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }
-        if (d.min != undefined) {
+        if (d.min !== undefined) {
           if (domain.indexOf(d.min) < 0) {
             domain.push(d.min);
           }
         }
-        if (d.max != undefined) {
+        if (d.max !== undefined) {
           if (domain.indexOf(d.max) < 0) {
             domain.push(d.max);
           }
@@ -279,7 +279,7 @@ export class LineChartComponent extends BaseChartComponent {
     }
 
     let min = Math.min(...domain);
-    let max = Math.max(...domain);
+    const max = Math.max(...domain);
     if (!this.autoScale) {
       min = Math.min(0, min);
     }
@@ -322,7 +322,7 @@ export class LineChartComponent extends BaseChartComponent {
     let date = true;
     let num = true;
 
-    for (let value of values) {
+    for (const value of values) {
       if (!this.isDate(value)) {
         date = false;
       }
@@ -383,7 +383,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getLegendOptions() {
-    let opts = {
+    const opts = {
       scaleType: this.schemeType,
       colors: undefined,
       domain: []

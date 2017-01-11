@@ -1,4 +1,4 @@
-let chartGroups = [
+const chartGroups = [
   {
     name: 'Bar Charts',
     charts: [

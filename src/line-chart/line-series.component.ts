@@ -82,11 +82,11 @@ export class LineSeriesComponent implements OnChanges {
   update(): void {    
     this.updateGradients();
 
-    let line = this.getLineGenerator();
-    let area = this.getAreaGenerator();
-    let range = this.getRangeGenerator();
+    const line = this.getLineGenerator();
+    const area = this.getAreaGenerator();
+    const range = this.getRangeGenerator();
 
-    let data = this.sortData(this.data.series);
+    const data = this.sortData(this.data.series);
 
     this.path = line(data) || '';
     this.outerPath = range(data) || '';
@@ -96,7 +96,7 @@ export class LineSeriesComponent implements OnChanges {
   getLineGenerator() {
     return d3.line()
       .x(d => {
-        let label = d.name;
+        const label = d.name;
         let value;
         if (this.scaleType === 'time') {
           value = this.xScale(moment(label).toDate());
@@ -114,7 +114,7 @@ export class LineSeriesComponent implements OnChanges {
   getRangeGenerator() {
     return d3.area()
         .x(d => {
-          let label = d.name;
+          const label = d.name;
           let value;
           if (this.scaleType === 'time') {
             value = this.xScale(moment(label).toDate());
@@ -130,9 +130,8 @@ export class LineSeriesComponent implements OnChanges {
         .curve(this.curve);
   }
 
-
   getAreaGenerator() {
-    let xProperty = (d) => {
+    const xProperty = (d) => {
       const label = d.name;
       return this.xScale(label);
     };
@@ -159,12 +158,12 @@ export class LineSeriesComponent implements OnChanges {
   updateGradients() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-      let pageUrl = window.location.href;      
+      const pageUrl = window.location.href;
       this.gradientId = 'grad' + id().toString();
       this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
-      let values = this.data.series.map(d => d.value);
-      let max = Math.max(...values);
-      let min = Math.min(...values);
+      const values = this.data.series.map(d => d.value);
+      const max = Math.max(...values);
+      const min = Math.min(...values);
       this.gradientStops = this.colors.getLinearGradientStops(max, min);
       this.areaGradientStops = this.colors.getLinearGradientStops(max);
     } else {
@@ -176,7 +175,7 @@ export class LineSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item !== undefined;
@@ -184,7 +183,7 @@ export class LineSeriesComponent implements OnChanges {
 
   isInactive(entry): boolean {
     if(!this.activeEntries || this.activeEntries.length === 0) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item === undefined;

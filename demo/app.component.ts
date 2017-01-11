@@ -688,7 +688,7 @@ export class AppComponent implements OnInit {
   colorScheme: any;
   schemeType: string = 'ordinal';
   selectedColorScheme: string;
-  rangeFillOpacity: number=0.15;
+  rangeFillOpacity: number = 0.15;
 
   // pie
   showLabels = true;
@@ -743,26 +743,26 @@ export class AppComponent implements OnInit {
 
     this.gaugeValue = this.gaugeMin + Math.floor(Math.random() * (this.gaugeMax - this.gaugeMin));
 
-    let country = this.countries[Math.floor(Math.random() * this.countries.length)];
-    let add = Math.random() < 0.7;
-    let remove = Math.random() < 0.5;
+    const country = this.countries[Math.floor(Math.random() * this.countries.length)];
+    const add = Math.random() < 0.7;
+    const remove = Math.random() < 0.5;
 
     if (remove) {
       if (this.single.length > 1) {
-        let index = Math.floor(Math.random() * this.single.length);
+        const index = Math.floor(Math.random() * this.single.length);
         this.single.splice(index, 1);
         this.single = [...this.single];
       }
 
       if (this.multi.length > 1) {
-        let index = Math.floor(Math.random() * this.multi.length);
+        const index = Math.floor(Math.random() * this.multi.length);
         this.multi.splice(index, 1);
         this.multi = [...this.multi];
       }
 
       if (this.graph.nodes.length > 1) {
-        let index = Math.floor(Math.random() * this.graph.nodes.length);
-        let value = this.graph.nodes[index].value;
+        const index = Math.floor(Math.random() * this.graph.nodes.length);
+        const value = this.graph.nodes[index].value;
         this.graph.nodes.splice(index, 1);
         const nodes = [ ...this.graph.nodes ];
 
@@ -776,14 +776,14 @@ export class AppComponent implements OnInit {
 
     if (add) {
       // single
-      let entry = {
+      const entry = {
         name: country,
         value: Math.floor(10000 + Math.random() * 50000)
       };
       this.single = [...this.single, entry];
 
       // multi
-      let multiEntry = {
+      const multiEntry = {
         name: country,
         series: [{
           name: '2010',
@@ -833,8 +833,8 @@ export class AppComponent implements OnInit {
 
     this.range = chartSelector.indexOf('range') >= 0;
 
-    for (let group of this.chartGroups) {
-      for (let chart of group.charts) {
+    for (const group of this.chartGroups) {
+      for (const chart of group.charts) {
         if (chart.selector === chartSelector) {
           this.chart = chart;
           return;

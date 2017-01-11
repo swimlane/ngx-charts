@@ -149,20 +149,20 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   getTooltipMinMaxText(min: any, max: any) {
-    if (min != undefined || max  != undefined) {
+    if (min !== undefined || max  !== undefined) {
       let result = ' (';
-      if (min != undefined) {
-        if (max == undefined) {
+      if (min !== undefined) {
+        if (max === undefined) {
           result += '≥';
         }
         result += min.toLocaleString();
-        if (max != undefined) {
-          result +=' - ';
+        if (max !== undefined) {
+          result += ' - ';
         }
-      } else if (max != undefined) {
+      } else if (max !== undefined) {
         result += '≤';
       }
-      if (max != undefined) {
+      if (max !== undefined) {
         result += max.toLocaleString();
       }
       result += ')';
@@ -195,7 +195,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item !== undefined;
