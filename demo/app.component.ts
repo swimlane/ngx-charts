@@ -205,29 +205,7 @@ import './demo.scss';
             class="chart-container"
             [scheme]="colorScheme"
             [schemeType]="schemeType"
-            [results]="dateData"
-            [legend]="showLegend"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [autoScale]="autoScale"
-            [timeline]="timeline"
-            [showGridLines]="showGridLines"
-            [curve]="curve"
-            (select)="select($event)">
-          </ngx-charts-line-chart>
-          <ngx-charts-line-chart
-            *ngIf="chartType === 'line-chart-with-ranges'"
-            [view]="view"
-            class="chart-container"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="dateDataWithRange"
+            [results]="dateDataWithOrWithoutRange"
             [legend]="showLegend"
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
@@ -243,7 +221,7 @@ import './demo.scss';
             [curve]="curve"
             [rangeFillOpacity]="rangeFillOpacity"
             (select)="select($event)">
-          </ngx-charts-line-chart>          
+          </ngx-charts-line-chart>
           <ngx-charts-force-directed-graph
             *ngIf="chartType === 'force-directed-graph'"
             class="chart-container"
@@ -428,6 +406,12 @@ import './demo.scss';
             <label>
               <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
               Real-time
+            </label>
+            
+           <label *ngIf="chartType === 'line-chart'">
+              <br />
+              <input type="checkbox" [checked]="range" (change)="range = $event.target.checked">
+              Show min and max values
             </label>
           </div>
         </div>
@@ -642,7 +626,7 @@ import './demo.scss';
         </div>
       </div>
     </main>
-  `
+  ^`
 })
 export class AppComponent implements OnInit {
 
@@ -724,6 +708,15 @@ export class AppComponent implements OnInit {
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
+  }
+
+  get dateDataWithOrWithoutRange() {
+    if (this.range) {
+      return this.dateDataWithRange;
+    } else {
+      return this.dateData;
+    }
+
   }
 
   ngOnInit() {
@@ -830,8 +823,6 @@ export class AppComponent implements OnInit {
       this.chartType === 'area-chart' ||
       this.chartType === 'area-chart-normalized' ||
       this.chartType === 'area-chart-stacked';
-
-    this.range = chartSelector.indexOf('range') >= 0;
 
     for (const group of this.chartGroups) {
       for (const chart of group.charts) {

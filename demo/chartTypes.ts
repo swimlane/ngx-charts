@@ -109,18 +109,8 @@ const chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
-        ]
-      },
-      {
-        name: 'Line Chart with Ranges',
-        selector: 'line-chart-with-ranges',
-        inputFormat: 'multiSeries',
-        options: [
-          'colorScheme', 'schemeType', 'rangeFillOpacity',
-          'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+          'rangeFillOpacity'
         ]
       },
       {
