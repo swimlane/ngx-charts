@@ -346,7 +346,7 @@ import './demo.scss';
             [showAxis]="gaugeShowAxis"
             [bigSegments]="gaugeLargeSegments"
             [smallSegments]="gaugeSmallSegments"
-            [margin]="gaugeMargin ? [Number(gaugeMarginLeft), Number(gaugeMarginTop), Number(gaugeMarginRight), Number(gaugeMarginBottom)] : null"
+            [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
             (select)="select($event)"
             (legendLabelClick)="onLegendLabelClick($event)">
           </ngx-charts-gauge>
@@ -609,16 +609,16 @@ import './demo.scss';
 
           <div *ngIf="chart.options.includes('margin')">
             <label>
-              <input type="checkbox" [checked]="gaugeMargin" (change)="gaugeMargin = $event.target.checked">
+              <input type="checkbox" [checked]="margin" (change)="margin = $event.target.checked">
               Show Margin
             </label> <br />
           </div>
 
-          <div *ngIf="chart.options.includes('margin') && gaugeMargin">
-            <label>Left</label><input type="text" [(ngModel)]="gaugeMarginLeft"><br />
-            <label>Top:</label><input type="text" [(ngModel)]="gaugeMarginTop"><br />
-            <label>Right</label><input type="text" [(ngModel)]="gaugeMarginRight"><br />
-            <label>Left:</label><input type="text" [(ngModel)]="gaugeMarginBottom"><br />
+          <div *ngIf="chart.options.includes('margin') && margin">
+            <label>Top:</label><input type="number" [(ngModel)]="marginTop"><br />
+            <label>Right:</label><input type="number" [(ngModel)]="marginRight"><br />
+            <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom"><br />
+            <label>Left:</label><input type="number" [(ngModel)]="marginLeft"><br />
           </div>
         </div>
         <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
@@ -679,6 +679,13 @@ export class AppComponent implements OnInit {
   autoScale = true;
   timeline = false;
 
+  // margin
+  margin: boolean = false;
+  marginTop: number = 40;
+  marginRight: number = 40;
+  marginBottom: number = 40;
+  marginLeft: number = 40;
+
   // gauge
   gaugeMin: number = 0;
   gaugeMax: number = 100;
@@ -690,11 +697,6 @@ export class AppComponent implements OnInit {
   gaugeShowAxis: boolean = true;
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
-  gaugeMargin: boolean = false;
-  gaugeMarginLeft: number = 40;
-  gaugeMarginRight: number = 40;
-  gaugeMarginTop: number = 40;
-  gaugeMarginBottom: number = 40;
 
   constructor() {
     Object.assign(this, {
@@ -872,10 +874,6 @@ export class AppComponent implements OnInit {
 
   onLegendLabelClick(entry) {
     console.log('Legend clicked', entry);
-  }
-
-  Number(value: any):  number {
-    return Number(value)
   }
 
 }
