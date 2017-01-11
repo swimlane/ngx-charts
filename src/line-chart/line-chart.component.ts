@@ -265,12 +265,12 @@ export class LineChartComponent extends BaseChartComponent {
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }
-        if (d.min) {
+        if (d.min != undefined) {
           if (domain.indexOf(d.min) < 0) {
             domain.push(d.min);
           }
         }
-        if (d.max) {
+        if (d.max != undefined) {
           if (domain.indexOf(d.max) < 0) {
             domain.push(d.max);
           }

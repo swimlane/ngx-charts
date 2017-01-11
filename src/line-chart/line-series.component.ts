@@ -21,7 +21,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
           [name]="gradientId"
           [stops]="gradientStops"
         />
-      </defs>ngx-charts-line
+      </defs>
       <svg:g ngx-charts-area
         class="line-highlight"
         [data]="data"
@@ -88,11 +88,6 @@ export class LineSeriesComponent implements OnChanges {
 
     let data = this.sortData(this.data.series);
 
-//    debugger;
-    let minMax = data.filter(d => d.min || d.max);
-
-    let isRangeChart =
-
     this.path = line(data) || '';
     this.outerPath = range(data) || '';
     this.areaPath = area(data) || '';
@@ -117,7 +112,6 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   getRangeGenerator() {
-    console.log('Range Hit!!!');
     return d3.area()
         .x(d => {
           let label = d.name;

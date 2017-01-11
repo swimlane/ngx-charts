@@ -117,7 +117,8 @@ let chartGroups = [
         selector: 'line-chart-with-ranges',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'colorScheme', 'schemeType', 'rangeFillOpacity',
+          'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
         ]

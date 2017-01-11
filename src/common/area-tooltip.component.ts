@@ -200,24 +200,32 @@ export class AreaTooltip implements OnChanges {
   /** This is a more flexible version of the original template "{{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}" */
   getToolTipText(tooltipItem: any): string {
     let result: string = '';
-    if (tooltipItem.series) {
+    if (tooltipItem.series != undefined) {
       result += tooltipItem.series;
     } else {
       result += '???';
     }
     result += ': ';
-    if (tooltipItem.value) {
+    if (tooltipItem.value != undefined) {
       result += tooltipItem.value.toLocaleString();
     }
-    if (tooltipItem.min || tooltipItem.max) {
+    if (tooltipItem.min != undefined || tooltipItem.max != undefined) {
       result += ' (';
-      if (tooltipItem.min) {
+      if (tooltipItem.min != undefined) {
+        if (tooltipItem.max == undefined) {
+          result += '≥';
+        }
         result += tooltipItem.min.toLocaleString();
+        if (tooltipItem.max != undefined) {
+          result +=' - ';
+        }
+      } else if (tooltipItem.max != undefined) {
+        result += '≤';
       }
-      result += ' - ';
-      if (tooltipItem.max) {
+      if (tooltipItem.max != undefined) {
         result += tooltipItem.max.toLocaleString();
       }
+      result += ")";
     }
     return result;
   }

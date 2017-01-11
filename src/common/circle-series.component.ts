@@ -44,7 +44,7 @@ import { id } from '../utils/id';
         ngx-tooltip
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="getTooltipText(circle, circle.min, circle.max)"
+        [tooltipTitle]="getTooltipText(circle)"
       />
     </svg:g>
   `,
@@ -141,7 +141,7 @@ export class CircleSeriesComponent implements OnChanges {
     }).filter((circle) => circle !== undefined);
   }
 
-  getTooltipText({ tooltipLabel, value, seriesName }, min: any, max: any): string {
+  getTooltipText({ tooltipLabel, value, seriesName, min, max}): string {
     return `
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
       <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
@@ -149,20 +149,20 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   getTooltipMinMaxText(min: any, max: any) {
-    if (min || max) {
+    if (min != undefined || max  != undefined) {
       let result = ' (';
-      if (min) {
-        if (!max) {
+      if (min != undefined) {
+        if (max == undefined) {
           result += '≥';
         }
         result += min.toLocaleString();
-        if (max) {
+        if (max != undefined) {
           result +=' - ';
         }
-      } else if (max) {
+      } else if (max != undefined) {
         result += '≤';
       }
-      if (max) {
+      if (max != undefined) {
         result += max.toLocaleString();
       }
       result += ')';
