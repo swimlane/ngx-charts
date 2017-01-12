@@ -35,7 +35,7 @@ import {
               class="tooltip-item-color"
               [style.background-color]="tooltipItem.color">
             </span>
-            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}
+            {{getToolTipText(tooltipItem)}}
           </xhtml:div>
         </xhtml:div>
       </xhtml:template>
@@ -91,10 +91,10 @@ export class AreaTooltip implements OnChanges {
       return this.xScale(a) - this.xScale(b);
     });
 
-    let results = [];
+    const results = [];
     for (let i = 0; i < uniqueSet.length; i++) {
-      let val = uniqueSet[i];
-      let ob: any = {};
+      const val = uniqueSet[i];
+      const ob: any = {};
       ob.tooltipAnchor = this.xScale(val);
 
       if (i === 0) {
@@ -123,8 +123,8 @@ export class AreaTooltip implements OnChanges {
   getValues(xVal): any[] {
     let results = [];
 
-    for (let group of this.results) {
-      let item = group.series.find(d => d.name.toString() === xVal.toString());
+    for (const group of this.results) {
+      const item = group.series.find(d => d.name.toString() === xVal.toString());
       let groupName = group.name;
       if (groupName instanceof Date) {
         groupName = groupName.toLocaleDateString();
@@ -154,6 +154,8 @@ export class AreaTooltip implements OnChanges {
           value: val,
           name: label,
           series: groupName,
+          min: item.min,
+          max: item.max,
           color
         });
       }
@@ -163,12 +165,12 @@ export class AreaTooltip implements OnChanges {
   }
 
   getUniqueValues(array): any[] {
-    let results = [];
+    const results = [];
 
     for (let i = 0; i < array.length; i++) {
-      let val = array[i];
+      const val = array[i];
 
-      let exists = results.find(v => {
+      const exists = results.find(v => {
         return v.toString() === val.toString();
       });
 
@@ -181,18 +183,50 @@ export class AreaTooltip implements OnChanges {
   }
 
   showTooltip(index): void {
-    let tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
-    let event = new MouseEvent('mouseenter', {bubbles: false});
+    const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+    const event = new MouseEvent('mouseenter', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0.7;
     this.hover.emit(this.tooltipAreas[index]);
   }
 
   hideTooltip(index): void {
-    let tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
-    let event = new MouseEvent('mouseleave', {bubbles: false});
+    const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+    const event = new MouseEvent('mouseleave', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0;
+  }
+
+  getToolTipText(tooltipItem: any): string {
+    let result: string = '';
+    if (tooltipItem.series !== undefined) {
+      result += tooltipItem.series;
+    } else {
+      result += '???';
+    }
+    result += ': ';
+    if (tooltipItem.value !== undefined) {
+      result += tooltipItem.value.toLocaleString();
+    }
+    if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
+      result += ' (';
+      if (tooltipItem.min !== undefined) {
+        if (tooltipItem.max === undefined) {
+          result += '≥';
+        }
+        result += tooltipItem.min.toLocaleString();
+        if (tooltipItem.max !== undefined) {
+          result += ' - ';
+        }
+      } else if (tooltipItem.max !== undefined) {
+        result += '≤';
+      }
+      if (tooltipItem.max !== undefined) {
+        result += tooltipItem.max.toLocaleString();
+      }
+      result += ')';
+    }
+    return result;
   }
 
 }

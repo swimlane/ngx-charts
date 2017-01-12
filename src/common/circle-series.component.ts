@@ -133,17 +133,43 @@ export class CircleSeriesComponent implements OnChanges {
           barVisible: false,
           gradientId,
           gradientFill,
-          gradientStops: this.getGradientStops(color)
+          gradientStops: this.getGradientStops(color),
+          min: d.min,
+          max: d.max
         };
       }
     }).filter((circle) => circle !== undefined);
   }
 
-  getTooltipText({ tooltipLabel, value, seriesName }): string {
+  getTooltipText({ tooltipLabel, value, seriesName, min, max}): string {
     return `
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
-      <span class="tooltip-val">${value.toLocaleString()}</span>
+      <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
     `;
+  }
+
+  getTooltipMinMaxText(min: any, max: any) {
+    if (min !== undefined || max  !== undefined) {
+      let result = ' (';
+      if (min !== undefined) {
+        if (max === undefined) {
+          result += '≥';
+        }
+        result += min.toLocaleString();
+        if (max !== undefined) {
+          result += ' - ';
+        }
+      } else if (max !== undefined) {
+        result += '≤';
+      }
+      if (max !== undefined) {
+        result += max.toLocaleString();
+      }
+      result += ')';
+      return result;
+    } else {
+      return '';
+    }
   }
 
   getGradientStops(color) {
@@ -169,7 +195,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item !== undefined;

@@ -1,4 +1,4 @@
-let chartGroups = [
+const chartGroups = [
   {
     name: 'Bar Charts',
     charts: [
@@ -109,7 +109,8 @@ let chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+          'rangeFillOpacity'
         ]
       },
       {

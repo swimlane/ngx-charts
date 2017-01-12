@@ -31,6 +31,7 @@
   }
 
   .line-series,
+  .line-series-range,
   .area-series {
     &.inactive {
       transition: opacity 100ms ease-in-out;
