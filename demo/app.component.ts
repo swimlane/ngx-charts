@@ -347,6 +347,7 @@ import './demo.scss';
             [showAxis]="gaugeShowAxis"
             [bigSegments]="gaugeLargeSegments"
             [smallSegments]="gaugeSmallSegments"
+            [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
             (select)="select($event)"
             (legendLabelClick)="onLegendLabelClick($event)">
           </ngx-charts-gauge>
@@ -621,6 +622,20 @@ import './demo.scss';
             <label>Units:</label><br />
             <input type="text" [(ngModel)]="gaugeUnits"><br />
           </div>
+
+          <div *ngIf="chart.options.includes('margin')">
+            <label>
+              <input type="checkbox" [checked]="margin" (change)="margin = $event.target.checked">
+              Show Margin
+            </label> <br />
+          </div>
+
+          <div *ngIf="chart.options.includes('margin') && margin">
+            <label>Top:</label><input type="number" [(ngModel)]="marginTop"><br />
+            <label>Right:</label><input type="number" [(ngModel)]="marginRight"><br />
+            <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom"><br />
+            <label>Left:</label><input type="number" [(ngModel)]="marginLeft"><br />
+          </div>
         </div>
         <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
         </div>
@@ -682,6 +697,13 @@ export class AppComponent implements OnInit {
   // line, area
   autoScale = true;
   timeline = false;
+
+  // margin
+  margin: boolean = false;
+  marginTop: number = 40;
+  marginRight: number = 40;
+  marginBottom: number = 40;
+  marginLeft: number = 40;
 
   // gauge
   gaugeMin: number = 0;
@@ -883,4 +905,5 @@ export class AppComponent implements OnInit {
   onLegendLabelClick(entry) {
     console.log('Legend clicked', entry);
   }
+
 }

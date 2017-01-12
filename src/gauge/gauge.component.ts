@@ -78,6 +78,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() angleSpan: number = 240;
   @Input() activeEntries: any[] = [];
 
+  // Specify margins
+  @Input() margin: any[];
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -90,7 +93,6 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   colors: ColorHelper;
   transform: string;
-  margin: any[];
 
   outerRadius: number;
   textRadius: number; // max available radius for the text
@@ -112,9 +114,13 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
     this.zone.run(() => {
       if (!this.showAxis) {
-        this.margin = [10, 20, 10, 20];
+        if (!this.margin) {
+          this.margin = [10, 20, 10, 20];
+        }
       } else {
-        this.margin = [60, 100, 60, 100];
+        if (!this.margin) {
+          this.margin = [60, 100, 60, 100];
+        }
       }
 
       // make the starting angle positive
@@ -263,7 +269,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       scaleType: 'ordinal',
       colors: this.colors,
       domain: this.domain
-    };    
+    };
   }
 
   setColors(): void {
