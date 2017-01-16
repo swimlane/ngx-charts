@@ -4,7 +4,11 @@ import {
   ElementRef,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  trigger,
+  style,
+  transition,
+  animate
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
@@ -14,6 +18,7 @@ import d3 from '../d3';
   template: `
     <title>{{label}}</title>
     <svg:text
+      [@animationState]="'active'"
       class="pie-label"
       [attr.transform]="transform"
       dy=".35em"
@@ -23,6 +28,7 @@ import d3 from '../d3';
       {{trimLabel(label, 10)}}
     </svg:text>
     <svg:path
+      [@animationState]="'active'"
       [attr.d]="line"
       [attr.stroke]="color"
       fill="none"
@@ -32,6 +38,16 @@ import d3 from '../d3';
     </svg:path>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate('0.25s 1s', style({opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class PieLabelComponent implements OnChanges {
 
