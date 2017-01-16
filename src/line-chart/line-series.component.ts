@@ -5,6 +5,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { Location } from '@angular/common';
 import d3 from '../d3';
 import * as moment from 'moment';
 import { id } from '../utils/id';
@@ -74,6 +75,9 @@ export class LineSeriesComponent implements OnChanges {
   hasGradient: boolean;
   gradientStops: any[];
   areaGradientStops: any[];
+
+  constructor(private location: Location) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -158,7 +162,7 @@ export class LineSeriesComponent implements OnChanges {
   updateGradients() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-      const pageUrl = window.location.href;
+      const pageUrl = this.location.path();
       this.gradientId = 'grad' + id().toString();
       this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
       const values = this.data.series.map(d => d.value);

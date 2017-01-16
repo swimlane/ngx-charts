@@ -3,6 +3,7 @@ import {
   OnChanges, ChangeDetectionStrategy, NgZone,
   ChangeDetectorRef, SimpleChanges
 } from '@angular/core';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 import d3 from '../d3';
 import { id } from '../utils/id';
@@ -58,7 +59,7 @@ export class Timeline implements OnChanges {
   filterId: any;
   filter: any;
 
-  constructor(element: ElementRef, private zone: NgZone, private cd: ChangeDetectorRef) {
+  constructor(element: ElementRef, private zone: NgZone, private cd: ChangeDetectorRef, private location: Location) {
     this.element = element.nativeElement;
   }
 
@@ -86,7 +87,7 @@ export class Timeline implements OnChanges {
 
       this.transform = `translate(0 , ${ offsetY })`;
 
-      let pageUrl = window.location.href;
+      let pageUrl = this.location.path();
       this.filterId = 'filter' + id().toString();
       this.filter = `url(${pageUrl}#${this.filterId})`;
 

@@ -2,6 +2,7 @@ import {
   Component, Input, Output, SimpleChanges, EventEmitter,
   OnChanges, ChangeDetectionStrategy
 } from '@angular/core';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
@@ -68,6 +69,9 @@ export class CircleSeriesComponent implements OnChanges {
   areaPath: any;
   circles: any[];
 
+  constructor(private location: Location) {
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -78,7 +82,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   getCircles(): any[] {
     const seriesName = this.data.name;
-    const pageUrl = window.location.href;
+    const pageUrl = this.location.path();
 
     return this.data.series.map((d, i) => {
       const value = d.value;

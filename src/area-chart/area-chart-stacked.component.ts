@@ -235,7 +235,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
       this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-      let pageUrl = window.location.href;
+      let pageUrl = this.location.path();
       this.clipPathId = 'clip' + id().toString();
       this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
     });

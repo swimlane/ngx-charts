@@ -11,6 +11,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -30,7 +31,11 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   height: number;
   resizeSubscription: any;
 
-  constructor(protected chartElement: ElementRef, protected zone: NgZone, protected cd: ChangeDetectorRef) {
+  constructor(
+    protected chartElement: ElementRef, 
+    protected zone: NgZone, 
+    protected cd: ChangeDetectorRef,
+    protected location: Location) {
   }
 
   ngAfterViewInit(): void {

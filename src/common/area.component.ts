@@ -8,6 +8,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { id } from '../utils/id';
 import d3 from '../d3';
 
@@ -54,7 +55,7 @@ export class AreaComponent implements OnChanges {
   gradientStops: any[];
   hasGradient: boolean = false;
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private location: Location) {
     this.element = element.nativeElement;
   }
 
@@ -68,7 +69,7 @@ export class AreaComponent implements OnChanges {
   }
 
   update(): void {
-    const pageUrl = window.location.href;
+    let pageUrl = this.location.path();
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 

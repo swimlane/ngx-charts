@@ -8,6 +8,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { Location } from '@angular/common';
 import d3 from '../d3';
 import { id } from '../utils/id';
 
@@ -66,7 +67,7 @@ export class PieArcComponent implements OnChanges {
   gradientFill: string;
   initialized: boolean = false;
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private location: Location) {
     this.element = element.nativeElement;
   }
 
@@ -79,7 +80,7 @@ export class PieArcComponent implements OnChanges {
     this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
     this.startOpacity = 0.5;
 
-    let pageUrl = window.location.href;
+    const pageUrl = this.location.path();
     this.radialGradientId = 'linearGrad' + id().toString();
 
     this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;
