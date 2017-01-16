@@ -470,7 +470,6 @@ import './demo.scss';
           </div>
         </div>
 
-
         <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
           <span
             [class.arrow-down]="optsVisible"

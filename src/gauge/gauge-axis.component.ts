@@ -69,23 +69,26 @@ export class GaugeAxisComponent implements OnChanges {
     let textDist = startDistance + tickLength + 10;
 
     for (let i = 0; i <= this.bigSegments; i++) {
-      if (i === 0 && this.angleSpan === 360) {
-        continue;
-      }
-      
       let angleDeg = i * bigTickSegment;
       let angle = angleDeg * Math.PI / 180;
 
       let textAnchor = this.getTextAnchor(angleDeg);
 
-      ticks.big.push({
-        line: this.getTickPath(startDistance, tickLength, angle),
-        textAnchor,
-        text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-        textTransform: `
-          translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(${ -this.rotationAngle })
-        `
-      });
+      let skip = false;
+      if (i === 0 && this.angleSpan === 360) {
+        skip = true;
+      }
+
+      if (!skip) {
+        ticks.big.push({
+          line: this.getTickPath(startDistance, tickLength, angle),
+          textAnchor,
+          text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
+          textTransform: `
+            translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(${ -this.rotationAngle })
+          `
+        });
+      }
 
       if (i === this.bigSegments) {
         continue;

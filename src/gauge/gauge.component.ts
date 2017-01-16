@@ -128,6 +128,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
         this.startAngle = (this.startAngle % 360) + 360;
       }
 
+      this.angleSpan = Math.min(this.angleSpan, 360);
+
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
