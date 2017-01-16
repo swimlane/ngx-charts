@@ -69,6 +69,10 @@ export class GaugeAxisComponent implements OnChanges {
     let textDist = startDistance + tickLength + 10;
 
     for (let i = 0; i <= this.bigSegments; i++) {
+      if (i === 0 && this.angleSpan === 360) {
+        continue;
+      }
+      
       let angleDeg = i * bigTickSegment;
       let angle = angleDeg * Math.PI / 180;
 
