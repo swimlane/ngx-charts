@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.1.0
+- Added min and max ranges option to line charts (#160)
+- Added margin support for Gauge charts (#159)
+- Added animation to pie chart label
+- Replaced window.location with angular's Location provider
+- Fixed axis tick overlap in gauge chart when the angle span is 360
+- Replaced .children with .getElementsByTagName in area tooltip to fix error in IE11 (#157)
+
+## 3.0.7
+- Changed arc colors on gauge charts to be based on name, not value
+
+## 3.0.6
+- Fixed typo in circle series (#149)
+- Fixed gradient bug in heatmap
+- Updated Axis components to allow tick count to be an input
+- Changed scaleText methods on gauge charts to not be recoursive
+
+## 3.0.5
+- Added the group name in grouped bar tooltips
+- Added legend to gauge chart
+- Added tooltips to gauge chart
+
+## 3.0.4
+- Fixed broken count animation in number card
+- Fixed tooltip for hybrid apps
+- Cody lint updates
+
 ## 3.0.3
 - Namespaced the project to swimlane organization
 
