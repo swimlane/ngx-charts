@@ -183,7 +183,7 @@ export class AreaTooltip implements OnChanges {
   }
 
   showTooltip(index): void {
-    const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+    const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
     const event = new MouseEvent('mouseenter', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0.7;
@@ -191,7 +191,7 @@ export class AreaTooltip implements OnChanges {
   }
 
   hideTooltip(index): void {
-    const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+    const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
     const event = new MouseEvent('mouseleave', {bubbles: false});
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0;
