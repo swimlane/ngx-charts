@@ -52,8 +52,18 @@ var PieLabelComponent = (function () {
     PieLabelComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[ngx-charts-pie-label]',
-                    template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
+                    template: "\n    <title>{{label}}</title>\n    <svg:text\n      [@animationState]=\"'active'\"\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [@animationState]=\"'active'\"\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    animations: [
+                        core_1.trigger('animationState', [
+                            core_1.transition('void => *', [
+                                core_1.style({
+                                    opacity: 0,
+                                }),
+                                core_1.animate('0.25s 1s', core_1.style({ opacity: 1 }))
+                            ])
+                        ])
+                    ]
                 },] },
     ];
     /** @nocollapse */

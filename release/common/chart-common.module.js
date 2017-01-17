@@ -1,5 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var chart_component_1 = require('./charts/chart.component');
 var legend_1 = require('./legend');
 var base_chart_component_1 = require('./base-chart.component');
@@ -12,7 +13,7 @@ var grid_panel_series_component_1 = require('./grid-panel-series.component');
 var svg_linear_gradient_component_1 = require('./svg-linear-gradient.component');
 var svg_radial_gradient_component_1 = require('./svg-radial-gradient.component');
 var timeline_component_1 = require('./timeline.component');
-var common_1 = require('@angular/common');
+var common_2 = require('@angular/common');
 var area_component_1 = require('./area.component');
 var area_tooltip_component_1 = require('./area-tooltip.component');
 var count_1 = require('./count');
@@ -39,14 +40,21 @@ var ChartCommonModule = (function () {
     }
     ChartCommonModule.decorators = [
         { type: core_1.NgModule, args: [{
+                    providers: [
+                        common_1.Location,
+                        {
+                            provide: common_1.LocationStrategy,
+                            useClass: common_1.PathLocationStrategy
+                        }
+                    ],
                     imports: [
-                        common_1.CommonModule,
+                        common_2.CommonModule,
                         axes_module_1.AxesModule,
                         tooltip_1.TooltipModule
                     ],
                     declarations: COMPONENTS.slice(),
                     exports: [
-                        common_1.CommonModule,
+                        common_2.CommonModule,
                         axes_module_1.AxesModule,
                         tooltip_1.TooltipModule
                     ].concat(COMPONENTS)

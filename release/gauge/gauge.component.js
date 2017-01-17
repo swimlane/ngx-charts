@@ -39,15 +39,20 @@ var GaugeComponent = (function (_super) {
         _super.prototype.update.call(this);
         this.zone.run(function () {
             if (!_this.showAxis) {
-                _this.margin = [10, 20, 10, 20];
+                if (!_this.margin) {
+                    _this.margin = [10, 20, 10, 20];
+                }
             }
             else {
-                _this.margin = [60, 100, 60, 100];
+                if (!_this.margin) {
+                    _this.margin = [60, 100, 60, 100];
+                }
             }
             // make the starting angle positive
             if (_this.startAngle < 0) {
                 _this.startAngle = (_this.startAngle % 360) + 360;
             }
+            _this.angleSpan = Math.min(_this.angleSpan, 360);
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
@@ -220,6 +225,7 @@ var GaugeComponent = (function (_super) {
         'startAngle': [{ type: core_1.Input },],
         'angleSpan': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
+        'margin': [{ type: core_1.Input },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],
         'textEl': [{ type: core_1.ViewChild, args: ['textEl',] },],

@@ -14,6 +14,7 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     startAngle: number;
     angleSpan: number;
     activeEntries: any[];
+    margin: any[];
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     textEl: ElementRef;
@@ -23,7 +24,6 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     valueScale: any;
     colors: ColorHelper;
     transform: string;
-    margin: any[];
     outerRadius: number;
     textRadius: number;
     resizeScale: number;

@@ -17,21 +17,22 @@ import * as import8 from '@angular/core/src/change_detection/constants';
 import * as import9 from '@angular/core/src/linker/component_factory';
 import * as import10 from '@angular/core/src/linker/element_ref';
 import * as import11 from '@angular/core/src/zone/ng_zone';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../src/common/charts/chart.component';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '../common/charts/chart.component.ngfactory';
-import * as import16 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import17 from '../../../src/services/injection.service';
-import * as import18 from '@angular/core/src/linker/template_ref';
-import * as import19 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import20 from '@angular/common/src/directives/ng_for';
-import * as import21 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import22 from '@angular/common/src/directives/ng_if';
-import * as import23 from '../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
-import * as import24 from '@angular/common/src/directives/ng_template_outlet';
-import * as import25 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import26 from '../../../src/common/tooltip/tooltip.directive';
+import * as import12 from '@angular/common/src/location/location';
+import * as import13 from '@angular/core/src/linker/view_container';
+import * as import14 from '../../../src/common/charts/chart.component';
+import * as import15 from '../../../src/common/tooltip/tooltip.service';
+import * as import16 from '../common/charts/chart.component.ngfactory';
+import * as import17 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import18 from '../../../src/services/injection.service';
+import * as import19 from '@angular/core/src/linker/template_ref';
+import * as import20 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import21 from '@angular/common/src/directives/ng_for';
+import * as import22 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import23 from '@angular/common/src/directives/ng_if';
+import * as import24 from '../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
+import * as import25 from '@angular/common/src/directives/ng_template_outlet';
+import * as import26 from '../common/tooltip/tooltip.directive.ngfactory';
+import * as import27 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_ForceDirectedGraphComponent {
   /*private*/ _eventHandler:Function;
   context:import0.ForceDirectedGraphComponent;
@@ -52,10 +53,10 @@ export class Wrapper_ForceDirectedGraphComponent {
   subscription0:any;
   subscription1:any;
   subscription2:any;
-  constructor(p0:any,p1:any,p2:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.ForceDirectedGraphComponent(p0,p1,p2);
+    this.context = new import0.ForceDirectedGraphComponent(p0,p1,p2,p3);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -216,7 +217,7 @@ class View_ForceDirectedGraphComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-force-directed-graph',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_ForceDirectedGraphComponent0(this.viewUtils,this,0,this._el_0);
-    this._ForceDirectedGraphComponent_0_3 = new Wrapper_ForceDirectedGraphComponent(new import10.ElementRef(this._el_0),this.injectorGet(import11.NgZone,this.parentIndex),this.compView_0.ref);
+    this._ForceDirectedGraphComponent_0_3 = new Wrapper_ForceDirectedGraphComponent(new import10.ElementRef(this._el_0),this.injectorGet(import11.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import12.Location,this.parentIndex));
     this._query_linkTemplate_0_0 = new import6.QueryList<any>();
     this._query_nodeTemplate_0_1 = new import6.QueryList<any>();
     this._query_linkTemplate_0_0.reset(([] as any[]));
@@ -258,27 +259,27 @@ export class View_ForceDirectedGraphComponent0 extends import2.AppView<import0.F
   _viewQuery_ChartComponent_0:import6.QueryList<any>;
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import12.ViewContainer;
-  compView_1:import2.AppView<import13.ChartComponent>;
-  _TooltipService_1_5:import14.TooltipService;
-  _ChartComponent_1_6:import15.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import13.ViewContainer;
+  compView_1:import2.AppView<import14.ChartComponent>;
+  _TooltipService_1_5:import15.TooltipService;
+  _ChartComponent_1_6:import16.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _el_5:any;
   _text_6:any;
   _anchor_7:any;
-  /*private*/ _vc_7:import12.ViewContainer;
+  /*private*/ _vc_7:import13.ViewContainer;
   _TemplateRef_7_5:any;
-  _NgFor_7_6:import16.Wrapper_NgFor;
+  _NgFor_7_6:import17.Wrapper_NgFor;
   _text_8:any;
   _text_9:any;
   _el_10:any;
   _text_11:any;
   _anchor_12:any;
-  /*private*/ _vc_12:import12.ViewContainer;
+  /*private*/ _vc_12:import13.ViewContainer;
   _TemplateRef_12_5:any;
-  _NgFor_12_6:import16.Wrapper_NgFor;
+  _NgFor_12_6:import17.Wrapper_NgFor;
   _text_13:any;
   _text_14:any;
   _text_15:any;
@@ -301,27 +302,27 @@ export class View_ForceDirectedGraphComponent0 extends import2.AppView<import0.F
     this._viewQuery_ChartComponent_0 = new import6.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import15.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import14.TooltipService(this.parentView.injectorGet(import17.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import15.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import13.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import16.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import15.TooltipService(this.parentView.injectorGet(import18.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import16.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','force-directed-graph chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'class','links'),(null as any));
     this._text_6 = this.renderer.createText(this._el_5,'\n          ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_5,(null as any));
-    this._vc_7 = new import12.ViewContainer(7,5,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import18.TemplateRef_(this,7,this._anchor_7);
-    this._NgFor_7_6 = new import16.Wrapper_NgFor(this._vc_7.vcRef,this._TemplateRef_7_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_7 = new import13.ViewContainer(7,5,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import19.TemplateRef_(this,7,this._anchor_7);
+    this._NgFor_7_6 = new import17.Wrapper_NgFor(this._vc_7.vcRef,this._TemplateRef_7_5,this.parentView.injectorGet(import20.IterableDiffers,this.parentIndex),this.ref);
     this._text_8 = this.renderer.createText(this._el_5,'\n        ',(null as any));
     this._text_9 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'class','nodes'),(null as any));
     this._text_11 = this.renderer.createText(this._el_10,'\n          ',(null as any));
     this._anchor_12 = this.renderer.createTemplateAnchor(this._el_10,(null as any));
-    this._vc_12 = new import12.ViewContainer(12,10,this,this._anchor_12);
-    this._TemplateRef_12_5 = new import18.TemplateRef_(this,12,this._anchor_12);
-    this._NgFor_12_6 = new import16.Wrapper_NgFor(this._vc_12.vcRef,this._TemplateRef_12_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_12 = new import13.ViewContainer(12,10,this,this._anchor_12);
+    this._TemplateRef_12_5 = new import19.TemplateRef_(this,12,this._anchor_12);
+    this._NgFor_12_6 = new import17.Wrapper_NgFor(this._vc_12.vcRef,this._TemplateRef_12_5,this.parentView.injectorGet(import20.IterableDiffers,this.parentIndex),this.ref);
     this._text_13 = this.renderer.createText(this._el_10,'\n        ',(null as any));
     this._text_14 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_15 = this.renderer.createText((null as any),'\n    ',(null as any));
@@ -354,12 +355,12 @@ export class View_ForceDirectedGraphComponent0 extends import2.AppView<import0.F
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import20.NgFor) && (7 === requestNodeIndex))) { return this._NgFor_7_6.context; }
-    if (((token === import18.TemplateRef) && (12 === requestNodeIndex))) { return this._TemplateRef_12_5; }
-    if (((token === import20.NgFor) && (12 === requestNodeIndex))) { return this._NgFor_12_6.context; }
-    if (((token === import14.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._TooltipService_1_5; }
-    if (((token === import13.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import19.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import21.NgFor) && (7 === requestNodeIndex))) { return this._NgFor_7_6.context; }
+    if (((token === import19.TemplateRef) && (12 === requestNodeIndex))) { return this._TemplateRef_12_5; }
+    if (((token === import21.NgFor) && (12 === requestNodeIndex))) { return this._NgFor_12_6.context; }
+    if (((token === import15.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._TooltipService_1_5; }
+    if (((token === import14.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -431,30 +432,30 @@ class View_ForceDirectedGraphComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _anchor_2:any;
-  /*private*/ _vc_2:import12.ViewContainer;
+  /*private*/ _vc_2:import13.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgIf_2_6:import21.Wrapper_NgIf;
+  _NgIf_2_6:import22.Wrapper_NgIf;
   _text_3:any;
   _anchor_4:any;
-  /*private*/ _vc_4:import12.ViewContainer;
+  /*private*/ _vc_4:import13.ViewContainer;
   _TemplateRef_4_5:any;
-  _NgIf_4_6:import21.Wrapper_NgIf;
+  _NgIf_4_6:import22.Wrapper_NgIf;
   _text_5:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent1,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import12.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import18.TemplateRef_(this,2,this._anchor_2);
-    this._NgIf_2_6 = new import21.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
+    this._vc_2 = new import13.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import19.TemplateRef_(this,2,this._anchor_2);
+    this._NgIf_2_6 = new import22.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
     this._text_3 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_4 = new import12.ViewContainer(4,0,this,this._anchor_4);
-    this._TemplateRef_4_5 = new import18.TemplateRef_(this,4,this._anchor_4);
-    this._NgIf_4_6 = new import21.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
+    this._vc_4 = new import13.ViewContainer(4,0,this,this._anchor_4);
+    this._TemplateRef_4_5 = new import19.TemplateRef_(this,4,this._anchor_4);
+    this._NgIf_4_6 = new import22.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
     this._text_5 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
       this._el_0,
@@ -468,10 +469,10 @@ class View_ForceDirectedGraphComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import22.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
-    if (((token === import18.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
-    if (((token === import22.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
+    if (((token === import19.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import23.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
+    if (((token === import19.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
+    if (((token === import23.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -499,12 +500,12 @@ class View_ForceDirectedGraphComponent1 extends import2.AppView<any> {
 }
 class View_ForceDirectedGraphComponent2 extends import2.AppView<any> {
   _anchor_0:any;
-  /*private*/ _vc_0:import12.ViewContainer;
+  /*private*/ _vc_0:import13.ViewContainer;
   _TemplateRef_0_5:any;
-  _NgTemplateOutlet_0_6:import23.Wrapper_NgTemplateOutlet;
+  _NgTemplateOutlet_0_6:import24.Wrapper_NgTemplateOutlet;
   _el_1:any;
   _map_5:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent2,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._map_5 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {$implicit: p0};
@@ -512,16 +513,16 @@ class View_ForceDirectedGraphComponent2 extends import2.AppView<any> {
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._anchor_0 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    this._vc_0 = new import12.ViewContainer(0,(null as any),this,this._anchor_0);
-    this._TemplateRef_0_5 = new import18.TemplateRef_(this,0,this._anchor_0);
-    this._NgTemplateOutlet_0_6 = new import23.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
+    this._vc_0 = new import13.ViewContainer(0,(null as any),this,this._anchor_0);
+    this._TemplateRef_0_5 = new import19.TemplateRef_(this,0,this._anchor_0);
+    this._NgTemplateOutlet_0_6 = new import24.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._anchor_0]),(null as any));
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
-    if (((token === import24.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
+    if (((token === import19.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
+    if (((token === import25.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -547,7 +548,7 @@ class View_ForceDirectedGraphComponent2 extends import2.AppView<any> {
 }
 class View_ForceDirectedGraphComponent3 extends import2.AppView<any> {
   _text_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent3,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
@@ -565,7 +566,7 @@ class View_ForceDirectedGraphComponent4 extends import2.AppView<any> {
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent4,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -605,24 +606,24 @@ class View_ForceDirectedGraphComponent4 extends import2.AppView<any> {
 }
 class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
   _el_0:any;
-  /*private*/ _vc_0:import12.ViewContainer;
-  _TooltipDirective_0_5:import25.Wrapper_TooltipDirective;
+  /*private*/ _vc_0:import13.ViewContainer;
+  _TooltipDirective_0_5:import26.Wrapper_TooltipDirective;
   _text_1:any;
   _anchor_2:any;
-  /*private*/ _vc_2:import12.ViewContainer;
+  /*private*/ _vc_2:import13.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgIf_2_6:import21.Wrapper_NgIf;
+  _NgIf_2_6:import22.Wrapper_NgIf;
   _text_3:any;
   _anchor_4:any;
-  /*private*/ _vc_4:import12.ViewContainer;
+  /*private*/ _vc_4:import13.ViewContainer;
   _TemplateRef_4_5:any;
-  _NgIf_4_6:import21.Wrapper_NgIf;
+  _NgIf_4_6:import22.Wrapper_NgIf;
   _text_5:any;
   _el_6:any;
   /*private*/ _expr_15:any;
   /*private*/ _expr_16:any;
   /*private*/ _expr_17:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent5,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_15 = import1.UNINITIALIZED;
     this._expr_16 = import1.UNINITIALIZED;
@@ -630,18 +631,18 @@ class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-tooltip',''),(null as any));
-    this._vc_0 = new import12.ViewContainer(0,(null as any),this,this._el_0);
-    this._TooltipDirective_0_5 = new import25.Wrapper_TooltipDirective((<View_ForceDirectedGraphComponent0>this.parentView)._TooltipService_1_5,this._vc_0.vcRef,this.renderer,new import10.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import11.NgZone,this.parentView.parentIndex));
+    this._vc_0 = new import13.ViewContainer(0,(null as any),this,this._el_0);
+    this._TooltipDirective_0_5 = new import26.Wrapper_TooltipDirective((<View_ForceDirectedGraphComponent0>this.parentView)._TooltipService_1_5,this._vc_0.vcRef,this.renderer,new import10.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import11.NgZone,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import12.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import18.TemplateRef_(this,2,this._anchor_2);
-    this._NgIf_2_6 = new import21.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
+    this._vc_2 = new import13.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import19.TemplateRef_(this,2,this._anchor_2);
+    this._NgIf_2_6 = new import22.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
     this._text_3 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_4 = new import12.ViewContainer(4,0,this,this._anchor_4);
-    this._TemplateRef_4_5 = new import18.TemplateRef_(this,4,this._anchor_4);
-    this._NgIf_4_6 = new import21.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
+    this._vc_4 = new import13.ViewContainer(4,0,this,this._anchor_4);
+    this._TemplateRef_4_5 = new import19.TemplateRef_(this,4,this._anchor_4);
+    this._NgIf_4_6 = new import22.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
     this._text_5 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_6 = this.renderer.createTemplateAnchor((null as any),(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(12,'mousedown',(null as any),'click',(null as any),'focusin',(null as any),'blur',(null as any),'mouseenter',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
@@ -657,11 +658,11 @@ class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import22.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
-    if (((token === import18.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
-    if (((token === import22.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
-    if (((token === import26.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import19.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import23.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
+    if (((token === import19.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
+    if (((token === import23.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
+    if (((token === import27.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_0_5.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -730,12 +731,12 @@ class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
 }
 class View_ForceDirectedGraphComponent6 extends import2.AppView<any> {
   _anchor_0:any;
-  /*private*/ _vc_0:import12.ViewContainer;
+  /*private*/ _vc_0:import13.ViewContainer;
   _TemplateRef_0_5:any;
-  _NgTemplateOutlet_0_6:import23.Wrapper_NgTemplateOutlet;
+  _NgTemplateOutlet_0_6:import24.Wrapper_NgTemplateOutlet;
   _el_1:any;
   _map_5:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent6,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._map_5 = import3.pureProxy1((p0:any):{[key: string]:any} => {
       return {$implicit: p0};
@@ -743,16 +744,16 @@ class View_ForceDirectedGraphComponent6 extends import2.AppView<any> {
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._anchor_0 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    this._vc_0 = new import12.ViewContainer(0,(null as any),this,this._anchor_0);
-    this._TemplateRef_0_5 = new import18.TemplateRef_(this,0,this._anchor_0);
-    this._NgTemplateOutlet_0_6 = new import23.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
+    this._vc_0 = new import13.ViewContainer(0,(null as any),this,this._anchor_0);
+    this._TemplateRef_0_5 = new import19.TemplateRef_(this,0,this._anchor_0);
+    this._NgTemplateOutlet_0_6 = new import24.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._anchor_0]),(null as any));
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
-    if (((token === import24.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
+    if (((token === import19.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
+    if (((token === import25.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -778,7 +779,7 @@ class View_ForceDirectedGraphComponent6 extends import2.AppView<any> {
 }
 class View_ForceDirectedGraphComponent7 extends import2.AppView<any> {
   _text_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent7,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
@@ -792,7 +793,7 @@ class View_ForceDirectedGraphComponent7 extends import2.AppView<any> {
 }
 class View_ForceDirectedGraphComponent8 extends import2.AppView<any> {
   _el_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_ForceDirectedGraphComponent8,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {

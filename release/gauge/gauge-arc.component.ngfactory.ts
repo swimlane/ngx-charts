@@ -19,9 +19,10 @@ import * as import10 from '../pie-chart/pie-arc.component.ngfactory';
 import * as import11 from '@angular/core/src/linker/view_container';
 import * as import12 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import13 from '@angular/core/src/linker/element_ref';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '@angular/core/src/zone/ng_zone';
-import * as import16 from '../../../src/common/tooltip/tooltip.directive';
+import * as import14 from '@angular/common/src/location/location';
+import * as import15 from '../../../src/common/tooltip/tooltip.service';
+import * as import16 from '@angular/core/src/zone/ng_zone';
+import * as import17 from '../../../src/common/tooltip/tooltip.directive';
 export class Wrapper_GaugeArcComponent {
   /*private*/ _eventHandler:Function;
   context:import0.GaugeArcComponent;
@@ -160,15 +161,15 @@ export class View_GaugeArcComponent0 extends import2.AppView<import0.GaugeArcCom
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray4(4,'class','background-arc','ngx-charts-pie-arc',''),(null as any));
     this.compView_1 = new import10.View_PieArcComponent0(this.viewUtils,this,1,this._el_1);
-    this._PieArcComponent_1_3 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_1));
+    this._PieArcComponent_1_3 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_1),this.parentView.injectorGet(import14.Location,this.parentIndex));
     this._text_2 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._PieArcComponent_1_3.context);
     this._text_3 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray4(4,'ngx-charts-pie-arc','','ngx-tooltip',''),(null as any));
     this._vc_4 = new import11.ViewContainer(4,(null as any),this,this._el_4);
     this.compView_4 = new import10.View_PieArcComponent0(this.viewUtils,this,4,this._el_4);
-    this._TooltipDirective_4_5 = new import12.Wrapper_TooltipDirective(this.parentView.injectorGet(import14.TooltipService,this.parentIndex),this._vc_4.vcRef,this.renderer,new import13.ElementRef(this._el_4),this.parentView.injectorGet(import15.NgZone,this.parentIndex));
-    this._PieArcComponent_4_6 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_4));
+    this._TooltipDirective_4_5 = new import12.Wrapper_TooltipDirective(this.parentView.injectorGet(import15.TooltipService,this.parentIndex),this._vc_4.vcRef,this.renderer,new import13.ElementRef(this._el_4),this.parentView.injectorGet(import16.NgZone,this.parentIndex));
+    this._PieArcComponent_4_6 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_4),this.parentView.injectorGet(import14.Location,this.parentIndex));
     this._text_5 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_4.create(this._PieArcComponent_4_6.context);
     this._text_6 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
@@ -188,7 +189,7 @@ export class View_GaugeArcComponent0 extends import2.AppView<import0.GaugeArcCom
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import9.PieArcComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 2)))) { return this._PieArcComponent_1_3.context; }
-    if (((token === import16.TooltipDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_4_5.context; }
+    if (((token === import17.TooltipDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_4_5.context; }
     if (((token === import9.PieArcComponent) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._PieArcComponent_4_6.context; }
     return notFoundResult;
   }

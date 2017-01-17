@@ -16,23 +16,24 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/core/src/linker/query_list';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../src/common/charts/chart.component';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '../common/charts/chart.component.ngfactory';
-import * as import16 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import17 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import18 from '../../../src/services/injection.service';
-import * as import19 from '@angular/core/src/linker/template_ref';
-import * as import20 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import21 from '@angular/common/src/directives/ng_for';
-import * as import22 from '@angular/common/src/directives/ng_if';
-import * as import23 from '@angular/core/src/security';
-import * as import24 from '../../../src/gauge/gauge-arc.component';
-import * as import25 from './gauge-arc.component.ngfactory';
-import * as import26 from '../../../src/gauge/gauge-axis.component';
-import * as import27 from './gauge-axis.component.ngfactory';
+import * as import11 from '@angular/common/src/location/location';
+import * as import12 from '@angular/core/src/linker/query_list';
+import * as import13 from '@angular/core/src/linker/view_container';
+import * as import14 from '../../../src/common/charts/chart.component';
+import * as import15 from '../../../src/common/tooltip/tooltip.service';
+import * as import16 from '../common/charts/chart.component.ngfactory';
+import * as import17 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import18 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import19 from '../../../src/services/injection.service';
+import * as import20 from '@angular/core/src/linker/template_ref';
+import * as import21 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import22 from '@angular/common/src/directives/ng_for';
+import * as import23 from '@angular/common/src/directives/ng_if';
+import * as import24 from '@angular/core/src/security';
+import * as import25 from '../../../src/gauge/gauge-arc.component';
+import * as import26 from './gauge-arc.component.ngfactory';
+import * as import27 from '../../../src/gauge/gauge-axis.component';
+import * as import28 from './gauge-axis.component.ngfactory';
 export class Wrapper_GaugeComponent {
   /*private*/ _eventHandler:Function;
   context:import0.GaugeComponent;
@@ -53,13 +54,14 @@ export class Wrapper_GaugeComponent {
   /*private*/ _expr_12:any;
   /*private*/ _expr_13:any;
   /*private*/ _expr_14:any;
+  /*private*/ _expr_15:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
-  constructor(p0:any,p1:any,p2:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.GaugeComponent(p0,p1,p2);
+    this.context = new import0.GaugeComponent(p0,p1,p2,p3);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -75,6 +77,7 @@ export class Wrapper_GaugeComponent {
     this._expr_12 = import1.UNINITIALIZED;
     this._expr_13 = import1.UNINITIALIZED;
     this._expr_14 = import1.UNINITIALIZED;
+    this._expr_15 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -204,6 +207,14 @@ export class Wrapper_GaugeComponent {
       this._expr_14 = currValue;
     }
   }
+  check_margin(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_15,currValue))) {
+      this._changed = true;
+      this.context.margin = currValue;
+      this._changes['margin'] = new import1.SimpleChange(this._expr_15,currValue);
+      this._expr_15 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -237,7 +248,7 @@ class View_GaugeComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-gauge',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_GaugeComponent0(this.viewUtils,this,0,this._el_0);
-    this._GaugeComponent_0_3 = new Wrapper_GaugeComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref);
+    this._GaugeComponent_0_3 = new Wrapper_GaugeComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
     this.compView_0.create(this._GaugeComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._GaugeComponent_0_3.context);
@@ -263,25 +274,25 @@ export const GaugeComponentNgFactory:import8.ComponentFactory<import0.GaugeCompo
 const styles_GaugeComponent:any[] = ([] as any[]);
 var renderType_GaugeComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_GaugeComponent,{});
 export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent> {
-  _viewQuery_textEl_0:import11.QueryList<any>;
+  _viewQuery_textEl_0:import12.QueryList<any>;
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import12.ViewContainer;
-  compView_1:import2.AppView<import13.ChartComponent>;
-  _TooltipService_1_5:import14.TooltipService;
-  _ChartComponent_1_6:import15.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import13.ViewContainer;
+  compView_1:import2.AppView<import14.ChartComponent>;
+  _TooltipService_1_5:import15.TooltipService;
+  _ChartComponent_1_6:import16.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _anchor_5:any;
-  /*private*/ _vc_5:import12.ViewContainer;
+  /*private*/ _vc_5:import13.ViewContainer;
   _TemplateRef_5_5:any;
-  _NgFor_5_6:import16.Wrapper_NgFor;
+  _NgFor_5_6:import17.Wrapper_NgFor;
   _text_6:any;
   _anchor_7:any;
-  /*private*/ _vc_7:import12.ViewContainer;
+  /*private*/ _vc_7:import13.ViewContainer;
   _TemplateRef_7_5:any;
-  _NgIf_7_6:import17.Wrapper_NgIf;
+  _NgIf_7_6:import18.Wrapper_NgIf;
   _text_8:any;
   _el_9:any;
   _text_10:any;
@@ -317,25 +328,25 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_textEl_0 = new import11.QueryList<any>();
+    this._viewQuery_textEl_0 = new import12.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import15.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import14.TooltipService(this.parentView.injectorGet(import18.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import15.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import13.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import16.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import15.TooltipService(this.parentView.injectorGet(import19.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import16.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','gauge chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_5 = new import12.ViewContainer(5,3,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import19.TemplateRef_(this,5,this._anchor_5);
-    this._NgFor_5_6 = new import16.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import20.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_5 = new import13.ViewContainer(5,3,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import20.TemplateRef_(this,5,this._anchor_5);
+    this._NgFor_5_6 = new import17.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import21.IterableDiffers,this.parentIndex),this.ref);
     this._text_6 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_7 = new import12.ViewContainer(7,3,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import19.TemplateRef_(this,7,this._anchor_7);
-    this._NgIf_7_6 = new import17.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
+    this._vc_7 = new import13.ViewContainer(7,3,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import20.TemplateRef_(this,7,this._anchor_7);
+    this._NgIf_7_6 = new import18.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
     this._text_8 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
     this._el_9 = import3.createRenderElement(this.renderer,this._el_3,':svg:text',new import3.InlineArray2(2,'alignment-baseline','central'),(null as any));
     this._text_10 = this.renderer.createText(this._el_9,'\n          ',(null as any));
@@ -379,12 +390,12 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import21.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
-    if (((token === import19.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import22.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
-    if (((token === import14.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._TooltipService_1_5; }
-    if (((token === import13.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import20.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import22.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
+    if (((token === import20.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import23.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
+    if (((token === import15.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._TooltipService_1_5; }
+    if (((token === import14.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 18)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -413,7 +424,7 @@ export class View_GaugeComponent0 extends import2.AppView<import0.GaugeComponent
     }
     const currVal_33:any = 'middle';
     if (import3.checkBinding(throwOnChange,this._expr_33,currVal_33)) {
-      this.renderer.setElementStyle(this._el_9,'textAnchor',((this.viewUtils.sanitizer.sanitize(import23.SecurityContext.STYLE,currVal_33) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import23.SecurityContext.STYLE,currVal_33).toString()));
+      this.renderer.setElementStyle(this._el_9,'textAnchor',((this.viewUtils.sanitizer.sanitize(import24.SecurityContext.STYLE,currVal_33) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import24.SecurityContext.STYLE,currVal_33).toString()));
       this._expr_33 = currVal_33;
     }
     const currVal_34:any = this.context.textTransform;
@@ -474,12 +485,12 @@ class View_GaugeComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import24.GaugeArcComponent>;
-  _GaugeArcComponent_2_3:import25.Wrapper_GaugeArcComponent;
+  compView_2:import2.AppView<import25.GaugeArcComponent>;
+  _GaugeArcComponent_2_3:import26.Wrapper_GaugeArcComponent;
   _text_3:any;
   _text_4:any;
   /*private*/ _expr_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_GaugeComponent1,renderType_GaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_7 = import1.UNINITIALIZED;
   }
@@ -487,8 +498,8 @@ class View_GaugeComponent1 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'ngx-charts-gauge-arc',''),(null as any));
-    this.compView_2 = new import25.View_GaugeArcComponent0(this.viewUtils,this,2,this._el_2);
-    this._GaugeArcComponent_2_3 = new import25.Wrapper_GaugeArcComponent();
+    this.compView_2 = new import26.View_GaugeArcComponent0(this.viewUtils,this,2,this._el_2);
+    this._GaugeArcComponent_2_3 = new import26.Wrapper_GaugeArcComponent();
     this._text_3 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_2.create(this._GaugeArcComponent_2_3.context);
     this._text_4 = this.renderer.createText(this._el_0,'\n        ',(null as any));
@@ -505,7 +516,7 @@ class View_GaugeComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import24.GaugeArcComponent) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._GaugeArcComponent_2_3.context; }
+    if (((token === import25.GaugeArcComponent) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._GaugeArcComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -554,16 +565,16 @@ class View_GaugeComponent1 extends import2.AppView<any> {
 }
 class View_GaugeComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import26.GaugeAxisComponent>;
-  _GaugeAxisComponent_0_3:import27.Wrapper_GaugeAxisComponent;
+  compView_0:import2.AppView<import27.GaugeAxisComponent>;
+  _GaugeAxisComponent_0_3:import28.Wrapper_GaugeAxisComponent;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_GaugeComponent2,renderType_GaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-gauge-axis',''),(null as any));
-    this.compView_0 = new import27.View_GaugeAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._GaugeAxisComponent_0_3 = new import27.Wrapper_GaugeAxisComponent();
+    this.compView_0 = new import28.View_GaugeAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._GaugeAxisComponent_0_3 = new import28.Wrapper_GaugeAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_0.create(this._GaugeAxisComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -574,7 +585,7 @@ class View_GaugeComponent2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import26.GaugeAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._GaugeAxisComponent_0_3.context; }
+    if (((token === import27.GaugeAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._GaugeAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

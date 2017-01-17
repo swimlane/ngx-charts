@@ -1,5 +1,7 @@
 import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
+import { Location } from '@angular/common';
 export declare class CircleSeriesComponent implements OnChanges {
+    private location;
     data: any;
     type: string;
     xScale: any;
@@ -13,14 +15,18 @@ export declare class CircleSeriesComponent implements OnChanges {
     deactivate: EventEmitter<{}>;
     areaPath: any;
     circles: any[];
+    constructor(location: Location);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCircles(): any[];
-    getTooltipText({tooltipLabel, value, seriesName}: {
+    getTooltipText({tooltipLabel, value, seriesName, min, max}: {
         tooltipLabel: any;
         value: any;
         seriesName: any;
+        min: any;
+        max: any;
     }): string;
+    getTooltipMinMaxText(min: any, max: any): string;
     getGradientStops(color: any): {
         offset: number;
         color: any;

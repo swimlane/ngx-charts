@@ -1,5 +1,7 @@
 import { EventEmitter, ElementRef, SimpleChanges, OnChanges } from '@angular/core';
+import { Location } from '@angular/common';
 export declare class BarComponent implements OnChanges {
+    private location;
     fill: any;
     data: any;
     width: any;
@@ -23,7 +25,7 @@ export declare class BarComponent implements OnChanges {
     initialized: boolean;
     gradientStops: any[];
     hasGradient: boolean;
-    constructor(element: ElementRef);
+    constructor(element: ElementRef, location: Location);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     loadAnimation(): void;

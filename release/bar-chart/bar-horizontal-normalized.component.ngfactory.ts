@@ -16,29 +16,30 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/core/src/animation/animation_transition';
-import * as import12 from '@angular/core/src/animation/animation_sequence_player';
-import * as import13 from '@angular/core/src/animation/animation_styles';
-import * as import14 from '@angular/core/src/animation/animation_style_util';
-import * as import15 from '@angular/core/src/animation/animation_keyframe';
-import * as import16 from '@angular/core/src/animation/animation_player';
-import * as import17 from '@angular/core/src/linker/view_container';
-import * as import18 from '../../../src/common/charts/chart.component';
-import * as import19 from '../../../src/common/tooltip/tooltip.service';
-import * as import20 from '../common/charts/chart.component.ngfactory';
-import * as import21 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import22 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import23 from '../../../src/services/injection.service';
-import * as import24 from '@angular/core/src/linker/template_ref';
-import * as import25 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import26 from '@angular/common/src/directives/ng_if';
-import * as import27 from '@angular/common/src/directives/ng_for';
-import * as import28 from '../../../src/common/axes/x-axis.component';
-import * as import29 from '../common/axes/x-axis.component.ngfactory';
-import * as import30 from '../../../src/common/axes/y-axis.component';
-import * as import31 from '../common/axes/y-axis.component.ngfactory';
-import * as import32 from '../../../src/bar-chart/series-horizontal.component';
-import * as import33 from './series-horizontal.component.ngfactory';
+import * as import11 from '@angular/common/src/location/location';
+import * as import12 from '@angular/core/src/animation/animation_transition';
+import * as import13 from '@angular/core/src/animation/animation_sequence_player';
+import * as import14 from '@angular/core/src/animation/animation_styles';
+import * as import15 from '@angular/core/src/animation/animation_style_util';
+import * as import16 from '@angular/core/src/animation/animation_keyframe';
+import * as import17 from '@angular/core/src/animation/animation_player';
+import * as import18 from '@angular/core/src/linker/view_container';
+import * as import19 from '../../../src/common/charts/chart.component';
+import * as import20 from '../../../src/common/tooltip/tooltip.service';
+import * as import21 from '../common/charts/chart.component.ngfactory';
+import * as import22 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import23 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import24 from '../../../src/services/injection.service';
+import * as import25 from '@angular/core/src/linker/template_ref';
+import * as import26 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import27 from '@angular/common/src/directives/ng_if';
+import * as import28 from '@angular/common/src/directives/ng_for';
+import * as import29 from '../../../src/common/axes/x-axis.component';
+import * as import30 from '../common/axes/x-axis.component.ngfactory';
+import * as import31 from '../../../src/common/axes/y-axis.component';
+import * as import32 from '../common/axes/y-axis.component.ngfactory';
+import * as import33 from '../../../src/bar-chart/series-horizontal.component';
+import * as import34 from './series-horizontal.component.ngfactory';
 export class Wrapper_BarHorizontalNormalizedComponent {
   /*private*/ _eventHandler:Function;
   context:import0.BarHorizontalNormalizedComponent;
@@ -62,10 +63,10 @@ export class Wrapper_BarHorizontalNormalizedComponent {
   subscription0:any;
   subscription1:any;
   subscription2:any;
-  constructor(p0:any,p1:any,p2:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.BarHorizontalNormalizedComponent(p0,p1,p2);
+    this.context = new import0.BarHorizontalNormalizedComponent(p0,p1,p2,p3);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -243,7 +244,7 @@ class View_BarHorizontalNormalizedComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-bar-horizontal-normalized',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_BarHorizontalNormalizedComponent0(this.viewUtils,this,0,this._el_0);
-    this._BarHorizontalNormalizedComponent_0_3 = new Wrapper_BarHorizontalNormalizedComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref);
+    this._BarHorizontalNormalizedComponent_0_3 = new Wrapper_BarHorizontalNormalizedComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
     this.compView_0.create(this._BarHorizontalNormalizedComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._BarHorizontalNormalizedComponent_0_3.context);
@@ -272,7 +273,7 @@ var BarHorizontalNormalizedComponent_animationState_states:any = {
   'void': {}
 }
 ;
-function BarHorizontalNormalizedComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import11.AnimationTransition {
+function BarHorizontalNormalizedComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import12.AnimationTransition {
   var previousPlayers:any = view.animationContext.getAnimationPlayers(element,((nextState == 'void')? (null as any): 'animationState'));
   var collectedStyles:any = {};
   var player:any = (null as any);
@@ -283,7 +284,7 @@ function BarHorizontalNormalizedComponent_animationState_factory(view:import2.Ap
   var endStateStyles:any = BarHorizontalNormalizedComponent_animationState_states[nextState];
   if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
   if (((player == (null as any)) && (true && (nextState == 'void')))) {
-      player = new import12.AnimationSequencePlayer([view.renderer.animate(element,new import13.AnimationStyles(import14.collectAndResolveStyles(collectedStyles,[
+      player = new import13.AnimationSequencePlayer([view.renderer.animate(element,new import14.AnimationStyles(import15.collectAndResolveStyles(collectedStyles,[
         startStateStyles,
         {
           'opacity': '1',
@@ -292,12 +293,12 @@ function BarHorizontalNormalizedComponent_animationState_factory(view:import2.Ap
 
       ]
       )),[
-          new import15.AnimationKeyframe(0,new import13.AnimationStyles(import14.collectAndResolveStyles(collectedStyles,[{
+          new import16.AnimationKeyframe(0,new import14.AnimationStyles(import15.collectAndResolveStyles(collectedStyles,[{
             'opacity': '1',
             'transform': '*'
           }
         ]))),
-          new import15.AnimationKeyframe(1,new import13.AnimationStyles(import14.collectAndResolveStyles(collectedStyles,[{
+          new import16.AnimationKeyframe(1,new import14.AnimationStyles(import15.collectAndResolveStyles(collectedStyles,[{
             'opacity': '0',
             'transform': 'scale(0)'
           }
@@ -306,41 +307,41 @@ function BarHorizontalNormalizedComponent_animationState_factory(view:import2.Ap
     ,500,0,(null as any),previousPlayers)]);
     totalTime = 500;
   }
-  if ((player == (null as any))) { (player = new import16.NoOpAnimationPlayer()); }
+  if ((player == (null as any))) { (player = new import17.NoOpAnimationPlayer()); }
   player.onDone(():void => {
     player.destroy();
-    import14.renderStyles(element,view.renderer,import14.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
+    import15.renderStyles(element,view.renderer,import15.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
   });
-  new import12.AnimationSequencePlayer(previousPlayers).destroy();
-  import14.renderStyles(element,view.renderer,import14.clearStyles(startStateStyles));
+  new import13.AnimationSequencePlayer(previousPlayers).destroy();
+  import15.renderStyles(element,view.renderer,import15.clearStyles(startStateStyles));
   view.animationContext.queueAnimation(element,'animationState',player);
-  return new import11.AnimationTransition(player,currentState,nextState,totalTime);
+  return new import12.AnimationTransition(player,currentState,nextState,totalTime);
 }
 var renderType_BarHorizontalNormalizedComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarHorizontalNormalizedComponent,{animationState: BarHorizontalNormalizedComponent_animationState_factory});
 export class View_BarHorizontalNormalizedComponent0 extends import2.AppView<import0.BarHorizontalNormalizedComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import17.ViewContainer;
-  compView_1:import2.AppView<import18.ChartComponent>;
-  _TooltipService_1_5:import19.TooltipService;
-  _ChartComponent_1_6:import20.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import18.ViewContainer;
+  compView_1:import2.AppView<import19.ChartComponent>;
+  _TooltipService_1_5:import20.TooltipService;
+  _ChartComponent_1_6:import21.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _anchor_5:any;
-  /*private*/ _vc_5:import17.ViewContainer;
+  /*private*/ _vc_5:import18.ViewContainer;
   _TemplateRef_5_5:any;
-  _NgIf_5_6:import21.Wrapper_NgIf;
+  _NgIf_5_6:import22.Wrapper_NgIf;
   _text_6:any;
   _anchor_7:any;
-  /*private*/ _vc_7:import17.ViewContainer;
+  /*private*/ _vc_7:import18.ViewContainer;
   _TemplateRef_7_5:any;
-  _NgIf_7_6:import21.Wrapper_NgIf;
+  _NgIf_7_6:import22.Wrapper_NgIf;
   _text_8:any;
   _anchor_9:any;
-  /*private*/ _vc_9:import17.ViewContainer;
+  /*private*/ _vc_9:import18.ViewContainer;
   _TemplateRef_9_5:any;
-  _NgFor_9_6:import22.Wrapper_NgFor;
+  _NgFor_9_6:import23.Wrapper_NgFor;
   _text_10:any;
   _text_11:any;
   _text_12:any;
@@ -361,27 +362,27 @@ export class View_BarHorizontalNormalizedComponent0 extends import2.AppView<impo
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import17.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import20.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import19.TooltipService(this.parentView.injectorGet(import23.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import20.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import18.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import21.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import20.TooltipService(this.parentView.injectorGet(import24.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import21.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','bar-chart chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_5 = new import17.ViewContainer(5,3,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import24.TemplateRef_(this,5,this._anchor_5);
-    this._NgIf_5_6 = new import21.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
+    this._vc_5 = new import18.ViewContainer(5,3,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import25.TemplateRef_(this,5,this._anchor_5);
+    this._NgIf_5_6 = new import22.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
     this._text_6 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_7 = new import17.ViewContainer(7,3,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import24.TemplateRef_(this,7,this._anchor_7);
-    this._NgIf_7_6 = new import21.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
+    this._vc_7 = new import18.ViewContainer(7,3,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import25.TemplateRef_(this,7,this._anchor_7);
+    this._NgIf_7_6 = new import22.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
     this._text_8 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_9 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_9 = new import17.ViewContainer(9,3,this,this._anchor_9);
-    this._TemplateRef_9_5 = new import24.TemplateRef_(this,9,this._anchor_9);
-    this._NgFor_9_6 = new import22.Wrapper_NgFor(this._vc_9.vcRef,this._TemplateRef_9_5,this.parentView.injectorGet(import25.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_9 = new import18.ViewContainer(9,3,this,this._anchor_9);
+    this._TemplateRef_9_5 = new import25.TemplateRef_(this,9,this._anchor_9);
+    this._NgFor_9_6 = new import23.Wrapper_NgFor(this._vc_9.vcRef,this._TemplateRef_9_5,this.parentView.injectorGet(import26.IterableDiffers,this.parentIndex),this.ref);
     this._text_10 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_11 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
@@ -407,14 +408,14 @@ export class View_BarHorizontalNormalizedComponent0 extends import2.AppView<impo
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import24.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import26.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
-    if (((token === import24.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import26.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
-    if (((token === import24.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
-    if (((token === import27.NgFor) && (9 === requestNodeIndex))) { return this._NgFor_9_6.context; }
-    if (((token === import19.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._TooltipService_1_5; }
-    if (((token === import18.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import25.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import27.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
+    if (((token === import25.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import27.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
+    if (((token === import25.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
+    if (((token === import28.NgFor) && (9 === requestNodeIndex))) { return this._NgFor_9_6.context; }
+    if (((token === import20.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._TooltipService_1_5; }
+    if (((token === import19.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -490,16 +491,16 @@ export class View_BarHorizontalNormalizedComponent0 extends import2.AppView<impo
 }
 class View_BarHorizontalNormalizedComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import28.XAxisComponent>;
-  _XAxisComponent_0_3:import29.Wrapper_XAxisComponent;
+  compView_0:import2.AppView<import29.XAxisComponent>;
+  _XAxisComponent_0_3:import30.Wrapper_XAxisComponent;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import18.ViewContainer) {
     super(View_BarHorizontalNormalizedComponent1,renderType_BarHorizontalNormalizedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis',''),(null as any));
-    this.compView_0 = new import29.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._XAxisComponent_0_3 = new import29.Wrapper_XAxisComponent();
+    this.compView_0 = new import30.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisComponent_0_3 = new import30.Wrapper_XAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_0.create(this._XAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
@@ -512,7 +513,7 @@ class View_BarHorizontalNormalizedComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import28.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
+    if (((token === import29.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -548,16 +549,16 @@ class View_BarHorizontalNormalizedComponent1 extends import2.AppView<any> {
 }
 class View_BarHorizontalNormalizedComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import30.YAxisComponent>;
-  _YAxisComponent_0_3:import31.Wrapper_YAxisComponent;
+  compView_0:import2.AppView<import31.YAxisComponent>;
+  _YAxisComponent_0_3:import32.Wrapper_YAxisComponent;
   _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import18.ViewContainer) {
     super(View_BarHorizontalNormalizedComponent2,renderType_BarHorizontalNormalizedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),(null as any));
-    this.compView_0 = new import31.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._YAxisComponent_0_3 = new import31.Wrapper_YAxisComponent();
+    this.compView_0 = new import32.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisComponent_0_3 = new import32.Wrapper_YAxisComponent();
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_0.create(this._YAxisComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
@@ -570,7 +571,7 @@ class View_BarHorizontalNormalizedComponent2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import30.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
+    if (((token === import31.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -606,12 +607,12 @@ class View_BarHorizontalNormalizedComponent3 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import32.SeriesHorizontal>;
-  _SeriesHorizontal_2_3:import33.Wrapper_SeriesHorizontal;
+  compView_2:import2.AppView<import33.SeriesHorizontal>;
+  _SeriesHorizontal_2_3:import34.Wrapper_SeriesHorizontal;
   _text_3:any;
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import17.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import18.ViewContainer) {
     super(View_BarHorizontalNormalizedComponent3,renderType_BarHorizontalNormalizedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
@@ -620,8 +621,8 @@ class View_BarHorizontalNormalizedComponent3 extends import2.AppView<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-series-horizontal','','type','normalized'),(null as any));
-    this.compView_2 = new import33.View_SeriesHorizontal0(this.viewUtils,this,2,this._el_2);
-    this._SeriesHorizontal_2_3 = new import33.Wrapper_SeriesHorizontal();
+    this.compView_2 = new import34.View_SeriesHorizontal0(this.viewUtils,this,2,this._el_2);
+    this._SeriesHorizontal_2_3 = new import34.Wrapper_SeriesHorizontal();
     this.compView_2.create(this._SeriesHorizontal_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
@@ -636,7 +637,7 @@ class View_BarHorizontalNormalizedComponent3 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import32.SeriesHorizontal) && (2 === requestNodeIndex))) { return this._SeriesHorizontal_2_3.context; }
+    if (((token === import33.SeriesHorizontal) && (2 === requestNodeIndex))) { return this._SeriesHorizontal_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

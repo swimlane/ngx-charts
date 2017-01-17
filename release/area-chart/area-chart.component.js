@@ -58,7 +58,7 @@ var AreaChartComponent = (function (_super) {
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + ", " + _this.margin[0] + ")";
-            var pageUrl = window.location.href;
+            var pageUrl = _this.location.path();
             _this.clipPathId = 'clip' + id_1.id().toString();
             _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });

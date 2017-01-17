@@ -1,16 +1,18 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var id_1 = require('../utils/id');
 var d3_1 = require('../d3');
 var HeatMapCellComponent = (function () {
-    function HeatMapCellComponent(element) {
+    function HeatMapCellComponent(element, location) {
+        this.location = location;
         this.gradient = false;
         this.select = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
     HeatMapCellComponent.prototype.ngOnChanges = function (changes) {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.startOpacity = 0.3;
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
@@ -53,6 +55,7 @@ var HeatMapCellComponent = (function () {
     /** @nocollapse */
     HeatMapCellComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
+        { type: common_1.Location, },
     ]; };
     HeatMapCellComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],

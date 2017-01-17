@@ -26,10 +26,11 @@ import * as import17 from './pie-arc.component.ngfactory';
 import * as import18 from '../../../src/common/tooltip/tooltip.service';
 import * as import19 from '@angular/core/src/linker/element_ref';
 import * as import20 from '@angular/core/src/zone/ng_zone';
-import * as import21 from '@angular/common/src/directives/ng_if';
-import * as import22 from '../../../src/common/tooltip/tooltip.directive';
-import * as import23 from '../../../src/pie-chart/pie-label.component';
-import * as import24 from './pie-label.component.ngfactory';
+import * as import21 from '@angular/common/src/location/location';
+import * as import22 from '@angular/common/src/directives/ng_if';
+import * as import23 from '../../../src/common/tooltip/tooltip.directive';
+import * as import24 from '../../../src/pie-chart/pie-label.component';
+import * as import25 from './pie-label.component.ngfactory';
 export class Wrapper_PieSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieSeriesComponent;
@@ -274,7 +275,7 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
     this._vc_4 = new import9.ViewContainer(4,0,this,this._el_4);
     this.compView_4 = new import17.View_PieArcComponent0(this.viewUtils,this,4,this._el_4);
     this._TooltipDirective_4_5 = new import16.Wrapper_TooltipDirective(this.parentView.injectorGet(import18.TooltipService,this.parentIndex),this._vc_4.vcRef,this.renderer,new import19.ElementRef(this._el_4),this.parentView.injectorGet(import20.NgZone,this.parentIndex));
-    this._PieArcComponent_4_6 = new import17.Wrapper_PieArcComponent(new import19.ElementRef(this._el_4));
+    this._PieArcComponent_4_6 = new import17.Wrapper_PieArcComponent(new import19.ElementRef(this._el_4),this.parentView.injectorGet(import21.Location,this.parentIndex));
     this._text_5 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_4.create(this._PieArcComponent_4_6.context);
     this._text_6 = this.renderer.createText(this._el_0,'\n    ',(null as any));
@@ -294,8 +295,8 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
     if (((token === import11.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import21.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
-    if (((token === import22.TooltipDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_4_5.context; }
+    if (((token === import22.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
+    if (((token === import23.TooltipDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_4_5.context; }
     if (((token === import15.PieArcComponent) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._PieArcComponent_4_6.context; }
     return notFoundResult;
   }
@@ -372,16 +373,16 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
 }
 class View_PieSeriesComponent2 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import23.PieLabelComponent>;
-  _PieLabelComponent_0_3:import24.Wrapper_PieLabelComponent;
+  compView_0:import2.AppView<import24.PieLabelComponent>;
+  _PieLabelComponent_0_3:import25.Wrapper_PieLabelComponent;
   _text_1:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
     super(View_PieSeriesComponent2,renderType_PieSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-pie-label',''),(null as any));
-    this.compView_0 = new import24.View_PieLabelComponent0(this.viewUtils,this,0,this._el_0);
-    this._PieLabelComponent_0_3 = new import24.Wrapper_PieLabelComponent(new import19.ElementRef(this._el_0));
+    this.compView_0 = new import25.View_PieLabelComponent0(this.viewUtils,this,0,this._el_0);
+    this._PieLabelComponent_0_3 = new import25.Wrapper_PieLabelComponent(new import19.ElementRef(this._el_0));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._PieLabelComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -392,7 +393,7 @@ class View_PieSeriesComponent2 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import23.PieLabelComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._PieLabelComponent_0_3.context; }
+    if (((token === import24.PieLabelComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._PieLabelComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

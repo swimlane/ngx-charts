@@ -1,11 +1,13 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var Rx_1 = require('rxjs/Rx');
 var BaseChartComponent = (function () {
-    function BaseChartComponent(chartElement, zone, cd) {
+    function BaseChartComponent(chartElement, zone, cd, location) {
         this.chartElement = chartElement;
         this.zone = zone;
         this.cd = cd;
+        this.location = location;
         this.schemeType = 'ordinal';
         this.select = new core_1.EventEmitter();
     }
@@ -123,6 +125,7 @@ var BaseChartComponent = (function () {
         { type: core_1.ElementRef, },
         { type: core_1.NgZone, },
         { type: core_1.ChangeDetectorRef, },
+        { type: common_1.Location, },
     ]; };
     BaseChartComponent.propDecorators = {
         'results': [{ type: core_1.Input },],

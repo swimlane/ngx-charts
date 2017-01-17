@@ -471,7 +471,7 @@ class View_AreaTooltip3 extends import2.AppView<any> {
       this.renderer.setElementStyle(this._el_2,'background-color',((this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_5) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import20.SecurityContext.STYLE,currVal_5).toString()));
       this._expr_5 = currVal_5;
     }
-    const currVal_6:any = import3.inlineInterpolate(2,'\n            ',this.context.$implicit.series,': ',this.context.$implicit.value.toLocaleString(),'\n          ');
+    const currVal_6:any = import3.inlineInterpolate(1,'\n            ',this.parentView.parentView.parentView.context.getToolTipText(this.context.$implicit),'\n          ');
     if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
       this.renderer.setText(this._text_4,currVal_6);
       this._expr_6 = currVal_6;

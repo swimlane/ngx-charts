@@ -22,6 +22,7 @@ import * as import13 from '@angular/core/src/change_detection/differs/iterable_d
 import * as import14 from '@angular/common/src/directives/ng_for';
 import * as import15 from '../../../src/pie-chart/pie-arc.component';
 import * as import16 from './pie-arc.component.ngfactory';
+import * as import17 from '@angular/common/src/location/location';
 export class Wrapper_PieGridSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieGridSeriesComponent;
@@ -202,7 +203,7 @@ class View_PieGridSeriesComponent1 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-pie-arc',''),(null as any));
     this.compView_0 = new import16.View_PieArcComponent0(this.viewUtils,this,0,this._el_0);
-    this._PieArcComponent_0_3 = new import16.Wrapper_PieArcComponent(new import9.ElementRef(this._el_0));
+    this._PieArcComponent_0_3 = new import16.Wrapper_PieArcComponent(new import9.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import17.Location,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._PieArcComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_0));

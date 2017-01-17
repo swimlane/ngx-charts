@@ -77,6 +77,8 @@ var AreaTooltip = (function () {
                     value: val,
                     name: label,
                     series: groupName,
+                    min: item.min,
+                    max: item.max,
                     color: color
                 });
             }
@@ -100,22 +102,55 @@ var AreaTooltip = (function () {
         return results;
     };
     AreaTooltip.prototype.showTooltip = function (index) {
-        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
         var event = new MouseEvent('mouseenter', { bubbles: false });
         this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
         this.anchorOpacity[index] = 0.7;
         this.hover.emit(this.tooltipAreas[index]);
     };
     AreaTooltip.prototype.hideTooltip = function (index) {
-        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
         var event = new MouseEvent('mouseleave', { bubbles: false });
         this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
         this.anchorOpacity[index] = 0;
     };
+    AreaTooltip.prototype.getToolTipText = function (tooltipItem) {
+        var result = '';
+        if (tooltipItem.series !== undefined) {
+            result += tooltipItem.series;
+        }
+        else {
+            result += '???';
+        }
+        result += ': ';
+        if (tooltipItem.value !== undefined) {
+            result += tooltipItem.value.toLocaleString();
+        }
+        if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
+            result += ' (';
+            if (tooltipItem.min !== undefined) {
+                if (tooltipItem.max === undefined) {
+                    result += '≥';
+                }
+                result += tooltipItem.min.toLocaleString();
+                if (tooltipItem.max !== undefined) {
+                    result += ' - ';
+                }
+            }
+            else if (tooltipItem.max !== undefined) {
+                result += '≤';
+            }
+            if (tooltipItem.max !== undefined) {
+                result += tooltipItem.max.toLocaleString();
+            }
+            result += ')';
+        }
+        return result;
+    };
     AreaTooltip.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[ngx-charts-area-tooltip]',
-                    template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
+                    template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];

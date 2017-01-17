@@ -1,10 +1,12 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var moment = require('moment');
 var label_helper_1 = require('../common/label.helper');
 var id_1 = require('../utils/id');
 var CircleSeriesComponent = (function () {
-    function CircleSeriesComponent() {
+    function CircleSeriesComponent(location) {
+        this.location = location;
         this.type = 'standard';
         this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
@@ -19,7 +21,7 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.prototype.getCircles = function () {
         var _this = this;
         var seriesName = this.data.name;
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         return this.data.series.map(function (d, i) {
             var value = d.value;
             var label = d.name;
@@ -71,14 +73,41 @@ var CircleSeriesComponent = (function () {
                     barVisible: false,
                     gradientId: gradientId,
                     gradientFill: gradientFill,
-                    gradientStops: _this.getGradientStops(color)
+                    gradientStops: _this.getGradientStops(color),
+                    min: d.min,
+                    max: d.max
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
     };
     CircleSeriesComponent.prototype.getTooltipText = function (_a) {
-        var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName;
-        return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+        var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName, min = _a.min, max = _a.max;
+        return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + this.getTooltipMinMaxText(min, max) + "</span>\n    ";
+    };
+    CircleSeriesComponent.prototype.getTooltipMinMaxText = function (min, max) {
+        if (min !== undefined || max !== undefined) {
+            var result = ' (';
+            if (min !== undefined) {
+                if (max === undefined) {
+                    result += '≥';
+                }
+                result += min.toLocaleString();
+                if (max !== undefined) {
+                    result += ' - ';
+                }
+            }
+            else if (max !== undefined) {
+                result += '≤';
+            }
+            if (max !== undefined) {
+                result += max.toLocaleString();
+            }
+            result += ')';
+            return result;
+        }
+        else {
+            return '';
+        }
     };
     CircleSeriesComponent.prototype.getGradientStops = function (color) {
         return [
@@ -129,7 +158,9 @@ var CircleSeriesComponent = (function () {
                 },] },
     ];
     /** @nocollapse */
-    CircleSeriesComponent.ctorParameters = function () { return []; };
+    CircleSeriesComponent.ctorParameters = function () { return [
+        { type: common_1.Location, },
+    ]; };
     CircleSeriesComponent.propDecorators = {
         'data': [{ type: core_1.Input },],
         'type': [{ type: core_1.Input },],

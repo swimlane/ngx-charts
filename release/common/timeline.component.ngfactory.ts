@@ -16,6 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
+import * as import11 from '@angular/common/src/location/location';
 export class Wrapper_Timeline {
   /*private*/ _eventHandler:Function;
   context:import0.Timeline;
@@ -33,10 +34,10 @@ export class Wrapper_Timeline {
   /*private*/ _expr_9:any;
   subscription0:any;
   subscription1:any;
-  constructor(p0:any,p1:any,p2:any) {
+  constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.Timeline(p0,p1,p2);
+    this.context = new import0.Timeline(p0,p1,p2,p3);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -166,7 +167,7 @@ class View_Timeline_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-timeline',''),rootSelector,(null as any));
     this.compView_0 = new View_Timeline0(this.viewUtils,this,0,this._el_0);
-    this._Timeline_0_3 = new Wrapper_Timeline(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref);
+    this._Timeline_0_3 = new Wrapper_Timeline(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
     this.compView_0.create(this._Timeline_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._Timeline_0_3.context);

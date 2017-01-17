@@ -1,8 +1,10 @@
 import { ElementRef, NgZone, ChangeDetectorRef, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Location } from '@angular/common';
 export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     protected chartElement: ElementRef;
     protected zone: NgZone;
     protected cd: ChangeDetectorRef;
+    protected location: Location;
     results: any;
     view: number[];
     scheme: any;
@@ -12,7 +14,7 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
     width: number;
     height: number;
     resizeSubscription: any;
-    constructor(chartElement: ElementRef, zone: NgZone, cd: ChangeDetectorRef);
+    constructor(chartElement: ElementRef, zone: NgZone, cd: ChangeDetectorRef, location: Location);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(changes: SimpleChanges): void;
