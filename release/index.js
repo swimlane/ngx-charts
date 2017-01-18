@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"3.1.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"3.1.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -324,9 +324,11 @@ var AreaChartNormalizedComponent = (function (_super) {
     };
     AreaChartNormalizedComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartNormalizedComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartNormalizedComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -389,7 +391,15 @@ var AreaChartNormalizedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartNormalizedComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -719,9 +729,11 @@ var AreaChartStackedComponent = (function (_super) {
     };
     AreaChartStackedComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartStackedComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartStackedComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -784,7 +796,15 @@ var AreaChartStackedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartStackedComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -1067,9 +1087,11 @@ var AreaChartComponent = (function (_super) {
     };
     AreaChartComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -1132,7 +1154,15 @@ var AreaChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -1735,7 +1765,7 @@ var BarHorizontal2DComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -1990,7 +2020,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -2257,7 +2287,7 @@ var BarHorizontalStackedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -2476,7 +2506,7 @@ var BarHorizontalComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -2742,7 +2772,7 @@ var BarVertical2DComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -3001,7 +3031,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -3268,7 +3298,7 @@ var BarVerticalStackedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -3487,7 +3517,7 @@ var BarVerticalComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -5936,8 +5966,18 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-circle-series]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('void => *', [
+                        core_1.style({
+                            opacity: 0,
+                        }),
+                        core_1.animate(250, core_1.style({ opacity: 1 }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [common_1.Location])
     ], CircleSeriesComponent);
@@ -8084,7 +8124,9 @@ var TooltipDirective = (function () {
                 _this.component = _this.tooltipService.create(options);
                 // add a tiny timeout to avoid event re-triggers
                 setTimeout(function () {
-                    _this.addHideListeners(_this.component.instance.element.nativeElement);
+                    if (_this.component) {
+                        _this.addHideListeners(_this.component.instance.element.nativeElement);
+                    }
                 }, 10);
                 _this.show.emit(true);
             }, time);
@@ -10214,9 +10256,11 @@ var LineChartComponent = (function (_super) {
     };
     LineChartComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     LineChartComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     LineChartComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -10279,7 +10323,15 @@ var LineChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    LineChartComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -11524,7 +11576,7 @@ var PieChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 

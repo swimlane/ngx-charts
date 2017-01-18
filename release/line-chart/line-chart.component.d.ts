@@ -75,4 +75,5 @@ export declare class LineChartComponent extends BaseChartComponent {
     }): void;
     onActivate(item: any): void;
     onDeactivate(item: any): void;
+    deactivateAll(): void;
 }

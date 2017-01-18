@@ -105,7 +105,7 @@ var PieChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     PieChartComponent.decorators = [
         { type: core_1.Component, args: [{

@@ -93,7 +93,9 @@ var TooltipDirective = (function () {
                 _this.component = _this.tooltipService.create(options);
                 // add a tiny timeout to avoid event re-triggers
                 setTimeout(function () {
-                    _this.addHideListeners(_this.component.instance.element.nativeElement);
+                    if (_this.component) {
+                        _this.addHideListeners(_this.component.instance.element.nativeElement);
+                    }
                 }, 10);
                 _this.show.emit(true);
             }, time);

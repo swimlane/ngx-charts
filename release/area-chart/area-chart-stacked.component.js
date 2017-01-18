@@ -232,9 +232,11 @@ var AreaChartStackedComponent = (function (_super) {
     };
     AreaChartStackedComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartStackedComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartStackedComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -297,7 +299,15 @@ var AreaChartStackedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartStackedComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     AreaChartStackedComponent.decorators = [
         { type: core_1.Component, args: [{

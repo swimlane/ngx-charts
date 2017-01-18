@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1
+- Fixed bug where activated lines and areas would not deactivate when mouse leaves the circle
+- Added fade in animation to active circle line
+
 ## 3.1.0
 - Added min and max ranges option to line charts (#160)
 - Added margin support for Gauge charts (#159)
@@ -111,7 +115,7 @@
 - Enhancement: Added `legendLabelClick` event
 - Enhancement: Properly format labels and numbers in axis, tooltips, and legends
 - Bug: Fix typo in legend eye class
-- Style: Hover styling for legend entries 
+- Style: Hover styling for legend entries
 - Chore: Upgrade to Angular 2.2.2
 - Chore: Better Webpack Config
 - Chore: Normalized exports

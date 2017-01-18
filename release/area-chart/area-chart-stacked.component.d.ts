@@ -71,4 +71,5 @@ export declare class AreaChartStackedComponent extends BaseChartComponent {
     }): void;
     onActivate(item: any): void;
     onDeactivate(item: any): void;
+    deactivateAll(): void;
 }

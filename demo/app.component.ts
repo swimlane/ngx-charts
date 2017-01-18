@@ -408,7 +408,7 @@ import './demo.scss';
               <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
               Real-time
             </label>
-            
+
            <label *ngIf="chartType === 'line-chart'">
               <br />
               <input type="checkbox" [checked]="range" (change)="range = $event.target.checked">
@@ -462,7 +462,7 @@ import './demo.scss';
           <option value="ordinal">Ordinal</option>
           <option value="linear">Linear</option>
         </select>
- 
+
         <div [hidden]="(!colorVisible) || (!range)" style="margin-left: 10px;">
            <div>
             <label>Range fill color opacity (0.0 - 1.0):</label><br />
@@ -645,7 +645,7 @@ import './demo.scss';
 export class AppComponent implements OnInit {
 
   theme = 'dark';
-  chartType = 'bar-vertical';
+  chartType = 'line-chart';
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;

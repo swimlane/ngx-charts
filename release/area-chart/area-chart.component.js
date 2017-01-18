@@ -185,9 +185,11 @@ var AreaChartComponent = (function (_super) {
     };
     AreaChartComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -250,7 +252,15 @@ var AreaChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     AreaChartComponent.decorators = [
         { type: core_1.Component, args: [{
