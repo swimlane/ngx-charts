@@ -1,6 +1,15 @@
 import {
-  Component, Input, Output, SimpleChanges, EventEmitter,
-  OnChanges, ChangeDetectionStrategy
+  Component,
+  Input,
+  Output,
+  SimpleChanges,
+  EventEmitter,
+  OnChanges,
+  ChangeDetectionStrategy,
+  trigger,
+  style,
+  transition,
+  animate
 } from '@angular/core';
 import { Location } from '@angular/common';
 import * as moment from 'moment';
@@ -21,6 +30,7 @@ import { id } from '../utils/id';
       </defs>
       <svg:rect
         *ngIf="circle.barVisible && type === 'standard'"
+        [@animationState]="'active'"
         [attr.x]="circle.cx - circle.radius"
         [attr.y]="circle.cy"
         [attr.width]="circle.radius * 2"
@@ -49,7 +59,17 @@ import { id } from '../utils/id';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate(250, style({opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class CircleSeriesComponent implements OnChanges {
 
