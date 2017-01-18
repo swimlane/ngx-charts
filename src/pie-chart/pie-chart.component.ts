@@ -147,7 +147,7 @@ export class PieChartComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
@@ -160,7 +160,7 @@ export class PieChartComponent extends BaseChartComponent {
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];
 
-    this.deactivate.emit({ value: event, entries: this.activeEntries });
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
 }

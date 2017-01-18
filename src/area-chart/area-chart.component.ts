@@ -348,11 +348,13 @@ export class AreaChartComponent extends BaseChartComponent {
 
   updateHoveredVertical(item): void {
     this.hoveredVertical = item.value;
+    this.deactivateAll();
   }
 
   @HostListener('mouseleave')
   hideCircles(): void {
     this.hoveredVertical = null;
+    this.deactivateAll();
   }
 
   onClick(data, series): void {
@@ -423,7 +425,14 @@ export class AreaChartComponent extends BaseChartComponent {
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];
 
-    this.deactivate.emit({ value: event, entries: this.activeEntries });
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
+  deactivateAll() {
+    this.activeEntries = [...this.activeEntries];
+    for (let entry of this.activeEntries) {
+      this.deactivate.emit({ value: entry, entries: [] });
+    }
+    this.activeEntries = [];
+  }
 }
