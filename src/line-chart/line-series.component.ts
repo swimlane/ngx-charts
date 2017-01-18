@@ -62,7 +62,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
-  @Input() scaleType;
+  @Input() xScaleType;
   @Input() curve: string;
   @Input() activeEntries: any[];
   @Input() rangeFillOpacity: number;
@@ -102,9 +102,9 @@ export class LineSeriesComponent implements OnChanges {
       .x(d => {
         const label = d.name;
         let value;
-        if (this.scaleType === 'time') {
+        if (this.xScaleType === 'time') {
           value = this.xScale(moment(label).toDate());
-        } else if (this.scaleType === 'linear') {
+        } else if (this.xScaleType === 'linear' || this.xScaleType === 'log') {
           value = this.xScale(Number(label));
         } else {
           value = this.xScale(label);
@@ -120,9 +120,9 @@ export class LineSeriesComponent implements OnChanges {
         .x(d => {
           const label = d.name;
           let value;
-          if (this.scaleType === 'time') {
+          if (this.xScaleType === 'time') {
             value = this.xScale(moment(label).toDate());
-          } else if (this.scaleType === 'linear') {
+          } else if (this.xScaleType === 'linear' || this.xScaleType === 'log') {
             value = this.xScale(Number(label));
           } else {
             value = this.xScale(label);
@@ -148,9 +148,9 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   sortData(data) {
-    if (this.scaleType === 'linear') {
+    if (this.xScaleType === 'linear' || this.xScaleType === 'log') {
       data = sortLinear(data, 'name');
-    } else if (this.scaleType === 'time') {
+    } else if (this.xScaleType === 'time') {
       data = sortByTime(data, 'name');
     } else {
       data = sortByDomain(data, 'name', 'asc', this.xScale.domain());
