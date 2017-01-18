@@ -10,6 +10,7 @@ import { TooltipService } from '../tooltip';
   selector: 'ngx-charts-chart',
   template: `
     <div
+      class="ngx-charts-outer"
       [style.width.px]="view[0]"
       [@animationState]="'active'">
       <svg
@@ -95,7 +96,7 @@ export class ChartComponent implements OnChanges {
       }
     }
 
-    let chartColumns = 12 - legendColumns;
+    const chartColumns = 12 - legendColumns;
 
     this.chartWidth = this.view[0] * chartColumns / 12.0;
     this.legendWidth = this.view[0] * legendColumns / 12.0;
