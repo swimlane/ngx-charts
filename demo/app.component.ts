@@ -176,7 +176,7 @@ import './demo.scss';
             [explodeSlices]="explodeSlices"
             [labels]="showLabels"
             [doughnut]="doughnut"
-            [innerRadiusFraction]="innerRadiusFraction"
+            [arcWidth]="arcWidth"
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             (select)="select($event)">
@@ -547,9 +547,9 @@ import './demo.scss';
               Doughnut
             </label> <br />
           </div>
-          <div *ngIf="chart.options.includes('innerRadiusFraction')">
-            <label>Inner radius fraction value:</label><br />
-            <input type="number" [disabled]="!doughnut" [(ngModel)]="innerRadiusFraction"
+          <div *ngIf="chart.options.includes('arcWidth')">
+            <label>Arc width (fraction of radius):</label><br />
+            <input type="number" [disabled]="!doughnut" [(ngModel)]="arcWidth"
               max="1" min="0" step="0.01"><br />
           </div>
           <div *ngIf="chart.options.includes('autoScale')">
@@ -698,7 +698,7 @@ export class AppComponent implements OnInit {
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
-  innerRadiusFraction = 0.75;
+  arcWidth = 0.25;
 
   // line, area
   autoScale = true;

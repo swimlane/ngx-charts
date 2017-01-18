@@ -84,7 +84,7 @@ const chartGroups = [
         selector: 'pie-chart',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'gradient', 'showLegend', 'doughnut', 'innerRadiusFraction',
+          'colorScheme', 'gradient', 'showLegend', 'doughnut', 'arcWidth',
           'explodeSlices', 'showLabels'
         ]
       },
