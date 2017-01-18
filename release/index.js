@@ -1,18 +1,18 @@
 /**
- * ngx-charts v"3.1.1" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"3.1.2" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
+		module.exports = factory(require("d3-force"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("@angular/common"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
 	else if(typeof define === 'function' && define.amd)
-		define("ngx-charts", ["@angular/common", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-color", "d3-force", "d3-format", "d3-hierarchy", "d3-interpolate", "d3-scale", "d3-selection", "d3-shape", "moment", "rxjs/Rx"], factory);
+		define("ngx-charts", ["d3-force", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-color", "@angular/common", "d3-format", "d3-hierarchy", "d3-interpolate", "d3-scale", "d3-selection", "d3-shape", "moment", "rxjs/Rx"], factory);
 	else if(typeof exports === 'object')
-		exports["ngx-charts"] = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
+		exports["ngx-charts"] = factory(require("d3-force"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("@angular/common"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
 	else
-		root["ngx-charts"] = factory(root["@angular/common"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["d3-force"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs/Rx"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_14__) {
+		root["ngx-charts"] = factory(root["d3-force"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["@angular/common"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs/Rx"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_14__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -48,16 +48,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmory imports with the correct context
+/******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
 /******/
-/******/ 	// define getter function for harmory exports
+/******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		Object.defineProperty(exports, name, {
-/******/ 			configurable: false,
-/******/ 			enumerable: true,
-/******/ 			get: getter
-/******/ 		});
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -82,10 +84,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ({
 
 /***/ "./src/area-chart/area-chart-normalized.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -480,13 +482,13 @@ var AreaChartNormalizedComponent = (function (_super) {
 exports.AreaChartNormalizedComponent = AreaChartNormalizedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-chart-stacked.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -885,13 +887,13 @@ var AreaChartStackedComponent = (function (_super) {
 exports.AreaChartStackedComponent = AreaChartStackedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -1251,13 +1253,13 @@ var AreaChartComponent = (function (_super) {
 exports.AreaChartComponent = AreaChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1303,13 +1305,13 @@ var AreaChartModule = (function () {
 exports.AreaChartModule = AreaChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1470,13 +1472,13 @@ var AreaSeriesComponent = (function () {
 exports.AreaSeriesComponent = AreaSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -1487,13 +1489,13 @@ __export(__webpack_require__("./src/area-chart/area-chart-stacked.component.ts")
 __export(__webpack_require__("./src/area-chart/area-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1567,13 +1569,13 @@ var BarChartModule = (function () {
 exports.BarChartModule = BarChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal-2d.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -1843,13 +1845,13 @@ var BarHorizontal2DComponent = (function (_super) {
 exports.BarHorizontal2DComponent = BarHorizontal2DComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal-normalized.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -2098,13 +2100,13 @@ var BarHorizontalNormalizedComponent = (function (_super) {
 exports.BarHorizontalNormalizedComponent = BarHorizontalNormalizedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal-stacked.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -2365,13 +2367,13 @@ var BarHorizontalStackedComponent = (function (_super) {
 exports.BarHorizontalStackedComponent = BarHorizontalStackedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -2573,13 +2575,13 @@ var BarHorizontalComponent = (function (_super) {
 exports.BarHorizontalComponent = BarHorizontalComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical-2d.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -2854,13 +2856,13 @@ var BarVertical2DComponent = (function (_super) {
 exports.BarVertical2DComponent = BarVertical2DComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical-normalized.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3109,13 +3111,13 @@ var BarVerticalNormalizedComponent = (function (_super) {
 exports.BarVerticalNormalizedComponent = BarVerticalNormalizedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical-stacked.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3376,13 +3378,13 @@ var BarVerticalStackedComponent = (function (_super) {
 exports.BarVerticalStackedComponent = BarVerticalStackedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3584,13 +3586,13 @@ var BarVerticalComponent = (function (_super) {
 exports.BarVerticalComponent = BarVerticalComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3851,13 +3853,13 @@ var BarComponent = (function () {
 exports.BarComponent = BarComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -3875,13 +3877,13 @@ __export(__webpack_require__("./src/bar-chart/bar-vertical-stacked.component.ts"
 __export(__webpack_require__("./src/bar-chart/series-vertical.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/series-horizontal.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4069,13 +4071,13 @@ var SeriesHorizontal = (function () {
 exports.SeriesHorizontal = SeriesHorizontal;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/series-vertical.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4270,13 +4272,13 @@ var SeriesVerticalComponent = (function () {
 exports.SeriesVerticalComponent = SeriesVerticalComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/area-tooltip.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4483,13 +4485,13 @@ var AreaTooltip = (function () {
 exports.AreaTooltip = AreaTooltip;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/area.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4619,13 +4621,13 @@ var AreaComponent = (function () {
 exports.AreaComponent = AreaComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/axes.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4658,13 +4660,13 @@ var AxesModule = (function () {
 exports.AxesModule = AxesModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/axis-label.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4743,13 +4745,13 @@ var AxisLabelComponent = (function () {
 exports.AxisLabelComponent = AxisLabelComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/ticks.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function reduceTicks(ticks, maxTicks) {
     if (ticks.length > maxTicks) {
         var reduced = [];
@@ -4766,13 +4768,13 @@ function reduceTicks(ticks, maxTicks) {
 exports.reduceTicks = reduceTicks;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/x-axis-ticks.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4958,13 +4960,13 @@ var XAxisTicksComponent = (function () {
 exports.XAxisTicksComponent = XAxisTicksComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/x-axis.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5062,13 +5064,13 @@ var XAxisComponent = (function () {
 exports.XAxisComponent = XAxisComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/y-axis-ticks.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5268,13 +5270,13 @@ var YAxisTicksComponent = (function () {
 exports.YAxisTicksComponent = YAxisTicksComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/y-axis.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5377,13 +5379,13 @@ var YAxisComponent = (function () {
 exports.YAxisComponent = YAxisComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/base-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5435,14 +5437,17 @@ var BaseChartComponent = (function () {
         var width = 0;
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
-        if (hostElem.parentNode != null) {
+        if (hostElem.parentNode !== null) {
             // Get the container dimensions
             width = hostElem.parentNode.clientWidth;
             height = hostElem.parentNode.clientHeight;
         }
         return { width: width, height: height };
     };
-    // converts all date objects that appear as name into formatted date strings
+    /**
+     * Converts all date objects that appear as name
+     * into formatted date strings
+     */
     BaseChartComponent.prototype.formatDates = function () {
         for (var i = 0; i < this.results.length; i++) {
             var g = this.results[i];
@@ -5544,13 +5549,13 @@ var BaseChartComponent = (function () {
 exports.BaseChartComponent = BaseChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/chart-common.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5627,13 +5632,13 @@ var ChartCommonModule = (function () {
 exports.ChartCommonModule = ChartCommonModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/charts/chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5734,7 +5739,7 @@ var ChartComponent = (function () {
         core_1.Component({
             providers: [tooltip_1.TooltipService],
             selector: 'ngx-charts-chart',
-            template: "\n    <div\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
+            template: "\n    <div\n      class=\"ngx-charts-outer\"\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -5752,13 +5757,13 @@ var ChartComponent = (function () {
 exports.ChartComponent = ChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/circle-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5986,13 +5991,13 @@ var CircleSeriesComponent = (function () {
 exports.CircleSeriesComponent = CircleSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/circle.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6100,13 +6105,13 @@ var CircleComponent = (function () {
 exports.CircleComponent = CircleComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/color.helper.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var d3_1 = __webpack_require__("./src/d3.ts");
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var ColorHelper = (function () {
@@ -6226,13 +6231,13 @@ var ColorHelper = (function () {
 exports.ColorHelper = ColorHelper;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/count/count.directive.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6369,13 +6374,13 @@ var CountUpDirective = (function () {
 exports.CountUpDirective = CountUpDirective;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/count/count.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 // Robert Penner's easeOutExpo
 function easeOutExpo(t, b, c, d) {
     return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
@@ -6449,13 +6454,13 @@ function decimalChecker(countTo) {
 exports.decimalChecker = decimalChecker;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/count/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -6463,13 +6468,13 @@ __export(__webpack_require__("./src/common/count/count.directive.ts"));
 __export(__webpack_require__("./src/common/count/count.helper.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/grid-layout.helper.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var d3_1 = __webpack_require__("./src/d3.ts");
 function gridLayout(dims, data, minWidth) {
     var rows = 1;
@@ -6524,13 +6529,13 @@ function getTotal(results) {
 }
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/grid-panel-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6626,13 +6631,13 @@ var GridPanelSeriesComponent = (function () {
 exports.GridPanelSeriesComponent = GridPanelSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/grid-panel.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6679,13 +6684,13 @@ var GridPanelComponent = (function () {
 exports.GridPanelComponent = GridPanelComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -6711,13 +6716,13 @@ __export(__webpack_require__("./src/common/view-dimensions.helper.ts"));
 __export(__webpack_require__("./src/common/label.helper.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/label.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 /**
  * Formats a label given a date, number or string.
  *
@@ -6737,13 +6742,13 @@ function formatLabel(label) {
 exports.formatLabel = formatLabel;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/advanced-legend.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6833,13 +6838,13 @@ var AdvancedLegendComponent = (function () {
 exports.AdvancedLegendComponent = AdvancedLegendComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -6849,13 +6854,13 @@ __export(__webpack_require__("./src/common/legend/legend-entry.component.ts"));
 __export(__webpack_require__("./src/common/legend/advanced-legend.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/legend-entry.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6944,13 +6949,13 @@ var LegendEntryComponent = (function () {
 exports.LegendEntryComponent = LegendEntryComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/legend.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7075,13 +7080,13 @@ var LegendComponent = (function () {
 exports.LegendComponent = LegendComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/scale-legend.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7145,13 +7150,13 @@ var ScaleLegendComponent = (function () {
 exports.ScaleLegendComponent = ScaleLegendComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/svg-linear-gradient.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7207,13 +7212,13 @@ var SvgLinearGradientComponent = (function () {
 exports.SvgLinearGradientComponent = SvgLinearGradientComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/svg-radial-gradient.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7270,13 +7275,13 @@ var SvgRadialGradientComponent = (function () {
 exports.SvgRadialGradientComponent = SvgRadialGradientComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tick-format.helper.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var moment = __webpack_require__(2);
 function tickFormat(fieldType, groupByType) {
     return function (label) {
@@ -7292,13 +7297,13 @@ function tickFormat(fieldType, groupByType) {
 exports.tickFormat = tickFormat;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/timeline.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7506,13 +7511,13 @@ var Timeline = (function () {
 exports.Timeline = Timeline;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/alignment.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (AlignmentTypes) {
     AlignmentTypes[AlignmentTypes["left"] = 'left'] = "left";
     AlignmentTypes[AlignmentTypes["center"] = 'center'] = "center";
@@ -7521,13 +7526,13 @@ exports.Timeline = Timeline;
 var AlignmentTypes = exports.AlignmentTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -7540,13 +7545,13 @@ __export(__webpack_require__("./src/common/tooltip/alignment.type.ts"));
 __export(__webpack_require__("./src/common/tooltip/show.type.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/position/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -7554,13 +7559,13 @@ __export(__webpack_require__("./src/common/tooltip/position/placement.type.ts"))
 __export(__webpack_require__("./src/common/tooltip/position/position.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/position/placement.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (PlacementTypes) {
     PlacementTypes[PlacementTypes["top"] = 'top'] = "top";
     PlacementTypes[PlacementTypes["bottom"] = 'bottom'] = "bottom";
@@ -7570,13 +7575,13 @@ __export(__webpack_require__("./src/common/tooltip/position/position.ts"));
 var PlacementTypes = exports.PlacementTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/position/position.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var placement_type_1 = __webpack_require__("./src/common/tooltip/position/placement.type.ts");
 var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
@@ -7852,13 +7857,13 @@ var PositionHelper = (function () {
 exports.PositionHelper = PositionHelper;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/show.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (ShowTypes) {
     ShowTypes[ShowTypes["all"] = 'all'] = "all";
     ShowTypes[ShowTypes["focus"] = 'focus'] = "focus";
@@ -7867,13 +7872,13 @@ exports.PositionHelper = PositionHelper;
 var ShowTypes = exports.ShowTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/style.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (StyleTypes) {
     StyleTypes[StyleTypes["popover"] = 'popover'] = "popover";
     StyleTypes[StyleTypes["tooltip"] = 'tooltip'] = "tooltip";
@@ -7881,13 +7886,13 @@ var ShowTypes = exports.ShowTypes;
 var StyleTypes = exports.StyleTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8014,13 +8019,13 @@ var TooltipContentComponent = (function () {
 exports.TooltipContentComponent = TooltipContentComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.directive.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8304,13 +8309,13 @@ var TooltipDirective = (function () {
 exports.TooltipDirective = TooltipDirective;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8344,13 +8349,13 @@ var TooltipModule = (function () {
 exports.TooltipModule = TooltipModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.service.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8384,13 +8389,13 @@ var TooltipService = (function (_super) {
 exports.TooltipService = TooltipService;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/trim-label.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function trimLabel(s, max) {
     if (max === void 0) { max = 16; }
     if (typeof s !== 'string') {
@@ -8411,13 +8416,13 @@ function trimLabel(s, max) {
 exports.trimLabel = trimLabel;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/view-dimensions.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function calculateViewDimensions(_a) {
     var width = _a.width, height = _a.height, margins = _a.margins, _b = _a.showXAxis, showXAxis = _b === void 0 ? false : _b, _c = _a.showYAxis, showYAxis = _c === void 0 ? false : _c, _d = _a.xAxisHeight, xAxisHeight = _d === void 0 ? 0 : _d, _e = _a.yAxisWidth, yAxisWidth = _e === void 0 ? 0 : _e, _f = _a.showXLabel, showXLabel = _f === void 0 ? false : _f, _g = _a.showYLabel, showYLabel = _g === void 0 ? false : _g, _h = _a.showLegend, showLegend = _h === void 0 ? false : _h, _j = _a.legendType, legendType = _j === void 0 ? 'ordinal' : _j, _k = _a.columns, columns = _k === void 0 ? 12 : _k;
     var xOffset = margins[3];
@@ -8465,14 +8470,14 @@ function calculateViewDimensions(_a) {
 exports.calculateViewDimensions = calculateViewDimensions;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/d3.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /// <reference path="../node_modules/awesome-typescript-loader/lib/runtime.d.ts" />
-"use strict";
+
 var array = __webpack_require__(4);
 var brush = __webpack_require__(5);
 var color = __webpack_require__(6);
@@ -8522,13 +8527,13 @@ exports.default = {
 };
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/force-directed-graph/force-directed-graph.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8722,13 +8727,13 @@ var ForceDirectedGraphComponent = (function (_super) {
 exports.ForceDirectedGraphComponent = ForceDirectedGraphComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/force-directed-graph/force-directed-graph.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8762,13 +8767,13 @@ var ForceDirectedGraphModule = (function () {
 exports.ForceDirectedGraphModule = ForceDirectedGraphModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/force-directed-graph/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -8776,13 +8781,13 @@ __export(__webpack_require__("./src/force-directed-graph/force-directed-graph.mo
 __export(__webpack_require__("./src/force-directed-graph/force-directed-graph.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge-arc.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8852,13 +8857,13 @@ var GaugeArcComponent = (function () {
 exports.GaugeArcComponent = GaugeArcComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge-axis.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8990,13 +8995,13 @@ var GaugeAxisComponent = (function () {
 exports.GaugeAxisComponent = GaugeAxisComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9284,13 +9289,13 @@ var GaugeComponent = (function (_super) {
 exports.GaugeComponent = GaugeComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9338,13 +9343,13 @@ var GaugeModule = (function () {
 exports.GaugeModule = GaugeModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -9352,13 +9357,13 @@ __export(__webpack_require__("./src/gauge/gauge.module.ts"));
 __export(__webpack_require__("./src/gauge/gauge.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/linear-gauge.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9531,13 +9536,13 @@ var LinearGaugeComponent = (function (_super) {
 exports.LinearGaugeComponent = LinearGaugeComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map-cell-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9634,13 +9639,13 @@ var HeatCellSeriesComponent = (function () {
 exports.HeatCellSeriesComponent = HeatCellSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map-cell.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9745,13 +9750,13 @@ var HeatMapCellComponent = (function () {
 exports.HeatMapCellComponent = HeatMapCellComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9943,13 +9948,13 @@ var HeatMapComponent = (function (_super) {
 exports.HeatMapComponent = HeatMapComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9991,13 +9996,13 @@ var HeatMapModule = (function () {
 exports.HeatMapModule = HeatMapModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -10007,13 +10012,13 @@ __export(__webpack_require__("./src/heat-map/heat-map-cell.component.ts"));
 __export(__webpack_require__("./src/heat-map/heat-map-cell-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -10030,13 +10035,13 @@ __export(__webpack_require__("./src/tree-map/index.ts"));
 __export(__webpack_require__("./src/gauge/index.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -10046,13 +10051,13 @@ __export(__webpack_require__("./src/line-chart/line.component.ts"));
 __export(__webpack_require__("./src/line-chart/line-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -10420,13 +10425,13 @@ var LineChartComponent = (function (_super) {
 exports.LineChartComponent = LineChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10468,13 +10473,13 @@ var LineChartModule = (function () {
 exports.LineChartModule = LineChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10651,13 +10656,13 @@ var LineSeriesComponent = (function () {
 exports.LineSeriesComponent = LineSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10715,13 +10720,13 @@ var LineComponent = (function () {
 exports.LineComponent = LineComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/ngx-charts.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10767,13 +10772,13 @@ var NgxChartsModule = (function () {
 exports.NgxChartsModule = NgxChartsModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/card-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10858,13 +10863,13 @@ var CardSeriesComponent = (function () {
 exports.CardSeriesComponent = CardSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/card.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11009,13 +11014,13 @@ var CardComponent = (function () {
 exports.CardComponent = CardComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -11025,13 +11030,13 @@ __export(__webpack_require__("./src/number-card/card.component.ts"));
 __export(__webpack_require__("./src/number-card/card-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/number-card.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -11094,13 +11099,13 @@ var NumberCardComponent = (function (_super) {
 exports.NumberCardComponent = NumberCardComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/number-card.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11142,13 +11147,13 @@ var NumberCardModule = (function () {
 exports.NumberCardModule = NumberCardModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/advanced-pie-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -11245,13 +11250,13 @@ var AdvancedPieChartComponent = (function (_super) {
 exports.AdvancedPieChartComponent = AdvancedPieChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -11264,13 +11269,13 @@ __export(__webpack_require__("./src/pie-chart/pie-label.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-arc.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11454,13 +11459,13 @@ var PieArcComponent = (function () {
 exports.PieArcComponent = PieArcComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -11627,13 +11632,13 @@ var PieChartComponent = (function (_super) {
 exports.PieChartComponent = PieChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11691,13 +11696,13 @@ var PieChartModule = (function () {
 exports.PieChartModule = PieChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-grid-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11792,13 +11797,13 @@ var PieGridSeriesComponent = (function () {
 exports.PieGridSeriesComponent = PieGridSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-grid.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -11914,13 +11919,13 @@ var PieGridComponent = (function (_super) {
 exports.PieGridComponent = PieGridComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-label.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12031,13 +12036,13 @@ var PieLabelComponent = (function () {
 exports.PieLabelComponent = PieLabelComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12195,13 +12200,13 @@ var PieSeriesComponent = (function () {
 exports.PieSeriesComponent = PieSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/services/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -12209,13 +12214,13 @@ __export(__webpack_require__("./src/services/injection.service.ts"));
 __export(__webpack_require__("./src/services/injection-registery.service.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/services/injection-registery.service.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var InjectionRegistery = (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
@@ -12286,13 +12291,13 @@ var InjectionRegistery = (function () {
 exports.InjectionRegistery = InjectionRegistery;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/services/injection.service.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12431,13 +12436,13 @@ var InjectionService = (function () {
 exports.InjectionService = InjectionService;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -12447,13 +12452,13 @@ __export(__webpack_require__("./src/tree-map/tree-map-cell.component.ts"));
 __export(__webpack_require__("./src/tree-map/tree-map-cell-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map-cell-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12530,13 +12535,13 @@ var TreeMapCellSeriesComponent = (function () {
 exports.TreeMapCellSeriesComponent = TreeMapCellSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map-cell.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12642,13 +12647,13 @@ var TreeMapCellComponent = (function () {
 exports.TreeMapCellComponent = TreeMapCellComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -12740,13 +12745,13 @@ var TreeMapComponent = (function (_super) {
 exports.TreeMapComponent = TreeMapComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12788,13 +12793,13 @@ var TreeMapModule = (function () {
 exports.TreeMapModule = TreeMapModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/color-sets.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 exports.colorSets = [
     {
         name: 'vivid',
@@ -12921,13 +12926,13 @@ exports.colorSets = [
 ];
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/color-utils.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 /**
  * Converts a hex to RGB
  * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
@@ -12984,13 +12989,13 @@ function shadeRGBColor(_a, percent) {
 exports.shadeRGBColor = shadeRGBColor;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/id.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var cache = {};
 /**
  * Generates a short id.
@@ -13016,13 +13021,13 @@ function id() {
 exports.id = id;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/sort.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var moment = __webpack_require__(2);
 function sortLinear(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
@@ -13076,13 +13081,13 @@ function sortByTime(data, property, direction) {
 exports.sortByTime = sortByTime;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/throttle.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 /**
  * Throttle a function
  *
@@ -13157,112 +13162,112 @@ function throttleable(duration, options) {
 exports.throttleable = throttleable;
 
 
-/***/ },
+/***/ }),
 
 /***/ 0:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
-/***/ },
+/***/ }),
 
 /***/ 1:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
-/***/ },
+/***/ }),
 
 /***/ 10:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
 
-/***/ },
+/***/ }),
 
 /***/ 11:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
 
-/***/ },
+/***/ }),
 
 /***/ 12:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
 
-/***/ },
+/***/ }),
 
 /***/ 13:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
 
-/***/ },
+/***/ }),
 
 /***/ 14:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
 
-/***/ },
+/***/ }),
 
 /***/ 2:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
-/***/ },
+/***/ }),
 
 /***/ 3:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
-/***/ },
+/***/ }),
 
 /***/ 4:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
-/***/ },
+/***/ }),
 
 /***/ 5:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
-/***/ },
+/***/ }),
 
 /***/ 6:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
-/***/ },
+/***/ }),
 
 /***/ 7:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
 
-/***/ },
+/***/ }),
 
 /***/ 8:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 
-/***/ },
+/***/ }),
 
 /***/ 9:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
 
-/***/ }
+/***/ })
 
 /******/ });
 });

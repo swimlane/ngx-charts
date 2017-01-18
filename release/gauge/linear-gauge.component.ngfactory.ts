@@ -17,8 +17,8 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '@angular/core/src/linker/query_list';
-import * as import13 from '@angular/core/src/linker/view_container';
+import * as import12 from '@angular/core/src/linker/view_container';
+import * as import13 from '@angular/core/src/linker/query_list';
 import * as import14 from '../../../src/common/charts/chart.component';
 import * as import15 from '../../../src/common/tooltip/tooltip.service';
 import * as import16 from '../common/charts/chart.component.ngfactory';
@@ -201,13 +201,73 @@ class View_LinearGaugeComponent_Host0 extends import2.AppView<any> {
 }
 export const LinearGaugeComponentNgFactory:import8.ComponentFactory<import0.LinearGaugeComponent> = new import8.ComponentFactory<import0.LinearGaugeComponent>('ngx-charts-linear-gauge',View_LinearGaugeComponent_Host0,import0.LinearGaugeComponent);
 const styles_LinearGaugeComponent:any[] = ([] as any[]);
+class View_LinearGaugeComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  /*private*/ _expr_1:any;
+  /*private*/ _expr_2:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+    super(View_LinearGaugeComponent1,renderType_LinearGaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_1 = import1.UNINITIALIZED;
+    this._expr_2 = import1.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:line',new import3.InlineArray8(8,'x1','0','x2','0','y1','5','y2','15'),(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
+    return (null as any);
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_1:any = this.parentView.context.transformLine;
+    if (import3.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
+      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_1 == null)? (null as any): currVal_1.toString()));
+      this._expr_1 = currVal_1;
+    }
+    const currVal_2:any = this.parentView.context.colors.getColor(this.parentView.context.units);
+    if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
+      this.renderer.setElementAttribute(this._el_0,'stroke',((currVal_2 == null)? (null as any): currVal_2.toString()));
+      this._expr_2 = currVal_2;
+    }
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
+class View_LinearGaugeComponent2 extends import2.AppView<any> {
+  _el_0:any;
+  /*private*/ _expr_1:any;
+  /*private*/ _expr_2:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+    super(View_LinearGaugeComponent2,renderType_LinearGaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_1 = import1.UNINITIALIZED;
+    this._expr_2 = import1.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:line',new import3.InlineArray8(8,'x1','0','x2','0','y1','-5','y2','-15'),(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
+    return (null as any);
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_1:any = this.parentView.context.transformLine;
+    if (import3.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
+      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_1 == null)? (null as any): currVal_1.toString()));
+      this._expr_1 = currVal_1;
+    }
+    const currVal_2:any = this.parentView.context.colors.getColor(this.parentView.context.units);
+    if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
+      this.renderer.setElementAttribute(this._el_0,'stroke',((currVal_2 == null)? (null as any): currVal_2.toString()));
+      this._expr_2 = currVal_2;
+    }
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
 var renderType_LinearGaugeComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_LinearGaugeComponent,{});
 export class View_LinearGaugeComponent0 extends import2.AppView<import0.LinearGaugeComponent> {
-  _viewQuery_valueTextEl_0:import12.QueryList<any>;
-  _viewQuery_unitsTextEl_1:import12.QueryList<any>;
+  _viewQuery_valueTextEl_0:import13.QueryList<any>;
+  _viewQuery_unitsTextEl_1:import13.QueryList<any>;
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import13.ViewContainer;
+  /*private*/ _vc_1:import12.ViewContainer;
   compView_1:import2.AppView<import14.ChartComponent>;
   _TooltipService_1_5:import15.TooltipService;
   _ChartComponent_1_6:import16.Wrapper_ChartComponent;
@@ -225,12 +285,12 @@ export class View_LinearGaugeComponent0 extends import2.AppView<import0.LinearGa
   _text_9:any;
   _text_10:any;
   _anchor_11:any;
-  /*private*/ _vc_11:import13.ViewContainer;
+  /*private*/ _vc_11:import12.ViewContainer;
   _TemplateRef_11_5:any;
   _NgIf_11_6:import19.Wrapper_NgIf;
   _text_12:any;
   _anchor_13:any;
-  /*private*/ _vc_13:import13.ViewContainer;
+  /*private*/ _vc_13:import12.ViewContainer;
   _TemplateRef_13_5:any;
   _NgIf_13_6:import19.Wrapper_NgIf;
   _text_14:any;
@@ -282,11 +342,11 @@ export class View_LinearGaugeComponent0 extends import2.AppView<import0.LinearGa
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_valueTextEl_0 = new import12.QueryList<any>();
-    this._viewQuery_unitsTextEl_1 = new import12.QueryList<any>();
+    this._viewQuery_valueTextEl_0 = new import13.QueryList<any>();
+    this._viewQuery_unitsTextEl_1 = new import13.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import13.ViewContainer(1,(null as any),this,this._el_1);
+    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
     this.compView_1 = new import16.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
     this._TooltipService_1_5 = new import15.TooltipService(this.parentView.injectorGet(import20.InjectionService,this.parentIndex));
     this._ChartComponent_1_6 = new import16.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
@@ -306,12 +366,12 @@ export class View_LinearGaugeComponent0 extends import2.AppView<import0.LinearGa
     this.compView_8.create(this._BarComponent_8_3.context);
     this._text_10 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
     this._anchor_11 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_11 = new import13.ViewContainer(11,3,this,this._anchor_11);
+    this._vc_11 = new import12.ViewContainer(11,3,this,this._anchor_11);
     this._TemplateRef_11_5 = new import21.TemplateRef_(this,11,this._anchor_11);
     this._NgIf_11_6 = new import19.Wrapper_NgIf(this._vc_11.vcRef,this._TemplateRef_11_5);
     this._text_12 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));
     this._anchor_13 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_13 = new import13.ViewContainer(13,3,this,this._anchor_13);
+    this._vc_13 = new import12.ViewContainer(13,3,this,this._anchor_13);
     this._TemplateRef_13_5 = new import21.TemplateRef_(this,13,this._anchor_13);
     this._NgIf_13_6 = new import19.Wrapper_NgIf(this._vc_13.vcRef,this._TemplateRef_13_5);
     this._text_14 = this.renderer.createText(this._el_3,'\n        \n        ',(null as any));
@@ -532,65 +592,5 @@ export class View_LinearGaugeComponent0 extends import2.AppView<import0.LinearGa
     var result:boolean = true;
     result = (this._BarComponent_8_3.handleEvent(eventName,$event) && result);
     return result;
-  }
-}
-class View_LinearGaugeComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  /*private*/ _expr_1:any;
-  /*private*/ _expr_2:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
-    super(View_LinearGaugeComponent1,renderType_LinearGaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_1 = import1.UNINITIALIZED;
-    this._expr_2 = import1.UNINITIALIZED;
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:line',new import3.InlineArray8(8,'x1','0','x2','0','y1','5','y2','15'),(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return (null as any);
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1:any = this.parentView.context.transformLine;
-    if (import3.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
-      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_1 == null)? (null as any): currVal_1.toString()));
-      this._expr_1 = currVal_1;
-    }
-    const currVal_2:any = this.parentView.context.colors.getColor(this.parentView.context.units);
-    if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
-      this.renderer.setElementAttribute(this._el_0,'stroke',((currVal_2 == null)? (null as any): currVal_2.toString()));
-      this._expr_2 = currVal_2;
-    }
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-}
-class View_LinearGaugeComponent2 extends import2.AppView<any> {
-  _el_0:any;
-  /*private*/ _expr_1:any;
-  /*private*/ _expr_2:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
-    super(View_LinearGaugeComponent2,renderType_LinearGaugeComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_1 = import1.UNINITIALIZED;
-    this._expr_2 = import1.UNINITIALIZED;
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:line',new import3.InlineArray8(8,'x1','0','x2','0','y1','-5','y2','-15'),(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return (null as any);
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1:any = this.parentView.context.transformLine;
-    if (import3.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
-      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_1 == null)? (null as any): currVal_1.toString()));
-      this._expr_1 = currVal_1;
-    }
-    const currVal_2:any = this.parentView.context.colors.getColor(this.parentView.context.units);
-    if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
-      this.renderer.setElementAttribute(this._el_0,'stroke',((currVal_2 == null)? (null as any): currVal_2.toString()));
-      this._expr_2 = currVal_2;
-    }
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
   }
 }

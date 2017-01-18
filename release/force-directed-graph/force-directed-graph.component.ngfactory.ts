@@ -19,20 +19,20 @@ import * as import10 from '@angular/core/src/linker/element_ref';
 import * as import11 from '@angular/core/src/zone/ng_zone';
 import * as import12 from '@angular/common/src/location/location';
 import * as import13 from '@angular/core/src/linker/view_container';
-import * as import14 from '../../../src/common/charts/chart.component';
-import * as import15 from '../../../src/common/tooltip/tooltip.service';
-import * as import16 from '../common/charts/chart.component.ngfactory';
-import * as import17 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import18 from '../../../src/services/injection.service';
-import * as import19 from '@angular/core/src/linker/template_ref';
-import * as import20 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import21 from '@angular/common/src/directives/ng_for';
-import * as import22 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import23 from '@angular/common/src/directives/ng_if';
-import * as import24 from '../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
-import * as import25 from '@angular/common/src/directives/ng_template_outlet';
-import * as import26 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import27 from '../../../src/common/tooltip/tooltip.directive';
+import * as import14 from '../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
+import * as import15 from '@angular/core/src/linker/template_ref';
+import * as import16 from '@angular/common/src/directives/ng_template_outlet';
+import * as import17 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import18 from '@angular/common/src/directives/ng_if';
+import * as import19 from '../common/tooltip/tooltip.directive.ngfactory';
+import * as import20 from '../../../src/common/tooltip/tooltip.directive';
+import * as import21 from '../../../src/common/charts/chart.component';
+import * as import22 from '../../../src/common/tooltip/tooltip.service';
+import * as import23 from '../common/charts/chart.component.ngfactory';
+import * as import24 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import25 from '../../../src/services/injection.service';
+import * as import26 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import27 from '@angular/common/src/directives/ng_for';
 export class Wrapper_ForceDirectedGraphComponent {
   /*private*/ _eventHandler:Function;
   context:import0.ForceDirectedGraphComponent;
@@ -220,12 +220,12 @@ class View_ForceDirectedGraphComponent_Host0 extends import2.AppView<any> {
     this._ForceDirectedGraphComponent_0_3 = new Wrapper_ForceDirectedGraphComponent(new import10.ElementRef(this._el_0),this.injectorGet(import11.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import12.Location,this.parentIndex));
     this._query_linkTemplate_0_0 = new import6.QueryList<any>();
     this._query_nodeTemplate_0_1 = new import6.QueryList<any>();
+    this.compView_0.create(this._ForceDirectedGraphComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray4(4,'mousemove','document','mouseup','document'),this.eventHandler(this.handleEvent_0));
     this._query_linkTemplate_0_0.reset(([] as any[]));
     this._ForceDirectedGraphComponent_0_3.context.linkTemplate = this._query_linkTemplate_0_0.first;
     this._query_nodeTemplate_0_1.reset(([] as any[]));
     this._ForceDirectedGraphComponent_0_3.context.nodeTemplate = this._query_nodeTemplate_0_1.first;
-    this.compView_0.create(this._ForceDirectedGraphComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray4(4,'mousemove','document','mouseup','document'),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
     return new import9.ComponentRef_<any>(0,this,this._el_0,this._ForceDirectedGraphComponent_0_3.context);
   }
@@ -254,255 +254,25 @@ class View_ForceDirectedGraphComponent_Host0 extends import2.AppView<any> {
 }
 export const ForceDirectedGraphComponentNgFactory:import9.ComponentFactory<import0.ForceDirectedGraphComponent> = new import9.ComponentFactory<import0.ForceDirectedGraphComponent>('ngx-charts-force-directed-graph',View_ForceDirectedGraphComponent_Host0,import0.ForceDirectedGraphComponent);
 const styles_ForceDirectedGraphComponent:any[] = ([] as any[]);
-var renderType_ForceDirectedGraphComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_ForceDirectedGraphComponent,{});
-export class View_ForceDirectedGraphComponent0 extends import2.AppView<import0.ForceDirectedGraphComponent> {
-  _viewQuery_ChartComponent_0:import6.QueryList<any>;
+class View_ForceDirectedGraphComponent3 extends import2.AppView<any> {
   _text_0:any;
-  _el_1:any;
-  /*private*/ _vc_1:import13.ViewContainer;
-  compView_1:import2.AppView<import14.ChartComponent>;
-  _TooltipService_1_5:import15.TooltipService;
-  _ChartComponent_1_6:import16.Wrapper_ChartComponent;
-  _text_2:any;
-  _el_3:any;
-  _text_4:any;
-  _el_5:any;
-  _text_6:any;
-  _anchor_7:any;
-  /*private*/ _vc_7:import13.ViewContainer;
-  _TemplateRef_7_5:any;
-  _NgFor_7_6:import17.Wrapper_NgFor;
-  _text_8:any;
-  _text_9:any;
-  _el_10:any;
-  _text_11:any;
-  _anchor_12:any;
-  /*private*/ _vc_12:import13.ViewContainer;
-  _TemplateRef_12_5:any;
-  _NgFor_12_6:import17.Wrapper_NgFor;
-  _text_13:any;
-  _text_14:any;
-  _text_15:any;
-  _text_16:any;
-  _arr_28:any;
-  /*private*/ _expr_29:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_ForceDirectedGraphComponent0,renderType_ForceDirectedGraphComponent,import7.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckOnce);
-    this._arr_28 = import3.pureProxy2((p0:any,p1:any):any[] => {
-      return [
-        p0,
-        p1
-      ]
-      ;
-    });
-    this._expr_29 = import1.UNINITIALIZED;
-  }
-  createInternal(rootSelector:string):import9.ComponentRef<any> {
-    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_ChartComponent_0 = new import6.QueryList<any>();
-    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import13.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import16.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import15.TooltipService(this.parentView.injectorGet(import18.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import16.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
-    this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','force-directed-graph chart'),(null as any));
-    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'class','links'),(null as any));
-    this._text_6 = this.renderer.createText(this._el_5,'\n          ',(null as any));
-    this._anchor_7 = this.renderer.createTemplateAnchor(this._el_5,(null as any));
-    this._vc_7 = new import13.ViewContainer(7,5,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import19.TemplateRef_(this,7,this._anchor_7);
-    this._NgFor_7_6 = new import17.Wrapper_NgFor(this._vc_7.vcRef,this._TemplateRef_7_5,this.parentView.injectorGet(import20.IterableDiffers,this.parentIndex),this.ref);
-    this._text_8 = this.renderer.createText(this._el_5,'\n        ',(null as any));
-    this._text_9 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._el_10 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'class','nodes'),(null as any));
-    this._text_11 = this.renderer.createText(this._el_10,'\n          ',(null as any));
-    this._anchor_12 = this.renderer.createTemplateAnchor(this._el_10,(null as any));
-    this._vc_12 = new import13.ViewContainer(12,10,this,this._anchor_12);
-    this._TemplateRef_12_5 = new import19.TemplateRef_(this,12,this._anchor_12);
-    this._NgFor_12_6 = new import17.Wrapper_NgFor(this._vc_12.vcRef,this._TemplateRef_12_5,this.parentView.injectorGet(import20.IterableDiffers,this.parentIndex),this.ref);
-    this._text_13 = this.renderer.createText(this._el_10,'\n        ',(null as any));
-    this._text_14 = this.renderer.createText(this._el_3,'\n      ',(null as any));
-    this._text_15 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_1.create(this._ChartComponent_1_6.context);
-    this._text_16 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
-    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
-    this._viewQuery_ChartComponent_0.reset([new import10.ElementRef(this._el_1)]);
-    this.context.chart = this._viewQuery_ChartComponent_0.first;
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._el_1,
-      this._text_2,
-      this._el_3,
-      this._text_4,
-      this._el_5,
-      this._text_6,
-      this._anchor_7,
-      this._text_8,
-      this._text_9,
-      this._el_10,
-      this._text_11,
-      this._anchor_12,
-      this._text_13,
-      this._text_14,
-      this._text_15,
-      this._text_16
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import21.NgFor) && (7 === requestNodeIndex))) { return this._NgFor_7_6.context; }
-    if (((token === import19.TemplateRef) && (12 === requestNodeIndex))) { return this._TemplateRef_12_5; }
-    if (((token === import21.NgFor) && (12 === requestNodeIndex))) { return this._NgFor_12_6.context; }
-    if (((token === import15.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._TooltipService_1_5; }
-    if (((token === import14.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._ChartComponent_1_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1_0_0:any = this._arr_28(this.context.width,this.context.height);
-    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
-    const currVal_1_0_1:any = this.context.legend;
-    this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
-    const currVal_1_0_2:any = this.context.legendOptions;
-    this._ChartComponent_1_6.check_legendOptions(currVal_1_0_2,throwOnChange,false);
-    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
-    const currVal_7_0_0:any = this.context.links;
-    this._NgFor_7_6.check_ngForOf(currVal_7_0_0,throwOnChange,false);
-    const currVal_7_0_1:any = this.context.trackLinkBy;
-    this._NgFor_7_6.check_ngForTrackBy(currVal_7_0_1,throwOnChange,false);
-    this._NgFor_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
-    const currVal_12_0_0:any = this.context.nodes;
-    this._NgFor_12_6.check_ngForOf(currVal_12_0_0,throwOnChange,false);
-    const currVal_12_0_1:any = this.context.trackNodeBy;
-    this._NgFor_12_6.check_ngForTrackBy(currVal_12_0_1,throwOnChange,false);
-    this._NgFor_12_6.ngDoCheck(this,this._anchor_12,throwOnChange);
-    this._vc_1.detectChangesInNestedViews(throwOnChange);
-    this._vc_7.detectChangesInNestedViews(throwOnChange);
-    this._vc_12.detectChangesInNestedViews(throwOnChange);
-    const currVal_29:any = this.context.transform;
-    if (import3.checkBinding(throwOnChange,this._expr_29,currVal_29)) {
-      this.renderer.setElementAttribute(this._el_3,'transform',((currVal_29 == null)? (null as any): currVal_29.toString()));
-      this._expr_29 = currVal_29;
-    }
-    this.compView_1.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_1.destroyNestedViews();
-    this._vc_7.destroyNestedViews();
-    this._vc_12.destroyNestedViews();
-    this.compView_1.destroy();
-    this._ChartComponent_1_6.ngOnDestroy();
-  }
-  visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
-    if (((nodeIndex == 1) && (ngContentIndex == 0))) {
-      cb(this._text_2,ctx);
-      cb(this._el_3,ctx);
-      cb(this._text_15,ctx);
-    }
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 7)) { return new View_ForceDirectedGraphComponent1(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
-    if ((nodeIndex == 12)) { return new View_ForceDirectedGraphComponent5(this.viewUtils,this,12,this._anchor_12,this._vc_12); }
-    return (null as any);
-  }
-  handleEvent_1(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'legendLabelClick')) {
-      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    if ((eventName == 'legendLabelActivate')) {
-      const pd_sub_1:any = ((<any>this.context.onActivate($event)) !== false);
-      result = (pd_sub_1 && result);
-    }
-    if ((eventName == 'legendLabelDeactivate')) {
-      const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
-      result = (pd_sub_2 && result);
-    }
-    return result;
-  }
-}
-class View_ForceDirectedGraphComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  _text_1:any;
-  _anchor_2:any;
-  /*private*/ _vc_2:import13.ViewContainer;
-  _TemplateRef_2_5:any;
-  _NgIf_2_6:import22.Wrapper_NgIf;
-  _text_3:any;
-  _anchor_4:any;
-  /*private*/ _vc_4:import13.ViewContainer;
-  _TemplateRef_4_5:any;
-  _NgIf_4_6:import22.Wrapper_NgIf;
-  _text_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
-    super(View_ForceDirectedGraphComponent1,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    super(View_ForceDirectedGraphComponent3,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
-    this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_2 = new import13.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import19.TemplateRef_(this,2,this._anchor_2);
-    this._NgIf_2_6 = new import22.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
-    this._text_3 = this.renderer.createText(this._el_0,'\n            ',(null as any));
-    this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_4 = new import13.ViewContainer(4,0,this,this._anchor_4);
-    this._TemplateRef_4_5 = new import19.TemplateRef_(this,4,this._anchor_4);
-    this._NgIf_4_6 = new import22.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
-    this._text_5 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._anchor_2,
-      this._text_3,
-      this._anchor_4,
-      this._text_5
-    ]
-    ),(null as any));
+    this._text_0 = this.renderer.createText((null as any),'\n            ',(null as any));
+    this.init(this._text_0,((<any>this.renderer).directRenderer? (null as any): [this._text_0]),(null as any));
     return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import23.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
-    if (((token === import19.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
-    if (((token === import23.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_2_0_0:any = this.parentView.context.linkTemplate;
-    this._NgIf_2_6.check_ngIf(currVal_2_0_0,throwOnChange,false);
-    this._NgIf_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
-    const currVal_4_0_0:boolean = !this.parentView.context.linkTemplate;
-    this._NgIf_4_6.check_ngIf(currVal_4_0_0,throwOnChange,false);
-    this._NgIf_4_6.ngDoCheck(this,this._anchor_4,throwOnChange);
-    this._vc_2.detectChangesInNestedViews(throwOnChange);
-    this._vc_4.detectChangesInNestedViews(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_2.destroyNestedViews();
-    this._vc_4.destroyNestedViews();
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 2)) { return new View_ForceDirectedGraphComponent2(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
-    if ((nodeIndex == 4)) { return new View_ForceDirectedGraphComponent4(this.viewUtils,this,4,this._anchor_4,this._vc_4); }
-    return (null as any);
+    cb(this._text_0,ctx);
   }
 }
 class View_ForceDirectedGraphComponent2 extends import2.AppView<any> {
   _anchor_0:any;
   /*private*/ _vc_0:import13.ViewContainer;
   _TemplateRef_0_5:any;
-  _NgTemplateOutlet_0_6:import24.Wrapper_NgTemplateOutlet;
+  _NgTemplateOutlet_0_6:import14.Wrapper_NgTemplateOutlet;
   _el_1:any;
   _map_5:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
@@ -514,15 +284,15 @@ class View_ForceDirectedGraphComponent2 extends import2.AppView<any> {
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._anchor_0 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this._vc_0 = new import13.ViewContainer(0,(null as any),this,this._anchor_0);
-    this._TemplateRef_0_5 = new import19.TemplateRef_(this,0,this._anchor_0);
-    this._NgTemplateOutlet_0_6 = new import24.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
+    this._TemplateRef_0_5 = new import15.TemplateRef_(this,0,this._anchor_0);
+    this._NgTemplateOutlet_0_6 = new import14.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._anchor_0]),(null as any));
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
-    if (((token === import25.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
+    if (((token === import15.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
+    if (((token === import16.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -544,20 +314,6 @@ class View_ForceDirectedGraphComponent2 extends import2.AppView<any> {
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
     if ((nodeIndex == 0)) { return new View_ForceDirectedGraphComponent3(this.viewUtils,this,0,this._anchor_0,this._vc_0); }
     return (null as any);
-  }
-}
-class View_ForceDirectedGraphComponent3 extends import2.AppView<any> {
-  _text_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
-    super(View_ForceDirectedGraphComponent3,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import9.ComponentRef<any> {
-    this._text_0 = this.renderer.createText((null as any),'\n            ',(null as any));
-    this.init(this._text_0,((<any>this.renderer).directRenderer? (null as any): [this._text_0]),(null as any));
-    return (null as any);
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._text_0,ctx);
   }
 }
 class View_ForceDirectedGraphComponent4 extends import2.AppView<any> {
@@ -604,20 +360,166 @@ class View_ForceDirectedGraphComponent4 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
+class View_ForceDirectedGraphComponent1 extends import2.AppView<any> {
   _el_0:any;
-  /*private*/ _vc_0:import13.ViewContainer;
-  _TooltipDirective_0_5:import26.Wrapper_TooltipDirective;
   _text_1:any;
   _anchor_2:any;
   /*private*/ _vc_2:import13.ViewContainer;
   _TemplateRef_2_5:any;
-  _NgIf_2_6:import22.Wrapper_NgIf;
+  _NgIf_2_6:import17.Wrapper_NgIf;
   _text_3:any;
   _anchor_4:any;
   /*private*/ _vc_4:import13.ViewContainer;
   _TemplateRef_4_5:any;
-  _NgIf_4_6:import22.Wrapper_NgIf;
+  _NgIf_4_6:import17.Wrapper_NgIf;
+  _text_5:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
+    super(View_ForceDirectedGraphComponent1,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import9.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
+    this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_2 = new import13.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import15.TemplateRef_(this,2,this._anchor_2);
+    this._NgIf_2_6 = new import17.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
+    this._text_3 = this.renderer.createText(this._el_0,'\n            ',(null as any));
+    this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_4 = new import13.ViewContainer(4,0,this,this._anchor_4);
+    this._TemplateRef_4_5 = new import15.TemplateRef_(this,4,this._anchor_4);
+    this._NgIf_4_6 = new import17.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
+    this._text_5 = this.renderer.createText(this._el_0,'\n          ',(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._anchor_2,
+      this._text_3,
+      this._anchor_4,
+      this._text_5
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import15.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import18.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
+    if (((token === import15.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
+    if (((token === import18.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = this.parentView.context.linkTemplate;
+    this._NgIf_2_6.check_ngIf(currVal_2_0_0,throwOnChange,false);
+    this._NgIf_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
+    const currVal_4_0_0:boolean = !this.parentView.context.linkTemplate;
+    this._NgIf_4_6.check_ngIf(currVal_4_0_0,throwOnChange,false);
+    this._NgIf_4_6.ngDoCheck(this,this._anchor_4,throwOnChange);
+    this._vc_2.detectChangesInNestedViews(throwOnChange);
+    this._vc_4.detectChangesInNestedViews(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_2.destroyNestedViews();
+    this._vc_4.destroyNestedViews();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 2)) { return new View_ForceDirectedGraphComponent2(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
+    if ((nodeIndex == 4)) { return new View_ForceDirectedGraphComponent4(this.viewUtils,this,4,this._anchor_4,this._vc_4); }
+    return (null as any);
+  }
+}
+class View_ForceDirectedGraphComponent7 extends import2.AppView<any> {
+  _text_0:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
+    super(View_ForceDirectedGraphComponent7,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import9.ComponentRef<any> {
+    this._text_0 = this.renderer.createText((null as any),'\n            ',(null as any));
+    this.init(this._text_0,((<any>this.renderer).directRenderer? (null as any): [this._text_0]),(null as any));
+    return (null as any);
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._text_0,ctx);
+  }
+}
+class View_ForceDirectedGraphComponent6 extends import2.AppView<any> {
+  _anchor_0:any;
+  /*private*/ _vc_0:import13.ViewContainer;
+  _TemplateRef_0_5:any;
+  _NgTemplateOutlet_0_6:import14.Wrapper_NgTemplateOutlet;
+  _el_1:any;
+  _map_5:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
+    super(View_ForceDirectedGraphComponent6,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._map_5 = import3.pureProxy1((p0:any):{[key: string]:any} => {
+      return {$implicit: p0};
+    });
+  }
+  createInternal(rootSelector:string):import9.ComponentRef<any> {
+    this._anchor_0 = this.renderer.createTemplateAnchor((null as any),(null as any));
+    this._vc_0 = new import13.ViewContainer(0,(null as any),this,this._anchor_0);
+    this._TemplateRef_0_5 = new import15.TemplateRef_(this,0,this._anchor_0);
+    this._NgTemplateOutlet_0_6 = new import14.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
+    this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
+    this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._anchor_0]),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import15.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
+    if (((token === import16.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this._map_5(this.parentView.context.$implicit);
+    this._NgTemplateOutlet_0_6.check_ngOutletContext(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.parentView.context.nodeTemplate;
+    this._NgTemplateOutlet_0_6.check_ngTemplateOutlet(currVal_0_0_1,throwOnChange,false);
+    this._NgTemplateOutlet_0_6.ngDoCheck(this,this._anchor_0,throwOnChange);
+    this._vc_0.detectChangesInNestedViews(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_0.destroyNestedViews();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._vc_0.nativeElement,ctx);
+    this._vc_0.visitNestedViewRootNodes(cb,ctx);
+    cb(this._el_1,ctx);
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 0)) { return new View_ForceDirectedGraphComponent7(this.viewUtils,this,0,this._anchor_0,this._vc_0); }
+    return (null as any);
+  }
+}
+class View_ForceDirectedGraphComponent8 extends import2.AppView<any> {
+  _el_0:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
+    super(View_ForceDirectedGraphComponent8,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import9.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:circle',new import3.InlineArray2(2,'r','5'),(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
+    return (null as any);
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
+class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
+  _el_0:any;
+  /*private*/ _vc_0:import13.ViewContainer;
+  _TooltipDirective_0_5:import19.Wrapper_TooltipDirective;
+  _text_1:any;
+  _anchor_2:any;
+  /*private*/ _vc_2:import13.ViewContainer;
+  _TemplateRef_2_5:any;
+  _NgIf_2_6:import17.Wrapper_NgIf;
+  _text_3:any;
+  _anchor_4:any;
+  /*private*/ _vc_4:import13.ViewContainer;
+  _TemplateRef_4_5:any;
+  _NgIf_4_6:import17.Wrapper_NgIf;
   _text_5:any;
   _el_6:any;
   /*private*/ _expr_15:any;
@@ -632,17 +534,17 @@ class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-tooltip',''),(null as any));
     this._vc_0 = new import13.ViewContainer(0,(null as any),this,this._el_0);
-    this._TooltipDirective_0_5 = new import26.Wrapper_TooltipDirective((<View_ForceDirectedGraphComponent0>this.parentView)._TooltipService_1_5,this._vc_0.vcRef,this.renderer,new import10.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import11.NgZone,this.parentView.parentIndex));
+    this._TooltipDirective_0_5 = new import19.Wrapper_TooltipDirective((<View_ForceDirectedGraphComponent0>this.parentView)._TooltipService_1_5,this._vc_0.vcRef,this.renderer,new import10.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import11.NgZone,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
     this._vc_2 = new import13.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import19.TemplateRef_(this,2,this._anchor_2);
-    this._NgIf_2_6 = new import22.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
+    this._TemplateRef_2_5 = new import15.TemplateRef_(this,2,this._anchor_2);
+    this._NgIf_2_6 = new import17.Wrapper_NgIf(this._vc_2.vcRef,this._TemplateRef_2_5);
     this._text_3 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
     this._vc_4 = new import13.ViewContainer(4,0,this,this._anchor_4);
-    this._TemplateRef_4_5 = new import19.TemplateRef_(this,4,this._anchor_4);
-    this._NgIf_4_6 = new import22.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
+    this._TemplateRef_4_5 = new import15.TemplateRef_(this,4,this._anchor_4);
+    this._NgIf_4_6 = new import17.Wrapper_NgIf(this._vc_4.vcRef,this._TemplateRef_4_5);
     this._text_5 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_6 = this.renderer.createTemplateAnchor((null as any),(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(12,'mousedown',(null as any),'click',(null as any),'focusin',(null as any),'blur',(null as any),'mouseenter',(null as any),'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
@@ -658,11 +560,11 @@ class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import23.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
-    if (((token === import19.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
-    if (((token === import23.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
-    if (((token === import27.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import15.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import18.NgIf) && (2 === requestNodeIndex))) { return this._NgIf_2_6.context; }
+    if (((token === import15.TemplateRef) && (4 === requestNodeIndex))) { return this._TemplateRef_4_5; }
+    if (((token === import18.NgIf) && (4 === requestNodeIndex))) { return this._NgIf_4_6.context; }
+    if (((token === import20.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._TooltipDirective_0_5.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -729,79 +631,177 @@ class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
     return result;
   }
 }
-class View_ForceDirectedGraphComponent6 extends import2.AppView<any> {
-  _anchor_0:any;
-  /*private*/ _vc_0:import13.ViewContainer;
-  _TemplateRef_0_5:any;
-  _NgTemplateOutlet_0_6:import24.Wrapper_NgTemplateOutlet;
+var renderType_ForceDirectedGraphComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_ForceDirectedGraphComponent,{});
+export class View_ForceDirectedGraphComponent0 extends import2.AppView<import0.ForceDirectedGraphComponent> {
+  _viewQuery_ChartComponent_0:import6.QueryList<any>;
+  _text_0:any;
   _el_1:any;
-  _map_5:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
-    super(View_ForceDirectedGraphComponent6,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._map_5 = import3.pureProxy1((p0:any):{[key: string]:any} => {
-      return {$implicit: p0};
+  /*private*/ _vc_1:import13.ViewContainer;
+  compView_1:import2.AppView<import21.ChartComponent>;
+  _TooltipService_1_5:import22.TooltipService;
+  _ChartComponent_1_6:import23.Wrapper_ChartComponent;
+  _text_2:any;
+  _el_3:any;
+  _text_4:any;
+  _el_5:any;
+  _text_6:any;
+  _anchor_7:any;
+  /*private*/ _vc_7:import13.ViewContainer;
+  _TemplateRef_7_5:any;
+  _NgFor_7_6:import24.Wrapper_NgFor;
+  _text_8:any;
+  _text_9:any;
+  _el_10:any;
+  _text_11:any;
+  _anchor_12:any;
+  /*private*/ _vc_12:import13.ViewContainer;
+  _TemplateRef_12_5:any;
+  _NgFor_12_6:import24.Wrapper_NgFor;
+  _text_13:any;
+  _text_14:any;
+  _text_15:any;
+  _text_16:any;
+  _arr_28:any;
+  /*private*/ _expr_29:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
+    super(View_ForceDirectedGraphComponent0,renderType_ForceDirectedGraphComponent,import7.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckOnce);
+    this._arr_28 = import3.pureProxy2((p0:any,p1:any):any[] => {
+      return [
+        p0,
+        p1
+      ]
+      ;
     });
+    this._expr_29 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import9.ComponentRef<any> {
-    this._anchor_0 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    this._vc_0 = new import13.ViewContainer(0,(null as any),this,this._anchor_0);
-    this._TemplateRef_0_5 = new import19.TemplateRef_(this,0,this._anchor_0);
-    this._NgTemplateOutlet_0_6 = new import24.Wrapper_NgTemplateOutlet(this._vc_0.vcRef);
-    this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    this.init(this._el_1,((<any>this.renderer).directRenderer? (null as any): [this._anchor_0]),(null as any));
+    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
+    this._viewQuery_ChartComponent_0 = new import6.QueryList<any>();
+    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._vc_1 = new import13.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import23.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import22.TooltipService(this.parentView.injectorGet(import25.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import23.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
+    this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','force-directed-graph chart'),(null as any));
+    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
+    this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'class','links'),(null as any));
+    this._text_6 = this.renderer.createText(this._el_5,'\n          ',(null as any));
+    this._anchor_7 = this.renderer.createTemplateAnchor(this._el_5,(null as any));
+    this._vc_7 = new import13.ViewContainer(7,5,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import15.TemplateRef_(this,7,this._anchor_7);
+    this._NgFor_7_6 = new import24.Wrapper_NgFor(this._vc_7.vcRef,this._TemplateRef_7_5,this.parentView.injectorGet(import26.IterableDiffers,this.parentIndex),this.ref);
+    this._text_8 = this.renderer.createText(this._el_5,'\n        ',(null as any));
+    this._text_9 = this.renderer.createText(this._el_3,'\n        ',(null as any));
+    this._el_10 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'class','nodes'),(null as any));
+    this._text_11 = this.renderer.createText(this._el_10,'\n          ',(null as any));
+    this._anchor_12 = this.renderer.createTemplateAnchor(this._el_10,(null as any));
+    this._vc_12 = new import13.ViewContainer(12,10,this,this._anchor_12);
+    this._TemplateRef_12_5 = new import15.TemplateRef_(this,12,this._anchor_12);
+    this._NgFor_12_6 = new import24.Wrapper_NgFor(this._vc_12.vcRef,this._TemplateRef_12_5,this.parentView.injectorGet(import26.IterableDiffers,this.parentIndex),this.ref);
+    this._text_13 = this.renderer.createText(this._el_10,'\n        ',(null as any));
+    this._text_14 = this.renderer.createText(this._el_3,'\n      ',(null as any));
+    this._text_15 = this.renderer.createText((null as any),'\n    ',(null as any));
+    this.compView_1.create(this._ChartComponent_1_6.context);
+    this._text_16 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
+    this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
+    this._viewQuery_ChartComponent_0.reset([new import10.ElementRef(this._el_1)]);
+    this.context.chart = this._viewQuery_ChartComponent_0.first;
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
+      this._text_0,
+      this._el_1,
+      this._text_2,
+      this._el_3,
+      this._text_4,
+      this._el_5,
+      this._text_6,
+      this._anchor_7,
+      this._text_8,
+      this._text_9,
+      this._el_10,
+      this._text_11,
+      this._anchor_12,
+      this._text_13,
+      this._text_14,
+      this._text_15,
+      this._text_16
+    ]
+    ),[disposable_0]);
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import19.TemplateRef) && (0 === requestNodeIndex))) { return this._TemplateRef_0_5; }
-    if (((token === import25.NgTemplateOutlet) && (0 === requestNodeIndex))) { return this._NgTemplateOutlet_0_6.context; }
+    if (((token === import15.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import27.NgFor) && (7 === requestNodeIndex))) { return this._NgFor_7_6.context; }
+    if (((token === import15.TemplateRef) && (12 === requestNodeIndex))) { return this._TemplateRef_12_5; }
+    if (((token === import27.NgFor) && (12 === requestNodeIndex))) { return this._NgFor_12_6.context; }
+    if (((token === import22.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._TooltipService_1_5; }
+    if (((token === import21.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this._map_5(this.parentView.context.$implicit);
-    this._NgTemplateOutlet_0_6.check_ngOutletContext(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.parentView.context.nodeTemplate;
-    this._NgTemplateOutlet_0_6.check_ngTemplateOutlet(currVal_0_0_1,throwOnChange,false);
-    this._NgTemplateOutlet_0_6.ngDoCheck(this,this._anchor_0,throwOnChange);
-    this._vc_0.detectChangesInNestedViews(throwOnChange);
+    const currVal_1_0_0:any = this._arr_28(this.context.width,this.context.height);
+    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
+    const currVal_1_0_1:any = this.context.legend;
+    this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
+    const currVal_1_0_2:any = this.context.legendOptions;
+    this._ChartComponent_1_6.check_legendOptions(currVal_1_0_2,throwOnChange,false);
+    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    const currVal_7_0_0:any = this.context.links;
+    this._NgFor_7_6.check_ngForOf(currVal_7_0_0,throwOnChange,false);
+    const currVal_7_0_1:any = this.context.trackLinkBy;
+    this._NgFor_7_6.check_ngForTrackBy(currVal_7_0_1,throwOnChange,false);
+    this._NgFor_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
+    const currVal_12_0_0:any = this.context.nodes;
+    this._NgFor_12_6.check_ngForOf(currVal_12_0_0,throwOnChange,false);
+    const currVal_12_0_1:any = this.context.trackNodeBy;
+    this._NgFor_12_6.check_ngForTrackBy(currVal_12_0_1,throwOnChange,false);
+    this._NgFor_12_6.ngDoCheck(this,this._anchor_12,throwOnChange);
+    this._vc_1.detectChangesInNestedViews(throwOnChange);
+    this._vc_7.detectChangesInNestedViews(throwOnChange);
+    this._vc_12.detectChangesInNestedViews(throwOnChange);
+    const currVal_29:any = this.context.transform;
+    if (import3.checkBinding(throwOnChange,this._expr_29,currVal_29)) {
+      this.renderer.setElementAttribute(this._el_3,'transform',((currVal_29 == null)? (null as any): currVal_29.toString()));
+      this._expr_29 = currVal_29;
+    }
+    this.compView_1.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
-    this._vc_0.destroyNestedViews();
+    this._vc_1.destroyNestedViews();
+    this._vc_7.destroyNestedViews();
+    this._vc_12.destroyNestedViews();
+    this.compView_1.destroy();
+    this._ChartComponent_1_6.ngOnDestroy();
   }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._vc_0.nativeElement,ctx);
-    this._vc_0.visitNestedViewRootNodes(cb,ctx);
-    cb(this._el_1,ctx);
+  visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
+    if (((nodeIndex == 1) && (ngContentIndex == 0))) {
+      cb(this._text_2,ctx);
+      cb(this._el_3,ctx);
+      cb(this._text_15,ctx);
+    }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 0)) { return new View_ForceDirectedGraphComponent7(this.viewUtils,this,0,this._anchor_0,this._vc_0); }
+    if ((nodeIndex == 7)) { return new View_ForceDirectedGraphComponent1(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
+    if ((nodeIndex == 12)) { return new View_ForceDirectedGraphComponent5(this.viewUtils,this,12,this._anchor_12,this._vc_12); }
     return (null as any);
   }
-}
-class View_ForceDirectedGraphComponent7 extends import2.AppView<any> {
-  _text_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
-    super(View_ForceDirectedGraphComponent7,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import9.ComponentRef<any> {
-    this._text_0 = this.renderer.createText((null as any),'\n            ',(null as any));
-    this.init(this._text_0,((<any>this.renderer).directRenderer? (null as any): [this._text_0]),(null as any));
-    return (null as any);
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._text_0,ctx);
-  }
-}
-class View_ForceDirectedGraphComponent8 extends import2.AppView<any> {
-  _el_0:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
-    super(View_ForceDirectedGraphComponent8,renderType_ForceDirectedGraphComponent,import7.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import8.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import9.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:circle',new import3.InlineArray2(2,'r','5'),(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
-    return (null as any);
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
+  handleEvent_1(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'legendLabelClick')) {
+      const pd_sub_0:any = ((<any>this.context.onClick($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'legendLabelActivate')) {
+      const pd_sub_1:any = ((<any>this.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'legendLabelDeactivate')) {
+      const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
+    }
+    return result;
   }
 }

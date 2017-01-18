@@ -16,13 +16,13 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/common/src/location/location';
-import * as import11 from '@angular/core/src/linker/view_container';
-import * as import12 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import13 from '@angular/core/src/linker/template_ref';
-import * as import14 from '@angular/common/src/directives/ng_if';
-import * as import15 from '@angular/core/src/security';
-import * as import16 from '../../../src/common/svg-radial-gradient.component';
-import * as import17 from '../common/svg-radial-gradient.component.ngfactory';
+import * as import11 from '../../../src/common/svg-radial-gradient.component';
+import * as import12 from '../common/svg-radial-gradient.component.ngfactory';
+import * as import13 from '@angular/core/src/linker/view_container';
+import * as import14 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import15 from '@angular/core/src/linker/template_ref';
+import * as import16 from '@angular/common/src/directives/ng_if';
+import * as import17 from '@angular/core/src/security';
 export class Wrapper_PieArcComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieArcComponent;
@@ -239,15 +239,63 @@ class View_PieArcComponent_Host0 extends import2.AppView<any> {
 }
 export const PieArcComponentNgFactory:import8.ComponentFactory<import0.PieArcComponent> = new import8.ComponentFactory<import0.PieArcComponent>('g[ngx-charts-pie-arc]',View_PieArcComponent_Host0,import0.PieArcComponent);
 const styles_PieArcComponent:any[] = ([] as any[]);
+class View_PieArcComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  compView_2:import2.AppView<import11.SvgRadialGradientComponent>;
+  _SvgRadialGradientComponent_2_3:import12.Wrapper_SvgRadialGradientComponent;
+  _text_3:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
+    super(View_PieArcComponent1,renderType_PieArcComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-svg-radial-gradient','','orientation','vertical'),(null as any));
+    this.compView_2 = new import12.View_SvgRadialGradientComponent0(this.viewUtils,this,2,this._el_2);
+    this._SvgRadialGradientComponent_2_3 = new import12.Wrapper_SvgRadialGradientComponent();
+    this.compView_2.create(this._SvgRadialGradientComponent_2_3.context);
+    this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import11.SvgRadialGradientComponent) && (2 === requestNodeIndex))) { return this._SvgRadialGradientComponent_2_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = this.parentView.context.fill;
+    this._SvgRadialGradientComponent_2_3.check_color(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = this.parentView.context.radialGradientId;
+    this._SvgRadialGradientComponent_2_3.check_name(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = this.parentView.context.startOpacity;
+    this._SvgRadialGradientComponent_2_3.check_startOpacity(currVal_2_0_2,throwOnChange,false);
+    if (this._SvgRadialGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this.compView_2.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_2.destroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
 var renderType_PieArcComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieArcComponent,{});
 export class View_PieArcComponent0 extends import2.AppView<import0.PieArcComponent> {
   _text_0:any;
   _el_1:any;
   _text_2:any;
   _anchor_3:any;
-  /*private*/ _vc_3:import11.ViewContainer;
+  /*private*/ _vc_3:import13.ViewContainer;
   _TemplateRef_3_5:any;
-  _NgIf_3_6:import12.Wrapper_NgIf;
+  _NgIf_3_6:import14.Wrapper_NgIf;
   _text_4:any;
   _el_5:any;
   _text_6:any;
@@ -269,9 +317,9 @@ export class View_PieArcComponent0 extends import2.AppView<import0.PieArcCompone
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray2(2,'class','arc-group'),(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._anchor_3 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_3 = new import11.ViewContainer(3,1,this,this._anchor_3);
-    this._TemplateRef_3_5 = new import13.TemplateRef_(this,3,this._anchor_3);
-    this._NgIf_3_6 = new import12.Wrapper_NgIf(this._vc_3.vcRef,this._TemplateRef_3_5);
+    this._vc_3 = new import13.ViewContainer(3,1,this,this._anchor_3);
+    this._TemplateRef_3_5 = new import15.TemplateRef_(this,3,this._anchor_3);
+    this._NgIf_3_6 = new import14.Wrapper_NgIf(this._vc_3.vcRef,this._TemplateRef_3_5);
     this._text_4 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_1,':svg:path',new import3.InlineArray2(2,'class','arc'),(null as any));
     this._text_6 = this.renderer.createText(this._el_1,'\n    ',(null as any));
@@ -291,8 +339,8 @@ export class View_PieArcComponent0 extends import2.AppView<import0.PieArcCompone
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import13.TemplateRef) && (3 === requestNodeIndex))) { return this._TemplateRef_3_5; }
-    if (((token === import14.NgIf) && (3 === requestNodeIndex))) { return this._NgIf_3_6.context; }
+    if (((token === import15.TemplateRef) && (3 === requestNodeIndex))) { return this._TemplateRef_3_5; }
+    if (((token === import16.NgIf) && (3 === requestNodeIndex))) { return this._NgIf_3_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -317,7 +365,7 @@ export class View_PieArcComponent0 extends import2.AppView<import0.PieArcCompone
     }
     const currVal_14:any = (this.context.pointerEvents? 'auto': 'none');
     if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setElementStyle(this._el_5,'pointer-events',((this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_14).toString()));
+      this.renderer.setElementStyle(this._el_5,'pointer-events',((this.viewUtils.sanitizer.sanitize(import17.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import17.SecurityContext.STYLE,currVal_14).toString()));
       this._expr_14 = currVal_14;
     }
   }
@@ -344,53 +392,5 @@ export class View_PieArcComponent0 extends import2.AppView<import0.PieArcCompone
       result = (pd_sub_2 && result);
     }
     return result;
-  }
-}
-class View_PieArcComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  _text_1:any;
-  _el_2:any;
-  compView_2:import2.AppView<import16.SvgRadialGradientComponent>;
-  _SvgRadialGradientComponent_2_3:import17.Wrapper_SvgRadialGradientComponent;
-  _text_3:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
-    super(View_PieArcComponent1,renderType_PieArcComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n        ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-svg-radial-gradient','','orientation','vertical'),(null as any));
-    this.compView_2 = new import17.View_SvgRadialGradientComponent0(this.viewUtils,this,2,this._el_2);
-    this._SvgRadialGradientComponent_2_3 = new import17.Wrapper_SvgRadialGradientComponent();
-    this.compView_2.create(this._SvgRadialGradientComponent_2_3.context);
-    this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._el_2,
-      this._text_3
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import16.SvgRadialGradientComponent) && (2 === requestNodeIndex))) { return this._SvgRadialGradientComponent_2_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_2_0_0:any = this.parentView.context.fill;
-    this._SvgRadialGradientComponent_2_3.check_color(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = this.parentView.context.radialGradientId;
-    this._SvgRadialGradientComponent_2_3.check_name(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = this.parentView.context.startOpacity;
-    this._SvgRadialGradientComponent_2_3.check_startOpacity(currVal_2_0_2,throwOnChange,false);
-    if (this._SvgRadialGradientComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
-    this.compView_2.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_2.destroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
   }
 }

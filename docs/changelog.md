@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.2
+- Enhancement: Add `ngx-charts-outer` class to `ngx-charts` inner element
+- Chore: Update dependencies
+
 ## 3.1.1
 - Fixed bug where activated lines and areas would not deactivate when mouse leaves the circle
 - Added fade in animation to active circle line

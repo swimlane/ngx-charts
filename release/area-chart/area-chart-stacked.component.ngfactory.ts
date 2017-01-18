@@ -17,29 +17,29 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../src/common/charts/chart.component';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '../common/charts/chart.component.ngfactory';
-import * as import16 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import17 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import18 from '../../../src/common/area-tooltip.component';
-import * as import19 from '../common/area-tooltip.component.ngfactory';
-import * as import20 from '../../../src/services/injection.service';
-import * as import21 from '@angular/core/src/linker/template_ref';
-import * as import22 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import23 from '@angular/common/src/directives/ng_if';
-import * as import24 from '@angular/common/src/directives/ng_for';
-import * as import25 from '../../../src/common/axes/x-axis.component';
-import * as import26 from '../common/axes/x-axis.component.ngfactory';
-import * as import27 from '../../../src/common/axes/y-axis.component';
-import * as import28 from '../common/axes/y-axis.component.ngfactory';
-import * as import29 from '../../../src/area-chart/area-series.component';
-import * as import30 from './area-series.component.ngfactory';
-import * as import31 from '../../../src/common/circle-series.component';
-import * as import32 from '../common/circle-series.component.ngfactory';
-import * as import33 from '../../../src/common/timeline.component';
-import * as import34 from '../common/timeline.component.ngfactory';
+import * as import12 from '../../../src/common/axes/x-axis.component';
+import * as import13 from '../common/axes/x-axis.component.ngfactory';
+import * as import14 from '@angular/core/src/linker/view_container';
+import * as import15 from '../../../src/common/axes/y-axis.component';
+import * as import16 from '../common/axes/y-axis.component.ngfactory';
+import * as import17 from '../../../src/area-chart/area-series.component';
+import * as import18 from './area-series.component.ngfactory';
+import * as import19 from '../../../src/common/circle-series.component';
+import * as import20 from '../common/circle-series.component.ngfactory';
+import * as import21 from '../../../src/common/timeline.component';
+import * as import22 from '../common/timeline.component.ngfactory';
+import * as import23 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import24 from '@angular/core/src/linker/template_ref';
+import * as import25 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import26 from '@angular/common/src/directives/ng_for';
+import * as import27 from '../../../src/common/charts/chart.component';
+import * as import28 from '../../../src/common/tooltip/tooltip.service';
+import * as import29 from '../common/charts/chart.component.ngfactory';
+import * as import30 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import31 from '../../../src/common/area-tooltip.component';
+import * as import32 from '../common/area-tooltip.component.ngfactory';
+import * as import33 from '../../../src/services/injection.service';
+import * as import34 from '@angular/common/src/directives/ng_if';
 export class Wrapper_AreaChartStackedComponent {
   /*private*/ _eventHandler:Function;
   context:import0.AreaChartStackedComponent;
@@ -299,14 +299,438 @@ class View_AreaChartStackedComponent_Host0 extends import2.AppView<any> {
 }
 export const AreaChartStackedComponentNgFactory:import8.ComponentFactory<import0.AreaChartStackedComponent> = new import8.ComponentFactory<import0.AreaChartStackedComponent>('ngx-charts-area-chart-stacked',View_AreaChartStackedComponent_Host0,import0.AreaChartStackedComponent);
 const styles_AreaChartStackedComponent:any[] = ([] as any[]);
+class View_AreaChartStackedComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import12.XAxisComponent>;
+  _XAxisComponent_0_3:import13.Wrapper_XAxisComponent;
+  _text_1:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_AreaChartStackedComponent1,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis',''),(null as any));
+    this.compView_0 = new import13.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisComponent_0_3 = new import13.Wrapper_XAxisComponent();
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this.compView_0.create(this._XAxisComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import12.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this.parentView.context.xScale;
+    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.dims;
+    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.showGridLines;
+    this._XAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.showXAxisLabel;
+    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    const currVal_0_0_4:any = this.parentView.context.xAxisLabel;
+    this._XAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_0.destroy();
+    this._XAxisComponent_0_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'dimensionsChanged')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.updateXAxisHeight($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
+class View_AreaChartStackedComponent2 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import15.YAxisComponent>;
+  _YAxisComponent_0_3:import16.Wrapper_YAxisComponent;
+  _text_1:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_AreaChartStackedComponent2,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),(null as any));
+    this.compView_0 = new import16.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisComponent_0_3 = new import16.Wrapper_YAxisComponent();
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this.compView_0.create(this._YAxisComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import15.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this.parentView.context.yScale;
+    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.dims;
+    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.showGridLines;
+    this._YAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.showYAxisLabel;
+    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    const currVal_0_0_4:any = this.parentView.context.yAxisLabel;
+    this._YAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_0.destroy();
+    this._YAxisComponent_0_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'dimensionsChanged')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.updateYAxisWidth($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
+class View_AreaChartStackedComponent3 extends import2.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  compView_2:import2.AppView<import17.AreaSeriesComponent>;
+  _AreaSeriesComponent_2_3:import18.Wrapper_AreaSeriesComponent;
+  _text_3:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_AreaChartStackedComponent3,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-area-series','','stacked','true'),(null as any));
+    this.compView_2 = new import18.View_AreaSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._AreaSeriesComponent_2_3 = new import18.Wrapper_AreaSeriesComponent();
+    this.compView_2.create(this._AreaSeriesComponent_2_3.context);
+    this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import17.AreaSeriesComponent) && (2 === requestNodeIndex))) { return this._AreaSeriesComponent_2_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = this.context.$implicit;
+    this._AreaSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = this.parentView.context.xScale;
+    this._AreaSeriesComponent_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = this.parentView.context.yScale;
+    this._AreaSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_3:any = this.parentView.context.colors;
+    this._AreaSeriesComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
+    const currVal_2_0_4:any = this.parentView.context.scaleType;
+    this._AreaSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
+    const currVal_2_0_5:any = 'true';
+    this._AreaSeriesComponent_2_3.check_stacked(currVal_2_0_5,throwOnChange,false);
+    const currVal_2_0_6:any = this.parentView.context.gradient;
+    this._AreaSeriesComponent_2_3.check_gradient(currVal_2_0_6,throwOnChange,false);
+    const currVal_2_0_7:any = this.parentView.context.curve;
+    this._AreaSeriesComponent_2_3.check_curve(currVal_2_0_7,throwOnChange,false);
+    const currVal_2_0_8:any = this.parentView.context.activeEntries;
+    this._AreaSeriesComponent_2_3.check_activeEntries(currVal_2_0_8,throwOnChange,false);
+    if (this._AreaSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this.compView_2.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_2.destroy();
+    this._AreaSeriesComponent_2_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
+class View_AreaChartStackedComponent4 extends import2.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  compView_2:import2.AppView<import19.CircleSeriesComponent>;
+  _CircleSeriesComponent_2_3:import20.Wrapper_CircleSeriesComponent;
+  _text_3:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_AreaChartStackedComponent4,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-circle-series','','type','stacked'),(null as any));
+    this.compView_2 = new import20.View_CircleSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._CircleSeriesComponent_2_3 = new import20.Wrapper_CircleSeriesComponent(this.parentView.parentView.injectorGet(import11.Location,this.parentView.parentIndex));
+    this.compView_2.create(this._CircleSeriesComponent_2_3.context);
+    this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
+    this._CircleSeriesComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true,true,true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import19.CircleSeriesComponent) && (2 === requestNodeIndex))) { return this._CircleSeriesComponent_2_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = this.context.$implicit;
+    this._CircleSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = 'stacked';
+    this._CircleSeriesComponent_2_3.check_type(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = this.parentView.context.xScale;
+    this._CircleSeriesComponent_2_3.check_xScale(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_3:any = this.parentView.context.yScale;
+    this._CircleSeriesComponent_2_3.check_yScale(currVal_2_0_3,throwOnChange,false);
+    const currVal_2_0_4:any = this.parentView.context.colors;
+    this._CircleSeriesComponent_2_3.check_colors(currVal_2_0_4,throwOnChange,false);
+    const currVal_2_0_5:any = this.parentView.context.scaleType;
+    this._CircleSeriesComponent_2_3.check_scaleType(currVal_2_0_5,throwOnChange,false);
+    const currVal_2_0_6:any = this.parentView.context.hoveredVertical;
+    this._CircleSeriesComponent_2_3.check_visibleValue(currVal_2_0_6,throwOnChange,false);
+    const currVal_2_0_7:any = this.parentView.context.activeEntries;
+    this._CircleSeriesComponent_2_3.check_activeEntries(currVal_2_0_7,throwOnChange,false);
+    if (this._CircleSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this.compView_2.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_2.destroy();
+    this._CircleSeriesComponent_2_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_2(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'select')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'activate')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.onActivate($event)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'deactivate')) {
+      const pd_sub_2:any = ((<any>this.parentView.context.onDeactivate($event)) !== false);
+      result = (pd_sub_2 && result);
+    }
+    return result;
+  }
+}
+class View_AreaChartStackedComponent6 extends import2.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  compView_2:import2.AppView<import17.AreaSeriesComponent>;
+  _AreaSeriesComponent_2_3:import18.Wrapper_AreaSeriesComponent;
+  _text_3:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_AreaChartStackedComponent6,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-area-series','','stacked','true'),(null as any));
+    this.compView_2 = new import18.View_AreaSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._AreaSeriesComponent_2_3 = new import18.Wrapper_AreaSeriesComponent();
+    this.compView_2.create(this._AreaSeriesComponent_2_3.context);
+    this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import17.AreaSeriesComponent) && (2 === requestNodeIndex))) { return this._AreaSeriesComponent_2_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_2_0_0:any = this.context.$implicit;
+    this._AreaSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = this.parentView.parentView.context.timelineXScale;
+    this._AreaSeriesComponent_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = this.parentView.parentView.context.timelineYScale;
+    this._AreaSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_3:any = this.parentView.parentView.context.colors;
+    this._AreaSeriesComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
+    const currVal_2_0_4:any = this.parentView.parentView.context.scaleType;
+    this._AreaSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
+    const currVal_2_0_5:any = 'true';
+    this._AreaSeriesComponent_2_3.check_stacked(currVal_2_0_5,throwOnChange,false);
+    const currVal_2_0_6:any = this.parentView.parentView.context.gradient;
+    this._AreaSeriesComponent_2_3.check_gradient(currVal_2_0_6,throwOnChange,false);
+    const currVal_2_0_7:any = this.parentView.parentView.context.curve;
+    this._AreaSeriesComponent_2_3.check_curve(currVal_2_0_7,throwOnChange,false);
+    if (this._AreaSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    this.compView_2.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_2.destroy();
+    this._AreaSeriesComponent_2_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
+class View_AreaChartStackedComponent5 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import21.Timeline>;
+  _Timeline_0_3:import22.Wrapper_Timeline;
+  _text_1:any;
+  _anchor_2:any;
+  /*private*/ _vc_2:import14.ViewContainer;
+  _TemplateRef_2_5:any;
+  _NgFor_2_6:import23.Wrapper_NgFor;
+  _text_3:any;
+  /*private*/ _expr_9:any;
+  _arr_10:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_AreaChartStackedComponent5,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_9 = import1.UNINITIALIZED;
+    this._arr_10 = import3.pureProxy2((p0:any,p1:any):any[] => {
+      return [
+        p0,
+        p1
+      ]
+      ;
+    });
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-timeline',''),(null as any));
+    this.compView_0 = new import22.View_Timeline0(this.viewUtils,this,0,this._el_0);
+    this._Timeline_0_3 = new import22.Wrapper_Timeline(new import9.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),this.compView_0.ref,this.parentView.parentView.injectorGet(import11.Location,this.parentView.parentIndex));
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this._anchor_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
+    this._vc_2 = new import14.ViewContainer(2,0,this,this._anchor_2);
+    this._TemplateRef_2_5 = new import24.TemplateRef_(this,2,this._anchor_2);
+    this._NgFor_2_6 = new import23.Wrapper_NgFor(this._vc_2.vcRef,this._TemplateRef_2_5,this.parentView.parentView.injectorGet(import25.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
+    this._text_3 = this.renderer.createText((null as any),'\n      ',(null as any));
+    this.compView_0.create(this._Timeline_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'onDomainChange',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._Timeline_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),false,true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._anchor_2,
+      this._text_3
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import24.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
+    if (((token === import26.NgFor) && (2 === requestNodeIndex))) { return this._NgFor_2_6.context; }
+    if (((token === import21.Timeline) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._Timeline_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this._arr_10(this.parentView.context.timelineWidth,this.parentView.context.height);
+    this._Timeline_0_3.check_view(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.results;
+    this._Timeline_0_3.check_results(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.scheme;
+    this._Timeline_0_3.check_scheme(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.customColors;
+    this._Timeline_0_3.check_customColors(currVal_0_0_3,throwOnChange,false);
+    const currVal_0_0_4:any = this.parentView.context.legend;
+    this._Timeline_0_3.check_legend(currVal_0_0_4,throwOnChange,false);
+    const currVal_0_0_5:any = this.parentView.context.scaleType;
+    this._Timeline_0_3.check_scaleType(currVal_0_0_5,throwOnChange,false);
+    const currVal_0_0_6:any = this.parentView.context.timelineHeight;
+    this._Timeline_0_3.check_height(currVal_0_0_6,throwOnChange,false);
+    if (this._Timeline_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    const currVal_2_0_0:any = this.parentView.context.results;
+    this._NgFor_2_6.check_ngForOf(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = this.parentView.context.trackBy;
+    this._NgFor_2_6.check_ngForTrackBy(currVal_2_0_1,throwOnChange,false);
+    this._NgFor_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
+    this._vc_2.detectChangesInNestedViews(throwOnChange);
+    const currVal_9:any = this.parentView.context.timelineTransform;
+    if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
+      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_9 == null)? (null as any): currVal_9.toString()));
+      this._expr_9 = currVal_9;
+    }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_2.destroyNestedViews();
+    this.compView_0.destroy();
+    this._Timeline_0_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
+    if (((nodeIndex == 0) && (ngContentIndex == 0))) {
+      cb(this._text_1,ctx);
+      cb(this._vc_2.nativeElement,ctx);
+      this._vc_2.visitNestedViewRootNodes(cb,ctx);
+      cb(this._text_3,ctx);
+    }
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 2)) { return new View_AreaChartStackedComponent6(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
+    return (null as any);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'onDomainChange')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.updateDomain($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
 var renderType_AreaChartStackedComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_AreaChartStackedComponent,{});
 export class View_AreaChartStackedComponent0 extends import2.AppView<import0.AreaChartStackedComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import12.ViewContainer;
-  compView_1:import2.AppView<import13.ChartComponent>;
-  _TooltipService_1_5:import14.TooltipService;
-  _ChartComponent_1_6:import15.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import14.ViewContainer;
+  compView_1:import2.AppView<import27.ChartComponent>;
+  _TooltipService_1_5:import28.TooltipService;
+  _ChartComponent_1_6:import29.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
@@ -319,37 +743,37 @@ export class View_AreaChartStackedComponent0 extends import2.AppView<import0.Are
   _el_11:any;
   _text_12:any;
   _anchor_13:any;
-  /*private*/ _vc_13:import12.ViewContainer;
+  /*private*/ _vc_13:import14.ViewContainer;
   _TemplateRef_13_5:any;
-  _NgIf_13_6:import16.Wrapper_NgIf;
+  _NgIf_13_6:import30.Wrapper_NgIf;
   _text_14:any;
   _anchor_15:any;
-  /*private*/ _vc_15:import12.ViewContainer;
+  /*private*/ _vc_15:import14.ViewContainer;
   _TemplateRef_15_5:any;
-  _NgIf_15_6:import16.Wrapper_NgIf;
+  _NgIf_15_6:import30.Wrapper_NgIf;
   _text_16:any;
   _el_17:any;
   _text_18:any;
   _anchor_19:any;
-  /*private*/ _vc_19:import12.ViewContainer;
+  /*private*/ _vc_19:import14.ViewContainer;
   _TemplateRef_19_5:any;
-  _NgFor_19_6:import17.Wrapper_NgFor;
+  _NgFor_19_6:import23.Wrapper_NgFor;
   _text_20:any;
   _el_21:any;
-  compView_21:import2.AppView<import18.AreaTooltip>;
-  _AreaTooltip_21_3:import19.Wrapper_AreaTooltip;
+  compView_21:import2.AppView<import31.AreaTooltip>;
+  _AreaTooltip_21_3:import32.Wrapper_AreaTooltip;
   _text_22:any;
   _anchor_23:any;
-  /*private*/ _vc_23:import12.ViewContainer;
+  /*private*/ _vc_23:import14.ViewContainer;
   _TemplateRef_23_5:any;
-  _NgFor_23_6:import17.Wrapper_NgFor;
+  _NgFor_23_6:import23.Wrapper_NgFor;
   _text_24:any;
   _text_25:any;
   _text_26:any;
   _anchor_27:any;
-  /*private*/ _vc_27:import12.ViewContainer;
+  /*private*/ _vc_27:import14.ViewContainer;
   _TemplateRef_27_5:any;
-  _NgIf_27_6:import16.Wrapper_NgIf;
+  _NgIf_27_6:import30.Wrapper_NgIf;
   _text_28:any;
   _text_29:any;
   _arr_51:any;
@@ -379,10 +803,10 @@ export class View_AreaChartStackedComponent0 extends import2.AppView<import0.Are
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import15.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import14.TooltipService(this.parentView.injectorGet(import20.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import15.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import14.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import29.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import28.TooltipService(this.parentView.injectorGet(import33.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import29.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
@@ -395,38 +819,38 @@ export class View_AreaChartStackedComponent0 extends import2.AppView<import0.Are
     this._el_11 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','area-chart chart'),(null as any));
     this._text_12 = this.renderer.createText(this._el_11,'\n        ',(null as any));
     this._anchor_13 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
-    this._vc_13 = new import12.ViewContainer(13,11,this,this._anchor_13);
-    this._TemplateRef_13_5 = new import21.TemplateRef_(this,13,this._anchor_13);
-    this._NgIf_13_6 = new import16.Wrapper_NgIf(this._vc_13.vcRef,this._TemplateRef_13_5);
+    this._vc_13 = new import14.ViewContainer(13,11,this,this._anchor_13);
+    this._TemplateRef_13_5 = new import24.TemplateRef_(this,13,this._anchor_13);
+    this._NgIf_13_6 = new import30.Wrapper_NgIf(this._vc_13.vcRef,this._TemplateRef_13_5);
     this._text_14 = this.renderer.createText(this._el_11,'\n        ',(null as any));
     this._anchor_15 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
-    this._vc_15 = new import12.ViewContainer(15,11,this,this._anchor_15);
-    this._TemplateRef_15_5 = new import21.TemplateRef_(this,15,this._anchor_15);
-    this._NgIf_15_6 = new import16.Wrapper_NgIf(this._vc_15.vcRef,this._TemplateRef_15_5);
+    this._vc_15 = new import14.ViewContainer(15,11,this,this._anchor_15);
+    this._TemplateRef_15_5 = new import24.TemplateRef_(this,15,this._anchor_15);
+    this._NgIf_15_6 = new import30.Wrapper_NgIf(this._vc_15.vcRef,this._TemplateRef_15_5);
     this._text_16 = this.renderer.createText(this._el_11,'\n        ',(null as any));
     this._el_17 = import3.createRenderElement(this.renderer,this._el_11,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_18 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._anchor_19 = this.renderer.createTemplateAnchor(this._el_17,(null as any));
-    this._vc_19 = new import12.ViewContainer(19,17,this,this._anchor_19);
-    this._TemplateRef_19_5 = new import21.TemplateRef_(this,19,this._anchor_19);
-    this._NgFor_19_6 = new import17.Wrapper_NgFor(this._vc_19.vcRef,this._TemplateRef_19_5,this.parentView.injectorGet(import22.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_19 = new import14.ViewContainer(19,17,this,this._anchor_19);
+    this._TemplateRef_19_5 = new import24.TemplateRef_(this,19,this._anchor_19);
+    this._NgFor_19_6 = new import23.Wrapper_NgFor(this._vc_19.vcRef,this._TemplateRef_19_5,this.parentView.injectorGet(import25.IterableDiffers,this.parentIndex),this.ref);
     this._text_20 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._el_21 = import3.createRenderElement(this.renderer,this._el_17,':svg:g',new import3.InlineArray2(2,'ngx-charts-area-tooltip',''),(null as any));
-    this.compView_21 = new import19.View_AreaTooltip0(this.viewUtils,this,21,this._el_21);
-    this._AreaTooltip_21_3 = new import19.Wrapper_AreaTooltip(this.renderer);
+    this.compView_21 = new import32.View_AreaTooltip0(this.viewUtils,this,21,this._el_21);
+    this._AreaTooltip_21_3 = new import32.Wrapper_AreaTooltip(this.renderer);
     this.compView_21.create(this._AreaTooltip_21_3.context);
     this._text_22 = this.renderer.createText(this._el_17,'\n          ',(null as any));
     this._anchor_23 = this.renderer.createTemplateAnchor(this._el_17,(null as any));
-    this._vc_23 = new import12.ViewContainer(23,17,this,this._anchor_23);
-    this._TemplateRef_23_5 = new import21.TemplateRef_(this,23,this._anchor_23);
-    this._NgFor_23_6 = new import17.Wrapper_NgFor(this._vc_23.vcRef,this._TemplateRef_23_5,this.parentView.injectorGet(import22.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_23 = new import14.ViewContainer(23,17,this,this._anchor_23);
+    this._TemplateRef_23_5 = new import24.TemplateRef_(this,23,this._anchor_23);
+    this._NgFor_23_6 = new import23.Wrapper_NgFor(this._vc_23.vcRef,this._TemplateRef_23_5,this.parentView.injectorGet(import25.IterableDiffers,this.parentIndex),this.ref);
     this._text_24 = this.renderer.createText(this._el_17,'\n        ',(null as any));
     this._text_25 = this.renderer.createText(this._el_11,'\n      ',(null as any));
     this._text_26 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._anchor_27 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    this._vc_27 = new import12.ViewContainer(27,1,this,this._anchor_27);
-    this._TemplateRef_27_5 = new import21.TemplateRef_(this,27,this._anchor_27);
-    this._NgIf_27_6 = new import16.Wrapper_NgIf(this._vc_27.vcRef,this._TemplateRef_27_5);
+    this._vc_27 = new import14.ViewContainer(27,1,this,this._anchor_27);
+    this._TemplateRef_27_5 = new import24.TemplateRef_(this,27,this._anchor_27);
+    this._NgIf_27_6 = new import30.Wrapper_NgIf(this._vc_27.vcRef,this._TemplateRef_27_5);
     this._text_28 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     this._text_29 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
@@ -474,19 +898,19 @@ export class View_AreaChartStackedComponent0 extends import2.AppView<import0.Are
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import21.TemplateRef) && (13 === requestNodeIndex))) { return this._TemplateRef_13_5; }
-    if (((token === import23.NgIf) && (13 === requestNodeIndex))) { return this._NgIf_13_6.context; }
-    if (((token === import21.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
-    if (((token === import23.NgIf) && (15 === requestNodeIndex))) { return this._NgIf_15_6.context; }
-    if (((token === import21.TemplateRef) && (19 === requestNodeIndex))) { return this._TemplateRef_19_5; }
-    if (((token === import24.NgFor) && (19 === requestNodeIndex))) { return this._NgFor_19_6.context; }
-    if (((token === import18.AreaTooltip) && (21 === requestNodeIndex))) { return this._AreaTooltip_21_3.context; }
-    if (((token === import21.TemplateRef) && (23 === requestNodeIndex))) { return this._TemplateRef_23_5; }
-    if (((token === import24.NgFor) && (23 === requestNodeIndex))) { return this._NgFor_23_6.context; }
-    if (((token === import21.TemplateRef) && (27 === requestNodeIndex))) { return this._TemplateRef_27_5; }
-    if (((token === import23.NgIf) && (27 === requestNodeIndex))) { return this._NgIf_27_6.context; }
-    if (((token === import14.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 28)))) { return this._TooltipService_1_5; }
-    if (((token === import13.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 28)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import24.TemplateRef) && (13 === requestNodeIndex))) { return this._TemplateRef_13_5; }
+    if (((token === import34.NgIf) && (13 === requestNodeIndex))) { return this._NgIf_13_6.context; }
+    if (((token === import24.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
+    if (((token === import34.NgIf) && (15 === requestNodeIndex))) { return this._NgIf_15_6.context; }
+    if (((token === import24.TemplateRef) && (19 === requestNodeIndex))) { return this._TemplateRef_19_5; }
+    if (((token === import26.NgFor) && (19 === requestNodeIndex))) { return this._NgFor_19_6.context; }
+    if (((token === import31.AreaTooltip) && (21 === requestNodeIndex))) { return this._AreaTooltip_21_3.context; }
+    if (((token === import24.TemplateRef) && (23 === requestNodeIndex))) { return this._TemplateRef_23_5; }
+    if (((token === import26.NgFor) && (23 === requestNodeIndex))) { return this._NgFor_23_6.context; }
+    if (((token === import24.TemplateRef) && (27 === requestNodeIndex))) { return this._TemplateRef_27_5; }
+    if (((token === import34.NgIf) && (27 === requestNodeIndex))) { return this._NgIf_27_6.context; }
+    if (((token === import28.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 28)))) { return this._TooltipService_1_5; }
+    if (((token === import27.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 28)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -627,429 +1051,5 @@ export class View_AreaChartStackedComponent0 extends import2.AppView<import0.Are
       result = (pd_sub_0 && result);
     }
     return result;
-  }
-}
-class View_AreaChartStackedComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import25.XAxisComponent>;
-  _XAxisComponent_0_3:import26.Wrapper_XAxisComponent;
-  _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_AreaChartStackedComponent1,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis',''),(null as any));
-    this.compView_0 = new import26.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._XAxisComponent_0_3 = new import26.Wrapper_XAxisComponent();
-    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._XAxisComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import25.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this.parentView.context.xScale;
-    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.dims;
-    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._XAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.showXAxisLabel;
-    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
-    const currVal_0_0_4:any = this.parentView.context.xAxisLabel;
-    this._XAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_0.destroy();
-    this._XAxisComponent_0_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'dimensionsChanged')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.updateXAxisHeight($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
-  }
-}
-class View_AreaChartStackedComponent2 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import27.YAxisComponent>;
-  _YAxisComponent_0_3:import28.Wrapper_YAxisComponent;
-  _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_AreaChartStackedComponent2,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),(null as any));
-    this.compView_0 = new import28.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._YAxisComponent_0_3 = new import28.Wrapper_YAxisComponent();
-    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._YAxisComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import27.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this.parentView.context.yScale;
-    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.dims;
-    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._YAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.showYAxisLabel;
-    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
-    const currVal_0_0_4:any = this.parentView.context.yAxisLabel;
-    this._YAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_0.destroy();
-    this._YAxisComponent_0_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'dimensionsChanged')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.updateYAxisWidth($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
-  }
-}
-class View_AreaChartStackedComponent3 extends import2.AppView<any> {
-  _el_0:any;
-  _text_1:any;
-  _el_2:any;
-  compView_2:import2.AppView<import29.AreaSeriesComponent>;
-  _AreaSeriesComponent_2_3:import30.Wrapper_AreaSeriesComponent;
-  _text_3:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_AreaChartStackedComponent3,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-area-series','','stacked','true'),(null as any));
-    this.compView_2 = new import30.View_AreaSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._AreaSeriesComponent_2_3 = new import30.Wrapper_AreaSeriesComponent();
-    this.compView_2.create(this._AreaSeriesComponent_2_3.context);
-    this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._el_2,
-      this._text_3
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import29.AreaSeriesComponent) && (2 === requestNodeIndex))) { return this._AreaSeriesComponent_2_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_2_0_0:any = this.context.$implicit;
-    this._AreaSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = this.parentView.context.xScale;
-    this._AreaSeriesComponent_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = this.parentView.context.yScale;
-    this._AreaSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
-    const currVal_2_0_3:any = this.parentView.context.colors;
-    this._AreaSeriesComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = this.parentView.context.scaleType;
-    this._AreaSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
-    const currVal_2_0_5:any = 'true';
-    this._AreaSeriesComponent_2_3.check_stacked(currVal_2_0_5,throwOnChange,false);
-    const currVal_2_0_6:any = this.parentView.context.gradient;
-    this._AreaSeriesComponent_2_3.check_gradient(currVal_2_0_6,throwOnChange,false);
-    const currVal_2_0_7:any = this.parentView.context.curve;
-    this._AreaSeriesComponent_2_3.check_curve(currVal_2_0_7,throwOnChange,false);
-    const currVal_2_0_8:any = this.parentView.context.activeEntries;
-    this._AreaSeriesComponent_2_3.check_activeEntries(currVal_2_0_8,throwOnChange,false);
-    if (this._AreaSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
-    this.compView_2.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_2.destroy();
-    this._AreaSeriesComponent_2_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-}
-class View_AreaChartStackedComponent4 extends import2.AppView<any> {
-  _el_0:any;
-  _text_1:any;
-  _el_2:any;
-  compView_2:import2.AppView<import31.CircleSeriesComponent>;
-  _CircleSeriesComponent_2_3:import32.Wrapper_CircleSeriesComponent;
-  _text_3:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_AreaChartStackedComponent4,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-circle-series','','type','stacked'),(null as any));
-    this.compView_2 = new import32.View_CircleSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._CircleSeriesComponent_2_3 = new import32.Wrapper_CircleSeriesComponent(this.parentView.parentView.injectorGet(import11.Location,this.parentView.parentIndex));
-    this.compView_2.create(this._CircleSeriesComponent_2_3.context);
-    this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
-    this._CircleSeriesComponent_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true,true,true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._el_2,
-      this._text_3
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import31.CircleSeriesComponent) && (2 === requestNodeIndex))) { return this._CircleSeriesComponent_2_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_2_0_0:any = this.context.$implicit;
-    this._CircleSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = 'stacked';
-    this._CircleSeriesComponent_2_3.check_type(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = this.parentView.context.xScale;
-    this._CircleSeriesComponent_2_3.check_xScale(currVal_2_0_2,throwOnChange,false);
-    const currVal_2_0_3:any = this.parentView.context.yScale;
-    this._CircleSeriesComponent_2_3.check_yScale(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = this.parentView.context.colors;
-    this._CircleSeriesComponent_2_3.check_colors(currVal_2_0_4,throwOnChange,false);
-    const currVal_2_0_5:any = this.parentView.context.scaleType;
-    this._CircleSeriesComponent_2_3.check_scaleType(currVal_2_0_5,throwOnChange,false);
-    const currVal_2_0_6:any = this.parentView.context.hoveredVertical;
-    this._CircleSeriesComponent_2_3.check_visibleValue(currVal_2_0_6,throwOnChange,false);
-    const currVal_2_0_7:any = this.parentView.context.activeEntries;
-    this._CircleSeriesComponent_2_3.check_activeEntries(currVal_2_0_7,throwOnChange,false);
-    if (this._CircleSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
-    this.compView_2.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_2.destroy();
-    this._CircleSeriesComponent_2_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_2(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'select')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    if ((eventName == 'activate')) {
-      const pd_sub_1:any = ((<any>this.parentView.context.onActivate($event)) !== false);
-      result = (pd_sub_1 && result);
-    }
-    if ((eventName == 'deactivate')) {
-      const pd_sub_2:any = ((<any>this.parentView.context.onDeactivate($event)) !== false);
-      result = (pd_sub_2 && result);
-    }
-    return result;
-  }
-}
-class View_AreaChartStackedComponent5 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import33.Timeline>;
-  _Timeline_0_3:import34.Wrapper_Timeline;
-  _text_1:any;
-  _anchor_2:any;
-  /*private*/ _vc_2:import12.ViewContainer;
-  _TemplateRef_2_5:any;
-  _NgFor_2_6:import17.Wrapper_NgFor;
-  _text_3:any;
-  /*private*/ _expr_9:any;
-  _arr_10:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_AreaChartStackedComponent5,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_9 = import1.UNINITIALIZED;
-    this._arr_10 = import3.pureProxy2((p0:any,p1:any):any[] => {
-      return [
-        p0,
-        p1
-      ]
-      ;
-    });
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-timeline',''),(null as any));
-    this.compView_0 = new import34.View_Timeline0(this.viewUtils,this,0,this._el_0);
-    this._Timeline_0_3 = new import34.Wrapper_Timeline(new import9.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),this.compView_0.ref,this.parentView.parentView.injectorGet(import11.Location,this.parentView.parentIndex));
-    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this._anchor_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
-    this._vc_2 = new import12.ViewContainer(2,0,this,this._anchor_2);
-    this._TemplateRef_2_5 = new import21.TemplateRef_(this,2,this._anchor_2);
-    this._NgFor_2_6 = new import17.Wrapper_NgFor(this._vc_2.vcRef,this._TemplateRef_2_5,this.parentView.parentView.injectorGet(import22.IterableDiffers,this.parentView.parentIndex),this.parentView.ref);
-    this._text_3 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this.compView_0.create(this._Timeline_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'onDomainChange',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._Timeline_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),false,true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._anchor_2,
-      this._text_3
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import21.TemplateRef) && (2 === requestNodeIndex))) { return this._TemplateRef_2_5; }
-    if (((token === import24.NgFor) && (2 === requestNodeIndex))) { return this._NgFor_2_6.context; }
-    if (((token === import33.Timeline) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._Timeline_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this._arr_10(this.parentView.context.timelineWidth,this.parentView.context.height);
-    this._Timeline_0_3.check_view(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.results;
-    this._Timeline_0_3.check_results(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.scheme;
-    this._Timeline_0_3.check_scheme(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.customColors;
-    this._Timeline_0_3.check_customColors(currVal_0_0_3,throwOnChange,false);
-    const currVal_0_0_4:any = this.parentView.context.legend;
-    this._Timeline_0_3.check_legend(currVal_0_0_4,throwOnChange,false);
-    const currVal_0_0_5:any = this.parentView.context.scaleType;
-    this._Timeline_0_3.check_scaleType(currVal_0_0_5,throwOnChange,false);
-    const currVal_0_0_6:any = this.parentView.context.timelineHeight;
-    this._Timeline_0_3.check_height(currVal_0_0_6,throwOnChange,false);
-    if (this._Timeline_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    const currVal_2_0_0:any = this.parentView.context.results;
-    this._NgFor_2_6.check_ngForOf(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = this.parentView.context.trackBy;
-    this._NgFor_2_6.check_ngForTrackBy(currVal_2_0_1,throwOnChange,false);
-    this._NgFor_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
-    this._vc_2.detectChangesInNestedViews(throwOnChange);
-    const currVal_9:any = this.parentView.context.timelineTransform;
-    if (import3.checkBinding(throwOnChange,this._expr_9,currVal_9)) {
-      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_9 == null)? (null as any): currVal_9.toString()));
-      this._expr_9 = currVal_9;
-    }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_2.destroyNestedViews();
-    this.compView_0.destroy();
-    this._Timeline_0_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
-    if (((nodeIndex == 0) && (ngContentIndex == 0))) {
-      cb(this._text_1,ctx);
-      cb(this._vc_2.nativeElement,ctx);
-      this._vc_2.visitNestedViewRootNodes(cb,ctx);
-      cb(this._text_3,ctx);
-    }
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 2)) { return new View_AreaChartStackedComponent6(this.viewUtils,this,2,this._anchor_2,this._vc_2); }
-    return (null as any);
-  }
-  handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'onDomainChange')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.updateDomain($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
-  }
-}
-class View_AreaChartStackedComponent6 extends import2.AppView<any> {
-  _el_0:any;
-  _text_1:any;
-  _el_2:any;
-  compView_2:import2.AppView<import29.AreaSeriesComponent>;
-  _AreaSeriesComponent_2_3:import30.Wrapper_AreaSeriesComponent;
-  _text_3:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_AreaChartStackedComponent6,renderType_AreaChartStackedComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-area-series','','stacked','true'),(null as any));
-    this.compView_2 = new import30.View_AreaSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._AreaSeriesComponent_2_3 = new import30.Wrapper_AreaSeriesComponent();
-    this.compView_2.create(this._AreaSeriesComponent_2_3.context);
-    this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._el_2,
-      this._text_3
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import29.AreaSeriesComponent) && (2 === requestNodeIndex))) { return this._AreaSeriesComponent_2_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_2_0_0:any = this.context.$implicit;
-    this._AreaSeriesComponent_2_3.check_data(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = this.parentView.parentView.context.timelineXScale;
-    this._AreaSeriesComponent_2_3.check_xScale(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = this.parentView.parentView.context.timelineYScale;
-    this._AreaSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
-    const currVal_2_0_3:any = this.parentView.parentView.context.colors;
-    this._AreaSeriesComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = this.parentView.parentView.context.scaleType;
-    this._AreaSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
-    const currVal_2_0_5:any = 'true';
-    this._AreaSeriesComponent_2_3.check_stacked(currVal_2_0_5,throwOnChange,false);
-    const currVal_2_0_6:any = this.parentView.parentView.context.gradient;
-    this._AreaSeriesComponent_2_3.check_gradient(currVal_2_0_6,throwOnChange,false);
-    const currVal_2_0_7:any = this.parentView.parentView.context.curve;
-    this._AreaSeriesComponent_2_3.check_curve(currVal_2_0_7,throwOnChange,false);
-    if (this._AreaSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
-    this.compView_2.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_2.destroy();
-    this._AreaSeriesComponent_2_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
   }
 }

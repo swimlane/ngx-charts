@@ -21,18 +21,18 @@ import * as import12 from '@angular/core/src/animation/animation_style_util';
 import * as import13 from '@angular/core/src/animation/animation_keyframe';
 import * as import14 from '@angular/core/src/animation/animation_player';
 import * as import15 from '@angular/core/src/linker/view_container';
-import * as import16 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import17 from '@angular/core/src/linker/template_ref';
-import * as import18 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import19 from '@angular/common/src/directives/ng_for';
-import * as import20 from '../../../src/bar-chart/bar.component';
-import * as import21 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import22 from './bar.component.ngfactory';
-import * as import23 from '../../../src/common/tooltip/tooltip.service';
-import * as import24 from '@angular/core/src/linker/element_ref';
-import * as import25 from '@angular/core/src/zone/ng_zone';
-import * as import26 from '@angular/common/src/location/location';
-import * as import27 from '../../../src/common/tooltip/tooltip.directive';
+import * as import16 from '../../../src/bar-chart/bar.component';
+import * as import17 from '../common/tooltip/tooltip.directive.ngfactory';
+import * as import18 from './bar.component.ngfactory';
+import * as import19 from '../../../src/common/tooltip/tooltip.service';
+import * as import20 from '@angular/core/src/linker/element_ref';
+import * as import21 from '@angular/core/src/zone/ng_zone';
+import * as import22 from '@angular/common/src/location/location';
+import * as import23 from '../../../src/common/tooltip/tooltip.directive';
+import * as import24 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import25 from '@angular/core/src/linker/template_ref';
+import * as import26 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import27 from '@angular/common/src/directives/ng_for';
 export class Wrapper_SeriesVerticalComponent {
   /*private*/ _eventHandler:Function;
   context:import0.SeriesVerticalComponent;
@@ -248,60 +248,12 @@ function SeriesVerticalComponent_animationState_factory(view:import2.AppView<any
   view.animationContext.queueAnimation(element,'animationState',player);
   return new import9.AnimationTransition(player,currentState,nextState,totalTime);
 }
-var renderType_SeriesVerticalComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesVerticalComponent,{animationState: SeriesVerticalComponent_animationState_factory});
-export class View_SeriesVerticalComponent0 extends import2.AppView<import0.SeriesVerticalComponent> {
-  _text_0:any;
-  _anchor_1:any;
-  /*private*/ _vc_1:import15.ViewContainer;
-  _TemplateRef_1_5:any;
-  _NgFor_1_6:import16.Wrapper_NgFor;
-  _text_2:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_SeriesVerticalComponent0,renderType_SeriesVerticalComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
-    this._vc_1 = new import15.ViewContainer(1,(null as any),this,this._anchor_1);
-    this._TemplateRef_1_5 = new import17.TemplateRef_(this,1,this._anchor_1);
-    this._NgFor_1_6 = new import16.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import18.IterableDiffers,this.parentIndex),this.ref);
-    this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._anchor_1,
-      this._text_2
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import17.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
-    if (((token === import19.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1_0_0:any = this.context.bars;
-    this._NgFor_1_6.check_ngForOf(currVal_1_0_0,throwOnChange,false);
-    const currVal_1_0_1:any = this.context.trackBy;
-    this._NgFor_1_6.check_ngForTrackBy(currVal_1_0_1,throwOnChange,false);
-    this._NgFor_1_6.ngDoCheck(this,this._anchor_1,throwOnChange);
-    this._vc_1.detectChangesInNestedViews(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_1.destroyNestedViews();
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 1)) { return new View_SeriesVerticalComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
-    return (null as any);
-  }
-}
 class View_SeriesVerticalComponent1 extends import2.AppView<any> {
   _el_0:any;
   /*private*/ _vc_0:import15.ViewContainer;
-  compView_0:import2.AppView<import20.BarComponent>;
-  _TooltipDirective_0_5:import21.Wrapper_TooltipDirective;
-  _BarComponent_0_6:import22.Wrapper_BarComponent;
+  compView_0:import2.AppView<import16.BarComponent>;
+  _TooltipDirective_0_5:import17.Wrapper_TooltipDirective;
+  _BarComponent_0_6:import18.Wrapper_BarComponent;
   _text_1:any;
   _el_2:any;
   /*private*/ _expr_7:any;
@@ -312,9 +264,9 @@ class View_SeriesVerticalComponent1 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray4(4,'ngx-charts-bar','','ngx-tooltip',''),(null as any));
     this._vc_0 = new import15.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new import22.View_BarComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import21.Wrapper_TooltipDirective(this.parentView.injectorGet(import23.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import24.ElementRef(this._el_0),this.parentView.injectorGet(import25.NgZone,this.parentIndex));
-    this._BarComponent_0_6 = new import22.Wrapper_BarComponent(new import24.ElementRef(this._el_0),this.parentView.injectorGet(import26.Location,this.parentIndex));
+    this.compView_0 = new import18.View_BarComponent0(this.viewUtils,this,0,this._el_0);
+    this._TooltipDirective_0_5 = new import17.Wrapper_TooltipDirective(this.parentView.injectorGet(import19.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import20.ElementRef(this._el_0),this.parentView.injectorGet(import21.NgZone,this.parentIndex));
+    this._BarComponent_0_6 = new import18.Wrapper_BarComponent(new import20.ElementRef(this._el_0),this.parentView.injectorGet(import22.Location,this.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_0.create(this._BarComponent_0_6.context);
     this._el_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
@@ -328,8 +280,8 @@ class View_SeriesVerticalComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import27.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
-    if (((token === import20.BarComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._BarComponent_0_6.context; }
+    if (((token === import23.TooltipDirective) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import16.BarComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._BarComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -403,5 +355,53 @@ class View_SeriesVerticalComponent1 extends import2.AppView<any> {
       result = (pd_sub_2 && result);
     }
     return result;
+  }
+}
+var renderType_SeriesVerticalComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesVerticalComponent,{animationState: SeriesVerticalComponent_animationState_factory});
+export class View_SeriesVerticalComponent0 extends import2.AppView<import0.SeriesVerticalComponent> {
+  _text_0:any;
+  _anchor_1:any;
+  /*private*/ _vc_1:import15.ViewContainer;
+  _TemplateRef_1_5:any;
+  _NgFor_1_6:import24.Wrapper_NgFor;
+  _text_2:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
+    super(View_SeriesVerticalComponent0,renderType_SeriesVerticalComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
+    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
+    this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
+    this._vc_1 = new import15.ViewContainer(1,(null as any),this,this._anchor_1);
+    this._TemplateRef_1_5 = new import25.TemplateRef_(this,1,this._anchor_1);
+    this._NgFor_1_6 = new import24.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import26.IterableDiffers,this.parentIndex),this.ref);
+    this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
+      this._text_0,
+      this._anchor_1,
+      this._text_2
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import25.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
+    if (((token === import27.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_1_0_0:any = this.context.bars;
+    this._NgFor_1_6.check_ngForOf(currVal_1_0_0,throwOnChange,false);
+    const currVal_1_0_1:any = this.context.trackBy;
+    this._NgFor_1_6.check_ngForTrackBy(currVal_1_0_1,throwOnChange,false);
+    this._NgFor_1_6.ngDoCheck(this,this._anchor_1,throwOnChange);
+    this._vc_1.detectChangesInNestedViews(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_1.destroyNestedViews();
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 1)) { return new View_SeriesVerticalComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
+    return (null as any);
   }
 }

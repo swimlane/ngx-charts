@@ -20,6 +20,10 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getContainerDims(): any;
+    /**
+     * Converts all date objects that appear as name
+     * into formatted date strings
+     */
     formatDates(): void;
     protected unbindEvents(): void;
     private bindWindowResizeEvent();

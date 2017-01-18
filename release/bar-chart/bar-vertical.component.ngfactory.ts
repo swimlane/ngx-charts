@@ -17,20 +17,20 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../src/common/charts/chart.component';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '../common/charts/chart.component.ngfactory';
-import * as import16 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import17 from '../../../src/bar-chart/series-vertical.component';
-import * as import18 from './series-vertical.component.ngfactory';
-import * as import19 from '../../../src/services/injection.service';
-import * as import20 from '@angular/core/src/linker/template_ref';
-import * as import21 from '@angular/common/src/directives/ng_if';
-import * as import22 from '../../../src/common/axes/x-axis.component';
-import * as import23 from '../common/axes/x-axis.component.ngfactory';
-import * as import24 from '../../../src/common/axes/y-axis.component';
-import * as import25 from '../common/axes/y-axis.component.ngfactory';
+import * as import12 from '../../../src/common/axes/x-axis.component';
+import * as import13 from '../common/axes/x-axis.component.ngfactory';
+import * as import14 from '@angular/core/src/linker/view_container';
+import * as import15 from '../../../src/common/axes/y-axis.component';
+import * as import16 from '../common/axes/y-axis.component.ngfactory';
+import * as import17 from '../../../src/common/charts/chart.component';
+import * as import18 from '../../../src/common/tooltip/tooltip.service';
+import * as import19 from '../common/charts/chart.component.ngfactory';
+import * as import20 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import21 from '../../../src/bar-chart/series-vertical.component';
+import * as import22 from './series-vertical.component.ngfactory';
+import * as import23 from '../../../src/services/injection.service';
+import * as import24 from '@angular/core/src/linker/template_ref';
+import * as import25 from '@angular/common/src/directives/ng_if';
 export class Wrapper_BarVerticalComponent {
   /*private*/ _eventHandler:Function;
   context:import0.BarVerticalComponent;
@@ -259,30 +259,144 @@ class View_BarVerticalComponent_Host0 extends import2.AppView<any> {
 }
 export const BarVerticalComponentNgFactory:import8.ComponentFactory<import0.BarVerticalComponent> = new import8.ComponentFactory<import0.BarVerticalComponent>('ngx-charts-bar-vertical',View_BarVerticalComponent_Host0,import0.BarVerticalComponent);
 const styles_BarVerticalComponent:any[] = ([] as any[]);
+class View_BarVerticalComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import12.XAxisComponent>;
+  _XAxisComponent_0_3:import13.Wrapper_XAxisComponent;
+  _text_1:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_BarVerticalComponent1,renderType_BarVerticalComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis',''),(null as any));
+    this.compView_0 = new import13.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisComponent_0_3 = new import13.Wrapper_XAxisComponent();
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this.compView_0.create(this._XAxisComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import12.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this.parentView.context.xScale;
+    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.dims;
+    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.showXAxisLabel;
+    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.xAxisLabel;
+    this._XAxisComponent_0_3.check_labelText(currVal_0_0_3,throwOnChange,false);
+    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_0.destroy();
+    this._XAxisComponent_0_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'dimensionsChanged')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.updateXAxisHeight($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
+class View_BarVerticalComponent2 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import15.YAxisComponent>;
+  _YAxisComponent_0_3:import16.Wrapper_YAxisComponent;
+  _text_1:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import14.ViewContainer) {
+    super(View_BarVerticalComponent2,renderType_BarVerticalComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),(null as any));
+    this.compView_0 = new import16.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisComponent_0_3 = new import16.Wrapper_YAxisComponent();
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this.compView_0.create(this._YAxisComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import15.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this.parentView.context.yScale;
+    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.dims;
+    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.showGridLines;
+    this._YAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.showYAxisLabel;
+    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    const currVal_0_0_4:any = this.parentView.context.yAxisLabel;
+    this._YAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_0.destroy();
+    this._YAxisComponent_0_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'dimensionsChanged')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.updateYAxisWidth($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
 var renderType_BarVerticalComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarVerticalComponent,{});
 export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerticalComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import12.ViewContainer;
-  compView_1:import2.AppView<import13.ChartComponent>;
-  _TooltipService_1_5:import14.TooltipService;
-  _ChartComponent_1_6:import15.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import14.ViewContainer;
+  compView_1:import2.AppView<import17.ChartComponent>;
+  _TooltipService_1_5:import18.TooltipService;
+  _ChartComponent_1_6:import19.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _anchor_5:any;
-  /*private*/ _vc_5:import12.ViewContainer;
+  /*private*/ _vc_5:import14.ViewContainer;
   _TemplateRef_5_5:any;
-  _NgIf_5_6:import16.Wrapper_NgIf;
+  _NgIf_5_6:import20.Wrapper_NgIf;
   _text_6:any;
   _anchor_7:any;
-  /*private*/ _vc_7:import12.ViewContainer;
+  /*private*/ _vc_7:import14.ViewContainer;
   _TemplateRef_7_5:any;
-  _NgIf_7_6:import16.Wrapper_NgIf;
+  _NgIf_7_6:import20.Wrapper_NgIf;
   _text_8:any;
   _el_9:any;
-  compView_9:import2.AppView<import17.SeriesVerticalComponent>;
-  _SeriesVerticalComponent_9_3:import18.Wrapper_SeriesVerticalComponent;
+  compView_9:import2.AppView<import21.SeriesVerticalComponent>;
+  _SeriesVerticalComponent_9_3:import22.Wrapper_SeriesVerticalComponent;
   _text_10:any;
   _text_11:any;
   _text_12:any;
@@ -304,26 +418,26 @@ export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerti
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import15.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import14.TooltipService(this.parentView.injectorGet(import19.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import15.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import14.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import19.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import18.TooltipService(this.parentView.injectorGet(import23.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import19.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','bar-chart chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_5 = new import12.ViewContainer(5,3,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import20.TemplateRef_(this,5,this._anchor_5);
-    this._NgIf_5_6 = new import16.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
+    this._vc_5 = new import14.ViewContainer(5,3,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import24.TemplateRef_(this,5,this._anchor_5);
+    this._NgIf_5_6 = new import20.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
     this._text_6 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_7 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_7 = new import12.ViewContainer(7,3,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import20.TemplateRef_(this,7,this._anchor_7);
-    this._NgIf_7_6 = new import16.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
+    this._vc_7 = new import14.ViewContainer(7,3,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import24.TemplateRef_(this,7,this._anchor_7);
+    this._NgIf_7_6 = new import20.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
     this._text_8 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_9 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'ngx-charts-series-vertical',''),(null as any));
-    this.compView_9 = new import18.View_SeriesVerticalComponent0(this.viewUtils,this,9,this._el_9);
-    this._SeriesVerticalComponent_9_3 = new import18.Wrapper_SeriesVerticalComponent();
+    this.compView_9 = new import22.View_SeriesVerticalComponent0(this.viewUtils,this,9,this._el_9);
+    this._SeriesVerticalComponent_9_3 = new import22.Wrapper_SeriesVerticalComponent();
     this._text_10 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_9.create(this._SeriesVerticalComponent_9_3.context);
     this._text_11 = this.renderer.createText(this._el_3,'\n      ',(null as any));
@@ -358,13 +472,13 @@ export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerti
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import20.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import21.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
-    if (((token === import20.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import21.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
-    if (((token === import17.SeriesVerticalComponent) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._SeriesVerticalComponent_9_3.context; }
-    if (((token === import14.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._TooltipService_1_5; }
-    if (((token === import13.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import24.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import25.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
+    if (((token === import24.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import25.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
+    if (((token === import21.SeriesVerticalComponent) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._SeriesVerticalComponent_9_3.context; }
+    if (((token === import18.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._TooltipService_1_5; }
+    if (((token === import17.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -461,120 +575,6 @@ export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerti
     if ((eventName == 'select')) {
       const pd_sub_2:any = ((<any>this.context.onClick($event)) !== false);
       result = (pd_sub_2 && result);
-    }
-    return result;
-  }
-}
-class View_BarVerticalComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import22.XAxisComponent>;
-  _XAxisComponent_0_3:import23.Wrapper_XAxisComponent;
-  _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_BarVerticalComponent1,renderType_BarVerticalComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis',''),(null as any));
-    this.compView_0 = new import23.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._XAxisComponent_0_3 = new import23.Wrapper_XAxisComponent();
-    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._XAxisComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import22.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this.parentView.context.xScale;
-    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.dims;
-    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.showXAxisLabel;
-    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.xAxisLabel;
-    this._XAxisComponent_0_3.check_labelText(currVal_0_0_3,throwOnChange,false);
-    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_0.destroy();
-    this._XAxisComponent_0_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'dimensionsChanged')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.updateXAxisHeight($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
-  }
-}
-class View_BarVerticalComponent2 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import24.YAxisComponent>;
-  _YAxisComponent_0_3:import25.Wrapper_YAxisComponent;
-  _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_BarVerticalComponent2,renderType_BarVerticalComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),(null as any));
-    this.compView_0 = new import25.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._YAxisComponent_0_3 = new import25.Wrapper_YAxisComponent();
-    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._YAxisComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import24.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this.parentView.context.yScale;
-    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.dims;
-    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._YAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.showYAxisLabel;
-    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
-    const currVal_0_0_4:any = this.parentView.context.yAxisLabel;
-    this._YAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_0.destroy();
-    this._YAxisComponent_0_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'dimensionsChanged')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.updateYAxisWidth($event)) !== false);
-      result = (pd_sub_0 && result);
     }
     return result;
   }

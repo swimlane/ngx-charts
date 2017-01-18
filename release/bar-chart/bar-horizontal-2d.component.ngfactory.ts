@@ -23,25 +23,25 @@ import * as import14 from '@angular/core/src/animation/animation_styles';
 import * as import15 from '@angular/core/src/animation/animation_style_util';
 import * as import16 from '@angular/core/src/animation/animation_keyframe';
 import * as import17 from '@angular/core/src/animation/animation_player';
-import * as import18 from '@angular/core/src/linker/view_container';
-import * as import19 from '../../../src/common/charts/chart.component';
-import * as import20 from '../../../src/common/tooltip/tooltip.service';
-import * as import21 from '../common/charts/chart.component.ngfactory';
-import * as import22 from '../../../src/common/grid-panel-series.component';
-import * as import23 from '../common/grid-panel-series.component.ngfactory';
-import * as import24 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import25 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import26 from '../../../src/services/injection.service';
-import * as import27 from '@angular/core/src/linker/template_ref';
-import * as import28 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import29 from '@angular/common/src/directives/ng_if';
-import * as import30 from '@angular/common/src/directives/ng_for';
-import * as import31 from '../../../src/common/axes/x-axis.component';
-import * as import32 from '../common/axes/x-axis.component.ngfactory';
-import * as import33 from '../../../src/common/axes/y-axis.component';
-import * as import34 from '../common/axes/y-axis.component.ngfactory';
-import * as import35 from '../../../src/bar-chart/series-horizontal.component';
-import * as import36 from './series-horizontal.component.ngfactory';
+import * as import18 from '../../../src/common/axes/x-axis.component';
+import * as import19 from '../common/axes/x-axis.component.ngfactory';
+import * as import20 from '@angular/core/src/linker/view_container';
+import * as import21 from '../../../src/common/axes/y-axis.component';
+import * as import22 from '../common/axes/y-axis.component.ngfactory';
+import * as import23 from '../../../src/bar-chart/series-horizontal.component';
+import * as import24 from './series-horizontal.component.ngfactory';
+import * as import25 from '../../../src/common/charts/chart.component';
+import * as import26 from '../../../src/common/tooltip/tooltip.service';
+import * as import27 from '../common/charts/chart.component.ngfactory';
+import * as import28 from '../../../src/common/grid-panel-series.component';
+import * as import29 from '../common/grid-panel-series.component.ngfactory';
+import * as import30 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import31 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import32 from '../../../src/services/injection.service';
+import * as import33 from '@angular/core/src/linker/template_ref';
+import * as import34 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import35 from '@angular/common/src/directives/ng_if';
+import * as import36 from '@angular/common/src/directives/ng_for';
 export class Wrapper_BarHorizontal2DComponent {
   /*private*/ _eventHandler:Function;
   context:import0.BarHorizontal2DComponent;
@@ -319,36 +319,245 @@ function BarHorizontal2DComponent_animationState_factory(view:import2.AppView<an
   view.animationContext.queueAnimation(element,'animationState',player);
   return new import12.AnimationTransition(player,currentState,nextState,totalTime);
 }
+class View_BarHorizontal2DComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import18.XAxisComponent>;
+  _XAxisComponent_0_3:import19.Wrapper_XAxisComponent;
+  _text_1:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import20.ViewContainer) {
+    super(View_BarHorizontal2DComponent1,renderType_BarHorizontal2DComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis',''),(null as any));
+    this.compView_0 = new import19.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._XAxisComponent_0_3 = new import19.Wrapper_XAxisComponent();
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this.compView_0.create(this._XAxisComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import18.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this.parentView.context.valueScale;
+    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.dims;
+    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.showGridLines;
+    this._XAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.showXAxisLabel;
+    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
+    const currVal_0_0_4:any = this.parentView.context.xAxisLabel;
+    this._XAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
+    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_0.destroy();
+    this._XAxisComponent_0_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'dimensionsChanged')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.updateXAxisHeight($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
+class View_BarHorizontal2DComponent2 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import21.YAxisComponent>;
+  _YAxisComponent_0_3:import22.Wrapper_YAxisComponent;
+  _text_1:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import20.ViewContainer) {
+    super(View_BarHorizontal2DComponent2,renderType_BarHorizontal2DComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),(null as any));
+    this.compView_0 = new import22.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
+    this._YAxisComponent_0_3 = new import22.Wrapper_YAxisComponent();
+    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this.compView_0.create(this._YAxisComponent_0_3.context);
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
+    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import21.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = this.parentView.context.groupScale;
+    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.dims;
+    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.showYAxisLabel;
+    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.yAxisLabel;
+    this._YAxisComponent_0_3.check_labelText(currVal_0_0_3,throwOnChange,false);
+    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_0.destroy();
+    this._YAxisComponent_0_3.ngOnDestroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_0(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'dimensionsChanged')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.updateYAxisWidth($event)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
+  }
+}
+class View_BarHorizontal2DComponent3 extends import2.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  compView_2:import2.AppView<import23.SeriesHorizontal>;
+  _SeriesHorizontal_2_3:import24.Wrapper_SeriesHorizontal;
+  _text_3:any;
+  /*private*/ _expr_6:any;
+  /*private*/ _expr_7:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import20.ViewContainer) {
+    super(View_BarHorizontal2DComponent3,renderType_BarHorizontal2DComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+    this._expr_6 = import1.UNINITIALIZED;
+    this._expr_7 = import1.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'ngx-charts-series-horizontal',''),(null as any));
+    this.compView_2 = new import24.View_SeriesHorizontal0(this.viewUtils,this,2,this._el_2);
+    this._SeriesHorizontal_2_3 = new import24.Wrapper_SeriesHorizontal();
+    this.compView_2.create(this._SeriesHorizontal_2_3.context);
+    this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
+    this._SeriesHorizontal_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true,true,true);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import23.SeriesHorizontal) && (2 === requestNodeIndex))) { return this._SeriesHorizontal_2_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_6:any = 'active';
+    if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
+      var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,((this._expr_6 == import1.UNINITIALIZED)? 'void': this._expr_6),((currVal_6 == import1.UNINITIALIZED)? 'void': currVal_6));
+      this._expr_6 = currVal_6;
+    }
+    const currVal_2_0_0:any = this.parentView.context.dims;
+    this._SeriesHorizontal_2_3.check_dims(currVal_2_0_0,throwOnChange,false);
+    const currVal_2_0_1:any = this.context.$implicit.series;
+    this._SeriesHorizontal_2_3.check_series(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = this.parentView.context.valueScale;
+    this._SeriesHorizontal_2_3.check_xScale(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_3:any = this.parentView.context.innerScale;
+    this._SeriesHorizontal_2_3.check_yScale(currVal_2_0_3,throwOnChange,false);
+    const currVal_2_0_4:any = this.parentView.context.colors;
+    this._SeriesHorizontal_2_3.check_colors(currVal_2_0_4,throwOnChange,false);
+    const currVal_2_0_5:any = this.parentView.context.gradient;
+    this._SeriesHorizontal_2_3.check_gradient(currVal_2_0_5,throwOnChange,false);
+    const currVal_2_0_6:any = this.parentView.context.activeEntries;
+    this._SeriesHorizontal_2_3.check_activeEntries(currVal_2_0_6,throwOnChange,false);
+    const currVal_2_0_7:any = this.context.$implicit.name;
+    this._SeriesHorizontal_2_3.check_seriesName(currVal_2_0_7,throwOnChange,false);
+    if (this._SeriesHorizontal_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
+    const currVal_7:any = this.parentView.context.groupTransform(this.context.$implicit);
+    if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
+      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_7 == null)? (null as any): currVal_7.toString()));
+      this._expr_7 = currVal_7;
+    }
+    this.compView_2.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_2.destroy();
+    this._SeriesHorizontal_2_3.ngOnDestroy();
+  }
+  detachInternal():void {
+    var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,this._expr_6,'void');
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  handleEvent_2(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'select')) {
+      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
+      result = (pd_sub_0 && result);
+    }
+    if ((eventName == 'activate')) {
+      const pd_sub_1:any = ((<any>this.parentView.context.onActivate($event,this.context.$implicit)) !== false);
+      result = (pd_sub_1 && result);
+    }
+    if ((eventName == 'deactivate')) {
+      const pd_sub_2:any = ((<any>this.parentView.context.onDeactivate($event,this.context.$implicit)) !== false);
+      result = (pd_sub_2 && result);
+    }
+    return result;
+  }
+}
 var renderType_BarHorizontal2DComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BarHorizontal2DComponent,{animationState: BarHorizontal2DComponent_animationState_factory});
 export class View_BarHorizontal2DComponent0 extends import2.AppView<import0.BarHorizontal2DComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import18.ViewContainer;
-  compView_1:import2.AppView<import19.ChartComponent>;
-  _TooltipService_1_5:import20.TooltipService;
-  _ChartComponent_1_6:import21.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import20.ViewContainer;
+  compView_1:import2.AppView<import25.ChartComponent>;
+  _TooltipService_1_5:import26.TooltipService;
+  _ChartComponent_1_6:import27.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import22.GridPanelSeriesComponent>;
-  _GridPanelSeriesComponent_5_3:import23.Wrapper_GridPanelSeriesComponent;
+  compView_5:import2.AppView<import28.GridPanelSeriesComponent>;
+  _GridPanelSeriesComponent_5_3:import29.Wrapper_GridPanelSeriesComponent;
   _text_6:any;
   _text_7:any;
   _anchor_8:any;
-  /*private*/ _vc_8:import18.ViewContainer;
+  /*private*/ _vc_8:import20.ViewContainer;
   _TemplateRef_8_5:any;
-  _NgIf_8_6:import24.Wrapper_NgIf;
+  _NgIf_8_6:import30.Wrapper_NgIf;
   _text_9:any;
   _anchor_10:any;
-  /*private*/ _vc_10:import18.ViewContainer;
+  /*private*/ _vc_10:import20.ViewContainer;
   _TemplateRef_10_5:any;
-  _NgIf_10_6:import24.Wrapper_NgIf;
+  _NgIf_10_6:import30.Wrapper_NgIf;
   _text_11:any;
   _anchor_12:any;
-  /*private*/ _vc_12:import18.ViewContainer;
+  /*private*/ _vc_12:import20.ViewContainer;
   _TemplateRef_12_5:any;
-  _NgFor_12_6:import25.Wrapper_NgFor;
+  _NgFor_12_6:import31.Wrapper_NgFor;
   _text_13:any;
   _text_14:any;
   _text_15:any;
@@ -369,33 +578,33 @@ export class View_BarHorizontal2DComponent0 extends import2.AppView<import0.BarH
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import18.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import21.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import20.TooltipService(this.parentView.injectorGet(import26.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import21.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import20.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import27.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import26.TooltipService(this.parentView.injectorGet(import32.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import27.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','bar-chart chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray4(4,'ngx-charts-grid-panel-series','','orient','horizontal'),(null as any));
-    this.compView_5 = new import23.View_GridPanelSeriesComponent0(this.viewUtils,this,5,this._el_5);
-    this._GridPanelSeriesComponent_5_3 = new import23.Wrapper_GridPanelSeriesComponent();
+    this.compView_5 = new import29.View_GridPanelSeriesComponent0(this.viewUtils,this,5,this._el_5);
+    this._GridPanelSeriesComponent_5_3 = new import29.Wrapper_GridPanelSeriesComponent();
     this._text_6 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_5.create(this._GridPanelSeriesComponent_5_3.context);
     this._text_7 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_8 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_8 = new import18.ViewContainer(8,3,this,this._anchor_8);
-    this._TemplateRef_8_5 = new import27.TemplateRef_(this,8,this._anchor_8);
-    this._NgIf_8_6 = new import24.Wrapper_NgIf(this._vc_8.vcRef,this._TemplateRef_8_5);
+    this._vc_8 = new import20.ViewContainer(8,3,this,this._anchor_8);
+    this._TemplateRef_8_5 = new import33.TemplateRef_(this,8,this._anchor_8);
+    this._NgIf_8_6 = new import30.Wrapper_NgIf(this._vc_8.vcRef,this._TemplateRef_8_5);
     this._text_9 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_10 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_10 = new import18.ViewContainer(10,3,this,this._anchor_10);
-    this._TemplateRef_10_5 = new import27.TemplateRef_(this,10,this._anchor_10);
-    this._NgIf_10_6 = new import24.Wrapper_NgIf(this._vc_10.vcRef,this._TemplateRef_10_5);
+    this._vc_10 = new import20.ViewContainer(10,3,this,this._anchor_10);
+    this._TemplateRef_10_5 = new import33.TemplateRef_(this,10,this._anchor_10);
+    this._NgIf_10_6 = new import30.Wrapper_NgIf(this._vc_10.vcRef,this._TemplateRef_10_5);
     this._text_11 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._anchor_12 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_12 = new import18.ViewContainer(12,3,this,this._anchor_12);
-    this._TemplateRef_12_5 = new import27.TemplateRef_(this,12,this._anchor_12);
-    this._NgFor_12_6 = new import25.Wrapper_NgFor(this._vc_12.vcRef,this._TemplateRef_12_5,this.parentView.injectorGet(import28.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_12 = new import20.ViewContainer(12,3,this,this._anchor_12);
+    this._TemplateRef_12_5 = new import33.TemplateRef_(this,12,this._anchor_12);
+    this._NgFor_12_6 = new import31.Wrapper_NgFor(this._vc_12.vcRef,this._TemplateRef_12_5,this.parentView.injectorGet(import34.IterableDiffers,this.parentIndex),this.ref);
     this._text_13 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_14 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
@@ -424,15 +633,15 @@ export class View_BarHorizontal2DComponent0 extends import2.AppView<import0.BarH
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import22.GridPanelSeriesComponent) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._GridPanelSeriesComponent_5_3.context; }
-    if (((token === import27.TemplateRef) && (8 === requestNodeIndex))) { return this._TemplateRef_8_5; }
-    if (((token === import29.NgIf) && (8 === requestNodeIndex))) { return this._NgIf_8_6.context; }
-    if (((token === import27.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
-    if (((token === import29.NgIf) && (10 === requestNodeIndex))) { return this._NgIf_10_6.context; }
-    if (((token === import27.TemplateRef) && (12 === requestNodeIndex))) { return this._TemplateRef_12_5; }
-    if (((token === import30.NgFor) && (12 === requestNodeIndex))) { return this._NgFor_12_6.context; }
-    if (((token === import20.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._TooltipService_1_5; }
-    if (((token === import19.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import28.GridPanelSeriesComponent) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._GridPanelSeriesComponent_5_3.context; }
+    if (((token === import33.TemplateRef) && (8 === requestNodeIndex))) { return this._TemplateRef_8_5; }
+    if (((token === import35.NgIf) && (8 === requestNodeIndex))) { return this._NgIf_8_6.context; }
+    if (((token === import33.TemplateRef) && (10 === requestNodeIndex))) { return this._TemplateRef_10_5; }
+    if (((token === import35.NgIf) && (10 === requestNodeIndex))) { return this._NgIf_10_6.context; }
+    if (((token === import33.TemplateRef) && (12 === requestNodeIndex))) { return this._TemplateRef_12_5; }
+    if (((token === import36.NgFor) && (12 === requestNodeIndex))) { return this._NgFor_12_6.context; }
+    if (((token === import26.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._TooltipService_1_5; }
+    if (((token === import25.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 14)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -514,215 +723,6 @@ export class View_BarHorizontal2DComponent0 extends import2.AppView<import0.BarH
     }
     if ((eventName == 'legendLabelClick')) {
       const pd_sub_2:any = ((<any>this.context.onClick($event)) !== false);
-      result = (pd_sub_2 && result);
-    }
-    return result;
-  }
-}
-class View_BarHorizontal2DComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import31.XAxisComponent>;
-  _XAxisComponent_0_3:import32.Wrapper_XAxisComponent;
-  _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import18.ViewContainer) {
-    super(View_BarHorizontal2DComponent1,renderType_BarHorizontal2DComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis',''),(null as any));
-    this.compView_0 = new import32.View_XAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._XAxisComponent_0_3 = new import32.Wrapper_XAxisComponent();
-    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._XAxisComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._XAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import31.XAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._XAxisComponent_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this.parentView.context.valueScale;
-    this._XAxisComponent_0_3.check_xScale(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.dims;
-    this._XAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.showGridLines;
-    this._XAxisComponent_0_3.check_showGridLines(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.showXAxisLabel;
-    this._XAxisComponent_0_3.check_showLabel(currVal_0_0_3,throwOnChange,false);
-    const currVal_0_0_4:any = this.parentView.context.xAxisLabel;
-    this._XAxisComponent_0_3.check_labelText(currVal_0_0_4,throwOnChange,false);
-    if (this._XAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_0.destroy();
-    this._XAxisComponent_0_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'dimensionsChanged')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.updateXAxisHeight($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
-  }
-}
-class View_BarHorizontal2DComponent2 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import33.YAxisComponent>;
-  _YAxisComponent_0_3:import34.Wrapper_YAxisComponent;
-  _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import18.ViewContainer) {
-    super(View_BarHorizontal2DComponent2,renderType_BarHorizontal2DComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-y-axis',''),(null as any));
-    this.compView_0 = new import34.View_YAxisComponent0(this.viewUtils,this,0,this._el_0);
-    this._YAxisComponent_0_3 = new import34.Wrapper_YAxisComponent();
-    this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
-    this.compView_0.create(this._YAxisComponent_0_3.context);
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_0));
-    this._YAxisComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import33.YAxisComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._YAxisComponent_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = this.parentView.context.groupScale;
-    this._YAxisComponent_0_3.check_yScale(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.dims;
-    this._YAxisComponent_0_3.check_dims(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.showYAxisLabel;
-    this._YAxisComponent_0_3.check_showLabel(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.yAxisLabel;
-    this._YAxisComponent_0_3.check_labelText(currVal_0_0_3,throwOnChange,false);
-    if (this._YAxisComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_0.destroy();
-    this._YAxisComponent_0_3.ngOnDestroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_0(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'dimensionsChanged')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.updateYAxisWidth($event)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
-  }
-}
-class View_BarHorizontal2DComponent3 extends import2.AppView<any> {
-  _el_0:any;
-  _text_1:any;
-  _el_2:any;
-  compView_2:import2.AppView<import35.SeriesHorizontal>;
-  _SeriesHorizontal_2_3:import36.Wrapper_SeriesHorizontal;
-  _text_3:any;
-  /*private*/ _expr_6:any;
-  /*private*/ _expr_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import18.ViewContainer) {
-    super(View_BarHorizontal2DComponent3,renderType_BarHorizontal2DComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-    this._expr_6 = import1.UNINITIALIZED;
-    this._expr_7 = import1.UNINITIALIZED;
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'ngx-charts-series-horizontal',''),(null as any));
-    this.compView_2 = new import36.View_SeriesHorizontal0(this.viewUtils,this,2,this._el_2);
-    this._SeriesHorizontal_2_3 = new import36.Wrapper_SeriesHorizontal();
-    this.compView_2.create(this._SeriesHorizontal_2_3.context);
-    this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
-    this._SeriesHorizontal_2_3.subscribe(this,this.eventHandler(this.handleEvent_2),true,true,true);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._el_2,
-      this._text_3
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import35.SeriesHorizontal) && (2 === requestNodeIndex))) { return this._SeriesHorizontal_2_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_6:any = 'active';
-    if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
-      var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,((this._expr_6 == import1.UNINITIALIZED)? 'void': this._expr_6),((currVal_6 == import1.UNINITIALIZED)? 'void': currVal_6));
-      this._expr_6 = currVal_6;
-    }
-    const currVal_2_0_0:any = this.parentView.context.dims;
-    this._SeriesHorizontal_2_3.check_dims(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = this.context.$implicit.series;
-    this._SeriesHorizontal_2_3.check_series(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = this.parentView.context.valueScale;
-    this._SeriesHorizontal_2_3.check_xScale(currVal_2_0_2,throwOnChange,false);
-    const currVal_2_0_3:any = this.parentView.context.innerScale;
-    this._SeriesHorizontal_2_3.check_yScale(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = this.parentView.context.colors;
-    this._SeriesHorizontal_2_3.check_colors(currVal_2_0_4,throwOnChange,false);
-    const currVal_2_0_5:any = this.parentView.context.gradient;
-    this._SeriesHorizontal_2_3.check_gradient(currVal_2_0_5,throwOnChange,false);
-    const currVal_2_0_6:any = this.parentView.context.activeEntries;
-    this._SeriesHorizontal_2_3.check_activeEntries(currVal_2_0_6,throwOnChange,false);
-    const currVal_2_0_7:any = this.context.$implicit.name;
-    this._SeriesHorizontal_2_3.check_seriesName(currVal_2_0_7,throwOnChange,false);
-    if (this._SeriesHorizontal_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
-    const currVal_7:any = this.parentView.context.groupTransform(this.context.$implicit);
-    if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
-      this.renderer.setElementAttribute(this._el_0,'transform',((currVal_7 == null)? (null as any): currVal_7.toString()));
-      this._expr_7 = currVal_7;
-    }
-    this.compView_2.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_2.destroy();
-    this._SeriesHorizontal_2_3.ngOnDestroy();
-  }
-  detachInternal():void {
-    var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,this._expr_6,'void');
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  handleEvent_2(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'select')) {
-      const pd_sub_0:any = ((<any>this.parentView.context.onClick($event,this.context.$implicit)) !== false);
-      result = (pd_sub_0 && result);
-    }
-    if ((eventName == 'activate')) {
-      const pd_sub_1:any = ((<any>this.parentView.context.onActivate($event,this.context.$implicit)) !== false);
-      result = (pd_sub_1 && result);
-    }
-    if ((eventName == 'deactivate')) {
-      const pd_sub_2:any = ((<any>this.parentView.context.onDeactivate($event,this.context.$implicit)) !== false);
       result = (pd_sub_2 && result);
     }
     return result;

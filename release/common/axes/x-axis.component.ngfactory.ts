@@ -14,16 +14,16 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '@angular/core/src/linker/query_list';
-import * as import10 from '../../../../src/common/axes/x-axis-ticks.component';
-import * as import11 from './x-axis-ticks.component.ngfactory';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import14 from '@angular/core/src/linker/template_ref';
-import * as import15 from '@angular/common/src/directives/ng_if';
-import * as import16 from '../../../../src/common/axes/axis-label.component';
-import * as import17 from './axis-label.component.ngfactory';
-import * as import18 from '@angular/core/src/linker/element_ref';
+import * as import9 from '../../../../src/common/axes/axis-label.component';
+import * as import10 from './axis-label.component.ngfactory';
+import * as import11 from '@angular/core/src/linker/view_container';
+import * as import12 from '@angular/core/src/linker/element_ref';
+import * as import13 from '@angular/core/src/linker/query_list';
+import * as import14 from '../../../../src/common/axes/x-axis-ticks.component';
+import * as import15 from './x-axis-ticks.component.ngfactory';
+import * as import16 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import17 from '@angular/core/src/linker/template_ref';
+import * as import18 from '@angular/common/src/directives/ng_if';
 export class Wrapper_XAxisComponent {
   /*private*/ _eventHandler:Function;
   context:import0.XAxisComponent;
@@ -174,20 +174,66 @@ class View_XAxisComponent_Host0 extends import2.AppView<any> {
 }
 export const XAxisComponentNgFactory:import8.ComponentFactory<import0.XAxisComponent> = new import8.ComponentFactory<import0.XAxisComponent>('g[ngx-charts-x-axis]',View_XAxisComponent_Host0,import0.XAxisComponent);
 const styles_XAxisComponent:any[] = ([] as any[]);
+class View_XAxisComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  compView_0:import2.AppView<import9.AxisLabelComponent>;
+  _AxisLabelComponent_0_3:import10.Wrapper_AxisLabelComponent;
+  _text_1:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+    super(View_XAxisComponent1,renderType_XAxisComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-axis-label',''),(null as any));
+    this.compView_0 = new import10.View_AxisLabelComponent0(this.viewUtils,this,0,this._el_0);
+    this._AxisLabelComponent_0_3 = new import10.Wrapper_AxisLabelComponent(new import12.ElementRef(this._el_0));
+    this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
+    this.compView_0.create(this._AxisLabelComponent_0_3.context);
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import9.AxisLabelComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._AxisLabelComponent_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_0_0_0:any = 'bottom';
+    this._AxisLabelComponent_0_3.check_orient(currVal_0_0_0,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.labelText;
+    this._AxisLabelComponent_0_3.check_label(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = this.parentView.context.labelOffset;
+    this._AxisLabelComponent_0_3.check_offset(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = this.parentView.context.dims.width;
+    this._AxisLabelComponent_0_3.check_width(currVal_0_0_3,throwOnChange,false);
+    const currVal_0_0_4:any = this.parentView.context.dims.height;
+    this._AxisLabelComponent_0_3.check_height(currVal_0_0_4,throwOnChange,false);
+    if (this._AxisLabelComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
+    this.compView_0.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this.compView_0.destroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+}
 var renderType_XAxisComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_XAxisComponent,{});
 export class View_XAxisComponent0 extends import2.AppView<import0.XAxisComponent> {
-  _viewQuery_XAxisTicksComponent_0:import9.QueryList<any>;
+  _viewQuery_XAxisTicksComponent_0:import13.QueryList<any>;
   _text_0:any;
   _el_1:any;
   _text_2:any;
   _el_3:any;
-  compView_3:import2.AppView<import10.XAxisTicksComponent>;
-  _XAxisTicksComponent_3_3:import11.Wrapper_XAxisTicksComponent;
+  compView_3:import2.AppView<import14.XAxisTicksComponent>;
+  _XAxisTicksComponent_3_3:import15.Wrapper_XAxisTicksComponent;
   _text_4:any;
   _anchor_5:any;
-  /*private*/ _vc_5:import12.ViewContainer;
+  /*private*/ _vc_5:import11.ViewContainer;
   _TemplateRef_5_5:any;
-  _NgIf_5_6:import13.Wrapper_NgIf;
+  _NgIf_5_6:import16.Wrapper_NgIf;
   _text_6:any;
   _text_7:any;
   /*private*/ _expr_14:any;
@@ -199,19 +245,19 @@ export class View_XAxisComponent0 extends import2.AppView<import0.XAxisComponent
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._viewQuery_XAxisTicksComponent_0 = new import9.QueryList<any>();
+    this._viewQuery_XAxisTicksComponent_0 = new import13.QueryList<any>();
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray2(2,'ngx-charts-x-axis-ticks',''),(null as any));
-    this.compView_3 = new import11.View_XAxisTicksComponent0(this.viewUtils,this,3,this._el_3);
-    this._XAxisTicksComponent_3_3 = new import11.Wrapper_XAxisTicksComponent();
+    this.compView_3 = new import15.View_XAxisTicksComponent0(this.viewUtils,this,3,this._el_3);
+    this._XAxisTicksComponent_3_3 = new import15.Wrapper_XAxisTicksComponent();
     this.compView_3.create(this._XAxisTicksComponent_3_3.context);
     this._text_4 = this.renderer.createText(this._el_1,'\n\n      ',(null as any));
     this._anchor_5 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_5 = new import12.ViewContainer(5,1,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import14.TemplateRef_(this,5,this._anchor_5);
-    this._NgIf_5_6 = new import13.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
+    this._vc_5 = new import11.ViewContainer(5,1,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import17.TemplateRef_(this,5,this._anchor_5);
+    this._NgIf_5_6 = new import16.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
     this._text_6 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_7 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_3,new import3.InlineArray2(2,'dimensionsChanged',(null as any)),this.eventHandler(this.handleEvent_3));
@@ -232,9 +278,9 @@ export class View_XAxisComponent0 extends import2.AppView<import0.XAxisComponent
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import10.XAxisTicksComponent) && (3 === requestNodeIndex))) { return this._XAxisTicksComponent_3_3.context; }
-    if (((token === import14.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import15.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
+    if (((token === import14.XAxisTicksComponent) && (3 === requestNodeIndex))) { return this._XAxisTicksComponent_3_3.context; }
+    if (((token === import17.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import18.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -289,51 +335,5 @@ export class View_XAxisComponent0 extends import2.AppView<import0.XAxisComponent
       result = (pd_sub_0 && result);
     }
     return result;
-  }
-}
-class View_XAxisComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  compView_0:import2.AppView<import16.AxisLabelComponent>;
-  _AxisLabelComponent_0_3:import17.Wrapper_AxisLabelComponent;
-  _text_1:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
-    super(View_XAxisComponent1,renderType_XAxisComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-axis-label',''),(null as any));
-    this.compView_0 = new import17.View_AxisLabelComponent0(this.viewUtils,this,0,this._el_0);
-    this._AxisLabelComponent_0_3 = new import17.Wrapper_AxisLabelComponent(new import18.ElementRef(this._el_0));
-    this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this.compView_0.create(this._AxisLabelComponent_0_3.context);
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import16.AxisLabelComponent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 1)))) { return this._AxisLabelComponent_0_3.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_0_0_0:any = 'bottom';
-    this._AxisLabelComponent_0_3.check_orient(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = this.parentView.context.labelText;
-    this._AxisLabelComponent_0_3.check_label(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = this.parentView.context.labelOffset;
-    this._AxisLabelComponent_0_3.check_offset(currVal_0_0_2,throwOnChange,false);
-    const currVal_0_0_3:any = this.parentView.context.dims.width;
-    this._AxisLabelComponent_0_3.check_width(currVal_0_0_3,throwOnChange,false);
-    const currVal_0_0_4:any = this.parentView.context.dims.height;
-    this._AxisLabelComponent_0_3.check_height(currVal_0_0_4,throwOnChange,false);
-    if (this._AxisLabelComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
-    this.compView_0.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this.compView_0.destroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
   }
 }

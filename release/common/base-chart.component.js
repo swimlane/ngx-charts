@@ -41,14 +41,17 @@ var BaseChartComponent = (function () {
         var width = 0;
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
-        if (hostElem.parentNode != null) {
+        if (hostElem.parentNode !== null) {
             // Get the container dimensions
             width = hostElem.parentNode.clientWidth;
             height = hostElem.parentNode.clientHeight;
         }
         return { width: width, height: height };
     };
-    // converts all date objects that appear as name into formatted date strings
+    /**
+     * Converts all date objects that appear as name
+     * into formatted date strings
+     */
     BaseChartComponent.prototype.formatDates = function () {
         for (var i = 0; i < this.results.length; i++) {
             var g = this.results[i];

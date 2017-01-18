@@ -18,20 +18,20 @@ import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
 import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../src/common/charts/chart.component';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '../common/charts/chart.component.ngfactory';
-import * as import16 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import17 from '../../../src/services/injection.service';
-import * as import18 from '@angular/core/src/linker/template_ref';
-import * as import19 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import20 from '@angular/common/src/directives/ng_for';
-import * as import21 from '../../../src/pie-chart/pie-grid-series.component';
-import * as import22 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import23 from './pie-grid-series.component.ngfactory';
-import * as import24 from '../../../src/common/count/count.directive';
-import * as import25 from '../common/count/count.directive.ngfactory';
-import * as import26 from '../../../src/common/tooltip/tooltip.directive';
+import * as import13 from '../../../src/pie-chart/pie-grid-series.component';
+import * as import14 from '../common/tooltip/tooltip.directive.ngfactory';
+import * as import15 from './pie-grid-series.component.ngfactory';
+import * as import16 from '../../../src/common/count/count.directive';
+import * as import17 from '../common/count/count.directive.ngfactory';
+import * as import18 from '../../../src/common/tooltip/tooltip.directive';
+import * as import19 from '../../../src/common/charts/chart.component';
+import * as import20 from '../../../src/common/tooltip/tooltip.service';
+import * as import21 from '../common/charts/chart.component.ngfactory';
+import * as import22 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import23 from '../../../src/services/injection.service';
+import * as import24 from '@angular/core/src/linker/template_ref';
+import * as import25 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import26 from '@angular/common/src/directives/ng_for';
 export class Wrapper_PieGridComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieGridComponent;
@@ -154,133 +154,26 @@ class View_PieGridComponent_Host0 extends import2.AppView<any> {
 }
 export const PieGridComponentNgFactory:import8.ComponentFactory<import0.PieGridComponent> = new import8.ComponentFactory<import0.PieGridComponent>('ngx-charts-pie-grid',View_PieGridComponent_Host0,import0.PieGridComponent);
 const styles_PieGridComponent:any[] = ([] as any[]);
-var renderType_PieGridComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieGridComponent,{});
-export class View_PieGridComponent0 extends import2.AppView<import0.PieGridComponent> {
-  _text_0:any;
-  _el_1:any;
-  /*private*/ _vc_1:import12.ViewContainer;
-  compView_1:import2.AppView<import13.ChartComponent>;
-  _TooltipService_1_5:import14.TooltipService;
-  _ChartComponent_1_6:import15.Wrapper_ChartComponent;
-  _text_2:any;
-  _el_3:any;
-  _text_4:any;
-  _anchor_5:any;
-  /*private*/ _vc_5:import12.ViewContainer;
-  _TemplateRef_5_5:any;
-  _NgFor_5_6:import16.Wrapper_NgFor;
-  _text_6:any;
-  _text_7:any;
-  _text_8:any;
-  _arr_16:any;
-  /*private*/ _expr_17:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_PieGridComponent0,renderType_PieGridComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
-    this._arr_16 = import3.pureProxy2((p0:any,p1:any):any[] => {
-      return [
-        p0,
-        p1
-      ]
-      ;
-    });
-    this._expr_17 = import1.UNINITIALIZED;
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import15.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import14.TooltipService(this.parentView.injectorGet(import17.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import15.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
-    this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
-    this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie-grid chart'),(null as any));
-    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
-    this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
-    this._vc_5 = new import12.ViewContainer(5,3,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import18.TemplateRef_(this,5,this._anchor_5);
-    this._NgFor_5_6 = new import16.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import19.IterableDiffers,this.parentIndex),this.ref);
-    this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
-    this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
-    this.compView_1.create(this._ChartComponent_1_6.context);
-    this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._el_1,
-      this._text_2,
-      this._el_3,
-      this._text_4,
-      this._anchor_5,
-      this._text_6,
-      this._text_7,
-      this._text_8
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import18.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import20.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
-    if (((token === import14.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
-    if (((token === import13.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1_0_0:any = this._arr_16(this.context.width,this.context.height);
-    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
-    const currVal_1_0_1:any = false;
-    this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
-    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
-    const currVal_5_0_0:any = this.context.series;
-    this._NgFor_5_6.check_ngForOf(currVal_5_0_0,throwOnChange,false);
-    this._NgFor_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
-    this._vc_1.detectChangesInNestedViews(throwOnChange);
-    this._vc_5.detectChangesInNestedViews(throwOnChange);
-    const currVal_17:any = this.context.transform;
-    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
-      this.renderer.setElementAttribute(this._el_3,'transform',((currVal_17 == null)? (null as any): currVal_17.toString()));
-      this._expr_17 = currVal_17;
-    }
-    this.compView_1.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_1.destroyNestedViews();
-    this._vc_5.destroyNestedViews();
-    this.compView_1.destroy();
-    this._ChartComponent_1_6.ngOnDestroy();
-  }
-  visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
-    if (((nodeIndex == 1) && (ngContentIndex == 0))) {
-      cb(this._text_2,ctx);
-      cb(this._el_3,ctx);
-      cb(this._text_7,ctx);
-    }
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 5)) { return new View_PieGridComponent1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
-    return (null as any);
-  }
-}
 class View_PieGridComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
   /*private*/ _vc_2:import12.ViewContainer;
-  compView_2:import2.AppView<import21.PieGridSeriesComponent>;
-  _TooltipDirective_2_5:import22.Wrapper_TooltipDirective;
-  _PieGridSeriesComponent_2_6:import23.Wrapper_PieGridSeriesComponent;
+  compView_2:import2.AppView<import13.PieGridSeriesComponent>;
+  _TooltipDirective_2_5:import14.Wrapper_TooltipDirective;
+  _PieGridSeriesComponent_2_6:import15.Wrapper_PieGridSeriesComponent;
   _text_3:any;
   _el_4:any;
-  compView_4:import2.AppView<import24.CountUpDirective>;
-  _CountUpDirective_4_3:import25.Wrapper_CountUpDirective;
+  compView_4:import2.AppView<import16.CountUpDirective>;
+  _CountUpDirective_4_3:import17.Wrapper_CountUpDirective;
   _text_5:any;
   _text_6:any;
   _el_7:any;
   _text_8:any;
   _text_9:any;
   _el_10:any;
-  compView_10:import2.AppView<import24.CountUpDirective>;
-  _CountUpDirective_10_3:import25.Wrapper_CountUpDirective;
+  compView_10:import2.AppView<import16.CountUpDirective>;
+  _CountUpDirective_10_3:import17.Wrapper_CountUpDirective;
   _text_11:any;
   _text_12:any;
   /*private*/ _expr_21:any;
@@ -297,14 +190,14 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray4(4,'ngx-charts-pie-grid-series','','ngx-tooltip',''),(null as any));
     this._vc_2 = new import12.ViewContainer(2,0,this,this._el_2);
-    this.compView_2 = new import23.View_PieGridSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._TooltipDirective_2_5 = new import22.Wrapper_TooltipDirective((<View_PieGridComponent0>this.parentView)._TooltipService_1_5,this._vc_2.vcRef,this.renderer,new import9.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex));
-    this._PieGridSeriesComponent_2_6 = new import23.Wrapper_PieGridSeriesComponent(new import9.ElementRef(this._el_2));
+    this.compView_2 = new import15.View_PieGridSeriesComponent0(this.viewUtils,this,2,this._el_2);
+    this._TooltipDirective_2_5 = new import14.Wrapper_TooltipDirective((<View_PieGridComponent0>this.parentView)._TooltipService_1_5,this._vc_2.vcRef,this.renderer,new import9.ElementRef(this._el_2),this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex));
+    this._PieGridSeriesComponent_2_6 = new import15.Wrapper_PieGridSeriesComponent(new import9.ElementRef(this._el_2));
     this.compView_2.create(this._PieGridSeriesComponent_2_6.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_4 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(12,'class','label percent-label','dy','-0.5em','ngx-charts-count-up','','text-anchor','middle','x','0','y','5'),(null as any));
-    this.compView_4 = new import25.View_CountUpDirective0(this.viewUtils,this,4,this._el_4);
-    this._CountUpDirective_4_3 = new import25.Wrapper_CountUpDirective(this.compView_4.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_4));
+    this.compView_4 = new import17.View_CountUpDirective0(this.viewUtils,this,4,this._el_4);
+    this._CountUpDirective_4_3 = new import17.Wrapper_CountUpDirective(this.compView_4.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_4));
     this._text_5 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_4.create(this._CountUpDirective_4_3.context);
     this._text_6 = this.renderer.createText(this._el_0,'\n          ',(null as any));
@@ -312,8 +205,8 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     this._text_8 = this.renderer.createText(this._el_7,'',(null as any));
     this._text_9 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_0,':svg:text',new import3.InlineArray16(10,'class','label','dy','1.23em','ngx-charts-count-up','','text-anchor','middle','x','0'),(null as any));
-    this.compView_10 = new import25.View_CountUpDirective0(this.viewUtils,this,10,this._el_10);
-    this._CountUpDirective_10_3 = new import25.Wrapper_CountUpDirective(this.compView_10.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_10));
+    this.compView_10 = new import17.View_CountUpDirective0(this.viewUtils,this,10,this._el_10);
+    this._CountUpDirective_10_3 = new import17.Wrapper_CountUpDirective(this.compView_10.ref,this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_10));
     this._text_11 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_10.create(this._CountUpDirective_10_3.context);
     this._text_12 = this.renderer.createText(this._el_0,'\n        ',(null as any));
@@ -338,10 +231,10 @@ class View_PieGridComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import26.TooltipDirective) && (2 === requestNodeIndex))) { return this._TooltipDirective_2_5.context; }
-    if (((token === import21.PieGridSeriesComponent) && (2 === requestNodeIndex))) { return this._PieGridSeriesComponent_2_6.context; }
-    if (((token === import24.CountUpDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._CountUpDirective_4_3.context; }
-    if (((token === import24.CountUpDirective) && ((10 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._CountUpDirective_10_3.context; }
+    if (((token === import18.TooltipDirective) && (2 === requestNodeIndex))) { return this._TooltipDirective_2_5.context; }
+    if (((token === import13.PieGridSeriesComponent) && (2 === requestNodeIndex))) { return this._PieGridSeriesComponent_2_6.context; }
+    if (((token === import16.CountUpDirective) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._CountUpDirective_4_3.context; }
+    if (((token === import16.CountUpDirective) && ((10 <= requestNodeIndex) && (requestNodeIndex <= 11)))) { return this._CountUpDirective_10_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -413,5 +306,112 @@ class View_PieGridComponent1 extends import2.AppView<any> {
       result = (pd_sub_0 && result);
     }
     return result;
+  }
+}
+var renderType_PieGridComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieGridComponent,{});
+export class View_PieGridComponent0 extends import2.AppView<import0.PieGridComponent> {
+  _text_0:any;
+  _el_1:any;
+  /*private*/ _vc_1:import12.ViewContainer;
+  compView_1:import2.AppView<import19.ChartComponent>;
+  _TooltipService_1_5:import20.TooltipService;
+  _ChartComponent_1_6:import21.Wrapper_ChartComponent;
+  _text_2:any;
+  _el_3:any;
+  _text_4:any;
+  _anchor_5:any;
+  /*private*/ _vc_5:import12.ViewContainer;
+  _TemplateRef_5_5:any;
+  _NgFor_5_6:import22.Wrapper_NgFor;
+  _text_6:any;
+  _text_7:any;
+  _text_8:any;
+  _arr_16:any;
+  /*private*/ _expr_17:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
+    super(View_PieGridComponent0,renderType_PieGridComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
+    this._arr_16 = import3.pureProxy2((p0:any,p1:any):any[] => {
+      return [
+        p0,
+        p1
+      ]
+      ;
+    });
+    this._expr_17 = import1.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
+    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import21.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import20.TooltipService(this.parentView.injectorGet(import23.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import21.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
+    this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie-grid chart'),(null as any));
+    this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
+    this._anchor_5 = this.renderer.createTemplateAnchor(this._el_3,(null as any));
+    this._vc_5 = new import12.ViewContainer(5,3,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import24.TemplateRef_(this,5,this._anchor_5);
+    this._NgFor_5_6 = new import22.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import25.IterableDiffers,this.parentIndex),this.ref);
+    this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
+    this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
+    this.compView_1.create(this._ChartComponent_1_6.context);
+    this._text_8 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
+      this._text_0,
+      this._el_1,
+      this._text_2,
+      this._el_3,
+      this._text_4,
+      this._anchor_5,
+      this._text_6,
+      this._text_7,
+      this._text_8
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import24.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import26.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
+    if (((token === import20.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
+    if (((token === import19.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_1_0_0:any = this._arr_16(this.context.width,this.context.height);
+    this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
+    const currVal_1_0_1:any = false;
+    this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
+    if (this._ChartComponent_1_6.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
+    const currVal_5_0_0:any = this.context.series;
+    this._NgFor_5_6.check_ngForOf(currVal_5_0_0,throwOnChange,false);
+    this._NgFor_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
+    this._vc_1.detectChangesInNestedViews(throwOnChange);
+    this._vc_5.detectChangesInNestedViews(throwOnChange);
+    const currVal_17:any = this.context.transform;
+    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
+      this.renderer.setElementAttribute(this._el_3,'transform',((currVal_17 == null)? (null as any): currVal_17.toString()));
+      this._expr_17 = currVal_17;
+    }
+    this.compView_1.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_1.destroyNestedViews();
+    this._vc_5.destroyNestedViews();
+    this.compView_1.destroy();
+    this._ChartComponent_1_6.ngOnDestroy();
+  }
+  visitProjectableNodesInternal(nodeIndex:number,ngContentIndex:number,cb:any,ctx:any):void {
+    if (((nodeIndex == 1) && (ngContentIndex == 0))) {
+      cb(this._text_2,ctx);
+      cb(this._el_3,ctx);
+      cb(this._text_7,ctx);
+    }
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 5)) { return new View_PieGridComponent1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
+    return (null as any);
   }
 }
