@@ -23,10 +23,14 @@ import * as import14 from '../../src/gauge/gauge.module';
 import * as import15 from '@angular/common/src/localization';
 import * as import16 from '../../src/services/injection.service';
 import * as import17 from '../../src/common/tooltip/tooltip.service';
-import * as import18 from '@angular/core/src/di/injector';
-import * as import19 from './common/tooltip/tooltip.component.ngfactory';
-import * as import20 from '@angular/core/src/i18n/tokens';
-import * as import21 from '@angular/core/src/application_ref';
+import * as import18 from '@angular/common/src/location/path_location_strategy';
+import * as import19 from '@angular/common/src/location/location';
+import * as import20 from '@angular/core/src/di/injector';
+import * as import21 from './common/tooltip/tooltip.component.ngfactory';
+import * as import22 from '@angular/core/src/i18n/tokens';
+import * as import23 from '@angular/core/src/application_ref';
+import * as import24 from '@angular/common/src/location/platform_location';
+import * as import25 from '@angular/common/src/location/location_strategy';
 class NgxChartsModuleInjector extends import0.NgModuleInjector<import1.NgxChartsModule> {
   _CommonModule_0:import2.CommonModule;
   _AxesModule_1:import3.AxesModule;
@@ -45,20 +49,30 @@ class NgxChartsModuleInjector extends import0.NgModuleInjector<import1.NgxCharts
   __NgLocalization_14:import15.NgLocaleLocalization;
   __InjectionService_15:import16.InjectionService;
   __TooltipService_16:import17.TooltipService;
-  constructor(parent:import18.Injector) {
-    super(parent,[import19.TooltipContentComponentNgFactory],([] as any[]));
+  __LocationStrategy_17:import18.PathLocationStrategy;
+  __Location_18:import19.Location;
+  constructor(parent:import20.Injector) {
+    super(parent,[import21.TooltipContentComponentNgFactory],([] as any[]));
   }
   get _NgLocalization_14():import15.NgLocaleLocalization {
-    if ((this.__NgLocalization_14 == null)) { (this.__NgLocalization_14 = new import15.NgLocaleLocalization(this.parent.get(import20.LOCALE_ID))); }
+    if ((this.__NgLocalization_14 == null)) { (this.__NgLocalization_14 = new import15.NgLocaleLocalization(this.parent.get(import22.LOCALE_ID))); }
     return this.__NgLocalization_14;
   }
   get _InjectionService_15():import16.InjectionService {
-    if ((this.__InjectionService_15 == null)) { (this.__InjectionService_15 = new import16.InjectionService(this.parent.get(import21.ApplicationRef),this,this)); }
+    if ((this.__InjectionService_15 == null)) { (this.__InjectionService_15 = new import16.InjectionService(this.parent.get(import23.ApplicationRef),this,this)); }
     return this.__InjectionService_15;
   }
   get _TooltipService_16():import17.TooltipService {
     if ((this.__TooltipService_16 == null)) { (this.__TooltipService_16 = new import17.TooltipService(this._InjectionService_15)); }
     return this.__TooltipService_16;
+  }
+  get _LocationStrategy_17():import18.PathLocationStrategy {
+    if ((this.__LocationStrategy_17 == null)) { (this.__LocationStrategy_17 = new import18.PathLocationStrategy(this.parent.get(import24.PlatformLocation),this.parent.get(import25.APP_BASE_HREF,(null as any)))); }
+    return this.__LocationStrategy_17;
+  }
+  get _Location_18():import19.Location {
+    if ((this.__Location_18 == null)) { (this.__Location_18 = new import19.Location(this._LocationStrategy_17)); }
+    return this.__Location_18;
   }
   createInternal():import1.NgxChartsModule {
     this._CommonModule_0 = new import2.CommonModule();
@@ -95,6 +109,8 @@ class NgxChartsModuleInjector extends import0.NgModuleInjector<import1.NgxCharts
     if ((token === import15.NgLocalization)) { return this._NgLocalization_14; }
     if ((token === import16.InjectionService)) { return this._InjectionService_15; }
     if ((token === import17.TooltipService)) { return this._TooltipService_16; }
+    if ((token === import25.LocationStrategy)) { return this._LocationStrategy_17; }
+    if ((token === import19.Location)) { return this._Location_18; }
     return notFoundResult;
   }
   destroyInternal():void {

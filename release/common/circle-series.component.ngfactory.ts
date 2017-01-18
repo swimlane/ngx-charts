@@ -14,22 +14,29 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '@angular/core/src/linker/view_container';
-import * as import10 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import11 from '@angular/core/src/linker/template_ref';
-import * as import12 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import13 from '@angular/common/src/directives/ng_for';
-import * as import14 from '../../../src/common/svg-linear-gradient.component';
-import * as import15 from './svg-linear-gradient.component.ngfactory';
-import * as import16 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import17 from '@angular/common/src/directives/ng_if';
-import * as import18 from '../../../src/common/circle.component';
-import * as import19 from './tooltip/tooltip.directive.ngfactory';
-import * as import20 from './circle.component.ngfactory';
-import * as import21 from '../../../src/common/tooltip/tooltip.service';
-import * as import22 from '@angular/core/src/linker/element_ref';
-import * as import23 from '@angular/core/src/zone/ng_zone';
-import * as import24 from '../../../src/common/tooltip/tooltip.directive';
+import * as import9 from '@angular/common/src/location/location';
+import * as import10 from '@angular/core/src/animation/animation_transition';
+import * as import11 from '@angular/core/src/animation/animation_sequence_player';
+import * as import12 from '@angular/core/src/animation/animation_styles';
+import * as import13 from '@angular/core/src/animation/animation_style_util';
+import * as import14 from '@angular/core/src/animation/animation_keyframe';
+import * as import15 from '@angular/core/src/animation/animation_player';
+import * as import16 from '@angular/core/src/linker/view_container';
+import * as import17 from '../../../src/common/circle.component';
+import * as import18 from './tooltip/tooltip.directive.ngfactory';
+import * as import19 from './circle.component.ngfactory';
+import * as import20 from '../../../src/common/tooltip/tooltip.service';
+import * as import21 from '@angular/core/src/linker/element_ref';
+import * as import22 from '@angular/core/src/zone/ng_zone';
+import * as import23 from '../../../src/common/tooltip/tooltip.directive';
+import * as import24 from '../../../src/common/svg-linear-gradient.component';
+import * as import25 from './svg-linear-gradient.component.ngfactory';
+import * as import26 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import27 from '@angular/core/src/linker/template_ref';
+import * as import28 from '@angular/common/src/directives/ng_if';
+import * as import29 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import30 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import31 from '@angular/common/src/directives/ng_for';
 export class Wrapper_CircleSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CircleSeriesComponent;
@@ -46,10 +53,10 @@ export class Wrapper_CircleSeriesComponent {
   subscription0:any;
   subscription1:any;
   subscription2:any;
-  constructor() {
+  constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.CircleSeriesComponent();
+    this.context = new import0.CircleSeriesComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -161,9 +168,9 @@ class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
     super(View_CircleSeriesComponent_Host0,renderType_CircleSeriesComponent_Host,import6.ViewType.HOST,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-circle-ceries',''),rootSelector,(null as any));
+    this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-circle-series',''),rootSelector,(null as any));
     this.compView_0 = new View_CircleSeriesComponent0(this.viewUtils,this,0,this._el_0);
-    this._CircleSeriesComponent_0_3 = new Wrapper_CircleSeriesComponent();
+    this._CircleSeriesComponent_0_3 = new Wrapper_CircleSeriesComponent(this.injectorGet(import9.Location,this.parentIndex));
     this.compView_0.create(this._CircleSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._CircleSeriesComponent_0_3.context);
@@ -184,155 +191,44 @@ class View_CircleSeriesComponent_Host0 extends import2.AppView<any> {
     cb(this._el_0,ctx);
   }
 }
-export const CircleSeriesComponentNgFactory:import8.ComponentFactory<import0.CircleSeriesComponent> = new import8.ComponentFactory<import0.CircleSeriesComponent>('g[ngx-charts-circle-ceries]',View_CircleSeriesComponent_Host0,import0.CircleSeriesComponent);
+export const CircleSeriesComponentNgFactory:import8.ComponentFactory<import0.CircleSeriesComponent> = new import8.ComponentFactory<import0.CircleSeriesComponent>('g[ngx-charts-circle-series]',View_CircleSeriesComponent_Host0,import0.CircleSeriesComponent);
 const styles_CircleSeriesComponent:any[] = ([] as any[]);
-var renderType_CircleSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeriesComponent,{});
-export class View_CircleSeriesComponent0 extends import2.AppView<import0.CircleSeriesComponent> {
-  _text_0:any;
-  _anchor_1:any;
-  /*private*/ _vc_1:import9.ViewContainer;
-  _TemplateRef_1_5:any;
-  _NgFor_1_6:import10.Wrapper_NgFor;
-  _text_2:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CircleSeriesComponent0,renderType_CircleSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
-    this._vc_1 = new import9.ViewContainer(1,(null as any),this,this._anchor_1);
-    this._TemplateRef_1_5 = new import11.TemplateRef_(this,1,this._anchor_1);
-    this._NgFor_1_6 = new import10.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
-    this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._anchor_1,
-      this._text_2
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import11.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
-    if (((token === import13.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1_0_0:any = this.context.circles;
-    this._NgFor_1_6.check_ngForOf(currVal_1_0_0,throwOnChange,false);
-    this._NgFor_1_6.ngDoCheck(this,this._anchor_1,throwOnChange);
-    this._vc_1.detectChangesInNestedViews(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_1.destroyNestedViews();
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 1)) { return new View_CircleSeriesComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
-    return (null as any);
-  }
+var CircleSeriesComponent_animationState_states:any = {
+  '*': {},
+  'void': {}
 }
-class View_CircleSeriesComponent1 extends import2.AppView<any> {
-  _el_0:any;
-  _text_1:any;
-  _el_2:any;
-  _text_3:any;
-  _el_4:any;
-  compView_4:import2.AppView<import14.SvgLinearGradientComponent>;
-  _SvgLinearGradientComponent_4_3:import15.Wrapper_SvgLinearGradientComponent;
-  _text_5:any;
-  _text_6:any;
-  _anchor_7:any;
-  /*private*/ _vc_7:import9.ViewContainer;
-  _TemplateRef_7_5:any;
-  _NgIf_7_6:import16.Wrapper_NgIf;
-  _text_8:any;
-  _anchor_9:any;
-  /*private*/ _vc_9:import9.ViewContainer;
-  _TemplateRef_9_5:any;
-  _NgIf_9_6:import16.Wrapper_NgIf;
-  _text_10:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
-    super(View_CircleSeriesComponent1,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+;
+function CircleSeriesComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import10.AnimationTransition {
+  var previousPlayers:any = view.animationContext.getAnimationPlayers(element,((nextState == 'void')? (null as any): 'animationState'));
+  var collectedStyles:any = {};
+  var player:any = (null as any);
+  var totalTime:any = 0;
+  var defaultStateStyles:any = CircleSeriesComponent_animationState_states['*'];
+  var startStateStyles:any = CircleSeriesComponent_animationState_states[currentState];
+  if ((startStateStyles == (null as any))) { (startStateStyles = defaultStateStyles); }
+  var endStateStyles:any = CircleSeriesComponent_animationState_states[nextState];
+  if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
+  if (((player == (null as any)) && ((currentState == 'void') && true))) {
+      player = new import11.AnimationSequencePlayer([view.renderer.animate(element,new import12.AnimationStyles(import13.collectAndResolveStyles(collectedStyles,[
+        startStateStyles,
+        {'opacity': '0'}
+      ]
+      )),[
+        new import14.AnimationKeyframe(0,new import12.AnimationStyles(import13.collectAndResolveStyles(collectedStyles,[{'opacity': '0'}]))),
+        new import14.AnimationKeyframe(1,new import12.AnimationStyles(import13.collectAndResolveStyles(collectedStyles,[{'opacity': '1'}])))
+      ]
+    ,250,0,(null as any),previousPlayers)]);
+    totalTime = 250;
   }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_3 = this.renderer.createText(this._el_2,'\n        ',(null as any));
-    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,':svg:g',new import3.InlineArray4(4,'ngx-charts-svg-linear-gradient','','orientation','vertical'),(null as any));
-    this.compView_4 = new import15.View_SvgLinearGradientComponent0(this.viewUtils,this,4,this._el_4);
-    this._SvgLinearGradientComponent_4_3 = new import15.Wrapper_SvgLinearGradientComponent();
-    this.compView_4.create(this._SvgLinearGradientComponent_4_3.context);
-    this._text_5 = this.renderer.createText(this._el_2,'\n      ',(null as any));
-    this._text_6 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._anchor_7 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_7 = new import9.ViewContainer(7,0,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import11.TemplateRef_(this,7,this._anchor_7);
-    this._NgIf_7_6 = new import16.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
-    this._text_8 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._anchor_9 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
-    this._vc_9 = new import9.ViewContainer(9,0,this,this._anchor_9);
-    this._TemplateRef_9_5 = new import11.TemplateRef_(this,9,this._anchor_9);
-    this._NgIf_9_6 = new import16.Wrapper_NgIf(this._vc_9.vcRef,this._TemplateRef_9_5);
-    this._text_10 = this.renderer.createText(this._el_0,'\n    ',(null as any));
-    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
-      this._el_0,
-      this._text_1,
-      this._el_2,
-      this._text_3,
-      this._el_4,
-      this._text_5,
-      this._text_6,
-      this._anchor_7,
-      this._text_8,
-      this._anchor_9,
-      this._text_10
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.SvgLinearGradientComponent) && (4 === requestNodeIndex))) { return this._SvgLinearGradientComponent_4_3.context; }
-    if (((token === import11.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import17.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
-    if (((token === import11.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
-    if (((token === import17.NgIf) && (9 === requestNodeIndex))) { return this._NgIf_9_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_4_0_0:any = 'vertical';
-    this._SvgLinearGradientComponent_4_3.check_orientation(currVal_4_0_0,throwOnChange,false);
-    const currVal_4_0_1:any = this.parentView.context.color;
-    this._SvgLinearGradientComponent_4_3.check_color(currVal_4_0_1,throwOnChange,false);
-    const currVal_4_0_2:any = this.context.$implicit.gradientId;
-    this._SvgLinearGradientComponent_4_3.check_name(currVal_4_0_2,throwOnChange,false);
-    const currVal_4_0_3:any = this.context.$implicit.gradientStops;
-    this._SvgLinearGradientComponent_4_3.check_stops(currVal_4_0_3,throwOnChange,false);
-    if (this._SvgLinearGradientComponent_4_3.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
-    const currVal_7_0_0:any = (this.context.$implicit.barVisible && (this.parentView.context.type === 'standard'));
-    this._NgIf_7_6.check_ngIf(currVal_7_0_0,throwOnChange,false);
-    this._NgIf_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
-    const currVal_9_0_0:any = this.parentView.context.isVisible(this.context.$implicit);
-    this._NgIf_9_6.check_ngIf(currVal_9_0_0,throwOnChange,false);
-    this._NgIf_9_6.ngDoCheck(this,this._anchor_9,throwOnChange);
-    this._vc_7.detectChangesInNestedViews(throwOnChange);
-    this._vc_9.detectChangesInNestedViews(throwOnChange);
-    this.compView_4.internalDetectChanges(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_7.destroyNestedViews();
-    this._vc_9.destroyNestedViews();
-    this.compView_4.destroy();
-  }
-  visitRootNodesInternal(cb:any,ctx:any):void {
-    cb(this._el_0,ctx);
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 7)) { return new View_CircleSeriesComponent2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
-    if ((nodeIndex == 9)) { return new View_CircleSeriesComponent3(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
-    return (null as any);
-  }
+  if ((player == (null as any))) { (player = new import15.NoOpAnimationPlayer()); }
+  player.onDone(():void => {
+    player.destroy();
+    import13.renderStyles(element,view.renderer,import13.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
+  });
+  new import11.AnimationSequencePlayer(previousPlayers).destroy();
+  import13.renderStyles(element,view.renderer,import13.clearStyles(startStateStyles));
+  view.animationContext.queueAnimation(element,'animationState',player);
+  return new import10.AnimationTransition(player,currentState,nextState,totalTime);
 }
 class View_CircleSeriesComponent2 extends import2.AppView<any> {
   _el_0:any;
@@ -341,13 +237,15 @@ class View_CircleSeriesComponent2 extends import2.AppView<any> {
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+  /*private*/ _expr_6:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
     super(View_CircleSeriesComponent2,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
+    this._expr_6 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:rect',new import3.InlineArray2(2,'class','tooltip-bar'),(null as any));
@@ -355,31 +253,39 @@ class View_CircleSeriesComponent2 extends import2.AppView<any> {
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1:any = (this.parentView.context.$implicit.cx - this.parentView.context.$implicit.radius);
+    const currVal_1:any = 'active';
     if (import3.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
-      this.renderer.setElementAttribute(this._el_0,'x',((currVal_1 == null)? (null as any): currVal_1.toString()));
+      var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,((this._expr_1 == import1.UNINITIALIZED)? 'void': this._expr_1),((currVal_1 == import1.UNINITIALIZED)? 'void': currVal_1));
       this._expr_1 = currVal_1;
     }
-    const currVal_2:any = this.parentView.context.$implicit.cy;
+    const currVal_2:any = (this.parentView.context.$implicit.cx - this.parentView.context.$implicit.radius);
     if (import3.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
-      this.renderer.setElementAttribute(this._el_0,'y',((currVal_2 == null)? (null as any): currVal_2.toString()));
+      this.renderer.setElementAttribute(this._el_0,'x',((currVal_2 == null)? (null as any): currVal_2.toString()));
       this._expr_2 = currVal_2;
     }
-    const currVal_3:any = (this.parentView.context.$implicit.radius * 2);
+    const currVal_3:any = this.parentView.context.$implicit.cy;
     if (import3.checkBinding(throwOnChange,this._expr_3,currVal_3)) {
-      this.renderer.setElementAttribute(this._el_0,'width',((currVal_3 == null)? (null as any): currVal_3.toString()));
+      this.renderer.setElementAttribute(this._el_0,'y',((currVal_3 == null)? (null as any): currVal_3.toString()));
       this._expr_3 = currVal_3;
     }
-    const currVal_4:any = this.parentView.context.$implicit.height;
+    const currVal_4:any = (this.parentView.context.$implicit.radius * 2);
     if (import3.checkBinding(throwOnChange,this._expr_4,currVal_4)) {
-      this.renderer.setElementAttribute(this._el_0,'height',((currVal_4 == null)? (null as any): currVal_4.toString()));
+      this.renderer.setElementAttribute(this._el_0,'width',((currVal_4 == null)? (null as any): currVal_4.toString()));
       this._expr_4 = currVal_4;
     }
-    const currVal_5:any = this.parentView.context.$implicit.gradientFill;
+    const currVal_5:any = this.parentView.context.$implicit.height;
     if (import3.checkBinding(throwOnChange,this._expr_5,currVal_5)) {
-      this.renderer.setElementAttribute(this._el_0,'fill',((currVal_5 == null)? (null as any): currVal_5.toString()));
+      this.renderer.setElementAttribute(this._el_0,'height',((currVal_5 == null)? (null as any): currVal_5.toString()));
       this._expr_5 = currVal_5;
     }
+    const currVal_6:any = this.parentView.context.$implicit.gradientFill;
+    if (import3.checkBinding(throwOnChange,this._expr_6,currVal_6)) {
+      this.renderer.setElementAttribute(this._el_0,'fill',((currVal_6 == null)? (null as any): currVal_6.toString()));
+      this._expr_6 = currVal_6;
+    }
+  }
+  detachInternal():void {
+    var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_0,this._expr_1,'void');
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
@@ -387,14 +293,14 @@ class View_CircleSeriesComponent2 extends import2.AppView<any> {
 }
 class View_CircleSeriesComponent3 extends import2.AppView<any> {
   _el_0:any;
-  /*private*/ _vc_0:import9.ViewContainer;
-  compView_0:import2.AppView<import18.CircleComponent>;
-  _TooltipDirective_0_5:import19.Wrapper_TooltipDirective;
-  _CircleComponent_0_6:import20.Wrapper_CircleComponent;
+  /*private*/ _vc_0:import16.ViewContainer;
+  compView_0:import2.AppView<import17.CircleComponent>;
+  _TooltipDirective_0_5:import18.Wrapper_TooltipDirective;
+  _CircleComponent_0_6:import19.Wrapper_CircleComponent;
   _el_1:any;
   /*private*/ _expr_6:any;
   _map_7:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import9.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
     super(View_CircleSeriesComponent3,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_6 = import1.UNINITIALIZED;
     this._map_7 = import3.pureProxy1((p0:any):{[key: string]:any} => {
@@ -403,10 +309,10 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray8(6,'class','circle','ngx-charts-circle','','ngx-tooltip',''),(null as any));
-    this._vc_0 = new import9.ViewContainer(0,(null as any),this,this._el_0);
-    this.compView_0 = new import20.View_CircleComponent0(this.viewUtils,this,0,this._el_0);
-    this._TooltipDirective_0_5 = new import19.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import21.TooltipService,this.parentView.parentIndex),this._vc_0.vcRef,this.renderer,new import22.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import23.NgZone,this.parentView.parentIndex));
-    this._CircleComponent_0_6 = new import20.Wrapper_CircleComponent();
+    this._vc_0 = new import16.ViewContainer(0,(null as any),this,this._el_0);
+    this.compView_0 = new import19.View_CircleComponent0(this.viewUtils,this,0,this._el_0);
+    this._TooltipDirective_0_5 = new import18.Wrapper_TooltipDirective(this.parentView.parentView.injectorGet(import20.TooltipService,this.parentView.parentIndex),this._vc_0.vcRef,this.renderer,new import21.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import22.NgZone,this.parentView.parentIndex));
+    this._CircleComponent_0_6 = new import19.Wrapper_CircleComponent();
     this.compView_0.create(this._CircleComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(16,'select',(null as any),'activate',(null as any),'deactivate',(null as any),'focusin',(null as any),'blur',(null as any),'mouseenter',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
@@ -415,8 +321,8 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import24.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
-    if (((token === import18.CircleComponent) && (0 === requestNodeIndex))) { return this._CircleComponent_0_6.context; }
+    if (((token === import23.TooltipDirective) && (0 === requestNodeIndex))) { return this._TooltipDirective_0_5.context; }
+    if (((token === import17.CircleComponent) && (0 === requestNodeIndex))) { return this._CircleComponent_0_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -479,5 +385,153 @@ class View_CircleSeriesComponent3 extends import2.AppView<any> {
       result = (pd_sub_2 && result);
     }
     return result;
+  }
+}
+class View_CircleSeriesComponent1 extends import2.AppView<any> {
+  _el_0:any;
+  _text_1:any;
+  _el_2:any;
+  _text_3:any;
+  _el_4:any;
+  compView_4:import2.AppView<import24.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_4_3:import25.Wrapper_SvgLinearGradientComponent;
+  _text_5:any;
+  _text_6:any;
+  _anchor_7:any;
+  /*private*/ _vc_7:import16.ViewContainer;
+  _TemplateRef_7_5:any;
+  _NgIf_7_6:import26.Wrapper_NgIf;
+  _text_8:any;
+  _anchor_9:any;
+  /*private*/ _vc_9:import16.ViewContainer;
+  _TemplateRef_9_5:any;
+  _NgIf_9_6:import26.Wrapper_NgIf;
+  _text_10:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import16.ViewContainer) {
+    super(View_CircleSeriesComponent1,renderType_CircleSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_3 = this.renderer.createText(this._el_2,'\n        ',(null as any));
+    this._el_4 = import3.createRenderElement(this.renderer,this._el_2,':svg:g',new import3.InlineArray4(4,'ngx-charts-svg-linear-gradient','','orientation','vertical'),(null as any));
+    this.compView_4 = new import25.View_SvgLinearGradientComponent0(this.viewUtils,this,4,this._el_4);
+    this._SvgLinearGradientComponent_4_3 = new import25.Wrapper_SvgLinearGradientComponent();
+    this.compView_4.create(this._SvgLinearGradientComponent_4_3.context);
+    this._text_5 = this.renderer.createText(this._el_2,'\n      ',(null as any));
+    this._text_6 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    this._anchor_7 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_7 = new import16.ViewContainer(7,0,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import27.TemplateRef_(this,7,this._anchor_7);
+    this._NgIf_7_6 = new import26.Wrapper_NgIf(this._vc_7.vcRef,this._TemplateRef_7_5);
+    this._text_8 = this.renderer.createText(this._el_0,'\n      ',(null as any));
+    this._anchor_9 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
+    this._vc_9 = new import16.ViewContainer(9,0,this,this._anchor_9);
+    this._TemplateRef_9_5 = new import27.TemplateRef_(this,9,this._anchor_9);
+    this._NgIf_9_6 = new import26.Wrapper_NgIf(this._vc_9.vcRef,this._TemplateRef_9_5);
+    this._text_10 = this.renderer.createText(this._el_0,'\n    ',(null as any));
+    this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._el_4,
+      this._text_5,
+      this._text_6,
+      this._anchor_7,
+      this._text_8,
+      this._anchor_9,
+      this._text_10
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import24.SvgLinearGradientComponent) && (4 === requestNodeIndex))) { return this._SvgLinearGradientComponent_4_3.context; }
+    if (((token === import27.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import28.NgIf) && (7 === requestNodeIndex))) { return this._NgIf_7_6.context; }
+    if (((token === import27.TemplateRef) && (9 === requestNodeIndex))) { return this._TemplateRef_9_5; }
+    if (((token === import28.NgIf) && (9 === requestNodeIndex))) { return this._NgIf_9_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_4_0_0:any = 'vertical';
+    this._SvgLinearGradientComponent_4_3.check_orientation(currVal_4_0_0,throwOnChange,false);
+    const currVal_4_0_1:any = this.parentView.context.color;
+    this._SvgLinearGradientComponent_4_3.check_color(currVal_4_0_1,throwOnChange,false);
+    const currVal_4_0_2:any = this.context.$implicit.gradientId;
+    this._SvgLinearGradientComponent_4_3.check_name(currVal_4_0_2,throwOnChange,false);
+    const currVal_4_0_3:any = this.context.$implicit.gradientStops;
+    this._SvgLinearGradientComponent_4_3.check_stops(currVal_4_0_3,throwOnChange,false);
+    if (this._SvgLinearGradientComponent_4_3.ngDoCheck(this,this._el_4,throwOnChange)) { this.compView_4.markAsCheckOnce(); }
+    const currVal_7_0_0:any = (this.context.$implicit.barVisible && (this.parentView.context.type === 'standard'));
+    this._NgIf_7_6.check_ngIf(currVal_7_0_0,throwOnChange,false);
+    this._NgIf_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
+    const currVal_9_0_0:any = this.parentView.context.isVisible(this.context.$implicit);
+    this._NgIf_9_6.check_ngIf(currVal_9_0_0,throwOnChange,false);
+    this._NgIf_9_6.ngDoCheck(this,this._anchor_9,throwOnChange);
+    this._vc_7.detectChangesInNestedViews(throwOnChange);
+    this._vc_9.detectChangesInNestedViews(throwOnChange);
+    this.compView_4.internalDetectChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_7.destroyNestedViews();
+    this._vc_9.destroyNestedViews();
+    this.compView_4.destroy();
+  }
+  visitRootNodesInternal(cb:any,ctx:any):void {
+    cb(this._el_0,ctx);
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 7)) { return new View_CircleSeriesComponent2(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
+    if ((nodeIndex == 9)) { return new View_CircleSeriesComponent3(this.viewUtils,this,9,this._anchor_9,this._vc_9); }
+    return (null as any);
+  }
+}
+var renderType_CircleSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeriesComponent,{animationState: CircleSeriesComponent_animationState_factory});
+export class View_CircleSeriesComponent0 extends import2.AppView<import0.CircleSeriesComponent> {
+  _text_0:any;
+  _anchor_1:any;
+  /*private*/ _vc_1:import16.ViewContainer;
+  _TemplateRef_1_5:any;
+  _NgFor_1_6:import29.Wrapper_NgFor;
+  _text_2:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
+    super(View_CircleSeriesComponent0,renderType_CircleSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
+    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
+    this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
+    this._vc_1 = new import16.ViewContainer(1,(null as any),this,this._anchor_1);
+    this._TemplateRef_1_5 = new import27.TemplateRef_(this,1,this._anchor_1);
+    this._NgFor_1_6 = new import29.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import30.IterableDiffers,this.parentIndex),this.ref);
+    this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
+      this._text_0,
+      this._anchor_1,
+      this._text_2
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import27.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
+    if (((token === import31.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_1_0_0:any = this.context.circles;
+    this._NgFor_1_6.check_ngForOf(currVal_1_0_0,throwOnChange,false);
+    this._NgFor_1_6.ngDoCheck(this,this._anchor_1,throwOnChange);
+    this._vc_1.detectChangesInNestedViews(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_1.destroyNestedViews();
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 1)) { return new View_CircleSeriesComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
+    return (null as any);
   }
 }

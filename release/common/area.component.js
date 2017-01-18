@@ -1,9 +1,11 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var id_1 = require('../utils/id');
 var d3_1 = require('../d3');
 var AreaComponent = (function () {
-    function AreaComponent(element) {
+    function AreaComponent(element, location) {
+        this.location = location;
         this.opacity = 1;
         this.startOpacity = 0.5;
         this.endOpacity = 1;
@@ -23,7 +25,7 @@ var AreaComponent = (function () {
         }
     };
     AreaComponent.prototype.update = function () {
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         if (this.gradient || this.stops) {
@@ -70,6 +72,7 @@ var AreaComponent = (function () {
     /** @nocollapse */
     AreaComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
+        { type: common_1.Location, },
     ]; };
     AreaComponent.propDecorators = {
         'data': [{ type: core_1.Input },],

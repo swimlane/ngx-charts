@@ -1,12 +1,14 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var moment = require('moment');
 var d3_1 = require('../d3');
 var id_1 = require('../utils/id');
 var Timeline = (function () {
-    function Timeline(element, zone, cd) {
+    function Timeline(element, zone, cd, location) {
         this.zone = zone;
         this.cd = cd;
+        this.location = location;
         this.height = 50;
         this.select = new core_1.EventEmitter();
         this.onDomainChange = new core_1.EventEmitter();
@@ -32,7 +34,7 @@ var Timeline = (function () {
                 _this.updateBrush();
             }
             _this.transform = "translate(0 , " + offsetY + ")";
-            var pageUrl = window.location.href;
+            var pageUrl = _this.location.path();
             _this.filterId = 'filter' + id_1.id().toString();
             _this.filter = "url(" + pageUrl + "#" + _this.filterId + ")";
             _this.cd.markForCheck();
@@ -146,6 +148,7 @@ var Timeline = (function () {
         { type: core_1.ElementRef, },
         { type: core_1.NgZone, },
         { type: core_1.ChangeDetectorRef, },
+        { type: common_1.Location, },
     ]; };
     Timeline.propDecorators = {
         'view': [{ type: core_1.Input },],

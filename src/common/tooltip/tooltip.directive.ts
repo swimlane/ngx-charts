@@ -88,7 +88,7 @@ export class TooltipDirective implements OnDestroy {
     if(this.listensForHover && this.tooltipCloseOnMouseLeave) {
       clearTimeout(this.timeout);
 
-      if(this.component) {
+      if (this.component) {
         const contentDom = this.component.instance.element.nativeElement;
         const contains = contentDom.contains(target);
         if(contains) return;
@@ -120,7 +120,9 @@ export class TooltipDirective implements OnDestroy {
 
         // add a tiny timeout to avoid event re-triggers
         setTimeout(() => {
-          this.addHideListeners(this.component.instance.element.nativeElement);
+          if (this.component) {
+            this.addHideListeners(this.component.instance.element.nativeElement);
+          }
         }, 10);
 
         this.show.emit(true);

@@ -11,6 +11,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -30,7 +31,11 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   height: number;
   resizeSubscription: any;
 
-  constructor(protected chartElement: ElementRef, protected zone: NgZone, protected cd: ChangeDetectorRef) {
+  constructor(
+    protected chartElement: ElementRef, 
+    protected zone: NgZone, 
+    protected cd: ChangeDetectorRef,
+    protected location: Location) {
   }
 
   ngAfterViewInit(): void {
@@ -68,18 +73,24 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     let width = 0;
     let height = 0;
     const hostElem = this.chartElement.nativeElement;
-    if (hostElem.parentNode != null) {
+
+    if (hostElem.parentNode !== null) {
       // Get the container dimensions
       width = hostElem.parentNode.clientWidth;
       height = hostElem.parentNode.clientHeight;
     }
-    return {width, height};
+
+    return { width, height };
   }
 
-  // converts all date objects that appear as name into formatted date strings
-  formatDates() {
+  /**
+   * Converts all date objects that appear as name 
+   * into formatted date strings
+   */
+  formatDates(): void {
     for (let i = 0; i < this.results.length; i++) {
       let g = this.results[i];
+
       if (g.name instanceof Date) {
         g.name = g.name.toLocaleDateString();
       }

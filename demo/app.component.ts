@@ -206,7 +206,7 @@ import './demo.scss';
             class="chart-container"
             [scheme]="colorScheme"
             [schemeType]="schemeType"
-            [results]="dateData"
+            [results]="dateDataWithOrWithoutRange"
             [legend]="showLegend"
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
@@ -220,6 +220,7 @@ import './demo.scss';
             [timeline]="timeline"
             [showGridLines]="showGridLines"
             [curve]="curve"
+            [rangeFillOpacity]="rangeFillOpacity"
             (select)="select($event)">
           </ngx-charts-line-chart>
           <ngx-charts-force-directed-graph
@@ -347,6 +348,7 @@ import './demo.scss';
             [showAxis]="gaugeShowAxis"
             [bigSegments]="gaugeLargeSegments"
             [smallSegments]="gaugeSmallSegments"
+            [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
             (select)="select($event)"
             (legendLabelClick)="onLegendLabelClick($event)">
           </ngx-charts-gauge>
@@ -400,11 +402,18 @@ import './demo.scss';
         <div [hidden]="!dataVisable" style="margin-left: 10px;">
           <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
           <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
-          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale">{{dateData | json}}</pre>
+          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
+          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
           <div>
             <label>
               <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
               Real-time
+            </label>
+
+           <label *ngIf="chartType === 'line-chart'">
+              <br />
+              <input type="checkbox" [checked]="range" (change)="range = $event.target.checked">
+              Show min and max values
             </label>
           </div>
         </div>
@@ -454,6 +463,13 @@ import './demo.scss';
           <option value="ordinal">Ordinal</option>
           <option value="linear">Linear</option>
         </select>
+
+        <div [hidden]="(!colorVisible) || (!range)" style="margin-left: 10px;">
+           <div>
+            <label>Range fill color opacity (0.0 - 1.0):</label><br />
+            <input type="number" [(ngModel)]="rangeFillOpacity"><br />
+          </div>
+        </div>
 
         <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
           <span
@@ -611,17 +627,31 @@ import './demo.scss';
             <label>Units:</label><br />
             <input type="text" [(ngModel)]="gaugeUnits"><br />
           </div>
+
+          <div *ngIf="chart.options.includes('margin')">
+            <label>
+              <input type="checkbox" [checked]="margin" (change)="margin = $event.target.checked">
+              Show Margin
+            </label> <br />
+          </div>
+
+          <div *ngIf="chart.options.includes('margin') && margin">
+            <label>Top:</label><input type="number" [(ngModel)]="marginTop"><br />
+            <label>Right:</label><input type="number" [(ngModel)]="marginRight"><br />
+            <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom"><br />
+            <label>Left:</label><input type="number" [(ngModel)]="marginLeft"><br />
+          </div>
         </div>
         <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
         </div>
       </div>
     </main>
-  `
+  ^`
 })
 export class AppComponent implements OnInit {
 
   theme = 'dark';
-  chartType = 'bar-vertical';
+  chartType = 'line-chart';
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;
@@ -629,8 +659,10 @@ export class AppComponent implements OnInit {
   single: any[];
   multi: any[];
   dateData: any[];
+  dateDataWithRange: any[];
   graph: { links: any[], nodes: any[] };
   linearScale: boolean = false;
+  range: boolean = false;
 
   view: any[];
   width: number = 700;
@@ -660,6 +692,7 @@ export class AppComponent implements OnInit {
   colorScheme: any;
   schemeType: string = 'ordinal';
   selectedColorScheme: string;
+  rangeFillOpacity: number = 0.15;
 
   // pie
   showLabels = true;
@@ -670,6 +703,13 @@ export class AppComponent implements OnInit {
   // line, area
   autoScale = true;
   timeline = false;
+
+  // margin
+  margin: boolean = false;
+  marginTop: number = 40;
+  marginRight: number = 40;
+  marginBottom: number = 40;
+  marginLeft: number = 40;
 
   // gauge
   gaugeMin: number = 0;
@@ -693,8 +733,18 @@ export class AppComponent implements OnInit {
       graph: generateGraph(50)
     });
 
-    this.dateData = generateData(5);
+    this.dateData = generateData(5, false);
+    this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
+  }
+
+  get dateDataWithOrWithoutRange() {
+    if (this.range) {
+      return this.dateDataWithRange;
+    } else {
+      return this.dateData;
+    }
+
   }
 
   ngOnInit() {
@@ -714,26 +764,26 @@ export class AppComponent implements OnInit {
 
     this.gaugeValue = this.gaugeMin + Math.floor(Math.random() * (this.gaugeMax - this.gaugeMin));
 
-    let country = this.countries[Math.floor(Math.random() * this.countries.length)];
-    let add = Math.random() < 0.7;
-    let remove = Math.random() < 0.5;
+    const country = this.countries[Math.floor(Math.random() * this.countries.length)];
+    const add = Math.random() < 0.7;
+    const remove = Math.random() < 0.5;
 
     if (remove) {
       if (this.single.length > 1) {
-        let index = Math.floor(Math.random() * this.single.length);
+        const index = Math.floor(Math.random() * this.single.length);
         this.single.splice(index, 1);
         this.single = [...this.single];
       }
 
       if (this.multi.length > 1) {
-        let index = Math.floor(Math.random() * this.multi.length);
+        const index = Math.floor(Math.random() * this.multi.length);
         this.multi.splice(index, 1);
         this.multi = [...this.multi];
       }
 
       if (this.graph.nodes.length > 1) {
-        let index = Math.floor(Math.random() * this.graph.nodes.length);
-        let value = this.graph.nodes[index].value;
+        const index = Math.floor(Math.random() * this.graph.nodes.length);
+        const value = this.graph.nodes[index].value;
         this.graph.nodes.splice(index, 1);
         const nodes = [ ...this.graph.nodes ];
 
@@ -747,14 +797,14 @@ export class AppComponent implements OnInit {
 
     if (add) {
       // single
-      let entry = {
+      const entry = {
         name: country,
         value: Math.floor(10000 + Math.random() * 50000)
       };
       this.single = [...this.single, entry];
 
       // multi
-      let multiEntry = {
+      const multiEntry = {
         name: country,
         series: [{
           name: '2010',
@@ -797,12 +847,13 @@ export class AppComponent implements OnInit {
     this.chartType = chartSelector;
 
     this.linearScale = this.chartType === 'line-chart' ||
+      this.chartType === 'line-chart-with-ranges' ||
       this.chartType === 'area-chart' ||
       this.chartType === 'area-chart-normalized' ||
       this.chartType === 'area-chart-stacked';
 
-    for (let group of this.chartGroups) {
-      for (let chart of group.charts) {
+    for (const group of this.chartGroups) {
+      for (const chart of group.charts) {
         if (chart.selector === chartSelector) {
           this.chart = chart;
           return;
@@ -860,4 +911,5 @@ export class AppComponent implements OnInit {
   onLegendLabelClick(entry) {
     console.log('Legend clicked', entry);
   }
+
 }

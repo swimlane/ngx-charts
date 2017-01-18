@@ -99,6 +99,7 @@
   .ngx-charts g:focus {
     outline: none; }
   .ngx-charts .line-series.inactive,
+  .ngx-charts .line-series-range.inactive,
   .ngx-charts .area-series.inactive {
     transition: opacity 100ms ease-in-out;
     opacity: .2; }

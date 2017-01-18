@@ -15,14 +15,14 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
-import * as import10 from '@angular/core/src/linker/view_container';
-import * as import11 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import12 from '@angular/core/src/linker/template_ref';
-import * as import13 from '@angular/common/src/directives/ng_if';
+import * as import10 from '../../../src/common/count/count.directive';
+import * as import11 from '../common/count/count.directive.ngfactory';
+import * as import12 from '@angular/core/src/linker/view_container';
+import * as import13 from '@angular/core/src/zone/ng_zone';
 import * as import14 from '@angular/core/src/security';
-import * as import15 from '../../../src/common/count/count.directive';
-import * as import16 from '../common/count/count.directive.ngfactory';
-import * as import17 from '@angular/core/src/zone/ng_zone';
+import * as import15 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import16 from '@angular/core/src/linker/template_ref';
+import * as import17 from '@angular/common/src/directives/ng_if';
 export class Wrapper_TreeMapCellComponent {
   /*private*/ _eventHandler:Function;
   context:import0.TreeMapCellComponent;
@@ -173,105 +173,6 @@ class View_TreeMapCellComponent_Host0 extends import2.AppView<any> {
 }
 export const TreeMapCellComponentNgFactory:import8.ComponentFactory<import0.TreeMapCellComponent> = new import8.ComponentFactory<import0.TreeMapCellComponent>('g[ngx-charts-tree-map-cell]',View_TreeMapCellComponent_Host0,import0.TreeMapCellComponent);
 const styles_TreeMapCellComponent:any[] = ([] as any[]);
-var renderType_TreeMapCellComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TreeMapCellComponent,{});
-export class View_TreeMapCellComponent0 extends import2.AppView<import0.TreeMapCellComponent> {
-  _text_0:any;
-  _el_1:any;
-  _text_2:any;
-  _el_3:any;
-  _text_4:any;
-  _anchor_5:any;
-  /*private*/ _vc_5:import10.ViewContainer;
-  _TemplateRef_5_5:any;
-  _NgIf_5_6:import11.Wrapper_NgIf;
-  _text_6:any;
-  _text_7:any;
-  /*private*/ _expr_11:any;
-  /*private*/ _expr_12:any;
-  /*private*/ _expr_13:any;
-  /*private*/ _expr_14:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_TreeMapCellComponent0,renderType_TreeMapCellComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
-    this._expr_11 = import1.UNINITIALIZED;
-    this._expr_12 = import1.UNINITIALIZED;
-    this._expr_13 = import1.UNINITIALIZED;
-    this._expr_14 = import1.UNINITIALIZED;
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:rect',new import3.InlineArray2(2,'class','cell'),(null as any));
-    this._text_4 = this.renderer.createText(this._el_1,'\n      ',(null as any));
-    this._anchor_5 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_5 = new import10.ViewContainer(5,1,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import12.TemplateRef_(this,5,this._anchor_5);
-    this._NgIf_5_6 = new import11.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
-    this._text_6 = this.renderer.createText(this._el_1,'\n    ',(null as any));
-    this._text_7 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_3,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_3));
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._el_1,
-      this._text_2,
-      this._el_3,
-      this._text_4,
-      this._anchor_5,
-      this._text_6,
-      this._text_7
-    ]
-    ),[disposable_0]);
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import12.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import13.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_5_0_0:any = ((this.context.width >= 70) && (this.context.height >= 35));
-    this._NgIf_5_6.check_ngIf(currVal_5_0_0,throwOnChange,false);
-    this._NgIf_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
-    this._vc_5.detectChangesInNestedViews(throwOnChange);
-    const currVal_11:any = this.context.fill;
-    if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
-      this.renderer.setElementAttribute(this._el_3,'fill',((currVal_11 == null)? (null as any): currVal_11.toString()));
-      this._expr_11 = currVal_11;
-    }
-    const currVal_12:any = this.context.width;
-    if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setElementAttribute(this._el_3,'width',((currVal_12 == null)? (null as any): currVal_12.toString()));
-      this._expr_12 = currVal_12;
-    }
-    const currVal_13:any = this.context.height;
-    if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
-      this.renderer.setElementAttribute(this._el_3,'height',((currVal_13 == null)? (null as any): currVal_13.toString()));
-      this._expr_13 = currVal_13;
-    }
-    const currVal_14:any = 'pointer';
-    if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setElementStyle(this._el_3,'cursor',((this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_14).toString()));
-      this._expr_14 = currVal_14;
-    }
-  }
-  destroyInternal():void {
-    this._vc_5.destroyNestedViews();
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 5)) { return new View_TreeMapCellComponent1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
-    return (null as any);
-  }
-  handleEvent_3(eventName:string,$event:any):boolean {
-    this.markPathToRootAsCheckOnce();
-    var result:boolean = true;
-    if ((eventName == 'click')) {
-      const pd_sub_0:any = ((<any>this.context.onClick()) !== false);
-      result = (pd_sub_0 && result);
-    }
-    return result;
-  }
-}
 class View_TreeMapCellComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
@@ -283,8 +184,8 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
   _el_7:any;
   _text_8:any;
   _el_9:any;
-  compView_9:import2.AppView<import15.CountUpDirective>;
-  _CountUpDirective_9_3:import16.Wrapper_CountUpDirective;
+  compView_9:import2.AppView<import10.CountUpDirective>;
+  _CountUpDirective_9_3:import11.Wrapper_CountUpDirective;
   _text_10:any;
   _text_11:any;
   _text_12:any;
@@ -297,7 +198,7 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
   /*private*/ _expr_21:any;
   /*private*/ _expr_22:any;
   /*private*/ _expr_23:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
     super(View_TreeMapCellComponent1,renderType_TreeMapCellComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_15 = import1.UNINITIALIZED;
     this._expr_16 = import1.UNINITIALIZED;
@@ -320,8 +221,8 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
     this._el_7 = import3.createRenderElement(this.renderer,this._el_2,':xhtml:br',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_8 = this.renderer.createText(this._el_2,'\n          ',(null as any));
     this._el_9 = import3.createRenderElement(this.renderer,this._el_2,':xhtml:span',new import3.InlineArray4(4,'class','treemap-val','ngx-charts-count-up',''),(null as any));
-    this.compView_9 = new import16.View_CountUpDirective0(this.viewUtils,this,9,this._el_9);
-    this._CountUpDirective_9_3 = new import16.Wrapper_CountUpDirective(this.compView_9.ref,this.parentView.parentView.injectorGet(import17.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_9));
+    this.compView_9 = new import11.View_CountUpDirective0(this.viewUtils,this,9,this._el_9);
+    this._CountUpDirective_9_3 = new import11.Wrapper_CountUpDirective(this.compView_9.ref,this.parentView.parentView.injectorGet(import13.NgZone,this.parentView.parentIndex),new import9.ElementRef(this._el_9));
     this._text_10 = this.renderer.createText((null as any),'\n          ',(null as any));
     this.compView_9.create(this._CountUpDirective_9_3.context);
     this._text_11 = this.renderer.createText(this._el_2,'\n        ',(null as any));
@@ -345,7 +246,7 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import15.CountUpDirective) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._CountUpDirective_9_3.context; }
+    if (((token === import10.CountUpDirective) && ((9 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._CountUpDirective_9_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -405,5 +306,104 @@ class View_TreeMapCellComponent1 extends import2.AppView<any> {
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
+  }
+}
+var renderType_TreeMapCellComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_TreeMapCellComponent,{});
+export class View_TreeMapCellComponent0 extends import2.AppView<import0.TreeMapCellComponent> {
+  _text_0:any;
+  _el_1:any;
+  _text_2:any;
+  _el_3:any;
+  _text_4:any;
+  _anchor_5:any;
+  /*private*/ _vc_5:import12.ViewContainer;
+  _TemplateRef_5_5:any;
+  _NgIf_5_6:import15.Wrapper_NgIf;
+  _text_6:any;
+  _text_7:any;
+  /*private*/ _expr_11:any;
+  /*private*/ _expr_12:any;
+  /*private*/ _expr_13:any;
+  /*private*/ _expr_14:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
+    super(View_TreeMapCellComponent0,renderType_TreeMapCellComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
+    this._expr_11 = import1.UNINITIALIZED;
+    this._expr_12 = import1.UNINITIALIZED;
+    this._expr_13 = import1.UNINITIALIZED;
+    this._expr_14 = import1.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
+    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
+    this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:rect',new import3.InlineArray2(2,'class','cell'),(null as any));
+    this._text_4 = this.renderer.createText(this._el_1,'\n      ',(null as any));
+    this._anchor_5 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
+    this._vc_5 = new import12.ViewContainer(5,1,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import16.TemplateRef_(this,5,this._anchor_5);
+    this._NgIf_5_6 = new import15.Wrapper_NgIf(this._vc_5.vcRef,this._TemplateRef_5_5);
+    this._text_6 = this.renderer.createText(this._el_1,'\n    ',(null as any));
+    this._text_7 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_3,new import3.InlineArray2(2,'click',(null as any)),this.eventHandler(this.handleEvent_3));
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
+      this._text_0,
+      this._el_1,
+      this._text_2,
+      this._el_3,
+      this._text_4,
+      this._anchor_5,
+      this._text_6,
+      this._text_7
+    ]
+    ),[disposable_0]);
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import16.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import17.NgIf) && (5 === requestNodeIndex))) { return this._NgIf_5_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_5_0_0:any = ((this.context.width >= 70) && (this.context.height >= 35));
+    this._NgIf_5_6.check_ngIf(currVal_5_0_0,throwOnChange,false);
+    this._NgIf_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
+    this._vc_5.detectChangesInNestedViews(throwOnChange);
+    const currVal_11:any = this.context.fill;
+    if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
+      this.renderer.setElementAttribute(this._el_3,'fill',((currVal_11 == null)? (null as any): currVal_11.toString()));
+      this._expr_11 = currVal_11;
+    }
+    const currVal_12:any = this.context.width;
+    if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
+      this.renderer.setElementAttribute(this._el_3,'width',((currVal_12 == null)? (null as any): currVal_12.toString()));
+      this._expr_12 = currVal_12;
+    }
+    const currVal_13:any = this.context.height;
+    if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
+      this.renderer.setElementAttribute(this._el_3,'height',((currVal_13 == null)? (null as any): currVal_13.toString()));
+      this._expr_13 = currVal_13;
+    }
+    const currVal_14:any = 'pointer';
+    if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
+      this.renderer.setElementStyle(this._el_3,'cursor',((this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_14).toString()));
+      this._expr_14 = currVal_14;
+    }
+  }
+  destroyInternal():void {
+    this._vc_5.destroyNestedViews();
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 5)) { return new View_TreeMapCellComponent1(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
+    return (null as any);
+  }
+  handleEvent_3(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'click')) {
+      const pd_sub_0:any = ((<any>this.context.onClick()) !== false);
+      result = (pd_sub_0 && result);
+    }
+    return result;
   }
 }

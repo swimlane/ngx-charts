@@ -8,9 +8,9 @@ export declare class YAxisComponent implements OnChanges {
     showLabel: any;
     labelText: any;
     yAxisTickInterval: any;
+    yAxisTickCount: any;
     dimensionsChanged: EventEmitter<{}>;
     yAxisClassName: string;
-    yAxisTickCount: any;
     tickArguments: any;
     offset: any;
     transform: any;

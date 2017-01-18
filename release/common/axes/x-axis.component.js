@@ -51,6 +51,7 @@ var XAxisComponent = (function () {
         'showLabel': [{ type: core_1.Input },],
         'labelText': [{ type: core_1.Input },],
         'xAxisTickInterval': [{ type: core_1.Input },],
+        'xAxisTickCount': [{ type: core_1.Input },],
         'dimensionsChanged': [{ type: core_1.Output },],
         'ticksComponent': [{ type: core_1.ViewChild, args: [x_axis_ticks_component_1.XAxisTicksComponent,] },],
     };

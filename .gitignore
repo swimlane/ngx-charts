@@ -6,3 +6,5 @@ dist/
 coverage/
 .idea
 yarn.lock
+/ngx-charts.iml
+ngx-charts.iml

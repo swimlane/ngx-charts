@@ -78,6 +78,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() angleSpan: number = 240;
   @Input() activeEntries: any[] = [];
 
+  // Specify margins
+  @Input() margin: any[];
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -90,13 +93,12 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   colors: ColorHelper;
   transform: string;
-  margin: any[];
 
   outerRadius: number;
   textRadius: number; // max available radius for the text
   resizeScale: number = 1;
   rotation: string = '';
-  textTransform: string = '';
+  textTransform: string = 'scale(1, 1)';
   cornerRadius: number = 10;
   arcs: any[];
   displayValue: string;
@@ -112,15 +114,21 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
     this.zone.run(() => {
       if (!this.showAxis) {
-        this.margin = [10, 20, 10, 20];
+        if (!this.margin) {
+          this.margin = [10, 20, 10, 20];
+        }
       } else {
-        this.margin = [60, 100, 60, 100];
+        if (!this.margin) {
+          this.margin = [60, 100, 60, 100];
+        }
       }
 
       // make the starting angle positive
       if (this.startAngle < 0) {
         this.startAngle = (this.startAngle % 360) + 360;
       }
+
+      this.angleSpan = Math.min(this.angleSpan, 360);
 
       this.dims = calculateViewDimensions({
         width: this.width,
@@ -146,7 +154,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
       this.transform = `translate(${ xOffset }, ${ yOffset })`;
       this.rotation = `rotate(${ this.startAngle })`;
-      this.scaleText();
+      setTimeout(() => this.scaleText(), 50);
     });
   }
 
@@ -232,19 +240,24 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     return value.toLocaleString();
   }
 
-  scaleText(): void {
+  scaleText(repeat: boolean = true): void {
     this.zone.run(() => {
       const { width } = this.textEl.nativeElement.getBoundingClientRect();
-      if (width === 0) return;
-
       const oldScale = this.resizeScale;
-      const availableSpace = this.textRadius;
-      this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+
+      if (width === 0) {
+        this.resizeScale = 1;
+      } else {        
+        const availableSpace = this.textRadius;
+        this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+      }
 
       if (this.resizeScale !== oldScale) {
         this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
         this.cd.markForCheck();
-        setTimeout(() => { this.scaleText(); });
+        if (repeat) {
+          setTimeout(() => this.scaleText(false), 50);
+        }
       }
     });
   }
@@ -258,7 +271,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       scaleType: 'ordinal',
       colors: this.colors,
       domain: this.domain
-    };    
+    };
   }
 
   setColors(): void {

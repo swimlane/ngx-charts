@@ -8,8 +8,8 @@ export declare class XAxisComponent implements OnChanges {
     showLabel: any;
     labelText: any;
     xAxisTickInterval: any;
-    dimensionsChanged: EventEmitter<{}>;
     xAxisTickCount: any;
+    dimensionsChanged: EventEmitter<{}>;
     xAxisClassName: string;
     xOrient: string;
     tickArguments: any;
