@@ -39,6 +39,7 @@ export default {
   selectAll: selection.selectAll,
   scaleBand: scales.scaleBand,
   scaleLinear: scales.scaleLinear,
+  scaleLog: scales.scaleLog,
   scaleOrdinal: scales.scaleOrdinal,
   scalePoint: scales.scalePoint,
   scaleQuantile: scales.scaleQuantile,

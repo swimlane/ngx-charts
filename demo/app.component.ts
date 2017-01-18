@@ -211,6 +211,7 @@ import './demo.scss';
             [gradient]="gradient"
             [xAxis]="showXAxis"
             [yAxis]="showYAxis"
+            [yAxisTransform]="yAxisTransform"
             [showXAxisLabel]="showXAxisLabel"
             [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel"
@@ -570,6 +571,17 @@ import './demo.scss';
             </select>
           </div>
 
+          <div *ngIf="chart.options.includes('yAxisTransform')">
+            <label>Y Axis Transform</label>
+            <select
+              [ngModel]="yAxisTransform"
+              (ngModelChange)="setYAxisTransform($event)">
+              <option *ngFor="let transformType of transformTypes" [value]="transformType">
+                {{transformType}}
+              </option>
+            </select>
+          </div>
+
           <div *ngIf="chart.options.includes('min')">
             <label>Min value:</label><br />
             <input type="number" [(ngModel)]="gaugeMin"><br />
@@ -674,6 +686,11 @@ export class AppComponent implements OnInit {
   yAxisLabel = 'GDP Per Capita';
   showGridLines = true;
 
+  // axis transforms
+  yAxisTransform = 'linear';
+  transformTypes = [
+    'linear', 'log'
+  ];
   // line interpolation
   curveType: string = 'Linear';
   curve = d3.shape.curveLinear;
@@ -893,6 +910,15 @@ export class AppComponent implements OnInit {
     }
     if (curveType === 'Step Before') {
       this.curve = d3.shape.curveStepBefore;
+    }
+  }
+
+  setYAxisTransform(transformType) {
+    if (transformType === 'linear') {
+      this.yAxisTransform = 'linear';
+    }
+    if (transformType === 'log') {
+      this.yAxisTransform = 'log';
     }
   }
 
