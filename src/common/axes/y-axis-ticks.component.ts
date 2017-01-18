@@ -104,7 +104,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   update(): void {
     let scale;
 
-    let sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
+    const sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
     this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 
     scale = this.scale;
@@ -172,7 +172,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   getTicks(): any {
     let ticks;
-    let maxTicks = this.getMaxTicks();
+    const maxTicks = this.getMaxTicks();
 
     if (this.tickValues) {
       ticks = this.tickValues;
@@ -194,7 +194,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   getMaxTicks(): number {
-    let tickHeight = 20;
+    const tickHeight = 20;
     return Math.floor(this.height / tickHeight);
   }
 

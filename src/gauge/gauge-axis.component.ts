@@ -57,22 +57,22 @@ export class GaugeAxisComponent implements OnChanges {
   }
 
   getTicks(): any {
-    let bigTickSegment = this.angleSpan / this.bigSegments;
-    let smallTickSegment = bigTickSegment / (this.smallSegments);
-    let tickLength = 20;
-    let ticks = {
+    const bigTickSegment = this.angleSpan / this.bigSegments;
+    const smallTickSegment = bigTickSegment / (this.smallSegments);
+    const tickLength = 20;
+    const ticks = {
       big: [],
       small: []
     };
 
-    let startDistance = this.radius + 10;
-    let textDist = startDistance + tickLength + 10;
+    const startDistance = this.radius + 10;
+    const textDist = startDistance + tickLength + 10;
 
     for (let i = 0; i <= this.bigSegments; i++) {
-      let angleDeg = i * bigTickSegment;
-      let angle = angleDeg * Math.PI / 180;
+      const angleDeg = i * bigTickSegment;
+      const angle = angleDeg * Math.PI / 180;
 
-      let textAnchor = this.getTextAnchor(angleDeg);
+      const textAnchor = this.getTextAnchor(angleDeg);
 
       let skip = false;
       if (i === 0 && this.angleSpan === 360) {
@@ -95,8 +95,8 @@ export class GaugeAxisComponent implements OnChanges {
       }
 
       for (let j = 1; j <= this.smallSegments; j++) {
-        let smallAngleDeg = angleDeg + j * smallTickSegment;
-        let smallAngle = smallAngleDeg * Math.PI / 180;
+        const smallAngleDeg = angleDeg + j * smallTickSegment;
+        const smallAngle = smallAngleDeg * Math.PI / 180;
 
         ticks.small.push({
           line: this.getTickPath(startDistance, tickLength / 2, smallAngle)
@@ -124,13 +124,13 @@ export class GaugeAxisComponent implements OnChanges {
   }
 
   getTickPath(startDistance, tickLength, angle): any {
-    let y1 = startDistance * Math.sin(angle);
-    let y2 = (startDistance + tickLength) * Math.sin(angle);
-    let x1 = startDistance * Math.cos(angle);
-    let x2 = (startDistance + tickLength) * Math.cos(angle);
+    const y1 = startDistance * Math.sin(angle);
+    const y2 = (startDistance + tickLength) * Math.sin(angle);
+    const x1 = startDistance * Math.cos(angle);
+    const x2 = (startDistance + tickLength) * Math.cos(angle);
 
-    let points = [{x: x1, y: y1}, {x: x2, y: y2}];
-    let line = d3.line().x(d => d.x).y(d => d.y);
+    const points = [{x: x1, y: y1}, {x: x2, y: y2}];
+    const line = d3.line().x(d => d.x).y(d => d.y);
     return line(points);
   }
 

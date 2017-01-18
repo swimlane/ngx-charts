@@ -204,7 +204,7 @@ export class LineChartComponent extends BaseChartComponent {
       this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-      let pageUrl = this.location.path();
+      const pageUrl = this.location.path();
       this.clipPathId = 'clip' + id().toString();
       this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
     });
@@ -435,7 +435,7 @@ export class LineChartComponent extends BaseChartComponent {
 
   deactivateAll() {
     this.activeEntries = [...this.activeEntries];
-    for (let entry of this.activeEntries) {
+    for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });
     }
     this.activeEntries = [];

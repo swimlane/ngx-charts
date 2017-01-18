@@ -45,12 +45,12 @@ describe('<ngx-charts-chart>', () => {
 
     it('should set the svg width and height', async(() => {
       TestBed.compileComponents().then(() => {
-        let fixture = TestBed.createComponent(TestComponent);
+        const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        let compiled = fixture.debugElement.nativeElement;
+        const compiled = fixture.debugElement.nativeElement;
 
-        let svg = compiled.querySelectorAll('svg')[0];
+        const svg = compiled.querySelectorAll('svg')[0];
         expect(d3.select(svg).attr('width')).toEqual('400');
         expect(d3.select(svg).attr('height')).toEqual('800');
       });
@@ -58,14 +58,14 @@ describe('<ngx-charts-chart>', () => {
 
     it('should correctly project the inner content', async((done) => {
       TestBed.compileComponents().then(() => {
-        let fixture = TestBed.createComponent(TestComponent);
+        const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        let compiled = fixture.debugElement.nativeElement;
+        const compiled = fixture.debugElement.nativeElement;
 
-        let svg = d3.select(compiled.querySelectorAll('svg')[0]);
+        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
 
-        let textNode = svg.select('p');
+        const textNode = svg.select('p');
         expect(textNode.text()).toEqual('ngx-charts is cool!');
 
       });

@@ -49,13 +49,13 @@ export class ColorHelper {
 
   getColor(value) {
     if (this.scaleType === 'linear') {
-      let valueScale = d3.scaleLinear()
+      const valueScale = d3.scaleLinear()
         .domain(this.domain)
         .range([0, 1]);
 
       return (this.scale(valueScale(value)));
     } else {
-      let formattedValue = value.toString();
+      const formattedValue = value.toString();
       let found: any = undefined; // todo type customColors
       if (this.customColors && this.customColors.length > 0) {
         found = this.customColors.find((mapping) => {
@@ -76,24 +76,24 @@ export class ColorHelper {
       start = this.domain[0];
     }
 
-    let valueScale = d3.scaleLinear()
+    const valueScale = d3.scaleLinear()
       .domain(this.domain)
       .range([0, 1]);
 
-    let colorValueScale = d3.scaleBand()
+    const colorValueScale = d3.scaleBand()
       .domain(this.colorDomain)
       .range([0, 1]);
 
-    let endColor = this.getColor(value);
+    const endColor = this.getColor(value);
 
     // generate the stops
-    let startVal = valueScale(start);
-    let startColor = this.getColor(start);
+    const startVal = valueScale(start);
+    const startColor = this.getColor(start);
 
-    let endVal = valueScale(value);
+    const endVal = valueScale(value);
     let i = 0;
     let currentVal = startVal;
-    let stops = [];
+    const stops = [];
     stops.push({
       color: startColor,
       offset: 0,
@@ -101,8 +101,8 @@ export class ColorHelper {
     });
 
     while (currentVal < endVal && i < this.colorDomain.length) {
-      let color = this.colorDomain[i];
-      let offset = colorValueScale(color);
+      const color = this.colorDomain[i];
+      const offset = colorValueScale(color);
       if (offset <= startVal) {
         i++;
         continue;
@@ -127,7 +127,7 @@ export class ColorHelper {
     });
 
     // normalize the offsets into percentages
-    for (let s of stops) {
+    for (const s of stops) {
       s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
     }
 

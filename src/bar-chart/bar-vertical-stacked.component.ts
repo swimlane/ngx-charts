@@ -144,8 +144,8 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   getGroupDomain() {
-    let domain = [];
-    for (let group of this.results) {
+    const domain = [];
+    for (const group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
       }
@@ -155,9 +155,9 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   getInnerDomain() {
-    let domain = [];
-    for (let group of this.results) {
-      for (let d of group.series) {
+    const domain = [];
+    for (const group of this.results) {
+      for (const d of group.series) {
         if (!domain.includes(d.name)) {
           domain.push(d.name);
         }
@@ -168,23 +168,23 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   getValueDomain() {
-    let domain = [];
-    for (let group of this.results) {
+    const domain = [];
+    for (const group of this.results) {
       let sum = 0;
-      for (let d of group.series) {
+      for (const d of group.series) {
         sum += d.value;
       }
 
       domain.push(sum);
     }
 
-    let min = Math.min(0, ...domain);
-    let max = Math.max(...domain);
+    const min = Math.min(0, ...domain);
+    const max = Math.max(...domain);
     return [min, max];
   }
 
   getXScale() {
-    let spacing = 0.1;
+    const spacing = 0.1;
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
@@ -225,7 +225,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   getLegendOptions() {
-    let opts = {
+    const opts = {
       scaleType: this.schemeType,
       colors: undefined,
       domain: []
@@ -252,7 +252,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   onActivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
@@ -269,7 +269,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   onDeactivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }

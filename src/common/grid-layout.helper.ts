@@ -2,11 +2,11 @@ import d3 from '../d3';
 
 export function gridLayout(dims, data, minWidth) {
   let rows = 1;
-  let xScale: any = d3.scaleBand();
-  let yScale: any = d3.scaleBand();
+  const xScale: any = d3.scaleBand();
+  const yScale: any = d3.scaleBand();
   let dataLength = data.length;
-  let width = dims.width;
-  let height = dims.height;
+  const width = dims.width;
+  const height = dims.height;
 
   if (width > minWidth) {
     while (width / dataLength < minWidth) {
@@ -15,10 +15,10 @@ export function gridLayout(dims, data, minWidth) {
     }
   }
 
-  let columns = dataLength;
+  const columns = dataLength;
 
-  let xDomain = [];
-  let yDomain = [];
+  const xDomain = [];
+  const yDomain = [];
   for (let i = 0; i < rows; i++) {
     yDomain.push(i);
   }
@@ -31,10 +31,10 @@ export function gridLayout(dims, data, minWidth) {
   xScale.rangeRound([0, width], 0.1);
   yScale.rangeRound([0, height], 0.1);
 
-  let res = [];
-  let total = getTotal(data);
-  let cardWidth = xScale.bandwidth();
-  let cardHeight = yScale.bandwidth();
+  const res = [];
+  const total = getTotal(data);
+  const cardWidth = xScale.bandwidth();
+  const cardHeight = yScale.bandwidth();
 
   for (let i = 0; i < data.length; i++) {
     res[i] = {};

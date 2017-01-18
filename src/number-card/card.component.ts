@@ -144,13 +144,13 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   scaleText(): void {
     this.zone.run(() => {
-      let { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+      const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
       if (width === 0 || height === 0) {
         return;
       }
 
-      let availableWidth = this.cardWidth * 0.85;
-      let availableHeight = this.cardHeight * 0.60;
+      const availableWidth = this.cardWidth * 0.85;
+      const availableHeight = this.cardHeight * 0.60;
 
       if (!this.originalWidthRatio) {
         this.originalWidthRatio = availableWidth / width;
@@ -162,8 +162,8 @@ export class CardComponent implements OnChanges, OnDestroy {
         this.originalHeight = availableHeight;
       }
 
-      let newWidthRatio = (availableWidth / this.originalWidth) * this.originalWidthRatio;
-      let newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
+      const newWidthRatio = (availableWidth / this.originalWidth) * this.originalWidthRatio;
+      const newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
 
       this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
 

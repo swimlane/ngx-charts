@@ -121,7 +121,7 @@ export class AreaTooltip implements OnChanges {
   }
 
   getValues(xVal): any[] {
-    let results = [];
+    const results = [];
 
     for (const group of this.results) {
       const item = group.series.find(d => d.name.toString() === xVal.toString());

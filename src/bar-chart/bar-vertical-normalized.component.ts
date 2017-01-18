@@ -143,8 +143,8 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   getGroupDomain() {
-    let domain = [];
-    for (let group of this.results) {
+    const domain = [];
+    for (const group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
       }
@@ -154,9 +154,9 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   getInnerDomain() {
-    let domain = [];
-    for (let group of this.results) {
-      for (let d of group.series) {
+    const domain = [];
+    for (const group of this.results) {
+      for (const d of group.series) {
         if (!domain.includes(d.name)) {
           domain.push(d.name);
         }
@@ -171,7 +171,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   getXScale() {
-    let spacing = 0.1;
+    const spacing = 0.1;
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
@@ -211,7 +211,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   getLegendOptions() {
-    let opts = {
+    const opts = {
       scaleType: this.schemeType,
       colors: undefined,
       domain: []
@@ -238,7 +238,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   onActivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
@@ -255,7 +255,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   onDeactivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }

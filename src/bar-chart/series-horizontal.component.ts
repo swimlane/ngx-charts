@@ -84,11 +84,11 @@ export class SeriesHorizontal implements OnChanges {
 
     this.bars = this.series.map((d, index) => {
       let value = d.value;
-      let label = d.name;
+      const label = d.name;
       const formattedLabel = formatLabel(label);
       const roundEdges = this.type === 'standard';
 
-      let bar: any = {
+      const bar: any = {
         value,
         label,
         roundEdges,
@@ -107,8 +107,8 @@ export class SeriesHorizontal implements OnChanges {
         }
         bar.y = this.yScale(label);
       } else if (this.type === 'stacked') {
-        let offset0 = d0;
-        let offset1 = offset0 + value;
+        const offset0 = d0;
+        const offset1 = offset0 + value;
         d0 += value;
 
         bar.width = this.xScale(offset1) - this.xScale(offset0);
@@ -165,7 +165,7 @@ export class SeriesHorizontal implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;

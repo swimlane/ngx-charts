@@ -143,9 +143,9 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   getGroupDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
+    for (const group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
       }
@@ -155,10 +155,10 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   getInnerDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
-      for (let d of group.series) {
+    for (const group of this.results) {
+      for (const d of group.series) {
         if (!domain.includes(d.name)) {
           domain.push(d.name);
         }
@@ -169,11 +169,11 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   getValueDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
+    for (const group of this.results) {
       let sum = 0;
-      for (let d of group.series) {
+      for (const d of group.series) {
         sum += d.value;
       }
 
@@ -230,7 +230,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   getLegendOptions() {
-    let opts = {
+    const opts = {
       scaleType: this.schemeType,
       colors: undefined,
       domain: []
@@ -257,7 +257,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   onActivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
@@ -274,7 +274,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   onDeactivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }

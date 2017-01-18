@@ -78,8 +78,8 @@ export class PieChartComponent extends BaseChartComponent {
         columns: 10
       });
 
-      let xOffset = this.margin[3] + this.dims.width / 2;
-      let yOffset = this.margin[0] + this.dims.height / 2;
+      const xOffset = this.margin[3] + this.dims.width / 2;
+      const yOffset = this.margin[0] + this.dims.height / 2;
       this.translation = `translate(${xOffset}, ${yOffset})`;
       this.outerRadius = Math.min(this.dims.width, this.dims.height);
       if (this.labels) {
@@ -106,7 +106,7 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    let items = [];
+    const items = [];
 
     this.results.map(d => {
       let label = d.name;

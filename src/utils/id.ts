@@ -1,4 +1,4 @@
-let cache = {};
+const cache = {};
 
 /**
  * Generates a short id.

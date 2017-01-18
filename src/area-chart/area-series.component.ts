@@ -60,7 +60,7 @@ export class AreaSeriesComponent implements OnChanges {
     let area;
     let startingArea;
 
-    let xProperty = (d) => {
+    const xProperty = (d) => {
       const label = d.name;
       return this.xScale(label);
     };
@@ -109,14 +109,14 @@ export class AreaSeriesComponent implements OnChanges {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
       if (this.stacked || this.normalized) {        
-        let d0values = this.data.series.map(d => d.d0);
-        let d1values = this.data.series.map(d => d.d1);
-        let max = Math.max(...d1values);
-        let min = Math.min(...d0values);
+        const d0values = this.data.series.map(d => d.d0);
+        const d1values = this.data.series.map(d => d.d1);
+        const max = Math.max(...d1values);
+        const min = Math.min(...d0values);
         this.gradientStops = this.colors.getLinearGradientStops(max, min);
       } else {
-        let values = this.data.series.map(d => d.value);
-        let max = Math.max(...values);
+        const values = this.data.series.map(d => d.value);
+        const max = Math.max(...values);
         this.gradientStops = this.colors.getLinearGradientStops(max);
       }
     } else {
@@ -127,7 +127,7 @@ export class AreaSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item !== undefined;
@@ -135,7 +135,7 @@ export class AreaSeriesComponent implements OnChanges {
 
   isInactive(entry): boolean {
     if(!this.activeEntries || this.activeEntries.length === 0) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item === undefined;

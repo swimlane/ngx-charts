@@ -51,13 +51,13 @@ export class HeatCellSeriesComponent implements OnChanges {
   }
 
   getCells() {
-    let cells = [];
+    const cells = [];
 
     this.data.map((row) => {
       row.series.map((cell) => {
-        let value = cell.value;
+        const value = cell.value;
 
-        let label = cell.name;
+        const label = cell.name;
         let tooltipLabel = label;
         if (tooltipLabel.constructor.name === 'Date') {
           tooltipLabel = tooltipLabel.toLocaleDateString();

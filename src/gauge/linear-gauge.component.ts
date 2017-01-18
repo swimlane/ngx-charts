@@ -148,8 +148,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
 
       this.setColors();
  
-      let xOffset = this.margin[3] + this.dims.width / 2;
-      let yOffset = this.margin[0] + this.dims.height / 2;
+      const xOffset = this.margin[3] + this.dims.width / 2;
+      const yOffset = this.margin[0] + this.dims.height / 2;
 
       this.transform = `translate(${ xOffset }, ${ yOffset })`;
       this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
@@ -191,8 +191,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
       const oldScale = resizeScale;
       const availableWidth = this.dims.width;
       const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-      let resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-      let resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+      const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+      const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
       resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
       
       if (resizeScale !== oldScale) {
