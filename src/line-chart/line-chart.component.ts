@@ -6,12 +6,12 @@ import {
   HostListener,
   ChangeDetectionStrategy
 } from '@angular/core';
+import parseDate = require('date-fns/parse');
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
 import d3 from '../d3';
-import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-charts-line-chart',
@@ -240,7 +240,7 @@ export class LineChartComponent extends BaseChartComponent {
     let domain = [];
 
     if (this.scaleType === 'time') {
-      values = values.map(v => moment(v).toDate());
+      values = values.map(v => parseDate(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
