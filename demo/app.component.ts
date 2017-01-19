@@ -646,7 +646,7 @@ import './demo.scss';
         </div>
       </div>
     </main>
-  ^`
+  `
 })
 export class AppComponent implements OnInit {
 
