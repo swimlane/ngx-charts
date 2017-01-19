@@ -535,22 +535,22 @@ import './demo.scss';
               Show Labels
             </label> <br />
           </div>
-          <div *ngIf="chart.options.includes('explodeSlices')">
-            <label>
-              <input type="checkbox" [checked]="explodeSlices" (change)="explodeSlices = $event.target.checked">
-              Explode Slices
-            </label> <br />
-          </div>
           <div *ngIf="chart.options.includes('doughnut')">
             <label>
               <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked">
               Doughnut
             </label> <br />
           </div>
-          <div *ngIf="chart.options.includes('arcWidth')">
+          <div *ngIf="chart.options.includes('arcWidth') && doughnut">
             <label>Arc width (fraction of radius):</label><br />
             <input type="number" [disabled]="!doughnut" [(ngModel)]="arcWidth"
               max="1" min="0" step="0.01"><br />
+          </div>
+          <div *ngIf="chart.options.includes('explodeSlices') && !doughnut">
+            <label>
+              <input type="checkbox" [checked]="explodeSlices" (change)="explodeSlices = $event.target.checked">
+              Explode Slices
+            </label> <br />
           </div>
           <div *ngIf="chart.options.includes('autoScale')">
             <label>
@@ -651,7 +651,7 @@ import './demo.scss';
 export class AppComponent implements OnInit {
 
   theme = 'dark';
-  chartType = 'line-chart';
+  chartType = 'bar-vertical';
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;
