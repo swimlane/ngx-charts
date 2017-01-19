@@ -14,13 +14,14 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '../../../src/common/svg-linear-gradient.component';
-import * as import10 from '../common/svg-linear-gradient.component.ngfactory';
-import * as import11 from '../../../src/common/area.component';
-import * as import12 from '../common/area.component.ngfactory';
-import * as import13 from '../../../src/line-chart/line.component';
-import * as import14 from './line.component.ngfactory';
-import * as import15 from '@angular/core/src/linker/element_ref';
+import * as import9 from '@angular/common/src/location/location';
+import * as import10 from '../../../src/common/svg-linear-gradient.component';
+import * as import11 from '../common/svg-linear-gradient.component.ngfactory';
+import * as import12 from '../../../src/common/area.component';
+import * as import13 from '../common/area.component.ngfactory';
+import * as import14 from '../../../src/line-chart/line.component';
+import * as import15 from './line.component.ngfactory';
+import * as import16 from '@angular/core/src/linker/element_ref';
 export class Wrapper_LineSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.LineSeriesComponent;
@@ -33,10 +34,11 @@ export class Wrapper_LineSeriesComponent {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
-  constructor() {
+  /*private*/ _expr_7:any;
+  constructor(p0:any) {
     this._changed = false;
     this._changes = {};
-    this.context = new import0.LineSeriesComponent();
+    this.context = new import0.LineSeriesComponent(p0);
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
@@ -44,6 +46,7 @@ export class Wrapper_LineSeriesComponent {
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
+    this._expr_7 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -105,6 +108,14 @@ export class Wrapper_LineSeriesComponent {
       this._expr_6 = currValue;
     }
   }
+  check_rangeFillOpacity(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_7,currValue))) {
+      this._changed = true;
+      this.context.rangeFillOpacity = currValue;
+      this._changes['rangeFillOpacity'] = new import1.SimpleChange(this._expr_7,currValue);
+      this._expr_7 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -135,7 +146,7 @@ class View_LineSeriesComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-line-series',''),rootSelector,(null as any));
     this.compView_0 = new View_LineSeriesComponent0(this.viewUtils,this,0,this._el_0);
-    this._LineSeriesComponent_0_3 = new Wrapper_LineSeriesComponent();
+    this._LineSeriesComponent_0_3 = new Wrapper_LineSeriesComponent(this.injectorGet(import9.Location,this.parentIndex));
     this.compView_0.create(this._LineSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._LineSeriesComponent_0_3.context);
@@ -165,29 +176,37 @@ export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSerie
   _el_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import9.SvgLinearGradientComponent>;
-  _SvgLinearGradientComponent_5_3:import10.Wrapper_SvgLinearGradientComponent;
+  compView_5:import2.AppView<import10.SvgLinearGradientComponent>;
+  _SvgLinearGradientComponent_5_3:import11.Wrapper_SvgLinearGradientComponent;
   _text_6:any;
   _text_7:any;
   _el_8:any;
-  compView_8:import2.AppView<import11.AreaComponent>;
-  _AreaComponent_8_3:import12.Wrapper_AreaComponent;
+  compView_8:import2.AppView<import12.AreaComponent>;
+  _AreaComponent_8_3:import13.Wrapper_AreaComponent;
   _text_9:any;
   _el_10:any;
-  compView_10:import2.AppView<import13.LineComponent>;
-  _LineComponent_10_3:import14.Wrapper_LineComponent;
+  compView_10:import2.AppView<import14.LineComponent>;
+  _LineComponent_10_3:import15.Wrapper_LineComponent;
   _text_11:any;
-  _text_12:any;
-  /*private*/ _expr_19:any;
-  /*private*/ _expr_20:any;
-  /*private*/ _expr_21:any;
-  /*private*/ _expr_22:any;
+  _el_12:any;
+  compView_12:import2.AppView<import12.AreaComponent>;
+  _AreaComponent_12_3:import13.Wrapper_AreaComponent;
+  _text_13:any;
+  _text_14:any;
+  /*private*/ _expr_23:any;
+  /*private*/ _expr_24:any;
+  /*private*/ _expr_25:any;
+  /*private*/ _expr_26:any;
+  /*private*/ _expr_27:any;
+  /*private*/ _expr_28:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_LineSeriesComponent0,renderType_LineSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
-    this._expr_19 = import1.UNINITIALIZED;
-    this._expr_20 = import1.UNINITIALIZED;
-    this._expr_21 = import1.UNINITIALIZED;
-    this._expr_22 = import1.UNINITIALIZED;
+    this._expr_23 = import1.UNINITIALIZED;
+    this._expr_24 = import1.UNINITIALIZED;
+    this._expr_25 = import1.UNINITIALIZED;
+    this._expr_26 = import1.UNINITIALIZED;
+    this._expr_27 = import1.UNINITIALIZED;
+    this._expr_28 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -197,22 +216,27 @@ export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSerie
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,':svg:defs',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray8(6,'ng-if','hasGradient','ngx-charts-svg-linear-gradient','','orientation','vertical'),(null as any));
-    this.compView_5 = new import10.View_SvgLinearGradientComponent0(this.viewUtils,this,5,this._el_5);
-    this._SvgLinearGradientComponent_5_3 = new import10.Wrapper_SvgLinearGradientComponent();
+    this.compView_5 = new import11.View_SvgLinearGradientComponent0(this.viewUtils,this,5,this._el_5);
+    this._SvgLinearGradientComponent_5_3 = new import11.Wrapper_SvgLinearGradientComponent();
     this.compView_5.create(this._SvgLinearGradientComponent_5_3.context);
     this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_7 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_8 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray4(4,'class','line-highlight','ngx-charts-area',''),(null as any));
-    this.compView_8 = new import12.View_AreaComponent0(this.viewUtils,this,8,this._el_8);
-    this._AreaComponent_8_3 = new import12.Wrapper_AreaComponent(new import15.ElementRef(this._el_8));
+    this.compView_8 = new import13.View_AreaComponent0(this.viewUtils,this,8,this._el_8);
+    this._AreaComponent_8_3 = new import13.Wrapper_AreaComponent(new import16.ElementRef(this._el_8),this.parentView.injectorGet(import9.Location,this.parentIndex));
     this.compView_8.create(this._AreaComponent_8_3.context);
     this._text_9 = this.renderer.createText(this._el_1,'    \n      ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray4(4,'class','line-series','ngx-charts-line',''),(null as any));
-    this.compView_10 = new import14.View_LineComponent0(this.viewUtils,this,10,this._el_10);
-    this._LineComponent_10_3 = new import14.Wrapper_LineComponent(new import15.ElementRef(this._el_10));
+    this.compView_10 = new import15.View_LineComponent0(this.viewUtils,this,10,this._el_10);
+    this._LineComponent_10_3 = new import15.Wrapper_LineComponent(new import16.ElementRef(this._el_10));
     this.compView_10.create(this._LineComponent_10_3.context);
-    this._text_11 = this.renderer.createText(this._el_1,'\n    ',(null as any));
-    this._text_12 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this._text_11 = this.renderer.createText(this._el_1,'\n     ',(null as any));
+    this._el_12 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray4(4,'class','line-series-range','ngx-charts-area',''),(null as any));
+    this.compView_12 = new import13.View_AreaComponent0(this.viewUtils,this,12,this._el_12);
+    this._AreaComponent_12_3 = new import13.Wrapper_AreaComponent(new import16.ElementRef(this._el_12),this.parentView.injectorGet(import9.Location,this.parentIndex));
+    this.compView_12.create(this._AreaComponent_12_3.context);
+    this._text_13 = this.renderer.createText(this._el_1,'\n    ',(null as any));
+    this._text_14 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -226,15 +250,18 @@ export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSerie
       this._text_9,
       this._el_10,
       this._text_11,
-      this._text_12
+      this._el_12,
+      this._text_13,
+      this._text_14
     ]
     ),(null as any));
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import9.SvgLinearGradientComponent) && (5 === requestNodeIndex))) { return this._SvgLinearGradientComponent_5_3.context; }
-    if (((token === import11.AreaComponent) && (8 === requestNodeIndex))) { return this._AreaComponent_8_3.context; }
-    if (((token === import13.LineComponent) && (10 === requestNodeIndex))) { return this._LineComponent_10_3.context; }
+    if (((token === import10.SvgLinearGradientComponent) && (5 === requestNodeIndex))) { return this._SvgLinearGradientComponent_5_3.context; }
+    if (((token === import12.AreaComponent) && (8 === requestNodeIndex))) { return this._AreaComponent_8_3.context; }
+    if (((token === import14.LineComponent) && (10 === requestNodeIndex))) { return this._LineComponent_10_3.context; }
+    if (((token === import12.AreaComponent) && (12 === requestNodeIndex))) { return this._AreaComponent_12_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -269,35 +296,57 @@ export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSerie
     const currVal_10_0_2:any = this.context.data;
     this._LineComponent_10_3.check_data(currVal_10_0_2,throwOnChange,false);
     if (this._LineComponent_10_3.ngDoCheck(this,this._el_10,throwOnChange)) { this.compView_10.markAsCheckOnce(); }
-    const currVal_19:any = this.context.isActive(this.context.data);
-    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
-      this.renderer.setElementClass(this._el_8,'active',currVal_19);
-      this._expr_19 = currVal_19;
+    const currVal_12_0_0:any = this.context.data;
+    this._AreaComponent_12_3.check_data(currVal_12_0_0,throwOnChange,false);
+    const currVal_12_0_1:any = this.context.outerPath;
+    this._AreaComponent_12_3.check_path(currVal_12_0_1,throwOnChange,false);
+    const currVal_12_0_2:any = (this.context.hasGradient? this.context.gradientUrl: this.context.colors.getColor(this.context.data.name));
+    this._AreaComponent_12_3.check_fill(currVal_12_0_2,throwOnChange,false);
+    const currVal_12_0_3:any = this.context.rangeFillOpacity;
+    this._AreaComponent_12_3.check_opacity(currVal_12_0_3,throwOnChange,false);
+    if (this._AreaComponent_12_3.ngDoCheck(this,this._el_12,throwOnChange)) { this.compView_12.markAsCheckOnce(); }
+    const currVal_23:any = this.context.isActive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
+      this.renderer.setElementClass(this._el_8,'active',currVal_23);
+      this._expr_23 = currVal_23;
     }
-    const currVal_20:any = this.context.isInactive(this.context.data);
-    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
-      this.renderer.setElementClass(this._el_8,'inactive',currVal_20);
-      this._expr_20 = currVal_20;
+    const currVal_24:any = this.context.isInactive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_24,currVal_24)) {
+      this.renderer.setElementClass(this._el_8,'inactive',currVal_24);
+      this._expr_24 = currVal_24;
     }
-    const currVal_21:any = this.context.isActive(this.context.data);
-    if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
-      this.renderer.setElementClass(this._el_10,'active',currVal_21);
-      this._expr_21 = currVal_21;
+    const currVal_25:any = this.context.isActive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_25,currVal_25)) {
+      this.renderer.setElementClass(this._el_10,'active',currVal_25);
+      this._expr_25 = currVal_25;
     }
-    const currVal_22:any = this.context.isInactive(this.context.data);
-    if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
-      this.renderer.setElementClass(this._el_10,'inactive',currVal_22);
-      this._expr_22 = currVal_22;
+    const currVal_26:any = this.context.isInactive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_26,currVal_26)) {
+      this.renderer.setElementClass(this._el_10,'inactive',currVal_26);
+      this._expr_26 = currVal_26;
+    }
+    const currVal_27:any = this.context.isActive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_27,currVal_27)) {
+      this.renderer.setElementClass(this._el_12,'active',currVal_27);
+      this._expr_27 = currVal_27;
+    }
+    const currVal_28:any = this.context.isInactive(this.context.data);
+    if (import3.checkBinding(throwOnChange,this._expr_28,currVal_28)) {
+      this.renderer.setElementClass(this._el_12,'inactive',currVal_28);
+      this._expr_28 = currVal_28;
     }
     this.compView_5.internalDetectChanges(throwOnChange);
     this.compView_8.internalDetectChanges(throwOnChange);
     this.compView_10.internalDetectChanges(throwOnChange);
+    this.compView_12.internalDetectChanges(throwOnChange);
   }
   destroyInternal():void {
     this.compView_5.destroy();
     this.compView_8.destroy();
     this.compView_10.destroy();
+    this.compView_12.destroy();
     this._AreaComponent_8_3.ngOnDestroy();
     this._LineComponent_10_3.ngOnDestroy();
+    this._AreaComponent_12_3.ngOnDestroy();
   }
 }

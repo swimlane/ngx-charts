@@ -1,9 +1,11 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var id_1 = require('../utils/id');
 var d3_1 = require('../d3');
 var BarComponent = (function () {
-    function BarComponent(element) {
+    function BarComponent(element, location) {
+        this.location = location;
         this.roundEdges = true;
         this.gradient = false;
         this.offset = 0;
@@ -25,7 +27,7 @@ var BarComponent = (function () {
         }
     };
     BarComponent.prototype.update = function () {
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         if (this.gradient || this.stops) {
@@ -173,6 +175,7 @@ var BarComponent = (function () {
     /** @nocollapse */
     BarComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
+        { type: common_1.Location, },
     ]; };
     BarComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],

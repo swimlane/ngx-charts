@@ -28,13 +28,13 @@ export abstract class InjectionRegistery {
   }
 
   destroy(instance): void {
-    let compsByType = this.components.get(instance.componentType);
+    const compsByType = this.components.get(instance.componentType);
 
     if(compsByType) {
       const idx = compsByType.indexOf(instance);
 
       if(idx > -1) {
-        let component = compsByType[idx];
+        const component = compsByType[idx];
         component.destroy();
         compsByType.splice(idx, 1);
       }
@@ -46,10 +46,10 @@ export abstract class InjectionRegistery {
   }
 
   destroyByType(type): void {
-    let comps = this.components.get(type);
+    const comps = this.components.get(type);
 
     if(comps) {
-      for(let comp of comps) {
+      for(const comp of comps) {
         this.destroy(comp);
       }
     }
@@ -82,7 +82,7 @@ export abstract class InjectionRegistery {
       this.components.set(type, []);
     }
 
-    let types = this.components.get(type);
+    const types = this.components.get(type);
     types.push(component);
   }
 

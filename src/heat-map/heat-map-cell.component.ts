@@ -8,6 +8,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { id } from '../utils/id';
 import d3 from '../d3';
 
@@ -20,7 +21,7 @@ import d3 from '../d3';
           [color]="fill"
           orientation="vertical"
           [name]="gradientId"
-          [stops]="circle.gradientStops"
+          [stops]="gradientStops"
         />
       </defs>
       <svg:rect
@@ -57,13 +58,14 @@ export class HeatMapCellComponent implements OnChanges {
   gradientUrl: string;
   gradientStops: any[];
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private location: Location) {
     this.element = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.transform = `translate(${this.x} , ${this.y})`;
-    let pageUrl = window.location.href;
+    const pageUrl = this.location.path();
+
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
@@ -87,13 +89,13 @@ export class HeatMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    let node = d3.select(this.element).select('.cell');
+    const node = d3.select(this.element).select('.cell');
     node.attr('opacity', 0);
     this.animateToCurrentForm();
   }
 
   animateToCurrentForm(): void {
-    let node = d3.select(this.element).select('.cell');
+    const node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1);

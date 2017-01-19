@@ -17,6 +17,7 @@ export declare class LineChartComponent extends BaseChartComponent {
     curve: any;
     activeEntries: any[];
     schemeType: string;
+    rangeFillOpacity: number;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;
@@ -74,4 +75,5 @@ export declare class LineChartComponent extends BaseChartComponent {
     }): void;
     onActivate(item: any): void;
     onDeactivate(item: any): void;
+    deactivateAll(): void;
 }

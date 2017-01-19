@@ -20,4 +20,5 @@ export declare class AreaTooltip implements OnChanges {
     getUniqueValues(array: any): any[];
     showTooltip(index: any): void;
     hideTooltip(index: any): void;
+    getToolTipText(tooltipItem: any): string;
 }

@@ -8,6 +8,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { Location } from '@angular/common';
 import d3 from '../d3';
 import { id } from '../utils/id';
 
@@ -66,7 +67,7 @@ export class PieArcComponent implements OnChanges {
   gradientFill: string;
   initialized: boolean = false;
 
-  constructor(element: ElementRef) {
+  constructor(element: ElementRef, private location: Location) {
     this.element = element.nativeElement;
   }
 
@@ -75,11 +76,11 @@ export class PieArcComponent implements OnChanges {
   }
 
   update(): void {
-    let arc = this.calculateArc();
+    const arc = this.calculateArc();
     this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
     this.startOpacity = 0.5;
 
-    let pageUrl = window.location.href;
+    const pageUrl = this.location.path();
     this.radialGradientId = 'linearGrad' + id().toString();
 
     this.gradientFill = `url(${pageUrl}#${this.radialGradientId})`;
@@ -108,16 +109,19 @@ export class PieArcComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    let node = d3.select(this.element).selectAll('.arc').data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
-    let arc = this.calculateArc();
+    const node = d3.select(this.element)
+      .selectAll('.arc')
+      .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
+
+    const arc = this.calculateArc();
 
     node
       .transition()
       .attrTween('d', function(d) {
         this._current = this._current || d;
-        let copyOfD = Object.assign({}, d);
+        const copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
-        let interpolate = d3.interpolate(copyOfD, copyOfD);
+        const interpolate = d3.interpolate(copyOfD, copyOfD);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));
@@ -126,7 +130,7 @@ export class PieArcComponent implements OnChanges {
       .transition().duration(750)
       .attrTween('d', function(d) {
         this._current = this._current || d;
-        let interpolate = d3.interpolate(this._current, d);
+        const interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));
@@ -135,14 +139,17 @@ export class PieArcComponent implements OnChanges {
   }
 
   updateAnimation(): void {
-    let node = d3.select(this.element).selectAll('.arc').data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
-    let arc = this.calculateArc();
+    const node = d3.select(this.element)
+      .selectAll('.arc')
+      .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
+
+    const arc = this.calculateArc();
 
     node
       .transition().duration(750)
       .attrTween('d', function(d) {
         this._current = this._current || d;
-        let interpolate = d3.interpolate(this._current, d);
+        const interpolate = d3.interpolate(this._current, d);
         this._current = interpolate(0);
         return function(t) {
           return arc(interpolate(t));

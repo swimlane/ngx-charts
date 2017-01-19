@@ -4,7 +4,11 @@ import {
   ElementRef,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  trigger,
+  style,
+  transition,
+  animate
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import d3 from '../d3';
@@ -14,6 +18,7 @@ import d3 from '../d3';
   template: `
     <title>{{label}}</title>
     <svg:text
+      [@animationState]="'active'"
       class="pie-label"
       [attr.transform]="transform"
       dy=".35em"
@@ -23,6 +28,7 @@ import d3 from '../d3';
       {{trimLabel(label, 10)}}
     </svg:text>
     <svg:path
+      [@animationState]="'active'"
       [attr.d]="line"
       [attr.stroke]="color"
       fill="none"
@@ -32,6 +38,16 @@ import d3 from '../d3';
     </svg:path>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate('0.25s 1s', style({opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class PieLabelComponent implements OnChanges {
 
@@ -61,7 +77,7 @@ export class PieLabelComponent implements OnChanges {
   update(): void {
     const factor = 1.5;
 
-    let outerArc = d3.arc()
+    const outerArc = d3.arc()
       .innerRadius(this.radius * factor)
       .outerRadius(this.radius * factor);
 
@@ -70,7 +86,7 @@ export class PieLabelComponent implements OnChanges {
       startRadius = this.radius * this.value / this.max;
     }
 
-    let innerArc = d3.arc()
+    const innerArc = d3.arc()
       .innerRadius(startRadius)
       .outerRadius(startRadius);
 
@@ -93,8 +109,8 @@ export class PieLabelComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    let label = d3.select(this.element).select('.label');
-    let line = d3.select(this.element).select('.line');
+    const label = d3.select(this.element).select('.label');
+    const line = d3.select(this.element).select('.line');
 
     label
       .attr('opacity', 0)

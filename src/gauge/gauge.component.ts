@@ -78,6 +78,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() angleSpan: number = 240;
   @Input() activeEntries: any[] = [];
 
+  // Specify margins
+  @Input() margin: any[];
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -90,13 +93,12 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   colors: ColorHelper;
   transform: string;
-  margin: any[];
 
   outerRadius: number;
   textRadius: number; // max available radius for the text
   resizeScale: number = 1;
   rotation: string = '';
-  textTransform: string = '';
+  textTransform: string = 'scale(1, 1)';
   cornerRadius: number = 10;
   arcs: any[];
   displayValue: string;
@@ -112,15 +114,21 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
     this.zone.run(() => {
       if (!this.showAxis) {
-        this.margin = [10, 20, 10, 20];
+        if (!this.margin) {
+          this.margin = [10, 20, 10, 20];
+        }
       } else {
-        this.margin = [60, 100, 60, 100];
+        if (!this.margin) {
+          this.margin = [60, 100, 60, 100];
+        }
       }
 
       // make the starting angle positive
       if (this.startAngle < 0) {
         this.startAngle = (this.startAngle % 360) + 360;
       }
+
+      this.angleSpan = Math.min(this.angleSpan, 360);
 
       this.dims = calculateViewDimensions({
         width: this.width,
@@ -141,31 +149,31 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       this.setColors();
       this.legendOptions = this.getLegendOptions();
 
-      let xOffset = this.margin[3] + this.dims.width / 2;
-      let yOffset = this.margin[0] + this.dims.height / 2;
+      const xOffset = this.margin[3] + this.dims.width / 2;
+      const yOffset = this.margin[0] + this.dims.height / 2;
 
       this.transform = `translate(${ xOffset }, ${ yOffset })`;
       this.rotation = `rotate(${ this.startAngle })`;
-      this.scaleText();
+      setTimeout(() => this.scaleText(), 50);
     });
   }
 
   getArcs(): any[] {
-    let arcs = [];
+    const arcs = [];
 
-    let availableRadius = this.outerRadius * 0.7;
+    const availableRadius = this.outerRadius * 0.7;
 
-    let radiusPerArc = Math.min(availableRadius / this.results.length, 10);
-    let arcWidth = radiusPerArc * 0.7;
+    const radiusPerArc = Math.min(availableRadius / this.results.length, 10);
+    const arcWidth = radiusPerArc * 0.7;
     this.textRadius = this.outerRadius - this.results.length * radiusPerArc;
     this.cornerRadius = Math.floor(arcWidth / 2);
 
     let i = 0;
-    for (let d of this.results) {
-      let outerRadius = this.outerRadius - (i * radiusPerArc);
-      let innerRadius = outerRadius - arcWidth;
+    for (const d of this.results) {
+      const outerRadius = this.outerRadius - (i * radiusPerArc);
+      const innerRadius = outerRadius - arcWidth;
 
-      let backgroundArc = {
+      const backgroundArc = {
         endAngle: this.angleSpan * Math.PI / 180,
         innerRadius,
         outerRadius,
@@ -175,7 +183,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
         }
       };
 
-      let valueArc = {
+      const valueArc = {
         endAngle: Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI / 180,
         innerRadius,
         outerRadius,
@@ -185,7 +193,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
         }
       };
 
-      let arc = {
+      const arc = {
         backgroundArc,
         valueArc
       };
@@ -202,9 +210,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getValueDomain(): any[] {
-    let values = this.results.map(d => d.value);
-    let dataMin = Math.min(...values);
-    let dataMax = Math.max(...values);
+    const values = this.results.map(d => d.value);
+    const dataMin = Math.min(...values);
+    const dataMax = Math.max(...values);
 
     if (this.min !== undefined) {
       this.min = Math.min(this.min, dataMin);
@@ -228,23 +236,28 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDisplayValue(): string {
-    let value = this.results.map(d => d.value).reduce((a, b) => { return a + b; }, 0);
+    const value = this.results.map(d => d.value).reduce((a, b) => { return a + b; }, 0);
     return value.toLocaleString();
   }
 
-  scaleText(): void {
+  scaleText(repeat: boolean = true): void {
     this.zone.run(() => {
       const { width } = this.textEl.nativeElement.getBoundingClientRect();
-      if (width === 0) return;
-
       const oldScale = this.resizeScale;
-      const availableSpace = this.textRadius;
-      this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+
+      if (width === 0) {
+        this.resizeScale = 1;
+      } else {        
+        const availableSpace = this.textRadius;
+        this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+      }
 
       if (this.resizeScale !== oldScale) {
         this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
         this.cd.markForCheck();
-        setTimeout(() => { this.scaleText(); });
+        if (repeat) {
+          setTimeout(() => this.scaleText(false), 50);
+        }
       }
     });
   }
@@ -258,7 +271,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       scaleType: 'ordinal',
       colors: this.colors,
       domain: this.domain
-    };    
+    };
   }
 
   setColors(): void {
@@ -290,7 +303,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;

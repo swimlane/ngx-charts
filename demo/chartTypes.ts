@@ -1,4 +1,4 @@
-let chartGroups = [
+const chartGroups = [
   {
     name: 'Bar Charts',
     charts: [
@@ -83,7 +83,10 @@ let chartGroups = [
         name: 'Pie Chart',
         selector: 'pie-chart',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'explodeSlices', 'showLabels']
+        options: [
+          'colorScheme', 'gradient', 'showLegend', 'doughnut', 'arcWidth',
+          'explodeSlices', 'showLabels'
+        ]
       },
       {
         name: 'Advanced Pie Chart',
@@ -109,7 +112,8 @@ let chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+          'rangeFillOpacity'
         ]
       },
       {
@@ -181,7 +185,7 @@ let chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'showLegend', 'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
-          'angleSpan', 'startAngle', 'showAxis'
+          'angleSpan', 'startAngle', 'showAxis', 'margin'
         ]
       },
       {

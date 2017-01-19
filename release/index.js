@@ -1,18 +1,18 @@
 /**
- * ngx-charts v"3.0.5" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"3.1.2" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
+		module.exports = factory(require("d3-force"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("@angular/common"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
 	else if(typeof define === 'function' && define.amd)
-		define("ngx-charts", ["@angular/common", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-color", "d3-force", "d3-format", "d3-hierarchy", "d3-interpolate", "d3-scale", "d3-selection", "d3-shape", "moment", "rxjs/Rx"], factory);
+		define("ngx-charts", ["d3-force", "@angular/core", "@angular/platform-browser", "d3-array", "d3-brush", "d3-color", "@angular/common", "d3-format", "d3-hierarchy", "d3-interpolate", "d3-scale", "d3-selection", "d3-shape", "moment", "rxjs/Rx"], factory);
 	else if(typeof exports === 'object')
-		exports["ngx-charts"] = factory(require("@angular/common"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("d3-force"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
+		exports["ngx-charts"] = factory(require("d3-force"), require("@angular/core"), require("@angular/platform-browser"), require("d3-array"), require("d3-brush"), require("d3-color"), require("@angular/common"), require("d3-format"), require("d3-hierarchy"), require("d3-interpolate"), require("d3-scale"), require("d3-selection"), require("d3-shape"), require("moment"), require("rxjs/Rx"));
 	else
-		root["ngx-charts"] = factory(root["@angular/common"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["d3-force"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs/Rx"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_14__) {
+		root["ngx-charts"] = factory(root["d3-force"], root["@angular/core"], root["@angular/platform-browser"], root["d3-array"], root["d3-brush"], root["d3-color"], root["@angular/common"], root["d3-format"], root["d3-hierarchy"], root["d3-interpolate"], root["d3-scale"], root["d3-selection"], root["d3-shape"], root["moment"], root["rxjs/Rx"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__, __WEBPACK_EXTERNAL_MODULE_10__, __WEBPACK_EXTERNAL_MODULE_11__, __WEBPACK_EXTERNAL_MODULE_12__, __WEBPACK_EXTERNAL_MODULE_13__, __WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_14__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -48,16 +48,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmory imports with the correct context
+/******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
 /******/
-/******/ 	// define getter function for harmory exports
+/******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		Object.defineProperty(exports, name, {
-/******/ 			configurable: false,
-/******/ 			enumerable: true,
-/******/ 			get: getter
-/******/ 		});
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -82,10 +84,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ({
 
 /***/ "./src/area-chart/area-chart-normalized.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -105,7 +107,7 @@ var d3_1 = __webpack_require__("./src/d3.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
-var moment = __webpack_require__(1);
+var moment = __webpack_require__(2);
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var AreaChartNormalizedComponent = (function (_super) {
     __extends(AreaChartNormalizedComponent, _super);
@@ -212,7 +214,7 @@ var AreaChartNormalizedComponent = (function (_super) {
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-            var pageUrl = window.location.href;
+            var pageUrl = _this.location.path();
             _this.clipPathId = 'clip' + id_1.id().toString();
             _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
@@ -324,9 +326,11 @@ var AreaChartNormalizedComponent = (function (_super) {
     };
     AreaChartNormalizedComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartNormalizedComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartNormalizedComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -389,7 +393,15 @@ var AreaChartNormalizedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartNormalizedComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -460,7 +472,7 @@ var AreaChartNormalizedComponent = (function (_super) {
     AreaChartNormalizedComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-area-chart-normalized',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-ceries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -470,13 +482,13 @@ var AreaChartNormalizedComponent = (function (_super) {
 exports.AreaChartNormalizedComponent = AreaChartNormalizedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-chart-stacked.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -495,7 +507,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
-var moment = __webpack_require__(1);
+var moment = __webpack_require__(2);
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var AreaChartStackedComponent = (function (_super) {
@@ -579,7 +591,7 @@ var AreaChartStackedComponent = (function (_super) {
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-            var pageUrl = window.location.href;
+            var pageUrl = _this.location.path();
             _this.clipPathId = 'clip' + id_1.id().toString();
             _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
@@ -719,9 +731,11 @@ var AreaChartStackedComponent = (function (_super) {
     };
     AreaChartStackedComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartStackedComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartStackedComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -784,7 +798,15 @@ var AreaChartStackedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartStackedComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -855,7 +877,7 @@ var AreaChartStackedComponent = (function (_super) {
     AreaChartStackedComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-area-chart-stacked',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [activeEntries]=\"activeEntries\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-circle-ceries\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [activeEntries]=\"activeEntries\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -865,13 +887,13 @@ var AreaChartStackedComponent = (function (_super) {
 exports.AreaChartStackedComponent = AreaChartStackedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -890,7 +912,7 @@ var core_1 = __webpack_require__(0);
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
-var moment = __webpack_require__(1);
+var moment = __webpack_require__(2);
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var AreaChartComponent = (function (_super) {
@@ -940,7 +962,7 @@ var AreaChartComponent = (function (_super) {
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + ", " + _this.margin[0] + ")";
-            var pageUrl = window.location.href;
+            var pageUrl = _this.location.path();
             _this.clipPathId = 'clip' + id_1.id().toString();
             _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
@@ -1067,9 +1089,11 @@ var AreaChartComponent = (function (_super) {
     };
     AreaChartComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     AreaChartComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     AreaChartComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -1132,7 +1156,15 @@ var AreaChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    AreaChartComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -1211,7 +1243,7 @@ var AreaChartComponent = (function (_super) {
     AreaChartComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-area-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-ceries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -1221,13 +1253,13 @@ var AreaChartComponent = (function (_super) {
 exports.AreaChartComponent = AreaChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1273,13 +1305,13 @@ var AreaChartModule = (function () {
 exports.AreaChartModule = AreaChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/area-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1440,13 +1472,13 @@ var AreaSeriesComponent = (function () {
 exports.AreaSeriesComponent = AreaSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/area-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -1457,13 +1489,13 @@ __export(__webpack_require__("./src/area-chart/area-chart-stacked.component.ts")
 __export(__webpack_require__("./src/area-chart/area-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1537,13 +1569,13 @@ var BarChartModule = (function () {
 exports.BarChartModule = BarChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal-2d.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -1735,7 +1767,7 @@ var BarHorizontal2DComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -1813,13 +1845,13 @@ var BarHorizontal2DComponent = (function (_super) {
 exports.BarHorizontal2DComponent = BarHorizontal2DComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal-normalized.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -1990,7 +2022,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -2068,13 +2100,13 @@ var BarHorizontalNormalizedComponent = (function (_super) {
 exports.BarHorizontalNormalizedComponent = BarHorizontalNormalizedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal-stacked.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -2257,7 +2289,7 @@ var BarHorizontalStackedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -2335,13 +2367,13 @@ var BarHorizontalStackedComponent = (function (_super) {
 exports.BarHorizontalStackedComponent = BarHorizontalStackedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-horizontal.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -2476,7 +2508,7 @@ var BarHorizontalComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -2543,13 +2575,13 @@ var BarHorizontalComponent = (function (_super) {
 exports.BarHorizontalComponent = BarHorizontalComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical-2d.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -2742,7 +2774,7 @@ var BarVertical2DComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -2824,13 +2856,13 @@ var BarVertical2DComponent = (function (_super) {
 exports.BarVertical2DComponent = BarVertical2DComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical-normalized.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3001,7 +3033,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -3079,13 +3111,13 @@ var BarVerticalNormalizedComponent = (function (_super) {
 exports.BarVerticalNormalizedComponent = BarVerticalNormalizedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical-stacked.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3268,7 +3300,7 @@ var BarVerticalStackedComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -3346,13 +3378,13 @@ var BarVerticalStackedComponent = (function (_super) {
 exports.BarVerticalStackedComponent = BarVerticalStackedComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar-vertical.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -3487,7 +3519,7 @@ var BarVerticalComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -3554,13 +3586,13 @@ var BarVerticalComponent = (function (_super) {
 exports.BarVerticalComponent = BarVerticalComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/bar.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3571,10 +3603,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var BarComponent = (function () {
-    function BarComponent(element) {
+    function BarComponent(element, location) {
+        this.location = location;
         this.roundEdges = true;
         this.gradient = false;
         this.offset = 0;
@@ -3596,7 +3630,7 @@ var BarComponent = (function () {
         }
     };
     BarComponent.prototype.update = function () {
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         if (this.gradient || this.stops) {
@@ -3812,20 +3846,20 @@ var BarComponent = (function () {
             template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], BarComponent);
     return BarComponent;
 }());
 exports.BarComponent = BarComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -3843,13 +3877,13 @@ __export(__webpack_require__("./src/bar-chart/bar-vertical-stacked.component.ts"
 __export(__webpack_require__("./src/bar-chart/series-vertical.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/series-horizontal.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4037,13 +4071,13 @@ var SeriesHorizontal = (function () {
 exports.SeriesHorizontal = SeriesHorizontal;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/bar-chart/series-vertical.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4238,13 +4272,13 @@ var SeriesVerticalComponent = (function () {
 exports.SeriesVerticalComponent = SeriesVerticalComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/area-tooltip.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4332,6 +4366,8 @@ var AreaTooltip = (function () {
                     value: val,
                     name: label,
                     series: groupName,
+                    min: item.min,
+                    max: item.max,
                     color: color
                 });
             }
@@ -4355,17 +4391,50 @@ var AreaTooltip = (function () {
         return results;
     };
     AreaTooltip.prototype.showTooltip = function (index) {
-        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
         var event = new MouseEvent('mouseenter', { bubbles: false });
         this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
         this.anchorOpacity[index] = 0.7;
         this.hover.emit(this.tooltipAreas[index]);
     };
     AreaTooltip.prototype.hideTooltip = function (index) {
-        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.children[1];
+        var tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
         var event = new MouseEvent('mouseleave', { bubbles: false });
         this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
         this.anchorOpacity[index] = 0;
+    };
+    AreaTooltip.prototype.getToolTipText = function (tooltipItem) {
+        var result = '';
+        if (tooltipItem.series !== undefined) {
+            result += tooltipItem.series;
+        }
+        else {
+            result += '???';
+        }
+        result += ': ';
+        if (tooltipItem.value !== undefined) {
+            result += tooltipItem.value.toLocaleString();
+        }
+        if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
+            result += ' (';
+            if (tooltipItem.min !== undefined) {
+                if (tooltipItem.max === undefined) {
+                    result += '≥';
+                }
+                result += tooltipItem.min.toLocaleString();
+                if (tooltipItem.max !== undefined) {
+                    result += ' - ';
+                }
+            }
+            else if (tooltipItem.max !== undefined) {
+                result += '≤';
+            }
+            if (tooltipItem.max !== undefined) {
+                result += tooltipItem.max.toLocaleString();
+            }
+            result += ')';
+        }
+        return result;
     };
     __decorate([
         core_1.Input(), 
@@ -4406,7 +4475,7 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-area-tooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{tooltipItem.series}}: {{tooltipItem.value.toLocaleString()}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
@@ -4416,13 +4485,13 @@ var AreaTooltip = (function () {
 exports.AreaTooltip = AreaTooltip;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/area.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4433,10 +4502,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var AreaComponent = (function () {
-    function AreaComponent(element) {
+    function AreaComponent(element, location) {
+        this.location = location;
         this.opacity = 1;
         this.startOpacity = 0.5;
         this.endOpacity = 1;
@@ -4456,7 +4527,7 @@ var AreaComponent = (function () {
         }
     };
     AreaComponent.prototype.update = function () {
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         if (this.gradient || this.stops) {
@@ -4543,20 +4614,20 @@ var AreaComponent = (function () {
             template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], AreaComponent);
     return AreaComponent;
 }());
 exports.AreaComponent = AreaComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/axes.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4572,7 +4643,7 @@ var x_axis_component_1 = __webpack_require__("./src/common/axes/x-axis.component
 var x_axis_ticks_component_1 = __webpack_require__("./src/common/axes/x-axis-ticks.component.ts");
 var y_axis_component_1 = __webpack_require__("./src/common/axes/y-axis.component.ts");
 var y_axis_ticks_component_1 = __webpack_require__("./src/common/axes/y-axis-ticks.component.ts");
-var common_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
 var AxesModule = (function () {
     function AxesModule() {
     }
@@ -4589,13 +4660,13 @@ var AxesModule = (function () {
 exports.AxesModule = AxesModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/axis-label.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4674,13 +4745,13 @@ var AxisLabelComponent = (function () {
 exports.AxisLabelComponent = AxisLabelComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/ticks.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function reduceTicks(ticks, maxTicks) {
     if (ticks.length > maxTicks) {
         var reduced = [];
@@ -4697,13 +4768,13 @@ function reduceTicks(ticks, maxTicks) {
 exports.reduceTicks = reduceTicks;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/x-axis-ticks.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4889,13 +4960,13 @@ var XAxisTicksComponent = (function () {
 exports.XAxisTicksComponent = XAxisTicksComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/x-axis.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4969,6 +5040,10 @@ var XAxisComponent = (function () {
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "xAxisTickInterval", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], XAxisComponent.prototype, "xAxisTickCount", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "dimensionsChanged", void 0);
@@ -4989,13 +5064,13 @@ var XAxisComponent = (function () {
 exports.XAxisComponent = XAxisComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/y-axis-ticks.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5195,13 +5270,13 @@ var YAxisTicksComponent = (function () {
 exports.YAxisTicksComponent = YAxisTicksComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/axes/y-axis.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5280,6 +5355,10 @@ var YAxisComponent = (function () {
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "yAxisTickInterval", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], YAxisComponent.prototype, "yAxisTickCount", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "dimensionsChanged", void 0);
@@ -5300,13 +5379,13 @@ var YAxisComponent = (function () {
 exports.YAxisComponent = YAxisComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/base-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5317,12 +5396,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var Rx_1 = __webpack_require__(14);
 var BaseChartComponent = (function () {
-    function BaseChartComponent(chartElement, zone, cd) {
+    function BaseChartComponent(chartElement, zone, cd, location) {
         this.chartElement = chartElement;
         this.zone = zone;
         this.cd = cd;
+        this.location = location;
         this.schemeType = 'ordinal';
         this.select = new core_1.EventEmitter();
     }
@@ -5356,14 +5437,17 @@ var BaseChartComponent = (function () {
         var width = 0;
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
-        if (hostElem.parentNode != null) {
+        if (hostElem.parentNode !== null) {
             // Get the container dimensions
             width = hostElem.parentNode.clientWidth;
             height = hostElem.parentNode.clientHeight;
         }
         return { width: width, height: height };
     };
-    // converts all date objects that appear as name into formatted date strings
+    /**
+     * Converts all date objects that appear as name
+     * into formatted date strings
+     */
     BaseChartComponent.prototype.formatDates = function () {
         for (var i = 0; i < this.results.length; i++) {
             var g = this.results[i];
@@ -5458,20 +5542,20 @@ var BaseChartComponent = (function () {
             selector: 'base-chart',
             template: ""
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef])
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef, common_1.Location])
     ], BaseChartComponent);
     return BaseChartComponent;
 }());
 exports.BaseChartComponent = BaseChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/chart-common.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5482,6 +5566,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var chart_component_1 = __webpack_require__("./src/common/charts/chart.component.ts");
 var legend_1 = __webpack_require__("./src/common/legend/index.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
@@ -5494,7 +5579,7 @@ var grid_panel_series_component_1 = __webpack_require__("./src/common/grid-panel
 var svg_linear_gradient_component_1 = __webpack_require__("./src/common/svg-linear-gradient.component.ts");
 var svg_radial_gradient_component_1 = __webpack_require__("./src/common/svg-radial-gradient.component.ts");
 var timeline_component_1 = __webpack_require__("./src/common/timeline.component.ts");
-var common_1 = __webpack_require__(2);
+var common_2 = __webpack_require__(1);
 var area_component_1 = __webpack_require__("./src/common/area.component.ts");
 var area_tooltip_component_1 = __webpack_require__("./src/common/area-tooltip.component.ts");
 var count_1 = __webpack_require__("./src/common/count/index.ts");
@@ -5521,14 +5606,21 @@ var ChartCommonModule = (function () {
     }
     ChartCommonModule = __decorate([
         core_1.NgModule({
+            providers: [
+                common_1.Location,
+                {
+                    provide: common_1.LocationStrategy,
+                    useClass: common_1.PathLocationStrategy
+                }
+            ],
             imports: [
-                common_1.CommonModule,
+                common_2.CommonModule,
                 axes_module_1.AxesModule,
                 tooltip_1.TooltipModule
             ],
             declarations: COMPONENTS.slice(),
             exports: [
-                common_1.CommonModule,
+                common_2.CommonModule,
                 axes_module_1.AxesModule,
                 tooltip_1.TooltipModule
             ].concat(COMPONENTS)
@@ -5540,13 +5632,13 @@ var ChartCommonModule = (function () {
 exports.ChartCommonModule = ChartCommonModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/charts/chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5647,7 +5739,7 @@ var ChartComponent = (function () {
         core_1.Component({
             providers: [tooltip_1.TooltipService],
             selector: 'ngx-charts-chart',
-            template: "\n    <div\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
+            template: "\n    <div\n      class=\"ngx-charts-outer\"\n      [style.width.px]=\"view[0]\"\n      [@animationState]=\"'active'\">\n      <svg\n        class=\"ngx-charts\"\n        [attr.width]=\"chartWidth\"\n        [attr.height]=\"view[1]\">\n        <ng-content></ng-content>\n      </svg>\n      <ngx-charts-scale-legend\n        *ngIf=\"showLegend && legendType === 'scaleLegend'\"\n        class=\"chart-legend\"\n        [valueRange]=\"legendOptions.domain\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\">\n      </ngx-charts-scale-legend>\n      <ngx-charts-legend\n        *ngIf=\"showLegend && legendType === 'legend'\"\n        class=\"chart-legend\"\n        [data]=\"legendOptions.domain\"\n        [title]=\"legendTitle\"\n        [colors]=\"legendOptions.colors\"\n        [height]=\"view[1]\"\n        [width]=\"legendWidth\"\n        [activeEntries]=\"activeEntries\"\n        (labelClick)=\"legendLabelClick.emit($event)\"\n        (labelActivate)=\"legendLabelActivate.emit($event)\"\n        (labelDeactivate)=\"legendLabelDeactivate.emit($event)\">\n      </ngx-charts-legend>\n    </div>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -5665,13 +5757,13 @@ var ChartComponent = (function () {
 exports.ChartComponent = ChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/circle-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5682,11 +5774,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var moment = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var moment = __webpack_require__(2);
 var label_helper_1 = __webpack_require__("./src/common/label.helper.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var CircleSeriesComponent = (function () {
-    function CircleSeriesComponent() {
+    function CircleSeriesComponent(location) {
+        this.location = location;
         this.type = 'standard';
         this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
@@ -5701,7 +5795,7 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.prototype.getCircles = function () {
         var _this = this;
         var seriesName = this.data.name;
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         return this.data.series.map(function (d, i) {
             var value = d.value;
             var label = d.name;
@@ -5753,14 +5847,41 @@ var CircleSeriesComponent = (function () {
                     barVisible: false,
                     gradientId: gradientId,
                     gradientFill: gradientFill,
-                    gradientStops: _this.getGradientStops(color)
+                    gradientStops: _this.getGradientStops(color),
+                    min: d.min,
+                    max: d.max
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
     };
     CircleSeriesComponent.prototype.getTooltipText = function (_a) {
-        var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName;
-        return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n    ";
+        var tooltipLabel = _a.tooltipLabel, value = _a.value, seriesName = _a.seriesName, min = _a.min, max = _a.max;
+        return "\n      <span class=\"tooltip-label\">" + seriesName + " \u2022 " + tooltipLabel + "</span>\n      <span class=\"tooltip-val\">" + value.toLocaleString() + this.getTooltipMinMaxText(min, max) + "</span>\n    ";
+    };
+    CircleSeriesComponent.prototype.getTooltipMinMaxText = function (min, max) {
+        if (min !== undefined || max !== undefined) {
+            var result = ' (';
+            if (min !== undefined) {
+                if (max === undefined) {
+                    result += '≥';
+                }
+                result += min.toLocaleString();
+                if (max !== undefined) {
+                    result += ' - ';
+                }
+            }
+            else if (max !== undefined) {
+                result += '≤';
+            }
+            if (max !== undefined) {
+                result += max.toLocaleString();
+            }
+            result += ')';
+            return result;
+        }
+        else {
+            return '';
+        }
     };
     CircleSeriesComponent.prototype.getGradientStops = function (color) {
         return [
@@ -5849,24 +5970,34 @@ var CircleSeriesComponent = (function () {
     ], CircleSeriesComponent.prototype, "deactivate", void 0);
     CircleSeriesComponent = __decorate([
         core_1.Component({
-            selector: 'g[ngx-charts-circle-ceries]',
-            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            selector: 'g[ngx-charts-circle-series]',
+            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('void => *', [
+                        core_1.style({
+                            opacity: 0,
+                        }),
+                        core_1.animate(250, core_1.style({ opacity: 1 }))
+                    ])
+                ])
+            ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [common_1.Location])
     ], CircleSeriesComponent);
     return CircleSeriesComponent;
 }());
 exports.CircleSeriesComponent = CircleSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/circle.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -5974,13 +6105,13 @@ var CircleComponent = (function () {
 exports.CircleComponent = CircleComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/color.helper.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var d3_1 = __webpack_require__("./src/d3.ts");
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
 var ColorHelper = (function () {
@@ -6100,13 +6231,13 @@ var ColorHelper = (function () {
 exports.ColorHelper = ColorHelper;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/count/count.directive.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6243,13 +6374,13 @@ var CountUpDirective = (function () {
 exports.CountUpDirective = CountUpDirective;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/count/count.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 // Robert Penner's easeOutExpo
 function easeOutExpo(t, b, c, d) {
     return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
@@ -6323,13 +6454,13 @@ function decimalChecker(countTo) {
 exports.decimalChecker = decimalChecker;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/count/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -6337,13 +6468,13 @@ __export(__webpack_require__("./src/common/count/count.directive.ts"));
 __export(__webpack_require__("./src/common/count/count.helper.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/grid-layout.helper.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var d3_1 = __webpack_require__("./src/d3.ts");
 function gridLayout(dims, data, minWidth) {
     var rows = 1;
@@ -6398,13 +6529,13 @@ function getTotal(results) {
 }
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/grid-panel-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6500,13 +6631,13 @@ var GridPanelSeriesComponent = (function () {
 exports.GridPanelSeriesComponent = GridPanelSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/grid-panel.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6553,13 +6684,13 @@ var GridPanelComponent = (function () {
 exports.GridPanelComponent = GridPanelComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -6585,13 +6716,13 @@ __export(__webpack_require__("./src/common/view-dimensions.helper.ts"));
 __export(__webpack_require__("./src/common/label.helper.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/label.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 /**
  * Formats a label given a date, number or string.
  *
@@ -6611,13 +6742,13 @@ function formatLabel(label) {
 exports.formatLabel = formatLabel;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/advanced-legend.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6707,13 +6838,13 @@ var AdvancedLegendComponent = (function () {
 exports.AdvancedLegendComponent = AdvancedLegendComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -6723,13 +6854,13 @@ __export(__webpack_require__("./src/common/legend/legend-entry.component.ts"));
 __export(__webpack_require__("./src/common/legend/advanced-legend.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/legend-entry.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6818,13 +6949,13 @@ var LegendEntryComponent = (function () {
 exports.LegendEntryComponent = LegendEntryComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/legend.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6949,13 +7080,13 @@ var LegendComponent = (function () {
 exports.LegendComponent = LegendComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/legend/scale-legend.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7019,13 +7150,13 @@ var ScaleLegendComponent = (function () {
 exports.ScaleLegendComponent = ScaleLegendComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/svg-linear-gradient.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7081,13 +7212,13 @@ var SvgLinearGradientComponent = (function () {
 exports.SvgLinearGradientComponent = SvgLinearGradientComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/svg-radial-gradient.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7144,14 +7275,14 @@ var SvgRadialGradientComponent = (function () {
 exports.SvgRadialGradientComponent = SvgRadialGradientComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tick-format.helper.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
-var moment = __webpack_require__(1);
+
+var moment = __webpack_require__(2);
 function tickFormat(fieldType, groupByType) {
     return function (label) {
         if (label === 'No Value' || label === 'Other') {
@@ -7166,13 +7297,13 @@ function tickFormat(fieldType, groupByType) {
 exports.tickFormat = tickFormat;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/timeline.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7183,13 +7314,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var moment = __webpack_require__(1);
+var common_1 = __webpack_require__(1);
+var moment = __webpack_require__(2);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var Timeline = (function () {
-    function Timeline(element, zone, cd) {
+    function Timeline(element, zone, cd, location) {
         this.zone = zone;
         this.cd = cd;
+        this.location = location;
         this.height = 50;
         this.select = new core_1.EventEmitter();
         this.onDomainChange = new core_1.EventEmitter();
@@ -7215,7 +7348,7 @@ var Timeline = (function () {
                 _this.updateBrush();
             }
             _this.transform = "translate(0 , " + offsetY + ")";
-            var pageUrl = window.location.href;
+            var pageUrl = _this.location.path();
             _this.filterId = 'filter' + id_1.id().toString();
             _this.filter = "url(" + pageUrl + "#" + _this.filterId + ")";
             _this.cd.markForCheck();
@@ -7371,20 +7504,20 @@ var Timeline = (function () {
             template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef])
+        __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef, common_1.Location])
     ], Timeline);
     return Timeline;
 }());
 exports.Timeline = Timeline;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/alignment.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (AlignmentTypes) {
     AlignmentTypes[AlignmentTypes["left"] = 'left'] = "left";
     AlignmentTypes[AlignmentTypes["center"] = 'center'] = "center";
@@ -7393,13 +7526,13 @@ exports.Timeline = Timeline;
 var AlignmentTypes = exports.AlignmentTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -7412,13 +7545,13 @@ __export(__webpack_require__("./src/common/tooltip/alignment.type.ts"));
 __export(__webpack_require__("./src/common/tooltip/show.type.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/position/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -7426,13 +7559,13 @@ __export(__webpack_require__("./src/common/tooltip/position/placement.type.ts"))
 __export(__webpack_require__("./src/common/tooltip/position/position.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/position/placement.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (PlacementTypes) {
     PlacementTypes[PlacementTypes["top"] = 'top'] = "top";
     PlacementTypes[PlacementTypes["bottom"] = 'bottom'] = "bottom";
@@ -7442,13 +7575,13 @@ __export(__webpack_require__("./src/common/tooltip/position/position.ts"));
 var PlacementTypes = exports.PlacementTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/position/position.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var placement_type_1 = __webpack_require__("./src/common/tooltip/position/placement.type.ts");
 var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
@@ -7724,13 +7857,13 @@ var PositionHelper = (function () {
 exports.PositionHelper = PositionHelper;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/show.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (ShowTypes) {
     ShowTypes[ShowTypes["all"] = 'all'] = "all";
     ShowTypes[ShowTypes["focus"] = 'focus'] = "focus";
@@ -7739,13 +7872,13 @@ exports.PositionHelper = PositionHelper;
 var ShowTypes = exports.ShowTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/style.type.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 (function (StyleTypes) {
     StyleTypes[StyleTypes["popover"] = 'popover'] = "popover";
     StyleTypes[StyleTypes["tooltip"] = 'tooltip'] = "tooltip";
@@ -7753,13 +7886,13 @@ var ShowTypes = exports.ShowTypes;
 var StyleTypes = exports.StyleTypes;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7886,13 +8019,13 @@ var TooltipContentComponent = (function () {
 exports.TooltipContentComponent = TooltipContentComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.directive.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7996,7 +8129,9 @@ var TooltipDirective = (function () {
                 _this.component = _this.tooltipService.create(options);
                 // add a tiny timeout to avoid event re-triggers
                 setTimeout(function () {
-                    _this.addHideListeners(_this.component.instance.element.nativeElement);
+                    if (_this.component) {
+                        _this.addHideListeners(_this.component.instance.element.nativeElement);
+                    }
                 }, 10);
                 _this.show.emit(true);
             }, time);
@@ -8174,13 +8309,13 @@ var TooltipDirective = (function () {
 exports.TooltipDirective = TooltipDirective;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8191,7 +8326,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var common_1 = __webpack_require__(2);
+var common_1 = __webpack_require__(1);
 var tooltip_directive_1 = __webpack_require__("./src/common/tooltip/tooltip.directive.ts");
 var tooltip_component_1 = __webpack_require__("./src/common/tooltip/tooltip.component.ts");
 var tooltip_service_1 = __webpack_require__("./src/common/tooltip/tooltip.service.ts");
@@ -8214,13 +8349,13 @@ var TooltipModule = (function () {
 exports.TooltipModule = TooltipModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/tooltip/tooltip.service.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8254,13 +8389,13 @@ var TooltipService = (function (_super) {
 exports.TooltipService = TooltipService;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/trim-label.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function trimLabel(s, max) {
     if (max === void 0) { max = 16; }
     if (typeof s !== 'string') {
@@ -8281,13 +8416,13 @@ function trimLabel(s, max) {
 exports.trimLabel = trimLabel;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/common/view-dimensions.helper.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function calculateViewDimensions(_a) {
     var width = _a.width, height = _a.height, margins = _a.margins, _b = _a.showXAxis, showXAxis = _b === void 0 ? false : _b, _c = _a.showYAxis, showYAxis = _c === void 0 ? false : _c, _d = _a.xAxisHeight, xAxisHeight = _d === void 0 ? 0 : _d, _e = _a.yAxisWidth, yAxisWidth = _e === void 0 ? 0 : _e, _f = _a.showXLabel, showXLabel = _f === void 0 ? false : _f, _g = _a.showYLabel, showYLabel = _g === void 0 ? false : _g, _h = _a.showLegend, showLegend = _h === void 0 ? false : _h, _j = _a.legendType, legendType = _j === void 0 ? 'ordinal' : _j, _k = _a.columns, columns = _k === void 0 ? 12 : _k;
     var xOffset = margins[3];
@@ -8335,14 +8470,14 @@ function calculateViewDimensions(_a) {
 exports.calculateViewDimensions = calculateViewDimensions;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/d3.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /// <reference path="../node_modules/awesome-typescript-loader/lib/runtime.d.ts" />
-"use strict";
+
 var array = __webpack_require__(4);
 var brush = __webpack_require__(5);
 var color = __webpack_require__(6);
@@ -8392,13 +8527,13 @@ exports.default = {
 };
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/force-directed-graph/force-directed-graph.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8592,13 +8727,13 @@ var ForceDirectedGraphComponent = (function (_super) {
 exports.ForceDirectedGraphComponent = ForceDirectedGraphComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/force-directed-graph/force-directed-graph.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8632,13 +8767,13 @@ var ForceDirectedGraphModule = (function () {
 exports.ForceDirectedGraphModule = ForceDirectedGraphModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/force-directed-graph/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -8646,13 +8781,13 @@ __export(__webpack_require__("./src/force-directed-graph/force-directed-graph.mo
 __export(__webpack_require__("./src/force-directed-graph/force-directed-graph.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge-arc.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8712,7 +8847,7 @@ var GaugeArcComponent = (function () {
     GaugeArcComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-gauge-arc]',
-            template: "\n    <svg:g ngx-charts-pie-arc\n        class=\"background-arc\"\n        [startAngle]=\"0\"\n        [endAngle]=\"backgroundArc.endAngle\"\n        [innerRadius]=\"backgroundArc.innerRadius\"\n        [outerRadius]=\"backgroundArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [data]=\"backgroundArc.data\"\n        [animate]=\"false\"\n        [pointerEvents]=\"false\">\n    </svg:g>\n    <svg:g ngx-charts-pie-arc\n        [startAngle]=\"0\"\n        [endAngle]=\"valueArc.endAngle\"\n        [innerRadius]=\"valueArc.innerRadius\"\n        [outerRadius]=\"valueArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [fill]=\"colors.getColor(valueArc.data.value)\"\n        [data]=\"valueArc.data\"\n        [animate]=\"true\"\n        [isActive]=\"isActive\"\n        (select)=\"select.emit($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(valueArc)\">\n    </svg:g>\n  ",
+            template: "\n    <svg:g ngx-charts-pie-arc\n        class=\"background-arc\"\n        [startAngle]=\"0\"\n        [endAngle]=\"backgroundArc.endAngle\"\n        [innerRadius]=\"backgroundArc.innerRadius\"\n        [outerRadius]=\"backgroundArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [data]=\"backgroundArc.data\"\n        [animate]=\"false\"\n        [pointerEvents]=\"false\">\n    </svg:g>\n    <svg:g ngx-charts-pie-arc\n        [startAngle]=\"0\"\n        [endAngle]=\"valueArc.endAngle\"\n        [innerRadius]=\"valueArc.innerRadius\"\n        [outerRadius]=\"valueArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [fill]=\"colors.getColor(valueArc.data.name)\"\n        [data]=\"valueArc.data\"\n        [animate]=\"true\"\n        [isActive]=\"isActive\"\n        (select)=\"select.emit($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(valueArc)\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -8722,13 +8857,13 @@ var GaugeArcComponent = (function () {
 exports.GaugeArcComponent = GaugeArcComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge-axis.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8766,12 +8901,18 @@ var GaugeAxisComponent = (function () {
             var angleDeg = i * bigTickSegment;
             var angle = angleDeg * Math.PI / 180;
             var textAnchor = this.getTextAnchor(angleDeg);
-            ticks.big.push({
-                line: this.getTickPath(startDistance, tickLength, angle),
-                textAnchor: textAnchor,
-                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-                textTransform: "\n          translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n        "
-            });
+            var skip = false;
+            if (i === 0 && this.angleSpan === 360) {
+                skip = true;
+            }
+            if (!skip) {
+                ticks.big.push({
+                    line: this.getTickPath(startDistance, tickLength, angle),
+                    textAnchor: textAnchor,
+                    text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
+                    textTransform: "\n            translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n          "
+                });
+            }
             if (i === this.bigSegments) {
                 continue;
             }
@@ -8854,13 +8995,13 @@ var GaugeAxisComponent = (function () {
 exports.GaugeAxisComponent = GaugeAxisComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8897,7 +9038,7 @@ var GaugeComponent = (function (_super) {
         this.deactivate = new core_1.EventEmitter();
         this.resizeScale = 1;
         this.rotation = '';
-        this.textTransform = '';
+        this.textTransform = 'scale(1, 1)';
         this.cornerRadius = 10;
     }
     GaugeComponent.prototype.ngAfterViewInit = function () {
@@ -8910,15 +9051,20 @@ var GaugeComponent = (function (_super) {
         _super.prototype.update.call(this);
         this.zone.run(function () {
             if (!_this.showAxis) {
-                _this.margin = [10, 20, 10, 20];
+                if (!_this.margin) {
+                    _this.margin = [10, 20, 10, 20];
+                }
             }
             else {
-                _this.margin = [60, 100, 60, 100];
+                if (!_this.margin) {
+                    _this.margin = [60, 100, 60, 100];
+                }
             }
             // make the starting angle positive
             if (_this.startAngle < 0) {
                 _this.startAngle = (_this.startAngle % 360) + 360;
             }
+            _this.angleSpan = Math.min(_this.angleSpan, 360);
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
@@ -8937,7 +9083,7 @@ var GaugeComponent = (function (_super) {
             var yOffset = _this.margin[0] + _this.dims.height / 2;
             _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
             _this.rotation = "rotate(" + _this.startAngle + ")";
-            _this.scaleText();
+            setTimeout(function () { return _this.scaleText(); }, 50);
         });
     };
     GaugeComponent.prototype.getArcs = function () {
@@ -9009,19 +9155,25 @@ var GaugeComponent = (function (_super) {
         var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
         return value.toLocaleString();
     };
-    GaugeComponent.prototype.scaleText = function () {
+    GaugeComponent.prototype.scaleText = function (repeat) {
         var _this = this;
+        if (repeat === void 0) { repeat = true; }
         this.zone.run(function () {
             var width = _this.textEl.nativeElement.getBoundingClientRect().width;
-            if (width === 0)
-                return;
             var oldScale = _this.resizeScale;
-            var availableSpace = _this.textRadius;
-            _this.resizeScale = Math.floor((availableSpace / (width / _this.resizeScale)) * 100) / 100;
+            if (width === 0) {
+                _this.resizeScale = 1;
+            }
+            else {
+                var availableSpace = _this.textRadius;
+                _this.resizeScale = Math.floor((availableSpace / (width / _this.resizeScale)) * 100) / 100;
+            }
             if (_this.resizeScale !== oldScale) {
                 _this.textTransform = "scale(" + _this.resizeScale + ", " + _this.resizeScale + ")";
                 _this.cd.markForCheck();
-                setTimeout(function () { _this.scaleText(); });
+                if (repeat) {
+                    setTimeout(function () { return _this.scaleText(false); }, 50);
+                }
             }
         });
     };
@@ -9109,6 +9261,10 @@ var GaugeComponent = (function (_super) {
         __metadata('design:type', Array)
     ], GaugeComponent.prototype, "activeEntries", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], GaugeComponent.prototype, "margin", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], GaugeComponent.prototype, "activate", void 0);
@@ -9133,13 +9289,13 @@ var GaugeComponent = (function (_super) {
 exports.GaugeComponent = GaugeComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/gauge.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9187,13 +9343,13 @@ var GaugeModule = (function () {
 exports.GaugeModule = GaugeModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -9201,13 +9357,13 @@ __export(__webpack_require__("./src/gauge/gauge.module.ts"));
 __export(__webpack_require__("./src/gauge/gauge.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/gauge/linear-gauge.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9276,8 +9432,8 @@ var LinearGaugeComponent = (function (_super) {
             _this.transformLine = "translate(" + (_this.margin[3] + _this.valueScale(_this.previousValue)) + ", " + yOffset + ")";
             _this.valueTranslate = "translate(0, -15)";
             _this.unitsTranslate = "translate(0, 15)";
-            _this.scaleText('value');
-            _this.scaleText('units');
+            setTimeout(function () { return _this.scaleText('value'); }, 50);
+            setTimeout(function () { return _this.scaleText('units'); }, 50);
         });
     };
     LinearGaugeComponent.prototype.getValueDomain = function () {
@@ -9291,8 +9447,9 @@ var LinearGaugeComponent = (function (_super) {
     LinearGaugeComponent.prototype.getDisplayValue = function () {
         return this.value.toLocaleString();
     };
-    LinearGaugeComponent.prototype.scaleText = function (element) {
+    LinearGaugeComponent.prototype.scaleText = function (element, repeat) {
         var _this = this;
+        if (repeat === void 0) { repeat = true; }
         this.zone.run(function () {
             var el;
             var resizeScale;
@@ -9323,7 +9480,9 @@ var LinearGaugeComponent = (function (_super) {
                     _this.unitsTextTransform = "scale(" + resizeScale + ", " + resizeScale + ")";
                 }
                 _this.cd.markForCheck();
-                setTimeout(function () { _this.scaleText(element); });
+                if (repeat) {
+                    setTimeout(function () { _this.scaleText(element, false); }, 50);
+                }
             }
         });
     };
@@ -9377,13 +9536,13 @@ var LinearGaugeComponent = (function (_super) {
 exports.LinearGaugeComponent = LinearGaugeComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map-cell-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9480,13 +9639,13 @@ var HeatCellSeriesComponent = (function () {
 exports.HeatCellSeriesComponent = HeatCellSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map-cell.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9497,17 +9656,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var HeatMapCellComponent = (function () {
-    function HeatMapCellComponent(element) {
+    function HeatMapCellComponent(element, location) {
+        this.location = location;
         this.gradient = false;
         this.select = new core_1.EventEmitter();
         this.element = element.nativeElement;
     }
     HeatMapCellComponent.prototype.ngOnChanges = function (changes) {
         this.transform = "translate(" + this.x + " , " + this.y + ")";
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.startOpacity = 0.3;
         this.gradientId = 'grad' + id_1.id().toString();
         this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
@@ -9579,23 +9740,23 @@ var HeatMapCellComponent = (function () {
     HeatMapCellComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-heat-map-cell]',
-            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], HeatMapCellComponent);
     return HeatMapCellComponent;
 }());
 exports.HeatMapCellComponent = HeatMapCellComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9787,13 +9948,13 @@ var HeatMapComponent = (function (_super) {
 exports.HeatMapComponent = HeatMapComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/heat-map.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9835,13 +9996,13 @@ var HeatMapModule = (function () {
 exports.HeatMapModule = HeatMapModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/heat-map/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -9851,13 +10012,13 @@ __export(__webpack_require__("./src/heat-map/heat-map-cell.component.ts"));
 __export(__webpack_require__("./src/heat-map/heat-map-cell-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -9874,13 +10035,13 @@ __export(__webpack_require__("./src/tree-map/index.ts"));
 __export(__webpack_require__("./src/gauge/index.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -9890,13 +10051,13 @@ __export(__webpack_require__("./src/line-chart/line.component.ts"));
 __export(__webpack_require__("./src/line-chart/line-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -9917,7 +10078,7 @@ var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
-var moment = __webpack_require__(1);
+var moment = __webpack_require__(2);
 var LineChartComponent = (function (_super) {
     __extends(LineChartComponent, _super);
     function LineChartComponent() {
@@ -9965,7 +10126,7 @@ var LineChartComponent = (function (_super) {
             _this.setColors();
             _this.legendOptions = _this.getLegendOptions();
             _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
-            var pageUrl = window.location.href;
+            var pageUrl = _this.location.path();
             _this.clipPathId = 'clip' + id_1.id().toString();
             _this.clipPath = "url(" + pageUrl + "#" + _this.clipPathId + ")";
         });
@@ -10019,8 +10180,18 @@ var LineChartComponent = (function (_super) {
             var results = _a[_i];
             for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
                 var d = _c[_b];
-                if (!domain.includes(d.value)) {
+                if (domain.indexOf(d.value) < 0) {
                     domain.push(d.value);
+                }
+                if (d.min !== undefined) {
+                    if (domain.indexOf(d.min) < 0) {
+                        domain.push(d.min);
+                    }
+                }
+                if (d.max !== undefined) {
+                    if (domain.indexOf(d.max) < 0) {
+                        domain.push(d.max);
+                    }
                 }
             }
         }
@@ -10090,9 +10261,11 @@ var LineChartComponent = (function (_super) {
     };
     LineChartComponent.prototype.updateHoveredVertical = function (item) {
         this.hoveredVertical = item.value;
+        this.deactivateAll();
     };
     LineChartComponent.prototype.hideCircles = function () {
         this.hoveredVertical = null;
+        this.deactivateAll();
     };
     LineChartComponent.prototype.onClick = function (data, series) {
         if (series) {
@@ -10155,7 +10328,15 @@ var LineChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    LineChartComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
     };
     __decorate([
         core_1.Input(), 
@@ -10214,6 +10395,10 @@ var LineChartComponent = (function (_super) {
         __metadata('design:type', String)
     ], LineChartComponent.prototype, "schemeType", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], LineChartComponent.prototype, "rangeFillOpacity", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], LineChartComponent.prototype, "activate", void 0);
@@ -10230,7 +10415,7 @@ var LineChartComponent = (function (_super) {
     LineChartComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-line-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-line-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-ceries\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [activeEntries]=\"activeEntries\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-line-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-line-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n              [rangeFillOpacity]=\"rangeFillOpacity\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [activeEntries]=\"activeEntries\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-line-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -10240,13 +10425,13 @@ var LineChartComponent = (function (_super) {
 exports.LineChartComponent = LineChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10288,13 +10473,13 @@ var LineChartModule = (function () {
 exports.LineChartModule = LineChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10305,12 +10490,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var d3_1 = __webpack_require__("./src/d3.ts");
-var moment = __webpack_require__(1);
+var moment = __webpack_require__(2);
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var sort_1 = __webpack_require__("./src/utils/sort.ts");
 var LineSeriesComponent = (function () {
-    function LineSeriesComponent() {
+    function LineSeriesComponent(location) {
+        this.location = location;
     }
     LineSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -10319,8 +10506,10 @@ var LineSeriesComponent = (function () {
         this.updateGradients();
         var line = this.getLineGenerator();
         var area = this.getAreaGenerator();
+        var range = this.getRangeGenerator();
         var data = this.sortData(this.data.series);
         this.path = line(data) || '';
+        this.outerPath = range(data) || '';
         this.areaPath = area(data) || '';
     };
     LineSeriesComponent.prototype.getLineGenerator = function () {
@@ -10341,6 +10530,27 @@ var LineSeriesComponent = (function () {
             return value;
         })
             .y(function (d) { return _this.yScale(d.value); })
+            .curve(this.curve);
+    };
+    LineSeriesComponent.prototype.getRangeGenerator = function () {
+        var _this = this;
+        return d3_1.default.area()
+            .x(function (d) {
+            var label = d.name;
+            var value;
+            if (_this.scaleType === 'time') {
+                value = _this.xScale(moment(label).toDate());
+            }
+            else if (_this.scaleType === 'linear') {
+                value = _this.xScale(Number(label));
+            }
+            else {
+                value = _this.xScale(label);
+            }
+            return value;
+        })
+            .y0(function (d) { return _this.yScale(d.min ? d.min : d.value); })
+            .y1(function (d) { return _this.yScale(d.max ? d.max : d.value); })
             .curve(this.curve);
     };
     LineSeriesComponent.prototype.getAreaGenerator = function () {
@@ -10370,7 +10580,7 @@ var LineSeriesComponent = (function () {
     LineSeriesComponent.prototype.updateGradients = function () {
         if (this.colors.scaleType === 'linear') {
             this.hasGradient = true;
-            var pageUrl = window.location.href;
+            var pageUrl = this.location.path();
             this.gradientId = 'grad' + id_1.id().toString();
             this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
             var values = this.data.series.map(function (d) { return d.value; });
@@ -10429,26 +10639,30 @@ var LineSeriesComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Array)
     ], LineSeriesComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], LineSeriesComponent.prototype, "rangeFillOpacity", void 0);
     LineSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-line-series]',
-            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />    \n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />    \n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [common_1.Location])
     ], LineSeriesComponent);
     return LineSeriesComponent;
 }());
 exports.LineSeriesComponent = LineSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/line-chart/line.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10506,13 +10720,13 @@ var LineComponent = (function () {
 exports.LineComponent = LineComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/ngx-charts.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10558,13 +10772,13 @@ var NgxChartsModule = (function () {
 exports.NgxChartsModule = NgxChartsModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/card-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10649,13 +10863,13 @@ var CardSeriesComponent = (function () {
 exports.CardSeriesComponent = CardSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/card.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10800,13 +11014,13 @@ var CardComponent = (function () {
 exports.CardComponent = CardComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -10816,13 +11030,13 @@ __export(__webpack_require__("./src/number-card/card.component.ts"));
 __export(__webpack_require__("./src/number-card/card-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/number-card.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -10885,13 +11099,13 @@ var NumberCardComponent = (function (_super) {
 exports.NumberCardComponent = NumberCardComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/number-card/number-card.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10933,13 +11147,13 @@ var NumberCardModule = (function () {
 exports.NumberCardModule = NumberCardModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/advanced-pie-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -11036,13 +11250,13 @@ var AdvancedPieChartComponent = (function (_super) {
 exports.AdvancedPieChartComponent = AdvancedPieChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -11055,13 +11269,13 @@ __export(__webpack_require__("./src/pie-chart/pie-label.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-arc.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11072,10 +11286,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
+var common_1 = __webpack_require__(1);
 var d3_1 = __webpack_require__("./src/d3.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var PieArcComponent = (function () {
-    function PieArcComponent(element) {
+    function PieArcComponent(element, location) {
+        this.location = location;
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
         this.cornerRadius = 0;
@@ -11097,7 +11313,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
         this.startOpacity = 0.5;
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.radialGradientId = 'linearGrad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
         if (this.animate) {
@@ -11236,20 +11452,20 @@ var PieArcComponent = (function () {
             template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], PieArcComponent);
     return PieArcComponent;
 }());
 exports.PieArcComponent = PieArcComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-chart.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -11365,7 +11581,7 @@ var PieChartComponent = (function (_super) {
         });
         this.activeEntries.splice(idx, 1);
         this.activeEntries = this.activeEntries.slice();
-        this.deactivate.emit({ value: event, entries: this.activeEntries });
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
         core_1.Input(), 
@@ -11416,13 +11632,13 @@ var PieChartComponent = (function (_super) {
 exports.PieChartComponent = PieChartComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-chart.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11480,13 +11696,13 @@ var PieChartModule = (function () {
 exports.PieChartModule = PieChartModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-grid-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11581,13 +11797,13 @@ var PieGridSeriesComponent = (function () {
 exports.PieGridSeriesComponent = PieGridSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-grid.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -11703,13 +11919,13 @@ var PieGridComponent = (function (_super) {
 exports.PieGridComponent = PieGridComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-label.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11800,8 +12016,18 @@ var PieLabelComponent = (function () {
     PieLabelComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-pie-label]',
-            template: "\n    <title>{{label}}</title>\n    <svg:text\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
+            template: "\n    <title>{{label}}</title>\n    <svg:text\n      [@animationState]=\"'active'\"\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [@animationState]=\"'active'\"\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('void => *', [
+                        core_1.style({
+                            opacity: 0,
+                        }),
+                        core_1.animate('0.25s 1s', core_1.style({ opacity: 1 }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], PieLabelComponent);
@@ -11810,13 +12036,13 @@ var PieLabelComponent = (function () {
 exports.PieLabelComponent = PieLabelComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/pie-chart/pie-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11974,13 +12200,13 @@ var PieSeriesComponent = (function () {
 exports.PieSeriesComponent = PieSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/services/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -11988,13 +12214,13 @@ __export(__webpack_require__("./src/services/injection.service.ts"));
 __export(__webpack_require__("./src/services/injection-registery.service.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/services/injection-registery.service.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var InjectionRegistery = (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
@@ -12065,13 +12291,13 @@ var InjectionRegistery = (function () {
 exports.InjectionRegistery = InjectionRegistery;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/services/injection.service.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12210,13 +12436,13 @@ var InjectionService = (function () {
 exports.InjectionService = InjectionService;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/index.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -12226,13 +12452,13 @@ __export(__webpack_require__("./src/tree-map/tree-map-cell.component.ts"));
 __export(__webpack_require__("./src/tree-map/tree-map-cell-series.component.ts"));
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map-cell-series.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12309,13 +12535,13 @@ var TreeMapCellSeriesComponent = (function () {
 exports.TreeMapCellSeriesComponent = TreeMapCellSeriesComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map-cell.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12421,13 +12647,13 @@ var TreeMapCellComponent = (function () {
 exports.TreeMapCellComponent = TreeMapCellComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map.component.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -12519,13 +12745,13 @@ var TreeMapComponent = (function (_super) {
 exports.TreeMapComponent = TreeMapComponent;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/tree-map/tree-map.module.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -12567,13 +12793,13 @@ var TreeMapModule = (function () {
 exports.TreeMapModule = TreeMapModule;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/color-sets.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 exports.colorSets = [
     {
         name: 'vivid',
@@ -12700,13 +12926,13 @@ exports.colorSets = [
 ];
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/color-utils.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 /**
  * Converts a hex to RGB
  * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
@@ -12763,13 +12989,13 @@ function shadeRGBColor(_a, percent) {
 exports.shadeRGBColor = shadeRGBColor;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/id.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 var cache = {};
 /**
  * Generates a short id.
@@ -12795,14 +13021,14 @@ function id() {
 exports.id = id;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/sort.ts":
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
-var moment = __webpack_require__(1);
+
+var moment = __webpack_require__(2);
 function sortLinear(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
@@ -12855,13 +13081,13 @@ function sortByTime(data, property, direction) {
 exports.sortByTime = sortByTime;
 
 
-/***/ },
+/***/ }),
 
 /***/ "./src/utils/throttle.ts":
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-"use strict";
+
 /**
  * Throttle a function
  *
@@ -12936,112 +13162,112 @@ function throttleable(duration, options) {
 exports.throttleable = throttleable;
 
 
-/***/ },
+/***/ }),
 
 /***/ 0:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
-/***/ },
+/***/ }),
 
 /***/ 1:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
 
-/***/ },
+/***/ }),
 
 /***/ 10:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_10__;
 
-/***/ },
+/***/ }),
 
 /***/ 11:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_11__;
 
-/***/ },
+/***/ }),
 
 /***/ 12:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_12__;
 
-/***/ },
+/***/ }),
 
 /***/ 13:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_13__;
 
-/***/ },
+/***/ }),
 
 /***/ 14:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
 
-/***/ },
+/***/ }),
 
 /***/ 2:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
-/***/ },
+/***/ }),
 
 /***/ 3:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
-/***/ },
+/***/ }),
 
 /***/ 4:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
-/***/ },
+/***/ }),
 
 /***/ 5:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
-/***/ },
+/***/ }),
 
 /***/ 6:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
 
-/***/ },
+/***/ }),
 
 /***/ 7:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
 
-/***/ },
+/***/ }),
 
 /***/ 8:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 
-/***/ },
+/***/ }),
 
 /***/ 9:
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
 
-/***/ }
+/***/ })
 
 /******/ });
 });

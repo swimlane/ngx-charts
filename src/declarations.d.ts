@@ -10,4 +10,6 @@ interface ErrorStackTraceLimit {
   stackTraceLimit: number;
 }
 
-interface ErrorConstructor extends ErrorStackTraceLimit {}
+interface ErrorConstructor {
+  stackTraceLimit: number;
+}

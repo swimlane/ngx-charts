@@ -13,10 +13,14 @@ import * as import4 from '../../../src/common/tooltip/tooltip.module';
 import * as import5 from '@angular/common/src/localization';
 import * as import6 from '../../../src/services/injection.service';
 import * as import7 from '../../../src/common/tooltip/tooltip.service';
-import * as import8 from '@angular/core/src/di/injector';
-import * as import9 from './tooltip/tooltip.component.ngfactory';
-import * as import10 from '@angular/core/src/i18n/tokens';
-import * as import11 from '@angular/core/src/application_ref';
+import * as import8 from '@angular/common/src/location/path_location_strategy';
+import * as import9 from '@angular/common/src/location/location';
+import * as import10 from '@angular/core/src/di/injector';
+import * as import11 from './tooltip/tooltip.component.ngfactory';
+import * as import12 from '@angular/core/src/i18n/tokens';
+import * as import13 from '@angular/core/src/application_ref';
+import * as import14 from '@angular/common/src/location/platform_location';
+import * as import15 from '@angular/common/src/location/location_strategy';
 class ChartCommonModuleInjector extends import0.NgModuleInjector<import1.ChartCommonModule> {
   _CommonModule_0:import2.CommonModule;
   _AxesModule_1:import3.AxesModule;
@@ -25,20 +29,30 @@ class ChartCommonModuleInjector extends import0.NgModuleInjector<import1.ChartCo
   __NgLocalization_4:import5.NgLocaleLocalization;
   __InjectionService_5:import6.InjectionService;
   __TooltipService_6:import7.TooltipService;
-  constructor(parent:import8.Injector) {
-    super(parent,[import9.TooltipContentComponentNgFactory],([] as any[]));
+  __LocationStrategy_7:import8.PathLocationStrategy;
+  __Location_8:import9.Location;
+  constructor(parent:import10.Injector) {
+    super(parent,[import11.TooltipContentComponentNgFactory],([] as any[]));
   }
   get _NgLocalization_4():import5.NgLocaleLocalization {
-    if ((this.__NgLocalization_4 == null)) { (this.__NgLocalization_4 = new import5.NgLocaleLocalization(this.parent.get(import10.LOCALE_ID))); }
+    if ((this.__NgLocalization_4 == null)) { (this.__NgLocalization_4 = new import5.NgLocaleLocalization(this.parent.get(import12.LOCALE_ID))); }
     return this.__NgLocalization_4;
   }
   get _InjectionService_5():import6.InjectionService {
-    if ((this.__InjectionService_5 == null)) { (this.__InjectionService_5 = new import6.InjectionService(this.parent.get(import11.ApplicationRef),this,this)); }
+    if ((this.__InjectionService_5 == null)) { (this.__InjectionService_5 = new import6.InjectionService(this.parent.get(import13.ApplicationRef),this,this)); }
     return this.__InjectionService_5;
   }
   get _TooltipService_6():import7.TooltipService {
     if ((this.__TooltipService_6 == null)) { (this.__TooltipService_6 = new import7.TooltipService(this._InjectionService_5)); }
     return this.__TooltipService_6;
+  }
+  get _LocationStrategy_7():import8.PathLocationStrategy {
+    if ((this.__LocationStrategy_7 == null)) { (this.__LocationStrategy_7 = new import8.PathLocationStrategy(this.parent.get(import14.PlatformLocation),this.parent.get(import15.APP_BASE_HREF,(null as any)))); }
+    return this.__LocationStrategy_7;
+  }
+  get _Location_8():import9.Location {
+    if ((this.__Location_8 == null)) { (this.__Location_8 = new import9.Location(this._LocationStrategy_7)); }
+    return this.__Location_8;
   }
   createInternal():import1.ChartCommonModule {
     this._CommonModule_0 = new import2.CommonModule();
@@ -55,6 +69,8 @@ class ChartCommonModuleInjector extends import0.NgModuleInjector<import1.ChartCo
     if ((token === import5.NgLocalization)) { return this._NgLocalization_4; }
     if ((token === import6.InjectionService)) { return this._InjectionService_5; }
     if ((token === import7.TooltipService)) { return this._TooltipService_6; }
+    if ((token === import15.LocationStrategy)) { return this._LocationStrategy_7; }
+    if ((token === import9.Location)) { return this._Location_8; }
     return notFoundResult;
   }
   destroyInternal():void {

@@ -49,7 +49,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
         return d.depth === 1;
       })
       .map((d, index) => {
-        let label = d.id;
+        const label = d.id;
 
         return {
           x: d.x0,

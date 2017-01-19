@@ -17,6 +17,7 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '../../../src/common/area.component';
 import * as import10 from '../common/area.component.ngfactory';
 import * as import11 from '@angular/core/src/linker/element_ref';
+import * as import12 from '@angular/common/src/location/location';
 export class Wrapper_AreaSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.AreaSeriesComponent;
@@ -206,7 +207,7 @@ export class View_AreaSeriesComponent0 extends import2.AppView<import0.AreaSerie
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray4(4,'class','area-series','ngx-charts-area',''),(null as any));
     this.compView_1 = new import10.View_AreaComponent0(this.viewUtils,this,1,this._el_1);
-    this._AreaComponent_1_3 = new import10.Wrapper_AreaComponent(new import11.ElementRef(this._el_1));
+    this._AreaComponent_1_3 = new import10.Wrapper_AreaComponent(new import11.ElementRef(this._el_1),this.parentView.injectorGet(import12.Location,this.parentIndex));
     this.compView_1.create(this._AreaComponent_1_3.context);
     this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [

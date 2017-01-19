@@ -15,7 +15,13 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
-import * as import10 from '@angular/core/src/security';
+import * as import10 from '@angular/core/src/animation/animation_transition';
+import * as import11 from '@angular/core/src/animation/animation_sequence_player';
+import * as import12 from '@angular/core/src/animation/animation_styles';
+import * as import13 from '@angular/core/src/animation/animation_style_util';
+import * as import14 from '@angular/core/src/animation/animation_keyframe';
+import * as import15 from '@angular/core/src/animation/animation_player';
+import * as import16 from '@angular/core/src/security';
 export class Wrapper_PieLabelComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieLabelComponent;
@@ -152,7 +158,44 @@ class View_PieLabelComponent_Host0 extends import2.AppView<any> {
 }
 export const PieLabelComponentNgFactory:import8.ComponentFactory<import0.PieLabelComponent> = new import8.ComponentFactory<import0.PieLabelComponent>('g[ngx-charts-pie-label]',View_PieLabelComponent_Host0,import0.PieLabelComponent);
 const styles_PieLabelComponent:any[] = ([] as any[]);
-var renderType_PieLabelComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieLabelComponent,{});
+var PieLabelComponent_animationState_states:any = {
+  '*': {},
+  'void': {}
+}
+;
+function PieLabelComponent_animationState_factory(view:import2.AppView<any>,element:any,currentState:any,nextState:any):import10.AnimationTransition {
+  var previousPlayers:any = view.animationContext.getAnimationPlayers(element,((nextState == 'void')? (null as any): 'animationState'));
+  var collectedStyles:any = {};
+  var player:any = (null as any);
+  var totalTime:any = 0;
+  var defaultStateStyles:any = PieLabelComponent_animationState_states['*'];
+  var startStateStyles:any = PieLabelComponent_animationState_states[currentState];
+  if ((startStateStyles == (null as any))) { (startStateStyles = defaultStateStyles); }
+  var endStateStyles:any = PieLabelComponent_animationState_states[nextState];
+  if ((endStateStyles == (null as any))) { (endStateStyles = defaultStateStyles); }
+  if (((player == (null as any)) && ((currentState == 'void') && true))) {
+      player = new import11.AnimationSequencePlayer([view.renderer.animate(element,new import12.AnimationStyles(import13.collectAndResolveStyles(collectedStyles,[
+        startStateStyles,
+        {'opacity': '0'}
+      ]
+      )),[
+        new import14.AnimationKeyframe(0,new import12.AnimationStyles(import13.collectAndResolveStyles(collectedStyles,[{'opacity': '0'}]))),
+        new import14.AnimationKeyframe(1,new import12.AnimationStyles(import13.collectAndResolveStyles(collectedStyles,[{'opacity': '1'}])))
+      ]
+    ,250,1000,(null as any),previousPlayers)]);
+    totalTime = 1250;
+  }
+  if ((player == (null as any))) { (player = new import15.NoOpAnimationPlayer()); }
+  player.onDone(():void => {
+    player.destroy();
+    import13.renderStyles(element,view.renderer,import13.prepareFinalAnimationStyles(startStateStyles,endStateStyles));
+  });
+  new import11.AnimationSequencePlayer(previousPlayers).destroy();
+  import13.renderStyles(element,view.renderer,import13.clearStyles(startStateStyles));
+  view.animationContext.queueAnimation(element,'animationState',player);
+  return new import10.AnimationTransition(player,currentState,nextState,totalTime);
+}
+var renderType_PieLabelComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieLabelComponent,{animationState: PieLabelComponent_animationState_factory});
 export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelComponent> {
   _text_0:any;
   _el_1:any;
@@ -174,6 +217,8 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
   /*private*/ _expr_17:any;
   /*private*/ _expr_18:any;
   /*private*/ _expr_19:any;
+  /*private*/ _expr_20:any;
+  /*private*/ _expr_21:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_PieLabelComponent0,renderType_PieLabelComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_10 = import1.UNINITIALIZED;
@@ -186,6 +231,8 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
     this._expr_17 = import1.UNINITIALIZED;
     this._expr_18 = import1.UNINITIALIZED;
     this._expr_19 = import1.UNINITIALIZED;
+    this._expr_20 = import1.UNINITIALIZED;
+    this._expr_21 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -215,55 +262,69 @@ export class View_PieLabelComponent0 extends import2.AppView<import0.PieLabelCom
     return (null as any);
   }
   detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_11:any = 'active';
+    if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
+      var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_4,((this._expr_11 == import1.UNINITIALIZED)? 'void': this._expr_11),((currVal_11 == import1.UNINITIALIZED)? 'void': currVal_11));
+      this._expr_11 = currVal_11;
+    }
+    const currVal_17:any = 'active';
+    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
+      var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_7,((this._expr_17 == import1.UNINITIALIZED)? 'void': this._expr_17),((currVal_17 == import1.UNINITIALIZED)? 'void': currVal_17));
+      this._expr_17 = currVal_17;
+    }
     const currVal_10:any = import3.inlineInterpolate(1,'',this.context.label,'');
     if (import3.checkBinding(throwOnChange,this._expr_10,currVal_10)) {
       this.renderer.setText(this._text_2,currVal_10);
       this._expr_10 = currVal_10;
     }
-    const currVal_11:any = this.context.transform;
-    if (import3.checkBinding(throwOnChange,this._expr_11,currVal_11)) {
-      this.renderer.setElementAttribute(this._el_4,'transform',((currVal_11 == null)? (null as any): currVal_11.toString()));
-      this._expr_11 = currVal_11;
-    }
-    const currVal_12:any = this.context.textAnchor();
+    const currVal_12:any = this.context.transform;
     if (import3.checkBinding(throwOnChange,this._expr_12,currVal_12)) {
-      this.renderer.setElementStyle(this._el_4,'textAnchor',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_12) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_12).toString()));
+      this.renderer.setElementAttribute(this._el_4,'transform',((currVal_12 == null)? (null as any): currVal_12.toString()));
       this._expr_12 = currVal_12;
     }
-    const currVal_13:any = 'crispEdges';
+    const currVal_13:any = this.context.textAnchor();
     if (import3.checkBinding(throwOnChange,this._expr_13,currVal_13)) {
-      this.renderer.setElementStyle(this._el_4,'shapeRendering',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_13) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_13).toString()));
+      this.renderer.setElementStyle(this._el_4,'textAnchor',((this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_13) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_13).toString()));
       this._expr_13 = currVal_13;
     }
-    const currVal_14:any = 'uppercase';
+    const currVal_14:any = 'crispEdges';
     if (import3.checkBinding(throwOnChange,this._expr_14,currVal_14)) {
-      this.renderer.setElementStyle(this._el_4,'textTransform',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_14).toString()));
+      this.renderer.setElementStyle(this._el_4,'shapeRendering',((this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_14) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_14).toString()));
       this._expr_14 = currVal_14;
     }
-    const currVal_15:any = import3.inlineInterpolate(1,'\n      ',this.context.trimLabel(this.context.label,10),'\n    ');
+    const currVal_15:any = 'uppercase';
     if (import3.checkBinding(throwOnChange,this._expr_15,currVal_15)) {
-      this.renderer.setText(this._text_5,currVal_15);
+      this.renderer.setElementStyle(this._el_4,'textTransform',((this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_15) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_15).toString()));
       this._expr_15 = currVal_15;
     }
-    const currVal_16:any = this.context.line;
+    const currVal_16:any = import3.inlineInterpolate(1,'\n      ',this.context.trimLabel(this.context.label,10),'\n    ');
     if (import3.checkBinding(throwOnChange,this._expr_16,currVal_16)) {
-      this.renderer.setElementAttribute(this._el_7,'d',((currVal_16 == null)? (null as any): currVal_16.toString()));
+      this.renderer.setText(this._text_5,currVal_16);
       this._expr_16 = currVal_16;
     }
-    const currVal_17:any = this.context.color;
-    if (import3.checkBinding(throwOnChange,this._expr_17,currVal_17)) {
-      this.renderer.setElementAttribute(this._el_7,'stroke',((currVal_17 == null)? (null as any): currVal_17.toString()));
-      this._expr_17 = currVal_17;
-    }
-    const currVal_18:any = 2000;
+    const currVal_18:any = this.context.line;
     if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setElementStyle(this._el_7,'strokeDasharray',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_18) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_18).toString()));
+      this.renderer.setElementAttribute(this._el_7,'d',((currVal_18 == null)? (null as any): currVal_18.toString()));
       this._expr_18 = currVal_18;
     }
-    const currVal_19:any = 0;
+    const currVal_19:any = this.context.color;
     if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
-      this.renderer.setElementStyle(this._el_7,'strokeDashoffset',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_19) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_19).toString()));
+      this.renderer.setElementAttribute(this._el_7,'stroke',((currVal_19 == null)? (null as any): currVal_19.toString()));
       this._expr_19 = currVal_19;
     }
+    const currVal_20:any = 2000;
+    if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
+      this.renderer.setElementStyle(this._el_7,'strokeDasharray',((this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_20) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_20).toString()));
+      this._expr_20 = currVal_20;
+    }
+    const currVal_21:any = 0;
+    if (import3.checkBinding(throwOnChange,this._expr_21,currVal_21)) {
+      this.renderer.setElementStyle(this._el_7,'strokeDashoffset',((this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_21) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import16.SecurityContext.STYLE,currVal_21).toString()));
+      this._expr_21 = currVal_21;
+    }
+  }
+  detachInternal():void {
+    var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_4,this._expr_11,'void');
+    var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_7,this._expr_17,'void');
   }
 }

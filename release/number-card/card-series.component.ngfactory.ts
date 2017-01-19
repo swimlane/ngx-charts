@@ -15,14 +15,14 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/zone/ng_zone';
-import * as import10 from '@angular/core/src/linker/view_container';
-import * as import11 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import12 from '@angular/core/src/linker/template_ref';
-import * as import13 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import14 from '@angular/common/src/directives/ng_for';
-import * as import15 from '../../../src/number-card/card.component';
-import * as import16 from './card.component.ngfactory';
-import * as import17 from '@angular/core/src/linker/element_ref';
+import * as import10 from '../../../src/number-card/card.component';
+import * as import11 from './card.component.ngfactory';
+import * as import12 from '@angular/core/src/linker/view_container';
+import * as import13 from '@angular/core/src/linker/element_ref';
+import * as import14 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import15 from '@angular/core/src/linker/template_ref';
+import * as import16 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import17 from '@angular/common/src/directives/ng_for';
 export class Wrapper_CardSeriesComponent {
   /*private*/ _eventHandler:Function;
   context:import0.CardSeriesComponent;
@@ -123,65 +123,17 @@ class View_CardSeriesComponent_Host0 extends import2.AppView<any> {
 }
 export const CardSeriesComponentNgFactory:import8.ComponentFactory<import0.CardSeriesComponent> = new import8.ComponentFactory<import0.CardSeriesComponent>('g[ngx-charts-card-series]',View_CardSeriesComponent_Host0,import0.CardSeriesComponent);
 const styles_CardSeriesComponent:any[] = ([] as any[]);
-var renderType_CardSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CardSeriesComponent,{});
-export class View_CardSeriesComponent0 extends import2.AppView<import0.CardSeriesComponent> {
-  _text_0:any;
-  _anchor_1:any;
-  /*private*/ _vc_1:import10.ViewContainer;
-  _TemplateRef_1_5:any;
-  _NgFor_1_6:import11.Wrapper_NgFor;
-  _text_2:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_CardSeriesComponent0,renderType_CardSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
-    this._vc_1 = new import10.ViewContainer(1,(null as any),this,this._anchor_1);
-    this._TemplateRef_1_5 = new import12.TemplateRef_(this,1,this._anchor_1);
-    this._NgFor_1_6 = new import11.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.ref);
-    this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._anchor_1,
-      this._text_2
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import12.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
-    if (((token === import14.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1_0_0:any = this.context.cards;
-    this._NgFor_1_6.check_ngForOf(currVal_1_0_0,throwOnChange,false);
-    const currVal_1_0_1:any = this.context.trackBy;
-    this._NgFor_1_6.check_ngForTrackBy(currVal_1_0_1,throwOnChange,false);
-    this._NgFor_1_6.ngDoCheck(this,this._anchor_1,throwOnChange);
-    this._vc_1.detectChangesInNestedViews(throwOnChange);
-  }
-  destroyInternal():void {
-    this._vc_1.destroyNestedViews();
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 1)) { return new View_CardSeriesComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
-    return (null as any);
-  }
-}
 class View_CardSeriesComponent1 extends import2.AppView<any> {
   _el_0:any;
-  compView_0:import2.AppView<import15.CardComponent>;
-  _CardComponent_0_3:import16.Wrapper_CardComponent;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import10.ViewContainer) {
+  compView_0:import2.AppView<import10.CardComponent>;
+  _CardComponent_0_3:import11.Wrapper_CardComponent;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
     super(View_CardSeriesComponent1,renderType_CardSeriesComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-card',''),(null as any));
-    this.compView_0 = new import16.View_CardComponent0(this.viewUtils,this,0,this._el_0);
-    this._CardComponent_0_3 = new import16.Wrapper_CardComponent(new import17.ElementRef(this._el_0),this.compView_0.ref,this.parentView.injectorGet(import9.NgZone,this.parentIndex));
+    this.compView_0 = new import11.View_CardComponent0(this.viewUtils,this,0,this._el_0);
+    this._CardComponent_0_3 = new import11.Wrapper_CardComponent(new import13.ElementRef(this._el_0),this.compView_0.ref,this.parentView.injectorGet(import9.NgZone,this.parentIndex));
     this.compView_0.create(this._CardComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_0));
     this._CardComponent_0_3.subscribe(this,this.eventHandler(this.handleEvent_0),true);
@@ -189,7 +141,7 @@ class View_CardSeriesComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import15.CardComponent) && (0 === requestNodeIndex))) { return this._CardComponent_0_3.context; }
+    if (((token === import10.CardComponent) && (0 === requestNodeIndex))) { return this._CardComponent_0_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -223,5 +175,53 @@ class View_CardSeriesComponent1 extends import2.AppView<any> {
       result = (pd_sub_0 && result);
     }
     return result;
+  }
+}
+var renderType_CardSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CardSeriesComponent,{});
+export class View_CardSeriesComponent0 extends import2.AppView<import0.CardSeriesComponent> {
+  _text_0:any;
+  _anchor_1:any;
+  /*private*/ _vc_1:import12.ViewContainer;
+  _TemplateRef_1_5:any;
+  _NgFor_1_6:import14.Wrapper_NgFor;
+  _text_2:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
+    super(View_CardSeriesComponent0,renderType_CardSeriesComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
+    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
+    this._anchor_1 = this.renderer.createTemplateAnchor(parentRenderNode,(null as any));
+    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._anchor_1);
+    this._TemplateRef_1_5 = new import15.TemplateRef_(this,1,this._anchor_1);
+    this._NgFor_1_6 = new import14.Wrapper_NgFor(this._vc_1.vcRef,this._TemplateRef_1_5,this.parentView.injectorGet(import16.IterableDiffers,this.parentIndex),this.ref);
+    this._text_2 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
+      this._text_0,
+      this._anchor_1,
+      this._text_2
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import15.TemplateRef) && (1 === requestNodeIndex))) { return this._TemplateRef_1_5; }
+    if (((token === import17.NgFor) && (1 === requestNodeIndex))) { return this._NgFor_1_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_1_0_0:any = this.context.cards;
+    this._NgFor_1_6.check_ngForOf(currVal_1_0_0,throwOnChange,false);
+    const currVal_1_0_1:any = this.context.trackBy;
+    this._NgFor_1_6.check_ngForTrackBy(currVal_1_0_1,throwOnChange,false);
+    this._NgFor_1_6.ngDoCheck(this,this._anchor_1,throwOnChange);
+    this._vc_1.detectChangesInNestedViews(throwOnChange);
+  }
+  destroyInternal():void {
+    this._vc_1.destroyNestedViews();
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 1)) { return new View_CardSeriesComponent1(this.viewUtils,this,1,this._anchor_1,this._vc_1); }
+    return (null as any);
   }
 }

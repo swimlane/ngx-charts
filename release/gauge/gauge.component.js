@@ -26,7 +26,7 @@ var GaugeComponent = (function (_super) {
         this.deactivate = new core_1.EventEmitter();
         this.resizeScale = 1;
         this.rotation = '';
-        this.textTransform = '';
+        this.textTransform = 'scale(1, 1)';
         this.cornerRadius = 10;
     }
     GaugeComponent.prototype.ngAfterViewInit = function () {
@@ -39,15 +39,20 @@ var GaugeComponent = (function (_super) {
         _super.prototype.update.call(this);
         this.zone.run(function () {
             if (!_this.showAxis) {
-                _this.margin = [10, 20, 10, 20];
+                if (!_this.margin) {
+                    _this.margin = [10, 20, 10, 20];
+                }
             }
             else {
-                _this.margin = [60, 100, 60, 100];
+                if (!_this.margin) {
+                    _this.margin = [60, 100, 60, 100];
+                }
             }
             // make the starting angle positive
             if (_this.startAngle < 0) {
                 _this.startAngle = (_this.startAngle % 360) + 360;
             }
+            _this.angleSpan = Math.min(_this.angleSpan, 360);
             _this.dims = view_dimensions_helper_1.calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
@@ -66,7 +71,7 @@ var GaugeComponent = (function (_super) {
             var yOffset = _this.margin[0] + _this.dims.height / 2;
             _this.transform = "translate(" + xOffset + ", " + yOffset + ")";
             _this.rotation = "rotate(" + _this.startAngle + ")";
-            _this.scaleText();
+            setTimeout(function () { return _this.scaleText(); }, 50);
         });
     };
     GaugeComponent.prototype.getArcs = function () {
@@ -138,19 +143,25 @@ var GaugeComponent = (function (_super) {
         var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
         return value.toLocaleString();
     };
-    GaugeComponent.prototype.scaleText = function () {
+    GaugeComponent.prototype.scaleText = function (repeat) {
         var _this = this;
+        if (repeat === void 0) { repeat = true; }
         this.zone.run(function () {
             var width = _this.textEl.nativeElement.getBoundingClientRect().width;
-            if (width === 0)
-                return;
             var oldScale = _this.resizeScale;
-            var availableSpace = _this.textRadius;
-            _this.resizeScale = Math.floor((availableSpace / (width / _this.resizeScale)) * 100) / 100;
+            if (width === 0) {
+                _this.resizeScale = 1;
+            }
+            else {
+                var availableSpace = _this.textRadius;
+                _this.resizeScale = Math.floor((availableSpace / (width / _this.resizeScale)) * 100) / 100;
+            }
             if (_this.resizeScale !== oldScale) {
                 _this.textTransform = "scale(" + _this.resizeScale + ", " + _this.resizeScale + ")";
                 _this.cd.markForCheck();
-                setTimeout(function () { _this.scaleText(); });
+                if (repeat) {
+                    setTimeout(function () { return _this.scaleText(false); }, 50);
+                }
             }
         });
     };
@@ -214,6 +225,7 @@ var GaugeComponent = (function (_super) {
         'startAngle': [{ type: core_1.Input },],
         'angleSpan': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
+        'margin': [{ type: core_1.Input },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],
         'textEl': [{ type: core_1.ViewChild, args: ['textEl',] },],

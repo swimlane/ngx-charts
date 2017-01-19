@@ -1,9 +1,11 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var d3_1 = require('../d3');
 var id_1 = require('../utils/id');
 var PieArcComponent = (function () {
-    function PieArcComponent(element) {
+    function PieArcComponent(element, location) {
+        this.location = location;
         this.startAngle = 0;
         this.endAngle = Math.PI * 2;
         this.cornerRadius = 0;
@@ -25,7 +27,7 @@ var PieArcComponent = (function () {
         var arc = this.calculateArc();
         this.path = arc.startAngle(this.startAngle).endAngle(this.endAngle)();
         this.startOpacity = 0.5;
-        var pageUrl = window.location.href;
+        var pageUrl = this.location.path();
         this.radialGradientId = 'linearGrad' + id_1.id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.radialGradientId + ")";
         if (this.animate) {
@@ -100,6 +102,7 @@ var PieArcComponent = (function () {
     /** @nocollapse */
     PieArcComponent.ctorParameters = function () { return [
         { type: core_1.ElementRef, },
+        { type: common_1.Location, },
     ]; };
     PieArcComponent.propDecorators = {
         'fill': [{ type: core_1.Input },],

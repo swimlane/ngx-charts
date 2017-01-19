@@ -27,12 +27,18 @@ var GaugeAxisComponent = (function () {
             var angleDeg = i * bigTickSegment;
             var angle = angleDeg * Math.PI / 180;
             var textAnchor = this.getTextAnchor(angleDeg);
-            ticks.big.push({
-                line: this.getTickPath(startDistance, tickLength, angle),
-                textAnchor: textAnchor,
-                text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
-                textTransform: "\n          translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n        "
-            });
+            var skip = false;
+            if (i === 0 && this.angleSpan === 360) {
+                skip = true;
+            }
+            if (!skip) {
+                ticks.big.push({
+                    line: this.getTickPath(startDistance, tickLength, angle),
+                    textAnchor: textAnchor,
+                    text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
+                    textTransform: "\n            translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n          "
+                });
+            }
             if (i === this.bigSegments) {
                 continue;
             }

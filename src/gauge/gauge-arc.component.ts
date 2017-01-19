@@ -28,7 +28,7 @@ import { ColorHelper } from '../common/color.helper';
         [innerRadius]="valueArc.innerRadius"
         [outerRadius]="valueArc.outerRadius"
         [cornerRadius]="cornerRadius"
-        [fill]="colors.getColor(valueArc.data.value)"
+        [fill]="colors.getColor(valueArc.data.name)"
         [data]="valueArc.data"
         [animate]="true"
         [isActive]="isActive"

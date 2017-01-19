@@ -74,4 +74,5 @@ export declare class AreaChartComponent extends BaseChartComponent {
     }): void;
     onActivate(item: any): void;
     onDeactivate(item: any): void;
+    deactivateAll(): void;
 }

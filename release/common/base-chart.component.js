@@ -1,11 +1,13 @@
 "use strict";
 var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
 var Rx_1 = require('rxjs/Rx');
 var BaseChartComponent = (function () {
-    function BaseChartComponent(chartElement, zone, cd) {
+    function BaseChartComponent(chartElement, zone, cd, location) {
         this.chartElement = chartElement;
         this.zone = zone;
         this.cd = cd;
+        this.location = location;
         this.schemeType = 'ordinal';
         this.select = new core_1.EventEmitter();
     }
@@ -39,14 +41,17 @@ var BaseChartComponent = (function () {
         var width = 0;
         var height = 0;
         var hostElem = this.chartElement.nativeElement;
-        if (hostElem.parentNode != null) {
+        if (hostElem.parentNode !== null) {
             // Get the container dimensions
             width = hostElem.parentNode.clientWidth;
             height = hostElem.parentNode.clientHeight;
         }
         return { width: width, height: height };
     };
-    // converts all date objects that appear as name into formatted date strings
+    /**
+     * Converts all date objects that appear as name
+     * into formatted date strings
+     */
     BaseChartComponent.prototype.formatDates = function () {
         for (var i = 0; i < this.results.length; i++) {
             var g = this.results[i];
@@ -123,6 +128,7 @@ var BaseChartComponent = (function () {
         { type: core_1.ElementRef, },
         { type: core_1.NgZone, },
         { type: core_1.ChangeDetectorRef, },
+        { type: common_1.Location, },
     ]; };
     BaseChartComponent.propDecorators = {
         'results': [{ type: core_1.Input },],

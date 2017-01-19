@@ -3,6 +3,7 @@ import {
   OnChanges, ChangeDetectionStrategy, NgZone,
   ChangeDetectorRef, SimpleChanges
 } from '@angular/core';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 import d3 from '../d3';
 import { id } from '../utils/id';
@@ -58,7 +59,7 @@ export class Timeline implements OnChanges {
   filterId: any;
   filter: any;
 
-  constructor(element: ElementRef, private zone: NgZone, private cd: ChangeDetectorRef) {
+  constructor(element: ElementRef, private zone: NgZone, private cd: ChangeDetectorRef, private location: Location) {
     this.element = element.nativeElement;
   }
 
@@ -75,7 +76,7 @@ export class Timeline implements OnChanges {
     this.zone.run(() => {
       this.dims = this.getDims();
       this.height = this.dims.height;
-      let offsetY = this.view[1] - this.height;
+      const offsetY = this.view[1] - this.height;
 
       this.xDomain = this.getXDomain();
       this.xScale = this.getXScale();
@@ -86,7 +87,7 @@ export class Timeline implements OnChanges {
 
       this.transform = `translate(0 , ${ offsetY })`;
 
-      let pageUrl = window.location.href;
+      const pageUrl = this.location.path();
       this.filterId = 'filter' + id().toString();
       this.filter = `url(${pageUrl}#${this.filterId})`;
 
@@ -97,8 +98,8 @@ export class Timeline implements OnChanges {
   getXDomain(): any[] {
     let values = [];
 
-    for (let results of this.results) {
-      for (let d of results.series){
+    for (const results of this.results) {
+      for (const d of results.series){
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -108,13 +109,13 @@ export class Timeline implements OnChanges {
     let domain = [];
     if (this.scaleType === 'time') {
       values = values.map(v => moment(v).toDate());
-      let min = Math.min(...values);
-      let max = Math.max(...values);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
       domain = [min, max];
     } else if (this.scaleType === 'linear') {
       values = values.map(v => Number(v));
-      let min = Math.min(...values);
-      let max = Math.max(...values);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
       domain = [min, max];
     } else {
       domain = values;
@@ -190,9 +191,9 @@ export class Timeline implements OnChanges {
   }
 
   getDims(): any {
-    let width = this.view[0];
+    const width = this.view[0];
 
-    let dims = {
+    const dims = {
       width,
       height: this.height
     };

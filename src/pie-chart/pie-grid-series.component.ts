@@ -64,14 +64,14 @@ export class PieGridSeriesComponent implements OnChanges {
 
   getArcs(): any[] {
     return this.layout(this.data).map((arc, index) => {
-      let label = arc.data.data.name;
-      let other = arc.data.data.other;
+      const label = arc.data.data.name;
+      const other = arc.data.data.other;
 
       if (index === 0) {
         arc.startAngle = 0;
       }
 
-      let color = this.colors(label);
+      const color = this.colors(label);
       return {
         data: arc.data.data,
         class: 'arc ' + 'arc' + index,

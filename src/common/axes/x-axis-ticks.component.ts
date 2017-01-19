@@ -96,7 +96,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   update(): void {
-    let scale = this.scale;
+    const scale = this.scale;
     this.ticks = this.getTicks();
 
     if (this.tickFormatting) {
@@ -112,7 +112,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
       };
     }
 
-    let angle = this.getRotationAngle(this.ticks);
+    const angle = this.getRotationAngle(this.ticks);
 
     this.adjustedScale = this.scale.bandwidth ? function(d) {
       return this.scale(d) + this.scale.bandwidth() * 0.5;
@@ -133,18 +133,18 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   getRotationAngle(ticks): number {
     let angle = 0;
     for (let i = 0; i < ticks.length; i++) {
-      let tick = ticks[i].toString();
+      const tick = ticks[i].toString();
       if (tick.length > this.maxTicksLength) {
         this.maxTicksLength = tick.length;
       }
     }
 
-    let len = Math.min(this.maxTicksLength, this.maxAllowedLength);
-    let charWidth = 8; // need to measure this
-    let wordWidth = len * charWidth;
+    const len = Math.min(this.maxTicksLength, this.maxAllowedLength);
+    const charWidth = 8; // need to measure this
+    const wordWidth = len * charWidth;
 
     let baseWidth = wordWidth;
-    let maxBaseWidth = Math.floor(this.width / ticks.length);
+    const maxBaseWidth = Math.floor(this.width / ticks.length);
 
     // calculate optimal angle
     while(baseWidth > maxBaseWidth && angle > -90) {
@@ -157,7 +157,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   getTicks() {
     let ticks;
-    let maxTicks = this.getMaxTicks();
+    const maxTicks = this.getMaxTicks();
 
     if (this.tickValues) {
       ticks = this.tickValues;
@@ -180,7 +180,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   getMaxTicks(): number {
-    let tickWidth = 20;
+    const tickWidth = 20;
     return Math.floor(this.width / tickWidth);
   }
 

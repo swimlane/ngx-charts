@@ -80,7 +80,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    let node = d3.select(this.element).select('.cell');
+    const node = d3.select(this.element).select('.cell');
 
     node
       .attr('opacity', 0)
@@ -95,7 +95,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    let node = d3.select(this.element).select('.cell');
+    const node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1)

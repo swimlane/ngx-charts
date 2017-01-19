@@ -120,8 +120,8 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getXDomain(): any {
-    let domain = [];
-    for (let group of this.results) {
+    const domain = [];
+    for (const group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
       }
@@ -131,10 +131,10 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
-      for (let d of group.series) {
+    for (const group of this.results) {
+      for (const d of group.series) {
         if (!domain.includes(d.name)) {
           domain.push(d.name);
         }
@@ -145,18 +145,18 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getValueDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
-      for (let d of group.series) {
+    for (const group of this.results) {
+      for (const d of group.series) {
         if (!domain.includes(d.value)) {
           domain.push(d.value);
         }
       }
     }
 
-    let min = Math.min(0, ...domain);
-    let max = Math.max(...domain);
+    const min = Math.min(0, ...domain);
+    const max = Math.max(...domain);
 
     return [min, max];
   }
@@ -178,7 +178,7 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getRects(): any[] {
-    let rects = [];
+    const rects = [];
 
     this.xDomain.map((xVal) => {
       this.yDomain.map((yVal) => {

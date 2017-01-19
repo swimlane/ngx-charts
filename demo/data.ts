@@ -148,10 +148,10 @@ export let countries = [
 ];
 
 export function generateGraph(nodeCount: number) {
-  let nodes = [];
-  let links = [];
+  const nodes = [];
+  const links = [];
   for (let i = 0; i < nodeCount; i++) {
-    let country = countries[Math.floor(Math.random() * countries.length)];
+    const country = countries[Math.floor(Math.random() * countries.length)];
     nodes.push({
       value: country,
     });
@@ -167,30 +167,42 @@ export function generateGraph(nodeCount: number) {
   return { links, nodes };
 }
 
-export function generateData(seriesLength) {
-  let results = [];
+export function generateData(seriesLength: number, includeMinMaxRange: boolean): any[] {
+  const results = [];
 
-  let domain = [];
+  const domain: Date[] = []; // array of time stamps in milliseconds
 
   for (let j = 0; j < 5; j++) {
-    domain.push(Math.floor(1473700105009 + Math.random() * 1000000000));
+    // random dates between Sep 12, 2016 and Sep 24, 2016
+    domain.push(new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)));
   }
 
   for (let i = 0; i < seriesLength; i++) {
-    let country = countries[Math.floor(Math.random() * countries.length)];
-    let series = {
+    const country = countries[Math.floor(Math.random() * countries.length)];
+    const series = {
       name: country,
       series: []
     };
 
     for (let j = 0; j < domain.length; j++) {
-      let value = Math.floor(2000 + Math.random() * 5000);
-      // let name = Math.floor(1473700105009 + Math.random() * 1000000000);
-      let name = domain[j];
-      series.series.push({
-        value,
-        name: new Date(name)
-      });
+      const value = Math.floor(2000 + Math.random() * 5000);
+      // let timestamp = Math.floor(1473700105009 + Math.random() * 1000000000);
+      const timestamp = domain[j];
+      if (includeMinMaxRange) {
+        const errorMargin = 0.02 + Math.random() * 0.08;
+
+        series.series.push({
+          value,
+          name: timestamp,
+          min: Math.floor(value * (1 - errorMargin)),
+          max: Math.ceil(value * (1 + errorMargin))
+        });
+    } else {
+        series.series.push({
+          value,
+          name: timestamp
+        });
+      }
     }
 
     results.push(series);

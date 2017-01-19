@@ -73,7 +73,7 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   update(): void {
-    let pie: any = d3.pie()
+    const pie: any = d3.pie()
       .value((d) => d.value)
       .sort(null);
 
@@ -100,7 +100,7 @@ export class PieSeriesComponent implements OnChanges {
 
   calculateLabelPositions(pieData): any {
     const minDistance = 10;
-    let labelPositions = pieData;
+    const labelPositions = pieData;
 
     labelPositions.forEach((d) => {
       d.pos = this.outerArc().centroid(d);
@@ -108,10 +108,10 @@ export class PieSeriesComponent implements OnChanges {
     });
 
     for (let i = 0; i < labelPositions.length - 1; i++) {
-      let a = labelPositions[i];
+      const a = labelPositions[i];
 
       for (let j = i + 1; j < labelPositions.length; j++) {
-        let b = labelPositions[j];
+        const b = labelPositions[j];
         // if they're on the same side
         if (b.pos[0] * a.pos[0] > 0) {
           // if they're overlapping
@@ -159,7 +159,7 @@ export class PieSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;

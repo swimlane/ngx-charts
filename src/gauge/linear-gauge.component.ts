@@ -148,15 +148,15 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
 
       this.setColors();
  
-      let xOffset = this.margin[3] + this.dims.width / 2;
-      let yOffset = this.margin[0] + this.dims.height / 2;
+      const xOffset = this.margin[3] + this.dims.width / 2;
+      const yOffset = this.margin[0] + this.dims.height / 2;
 
       this.transform = `translate(${ xOffset }, ${ yOffset })`;
       this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
       this.valueTranslate = `translate(0, -15)`;
       this.unitsTranslate = `translate(0, 15)`;
-      this.scaleText('value');
-      this.scaleText('units');
+      setTimeout(() => this.scaleText('value'), 50);
+      setTimeout(() => this.scaleText('units'), 50);      
     });
   }
 
@@ -174,7 +174,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
     return this.value.toLocaleString();
   }
 
-  scaleText(element): void {
+  scaleText(element, repeat: boolean = true): void {
     this.zone.run(() => {
       let el;
       let resizeScale;
@@ -191,8 +191,8 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
       const oldScale = resizeScale;
       const availableWidth = this.dims.width;
       const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-      let resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-      let resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+      const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+      const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
       resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
       
       if (resizeScale !== oldScale) {
@@ -203,9 +203,10 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
           this.unitsResizeScale = resizeScale;
           this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
         }
-        
-        this.cd.markForCheck();
-        setTimeout(() => { this.scaleText(element); });
+        this.cd.markForCheck();        
+        if (repeat) {
+          setTimeout(() => { this.scaleText(element, false); }, 50); 
+        }
       }
     });
   }

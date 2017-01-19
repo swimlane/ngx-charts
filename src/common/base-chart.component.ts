@@ -11,6 +11,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -30,7 +31,11 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   height: number;
   resizeSubscription: any;
 
-  constructor(protected chartElement: ElementRef, protected zone: NgZone, protected cd: ChangeDetectorRef) {
+  constructor(
+    protected chartElement: ElementRef, 
+    protected zone: NgZone, 
+    protected cd: ChangeDetectorRef,
+    protected location: Location) {
   }
 
   ngAfterViewInit(): void {
@@ -54,7 +59,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.width = this.view[0];
       this.height = this.view[1];
     } else {
-      let dims = this.getContainerDims();
+      const dims = this.getContainerDims();
       this.width = dims.width;
       this.height = dims.height;
     }
@@ -68,25 +73,31 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     let width = 0;
     let height = 0;
     const hostElem = this.chartElement.nativeElement;
-    if (hostElem.parentNode != null) {
+
+    if (hostElem.parentNode !== null) {
       // Get the container dimensions
       width = hostElem.parentNode.clientWidth;
       height = hostElem.parentNode.clientHeight;
     }
-    return {width, height};
+
+    return { width, height };
   }
 
-  // converts all date objects that appear as name into formatted date strings
-  formatDates() {
+  /**
+   * Converts all date objects that appear as name 
+   * into formatted date strings
+   */
+  formatDates(): void {
     for (let i = 0; i < this.results.length; i++) {
-      let g = this.results[i];
+      const g = this.results[i];
+
       if (g.name instanceof Date) {
         g.name = g.name.toLocaleDateString();
       }
 
       if (g.series) {
         for (let j = 0; j < g.series.length; j++) {
-          let d = g.series[j];
+          const d = g.series[j];
           if (d.name instanceof Date) {
             d.name = d.name.toLocaleDateString();
           }
@@ -103,8 +114,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private bindWindowResizeEvent(): void {
     this.zone.run(() => {
-      let source = Observable.fromEvent(window, 'resize', null, null);
-      let subscription = source.debounceTime(200).subscribe(e => {
+      const source = Observable.fromEvent(window, 'resize', null, null);
+      const subscription = source.debounceTime(200).subscribe(e => {
         this.update();
         if (this.cd) {
           this.cd.markForCheck();
@@ -124,10 +135,10 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
    * @memberOf BaseChart
    */
   private cloneData(data): any {
-    let results = [];
+    const results = [];
 
-    for (let item of data) {
-      let copy = {
+    for (const item of data) {
+      const copy = {
         name: item['name']
       };
 
@@ -137,8 +148,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
       if (item['series'] !== undefined) {
         copy['series'] = [];
-        for (let seriesItem of item['series']) {
-          let seriesItemCopy = Object.assign({}, seriesItem);
+        for (const seriesItem of item['series']) {
+          const seriesItemCopy = Object.assign({}, seriesItem);
           copy['series'].push(seriesItemCopy);
         }
       }

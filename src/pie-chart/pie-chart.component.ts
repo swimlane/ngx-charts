@@ -45,6 +45,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() explodeSlices = false;
   @Input() doughnut = false;
+  @Input() arcWidth = 0.25;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
 
@@ -78,8 +79,8 @@ export class PieChartComponent extends BaseChartComponent {
         columns: 10
       });
 
-      let xOffset = this.margin[3] + this.dims.width / 2;
-      let yOffset = this.margin[0] + this.dims.height / 2;
+      const xOffset = this.margin[3] + this.dims.width / 2;
+      const yOffset = this.margin[0] + this.dims.height / 2;
       this.translation = `translate(${xOffset}, ${yOffset})`;
       this.outerRadius = Math.min(this.dims.width, this.dims.height);
       if (this.labels) {
@@ -90,7 +91,7 @@ export class PieChartComponent extends BaseChartComponent {
       }
       this.innerRadius = 0;
       if (this.doughnut) {
-        this.innerRadius = this.outerRadius * 0.75;
+        this.innerRadius = this.outerRadius * (1 - this.arcWidth);
       }
 
       this.domain = this.getDomain();
@@ -106,7 +107,7 @@ export class PieChartComponent extends BaseChartComponent {
   }
 
   getDomain(): any[] {
-    let items = [];
+    const items = [];
 
     this.results.map(d => {
       let label = d.name;
@@ -147,7 +148,7 @@ export class PieChartComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-    
+
     this.activeEntries = [ item, ...this.activeEntries ];
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
@@ -160,7 +161,7 @@ export class PieChartComponent extends BaseChartComponent {
     this.activeEntries.splice(idx, 1);
     this.activeEntries = [...this.activeEntries];
 
-    this.deactivate.emit({ value: event, entries: this.activeEntries });
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
 }

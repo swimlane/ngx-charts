@@ -49,7 +49,7 @@ export class ScaleLegendComponent implements OnChanges {
   gradientString(colors, splits): string {
     // add the 100%
     splits.push(1);
-    let pairs = [];
+    const pairs = [];
     colors.reverse().forEach((c, i) => {
       pairs.push(`${c} ${Math.round(splits[i] * 100)}%`);
     });

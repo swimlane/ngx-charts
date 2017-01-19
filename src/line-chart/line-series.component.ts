@@ -5,6 +5,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { Location } from '@angular/common';
 import d3 from '../d3';
 import * as moment from 'moment';
 import { id } from '../utils/id';
@@ -42,6 +43,15 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />
+     <svg:g ngx-charts-area
+        class="line-series-range"
+        [data]="data"
+        [path]="outerPath"
+        [fill]="hasGradient ? gradientUrl : colors.getColor(data.name)"
+        [class.active]="isActive(data)"
+        [class.inactive]="isInactive(data)"
+        [opacity]="rangeFillOpacity"
+      />
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -55,14 +65,19 @@ export class LineSeriesComponent implements OnChanges {
   @Input() scaleType;
   @Input() curve: string;
   @Input() activeEntries: any[];
+  @Input() rangeFillOpacity: number;
 
   path: string;
+  outerPath: string;
   areaPath: string;
   gradientId: string;
   gradientUrl: string;
   hasGradient: boolean;
   gradientStops: any[];
   areaGradientStops: any[];
+
+  constructor(private location: Location) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -71,19 +86,21 @@ export class LineSeriesComponent implements OnChanges {
   update(): void {    
     this.updateGradients();
 
-    let line = this.getLineGenerator();
-    let area = this.getAreaGenerator();
+    const line = this.getLineGenerator();
+    const area = this.getAreaGenerator();
+    const range = this.getRangeGenerator();
 
-    let data = this.sortData(this.data.series);
+    const data = this.sortData(this.data.series);
 
     this.path = line(data) || '';
+    this.outerPath = range(data) || '';
     this.areaPath = area(data) || '';
   }
 
   getLineGenerator() {
     return d3.line()
       .x(d => {
-        let label = d.name;
+        const label = d.name;
         let value;
         if (this.scaleType === 'time') {
           value = this.xScale(moment(label).toDate());
@@ -98,8 +115,27 @@ export class LineSeriesComponent implements OnChanges {
       .curve(this.curve);
   }
 
+  getRangeGenerator() {
+    return d3.area()
+        .x(d => {
+          const label = d.name;
+          let value;
+          if (this.scaleType === 'time') {
+            value = this.xScale(moment(label).toDate());
+          } else if (this.scaleType === 'linear') {
+            value = this.xScale(Number(label));
+          } else {
+            value = this.xScale(label);
+          }
+          return value;
+        })
+        .y0(d => this.yScale(d.min ? d.min : d.value))
+        .y1(d => this.yScale(d.max ? d.max : d.value))
+        .curve(this.curve);
+  }
+
   getAreaGenerator() {
-    let xProperty = (d) => {
+    const xProperty = (d) => {
       const label = d.name;
       return this.xScale(label);
     };
@@ -126,12 +162,12 @@ export class LineSeriesComponent implements OnChanges {
   updateGradients() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-      let pageUrl = window.location.href;      
+      const pageUrl = this.location.path();
       this.gradientId = 'grad' + id().toString();
       this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
-      let values = this.data.series.map(d => d.value);
-      let max = Math.max(...values);
-      let min = Math.min(...values);
+      const values = this.data.series.map(d => d.value);
+      const max = Math.max(...values);
+      const min = Math.min(...values);
       this.gradientStops = this.colors.getLinearGradientStops(max, min);
       this.areaGradientStops = this.colors.getLinearGradientStops(max);
     } else {
@@ -143,7 +179,7 @@ export class LineSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item !== undefined;
@@ -151,7 +187,7 @@ export class LineSeriesComponent implements OnChanges {
 
   isInactive(entry): boolean {
     if(!this.activeEntries || this.activeEntries.length === 0) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item === undefined;

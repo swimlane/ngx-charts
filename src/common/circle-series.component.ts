@@ -1,7 +1,17 @@
 import {
-  Component, Input, Output, SimpleChanges, EventEmitter,
-  OnChanges, ChangeDetectionStrategy
+  Component,
+  Input,
+  Output,
+  SimpleChanges,
+  EventEmitter,
+  OnChanges,
+  ChangeDetectionStrategy,
+  trigger,
+  style,
+  transition,
+  animate
 } from '@angular/core';
+import { Location } from '@angular/common';
 import * as moment from 'moment';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
@@ -20,6 +30,7 @@ import { id } from '../utils/id';
       </defs>
       <svg:rect
         *ngIf="circle.barVisible && type === 'standard'"
+        [@animationState]="'active'"
         [attr.x]="circle.cx - circle.radius"
         [attr.y]="circle.cy"
         [attr.width]="circle.radius * 2"
@@ -48,7 +59,17 @@ import { id } from '../utils/id';
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition('void => *', [
+        style({
+          opacity: 0,
+        }),
+        animate(250, style({opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class CircleSeriesComponent implements OnChanges {
 
@@ -68,6 +89,9 @@ export class CircleSeriesComponent implements OnChanges {
   areaPath: any;
   circles: any[];
 
+  constructor(private location: Location) {
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -78,7 +102,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   getCircles(): any[] {
     const seriesName = this.data.name;
-    const pageUrl = window.location.href;
+    const pageUrl = this.location.path();
 
     return this.data.series.map((d, i) => {
       const value = d.value;
@@ -133,17 +157,43 @@ export class CircleSeriesComponent implements OnChanges {
           barVisible: false,
           gradientId,
           gradientFill,
-          gradientStops: this.getGradientStops(color)
+          gradientStops: this.getGradientStops(color),
+          min: d.min,
+          max: d.max
         };
       }
     }).filter((circle) => circle !== undefined);
   }
 
-  getTooltipText({ tooltipLabel, value, seriesName }): string {
+  getTooltipText({ tooltipLabel, value, seriesName, min, max}): string {
     return `
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
-      <span class="tooltip-val">${value.toLocaleString()}</span>
+      <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
     `;
+  }
+
+  getTooltipMinMaxText(min: any, max: any) {
+    if (min !== undefined || max  !== undefined) {
+      let result = ' (';
+      if (min !== undefined) {
+        if (max === undefined) {
+          result += '≥';
+        }
+        result += min.toLocaleString();
+        if (max !== undefined) {
+          result += ' - ';
+        }
+      } else if (max !== undefined) {
+        result += '≤';
+      }
+      if (max !== undefined) {
+        result += max.toLocaleString();
+      }
+      result += ')';
+      return result;
+    } else {
+      return '';
+    }
   }
 
   getGradientStops(color) {
@@ -169,7 +219,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
     return item !== undefined;

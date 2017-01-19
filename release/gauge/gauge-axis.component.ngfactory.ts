@@ -15,11 +15,11 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/view_container';
-import * as import10 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import11 from '@angular/core/src/linker/template_ref';
-import * as import12 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import13 from '@angular/common/src/directives/ng_for';
-import * as import14 from '@angular/core/src/security';
+import * as import10 from '@angular/core/src/security';
+import * as import11 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import12 from '@angular/core/src/linker/template_ref';
+import * as import13 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import14 from '@angular/common/src/directives/ng_for';
 export class Wrapper_GaugeAxisComponent {
   /*private*/ _eventHandler:Function;
   context:import0.GaugeAxisComponent;
@@ -166,108 +166,6 @@ class View_GaugeAxisComponent_Host0 extends import2.AppView<any> {
 }
 export const GaugeAxisComponentNgFactory:import8.ComponentFactory<import0.GaugeAxisComponent> = new import8.ComponentFactory<import0.GaugeAxisComponent>('g[ngx-charts-gauge-axis]',View_GaugeAxisComponent_Host0,import0.GaugeAxisComponent);
 const styles_GaugeAxisComponent:any[] = ([] as any[]);
-var renderType_GaugeAxisComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_GaugeAxisComponent,{});
-export class View_GaugeAxisComponent0 extends import2.AppView<import0.GaugeAxisComponent> {
-  _text_0:any;
-  _el_1:any;
-  _text_2:any;
-  _anchor_3:any;
-  /*private*/ _vc_3:import9.ViewContainer;
-  _TemplateRef_3_5:any;
-  _NgFor_3_6:import10.Wrapper_NgFor;
-  _text_4:any;
-  _anchor_5:any;
-  /*private*/ _vc_5:import9.ViewContainer;
-  _TemplateRef_5_5:any;
-  _NgFor_5_6:import10.Wrapper_NgFor;
-  _text_6:any;
-  _anchor_7:any;
-  /*private*/ _vc_7:import9.ViewContainer;
-  _TemplateRef_7_5:any;
-  _NgFor_7_6:import10.Wrapper_NgFor;
-  _text_8:any;
-  _text_9:any;
-  /*private*/ _expr_19:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
-    super(View_GaugeAxisComponent0,renderType_GaugeAxisComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
-    this._expr_19 = import1.UNINITIALIZED;
-  }
-  createInternal(rootSelector:string):import8.ComponentRef<any> {
-    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
-    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._text_2 = this.renderer.createText(this._el_1,'\n        ',(null as any));
-    this._anchor_3 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_3 = new import9.ViewContainer(3,1,this,this._anchor_3);
-    this._TemplateRef_3_5 = new import11.TemplateRef_(this,3,this._anchor_3);
-    this._NgFor_3_6 = new import10.Wrapper_NgFor(this._vc_3.vcRef,this._TemplateRef_3_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
-    this._text_4 = this.renderer.createText(this._el_1,'\n        ',(null as any));
-    this._anchor_5 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_5 = new import9.ViewContainer(5,1,this,this._anchor_5);
-    this._TemplateRef_5_5 = new import11.TemplateRef_(this,5,this._anchor_5);
-    this._NgFor_5_6 = new import10.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
-    this._text_6 = this.renderer.createText(this._el_1,'\n        ',(null as any));
-    this._anchor_7 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
-    this._vc_7 = new import9.ViewContainer(7,1,this,this._anchor_7);
-    this._TemplateRef_7_5 = new import11.TemplateRef_(this,7,this._anchor_7);
-    this._NgFor_7_6 = new import10.Wrapper_NgFor(this._vc_7.vcRef,this._TemplateRef_7_5,this.parentView.injectorGet(import12.IterableDiffers,this.parentIndex),this.ref);
-    this._text_8 = this.renderer.createText(this._el_1,'\n    ',(null as any));
-    this._text_9 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
-      this._text_0,
-      this._el_1,
-      this._text_2,
-      this._anchor_3,
-      this._text_4,
-      this._anchor_5,
-      this._text_6,
-      this._anchor_7,
-      this._text_8,
-      this._text_9
-    ]
-    ),(null as any));
-    return (null as any);
-  }
-  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import11.TemplateRef) && (3 === requestNodeIndex))) { return this._TemplateRef_3_5; }
-    if (((token === import13.NgFor) && (3 === requestNodeIndex))) { return this._NgFor_3_6.context; }
-    if (((token === import11.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
-    if (((token === import13.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
-    if (((token === import11.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
-    if (((token === import13.NgFor) && (7 === requestNodeIndex))) { return this._NgFor_7_6.context; }
-    return notFoundResult;
-  }
-  detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_3_0_0:any = this.context.ticks.big;
-    this._NgFor_3_6.check_ngForOf(currVal_3_0_0,throwOnChange,false);
-    this._NgFor_3_6.ngDoCheck(this,this._anchor_3,throwOnChange);
-    const currVal_5_0_0:any = this.context.ticks.big;
-    this._NgFor_5_6.check_ngForOf(currVal_5_0_0,throwOnChange,false);
-    this._NgFor_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
-    const currVal_7_0_0:any = this.context.ticks.small;
-    this._NgFor_7_6.check_ngForOf(currVal_7_0_0,throwOnChange,false);
-    this._NgFor_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
-    this._vc_3.detectChangesInNestedViews(throwOnChange);
-    this._vc_5.detectChangesInNestedViews(throwOnChange);
-    this._vc_7.detectChangesInNestedViews(throwOnChange);
-    const currVal_19:any = this.context.rotate;
-    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
-      this.renderer.setElementAttribute(this._el_1,'transform',((currVal_19 == null)? (null as any): currVal_19.toString()));
-      this._expr_19 = currVal_19;
-    }
-  }
-  destroyInternal():void {
-    this._vc_3.destroyNestedViews();
-    this._vc_5.destroyNestedViews();
-    this._vc_7.destroyNestedViews();
-  }
-  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
-    if ((nodeIndex == 3)) { return new View_GaugeAxisComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
-    if ((nodeIndex == 5)) { return new View_GaugeAxisComponent2(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
-    if ((nodeIndex == 7)) { return new View_GaugeAxisComponent3(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
-    return (null as any);
-  }
-}
 class View_GaugeAxisComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
@@ -337,7 +235,7 @@ class View_GaugeAxisComponent2 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_5:any = this.context.$implicit.textAnchor;
     if (import3.checkBinding(throwOnChange,this._expr_5,currVal_5)) {
-      this.renderer.setElementStyle(this._el_2,'textAnchor',((this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_5) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_5).toString()));
+      this.renderer.setElementStyle(this._el_2,'textAnchor',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_5) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_5).toString()));
       this._expr_5 = currVal_5;
     }
     const currVal_6:any = this.context.$implicit.textTransform;
@@ -388,5 +286,107 @@ class View_GaugeAxisComponent3 extends import2.AppView<any> {
   }
   visitRootNodesInternal(cb:any,ctx:any):void {
     cb(this._el_0,ctx);
+  }
+}
+var renderType_GaugeAxisComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_GaugeAxisComponent,{});
+export class View_GaugeAxisComponent0 extends import2.AppView<import0.GaugeAxisComponent> {
+  _text_0:any;
+  _el_1:any;
+  _text_2:any;
+  _anchor_3:any;
+  /*private*/ _vc_3:import9.ViewContainer;
+  _TemplateRef_3_5:any;
+  _NgFor_3_6:import11.Wrapper_NgFor;
+  _text_4:any;
+  _anchor_5:any;
+  /*private*/ _vc_5:import9.ViewContainer;
+  _TemplateRef_5_5:any;
+  _NgFor_5_6:import11.Wrapper_NgFor;
+  _text_6:any;
+  _anchor_7:any;
+  /*private*/ _vc_7:import9.ViewContainer;
+  _TemplateRef_7_5:any;
+  _NgFor_7_6:import11.Wrapper_NgFor;
+  _text_8:any;
+  _text_9:any;
+  /*private*/ _expr_19:any;
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
+    super(View_GaugeAxisComponent0,renderType_GaugeAxisComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
+    this._expr_19 = import1.UNINITIALIZED;
+  }
+  createInternal(rootSelector:string):import8.ComponentRef<any> {
+    const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
+    this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
+    this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this._text_2 = this.renderer.createText(this._el_1,'\n        ',(null as any));
+    this._anchor_3 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
+    this._vc_3 = new import9.ViewContainer(3,1,this,this._anchor_3);
+    this._TemplateRef_3_5 = new import12.TemplateRef_(this,3,this._anchor_3);
+    this._NgFor_3_6 = new import11.Wrapper_NgFor(this._vc_3.vcRef,this._TemplateRef_3_5,this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.ref);
+    this._text_4 = this.renderer.createText(this._el_1,'\n        ',(null as any));
+    this._anchor_5 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
+    this._vc_5 = new import9.ViewContainer(5,1,this,this._anchor_5);
+    this._TemplateRef_5_5 = new import12.TemplateRef_(this,5,this._anchor_5);
+    this._NgFor_5_6 = new import11.Wrapper_NgFor(this._vc_5.vcRef,this._TemplateRef_5_5,this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.ref);
+    this._text_6 = this.renderer.createText(this._el_1,'\n        ',(null as any));
+    this._anchor_7 = this.renderer.createTemplateAnchor(this._el_1,(null as any));
+    this._vc_7 = new import9.ViewContainer(7,1,this,this._anchor_7);
+    this._TemplateRef_7_5 = new import12.TemplateRef_(this,7,this._anchor_7);
+    this._NgFor_7_6 = new import11.Wrapper_NgFor(this._vc_7.vcRef,this._TemplateRef_7_5,this.parentView.injectorGet(import13.IterableDiffers,this.parentIndex),this.ref);
+    this._text_8 = this.renderer.createText(this._el_1,'\n    ',(null as any));
+    this._text_9 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
+      this._text_0,
+      this._el_1,
+      this._text_2,
+      this._anchor_3,
+      this._text_4,
+      this._anchor_5,
+      this._text_6,
+      this._anchor_7,
+      this._text_8,
+      this._text_9
+    ]
+    ),(null as any));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import12.TemplateRef) && (3 === requestNodeIndex))) { return this._TemplateRef_3_5; }
+    if (((token === import14.NgFor) && (3 === requestNodeIndex))) { return this._NgFor_3_6.context; }
+    if (((token === import12.TemplateRef) && (5 === requestNodeIndex))) { return this._TemplateRef_5_5; }
+    if (((token === import14.NgFor) && (5 === requestNodeIndex))) { return this._NgFor_5_6.context; }
+    if (((token === import12.TemplateRef) && (7 === requestNodeIndex))) { return this._TemplateRef_7_5; }
+    if (((token === import14.NgFor) && (7 === requestNodeIndex))) { return this._NgFor_7_6.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    const currVal_3_0_0:any = this.context.ticks.big;
+    this._NgFor_3_6.check_ngForOf(currVal_3_0_0,throwOnChange,false);
+    this._NgFor_3_6.ngDoCheck(this,this._anchor_3,throwOnChange);
+    const currVal_5_0_0:any = this.context.ticks.big;
+    this._NgFor_5_6.check_ngForOf(currVal_5_0_0,throwOnChange,false);
+    this._NgFor_5_6.ngDoCheck(this,this._anchor_5,throwOnChange);
+    const currVal_7_0_0:any = this.context.ticks.small;
+    this._NgFor_7_6.check_ngForOf(currVal_7_0_0,throwOnChange,false);
+    this._NgFor_7_6.ngDoCheck(this,this._anchor_7,throwOnChange);
+    this._vc_3.detectChangesInNestedViews(throwOnChange);
+    this._vc_5.detectChangesInNestedViews(throwOnChange);
+    this._vc_7.detectChangesInNestedViews(throwOnChange);
+    const currVal_19:any = this.context.rotate;
+    if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
+      this.renderer.setElementAttribute(this._el_1,'transform',((currVal_19 == null)? (null as any): currVal_19.toString()));
+      this._expr_19 = currVal_19;
+    }
+  }
+  destroyInternal():void {
+    this._vc_3.destroyNestedViews();
+    this._vc_5.destroyNestedViews();
+    this._vc_7.destroyNestedViews();
+  }
+  createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
+    if ((nodeIndex == 3)) { return new View_GaugeAxisComponent1(this.viewUtils,this,3,this._anchor_3,this._vc_3); }
+    if ((nodeIndex == 5)) { return new View_GaugeAxisComponent2(this.viewUtils,this,5,this._anchor_5,this._vc_5); }
+    if ((nodeIndex == 7)) { return new View_GaugeAxisComponent3(this.viewUtils,this,7,this._anchor_7,this._vc_7); }
+    return (null as any);
   }
 }
