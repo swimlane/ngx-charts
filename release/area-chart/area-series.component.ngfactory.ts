@@ -90,7 +90,7 @@ export class Wrapper_AreaSeriesComponent {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_4,currValue))) {
       this._changed = true;
       this.context.scaleType = currValue;
-      this._changes['xScaleType'] = new import1.SimpleChange(this._expr_4,currValue);
+      this._changes['scaleType'] = new import1.SimpleChange(this._expr_4,currValue);
       this._expr_4 = currValue;
     }
   }

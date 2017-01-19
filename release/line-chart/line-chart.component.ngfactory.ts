@@ -64,6 +64,8 @@ export class Wrapper_LineChartComponent {
   /*private*/ _expr_16:any;
   /*private*/ _expr_17:any;
   /*private*/ _expr_18:any;
+  /*private*/ _expr_19:any;
+  /*private*/ _expr_20:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -90,6 +92,8 @@ export class Wrapper_LineChartComponent {
     this._expr_16 = import1.UNINITIALIZED;
     this._expr_17 = import1.UNINITIALIZED;
     this._expr_18 = import1.UNINITIALIZED;
+    this._expr_19 = import1.UNINITIALIZED;
+    this._expr_20 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -195,60 +199,76 @@ export class Wrapper_LineChartComponent {
       this._expr_11 = currValue;
     }
   }
-  check_autoScale(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_xAxisTransform(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_12,currValue))) {
       this._changed = true;
-      this.context.autoScale = currValue;
-      this._changes['autoScale'] = new import1.SimpleChange(this._expr_12,currValue);
+      this.context.xAxisTransform = currValue;
+      this._changes['xAxisTransform'] = new import1.SimpleChange(this._expr_12,currValue);
       this._expr_12 = currValue;
     }
   }
-  check_timeline(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_yAxisTransform(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
       this._changed = true;
-      this.context.timeline = currValue;
-      this._changes['timeline'] = new import1.SimpleChange(this._expr_13,currValue);
+      this.context.yAxisTransform = currValue;
+      this._changes['yAxisTransform'] = new import1.SimpleChange(this._expr_13,currValue);
       this._expr_13 = currValue;
     }
   }
-  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_autoScale(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_14,currValue))) {
       this._changed = true;
-      this.context.gradient = currValue;
-      this._changes['gradient'] = new import1.SimpleChange(this._expr_14,currValue);
+      this.context.autoScale = currValue;
+      this._changes['autoScale'] = new import1.SimpleChange(this._expr_14,currValue);
       this._expr_14 = currValue;
     }
   }
-  check_showGridLines(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_timeline(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_15,currValue))) {
       this._changed = true;
-      this.context.showGridLines = currValue;
-      this._changes['showGridLines'] = new import1.SimpleChange(this._expr_15,currValue);
+      this.context.timeline = currValue;
+      this._changes['timeline'] = new import1.SimpleChange(this._expr_15,currValue);
       this._expr_15 = currValue;
     }
   }
-  check_curve(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_16,currValue))) {
       this._changed = true;
-      this.context.curve = currValue;
-      this._changes['curve'] = new import1.SimpleChange(this._expr_16,currValue);
+      this.context.gradient = currValue;
+      this._changes['gradient'] = new import1.SimpleChange(this._expr_16,currValue);
       this._expr_16 = currValue;
     }
   }
-  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_showGridLines(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_17,currValue))) {
       this._changed = true;
-      this.context.activeEntries = currValue;
-      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_17,currValue);
+      this.context.showGridLines = currValue;
+      this._changes['showGridLines'] = new import1.SimpleChange(this._expr_17,currValue);
       this._expr_17 = currValue;
     }
   }
-  check_rangeFillOpacity(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_curve(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_18,currValue))) {
       this._changed = true;
-      this.context.rangeFillOpacity = currValue;
-      this._changes['rangeFillOpacity'] = new import1.SimpleChange(this._expr_18,currValue);
+      this.context.curve = currValue;
+      this._changes['curve'] = new import1.SimpleChange(this._expr_18,currValue);
       this._expr_18 = currValue;
+    }
+  }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_19,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_19,currValue);
+      this._expr_19 = currValue;
+    }
+  }
+  check_rangeFillOpacity(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_20,currValue))) {
+      this._changed = true;
+      this.context.rangeFillOpacity = currValue;
+      this._changes['rangeFillOpacity'] = new import1.SimpleChange(this._expr_20,currValue);
+      this._expr_20 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -475,7 +495,7 @@ class View_LineChartComponent3 extends import2.AppView<any> {
     this._LineSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.colors;
     this._LineSeriesComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = this.parentView.context.scaleType;
+    const currVal_2_0_4:any = this.parentView.context.xScaleType;
     this._LineSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.context.curve;
     this._LineSeriesComponent_2_3.check_curve(currVal_2_0_5,throwOnChange,false);
@@ -535,7 +555,7 @@ class View_LineChartComponent4 extends import2.AppView<any> {
     this._CircleSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.context.colors;
     this._CircleSeriesComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = this.parentView.context.scaleType;
+    const currVal_2_0_4:any = this.parentView.context.xScaleType;
     this._CircleSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.context.hoveredVertical;
     this._CircleSeriesComponent_2_3.check_visibleValue(currVal_2_0_5,throwOnChange,false);
@@ -609,7 +629,7 @@ class View_LineChartComponent6 extends import2.AppView<any> {
     this._LineSeriesComponent_2_3.check_yScale(currVal_2_0_2,throwOnChange,false);
     const currVal_2_0_3:any = this.parentView.parentView.context.colors;
     this._LineSeriesComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
-    const currVal_2_0_4:any = this.parentView.parentView.context.scaleType;
+    const currVal_2_0_4:any = this.parentView.parentView.context.xScaleType;
     this._LineSeriesComponent_2_3.check_scaleType(currVal_2_0_4,throwOnChange,false);
     const currVal_2_0_5:any = this.parentView.parentView.context.curve;
     this._LineSeriesComponent_2_3.check_curve(currVal_2_0_5,throwOnChange,false);
@@ -685,7 +705,7 @@ class View_LineChartComponent5 extends import2.AppView<any> {
     this._Timeline_0_3.check_customColors(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.legend;
     this._Timeline_0_3.check_legend(currVal_0_0_4,throwOnChange,false);
-    const currVal_0_0_5:any = this.parentView.context.scaleType;
+    const currVal_0_0_5:any = this.parentView.context.xScaleType;
     this._Timeline_0_3.check_scaleType(currVal_0_0_5,throwOnChange,false);
     const currVal_0_0_6:any = this.parentView.context.timelineHeight;
     this._Timeline_0_3.check_height(currVal_0_0_6,throwOnChange,false);
@@ -960,7 +980,7 @@ export class View_LineChartComponent0 extends import2.AppView<import0.LineChartC
     const currVal_23_0_0:any = this.context.results;
     this._NgFor_23_6.check_ngForOf(currVal_23_0_0,throwOnChange,false);
     this._NgFor_23_6.ngDoCheck(this,this._anchor_23,throwOnChange);
-    const currVal_27_0_0:any = (this.context.timeline && (this.context.scaleType === 'time'));
+    const currVal_27_0_0:any = (this.context.timeline && (this.context.xScaleType === 'time'));
     this._NgIf_27_6.check_ngIf(currVal_27_0_0,throwOnChange,false);
     this._NgIf_27_6.ngDoCheck(this,this._anchor_27,throwOnChange);
     this._vc_1.detectChangesInNestedViews(throwOnChange);

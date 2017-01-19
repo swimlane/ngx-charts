@@ -47,7 +47,7 @@ var CircleSeriesComponent = (function () {
                 var gradientId = 'grad' + id_1.id().toString();
                 var gradientFill = "url(" + pageUrl + "#" + gradientId + ")";
                 var color = void 0;
-                if (_this.colors.scaleType === 'linear') {
+                if (_this.colors.xScaleType === 'linear') {
                     if (_this.type === 'standard') {
                         color = _this.colors.getColor(value);
                     }

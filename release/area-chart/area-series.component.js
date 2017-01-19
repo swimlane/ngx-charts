@@ -57,7 +57,7 @@ var AreaSeriesComponent = (function () {
         this.startingPath = startingArea(data);
     };
     AreaSeriesComponent.prototype.updateGradient = function () {
-        if (this.colors.scaleType === 'linear') {
+        if (this.colors.xScaleType === 'linear') {
             this.hasGradient = true;
             if (this.stacked || this.normalized) {
                 var d0values = this.data.series.map(function (d) { return d.d0; });
