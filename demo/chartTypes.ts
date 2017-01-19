@@ -83,7 +83,10 @@ const chartGroups = [
         name: 'Pie Chart',
         selector: 'pie-chart',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'explodeSlices', 'showLabels']
+        options: [
+          'colorScheme', 'gradient', 'showLegend', 'doughnut', 'arcWidth',
+          'explodeSlices', 'showLabels'
+        ]
       },
       {
         name: 'Advanced Pie Chart',

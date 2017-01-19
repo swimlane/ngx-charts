@@ -176,6 +176,7 @@ import './demo.scss';
             [explodeSlices]="explodeSlices"
             [labels]="showLabels"
             [doughnut]="doughnut"
+            [arcWidth]="arcWidth"
             (legendLabelClick)="onLegendLabelClick($event)"
             [gradient]="gradient"
             (select)="select($event)">
@@ -546,6 +547,11 @@ import './demo.scss';
               Doughnut
             </label> <br />
           </div>
+          <div *ngIf="chart.options.includes('arcWidth')">
+            <label>Arc width (fraction of radius):</label><br />
+            <input type="number" [disabled]="!doughnut" [(ngModel)]="arcWidth"
+              max="1" min="0" step="0.01"><br />
+          </div>
           <div *ngIf="chart.options.includes('autoScale')">
             <label>
               <input type="checkbox" [checked]="autoScale" (change)="autoScale = $event.target.checked">
@@ -692,6 +698,7 @@ export class AppComponent implements OnInit {
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
+  arcWidth = 0.25;
 
   // line, area
   autoScale = true;

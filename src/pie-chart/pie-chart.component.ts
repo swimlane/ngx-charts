@@ -45,6 +45,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() explodeSlices = false;
   @Input() doughnut = false;
+  @Input() arcWidth = 0.25;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
 
@@ -90,7 +91,7 @@ export class PieChartComponent extends BaseChartComponent {
       }
       this.innerRadius = 0;
       if (this.doughnut) {
-        this.innerRadius = this.outerRadius * 0.75;
+        this.innerRadius = this.outerRadius * (1 - this.arcWidth);
       }
 
       this.domain = this.getDomain();
