@@ -588,7 +588,7 @@ import './demo.scss';
           </div>
 
           <div *ngIf="chart.options.includes('innerPadding')">
-            <label>X Inner padding value:</label><br />
+            <label>Inner padding value:</label><br />
             <input type="number" [(ngModel)]="innerPadding" min="0" step="1"><br />
           </div>
 
