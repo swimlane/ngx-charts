@@ -140,7 +140,7 @@ export class AreaTooltip implements OnChanges {
           val = (item.d1 - item.d0).toFixed(2) + '%';
         }
         let color;
-        if (this.colors.scaleType === 'linear') {
+        if (this.colors.xScaleType === 'linear') {
           let v = val;
           if (item.d1) {
             v = item.d1;

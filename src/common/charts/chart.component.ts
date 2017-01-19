@@ -103,7 +103,7 @@ export class ChartComponent implements OnChanges {
   }
 
   getLegendType(): string {
-    if (this.legendOptions.scaleType === 'linear') {
+    if (this.legendOptions.xScaleType === 'linear') {
       return 'scaleLegend';
     } else {
       return 'legend';
