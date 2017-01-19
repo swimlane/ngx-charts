@@ -109,7 +109,7 @@ export class PieGridComponent extends BaseChartComponent {
   }
 
   getSeries(): any[] {
-    let total = this.getTotal();
+    const total = this.getTotal();
 
     return this.data.map((d) => {
       const baselineLabelHeight = 20;

@@ -176,9 +176,9 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getGroupDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
+    for (const group of this.results) {
       if (!domain.includes(group.name)) {
         domain.push(group.name);
       }
@@ -188,10 +188,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getInnerDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
-      for (let d of group.series) {
+    for (const group of this.results) {
+      for (const d of group.series) {
         if (!domain.includes(d.name)) {
           domain.push(d.name);
         }
@@ -202,18 +202,18 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getValueDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let group of this.results) {
-      for (let d of group.series) {
+    for (const group of this.results) {
+      for (const d of group.series) {
         if (!domain.includes(d.value)) {
           domain.push(d.value);
         }
       }
     }
 
-    let min = Math.min(0, ...domain);
-    let max = Math.max(...domain);
+    const min = Math.min(0, ...domain);
+    const max = Math.max(...domain);
 
     return [ min, max ];
   }
@@ -246,7 +246,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getLegendOptions() {
-    let opts = {
+    const opts = {
       scaleType: this.schemeType,
       colors: undefined,
       domain: []
@@ -273,7 +273,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   onActivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }
@@ -290,7 +290,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   onDeactivate(event, group) {
-    let item = Object.assign({}, event);
+    const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
     }

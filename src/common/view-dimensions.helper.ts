@@ -30,7 +30,7 @@ export function calculateViewDimensions({
 
     if (showXLabel) {
       // text height + spacing between axis label and tick labels
-      let offset = 25 + 5;
+      const offset = 25 + 5;
       chartHeight -= offset;
     }
   }
@@ -43,7 +43,7 @@ export function calculateViewDimensions({
 
     if (showYLabel) {
       // text height + spacing between axis label and tick labels
-      let offset = 25 + 5;
+      const offset = 25 + 5;
       chartWidth -= offset;
       xOffset += offset;
     }

@@ -204,7 +204,7 @@ export class AreaChartComponent extends BaseChartComponent {
       this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
-      let pageUrl = this.location.path();
+      const pageUrl = this.location.path();
       this.clipPathId = 'clip' + id().toString();
       this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
     });
@@ -228,8 +228,8 @@ export class AreaChartComponent extends BaseChartComponent {
   getXDomain(): any[] {
     let values = [];
 
-    for (let results of this.results) {
-      for (let d of results.series){
+    for (const results of this.results) {
+      for (const d of results.series){
         if (!values.includes(d.name)) {
           values.push(d.name);
         }
@@ -241,13 +241,13 @@ export class AreaChartComponent extends BaseChartComponent {
 
     if (this.scaleType === 'time') {
       values = values.map(v => moment(v).toDate());
-      let min = Math.min(...values);
-      let max = Math.max(...values);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
       domain = [min, max];
     } else if (this.scaleType === 'linear') {
       values = values.map(v => Number(v));
-      let min = Math.min(...values);
-      let max = Math.max(...values);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
       domain = [min, max];
     } else {
       domain = values;
@@ -259,10 +259,10 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
-    let domain = [];
+    const domain = [];
 
-    for (let results of this.results) {
-      for (let d of results.series){
+    for (const results of this.results) {
+      for (const d of results.series){
         if (!domain.includes(d.value)) {
           domain.push(d.value);
         }
@@ -270,7 +270,7 @@ export class AreaChartComponent extends BaseChartComponent {
     }
 
     let min = Math.min(...domain);
-    let max = Math.max(...domain);
+    const max = Math.max(...domain);
     if (!this.autoScale) {
       min = Math.min(0, min);
     }
@@ -312,7 +312,7 @@ export class AreaChartComponent extends BaseChartComponent {
   getScaleType(values): string {
     let date = true;
     let num = true;
-    for (let value of values) {
+    for (const value of values) {
       if (!this.isDate(value)) {
         date = false;
       }
@@ -380,7 +380,7 @@ export class AreaChartComponent extends BaseChartComponent {
   }
 
   getLegendOptions() {
-    let opts = {
+    const opts = {
       scaleType: this.schemeType,
       colors: undefined,
       domain: []
@@ -430,7 +430,7 @@ export class AreaChartComponent extends BaseChartComponent {
 
   deactivateAll() {
     this.activeEntries = [...this.activeEntries];
-    for (let entry of this.activeEntries) {
+    for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });
     }
     this.activeEntries = [];

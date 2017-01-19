@@ -69,7 +69,7 @@ export class AreaComponent implements OnChanges {
   }
 
   update(): void {
-    let pageUrl = this.location.path();
+    const pageUrl = this.location.path();
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 

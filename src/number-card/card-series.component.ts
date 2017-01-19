@@ -68,7 +68,7 @@ export class CardSeriesComponent implements OnChanges {
         }
         d.data.name = label;
 
-        let value = d.data.value;
+        const value = d.data.value;
         return {
           x: d.x,
           y: d.y,

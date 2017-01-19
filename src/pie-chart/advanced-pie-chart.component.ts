@@ -85,8 +85,8 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
       this.domain = this.getDomain();
       this.setColors();
 
-      let xOffset = this.dims.width / 2;
-      let yOffset = this.margin[0] + this.dims.height / 2;
+      const xOffset = this.dims.width / 2;
+      const yOffset = this.margin[0] + this.dims.height / 2;
       this.legendWidth = this.width - this.dims.width - this.margin[1];
 
       this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;

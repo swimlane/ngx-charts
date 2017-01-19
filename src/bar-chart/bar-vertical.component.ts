@@ -134,9 +134,9 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   getYDomain() {
-    let values = this.results.map(d => d.value);
-    let min = Math.min(0, ...values);
-    let max = Math.max(...values);
+    const values = this.results.map(d => d.value);
+    const min = Math.min(0, ...values);
+    const max = Math.max(...values);
     return [min, max];
   }
 
@@ -156,7 +156,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   getLegendOptions() {
-    let opts = {
+    const opts = {
       scaleType: this.schemeType,
       colors: undefined,
       domain: []

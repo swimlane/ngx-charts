@@ -57,13 +57,13 @@ export class TreeMapComponent extends BaseChartComponent {
       this.treemap = d3.treemap()
         .size([this.dims.width, this.dims.height]);
 
-      let rootNode = {
+      const rootNode = {
         name: 'root',
         value: 0,
         isRoot: true
       };
 
-      let root = d3.stratify()
+      const root = d3.stratify()
         .id(d => {
           let label = d.name;
 

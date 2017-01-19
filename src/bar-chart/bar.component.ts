@@ -77,7 +77,7 @@ export class BarComponent implements OnChanges {
   }
 
   update(): void {
-    let pageUrl = this.location.path();
+    const pageUrl = this.location.path();
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 
@@ -97,8 +97,8 @@ export class BarComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    let node = d3.select(this.element).select('.bar');
-    let path = this.getPath();
+    const node = d3.select(this.element).select('.bar');
+    const path = this.getPath();
 
     node.transition().duration(750)
       .attr('d', path);

@@ -88,15 +88,15 @@ export class InjectionService {
   projectComponentBindings(component: ComponentRef<any>, bindings: any): ComponentRef<any> {
     if(bindings) {
       if (bindings.inputs !== undefined) {
-        let bindingKeys = Object.getOwnPropertyNames(bindings.inputs);
-        for (let bindingName of bindingKeys) {
+        const bindingKeys = Object.getOwnPropertyNames(bindings.inputs);
+        for (const bindingName of bindingKeys) {
           component.instance[bindingName] = bindings.inputs[bindingName];
         }
       }
 
       if (bindings.outputs !== undefined) {
-        let eventKeys = Object.getOwnPropertyNames(bindings.outputs);
-        for (let eventName of eventKeys) {
+        const eventKeys = Object.getOwnPropertyNames(bindings.outputs);
+        for (const eventName of eventKeys) {
           component.instance[eventName] = bindings.outputs[eventName];
         }
       }
@@ -121,10 +121,10 @@ export class InjectionService {
     bindings: any = {},
     location: Element = this.getRootViewContainerNode()): ComponentRef<any> {
 
-    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
-    let componentRef = componentFactory.create(this.injector);
-    let appRef: any = this.applicationRef;
-    let componentRootNode = this.getComponentRootNode(componentRef);
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
+    const componentRef = componentFactory.create(this.injector);
+    const appRef: any = this.applicationRef;
+    const componentRootNode = this.getComponentRootNode(componentRef);
 
     // project the options passed to the component instance
     this.projectComponentBindings(componentRef, bindings);

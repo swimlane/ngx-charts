@@ -149,8 +149,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
       this.setColors();
       this.legendOptions = this.getLegendOptions();
 
-      let xOffset = this.margin[3] + this.dims.width / 2;
-      let yOffset = this.margin[0] + this.dims.height / 2;
+      const xOffset = this.margin[3] + this.dims.width / 2;
+      const yOffset = this.margin[0] + this.dims.height / 2;
 
       this.transform = `translate(${ xOffset }, ${ yOffset })`;
       this.rotation = `rotate(${ this.startAngle })`;
@@ -159,21 +159,21 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getArcs(): any[] {
-    let arcs = [];
+    const arcs = [];
 
-    let availableRadius = this.outerRadius * 0.7;
+    const availableRadius = this.outerRadius * 0.7;
 
-    let radiusPerArc = Math.min(availableRadius / this.results.length, 10);
-    let arcWidth = radiusPerArc * 0.7;
+    const radiusPerArc = Math.min(availableRadius / this.results.length, 10);
+    const arcWidth = radiusPerArc * 0.7;
     this.textRadius = this.outerRadius - this.results.length * radiusPerArc;
     this.cornerRadius = Math.floor(arcWidth / 2);
 
     let i = 0;
-    for (let d of this.results) {
-      let outerRadius = this.outerRadius - (i * radiusPerArc);
-      let innerRadius = outerRadius - arcWidth;
+    for (const d of this.results) {
+      const outerRadius = this.outerRadius - (i * radiusPerArc);
+      const innerRadius = outerRadius - arcWidth;
 
-      let backgroundArc = {
+      const backgroundArc = {
         endAngle: this.angleSpan * Math.PI / 180,
         innerRadius,
         outerRadius,
@@ -183,7 +183,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
         }
       };
 
-      let valueArc = {
+      const valueArc = {
         endAngle: Math.min(this.valueScale(d.value), this.angleSpan) * Math.PI / 180,
         innerRadius,
         outerRadius,
@@ -193,7 +193,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
         }
       };
 
-      let arc = {
+      const arc = {
         backgroundArc,
         valueArc
       };
@@ -210,9 +210,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getValueDomain(): any[] {
-    let values = this.results.map(d => d.value);
-    let dataMin = Math.min(...values);
-    let dataMax = Math.max(...values);
+    const values = this.results.map(d => d.value);
+    const dataMin = Math.min(...values);
+    const dataMax = Math.max(...values);
 
     if (this.min !== undefined) {
       this.min = Math.min(this.min, dataMin);
@@ -236,7 +236,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDisplayValue(): string {
-    let value = this.results.map(d => d.value).reduce((a, b) => { return a + b; }, 0);
+    const value = this.results.map(d => d.value).reduce((a, b) => { return a + b; }, 0);
     return value.toLocaleString();
   }
 
@@ -303,7 +303,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    let item = this.activeEntries.find(d => {
+    const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });
     return item !== undefined;

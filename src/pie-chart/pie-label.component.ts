@@ -77,7 +77,7 @@ export class PieLabelComponent implements OnChanges {
   update(): void {
     const factor = 1.5;
 
-    let outerArc = d3.arc()
+    const outerArc = d3.arc()
       .innerRadius(this.radius * factor)
       .outerRadius(this.radius * factor);
 
@@ -86,7 +86,7 @@ export class PieLabelComponent implements OnChanges {
       startRadius = this.radius * this.value / this.max;
     }
 
-    let innerArc = d3.arc()
+    const innerArc = d3.arc()
       .innerRadius(startRadius)
       .outerRadius(startRadius);
 
@@ -109,8 +109,8 @@ export class PieLabelComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    let label = d3.select(this.element).select('.label');
-    let line = d3.select(this.element).select('.line');
+    const label = d3.select(this.element).select('.label');
+    const line = d3.select(this.element).select('.line');
 
     label
       .attr('opacity', 0)

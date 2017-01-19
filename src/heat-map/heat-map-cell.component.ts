@@ -64,7 +64,8 @@ export class HeatMapCellComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.transform = `translate(${this.x} , ${this.y})`;
-    let pageUrl = this.location.path();
+    const pageUrl = this.location.path();
+
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + id().toString();
     this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
@@ -88,13 +89,13 @@ export class HeatMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    let node = d3.select(this.element).select('.cell');
+    const node = d3.select(this.element).select('.cell');
     node.attr('opacity', 0);
     this.animateToCurrentForm();
   }
 
   animateToCurrentForm(): void {
-    let node = d3.select(this.element).select('.cell');
+    const node = d3.select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1);
