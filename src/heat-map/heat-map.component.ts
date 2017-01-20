@@ -163,18 +163,20 @@ export class HeatMapComponent extends BaseChartComponent {
 
   getXScale(): any {
     const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0];
+    const f = this.xDomain.length / (this.dims.width / innerPadding + 1);
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
-      .paddingInner(innerPadding / this.dims.width)
-      .domain(this.xDomain);
+      .domain(this.xDomain)
+      .paddingInner(f);
   }
 
   getYScale(): any {
     const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1];
+    const f = this.yDomain.length / (this.dims.height / innerPadding + 1);
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
-      .paddingInner(innerPadding / this.dims.height)
-      .domain(this.yDomain);
+      .domain(this.yDomain)
+      .paddingInner(f);
   }
 
   getRects(): any[] {
