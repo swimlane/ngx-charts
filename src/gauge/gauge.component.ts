@@ -234,6 +234,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   getValueScale(): any {
     return d3.scaleLinear()
       .range([0, this.angleSpan])
+      .nice()
       .domain(this.valueDomain);
   }
 
