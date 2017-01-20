@@ -81,7 +81,7 @@ export class GaugeAxisComponent implements OnChanges {
       }
 
       if (!skip) {
-        let text = Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString();
+        let text = Number.parseFloat(this.valueScale.invert(angleDeg).toString()).toLocaleString();
         if (this.tickFormatting) {
           text = this.tickFormatting(text);
         }
