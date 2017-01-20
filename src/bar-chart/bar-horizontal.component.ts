@@ -29,6 +29,7 @@ import d3 from '../d3';
           [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -37,6 +38,7 @@ import d3 from '../d3';
           [dims]="dims"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g ngx-charts-series-horizontal
@@ -69,6 +71,8 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
+  @Input() xAxisTickFormatting: any;
+  @Input() yAxisTickFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
