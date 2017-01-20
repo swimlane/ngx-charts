@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import d3 from '../d3';
 import '../../config/testing-utils';
 import { multi } from '../../demo/data';
+import {APP_BASE_HREF} from '@angular/common';
 
-import { NgxChartsModule } from '../ngx-charts.module';
+import { HeatMapModule } from './heat-map.module';
 
 @Component({
   selector: 'test-component',
@@ -22,7 +23,10 @@ describe('<ngx-charts-heat-map>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [NgxChartsModule]
+      imports: [HeatMapModule],
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ]
     });
   });
 
@@ -32,14 +36,11 @@ describe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
-                [results]="multi"
-                [legend]="false">
-              </ngx-charts-heat-map>
-          `
+                [results]="multi">
+              </ngx-charts-heat-map>`
         }
       });
     });
@@ -92,15 +93,12 @@ describe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
-                [legend]="false"
                 [innerPadding]="0">
-              </ngx-charts-heat-map>
-          `
+              </ngx-charts-heat-map>`
         }
       });
 
@@ -122,12 +120,10 @@ describe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
-                [legend]="false"
                 [innerPadding]="20">
               </ngx-charts-heat-map>
           `
@@ -152,13 +148,11 @@ describe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
-                [legend]="false"
-                [innerPadding]="[50, 40]">
+                [innerPadding]="[50,40]">
               </ngx-charts-heat-map>
           `
         }
