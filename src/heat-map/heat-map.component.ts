@@ -68,12 +68,9 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
-<<<<<<< HEAD
   @Input() innerPadding: Number | Number[] = 8;
-=======
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
->>>>>>> master
 
   dims: ViewDimensions;
   xDomain: any[];
