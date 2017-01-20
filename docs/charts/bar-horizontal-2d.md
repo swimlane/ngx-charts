@@ -4,7 +4,7 @@
 
 # Inputs
 | Property            | Type     | Default Value | Description                                                                                                     |
-|---------------------|----------|---------------|-----------------------------------------------------------------------------------------------------------------|
+|:--------------------|:---------|:--------------|:----------------------------------------------------------------------------------------------------------------|
 | view                | number[] |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
 | results             | object[] |               | the chart data                                                                                                  |
 | scheme              | object   |               | the color scheme of the chart                                                                                   |
@@ -24,11 +24,11 @@
 | activeEntries       | object[] | []            | elements to highlight                                                                                           |
 
 # Outputs
-| Property     | Description                              |
-|--------------|------------------------------------------|
-| select       | click event                              |
-| activate     | element activation event (mouse enter)   |
-| deactivate   | element deactivation event (mouse leave) |
+| Property   | Description                              |
+|:-----------|:-----------------------------------------|
+| select     | click event                              |
+| activate   | element activation event (mouse enter)   |
+| deactivate | element deactivation event (mouse leave) |
 
 # Data Format
 The data format is multi series:

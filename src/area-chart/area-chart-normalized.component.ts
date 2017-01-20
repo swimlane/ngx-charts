@@ -41,6 +41,7 @@ import { id } from '../utils/id';
           [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -50,6 +51,7 @@ import { id } from '../utils/id';
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -136,6 +138,8 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() curve = d3.shape.curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
+  @Input() xAxisTickFormatting: any;
+  @Input() yAxisTickFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

@@ -3,24 +3,26 @@
 <iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/iyvvzBrEIayRWG5BcQ7e?show=preview"></iframe>
 
 # Inputs
-| Property      | Type     | Default Value | Description                                                                                                     |
-|---------------|----------|---------------|-----------------------------------------------------------------------------------------------------------------|
-| view          | number[] |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
-| results       | object[] |               | the chart data                                                                                                  |
-| scheme        | object   |               | the color scheme of the chart                                                                                   |
-| legend        | boolean  | false         | show or hide the legend                                                                                         |
-| xAxis         | boolean  | false         | show or hide the x axis                                                                                         |
-| yAxis         | boolean  | false         | show or hide the y axis                                                                                         |
-| showXAxisLabel| boolean  | false         | show or hide the x axis label                                                                                   |
-| showYAxisLabel| boolean  | false         | show or hide the y axis label                                                                                   |
-| xAxisLabel    | string   |               | the x axis label text                                                                                           |
-| yAxisLabel    | string   |               | the y axis label text                                                                                           |
-| gradient      | boolean  | false         | fill elements with a gradient instead of a solid color                                                          |
+| Property            | Type     | Default Value | Description                                                                                                     |
+|:--------------------|:---------|:--------------|:----------------------------------------------------------------------------------------------------------------|
+| view                | number[] |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
+| results             | object[] |               | the chart data                                                                                                  |
+| scheme              | object   |               | the color scheme of the chart                                                                                   |
+| legend              | boolean  | false         | show or hide the legend                                                                                         |
+| xAxis               | boolean  | false         | show or hide the x axis                                                                                         |
+| yAxis               | boolean  | false         | show or hide the y axis                                                                                         |
+| showXAxisLabel      | boolean  | false         | show or hide the x axis label                                                                                   |
+| showYAxisLabel      | boolean  | false         | show or hide the y axis label                                                                                   |
+| xAxisLabel          | string   |               | the x axis label text                                                                                           |
+| yAxisLabel          | string   |               | the y axis label text                                                                                           |
+| xAxisTickFormatting | function |               | the x axis tick formatting                                                                                      |
+| yAxisTickFormatting | function |               | the y axis tick formatting                                                                                      |
+| gradient            | boolean  | false         | fill elements with a gradient instead of a solid color                                                          |
 
 # Outputs
-| Property     | Description                              |
-|--------------|------------------------------------------|
-| select       | click event                              |
+| Property | Description |
+|:---------|:------------|
+| select   | click event |
 
 # Data Format
 The data format is multi series:

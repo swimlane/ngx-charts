@@ -41,6 +41,7 @@ export class GaugeAxisComponent implements OnChanges {
   @Input() startAngle: number;
   @Input() radius: any;
   @Input() valueScale: any;
+  @Input() tickFormatting: any;
 
   ticks: any[];
   rotationAngle: number;
@@ -80,10 +81,14 @@ export class GaugeAxisComponent implements OnChanges {
       }
 
       if (!skip) {
+        let text = Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString();
+        if (this.tickFormatting) {
+          text = this.tickFormatting(text);
+        }
         ticks.big.push({
           line: this.getTickPath(startDistance, tickLength, angle),
           textAnchor,
-          text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
+          text,
           textTransform: `
             translate(${textDist * Math.cos(angle)}, ${textDist * Math.sin(angle)}) rotate(${ -this.rotationAngle })
           `

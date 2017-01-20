@@ -48,7 +48,8 @@ import { ColorHelper } from '../common/color.helper';
           [radius]="outerRadius"
           [angleSpan]="angleSpan"
           [valueScale]="valueScale"
-          [startAngle]="startAngle">
+          [startAngle]="startAngle"
+          [tickFormatting]="axisTickFormatting">
         </svg:g>
 
         <svg:text #textEl
@@ -77,6 +78,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() startAngle: number = -120;
   @Input() angleSpan: number = 240;
   @Input() activeEntries: any[] = [];
+  @Input() axisTickFormatting: any;
 
   // Specify margins
   @Input() margin: any[];
@@ -247,7 +249,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
       if (width === 0) {
         this.resizeScale = 1;
-      } else {        
+      } else {
         const availableSpace = this.textRadius;
         this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
       }

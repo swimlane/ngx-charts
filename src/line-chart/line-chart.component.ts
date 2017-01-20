@@ -40,6 +40,7 @@ import * as moment from 'moment';
           [showGridLines]="showGridLines"
           [showLabel]="showXAxisLabel"
           [labelText]="xAxisLabel"
+          [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
         <svg:g ngx-charts-y-axis
@@ -49,6 +50,7 @@ import * as moment from 'moment';
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
+          [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -132,6 +134,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
   @Input() rangeFillOpacity: number;
+  @Input() xAxisTickFormatting: any;
+  @Input() yAxisTickFormatting: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
