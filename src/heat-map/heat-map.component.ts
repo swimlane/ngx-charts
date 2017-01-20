@@ -68,6 +68,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
+  @Input() innerPadding: Number | Number[] = 8;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
 
@@ -165,17 +166,21 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getXScale(): any {
+    const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0];
+    const f = this.xDomain.length / (this.dims.width / innerPadding + 1);
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
-      .paddingInner(0.1)
-      .domain(this.xDomain);
+      .domain(this.xDomain)
+      .paddingInner(f);
   }
 
   getYScale(): any {
+    const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1];
+    const f = this.yDomain.length / (this.dims.height / innerPadding + 1);
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
-      .paddingInner(0.1)
-      .domain(this.yDomain);
+      .domain(this.yDomain)
+      .paddingInner(f);
   }
 
   getRects(): any[] {

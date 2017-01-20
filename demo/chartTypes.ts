@@ -163,7 +163,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
-          'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel'
+          'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'innerPadding'
         ]
       },
       {
