@@ -72,8 +72,7 @@ module.exports = function(env) {
       'rxjs/observable/PromiseObservable': 'rxjs/observable/PromiseObservable',
       'rxjs/operator/toPromise': 'rxjs/operator/toPromise',
       'rxjs/Observable': 'rxjs/Observable',
-      'zone.js/dist/zone': 'zone.js/dist/zone',
-      'moment': 'moment'
+      'zone.js/dist/zone': 'zone.js/dist/zone'
     },
     plugins: [
       new webpack.BannerPlugin({
