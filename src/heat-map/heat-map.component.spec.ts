@@ -87,6 +87,37 @@ describe('<ngx-charts-heat-map>', () => {
     });
   });
 
+  describe('with gradiant', () => {
+
+    beforeEach(() => {
+      TestBed.overrideComponent(TestComponent, {
+        set: {
+          template: `
+               <ngx-charts-heat-map
+                [view]="[400,800]"
+                [scheme]="colorScheme"
+                [results]="multi"
+                [gradient]="true">
+              </ngx-charts-heat-map>`
+        }
+      });
+    });
+
+    it('should set fill attr', (done) => {
+      TestBed.compileComponents().then(() => {
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+
+        const compiled = fixture.debugElement.nativeElement;
+        const rects = compiled.querySelectorAll('rect.cell');
+        const rect = d3.select(rects[0]);
+
+        expect(rect.attr('fill')).toMatch('url(.*)');
+        done();
+      });
+    });
+  });
+
   describe('padding', () => {
 
     it('should render correct cell size, with zero padding', (done) => {
