@@ -286,7 +286,7 @@ var AppModule = (function () {
             providers: [
                 {
                     provide: common_1.APP_BASE_HREF,
-                    useValue: './'
+                    useFactory: getBaseLocation
                 }
             ],
             imports: [src_1.NgxChartsModule, platform_browser_1.BrowserModule, forms_1.FormsModule],
@@ -298,6 +298,12 @@ var AppModule = (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
+function getBaseLocation() {
+    var paths = location.pathname.split('/').splice(1, 1);
+    var basePath = (paths && paths[0]) || '';
+    return '/' + basePath;
+}
+exports.getBaseLocation = getBaseLocation;
 
 
 /***/ }),
