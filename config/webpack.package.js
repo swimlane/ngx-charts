@@ -67,11 +67,9 @@ module.exports = function(env) {
       'd3-hierarchy': 'd3-hierarchy',
       'rxjs': 'rxjs',
       'rxjs/Rx': 'rxjs/Rx',
-      'rxjs/Subject': 'rxjs/Subject',
-      'rxjs/Subscription': 'rxjs/Subscription',
-      'rxjs/observable/PromiseObservable': 'rxjs/observable/PromiseObservable',
-      'rxjs/operator/toPromise': 'rxjs/operator/toPromise',
       'rxjs/Observable': 'rxjs/Observable',
+      'rxjs/add/observable/fromEvent': 'rxjs/add/observable/fromEvent',
+      'rxjs/add/operator/debounceTime': 'rxjs/add/operator/debounceTime',
       'zone.js/dist/zone': 'zone.js/dist/zone',
       'moment': 'moment'
     },
