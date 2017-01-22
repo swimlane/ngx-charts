@@ -286,7 +286,7 @@ var AppModule = (function () {
             providers: [
                 {
                     provide: common_1.APP_BASE_HREF,
-                    useValue: '/'
+                    useValue: './'
                 }
             ],
             imports: [src_1.NgxChartsModule, platform_browser_1.BrowserModule, forms_1.FormsModule],
