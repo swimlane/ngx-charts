@@ -34,8 +34,8 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   resizeSubscription: any;
 
   constructor(
-    protected chartElement: ElementRef, 
-    protected zone: NgZone, 
+    protected chartElement: ElementRef,
+    protected zone: NgZone,
     protected cd: ChangeDetectorRef,
     protected location: Location) {
   }
@@ -62,8 +62,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.height = this.view[1];
     } else {
       const dims = this.getContainerDims();
-      this.width = dims.width;
-      this.height = dims.height;
+      if (dims) {
+        this.width = dims.width;
+        this.height = dims.height;
+      }
+    }
+
+    if (!this.width || !this.height) {
+      this.width = this.height = 0;
     }
 
     if (this.cd) {
@@ -72,21 +78,26 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   getContainerDims(): any {
-    let width = 0;
-    let height = 0;
+    let width;
+    let height;
     const hostElem = this.chartElement.nativeElement;
 
     if (hostElem.parentNode !== null) {
       // Get the container dimensions
-      width = hostElem.parentNode.clientWidth;
-      height = hostElem.parentNode.clientHeight;
+      let dims = hostElem.parentNode.getBoundingClientRect();
+      width = dims.width;
+      height = dims.height;
     }
 
-    return { width, height };
+    if (width && height) {
+      return { width, height };
+    }
+    
+    return null;
   }
 
   /**
-   * Converts all date objects that appear as name 
+   * Converts all date objects that appear as name
    * into formatted date strings
    */
   formatDates(): void {
