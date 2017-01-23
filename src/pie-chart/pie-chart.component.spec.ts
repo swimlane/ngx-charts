@@ -38,6 +38,7 @@ describe('<ngx-charts-pie>', () => {
           template: `
             <ngx-charts-pie-chart
                 [results]="single"
+                [view]="[400,800]"
                 [scheme]="colorScheme"
                 [doughnut]="false">
             </ngx-charts-pie-chart>`
@@ -53,8 +54,8 @@ describe('<ngx-charts-pie>', () => {
         const compiled = fixture.debugElement.nativeElement;
         const svg = d3.select(compiled.querySelectorAll('svg')[0]);
 
-        expect(svg.attr('width')).toEqual('791');
-        expect(svg.attr('height')).toEqual('154');
+        expect(svg.attr('width')).toEqual('400');
+        expect(svg.attr('height')).toEqual('800');
         done();
       });
     });
