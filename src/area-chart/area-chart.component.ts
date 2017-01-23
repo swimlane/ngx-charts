@@ -9,7 +9,6 @@ import {
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import * as moment from 'moment';
 import { id } from '../utils/id';
 import d3 from '../d3';
 
@@ -244,7 +243,6 @@ export class AreaChartComponent extends BaseChartComponent {
     let domain = [];
 
     if (this.scaleType === 'time') {
-      values = values.map(v => moment(v).toDate());
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];

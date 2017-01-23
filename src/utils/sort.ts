@@ -1,4 +1,3 @@
-import * as moment from 'moment';
 export function sortLinear(data, property, direction = 'asc') {
   return data.sort((a, b) => {
     if (direction === 'asc') {
@@ -27,16 +26,16 @@ export function sortByDomain(data, property, direction = 'asc', domain) {
 
 export function sortByTime(data, property, direction = 'asc') {
   return data.sort((a, b) => {
-    const aDate = moment(a[property]);
-    const bDate = moment(b[property]);
+    const aDate = a[property].getTime();
+    const bDate = b[property].getTime();
 
     if (direction === 'asc') {
-      if (aDate.isAfter(bDate)) return 1;
-      if (bDate.isAfter(aDate)) return -1;
+      if (aDate > bDate) return 1;
+      if (bDate > aDate) return -1;
       return 0;
     } else {
-      if (aDate.isAfter(bDate)) return -1;
-      if (bDate.isAfter(aDate)) return 1;
+      if (aDate > bDate) return -1;
+      if (bDate > aDate) return 1;
       return 0;
     }
   });

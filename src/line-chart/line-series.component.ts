@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { Location } from '@angular/common';
 import d3 from '../d3';
-import * as moment from 'moment';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
@@ -34,7 +33,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [stops]="areaGradientStops"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
-      />    
+      />
       <svg:g ngx-charts-line
         class="line-series"
         [data]="data"
@@ -83,7 +82,7 @@ export class LineSeriesComponent implements OnChanges {
     this.update();
   }
 
-  update(): void {    
+  update(): void {
     this.updateGradients();
 
     const line = this.getLineGenerator();
@@ -103,7 +102,7 @@ export class LineSeriesComponent implements OnChanges {
         const label = d.name;
         let value;
         if (this.scaleType === 'time') {
-          value = this.xScale(moment(label).toDate());
+          value = this.xScale(label);
         } else if (this.scaleType === 'linear') {
           value = this.xScale(Number(label));
         } else {
@@ -121,7 +120,7 @@ export class LineSeriesComponent implements OnChanges {
           const label = d.name;
           let value;
           if (this.scaleType === 'time') {
-            value = this.xScale(moment(label).toDate());
+            value = this.xScale(label);
           } else if (this.scaleType === 'linear') {
             value = this.xScale(Number(label));
           } else {
