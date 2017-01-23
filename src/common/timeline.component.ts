@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef, SimpleChanges
 } from '@angular/core';
 import { Location } from '@angular/common';
-import * as moment from 'moment';
 import d3 from '../d3';
 import { id } from '../utils/id';
 
@@ -108,7 +107,6 @@ export class Timeline implements OnChanges {
 
     let domain = [];
     if (this.scaleType === 'time') {
-      values = values.map(v => moment(v).toDate());
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];

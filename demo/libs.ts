@@ -10,7 +10,6 @@ import '@angular/common';
 
 // externals
 import '../src/d3';
-import 'moment';
 
 if(IS_PRODUCTION) {
   disableDebugTools();

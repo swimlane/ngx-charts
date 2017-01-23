@@ -12,7 +12,6 @@ import {
   animate
 } from '@angular/core';
 import { Location } from '@angular/common';
-import * as moment from 'moment';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
@@ -112,7 +111,7 @@ export class CircleSeriesComponent implements OnChanges {
       if (value) {
         let cx;
         if (this.scaleType === 'time') {
-          cx = this.xScale(moment(label).toDate());
+          cx = this.xScale(label);
         } else if (this.scaleType === 'linear') {
           cx = this.xScale(Number(label));
         } else {

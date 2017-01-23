@@ -70,8 +70,7 @@ module.exports = function(env) {
       'rxjs/Observable': 'rxjs/Observable',
       'rxjs/add/observable/fromEvent': 'rxjs/add/observable/fromEvent',
       'rxjs/add/operator/debounceTime': 'rxjs/add/operator/debounceTime',
-      'zone.js/dist/zone': 'zone.js/dist/zone',
-      'moment': 'moment'
+      'zone.js/dist/zone': 'zone.js/dist/zone'
     },
     plugins: [
       new webpack.BannerPlugin({

@@ -11,7 +11,6 @@ import d3 from '../d3';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import * as moment from 'moment';
 import { id } from '../utils/id';
 
 @Component({
@@ -302,7 +301,6 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
     let domain = [];
 
     if (this.scaleType === 'time') {
-      values = values.map(v => moment(v).toDate());
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [new Date(min), new Date(max)];
