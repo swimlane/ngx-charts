@@ -61,7 +61,7 @@ import * as moment from 'moment';
               [colors]="colors"
               [data]="series"
               [activeEntries]="activeEntries"
-              [scaleType]="scaleType"
+              [scaleType]="xScaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
             />
@@ -81,7 +81,7 @@ import * as moment from 'moment';
               [yScale]="yScale"
               [colors]="colors"
               [data]="series"
-              [scaleType]="scaleType"
+              [scaleType]="xScaleType"
               [visibleValue]="hoveredVertical"
               [activeEntries]="activeEntries"
               (select)="onClick($event, series)"
@@ -92,14 +92,14 @@ import * as moment from 'moment';
         </svg:g>
       </svg:g>
       <svg:g ngx-charts-timeline
-        *ngIf="timeline && scaleType === 'time'"
+        *ngIf="timeline && xScaleType === 'time'"
         [attr.transform]="timelineTransform"
         [results]="results"
         [view]="[timelineWidth, height]"
         [height]="timelineHeight"
         [scheme]="scheme"
         [customColors]="customColors"
-        [scaleType]="scaleType"
+        [scaleType]="xScaleType"
         [legend]="legend"
         (onDomainChange)="updateDomain($event)">
         <svg:g *ngFor="let series of results; trackBy:trackBy">
@@ -108,7 +108,7 @@ import * as moment from 'moment';
             [yScale]="timelineYScale"
             [colors]="colors"
             [data]="series"
-            [scaleType]="scaleType"
+            [scaleType]="xScaleType"
             [curve]="curve"
           />
         </svg:g>
@@ -126,6 +126,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() xAxisTransform;
+  @Input() yAxisTransform;
   @Input() autoScale;
   @Input() timeline;
   @Input() gradient: boolean;
@@ -148,7 +150,8 @@ export class LineChartComponent extends BaseChartComponent {
   yScale: any;
   xScale: any;
   colors: ColorHelper;
-  scaleType: string;
+  xScaleType: string;
+  yScaleType: string;
   transform: string;
   clipPath: string;
   clipPathId: string;
@@ -240,15 +243,20 @@ export class LineChartComponent extends BaseChartComponent {
       }
     }
 
-    this.scaleType = this.getScaleType(values);
+    this.xScaleType = this.getXScaleType(values);
     let domain = [];
 
-    if (this.scaleType === 'time') {
+    if (this.xScaleType === 'time') {
       values = values.map(v => moment(v).toDate());
       const min = Math.min(...values);
       const max = Math.max(...values);
       domain = [min, max];
-    } else if (this.scaleType === 'linear') {
+    } else if (this.xScaleType === 'linear') {
+      values = values.map(v => Number(v));
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      domain = [min, max];
+    } else if (this.xScaleType === 'log') {
       values = values.map(v => Number(v));
       const min = Math.min(...values);
       const max = Math.max(...values);
@@ -262,6 +270,7 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getYDomain(): any[] {
+    this.yScaleType = this.getYScaleType();
     const domain = [];
 
     for (const results of this.results) {
@@ -298,15 +307,19 @@ export class LineChartComponent extends BaseChartComponent {
   getXScale(domain, width): any {
     let scale;
 
-    if (this.scaleType === 'time') {
+    if (this.xScaleType === 'time') {
       scale = d3.scaleTime()
         .range([0, width])
         .domain(domain);
-    } else if (this.scaleType === 'linear') {
+    } else if (this.xScaleType === 'linear') {
       scale = d3.scaleLinear()
         .range([0, width])
         .domain(domain);
-    } else if (this.scaleType === 'ordinal') {
+    } else if (this.xScaleType === 'log') {
+      scale = d3.scaleLog()
+        .range([0, width])
+        .domain(domain);
+    } else if (this.xScaleType === 'ordinal') {
       scale = d3.scalePoint()
         .range([0, width])
         .padding(0.1)
@@ -317,12 +330,20 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getYScale(domain, height): any {
-    return d3.scaleLinear()
-      .range([height, 0])
-      .domain(domain);
+    let scale;
+
+    if (this.yScaleType === 'linear') {
+      return d3.scaleLinear()
+        .range([height, 0])
+        .domain(domain);
+    } else if (this.yScaleType === 'log') {
+      return d3.scaleLog()
+        .range([height, 0])
+        .domain(domain);
+    }
   }
 
-  getScaleType(values): string {
+  getXScaleType(values): string {
     let date = true;
     let num = true;
 
@@ -337,8 +358,20 @@ export class LineChartComponent extends BaseChartComponent {
     }
 
     if (date) return 'time';
-    if (num) return 'linear';
+    if (num) {
+      if ( typeof(this.xAxisTransform) != "undefined" && this.xAxisTransform === 'log' ) {
+        return 'log';
+      }
+      return 'linear';
+    }
     return 'ordinal';
+  }
+
+  getYScaleType(): string {
+    if ( typeof(this.yAxisTransform) != "undefined" && this.yAxisTransform === 'log' ) {
+      return 'log';
+    }
+    return 'linear';
   }
 
   isDate(value): boolean {

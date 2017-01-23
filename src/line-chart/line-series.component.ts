@@ -160,7 +160,7 @@ export class LineSeriesComponent implements OnChanges {
   }
 
   updateGradients() {
-    if (this.colors.scaleType === 'linear') {
+    if (this.colors.xScaleType === 'linear') {
       this.hasGradient = true;
       const pageUrl = this.location.path();
       this.gradientId = 'grad' + id().toString();

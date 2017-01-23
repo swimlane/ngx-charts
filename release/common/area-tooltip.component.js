@@ -63,7 +63,7 @@ var AreaTooltip = (function () {
                     val = (item.d1 - item.d0).toFixed(2) + '%';
                 }
                 var color = void 0;
-                if (this.colors.scaleType === 'linear') {
+                if (this.colors.xScaleType === 'linear') {
                     var v = val;
                     if (item.d1) {
                         v = item.d1;

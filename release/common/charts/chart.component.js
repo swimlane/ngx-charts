@@ -31,7 +31,7 @@ var ChartComponent = (function () {
         this.legendWidth = this.view[0] * legendColumns / 12.0;
     };
     ChartComponent.prototype.getLegendType = function () {
-        if (this.legendOptions.scaleType === 'linear') {
+        if (this.legendOptions.xScaleType === 'linear') {
             return 'scaleLegend';
         }
         else {

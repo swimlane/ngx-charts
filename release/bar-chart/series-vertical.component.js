@@ -77,7 +77,7 @@ var SeriesVerticalComponent = (function () {
                 bar.offset1 = offset1;
                 value = (offset1 - offset0).toFixed(2) + '%';
             }
-            if (_this.colors.scaleType === 'ordinal') {
+            if (_this.colors.xScaleType === 'ordinal') {
                 bar.color = _this.colors.getColor(label);
             }
             else {

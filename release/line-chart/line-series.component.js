@@ -88,7 +88,7 @@ var LineSeriesComponent = (function () {
         return data;
     };
     LineSeriesComponent.prototype.updateGradients = function () {
-        if (this.colors.scaleType === 'linear') {
+        if (this.colors.xScaleType === 'linear') {
             this.hasGradient = true;
             var pageUrl = this.location.path();
             this.gradientId = 'grad' + id_1.id().toString();
