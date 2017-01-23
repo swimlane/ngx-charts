@@ -65,6 +65,8 @@ module.exports = function(env) {
       'd3-selection': 'd3-selection',
       'd3-shape': 'd3-shape',
       'd3-hierarchy': 'd3-hierarchy',
+      'd3-time': 'd3-time',
+      'd3-time-format': 'd3-time-format',
       'rxjs': 'rxjs',
       'rxjs/Rx': 'rxjs/Rx',
       'rxjs/Observable': 'rxjs/Observable',
