@@ -59,5 +59,103 @@ describe('<ngx-charts-pie>', () => {
         done();
       });
     });
+
+    it('should render 6 arc elements', (done) => {
+      TestBed.compileComponents().then(() => {
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+
+        const compiled = fixture.debugElement.nativeElement;
+
+        expect(compiled.querySelectorAll('path.arc').length).toEqual(6);
+        done();
+      });
+    });
+
+    it('should render an arc', (done) => {
+      TestBed.compileComponents().then(() => {
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+
+        const compiled = fixture.debugElement.nativeElement;
+        const arcs = compiled.querySelectorAll('path.arc');
+
+        const arc = d3.arc()
+          .innerRadius(0)
+          .outerRadius(440 / 3)
+          .startAngle(0)
+          .endAngle(1.1656999674906274);
+
+        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
+        done();
+      });
+    });
+  });
+
+  describe('doughnut', () => {
+    it('should render an arc, default width', (done) => {
+      TestBed.overrideComponent(TestComponent, {
+        set: {
+          template: `
+            <ngx-charts-pie-chart
+                [results]="single"
+                [view]="[400,800]"
+                [scheme]="colorScheme"
+                [doughnut]="true">
+            </ngx-charts-pie-chart>`
+        }
+      });
+
+      TestBed.compileComponents().then(() => {
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+
+        const compiled = fixture.debugElement.nativeElement;
+        const arcs = compiled.querySelectorAll('path.arc');
+        const outerRadius = 440 / 3;
+
+        const arc = d3.arc()
+          .innerRadius(outerRadius * 3 / 4) // default arc is 1/4 outerwidth
+          .outerRadius(outerRadius)
+          .startAngle(0)
+          .endAngle(1.1656999674906274);
+
+        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
+        done();
+      });
+    });
+
+    it('should render an arc, set width', (done) => {
+      TestBed.overrideComponent(TestComponent, {
+        set: {
+          template: `
+            <ngx-charts-pie-chart
+                [results]="single"
+                [view]="[400,800]"
+                [scheme]="colorScheme"
+                [doughnut]="true"
+                [arcWidth]="0.1">
+            </ngx-charts-pie-chart>`
+        }
+      });
+
+      TestBed.compileComponents().then(() => {
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+
+        const compiled = fixture.debugElement.nativeElement;
+        const arcs = compiled.querySelectorAll('path.arc');
+        const outerRadius = 440 / 3;
+
+        const arc = d3.arc()
+          .innerRadius(outerRadius * 0.90) // default arc is 1/4 outerwidth
+          .outerRadius(outerRadius)
+          .startAngle(0)
+          .endAngle(1.1656999674906274);
+
+        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
+        done();
+      });
+    });
   });
 });
