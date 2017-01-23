@@ -10,7 +10,7 @@ import '@angular/common';
 
 // externals
 import '../src/d3';
-import 'moment';
+import 'date-fns';
 
 if(IS_PRODUCTION) {
   disableDebugTools();

@@ -1,4 +1,5 @@
-import * as moment from 'moment';
+import parseDate = require('date-fns/parse');
+import isAfter = require('date-fns/is_after');
 export function sortLinear(data, property, direction = 'asc') {
   return data.sort((a, b) => {
     if (direction === 'asc') {
@@ -27,16 +28,16 @@ export function sortByDomain(data, property, direction = 'asc', domain) {
 
 export function sortByTime(data, property, direction = 'asc') {
   return data.sort((a, b) => {
-    const aDate = moment(a[property]);
-    const bDate = moment(b[property]);
+    const aDate = parseDate(a[property]);
+    const bDate = parseDate(b[property]);
 
     if (direction === 'asc') {
-      if (aDate.isAfter(bDate)) return 1;
-      if (bDate.isAfter(aDate)) return -1;
+      if (isAfter(aDate, bDate)) return 1;
+      if (isAfter(bDate, aDate)) return -1;
       return 0;
     } else {
-      if (aDate.isAfter(bDate)) return -1;
-      if (bDate.isAfter(aDate)) return 1;
+      if (isAfter(aDate, bDate)) return -1;
+      if (isAfter(bDate, aDate)) return 1;
       return 0;
     }
   });
