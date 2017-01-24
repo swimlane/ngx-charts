@@ -208,6 +208,7 @@
         [showGridLines]="showGridLines"
         [curve]="curve"
         [rangeFillOpacity]="rangeFillOpacity"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-line-chart>
       <ngx-charts-force-directed-graph
@@ -483,6 +484,12 @@
         <label>
           <input type="checkbox" [checked]="showGridLines" (change)="showGridLines = $event.target.checked">
           Show Grid Lines
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('roundDomains')">
+        <label>
+          <input type="checkbox" [checked]="roundDomains" (change)="roundDomains = $event.target.checked">
+          Round Domains
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('gradient')">
