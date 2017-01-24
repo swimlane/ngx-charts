@@ -7,6 +7,8 @@ import {APP_BASE_HREF} from '@angular/common';
 
 import { HeatMapModule } from './heat-map.module';
 
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
 @Component({
   selector: 'test-component',
   template: ''
@@ -18,7 +20,7 @@ class TestComponent {
   };
 }
 
-describe('<ngx-charts-heat-map>', () => {
+xdescribe('<ngx-charts-heat-map>', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({

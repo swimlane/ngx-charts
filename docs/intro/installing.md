@@ -9,7 +9,6 @@ Also, the release code is checked in and resides [here](https://github.com/swiml
 You will also need to install the peer dependencies of the project:
 
 * `npm install d3 --save`
-* `npm install moment --save`
 
 Check the `package.json` file for the required versions of these dependencies.
 
