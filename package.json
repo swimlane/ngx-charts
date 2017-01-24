@@ -144,6 +144,7 @@
     "uglify-js": "^2.7.5",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.0",
+    "webpack-combine-loaders": "^2.0.3",
     "webpack-dev-server": "^2.2.0",
     "webpack-merge": "^2.4.0",
     "webpack-notifier": "^1.5.0",

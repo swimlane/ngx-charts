@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const commonConfig = require('./webpack.common');
 const { ENV, dir } = require('./helpers');
 const { CheckerPlugin } = require('awesome-typescript-loader');
+const combineLoaders = require('webpack-combine-loaders');
 
 module.exports = function(env) {
   return webpackMerge(commonConfig({ env: ENV }), {
@@ -22,17 +23,28 @@ module.exports = function(env) {
         },
         {
           test: /\.ts$/,
-          loaders: [
-            'awesome-typescript-loader',
-            'angular2-template-loader'
-          ],
-          query: {
-            sourceMap: false,
-            inlineSourceMap: true,
-            compilerOptions: {
-              removeComments: true
+          loader: combineLoaders([
+            {
+              loader: 'awesome-typescript-loader',
+              query: {
+                sourceMap: false,
+                inlineSourceMap: true,
+                compilerOptions: {
+                  removeComments: true
+                }
+              }
+            },
+            {
+              loader: 'angular2-template-loader',
+              query: {
+                sourceMap: false,
+                inlineSourceMap: true,
+                compilerOptions: {
+                  removeComments: true
+                }
+              }
             }
-          },
+          ]),
           exclude: [/\.e2e\.ts$/, /(node_modules)/]
         },
         {
