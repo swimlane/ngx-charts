@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import d3 from '../d3';
 import '../../config/testing-utils';
 import { multi } from '../../demo/data';
+import {APP_BASE_HREF} from '@angular/common';
 
-import { NgxChartsModule } from '../ngx-charts.module';
+import { HeatMapModule } from './heat-map.module';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
@@ -24,7 +25,10 @@ xdescribe('<ngx-charts-heat-map>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [NgxChartsModule]
+      imports: [HeatMapModule],
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ]
     });
   });
 
@@ -34,14 +38,11 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
-                [results]="multi"
-                [legend]="false">
-              </ngx-charts-heat-map>
-          `
+                [results]="multi">
+              </ngx-charts-heat-map>`
         }
       });
     });
@@ -88,21 +89,49 @@ xdescribe('<ngx-charts-heat-map>', () => {
     });
   });
 
+  describe('with gradiant', () => {
+
+    beforeEach(() => {
+      TestBed.overrideComponent(TestComponent, {
+        set: {
+          template: `
+               <ngx-charts-heat-map
+                [view]="[400,800]"
+                [scheme]="colorScheme"
+                [results]="multi"
+                [gradient]="true">
+              </ngx-charts-heat-map>`
+        }
+      });
+    });
+
+    it('should set fill attr', (done) => {
+      TestBed.compileComponents().then(() => {
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+
+        const compiled = fixture.debugElement.nativeElement;
+        const rects = compiled.querySelectorAll('rect.cell');
+        const rect = d3.select(rects[0]);
+
+        expect(rect.attr('fill')).toMatch('url(.*)');
+        done();
+      });
+    });
+  });
+
   describe('padding', () => {
 
     it('should render correct cell size, with zero padding', (done) => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
-                [legend]="false"
                 [innerPadding]="0">
-              </ngx-charts-heat-map>
-          `
+              </ngx-charts-heat-map>`
         }
       });
 
@@ -124,12 +153,10 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
-                [legend]="false"
                 [innerPadding]="20">
               </ngx-charts-heat-map>
           `
@@ -154,13 +181,11 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <base href="/" />
                <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
-                [legend]="false"
-                [innerPadding]="[50, 40]">
+                [innerPadding]="[50,40]">
               </ngx-charts-heat-map>
           `
         }
