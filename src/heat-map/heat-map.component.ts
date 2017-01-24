@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
 import d3 from '../d3';
@@ -57,6 +58,8 @@ import { ColorHelper } from '../common/color.helper';
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HeatMapComponent extends BaseChartComponent {
 

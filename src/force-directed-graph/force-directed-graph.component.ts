@@ -7,6 +7,7 @@ import {
   TemplateRef,
   ViewChild,
   Output,
+  ViewEncapsulation,
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -64,6 +65,11 @@ import { ColorHelper } from '../common/color.helper';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './force-directed-graph.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForceDirectedGraphComponent extends BaseChartComponent {

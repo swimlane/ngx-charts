@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const commonConfig = require('./webpack.common');
 const { ENV, dir } = require('./helpers');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 module.exports = function(env) {
   return webpackMerge(commonConfig({ env: ENV }), {
@@ -24,22 +25,15 @@ module.exports = function(env) {
         {
           test: /\.ts$/,
           loaders: [
-            'awesome-typescript-loader'
+            'awesome-typescript-loader',
+            'angular2-template-loader'
           ],
           exclude: [/\.(spec|e2e|d)\.ts$/]
-        },
-        {
-          test: /\.scss$/,
-          loaders: [
-            'style-loader',
-            'css-loader?sourceMap',
-            'postcss-loader?sourceMap',
-            'sass-loader?sourceMap'
-          ]
         }
       ]
     },
     plugins: [
+      new CheckerPlugin(),
       new webpack.optimize.CommonsChunkPlugin({
         name: ['libs'],
         minChunks: Infinity

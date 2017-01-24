@@ -4,6 +4,7 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
+  ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
 
@@ -85,6 +86,11 @@ import { ColorHelper } from '../common/color.helper';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './linear-gauge.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LinearGaugeComponent extends BaseChartComponent implements AfterViewInit {
