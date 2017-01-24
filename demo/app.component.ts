@@ -43,6 +43,8 @@ export class AppComponent implements OnInit {
   yAxisLabel = 'GDP Per Capita';
   showGridLines = true;
   innerPadding = 8;
+  barPadding = 8;
+  groupPadding = 16;
   roundDomains = false;
 
   // line interpolation

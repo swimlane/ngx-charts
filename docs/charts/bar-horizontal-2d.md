@@ -23,6 +23,8 @@
 | xAxisTickFormatting | function |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function |               | the y axis tick formatting                                                                                      |
 | activeEntries       | object[] | []            | elements to highlight                                                                                           |
+| barPadding          | number   | 8             | padding between bars in px                                                                                      |  
+| groupPadding        | number   | 16            | padding between groups in px                                                                                    |  
 
 # Outputs
 | Property   | Description                              |

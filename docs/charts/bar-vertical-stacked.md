@@ -23,6 +23,7 @@
 | yAxisTickFormatting | function |               | the y axis tick formatting                                                                                      |
 | gradient            | boolean  | false         | fill elements with a gradient instead of a solid color                                                          |
 | activeEntries       | object[] | []            | elements to highlight                                                                                           |
+| barPadding          | number   | 8             | padding between bars in px                                                                                      |                                                                                   |
 
 # Outputs
 | Property   | Description                              |
