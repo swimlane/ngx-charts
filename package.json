@@ -27,11 +27,10 @@
     "start": "webpack-dev-server",
     "start:hmr": "webpack-dev-server --env.HMR",
     "release": "npm-run-all build:release",
-    "package": "npm-run-all -s clean:release package:css package:aot build:package package:replace package:minify",
+    "package": "npm-run-all -s clean:release package:aot build:package package:replace package:minify",
     "package:ts": "tsc --outDir release",
     "package:aot": "ngc -p tsconfig-aot.json",
     "package:replace": "node ./config/replace.js",
-    "package:css": "node-sass -o release/ src/ngx-charts.scss",
     "package:minify": "uglifyjs release/index.js --source-map release/index.min.js.map --source-map-url release/index.js.map --compress --mangle --screw-ie8 --output release/index.min.js",
     "deploy": "node ./config/deploy.js",
     "profile": "NODE_ENV=production webpack --profile --json > dist/stats.json"
