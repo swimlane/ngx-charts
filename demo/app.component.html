@@ -17,6 +17,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-bar-vertical>
@@ -36,6 +37,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)">
       </ngx-charts-bar-horizontal>
@@ -56,6 +58,7 @@
         [yAxisLabel]="yAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -75,6 +78,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -94,6 +98,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-horizontal-stacked
@@ -113,6 +118,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-stacked>
       <ngx-charts-bar-vertical-normalized
@@ -132,6 +138,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-bar-vertical-normalized>
       <ngx-charts-bar-horizontal-normalized
@@ -151,6 +158,7 @@
         [yAxisLabel]="yAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-normalized>
       <ngx-charts-pie-chart
@@ -208,6 +216,7 @@
         [showGridLines]="showGridLines"
         [curve]="curve"
         [rangeFillOpacity]="rangeFillOpacity"
+        [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-line-chart>
       <ngx-charts-force-directed-graph
@@ -240,6 +249,7 @@
         [autoScale]="autoScale"
         [timeline]="timeline"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart>
@@ -261,6 +271,7 @@
         [yAxisLabel]="yAxisLabel"
         [timeline]="timeline"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-stacked>
@@ -282,6 +293,7 @@
         [yAxisLabel]="yAxisLabel"
         [timeline]="timeline"
         [showGridLines]="showGridLines"
+        [roundDomains]="roundDomains"
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-normalized>
@@ -483,6 +495,12 @@
         <label>
           <input type="checkbox" [checked]="showGridLines" (change)="showGridLines = $event.target.checked">
           Show Grid Lines
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('roundDomains')">
+        <label>
+          <input type="checkbox" [checked]="roundDomains" (change)="roundDomains = $event.target.checked">
+          Round Domains
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('gradient')">

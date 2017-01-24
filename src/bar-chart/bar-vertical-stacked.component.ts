@@ -98,6 +98,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -199,10 +200,10 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   }
 
   getYScale() {
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.valueDomain);
-
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   groupTransform(group) {

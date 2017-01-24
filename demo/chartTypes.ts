@@ -8,7 +8,8 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -17,7 +18,8 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -26,7 +28,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains' 
         ]
       },
       {
@@ -35,7 +38,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -44,7 +48,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -53,7 +58,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -62,7 +68,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -71,7 +78,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains'
         ]
       }
     ]
@@ -113,7 +121,7 @@ const chartGroups = [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
-          'rangeFillOpacity'
+          'rangeFillOpacity', 'roundDomains'
         ]
       },
       {
@@ -123,7 +131,8 @@ const chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+          'roundDomains'
         ]
       },
       {
@@ -133,7 +142,8 @@ const chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+          'roundDomains'
         ]
       },
       {
@@ -143,7 +153,8 @@ const chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+          'roundDomains'
         ]
       },
     ]
