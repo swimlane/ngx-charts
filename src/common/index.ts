@@ -2,6 +2,7 @@ export * from './chart-common.module';
 export * from './legend';
 export * from './tooltip';
 export * from './count';
+export * from './timeline';
 export * from './color.helper';
 
 export * from './area.component';
@@ -15,7 +16,6 @@ export * from './grid-panel-series.component';
 export * from './svg-linear-gradient.component';
 export * from './svg-radial-gradient.component';
 export * from './tick-format.helper';
-export * from './timeline.component';
 export * from './trim-label.helper';
 export * from './view-dimensions.helper';
 export * from './label.helper';

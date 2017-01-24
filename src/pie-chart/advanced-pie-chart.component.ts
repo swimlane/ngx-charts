@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewEncapsulation
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -52,6 +53,11 @@ import { BaseChartComponent } from '../common/base-chart.component';
       </div>
     </div>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './advanced-pie-chart.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedPieChartComponent extends BaseChartComponent {

@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -56,7 +57,9 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BarHorizontalComponent extends BaseChartComponent {
 

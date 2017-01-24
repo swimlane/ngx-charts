@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   trigger,
+  ViewEncapsulation,
   style,
   transition,
   animate,
@@ -67,6 +68,8 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [

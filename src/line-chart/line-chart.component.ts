@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewEncapsulation,
   HostListener,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -114,6 +115,8 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LineChartComponent extends BaseChartComponent {

@@ -1,11 +1,11 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
   OnChanges, ChangeDetectionStrategy, NgZone,
-  ChangeDetectorRef, SimpleChanges
+  ChangeDetectorRef, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
 import { Location } from '@angular/common';
-import d3 from '../d3';
-import { id } from '../utils/id';
+import d3 from '../../d3';
+import { id } from '../../utils';
 
 @Component({
   selector: 'g[ngx-charts-timeline]',
@@ -30,6 +30,8 @@ import { id } from '../utils/id';
       <svg:g class="brush"></svg:g>
     </svg:g>
   `,
+  styleUrls: ['./timeline.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Timeline implements OnChanges {
