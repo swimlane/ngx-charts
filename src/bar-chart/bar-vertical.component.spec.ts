@@ -82,7 +82,7 @@ describe('<ngx-charts-bar-vertical>', () => {
         const bars = compiled.querySelectorAll('[ngx-charts-bar]');
         const bar = d3.select(bars[0]);
 
-        expect(bar.attr('ng-reflect-width')).toEqual('53'); // ~(360 - 5 * innerPadding) / 6 
+        expect(bar.attr('ng-reflect-width')).toEqual('53'); // ~(360 - 5 * barPadding) / 6 
         done();
       });
     });
@@ -98,7 +98,7 @@ describe('<ngx-charts-bar-vertical>', () => {
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="single"
-                [innerPadding]="0">
+                [barPadding]="0">
               </ngx-charts-bar-vertical>`
         }
       });
@@ -111,7 +111,7 @@ describe('<ngx-charts-bar-vertical>', () => {
         const bars = compiled.querySelectorAll('[ngx-charts-bar]');
         const bar = d3.select(bars[0]);
 
-        expect(bar.attr('ng-reflect-width')).toEqual('60'); // ~(360 - 5 * innerPadding) / 6 
+        expect(bar.attr('ng-reflect-width')).toEqual('60'); // ~(360 - 5 * barPadding) / 6 
         done();
       });
     });
@@ -124,7 +124,7 @@ describe('<ngx-charts-bar-vertical>', () => {
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="single"
-                [innerPadding]="20">
+                [barPadding]="20">
               </ngx-charts-bar-vertical>`
         }
       });
@@ -137,7 +137,7 @@ describe('<ngx-charts-bar-vertical>', () => {
         const bars = compiled.querySelectorAll('[ngx-charts-bar]');
         const bar = d3.select(bars[0]);
 
-        expect(bar.attr('ng-reflect-width')).toEqual('43'); // ~(360 - 5 * innerPadding) / 6 
+        expect(bar.attr('ng-reflect-width')).toEqual('43'); // ~(360 - 5 * barPadding) / 6 
         done();
       });
     });

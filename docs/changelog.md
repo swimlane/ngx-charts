@@ -1,6 +1,8 @@
 # Changelog
 
 ## Master
+- Enhancement: Bar padding for bar-charts (#185)
+- Enhancement: Bar padding for grouped bar-charts (#185)
 - Enhancement: Inner padding for heatmap (#165) 
 - Enhancement: Add `axisTickformatting` inputs to bar, area, line, gauge and heatmap charts (#167)
 - Enhancement: Add Inner radius, Fixes #104 (#162)

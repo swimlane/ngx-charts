@@ -7,7 +7,7 @@ const chartGroups = [
         selector: 'bar-vertical',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'innerPadding',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       },
@@ -16,7 +16,7 @@ const chartGroups = [
         selector: 'bar-horizontal',
         inputFormat: 'singleSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'innerPadding',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       },
@@ -25,7 +25,7 @@ const chartGroups = [
         selector: 'bar-vertical-2d',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       },
@@ -34,7 +34,7 @@ const chartGroups = [
         selector: 'bar-horizontal-2d',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       },
@@ -43,7 +43,7 @@ const chartGroups = [
         selector: 'bar-vertical-stacked',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'innerPadding',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       },
@@ -52,7 +52,7 @@ const chartGroups = [
         selector: 'bar-horizontal-stacked',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'innerPadding',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       },
@@ -61,7 +61,7 @@ const chartGroups = [
         selector: 'bar-vertical-normalized',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'innerPadding',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       },
@@ -70,7 +70,7 @@ const chartGroups = [
         selector: 'bar-horizontal-normalized',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'innerPadding',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
         ]
       }

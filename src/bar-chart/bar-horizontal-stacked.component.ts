@@ -98,7 +98,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
-  @Input() innerPadding = 8;
+  @Input() barPadding = 8;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -195,7 +195,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   getYScale() {
-    const spacing = this.groupDomain.length / (this.dims.height / this.innerPadding + 1);
+    const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
 
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
