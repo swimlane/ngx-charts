@@ -17,13 +17,15 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../src/common/charts/chart.component';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '../common/charts/chart.component.ngfactory';
-import * as import16 from '../../../src/pie-chart/pie-series.component';
-import * as import17 from './pie-series.component.ngfactory';
-import * as import18 from '../../../src/services/injection.service';
+import * as import12 from '../common/base-chart.component.scss.ngstyle';
+import * as import13 from './pie-chart.component.scss.ngstyle';
+import * as import14 from '@angular/core/src/linker/view_container';
+import * as import15 from '../../../src/common/charts/chart.component';
+import * as import16 from '../../../src/common/tooltip/tooltip.service';
+import * as import17 from '../common/charts/chart.component.ngfactory';
+import * as import18 from '../../../src/pie-chart/pie-series.component';
+import * as import19 from './pie-series.component.ngfactory';
+import * as import20 from '../../../src/services/injection.service';
 export class Wrapper_PieChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieChartComponent;
@@ -40,6 +42,7 @@ export class Wrapper_PieChartComponent {
   /*private*/ _expr_8:any;
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
+  /*private*/ _expr_11:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -58,6 +61,7 @@ export class Wrapper_PieChartComponent {
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
+    this._expr_11 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -139,20 +143,28 @@ export class Wrapper_PieChartComponent {
       this._expr_8 = currValue;
     }
   }
-  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_arcWidth(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_9,currValue))) {
       this._changed = true;
-      this.context.gradient = currValue;
-      this._changes['gradient'] = new import1.SimpleChange(this._expr_9,currValue);
+      this.context.arcWidth = currValue;
+      this._changes['arcWidth'] = new import1.SimpleChange(this._expr_9,currValue);
       this._expr_9 = currValue;
     }
   }
-  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_10,currValue))) {
       this._changed = true;
-      this.context.activeEntries = currValue;
-      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_10,currValue);
+      this.context.gradient = currValue;
+      this._changes['gradient'] = new import1.SimpleChange(this._expr_10,currValue);
       this._expr_10 = currValue;
+    }
+  }
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_11,currValue))) {
+      this._changed = true;
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_11,currValue);
+      this._expr_11 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -211,21 +223,25 @@ class View_PieChartComponent_Host0 extends import2.AppView<any> {
   }
 }
 export const PieChartComponentNgFactory:import8.ComponentFactory<import0.PieChartComponent> = new import8.ComponentFactory<import0.PieChartComponent>('ngx-charts-pie-chart',View_PieChartComponent_Host0,import0.PieChartComponent);
-const styles_PieChartComponent:any[] = ([] as any[]);
+const styles_PieChartComponent:any[] = [
+  import12.styles,
+  import13.styles
+]
+;
 var renderType_PieChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_PieChartComponent,{});
 export class View_PieChartComponent0 extends import2.AppView<import0.PieChartComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import12.ViewContainer;
-  compView_1:import2.AppView<import13.ChartComponent>;
-  _TooltipService_1_5:import14.TooltipService;
-  _ChartComponent_1_6:import15.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import14.ViewContainer;
+  compView_1:import2.AppView<import15.ChartComponent>;
+  _TooltipService_1_5:import16.TooltipService;
+  _ChartComponent_1_6:import17.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import16.PieSeriesComponent>;
-  _PieSeriesComponent_5_3:import17.Wrapper_PieSeriesComponent;
+  compView_5:import2.AppView<import18.PieSeriesComponent>;
+  _PieSeriesComponent_5_3:import19.Wrapper_PieSeriesComponent;
   _text_6:any;
   _text_7:any;
   _text_8:any;
@@ -246,16 +262,16 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import15.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import14.TooltipService(this.parentView.injectorGet(import18.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import15.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import14.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import17.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import16.TooltipService(this.parentView.injectorGet(import20.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import17.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','pie-chart chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'ngx-charts-pie-series',''),(null as any));
-    this.compView_5 = new import17.View_PieSeriesComponent0(this.viewUtils,this,5,this._el_5);
-    this._PieSeriesComponent_5_3 = new import17.Wrapper_PieSeriesComponent();
+    this.compView_5 = new import19.View_PieSeriesComponent0(this.viewUtils,this,5,this._el_5);
+    this._PieSeriesComponent_5_3 = new import19.Wrapper_PieSeriesComponent();
     this.compView_5.create(this._PieSeriesComponent_5_3.context);
     this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
@@ -284,9 +300,9 @@ export class View_PieChartComponent0 extends import2.AppView<import0.PieChartCom
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import16.PieSeriesComponent) && (5 === requestNodeIndex))) { return this._PieSeriesComponent_5_3.context; }
-    if (((token === import14.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
-    if (((token === import13.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import18.PieSeriesComponent) && (5 === requestNodeIndex))) { return this._PieSeriesComponent_5_3.context; }
+    if (((token === import16.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
+    if (((token === import15.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

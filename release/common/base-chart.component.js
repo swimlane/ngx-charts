@@ -1,7 +1,10 @@
 "use strict";
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
-var Rx_1 = require('rxjs/Rx');
+var Observable_1 = require('rxjs/Observable');
+require('rxjs/add/observable/fromEvent');
+require('rxjs/add/operator/debounceTime');
+var utils_1 = require('../utils');
 var BaseChartComponent = (function () {
     function BaseChartComponent(chartElement, zone, cd, location) {
         this.chartElement = chartElement;
@@ -13,9 +16,14 @@ var BaseChartComponent = (function () {
     }
     BaseChartComponent.prototype.ngAfterViewInit = function () {
         this.bindWindowResizeEvent();
+        // listen for visibility of the element for hidden by default scenario
+        this.visibilityObserver = new utils_1.VisibilityObserver(this.chartElement, this.zone);
+        this.visibilityObserver.visible.subscribe(this.update.bind(this));
     };
     BaseChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
+        this.visibilityObserver.visible.unsubscribe();
+        this.visibilityObserver.destroy();
     };
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -30,23 +38,32 @@ var BaseChartComponent = (function () {
         }
         else {
             var dims = this.getContainerDims();
-            this.width = dims.width;
-            this.height = dims.height;
+            if (dims) {
+                this.width = dims.width;
+                this.height = dims.height;
+            }
+        }
+        if (!this.width || !this.height) {
+            this.width = this.height = 0;
         }
         if (this.cd) {
             this.cd.markForCheck();
         }
     };
     BaseChartComponent.prototype.getContainerDims = function () {
-        var width = 0;
-        var height = 0;
+        var width;
+        var height;
         var hostElem = this.chartElement.nativeElement;
         if (hostElem.parentNode !== null) {
             // Get the container dimensions
-            width = hostElem.parentNode.clientWidth;
-            height = hostElem.parentNode.clientHeight;
+            var dims = hostElem.parentNode.getBoundingClientRect();
+            width = dims.width;
+            height = dims.height;
         }
-        return { width: width, height: height };
+        if (width && height) {
+            return { width: width, height: height };
+        }
+        return null;
     };
     /**
      * Converts all date objects that appear as name
@@ -76,7 +93,7 @@ var BaseChartComponent = (function () {
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
         this.zone.run(function () {
-            var source = Rx_1.Observable.fromEvent(window, 'resize', null, null);
+            var source = Observable_1.Observable.fromEvent(window, 'resize', null, null);
             var subscription = source.debounceTime(200).subscribe(function (e) {
                 _this.update();
                 if (_this.cd) {
@@ -120,7 +137,7 @@ var BaseChartComponent = (function () {
     BaseChartComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'base-chart',
-                    template: ""
+                    template: "<div></div>"
                 },] },
     ];
     /** @nocollapse */

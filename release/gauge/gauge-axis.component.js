@@ -32,10 +32,14 @@ var GaugeAxisComponent = (function () {
                 skip = true;
             }
             if (!skip) {
+                var text = Number.parseFloat(this.valueScale.invert(angleDeg).toString()).toLocaleString();
+                if (this.tickFormatting) {
+                    text = this.tickFormatting(text);
+                }
                 ticks.big.push({
                     line: this.getTickPath(startDistance, tickLength, angle),
                     textAnchor: textAnchor,
-                    text: Number.parseInt(this.valueScale.invert(angleDeg).toString()).toLocaleString(),
+                    text: text,
                     textTransform: "\n            translate(" + textDist * Math.cos(angle) + ", " + textDist * Math.sin(angle) + ") rotate(" + -this.rotationAngle + ")\n          "
                 });
             }
@@ -94,6 +98,7 @@ var GaugeAxisComponent = (function () {
         'startAngle': [{ type: core_1.Input },],
         'radius': [{ type: core_1.Input },],
         'valueScale': [{ type: core_1.Input },],
+        'tickFormatting': [{ type: core_1.Input },],
     };
     return GaugeAxisComponent;
 }());

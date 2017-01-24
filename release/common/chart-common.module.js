@@ -12,7 +12,7 @@ var grid_panel_component_1 = require('./grid-panel.component');
 var grid_panel_series_component_1 = require('./grid-panel-series.component');
 var svg_linear_gradient_component_1 = require('./svg-linear-gradient.component');
 var svg_radial_gradient_component_1 = require('./svg-radial-gradient.component');
-var timeline_component_1 = require('./timeline.component');
+var timeline_1 = require('./timeline');
 var common_2 = require('@angular/common');
 var area_component_1 = require('./area.component');
 var area_tooltip_component_1 = require('./area-tooltip.component');
@@ -32,7 +32,7 @@ var COMPONENTS = [
     grid_panel_series_component_1.GridPanelSeriesComponent,
     svg_linear_gradient_component_1.SvgLinearGradientComponent,
     svg_radial_gradient_component_1.SvgRadialGradientComponent,
-    timeline_component_1.Timeline,
+    timeline_1.Timeline,
     legend_1.AdvancedLegendComponent
 ];
 var ChartCommonModule = (function () {

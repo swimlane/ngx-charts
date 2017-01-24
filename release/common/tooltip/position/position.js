@@ -2,20 +2,18 @@
 var placement_type_1 = require('./placement.type');
 var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
-    var result;
     if (alignment === 'top') {
-        result = elDimensions.top - caretOffset;
+        return elDimensions.top - caretOffset;
     }
     if (alignment === 'bottom') {
-        result = elDimensions.top + elDimensions.height - popoverDimensions.height + caretOffset;
+        return elDimensions.top + elDimensions.height - popoverDimensions.height + caretOffset;
     }
     if (alignment === 'center') {
-        result = elDimensions.top + elDimensions.height / 2 - popoverDimensions.height / 2;
+        return elDimensions.top + elDimensions.height / 2 - popoverDimensions.height / 2;
     }
-    return result;
+    return undefined;
 }
 function horizontalPosition(elDimensions, popoverDimensions, alignment) {
-    var result;
     if (alignment === 'left') {
         return elDimensions.left - caretOffset;
     }
@@ -25,7 +23,7 @@ function horizontalPosition(elDimensions, popoverDimensions, alignment) {
     if (alignment === 'center') {
         return elDimensions.left + elDimensions.width / 2 - popoverDimensions.width / 2;
     }
-    return result;
+    return undefined;
 }
 /**
  * Position helper for the popover directive.

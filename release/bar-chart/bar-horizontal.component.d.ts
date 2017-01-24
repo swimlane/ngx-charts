@@ -14,6 +14,10 @@ export declare class BarHorizontalComponent extends BaseChartComponent {
     showGridLines: boolean;
     activeEntries: any[];
     schemeType: string;
+    xAxisTickFormatting: any;
+    yAxisTickFormatting: any;
+    barPadding: number;
+    roundDomains: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;

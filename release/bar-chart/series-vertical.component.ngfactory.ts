@@ -357,7 +357,7 @@ class View_SeriesVerticalComponent1 extends import2.AppView<any> {
     return result;
   }
 }
-var renderType_SeriesVerticalComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesVerticalComponent,{animationState: SeriesVerticalComponent_animationState_factory});
+var renderType_SeriesVerticalComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesVerticalComponent,{'animationState': SeriesVerticalComponent_animationState_factory});
 export class View_SeriesVerticalComponent0 extends import2.AppView<import0.SeriesVerticalComponent> {
   _text_0:any;
   _anchor_1:any;

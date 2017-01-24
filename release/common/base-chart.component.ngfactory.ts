@@ -141,12 +141,14 @@ export const BaseChartComponentNgFactory:import8.ComponentFactory<import0.BaseCh
 const styles_BaseChartComponent:any[] = ([] as any[]);
 var renderType_BaseChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_BaseChartComponent,{});
 export class View_BaseChartComponent0 extends import2.AppView<import0.BaseChartComponent> {
+  _el_0:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_BaseChartComponent0,renderType_BaseChartComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
-    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): ([] as any[])),(null as any));
+    this._el_0 = import3.createRenderElement(this.renderer,parentRenderNode,'div',import3.EMPTY_INLINE_ARRAY,(null as any));
+    this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return (null as any);
   }
 }

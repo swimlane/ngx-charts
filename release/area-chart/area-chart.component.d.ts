@@ -18,6 +18,9 @@ export declare class AreaChartComponent extends BaseChartComponent {
     curve: any;
     activeEntries: any[];
     schemeType: string;
+    xAxisTickFormatting: any;
+    yAxisTickFormatting: any;
+    roundDomains: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;

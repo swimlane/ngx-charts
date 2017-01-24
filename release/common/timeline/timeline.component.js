@@ -1,9 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
-var moment = require('moment');
-var d3_1 = require('../d3');
-var id_1 = require('../utils/id');
+var d3_1 = require('../../d3');
+var utils_1 = require('../../utils');
 var Timeline = (function () {
     function Timeline(element, zone, cd, location) {
         this.zone = zone;
@@ -35,7 +34,7 @@ var Timeline = (function () {
             }
             _this.transform = "translate(0 , " + offsetY + ")";
             var pageUrl = _this.location.path();
-            _this.filterId = 'filter' + id_1.id().toString();
+            _this.filterId = 'filter' + utils_1.id().toString();
             _this.filter = "url(" + pageUrl + "#" + _this.filterId + ")";
             _this.cd.markForCheck();
         });
@@ -53,7 +52,6 @@ var Timeline = (function () {
         }
         var domain = [];
         if (this.scaleType === 'time') {
-            values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
             domain = [min, max];
@@ -140,6 +138,8 @@ var Timeline = (function () {
         { type: core_1.Component, args: [{
                     selector: 'g[ngx-charts-timeline]',
                     template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
+                    styleUrls: ['./timeline.component.scss'],
+                    encapsulation: core_1.ViewEncapsulation.None,
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];

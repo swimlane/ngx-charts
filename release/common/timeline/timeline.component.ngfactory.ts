@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/common/timeline.component';
+import * as import0 from '../../../../src/common/timeline/timeline.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -17,6 +17,7 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
+import * as import12 from './timeline.component.scss.ngstyle';
 export class Wrapper_Timeline {
   /*private*/ _eventHandler:Function;
   context:import0.Timeline;
@@ -192,7 +193,7 @@ class View_Timeline_Host0 extends import2.AppView<any> {
   }
 }
 export const TimelineNgFactory:import8.ComponentFactory<import0.Timeline> = new import8.ComponentFactory<import0.Timeline>('g[ngx-charts-timeline]',View_Timeline_Host0,import0.Timeline);
-const styles_Timeline:any[] = ([] as any[]);
+const styles_Timeline:any[] = [import12.styles];
 var renderType_Timeline:import4.RenderComponentType = import3.createRenderComponentType('',1,import5.ViewEncapsulation.None,styles_Timeline,{});
 export class View_Timeline0 extends import2.AppView<import0.Timeline> {
   _text_0:any;
