@@ -1,26 +1,20 @@
 import {
-  ElementRef,
-  NgZone,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  OnDestroy,
-  OnChanges,
-  SimpleChanges
+  ElementRef, NgZone, ChangeDetectorRef, Component, Input,
+  Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
+
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
+import { VisibilityObserver } from '../utils';
 
 @Component({
   selector: 'base-chart',
-  template: ``
+  template: `<div></div>`
 })
 export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
+
   @Input() results: any;
   @Input() view: number[];
   @Input() scheme: any;
@@ -32,6 +26,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   width: number;
   height: number;
   resizeSubscription: any;
+  visibilityObserver: VisibilityObserver;
 
   constructor(
     protected chartElement: ElementRef,
@@ -42,10 +37,16 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.bindWindowResizeEvent();
+
+    // listen for visibility of the element for hidden by default scenario
+    this.visibilityObserver = new VisibilityObserver(this.chartElement, this.zone);
+    this.visibilityObserver.visible.subscribe(this.update.bind(this));
   }
 
   ngOnDestroy(): void {
     this.unbindEvents();
+    this.visibilityObserver.visible.unsubscribe();
+    this.visibilityObserver.destroy();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -84,7 +85,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
     if (hostElem.parentNode !== null) {
       // Get the container dimensions
-      let dims = hostElem.parentNode.getBoundingClientRect();
+      const dims = hostElem.parentNode.getBoundingClientRect();
       width = dims.width;
       height = dims.height;
     }
