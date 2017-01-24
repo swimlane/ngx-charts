@@ -19,7 +19,7 @@ import { NgxChartsModule } from '../src';
 export class AppModule { }
 
 export function getBaseLocation() {
-    let paths: string[] = location.pathname.split('/').splice(1, 1);
-    let basePath: string = (paths && paths[0]) || '';
+    const paths: string[] = location.pathname.split('/').splice(1, 1);
+    const basePath: string = (paths && paths[0]) || '';
     return '/' + basePath;
 }
