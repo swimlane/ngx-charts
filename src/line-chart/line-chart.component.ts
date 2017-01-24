@@ -138,6 +138,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -314,13 +315,15 @@ export class LineChartComponent extends BaseChartComponent {
         .domain(domain);
     }
 
-    return scale;
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getYScale(domain, height): any {
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([height, 0])
       .domain(domain);
+
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getScaleType(values): string {

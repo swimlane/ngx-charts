@@ -106,6 +106,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() groupPadding = 16;
   @Input() barPadding = 8;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -180,9 +181,11 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getValueScale() {
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valuesDomain);
+    
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getGroupDomain(): any[] {
