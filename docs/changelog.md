@@ -1,5 +1,16 @@
 # Changelog
 
+## Master
+- Enhancement: Inner padding for heatmap (#165) 
+- Enhancement: Add `axisTickformatting` inputs to bar, area, line, gauge and heatmap charts (#167)
+- Enhancement: Add Inner radius, Fixes #104 (#162)
+- Bug: Charts not rendering with hidden by default (#170)
+- Bug: Use old parent dimensions if new dimensions are undefined or 0
+- Bug: Fix axis number formatting (#171)
+- Chore: Update dependencies
+- Chore: Remove moment with d3 timeFormat (#173)
+- Chore: Only include used Rxjs operators to decrease file size (#169)
+
 ## 3.1.2
 - Enhancement: Add `ngx-charts-outer` class to `ngx-charts` inner element
 - Chore: Update dependencies
