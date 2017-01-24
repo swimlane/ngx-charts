@@ -1,13 +1,6 @@
 import {
-  Component,
-  Input,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  SimpleChanges,
-  OnChanges,
-  ChangeDetectorRef,
-  NgZone
+  Component, Input, ChangeDetectionStrategy, Output, EventEmitter,
+  SimpleChanges, OnChanges, ChangeDetectorRef, NgZone, ViewEncapsulation
  } from '@angular/core';
  import { formatLabel } from '../label.helper';
 
@@ -39,6 +32,8 @@ import {
       </div>
     </div>
   `,
+  styleUrls: ['./legend.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LegendComponent implements OnChanges {

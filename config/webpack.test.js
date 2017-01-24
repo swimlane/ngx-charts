@@ -3,10 +3,14 @@ const webpackMerge = require('webpack-merge');
 const chalk = require('chalk');
 const commonConfig = require('./webpack.common');
 const { ENV, dir } = require('./helpers');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 module.exports = function(env) {
   return webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'inline-source-map',
+    plugins: [
+      new CheckerPlugin()
+    ],
     module: {
       exprContextCritical: false,
       rules: [
@@ -18,7 +22,10 @@ module.exports = function(env) {
         },
         {
           test: /\.ts$/,
-          loader: 'awesome-typescript-loader',
+          loaders: [
+            'awesome-typescript-loader',
+            'angular2-template-loader'
+          ],
           query: {
             sourceMap: false,
             inlineSourceMap: true,
@@ -37,14 +44,6 @@ module.exports = function(env) {
             /\.(e2e|spec)\.ts$/,
             /node_modules/
           ]
-        },
-        {
-          test: /\.css/,
-          loader: 'style-loader!css-loader?sourceMap'
-        },
-        {
-          test: /\.scss$/,
-          loader: 'style-loader!css-loader!postcss-loader?sourceMap!sass-loader?sourceMap'
         }
       ]
     },

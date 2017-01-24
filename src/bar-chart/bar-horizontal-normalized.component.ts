@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   Output,
+  ViewEncapsulation,
   EventEmitter,
   trigger,
   style,
@@ -68,6 +69,8 @@ import d3 from '../d3';
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('animationState', [
       transition('* => void', [
