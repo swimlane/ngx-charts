@@ -1,5 +1,5 @@
 import {
-  Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges
+  Component, Input, OnChanges, ChangeDetectionStrategy, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -13,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
       <div class="scale-legend-label">
         <span>{{ valueRange[1].toLocaleString() }}</span>
       </div>
-      <div 
+      <div
         class="scale-legend-wrap"
         [style.background]="gradient">
       </div>
@@ -22,6 +22,8 @@ import { DomSanitizer } from '@angular/platform-browser';
       </div>
     </div>
   `,
+  styleUrls: ['./scale-legend.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScaleLegendComponent implements OnChanges {
