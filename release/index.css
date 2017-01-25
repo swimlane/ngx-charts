@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.0.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.0.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -40,11 +40,6 @@
     opacity: 0.6; }
   .ngx-charts .circle:hover {
     cursor: pointer; }
-  .ngx-charts .tree-map .label p {
-    display: table-cell;
-    text-align: center;
-    line-height: 1.2em;
-    vertical-align: middle; }
 
 .label {
   font-size: 12px;

@@ -15,7 +15,8 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/platform-browser/src/security/dom_sanitization_service';
-import * as import10 from '@angular/core/src/security';
+import * as import10 from './scale-legend.component.scss.ngstyle';
+import * as import11 from '@angular/core/src/security';
 export class Wrapper_ScaleLegendComponent {
   /*private*/ _eventHandler:Function;
   context:import0.ScaleLegendComponent;
@@ -121,7 +122,7 @@ class View_ScaleLegendComponent_Host0 extends import2.AppView<any> {
   }
 }
 export const ScaleLegendComponentNgFactory:import8.ComponentFactory<import0.ScaleLegendComponent> = new import8.ComponentFactory<import0.ScaleLegendComponent>('ngx-charts-scale-legend',View_ScaleLegendComponent_Host0,import0.ScaleLegendComponent);
-const styles_ScaleLegendComponent:any[] = ([] as any[]);
+const styles_ScaleLegendComponent:any[] = [import10.styles];
 var renderType_ScaleLegendComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_ScaleLegendComponent,{});
 export class View_ScaleLegendComponent0 extends import2.AppView<import0.ScaleLegendComponent> {
   _text_0:any;
@@ -204,12 +205,12 @@ export class View_ScaleLegendComponent0 extends import2.AppView<import0.ScaleLeg
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_19:any = this.context.height;
     if (import3.checkBinding(throwOnChange,this._expr_19,currVal_19)) {
-      this.renderer.setElementStyle(this._el_1,'height',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_19) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_19).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_1,'height',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_19) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_19).toString() + 'px')));
       this._expr_19 = currVal_19;
     }
     const currVal_20:any = this.context.width;
     if (import3.checkBinding(throwOnChange,this._expr_20,currVal_20)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_20) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_20).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_20).toString() + 'px')));
       this._expr_20 = currVal_20;
     }
     const currVal_21:any = import3.inlineInterpolate(1,'',this.context.valueRange[1].toLocaleString(),'');
@@ -219,7 +220,7 @@ export class View_ScaleLegendComponent0 extends import2.AppView<import0.ScaleLeg
     }
     const currVal_22:any = this.context.gradient;
     if (import3.checkBinding(throwOnChange,this._expr_22,currVal_22)) {
-      this.renderer.setElementStyle(this._el_9,'background',((this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_22) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import10.SecurityContext.STYLE,currVal_22).toString()));
+      this.renderer.setElementStyle(this._el_9,'background',((this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_22) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import11.SecurityContext.STYLE,currVal_22).toString()));
       this._expr_22 = currVal_22;
     }
     const currVal_23:any = import3.inlineInterpolate(1,'',this.context.valueRange[0].toLocaleString(),'');

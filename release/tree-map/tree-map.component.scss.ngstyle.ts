@@ -5,4 +5,4 @@
  */
  /* tslint:disable */
 
-export const styles:any[] = ['.tree-map {\n  .treemap-val {\n    font-size: 1.3em;\n    padding-top: 5px;\n    display: inline-block;\n  }\n}\n'];
+export const styles:any[] = ['.tree-map {\n  .treemap-val {\n    font-size: 1.3em;\n    padding-top: 5px;\n    display: inline-block;\n  }\n\n  .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle;\n  }\n}\n'];
