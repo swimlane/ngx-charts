@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.1
+- Fixed regressions from CSS refactor
+
 ## 4.0.0
 - Enhancement: Added `barPadding` and `groupPadding` properties to bar-charts (#185)
 - Enhancement: Added `innerPadding` property for heatmap, to control padding between cells (#165)
