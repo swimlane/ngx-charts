@@ -16,9 +16,6 @@ Check the `package.json` file for the required versions of these dependencies.
 - `release/index.js` - UMD Version
 - `release/index.min.js` - UMD Version Minified
 
-### CSS
-Additionally, you will need to include `./release/ngx-charts.css`.
-
 ## Developing
 If you want to run the demos locally, just do:
 
