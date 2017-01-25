@@ -29,7 +29,7 @@ const chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
           'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains' 
+          'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -100,7 +100,7 @@ const chartGroups = [
         name: 'Advanced Pie Chart',
         selector: 'advanced-pie-chart',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'showLabels']
+        options: ['colorScheme', 'gradient']
       },
       {
         name: 'Pie Grid',
