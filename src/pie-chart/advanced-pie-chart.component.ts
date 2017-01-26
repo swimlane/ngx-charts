@@ -39,9 +39,10 @@ import { BaseChartComponent } from '../common/base-chart.component';
           </svg:g>
         </ngx-charts-chart>
       </div>
-      <div 
+      <div
         class="advanced-pie-legend-wrapper"
-        [style.width.px]="width - dims.width">
+        [style.width.px]="width - dims.width"
+        [style.height.px]="height">
         <ngx-charts-advanced-legend
           [data]="results"
           [colors]="colors"
