@@ -54,27 +54,28 @@
       cursor: pointer;
     }
   }
-}
 
-.label {
-  font-size: 12px;
-  font-weight: normal;
-}
+  .label {
+    font-size: 12px;
+    font-weight: normal;
+  }
 
-.gridline-path {
-  stroke: #ddd;
-  stroke-width: 1;
-  fill: none;
-}
-
-.grid-panel {
-  rect {
+  .gridline-path {
+    stroke: #ddd;
+    stroke-width: 1;
     fill: none;
   }
 
-  &.odd {
+  .grid-panel {
     rect {
-      fill: rgba(0,0,0,0.05);
+      fill: none;
+    }
+
+    &.odd {
+      rect {
+        fill: rgba(0,0,0,0.05);
+      }
     }
   }
+
 }

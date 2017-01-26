@@ -209,46 +209,106 @@ main {
 
   background: $color-bg-darker;
 
-  text {
-    fill: $color-text-med;
-  }
+  .ngx-charts {
 
-  .gridline-path {
-    stroke: $color-bg-med;
-  }
+    text {
+      fill: $color-text-med;
+    }
 
-  .grid-panel {
-    &.odd {
-      rect {
+    .gridline-path {
+      stroke: $color-bg-med;
+    }
+
+    .grid-panel {
+      &.odd {
+        rect {
+          fill: rgba(255,255,255,0.05);
+        }
+      }
+    }
+
+    .force-directed-graph {
+      .edge {
+        stroke: $color-bg-light;
+      }
+    }
+
+    .number-card {
+      p {
+        color: $color-text-light;
+      }
+    }
+
+    .gauge {
+      .background-arc{
+        path {
+          fill: $color-bg-med;
+        }
+      }
+
+      .gauge-tick {
+        path {
+          stroke: $color-text-med;
+        }
+        text {
+          fill: $color-text-med;
+        }
+      }
+    }
+
+    .linear-gauge {
+      .background-bar {
+        path {
+          fill: $color-bg-med;
+        }
+      }
+
+      .units {
+        fill: $color-text-dark;
+      }
+    }
+
+    .timeline {
+      .brush-background {
         fill: rgba(255,255,255,0.05);
       }
-    }
-  }
 
-  .legend-labels {
-    background: rgba(255,255,255,0.05) !important;
-  }
-
-  .legend-item {
-    &:hover {
-      color: #fff;
-    }
-  }
-
-  .legend-label {
-    &:hover {
-      color: #fff !important;
-    }
-
-    .active {
-      .legend-label-text {
-        color: #fff !important;
+      .brush {
+        .selection {
+          fill: rgba(255, 255, 255, 0.1);
+          stroke: #aaa;
+        }
       }
     }
+
   }
 
-  .scale-legend-label {
-    color: $color-text-med;
+  .chart-legend {
+    .legend-labels {
+      background: rgba(255,255,255,0.05) !important;
+    }
+
+    .legend-item {
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    .legend-label {
+      &:hover {
+        color: #fff !important;
+      }
+
+      .active {
+        .legend-label-text {
+          color: #fff !important;
+        }
+      }
+    }
+
+    .scale-legend-label {
+      color: $color-text-med;
+    }
   }
 
   .advanced-pie-legend {
@@ -261,57 +321,4 @@ main {
     }
   }
 
-  .force-directed-graph {
-    .edge {
-      stroke: $color-bg-light;
-    }
-  }
-
-  .number-card {
-    p {
-      color: $color-text-light;
-    }
-  }
-
-  .gauge {
-    .background-arc{
-      path {
-        fill: $color-bg-med;
-      }
-    }
-
-    .gauge-tick {
-      path {
-        stroke: $color-text-med;
-      }
-      text {
-        fill: $color-text-med;
-      }
-    }
-  }
-
-  .linear-gauge {
-    .background-bar {
-      path {
-        fill: $color-bg-med;
-      }
-    }
-
-    .units {
-      fill: $color-text-dark;
-    }
-  }
-
-  .timeline {
-    .brush-background {
-      fill: rgba(255,255,255,0.05);
-    }
-
-    .brush {
-      .selection {
-        fill: rgba(255, 255, 255, 0.1);
-        stroke: #aaa;
-      }
-    }
-  }
 }
