@@ -135,7 +135,9 @@ export class InjectionService {
       appRef.detachView(componentRef.hostView);
     });
 
-    location.appendChild(componentRootNode);
+    // use the renderer to append the element for univseral support
+    const renderer = componentRef.instance.renderer;
+    renderer.projectNodes(location, [componentRootNode]);
 
     return componentRef;
   }
