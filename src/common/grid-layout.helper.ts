@@ -56,5 +56,5 @@ export function gridLayout(dims, data, minWidth) {
 function getTotal(results) {
   return results
     .map(d => d.value)
-    .reduce((sum, val) => { return sum + val; }, 0);
+    .reduce((sum, val) => sum + val, 0);
 }
