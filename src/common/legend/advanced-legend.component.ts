@@ -80,7 +80,7 @@ export class AdvancedLegendComponent implements OnChanges  {
   getTotal(): number {
     return this.data
       .map(d => d.value)
-      .reduce((sum, d) => { return sum + d; }, 0);
+      .reduce((sum, d) => sum + d, 0);
   }
 
   update(): void {

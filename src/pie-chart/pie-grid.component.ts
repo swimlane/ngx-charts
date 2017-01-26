@@ -161,7 +161,7 @@ export class PieGridComponent extends BaseChartComponent {
   getTotal(): any {
     return this.results
       .map(d => d.value)
-      .reduce((sum, d) => { return sum + d; }, 0);
+      .reduce((sum, d) => sum + d, 0);
   }
 
   onClick(data): void {

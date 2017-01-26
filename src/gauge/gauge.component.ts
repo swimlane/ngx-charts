@@ -245,7 +245,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDisplayValue(): string {
-    const value = this.results.map(d => d.value).reduce((a, b) => { return a + b; }, 0);
+    const value = this.results.map(d => d.value).reduce((a, b) => a + b, 0);
     return value.toLocaleString();
   }
 

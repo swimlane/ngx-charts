@@ -77,7 +77,7 @@ export class TreeMapComponent extends BaseChartComponent {
           }
           return label;
         })
-        .parentId(d => { return d.isRoot ? null : 'root'; })
+        .parentId(d => d.isRoot ? null : 'root')
         ([rootNode, ...this.results])
         .sum(d => d.value);
 
