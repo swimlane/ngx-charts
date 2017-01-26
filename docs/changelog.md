@@ -1,7 +1,11 @@
 # Changelog
 
+## Master
+- Chore: Make tooltip injector use Renderer
+- Chore: Update Angular to 2.4.5
+
 ## 4.0.1
-- Fixed regressions from CSS refactor
+- Bug: Fixed regressions from CSS refactor
 
 ## 4.0.0
 - Enhancement: Added `barPadding` and `groupPadding` properties to bar-charts (#185)
