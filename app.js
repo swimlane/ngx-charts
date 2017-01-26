@@ -1,5 +1,19 @@
 webpackJsonp([0],{
 
+/***/ "./demo/app.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<main [class]=\"theme\">\n  <div class=\"chart-col\">\n    <div style=\"position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;\">\n      <ngx-charts-bar-vertical\n        *ngIf=\"chartType === 'bar-vertical'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"single\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\">\n      </ngx-charts-bar-vertical>\n      <ngx-charts-bar-horizontal\n        *ngIf=\"chartType === 'bar-horizontal'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"single\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [roundDomains]=\"roundDomains\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        (select)=\"select($event)\">\n      </ngx-charts-bar-horizontal>\n      <ngx-charts-bar-vertical-2d\n        *ngIf=\"chartType === 'bar-vertical-2d'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"multi\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [groupPadding]=\"groupPadding\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\">\n      </ngx-charts-bar-vertical-2d>\n      <ngx-charts-bar-horizontal-2d\n        *ngIf=\"chartType === 'bar-horizontal-2d'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"multi\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [groupPadding]=\"groupPadding\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\">\n      </ngx-charts-bar-horizontal-2d>\n      <ngx-charts-bar-vertical-stacked\n        *ngIf=\"chartType === 'bar-vertical-stacked'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"multi\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\">\n      </ngx-charts-bar-vertical-stacked>\n      <ngx-charts-bar-horizontal-stacked\n        *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"multi\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\">\n      </ngx-charts-bar-horizontal-stacked>\n      <ngx-charts-bar-vertical-normalized\n        *ngIf=\"chartType === 'bar-vertical-normalized'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"multi\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\">\n      </ngx-charts-bar-vertical-normalized>\n      <ngx-charts-bar-horizontal-normalized\n        *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"multi\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [legend]=\"showLegend\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [showGridLines]=\"showGridLines\"\n        [barPadding]=\"barPadding\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\">\n      </ngx-charts-bar-horizontal-normalized>\n      <ngx-charts-pie-chart\n        *ngIf=\"chartType === 'pie-chart'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [results]=\"single\"\n        [legend]=\"showLegend\"\n        [explodeSlices]=\"explodeSlices\"\n        [labels]=\"showLabels\"\n        [doughnut]=\"doughnut\"\n        [arcWidth]=\"arcWidth\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [gradient]=\"gradient\"\n        (select)=\"select($event)\">\n      </ngx-charts-pie-chart>\n      <ngx-charts-advanced-pie-chart\n        *ngIf=\"chartType === 'advanced-pie-chart'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [results]=\"single\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [gradient]=\"gradient\"\n        (select)=\"select($event)\">\n      </ngx-charts-advanced-pie-chart>\n      <ngx-charts-pie-grid\n        *ngIf=\"chartType === 'pie-grid'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [results]=\"single\"\n        (select)=\"select($event)\">\n      </ngx-charts-pie-grid>\n      <ngx-charts-line-chart\n        *ngIf=\"chartType === 'line-chart'\"\n        [view]=\"view\"\n        class=\"chart-container\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"dateDataWithOrWithoutRange\"\n        [legend]=\"showLegend\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [autoScale]=\"autoScale\"\n        [timeline]=\"timeline\"\n        [showGridLines]=\"showGridLines\"\n        [curve]=\"curve\"\n        [rangeFillOpacity]=\"rangeFillOpacity\"\n        [roundDomains]=\"roundDomains\"\n        (select)=\"select($event)\">\n      </ngx-charts-line-chart>\n      <ngx-charts-force-directed-graph\n        *ngIf=\"chartType === 'force-directed-graph'\"\n        class=\"chart-container\"\n        [legend]=\"showLegend\"\n        [links]=\"graph.links\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [nodes]=\"graph.nodes\"\n        [scheme]=\"colorScheme\"\n        [view]=\"view\"\n        (select)=\"select($event)\">\n      </ngx-charts-force-directed-graph>\n      <ngx-charts-area-chart\n        *ngIf=\"chartType === 'area-chart'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"dateData\"\n        [legend]=\"showLegend\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [autoScale]=\"autoScale\"\n        [timeline]=\"timeline\"\n        [showGridLines]=\"showGridLines\"\n        [roundDomains]=\"roundDomains\"\n        [curve]=\"curve\"\n        (select)=\"select($event)\">\n      </ngx-charts-area-chart>\n      <ngx-charts-area-chart-stacked\n        *ngIf=\"chartType === 'area-chart-stacked'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"dateData\"\n        [legend]=\"showLegend\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [timeline]=\"timeline\"\n        [showGridLines]=\"showGridLines\"\n        [roundDomains]=\"roundDomains\"\n        [curve]=\"curve\"\n        (select)=\"select($event)\">\n      </ngx-charts-area-chart-stacked>\n      <ngx-charts-area-chart-normalized\n        *ngIf=\"chartType === 'area-chart-normalized'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [schemeType]=\"schemeType\"\n        [results]=\"dateData\"\n        [legend]=\"showLegend\"\n        [gradient]=\"gradient\"\n        [xAxis]=\"showXAxis\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [yAxis]=\"showYAxis\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [timeline]=\"timeline\"\n        [showGridLines]=\"showGridLines\"\n        [roundDomains]=\"roundDomains\"\n        [curve]=\"curve\"\n        (select)=\"select($event)\">\n      </ngx-charts-area-chart-normalized>\n      <ngx-charts-heat-map\n        *ngIf=\"chartType === 'heat-map'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [results]=\"multi\"\n        [legend]=\"showLegend\"\n        [gradient]=\"gradient\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [xAxis]=\"showXAxis\"\n        [yAxis]=\"showYAxis\"\n        [showXAxisLabel]=\"showXAxisLabel\"\n        [showYAxisLabel]=\"showYAxisLabel\"\n        [xAxisLabel]=\"xAxisLabel\"\n        [yAxisLabel]=\"yAxisLabel\"\n        [innerPadding]=\"innerPadding\"\n        (select)=\"select($event)\">\n      </ngx-charts-heat-map>\n      <ngx-charts-tree-map\n        *ngIf=\"chartType === 'tree-map'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [scheme]=\"colorScheme\"\n        [results]=\"single\"\n        (select)=\"select($event)\">\n      </ngx-charts-tree-map>\n      <ngx-charts-number-card\n        *ngIf=\"chartType === 'number-card'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\"\n        [scheme]=\"colorScheme\"\n        [results]=\"single\"\n        (select)=\"select($event)\">\n      </ngx-charts-number-card>\n      <ngx-charts-gauge\n        *ngIf=\"chartType === 'gauge'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [legend]=\"showLegend\"\n        [results]=\"single\"\n        [scheme]=\"colorScheme\"\n        [min]=\"gaugeMin\"\n        [max]=\"gaugeMax\"\n        [units]=\"gaugeUnits\"\n        [angleSpan]=\"gaugeAngleSpan\"\n        [startAngle]=\"gaugeStartAngle\"\n        [showAxis]=\"gaugeShowAxis\"\n        [bigSegments]=\"gaugeLargeSegments\"\n        [smallSegments]=\"gaugeSmallSegments\"\n        [margin]=\"margin ? [marginTop, marginRight, marginBottom, marginLeft] : null\"\n        (select)=\"select($event)\"\n        (legendLabelClick)=\"onLegendLabelClick($event)\">\n      </ngx-charts-gauge>\n      <ngx-charts-linear-gauge\n        *ngIf=\"chartType === 'linear-gauge'\"\n        class=\"chart-container\"\n        [view]=\"view\"\n        [scheme]=\"colorScheme\"\n        [min]=\"gaugeMin\"\n        [max]=\"gaugeMax\"\n        [value]=\"gaugeValue\"\n        [previousValue]=\"gaugePreviousValue\"\n        [units]=\"gaugeUnits\"\n        (select)=\"select($event)\">\n      </ngx-charts-linear-gauge>\n    </div>\n  </div>\n  <div class=\"sidebar\">\n    <h1>\n      Ngx-<strong>Charts</strong>\n      <small>Angular2 D3 Chart Framework</small>\n    </h1>\n    <div style=\"margin:20px\">\n\n    <h3>Chart Type</h3>\n    <select\n      [ngModel]=\"chartType\"\n      (ngModelChange)=\"selectChart($event)\">\n      <template ngFor let-group [ngForOf]=\"chartGroups\">\n        <optgroup [label]=\"group.name\">\n          <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n        </optgroup>\n      </template>\n    </select>\n\n    <h3>Theme</h3>\n    <select\n      [ngModel]=\"theme\"\n      (ngModelChange)=\"theme = $event\">>\n      <option [value]=\"'dark'\">Dark</option>\n      <option [value]=\"'light'\">Light</option>\n    </select>\n\n    <h3 (click)=\"dataVisable = !dataVisable\" style=\"cursor: pointer\">\n      <span\n        [class.arrow-down]=\"dataVisable\"\n        [class.arrow-right]=\"!dataVisable\">\n      </span>\n      <strong>Data</strong>\n    </h3>\n    <div [hidden]=\"!dataVisable\" style=\"margin-left: 10px;\">\n      <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n      <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n      <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale && (!range)\">{{dateData | json}}</pre>\n      <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale && range\">{{dateDataWithRange | json}}</pre>\n      <div>\n        <label>\n          <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n          Real-time\n        </label>\n\n        <label *ngIf=\"chartType === 'line-chart'\">\n          <br />\n          <input type=\"checkbox\" [checked]=\"range\" (change)=\"range = $event.target.checked\">\n          Show min and max values\n        </label>\n      </div>\n    </div>\n    <div>\n      <h3 (click)=\"dimVisiable = !dimVisiable\" style=\"cursor: pointer\">\n        <span\n          [class.arrow-down]=\"dimVisiable\"\n          [class.arrow-right]=\"!dimVisiable\">\n        </span>\n        <strong>Dimensions</strong>\n      </h3>\n      <div [hidden]=\"!dimVisiable\" style=\"margin-left: 10px;\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n          Fit Container\n        </label> <br />\n        <div *ngIf=\"!fitContainer\">\n          <label>Width:</label><br />\n          <input type=\"number\" [(ngModel)]=\"width\"><br />\n          <label>Height:</label><br />\n          <input type=\"number\" [(ngModel)]=\"height\"><br />\n          <button (click)=\"applyDimensions()\">Apply dimensions</button>\n        </div>\n      </div>\n    </div>\n    <h3 (click)=\"colorVisible = !colorVisible\" style=\"cursor: pointer\">\n      <span\n        [class.arrow-down]=\"colorVisible\"\n        [class.arrow-right]=\"!colorVisible\">\n      </span>\n      <strong>Color Scheme</strong>\n    </h3>\n    <select\n      [hidden]=\"!colorVisible\"\n      style=\"margin-left: 10px;\"\n      [ngModel]=\"selectedColorScheme\"\n      (ngModelChange)=\"setColorScheme($event)\">\n      <option *ngFor=\"let scheme of colorSets\" [value]=\"scheme.name\">{{scheme.name}}</option>\n    </select>\n\n    <select\n      *ngIf=\"chart.options.includes('schemeType')\"\n      [hidden]=\"!colorVisible\"\n      style=\"margin-left: 10px;\"\n      [ngModel]=\"schemeType\"\n      (ngModelChange)=\"schemeType = $event\">\n      <option value=\"ordinal\">Ordinal</option>\n      <option value=\"linear\">Linear</option>\n    </select>\n\n    <div [hidden]=\"(!colorVisible) || (!range)\" style=\"margin-left: 10px;\">\n        <div>\n        <label>Range fill color opacity (0.0 - 1.0):</label><br />\n        <input type=\"number\" [(ngModel)]=\"rangeFillOpacity\"><br />\n      </div>\n    </div>\n\n    <h3 (click)=\"optsVisible = !optsVisible\" style=\"cursor: pointer\">\n      <span\n        [class.arrow-down]=\"optsVisible\"\n        [class.arrow-right]=\"!optsVisible\">\n      </span>\n      <strong>Options</strong>\n    </h3>\n    <div [hidden]=\"!optsVisible\" style=\"margin-left: 10px;\">\n      <div *ngIf=\"chart.options.includes('showXAxis')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n          Show X Axis\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('showYAxis')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n          Show Y Axis\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('showGridLines')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n          Show Grid Lines\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('roundDomains')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"roundDomains\" (change)=\"roundDomains = $event.target.checked\">\n          Round Domains\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('gradient')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n          Use Gradients\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('showLegend')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n          Show Legend\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n          Show X Axis Label\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n        <label>X Axis Label:</label><br />\n        <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n      </div>\n      <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n          Show Y Axis Label\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n        <label>Y Axis Label:</label><br />\n        <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n      </div>\n      <div *ngIf=\"chart.options.includes('showLabels')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n          Show Labels\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('doughnut')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n          Doughnut\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('arcWidth') && doughnut\">\n        <label>Arc width (fraction of radius):</label><br />\n        <input type=\"number\" [disabled]=\"!doughnut\" [(ngModel)]=\"arcWidth\"\n          max=\"1\" min=\"0\" step=\"0.01\"><br />\n      </div>\n      <div *ngIf=\"chart.options.includes('explodeSlices') && !doughnut\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n          Explode Slices\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('autoScale')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n          Auto Scale\n        </label> <br />\n      </div>\n      <div *ngIf=\"chart.options.includes('timeline')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n          Timeline\n        </label> <br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('curve')\">\n        <label>Line Interpolation</label>\n        <select\n          [ngModel]=\"curveType\"\n          (ngModelChange)=\"setInterpolationType($event)\">\n          <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">\n            {{interpolationType}}\n          </option>\n        </select>\n      </div>\n\n      <div *ngIf=\"chart.options.includes('min')\">\n        <label>Min value:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugeMin\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('max')\">\n        <label>Max value:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugeMax\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('innerPadding')\">\n        <label>Inner padding value:</label><br />\n        <input type=\"number\" [(ngModel)]=\"innerPadding\" min=\"0\" step=\"1\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('barPadding')\">\n        <label>Padding between bars:</label><br />\n        <input type=\"number\" [(ngModel)]=\"barPadding\" min=\"0\" step=\"1\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('groupPadding')\">\n        <label>Padding between groups:</label><br />\n        <input type=\"number\" [(ngModel)]=\"groupPadding\" min=\"0\" step=\"1\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('value')\">\n        <label>Value:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugeValue\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('previousValue')\">\n        <label>Previous value:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugePreviousValue\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('angleSpan')\">\n        <label>Angle span:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugeAngleSpan\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('startAngle')\">\n        <label>Start Angle:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugeStartAngle\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('showAxis')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"gaugeShowAxis\" (change)=\"gaugeShowAxis = $event.target.checked\">\n          Show Axis\n        </label> <br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('largeSegments')\">\n        <label>Number of large segments:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugeLargeSegments\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('smallSegments')\">\n        <label>Number of small segments:</label><br />\n        <input type=\"number\" [(ngModel)]=\"gaugeSmallSegments\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('units')\">\n        <label>Units:</label><br />\n        <input type=\"text\" [(ngModel)]=\"gaugeUnits\"><br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('margin')\">\n        <label>\n          <input type=\"checkbox\" [checked]=\"margin\" (change)=\"margin = $event.target.checked\">\n          Show Margin\n        </label> <br />\n      </div>\n\n      <div *ngIf=\"chart.options.includes('margin') && margin\">\n        <label>Top:</label><input type=\"number\" [(ngModel)]=\"marginTop\"><br />\n        <label>Right:</label><input type=\"number\" [(ngModel)]=\"marginRight\"><br />\n        <label>Bottom:</label><input type=\"number\" [(ngModel)]=\"marginBottom\"><br />\n        <label>Left:</label><input type=\"number\" [(ngModel)]=\"marginLeft\"><br />\n      </div>\n    </div>\n    <h3><a href=\"https://swimlane.gitbooks.io/ngx-charts/content/\" target=\"_blank\">Documentation</a></h3>\n    </div>\n  </div>\n</main>\n"
+
+/***/ }),
+
+/***/ "./demo/app.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
 /***/ "./demo/app.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17,10 +31,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var color_sets_1 = __webpack_require__("./src/utils/color-sets.ts");
-__webpack_require__("./src/ngx-charts.scss");
 var data_1 = __webpack_require__("./demo/data.ts");
 var chartTypes_1 = __webpack_require__("./demo/chartTypes.ts");
-__webpack_require__("./demo/demo.scss");
 var AppComponent = (function () {
     function AppComponent() {
         this.theme = 'dark';
@@ -42,6 +54,9 @@ var AppComponent = (function () {
         this.yAxisLabel = 'GDP Per Capita';
         this.showGridLines = true;
         this.innerPadding = 8;
+        this.barPadding = 8;
+        this.groupPadding = 16;
+        this.roundDomains = false;
         // line interpolation
         this.curveType = 'Linear';
         this.curve = d3_1.default.shape.curveLinear;
@@ -247,7 +262,9 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
-            template: "\n    <main [class]=\"theme\">\n      <div class=\"chart-col\">\n        <div style=\"position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;\">\n          <ngx-charts-bar-vertical\n            *ngIf=\"chartType === 'bar-vertical'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-bar-vertical>\n          <ngx-charts-bar-horizontal\n            *ngIf=\"chartType === 'bar-horizontal'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"single\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal>\n          <ngx-charts-bar-vertical-2d\n            *ngIf=\"chartType === 'bar-vertical-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-2d>\n          <ngx-charts-bar-horizontal-2d\n            *ngIf=\"chartType === 'bar-horizontal-2d'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-2d>\n          <ngx-charts-bar-vertical-stacked\n            *ngIf=\"chartType === 'bar-vertical-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-stacked>\n          <ngx-charts-bar-horizontal-stacked\n            *ngIf=\"chartType === 'bar-horizontal-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-stacked>\n          <ngx-charts-bar-vertical-normalized\n            *ngIf=\"chartType === 'bar-vertical-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-vertical-normalized>\n          <ngx-charts-bar-horizontal-normalized\n            *ngIf=\"chartType === 'bar-horizontal-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"multi\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [legend]=\"showLegend\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showGridLines]=\"showGridLines\"\n            (select)=\"select($event)\">\n          </ngx-charts-bar-horizontal-normalized>\n          <ngx-charts-pie-chart\n            *ngIf=\"chartType === 'pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            [legend]=\"showLegend\"\n            [explodeSlices]=\"explodeSlices\"\n            [labels]=\"showLabels\"\n            [doughnut]=\"doughnut\"\n            [arcWidth]=\"arcWidth\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-chart>\n          <ngx-charts-advanced-pie-chart\n            *ngIf=\"chartType === 'advanced-pie-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            (select)=\"select($event)\">\n          </ngx-charts-advanced-pie-chart>\n          <ngx-charts-pie-grid\n            *ngIf=\"chartType === 'pie-grid'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-pie-grid>\n          <ngx-charts-line-chart\n            *ngIf=\"chartType === 'line-chart'\"\n            [view]=\"view\"\n            class=\"chart-container\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateDataWithOrWithoutRange\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            [rangeFillOpacity]=\"rangeFillOpacity\"\n            (select)=\"select($event)\">\n          </ngx-charts-line-chart>\n          <ngx-charts-force-directed-graph\n            *ngIf=\"chartType === 'force-directed-graph'\"\n            class=\"chart-container\"\n            [legend]=\"showLegend\"\n            [links]=\"graph.links\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [nodes]=\"graph.nodes\"\n            [scheme]=\"colorScheme\"\n            [view]=\"view\"\n            (select)=\"select($event)\">\n          </ngx-charts-force-directed-graph>\n          <ngx-charts-area-chart\n            *ngIf=\"chartType === 'area-chart'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [autoScale]=\"autoScale\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart>\n          <ngx-charts-area-chart-stacked\n            *ngIf=\"chartType === 'area-chart-stacked'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-stacked>\n          <ngx-charts-area-chart-normalized\n            *ngIf=\"chartType === 'area-chart-normalized'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [schemeType]=\"schemeType\"\n            [results]=\"dateData\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            [xAxis]=\"showXAxis\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [timeline]=\"timeline\"\n            [showGridLines]=\"showGridLines\"\n            [curve]=\"curve\"\n            (select)=\"select($event)\">\n          </ngx-charts-area-chart-normalized>\n          <ngx-charts-heat-map\n            *ngIf=\"chartType === 'heat-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [results]=\"multi\"\n            [legend]=\"showLegend\"\n            [gradient]=\"gradient\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\"\n            [showXAxisLabel]=\"showXAxisLabel\"\n            [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [innerPadding]=\"innerPadding\"\n            (select)=\"select($event)\">\n          </ngx-charts-heat-map>\n          <ngx-charts-tree-map\n            *ngIf=\"chartType === 'tree-map'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-tree-map>\n          <ngx-charts-number-card\n            *ngIf=\"chartType === 'number-card'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\"\n            [scheme]=\"colorScheme\"\n            [results]=\"single\"\n            (select)=\"select($event)\">\n          </ngx-charts-number-card>\n          <ngx-charts-gauge\n            *ngIf=\"chartType === 'gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [legend]=\"showLegend\"\n            [results]=\"single\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [units]=\"gaugeUnits\"\n            [angleSpan]=\"gaugeAngleSpan\"\n            [startAngle]=\"gaugeStartAngle\"\n            [showAxis]=\"gaugeShowAxis\"\n            [bigSegments]=\"gaugeLargeSegments\"\n            [smallSegments]=\"gaugeSmallSegments\"\n            [margin]=\"margin ? [marginTop, marginRight, marginBottom, marginLeft] : null\"\n            (select)=\"select($event)\"\n            (legendLabelClick)=\"onLegendLabelClick($event)\">\n          </ngx-charts-gauge>\n          <ngx-charts-linear-gauge\n            *ngIf=\"chartType === 'linear-gauge'\"\n            class=\"chart-container\"\n            [view]=\"view\"\n            [scheme]=\"colorScheme\"\n            [min]=\"gaugeMin\"\n            [max]=\"gaugeMax\"\n            [value]=\"gaugeValue\"\n            [previousValue]=\"gaugePreviousValue\"\n            [units]=\"gaugeUnits\"\n            (select)=\"select($event)\">\n          </ngx-charts-linear-gauge>\n        </div>\n      </div>\n      <div class=\"sidebar\">\n        <h1>\n          Ngx-<strong>Charts</strong>\n          <small>Angular2 D3 Chart Framework</small>\n        </h1>\n        <div style=\"margin:20px\">\n\n        <h3>Chart Type</h3>\n        <select\n          [ngModel]=\"chartType\"\n          (ngModelChange)=\"selectChart($event)\">\n          <template ngFor let-group [ngForOf]=\"chartGroups\">\n            <optgroup [label]=\"group.name\">\n              <option *ngFor=\"let chart of group.charts\" [value]=\"chart.selector\">{{chart.name}}</option>\n            </optgroup>\n          </template>\n        </select>\n\n        <h3>Theme</h3>\n        <select\n          [ngModel]=\"theme\"\n          (ngModelChange)=\"theme = $event\">>\n          <option [value]=\"'dark'\">Dark</option>\n          <option [value]=\"'light'\">Light</option>\n        </select>\n\n        <h3 (click)=\"dataVisable = !dataVisable\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"dataVisable\"\n            [class.arrow-right]=\"!dataVisable\">\n          </span>\n          <strong>Data</strong>\n        </h3>\n        <div [hidden]=\"!dataVisable\" style=\"margin-left: 10px;\">\n          <pre *ngIf=\"chart.inputFormat === 'singleSeries'\">{{single | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && !linearScale\">{{multi | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale && (!range)\">{{dateData | json}}</pre>\n          <pre *ngIf=\"chart.inputFormat === 'multiSeries' && linearScale && range\">{{dateDataWithRange | json}}</pre>\n          <div>\n            <label>\n              <input type=\"checkbox\" [checked]=\"realTimeData\" (change)=\"realTimeData = $event.target.checked\">\n              Real-time\n            </label>\n\n           <label *ngIf=\"chartType === 'line-chart'\">\n              <br />\n              <input type=\"checkbox\" [checked]=\"range\" (change)=\"range = $event.target.checked\">\n              Show min and max values\n            </label>\n          </div>\n        </div>\n        <div>\n          <h3 (click)=\"dimVisiable = !dimVisiable\" style=\"cursor: pointer\">\n            <span\n              [class.arrow-down]=\"dimVisiable\"\n              [class.arrow-right]=\"!dimVisiable\">\n            </span>\n            <strong>Dimensions</strong>\n          </h3>\n          <div [hidden]=\"!dimVisiable\" style=\"margin-left: 10px;\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"fitContainer\" (change)=\"toggleFitContainer($event.target.checked)\">\n              Fit Container\n            </label> <br />\n            <div *ngIf=\"!fitContainer\">\n              <label>Width:</label><br />\n              <input type=\"number\" [(ngModel)]=\"width\"><br />\n              <label>Height:</label><br />\n              <input type=\"number\" [(ngModel)]=\"height\"><br />\n              <button (click)=\"applyDimensions()\">Apply dimensions</button>\n            </div>\n          </div>\n        </div>\n        <h3 (click)=\"colorVisible = !colorVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"colorVisible\"\n            [class.arrow-right]=\"!colorVisible\">\n          </span>\n          <strong>Color Scheme</strong>\n        </h3>\n        <select\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"selectedColorScheme\"\n          (ngModelChange)=\"setColorScheme($event)\">\n          <option *ngFor=\"let scheme of colorSets\" [value]=\"scheme.name\">{{scheme.name}}</option>\n        </select>\n\n        <select\n          *ngIf=\"chart.options.includes('schemeType')\"\n          [hidden]=\"!colorVisible\"\n          style=\"margin-left: 10px;\"\n          [ngModel]=\"schemeType\"\n          (ngModelChange)=\"schemeType = $event\">\n          <option value=\"ordinal\">Ordinal</option>\n          <option value=\"linear\">Linear</option>\n        </select>\n\n        <div [hidden]=\"(!colorVisible) || (!range)\" style=\"margin-left: 10px;\">\n           <div>\n            <label>Range fill color opacity (0.0 - 1.0):</label><br />\n            <input type=\"number\" [(ngModel)]=\"rangeFillOpacity\"><br />\n          </div>\n        </div>\n\n        <h3 (click)=\"optsVisible = !optsVisible\" style=\"cursor: pointer\">\n          <span\n            [class.arrow-down]=\"optsVisible\"\n            [class.arrow-right]=\"!optsVisible\">\n          </span>\n          <strong>Options</strong>\n        </h3>\n        <div [hidden]=\"!optsVisible\" style=\"margin-left: 10px;\">\n          <div *ngIf=\"chart.options.includes('showXAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxis\" (change)=\"showXAxis = $event.target.checked\">\n              Show X Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxis\" (change)=\"showYAxis = $event.target.checked\">\n              Show Y Axis\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showGridLines')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showGridLines\" (change)=\"showGridLines = $event.target.checked\">\n              Show Grid Lines\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('gradient')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gradient\" (change)=\"gradient = $event.target.checked\">\n              Use Gradients\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLegend')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLegend\" (change)=\"showLegend = $event.target.checked\">\n              Show Legend\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showXAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showXAxisLabel\" (change)=\"showXAxisLabel = $event.target.checked\">\n              Show X Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('xAxisLabel')\">\n            <label>X Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"xAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showYAxisLabel')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showYAxisLabel\" (change)=\"showYAxisLabel = $event.target.checked\">\n              Show Y Axis Label\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('yAxisLabel')\">\n            <label>Y Axis Label:</label><br />\n            <input type=\"text\" [(ngModel)]=\"yAxisLabel\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('showLabels')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"showLabels\" (change)=\"showLabels = $event.target.checked\">\n              Show Labels\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('doughnut')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"doughnut\" (change)=\"doughnut = $event.target.checked\">\n              Doughnut\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('arcWidth') && doughnut\">\n            <label>Arc width (fraction of radius):</label><br />\n            <input type=\"number\" [disabled]=\"!doughnut\" [(ngModel)]=\"arcWidth\"\n              max=\"1\" min=\"0\" step=\"0.01\"><br />\n          </div>\n          <div *ngIf=\"chart.options.includes('explodeSlices') && !doughnut\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"explodeSlices\" (change)=\"explodeSlices = $event.target.checked\">\n              Explode Slices\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('autoScale')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"autoScale\" (change)=\"autoScale = $event.target.checked\">\n              Auto Scale\n            </label> <br />\n          </div>\n          <div *ngIf=\"chart.options.includes('timeline')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"timeline\" (change)=\"timeline = $event.target.checked\">\n              Timeline\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('curve')\">\n            <label>Line Interpolation</label>\n            <select\n              [ngModel]=\"curveType\"\n              (ngModelChange)=\"setInterpolationType($event)\">\n              <option *ngFor=\"let interpolationType of interpolationTypes\" [value]=\"interpolationType\">\n                {{interpolationType}}\n              </option>\n            </select>\n          </div>\n\n          <div *ngIf=\"chart.options.includes('min')\">\n            <label>Min value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMin\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('max')\">\n            <label>Max value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeMax\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('innerPadding')\">\n            <label>Inner padding value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"innerPadding\" min=\"0\" step=\"1\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('value')\">\n            <label>Value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('previousValue')\">\n            <label>Previous value:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugePreviousValue\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('angleSpan')\">\n            <label>Angle span:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeAngleSpan\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('startAngle')\">\n            <label>Start Angle:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeStartAngle\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('showAxis')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"gaugeShowAxis\" (change)=\"gaugeShowAxis = $event.target.checked\">\n              Show Axis\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('largeSegments')\">\n            <label>Number of large segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeLargeSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('smallSegments')\">\n            <label>Number of small segments:</label><br />\n            <input type=\"number\" [(ngModel)]=\"gaugeSmallSegments\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('units')\">\n            <label>Units:</label><br />\n            <input type=\"text\" [(ngModel)]=\"gaugeUnits\"><br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('margin')\">\n            <label>\n              <input type=\"checkbox\" [checked]=\"margin\" (change)=\"margin = $event.target.checked\">\n              Show Margin\n            </label> <br />\n          </div>\n\n          <div *ngIf=\"chart.options.includes('margin') && margin\">\n            <label>Top:</label><input type=\"number\" [(ngModel)]=\"marginTop\"><br />\n            <label>Right:</label><input type=\"number\" [(ngModel)]=\"marginRight\"><br />\n            <label>Bottom:</label><input type=\"number\" [(ngModel)]=\"marginBottom\"><br />\n            <label>Left:</label><input type=\"number\" [(ngModel)]=\"marginLeft\"><br />\n          </div>\n        </div>\n        <h3><a href=\"https://swimlane.gitbooks.io/ngx-charts/content/\" target=\"_blank\">Documentation</a></h3>\n        </div>\n      </div>\n    </main>\n  "
+            encapsulation: core_1.ViewEncapsulation.None,
+            styles: [__webpack_require__("./demo/app.component.scss")],
+            template: __webpack_require__("./demo/app.component.html")
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -338,8 +355,9 @@ var chartGroups = [
                 selector: 'bar-vertical',
                 inputFormat: 'singleSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             },
             {
@@ -347,8 +365,9 @@ var chartGroups = [
                 selector: 'bar-horizontal',
                 inputFormat: 'singleSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             },
             {
@@ -356,8 +375,9 @@ var chartGroups = [
                 selector: 'bar-vertical-2d',
                 inputFormat: 'multiSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             },
             {
@@ -365,8 +385,9 @@ var chartGroups = [
                 selector: 'bar-horizontal-2d',
                 inputFormat: 'multiSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             },
             {
@@ -374,8 +395,9 @@ var chartGroups = [
                 selector: 'bar-vertical-stacked',
                 inputFormat: 'multiSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             },
             {
@@ -383,8 +405,9 @@ var chartGroups = [
                 selector: 'bar-horizontal-stacked',
                 inputFormat: 'multiSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             },
             {
@@ -392,8 +415,9 @@ var chartGroups = [
                 selector: 'bar-vertical-normalized',
                 inputFormat: 'multiSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             },
             {
@@ -401,8 +425,9 @@ var chartGroups = [
                 selector: 'bar-horizontal-normalized',
                 inputFormat: 'multiSeries',
                 options: [
-                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
-                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines'
+                    'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+                    'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+                    'showGridLines', 'roundDomains'
                 ]
             }
         ]
@@ -423,7 +448,7 @@ var chartGroups = [
                 name: 'Advanced Pie Chart',
                 selector: 'advanced-pie-chart',
                 inputFormat: 'singleSeries',
-                options: ['colorScheme', 'gradient', 'showLegend', 'doughnut', 'showLabels']
+                options: ['colorScheme', 'gradient']
             },
             {
                 name: 'Pie Grid',
@@ -444,7 +469,7 @@ var chartGroups = [
                     'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
                     'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
                     'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
-                    'rangeFillOpacity'
+                    'rangeFillOpacity', 'roundDomains'
                 ]
             },
             {
@@ -454,7 +479,8 @@ var chartGroups = [
                 options: [
                     'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
                     'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+                    'roundDomains'
                 ]
             },
             {
@@ -464,7 +490,8 @@ var chartGroups = [
                 options: [
                     'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
                     'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+                    'roundDomains'
                 ]
             },
             {
@@ -474,7 +501,8 @@ var chartGroups = [
                 options: [
                     'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
                     'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
-                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve'
+                    'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+                    'roundDomains'
                 ]
             },
         ]
@@ -741,33 +769,6 @@ function generateData(seriesLength, includeMinMaxRange) {
 }
 exports.generateData = generateData;
 
-
-/***/ }),
-
-/***/ "./demo/demo.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./demo/demo.scss");
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/style-loader/addStyles.js")(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./demo.scss", function() {
-			var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./demo.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
 
 /***/ }),
 
@@ -8428,95 +8429,8 @@ function _mergeErrors(arrayOfErrors) {
 /**
  * @stable
  */
-var /** @type {?} */ VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["Version"]('2.4.4');
+var /** @type {?} */ VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["Version"]('2.4.5');
 //# sourceMappingURL=version.js.map
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./demo/demo.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, "html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%; }\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n  min-height: 100vh;\n  color: #666; }\n\n* {\n  box-sizing: border-box; }\n\napp {\n  height: 100%; }\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none; }\n  button:hover {\n    outline: none;\n    background: #1483ff; }\n  button:focus, button:active {\n    outline: none;\n    background: #097dff; }\n\n.arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px; }\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0;\n  height: 0;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff; }\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE; }\n\ninput:focus {\n  outline: none; }\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0; }\n\nmain {\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  height: 100%; }\n  main .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 25%;\n    bottom: 0; }\n    main .chart-col .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      -webkit-transform: translate(-50%, -50%);\n              transform: translate(-50%, -50%); }\n  main .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top: 0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em; }\n    main .sidebar h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px; }\n      main .sidebar h1 strong {\n        font-weight: 700; }\n      main .sidebar h1 small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white; }\n    main .sidebar input[type=text],\n    main .sidebar select {\n      width: 100%; }\n    main .sidebar h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      -webkit-user-select: none;\n         -moz-user-select: none;\n          -ms-user-select: none;\n              user-select: none; }\n      main .sidebar h3 a {\n        color: #a8b2c7;\n        text-decoration: none; }\n    main .sidebar pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px; }\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  /**\n   * Text\n   */\n  background: #1b1e27; }\n  .dark text {\n    fill: #a8b2c7; }\n  .dark .gridline-path {\n    stroke: #2f3646; }\n  .dark .grid-panel.odd rect {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .legend-labels {\n    background: rgba(255, 255, 255, 0.05); }\n  .dark .legend-item:hover {\n    color: #fff; }\n  .dark .legend-label:hover {\n    color: #fff !important; }\n  .dark .legend-label .active .legend-label-text {\n    color: #fff !important; }\n  .dark .scale-legend-label {\n    color: #a8b2c7; }\n  .dark .advanced-pie-legend {\n    color: #a8b2c7; }\n    .dark .advanced-pie-legend .legend-item:hover {\n      color: #fff !important; }\n  .dark .force-directed-graph .edge {\n    stroke: #455066; }\n  .dark .number-card p {\n    color: #f0f1f6; }\n  .dark .gauge .background-arc path {\n    fill: #2f3646; }\n  .dark .gauge .gauge-tick path {\n    stroke: #a8b2c7; }\n  .dark .gauge .gauge-tick text {\n    fill: #a8b2c7; }\n  .dark .linear-gauge .background-bar path {\n    fill: #2f3646; }\n  .dark .linear-gauge .units {\n    fill: #72809b; }\n  .dark .timeline .brush-background {\n    fill: rgba(255, 255, 255, 0.05); }\n  .dark .timeline .brush .selection {\n    fill: rgba(255, 255, 255, 0.1);\n    stroke: #aaa; }\n", "", {"version":3,"sources":["/./demo/demo/demo.scss"],"names":[],"mappings":"AAAA;EACE,UAAS;EACT,WAAU;EACV,aAAY,EACb;;AAED;EACE,qFAAoF;EACpF,mBAAkB;EAClB,iBAAgB;EAChB,kBAAiB;EACjB,kBAAiB;EACjB,wBAAuB;EACvB,oCAAmC;EACnC,mCAAkC;EAClC,mCAAkC;EAElC,kBAAiB;EACjB,YAAW,EACZ;;AAED;EACE,uBAAsB,EACvB;;AAED;EACE,aAAY,EACb;;AAED;EACE,sBAAqB;EACrB,iBAAgB;EAChB,iBAAgB;EAChB,oBAAmB;EACnB,YAAW;EACX,aAAY;EACZ,mBAAkB;EAClB,kBAAiB;EACjB,0BAAyB;EACzB,gBAAe;EACf,mBAAkB;EAClB,mBAAkB;EAClB,iBAAgB;EAChB,gBAAe;EACf,aAAY;EACZ,cAAa,EAYd;EA5BD;IAmBI,cAAa;IACb,oBAAmB,EACpB;EArBH;IAyBI,cAAa;IACb,oBAAmB,EACpB;;AAGH;EACE,SAAQ;EACR,UAAS;EACT,mCAAkC;EAClC,oCAAmC;EACnC,2BAA0B;EAC1B,sBAAqB;EACrB,kBAAiB,EAClB;;AAED;EACE,kBAAiB;EACjB,sBAAqB;EACrB,SAAQ;EACR,UAAS;EACT,kCAAiC;EACjC,qCAAoC;EACpC,4BAA2B,EAC5B;;AAED;;EAEE,gBAAe;EACf,yBAAwB;EACxB,eAAc;EACd,wBAAuB;EACvB,YAAW;EACX,YAAW;EACX,aAAY;EACZ,iCAAgC,EACjC;;AAED;EACE,cAAa,EACd;;AAED;EACE,YAAW;EACX,aAAY;EACZ,cAAa,EACd;;AAED;EACE,yBAAuB;MAAvB,sBAAuB;UAAvB,wBAAuB;EACvB,aAAY,EAmFb;EArFD;IAKI,WAAU;IACV,cAAa;IACb,mBAAkB;IAClB,OAAK;IACL,SAAQ;IACR,UAAS;IACT,UAAS,EAQV;IAnBH;MAcM,mBAAkB;MAClB,SAAQ;MACR,UAAS;MACT,yCAAgC;cAAhC,iCAAgC,EACjC;EAlBL;IAsBI,iBAAgB;IAChB,uHAAwG;IAExG,WAAU;IACV,cAAa;IACb,mBAAkB;IAClB,OAAK;IACL,WAAU;IACV,QAAO;IACP,UAAS;IAET,oBAAmB;IACnB,YAAW;IACX,gBAAe,EAiDhB;IApFH;MAsCM,YAAW;MACX,iBAAgB;MAChB,0BAAyB;MACzB,eAAc;MACd,UAAS;MACT,oBAAmB;MACnB,cAAa,EAYd;MAxDL;QA+CQ,iBAAgB,EACjB;MAhDP;QAmDQ,eAAc;QACd,gBAAe;QACf,mBAAkB;QAClB,aAAY,EACb;IAvDP;;MA4DM,YAAW,EACZ;IA7DL;MAgEM,WAAU;MACV,mBAAkB;MAClB,0BAAyB;MACzB,eAAc;MACd,0BAAiB;SAAjB,uBAAiB;UAAjB,sBAAiB;cAAjB,kBAAiB,EAMlB;MA1EL;QAuEQ,eAAc;QACd,sBAAqB,EACtB;IAzEP;MA6EM,oBAAmB;MACnB,gBAAe;MACf,iBAAgB;MAChB,kBAAiB;MACjB,eAAc;MACd,cAAa,EACd;;AAIL;EACE;;KAEG;EAQH;;KAEG;EAQH,oBAhByB,EA2H1B;EAhID;IAwBI,cARsB,EASvB;EAzBH;IA4BI,gBArBoB,EAsBrB;EA7BH;IAkCQ,gCAA4B,EAC7B;EAnCP;IAwCI,sCAAkC,EACnC;EAzCH;IA6CM,YAAW,EACZ;EA9CL;IAmDM,uBAAsB,EACvB;EApDL;IAwDQ,uBAAsB,EACvB;EAzDP;IA8DI,eA9CsB,EA+CvB;EA/DH;IAkEI,eAlDsB,EAyDvB;IAzEH;MAsEQ,uBAAsB,EACvB;EAvEP;IA6EM,gBArEoB,EAsErB;EA9EL;IAmFM,eAjEsB,EAkEvB;EApFL;IA0FQ,cAnFgB,EAoFjB;EA3FP;IAgGQ,gBAhFkB,EAiFnB;EAjGP;IAmGQ,cAnFkB,EAoFnB;EApGP;IA2GQ,cApGgB,EAqGjB;EA5GP;IAgHM,cAlGqB,EAmGtB;EAjHL;IAsHM,gCAA4B,EAC7B;EAvHL;IA2HQ,+BAA8B;IAC9B,aAAY,EACb","file":"demo.scss","sourcesContent":["html, body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n}\n\nbody {\n  font-family: 'RobotoDraft', 'Roboto', 'Helvetica Neue, Helvetica, Arial', sans-serif;\n  font-style: normal;\n  font-weight: 300;\n  font-size: 1.4rem;\n  line-height: 2rem;\n  letter-spacing: 0.01rem;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  text-rendering: optimizeLegibility;\n\n  min-height: 100vh;\n  color: #666;\n}\n\n* {\n  box-sizing: border-box;\n}\n\napp {\n  height: 100%;\n}\n\nbutton {\n  display: inline-block;\n  font-weight: 500;\n  font-size: 0.9vw;\n  background: #479eff;\n  color: #fff;\n  height: 30px;\n  text-align: center;\n  line-height: 30px;\n  text-transform: uppercase;\n  padding: 0 15px;\n  border-radius: 1px;\n  position: relative;\n  overflow: hidden;\n  cursor: pointer;\n  border: none;\n  outline: none;\n\n  &:hover {\n    outline: none;\n    background: #1483ff;\n  }\n\n  &:focus,\n  &:active {\n    outline: none;\n    background: #097dff;\n  }\n}\n\n.arrow-down {\n  width: 0;\n  height: 0;\n  border-left: 5px solid transparent;\n  border-right: 5px solid transparent;\n  border-top: 5px solid #fff;\n  display: inline-block;\n  margin-right: 5px;\n}\n\n.arrow-right {\n  margin-right: 5px;\n  display: inline-block;\n  width: 0;\n  height: 0;\n  border-top: 5px solid transparent;\n  border-bottom: 5px solid transparent;\n  border-left: 5px solid #fff;\n}\n\ninput[type=text],\ninput[type=number] {\n  font-size: 16px;\n  padding: 5px 5px 5px 5px;\n  display: block;\n  background: transparent;\n  color: #fff;\n  width: 100%;\n  border: none;\n  border-bottom: 1px solid #5264AE;\n}\n\ninput:focus {\n  outline: none;\n}\n\nselect {\n  width: 100%;\n  height: 30px;\n  margin: 5px 0;\n}\n\nmain {\n  justify-content: center;\n  height: 100%;\n\n  .chart-col {\n    width: 75%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 0;\n    left: 25%;\n    bottom: 0;\n\n    .chart-container {\n      position: absolute;\n      top: 50%;\n      left: 50%;\n      transform: translate(-50%, -50%);\n    }\n  }\n\n  .sidebar {\n    overflow-y: auto;\n    box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 13px 19px 2px rgba(0,0,0,.14),0 5px 24px 4px rgba(0,0,0,.12);\n\n    width: 25%;\n    height: 100vh;\n    position: absolute;\n    top:0;\n    right: 75%;\n    left: 0;\n    bottom: 0;\n\n    background: #2f3646;\n    color: #fff;\n    font-size: .6em;\n\n    h1 {\n      color: #fff;\n      font-weight: 100;\n      text-transform: uppercase;\n      display: block;\n      margin: 0;\n      background: #1f89ff;\n      padding: 15px;\n\n      strong {\n        font-weight: 700;\n      }\n\n      small {\n        display: block;\n        font-size: .5em;\n        line-height: 1.3em;\n        color: white;\n      }\n    }\n\n    input[type=text],\n    select {\n      width: 100%;\n    }\n\n    h3 {\n      padding: 0;\n      margin: 10px 0 0 0;\n      text-transform: uppercase;\n      color: #a8b2c7;\n      user-select: none;\n\n      a {\n        color: #a8b2c7;\n        text-decoration: none;\n      }\n    }\n\n    pre {\n      background: #1b1e27;\n      font-size: 12px;\n      line-height: 1em;\n      max-height: 400px;\n      overflow: auto;\n      padding: 15px;\n    }\n  }\n}\n\n.dark {\n  /**\n   * Backgrounds\n   */\n  $color-bg-darkest: #13141b;\n  $color-bg-darker: #1b1e27;\n  $color-bg-dark: #232837;\n  $color-bg-med: #2f3646;\n  $color-bg-light: #455066;\n  $color-bg-lighter: #5b6882;\n\n  /**\n   * Text\n   */\n  $color-text-dark: #72809b;\n  $color-text-med-dark: #919db5;\n  $color-text-med: #a8b2c7;\n  $color-text-med-light: #d9dce1;\n  $color-text-light: #f0f1f6;\n  $color-text-lighter: #fff;\n\n  background: $color-bg-darker;\n\n  text {\n    fill: $color-text-med;\n  }\n\n  .gridline-path {\n    stroke: $color-bg-med;\n  }\n\n  .grid-panel {\n    &.odd {\n      rect {\n        fill: rgba(255,255,255,0.05);\n      }\n    }\n  }\n\n  .legend-labels {\n    background: rgba(255,255,255,0.05);\n  }\n\n  .legend-item {\n    &:hover {\n      color: #fff;\n    }\n  }\n\n  .legend-label {\n    &:hover {\n      color: #fff !important;\n    }\n\n    .active {\n      .legend-label-text {\n        color: #fff !important;\n      }\n    }\n  }\n\n  .scale-legend-label {\n    color: $color-text-med;\n  }\n\n  .advanced-pie-legend {\n    color: $color-text-med;\n\n    .legend-item {\n      &:hover {\n        color: #fff !important;\n      }\n    }\n  }\n\n  .force-directed-graph {\n    .edge {\n      stroke: $color-bg-light;\n    }\n  }\n\n  .number-card {\n    p {\n      color: $color-text-light;\n    }\n  }\n\n  .gauge {\n    .background-arc{\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .gauge-tick {\n      path {\n        stroke: $color-text-med;\n      }\n      text {\n        fill: $color-text-med;\n      }\n    }\n  }\n\n  .linear-gauge {\n    .background-bar {\n      path {\n        fill: $color-bg-med;\n      }\n    }\n\n    .units {\n      fill: $color-text-dark;\n    }\n  }\n\n  .timeline {\n    .brush-background {\n      fill: rgba(255,255,255,0.05);\n    }\n\n    .brush {\n      .selection {\n        fill: rgba(255, 255, 255, 0.1);\n        stroke: #aaa;\n      }\n    }\n  }\n}\n"],"sourceRoot":"webpack://"}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/ngx-charts.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")();
-// imports
-
-
-// module
-exports.push([module.i, ".ngx-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n  pointer-events: none; }\n  .ngx-tooltip-content.type-popover {\n    background: #fff;\n    color: #060709;\n    border: 1px solid #72809b;\n    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);\n    font-size: 13px;\n    padding: 4px; }\n    .ngx-tooltip-content.type-popover .tooltip-caret {\n      position: absolute;\n      z-index: 5001;\n      width: 0;\n      height: 0; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-left {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-left: 7px solid #fff; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-top {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-top: 7px solid #fff; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-right {\n        border-top: 7px solid transparent;\n        border-bottom: 7px solid transparent;\n        border-right: 7px solid #fff; }\n      .ngx-tooltip-content.type-popover .tooltip-caret.position-bottom {\n        border-left: 7px solid transparent;\n        border-right: 7px solid transparent;\n        border-bottom: 7px solid #fff; }\n  .ngx-tooltip-content.type-tooltip {\n    color: #fff;\n    background: rgba(0, 0, 0, 0.75);\n    font-size: 12px;\n    padding: 0 10px;\n    text-align: center;\n    pointer-events: auto; }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-left {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-left: 7px solid rgba(0, 0, 0, 0.75); }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-top {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-top: 7px solid rgba(0, 0, 0, 0.75); }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-right {\n      border-top: 7px solid transparent;\n      border-bottom: 7px solid transparent;\n      border-right: 7px solid rgba(0, 0, 0, 0.75); }\n    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-bottom {\n      border-left: 7px solid transparent;\n      border-right: 7px solid transparent;\n      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }\n  .ngx-tooltip-content .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0; }\n  .ngx-tooltip-content.position-right {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0); }\n  .ngx-tooltip-content.position-left {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0); }\n  .ngx-tooltip-content.position-top {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0); }\n  .ngx-tooltip-content.position-bottom {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0); }\n  .ngx-tooltip-content.animate {\n    opacity: 1;\n    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;\n    transition: opacity 0.3s, -webkit-transform 0.3s;\n    transition: opacity 0.3s, transform 0.3s;\n    transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;\n    -webkit-transform: translate3d(0, 0, 0);\n            transform: translate3d(0, 0, 0);\n    pointer-events: auto; }\n\n.ngx-charts {\n  float: left; }\n  .ngx-charts .circle,\n  .ngx-charts .bar,\n  .ngx-charts .arc {\n    cursor: pointer; }\n  .ngx-charts .bar.active, .ngx-charts .bar:hover,\n  .ngx-charts .cell.active,\n  .ngx-charts .cell:hover,\n  .ngx-charts .arc.active,\n  .ngx-charts .arc:hover,\n  .ngx-charts .card.active,\n  .ngx-charts .card:hover {\n    opacity: 0.8;\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out; }\n  .ngx-charts .bar:focus,\n  .ngx-charts .cell:focus,\n  .ngx-charts .arc:focus,\n  .ngx-charts .card:focus {\n    outline: none; }\n  .ngx-charts g:focus {\n    outline: none; }\n  .ngx-charts .line-series.inactive,\n  .ngx-charts .line-series-range.inactive,\n  .ngx-charts .area-series.inactive {\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out;\n    opacity: .2; }\n  .ngx-charts .line-highlight {\n    display: none; }\n    .ngx-charts .line-highlight.active {\n      display: block; }\n  .ngx-charts .area {\n    opacity: 0.6; }\n  .ngx-charts .circle:hover {\n    cursor: pointer; }\n  .ngx-charts .tree-map .label p {\n    display: table-cell;\n    text-align: center;\n    line-height: 1.2em;\n    vertical-align: middle; }\n\n.ngx-tooltip-content {\n  pointer-events: none !important; }\n  .ngx-tooltip-content .tooltip-label {\n    display: block;\n    line-height: 1em;\n    padding: 8px 5px 5px 5px;\n    font-size: 1em; }\n  .ngx-tooltip-content .tooltip-val {\n    display: block;\n    font-size: 1.3em;\n    line-height: 1em;\n    padding: 0 5px 8px 5px; }\n\n.label {\n  font-size: 12px;\n  font-weight: normal; }\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none; }\n\n.grid-panel rect {\n  fill: none; }\n\n.grid-panel.odd rect {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.a2d3-container {\n  height: 100%; }\n  .a2d3-container .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999; }\n  .a2d3-container .icon-loading {\n    color: #999;\n    font-size: 32px; }\n\n.timeline .brush-background {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.timeline .brush .selection {\n  fill: rgba(0, 0, 0, 0.1);\n  stroke-width: 1px;\n  stroke: #888888; }\n\n.timeline .brush .handle {\n  fill-opacity: 0; }\n\n.timeline .embedded-chart {\n  opacity: 0.6; }\n\n.area-tooltip-container {\n  padding: 5px 0;\n  pointer-events: none; }\n\n.tooltip-item {\n  text-align: left;\n  line-height: 1.2em;\n  padding: 5px 0; }\n  .tooltip-item .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n\n.chart-legend {\n  display: inline-block;\n  padding: 0;\n  width: auto !important; }\n  .chart-legend .legend-title {\n    white-space: nowrap;\n    overflow: hidden;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold; }\n  .chart-legend ul, .chart-legend li {\n    padding: 0;\n    margin: 0;\n    list-style: none; }\n  .chart-legend .legend-wrap {\n    width: 90%; }\n  .chart-legend .scale-legend {\n    text-align: center;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column; }\n  .chart-legend .scale-legend-wrap {\n    display: inline-block;\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    width: 30px;\n    border-radius: 5px;\n    margin: 0 auto; }\n  .chart-legend .scale-legend-label {\n    font-size: 12px; }\n  .chart-legend .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    white-space: nowrap;\n    background: rgba(0, 0, 0, 0.05); }\n  .chart-legend .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a; }\n    .chart-legend .legend-label:hover {\n      color: #000;\n      -webkit-transition: 0.2s;\n      transition: 0.2s; }\n    .chart-legend .legend-label .active .legend-label-text {\n      color: #000; }\n  .chart-legend .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px; }\n  .chart-legend .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px; }\n  .chart-legend .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px; }\n  .chart-legend .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis; }\n\n.advanced-pie {\n  display: inline-block;\n  float: left; }\n\n.advanced-pie-legend-wrapper {\n  display: inline-block; }\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n  .advanced-pie-legend .total-value {\n    font-size: 36px; }\n  .advanced-pie-legend .total-label {\n    font-size: 24px;\n    margin-bottom: 19px; }\n  .advanced-pie-legend .legend-items-container {\n    width: 100%; }\n    .advanced-pie-legend .legend-items-container .legend-items {\n      white-space: nowrap;\n      overflow: auto; }\n      .advanced-pie-legend .legend-items-container .legend-items .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n        cursor: pointer; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item:focus {\n          outline: none; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item:hover {\n          color: #000;\n          -webkit-transition: 0.2s;\n          transition: 0.2s; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px; }\n        .advanced-pie-legend .legend-items-container .legend-items .legend-item .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px; }\n\n.pie-label {\n  font-size: 11px; }\n\n.pie-grid .arc1 {\n  opacity: 0.4; }\n\n.pie-grid .percent-label {\n  font-size: 16px;\n  font-weight: 400; }\n\n.force-directed-graph .edge {\n  stroke: #333; }\n\n.tree-map .treemap-val {\n  font-size: 1.3em;\n  padding-top: 5px;\n  display: inline-block; }\n\n.gauge .background-arc path {\n  fill: rgba(0, 0, 0, 0.05); }\n\n.gauge .gauge-tick path {\n  stroke: #666; }\n\n.gauge .gauge-tick text {\n  font-size: 12px;\n  fill: #666;\n  font-weight: bold; }\n\n.gauge .gauge-tick-large path {\n  stroke-width: 2px; }\n\n.gauge .gauge-tick-small path {\n  stroke-width: 1px; }\n\n.linear-gauge {\n  cursor: pointer; }\n  .linear-gauge .background-bar path {\n    fill: rgba(0, 0, 0, 0.05); }\n  .linear-gauge .units {\n    fill: #666; }\n", "", {"version":3,"sources":["/./src/src/common/tooltip/tooltip.component.scss","/./src/src/ngx-charts.scss"],"names":[],"mappings":"AAqBA;EACE,gBAAe;EACf,mBAAkB;EAClB,cAAa;EACb,eAAc;EACd,oBAAmB;EACnB,WAAU;EACV,qBAAoB,EA2GrB;EAlHD;IAUI,iBAzBa;IA0Bb,eAzBmB;IA0BnB,0BAxBoB;IAyBpB,gHAhB0D;IAiB1D,gBAAe;IACf,aAAY,EAgCb;IA/CH;MAkBK,mBAAkB;MAClB,cAAa;MACb,SAAQ;MACR,UAAS,EAyBV;MA9CJ;QAwBO,kCAAiC;QACjC,qCAAoC;QACpC,4BAzCU,EA0CX;MA3BN;QA8BO,mCAAkC;QAClC,oCAAmC;QACnC,2BA/CU,EAgDX;MAjCN;QAoCO,kCAAiC;QACjC,qCAAoC;QACpC,6BArDU,EAsDX;MAvCN;QA0CO,mCAAkC;QAClC,oCAAmC;QACnC,8BA3DU,EA4DX;EA7CN;IAkDG,YAtEiB;IAuEjB,gCAxE4B;IAyE5B,gBAAe;IACf,gBAAe;IACf,mBAAkB;IAClB,qBAAoB,EA2BpB;IAlFH;MA2DO,kCAAiC;MACjC,qCAAoC;MACpC,2CAlFwB,EAmFzB;IA9DN;MAiEO,mCAAkC;MAClC,oCAAmC;MACnC,0CAxFwB,EAyFzB;IApEN;MAuEO,kCAAiC;MACjC,qCAAoC;MACpC,4CA9FwB,EA+FzB;IA1EN;MA6EO,mCAAkC;MAClC,oCAAmC;MACnC,6CApGwB,EAqGzB;EAhFN;IAqFI,mBAAkB;IAClB,cAAa;IACb,SAAQ;IACR,UAAS,EACV;EAzFH;IA4FG,2CAAkC;YAAlC,mCAAkC,EAClC;EA7FH;IAgGG,4CAAmC;YAAnC,oCAAmC,EACnC;EAjGH;IAoGG,4CAAmC;YAAnC,oCAAmC,EACnC;EArGH;IAwGG,2CAAkC;YAAlC,mCAAkC,EAClC;EAzGH;IA4GI,WAAU;IACV,yDAAwC;IAAxC,iDAAwC;IAAxC,yCAAwC;IAAxC,iEAAwC;IACxC,wCAA+B;YAA/B,gCAA+B;IAC/B,qBAAoB,EACrB;;ACnIH;EACE,YAAW,EAgEZ;EAjED;;;IAMI,gBAAe,EAChB;EAPH;;;;;;;IAeM,aAAY;IACZ,8CAAqC;IAArC,sCAAqC,EACtC;EAjBL;;;;IAoBM,cAAa,EACd;EArBL;IA0BM,cAAa,EACd;EA3BL;;;IAkCM,8CAAqC;IAArC,sCAAqC;IACrC,YACF,EAAE;EApCN;IAwCI,cAAa,EAKd;IA7CH;MA2CM,eAAc,EACf;EA5CL;IAgDI,aAAY,EACb;EAjDH;IAqDM,gBAAe,EAChB;EAtDL;IA2DM,oBAAmB;IACnB,mBAAkB;IAClB,mBAAkB;IAClB,uBAAsB,EACvB;;AAIL;EACE,gCAA+B,EAehC;EAhBD;IAII,eAAc;IACd,iBAAgB;IAChB,yBAAwB;IACxB,eAAc,EACf;EARH;IAWI,eAAc;IACd,iBAAgB;IAChB,iBAAgB;IAChB,uBAAsB,EACvB;;AAGH;EACE,gBAAe;EACf,oBAAmB,EACpB;;AAED;EACE,aAAY;EACZ,gBAAe;EACf,WAAU,EACX;;AAED;EAEI,WAAU,EACX;;AAHH;EAOM,0BAAsB,EACvB;;AAIL;EACE,aAAY,EAcb;EAfD;IAII,gBAAe;IACf,mBAAkB;IAClB,mBAAkB;IAClB,SAAQ;IACR,YAAW,EACZ;EATH;IAYI,YAAW;IACX,gBAAe,EAChB;;AAGH;EAEI,0BAAsB,EACvB;;AAHH;EAOM,yBAAwB;EACxB,kBAAiB;EACjB,gBAAe,EAChB;;AAVL;EAaM,gBAAe,EAChB;;AAdL;EAkBI,aAAY,EACb;;AAGH;EACE,eAAc;EACd,qBAAoB,EACrB;;AAGD;EACE,iBAAgB;EAChB,mBAAkB;EAClB,eAAc,EAUf;EAbD;IAMI,sBAAqB;IACrB,aAAY;IACZ,YAAW;IACX,kBAAiB;IACjB,eAAc;IACd,mBAAkB,EACnB;;AAGH;EACE,sBAAqB;EACrB,WAAU;EACV,uBAAsB,EA0GvB;EA7GD;IAMI,oBAAmB;IACnB,iBAAgB;IAChB,kBAAiB;IACjB,mBAAkB;IAClB,gBAAe;IACf,kBAAiB,EAClB;EAZH;IAeI,WAAU;IACV,UAAS;IACT,iBAAgB,EACjB;EAlBH;IAqBI,WAAU,EACX;EAtBH;IAyBI,mBAAkB;IAClB,qBAAa;IAAb,qBAAa;IAAb,cAAa;IACb,6BAAsB;IAAtB,8BAAsB;QAAtB,2BAAsB;YAAtB,uBAAsB,EACvB;EA5BH;IA+BI,sBAAqB;IACrB,oBAAO;QAAP,YAAO;YAAP,QAAO;IACP,YAAW;IACX,mBAAkB;IAClB,eAAc,EACf;EApCH;IAuCI,gBAAe,EAChB;EAxCH;IA2CI,iBAAgB;IAChB,iBAAgB;IAChB,iBAAgB;IAChB,YAAW;IACX,YAAW;IACX,mBAAkB;IAClB,iBAAgB;IAChB,mBAAkB;IAClB,oBAAmB;IACnB,gCAA4B,EAC7B;EArDH;IAwDI,gBAAe;IACf,eAAc;IACd,YAAW;IACX,eAAc,EAcf;IAzEH;MA8DM,YAAW;MACX,yBAAwB;MAExB,iBAAgB,EACjB;IAlEL;MAsEQ,YAAW,EACZ;EAvEP;IA4EI,sBAAqB;IACrB,aAAY;IACZ,YAAW;IACX,kBAAiB;IACjB,eAAc;IACd,mBAAkB,EACnB;EAlFH;IAqFI,sBAAqB;IACrB,oBAAmB;IACnB,kBAAiB;IACjB,gBAAe;IACf,YAAW;IACX,wBAAuB;IACvB,oBAAmB;IACnB,iBAAgB;IAChB,oBAAmB,EACpB;EA9FH;IAiGI,eAAc;IACd,kBAAiB,EAClB;EAnGH;IAsGI,uBAAsB;IACtB,sBAAqB;IACrB,kBAAiB;IACjB,iBAAgB;IAChB,oBAAmB;IACnB,wBAAuB,EACxB;;AAGH;EACE,sBAAqB;EACrB,YAAW,EACZ;;AAED;EACE,sBAAqB,EACtB;;AAED;EACE,YAAW;EACX,mBAAkB;EAClB,SAAQ;EACR,sCAA6B;UAA7B,8BAA6B,EA8D9B;EAlED;IAOI,gBACF,EAAE;EARJ;IAWI,gBAAe;IACf,oBAAmB,EACpB;EAbH;IAgBI,YAAW,EAiDZ;IAjEH;MAmBM,oBAAmB;MACnB,eAAc,EA4Cf;MAhEL;QAuBQ,mBAAkB;QAClB,sBAAqB;QACrB,gBAAe,EAsChB;QA/DP;UA4BU,cAAa,EACd;QA7BT;UAgCU,YAAW;UACX,yBAAwB;UAExB,iBAAgB,EACjB;QApCT;UAuCU,gBAAe;UACf,iBAAgB;UAChB,kBAAiB,EAClB;QA1CT;UA6CU,gBAAe;UACf,aAAY;UACZ,kBAAiB;UACjB,iBAAgB,EACjB;QAjDT;UAoDU,gBAAe;UACf,aAAY;UACZ,kBAAiB,EAClB;QAvDT;UA0DU,WAAU;UACV,aAAY;UACZ,YAAW;UACX,kBAAiB,EAClB;;AAMT;EACE,gBAAe,EAChB;;AAED;EAEI,aAAY,EACb;;AAHH;EAKI,gBAAe;EACf,iBAAgB,EACjB;;AAGH;EAEI,aAAY,EACb;;AAGH;EAEI,iBAAgB;EAChB,iBAAgB;EAChB,sBAAqB,EACtB;;AAGH;EAGM,0BAAsB,EACvB;;AAJL;EASM,aAAY,EACb;;AAVL;EAaM,gBAAe;EACf,WAAU;EACV,kBAAiB,EAClB;;AAhBL;EAoBI,kBAAiB,EAClB;;AArBH;EAwBI,kBAAiB,EAClB;;AAGH;EACE,gBAAe,EAWhB;EAZD;IAKM,0BAAsB,EACvB;EANL;IAUI,WAAU,EACX","file":"ngx-charts.scss","sourcesContent":["$tooltip-bg: rgba(0, 0, 0, .75);\n$tooltip-color: #fff;\n$tooltip-caret-bg: $tooltip-bg;\n$tooltip-border: transparent;\n$tooltip-spacing: 10px;\n\n$popover-bg: #fff;\n$popover-color: #060709;\n$popover-caret-bg: $popover-bg;\n$popover-border: #72809b;\n$popover-spacing: 10px;\n\n$shadow-key-umbra-opacity: 0.2;\n$shadow-key-penumbra-opacity: 0.14;\n$shadow-ambient-shadow-opacity: 0.12;\n$shadow:\n  0 1px 3px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),\n  0 1px 1px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),\n  0 2px 1px -1px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);\n\n\n.ngx-tooltip-content {\n  position: fixed;\n  border-radius: 3px;\n  z-index: 5000;\n  display: block;\n  font-weight: normal;\n  opacity: 0;\n  pointer-events: none;\n\n  &.type-popover {\n    background: $popover-bg;\n    color: $popover-color;\n    border: 1px solid $popover-border;\n    box-shadow: $shadow;\n    font-size: 13px;\n    padding: 4px;\n\n   .tooltip-caret {\n     position: absolute;\n     z-index: 5001;\n     width: 0;\n     height: 0;\n\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $popover-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $popover-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $popover-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $popover-caret-bg;\n     }\n   }\n  }\n\n  &.type-tooltip {\n   color: $tooltip-color;\n   background: $tooltip-bg;\n   font-size: 12px;\n   padding: 0 10px;\n   text-align: center;\n   pointer-events: auto;\n\n   .tooltip-caret {\n     &.position-left {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-left: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-top {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-top: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-right {\n       border-top: 7px solid transparent;\n       border-bottom: 7px solid transparent;\n       border-right: 7px solid $tooltip-caret-bg;\n     }\n\n     &.position-bottom {\n       border-left: 7px solid transparent;\n       border-right: 7px solid transparent;\n       border-bottom: 7px solid $tooltip-caret-bg;\n     }\n   }\n  }\n\n  .tooltip-caret {\n    position: absolute;\n    z-index: 5001;\n    width: 0;\n    height: 0;\n  }\n\n  &.position-right {\n   transform: translate3d(10px, 0, 0);\n  }\n\n  &.position-left {\n   transform: translate3d(-10px, 0, 0);\n  }\n\n  &.position-top {\n   transform: translate3d(0, -10px, 0);\n  }\n\n  &.position-bottom {\n   transform: translate3d(0, 10px, 0);\n  }\n\n  &.animate {\n    opacity: 1;\n    transition: opacity 0.3s, transform 0.3s;\n    transform: translate3d(0, 0, 0);\n    pointer-events: auto;\n  }\n\n}\n","@import \"./common/tooltip/tooltip.component\";\n\n.ngx-charts {\n  float: left;\n\n  .circle,\n  .bar,\n  .arc {\n    cursor: pointer;\n  }\n\n  .bar,\n  .cell,\n  .arc,\n  .card {\n    &.active,\n    &:hover {\n      opacity: 0.8;\n      transition: opacity 100ms ease-in-out;\n    }\n\n    &:focus {\n      outline: none;\n    }\n  }\n\n  g {\n    &:focus {\n      outline: none;\n    }\n  }\n\n  .line-series,\n  .line-series-range,\n  .area-series {\n    &.inactive {\n      transition: opacity 100ms ease-in-out;\n      opacity: .2\n    }\n  }\n\n  .line-highlight {\n    display: none;\n\n    &.active {\n      display: block;\n    }\n  }\n\n  .area {\n    opacity: 0.6;\n  }\n\n  .circle {\n    &:hover {\n      cursor: pointer;\n    }\n  }\n\n  .tree-map {\n    .label p {\n      display: table-cell;\n      text-align: center;\n      line-height: 1.2em;\n      vertical-align: middle;\n    }\n  }\n}\n\n.ngx-tooltip-content {\n  pointer-events: none !important;\n\n  .tooltip-label {\n    display: block;\n    line-height: 1em;\n    padding: 8px 5px 5px 5px;\n    font-size: 1em;\n  }\n\n  .tooltip-val {\n    display: block;\n    font-size: 1.3em;\n    line-height: 1em;\n    padding: 0 5px 8px 5px;\n  }\n}\n\n.label {\n  font-size: 12px;\n  font-weight: normal;\n}\n\n.gridline-path {\n  stroke: #ddd;\n  stroke-width: 1;\n  fill: none;\n}\n\n.grid-panel {\n  rect {\n    fill: none;\n  }\n\n  &.odd {\n    rect {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n}\n\n.a2d3-container {\n  height: 100%;\n\n  .status-message {\n    font-size: 14px;\n    text-align: center;\n    position: relative;\n    top: 43%;\n    color: #999;\n  }\n\n  .icon-loading {\n    color: #999;\n    font-size: 32px;\n  }\n}\n\n.timeline {\n  .brush-background {\n    fill: rgba(0,0,0,0.05);\n  }\n\n  .brush {\n    .selection {\n      fill: rgba(0, 0, 0, 0.1);\n      stroke-width: 1px;\n      stroke: #888888;\n    }\n\n    .handle {\n      fill-opacity: 0;\n    }\n  }\n\n  .embedded-chart {\n    opacity: 0.6;\n  }\n}\n\n.area-tooltip-container {\n  padding: 5px 0;\n  pointer-events: none;\n}\n\n\n.tooltip-item{\n  text-align: left;\n  line-height: 1.2em;\n  padding: 5px 0;\n\n  .tooltip-item-color {\n    display: inline-block;\n    height: 12px;\n    width: 12px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n}\n\n.chart-legend {\n  display: inline-block;\n  padding: 0;\n  width: auto !important;\n\n  .legend-title {\n    white-space: nowrap;\n    overflow: hidden;\n    margin-left: 10px;\n    margin-bottom: 5px;\n    font-size: 14px;\n    font-weight: bold;\n  }\n\n  ul, li {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n  }\n\n  .legend-wrap {\n    width: 90%;\n  }\n\n  .scale-legend {\n    text-align: center;\n    display: flex;\n    flex-direction: column;\n  }\n\n  .scale-legend-wrap {\n    display: inline-block;\n    flex: 1;\n    width: 30px;\n    border-radius: 5px;\n    margin: 0 auto;\n  }\n\n  .scale-legend-label{\n    font-size: 12px;\n  }\n\n  .legend-labels {\n    line-height: 85%;\n    list-style: none;\n    text-align: left;\n    float: left;\n    width: 100%;\n    border-radius: 3px;\n    overflow-y: auto;\n    overflow-x: hidden;\n    white-space: nowrap;\n    background: rgba(0,0,0,0.05);\n  }\n\n  .legend-label {\n    cursor: pointer;\n    font-size: 90%;\n    margin: 8px;\n    color: #76818a;\n\n    &:hover {\n      color: #000;\n      -webkit-transition: 0.2s;\n      -moz-transition: 0.2s;\n      transition: 0.2s;\n    }\n\n    .active {\n      .legend-label-text {\n        color: #000;\n      }\n    }\n  }\n\n  .legend-label-color {\n    display: inline-block;\n    height: 15px;\n    width: 15px;\n    margin-right: 5px;\n    color: #5b646b;\n    border-radius: 3px;\n  }\n\n  .legend-label-text {\n    display: inline-block;\n    vertical-align: top;\n    line-height: 15px;\n    font-size: 12px;\n    width: 100%;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    overflow: hidden;\n    padding-right: 20px;\n  }\n\n  .legend-icon {\n    color: #4d9df6;\n    margin-right: 5px;\n  }\n\n  .legend-title-text {\n    vertical-align: bottom;\n    display: inline-block;\n    line-height: 16px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n  }\n}\n\n.advanced-pie {\n  display: inline-block;\n  float: left;\n}\n\n.advanced-pie-legend-wrapper {\n  display: inline-block;\n}\n\n.advanced-pie-legend {\n  float: left;\n  position: absolute;\n  top: 50%;\n  transform: translate(0, -50%);\n\n  .total-value {\n    font-size: 36px\n  }\n\n  .total-label {\n    font-size: 24px;\n    margin-bottom: 19px;\n  }\n\n  .legend-items-container {\n    width: 100%;\n\n    .legend-items {\n      white-space: nowrap;\n      overflow: auto;\n\n      .legend-item {\n        margin-right: 20px;\n        display: inline-block;\n        cursor: pointer;\n\n        &:focus {\n          outline: none;\n        }\n\n        &:hover {\n          color: #000;\n          -webkit-transition: 0.2s;\n          -moz-transition: 0.2s;\n          transition: 0.2s;\n        }\n\n        .item-value {\n          font-size: 24px;\n          margin-top: -6px;\n          margin-left: 11px;\n        }\n\n        .item-label {\n          font-size: 12px;\n          opacity: 0.7;\n          margin-left: 11px;\n          margin-top: -6px;\n        }\n\n        .item-percent {\n          font-size: 24px;\n          opacity: 0.7;\n          margin-left: 11px;\n        }\n\n        .item-color {\n          width: 4px;\n          height: 32px;\n          float: left;\n          margin-right: 7px;\n        }\n      }\n    }\n  }\n}\n\n.pie-label {\n  font-size: 11px;\n}\n\n.pie-grid {\n  .arc1 {\n    opacity: 0.4;\n  }\n  .percent-label {\n    font-size: 16px;\n    font-weight: 400;\n  }\n}\n\n.force-directed-graph {\n  .edge {\n    stroke: #333;\n  }\n}\n\n.tree-map {\n  .treemap-val {\n    font-size: 1.3em;\n    padding-top: 5px;\n    display: inline-block;\n  }\n}\n\n.gauge {\n  .background-arc {\n    path {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n\n  .gauge-tick {\n    path {\n      stroke: #666;\n    }\n\n    text {\n      font-size: 12px;\n      fill: #666;\n      font-weight: bold;\n    }\n  }\n\n  .gauge-tick-large path {\n    stroke-width: 2px;\n  }\n\n  .gauge-tick-small path{\n    stroke-width: 1px;\n  }\n}\n\n.linear-gauge {\n  cursor: pointer;\n  \n  .background-bar {\n    path {\n      fill: rgba(0,0,0,0.05);\n    }\n  }\n\n  .units {\n    fill: #666;\n  }\n}\n"],"sourceRoot":"webpack://"}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/lib/css-base.js":
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
 
 /***/ }),
 
@@ -9326,259 +9240,6 @@ exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/addStyles.js":
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-var stylesInDom = {},
-	memoize = function(fn) {
-		var memo;
-		return function () {
-			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-			return memo;
-		};
-	},
-	isOldIE = memoize(function() {
-		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-	}),
-	getHeadElement = memoize(function () {
-		return document.head || document.getElementsByTagName("head")[0];
-	}),
-	singletonElement = null,
-	singletonCounter = 0,
-	styleElementsInsertedAtTop = [];
-
-module.exports = function(list, options) {
-	if(typeof DEBUG !== "undefined" && DEBUG) {
-		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the bottom of <head>.
-	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-	var styles = listToStyles(list);
-	addStylesToDom(styles, options);
-
-	return function update(newList) {
-		var mayRemove = [];
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-		if(newList) {
-			var newStyles = listToStyles(newList);
-			addStylesToDom(newStyles, options);
-		}
-		for(var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-			if(domStyle.refs === 0) {
-				for(var j = 0; j < domStyle.parts.length; j++)
-					domStyle.parts[j]();
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-}
-
-function addStylesToDom(styles, options) {
-	for(var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-		if(domStyle) {
-			domStyle.refs++;
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles(list) {
-	var styles = [];
-	var newStyles = {};
-	for(var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-		if(!newStyles[id])
-			styles.push(newStyles[id] = {id: id, parts: [part]});
-		else
-			newStyles[id].parts.push(part);
-	}
-	return styles;
-}
-
-function insertStyleElement(options, styleElement) {
-	var head = getHeadElement();
-	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-	if (options.insertAt === "top") {
-		if(!lastStyleElementInsertedAtTop) {
-			head.insertBefore(styleElement, head.firstChild);
-		} else if(lastStyleElementInsertedAtTop.nextSibling) {
-			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			head.appendChild(styleElement);
-		}
-		styleElementsInsertedAtTop.push(styleElement);
-	} else if (options.insertAt === "bottom") {
-		head.appendChild(styleElement);
-	} else {
-		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-	}
-}
-
-function removeStyleElement(styleElement) {
-	styleElement.parentNode.removeChild(styleElement);
-	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-	if(idx >= 0) {
-		styleElementsInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement(options) {
-	var styleElement = document.createElement("style");
-	styleElement.type = "text/css";
-	insertStyleElement(options, styleElement);
-	return styleElement;
-}
-
-function createLinkElement(options) {
-	var linkElement = document.createElement("link");
-	linkElement.rel = "stylesheet";
-	insertStyleElement(options, linkElement);
-	return linkElement;
-}
-
-function addStyle(obj, options) {
-	var styleElement, update, remove;
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-		styleElement = singletonElement || (singletonElement = createStyleElement(options));
-		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-	} else if(obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function") {
-		styleElement = createLinkElement(options);
-		update = updateLink.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-			if(styleElement.href)
-				URL.revokeObjectURL(styleElement.href);
-		};
-	} else {
-		styleElement = createStyleElement(options);
-		update = applyToTag.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle(newObj) {
-		if(newObj) {
-			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-				return;
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag(styleElement, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = styleElement.childNodes;
-		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-		if (childNodes.length) {
-			styleElement.insertBefore(cssNode, childNodes[index]);
-		} else {
-			styleElement.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag(styleElement, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		styleElement.setAttribute("media", media)
-	}
-
-	if(styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = css;
-	} else {
-		while(styleElement.firstChild) {
-			styleElement.removeChild(styleElement.firstChild);
-		}
-		styleElement.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink(linkElement, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	if(sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = linkElement.href;
-
-	linkElement.href = URL.createObjectURL(blob);
-
-	if(oldSrc)
-		URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
 /***/ "./src/area-chart/area-chart-normalized.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9603,7 +9264,6 @@ var d3_1 = __webpack_require__("./src/d3.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var AreaChartNormalizedComponent = (function (_super) {
     __extends(AreaChartNormalizedComponent, _super);
@@ -9613,6 +9273,7 @@ var AreaChartNormalizedComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -9741,7 +9402,6 @@ var AreaChartNormalizedComponent = (function (_super) {
         this.scaleType = this.getScaleType(values);
         var domain = [];
         if (this.scaleType === 'time') {
-            values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
             domain = [new Date(min), new Date(max)];
@@ -9767,27 +9427,25 @@ var AreaChartNormalizedComponent = (function (_super) {
     AreaChartNormalizedComponent.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
-            scale = d3_1.default.scaleTime()
-                .range([0, width])
-                .domain(domain);
+            scale = d3_1.default.scaleTime();
         }
         else if (this.scaleType === 'linear') {
-            scale = d3_1.default.scaleLinear()
-                .range([0, width])
-                .domain(domain);
+            scale = d3_1.default.scaleLinear();
         }
         else if (this.scaleType === 'ordinal') {
             scale = d3_1.default.scalePoint()
-                .range([0, width])
-                .padding(0.1)
-                .domain(domain);
+                .padding(0.1);
         }
-        return scale;
+        scale
+            .range([0, width])
+            .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     AreaChartNormalizedComponent.prototype.getYScale = function (domain, height) {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([height, 0])
             .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     AreaChartNormalizedComponent.prototype.getScaleType = function (values) {
         var date = true;
@@ -9960,6 +9618,10 @@ var AreaChartNormalizedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], AreaChartNormalizedComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartNormalizedComponent.prototype, "activate", void 0);
@@ -9977,7 +9639,9 @@ var AreaChartNormalizedComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-area-chart-normalized',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChartNormalizedComponent);
@@ -10011,7 +9675,6 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var AreaChartStackedComponent = (function (_super) {
@@ -10022,6 +9685,7 @@ var AreaChartStackedComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -10126,7 +9790,6 @@ var AreaChartStackedComponent = (function (_super) {
         this.scaleType = this.getScaleType(values);
         var domain = [];
         if (this.scaleType === 'time') {
-            values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
             domain = [new Date(min), new Date(max)];
@@ -10180,27 +9843,25 @@ var AreaChartStackedComponent = (function (_super) {
     AreaChartStackedComponent.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
-            scale = d3_1.default.scaleTime()
-                .range([0, width])
-                .domain(domain);
+            scale = d3_1.default.scaleTime();
         }
         else if (this.scaleType === 'linear') {
-            scale = d3_1.default.scaleLinear()
-                .range([0, width])
-                .domain(domain);
+            scale = d3_1.default.scaleLinear();
         }
         else if (this.scaleType === 'ordinal') {
             scale = d3_1.default.scalePoint()
-                .range([0, width])
-                .padding(0.1)
-                .domain(domain);
+                .padding(0.1);
         }
-        return scale;
+        scale
+            .range([0, width])
+            .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     AreaChartStackedComponent.prototype.getYScale = function (domain, height) {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([height, 0])
             .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     AreaChartStackedComponent.prototype.getScaleType = function (values) {
         var date = true;
@@ -10373,6 +10034,10 @@ var AreaChartStackedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], AreaChartStackedComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartStackedComponent.prototype, "activate", void 0);
@@ -10390,7 +10055,9 @@ var AreaChartStackedComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-area-chart-stacked',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [activeEntries]=\"activeEntries\"\n              stacked=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            stacked=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChartStackedComponent);
@@ -10424,7 +10091,6 @@ var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
 var AreaChartComponent = (function (_super) {
@@ -10434,6 +10100,7 @@ var AreaChartComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -10505,7 +10172,6 @@ var AreaChartComponent = (function (_super) {
         this.scaleType = this.getScaleType(values);
         var domain = [];
         if (this.scaleType === 'time') {
-            values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
             domain = [min, max];
@@ -10546,27 +10212,24 @@ var AreaChartComponent = (function (_super) {
     AreaChartComponent.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
-            scale = d3_1.default.scaleTime()
-                .range([0, width])
-                .domain(domain);
+            scale = d3_1.default.scaleTime();
         }
         else if (this.scaleType === 'linear') {
-            scale = d3_1.default.scaleLinear()
-                .range([0, width])
-                .domain(domain);
+            scale = d3_1.default.scaleLinear();
         }
         else if (this.scaleType === 'ordinal') {
             scale = d3_1.default.scalePoint()
-                .range([0, width])
-                .padding(0.1)
-                .domain(domain);
+                .padding(0.1);
         }
-        return scale;
+        scale.range([0, width])
+            .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     AreaChartComponent.prototype.getYScale = function (domain, height) {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([height, 0])
             .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     AreaChartComponent.prototype.getScaleType = function (values) {
         var date = true;
@@ -10747,6 +10410,10 @@ var AreaChartComponent = (function (_super) {
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], AreaChartComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartComponent.prototype, "activate", void 0);
@@ -10764,7 +10431,9 @@ var AreaChartComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-area-chart',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [gradient]=\"gradient\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [])
     ], AreaChartComponent);
@@ -11122,6 +10791,9 @@ var BarHorizontal2DComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
+        this.groupPadding = 16;
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -11158,7 +10830,7 @@ var BarHorizontal2DComponent = (function (_super) {
         });
     };
     BarHorizontal2DComponent.prototype.getGroupScale = function () {
-        var spacing = 0.2;
+        var spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
@@ -11166,16 +10838,18 @@ var BarHorizontal2DComponent = (function (_super) {
             .domain(this.groupDomain);
     };
     BarHorizontal2DComponent.prototype.getInnerScale = function () {
-        var spacing = 0.2;
+        var height = this.groupScale.bandwidth();
+        var spacing = this.innerDomain.length / (height / this.barPadding + 1);
         return d3_1.default.scaleBand()
-            .rangeRound([0, this.groupScale.bandwidth()])
+            .rangeRound([0, height])
             .paddingInner(spacing)
             .domain(this.innerDomain);
     };
     BarHorizontal2DComponent.prototype.getValueScale = function () {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([0, this.dims.width])
             .domain(this.valuesDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarHorizontal2DComponent.prototype.getGroupDomain = function () {
         var domain = [];
@@ -11342,6 +11016,18 @@ var BarHorizontal2DComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarHorizontal2DComponent.prototype, "groupPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarHorizontal2DComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarHorizontal2DComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontal2DComponent.prototype, "activate", void 0);
@@ -11354,6 +11040,8 @@ var BarHorizontal2DComponent = (function (_super) {
             selector: 'ngx-charts-bar-horizontal-2d',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"valueScale\"\n          [yScale]=\"groupScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"horizontal\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            [xScale]=\"valueScale\"\n            [activeEntries]=\"activeEntries\"\n            [yScale]=\"innerScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             animations: [
                 core_1.trigger('animationState', [
                     core_1.transition('* => void', [
@@ -11406,6 +11094,8 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -11467,16 +11157,17 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         return [0, 100];
     };
     BarHorizontalNormalizedComponent.prototype.getYScale = function () {
-        var spacing = 0.1;
+        var spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
     BarHorizontalNormalizedComponent.prototype.getXScale = function () {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([0, this.dims.width])
             .domain(this.valueDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarHorizontalNormalizedComponent.prototype.groupTransform = function (group) {
         return "translate(0, " + this.yScale(group.name) + ")";
@@ -11605,6 +11296,14 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarHorizontalNormalizedComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarHorizontalNormalizedComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalNormalizedComponent.prototype, "activate", void 0);
@@ -11617,6 +11316,8 @@ var BarHorizontalNormalizedComponent = (function (_super) {
             selector: 'ngx-charts-bar-horizontal-normalized',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             animations: [
                 core_1.trigger('animationState', [
                     core_1.transition('* => void', [
@@ -11669,6 +11370,8 @@ var BarHorizontalStackedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -11742,16 +11445,17 @@ var BarHorizontalStackedComponent = (function (_super) {
         return [min, max];
     };
     BarHorizontalStackedComponent.prototype.getYScale = function () {
-        var spacing = 0.1;
+        var spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
     BarHorizontalStackedComponent.prototype.getXScale = function () {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([0, this.dims.width])
             .domain(this.valueDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarHorizontalStackedComponent.prototype.groupTransform = function (group) {
         return "translate(0, " + this.yScale(group.name) + ")";
@@ -11880,6 +11584,14 @@ var BarHorizontalStackedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarHorizontalStackedComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarHorizontalStackedComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalStackedComponent.prototype, "activate", void 0);
@@ -11892,6 +11604,8 @@ var BarHorizontalStackedComponent = (function (_super) {
             selector: 'ngx-charts-bar-horizontal-stacked',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-horizontal\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [activeEntries]=\"activeEntries\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             animations: [
                 core_1.trigger('animationState', [
                     core_1.transition('* => void', [
@@ -11944,6 +11658,8 @@ var BarHorizontalComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -11976,13 +11692,14 @@ var BarHorizontalComponent = (function (_super) {
     };
     BarHorizontalComponent.prototype.getXScale = function () {
         this.xDomain = this.getXDomain();
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([0, this.dims.width])
             .domain(this.xDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarHorizontalComponent.prototype.getYScale = function () {
-        var spacing = 0.2;
         this.yDomain = this.getYDomain();
+        var spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
@@ -12107,6 +11824,14 @@ var BarHorizontalComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarHorizontalComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarHorizontalComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalComponent.prototype, "activate", void 0);
@@ -12118,7 +11843,9 @@ var BarHorizontalComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-bar-horizontal',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-horizontal\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [])
     ], BarHorizontalComponent);
@@ -12161,6 +11888,9 @@ var BarVertical2DComponent = (function (_super) {
         this.scaleType = 'ordinal';
         this.showGridLines = true;
         this.activeEntries = [];
+        this.groupPadding = 16;
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -12197,7 +11927,7 @@ var BarVertical2DComponent = (function (_super) {
         });
     };
     BarVertical2DComponent.prototype.getGroupScale = function () {
-        var spacing = 0.2;
+        var spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(spacing)
@@ -12205,16 +11935,18 @@ var BarVertical2DComponent = (function (_super) {
             .domain(this.groupDomain);
     };
     BarVertical2DComponent.prototype.getInnerScale = function () {
-        var spacing = 0.2;
+        var width = this.groupScale.bandwidth();
+        var spacing = this.innerDomain.length / (width / this.barPadding + 1);
         return d3_1.default.scaleBand()
-            .rangeRound([0, this.groupScale.bandwidth()])
+            .rangeRound([0, width])
             .paddingInner(spacing)
             .domain(this.innerDomain);
     };
     BarVertical2DComponent.prototype.getValueScale = function () {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([this.dims.height, 0])
             .domain(this.valuesDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarVertical2DComponent.prototype.getGroupDomain = function () {
         var domain = [];
@@ -12385,6 +12117,18 @@ var BarVertical2DComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarVertical2DComponent.prototype, "groupPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarVertical2DComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarVertical2DComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarVertical2DComponent.prototype, "activate", void 0);
@@ -12396,6 +12140,8 @@ var BarVertical2DComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-bar-vertical-2d',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-grid-panel-series\n          [xScale]=\"groupScale\"\n          [yScale]=\"valueScale\"\n          [data]=\"results\"\n          [dims]=\"dims\"\n          orient=\"vertical\">\n        </svg:g>\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"groupScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"valueScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\"\n          [activeEntries]=\"activeEntries\"\n          [xScale]=\"innerScale\"\n          [yScale]=\"valueScale\"\n          [colors]=\"colors\"\n          [series]=\"group.series\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [seriesName]=\"group.name\"\n          (select)=\"onClick($event, group)\"\n          (activate)=\"onActivate($event, group)\"\n          (deactivate)=\"onDeactivate($event, group)\"\n        />\n        </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -12449,6 +12195,8 @@ var BarVerticalNormalizedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -12510,16 +12258,17 @@ var BarVerticalNormalizedComponent = (function (_super) {
         return [0, 100];
     };
     BarVerticalNormalizedComponent.prototype.getXScale = function () {
-        var spacing = 0.1;
+        var spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
     BarVerticalNormalizedComponent.prototype.getYScale = function () {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([this.dims.height, 0])
             .domain(this.valueDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarVerticalNormalizedComponent.prototype.groupTransform = function (group) {
         return "translate(" + this.xScale(group.name) + ", 0)";
@@ -12648,6 +12397,14 @@ var BarVerticalNormalizedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarVerticalNormalizedComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarVerticalNormalizedComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalNormalizedComponent.prototype, "activate", void 0);
@@ -12659,6 +12416,8 @@ var BarVerticalNormalizedComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-bar-vertical-normalized',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -12712,6 +12471,8 @@ var BarVerticalStackedComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -12785,16 +12546,17 @@ var BarVerticalStackedComponent = (function (_super) {
         return [min, max];
     };
     BarVerticalStackedComponent.prototype.getXScale = function () {
-        var spacing = 0.1;
+        var spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
     BarVerticalStackedComponent.prototype.getYScale = function () {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([this.dims.height, 0])
             .domain(this.valueDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarVerticalStackedComponent.prototype.groupTransform = function (group) {
         return "translate(" + this.xScale(group.name) + ", 0)";
@@ -12923,6 +12685,14 @@ var BarVerticalStackedComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarVerticalStackedComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarVerticalStackedComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalStackedComponent.prototype, "activate", void 0);
@@ -12934,6 +12704,8 @@ var BarVerticalStackedComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-bar-vertical-stacked',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"stacked\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -12987,6 +12759,8 @@ var BarVerticalComponent = (function (_super) {
         this.legend = false;
         this.showGridLines = true;
         this.activeEntries = [];
+        this.barPadding = 8;
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -13018,8 +12792,8 @@ var BarVerticalComponent = (function (_super) {
         });
     };
     BarVerticalComponent.prototype.getXScale = function () {
-        var spacing = 0.2;
         this.xDomain = this.getXDomain();
+        var spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
         return d3_1.default.scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(spacing)
@@ -13027,9 +12801,10 @@ var BarVerticalComponent = (function (_super) {
     };
     BarVerticalComponent.prototype.getYScale = function () {
         this.yDomain = this.getYDomain();
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([this.dims.height, 0])
             .domain(this.yDomain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     BarVerticalComponent.prototype.getXDomain = function () {
         return this.results.map(function (d) { return d.name; });
@@ -13150,6 +12925,14 @@ var BarVerticalComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BarVerticalComponent.prototype, "barPadding", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BarVerticalComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalComponent.prototype, "activate", void 0);
@@ -13161,7 +12944,9 @@ var BarVerticalComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-bar-vertical',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [activeEntries]=\"activeEntries\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [])
     ], BarVerticalComponent);
@@ -14059,8 +13844,24 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-area-tooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
-            changeDetection: core_1.ChangeDetectionStrategy.OnPush
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        [@animationState]=\"anchorOpacity[i] !== 0 ? 'active' : 'inactive'\"\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('inactive => active', [
+                        core_1.style({
+                            opacity: 0,
+                        }),
+                        core_1.animate(250, core_1.style({ opacity: 0.7 }))
+                    ]),
+                    core_1.transition('active => inactive', [
+                        core_1.style({
+                            opacity: 0.7,
+                        }),
+                        core_1.animate(250, core_1.style({ opacity: 0 }))
+                    ])
+                ])
+            ]
         }), 
         __metadata('design:paramtypes', [core_1.Renderer])
     ], AreaTooltip);
@@ -14965,6 +14766,13 @@ exports.YAxisComponent = YAxisComponent;
 
 /***/ }),
 
+/***/ "./src/common/base-chart.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
 /***/ "./src/common/base-chart.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14984,6 +14792,7 @@ var common_1 = __webpack_require__("./node_modules/@angular/common/index.js");
 var Observable_1 = __webpack_require__("./node_modules/rxjs/Observable.js");
 __webpack_require__("./node_modules/rxjs/add/observable/fromEvent.js");
 __webpack_require__("./node_modules/rxjs/add/operator/debounceTime.js");
+var utils_1 = __webpack_require__("./src/utils/index.ts");
 var BaseChartComponent = (function () {
     function BaseChartComponent(chartElement, zone, cd, location) {
         this.chartElement = chartElement;
@@ -14995,9 +14804,14 @@ var BaseChartComponent = (function () {
     }
     BaseChartComponent.prototype.ngAfterViewInit = function () {
         this.bindWindowResizeEvent();
+        // listen for visibility of the element for hidden by default scenario
+        this.visibilityObserver = new utils_1.VisibilityObserver(this.chartElement, this.zone);
+        this.visibilityObserver.visible.subscribe(this.update.bind(this));
     };
     BaseChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
+        this.visibilityObserver.visible.unsubscribe();
+        this.visibilityObserver.destroy();
     };
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -15012,23 +14826,32 @@ var BaseChartComponent = (function () {
         }
         else {
             var dims = this.getContainerDims();
-            this.width = dims.width;
-            this.height = dims.height;
+            if (dims) {
+                this.width = dims.width;
+                this.height = dims.height;
+            }
+        }
+        if (!this.width || !this.height) {
+            this.width = this.height = 0;
         }
         if (this.cd) {
             this.cd.markForCheck();
         }
     };
     BaseChartComponent.prototype.getContainerDims = function () {
-        var width = 0;
-        var height = 0;
+        var width;
+        var height;
         var hostElem = this.chartElement.nativeElement;
         if (hostElem.parentNode !== null) {
             // Get the container dimensions
-            width = hostElem.parentNode.clientWidth;
-            height = hostElem.parentNode.clientHeight;
+            var dims = hostElem.parentNode.getBoundingClientRect();
+            width = dims.width;
+            height = dims.height;
         }
-        return { width: width, height: height };
+        if (width && height) {
+            return { width: width, height: height };
+        }
+        return null;
     };
     /**
      * Converts all date objects that appear as name
@@ -15126,7 +14949,7 @@ var BaseChartComponent = (function () {
     BaseChartComponent = __decorate([
         core_1.Component({
             selector: 'base-chart',
-            template: ""
+            template: "<div></div>"
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef, common_1.Location])
     ], BaseChartComponent);
@@ -15164,7 +14987,7 @@ var grid_panel_component_1 = __webpack_require__("./src/common/grid-panel.compon
 var grid_panel_series_component_1 = __webpack_require__("./src/common/grid-panel-series.component.ts");
 var svg_linear_gradient_component_1 = __webpack_require__("./src/common/svg-linear-gradient.component.ts");
 var svg_radial_gradient_component_1 = __webpack_require__("./src/common/svg-radial-gradient.component.ts");
-var timeline_component_1 = __webpack_require__("./src/common/timeline.component.ts");
+var timeline_1 = __webpack_require__("./src/common/timeline/index.ts");
 var common_2 = __webpack_require__("./node_modules/@angular/common/index.js");
 var area_component_1 = __webpack_require__("./src/common/area.component.ts");
 var area_tooltip_component_1 = __webpack_require__("./src/common/area-tooltip.component.ts");
@@ -15184,7 +15007,7 @@ var COMPONENTS = [
     grid_panel_series_component_1.GridPanelSeriesComponent,
     svg_linear_gradient_component_1.SvgLinearGradientComponent,
     svg_radial_gradient_component_1.SvgRadialGradientComponent,
-    timeline_component_1.Timeline,
+    timeline_1.Timeline,
     legend_1.AdvancedLegendComponent
 ];
 var ChartCommonModule = (function () {
@@ -15361,7 +15184,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var common_1 = __webpack_require__("./node_modules/@angular/common/index.js");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var label_helper_1 = __webpack_require__("./src/common/label.helper.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var CircleSeriesComponent = (function () {
@@ -15389,7 +15211,7 @@ var CircleSeriesComponent = (function () {
             if (value) {
                 var cx = void 0;
                 if (_this.scaleType === 'time') {
-                    cx = _this.xScale(moment(label).toDate());
+                    cx = _this.xScale(label);
                 }
                 else if (_this.scaleType === 'linear') {
                     cx = _this.xScale(Number(label));
@@ -16284,6 +16106,7 @@ __export(__webpack_require__("./src/common/chart-common.module.ts"));
 __export(__webpack_require__("./src/common/legend/index.ts"));
 __export(__webpack_require__("./src/common/tooltip/index.ts"));
 __export(__webpack_require__("./src/common/count/index.ts"));
+__export(__webpack_require__("./src/common/timeline/index.ts"));
 __export(__webpack_require__("./src/common/color.helper.ts"));
 __export(__webpack_require__("./src/common/area.component.ts"));
 __export(__webpack_require__("./src/common/area-tooltip.component.ts"));
@@ -16296,7 +16119,6 @@ __export(__webpack_require__("./src/common/grid-panel-series.component.ts"));
 __export(__webpack_require__("./src/common/svg-linear-gradient.component.ts"));
 __export(__webpack_require__("./src/common/svg-radial-gradient.component.ts"));
 __export(__webpack_require__("./src/common/tick-format.helper.ts"));
-__export(__webpack_require__("./src/common/timeline.component.ts"));
 __export(__webpack_require__("./src/common/trim-label.helper.ts"));
 __export(__webpack_require__("./src/common/view-dimensions.helper.ts"));
 __export(__webpack_require__("./src/common/label.helper.ts"));
@@ -16327,6 +16149,13 @@ function formatLabel(label) {
 }
 exports.formatLabel = formatLabel;
 
+
+/***/ }),
+
+/***/ "./src/common/legend/advanced-legend.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
 
 /***/ }),
 
@@ -16415,6 +16244,8 @@ var AdvancedLegendComponent = (function () {
         core_1.Component({
             selector: 'ngx-charts-advanced-legend',
             template: "\n    <div class=\"advanced-pie-legend\"\n      [style.width.px]=\"width\">\n      <div\n        class=\"total-value\"\n        ngx-charts-count-up\n        [countTo]=\"roundedTotal\">\n      </div>\n      <div class=\"total-label\">\n        {{totalLabel}}\n      </div>\n      <div class=\"legend-items-container\">\n        <div class=\"legend-items\">\n          <div\n            *ngFor=\"let legendItem of legendItems; trackBy:trackBy\"\n            tabindex=\"-1\"\n            class=\"legend-item\"\n            (mouseenter)=\"activate.emit(legendItem.label)\"\n            (mouseleave)=\"deactivate.emit(legendItem.label)\"\n            (click)=\"select.emit({ name: legendItem.label, value: legendItem.value })\">\n            <div\n              class=\"item-color\"\n              [style.background]=\"legendItem.color\">\n            </div>\n            <div\n              class=\"item-value\"\n              ngx-charts-count-up\n              [countTo]=\"legendItem.value\">\n            </div>\n            <div class=\"item-label\">{{legendItem.label}}</div>\n            <div\n              class=\"item-percent\"\n              ngx-charts-count-up\n              [countTo]=\"legendItem.percentage\"\n              [countSuffix]=\"'%'\">\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  ",
+            styles: [__webpack_require__("./src/common/legend/advanced-legend.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -16534,6 +16365,13 @@ var LegendEntryComponent = (function () {
 }());
 exports.LegendEntryComponent = LegendEntryComponent;
 
+
+/***/ }),
+
+/***/ "./src/common/legend/legend.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
 
 /***/ }),
 
@@ -16657,6 +16495,8 @@ var LegendComponent = (function () {
         core_1.Component({
             selector: 'ngx-charts-legend',
             template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
+            styles: [__webpack_require__("./src/common/legend/legend.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ChangeDetectorRef, core_1.NgZone])
@@ -16665,6 +16505,13 @@ var LegendComponent = (function () {
 }());
 exports.LegendComponent = LegendComponent;
 
+
+/***/ }),
+
+/***/ "./src/common/legend/scale-legend.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
 
 /***/ }),
 
@@ -16726,7 +16573,9 @@ var ScaleLegendComponent = (function () {
     ScaleLegendComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-scale-legend',
-            template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n      <div \n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
+            template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n      <div\n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
+            styles: [__webpack_require__("./src/common/legend/scale-legend.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
@@ -16868,14 +16717,15 @@ exports.SvgRadialGradientComponent = SvgRadialGradientComponent;
 
 "use strict";
 
-var moment = __webpack_require__("./node_modules/moment/moment.js");
+var d3_1 = __webpack_require__("./src/d3.ts");
 function tickFormat(fieldType, groupByType) {
     return function (label) {
         if (label === 'No Value' || label === 'Other') {
             return label;
         }
         if (fieldType === 'date' && groupByType === 'groupBy') {
-            return moment(label).format('MM/DD/YYYY');
+            var formatter = d3_1.default.timeFormat('MM/DD/YYYY');
+            return formatter(label);
         }
         return label.toString();
     };
@@ -16885,7 +16735,27 @@ exports.tickFormat = tickFormat;
 
 /***/ }),
 
-/***/ "./src/common/timeline.component.ts":
+/***/ "./src/common/timeline/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/common/timeline/timeline.component.ts"));
+
+
+/***/ }),
+
+/***/ "./src/common/timeline/timeline.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
+/***/ "./src/common/timeline/timeline.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16901,9 +16771,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var common_1 = __webpack_require__("./node_modules/@angular/common/index.js");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
-var id_1 = __webpack_require__("./src/utils/id.ts");
+var utils_1 = __webpack_require__("./src/utils/index.ts");
 var Timeline = (function () {
     function Timeline(element, zone, cd, location) {
         this.zone = zone;
@@ -16935,7 +16804,7 @@ var Timeline = (function () {
             }
             _this.transform = "translate(0 , " + offsetY + ")";
             var pageUrl = _this.location.path();
-            _this.filterId = 'filter' + id_1.id().toString();
+            _this.filterId = 'filter' + utils_1.id().toString();
             _this.filter = "url(" + pageUrl + "#" + _this.filterId + ")";
             _this.cd.markForCheck();
         });
@@ -16953,7 +16822,6 @@ var Timeline = (function () {
         }
         var domain = [];
         if (this.scaleType === 'time') {
-            values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
             domain = [min, max];
@@ -17088,6 +16956,8 @@ var Timeline = (function () {
         core_1.Component({
             selector: 'g[ngx-charts-timeline]',
             template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
+            styles: [__webpack_require__("./src/common/timeline/timeline.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef, common_1.Location])
@@ -17472,6 +17342,13 @@ var StyleTypes = exports.StyleTypes;
 
 /***/ }),
 
+/***/ "./src/common/tooltip/tooltip.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
 /***/ "./src/common/tooltip/tooltip.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17594,7 +17471,9 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent = __decorate([
         core_1.Component({
             selector: 'ngx-tooltip-content',
-            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  "
+            template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+            encapsulation: core_1.ViewEncapsulation.None,
+            styles: [__webpack_require__("./src/common/tooltip/tooltip.component.scss")]
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
     ], TooltipContentComponent);
@@ -18056,6 +17935,13 @@ exports.calculateViewDimensions = calculateViewDimensions;
 
 /***/ }),
 
+/***/ "./src/force-directed-graph/force-directed-graph.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
 /***/ "./src/force-directed-graph/force-directed-graph.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18245,6 +18131,11 @@ var ForceDirectedGraphComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-force-directed-graph',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [
+                __webpack_require__("./src/common/base-chart.component.scss"),
+                __webpack_require__("./src/force-directed-graph/force-directed-graph.component.scss")
+            ],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -18529,6 +18420,13 @@ var GaugeAxisComponent = (function () {
 }());
 exports.GaugeAxisComponent = GaugeAxisComponent;
 
+
+/***/ }),
+
+/***/ "./src/gauge/gauge.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
 
 /***/ }),
 
@@ -18820,6 +18718,11 @@ var GaugeComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-gauge',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            [isActive]=\"isActive(arc.valueArc.data)\"\n            (select)=\"onClick($event)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\"\n          [tickFormatting]=\"axisTickFormatting\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [
+                __webpack_require__("./src/common/base-chart.component.scss"),
+                __webpack_require__("./src/gauge/gauge.component.scss")
+            ],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -18896,6 +18799,13 @@ function __export(m) {
 __export(__webpack_require__("./src/gauge/gauge.module.ts"));
 __export(__webpack_require__("./src/gauge/gauge.component.ts"));
 
+
+/***/ }),
+
+/***/ "./src/gauge/linear-gauge.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
 
 /***/ }),
 
@@ -19067,6 +18977,11 @@ var LinearGaugeComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-linear-gauge',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      (click)=\"onClick()\">\n      <svg:g class=\"linear-gauge chart\">\n        <svg:g ngx-charts-bar \n          class=\"background-bar\"\n          [width]=\"dims.width\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n        <svg:g ngx-charts-bar \n          [width]=\"valueScale(value)\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [fill]=\"colors.getColor(units)\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"5\" \n          x2=\"0\"\n          y2=\"15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"-5\" \n          x2=\"0\"\n          y2=\"-15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n        \n        <svg:g [attr.transform]=\"transform\">        \n          <svg:g [attr.transform]=\"valueTranslate\">\n            <svg:text #valueTextEl\n              class=\"value\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"valueTextTransform\"          \n              alignment-baseline=\"after-edge\">\n              {{displayValue}}\n            </svg:text>        \n          </svg:g>\n          \n          <svg:g [attr.transform]=\"unitsTranslate\">\n            <svg:text #unitsTextEl\n              class=\"units\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"unitsTextTransform\"          \n              alignment-baseline=\"before-edge\">\n              {{units}}\n            </svg:text>        \n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [
+                __webpack_require__("./src/common/base-chart.component.scss"),
+                __webpack_require__("./src/gauge/linear-gauge.component.scss")
+            ],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -19497,6 +19412,8 @@ var HeatMapComponent = (function (_super) {
             selector: 'ngx-charts-heat-map',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [])
     ], HeatMapComponent);
@@ -19635,7 +19552,6 @@ var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
 var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var LineChartComponent = (function (_super) {
     __extends(LineChartComponent, _super);
     function LineChartComponent() {
@@ -19643,6 +19559,7 @@ var LineChartComponent = (function (_super) {
         this.showGridLines = true;
         this.curve = d3_1.default.shape.curveLinear;
         this.activeEntries = [];
+        this.roundDomains = false;
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.margin = [10, 20, 10, 20];
@@ -19714,7 +19631,6 @@ var LineChartComponent = (function (_super) {
         this.scaleType = this.getScaleType(values);
         var domain = [];
         if (this.scaleType === 'time') {
-            values = values.map(function (v) { return moment(v).toDate(); });
             var min = Math.min.apply(Math, values);
             var max = Math.max.apply(Math, values);
             domain = [min, max];
@@ -19780,12 +19696,13 @@ var LineChartComponent = (function (_super) {
                 .padding(0.1)
                 .domain(domain);
         }
-        return scale;
+        return this.roundDomains ? scale.nice() : scale;
     };
     LineChartComponent.prototype.getYScale = function (domain, height) {
-        return d3_1.default.scaleLinear()
+        var scale = d3_1.default.scaleLinear()
             .range([height, 0])
             .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
     };
     LineChartComponent.prototype.getScaleType = function (values) {
         var date = true;
@@ -19964,6 +19881,10 @@ var LineChartComponent = (function (_super) {
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], LineChartComponent.prototype, "roundDomains", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], LineChartComponent.prototype, "activate", void 0);
@@ -19981,6 +19902,8 @@ var LineChartComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-line-chart',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"line-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-line-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [activeEntries]=\"activeEntries\"\n              [scaleType]=\"scaleType\"\n              [curve]=\"curve\"\n              [rangeFillOpacity]=\"rangeFillOpacity\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              [activeEntries]=\"activeEntries\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [scaleType]=\"scaleType\"\n        [legend]=\"legend\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-line-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -20057,7 +19980,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
 var common_1 = __webpack_require__("./node_modules/@angular/common/index.js");
 var d3_1 = __webpack_require__("./src/d3.ts");
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 var id_1 = __webpack_require__("./src/utils/id.ts");
 var sort_1 = __webpack_require__("./src/utils/sort.ts");
 var LineSeriesComponent = (function () {
@@ -20084,7 +20006,7 @@ var LineSeriesComponent = (function () {
             var label = d.name;
             var value;
             if (_this.scaleType === 'time') {
-                value = _this.xScale(moment(label).toDate());
+                value = _this.xScale(label);
             }
             else if (_this.scaleType === 'linear') {
                 value = _this.xScale(Number(label));
@@ -20104,7 +20026,7 @@ var LineSeriesComponent = (function () {
             var label = d.name;
             var value;
             if (_this.scaleType === 'time') {
-                value = _this.xScale(moment(label).toDate());
+                value = _this.xScale(label);
             }
             else if (_this.scaleType === 'linear') {
                 value = _this.xScale(Number(label));
@@ -20211,7 +20133,7 @@ var LineSeriesComponent = (function () {
     LineSeriesComponent = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-line-series]',
-            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />    \n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [common_1.Location])
@@ -20336,33 +20258,6 @@ var NgxChartsModule = (function () {
 }());
 exports.NgxChartsModule = NgxChartsModule;
 
-
-/***/ }),
-
-/***/ "./src/ngx-charts.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js?sourceMap!./node_modules/postcss-loader/index.js?sourceMap!./node_modules/sass-loader/index.js?sourceMap!./src/ngx-charts.scss");
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__("./node_modules/style-loader/addStyles.js")(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./ngx-charts.scss", function() {
-			var newContent = require("!!./../node_modules/css-loader/index.js?sourceMap!./../node_modules/postcss-loader/index.js?sourceMap!./../node_modules/sass-loader/index.js?sourceMap!./ngx-charts.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
 
 /***/ }),
 
@@ -20682,6 +20577,8 @@ var NumberCardComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-number-card',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [__webpack_require__("./src/common/base-chart.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -20738,6 +20635,13 @@ var NumberCardModule = (function () {
 }());
 exports.NumberCardModule = NumberCardModule;
 
+
+/***/ }),
+
+/***/ "./src/pie-chart/advanced-pie-chart.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
 
 /***/ }),
 
@@ -20832,7 +20736,12 @@ var AdvancedPieChartComponent = (function (_super) {
     AdvancedPieChartComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-advanced-pie-chart',
-            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <ngx-charts-chart\n          [view]=\"[width, height]\"\n          [showLegend]=\"false\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g ngx-charts-pie-series\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </ngx-charts-chart>\n      </div>\n      <div \n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\">\n        <ngx-charts-advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </ngx-charts-advanced-legend>\n      </div>\n    </div>\n  ",
+            template: "\n    <div\n      [style.width.px]=\"width\"\n      [style.height.px]=\"height\">\n      <div class=\"advanced-pie chart\"\n        [style.width.px]=\"dims.width\"\n        [style.height.px]=\"dims.height\">\n        <ngx-charts-chart\n          [view]=\"[width, height]\"\n          [showLegend]=\"false\">\n          <svg:g\n            [attr.transform]=\"transform\"\n            class=\"pie chart\">\n            <svg:g ngx-charts-pie-series\n              [colors]=\"colors\"\n              [showLabels]=\"labels\"\n              [series]=\"results\"\n              [innerRadius]=\"innerRadius\"\n              [activeEntries]=\"activeEntries\"\n              [outerRadius]=\"outerRadius\"\n              [gradient]=\"gradient\"\n              (select)=\"onClick($event)\">\n            </svg:g>\n          </svg:g>\n        </ngx-charts-chart>\n      </div>\n      <div\n        class=\"advanced-pie-legend-wrapper\"\n        [style.width.px]=\"width - dims.width\"\n        [style.height.px]=\"height\">\n        <ngx-charts-advanced-legend\n          [data]=\"results\"\n          [colors]=\"colors\"\n          [width]=\"width - dims.width - margin[1]\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\">\n        </ngx-charts-advanced-legend>\n      </div>\n    </div>\n  ",
+            styles: [
+                __webpack_require__("./src/common/base-chart.component.scss"),
+                __webpack_require__("./src/pie-chart/advanced-pie-chart.component.scss")
+            ],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -21057,6 +20966,13 @@ exports.PieArcComponent = PieArcComponent;
 
 /***/ }),
 
+/***/ "./src/pie-chart/pie-chart.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
 /***/ "./src/pie-chart/pie-chart.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21224,6 +21140,11 @@ var PieChartComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-pie-chart',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [
+                __webpack_require__("./src/common/base-chart.component.scss"),
+                __webpack_require__("./src/pie-chart/pie-chart.component.scss")
+            ],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -21400,6 +21321,13 @@ exports.PieGridSeriesComponent = PieGridSeriesComponent;
 
 /***/ }),
 
+/***/ "./src/pie-chart/pie-grid.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
 /***/ "./src/pie-chart/pie-grid.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21511,6 +21439,11 @@ var PieGridComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-pie-grid',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [
+                __webpack_require__("./src/common/base-chart.component.scss"),
+                __webpack_require__("./src/pie-chart/pie-grid.component.scss")
+            ],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
         }), 
         __metadata('design:paramtypes', [])
@@ -22025,7 +21958,9 @@ var InjectionService = (function () {
         componentRef.onDestroy(function () {
             appRef.detachView(componentRef.hostView);
         });
-        location.appendChild(componentRootNode);
+        // use the renderer to append the element for univseral support
+        var renderer = componentRef.instance.renderer;
+        renderer.projectNodes(location, [componentRootNode]);
         return componentRef;
     };
     InjectionService = __decorate([
@@ -22250,6 +22185,13 @@ exports.TreeMapCellComponent = TreeMapCellComponent;
 
 /***/ }),
 
+/***/ "./src/tree-map/tree-map.component.scss":
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Missing binding /Users/marjan/Projects/ng2d3/node_modules/node-sass/vendor/darwin-x64-48/binding.node\nNode Sass could not find a binding for your current environment: OS X 64-bit with Node.js 6.x\n\nFound bindings for the following environments:\n  - OS X 64-bit with Node.js 7.x\n\nThis usually happens because your environment has changed since running `npm install`.\nRun `npm rebuild node-sass` to build the binding for your current environment.\n    at module.exports (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/binding.js:15:13)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/node-sass/lib/index.js:14:35)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at Object.<anonymous> (/Users/marjan/Projects/ng2d3/node_modules/sass-loader/index.js:4:12)\n    at Module._compile (module.js:541:32)\n    at Object.Module._extensions..js (module.js:550:10)\n    at Module.load (module.js:458:32)\n    at tryModuleLoad (module.js:417:12)\n    at Function.Module._load (module.js:409:3)\n    at Module.require (module.js:468:17)\n    at require (internal/module.js:20:19)\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:141:35\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:359:11\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:165:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:160:10)\n    at /Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:168:18\n    at loadLoader (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:164:2)\n    at runLoaders (/Users/marjan/Projects/ng2d3/node_modules/loader-runner/lib/LoaderRunner.js:357:2)\n    at NormalModule.doBuild (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:129:2)\n    at NormalModule.build (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModule.js:180:15)\n    at Compilation.buildModule (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:127:10)\n    at factoryCallback (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:304:11)\n    at NormalModuleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:213:24)\n    at iteratorFactory (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:209:12)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3025:16\n    at eachOfArrayLike (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:941:9)\n    at eachOf (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:991:5)\n    at Object.eachLimit (/Users/marjan/Projects/ng2d3/node_modules/webpack/node_modules/async/dist/async.js:3089:3)\n    at Compilation.addModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:190:9)\n    at Compilation.processModuleDependencies (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:175:8)\n    at Compilation.moduleReady (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:418:10)\n    at moduleFactory.create (/Users/marjan/Projects/ng2d3/node_modules/webpack/lib/Compilation.js:398:17)\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:242:4\n    at /Users/marjan/Projects/ng2d3/node_modules/webpack/lib/NormalModuleFactory.js:93:13");
+
+/***/ }),
+
 /***/ "./src/tree-map/tree-map.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -22337,6 +22279,8 @@ var TreeMapComponent = (function (_super) {
         core_1.Component({
             selector: 'ngx-charts-tree-map',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g ngx-charts-tree-map-cell-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            styles: [__webpack_require__("./src/tree-map/tree-map.component.scss")],
+            encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
         }), 
         __metadata('design:paramtypes', [])
@@ -22624,12 +22568,29 @@ exports.id = id;
 
 /***/ }),
 
+/***/ "./src/utils/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/utils/id.ts"));
+__export(__webpack_require__("./src/utils/color-sets.ts"));
+__export(__webpack_require__("./src/utils/sort.ts"));
+__export(__webpack_require__("./src/utils/throttle.ts"));
+__export(__webpack_require__("./src/utils/color-utils.ts"));
+__export(__webpack_require__("./src/utils/visibility-observer.ts"));
+
+
+/***/ }),
+
 /***/ "./src/utils/sort.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var moment = __webpack_require__("./node_modules/moment/moment.js");
 function sortLinear(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
@@ -22661,19 +22622,19 @@ exports.sortByDomain = sortByDomain;
 function sortByTime(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
-        var aDate = moment(a[property]);
-        var bDate = moment(b[property]);
+        var aDate = a[property].getTime();
+        var bDate = b[property].getTime();
         if (direction === 'asc') {
-            if (aDate.isAfter(bDate))
+            if (aDate > bDate)
                 return 1;
-            if (bDate.isAfter(aDate))
+            if (bDate > aDate)
                 return -1;
             return 0;
         }
         else {
-            if (aDate.isAfter(bDate))
+            if (aDate > bDate)
                 return -1;
-            if (bDate.isAfter(aDate))
+            if (bDate > aDate)
                 return 1;
             return 0;
         }
@@ -22761,6 +22722,72 @@ function throttleable(duration, options) {
     };
 }
 exports.throttleable = throttleable;
+
+
+/***/ }),
+
+/***/ "./src/utils/visibility-observer.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__("./node_modules/@angular/core/index.js");
+/**
+ * Visibility Observer
+ */
+var VisibilityObserver = (function () {
+    function VisibilityObserver(element, zone) {
+        this.element = element;
+        this.zone = zone;
+        this.visible = new core_1.EventEmitter();
+        this.isVisible = false;
+        this.runCheck();
+    }
+    VisibilityObserver.prototype.destroy = function () {
+        clearTimeout(this.timeout);
+    };
+    VisibilityObserver.prototype.onVisibilityChange = function () {
+        var _this = this;
+        // trigger zone recalc for columns
+        this.zone.run(function () {
+            _this.isVisible = true;
+            _this.visible.emit(true);
+        });
+    };
+    VisibilityObserver.prototype.runCheck = function () {
+        var _this = this;
+        var check = function () {
+            // https://davidwalsh.name/offsetheight-visibility
+            var _a = _this.element.nativeElement, offsetHeight = _a.offsetHeight, offsetWidth = _a.offsetWidth;
+            if (offsetHeight && offsetWidth) {
+                clearTimeout(_this.timeout);
+                _this.onVisibilityChange();
+            }
+            else {
+                clearTimeout(_this.timeout);
+                _this.zone.runOutsideAngular(function () {
+                    _this.timeout = setTimeout(function () { return check(); }, 50);
+                });
+            }
+        };
+        setTimeout(function () { return check(); });
+    };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], VisibilityObserver.prototype, "visible", void 0);
+    return VisibilityObserver;
+}());
+exports.VisibilityObserver = VisibilityObserver;
 
 
 /***/ })
