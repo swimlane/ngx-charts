@@ -27,7 +27,6 @@ declare var _default: {
     selectAll: any;
     scaleBand: any;
     scaleLinear: any;
-    scaleLog: any;
     scaleOrdinal: any;
     scalePoint: any;
     scaleQuantile: any;
