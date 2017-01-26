@@ -132,7 +132,7 @@ export class CircleSeriesComponent implements OnChanges {
         const gradientFill = `url(${pageUrl}#${gradientId})`;
 
         let color;
-        if (this.colors.xScaleType === 'linear') {
+        if (this.colors.scaleType === 'linear') {
           if (this.type === 'standard') {
             color = this.colors.getColor(value);
           } else {

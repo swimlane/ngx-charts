@@ -137,7 +137,7 @@ export class SeriesHorizontal implements OnChanges {
         value = (offset1 - offset0).toFixed(2) + '%';
       }
 
-      if (this.colors.xScaleType === 'ordinal') {
+      if (this.colors.scaleType === 'ordinal') {
         bar.color = this.colors.getColor(label);
       } else {
         if (this.type === 'standard') {

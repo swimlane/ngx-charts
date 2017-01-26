@@ -28,10 +28,10 @@ var LineSeriesComponent = (function () {
             .x(function (d) {
             var label = d.name;
             var value;
-            if (_this.xScaleType === 'time') {
+            if (_this.scaleType === 'time') {
                 value = _this.xScale(moment(label).toDate());
             }
-            else if (_this.xScaleType === 'linear') {
+            else if (_this.scaleType === 'linear') {
                 value = _this.xScale(Number(label));
             }
             else {
@@ -48,10 +48,10 @@ var LineSeriesComponent = (function () {
             .x(function (d) {
             var label = d.name;
             var value;
-            if (_this.xScaleType === 'time') {
+            if (_this.scaleType === 'time') {
                 value = _this.xScale(moment(label).toDate());
             }
-            else if (_this.xScaleType === 'linear') {
+            else if (_this.scaleType === 'linear') {
                 value = _this.xScale(Number(label));
             }
             else {
@@ -76,10 +76,10 @@ var LineSeriesComponent = (function () {
             .curve(this.curve);
     };
     LineSeriesComponent.prototype.sortData = function (data) {
-        if (this.xScaleType === 'linear') {
+        if (this.scaleType === 'linear') {
             data = sort_1.sortLinear(data, 'name');
         }
-        else if (this.xScaleType === 'time') {
+        else if (this.scaleType === 'time') {
             data = sort_1.sortByTime(data, 'name');
         }
         else {
