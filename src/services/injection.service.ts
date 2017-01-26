@@ -122,7 +122,7 @@ export class InjectionService {
     location: Element = this.getRootViewContainerNode()): ComponentRef<any> {
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
-    const componentRef = componentFactory.create(this.injector);
+    const componentRef: any = componentFactory.create(this.injector);
     const appRef: any = this.applicationRef;
     const componentRootNode = this.getComponentRootNode(componentRef);
 
