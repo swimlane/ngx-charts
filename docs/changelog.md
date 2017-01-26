@@ -1,8 +1,10 @@
 # Changelog
 
 ## Master
-- Chore: Make tooltip injector use Renderer
-- Chore: Update Angular to 2.4.5
+- Bug: Fixed css scope
+- Bug: Fixed vertical alignment issue of advanced pie legend
+- Chore: Made tooltip injector use Renderer
+- Chore: Updated Angular to 2.4.5
 
 ## 4.0.1
 - Bug: Fixed regressions from CSS refactor
