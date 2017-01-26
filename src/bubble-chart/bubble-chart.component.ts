@@ -1,0 +1,286 @@
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
+
+import { BaseChartComponent } from '../common/base-chart.component';
+
+import d3 from '../d3';
+import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+import { ColorHelper } from '../common/color.helper';
+
+@Component({
+  selector: 'ngx-charts-bubble-chart',
+  template: `
+    <ngx-charts-chart
+      [view]="[width, height]"
+      [showLegend]="legend"
+      [legendOptions]="legendOptions"
+      (legendLabelClick)="onClick($event)"
+      (legendLabelActivate)="onActivate($event)"
+      (legendLabelDeactivate)="onDeactivate($event)">
+
+      <svg:defs>
+        <svg:clipPath [attr.id]="clipPathId">
+          <svg:rect
+            [attr.width]="dims.width + 10"
+            [attr.height]="dims.height + 10"
+            [attr.transform]="'translate(-5, -5)'"/>
+        </svg:clipPath>
+      </svg:defs>
+
+      <svg:g [attr.transform]="transform" class="bubble-chart chart">
+      
+        <svg:g ngx-charts-x-axis
+          *ngIf="xAxis"
+          [showGridLines]="showGridLines"
+          [dims]="dims"
+          [xScale]="xScale"
+          [showLabel]="showXAxisLabel"
+          [labelText]="xAxisLabel"
+          [tickFormatting]="xAxisTickFormatting"
+          (dimensionsChanged)="updateXAxisHeight($event)"/>
+          
+        <svg:g ngx-charts-y-axis
+          *ngIf="yAxis"
+          [showGridLines]="showGridLines"
+          [yScale]="yScale"
+          [dims]="dims"
+          [showLabel]="showYAxisLabel"
+          [labelText]="yAxisLabel"
+          [tickFormatting]="yAxisTickFormatting"
+          (dimensionsChanged)="updateYAxisWidth($event)"/>
+          
+        <svg:g *ngFor="let series of data">
+          <svg:g ngx-charts-bubble-series
+            [xScale]="xScale"
+            [yScale]="yScale"
+            [rScale]="rScale"
+            [scaleType]="scaleType"
+            [type]="'standard'"
+            [colors]="colors"
+            [data]="series"
+            [activeEntries]="activeEntries" />
+        </svg:g>
+        
+      </svg:g>
+    </ngx-charts-chart>`
+})
+export class BubbleChartComponent extends BaseChartComponent {
+  @Input() view: number[] = [400, 400];
+
+  @Input() results;
+  @Input() showGridLines: boolean = true;
+  @Input() legend = false;
+  @Input() xAxis: boolean = true;
+  @Input() yAxis: boolean = true;
+  @Input() showXAxisLabel;
+  @Input() showYAxisLabel;
+  @Input() xAxisLabel;
+  @Input() yAxisLabel;
+  @Input() xAxisTickFormatting: any;
+  @Input() yAxisTickFormatting: any;
+  @Input() roundDomains: boolean = false;
+  @Input() maxRadius = 10;
+  @Input() minRadius = 3;
+
+  @Output() activate: EventEmitter<any> = new EventEmitter();
+  @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  dims: ViewDimensions;
+  colors: ColorHelper;
+  scaleType = 'linear';
+  margin = [10, 20, 10, 20];
+  data: any;
+  seriesDomain: any;
+  legendOptions: any;
+  transform: string;
+  
+  xDomain: number[];
+  yDomain: number[];
+  rDomain: number[];
+  
+  yScale: any;
+  xScale: any;
+  rScale: any;
+
+  xAxisHeight: number = 0;
+  yAxisWidth: number = 0;
+
+  activeEntries: any[] = [];
+
+  // line, area
+  autoScale = true;
+  
+  ngOnInit() {
+    // this.update();
+  }
+  
+  update(): void {
+    super.update();
+ 
+    this.zone.run(() => {
+      this.dims = calculateViewDimensions({
+        width: this.width,
+        height: this.height,
+        margins: this.margin,
+        showXAxis: this.xAxis,
+        showYAxis: this.yAxis,
+        xAxisHeight: this.xAxisHeight,
+        yAxisWidth: this.yAxisWidth,
+        showXLabel: this.showXAxisLabel,
+        showYLabel: this.showYAxisLabel,
+        showLegend: this.legend
+      });
+
+      this.seriesDomain = this.results.map(d => d.name);
+    
+      this.transform = `translate(${ this.dims.xOffset },${ this.margin[0] })`;
+      this.schemeType = 'ordinal';
+      this.colors = new ColorHelper(this.scheme, this.schemeType, this.seriesDomain, this.customColors);
+      
+      this.data = this.results;
+
+      this.rDomain = this.getRDomain();
+      this.rScale = this.getRScale(this.rDomain, [this.minRadius, this.maxRadius]);
+
+      this.xDomain = this.getXDomain();
+      this.yDomain = this.getYDomain();
+
+      this.xScale = this.getXScale(this.xDomain, this.dims.width);
+      this.yScale = this.getYScale(this.yDomain, this.dims.height);
+      
+      this.legendOptions = this.getLegendOptions();
+    });
+  }
+  
+  onSelect(event) {
+    console.log(event);
+  }
+  
+  getYScale(domain, height): any {
+    // padding to keep bubbles inside range
+    const P = (domain[1] - domain[0]) / height * this.maxRadius;
+
+    const scale = d3.scaleLinear()
+      .range([height, 0])
+      .domain([domain[0] - P, domain[1] + P]);
+
+    return this.roundDomains ? scale.nice() : scale;
+  }
+  
+  getXScale(domain, width): any {
+    // padding to keep bubbles inside range
+    const P = (domain[1] - domain[0]) / width * this.maxRadius;
+
+    const scale = d3.scaleLinear()
+      .range([0, width])
+      .domain([domain[0] - P, domain[1] + P]);
+      
+    return this.roundDomains ? scale.nice() : scale;
+  }
+
+  getRScale(domain, range): any {
+    const scale = d3.scaleLinear()
+      .range(range)
+      .domain(domain);
+
+    return this.roundDomains ? scale.nice() : scale;
+  }
+  
+  getLegendOptions() {
+    const opts = {
+      scaleType: this.schemeType,
+      colors: undefined,
+      domain: []
+    };
+    if (opts.scaleType === 'ordinal') {
+      opts.domain = this.seriesDomain;
+      opts.colors = this.colors;
+    } else {
+      opts.domain = this.yDomain;
+      opts.colors = this.colors.scale;
+    }
+    return opts;
+  }
+  
+  getXDomain(): any[] {
+    let min = Infinity;
+    let max = -Infinity;
+
+    for (const results of this.results) {
+      for (const d of results.series){
+        const value = Number(d.x);
+        min = Math.min(min, value);
+        max = Math.max(max, value);
+      }
+    }
+
+    return [min, max];
+  }
+  
+  getYDomain(): any[] {
+    let min = Infinity;
+    let max = -Infinity;
+
+    for (const results of this.results) {
+      for (const d of results.series){
+        const value = Number(d.y);
+        min = Math.min(min, value);
+        max = Math.max(max, value);
+      }
+    }
+
+    return [min, max];
+  }
+
+  getRDomain(): any[] {
+    let min = Infinity;
+    let max = -Infinity;
+
+    for (const results of this.results) {
+      for (const d of results.series){
+        const value = Number(d.r);
+        min = Math.min(min, value);
+        max = Math.max(max, value);
+      }
+    }
+
+    return [min, max];
+  }
+
+  updateYAxisWidth({ width }): void {
+    this.yAxisWidth = width;
+    this.update();
+  }
+
+  updateXAxisHeight({ height }): void {
+    this.xAxisHeight = height;
+    this.update();
+  }
+
+  onActivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
+    if (idx > -1) {
+      return;
+    }
+
+    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activate.emit({ value: item, entries: this.activeEntries });
+  }
+
+  onDeactivate(item) {
+    const idx = this.activeEntries.findIndex(d => {
+      return d.name === item.name && d.value === item.value;
+    });
+
+    this.activeEntries.splice(idx, 1);
+    this.activeEntries = [...this.activeEntries];
+
+    this.deactivate.emit({ value: item, entries: this.activeEntries });
+  }
+}

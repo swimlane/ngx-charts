@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import d3 from '../src/d3';
 
 import { colorSets } from '../src/utils/color-sets';
-import { single, multi, countries, generateData, generateGraph } from './data';
+import { single, multi, countries, generateData, generateGraph, generateBubbleData } from './data';
 import chartGroups from './chartTypes';
 
 @Component({
@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   dateData: any[];
   dateDataWithRange: any[];
   graph: { links: any[], nodes: any[] };
+  bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
 
@@ -97,7 +98,8 @@ export class AppComponent implements OnInit {
       countries,
       chartGroups,
       colorSets,
-      graph: generateGraph(50)
+      graph: generateGraph(50),
+      bubble: generateBubbleData()
     });
 
     this.dateData = generateData(5, false);
@@ -175,10 +177,14 @@ export class AppComponent implements OnInit {
         name: country,
         series: [{
           name: '2010',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          value: Math.floor(1000000 + Math.random() * 20000000),
+          lifeExpectancy: Math.floor(30 + Math.random() * 70),
+          population: Math.floor(30 + Math.random() * 20),
         }, {
           name: '2011',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          value: Math.floor(1000000 + Math.random() * 20000000),
+          lifeExpectancy: Math.floor(30 + Math.random() * 70),
+          population: Math.floor(30 + Math.random() * 20),
         }]
       };
 
@@ -193,6 +199,9 @@ export class AppComponent implements OnInit {
       };
       const links = [ ...this.graph.links, link];
       this.graph = { links, nodes };
+
+      // bubble
+      this.bubble = generateBubbleData(this.multi);
     }
   }
 
@@ -218,6 +227,14 @@ export class AppComponent implements OnInit {
       this.chartType === 'area-chart' ||
       this.chartType === 'area-chart-normalized' ||
       this.chartType === 'area-chart-stacked';
+
+    if (this.chartType === 'bubble-chart') {
+      this.xAxisLabel = 'GDP Per Capita';
+      this.yAxisLabel = 'Life expectancy [years]';
+    } else {
+      this.yAxisLabel = 'GDP Per Capita';
+      this.xAxisLabel = 'Country';
+    }
 
     for (const group of this.chartGroups) {
       for (const chart of group.charts) {

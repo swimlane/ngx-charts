@@ -1,105 +1,148 @@
-export let single = [
+export const single = [
   {
     name: 'Germany',
-    value: 46268
+    region: 'Europe and Central Asia',
+    value: 40632,
+    lifeExpectancy: 80.3,
+    population: 80.4
   },
   {
     name: 'USA',
-    value: 53041
+    region: 'America',
+    value: 49737,
+    lifeExpectancy: 78.8,
+    population: 310
   },
   {
     name: 'France',
-    value: 42503
+    region: 'Europe and Central Asia',
+    value: 36745,
+    lifeExpectancy: 81.4,
+    population: 63
   },
   {
     name: 'United Kingdom',
-    value: 41787
+    region: 'Europe and Central Asia',
+    value: 36240,
+    lifeExpectancy: 80.2,
+    population: 62.7
   },
   {
     name: 'Spain',
-    value: 29863
+    region: 'Europe and Central Asia',
+    value: 33000,
+    lifeExpectancy: 81.8,
+    population: 46.6
   },
   {
     name: 'Italy',
-    value: 35925
+    region: 'Europe and Central Asia',
+    value: 35800,
+    lifeExpectancy: 81.9,
+    population: 59.6
   }
 ];
 
-export let multi = [
+export const multi = [
   {
     name: 'Germany',
+    region: 'Europe and Central Asia',
     series: [
       {
         name: '2010',
-        value: 46268
+        value: 40632,
+        lifeExpectancy: 80.3,
+        population: 80.4
       },
       {
         name: '2000',
-        value: 23685
+        value: 36953,
+        lifeExpectancy: 80.3,
+        population: 78
       },
       {
         name: '1990',
-        value: 22219
+        value: 31476,
+        lifeExpectancy: 75.4,
+        population: 79
       }
     ]
   },
-
   {
     name: 'USA',
+    region: 'America',
     series: [
       {
         name: '2010',
-        value: 48377
+        value: 49737,
+        lifeExpectancy: 78.8,
+        population: 310
       },
       {
         name: '2000',
-        value: 36449
+        value: 45986,
+        lifeExpectancy: 76.9,
+        population: 283
       },
       {
         name: '1990',
-        value: 23954
+        value: 3706,
+        lifeExpectancy: 75.4,
+        population: 253
       }
     ]
   },
-
   {
     name: 'France',
+    region: 'Europe and Central Asia',
     series: [
       {
         name: '2010',
-        value: 42503
+        value: 36745,
+        lifeExpectancy: 81.4,
+        population: 63
       },
       {
         name: '2000',
-        value: 22466
+        value: 34774,
+        lifeExpectancy: 79.1,
+        population: 59.4
       },
       {
         name: '1990',
-        value: 21833
+        value: 29476,
+        lifeExpectancy: 77.2,
+        population: 56.9
       }
     ]
   },
-
   {
     name: 'United Kingdom',
+    region: 'Europe and Central Asia',
     series: [
       {
         name: '2010',
-        value: 38363
+        value: 36240,
+        lifeExpectancy: 80.2,
+        population: 62.7
       },
       {
         name: '2000',
-        value: 26296
+        value: 32543,
+        lifeExpectancy: 77.8,
+        population: 58.9
       },
       {
         name: '1990',
-        value: 18632
+        value: 26424,
+        lifeExpectancy: 75.7,
+        population: 57.1
       }
     ]
   }
 ];
 
-export let countries = [
+export const countries = [
   'Abkhazia', 'Afghanistan', 'Akrotiri and Dhekelia', 'Aland', 'Albania',
   'Algeria', 'American Samoa', 'Andorra', 'Angola', 'Anguilla',
   'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Ascension Island',
@@ -208,4 +251,16 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean):
     results.push(series);
   }
   return results;
+}
+
+export function generateBubbleData(multiData = multi) {
+  return multiData.map(({name, series}) => ({
+    name,
+    series: series.map(s => ({
+      name: s.name,
+      x: s.value,
+      y: s.lifeExpectancy,
+      r: s.population
+    }))
+  }));
 }
