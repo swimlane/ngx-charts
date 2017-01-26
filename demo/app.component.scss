@@ -150,10 +150,13 @@ main {
       }
 
       small {
-        display: block;
         font-size: .5em;
         line-height: 1.3em;
         color: white;
+
+        &.subtitle {
+          display: block;
+        }
       }
     }
 
