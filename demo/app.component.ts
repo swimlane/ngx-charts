@@ -13,6 +13,8 @@ import chartGroups from './chartTypes';
 })
 export class AppComponent implements OnInit {
 
+  version = APP_VERSION;
+
   theme = 'dark';
   chartType = 'bar-vertical';
   chartGroups: any[];
