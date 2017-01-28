@@ -1,7 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
-var moment = require('moment');
 var label_helper_1 = require('../common/label.helper');
 var id_1 = require('../utils/id');
 var CircleSeriesComponent = (function () {
@@ -29,7 +28,7 @@ var CircleSeriesComponent = (function () {
             if (value) {
                 var cx = void 0;
                 if (_this.scaleType === 'time') {
-                    cx = _this.xScale(moment(label).toDate());
+                    cx = _this.xScale(label);
                 }
                 else if (_this.scaleType === 'linear') {
                     cx = _this.xScale(Number(label));

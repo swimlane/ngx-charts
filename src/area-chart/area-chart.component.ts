@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewEncapsulation,
   HostListener,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -115,7 +116,9 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AreaChartComponent extends BaseChartComponent {
 
@@ -136,6 +139,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -288,27 +292,25 @@ export class AreaChartComponent extends BaseChartComponent {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = d3.scaleTime()
-        .range([0, width])
-        .domain(domain);
+      scale = d3.scaleTime();
     } else if (this.scaleType === 'linear') {
-      scale = d3.scaleLinear()
-        .range([0, width])
-        .domain(domain);
+      scale = d3.scaleLinear();
     } else if (this.scaleType === 'ordinal') {
       scale = d3.scalePoint()
-        .range([0, width])
-        .padding(0.1)
-        .domain(domain);
+        .padding(0.1);
     }
 
-    return scale;
+    scale.range([0, width])
+        .domain(domain);
+
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getYScale(domain, height) {
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([height, 0])
       .domain(domain);
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getScaleType(values): string {

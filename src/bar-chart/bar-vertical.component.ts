@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  ViewEncapsulation,
   Output,
   EventEmitter,
   ChangeDetectionStrategy
@@ -56,7 +57,9 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BarVerticalComponent extends BaseChartComponent {
 
@@ -73,6 +76,8 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() barPadding = 8;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -118,8 +123,8 @@ export class BarVerticalComponent extends BaseChartComponent {
   }
 
   getXScale() {
-    const spacing = 0.2;
     this.xDomain = this.getXDomain();
+    const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
@@ -128,9 +133,10 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   getYScale() {
     this.yDomain = this.getYDomain();
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.yDomain);
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getXDomain(): any[] {

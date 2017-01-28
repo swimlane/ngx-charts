@@ -6,6 +6,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     legend: boolean;
     explodeSlices: boolean;
     doughnut: boolean;
+    arcWidth: number;
     gradient: boolean;
     activeEntries: any[];
     select: EventEmitter<{}>;

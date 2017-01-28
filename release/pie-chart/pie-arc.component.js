@@ -51,7 +51,9 @@ var PieArcComponent = (function () {
             .cornerRadius(this.cornerRadius);
     };
     PieArcComponent.prototype.loadAnimation = function () {
-        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        var node = d3_1.default.select(this.element)
+            .selectAll('.arc')
+            .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
         var arc = this.calculateArc();
         node
             .transition()
@@ -76,7 +78,9 @@ var PieArcComponent = (function () {
         });
     };
     PieArcComponent.prototype.updateAnimation = function () {
-        var node = d3_1.default.select(this.element).selectAll('.arc').data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
+        var node = d3_1.default.select(this.element)
+            .selectAll('.arc')
+            .data([{ startAngle: this.startAngle, endAngle: this.endAngle }]);
         var arc = this.calculateArc();
         node
             .transition().duration(750)

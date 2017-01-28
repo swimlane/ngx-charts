@@ -17,13 +17,14 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../src/common/charts/chart.component';
-import * as import14 from '../../../src/common/tooltip/tooltip.service';
-import * as import15 from '../common/charts/chart.component.ngfactory';
-import * as import16 from '../../../src/number-card/card-series.component';
-import * as import17 from './card-series.component.ngfactory';
-import * as import18 from '../../../src/services/injection.service';
+import * as import12 from '../common/base-chart.component.scss.ngstyle';
+import * as import13 from '@angular/core/src/linker/view_container';
+import * as import14 from '../../../src/common/charts/chart.component';
+import * as import15 from '../../../src/common/tooltip/tooltip.service';
+import * as import16 from '../common/charts/chart.component.ngfactory';
+import * as import17 from '../../../src/number-card/card-series.component';
+import * as import18 from './card-series.component.ngfactory';
+import * as import19 from '../../../src/services/injection.service';
 export class Wrapper_NumberCardComponent {
   /*private*/ _eventHandler:Function;
   context:import0.NumberCardComponent;
@@ -145,21 +146,21 @@ class View_NumberCardComponent_Host0 extends import2.AppView<any> {
   }
 }
 export const NumberCardComponentNgFactory:import8.ComponentFactory<import0.NumberCardComponent> = new import8.ComponentFactory<import0.NumberCardComponent>('ngx-charts-number-card',View_NumberCardComponent_Host0,import0.NumberCardComponent);
-const styles_NumberCardComponent:any[] = ([] as any[]);
+const styles_NumberCardComponent:any[] = [import12.styles];
 var renderType_NumberCardComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_NumberCardComponent,{});
 export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCardComponent> {
   _text_0:any;
   _el_1:any;
-  /*private*/ _vc_1:import12.ViewContainer;
-  compView_1:import2.AppView<import13.ChartComponent>;
-  _TooltipService_1_5:import14.TooltipService;
-  _ChartComponent_1_6:import15.Wrapper_ChartComponent;
+  /*private*/ _vc_1:import13.ViewContainer;
+  compView_1:import2.AppView<import14.ChartComponent>;
+  _TooltipService_1_5:import15.TooltipService;
+  _ChartComponent_1_6:import16.Wrapper_ChartComponent;
   _text_2:any;
   _el_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import16.CardSeriesComponent>;
-  _CardSeriesComponent_5_3:import17.Wrapper_CardSeriesComponent;
+  compView_5:import2.AppView<import17.CardSeriesComponent>;
+  _CardSeriesComponent_5_3:import18.Wrapper_CardSeriesComponent;
   _text_6:any;
   _text_7:any;
   _text_8:any;
@@ -180,16 +181,16 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'ngx-charts-chart',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this._vc_1 = new import12.ViewContainer(1,(null as any),this,this._el_1);
-    this.compView_1 = new import15.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
-    this._TooltipService_1_5 = new import14.TooltipService(this.parentView.injectorGet(import18.InjectionService,this.parentIndex));
-    this._ChartComponent_1_6 = new import15.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
+    this._vc_1 = new import13.ViewContainer(1,(null as any),this,this._el_1);
+    this.compView_1 = new import16.View_ChartComponent0(this.viewUtils,this,1,this._el_1);
+    this._TooltipService_1_5 = new import15.TooltipService(this.parentView.injectorGet(import19.InjectionService,this.parentIndex));
+    this._ChartComponent_1_6 = new import16.Wrapper_ChartComponent(this._vc_1.vcRef,this._TooltipService_1_5);
     this._text_2 = this.renderer.createText((null as any),'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','number-card chart'),(null as any));
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'ngx-charts-card-series',''),(null as any));
-    this.compView_5 = new import17.View_CardSeriesComponent0(this.viewUtils,this,5,this._el_5);
-    this._CardSeriesComponent_5_3 = new import17.Wrapper_CardSeriesComponent(this.parentView.injectorGet(import10.NgZone,this.parentIndex));
+    this.compView_5 = new import18.View_CardSeriesComponent0(this.viewUtils,this,5,this._el_5);
+    this._CardSeriesComponent_5_3 = new import18.Wrapper_CardSeriesComponent(this.parentView.injectorGet(import10.NgZone,this.parentIndex));
     this.compView_5.create(this._CardSeriesComponent_5_3.context);
     this._text_6 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_7 = this.renderer.createText((null as any),'\n    ',(null as any));
@@ -212,9 +213,9 @@ export class View_NumberCardComponent0 extends import2.AppView<import0.NumberCar
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import16.CardSeriesComponent) && (5 === requestNodeIndex))) { return this._CardSeriesComponent_5_3.context; }
-    if (((token === import14.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
-    if (((token === import13.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import17.CardSeriesComponent) && (5 === requestNodeIndex))) { return this._CardSeriesComponent_5_3.context; }
+    if (((token === import15.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._TooltipService_1_5; }
+    if (((token === import14.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 7)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {

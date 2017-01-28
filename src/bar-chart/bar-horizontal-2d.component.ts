@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  ViewEncapsulation,
   Output,
   EventEmitter,
   trigger,
@@ -74,6 +75,8 @@ import d3 from '../d3';
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('animationState', [
       transition('* => void', [
@@ -101,6 +104,9 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() groupPadding = 16;
+  @Input() barPadding = 8;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -155,7 +161,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getGroupScale() {
-    const spacing = 0.2;
+    const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
 
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
@@ -165,18 +171,21 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getInnerScale() {
-    const spacing = 0.2;
+    const height = this.groupScale.bandwidth();
+    const spacing = this.innerDomain.length / (height / this.barPadding + 1);
 
     return d3.scaleBand()
-      .rangeRound([0, this.groupScale.bandwidth()])
+      .rangeRound([0, height])
       .paddingInner(spacing)
       .domain(this.innerDomain);
   }
 
   getValueScale() {
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valuesDomain);
+    
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getGroupDomain(): any[] {

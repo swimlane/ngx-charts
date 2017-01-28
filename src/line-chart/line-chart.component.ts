@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewEncapsulation,
   HostListener,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -114,6 +115,8 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LineChartComponent extends BaseChartComponent {
@@ -135,6 +138,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() rangeFillOpacity: number;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -311,13 +315,15 @@ export class LineChartComponent extends BaseChartComponent {
         .domain(domain);
     }
 
-    return scale;
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getYScale(domain, height): any {
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([height, 0])
       .domain(domain);
+
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   getScaleType(values): string {

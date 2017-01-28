@@ -357,7 +357,7 @@ class View_SeriesHorizontal1 extends import2.AppView<any> {
     return result;
   }
 }
-var renderType_SeriesHorizontal:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesHorizontal,{animationState: SeriesHorizontal_animationState_factory});
+var renderType_SeriesHorizontal:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_SeriesHorizontal,{'animationState': SeriesHorizontal_animationState_factory});
 export class View_SeriesHorizontal0 extends import2.AppView<import0.SeriesHorizontal> {
   _text_0:any;
   _anchor_1:any;

@@ -489,7 +489,7 @@ class View_CircleSeriesComponent1 extends import2.AppView<any> {
     return (null as any);
   }
 }
-var renderType_CircleSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeriesComponent,{animationState: CircleSeriesComponent_animationState_factory});
+var renderType_CircleSeriesComponent:import4.RenderComponentType = import3.createRenderComponentType('',0,import5.ViewEncapsulation.None,styles_CircleSeriesComponent,{'animationState': CircleSeriesComponent_animationState_factory});
 export class View_CircleSeriesComponent0 extends import2.AppView<import0.CircleSeriesComponent> {
   _text_0:any;
   _anchor_1:any;

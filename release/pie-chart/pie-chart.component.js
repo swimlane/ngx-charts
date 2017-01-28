@@ -16,6 +16,7 @@ var PieChartComponent = (function (_super) {
         this.legend = false;
         this.explodeSlices = false;
         this.doughnut = false;
+        this.arcWidth = 0.25;
         this.activeEntries = [];
         this.select = new core_1.EventEmitter();
         this.activate = new core_1.EventEmitter();
@@ -49,7 +50,7 @@ var PieChartComponent = (function (_super) {
             }
             _this.innerRadius = 0;
             if (_this.doughnut) {
-                _this.innerRadius = _this.outerRadius * 0.75;
+                _this.innerRadius = _this.outerRadius * (1 - _this.arcWidth);
             }
             _this.domain = _this.getDomain();
             // sort data according to domain
@@ -111,6 +112,11 @@ var PieChartComponent = (function (_super) {
         { type: core_1.Component, args: [{
                     selector: 'ngx-charts-pie-chart',
                     template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    styleUrls: [
+                        '../common/base-chart.component.scss',
+                        './pie-chart.component.scss'
+                    ],
+                    encapsulation: core_1.ViewEncapsulation.None,
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -121,6 +127,7 @@ var PieChartComponent = (function (_super) {
         'legend': [{ type: core_1.Input },],
         'explodeSlices': [{ type: core_1.Input },],
         'doughnut': [{ type: core_1.Input },],
+        'arcWidth': [{ type: core_1.Input },],
         'gradient': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
         'select': [{ type: core_1.Output },],

@@ -3,6 +3,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewEncapsulation,
   trigger,
   style,
   transition,
@@ -67,6 +68,8 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
@@ -95,6 +98,8 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() barPadding = 8;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -175,7 +180,8 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   getXScale() {
-    const spacing = 0.1;
+    const spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
+
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
@@ -183,9 +189,10 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   getYScale() {
-    return d3.scaleLinear()
+    const scale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.valueDomain);
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   groupTransform(group) {

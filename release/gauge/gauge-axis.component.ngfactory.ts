@@ -33,6 +33,7 @@ export class Wrapper_GaugeAxisComponent {
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
+  /*private*/ _expr_8:any;
   constructor() {
     this._changed = false;
     this._changes = {};
@@ -45,6 +46,7 @@ export class Wrapper_GaugeAxisComponent {
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
+    this._expr_8 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -112,6 +114,14 @@ export class Wrapper_GaugeAxisComponent {
       this.context.valueScale = currValue;
       this._changes['valueScale'] = new import1.SimpleChange(this._expr_7,currValue);
       this._expr_7 = currValue;
+    }
+  }
+  check_tickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
+      this._changed = true;
+      this.context.tickFormatting = currValue;
+      this._changes['tickFormatting'] = new import1.SimpleChange(this._expr_8,currValue);
+      this._expr_8 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {

@@ -1,5 +1,4 @@
 "use strict";
-var moment = require('moment');
 function sortLinear(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
@@ -31,19 +30,19 @@ exports.sortByDomain = sortByDomain;
 function sortByTime(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
-        var aDate = moment(a[property]);
-        var bDate = moment(b[property]);
+        var aDate = a[property].getTime();
+        var bDate = b[property].getTime();
         if (direction === 'asc') {
-            if (aDate.isAfter(bDate))
+            if (aDate > bDate)
                 return 1;
-            if (bDate.isAfter(aDate))
+            if (bDate > aDate)
                 return -1;
             return 0;
         }
         else {
-            if (aDate.isAfter(bDate))
+            if (aDate > bDate)
                 return -1;
-            if (bDate.isAfter(aDate))
+            if (bDate > aDate)
                 return 1;
             return 0;
         }

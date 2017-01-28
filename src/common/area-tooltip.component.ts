@@ -7,7 +7,11 @@ import {
   ViewChildren,
   SimpleChanges,
   Renderer,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  trigger,
+  style,
+  transition,
+  animate
 } from '@angular/core';
 
 @Component({
@@ -40,6 +44,7 @@ import {
         </xhtml:div>
       </xhtml:template>
       <svg:rect
+        [@animationState]="anchorOpacity[i] !== 0 ? 'active' : 'inactive'"
         class="tooltip-anchor"
         [attr.x]="tooltipArea.tooltipAnchor"
         y="0"
@@ -56,7 +61,23 @@ import {
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition('inactive => active', [
+        style({
+          opacity: 0,
+        }),
+        animate(250, style({opacity: 0.7}))
+      ]),
+      transition('active => inactive', [
+        style({
+          opacity: 0.7,
+        }),
+        animate(250, style({opacity: 0}))
+      ])
+    ])
+  ]
 })
 export class AreaTooltip implements OnChanges {
   tooltipAreas: any[];

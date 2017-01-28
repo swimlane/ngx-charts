@@ -362,7 +362,7 @@ class View_ChartComponent2 extends import2.AppView<any> {
     return result;
   }
 }
-var renderType_ChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',1,import5.ViewEncapsulation.None,styles_ChartComponent,{animationState: ChartComponent_animationState_factory});
+var renderType_ChartComponent:import4.RenderComponentType = import3.createRenderComponentType('',1,import5.ViewEncapsulation.None,styles_ChartComponent,{'animationState': ChartComponent_animationState_factory});
 export class View_ChartComponent0 extends import2.AppView<import0.ChartComponent> {
   _text_0:any;
   _el_1:any;

@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   Output,
+  ViewEncapsulation,
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -37,6 +38,11 @@ import { BaseChartComponent } from '../common/base-chart.component';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './pie-chart.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChartComponent extends BaseChartComponent {

@@ -14,6 +14,7 @@
 | xAxis               | boolean  | false         | show or hide the x axis                                                                                         |
 | yAxis               | boolean  | false         | show or hide the y axis                                                                                         |
 | showGridLines       | boolean  | true          | show or hide the grid lines                                                                                     |
+| roundDomains        | boolean  | false         | round domains for aligned gridlines                                                                                                                                                                                                       |
 | showXAxisLabel      | boolean  | false         | show or hide the x axis label                                                                                   |
 | showYAxisLabel      | boolean  | false         | show or hide the y axis label                                                                                   |
 | xAxisLabel          | string   |               | the x axis label text                                                                                           |
@@ -22,6 +23,8 @@
 | xAxisTickFormatting | function |               | the x axis tick formatting                                                                                      |
 | yAxisTickFormatting | function |               | the y axis tick formatting                                                                                      |
 | activeEntries       | object[] | []            | elements to highlight                                                                                           |
+| barPadding          | number   | 8             | padding between bars in px                                                                                      |  
+| groupPadding        | number   | 16            | padding between groups in px                                                                                    |  
 
 # Outputs
 | Property   | Description                              |

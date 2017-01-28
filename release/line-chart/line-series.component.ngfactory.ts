@@ -225,7 +225,7 @@ export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSerie
     this.compView_8 = new import13.View_AreaComponent0(this.viewUtils,this,8,this._el_8);
     this._AreaComponent_8_3 = new import13.Wrapper_AreaComponent(new import16.ElementRef(this._el_8),this.parentView.injectorGet(import9.Location,this.parentIndex));
     this.compView_8.create(this._AreaComponent_8_3.context);
-    this._text_9 = this.renderer.createText(this._el_1,'    \n      ',(null as any));
+    this._text_9 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray4(4,'class','line-series','ngx-charts-line',''),(null as any));
     this.compView_10 = new import15.View_LineComponent0(this.viewUtils,this,10,this._el_10);
     this._LineComponent_10_3 = new import15.Wrapper_LineComponent(new import16.ElementRef(this._el_10));

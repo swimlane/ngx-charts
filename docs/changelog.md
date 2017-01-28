@@ -1,5 +1,29 @@
 # Changelog
 
+## Master
+- Bug: Fixed css scope
+- Bug: Fixed vertical alignment issue of advanced pie legend
+- Chore: Made tooltip injector use Renderer
+- Chore: Updated Angular to 2.4.5
+
+## 4.0.1
+- Bug: Fixed regressions from CSS refactor
+
+## 4.0.0
+- Enhancement: Added `barPadding` and `groupPadding` properties to bar-charts (#185)
+- Enhancement: Added `innerPadding` property for heatmap, to control padding between cells (#165)
+- Enhancement: Added `axisTickformatting` property to bar, area, line, gauge and heatmap charts, for custom axis tick formatting (#167)
+- Enhancement: Added `innerRadius` property to pie charts, Fixes #104 (#162)
+- Enhancement: Added `roundDomain` property to all charts with axis, allowing it to round the domains to nice values (#183)
+- Enhancement: Added animation to areaTooltip anchors (#183)
+- Bug: Charts not rendering if container is hidden by default (#170)
+- Bug: Use old parent dimensions if new dimensions are undefined or 0
+- Bug: Fixed axis number formatting (#171)
+- Chore: Updated dependencies
+- Chore: Replaced moment with d3 timeFormat. Moment.js is no longer a dependency (#173)
+- Chore: Only include used Rxjs operators to decrease file size (#169)
+- Chore: Refactored CSS and embedded it into the chart components. No need to import the css file separately any longer. [Breaking change]
+
 ## 3.1.2
 - Enhancement: Add `ngx-charts-outer` class to `ngx-charts` inner element
 - Chore: Update dependencies

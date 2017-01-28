@@ -1,5 +1,6 @@
 import {
   Component,
+  ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
 
@@ -65,6 +66,11 @@ import { formatLabel } from '../common/label.helper';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './pie-grid.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieGridComponent extends BaseChartComponent {
@@ -155,7 +161,7 @@ export class PieGridComponent extends BaseChartComponent {
   getTotal(): any {
     return this.results
       .map(d => d.value)
-      .reduce((sum, d) => { return sum + d; }, 0);
+      .reduce((sum, d) => sum + d, 0);
   }
 
   onClick(data): void {

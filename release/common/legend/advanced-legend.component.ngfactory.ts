@@ -14,16 +14,17 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '../../../../src/common/count/count.directive';
-import * as import10 from '../count/count.directive.ngfactory';
-import * as import11 from '@angular/core/src/linker/view_container';
-import * as import12 from '@angular/core/src/zone/ng_zone';
-import * as import13 from '@angular/core/src/linker/element_ref';
-import * as import14 from '@angular/core/src/security';
-import * as import15 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import16 from '@angular/core/src/linker/template_ref';
-import * as import17 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import18 from '@angular/common/src/directives/ng_for';
+import * as import9 from './advanced-legend.component.scss.ngstyle';
+import * as import10 from '../../../../src/common/count/count.directive';
+import * as import11 from '../count/count.directive.ngfactory';
+import * as import12 from '@angular/core/src/linker/view_container';
+import * as import13 from '@angular/core/src/zone/ng_zone';
+import * as import14 from '@angular/core/src/linker/element_ref';
+import * as import15 from '@angular/core/src/security';
+import * as import16 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import17 from '@angular/core/src/linker/template_ref';
+import * as import18 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import19 from '@angular/common/src/directives/ng_for';
 export class Wrapper_AdvancedLegendComponent {
   /*private*/ _eventHandler:Function;
   context:import0.AdvancedLegendComponent;
@@ -129,7 +130,7 @@ class View_AdvancedLegendComponent_Host0 extends import2.AppView<any> {
   }
 }
 export const AdvancedLegendComponentNgFactory:import8.ComponentFactory<import0.AdvancedLegendComponent> = new import8.ComponentFactory<import0.AdvancedLegendComponent>('ngx-charts-advanced-legend',View_AdvancedLegendComponent_Host0,import0.AdvancedLegendComponent);
-const styles_AdvancedLegendComponent:any[] = ([] as any[]);
+const styles_AdvancedLegendComponent:any[] = [import9.styles];
 class View_AdvancedLegendComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
@@ -137,21 +138,21 @@ class View_AdvancedLegendComponent1 extends import2.AppView<any> {
   _text_3:any;
   _text_4:any;
   _el_5:any;
-  compView_5:import2.AppView<import9.CountUpDirective>;
-  _CountUpDirective_5_3:import10.Wrapper_CountUpDirective;
+  compView_5:import2.AppView<import10.CountUpDirective>;
+  _CountUpDirective_5_3:import11.Wrapper_CountUpDirective;
   _text_6:any;
   _text_7:any;
   _el_8:any;
   _text_9:any;
   _text_10:any;
   _el_11:any;
-  compView_11:import2.AppView<import9.CountUpDirective>;
-  _CountUpDirective_11_3:import10.Wrapper_CountUpDirective;
+  compView_11:import2.AppView<import10.CountUpDirective>;
+  _CountUpDirective_11_3:import11.Wrapper_CountUpDirective;
   _text_12:any;
   _text_13:any;
   /*private*/ _expr_18:any;
   /*private*/ _expr_19:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import11.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
     super(View_AdvancedLegendComponent1,renderType_AdvancedLegendComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
     this._expr_18 = import1.UNINITIALIZED;
     this._expr_19 = import1.UNINITIALIZED;
@@ -163,8 +164,8 @@ class View_AdvancedLegendComponent1 extends import2.AppView<any> {
     this._text_3 = this.renderer.createText(this._el_2,'\n            ',(null as any));
     this._text_4 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray4(4,'class','item-value','ngx-charts-count-up',''),(null as any));
-    this.compView_5 = new import10.View_CountUpDirective0(this.viewUtils,this,5,this._el_5);
-    this._CountUpDirective_5_3 = new import10.Wrapper_CountUpDirective(this.compView_5.ref,this.parentView.parentView.injectorGet(import12.NgZone,this.parentView.parentIndex),new import13.ElementRef(this._el_5));
+    this.compView_5 = new import11.View_CountUpDirective0(this.viewUtils,this,5,this._el_5);
+    this._CountUpDirective_5_3 = new import11.Wrapper_CountUpDirective(this.compView_5.ref,this.parentView.parentView.injectorGet(import13.NgZone,this.parentView.parentIndex),new import14.ElementRef(this._el_5));
     this._text_6 = this.renderer.createText((null as any),'\n            ',(null as any));
     this.compView_5.create(this._CountUpDirective_5_3.context);
     this._text_7 = this.renderer.createText(this._el_0,'\n            ',(null as any));
@@ -172,8 +173,8 @@ class View_AdvancedLegendComponent1 extends import2.AppView<any> {
     this._text_9 = this.renderer.createText(this._el_8,'',(null as any));
     this._text_10 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_11 = import3.createRenderElement(this.renderer,this._el_0,'div',new import3.InlineArray4(4,'class','item-percent','ngx-charts-count-up',''),(null as any));
-    this.compView_11 = new import10.View_CountUpDirective0(this.viewUtils,this,11,this._el_11);
-    this._CountUpDirective_11_3 = new import10.Wrapper_CountUpDirective(this.compView_11.ref,this.parentView.parentView.injectorGet(import12.NgZone,this.parentView.parentIndex),new import13.ElementRef(this._el_11));
+    this.compView_11 = new import11.View_CountUpDirective0(this.viewUtils,this,11,this._el_11);
+    this._CountUpDirective_11_3 = new import11.Wrapper_CountUpDirective(this.compView_11.ref,this.parentView.parentView.injectorGet(import13.NgZone,this.parentView.parentIndex),new import14.ElementRef(this._el_11));
     this._text_12 = this.renderer.createText((null as any),'\n            ',(null as any));
     this.compView_11.create(this._CountUpDirective_11_3.context);
     this._text_13 = this.renderer.createText(this._el_0,'\n          ',(null as any));
@@ -198,8 +199,8 @@ class View_AdvancedLegendComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import9.CountUpDirective) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._CountUpDirective_5_3.context; }
-    if (((token === import9.CountUpDirective) && ((11 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._CountUpDirective_11_3.context; }
+    if (((token === import10.CountUpDirective) && ((5 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._CountUpDirective_5_3.context; }
+    if (((token === import10.CountUpDirective) && ((11 <= requestNodeIndex) && (requestNodeIndex <= 12)))) { return this._CountUpDirective_11_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -213,7 +214,7 @@ class View_AdvancedLegendComponent1 extends import2.AppView<any> {
     this._CountUpDirective_11_3.ngDoCheck(this,this._el_11,throwOnChange);
     const currVal_18:any = this.context.$implicit.color;
     if (import3.checkBinding(throwOnChange,this._expr_18,currVal_18)) {
-      this.renderer.setElementStyle(this._el_2,'background',((this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_18) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_18).toString()));
+      this.renderer.setElementStyle(this._el_2,'background',((this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_18) == null)? (null as any): this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_18).toString()));
       this._expr_18 = currVal_18;
     }
     const currVal_19:any = import3.inlineInterpolate(1,'',this.context.$implicit.label,'');
@@ -261,8 +262,8 @@ export class View_AdvancedLegendComponent0 extends import2.AppView<import0.Advan
   _el_1:any;
   _text_2:any;
   _el_3:any;
-  compView_3:import2.AppView<import9.CountUpDirective>;
-  _CountUpDirective_3_3:import10.Wrapper_CountUpDirective;
+  compView_3:import2.AppView<import10.CountUpDirective>;
+  _CountUpDirective_3_3:import11.Wrapper_CountUpDirective;
   _text_4:any;
   _text_5:any;
   _el_6:any;
@@ -273,9 +274,9 @@ export class View_AdvancedLegendComponent0 extends import2.AppView<import0.Advan
   _el_11:any;
   _text_12:any;
   _anchor_13:any;
-  /*private*/ _vc_13:import11.ViewContainer;
+  /*private*/ _vc_13:import12.ViewContainer;
   _TemplateRef_13_5:any;
-  _NgFor_13_6:import15.Wrapper_NgFor;
+  _NgFor_13_6:import16.Wrapper_NgFor;
   _text_14:any;
   _text_15:any;
   _text_16:any;
@@ -293,8 +294,8 @@ export class View_AdvancedLegendComponent0 extends import2.AppView<import0.Advan
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,'div',new import3.InlineArray2(2,'class','advanced-pie-legend'),(null as any));
     this._text_2 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_3 = import3.createRenderElement(this.renderer,this._el_1,'div',new import3.InlineArray4(4,'class','total-value','ngx-charts-count-up',''),(null as any));
-    this.compView_3 = new import10.View_CountUpDirective0(this.viewUtils,this,3,this._el_3);
-    this._CountUpDirective_3_3 = new import10.Wrapper_CountUpDirective(this.compView_3.ref,this.parentView.injectorGet(import12.NgZone,this.parentIndex),new import13.ElementRef(this._el_3));
+    this.compView_3 = new import11.View_CountUpDirective0(this.viewUtils,this,3,this._el_3);
+    this._CountUpDirective_3_3 = new import11.Wrapper_CountUpDirective(this.compView_3.ref,this.parentView.injectorGet(import13.NgZone,this.parentIndex),new import14.ElementRef(this._el_3));
     this._text_4 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_3.create(this._CountUpDirective_3_3.context);
     this._text_5 = this.renderer.createText(this._el_1,'\n      ',(null as any));
@@ -306,9 +307,9 @@ export class View_AdvancedLegendComponent0 extends import2.AppView<import0.Advan
     this._el_11 = import3.createRenderElement(this.renderer,this._el_9,'div',new import3.InlineArray2(2,'class','legend-items'),(null as any));
     this._text_12 = this.renderer.createText(this._el_11,'\n          ',(null as any));
     this._anchor_13 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
-    this._vc_13 = new import11.ViewContainer(13,11,this,this._anchor_13);
-    this._TemplateRef_13_5 = new import16.TemplateRef_(this,13,this._anchor_13);
-    this._NgFor_13_6 = new import15.Wrapper_NgFor(this._vc_13.vcRef,this._TemplateRef_13_5,this.parentView.injectorGet(import17.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_13 = new import12.ViewContainer(13,11,this,this._anchor_13);
+    this._TemplateRef_13_5 = new import17.TemplateRef_(this,13,this._anchor_13);
+    this._NgFor_13_6 = new import16.Wrapper_NgFor(this._vc_13.vcRef,this._TemplateRef_13_5,this.parentView.injectorGet(import18.IterableDiffers,this.parentIndex),this.ref);
     this._text_14 = this.renderer.createText(this._el_11,'\n        ',(null as any));
     this._text_15 = this.renderer.createText(this._el_9,'\n      ',(null as any));
     this._text_16 = this.renderer.createText(this._el_1,'\n    ',(null as any));
@@ -337,9 +338,9 @@ export class View_AdvancedLegendComponent0 extends import2.AppView<import0.Advan
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import9.CountUpDirective) && ((3 <= requestNodeIndex) && (requestNodeIndex <= 4)))) { return this._CountUpDirective_3_3.context; }
-    if (((token === import16.TemplateRef) && (13 === requestNodeIndex))) { return this._TemplateRef_13_5; }
-    if (((token === import18.NgFor) && (13 === requestNodeIndex))) { return this._NgFor_13_6.context; }
+    if (((token === import10.CountUpDirective) && ((3 <= requestNodeIndex) && (requestNodeIndex <= 4)))) { return this._CountUpDirective_3_3.context; }
+    if (((token === import17.TemplateRef) && (13 === requestNodeIndex))) { return this._TemplateRef_13_5; }
+    if (((token === import19.NgFor) && (13 === requestNodeIndex))) { return this._NgFor_13_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -354,7 +355,7 @@ export class View_AdvancedLegendComponent0 extends import2.AppView<import0.Advan
     this._vc_13.detectChangesInNestedViews(throwOnChange);
     const currVal_23:any = this.context.width;
     if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_23) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import14.SecurityContext.STYLE,currVal_23).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_23) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import15.SecurityContext.STYLE,currVal_23).toString() + 'px')));
       this._expr_23 = currVal_23;
     }
     const currVal_24:any = import3.inlineInterpolate(1,'\n        ',this.context.totalLabel,'\n      ');

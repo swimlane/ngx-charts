@@ -26,7 +26,7 @@ $shadow:
   display: block;
   font-weight: normal;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none !important;
 
   &.type-popover {
     background: $popover-bg;
@@ -103,6 +103,20 @@ $shadow:
    }
   }
 
+  .tooltip-label {
+    display: block;
+    line-height: 1em;
+    padding: 8px 5px 5px 5px;
+    font-size: 1em;
+  }
+
+  .tooltip-val {
+    display: block;
+    font-size: 1.3em;
+    line-height: 1em;
+    padding: 0 5px 8px 5px;
+  }
+
   .tooltip-caret {
     position: absolute;
     z-index: 5001;
@@ -133,4 +147,25 @@ $shadow:
     pointer-events: auto;
   }
 
+}
+
+.area-tooltip-container {
+  padding: 5px 0;
+  pointer-events: none;
+}
+
+
+.tooltip-item{
+  text-align: left;
+  line-height: 1.2em;
+  padding: 5px 0;
+
+  .tooltip-item-color {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+    color: #5b646b;
+    border-radius: 3px;
+  }
 }

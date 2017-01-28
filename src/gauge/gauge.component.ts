@@ -6,7 +6,8 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Output,
-  EventEmitter
+  EventEmitter,
+  ViewEncapsulation
 } from '@angular/core';
 
 import d3 from '../d3';
@@ -63,6 +64,11 @@ import { ColorHelper } from '../common/color.helper';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './gauge.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
@@ -239,7 +245,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getDisplayValue(): string {
-    const value = this.results.map(d => d.value).reduce((a, b) => { return a + b; }, 0);
+    const value = this.results.map(d => d.value).reduce((a, b) => a + b, 0);
     return value.toLocaleString();
   }
 

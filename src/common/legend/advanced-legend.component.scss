@@ -1,0 +1,67 @@
+.advanced-pie-legend {
+  float: left;
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%);
+
+  .total-value {
+    font-size: 36px
+  }
+
+  .total-label {
+    font-size: 24px;
+    margin-bottom: 19px;
+  }
+
+  .legend-items-container {
+    width: 100%;
+
+    .legend-items {
+      white-space: nowrap;
+      overflow: auto;
+
+      .legend-item {
+        margin-right: 20px;
+        display: inline-block;
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover {
+          color: #000;
+          -webkit-transition: 0.2s;
+          -moz-transition: 0.2s;
+          transition: 0.2s;
+        }
+
+        .item-value {
+          font-size: 24px;
+          margin-top: -6px;
+          margin-left: 11px;
+        }
+
+        .item-label {
+          font-size: 12px;
+          opacity: 0.7;
+          margin-left: 11px;
+          margin-top: -6px;
+        }
+
+        .item-percent {
+          font-size: 24px;
+          opacity: 0.7;
+          margin-left: 11px;
+        }
+
+        .item-color {
+          width: 4px;
+          height: 32px;
+          float: left;
+          margin-right: 7px;
+        }
+      }
+    }
+  }
+}

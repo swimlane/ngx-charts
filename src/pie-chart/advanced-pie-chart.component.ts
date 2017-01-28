@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewEncapsulation
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -38,9 +39,10 @@ import { BaseChartComponent } from '../common/base-chart.component';
           </svg:g>
         </ngx-charts-chart>
       </div>
-      <div 
+      <div
         class="advanced-pie-legend-wrapper"
-        [style.width.px]="width - dims.width">
+        [style.width.px]="width - dims.width"
+        [style.height.px]="height">
         <ngx-charts-advanced-legend
           [data]="results"
           [colors]="colors"
@@ -52,6 +54,11 @@ import { BaseChartComponent } from '../common/base-chart.component';
       </div>
     </div>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './advanced-pie-chart.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedPieChartComponent extends BaseChartComponent {

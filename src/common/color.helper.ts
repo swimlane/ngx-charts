@@ -56,7 +56,7 @@ export class ColorHelper {
       return (this.scale(valueScale(value)));
     } else {
       const formattedValue = value.toString();
-      let found: any = undefined; // todo type customColors
+      let found: any; // todo type customColors
       if (this.customColors && this.customColors.length > 0) {
         found = this.customColors.find((mapping) => {
           return mapping.name === formattedValue.toLowerCase();

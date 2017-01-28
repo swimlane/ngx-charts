@@ -15,14 +15,15 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/zone/ng_zone';
-import * as import10 from '../../../../src/common/legend/legend-entry.component';
-import * as import11 from './legend-entry.component.ngfactory';
-import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import14 from '@angular/core/src/linker/template_ref';
-import * as import15 from '@angular/core/src/change_detection/differs/iterable_differs';
-import * as import16 from '@angular/common/src/directives/ng_for';
-import * as import17 from '@angular/core/src/security';
+import * as import10 from './legend.component.scss.ngstyle';
+import * as import11 from '../../../../src/common/legend/legend-entry.component';
+import * as import12 from './legend-entry.component.ngfactory';
+import * as import13 from '@angular/core/src/linker/view_container';
+import * as import14 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
+import * as import15 from '@angular/core/src/linker/template_ref';
+import * as import16 from '@angular/core/src/change_detection/differs/iterable_differs';
+import * as import17 from '@angular/common/src/directives/ng_for';
+import * as import18 from '@angular/core/src/security';
 export class Wrapper_LegendComponent {
   /*private*/ _eventHandler:Function;
   context:import0.LegendComponent;
@@ -158,24 +159,24 @@ class View_LegendComponent_Host0 extends import2.AppView<any> {
   }
 }
 export const LegendComponentNgFactory:import8.ComponentFactory<import0.LegendComponent> = new import8.ComponentFactory<import0.LegendComponent>('ngx-charts-legend',View_LegendComponent_Host0,import0.LegendComponent);
-const styles_LegendComponent:any[] = ([] as any[]);
+const styles_LegendComponent:any[] = [import10.styles];
 class View_LegendComponent1 extends import2.AppView<any> {
   _el_0:any;
   _text_1:any;
   _el_2:any;
-  compView_2:import2.AppView<import10.LegendEntryComponent>;
-  _LegendEntryComponent_2_3:import11.Wrapper_LegendEntryComponent;
+  compView_2:import2.AppView<import11.LegendEntryComponent>;
+  _LegendEntryComponent_2_3:import12.Wrapper_LegendEntryComponent;
   _text_3:any;
   _text_4:any;
-  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import12.ViewContainer) {
+  constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any,declaredViewContainer:import13.ViewContainer) {
     super(View_LegendComponent1,renderType_LegendComponent,import6.ViewType.EMBEDDED,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways,declaredViewContainer);
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),'li',new import3.InlineArray2(2,'class','legend-label'),(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,'ngx-charts-legend-entry',import3.EMPTY_INLINE_ARRAY,(null as any));
-    this.compView_2 = new import11.View_LegendEntryComponent0(this.viewUtils,this,2,this._el_2);
-    this._LegendEntryComponent_2_3 = new import11.Wrapper_LegendEntryComponent();
+    this.compView_2 = new import12.View_LegendEntryComponent0(this.viewUtils,this,2,this._el_2);
+    this._LegendEntryComponent_2_3 = new import12.Wrapper_LegendEntryComponent();
     this._text_3 = this.renderer.createText((null as any),'\n            ',(null as any));
     this.compView_2.create(this._LegendEntryComponent_2_3.context);
     this._text_4 = this.renderer.createText(this._el_0,'\n          ',(null as any));
@@ -192,7 +193,7 @@ class View_LegendComponent1 extends import2.AppView<any> {
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import10.LegendEntryComponent) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._LegendEntryComponent_2_3.context; }
+    if (((token === import11.LegendEntryComponent) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 3)))) { return this._LegendEntryComponent_2_3.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -251,9 +252,9 @@ export class View_LegendComponent0 extends import2.AppView<import0.LegendCompone
   _el_13:any;
   _text_14:any;
   _anchor_15:any;
-  /*private*/ _vc_15:import12.ViewContainer;
+  /*private*/ _vc_15:import13.ViewContainer;
   _TemplateRef_15_5:any;
-  _NgFor_15_6:import13.Wrapper_NgFor;
+  _NgFor_15_6:import14.Wrapper_NgFor;
   _text_16:any;
   _text_17:any;
   _text_18:any;
@@ -285,9 +286,9 @@ export class View_LegendComponent0 extends import2.AppView<import0.LegendCompone
     this._el_13 = import3.createRenderElement(this.renderer,this._el_11,'ul',new import3.InlineArray2(2,'class','legend-labels'),(null as any));
     this._text_14 = this.renderer.createText(this._el_13,'\n          ',(null as any));
     this._anchor_15 = this.renderer.createTemplateAnchor(this._el_13,(null as any));
-    this._vc_15 = new import12.ViewContainer(15,13,this,this._anchor_15);
-    this._TemplateRef_15_5 = new import14.TemplateRef_(this,15,this._anchor_15);
-    this._NgFor_15_6 = new import13.Wrapper_NgFor(this._vc_15.vcRef,this._TemplateRef_15_5,this.parentView.injectorGet(import15.IterableDiffers,this.parentIndex),this.ref);
+    this._vc_15 = new import13.ViewContainer(15,13,this,this._anchor_15);
+    this._TemplateRef_15_5 = new import15.TemplateRef_(this,15,this._anchor_15);
+    this._NgFor_15_6 = new import14.Wrapper_NgFor(this._vc_15.vcRef,this._TemplateRef_15_5,this.parentView.injectorGet(import16.IterableDiffers,this.parentIndex),this.ref);
     this._text_16 = this.renderer.createText(this._el_13,'\n        ',(null as any));
     this._text_17 = this.renderer.createText(this._el_11,'\n      ',(null as any));
     this._text_18 = this.renderer.createText(this._el_1,'\n    ',(null as any));
@@ -318,8 +319,8 @@ export class View_LegendComponent0 extends import2.AppView<import0.LegendCompone
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import14.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
-    if (((token === import16.NgFor) && (15 === requestNodeIndex))) { return this._NgFor_15_6.context; }
+    if (((token === import15.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
+    if (((token === import17.NgFor) && (15 === requestNodeIndex))) { return this._NgFor_15_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
@@ -331,7 +332,7 @@ export class View_LegendComponent0 extends import2.AppView<import0.LegendCompone
     this._vc_15.detectChangesInNestedViews(throwOnChange);
     const currVal_23:any = this.context.width;
     if (import3.checkBinding(throwOnChange,this._expr_23,currVal_23)) {
-      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import17.SecurityContext.STYLE,currVal_23) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import17.SecurityContext.STYLE,currVal_23).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_1,'width',((this.viewUtils.sanitizer.sanitize(import18.SecurityContext.STYLE,currVal_23) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import18.SecurityContext.STYLE,currVal_23).toString() + 'px')));
       this._expr_23 = currVal_23;
     }
     const currVal_24:any = import3.inlineInterpolate(1,'',this.context.title,'');
@@ -341,7 +342,7 @@ export class View_LegendComponent0 extends import2.AppView<import0.LegendCompone
     }
     const currVal_25:any = (this.context.height - 45);
     if (import3.checkBinding(throwOnChange,this._expr_25,currVal_25)) {
-      this.renderer.setElementStyle(this._el_13,'max-height',((this.viewUtils.sanitizer.sanitize(import17.SecurityContext.STYLE,currVal_25) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import17.SecurityContext.STYLE,currVal_25).toString() + 'px')));
+      this.renderer.setElementStyle(this._el_13,'max-height',((this.viewUtils.sanitizer.sanitize(import18.SecurityContext.STYLE,currVal_25) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import18.SecurityContext.STYLE,currVal_25).toString() + 'px')));
       this._expr_25 = currVal_25;
     }
   }

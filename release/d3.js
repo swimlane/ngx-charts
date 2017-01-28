@@ -10,6 +10,8 @@ var scales = require('d3-scale');
 var selection = require('d3-selection');
 var shape = require('d3-shape');
 var hierarchy = require('d3-hierarchy');
+var tInterval = require('d3-time');
+var tFormat = require('d3-time-format');
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     arc: shape.arc,
@@ -45,6 +47,9 @@ exports.default = {
     scaleTime: scales.scaleTime,
     shape: shape,
     treemap: hierarchy.treemap,
-    stratify: hierarchy.stratify
+    stratify: hierarchy.stratify,
+    timeFormat: tFormat.timeFormat,
+    timeParse: tFormat.timeParse,
+    timeHour: tInterval.timeHour
 };
 //# sourceMappingURL=d3.js.map
