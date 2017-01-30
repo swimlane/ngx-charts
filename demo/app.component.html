@@ -186,6 +186,16 @@
         [gradient]="gradient"
         (select)="select($event)">
       </ngx-charts-pie-chart>
+      <ngx-charts-simple-pie-chart
+        *ngIf="chartType === 'simple-pie-chart'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        totalLabel="Total:"
+        [totalValue]="78"
+        (select)="select($event)">
+      </ngx-charts-simple-pie-chart>
       <ngx-charts-advanced-pie-chart
         *ngIf="chartType === 'advanced-pie-chart'"
         class="chart-container"
