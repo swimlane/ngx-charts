@@ -146,7 +146,7 @@ export class PieGridComponent extends BaseChartComponent {
         label: trimLabel(label),
         total: value,
         value,
-        percent: d3.format('.1p')(d.data.percent),
+        percent: d3.format('.1%')(d.data.percent),
         data: [d, {
           data: {
             other: true,
