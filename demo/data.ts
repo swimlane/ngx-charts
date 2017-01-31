@@ -1,32 +1,26 @@
 export const single = [
   {
     name: 'Germany',
-    region: 'Europe and Central Asia',
     value: 40632
   },
   {
     name: 'USA',
-    region: 'America',
     value: 49737
   },
   {
     name: 'France',
-    region: 'Europe and Central Asia',
     value: 36745
   },
   {
     name: 'United Kingdom',
-    region: 'Europe and Central Asia',
     value: 36240
   },
   {
     name: 'Spain',
-    region: 'Europe and Central Asia',
     value: 33000
   },
   {
     name: 'Italy',
-    region: 'Europe and Central Asia',
     value: 35800
   }
 ];
