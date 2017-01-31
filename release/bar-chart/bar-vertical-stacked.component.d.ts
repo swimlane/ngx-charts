@@ -1,4 +1,3 @@
-
 import { EventEmitter } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';

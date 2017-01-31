@@ -4,30 +4,40 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
-var d3_1 = require('../d3');
-var base_chart_component_1 = require('../common/base-chart.component');
-var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_helper_1 = require('../common/color.helper');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require("@angular/core");
+var d3_1 = require("../d3");
+var base_chart_component_1 = require("../common/base-chart.component");
+var view_dimensions_helper_1 = require("../common/view-dimensions.helper");
+var color_helper_1 = require("../common/color.helper");
 var GaugeComponent = (function (_super) {
     __extends(GaugeComponent, _super);
     function GaugeComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.min = 0;
-        this.max = 100;
-        this.bigSegments = 10;
-        this.smallSegments = 5;
-        this.showAxis = true;
-        this.startAngle = -120;
-        this.angleSpan = 240;
-        this.activeEntries = [];
-        this.activate = new core_1.EventEmitter();
-        this.deactivate = new core_1.EventEmitter();
-        this.resizeScale = 1;
-        this.rotation = '';
-        this.textTransform = 'scale(1, 1)';
-        this.cornerRadius = 10;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.legend = false;
+        _this.min = 0;
+        _this.max = 100;
+        _this.bigSegments = 10;
+        _this.smallSegments = 5;
+        _this.showAxis = true;
+        _this.startAngle = -120;
+        _this.angleSpan = 240;
+        _this.activeEntries = [];
+        _this.activate = new core_1.EventEmitter();
+        _this.deactivate = new core_1.EventEmitter();
+        _this.resizeScale = 1;
+        _this.rotation = '';
+        _this.textTransform = 'scale(1, 1)';
+        _this.cornerRadius = 10;
+        return _this;
     }
     GaugeComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -205,39 +215,83 @@ var GaugeComponent = (function (_super) {
         });
         return item !== undefined;
     };
-    GaugeComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ngx-charts-gauge',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            [isActive]=\"isActive(arc.valueArc.data)\"\n            (select)=\"onClick($event)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\"\n          [tickFormatting]=\"axisTickFormatting\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: [
-                        '../common/base-chart.component.scss',
-                        './gauge.component.scss'
-                    ],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    GaugeComponent.ctorParameters = function () { return []; };
-    GaugeComponent.propDecorators = {
-        'legend': [{ type: core_1.Input },],
-        'min': [{ type: core_1.Input },],
-        'max': [{ type: core_1.Input },],
-        'units': [{ type: core_1.Input },],
-        'bigSegments': [{ type: core_1.Input },],
-        'smallSegments': [{ type: core_1.Input },],
-        'results': [{ type: core_1.Input },],
-        'showAxis': [{ type: core_1.Input },],
-        'startAngle': [{ type: core_1.Input },],
-        'angleSpan': [{ type: core_1.Input },],
-        'activeEntries': [{ type: core_1.Input },],
-        'axisTickFormatting': [{ type: core_1.Input },],
-        'margin': [{ type: core_1.Input },],
-        'activate': [{ type: core_1.Output },],
-        'deactivate': [{ type: core_1.Output },],
-        'textEl': [{ type: core_1.ViewChild, args: ['textEl',] },],
-    };
     return GaugeComponent;
 }(base_chart_component_1.BaseChartComponent));
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], GaugeComponent.prototype, "legend", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], GaugeComponent.prototype, "min", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], GaugeComponent.prototype, "max", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], GaugeComponent.prototype, "units", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], GaugeComponent.prototype, "bigSegments", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], GaugeComponent.prototype, "smallSegments", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], GaugeComponent.prototype, "results", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], GaugeComponent.prototype, "showAxis", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], GaugeComponent.prototype, "startAngle", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], GaugeComponent.prototype, "angleSpan", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], GaugeComponent.prototype, "activeEntries", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], GaugeComponent.prototype, "axisTickFormatting", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], GaugeComponent.prototype, "margin", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], GaugeComponent.prototype, "activate", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], GaugeComponent.prototype, "deactivate", void 0);
+__decorate([
+    core_1.ViewChild('textEl'),
+    __metadata("design:type", core_1.ElementRef)
+], GaugeComponent.prototype, "textEl", void 0);
+GaugeComponent = __decorate([
+    core_1.Component({
+        selector: 'ngx-charts-gauge',
+        template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            [isActive]=\"isActive(arc.valueArc.data)\"\n            (select)=\"onClick($event)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\"\n          [tickFormatting]=\"axisTickFormatting\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+        styleUrls: [
+            '../common/base-chart.component.scss',
+            './gauge.component.scss'
+        ],
+        encapsulation: core_1.ViewEncapsulation.None,
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+    })
+], GaugeComponent);
 exports.GaugeComponent = GaugeComponent;
 //# sourceMappingURL=gauge.component.js.map

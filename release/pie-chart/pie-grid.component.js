@@ -4,19 +4,26 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
-var d3_1 = require('../d3');
-var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_helper_1 = require('../common/color.helper');
-var base_chart_component_1 = require('../common/base-chart.component');
-var trim_label_helper_1 = require('../common/trim-label.helper');
-var grid_layout_helper_1 = require('../common/grid-layout.helper');
-var label_helper_1 = require('../common/label.helper');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var core_1 = require("@angular/core");
+var d3_1 = require("../d3");
+var view_dimensions_helper_1 = require("../common/view-dimensions.helper");
+var color_helper_1 = require("../common/color.helper");
+var base_chart_component_1 = require("../common/base-chart.component");
+var trim_label_helper_1 = require("../common/trim-label.helper");
+var grid_layout_helper_1 = require("../common/grid-layout.helper");
+var label_helper_1 = require("../common/label.helper");
 var PieGridComponent = (function (_super) {
     __extends(PieGridComponent, _super);
     function PieGridComponent() {
-        _super.apply(this, arguments);
-        this.margin = [20, 20, 20, 20];
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.margin = [20, 20, 20, 20];
+        return _this;
     }
     PieGridComponent.prototype.update = function () {
         var _this = this;
@@ -92,21 +99,19 @@ var PieGridComponent = (function (_super) {
     PieGridComponent.prototype.setColors = function () {
         this.colorScale = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
-    PieGridComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ngx-charts-pie-grid',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: [
-                        '../common/base-chart.component.scss',
-                        './pie-grid.component.scss'
-                    ],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    PieGridComponent.ctorParameters = function () { return []; };
     return PieGridComponent;
 }(base_chart_component_1.BaseChartComponent));
+PieGridComponent = __decorate([
+    core_1.Component({
+        selector: 'ngx-charts-pie-grid',
+        template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+        styleUrls: [
+            '../common/base-chart.component.scss',
+            './pie-grid.component.scss'
+        ],
+        encapsulation: core_1.ViewEncapsulation.None,
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+    })
+], PieGridComponent);
 exports.PieGridComponent = PieGridComponent;
 //# sourceMappingURL=pie-grid.component.js.map

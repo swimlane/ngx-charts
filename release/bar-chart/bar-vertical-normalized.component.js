@@ -4,25 +4,35 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
-var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_helper_1 = require('../common/color.helper');
-var base_chart_component_1 = require('../common/base-chart.component');
-var d3_1 = require('../d3');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require("@angular/core");
+var view_dimensions_helper_1 = require("../common/view-dimensions.helper");
+var color_helper_1 = require("../common/color.helper");
+var base_chart_component_1 = require("../common/base-chart.component");
+var d3_1 = require("../d3");
 var BarVerticalNormalizedComponent = (function (_super) {
     __extends(BarVerticalNormalizedComponent, _super);
     function BarVerticalNormalizedComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new core_1.EventEmitter();
-        this.deactivate = new core_1.EventEmitter();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.legend = false;
+        _this.showGridLines = true;
+        _this.activeEntries = [];
+        _this.barPadding = 8;
+        _this.roundDomains = false;
+        _this.activate = new core_1.EventEmitter();
+        _this.deactivate = new core_1.EventEmitter();
+        _this.margin = [10, 20, 10, 20];
+        _this.xAxisHeight = 0;
+        _this.yAxisWidth = 0;
+        return _this;
     }
     BarVerticalNormalizedComponent.prototype.update = function () {
         var _this = this;
@@ -165,48 +175,95 @@ var BarVerticalNormalizedComponent = (function (_super) {
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
-    BarVerticalNormalizedComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'ngx-charts-bar-vertical-normalized',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: ['../common/base-chart.component.scss'],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        core_1.trigger('animationState', [
-                            core_1.transition('* => void', [
-                                core_1.style({
-                                    opacity: 1,
-                                    transform: '*',
-                                }),
-                                core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    BarVerticalNormalizedComponent.ctorParameters = function () { return []; };
-    BarVerticalNormalizedComponent.propDecorators = {
-        'legend': [{ type: core_1.Input },],
-        'xAxis': [{ type: core_1.Input },],
-        'yAxis': [{ type: core_1.Input },],
-        'showXAxisLabel': [{ type: core_1.Input },],
-        'showYAxisLabel': [{ type: core_1.Input },],
-        'xAxisLabel': [{ type: core_1.Input },],
-        'yAxisLabel': [{ type: core_1.Input },],
-        'gradient': [{ type: core_1.Input },],
-        'showGridLines': [{ type: core_1.Input },],
-        'activeEntries': [{ type: core_1.Input },],
-        'schemeType': [{ type: core_1.Input },],
-        'xAxisTickFormatting': [{ type: core_1.Input },],
-        'yAxisTickFormatting': [{ type: core_1.Input },],
-        'barPadding': [{ type: core_1.Input },],
-        'roundDomains': [{ type: core_1.Input },],
-        'activate': [{ type: core_1.Output },],
-        'deactivate': [{ type: core_1.Output },],
-    };
     return BarVerticalNormalizedComponent;
 }(base_chart_component_1.BaseChartComponent));
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "legend", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "xAxis", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "yAxis", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "showXAxisLabel", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "showYAxisLabel", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "xAxisLabel", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "yAxisLabel", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BarVerticalNormalizedComponent.prototype, "gradient", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BarVerticalNormalizedComponent.prototype, "showGridLines", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], BarVerticalNormalizedComponent.prototype, "activeEntries", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], BarVerticalNormalizedComponent.prototype, "schemeType", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarVerticalNormalizedComponent.prototype, "barPadding", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BarVerticalNormalizedComponent.prototype, "roundDomains", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], BarVerticalNormalizedComponent.prototype, "activate", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], BarVerticalNormalizedComponent.prototype, "deactivate", void 0);
+BarVerticalNormalizedComponent = __decorate([
+    core_1.Component({
+        selector: 'ngx-charts-bar-vertical-normalized',
+        template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g\n          *ngFor=\"let group of results; trackBy:trackBy\"\n          [@animationState]=\"'active'\"\n          [attr.transform]=\"groupTransform(group)\">\n          <svg:g ngx-charts-series-vertical\n            type=\"normalized\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [activeEntries]=\"activeEntries\"\n            [colors]=\"colors\"\n            [series]=\"group.series\"\n            [dims]=\"dims\"\n            [gradient]=\"gradient\"\n            [seriesName]=\"group.name\"\n            (select)=\"onClick($event, group)\"\n            (activate)=\"onActivate($event, group)\"\n            (deactivate)=\"onDeactivate($event, group)\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+        styleUrls: ['../common/base-chart.component.scss'],
+        encapsulation: core_1.ViewEncapsulation.None,
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        animations: [
+            core_1.trigger('animationState', [
+                core_1.transition('* => void', [
+                    core_1.style({
+                        opacity: 1,
+                        transform: '*',
+                    }),
+                    core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                ])
+            ])
+        ]
+    })
+], BarVerticalNormalizedComponent);
 exports.BarVerticalNormalizedComponent = BarVerticalNormalizedComponent;
 //# sourceMappingURL=bar-vertical-normalized.component.js.map

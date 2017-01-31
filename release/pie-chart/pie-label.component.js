@@ -1,7 +1,16 @@
 "use strict";
-var core_1 = require('@angular/core');
-var trim_label_helper_1 = require('../common/trim-label.helper');
-var d3_1 = require('../d3');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require("@angular/core");
+var trim_label_helper_1 = require("../common/trim-label.helper");
+var d3_1 = require("../d3");
 var PieLabelComponent = (function () {
     function PieLabelComponent(element) {
         this.element = element.nativeElement;
@@ -49,37 +58,53 @@ var PieLabelComponent = (function () {
             .transition()
             .style('stroke-dasharray', 'none');
     };
-    PieLabelComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'g[ngx-charts-pie-label]',
-                    template: "\n    <title>{{label}}</title>\n    <svg:text\n      [@animationState]=\"'active'\"\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [@animationState]=\"'active'\"\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        core_1.trigger('animationState', [
-                            core_1.transition('void => *', [
-                                core_1.style({
-                                    opacity: 0,
-                                }),
-                                core_1.animate('0.25s 1s', core_1.style({ opacity: 1 }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    PieLabelComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-    ]; };
-    PieLabelComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'radius': [{ type: core_1.Input },],
-        'label': [{ type: core_1.Input },],
-        'color': [{ type: core_1.Input },],
-        'max': [{ type: core_1.Input },],
-        'value': [{ type: core_1.Input },],
-        'explodeSlices': [{ type: core_1.Input },],
-    };
     return PieLabelComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], PieLabelComponent.prototype, "data", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], PieLabelComponent.prototype, "radius", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], PieLabelComponent.prototype, "label", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], PieLabelComponent.prototype, "color", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], PieLabelComponent.prototype, "max", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], PieLabelComponent.prototype, "value", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], PieLabelComponent.prototype, "explodeSlices", void 0);
+PieLabelComponent = __decorate([
+    core_1.Component({
+        selector: 'g[ngx-charts-pie-label]',
+        template: "\n    <title>{{label}}</title>\n    <svg:text\n      [@animationState]=\"'active'\"\n      class=\"pie-label\"\n      [attr.transform]=\"transform\"\n      dy=\".35em\"\n      [style.textAnchor]=\"textAnchor()\"\n      [style.shapeRendering]=\"'crispEdges'\"\n      [style.textTransform]=\"'uppercase'\">\n      {{trimLabel(label, 10)}}\n    </svg:text>\n    <svg:path\n      [@animationState]=\"'active'\"\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"line\"\n      [style.strokeDasharray]=\"2000\"\n      [style.strokeDashoffset]=\"0\">\n    </svg:path>\n  ",
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        animations: [
+            core_1.trigger('animationState', [
+                core_1.transition('void => *', [
+                    core_1.style({
+                        opacity: 0,
+                    }),
+                    core_1.animate('0.25s 1s', core_1.style({ opacity: 1 }))
+                ])
+            ])
+        ]
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], PieLabelComponent);
 exports.PieLabelComponent = PieLabelComponent;
 //# sourceMappingURL=pie-label.component.js.map

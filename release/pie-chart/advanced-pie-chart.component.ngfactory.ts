@@ -220,6 +220,7 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
   _arr_34:any;
   /*private*/ _expr_35:any;
   /*private*/ _expr_36:any;
+  /*private*/ _expr_37:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_AdvancedPieChartComponent0,renderType_AdvancedPieChartComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckOnce);
     this._expr_30 = import1.UNINITIALIZED;
@@ -235,6 +236,7 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
     });
     this._expr_35 = import1.UNINITIALIZED;
     this._expr_36 = import1.UNINITIALIZED;
+    this._expr_37 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -371,6 +373,11 @@ export class View_AdvancedPieChartComponent0 extends import2.AppView<import0.Adv
     if (import3.checkBinding(throwOnChange,this._expr_36,currVal_36)) {
       this.renderer.setElementStyle(this._el_15,'width',((this.viewUtils.sanitizer.sanitize(import23.SecurityContext.STYLE,currVal_36) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import23.SecurityContext.STYLE,currVal_36).toString() + 'px')));
       this._expr_36 = currVal_36;
+    }
+    const currVal_37:any = this.context.height;
+    if (import3.checkBinding(throwOnChange,this._expr_37,currVal_37)) {
+      this.renderer.setElementStyle(this._el_15,'height',((this.viewUtils.sanitizer.sanitize(import23.SecurityContext.STYLE,currVal_37) == null)? (null as any): (this.viewUtils.sanitizer.sanitize(import23.SecurityContext.STYLE,currVal_37).toString() + 'px')));
+      this._expr_37 = currVal_37;
     }
     this.compView_5.internalDetectChanges(throwOnChange);
     this.compView_9.internalDetectChanges(throwOnChange);
