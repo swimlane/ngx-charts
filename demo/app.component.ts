@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import d3 from '../src/d3';
 
 import { colorSets } from '../src/utils/color-sets';
-import { single, multi, countries, generateData, generateGraph, generateBubbleData } from './data';
+import { single, multi, countries, bubble, generateData, generateGraph } from './data';
 import chartGroups from './chartTypes';
 
 @Component({
@@ -101,7 +101,7 @@ export class AppComponent implements OnInit {
       chartGroups,
       colorSets,
       graph: generateGraph(50),
-      bubble: generateBubbleData()
+      bubble
     });
 
     this.dateData = generateData(5, false);
@@ -152,6 +152,12 @@ export class AppComponent implements OnInit {
         this.multi = [...this.multi];
       }
 
+      if (this.bubble.length > 1) {
+        const index = Math.floor(Math.random() * this.bubble.length);
+        this.bubble.splice(index, 1);
+        this.bubble = [...this.bubble];
+      }
+
       if (this.graph.nodes.length > 1) {
         const index = Math.floor(Math.random() * this.graph.nodes.length);
         const value = this.graph.nodes[index].value;
@@ -179,14 +185,10 @@ export class AppComponent implements OnInit {
         name: country,
         series: [{
           name: '2010',
-          value: Math.floor(1000000 + Math.random() * 20000000),
-          lifeExpectancy: Math.floor(30 + Math.random() * 70),
-          population: Math.floor(30 + Math.random() * 20),
+          value: Math.floor(1000000 + Math.random() * 20000000)
         }, {
           name: '2011',
-          value: Math.floor(1000000 + Math.random() * 20000000),
-          lifeExpectancy: Math.floor(30 + Math.random() * 70),
-          population: Math.floor(30 + Math.random() * 20),
+          value: Math.floor(1000000 + Math.random() * 20000000)
         }]
       };
 
@@ -203,7 +205,22 @@ export class AppComponent implements OnInit {
       this.graph = { links, nodes };
 
       // bubble
-      this.bubble = generateBubbleData(this.multi);
+      const bubbleEntry = {
+        name: country,
+        series: [{
+          name: '2010',
+          x: Math.floor(10000 + Math.random() * 20000),
+          y: Math.floor(30 + Math.random() * 70),
+          r: Math.floor(30 + Math.random() * 20),
+        }, {
+          name: '2011',
+          x: Math.floor(10000 + Math.random() * 20000),
+          y: Math.floor(30 + Math.random() * 70),
+          r: Math.floor(30 + Math.random() * 20),
+        }]
+      };
+
+      this.bubble = [...this.bubble, bubbleEntry];
     }
   }
 

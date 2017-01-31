@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import d3 from '../d3';
 import '../../config/testing-utils';
-import { generateBubbleData } from '../../demo/data';
+import { bubble } from '../../demo/data';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { BubbleChartModule } from './bubble-chart.module';
@@ -14,7 +14,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
   template: ''
 })
 class TestComponent {
-  results: any[] = generateBubbleData();
+  results: any[] = bubble;
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };

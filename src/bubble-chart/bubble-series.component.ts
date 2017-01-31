@@ -19,14 +19,6 @@ import { id } from '../utils/id';
   selector: 'g[ngx-charts-bubble-series]',
   template: `
     <svg:g *ngFor="let circle of circles">
-      <defs>
-        <svg:g ngx-charts-svg-linear-gradient
-          [color]="color"
-          orientation="vertical"
-          [name]="circle.gradientId"
-          [stops]="circle.gradientStops"
-        />
-      </defs>
       <svg:g ngx-charts-circle
         *ngIf="isVisible(circle)"
         class="circle"
@@ -68,7 +60,6 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() yScale;
   @Input() rScale;
   @Input() colors;
-  @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
 
@@ -97,25 +88,15 @@ export class BubbleSeriesComponent implements OnChanges {
     return this.data.series.map((d, i) => {
       const y = d.y;
       const x = d.x;
-      const r = d.r;
+      const r = d.r || 1;
 
       const radius = this.rScale(r);
       const tooltipLabel = formatLabel(d.name);
 
       if (y) {
-        let cx;
-        if (this.scaleType === 'time') {
-          cx = this.xScale(x);
-        } else if (this.scaleType === 'linear') {
-          cx = this.xScale(Number(x));
-        } else {
-          cx = this.xScale(x);
-        }
-
+        const cx = this.xScale(x);
         const cy = this.yScale(this.type === 'standard' ? y : d.d1);
         const height = this.yScale.range()[0] - cy;
-
-        const opacity = 1;
 
         const gradientId = 'grad' + id().toString();
         const gradientFill = `url(${pageUrl}#${gradientId})`;
@@ -123,7 +104,7 @@ export class BubbleSeriesComponent implements OnChanges {
         let color;
         if (this.colors.scaleType === 'linear') {
           if (this.type === 'standard') {
-            color = this.colors.getColor(y);
+            color = this.colors.getColor(r);
           } else {
             color = this.colors.getColor(d.d1);
           }
@@ -144,14 +125,8 @@ export class BubbleSeriesComponent implements OnChanges {
           height,
           tooltipLabel,
           color,
-          opacity,
-          seriesName,
-          barVisible: false,
-          gradientId,
-          gradientFill,
-          gradientStops: this.getGradientStops(color),
-          min: d.min,
-          max: d.max
+          opacity: 1,
+          seriesName
         };
       }
     }).filter((circle) => circle !== undefined);
@@ -167,47 +142,8 @@ export class BubbleSeriesComponent implements OnChanges {
       </span>
       <span class="tooltip-val">
         ${circle.r.toLocaleString()}
-        ${this.getTooltipMinMaxText(circle.min, circle.max)}
       </span>
     `;
-  }
-
-  getTooltipMinMaxText(min: any, max: any) {
-    if (min !== undefined || max  !== undefined) {
-      let result = ' (';
-      if (min !== undefined) {
-        if (max === undefined) {
-          result += '≥';
-        }
-        result += min.toLocaleString();
-        if (max !== undefined) {
-          result += ' - ';
-        }
-      } else if (max !== undefined) {
-        result += '≤';
-      }
-      if (max !== undefined) {
-        result += max.toLocaleString();
-      }
-      result += ')';
-      return result;
-    } else {
-      return '';
-    }
-  }
-
-  getGradientStops(color) {
-    return [
-      {
-        offset: 0,
-        color,
-        opacity: 0.2
-      },
-      {
-        offset: 100,
-        color,
-        opacity: 1
-    }];
   }
 
   onClick(value, label): void {

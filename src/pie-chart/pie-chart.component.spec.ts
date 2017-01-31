@@ -72,7 +72,7 @@ describe('<ngx-charts-pie>', () => {
       });
     });
 
-    xit('should render an arc', (done) => {
+    it('should render an arc', (done) => {
       TestBed.compileComponents().then(() => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
@@ -93,7 +93,7 @@ describe('<ngx-charts-pie>', () => {
   });
 
   describe('doughnut', () => {
-    xit('should render an arc, default width', (done) => {
+    it('should render an arc, default width', (done) => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -125,7 +125,7 @@ describe('<ngx-charts-pie>', () => {
       });
     });
 
-    xit('should render an arc, set width', (done) => {
+    it('should render an arc, set width', (done) => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `

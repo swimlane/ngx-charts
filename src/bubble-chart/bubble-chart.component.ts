@@ -58,11 +58,13 @@ import { ColorHelper } from '../common/color.helper';
             [xScale]="xScale"
             [yScale]="yScale"
             [rScale]="rScale"
-            [scaleType]="scaleType"
             [type]="'standard'"
             [colors]="colors"
             [data]="series"
-            [activeEntries]="activeEntries" />
+            [activeEntries]="activeEntries"
+            (select)="onClick($event, series)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)" />
         </svg:g>
         
       </svg:g>
@@ -85,6 +87,8 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
+  @Input() autoScale;
+  @Input() schemeType = 'ordinal';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -110,13 +114,6 @@ export class BubbleChartComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
 
   activeEntries: any[] = [];
-
-  // line, area
-  autoScale = true;
-  
-  ngOnInit() {
-    // this.update();
-  }
   
   update(): void {
     super.update();
@@ -136,19 +133,18 @@ export class BubbleChartComponent extends BaseChartComponent {
       });
 
       this.seriesDomain = this.results.map(d => d.name);
-    
-      this.transform = `translate(${ this.dims.xOffset },${ this.margin[0] })`;
-      this.schemeType = 'ordinal';
-      this.colors = new ColorHelper(this.scheme, this.schemeType, this.seriesDomain, this.customColors);
-      
-      this.data = this.results;
-
       this.rDomain = this.getRDomain();
-      this.rScale = this.getRScale(this.rDomain, [this.minRadius, this.maxRadius]);
-
       this.xDomain = this.getXDomain();
       this.yDomain = this.getYDomain();
 
+      this.transform = `translate(${ this.dims.xOffset },${ this.margin[0] })`;
+
+      const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
+      this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
+
+      this.data = this.results;
+
+      this.rScale = this.getRScale(this.rDomain, [this.minRadius, this.maxRadius]);
       this.xScale = this.getXScale(this.xDomain, this.dims.width);
       this.yScale = this.getYScale(this.yDomain, this.dims.height);
       
@@ -156,8 +152,11 @@ export class BubbleChartComponent extends BaseChartComponent {
     });
   }
   
-  onSelect(event) {
-    console.log(event);
+  onClick(data, series): void {
+    if (series) {
+      data.series = series.name;
+    }
+    this.select.emit(data);
   }
   
   getYScale(domain, height): any {
@@ -200,7 +199,7 @@ export class BubbleChartComponent extends BaseChartComponent {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
     } else {
-      opts.domain = this.yDomain;
+      opts.domain = this.rDomain;
       opts.colors = this.colors.scale;
     }
     return opts;
@@ -218,6 +217,10 @@ export class BubbleChartComponent extends BaseChartComponent {
       }
     }
 
+    if (!this.autoScale) {
+      min = Math.min(0, min);
+    }
+
     return [min, max];
   }
   
@@ -233,6 +236,10 @@ export class BubbleChartComponent extends BaseChartComponent {
       }
     }
 
+    if (!this.autoScale) {
+      min = Math.min(0, min);
+    }
+
     return [min, max];
   }
 
@@ -242,7 +249,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
     for (const results of this.results) {
       for (const d of results.series){
-        const value = Number(d.r);
+        const value = Number(d.r) || 1;
         min = Math.min(min, value);
         max = Math.max(max, value);
       }
@@ -263,7 +270,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   onActivate(item) {
     const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value;
+      return d.name === item.name;
     });
     if (idx > -1) {
       return;
@@ -275,7 +282,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   onDeactivate(item) {
     const idx = this.activeEntries.findIndex(d => {
-      return d.name === item.name && d.value === item.value;
+      return d.name === item.name;
     });
 
     this.activeEntries.splice(idx, 1);

@@ -34,7 +34,7 @@
 
 # Data Format
 
-## Regular line charts
+## Regular bubble charts
 The data format is multi series:
 
 ```

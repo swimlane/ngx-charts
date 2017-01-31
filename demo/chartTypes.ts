@@ -167,9 +167,9 @@ const chartGroups = [
         selector: 'bubble-chart',
         inputFormat: 'bubble',
         options: [
-          'colorScheme', 'showXAxis', 'showYAxis', 'showLegend',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'showLegend',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines',
-          'roundDomains'
+          'roundDomains', 'autoScale'
         ]
       },
       {
