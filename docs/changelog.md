@@ -1,8 +1,12 @@
 # Changelog
 
-## Master
+## 4.0.3
+- Bug: Update zone.js version
+
+## 4.0.2
 - Bug: Fixed css scope
 - Bug: Fixed vertical alignment issue of advanced pie legend
+- Bug: Fixed AOT issue where scss files were missing in the release folder
 - Chore: Made tooltip injector use Renderer
 - Chore: Updated Angular to 2.4.5
 

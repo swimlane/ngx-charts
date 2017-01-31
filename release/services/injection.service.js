@@ -116,7 +116,9 @@ var InjectionService = (function () {
         componentRef.onDestroy(function () {
             appRef.detachView(componentRef.hostView);
         });
-        location.appendChild(componentRootNode);
+        // use the renderer to append the element for univseral support
+        var renderer = componentRef.instance.renderer;
+        renderer.projectNodes(location, [componentRootNode]);
         return componentRef;
     };
     InjectionService.decorators = [

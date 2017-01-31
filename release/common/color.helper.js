@@ -46,7 +46,7 @@ var ColorHelper = (function () {
         }
         else {
             var formattedValue_1 = value.toString();
-            var found = undefined; // todo type customColors
+            var found = void 0; // todo type customColors
             if (this.customColors && this.customColors.length > 0) {
                 found = this.customColors.find(function (mapping) {
                     return mapping.name === formattedValue_1.toLowerCase();

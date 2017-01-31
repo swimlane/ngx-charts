@@ -1,6 +1,6 @@
 {
   "name": "@swimlane/ngx-charts",
-  "version": "4.0.1",
+  "version": "4.0.3",
   "description": "Declarative Charting Framework for Angular2 and beyond!",
   "main": "release/index.js",
   "typings": "release/index.d.ts",
@@ -23,11 +23,12 @@
     "build:aot": "ngc",
     "build:sass": "node-sass -o dist/ src/",
     "build:css": "postcss --use autoprefixer dist/*.css -d dist/",
+    "copy:styles": "cpx 'src/**/*.scss' release",
     "watch": "webpack --display-error-details --watch",
     "start": "webpack-dev-server",
     "start:hmr": "webpack-dev-server --env.HMR",
     "release": "npm-run-all build:release",
-    "package": "npm-run-all -s clean:release package:aot build:package package:replace package:minify",
+    "package": "npm-run-all -s clean:release package:aot build:package package:replace package:minify copy:styles",
     "package:ts": "tsc --outDir release",
     "package:aot": "ngc -p tsconfig-aot.json",
     "package:replace": "node ./config/replace.js",
@@ -74,8 +75,8 @@
     "@angular/platform-browser-dynamic": "~2.4.5",
     "core-js": "2.4.1",
     "d3": "4.4.0",
-    "rxjs": "5.0.1",
-    "zone.js": "^0.7.4"
+    "rxjs": "5.0.3",
+    "zone.js": "^0.7.6"
   },
   "devDependencies": {
     "@angular/common": "~2.4.5",
@@ -104,6 +105,7 @@
     "codelyzer": "0.0.28",
     "copy-webpack-plugin": "^4.0.0",
     "core-js": "2.4.1",
+    "cpx": "^1.5.0",
     "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
     "d3": "4.2.2",
