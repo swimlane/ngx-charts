@@ -1,6 +1,6 @@
 "use strict";
-var d3_1 = require("../d3");
-var color_sets_1 = require("../utils/color-sets");
+var d3_1 = require('../d3');
+var color_sets_1 = require('../utils/color-sets');
 var ColorHelper = (function () {
     function ColorHelper(scheme, type, domain, customColors) {
         if (typeof (scheme) === 'string') {

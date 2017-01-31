@@ -4,29 +4,19 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require("@angular/core");
-var d3_1 = require("../d3");
-var base_chart_component_1 = require("../common/base-chart.component");
-var view_dimensions_helper_1 = require("../common/view-dimensions.helper");
-var color_helper_1 = require("../common/color.helper");
+var core_1 = require('@angular/core');
+var d3_1 = require('../d3');
+var base_chart_component_1 = require('../common/base-chart.component');
+var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
+var color_helper_1 = require('../common/color.helper');
 var HeatMapComponent = (function (_super) {
     __extends(HeatMapComponent, _super);
     function HeatMapComponent() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.innerPadding = 8;
-        _this.margin = [10, 20, 10, 20];
-        _this.xAxisHeight = 0;
-        _this.yAxisWidth = 0;
-        return _this;
+        _super.apply(this, arguments);
+        this.innerPadding = 8;
+        this.margin = [10, 20, 10, 20];
+        this.xAxisHeight = 0;
+        this.yAxisWidth = 0;
     }
     HeatMapComponent.prototype.update = function () {
         var _this = this;
@@ -151,60 +141,31 @@ var HeatMapComponent = (function (_super) {
         this.xAxisHeight = height;
         this.update();
     };
+    HeatMapComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ngx-charts-heat-map',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    styleUrls: ['../common/base-chart.component.scss'],
+                    encapsulation: core_1.ViewEncapsulation.None
+                },] },
+    ];
+    /** @nocollapse */
+    HeatMapComponent.ctorParameters = function () { return []; };
+    HeatMapComponent.propDecorators = {
+        'legend': [{ type: core_1.Input },],
+        'xAxis': [{ type: core_1.Input },],
+        'yAxis': [{ type: core_1.Input },],
+        'showXAxisLabel': [{ type: core_1.Input },],
+        'showYAxisLabel': [{ type: core_1.Input },],
+        'xAxisLabel': [{ type: core_1.Input },],
+        'yAxisLabel': [{ type: core_1.Input },],
+        'gradient': [{ type: core_1.Input },],
+        'innerPadding': [{ type: core_1.Input },],
+        'xAxisTickFormatting': [{ type: core_1.Input },],
+        'yAxisTickFormatting': [{ type: core_1.Input },],
+    };
     return HeatMapComponent;
 }(base_chart_component_1.BaseChartComponent));
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "legend", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "xAxis", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "yAxis", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "showXAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "showYAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "xAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "yAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], HeatMapComponent.prototype, "gradient", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "innerPadding", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "xAxisTickFormatting", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], HeatMapComponent.prototype, "yAxisTickFormatting", void 0);
-HeatMapComponent = __decorate([
-    core_1.Component({
-        selector: 'ngx-charts-heat-map',
-        template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        styleUrls: ['../common/base-chart.component.scss'],
-        encapsulation: core_1.ViewEncapsulation.None
-    })
-], HeatMapComponent);
 exports.HeatMapComponent = HeatMapComponent;
 //# sourceMappingURL=heat-map.component.js.map

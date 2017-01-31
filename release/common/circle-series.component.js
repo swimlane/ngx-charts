@@ -1,17 +1,8 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require("@angular/core");
-var common_1 = require("@angular/common");
-var label_helper_1 = require("../common/label.helper");
-var id_1 = require("../utils/id");
+var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
+var label_helper_1 = require('../common/label.helper');
+var id_1 = require('../utils/id');
 var CircleSeriesComponent = (function () {
     function CircleSeriesComponent(location) {
         this.location = location;
@@ -67,7 +58,7 @@ var CircleSeriesComponent = (function () {
                     color = _this.colors.getColor(seriesName);
                 }
                 return {
-                    classNames: ["circle-data-" + i],
+                    classNames: [("circle-data-" + i)],
                     value: value,
                     label: label,
                     cx: cx,
@@ -128,8 +119,7 @@ var CircleSeriesComponent = (function () {
                 offset: 100,
                 color: color,
                 opacity: 1
-            }
-        ];
+            }];
     };
     CircleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({
@@ -159,69 +149,41 @@ var CircleSeriesComponent = (function () {
         circle.barVisible = false;
         this.deactivate.emit({ name: this.data.name });
     };
+    CircleSeriesComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[ngx-charts-circle-series]',
+                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    animations: [
+                        core_1.trigger('animationState', [
+                            core_1.transition('void => *', [
+                                core_1.style({
+                                    opacity: 0,
+                                }),
+                                core_1.animate(250, core_1.style({ opacity: 1 }))
+                            ])
+                        ])
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    CircleSeriesComponent.ctorParameters = function () { return [
+        { type: common_1.Location, },
+    ]; };
+    CircleSeriesComponent.propDecorators = {
+        'data': [{ type: core_1.Input },],
+        'type': [{ type: core_1.Input },],
+        'xScale': [{ type: core_1.Input },],
+        'yScale': [{ type: core_1.Input },],
+        'colors': [{ type: core_1.Input },],
+        'scaleType': [{ type: core_1.Input },],
+        'visibleValue': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
+        'select': [{ type: core_1.Output },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
+    };
     return CircleSeriesComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "data", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "type", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "xScale", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "yScale", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "colors", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "scaleType", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "visibleValue", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], CircleSeriesComponent.prototype, "activeEntries", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "select", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "activate", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], CircleSeriesComponent.prototype, "deactivate", void 0);
-CircleSeriesComponent = __decorate([
-    core_1.Component({
-        selector: 'g[ngx-charts-circle-series]',
-        template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
-        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        animations: [
-            core_1.trigger('animationState', [
-                core_1.transition('void => *', [
-                    core_1.style({
-                        opacity: 0,
-                    }),
-                    core_1.animate(250, core_1.style({ opacity: 1 }))
-                ])
-            ])
-        ]
-    }),
-    __metadata("design:paramtypes", [common_1.Location])
-], CircleSeriesComponent);
 exports.CircleSeriesComponent = CircleSeriesComponent;
 //# sourceMappingURL=circle-series.component.js.map

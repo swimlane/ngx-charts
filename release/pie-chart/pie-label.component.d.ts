@@ -1,3 +1,4 @@
+
 import { ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 export declare class PieLabelComponent implements OnChanges {
     data: any;

@@ -1,3 +1,4 @@
+
 import { ElementRef, TemplateRef, EventEmitter } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';

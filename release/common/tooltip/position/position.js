@@ -1,5 +1,5 @@
 "use strict";
-var placement_type_1 = require("./placement.type");
+var placement_type_1 = require('./placement.type');
 var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
     if (alignment === 'top') {

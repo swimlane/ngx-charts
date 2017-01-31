@@ -1,5 +1,5 @@
 "use strict";
-var d3_1 = require("../d3");
+var d3_1 = require('../d3');
 function gridLayout(dims, data, minWidth) {
     var rows = 1;
     var xScale = d3_1.default.scaleBand();
