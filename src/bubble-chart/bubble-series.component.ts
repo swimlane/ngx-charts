@@ -55,10 +55,11 @@ import { id } from '../utils/id';
 export class BubbleSeriesComponent implements OnChanges {
 
   @Input() data;
-  @Input() type = 'standard';
   @Input() xScale;
   @Input() yScale;
   @Input() rScale;
+  @Input() xScaleType;
+  @Input() yScaleType;
   @Input() colors;
   @Input() visibleValue;
   @Input() activeEntries: any[];
@@ -70,9 +71,6 @@ export class BubbleSeriesComponent implements OnChanges {
   areaPath: any;
   circles: any[];
 
-  constructor(private location: Location) {
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -83,7 +81,6 @@ export class BubbleSeriesComponent implements OnChanges {
 
   getCircles(): any[] {
     const seriesName = this.data.name;
-    const pageUrl = this.location.path();
 
     return this.data.series.map((d, i) => {
       const y = d.y;
@@ -94,23 +91,12 @@ export class BubbleSeriesComponent implements OnChanges {
       const tooltipLabel = formatLabel(d.name);
 
       if (y) {
-        const cx = this.xScale(x);
-        const cy = this.yScale(this.type === 'standard' ? y : d.d1);
-        const height = this.yScale.range()[0] - cy;
+        const cx = (this.xScaleType === 'linear') ? this.xScale(Number(x)) : this.xScale(x);
+        const cy = (this.yScaleType === 'linear') ? this.yScale(Number(y)) : this.yScale(y);
 
-        const gradientId = 'grad' + id().toString();
-        const gradientFill = `url(${pageUrl}#${gradientId})`;
-
-        let color;
-        if (this.colors.scaleType === 'linear') {
-          if (this.type === 'standard') {
-            color = this.colors.getColor(r);
-          } else {
-            color = this.colors.getColor(d.d1);
-          }
-        } else {
-          color = this.colors.getColor(seriesName);
-        }
+        const color = (this.colors.scaleType === 'linear') ?
+          this.colors.getColor(r) :
+          this.colors.getColor(seriesName);
 
         return {
           x,
@@ -122,7 +108,6 @@ export class BubbleSeriesComponent implements OnChanges {
           cx,
           cy,
           radius,
-          height,
           tooltipLabel,
           color,
           opacity: 1,
@@ -142,7 +127,7 @@ export class BubbleSeriesComponent implements OnChanges {
       </span>
       <span class="tooltip-val">
         ${circle.r.toLocaleString()}
-      </span>
+      </span>s
     `;
   }
 

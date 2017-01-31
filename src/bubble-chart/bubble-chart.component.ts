@@ -58,7 +58,8 @@ import { ColorHelper } from '../common/color.helper';
             [xScale]="xScale"
             [yScale]="yScale"
             [rScale]="rScale"
-            [type]="'standard'"
+            [xScaleType]="xScaleType"
+            [yScaleType]="yScaleType"
             [colors]="colors"
             [data]="series"
             [activeEntries]="activeEntries"
@@ -105,6 +106,9 @@ export class BubbleChartComponent extends BaseChartComponent {
   xDomain: number[];
   yDomain: number[];
   rDomain: number[];
+
+  xScaleType: string;
+  yScaleType: string;
   
   yScale: any;
   xScale: any;
@@ -117,7 +121,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   
   update(): void {
     super.update();
- 
+
     this.zone.run(() => {
       this.dims = calculateViewDimensions({
         width: this.width,
@@ -160,25 +164,13 @@ export class BubbleChartComponent extends BaseChartComponent {
   }
   
   getYScale(domain, height): any {
-    // padding to keep bubbles inside range
-    const P = (domain[1] - domain[0]) / height * this.maxRadius;
-
-    const scale = d3.scaleLinear()
-      .range([height, 0])
-      .domain([domain[0] - P, domain[1] + P]);
-
-    return this.roundDomains ? scale.nice() : scale;
+    const padding = (domain[1] - domain[0]) / height * this.maxRadius;  // padding to keep bubbles inside range
+    return getScale(domain, [height, 0], this.yScaleType, padding, this.roundDomains);
   }
   
   getXScale(domain, width): any {
-    // padding to keep bubbles inside range
-    const P = (domain[1] - domain[0]) / width * this.maxRadius;
-
-    const scale = d3.scaleLinear()
-      .range([0, width])
-      .domain([domain[0] - P, domain[1] + P]);
-      
-    return this.roundDomains ? scale.nice() : scale;
+    const padding = (domain[1] - domain[0]) / width * this.maxRadius;  // padding to keep bubbles inside range
+    return getScale(domain, [0, width], this.xScaleType, padding, this.roundDomains);
   }
 
   getRScale(domain, range): any {
@@ -206,41 +198,33 @@ export class BubbleChartComponent extends BaseChartComponent {
   }
   
   getXDomain(): any[] {
-    let min = Infinity;
-    let max = -Infinity;
+    const values = [];
 
     for (const results of this.results) {
       for (const d of results.series){
-        const value = Number(d.x);
-        min = Math.min(min, value);
-        max = Math.max(max, value);
+        if (!values.includes(d.x)) {
+          values.push(d.x);
+        }
       }
     }
 
-    if (!this.autoScale) {
-      min = Math.min(0, min);
-    }
-
-    return [min, max];
+    this.xScaleType = getScaleType(values);
+    return getDomain(values, this.xScaleType, this.autoScale);
   }
   
   getYDomain(): any[] {
-    let min = Infinity;
-    let max = -Infinity;
+    const values = [];
 
     for (const results of this.results) {
       for (const d of results.series){
-        const value = Number(d.y);
-        min = Math.min(min, value);
-        max = Math.max(max, value);
+        if (!values.includes(d.y)) {
+          values.push(d.y);
+        }
       }
     }
 
-    if (!this.autoScale) {
-      min = Math.min(0, min);
-    }
-
-    return [min, max];
+    this.yScaleType = getScaleType(values);
+    return getDomain(values, this.yScaleType, this.autoScale);
   }
 
   getRDomain(): any[] {
@@ -291,3 +275,74 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 }
+
+// TODO: move to utilities?
+function getScaleType(values): string {
+  let date = true;
+  let num = true;
+
+  for (const value of values) {
+    if (!isDate(value)) {
+      date = false;
+    }
+
+    if (typeof value !== 'number') {
+      num = false;
+    }
+  }
+
+  if (date) return 'time';
+  if (num) return 'linear';
+  return 'ordinal';
+}
+
+function isDate(value): boolean {
+  if (value instanceof Date) {
+    return true;
+  }
+
+  return false;
+}
+
+function getDomain(values, scaleType, autoScale) {
+    let domain = [];
+
+    if (scaleType === 'time') {
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      domain = [min, max];
+    } else if (scaleType === 'linear') {
+      values = values.map(v => Number(v));
+      let min = Math.min(...values);
+      const max = Math.max(...values);
+      if (!autoScale) {
+        min = Math.min(0, min);
+      }
+      domain = [min, max];
+    } else {
+      domain = values;
+    }
+
+    return domain;
+}
+
+function getScale(domain, range: number[], scaleType, padding, roundDomains): any {
+    let scale;
+
+    if (scaleType === 'time') {
+      scale = d3.scaleTime()
+        .range(range)
+        .domain(domain);
+    } else if (scaleType === 'linear') {
+     scale = d3.scaleLinear()
+        .range(range)
+        .domain([domain[0] - padding, domain[1] + padding]);
+    } else if (scaleType === 'ordinal') {
+      scale = d3.scalePoint()
+        .range(range)
+        .padding(0.1)
+        .domain(domain);
+    }
+
+    return roundDomains ? scale.nice() : scale;
+  }
