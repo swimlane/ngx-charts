@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.3
+- Bug: Update zone.js version
+
 ## 4.0.2
 - Bug: Fixed css scope
 - Bug: Fixed vertical alignment issue of advanced pie legend
