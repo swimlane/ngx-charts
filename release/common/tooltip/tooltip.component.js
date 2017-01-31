@@ -8,11 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var throttle_1 = require("../../utils/throttle");
-var position_1 = require("./position");
-var style_type_1 = require("./style.type");
-var alignment_type_1 = require("./alignment.type");
+var core_1 = require('@angular/core');
+var throttle_1 = require('../../utils/throttle');
+var position_1 = require('./position');
 var TooltipContentComponent = (function () {
     function TooltipContentComponent(element, renderer) {
         this.element = element;
@@ -66,65 +64,39 @@ var TooltipContentComponent = (function () {
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
     };
+    TooltipContentComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ngx-tooltip-content',
+                    template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
+                    encapsulation: core_1.ViewEncapsulation.None,
+                    styleUrls: ['./tooltip.component.scss']
+                },] },
+    ];
+    /** @nocollapse */
+    TooltipContentComponent.ctorParameters = function () { return [
+        { type: core_1.ElementRef, },
+        { type: core_1.Renderer, },
+    ]; };
+    TooltipContentComponent.propDecorators = {
+        'host': [{ type: core_1.Input },],
+        'showCaret': [{ type: core_1.Input },],
+        'type': [{ type: core_1.Input },],
+        'placement': [{ type: core_1.Input },],
+        'alignment': [{ type: core_1.Input },],
+        'spacing': [{ type: core_1.Input },],
+        'cssClass': [{ type: core_1.Input },],
+        'title': [{ type: core_1.Input },],
+        'caretElm': [{ type: core_1.ViewChild, args: ['caretElm',] },],
+        'cssClasses': [{ type: core_1.HostBinding, args: ['class',] },],
+        'onWindowResize': [{ type: core_1.HostListener, args: ['window:resize',] },],
+    };
+    __decorate([
+        throttle_1.throttleable(100), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], TooltipContentComponent.prototype, "onWindowResize", null);
     return TooltipContentComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], TooltipContentComponent.prototype, "host", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], TooltipContentComponent.prototype, "showCaret", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], TooltipContentComponent.prototype, "type", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], TooltipContentComponent.prototype, "placement", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], TooltipContentComponent.prototype, "alignment", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], TooltipContentComponent.prototype, "spacing", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], TooltipContentComponent.prototype, "cssClass", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], TooltipContentComponent.prototype, "title", void 0);
-__decorate([
-    core_1.ViewChild('caretElm'),
-    __metadata("design:type", Object)
-], TooltipContentComponent.prototype, "caretElm", void 0);
-__decorate([
-    core_1.HostBinding('class'),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [])
-], TooltipContentComponent.prototype, "cssClasses", null);
-__decorate([
-    core_1.HostListener('window:resize'),
-    throttle_1.throttleable(100),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], TooltipContentComponent.prototype, "onWindowResize", null);
-TooltipContentComponent = __decorate([
-    core_1.Component({
-        selector: 'ngx-tooltip-content',
-        template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
-        encapsulation: core_1.ViewEncapsulation.None,
-        styleUrls: ['./tooltip.component.scss']
-    }),
-    __metadata("design:paramtypes", [core_1.ElementRef,
-        core_1.Renderer])
-], TooltipContentComponent);
 exports.TooltipContentComponent = TooltipContentComponent;
 //# sourceMappingURL=tooltip.component.js.map

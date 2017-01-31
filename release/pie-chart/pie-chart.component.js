@@ -4,34 +4,24 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require("@angular/core");
-var view_dimensions_helper_1 = require("../common/view-dimensions.helper");
-var color_helper_1 = require("../common/color.helper");
-var base_chart_component_1 = require("../common/base-chart.component");
+var core_1 = require('@angular/core');
+var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
+var color_helper_1 = require('../common/color.helper');
+var base_chart_component_1 = require('../common/base-chart.component');
 var PieChartComponent = (function (_super) {
     __extends(PieChartComponent, _super);
     function PieChartComponent() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.labels = false;
-        _this.legend = false;
-        _this.explodeSlices = false;
-        _this.doughnut = false;
-        _this.arcWidth = 0.25;
-        _this.activeEntries = [];
-        _this.select = new core_1.EventEmitter();
-        _this.activate = new core_1.EventEmitter();
-        _this.deactivate = new core_1.EventEmitter();
-        _this.margin = [20, 20, 20, 20];
-        return _this;
+        _super.apply(this, arguments);
+        this.labels = false;
+        this.legend = false;
+        this.explodeSlices = false;
+        this.doughnut = false;
+        this.arcWidth = 0.25;
+        this.activeEntries = [];
+        this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
+        this.margin = [20, 20, 20, 20];
     }
     PieChartComponent.prototype.update = function () {
         var _this = this;
@@ -118,59 +108,33 @@ var PieChartComponent = (function (_super) {
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
+    PieChartComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ngx-charts-pie-chart',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    styleUrls: [
+                        '../common/base-chart.component.scss',
+                        './pie-chart.component.scss'
+                    ],
+                    encapsulation: core_1.ViewEncapsulation.None,
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    PieChartComponent.ctorParameters = function () { return []; };
+    PieChartComponent.propDecorators = {
+        'labels': [{ type: core_1.Input },],
+        'legend': [{ type: core_1.Input },],
+        'explodeSlices': [{ type: core_1.Input },],
+        'doughnut': [{ type: core_1.Input },],
+        'arcWidth': [{ type: core_1.Input },],
+        'gradient': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
+        'select': [{ type: core_1.Output },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
+    };
     return PieChartComponent;
 }(base_chart_component_1.BaseChartComponent));
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], PieChartComponent.prototype, "labels", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], PieChartComponent.prototype, "legend", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], PieChartComponent.prototype, "explodeSlices", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], PieChartComponent.prototype, "doughnut", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], PieChartComponent.prototype, "arcWidth", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], PieChartComponent.prototype, "gradient", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], PieChartComponent.prototype, "activeEntries", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", Object)
-], PieChartComponent.prototype, "select", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], PieChartComponent.prototype, "activate", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], PieChartComponent.prototype, "deactivate", void 0);
-PieChartComponent = __decorate([
-    core_1.Component({
-        selector: 'ngx-charts-pie-chart',
-        template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"translation\" class=\"pie-chart chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"data\"\n          [activeEntries]=\"activeEntries\"\n          [innerRadius]=\"innerRadius\"\n          [outerRadius]=\"outerRadius\"\n          [explodeSlices]=\"explodeSlices\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-        styleUrls: [
-            '../common/base-chart.component.scss',
-            './pie-chart.component.scss'
-        ],
-        encapsulation: core_1.ViewEncapsulation.None,
-        changeDetection: core_1.ChangeDetectionStrategy.OnPush
-    })
-], PieChartComponent);
 exports.PieChartComponent = PieChartComponent;
 //# sourceMappingURL=pie-chart.component.js.map

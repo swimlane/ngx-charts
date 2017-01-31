@@ -4,38 +4,28 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require("@angular/core");
-var d3_1 = require("../d3");
-var view_dimensions_helper_1 = require("../common/view-dimensions.helper");
-var color_helper_1 = require("../common/color.helper");
-var base_chart_component_1 = require("../common/base-chart.component");
-var id_1 = require("../utils/id");
+var core_1 = require('@angular/core');
+var d3_1 = require('../d3');
+var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
+var color_helper_1 = require('../common/color.helper');
+var base_chart_component_1 = require('../common/base-chart.component');
+var id_1 = require('../utils/id');
 var AreaChartNormalizedComponent = (function (_super) {
     __extends(AreaChartNormalizedComponent, _super);
     function AreaChartNormalizedComponent() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.legend = false;
-        _this.showGridLines = true;
-        _this.curve = d3_1.default.shape.curveLinear;
-        _this.activeEntries = [];
-        _this.roundDomains = false;
-        _this.activate = new core_1.EventEmitter();
-        _this.deactivate = new core_1.EventEmitter();
-        _this.margin = [10, 20, 10, 20];
-        _this.xAxisHeight = 0;
-        _this.yAxisWidth = 0;
-        _this.timelineHeight = 50;
-        _this.timelinePadding = 10;
-        return _this;
+        _super.apply(this, arguments);
+        this.legend = false;
+        this.showGridLines = true;
+        this.curve = d3_1.default.shape.curveLinear;
+        this.activeEntries = [];
+        this.roundDomains = false;
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
+        this.margin = [10, 20, 10, 20];
+        this.xAxisHeight = 0;
+        this.yAxisWidth = 0;
+        this.timelineHeight = 50;
+        this.timelinePadding = 10;
     }
     AreaChartNormalizedComponent.prototype.update = function () {
         var _this = this;
@@ -65,7 +55,7 @@ var AreaChartNormalizedComponent = (function (_super) {
             _this.seriesDomain = _this.getSeriesDomain();
             _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
             _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
-            var _loop_1 = function (i) {
+            var _loop_1 = function(i) {
                 var val = _this.xSet[i];
                 var d0 = 0;
                 var total = 0;
@@ -312,94 +302,39 @@ var AreaChartNormalizedComponent = (function (_super) {
         }
         this.activeEntries = [];
     };
+    AreaChartNormalizedComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'ngx-charts-area-chart-normalized',
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    styleUrls: ['../common/base-chart.component.scss'],
+                    encapsulation: core_1.ViewEncapsulation.None
+                },] },
+    ];
+    /** @nocollapse */
+    AreaChartNormalizedComponent.ctorParameters = function () { return []; };
+    AreaChartNormalizedComponent.propDecorators = {
+        'legend': [{ type: core_1.Input },],
+        'xAxis': [{ type: core_1.Input },],
+        'yAxis': [{ type: core_1.Input },],
+        'showXAxisLabel': [{ type: core_1.Input },],
+        'showYAxisLabel': [{ type: core_1.Input },],
+        'xAxisLabel': [{ type: core_1.Input },],
+        'yAxisLabel': [{ type: core_1.Input },],
+        'timeline': [{ type: core_1.Input },],
+        'gradient': [{ type: core_1.Input },],
+        'showGridLines': [{ type: core_1.Input },],
+        'curve': [{ type: core_1.Input },],
+        'activeEntries': [{ type: core_1.Input },],
+        'schemeType': [{ type: core_1.Input },],
+        'xAxisTickFormatting': [{ type: core_1.Input },],
+        'yAxisTickFormatting': [{ type: core_1.Input },],
+        'roundDomains': [{ type: core_1.Input },],
+        'activate': [{ type: core_1.Output },],
+        'deactivate': [{ type: core_1.Output },],
+        'hideCircles': [{ type: core_1.HostListener, args: ['mouseleave',] },],
+    };
     return AreaChartNormalizedComponent;
 }(base_chart_component_1.BaseChartComponent));
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "legend", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "xAxis", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "yAxis", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "showXAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "showYAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "xAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "yAxisLabel", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "timeline", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "gradient", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], AreaChartNormalizedComponent.prototype, "showGridLines", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "curve", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Array)
-], AreaChartNormalizedComponent.prototype, "activeEntries", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", String)
-], AreaChartNormalizedComponent.prototype, "schemeType", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], AreaChartNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], AreaChartNormalizedComponent.prototype, "roundDomains", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], AreaChartNormalizedComponent.prototype, "activate", void 0);
-__decorate([
-    core_1.Output(),
-    __metadata("design:type", core_1.EventEmitter)
-], AreaChartNormalizedComponent.prototype, "deactivate", void 0);
-__decorate([
-    core_1.HostListener('mouseleave'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AreaChartNormalizedComponent.prototype, "hideCircles", null);
-AreaChartNormalizedComponent = __decorate([
-    core_1.Component({
-        selector: 'ngx-charts-area-chart-normalized',
-        template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"area-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g [attr.clip-path]=\"clipPath\">\n          <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n            <svg:g ngx-charts-area-series\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [activeEntries]=\"activeEntries\"\n              [gradient]=\"gradient\"\n              normalized=\"true\"\n              [curve]=\"curve\"\n            />\n          </svg:g>\n          <svg:g ngx-charts-area-tooltip\n            [xSet]=\"xSet\"\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [results]=\"results\"\n            [height]=\"dims.height\"\n            [colors]=\"colors\"\n            [showPercentage]=\"true\"\n            (hover)=\"updateHoveredVertical($event)\"\n          />\n          <svg:g *ngFor=\"let series of results\">\n            <svg:g ngx-charts-circle-series\n              type=\"stacked\"\n              [xScale]=\"xScale\"\n              [yScale]=\"yScale\"\n              [colors]=\"colors\"\n              [activeEntries]=\"activeEntries\"\n              [data]=\"series\"\n              [scaleType]=\"scaleType\"\n              [visibleValue]=\"hoveredVertical\"\n              (select)=\"onClick($event, series)\"\n              (activate)=\"onActivate($event)\"\n              (deactivate)=\"onDeactivate($event)\"\n            />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n      <svg:g ngx-charts-timeline\n        *ngIf=\"timeline && scaleType === 'time'\"\n        [attr.transform]=\"timelineTransform\"\n        [results]=\"results\"\n        [view]=\"[timelineWidth, height]\"\n        [height]=\"timelineHeight\"\n        [scheme]=\"scheme\"\n        [customColors]=\"customColors\"\n        [legend]=\"legend\"\n        [scaleType]=\"scaleType\"\n        (onDomainChange)=\"updateDomain($event)\">\n        <svg:g *ngFor=\"let series of results; trackBy:trackBy\">\n          <svg:g ngx-charts-area-series\n            [xScale]=\"timelineXScale\"\n            [yScale]=\"timelineYScale\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [scaleType]=\"scaleType\"\n            [gradient]=\"gradient\"\n            normalized=\"true\"\n            [curve]=\"curve\"\n          />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        styleUrls: ['../common/base-chart.component.scss'],
-        encapsulation: core_1.ViewEncapsulation.None
-    })
-], AreaChartNormalizedComponent);
 exports.AreaChartNormalizedComponent = AreaChartNormalizedComponent;
 //# sourceMappingURL=area-chart-normalized.component.js.map

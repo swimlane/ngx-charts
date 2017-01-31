@@ -1,15 +1,6 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = require("@angular/core");
-var d3_1 = require("../d3");
+var core_1 = require('@angular/core');
+var d3_1 = require('../d3');
 var GaugeAxisComponent = (function () {
     function GaugeAxisComponent() {
         this.rotate = '';
@@ -89,50 +80,27 @@ var GaugeAxisComponent = (function () {
         var line = d3_1.default.line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
         return line(points);
     };
+    GaugeAxisComponent.decorators = [
+        { type: core_1.Component, args: [{
+                    selector: 'g[ngx-charts-gauge-axis]',
+                    template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                },] },
+    ];
+    /** @nocollapse */
+    GaugeAxisComponent.ctorParameters = function () { return []; };
+    GaugeAxisComponent.propDecorators = {
+        'bigSegments': [{ type: core_1.Input },],
+        'smallSegments': [{ type: core_1.Input },],
+        'min': [{ type: core_1.Input },],
+        'max': [{ type: core_1.Input },],
+        'angleSpan': [{ type: core_1.Input },],
+        'startAngle': [{ type: core_1.Input },],
+        'radius': [{ type: core_1.Input },],
+        'valueScale': [{ type: core_1.Input },],
+        'tickFormatting': [{ type: core_1.Input },],
+    };
     return GaugeAxisComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], GaugeAxisComponent.prototype, "bigSegments", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], GaugeAxisComponent.prototype, "smallSegments", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], GaugeAxisComponent.prototype, "min", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], GaugeAxisComponent.prototype, "max", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], GaugeAxisComponent.prototype, "angleSpan", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], GaugeAxisComponent.prototype, "startAngle", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], GaugeAxisComponent.prototype, "radius", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], GaugeAxisComponent.prototype, "valueScale", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Object)
-], GaugeAxisComponent.prototype, "tickFormatting", void 0);
-GaugeAxisComponent = __decorate([
-    core_1.Component({
-        selector: 'g[ngx-charts-gauge-axis]',
-        template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
-        changeDetection: core_1.ChangeDetectionStrategy.OnPush
-    })
-], GaugeAxisComponent);
 exports.GaugeAxisComponent = GaugeAxisComponent;
 //# sourceMappingURL=gauge-axis.component.js.map
