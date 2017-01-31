@@ -1,25 +1,45 @@
 "use strict";
-var core_1 = require('@angular/core');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require("@angular/core");
 var GridPanelComponent = (function () {
     function GridPanelComponent() {
     }
-    GridPanelComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'g[ngx-charts-grid-panel]',
-                    template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      class=\"gridpanel\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    GridPanelComponent.ctorParameters = function () { return []; };
-    GridPanelComponent.propDecorators = {
-        'path': [{ type: core_1.Input },],
-        'width': [{ type: core_1.Input },],
-        'height': [{ type: core_1.Input },],
-        'x': [{ type: core_1.Input },],
-        'y': [{ type: core_1.Input },],
-    };
     return GridPanelComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], GridPanelComponent.prototype, "path", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], GridPanelComponent.prototype, "width", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], GridPanelComponent.prototype, "height", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], GridPanelComponent.prototype, "x", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], GridPanelComponent.prototype, "y", void 0);
+GridPanelComponent = __decorate([
+    core_1.Component({
+        selector: 'g[ngx-charts-grid-panel]',
+        template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      class=\"gridpanel\"\n    />\n  ",
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush
+    })
+], GridPanelComponent);
 exports.GridPanelComponent = GridPanelComponent;
 //# sourceMappingURL=grid-panel.component.js.map

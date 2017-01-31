@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.0.1" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.0.2" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -40,20 +40,16 @@
     opacity: 0.6; }
   .ngx-charts .circle:hover {
     cursor: pointer; }
-
-.label {
-  font-size: 12px;
-  font-weight: normal; }
-
-.gridline-path {
-  stroke: #ddd;
-  stroke-width: 1;
-  fill: none; }
-
-.grid-panel rect {
-  fill: none; }
-
-.grid-panel.odd rect {
-  fill: rgba(0, 0, 0, 0.05); }
+  .ngx-charts .label {
+    font-size: 12px;
+    font-weight: normal; }
+  .ngx-charts .gridline-path {
+    stroke: #ddd;
+    stroke-width: 1;
+    fill: none; }
+  .ngx-charts .grid-panel rect {
+    fill: none; }
+  .ngx-charts .grid-panel.odd rect {
+    fill: rgba(0, 0, 0, 0.05); }
 
 /*# sourceMappingURL=index.map*/

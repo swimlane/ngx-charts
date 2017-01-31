@@ -1,8 +1,17 @@
 "use strict";
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var id_1 = require('../utils/id');
-var d3_1 = require('../d3');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require("@angular/core");
+var common_1 = require("@angular/common");
+var id_1 = require("../utils/id");
+var d3_1 = require("../d3");
 var BarComponent = (function () {
     function BarComponent(element, location) {
         this.location = location;
@@ -63,7 +72,8 @@ var BarComponent = (function () {
                 offset: 100,
                 color: this.fill,
                 opacity: 1
-            }];
+            }
+        ];
     };
     BarComponent.prototype.getStartingPath = function () {
         var radius = this.getRadius();
@@ -165,38 +175,87 @@ var BarComponent = (function () {
     BarComponent.prototype.onMouseLeave = function () {
         this.deactivate.emit(this.data);
     };
-    BarComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'g[ngx-charts-bar]',
-                    template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    BarComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: common_1.Location, },
-    ]; };
-    BarComponent.propDecorators = {
-        'fill': [{ type: core_1.Input },],
-        'data': [{ type: core_1.Input },],
-        'width': [{ type: core_1.Input },],
-        'height': [{ type: core_1.Input },],
-        'x': [{ type: core_1.Input },],
-        'y': [{ type: core_1.Input },],
-        'orientation': [{ type: core_1.Input },],
-        'roundEdges': [{ type: core_1.Input },],
-        'gradient': [{ type: core_1.Input },],
-        'offset': [{ type: core_1.Input },],
-        'isActive': [{ type: core_1.Input },],
-        'stops': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-        'activate': [{ type: core_1.Output },],
-        'deactivate': [{ type: core_1.Output },],
-        'onMouseEnter': [{ type: core_1.HostListener, args: ['mouseenter',] },],
-        'onMouseLeave': [{ type: core_1.HostListener, args: ['mouseleave',] },],
-    };
     return BarComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "fill", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "data", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "width", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "height", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "x", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "y", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "orientation", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BarComponent.prototype, "roundEdges", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BarComponent.prototype, "gradient", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "offset", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BarComponent.prototype, "isActive", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], BarComponent.prototype, "stops", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "select", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "activate", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], BarComponent.prototype, "deactivate", void 0);
+__decorate([
+    core_1.HostListener('mouseenter'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BarComponent.prototype, "onMouseEnter", null);
+__decorate([
+    core_1.HostListener('mouseleave'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BarComponent.prototype, "onMouseLeave", null);
+BarComponent = __decorate([
+    core_1.Component({
+        selector: 'g[ngx-charts-bar]',
+        template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef, common_1.Location])
+], BarComponent);
 exports.BarComponent = BarComponent;
 //# sourceMappingURL=bar.component.js.map

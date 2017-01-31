@@ -1,5 +1,5 @@
 "use strict";
-var d3_1 = require('../d3');
+var d3_1 = require("../d3");
 function tickFormat(fieldType, groupByType) {
     return function (label) {
         if (label === 'No Value' || label === 'Other') {

@@ -1,6 +1,15 @@
 "use strict";
-var core_1 = require('@angular/core');
-var label_helper_1 = require('../common/label.helper');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require("@angular/core");
+var label_helper_1 = require("../common/label.helper");
 var SeriesHorizontal = (function () {
     function SeriesHorizontal() {
         this.type = 'standard';
@@ -105,41 +114,73 @@ var SeriesHorizontal = (function () {
     SeriesHorizontal.prototype.click = function (data) {
         this.select.emit(data);
     };
-    SeriesHorizontal.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'g[ngx-charts-series-horizontal]',
-                    template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        core_1.trigger('animationState', [
-                            core_1.transition('* => void', [
-                                core_1.style({
-                                    opacity: 1,
-                                    transform: '*',
-                                }),
-                                core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    SeriesHorizontal.ctorParameters = function () { return []; };
-    SeriesHorizontal.propDecorators = {
-        'dims': [{ type: core_1.Input },],
-        'type': [{ type: core_1.Input },],
-        'series': [{ type: core_1.Input },],
-        'xScale': [{ type: core_1.Input },],
-        'yScale': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'gradient': [{ type: core_1.Input },],
-        'activeEntries': [{ type: core_1.Input },],
-        'seriesName': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-        'activate': [{ type: core_1.Output },],
-        'deactivate': [{ type: core_1.Output },],
-    };
     return SeriesHorizontal;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "dims", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "type", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "series", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "xScale", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "yScale", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "colors", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], SeriesHorizontal.prototype, "gradient", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Array)
+], SeriesHorizontal.prototype, "activeEntries", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], SeriesHorizontal.prototype, "seriesName", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "select", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "activate", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", Object)
+], SeriesHorizontal.prototype, "deactivate", void 0);
+SeriesHorizontal = __decorate([
+    core_1.Component({
+        selector: 'g[ngx-charts-series-horizontal]',
+        template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy:trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'horizontal'\"\n      [roundEdges]=\"bar.roundEdges\"\n      (select)=\"click($event)\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        animations: [
+            core_1.trigger('animationState', [
+                core_1.transition('* => void', [
+                    core_1.style({
+                        opacity: 1,
+                        transform: '*',
+                    }),
+                    core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                ])
+            ])
+        ]
+    })
+], SeriesHorizontal);
 exports.SeriesHorizontal = SeriesHorizontal;
 //# sourceMappingURL=series-horizontal.component.js.map
