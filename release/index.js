@@ -11998,8 +11998,10 @@ exports.AdvancedPieChartComponent = AdvancedPieChartComponent;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
+__export(__webpack_require__("./src/pie-chart/advanced-pie-chart.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-chart.module.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-chart.component.ts"));
+__export(__webpack_require__("./src/pie-chart/simple-pie-chart.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-arc.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-grid.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-series.component.ts"));
@@ -12425,6 +12427,8 @@ var pie_arc_component_1 = __webpack_require__("./src/pie-chart/pie-arc.component
 exports.PieArcComponent = pie_arc_component_1.PieArcComponent;
 var pie_chart_component_1 = __webpack_require__("./src/pie-chart/pie-chart.component.ts");
 exports.PieChartComponent = pie_chart_component_1.PieChartComponent;
+var simple_pie_chart_component_1 = __webpack_require__("./src/pie-chart/simple-pie-chart.component.ts");
+exports.SimplePieChartComponent = simple_pie_chart_component_1.SimplePieChartComponent;
 var pie_grid_component_1 = __webpack_require__("./src/pie-chart/pie-grid.component.ts");
 exports.PieGridComponent = pie_grid_component_1.PieGridComponent;
 var pie_grid_series_component_1 = __webpack_require__("./src/pie-chart/pie-grid-series.component.ts");
@@ -12442,6 +12446,7 @@ var PieChartModule = (function () {
                 pie_label_component_1.PieLabelComponent,
                 pie_arc_component_1.PieArcComponent,
                 pie_chart_component_1.PieChartComponent,
+                simple_pie_chart_component_1.SimplePieChartComponent,
                 pie_grid_component_1.PieGridComponent,
                 pie_grid_series_component_1.PieGridSeriesComponent,
                 pie_series_component_1.PieSeriesComponent
@@ -12451,6 +12456,7 @@ var PieChartModule = (function () {
                 pie_label_component_1.PieLabelComponent,
                 pie_arc_component_1.PieArcComponent,
                 pie_chart_component_1.PieChartComponent,
+                simple_pie_chart_component_1.SimplePieChartComponent,
                 pie_grid_component_1.PieGridComponent,
                 pie_grid_series_component_1.PieGridSeriesComponent,
                 pie_series_component_1.PieSeriesComponent
@@ -12666,7 +12672,7 @@ var PieGridComponent = (function (_super) {
                 label: trim_label_helper_1.trimLabel(label),
                 total: value,
                 value: value,
-                percent: d3_1.default.format('.1p')(d.data.percent),
+                percent: d3_1.default.format('.1%')(d.data.percent),
                 data: [d, {
                         data: {
                             other: true,
@@ -12691,7 +12697,7 @@ var PieGridComponent = (function (_super) {
     PieGridComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-pie-grid',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up\n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up\n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             styles: [
                 __webpack_require__("./src/common/base-chart.component.scss"),
                 __webpack_require__("./src/pie-chart/pie-grid.component.scss")
@@ -12985,6 +12991,122 @@ var PieSeriesComponent = (function () {
     return PieSeriesComponent;
 }());
 exports.PieSeriesComponent = PieSeriesComponent;
+
+
+/***/ }),
+
+/***/ "./src/pie-chart/simple-pie-chart.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
+var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
+var SimplePieChartComponent = (function (_super) {
+    __extends(SimplePieChartComponent, _super);
+    function SimplePieChartComponent() {
+        _super.apply(this, arguments);
+        this.activeEntries = [];
+        this.unit = '';
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
+        this.margin = [0, 0, 0, 0];
+    }
+    SimplePieChartComponent.prototype.update = function () {
+        var _this = this;
+        _super.prototype.update.call(this);
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin
+            });
+            _this.domain = _this.getDomain();
+            _this.setColors();
+            var xOffset = _this.dims.width / 2;
+            var yOffset = _this.margin[0] + _this.dims.height / 2;
+            _this.legendWidth = _this.width - _this.dims.width - _this.margin[1];
+            _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2.5;
+            _this.innerRadius = _this.outerRadius * 0.65;
+            _this.transform = "translate(" + xOffset + " , " + yOffset + ")";
+        });
+    };
+    SimplePieChartComponent.prototype.getDomain = function () {
+        return this.results.map(function (d) { return d.name; });
+    };
+    SimplePieChartComponent.prototype.onClick = function (data) {
+        this.select.emit(data);
+    };
+    SimplePieChartComponent.prototype.setColors = function () {
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    };
+    SimplePieChartComponent.prototype.onActivate = function (event) {
+        if (this.activeEntries.indexOf(event) > -1)
+            return;
+        this.activeEntries = [event].concat(this.activeEntries);
+        this.activate.emit({ value: event, entries: this.activeEntries });
+    };
+    SimplePieChartComponent.prototype.onDeactivate = function (event) {
+        var idx = this.activeEntries.indexOf(event);
+        this.activeEntries.splice(idx, 1);
+        this.activeEntries = this.activeEntries.slice();
+        this.deactivate.emit({ value: event, entries: this.activeEntries });
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], SimplePieChartComponent.prototype, "gradient", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], SimplePieChartComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], SimplePieChartComponent.prototype, "totalLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], SimplePieChartComponent.prototype, "totalValue", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], SimplePieChartComponent.prototype, "unit", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], SimplePieChartComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], SimplePieChartComponent.prototype, "deactivate", void 0);
+    SimplePieChartComponent = __decorate([
+        core_1.Component({
+            selector: 'ngx-charts-simple-pie-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g\n        [attr.transform]=\"transform\"\n        class=\"pie chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"results\"\n          [innerRadius]=\"innerRadius\"\n          [activeEntries]=\"activeEntries\"\n          [outerRadius]=\"outerRadius\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n        <svg:text\n          class=\"label\"\n          dy=\"-0.5em\"\n          x=\"0\"\n          y=\"5\"\n          text-anchor=\"middle\">\n          {{ totalLabel }}\n        </svg:text>\n        <svg:text\n          class=\"label percent-label\"\n          dy=\"0.5em\"\n          x=\"0\"\n          y=\"5\"\n          ngx-charts-count-up\n          [countTo]=\"totalValue\"\n          [countSuffix]=\"unit\"\n          text-anchor=\"middle\">\n        </svg:text>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        }), 
+        __metadata('design:paramtypes', [])
+    ], SimplePieChartComponent);
+    return SimplePieChartComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.SimplePieChartComponent = SimplePieChartComponent;
 
 
 /***/ }),
