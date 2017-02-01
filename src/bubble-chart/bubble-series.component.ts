@@ -127,7 +127,7 @@ export class BubbleSeriesComponent implements OnChanges {
       </span>
       <span class="tooltip-val">
         ${circle.r.toLocaleString()}
-      </span>s
+      </span>
     `;
   }
 
