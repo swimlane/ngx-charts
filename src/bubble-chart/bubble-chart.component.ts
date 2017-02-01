@@ -54,7 +54,17 @@ import { ColorHelper } from '../common/color.helper';
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)"/>
-          
+ 
+        <svg:rect
+          class="bubble-chart-area"
+          x="0"
+          y="0"
+          [attr.width]="dims.width"
+          [attr.height]="dims.height"
+          style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
+          (mouseenter)="deactivateAll()"
+        />
+
         <svg:g *ngFor="let series of data">
           <svg:g ngx-charts-bubble-series
             [xScale]="xScale"
