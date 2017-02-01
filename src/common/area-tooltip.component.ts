@@ -50,7 +50,6 @@ import {
         y="0"
         [attr.width]="1"
         [attr.height]="height"
-        style="fill: rgb(0, 0, 0);"
         [style.opacity]="anchorOpacity[i]"
         [style.pointer-events]="'none'"
         ngx-tooltip
