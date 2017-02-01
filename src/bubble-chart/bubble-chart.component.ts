@@ -79,16 +79,16 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() legend = false;
   @Input() xAxis: boolean = true;
   @Input() yAxis: boolean = true;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() maxRadius = 10;
   @Input() minRadius = 3;
-  @Input() autoScale;
+  @Input() autoScale: boolean;
   @Input() schemeType = 'ordinal';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -99,12 +99,13 @@ export class BubbleChartComponent extends BaseChartComponent {
   scaleType = 'linear';
   margin = [10, 20, 10, 20];
   data: any;
-  seriesDomain: any;
+  
   legendOptions: any;
   transform: string;
   
-  xDomain: number[];
-  yDomain: number[];
+  seriesDomain: any[];
+  xDomain: any[];
+  yDomain: any[];
   rDomain: number[];
 
   xScaleType: string;
@@ -181,7 +182,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
   
-  getLegendOptions() {
+  getLegendOptions(): any {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
@@ -227,7 +228,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     return getDomain(values, this.yScaleType, this.autoScale);
   }
 
-  getRDomain(): any[] {
+  getRDomain(): number[] {
     let min = Infinity;
     let max = -Infinity;
 
@@ -296,7 +297,7 @@ function getScaleType(values): string {
   return 'ordinal';
 }
 
-function isDate(value): boolean {
+function isDate(value: any): boolean {
   if (value instanceof Date) {
     return true;
   }
@@ -304,8 +305,8 @@ function isDate(value): boolean {
   return false;
 }
 
-function getDomain(values, scaleType, autoScale) {
-    let domain = [];
+function getDomain(values, scaleType, autoScale): number[] {
+    let domain: number[] = [];
 
     if (scaleType === 'time') {
       const min = Math.min(...values);
@@ -327,7 +328,7 @@ function getDomain(values, scaleType, autoScale) {
 }
 
 function getScale(domain, range: number[], scaleType, padding, roundDomains): any {
-    let scale;
+    let scale: any;
 
     if (scaleType === 'time') {
       scale = d3.scaleTime()
