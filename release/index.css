@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.0.3" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.1.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -43,6 +43,8 @@
   .ngx-charts .label {
     font-size: 12px;
     font-weight: normal; }
+  .ngx-charts .tooltip-anchor {
+    fill: black; }
   .ngx-charts .gridline-path {
     stroke: #ddd;
     stroke-width: 1;
