@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.0.3" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.1.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -91,7 +91,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, ".ngx-charts {\n  float: left; }\n  .ngx-charts .circle,\n  .ngx-charts .bar,\n  .ngx-charts .arc {\n    cursor: pointer; }\n  .ngx-charts .bar.active, .ngx-charts .bar:hover,\n  .ngx-charts .cell.active,\n  .ngx-charts .cell:hover,\n  .ngx-charts .arc.active,\n  .ngx-charts .arc:hover,\n  .ngx-charts .card.active,\n  .ngx-charts .card:hover {\n    opacity: 0.8;\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out; }\n  .ngx-charts .bar:focus,\n  .ngx-charts .cell:focus,\n  .ngx-charts .arc:focus,\n  .ngx-charts .card:focus {\n    outline: none; }\n  .ngx-charts g:focus {\n    outline: none; }\n  .ngx-charts .line-series.inactive,\n  .ngx-charts .line-series-range.inactive,\n  .ngx-charts .area-series.inactive {\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out;\n    opacity: .2; }\n  .ngx-charts .line-highlight {\n    display: none; }\n    .ngx-charts .line-highlight.active {\n      display: block; }\n  .ngx-charts .area {\n    opacity: 0.6; }\n  .ngx-charts .circle:hover {\n    cursor: pointer; }\n  .ngx-charts .label {\n    font-size: 12px;\n    font-weight: normal; }\n  .ngx-charts .gridline-path {\n    stroke: #ddd;\n    stroke-width: 1;\n    fill: none; }\n  .ngx-charts .grid-panel rect {\n    fill: none; }\n  .ngx-charts .grid-panel.odd rect {\n    fill: rgba(0, 0, 0, 0.05); }\n", ""]);
+exports.push([module.i, ".ngx-charts {\n  float: left; }\n  .ngx-charts .circle,\n  .ngx-charts .bar,\n  .ngx-charts .arc {\n    cursor: pointer; }\n  .ngx-charts .bar.active, .ngx-charts .bar:hover,\n  .ngx-charts .cell.active,\n  .ngx-charts .cell:hover,\n  .ngx-charts .arc.active,\n  .ngx-charts .arc:hover,\n  .ngx-charts .card.active,\n  .ngx-charts .card:hover {\n    opacity: 0.8;\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out; }\n  .ngx-charts .bar:focus,\n  .ngx-charts .cell:focus,\n  .ngx-charts .arc:focus,\n  .ngx-charts .card:focus {\n    outline: none; }\n  .ngx-charts g:focus {\n    outline: none; }\n  .ngx-charts .line-series.inactive,\n  .ngx-charts .line-series-range.inactive,\n  .ngx-charts .area-series.inactive {\n    -webkit-transition: opacity 100ms ease-in-out;\n    transition: opacity 100ms ease-in-out;\n    opacity: .2; }\n  .ngx-charts .line-highlight {\n    display: none; }\n    .ngx-charts .line-highlight.active {\n      display: block; }\n  .ngx-charts .area {\n    opacity: 0.6; }\n  .ngx-charts .circle:hover {\n    cursor: pointer; }\n  .ngx-charts .label {\n    font-size: 12px;\n    font-weight: normal; }\n  .ngx-charts .tooltip-anchor {\n    fill: black; }\n  .ngx-charts .gridline-path {\n    stroke: #ddd;\n    stroke-width: 1;\n    fill: none; }\n  .ngx-charts .grid-panel rect {\n    fill: none; }\n  .ngx-charts .grid-panel.odd rect {\n    fill: rgba(0, 0, 0, 0.05); }\n", ""]);
 
 // exports
 
@@ -4738,6 +4738,588 @@ exports.SeriesVerticalComponent = SeriesVerticalComponent;
 
 /***/ }),
 
+/***/ "./src/bubble-chart/bubble-chart.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
+var d3_1 = __webpack_require__("./src/d3.ts");
+var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
+var BubbleChartComponent = (function (_super) {
+    __extends(BubbleChartComponent, _super);
+    function BubbleChartComponent() {
+        _super.apply(this, arguments);
+        this.view = [400, 400];
+        this.showGridLines = true;
+        this.legend = false;
+        this.xAxis = true;
+        this.yAxis = true;
+        this.roundDomains = false;
+        this.maxRadius = 10;
+        this.minRadius = 3;
+        this.schemeType = 'ordinal';
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
+        this.scaleType = 'linear';
+        this.margin = [10, 20, 10, 20];
+        this.xAxisHeight = 0;
+        this.yAxisWidth = 0;
+        this.activeEntries = [];
+    }
+    BubbleChartComponent.prototype.update = function () {
+        var _this = this;
+        _super.prototype.update.call(this);
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin,
+                showXAxis: _this.xAxis,
+                showYAxis: _this.yAxis,
+                xAxisHeight: _this.xAxisHeight,
+                yAxisWidth: _this.yAxisWidth,
+                showXLabel: _this.showXAxisLabel,
+                showYLabel: _this.showYAxisLabel,
+                showLegend: _this.legend,
+                legendType: _this.schemeType
+            });
+            _this.seriesDomain = _this.results.map(function (d) { return d.name; });
+            _this.rDomain = _this.getRDomain();
+            _this.xDomain = _this.getXDomain();
+            _this.yDomain = _this.getYDomain();
+            _this.transform = "translate(" + _this.dims.xOffset + "," + _this.margin[0] + ")";
+            var colorDomain = _this.schemeType === 'ordinal' ? _this.seriesDomain : _this.rDomain;
+            _this.colors = new color_helper_1.ColorHelper(_this.scheme, _this.schemeType, colorDomain, _this.customColors);
+            _this.data = _this.results;
+            _this.rScale = _this.getRScale(_this.rDomain, [_this.minRadius, _this.maxRadius]);
+            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
+            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
+            _this.legendOptions = _this.getLegendOptions();
+        });
+    };
+    BubbleChartComponent.prototype.hideCircles = function () {
+        this.deactivateAll();
+    };
+    BubbleChartComponent.prototype.onClick = function (data, series) {
+        if (series) {
+            data.series = series.name;
+        }
+        this.select.emit(data);
+    };
+    BubbleChartComponent.prototype.getYScale = function (domain, height) {
+        var padding = (domain[1] - domain[0]) / height * this.maxRadius; // padding to keep bubbles inside range
+        return getScale(domain, [height, 0], this.yScaleType, padding, this.roundDomains);
+    };
+    BubbleChartComponent.prototype.getXScale = function (domain, width) {
+        var padding = (domain[1] - domain[0]) / width * this.maxRadius; // padding to keep bubbles inside range
+        return getScale(domain, [0, width], this.xScaleType, padding, this.roundDomains);
+    };
+    BubbleChartComponent.prototype.getRScale = function (domain, range) {
+        var scale = d3_1.default.scaleLinear()
+            .range(range)
+            .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
+    };
+    BubbleChartComponent.prototype.getLegendOptions = function () {
+        var opts = {
+            scaleType: this.schemeType,
+            colors: undefined,
+            domain: []
+        };
+        if (opts.scaleType === 'ordinal') {
+            opts.domain = this.seriesDomain;
+            opts.colors = this.colors;
+        }
+        else {
+            opts.domain = this.rDomain;
+            opts.colors = this.colors.scale;
+        }
+        return opts;
+    };
+    BubbleChartComponent.prototype.getXDomain = function () {
+        var values = [];
+        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
+            var results = _a[_i];
+            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
+                var d = _c[_b];
+                if (!values.includes(d.x)) {
+                    values.push(d.x);
+                }
+            }
+        }
+        this.xScaleType = getScaleType(values);
+        return getDomain(values, this.xScaleType, this.autoScale);
+    };
+    BubbleChartComponent.prototype.getYDomain = function () {
+        var values = [];
+        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
+            var results = _a[_i];
+            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
+                var d = _c[_b];
+                if (!values.includes(d.y)) {
+                    values.push(d.y);
+                }
+            }
+        }
+        this.yScaleType = getScaleType(values);
+        return getDomain(values, this.yScaleType, this.autoScale);
+    };
+    BubbleChartComponent.prototype.getRDomain = function () {
+        var min = Infinity;
+        var max = -Infinity;
+        for (var _i = 0, _a = this.results; _i < _a.length; _i++) {
+            var results = _a[_i];
+            for (var _b = 0, _c = results.series; _b < _c.length; _b++) {
+                var d = _c[_b];
+                var value = Number(d.r) || 1;
+                min = Math.min(min, value);
+                max = Math.max(max, value);
+            }
+        }
+        return [min, max];
+    };
+    BubbleChartComponent.prototype.updateYAxisWidth = function (_a) {
+        var width = _a.width;
+        this.yAxisWidth = width;
+        this.update();
+    };
+    BubbleChartComponent.prototype.updateXAxisHeight = function (_a) {
+        var height = _a.height;
+        this.xAxisHeight = height;
+        this.update();
+    };
+    BubbleChartComponent.prototype.onActivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name;
+        });
+        if (idx > -1) {
+            return;
+        }
+        this.activeEntries = [item].concat(this.activeEntries);
+        this.activate.emit({ value: item, entries: this.activeEntries });
+    };
+    BubbleChartComponent.prototype.onDeactivate = function (item) {
+        var idx = this.activeEntries.findIndex(function (d) {
+            return d.name === item.name;
+        });
+        this.activeEntries.splice(idx, 1);
+        this.activeEntries = this.activeEntries.slice();
+        this.deactivate.emit({ value: item, entries: this.activeEntries });
+    };
+    BubbleChartComponent.prototype.deactivateAll = function () {
+        this.activeEntries = this.activeEntries.slice();
+        for (var _i = 0, _a = this.activeEntries; _i < _a.length; _i++) {
+            var entry = _a[_i];
+            this.deactivate.emit({ value: entry, entries: [] });
+        }
+        this.activeEntries = [];
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BubbleChartComponent.prototype, "view", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleChartComponent.prototype, "results", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BubbleChartComponent.prototype, "showGridLines", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleChartComponent.prototype, "legend", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BubbleChartComponent.prototype, "xAxis", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BubbleChartComponent.prototype, "yAxis", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BubbleChartComponent.prototype, "showXAxisLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BubbleChartComponent.prototype, "showYAxisLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BubbleChartComponent.prototype, "xAxisLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BubbleChartComponent.prototype, "yAxisLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleChartComponent.prototype, "xAxisTickFormatting", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleChartComponent.prototype, "yAxisTickFormatting", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BubbleChartComponent.prototype, "roundDomains", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleChartComponent.prototype, "maxRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleChartComponent.prototype, "minRadius", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], BubbleChartComponent.prototype, "autoScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleChartComponent.prototype, "schemeType", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], BubbleChartComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], BubbleChartComponent.prototype, "deactivate", void 0);
+    __decorate([
+        core_1.HostListener('mouseleave'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
+    ], BubbleChartComponent.prototype, "hideCircles", null);
+    BubbleChartComponent = __decorate([
+        core_1.Component({
+            selector: 'ngx-charts-bubble-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n      \n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n          \n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n          \n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n        \n      </svg:g>\n    </ngx-charts-chart>"
+        }), 
+        __metadata('design:paramtypes', [])
+    ], BubbleChartComponent);
+    return BubbleChartComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.BubbleChartComponent = BubbleChartComponent;
+// TODO: move to utilities?
+function getScaleType(values) {
+    var date = true;
+    var num = true;
+    for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
+        var value = values_1[_i];
+        if (!isDate(value)) {
+            date = false;
+        }
+        if (typeof value !== 'number') {
+            num = false;
+        }
+    }
+    if (date)
+        return 'time';
+    if (num)
+        return 'linear';
+    return 'ordinal';
+}
+function isDate(value) {
+    if (value instanceof Date) {
+        return true;
+    }
+    return false;
+}
+function getDomain(values, scaleType, autoScale) {
+    var domain = [];
+    if (scaleType === 'time') {
+        var min = Math.min.apply(Math, values);
+        var max = Math.max.apply(Math, values);
+        domain = [min, max];
+    }
+    else if (scaleType === 'linear') {
+        values = values.map(function (v) { return Number(v); });
+        var min = Math.min.apply(Math, values);
+        var max = Math.max.apply(Math, values);
+        if (!autoScale) {
+            min = Math.min(0, min);
+        }
+        domain = [min, max];
+    }
+    else {
+        domain = values;
+    }
+    return domain;
+}
+function getScale(domain, range, scaleType, padding, roundDomains) {
+    var scale;
+    if (scaleType === 'time') {
+        scale = d3_1.default.scaleTime()
+            .range(range)
+            .domain(domain);
+    }
+    else if (scaleType === 'linear') {
+        scale = d3_1.default.scaleLinear()
+            .range(range)
+            .domain([domain[0] - padding, domain[1] + padding]);
+    }
+    else if (scaleType === 'ordinal') {
+        scale = d3_1.default.scalePoint()
+            .range(range)
+            .padding(0.1)
+            .domain(domain);
+    }
+    return roundDomains ? scale.nice() : scale;
+}
+
+
+/***/ }),
+
+/***/ "./src/bubble-chart/bubble-chart.module.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
+var bubble_chart_component_1 = __webpack_require__("./src/bubble-chart/bubble-chart.component.ts");
+exports.BubbleChartComponent = bubble_chart_component_1.BubbleChartComponent;
+var bubble_series_component_1 = __webpack_require__("./src/bubble-chart/bubble-series.component.ts");
+exports.BubbleSeriesComponent = bubble_series_component_1.BubbleSeriesComponent;
+var BubbleChartModule = (function () {
+    function BubbleChartModule() {
+    }
+    BubbleChartModule = __decorate([
+        core_1.NgModule({
+            imports: [chart_common_module_1.ChartCommonModule],
+            declarations: [
+                bubble_chart_component_1.BubbleChartComponent,
+                bubble_series_component_1.BubbleSeriesComponent
+            ],
+            exports: [
+                bubble_chart_component_1.BubbleChartComponent,
+                bubble_series_component_1.BubbleSeriesComponent
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], BubbleChartModule);
+    return BubbleChartModule;
+}());
+exports.BubbleChartModule = BubbleChartModule;
+
+
+/***/ }),
+
+/***/ "./src/bubble-chart/bubble-series.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var label_helper_1 = __webpack_require__("./src/common/label.helper.ts");
+var BubbleSeriesComponent = (function () {
+    function BubbleSeriesComponent() {
+        this.select = new core_1.EventEmitter();
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
+    }
+    BubbleSeriesComponent.prototype.ngOnChanges = function (changes) {
+        this.update();
+    };
+    BubbleSeriesComponent.prototype.update = function () {
+        this.circles = this.getCircles();
+    };
+    BubbleSeriesComponent.prototype.getCircles = function () {
+        var _this = this;
+        var seriesName = this.data.name;
+        return this.data.series.map(function (d, i) {
+            var y = d.y;
+            var x = d.x;
+            var r = d.r || 1;
+            var radius = _this.rScale(r);
+            var tooltipLabel = label_helper_1.formatLabel(d.name);
+            if (y) {
+                var cx = (_this.xScaleType === 'linear') ? _this.xScale(Number(x)) : _this.xScale(x);
+                var cy = (_this.yScaleType === 'linear') ? _this.yScale(Number(y)) : _this.yScale(y);
+                var color = (_this.colors.scaleType === 'linear') ?
+                    _this.colors.getColor(r) :
+                    _this.colors.getColor(seriesName);
+                var isActive = !_this.activeEntries.length ? true : _this.isActive({ name: seriesName });
+                var opacity = isActive ? 1 : 0.3;
+                return {
+                    x: x,
+                    y: y,
+                    r: r,
+                    classNames: [("circle-data-" + i)],
+                    value: y,
+                    label: x,
+                    cx: cx,
+                    cy: cy,
+                    radius: radius,
+                    tooltipLabel: tooltipLabel,
+                    color: color,
+                    opacity: opacity,
+                    seriesName: seriesName,
+                    isActive: isActive
+                };
+            }
+        }).filter(function (circle) { return circle !== undefined; });
+    };
+    BubbleSeriesComponent.prototype.getTooltipText = function (circle) {
+        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        " + circle.x.toLocaleString() + " " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + circle.r.toLocaleString() + "\n      </span>\n    ";
+    };
+    BubbleSeriesComponent.prototype.onClick = function (value, label) {
+        this.select.emit({
+            name: label,
+            value: value
+        });
+    };
+    BubbleSeriesComponent.prototype.isActive = function (entry) {
+        if (!this.activeEntries)
+            return false;
+        var item = this.activeEntries.find(function (d) {
+            return entry.name === d.name;
+        });
+        return item !== undefined;
+    };
+    BubbleSeriesComponent.prototype.isVisible = function (circle) {
+        if (this.activeEntries.length > 0) {
+            return this.isActive({ name: circle.seriesName });
+        }
+        return circle.opacity !== 0;
+    };
+    BubbleSeriesComponent.prototype.activateCircle = function (circle) {
+        circle.barVisible = true;
+        this.activate.emit({ name: this.data.name });
+    };
+    BubbleSeriesComponent.prototype.deactivateCircle = function (circle) {
+        circle.barVisible = false;
+        this.deactivate.emit({ name: this.data.name });
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "xScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "yScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "rScale", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "xScaleType", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "yScaleType", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "colors", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "visibleValue", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], BubbleSeriesComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], BubbleSeriesComponent.prototype, "deactivate", void 0);
+    BubbleSeriesComponent = __decorate([
+        core_1.Component({
+            selector: 'g[ngx-charts-bubble-series]',
+            template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [style.opacity]=\"circle.opacity\"\n        [class.active]=\"circle.isActive\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+            animations: [
+                core_1.trigger('animationState', [
+                    core_1.transition('void => *', [
+                        core_1.style({
+                            opacity: 0,
+                        }),
+                        core_1.animate(250, core_1.style({ opacity: 1 }))
+                    ])
+                ])
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], BubbleSeriesComponent);
+    return BubbleSeriesComponent;
+}());
+exports.BubbleSeriesComponent = BubbleSeriesComponent;
+
+
+/***/ }),
+
+/***/ "./src/bubble-chart/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/bubble-chart/bubble-chart.module.ts"));
+__export(__webpack_require__("./src/bubble-chart/bubble-chart.component.ts"));
+__export(__webpack_require__("./src/bubble-chart/bubble-series.component.ts"));
+
+
+/***/ }),
+
 /***/ "./src/common/area-tooltip.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4939,7 +5521,7 @@ var AreaTooltip = (function () {
     AreaTooltip = __decorate([
         core_1.Component({
             selector: 'g[ngx-charts-area-tooltip]',
-            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        [@animationState]=\"anchorOpacity[i] !== 0 ? 'active' : 'inactive'\"\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        style=\"fill: rgb(255, 255, 255);\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"5\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
+            template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        [@animationState]=\"anchorOpacity[i] !== 0 ? 'active' : 'inactive'\"\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"15\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             animations: [
                 core_1.trigger('animationState', [
@@ -5913,8 +6495,10 @@ var BaseChartComponent = (function () {
     };
     BaseChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
-        this.visibilityObserver.visible.unsubscribe();
-        this.visibilityObserver.destroy();
+        if (this.visibilityObserver) {
+            this.visibilityObserver.visible.unsubscribe();
+            this.visibilityObserver.destroy();
+        }
     };
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -10729,6 +11313,7 @@ __export(__webpack_require__("./src/ngx-charts.module.ts"));
 __export(__webpack_require__("./src/common/index.ts"));
 __export(__webpack_require__("./src/area-chart/index.ts"));
 __export(__webpack_require__("./src/bar-chart/index.ts"));
+__export(__webpack_require__("./src/bubble-chart/index.ts"));
 __export(__webpack_require__("./src/force-directed-graph/index.ts"));
 __export(__webpack_require__("./src/heat-map/index.ts"));
 __export(__webpack_require__("./src/line-chart/index.ts"));
@@ -11456,6 +12041,7 @@ var core_1 = __webpack_require__(0);
 var chart_common_module_1 = __webpack_require__("./src/common/chart-common.module.ts");
 var area_chart_module_1 = __webpack_require__("./src/area-chart/area-chart.module.ts");
 var bar_chart_module_1 = __webpack_require__("./src/bar-chart/bar-chart.module.ts");
+var bubble_chart_module_1 = __webpack_require__("./src/bubble-chart/bubble-chart.module.ts");
 var force_directed_graph_module_1 = __webpack_require__("./src/force-directed-graph/force-directed-graph.module.ts");
 var heat_map_module_1 = __webpack_require__("./src/heat-map/heat-map.module.ts");
 var line_chart_module_1 = __webpack_require__("./src/line-chart/line-chart.module.ts");
@@ -11472,6 +12058,7 @@ var NgxChartsModule = (function () {
                 chart_common_module_1.ChartCommonModule,
                 area_chart_module_1.AreaChartModule,
                 bar_chart_module_1.BarChartModule,
+                bubble_chart_module_1.BubbleChartModule,
                 force_directed_graph_module_1.ForceDirectedGraphModule,
                 heat_map_module_1.HeatMapModule,
                 line_chart_module_1.LineChartModule,
@@ -12666,7 +13253,7 @@ var PieGridComponent = (function (_super) {
                 label: trim_label_helper_1.trimLabel(label),
                 total: value,
                 value: value,
-                percent: d3_1.default.format('.1p')(d.data.percent),
+                percent: d3_1.default.format('.1%')(d.data.percent),
                 data: [d, {
                         data: {
                             other: true,

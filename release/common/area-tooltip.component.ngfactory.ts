@@ -362,13 +362,13 @@ class View_AreaTooltip1 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',import3.EMPTY_INLINE_ARRAY,(null as any));
     this._text_1 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:rect',new import3.InlineArray8(6,'class','tooltip-area','style','fill: rgb(255, 0, 0); opacity: 0; cursor: \'auto\';','y','0'),(null as any));
+    this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:rect',new import3.InlineArray8(6,'class','tooltip-area','style','opacity: 0; cursor: \'auto\';','y','0'),(null as any));
     this._text_3 = this.renderer.createText(this._el_0,'\n      ',(null as any));
     this._anchor_4 = this.renderer.createTemplateAnchor(this._el_0,(null as any));
     this._vc_4 = new import15.ViewContainer(4,0,this,this._anchor_4);
     this._TemplateRef_4_4 = new import18.TemplateRef_(this,4,this._anchor_4);
     this._text_5 = this.renderer.createText(this._el_0,'\n      ',(null as any));
-    this._el_6 = import3.createRenderElement(this.renderer,this._el_0,':svg:rect',new import3.InlineArray8(8,'class','tooltip-anchor','ngx-tooltip','','style','fill: rgb(255, 255, 255);','y','0'),(null as any));
+    this._el_6 = import3.createRenderElement(this.renderer,this._el_0,':svg:rect',new import3.InlineArray8(6,'class','tooltip-anchor','ngx-tooltip','','y','0'),(null as any));
     this._vc_6 = new import15.ViewContainer(6,0,this,this._el_6);
     this._TooltipDirective_6_5 = new import21.Wrapper_TooltipDirective(this.parentView.injectorGet(import22.TooltipService,this.parentIndex),this._vc_6.vcRef,this.renderer,new import23.ElementRef(this._el_6),this.parentView.injectorGet(import24.NgZone,this.parentIndex));
     this._text_7 = this.renderer.createText(this._el_0,'\n    ',(null as any));
@@ -402,7 +402,7 @@ class View_AreaTooltip1 extends import2.AppView<any> {
       var animationTransition_animationState:any = this.componentType.animations['animationState'](this,this._el_6,((this._expr_15 == import1.UNINITIALIZED)? 'void': this._expr_15),((currVal_15 == import1.UNINITIALIZED)? 'void': currVal_15));
       this._expr_15 = currVal_15;
     }
-    const currVal_6_0_0:any = 5;
+    const currVal_6_0_0:any = 15;
     this._TooltipDirective_6_5.check_tooltipSpacing(currVal_6_0_0,throwOnChange,false);
     const currVal_6_0_1:any = 'right';
     this._TooltipDirective_6_5.check_tooltipPlacement(currVal_6_0_1,throwOnChange,false);
