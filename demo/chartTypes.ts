@@ -97,6 +97,12 @@ const chartGroups = [
         ]
       },
       {
+        name: 'Simple Pie Chart',
+        selector: 'simple-pie-chart',
+        inputFormat: 'singleSeries',
+        options: ['colorScheme']
+      },
+      {
         name: 'Advanced Pie Chart',
         selector: 'advanced-pie-chart',
         inputFormat: 'singleSeries',
