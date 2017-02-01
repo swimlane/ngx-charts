@@ -229,6 +229,24 @@
         [roundDomains]="roundDomains"
         (select)="select($event)">
       </ngx-charts-line-chart>
+      <ngx-charts-bubble-chart
+        *ngIf="chartType === 'bubble-chart'"
+        [view]="view"
+        class="chart-container"
+        [results]="bubble"
+        [showGridLines]="showGridLines"
+        [legend]="showLegend"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [roundDomains]="roundDomains">
+      </ngx-charts-bubble-chart>
       <ngx-charts-force-directed-graph
         *ngIf="chartType === 'force-directed-graph'"
         class="chart-container"
@@ -415,6 +433,7 @@
       <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
+      <pre *ngIf="chart.inputFormat === 'bubble'">{{bubble | json}}</pre>
       <div>
         <label>
           <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">

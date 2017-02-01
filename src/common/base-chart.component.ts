@@ -45,8 +45,10 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unbindEvents();
-    this.visibilityObserver.visible.unsubscribe();
-    this.visibilityObserver.destroy();
+    if (this.visibilityObserver) {
+      this.visibilityObserver.visible.unsubscribe();
+      this.visibilityObserver.destroy();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {

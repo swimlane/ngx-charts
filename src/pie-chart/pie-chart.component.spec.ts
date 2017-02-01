@@ -84,7 +84,7 @@ describe('<ngx-charts-pie>', () => {
           .innerRadius(0)
           .outerRadius(440 / 3)
           .startAngle(0)
-          .endAngle(1.1656999674906274);
+          .endAngle(1.0996941056424656);
 
         expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
         done();
@@ -118,7 +118,7 @@ describe('<ngx-charts-pie>', () => {
           .innerRadius(outerRadius * 3 / 4) // default arc is 1/4 outerwidth
           .outerRadius(outerRadius)
           .startAngle(0)
-          .endAngle(1.1656999674906274);
+          .endAngle(1.0996941056424656);
 
         expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
         done();
@@ -151,7 +151,7 @@ describe('<ngx-charts-pie>', () => {
           .innerRadius(outerRadius * 0.90) // default arc is 1/4 outerwidth
           .outerRadius(outerRadius)
           .startAngle(0)
-          .endAngle(1.1656999674906274);
+          .endAngle(1.0996941056424656);
 
         expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
         done();
