@@ -20,13 +20,13 @@ import { id } from '../utils/id';
   template: `
     <svg:g *ngFor="let circle of circles">
       <svg:g ngx-charts-circle
-        *ngIf="isVisible(circle)"
         class="circle"
         [cx]="circle.cx"
         [cy]="circle.cy"
         [r]="circle.radius"
         [fill]="circle.color"
-        [class.active]="isActive({name: circle.seriesName})"
+        [style.opacity]="circle.opacity"
+        [class.active]="circle.isActive"
         [pointerEvents]="circle.value === 0 ? 'none': 'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
@@ -98,6 +98,9 @@ export class BubbleSeriesComponent implements OnChanges {
           this.colors.getColor(r) :
           this.colors.getColor(seriesName);
 
+        const isActive = !this.activeEntries.length ? true : this.isActive({name: seriesName});
+        const opacity = isActive ? 1 : 0.3;
+
         return {
           x,
           y,
@@ -110,8 +113,9 @@ export class BubbleSeriesComponent implements OnChanges {
           radius,
           tooltipLabel,
           color,
-          opacity: 1,
-          seriesName
+          opacity,
+          seriesName,
+          isActive
         };
       }
     }).filter((circle) => circle !== undefined);

@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  HostListener
 } from '@angular/core';
 
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -17,6 +18,7 @@ import { ColorHelper } from '../common/color.helper';
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
+      [activeEntries]="activeEntries"
       [legendOptions]="legendOptions"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
@@ -134,7 +136,8 @@ export class BubbleChartComponent extends BaseChartComponent {
         yAxisWidth: this.yAxisWidth,
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
-        showLegend: this.legend
+        showLegend: this.legend,
+        legendType: this.schemeType
       });
 
       this.seriesDomain = this.results.map(d => d.name);
@@ -155,6 +158,11 @@ export class BubbleChartComponent extends BaseChartComponent {
       
       this.legendOptions = this.getLegendOptions();
     });
+  }
+
+  @HostListener('mouseleave')
+  hideCircles(): void {
+    this.deactivateAll();
   }
   
   onClick(data, series): void {
@@ -274,6 +282,14 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.activeEntries = [...this.activeEntries];
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
+  }
+
+  deactivateAll() {
+    this.activeEntries = [...this.activeEntries];
+    for (const entry of this.activeEntries) {
+      this.deactivate.emit({ value: entry, entries: [] });
+    }
+    this.activeEntries = [];
   }
 }
 
