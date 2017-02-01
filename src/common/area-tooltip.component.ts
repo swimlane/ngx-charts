@@ -26,7 +26,7 @@ import {
         y="0"
         [attr.width]="tooltipArea.width"
         [attr.height]="height"
-        style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
+        style="opacity: 0; cursor: 'auto';"
         (mouseenter)="showTooltip(i)"
         (mouseleave)="hideTooltip(i)"
       />
@@ -50,13 +50,13 @@ import {
         y="0"
         [attr.width]="1"
         [attr.height]="height"
-        style="fill: rgb(255, 255, 255);"
+        style="fill: rgb(0, 0, 0);"
         [style.opacity]="anchorOpacity[i]"
         [style.pointer-events]="'none'"
         ngx-tooltip
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
-        [tooltipSpacing]="5"
+        [tooltipSpacing]="15"
         [tooltipTemplate]="tooltipTemplate"
       />
     </svg:g>
