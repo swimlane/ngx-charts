@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.0
+- Feature: Added scatter/bubble chart (#197)
+- Bug: Made line-area-tooltip anchor visible on light theme
+- Bug: Fixed precision on pie grid percentage values (#202)
+
 ## 4.0.3
 - Bug: Update zone.js version
 

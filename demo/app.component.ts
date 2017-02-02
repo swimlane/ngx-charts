@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import d3 from '../src/d3';
 
 import { colorSets } from '../src/utils/color-sets';
-import { single, multi, countries, generateData, generateGraph } from './data';
+import { single, multi, countries, bubble, generateData, generateGraph } from './data';
 import chartGroups from './chartTypes';
 
 @Component({
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   dateData: any[];
   dateDataWithRange: any[];
   graph: { links: any[], nodes: any[] };
+  bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
 
@@ -99,7 +100,8 @@ export class AppComponent implements OnInit {
       countries,
       chartGroups,
       colorSets,
-      graph: generateGraph(50)
+      graph: generateGraph(50),
+      bubble
     });
 
     this.dateData = generateData(5, false);
@@ -150,6 +152,12 @@ export class AppComponent implements OnInit {
         this.multi = [...this.multi];
       }
 
+      if (this.bubble.length > 1) {
+        const index = Math.floor(Math.random() * this.bubble.length);
+        this.bubble.splice(index, 1);
+        this.bubble = [...this.bubble];
+      }
+
       if (this.graph.nodes.length > 1) {
         const index = Math.floor(Math.random() * this.graph.nodes.length);
         const value = this.graph.nodes[index].value;
@@ -195,6 +203,24 @@ export class AppComponent implements OnInit {
       };
       const links = [ ...this.graph.links, link];
       this.graph = { links, nodes };
+
+      // bubble
+      const bubbleEntry = {
+        name: country,
+        series: [{
+          name: '2010',
+          x: Math.floor(10000 + Math.random() * 20000),
+          y: Math.floor(30 + Math.random() * 70),
+          r: Math.floor(30 + Math.random() * 20),
+        }, {
+          name: '2011',
+          x: Math.floor(10000 + Math.random() * 20000),
+          y: Math.floor(30 + Math.random() * 70),
+          r: Math.floor(30 + Math.random() * 20),
+        }]
+      };
+
+      this.bubble = [...this.bubble, bubbleEntry];
     }
   }
 
@@ -220,6 +246,14 @@ export class AppComponent implements OnInit {
       this.chartType === 'area-chart' ||
       this.chartType === 'area-chart-normalized' ||
       this.chartType === 'area-chart-stacked';
+
+    if (this.chartType === 'bubble-chart') {
+      this.xAxisLabel = 'GDP Per Capita';
+      this.yAxisLabel = 'Life expectancy [years]';
+    } else {
+      this.yAxisLabel = 'GDP Per Capita';
+      this.xAxisLabel = 'Country';
+    }
 
     for (const group of this.chartGroups) {
       for (const chart of group.charts) {

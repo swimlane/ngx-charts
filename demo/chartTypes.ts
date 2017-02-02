@@ -169,6 +169,16 @@ const chartGroups = [
     name: 'Other Charts',
     charts: [
       {
+        name: 'Bubble Chart',
+        selector: 'bubble-chart',
+        inputFormat: 'bubble',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'showLegend',
+          'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines',
+          'roundDomains', 'autoScale'
+        ]
+      },
+      {
         name: 'Force Directed Graph',
         selector: 'force-directed-graph',
         inputFormat: 'graph',
