@@ -222,6 +222,9 @@ export class AppComponent implements OnInit {
 
       this.bubble = [...this.bubble, bubbleEntry];
     }
+
+    this.dateData = generateData(5, false);
+    this.dateDataWithRange = generateData(2, true);
   }
 
   applyDimensions() {
