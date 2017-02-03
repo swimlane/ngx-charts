@@ -528,32 +528,38 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
   _TemplateRef_15_5:any;
   _NgIf_15_6:import22.Wrapper_NgIf;
   _text_16:any;
-  _anchor_17:any;
-  /*private*/ _vc_17:import14.ViewContainer;
-  _TemplateRef_17_5:any;
-  _NgFor_17_6:import23.Wrapper_NgFor;
+  _el_17:any;
   _text_18:any;
-  _text_19:any;
-  _arr_33:any;
-  /*private*/ _expr_34:any;
-  /*private*/ _expr_35:any;
+  _anchor_19:any;
+  /*private*/ _vc_19:import14.ViewContainer;
+  _TemplateRef_19_5:any;
+  _NgFor_19_6:import23.Wrapper_NgFor;
+  _text_20:any;
+  _text_21:any;
+  _arr_35:any;
   /*private*/ _expr_36:any;
   /*private*/ _expr_37:any;
   /*private*/ _expr_38:any;
+  /*private*/ _expr_39:any;
+  /*private*/ _expr_40:any;
+  /*private*/ _expr_41:any;
+  /*private*/ _expr_42:any;
   constructor(viewUtils:import3.ViewUtils,parentView:import2.AppView<any>,parentIndex:number,parentElement:any) {
     super(View_BubbleChartComponent0,renderType_BubbleChartComponent,import6.ViewType.COMPONENT,viewUtils,parentView,parentIndex,parentElement,import7.ChangeDetectorStatus.CheckAlways);
-    this._arr_33 = import3.pureProxy2((p0:any,p1:any):any[] => {
+    this._arr_35 = import3.pureProxy2((p0:any,p1:any):any[] => {
       return [
         p0,
         p1
       ]
       ;
     });
-    this._expr_34 = import1.UNINITIALIZED;
-    this._expr_35 = import1.UNINITIALIZED;
     this._expr_36 = import1.UNINITIALIZED;
     this._expr_37 = import1.UNINITIALIZED;
     this._expr_38 = import1.UNINITIALIZED;
+    this._expr_39 = import1.UNINITIALIZED;
+    this._expr_40 = import1.UNINITIALIZED;
+    this._expr_41 = import1.UNINITIALIZED;
+    this._expr_42 = import1.UNINITIALIZED;
   }
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     const parentRenderNode:any = this.renderer.createViewRoot(this.parentElement);
@@ -583,16 +589,19 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
     this._vc_15 = new import14.ViewContainer(15,11,this,this._anchor_15);
     this._TemplateRef_15_5 = new import25.TemplateRef_(this,15,this._anchor_15);
     this._NgIf_15_6 = new import22.Wrapper_NgIf(this._vc_15.vcRef,this._TemplateRef_15_5);
-    this._text_16 = this.renderer.createText(this._el_11,'\n          \n        ',(null as any));
-    this._anchor_17 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
-    this._vc_17 = new import14.ViewContainer(17,11,this,this._anchor_17);
-    this._TemplateRef_17_5 = new import25.TemplateRef_(this,17,this._anchor_17);
-    this._NgFor_17_6 = new import23.Wrapper_NgFor(this._vc_17.vcRef,this._TemplateRef_17_5,this.parentView.injectorGet(import26.IterableDiffers,this.parentIndex),this.ref);
-    this._text_18 = this.renderer.createText(this._el_11,'\n        \n      ',(null as any));
-    this._text_19 = this.renderer.createText((null as any),'\n    ',(null as any));
+    this._text_16 = this.renderer.createText(this._el_11,'\n \n        ',(null as any));
+    this._el_17 = import3.createRenderElement(this.renderer,this._el_11,':svg:rect',new import3.InlineArray8(8,'class','bubble-chart-area','style','fill: rgb(255, 0, 0); opacity: 0; cursor: \'auto\';','x','0','y','0'),(null as any));
+    this._text_18 = this.renderer.createText(this._el_11,'\n\n        ',(null as any));
+    this._anchor_19 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
+    this._vc_19 = new import14.ViewContainer(19,11,this,this._anchor_19);
+    this._TemplateRef_19_5 = new import25.TemplateRef_(this,19,this._anchor_19);
+    this._NgFor_19_6 = new import23.Wrapper_NgFor(this._vc_19.vcRef,this._TemplateRef_19_5,this.parentView.injectorGet(import26.IterableDiffers,this.parentIndex),this.ref);
+    this._text_20 = this.renderer.createText(this._el_11,'\n        \n      ',(null as any));
+    this._text_21 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));
     this._ChartComponent_1_6.subscribe(this,this.eventHandler(this.handleEvent_1),true,true,true);
+    var disposable_1:Function = import3.subscribeToRenderElement(this,this._el_17,new import3.InlineArray2(2,'mouseenter',(null as any)),this.eventHandler(this.handleEvent_17));
     this.init((null as any),((<any>this.renderer).directRenderer? (null as any): [
       this._text_0,
       this._el_1,
@@ -611,11 +620,17 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
       this._text_14,
       this._anchor_15,
       this._text_16,
-      this._anchor_17,
+      this._el_17,
       this._text_18,
-      this._text_19
+      this._anchor_19,
+      this._text_20,
+      this._text_21
     ]
-    ),[disposable_0]);
+    ),[
+      disposable_0,
+      disposable_1
+    ]
+    );
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
@@ -623,14 +638,14 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
     if (((token === import27.NgIf) && (13 === requestNodeIndex))) { return this._NgIf_13_6.context; }
     if (((token === import25.TemplateRef) && (15 === requestNodeIndex))) { return this._TemplateRef_15_5; }
     if (((token === import27.NgIf) && (15 === requestNodeIndex))) { return this._NgIf_15_6.context; }
-    if (((token === import25.TemplateRef) && (17 === requestNodeIndex))) { return this._TemplateRef_17_5; }
-    if (((token === import28.NgFor) && (17 === requestNodeIndex))) { return this._NgFor_17_6.context; }
-    if (((token === import20.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 19)))) { return this._TooltipService_1_5; }
-    if (((token === import19.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 19)))) { return this._ChartComponent_1_6.context; }
+    if (((token === import25.TemplateRef) && (19 === requestNodeIndex))) { return this._TemplateRef_19_5; }
+    if (((token === import28.NgFor) && (19 === requestNodeIndex))) { return this._NgFor_19_6.context; }
+    if (((token === import20.TooltipService) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 21)))) { return this._TooltipService_1_5; }
+    if (((token === import19.ChartComponent) && ((1 <= requestNodeIndex) && (requestNodeIndex <= 21)))) { return this._ChartComponent_1_6.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
-    const currVal_1_0_0:any = this._arr_33(this.context.width,this.context.height);
+    const currVal_1_0_0:any = this._arr_35(this.context.width,this.context.height);
     this._ChartComponent_1_6.check_view(currVal_1_0_0,throwOnChange,false);
     const currVal_1_0_1:any = this.context.legend;
     this._ChartComponent_1_6.check_showLegend(currVal_1_0_1,throwOnChange,false);
@@ -645,37 +660,47 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
     const currVal_15_0_0:any = this.context.yAxis;
     this._NgIf_15_6.check_ngIf(currVal_15_0_0,throwOnChange,false);
     this._NgIf_15_6.ngDoCheck(this,this._anchor_15,throwOnChange);
-    const currVal_17_0_0:any = this.context.data;
-    this._NgFor_17_6.check_ngForOf(currVal_17_0_0,throwOnChange,false);
-    this._NgFor_17_6.ngDoCheck(this,this._anchor_17,throwOnChange);
+    const currVal_19_0_0:any = this.context.data;
+    this._NgFor_19_6.check_ngForOf(currVal_19_0_0,throwOnChange,false);
+    this._NgFor_19_6.ngDoCheck(this,this._anchor_19,throwOnChange);
     this._vc_1.detectChangesInNestedViews(throwOnChange);
     this._vc_13.detectChangesInNestedViews(throwOnChange);
     this._vc_15.detectChangesInNestedViews(throwOnChange);
-    this._vc_17.detectChangesInNestedViews(throwOnChange);
-    const currVal_34:any = this.context.clipPathId;
-    if (import3.checkBinding(throwOnChange,this._expr_34,currVal_34)) {
-      this.renderer.setElementAttribute(this._el_5,'id',((currVal_34 == null)? (null as any): currVal_34.toString()));
-      this._expr_34 = currVal_34;
-    }
-    const currVal_35:any = (this.context.dims.width + 10);
-    if (import3.checkBinding(throwOnChange,this._expr_35,currVal_35)) {
-      this.renderer.setElementAttribute(this._el_7,'width',((currVal_35 == null)? (null as any): currVal_35.toString()));
-      this._expr_35 = currVal_35;
-    }
-    const currVal_36:any = (this.context.dims.height + 10);
+    this._vc_19.detectChangesInNestedViews(throwOnChange);
+    const currVal_36:any = this.context.clipPathId;
     if (import3.checkBinding(throwOnChange,this._expr_36,currVal_36)) {
-      this.renderer.setElementAttribute(this._el_7,'height',((currVal_36 == null)? (null as any): currVal_36.toString()));
+      this.renderer.setElementAttribute(this._el_5,'id',((currVal_36 == null)? (null as any): currVal_36.toString()));
       this._expr_36 = currVal_36;
     }
-    const currVal_37:any = 'translate(-5, -5)';
+    const currVal_37:any = (this.context.dims.width + 10);
     if (import3.checkBinding(throwOnChange,this._expr_37,currVal_37)) {
-      this.renderer.setElementAttribute(this._el_7,'transform',((currVal_37 == null)? (null as any): currVal_37.toString()));
+      this.renderer.setElementAttribute(this._el_7,'width',((currVal_37 == null)? (null as any): currVal_37.toString()));
       this._expr_37 = currVal_37;
     }
-    const currVal_38:any = this.context.transform;
+    const currVal_38:any = (this.context.dims.height + 10);
     if (import3.checkBinding(throwOnChange,this._expr_38,currVal_38)) {
-      this.renderer.setElementAttribute(this._el_11,'transform',((currVal_38 == null)? (null as any): currVal_38.toString()));
+      this.renderer.setElementAttribute(this._el_7,'height',((currVal_38 == null)? (null as any): currVal_38.toString()));
       this._expr_38 = currVal_38;
+    }
+    const currVal_39:any = 'translate(-5, -5)';
+    if (import3.checkBinding(throwOnChange,this._expr_39,currVal_39)) {
+      this.renderer.setElementAttribute(this._el_7,'transform',((currVal_39 == null)? (null as any): currVal_39.toString()));
+      this._expr_39 = currVal_39;
+    }
+    const currVal_40:any = this.context.transform;
+    if (import3.checkBinding(throwOnChange,this._expr_40,currVal_40)) {
+      this.renderer.setElementAttribute(this._el_11,'transform',((currVal_40 == null)? (null as any): currVal_40.toString()));
+      this._expr_40 = currVal_40;
+    }
+    const currVal_41:any = this.context.dims.width;
+    if (import3.checkBinding(throwOnChange,this._expr_41,currVal_41)) {
+      this.renderer.setElementAttribute(this._el_17,'width',((currVal_41 == null)? (null as any): currVal_41.toString()));
+      this._expr_41 = currVal_41;
+    }
+    const currVal_42:any = this.context.dims.height;
+    if (import3.checkBinding(throwOnChange,this._expr_42,currVal_42)) {
+      this.renderer.setElementAttribute(this._el_17,'height',((currVal_42 == null)? (null as any): currVal_42.toString()));
+      this._expr_42 = currVal_42;
     }
     this.compView_1.internalDetectChanges(throwOnChange);
   }
@@ -683,7 +708,7 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
     this._vc_1.destroyNestedViews();
     this._vc_13.destroyNestedViews();
     this._vc_15.destroyNestedViews();
-    this._vc_17.destroyNestedViews();
+    this._vc_19.destroyNestedViews();
     this.compView_1.destroy();
     this._ChartComponent_1_6.ngOnDestroy();
   }
@@ -693,13 +718,13 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
       cb(this._el_3,ctx);
       cb(this._text_10,ctx);
       cb(this._el_11,ctx);
-      cb(this._text_19,ctx);
+      cb(this._text_21,ctx);
     }
   }
   createEmbeddedViewInternal(nodeIndex:number):import2.AppView<any> {
     if ((nodeIndex == 13)) { return new View_BubbleChartComponent1(this.viewUtils,this,13,this._anchor_13,this._vc_13); }
     if ((nodeIndex == 15)) { return new View_BubbleChartComponent2(this.viewUtils,this,15,this._anchor_15,this._vc_15); }
-    if ((nodeIndex == 17)) { return new View_BubbleChartComponent3(this.viewUtils,this,17,this._anchor_17,this._vc_17); }
+    if ((nodeIndex == 19)) { return new View_BubbleChartComponent3(this.viewUtils,this,19,this._anchor_19,this._vc_19); }
     return (null as any);
   }
   handleEvent_1(eventName:string,$event:any):boolean {
@@ -716,6 +741,15 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
     if ((eventName == 'legendLabelDeactivate')) {
       const pd_sub_2:any = ((<any>this.context.onDeactivate($event)) !== false);
       result = (pd_sub_2 && result);
+    }
+    return result;
+  }
+  handleEvent_17(eventName:string,$event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    var result:boolean = true;
+    if ((eventName == 'mouseenter')) {
+      const pd_sub_0:any = ((<any>this.context.deactivateAll()) !== false);
+      result = (pd_sub_0 && result);
     }
     return result;
   }
