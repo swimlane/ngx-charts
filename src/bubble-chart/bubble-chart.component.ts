@@ -72,6 +72,8 @@ import { ColorHelper } from '../common/color.helper';
             [rScale]="rScale"
             [xScaleType]="xScaleType"
             [yScaleType]="yScaleType"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
             [colors]="colors"
             [data]="series"
             [activeEntries]="activeEntries"
