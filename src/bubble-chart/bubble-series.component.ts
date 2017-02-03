@@ -27,7 +27,7 @@ import { id } from '../utils/id';
         [fill]="circle.color"
         [style.opacity]="circle.opacity"
         [class.active]="circle.isActive"
-        [pointerEvents]="circle.value === 0 ? 'none': 'all'"
+        [pointerEvents]="'all'"
         [data]="circle.value"
         [classNames]="circle.classNames"
         (select)="onClick($event, circle.label)"
@@ -83,14 +83,14 @@ export class BubbleSeriesComponent implements OnChanges {
     const seriesName = this.data.name;
 
     return this.data.series.map((d, i) => {
-      const y = d.y;
-      const x = d.x;
-      const r = d.r || 1;
+      if (typeof d.y !== 'undefined' && typeof d.x !== 'undefined') {
+        const y = d.y;
+        const x = d.x;
+        const r = d.r;
 
-      const radius = this.rScale(r);
-      const tooltipLabel = formatLabel(d.name);
+        const radius = this.rScale(r || 1);
+        const tooltipLabel = formatLabel(d.name);
 
-      if (y) {
         const cx = (this.xScaleType === 'linear') ? this.xScale(Number(x)) : this.xScale(x);
         const cy = (this.yScaleType === 'linear') ? this.yScale(Number(y)) : this.yScale(y);
 
@@ -122,6 +122,8 @@ export class BubbleSeriesComponent implements OnChanges {
   }
 
   getTooltipText(circle): string {
+    const hasRadius = typeof circle.r !== 'undefined';
+    const radiusValue = hasRadius ? circle.r.toLocaleString() : '';
     return `
       <span class="tooltip-label">
         ${circle.seriesName} • ${circle.tooltipLabel}
@@ -130,7 +132,7 @@ export class BubbleSeriesComponent implements OnChanges {
         ${circle.x.toLocaleString()} ${circle.y.toLocaleString()}
       </span>
       <span class="tooltip-val">
-        ${circle.r.toLocaleString()}
+        ${radiusValue}
       </span>
     `;
   }
