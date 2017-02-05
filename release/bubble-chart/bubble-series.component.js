@@ -17,12 +17,12 @@ var BubbleSeriesComponent = (function () {
         var _this = this;
         var seriesName = this.data.name;
         return this.data.series.map(function (d, i) {
-            var y = d.y;
-            var x = d.x;
-            var r = d.r || 1;
-            var radius = _this.rScale(r);
-            var tooltipLabel = label_helper_1.formatLabel(d.name);
-            if (y) {
+            if (typeof d.y !== 'undefined' && typeof d.x !== 'undefined') {
+                var y = d.y;
+                var x = d.x;
+                var r = d.r;
+                var radius = _this.rScale(r || 1);
+                var tooltipLabel = label_helper_1.formatLabel(d.name);
                 var cx = (_this.xScaleType === 'linear') ? _this.xScale(Number(x)) : _this.xScale(x);
                 var cy = (_this.yScaleType === 'linear') ? _this.yScale(Number(y)) : _this.yScale(y);
                 var color = (_this.colors.scaleType === 'linear') ?
@@ -50,7 +50,9 @@ var BubbleSeriesComponent = (function () {
         }).filter(function (circle) { return circle !== undefined; });
     };
     BubbleSeriesComponent.prototype.getTooltipText = function (circle) {
-        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        " + circle.x.toLocaleString() + " " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + circle.r.toLocaleString() + "\n      </span>\n    ";
+        var hasRadius = typeof circle.r !== 'undefined';
+        var radiusValue = hasRadius ? circle.r.toLocaleString() : '';
+        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        " + circle.x.toLocaleString() + " " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
     };
     BubbleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({
@@ -83,7 +85,7 @@ var BubbleSeriesComponent = (function () {
     BubbleSeriesComponent.decorators = [
         { type: core_1.Component, args: [{
                     selector: 'g[ngx-charts-bubble-series]',
-                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [style.opacity]=\"circle.opacity\"\n        [class.active]=\"circle.isActive\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [style.opacity]=\"circle.opacity\"\n        [class.active]=\"circle.isActive\"\n        [pointerEvents]=\"'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     animations: [
                         core_1.trigger('animationState', [

@@ -298,7 +298,7 @@ class View_BubbleSeriesComponent1 extends import2.AppView<any> {
     this._CircleComponent_2_6.check_data(currVal_2_1_4,throwOnChange,false);
     const currVal_2_1_5:any = this.context.$implicit.classNames;
     this._CircleComponent_2_6.check_classNames(currVal_2_1_5,throwOnChange,false);
-    const currVal_2_1_6:any = ((this.context.$implicit.value === 0)? 'none': 'all');
+    const currVal_2_1_6:any = 'all';
     this._CircleComponent_2_6.check_pointerEvents(currVal_2_1_6,throwOnChange,false);
     if (this._CircleComponent_2_6.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this._vc_2.detectChangesInNestedViews(throwOnChange);
