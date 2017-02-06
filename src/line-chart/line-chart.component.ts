@@ -139,6 +139,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -396,8 +397,10 @@ export class LineChartComponent extends BaseChartComponent {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
@@ -405,6 +408,7 @@ export class LineChartComponent extends BaseChartComponent {
       opts.domain = this.yDomain;
       opts.colors = this.colors.scale;
     }
+
     return opts;
   }
 
@@ -418,7 +422,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -430,7 +434,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -441,7 +445,7 @@ export class LineChartComponent extends BaseChartComponent {
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
 
-  deactivateAll() {
+  deactivateAll(): void {
     this.activeEntries = [...this.activeEntries];
     for (const entry of this.activeEntries) {
       this.deactivate.emit({ value: entry, entries: [] });

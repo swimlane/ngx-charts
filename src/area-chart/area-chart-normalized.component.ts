@@ -143,6 +143,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

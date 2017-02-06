@@ -78,6 +78,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -122,7 +123,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
     });
   }
 
-  getXScale() {
+  getXScale(): any {
     this.xDomain = this.getXDomain();
 
     const scale = d3.scaleLinear()
@@ -132,7 +133,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale() {
+  getYScale(): any {
     this.yDomain = this.getYDomain();
     const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
     
@@ -170,12 +171,14 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.yDomain;
       opts.colors = this.colors;
@@ -197,7 +200,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
@@ -209,7 +212,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });

@@ -74,6 +74,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() innerPadding: Number | Number[] = 8;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() legendPosition: string = 'right';
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -213,11 +214,12 @@ export class HeatMapComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     return {
       scaleType: 'linear',
       domain: this.valueDomain,
-      colors: this.colors.scale
+      colors: this.colors.scale,
+      position: this.legendPosition
     };
   }
 

@@ -85,6 +85,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Input() nodes: any[] = [];
   @Input() links: Array<{ source: any, target: any }> = [];
   @Input() activeEntries: any[] = [];
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -169,11 +170,12 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.seriesDomain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     return {
       scaleType: 'ordinal',
       domain: this.seriesDomain,
-      colors: this.colors
+      colors: this.colors,
+      position: this.legendPosition
     };
   }
 

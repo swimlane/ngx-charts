@@ -78,6 +78,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -169,8 +170,10 @@ export class BarVerticalComponent extends BaseChartComponent {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.xDomain;
       opts.colors = this.colors;
@@ -178,6 +181,7 @@ export class BarVerticalComponent extends BaseChartComponent {
       opts.domain = this.yDomain;
       opts.colors = this.colors.scale;
     }
+
     return opts;
   }
 

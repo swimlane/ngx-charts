@@ -107,6 +107,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() groupPadding = 16;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

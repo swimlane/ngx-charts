@@ -12,6 +12,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendPosition]="legendPosition"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -31,6 +32,7 @@
         [results]="single"
         [gradient]="gradient"
         [xAxis]="showXAxis"
+        [legendPosition]="legendPosition"
         [yAxis]="showYAxis"
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
@@ -51,6 +53,7 @@
         [schemeType]="schemeType"
         [results]="multi"
         [gradient]="gradient"
+        [legendPosition]="legendPosition"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
@@ -74,6 +77,7 @@
         [results]="multi"
         [gradient]="gradient"
         [xAxis]="showXAxis"
+        [legendPosition]="legendPosition"
         [yAxis]="showYAxis"
         [legend]="showLegend"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -93,6 +97,7 @@
         [view]="view"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
+        [legendPosition]="legendPosition"
         [results]="multi"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -117,6 +122,7 @@
         [results]="multi"
         [gradient]="gradient"
         [xAxis]="showXAxis"
+        [legendPosition]="legendPosition"
         [yAxis]="showYAxis"
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
@@ -141,6 +147,7 @@
         [yAxis]="showYAxis"
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
+        [legendPosition]="legendPosition"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -163,6 +170,7 @@
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [legendPosition]="legendPosition"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -180,6 +188,7 @@
         [legend]="showLegend"
         [explodeSlices]="explodeSlices"
         [labels]="showLabels"
+        [legendPosition]="legendPosition"
         [doughnut]="doughnut"
         [arcWidth]="arcWidth"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -217,6 +226,7 @@
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
+        [legendPosition]="legendPosition"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -239,6 +249,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
+        [legendPosition]="legendPosition"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
@@ -253,6 +264,7 @@
         [legend]="showLegend"
         [links]="graph.links"
         (legendLabelClick)="onLegendLabelClick($event)"
+        [legendPosition]="legendPosition"
         [nodes]="graph.nodes"
         [scheme]="colorScheme"
         [view]="view"
@@ -272,6 +284,7 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [legendPosition]="legendPosition"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
@@ -290,6 +303,7 @@
         [results]="dateData"
         [legend]="showLegend"
         [gradient]="gradient"
+        [legendPosition]="legendPosition"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -313,6 +327,7 @@
         [legend]="showLegend"
         [gradient]="gradient"
         [xAxis]="showXAxis"
+        [legendPosition]="legendPosition"
         (legendLabelClick)="onLegendLabelClick($event)"
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
@@ -333,6 +348,7 @@
         [results]="multi"
         [legend]="showLegend"
         [gradient]="gradient"
+        [legendPosition]="legendPosition"
         (legendLabelClick)="onLegendLabelClick($event)"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -370,6 +386,7 @@
         [scheme]="colorScheme"
         [min]="gaugeMin"
         [max]="gaugeMax"
+        [legendPosition]="legendPosition"
         [units]="gaugeUnits"
         [angleSpan]="gaugeAngleSpan"
         [startAngle]="gaugeStartAngle"
@@ -544,6 +561,16 @@
           <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
           Show Legend
         </label> <br />
+      </div>
+      <div *ngIf="showLegend">
+        <label>Legend Position</label>
+        <select
+          [(ngModel)]="legendPosition">
+          <option value="right">Right</option>
+          <option value="left">Left</option>
+          <option value="top">Top</option>
+          <option value="top">bottom</option>
+        </select>
       </div>
       <div *ngIf="chart.options.includes('showXAxisLabel')">
         <label>

@@ -106,6 +106,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() groupPadding = 16;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -159,7 +160,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
     });
   }
 
-  getGroupScale() {
+  getGroupScale(): any {
     const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
   
     return d3.scaleBand()
@@ -169,7 +170,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
       .domain(this.groupDomain);
   }
 
-  getInnerScale() {
+  getInnerScale(): any {
     const width = this.groupScale.bandwidth();
     const spacing = this.innerDomain.length / (width / this.barPadding + 1);
     return d3.scaleBand()
@@ -178,10 +179,11 @@ export class BarVertical2DComponent extends BaseChartComponent {
       .domain(this.innerDomain);
   }
 
-  getValueScale() {
+  getValueScale(): any {
     const scale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.valuesDomain);
+
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -196,8 +198,9 @@ export class BarVertical2DComponent extends BaseChartComponent {
     return domain;
   }
 
-  getInnerDomain() {
+  getInnerDomain(): any[] {
     const domain = [];
+
     for (const group of this.results) {
       for (const d of group.series) {
         if (!domain.includes(d.name)) {
@@ -209,8 +212,9 @@ export class BarVertical2DComponent extends BaseChartComponent {
     return domain;
   }
 
-  getValueDomain() {
+  getValueDomain(): number[] {
     const domain = [];
+
     for (const group of this.results) {
       for (const d of group.series) {
         if (!domain.includes(d.value)) {
@@ -221,10 +225,11 @@ export class BarVertical2DComponent extends BaseChartComponent {
 
     const min = Math.min(0, ...domain);
     const max = Math.max(...domain);
+
     return [min, max];
   }
 
-  groupTransform(group) {
+  groupTransform(group): string {
     return `translate(${this.groupScale(group.name)}, 0)`;
   }
 
@@ -235,7 +240,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.name;
   }
 
@@ -250,12 +255,14 @@ export class BarVertical2DComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
@@ -267,17 +274,17 @@ export class BarVertical2DComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(event, group) {
+  onActivate(event, group): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -294,7 +301,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group) {
+  onDeactivate(event, group): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

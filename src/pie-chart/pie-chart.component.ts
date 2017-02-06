@@ -54,6 +54,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() arcWidth = 0.25;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
+  @Input() legendPosition: string = 'right';
 
   @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -139,15 +140,16 @@ export class PieChartComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     return {
       scaleType: 'ordinal',
       domain: this.domain,
-      colors: this.colors
+      colors: this.colors,
+      position: this.legendPosition
     };
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -159,7 +161,7 @@ export class PieChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });

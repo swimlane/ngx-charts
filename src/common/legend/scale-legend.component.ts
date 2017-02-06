@@ -24,14 +24,22 @@ import { DomSanitizer } from '@angular/platform-browser';
   `,
   styleUrls: ['./scale-legend.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.chart-legend]': 'true',
+    '[class.legend-position-left]': `position === 'left'`,
+    '[class.legend-position-right]': `position === 'right'`,
+    '[class.legend-position-top]': `position === 'top'`,
+    '[class.legend-position-bottom]': `position === 'bottom'`
+  }
 })
 export class ScaleLegendComponent implements OnChanges {
 
-  @Input() valueRange;
-  @Input() colors;
-  @Input() height;
-  @Input() width;
+  @Input() valueRange: any;
+  @Input() colors: any;
+  @Input() height: number;
+  @Input() width: number;
+  @Input() position: string;
 
   gradient: any;
 

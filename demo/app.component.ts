@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
   barPadding = 8;
   groupPadding = 16;
   roundDomains = false;
+  legendPosition = 'left';
 
   // line interpolation
   curveType: string = 'Linear';

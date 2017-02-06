@@ -85,6 +85,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() angleSpan: number = 240;
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
+  @Input() legendPosition: string = 'right';
 
   // Specify margins
   @Input() margin: any[];
@@ -275,11 +276,12 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.select.emit(data);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     return {
       scaleType: 'ordinal',
       colors: this.colors,
-      domain: this.domain
+      domain: this.domain,
+      position: this.legendPosition
     };
   }
 
@@ -287,7 +289,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -299,7 +301,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });

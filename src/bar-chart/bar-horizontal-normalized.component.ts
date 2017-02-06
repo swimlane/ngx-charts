@@ -100,6 +100,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -181,7 +182,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     return [0, 100];
   }
 
-  getYScale() {
+  getYScale(): any {
     const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
 
     return d3.scaleBand()
@@ -190,10 +191,11 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
       .domain(this.groupDomain);
   }
 
-  getXScale() {
+  getXScale(): any {
     const scale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valueDomain);
+
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -224,12 +226,14 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
@@ -251,7 +255,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(event, group) {
+  onActivate(event, group): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -268,7 +272,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group) {
+  onDeactivate(event, group): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

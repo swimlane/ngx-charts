@@ -21,7 +21,7 @@ import { TooltipService } from '../tooltip';
       </svg>
       <ngx-charts-scale-legend
         *ngIf="showLegend && legendType === 'scaleLegend'"
-        class="chart-legend"
+        [position]="legendOptions.position"
         [valueRange]="legendOptions.domain"
         [colors]="legendOptions.colors"
         [height]="view[1]"
@@ -29,7 +29,7 @@ import { TooltipService } from '../tooltip';
       </ngx-charts-scale-legend>
       <ngx-charts-legend
         *ngIf="showLegend && legendType === 'legend'"
-        class="chart-legend"
+        [position]="legendOptions.position"
         [data]="legendOptions.domain"
         [title]="legendTitle"
         [colors]="legendOptions.colors"
@@ -54,15 +54,15 @@ import { TooltipService } from '../tooltip';
 })
 export class ChartComponent implements OnChanges {
 
-  @Input() view;
-  @Input() showLegend = false;
+  @Input() view: any[];
+  @Input() showLegend: boolean = false;
   @Input() legendOptions: any;
 
   // remove
-  @Input() data;
-  @Input() legendData;
+  @Input() data: any;
+  @Input() legendData: any;
   @Input() legendType: any;
-  @Input() legendTitle = 'Legend';
+  @Input() legendTitle: string = 'Legend';
   @Input() colors: any;
   @Input() activeEntries: any[];
 

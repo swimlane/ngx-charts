@@ -3,6 +3,14 @@
   padding: 0;
   width: auto !important;
 
+  &.legend-position-right {
+    float: right;
+  }
+
+  &.legend-position-left {
+    float: left;
+  }
+
   .legend-title {
     white-space: nowrap;
     overflow: hidden;

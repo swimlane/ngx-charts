@@ -34,16 +34,24 @@ import {
   `,
   styleUrls: ['./legend.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.chart-legend]': 'true',
+    '[class.legend-position-left]': `position === 'left'`,
+    '[class.legend-position-right]': `position === 'right'`,
+    '[class.legend-position-top]': `position === 'top'`,
+    '[class.legend-position-bottom]': `position === 'bottom'`
+  }
 })
 export class LegendComponent implements OnChanges {
 
-  @Input() data;
-  @Input() title;
-  @Input() colors;
-  @Input() height;
-  @Input() width;
-  @Input() activeEntries;
+  @Input() data: any;
+  @Input() colors: any;
+  @Input() title: string;
+  @Input() height: number;
+  @Input() width: number;
+  @Input() activeEntries: any[];
+  @Input() position: string;
 
   @Output() labelClick: EventEmitter<any> = new EventEmitter();
   @Output() labelActivate: EventEmitter<any> = new EventEmitter();

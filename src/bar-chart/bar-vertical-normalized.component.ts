@@ -100,6 +100,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -151,7 +152,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     });
   }
 
-  getGroupDomain() {
+  getGroupDomain(): any[] {
     const domain = [];
     for (const group of this.results) {
       if (!domain.includes(group.name)) {
@@ -162,8 +163,9 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return domain;
   }
 
-  getInnerDomain() {
+  getInnerDomain(): any[] {
     const domain = [];
+
     for (const group of this.results) {
       for (const d of group.series) {
         if (!domain.includes(d.name)) {
@@ -175,7 +177,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return domain;
   }
 
-  getValueDomain() {
+  getValueDomain(): number[] {
     return [0, 100];
   }
 
@@ -188,25 +190,27 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
       .domain(this.groupDomain);
   }
 
-  getYScale() {
+  getYScale(): any {
     const scale = d3.scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.valueDomain);
+
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  groupTransform(group) {
+  groupTransform(group): string {
     return `translate(${this.xScale(group.name)}, 0)`;
   }
 
-  onClick(data, group) {
+  onClick(data, group): void {
     if (group) {
       data.series = group.name;
     }
+
     this.select.emit(data);
   }
 
-  trackBy(index, item) {
+  trackBy(index, item): string {
     return item.name;
   }
 
@@ -221,12 +225,14 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
@@ -238,17 +244,17 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return opts;
   }
 
-  updateYAxisWidth({width}) {
+  updateYAxisWidth({ width }): void {
     this.yAxisWidth = width;
     this.update();
   }
 
-  updateXAxisHeight({height}) {
+  updateXAxisHeight({ height }): void {
     this.xAxisHeight = height;
     this.update();
   }
 
-  onActivate(event, group) {
+  onActivate(event, group): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -265,7 +271,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group) {
+  onDeactivate(event, group): void {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
