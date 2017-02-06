@@ -1,16 +1,10 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  HostListener
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import d3 from '../d3';
 
 import { BaseChartComponent } from '../common/base-chart.component';
-
-import d3 from '../d3';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
+import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
 
 @Component({
   selector: 'ngx-charts-bubble-chart',
@@ -104,6 +98,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() minRadius = 3;
   @Input() autoScale: boolean;
   @Input() schemeType = 'ordinal';
+  @Input() legendPosition: string = 'right';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -206,8 +201,10 @@ export class BubbleChartComponent extends BaseChartComponent {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
@@ -215,6 +212,7 @@ export class BubbleChartComponent extends BaseChartComponent {
       opts.domain = this.rDomain;
       opts.colors = this.colors.scale;
     }
+
     return opts;
   }
 
@@ -273,7 +271,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name;
     });
@@ -285,7 +283,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name;
     });
@@ -304,78 +302,3 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.activeEntries = [];
   }
 }
-
-// TODO: move to utilities?
-function getScaleType(values): string {
-  let date = true;
-  let num = true;
-
-  for (const value of values) {
-    if (!isDate(value)) {
-      date = false;
-    }
-
-    if (typeof value !== 'number') {
-      num = false;
-    }
-  }
-
-  if (date) return 'time';
-  if (num) return 'linear';
-  return 'ordinal';
-}
-
-function isDate(value: any): boolean {
-  if (value instanceof Date) {
-    return true;
-  }
-
-  return false;
-}
-
-function getDomain(values, scaleType, autoScale): number[] {
-    let domain: number[] = [];
-
-    if (scaleType === 'time') {
-      const min = Math.min(...values);
-      const max = Math.max(...values);
-      domain = [min, max];
-    } else if (scaleType === 'linear') {
-      values = values.map(v => Number(v));
-      let min = Math.min(...values);
-      const max = Math.max(...values);
-      if (!autoScale) {
-        min = Math.min(0, min);
-      }
-      domain = [min, max];
-    } else {
-      domain = values;
-    }
-
-    return domain;
-}
-
-function getScale(domain, range: number[], scaleType, padding, roundDomains): any {
-    let scale: any;
-
-    if (scaleType === 'time') {
-      scale = d3.scaleTime()
-        .range(range)
-        .domain(domain);
-    } else if (scaleType === 'linear') {
-      scale = d3.scaleLinear()
-        .range(range)
-        .domain([domain[0] - padding, domain[1] + padding]);
-
-      if (roundDomains) {
-        scale = scale.nice();
-      }
-    } else if (scaleType === 'ordinal') {
-      scale = d3.scalePoint()
-        .range(range)
-        .padding(0.1)
-        .domain(domain);
-    }
-
-    return scale;
-  }
