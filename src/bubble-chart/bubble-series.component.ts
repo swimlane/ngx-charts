@@ -63,6 +63,8 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() colors;
   @Input() visibleValue;
   @Input() activeEntries: any[];
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -129,7 +131,8 @@ export class BubbleSeriesComponent implements OnChanges {
         ${circle.seriesName} • ${circle.tooltipLabel}
       </span>
       <span class="tooltip-label">
-        ${circle.x.toLocaleString()} ${circle.y.toLocaleString()}
+        <span>${this.xAxisLabel}: ${circle.x.toLocaleString()}</span><br />
+        <span>${this.yAxisLabel}: ${circle.y.toLocaleString()}</span>
       </span>
       <span class="tooltip-val">
         ${radiusValue}
