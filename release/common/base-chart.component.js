@@ -22,8 +22,10 @@ var BaseChartComponent = (function () {
     };
     BaseChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
-        this.visibilityObserver.visible.unsubscribe();
-        this.visibilityObserver.destroy();
+        if (this.visibilityObserver) {
+            this.visibilityObserver.visible.unsubscribe();
+            this.visibilityObserver.destroy();
+        }
     };
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();

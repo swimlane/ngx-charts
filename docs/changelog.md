@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.1.1
+- Bug: Fix items not always deactivating on bubble chart
+- Bug: Fix bubbles not showing for when y value is 0
+- Bug: Fix realtime data generator on demo page for line and area charts
+
+## 4.1.0
+- Feature: Added scatter/bubble chart (#197)
+- Bug: Made line-area-tooltip anchor visible on light theme
+- Bug: Fixed precision on pie grid percentage values (#202)
+
 ## 4.0.3
 - Bug: Update zone.js version
 

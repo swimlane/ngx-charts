@@ -70,7 +70,7 @@ var PieGridComponent = (function (_super) {
                 label: trim_label_helper_1.trimLabel(label),
                 total: value,
                 value: value,
-                percent: d3_1.default.format('.1p')(d.data.percent),
+                percent: d3_1.default.format('.1%')(d.data.percent),
                 data: [d, {
                         data: {
                             other: true,
