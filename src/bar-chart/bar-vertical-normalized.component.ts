@@ -99,6 +99,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
+  @Input() paddingProportion = 0;
   @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -180,8 +181,10 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   }
 
   getXScale() {
-    const spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
-
+    let spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
+    if (this.paddingProportion) {
+      spacing = this.paddingProportion;
+    }
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)

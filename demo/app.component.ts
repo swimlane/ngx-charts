@@ -47,7 +47,9 @@ export class AppComponent implements OnInit {
   showGridLines = true;
   innerPadding = 8;
   barPadding = 8;
+  paddingProportion = 0;
   groupPadding = 16;
+  groupProportion = 0;
   roundDomains = false;
 
   // line interpolation
