@@ -8,8 +8,8 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'paddingProportion', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -18,8 +18,8 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'paddingProportion', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -27,9 +27,9 @@ const chartGroups = [
         selector: 'bar-vertical-2d',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'paddingProportion', 'groupPadding', 'groupProportion', 'showLegend', 'showXAxisLabel',
+          'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -37,9 +37,9 @@ const chartGroups = [
         selector: 'bar-horizontal-2d',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding', 'groupPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'paddingProportion', 'groupPadding', 'groupProportion', 'showLegend', 'showXAxisLabel',
+          'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -48,8 +48,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'paddingProportion', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -58,8 +58,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'paddingProportion', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -68,8 +68,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'paddingProportion', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       },
       {
@@ -78,8 +78,8 @@ const chartGroups = [
         inputFormat: 'multiSeries',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
-          'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
-          'showGridLines', 'roundDomains'
+          'paddingProportion', 'showLegend', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'showGridLines', 'roundDomains'
         ]
       }
     ]
