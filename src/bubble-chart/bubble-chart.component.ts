@@ -34,7 +34,7 @@ import { ColorHelper } from '../common/color.helper';
       </svg:defs>
 
       <svg:g [attr.transform]="transform" class="bubble-chart chart">
-      
+
         <svg:g ngx-charts-x-axis
           *ngIf="xAxis"
           [showGridLines]="showGridLines"
@@ -44,7 +44,7 @@ import { ColorHelper } from '../common/color.helper';
           [labelText]="xAxisLabel"
           [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)"/>
-          
+
         <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [showGridLines]="showGridLines"
@@ -54,7 +54,7 @@ import { ColorHelper } from '../common/color.helper';
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)"/>
- 
+
         <svg:rect
           class="bubble-chart-area"
           x="0"
@@ -81,7 +81,7 @@ import { ColorHelper } from '../common/color.helper';
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)" />
         </svg:g>
-        
+
       </svg:g>
     </ngx-charts-chart>`
 })
@@ -113,10 +113,10 @@ export class BubbleChartComponent extends BaseChartComponent {
   scaleType = 'linear';
   margin = [10, 20, 10, 20];
   data: any;
-  
+
   legendOptions: any;
   transform: string;
-  
+
   seriesDomain: any[];
   xDomain: any[];
   yDomain: any[];
@@ -124,7 +124,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   xScaleType: string;
   yScaleType: string;
-  
+
   yScale: any;
   xScale: any;
   rScale: any;
@@ -133,7 +133,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
 
   activeEntries: any[] = [];
-  
+
   update(): void {
     super.update();
 
@@ -167,7 +167,7 @@ export class BubbleChartComponent extends BaseChartComponent {
       this.rScale = this.getRScale(this.rDomain, [this.minRadius, this.maxRadius]);
       this.xScale = this.getXScale(this.xDomain, this.dims.width);
       this.yScale = this.getYScale(this.yDomain, this.dims.height);
-      
+
       this.legendOptions = this.getLegendOptions();
     });
   }
@@ -176,19 +176,19 @@ export class BubbleChartComponent extends BaseChartComponent {
   hideCircles(): void {
     this.deactivateAll();
   }
-  
+
   onClick(data, series): void {
     if (series) {
       data.series = series.name;
     }
     this.select.emit(data);
   }
-  
+
   getYScale(domain, height): any {
     const padding = (domain[1] - domain[0]) / height * this.maxRadius;  // padding to keep bubbles inside range
     return getScale(domain, [height, 0], this.yScaleType, padding, this.roundDomains);
   }
-  
+
   getXScale(domain, width): any {
     const padding = (domain[1] - domain[0]) / width * this.maxRadius;  // padding to keep bubbles inside range
     return getScale(domain, [0, width], this.xScaleType, padding, this.roundDomains);
@@ -201,7 +201,7 @@ export class BubbleChartComponent extends BaseChartComponent {
 
     return this.roundDomains ? scale.nice() : scale;
   }
-  
+
   getLegendOptions(): any {
     const opts = {
       scaleType: this.schemeType,
@@ -217,7 +217,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     }
     return opts;
   }
-  
+
   getXDomain(): any[] {
     const values = [];
 
@@ -232,7 +232,7 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.xScaleType = getScaleType(values);
     return getDomain(values, this.xScaleType, this.autoScale);
   }
-  
+
   getYDomain(): any[] {
     const values = [];
 
@@ -363,9 +363,13 @@ function getScale(domain, range: number[], scaleType, padding, roundDomains): an
         .range(range)
         .domain(domain);
     } else if (scaleType === 'linear') {
-     scale = d3.scaleLinear()
+      scale = d3.scaleLinear()
         .range(range)
         .domain([domain[0] - padding, domain[1] + padding]);
+
+      if (roundDomains) {
+        scale = scale.nice();
+      }
     } else if (scaleType === 'ordinal') {
       scale = d3.scalePoint()
         .range(range)
@@ -373,5 +377,5 @@ function getScale(domain, range: number[], scaleType, padding, roundDomains): an
         .domain(domain);
     }
 
-    return roundDomains ? scale.nice() : scale;
+    return scale;
   }
