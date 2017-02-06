@@ -5,7 +5,7 @@ import { TooltipDirective } from './tooltip.directive';
 import { TooltipContentComponent } from './tooltip.component';
 import { TooltipService } from './tooltip.service';
 
-import { InjectionService } from '../../services';
+import { InjectionService } from './injection.service';
 
 @NgModule({
   declarations: [TooltipContentComponent, TooltipDirective],
