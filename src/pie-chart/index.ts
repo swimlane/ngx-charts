@@ -1,5 +1,7 @@
+export * from './advanced-pie-chart.component';
 export * from './pie-chart.module';
 export * from './pie-chart.component';
+export * from './simple-pie-chart.component';
 export * from './pie-arc.component';
 export * from './pie-grid.component';
 export * from './pie-series.component';

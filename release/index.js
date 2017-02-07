@@ -653,81 +653,81 @@ var AreaChartNormalizedComponent = (function (_super) {
         this.activeEntries = [];
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "timeline", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaChartNormalizedComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "curve", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], AreaChartNormalizedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], AreaChartNormalizedComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaChartNormalizedComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartNormalizedComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartNormalizedComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], AreaChartNormalizedComponent.prototype, "hideCircles", null);
     AreaChartNormalizedComponent = __decorate([
@@ -737,7 +737,7 @@ var AreaChartNormalizedComponent = (function (_super) {
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AreaChartNormalizedComponent);
     return AreaChartNormalizedComponent;
@@ -1069,81 +1069,81 @@ var AreaChartStackedComponent = (function (_super) {
         this.activeEntries = [];
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "timeline", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaChartStackedComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "curve", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], AreaChartStackedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], AreaChartStackedComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartStackedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaChartStackedComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartStackedComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartStackedComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], AreaChartStackedComponent.prototype, "hideCircles", null);
     AreaChartStackedComponent = __decorate([
@@ -1153,7 +1153,7 @@ var AreaChartStackedComponent = (function (_super) {
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AreaChartStackedComponent);
     return AreaChartStackedComponent;
@@ -1437,89 +1437,89 @@ var AreaChartComponent = (function (_super) {
         this.activeEntries = [];
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "state", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "autoScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "timeline", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaChartComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaChartComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "curve", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], AreaChartComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], AreaChartComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaChartComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaChartComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AreaChartComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], AreaChartComponent.prototype, "hideCircles", null);
     AreaChartComponent = __decorate([
@@ -1529,7 +1529,7 @@ var AreaChartComponent = (function (_super) {
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AreaChartComponent);
     return AreaChartComponent;
@@ -1581,7 +1581,7 @@ var AreaChartModule = (function () {
                 area_chart_stacked_component_1.AreaChartStackedComponent,
                 area_series_component_1.AreaSeriesComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AreaChartModule);
     return AreaChartModule;
@@ -1700,47 +1700,47 @@ var AreaSeriesComponent = (function () {
         return item === undefined;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "scaleType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaSeriesComponent.prototype, "stacked", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaSeriesComponent.prototype, "normalized", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "curve", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], AreaSeriesComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], AreaSeriesComponent.prototype, "select", void 0);
     AreaSeriesComponent = __decorate([
@@ -1748,7 +1748,7 @@ var AreaSeriesComponent = (function () {
             selector: 'g[ngx-charts-area-series]',
             template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AreaSeriesComponent);
     return AreaSeriesComponent;
@@ -1845,7 +1845,7 @@ var BarChartModule = (function () {
                 series_horizontal_component_1.SeriesHorizontal,
                 series_vertical_component_1.SeriesVerticalComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarChartModule);
     return BarChartModule;
@@ -2059,75 +2059,75 @@ var BarHorizontal2DComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontal2DComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontal2DComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarHorizontal2DComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarHorizontal2DComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "groupPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontal2DComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontal2DComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontal2DComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontal2DComponent.prototype, "deactivate", void 0);
     BarHorizontal2DComponent = __decorate([
@@ -2148,7 +2148,7 @@ var BarHorizontal2DComponent = (function (_super) {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarHorizontal2DComponent);
     return BarHorizontal2DComponent;
@@ -2339,71 +2339,71 @@ var BarHorizontalNormalizedComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalNormalizedComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalNormalizedComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarHorizontalNormalizedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarHorizontalNormalizedComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalNormalizedComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalNormalizedComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalNormalizedComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalNormalizedComponent.prototype, "deactivate", void 0);
     BarHorizontalNormalizedComponent = __decorate([
@@ -2424,7 +2424,7 @@ var BarHorizontalNormalizedComponent = (function (_super) {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarHorizontalNormalizedComponent);
     return BarHorizontalNormalizedComponent;
@@ -2627,71 +2627,71 @@ var BarHorizontalStackedComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalStackedComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalStackedComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarHorizontalStackedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarHorizontalStackedComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalStackedComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalStackedComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalStackedComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalStackedComponent.prototype, "deactivate", void 0);
     BarHorizontalStackedComponent = __decorate([
@@ -2712,7 +2712,7 @@ var BarHorizontalStackedComponent = (function (_super) {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarHorizontalStackedComponent);
     return BarHorizontalStackedComponent;
@@ -2867,71 +2867,71 @@ var BarHorizontalComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarHorizontalComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarHorizontalComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarHorizontalComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarHorizontalComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarHorizontalComponent.prototype, "deactivate", void 0);
     BarHorizontalComponent = __decorate([
@@ -2941,7 +2941,7 @@ var BarHorizontalComponent = (function (_super) {
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarHorizontalComponent);
     return BarHorizontalComponent;
@@ -3156,79 +3156,79 @@ var BarVertical2DComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "scaleType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVertical2DComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVertical2DComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarVertical2DComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarVertical2DComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "groupPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVertical2DComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVertical2DComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVertical2DComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVertical2DComponent.prototype, "deactivate", void 0);
     BarVertical2DComponent = __decorate([
@@ -3249,7 +3249,7 @@ var BarVertical2DComponent = (function (_super) {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarVertical2DComponent);
     return BarVertical2DComponent;
@@ -3440,71 +3440,71 @@ var BarVerticalNormalizedComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalNormalizedComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalNormalizedComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarVerticalNormalizedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarVerticalNormalizedComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalNormalizedComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalNormalizedComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalNormalizedComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalNormalizedComponent.prototype, "deactivate", void 0);
     BarVerticalNormalizedComponent = __decorate([
@@ -3525,7 +3525,7 @@ var BarVerticalNormalizedComponent = (function (_super) {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarVerticalNormalizedComponent);
     return BarVerticalNormalizedComponent;
@@ -3728,71 +3728,71 @@ var BarVerticalStackedComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalStackedComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalStackedComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarVerticalStackedComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarVerticalStackedComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalStackedComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalStackedComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalStackedComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalStackedComponent.prototype, "deactivate", void 0);
     BarVerticalStackedComponent = __decorate([
@@ -3813,7 +3813,7 @@ var BarVerticalStackedComponent = (function (_super) {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarVerticalStackedComponent);
     return BarVerticalStackedComponent;
@@ -3968,71 +3968,71 @@ var BarVerticalComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarVerticalComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BarVerticalComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarVerticalComponent.prototype, "barPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarVerticalComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BarVerticalComponent.prototype, "deactivate", void 0);
     BarVerticalComponent = __decorate([
@@ -4042,7 +4042,7 @@ var BarVerticalComponent = (function (_super) {
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BarVerticalComponent);
     return BarVerticalComponent;
@@ -4233,75 +4233,75 @@ var BarComponent = (function () {
         this.deactivate.emit(this.data);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "fill", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "x", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "y", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "orientation", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarComponent.prototype, "roundEdges", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "offset", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BarComponent.prototype, "isActive", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BarComponent.prototype, "stops", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], BarComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.HostListener('mouseenter'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseenter'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], BarComponent.prototype, "onMouseEnter", null);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], BarComponent.prototype, "onMouseLeave", null);
     BarComponent = __decorate([
@@ -4309,7 +4309,7 @@ var BarComponent = (function () {
             selector: 'g[ngx-charts-bar]',
             template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], BarComponent);
     return BarComponent;
@@ -4464,51 +4464,51 @@ var SeriesHorizontal = (function () {
         this.select.emit(data);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "type", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "series", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], SeriesHorizontal.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], SeriesHorizontal.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], SeriesHorizontal.prototype, "seriesName", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], SeriesHorizontal.prototype, "deactivate", void 0);
     SeriesHorizontal = __decorate([
@@ -4527,7 +4527,7 @@ var SeriesHorizontal = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], SeriesHorizontal);
     return SeriesHorizontal;
@@ -4665,51 +4665,51 @@ var SeriesVerticalComponent = (function () {
         return bar.label;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "type", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "series", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], SeriesVerticalComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], SeriesVerticalComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], SeriesVerticalComponent.prototype, "seriesName", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], SeriesVerticalComponent.prototype, "deactivate", void 0);
     SeriesVerticalComponent = __decorate([
@@ -4728,7 +4728,7 @@ var SeriesVerticalComponent = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], SeriesVerticalComponent);
     return SeriesVerticalComponent;
@@ -4932,92 +4932,92 @@ var BubbleChartComponent = (function (_super) {
         this.activeEntries = [];
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BubbleChartComponent.prototype, "view", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "results", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BubbleChartComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BubbleChartComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BubbleChartComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BubbleChartComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BubbleChartComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BubbleChartComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BubbleChartComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BubbleChartComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "maxRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "minRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], BubbleChartComponent.prototype, "autoScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BubbleChartComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], BubbleChartComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], BubbleChartComponent.prototype, "hideCircles", null);
     BubbleChartComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-bubble-chart',
             template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n      \n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n          \n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n \n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n        \n      </svg:g>\n    </ngx-charts-chart>"
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BubbleChartComponent);
     return BubbleChartComponent;
@@ -5127,7 +5127,7 @@ var BubbleChartModule = (function () {
                 bubble_chart_component_1.BubbleChartComponent,
                 bubble_series_component_1.BubbleSeriesComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BubbleChartModule);
     return BubbleChartModule;
@@ -5235,51 +5235,51 @@ var BubbleSeriesComponent = (function () {
         this.deactivate.emit({ name: this.data.name });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "rScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "xScaleType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "yScaleType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "visibleValue", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BubbleSeriesComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], BubbleSeriesComponent.prototype, "deactivate", void 0);
     BubbleSeriesComponent = __decorate([
@@ -5297,7 +5297,7 @@ var BubbleSeriesComponent = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], BubbleSeriesComponent);
     return BubbleSeriesComponent;
@@ -5485,39 +5485,39 @@ var AreaTooltip = (function () {
         return result;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "xSet", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "results", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaTooltip.prototype, "showPercentage", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "hover", void 0);
     __decorate([
-        core_1.ViewChildren('tooltips'), 
+        core_1.ViewChildren('tooltips'),
         __metadata('design:type', Object)
     ], AreaTooltip.prototype, "tooltips", void 0);
     AreaTooltip = __decorate([
@@ -5541,7 +5541,7 @@ var AreaTooltip = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.Renderer])
     ], AreaTooltip);
     return AreaTooltip;
@@ -5629,47 +5629,47 @@ var AreaComponent = (function () {
             }];
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "path", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "startingPath", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "fill", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "opacity", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "startOpacity", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "endOpacity", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "activeLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AreaComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], AreaComponent.prototype, "stops", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], AreaComponent.prototype, "select", void 0);
     AreaComponent = __decorate([
@@ -5677,7 +5677,7 @@ var AreaComponent = (function () {
             selector: 'g[ngx-charts-area]',
             template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], AreaComponent);
     return AreaComponent;
@@ -5716,7 +5716,7 @@ var AxesModule = (function () {
             imports: [common_1.CommonModule],
             declarations: [axis_label_component_1.AxisLabelComponent, x_axis_component_1.XAxisComponent, x_axis_ticks_component_1.XAxisTicksComponent, y_axis_component_1.YAxisComponent, y_axis_ticks_component_1.YAxisTicksComponent],
             exports: [axis_label_component_1.AxisLabelComponent, x_axis_component_1.XAxisComponent, x_axis_ticks_component_1.XAxisTicksComponent, y_axis_component_1.YAxisComponent, y_axis_ticks_component_1.YAxisTicksComponent]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AxesModule);
     return AxesModule;
@@ -5777,23 +5777,23 @@ var AxisLabelComponent = (function () {
         }
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AxisLabelComponent.prototype, "orient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AxisLabelComponent.prototype, "label", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AxisLabelComponent.prototype, "offset", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AxisLabelComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AxisLabelComponent.prototype, "height", void 0);
     AxisLabelComponent = __decorate([
@@ -5801,7 +5801,7 @@ var AxisLabelComponent = (function () {
             selector: 'g[ngx-charts-axis-label]',
             template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], AxisLabelComponent);
     return AxisLabelComponent;
@@ -5972,43 +5972,43 @@ var XAxisTicksComponent = (function () {
         return "translate(0," + (-this.verticalSpacing - 5) + ")";
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "scale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "orient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "tickArguments", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "tickStroke", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "tickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "gridLineHeight", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], XAxisTicksComponent.prototype, "dimensionsChanged", void 0);
     __decorate([
-        core_1.ViewChild('ticksel'), 
+        core_1.ViewChild('ticksel'),
         __metadata('design:type', core_1.ElementRef)
     ], XAxisTicksComponent.prototype, "ticksElement", void 0);
     XAxisTicksComponent = __decorate([
@@ -6016,7 +6016,7 @@ var XAxisTicksComponent = (function () {
             selector: 'g[ngx-charts-x-axis-ticks]',
             template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"tickTransform(tick)\">\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.text-anchor]=\"textAnchor\"\n          [attr.transform]=\"textTransform\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <svg:g *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], XAxisTicksComponent);
     return XAxisTicksComponent;
@@ -6076,43 +6076,43 @@ var XAxisComponent = (function () {
         }
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "tickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "showLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "labelText", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "xAxisTickInterval", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "xAxisTickCount", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], XAxisComponent.prototype, "dimensionsChanged", void 0);
     __decorate([
-        core_1.ViewChild(x_axis_ticks_component_1.XAxisTicksComponent), 
+        core_1.ViewChild(x_axis_ticks_component_1.XAxisTicksComponent),
         __metadata('design:type', x_axis_ticks_component_1.XAxisTicksComponent)
     ], XAxisComponent.prototype, "ticksComponent", void 0);
     XAxisComponent = __decorate([
@@ -6120,7 +6120,7 @@ var XAxisComponent = (function () {
             selector: 'g[ngx-charts-x-axis]',
             template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-x-axis-ticks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n        (dimensionsChanged)=\"emitTicksHeight($event)\"\n      />\n\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], XAxisComponent);
     return XAxisComponent;
@@ -6278,47 +6278,47 @@ var YAxisTicksComponent = (function () {
         return "translate(5,0)";
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "scale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "orient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "tickArguments", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "tickValues", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "tickStroke", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "tickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "gridLineWidth", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], YAxisTicksComponent.prototype, "dimensionsChanged", void 0);
     __decorate([
-        core_1.ViewChild('ticksel'), 
+        core_1.ViewChild('ticksel'),
         __metadata('design:type', core_1.ElementRef)
     ], YAxisTicksComponent.prototype, "ticksElement", void 0);
     YAxisTicksComponent = __decorate([
@@ -6326,7 +6326,7 @@ var YAxisTicksComponent = (function () {
             selector: 'g[ngx-charts-y-axis-ticks]',
             template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], YAxisTicksComponent);
     return YAxisTicksComponent;
@@ -6391,43 +6391,43 @@ var YAxisComponent = (function () {
         }
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "tickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "showLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "labelText", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "yAxisTickInterval", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "yAxisTickCount", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], YAxisComponent.prototype, "dimensionsChanged", void 0);
     __decorate([
-        core_1.ViewChild(y_axis_ticks_component_1.YAxisTicksComponent), 
+        core_1.ViewChild(y_axis_ticks_component_1.YAxisTicksComponent),
         __metadata('design:type', y_axis_ticks_component_1.YAxisTicksComponent)
     ], YAxisComponent.prototype, "ticksComponent", void 0);
     YAxisComponent = __decorate([
@@ -6435,7 +6435,7 @@ var YAxisComponent = (function () {
             selector: 'g[ngx-charts-y-axis]',
             template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-y-axis-ticks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineWidth]=\"dims.width\"\n        [height]=\"dims.height\"\n        (dimensionsChanged)=\"emitTicksWidth($event)\"\n      />\n\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], YAxisComponent);
     return YAxisComponent;
@@ -6456,7 +6456,7 @@ exports.YAxisComponent = YAxisComponent;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -6612,34 +6612,34 @@ var BaseChartComponent = (function () {
         return results;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BaseChartComponent.prototype, "results", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], BaseChartComponent.prototype, "view", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BaseChartComponent.prototype, "scheme", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], BaseChartComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], BaseChartComponent.prototype, "customColors", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], BaseChartComponent.prototype, "select", void 0);
     BaseChartComponent = __decorate([
         core_1.Component({
             selector: 'base-chart',
             template: "<div></div>"
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef, common_1.Location])
     ], BaseChartComponent);
     return BaseChartComponent;
@@ -6722,7 +6722,7 @@ var ChartCommonModule = (function () {
                 axes_module_1.AxesModule,
                 tooltip_1.TooltipModule
             ].concat(COMPONENTS)
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], ChartCommonModule);
     return ChartCommonModule;
@@ -6786,51 +6786,51 @@ var ChartComponent = (function () {
         }
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "view", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "showLegend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "legendOptions", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "legendData", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "legendType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "legendTitle", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ChartComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], ChartComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], ChartComponent.prototype, "legendLabelClick", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], ChartComponent.prototype, "legendLabelActivate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], ChartComponent.prototype, "legendLabelDeactivate", void 0);
     ChartComponent = __decorate([
@@ -6847,7 +6847,7 @@ var ChartComponent = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ViewContainerRef, tooltip_1.TooltipService])
     ], ChartComponent);
     return ChartComponent;
@@ -7022,47 +7022,47 @@ var CircleSeriesComponent = (function () {
         this.deactivate.emit({ name: this.data.name });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "type", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "scaleType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "visibleValue", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], CircleSeriesComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CircleSeriesComponent.prototype, "deactivate", void 0);
     CircleSeriesComponent = __decorate([
@@ -7080,7 +7080,7 @@ var CircleSeriesComponent = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [common_1.Location])
     ], CircleSeriesComponent);
     return CircleSeriesComponent;
@@ -7124,69 +7124,69 @@ var CircleComponent = (function () {
         this.classNames = this.classNames.join(' ') + 'circle';
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "cx", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "cy", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "r", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "fill", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "stroke", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "classNames", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "circleOpacity", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "pointerEvents", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CircleComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.HostListener('click'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('click'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], CircleComponent.prototype, "onClick", null);
     __decorate([
-        core_1.HostListener('mouseenter'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseenter'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], CircleComponent.prototype, "onMouseEnter", null);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], CircleComponent.prototype, "onMouseLeave", null);
     CircleComponent = __decorate([
@@ -7194,7 +7194,7 @@ var CircleComponent = (function () {
             selector: 'g[ngx-charts-circle]',
             template: "\n    <svg:circle\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      [attr.fill]=\"fill\"\n      [attr.stroke]=\"stroke\"\n      [attr.opacity]=\"circleOpacity\"\n      [attr.class]=\"classNames\"\n      [attr.pointer-events]=\"pointerEvents\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], CircleComponent);
     return CircleComponent;
@@ -7425,45 +7425,45 @@ var CountUpDirective = (function () {
         this.animationReq = count_helper_1.count(this.countFrom, this.countTo, this.countDecimals, this.countDuration, callback);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], CountUpDirective.prototype, "countDuration", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], CountUpDirective.prototype, "countPrefix", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], CountUpDirective.prototype, "countSuffix", void 0);
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number), 
+        core_1.Input(),
+        __metadata('design:type', Number),
         __metadata('design:paramtypes', [Number])
     ], CountUpDirective.prototype, "countDecimals", null);
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object), 
+        core_1.Input(),
+        __metadata('design:type', Object),
         __metadata('design:paramtypes', [Object])
     ], CountUpDirective.prototype, "countTo", null);
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object), 
+        core_1.Input(),
+        __metadata('design:type', Object),
         __metadata('design:paramtypes', [Object])
     ], CountUpDirective.prototype, "countFrom", null);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CountUpDirective.prototype, "countChange", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CountUpDirective.prototype, "countFinish", void 0);
     CountUpDirective = __decorate([
         core_1.Component({
             selector: '[ngx-charts-count-up]',
             template: "{{value}}"
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ChangeDetectorRef, core_1.NgZone, core_1.ElementRef])
     ], CountUpDirective);
     return CountUpDirective;
@@ -7696,23 +7696,23 @@ var GridPanelSeriesComponent = (function () {
         });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelSeriesComponent.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelSeriesComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelSeriesComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelSeriesComponent.prototype, "orient", void 0);
     GridPanelSeriesComponent = __decorate([
@@ -7720,7 +7720,7 @@ var GridPanelSeriesComponent = (function () {
             selector: 'g[ngx-charts-grid-panel-series]',
             template: "\n    <svg:g ngx-charts-grid-panel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], GridPanelSeriesComponent);
     return GridPanelSeriesComponent;
@@ -7749,23 +7749,23 @@ var GridPanelComponent = (function () {
     function GridPanelComponent() {
     }
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelComponent.prototype, "path", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelComponent.prototype, "x", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GridPanelComponent.prototype, "y", void 0);
     GridPanelComponent = __decorate([
@@ -7773,7 +7773,7 @@ var GridPanelComponent = (function () {
             selector: 'g[ngx-charts-grid-panel]',
             template: "\n    <svg:rect\n      [attr.height]=\"height\"\n      [attr.width]=\"width\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      stroke=\"none\"\n      class=\"gridpanel\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], GridPanelComponent);
     return GridPanelComponent;
@@ -7852,7 +7852,7 @@ exports.formatLabel = formatLabel;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -7914,27 +7914,27 @@ var AdvancedLegendComponent = (function () {
         return item.formattedLabel;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], AdvancedLegendComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AdvancedLegendComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], AdvancedLegendComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AdvancedLegendComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AdvancedLegendComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AdvancedLegendComponent.prototype, "deactivate", void 0);
     AdvancedLegendComponent = __decorate([
@@ -7944,7 +7944,7 @@ var AdvancedLegendComponent = (function () {
             styles: [__webpack_require__("./src/common/legend/advanced-legend.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AdvancedLegendComponent);
     return AdvancedLegendComponent;
@@ -8007,47 +8007,47 @@ var LegendEntryComponent = (function () {
         this.deactivate.emit({ name: this.label });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], LegendEntryComponent.prototype, "color", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LegendEntryComponent.prototype, "label", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], LegendEntryComponent.prototype, "formattedLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], LegendEntryComponent.prototype, "isActive", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LegendEntryComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LegendEntryComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LegendEntryComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LegendEntryComponent.prototype, "toggle", void 0);
     __decorate([
-        core_1.HostListener('mouseenter'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseenter'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], LegendEntryComponent.prototype, "onMouseEnter", null);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], LegendEntryComponent.prototype, "onMouseLeave", null);
     LegendEntryComponent = __decorate([
@@ -8055,7 +8055,7 @@ var LegendEntryComponent = (function () {
             selector: 'ngx-charts-legend-entry',
             template: "\n    <span \n      [title]=\"formattedLabel\"\n      tabindex=\"-1\"\n      [class.active]=\"isActive\"\n      (click)=\"select.emit(formattedLabel)\">\n      <span\n        class=\"legend-label-color\"\n        [style.background-color]=\"color\"\n        (click)=\"toggle.emit(formattedLabel)\">\n      </span>\n      <span class=\"legend-label-text\">\n        {{trimmedLabel}}\n      </span>\n    </span>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], LegendEntryComponent);
     return LegendEntryComponent;
@@ -8076,7 +8076,7 @@ exports.LegendEntryComponent = LegendEntryComponent;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -8161,39 +8161,39 @@ var LegendComponent = (function () {
         return item.label;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LegendComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LegendComponent.prototype, "title", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LegendComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LegendComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LegendComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LegendComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LegendComponent.prototype, "labelClick", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LegendComponent.prototype, "labelActivate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LegendComponent.prototype, "labelDeactivate", void 0);
     LegendComponent = __decorate([
@@ -8203,7 +8203,7 @@ var LegendComponent = (function () {
             styles: [__webpack_require__("./src/common/legend/legend.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ChangeDetectorRef, core_1.NgZone])
     ], LegendComponent);
     return LegendComponent;
@@ -8224,7 +8224,7 @@ exports.LegendComponent = LegendComponent;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -8268,19 +8268,19 @@ var ScaleLegendComponent = (function () {
         return pairs.join(', ');
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ScaleLegendComponent.prototype, "valueRange", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ScaleLegendComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ScaleLegendComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ScaleLegendComponent.prototype, "width", void 0);
     ScaleLegendComponent = __decorate([
@@ -8290,7 +8290,7 @@ var ScaleLegendComponent = (function () {
             styles: [__webpack_require__("./src/common/legend/scale-legend.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [platform_browser_1.DomSanitizer])
     ], ScaleLegendComponent);
     return ScaleLegendComponent;
@@ -8332,19 +8332,19 @@ var SvgLinearGradientComponent = (function () {
         }
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SvgLinearGradientComponent.prototype, "orientation", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SvgLinearGradientComponent.prototype, "color", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SvgLinearGradientComponent.prototype, "name", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], SvgLinearGradientComponent.prototype, "stops", void 0);
     SvgLinearGradientComponent = __decorate([
@@ -8352,7 +8352,7 @@ var SvgLinearGradientComponent = (function () {
             selector: 'g[ngx-charts-svg-linear-gradient]',
             template: "\n    <svg:linearGradient\n      [id]=\"name\"\n      [attr.x1]=\"x1\"\n      [attr.y1]=\"y1\"\n      [attr.x2]=\"x2\"\n      [attr.y2]=\"y2\">\n      <svg:stop *ngFor=\"let stop of stops\"\n        [attr.offset]=\"stop.offset + '%'\"\n        [style.stop-color]=\"stop.color\"\n        [style.stop-opacity]=\"stop.opacity\"\n      />     \n    </svg:linearGradient>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], SvgLinearGradientComponent);
     return SvgLinearGradientComponent;
@@ -8387,27 +8387,27 @@ var SvgRadialGradientComponent = (function () {
         this.r = '30%';
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SvgRadialGradientComponent.prototype, "color", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SvgRadialGradientComponent.prototype, "name", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SvgRadialGradientComponent.prototype, "startOpacity", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], SvgRadialGradientComponent.prototype, "endOpacity", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], SvgRadialGradientComponent.prototype, "cx", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], SvgRadialGradientComponent.prototype, "cy", void 0);
     SvgRadialGradientComponent = __decorate([
@@ -8415,7 +8415,7 @@ var SvgRadialGradientComponent = (function () {
             selector: 'g[ngx-charts-svg-radial-gradient]',
             template: "\n    <svg:radialGradient\n      [id]=\"name\"\n      [attr.cx]=\"cx\"\n      [attr.cy]=\"cy\"\n      [attr.r]=\"r\"\n      gradientUnits=\"userSpaceOnUse\">\n      <svg:stop\n        offset=\"0%\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"startOpacity\"\n      />\n      <svg:stop\n        offset=\"100%\"\n        [style.stop-color]=\"color\"\n        [style.stop-opacity]=\"endOpacity\"\n      />\n    </svg:radialGradient>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], SvgRadialGradientComponent);
     return SvgRadialGradientComponent;
@@ -8472,7 +8472,7 @@ __export(__webpack_require__("./src/common/timeline/timeline.component.ts"));
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -8626,51 +8626,51 @@ var Timeline = (function () {
         return dims;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "view", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "state", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "results", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "scheme", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "customColors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "miniChart", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "autoScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "scaleType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], Timeline.prototype, "height", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], Timeline.prototype, "onDomainChange", void 0);
     Timeline = __decorate([
@@ -8680,7 +8680,7 @@ var Timeline = (function () {
             styles: [__webpack_require__("./src/common/timeline/timeline.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.NgZone, core_1.ChangeDetectorRef, common_1.Location])
     ], Timeline);
     return Timeline;
@@ -9074,7 +9074,7 @@ var StyleTypes = exports.StyleTypes;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -9151,50 +9151,50 @@ var TooltipContentComponent = (function () {
         this.position();
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TooltipContentComponent.prototype, "host", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], TooltipContentComponent.prototype, "showCaret", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipContentComponent.prototype, "type", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipContentComponent.prototype, "placement", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipContentComponent.prototype, "alignment", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipContentComponent.prototype, "spacing", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], TooltipContentComponent.prototype, "cssClass", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], TooltipContentComponent.prototype, "title", void 0);
     __decorate([
-        core_1.ViewChild('caretElm'), 
+        core_1.ViewChild('caretElm'),
         __metadata('design:type', Object)
     ], TooltipContentComponent.prototype, "caretElm", void 0);
     __decorate([
-        core_1.HostBinding('class'), 
+        core_1.HostBinding('class'),
         __metadata('design:type', String)
     ], TooltipContentComponent.prototype, "cssClasses", null);
     __decorate([
         core_1.HostListener('window:resize'),
-        throttle_1.throttleable(100), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        throttle_1.throttleable(100),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], TooltipContentComponent.prototype, "onWindowResize", null);
     TooltipContentComponent = __decorate([
@@ -9203,7 +9203,7 @@ var TooltipContentComponent = (function () {
             template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
             encapsulation: core_1.ViewEncapsulation.None,
             styles: [__webpack_require__("./src/common/tooltip/tooltip.component.scss")]
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.Renderer])
     ], TooltipContentComponent);
     return TooltipContentComponent;
@@ -9391,109 +9391,109 @@ var TooltipDirective = (function () {
         };
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], TooltipDirective.prototype, "tooltipCssClass", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], TooltipDirective.prototype, "tooltipTitle", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], TooltipDirective.prototype, "tooltipAppendToBody", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipDirective.prototype, "tooltipSpacing", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], TooltipDirective.prototype, "tooltipDisabled", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], TooltipDirective.prototype, "tooltipShowCaret", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipDirective.prototype, "tooltipPlacement", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipDirective.prototype, "tooltipAlignment", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipDirective.prototype, "tooltipType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], TooltipDirective.prototype, "tooltipCloseOnClickOutside", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], TooltipDirective.prototype, "tooltipCloseOnMouseLeave", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipDirective.prototype, "tooltipHideTimeout", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipDirective.prototype, "tooltipShowTimeout", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TooltipDirective.prototype, "tooltipTemplate", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], TooltipDirective.prototype, "tooltipShowEvent", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TooltipDirective.prototype, "tooltipContext", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], TooltipDirective.prototype, "show", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], TooltipDirective.prototype, "hide", void 0);
     __decorate([
-        core_1.HostListener('focusin'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('focusin'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onFocus", null);
     __decorate([
-        core_1.HostListener('blur'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('blur'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onBlur", null);
     __decorate([
-        core_1.HostListener('mouseenter'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseenter'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onMouseEnter", null);
     __decorate([
-        core_1.HostListener('mouseleave', ['$event.target']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
+        core_1.HostListener('mouseleave', ['$event.target']),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [Object]),
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onMouseLeave", null);
     __decorate([
-        core_1.HostListener('click'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('click'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], TooltipDirective.prototype, "onMouseClick", null);
     TooltipDirective = __decorate([
-        core_1.Directive({ selector: '[ngx-tooltip]' }), 
+        core_1.Directive({ selector: '[ngx-tooltip]' }),
         __metadata('design:paramtypes', [tooltip_service_1.TooltipService, core_1.ViewContainerRef, core_1.Renderer, core_1.ElementRef, core_1.NgZone])
     ], TooltipDirective);
     return TooltipDirective;
@@ -9533,7 +9533,7 @@ var TooltipModule = (function () {
             exports: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
             imports: [common_1.CommonModule],
             entryComponents: [tooltip_component_1.TooltipContentComponent]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], TooltipModule);
     return TooltipModule;
@@ -9573,7 +9573,7 @@ var TooltipService = (function (_super) {
         this.type = _1.TooltipContentComponent;
     }
     TooltipService = __decorate([
-        core_1.Injectable(), 
+        core_1.Injectable(),
         __metadata('design:paramtypes', [services_1.InjectionService])
     ], TooltipService);
     return TooltipService;
@@ -9737,7 +9737,7 @@ exports.default = {
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -9867,63 +9867,63 @@ var ForceDirectedGraphComponent = (function (_super) {
         this.draggingNode = undefined;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ForceDirectedGraphComponent.prototype, "force", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], ForceDirectedGraphComponent.prototype, "forceLink", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], ForceDirectedGraphComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], ForceDirectedGraphComponent.prototype, "nodes", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], ForceDirectedGraphComponent.prototype, "links", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], ForceDirectedGraphComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], ForceDirectedGraphComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], ForceDirectedGraphComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.ContentChild('linkTemplate'), 
+        core_1.ContentChild('linkTemplate'),
         __metadata('design:type', core_1.TemplateRef)
     ], ForceDirectedGraphComponent.prototype, "linkTemplate", void 0);
     __decorate([
-        core_1.ContentChild('nodeTemplate'), 
+        core_1.ContentChild('nodeTemplate'),
         __metadata('design:type', core_1.TemplateRef)
     ], ForceDirectedGraphComponent.prototype, "nodeTemplate", void 0);
     __decorate([
-        core_1.ViewChild(chart_component_1.ChartComponent, { read: core_1.ElementRef }), 
+        core_1.ViewChild(chart_component_1.ChartComponent, { read: core_1.ElementRef }),
         __metadata('design:type', core_1.ElementRef)
     ], ForceDirectedGraphComponent.prototype, "chart", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Function)
     ], ForceDirectedGraphComponent.prototype, "groupResultsBy", void 0);
     __decorate([
-        core_1.HostListener('document:mousemove', ['$event']), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [MouseEvent]), 
+        core_1.HostListener('document:mousemove', ['$event']),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [MouseEvent]),
         __metadata('design:returntype', void 0)
     ], ForceDirectedGraphComponent.prototype, "onDrag", null);
     __decorate([
-        core_1.HostListener('document:mouseup'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object, MouseEvent]), 
+        core_1.HostListener('document:mouseup'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', [Object, MouseEvent]),
         __metadata('design:returntype', void 0)
     ], ForceDirectedGraphComponent.prototype, "onDragEnd", null);
     ForceDirectedGraphComponent = __decorate([
@@ -9936,7 +9936,7 @@ var ForceDirectedGraphComponent = (function (_super) {
             ],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], ForceDirectedGraphComponent);
     return ForceDirectedGraphComponent;
@@ -9976,7 +9976,7 @@ var ForceDirectedGraphModule = (function () {
             exports: [
                 force_directed_graph_component_1.ForceDirectedGraphComponent,
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], ForceDirectedGraphModule);
     return ForceDirectedGraphModule;
@@ -10030,35 +10030,35 @@ var GaugeArcComponent = (function () {
         return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeArcComponent.prototype, "backgroundArc", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeArcComponent.prototype, "valueArc", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeArcComponent.prototype, "cornerRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', color_helper_1.ColorHelper)
     ], GaugeArcComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], GaugeArcComponent.prototype, "isActive", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], GaugeArcComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], GaugeArcComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], GaugeArcComponent.prototype, "deactivate", void 0);
     GaugeArcComponent = __decorate([
@@ -10066,7 +10066,7 @@ var GaugeArcComponent = (function () {
             selector: 'g[ngx-charts-gauge-arc]',
             template: "\n    <svg:g ngx-charts-pie-arc\n        class=\"background-arc\"\n        [startAngle]=\"0\"\n        [endAngle]=\"backgroundArc.endAngle\"\n        [innerRadius]=\"backgroundArc.innerRadius\"\n        [outerRadius]=\"backgroundArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [data]=\"backgroundArc.data\"\n        [animate]=\"false\"\n        [pointerEvents]=\"false\">\n    </svg:g>\n    <svg:g ngx-charts-pie-arc\n        [startAngle]=\"0\"\n        [endAngle]=\"valueArc.endAngle\"\n        [innerRadius]=\"valueArc.innerRadius\"\n        [outerRadius]=\"valueArc.outerRadius\"\n        [cornerRadius]=\"cornerRadius\"\n        [fill]=\"colors.getColor(valueArc.data.name)\"\n        [data]=\"valueArc.data\"\n        [animate]=\"true\"\n        [isActive]=\"isActive\"\n        (select)=\"select.emit($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(valueArc)\">\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], GaugeArcComponent);
     return GaugeArcComponent;
@@ -10172,39 +10172,39 @@ var GaugeAxisComponent = (function () {
         return line(points);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeAxisComponent.prototype, "bigSegments", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeAxisComponent.prototype, "smallSegments", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeAxisComponent.prototype, "min", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeAxisComponent.prototype, "max", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeAxisComponent.prototype, "angleSpan", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeAxisComponent.prototype, "startAngle", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeAxisComponent.prototype, "radius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeAxisComponent.prototype, "valueScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeAxisComponent.prototype, "tickFormatting", void 0);
     GaugeAxisComponent = __decorate([
@@ -10212,7 +10212,7 @@ var GaugeAxisComponent = (function () {
             selector: 'g[ngx-charts-gauge-axis]',
             template: "\n    <svg:g [attr.transform]=\"rotate\">\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.big\"\n            class=\"gauge-tick gauge-tick-large\">\n            <svg:text\n                [style.textAnchor]=\"tick.textAnchor\"\n                [attr.transform]=\"tick.textTransform\"\n                alignment-baseline=\"central\">\n                {{tick.text}}\n            </svg:text>\n        </svg:g>\n        <svg:g *ngFor=\"let tick of ticks.small\"\n            class=\"gauge-tick gauge-tick-small\">\n            <svg:path [attr.d]=\"tick.line\" />\n        </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], GaugeAxisComponent);
     return GaugeAxisComponent;
@@ -10233,7 +10233,7 @@ exports.GaugeAxisComponent = GaugeAxisComponent;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -10458,67 +10458,67 @@ var GaugeComponent = (function (_super) {
         return item !== undefined;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "min", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "max", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], GaugeComponent.prototype, "units", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "bigSegments", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "smallSegments", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], GaugeComponent.prototype, "results", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], GaugeComponent.prototype, "showAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "startAngle", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "angleSpan", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], GaugeComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], GaugeComponent.prototype, "axisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], GaugeComponent.prototype, "margin", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], GaugeComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], GaugeComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.ViewChild('textEl'), 
+        core_1.ViewChild('textEl'),
         __metadata('design:type', core_1.ElementRef)
     ], GaugeComponent.prototype, "textEl", void 0);
     GaugeComponent = __decorate([
@@ -10531,7 +10531,7 @@ var GaugeComponent = (function (_super) {
             ],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], GaugeComponent);
     return GaugeComponent;
@@ -10585,7 +10585,7 @@ var GaugeModule = (function () {
                 gauge_arc_component_1.GaugeArcComponent,
                 gauge_axis_component_1.GaugeAxisComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], GaugeModule);
     return GaugeModule;
@@ -10620,7 +10620,7 @@ __export(__webpack_require__("./src/gauge/gauge.component.ts"));
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -10761,31 +10761,31 @@ var LinearGaugeComponent = (function (_super) {
         this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], LinearGaugeComponent.prototype, "min", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], LinearGaugeComponent.prototype, "max", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], LinearGaugeComponent.prototype, "value", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], LinearGaugeComponent.prototype, "units", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LinearGaugeComponent.prototype, "previousValue", void 0);
     __decorate([
-        core_1.ViewChild('valueTextEl'), 
+        core_1.ViewChild('valueTextEl'),
         __metadata('design:type', core_1.ElementRef)
     ], LinearGaugeComponent.prototype, "valueTextEl", void 0);
     __decorate([
-        core_1.ViewChild('unitsTextEl'), 
+        core_1.ViewChild('unitsTextEl'),
         __metadata('design:type', core_1.ElementRef)
     ], LinearGaugeComponent.prototype, "unitsTextEl", void 0);
     LinearGaugeComponent = __decorate([
@@ -10798,7 +10798,7 @@ var LinearGaugeComponent = (function (_super) {
             ],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], LinearGaugeComponent);
     return LinearGaugeComponent;
@@ -10873,27 +10873,27 @@ var HeatCellSeriesComponent = (function () {
         });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatCellSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatCellSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatCellSeriesComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatCellSeriesComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], HeatCellSeriesComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], HeatCellSeriesComponent.prototype, "select", void 0);
     HeatCellSeriesComponent = __decorate([
@@ -10901,7 +10901,7 @@ var HeatCellSeriesComponent = (function () {
             selector: 'g[ngx-charts-heat-map-cell-series]',
             template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], HeatCellSeriesComponent);
     return HeatCellSeriesComponent;
@@ -10972,39 +10972,39 @@ var HeatMapCellComponent = (function () {
         this.select.emit(this.data);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "fill", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "x", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "y", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "label", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], HeatMapCellComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], HeatMapCellComponent.prototype, "select", void 0);
     HeatMapCellComponent = __decorate([
@@ -11012,7 +11012,7 @@ var HeatMapCellComponent = (function () {
             selector: 'g[ngx-charts-heat-map-cell]',
             template: "\n    <svg:g [attr.transform]=\"transform\" class=\"cell\">\n      <defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        [attr.fill]=\"gradient ? gradientUrl : fill\"\n        rx=\"3\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"cell\"\n        style=\"cursor: pointer\"\n        (click)=\"onClick()\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], HeatMapCellComponent);
     return HeatMapCellComponent;
@@ -11179,47 +11179,47 @@ var HeatMapComponent = (function (_super) {
         this.update();
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], HeatMapComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "innerPadding", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], HeatMapComponent.prototype, "yAxisTickFormatting", void 0);
     HeatMapComponent = __decorate([
@@ -11229,7 +11229,7 @@ var HeatMapComponent = (function (_super) {
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], HeatMapComponent);
     return HeatMapComponent;
@@ -11277,7 +11277,7 @@ var HeatMapModule = (function () {
                 heat_map_cell_series_component_1.HeatCellSeriesComponent,
                 heat_map_component_1.HeatMapComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], HeatMapModule);
     return HeatMapModule;
@@ -11629,89 +11629,89 @@ var LineChartComponent = (function (_super) {
         this.activeEntries = [];
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "xAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "yAxis", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "showXAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "showYAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "xAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "yAxisLabel", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "autoScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "timeline", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], LineChartComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], LineChartComponent.prototype, "showGridLines", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "curve", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], LineChartComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], LineChartComponent.prototype, "schemeType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], LineChartComponent.prototype, "rangeFillOpacity", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "xAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineChartComponent.prototype, "yAxisTickFormatting", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], LineChartComponent.prototype, "roundDomains", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LineChartComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], LineChartComponent.prototype, "deactivate", void 0);
     __decorate([
-        core_1.HostListener('mouseleave'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
+        core_1.HostListener('mouseleave'),
+        __metadata('design:type', Function),
+        __metadata('design:paramtypes', []),
         __metadata('design:returntype', void 0)
     ], LineChartComponent.prototype, "hideCircles", null);
     LineChartComponent = __decorate([
@@ -11721,7 +11721,7 @@ var LineChartComponent = (function (_super) {
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], LineChartComponent);
     return LineChartComponent;
@@ -11769,7 +11769,7 @@ var LineChartModule = (function () {
                 line_chart_component_1.LineChartComponent,
                 line_series_component_1.LineSeriesComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], LineChartModule);
     return LineChartModule;
@@ -11915,35 +11915,35 @@ var LineSeriesComponent = (function () {
         return item === undefined;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineSeriesComponent.prototype, "xScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineSeriesComponent.prototype, "yScale", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineSeriesComponent.prototype, "scaleType", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', String)
     ], LineSeriesComponent.prototype, "curve", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], LineSeriesComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], LineSeriesComponent.prototype, "rangeFillOpacity", void 0);
     LineSeriesComponent = __decorate([
@@ -11951,7 +11951,7 @@ var LineSeriesComponent = (function () {
             selector: 'g[ngx-charts-line-series]',
             template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [common_1.Location])
     ], LineSeriesComponent);
     return LineSeriesComponent;
@@ -11982,19 +11982,19 @@ var LineComponent = (function () {
         this.element = element.nativeElement;
     }
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineComponent.prototype, "path", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineComponent.prototype, "stroke", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], LineComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], LineComponent.prototype, "select", void 0);
     LineComponent = __decorate([
@@ -12015,7 +12015,7 @@ var LineComponent = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], LineComponent);
     return LineComponent;
@@ -12069,7 +12069,7 @@ var NgxChartsModule = (function () {
                 tree_map_module_1.TreeMapModule,
                 gauge_module_1.GaugeModule
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], NgxChartsModule);
     return NgxChartsModule;
@@ -12140,19 +12140,19 @@ var CardSeriesComponent = (function () {
         this.select.emit(data);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardSeriesComponent.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CardSeriesComponent.prototype, "select", void 0);
     CardSeriesComponent = __decorate([
@@ -12160,7 +12160,7 @@ var CardSeriesComponent = (function () {
             selector: 'g[ngx-charts-card-series]',
             template: "\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.NgZone])
     ], CardSeriesComponent);
     return CardSeriesComponent;
@@ -12271,39 +12271,39 @@ var CardComponent = (function () {
         });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "color", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "x", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "y", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "label", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], CardComponent.prototype, "select", void 0);
     __decorate([
-        core_1.ViewChild('textEl'), 
+        core_1.ViewChild('textEl'),
         __metadata('design:type', core_1.ElementRef)
     ], CardComponent.prototype, "textEl", void 0);
     CardComponent = __decorate([
@@ -12311,7 +12311,7 @@ var CardComponent = (function () {
             selector: 'g[ngx-charts-card]',
             template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        style=\"cursor: pointer;\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        x=\"5\"\n        [attr.y]=\"height * 0.7\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"height * 0.3\"\n        style=\"font-size: 12px;\n               pointer-events: none;\n               text-transform: uppercase;\n               overflow: hidden;\n               text-align: center;\n               line-height: 1em;\">\n        <xhtml:p\n          [style.color]=\"getTextColor(color)\"\n          style=\"overflow: hidden;\n                 white-space: nowrap;\n                 text-overflow: ellipsis;\n                 width: 100%;\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        [attr.x]=\"cardWidth / 2\"\n        [attr.y]=\"height * 0.30\"\n        dy=\".35em\"\n        class=\"value-text\"\n        [style.fill]=\"getTextColor(color)\"\n        text-anchor=\"middle\"\n        [style.font-size.pt]=\"textFontSize\"\n        style=\"pointer-events: none;\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, core_1.ChangeDetectorRef, core_1.NgZone])
     ], CardComponent);
     return CardComponent;
@@ -12398,7 +12398,7 @@ var NumberCardComponent = (function (_super) {
             styles: [__webpack_require__("./src/common/base-chart.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], NumberCardComponent);
     return NumberCardComponent;
@@ -12446,7 +12446,7 @@ var NumberCardModule = (function () {
                 card_series_component_1.CardSeriesComponent,
                 number_card_component_1.NumberCardComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], NumberCardModule);
     return NumberCardModule;
@@ -12467,7 +12467,7 @@ exports.NumberCardModule = NumberCardModule;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -12544,19 +12544,19 @@ var AdvancedPieChartComponent = (function (_super) {
         this.deactivate.emit({ value: event, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], AdvancedPieChartComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], AdvancedPieChartComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AdvancedPieChartComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], AdvancedPieChartComponent.prototype, "deactivate", void 0);
     AdvancedPieChartComponent = __decorate([
@@ -12569,7 +12569,7 @@ var AdvancedPieChartComponent = (function (_super) {
             ],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], AdvancedPieChartComponent);
     return AdvancedPieChartComponent;
@@ -12587,8 +12587,10 @@ exports.AdvancedPieChartComponent = AdvancedPieChartComponent;
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
+__export(__webpack_require__("./src/pie-chart/advanced-pie-chart.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-chart.module.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-chart.component.ts"));
+__export(__webpack_require__("./src/pie-chart/simple-pie-chart.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-arc.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-grid.component.ts"));
 __export(__webpack_require__("./src/pie-chart/pie-series.component.ts"));
@@ -12710,71 +12712,71 @@ var PieArcComponent = (function () {
         this.select.emit(this.data);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "fill", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], PieArcComponent.prototype, "startAngle", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], PieArcComponent.prototype, "endAngle", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "innerRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "outerRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Number)
     ], PieArcComponent.prototype, "cornerRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "value", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "max", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], PieArcComponent.prototype, "explodeSlices", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], PieArcComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], PieArcComponent.prototype, "animate", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], PieArcComponent.prototype, "pointerEvents", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], PieArcComponent.prototype, "isActive", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieArcComponent.prototype, "deactivate", void 0);
     PieArcComponent = __decorate([
@@ -12782,7 +12784,7 @@ var PieArcComponent = (function () {
             selector: 'g[ngx-charts-pie-arc]',
             template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef, common_1.Location])
     ], PieArcComponent);
     return PieArcComponent;
@@ -12803,7 +12805,7 @@ exports.PieArcComponent = PieArcComponent;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -12931,43 +12933,43 @@ var PieChartComponent = (function (_super) {
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "labels", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "legend", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "explodeSlices", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "doughnut", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "arcWidth", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], PieChartComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], PieChartComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieChartComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], PieChartComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], PieChartComponent.prototype, "deactivate", void 0);
     PieChartComponent = __decorate([
@@ -12980,7 +12982,7 @@ var PieChartComponent = (function (_super) {
             ],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], PieChartComponent);
     return PieChartComponent;
@@ -13014,6 +13016,8 @@ var pie_arc_component_1 = __webpack_require__("./src/pie-chart/pie-arc.component
 exports.PieArcComponent = pie_arc_component_1.PieArcComponent;
 var pie_chart_component_1 = __webpack_require__("./src/pie-chart/pie-chart.component.ts");
 exports.PieChartComponent = pie_chart_component_1.PieChartComponent;
+var simple_pie_chart_component_1 = __webpack_require__("./src/pie-chart/simple-pie-chart.component.ts");
+exports.SimplePieChartComponent = simple_pie_chart_component_1.SimplePieChartComponent;
 var pie_grid_component_1 = __webpack_require__("./src/pie-chart/pie-grid.component.ts");
 exports.PieGridComponent = pie_grid_component_1.PieGridComponent;
 var pie_grid_series_component_1 = __webpack_require__("./src/pie-chart/pie-grid-series.component.ts");
@@ -13031,6 +13035,7 @@ var PieChartModule = (function () {
                 pie_label_component_1.PieLabelComponent,
                 pie_arc_component_1.PieArcComponent,
                 pie_chart_component_1.PieChartComponent,
+                simple_pie_chart_component_1.SimplePieChartComponent,
                 pie_grid_component_1.PieGridComponent,
                 pie_grid_series_component_1.PieGridSeriesComponent,
                 pie_series_component_1.PieSeriesComponent
@@ -13040,11 +13045,12 @@ var PieChartModule = (function () {
                 pie_label_component_1.PieLabelComponent,
                 pie_arc_component_1.PieArcComponent,
                 pie_chart_component_1.PieChartComponent,
+                simple_pie_chart_component_1.SimplePieChartComponent,
                 pie_grid_component_1.PieGridComponent,
                 pie_grid_series_component_1.PieGridSeriesComponent,
                 pie_series_component_1.PieSeriesComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], PieChartModule);
     return PieChartModule;
@@ -13121,23 +13127,23 @@ var PieGridSeriesComponent = (function () {
         return this.colors(this.label(arc));
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieGridSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieGridSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieGridSeriesComponent.prototype, "innerRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieGridSeriesComponent.prototype, "outerRadius", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieGridSeriesComponent.prototype, "select", void 0);
     PieGridSeriesComponent = __decorate([
@@ -13145,7 +13151,7 @@ var PieGridSeriesComponent = (function () {
             selector: 'g[ngx-charts-pie-grid-series]',
             template: "\n    <svg:g class=\"pie-grid-arcs\">\n      <svg:g ngx-charts-pie-arc *ngFor=\"let arc of arcs; trackBy:trackBy\"\n        [attr.class]=\"arc.class\"\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [gradient]=\"false\"\n        [pointerEvents]=\"arc.pointerEvents\"\n        [animate]=\"arc.animate\"\n        (select)=\"onClick($event)\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], PieGridSeriesComponent);
     return PieGridSeriesComponent;
@@ -13166,7 +13172,7 @@ exports.PieGridSeriesComponent = PieGridSeriesComponent;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -13280,14 +13286,14 @@ var PieGridComponent = (function (_super) {
     PieGridComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-pie-grid',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up \n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up \n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"pie-grid chart\">\n        <svg:g\n          *ngFor=\"let series of series\"\n          class=\"pie-grid-item\"\n          [attr.transform]=\"series.transform\">\n          <svg:g ngx-charts-pie-grid-series\n            [colors]=\"series.colors\"\n            [data]=\"series.data\"\n            [innerRadius]=\"series.innerRadius\"\n            [outerRadius]=\"series.outerRadius\"\n            (select)=\"onClick($event)\"\n            ngx-tooltip\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"getTooltipText(series.label, series.value.toLocaleString())\"\n          />\n          <svg:text\n            class=\"label percent-label\"\n            dy=\"-0.5em\"\n            x=\"0\"\n            y=\"5\"\n            ngx-charts-count-up\n            [countTo]=\"series.percent\"\n            [countSuffix]=\"'%'\"\n            text-anchor=\"middle\">\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"0.5em\"\n            x=\"0\"\n            y=\"5\"\n            text-anchor=\"middle\">\n            {{series.label}}\n          </svg:text>\n          <svg:text\n            class=\"label\"\n            dy=\"1.23em\"\n            x=\"0\"\n            [attr.y]=\"series.outerRadius\"\n            text-anchor=\"middle\"\n            ngx-charts-count-up\n            [countTo]=\"series.total\"\n            [countPrefix]=\"'Total: '\">\n          </svg:text>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
             styles: [
                 __webpack_require__("./src/common/base-chart.component.scss"),
                 __webpack_require__("./src/pie-chart/pie-grid.component.scss")
             ],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], PieGridComponent);
     return PieGridComponent;
@@ -13362,31 +13368,31 @@ var PieLabelComponent = (function () {
             .style('stroke-dasharray', 'none');
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieLabelComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieLabelComponent.prototype, "radius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieLabelComponent.prototype, "label", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieLabelComponent.prototype, "color", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieLabelComponent.prototype, "max", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieLabelComponent.prototype, "value", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieLabelComponent.prototype, "explodeSlices", void 0);
     PieLabelComponent = __decorate([
@@ -13404,7 +13410,7 @@ var PieLabelComponent = (function () {
                     ])
                 ])
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], PieLabelComponent);
     return PieLabelComponent;
@@ -13516,51 +13522,51 @@ var PieSeriesComponent = (function () {
         return item !== undefined;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "series", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "innerRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "outerRadius", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "explodeSlices", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "showLabels", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Boolean)
     ], PieSeriesComponent.prototype, "gradient", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Array)
     ], PieSeriesComponent.prototype, "activeEntries", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "select", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "activate", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], PieSeriesComponent.prototype, "deactivate", void 0);
     PieSeriesComponent = __decorate([
@@ -13568,12 +13574,128 @@ var PieSeriesComponent = (function () {
             selector: 'g[ngx-charts-pie-series]',
             template: "\n    <svg:g *ngFor=\"let arc of data; trackBy:trackBy\">\n      <svg:g ngx-charts-pie-label\n        *ngIf=\"labelVisible(arc)\"\n        [data]=\"arc\"\n        [radius]=\"outerRadius\"\n        [color]=\"color(arc)\"\n        [label]=\"label(arc)\"\n        [max]=\"max\"\n        [value]=\"arc.value\"\n        [explodeSlices]=\"explodeSlices\">\n      </svg:g>\n      <svg:g \n        ngx-charts-pie-arc\n        [startAngle]=\"arc.startAngle\"\n        [endAngle]=\"arc.endAngle\"\n        [innerRadius]=\"innerRadius\"\n        [outerRadius]=\"outerRadius\"\n        [fill]=\"color(arc)\"\n        [value]=\"arc.data.value\"\n        [gradient]=\"gradient\" \n        [data]=\"arc.data\"\n        [max]=\"max\"\n        [explodeSlices]=\"explodeSlices\"\n        [isActive]=\"isActive(arc.data)\"\n        (select)=\"onClick($event)\"\n        (activate)=\"activate.emit($event)\"\n        (deactivate)=\"deactivate.emit($event)\"        \n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"tooltipText(arc)\">\n      </svg:g>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], PieSeriesComponent);
     return PieSeriesComponent;
 }());
 exports.PieSeriesComponent = PieSeriesComponent;
+
+
+/***/ }),
+
+/***/ "./src/pie-chart/simple-pie-chart.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
+var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
+var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
+var SimplePieChartComponent = (function (_super) {
+    __extends(SimplePieChartComponent, _super);
+    function SimplePieChartComponent() {
+        _super.apply(this, arguments);
+        this.activeEntries = [];
+        this.unit = '';
+        this.activate = new core_1.EventEmitter();
+        this.deactivate = new core_1.EventEmitter();
+        this.margin = [0, 0, 0, 0];
+    }
+    SimplePieChartComponent.prototype.update = function () {
+        var _this = this;
+        _super.prototype.update.call(this);
+        this.zone.run(function () {
+            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+                width: _this.width,
+                height: _this.height,
+                margins: _this.margin
+            });
+            _this.domain = _this.getDomain();
+            _this.setColors();
+            var xOffset = _this.dims.width / 2;
+            var yOffset = _this.margin[0] + _this.dims.height / 2;
+            _this.legendWidth = _this.width - _this.dims.width - _this.margin[1];
+            _this.outerRadius = Math.min(_this.dims.width, _this.dims.height) / 2.5;
+            _this.innerRadius = _this.outerRadius * 0.65;
+            _this.transform = "translate(" + xOffset + " , " + yOffset + ")";
+        });
+    };
+    SimplePieChartComponent.prototype.getDomain = function () {
+        return this.results.map(function (d) { return d.name; });
+    };
+    SimplePieChartComponent.prototype.onClick = function (data) {
+        this.select.emit(data);
+    };
+    SimplePieChartComponent.prototype.setColors = function () {
+        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
+    };
+    SimplePieChartComponent.prototype.onActivate = function (event) {
+        if (this.activeEntries.indexOf(event) > -1)
+            return;
+        this.activeEntries = [event].concat(this.activeEntries);
+        this.activate.emit({ value: event, entries: this.activeEntries });
+    };
+    SimplePieChartComponent.prototype.onDeactivate = function (event) {
+        var idx = this.activeEntries.indexOf(event);
+        this.activeEntries.splice(idx, 1);
+        this.activeEntries = this.activeEntries.slice();
+        this.deactivate.emit({ value: event, entries: this.activeEntries });
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata('design:type', Boolean)
+    ], SimplePieChartComponent.prototype, "gradient", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata('design:type', Array)
+    ], SimplePieChartComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata('design:type', String)
+    ], SimplePieChartComponent.prototype, "totalLabel", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata('design:type', Number)
+    ], SimplePieChartComponent.prototype, "totalValue", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata('design:type', String)
+    ], SimplePieChartComponent.prototype, "unit", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata('design:type', core_1.EventEmitter)
+    ], SimplePieChartComponent.prototype, "activate", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata('design:type', core_1.EventEmitter)
+    ], SimplePieChartComponent.prototype, "deactivate", void 0);
+    SimplePieChartComponent = __decorate([
+        core_1.Component({
+            selector: 'ngx-charts-simple-pie-chart',
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g\n        [attr.transform]=\"transform\"\n        class=\"pie chart\">\n        <svg:g ngx-charts-pie-series\n          [colors]=\"colors\"\n          [showLabels]=\"labels\"\n          [series]=\"results\"\n          [innerRadius]=\"innerRadius\"\n          [activeEntries]=\"activeEntries\"\n          [outerRadius]=\"outerRadius\"\n          [gradient]=\"gradient\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n        <svg:text\n          class=\"label\"\n          dy=\"-0.5em\"\n          x=\"0\"\n          y=\"5\"\n          text-anchor=\"middle\">\n          {{ totalLabel }}\n        </svg:text>\n        <svg:text\n          class=\"label percent-label\"\n          dy=\"0.5em\"\n          x=\"0\"\n          y=\"5\"\n          ngx-charts-count-up\n          [countTo]=\"totalValue\"\n          [countSuffix]=\"unit\"\n          text-anchor=\"middle\">\n        </svg:text>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+            changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+        }),
+        __metadata('design:paramtypes', [])
+    ], SimplePieChartComponent);
+    return SimplePieChartComponent;
+}(base_chart_component_1.BaseChartComponent));
+exports.SimplePieChartComponent = SimplePieChartComponent;
 
 
 /***/ }),
@@ -13806,7 +13928,7 @@ var InjectionService = (function () {
         return componentRef;
     };
     InjectionService = __decorate([
-        core_1.Injectable(), 
+        core_1.Injectable(),
         __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
     ], InjectionService);
     return InjectionService;
@@ -13885,19 +14007,19 @@ var TreeMapCellSeriesComponent = (function () {
         return item.label;
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellSeriesComponent.prototype, "data", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellSeriesComponent.prototype, "dims", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellSeriesComponent.prototype, "colors", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], TreeMapCellSeriesComponent.prototype, "select", void 0);
     TreeMapCellSeriesComponent = __decorate([
@@ -13905,7 +14027,7 @@ var TreeMapCellSeriesComponent = (function () {
             selector: 'g[ngx-charts-tree-map-cell-series]',
             template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], TreeMapCellSeriesComponent);
     return TreeMapCellSeriesComponent;
@@ -13977,39 +14099,39 @@ var TreeMapCellComponent = (function () {
         });
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "fill", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "x", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "y", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "width", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "height", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "label", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "value", void 0);
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "valueType", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], TreeMapCellComponent.prototype, "select", void 0);
     TreeMapCellComponent = __decorate([
@@ -14017,7 +14139,7 @@ var TreeMapCellComponent = (function () {
             selector: 'g[ngx-charts-tree-map-cell]',
             template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\">\n            {{label}}\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span \n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\">\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ElementRef])
     ], TreeMapCellComponent);
     return TreeMapCellComponent;
@@ -14038,7 +14160,7 @@ exports.TreeMapCellComponent = TreeMapCellComponent;
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -14118,11 +14240,11 @@ var TreeMapComponent = (function (_super) {
         this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
     };
     __decorate([
-        core_1.Input(), 
+        core_1.Input(),
         __metadata('design:type', Object)
     ], TreeMapComponent.prototype, "results", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', Object)
     ], TreeMapComponent.prototype, "select", void 0);
     TreeMapComponent = __decorate([
@@ -14132,7 +14254,7 @@ var TreeMapComponent = (function (_super) {
             styles: [__webpack_require__("./src/tree-map/tree-map.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None,
             changeDetection: core_1.ChangeDetectionStrategy.OnPush
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], TreeMapComponent);
     return TreeMapComponent;
@@ -14180,7 +14302,7 @@ var TreeMapModule = (function () {
                 tree_map_cell_series_component_1.TreeMapCellSeriesComponent,
                 tree_map_component_1.TreeMapComponent
             ]
-        }), 
+        }),
         __metadata('design:paramtypes', [])
     ], TreeMapModule);
     return TreeMapModule;
@@ -14632,7 +14754,7 @@ var VisibilityObserver = (function () {
         setTimeout(function () { return check(); });
     };
     __decorate([
-        core_1.Output(), 
+        core_1.Output(),
         __metadata('design:type', core_1.EventEmitter)
     ], VisibilityObserver.prototype, "visible", void 0);
     return VisibilityObserver;

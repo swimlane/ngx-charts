@@ -9,6 +9,8 @@ var pie_arc_component_1 = require('./pie-arc.component');
 exports.PieArcComponent = pie_arc_component_1.PieArcComponent;
 var pie_chart_component_1 = require('./pie-chart.component');
 exports.PieChartComponent = pie_chart_component_1.PieChartComponent;
+var simple_pie_chart_component_1 = require('./simple-pie-chart.component');
+exports.SimplePieChartComponent = simple_pie_chart_component_1.SimplePieChartComponent;
 var pie_grid_component_1 = require('./pie-grid.component');
 exports.PieGridComponent = pie_grid_component_1.PieGridComponent;
 var pie_grid_series_component_1 = require('./pie-grid-series.component');
@@ -26,6 +28,7 @@ var PieChartModule = (function () {
                         pie_label_component_1.PieLabelComponent,
                         pie_arc_component_1.PieArcComponent,
                         pie_chart_component_1.PieChartComponent,
+                        simple_pie_chart_component_1.SimplePieChartComponent,
                         pie_grid_component_1.PieGridComponent,
                         pie_grid_series_component_1.PieGridSeriesComponent,
                         pie_series_component_1.PieSeriesComponent
@@ -35,6 +38,7 @@ var PieChartModule = (function () {
                         pie_label_component_1.PieLabelComponent,
                         pie_arc_component_1.PieArcComponent,
                         pie_chart_component_1.PieChartComponent,
+                        simple_pie_chart_component_1.SimplePieChartComponent,
                         pie_grid_component_1.PieGridComponent,
                         pie_grid_series_component_1.PieGridSeriesComponent,
                         pie_series_component_1.PieSeriesComponent
