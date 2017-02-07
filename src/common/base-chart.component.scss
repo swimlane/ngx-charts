@@ -1,3 +1,17 @@
+.ngx-charts-outer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  .ngx-charts-chart-outer {
+    flex: 2;
+  }
+
+  .ngx-charts-legend-outer {
+    padding: 0 15px;
+  }
+}
+
 .ngx-charts {
 
   .circle,

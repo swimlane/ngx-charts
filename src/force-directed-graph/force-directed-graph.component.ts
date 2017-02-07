@@ -116,6 +116,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
         height: this.height,
         margins: this.margin,
         showLegend: this.legend,
+        legendPosition: this.legendPosition
       });
 
       this.seriesDomain = this.getSeriesDomain();

@@ -7,7 +7,7 @@ import {
 @Component({
   selector: 'ngx-charts-legend',
   template: `
-    <div [style.width.px]="width">
+    <div>
       <header class="legend-title">
         <span class="legend-icon icon-eye"></span>
         <span class="legend-title-text">{{title}}</span>
@@ -36,11 +36,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class.chart-legend]': 'true',
-    '[class.legend-position-left]': `position === 'left'`,
-    '[class.legend-position-right]': `position === 'right'`,
-    '[class.legend-position-top]': `position === 'top'`,
-    '[class.legend-position-bottom]': `position === 'bottom'`
+    '[class.chart-legend]': 'true'
   }
 })
 export class LegendComponent implements OnChanges {
@@ -49,7 +45,6 @@ export class LegendComponent implements OnChanges {
   @Input() colors: any;
   @Input() title: string;
   @Input() height: number;
-  @Input() width: number;
   @Input() activeEntries: any[];
   @Input() position: string;
 

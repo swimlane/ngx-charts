@@ -1,13 +1,12 @@
 import {
-  ElementRef, NgZone, ChangeDetectorRef, Component, Input,
+  ElementRef, NgZone, ChangeDetectorRef, Component, Input, ViewChild, HostListener,
   Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/debounceTime';
 import { VisibilityObserver } from '../utils';
+import { ChartComponent } from '../common/charts/chart.component';
 
 @Component({
   selector: 'base-chart',
@@ -23,10 +22,23 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Output() select = new EventEmitter();
 
-  width: number;
-  height: number;
+  @ViewChild(ChartComponent) container: any;
+
+  get width(): number {
+    if(this.container.chartWidth) return this.container.chartWidth;
+    if(this.view) return this.view[0];
+    return 0;
+  }
+
+  get height(): number {
+    if(this.container.chartHeight) return this.container.chartHeight;
+    if(this.view) return this.view[1];
+    return 0;
+  }
+
   resizeSubscription: any;
   visibilityObserver: VisibilityObserver;
+  viewInit: boolean = false;
 
   constructor(
     protected chartElement: ElementRef,
@@ -36,15 +48,12 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.bindWindowResizeEvent();
-
     // listen for visibility of the element for hidden by default scenario
     this.visibilityObserver = new VisibilityObserver(this.chartElement, this.zone);
     this.visibilityObserver.visible.subscribe(this.update.bind(this));
   }
 
   ngOnDestroy(): void {
-    this.unbindEvents();
     if (this.visibilityObserver) {
       this.visibilityObserver.visible.unsubscribe();
       this.visibilityObserver.destroy();
@@ -55,48 +64,20 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.update();
   }
 
+  @HostListener('window:resize')
+  onResize(): void {
+    // todo: debounce
+    this.update();
+  }
+
   update(): void {
     if (this.results) {
       this.results = this.cloneData(this.results);
     }
 
-    if (this.view) {
-      this.width = this.view[0];
-      this.height = this.view[1];
-    } else {
-      const dims = this.getContainerDims();
-      if (dims) {
-        this.width = dims.width;
-        this.height = dims.height;
-      }
-    }
-
-    if (!this.width || !this.height) {
-      this.width = this.height = 0;
-    }
-
     if (this.cd) {
       this.cd.markForCheck();
     }
-  }
-
-  getContainerDims(): any {
-    let width;
-    let height;
-    const hostElem = this.chartElement.nativeElement;
-
-    if (hostElem.parentNode !== null) {
-      // Get the container dimensions
-      const dims = hostElem.parentNode.getBoundingClientRect();
-      width = dims.width;
-      height = dims.height;
-    }
-
-    if (width && height) {
-      return { width, height };
-    }
-    
-    return null;
   }
 
   /**
@@ -120,25 +101,6 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
         }
       }
     }
-  }
-
-  protected unbindEvents(): void {
-    if (this.resizeSubscription) {
-      this.resizeSubscription.unsubscribe();
-    }
-  }
-
-  private bindWindowResizeEvent(): void {
-    this.zone.run(() => {
-      const source = Observable.fromEvent(window, 'resize', null, null);
-      const subscription = source.debounceTime(200).subscribe(e => {
-        this.update();
-        if (this.cd) {
-          this.cd.markForCheck();
-        }
-      });
-      this.resizeSubscription = subscription;
-    });
   }
 
   /**

@@ -188,7 +188,8 @@ export class LineChartComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        legendType: this.schemeType
+        legendType: this.schemeType,
+        legendPosition: this.legendPosition
       });
 
       if (this.timeline) {

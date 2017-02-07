@@ -107,7 +107,8 @@ export class HeatMapComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        legendType: 'linear'
+        legendType: 'linear',
+        legendPosition: this.legendPosition
       });
 
       this.formatDates();

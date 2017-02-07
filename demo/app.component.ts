@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
   barPadding = 8;
   groupPadding = 16;
   roundDomains = false;
-  legendPosition = 'left';
+  legendPosition = 'right';
 
   // line interpolation
   curveType: string = 'Linear';
@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
 
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
-    this.setColorScheme('cool');
+    this.setColorScheme('vivid');
   }
 
   get dateDataWithOrWithoutRange() {

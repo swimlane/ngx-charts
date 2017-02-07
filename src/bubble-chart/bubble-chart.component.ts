@@ -144,7 +144,8 @@ export class BubbleChartComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        legendType: this.schemeType
+        legendType: this.schemeType,
+        legendPosition: this.legendPosition
       });
 
       this.seriesDomain = this.results.map(d => d.name);

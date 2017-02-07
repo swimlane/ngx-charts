@@ -141,7 +141,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        legendType: this.schemeType
+        legendType: this.schemeType,
+        legendPosition: this.legendPosition
       });
 
       this.formatDates();
@@ -263,8 +264,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      position: this.legendPosition
     };
+
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;

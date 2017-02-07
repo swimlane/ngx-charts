@@ -1,15 +1,47 @@
+.legend-position-right {
+  // float: right;
+}
+
+.legend-position-left {
+  // float: left;
+  .ngx-charts-legend-outer {
+    order: 0;
+  }
+  .ngx-charts-chart-outer {
+    order: 1;
+  }
+}
+
+.legend-position-right,
+.legend-position-left {
+  // width: auto !important;
+
+  .legend-wrap {
+    width: 90%;
+  }
+}
+
+.legend-position-top,
+.legend-position-bottom {
+  // width: 100%;
+  margin: 0 auto;
+
+  // doesn't work but should....
+  flex: column;
+  flex-wrap: wrap;
+
+  .legend-title {
+    display: none;
+  }
+
+  .legend-label {
+    display: inline-block; 
+  }
+}
+
 .chart-legend {
   display: inline-block;
   padding: 0;
-  width: auto !important;
-
-  &.legend-position-right {
-    float: right;
-  }
-
-  &.legend-position-left {
-    float: left;
-  }
 
   .legend-title {
     white-space: nowrap;
@@ -24,10 +56,6 @@
     padding: 0;
     margin: 0;
     list-style: none;
-  }
-
-  .legend-wrap {
-    width: 90%;
   }
 
   .legend-labels {

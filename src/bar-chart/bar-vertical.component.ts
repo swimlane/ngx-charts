@@ -4,7 +4,8 @@ import {
   ViewEncapsulation,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewChild
 } from '@angular/core';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -15,7 +16,7 @@ import d3 from '../d3';
   selector: 'ngx-charts-bar-vertical',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
@@ -63,20 +64,20 @@ import d3 from '../d3';
 })
 export class BarVerticalComponent extends BaseChartComponent {
 
-  @Input() legend = false;
+  @Input() legend: boolean = false;
   @Input() xAxis;
   @Input() yAxis;
-  @Input() showXAxisLabel;
-  @Input() showYAxisLabel;
-  @Input() xAxisLabel;
-  @Input() yAxisLabel;
+  @Input() showXAxisLabel: boolean;
+  @Input() showYAxisLabel: boolean;
+  @Input() xAxisLabel: string;
+  @Input() yAxisLabel: string;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
-  @Input() barPadding = 8;
+  @Input() barPadding: number = 8;
   @Input() roundDomains: boolean = false;
   @Input() legendPosition: string = 'right';
 
@@ -110,7 +111,8 @@ export class BarVerticalComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        legendType: this.schemeType
+        legendType: this.schemeType,
+        legendPosition: this.legendPosition
       });
 
       this.xScale = this.getXScale();
@@ -144,7 +146,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     return this.results.map(d => d.name);
   }
 
-  getYDomain() {
+  getYDomain(): number[] {
     const values = this.results.map(d => d.value);
     const min = Math.min(0, ...values);
     const max = Math.max(...values);
@@ -166,7 +168,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
@@ -195,7 +197,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
@@ -207,7 +209,7 @@ export class BarVerticalComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value && d.series === item.series;
     });
