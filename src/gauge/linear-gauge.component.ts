@@ -17,7 +17,7 @@ import { ColorHelper } from '../common/color.helper';
   selector: 'ngx-charts-linear-gauge',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="false"
       (click)="onClick()">
       <svg:g class="linear-gauge chart">

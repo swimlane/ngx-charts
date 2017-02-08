@@ -16,7 +16,7 @@ import { formatLabel } from '../common/label.helper';
   selector: 'ngx-charts-pie-grid',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="pie-grid chart">
         <svg:g

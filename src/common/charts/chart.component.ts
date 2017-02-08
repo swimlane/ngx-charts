@@ -3,6 +3,7 @@ import {
   animate, ViewContainerRef, ChangeDetectionStrategy, EventEmitter,
   Output, SimpleChanges, ViewChild, ElementRef, HostListener
 } from '@angular/core';
+import { debounceable } from '../../utils/debounce';
 import { TooltipService } from '../tooltip';
 
 @Component({
@@ -11,6 +12,8 @@ import { TooltipService } from '../tooltip';
   template: `
     <div
       class="ngx-charts-outer"
+      [class.horizontal-legend]="showLegend && (legendOptions.position === 'top' || legendOptions.position === 'bottom')"
+      [class.vertical-legend]="showLegend && (legendOptions.position === 'left' || legendOptions.position === 'right')"
       [style.width.px]="containerWidth"
       [style.height.px]="containerHeight"
       [@animationState]="'active'">
@@ -55,10 +58,10 @@ import { TooltipService } from '../tooltip';
     ])
   ],
    host: {
-    '[class.legend-position-left]': `legendOptions.position === 'left'`,
-    '[class.legend-position-right]': `legendOptions.position === 'right'`,
-    '[class.legend-position-top]': `legendOptions.position === 'top'`,
-    '[class.legend-position-bottom]': `legendOptions.position === 'bottom'`
+    '[class.legend-position-left]': `showLegend && legendOptions.position === 'left'`,
+    '[class.legend-position-right]': `showLegend && legendOptions.position === 'right'`,
+    '[class.legend-position-top]': `showLegend && legendOptions.position === 'top'`,
+    '[class.legend-position-bottom]': `showLegend && legendOptions.position === 'bottom'`
   }
 })
 export class ChartComponent implements OnChanges {
@@ -94,11 +97,12 @@ export class ChartComponent implements OnChanges {
     this.tooltipService.injectionService.setRootViewContainer(vcr);
   }
 
-  @HostListener('window:resize')
-  onResize(): void {
-    // todo: debounce
-    this.update();
-  }
+  // @debounceable(150)
+  // @HostListener('window:resize')
+  // onResize(): void {
+  //   // todo: debounce
+  //   this.update();
+  // }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -119,12 +123,16 @@ export class ChartComponent implements OnChanges {
     }
 
     const bounds = this.chartOuter.nativeElement.getBoundingClientRect();
-    if(this.legendOptions.position === 'left' || this.legendOptions.position === 'right') {
-      this.chartWidth = Math.round(bounds.width);
-      this.chartHeight = this.containerHeight;
-    } else if(this.legendOptions.position === 'top' || this.legendOptions.position === 'bottom') {
-      this.chartWidth = this.containerWidth;
-      this.chartHeight = Math.round(bounds.height);
+    this.chartWidth = bounds.width;
+    this.chartHeight = bounds.height;
+    if (this.showLegend) {
+      if(this.legendOptions.position === 'left' || this.legendOptions.position === 'right') {
+        this.chartWidth = Math.round(bounds.width);
+        this.chartHeight = this.containerHeight;
+      } else if(this.legendOptions.position === 'top' || this.legendOptions.position === 'bottom') {
+        this.chartWidth = this.containerWidth;
+        this.chartHeight = Math.round(bounds.height);
+      }
     }
   }
 

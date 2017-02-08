@@ -15,13 +15,13 @@ import { BaseChartComponent } from '../common/base-chart.component';
   selector: 'ngx-charts-advanced-pie-chart',
   template: `
     <div
-      [style.width.px]="width"
-      [style.height.px]="height">
+      [style.width.px]="view ? view[0] : width"
+      [style.height.px]="view ? view[1] : height">
       <div class="advanced-pie chart"
         [style.width.px]="dims.width"
         [style.height.px]="dims.height">
         <ngx-charts-chart
-          [view]="[width, height]"
+          [view]="view"
           [showLegend]="false">
           <svg:g
             [attr.transform]="transform"

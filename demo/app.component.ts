@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   version = APP_VERSION;
 
   theme = 'dark';
-  chartType = 'bar-vertical';
+  chartType = 'bar-horizontal';
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;

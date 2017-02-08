@@ -15,7 +15,7 @@ import d3 from '../d3';
   selector: 'ngx-charts-bar-horizontal',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
@@ -130,14 +130,14 @@ export class BarHorizontalComponent extends BaseChartComponent {
     const scale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.xDomain);
-    
+
     return this.roundDomains ? scale.nice() : scale;
   }
 
   getYScale(): any {
     this.yDomain = this.getYDomain();
     const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
-    
+
     return d3.scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)

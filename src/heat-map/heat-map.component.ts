@@ -13,7 +13,7 @@ import { ColorHelper } from '../common/color.helper';
   selector: 'ngx-charts-heat-map',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       (legendLabelActivate)="onActivate($event)"

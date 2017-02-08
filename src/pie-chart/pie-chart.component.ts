@@ -14,7 +14,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
   selector: 'ngx-charts-pie-chart',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"

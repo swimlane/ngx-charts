@@ -10,7 +10,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
   selector: 'ngx-charts-bubble-chart',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [activeEntries]="activeEntries"
       [legendOptions]="legendOptions"

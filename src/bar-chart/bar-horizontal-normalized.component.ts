@@ -19,7 +19,7 @@ import d3 from '../d3';
   selector: 'ngx-charts-bar-horizontal-normalized',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"

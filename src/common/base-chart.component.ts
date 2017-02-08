@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { VisibilityObserver } from '../utils';
 import { ChartComponent } from '../common/charts/chart.component';
+import { debounceable } from '../utils/debounce';
 
 @Component({
   selector: 'base-chart',
@@ -36,9 +37,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     return 0;
   }
 
-  resizeSubscription: any;
   visibilityObserver: VisibilityObserver;
-  viewInit: boolean = false;
 
   constructor(
     protected chartElement: ElementRef,
@@ -64,9 +63,9 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.update();
   }
 
+  @debounceable(150)
   @HostListener('window:resize')
   onResize(): void {
-    // todo: debounce
     this.update();
   }
 

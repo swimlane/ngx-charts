@@ -2,7 +2,7 @@
   // float: right;
 }
 
-.legend-position-left {
+.legend-position-left, .legend-position-top {
   // float: left;
   .ngx-charts-legend-outer {
     order: 0;
@@ -14,33 +14,37 @@
 
 .legend-position-right,
 .legend-position-left {
-  // width: auto !important;
-
   .legend-wrap {
     width: 90%;
+  }
+
+  .legend-labels {
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
 .legend-position-top,
 .legend-position-bottom {
-  // width: 100%;
   margin: 0 auto;
-
-  // doesn't work but should....
-  flex: column;
-  flex-wrap: wrap;
 
   .legend-title {
     display: none;
   }
 
+  .legend-labels {
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+
   .legend-label {
-    display: inline-block; 
+    display: inline-block;
   }
 }
 
 .chart-legend {
   display: inline-block;
+  width: 100%;
   padding: 0;
 
   .legend-title {
@@ -65,8 +69,6 @@
     float: left;
     width: 100%;
     border-radius: 3px;
-    overflow-y: auto;
-    overflow-x: hidden;
     white-space: nowrap;
     background: rgba(0,0,0,0.05);
   }
@@ -102,7 +104,6 @@
 
   .legend-label-text {
     display: inline-block;
-    vertical-align: top;
     line-height: 15px;
     font-size: 12px;
     width: 100%;

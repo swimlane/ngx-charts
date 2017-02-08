@@ -18,7 +18,7 @@ import { id } from '../utils/id';
   selector: 'ngx-charts-area-chart-normalized',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"

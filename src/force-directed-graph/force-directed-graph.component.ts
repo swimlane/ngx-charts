@@ -22,7 +22,7 @@ import { ColorHelper } from '../common/color.helper';
   selector: 'ngx-charts-force-directed-graph',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       (legendLabelClick)="onClick($event)"

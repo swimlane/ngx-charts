@@ -12,7 +12,7 @@ import { gridLayout } from '../common/grid-layout.helper';
   selector: 'ngx-charts-number-card',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="number-card chart">
         <svg:g ngx-charts-card-series

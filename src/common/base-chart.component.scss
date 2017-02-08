@@ -1,14 +1,23 @@
 .ngx-charts-outer {
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
 
+  &.horizontal-legend {
+    flex-direction: column;
+  }
+
+  &.vertical-legend {
+    flex-direction: row;
+  }
+
   .ngx-charts-chart-outer {
-    flex: 2;
+    flex: 6;
+    overflow: hidden;
   }
 
   .ngx-charts-legend-outer {
-    padding: 0 15px;
+    flex: 1;
+    padding: 0;
   }
 }
 

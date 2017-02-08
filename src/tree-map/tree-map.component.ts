@@ -15,7 +15,7 @@ import { ColorHelper } from '../common/color.helper';
   selector: 'ngx-charts-tree-map',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="false">
       <svg:g [attr.transform]="transform" class="tree-map chart">
         <svg:g ngx-charts-tree-map-cell-series

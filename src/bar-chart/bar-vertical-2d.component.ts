@@ -19,7 +19,7 @@ import d3 from '../d3';
   selector: 'ngx-charts-bar-vertical-2d',
   template: `
     <ngx-charts-chart
-      [view]="[width, height]"
+      [view]="view"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
@@ -163,7 +163,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
 
   getGroupScale(): any {
     const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
-  
+
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
