@@ -76,6 +76,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() legend = false;
   @Input() min: number = 0;
   @Input() max: number = 100;
+  @Input() textValue: string;
   @Input() units: string;
   @Input() bigSegments: number = 10;
   @Input() smallSegments: number = 5;
@@ -246,6 +247,10 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
 
   getDisplayValue(): string {
     const value = this.results.map(d => d.value).reduce((a, b) => a + b, 0);
+
+    if(this.textValue && 0 !== this.textValue.length) {
+      return this.textValue.toLocaleString();
+    }
     return value.toLocaleString();
   }
 
