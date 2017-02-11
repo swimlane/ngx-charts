@@ -126,13 +126,15 @@ export class BubbleSeriesComponent implements OnChanges {
   getTooltipText(circle): string {
     const hasRadius = typeof circle.r !== 'undefined';
     const radiusValue = hasRadius ? circle.r.toLocaleString() : '';
+    const xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? `${this.xAxisLabel}:` : '';
+    const yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? `${this.yAxisLabel}:` : '';
     return `
       <span class="tooltip-label">
         ${circle.seriesName} • ${circle.tooltipLabel}
       </span>
       <span class="tooltip-label">
-        <span>${this.xAxisLabel}: ${circle.x.toLocaleString()}</span><br />
-        <span>${this.yAxisLabel}: ${circle.y.toLocaleString()}</span>
+        <label>${xAxisLabel}</label> ${circle.x.toLocaleString()}<br />
+        <label>${yAxisLabel}</label> ${circle.y.toLocaleString()}
       </span>
       <span class="tooltip-val">
         ${radiusValue}
