@@ -52,7 +52,9 @@ var BubbleSeriesComponent = (function () {
     BubbleSeriesComponent.prototype.getTooltipText = function (circle) {
         var hasRadius = typeof circle.r !== 'undefined';
         var radiusValue = hasRadius ? circle.r.toLocaleString() : '';
-        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        " + circle.x.toLocaleString() + " " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
+        var xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? this.xAxisLabel + ":" : '';
+        var yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? this.yAxisLabel + ":" : '';
+        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + circle.x.toLocaleString() + "<br />\n        <label>" + yAxisLabel + "</label> " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
     };
     BubbleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({
@@ -111,6 +113,8 @@ var BubbleSeriesComponent = (function () {
         'colors': [{ type: core_1.Input },],
         'visibleValue': [{ type: core_1.Input },],
         'activeEntries': [{ type: core_1.Input },],
+        'xAxisLabel': [{ type: core_1.Input },],
+        'yAxisLabel': [{ type: core_1.Input },],
         'select': [{ type: core_1.Output },],
         'activate': [{ type: core_1.Output },],
         'deactivate': [{ type: core_1.Output },],

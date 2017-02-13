@@ -36,7 +36,7 @@ import * as import27 from '../../../src/common/tooltip/tooltip.service';
 import * as import28 from '../common/charts/chart.component.ngfactory';
 import * as import29 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import30 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import31 from '../../../src/services/injection.service';
+import * as import31 from '../../../src/common/tooltip/injection.service';
 import * as import32 from '@angular/core/src/linker/template_ref';
 import * as import33 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import34 from '@angular/common/src/directives/ng_if';

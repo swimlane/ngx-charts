@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.1.1" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.1.2" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -4758,10 +4758,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var d3_1 = __webpack_require__("./src/d3.ts");
+var base_chart_component_1 = __webpack_require__("./src/common/base-chart.component.ts");
 var view_dimensions_helper_1 = __webpack_require__("./src/common/view-dimensions.helper.ts");
 var color_helper_1 = __webpack_require__("./src/common/color.helper.ts");
+var bubble_chart_utils_1 = __webpack_require__("./src/bubble-chart/bubble-chart.utils.ts");
 var BubbleChartComponent = (function (_super) {
     __extends(BubbleChartComponent, _super);
     function BubbleChartComponent() {
@@ -4775,6 +4776,7 @@ var BubbleChartComponent = (function (_super) {
         this.maxRadius = 10;
         this.minRadius = 3;
         this.schemeType = 'ordinal';
+        this.legendPosition = 'right';
         this.activate = new core_1.EventEmitter();
         this.deactivate = new core_1.EventEmitter();
         this.scaleType = 'linear';
@@ -4825,11 +4827,11 @@ var BubbleChartComponent = (function (_super) {
     };
     BubbleChartComponent.prototype.getYScale = function (domain, height) {
         var padding = (domain[1] - domain[0]) / height * this.maxRadius; // padding to keep bubbles inside range
-        return getScale(domain, [height, 0], this.yScaleType, padding, this.roundDomains);
+        return bubble_chart_utils_1.getScale(domain, [height, 0], this.yScaleType, padding, this.roundDomains);
     };
     BubbleChartComponent.prototype.getXScale = function (domain, width) {
         var padding = (domain[1] - domain[0]) / width * this.maxRadius; // padding to keep bubbles inside range
-        return getScale(domain, [0, width], this.xScaleType, padding, this.roundDomains);
+        return bubble_chart_utils_1.getScale(domain, [0, width], this.xScaleType, padding, this.roundDomains);
     };
     BubbleChartComponent.prototype.getRScale = function (domain, range) {
         var scale = d3_1.default.scaleLinear()
@@ -4841,7 +4843,8 @@ var BubbleChartComponent = (function (_super) {
         var opts = {
             scaleType: this.schemeType,
             colors: undefined,
-            domain: []
+            domain: [],
+            position: this.legendPosition
         };
         if (opts.scaleType === 'ordinal') {
             opts.domain = this.seriesDomain;
@@ -4864,8 +4867,8 @@ var BubbleChartComponent = (function (_super) {
                 }
             }
         }
-        this.xScaleType = getScaleType(values);
-        return getDomain(values, this.xScaleType, this.autoScale);
+        this.xScaleType = bubble_chart_utils_1.getScaleType(values);
+        return bubble_chart_utils_1.getDomain(values, this.xScaleType, this.autoScale);
     };
     BubbleChartComponent.prototype.getYDomain = function () {
         var values = [];
@@ -4878,8 +4881,8 @@ var BubbleChartComponent = (function (_super) {
                 }
             }
         }
-        this.yScaleType = getScaleType(values);
-        return getDomain(values, this.yScaleType, this.autoScale);
+        this.yScaleType = bubble_chart_utils_1.getScaleType(values);
+        return bubble_chart_utils_1.getDomain(values, this.yScaleType, this.autoScale);
     };
     BubbleChartComponent.prototype.getRDomain = function () {
         var min = Infinity;
@@ -5000,6 +5003,10 @@ var BubbleChartComponent = (function (_super) {
         __metadata('design:type', Object)
     ], BubbleChartComponent.prototype, "schemeType", void 0);
     __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BubbleChartComponent.prototype, "legendPosition", void 0);
+    __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], BubbleChartComponent.prototype, "activate", void 0);
@@ -5016,79 +5023,13 @@ var BubbleChartComponent = (function (_super) {
     BubbleChartComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-bubble-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n      \n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n          \n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n \n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n        \n      </svg:g>\n    </ngx-charts-chart>"
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n\n      </svg:g>\n    </ngx-charts-chart>"
         }), 
         __metadata('design:paramtypes', [])
     ], BubbleChartComponent);
     return BubbleChartComponent;
 }(base_chart_component_1.BaseChartComponent));
 exports.BubbleChartComponent = BubbleChartComponent;
-// TODO: move to utilities?
-function getScaleType(values) {
-    var date = true;
-    var num = true;
-    for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-        var value = values_1[_i];
-        if (!isDate(value)) {
-            date = false;
-        }
-        if (typeof value !== 'number') {
-            num = false;
-        }
-    }
-    if (date)
-        return 'time';
-    if (num)
-        return 'linear';
-    return 'ordinal';
-}
-function isDate(value) {
-    if (value instanceof Date) {
-        return true;
-    }
-    return false;
-}
-function getDomain(values, scaleType, autoScale) {
-    var domain = [];
-    if (scaleType === 'time') {
-        var min = Math.min.apply(Math, values);
-        var max = Math.max.apply(Math, values);
-        domain = [min, max];
-    }
-    else if (scaleType === 'linear') {
-        values = values.map(function (v) { return Number(v); });
-        var min = Math.min.apply(Math, values);
-        var max = Math.max.apply(Math, values);
-        if (!autoScale) {
-            min = Math.min(0, min);
-        }
-        domain = [min, max];
-    }
-    else {
-        domain = values;
-    }
-    return domain;
-}
-function getScale(domain, range, scaleType, padding, roundDomains) {
-    var scale;
-    if (scaleType === 'time') {
-        scale = d3_1.default.scaleTime()
-            .range(range)
-            .domain(domain);
-    }
-    else if (scaleType === 'linear') {
-        scale = d3_1.default.scaleLinear()
-            .range(range)
-            .domain([domain[0] - padding, domain[1] + padding]);
-    }
-    else if (scaleType === 'ordinal') {
-        scale = d3_1.default.scalePoint()
-            .range(range)
-            .padding(0.1)
-            .domain(domain);
-    }
-    return roundDomains ? scale.nice() : scale;
-}
 
 
 /***/ }),
@@ -5133,6 +5074,87 @@ var BubbleChartModule = (function () {
     return BubbleChartModule;
 }());
 exports.BubbleChartModule = BubbleChartModule;
+
+
+/***/ }),
+
+/***/ "./src/bubble-chart/bubble-chart.utils.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var d3_1 = __webpack_require__("./src/d3.ts");
+function getScaleType(values) {
+    var date = true;
+    var num = true;
+    for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
+        var value = values_1[_i];
+        if (!isDate(value)) {
+            date = false;
+        }
+        if (typeof value !== 'number') {
+            num = false;
+        }
+    }
+    if (date)
+        return 'time';
+    if (num)
+        return 'linear';
+    return 'ordinal';
+}
+exports.getScaleType = getScaleType;
+function isDate(value) {
+    if (value instanceof Date) {
+        return true;
+    }
+    return false;
+}
+function getDomain(values, scaleType, autoScale) {
+    var domain = [];
+    if (scaleType === 'time') {
+        var min = Math.min.apply(Math, values);
+        var max = Math.max.apply(Math, values);
+        domain = [min, max];
+    }
+    else if (scaleType === 'linear') {
+        values = values.map(function (v) { return Number(v); });
+        var min = Math.min.apply(Math, values);
+        var max = Math.max.apply(Math, values);
+        if (!autoScale) {
+            min = Math.min(0, min);
+        }
+        domain = [min, max];
+    }
+    else {
+        domain = values;
+    }
+    return domain;
+}
+exports.getDomain = getDomain;
+function getScale(domain, range, scaleType, padding, roundDomains) {
+    var scale;
+    if (scaleType === 'time') {
+        scale = d3_1.default.scaleTime()
+            .range(range)
+            .domain(domain);
+    }
+    else if (scaleType === 'linear') {
+        scale = d3_1.default.scaleLinear()
+            .range(range)
+            .domain([domain[0] - padding, domain[1] + padding]);
+        if (roundDomains) {
+            scale = scale.nice();
+        }
+    }
+    else if (scaleType === 'ordinal') {
+        scale = d3_1.default.scalePoint()
+            .range(range)
+            .padding(0.1)
+            .domain(domain);
+    }
+    return scale;
+}
+exports.getScale = getScale;
 
 
 /***/ }),
@@ -5204,7 +5226,9 @@ var BubbleSeriesComponent = (function () {
     BubbleSeriesComponent.prototype.getTooltipText = function (circle) {
         var hasRadius = typeof circle.r !== 'undefined';
         var radiusValue = hasRadius ? circle.r.toLocaleString() : '';
-        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        " + circle.x.toLocaleString() + " " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
+        var xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? this.xAxisLabel + ":" : '';
+        var yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? this.yAxisLabel + ":" : '';
+        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + circle.x.toLocaleString() + "<br />\n        <label>" + yAxisLabel + "</label> " + circle.y.toLocaleString() + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
     };
     BubbleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({
@@ -5270,6 +5294,14 @@ var BubbleSeriesComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Array)
     ], BubbleSeriesComponent.prototype, "activeEntries", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BubbleSeriesComponent.prototype, "xAxisLabel", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], BubbleSeriesComponent.prototype, "yAxisLabel", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', Object)
@@ -8724,6 +8756,230 @@ __export(__webpack_require__("./src/common/tooltip/show.type.ts"));
 
 /***/ }),
 
+/***/ "./src/common/tooltip/injection-registery.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var InjectionRegistery = (function () {
+    function InjectionRegistery(injectionService) {
+        this.injectionService = injectionService;
+        this.defaults = {};
+        this.components = new Map();
+    }
+    InjectionRegistery.prototype.getByType = function (type) {
+        if (type === void 0) { type = this.type; }
+        return this.components.get(type);
+    };
+    InjectionRegistery.prototype.create = function (bindings) {
+        return this.createByType(this.type, bindings);
+    };
+    InjectionRegistery.prototype.createByType = function (type, bindings) {
+        bindings = this.assignDefaults(bindings);
+        var component = this.injectComponent(type, bindings);
+        this.register(type, component);
+        return component;
+    };
+    InjectionRegistery.prototype.destroy = function (instance) {
+        var compsByType = this.components.get(instance.componentType);
+        if (compsByType) {
+            var idx = compsByType.indexOf(instance);
+            if (idx > -1) {
+                var component = compsByType[idx];
+                component.destroy();
+                compsByType.splice(idx, 1);
+            }
+        }
+    };
+    InjectionRegistery.prototype.destroyAll = function () {
+        this.destroyByType(this.type);
+    };
+    InjectionRegistery.prototype.destroyByType = function (type) {
+        var comps = this.components.get(type);
+        if (comps) {
+            for (var _i = 0, comps_1 = comps; _i < comps_1.length; _i++) {
+                var comp = comps_1[_i];
+                this.destroy(comp);
+            }
+        }
+    };
+    InjectionRegistery.prototype.assignDefaults = function (bindings) {
+        var _a = this.defaults, inputs = _a.inputs, outputs = _a.outputs;
+        if (!bindings.inputs && !bindings.outputs) {
+            bindings = { inputs: bindings };
+        }
+        if (inputs) {
+            bindings.inputs = Object.assign(inputs, bindings.inputs);
+        }
+        if (outputs) {
+            bindings.outputs = Object.assign(outputs, bindings.outputs);
+        }
+        return bindings;
+    };
+    InjectionRegistery.prototype.injectComponent = function (type, bindings) {
+        return this.injectionService.appendComponent(type, bindings);
+    };
+    InjectionRegistery.prototype.register = function (type, component) {
+        if (!this.components.has(type)) {
+            this.components.set(type, []);
+        }
+        var types = this.components.get(type);
+        types.push(component);
+    };
+    return InjectionRegistery;
+}());
+exports.InjectionRegistery = InjectionRegistery;
+
+
+/***/ }),
+
+/***/ "./src/common/tooltip/injection.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(0);
+/**
+ * Injection service is a helper to append components
+ * dynamically to a known location in the DOM, most
+ * noteably for dialogs/tooltips appending to body.
+ *
+ * @export
+ * @class InjectionService
+ */
+var InjectionService = (function () {
+    function InjectionService(applicationRef, componentFactoryResolver, injector) {
+        this.applicationRef = applicationRef;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.injector = injector;
+    }
+    /**
+     * Gets the root view container to inject the component to.
+     *
+     * @returns {ComponentRef<any>}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.getRootViewContainer = function () {
+        var rootComponents = this.applicationRef['_rootComponents'];
+        if (rootComponents.length)
+            return rootComponents[0];
+        if (this._container)
+            return this._container;
+        throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
+    };
+    /**
+     * Overrides the default root view container. This is useful for
+     * things like ngUpgrade that doesn't have a ApplicationRef root.
+     *
+     * @param {any} container
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.setRootViewContainer = function (container) {
+        this._container = container;
+    };
+    /**
+     * Gets the html element for a component ref.
+     *
+     * @param {ComponentRef<any>} componentRef
+     * @returns {HTMLElement}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.getComponentRootNode = function (componentRef) {
+        // the top most component root node has no `hostView`
+        if (!componentRef.hostView)
+            return componentRef.element.nativeElement;
+        return componentRef.hostView.rootNodes[0];
+    };
+    /**
+     * Gets the root component container html element.
+     *
+     * @returns {HTMLElement}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.getRootViewContainerNode = function () {
+        return this.getComponentRootNode(this.getRootViewContainer());
+    };
+    /**
+     * Projects the bindings onto the component
+     *
+     * @param {ComponentRef<any>} component
+     * @param {*} options
+     * @returns {ComponentRef<any>}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.projectComponentBindings = function (component, bindings) {
+        if (bindings) {
+            if (bindings.inputs !== undefined) {
+                var bindingKeys = Object.getOwnPropertyNames(bindings.inputs);
+                for (var _i = 0, bindingKeys_1 = bindingKeys; _i < bindingKeys_1.length; _i++) {
+                    var bindingName = bindingKeys_1[_i];
+                    component.instance[bindingName] = bindings.inputs[bindingName];
+                }
+            }
+            if (bindings.outputs !== undefined) {
+                var eventKeys = Object.getOwnPropertyNames(bindings.outputs);
+                for (var _a = 0, eventKeys_1 = eventKeys; _a < eventKeys_1.length; _a++) {
+                    var eventName = eventKeys_1[_a];
+                    component.instance[eventName] = bindings.outputs[eventName];
+                }
+            }
+        }
+        return component;
+    };
+    /**
+     * Appends a component to a adjacent location
+     *
+     * @template T
+     * @param {Type<T>} componentClass
+     * @param {*} [options={}]
+     * @param {Element} [location=this.getRootViewContainerNode()]
+     * @returns {ComponentRef<any>}
+     *
+     * @memberOf InjectionService
+     */
+    InjectionService.prototype.appendComponent = function (componentClass, bindings, location) {
+        if (bindings === void 0) { bindings = {}; }
+        if (location === void 0) { location = this.getRootViewContainerNode(); }
+        var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
+        var componentRef = componentFactory.create(this.injector);
+        var appRef = this.applicationRef;
+        var componentRootNode = this.getComponentRootNode(componentRef);
+        // project the options passed to the component instance
+        this.projectComponentBindings(componentRef, bindings);
+        appRef.attachView(componentRef.hostView);
+        componentRef.onDestroy(function () {
+            appRef.detachView(componentRef.hostView);
+        });
+        // use the renderer to append the element for univseral support
+        var renderer = componentRef.instance.renderer;
+        renderer.projectNodes(location, [componentRootNode]);
+        return componentRef;
+    };
+    InjectionService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
+    ], InjectionService);
+    return InjectionService;
+}());
+exports.InjectionService = InjectionService;
+
+
+/***/ }),
+
 /***/ "./src/common/tooltip/position/index.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9522,14 +9778,14 @@ var common_1 = __webpack_require__(1);
 var tooltip_directive_1 = __webpack_require__("./src/common/tooltip/tooltip.directive.ts");
 var tooltip_component_1 = __webpack_require__("./src/common/tooltip/tooltip.component.ts");
 var tooltip_service_1 = __webpack_require__("./src/common/tooltip/tooltip.service.ts");
-var services_1 = __webpack_require__("./src/services/index.ts");
+var injection_service_1 = __webpack_require__("./src/common/tooltip/injection.service.ts");
 var TooltipModule = (function () {
     function TooltipModule() {
     }
     TooltipModule = __decorate([
         core_1.NgModule({
             declarations: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
-            providers: [services_1.InjectionService, tooltip_service_1.TooltipService],
+            providers: [injection_service_1.InjectionService, tooltip_service_1.TooltipService],
             exports: [tooltip_component_1.TooltipContentComponent, tooltip_directive_1.TooltipDirective],
             imports: [common_1.CommonModule],
             entryComponents: [tooltip_component_1.TooltipContentComponent]
@@ -9563,21 +9819,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = __webpack_require__(0);
-var services_1 = __webpack_require__("./src/services/index.ts");
-var _1 = __webpack_require__("./src/common/tooltip/index.ts");
+var injection_service_1 = __webpack_require__("./src/common/tooltip/injection.service.ts");
+var injection_registery_service_1 = __webpack_require__("./src/common/tooltip/injection-registery.service.ts");
+var tooltip_component_1 = __webpack_require__("./src/common/tooltip/tooltip.component.ts");
 var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
     function TooltipService(injectionService) {
         _super.call(this, injectionService);
         this.injectionService = injectionService;
-        this.type = _1.TooltipContentComponent;
+        this.type = tooltip_component_1.TooltipContentComponent;
     }
     TooltipService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [services_1.InjectionService])
+        __metadata('design:paramtypes', [injection_service_1.InjectionService])
     ], TooltipService);
     return TooltipService;
-}(services_1.InjectionRegistery));
+}(injection_registery_service_1.InjectionRegistery));
 exports.TooltipService = TooltipService;
 
 
@@ -13574,244 +13831,6 @@ var PieSeriesComponent = (function () {
     return PieSeriesComponent;
 }());
 exports.PieSeriesComponent = PieSeriesComponent;
-
-
-/***/ }),
-
-/***/ "./src/services/index.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(__webpack_require__("./src/services/injection.service.ts"));
-__export(__webpack_require__("./src/services/injection-registery.service.ts"));
-
-
-/***/ }),
-
-/***/ "./src/services/injection-registery.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var InjectionRegistery = (function () {
-    function InjectionRegistery(injectionService) {
-        this.injectionService = injectionService;
-        this.defaults = {};
-        this.components = new Map();
-    }
-    InjectionRegistery.prototype.getByType = function (type) {
-        if (type === void 0) { type = this.type; }
-        return this.components.get(type);
-    };
-    InjectionRegistery.prototype.create = function (bindings) {
-        return this.createByType(this.type, bindings);
-    };
-    InjectionRegistery.prototype.createByType = function (type, bindings) {
-        bindings = this.assignDefaults(bindings);
-        var component = this.injectComponent(type, bindings);
-        this.register(type, component);
-        return component;
-    };
-    InjectionRegistery.prototype.destroy = function (instance) {
-        var compsByType = this.components.get(instance.componentType);
-        if (compsByType) {
-            var idx = compsByType.indexOf(instance);
-            if (idx > -1) {
-                var component = compsByType[idx];
-                component.destroy();
-                compsByType.splice(idx, 1);
-            }
-        }
-    };
-    InjectionRegistery.prototype.destroyAll = function () {
-        this.destroyByType(this.type);
-    };
-    InjectionRegistery.prototype.destroyByType = function (type) {
-        var comps = this.components.get(type);
-        if (comps) {
-            for (var _i = 0, comps_1 = comps; _i < comps_1.length; _i++) {
-                var comp = comps_1[_i];
-                this.destroy(comp);
-            }
-        }
-    };
-    InjectionRegistery.prototype.assignDefaults = function (bindings) {
-        var _a = this.defaults, inputs = _a.inputs, outputs = _a.outputs;
-        if (!bindings.inputs && !bindings.outputs) {
-            bindings = { inputs: bindings };
-        }
-        if (inputs) {
-            bindings.inputs = Object.assign(inputs, bindings.inputs);
-        }
-        if (outputs) {
-            bindings.outputs = Object.assign(outputs, bindings.outputs);
-        }
-        return bindings;
-    };
-    InjectionRegistery.prototype.injectComponent = function (type, bindings) {
-        return this.injectionService.appendComponent(type, bindings);
-    };
-    InjectionRegistery.prototype.register = function (type, component) {
-        if (!this.components.has(type)) {
-            this.components.set(type, []);
-        }
-        var types = this.components.get(type);
-        types.push(component);
-    };
-    return InjectionRegistery;
-}());
-exports.InjectionRegistery = InjectionRegistery;
-
-
-/***/ }),
-
-/***/ "./src/services/injection.service.ts":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var core_1 = __webpack_require__(0);
-/**
- * Injection service is a helper to append components
- * dynamically to a known location in the DOM, most
- * noteably for dialogs/tooltips appending to body.
- *
- * @export
- * @class InjectionService
- */
-var InjectionService = (function () {
-    function InjectionService(applicationRef, componentFactoryResolver, injector) {
-        this.applicationRef = applicationRef;
-        this.componentFactoryResolver = componentFactoryResolver;
-        this.injector = injector;
-    }
-    /**
-     * Gets the root view container to inject the component to.
-     *
-     * @returns {ComponentRef<any>}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.getRootViewContainer = function () {
-        var rootComponents = this.applicationRef['_rootComponents'];
-        if (rootComponents.length)
-            return rootComponents[0];
-        if (this._container)
-            return this._container;
-        throw new Error('View Container not found! ngUpgrade needs to manually set this via setRootViewContainer.');
-    };
-    /**
-     * Overrides the default root view container. This is useful for
-     * things like ngUpgrade that doesn't have a ApplicationRef root.
-     *
-     * @param {any} container
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.setRootViewContainer = function (container) {
-        this._container = container;
-    };
-    /**
-     * Gets the html element for a component ref.
-     *
-     * @param {ComponentRef<any>} componentRef
-     * @returns {HTMLElement}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.getComponentRootNode = function (componentRef) {
-        // the top most component root node has no `hostView`
-        if (!componentRef.hostView)
-            return componentRef.element.nativeElement;
-        return componentRef.hostView.rootNodes[0];
-    };
-    /**
-     * Gets the root component container html element.
-     *
-     * @returns {HTMLElement}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.getRootViewContainerNode = function () {
-        return this.getComponentRootNode(this.getRootViewContainer());
-    };
-    /**
-     * Projects the bindings onto the component
-     *
-     * @param {ComponentRef<any>} component
-     * @param {*} options
-     * @returns {ComponentRef<any>}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.projectComponentBindings = function (component, bindings) {
-        if (bindings) {
-            if (bindings.inputs !== undefined) {
-                var bindingKeys = Object.getOwnPropertyNames(bindings.inputs);
-                for (var _i = 0, bindingKeys_1 = bindingKeys; _i < bindingKeys_1.length; _i++) {
-                    var bindingName = bindingKeys_1[_i];
-                    component.instance[bindingName] = bindings.inputs[bindingName];
-                }
-            }
-            if (bindings.outputs !== undefined) {
-                var eventKeys = Object.getOwnPropertyNames(bindings.outputs);
-                for (var _a = 0, eventKeys_1 = eventKeys; _a < eventKeys_1.length; _a++) {
-                    var eventName = eventKeys_1[_a];
-                    component.instance[eventName] = bindings.outputs[eventName];
-                }
-            }
-        }
-        return component;
-    };
-    /**
-     * Appends a component to a adjacent location
-     *
-     * @template T
-     * @param {Type<T>} componentClass
-     * @param {*} [options={}]
-     * @param {Element} [location=this.getRootViewContainerNode()]
-     * @returns {ComponentRef<any>}
-     *
-     * @memberOf InjectionService
-     */
-    InjectionService.prototype.appendComponent = function (componentClass, bindings, location) {
-        if (bindings === void 0) { bindings = {}; }
-        if (location === void 0) { location = this.getRootViewContainerNode(); }
-        var componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentClass);
-        var componentRef = componentFactory.create(this.injector);
-        var appRef = this.applicationRef;
-        var componentRootNode = this.getComponentRootNode(componentRef);
-        // project the options passed to the component instance
-        this.projectComponentBindings(componentRef, bindings);
-        appRef.attachView(componentRef.hostView);
-        componentRef.onDestroy(function () {
-            appRef.detachView(componentRef.hostView);
-        });
-        // use the renderer to append the element for univseral support
-        var renderer = componentRef.instance.renderer;
-        renderer.projectNodes(location, [componentRootNode]);
-        return componentRef;
-    };
-    InjectionService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [core_1.ApplicationRef, core_1.ComponentFactoryResolver, core_1.Injector])
-    ], InjectionService);
-    return InjectionService;
-}());
-exports.InjectionService = InjectionService;
 
 
 /***/ }),

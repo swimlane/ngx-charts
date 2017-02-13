@@ -24,7 +24,7 @@ import * as import15 from '../../../src/common/tooltip/tooltip.service';
 import * as import16 from '../common/charts/chart.component.ngfactory';
 import * as import17 from '../../../src/number-card/card-series.component';
 import * as import18 from './card-series.component.ngfactory';
-import * as import19 from '../../../src/services/injection.service';
+import * as import19 from '../../../src/common/tooltip/injection.service';
 export class Wrapper_NumberCardComponent {
   /*private*/ _eventHandler:Function;
   context:import0.NumberCardComponent;

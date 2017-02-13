@@ -38,7 +38,7 @@ import * as import29 from '../../../src/common/grid-panel-series.component';
 import * as import30 from '../common/grid-panel-series.component.ngfactory';
 import * as import31 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import32 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import33 from '../../../src/services/injection.service';
+import * as import33 from '../../../src/common/tooltip/injection.service';
 import * as import34 from '@angular/core/src/linker/template_ref';
 import * as import35 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import36 from '@angular/common/src/directives/ng_if';

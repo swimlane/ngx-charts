@@ -14,7 +14,7 @@ import * as import5 from '../../../src/common/chart-common.module';
 import * as import6 from '../../../src/pie-chart/pie-chart.module';
 import * as import7 from '../../../src/bar-chart/bar-chart.module';
 import * as import8 from '@angular/common/src/localization';
-import * as import9 from '../../../src/services/injection.service';
+import * as import9 from '../../../src/common/tooltip/injection.service';
 import * as import10 from '../../../src/common/tooltip/tooltip.service';
 import * as import11 from '@angular/common/src/location/path_location_strategy';
 import * as import12 from '@angular/common/src/location/location';

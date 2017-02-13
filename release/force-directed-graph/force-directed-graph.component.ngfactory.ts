@@ -32,7 +32,7 @@ import * as import23 from '../../../src/common/charts/chart.component';
 import * as import24 from '../../../src/common/tooltip/tooltip.service';
 import * as import25 from '../common/charts/chart.component.ngfactory';
 import * as import26 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import27 from '../../../src/services/injection.service';
+import * as import27 from '../../../src/common/tooltip/injection.service';
 import * as import28 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import29 from '@angular/common/src/directives/ng_for';
 export class Wrapper_ForceDirectedGraphComponent {

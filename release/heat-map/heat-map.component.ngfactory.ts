@@ -30,7 +30,7 @@ import * as import21 from '../../node_modules/@angular/common/src/directives/ng_
 import * as import22 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import23 from '../../../src/heat-map/heat-map-cell-series.component';
 import * as import24 from './heat-map-cell-series.component.ngfactory';
-import * as import25 from '../../../src/services/injection.service';
+import * as import25 from '../../../src/common/tooltip/injection.service';
 import * as import26 from '@angular/core/src/linker/template_ref';
 import * as import27 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import28 from '@angular/common/src/directives/ng_if';

@@ -11,7 +11,7 @@ import * as import2 from '@angular/common/src/common_module';
 import * as import3 from '../../../src/common/axes/axes.module';
 import * as import4 from '../../../src/common/tooltip/tooltip.module';
 import * as import5 from '@angular/common/src/localization';
-import * as import6 from '../../../src/services/injection.service';
+import * as import6 from '../../../src/common/tooltip/injection.service';
 import * as import7 from '../../../src/common/tooltip/tooltip.service';
 import * as import8 from '@angular/common/src/location/path_location_strategy';
 import * as import9 from '@angular/common/src/location/location';

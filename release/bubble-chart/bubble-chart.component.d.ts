@@ -20,6 +20,7 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     minRadius: number;
     autoScale: boolean;
     schemeType: string;
+    legendPosition: string;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;

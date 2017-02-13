@@ -47,6 +47,8 @@ export class Wrapper_BubbleSeriesComponent {
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
+  /*private*/ _expr_9:any;
+  /*private*/ _expr_10:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -63,6 +65,8 @@ export class Wrapper_BubbleSeriesComponent {
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
+    this._expr_9 = import1.UNINITIALIZED;
+    this._expr_10 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -141,6 +145,22 @@ export class Wrapper_BubbleSeriesComponent {
       this.context.activeEntries = currValue;
       this._changes['activeEntries'] = new import1.SimpleChange(this._expr_8,currValue);
       this._expr_8 = currValue;
+    }
+  }
+  check_xAxisLabel(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_9,currValue))) {
+      this._changed = true;
+      this.context.xAxisLabel = currValue;
+      this._changes['xAxisLabel'] = new import1.SimpleChange(this._expr_9,currValue);
+      this._expr_9 = currValue;
+    }
+  }
+  check_yAxisLabel(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_10,currValue))) {
+      this._changed = true;
+      this.context.yAxisLabel = currValue;
+      this._changes['yAxisLabel'] = new import1.SimpleChange(this._expr_10,currValue);
+      this._expr_10 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {

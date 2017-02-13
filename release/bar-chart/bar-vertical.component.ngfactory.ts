@@ -29,7 +29,7 @@ import * as import20 from '../common/charts/chart.component.ngfactory';
 import * as import21 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import22 from '../../../src/bar-chart/series-vertical.component';
 import * as import23 from './series-vertical.component.ngfactory';
-import * as import24 from '../../../src/services/injection.service';
+import * as import24 from '../../../src/common/tooltip/injection.service';
 import * as import25 from '@angular/core/src/linker/template_ref';
 import * as import26 from '@angular/common/src/directives/ng_if';
 export class Wrapper_BarVerticalComponent {

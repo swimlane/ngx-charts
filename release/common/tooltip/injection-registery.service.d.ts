@@ -1,6 +1,6 @@
 
 import { ComponentRef } from '@angular/core';
-import { InjectionService } from '.';
+import { InjectionService } from './injection.service';
 export declare abstract class InjectionRegistery {
     injectionService: InjectionService;
     protected abstract type: any;

@@ -29,7 +29,7 @@ import * as import20 from '../../../src/common/tooltip/tooltip.service';
 import * as import21 from '../common/charts/chart.component.ngfactory';
 import * as import22 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import23 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import24 from '../../../src/services/injection.service';
+import * as import24 from '../../../src/common/tooltip/injection.service';
 import * as import25 from '@angular/core/src/linker/template_ref';
 import * as import26 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import27 from '@angular/common/src/directives/ng_if';
@@ -58,6 +58,7 @@ export class Wrapper_BubbleChartComponent {
   /*private*/ _expr_16:any;
   /*private*/ _expr_17:any;
   /*private*/ _expr_18:any;
+  /*private*/ _expr_19:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -84,6 +85,7 @@ export class Wrapper_BubbleChartComponent {
     this._expr_16 = import1.UNINITIALIZED;
     this._expr_17 = import1.UNINITIALIZED;
     this._expr_18 = import1.UNINITIALIZED;
+    this._expr_19 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -243,6 +245,14 @@ export class Wrapper_BubbleChartComponent {
       this.context.autoScale = currValue;
       this._changes['autoScale'] = new import1.SimpleChange(this._expr_18,currValue);
       this._expr_18 = currValue;
+    }
+  }
+  check_legendPosition(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_19,currValue))) {
+      this._changed = true;
+      this.context.legendPosition = currValue;
+      this._changes['legendPosition'] = new import1.SimpleChange(this._expr_19,currValue);
+      this._expr_19 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -471,6 +481,10 @@ class View_BubbleChartComponent3 extends import2.AppView<any> {
     this._BubbleSeriesComponent_2_3.check_colors(currVal_2_0_6,throwOnChange,false);
     const currVal_2_0_7:any = this.parentView.context.activeEntries;
     this._BubbleSeriesComponent_2_3.check_activeEntries(currVal_2_0_7,throwOnChange,false);
+    const currVal_2_0_8:any = this.parentView.context.xAxisLabel;
+    this._BubbleSeriesComponent_2_3.check_xAxisLabel(currVal_2_0_8,throwOnChange,false);
+    const currVal_2_0_9:any = this.parentView.context.yAxisLabel;
+    this._BubbleSeriesComponent_2_3.check_yAxisLabel(currVal_2_0_9,throwOnChange,false);
     if (this._BubbleSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.internalDetectChanges(throwOnChange);
   }
@@ -579,24 +593,24 @@ export class View_BubbleChartComponent0 extends import2.AppView<import0.BubbleCh
     this._text_9 = this.renderer.createText(this._el_3,'\n      ',(null as any));
     this._text_10 = this.renderer.createText((null as any),'\n\n      ',(null as any));
     this._el_11 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'class','bubble-chart chart'),(null as any));
-    this._text_12 = this.renderer.createText(this._el_11,'\n      \n        ',(null as any));
+    this._text_12 = this.renderer.createText(this._el_11,'\n\n        ',(null as any));
     this._anchor_13 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
     this._vc_13 = new import14.ViewContainer(13,11,this,this._anchor_13);
     this._TemplateRef_13_5 = new import25.TemplateRef_(this,13,this._anchor_13);
     this._NgIf_13_6 = new import22.Wrapper_NgIf(this._vc_13.vcRef,this._TemplateRef_13_5);
-    this._text_14 = this.renderer.createText(this._el_11,'\n          \n        ',(null as any));
+    this._text_14 = this.renderer.createText(this._el_11,'\n\n        ',(null as any));
     this._anchor_15 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
     this._vc_15 = new import14.ViewContainer(15,11,this,this._anchor_15);
     this._TemplateRef_15_5 = new import25.TemplateRef_(this,15,this._anchor_15);
     this._NgIf_15_6 = new import22.Wrapper_NgIf(this._vc_15.vcRef,this._TemplateRef_15_5);
-    this._text_16 = this.renderer.createText(this._el_11,'\n \n        ',(null as any));
+    this._text_16 = this.renderer.createText(this._el_11,'\n\n        ',(null as any));
     this._el_17 = import3.createRenderElement(this.renderer,this._el_11,':svg:rect',new import3.InlineArray8(8,'class','bubble-chart-area','style','fill: rgb(255, 0, 0); opacity: 0; cursor: \'auto\';','x','0','y','0'),(null as any));
     this._text_18 = this.renderer.createText(this._el_11,'\n\n        ',(null as any));
     this._anchor_19 = this.renderer.createTemplateAnchor(this._el_11,(null as any));
     this._vc_19 = new import14.ViewContainer(19,11,this,this._anchor_19);
     this._TemplateRef_19_5 = new import25.TemplateRef_(this,19,this._anchor_19);
     this._NgFor_19_6 = new import23.Wrapper_NgFor(this._vc_19.vcRef,this._TemplateRef_19_5,this.parentView.injectorGet(import26.IterableDiffers,this.parentIndex),this.ref);
-    this._text_20 = this.renderer.createText(this._el_11,'\n        \n      ',(null as any));
+    this._text_20 = this.renderer.createText(this._el_11,'\n\n      ',(null as any));
     this._text_21 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._ChartComponent_1_6.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_1,new import3.InlineArray8(6,'legendLabelClick',(null as any),'legendLabelActivate',(null as any),'legendLabelDeactivate',(null as any)),this.eventHandler(this.handleEvent_1));

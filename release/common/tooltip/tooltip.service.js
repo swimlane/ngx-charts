@@ -5,23 +5,24 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var services_1 = require('../../services');
-var _1 = require('.');
+var injection_service_1 = require('./injection.service');
+var injection_registery_service_1 = require('./injection-registery.service');
+var tooltip_component_1 = require('./tooltip.component');
 var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
     function TooltipService(injectionService) {
         _super.call(this, injectionService);
         this.injectionService = injectionService;
-        this.type = _1.TooltipContentComponent;
+        this.type = tooltip_component_1.TooltipContentComponent;
     }
     TooltipService.decorators = [
         { type: core_1.Injectable },
     ];
     /** @nocollapse */
     TooltipService.ctorParameters = function () { return [
-        { type: services_1.InjectionService, },
+        { type: injection_service_1.InjectionService, },
     ]; };
     return TooltipService;
-}(services_1.InjectionRegistery));
+}(injection_registery_service_1.InjectionRegistery));
 exports.TooltipService = TooltipService;
 //# sourceMappingURL=tooltip.service.js.map

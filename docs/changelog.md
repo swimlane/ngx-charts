@@ -1,5 +1,10 @@
 # Changelog
 
+# 4.1.2
+- Bug: Fix tooltip when axis labels are not shown in bubble chart
+- Bug: Do not round scales when they are not linear
+- Enhancement: Show Axis labels in bubble chart tooltip (#210)
+
 ## 4.1.1
 - Bug: Fix items not always deactivating on bubble chart
 - Bug: Fix bubbles not showing for when y value is 0

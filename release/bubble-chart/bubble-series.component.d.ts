@@ -9,6 +9,8 @@ export declare class BubbleSeriesComponent implements OnChanges {
     colors: any;
     visibleValue: any;
     activeEntries: any[];
+    xAxisLabel: string;
+    yAxisLabel: string;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

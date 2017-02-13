@@ -22,7 +22,7 @@ import * as import13 from '../../src/pie-chart/pie-chart.module';
 import * as import14 from '../../src/tree-map/tree-map.module';
 import * as import15 from '../../src/gauge/gauge.module';
 import * as import16 from '@angular/common/src/localization';
-import * as import17 from '../../src/services/injection.service';
+import * as import17 from '../../src/common/tooltip/injection.service';
 import * as import18 from '../../src/common/tooltip/tooltip.service';
 import * as import19 from '@angular/common/src/location/path_location_strategy';
 import * as import20 from '@angular/common/src/location/location';

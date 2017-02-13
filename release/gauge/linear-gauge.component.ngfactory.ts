@@ -27,7 +27,7 @@ import * as import18 from '../common/charts/chart.component.ngfactory';
 import * as import19 from '../../../src/bar-chart/bar.component';
 import * as import20 from '../bar-chart/bar.component.ngfactory';
 import * as import21 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import22 from '../../../src/services/injection.service';
+import * as import22 from '../../../src/common/tooltip/injection.service';
 import * as import23 from '@angular/core/src/linker/template_ref';
 import * as import24 from '@angular/common/src/directives/ng_if';
 import * as import25 from '@angular/core/src/security';

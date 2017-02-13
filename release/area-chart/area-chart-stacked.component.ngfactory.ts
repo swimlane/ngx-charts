@@ -39,7 +39,7 @@ import * as import30 from '../common/charts/chart.component.ngfactory';
 import * as import31 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import32 from '../../../src/common/area-tooltip.component';
 import * as import33 from '../common/area-tooltip.component.ngfactory';
-import * as import34 from '../../../src/services/injection.service';
+import * as import34 from '../../../src/common/tooltip/injection.service';
 import * as import35 from '@angular/common/src/directives/ng_if';
 export class Wrapper_AreaChartStackedComponent {
   /*private*/ _eventHandler:Function;

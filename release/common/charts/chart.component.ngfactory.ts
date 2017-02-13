@@ -16,7 +16,7 @@ import * as import7 from '../../../../src/common/tooltip/tooltip.service';
 import * as import8 from '@angular/core/src/linker/view_type';
 import * as import9 from '@angular/core/src/change_detection/constants';
 import * as import10 from '@angular/core/src/linker/component_factory';
-import * as import11 from '../../../../src/services/injection.service';
+import * as import11 from '../../../../src/common/tooltip/injection.service';
 import * as import12 from '@angular/core/src/animation/animation_transition';
 import * as import13 from '@angular/core/src/animation/animation_sequence_player';
 import * as import14 from '@angular/core/src/animation/animation_styles';

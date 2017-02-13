@@ -27,7 +27,7 @@ import * as import18 from '../../../src/pie-chart/pie-series.component';
 import * as import19 from './pie-series.component.ngfactory';
 import * as import20 from '../../../src/common/legend/advanced-legend.component';
 import * as import21 from '../common/legend/advanced-legend.component.ngfactory';
-import * as import22 from '../../../src/services/injection.service';
+import * as import22 from '../../../src/common/tooltip/injection.service';
 import * as import23 from '@angular/core/src/security';
 export class Wrapper_AdvancedPieChartComponent {
   /*private*/ _eventHandler:Function;

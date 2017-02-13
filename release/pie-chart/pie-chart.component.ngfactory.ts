@@ -25,7 +25,7 @@ import * as import16 from '../../../src/common/tooltip/tooltip.service';
 import * as import17 from '../common/charts/chart.component.ngfactory';
 import * as import18 from '../../../src/pie-chart/pie-series.component';
 import * as import19 from './pie-series.component.ngfactory';
-import * as import20 from '../../../src/services/injection.service';
+import * as import20 from '../../../src/common/tooltip/injection.service';
 export class Wrapper_PieChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieChartComponent;
