@@ -14,6 +14,7 @@
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
@@ -35,6 +36,7 @@
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [showGridLines]="showGridLines"
@@ -56,6 +58,7 @@
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -73,6 +76,7 @@
         [schemeType]="schemeType"
         [results]="multi"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
@@ -95,6 +99,7 @@
         [schemeType]="schemeType"
         [results]="multi"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
@@ -116,6 +121,7 @@
         [schemeType]="schemeType"
         [results]="multi"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
@@ -137,6 +143,7 @@
         [schemeType]="schemeType"
         [results]="multi"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
@@ -158,6 +165,7 @@
         [schemeType]="schemeType"
         [results]="multi"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
@@ -549,6 +557,12 @@
         <label>
           <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
           Show X Axis Label
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('tooltipDisabled')">
+        <label>
+          <input type="checkbox" [checked]="tooltipDisabled" (change)="tooltipDisabled = $event.target.checked">
+          Disable tooltip
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('xAxisLabel')">

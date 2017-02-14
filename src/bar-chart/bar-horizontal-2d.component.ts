@@ -65,6 +65,7 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
             [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
@@ -98,6 +99,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() tooltipDisabled;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
@@ -184,7 +186,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     const scale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valuesDomain);
-    
+
     return this.roundDomains ? scale.nice() : scale;
   }
 

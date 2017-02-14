@@ -64,6 +64,7 @@ import d3 from '../d3';
           [series]="group.series"
           [dims]="dims"
           [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
           [seriesName]="group.name"
           (select)="onClick($event, group)"
           (activate)="onActivate($event, group)"
@@ -96,6 +97,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() tooltipDisabled;
   @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
@@ -161,7 +163,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
 
   getGroupScale() {
     const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
-  
+
     return d3.scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
