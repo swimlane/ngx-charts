@@ -1,5 +1,6 @@
 import {
   Component,
+  Input,
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -30,6 +31,7 @@ import { formatLabel } from '../common/label.helper';
             [outerRadius]="series.outerRadius"
             (select)="onClick($event)"
             ngx-tooltip
+            [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="getTooltipText(series.label, series.value.toLocaleString())"
@@ -39,7 +41,7 @@ import { formatLabel } from '../common/label.helper';
             dy="-0.5em"
             x="0"
             y="5"
-            ngx-charts-count-up 
+            ngx-charts-count-up
             [countTo]="series.percent"
             [countSuffix]="'%'"
             text-anchor="middle">
@@ -58,7 +60,7 @@ import { formatLabel } from '../common/label.helper';
             x="0"
             [attr.y]="series.outerRadius"
             text-anchor="middle"
-            ngx-charts-count-up 
+            ngx-charts-count-up
             [countTo]="series.total"
             [countPrefix]="'Total: '">
           </svg:text>
@@ -74,7 +76,8 @@ import { formatLabel } from '../common/label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieGridComponent extends BaseChartComponent {
-  
+  @Input() tooltipDisabled: boolean = false;  
+
   dims: ViewDimensions;
   data: any[];
   transform: string;

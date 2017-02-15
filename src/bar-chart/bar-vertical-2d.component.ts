@@ -97,7 +97,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
-  @Input() tooltipDisabled;
+  @Input() tooltipDisabled: boolean = false;
   @Input() scaleType = 'ordinal';
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;

@@ -192,6 +192,7 @@
         [arcWidth]="arcWidth"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-pie-chart>
       <ngx-charts-advanced-pie-chart
@@ -202,6 +203,7 @@
         [results]="single"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-advanced-pie-chart>
       <ngx-charts-pie-grid
@@ -211,6 +213,7 @@
         [scheme]="colorScheme"
         (legendLabelClick)="onLegendLabelClick($event)"
         [results]="single"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-pie-grid>
       <ngx-charts-line-chart
@@ -235,6 +238,7 @@
         [curve]="curve"
         [rangeFillOpacity]="rangeFillOpacity"
         [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-line-chart>
       <ngx-charts-bubble-chart
@@ -253,7 +257,8 @@
         [autoScale]="autoScale"
         [scheme]="colorScheme"
         [schemeType]="schemeType"
-        [roundDomains]="roundDomains">
+        [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled">
       </ngx-charts-bubble-chart>
       <ngx-charts-force-directed-graph
         *ngIf="chartType === 'force-directed-graph'"
@@ -264,6 +269,7 @@
         [nodes]="graph.nodes"
         [scheme]="colorScheme"
         [view]="view"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-force-directed-graph>
       <ngx-charts-area-chart
@@ -287,6 +293,7 @@
         [showGridLines]="showGridLines"
         [roundDomains]="roundDomains"
         [curve]="curve"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-area-chart>
       <ngx-charts-area-chart-stacked
@@ -308,6 +315,7 @@
         [timeline]="timeline"
         [showGridLines]="showGridLines"
         [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-stacked>
@@ -330,6 +338,7 @@
         [timeline]="timeline"
         [showGridLines]="showGridLines"
         [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-normalized>
@@ -349,6 +358,7 @@
         [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [innerPadding]="innerPadding"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-heat-map>
       <ngx-charts-tree-map
@@ -358,6 +368,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [scheme]="colorScheme"
         [results]="single"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-tree-map>
       <ngx-charts-number-card
@@ -385,6 +396,7 @@
         [bigSegments]="gaugeLargeSegments"
         [smallSegments]="gaugeSmallSegments"
         [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
+        [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-gauge>
@@ -614,7 +626,6 @@
           Timeline
         </label> <br />
       </div>
-
       <div *ngIf="chart.options.includes('curve')">
         <label>Line Interpolation</label>
         <select
@@ -625,74 +636,60 @@
           </option>
         </select>
       </div>
-
       <div *ngIf="chart.options.includes('min')">
         <label>Min value:</label><br />
         <input type="number" [(ngModel)]="gaugeMin"><br />
       </div>
-
       <div *ngIf="chart.options.includes('max')">
         <label>Max value:</label><br />
         <input type="number" [(ngModel)]="gaugeMax"><br />
       </div>
-
       <div *ngIf="chart.options.includes('innerPadding')">
         <label>Inner padding value:</label><br />
         <input type="number" [(ngModel)]="innerPadding" min="0" step="1"><br />
       </div>
-
       <div *ngIf="chart.options.includes('barPadding')">
         <label>Padding between bars:</label><br />
         <input type="number" [(ngModel)]="barPadding" min="0" step="1"><br />
       </div>
-
       <div *ngIf="chart.options.includes('groupPadding')">
         <label>Padding between groups:</label><br />
         <input type="number" [(ngModel)]="groupPadding" min="0" step="1"><br />
       </div>
-
       <div *ngIf="chart.options.includes('value')">
         <label>Value:</label><br />
         <input type="number" [(ngModel)]="gaugeValue"><br />
       </div>
-
       <div *ngIf="chart.options.includes('previousValue')">
         <label>Previous value:</label><br />
         <input type="number" [(ngModel)]="gaugePreviousValue"><br />
       </div>
-
       <div *ngIf="chart.options.includes('angleSpan')">
         <label>Angle span:</label><br />
         <input type="number" [(ngModel)]="gaugeAngleSpan"><br />
       </div>
-
       <div *ngIf="chart.options.includes('startAngle')">
         <label>Start Angle:</label><br />
         <input type="number" [(ngModel)]="gaugeStartAngle"><br />
       </div>
-
       <div *ngIf="chart.options.includes('showAxis')">
         <label>
           <input type="checkbox" [checked]="gaugeShowAxis" (change)="gaugeShowAxis = $event.target.checked">
           Show Axis
         </label> <br />
       </div>
-
       <div *ngIf="chart.options.includes('largeSegments')">
         <label>Number of large segments:</label><br />
         <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
       </div>
-
       <div *ngIf="chart.options.includes('smallSegments')">
         <label>Number of small segments:</label><br />
         <input type="number" [(ngModel)]="gaugeSmallSegments"><br />
       </div>
-
       <div *ngIf="chart.options.includes('units')">
         <label>Units:</label><br />
         <input type="text" [(ngModel)]="gaugeUnits"><br />
       </div>
-
       <div *ngIf="chart.options.includes('margin')">
         <label>
           <input type="checkbox" [checked]="margin" (change)="margin = $event.target.checked">

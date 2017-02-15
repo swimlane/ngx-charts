@@ -34,6 +34,7 @@ import { id } from '../utils/id';
         (activate)="activateCircle(circle)"
         (deactivate)="deactivateCircle(circle)"
         ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="getTooltipText(circle)"
@@ -65,6 +66,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() tooltipDisabled: boolean = false; 
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

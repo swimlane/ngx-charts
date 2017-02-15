@@ -52,6 +52,7 @@ import { ColorHelper } from '../common/color.helper';
           [colors]="colors"
           [data]="results"
           [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -74,6 +75,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() innerPadding: Number | Number[] = 8;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() tooltipDisabled: boolean = false;
 
   dims: ViewDimensions;
   xDomain: any[];
