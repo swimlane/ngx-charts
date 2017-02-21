@@ -49,6 +49,8 @@ export class AppComponent implements OnInit {
   barPadding = 8;
   groupPadding = 16;
   roundDomains = false;
+  maxRadius = 10;
+  minRadius = 3;
 
   // line interpolation
   curveType: string = 'Linear';

@@ -169,7 +169,7 @@ const chartGroups = [
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'showLegend',
           'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel', 'showGridLines',
-          'roundDomains', 'autoScale'
+          'roundDomains', 'autoScale', 'minRadius', 'maxRadius'
         ]
       },
       {
