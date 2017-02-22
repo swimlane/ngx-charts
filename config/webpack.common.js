@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const { ENV, IS_PRODUCTION, IS_DEV, APP_VERSION, dir } = require('./helpers');
+const { ENV, IS_PRODUCTION, IS_DEV, APP_VERSION, TRAVIS, dir } = require('./helpers');
 
 module.exports = function(options = {}) {
   return {
@@ -72,7 +72,8 @@ module.exports = function(options = {}) {
         IS_PRODUCTION,
         APP_VERSION,
         IS_DEV,
-        HMR: options.HMR
+        HMR: options.HMR,
+        TRAVIS
       }),
       new webpack.LoaderOptionsPlugin({
         options: {

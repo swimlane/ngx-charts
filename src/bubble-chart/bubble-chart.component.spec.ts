@@ -20,8 +20,7 @@ class TestComponent {
   };
 }
 
-xdescribe('<ngx-charts-bubble-chart>', () => {
-
+(TRAVIS ? xdescribe : describe)('<ngx-charts-bubble-chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
@@ -38,7 +37,7 @@ xdescribe('<ngx-charts-bubble-chart>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <ngx-charts-bubble-chart
+              <ngx-charts-bubble-chart
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="results">
@@ -72,5 +71,6 @@ xdescribe('<ngx-charts-bubble-chart>', () => {
         done();
       });
     });
+    
   });
 });
