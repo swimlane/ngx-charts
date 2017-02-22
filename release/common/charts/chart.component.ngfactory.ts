@@ -5,28 +5,28 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../../src/common/charts/chart.component';
+import * as import0 from '../../../../build/common/charts/chart.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
 import * as import4 from '@angular/core/src/render/api';
 import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_container';
-import * as import7 from '../../../../src/common/tooltip/tooltip.service';
+import * as import7 from '../../../../build/common/tooltip/tooltip.service';
 import * as import8 from '@angular/core/src/linker/view_type';
 import * as import9 from '@angular/core/src/change_detection/constants';
 import * as import10 from '@angular/core/src/linker/component_factory';
-import * as import11 from '../../../../src/common/tooltip/injection.service';
+import * as import11 from '../../../../build/common/tooltip/injection.service';
 import * as import12 from '@angular/core/src/animation/animation_transition';
 import * as import13 from '@angular/core/src/animation/animation_sequence_player';
 import * as import14 from '@angular/core/src/animation/animation_styles';
 import * as import15 from '@angular/core/src/animation/animation_style_util';
 import * as import16 from '@angular/core/src/animation/animation_keyframe';
 import * as import17 from '@angular/core/src/animation/animation_player';
-import * as import18 from '../../../../src/common/legend/scale-legend.component';
+import * as import18 from '../../../../build/common/legend/scale-legend.component';
 import * as import19 from '../legend/scale-legend.component.ngfactory';
 import * as import20 from '@angular/platform-browser/src/security/dom_sanitization_service';
-import * as import21 from '../../../../src/common/legend/legend.component';
+import * as import21 from '../../../../build/common/legend/legend.component';
 import * as import22 from '../legend/legend.component.ngfactory';
 import * as import23 from '@angular/core/src/zone/ng_zone';
 import * as import24 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';

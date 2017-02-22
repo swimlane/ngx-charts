@@ -43,7 +43,7 @@ var NumberCardComponent = (function (_super) {
         { type: core_1.Component, args: [{
                     selector: 'ngx-charts-number-card',
                     template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: ['../common/base-chart.component.scss'],
+                    styleUrls: ['../common/base-chart.component.css'],
                     encapsulation: core_1.ViewEncapsulation.None,
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },

@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../../src/common/legend/legend.component';
+import * as import0 from '../../../../build/common/legend/legend.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -15,8 +15,8 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/zone/ng_zone';
-import * as import10 from './legend.component.scss.ngstyle';
-import * as import11 from '../../../../src/common/legend/legend-entry.component';
+import * as import10 from './legend.component.css.ngstyle';
+import * as import11 from '../../../../build/common/legend/legend-entry.component';
 import * as import12 from './legend-entry.component.ngfactory';
 import * as import13 from '@angular/core/src/linker/view_container';
 import * as import14 from '../../../node_modules/@angular/common/src/directives/ng_for.ngfactory';

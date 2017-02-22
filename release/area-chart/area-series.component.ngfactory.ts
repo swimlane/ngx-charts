@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/area-chart/area-series.component';
+import * as import0 from '../../../build/area-chart/area-series.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -14,7 +14,7 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '../../../src/common/area.component';
+import * as import9 from '../../../build/common/area.component';
 import * as import10 from '../common/area.component.ngfactory';
 import * as import11 from '@angular/core/src/linker/element_ref';
 import * as import12 from '@angular/common/src/location/location';

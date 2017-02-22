@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../../src/common/timeline/timeline.component';
+import * as import0 from '../../../../build/common/timeline/timeline.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -17,7 +17,7 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from './timeline.component.scss.ngstyle';
+import * as import12 from './timeline.component.css.ngstyle';
 export class Wrapper_Timeline {
   /*private*/ _eventHandler:Function;
   context:import0.Timeline;

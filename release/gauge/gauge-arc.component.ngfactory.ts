@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/gauge/gauge-arc.component';
+import * as import0 from '../../../build/gauge/gauge-arc.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -14,15 +14,15 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '../../../src/pie-chart/pie-arc.component';
+import * as import9 from '../../../build/pie-chart/pie-arc.component';
 import * as import10 from '../pie-chart/pie-arc.component.ngfactory';
 import * as import11 from '@angular/core/src/linker/view_container';
 import * as import12 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import13 from '@angular/core/src/linker/element_ref';
 import * as import14 from '@angular/common/src/location/location';
-import * as import15 from '../../../src/common/tooltip/tooltip.service';
+import * as import15 from '../../../build/common/tooltip/tooltip.service';
 import * as import16 from '@angular/core/src/zone/ng_zone';
-import * as import17 from '../../../src/common/tooltip/tooltip.directive';
+import * as import17 from '../../../build/common/tooltip/tooltip.directive';
 export class Wrapper_GaugeArcComponent {
   /*private*/ _eventHandler:Function;
   context:import0.GaugeArcComponent;

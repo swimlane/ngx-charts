@@ -27,6 +27,7 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     colors: ColorHelper;
     scaleType: string;
     margin: number[];
+    bubblePadding: number[];
     data: any;
     legendOptions: any;
     transform: string;
@@ -45,6 +46,8 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     update(): void;
     hideCircles(): void;
     onClick(data: any, series: any): void;
+    getBubblePadding(): number[];
+    setScales(): void;
     getYScale(domain: any, height: any): any;
     getXScale(domain: any, width: any): any;
     getRScale(domain: any, range: any): any;

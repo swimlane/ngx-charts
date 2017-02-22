@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/common/circle-series.component';
+import * as import0 from '../../../build/common/circle-series.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -22,14 +22,14 @@ import * as import13 from '@angular/core/src/animation/animation_style_util';
 import * as import14 from '@angular/core/src/animation/animation_keyframe';
 import * as import15 from '@angular/core/src/animation/animation_player';
 import * as import16 from '@angular/core/src/linker/view_container';
-import * as import17 from '../../../src/common/circle.component';
+import * as import17 from '../../../build/common/circle.component';
 import * as import18 from './tooltip/tooltip.directive.ngfactory';
 import * as import19 from './circle.component.ngfactory';
-import * as import20 from '../../../src/common/tooltip/tooltip.service';
+import * as import20 from '../../../build/common/tooltip/tooltip.service';
 import * as import21 from '@angular/core/src/linker/element_ref';
 import * as import22 from '@angular/core/src/zone/ng_zone';
-import * as import23 from '../../../src/common/tooltip/tooltip.directive';
-import * as import24 from '../../../src/common/svg-linear-gradient.component';
+import * as import23 from '../../../build/common/tooltip/tooltip.directive';
+import * as import24 from '../../../build/common/svg-linear-gradient.component';
 import * as import25 from './svg-linear-gradient.component.ngfactory';
 import * as import26 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import27 from '@angular/core/src/linker/template_ref';

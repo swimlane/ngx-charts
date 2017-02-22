@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/tree-map/tree-map-cell-series.component';
+import * as import0 from '../../../build/tree-map/tree-map-cell-series.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -15,13 +15,13 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/view_container';
-import * as import10 from '../../../src/tree-map/tree-map-cell.component';
+import * as import10 from '../../../build/tree-map/tree-map-cell.component';
 import * as import11 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import12 from './tree-map-cell.component.ngfactory';
-import * as import13 from '../../../src/common/tooltip/tooltip.service';
+import * as import13 from '../../../build/common/tooltip/tooltip.service';
 import * as import14 from '@angular/core/src/linker/element_ref';
 import * as import15 from '@angular/core/src/zone/ng_zone';
-import * as import16 from '../../../src/common/tooltip/tooltip.directive';
+import * as import16 from '../../../build/common/tooltip/tooltip.directive';
 import * as import17 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import18 from '@angular/core/src/linker/template_ref';
 import * as import19 from '@angular/core/src/change_detection/differs/iterable_differs';

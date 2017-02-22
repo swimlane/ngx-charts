@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/bar-chart/series-horizontal.component';
+import * as import0 from '../../../build/bar-chart/series-horizontal.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -21,14 +21,14 @@ import * as import12 from '@angular/core/src/animation/animation_style_util';
 import * as import13 from '@angular/core/src/animation/animation_keyframe';
 import * as import14 from '@angular/core/src/animation/animation_player';
 import * as import15 from '@angular/core/src/linker/view_container';
-import * as import16 from '../../../src/bar-chart/bar.component';
+import * as import16 from '../../../build/bar-chart/bar.component';
 import * as import17 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import18 from './bar.component.ngfactory';
-import * as import19 from '../../../src/common/tooltip/tooltip.service';
+import * as import19 from '../../../build/common/tooltip/tooltip.service';
 import * as import20 from '@angular/core/src/linker/element_ref';
 import * as import21 from '@angular/core/src/zone/ng_zone';
 import * as import22 from '@angular/common/src/location/location';
-import * as import23 from '../../../src/common/tooltip/tooltip.directive';
+import * as import23 from '../../../build/common/tooltip/tooltip.directive';
 import * as import24 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import25 from '@angular/core/src/linker/template_ref';
 import * as import26 from '@angular/core/src/change_detection/differs/iterable_differs';

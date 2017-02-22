@@ -5,4 +5,4 @@
  */
  /* tslint:disable */
 
-export const styles:any[] = ['.advanced-pie {\n  display: inline-block;\n  float: left;\n}\n\n.advanced-pie-legend-wrapper {\n  display: inline-block;\n}\n'];
+export const styles:any[] = ['.pie-grid .arc1 {\n  opacity: 0.4; }\n\n.pie-grid .percent-label {\n  font-size: 16px;\n  font-weight: 400; }\n'];

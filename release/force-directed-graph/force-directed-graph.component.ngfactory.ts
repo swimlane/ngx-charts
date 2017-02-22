@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/force-directed-graph/force-directed-graph.component';
+import * as import0 from '../../../build/force-directed-graph/force-directed-graph.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -18,8 +18,8 @@ import * as import9 from '@angular/core/src/linker/component_factory';
 import * as import10 from '@angular/core/src/linker/element_ref';
 import * as import11 from '@angular/core/src/zone/ng_zone';
 import * as import12 from '@angular/common/src/location/location';
-import * as import13 from '../common/base-chart.component.scss.ngstyle';
-import * as import14 from './force-directed-graph.component.scss.ngstyle';
+import * as import13 from '../common/base-chart.component.css.ngstyle';
+import * as import14 from './force-directed-graph.component.css.ngstyle';
 import * as import15 from '@angular/core/src/linker/view_container';
 import * as import16 from '../../node_modules/@angular/common/src/directives/ng_template_outlet.ngfactory';
 import * as import17 from '@angular/core/src/linker/template_ref';
@@ -27,12 +27,12 @@ import * as import18 from '@angular/common/src/directives/ng_template_outlet';
 import * as import19 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import20 from '@angular/common/src/directives/ng_if';
 import * as import21 from '../common/tooltip/tooltip.directive.ngfactory';
-import * as import22 from '../../../src/common/tooltip/tooltip.directive';
-import * as import23 from '../../../src/common/charts/chart.component';
-import * as import24 from '../../../src/common/tooltip/tooltip.service';
+import * as import22 from '../../../build/common/tooltip/tooltip.directive';
+import * as import23 from '../../../build/common/charts/chart.component';
+import * as import24 from '../../../build/common/tooltip/tooltip.service';
 import * as import25 from '../common/charts/chart.component.ngfactory';
 import * as import26 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import27 from '../../../src/common/tooltip/injection.service';
+import * as import27 from '../../../build/common/tooltip/injection.service';
 import * as import28 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import29 from '@angular/common/src/directives/ng_for';
 export class Wrapper_ForceDirectedGraphComponent {

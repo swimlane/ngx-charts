@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/area-chart/area-chart-stacked.component';
+import * as import0 from '../../../build/area-chart/area-chart-stacked.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -17,29 +17,29 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '../common/base-chart.component.scss.ngstyle';
-import * as import13 from '../../../src/common/axes/x-axis.component';
+import * as import12 from '../common/base-chart.component.css.ngstyle';
+import * as import13 from '../../../build/common/axes/x-axis.component';
 import * as import14 from '../common/axes/x-axis.component.ngfactory';
 import * as import15 from '@angular/core/src/linker/view_container';
-import * as import16 from '../../../src/common/axes/y-axis.component';
+import * as import16 from '../../../build/common/axes/y-axis.component';
 import * as import17 from '../common/axes/y-axis.component.ngfactory';
-import * as import18 from '../../../src/area-chart/area-series.component';
+import * as import18 from '../../../build/area-chart/area-series.component';
 import * as import19 from './area-series.component.ngfactory';
-import * as import20 from '../../../src/common/circle-series.component';
+import * as import20 from '../../../build/common/circle-series.component';
 import * as import21 from '../common/circle-series.component.ngfactory';
-import * as import22 from '../../../src/common/timeline/timeline.component';
+import * as import22 from '../../../build/common/timeline/timeline.component';
 import * as import23 from '../common/timeline/timeline.component.ngfactory';
 import * as import24 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import25 from '@angular/core/src/linker/template_ref';
 import * as import26 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import27 from '@angular/common/src/directives/ng_for';
-import * as import28 from '../../../src/common/charts/chart.component';
-import * as import29 from '../../../src/common/tooltip/tooltip.service';
+import * as import28 from '../../../build/common/charts/chart.component';
+import * as import29 from '../../../build/common/tooltip/tooltip.service';
 import * as import30 from '../common/charts/chart.component.ngfactory';
 import * as import31 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import32 from '../../../src/common/area-tooltip.component';
+import * as import32 from '../../../build/common/area-tooltip.component';
 import * as import33 from '../common/area-tooltip.component.ngfactory';
-import * as import34 from '../../../src/common/tooltip/injection.service';
+import * as import34 from '../../../build/common/tooltip/injection.service';
 import * as import35 from '@angular/common/src/directives/ng_if';
 export class Wrapper_AreaChartStackedComponent {
   /*private*/ _eventHandler:Function;

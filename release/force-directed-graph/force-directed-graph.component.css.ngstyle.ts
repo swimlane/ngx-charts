@@ -5,4 +5,4 @@
  */
  /* tslint:disable */
 
-export const styles:any[] = ['.pie-label {\n  font-size: 11px;\n}\n'];
+export const styles:any[] = ['.force-directed-graph .edge {\n  stroke: #333; }\n'];

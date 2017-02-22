@@ -5,4 +5,4 @@
  */
  /* tslint:disable */
 
-export const styles:any[] = ['.pie-grid {\n  .arc1 {\n    opacity: 0.4;\n  }\n  .percent-label {\n    font-size: 16px;\n    font-weight: 400;\n  }\n}\n'];
+export const styles:any[] = ['.pie-label {\n  font-size: 11px; }\n'];

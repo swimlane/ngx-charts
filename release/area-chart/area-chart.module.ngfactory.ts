@@ -6,14 +6,14 @@
  /* tslint:disable */
 
 import * as import0 from '@angular/core/src/linker/ng_module_factory';
-import * as import1 from '../../../src/area-chart/area-chart.module';
+import * as import1 from '../../../build/area-chart/area-chart.module';
 import * as import2 from '@angular/common/src/common_module';
-import * as import3 from '../../../src/common/axes/axes.module';
-import * as import4 from '../../../src/common/tooltip/tooltip.module';
-import * as import5 from '../../../src/common/chart-common.module';
+import * as import3 from '../../../build/common/axes/axes.module';
+import * as import4 from '../../../build/common/tooltip/tooltip.module';
+import * as import5 from '../../../build/common/chart-common.module';
 import * as import6 from '@angular/common/src/localization';
-import * as import7 from '../../../src/common/tooltip/injection.service';
-import * as import8 from '../../../src/common/tooltip/tooltip.service';
+import * as import7 from '../../../build/common/tooltip/injection.service';
+import * as import8 from '../../../build/common/tooltip/tooltip.service';
 import * as import9 from '@angular/common/src/location/path_location_strategy';
 import * as import10 from '@angular/common/src/location/location';
 import * as import11 from '@angular/core/src/di/injector';

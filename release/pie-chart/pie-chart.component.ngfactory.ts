@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/pie-chart/pie-chart.component';
+import * as import0 from '../../../build/pie-chart/pie-chart.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -17,15 +17,15 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '../common/base-chart.component.scss.ngstyle';
-import * as import13 from './pie-chart.component.scss.ngstyle';
+import * as import12 from '../common/base-chart.component.css.ngstyle';
+import * as import13 from './pie-chart.component.css.ngstyle';
 import * as import14 from '@angular/core/src/linker/view_container';
-import * as import15 from '../../../src/common/charts/chart.component';
-import * as import16 from '../../../src/common/tooltip/tooltip.service';
+import * as import15 from '../../../build/common/charts/chart.component';
+import * as import16 from '../../../build/common/tooltip/tooltip.service';
 import * as import17 from '../common/charts/chart.component.ngfactory';
-import * as import18 from '../../../src/pie-chart/pie-series.component';
+import * as import18 from '../../../build/pie-chart/pie-series.component';
 import * as import19 from './pie-series.component.ngfactory';
-import * as import20 from '../../../src/common/tooltip/injection.service';
+import * as import20 from '../../../build/common/tooltip/injection.service';
 export class Wrapper_PieChartComponent {
   /*private*/ _eventHandler:Function;
   context:import0.PieChartComponent;

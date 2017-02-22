@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/common/area-tooltip.component';
+import * as import0 from '../../../build/common/area-tooltip.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -27,10 +27,10 @@ import * as import18 from '@angular/core/src/linker/template_ref';
 import * as import19 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import20 from '@angular/common/src/directives/ng_for';
 import * as import21 from './tooltip/tooltip.directive.ngfactory';
-import * as import22 from '../../../src/common/tooltip/tooltip.service';
+import * as import22 from '../../../build/common/tooltip/tooltip.service';
 import * as import23 from '@angular/core/src/linker/element_ref';
 import * as import24 from '@angular/core/src/zone/ng_zone';
-import * as import25 from '../../../src/common/tooltip/tooltip.directive';
+import * as import25 from '../../../build/common/tooltip/tooltip.directive';
 import * as import26 from '@angular/core/src/linker/query_list';
 export class Wrapper_AreaTooltip {
   /*private*/ _eventHandler:Function;
