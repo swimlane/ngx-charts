@@ -21,11 +21,12 @@ For more info, check out the [documentation](https://swimlane.gitbooks.io/ngx-ch
 - Area (Standard, Stacked, Normalized)
 - Pie (Explodable, Grid, Custom legends)
 - Donut
-- Gauge
-- Force Directed Graph
+- Bubble
+- Gauge (Radial, Linear)
 - Heatmap
 - Treemap
 - Number Cards
+- Force Directed Graph
 
 ### Customization
 - Autoscaling
