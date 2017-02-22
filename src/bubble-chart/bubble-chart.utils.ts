@@ -49,7 +49,7 @@ export function getDomain(values, scaleType, autoScale): number[] {
     return domain;
 }
 
-export function getScale(domain, range: number[], scaleType, padding, roundDomains): any {
+export function getScale(domain, range: number[], scaleType, roundDomains): any {
   let scale: any;
 
   if (scaleType === 'time') {
@@ -59,7 +59,7 @@ export function getScale(domain, range: number[], scaleType, padding, roundDomai
   } else if (scaleType === 'linear') {
     scale = d3.scaleLinear()
       .range(range)
-      .domain([domain[0] - padding, domain[1] + padding]);
+      .domain(domain);
 
     if (roundDomains) {
       scale = scale.nice();
@@ -67,7 +67,6 @@ export function getScale(domain, range: number[], scaleType, padding, roundDomai
   } else if (scaleType === 'ordinal') {
     scale = d3.scalePoint()
       .range(range)
-      .padding(0.1)
       .domain(domain);
   }
 
