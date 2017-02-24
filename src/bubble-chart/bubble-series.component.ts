@@ -11,7 +11,6 @@ import {
   transition,
   animate
 } from '@angular/core';
-import { Location } from '@angular/common';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
