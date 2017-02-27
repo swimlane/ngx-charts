@@ -184,7 +184,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     const scale = d3.scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valuesDomain);
-    
+
     return this.roundDomains ? scale.nice() : scale;
   }
 
@@ -235,7 +235,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     return `translate(0, ${this.groupScale(group.name)})`;
   }
 
-  onClick(data, group): void {
+  onClick(data, group?): void {
     if (group) {
       data.series = group.name;
     }
