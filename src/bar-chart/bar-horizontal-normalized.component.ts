@@ -201,7 +201,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     return `translate(0, ${this.yScale(group.name)})`;
   }
 
-  onClick(data, group): void {
+  onClick(data, group?): void {
     if (group) {
       data.series = group.name;
     }

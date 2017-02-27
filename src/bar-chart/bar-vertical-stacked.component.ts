@@ -211,10 +211,11 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
     return `translate(${this.xScale(group.name)}, 0)`;
   }
 
-  onClick(data, group) {
+  onClick(data, group?) {
     if (group) {
       data.series = group.name;
     }
+
     this.select.emit(data);
   }
 
