@@ -28,7 +28,7 @@ var ScaleLegendComponent = (function () {
         { type: core_1.Component, args: [{
                     selector: 'ngx-charts-scale-legend',
                     template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n      <div\n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
-                    styleUrls: ['./scale-legend.component.scss'],
+                    styleUrls: ['./scale-legend.component.css'],
                     encapsulation: core_1.ViewEncapsulation.None,
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },

@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../../src/common/axes/y-axis.component';
+import * as import0 from '../../../../build/common/axes/y-axis.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -14,12 +14,12 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '../../../../src/common/axes/axis-label.component';
+import * as import9 from '../../../../build/common/axes/axis-label.component';
 import * as import10 from './axis-label.component.ngfactory';
 import * as import11 from '@angular/core/src/linker/view_container';
 import * as import12 from '@angular/core/src/linker/element_ref';
 import * as import13 from '@angular/core/src/linker/query_list';
-import * as import14 from '../../../../src/common/axes/y-axis-ticks.component';
+import * as import14 from '../../../../build/common/axes/y-axis-ticks.component';
 import * as import15 from './y-axis-ticks.component.ngfactory';
 import * as import16 from '../../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import17 from '@angular/core/src/linker/template_ref';

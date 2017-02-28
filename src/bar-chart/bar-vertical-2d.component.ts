@@ -230,10 +230,11 @@ export class BarVertical2DComponent extends BaseChartComponent {
     return `translate(${this.groupScale(group.name)}, 0)`;
   }
 
-  onClick(data, group) {
+  onClick(data, group?) {
     if (group) {
       data.series = group.name;
     }
+
     this.select.emit(data);
   }
 

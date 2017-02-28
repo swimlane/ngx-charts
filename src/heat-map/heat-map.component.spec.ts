@@ -20,7 +20,7 @@ class TestComponent {
   };
 }
 
-xdescribe('<ngx-charts-heat-map>', () => {
+(TRAVIS ? xdescribe : describe)('<ngx-charts-heat-map>', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,7 +38,7 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <ngx-charts-heat-map
+              <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi">
@@ -95,7 +95,7 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <ngx-charts-heat-map
+              <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
@@ -126,7 +126,7 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <ngx-charts-heat-map
+              <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
@@ -153,7 +153,7 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <ngx-charts-heat-map
+              <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"
@@ -181,7 +181,7 @@ xdescribe('<ngx-charts-heat-map>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-               <ngx-charts-heat-map
+              <ngx-charts-heat-map
                 [view]="[400,800]"
                 [scheme]="colorScheme"
                 [results]="multi"

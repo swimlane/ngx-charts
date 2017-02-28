@@ -6,11 +6,11 @@
  /* tslint:disable */
 
 import * as import0 from '@angular/core/src/linker/ng_module_factory';
-import * as import1 from '../../../../src/common/tooltip/tooltip.module';
+import * as import1 from '../../../../build/common/tooltip/tooltip.module';
 import * as import2 from '@angular/common/src/common_module';
 import * as import3 from '@angular/common/src/localization';
-import * as import4 from '../../../../src/common/tooltip/injection.service';
-import * as import5 from '../../../../src/common/tooltip/tooltip.service';
+import * as import4 from '../../../../build/common/tooltip/injection.service';
+import * as import5 from '../../../../build/common/tooltip/tooltip.service';
 import * as import6 from '@angular/core/src/di/injector';
 import * as import7 from './tooltip.component.ngfactory';
 import * as import8 from '@angular/core/src/i18n/tokens';

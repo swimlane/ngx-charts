@@ -51,6 +51,8 @@ export class AppComponent implements OnInit {
   barPadding = 8;
   groupPadding = 16;
   roundDomains = false;
+  maxRadius = 10;
+  minRadius = 3;
 
   // line interpolation
   curveType: string = 'Linear';
@@ -88,6 +90,7 @@ export class AppComponent implements OnInit {
   gaugeMax: number = 100;
   gaugeLargeSegments: number = 10;
   gaugeSmallSegments: number = 5;
+  gaugeTextValue: string = '';
   gaugeUnits: string = 'alerts';
   gaugeAngleSpan: number = 240;
   gaugeStartAngle: number = -120;

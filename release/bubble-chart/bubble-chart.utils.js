@@ -47,7 +47,7 @@ function getDomain(values, scaleType, autoScale) {
     return domain;
 }
 exports.getDomain = getDomain;
-function getScale(domain, range, scaleType, padding, roundDomains) {
+function getScale(domain, range, scaleType, roundDomains) {
     var scale;
     if (scaleType === 'time') {
         scale = d3_1.default.scaleTime()
@@ -57,7 +57,7 @@ function getScale(domain, range, scaleType, padding, roundDomains) {
     else if (scaleType === 'linear') {
         scale = d3_1.default.scaleLinear()
             .range(range)
-            .domain([domain[0] - padding, domain[1] + padding]);
+            .domain(domain);
         if (roundDomains) {
             scale = scale.nice();
         }
@@ -65,7 +65,6 @@ function getScale(domain, range, scaleType, padding, roundDomains) {
     else if (scaleType === 'ordinal') {
         scale = d3_1.default.scalePoint()
             .range(range)
-            .padding(0.1)
             .domain(domain);
     }
     return scale;

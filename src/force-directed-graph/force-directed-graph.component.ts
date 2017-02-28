@@ -134,7 +134,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     });
   }
 
-  onClick(data, node): void {
+  onClick(data): void {
     this.select.emit(data);
   }
 

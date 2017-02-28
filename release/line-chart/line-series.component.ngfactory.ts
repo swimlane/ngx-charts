@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/line-chart/line-series.component';
+import * as import0 from '../../../build/line-chart/line-series.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -15,11 +15,11 @@ import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/common/src/location/location';
-import * as import10 from '../../../src/common/svg-linear-gradient.component';
+import * as import10 from '../../../build/common/svg-linear-gradient.component';
 import * as import11 from '../common/svg-linear-gradient.component.ngfactory';
-import * as import12 from '../../../src/common/area.component';
+import * as import12 from '../../../build/common/area.component';
 import * as import13 from '../common/area.component.ngfactory';
-import * as import14 from '../../../src/line-chart/line.component';
+import * as import14 from '../../../build/line-chart/line.component';
 import * as import15 from './line.component.ngfactory';
 import * as import16 from '@angular/core/src/linker/element_ref';
 export class Wrapper_LineSeriesComponent {

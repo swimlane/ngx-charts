@@ -8,6 +8,7 @@ __export(require('./tooltip'));
 __export(require('./count'));
 __export(require('./timeline'));
 __export(require('./color.helper'));
+__export(require('./charts'));
 __export(require('./area.component'));
 __export(require('./area-tooltip.component'));
 __export(require('./base-chart.component'));

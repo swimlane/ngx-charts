@@ -5,4 +5,4 @@
  */
  /* tslint:disable */
 
-export const styles:any[] = ['.force-directed-graph {\n  .edge {\n    stroke: #333;\n  }\n}\n'];
+export const styles:any[] = ['.advanced-pie {\n  display: inline-block;\n  float: left; }\n\n.advanced-pie-legend-wrapper {\n  display: inline-block; }\n'];

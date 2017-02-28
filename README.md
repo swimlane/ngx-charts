@@ -20,8 +20,9 @@ For more info, check out the [documentation](https://swimlane.gitbooks.io/ngx-ch
 - Line 
 - Area (Standard, Stacked, Normalized)
 - Pie (Explodable, Grid, Custom legends)
+- Bubble
 - Donut
-- Gauge
+- Gauge (Linear & Radial)
 - Force Directed Graph
 - Heatmap
 - Treemap

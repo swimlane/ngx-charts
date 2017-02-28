@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.1.2" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.1.3" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -4781,6 +4781,7 @@ var BubbleChartComponent = (function (_super) {
         this.deactivate = new core_1.EventEmitter();
         this.scaleType = 'linear';
         this.margin = [10, 20, 10, 20];
+        this.bubblePadding = [0, 0, 0, 0];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
         this.activeEntries = [];
@@ -4810,9 +4811,13 @@ var BubbleChartComponent = (function (_super) {
             var colorDomain = _this.schemeType === 'ordinal' ? _this.seriesDomain : _this.rDomain;
             _this.colors = new color_helper_1.ColorHelper(_this.scheme, _this.schemeType, colorDomain, _this.customColors);
             _this.data = _this.results;
+            _this.minRadius = Math.max(_this.minRadius, 1);
+            _this.maxRadius = Math.max(_this.maxRadius, 1);
             _this.rScale = _this.getRScale(_this.rDomain, [_this.minRadius, _this.maxRadius]);
-            _this.xScale = _this.getXScale(_this.xDomain, _this.dims.width);
-            _this.yScale = _this.getYScale(_this.yDomain, _this.dims.height);
+            _this.bubblePadding = [0, 0, 0, 0];
+            _this.setScales();
+            _this.bubblePadding = _this.getBubblePadding();
+            _this.setScales();
             _this.legendOptions = _this.getLegendOptions();
         });
     };
@@ -4825,13 +4830,35 @@ var BubbleChartComponent = (function (_super) {
         }
         this.select.emit(data);
     };
+    BubbleChartComponent.prototype.getBubblePadding = function () {
+        var yMin = 0;
+        var xMin = 0;
+        var yMax = this.dims.height;
+        var xMax = this.dims.width;
+        for (var _i = 0, _a = this.data; _i < _a.length; _i++) {
+            var s = _a[_i];
+            for (var _b = 0, _c = s.series; _b < _c.length; _b++) {
+                var d = _c[_b];
+                var r = this.rScale(d.r);
+                var cx = (this.xScaleType === 'linear') ? this.xScale(Number(d.x)) : this.xScale(d.x);
+                var cy = (this.yScaleType === 'linear') ? this.yScale(Number(d.y)) : this.yScale(d.y);
+                xMin = Math.max(r - cx, xMin);
+                yMin = Math.max(r - cy, yMin);
+                yMax = Math.max(cy + r, yMax);
+                xMax = Math.max(cx + r, xMax);
+            }
+        }
+        return [yMin, xMax - this.dims.width, yMax - this.dims.height, xMin];
+    };
+    BubbleChartComponent.prototype.setScales = function () {
+        this.xScale = this.getXScale(this.xDomain, this.dims.width - this.bubblePadding[1]);
+        this.yScale = this.getYScale(this.yDomain, this.dims.height - this.bubblePadding[2]);
+    };
     BubbleChartComponent.prototype.getYScale = function (domain, height) {
-        var padding = (domain[1] - domain[0]) / height * this.maxRadius; // padding to keep bubbles inside range
-        return bubble_chart_utils_1.getScale(domain, [height, 0], this.yScaleType, padding, this.roundDomains);
+        return bubble_chart_utils_1.getScale(domain, [height, this.bubblePadding[0]], this.yScaleType, this.roundDomains);
     };
     BubbleChartComponent.prototype.getXScale = function (domain, width) {
-        var padding = (domain[1] - domain[0]) / width * this.maxRadius; // padding to keep bubbles inside range
-        return bubble_chart_utils_1.getScale(domain, [0, width], this.xScaleType, padding, this.roundDomains);
+        return bubble_chart_utils_1.getScale(domain, [this.bubblePadding[3], width], this.xScaleType, this.roundDomains);
     };
     BubbleChartComponent.prototype.getRScale = function (domain, range) {
         var scale = d3_1.default.scaleLinear()
@@ -5023,7 +5050,7 @@ var BubbleChartComponent = (function (_super) {
     BubbleChartComponent = __decorate([
         core_1.Component({
             selector: 'ngx-charts-bubble-chart',
-            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n\n      </svg:g>\n    </ngx-charts-chart>"
+            template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath [attr.id]=\"clipPathId\">\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>"
         }), 
         __metadata('design:paramtypes', [])
     ], BubbleChartComponent);
@@ -5131,7 +5158,7 @@ function getDomain(values, scaleType, autoScale) {
     return domain;
 }
 exports.getDomain = getDomain;
-function getScale(domain, range, scaleType, padding, roundDomains) {
+function getScale(domain, range, scaleType, roundDomains) {
     var scale;
     if (scaleType === 'time') {
         scale = d3_1.default.scaleTime()
@@ -5141,7 +5168,7 @@ function getScale(domain, range, scaleType, padding, roundDomains) {
     else if (scaleType === 'linear') {
         scale = d3_1.default.scaleLinear()
             .range(range)
-            .domain([domain[0] - padding, domain[1] + padding]);
+            .domain(domain);
         if (roundDomains) {
             scale = scale.nice();
         }
@@ -5149,7 +5176,6 @@ function getScale(domain, range, scaleType, padding, roundDomains) {
     else if (scaleType === 'ordinal') {
         scale = d3_1.default.scalePoint()
             .range(range)
-            .padding(0.1)
             .domain(domain);
     }
     return scale;
@@ -6889,6 +6915,19 @@ exports.ChartComponent = ChartComponent;
 
 /***/ }),
 
+/***/ "./src/common/charts/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__("./src/common/charts/chart.component.ts"));
+
+
+/***/ }),
+
 /***/ "./src/common/circle-series.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7829,6 +7868,7 @@ __export(__webpack_require__("./src/common/tooltip/index.ts"));
 __export(__webpack_require__("./src/common/count/index.ts"));
 __export(__webpack_require__("./src/common/timeline/index.ts"));
 __export(__webpack_require__("./src/common/color.helper.ts"));
+__export(__webpack_require__("./src/common/charts/index.ts"));
 __export(__webpack_require__("./src/common/area.component.ts"));
 __export(__webpack_require__("./src/common/area-tooltip.component.ts"));
 __export(__webpack_require__("./src/common/base-chart.component.ts"));
@@ -10651,6 +10691,9 @@ var GaugeComponent = (function (_super) {
     };
     GaugeComponent.prototype.getDisplayValue = function () {
         var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
+        if (this.textValue && 0 !== this.textValue.length) {
+            return this.textValue.toLocaleString();
+        }
         return value.toLocaleString();
     };
     GaugeComponent.prototype.scaleText = function (repeat) {
@@ -10726,6 +10769,10 @@ var GaugeComponent = (function (_super) {
         core_1.Input(), 
         __metadata('design:type', Number)
     ], GaugeComponent.prototype, "max", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', String)
+    ], GaugeComponent.prototype, "textValue", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', String)

@@ -28,10 +28,6 @@ to build charts. Outside of the following chart types:
 - Data point Event Handlers
 - Works with ngUpgrade
 
-## Coming Soon
-- Improved transitions / animations
-- Better RX Support
-
 If you have an idea for a new feature, create a Github issue or even better a PR ;).
 Make sure to include the use case, an example image of the chart (if applicable) and
 data formats.

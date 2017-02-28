@@ -1,5 +1,11 @@
 # Changelog
 
+# 4.1.3
+- Enhancement: Added option to override the value in gauge chart
+- Bug: Fixed padding on bubble charts
+- Chore: Compile SCSS into CSS before building
+- Chore: Expor ChartComponent through the main module
+
 # 4.1.2
 - Bug: Fix tooltip when axis labels are not shown in bubble chart
 - Bug: Do not round scales when they are not linear

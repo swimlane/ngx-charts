@@ -142,6 +142,9 @@ var GaugeComponent = (function (_super) {
     };
     GaugeComponent.prototype.getDisplayValue = function () {
         var value = this.results.map(function (d) { return d.value; }).reduce(function (a, b) { return a + b; }, 0);
+        if (this.textValue && 0 !== this.textValue.length) {
+            return this.textValue.toLocaleString();
+        }
         return value.toLocaleString();
     };
     GaugeComponent.prototype.scaleText = function (repeat) {
@@ -210,8 +213,8 @@ var GaugeComponent = (function (_super) {
                     selector: 'ngx-charts-gauge',
                     template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"gauge chart\">\n        <svg:g *ngFor=\"let arc of arcs\" [attr.transform]=\"rotation\">\n          <svg:g ngx-charts-gauge-arc\n            [backgroundArc]=\"arc.backgroundArc\"\n            [valueArc]=\"arc.valueArc\"\n            [cornerRadius]=\"cornerRadius\"\n            [colors]=\"colors\"\n            [isActive]=\"isActive(arc.valueArc.data)\"\n            (select)=\"onClick($event)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\">\n          </svg:g>\n        </svg:g>\n\n        <svg:g ngx-charts-gauge-axis\n          *ngIf=\"showAxis\"\n          [bigSegments]=\"bigSegments\"\n          [smallSegments]=\"smallSegments\"\n          [min]=\"min\"\n          [max]=\"max\"\n          [radius]=\"outerRadius\"\n          [angleSpan]=\"angleSpan\"\n          [valueScale]=\"valueScale\"\n          [startAngle]=\"startAngle\"\n          [tickFormatting]=\"axisTickFormatting\">\n        </svg:g>\n\n        <svg:text #textEl\n            [style.textAnchor]=\"'middle'\"\n            [attr.transform]=\"textTransform\"\n            alignment-baseline=\"central\">\n          <tspan x=\"0\" dy=\"0\">{{displayValue}}</tspan>\n          <tspan x=\"0\" dy=\"1.2em\">{{units}}</tspan>\n        </svg:text>\n\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     styleUrls: [
-                        '../common/base-chart.component.scss',
-                        './gauge.component.scss'
+                        '../common/base-chart.component.css',
+                        './gauge.component.css'
                     ],
                     encapsulation: core_1.ViewEncapsulation.None,
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush,
@@ -223,6 +226,7 @@ var GaugeComponent = (function (_super) {
         'legend': [{ type: core_1.Input },],
         'min': [{ type: core_1.Input },],
         'max': [{ type: core_1.Input },],
+        'textValue': [{ type: core_1.Input },],
         'units': [{ type: core_1.Input },],
         'bigSegments': [{ type: core_1.Input },],
         'smallSegments': [{ type: core_1.Input },],

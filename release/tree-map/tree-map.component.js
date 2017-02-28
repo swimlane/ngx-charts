@@ -64,7 +64,7 @@ var TreeMapComponent = (function (_super) {
         { type: core_1.Component, args: [{
                     selector: 'ngx-charts-tree-map',
                     template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"tree-map chart\">\n        <svg:g ngx-charts-tree-map-cell-series\n          [colors]=\"colors\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: ['./tree-map.component.scss'],
+                    styleUrls: ['./tree-map.component.css'],
                     encapsulation: core_1.ViewEncapsulation.None,
                     changeDetection: core_1.ChangeDetectionStrategy.OnPush
                 },] },

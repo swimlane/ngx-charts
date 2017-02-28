@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/bar-chart/bar-horizontal-normalized.component';
+import * as import0 from '../../../build/bar-chart/bar-horizontal-normalized.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -17,26 +17,26 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '../common/base-chart.component.scss.ngstyle';
+import * as import12 from '../common/base-chart.component.css.ngstyle';
 import * as import13 from '@angular/core/src/animation/animation_transition';
 import * as import14 from '@angular/core/src/animation/animation_sequence_player';
 import * as import15 from '@angular/core/src/animation/animation_styles';
 import * as import16 from '@angular/core/src/animation/animation_style_util';
 import * as import17 from '@angular/core/src/animation/animation_keyframe';
 import * as import18 from '@angular/core/src/animation/animation_player';
-import * as import19 from '../../../src/common/axes/x-axis.component';
+import * as import19 from '../../../build/common/axes/x-axis.component';
 import * as import20 from '../common/axes/x-axis.component.ngfactory';
 import * as import21 from '@angular/core/src/linker/view_container';
-import * as import22 from '../../../src/common/axes/y-axis.component';
+import * as import22 from '../../../build/common/axes/y-axis.component';
 import * as import23 from '../common/axes/y-axis.component.ngfactory';
-import * as import24 from '../../../src/bar-chart/series-horizontal.component';
+import * as import24 from '../../../build/bar-chart/series-horizontal.component';
 import * as import25 from './series-horizontal.component.ngfactory';
-import * as import26 from '../../../src/common/charts/chart.component';
-import * as import27 from '../../../src/common/tooltip/tooltip.service';
+import * as import26 from '../../../build/common/charts/chart.component';
+import * as import27 from '../../../build/common/tooltip/tooltip.service';
 import * as import28 from '../common/charts/chart.component.ngfactory';
 import * as import29 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
 import * as import30 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
-import * as import31 from '../../../src/common/tooltip/injection.service';
+import * as import31 from '../../../build/common/tooltip/injection.service';
 import * as import32 from '@angular/core/src/linker/template_ref';
 import * as import33 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import34 from '@angular/common/src/directives/ng_if';

@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/gauge/gauge.component';
+import * as import0 from '../../../build/gauge/gauge.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -17,20 +17,20 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from '../common/base-chart.component.scss.ngstyle';
-import * as import13 from './gauge.component.scss.ngstyle';
-import * as import14 from '../../../src/gauge/gauge-arc.component';
+import * as import12 from '../common/base-chart.component.css.ngstyle';
+import * as import13 from './gauge.component.css.ngstyle';
+import * as import14 from '../../../build/gauge/gauge-arc.component';
 import * as import15 from './gauge-arc.component.ngfactory';
 import * as import16 from '@angular/core/src/linker/view_container';
-import * as import17 from '../../../src/gauge/gauge-axis.component';
+import * as import17 from '../../../build/gauge/gauge-axis.component';
 import * as import18 from './gauge-axis.component.ngfactory';
 import * as import19 from '@angular/core/src/linker/query_list';
-import * as import20 from '../../../src/common/charts/chart.component';
-import * as import21 from '../../../src/common/tooltip/tooltip.service';
+import * as import20 from '../../../build/common/charts/chart.component';
+import * as import21 from '../../../build/common/tooltip/tooltip.service';
 import * as import22 from '../common/charts/chart.component.ngfactory';
 import * as import23 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import24 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
-import * as import25 from '../../../src/common/tooltip/injection.service';
+import * as import25 from '../../../build/common/tooltip/injection.service';
 import * as import26 from '@angular/core/src/linker/template_ref';
 import * as import27 from '@angular/core/src/change_detection/differs/iterable_differs';
 import * as import28 from '@angular/common/src/directives/ng_for';
@@ -58,6 +58,7 @@ export class Wrapper_GaugeComponent {
   /*private*/ _expr_14:any;
   /*private*/ _expr_15:any;
   /*private*/ _expr_16:any;
+  /*private*/ _expr_17:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -82,6 +83,7 @@ export class Wrapper_GaugeComponent {
     this._expr_14 = import1.UNINITIALIZED;
     this._expr_15 = import1.UNINITIALIZED;
     this._expr_16 = import1.UNINITIALIZED;
+    this._expr_17 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -155,76 +157,84 @@ export class Wrapper_GaugeComponent {
       this._expr_7 = currValue;
     }
   }
-  check_units(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_textValue(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_8,currValue))) {
       this._changed = true;
-      this.context.units = currValue;
-      this._changes['units'] = new import1.SimpleChange(this._expr_8,currValue);
+      this.context.textValue = currValue;
+      this._changes['textValue'] = new import1.SimpleChange(this._expr_8,currValue);
       this._expr_8 = currValue;
     }
   }
-  check_bigSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_units(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_9,currValue))) {
       this._changed = true;
-      this.context.bigSegments = currValue;
-      this._changes['bigSegments'] = new import1.SimpleChange(this._expr_9,currValue);
+      this.context.units = currValue;
+      this._changes['units'] = new import1.SimpleChange(this._expr_9,currValue);
       this._expr_9 = currValue;
     }
   }
-  check_smallSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_bigSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_10,currValue))) {
       this._changed = true;
-      this.context.smallSegments = currValue;
-      this._changes['smallSegments'] = new import1.SimpleChange(this._expr_10,currValue);
+      this.context.bigSegments = currValue;
+      this._changes['bigSegments'] = new import1.SimpleChange(this._expr_10,currValue);
       this._expr_10 = currValue;
     }
   }
-  check_showAxis(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_smallSegments(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_11,currValue))) {
       this._changed = true;
-      this.context.showAxis = currValue;
-      this._changes['showAxis'] = new import1.SimpleChange(this._expr_11,currValue);
+      this.context.smallSegments = currValue;
+      this._changes['smallSegments'] = new import1.SimpleChange(this._expr_11,currValue);
       this._expr_11 = currValue;
     }
   }
-  check_startAngle(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_showAxis(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_12,currValue))) {
       this._changed = true;
-      this.context.startAngle = currValue;
-      this._changes['startAngle'] = new import1.SimpleChange(this._expr_12,currValue);
+      this.context.showAxis = currValue;
+      this._changes['showAxis'] = new import1.SimpleChange(this._expr_12,currValue);
       this._expr_12 = currValue;
     }
   }
-  check_angleSpan(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_startAngle(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
       this._changed = true;
-      this.context.angleSpan = currValue;
-      this._changes['angleSpan'] = new import1.SimpleChange(this._expr_13,currValue);
+      this.context.startAngle = currValue;
+      this._changes['startAngle'] = new import1.SimpleChange(this._expr_13,currValue);
       this._expr_13 = currValue;
     }
   }
-  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_angleSpan(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_14,currValue))) {
       this._changed = true;
-      this.context.activeEntries = currValue;
-      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_14,currValue);
+      this.context.angleSpan = currValue;
+      this._changes['angleSpan'] = new import1.SimpleChange(this._expr_14,currValue);
       this._expr_14 = currValue;
     }
   }
-  check_axisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_15,currValue))) {
       this._changed = true;
-      this.context.axisTickFormatting = currValue;
-      this._changes['axisTickFormatting'] = new import1.SimpleChange(this._expr_15,currValue);
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_15,currValue);
       this._expr_15 = currValue;
     }
   }
-  check_margin(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_axisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_16,currValue))) {
       this._changed = true;
-      this.context.margin = currValue;
-      this._changes['margin'] = new import1.SimpleChange(this._expr_16,currValue);
+      this.context.axisTickFormatting = currValue;
+      this._changes['axisTickFormatting'] = new import1.SimpleChange(this._expr_16,currValue);
       this._expr_16 = currValue;
+    }
+  }
+  check_margin(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_17,currValue))) {
+      this._changed = true;
+      this.context.margin = currValue;
+      this._changes['margin'] = new import1.SimpleChange(this._expr_17,currValue);
+      this._expr_17 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {

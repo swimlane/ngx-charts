@@ -1,0 +1,48 @@
+.ngx-charts {
+  float: left; }
+  .ngx-charts .circle,
+  .ngx-charts .bar,
+  .ngx-charts .arc {
+    cursor: pointer; }
+  .ngx-charts .bar.active, .ngx-charts .bar:hover,
+  .ngx-charts .cell.active,
+  .ngx-charts .cell:hover,
+  .ngx-charts .arc.active,
+  .ngx-charts .arc:hover,
+  .ngx-charts .card.active,
+  .ngx-charts .card:hover {
+    opacity: 0.8;
+    transition: opacity 100ms ease-in-out; }
+  .ngx-charts .bar:focus,
+  .ngx-charts .cell:focus,
+  .ngx-charts .arc:focus,
+  .ngx-charts .card:focus {
+    outline: none; }
+  .ngx-charts g:focus {
+    outline: none; }
+  .ngx-charts .line-series.inactive,
+  .ngx-charts .line-series-range.inactive,
+  .ngx-charts .area-series.inactive {
+    transition: opacity 100ms ease-in-out;
+    opacity: .2; }
+  .ngx-charts .line-highlight {
+    display: none; }
+    .ngx-charts .line-highlight.active {
+      display: block; }
+  .ngx-charts .area {
+    opacity: 0.6; }
+  .ngx-charts .circle:hover {
+    cursor: pointer; }
+  .ngx-charts .label {
+    font-size: 12px;
+    font-weight: normal; }
+  .ngx-charts .tooltip-anchor {
+    fill: black; }
+  .ngx-charts .gridline-path {
+    stroke: #ddd;
+    stroke-width: 1;
+    fill: none; }
+  .ngx-charts .grid-panel rect {
+    fill: none; }
+  .ngx-charts .grid-panel.odd rect {
+    fill: rgba(0, 0, 0, 0.05); }

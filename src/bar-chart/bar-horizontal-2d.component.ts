@@ -237,7 +237,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     return `translate(0, ${this.groupScale(group.name)})`;
   }
 
-  onClick(data, group): void {
+  onClick(data, group?): void {
     if (group) {
       data.series = group.name;
     }

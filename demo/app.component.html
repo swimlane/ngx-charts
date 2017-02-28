@@ -259,6 +259,8 @@
         [schemeType]="schemeType"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled">
+        [minRadius]="minRadius"
+        [maxRadius]="maxRadius">
       </ngx-charts-bubble-chart>
       <ngx-charts-force-directed-graph
         *ngIf="chartType === 'force-directed-graph'"
@@ -386,6 +388,7 @@
         [view]="view"
         [legend]="showLegend"
         [results]="single"
+        [textValue]="gaugeTextValue"
         [scheme]="colorScheme"
         [min]="gaugeMin"
         [max]="gaugeMax"
@@ -703,6 +706,15 @@
         <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom"><br />
         <label>Left:</label><input type="number" [(ngModel)]="marginLeft"><br />
       </div>
+
+      <div *ngIf="chart.options.includes('minRadius')">
+        <label>Minimum Radius:</label><input type="number" [(ngModel)]="minRadius">
+      </div>
+
+      <div *ngIf="chart.options.includes('maxRadius')">
+        <label>Maximum Radius:</label><input type="number" [(ngModel)]="maxRadius">
+      </div>
+
     </div>
     <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
     </div>

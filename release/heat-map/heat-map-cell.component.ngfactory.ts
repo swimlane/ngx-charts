@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/heat-map/heat-map-cell.component';
+import * as import0 from '../../../build/heat-map/heat-map-cell.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/common/src/location/location';
-import * as import11 from '../../../src/common/svg-linear-gradient.component';
+import * as import11 from '../../../build/common/svg-linear-gradient.component';
 import * as import12 from '../common/svg-linear-gradient.component.ngfactory';
 import * as import13 from '@angular/core/src/linker/view_container';
 import * as import14 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';

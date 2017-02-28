@@ -5,7 +5,7 @@
  */
  /* tslint:disable */
 
-import * as import0 from '../../../src/tree-map/tree-map.component';
+import * as import0 from '../../../build/tree-map/tree-map.component';
 import * as import1 from '@angular/core/src/change_detection/change_detection_util';
 import * as import2 from '@angular/core/src/linker/view';
 import * as import3 from '@angular/core/src/linker/view_utils';
@@ -17,14 +17,14 @@ import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
 import * as import11 from '@angular/common/src/location/location';
-import * as import12 from './tree-map.component.scss.ngstyle';
+import * as import12 from './tree-map.component.css.ngstyle';
 import * as import13 from '@angular/core/src/linker/view_container';
-import * as import14 from '../../../src/common/charts/chart.component';
-import * as import15 from '../../../src/common/tooltip/tooltip.service';
+import * as import14 from '../../../build/common/charts/chart.component';
+import * as import15 from '../../../build/common/tooltip/tooltip.service';
 import * as import16 from '../common/charts/chart.component.ngfactory';
-import * as import17 from '../../../src/tree-map/tree-map-cell-series.component';
+import * as import17 from '../../../build/tree-map/tree-map-cell-series.component';
 import * as import18 from './tree-map-cell-series.component.ngfactory';
-import * as import19 from '../../../src/common/tooltip/injection.service';
+import * as import19 from '../../../build/common/tooltip/injection.service';
 export class Wrapper_TreeMapComponent {
   /*private*/ _eventHandler:Function;
   context:import0.TreeMapComponent;
