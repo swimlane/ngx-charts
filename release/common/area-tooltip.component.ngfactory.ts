@@ -44,6 +44,7 @@ export class Wrapper_AreaTooltip {
   /*private*/ _expr_4:any;
   /*private*/ _expr_5:any;
   /*private*/ _expr_6:any;
+  /*private*/ _expr_7:any;
   subscription0:any;
   constructor(p0:any) {
     this._changed = false;
@@ -56,6 +57,7 @@ export class Wrapper_AreaTooltip {
     this._expr_4 = import1.UNINITIALIZED;
     this._expr_5 = import1.UNINITIALIZED;
     this._expr_6 = import1.UNINITIALIZED;
+    this._expr_7 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -116,6 +118,14 @@ export class Wrapper_AreaTooltip {
       this.context.showPercentage = currValue;
       this._changes['showPercentage'] = new import1.SimpleChange(this._expr_6,currValue);
       this._expr_6 = currValue;
+    }
+  }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_7,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_7,currValue);
+      this._expr_7 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -404,12 +414,14 @@ class View_AreaTooltip1 extends import2.AppView<any> {
     }
     const currVal_6_0_0:any = 15;
     this._TooltipDirective_6_5.check_tooltipSpacing(currVal_6_0_0,throwOnChange,false);
-    const currVal_6_0_1:any = 'right';
-    this._TooltipDirective_6_5.check_tooltipPlacement(currVal_6_0_1,throwOnChange,false);
-    const currVal_6_0_2:any = 'tooltip';
-    this._TooltipDirective_6_5.check_tooltipType(currVal_6_0_2,throwOnChange,false);
-    const currVal_6_0_3:any = this._TemplateRef_4_4;
-    this._TooltipDirective_6_5.check_tooltipTemplate(currVal_6_0_3,throwOnChange,false);
+    const currVal_6_0_1:any = this.parentView.context.tooltipDisabled;
+    this._TooltipDirective_6_5.check_tooltipDisabled(currVal_6_0_1,throwOnChange,false);
+    const currVal_6_0_2:any = 'right';
+    this._TooltipDirective_6_5.check_tooltipPlacement(currVal_6_0_2,throwOnChange,false);
+    const currVal_6_0_3:any = 'tooltip';
+    this._TooltipDirective_6_5.check_tooltipType(currVal_6_0_3,throwOnChange,false);
+    const currVal_6_0_4:any = this._TemplateRef_4_4;
+    this._TooltipDirective_6_5.check_tooltipTemplate(currVal_6_0_4,throwOnChange,false);
     this._TooltipDirective_6_5.ngDoCheck(this,this._el_6,throwOnChange);
     this._vc_4.detectChangesInNestedViews(throwOnChange);
     this._vc_6.detectChangesInNestedViews(throwOnChange);

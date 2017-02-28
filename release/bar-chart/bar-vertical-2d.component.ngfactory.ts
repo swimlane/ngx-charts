@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from '../common/base-chart.component.css.ngstyle';
 import * as import13 from '@angular/core/src/animation/animation_transition';
 import * as import14 from '@angular/core/src/animation/animation_sequence_player';
@@ -69,6 +69,7 @@ export class Wrapper_BarVertical2DComponent {
   /*private*/ _expr_18:any;
   /*private*/ _expr_19:any;
   /*private*/ _expr_20:any;
+  /*private*/ _expr_21:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -97,6 +98,7 @@ export class Wrapper_BarVertical2DComponent {
     this._expr_18 = import1.UNINITIALIZED;
     this._expr_19 = import1.UNINITIALIZED;
     this._expr_20 = import1.UNINITIALIZED;
+    this._expr_21 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -202,76 +204,84 @@ export class Wrapper_BarVertical2DComponent {
       this._expr_11 = currValue;
     }
   }
-  check_scaleType(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_12,currValue))) {
       this._changed = true;
-      this.context.scaleType = currValue;
-      this._changes['scaleType'] = new import1.SimpleChange(this._expr_12,currValue);
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_12,currValue);
       this._expr_12 = currValue;
     }
   }
-  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_scaleType(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
       this._changed = true;
-      this.context.gradient = currValue;
-      this._changes['gradient'] = new import1.SimpleChange(this._expr_13,currValue);
+      this.context.scaleType = currValue;
+      this._changes['scaleType'] = new import1.SimpleChange(this._expr_13,currValue);
       this._expr_13 = currValue;
     }
   }
-  check_showGridLines(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_14,currValue))) {
       this._changed = true;
-      this.context.showGridLines = currValue;
-      this._changes['showGridLines'] = new import1.SimpleChange(this._expr_14,currValue);
+      this.context.gradient = currValue;
+      this._changes['gradient'] = new import1.SimpleChange(this._expr_14,currValue);
       this._expr_14 = currValue;
     }
   }
-  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_showGridLines(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_15,currValue))) {
       this._changed = true;
-      this.context.activeEntries = currValue;
-      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_15,currValue);
+      this.context.showGridLines = currValue;
+      this._changes['showGridLines'] = new import1.SimpleChange(this._expr_15,currValue);
       this._expr_15 = currValue;
     }
   }
-  check_xAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_16,currValue))) {
       this._changed = true;
-      this.context.xAxisTickFormatting = currValue;
-      this._changes['xAxisTickFormatting'] = new import1.SimpleChange(this._expr_16,currValue);
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_16,currValue);
       this._expr_16 = currValue;
     }
   }
-  check_yAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_xAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_17,currValue))) {
       this._changed = true;
-      this.context.yAxisTickFormatting = currValue;
-      this._changes['yAxisTickFormatting'] = new import1.SimpleChange(this._expr_17,currValue);
+      this.context.xAxisTickFormatting = currValue;
+      this._changes['xAxisTickFormatting'] = new import1.SimpleChange(this._expr_17,currValue);
       this._expr_17 = currValue;
     }
   }
-  check_groupPadding(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_yAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_18,currValue))) {
       this._changed = true;
-      this.context.groupPadding = currValue;
-      this._changes['groupPadding'] = new import1.SimpleChange(this._expr_18,currValue);
+      this.context.yAxisTickFormatting = currValue;
+      this._changes['yAxisTickFormatting'] = new import1.SimpleChange(this._expr_18,currValue);
       this._expr_18 = currValue;
     }
   }
-  check_barPadding(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_groupPadding(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_19,currValue))) {
       this._changed = true;
-      this.context.barPadding = currValue;
-      this._changes['barPadding'] = new import1.SimpleChange(this._expr_19,currValue);
+      this.context.groupPadding = currValue;
+      this._changes['groupPadding'] = new import1.SimpleChange(this._expr_19,currValue);
       this._expr_19 = currValue;
     }
   }
-  check_roundDomains(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_barPadding(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_20,currValue))) {
       this._changed = true;
-      this.context.roundDomains = currValue;
-      this._changes['roundDomains'] = new import1.SimpleChange(this._expr_20,currValue);
+      this.context.barPadding = currValue;
+      this._changes['barPadding'] = new import1.SimpleChange(this._expr_20,currValue);
       this._expr_20 = currValue;
+    }
+  }
+  check_roundDomains(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_21,currValue))) {
+      this._changed = true;
+      this.context.roundDomains = currValue;
+      this._changes['roundDomains'] = new import1.SimpleChange(this._expr_21,currValue);
+      this._expr_21 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -307,7 +317,7 @@ class View_BarVertical2DComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-bar-vertical-2d',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_BarVertical2DComponent0(this.viewUtils,this,0,this._el_0);
-    this._BarVertical2DComponent_0_3 = new Wrapper_BarVertical2DComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._BarVertical2DComponent_0_3 = new Wrapper_BarVertical2DComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._BarVertical2DComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._BarVertical2DComponent_0_3.context);
@@ -539,12 +549,14 @@ class View_BarVertical2DComponent3 extends import2.AppView<any> {
     this._SeriesVerticalComponent_0_3.check_yScale(currVal_0_0_3,throwOnChange,false);
     const currVal_0_0_4:any = this.parentView.context.colors;
     this._SeriesVerticalComponent_0_3.check_colors(currVal_0_0_4,throwOnChange,false);
-    const currVal_0_0_5:any = this.parentView.context.gradient;
-    this._SeriesVerticalComponent_0_3.check_gradient(currVal_0_0_5,throwOnChange,false);
-    const currVal_0_0_6:any = this.parentView.context.activeEntries;
-    this._SeriesVerticalComponent_0_3.check_activeEntries(currVal_0_0_6,throwOnChange,false);
-    const currVal_0_0_7:any = this.context.$implicit.name;
-    this._SeriesVerticalComponent_0_3.check_seriesName(currVal_0_0_7,throwOnChange,false);
+    const currVal_0_0_5:any = this.parentView.context.tooltipDisabled;
+    this._SeriesVerticalComponent_0_3.check_tooltipDisabled(currVal_0_0_5,throwOnChange,false);
+    const currVal_0_0_6:any = this.parentView.context.gradient;
+    this._SeriesVerticalComponent_0_3.check_gradient(currVal_0_0_6,throwOnChange,false);
+    const currVal_0_0_7:any = this.parentView.context.activeEntries;
+    this._SeriesVerticalComponent_0_3.check_activeEntries(currVal_0_0_7,throwOnChange,false);
+    const currVal_0_0_8:any = this.context.$implicit.name;
+    this._SeriesVerticalComponent_0_3.check_seriesName(currVal_0_0_8,throwOnChange,false);
     if (this._SeriesVerticalComponent_0_3.ngDoCheck(this,this._el_0,throwOnChange)) { this.compView_0.markAsCheckOnce(); }
     const currVal_4:any = this.parentView.context.groupTransform(this.context.$implicit);
     if (import3.checkBinding(throwOnChange,this._expr_4,currVal_4)) {

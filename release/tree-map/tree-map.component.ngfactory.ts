@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from './tree-map.component.css.ngstyle';
 import * as import13 from '@angular/core/src/linker/view_container';
 import * as import14 from '../../../build/common/charts/chart.component';
@@ -35,6 +35,7 @@ export class Wrapper_TreeMapComponent {
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
+  /*private*/ _expr_5:any;
   subscription0:any;
   constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
@@ -45,6 +46,7 @@ export class Wrapper_TreeMapComponent {
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
+    this._expr_5 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -92,6 +94,14 @@ export class Wrapper_TreeMapComponent {
       this._expr_4 = currValue;
     }
   }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_5,currValue);
+      this._expr_5 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -123,7 +133,7 @@ class View_TreeMapComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-tree-map',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_TreeMapComponent0(this.viewUtils,this,0,this._el_0);
-    this._TreeMapComponent_0_3 = new Wrapper_TreeMapComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._TreeMapComponent_0_3 = new Wrapper_TreeMapComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._TreeMapComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._TreeMapComponent_0_3.context);
@@ -230,6 +240,8 @@ export class View_TreeMapComponent0 extends import2.AppView<import0.TreeMapCompo
     this._TreeMapCellSeriesComponent_5_3.check_dims(currVal_5_0_1,throwOnChange,false);
     const currVal_5_0_2:any = this.context.colors;
     this._TreeMapCellSeriesComponent_5_3.check_colors(currVal_5_0_2,throwOnChange,false);
+    const currVal_5_0_3:any = this.context.tooltipDisabled;
+    this._TreeMapCellSeriesComponent_5_3.check_tooltipDisabled(currVal_5_0_3,throwOnChange,false);
     if (this._TreeMapCellSeriesComponent_5_3.ngDoCheck(this,this._el_5,throwOnChange)) { this.compView_5.markAsCheckOnce(); }
     this._vc_1.detectChangesInNestedViews(throwOnChange);
     const currVal_16:any = this.context.transform;

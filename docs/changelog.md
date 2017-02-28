@@ -1,12 +1,16 @@
 # Changelog
 
-# 4.1.3
+## 4.2.0
+- Chore: AoT compilation compatibility improvements (#253, #252, #251)
+- Enhancement: Added option to disable tooltips (#223)
+
+## 4.1.3
 - Enhancement: Added option to override the value in gauge chart
 - Bug: Fixed padding on bubble charts
 - Chore: Compile SCSS into CSS before building
 - Chore: Expor ChartComponent through the main module
 
-# 4.1.2
+## 4.1.2
 - Bug: Fix tooltip when axis labels are not shown in bubble chart
 - Bug: Do not round scales when they are not linear
 - Enhancement: Show Axis labels in bubble chart tooltip (#210)

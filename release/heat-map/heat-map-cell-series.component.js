@@ -1,8 +1,8 @@
-"use strict";
-var core_1 = require('@angular/core');
-var HeatCellSeriesComponent = (function () {
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+export var HeatCellSeriesComponent = (function () {
     function HeatCellSeriesComponent() {
-        this.select = new core_1.EventEmitter();
+        this.tooltipDisabled = false;
+        this.select = new EventEmitter();
     }
     HeatCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -50,23 +50,23 @@ var HeatCellSeriesComponent = (function () {
         });
     };
     HeatCellSeriesComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-heat-map-cell-series]',
-                    template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
     HeatCellSeriesComponent.ctorParameters = function () { return []; };
     HeatCellSeriesComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'xScale': [{ type: core_1.Input },],
-        'yScale': [{ type: core_1.Input },],
-        'gradient': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
+        'data': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'xScale': [{ type: Input },],
+        'yScale': [{ type: Input },],
+        'gradient': [{ type: Input },],
+        'tooltipDisabled': [{ type: Input },],
+        'select': [{ type: Output },],
     };
     return HeatCellSeriesComponent;
 }());
-exports.HeatCellSeriesComponent = HeatCellSeriesComponent;
 //# sourceMappingURL=heat-map-cell-series.component.js.map

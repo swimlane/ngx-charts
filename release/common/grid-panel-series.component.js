@@ -1,6 +1,5 @@
-"use strict";
-var core_1 = require('@angular/core');
-var GridPanelSeriesComponent = (function () {
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+export var GridPanelSeriesComponent = (function () {
     function GridPanelSeriesComponent() {
     }
     GridPanelSeriesComponent.prototype.ngOnChanges = function (changes) {
@@ -53,22 +52,21 @@ var GridPanelSeriesComponent = (function () {
         });
     };
     GridPanelSeriesComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-grid-panel-series]',
                     template: "\n    <svg:g ngx-charts-grid-panel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     GridPanelSeriesComponent.ctorParameters = function () { return []; };
     GridPanelSeriesComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'dims': [{ type: core_1.Input },],
-        'xScale': [{ type: core_1.Input },],
-        'yScale': [{ type: core_1.Input },],
-        'orient': [{ type: core_1.Input },],
+        'data': [{ type: Input },],
+        'dims': [{ type: Input },],
+        'xScale': [{ type: Input },],
+        'yScale': [{ type: Input },],
+        'orient': [{ type: Input },],
     };
     return GridPanelSeriesComponent;
 }());
-exports.GridPanelSeriesComponent = GridPanelSeriesComponent;
 //# sourceMappingURL=grid-panel-series.component.js.map

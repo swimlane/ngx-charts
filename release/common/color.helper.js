@@ -1,10 +1,9 @@
-"use strict";
-var d3_1 = require('../d3');
-var color_sets_1 = require('../utils/color-sets');
-var ColorHelper = (function () {
+import d3 from '../d3';
+import { colorSets } from '../utils/color-sets';
+export var ColorHelper = (function () {
     function ColorHelper(scheme, type, domain, customColors) {
         if (typeof (scheme) === 'string') {
-            scheme = color_sets_1.colorSets.find(function (cs) {
+            scheme = colorSets.find(function (cs) {
                 return cs.name === scheme;
             });
         }
@@ -15,31 +14,31 @@ var ColorHelper = (function () {
     }
     ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
         if (typeof (scheme) === 'string') {
-            scheme = color_sets_1.colorSets.find(function (cs) {
+            scheme = colorSets.find(function (cs) {
                 return cs.name === scheme;
             });
         }
         var colorScale;
         if (type === 'quantile') {
-            colorScale = d3_1.default.scaleQuantile()
+            colorScale = d3.scaleQuantile()
                 .range(scheme.domain)
                 .domain(domain);
         }
         else if (type === 'ordinal') {
-            colorScale = d3_1.default.scaleOrdinal()
+            colorScale = d3.scaleOrdinal()
                 .range(scheme.domain)
                 .domain(domain);
         }
         else if (type === 'linear') {
-            colorScale = d3_1.default.scaleLinear()
-                .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
+            colorScale = d3.scaleLinear()
+                .domain(d3.range(0, 1, 1.0 / (scheme.domain.length - 1)))
                 .range(scheme.domain);
         }
         return colorScale;
     };
     ColorHelper.prototype.getColor = function (value) {
         if (this.scaleType === 'linear') {
-            var valueScale = d3_1.default.scaleLinear()
+            var valueScale = d3.scaleLinear()
                 .domain(this.domain)
                 .range([0, 1]);
             return (this.scale(valueScale(value)));
@@ -64,10 +63,10 @@ var ColorHelper = (function () {
         if (!start) {
             start = this.domain[0];
         }
-        var valueScale = d3_1.default.scaleLinear()
+        var valueScale = d3.scaleLinear()
             .domain(this.domain)
             .range([0, 1]);
-        var colorValueScale = d3_1.default.scaleBand()
+        var colorValueScale = d3.scaleBand()
             .domain(this.colorDomain)
             .range([0, 1]);
         var endColor = this.getColor(value);
@@ -115,5 +114,4 @@ var ColorHelper = (function () {
     };
     return ColorHelper;
 }());
-exports.ColorHelper = ColorHelper;
 //# sourceMappingURL=color.helper.js.map

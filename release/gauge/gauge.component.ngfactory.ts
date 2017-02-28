@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from '../common/base-chart.component.css.ngstyle';
 import * as import13 from './gauge.component.css.ngstyle';
 import * as import14 from '../../../build/gauge/gauge-arc.component';
@@ -59,6 +59,7 @@ export class Wrapper_GaugeComponent {
   /*private*/ _expr_15:any;
   /*private*/ _expr_16:any;
   /*private*/ _expr_17:any;
+  /*private*/ _expr_18:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -84,6 +85,7 @@ export class Wrapper_GaugeComponent {
     this._expr_15 = import1.UNINITIALIZED;
     this._expr_16 = import1.UNINITIALIZED;
     this._expr_17 = import1.UNINITIALIZED;
+    this._expr_18 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -229,12 +231,20 @@ export class Wrapper_GaugeComponent {
       this._expr_16 = currValue;
     }
   }
-  check_margin(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_17,currValue))) {
       this._changed = true;
-      this.context.margin = currValue;
-      this._changes['margin'] = new import1.SimpleChange(this._expr_17,currValue);
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_17,currValue);
       this._expr_17 = currValue;
+    }
+  }
+  check_margin(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_18,currValue))) {
+      this._changed = true;
+      this.context.margin = currValue;
+      this._changes['margin'] = new import1.SimpleChange(this._expr_18,currValue);
+      this._expr_18 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -270,7 +280,7 @@ class View_GaugeComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-gauge',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_GaugeComponent0(this.viewUtils,this,0,this._el_0);
-    this._GaugeComponent_0_3 = new Wrapper_GaugeComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._GaugeComponent_0_3 = new Wrapper_GaugeComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._GaugeComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._GaugeComponent_0_3.context);
@@ -347,6 +357,8 @@ class View_GaugeComponent1 extends import2.AppView<any> {
     this._GaugeArcComponent_2_3.check_colors(currVal_2_0_3,throwOnChange,false);
     const currVal_2_0_4:any = this.parentView.context.isActive(this.context.$implicit.valueArc.data);
     this._GaugeArcComponent_2_3.check_isActive(currVal_2_0_4,throwOnChange,false);
+    const currVal_2_0_5:any = this.parentView.context.tooltipDisabled;
+    this._GaugeArcComponent_2_3.check_tooltipDisabled(currVal_2_0_5,throwOnChange,false);
     if (this._GaugeArcComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     const currVal_7:any = this.parentView.context.rotation;
     if (import3.checkBinding(throwOnChange,this._expr_7,currVal_7)) {

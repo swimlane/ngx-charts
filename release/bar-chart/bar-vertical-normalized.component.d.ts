@@ -10,6 +10,7 @@ export declare class BarVerticalNormalizedComponent extends BaseChartComponent {
     showYAxisLabel: any;
     xAxisLabel: any;
     yAxisLabel: any;
+    tooltipDisabled: boolean;
     gradient: boolean;
     showGridLines: boolean;
     activeEntries: any[];
@@ -39,7 +40,7 @@ export declare class BarVerticalNormalizedComponent extends BaseChartComponent {
     getXScale(): any;
     getYScale(): any;
     groupTransform(group: any): string;
-    onClick(data: any, group: any): void;
+    onClick(data: any, group?: any): void;
     trackBy(index: any, item: any): any;
     setColors(): void;
     getLegendOptions(): {

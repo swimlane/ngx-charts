@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from '../common/base-chart.component.css.ngstyle';
 import * as import13 from '../../../build/common/axes/x-axis.component';
 import * as import14 from '../common/axes/x-axis.component.ngfactory';
@@ -56,6 +56,7 @@ export class Wrapper_BarVerticalComponent {
   /*private*/ _expr_16:any;
   /*private*/ _expr_17:any;
   /*private*/ _expr_18:any;
+  /*private*/ _expr_19:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -82,6 +83,7 @@ export class Wrapper_BarVerticalComponent {
     this._expr_16 = import1.UNINITIALIZED;
     this._expr_17 = import1.UNINITIALIZED;
     this._expr_18 = import1.UNINITIALIZED;
+    this._expr_19 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -187,60 +189,68 @@ export class Wrapper_BarVerticalComponent {
       this._expr_11 = currValue;
     }
   }
-  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_12,currValue))) {
       this._changed = true;
-      this.context.gradient = currValue;
-      this._changes['gradient'] = new import1.SimpleChange(this._expr_12,currValue);
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_12,currValue);
       this._expr_12 = currValue;
     }
   }
-  check_showGridLines(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_gradient(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_13,currValue))) {
       this._changed = true;
-      this.context.showGridLines = currValue;
-      this._changes['showGridLines'] = new import1.SimpleChange(this._expr_13,currValue);
+      this.context.gradient = currValue;
+      this._changes['gradient'] = new import1.SimpleChange(this._expr_13,currValue);
       this._expr_13 = currValue;
     }
   }
-  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_showGridLines(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_14,currValue))) {
       this._changed = true;
-      this.context.activeEntries = currValue;
-      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_14,currValue);
+      this.context.showGridLines = currValue;
+      this._changes['showGridLines'] = new import1.SimpleChange(this._expr_14,currValue);
       this._expr_14 = currValue;
     }
   }
-  check_xAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_activeEntries(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_15,currValue))) {
       this._changed = true;
-      this.context.xAxisTickFormatting = currValue;
-      this._changes['xAxisTickFormatting'] = new import1.SimpleChange(this._expr_15,currValue);
+      this.context.activeEntries = currValue;
+      this._changes['activeEntries'] = new import1.SimpleChange(this._expr_15,currValue);
       this._expr_15 = currValue;
     }
   }
-  check_yAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_xAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_16,currValue))) {
       this._changed = true;
-      this.context.yAxisTickFormatting = currValue;
-      this._changes['yAxisTickFormatting'] = new import1.SimpleChange(this._expr_16,currValue);
+      this.context.xAxisTickFormatting = currValue;
+      this._changes['xAxisTickFormatting'] = new import1.SimpleChange(this._expr_16,currValue);
       this._expr_16 = currValue;
     }
   }
-  check_barPadding(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_yAxisTickFormatting(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_17,currValue))) {
       this._changed = true;
-      this.context.barPadding = currValue;
-      this._changes['barPadding'] = new import1.SimpleChange(this._expr_17,currValue);
+      this.context.yAxisTickFormatting = currValue;
+      this._changes['yAxisTickFormatting'] = new import1.SimpleChange(this._expr_17,currValue);
       this._expr_17 = currValue;
     }
   }
-  check_roundDomains(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_barPadding(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_18,currValue))) {
       this._changed = true;
-      this.context.roundDomains = currValue;
-      this._changes['roundDomains'] = new import1.SimpleChange(this._expr_18,currValue);
+      this.context.barPadding = currValue;
+      this._changes['barPadding'] = new import1.SimpleChange(this._expr_18,currValue);
       this._expr_18 = currValue;
+    }
+  }
+  check_roundDomains(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_19,currValue))) {
+      this._changed = true;
+      this.context.roundDomains = currValue;
+      this._changes['roundDomains'] = new import1.SimpleChange(this._expr_19,currValue);
+      this._expr_19 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -276,7 +286,7 @@ class View_BarVerticalComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-bar-vertical',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_BarVerticalComponent0(this.viewUtils,this,0,this._el_0);
-    this._BarVerticalComponent_0_3 = new Wrapper_BarVerticalComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._BarVerticalComponent_0_3 = new Wrapper_BarVerticalComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._BarVerticalComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._BarVerticalComponent_0_3.context);
@@ -552,10 +562,12 @@ export class View_BarVerticalComponent0 extends import2.AppView<import0.BarVerti
     this._SeriesVerticalComponent_9_3.check_yScale(currVal_9_0_3,throwOnChange,false);
     const currVal_9_0_4:any = this.context.colors;
     this._SeriesVerticalComponent_9_3.check_colors(currVal_9_0_4,throwOnChange,false);
-    const currVal_9_0_5:any = this.context.gradient;
-    this._SeriesVerticalComponent_9_3.check_gradient(currVal_9_0_5,throwOnChange,false);
-    const currVal_9_0_6:any = this.context.activeEntries;
-    this._SeriesVerticalComponent_9_3.check_activeEntries(currVal_9_0_6,throwOnChange,false);
+    const currVal_9_0_5:any = this.context.tooltipDisabled;
+    this._SeriesVerticalComponent_9_3.check_tooltipDisabled(currVal_9_0_5,throwOnChange,false);
+    const currVal_9_0_6:any = this.context.gradient;
+    this._SeriesVerticalComponent_9_3.check_gradient(currVal_9_0_6,throwOnChange,false);
+    const currVal_9_0_7:any = this.context.activeEntries;
+    this._SeriesVerticalComponent_9_3.check_activeEntries(currVal_9_0_7,throwOnChange,false);
     if (this._SeriesVerticalComponent_9_3.ngDoCheck(this,this._el_9,throwOnChange)) { this.compView_9.markAsCheckOnce(); }
     this._vc_1.detectChangesInNestedViews(throwOnChange);
     this._vc_5.detectChangesInNestedViews(throwOnChange);

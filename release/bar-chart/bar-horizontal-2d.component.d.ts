@@ -10,6 +10,7 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent {
     showYAxisLabel: any;
     xAxisLabel: any;
     yAxisLabel: any;
+    tooltipDisabled: boolean;
     gradient: boolean;
     showGridLines: boolean;
     activeEntries: any[];
@@ -42,7 +43,7 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent {
     getInnerDomain(): any[];
     getValueDomain(): any[];
     groupTransform(group: any): string;
-    onClick(data: any, group: any): void;
+    onClick(data: any, group?: any): void;
     trackBy(index: any, item: any): string;
     setColors(): void;
     getLegendOptions(): {

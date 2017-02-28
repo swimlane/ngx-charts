@@ -1,8 +1,4 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(require('./bubble-chart.module'));
-__export(require('./bubble-chart.component'));
-__export(require('./bubble-series.component'));
+export * from './bubble-chart.module';
+export * from './bubble-chart.component';
+export * from './bubble-series.component';
 //# sourceMappingURL=index.js.map

@@ -1,13 +1,12 @@
-"use strict";
-var core_1 = require('@angular/core');
+import { Output, EventEmitter } from '@angular/core';
 /**
  * Visibility Observer
  */
-var VisibilityObserver = (function () {
+export var VisibilityObserver = (function () {
     function VisibilityObserver(element, zone) {
         this.element = element;
         this.zone = zone;
-        this.visible = new core_1.EventEmitter();
+        this.visible = new EventEmitter();
         this.isVisible = false;
         this.runCheck();
     }
@@ -41,9 +40,8 @@ var VisibilityObserver = (function () {
         setTimeout(function () { return check(); });
     };
     VisibilityObserver.propDecorators = {
-        'visible': [{ type: core_1.Output },],
+        'visible': [{ type: Output },],
     };
     return VisibilityObserver;
 }());
-exports.VisibilityObserver = VisibilityObserver;
 //# sourceMappingURL=visibility-observer.js.map

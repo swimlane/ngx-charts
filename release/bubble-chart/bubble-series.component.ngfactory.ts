@@ -49,6 +49,7 @@ export class Wrapper_BubbleSeriesComponent {
   /*private*/ _expr_8:any;
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
+  /*private*/ _expr_11:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -67,6 +68,7 @@ export class Wrapper_BubbleSeriesComponent {
     this._expr_8 = import1.UNINITIALIZED;
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
+    this._expr_11 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -161,6 +163,14 @@ export class Wrapper_BubbleSeriesComponent {
       this.context.yAxisLabel = currValue;
       this._changes['yAxisLabel'] = new import1.SimpleChange(this._expr_10,currValue);
       this._expr_10 = currValue;
+    }
+  }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_11,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_11,currValue);
+      this._expr_11 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -301,10 +311,12 @@ class View_BubbleSeriesComponent1 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = this.parentView.context.getTooltipText(this.context.$implicit);
     this._TooltipDirective_2_5.check_tooltipTitle(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = 'top';
-    this._TooltipDirective_2_5.check_tooltipPlacement(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = 'tooltip';
-    this._TooltipDirective_2_5.check_tooltipType(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_1:any = this.parentView.context.tooltipDisabled;
+    this._TooltipDirective_2_5.check_tooltipDisabled(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = 'top';
+    this._TooltipDirective_2_5.check_tooltipPlacement(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_3:any = 'tooltip';
+    this._TooltipDirective_2_5.check_tooltipType(currVal_2_0_3,throwOnChange,false);
     this._TooltipDirective_2_5.ngDoCheck(this,this._el_2,throwOnChange);
     const currVal_2_1_0:any = this.context.$implicit.cx;
     this._CircleComponent_2_6.check_cx(currVal_2_1_0,throwOnChange,false);

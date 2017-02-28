@@ -1,5 +1,4 @@
-"use strict";
-var placement_type_1 = require('./placement.type');
+import { PlacementTypes } from './placement.type';
 var caretOffset = 7;
 function verticalPosition(elDimensions, popoverDimensions, alignment) {
     if (alignment === 'top') {
@@ -31,7 +30,7 @@ function horizontalPosition(elDimensions, popoverDimensions, alignment) {
  * @export
  * @class PositionHelper
  */
-var PositionHelper = (function () {
+export var PositionHelper = (function () {
     function PositionHelper() {
     }
     /**
@@ -184,19 +183,19 @@ var PositionHelper = (function () {
     PositionHelper.positionCaret = function (placement, elmDim, hostDim, caretDimensions, alignment) {
         var top = 0;
         var left = 0;
-        if (placement === placement_type_1.PlacementTypes.right) {
+        if (placement === PlacementTypes.right) {
             left = -7;
             top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, alignment);
         }
-        else if (placement === placement_type_1.PlacementTypes.left) {
+        else if (placement === PlacementTypes.left) {
             left = elmDim.width;
             top = PositionHelper.calculateVerticalCaret(hostDim, elmDim, caretDimensions, alignment);
         }
-        else if (placement === placement_type_1.PlacementTypes.top) {
+        else if (placement === PlacementTypes.top) {
             top = elmDim.height;
             left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, alignment);
         }
-        else if (placement === placement_type_1.PlacementTypes.bottom) {
+        else if (placement === PlacementTypes.bottom) {
             top = -7;
             left = PositionHelper.calculateHorizontalCaret(hostDim, elmDim, caretDimensions, alignment);
         }
@@ -218,19 +217,19 @@ var PositionHelper = (function () {
     PositionHelper.positionContent = function (placement, elmDim, hostDim, spacing, alignment) {
         var top = 0;
         var left = 0;
-        if (placement === placement_type_1.PlacementTypes.right) {
+        if (placement === PlacementTypes.right) {
             left = hostDim.left + hostDim.width + spacing;
             top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, alignment);
         }
-        else if (placement === placement_type_1.PlacementTypes.left) {
+        else if (placement === PlacementTypes.left) {
             left = hostDim.left - elmDim.width - spacing;
             top = PositionHelper.calculateVerticalAlignment(hostDim, elmDim, alignment);
         }
-        else if (placement === placement_type_1.PlacementTypes.top) {
+        else if (placement === PlacementTypes.top) {
             top = hostDim.top - elmDim.height - spacing;
             left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, alignment);
         }
-        else if (placement === placement_type_1.PlacementTypes.bottom) {
+        else if (placement === PlacementTypes.bottom) {
             top = hostDim.top + hostDim.height + spacing;
             left = PositionHelper.calculateHorizontalAlignment(hostDim, elmDim, alignment);
         }
@@ -252,22 +251,21 @@ var PositionHelper = (function () {
     PositionHelper.determinePlacement = function (placement, elmDim, hostDim, spacing, alignment) {
         var shouldFlip = PositionHelper.shouldFlip(hostDim, elmDim, placement, alignment, spacing);
         if (shouldFlip) {
-            if (placement === placement_type_1.PlacementTypes.right) {
-                return placement_type_1.PlacementTypes.left;
+            if (placement === PlacementTypes.right) {
+                return PlacementTypes.left;
             }
-            else if (placement === placement_type_1.PlacementTypes.left) {
-                return placement_type_1.PlacementTypes.right;
+            else if (placement === PlacementTypes.left) {
+                return PlacementTypes.right;
             }
-            else if (placement === placement_type_1.PlacementTypes.top) {
-                return placement_type_1.PlacementTypes.bottom;
+            else if (placement === PlacementTypes.top) {
+                return PlacementTypes.bottom;
             }
-            else if (placement === placement_type_1.PlacementTypes.bottom) {
-                return placement_type_1.PlacementTypes.top;
+            else if (placement === PlacementTypes.bottom) {
+                return PlacementTypes.top;
             }
         }
         return placement;
     };
     return PositionHelper;
 }());
-exports.PositionHelper = PositionHelper;
 //# sourceMappingURL=position.js.map

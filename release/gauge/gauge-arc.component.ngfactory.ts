@@ -19,7 +19,7 @@ import * as import10 from '../pie-chart/pie-arc.component.ngfactory';
 import * as import11 from '@angular/core/src/linker/view_container';
 import * as import12 from '../common/tooltip/tooltip.directive.ngfactory';
 import * as import13 from '@angular/core/src/linker/element_ref';
-import * as import14 from '@angular/common/src/location/location';
+import * as import14 from '@angular/common/src/location/location_strategy';
 import * as import15 from '../../../build/common/tooltip/tooltip.service';
 import * as import16 from '@angular/core/src/zone/ng_zone';
 import * as import17 from '../../../build/common/tooltip/tooltip.directive';
@@ -32,6 +32,7 @@ export class Wrapper_GaugeArcComponent {
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
+  /*private*/ _expr_5:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -43,6 +44,7 @@ export class Wrapper_GaugeArcComponent {
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
+    this._expr_5 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -84,6 +86,13 @@ export class Wrapper_GaugeArcComponent {
       this._changed = true;
       this.context.isActive = currValue;
       this._expr_4 = currValue;
+    }
+  }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._expr_5 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -161,7 +170,7 @@ export class View_GaugeArcComponent0 extends import2.AppView<import0.GaugeArcCom
     this._text_0 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
     this._el_1 = import3.createRenderElement(this.renderer,parentRenderNode,':svg:g',new import3.InlineArray4(4,'class','background-arc','ngx-charts-pie-arc',''),(null as any));
     this.compView_1 = new import10.View_PieArcComponent0(this.viewUtils,this,1,this._el_1);
-    this._PieArcComponent_1_3 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_1),this.parentView.injectorGet(import14.Location,this.parentIndex));
+    this._PieArcComponent_1_3 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_1),this.parentView.injectorGet(import14.LocationStrategy,this.parentIndex));
     this._text_2 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_1.create(this._PieArcComponent_1_3.context);
     this._text_3 = this.renderer.createText(parentRenderNode,'\n    ',(null as any));
@@ -169,7 +178,7 @@ export class View_GaugeArcComponent0 extends import2.AppView<import0.GaugeArcCom
     this._vc_4 = new import11.ViewContainer(4,(null as any),this,this._el_4);
     this.compView_4 = new import10.View_PieArcComponent0(this.viewUtils,this,4,this._el_4);
     this._TooltipDirective_4_5 = new import12.Wrapper_TooltipDirective(this.parentView.injectorGet(import15.TooltipService,this.parentIndex),this._vc_4.vcRef,this.renderer,new import13.ElementRef(this._el_4),this.parentView.injectorGet(import16.NgZone,this.parentIndex));
-    this._PieArcComponent_4_6 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_4),this.parentView.injectorGet(import14.Location,this.parentIndex));
+    this._PieArcComponent_4_6 = new import10.Wrapper_PieArcComponent(new import13.ElementRef(this._el_4),this.parentView.injectorGet(import14.LocationStrategy,this.parentIndex));
     this._text_5 = this.renderer.createText((null as any),'\n    ',(null as any));
     this.compView_4.create(this._PieArcComponent_4_6.context);
     this._text_6 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));
@@ -213,10 +222,12 @@ export class View_GaugeArcComponent0 extends import2.AppView<import0.GaugeArcCom
     if (this._PieArcComponent_1_3.ngDoCheck(this,this._el_1,throwOnChange)) { this.compView_1.markAsCheckOnce(); }
     const currVal_4_0_0:any = this.context.tooltipText(this.context.valueArc);
     this._TooltipDirective_4_5.check_tooltipTitle(currVal_4_0_0,throwOnChange,false);
-    const currVal_4_0_1:any = 'top';
-    this._TooltipDirective_4_5.check_tooltipPlacement(currVal_4_0_1,throwOnChange,false);
-    const currVal_4_0_2:any = 'tooltip';
-    this._TooltipDirective_4_5.check_tooltipType(currVal_4_0_2,throwOnChange,false);
+    const currVal_4_0_1:any = this.context.tooltipDisabled;
+    this._TooltipDirective_4_5.check_tooltipDisabled(currVal_4_0_1,throwOnChange,false);
+    const currVal_4_0_2:any = 'top';
+    this._TooltipDirective_4_5.check_tooltipPlacement(currVal_4_0_2,throwOnChange,false);
+    const currVal_4_0_3:any = 'tooltip';
+    this._TooltipDirective_4_5.check_tooltipType(currVal_4_0_3,throwOnChange,false);
     this._TooltipDirective_4_5.ngDoCheck(this,this._el_4,throwOnChange);
     const currVal_4_1_0:any = this.context.colors.getColor(this.context.valueArc.data.name);
     this._PieArcComponent_4_6.check_fill(currVal_4_1_0,throwOnChange,false);

@@ -1,9 +1,8 @@
-"use strict";
-var d3_1 = require('../d3');
-function gridLayout(dims, data, minWidth) {
+import d3 from '../d3';
+export function gridLayout(dims, data, minWidth) {
     var rows = 1;
-    var xScale = d3_1.default.scaleBand();
-    var yScale = d3_1.default.scaleBand();
+    var xScale = d3.scaleBand();
+    var yScale = d3.scaleBand();
     var dataLength = data.length;
     var width = dims.width;
     var height = dims.height;
@@ -45,7 +44,6 @@ function gridLayout(dims, data, minWidth) {
     }
     return res;
 }
-exports.gridLayout = gridLayout;
 function getTotal(results) {
     return results
         .map(function (d) { return d.value; })

@@ -1,12 +1,12 @@
-"use strict";
-var core_1 = require('@angular/core');
-var label_helper_1 = require('../common/label.helper');
-var SeriesVerticalComponent = (function () {
+import { Component, Input, Output, EventEmitter, trigger, style, transition, animate, ChangeDetectionStrategy } from '@angular/core';
+import { formatLabel } from '../common/label.helper';
+export var SeriesVerticalComponent = (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
-        this.select = new core_1.EventEmitter();
-        this.activate = new core_1.EventEmitter();
-        this.deactivate = new core_1.EventEmitter();
+        this.tooltipDisabled = false;
+        this.select = new EventEmitter();
+        this.activate = new EventEmitter();
+        this.deactivate = new EventEmitter();
     }
     SeriesVerticalComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -25,7 +25,7 @@ var SeriesVerticalComponent = (function () {
         this.bars = this.series.map(function (d, index) {
             var value = d.value;
             var label = d.name;
-            var formattedLabel = label_helper_1.formatLabel(label);
+            var formattedLabel = formatLabel(label);
             var roundEdges = _this.type === 'standard';
             var bar = {
                 value: value,
@@ -113,18 +113,18 @@ var SeriesVerticalComponent = (function () {
         return bar.label;
     };
     SeriesVerticalComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-series-vertical]',
-                    template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                    changeDetection: ChangeDetectionStrategy.OnPush,
                     animations: [
-                        core_1.trigger('animationState', [
-                            core_1.transition('* => void', [
-                                core_1.style({
+                        trigger('animationState', [
+                            transition('* => void', [
+                                style({
                                     opacity: 1,
                                     transform: '*',
                                 }),
-                                core_1.animate(500, core_1.style({ opacity: 0, transform: 'scale(0)' }))
+                                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
                             ])
                         ])
                     ]
@@ -133,20 +133,20 @@ var SeriesVerticalComponent = (function () {
     /** @nocollapse */
     SeriesVerticalComponent.ctorParameters = function () { return []; };
     SeriesVerticalComponent.propDecorators = {
-        'dims': [{ type: core_1.Input },],
-        'type': [{ type: core_1.Input },],
-        'series': [{ type: core_1.Input },],
-        'xScale': [{ type: core_1.Input },],
-        'yScale': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'gradient': [{ type: core_1.Input },],
-        'activeEntries': [{ type: core_1.Input },],
-        'seriesName': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-        'activate': [{ type: core_1.Output },],
-        'deactivate': [{ type: core_1.Output },],
+        'dims': [{ type: Input },],
+        'type': [{ type: Input },],
+        'series': [{ type: Input },],
+        'xScale': [{ type: Input },],
+        'yScale': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'tooltipDisabled': [{ type: Input },],
+        'gradient': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'seriesName': [{ type: Input },],
+        'select': [{ type: Output },],
+        'activate': [{ type: Output },],
+        'deactivate': [{ type: Output },],
     };
     return SeriesVerticalComponent;
 }());
-exports.SeriesVerticalComponent = SeriesVerticalComponent;
 //# sourceMappingURL=series-vertical.component.js.map

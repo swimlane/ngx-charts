@@ -21,6 +21,7 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     autoScale: boolean;
     schemeType: string;
     legendPosition: string;
+    tooltipDisabled: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;
@@ -45,7 +46,7 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     activeEntries: any[];
     update(): void;
     hideCircles(): void;
-    onClick(data: any, series: any): void;
+    onClick(data: any, series?: any): void;
     getBubblePadding(): number[];
     setScales(): void;
     getYScale(domain: any, height: any): any;

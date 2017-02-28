@@ -21,7 +21,7 @@ import * as import12 from './heat-map-cell.component.ngfactory';
 import * as import13 from '../../../build/common/tooltip/tooltip.service';
 import * as import14 from '@angular/core/src/linker/element_ref';
 import * as import15 from '@angular/core/src/zone/ng_zone';
-import * as import16 from '@angular/common/src/location/location';
+import * as import16 from '@angular/common/src/location/location_strategy';
 import * as import17 from '../../../build/common/tooltip/tooltip.directive';
 import * as import18 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import19 from '@angular/core/src/linker/template_ref';
@@ -37,6 +37,7 @@ export class Wrapper_HeatCellSeriesComponent {
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
+  /*private*/ _expr_5:any;
   subscription0:any;
   constructor() {
     this._changed = false;
@@ -47,6 +48,7 @@ export class Wrapper_HeatCellSeriesComponent {
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
+    this._expr_5 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -91,6 +93,14 @@ export class Wrapper_HeatCellSeriesComponent {
       this.context.gradient = currValue;
       this._changes['gradient'] = new import1.SimpleChange(this._expr_4,currValue);
       this._expr_4 = currValue;
+    }
+  }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_5,currValue);
+      this._expr_5 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -162,7 +172,7 @@ class View_HeatCellSeriesComponent1 extends import2.AppView<any> {
     this._vc_0 = new import9.ViewContainer(0,(null as any),this,this._el_0);
     this.compView_0 = new import12.View_HeatMapCellComponent0(this.viewUtils,this,0,this._el_0);
     this._TooltipDirective_0_5 = new import11.Wrapper_TooltipDirective(this.parentView.injectorGet(import13.TooltipService,this.parentIndex),this._vc_0.vcRef,this.renderer,new import14.ElementRef(this._el_0),this.parentView.injectorGet(import15.NgZone,this.parentIndex));
-    this._HeatMapCellComponent_0_6 = new import12.Wrapper_HeatMapCellComponent(new import14.ElementRef(this._el_0),this.parentView.injectorGet(import16.Location,this.parentIndex));
+    this._HeatMapCellComponent_0_6 = new import12.Wrapper_HeatMapCellComponent(new import14.ElementRef(this._el_0),this.parentView.injectorGet(import16.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._HeatMapCellComponent_0_6.context);
     this._el_1 = this.renderer.createTemplateAnchor((null as any),(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray16(12,'select',(null as any),'focusin',(null as any),'blur',(null as any),'mouseenter',(null as any),'mouseleave',(null as any),'click',(null as any)),this.eventHandler(this.handleEvent_0));
@@ -178,10 +188,12 @@ class View_HeatCellSeriesComponent1 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.getTooltipText(this.context.$implicit);
     this._TooltipDirective_0_5.check_tooltipTitle(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = 'top';
-    this._TooltipDirective_0_5.check_tooltipPlacement(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = 'tooltip';
-    this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.tooltipDisabled;
+    this._TooltipDirective_0_5.check_tooltipDisabled(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = 'top';
+    this._TooltipDirective_0_5.check_tooltipPlacement(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = 'tooltip';
+    this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_3,throwOnChange,false);
     this._TooltipDirective_0_5.ngDoCheck(this,this._el_0,throwOnChange);
     const currVal_0_1_0:any = this.context.$implicit.fill;
     this._HeatMapCellComponent_0_6.check_fill(currVal_0_1_0,throwOnChange,false);

@@ -1,18 +1,17 @@
-"use strict";
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var id_1 = require('../utils/id');
-var d3_1 = require('../d3');
-var BarComponent = (function () {
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { id } from '../utils/id';
+import d3 from '../d3';
+export var BarComponent = (function () {
     function BarComponent(element, location) {
         this.location = location;
         this.roundEdges = true;
         this.gradient = false;
         this.offset = 0;
         this.isActive = false;
-        this.select = new core_1.EventEmitter();
-        this.activate = new core_1.EventEmitter();
-        this.deactivate = new core_1.EventEmitter();
+        this.select = new EventEmitter();
+        this.activate = new EventEmitter();
+        this.deactivate = new EventEmitter();
         this.initialized = false;
         this.hasGradient = false;
         this.element = element.nativeElement;
@@ -27,8 +26,10 @@ var BarComponent = (function () {
         }
     };
     BarComponent.prototype.update = function () {
-        var pageUrl = this.location.path();
-        this.gradientId = 'grad' + id_1.id().toString();
+        var pageUrl = this.location instanceof PathLocationStrategy
+            ? this.location.path()
+            : '';
+        this.gradientId = 'grad' + id().toString();
         this.gradientFill = "url(" + pageUrl + "#" + this.gradientId + ")";
         if (this.gradient || this.stops) {
             this.gradientStops = this.getGradient();
@@ -44,7 +45,7 @@ var BarComponent = (function () {
         setTimeout(this.update.bind(this), 100);
     };
     BarComponent.prototype.animateToCurrentForm = function () {
-        var node = d3_1.default.select(this.element).select('.bar');
+        var node = d3.select(this.element).select('.bar');
         var path = this.getPath();
         node.transition().duration(750)
             .attr('d', path);
@@ -166,37 +167,36 @@ var BarComponent = (function () {
         this.deactivate.emit(this.data);
     };
     BarComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-bar]',
                     template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     BarComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: common_1.Location, },
+        { type: ElementRef, },
+        { type: LocationStrategy, },
     ]; };
     BarComponent.propDecorators = {
-        'fill': [{ type: core_1.Input },],
-        'data': [{ type: core_1.Input },],
-        'width': [{ type: core_1.Input },],
-        'height': [{ type: core_1.Input },],
-        'x': [{ type: core_1.Input },],
-        'y': [{ type: core_1.Input },],
-        'orientation': [{ type: core_1.Input },],
-        'roundEdges': [{ type: core_1.Input },],
-        'gradient': [{ type: core_1.Input },],
-        'offset': [{ type: core_1.Input },],
-        'isActive': [{ type: core_1.Input },],
-        'stops': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-        'activate': [{ type: core_1.Output },],
-        'deactivate': [{ type: core_1.Output },],
-        'onMouseEnter': [{ type: core_1.HostListener, args: ['mouseenter',] },],
-        'onMouseLeave': [{ type: core_1.HostListener, args: ['mouseleave',] },],
+        'fill': [{ type: Input },],
+        'data': [{ type: Input },],
+        'width': [{ type: Input },],
+        'height': [{ type: Input },],
+        'x': [{ type: Input },],
+        'y': [{ type: Input },],
+        'orientation': [{ type: Input },],
+        'roundEdges': [{ type: Input },],
+        'gradient': [{ type: Input },],
+        'offset': [{ type: Input },],
+        'isActive': [{ type: Input },],
+        'stops': [{ type: Input },],
+        'select': [{ type: Output },],
+        'activate': [{ type: Output },],
+        'deactivate': [{ type: Output },],
+        'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
+        'onMouseLeave': [{ type: HostListener, args: ['mouseleave',] },],
     };
     return BarComponent;
 }());
-exports.BarComponent = BarComponent;
 //# sourceMappingURL=bar.component.js.map

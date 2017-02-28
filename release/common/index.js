@@ -1,26 +1,22 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(require('./chart-common.module'));
-__export(require('./legend'));
-__export(require('./tooltip'));
-__export(require('./count'));
-__export(require('./timeline'));
-__export(require('./color.helper'));
-__export(require('./charts'));
-__export(require('./area.component'));
-__export(require('./area-tooltip.component'));
-__export(require('./base-chart.component'));
-__export(require('./circle.component'));
-__export(require('./circle-series.component'));
-__export(require('./grid-layout.helper'));
-__export(require('./grid-panel.component'));
-__export(require('./grid-panel-series.component'));
-__export(require('./svg-linear-gradient.component'));
-__export(require('./svg-radial-gradient.component'));
-__export(require('./tick-format.helper'));
-__export(require('./trim-label.helper'));
-__export(require('./view-dimensions.helper'));
-__export(require('./label.helper'));
+export * from './chart-common.module';
+export * from './legend';
+export * from './tooltip';
+export * from './count';
+export * from './timeline';
+export * from './color.helper';
+export * from './charts';
+export * from './area.component';
+export * from './area-tooltip.component';
+export * from './base-chart.component';
+export * from './circle.component';
+export * from './circle-series.component';
+export * from './grid-layout.helper';
+export * from './grid-panel.component';
+export * from './grid-panel-series.component';
+export * from './svg-linear-gradient.component';
+export * from './svg-radial-gradient.component';
+export * from './tick-format.helper';
+export * from './trim-label.helper';
+export * from './view-dimensions.helper';
+export * from './label.helper';
 //# sourceMappingURL=index.js.map

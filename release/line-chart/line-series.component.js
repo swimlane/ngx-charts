@@ -1,10 +1,9 @@
-"use strict";
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var d3_1 = require('../d3');
-var id_1 = require('../utils/id');
-var sort_1 = require('../utils/sort');
-var LineSeriesComponent = (function () {
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import d3 from '../d3';
+import { id } from '../utils/id';
+import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
+export var LineSeriesComponent = (function () {
     function LineSeriesComponent(location) {
         this.location = location;
     }
@@ -23,7 +22,7 @@ var LineSeriesComponent = (function () {
     };
     LineSeriesComponent.prototype.getLineGenerator = function () {
         var _this = this;
-        return d3_1.default.line()
+        return d3.line()
             .x(function (d) {
             var label = d.name;
             var value;
@@ -43,7 +42,7 @@ var LineSeriesComponent = (function () {
     };
     LineSeriesComponent.prototype.getRangeGenerator = function () {
         var _this = this;
-        return d3_1.default.area()
+        return d3.area()
             .x(function (d) {
             var label = d.name;
             var value;
@@ -68,7 +67,7 @@ var LineSeriesComponent = (function () {
             var label = d.name;
             return _this.xScale(label);
         };
-        return d3_1.default.area()
+        return d3.area()
             .x(xProperty)
             .y0(function () { return _this.yScale.range()[0]; })
             .y1(function (d) { return _this.yScale(d.value); })
@@ -76,21 +75,23 @@ var LineSeriesComponent = (function () {
     };
     LineSeriesComponent.prototype.sortData = function (data) {
         if (this.scaleType === 'linear') {
-            data = sort_1.sortLinear(data, 'name');
+            data = sortLinear(data, 'name');
         }
         else if (this.scaleType === 'time') {
-            data = sort_1.sortByTime(data, 'name');
+            data = sortByTime(data, 'name');
         }
         else {
-            data = sort_1.sortByDomain(data, 'name', 'asc', this.xScale.domain());
+            data = sortByDomain(data, 'name', 'asc', this.xScale.domain());
         }
         return data;
     };
     LineSeriesComponent.prototype.updateGradients = function () {
         if (this.colors.scaleType === 'linear') {
             this.hasGradient = true;
-            var pageUrl = this.location.path();
-            this.gradientId = 'grad' + id_1.id().toString();
+            var pageUrl = this.location instanceof PathLocationStrategy
+                ? this.location.path()
+                : '';
+            this.gradientId = 'grad' + id().toString();
             this.gradientUrl = "url(" + pageUrl + "#" + this.gradientId + ")";
             var values = this.data.series.map(function (d) { return d.value; });
             var max = Math.max.apply(Math, values);
@@ -121,27 +122,26 @@ var LineSeriesComponent = (function () {
         return item === undefined;
     };
     LineSeriesComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-line-series]',
                     template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient ng-if=\"hasGradient\"\n          [color]=\"colors.getColor(data.name)\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     LineSeriesComponent.ctorParameters = function () { return [
-        { type: common_1.Location, },
+        { type: LocationStrategy, },
     ]; };
     LineSeriesComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'xScale': [{ type: core_1.Input },],
-        'yScale': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'scaleType': [{ type: core_1.Input },],
-        'curve': [{ type: core_1.Input },],
-        'activeEntries': [{ type: core_1.Input },],
-        'rangeFillOpacity': [{ type: core_1.Input },],
+        'data': [{ type: Input },],
+        'xScale': [{ type: Input },],
+        'yScale': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'scaleType': [{ type: Input },],
+        'curve': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'rangeFillOpacity': [{ type: Input },],
     };
     return LineSeriesComponent;
 }());
-exports.LineSeriesComponent = LineSeriesComponent;
 //# sourceMappingURL=line-series.component.js.map

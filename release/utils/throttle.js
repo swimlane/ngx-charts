@@ -1,4 +1,3 @@
-"use strict";
 /**
  * Throttle a function
  *
@@ -8,7 +7,7 @@
  * @param {*}      [options]
  * @returns
  */
-function throttle(func, wait, options) {
+export function throttle(func, wait, options) {
     options = options || {};
     var context;
     var args;
@@ -40,7 +39,6 @@ function throttle(func, wait, options) {
         return result;
     };
 }
-exports.throttle = throttle;
 /**
  * Throttle decorator
  *
@@ -54,7 +52,7 @@ exports.throttle = throttle;
  * @param {*} [options]
  * @returns
  */
-function throttleable(duration, options) {
+export function throttleable(duration, options) {
     return function innerDecorator(target, key, descriptor) {
         return {
             configurable: true,
@@ -70,5 +68,4 @@ function throttleable(duration, options) {
         };
     };
 }
-exports.throttleable = throttleable;
 //# sourceMappingURL=throttle.js.map

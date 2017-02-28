@@ -1,13 +1,12 @@
-"use strict";
-var core_1 = require('@angular/core');
-var label_helper_1 = require('../label.helper');
-var LegendComponent = (function () {
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ChangeDetectorRef, NgZone, ViewEncapsulation } from '@angular/core';
+import { formatLabel } from '../label.helper';
+export var LegendComponent = (function () {
     function LegendComponent(cd, zone) {
         this.cd = cd;
         this.zone = zone;
-        this.labelClick = new core_1.EventEmitter();
-        this.labelActivate = new core_1.EventEmitter();
-        this.labelDeactivate = new core_1.EventEmitter();
+        this.labelClick = new EventEmitter();
+        this.labelActivate = new EventEmitter();
+        this.labelDeactivate = new EventEmitter();
         this.legendEntries = [];
     }
     LegendComponent.prototype.ngOnChanges = function (changes) {
@@ -23,7 +22,7 @@ var LegendComponent = (function () {
     LegendComponent.prototype.getLegendEntries = function () {
         var items = [];
         var _loop_1 = function(label) {
-            var formattedLabel = label_helper_1.formatLabel(label);
+            var formattedLabel = formatLabel(label);
             var idx = items.findIndex(function (i) {
                 return i.label === formattedLabel;
             });
@@ -66,31 +65,30 @@ var LegendComponent = (function () {
         return item.label;
     };
     LegendComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'ngx-charts-legend',
                     template: "\n    <div [style.width.px]=\"width\">\n      <header class=\"legend-title\">\n        <span class=\"legend-icon icon-eye\"></span>\n        <span class=\"legend-title-text\">{{title}}</span>\n      </header>\n      <div class=\"legend-wrap\">\n        <ul class=\"legend-labels\"\n          [style.max-height.px]=\"height - 45\">\n          <li\n            *ngFor=\"let entry of legendEntries; trackBy: trackBy\"\n            class=\"legend-label\">\n            <ngx-charts-legend-entry\n              [label]=\"entry.label\"\n              [formattedLabel]=\"entry.formattedLabel\"\n              [color]=\"entry.color\"\n              [isActive]=\"isActive(entry)\"\n              (select)=\"labelClick.emit($event)\"\n              (activate)=\"activate($event)\"\n              (deactivate)=\"deactivate($event)\">\n            </ngx-charts-legend-entry>\n          </li>\n        </ul>\n      </div>\n    </div>\n  ",
                     styleUrls: ['./legend.component.css'],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     LegendComponent.ctorParameters = function () { return [
-        { type: core_1.ChangeDetectorRef, },
-        { type: core_1.NgZone, },
+        { type: ChangeDetectorRef, },
+        { type: NgZone, },
     ]; };
     LegendComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'title': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'height': [{ type: core_1.Input },],
-        'width': [{ type: core_1.Input },],
-        'activeEntries': [{ type: core_1.Input },],
-        'labelClick': [{ type: core_1.Output },],
-        'labelActivate': [{ type: core_1.Output },],
-        'labelDeactivate': [{ type: core_1.Output },],
+        'data': [{ type: Input },],
+        'title': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'height': [{ type: Input },],
+        'width': [{ type: Input },],
+        'activeEntries': [{ type: Input },],
+        'labelClick': [{ type: Output },],
+        'labelActivate': [{ type: Output },],
+        'labelDeactivate': [{ type: Output },],
     };
     return LegendComponent;
 }());
-exports.LegendComponent = LegendComponent;
 //# sourceMappingURL=legend.component.js.map

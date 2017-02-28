@@ -1,27 +1,24 @@
-"use strict";
-var core_1 = require('@angular/core');
-var chart_common_module_1 = require('../common/chart-common.module');
-var tree_map_cell_component_1 = require('./tree-map-cell.component');
-exports.TreeMapCellComponent = tree_map_cell_component_1.TreeMapCellComponent;
-var tree_map_cell_series_component_1 = require('./tree-map-cell-series.component');
-exports.TreeMapCellSeriesComponent = tree_map_cell_series_component_1.TreeMapCellSeriesComponent;
-var tree_map_component_1 = require('./tree-map.component');
-exports.TreeMapComponent = tree_map_component_1.TreeMapComponent;
-var TreeMapModule = (function () {
+import { NgModule } from '@angular/core';
+import { ChartCommonModule } from '../common/chart-common.module';
+import { TreeMapCellComponent } from './tree-map-cell.component';
+import { TreeMapCellSeriesComponent } from './tree-map-cell-series.component';
+import { TreeMapComponent } from './tree-map.component';
+export { TreeMapCellComponent, TreeMapCellSeriesComponent, TreeMapComponent };
+export var TreeMapModule = (function () {
     function TreeMapModule() {
     }
     TreeMapModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [chart_common_module_1.ChartCommonModule],
+        { type: NgModule, args: [{
+                    imports: [ChartCommonModule],
                     declarations: [
-                        tree_map_cell_component_1.TreeMapCellComponent,
-                        tree_map_cell_series_component_1.TreeMapCellSeriesComponent,
-                        tree_map_component_1.TreeMapComponent
+                        TreeMapCellComponent,
+                        TreeMapCellSeriesComponent,
+                        TreeMapComponent
                     ],
                     exports: [
-                        tree_map_cell_component_1.TreeMapCellComponent,
-                        tree_map_cell_series_component_1.TreeMapCellSeriesComponent,
-                        tree_map_component_1.TreeMapComponent
+                        TreeMapCellComponent,
+                        TreeMapCellSeriesComponent,
+                        TreeMapComponent
                     ]
                 },] },
     ];
@@ -29,5 +26,4 @@ var TreeMapModule = (function () {
     TreeMapModule.ctorParameters = function () { return []; };
     return TreeMapModule;
 }());
-exports.TreeMapModule = TreeMapModule;
 //# sourceMappingURL=tree-map.module.js.map

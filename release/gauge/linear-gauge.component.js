@@ -1,15 +1,14 @@
-"use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
-var d3_1 = require('../d3');
-var base_chart_component_1 = require('../common/base-chart.component');
-var view_dimensions_helper_1 = require('../common/view-dimensions.helper');
-var color_helper_1 = require('../common/color.helper');
-var LinearGaugeComponent = (function (_super) {
+import { Component, Input, ViewChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import d3 from '../d3';
+import { BaseChartComponent } from '../common/base-chart.component';
+import { calculateViewDimensions } from '../common/view-dimensions.helper';
+import { ColorHelper } from '../common/color.helper';
+export var LinearGaugeComponent = (function (_super) {
     __extends(LinearGaugeComponent, _super);
     function LinearGaugeComponent() {
         _super.apply(this, arguments);
@@ -43,7 +42,7 @@ var LinearGaugeComponent = (function (_super) {
                 _this.max = Math.max(_this.max, _this.previousValue);
                 _this.min = Math.min(_this.min, _this.previousValue);
             }
-            _this.dims = view_dimensions_helper_1.calculateViewDimensions({
+            _this.dims = calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
                 margins: _this.margin
@@ -66,7 +65,7 @@ var LinearGaugeComponent = (function (_super) {
         return [this.min, this.max];
     };
     LinearGaugeComponent.prototype.getValueScale = function () {
-        return d3_1.default.scaleLinear()
+        return d3.scaleLinear()
             .range([0, this.dims.width])
             .domain(this.valueDomain);
     };
@@ -119,32 +118,31 @@ var LinearGaugeComponent = (function (_super) {
         });
     };
     LinearGaugeComponent.prototype.setColors = function () {
-        this.colors = new color_helper_1.ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
+        this.colors = new ColorHelper(this.scheme, 'ordinal', [this.value], this.customColors);
     };
     LinearGaugeComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'ngx-charts-linear-gauge',
                     template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\"\n      (click)=\"onClick()\">\n      <svg:g class=\"linear-gauge chart\">\n        <svg:g ngx-charts-bar \n          class=\"background-bar\"\n          [width]=\"dims.width\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n        <svg:g ngx-charts-bar \n          [width]=\"valueScale(value)\"\n          [height]=\"3\"\n          [x]=\"margin[3]\"\n          [y]=\"dims.height / 2 + margin[0] - 2\"\n          [fill]=\"colors.getColor(units)\"\n          [data]=\"{}\"\n          [orientation]=\"'horizontal'\"\n          [roundEdges]=\"true\">\n        </svg:g>\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"5\" \n          x2=\"0\"\n          y2=\"15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n\n        <svg:line \n          *ngIf=\"hasPreviousValue\"\n          [attr.transform]=\"transformLine\"\n          x1=\"0\"\n          y1=\"-5\" \n          x2=\"0\"\n          y2=\"-15\"\n          [attr.stroke]=\"colors.getColor(units)\"          \n        />\n        \n        <svg:g [attr.transform]=\"transform\">        \n          <svg:g [attr.transform]=\"valueTranslate\">\n            <svg:text #valueTextEl\n              class=\"value\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"valueTextTransform\"          \n              alignment-baseline=\"after-edge\">\n              {{displayValue}}\n            </svg:text>        \n          </svg:g>\n          \n          <svg:g [attr.transform]=\"unitsTranslate\">\n            <svg:text #unitsTextEl\n              class=\"units\"\n              [style.textAnchor]=\"'middle'\"\n              [attr.transform]=\"unitsTextTransform\"          \n              alignment-baseline=\"before-edge\">\n              {{units}}\n            </svg:text>        \n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     styleUrls: [
                         '../common/base-chart.component.css',
                         './linear-gauge.component.css'
                     ],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
                 },] },
     ];
     /** @nocollapse */
     LinearGaugeComponent.ctorParameters = function () { return []; };
     LinearGaugeComponent.propDecorators = {
-        'min': [{ type: core_1.Input },],
-        'max': [{ type: core_1.Input },],
-        'value': [{ type: core_1.Input },],
-        'units': [{ type: core_1.Input },],
-        'previousValue': [{ type: core_1.Input },],
-        'valueTextEl': [{ type: core_1.ViewChild, args: ['valueTextEl',] },],
-        'unitsTextEl': [{ type: core_1.ViewChild, args: ['unitsTextEl',] },],
+        'min': [{ type: Input },],
+        'max': [{ type: Input },],
+        'value': [{ type: Input },],
+        'units': [{ type: Input },],
+        'previousValue': [{ type: Input },],
+        'valueTextEl': [{ type: ViewChild, args: ['valueTextEl',] },],
+        'unitsTextEl': [{ type: ViewChild, args: ['unitsTextEl',] },],
     };
     return LinearGaugeComponent;
-}(base_chart_component_1.BaseChartComponent));
-exports.LinearGaugeComponent = LinearGaugeComponent;
+}(BaseChartComponent));
 //# sourceMappingURL=linear-gauge.component.js.map

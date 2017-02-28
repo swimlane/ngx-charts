@@ -1,10 +1,9 @@
-"use strict";
-var core_1 = require('@angular/core');
-var x_axis_ticks_component_1 = require('./x-axis-ticks.component');
-var XAxisComponent = (function () {
+import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { XAxisTicksComponent } from './x-axis-ticks.component';
+export var XAxisComponent = (function () {
     function XAxisComponent() {
         this.showGridLines = false;
-        this.dimensionsChanged = new core_1.EventEmitter();
+        this.dimensionsChanged = new EventEmitter();
         this.xAxisClassName = 'x axis';
         this.xOrient = 'bottom';
         this.labelOffset = 80;
@@ -35,27 +34,26 @@ var XAxisComponent = (function () {
         }
     };
     XAxisComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-x-axis]',
                     template: "\n    <svg:g\n      [attr.class]=\"xAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-x-axis-ticks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"xScale\"\n        [orient]=\"xOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineHeight]=\"dims.height\"\n        [width]=\"dims.width\"\n        (dimensionsChanged)=\"emitTicksHeight($event)\"\n      />\n\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"'bottom'\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     XAxisComponent.ctorParameters = function () { return []; };
     XAxisComponent.propDecorators = {
-        'xScale': [{ type: core_1.Input },],
-        'dims': [{ type: core_1.Input },],
-        'tickFormatting': [{ type: core_1.Input },],
-        'showGridLines': [{ type: core_1.Input },],
-        'showLabel': [{ type: core_1.Input },],
-        'labelText': [{ type: core_1.Input },],
-        'xAxisTickInterval': [{ type: core_1.Input },],
-        'xAxisTickCount': [{ type: core_1.Input },],
-        'dimensionsChanged': [{ type: core_1.Output },],
-        'ticksComponent': [{ type: core_1.ViewChild, args: [x_axis_ticks_component_1.XAxisTicksComponent,] },],
+        'xScale': [{ type: Input },],
+        'dims': [{ type: Input },],
+        'tickFormatting': [{ type: Input },],
+        'showGridLines': [{ type: Input },],
+        'showLabel': [{ type: Input },],
+        'labelText': [{ type: Input },],
+        'xAxisTickInterval': [{ type: Input },],
+        'xAxisTickCount': [{ type: Input },],
+        'dimensionsChanged': [{ type: Output },],
+        'ticksComponent': [{ type: ViewChild, args: [XAxisTicksComponent,] },],
     };
     return XAxisComponent;
 }());
-exports.XAxisComponent = XAxisComponent;
 //# sourceMappingURL=x-axis.component.js.map

@@ -9,6 +9,7 @@ export declare class PieSeriesComponent implements OnChanges {
     showLabels: any;
     gradient: boolean;
     activeEntries: any[];
+    tooltipDisabled: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

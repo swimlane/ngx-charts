@@ -1,6 +1,5 @@
-"use strict";
-var d3_1 = require('../d3');
-function getScaleType(values) {
+import d3 from '../d3';
+export function getScaleType(values) {
     var date = true;
     var num = true;
     for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
@@ -18,14 +17,13 @@ function getScaleType(values) {
         return 'linear';
     return 'ordinal';
 }
-exports.getScaleType = getScaleType;
 function isDate(value) {
     if (value instanceof Date) {
         return true;
     }
     return false;
 }
-function getDomain(values, scaleType, autoScale) {
+export function getDomain(values, scaleType, autoScale) {
     var domain = [];
     if (scaleType === 'time') {
         var min = Math.min.apply(Math, values);
@@ -46,16 +44,15 @@ function getDomain(values, scaleType, autoScale) {
     }
     return domain;
 }
-exports.getDomain = getDomain;
-function getScale(domain, range, scaleType, roundDomains) {
+export function getScale(domain, range, scaleType, roundDomains) {
     var scale;
     if (scaleType === 'time') {
-        scale = d3_1.default.scaleTime()
+        scale = d3.scaleTime()
             .range(range)
             .domain(domain);
     }
     else if (scaleType === 'linear') {
-        scale = d3_1.default.scaleLinear()
+        scale = d3.scaleLinear()
             .range(range)
             .domain(domain);
         if (roundDomains) {
@@ -63,11 +60,10 @@ function getScale(domain, range, scaleType, roundDomains) {
         }
     }
     else if (scaleType === 'ordinal') {
-        scale = d3_1.default.scalePoint()
+        scale = d3.scalePoint()
             .range(range)
             .domain(domain);
     }
     return scale;
 }
-exports.getScale = getScale;
 //# sourceMappingURL=bubble-chart.utils.js.map

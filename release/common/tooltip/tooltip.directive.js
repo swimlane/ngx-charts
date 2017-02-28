@@ -1,11 +1,10 @@
-"use strict";
-var core_1 = require('@angular/core');
-var position_1 = require('./position');
-var style_type_1 = require('./style.type');
-var alignment_type_1 = require('./alignment.type');
-var show_type_1 = require('./show.type');
-var tooltip_service_1 = require('./tooltip.service');
-var TooltipDirective = (function () {
+import { Directive, Input, Output, EventEmitter, HostListener, ViewContainerRef, ElementRef, Renderer, NgZone } from '@angular/core';
+import { PlacementTypes } from './position';
+import { StyleTypes } from './style.type';
+import { AlignmentTypes } from './alignment.type';
+import { ShowTypes } from './show.type';
+import { TooltipService } from './tooltip.service';
+export var TooltipDirective = (function () {
     function TooltipDirective(tooltipService, viewContainerRef, renderer, element, zone) {
         this.tooltipService = tooltipService;
         this.viewContainerRef = viewContainerRef;
@@ -18,29 +17,29 @@ var TooltipDirective = (function () {
         this.tooltipSpacing = 10;
         this.tooltipDisabled = false;
         this.tooltipShowCaret = true;
-        this.tooltipPlacement = position_1.PlacementTypes.top;
-        this.tooltipAlignment = alignment_type_1.AlignmentTypes.center;
-        this.tooltipType = style_type_1.StyleTypes.popover;
+        this.tooltipPlacement = PlacementTypes.top;
+        this.tooltipAlignment = AlignmentTypes.center;
+        this.tooltipType = StyleTypes.popover;
         this.tooltipCloseOnClickOutside = true;
         this.tooltipCloseOnMouseLeave = true;
         this.tooltipHideTimeout = 300;
         this.tooltipShowTimeout = 100;
-        this.tooltipShowEvent = show_type_1.ShowTypes.all;
-        this.show = new core_1.EventEmitter();
-        this.hide = new core_1.EventEmitter();
+        this.tooltipShowEvent = ShowTypes.all;
+        this.show = new EventEmitter();
+        this.hide = new EventEmitter();
     }
     Object.defineProperty(TooltipDirective.prototype, "listensForFocus", {
         get: function () {
-            return this.tooltipShowEvent === show_type_1.ShowTypes.all ||
-                this.tooltipShowEvent === show_type_1.ShowTypes.focus;
+            return this.tooltipShowEvent === ShowTypes.all ||
+                this.tooltipShowEvent === ShowTypes.focus;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(TooltipDirective.prototype, "listensForHover", {
         get: function () {
-            return this.tooltipShowEvent === show_type_1.ShowTypes.all ||
-                this.tooltipShowEvent === show_type_1.ShowTypes.mouseover;
+            return this.tooltipShowEvent === ShowTypes.all ||
+                this.tooltipShowEvent === ShowTypes.mouseover;
         },
         enumerable: true,
         configurable: true
@@ -163,42 +162,41 @@ var TooltipDirective = (function () {
         };
     };
     TooltipDirective.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngx-tooltip]' },] },
+        { type: Directive, args: [{ selector: '[ngx-tooltip]' },] },
     ];
     /** @nocollapse */
     TooltipDirective.ctorParameters = function () { return [
-        { type: tooltip_service_1.TooltipService, },
-        { type: core_1.ViewContainerRef, },
-        { type: core_1.Renderer, },
-        { type: core_1.ElementRef, },
-        { type: core_1.NgZone, },
+        { type: TooltipService, },
+        { type: ViewContainerRef, },
+        { type: Renderer, },
+        { type: ElementRef, },
+        { type: NgZone, },
     ]; };
     TooltipDirective.propDecorators = {
-        'tooltipCssClass': [{ type: core_1.Input },],
-        'tooltipTitle': [{ type: core_1.Input },],
-        'tooltipAppendToBody': [{ type: core_1.Input },],
-        'tooltipSpacing': [{ type: core_1.Input },],
-        'tooltipDisabled': [{ type: core_1.Input },],
-        'tooltipShowCaret': [{ type: core_1.Input },],
-        'tooltipPlacement': [{ type: core_1.Input },],
-        'tooltipAlignment': [{ type: core_1.Input },],
-        'tooltipType': [{ type: core_1.Input },],
-        'tooltipCloseOnClickOutside': [{ type: core_1.Input },],
-        'tooltipCloseOnMouseLeave': [{ type: core_1.Input },],
-        'tooltipHideTimeout': [{ type: core_1.Input },],
-        'tooltipShowTimeout': [{ type: core_1.Input },],
-        'tooltipTemplate': [{ type: core_1.Input },],
-        'tooltipShowEvent': [{ type: core_1.Input },],
-        'tooltipContext': [{ type: core_1.Input },],
-        'show': [{ type: core_1.Output },],
-        'hide': [{ type: core_1.Output },],
-        'onFocus': [{ type: core_1.HostListener, args: ['focusin',] },],
-        'onBlur': [{ type: core_1.HostListener, args: ['blur',] },],
-        'onMouseEnter': [{ type: core_1.HostListener, args: ['mouseenter',] },],
-        'onMouseLeave': [{ type: core_1.HostListener, args: ['mouseleave', ['$event.target'],] },],
-        'onMouseClick': [{ type: core_1.HostListener, args: ['click',] },],
+        'tooltipCssClass': [{ type: Input },],
+        'tooltipTitle': [{ type: Input },],
+        'tooltipAppendToBody': [{ type: Input },],
+        'tooltipSpacing': [{ type: Input },],
+        'tooltipDisabled': [{ type: Input },],
+        'tooltipShowCaret': [{ type: Input },],
+        'tooltipPlacement': [{ type: Input },],
+        'tooltipAlignment': [{ type: Input },],
+        'tooltipType': [{ type: Input },],
+        'tooltipCloseOnClickOutside': [{ type: Input },],
+        'tooltipCloseOnMouseLeave': [{ type: Input },],
+        'tooltipHideTimeout': [{ type: Input },],
+        'tooltipShowTimeout': [{ type: Input },],
+        'tooltipTemplate': [{ type: Input },],
+        'tooltipShowEvent': [{ type: Input },],
+        'tooltipContext': [{ type: Input },],
+        'show': [{ type: Output },],
+        'hide': [{ type: Output },],
+        'onFocus': [{ type: HostListener, args: ['focusin',] },],
+        'onBlur': [{ type: HostListener, args: ['blur',] },],
+        'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
+        'onMouseLeave': [{ type: HostListener, args: ['mouseleave', ['$event.target'],] },],
+        'onMouseClick': [{ type: HostListener, args: ['click',] },],
     };
     return TooltipDirective;
 }());
-exports.TooltipDirective = TooltipDirective;
 //# sourceMappingURL=tooltip.directive.js.map

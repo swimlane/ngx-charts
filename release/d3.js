@@ -1,19 +1,17 @@
 /// <reference path="../node_modules/awesome-typescript-loader/lib/runtime.d.ts" />
-"use strict";
-var array = require('d3-array');
-var brush = require('d3-brush');
-var color = require('d3-color');
-var force = require('d3-force');
-var format = require('d3-format');
-var interpolate = require('d3-interpolate');
-var scales = require('d3-scale');
-var selection = require('d3-selection');
-var shape = require('d3-shape');
-var hierarchy = require('d3-hierarchy');
-var tInterval = require('d3-time');
-var tFormat = require('d3-time-format');
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+import * as array from 'd3-array';
+import * as brush from 'd3-brush';
+import * as color from 'd3-color';
+import * as force from 'd3-force';
+import * as format from 'd3-format';
+import * as interpolate from 'd3-interpolate';
+import * as scales from 'd3-scale';
+import * as selection from 'd3-selection';
+import * as shape from 'd3-shape';
+import * as hierarchy from 'd3-hierarchy';
+import * as tInterval from 'd3-time';
+import * as tFormat from 'd3-time-format';
+export default {
     arc: shape.arc,
     area: shape.area,
     brush: brush.brush,

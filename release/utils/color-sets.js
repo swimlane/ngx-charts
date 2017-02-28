@@ -1,5 +1,4 @@
-"use strict";
-exports.colorSets = [
+export var colorSets = [
     {
         name: 'vivid',
         selectable: true,

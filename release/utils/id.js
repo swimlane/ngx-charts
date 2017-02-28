@@ -1,4 +1,3 @@
-"use strict";
 var cache = {};
 /**
  * Generates a short id.
@@ -10,7 +9,7 @@ var cache = {};
  *
  *   Example: `ebgf`
  */
-function id() {
+export function id() {
     var newId = ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4);
     // append a 'a' because neo gets mad
     newId = "a" + newId;
@@ -21,5 +20,4 @@ function id() {
     }
     return id();
 }
-exports.id = id;
 //# sourceMappingURL=id.js.map

@@ -1,5 +1,5 @@
 import { ElementRef, NgZone, ChangeDetectorRef, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
-import { Location } from '@angular/common';
+import { LocationStrategy } from '@angular/common';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
 import { VisibilityObserver } from '../utils';
@@ -7,7 +7,7 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
     protected chartElement: ElementRef;
     protected zone: NgZone;
     protected cd: ChangeDetectorRef;
-    protected location: Location;
+    protected location: LocationStrategy;
     results: any;
     view: number[];
     scheme: any;
@@ -18,7 +18,7 @@ export declare class BaseChartComponent implements OnChanges, AfterViewInit, OnD
     height: number;
     resizeSubscription: any;
     visibilityObserver: VisibilityObserver;
-    constructor(chartElement: ElementRef, zone: NgZone, cd: ChangeDetectorRef, location: Location);
+    constructor(chartElement: ElementRef, zone: NgZone, cd: ChangeDetectorRef, location: LocationStrategy);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(changes: SimpleChanges): void;

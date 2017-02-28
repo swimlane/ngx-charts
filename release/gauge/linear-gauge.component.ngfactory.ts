@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from '../common/base-chart.component.css.ngstyle';
 import * as import13 from './linear-gauge.component.css.ngstyle';
 import * as import14 from '@angular/core/src/linker/view_container';
@@ -179,7 +179,7 @@ class View_LinearGaugeComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-linear-gauge',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_LinearGaugeComponent0(this.viewUtils,this,0,this._el_0);
-    this._LinearGaugeComponent_0_3 = new Wrapper_LinearGaugeComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._LinearGaugeComponent_0_3 = new Wrapper_LinearGaugeComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._LinearGaugeComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._LinearGaugeComponent_0_3.context);
@@ -361,13 +361,13 @@ export class View_LinearGaugeComponent0 extends import2.AppView<import0.LinearGa
     this._text_4 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_5 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray4(4,'class','background-bar','ngx-charts-bar',''),(null as any));
     this.compView_5 = new import20.View_BarComponent0(this.viewUtils,this,5,this._el_5);
-    this._BarComponent_5_3 = new import20.Wrapper_BarComponent(new import9.ElementRef(this._el_5),this.parentView.injectorGet(import11.Location,this.parentIndex));
+    this._BarComponent_5_3 = new import20.Wrapper_BarComponent(new import9.ElementRef(this._el_5),this.parentView.injectorGet(import11.LocationStrategy,this.parentIndex));
     this._text_6 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_5.create(this._BarComponent_5_3.context);
     this._text_7 = this.renderer.createText(this._el_3,'\n        ',(null as any));
     this._el_8 = import3.createRenderElement(this.renderer,this._el_3,':svg:g',new import3.InlineArray2(2,'ngx-charts-bar',''),(null as any));
     this.compView_8 = new import20.View_BarComponent0(this.viewUtils,this,8,this._el_8);
-    this._BarComponent_8_3 = new import20.Wrapper_BarComponent(new import9.ElementRef(this._el_8),this.parentView.injectorGet(import11.Location,this.parentIndex));
+    this._BarComponent_8_3 = new import20.Wrapper_BarComponent(new import9.ElementRef(this._el_8),this.parentView.injectorGet(import11.LocationStrategy,this.parentIndex));
     this._text_9 = this.renderer.createText((null as any),'\n        ',(null as any));
     this.compView_8.create(this._BarComponent_8_3.context);
     this._text_10 = this.renderer.createText(this._el_3,'\n\n        ',(null as any));

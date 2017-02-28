@@ -1,7 +1,6 @@
-"use strict";
-var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var ScaleLegendComponent = (function () {
+import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+export var ScaleLegendComponent = (function () {
     function ScaleLegendComponent(sanitizer) {
         this.sanitizer = sanitizer;
     }
@@ -25,25 +24,24 @@ var ScaleLegendComponent = (function () {
         return pairs.join(', ');
     };
     ScaleLegendComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'ngx-charts-scale-legend',
                     template: "\n    <div\n      class=\"scale-legend\"\n      [style.height.px]=\"height\"\n      [style.width.px]=\"width\">\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[1].toLocaleString() }}</span>\n      </div>\n      <div\n        class=\"scale-legend-wrap\"\n        [style.background]=\"gradient\">\n      </div>\n      <div class=\"scale-legend-label\">\n        <span>{{ valueRange[0].toLocaleString() }}</span>\n      </div>\n    </div>\n  ",
                     styleUrls: ['./scale-legend.component.css'],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    encapsulation: ViewEncapsulation.None,
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     ScaleLegendComponent.ctorParameters = function () { return [
-        { type: platform_browser_1.DomSanitizer, },
+        { type: DomSanitizer, },
     ]; };
     ScaleLegendComponent.propDecorators = {
-        'valueRange': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'height': [{ type: core_1.Input },],
-        'width': [{ type: core_1.Input },],
+        'valueRange': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'height': [{ type: Input },],
+        'width': [{ type: Input },],
     };
     return ScaleLegendComponent;
 }());
-exports.ScaleLegendComponent = ScaleLegendComponent;
 //# sourceMappingURL=scale-legend.component.js.map

@@ -1,4 +1,3 @@
-"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var throttle_1 = require('../../utils/throttle');
-var position_1 = require('./position');
-var TooltipContentComponent = (function () {
+import { Input, Component, ElementRef, ViewEncapsulation, HostListener, ViewChild, HostBinding, Renderer } from '@angular/core';
+import { throttleable } from '../../utils/throttle';
+import { PositionHelper } from './position';
+export var TooltipContentComponent = (function () {
     function TooltipContentComponent(element, renderer) {
         this.element = element;
         this.renderer = renderer;
@@ -47,56 +46,55 @@ var TooltipContentComponent = (function () {
         setTimeout(function () { return _this.renderer.setElementClass(nativeElm, 'animate', true); }, 1);
     };
     TooltipContentComponent.prototype.positionContent = function (nativeElm, hostDim, elmDim) {
-        var _a = position_1.PositionHelper.positionContent(this.placement, elmDim, hostDim, this.spacing, this.alignment), top = _a.top, left = _a.left;
+        var _a = PositionHelper.positionContent(this.placement, elmDim, hostDim, this.spacing, this.alignment), top = _a.top, left = _a.left;
         this.renderer.setElementStyle(nativeElm, 'top', top + "px");
         this.renderer.setElementStyle(nativeElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.positionCaret = function (hostDim, elmDim) {
         var caretElm = this.caretElm.nativeElement;
         var caretDimensions = caretElm.getBoundingClientRect();
-        var _a = position_1.PositionHelper.positionCaret(this.placement, elmDim, hostDim, caretDimensions, this.alignment), top = _a.top, left = _a.left;
+        var _a = PositionHelper.positionCaret(this.placement, elmDim, hostDim, caretDimensions, this.alignment), top = _a.top, left = _a.left;
         this.renderer.setElementStyle(caretElm, 'top', top + "px");
         this.renderer.setElementStyle(caretElm, 'left', left + "px");
     };
     TooltipContentComponent.prototype.checkFlip = function (hostDim, elmDim) {
-        this.placement = position_1.PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing, this.alignment);
+        this.placement = PositionHelper.determinePlacement(this.placement, elmDim, hostDim, this.spacing, this.alignment);
     };
     TooltipContentComponent.prototype.onWindowResize = function () {
         this.position();
     };
     TooltipContentComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'ngx-tooltip-content',
                     template: "\n    <div>\n      <span\n        #caretElm\n        [hidden]=\"!showCaret\"\n        class=\"tooltip-caret position-{{this.placement}}\">\n      </span>\n      <div class=\"tooltip-content\">\n        <span *ngIf=\"!title\">\n          <template\n            [ngTemplateOutlet]=\"template\"\n            [ngOutletContext]=\"{ model: context }\">\n          </template>\n        </span>\n        <span\n          *ngIf=\"title\"\n          [innerHTML]=\"title\">\n        </span>\n      </div>\n    </div>\n  ",
-                    encapsulation: core_1.ViewEncapsulation.None,
+                    encapsulation: ViewEncapsulation.None,
                     styleUrls: ['./tooltip.component.css']
                 },] },
     ];
     /** @nocollapse */
     TooltipContentComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: core_1.Renderer, },
+        { type: ElementRef, },
+        { type: Renderer, },
     ]; };
     TooltipContentComponent.propDecorators = {
-        'host': [{ type: core_1.Input },],
-        'showCaret': [{ type: core_1.Input },],
-        'type': [{ type: core_1.Input },],
-        'placement': [{ type: core_1.Input },],
-        'alignment': [{ type: core_1.Input },],
-        'spacing': [{ type: core_1.Input },],
-        'cssClass': [{ type: core_1.Input },],
-        'title': [{ type: core_1.Input },],
-        'caretElm': [{ type: core_1.ViewChild, args: ['caretElm',] },],
-        'cssClasses': [{ type: core_1.HostBinding, args: ['class',] },],
-        'onWindowResize': [{ type: core_1.HostListener, args: ['window:resize',] },],
+        'host': [{ type: Input },],
+        'showCaret': [{ type: Input },],
+        'type': [{ type: Input },],
+        'placement': [{ type: Input },],
+        'alignment': [{ type: Input },],
+        'spacing': [{ type: Input },],
+        'cssClass': [{ type: Input },],
+        'title': [{ type: Input },],
+        'caretElm': [{ type: ViewChild, args: ['caretElm',] },],
+        'cssClasses': [{ type: HostBinding, args: ['class',] },],
+        'onWindowResize': [{ type: HostListener, args: ['window:resize',] },],
     };
     __decorate([
-        throttle_1.throttleable(100), 
+        throttleable(100), 
         __metadata('design:type', Function), 
         __metadata('design:paramtypes', []), 
         __metadata('design:returntype', void 0)
     ], TooltipContentComponent.prototype, "onWindowResize", null);
     return TooltipContentComponent;
 }());
-exports.TooltipContentComponent = TooltipContentComponent;
 //# sourceMappingURL=tooltip.component.js.map

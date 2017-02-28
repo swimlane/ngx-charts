@@ -1,5 +1,4 @@
-"use strict";
-var core_1 = require('@angular/core');
+import { ApplicationRef, ComponentFactoryResolver, Injectable, Injector } from '@angular/core';
 /**
  * Injection service is a helper to append components
  * dynamically to a known location in the DOM, most
@@ -8,7 +7,7 @@ var core_1 = require('@angular/core');
  * @export
  * @class InjectionService
  */
-var InjectionService = (function () {
+export var InjectionService = (function () {
     function InjectionService(applicationRef, componentFactoryResolver, injector) {
         this.applicationRef = applicationRef;
         this.componentFactoryResolver = componentFactoryResolver;
@@ -122,15 +121,14 @@ var InjectionService = (function () {
         return componentRef;
     };
     InjectionService.decorators = [
-        { type: core_1.Injectable },
+        { type: Injectable },
     ];
     /** @nocollapse */
     InjectionService.ctorParameters = function () { return [
-        { type: core_1.ApplicationRef, },
-        { type: core_1.ComponentFactoryResolver, },
-        { type: core_1.Injector, },
+        { type: ApplicationRef, },
+        { type: ComponentFactoryResolver, },
+        { type: Injector, },
     ]; };
     return InjectionService;
 }());
-exports.InjectionService = InjectionService;
 //# sourceMappingURL=injection.service.js.map

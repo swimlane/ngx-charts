@@ -1,9 +1,8 @@
-"use strict";
+export var PlacementTypes;
 (function (PlacementTypes) {
     PlacementTypes[PlacementTypes["top"] = 'top'] = "top";
     PlacementTypes[PlacementTypes["bottom"] = 'bottom'] = "bottom";
     PlacementTypes[PlacementTypes["left"] = 'left'] = "left";
     PlacementTypes[PlacementTypes["right"] = 'right'] = "right";
-})(exports.PlacementTypes || (exports.PlacementTypes = {}));
-var PlacementTypes = exports.PlacementTypes;
+})(PlacementTypes || (PlacementTypes = {}));
 //# sourceMappingURL=placement.type.js.map

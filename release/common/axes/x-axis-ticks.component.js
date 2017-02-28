@@ -1,13 +1,12 @@
-"use strict";
-var core_1 = require('@angular/core');
-var trim_label_helper_1 = require('../trim-label.helper');
-var ticks_helper_1 = require('./ticks.helper');
-var XAxisTicksComponent = (function () {
+import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { trimLabel } from '../trim-label.helper';
+import { reduceTicks } from './ticks.helper';
+export var XAxisTicksComponent = (function () {
     function XAxisTicksComponent() {
         this.tickArguments = [5];
         this.tickStroke = '#ccc';
         this.showGridLines = false;
-        this.dimensionsChanged = new core_1.EventEmitter();
+        this.dimensionsChanged = new EventEmitter();
         this.verticalSpacing = 20;
         this.rotateLabels = false;
         this.innerTickSize = 6;
@@ -17,7 +16,7 @@ var XAxisTicksComponent = (function () {
         this.maxTicksLength = 0;
         this.maxAllowedLength = 16;
         this.height = 0;
-        this.trimLabel = trim_label_helper_1.trimLabel;
+        this.trimLabel = trimLabel;
     }
     XAxisTicksComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -108,7 +107,7 @@ var XAxisTicksComponent = (function () {
         }
         else {
             ticks = this.scale.domain();
-            ticks = ticks_helper_1.reduceTicks(ticks, maxTicks);
+            ticks = reduceTicks(ticks, maxTicks);
         }
         return ticks;
     };
@@ -123,27 +122,26 @@ var XAxisTicksComponent = (function () {
         return "translate(0," + (-this.verticalSpacing - 5) + ")";
     };
     XAxisTicksComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-x-axis-ticks]',
                     template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"tickTransform(tick)\">\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.text-anchor]=\"textAnchor\"\n          [attr.transform]=\"textTransform\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"tickTransform(tick)\">\n      <svg:g *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-vertical\"\n          [attr.y1]=\"-gridLineHeight\"\n          y2=\"0\" />\n      </svg:g>\n    </svg:g>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     XAxisTicksComponent.ctorParameters = function () { return []; };
     XAxisTicksComponent.propDecorators = {
-        'scale': [{ type: core_1.Input },],
-        'orient': [{ type: core_1.Input },],
-        'tickArguments': [{ type: core_1.Input },],
-        'tickStroke': [{ type: core_1.Input },],
-        'tickFormatting': [{ type: core_1.Input },],
-        'showGridLines': [{ type: core_1.Input },],
-        'gridLineHeight': [{ type: core_1.Input },],
-        'width': [{ type: core_1.Input },],
-        'dimensionsChanged': [{ type: core_1.Output },],
-        'ticksElement': [{ type: core_1.ViewChild, args: ['ticksel',] },],
+        'scale': [{ type: Input },],
+        'orient': [{ type: Input },],
+        'tickArguments': [{ type: Input },],
+        'tickStroke': [{ type: Input },],
+        'tickFormatting': [{ type: Input },],
+        'showGridLines': [{ type: Input },],
+        'gridLineHeight': [{ type: Input },],
+        'width': [{ type: Input },],
+        'dimensionsChanged': [{ type: Output },],
+        'ticksElement': [{ type: ViewChild, args: ['ticksel',] },],
     };
     return XAxisTicksComponent;
 }());
-exports.XAxisTicksComponent = XAxisTicksComponent;
 //# sourceMappingURL=x-axis-ticks.component.js.map

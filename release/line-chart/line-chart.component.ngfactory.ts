@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from '../common/base-chart.component.css.ngstyle';
 import * as import13 from '../../../build/common/axes/x-axis.component';
 import * as import14 from '../common/axes/x-axis.component.ngfactory';
@@ -68,6 +68,7 @@ export class Wrapper_LineChartComponent {
   /*private*/ _expr_19:any;
   /*private*/ _expr_20:any;
   /*private*/ _expr_21:any;
+  /*private*/ _expr_22:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -97,6 +98,7 @@ export class Wrapper_LineChartComponent {
     this._expr_19 = import1.UNINITIALIZED;
     this._expr_20 = import1.UNINITIALIZED;
     this._expr_21 = import1.UNINITIALIZED;
+    this._expr_22 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -282,6 +284,14 @@ export class Wrapper_LineChartComponent {
       this._expr_21 = currValue;
     }
   }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_22,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_22,currValue);
+      this._expr_22 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -319,7 +329,7 @@ class View_LineChartComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-line-chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_LineChartComponent0(this.viewUtils,this,0,this._el_0);
-    this._LineChartComponent_0_3 = new Wrapper_LineChartComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._LineChartComponent_0_3 = new Wrapper_LineChartComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._LineChartComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
@@ -485,7 +495,7 @@ class View_LineChartComponent3 extends import2.AppView<any> {
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'ngx-charts-line-series',''),(null as any));
     this.compView_2 = new import19.View_LineSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._LineSeriesComponent_2_3 = new import19.Wrapper_LineSeriesComponent(this.parentView.parentView.injectorGet(import11.Location,this.parentView.parentIndex));
+    this._LineSeriesComponent_2_3 = new import19.Wrapper_LineSeriesComponent(this.parentView.parentView.injectorGet(import11.LocationStrategy,this.parentView.parentIndex));
     this.compView_2.create(this._LineSeriesComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -543,7 +553,7 @@ class View_LineChartComponent4 extends import2.AppView<any> {
     this._text_1 = this.renderer.createText(this._el_0,'\n            ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'ngx-charts-circle-series',''),(null as any));
     this.compView_2 = new import21.View_CircleSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._CircleSeriesComponent_2_3 = new import21.Wrapper_CircleSeriesComponent(this.parentView.parentView.injectorGet(import11.Location,this.parentView.parentIndex));
+    this._CircleSeriesComponent_2_3 = new import21.Wrapper_CircleSeriesComponent(this.parentView.parentView.injectorGet(import11.LocationStrategy,this.parentView.parentIndex));
     this.compView_2.create(this._CircleSeriesComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_2,new import3.InlineArray8(6,'select',(null as any),'activate',(null as any),'deactivate',(null as any)),this.eventHandler(this.handleEvent_2));
@@ -576,6 +586,8 @@ class View_LineChartComponent4 extends import2.AppView<any> {
     this._CircleSeriesComponent_2_3.check_visibleValue(currVal_2_0_5,throwOnChange,false);
     const currVal_2_0_6:any = this.parentView.context.activeEntries;
     this._CircleSeriesComponent_2_3.check_activeEntries(currVal_2_0_6,throwOnChange,false);
+    const currVal_2_0_7:any = this.parentView.context.tooltipDisabled;
+    this._CircleSeriesComponent_2_3.check_tooltipDisabled(currVal_2_0_7,throwOnChange,false);
     if (this._CircleSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.internalDetectChanges(throwOnChange);
   }
@@ -619,7 +631,7 @@ class View_LineChartComponent6 extends import2.AppView<any> {
     this._text_1 = this.renderer.createText(this._el_0,'\n          ',(null as any));
     this._el_2 = import3.createRenderElement(this.renderer,this._el_0,':svg:g',new import3.InlineArray2(2,'ngx-charts-line-series',''),(null as any));
     this.compView_2 = new import19.View_LineSeriesComponent0(this.viewUtils,this,2,this._el_2);
-    this._LineSeriesComponent_2_3 = new import19.Wrapper_LineSeriesComponent(this.parentView.parentView.parentView.injectorGet(import11.Location,this.parentView.parentView.parentIndex));
+    this._LineSeriesComponent_2_3 = new import19.Wrapper_LineSeriesComponent(this.parentView.parentView.parentView.injectorGet(import11.LocationStrategy,this.parentView.parentView.parentIndex));
     this.compView_2.create(this._LineSeriesComponent_2_3.context);
     this._text_3 = this.renderer.createText(this._el_0,'\n        ',(null as any));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [
@@ -684,7 +696,7 @@ class View_LineChartComponent5 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-timeline',''),(null as any));
     this.compView_0 = new import23.View_Timeline0(this.viewUtils,this,0,this._el_0);
-    this._Timeline_0_3 = new import23.Wrapper_Timeline(new import9.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),this.compView_0.ref,this.parentView.parentView.injectorGet(import11.Location,this.parentView.parentIndex));
+    this._Timeline_0_3 = new import23.Wrapper_Timeline(new import9.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import10.NgZone,this.parentView.parentIndex),this.compView_0.ref,this.parentView.parentView.injectorGet(import11.LocationStrategy,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._anchor_2 = this.renderer.createTemplateAnchor((null as any),(null as any));
     this._vc_2 = new import15.ViewContainer(2,0,this,this._anchor_2);
@@ -991,6 +1003,8 @@ export class View_LineChartComponent0 extends import2.AppView<import0.LineChartC
     this._AreaTooltip_21_3.check_height(currVal_21_0_4,throwOnChange,false);
     const currVal_21_0_5:any = this.context.colors;
     this._AreaTooltip_21_3.check_colors(currVal_21_0_5,throwOnChange,false);
+    const currVal_21_0_6:any = this.context.tooltipDisabled;
+    this._AreaTooltip_21_3.check_tooltipDisabled(currVal_21_0_6,throwOnChange,false);
     if (this._AreaTooltip_21_3.ngDoCheck(this,this._el_21,throwOnChange)) { this.compView_21.markAsCheckOnce(); }
     const currVal_23_0_0:any = this.context.results;
     this._NgFor_23_6.check_ngForOf(currVal_23_0_0,throwOnChange,false);

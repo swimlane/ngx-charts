@@ -18,7 +18,7 @@ import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '../../../build/pie-chart/pie-arc.component';
 import * as import11 from './pie-arc.component.ngfactory';
 import * as import12 from '@angular/core/src/linker/view_container';
-import * as import13 from '@angular/common/src/location/location';
+import * as import13 from '@angular/common/src/location/location_strategy';
 import * as import14 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
 import * as import15 from '@angular/core/src/linker/template_ref';
 import * as import16 from '@angular/core/src/change_detection/differs/iterable_differs';
@@ -146,7 +146,7 @@ class View_PieGridSeriesComponent1 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.createRenderElement(this.renderer,(null as any),':svg:g',new import3.InlineArray2(2,'ngx-charts-pie-arc',''),(null as any));
     this.compView_0 = new import11.View_PieArcComponent0(this.viewUtils,this,0,this._el_0);
-    this._PieArcComponent_0_3 = new import11.Wrapper_PieArcComponent(new import9.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import13.Location,this.parentView.parentIndex));
+    this._PieArcComponent_0_3 = new import11.Wrapper_PieArcComponent(new import9.ElementRef(this._el_0),this.parentView.parentView.injectorGet(import13.LocationStrategy,this.parentView.parentIndex));
     this._text_1 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_0.create(this._PieArcComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'select',(null as any)),this.eventHandler(this.handleEvent_0));

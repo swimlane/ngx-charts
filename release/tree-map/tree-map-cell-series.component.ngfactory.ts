@@ -34,6 +34,7 @@ export class Wrapper_TreeMapCellSeriesComponent {
   /*private*/ _expr_0:any;
   /*private*/ _expr_1:any;
   /*private*/ _expr_2:any;
+  /*private*/ _expr_3:any;
   subscription0:any;
   constructor() {
     this._changed = false;
@@ -42,6 +43,7 @@ export class Wrapper_TreeMapCellSeriesComponent {
     this._expr_0 = import1.UNINITIALIZED;
     this._expr_1 = import1.UNINITIALIZED;
     this._expr_2 = import1.UNINITIALIZED;
+    this._expr_3 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -70,6 +72,14 @@ export class Wrapper_TreeMapCellSeriesComponent {
       this.context.colors = currValue;
       this._changes['colors'] = new import1.SimpleChange(this._expr_2,currValue);
       this._expr_2 = currValue;
+    }
+  }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_3,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_3,currValue);
+      this._expr_3 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -157,10 +167,12 @@ class View_TreeMapCellSeriesComponent1 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.parentView.context.getTooltipText(this.context.$implicit);
     this._TooltipDirective_0_5.check_tooltipTitle(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = 'top';
-    this._TooltipDirective_0_5.check_tooltipPlacement(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = 'tooltip';
-    this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.tooltipDisabled;
+    this._TooltipDirective_0_5.check_tooltipDisabled(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = 'top';
+    this._TooltipDirective_0_5.check_tooltipPlacement(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = 'tooltip';
+    this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_3,throwOnChange,false);
     this._TooltipDirective_0_5.ngDoCheck(this,this._el_0,throwOnChange);
     const currVal_0_1_0:any = this.context.$implicit.fill;
     this._TreeMapCellComponent_0_6.check_fill(currVal_0_1_0,throwOnChange,false);

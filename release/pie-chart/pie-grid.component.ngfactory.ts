@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from '../common/base-chart.component.css.ngstyle';
 import * as import13 from './pie-grid.component.css.ngstyle';
 import * as import14 from '@angular/core/src/linker/view_container';
@@ -44,6 +44,7 @@ export class Wrapper_PieGridComponent {
   /*private*/ _expr_2:any;
   /*private*/ _expr_3:any;
   /*private*/ _expr_4:any;
+  /*private*/ _expr_5:any;
   subscription0:any;
   constructor(p0:any,p1:any,p2:any,p3:any) {
     this._changed = false;
@@ -54,6 +55,7 @@ export class Wrapper_PieGridComponent {
     this._expr_2 = import1.UNINITIALIZED;
     this._expr_3 = import1.UNINITIALIZED;
     this._expr_4 = import1.UNINITIALIZED;
+    this._expr_5 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -101,6 +103,14 @@ export class Wrapper_PieGridComponent {
       this._expr_4 = currValue;
     }
   }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_5,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_5,currValue);
+      this._expr_5 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -132,7 +142,7 @@ class View_PieGridComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-pie-grid',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_PieGridComponent0(this.viewUtils,this,0,this._el_0);
-    this._PieGridComponent_0_3 = new Wrapper_PieGridComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._PieGridComponent_0_3 = new Wrapper_PieGridComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._PieGridComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._PieGridComponent_0_3.context);
@@ -246,10 +256,12 @@ class View_PieGridComponent1 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_2_0_0:any = this.parentView.context.getTooltipText(this.context.$implicit.label,this.context.$implicit.value.toLocaleString());
     this._TooltipDirective_2_5.check_tooltipTitle(currVal_2_0_0,throwOnChange,false);
-    const currVal_2_0_1:any = 'top';
-    this._TooltipDirective_2_5.check_tooltipPlacement(currVal_2_0_1,throwOnChange,false);
-    const currVal_2_0_2:any = 'tooltip';
-    this._TooltipDirective_2_5.check_tooltipType(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_1:any = this.parentView.context.tooltipDisabled;
+    this._TooltipDirective_2_5.check_tooltipDisabled(currVal_2_0_1,throwOnChange,false);
+    const currVal_2_0_2:any = 'top';
+    this._TooltipDirective_2_5.check_tooltipPlacement(currVal_2_0_2,throwOnChange,false);
+    const currVal_2_0_3:any = 'tooltip';
+    this._TooltipDirective_2_5.check_tooltipType(currVal_2_0_3,throwOnChange,false);
     this._TooltipDirective_2_5.ngDoCheck(this,this._el_2,throwOnChange);
     const currVal_2_1_0:any = this.context.$implicit.colors;
     this._PieGridSeriesComponent_2_6.check_colors(currVal_2_1_0,throwOnChange,false);

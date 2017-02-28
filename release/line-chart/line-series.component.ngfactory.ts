@@ -14,7 +14,7 @@ import * as import5 from '@angular/core/src/metadata/view';
 import * as import6 from '@angular/core/src/linker/view_type';
 import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
-import * as import9 from '@angular/common/src/location/location';
+import * as import9 from '@angular/common/src/location/location_strategy';
 import * as import10 from '../../../build/common/svg-linear-gradient.component';
 import * as import11 from '../common/svg-linear-gradient.component.ngfactory';
 import * as import12 from '../../../build/common/area.component';
@@ -146,7 +146,7 @@ class View_LineSeriesComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'g',new import3.InlineArray2(2,'ngx-charts-line-series',''),rootSelector,(null as any));
     this.compView_0 = new View_LineSeriesComponent0(this.viewUtils,this,0,this._el_0);
-    this._LineSeriesComponent_0_3 = new Wrapper_LineSeriesComponent(this.injectorGet(import9.Location,this.parentIndex));
+    this._LineSeriesComponent_0_3 = new Wrapper_LineSeriesComponent(this.injectorGet(import9.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._LineSeriesComponent_0_3.context);
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),(null as any));
     return new import8.ComponentRef_<any>(0,this,this._el_0,this._LineSeriesComponent_0_3.context);
@@ -223,7 +223,7 @@ export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSerie
     this._text_7 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_8 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray4(4,'class','line-highlight','ngx-charts-area',''),(null as any));
     this.compView_8 = new import13.View_AreaComponent0(this.viewUtils,this,8,this._el_8);
-    this._AreaComponent_8_3 = new import13.Wrapper_AreaComponent(new import16.ElementRef(this._el_8),this.parentView.injectorGet(import9.Location,this.parentIndex));
+    this._AreaComponent_8_3 = new import13.Wrapper_AreaComponent(new import16.ElementRef(this._el_8),this.parentView.injectorGet(import9.LocationStrategy,this.parentIndex));
     this.compView_8.create(this._AreaComponent_8_3.context);
     this._text_9 = this.renderer.createText(this._el_1,'\n      ',(null as any));
     this._el_10 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray4(4,'class','line-series','ngx-charts-line',''),(null as any));
@@ -233,7 +233,7 @@ export class View_LineSeriesComponent0 extends import2.AppView<import0.LineSerie
     this._text_11 = this.renderer.createText(this._el_1,'\n     ',(null as any));
     this._el_12 = import3.createRenderElement(this.renderer,this._el_1,':svg:g',new import3.InlineArray4(4,'class','line-series-range','ngx-charts-area',''),(null as any));
     this.compView_12 = new import13.View_AreaComponent0(this.viewUtils,this,12,this._el_12);
-    this._AreaComponent_12_3 = new import13.Wrapper_AreaComponent(new import16.ElementRef(this._el_12),this.parentView.injectorGet(import9.Location,this.parentIndex));
+    this._AreaComponent_12_3 = new import13.Wrapper_AreaComponent(new import16.ElementRef(this._el_12),this.parentView.injectorGet(import9.LocationStrategy,this.parentIndex));
     this.compView_12.create(this._AreaComponent_12_3.context);
     this._text_13 = this.renderer.createText(this._el_1,'\n    ',(null as any));
     this._text_14 = this.renderer.createText(parentRenderNode,'\n  ',(null as any));

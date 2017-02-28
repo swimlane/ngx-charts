@@ -25,7 +25,7 @@ import * as import16 from './pie-arc.component.ngfactory';
 import * as import17 from '@angular/core/src/linker/template_ref';
 import * as import18 from '../../../build/common/tooltip/tooltip.service';
 import * as import19 from '@angular/core/src/zone/ng_zone';
-import * as import20 from '@angular/common/src/location/location';
+import * as import20 from '@angular/common/src/location/location_strategy';
 import * as import21 from '@angular/common/src/directives/ng_if';
 import * as import22 from '../../../build/common/tooltip/tooltip.directive';
 import * as import23 from '../../node_modules/@angular/common/src/directives/ng_for.ngfactory';
@@ -45,6 +45,7 @@ export class Wrapper_PieSeriesComponent {
   /*private*/ _expr_6:any;
   /*private*/ _expr_7:any;
   /*private*/ _expr_8:any;
+  /*private*/ _expr_9:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -61,6 +62,7 @@ export class Wrapper_PieSeriesComponent {
     this._expr_6 = import1.UNINITIALIZED;
     this._expr_7 = import1.UNINITIALIZED;
     this._expr_8 = import1.UNINITIALIZED;
+    this._expr_9 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -139,6 +141,14 @@ export class Wrapper_PieSeriesComponent {
       this.context.activeEntries = currValue;
       this._changes['activeEntries'] = new import1.SimpleChange(this._expr_8,currValue);
       this._expr_8 = currValue;
+    }
+  }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_9,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_9,currValue);
+      this._expr_9 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -277,7 +287,7 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
     this._vc_4 = new import11.ViewContainer(4,0,this,this._el_4);
     this.compView_4 = new import16.View_PieArcComponent0(this.viewUtils,this,4,this._el_4);
     this._TooltipDirective_4_5 = new import15.Wrapper_TooltipDirective(this.parentView.injectorGet(import18.TooltipService,this.parentIndex),this._vc_4.vcRef,this.renderer,new import12.ElementRef(this._el_4),this.parentView.injectorGet(import19.NgZone,this.parentIndex));
-    this._PieArcComponent_4_6 = new import16.Wrapper_PieArcComponent(new import12.ElementRef(this._el_4),this.parentView.injectorGet(import20.Location,this.parentIndex));
+    this._PieArcComponent_4_6 = new import16.Wrapper_PieArcComponent(new import12.ElementRef(this._el_4),this.parentView.injectorGet(import20.LocationStrategy,this.parentIndex));
     this._text_5 = this.renderer.createText((null as any),'\n      ',(null as any));
     this.compView_4.create(this._PieArcComponent_4_6.context);
     this._text_6 = this.renderer.createText(this._el_0,'\n    ',(null as any));
@@ -308,10 +318,12 @@ class View_PieSeriesComponent1 extends import2.AppView<any> {
     this._NgIf_2_6.ngDoCheck(this,this._anchor_2,throwOnChange);
     const currVal_4_0_0:any = this.parentView.context.tooltipText(this.context.$implicit);
     this._TooltipDirective_4_5.check_tooltipTitle(currVal_4_0_0,throwOnChange,false);
-    const currVal_4_0_1:any = 'top';
-    this._TooltipDirective_4_5.check_tooltipPlacement(currVal_4_0_1,throwOnChange,false);
-    const currVal_4_0_2:any = 'tooltip';
-    this._TooltipDirective_4_5.check_tooltipType(currVal_4_0_2,throwOnChange,false);
+    const currVal_4_0_1:any = this.parentView.context.tooltipDisabled;
+    this._TooltipDirective_4_5.check_tooltipDisabled(currVal_4_0_1,throwOnChange,false);
+    const currVal_4_0_2:any = 'top';
+    this._TooltipDirective_4_5.check_tooltipPlacement(currVal_4_0_2,throwOnChange,false);
+    const currVal_4_0_3:any = 'tooltip';
+    this._TooltipDirective_4_5.check_tooltipType(currVal_4_0_3,throwOnChange,false);
     this._TooltipDirective_4_5.ngDoCheck(this,this._el_4,throwOnChange);
     const currVal_4_1_0:any = this.parentView.context.color(this.context.$implicit);
     this._PieArcComponent_4_6.check_fill(currVal_4_1_0,throwOnChange,false);

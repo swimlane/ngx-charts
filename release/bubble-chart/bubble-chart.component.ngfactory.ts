@@ -16,7 +16,7 @@ import * as import7 from '@angular/core/src/change_detection/constants';
 import * as import8 from '@angular/core/src/linker/component_factory';
 import * as import9 from '@angular/core/src/linker/element_ref';
 import * as import10 from '@angular/core/src/zone/ng_zone';
-import * as import11 from '@angular/common/src/location/location';
+import * as import11 from '@angular/common/src/location/location_strategy';
 import * as import12 from '../../../build/common/axes/x-axis.component';
 import * as import13 from '../common/axes/x-axis.component.ngfactory';
 import * as import14 from '@angular/core/src/linker/view_container';
@@ -59,6 +59,7 @@ export class Wrapper_BubbleChartComponent {
   /*private*/ _expr_17:any;
   /*private*/ _expr_18:any;
   /*private*/ _expr_19:any;
+  /*private*/ _expr_20:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -86,6 +87,7 @@ export class Wrapper_BubbleChartComponent {
     this._expr_17 = import1.UNINITIALIZED;
     this._expr_18 = import1.UNINITIALIZED;
     this._expr_19 = import1.UNINITIALIZED;
+    this._expr_20 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -255,6 +257,14 @@ export class Wrapper_BubbleChartComponent {
       this._expr_19 = currValue;
     }
   }
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_20,currValue))) {
+      this._changed = true;
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_20,currValue);
+      this._expr_20 = currValue;
+    }
+  }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
     var changed:any = this._changed;
     this._changed = false;
@@ -292,7 +302,7 @@ class View_BubbleChartComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import8.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-bubble-chart',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_BubbleChartComponent0(this.viewUtils,this,0,this._el_0);
-    this._BubbleChartComponent_0_3 = new Wrapper_BubbleChartComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.Location,this.parentIndex));
+    this._BubbleChartComponent_0_3 = new Wrapper_BubbleChartComponent(new import9.ElementRef(this._el_0),this.injectorGet(import10.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import11.LocationStrategy,this.parentIndex));
     this.compView_0.create(this._BubbleChartComponent_0_3.context);
     var disposable_0:Function = import3.subscribeToRenderElement(this,this._el_0,new import3.InlineArray2(2,'mouseleave',(null as any)),this.eventHandler(this.handleEvent_0));
     this.init(this._el_0,((<any>this.renderer).directRenderer? (null as any): [this._el_0]),[disposable_0]);
@@ -485,6 +495,8 @@ class View_BubbleChartComponent3 extends import2.AppView<any> {
     this._BubbleSeriesComponent_2_3.check_xAxisLabel(currVal_2_0_8,throwOnChange,false);
     const currVal_2_0_9:any = this.parentView.context.yAxisLabel;
     this._BubbleSeriesComponent_2_3.check_yAxisLabel(currVal_2_0_9,throwOnChange,false);
+    const currVal_2_0_10:any = this.parentView.context.tooltipDisabled;
+    this._BubbleSeriesComponent_2_3.check_tooltipDisabled(currVal_2_0_10,throwOnChange,false);
     if (this._BubbleSeriesComponent_2_3.ngDoCheck(this,this._el_2,throwOnChange)) { this.compView_2.markAsCheckOnce(); }
     this.compView_2.internalDetectChanges(throwOnChange);
   }

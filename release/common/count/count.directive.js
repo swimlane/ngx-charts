@@ -1,6 +1,5 @@
-"use strict";
-var core_1 = require('@angular/core');
-var count_helper_1 = require('./count.helper');
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef, NgZone, ElementRef } from '@angular/core';
+import { count, decimalChecker } from './count.helper';
 /**
  * Count up component
  *
@@ -11,15 +10,15 @@ var count_helper_1 = require('./count.helper');
  * @export
  * @class CountUpDirective
  */
-var CountUpDirective = (function () {
+export var CountUpDirective = (function () {
     function CountUpDirective(cd, zone, element) {
         this.cd = cd;
         this.zone = zone;
         this.countDuration = 1;
         this.countPrefix = '';
         this.countSuffix = '';
-        this.countChange = new core_1.EventEmitter();
-        this.countFinish = new core_1.EventEmitter();
+        this.countChange = new EventEmitter();
+        this.countFinish = new EventEmitter();
         this.value = '';
         this._countDecimals = 0;
         this._countTo = 0;
@@ -30,7 +29,7 @@ var CountUpDirective = (function () {
         get: function () {
             if (this._countDecimals)
                 return this._countDecimals;
-            return count_helper_1.decimalChecker(this.countTo);
+            return decimalChecker(this.countTo);
         },
         set: function (val) {
             this._countDecimals = val;
@@ -77,31 +76,30 @@ var CountUpDirective = (function () {
                     _this.countFinish.emit({ value: value, progress: progress });
             });
         };
-        this.animationReq = count_helper_1.count(this.countFrom, this.countTo, this.countDecimals, this.countDuration, callback);
+        this.animationReq = count(this.countFrom, this.countTo, this.countDecimals, this.countDuration, callback);
     };
     CountUpDirective.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: '[ngx-charts-count-up]',
                     template: "{{value}}"
                 },] },
     ];
     /** @nocollapse */
     CountUpDirective.ctorParameters = function () { return [
-        { type: core_1.ChangeDetectorRef, },
-        { type: core_1.NgZone, },
-        { type: core_1.ElementRef, },
+        { type: ChangeDetectorRef, },
+        { type: NgZone, },
+        { type: ElementRef, },
     ]; };
     CountUpDirective.propDecorators = {
-        'countDuration': [{ type: core_1.Input },],
-        'countPrefix': [{ type: core_1.Input },],
-        'countSuffix': [{ type: core_1.Input },],
-        'countDecimals': [{ type: core_1.Input },],
-        'countTo': [{ type: core_1.Input },],
-        'countFrom': [{ type: core_1.Input },],
-        'countChange': [{ type: core_1.Output },],
-        'countFinish': [{ type: core_1.Output },],
+        'countDuration': [{ type: Input },],
+        'countPrefix': [{ type: Input },],
+        'countSuffix': [{ type: Input },],
+        'countDecimals': [{ type: Input },],
+        'countTo': [{ type: Input },],
+        'countFrom': [{ type: Input },],
+        'countChange': [{ type: Output },],
+        'countFinish': [{ type: Output },],
     };
     return CountUpDirective;
 }());
-exports.CountUpDirective = CountUpDirective;
 //# sourceMappingURL=count.directive.js.map

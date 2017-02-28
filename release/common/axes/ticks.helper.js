@@ -1,5 +1,4 @@
-"use strict";
-function reduceTicks(ticks, maxTicks) {
+export function reduceTicks(ticks, maxTicks) {
     if (ticks.length > maxTicks) {
         var reduced = [];
         var modulus = Math.floor(ticks.length / maxTicks);
@@ -12,5 +11,4 @@ function reduceTicks(ticks, maxTicks) {
     }
     return ticks;
 }
-exports.reduceTicks = reduceTicks;
 //# sourceMappingURL=ticks.helper.js.map

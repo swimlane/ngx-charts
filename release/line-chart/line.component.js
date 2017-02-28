@@ -1,23 +1,22 @@
-"use strict";
-var core_1 = require('@angular/core');
-var LineComponent = (function () {
+import { Component, Input, Output, EventEmitter, ElementRef, trigger, style, transition, animate, ChangeDetectionStrategy } from '@angular/core';
+export var LineComponent = (function () {
     function LineComponent(element) {
-        this.select = new core_1.EventEmitter();
+        this.select = new EventEmitter();
         this.element = element.nativeElement;
     }
     LineComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-line]',
                     template: "\n    <svg:path\n      [@animationState]=\"'active'\"\n      class=\"line\"\n      [attr.d]=\"path\"\n      fill=\"none\"\n      [attr.stroke]=\"stroke\"\n      stroke-width=\"1.5px\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                    changeDetection: ChangeDetectionStrategy.OnPush,
                     animations: [
-                        core_1.trigger('animationState', [
-                            core_1.transition('void => *', [
-                                core_1.style({
+                        trigger('animationState', [
+                            transition('void => *', [
+                                style({
                                     strokeDasharray: 2000,
                                     strokeDashoffset: 2000,
                                 }),
-                                core_1.animate(1000, core_1.style({
+                                animate(1000, style({
                                     strokeDashoffset: 0
                                 }))
                             ])
@@ -27,15 +26,14 @@ var LineComponent = (function () {
     ];
     /** @nocollapse */
     LineComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
+        { type: ElementRef, },
     ]; };
     LineComponent.propDecorators = {
-        'path': [{ type: core_1.Input },],
-        'stroke': [{ type: core_1.Input },],
-        'data': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
+        'path': [{ type: Input },],
+        'stroke': [{ type: Input },],
+        'data': [{ type: Input },],
+        'select': [{ type: Output },],
     };
     return LineComponent;
 }());
-exports.LineComponent = LineComponent;
 //# sourceMappingURL=line.component.js.map

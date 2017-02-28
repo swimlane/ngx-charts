@@ -17,7 +17,7 @@ import * as import8 from '@angular/core/src/change_detection/constants';
 import * as import9 from '@angular/core/src/linker/component_factory';
 import * as import10 from '@angular/core/src/linker/element_ref';
 import * as import11 from '@angular/core/src/zone/ng_zone';
-import * as import12 from '@angular/common/src/location/location';
+import * as import12 from '@angular/common/src/location/location_strategy';
 import * as import13 from '../common/base-chart.component.css.ngstyle';
 import * as import14 from './force-directed-graph.component.css.ngstyle';
 import * as import15 from '@angular/core/src/linker/view_container';
@@ -52,6 +52,7 @@ export class Wrapper_ForceDirectedGraphComponent {
   /*private*/ _expr_9:any;
   /*private*/ _expr_10:any;
   /*private*/ _expr_11:any;
+  /*private*/ _expr_12:any;
   subscription0:any;
   subscription1:any;
   subscription2:any;
@@ -71,6 +72,7 @@ export class Wrapper_ForceDirectedGraphComponent {
     this._expr_9 = import1.UNINITIALIZED;
     this._expr_10 = import1.UNINITIALIZED;
     this._expr_11 = import1.UNINITIALIZED;
+    this._expr_12 = import1.UNINITIALIZED;
   }
   ngOnDetach(view:import2.AppView<any>,componentView:import2.AppView<any>,el:any):void {
   }
@@ -168,12 +170,20 @@ export class Wrapper_ForceDirectedGraphComponent {
       this._expr_10 = currValue;
     }
   }
-  check_groupResultsBy(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+  check_tooltipDisabled(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
     if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_11,currValue))) {
       this._changed = true;
-      this.context.groupResultsBy = currValue;
-      this._changes['groupResultsBy'] = new import1.SimpleChange(this._expr_11,currValue);
+      this.context.tooltipDisabled = currValue;
+      this._changes['tooltipDisabled'] = new import1.SimpleChange(this._expr_11,currValue);
       this._expr_11 = currValue;
+    }
+  }
+  check_groupResultsBy(currValue:any,throwOnChange:boolean,forceUpdate:boolean):void {
+    if ((forceUpdate || import3.checkBinding(throwOnChange,this._expr_12,currValue))) {
+      this._changed = true;
+      this.context.groupResultsBy = currValue;
+      this._changes['groupResultsBy'] = new import1.SimpleChange(this._expr_12,currValue);
+      this._expr_12 = currValue;
     }
   }
   ngDoCheck(view:import2.AppView<any>,el:any,throwOnChange:boolean):boolean {
@@ -219,7 +229,7 @@ class View_ForceDirectedGraphComponent_Host0 extends import2.AppView<any> {
   createInternal(rootSelector:string):import9.ComponentRef<any> {
     this._el_0 = import3.selectOrCreateRenderHostElement(this.renderer,'ngx-charts-force-directed-graph',import3.EMPTY_INLINE_ARRAY,rootSelector,(null as any));
     this.compView_0 = new View_ForceDirectedGraphComponent0(this.viewUtils,this,0,this._el_0);
-    this._ForceDirectedGraphComponent_0_3 = new Wrapper_ForceDirectedGraphComponent(new import10.ElementRef(this._el_0),this.injectorGet(import11.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import12.Location,this.parentIndex));
+    this._ForceDirectedGraphComponent_0_3 = new Wrapper_ForceDirectedGraphComponent(new import10.ElementRef(this._el_0),this.injectorGet(import11.NgZone,this.parentIndex),this.compView_0.ref,this.injectorGet(import12.LocationStrategy,this.parentIndex));
     this._query_linkTemplate_0_0 = new import6.QueryList<any>();
     this._query_nodeTemplate_0_1 = new import6.QueryList<any>();
     this.compView_0.create(this._ForceDirectedGraphComponent_0_3.context);
@@ -576,10 +586,12 @@ class View_ForceDirectedGraphComponent5 extends import2.AppView<any> {
   detectChangesInternal(throwOnChange:boolean):void {
     const currVal_0_0_0:any = this.context.$implicit.value;
     this._TooltipDirective_0_5.check_tooltipTitle(currVal_0_0_0,throwOnChange,false);
-    const currVal_0_0_1:any = 'top';
-    this._TooltipDirective_0_5.check_tooltipPlacement(currVal_0_0_1,throwOnChange,false);
-    const currVal_0_0_2:any = 'tooltip';
-    this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_1:any = this.parentView.context.tooltipDisabled;
+    this._TooltipDirective_0_5.check_tooltipDisabled(currVal_0_0_1,throwOnChange,false);
+    const currVal_0_0_2:any = 'top';
+    this._TooltipDirective_0_5.check_tooltipPlacement(currVal_0_0_2,throwOnChange,false);
+    const currVal_0_0_3:any = 'tooltip';
+    this._TooltipDirective_0_5.check_tooltipType(currVal_0_0_3,throwOnChange,false);
     this._TooltipDirective_0_5.ngDoCheck(this,this._el_0,throwOnChange);
     const currVal_2_0_0:any = this.parentView.context.nodeTemplate;
     this._NgIf_2_6.check_ngIf(currVal_2_0_0,throwOnChange,false);

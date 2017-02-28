@@ -1,9 +1,8 @@
-"use strict";
-var core_1 = require('@angular/core');
-var CardSeriesComponent = (function () {
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, NgZone } from '@angular/core';
+export var CardSeriesComponent = (function () {
     function CardSeriesComponent(zone) {
         this.zone = zone;
-        this.select = new core_1.EventEmitter();
+        this.select = new EventEmitter();
     }
     CardSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -46,23 +45,22 @@ var CardSeriesComponent = (function () {
         this.select.emit(data);
     };
     CardSeriesComponent.decorators = [
-        { type: core_1.Component, args: [{
+        { type: Component, args: [{
                     selector: 'g[ngx-charts-card-series]',
                     template: "\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event)\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
+                    changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
     /** @nocollapse */
     CardSeriesComponent.ctorParameters = function () { return [
-        { type: core_1.NgZone, },
+        { type: NgZone, },
     ]; };
     CardSeriesComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'dims': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
+        'data': [{ type: Input },],
+        'dims': [{ type: Input },],
+        'colors': [{ type: Input },],
+        'select': [{ type: Output },],
     };
     return CardSeriesComponent;
 }());
-exports.CardSeriesComponent = CardSeriesComponent;
 //# sourceMappingURL=card-series.component.js.map
