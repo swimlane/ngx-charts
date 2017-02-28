@@ -8,7 +8,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { Location } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { id } from '../utils/id';
 import d3 from '../d3';
 
@@ -58,13 +58,16 @@ export class HeatMapCellComponent implements OnChanges {
   gradientUrl: string;
   gradientStops: any[];
 
-  constructor(element: ElementRef, private location: Location) {
+  constructor(element: ElementRef, private location: LocationStrategy) {
     this.element = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.transform = `translate(${this.x} , ${this.y})`;
-    const pageUrl = this.location.path();
+
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
 
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + id().toString();

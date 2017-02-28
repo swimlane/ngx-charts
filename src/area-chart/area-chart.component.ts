@@ -7,6 +7,7 @@ import {
   HostListener,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { PathLocationStrategy } from '@angular/common';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -211,7 +212,11 @@ export class AreaChartComponent extends BaseChartComponent {
       this.legendOptions = this.getLegendOptions();
 
       this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
-      const pageUrl = this.location.path();
+
+      const pageUrl = this.location instanceof PathLocationStrategy
+        ? this.location.path()
+        : '';
+
       this.clipPathId = 'clip' + id().toString();
       this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
     });

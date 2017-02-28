@@ -5,7 +5,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { Location } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import d3 from '../d3';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
@@ -75,7 +75,7 @@ export class LineSeriesComponent implements OnChanges {
   gradientStops: any[];
   areaGradientStops: any[];
 
-  constructor(private location: Location) {
+  constructor(private location: LocationStrategy) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -161,7 +161,11 @@ export class LineSeriesComponent implements OnChanges {
   updateGradients() {
     if (this.colors.scaleType === 'linear') {
       this.hasGradient = true;
-      const pageUrl = this.location.path();
+
+      const pageUrl = this.location instanceof PathLocationStrategy
+        ? this.location.path()
+        : '';
+
       this.gradientId = 'grad' + id().toString();
       this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
       const values = this.data.series.map(d => d.value);
