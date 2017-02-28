@@ -1,54 +1,54 @@
 /// <reference path="../node_modules/awesome-typescript-loader/lib/runtime.d.ts" />
 
-const array = require('d3-array');
-const brush = require('d3-brush');
-const color = require('d3-color');
-const force = require('d3-force');
-const format = require('d3-format');
-const interpolate = require('d3-interpolate');
-const scales = require('d3-scale');
-const selection = require('d3-selection');
-const shape = require('d3-shape');
-const hierarchy = require('d3-hierarchy');
-const tInterval = require('d3-time');
-const tFormat = require('d3-time-format');
+import * as array from 'd3-array';
+import * as brush from 'd3-brush';
+import * as color from 'd3-color';
+import * as force from 'd3-force';
+import * as format from 'd3-format';
+import * as interpolate from 'd3-interpolate';
+import * as scales from 'd3-scale';
+import * as selection from 'd3-selection';
+import * as shape from 'd3-shape';
+import * as hierarchy from 'd3-hierarchy';
+import * as tInterval from 'd3-time';
+import * as tFormat from 'd3-time-format';
 
 export default {
-  arc: shape.arc,
-  area: shape.area,
-  brush: brush.brush,
-  brushX: brush.brushX,
-  brushY: brush.brushY,
-  event: selection.event,
-  extent: array.extent,
-  forceCollide: force.forceCollide,
-  forceLink: force.forceLink,
-  forceManyBody: force.forceManyBody,
-  forceSimulation: force.forceSimulation,
-  forceX: force.forceX,
-  forceY: force.forceY,
-  format: format.format,
-  interpolate: interpolate.interpolate,
-  line: shape.line,
-  max: array.max,
-  min: array.min,
-  mouse: selection.mouse,
-  pie: shape.pie,
-  range: array.range,
-  rgb: color.rgb,
-  selection,
-  select: selection.select,
-  selectAll: selection.selectAll,
-  scaleBand: scales.scaleBand,
-  scaleLinear: scales.scaleLinear,
-  scaleOrdinal: scales.scaleOrdinal,
-  scalePoint: scales.scalePoint,
-  scaleQuantile: scales.scaleQuantile,
-  scaleTime: scales.scaleTime,
-  shape,
-  treemap: hierarchy.treemap,
-  stratify: hierarchy.stratify,
-  timeFormat: tFormat.timeFormat,
-  timeParse: tFormat.timeParse,
-  timeHour: tInterval.timeHour
+  arc: shape.arc as any,
+  area: shape.area as any,
+  brush: brush.brush as any,
+  brushX: brush.brushX as any,
+  brushY: brush.brushY as any,
+  event: selection.event as any,
+  extent: array.extent as any,
+  forceCollide: force.forceCollide as any,
+  forceLink: force.forceLink as any,
+  forceManyBody: force.forceManyBody as any,
+  forceSimulation: force.forceSimulation as any,
+  forceX: force.forceX as any,
+  forceY: force.forceY as any,
+  format: format.format as any,
+  interpolate: interpolate.interpolate as any,
+  line: shape.line as any,
+  max: array.max as any,
+  min: array.min as any,
+  mouse: selection.mouse as any,
+  pie: shape.pie as any,
+  range: array.range as any,
+  rgb: color.rgb as any,
+  selection: selection as any,
+  select: selection.select as any,
+  selectAll: selection.selectAll as any,
+  scaleBand: scales.scaleBand as any,
+  scaleLinear: scales.scaleLinear as any,
+  scaleOrdinal: scales.scaleOrdinal as any,
+  scalePoint: scales.scalePoint as any,
+  scaleQuantile: scales.scaleQuantile as any,
+  scaleTime: scales.scaleTime as any,
+  shape: shape as any,
+  treemap: hierarchy.treemap as any,
+  stratify: hierarchy.stratify as any,
+  timeFormat: tFormat.timeFormat as any,
+  timeParse: tFormat.timeParse as any,
+  timeHour: tInterval.timeHour as any
 };
