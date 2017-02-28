@@ -52,6 +52,7 @@ import { ColorHelper } from '../common/color.helper';
             (mousedown)="onDragStart(node, $event)"
             (click)="onClick({name: node.value})"
             ngx-tooltip
+            [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="node.value">
@@ -85,6 +86,7 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   @Input() nodes: any[] = [];
   @Input() links: Array<{ source: any, target: any }> = [];
   @Input() activeEntries: any[] = [];
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

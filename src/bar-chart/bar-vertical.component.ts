@@ -49,6 +49,7 @@ import d3 from '../d3';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
           [activeEntries]="activeEntries"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -70,6 +71,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];

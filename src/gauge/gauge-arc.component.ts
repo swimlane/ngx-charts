@@ -36,6 +36,7 @@ import { ColorHelper } from '../common/color.helper';
         (activate)="activate.emit($event)"
         (deactivate)="deactivate.emit($event)"
         ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="tooltipText(valueArc)">
@@ -50,6 +51,7 @@ export class GaugeArcComponent {
   @Input() cornerRadius: any;
   @Input() colors: ColorHelper;
   @Input() isActive: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

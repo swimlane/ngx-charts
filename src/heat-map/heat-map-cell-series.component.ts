@@ -23,6 +23,7 @@ import {
       (select)="onClick($event, c.label, c.series)"
       [gradient]="gradient"
       ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="getTooltipText(c)"
@@ -37,6 +38,7 @@ export class HeatCellSeriesComponent implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() gradient: boolean;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
 

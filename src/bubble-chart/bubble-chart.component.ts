@@ -65,6 +65,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
             [colors]="colors"
             [data]="series"
             [activeEntries]="activeEntries"
+            [tooltipDisabled]="tooltipDisabled"
             (select)="onClick($event, series)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)" />
@@ -92,6 +93,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() autoScale: boolean;
   @Input() schemeType = 'ordinal';
   @Input() legendPosition: string = 'right';
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

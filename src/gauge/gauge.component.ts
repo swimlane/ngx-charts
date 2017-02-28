@@ -34,6 +34,7 @@ import { ColorHelper } from '../common/color.helper';
             [cornerRadius]="cornerRadius"
             [colors]="colors"
             [isActive]="isActive(arc.valueArc.data)"
+            [tooltipDisabled]="tooltipDisabled"
             (select)="onClick($event)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)">
@@ -86,6 +87,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() angleSpan: number = 240;
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
+  @Input() tooltipDisabled: boolean = false;
 
   // Specify margins
   @Input() margin: any[];

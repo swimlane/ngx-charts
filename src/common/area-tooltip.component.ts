@@ -53,6 +53,7 @@ import {
         [style.opacity]="anchorOpacity[i]"
         [style.pointer-events]="'none'"
         ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="15"
@@ -89,6 +90,7 @@ export class AreaTooltip implements OnChanges {
   @Input() height;
   @Input() colors;
   @Input() showPercentage: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() hover = new EventEmitter();
 

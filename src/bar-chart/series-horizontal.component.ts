@@ -34,6 +34,7 @@ import {
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="bar.tooltipText">
@@ -63,6 +64,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
+  @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;

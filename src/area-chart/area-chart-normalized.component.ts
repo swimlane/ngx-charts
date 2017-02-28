@@ -77,6 +77,7 @@ import { id } from '../utils/id';
             [height]="dims.height"
             [colors]="colors"
             [showPercentage]="true"
+            [tooltipDisabled]="tooltipDisabled"
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
@@ -89,6 +90,7 @@ import { id } from '../utils/id';
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
+              [tooltipDisabled]="tooltipDisabled"
               (select)="onClick($event, series)"
               (activate)="onActivate($event)"
               (deactivate)="onDeactivate($event)"
@@ -144,6 +146,7 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

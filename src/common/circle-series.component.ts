@@ -52,6 +52,7 @@ import { id } from '../utils/id';
         (activate)="activateCircle(circle)"
         (deactivate)="deactivateCircle(circle)"
         ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="getTooltipText(circle)"
@@ -80,6 +81,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

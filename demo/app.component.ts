@@ -41,6 +41,8 @@ export class AppComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
+  tooltipDisabled = false;
+  pointTooltipDisabled = false;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';

@@ -74,6 +74,7 @@ import d3 from '../d3';
             [results]="results"
             [height]="dims.height"
             [colors]="colors"
+            [tooltipDisabled]="tooltipDisabled"
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
@@ -85,6 +86,7 @@ import d3 from '../d3';
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
+              [tooltipDisabled]="tooltipDisabled"
               (select)="onClick($event, series)"
               (activate)="onActivate($event)"
               (deactivate)="onDeactivate($event)"
@@ -141,6 +143,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
