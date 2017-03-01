@@ -1,3 +1,9 @@
 {
-    "typescript.check.workspaceVersion": false
+    "typescript.check.tscVersion": false,
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "search.exclude": {
+      "**/node_modules": true,
+      "dist": true,
+      "release": true
+    }
 }
