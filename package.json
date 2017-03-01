@@ -75,14 +75,9 @@
   "homepage": "https://github.com/swimlane/ngx-charts#readme",
   "peerDependencies": {
     "@angular/common": "~2.4.5",
-    "@angular/compiler": "~2.4.5",
     "@angular/core": "~2.4.5",
-    "@angular/platform-browser": "~2.4.5",
-    "@angular/platform-browser-dynamic": "~2.4.5",
-    "core-js": "2.4.1",
     "d3": "4.4.0",
-    "rxjs": "5.0.3",
-    "zone.js": "^0.7.6"
+    "rxjs": "^5.0.3"
   },
   "devDependencies": {
     "@angular/common": "~2.4.5",
