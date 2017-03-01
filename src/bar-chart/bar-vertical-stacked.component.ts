@@ -113,7 +113,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   xScale: any;
   yScale: any;
   transform: string;
-  tickFormatting: Function;
+  tickFormatting: (label: string) => string;
   colors: ColorHelper;
   margin = [10, 20, 10, 20];
   xAxisHeight: number = 0;

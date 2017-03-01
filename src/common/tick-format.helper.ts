@@ -1,6 +1,6 @@
 import d3 from '../d3';
 
-export function tickFormat(fieldType, groupByType): Function {
+export function tickFormat(fieldType, groupByType): (label: string) => string {
   return function(label: string): string {
     if (label === 'No Value' || label === 'Other') {
       return label;
