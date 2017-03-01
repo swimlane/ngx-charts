@@ -72,7 +72,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
-  @Input() innerPadding: Number | Number[] = 8;
+  @Input() innerPadding: number | number[] = 8;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
