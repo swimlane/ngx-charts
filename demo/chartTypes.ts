@@ -206,7 +206,7 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'showLegend', 'colorScheme', 'min', 'max', 'largeSegments', 'smallSegments', 'units',
-          'angleSpan', 'startAngle', 'showAxis', 'margin', 'tooltipDisabled'
+          'angleSpan', 'startAngle', 'showAxis', 'margin', 'tooltipDisabled', 'showText'
         ]
       },
       {

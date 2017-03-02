@@ -22,6 +22,7 @@ axisTickFormatting | function |               | the axis tick formatting
 angleSpan          | number   | 240           | the angle that the chart spans (in degrees)
 startAngle         | number   | -120          | the angle that the chart is rotated by. Use negative half of the spanning angle to centralize
 tooltipDisabled    | boolean  | false         | show or hide the tooltip
+showText           | boolean  | true          | show or hide the inner text
 
 # Outputs
 

@@ -54,7 +54,7 @@ import { ColorHelper } from '../common/color.helper';
           [tickFormatting]="axisTickFormatting">
         </svg:g>
 
-        <svg:text #textEl
+        <svg:text #textEl *ngIf="showText"
             [style.textAnchor]="'middle'"
             [attr.transform]="textTransform"
             alignment-baseline="central">
@@ -88,6 +88,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
+  @Input() showText: boolean = true;
 
   // Specify margins
   @Input() margin: any[];
@@ -257,6 +258,9 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   scaleText(repeat: boolean = true): void {
+    if (!this.showText) {
+      return;
+    }
     this.zone.run(() => {
       const { width } = this.textEl.nativeElement.getBoundingClientRect();
       const oldScale = this.resizeScale;
