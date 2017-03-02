@@ -6,7 +6,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import d3 from '../d3';
+import { area, line } from 'd3-shape';
+
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
@@ -62,7 +63,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() yScale;
   @Input() colors;
   @Input() scaleType;
-  @Input() curve: string;
+  @Input() curve: any;
   @Input() activeEntries: any[];
   @Input() rangeFillOpacity: number;
 
@@ -96,8 +97,8 @@ export class LineSeriesComponent implements OnChanges {
     this.areaPath = area(data) || '';
   }
 
-  getLineGenerator() {
-    return d3.line()
+  getLineGenerator(): any {
+    return line<any>()
       .x(d => {
         const label = d.name;
         let value;
@@ -114,8 +115,8 @@ export class LineSeriesComponent implements OnChanges {
       .curve(this.curve);
   }
 
-  getRangeGenerator() {
-    return d3.area()
+  getRangeGenerator(): any {
+    return area<any>()
         .x(d => {
           const label = d.name;
           let value;
@@ -133,13 +134,13 @@ export class LineSeriesComponent implements OnChanges {
         .curve(this.curve);
   }
 
-  getAreaGenerator() {
+  getAreaGenerator(): any {
     const xProperty = (d) => {
       const label = d.name;
       return this.xScale(label);
     };
 
-    return d3.area()
+    return area<any>()
       .x(xProperty)
       .y0(() => this.yScale.range()[0])
       .y1(d => this.yScale(d.value))

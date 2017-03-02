@@ -9,7 +9,10 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import d3 from '../d3';
+import { interpolate } from 'd3-interpolate';
+import { select } from 'd3-selection';
+import { arc } from 'd3-shape';
+
 import { id } from '../utils/id';
 
 @Component({
@@ -104,14 +107,14 @@ export class PieArcComponent implements OnChanges {
       outerRadius = this.outerRadius * this.value / this.max;
     }
 
-    return d3.arc()
+    return arc()
       .innerRadius(this.innerRadius)
       .outerRadius(outerRadius)
       .cornerRadius(this.cornerRadius);
   }
 
   loadAnimation(): void {
-    const node = d3.select(this.element)
+    const node = select(this.element)
       .selectAll('.arc')
       .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
 
@@ -120,28 +123,28 @@ export class PieArcComponent implements OnChanges {
     node
       .transition()
       .attrTween('d', function(d) {
-        this._current = this._current || d;
+        (<any>this)._current = (<any>this)._current || d;
         const copyOfD = Object.assign({}, d);
         copyOfD.endAngle = copyOfD.startAngle;
-        const interpolate = d3.interpolate(copyOfD, copyOfD);
-        this._current = interpolate(0);
+        const interpolater = interpolate(copyOfD, copyOfD);
+        (<any>this)._current = interpolater(0);
         return function(t) {
-          return arc(interpolate(t));
+          return arc(interpolater(t));
         };
       })
       .transition().duration(750)
       .attrTween('d', function(d) {
-        this._current = this._current || d;
-        const interpolate = d3.interpolate(this._current, d);
-        this._current = interpolate(0);
+        (<any>this)._current = (<any>this)._current || d;
+        const interpolater = interpolate((<any>this)._current, d);
+        (<any>this)._current = interpolater(0);
         return function(t) {
-          return arc(interpolate(t));
+          return arc(interpolater(t));
         };
       });
   }
 
   updateAnimation(): void {
-    const node = d3.select(this.element)
+    const node = select(this.element)
       .selectAll('.arc')
       .data([{startAngle: this.startAngle, endAngle: this.endAngle}]);
 
@@ -150,11 +153,11 @@ export class PieArcComponent implements OnChanges {
     node
       .transition().duration(750)
       .attrTween('d', function(d) {
-        this._current = this._current || d;
-        const interpolate = d3.interpolate(this._current, d);
-        this._current = interpolate(0);
+        (<any>this)._current = (<any>this)._current || d;
+        const interpolater = interpolate((<any>this)._current, d);
+        (<any>this)._current = interpolater(0);
         return function(t) {
-          return arc(interpolate(t));
+          return arc(interpolater(t));
         };
       });
   }

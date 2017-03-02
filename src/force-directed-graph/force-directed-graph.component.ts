@@ -11,11 +11,18 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {
+  forceCollide,
+  forceLink,
+  forceManyBody,
+  forceSimulation,
+  forceX,
+  forceY
+} from 'd3-force';
 
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import d3 from '../d3';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -75,13 +82,13 @@ import { ColorHelper } from '../common/color.helper';
 })
 export class ForceDirectedGraphComponent extends BaseChartComponent {
 
-  @Input() force = d3.forceSimulation()
-    .force('charge', d3.forceManyBody())
-    .force('collide', d3.forceCollide(5))
-    .force('x', d3.forceX())
-    .force('y', d3.forceY());
+  @Input() force: any = forceSimulation<any>()
+    .force('charge', forceManyBody())
+    .force('collide', forceCollide(5))
+    .force('x', forceX())
+    .force('y', forceY());
 
-  @Input() forceLink = d3.forceLink().id(node => node.value);
+  @Input() forceLink: any = forceLink<any, any>().id(node => node.value);
   @Input() legend: boolean;
   @Input() nodes: any[] = [];
   @Input() links: Array<{ source: any, target: any }> = [];
