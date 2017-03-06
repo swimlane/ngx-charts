@@ -68,12 +68,12 @@ export class AppComponent implements OnInit {
   rangeFillOpacity: number = 0.15;
 
   // Override colors for certain values
-  customColors: any[] = [
-    {
-      name: 'Germany',
-      value: '#0000ff'
-    }
-  ];
+  // customColors: any[] = [
+  //   {
+  //     name: 'Germany',
+  //     value: '#0000ff'
+  //   }
+  // ];
 
   // pie
   showLabels = true;

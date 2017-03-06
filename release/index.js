@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"4.2.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"4.2.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -7392,6 +7392,7 @@ var ColorHelper = (function () {
         this.colorDomain = scheme.domain;
         this.scaleType = type;
         this.domain = domain;
+        this.customColors = customColors;
         this.scale = this.generateColorScheme(scheme, type, domain);
     }
     ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
@@ -7430,7 +7431,7 @@ var ColorHelper = (function () {
             var found = void 0; // todo type customColors
             if (this.customColors && this.customColors.length > 0) {
                 found = this.customColors.find(function (mapping) {
-                    return mapping.name === formattedValue_1.toLowerCase();
+                    return mapping.name.toLowerCase() === formattedValue_1.toLowerCase();
                 });
             }
             if (found) {

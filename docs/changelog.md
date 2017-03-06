@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.1
+- Bug: Fixed customColors mapping
+- Chore: Various AoT compilation and build improvements (#255, #257, #258, #259, #256, #263, #260, #266)
+
 ## 4.2.0
 - Chore: AoT compilation compatibility improvements (#253, #252, #251)
 - Enhancement: Added option to disable tooltips (#223)

@@ -10,6 +10,7 @@ export var ColorHelper = (function () {
         this.colorDomain = scheme.domain;
         this.scaleType = type;
         this.domain = domain;
+        this.customColors = customColors;
         this.scale = this.generateColorScheme(scheme, type, domain);
     }
     ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
@@ -48,7 +49,7 @@ export var ColorHelper = (function () {
             var found = void 0; // todo type customColors
             if (this.customColors && this.customColors.length > 0) {
                 found = this.customColors.find(function (mapping) {
-                    return mapping.name === formattedValue_1.toLowerCase();
+                    return mapping.name.toLowerCase() === formattedValue_1.toLowerCase();
                 });
             }
             if (found) {
