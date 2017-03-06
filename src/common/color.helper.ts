@@ -17,6 +17,7 @@ export class ColorHelper {
     this.colorDomain = scheme.domain;
     this.scaleType = type;
     this.domain = domain;
+    this.customColors = customColors;
 
     this.scale = this.generateColorScheme(scheme, type, domain);
   }
@@ -59,7 +60,7 @@ export class ColorHelper {
       let found: any; // todo type customColors
       if (this.customColors && this.customColors.length > 0) {
         found = this.customColors.find((mapping) => {
-          return mapping.name === formattedValue.toLowerCase();
+          return mapping.name.toLowerCase() === formattedValue.toLowerCase();
         });
       }
 

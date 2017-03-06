@@ -67,6 +67,14 @@ export class AppComponent implements OnInit {
   selectedColorScheme: string;
   rangeFillOpacity: number = 0.15;
 
+  // Override colors for certain values
+  customColors: any[] = [
+    {
+      name: 'Germany',
+      value: '#0000ff'
+    }
+  ];
+
   // pie
   showLabels = true;
   explodeSlices = false;
