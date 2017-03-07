@@ -51,11 +51,10 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.attr('width')).toEqual('400');
-        expect(svg.attr('height')).toEqual('800');
+        expect(svg.getAttribute('width')).toBe('400');
+        expect(svg.getAttribute('height')).toBe('800');
         done();
       });
     });
@@ -77,8 +76,7 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const arcs = compiled.querySelectorAll('path.arc');
+        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
 
         const arc = d3.arc()
           .innerRadius(0)
@@ -86,7 +84,7 @@ describe('<ngx-charts-pie>', () => {
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
+        expect(arcElement.getAttribute('d')).toEqual(arc());
         done();
       });
     });
@@ -110,8 +108,7 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const arcs = compiled.querySelectorAll('path.arc');
+        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
         const outerRadius = 440 / 3;
 
         const arc = d3.arc()
@@ -120,7 +117,7 @@ describe('<ngx-charts-pie>', () => {
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
+        expect(arcElement.getAttribute('d')).toEqual(arc());
         done();
       });
     });
@@ -143,8 +140,7 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const arcs = compiled.querySelectorAll('path.arc');
+        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
         const outerRadius = 440 / 3;
 
         const arc = d3.arc()
@@ -153,7 +149,7 @@ describe('<ngx-charts-pie>', () => {
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
+        expect(arcElement.getAttribute('d')).toEqual(arc());
         done();
       });
     });

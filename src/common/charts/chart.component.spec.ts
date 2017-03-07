@@ -3,7 +3,7 @@ import {
   async
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
-import d3 from '../../d3';
+
 import '../../../config/testing-utils';
 
 import { ChartCommonModule } from '../chart-common.module';
@@ -48,11 +48,10 @@ describe('<ngx-charts-chart>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
+        const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        const svg = compiled.querySelectorAll('svg')[0];
-        expect(d3.select(svg).attr('width')).toEqual('400');
-        expect(d3.select(svg).attr('height')).toEqual('800');
+        expect(svg.getAttribute('width')).toBe('400');
+        expect(svg.getAttribute('height')).toBe('800');
       });
     }));
 
@@ -61,12 +60,9 @@ describe('<ngx-charts-chart>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
+        const textNode = fixture.debugElement.nativeElement.querySelector('svg p');
 
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
-
-        const textNode = svg.select('p');
-        expect(textNode.text()).toEqual('ngx-charts is cool!');
+        expect(textNode.textContent).toEqual('ngx-charts is cool!');
 
       });
     }));
