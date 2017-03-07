@@ -40,7 +40,7 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string;
-  @Input() innerPadding = [2.5, 2.5, 2.5, 2.5];
+  @Input() innerPadding = 2.5;
 
   dims: ViewDimensions;
   data: any[];

@@ -55,11 +55,11 @@ export class CardSeriesComponent implements OnChanges {
   @Input() slots: any[];
   @Input() dims;
   @Input() colors;
-  @Input() innerPadding = [2.5, 2.5, 2.5, 2.5];
+  @Input() innerPadding = 2.5;
 
   @Input() cardColor;
   @Input() bandColor;
-  @Input() emptyColor = 'black';
+  @Input() emptyColor = 'rgba(0, 0, 0, 0)';
 
   @Output() select = new EventEmitter();
 
