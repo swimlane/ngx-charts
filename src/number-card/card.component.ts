@@ -1,7 +1,7 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
   SimpleChanges, OnChanges, ViewChild, ChangeDetectionStrategy,
-  ChangeDetectorRef, NgZone, OnDestroy
+  ChangeDetectorRef, NgZone, OnDestroy, ViewEncapsulation
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { invertColor } from '../utils/color-utils';
@@ -17,42 +17,44 @@ import { count, decimalChecker } from '../common/count';
       <svg:rect
         class="card"
         [style.fill]="color"
-        style="cursor: pointer;"
         [attr.width]="cardWidth"
         [attr.height]="cardHeight"
         rx="3"
         ry="3"
       />
+      <svg:rect
+        *ngIf="bandColor && bandColor !== color"
+        class="card-band"
+        [style.fill]="bandColor"
+        [attr.transform]="transformBand"
+        [attr.width]="cardWidth"
+        [attr.height]="bandHeight"
+        rx="3"
+        ry="3"
+      />
       <title>{{label}}</title>
       <svg:foreignObject
+        class="trimmed-label"
         x="5"
-        [attr.y]="height * 0.7"
+        [attr.x]="textPadding[3]"
+        [attr.y]="textPadding[0] + textFontSize + labelFontSize"
         [attr.width]="textWidth"
-        [attr.height]="height * 0.3"
-        style="font-size: 12px;
-               pointer-events: none;
-               text-transform: uppercase;
-               overflow: hidden;
-               text-align: center;
-               line-height: 1em;">
+        [attr.height]="labelFontSize + textPadding[2]"
+        alignment-baseline="hanging">
         <xhtml:p
           [style.color]="getTextColor(color)"
-          style="overflow: hidden;
-                 white-space: nowrap;
-                 text-overflow: ellipsis;
-                 width: 100%;">
+          [style.fontSize.px]="labelFontSize">
           {{trimmedLabel}}
         </xhtml:p>
       </svg:foreignObject>
       <svg:text #textEl
-        [attr.x]="cardWidth / 2"
-        [attr.y]="height * 0.30"
-        dy=".35em"
         class="value-text"
+        [attr.x]="textPadding[3]"
+        [attr.y]="textPadding[0]"
         [style.fill]="getTextColor(color)"
-        text-anchor="middle"
-        [style.font-size.pt]="textFontSize"
-        style="pointer-events: none;">
+        text-anchor="start"
+        alignment-baseline="hanging"
+        [style.font-size.pt]="textFontSize">
         {{value}}
       </svg:text>
     </svg:g>
@@ -62,12 +64,15 @@ import { count, decimalChecker } from '../common/count';
 export class CardComponent implements OnChanges, OnDestroy {
 
   @Input() color;
+  @Input() bandColor;
+
   @Input() x;
   @Input() y;
   @Input() width;
   @Input() height;
   @Input() label;
   @Input() data;
+  @Input() medianSize: number;
 
   @Output() select = new EventEmitter();
 
@@ -90,6 +95,11 @@ export class CardComponent implements OnChanges, OnDestroy {
   initialized: boolean = false;
   animationReq: any;
 
+  bandHeight: number = 10;
+  transformBand: string;
+  textPadding = [10, 20, 10, 20];
+  labelFontSize = 12;
+
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
   }
@@ -104,18 +114,33 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   update(): void {
     this.zone.run(() => {
+      const hasValue = this.data && typeof this.data.value !== 'undefined';
+
       this.transform = `translate(${this.x} , ${this.y})`;
+      
+      this.textWidth = Math.max(0, this.width) - this.textPadding[1] - this.textPadding[3];
+      this.cardWidth = Math.max(0, this.width);
+      this.cardHeight = Math.max(0, this.height);
 
-      this.textWidth = Math.max(0, this.width - 15);
-      this.cardWidth = Math.max(0, this.width - 5);
-      this.cardHeight = Math.max(0, this.height - 5);
-
-      this.label = this.data.name;
+      this.label = this.data ? this.data.name : '';
       this.trimmedLabel = trimLabel(this.label, 55);
-      this.value = this.data.value.toLocaleString();
+      this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
 
-      setTimeout(() => this.scaleText());
-      setTimeout(() => this.startCount(), 20);
+      const value = this.value = hasValue ? this.data.value.toLocaleString() : '';
+
+      if (this.medianSize && this.medianSize > value.length) {
+        this.value = this.value + '\u2007'.repeat(this.medianSize - value.length);
+      }
+
+      const textHeight = this.textFontSize + 2 * this.labelFontSize;
+      this.textPadding[0] = this.textPadding[2] = (this.cardHeight - textHeight - this.bandHeight) / 2 ;
+
+      setTimeout(() => {
+        this.scaleText();
+        this.value = value;
+
+        setTimeout(() => this.startCount(), 20);
+      }, 0);
     });
   }
 
@@ -133,6 +158,9 @@ export class CardComponent implements OnChanges, OnDestroy {
       const callback = ({ value }) => {
         this.zone.run(() => {
           this.value = value.toLocaleString();
+          if (this.medianSize && this.medianSize > value.length) {
+            this.value = this.value + '\u2007'.repeat(this.medianSize - value.length);
+          }
           this.cd.markForCheck();
         });
       };
@@ -149,8 +177,10 @@ export class CardComponent implements OnChanges, OnDestroy {
         return;
       }
 
-      const availableWidth = this.cardWidth * 0.85;
-      const availableHeight = this.cardHeight * 0.60;
+      this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
+
+      const availableWidth = this.cardWidth - this.textPadding[1] - this.textPadding[3];
+      const availableHeight = this.cardHeight / 3;
 
       if (!this.originalWidthRatio) {
         this.originalWidthRatio = availableWidth / width;
@@ -168,6 +198,11 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
 
       this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+      this.labelFontSize = Math.min(this.textFontSize, 12);
+
+      const textHeight = this.textFontSize + 2 * this.labelFontSize;
+      this.textPadding[0] = this.textPadding[2] = (this.cardHeight - textHeight - this.bandHeight) / 2 ;
+
       this.cd.markForCheck();
     });
   }

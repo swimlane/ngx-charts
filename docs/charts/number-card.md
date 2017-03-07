@@ -5,12 +5,16 @@
 
 # Inputs
 
-Property     | Type     | Default Value | Description
-:----------- | :------- | :------------ | :--------------------------------------------------------------------------------------------------------------
-view         | number[] |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size
-results      | object[] |               | the chart data
-scheme       | object   |               | the color scheme of the chart
-customColors | object   |               | custom colors for the chart. Used to override a color for a specific value
+Property     | Type     | Default Value      | Description
+:----------- | :------- | :----------------- | :--------------------------------------------------------------------------------------------------------------
+view         | number[] |                    | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size
+results      | object[] |                    | the chart data
+scheme       | object   |                    | the color scheme of the chart
+customColors | object   |                    | custom colors for the chart. Used to override a color for a specific value
+cardColor    | string   |                    | color of the card background, defaults to color based on value and scheme
+bandColor    | string   |                    | color of the card color-bar, defaults to color based on value and scheme
+emptyColor   | string   | 'rgba(0, 0, 0, 0)' | color of empty card slots
+innerPadding | number \| number[] | 2.5      | padding around each card in px
 
 # Outputs
 
