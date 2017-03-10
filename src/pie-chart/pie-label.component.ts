@@ -1,16 +1,10 @@
 import {
   Component,
   Input,
-  ElementRef,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy,
-  trigger,
-  style,
-  transition,
-  animate
+  ChangeDetectionStrategy
 } from '@angular/core';
-import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
@@ -19,37 +13,27 @@ import { trimLabel } from '../common/trim-label.helper';
   selector: 'g[ngx-charts-pie-label]',
   template: `
     <title>{{label}}</title>
-    <svg:text
-      [@animationState]="'active'"
-      class="pie-label"
-      [attr.transform]="transform"
-      dy=".35em"
-      [style.textAnchor]="textAnchor()"
-      [style.shapeRendering]="'crispEdges'"
-      [style.textTransform]="'uppercase'">
-      {{trimLabel(label, 10)}}
-    </svg:text>
+    <svg:g
+      [attr.transform]="attrTransform"
+      [style.transform]="styleTransform"
+      [style.transition]="textTransition">
+      <svg:text
+        class="pie-label"
+        dy=".35em"
+        [style.textAnchor]="textAnchor()"
+        [style.shapeRendering]="'crispEdges'"
+        [style.textTransform]="'uppercase'">
+        {{trimLabel(label, 10)}}
+      </svg:text>
+    </svg:g>
     <svg:path
-      [@animationState]="'active'"
       [attr.d]="line"
       [attr.stroke]="color"
       fill="none"
-      class="line"
-      [style.strokeDasharray]="2000"
-      [style.strokeDashoffset]="0">
+      class="pie-label-line line">
     </svg:path>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('animationState', [
-      transition('void => *', [
-        style({
-          opacity: 0,
-        }),
-        animate('0.25s 1s', style({opacity: 1}))
-      ])
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieLabelComponent implements OnChanges {
 
@@ -61,14 +45,12 @@ export class PieLabelComponent implements OnChanges {
   @Input() value;
   @Input() explodeSlices;
 
-  element: HTMLElement;
   trimLabel: (label: string, max?: number) => string;
-  labelXY: any;
-  transform: string;
   line: string;
 
-  constructor(element: ElementRef) {
-    this.element = element.nativeElement;
+  private readonly isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
+  
+  constructor() {
     this.trimLabel = trimLabel;
   }
 
@@ -78,7 +60,6 @@ export class PieLabelComponent implements OnChanges {
 
   update(): void {
     const factor = 1.5;
-
     const outerArc = arc()
       .innerRadius(this.radius * factor)
       .outerRadius(this.radius * factor);
@@ -92,17 +73,32 @@ export class PieLabelComponent implements OnChanges {
       .innerRadius(startRadius)
       .outerRadius(startRadius);
 
-    this.labelXY = this.data.pos;
-
     // Calculate innerPos then scale outer position to match label position
     const innerPos = innerArc.centroid(this.data);
     const scale = this.data.pos[1] / innerPos[1];
     const outerPos = [scale * innerPos[0], scale * innerPos[1]];
 
-    this.line = `M${innerPos}L${outerPos}L${this.labelXY}`;
-    this.transform = `translate(${this.labelXY})`;
+    this.line = `M${innerPos}L${outerPos}L${this.data.pos}`;
+  }
 
-    this.loadAnimation();
+  get textX(): number {
+    return this.data.pos[0];
+  }
+
+  get textY(): number {
+    return this.data.pos[1];
+  }
+
+  get styleTransform(): string {
+    return this.isIE ? null : `translate3d(${this.textX}px,${this.textY}px, 0)`;
+  }
+
+  get attrTransform(): string {
+    return !this.isIE ? null : `translate(${this.textX},${this.textY})`;
+  }
+
+  get textTransition(): string {
+    return this.isIE ? null : 'transform 0.75s';
   }
 
   textAnchor(): any {
@@ -111,23 +107,6 @@ export class PieLabelComponent implements OnChanges {
 
   midAngle(d): number {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
-  }
-
-  loadAnimation(): void {
-    const label = select(this.element).select('.label');
-    const line = select(this.element).select('.line');
-
-    label
-      .attr('opacity', 0)
-      .transition().delay(750).duration(750)
-      .attr('opacity', 1);
-
-    line
-      .style('stroke-dashoffset', 2000)
-      .transition().delay(750).duration(750)
-      .style('stroke-dashoffset', '0')
-      .transition()
-      .style('stroke-dasharray', 'none');
   }
 
 }
