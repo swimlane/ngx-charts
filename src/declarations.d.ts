@@ -6,6 +6,8 @@ declare var IS_PRODUCTION: boolean;
 declare var HMR: boolean;
 declare var IS_DEV: boolean;
 declare var TRAVIS: boolean;
+declare var require: any;
+
 
 interface ErrorStackTraceLimit {
   stackTraceLimit: number;
