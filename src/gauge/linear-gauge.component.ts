@@ -7,8 +7,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { scaleLinear } from 'd3-scale';
 
-import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -171,7 +171,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   getValueScale(): any {
-    return d3.scaleLinear()
+    return scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valueDomain);
   }

@@ -2,7 +2,8 @@ import {
   Component, Input, Output, EventEmitter, ElementRef,
   OnChanges, SimpleChanges, ChangeDetectionStrategy
 } from '@angular/core';
-import d3 from '../d3';
+import { select } from 'd3-selection';
+
 import { invertColor } from '../utils/color-utils';
 
 @Component({
@@ -80,7 +81,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    const node = d3.select(this.element).select('.cell');
+    const node = select(this.element).select('.cell');
 
     node
       .attr('opacity', 0)
@@ -95,7 +96,7 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    const node = d3.select(this.element).select('.cell');
+    const node = select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1)

@@ -4,8 +4,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-
-import d3 from '../d3';
+import { line } from 'd3-shape';
 
 @Component({
   selector: 'g[ngx-charts-gauge-axis]',
@@ -135,8 +134,8 @@ export class GaugeAxisComponent implements OnChanges {
     const x2 = (startDistance + tickLength) * Math.cos(angle);
 
     const points = [{x: x1, y: y1}, {x: x2, y: y2}];
-    const line = d3.line().x(d => d.x).y(d => d.y);
-    return line(points);
+    const lineGenerator = line<any>().x(d => d.x).y(d => d.y);
+    return lineGenerator(points);
   }
 
 }

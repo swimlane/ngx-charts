@@ -10,10 +10,11 @@ import {
   animate,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { scaleBand, scaleLinear } from 'd3-scale';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-bar-vertical-normalized',
@@ -181,17 +182,17 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return [0, 100];
   }
 
-  getXScale() {
+  getXScale(): any {
     const spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
 
-    return d3.scaleBand()
+    return scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
       .domain(this.groupDomain);
   }
 
-  getYScale() {
-    const scale = d3.scaleLinear()
+  getYScale(): any {
+    const scale = scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.valueDomain);
     return this.roundDomains ? scale.nice() : scale;

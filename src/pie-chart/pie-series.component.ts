@@ -7,7 +7,9 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import d3 from '../d3';
+import { max } from 'd3-array';
+import { arc, pie } from 'd3-shape';
+
 import { formatLabel } from '../common/label.helper';
 
 @Component({
@@ -75,13 +77,13 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   update(): void {
-    const pie: any = d3.pie()
+    const pieGenerator = pie<any, any>()
       .value((d) => d.value)
       .sort(null);
 
-    const arcData = pie(this.series);
+    const arcData = pieGenerator(this.series);
 
-    this.max = d3.max(arcData, (d) => {
+    this.max = max(arcData, (d) => {
       return d.value;
     });
 
@@ -95,7 +97,7 @@ export class PieSeriesComponent implements OnChanges {
   outerArc(): any {
     const factor = 1.5;
 
-    return d3.arc()
+    return arc()
       .innerRadius(this.outerRadius * factor)
       .outerRadius(this.outerRadius * factor);
   }

@@ -7,7 +7,8 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import d3 from '../d3';
+import { area } from 'd3-shape';
+
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 
 @Component({
@@ -57,7 +58,7 @@ export class AreaSeriesComponent implements OnChanges {
   update(): void {
     this.updateGradient();
 
-    let area;
+    let currentArea;
     let startingArea;
 
     const xProperty = (d) => {
@@ -66,28 +67,28 @@ export class AreaSeriesComponent implements OnChanges {
     };
 
     if (this.stacked || this.normalized) {
-      area = d3.area()
+      currentArea = area<any>()
         .x(xProperty)
         .y0((d, i) => this.yScale(d.d0))
         .y1((d, i) => this.yScale(d.d1));
 
-      startingArea = d3.area()
+      startingArea = area<any>()
         .x(xProperty)
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);
     } else {
-      area = d3.area()
+      currentArea = area<any>()
         .x(xProperty)
         .y0(() => this.yScale.range()[0])
         .y1(d => this.yScale(d.value));
 
-      startingArea = d3.area()
+      startingArea = area<any>()
         .x(xProperty)
         .y0(d => this.yScale.range()[0])
         .y1(d => this.yScale.range()[0]);
     }
 
-    area.curve(this.curve);
+    currentArea.curve(this.curve);
     startingArea.curve(this.curve);
 
     this.opacity = .8;
@@ -101,7 +102,7 @@ export class AreaSeriesComponent implements OnChanges {
       data = sortByDomain(data, 'name', 'asc', this.xScale.domain());
     }
 
-    this.path = area(data);
+    this.path = currentArea(data);
     this.startingPath = startingArea(data);
   }
 

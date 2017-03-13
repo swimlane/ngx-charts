@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import d3 from '../d3';
+import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -218,7 +218,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   }
 
   getRScale(domain, range): any {
-    const scale = d3.scaleLinear()
+    const scale = scaleLinear()
       .range(range)
       .domain(domain);
 

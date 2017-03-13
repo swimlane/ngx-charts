@@ -10,8 +10,10 @@ import {
   transition,
   animate
 } from '@angular/core';
+import { select } from 'd3-selection';
+import { arc } from 'd3-shape';
+
 import { trimLabel } from '../common/trim-label.helper';
-import d3 from '../d3';
 
 @Component({
   selector: 'g[ngx-charts-pie-label]',
@@ -77,7 +79,7 @@ export class PieLabelComponent implements OnChanges {
   update(): void {
     const factor = 1.5;
 
-    const outerArc = d3.arc()
+    const outerArc = arc()
       .innerRadius(this.radius * factor)
       .outerRadius(this.radius * factor);
 
@@ -86,7 +88,7 @@ export class PieLabelComponent implements OnChanges {
       startRadius = this.radius * this.value / this.max;
     }
 
-    const innerArc = d3.arc()
+    const innerArc = arc()
       .innerRadius(startRadius)
       .outerRadius(startRadius);
 
@@ -109,8 +111,8 @@ export class PieLabelComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    const label = d3.select(this.element).select('.label');
-    const line = d3.select(this.element).select('.line');
+    const label = select(this.element).select('.label');
+    const line = select(this.element).select('.line');
 
     label
       .attr('opacity', 0)
