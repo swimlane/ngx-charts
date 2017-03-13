@@ -103,12 +103,13 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   calculateLabelPositions(pieData): any {
+    const factor = 1.5;
     const minDistance = 10;
     const labelPositions = pieData;
 
     labelPositions.forEach((d) => {
       d.pos = this.outerArc().centroid(d);
-      d.pos[0] = this.outerRadius * (this.midAngle(d) < Math.PI ? 1 : -1);
+      d.pos[0] = factor * this.outerRadius * (this.midAngle(d) < Math.PI ? 1 : -1);
     });
 
     for (let i = 0; i < labelPositions.length - 1; i++) {
@@ -119,10 +120,10 @@ export class PieSeriesComponent implements OnChanges {
         // if they're on the same side
         if (b.pos[0] * a.pos[0] > 0) {
           // if they're overlapping
-          if (Math.abs(b.pos[1] - a.pos[1]) <= minDistance) {
-            // push the second one down
-            labelPositions[j].pos[1] = b.pos[1] + minDistance;
-            j--;
+          const o = minDistance - Math.abs(b.pos[1] - a.pos[1]);
+          if (o > 0) {
+            // push the second up or down
+            b.pos[1] += Math.sign(b.pos[0]) * o;
           }
         }
       }

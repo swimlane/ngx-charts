@@ -92,11 +92,14 @@ export class PieLabelComponent implements OnChanges {
       .innerRadius(startRadius)
       .outerRadius(startRadius);
 
-    this.labelXY = outerArc.centroid(this.data);
-    this.labelXY[0] = this.radius * factor * (this.midAngle(this.data) < Math.PI ? 1 : -1);
-    this.labelXY[1] = this.data.pos[1];
+    this.labelXY = this.data.pos;
 
-    this.line = `M${innerArc.centroid(this.data)}L${outerArc.centroid(this.data)}L${this.labelXY}`;
+    // Calculate innerPos then scale outer position to match label position
+    const innerPos = innerArc.centroid(this.data);
+    const scale = this.data.pos[1] / innerPos[1];
+    const outerPos = [scale * innerPos[0], scale * innerPos[1]];
+
+    this.line = `M${innerPos}L${outerPos}L${this.labelXY}`;
     this.transform = `translate(${this.labelXY})`;
 
     this.loadAnimation();
