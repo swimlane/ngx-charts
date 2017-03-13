@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { pie } from 'd3-shape';
 export var PieGridSeriesComponent = (function () {
     function PieGridSeriesComponent(element) {
         this.innerRadius = 70;
@@ -11,7 +11,7 @@ export var PieGridSeriesComponent = (function () {
         this.update();
     };
     PieGridSeriesComponent.prototype.update = function () {
-        this.layout = d3.pie()
+        this.layout = pie()
             .value(function (d) { return d.data.value; }).sort(null);
         this.arcs = this.getArcs();
     };

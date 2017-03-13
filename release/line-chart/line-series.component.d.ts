@@ -7,7 +7,7 @@ export declare class LineSeriesComponent implements OnChanges {
     yScale: any;
     colors: any;
     scaleType: any;
-    curve: string;
+    curve: any;
     activeEntries: any[];
     rangeFillOpacity: number;
     path: string;

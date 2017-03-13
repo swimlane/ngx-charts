@@ -4,7 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, Output, EventEmitter, HostListener, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
+import { curveLinear } from 'd3-shape';
 import { PathLocationStrategy } from '@angular/common';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -16,7 +17,7 @@ export var AreaChartNormalizedComponent = (function (_super) {
         _super.apply(this, arguments);
         this.legend = false;
         this.showGridLines = true;
-        this.curve = d3.shape.curveLinear;
+        this.curve = curveLinear;
         this.activeEntries = [];
         this.roundDomains = false;
         this.tooltipDisabled = false;
@@ -175,13 +176,13 @@ export var AreaChartNormalizedComponent = (function (_super) {
     AreaChartNormalizedComponent.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
-            scale = d3.scaleTime();
+            scale = scaleTime();
         }
         else if (this.scaleType === 'linear') {
-            scale = d3.scaleLinear();
+            scale = scaleLinear();
         }
         else if (this.scaleType === 'ordinal') {
-            scale = d3.scalePoint()
+            scale = scalePoint()
                 .padding(0.1);
         }
         scale
@@ -190,7 +191,7 @@ export var AreaChartNormalizedComponent = (function (_super) {
         return this.roundDomains ? scale.nice() : scale;
     };
     AreaChartNormalizedComponent.prototype.getYScale = function (domain, height) {
-        var scale = d3.scaleLinear()
+        var scale = scaleLinear()
             .range([height, 0])
             .domain(domain);
         return this.roundDomains ? scale.nice() : scale;

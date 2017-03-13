@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.3.0
+- Enhancement: Improved pie chart label positioning (#273)
+- Enhancement: Improved number card design and scaling (#272)
+- Chore: Refactored charts to use d3 modules directly in library components (#270)
+
 ## 4.2.1
 - Bug: Fixed customColors mapping
 - Chore: Various AoT compilation and build improvements (#255, #257, #258, #259, #256, #263, #260, #266)

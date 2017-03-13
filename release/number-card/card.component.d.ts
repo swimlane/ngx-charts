@@ -3,12 +3,14 @@ export declare class CardComponent implements OnChanges, OnDestroy {
     private cd;
     private zone;
     color: any;
+    bandColor: any;
     x: any;
     y: any;
     width: any;
     height: any;
     label: any;
     data: any;
+    medianSize: number;
     select: EventEmitter<{}>;
     textEl: ElementRef;
     element: HTMLElement;
@@ -27,6 +29,10 @@ export declare class CardComponent implements OnChanges, OnDestroy {
     originalHeightRatio: number;
     initialized: boolean;
     animationReq: any;
+    bandHeight: number;
+    transformBand: string;
+    textPadding: number[];
+    labelFontSize: number;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { select } from 'd3-selection';
 import { id } from '../utils/id';
-import d3 from '../d3';
 export var HeatMapCellComponent = (function () {
     function HeatMapCellComponent(element, location) {
         this.location = location;
@@ -34,12 +34,12 @@ export var HeatMapCellComponent = (function () {
             }];
     };
     HeatMapCellComponent.prototype.loadAnimation = function () {
-        var node = d3.select(this.element).select('.cell');
+        var node = select(this.element).select('.cell');
         node.attr('opacity', 0);
         this.animateToCurrentForm();
     };
     HeatMapCellComponent.prototype.animateToCurrentForm = function () {
-        var node = d3.select(this.element).select('.cell');
+        var node = select(this.element).select('.cell');
         node.transition().duration(750)
             .attr('opacity', 1);
     };

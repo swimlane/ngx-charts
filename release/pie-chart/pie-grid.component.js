@@ -4,7 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { min } from 'd3-array';
+import { format } from 'd3-format';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -48,7 +49,7 @@ export var PieGridComponent = (function (_super) {
             var padding = 10;
             var label = formatLabel(d.data.name);
             var value = d.data.value;
-            var radius = (d3.min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
+            var radius = (min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
             var innerRadius = radius * 0.9;
             var count = 0;
             var colors = function () {
@@ -70,7 +71,7 @@ export var PieGridComponent = (function (_super) {
                 label: trimLabel(label),
                 total: value,
                 value: value,
-                percent: d3.format('.1%')(d.data.percent),
+                percent: format('.1%')(d.data.percent),
                 data: [d, {
                         data: {
                             other: true,

@@ -5,17 +5,18 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, HostListener, ChangeDetectionStrategy } from '@angular/core';
 import { PathLocationStrategy } from '@angular/common';
+import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
+import { curveLinear } from 'd3-shape';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-import d3 from '../d3';
 export var LineChartComponent = (function (_super) {
     __extends(LineChartComponent, _super);
     function LineChartComponent() {
         _super.apply(this, arguments);
         this.showGridLines = true;
-        this.curve = d3.shape.curveLinear;
+        this.curve = curveLinear;
         this.activeEntries = [];
         this.roundDomains = false;
         this.tooltipDisabled = false;
@@ -142,17 +143,17 @@ export var LineChartComponent = (function (_super) {
     LineChartComponent.prototype.getXScale = function (domain, width) {
         var scale;
         if (this.scaleType === 'time') {
-            scale = d3.scaleTime()
+            scale = scaleTime()
                 .range([0, width])
                 .domain(domain);
         }
         else if (this.scaleType === 'linear') {
-            scale = d3.scaleLinear()
+            scale = scaleLinear()
                 .range([0, width])
                 .domain(domain);
         }
         else if (this.scaleType === 'ordinal') {
-            scale = d3.scalePoint()
+            scale = scalePoint()
                 .range([0, width])
                 .padding(0.1)
                 .domain(domain);
@@ -160,7 +161,7 @@ export var LineChartComponent = (function (_super) {
         return this.roundDomains ? scale.nice() : scale;
     };
     LineChartComponent.prototype.getYScale = function (domain, height) {
-        var scale = d3.scaleLinear()
+        var scale = scaleLinear()
             .range([height, 0])
             .domain(domain);
         return this.roundDomains ? scale.nice() : scale;

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { area } from 'd3-shape';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 export var AreaSeriesComponent = (function () {
     function AreaSeriesComponent() {
@@ -13,33 +13,33 @@ export var AreaSeriesComponent = (function () {
     AreaSeriesComponent.prototype.update = function () {
         var _this = this;
         this.updateGradient();
-        var area;
+        var currentArea;
         var startingArea;
         var xProperty = function (d) {
             var label = d.name;
             return _this.xScale(label);
         };
         if (this.stacked || this.normalized) {
-            area = d3.area()
+            currentArea = area()
                 .x(xProperty)
                 .y0(function (d, i) { return _this.yScale(d.d0); })
                 .y1(function (d, i) { return _this.yScale(d.d1); });
-            startingArea = d3.area()
+            startingArea = area()
                 .x(xProperty)
                 .y0(function (d) { return _this.yScale.range()[0]; })
                 .y1(function (d) { return _this.yScale.range()[0]; });
         }
         else {
-            area = d3.area()
+            currentArea = area()
                 .x(xProperty)
                 .y0(function () { return _this.yScale.range()[0]; })
                 .y1(function (d) { return _this.yScale(d.value); });
-            startingArea = d3.area()
+            startingArea = area()
                 .x(xProperty)
                 .y0(function (d) { return _this.yScale.range()[0]; })
                 .y1(function (d) { return _this.yScale.range()[0]; });
         }
-        area.curve(this.curve);
+        currentArea.curve(this.curve);
         startingArea.curve(this.curve);
         this.opacity = .8;
         var data = this.data.series;
@@ -52,7 +52,7 @@ export var AreaSeriesComponent = (function () {
         else {
             data = sortByDomain(data, 'name', 'asc', this.xScale.domain());
         }
-        this.path = area(data);
+        this.path = currentArea(data);
         this.startingPath = startingArea(data);
     };
     AreaSeriesComponent.prototype.updateGradient = function () {

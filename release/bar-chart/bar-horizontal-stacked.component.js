@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, Output, EventEmitter, trigger, style, ViewEncapsulation, transition, animate, ChangeDetectionStrategy } from '@angular/core';
+import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 export var BarHorizontalStackedComponent = (function (_super) {
     __extends(BarHorizontalStackedComponent, _super);
     function BarHorizontalStackedComponent() {
@@ -92,13 +92,13 @@ export var BarHorizontalStackedComponent = (function (_super) {
     };
     BarHorizontalStackedComponent.prototype.getYScale = function () {
         var spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
-        return d3.scaleBand()
+        return scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
     BarHorizontalStackedComponent.prototype.getXScale = function () {
-        var scale = d3.scaleLinear()
+        var scale = scaleLinear()
             .range([0, this.dims.width])
             .domain(this.valueDomain);
         return this.roundDomains ? scale.nice() : scale;

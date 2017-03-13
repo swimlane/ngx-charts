@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 export var BarHorizontalComponent = (function (_super) {
     __extends(BarHorizontalComponent, _super);
     function BarHorizontalComponent() {
@@ -50,7 +50,7 @@ export var BarHorizontalComponent = (function (_super) {
     };
     BarHorizontalComponent.prototype.getXScale = function () {
         this.xDomain = this.getXDomain();
-        var scale = d3.scaleLinear()
+        var scale = scaleLinear()
             .range([0, this.dims.width])
             .domain(this.xDomain);
         return this.roundDomains ? scale.nice() : scale;
@@ -58,7 +58,7 @@ export var BarHorizontalComponent = (function (_super) {
     BarHorizontalComponent.prototype.getYScale = function () {
         this.yDomain = this.getYDomain();
         var spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
-        return d3.scaleBand()
+        return scaleBand()
             .rangeRound([this.dims.height, 0])
             .paddingInner(spacing)
             .domain(this.yDomain);

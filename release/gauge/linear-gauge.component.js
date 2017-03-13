@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, ViewChild, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -65,7 +65,7 @@ export var LinearGaugeComponent = (function (_super) {
         return [this.min, this.max];
     };
     LinearGaugeComponent.prototype.getValueScale = function () {
-        return d3.scaleLinear()
+        return scaleLinear()
             .range([0, this.dims.width])
             .domain(this.valueDomain);
     };

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { select } from 'd3-selection';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { id } from '../utils/id';
-import d3 from '../d3';
 export var AreaComponent = (function () {
     function AreaComponent(element, location) {
         this.location = location;
@@ -43,7 +43,7 @@ export var AreaComponent = (function () {
         setTimeout(this.update.bind(this), 100);
     };
     AreaComponent.prototype.animateToCurrentForm = function () {
-        var node = d3.select(this.element).select('.area');
+        var node = select(this.element).select('.area');
         node.transition().duration(750)
             .attr('d', this.path);
     };
