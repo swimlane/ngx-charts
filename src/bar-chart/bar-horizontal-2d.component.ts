@@ -10,10 +10,11 @@ import {
   animate,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { scaleBand, scaleLinear } from 'd3-scale';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-2d',
@@ -162,28 +163,28 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     });
   }
 
-  getGroupScale() {
+  getGroupScale(): any {
     const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
 
-    return d3.scaleBand()
+    return scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
       .paddingOuter(spacing / 2)
       .domain(this.groupDomain);
   }
 
-  getInnerScale() {
+  getInnerScale(): any {
     const height = this.groupScale.bandwidth();
     const spacing = this.innerDomain.length / (height / this.barPadding + 1);
 
-    return d3.scaleBand()
+    return scaleBand()
       .rangeRound([0, height])
       .paddingInner(spacing)
       .domain(this.innerDomain);
   }
 
-  getValueScale() {
-    const scale = d3.scaleLinear()
+  getValueScale(): any {
+    const scale = scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valuesDomain);
 

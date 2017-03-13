@@ -8,9 +8,10 @@ import {
   OnChanges,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { select } from 'd3-selection';
+
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { id } from '../utils/id';
-import d3 from '../d3';
 
 @Component({
   selector: 'g[ngx-charts-area]',
@@ -92,7 +93,7 @@ export class AreaComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    const node = d3.select(this.element).select('.area');
+    const node = select(this.element).select('.area');
 
     node.transition().duration(750)
       .attr('d', this.path);

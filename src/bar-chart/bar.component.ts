@@ -10,8 +10,9 @@ import {
   ChangeDetectionStrategy
  } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { select } from 'd3-selection';
+
 import { id } from '../utils/id';
-import d3 from '../d3';
 
 @Component({
   selector: 'g[ngx-charts-bar]',
@@ -100,7 +101,7 @@ export class BarComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    const node = d3.select(this.element).select('.bar');
+    const node = select(this.element).select('.bar');
     const path = this.getPath();
 
     node.transition().duration(750)

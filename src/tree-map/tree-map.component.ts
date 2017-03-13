@@ -6,7 +6,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
-import d3 from '../d3';
+import { treemap, stratify } from 'd3-hierarchy';
+
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -59,7 +60,7 @@ export class TreeMapComponent extends BaseChartComponent {
 
       this.domain = this.getDomain();
 
-      this.treemap = d3.treemap()
+      this.treemap = treemap<any>()
         .size([this.dims.width, this.dims.height]);
 
       const rootNode = {
@@ -68,7 +69,7 @@ export class TreeMapComponent extends BaseChartComponent {
         isRoot: true
       };
 
-      const root = d3.stratify()
+      const root = stratify<any>()
         .id(d => {
           let label = d.name;
 
