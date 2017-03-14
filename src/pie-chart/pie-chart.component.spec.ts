@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import d3 from '../d3';
+import { arc } from 'd3-shape';
+
 import '../../config/testing-utils';
 import { single } from '../../demo/data';
 import { APP_BASE_HREF } from '@angular/common';
@@ -78,13 +79,13 @@ describe('<ngx-charts-pie>', () => {
 
         const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
 
-        const arc = d3.arc()
+        const testArc: any = arc()
           .innerRadius(0)
           .outerRadius(440 / 3)
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(arcElement.getAttribute('d')).toEqual(arc());
+        expect(arcElement.getAttribute('d')).toEqual(testArc());
         done();
       });
     });
@@ -111,13 +112,13 @@ describe('<ngx-charts-pie>', () => {
         const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
         const outerRadius = 440 / 3;
 
-        const arc = d3.arc()
+        const testArc: any = arc()
           .innerRadius(outerRadius * 3 / 4) // default arc is 1/4 outerwidth
           .outerRadius(outerRadius)
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(arcElement.getAttribute('d')).toEqual(arc());
+        expect(arcElement.getAttribute('d')).toEqual(testArc());
         done();
       });
     });
@@ -143,13 +144,13 @@ describe('<ngx-charts-pie>', () => {
         const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
         const outerRadius = 440 / 3;
 
-        const arc = d3.arc()
+        const testArc: any = arc()
           .innerRadius(outerRadius * 0.90) // default arc is 1/4 outerwidth
           .outerRadius(outerRadius)
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(arcElement.getAttribute('d')).toEqual(arc());
+        expect(arcElement.getAttribute('d')).toEqual(testArc());
         done();
       });
     });
