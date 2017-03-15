@@ -62,7 +62,7 @@ export class PieLabelComponent implements OnChanges {
   @Input() explodeSlices;
 
   element: HTMLElement;
-  trimLabel: (label: string) => string;
+  trimLabel: (label: string, max?: number) => string;
   labelXY: any;
   transform: string;
   line: string;

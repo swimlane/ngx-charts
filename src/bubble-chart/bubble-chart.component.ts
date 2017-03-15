@@ -18,7 +18,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:defs>
-        <svg:clipPath [attr.id]="clipPathId">
+        <svg:clipPath>
           <svg:rect
             [attr.width]="dims.width + 10"
             [attr.height]="dims.height + 10"

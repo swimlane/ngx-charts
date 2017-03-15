@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 import { line } from 'd3-shape';
@@ -42,11 +43,11 @@ export class GaugeAxisComponent implements OnChanges {
   @Input() valueScale: any;
   @Input() tickFormatting: any;
 
-  ticks: any[];
+  ticks: any;
   rotationAngle: number;
   rotate: string = '';
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     this.update();
   }
 

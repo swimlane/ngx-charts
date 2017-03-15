@@ -17,8 +17,6 @@ import { ColorHelper } from '../common/color.helper';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
-      (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="heat-map chart">
         <svg:g ngx-charts-x-axis

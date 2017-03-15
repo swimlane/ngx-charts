@@ -203,8 +203,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.draggingNode.fy = $event.y - this.draggingStart.y;
   }
 
-  @HostListener('document:mouseup')
-  onDragEnd(node, $event: MouseEvent): void {
+  @HostListener('document:mouseup', ['$event'])
+  onDragEnd($event: MouseEvent): void {
     if (!this.draggingNode) return;
 
     this.force.alphaTarget(0);
