@@ -268,7 +268,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(event, group) {
+  onActivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -285,7 +285,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group) {
+  onDeactivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
