@@ -318,6 +318,10 @@ export class LineChartComponent extends BaseChartComponent {
       scale = scaleLinear()
         .range([0, width])
         .domain(domain);
+ 
+      if (this.roundDomains) {
+        scale = scale.nice();
+      }
     } else if (this.scaleType === 'ordinal') {
       scale = scalePoint()
         .range([0, width])
@@ -325,7 +329,7 @@ export class LineChartComponent extends BaseChartComponent {
         .domain(domain);
     }
 
-    return this.roundDomains ? scale.nice() : scale;
+    return scale;
   }
 
   getYScale(domain, height): any {
