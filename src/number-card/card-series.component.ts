@@ -9,6 +9,7 @@ import {
   NgZone
 } from '@angular/core';
 import { gridSize, gridLayout } from '../common/grid-layout.helper';
+import { invertColor } from '../utils/color-utils';
 
 export interface CardModel {
   x;
@@ -42,6 +43,7 @@ export interface CardModel {
       [height]="c.height"
       [color]="c.color"
       [bandColor]="c.bandColor"
+      [textColor]="c.textColor"
       [data]="c.data"
       [medianSize]="medianSize"
       (select)="onClick($event)"
@@ -60,6 +62,7 @@ export class CardSeriesComponent implements OnChanges {
   @Input() cardColor;
   @Input() bandColor;
   @Input() emptyColor = 'rgba(0, 0, 0, 0)';
+  @Input() textColor;
 
   @Output() select = new EventEmitter();
 
@@ -107,14 +110,16 @@ export class CardSeriesComponent implements OnChanges {
         d.data.name = label;
 
         const value = d.data.value;
-        const labelColor = label ? this.colors.getColor(label) : this.emptyColor;
+        const valueColor = label ? this.colors.getColor(label) : this.emptyColor;
+        const color = this.cardColor || valueColor;
         return {
           x: d.x,
           y: d.y,
           width: d.width - xPadding,
           height: d.height - yPadding,
-          color: this.cardColor || labelColor,
-          bandColor: this.bandColor || labelColor,
+          color,
+          bandColor: this.bandColor || valueColor,
+          textColor: this.textColor || invertColor(color),
           label,
           data: d.data,
           tooltipText: `${label}: ${value}`

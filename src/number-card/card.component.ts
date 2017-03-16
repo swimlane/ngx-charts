@@ -5,7 +5,6 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
 import { roundedRect } from '../common/shape.helper';
-import { invertColor } from '../utils/color-utils';
 import { count, decimalChecker } from '../common/count';
 
 @Component({
@@ -41,7 +40,7 @@ import { count, decimalChecker } from '../common/count';
         [attr.height]="labelFontSize + textPadding[2]"
         alignment-baseline="hanging">
         <xhtml:p
-          [style.color]="getTextColor(color)"
+          [style.color]="textColor"
           [style.fontSize.px]="labelFontSize">
           {{trimmedLabel}}
         </xhtml:p>
@@ -50,7 +49,7 @@ import { count, decimalChecker } from '../common/count';
         class="value-text"
         [attr.x]="textPadding[3]"
         [attr.y]="textPadding[0]"
-        [style.fill]="getTextColor(color)"
+        [style.fill]="textColor"
         text-anchor="start"
         alignment-baseline="hanging"
         [style.font-size.pt]="textFontSize">
@@ -64,6 +63,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   @Input() color;
   @Input() bandColor;
+  @Input() textColor;
 
   @Input() x;
   @Input() y;
@@ -145,10 +145,6 @@ export class CardComponent implements OnChanges, OnDestroy {
         setTimeout(() => this.startCount(), 20);
       }, 0);
     });
-  }
-
-  getTextColor(color): string {
-    return invertColor(color);
   }
 
   startCount(): void {
