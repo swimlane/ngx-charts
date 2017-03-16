@@ -14,7 +14,7 @@ customColors | object   |                    | custom colors for the chart. Used
 cardColor    | string   |                    | color of the card background, defaults to color based on value and scheme
 bandColor    | string   |                    | color of the card color-bar, defaults to color based on value and scheme
 emptyColor   | string   | 'rgba(0, 0, 0, 0)' | color of empty card slots
-innerPadding | number \| number[] | 2.5      | padding around each card in px
+innerPadding | number \| number[] | 15       | padding around each card in px
 
 # Outputs
 
