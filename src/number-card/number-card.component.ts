@@ -41,8 +41,9 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string;
+  @Input() innerPadding = 15;
   @Input() textColor: string;
-  @Input() innerPadding = 2.5;
+
 
   dims: ViewDimensions;
   data: any[];

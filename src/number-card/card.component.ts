@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef, NgZone, OnDestroy, ViewEncapsulation
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
+import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
 
 @Component({
@@ -21,15 +22,13 @@ import { count, decimalChecker } from '../common/count';
         rx="3"
         ry="3"
       />
-      <svg:rect
+      <svg:path
         *ngIf="bandColor && bandColor !== color"
         class="card-band"
-        [style.fill]="bandColor"
+        [attr.fill]="bandColor"
         [attr.transform]="transformBand"
-        [attr.width]="cardWidth"
-        [attr.height]="bandHeight"
-        rx="3"
-        ry="3"
+        stroke="none"
+        [attr.d]="bandPath"
       />
       <title>{{label}}</title>
       <svg:foreignObject
@@ -100,6 +99,8 @@ export class CardComponent implements OnChanges, OnDestroy {
   textPadding = [10, 20, 10, 20];
   labelFontSize = 12;
 
+  bandPath: string;
+
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
   }
@@ -134,6 +135,8 @@ export class CardComponent implements OnChanges, OnDestroy {
 
       const textHeight = this.textFontSize + 2 * this.labelFontSize;
       this.textPadding[0] = this.textPadding[2] = (this.cardHeight - textHeight - this.bandHeight) / 2 ;
+
+      this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
 
       setTimeout(() => {
         this.scaleText();
@@ -209,5 +212,4 @@ export class CardComponent implements OnChanges, OnDestroy {
       value: this.data.value
     });
   }
-
 }

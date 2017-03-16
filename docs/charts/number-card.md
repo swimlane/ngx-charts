@@ -15,7 +15,7 @@ cardColor    | string   |                    | color of the card background, def
 bandColor    | string   |                    | color of the card color-bar, defaults to color based on value and scheme
 textColor    | string   |                    | color of the card text, defaults to the inverse of the card color
 emptyColor   | string   | 'rgba(0, 0, 0, 0)' | color of empty card slots
-innerPadding | number \| number[] | 2.5      | padding around each card in px
+innerPadding | number \| number[] | 15       | padding around each card in px
 
 # Outputs
 

@@ -57,7 +57,7 @@ export class CardSeriesComponent implements OnChanges {
   @Input() slots: any[];
   @Input() dims;
   @Input() colors;
-  @Input() innerPadding = 2.5;
+  @Input() innerPadding = 15;
 
   @Input() cardColor;
   @Input() bandColor;
