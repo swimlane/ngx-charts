@@ -20,6 +20,7 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
           [colors]="colors"
           [cardColor]="cardColor"
           [bandColor]="bandColor"
+          [textColor]="textColor"
           [emptyColor]="emptyColor"
           [data]="data"
           [dims]="dims"
@@ -40,6 +41,7 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
   @Input() bandColor: string;
   @Input() emptyColor: string;
+  @Input() textColor: string;
   @Input() innerPadding = 2.5;
 
   dims: ViewDimensions;
