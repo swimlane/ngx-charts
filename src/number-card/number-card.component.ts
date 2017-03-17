@@ -44,7 +44,6 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() innerPadding = 15;
   @Input() textColor: string;
 
-
   dims: ViewDimensions;
   data: any[];
   slots: any[];
