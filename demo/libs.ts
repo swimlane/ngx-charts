@@ -8,6 +8,8 @@ import { enableProdMode } from '@angular/core';
 import '@angular/platform-browser-dynamic';
 import '@angular/common';
 
+import 'web-animations-js';
+
 if(IS_PRODUCTION) {
   disableDebugTools();
   enableProdMode();
