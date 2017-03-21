@@ -20,6 +20,14 @@
 | gradient        | boolean  | false         | fill elements with a gradient instead of a solid color                                                          |
 | activeEntries   | object[] | []            | elements to highlight                                                                                           |
 | tooltipDisabled | boolean  | false         | show or hide the tooltip                                                                                        |
+| pieLabelOption | [PieLabelOption](#pie-label-option)|        | optional input for fine control on pie label processing 
+                                             |
+
+## PieLabelOption <a id="pie-label-option"></a>
+Property              | Type          | Default Value | Description
+:-------------------- | :------------ | :------------ | :--------------------------------------------------------------------------------------------------------------
+trimLabel             | boolean       | true          | Whether to trim pie chart label
+trimLabelMaxLength    | number        | 10            | Max. length of trim pie chart label. Only apply when trimLabel is true
 
 # Outputs
 

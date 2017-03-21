@@ -189,6 +189,7 @@
         [legend]="showLegend"
         [explodeSlices]="explodeSlices"
         [labels]="showLabels"
+        [pieLabelOption]="pieLabelOption$ | async"
         [doughnut]="doughnut"
         [arcWidth]="arcWidth"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -735,6 +736,15 @@
 
       <div *ngIf="chart.options.includes('maxRadius')">
         <label>Maximum Radius:</label><input type="number" [(ngModel)]="maxRadius">
+      </div>
+
+      <div *ngIf="chart.options.includes('pieLabelOption')">
+        <label>
+          <input type="checkbox" [(ngModel)]="pieLabelOption.trimLabel" (change)="pieLabelOptionChanged()">
+          Trim Label
+        </label> <br />
+        <label>Pie Label Max Length:</label><br />
+        <input type="number" [(ngModel)]="pieLabelOption.trimLabelMaxLength" (change)="pieLabelOptionChanged()"><br />
       </div>
 
     </div>
