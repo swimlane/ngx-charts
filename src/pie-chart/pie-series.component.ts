@@ -11,6 +11,7 @@ import { max } from 'd3-array';
 import { arc, pie } from 'd3-shape';
 
 import { formatLabel } from '../common/label.helper';
+import { PieLabelOption } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-pie-series]',
@@ -22,6 +23,7 @@ import { formatLabel } from '../common/label.helper';
         [radius]="outerRadius"
         [color]="color(arc)"
         [label]="label(arc)"
+        [pieLabelOption]="pieLabelOption"
         [max]="max"
         [value]="arc.value"
         [explodeSlices]="explodeSlices">
@@ -64,6 +66,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
+  @Input() pieLabelOption: PieLabelOption;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();

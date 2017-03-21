@@ -5,5 +5,7 @@
       "**/node_modules": true,
       "dist": true,
       "release": true
-    }
+    },
+    "angulardoc.repoId": "423d256a-6da4-4f13-944d-ee69532bdc68",
+    "angulardoc.lastSync": 0
 }

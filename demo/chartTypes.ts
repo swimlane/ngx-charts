@@ -93,7 +93,7 @@ const chartGroups = [
         inputFormat: 'singleSeries',
         options: [
           'colorScheme', 'gradient', 'showLegend', 'doughnut', 'arcWidth',
-          'explodeSlices', 'showLabels', 'tooltipDisabled'
+          'explodeSlices', 'showLabels', 'tooltipDisabled', 'pieLabelOption'
         ]
       },
       {

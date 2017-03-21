@@ -14,6 +14,7 @@ import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
 
 import { trimLabel } from '../common/trim-label.helper';
+import { PieLabelOption } from '../common';
 
 @Component({
   selector: 'g[ngx-charts-pie-label]',
@@ -27,7 +28,7 @@ import { trimLabel } from '../common/trim-label.helper';
       [style.textAnchor]="textAnchor()"
       [style.shapeRendering]="'crispEdges'"
       [style.textTransform]="'uppercase'">
-      {{trimLabel(label, 10)}}
+      {{formatPieLabel(label)}}
     </svg:text>
     <svg:path
       [@animationState]="'active'"
@@ -60,6 +61,7 @@ export class PieLabelComponent implements OnChanges {
   @Input() max;
   @Input() value;
   @Input() explodeSlices;
+  @Input() pieLabelOption: PieLabelOption;
 
   element: HTMLElement;
   trimLabel: (label: string, max?: number) => string;
@@ -128,6 +130,26 @@ export class PieLabelComponent implements OnChanges {
       .style('stroke-dashoffset', '0')
       .transition()
       .style('stroke-dasharray', 'none');
+  }
+
+  /**
+   * Format pie label base on provided options
+   * 
+   * @param {string} label 
+   * @returns {string} 
+   * 
+   * @memberOf PieLabelComponent
+   */
+  formatPieLabel(label: string): string {
+
+    let formattedLabel = label;
+
+    if (this.pieLabelOption.trimLabel) {
+      formattedLabel = this.trimLabel(label, this.pieLabelOption.trimLabelMaxLength);
+    }
+
+    return formattedLabel;
+
   }
 
 }

@@ -9,6 +9,7 @@ import {
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { PieLabelOption } from '../common';
 
 @Component({
   selector: 'ngx-charts-pie-chart',
@@ -25,6 +26,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
         <svg:g ngx-charts-pie-series
           [colors]="colors"
           [showLabels]="labels"
+          [pieLabelOption]="pieLabelOption"
           [series]="data"
           [activeEntries]="activeEntries"
           [innerRadius]="innerRadius"
@@ -56,6 +58,7 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
+  @Input() pieLabelOption = new PieLabelOption();
 
   @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
