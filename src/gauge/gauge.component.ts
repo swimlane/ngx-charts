@@ -88,6 +88,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
+  @Input() valueFormatting: any;
 
   // Specify margins
   @Input() margin: any[];
@@ -253,6 +254,11 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     if(this.textValue && 0 !== this.textValue.length) {
       return this.textValue.toLocaleString();
     }
+
+    if (this.valueFormatting) {
+      return this.valueFormatting(value);
+    }
+    
     return value.toLocaleString();
   }
 
