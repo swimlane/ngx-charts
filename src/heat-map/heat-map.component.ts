@@ -52,6 +52,7 @@ import { ColorHelper } from '../common/color.helper';
           [data]="results"
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
+          [tooltipText]="tooltipText"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -75,6 +76,8 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
+  @Input() scaleType: string = 'linear';
+  @Input() tooltipText: any;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -107,7 +110,7 @@ export class HeatMapComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        legendType: 'linear'
+        legendType: this.scaleType
       });
 
       this.formatDates();
@@ -163,6 +166,10 @@ export class HeatMapComponent extends BaseChartComponent {
       }
     }
 
+    if (this.scaleType === 'ordinal') {
+      return domain.sort();
+    }
+    
     const min = Math.min(0, ...domain);
     const max = Math.max(...domain);
 
@@ -211,14 +218,14 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
+    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
   }
 
   getLegendOptions() {
     return {
-      scaleType: 'linear',
+      scaleType: this.scaleType,
       domain: this.valueDomain,
-      colors: this.colors.scale
+      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale
     };
   }
 

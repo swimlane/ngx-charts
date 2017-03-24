@@ -189,6 +189,15 @@ const chartGroups = [
         ]
       },
       {
+        name: 'Heat Map - Calendar',
+        selector: 'calendar',
+        inputFormat: 'calendarData',
+        options: [
+          'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+          'innerPadding', 'tooltipDisabled'
+        ]
+      },
+      {
         name: 'Tree Map',
         selector: 'tree-map',
         inputFormat: 'singleSeries',
