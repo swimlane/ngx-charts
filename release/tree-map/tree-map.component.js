@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { treemap, stratify } from 'd3-hierarchy';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -26,14 +26,14 @@ export var TreeMapComponent = (function (_super) {
                 margins: _this.margin
             });
             _this.domain = _this.getDomain();
-            _this.treemap = d3.treemap()
+            _this.treemap = treemap()
                 .size([_this.dims.width, _this.dims.height]);
             var rootNode = {
                 name: 'root',
                 value: 0,
                 isRoot: true
             };
-            var root = d3.stratify()
+            var root = stratify()
                 .id(function (d) {
                 var label = d.name;
                 if (label.constructor.name === 'Date') {

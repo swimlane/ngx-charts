@@ -1,6 +1,7 @@
 import { Component, Input, ElementRef, ChangeDetectionStrategy, trigger, style, transition, animate } from '@angular/core';
+import { select } from 'd3-selection';
+import { arc } from 'd3-shape';
 import { trimLabel } from '../common/trim-label.helper';
-import d3 from '../d3';
 export var PieLabelComponent = (function () {
     function PieLabelComponent(element) {
         this.element = element.nativeElement;
@@ -11,20 +12,22 @@ export var PieLabelComponent = (function () {
     };
     PieLabelComponent.prototype.update = function () {
         var factor = 1.5;
-        var outerArc = d3.arc()
+        var outerArc = arc()
             .innerRadius(this.radius * factor)
             .outerRadius(this.radius * factor);
         var startRadius = this.radius;
         if (this.explodeSlices) {
             startRadius = this.radius * this.value / this.max;
         }
-        var innerArc = d3.arc()
+        var innerArc = arc()
             .innerRadius(startRadius)
             .outerRadius(startRadius);
-        this.labelXY = outerArc.centroid(this.data);
-        this.labelXY[0] = this.radius * factor * (this.midAngle(this.data) < Math.PI ? 1 : -1);
-        this.labelXY[1] = this.data.pos[1];
-        this.line = "M" + innerArc.centroid(this.data) + "L" + outerArc.centroid(this.data) + "L" + this.labelXY;
+        this.labelXY = this.data.pos;
+        // Calculate innerPos then scale outer position to match label position
+        var innerPos = innerArc.centroid(this.data);
+        var scale = this.data.pos[1] / innerPos[1];
+        var outerPos = [scale * innerPos[0], scale * innerPos[1]];
+        this.line = "M" + innerPos + "L" + outerPos + "L" + this.labelXY;
         this.transform = "translate(" + this.labelXY + ")";
         this.loadAnimation();
     };
@@ -35,8 +38,8 @@ export var PieLabelComponent = (function () {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     };
     PieLabelComponent.prototype.loadAnimation = function () {
-        var label = d3.select(this.element).select('.label');
-        var line = d3.select(this.element).select('.line');
+        var label = select(this.element).select('.label');
+        var line = select(this.element).select('.line');
         label
             .attr('opacity', 0)
             .transition().delay(750).duration(750)

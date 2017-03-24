@@ -1,4 +1,4 @@
-import d3 from '../d3';
+import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 export function getScaleType(values) {
     var date = true;
     var num = true;
@@ -47,12 +47,12 @@ export function getDomain(values, scaleType, autoScale) {
 export function getScale(domain, range, scaleType, roundDomains) {
     var scale;
     if (scaleType === 'time') {
-        scale = d3.scaleTime()
+        scale = scaleTime()
             .range(range)
             .domain(domain);
     }
     else if (scaleType === 'linear') {
-        scale = d3.scaleLinear()
+        scale = scaleLinear()
             .range(range)
             .domain(domain);
         if (roundDomains) {
@@ -60,8 +60,8 @@ export function getScale(domain, range, scaleType, roundDomains) {
         }
     }
     else if (scaleType === 'ordinal') {
-        scale = d3.scalePoint()
-            .range(range)
+        scale = scalePoint()
+            .range([range[0], range[1]])
             .domain(domain);
     }
     return scale;

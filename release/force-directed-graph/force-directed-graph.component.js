@@ -4,21 +4,21 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, ContentChild, ElementRef, HostListener, Input, ViewChild, Output, ViewEncapsulation, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY } from 'd3-force';
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
-import d3 from '../d3';
 import { ColorHelper } from '../common/color.helper';
 export var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
     function ForceDirectedGraphComponent() {
         _super.apply(this, arguments);
-        this.force = d3.forceSimulation()
-            .force('charge', d3.forceManyBody())
-            .force('collide', d3.forceCollide(5))
-            .force('x', d3.forceX())
-            .force('y', d3.forceY());
-        this.forceLink = d3.forceLink().id(function (node) { return node.value; });
+        this.force = forceSimulation()
+            .force('charge', forceManyBody())
+            .force('collide', forceCollide(5))
+            .force('x', forceX())
+            .force('y', forceY());
+        this.forceLink = forceLink().id(function (node) { return node.value; });
         this.nodes = [];
         this.links = [];
         this.activeEntries = [];

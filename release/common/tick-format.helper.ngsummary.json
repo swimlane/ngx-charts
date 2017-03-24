@@ -1,1 +1,0 @@
-{"summaries":[{"symbol":{"__symbol":0},"metadata":{"__symbolic":"function","parameters":["fieldType","groupByType"],"value":{"__symbolic":"error","message":"Function call not supported","line":3,"character":9}}}],"symbols":[{"__symbol":0,"name":"tickFormat","filePath":"/Users/marjan/Projects/ng2d3/build/common/tick-format.helper.d.ts"}]}

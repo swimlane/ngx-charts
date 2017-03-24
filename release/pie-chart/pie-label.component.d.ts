@@ -1,4 +1,3 @@
-
 import { ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 export declare class PieLabelComponent implements OnChanges {
     data: any;
@@ -9,7 +8,7 @@ export declare class PieLabelComponent implements OnChanges {
     value: any;
     explodeSlices: any;
     element: HTMLElement;
-    trimLabel: Function;
+    trimLabel: (label: string) => string;
     labelXY: any;
     transform: string;
     line: string;

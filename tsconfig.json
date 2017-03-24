@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "es2015",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
     "moduleResolution": "node",
     "declaration": true,
     "noEmitHelpers": false,
@@ -35,6 +39,6 @@
   },
   "angularCompilerOptions": {
     "genDir": "release/",
-    "skipMetadataEmit": false
+    "skipTemplateCodegen": true
   }
 }

@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import d3 from '../d3';
+import { pie } from 'd3-shape';
 
 @Component({
   selector: 'g[ngx-charts-pie-grid-series]',
@@ -56,7 +56,7 @@ export class PieGridSeriesComponent implements OnChanges {
   }
 
   update(): void {
-    this.layout = d3.pie()
+    this.layout = pie<any, any>()
       .value((d) => d.data.value).sort(null);
 
     this.arcs = this.getArcs();

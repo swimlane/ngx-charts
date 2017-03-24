@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { max } from 'd3-array';
+import { arc, pie } from 'd3-shape';
 import { formatLabel } from '../common/label.helper';
 export var PieSeriesComponent = (function () {
     function PieSeriesComponent() {
@@ -15,11 +16,11 @@ export var PieSeriesComponent = (function () {
         this.update();
     };
     PieSeriesComponent.prototype.update = function () {
-        var pie = d3.pie()
+        var pieGenerator = pie()
             .value(function (d) { return d.value; })
             .sort(null);
-        var arcData = pie(this.series);
-        this.max = d3.max(arcData, function (d) {
+        var arcData = pieGenerator(this.series);
+        this.max = max(arcData, function (d) {
             return d.value;
         });
         this.data = this.calculateLabelPositions(arcData);
@@ -29,17 +30,18 @@ export var PieSeriesComponent = (function () {
     };
     PieSeriesComponent.prototype.outerArc = function () {
         var factor = 1.5;
-        return d3.arc()
+        return arc()
             .innerRadius(this.outerRadius * factor)
             .outerRadius(this.outerRadius * factor);
     };
     PieSeriesComponent.prototype.calculateLabelPositions = function (pieData) {
         var _this = this;
+        var factor = 1.5;
         var minDistance = 10;
         var labelPositions = pieData;
         labelPositions.forEach(function (d) {
             d.pos = _this.outerArc().centroid(d);
-            d.pos[0] = _this.outerRadius * (_this.midAngle(d) < Math.PI ? 1 : -1);
+            d.pos[0] = factor * _this.outerRadius * (_this.midAngle(d) < Math.PI ? 1 : -1);
         });
         for (var i = 0; i < labelPositions.length - 1; i++) {
             var a = labelPositions[i];
@@ -48,10 +50,10 @@ export var PieSeriesComponent = (function () {
                 // if they're on the same side
                 if (b.pos[0] * a.pos[0] > 0) {
                     // if they're overlapping
-                    if (Math.abs(b.pos[1] - a.pos[1]) <= minDistance) {
-                        // push the second one down
-                        labelPositions[j].pos[1] = b.pos[1] + minDistance;
-                        j--;
+                    var o = minDistance - Math.abs(b.pos[1] - a.pos[1]);
+                    if (o > 0) {
+                        // push the second up or down
+                        b.pos[1] += Math.sign(b.pos[0]) * o;
                     }
                 }
             }

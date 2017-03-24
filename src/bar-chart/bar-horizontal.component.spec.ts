@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import d3 from '../d3';
+import { By } from '@angular/platform-browser';
+
 import '../../config/testing-utils';
 import { single } from '../../demo/data';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { BarChartModule } from './bar-chart.module';
+import { BarComponent } from './bar.component'; 
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
@@ -52,11 +54,11 @@ describe('<ngx-charts-bar-horizontal>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.attr('width')).toEqual('400');
-        expect(svg.attr('height')).toEqual('800');
+        expect(svg.getAttribute('width')).toBe('400');
+        expect(svg.getAttribute('height')).toBe('800');
+
         done();
       });
     });
@@ -78,11 +80,9 @@ describe('<ngx-charts-bar-horizontal>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const bars = compiled.querySelectorAll('[ngx-charts-bar]');
-        const bar = d3.select(bars[0]);
+        const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.attr('ng-reflect-height')).toEqual('123'); // ~(780 - 5 * barPadding) / 6 
+        expect(bar.componentInstance.height).toEqual(123); // ~(780 - 5 * barPadding) / 6 
         done();
       });
     });
@@ -107,11 +107,9 @@ describe('<ngx-charts-bar-horizontal>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const bars = compiled.querySelectorAll('[ngx-charts-bar]');
-        const bar = d3.select(bars[0]);
+        const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.attr('ng-reflect-height')).toEqual('130'); // ~(780 - 5 * barPadding) / 6 
+        expect(bar.componentInstance.height).toEqual(130); // ~(780 - 5 * barPadding) / 6 
         done();
       });
     });
@@ -133,11 +131,9 @@ describe('<ngx-charts-bar-horizontal>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const bars = compiled.querySelectorAll('[ngx-charts-bar]');
-        const bar = d3.select(bars[0]);
+        const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.attr('ng-reflect-height')).toEqual('113'); // ~(780 - 5 * barPadding) / 6 
+        expect(bar.componentInstance.height).toEqual(113); // ~(780 - 5 * barPadding) / 6 
         done();
       });
     });

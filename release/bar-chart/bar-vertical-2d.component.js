@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, Output, ViewEncapsulation, EventEmitter, trigger, style, transition, animate, ChangeDetectionStrategy } from '@angular/core';
+import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 export var BarVertical2DComponent = (function (_super) {
     __extends(BarVertical2DComponent, _super);
     function BarVertical2DComponent() {
@@ -57,7 +57,7 @@ export var BarVertical2DComponent = (function (_super) {
     };
     BarVertical2DComponent.prototype.getGroupScale = function () {
         var spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
-        return d3.scaleBand()
+        return scaleBand()
             .rangeRound([0, this.dims.width])
             .paddingInner(spacing)
             .paddingOuter(spacing / 2)
@@ -66,13 +66,13 @@ export var BarVertical2DComponent = (function (_super) {
     BarVertical2DComponent.prototype.getInnerScale = function () {
         var width = this.groupScale.bandwidth();
         var spacing = this.innerDomain.length / (width / this.barPadding + 1);
-        return d3.scaleBand()
+        return scaleBand()
             .rangeRound([0, width])
             .paddingInner(spacing)
             .domain(this.innerDomain);
     };
     BarVertical2DComponent.prototype.getValueScale = function () {
-        var scale = d3.scaleLinear()
+        var scale = scaleLinear()
             .range([this.dims.height, 0])
             .domain(this.valuesDomain);
         return this.roundDomains ? scale.nice() : scale;

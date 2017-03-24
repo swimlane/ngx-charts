@@ -1,4 +1,3 @@
-
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -11,7 +10,7 @@ export declare class HeatMapComponent extends BaseChartComponent {
     xAxisLabel: any;
     yAxisLabel: any;
     gradient: boolean;
-    innerPadding: Number | Number[];
+    innerPadding: number | number[];
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     tooltipDisabled: boolean;

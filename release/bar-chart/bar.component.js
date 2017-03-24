@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { select } from 'd3-selection';
 import { id } from '../utils/id';
-import d3 from '../d3';
 export var BarComponent = (function () {
     function BarComponent(element, location) {
         this.location = location;
@@ -45,7 +45,7 @@ export var BarComponent = (function () {
         setTimeout(this.update.bind(this), 100);
     };
     BarComponent.prototype.animateToCurrentForm = function () {
-        var node = d3.select(this.element).select('.bar');
+        var node = select(this.element).select('.bar');
         var path = this.getPath();
         node.transition().duration(750)
             .attr('d', path);

@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { line } from 'd3-shape';
 export var GaugeAxisComponent = (function () {
     function GaugeAxisComponent() {
         this.rotate = '';
@@ -76,8 +76,8 @@ export var GaugeAxisComponent = (function () {
         var x1 = startDistance * Math.cos(angle);
         var x2 = (startDistance + tickLength) * Math.cos(angle);
         var points = [{ x: x1, y: y1 }, { x: x2, y: y2 }];
-        var line = d3.line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
-        return line(points);
+        var lineGenerator = line().x(function (d) { return d.x; }).y(function (d) { return d.y; });
+        return lineGenerator(points);
     };
     GaugeAxisComponent.decorators = [
         { type: Component, args: [{

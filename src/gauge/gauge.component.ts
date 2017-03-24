@@ -9,8 +9,8 @@ import {
   EventEmitter,
   ViewEncapsulation
 } from '@angular/core';
+import { scaleLinear } from 'd3-scale';
 
-import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -89,6 +89,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
   @Input() showText: boolean = true;
+  @Input() valueFormatting: any;
 
   // Specify margins
   @Input() margin: any[];
@@ -242,7 +243,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getValueScale(): any {
-    return d3.scaleLinear()
+    return scaleLinear()
       .range([0, this.angleSpan])
       .nice()
       .domain(this.valueDomain);
@@ -254,6 +255,11 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     if(this.textValue && 0 !== this.textValue.length) {
       return this.textValue.toLocaleString();
     }
+
+    if (this.valueFormatting) {
+      return this.valueFormatting(value);
+    }
+    
     return value.toLocaleString();
   }
 

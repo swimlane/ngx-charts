@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { scaleBand } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -88,7 +88,7 @@ export var HeatMapComponent = (function (_super) {
     HeatMapComponent.prototype.getXScale = function () {
         var innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0];
         var f = this.xDomain.length / (this.dims.width / innerPadding + 1);
-        return d3.scaleBand()
+        return scaleBand()
             .rangeRound([0, this.dims.width])
             .domain(this.xDomain)
             .paddingInner(f);
@@ -96,7 +96,7 @@ export var HeatMapComponent = (function (_super) {
     HeatMapComponent.prototype.getYScale = function () {
         var innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1];
         var f = this.yDomain.length / (this.dims.height / innerPadding + 1);
-        return d3.scaleBand()
+        return scaleBand()
             .rangeRound([this.dims.height, 0])
             .domain(this.yDomain)
             .paddingInner(f);

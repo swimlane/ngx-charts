@@ -1,4 +1,3 @@
-
 import { EventEmitter } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -29,7 +28,7 @@ export declare class BarVerticalStackedComponent extends BaseChartComponent {
     xScale: any;
     yScale: any;
     transform: string;
-    tickFormatting: Function;
+    tickFormatting: (label: string) => string;
     colors: ColorHelper;
     margin: number[];
     xAxisHeight: number;

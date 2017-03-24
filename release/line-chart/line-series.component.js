@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import d3 from '../d3';
+import { area, line } from 'd3-shape';
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 export var LineSeriesComponent = (function () {
@@ -22,7 +22,7 @@ export var LineSeriesComponent = (function () {
     };
     LineSeriesComponent.prototype.getLineGenerator = function () {
         var _this = this;
-        return d3.line()
+        return line()
             .x(function (d) {
             var label = d.name;
             var value;
@@ -42,7 +42,7 @@ export var LineSeriesComponent = (function () {
     };
     LineSeriesComponent.prototype.getRangeGenerator = function () {
         var _this = this;
-        return d3.area()
+        return area()
             .x(function (d) {
             var label = d.name;
             var value;
@@ -67,7 +67,7 @@ export var LineSeriesComponent = (function () {
             var label = d.name;
             return _this.xScale(label);
         };
-        return d3.area()
+        return area()
             .x(xProperty)
             .y0(function () { return _this.yScale.range()[0]; })
             .y1(function (d) { return _this.yScale(d.value); })

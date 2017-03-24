@@ -6,10 +6,11 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { scaleBand, scaleLinear } from 'd3-scale';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal',
@@ -124,21 +125,21 @@ export class BarHorizontalComponent extends BaseChartComponent {
     });
   }
 
-  getXScale() {
+  getXScale(): any {
     this.xDomain = this.getXDomain();
 
-    const scale = d3.scaleLinear()
+    const scale = scaleLinear()
       .range([0, this.dims.width])
       .domain(this.xDomain);
 
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale() {
+  getYScale(): any {
     this.yDomain = this.getYDomain();
     const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return d3.scaleBand()
+    return scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
       .domain(this.yDomain);

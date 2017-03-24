@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import d3 from '../d3';
+
 import '../../config/testing-utils';
 import { multi } from '../../demo/data';
 import {APP_BASE_HREF} from '@angular/common';
@@ -52,11 +52,10 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.attr('width')).toEqual('400');
-        expect(svg.attr('height')).toEqual('800');
+        expect(svg.getAttribute('width')).toBe('400');
+        expect(svg.getAttribute('height')).toBe('800');
         done();
       });
     });
@@ -78,12 +77,10 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('84');
-        expect(rect.attr('height')).toEqual('254');
+        expect(svg.getAttribute('width')).toBe('84');
+        expect(svg.getAttribute('height')).toBe('254');
         done();
       });
     });
@@ -110,11 +107,9 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('fill')).toMatch('url(.*)');
+        expect(svg.getAttribute('fill')).toMatch('url(.*)');
         done();
       });
     });
@@ -139,12 +134,10 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('90');
-        expect(rect.attr('height')).toEqual('260');
+        expect(svg.getAttribute('width')).toBe('90');
+        expect(svg.getAttribute('height')).toBe('260');
         done();
       });
     });
@@ -167,12 +160,10 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('75');    // ~(360 - 3 * innerPadding) / 4
-        expect(rect.attr('height')).toEqual('246');  // ~(780 - 2 * innnerPadding) / 3
+        expect(svg.getAttribute('width')).toBe('75'); // ~(360 - 3 * innerPadding) / 4
+        expect(svg.getAttribute('height')).toBe('246'); // ~(780 - 2 * innnerPadding) / 3
         done();
       });
     });
@@ -195,12 +186,10 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('52');    // ~(360 - 3 * innerPadding) / 4
-        expect(rect.attr('height')).toEqual('233');  // ~(780 - 2 * innnerPadding) / 3
+        expect(svg.getAttribute('width')).toBe('52'); // ~(360 - 3 * innerPadding) / 4
+        expect(svg.getAttribute('height')).toBe('233'); // ~(780 - 2 * innnerPadding) / 3
         done();
       });
     });

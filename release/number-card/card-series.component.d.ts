@@ -11,11 +11,18 @@ export interface CardModel {
 }
 export declare class CardSeriesComponent implements OnChanges {
     private zone;
-    data: any;
+    data: any[];
+    slots: any[];
     dims: any;
     colors: any;
+    innerPadding: number;
+    cardColor: any;
+    bandColor: any;
+    emptyColor: string;
     select: EventEmitter<{}>;
     cards: CardModel[];
+    emptySlots: any[];
+    medianSize: number;
     constructor(zone: NgZone);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;

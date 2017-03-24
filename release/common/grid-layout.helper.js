@@ -1,18 +1,23 @@
-import d3 from '../d3';
-export function gridLayout(dims, data, minWidth) {
+import { scaleBand } from 'd3-scale';
+export function gridSize(dims, len, minWidth) {
     var rows = 1;
-    var xScale = d3.scaleBand();
-    var yScale = d3.scaleBand();
-    var dataLength = data.length;
+    var cols = len;
     var width = dims.width;
     var height = dims.height;
     if (width > minWidth) {
-        while (width / dataLength < minWidth) {
+        while (width / cols < minWidth) {
             rows += 1;
-            dataLength = Math.ceil(data.length / rows);
+            cols = Math.ceil(len / rows);
         }
     }
-    var columns = dataLength;
+    return [cols, rows];
+}
+export function gridLayout(dims, data, minWidth) {
+    var xScale = scaleBand();
+    var yScale = scaleBand();
+    var width = dims.width;
+    var height = dims.height;
+    var _a = gridSize(dims, data.length, minWidth), columns = _a[0], rows = _a[1];
     var xDomain = [];
     var yDomain = [];
     for (var i = 0; i < rows; i++) {
@@ -32,8 +37,8 @@ export function gridLayout(dims, data, minWidth) {
     for (var i = 0; i < data.length; i++) {
         res[i] = {};
         res[i].data = {
-            name: data[i].name,
-            value: data[i].value
+            name: data[i] ? data[i].name : '',
+            value: data[i] ? data[i].value : undefined
         };
         res[i].x = xScale(i % columns);
         res[i].y = yScale(Math.floor(i / columns));
@@ -46,7 +51,7 @@ export function gridLayout(dims, data, minWidth) {
 }
 function getTotal(results) {
     return results
-        .map(function (d) { return d.value; })
+        .map(function (d) { return d ? d.value : 0; })
         .reduce(function (sum, val) { return sum + val; }, 0);
 }
 //# sourceMappingURL=grid-layout.helper.js.map

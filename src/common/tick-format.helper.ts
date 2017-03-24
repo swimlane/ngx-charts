@@ -1,4 +1,4 @@
-import d3 from '../d3';
+import { timeFormat } from 'd3-time-format';
 
 export function tickFormat(fieldType, groupByType): (label: string) => string {
   return function(label: string): string {
@@ -6,8 +6,8 @@ export function tickFormat(fieldType, groupByType): (label: string) => string {
       return label;
     }
     if (fieldType === 'date' && groupByType === 'groupBy') {
-      const formatter = d3.timeFormat('MM/DD/YYYY');
-      return formatter(label);
+      const formatter = timeFormat('MM/DD/YYYY');
+      return formatter(<any>label);
     }
 
     return label.toString();

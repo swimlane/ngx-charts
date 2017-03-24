@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import d3 from '../d3';
+import { scaleLinear } from 'd3-scale';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -108,7 +108,7 @@ export var BubbleChartComponent = (function (_super) {
         return getScale(domain, [this.bubblePadding[3], width], this.xScaleType, this.roundDomains);
     };
     BubbleChartComponent.prototype.getRScale = function (domain, range) {
-        var scale = d3.scaleLinear()
+        var scale = scaleLinear()
             .range(range)
             .domain(domain);
         return this.roundDomains ? scale.nice() : scale;

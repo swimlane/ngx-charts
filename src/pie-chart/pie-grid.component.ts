@@ -4,8 +4,9 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { min } from 'd3-array';
+import { format } from 'd3-format';
 
-import d3 from '../d3';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -125,7 +126,7 @@ export class PieGridComponent extends BaseChartComponent {
       const padding = 10;
       const label = formatLabel(d.data.name);
       const value = d.data.value;
-      const radius = (d3.min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
+      const radius = (min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
       const innerRadius = radius * 0.9;
 
       let count = 0;
@@ -149,7 +150,7 @@ export class PieGridComponent extends BaseChartComponent {
         label: trimLabel(label),
         total: value,
         value,
-        percent: d3.format('.1%')(d.data.percent),
+        percent: format('.1%')(d.data.percent),
         data: [d, {
           data: {
             other: true,

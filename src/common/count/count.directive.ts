@@ -59,7 +59,7 @@ export class CountUpDirective implements OnDestroy {
 
   nativeElement: any;
 
-  private value: any = '';
+  value: any = '';
   private animationReq: any;
 
   private _countDecimals: number = 0;

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import d3 from '../d3';
+import { select } from 'd3-selection';
 import { invertColor } from '../utils/color-utils';
 export var TreeMapCellComponent = (function () {
     function TreeMapCellComponent(element) {
@@ -20,7 +20,7 @@ export var TreeMapCellComponent = (function () {
         }
     };
     TreeMapCellComponent.prototype.loadAnimation = function () {
-        var node = d3.select(this.element).select('.cell');
+        var node = select(this.element).select('.cell');
         node
             .attr('opacity', 0)
             .attr('x', this.x)
@@ -31,7 +31,7 @@ export var TreeMapCellComponent = (function () {
         return invertColor(this.fill);
     };
     TreeMapCellComponent.prototype.animateToCurrentForm = function () {
-        var node = d3.select(this.element).select('.cell');
+        var node = select(this.element).select('.cell');
         node.transition().duration(750)
             .attr('opacity', 1)
             .attr('x', this.x)

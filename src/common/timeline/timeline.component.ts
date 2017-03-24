@@ -4,7 +4,10 @@ import {
   ChangeDetectorRef, SimpleChanges, ViewEncapsulation
 } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import d3 from '../../d3';
+import { brushX } from 'd3-brush';
+import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
+import { select, event as d3event } from 'd3-selection';
+
 import { id } from '../../utils';
 
 @Component({
@@ -135,15 +138,15 @@ export class Timeline implements OnChanges {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = d3.scaleTime()
+      scale = scaleTime()
         .range([0, this.dims.width])
         .domain(this.xDomain);
     } else if (this.scaleType === 'linear') {
-      scale = d3.scaleLinear()
+      scale = scaleLinear()
         .range([0, this.dims.width])
         .domain(this.xDomain);
     } else if (this.scaleType === 'ordinal') {
-      scale = d3.scalePoint()
+      scale = scalePoint()
         .range([0, this.dims.width])
         .padding(0.1)
         .domain(this.xDomain);
@@ -158,11 +161,11 @@ export class Timeline implements OnChanges {
     const height = this.height;
     const width = this.view[0];
 
-    this.brush = d3.brushX()
+    this.brush = brushX()
       .extent([[0, 0], [width, height]])
       .on('brush end', () => {
         this.zone.run(() => {
-          const selection = d3.selection.event.selection || this.xScale.range();
+          const selection = d3event.selection || this.xScale.range();
           const newDomain = selection.map(this.xScale.invert);
 
           this.onDomainChange.emit(newDomain);
@@ -170,7 +173,7 @@ export class Timeline implements OnChanges {
         });
       });
 
-    d3.select(this.element)
+    select(this.element)
       .select('.brush')
       .call(this.brush);
   }
@@ -183,12 +186,12 @@ export class Timeline implements OnChanges {
 
     this.zone.run(() => {
       this.brush.extent([[0, 0], [width, height]]);
-      d3.select(this.element)
+      select(this.element)
         .select('.brush')
         .call(this.brush);
 
       // clear hardcoded properties so they can be defined by CSS
-      d3.select(this.element).select('.selection')
+      select(this.element).select('.selection')
         .attr('fill', undefined)
         .attr('stroke', undefined)
         .attr('fill-opacity', undefined);
