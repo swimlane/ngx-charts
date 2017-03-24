@@ -81,7 +81,7 @@ describe('<ngx-charts-pie>', () => {
 
         const testArc: any = arc()
           .innerRadius(0)
-          .outerRadius(440 / 3)
+          .outerRadius(180)
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
@@ -110,7 +110,7 @@ describe('<ngx-charts-pie>', () => {
         fixture.detectChanges();
 
         const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
-        const outerRadius = 440 / 3;
+        const outerRadius = 180;
 
         const testArc: any = arc()
           .innerRadius(outerRadius * 3 / 4) // default arc is 1/4 outerwidth
@@ -142,7 +142,7 @@ describe('<ngx-charts-pie>', () => {
         fixture.detectChanges();
 
         const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
-        const outerRadius = 440 / 3;
+        const outerRadius = 180;
 
         const testArc: any = arc()
           .innerRadius(outerRadius * 0.90) // default arc is 1/4 outerwidth
