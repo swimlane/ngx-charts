@@ -21,7 +21,7 @@ import { formatLabel } from '../common/label.helper';
         [data]="arc"
         [radius]="outerRadius"
         [color]="color(arc)"
-        [label]="label(arc)"
+        [label]="labelText(arc)"
         [max]="max"
         [value]="arc.value"
         [explodeSlices]="explodeSlices">
@@ -64,6 +64,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
+  @Input() labelFormatting: any;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -134,6 +135,13 @@ export class PieSeriesComponent implements OnChanges {
 
   labelVisible(arc): boolean {
     return this.showLabels && (arc.endAngle - arc.startAngle > Math.PI / 30);
+  }
+
+  labelText(arc): string {
+    if (this.labelFormatting) {
+      return this.labelFormatting(arc.data.name);
+    }
+    return this.label(arc);
   }
 
   label(arc): string {
