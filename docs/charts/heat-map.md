@@ -22,6 +22,7 @@ yAxisTickFormatting | function |               | the y axis tick formatting
 gradient            | boolean  | false         | fill elements with a gradient instead of a solid color
 innerPadding        | number \ | number[]      | 8                                                                                                               | the inner padding in px
 tooltipDisabled     | boolean  | false         | show or hide the tooltip
+tooltipText         | function | (see source)  | the HTML text to display in the tooltip
 
 # Outputs
 

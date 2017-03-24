@@ -76,7 +76,6 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
-  @Input() scaleType: string = 'linear';
   @Input() tooltipText: any;
 
   dims: ViewDimensions;
@@ -94,6 +93,7 @@ export class HeatMapComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
+  scaleType: string = 'linear';
 
   update(): void {
     super.update();
@@ -118,6 +118,14 @@ export class HeatMapComponent extends BaseChartComponent {
       this.xDomain = this.getXDomain();
       this.yDomain = this.getYDomain();
       this.valueDomain = this.getValueDomain();
+
+      this.scaleType = this.getScaleType(this.valueDomain);
+
+      if (this.scaleType === 'linear') {
+        const min = Math.min(0, ...this.valueDomain);
+        const max = Math.max(...this.valueDomain);
+        this.valueDomain = [min, max];
+      }
 
       this.xScale = this.getXScale();
       this.yScale = this.getYScale();
@@ -166,14 +174,7 @@ export class HeatMapComponent extends BaseChartComponent {
       }
     }
 
-    if (this.scaleType === 'ordinal') {
-      return domain.sort();
-    }
-    
-    const min = Math.min(0, ...domain);
-    const max = Math.max(...domain);
-
-    return [min, max];
+    return domain;
   }
 
   getXScale(): any {
@@ -215,6 +216,19 @@ export class HeatMapComponent extends BaseChartComponent {
 
   onClick(data): void {
     this.select.emit(data);
+  }
+
+  getScaleType(values): string {
+    let num = true;
+
+    for (const value of values) {
+      if (typeof value !== 'number') {
+        num = false;
+      }
+    }
+
+    if (num) return 'linear';
+    return 'ordinal';
   }
 
   setColors(): void {
