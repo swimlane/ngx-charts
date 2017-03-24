@@ -41,7 +41,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() yScale;
   @Input() gradient: boolean;
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipText: Function;
+  @Input() tooltipText: any;
 
   @Output() select = new EventEmitter();
 
