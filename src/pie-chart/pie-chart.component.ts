@@ -84,7 +84,6 @@ export class PieChartComponent extends BaseChartComponent {
         height: this.height,
         margins: this.margin,
         showLegend: this.legend,
-        columns: 10
       });
 
       const xOffset = this.margin[3] + this.dims.width / 2;
