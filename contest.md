@@ -9,3 +9,5 @@ the author of the best ngx-charts pull request. What makes a PR the best?
 
 Contest ends April 2nd at 12PM PT. A panel of community members and
 the Swimlane team will judge the contestants.
+
+Make sure to note in the PR, that its a submission for the contest!
