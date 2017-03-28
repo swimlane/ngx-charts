@@ -52,6 +52,7 @@ import { ColorHelper } from '../common/color.helper';
           [data]="results"
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
+          [tooltipText]="tooltipText"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -75,6 +76,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipText: any;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -91,6 +93,7 @@ export class HeatMapComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
+  scaleType: string = 'linear';
 
   update(): void {
     super.update();
@@ -107,7 +110,7 @@ export class HeatMapComponent extends BaseChartComponent {
         showXLabel: this.showXAxisLabel,
         showYLabel: this.showYAxisLabel,
         showLegend: this.legend,
-        legendType: 'linear'
+        legendType: this.scaleType
       });
 
       this.formatDates();
@@ -115,6 +118,14 @@ export class HeatMapComponent extends BaseChartComponent {
       this.xDomain = this.getXDomain();
       this.yDomain = this.getYDomain();
       this.valueDomain = this.getValueDomain();
+
+      this.scaleType = this.getScaleType(this.valueDomain);
+
+      if (this.scaleType === 'linear') {
+        const min = Math.min(0, ...this.valueDomain);
+        const max = Math.max(...this.valueDomain);
+        this.valueDomain = [min, max];
+      }
 
       this.xScale = this.getXScale();
       this.yScale = this.getYScale();
@@ -163,10 +174,7 @@ export class HeatMapComponent extends BaseChartComponent {
       }
     }
 
-    const min = Math.min(0, ...domain);
-    const max = Math.max(...domain);
-
-    return [min, max];
+    return domain;
   }
 
   getXScale(): any {
@@ -210,15 +218,28 @@ export class HeatMapComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
+  getScaleType(values): string {
+    let num = true;
+
+    for (const value of values) {
+      if (typeof value !== 'number') {
+        num = false;
+      }
+    }
+
+    if (num) return 'linear';
+    return 'ordinal';
+  }
+
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
+    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
   }
 
   getLegendOptions() {
     return {
-      scaleType: 'linear',
+      scaleType: this.scaleType,
       domain: this.valueDomain,
-      colors: this.colors.scale
+      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale
     };
   }
 

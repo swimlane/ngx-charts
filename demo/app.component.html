@@ -364,6 +364,25 @@
         [tooltipDisabled]="tooltipDisabled"
         (select)="select($event)">
       </ngx-charts-heat-map>
+      <ngx-charts-heat-map
+        *ngIf="chartType === 'calendar'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="calendarData"
+        [legend]="showLegend"
+        [gradient]="gradient"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="false"
+        [xAxisTickFormatting]="calendarAxisTickFormatting"
+        [tooltipText]="calendarTooltipText"
+        [innerPadding]="2"
+        [tooltipDisabled]="tooltipDisabled"
+        (select)="select($event)">
+      </ngx-charts-heat-map>
       <ngx-charts-tree-map
         *ngIf="chartType === 'tree-map'"
         class="chart-container"
