@@ -129,16 +129,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private bindWindowResizeEvent(): void {
-    this.zone.run(() => {
-      const source = Observable.fromEvent(window, 'resize', null, null);
-      const subscription = source.debounceTime(200).subscribe(e => {
-        this.update();
-        if (this.cd) {
-          this.cd.markForCheck();
-        }
-      });
-      this.resizeSubscription = subscription;
+    const source = Observable.fromEvent(window, 'resize', null, null);
+    const subscription = source.debounceTime(200).subscribe(e => {
+      this.update();
+      if (this.cd) {
+        this.cd.markForCheck();
+      }
     });
+    this.resizeSubscription = subscription;
   }
 
   /**
@@ -169,9 +167,9 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
           copy['series'].push(seriesItemCopy);
         }
       }
-      
+
       if(item['extra'] !== undefined) {
-        copy['extra'] = JSON.parse(JSON.stringify(item['extra'])); 
+        copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
       }
 
       results.push(copy);

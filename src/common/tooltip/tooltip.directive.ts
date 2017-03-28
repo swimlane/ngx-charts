@@ -106,28 +106,26 @@ export class TooltipDirective implements OnDestroy {
   }
 
   showTooltip(immediate?: boolean): void {
-    this.zone.run(() => {
-      if (this.component || this.tooltipDisabled) return;
+    if (this.component || this.tooltipDisabled) return;
 
-      const time = immediate ? 0 : this.tooltipShowTimeout;
+    const time = immediate ? 0 : this.tooltipShowTimeout;
 
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => {
-        this.tooltipService.destroyAll();
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      this.tooltipService.destroyAll();
 
-        const options = this.createBoundOptions();
-        this.component = this.tooltipService.create(options);
+      const options = this.createBoundOptions();
+      this.component = this.tooltipService.create(options);
 
-        // add a tiny timeout to avoid event re-triggers
-        setTimeout(() => {
-          if (this.component) {
-            this.addHideListeners(this.component.instance.element.nativeElement);
-          }
-        }, 10);
+      // add a tiny timeout to avoid event re-triggers
+      setTimeout(() => {
+        if (this.component) {
+          this.addHideListeners(this.component.instance.element.nativeElement);
+        }
+      }, 10);
 
-        this.show.emit(true);
-      }, time);
-    });
+      this.show.emit(true);
+    }, time);
   }
 
   addHideListeners(tooltip): void {

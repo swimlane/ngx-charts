@@ -3,13 +3,17 @@ import {
   Input,
   Output,
   EventEmitter,
-  trigger,
-  style,
   ViewEncapsulation,
-  transition,
-  animate,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+
 import { scaleBand, scaleLinear } from 'd3-scale';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -123,35 +127,33 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      this.formatDates();
-
-      this.groupDomain = this.getGroupDomain();
-      this.innerDomain = this.getInnerDomain();
-      this.valueDomain = this.getValueDomain();
-
-      this.xScale = this.getXScale();
-      this.yScale = this.getYScale();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    this.formatDates();
+
+    this.groupDomain = this.getGroupDomain();
+    this.innerDomain = this.getInnerDomain();
+    this.valueDomain = this.getValueDomain();
+
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getGroupDomain(): any[] {

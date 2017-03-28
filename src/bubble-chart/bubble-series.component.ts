@@ -6,11 +6,14 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  trigger,
-  style,
-  transition,
-  animate
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
@@ -65,7 +68,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
-  @Input() tooltipDisabled: boolean = false; 
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -131,7 +134,7 @@ export class BubbleSeriesComponent implements OnChanges {
     const yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? `${this.yAxisLabel}:` : '';
     const x = formatLabel(circle.x);
     const y = formatLabel(circle.y);
-    
+
     return `
       <span class="tooltip-label">
         ${circle.seriesName} • ${circle.tooltipLabel}

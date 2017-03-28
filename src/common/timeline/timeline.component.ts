@@ -81,29 +81,27 @@ export class Timeline implements OnChanges {
   }
 
   update(): void {
-    this.zone.run(() => {
-      this.dims = this.getDims();
-      this.height = this.dims.height;
-      const offsetY = this.view[1] - this.height;
+    this.dims = this.getDims();
+    this.height = this.dims.height;
+    const offsetY = this.view[1] - this.height;
 
-      this.xDomain = this.getXDomain();
-      this.xScale = this.getXScale();
+    this.xDomain = this.getXDomain();
+    this.xScale = this.getXScale();
 
-      if (this.brush) {
-        this.updateBrush();
-      }
+    if (this.brush) {
+      this.updateBrush();
+    }
 
-      this.transform = `translate(0 , ${ offsetY })`;
+    this.transform = `translate(0 , ${ offsetY })`;
 
-      const pageUrl = this.location instanceof PathLocationStrategy
-        ? this.location.path()
-        : '';
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
 
-      this.filterId = 'filter' + id().toString();
-      this.filter = `url(${pageUrl}#${this.filterId})`;
+    this.filterId = 'filter' + id().toString();
+    this.filter = `url(${pageUrl}#${this.filterId})`;
 
-      this.cd.markForCheck();
-    });
+    this.cd.markForCheck();
   }
 
   getXDomain(): any[] {
@@ -164,13 +162,11 @@ export class Timeline implements OnChanges {
     this.brush = brushX()
       .extent([[0, 0], [width, height]])
       .on('brush end', () => {
-        this.zone.run(() => {
-          const selection = d3event.selection || this.xScale.range();
-          const newDomain = selection.map(this.xScale.invert);
+        const selection = d3event.selection || this.xScale.range();
+        const newDomain = selection.map(this.xScale.invert);
 
-          this.onDomainChange.emit(newDomain);
-          this.cd.markForCheck();
-        });
+        this.onDomainChange.emit(newDomain);
+        this.cd.markForCheck();
       });
 
     select(this.element)
@@ -184,20 +180,18 @@ export class Timeline implements OnChanges {
     const height = this.height;
     const width = this.view[0];
 
-    this.zone.run(() => {
-      this.brush.extent([[0, 0], [width, height]]);
-      select(this.element)
-        .select('.brush')
-        .call(this.brush);
+    this.brush.extent([[0, 0], [width, height]]);
+    select(this.element)
+      .select('.brush')
+      .call(this.brush);
 
-      // clear hardcoded properties so they can be defined by CSS
-      select(this.element).select('.selection')
-        .attr('fill', undefined)
-        .attr('stroke', undefined)
-        .attr('fill-opacity', undefined);
+    // clear hardcoded properties so they can be defined by CSS
+    select(this.element).select('.selection')
+      .attr('fill', undefined)
+      .attr('stroke', undefined)
+      .attr('fill-opacity', undefined);
 
-      this.cd.markForCheck();
-    });
+    this.cd.markForCheck();
   }
 
   getDims(): any {

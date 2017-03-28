@@ -51,45 +51,43 @@ export class TreeMapComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.domain = this.getDomain();
-
-      this.treemap = treemap<any>()
-        .size([this.dims.width, this.dims.height]);
-
-      const rootNode = {
-        name: 'root',
-        value: 0,
-        isRoot: true
-      };
-
-      const root = stratify<any>()
-        .id(d => {
-          let label = d.name;
-
-          if (label.constructor.name === 'Date') {
-            label = label.toLocaleDateString();
-          } else {
-            label = label.toLocaleString();
-          }
-          return label;
-        })
-        .parentId(d => d.isRoot ? null : 'root')
-        ([rootNode, ...this.results])
-        .sum(d => d.value);
-
-      this.data = this.treemap(root);
-
-      this.setColors();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.domain = this.getDomain();
+
+    this.treemap = treemap<any>()
+      .size([this.dims.width, this.dims.height]);
+
+    const rootNode = {
+      name: 'root',
+      value: 0,
+      isRoot: true
+    };
+
+    const root = stratify<any>()
+      .id(d => {
+        let label = d.name;
+
+        if (label.constructor.name === 'Date') {
+          label = label.toLocaleDateString();
+        } else {
+          label = label.toLocaleString();
+        }
+        return label;
+      })
+      .parentId(d => d.isRoot ? null : 'root')
+      ([rootNode, ...this.results])
+      .sum(d => d.value);
+
+    this.data = this.treemap(root);
+
+    this.setColors();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getDomain(): any[] {

@@ -38,10 +38,10 @@ import { ColorHelper } from '../common/color.helper';
       <svg:g [attr.transform]="transform" class="force-directed-graph chart">
         <svg:g class="links">
           <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
-            <template *ngIf="linkTemplate"
+            <ng-template *ngIf="linkTemplate"
               [ngTemplateOutlet]="linkTemplate"
               [ngOutletContext]="{ $implicit: link }">
-            </template>
+            </ng-template>
             <svg:line *ngIf="!linkTemplate"
               strokeWidth="1" class="edge"
               [attr.x1]="link.source.x"
@@ -63,10 +63,10 @@ import { ColorHelper } from '../common/color.helper';
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="node.value">
-            <template *ngIf="nodeTemplate"
+            <ng-template *ngIf="nodeTemplate"
               [ngTemplateOutlet]="nodeTemplate"
               [ngOutletContext]="{ $implicit: node }">
-            </template>
+            </ng-template>
             <svg:circle *ngIf="!nodeTemplate" r="5" />
           </svg:g>
         </svg:g>
@@ -117,28 +117,26 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      // center graph
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showLegend: this.legend,
-      });
-
-      this.seriesDomain = this.getSeriesDomain();
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `
-        translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })
-      `;
-      if(this.force) {
-        this.force.nodes(this.nodes)
-          .force('link', this.forceLink.links(this.links))
-          .alpha(0.5).restart();
-      }
+    // center graph
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showLegend: this.legend,
     });
+
+    this.seriesDomain = this.getSeriesDomain();
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `
+      translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })
+    `;
+    if(this.force) {
+      this.force.nodes(this.nodes)
+        .force('link', this.forceLink.links(this.links))
+        .alpha(0.5).restart();
+    }
   }
 
   onClick(data): void {

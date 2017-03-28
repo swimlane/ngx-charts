@@ -8,12 +8,14 @@ import {
   SimpleChanges,
   Renderer,
   ChangeDetectionStrategy,
-  trigger,
-  style,
-  transition,
-  animate
 } from '@angular/core';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 @Component({
   selector: 'g[ngx-charts-area-tooltip]',
   template: `
@@ -30,7 +32,7 @@ import {
         (mouseenter)="showTooltip(i)"
         (mouseleave)="hideTooltip(i)"
       />
-      <xhtml:template #tooltipTemplate>
+      <xhtml:ng-template #tooltipTemplate>
         <xhtml:div class="area-tooltip-container">
           <xhtml:div
             *ngFor="let tooltipItem of tooltipArea.values"
@@ -42,7 +44,7 @@ import {
             {{getToolTipText(tooltipItem)}}
           </xhtml:div>
         </xhtml:div>
-      </xhtml:template>
+      </xhtml:ng-template>
       <svg:rect
         [@animationState]="anchorOpacity[i] !== 0 ? 'active' : 'inactive'"
         class="tooltip-anchor"
