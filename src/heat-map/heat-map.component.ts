@@ -99,6 +99,14 @@ export class HeatMapComponent extends BaseChartComponent {
     super.update();
 
     this.zone.run(() => {
+      this.formatDates();
+
+      this.xDomain = this.getXDomain();
+      this.yDomain = this.getYDomain();
+      this.valueDomain = this.getValueDomain();
+
+      this.scaleType = this.getScaleType(this.valueDomain);
+      
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
@@ -112,14 +120,6 @@ export class HeatMapComponent extends BaseChartComponent {
         showLegend: this.legend,
         legendType: this.scaleType
       });
-
-      this.formatDates();
-
-      this.xDomain = this.getXDomain();
-      this.yDomain = this.getYDomain();
-      this.valueDomain = this.getValueDomain();
-
-      this.scaleType = this.getScaleType(this.valueDomain);
 
       if (this.scaleType === 'linear') {
         const min = Math.min(0, ...this.valueDomain);
@@ -184,13 +184,13 @@ export class HeatMapComponent extends BaseChartComponent {
    *    Strings: "8", "8px", "8%"
    *    Arrays: [8,2], "8,2", "[8,2]"
    *    Mixed: [8,"2%"], ["8px","2%"], "8,2%", "[8,2%]"
-   * 
-   * @param {(string | number | Array<string | number>)} value 
-   * @param {number} [index=0] 
-   * @param {number} N 
-   * @param {number} L 
-   * @returns {number} 
-   * 
+   *
+   * @param {(string | number | Array<string | number>)} value
+   * @param {number} [index=0]
+   * @param {number} N
+   * @param {number} L
+   * @returns {number}
+   *
    * @memberOf HeatMapComponent
    */
   getDimension(value: string | number | Array<string | number>, index = 0, N: number, L: number): number {
