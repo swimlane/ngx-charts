@@ -58,10 +58,8 @@ export class LegendComponent implements OnChanges {
   }
 
   update(): void {
-    this.zone.run(() => {
-      this.cd.markForCheck();
-      this.legendEntries = this.getLegendEntries();
-    });
+    this.cd.markForCheck();
+    this.legendEntries = this.getLegendEntries();
   }
 
   getLegendEntries(): any[] {
@@ -88,22 +86,18 @@ export class LegendComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {      
+    const item = this.activeEntries.find(d => {
       return entry.label === d.name;
     });
     return item !== undefined;
   }
 
   activate(item) {
-    this.zone.run(() => {
-      this.labelActivate.emit(item);
-    });
+    this.labelActivate.emit(item);
   }
 
   deactivate(item) {
-    this.zone.run(() => {
-      this.labelDeactivate.emit(item);
-    });
+    this.labelDeactivate.emit(item);
   }
 
   trackBy(index, item): string {

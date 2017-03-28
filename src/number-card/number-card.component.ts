@@ -57,29 +57,27 @@ export class NumberCardComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.domain = this.getDomain();
-
-      this.setColors();
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-
-      const size = gridSize(this.dims, this.results.length, 150);
-      const N = size[0] * size[1];
-
-      const data = this.results.slice();
-
-      while (data.length < N) {
-        data.push({value: null});
-      }
-
-      this.data = gridLayout(this.dims, data, 150);
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.domain = this.getDomain();
+
+    this.setColors();
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+
+    const size = gridSize(this.dims, this.results.length, 150);
+    const N = size[0] * size[1];
+
+    const data = this.results.slice();
+
+    while (data.length < N) {
+      data.push({value: null});
+    }
+
+    this.data = gridLayout(this.dims, data, 150);
   }
 
   getDomain(): any[] {

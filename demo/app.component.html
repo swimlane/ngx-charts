@@ -451,11 +451,11 @@
     <select
       [ngModel]="chartType"
       (ngModelChange)="selectChart($event)">
-      <template ngFor let-group [ngForOf]="chartGroups">
+      <ng-template ngFor let-group [ngForOf]="chartGroups">
         <optgroup [label]="group.name">
           <option *ngFor="let chart of group.charts" [value]="chart.selector">{{chart.name}}</option>
         </optgroup>
-      </template>
+      </ng-template>
     </select>
 
     <h3>Theme</h3>

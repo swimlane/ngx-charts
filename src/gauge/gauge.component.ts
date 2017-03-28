@@ -124,50 +124,48 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      if (!this.showAxis) {
-        if (!this.margin) {
-          this.margin = [10, 20, 10, 20];
-        }
-      } else {
-        if (!this.margin) {
-          this.margin = [60, 100, 60, 100];
-        }
+    if (!this.showAxis) {
+      if (!this.margin) {
+        this.margin = [10, 20, 10, 20];
       }
-
-      // make the starting angle positive
-      if (this.startAngle < 0) {
-        this.startAngle = (this.startAngle % 360) + 360;
+    } else {
+      if (!this.margin) {
+        this.margin = [60, 100, 60, 100];
       }
+    }
 
-      this.angleSpan = Math.min(this.angleSpan, 360);
+    // make the starting angle positive
+    if (this.startAngle < 0) {
+      this.startAngle = (this.startAngle % 360) + 360;
+    }
 
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showLegend: this.legend
-      });
+    this.angleSpan = Math.min(this.angleSpan, 360);
 
-      this.domain = this.getDomain();
-      this.valueDomain = this.getValueDomain();
-      this.valueScale = this.getValueScale();
-      this.displayValue = this.getDisplayValue();
-
-      this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
-
-      this.arcs = this.getArcs();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      const xOffset = this.margin[3] + this.dims.width / 2;
-      const yOffset = this.margin[0] + this.dims.height / 2;
-
-      this.transform = `translate(${ xOffset }, ${ yOffset })`;
-      this.rotation = `rotate(${ this.startAngle })`;
-      setTimeout(() => this.scaleText(), 50);
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showLegend: this.legend
     });
+
+    this.domain = this.getDomain();
+    this.valueDomain = this.getValueDomain();
+    this.valueScale = this.getValueScale();
+    this.displayValue = this.getDisplayValue();
+
+    this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
+
+    this.arcs = this.getArcs();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    const xOffset = this.margin[3] + this.dims.width / 2;
+    const yOffset = this.margin[0] + this.dims.height / 2;
+
+    this.transform = `translate(${ xOffset }, ${ yOffset })`;
+    this.rotation = `rotate(${ this.startAngle })`;
+    setTimeout(() => this.scaleText(), 50);
   }
 
   getArcs(): any[] {
@@ -258,30 +256,28 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     if (this.valueFormatting) {
       return this.valueFormatting(value);
     }
-    
+
     return value.toLocaleString();
   }
 
   scaleText(repeat: boolean = true): void {
-    this.zone.run(() => {
-      const { width } = this.textEl.nativeElement.getBoundingClientRect();
-      const oldScale = this.resizeScale;
+    const { width } = this.textEl.nativeElement.getBoundingClientRect();
+    const oldScale = this.resizeScale;
 
-      if (width === 0) {
-        this.resizeScale = 1;
-      } else {
-        const availableSpace = this.textRadius;
-        this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
-      }
+    if (width === 0) {
+      this.resizeScale = 1;
+    } else {
+      const availableSpace = this.textRadius;
+      this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+    }
 
-      if (this.resizeScale !== oldScale) {
-        this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
-        this.cd.markForCheck();
-        if (repeat) {
-          setTimeout(() => this.scaleText(false), 50);
-        }
+    if (this.resizeScale !== oldScale) {
+      this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
+      this.cd.markForCheck();
+      if (repeat) {
+        setTimeout(() => this.scaleText(false), 50);
       }
-    });
+    }
   }
 
   onClick(data): void {

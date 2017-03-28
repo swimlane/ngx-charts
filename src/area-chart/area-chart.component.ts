@@ -181,50 +181,48 @@ export class AreaChartComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      if (this.timeline) {
-        this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-      }
-
-      this.xDomain = this.getXDomain();
-      if (this.filteredDomain) {
-        this.xDomain = this.filteredDomain;
-      }
-
-      this.yDomain = this.getYDomain();
-      this.seriesDomain = this.getSeriesDomain();
-
-      this.xScale = this.getXScale(this.xDomain, this.dims.width);
-      this.yScale = this.getYScale(this.yDomain, this.dims.height);
-
-      this.updateTimeline();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
-
-      const pageUrl = this.location instanceof PathLocationStrategy
-        ? this.location.path()
-        : '';
-
-      this.clipPathId = 'clip' + id().toString();
-      this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    if (this.timeline) {
+      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+    }
+
+    this.xDomain = this.getXDomain();
+    if (this.filteredDomain) {
+      this.xDomain = this.filteredDomain;
+    }
+
+    this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
+
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.yScale = this.getYScale(this.yDomain, this.dims.height);
+
+    this.updateTimeline();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
+
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
+
+    this.clipPathId = 'clip' + id().toString();
+    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 
   updateTimeline(): void {

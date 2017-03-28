@@ -98,44 +98,42 @@ export class HeatMapComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.formatDates();
+    this.formatDates();
 
-      this.xDomain = this.getXDomain();
-      this.yDomain = this.getYDomain();
-      this.valueDomain = this.getValueDomain();
+    this.xDomain = this.getXDomain();
+    this.yDomain = this.getYDomain();
+    this.valueDomain = this.getValueDomain();
 
-      this.scaleType = this.getScaleType(this.valueDomain);
+    this.scaleType = this.getScaleType(this.valueDomain);
 
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.scaleType
-      });
-
-      if (this.scaleType === 'linear') {
-        const min = Math.min(0, ...this.valueDomain);
-        const max = Math.max(...this.valueDomain);
-        this.valueDomain = [min, max];
-      }
-
-      this.xScale = this.getXScale();
-      this.yScale = this.getYScale();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-      this.rects = this.getRects();
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.scaleType
     });
+
+    if (this.scaleType === 'linear') {
+      const min = Math.min(0, ...this.valueDomain);
+      const max = Math.max(...this.valueDomain);
+      this.valueDomain = [min, max];
+    }
+
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.rects = this.getRects();
   }
 
   getXDomain(): any {

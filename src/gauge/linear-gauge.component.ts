@@ -134,37 +134,35 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.hasPreviousValue = this.previousValue !== undefined;
-      this.max = Math.max(this.max, this.value);
-      this.min = Math.min(this.min, this.value);
-      if (this.hasPreviousValue) {
-        this.max = Math.max(this.max, this.previousValue);
-        this.min = Math.min(this.min, this.previousValue);
-      }
+    this.hasPreviousValue = this.previousValue !== undefined;
+    this.max = Math.max(this.max, this.value);
+    this.min = Math.min(this.min, this.value);
+    if (this.hasPreviousValue) {
+      this.max = Math.max(this.max, this.previousValue);
+      this.min = Math.min(this.min, this.previousValue);
+    }
 
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.valueDomain = this.getValueDomain();
-      this.valueScale = this.getValueScale();
-      this.displayValue = this.getDisplayValue();
-
-      this.setColors();
-
-      const xOffset = this.margin[3] + this.dims.width / 2;
-      const yOffset = this.margin[0] + this.dims.height / 2;
-
-      this.transform = `translate(${ xOffset }, ${ yOffset })`;
-      this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
-      this.valueTranslate = `translate(0, -15)`;
-      this.unitsTranslate = `translate(0, 15)`;
-      setTimeout(() => this.scaleText('value'), 50);
-      setTimeout(() => this.scaleText('units'), 50);
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.valueDomain = this.getValueDomain();
+    this.valueScale = this.getValueScale();
+    this.displayValue = this.getDisplayValue();
+
+    this.setColors();
+
+    const xOffset = this.margin[3] + this.dims.width / 2;
+    const yOffset = this.margin[0] + this.dims.height / 2;
+
+    this.transform = `translate(${ xOffset }, ${ yOffset })`;
+    this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
+    this.valueTranslate = `translate(0, -15)`;
+    this.unitsTranslate = `translate(0, 15)`;
+    setTimeout(() => this.scaleText('value'), 50);
+    setTimeout(() => this.scaleText('units'), 50);
   }
 
   getValueDomain(): any[] {
@@ -185,40 +183,38 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   scaleText(element, repeat: boolean = true): void {
-    this.zone.run(() => {
-      let el;
-      let resizeScale;
+    let el;
+    let resizeScale;
+    if (element === 'value') {
+      el = this.valueTextEl;
+      resizeScale = this.valueResizeScale;
+    } else {
+      el = this.unitsTextEl;
+      resizeScale = this.unitsResizeScale;
+    }
+
+    const { width, height } = el.nativeElement.getBoundingClientRect();
+    if (width === 0 || height === 0) return;
+    const oldScale = resizeScale;
+    const availableWidth = this.dims.width;
+    const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+    const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+    const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+    resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+
+    if (resizeScale !== oldScale) {
       if (element === 'value') {
-        el = this.valueTextEl;
-        resizeScale = this.valueResizeScale;
+        this.valueResizeScale = resizeScale;
+        this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
       } else {
-        el = this.unitsTextEl;
-        resizeScale = this.unitsResizeScale;
+        this.unitsResizeScale = resizeScale;
+        this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
       }
-
-      const { width, height } = el.nativeElement.getBoundingClientRect();
-      if (width === 0 || height === 0) return;
-      const oldScale = resizeScale;
-      const availableWidth = this.dims.width;
-      const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-      const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-      const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
-      resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-
-      if (resizeScale !== oldScale) {
-        if (element === 'value') {
-          this.valueResizeScale = resizeScale;
-          this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
-        } else {
-          this.unitsResizeScale = resizeScale;
-          this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
-        }
-        this.cd.markForCheck();
-        if (repeat) {
-          setTimeout(() => { this.scaleText(element, false); }, 50);
-        }
+      this.cd.markForCheck();
+      if (repeat) {
+        setTimeout(() => { this.scaleText(element, false); }, 50);
       }
-    });
+    }
   }
 
   onClick(): void {

@@ -77,7 +77,7 @@ import { formatLabel } from '../common/label.helper';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieGridComponent extends BaseChartComponent {
-  @Input() tooltipDisabled: boolean = false;  
+  @Input() tooltipDisabled: boolean = false;
 
   dims: ViewDimensions;
   data: any[];
@@ -90,21 +90,19 @@ export class PieGridComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.domain = this.getDomain();
-
-      this.data = gridLayout(this.dims, this.results, 150);
-      this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
-
-      this.series = this.getSeries();
-      this.setColors();
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.domain = this.getDomain();
+
+    this.data = gridLayout(this.dims, this.results, 150);
+    this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
+
+    this.series = this.getSeries();
+    this.setColors();
   }
 
   getTooltipText(label, val): string {

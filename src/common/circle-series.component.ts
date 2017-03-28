@@ -6,11 +6,14 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  trigger,
-  style,
-  transition,
-  animate
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';

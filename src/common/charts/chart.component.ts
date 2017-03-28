@@ -1,8 +1,14 @@
 import {
-  Component, Input, OnChanges, trigger, style, transition,
-  animate, ViewContainerRef, ChangeDetectionStrategy, EventEmitter,
+  Component, Input, OnChanges, ViewContainerRef, ChangeDetectionStrategy, EventEmitter,
   Output, SimpleChanges
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { TooltipService } from '../tooltip';
 
 @Component({

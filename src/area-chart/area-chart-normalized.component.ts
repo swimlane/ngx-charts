@@ -183,105 +183,103 @@ export class AreaChartNormalizedComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      if (this.timeline) {
-        this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-      }
-
-      this.xDomain = this.getXDomain();
-      if (this.filteredDomain) {
-        this.xDomain = this.filteredDomain;
-      }
-
-      this.yDomain = this.getYDomain();
-      this.seriesDomain = this.getSeriesDomain();
-
-      this.xScale = this.getXScale(this.xDomain, this.dims.width);
-      this.yScale = this.getYScale(this.yDomain, this.dims.height);
-
-      for (let i = 0; i < this.xSet.length; i++) {
-        const val = this.xSet[i];
-        let d0 = 0;
-
-        let total = 0;
-        for (const group of this.results){
-          const d = group.series.find(item => {
-            let a = item.name;
-            let b = val;
-            if (this.scaleType === 'time') {
-              a = a.valueOf();
-              b = b.valueOf();
-            }
-            return a === b;
-          });
-          if (d) {
-            total += d.value;
-          }
-        }
-
-        for (const group of this.results){
-          let d = group.series.find(item => {
-            let a = item.name;
-            let b = val;
-            if (this.scaleType === 'time') {
-              a = a.valueOf();
-              b = b.valueOf();
-            }
-            return a === b;
-          });
-
-          if (d) {
-            d.d0 = d0;
-            d.d1 = d0 + d.value;
-            d0 += d.value;
-          } else {
-            d = {
-              name: val,
-              value: 0,
-              d0,
-              d1: d0
-            };
-            group.series.push(d);
-          }
-
-          if (total > 0) {
-            d.d0 = (d.d0 * 100) / total;
-            d.d1 = (d.d1 * 100) / total;
-          } else {
-            d.d0 = 0;
-            d.d1 = 0;
-          }
-        }
-      }
-
-      this.updateTimeline();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-
-      const pageUrl = this.location instanceof PathLocationStrategy
-        ? this.location.path()
-        : '';
-
-      this.clipPathId = 'clip' + id().toString();
-      this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    if (this.timeline) {
+      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+    }
+
+    this.xDomain = this.getXDomain();
+    if (this.filteredDomain) {
+      this.xDomain = this.filteredDomain;
+    }
+
+    this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
+
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.yScale = this.getYScale(this.yDomain, this.dims.height);
+
+    for (let i = 0; i < this.xSet.length; i++) {
+      const val = this.xSet[i];
+      let d0 = 0;
+
+      let total = 0;
+      for (const group of this.results){
+        const d = group.series.find(item => {
+          let a = item.name;
+          let b = val;
+          if (this.scaleType === 'time') {
+            a = a.valueOf();
+            b = b.valueOf();
+          }
+          return a === b;
+        });
+        if (d) {
+          total += d.value;
+        }
+      }
+
+      for (const group of this.results){
+        let d = group.series.find(item => {
+          let a = item.name;
+          let b = val;
+          if (this.scaleType === 'time') {
+            a = a.valueOf();
+            b = b.valueOf();
+          }
+          return a === b;
+        });
+
+        if (d) {
+          d.d0 = d0;
+          d.d1 = d0 + d.value;
+          d0 += d.value;
+        } else {
+          d = {
+            name: val,
+            value: 0,
+            d0,
+            d1: d0
+          };
+          group.series.push(d);
+        }
+
+        if (total > 0) {
+          d.d0 = (d.d0 * 100) / total;
+          d.d1 = (d.d1 * 100) / total;
+        } else {
+          d.d0 = 0;
+          d.d1 = 0;
+        }
+      }
+    }
+
+    this.updateTimeline();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
+
+    this.clipPathId = 'clip' + id().toString();
+    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 
   updateTimeline(): void {

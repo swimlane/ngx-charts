@@ -77,18 +77,15 @@ export class CardSeriesComponent implements OnChanges {
   }
 
   update(): void {
-    this.zone.run(() => {
+    if (this.data.length > 2) {
+      const sortedLengths = this.data.map(d => ('' + d.data.value).length).sort((a, b) => b - a);
+      const idx = Math.ceil(this.data.length / 2);
+      this.medianSize = sortedLengths[idx];
+    }
 
-      if (this.data.length > 2) {
-        const sortedLengths = this.data.map(d => ('' + d.data.value).length).sort((a, b) => b - a);
-        const idx = Math.ceil(this.data.length / 2);
-        this.medianSize = sortedLengths[idx];
-      }
-
-      const cards = this.getCards();
-      this.cards = cards.filter(d => d.data.value !== null);
-      this.emptySlots = cards.filter(d => d.data.value === null);
-    });
+    const cards = this.getCards();
+    this.cards = cards.filter(d => d.data.value !== null);
+    this.emptySlots = cards.filter(d => d.data.value === null);
   }
 
   getCards(): any[] {
