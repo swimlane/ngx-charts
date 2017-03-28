@@ -106,7 +106,7 @@ export class HeatMapComponent extends BaseChartComponent {
       this.valueDomain = this.getValueDomain();
 
       this.scaleType = this.getScaleType(this.valueDomain);
-      
+
       this.dims = calculateViewDimensions({
         width: this.width,
         height: this.height,
