@@ -671,7 +671,7 @@
       </div>
       <div *ngIf="chart.options.includes('innerPadding')">
         <label>Inner padding value:</label><br />
-        <input type="number" [(ngModel)]="innerPadding" min="0" step="1"><br />
+        <input type="text" [(ngModel)]="innerPadding" min="0" step="1"><br />
       </div>
       <div *ngIf="chart.options.includes('barPadding')">
         <label>Padding between bars:</label><br />

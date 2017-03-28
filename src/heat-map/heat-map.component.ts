@@ -177,9 +177,45 @@ export class HeatMapComponent extends BaseChartComponent {
     return domain;
   }
 
+  /**
+   * Converts the input to gap paddingInner in fraction
+   * Supports the following inputs:
+   *    Numbers: 8
+   *    Strings: "8", "8px", "8%"
+   *    Arrays: [8,2], "8,2", "[8,2]"
+   *    Mixed: [8,"2%"], ["8px","2%"], "8,2%", "[8,2%]"
+   * 
+   * @param {(string | number | Array<string | number>)} value 
+   * @param {number} [index=0] 
+   * @param {number} N 
+   * @param {number} L 
+   * @returns {number} 
+   * 
+   * @memberOf HeatMapComponent
+   */
+  getDimension(value: string | number | Array<string | number>, index = 0, N: number, L: number): number {
+    if (typeof value === 'string') {
+      value = value
+        .replace('[', '')
+        .replace(']', '')
+        .replace('px', '')
+        .replace('\'', '');
+
+      if (value.includes(',')) {
+        value = value.split(',');
+      }
+    }
+    if (Array.isArray(value) && typeof index === 'number') {
+      return this.getDimension(value[index], null, N, L);
+    }
+    if (typeof value === 'string' && value.includes('%')) {
+      return +value.replace('%', '') / 100;
+    }
+    return N / (L / +value + 1);
+  }
+
   getXScale(): any {
-    const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0];
-    const f = this.xDomain.length / (this.dims.width / innerPadding + 1);
+    const f = this.getDimension(this.innerPadding, 0, this.xDomain.length, this.dims.width);
     return scaleBand()
       .rangeRound([0, this.dims.width])
       .domain(this.xDomain)
@@ -187,8 +223,7 @@ export class HeatMapComponent extends BaseChartComponent {
   }
 
   getYScale(): any {
-    const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1];
-    const f = this.yDomain.length / (this.dims.height / innerPadding + 1);
+    const f = this.getDimension(this.innerPadding, 1, this.yDomain.length, this.dims.height);
     return scaleBand()
       .rangeRound([this.dims.height, 0])
       .domain(this.yDomain)
