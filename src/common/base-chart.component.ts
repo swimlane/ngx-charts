@@ -170,7 +170,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
         }
       }
       
-      if(item['extra'] !== undefined){
+      if(item['extra'] !== undefined) {
         copy['extra'] = JSON.parse(JSON.stringify(item['extra'])); 
       }
 
