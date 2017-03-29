@@ -102,6 +102,7 @@
     "@types/d3-time-format": "2.0.4",
     "@types/d3-transition": "1.0.7",
     "@types/jasmine": "2.5.41",
+    "@types/node": "^7.0.12",
     "angular2-template-loader": "^0.6.0",
     "autoprefixer": "^6.7.0",
     "awesome-typescript-loader": "~3.1.2",

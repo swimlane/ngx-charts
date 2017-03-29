@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { arc } from 'd3-shape';
 
-import '../../config/testing-utils';
 import { single } from '../../demo/data';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -24,7 +24,7 @@ describe('<ngx-charts-pie>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [PieChartModule],
+      imports: [NoopAnimationsModule, PieChartModule],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'}
       ]
@@ -33,7 +33,7 @@ describe('<ngx-charts-pie>', () => {
 
   describe('basic setup', () => {
 
-    beforeEach(() => {
+    beforeEach(async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -44,55 +44,46 @@ describe('<ngx-charts-pie>', () => {
                 [doughnut]="false">
             </ngx-charts-pie-chart>`
         }
-      });
-    });
+      }).compileComponents();
+    }));
 
-    it('should set the svg width and height', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should set the svg width and height', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const svg = fixture.debugElement.nativeElement.querySelector('svg');
+      const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.getAttribute('width')).toBe('400');
-        expect(svg.getAttribute('height')).toBe('800');
-        done();
-      });
-    });
+      expect(svg.getAttribute('width')).toBe('400');
+      expect(svg.getAttribute('height')).toBe('800');
+    }));
 
-    it('should render 6 arc elements', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render 6 arc elements', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
+      const compiled = fixture.debugElement.nativeElement;
 
-        expect(compiled.querySelectorAll('path.arc').length).toEqual(6);
-        done();
-      });
-    });
+      expect(compiled.querySelectorAll('path.arc').length).toEqual(6);
+    }));
 
-    it('should render an arc', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render an arc', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
+      const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
 
-        const testArc: any = arc()
-          .innerRadius(0)
-          .outerRadius(180)
-          .startAngle(0)
-          .endAngle(1.0996941056424656);
+      const testArc: any = arc()
+        .innerRadius(0)
+        .outerRadius(180)
+        .startAngle(0)
+        .endAngle(1.0996941056424656);
 
-        expect(arcElement.getAttribute('d')).toEqual(testArc());
-        done();
-      });
-    });
+      expect(arcElement.getAttribute('d')).toEqual(testArc());
+    }));
   });
 
   describe('doughnut', () => {
-    it('should render an arc, default width', (done) => {
+    it('should render an arc, default width', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -119,11 +110,10 @@ describe('<ngx-charts-pie>', () => {
           .endAngle(1.0996941056424656);
 
         expect(arcElement.getAttribute('d')).toEqual(testArc());
-        done();
       });
-    });
+    }));
 
-    it('should render an arc, set width', (done) => {
+    it('should render an arc, set width', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -151,8 +141,7 @@ describe('<ngx-charts-pie>', () => {
           .endAngle(1.0996941056424656);
 
         expect(arcElement.getAttribute('d')).toEqual(testArc());
-        done();
       });
-    });
+    }));
   });
 });
