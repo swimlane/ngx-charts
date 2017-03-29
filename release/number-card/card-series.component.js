@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, NgZone } from '@angular/core';
+import { invertColor } from '../utils/color-utils';
 export var CardSeriesComponent = (function () {
     function CardSeriesComponent(zone) {
         this.zone = zone;
-        this.innerPadding = 2.5;
+        this.innerPadding = 15;
         this.emptyColor = 'rgba(0, 0, 0, 0)';
         this.select = new EventEmitter();
     }
@@ -41,14 +42,16 @@ export var CardSeriesComponent = (function () {
             }
             d.data.name = label;
             var value = d.data.value;
-            var labelColor = label ? _this.colors.getColor(label) : _this.emptyColor;
+            var valueColor = label ? _this.colors.getColor(label) : _this.emptyColor;
+            var color = _this.cardColor || valueColor;
             return {
                 x: d.x,
                 y: d.y,
                 width: d.width - xPadding,
                 height: d.height - yPadding,
-                color: _this.cardColor || labelColor,
-                bandColor: _this.bandColor || labelColor,
+                color: color,
+                bandColor: _this.bandColor || valueColor,
+                textColor: _this.textColor || invertColor(color),
                 label: label,
                 data: d.data,
                 tooltipText: label + ": " + value
@@ -64,7 +67,7 @@ export var CardSeriesComponent = (function () {
     CardSeriesComponent.decorators = [
         { type: Component, args: [{
                     selector: 'g[ngx-charts-card-series]',
-                    template: "\n    <svg:rect\n      *ngFor=\"let c of emptySlots; trackBy:trackBy\"\n      class=\"card-empty\"\n      [attr.x]=\"c.x\"\n      [attr.y]=\"c.y\"\n      [style.fill]=\"emptyColor\"\n      [attr.width]=\"c.width\"\n      [attr.height]=\"c.height\"\n      rx=\"3\"\n      ry=\"3\"\n    />\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [bandColor]=\"c.bandColor\"\n      [data]=\"c.data\"\n      [medianSize]=\"medianSize\"\n      (select)=\"onClick($event)\"\n    />\n  ",
+                    template: "\n    <svg:rect\n      *ngFor=\"let c of emptySlots; trackBy:trackBy\"\n      class=\"card-empty\"\n      [attr.x]=\"c.x\"\n      [attr.y]=\"c.y\"\n      [style.fill]=\"emptyColor\"\n      [attr.width]=\"c.width\"\n      [attr.height]=\"c.height\"\n      rx=\"3\"\n      ry=\"3\"\n    />\n    <svg:g ngx-charts-card *ngFor=\"let c of cards; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [color]=\"c.color\"\n      [bandColor]=\"c.bandColor\"\n      [textColor]=\"c.textColor\"\n      [data]=\"c.data\"\n      [medianSize]=\"medianSize\"\n      (select)=\"onClick($event)\"\n    />\n  ",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -81,6 +84,7 @@ export var CardSeriesComponent = (function () {
         'cardColor': [{ type: Input },],
         'bandColor': [{ type: Input },],
         'emptyColor': [{ type: Input },],
+        'textColor': [{ type: Input },],
         'select': [{ type: Output },],
     };
     return CardSeriesComponent;

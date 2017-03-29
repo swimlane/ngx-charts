@@ -4,6 +4,7 @@ export declare class CardComponent implements OnChanges, OnDestroy {
     private zone;
     color: any;
     bandColor: any;
+    textColor: any;
     x: any;
     y: any;
     width: any;
@@ -33,11 +34,11 @@ export declare class CardComponent implements OnChanges, OnDestroy {
     transformBand: string;
     textPadding: number[];
     labelFontSize: number;
+    bandPath: string;
     constructor(element: ElementRef, cd: ChangeDetectorRef, zone: NgZone);
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     update(): void;
-    getTextColor(color: any): string;
     startCount(): void;
     scaleText(): void;
     onClick(): void;

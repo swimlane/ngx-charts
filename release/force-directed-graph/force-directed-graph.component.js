@@ -102,7 +102,7 @@ export var ForceDirectedGraphComponent = (function (_super) {
         this.draggingNode.fx = $event.x - this.draggingStart.x;
         this.draggingNode.fy = $event.y - this.draggingStart.y;
     };
-    ForceDirectedGraphComponent.prototype.onDragEnd = function (node, $event) {
+    ForceDirectedGraphComponent.prototype.onDragEnd = function ($event) {
         if (!this.draggingNode)
             return;
         this.force.alphaTarget(0);
@@ -139,7 +139,7 @@ export var ForceDirectedGraphComponent = (function (_super) {
         'chart': [{ type: ViewChild, args: [ChartComponent, { read: ElementRef },] },],
         'groupResultsBy': [{ type: Input },],
         'onDrag': [{ type: HostListener, args: ['document:mousemove', ['$event'],] },],
-        'onDragEnd': [{ type: HostListener, args: ['document:mouseup',] },],
+        'onDragEnd': [{ type: HostListener, args: ['document:mouseup', ['$event'],] },],
     };
     return ForceDirectedGraphComponent;
 }(BaseChartComponent));

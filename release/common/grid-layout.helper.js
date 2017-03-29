@@ -44,7 +44,7 @@ export function gridLayout(dims, data, minWidth) {
         res[i].y = yScale(Math.floor(i / columns));
         res[i].width = cardWidth;
         res[i].height = cardHeight;
-        res[i].data.percent = res[i].data.value / total;
+        res[i].data.percent = (total > 0) ? res[i].data.value / total : 0;
         res[i].data.total = total;
     }
     return res;

@@ -17,11 +17,17 @@ export var HeatMapComponent = (function (_super) {
         this.margin = [10, 20, 10, 20];
         this.xAxisHeight = 0;
         this.yAxisWidth = 0;
+        this.scaleType = 'linear';
     }
     HeatMapComponent.prototype.update = function () {
         var _this = this;
         _super.prototype.update.call(this);
         this.zone.run(function () {
+            _this.formatDates();
+            _this.xDomain = _this.getXDomain();
+            _this.yDomain = _this.getYDomain();
+            _this.valueDomain = _this.getValueDomain();
+            _this.scaleType = _this.getScaleType(_this.valueDomain);
             _this.dims = calculateViewDimensions({
                 width: _this.width,
                 height: _this.height,
@@ -33,12 +39,13 @@ export var HeatMapComponent = (function (_super) {
                 showXLabel: _this.showXAxisLabel,
                 showYLabel: _this.showYAxisLabel,
                 showLegend: _this.legend,
-                legendType: 'linear'
+                legendType: _this.scaleType
             });
-            _this.formatDates();
-            _this.xDomain = _this.getXDomain();
-            _this.yDomain = _this.getYDomain();
-            _this.valueDomain = _this.getValueDomain();
+            if (_this.scaleType === 'linear') {
+                var min = Math.min.apply(Math, [0].concat(_this.valueDomain));
+                var max = Math.max.apply(Math, _this.valueDomain);
+                _this.valueDomain = [min, max];
+            }
             _this.xScale = _this.getXScale();
             _this.yScale = _this.getYScale();
             _this.setColors();
@@ -81,21 +88,53 @@ export var HeatMapComponent = (function (_super) {
                 }
             }
         }
-        var min = Math.min.apply(Math, [0].concat(domain));
-        var max = Math.max.apply(Math, domain);
-        return [min, max];
+        return domain;
+    };
+    /**
+     * Converts the input to gap paddingInner in fraction
+     * Supports the following inputs:
+     *    Numbers: 8
+     *    Strings: "8", "8px", "8%"
+     *    Arrays: [8,2], "8,2", "[8,2]"
+     *    Mixed: [8,"2%"], ["8px","2%"], "8,2%", "[8,2%]"
+     *
+     * @param {(string | number | Array<string | number>)} value
+     * @param {number} [index=0]
+     * @param {number} N
+     * @param {number} L
+     * @returns {number}
+     *
+     * @memberOf HeatMapComponent
+     */
+    HeatMapComponent.prototype.getDimension = function (value, index, N, L) {
+        if (index === void 0) { index = 0; }
+        if (typeof value === 'string') {
+            value = value
+                .replace('[', '')
+                .replace(']', '')
+                .replace('px', '')
+                .replace('\'', '');
+            if (value.includes(',')) {
+                value = value.split(',');
+            }
+        }
+        if (Array.isArray(value) && typeof index === 'number') {
+            return this.getDimension(value[index], null, N, L);
+        }
+        if (typeof value === 'string' && value.includes('%')) {
+            return +value.replace('%', '') / 100;
+        }
+        return N / (L / +value + 1);
     };
     HeatMapComponent.prototype.getXScale = function () {
-        var innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0];
-        var f = this.xDomain.length / (this.dims.width / innerPadding + 1);
+        var f = this.getDimension(this.innerPadding, 0, this.xDomain.length, this.dims.width);
         return scaleBand()
             .rangeRound([0, this.dims.width])
             .domain(this.xDomain)
             .paddingInner(f);
     };
     HeatMapComponent.prototype.getYScale = function () {
-        var innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1];
-        var f = this.yDomain.length / (this.dims.height / innerPadding + 1);
+        var f = this.getDimension(this.innerPadding, 1, this.yDomain.length, this.dims.height);
         return scaleBand()
             .rangeRound([this.dims.height, 0])
             .domain(this.yDomain)
@@ -121,14 +160,26 @@ export var HeatMapComponent = (function (_super) {
     HeatMapComponent.prototype.onClick = function (data) {
         this.select.emit(data);
     };
+    HeatMapComponent.prototype.getScaleType = function (values) {
+        var num = true;
+        for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
+            var value = values_1[_i];
+            if (typeof value !== 'number') {
+                num = false;
+            }
+        }
+        if (num)
+            return 'linear';
+        return 'ordinal';
+    };
     HeatMapComponent.prototype.setColors = function () {
-        this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
+        this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
     };
     HeatMapComponent.prototype.getLegendOptions = function () {
         return {
-            scaleType: 'linear',
+            scaleType: this.scaleType,
             domain: this.valueDomain,
-            colors: this.colors.scale
+            colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale
         };
     };
     HeatMapComponent.prototype.updateYAxisWidth = function (_a) {
@@ -144,7 +195,7 @@ export var HeatMapComponent = (function (_super) {
     HeatMapComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ngx-charts-heat-map',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"heat-map chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:rect *ngFor=\"let rect of rects\"\n          [attr.x]=\"rect.x\"\n          [attr.y]=\"rect.y\"\n          [attr.rx]=\"rect.rx\"\n          [attr.width]=\"rect.width\"\n          [attr.height]=\"rect.height\"\n          [attr.fill]=\"rect.fill\"\n        />\n        <svg:g ngx-charts-heat-map-cell-series\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [data]=\"results\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipText]=\"tooltipText\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     changeDetection: ChangeDetectionStrategy.OnPush,
                     styleUrls: ['../common/base-chart.component.css'],
                     encapsulation: ViewEncapsulation.None
@@ -165,6 +216,7 @@ export var HeatMapComponent = (function (_super) {
         'xAxisTickFormatting': [{ type: Input },],
         'yAxisTickFormatting': [{ type: Input },],
         'tooltipDisabled': [{ type: Input },],
+        'tooltipText': [{ type: Input },],
     };
     return HeatMapComponent;
 }(BaseChartComponent));

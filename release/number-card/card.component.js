@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, NgZone } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
-import { invertColor } from '../utils/color-utils';
+import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
 export var CardComponent = (function () {
     function CardComponent(element, cd, zone) {
@@ -40,15 +40,13 @@ export var CardComponent = (function () {
             }
             var textHeight = _this.textFontSize + 2 * _this.labelFontSize;
             _this.textPadding[0] = _this.textPadding[2] = (_this.cardHeight - textHeight - _this.bandHeight) / 2;
+            _this.bandPath = roundedRect(0, 0, _this.cardWidth, _this.bandHeight, 3, false, false, true, true);
             setTimeout(function () {
                 _this.scaleText();
                 _this.value = value;
                 setTimeout(function () { return _this.startCount(); }, 20);
             }, 0);
         });
-    };
-    CardComponent.prototype.getTextColor = function (color) {
-        return invertColor(color);
     };
     CardComponent.prototype.startCount = function () {
         var _this = this;
@@ -107,7 +105,7 @@ export var CardComponent = (function () {
     CardComponent.decorators = [
         { type: Component, args: [{
                     selector: 'g[ngx-charts-card]',
-                    template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <svg:rect\n        *ngIf=\"bandColor && bandColor !== color\"\n        class=\"card-band\"\n        [style.fill]=\"bandColor\"\n        [attr.transform]=\"transformBand\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"bandHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        class=\"trimmed-label\"\n        x=\"5\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0] + textFontSize + labelFontSize\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"labelFontSize + textPadding[2]\"\n        alignment-baseline=\"hanging\">\n        <xhtml:p\n          [style.color]=\"getTextColor(color)\"\n          [style.fontSize.px]=\"labelFontSize\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        class=\"value-text\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0]\"\n        [style.fill]=\"getTextColor(color)\"\n        text-anchor=\"start\"\n        alignment-baseline=\"hanging\"\n        [style.font-size.pt]=\"textFontSize\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
+                    template: "\n    <svg:g\n      [attr.transform]=\"transform\"\n      class=\"cell\"\n      (click)=\"onClick()\">\n      <svg:rect\n        class=\"card\"\n        [style.fill]=\"color\"\n        [attr.width]=\"cardWidth\"\n        [attr.height]=\"cardHeight\"\n        rx=\"3\"\n        ry=\"3\"\n      />\n      <svg:path\n        *ngIf=\"bandColor && bandColor !== color\"\n        class=\"card-band\"\n        [attr.fill]=\"bandColor\"\n        [attr.transform]=\"transformBand\"\n        stroke=\"none\"\n        [attr.d]=\"bandPath\"\n      />\n      <title>{{label}}</title>\n      <svg:foreignObject\n        class=\"trimmed-label\"\n        x=\"5\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0] + textFontSize + labelFontSize\"\n        [attr.width]=\"textWidth\"\n        [attr.height]=\"labelFontSize + textPadding[2]\"\n        alignment-baseline=\"hanging\">\n        <xhtml:p\n          [style.color]=\"textColor\"\n          [style.fontSize.px]=\"labelFontSize\">\n          {{trimmedLabel}}\n        </xhtml:p>\n      </svg:foreignObject>\n      <svg:text #textEl\n        class=\"value-text\"\n        [attr.x]=\"textPadding[3]\"\n        [attr.y]=\"textPadding[0]\"\n        [style.fill]=\"textColor\"\n        text-anchor=\"start\"\n        alignment-baseline=\"hanging\"\n        [style.font-size.pt]=\"textFontSize\">\n        {{value}}\n      </svg:text>\n    </svg:g>\n  ",
                     changeDetection: ChangeDetectionStrategy.OnPush
                 },] },
     ];
@@ -120,6 +118,7 @@ export var CardComponent = (function () {
     CardComponent.propDecorators = {
         'color': [{ type: Input },],
         'bandColor': [{ type: Input },],
+        'textColor': [{ type: Input },],
         'x': [{ type: Input },],
         'y': [{ type: Input },],
         'width': [{ type: Input },],

@@ -1,9 +1,15 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { formatLabel } from '../common/label.helper';
 export var HeatCellSeriesComponent = (function () {
     function HeatCellSeriesComponent() {
         this.tooltipDisabled = false;
         this.select = new EventEmitter();
     }
+    HeatCellSeriesComponent.prototype.ngOnInit = function () {
+        if (!this.tooltipText) {
+            this.tooltipText = this.getTooltipText;
+        }
+    };
     HeatCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
@@ -16,19 +22,16 @@ export var HeatCellSeriesComponent = (function () {
         this.data.map(function (row) {
             row.series.map(function (cell) {
                 var value = cell.value;
-                var label = cell.name;
-                var tooltipLabel = label;
-                if (tooltipLabel.constructor.name === 'Date') {
-                    tooltipLabel = tooltipLabel.toLocaleDateString();
-                }
                 cells.push({
+                    row: row,
+                    cell: cell,
                     x: _this.xScale(row.name),
                     y: _this.yScale(cell.name),
                     width: _this.xScale.bandwidth(),
                     height: _this.yScale.bandwidth(),
                     fill: _this.colors.getColor(value),
                     data: value,
-                    label: label,
+                    label: formatLabel(cell.name),
                     series: row.name
                 });
             });
@@ -52,7 +55,7 @@ export var HeatCellSeriesComponent = (function () {
     HeatCellSeriesComponent.decorators = [
         { type: Component, args: [{
                     selector: 'g[ngx-charts-heat-map-cell-series]',
-                    template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+                    template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipText(c)\"\n    />\n  ",
                     changeDetection: ChangeDetectionStrategy.OnPush,
                 },] },
     ];
@@ -65,6 +68,7 @@ export var HeatCellSeriesComponent = (function () {
         'yScale': [{ type: Input },],
         'gradient': [{ type: Input },],
         'tooltipDisabled': [{ type: Input },],
+        'tooltipText': [{ type: Input },],
         'select': [{ type: Output },],
     };
     return HeatCellSeriesComponent;

@@ -8,6 +8,7 @@ export declare class LinearGaugeComponent extends BaseChartComponent implements 
     value: number;
     units: string;
     previousValue: any;
+    valueFormatting: any;
     valueTextEl: ElementRef;
     unitsTextEl: ElementRef;
     dims: ViewDimensions;

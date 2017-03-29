@@ -89,21 +89,13 @@ export var XAxisTicksComponent = (function () {
     };
     XAxisTicksComponent.prototype.getTicks = function () {
         var ticks;
-        var maxTicks = this.getMaxTicks();
+        var maxTicks = this.getMaxTicks(20);
+        var maxScaleTicks = this.getMaxTicks(100);
         if (this.tickValues) {
             ticks = this.tickValues;
         }
         else if (this.scale.ticks) {
-            ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            if (ticks.length > maxTicks) {
-                if (this.tickArguments) {
-                    this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-                }
-                else {
-                    this.tickArguments = [maxTicks];
-                }
-                ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-            }
+            ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
         }
         else {
             ticks = this.scale.domain();
@@ -111,8 +103,7 @@ export var XAxisTicksComponent = (function () {
         }
         return ticks;
     };
-    XAxisTicksComponent.prototype.getMaxTicks = function () {
-        var tickWidth = 20;
+    XAxisTicksComponent.prototype.getMaxTicks = function (tickWidth) {
         return Math.floor(this.width / tickWidth);
     };
     XAxisTicksComponent.prototype.tickTransform = function (tick) {

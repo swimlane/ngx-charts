@@ -4,7 +4,7 @@ export var GaugeAxisComponent = (function () {
     function GaugeAxisComponent() {
         this.rotate = '';
     }
-    GaugeAxisComponent.prototype.ngOnChanges = function () {
+    GaugeAxisComponent.prototype.ngOnChanges = function (changes) {
         this.update();
     };
     GaugeAxisComponent.prototype.update = function () {

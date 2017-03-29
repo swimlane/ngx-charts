@@ -145,6 +145,9 @@ export var GaugeComponent = (function (_super) {
         if (this.textValue && 0 !== this.textValue.length) {
             return this.textValue.toLocaleString();
         }
+        if (this.valueFormatting) {
+            return this.valueFormatting(value);
+        }
         return value.toLocaleString();
     };
     GaugeComponent.prototype.scaleText = function (repeat) {
@@ -237,6 +240,7 @@ export var GaugeComponent = (function (_super) {
         'activeEntries': [{ type: Input },],
         'axisTickFormatting': [{ type: Input },],
         'tooltipDisabled': [{ type: Input },],
+        'valueFormatting': [{ type: Input },],
         'margin': [{ type: Input },],
         'activate': [{ type: Output },],
         'deactivate': [{ type: Output },],

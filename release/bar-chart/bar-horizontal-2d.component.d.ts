@@ -57,6 +57,6 @@ export declare class BarHorizontal2DComponent extends BaseChartComponent {
     updateXAxisHeight({height}: {
         height: any;
     }): void;
-    onActivate(event: any, group: any): void;
-    onDeactivate(event: any, group: any): void;
+    onActivate(event: any, group?: any): void;
+    onDeactivate(event: any, group?: any): void;
 }

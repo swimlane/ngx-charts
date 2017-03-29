@@ -12,7 +12,7 @@ export var NumberCardComponent = (function (_super) {
     __extends(NumberCardComponent, _super);
     function NumberCardComponent() {
         _super.apply(this, arguments);
-        this.innerPadding = 2.5;
+        this.innerPadding = 15;
         this.margin = [10, 10, 10, 10];
     }
     NumberCardComponent.prototype.update = function () {
@@ -48,7 +48,7 @@ export var NumberCardComponent = (function (_super) {
     NumberCardComponent.decorators = [
         { type: Component, args: [{
                     selector: 'ngx-charts-number-card',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [cardColor]=\"cardColor\"\n          [bandColor]=\"bandColor\"\n          [emptyColor]=\"emptyColor\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [innerPadding]=\"innerPadding\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [cardColor]=\"cardColor\"\n          [bandColor]=\"bandColor\"\n          [textColor]=\"textColor\"\n          [emptyColor]=\"emptyColor\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [innerPadding]=\"innerPadding\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                     styleUrls: [
                         '../common/base-chart.component.css',
                         './card.component.css'
@@ -64,6 +64,7 @@ export var NumberCardComponent = (function (_super) {
         'bandColor': [{ type: Input },],
         'emptyColor': [{ type: Input },],
         'innerPadding': [{ type: Input },],
+        'textColor': [{ type: Input },],
     };
     return NumberCardComponent;
 }(BaseChartComponent));

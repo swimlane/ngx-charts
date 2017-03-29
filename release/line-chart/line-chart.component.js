@@ -151,6 +151,9 @@ export var LineChartComponent = (function (_super) {
             scale = scaleLinear()
                 .range([0, width])
                 .domain(domain);
+            if (this.roundDomains) {
+                scale = scale.nice();
+            }
         }
         else if (this.scaleType === 'ordinal') {
             scale = scalePoint()
@@ -158,7 +161,7 @@ export var LineChartComponent = (function (_super) {
                 .padding(0.1)
                 .domain(domain);
         }
-        return this.roundDomains ? scale.nice() : scale;
+        return scale;
     };
     LineChartComponent.prototype.getYScale = function (domain, height) {
         var scale = scaleLinear()

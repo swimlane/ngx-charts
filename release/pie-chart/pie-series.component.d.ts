@@ -10,6 +10,7 @@ export declare class PieSeriesComponent implements OnChanges {
     gradient: boolean;
     activeEntries: any[];
     tooltipDisabled: boolean;
+    labelFormatting: any;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -21,6 +22,7 @@ export declare class PieSeriesComponent implements OnChanges {
     outerArc(): any;
     calculateLabelPositions(pieData: any): any;
     labelVisible(arc: any): boolean;
+    labelText(arc: any): string;
     label(arc: any): string;
     tooltipText(arc: any): string;
     color(arc: any): any;

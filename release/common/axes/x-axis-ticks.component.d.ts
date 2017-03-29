@@ -32,7 +32,7 @@ export declare class XAxisTicksComponent implements OnChanges, AfterViewInit {
     update(): void;
     getRotationAngle(ticks: any): number;
     getTicks(): any;
-    getMaxTicks(): number;
+    getMaxTicks(tickWidth: number): number;
     tickTransform(tick: any): string;
     gridLineTransform(): string;
 }
