@@ -149,6 +149,7 @@
     "typescript": "~2.1.0",
     "uglify-js": "^2.7.5",
     "url-loader": "^0.5.7",
+    "web-animations-js": "^2.2.2",
     "webpack": "^2.2.0",
     "webpack-combine-loaders": "^2.0.3",
     "webpack-dev-server": "^2.2.0",
