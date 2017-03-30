@@ -20,7 +20,7 @@
 | gradient        | boolean  | false         | fill elements with a gradient instead of a solid color                                                          |
 | activeEntries   | object[] | []            | elements to highlight                                                                                           |
 | tooltipDisabled | boolean  | false         | show or hide the tooltip  
-| pieLabelOption | [PieLabelOption](#pie-label-option)|        | optional input for fine control on pie label processing                                                                                       |
+| pieLabelOption | [PieLabelOption](#pie-label-option)|        | optional input for fine control on pie label processing           
 
 ## PieLabelOption <a id="pie-label-option"></a>
 Property              | Type          | Default Value | Description
