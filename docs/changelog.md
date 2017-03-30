@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.0.0
+- Breaking: Upgrade to angular 4
+
 ## 4.4.0
 - Feature: Added ability to set card text color in number card (#284)
 - Enhancement: Added more heatmap options and support for various inputs for innerPadding (#297, #301)
