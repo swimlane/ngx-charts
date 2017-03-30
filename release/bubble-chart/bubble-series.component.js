@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, trigger, style, transition, animate } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
-export var BubbleSeriesComponent = (function () {
+var BubbleSeriesComponent = (function () {
     function BubbleSeriesComponent() {
         this.tooltipDisabled = false;
         this.select = new EventEmitter();
@@ -34,7 +35,7 @@ export var BubbleSeriesComponent = (function () {
                     x: x,
                     y: y,
                     r: r,
-                    classNames: [("circle-data-" + i)],
+                    classNames: ["circle-data-" + i],
                     value: y,
                     label: x,
                     cx: cx,
@@ -86,42 +87,43 @@ export var BubbleSeriesComponent = (function () {
         circle.barVisible = false;
         this.deactivate.emit({ name: this.data.name });
     };
-    BubbleSeriesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-bubble-series]',
-                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [style.opacity]=\"circle.opacity\"\n        [class.active]=\"circle.isActive\"\n        [pointerEvents]=\"'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        trigger('animationState', [
-                            transition('void => *', [
-                                style({
-                                    opacity: 0,
-                                }),
-                                animate(250, style({ opacity: 1 }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    BubbleSeriesComponent.ctorParameters = function () { return []; };
-    BubbleSeriesComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'xScale': [{ type: Input },],
-        'yScale': [{ type: Input },],
-        'rScale': [{ type: Input },],
-        'xScaleType': [{ type: Input },],
-        'yScaleType': [{ type: Input },],
-        'colors': [{ type: Input },],
-        'visibleValue': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'xAxisLabel': [{ type: Input },],
-        'yAxisLabel': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'select': [{ type: Output },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-    };
     return BubbleSeriesComponent;
 }());
+export { BubbleSeriesComponent };
+BubbleSeriesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-bubble-series]',
+                template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [style.opacity]=\"circle.opacity\"\n        [class.active]=\"circle.isActive\"\n        [pointerEvents]=\"'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                animations: [
+                    trigger('animationState', [
+                        transition('void => *', [
+                            style({
+                                opacity: 0,
+                            }),
+                            animate(250, style({ opacity: 1 }))
+                        ])
+                    ])
+                ]
+            },] },
+];
+/** @nocollapse */
+BubbleSeriesComponent.ctorParameters = function () { return []; };
+BubbleSeriesComponent.propDecorators = {
+    'data': [{ type: Input },],
+    'xScale': [{ type: Input },],
+    'yScale': [{ type: Input },],
+    'rScale': [{ type: Input },],
+    'xScaleType': [{ type: Input },],
+    'yScaleType': [{ type: Input },],
+    'colors': [{ type: Input },],
+    'visibleValue': [{ type: Input },],
+    'activeEntries': [{ type: Input },],
+    'xAxisLabel': [{ type: Input },],
+    'yAxisLabel': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'select': [{ type: Output },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+};
 //# sourceMappingURL=bubble-series.component.js.map

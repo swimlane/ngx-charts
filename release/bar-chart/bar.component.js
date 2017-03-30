@@ -3,7 +3,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
-export var BarComponent = (function () {
+var BarComponent = (function () {
     function BarComponent(element, location) {
         this.location = location;
         this.roundEdges = true;
@@ -65,7 +65,8 @@ export var BarComponent = (function () {
                 offset: 100,
                 color: this.fill,
                 opacity: 1
-            }];
+            }
+        ];
     };
     BarComponent.prototype.getStartingPath = function () {
         var radius = this.getRadius();
@@ -129,37 +130,38 @@ export var BarComponent = (function () {
     BarComponent.prototype.onMouseLeave = function () {
         this.deactivate.emit(this.data);
     };
-    BarComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-bar]',
-                    template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    BarComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: LocationStrategy, },
-    ]; };
-    BarComponent.propDecorators = {
-        'fill': [{ type: Input },],
-        'data': [{ type: Input },],
-        'width': [{ type: Input },],
-        'height': [{ type: Input },],
-        'x': [{ type: Input },],
-        'y': [{ type: Input },],
-        'orientation': [{ type: Input },],
-        'roundEdges': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'offset': [{ type: Input },],
-        'isActive': [{ type: Input },],
-        'stops': [{ type: Input },],
-        'select': [{ type: Output },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
-        'onMouseLeave': [{ type: HostListener, args: ['mouseleave',] },],
-    };
     return BarComponent;
 }());
+export { BarComponent };
+BarComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-bar]',
+                template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+BarComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: LocationStrategy, },
+]; };
+BarComponent.propDecorators = {
+    'fill': [{ type: Input },],
+    'data': [{ type: Input },],
+    'width': [{ type: Input },],
+    'height': [{ type: Input },],
+    'x': [{ type: Input },],
+    'y': [{ type: Input },],
+    'orientation': [{ type: Input },],
+    'roundEdges': [{ type: Input },],
+    'gradient': [{ type: Input },],
+    'offset': [{ type: Input },],
+    'isActive': [{ type: Input },],
+    'stops': [{ type: Input },],
+    'select': [{ type: Output },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+    'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
+    'onMouseLeave': [{ type: HostListener, args: ['mouseleave',] },],
+};
 //# sourceMappingURL=bar.component.js.map

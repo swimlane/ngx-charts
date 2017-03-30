@@ -10,7 +10,7 @@ import { count, decimalChecker } from './count.helper';
  * @export
  * @class CountUpDirective
  */
-export var CountUpDirective = (function () {
+var CountUpDirective = (function () {
     function CountUpDirective(cd, zone, element) {
         this.cd = cd;
         this.zone = zone;
@@ -67,39 +67,38 @@ export var CountUpDirective = (function () {
         cancelAnimationFrame(this.animationReq);
         var callback = function (_a) {
             var value = _a.value, progress = _a.progress, finished = _a.finished;
-            _this.zone.run(function () {
-                _this.value = "" + _this.countPrefix + value.toLocaleString() + _this.countSuffix;
-                _this.cd.markForCheck();
-                if (!finished)
-                    _this.countChange.emit({ value: value, progress: progress });
-                if (finished)
-                    _this.countFinish.emit({ value: value, progress: progress });
-            });
+            _this.value = "" + _this.countPrefix + value.toLocaleString() + _this.countSuffix;
+            _this.cd.markForCheck();
+            if (!finished)
+                _this.countChange.emit({ value: value, progress: progress });
+            if (finished)
+                _this.countFinish.emit({ value: value, progress: progress });
         };
         this.animationReq = count(this.countFrom, this.countTo, this.countDecimals, this.countDuration, callback);
     };
-    CountUpDirective.decorators = [
-        { type: Component, args: [{
-                    selector: '[ngx-charts-count-up]',
-                    template: "{{value}}"
-                },] },
-    ];
-    /** @nocollapse */
-    CountUpDirective.ctorParameters = function () { return [
-        { type: ChangeDetectorRef, },
-        { type: NgZone, },
-        { type: ElementRef, },
-    ]; };
-    CountUpDirective.propDecorators = {
-        'countDuration': [{ type: Input },],
-        'countPrefix': [{ type: Input },],
-        'countSuffix': [{ type: Input },],
-        'countDecimals': [{ type: Input },],
-        'countTo': [{ type: Input },],
-        'countFrom': [{ type: Input },],
-        'countChange': [{ type: Output },],
-        'countFinish': [{ type: Output },],
-    };
     return CountUpDirective;
 }());
+export { CountUpDirective };
+CountUpDirective.decorators = [
+    { type: Component, args: [{
+                selector: '[ngx-charts-count-up]',
+                template: "{{value}}"
+            },] },
+];
+/** @nocollapse */
+CountUpDirective.ctorParameters = function () { return [
+    { type: ChangeDetectorRef, },
+    { type: NgZone, },
+    { type: ElementRef, },
+]; };
+CountUpDirective.propDecorators = {
+    'countDuration': [{ type: Input },],
+    'countPrefix': [{ type: Input },],
+    'countSuffix': [{ type: Input },],
+    'countDecimals': [{ type: Input },],
+    'countTo': [{ type: Input },],
+    'countFrom': [{ type: Input },],
+    'countChange': [{ type: Output },],
+    'countFinish': [{ type: Output },],
+};
 //# sourceMappingURL=count.directive.js.map

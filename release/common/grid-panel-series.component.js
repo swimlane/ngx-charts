@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-export var GridPanelSeriesComponent = (function () {
+var GridPanelSeriesComponent = (function () {
     function GridPanelSeriesComponent() {
     }
     GridPanelSeriesComponent.prototype.ngOnChanges = function (changes) {
@@ -51,22 +51,23 @@ export var GridPanelSeriesComponent = (function () {
             };
         });
     };
-    GridPanelSeriesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-grid-panel-series]',
-                    template: "\n    <svg:g ngx-charts-grid-panel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    GridPanelSeriesComponent.ctorParameters = function () { return []; };
-    GridPanelSeriesComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'dims': [{ type: Input },],
-        'xScale': [{ type: Input },],
-        'yScale': [{ type: Input },],
-        'orient': [{ type: Input },],
-    };
     return GridPanelSeriesComponent;
 }());
+export { GridPanelSeriesComponent };
+GridPanelSeriesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-grid-panel-series]',
+                template: "\n    <svg:g ngx-charts-grid-panel *ngFor=\"let gridPanel of gridPanels\"\n      [height]=\"gridPanel.height\"\n      [width]=\"gridPanel.width\"\n      [x]=\"gridPanel.x\"\n      [y]=\"gridPanel.y\"\n      [class.grid-panel]=\"true\"\n      [class.odd]=\"gridPanel.class === 'odd'\"\n      [class.even]=\"gridPanel.class === 'even'\">\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+GridPanelSeriesComponent.ctorParameters = function () { return []; };
+GridPanelSeriesComponent.propDecorators = {
+    'data': [{ type: Input },],
+    'dims': [{ type: Input },],
+    'xScale': [{ type: Input },],
+    'yScale': [{ type: Input },],
+    'orient': [{ type: Input },],
+};
 //# sourceMappingURL=grid-panel-series.component.js.map

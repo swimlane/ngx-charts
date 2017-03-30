@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, trigger, style, transition, animate, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
-export var SeriesVerticalComponent = (function () {
+var SeriesVerticalComponent = (function () {
     function SeriesVerticalComponent() {
         this.type = 'standard';
         this.tooltipDisabled = false;
@@ -112,41 +113,42 @@ export var SeriesVerticalComponent = (function () {
     SeriesVerticalComponent.prototype.trackBy = function (index, bar) {
         return bar.label;
     };
-    SeriesVerticalComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-series-vertical]',
-                    template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        trigger('animationState', [
-                            transition('* => void', [
-                                style({
-                                    opacity: 1,
-                                    transform: '*',
-                                }),
-                                animate(500, style({ opacity: 0, transform: 'scale(0)' }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    SeriesVerticalComponent.ctorParameters = function () { return []; };
-    SeriesVerticalComponent.propDecorators = {
-        'dims': [{ type: Input },],
-        'type': [{ type: Input },],
-        'series': [{ type: Input },],
-        'xScale': [{ type: Input },],
-        'yScale': [{ type: Input },],
-        'colors': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'seriesName': [{ type: Input },],
-        'select': [{ type: Output },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-    };
     return SeriesVerticalComponent;
 }());
+export { SeriesVerticalComponent };
+SeriesVerticalComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-series-vertical]',
+                template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                animations: [
+                    trigger('animationState', [
+                        transition('* => void', [
+                            style({
+                                opacity: 1,
+                                transform: '*',
+                            }),
+                            animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+                        ])
+                    ])
+                ]
+            },] },
+];
+/** @nocollapse */
+SeriesVerticalComponent.ctorParameters = function () { return []; };
+SeriesVerticalComponent.propDecorators = {
+    'dims': [{ type: Input },],
+    'type': [{ type: Input },],
+    'series': [{ type: Input },],
+    'xScale': [{ type: Input },],
+    'yScale': [{ type: Input },],
+    'colors': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'gradient': [{ type: Input },],
+    'activeEntries': [{ type: Input },],
+    'seriesName': [{ type: Input },],
+    'select': [{ type: Output },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+};
 //# sourceMappingURL=series-vertical.component.js.map

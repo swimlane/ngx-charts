@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { select } from 'd3-selection';
 import { invertColor } from '../utils/color-utils';
-export var TreeMapCellComponent = (function () {
+var TreeMapCellComponent = (function () {
     function TreeMapCellComponent(element) {
         this.select = new EventEmitter();
         this.initialized = false;
@@ -45,28 +45,29 @@ export var TreeMapCellComponent = (function () {
             value: this.value
         });
     };
-    TreeMapCellComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-tree-map-cell]',
-                    template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\">\n            {{label}}\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span \n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\">\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    TreeMapCellComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-    ]; };
-    TreeMapCellComponent.propDecorators = {
-        'fill': [{ type: Input },],
-        'x': [{ type: Input },],
-        'y': [{ type: Input },],
-        'width': [{ type: Input },],
-        'height': [{ type: Input },],
-        'label': [{ type: Input },],
-        'value': [{ type: Input },],
-        'valueType': [{ type: Input },],
-        'select': [{ type: Output },],
-    };
     return TreeMapCellComponent;
 }());
+export { TreeMapCellComponent };
+TreeMapCellComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-tree-map-cell]',
+                template: "\n    <svg:g>\n      <svg:rect\n        [attr.fill]=\"fill\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        [style.cursor]=\"'pointer'\"\n        class=\"cell\"\n        (click)=\"onClick()\"\n      />\n      <svg:foreignObject\n        *ngIf=\"width >= 70 && height >= 35\"\n        [attr.x]=\"x\"\n        [attr.y]=\"y\"\n        [attr.width]=\"width\"\n        [attr.height]=\"height\"\n        class=\"label\"\n        [style.pointer-events]=\"'none'\">\n        <xhtml:p\n          [style.color]=\"getTextColor()\"\n          [style.height]=\"height + 'px'\"\n          [style.width]=\"width + 'px'\">\n          <xhtml:span class=\"treemap-label\">\n            {{label}}\n          </xhtml:span>\n          <xhtml:br />\n          <xhtml:span \n            class=\"treemap-val\" \n            ngx-charts-count-up \n            [countTo]=\"value\">\n          </xhtml:span>\n        </xhtml:p>\n      </svg:foreignObject>\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+TreeMapCellComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+]; };
+TreeMapCellComponent.propDecorators = {
+    'fill': [{ type: Input },],
+    'x': [{ type: Input },],
+    'y': [{ type: Input },],
+    'width': [{ type: Input },],
+    'height': [{ type: Input },],
+    'label': [{ type: Input },],
+    'value': [{ type: Input },],
+    'valueType': [{ type: Input },],
+    'select': [{ type: Output },],
+};
 //# sourceMappingURL=tree-map-cell.component.js.map

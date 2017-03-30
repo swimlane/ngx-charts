@@ -1,7 +1,7 @@
 import { Component, Input, Output, ViewChild, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
-export var YAxisTicksComponent = (function () {
+var YAxisTicksComponent = (function () {
     function YAxisTicksComponent() {
         this.tickArguments = [5];
         this.tickStroke = '#ccc';
@@ -122,28 +122,29 @@ export var YAxisTicksComponent = (function () {
     YAxisTicksComponent.prototype.gridLineTransform = function () {
         return "translate(5,0)";
     };
-    YAxisTicksComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-y-axis-ticks]',
-                    template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    YAxisTicksComponent.ctorParameters = function () { return []; };
-    YAxisTicksComponent.propDecorators = {
-        'scale': [{ type: Input },],
-        'orient': [{ type: Input },],
-        'tickArguments': [{ type: Input },],
-        'tickValues': [{ type: Input },],
-        'tickStroke': [{ type: Input },],
-        'tickFormatting': [{ type: Input },],
-        'showGridLines': [{ type: Input },],
-        'gridLineWidth': [{ type: Input },],
-        'height': [{ type: Input },],
-        'dimensionsChanged': [{ type: Output },],
-        'ticksElement': [{ type: ViewChild, args: ['ticksel',] },],
-    };
     return YAxisTicksComponent;
 }());
+export { YAxisTicksComponent };
+YAxisTicksComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-y-axis-ticks]',
+                template: "\n    <svg:g #ticksel>\n      <svg:g *ngFor=\"let tick of ticks\" class=\"tick\"\n        [attr.transform]=\"transform(tick)\" >\n        <title>{{tickFormat(tick)}}</title>\n        <svg:text\n          stroke-width=\"0.01\"\n          [attr.dy]=\"dy\"\n          [attr.x]=\"x1\"\n          [attr.y]=\"y1\"\n          [attr.text-anchor]=\"textAnchor\"\n          [style.font-size]=\"'12px'\">\n          {{trimLabel(tickFormat(tick))}}\n        </svg:text>\n      </svg:g>\n    </svg:g>\n    <svg:g *ngFor=\"let tick of ticks\"\n      [attr.transform]=\"transform(tick)\">\n      <svg:g\n        *ngIf=\"showGridLines\"\n        [attr.transform]=\"gridLineTransform()\">\n        <svg:line\n          class=\"gridline-path gridline-path-horizontal\"\n          x1=\"0\"\n          [attr.x2]=\"gridLineWidth\" />\n      </svg:g>\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+YAxisTicksComponent.ctorParameters = function () { return []; };
+YAxisTicksComponent.propDecorators = {
+    'scale': [{ type: Input },],
+    'orient': [{ type: Input },],
+    'tickArguments': [{ type: Input },],
+    'tickValues': [{ type: Input },],
+    'tickStroke': [{ type: Input },],
+    'tickFormatting': [{ type: Input },],
+    'showGridLines': [{ type: Input },],
+    'gridLineWidth': [{ type: Input },],
+    'height': [{ type: Input },],
+    'dimensionsChanged': [{ type: Output },],
+    'ticksElement': [{ type: ViewChild, args: ['ticksel',] },],
+};
 //# sourceMappingURL=y-axis-ticks.component.js.map

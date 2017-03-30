@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { arc } from 'd3-shape';
 import { trimLabel } from '../common/trim-label.helper';
-export var PieLabelComponent = (function () {
+var PieLabelComponent = (function () {
     function PieLabelComponent() {
         this.isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
         this.trimLabel = trimLabel;
@@ -68,24 +68,25 @@ export var PieLabelComponent = (function () {
     PieLabelComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
     };
-    PieLabelComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-pie-label]',
-                    template: "\n    <title>{{label}}</title>\n    <svg:g\n      [attr.transform]=\"attrTransform\"\n      [style.transform]=\"styleTransform\"\n      [style.transition]=\"textTransition\">\n      <svg:text\n        class=\"pie-label\"\n        dy=\".35em\"\n        [style.textAnchor]=\"textAnchor()\"\n        [style.shapeRendering]=\"'crispEdges'\"\n        [style.textTransform]=\"'uppercase'\">\n        {{trimLabel(label, 10)}}\n      </svg:text>\n    </svg:g>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"pie-label-line line\">\n    </svg:path>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    PieLabelComponent.ctorParameters = function () { return []; };
-    PieLabelComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'radius': [{ type: Input },],
-        'label': [{ type: Input },],
-        'color': [{ type: Input },],
-        'max': [{ type: Input },],
-        'value': [{ type: Input },],
-        'explodeSlices': [{ type: Input },],
-    };
     return PieLabelComponent;
 }());
+export { PieLabelComponent };
+PieLabelComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-pie-label]',
+                template: "\n    <title>{{label}}</title>\n    <svg:g\n      [attr.transform]=\"attrTransform\"\n      [style.transform]=\"styleTransform\"\n      [style.transition]=\"textTransition\">\n      <svg:text\n        class=\"pie-label\"\n        dy=\".35em\"\n        [style.textAnchor]=\"textAnchor()\"\n        [style.shapeRendering]=\"'crispEdges'\"\n        [style.textTransform]=\"'uppercase'\">\n        {{trimLabel(label, 10)}}\n      </svg:text>\n    </svg:g>\n    <svg:path\n      [attr.d]=\"line\"\n      [attr.stroke]=\"color\"\n      fill=\"none\"\n      class=\"pie-label-line line\">\n    </svg:path>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+PieLabelComponent.ctorParameters = function () { return []; };
+PieLabelComponent.propDecorators = {
+    'data': [{ type: Input },],
+    'radius': [{ type: Input },],
+    'label': [{ type: Input },],
+    'color': [{ type: Input },],
+    'max': [{ type: Input },],
+    'value': [{ type: Input },],
+    'explodeSlices': [{ type: Input },],
+};
 //# sourceMappingURL=pie-label.component.js.map

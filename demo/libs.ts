@@ -9,8 +9,11 @@ import '@angular/platform-browser-dynamic';
 import '@angular/common';
 
 if(IS_PRODUCTION) {
-  disableDebugTools();
   enableProdMode();
+  _decorateModuleRef = (modRef: any) => {
+    disableDebugTools();
+    return modRef;
+  };
 }
 
 if(IS_DEV) {

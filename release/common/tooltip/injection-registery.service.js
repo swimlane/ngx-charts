@@ -1,4 +1,4 @@
-export var InjectionRegistery = (function () {
+var InjectionRegistery = (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
         this.defaults = {};
@@ -65,4 +65,5 @@ export var InjectionRegistery = (function () {
     };
     return InjectionRegistery;
 }());
+export { InjectionRegistery };
 //# sourceMappingURL=injection-registery.service.js.map

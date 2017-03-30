@@ -6,7 +6,14 @@
  * @param {string} hex
  * @returns {*}
  */
-export function hexToRgb(hex) {
+/**
+ * Converts a hex to RGB
+ * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+ *
+ * @export
+ * @param {string} hex
+ * @returns {*}
+ */ export function hexToRgb(hex) {
     var result = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (m, r, g, b) { return '#' + r + r + g + g + b + b; })
         .substring(1).match(/.{2}/g)
         .map(function (x) { return parseInt(x, 16); });

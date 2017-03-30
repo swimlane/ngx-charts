@@ -4,7 +4,7 @@ import { interpolate } from 'd3-interpolate';
 import { select } from 'd3-selection';
 import { arc } from 'd3-shape';
 import { id } from '../utils/id';
-export var PieArcComponent = (function () {
+var PieArcComponent = (function () {
     function PieArcComponent(element, location) {
         this.location = location;
         this.startAngle = 0;
@@ -99,37 +99,38 @@ export var PieArcComponent = (function () {
     PieArcComponent.prototype.onClick = function () {
         this.select.emit(this.data);
     };
-    PieArcComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-pie-arc]',
-                    template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    PieArcComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: LocationStrategy, },
-    ]; };
-    PieArcComponent.propDecorators = {
-        'fill': [{ type: Input },],
-        'startAngle': [{ type: Input },],
-        'endAngle': [{ type: Input },],
-        'innerRadius': [{ type: Input },],
-        'outerRadius': [{ type: Input },],
-        'cornerRadius': [{ type: Input },],
-        'value': [{ type: Input },],
-        'max': [{ type: Input },],
-        'data': [{ type: Input },],
-        'explodeSlices': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'animate': [{ type: Input },],
-        'pointerEvents': [{ type: Input },],
-        'isActive': [{ type: Input },],
-        'select': [{ type: Output },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-    };
     return PieArcComponent;
 }());
+export { PieArcComponent };
+PieArcComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-pie-arc]',
+                template: "\n    <svg:g class=\"arc-group\">\n      <svg:defs *ngIf=\"gradient\">\n        <svg:g ngx-charts-svg-radial-gradient\n          [color]=\"fill\"\n          orientation=\"vertical\"\n          [name]=\"radialGradientId\"\n          [startOpacity]=\"startOpacity\"\n        />\n      </svg:defs>\n      <svg:path\n        [attr.d]=\"path\"\n        class=\"arc\"\n        [class.active]=\"isActive\"\n        [attr.fill]=\"gradient ? gradientFill : fill\"\n        (click)=\"onClick()\"\n        (mouseenter)=\"activate.emit(data)\"\n        (mouseleave)=\"deactivate.emit(data)\"\n        [style.pointer-events]=\"pointerEvents ? 'auto' : 'none'\"\n      />\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+            },] },
+];
+/** @nocollapse */
+PieArcComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: LocationStrategy, },
+]; };
+PieArcComponent.propDecorators = {
+    'fill': [{ type: Input },],
+    'startAngle': [{ type: Input },],
+    'endAngle': [{ type: Input },],
+    'innerRadius': [{ type: Input },],
+    'outerRadius': [{ type: Input },],
+    'cornerRadius': [{ type: Input },],
+    'value': [{ type: Input },],
+    'max': [{ type: Input },],
+    'data': [{ type: Input },],
+    'explodeSlices': [{ type: Input },],
+    'gradient': [{ type: Input },],
+    'animate': [{ type: Input },],
+    'pointerEvents': [{ type: Input },],
+    'isActive': [{ type: Input },],
+    'select': [{ type: Output },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+};
 //# sourceMappingURL=pie-arc.component.js.map

@@ -9,64 +9,62 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
-export var BubbleChartComponent = (function (_super) {
+var BubbleChartComponent = (function (_super) {
     __extends(BubbleChartComponent, _super);
     function BubbleChartComponent() {
-        _super.apply(this, arguments);
-        this.view = [400, 400];
-        this.showGridLines = true;
-        this.legend = false;
-        this.xAxis = true;
-        this.yAxis = true;
-        this.roundDomains = false;
-        this.maxRadius = 10;
-        this.minRadius = 3;
-        this.schemeType = 'ordinal';
-        this.legendPosition = 'right';
-        this.tooltipDisabled = false;
-        this.activate = new EventEmitter();
-        this.deactivate = new EventEmitter();
-        this.scaleType = 'linear';
-        this.margin = [10, 20, 10, 20];
-        this.bubblePadding = [0, 0, 0, 0];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
-        this.activeEntries = [];
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.view = [400, 400];
+        _this.showGridLines = true;
+        _this.legend = false;
+        _this.xAxis = true;
+        _this.yAxis = true;
+        _this.roundDomains = false;
+        _this.maxRadius = 10;
+        _this.minRadius = 3;
+        _this.schemeType = 'ordinal';
+        _this.legendPosition = 'right';
+        _this.tooltipDisabled = false;
+        _this.activate = new EventEmitter();
+        _this.deactivate = new EventEmitter();
+        _this.scaleType = 'linear';
+        _this.margin = [10, 20, 10, 20];
+        _this.bubblePadding = [0, 0, 0, 0];
+        _this.xAxisHeight = 0;
+        _this.yAxisWidth = 0;
+        _this.activeEntries = [];
+        return _this;
     }
     BubbleChartComponent.prototype.update = function () {
-        var _this = this;
         _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = calculateViewDimensions({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.seriesDomain = _this.results.map(function (d) { return d.name; });
-            _this.rDomain = _this.getRDomain();
-            _this.xDomain = _this.getXDomain();
-            _this.yDomain = _this.getYDomain();
-            _this.transform = "translate(" + _this.dims.xOffset + "," + _this.margin[0] + ")";
-            var colorDomain = _this.schemeType === 'ordinal' ? _this.seriesDomain : _this.rDomain;
-            _this.colors = new ColorHelper(_this.scheme, _this.schemeType, colorDomain, _this.customColors);
-            _this.data = _this.results;
-            _this.minRadius = Math.max(_this.minRadius, 1);
-            _this.maxRadius = Math.max(_this.maxRadius, 1);
-            _this.rScale = _this.getRScale(_this.rDomain, [_this.minRadius, _this.maxRadius]);
-            _this.bubblePadding = [0, 0, 0, 0];
-            _this.setScales();
-            _this.bubblePadding = _this.getBubblePadding();
-            _this.setScales();
-            _this.legendOptions = _this.getLegendOptions();
+        this.dims = calculateViewDimensions({
+            width: this.width,
+            height: this.height,
+            margins: this.margin,
+            showXAxis: this.xAxis,
+            showYAxis: this.yAxis,
+            xAxisHeight: this.xAxisHeight,
+            yAxisWidth: this.yAxisWidth,
+            showXLabel: this.showXAxisLabel,
+            showYLabel: this.showYAxisLabel,
+            showLegend: this.legend,
+            legendType: this.schemeType
         });
+        this.seriesDomain = this.results.map(function (d) { return d.name; });
+        this.rDomain = this.getRDomain();
+        this.xDomain = this.getXDomain();
+        this.yDomain = this.getYDomain();
+        this.transform = "translate(" + this.dims.xOffset + "," + this.margin[0] + ")";
+        var colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
+        this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
+        this.data = this.results;
+        this.minRadius = Math.max(this.minRadius, 1);
+        this.maxRadius = Math.max(this.maxRadius, 1);
+        this.rScale = this.getRScale(this.rDomain, [this.minRadius, this.maxRadius]);
+        this.bubblePadding = [0, 0, 0, 0];
+        this.setScales();
+        this.bubblePadding = this.getBubblePadding();
+        this.setScales();
+        this.legendOptions = this.getLegendOptions();
     };
     BubbleChartComponent.prototype.hideCircles = function () {
         this.deactivateAll();
@@ -208,38 +206,39 @@ export var BubbleChartComponent = (function (_super) {
         }
         this.activeEntries = [];
     };
-    BubbleChartComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-bubble-chart',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath>\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>"
-                },] },
-    ];
-    /** @nocollapse */
-    BubbleChartComponent.ctorParameters = function () { return []; };
-    BubbleChartComponent.propDecorators = {
-        'view': [{ type: Input },],
-        'results': [{ type: Input },],
-        'showGridLines': [{ type: Input },],
-        'legend': [{ type: Input },],
-        'xAxis': [{ type: Input },],
-        'yAxis': [{ type: Input },],
-        'showXAxisLabel': [{ type: Input },],
-        'showYAxisLabel': [{ type: Input },],
-        'xAxisLabel': [{ type: Input },],
-        'yAxisLabel': [{ type: Input },],
-        'xAxisTickFormatting': [{ type: Input },],
-        'yAxisTickFormatting': [{ type: Input },],
-        'roundDomains': [{ type: Input },],
-        'maxRadius': [{ type: Input },],
-        'minRadius': [{ type: Input },],
-        'autoScale': [{ type: Input },],
-        'schemeType': [{ type: Input },],
-        'legendPosition': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'hideCircles': [{ type: HostListener, args: ['mouseleave',] },],
-    };
     return BubbleChartComponent;
 }(BaseChartComponent));
+export { BubbleChartComponent };
+BubbleChartComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ngx-charts-bubble-chart',
+                template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [activeEntries]=\"activeEntries\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:defs>\n        <svg:clipPath>\n          <svg:rect\n            [attr.width]=\"dims.width + 10\"\n            [attr.height]=\"dims.height + 10\"\n            [attr.transform]=\"'translate(-5, -5)'\"/>\n        </svg:clipPath>\n      </svg:defs>\n      <svg:g [attr.transform]=\"transform\" class=\"bubble-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [showGridLines]=\"showGridLines\"\n          [dims]=\"dims\"\n          [xScale]=\"xScale\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\"/>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [showGridLines]=\"showGridLines\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\"/>\n        <svg:rect\n          class=\"bubble-chart-area\"\n          x=\"0\"\n          y=\"0\"\n          [attr.width]=\"dims.width\"\n          [attr.height]=\"dims.height\"\n          style=\"fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';\"\n          (mouseenter)=\"deactivateAll()\"\n        />\n        <svg:g *ngFor=\"let series of data\">\n          <svg:g ngx-charts-bubble-series\n            [xScale]=\"xScale\"\n            [yScale]=\"yScale\"\n            [rScale]=\"rScale\"\n            [xScaleType]=\"xScaleType\"\n            [yScaleType]=\"yScaleType\"\n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\"\n            [colors]=\"colors\"\n            [data]=\"series\"\n            [activeEntries]=\"activeEntries\"\n            [tooltipDisabled]=\"tooltipDisabled\"\n            (select)=\"onClick($event, series)\"\n            (activate)=\"onActivate($event)\"\n            (deactivate)=\"onDeactivate($event)\" />\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>"
+            },] },
+];
+/** @nocollapse */
+BubbleChartComponent.ctorParameters = function () { return []; };
+BubbleChartComponent.propDecorators = {
+    'view': [{ type: Input },],
+    'results': [{ type: Input },],
+    'showGridLines': [{ type: Input },],
+    'legend': [{ type: Input },],
+    'xAxis': [{ type: Input },],
+    'yAxis': [{ type: Input },],
+    'showXAxisLabel': [{ type: Input },],
+    'showYAxisLabel': [{ type: Input },],
+    'xAxisLabel': [{ type: Input },],
+    'yAxisLabel': [{ type: Input },],
+    'xAxisTickFormatting': [{ type: Input },],
+    'yAxisTickFormatting': [{ type: Input },],
+    'roundDomains': [{ type: Input },],
+    'maxRadius': [{ type: Input },],
+    'minRadius': [{ type: Input },],
+    'autoScale': [{ type: Input },],
+    'schemeType': [{ type: Input },],
+    'legendPosition': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+    'hideCircles': [{ type: HostListener, args: ['mouseleave',] },],
+};
 //# sourceMappingURL=bubble-chart.component.js.map

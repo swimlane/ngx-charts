@@ -9,47 +9,45 @@ import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
-export var ForceDirectedGraphComponent = (function (_super) {
+var ForceDirectedGraphComponent = (function (_super) {
     __extends(ForceDirectedGraphComponent, _super);
     function ForceDirectedGraphComponent() {
-        _super.apply(this, arguments);
-        this.force = forceSimulation()
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.force = forceSimulation()
             .force('charge', forceManyBody())
             .force('collide', forceCollide(5))
             .force('x', forceX())
             .force('y', forceY());
-        this.forceLink = forceLink().id(function (node) { return node.value; });
-        this.nodes = [];
-        this.links = [];
-        this.activeEntries = [];
-        this.tooltipDisabled = false;
-        this.activate = new EventEmitter();
-        this.deactivate = new EventEmitter();
-        this.margin = [0, 0, 0, 0];
-        this.results = [];
-        this.groupResultsBy = function (node) { return node.value; };
+        _this.forceLink = forceLink().id(function (node) { return node.value; });
+        _this.nodes = [];
+        _this.links = [];
+        _this.activeEntries = [];
+        _this.tooltipDisabled = false;
+        _this.activate = new EventEmitter();
+        _this.deactivate = new EventEmitter();
+        _this.margin = [0, 0, 0, 0];
+        _this.results = [];
+        _this.groupResultsBy = function (node) { return node.value; };
+        return _this;
     }
     ForceDirectedGraphComponent.prototype.update = function () {
-        var _this = this;
         _super.prototype.update.call(this);
-        this.zone.run(function () {
-            // center graph
-            _this.dims = calculateViewDimensions({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showLegend: _this.legend,
-            });
-            _this.seriesDomain = _this.getSeriesDomain();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "\n        translate(" + (_this.dims.xOffset + _this.dims.width / 2) + ", " + (_this.margin[0] + _this.dims.height / 2) + ")\n      ";
-            if (_this.force) {
-                _this.force.nodes(_this.nodes)
-                    .force('link', _this.forceLink.links(_this.links))
-                    .alpha(0.5).restart();
-            }
+        // center graph
+        this.dims = calculateViewDimensions({
+            width: this.width,
+            height: this.height,
+            margins: this.margin,
+            showLegend: this.legend,
         });
+        this.seriesDomain = this.getSeriesDomain();
+        this.setColors();
+        this.legendOptions = this.getLegendOptions();
+        this.transform = "\n      translate(" + (this.dims.xOffset + this.dims.width / 2) + ", " + (this.margin[0] + this.dims.height / 2) + ")\n    ";
+        if (this.force) {
+            this.force.nodes(this.nodes)
+                .force('link', this.forceLink.links(this.links))
+                .alpha(0.5).restart();
+        }
     };
     ForceDirectedGraphComponent.prototype.onClick = function (data) {
         this.select.emit(data);
@@ -110,37 +108,38 @@ export var ForceDirectedGraphComponent = (function (_super) {
         this.draggingNode.fy = undefined;
         this.draggingNode = undefined;
     };
-    ForceDirectedGraphComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-force-directed-graph',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    styleUrls: [
-                        '../common/base-chart.component.css',
-                        './force-directed-graph.component.css'
-                    ],
-                    encapsulation: ViewEncapsulation.None,
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    ForceDirectedGraphComponent.ctorParameters = function () { return []; };
-    ForceDirectedGraphComponent.propDecorators = {
-        'force': [{ type: Input },],
-        'forceLink': [{ type: Input },],
-        'legend': [{ type: Input },],
-        'nodes': [{ type: Input },],
-        'links': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'linkTemplate': [{ type: ContentChild, args: ['linkTemplate',] },],
-        'nodeTemplate': [{ type: ContentChild, args: ['nodeTemplate',] },],
-        'chart': [{ type: ViewChild, args: [ChartComponent, { read: ElementRef },] },],
-        'groupResultsBy': [{ type: Input },],
-        'onDrag': [{ type: HostListener, args: ['document:mousemove', ['$event'],] },],
-        'onDragEnd': [{ type: HostListener, args: ['document:mouseup', ['$event'],] },],
-    };
     return ForceDirectedGraphComponent;
 }(BaseChartComponent));
+export { ForceDirectedGraphComponent };
+ForceDirectedGraphComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ngx-charts-force-directed-graph',
+                template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"force-directed-graph chart\">\n        <svg:g class=\"links\">\n          <svg:g *ngFor=\"let link of links; trackBy:trackLinkBy\">\n            <ng-template *ngIf=\"linkTemplate\"\n              [ngTemplateOutlet]=\"linkTemplate\"\n              [ngOutletContext]=\"{ $implicit: link }\">\n            </ng-template>\n            <svg:line *ngIf=\"!linkTemplate\"\n              strokeWidth=\"1\" class=\"edge\"\n              [attr.x1]=\"link.source.x\"\n              [attr.y1]=\"link.source.y\"\n              [attr.x2]=\"link.target.x\"\n              [attr.y2]=\"link.target.y\"\n            />\n          </svg:g>\n        </svg:g>\n        <svg:g class=\"nodes\">\n          <svg:g *ngFor=\"let node of nodes; trackBy:trackNodeBy\"\n            [attr.transform]=\"'translate(' + node.x + ',' + node.y + ')'\"\n            [attr.fill]=\"colors.getColor(groupResultsBy(node))\"\n            [attr.stroke]=\"colors.getColor(groupResultsBy(node))\"\n            (mousedown)=\"onDragStart(node, $event)\"\n            (click)=\"onClick({name: node.value})\"\n            ngx-tooltip\n            [tooltipDisabled]=\"tooltipDisabled\"\n            [tooltipPlacement]=\"'top'\"\n            [tooltipType]=\"'tooltip'\"\n            [tooltipTitle]=\"node.value\">\n            <ng-template *ngIf=\"nodeTemplate\"\n              [ngTemplateOutlet]=\"nodeTemplate\"\n              [ngOutletContext]=\"{ $implicit: node }\">\n            </ng-template>\n            <svg:circle *ngIf=\"!nodeTemplate\" r=\"5\" />\n          </svg:g>\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                styleUrls: [
+                    '../common/base-chart.component.css',
+                    './force-directed-graph.component.css'
+                ],
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush,
+            },] },
+];
+/** @nocollapse */
+ForceDirectedGraphComponent.ctorParameters = function () { return []; };
+ForceDirectedGraphComponent.propDecorators = {
+    'force': [{ type: Input },],
+    'forceLink': [{ type: Input },],
+    'legend': [{ type: Input },],
+    'nodes': [{ type: Input },],
+    'links': [{ type: Input },],
+    'activeEntries': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+    'linkTemplate': [{ type: ContentChild, args: ['linkTemplate',] },],
+    'nodeTemplate': [{ type: ContentChild, args: ['nodeTemplate',] },],
+    'chart': [{ type: ViewChild, args: [ChartComponent, { read: ElementRef },] },],
+    'groupResultsBy': [{ type: Input },],
+    'onDrag': [{ type: HostListener, args: ['document:mousemove', ['$event'],] },],
+    'onDragEnd': [{ type: HostListener, args: ['document:mouseup', ['$event'],] },],
+};
 //# sourceMappingURL=force-directed-graph.component.js.map

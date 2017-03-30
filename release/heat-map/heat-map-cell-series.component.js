@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { formatLabel } from '../common/label.helper';
-export var HeatCellSeriesComponent = (function () {
+var HeatCellSeriesComponent = (function () {
     function HeatCellSeriesComponent() {
         this.tooltipDisabled = false;
         this.select = new EventEmitter();
@@ -52,25 +52,26 @@ export var HeatCellSeriesComponent = (function () {
             series: series
         });
     };
-    HeatCellSeriesComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-heat-map-cell-series]',
-                    template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipText(c)\"\n    />\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                },] },
-    ];
-    /** @nocollapse */
-    HeatCellSeriesComponent.ctorParameters = function () { return []; };
-    HeatCellSeriesComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'colors': [{ type: Input },],
-        'xScale': [{ type: Input },],
-        'yScale': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'tooltipText': [{ type: Input },],
-        'select': [{ type: Output },],
-    };
     return HeatCellSeriesComponent;
 }());
+export { HeatCellSeriesComponent };
+HeatCellSeriesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-heat-map-cell-series]',
+                template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipText(c)\"\n    />\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+            },] },
+];
+/** @nocollapse */
+HeatCellSeriesComponent.ctorParameters = function () { return []; };
+HeatCellSeriesComponent.propDecorators = {
+    'data': [{ type: Input },],
+    'colors': [{ type: Input },],
+    'xScale': [{ type: Input },],
+    'yScale': [{ type: Input },],
+    'gradient': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'tooltipText': [{ type: Input },],
+    'select': [{ type: Output },],
+};
 //# sourceMappingURL=heat-map-cell-series.component.js.map

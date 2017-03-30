@@ -1,5 +1,5 @@
 import { Component, Input, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-export var AxisLabelComponent = (function () {
+var AxisLabelComponent = (function () {
     function AxisLabelComponent(element) {
         this.textHeight = 25;
         this.margin = 5;
@@ -34,24 +34,25 @@ export var AxisLabelComponent = (function () {
             default:
         }
     };
-    AxisLabelComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-axis-label]',
-                    template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    AxisLabelComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-    ]; };
-    AxisLabelComponent.propDecorators = {
-        'orient': [{ type: Input },],
-        'label': [{ type: Input },],
-        'offset': [{ type: Input },],
-        'width': [{ type: Input },],
-        'height': [{ type: Input },],
-    };
     return AxisLabelComponent;
 }());
+export { AxisLabelComponent };
+AxisLabelComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-axis-label]',
+                template: "\n    <svg:text\n      [attr.stroke-width]=\"strokeWidth\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.x]=\"x\"\n      [attr.y]=\"y\"\n      [attr.text-anchor]=\"textAnchor\"\n      [attr.transform]=\"transform\">\n      {{label}}\n    </svg:text>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+AxisLabelComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+]; };
+AxisLabelComponent.propDecorators = {
+    'orient': [{ type: Input },],
+    'label': [{ type: Input },],
+    'offset': [{ type: Input },],
+    'width': [{ type: Input },],
+    'height': [{ type: Input },],
+};
 //# sourceMappingURL=axis-label.component.js.map
