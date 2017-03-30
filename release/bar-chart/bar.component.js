@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
+import { roundedRect } from '../common/shape.helper';
 import { id } from '../utils/id';
-export var BarComponent = (function () {
+var BarComponent = (function () {
     function BarComponent(element, location) {
         this.location = location;
         this.roundEdges = true;
@@ -64,7 +65,8 @@ export var BarComponent = (function () {
                 offset: 100,
                 color: this.fill,
                 opacity: 1
-            }];
+            }
+        ];
     };
     BarComponent.prototype.getStartingPath = function () {
         var radius = this.getRadius();
@@ -72,19 +74,19 @@ export var BarComponent = (function () {
         if (this.roundEdges) {
             if (this.orientation === 'vertical') {
                 radius = Math.min(this.height, radius);
-                path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
+                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
             }
             else if (this.orientation === 'horizontal') {
                 radius = Math.min(this.width, radius);
-                path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
+                path = roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
             }
         }
         else {
             if (this.orientation === 'vertical') {
-                path = this.roundedRect(this.x, this.y + this.height, this.width, 0, radius, false, false, false, false);
+                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, false, false, false, false);
             }
             else if (this.orientation === 'horizontal') {
-                path = this.roundedRect(this.x, this.y, 0, this.height, radius, false, false, false, false);
+                path = roundedRect(this.x, this.y, 0, this.height, radius, false, false, false, false);
             }
         }
         return path;
@@ -95,15 +97,15 @@ export var BarComponent = (function () {
         if (this.roundEdges) {
             if (this.orientation === 'vertical') {
                 radius = Math.min(this.height, radius);
-                path = this.roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
+                path = roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
             }
             else if (this.orientation === 'horizontal') {
                 radius = Math.min(this.width, radius);
-                path = this.roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
+                path = roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
             }
         }
         else {
-            path = this.roundedRect(this.x, this.y, this.width, this.height, radius, false, false, false, false);
+            path = roundedRect(this.x, this.y, this.width, this.height, radius, false, false, false, false);
         }
         return path;
     };
@@ -122,81 +124,44 @@ export var BarComponent = (function () {
             return 0.5;
         }
     };
-    BarComponent.prototype.roundedRect = function (x, y, w, h, r, tl, tr, bl, br) {
-        var retval;
-        retval = 'M' + (x + r) + ',' + y;
-        retval += 'h' + (w - 2 * r);
-        if (tr) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + r;
-        }
-        else {
-            retval += 'h' + r;
-            retval += 'v' + r;
-        }
-        retval += 'v' + (h - 2 * r);
-        if (br) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + r;
-        }
-        else {
-            retval += 'v' + r;
-            retval += 'h' + -r;
-        }
-        retval += 'h' + (2 * r - w);
-        if (bl) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + -r + ',' + -r;
-        }
-        else {
-            retval += 'h' + -r;
-            retval += 'v' + -r;
-        }
-        retval += 'v' + (2 * r - h);
-        if (tl) {
-            retval += 'a' + r + ',' + r + ' 0 0 1 ' + r + ',' + -r;
-        }
-        else {
-            retval += 'v' + -r;
-            retval += 'h' + r;
-        }
-        retval += 'z';
-        return retval;
-    };
     BarComponent.prototype.onMouseEnter = function () {
         this.activate.emit(this.data);
     };
     BarComponent.prototype.onMouseLeave = function () {
         this.deactivate.emit(this.data);
     };
-    BarComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-bar]',
-                    template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    BarComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: LocationStrategy, },
-    ]; };
-    BarComponent.propDecorators = {
-        'fill': [{ type: Input },],
-        'data': [{ type: Input },],
-        'width': [{ type: Input },],
-        'height': [{ type: Input },],
-        'x': [{ type: Input },],
-        'y': [{ type: Input },],
-        'orientation': [{ type: Input },],
-        'roundEdges': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'offset': [{ type: Input },],
-        'isActive': [{ type: Input },],
-        'stops': [{ type: Input },],
-        'select': [{ type: Output },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-        'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
-        'onMouseLeave': [{ type: HostListener, args: ['mouseleave',] },],
-    };
     return BarComponent;
 }());
+export { BarComponent };
+BarComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-bar]',
+                template: "\n    <svg:defs *ngIf=\"hasGradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        [orientation]=\"orientation\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"bar\"\n      stroke=\"none\"\n      [class.active]=\"isActive\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"hasGradient ? gradientFill : fill\"\n      (click)=\"select.emit(data)\"\n    />\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+BarComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: LocationStrategy, },
+]; };
+BarComponent.propDecorators = {
+    'fill': [{ type: Input },],
+    'data': [{ type: Input },],
+    'width': [{ type: Input },],
+    'height': [{ type: Input },],
+    'x': [{ type: Input },],
+    'y': [{ type: Input },],
+    'orientation': [{ type: Input },],
+    'roundEdges': [{ type: Input },],
+    'gradient': [{ type: Input },],
+    'offset': [{ type: Input },],
+    'isActive': [{ type: Input },],
+    'stops': [{ type: Input },],
+    'select': [{ type: Output },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+    'onMouseEnter': [{ type: HostListener, args: ['mouseenter',] },],
+    'onMouseLeave': [{ type: HostListener, args: ['mouseleave',] },],
+};
 //# sourceMappingURL=bar.component.js.map

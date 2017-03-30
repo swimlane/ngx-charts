@@ -1,4 +1,4 @@
-import { OnChanges } from '@angular/core';
+import { OnChanges, SimpleChanges } from '@angular/core';
 export declare class GaugeAxisComponent implements OnChanges {
     bigSegments: any;
     smallSegments: any;
@@ -9,10 +9,10 @@ export declare class GaugeAxisComponent implements OnChanges {
     radius: any;
     valueScale: any;
     tickFormatting: any;
-    ticks: any[];
+    ticks: any;
     rotationAngle: number;
     rotate: string;
-    ngOnChanges(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getTicks(): any;
     getTextAnchor(angle: any): string;

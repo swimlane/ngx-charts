@@ -30,7 +30,7 @@ function horizontalPosition(elDimensions, popoverDimensions, alignment) {
  * @export
  * @class PositionHelper
  */
-export var PositionHelper = (function () {
+var PositionHelper = (function () {
     function PositionHelper() {
     }
     /**
@@ -268,4 +268,5 @@ export var PositionHelper = (function () {
     };
     return PositionHelper;
 }());
+export { PositionHelper };
 //# sourceMappingURL=position.js.map

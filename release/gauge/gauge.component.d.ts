@@ -17,6 +17,7 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     activeEntries: any[];
     axisTickFormatting: any;
     tooltipDisabled: boolean;
+    valueFormatting: any;
     margin: any[];
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;

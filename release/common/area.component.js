@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, } from '@angular/core';
 import { select } from 'd3-selection';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { id } from '../utils/id';
-export var AreaComponent = (function () {
+var AreaComponent = (function () {
     function AreaComponent(element, location) {
         this.location = location;
         this.opacity = 1;
@@ -61,33 +61,35 @@ export var AreaComponent = (function () {
                 offset: 100,
                 color: this.fill,
                 opacity: this.endOpacity
-            }];
-    };
-    AreaComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-area]',
-                    template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    AreaComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: LocationStrategy, },
-    ]; };
-    AreaComponent.propDecorators = {
-        'data': [{ type: Input },],
-        'path': [{ type: Input },],
-        'startingPath': [{ type: Input },],
-        'fill': [{ type: Input },],
-        'opacity': [{ type: Input },],
-        'startOpacity': [{ type: Input },],
-        'endOpacity': [{ type: Input },],
-        'activeLabel': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'stops': [{ type: Input },],
-        'select': [{ type: Output },],
+            }
+        ];
     };
     return AreaComponent;
 }());
+export { AreaComponent };
+AreaComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-area]',
+                template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        [color]=\"fill\"\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+AreaComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: LocationStrategy, },
+]; };
+AreaComponent.propDecorators = {
+    'data': [{ type: Input },],
+    'path': [{ type: Input },],
+    'startingPath': [{ type: Input },],
+    'fill': [{ type: Input },],
+    'opacity': [{ type: Input },],
+    'startOpacity': [{ type: Input },],
+    'endOpacity': [{ type: Input },],
+    'activeLabel': [{ type: Input },],
+    'gradient': [{ type: Input },],
+    'stops': [{ type: Input },],
+    'select': [{ type: Output },],
+};
 //# sourceMappingURL=area.component.js.map

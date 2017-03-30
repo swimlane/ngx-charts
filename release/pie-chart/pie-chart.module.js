@@ -8,34 +8,35 @@ import { PieGridComponent } from './pie-grid.component';
 import { PieGridSeriesComponent } from './pie-grid-series.component';
 import { PieSeriesComponent } from './pie-series.component';
 export { AdvancedPieChartComponent, PieLabelComponent, PieArcComponent, PieChartComponent, PieGridComponent, PieGridSeriesComponent, PieSeriesComponent };
-export var PieChartModule = (function () {
+var PieChartModule = (function () {
     function PieChartModule() {
     }
-    PieChartModule.decorators = [
-        { type: NgModule, args: [{
-                    imports: [ChartCommonModule],
-                    declarations: [
-                        AdvancedPieChartComponent,
-                        PieLabelComponent,
-                        PieArcComponent,
-                        PieChartComponent,
-                        PieGridComponent,
-                        PieGridSeriesComponent,
-                        PieSeriesComponent
-                    ],
-                    exports: [
-                        AdvancedPieChartComponent,
-                        PieLabelComponent,
-                        PieArcComponent,
-                        PieChartComponent,
-                        PieGridComponent,
-                        PieGridSeriesComponent,
-                        PieSeriesComponent
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    PieChartModule.ctorParameters = function () { return []; };
     return PieChartModule;
 }());
+export { PieChartModule };
+PieChartModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [ChartCommonModule],
+                declarations: [
+                    AdvancedPieChartComponent,
+                    PieLabelComponent,
+                    PieArcComponent,
+                    PieChartComponent,
+                    PieGridComponent,
+                    PieGridSeriesComponent,
+                    PieSeriesComponent
+                ],
+                exports: [
+                    AdvancedPieChartComponent,
+                    PieLabelComponent,
+                    PieArcComponent,
+                    PieChartComponent,
+                    PieGridComponent,
+                    PieGridSeriesComponent,
+                    PieSeriesComponent
+                ]
+            },] },
+];
+/** @nocollapse */
+PieChartModule.ctorParameters = function () { return []; };
 //# sourceMappingURL=pie-chart.module.js.map

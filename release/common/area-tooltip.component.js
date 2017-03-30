@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter, ViewChildren, Renderer, ChangeDetectionStrategy, trigger, style, transition, animate } from '@angular/core';
-export var AreaTooltip = (function () {
+import { Component, Input, Output, EventEmitter, ViewChildren, Renderer, ChangeDetectionStrategy, } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
+var AreaTooltip = (function () {
     function AreaTooltip(renderer) {
         this.renderer = renderer;
         this.anchorOpacity = new Array();
@@ -87,7 +88,7 @@ export var AreaTooltip = (function () {
     };
     AreaTooltip.prototype.getUniqueValues = function (array) {
         var results = [];
-        var _loop_1 = function(i) {
+        var _loop_1 = function (i) {
             var val = array[i];
             var exists = results.find(function (v) {
                 return v.toString() === val.toString();
@@ -147,45 +148,46 @@ export var AreaTooltip = (function () {
         }
         return result;
     };
-    AreaTooltip.decorators = [
-        { type: Component, args: [{
-                    selector: 'g[ngx-charts-area-tooltip]',
-                    template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:template>\n      <svg:rect\n        [@animationState]=\"anchorOpacity[i] !== 0 ? 'active' : 'inactive'\"\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"15\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        trigger('animationState', [
-                            transition('inactive => active', [
-                                style({
-                                    opacity: 0,
-                                }),
-                                animate(250, style({ opacity: 0.7 }))
-                            ]),
-                            transition('active => inactive', [
-                                style({
-                                    opacity: 0.7,
-                                }),
-                                animate(250, style({ opacity: 0 }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    AreaTooltip.ctorParameters = function () { return [
-        { type: Renderer, },
-    ]; };
-    AreaTooltip.propDecorators = {
-        'xSet': [{ type: Input },],
-        'xScale': [{ type: Input },],
-        'yScale': [{ type: Input },],
-        'results': [{ type: Input },],
-        'height': [{ type: Input },],
-        'colors': [{ type: Input },],
-        'showPercentage': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'hover': [{ type: Output },],
-        'tooltips': [{ type: ViewChildren, args: ['tooltips',] },],
-    };
     return AreaTooltip;
 }());
+export { AreaTooltip };
+AreaTooltip.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-area-tooltip]',
+                template: "\n    <svg:g\n      #tooltips\n      *ngFor=\"let tooltipArea of tooltipAreas; let i = index\">\n      <svg:rect\n        class=\"tooltip-area\"\n        [attr.x]=\"tooltipArea.x0\"\n        y=\"0\"\n        [attr.width]=\"tooltipArea.width\"\n        [attr.height]=\"height\"\n        style=\"opacity: 0; cursor: 'auto';\"\n        (mouseenter)=\"showTooltip(i)\"\n        (mouseleave)=\"hideTooltip(i)\"\n      />\n      <xhtml:ng-template #tooltipTemplate>\n        <xhtml:div class=\"area-tooltip-container\">\n          <xhtml:div\n            *ngFor=\"let tooltipItem of tooltipArea.values\"\n            class=\"tooltip-item\">\n            <span\n              class=\"tooltip-item-color\"\n              [style.background-color]=\"tooltipItem.color\">\n            </span>\n            {{getToolTipText(tooltipItem)}}\n          </xhtml:div>\n        </xhtml:div>\n      </xhtml:ng-template>\n      <svg:rect\n        [@animationState]=\"anchorOpacity[i] !== 0 ? 'active' : 'inactive'\"\n        class=\"tooltip-anchor\"\n        [attr.x]=\"tooltipArea.tooltipAnchor\"\n        y=\"0\"\n        [attr.width]=\"1\"\n        [attr.height]=\"height\"\n        [style.opacity]=\"anchorOpacity[i]\"\n        [style.pointer-events]=\"'none'\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'right'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipSpacing]=\"15\"\n        [tooltipTemplate]=\"tooltipTemplate\"\n      />\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                animations: [
+                    trigger('animationState', [
+                        transition('inactive => active', [
+                            style({
+                                opacity: 0,
+                            }),
+                            animate(250, style({ opacity: 0.7 }))
+                        ]),
+                        transition('active => inactive', [
+                            style({
+                                opacity: 0.7,
+                            }),
+                            animate(250, style({ opacity: 0 }))
+                        ])
+                    ])
+                ]
+            },] },
+];
+/** @nocollapse */
+AreaTooltip.ctorParameters = function () { return [
+    { type: Renderer, },
+]; };
+AreaTooltip.propDecorators = {
+    'xSet': [{ type: Input },],
+    'xScale': [{ type: Input },],
+    'yScale': [{ type: Input },],
+    'results': [{ type: Input },],
+    'height': [{ type: Input },],
+    'colors': [{ type: Input },],
+    'showPercentage': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'hover': [{ type: Output },],
+    'tooltips': [{ type: ViewChildren, args: ['tooltips',] },],
+};
 //# sourceMappingURL=area-tooltip.component.js.map
