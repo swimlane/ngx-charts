@@ -4,8 +4,6 @@ import {
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
 
-import '../../../config/testing-utils';
-
 import { ChartCommonModule } from '../chart-common.module';
 import { ColorHelper } from '../color.helper';
 
@@ -60,9 +58,8 @@ describe('<ngx-charts-legend>', () => {
       expect(labelsElement).toBeDefined();
       expect(labelsElement.childElementCount).toEqual(2); // 2 legend labels
 
-      expect(labelsElement.children[0]).toContainText('complete');
-      expect(labelsElement.children[1]).toContainText('not complete');
-
+      expect(labelsElement.children[0].textContent).toContain('complete');
+      expect(labelsElement.children[1].textContent).toContain('not complete');
     });
   }));
 });
