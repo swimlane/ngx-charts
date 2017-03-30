@@ -8,6 +8,8 @@ import { enableProdMode } from '@angular/core';
 import '@angular/platform-browser-dynamic';
 import '@angular/common';
 
+let _decorateModuleRef = function identity<T>(value: T): T { return value; };
+
 if(IS_PRODUCTION) {
   enableProdMode();
   _decorateModuleRef = (modRef: any) => {
