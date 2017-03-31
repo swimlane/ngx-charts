@@ -1,7 +1,7 @@
 import { range } from 'd3-array';
 import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
 import { colorSets } from '../utils/color-sets';
-export var ColorHelper = (function () {
+var ColorHelper = (function () {
     function ColorHelper(scheme, type, domain, customColors) {
         if (typeof (scheme) === 'string') {
             scheme = colorSets.find(function (cs) {
@@ -116,4 +116,5 @@ export var ColorHelper = (function () {
     };
     return ColorHelper;
 }());
+export { ColorHelper };
 //# sourceMappingURL=color.helper.js.map

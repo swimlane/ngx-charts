@@ -46,5 +46,5 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent {
     };
     onDragStart(node: any, $event: MouseEvent): void;
     onDrag($event: MouseEvent): void;
-    onDragEnd(node: any, $event: MouseEvent): void;
+    onDragEnd($event: MouseEvent): void;
 }

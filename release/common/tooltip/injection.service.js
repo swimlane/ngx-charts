@@ -7,7 +7,7 @@ import { ApplicationRef, ComponentFactoryResolver, Injectable, Injector } from '
  * @export
  * @class InjectionService
  */
-export var InjectionService = (function () {
+var InjectionService = (function () {
     function InjectionService(applicationRef, componentFactoryResolver, injector) {
         this.applicationRef = applicationRef;
         this.componentFactoryResolver = componentFactoryResolver;
@@ -120,15 +120,16 @@ export var InjectionService = (function () {
         renderer.projectNodes(location, [componentRootNode]);
         return componentRef;
     };
-    InjectionService.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    InjectionService.ctorParameters = function () { return [
-        { type: ApplicationRef, },
-        { type: ComponentFactoryResolver, },
-        { type: Injector, },
-    ]; };
     return InjectionService;
 }());
+export { InjectionService };
+InjectionService.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+InjectionService.ctorParameters = function () { return [
+    { type: ApplicationRef, },
+    { type: ComponentFactoryResolver, },
+    { type: Injector, },
+]; };
 //# sourceMappingURL=injection.service.js.map

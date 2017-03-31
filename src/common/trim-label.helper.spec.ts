@@ -1,4 +1,3 @@
-import '../../config/testing-utils';
 import { trimLabel } from './trim-label.helper';
 
 describe('trimLabel', () => {

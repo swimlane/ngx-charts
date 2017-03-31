@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import '../../config/testing-utils';
 import { bubble } from '../../demo/data';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -20,11 +20,11 @@ class TestComponent {
   };
 }
 
-(TRAVIS ? xdescribe : describe)('<ngx-charts-bubble-chart>', () => {
+describe('<ngx-charts-bubble-chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [BubbleChartModule],
+      imports: [NoopAnimationsModule, BubbleChartModule],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'}
       ]
@@ -33,7 +33,7 @@ class TestComponent {
 
   describe('basic setup', () => {
 
-    beforeEach(() => {
+    beforeEach(async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -43,33 +43,27 @@ class TestComponent {
                 [results]="results">
               </ngx-charts-bubble-chart>`
         }
-      });
-    });
+      }).compileComponents();
+    }));
 
-    it('should set the svg width and height', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should set the svg width and height', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const svg = fixture.debugElement.nativeElement.querySelector('svg');
+      const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.getAttribute('width')).toBe('400');
-        expect(svg.getAttribute('height')).toBe('800');
-        done();
-      });
-    });
+      expect(svg.getAttribute('width')).toBe('400');
+      expect(svg.getAttribute('height')).toBe('800');
+    }));
 
-    it('should render 12 circle elements', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render 12 circle elements', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
+      const circleElements = fixture.debugElement.nativeElement.querySelectorAll('g.circle');
 
-        expect(compiled.querySelectorAll('g.circle').length).toEqual(12);
-        done();
-      });
-    });
+      expect(circleElements.length).toEqual(12);
+    }));
     
   });
 });

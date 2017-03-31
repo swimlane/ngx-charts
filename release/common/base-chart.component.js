@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
 import { VisibilityObserver } from '../utils';
-export var BaseChartComponent = (function () {
+var BaseChartComponent = (function () {
     function BaseChartComponent(chartElement, zone, cd, location) {
         this.chartElement = chartElement;
         this.zone = zone;
@@ -93,16 +93,14 @@ export var BaseChartComponent = (function () {
     };
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
-        this.zone.run(function () {
-            var source = Observable.fromEvent(window, 'resize', null, null);
-            var subscription = source.debounceTime(200).subscribe(function (e) {
-                _this.update();
-                if (_this.cd) {
-                    _this.cd.markForCheck();
-                }
-            });
-            _this.resizeSubscription = subscription;
+        var source = Observable.fromEvent(window, 'resize', null, null);
+        var subscription = source.debounceTime(200).subscribe(function (e) {
+            _this.update();
+            if (_this.cd) {
+                _this.cd.markForCheck();
+            }
         });
+        this.resizeSubscription = subscription;
     };
     /**
      * Clones the data into a new object
@@ -131,31 +129,35 @@ export var BaseChartComponent = (function () {
                     copy['series'].push(seriesItemCopy);
                 }
             }
+            if (item['extra'] !== undefined) {
+                copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
+            }
             results.push(copy);
         }
         return results;
     };
-    BaseChartComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'base-chart',
-                    template: "<div></div>"
-                },] },
-    ];
-    /** @nocollapse */
-    BaseChartComponent.ctorParameters = function () { return [
-        { type: ElementRef, },
-        { type: NgZone, },
-        { type: ChangeDetectorRef, },
-        { type: LocationStrategy, },
-    ]; };
-    BaseChartComponent.propDecorators = {
-        'results': [{ type: Input },],
-        'view': [{ type: Input },],
-        'scheme': [{ type: Input },],
-        'schemeType': [{ type: Input },],
-        'customColors': [{ type: Input },],
-        'select': [{ type: Output },],
-    };
     return BaseChartComponent;
 }());
+export { BaseChartComponent };
+BaseChartComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'base-chart',
+                template: "<div></div>"
+            },] },
+];
+/** @nocollapse */
+BaseChartComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: NgZone, },
+    { type: ChangeDetectorRef, },
+    { type: LocationStrategy, },
+]; };
+BaseChartComponent.propDecorators = {
+    'results': [{ type: Input },],
+    'view': [{ type: Input },],
+    'scheme': [{ type: Input },],
+    'schemeType': [{ type: Input },],
+    'customColors': [{ type: Input },],
+    'select': [{ type: Output },],
+};
 //# sourceMappingURL=base-chart.component.js.map

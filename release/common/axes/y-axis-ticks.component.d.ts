@@ -35,7 +35,7 @@ export declare class YAxisTicksComponent implements OnChanges, AfterViewInit {
     updateDims(): void;
     update(): void;
     getTicks(): any;
-    getMaxTicks(): number;
+    getMaxTicks(tickHeight: number): number;
     tickTransform(tick: any): string;
     gridLineTransform(): string;
 }

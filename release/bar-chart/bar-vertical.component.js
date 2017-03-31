@@ -8,45 +8,43 @@ import { scaleBand, scaleLinear } from 'd3-scale';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-export var BarVerticalComponent = (function (_super) {
+var BarVerticalComponent = (function (_super) {
     __extends(BarVerticalComponent, _super);
     function BarVerticalComponent() {
-        _super.apply(this, arguments);
-        this.legend = false;
-        this.tooltipDisabled = false;
-        this.showGridLines = true;
-        this.activeEntries = [];
-        this.barPadding = 8;
-        this.roundDomains = false;
-        this.activate = new EventEmitter();
-        this.deactivate = new EventEmitter();
-        this.margin = [10, 20, 10, 20];
-        this.xAxisHeight = 0;
-        this.yAxisWidth = 0;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.legend = false;
+        _this.tooltipDisabled = false;
+        _this.showGridLines = true;
+        _this.activeEntries = [];
+        _this.barPadding = 8;
+        _this.roundDomains = false;
+        _this.activate = new EventEmitter();
+        _this.deactivate = new EventEmitter();
+        _this.margin = [10, 20, 10, 20];
+        _this.xAxisHeight = 0;
+        _this.yAxisWidth = 0;
+        return _this;
     }
     BarVerticalComponent.prototype.update = function () {
-        var _this = this;
         _super.prototype.update.call(this);
-        this.zone.run(function () {
-            _this.dims = calculateViewDimensions({
-                width: _this.width,
-                height: _this.height,
-                margins: _this.margin,
-                showXAxis: _this.xAxis,
-                showYAxis: _this.yAxis,
-                xAxisHeight: _this.xAxisHeight,
-                yAxisWidth: _this.yAxisWidth,
-                showXLabel: _this.showXAxisLabel,
-                showYLabel: _this.showYAxisLabel,
-                showLegend: _this.legend,
-                legendType: _this.schemeType
-            });
-            _this.xScale = _this.getXScale();
-            _this.yScale = _this.getYScale();
-            _this.setColors();
-            _this.legendOptions = _this.getLegendOptions();
-            _this.transform = "translate(" + _this.dims.xOffset + " , " + _this.margin[0] + ")";
+        this.dims = calculateViewDimensions({
+            width: this.width,
+            height: this.height,
+            margins: this.margin,
+            showXAxis: this.xAxis,
+            showYAxis: this.yAxis,
+            xAxisHeight: this.xAxisHeight,
+            yAxisWidth: this.yAxisWidth,
+            showXLabel: this.showXAxisLabel,
+            showYLabel: this.showYAxisLabel,
+            showLegend: this.legend,
+            legendType: this.schemeType
         });
+        this.xScale = this.getXScale();
+        this.yScale = this.getYScale();
+        this.setColors();
+        this.legendOptions = this.getLegendOptions();
+        this.transform = "translate(" + this.dims.xOffset + " , " + this.margin[0] + ")";
     };
     BarVerticalComponent.prototype.getXScale = function () {
         this.xDomain = this.getXDomain();
@@ -129,37 +127,38 @@ export var BarVerticalComponent = (function (_super) {
         this.activeEntries = this.activeEntries.slice();
         this.deactivate.emit({ value: item, entries: this.activeEntries });
     };
-    BarVerticalComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ngx-charts-bar-vertical',
-                    template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [activeEntries]=\"activeEntries\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styleUrls: ['../common/base-chart.component.css'],
-                    encapsulation: ViewEncapsulation.None
-                },] },
-    ];
-    /** @nocollapse */
-    BarVerticalComponent.ctorParameters = function () { return []; };
-    BarVerticalComponent.propDecorators = {
-        'legend': [{ type: Input },],
-        'xAxis': [{ type: Input },],
-        'yAxis': [{ type: Input },],
-        'showXAxisLabel': [{ type: Input },],
-        'showYAxisLabel': [{ type: Input },],
-        'xAxisLabel': [{ type: Input },],
-        'yAxisLabel': [{ type: Input },],
-        'tooltipDisabled': [{ type: Input },],
-        'gradient': [{ type: Input },],
-        'showGridLines': [{ type: Input },],
-        'activeEntries': [{ type: Input },],
-        'schemeType': [{ type: Input },],
-        'xAxisTickFormatting': [{ type: Input },],
-        'yAxisTickFormatting': [{ type: Input },],
-        'barPadding': [{ type: Input },],
-        'roundDomains': [{ type: Input },],
-        'activate': [{ type: Output },],
-        'deactivate': [{ type: Output },],
-    };
     return BarVerticalComponent;
 }(BaseChartComponent));
+export { BarVerticalComponent };
+BarVerticalComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ngx-charts-bar-vertical',
+                template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"legend\"\n      [legendOptions]=\"legendOptions\"\n      [activeEntries]=\"activeEntries\"\n      (legendLabelClick)=\"onClick($event)\"\n      (legendLabelActivate)=\"onActivate($event)\"\n      (legendLabelDeactivate)=\"onDeactivate($event)\">\n      <svg:g [attr.transform]=\"transform\" class=\"bar-chart chart\">\n        <svg:g ngx-charts-x-axis\n          *ngIf=\"xAxis\"\n          [xScale]=\"xScale\"\n          [dims]=\"dims\"\n          [showLabel]=\"showXAxisLabel\"\n          [labelText]=\"xAxisLabel\"\n          [tickFormatting]=\"xAxisTickFormatting\"\n          (dimensionsChanged)=\"updateXAxisHeight($event)\">\n        </svg:g>\n        <svg:g ngx-charts-y-axis\n          *ngIf=\"yAxis\"\n          [yScale]=\"yScale\"\n          [dims]=\"dims\"\n          [showGridLines]=\"showGridLines\"\n          [showLabel]=\"showYAxisLabel\"\n          [labelText]=\"yAxisLabel\"\n          [tickFormatting]=\"yAxisTickFormatting\"\n          (dimensionsChanged)=\"updateYAxisWidth($event)\">\n        </svg:g>\n        <svg:g ngx-charts-series-vertical\n          [xScale]=\"xScale\"\n          [yScale]=\"yScale\"\n          [colors]=\"colors\"\n          [series]=\"results\"\n          [dims]=\"dims\"\n          [gradient]=\"gradient\"\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [activeEntries]=\"activeEntries\"\n          (activate)=\"onActivate($event)\"\n          (deactivate)=\"onDeactivate($event)\"\n          (select)=\"onClick($event)\">\n        </svg:g>\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styleUrls: ['../common/base-chart.component.css'],
+                encapsulation: ViewEncapsulation.None
+            },] },
+];
+/** @nocollapse */
+BarVerticalComponent.ctorParameters = function () { return []; };
+BarVerticalComponent.propDecorators = {
+    'legend': [{ type: Input },],
+    'xAxis': [{ type: Input },],
+    'yAxis': [{ type: Input },],
+    'showXAxisLabel': [{ type: Input },],
+    'showYAxisLabel': [{ type: Input },],
+    'xAxisLabel': [{ type: Input },],
+    'yAxisLabel': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'gradient': [{ type: Input },],
+    'showGridLines': [{ type: Input },],
+    'activeEntries': [{ type: Input },],
+    'schemeType': [{ type: Input },],
+    'xAxisTickFormatting': [{ type: Input },],
+    'yAxisTickFormatting': [{ type: Input },],
+    'barPadding': [{ type: Input },],
+    'roundDomains': [{ type: Input },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+};
 //# sourceMappingURL=bar-vertical.component.js.map

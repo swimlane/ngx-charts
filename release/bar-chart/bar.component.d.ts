@@ -35,7 +35,6 @@ export declare class BarComponent implements OnChanges {
     getPath(): any;
     getRadius(): number;
     getStartOpacity(): number;
-    roundedRect(x: any, y: any, w: any, h: any, r: any, tl: any, tr: any, bl: any, br: any): any;
     onMouseEnter(): void;
     onMouseLeave(): void;
 }

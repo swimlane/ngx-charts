@@ -7,20 +7,22 @@ import { Injectable } from '@angular/core';
 import { InjectionService } from './injection.service';
 import { InjectionRegistery } from './injection-registery.service';
 import { TooltipContentComponent } from './tooltip.component';
-export var TooltipService = (function (_super) {
+var TooltipService = (function (_super) {
     __extends(TooltipService, _super);
     function TooltipService(injectionService) {
-        _super.call(this, injectionService);
-        this.injectionService = injectionService;
-        this.type = TooltipContentComponent;
+        var _this = _super.call(this, injectionService) || this;
+        _this.injectionService = injectionService;
+        _this.type = TooltipContentComponent;
+        return _this;
     }
-    TooltipService.decorators = [
-        { type: Injectable },
-    ];
-    /** @nocollapse */
-    TooltipService.ctorParameters = function () { return [
-        { type: InjectionService, },
-    ]; };
     return TooltipService;
 }(InjectionRegistery));
+export { TooltipService };
+TooltipService.decorators = [
+    { type: Injectable },
+];
+/** @nocollapse */
+TooltipService.ctorParameters = function () { return [
+    { type: InjectionService, },
+]; };
 //# sourceMappingURL=tooltip.service.js.map
