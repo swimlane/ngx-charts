@@ -1,44 +1,16 @@
+// Editor support tsconfig
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
+    "experimentalDecorators": true,
     "lib": [
       "es2016",
       "dom"
     ],
+    "module": "es2015",
     "moduleResolution": "node",
-    "declaration": true,
-    "noEmitHelpers": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "pretty": true,
-    "allowUnreachableCode": true,
-    "allowUnusedLabels": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": false,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": false,
-    "allowSyntheticDefaultImports": true,
-    "suppressExcessPropertyErrors": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "outDir": "dist",
-    "declarationDir": "release"
-  },
-  "files": [
-    "src/declarations.d.ts",
-    "src/index.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": false
-  },
-  "angularCompilerOptions": {
-    "genDir": "release/",
-    "skipTemplateCodegen": true
+    "target": "es2015",
+    "types": [
+      "jasmine"
+    ]
   }
 }

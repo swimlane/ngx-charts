@@ -10,7 +10,7 @@
       "es2016",
       "dom"
     ],
-    "outDir": "dist/spec",
+    "outDir": "../dist/spec",
     "module": "commonjs",
     "target": "es5",
     "baseUrl": "",
@@ -21,9 +21,9 @@
     ]
   },
   "files": [
-    "src/declarations.d.ts"
+    "declarations.d.ts"
   ],
   "include": [
-    "src/**/*.spec.ts"
+    "**/*.spec.ts"
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    // "noEmitOnError": true,
+    // "noImplicitAny": true,
+    // "noUnusedLocals": true,
+    "outDir": "../release",
+    "pretty": true,
+    "sourceMap": true,
+    // "strictNullChecks": true,
+    "target": "es5"
+  },
+  "files": [
+    "declarations.d.ts",
+    "index.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "genDir": "../release",
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true
+  }
+}

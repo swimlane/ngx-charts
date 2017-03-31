@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CheckerPlugin, ForkCheckerPlugin } = require('awesome-typescript-loader');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 const commonConfig = require('./webpack.common');
 const { ENV, dir } = require('./helpers');
@@ -49,7 +49,12 @@ module.exports = function(options) {
         {
           test: /\.ts$/,
           loaders: [
-            'awesome-typescript-loader',
+            {
+              loader: 'awesome-typescript-loader',
+              options: {
+                configFileName: './demo/tsconfig-build.json'
+              }
+            },
             'angular2-template-loader'
           ],
           exclude: [/\.(spec|e2e|d)\.ts$/]
