@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { bubble } from '../../demo/data';
+import { bubble } from '../../demo-app/data';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { BubbleChartModule } from './bubble-chart.module';

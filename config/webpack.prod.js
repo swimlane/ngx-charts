@@ -10,8 +10,8 @@ module.exports = function(env) {
   return webpackMerge(commonConfig({ env: ENV }), {
     devtool: 'source-map',
     entry: {
-      'app': './demo/bootstrap.ts',
-      'libs': './demo/libs.ts'
+      'app': './src/demo-app/bootstrap.ts',
+      'libs': './src/demo-app/libs.ts'
     },
     module: {
       exprContextCritical: false,
@@ -39,7 +39,7 @@ module.exports = function(env) {
         minChunks: Infinity
       }),
       new HtmlWebpackPlugin({
-        template: 'demo/index.ejs',
+        template: './src/demo-app/index.ejs',
         chunksSortMode: 'dependency',
         title: 'ngx-charts',
         googleAnalytics: {

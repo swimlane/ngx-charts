@@ -27,7 +27,7 @@ module.exports = function(env) {
             {
               loader: 'awesome-typescript-loader',
               query: {
-                configFileName: 'tsconfig.spec.json',
+                configFileName: 'src/lib/tsconfig.spec.json',
                 sourceMap: false,
                 inlineSourceMap: true,
                 compilerOptions: {

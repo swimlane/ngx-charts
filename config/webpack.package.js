@@ -31,7 +31,7 @@ module.exports = function(env) {
       ]
     },
     entry: {
-      'index': './src/index.ts'
+      'index': './src/lib/index.ts'
     },
     output: {
       path: dir('release'),

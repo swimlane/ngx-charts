@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF, Location } from '@angular/common';
 import { AppComponent } from './app.component';
-import { NgxChartsModule } from '../src';
+import { NgxChartsModule } from '../lib';
 
 @NgModule({
   providers: [

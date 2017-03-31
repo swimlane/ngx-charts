@@ -10,8 +10,8 @@ module.exports = function(options = {}) {
       extensions: ['.ts', '.js', '.json', '.css', '.scss', '.html'],
       modules: [
         'node_modules',
-        dir('src'),
-        dir('demo')
+        dir('src/lib'),
+        dir('src/demo-app')
       ]
     },
     output: {
@@ -81,7 +81,7 @@ module.exports = function(options = {}) {
           tslint: {
             emitErrors: false,
             failOnHint: false,
-            resourcePath: 'src'
+            resourcePath: 'src/lib'
           },
           postcss: function() {
             return [ autoprefixer ];

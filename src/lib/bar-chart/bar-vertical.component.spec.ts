@@ -1,12 +1,15 @@
 import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { arc } from 'd3-shape';
 
-import { single } from '../../demo/data';
+import { single } from '../../demo-app/data';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { PieChartModule } from './pie-chart.module';
+import { BarChartModule } from './bar-chart.module';
+import { BarComponent } from './bar.component'; 
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
 @Component({
   selector: 'test-component',
@@ -19,12 +22,12 @@ class TestComponent {
   };
 }
 
-describe('<ngx-charts-pie>', () => {
+describe('<ngx-charts-bar-vertical>', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [NoopAnimationsModule, PieChartModule],
+      imports: [NoopAnimationsModule, BarChartModule],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'}
       ]
@@ -37,14 +40,13 @@ describe('<ngx-charts-pie>', () => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-            <ngx-charts-pie-chart
-                [results]="single"
+               <ngx-charts-bar-vertical
                 [view]="[400,800]"
                 [scheme]="colorScheme"
-                [doughnut]="false">
-            </ngx-charts-pie-chart>`
+                [results]="single">
+              </ngx-charts-bar-vertical>`
         }
-      }).compileComponents();
+      });
     }));
 
     it('should set the svg width and height', async(() => {
@@ -57,42 +59,37 @@ describe('<ngx-charts-pie>', () => {
       expect(svg.getAttribute('height')).toBe('800');
     }));
 
-    it('should render 6 arc elements', async(() => {
+    it('should render 12 cell elements', async(() => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
       const compiled = fixture.debugElement.nativeElement;
 
-      expect(compiled.querySelectorAll('path.arc').length).toEqual(6);
+      expect(compiled.querySelectorAll('path.bar').length).toEqual(6);
     }));
 
-    it('should render an arc', async(() => {
+    it('should render correct cell size', async(() => {
       const fixture = TestBed.createComponent(TestComponent);
       fixture.detectChanges();
 
-      const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
+      const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-      const testArc: any = arc()
-        .innerRadius(0)
-        .outerRadius(180)
-        .startAngle(0)
-        .endAngle(1.0996941056424656);
-
-      expect(arcElement.getAttribute('d')).toEqual(testArc());
+      expect(bar.componentInstance.width).toEqual(53); // ~(360 - 5 * barPadding) / 6 
     }));
   });
 
-  describe('doughnut', () => {
-    it('should render an arc, default width', async(() => {
+  describe('padding', () => {
+
+    it('should render correct cell size, with zero padding', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-            <ngx-charts-pie-chart
-                [results]="single"
+               <ngx-charts-bar-vertical
                 [view]="[400,800]"
                 [scheme]="colorScheme"
-                [doughnut]="true">
-            </ngx-charts-pie-chart>`
+                [results]="single"
+                [barPadding]="0">
+              </ngx-charts-bar-vertical>`
         }
       });
 
@@ -100,30 +97,22 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
-        const outerRadius = 180;
+        const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        const testArc: any = arc()
-          .innerRadius(outerRadius * 3 / 4) // default arc is 1/4 outerwidth
-          .outerRadius(outerRadius)
-          .startAngle(0)
-          .endAngle(1.0996941056424656);
-
-        expect(arcElement.getAttribute('d')).toEqual(testArc());
+        expect(bar.componentInstance.width).toEqual(60); // ~(360 - 5 * barPadding) / 6
       });
     }));
 
-    it('should render an arc, set width', async(() => {
+    it('should render correct cell size, with padding', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
-            <ngx-charts-pie-chart
-                [results]="single"
+               <ngx-charts-bar-vertical
                 [view]="[400,800]"
                 [scheme]="colorScheme"
-                [doughnut]="true"
-                [arcWidth]="0.1">
-            </ngx-charts-pie-chart>`
+                [results]="single"
+                [barPadding]="20">
+              </ngx-charts-bar-vertical>`
         }
       });
 
@@ -131,16 +120,9 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
-        const outerRadius = 180;
+        const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        const testArc: any = arc()
-          .innerRadius(outerRadius * 0.90) // default arc is 1/4 outerwidth
-          .outerRadius(outerRadius)
-          .startAngle(0)
-          .endAngle(1.0996941056424656);
-
-        expect(arcElement.getAttribute('d')).toEqual(testArc());
+        expect(bar.componentInstance.width).toEqual(43); // ~(360 - 5 * barPadding) / 6
       });
     }));
   });

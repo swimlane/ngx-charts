@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "lib": [ "es2015", "dom" ],
+    "module": "es2015",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "types": [
+      "jasmine"
+    ]
+  }
+}
