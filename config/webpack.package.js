@@ -40,6 +40,7 @@ module.exports = function(env) {
       umdNamedDefine: true
     },
     externals: {
+      '@angular/animations': '@angular/animations',
       '@angular/platform-browser-dynamic': '@angular/platform-browser-dynamic',
       '@angular/platform-browser': '@angular/platform-browser',
       '@angular/core': '@angular/core',
