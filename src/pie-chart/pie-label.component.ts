@@ -111,23 +111,6 @@ export class PieLabelComponent implements OnChanges {
     return d.startAngle + (d.endAngle - d.startAngle) / 2;
   }
 
-  loadAnimation(): void {
-    const label = select(this.element).select('.label');
-    const line = select(this.element).select('.line');
-
-    label
-      .attr('opacity', 0)
-      .transition().delay(750).duration(750)
-      .attr('opacity', 1);
-
-    line
-      .style('stroke-dashoffset', 2000)
-      .transition().delay(750).duration(750)
-      .style('stroke-dashoffset', '0')
-      .transition()
-      .style('stroke-dasharray', 'none');
-  }
-
   /**
    * Format pie label base on provided options
    * 

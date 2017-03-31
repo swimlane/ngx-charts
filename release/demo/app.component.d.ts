@@ -1,4 +1,6 @@
 import { OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { PieLabelOption } from '../src/common';
 export declare class AppComponent implements OnInit {
     version: string;
     theme: string;
@@ -51,6 +53,8 @@ export declare class AppComponent implements OnInit {
     explodeSlices: boolean;
     doughnut: boolean;
     arcWidth: number;
+    pieLabelOption: PieLabelOption;
+    pieLabelOption$: Observable<PieLabelOption>;
     autoScale: boolean;
     timeline: boolean;
     margin: boolean;
@@ -83,4 +87,5 @@ export declare class AppComponent implements OnInit {
     getCalendarData(): any[];
     calendarAxisTickFormatting(mondayString: string): string;
     calendarTooltipText(c: any): string;
+    pieLabelOptionChanged(): void;
 }

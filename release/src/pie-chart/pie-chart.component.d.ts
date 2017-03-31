@@ -1,6 +1,7 @@
 import { EventEmitter } from '@angular/core';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
+import { PieLabelOption } from '../common';
 export declare class PieChartComponent extends BaseChartComponent {
     labels: boolean;
     legend: boolean;
@@ -11,6 +12,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     activeEntries: any[];
     tooltipDisabled: boolean;
     labelFormatting: any;
+    pieLabelOption: PieLabelOption;
     select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
