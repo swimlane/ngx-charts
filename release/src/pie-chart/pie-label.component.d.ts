@@ -1,4 +1,5 @@
 import { OnChanges, SimpleChanges } from '@angular/core';
+import { PieLabelOption } from '../common';
 export declare class PieLabelComponent implements OnChanges {
     data: any;
     radius: any;
@@ -7,6 +8,7 @@ export declare class PieLabelComponent implements OnChanges {
     max: any;
     value: any;
     explodeSlices: any;
+    pieLabelOption: PieLabelOption;
     trimLabel: (label: string, max?: number) => string;
     line: string;
     private readonly isIE;
@@ -20,4 +22,13 @@ export declare class PieLabelComponent implements OnChanges {
     readonly textTransition: string;
     textAnchor(): any;
     midAngle(d: any): number;
+    /**
+     * Format pie label base on provided options
+     *
+     * @param {string} label
+     * @returns {string}
+     *
+     * @memberOf PieLabelComponent
+     */
+    formatPieLabel(label: string): string;
 }
