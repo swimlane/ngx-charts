@@ -23,6 +23,7 @@
 | pieLabelOption | [PieLabelOption](#pie-label-option)|        | optional input for fine control on pie label processing 
                                              |
 
+
 ## PieLabelOption <a id="pie-label-option"></a>
 Property              | Type          | Default Value | Description
 :-------------------- | :------------ | :------------ | :--------------------------------------------------------------------------------------------------------------
