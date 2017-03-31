@@ -1,4 +1,5 @@
 import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
+import { PieLabelOption } from '../common';
 export declare class PieSeriesComponent implements OnChanges {
     colors: any;
     series: any;
@@ -11,6 +12,7 @@ export declare class PieSeriesComponent implements OnChanges {
     activeEntries: any[];
     tooltipDisabled: boolean;
     labelFormatting: any;
+    pieLabelOption: PieLabelOption;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
