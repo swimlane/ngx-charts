@@ -23,6 +23,7 @@ import { ColorHelper } from '../common/color.helper';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [legendTitle]="legendTitle"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
@@ -75,6 +76,7 @@ import { ColorHelper } from '../common/color.helper';
 export class GaugeComponent extends BaseChartComponent implements AfterViewInit {
 
   @Input() legend = false;
+  @Input() legendTitle: string = 'Legend';
   @Input() min: number = 0;
   @Input() max: number = 100;
   @Input() textValue: string;
@@ -288,7 +290,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     return {
       scaleType: 'ordinal',
       colors: this.colors,
-      domain: this.domain
+      domain: this.domain,
+      title: this.legendTitle
     };
   }
 
