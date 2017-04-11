@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as shape from 'd3-shape';
 
-import { colorSets } from '../src/utils/color-sets';
+import { colorSets } from '../lib/utils/color-sets';
 import { single, multi, countries, bubble, generateData, generateGraph } from './data';
 import chartGroups from './chartTypes';
 

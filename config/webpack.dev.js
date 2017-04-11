@@ -28,8 +28,8 @@ module.exports = function(options) {
       }
     },
     entry: {
-      'app': './demo/bootstrap.ts',
-      'libs': './demo/libs.ts'
+      'app': './src/demo-app/bootstrap.ts',
+      'libs': './src/demo-app/libs.ts'
     },
     module: {
       exprContextCritical: false,
@@ -65,7 +65,7 @@ module.exports = function(options) {
         minChunks: Infinity
       }),
       new HtmlWebpackPlugin({
-        template: 'demo/index.ejs',
+        template: './src/demo-app/index.ejs',
         chunksSortMode: 'dependency',
         title: 'ngx-charts'
       }),
