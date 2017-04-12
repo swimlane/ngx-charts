@@ -189,15 +189,6 @@ const chartGroups = [
         ]
       },
       {
-        name: 'Heat Map - Calendar',
-        selector: 'calendar',
-        inputFormat: 'calendarData',
-        options: [
-          'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
-          'innerPadding', 'tooltipDisabled'
-        ]
-      },
-      {
         name: 'Tree Map',
         selector: 'tree-map',
         inputFormat: 'singleSeries',
@@ -223,6 +214,20 @@ const chartGroups = [
         selector: 'linear-gauge',
         inputFormat: 'single',
         options: ['colorScheme', 'value', 'previousValue', 'min', 'max', 'units']
+      }
+    ]
+  },
+  {
+    name: 'Demos',
+    charts: [
+      {
+        name: 'Heat Map - Calendar',
+        selector: 'calendar',
+        inputFormat: 'calendarData',
+        options: [
+          'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
+          'innerPadding', 'tooltipDisabled'
+        ]
       }
     ]
   }

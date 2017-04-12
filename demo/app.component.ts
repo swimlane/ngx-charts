@@ -389,7 +389,7 @@ export class AppComponent implements OnInit {
       }
 
       calendarData.push({
-        name: `Week of ${monday.toLocaleDateString()}`,
+        name: monday.toString(),
         series
       });
     }
@@ -398,7 +398,7 @@ export class AppComponent implements OnInit {
   }
 
   calendarAxisTickFormatting(mondayString: string) {
-    const monday = new Date(mondayString.replace('Week of ', ''));
+    const monday = new Date(mondayString);
     const month = monday.getMonth();
     const day = monday.getDate();
     const year = monday.getFullYear();
