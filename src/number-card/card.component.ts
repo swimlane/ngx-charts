@@ -84,13 +84,8 @@ export class CardComponent implements OnChanges, OnDestroy {
   cardWidth: number;
   cardHeight: number;
   textWidth: number;
-  resizeScale: number = 1;
-  textFontSize: number = 35;
+  textFontSize: number = 12;
   textTransform: string = '';
-  originalWidth: number;
-  originalHeight: number;
-  originalWidthRatio: number;
-  originalHeightRatio: number;
   initialized: boolean = false;
   animationReq: any;
 
@@ -171,27 +166,13 @@ export class CardComponent implements OnChanges, OnDestroy {
       return;
     }
 
-    this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
-
-    const availableWidth = this.cardWidth - this.textPadding[1] - this.textPadding[3];
+    const textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
+    const availableWidth = this.cardWidth - 2 * textPadding;
     const availableHeight = this.cardHeight / 3;
 
-    if (!this.originalWidthRatio) {
-      this.originalWidthRatio = availableWidth / width;
-      this.originalWidth = availableWidth;
-    }
+    const resizeScale = Math.min(availableWidth / width, availableHeight / height);
 
-    if (!this.originalHeightRatio) {
-      this.originalHeightRatio = availableHeight / height;
-      this.originalHeight = availableHeight;
-    }
-
-    const newWidthRatio = (availableWidth / this.originalWidth) * this.originalWidthRatio;
-    const newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
-
-    this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
-
-    this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+    this.textFontSize = Math.round(this.textFontSize * resizeScale);
     this.labelFontSize = Math.min(this.textFontSize, 12);
 
     const textHeight = this.textFontSize + 2 * this.labelFontSize;
