@@ -145,6 +145,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() showSeriesOnHover: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -438,8 +439,7 @@ export class LineChartComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = this.showSeriesOnHover ? [ item, ...this.activeEntries ] : this.activeEntries;
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
