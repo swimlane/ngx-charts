@@ -138,7 +138,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
     const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
 
     return scaleBand()
-      .rangeRound([this.dims.height, 0])
+      .rangeRound([0, this.dims.height])
       .paddingInner(spacing)
       .domain(this.yDomain);
   }
