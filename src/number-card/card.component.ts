@@ -72,6 +72,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   @Input() label;
   @Input() data;
   @Input() medianSize: number;
+  @Input() valueFormatting: any;
 
   @Output() select = new EventEmitter();
 
@@ -84,7 +85,6 @@ export class CardComponent implements OnChanges, OnDestroy {
   cardWidth: number;
   cardHeight: number;
   textWidth: number;
-  resizeScale: number = 1;
   textFontSize: number = 35;
   textTransform: string = '';
   originalWidth: number;
@@ -104,7 +104,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
   }
-
+  
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -115,6 +115,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
   update(): void {
     const hasValue = this.data && typeof this.data.value !== 'undefined';
+    this.valueFormatting = this.valueFormatting || (card => card.data.value.toLocaleString());
 
     this.transform = `translate(${this.x} , ${this.y})`;
 
@@ -126,11 +127,15 @@ export class CardComponent implements OnChanges, OnDestroy {
     this.trimmedLabel = trimLabel(this.label, 55);
     this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
 
-    const value = this.value = hasValue ? this.data.value.toLocaleString() : '';
+    const value = hasValue ?
+      this.valueFormatting({
+        label: this.label,
+        data: this.data,
+        value: this.data.value
+      }) :
+      '';
 
-    if (this.medianSize && this.medianSize > value.length) {
-      this.value = this.value + '\u2007'.repeat(this.medianSize - value.length);
-    }
+    this.value = this.paddedValue(value);
 
     const textHeight = this.textFontSize + 2 * this.labelFontSize;
     this.textPadding[0] = this.textPadding[2] = (this.cardHeight - textHeight - this.bandHeight) / 2 ;
@@ -140,9 +145,18 @@ export class CardComponent implements OnChanges, OnDestroy {
     setTimeout(() => {
       this.scaleText();
       this.value = value;
-
-      setTimeout(() => this.startCount(), 20);
+      
+      if (hasValue) {
+        setTimeout(() => this.startCount(), 20);
+      }
     }, 0);
+  }
+
+  paddedValue(value: string) {
+    if (this.medianSize && this.medianSize > value.length) {
+      value += '\u2007'.repeat(this.medianSize - value.length);
+    }
+    return value;
   }
 
   startCount(): void {
@@ -152,11 +166,9 @@ export class CardComponent implements OnChanges, OnDestroy {
       const val = this.data.value;
       const decs = decimalChecker(val);
 
-      const callback = ({ value }) => {
-        this.value = value.toLocaleString();
-        if (this.medianSize && this.medianSize > value.length) {
-          this.value = this.value + '\u2007'.repeat(this.medianSize - value.length);
-        }
+      const callback = ({value}) => {
+        const v = this.valueFormatting({label: this.label, data: this.data, value});
+        this.value = this.paddedValue(v);
         this.cd.markForCheck();
       };
 
@@ -189,9 +201,9 @@ export class CardComponent implements OnChanges, OnDestroy {
     const newWidthRatio = (availableWidth / this.originalWidth) * this.originalWidthRatio;
     const newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
 
-    this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
+    const resizeScale = Math.min(newWidthRatio, newHeightRatio);
 
-    this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+    this.textFontSize = Number.parseInt((35 * resizeScale).toString());
     this.labelFontSize = Math.min(this.textFontSize, 12);
 
     const textHeight = this.textFontSize + 2 * this.labelFontSize;

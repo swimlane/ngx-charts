@@ -46,6 +46,7 @@ export interface CardModel {
       [textColor]="c.textColor"
       [data]="c.data"
       [medianSize]="medianSize"
+      [valueFormatting]="valueFormatting"
       (select)="onClick($event)"
     />
   `,
@@ -63,6 +64,7 @@ export class CardSeriesComponent implements OnChanges {
   @Input() bandColor;
   @Input() emptyColor = 'rgba(0, 0, 0, 0)';
   @Input() textColor;
+  @Input() valueFormatting: any;
 
   @Output() select = new EventEmitter();
 
@@ -78,7 +80,16 @@ export class CardSeriesComponent implements OnChanges {
 
   update(): void {
     if (this.data.length > 2) {
-      const sortedLengths = this.data.map(d => ('' + d.data.value).length).sort((a, b) => b - a);
+      const sortedLengths = this.data
+        .map(d => {
+          const hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;
+          return hasValue ? this.valueFormatting({
+            data: d.data,
+            label: d ? d.data.name : '',
+            value: (d && d.data) ? d.data.value : ''
+          }).length : 0;
+        })
+        .sort((a, b) => b - a);
       const idx = Math.ceil(this.data.length / 2);
       this.medianSize = sortedLengths[idx];
     }

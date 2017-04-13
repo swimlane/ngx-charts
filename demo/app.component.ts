@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as shape from 'd3-shape';
+import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
 import { single, multi, countries, bubble, generateData, generateGraph } from './data';
@@ -7,6 +8,22 @@ import chartGroups from './chartTypes';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
+
+function twoDigits(value) {
+  return Math.round(value * 10) / 10;
+}
+
+function multiFormat(value) {
+  if (value < 1000) return `${twoDigits(value)}ms`;
+  value /= 1000;
+  if (value < 60) return `${twoDigits(value)}s`;
+  value /= 60;
+  if (value < 60) return `${twoDigits(value)}mins`;
+  value /= 60;
+  if (value < 24) return `${twoDigits(value)}hrs`;
+  value /= 24;
+  return `${twoDigits(value)}days`;
+}
 
 @Component({
   selector: 'app',
@@ -29,6 +46,7 @@ export class AppComponent implements OnInit {
   dateData: any[];
   dateDataWithRange: any[];
   calendarData: any[];
+  statusData: any[];
   graph: { links: any[], nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -124,6 +142,7 @@ export class AppComponent implements OnInit {
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
     this.calendarData = this.getCalendarData();
+    this.statusData = this.getStatusData();
   }
 
   get dateDataWithOrWithoutRange() {
@@ -132,7 +151,6 @@ export class AppComponent implements OnInit {
     } else {
       return this.dateData;
     }
-
   }
 
   ngOnInit() {
@@ -238,6 +256,8 @@ export class AppComponent implements OnInit {
       };
 
       this.bubble = [...this.bubble, bubbleEntry];
+
+      this.statusData = this.getStatusData();
     }
 
     this.dateData = generateData(5, false);
@@ -248,6 +268,27 @@ export class AppComponent implements OnInit {
 
   applyDimensions() {
     this.view = [this.width, this.height];
+  }
+
+  getStatusData() {
+    return [
+      {
+        name: 'Count',
+        value: Math.round(10000 * Math.random())
+      },
+      {
+        name: 'Time',
+        value: 10 * 60 * 60 * 1000 * Math.random()
+      },
+      {
+        name: 'Cost',
+        value: Math.round(4000000 * Math.random()) / 100
+      },
+      {
+        name: 'Percent',
+        value: Math.random()
+      }
+    ];
   }
 
   toggleFitContainer(event) {
@@ -412,6 +453,23 @@ export class AppComponent implements OnInit {
       <span class="tooltip-label">${c.label} • ${c.cell.date.toLocaleDateString()}</span>
       <span class="tooltip-val">${c.data.toLocaleString()}</span>
     `;
+  }
+
+  dollarValueFormat(c): string {
+    return `\$${c.value.toLocaleString()}`;
+  }
+
+  statusValueFormat(c): string {
+    switch(c.label) {
+      case 'Cost':
+        return `\$${c.value.toLocaleString()}`;
+      case 'Time':
+        return multiFormat(c.value);
+      case 'Percent':
+        return `${Math.floor(c.value * 100)}%`;
+      default:
+        return c.value.toLocaleString();
+    }
   }
 
 }
