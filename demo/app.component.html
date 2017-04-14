@@ -402,6 +402,19 @@
         cardColor="#232837"
         emptyColor="#1e222e"
         [results]="single"
+        [valueFormatting]="dollarValueFormat"
+        (select)="select($event)">
+      </ngx-charts-number-card>
+      <ngx-charts-number-card
+        *ngIf="chartType === 'status-demo'"
+        class="chart-container"
+        [view]="view"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [scheme]="colorScheme"
+        cardColor="#232837"
+        emptyColor="#1e222e"
+        [results]="statusData"
+        [valueFormatting]="statusValueFormat"
         (select)="select($event)">
       </ngx-charts-number-card>
       <ngx-charts-gauge
