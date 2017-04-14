@@ -6,10 +6,11 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { scaleBand, scaleLinear } from 'd3-scale';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal',
@@ -49,6 +50,7 @@ import d3 from '../d3';
           [series]="results"
           [dims]="dims"
           [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
           [activeEntries]="activeEntries"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
@@ -70,6 +72,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
@@ -97,46 +100,44 @@ export class BarHorizontalComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      this.xScale = this.getXScale();
-      this.yScale = this.getYScale();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
-  getXScale() {
+  getXScale(): any {
     this.xDomain = this.getXDomain();
 
-    const scale = d3.scaleLinear()
+    const scale = scaleLinear()
       .range([0, this.dims.width])
       .domain(this.xDomain);
-    
+
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale() {
+  getYScale(): any {
     this.yDomain = this.getYDomain();
     const spacing = this.yDomain.length / (this.dims.height / this.barPadding + 1);
-    
-    return d3.scaleBand()
+
+    return scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
       .domain(this.yDomain);

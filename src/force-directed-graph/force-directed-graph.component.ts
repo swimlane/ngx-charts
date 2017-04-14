@@ -11,11 +11,18 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {
+  forceCollide,
+  forceLink,
+  forceManyBody,
+  forceSimulation,
+  forceX,
+  forceY
+} from 'd3-force';
 
 import { ChartComponent } from '../common/charts/chart.component';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import d3 from '../d3';
 import { ColorHelper } from '../common/color.helper';
 
 @Component({
@@ -31,10 +38,10 @@ import { ColorHelper } from '../common/color.helper';
       <svg:g [attr.transform]="transform" class="force-directed-graph chart">
         <svg:g class="links">
           <svg:g *ngFor="let link of links; trackBy:trackLinkBy">
-            <template *ngIf="linkTemplate"
+            <ng-template *ngIf="linkTemplate"
               [ngTemplateOutlet]="linkTemplate"
               [ngOutletContext]="{ $implicit: link }">
-            </template>
+            </ng-template>
             <svg:line *ngIf="!linkTemplate"
               strokeWidth="1" class="edge"
               [attr.x1]="link.source.x"
@@ -52,13 +59,14 @@ import { ColorHelper } from '../common/color.helper';
             (mousedown)="onDragStart(node, $event)"
             (click)="onClick({name: node.value})"
             ngx-tooltip
+            [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="node.value">
-            <template *ngIf="nodeTemplate"
+            <ng-template *ngIf="nodeTemplate"
               [ngTemplateOutlet]="nodeTemplate"
               [ngOutletContext]="{ $implicit: node }">
-            </template>
+            </ng-template>
             <svg:circle *ngIf="!nodeTemplate" r="5" />
           </svg:g>
         </svg:g>
@@ -74,17 +82,18 @@ import { ColorHelper } from '../common/color.helper';
 })
 export class ForceDirectedGraphComponent extends BaseChartComponent {
 
-  @Input() force = d3.forceSimulation()
-    .force('charge', d3.forceManyBody())
-    .force('collide', d3.forceCollide(5))
-    .force('x', d3.forceX())
-    .force('y', d3.forceY());
+  @Input() force: any = forceSimulation<any>()
+    .force('charge', forceManyBody())
+    .force('collide', forceCollide(5))
+    .force('x', forceX())
+    .force('y', forceY());
 
-  @Input() forceLink = d3.forceLink().id(node => node.value);
+  @Input() forceLink: any = forceLink<any, any>().id(node => node.value);
   @Input() legend: boolean;
   @Input() nodes: any[] = [];
   @Input() links: Array<{ source: any, target: any }> = [];
   @Input() activeEntries: any[] = [];
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -108,31 +117,29 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      // center graph
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showLegend: this.legend,
-      });
-
-      this.seriesDomain = this.getSeriesDomain();
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `
-        translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })
-      `;
-      if(this.force) {
-        this.force.nodes(this.nodes)
-          .force('link', this.forceLink.links(this.links))
-          .alpha(0.5).restart();
-      }
+    // center graph
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showLegend: this.legend,
     });
+
+    this.seriesDomain = this.getSeriesDomain();
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `
+      translate(${ this.dims.xOffset + this.dims.width / 2 }, ${ this.margin[0] + this.dims.height / 2 })
+    `;
+    if(this.force) {
+      this.force.nodes(this.nodes)
+        .force('link', this.forceLink.links(this.links))
+        .alpha(0.5).restart();
+    }
   }
 
-  onClick(data, node): void {
+  onClick(data): void {
     this.select.emit(data);
   }
 
@@ -194,8 +201,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
     this.draggingNode.fy = $event.y - this.draggingStart.y;
   }
 
-  @HostListener('document:mouseup')
-  onDragEnd(node, $event: MouseEvent): void {
+  @HostListener('document:mouseup', ['$event'])
+  onDragEnd($event: MouseEvent): void {
     if (!this.draggingNode) return;
 
     this.force.alphaTarget(0);

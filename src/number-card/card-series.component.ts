@@ -8,6 +8,8 @@ import {
   ChangeDetectionStrategy,
   NgZone
 } from '@angular/core';
+import { gridSize, gridLayout } from '../common/grid-layout.helper';
+import { invertColor } from '../utils/color-utils';
 
 export interface CardModel {
   x;
@@ -23,13 +25,27 @@ export interface CardModel {
 @Component({
   selector: 'g[ngx-charts-card-series]',
   template: `
+    <svg:rect
+      *ngFor="let c of emptySlots; trackBy:trackBy"
+      class="card-empty"
+      [attr.x]="c.x"
+      [attr.y]="c.y"
+      [style.fill]="emptyColor"
+      [attr.width]="c.width"
+      [attr.height]="c.height"
+      rx="3"
+      ry="3"
+    />
     <svg:g ngx-charts-card *ngFor="let c of cards; trackBy:trackBy"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
       [height]="c.height"
       [color]="c.color"
+      [bandColor]="c.bandColor"
+      [textColor]="c.textColor"
       [data]="c.data"
+      [medianSize]="medianSize"
       (select)="onClick($event)"
     />
   `,
@@ -37,13 +53,22 @@ export interface CardModel {
 })
 export class CardSeriesComponent implements OnChanges {
 
-  @Input() data;
+  @Input() data: any[];
+  @Input() slots: any[];
   @Input() dims;
   @Input() colors;
+  @Input() innerPadding = 15;
+
+  @Input() cardColor;
+  @Input() bandColor;
+  @Input() emptyColor = 'rgba(0, 0, 0, 0)';
+  @Input() textColor;
 
   @Output() select = new EventEmitter();
 
   cards: CardModel[];
+  emptySlots: any[];
+  medianSize: number;
 
   constructor(private zone: NgZone) { }
 
@@ -52,29 +77,46 @@ export class CardSeriesComponent implements OnChanges {
   }
 
   update(): void {
-    this.zone.run(() => {
-      this.cards = this.getCards();
-    });
+    if (this.data.length > 2) {
+      const sortedLengths = this.data.map(d => ('' + d.data.value).length).sort((a, b) => b - a);
+      const idx = Math.ceil(this.data.length / 2);
+      this.medianSize = sortedLengths[idx];
+    }
+
+    const cards = this.getCards();
+    this.cards = cards.filter(d => d.data.value !== null);
+    this.emptySlots = cards.filter(d => d.data.value === null);
   }
 
   getCards(): any[] {
+    const yPadding = typeof this.innerPadding === 'number' ?
+      this.innerPadding :
+      this.innerPadding[0] + this.innerPadding[2];
+    const xPadding = typeof this.innerPadding === 'number' ?
+      this.innerPadding :
+      this.innerPadding[1] + this.innerPadding[3];
+
     return this.data
       .map((d, index) => {
         let label = d.data.name;
-        if (label.constructor.name === 'Date') {
+        if (label && label.constructor.name === 'Date') {
           label = label.toLocaleDateString();
         } else {
-          label = label.toLocaleString();
+          label = label ? label.toLocaleString() : label;
         }
         d.data.name = label;
 
         const value = d.data.value;
+        const valueColor = label ? this.colors.getColor(label) : this.emptyColor;
+        const color = this.cardColor || valueColor;
         return {
           x: d.x,
           y: d.y,
-          width: d.width,
-          height: d.height,
-          color: this.colors.getColor(label),
+          width: d.width - xPadding,
+          height: d.height - yPadding,
+          color,
+          bandColor: this.bandColor || valueColor,
+          textColor: this.textColor || invertColor(color),
           label,
           data: d.data,
           tooltipText: `${label}: ${value}`

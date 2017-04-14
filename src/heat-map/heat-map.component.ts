@@ -4,7 +4,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
-import d3 from '../d3';
+import { scaleBand } from 'd3-scale';
+
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -16,8 +17,6 @@ import { ColorHelper } from '../common/color.helper';
       [view]="[width, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
-      (legendLabelActivate)="onActivate($event)"
-      (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
       <svg:g [attr.transform]="transform" class="heat-map chart">
         <svg:g ngx-charts-x-axis
@@ -52,6 +51,8 @@ import { ColorHelper } from '../common/color.helper';
           [colors]="colors"
           [data]="results"
           [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipText]="tooltipText"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -71,9 +72,11 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() gradient: boolean;
-  @Input() innerPadding: Number | Number[] = 8;
+  @Input() innerPadding: number | number[] = 8;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipText: any;
 
   dims: ViewDimensions;
   xDomain: any[];
@@ -90,40 +93,47 @@ export class HeatMapComponent extends BaseChartComponent {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
+  scaleType: string = 'linear';
 
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: 'linear'
-      });
+    this.formatDates();
 
-      this.formatDates();
+    this.xDomain = this.getXDomain();
+    this.yDomain = this.getYDomain();
+    this.valueDomain = this.getValueDomain();
 
-      this.xDomain = this.getXDomain();
-      this.yDomain = this.getYDomain();
-      this.valueDomain = this.getValueDomain();
+    this.scaleType = this.getScaleType(this.valueDomain);
 
-      this.xScale = this.getXScale();
-      this.yScale = this.getYScale();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
-      this.rects = this.getRects();
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.scaleType
     });
+
+    if (this.scaleType === 'linear') {
+      const min = Math.min(0, ...this.valueDomain);
+      const max = Math.max(...this.valueDomain);
+      this.valueDomain = [min, max];
+    }
+
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.rects = this.getRects();
   }
 
   getXDomain(): any {
@@ -162,25 +172,57 @@ export class HeatMapComponent extends BaseChartComponent {
       }
     }
 
-    const min = Math.min(0, ...domain);
-    const max = Math.max(...domain);
+    return domain;
+  }
 
-    return [min, max];
+  /**
+   * Converts the input to gap paddingInner in fraction
+   * Supports the following inputs:
+   *    Numbers: 8
+   *    Strings: "8", "8px", "8%"
+   *    Arrays: [8,2], "8,2", "[8,2]"
+   *    Mixed: [8,"2%"], ["8px","2%"], "8,2%", "[8,2%]"
+   *
+   * @param {(string | number | Array<string | number>)} value
+   * @param {number} [index=0]
+   * @param {number} N
+   * @param {number} L
+   * @returns {number}
+   *
+   * @memberOf HeatMapComponent
+   */
+  getDimension(value: string | number | Array<string | number>, index = 0, N: number, L: number): number {
+    if (typeof value === 'string') {
+      value = value
+        .replace('[', '')
+        .replace(']', '')
+        .replace('px', '')
+        .replace('\'', '');
+
+      if (value.includes(',')) {
+        value = value.split(',');
+      }
+    }
+    if (Array.isArray(value) && typeof index === 'number') {
+      return this.getDimension(value[index], null, N, L);
+    }
+    if (typeof value === 'string' && value.includes('%')) {
+      return +value.replace('%', '') / 100;
+    }
+    return N / (L / +value + 1);
   }
 
   getXScale(): any {
-    const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[0];
-    const f = this.xDomain.length / (this.dims.width / innerPadding + 1);
-    return d3.scaleBand()
+    const f = this.getDimension(this.innerPadding, 0, this.xDomain.length, this.dims.width);
+    return scaleBand()
       .rangeRound([0, this.dims.width])
       .domain(this.xDomain)
       .paddingInner(f);
   }
 
   getYScale(): any {
-    const innerPadding = typeof this.innerPadding === 'number' ? this.innerPadding : this.innerPadding[1];
-    const f = this.yDomain.length / (this.dims.height / innerPadding + 1);
-    return d3.scaleBand()
+    const f = this.getDimension(this.innerPadding, 1, this.yDomain.length, this.dims.height);
+    return scaleBand()
       .rangeRound([this.dims.height, 0])
       .domain(this.yDomain)
       .paddingInner(f);
@@ -209,15 +251,28 @@ export class HeatMapComponent extends BaseChartComponent {
     this.select.emit(data);
   }
 
+  getScaleType(values): string {
+    let num = true;
+
+    for (const value of values) {
+      if (typeof value !== 'number') {
+        num = false;
+      }
+    }
+
+    if (num) return 'linear';
+    return 'ordinal';
+  }
+
   setColors(): void {
-    this.colors = new ColorHelper(this.scheme, 'linear', this.valueDomain);
+    this.colors = new ColorHelper(this.scheme, this.scaleType, this.valueDomain);
   }
 
   getLegendOptions() {
     return {
-      scaleType: 'linear',
+      scaleType: this.scaleType,
       domain: this.valueDomain,
-      colors: this.colors.scale
+      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale
     };
   }
 

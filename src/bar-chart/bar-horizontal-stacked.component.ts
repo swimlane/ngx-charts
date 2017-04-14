@@ -3,17 +3,22 @@ import {
   Input,
   Output,
   EventEmitter,
-  trigger,
-  style,
   ViewEncapsulation,
-  transition,
-  animate,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+
+import { scaleBand, scaleLinear } from 'd3-scale';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-stacked',
@@ -59,6 +64,7 @@ import d3 from '../d3';
             [activeEntries]="activeEntries"
             [dims]="dims"
             [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
             [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
@@ -92,6 +98,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
@@ -120,35 +127,33 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      this.formatDates();
-
-      this.groupDomain = this.getGroupDomain();
-      this.innerDomain = this.getInnerDomain();
-      this.valueDomain = this.getValueDomain();
-
-      this.xScale = this.getXScale();
-      this.yScale = this.getYScale();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    this.formatDates();
+
+    this.groupDomain = this.getGroupDomain();
+    this.innerDomain = this.getInnerDomain();
+    this.valueDomain = this.getValueDomain();
+
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getGroupDomain(): any[] {
@@ -195,17 +200,17 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     return [ min, max ];
   }
 
-  getYScale() {
+  getYScale(): any {
     const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return d3.scaleBand()
+    return scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
       .domain(this.groupDomain);
   }
 
-  getXScale() {
-    const scale = d3.scaleLinear()
+  getXScale(): any {
+    const scale = scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valueDomain);
     return this.roundDomains ? scale.nice() : scale;
@@ -215,7 +220,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     return `translate(0, ${this.yScale(group.name)})`;
   }
 
-  onClick(data, group): void {
+  onClick(data, group?): void {
     if (group) {
       data.series = group.name;
     }
@@ -265,7 +270,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(event, group) {
+  onActivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -282,7 +287,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group) {
+  onDeactivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

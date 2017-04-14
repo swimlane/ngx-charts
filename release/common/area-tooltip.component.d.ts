@@ -10,6 +10,7 @@ export declare class AreaTooltip implements OnChanges {
     height: any;
     colors: any;
     showPercentage: boolean;
+    tooltipDisabled: boolean;
     hover: EventEmitter<{}>;
     tooltips: any;
     constructor(renderer: Renderer);

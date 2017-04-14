@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import d3 from '../d3';
+import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -18,7 +18,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
       <svg:defs>
-        <svg:clipPath [attr.id]="clipPathId">
+        <svg:clipPath>
           <svg:rect
             [attr.width]="dims.width + 10"
             [attr.height]="dims.height + 10"
@@ -65,6 +65,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
             [colors]="colors"
             [data]="series"
             [activeEntries]="activeEntries"
+            [tooltipDisabled]="tooltipDisabled"
             (select)="onClick($event, series)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)" />
@@ -92,6 +93,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() autoScale: boolean;
   @Input() schemeType = 'ordinal';
   @Input() legendPosition: string = 'right';
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -126,46 +128,44 @@ export class BubbleChartComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      this.seriesDomain = this.results.map(d => d.name);
-      this.rDomain = this.getRDomain();
-      this.xDomain = this.getXDomain();
-      this.yDomain = this.getYDomain();
-
-      this.transform = `translate(${ this.dims.xOffset },${ this.margin[0] })`;
-
-      const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
-      this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
-
-      this.data = this.results;
-
-      this.minRadius = Math.max(this.minRadius, 1);
-      this.maxRadius = Math.max(this.maxRadius, 1);
-
-      this.rScale = this.getRScale(this.rDomain, [this.minRadius, this.maxRadius]);
-
-      this.bubblePadding = [0, 0, 0, 0];
-      this.setScales();
-
-      this.bubblePadding = this.getBubblePadding();
-      this.setScales();
-
-      this.legendOptions = this.getLegendOptions();
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    this.seriesDomain = this.results.map(d => d.name);
+    this.rDomain = this.getRDomain();
+    this.xDomain = this.getXDomain();
+    this.yDomain = this.getYDomain();
+
+    this.transform = `translate(${ this.dims.xOffset },${ this.margin[0] })`;
+
+    const colorDomain = this.schemeType === 'ordinal' ? this.seriesDomain : this.rDomain;
+    this.colors = new ColorHelper(this.scheme, this.schemeType, colorDomain, this.customColors);
+
+    this.data = this.results;
+
+    this.minRadius = Math.max(this.minRadius, 1);
+    this.maxRadius = Math.max(this.maxRadius, 1);
+
+    this.rScale = this.getRScale(this.rDomain, [this.minRadius, this.maxRadius]);
+
+    this.bubblePadding = [0, 0, 0, 0];
+    this.setScales();
+
+    this.bubblePadding = this.getBubblePadding();
+    this.setScales();
+
+    this.legendOptions = this.getLegendOptions();
   }
 
   @HostListener('mouseleave')
@@ -173,10 +173,11 @@ export class BubbleChartComponent extends BaseChartComponent {
     this.deactivateAll();
   }
 
-  onClick(data, series): void {
+  onClick(data, series?): void {
     if (series) {
       data.series = series.name;
     }
+
     this.select.emit(data);
   }
 
@@ -215,7 +216,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   }
 
   getRScale(domain, range): any {
-    const scale = d3.scaleLinear()
+    const scale = scaleLinear()
       .range(range)
       .domain(domain);
 

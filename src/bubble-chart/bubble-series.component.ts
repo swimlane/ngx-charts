@@ -6,12 +6,14 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  trigger,
-  style,
-  transition,
-  animate
 } from '@angular/core';
-import { Location } from '@angular/common';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
@@ -34,6 +36,7 @@ import { id } from '../utils/id';
         (activate)="activateCircle(circle)"
         (deactivate)="deactivateCircle(circle)"
         ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="getTooltipText(circle)"
@@ -65,6 +68,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -125,16 +129,19 @@ export class BubbleSeriesComponent implements OnChanges {
 
   getTooltipText(circle): string {
     const hasRadius = typeof circle.r !== 'undefined';
-    const radiusValue = hasRadius ? circle.r.toLocaleString() : '';
+    const radiusValue = hasRadius ? formatLabel(circle.r) : '';
     const xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? `${this.xAxisLabel}:` : '';
     const yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? `${this.yAxisLabel}:` : '';
+    const x = formatLabel(circle.x);
+    const y = formatLabel(circle.y);
+
     return `
       <span class="tooltip-label">
         ${circle.seriesName} • ${circle.tooltipLabel}
       </span>
       <span class="tooltip-label">
-        <label>${xAxisLabel}</label> ${circle.x.toLocaleString()}<br />
-        <label>${yAxisLabel}</label> ${circle.y.toLocaleString()}
+        <label>${xAxisLabel}</label> ${x}<br />
+        <label>${yAxisLabel}</label> ${y}
       </span>
       <span class="tooltip-val">
         ${radiusValue}

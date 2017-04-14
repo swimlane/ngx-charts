@@ -28,6 +28,10 @@ export class VisibilityObserver {
 
   runCheck(): void {
     const check = () => {
+      if (!this.element) {
+        return;
+      }
+
       // https://davidwalsh.name/offsetheight-visibility
       const { offsetHeight, offsetWidth } = this.element.nativeElement;
 

@@ -1,8 +1,8 @@
-"use strict";
-var core_1 = require('@angular/core');
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 var TreeMapCellSeriesComponent = (function () {
     function TreeMapCellSeriesComponent() {
-        this.select = new core_1.EventEmitter();
+        this.tooltipDisabled = false;
+        this.select = new EventEmitter();
     }
     TreeMapCellSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.cells = this.getCells();
@@ -37,22 +37,23 @@ var TreeMapCellSeriesComponent = (function () {
     TreeMapCellSeriesComponent.prototype.trackBy = function (index, item) {
         return item.label;
     };
-    TreeMapCellSeriesComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'g[ngx-charts-tree-map-cell-series]',
-                    template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    TreeMapCellSeriesComponent.ctorParameters = function () { return []; };
-    TreeMapCellSeriesComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'dims': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-    };
     return TreeMapCellSeriesComponent;
 }());
-exports.TreeMapCellSeriesComponent = TreeMapCellSeriesComponent;
+export { TreeMapCellSeriesComponent };
+TreeMapCellSeriesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-tree-map-cell-series]',
+                template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+TreeMapCellSeriesComponent.ctorParameters = function () { return []; };
+TreeMapCellSeriesComponent.propDecorators = {
+    'data': [{ type: Input },],
+    'dims': [{ type: Input },],
+    'colors': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'select': [{ type: Output },],
+};
 //# sourceMappingURL=tree-map-cell-series.component.js.map

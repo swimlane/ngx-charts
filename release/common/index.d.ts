@@ -4,6 +4,7 @@ export * from './tooltip';
 export * from './count';
 export * from './timeline';
 export * from './color.helper';
+export * from './charts';
 export * from './area.component';
 export * from './area-tooltip.component';
 export * from './base-chart.component';

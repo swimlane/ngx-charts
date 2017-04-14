@@ -20,10 +20,10 @@ import { AlignmentTypes } from './alignment.type';
       </span>
       <div class="tooltip-content">
         <span *ngIf="!title">
-          <template
+          <ng-template
             [ngTemplateOutlet]="template"
             [ngOutletContext]="{ model: context }">
-          </template>
+          </ng-template>
         </span>
         <span
           *ngIf="title"

@@ -7,11 +7,14 @@ import {
   HostListener,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { PathLocationStrategy } from '@angular/common';
+import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
+import { curveLinear } from 'd3-shape';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { id } from '../utils/id';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-area-chart',
@@ -73,6 +76,7 @@ import d3 from '../d3';
             [results]="results"
             [height]="dims.height"
             [colors]="colors"
+            [tooltipDisabled]="tooltipDisabled"
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
@@ -84,6 +88,7 @@ import d3 from '../d3';
               [data]="series"
               [scaleType]="scaleType"
               [visibleValue]="hoveredVertical"
+              [tooltipDisabled]="tooltipDisabled"
               (select)="onClick($event, series)"
               (activate)="onActivate($event)"
               (deactivate)="onDeactivate($event)"
@@ -134,12 +139,13 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() timeline;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
-  @Input() curve = d3.shape.curveLinear;
+  @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -175,46 +181,48 @@ export class AreaChartComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      if (this.timeline) {
-        this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
-      }
-
-      this.xDomain = this.getXDomain();
-      if (this.filteredDomain) {
-        this.xDomain = this.filteredDomain;
-      }
-
-      this.yDomain = this.getYDomain();
-      this.seriesDomain = this.getSeriesDomain();
-
-      this.xScale = this.getXScale(this.xDomain, this.dims.width);
-      this.yScale = this.getYScale(this.yDomain, this.dims.height);
-
-      this.updateTimeline();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
-      const pageUrl = this.location.path();
-      this.clipPathId = 'clip' + id().toString();
-      this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    if (this.timeline) {
+      this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
+    }
+
+    this.xDomain = this.getXDomain();
+    if (this.filteredDomain) {
+      this.xDomain = this.filteredDomain;
+    }
+
+    this.yDomain = this.getYDomain();
+    this.seriesDomain = this.getSeriesDomain();
+
+    this.xScale = this.getXScale(this.xDomain, this.dims.width);
+    this.yScale = this.getYScale(this.yDomain, this.dims.height);
+
+    this.updateTimeline();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
+
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
+
+    this.clipPathId = 'clip' + id().toString();
+    this.clipPath = `url(${pageUrl}#${this.clipPathId})`;
   }
 
   updateTimeline(): void {
@@ -288,15 +296,15 @@ export class AreaChartComponent extends BaseChartComponent {
     return this.results.map(d => d.name);
   }
 
-  getXScale(domain, width) {
+  getXScale(domain, width): any {
     let scale;
 
     if (this.scaleType === 'time') {
-      scale = d3.scaleTime();
+      scale = scaleTime();
     } else if (this.scaleType === 'linear') {
-      scale = d3.scaleLinear();
+      scale = scaleLinear();
     } else if (this.scaleType === 'ordinal') {
-      scale = d3.scalePoint()
+      scale = scalePoint()
         .padding(0.1);
     }
 
@@ -306,8 +314,8 @@ export class AreaChartComponent extends BaseChartComponent {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  getYScale(domain, height) {
-    const scale = d3.scaleLinear()
+  getYScale(domain, height): any {
+    const scale = scaleLinear()
       .range([height, 0])
       .domain(domain);
     return this.roundDomains ? scale.nice() : scale;
@@ -361,10 +369,11 @@ export class AreaChartComponent extends BaseChartComponent {
     this.deactivateAll();
   }
 
-  onClick(data, series): void {
+  onClick(data, series?): void {
     if (series) {
       data.series = series.name;
     }
+
     this.select.emit(data);
   }
 

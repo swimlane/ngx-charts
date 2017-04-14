@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import d3 from '../d3';
-import '../../config/testing-utils';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { multi } from '../../demo/data';
 import {APP_BASE_HREF} from '@angular/common';
 
@@ -20,12 +20,12 @@ class TestComponent {
   };
 }
 
-(TRAVIS ? xdescribe : describe)('<ngx-charts-heat-map>', () => {
+describe('<ngx-charts-heat-map>', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [HeatMapModule],
+      imports: [NoopAnimationsModule, HeatMapModule],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'}
       ]
@@ -34,7 +34,7 @@ class TestComponent {
 
   describe('basic setup', () => {
 
-    beforeEach(() => {
+    beforeEach(async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -44,49 +44,37 @@ class TestComponent {
                 [results]="multi">
               </ngx-charts-heat-map>`
         }
-      });
-    });
+      }).compileComponents();
+    }));
 
-    it('should set the svg width and height', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should set the svg width and height', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
+      const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.attr('width')).toEqual('400');
-        expect(svg.attr('height')).toEqual('800');
-        done();
-      });
-    });
+      expect(svg.getAttribute('width')).toBe('400');
+      expect(svg.getAttribute('height')).toBe('800');
+    }));
 
-    it('should render 12 cell elements', (done) => {
-      TestBed.compileComponents().then(() => {
+    it('should render 12 cell elements', async(() => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
         const compiled = fixture.debugElement.nativeElement;
 
         expect(compiled.querySelectorAll('rect.cell').length).toEqual(12);
-        done();
-      });
-    });
+    }));
 
-    it('should render correct cell size', (done) => {
-      TestBed.compileComponents().then(() => {
+    it('should render correct cell size', async(() => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('84');
-        expect(rect.attr('height')).toEqual('254');
-        done();
-      });
-    });
+        expect(svg.getAttribute('width')).toBe('84');
+        expect(svg.getAttribute('height')).toBe('254');
+    }));
   });
 
   describe('with gradiant', () => {
@@ -105,24 +93,21 @@ class TestComponent {
       });
     });
 
-    it('should set fill attr', (done) => {
+    it('should set fill attr', async(() => {
       TestBed.compileComponents().then(() => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('fill')).toMatch('url(.*)');
-        done();
+        expect(svg.getAttribute('fill')).toMatch('url(.*)');
       });
-    });
+    }));
   });
 
   describe('padding', () => {
 
-    it('should render correct cell size, with zero padding', (done) => {
+    it('should render correct cell size, with zero padding', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -139,17 +124,14 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('90');
-        expect(rect.attr('height')).toEqual('260');
-        done();
+        expect(svg.getAttribute('width')).toBe('90');
+        expect(svg.getAttribute('height')).toBe('260');
       });
-    });
+    }));
 
-    it('should render correct cell size, with padding', (done) => {
+    it('should render correct cell size, with padding', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -167,17 +149,14 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('75');    // ~(360 - 3 * innerPadding) / 4
-        expect(rect.attr('height')).toEqual('246');  // ~(780 - 2 * innnerPadding) / 3
-        done();
+        expect(svg.getAttribute('width')).toBe('75'); // ~(360 - 3 * innerPadding) / 4
+        expect(svg.getAttribute('height')).toBe('246'); // ~(780 - 2 * innnerPadding) / 3
       });
-    });
+    }));
 
-    it('should render correct cell size, with x and y padding', (done) => {
+    it('should render correct cell size, with x and y padding', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -195,14 +174,11 @@ class TestComponent {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const rects = compiled.querySelectorAll('rect.cell');
-        const rect = d3.select(rects[0]);
+        const svg = fixture.debugElement.nativeElement.querySelector('rect.cell');
 
-        expect(rect.attr('width')).toEqual('52');    // ~(360 - 3 * innerPadding) / 4
-        expect(rect.attr('height')).toEqual('233');  // ~(780 - 2 * innnerPadding) / 3
-        done();
+        expect(svg.getAttribute('width')).toBe('52'); // ~(360 - 3 * innerPadding) / 4
+        expect(svg.getAttribute('height')).toBe('233'); // ~(780 - 2 * innnerPadding) / 3
       });
-    });
+    }));
   });
 });

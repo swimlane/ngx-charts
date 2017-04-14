@@ -9,8 +9,8 @@ import {
   EventEmitter,
   ViewEncapsulation
 } from '@angular/core';
+import { scaleLinear } from 'd3-scale';
 
-import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -34,6 +34,7 @@ import { ColorHelper } from '../common/color.helper';
             [cornerRadius]="cornerRadius"
             [colors]="colors"
             [isActive]="isActive(arc.valueArc.data)"
+            [tooltipDisabled]="tooltipDisabled"
             (select)="onClick($event)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)">
@@ -86,6 +87,8 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() angleSpan: number = 240;
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
+  @Input() tooltipDisabled: boolean = false;
+  @Input() valueFormatting: any;
 
   // Specify margins
   @Input() margin: any[];
@@ -121,50 +124,48 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      if (!this.showAxis) {
-        if (!this.margin) {
-          this.margin = [10, 20, 10, 20];
-        }
-      } else {
-        if (!this.margin) {
-          this.margin = [60, 100, 60, 100];
-        }
+    if (!this.showAxis) {
+      if (!this.margin) {
+        this.margin = [10, 20, 10, 20];
       }
-
-      // make the starting angle positive
-      if (this.startAngle < 0) {
-        this.startAngle = (this.startAngle % 360) + 360;
+    } else {
+      if (!this.margin) {
+        this.margin = [60, 100, 60, 100];
       }
+    }
 
-      this.angleSpan = Math.min(this.angleSpan, 360);
+    // make the starting angle positive
+    if (this.startAngle < 0) {
+      this.startAngle = (this.startAngle % 360) + 360;
+    }
 
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showLegend: this.legend
-      });
+    this.angleSpan = Math.min(this.angleSpan, 360);
 
-      this.domain = this.getDomain();
-      this.valueDomain = this.getValueDomain();
-      this.valueScale = this.getValueScale();
-      this.displayValue = this.getDisplayValue();
-
-      this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
-
-      this.arcs = this.getArcs();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      const xOffset = this.margin[3] + this.dims.width / 2;
-      const yOffset = this.margin[0] + this.dims.height / 2;
-
-      this.transform = `translate(${ xOffset }, ${ yOffset })`;
-      this.rotation = `rotate(${ this.startAngle })`;
-      setTimeout(() => this.scaleText(), 50);
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showLegend: this.legend
     });
+
+    this.domain = this.getDomain();
+    this.valueDomain = this.getValueDomain();
+    this.valueScale = this.getValueScale();
+    this.displayValue = this.getDisplayValue();
+
+    this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2;
+
+    this.arcs = this.getArcs();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    const xOffset = this.margin[3] + this.dims.width / 2;
+    const yOffset = this.margin[0] + this.dims.height / 2;
+
+    this.transform = `translate(${ xOffset }, ${ yOffset })`;
+    this.rotation = `rotate(${ this.startAngle })`;
+    setTimeout(() => this.scaleText(), 50);
   }
 
   getArcs(): any[] {
@@ -239,7 +240,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   }
 
   getValueScale(): any {
-    return d3.scaleLinear()
+    return scaleLinear()
       .range([0, this.angleSpan])
       .nice()
       .domain(this.valueDomain);
@@ -251,29 +252,32 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     if(this.textValue && 0 !== this.textValue.length) {
       return this.textValue.toLocaleString();
     }
+
+    if (this.valueFormatting) {
+      return this.valueFormatting(value);
+    }
+
     return value.toLocaleString();
   }
 
   scaleText(repeat: boolean = true): void {
-    this.zone.run(() => {
-      const { width } = this.textEl.nativeElement.getBoundingClientRect();
-      const oldScale = this.resizeScale;
+    const { width } = this.textEl.nativeElement.getBoundingClientRect();
+    const oldScale = this.resizeScale;
 
-      if (width === 0) {
-        this.resizeScale = 1;
-      } else {
-        const availableSpace = this.textRadius;
-        this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
-      }
+    if (width === 0) {
+      this.resizeScale = 1;
+    } else {
+      const availableSpace = this.textRadius;
+      this.resizeScale = Math.floor((availableSpace / (width / this.resizeScale)) * 100) / 100;
+    }
 
-      if (this.resizeScale !== oldScale) {
-        this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
-        this.cd.markForCheck();
-        if (repeat) {
-          setTimeout(() => this.scaleText(false), 50);
-        }
+    if (this.resizeScale !== oldScale) {
+      this.textTransform = `scale(${this.resizeScale}, ${this.resizeScale})`;
+      this.cd.markForCheck();
+      if (repeat) {
+        setTimeout(() => this.scaleText(false), 50);
       }
-    });
+    }
   }
 
   onClick(data): void {

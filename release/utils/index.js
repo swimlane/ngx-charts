@@ -1,11 +1,7 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(require('./id'));
-__export(require('./color-sets'));
-__export(require('./sort'));
-__export(require('./throttle'));
-__export(require('./color-utils'));
-__export(require('./visibility-observer'));
+export * from './id';
+export * from './color-sets';
+export * from './sort';
+export * from './throttle';
+export * from './color-utils';
+export * from './visibility-observer';
 //# sourceMappingURL=index.js.map

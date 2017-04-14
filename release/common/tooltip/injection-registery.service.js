@@ -1,4 +1,3 @@
-"use strict";
 var InjectionRegistery = (function () {
     function InjectionRegistery(injectionService) {
         this.injectionService = injectionService;
@@ -66,5 +65,5 @@ var InjectionRegistery = (function () {
     };
     return InjectionRegistery;
 }());
-exports.InjectionRegistery = InjectionRegistery;
+export { InjectionRegistery };
 //# sourceMappingURL=injection-registery.service.js.map

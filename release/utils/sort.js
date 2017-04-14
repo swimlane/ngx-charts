@@ -1,5 +1,4 @@
-"use strict";
-function sortLinear(data, property, direction) {
+export function sortLinear(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
         if (direction === 'asc') {
@@ -10,8 +9,7 @@ function sortLinear(data, property, direction) {
         }
     });
 }
-exports.sortLinear = sortLinear;
-function sortByDomain(data, property, direction, domain) {
+export function sortByDomain(data, property, direction, domain) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
         var aVal = a[property];
@@ -26,8 +24,7 @@ function sortByDomain(data, property, direction, domain) {
         }
     });
 }
-exports.sortByDomain = sortByDomain;
-function sortByTime(data, property, direction) {
+export function sortByTime(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
         var aDate = a[property].getTime();
@@ -48,5 +45,4 @@ function sortByTime(data, property, direction) {
         }
     });
 }
-exports.sortByTime = sortByTime;
 //# sourceMappingURL=sort.js.map

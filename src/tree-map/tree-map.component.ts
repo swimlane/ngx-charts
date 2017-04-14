@@ -6,7 +6,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
-import d3 from '../d3';
+import { treemap, stratify } from 'd3-hierarchy';
+
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -22,6 +23,7 @@ import { ColorHelper } from '../common/color.helper';
           [colors]="colors"
           [data]="data"
           [dims]="dims"
+          [tooltipDisabled]="tooltipDisabled"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -34,6 +36,7 @@ import { ColorHelper } from '../common/color.helper';
 export class TreeMapComponent extends BaseChartComponent {
 
   @Input() results;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
 
@@ -48,45 +51,43 @@ export class TreeMapComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.domain = this.getDomain();
-
-      this.treemap = d3.treemap()
-        .size([this.dims.width, this.dims.height]);
-
-      const rootNode = {
-        name: 'root',
-        value: 0,
-        isRoot: true
-      };
-
-      const root = d3.stratify()
-        .id(d => {
-          let label = d.name;
-
-          if (label.constructor.name === 'Date') {
-            label = label.toLocaleDateString();
-          } else {
-            label = label.toLocaleString();
-          }
-          return label;
-        })
-        .parentId(d => d.isRoot ? null : 'root')
-        ([rootNode, ...this.results])
-        .sum(d => d.value);
-
-      this.data = this.treemap(root);
-
-      this.setColors();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.domain = this.getDomain();
+
+    this.treemap = treemap<any>()
+      .size([this.dims.width, this.dims.height]);
+
+    const rootNode = {
+      name: 'root',
+      value: 0,
+      isRoot: true
+    };
+
+    const root = stratify<any>()
+      .id(d => {
+        let label = d.name;
+
+        if (label.constructor.name === 'Date') {
+          label = label.toLocaleDateString();
+        } else {
+          label = label.toLocaleString();
+        }
+        return label;
+      })
+      .parentId(d => d.isRoot ? null : 'root')
+      ([rootNode, ...this.results])
+      .sum(d => d.value);
+
+    this.data = this.treemap(root);
+
+    this.setColors();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getDomain(): any[] {

@@ -1,4 +1,3 @@
-
 import { ComponentRef } from '@angular/core';
 import { InjectionService } from './injection.service';
 export declare abstract class InjectionRegistery {

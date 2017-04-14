@@ -8,9 +8,10 @@ import {
   OnChanges,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Location } from '@angular/common';
+import { select } from 'd3-selection';
+
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { id } from '../utils/id';
-import d3 from '../d3';
 
 @Component({
   selector: 'g[ngx-charts-area]',
@@ -55,7 +56,7 @@ export class AreaComponent implements OnChanges {
   gradientStops: any[];
   hasGradient: boolean = false;
 
-  constructor(element: ElementRef, private location: Location) {
+  constructor(element: ElementRef, private location: LocationStrategy) {
     this.element = element.nativeElement;
   }
 
@@ -69,7 +70,10 @@ export class AreaComponent implements OnChanges {
   }
 
   update(): void {
-    const pageUrl = this.location.path();
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
+
     this.gradientId = 'grad' + id().toString();
     this.gradientFill = `url(${pageUrl}#${this.gradientId})`;
 
@@ -89,7 +93,7 @@ export class AreaComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    const node = d3.select(this.element).select('.area');
+    const node = select(this.element).select('.area');
 
     node.transition().duration(750)
       .attr('d', this.path);
@@ -99,7 +103,7 @@ export class AreaComponent implements OnChanges {
     if (this.stops) {
       return this.stops;
     }
-    
+
     return [
       {
         offset: 0,

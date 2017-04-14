@@ -25,12 +25,14 @@ import { BaseChartComponent } from '../common/base-chart.component';
         <svg:g ngx-charts-pie-series
           [colors]="colors"
           [showLabels]="labels"
+          [labelFormatting]="labelFormatting"
           [series]="data"
           [activeEntries]="activeEntries"
           [innerRadius]="innerRadius"
           [outerRadius]="outerRadius"
           [explodeSlices]="explodeSlices"
           [gradient]="gradient"
+          [tooltipDisabled]="tooltipDisabled"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -54,6 +56,8 @@ export class PieChartComponent extends BaseChartComponent {
   @Input() arcWidth = 0.25;
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
+  @Input() tooltipDisabled: boolean = false;
+  @Input() labelFormatting: any;
 
   @Output() select = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -72,44 +76,41 @@ export class PieChartComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      if (this.labels) {
-        this.margin = [30, 80, 30, 80];
-      }
+    if (this.labels) {
+      this.margin = [30, 80, 30, 80];
+    }
 
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showLegend: this.legend,
-        columns: 10
-      });
-
-      const xOffset = this.margin[3] + this.dims.width / 2;
-      const yOffset = this.margin[0] + this.dims.height / 2;
-      this.translation = `translate(${xOffset}, ${yOffset})`;
-      this.outerRadius = Math.min(this.dims.width, this.dims.height);
-      if (this.labels) {
-        // make room for labels
-        this.outerRadius /= 3;
-      } else {
-        this.outerRadius /= 2;
-      }
-      this.innerRadius = 0;
-      if (this.doughnut) {
-        this.innerRadius = this.outerRadius * (1 - this.arcWidth);
-      }
-
-      this.domain = this.getDomain();
-
-      // sort data according to domain
-      this.data = this.results.sort((a, b) => {
-        return this.domain.indexOf(a.name) - this.domain.indexOf(b.name);
-      });
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showLegend: this.legend,
     });
+
+    const xOffset = this.margin[3] + this.dims.width / 2;
+    const yOffset = this.margin[0] + this.dims.height / 2;
+    this.translation = `translate(${xOffset}, ${yOffset})`;
+    this.outerRadius = Math.min(this.dims.width, this.dims.height);
+    if (this.labels) {
+      // make room for labels
+      this.outerRadius /= 3;
+    } else {
+      this.outerRadius /= 2;
+    }
+    this.innerRadius = 0;
+    if (this.doughnut) {
+      this.innerRadius = this.outerRadius * (1 - this.arcWidth);
+    }
+
+    this.domain = this.getDomain();
+
+    // sort data according to domain
+    this.data = this.results.sort((a, b) => {
+      return this.domain.indexOf(a.name) - this.domain.indexOf(b.name);
+    });
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
   }
 
   getDomain(): any[] {

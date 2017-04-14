@@ -19,6 +19,7 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent {
     xAxisTickFormatting: any;
     yAxisTickFormatting: any;
     roundDomains: boolean;
+    tooltipDisabled: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;
@@ -59,7 +60,7 @@ export declare class AreaChartNormalizedComponent extends BaseChartComponent {
     updateDomain(domain: any): void;
     updateHoveredVertical(item: any): void;
     hideCircles(): void;
-    onClick(data: any, series: any): void;
+    onClick(data: any, series?: any): void;
     trackBy(index: any, item: any): string;
     setColors(): void;
     getLegendOptions(): {

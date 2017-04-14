@@ -11,6 +11,7 @@ export declare class BubbleSeriesComponent implements OnChanges {
     activeEntries: any[];
     xAxisLabel: string;
     yAxisLabel: string;
+    tooltipDisabled: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

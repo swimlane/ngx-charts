@@ -1,33 +1,30 @@
-"use strict";
-var core_1 = require('@angular/core');
-var chart_common_module_1 = require('../common/chart-common.module');
-var card_component_1 = require('./card.component');
-exports.CardComponent = card_component_1.CardComponent;
-var card_series_component_1 = require('./card-series.component');
-exports.CardSeriesComponent = card_series_component_1.CardSeriesComponent;
-var number_card_component_1 = require('./number-card.component');
-exports.NumberCardComponent = number_card_component_1.NumberCardComponent;
+import { NgModule } from '@angular/core';
+import { ChartCommonModule } from '../common/chart-common.module';
+import { CardComponent } from './card.component';
+import { CardSeriesComponent } from './card-series.component';
+import { NumberCardComponent } from './number-card.component';
+export { CardComponent, CardSeriesComponent, NumberCardComponent };
 var NumberCardModule = (function () {
     function NumberCardModule() {
     }
-    NumberCardModule.decorators = [
-        { type: core_1.NgModule, args: [{
-                    imports: [chart_common_module_1.ChartCommonModule],
-                    declarations: [
-                        card_component_1.CardComponent,
-                        card_series_component_1.CardSeriesComponent,
-                        number_card_component_1.NumberCardComponent
-                    ],
-                    exports: [
-                        card_component_1.CardComponent,
-                        card_series_component_1.CardSeriesComponent,
-                        number_card_component_1.NumberCardComponent
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    NumberCardModule.ctorParameters = function () { return []; };
     return NumberCardModule;
 }());
-exports.NumberCardModule = NumberCardModule;
+export { NumberCardModule };
+NumberCardModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [ChartCommonModule],
+                declarations: [
+                    CardComponent,
+                    CardSeriesComponent,
+                    NumberCardComponent
+                ],
+                exports: [
+                    CardComponent,
+                    CardSeriesComponent,
+                    NumberCardComponent
+                ]
+            },] },
+];
+/** @nocollapse */
+NumberCardModule.ctorParameters = function () { return []; };
 //# sourceMappingURL=number-card.module.js.map

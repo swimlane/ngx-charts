@@ -1,0 +1,103 @@
+.ngx-tooltip-content {
+  position: fixed;
+  border-radius: 3px;
+  z-index: 5000;
+  display: block;
+  font-weight: normal;
+  opacity: 0;
+  pointer-events: none !important; }
+  .ngx-tooltip-content.type-popover {
+    background: #fff;
+    color: #060709;
+    border: 1px solid #72809b;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    font-size: 13px;
+    padding: 4px; }
+    .ngx-tooltip-content.type-popover .tooltip-caret {
+      position: absolute;
+      z-index: 5001;
+      width: 0;
+      height: 0; }
+      .ngx-tooltip-content.type-popover .tooltip-caret.position-left {
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-left: 7px solid #fff; }
+      .ngx-tooltip-content.type-popover .tooltip-caret.position-top {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 7px solid #fff; }
+      .ngx-tooltip-content.type-popover .tooltip-caret.position-right {
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid transparent;
+        border-right: 7px solid #fff; }
+      .ngx-tooltip-content.type-popover .tooltip-caret.position-bottom {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #fff; }
+  .ngx-tooltip-content.type-tooltip {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.75);
+    font-size: 12px;
+    padding: 0 10px;
+    text-align: center;
+    pointer-events: auto; }
+    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-left {
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 7px solid rgba(0, 0, 0, 0.75); }
+    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-top {
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid rgba(0, 0, 0, 0.75); }
+    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-right {
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 7px solid rgba(0, 0, 0, 0.75); }
+    .ngx-tooltip-content.type-tooltip .tooltip-caret.position-bottom {
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid rgba(0, 0, 0, 0.75); }
+  .ngx-tooltip-content .tooltip-label {
+    display: block;
+    line-height: 1em;
+    padding: 8px 5px 5px 5px;
+    font-size: 1em; }
+  .ngx-tooltip-content .tooltip-val {
+    display: block;
+    font-size: 1.3em;
+    line-height: 1em;
+    padding: 0 5px 8px 5px; }
+  .ngx-tooltip-content .tooltip-caret {
+    position: absolute;
+    z-index: 5001;
+    width: 0;
+    height: 0; }
+  .ngx-tooltip-content.position-right {
+    transform: translate3d(10px, 0, 0); }
+  .ngx-tooltip-content.position-left {
+    transform: translate3d(-10px, 0, 0); }
+  .ngx-tooltip-content.position-top {
+    transform: translate3d(0, -10px, 0); }
+  .ngx-tooltip-content.position-bottom {
+    transform: translate3d(0, 10px, 0); }
+  .ngx-tooltip-content.animate {
+    opacity: 1;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto; }
+
+.area-tooltip-container {
+  padding: 5px 0;
+  pointer-events: none; }
+
+.tooltip-item {
+  text-align: left;
+  line-height: 1.2em;
+  padding: 5px 0; }
+  .tooltip-item .tooltip-item-color {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+    color: #5b646b;
+    border-radius: 3px; }

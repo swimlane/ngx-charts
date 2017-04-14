@@ -1,6 +1,42 @@
 # Changelog
 
-# 4.1.2
+## 5.0.0
+- Breaking: Upgrade to angular 4
+
+## 4.4.0
+- Feature: Added ability to set card text color in number card (#284)
+- Enhancement: Added more heatmap options and support for various inputs for innerPadding (#297, #301)
+- Enhancement: Added valueFormatting input to linear gauge chart
+- Enhancement: Added valueFormatting input to gauge chart
+- Enhancement: Added labelFormatting input to pie chart
+- Enhancement: Updated pie chart label animations (#291)
+- Bug: Fixed pie chart positioning
+- Bug: Fixed ticks calculation on resize (#295)
+- Bug: Fixed percentage value in pie grid when the total is 0 (#288)
+- Bug: Fixed date formatting in bubble chart tooltips (#285)
+- Bug: Fixed Scale.round error in line chart ()#287)
+- Chore: AOT error fixes
+
+## 4.3.0
+- Enhancement: Improved pie chart label positioning (#273)
+- Enhancement: Improved number card design and scaling (#272)
+- Chore: Refactored charts to use d3 modules directly in library components (#270)
+
+## 4.2.1
+- Bug: Fixed customColors mapping
+- Chore: Various AoT compilation and build improvements (#255, #257, #258, #259, #256, #263, #260, #266)
+
+## 4.2.0
+- Chore: AoT compilation compatibility improvements (#253, #252, #251)
+- Enhancement: Added option to disable tooltips (#223)
+
+## 4.1.3
+- Enhancement: Added option to override the value in gauge chart
+- Bug: Fixed padding on bubble charts
+- Chore: Compile SCSS into CSS before building
+- Chore: Expor ChartComponent through the main module
+
+## 4.1.2
 - Bug: Fix tooltip when axis labels are not shown in bubble chart
 - Bug: Do not round scales when they are not linear
 - Enhancement: Show Axis labels in bubble chart tooltip (#210)

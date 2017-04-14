@@ -1,5 +1,5 @@
 import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
-import { Location } from '@angular/common';
+import { LocationStrategy } from '@angular/common';
 export declare class CircleSeriesComponent implements OnChanges {
     private location;
     data: any;
@@ -10,12 +10,13 @@ export declare class CircleSeriesComponent implements OnChanges {
     scaleType: any;
     visibleValue: any;
     activeEntries: any[];
+    tooltipDisabled: boolean;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
     areaPath: any;
     circles: any[];
-    constructor(location: Location);
+    constructor(location: LocationStrategy);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getCircles(): any[];

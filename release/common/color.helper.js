@@ -1,45 +1,46 @@
-"use strict";
-var d3_1 = require('../d3');
-var color_sets_1 = require('../utils/color-sets');
+import { range } from 'd3-array';
+import { scaleBand, scaleLinear, scaleOrdinal, scaleQuantile } from 'd3-scale';
+import { colorSets } from '../utils/color-sets';
 var ColorHelper = (function () {
     function ColorHelper(scheme, type, domain, customColors) {
         if (typeof (scheme) === 'string') {
-            scheme = color_sets_1.colorSets.find(function (cs) {
+            scheme = colorSets.find(function (cs) {
                 return cs.name === scheme;
             });
         }
         this.colorDomain = scheme.domain;
         this.scaleType = type;
         this.domain = domain;
+        this.customColors = customColors;
         this.scale = this.generateColorScheme(scheme, type, domain);
     }
     ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
         if (typeof (scheme) === 'string') {
-            scheme = color_sets_1.colorSets.find(function (cs) {
+            scheme = colorSets.find(function (cs) {
                 return cs.name === scheme;
             });
         }
         var colorScale;
         if (type === 'quantile') {
-            colorScale = d3_1.default.scaleQuantile()
+            colorScale = scaleQuantile()
                 .range(scheme.domain)
                 .domain(domain);
         }
         else if (type === 'ordinal') {
-            colorScale = d3_1.default.scaleOrdinal()
+            colorScale = scaleOrdinal()
                 .range(scheme.domain)
                 .domain(domain);
         }
         else if (type === 'linear') {
-            colorScale = d3_1.default.scaleLinear()
-                .domain(d3_1.default.range(0, 1, 1.0 / (scheme.domain.length - 1)))
+            colorScale = scaleLinear()
+                .domain(range(0, 1, 1.0 / (scheme.domain.length - 1)))
                 .range(scheme.domain);
         }
         return colorScale;
     };
     ColorHelper.prototype.getColor = function (value) {
         if (this.scaleType === 'linear') {
-            var valueScale = d3_1.default.scaleLinear()
+            var valueScale = scaleLinear()
                 .domain(this.domain)
                 .range([0, 1]);
             return (this.scale(valueScale(value)));
@@ -49,7 +50,7 @@ var ColorHelper = (function () {
             var found = void 0; // todo type customColors
             if (this.customColors && this.customColors.length > 0) {
                 found = this.customColors.find(function (mapping) {
-                    return mapping.name === formattedValue_1.toLowerCase();
+                    return mapping.name.toLowerCase() === formattedValue_1.toLowerCase();
                 });
             }
             if (found) {
@@ -64,10 +65,10 @@ var ColorHelper = (function () {
         if (!start) {
             start = this.domain[0];
         }
-        var valueScale = d3_1.default.scaleLinear()
+        var valueScale = scaleLinear()
             .domain(this.domain)
             .range([0, 1]);
-        var colorValueScale = d3_1.default.scaleBand()
+        var colorValueScale = scaleBand()
             .domain(this.colorDomain)
             .range([0, 1]);
         var endColor = this.getColor(value);
@@ -115,5 +116,5 @@ var ColorHelper = (function () {
     };
     return ColorHelper;
 }());
-exports.ColorHelper = ColorHelper;
+export { ColorHelper };
 //# sourceMappingURL=color.helper.js.map

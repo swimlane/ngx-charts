@@ -1,4 +1,3 @@
-"use strict";
 // Robert Penner's easeOutExpo
 function easeOutExpo(t, b, c, d) {
     return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b;
@@ -14,7 +13,7 @@ function easeOutExpo(t, b, c, d) {
  * @param {any} callback
  * @returns
  */
-function count(countFrom, countTo, countDecimals, countDuration, callback) {
+export function count(countFrom, countTo, countDecimals, countDuration, callback) {
     var startVal = Number(countFrom);
     var endVal = Number(countTo);
     var countDown = (startVal > endVal);
@@ -54,7 +53,6 @@ function count(countFrom, countTo, countDecimals, countDuration, callback) {
         return runCount(timestamp);
     });
 }
-exports.count = count;
 /**
  * Determine decimals places
  *
@@ -62,12 +60,11 @@ exports.count = count;
  * @param {any} countTo
  * @returns
  */
-function decimalChecker(countTo) {
+export function decimalChecker(countTo) {
     var endVal = Number(countTo);
     if (endVal % 1 !== 0 && Math.abs(endVal) <= 10) {
         return 2;
     }
     return 0;
 }
-exports.decimalChecker = decimalChecker;
 //# sourceMappingURL=count.helper.js.map

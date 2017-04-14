@@ -7,8 +7,8 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { scaleLinear } from 'd3-scale';
 
-import d3 from '../d3';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -21,7 +21,7 @@ import { ColorHelper } from '../common/color.helper';
       [showLegend]="false"
       (click)="onClick()">
       <svg:g class="linear-gauge chart">
-        <svg:g ngx-charts-bar 
+        <svg:g ngx-charts-bar
           class="background-bar"
           [width]="dims.width"
           [height]="3"
@@ -31,7 +31,7 @@ import { ColorHelper } from '../common/color.helper';
           [orientation]="'horizontal'"
           [roundEdges]="true">
         </svg:g>
-        <svg:g ngx-charts-bar 
+        <svg:g ngx-charts-bar
           [width]="valueScale(value)"
           [height]="3"
           [x]="margin[3]"
@@ -42,45 +42,45 @@ import { ColorHelper } from '../common/color.helper';
           [roundEdges]="true">
         </svg:g>
 
-        <svg:line 
+        <svg:line
           *ngIf="hasPreviousValue"
           [attr.transform]="transformLine"
           x1="0"
-          y1="5" 
+          y1="5"
           x2="0"
           y2="15"
-          [attr.stroke]="colors.getColor(units)"          
+          [attr.stroke]="colors.getColor(units)"
         />
 
-        <svg:line 
+        <svg:line
           *ngIf="hasPreviousValue"
           [attr.transform]="transformLine"
           x1="0"
-          y1="-5" 
+          y1="-5"
           x2="0"
           y2="-15"
-          [attr.stroke]="colors.getColor(units)"          
+          [attr.stroke]="colors.getColor(units)"
         />
-        
-        <svg:g [attr.transform]="transform">        
+
+        <svg:g [attr.transform]="transform">
           <svg:g [attr.transform]="valueTranslate">
             <svg:text #valueTextEl
               class="value"
               [style.textAnchor]="'middle'"
-              [attr.transform]="valueTextTransform"          
+              [attr.transform]="valueTextTransform"
               alignment-baseline="after-edge">
               {{displayValue}}
-            </svg:text>        
+            </svg:text>
           </svg:g>
-          
+
           <svg:g [attr.transform]="unitsTranslate">
             <svg:text #unitsTextEl
               class="units"
               [style.textAnchor]="'middle'"
-              [attr.transform]="unitsTextTransform"          
+              [attr.transform]="unitsTextTransform"
               alignment-baseline="before-edge">
               {{units}}
-            </svg:text>        
+            </svg:text>
           </svg:g>
         </svg:g>
       </svg:g>
@@ -100,6 +100,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   @Input() value: number = 0;
   @Input() units: string;
   @Input() previousValue;
+  @Input() valueFormatting: any;
 
   @ViewChild('valueTextEl') valueTextEl: ElementRef;
   @ViewChild('unitsTextEl') unitsTextEl: ElementRef;
@@ -112,7 +113,7 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   transform: string;
   margin: any[] = [10, 20, 10, 20];
   transformLine: string;
-  
+
   valueResizeScale: number = 1;
   unitsResizeScale: number = 1;
   valueTextTransform: string = '';
@@ -133,37 +134,35 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.hasPreviousValue = this.previousValue !== undefined;
-      this.max = Math.max(this.max, this.value);
-      this.min = Math.min(this.min, this.value);
-      if (this.hasPreviousValue) {
-        this.max = Math.max(this.max, this.previousValue);
-        this.min = Math.min(this.min, this.previousValue);
-      }
+    this.hasPreviousValue = this.previousValue !== undefined;
+    this.max = Math.max(this.max, this.value);
+    this.min = Math.min(this.min, this.value);
+    if (this.hasPreviousValue) {
+      this.max = Math.max(this.max, this.previousValue);
+      this.min = Math.min(this.min, this.previousValue);
+    }
 
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.valueDomain = this.getValueDomain();
-      this.valueScale = this.getValueScale();
-      this.displayValue = this.getDisplayValue();
-
-      this.setColors();
- 
-      const xOffset = this.margin[3] + this.dims.width / 2;
-      const yOffset = this.margin[0] + this.dims.height / 2;
-
-      this.transform = `translate(${ xOffset }, ${ yOffset })`;
-      this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
-      this.valueTranslate = `translate(0, -15)`;
-      this.unitsTranslate = `translate(0, 15)`;
-      setTimeout(() => this.scaleText('value'), 50);
-      setTimeout(() => this.scaleText('units'), 50);      
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.valueDomain = this.getValueDomain();
+    this.valueScale = this.getValueScale();
+    this.displayValue = this.getDisplayValue();
+
+    this.setColors();
+
+    const xOffset = this.margin[3] + this.dims.width / 2;
+    const yOffset = this.margin[0] + this.dims.height / 2;
+
+    this.transform = `translate(${ xOffset }, ${ yOffset })`;
+    this.transformLine = `translate(${ this.margin[3] + this.valueScale(this.previousValue) }, ${ yOffset })`;
+    this.valueTranslate = `translate(0, -15)`;
+    this.unitsTranslate = `translate(0, 15)`;
+    setTimeout(() => this.scaleText('value'), 50);
+    setTimeout(() => this.scaleText('units'), 50);
   }
 
   getValueDomain(): any[] {
@@ -171,56 +170,57 @@ export class LinearGaugeComponent extends BaseChartComponent implements AfterVie
   }
 
   getValueScale(): any {
-    return d3.scaleLinear()
+    return scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valueDomain);
   }
 
   getDisplayValue(): string {
+    if (this.valueFormatting) {
+      return this.valueFormatting(this.value);
+    }
     return this.value.toLocaleString();
   }
 
   scaleText(element, repeat: boolean = true): void {
-    this.zone.run(() => {
-      let el;
-      let resizeScale;
-      if (element === 'value') {
-        el = this.valueTextEl;
-        resizeScale = this.valueResizeScale;
-      } else {
-        el = this.unitsTextEl;
-        resizeScale = this.unitsResizeScale;
-      }
+    let el;
+    let resizeScale;
+    if (element === 'value') {
+      el = this.valueTextEl;
+      resizeScale = this.valueResizeScale;
+    } else {
+      el = this.unitsTextEl;
+      resizeScale = this.unitsResizeScale;
+    }
 
-      const { width, height } = el.nativeElement.getBoundingClientRect();
-      if (width === 0 || height === 0) return;
-      const oldScale = resizeScale;
-      const availableWidth = this.dims.width;
-      const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
-      const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
-      const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
-      resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
-      
-      if (resizeScale !== oldScale) {
-        if (element === 'value') {
-          this.valueResizeScale = resizeScale;
-          this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
-        } else {
-          this.unitsResizeScale = resizeScale;
-          this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
-        }
-        this.cd.markForCheck();        
-        if (repeat) {
-          setTimeout(() => { this.scaleText(element, false); }, 50); 
-        }
+    const { width, height } = el.nativeElement.getBoundingClientRect();
+    if (width === 0 || height === 0) return;
+    const oldScale = resizeScale;
+    const availableWidth = this.dims.width;
+    const availableHeight = Math.max(this.dims.height / 2 - 15, 0);
+    const resizeScaleWidth = Math.floor((availableWidth / (width / resizeScale)) * 100) / 100;
+    const resizeScaleHeight = Math.floor((availableHeight / (height / resizeScale)) * 100) / 100;
+    resizeScale = Math.min(resizeScaleHeight, resizeScaleWidth);
+
+    if (resizeScale !== oldScale) {
+      if (element === 'value') {
+        this.valueResizeScale = resizeScale;
+        this.valueTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
+      } else {
+        this.unitsResizeScale = resizeScale;
+        this.unitsTextTransform = `scale(${ resizeScale }, ${ resizeScale })`;
       }
-    });
+      this.cd.markForCheck();
+      if (repeat) {
+        setTimeout(() => { this.scaleText(element, false); }, 50);
+      }
+    }
   }
 
   onClick(): void {
     this.select.emit({
       name: 'Value',
-      value: this.value  
+      value: this.value
     });
   }
 

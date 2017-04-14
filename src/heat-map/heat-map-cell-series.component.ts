@@ -5,8 +5,10 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  OnInit,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-heat-map-cell-series]',
@@ -23,24 +25,33 @@ import {
       (select)="onClick($event, c.label, c.series)"
       [gradient]="gradient"
       ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="getTooltipText(c)"
+      [tooltipTitle]="tooltipText(c)"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeatCellSeriesComponent implements OnChanges {
+export class HeatCellSeriesComponent implements OnChanges, OnInit {
 
   @Input() data;
   @Input() colors;
   @Input() xScale;
   @Input() yScale;
   @Input() gradient: boolean;
+  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipText: any;
 
   @Output() select = new EventEmitter();
 
   cells: any[];
+
+  ngOnInit() {
+    if (!this.tooltipText) {
+      this.tooltipText = this.getTooltipText;
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -57,20 +68,16 @@ export class HeatCellSeriesComponent implements OnChanges {
       row.series.map((cell) => {
         const value = cell.value;
 
-        const label = cell.name;
-        let tooltipLabel = label;
-        if (tooltipLabel.constructor.name === 'Date') {
-          tooltipLabel = tooltipLabel.toLocaleDateString();
-        }
-
         cells.push({
+          row,
+          cell,
           x: this.xScale(row.name),
           y: this.yScale(cell.name),
           width: this.xScale.bandwidth(),
           height: this.yScale.bandwidth(),
           fill: this.colors.getColor(value),
           data: value,
-          label,
+          label: formatLabel(cell.name),
           series: row.name
         });
       });

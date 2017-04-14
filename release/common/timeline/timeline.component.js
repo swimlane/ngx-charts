@@ -1,16 +1,17 @@
-"use strict";
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var d3_1 = require('../../d3');
-var utils_1 = require('../../utils');
+import { Component, Input, Output, EventEmitter, ElementRef, ChangeDetectionStrategy, NgZone, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { brushX } from 'd3-brush';
+import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
+import { select, event as d3event } from 'd3-selection';
+import { id } from '../../utils';
 var Timeline = (function () {
     function Timeline(element, zone, cd, location) {
         this.zone = zone;
         this.cd = cd;
         this.location = location;
         this.height = 50;
-        this.select = new core_1.EventEmitter();
-        this.onDomainChange = new core_1.EventEmitter();
+        this.select = new EventEmitter();
+        this.onDomainChange = new EventEmitter();
         this.initialized = false;
         this.element = element.nativeElement;
     }
@@ -22,22 +23,21 @@ var Timeline = (function () {
         }
     };
     Timeline.prototype.update = function () {
-        var _this = this;
-        this.zone.run(function () {
-            _this.dims = _this.getDims();
-            _this.height = _this.dims.height;
-            var offsetY = _this.view[1] - _this.height;
-            _this.xDomain = _this.getXDomain();
-            _this.xScale = _this.getXScale();
-            if (_this.brush) {
-                _this.updateBrush();
-            }
-            _this.transform = "translate(0 , " + offsetY + ")";
-            var pageUrl = _this.location.path();
-            _this.filterId = 'filter' + utils_1.id().toString();
-            _this.filter = "url(" + pageUrl + "#" + _this.filterId + ")";
-            _this.cd.markForCheck();
-        });
+        this.dims = this.getDims();
+        this.height = this.dims.height;
+        var offsetY = this.view[1] - this.height;
+        this.xDomain = this.getXDomain();
+        this.xScale = this.getXScale();
+        if (this.brush) {
+            this.updateBrush();
+        }
+        this.transform = "translate(0 , " + offsetY + ")";
+        var pageUrl = this.location instanceof PathLocationStrategy
+            ? this.location.path()
+            : '';
+        this.filterId = 'filter' + id().toString();
+        this.filter = "url(" + pageUrl + "#" + this.filterId + ")";
+        this.cd.markForCheck();
     };
     Timeline.prototype.getXDomain = function () {
         var values = [];
@@ -70,17 +70,17 @@ var Timeline = (function () {
     Timeline.prototype.getXScale = function () {
         var scale;
         if (this.scaleType === 'time') {
-            scale = d3_1.default.scaleTime()
+            scale = scaleTime()
                 .range([0, this.dims.width])
                 .domain(this.xDomain);
         }
         else if (this.scaleType === 'linear') {
-            scale = d3_1.default.scaleLinear()
+            scale = scaleLinear()
                 .range([0, this.dims.width])
                 .domain(this.xDomain);
         }
         else if (this.scaleType === 'ordinal') {
-            scale = d3_1.default.scalePoint()
+            scale = scalePoint()
                 .range([0, this.dims.width])
                 .padding(0.1)
                 .domain(this.xDomain);
@@ -93,38 +93,33 @@ var Timeline = (function () {
             return;
         var height = this.height;
         var width = this.view[0];
-        this.brush = d3_1.default.brushX()
+        this.brush = brushX()
             .extent([[0, 0], [width, height]])
             .on('brush end', function () {
-            _this.zone.run(function () {
-                var selection = d3_1.default.selection.event.selection || _this.xScale.range();
-                var newDomain = selection.map(_this.xScale.invert);
-                _this.onDomainChange.emit(newDomain);
-                _this.cd.markForCheck();
-            });
+            var selection = d3event.selection || _this.xScale.range();
+            var newDomain = selection.map(_this.xScale.invert);
+            _this.onDomainChange.emit(newDomain);
+            _this.cd.markForCheck();
         });
-        d3_1.default.select(this.element)
+        select(this.element)
             .select('.brush')
             .call(this.brush);
     };
     Timeline.prototype.updateBrush = function () {
-        var _this = this;
         if (!this.brush)
             return;
         var height = this.height;
         var width = this.view[0];
-        this.zone.run(function () {
-            _this.brush.extent([[0, 0], [width, height]]);
-            d3_1.default.select(_this.element)
-                .select('.brush')
-                .call(_this.brush);
-            // clear hardcoded properties so they can be defined by CSS
-            d3_1.default.select(_this.element).select('.selection')
-                .attr('fill', undefined)
-                .attr('stroke', undefined)
-                .attr('fill-opacity', undefined);
-            _this.cd.markForCheck();
-        });
+        this.brush.extent([[0, 0], [width, height]]);
+        select(this.element)
+            .select('.brush')
+            .call(this.brush);
+        // clear hardcoded properties so they can be defined by CSS
+        select(this.element).select('.selection')
+            .attr('fill', undefined)
+            .attr('stroke', undefined)
+            .attr('fill-opacity', undefined);
+        this.cd.markForCheck();
     };
     Timeline.prototype.getDims = function () {
         var width = this.view[0];
@@ -134,37 +129,37 @@ var Timeline = (function () {
         };
         return dims;
     };
-    Timeline.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'g[ngx-charts-timeline]',
-                    template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
-                    styleUrls: ['./timeline.component.scss'],
-                    encapsulation: core_1.ViewEncapsulation.None,
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush
-                },] },
-    ];
-    /** @nocollapse */
-    Timeline.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: core_1.NgZone, },
-        { type: core_1.ChangeDetectorRef, },
-        { type: common_1.Location, },
-    ]; };
-    Timeline.propDecorators = {
-        'view': [{ type: core_1.Input },],
-        'state': [{ type: core_1.Input },],
-        'results': [{ type: core_1.Input },],
-        'scheme': [{ type: core_1.Input },],
-        'customColors': [{ type: core_1.Input },],
-        'legend': [{ type: core_1.Input },],
-        'miniChart': [{ type: core_1.Input },],
-        'autoScale': [{ type: core_1.Input },],
-        'scaleType': [{ type: core_1.Input },],
-        'height': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-        'onDomainChange': [{ type: core_1.Output },],
-    };
     return Timeline;
 }());
-exports.Timeline = Timeline;
+export { Timeline };
+Timeline.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-timeline]',
+                template: "\n    <svg:g\n      class=\"timeline\"\n      [attr.transform]=\"transform\">\n      <svg:filter [attr.id]=\"filterId\">\n        <svg:feColorMatrix in=\"SourceGraphic\"\n            type=\"matrix\"\n            values=\"0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\" />\n      </svg:filter>\n      <svg:g class=\"embedded-chart\">\n        <ng-content></ng-content>\n      </svg:g>\n      <svg:rect x=\"0\"\n        [attr.width]=\"view[0]\"\n        y=\"0\"\n        [attr.height]=\"height\"\n        class=\"brush-background\"\n      />\n      <svg:g class=\"brush\"></svg:g>\n    </svg:g>\n  ",
+                styleUrls: ['./timeline.component.css'],
+                encapsulation: ViewEncapsulation.None,
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] },
+];
+/** @nocollapse */
+Timeline.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: NgZone, },
+    { type: ChangeDetectorRef, },
+    { type: LocationStrategy, },
+]; };
+Timeline.propDecorators = {
+    'view': [{ type: Input },],
+    'state': [{ type: Input },],
+    'results': [{ type: Input },],
+    'scheme': [{ type: Input },],
+    'customColors': [{ type: Input },],
+    'legend': [{ type: Input },],
+    'miniChart': [{ type: Input },],
+    'autoScale': [{ type: Input },],
+    'scaleType': [{ type: Input },],
+    'height': [{ type: Input },],
+    'select': [{ type: Output },],
+    'onDomainChange': [{ type: Output },],
+};
 //# sourceMappingURL=timeline.component.js.map

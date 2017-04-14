@@ -1,5 +1,5 @@
 import { EventEmitter, ElementRef, SimpleChanges, OnChanges } from '@angular/core';
-import { Location } from '@angular/common';
+import { LocationStrategy } from '@angular/common';
 export declare class BarComponent implements OnChanges {
     private location;
     fill: any;
@@ -25,7 +25,7 @@ export declare class BarComponent implements OnChanges {
     initialized: boolean;
     gradientStops: any[];
     hasGradient: boolean;
-    constructor(element: ElementRef, location: Location);
+    constructor(element: ElementRef, location: LocationStrategy);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     loadAnimation(): void;
@@ -35,7 +35,6 @@ export declare class BarComponent implements OnChanges {
     getPath(): any;
     getRadius(): number;
     getStartOpacity(): number;
-    roundedRect(x: any, y: any, w: any, h: any, r: any, tl: any, tr: any, bl: any, br: any): any;
     onMouseEnter(): void;
     onMouseLeave(): void;
 }

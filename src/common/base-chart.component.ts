@@ -3,7 +3,7 @@ import {
   Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges, SimpleChanges
 } from '@angular/core';
 
-import { Location } from '@angular/common';
+import { LocationStrategy } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/debounceTime';
@@ -32,7 +32,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     protected chartElement: ElementRef,
     protected zone: NgZone,
     protected cd: ChangeDetectorRef,
-    protected location: Location) {
+    protected location: LocationStrategy) {
   }
 
   ngAfterViewInit(): void {
@@ -95,7 +95,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (width && height) {
       return { width, height };
     }
-    
+
     return null;
   }
 
@@ -129,16 +129,14 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private bindWindowResizeEvent(): void {
-    this.zone.run(() => {
-      const source = Observable.fromEvent(window, 'resize', null, null);
-      const subscription = source.debounceTime(200).subscribe(e => {
-        this.update();
-        if (this.cd) {
-          this.cd.markForCheck();
-        }
-      });
-      this.resizeSubscription = subscription;
+    const source = Observable.fromEvent(window, 'resize', null, null);
+    const subscription = source.debounceTime(200).subscribe(e => {
+      this.update();
+      if (this.cd) {
+        this.cd.markForCheck();
+      }
     });
+    this.resizeSubscription = subscription;
   }
 
   /**
@@ -168,6 +166,10 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
           const seriesItemCopy = Object.assign({}, seriesItem);
           copy['series'].push(seriesItemCopy);
         }
+      }
+
+      if(item['extra'] !== undefined) {
+        copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
       }
 
       results.push(copy);

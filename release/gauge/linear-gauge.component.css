@@ -1,0 +1,6 @@
+.linear-gauge {
+  cursor: pointer; }
+  .linear-gauge .background-bar path {
+    fill: rgba(0, 0, 0, 0.05); }
+  .linear-gauge .units {
+    fill: #666; }

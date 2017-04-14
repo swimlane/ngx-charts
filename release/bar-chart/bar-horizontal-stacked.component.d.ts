@@ -10,6 +10,7 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent {
     showYAxisLabel: any;
     xAxisLabel: any;
     yAxisLabel: any;
+    tooltipDisabled: boolean;
     gradient: boolean;
     showGridLines: boolean;
     activeEntries: any[];
@@ -39,7 +40,7 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent {
     getYScale(): any;
     getXScale(): any;
     groupTransform(group: any): string;
-    onClick(data: any, group: any): void;
+    onClick(data: any, group?: any): void;
     trackBy(index: any, item: any): string;
     setColors(): void;
     getLegendOptions(): {
@@ -53,6 +54,6 @@ export declare class BarHorizontalStackedComponent extends BaseChartComponent {
     updateXAxisHeight({height}: {
         height: any;
     }): void;
-    onActivate(event: any, group: any): void;
-    onDeactivate(event: any, group: any): void;
+    onActivate(event: any, group?: any): void;
+    onDeactivate(event: any, group?: any): void;
 }

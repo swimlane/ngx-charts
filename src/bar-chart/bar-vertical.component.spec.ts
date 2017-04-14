@@ -1,11 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import d3 from '../d3';
-import '../../config/testing-utils';
+import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { single } from '../../demo/data';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { BarChartModule } from './bar-chart.module';
+import { BarComponent } from './bar.component'; 
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
@@ -25,7 +27,7 @@ describe('<ngx-charts-bar-vertical>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [BarChartModule],
+      imports: [NoopAnimationsModule, BarChartModule],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'}
       ]
@@ -34,7 +36,7 @@ describe('<ngx-charts-bar-vertical>', () => {
 
   describe('basic setup', () => {
 
-    beforeEach(() => {
+    beforeEach(async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -45,52 +47,40 @@ describe('<ngx-charts-bar-vertical>', () => {
               </ngx-charts-bar-vertical>`
         }
       });
-    });
+    }));
 
-    it('should set the svg width and height', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should set the svg width and height', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
+      const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.attr('width')).toEqual('400');
-        expect(svg.attr('height')).toEqual('800');
-        done();
-      });
-    });
+      expect(svg.getAttribute('width')).toBe('400');
+      expect(svg.getAttribute('height')).toBe('800');
+    }));
 
-    it('should render 12 cell elements', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render 12 cell elements', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
+      const compiled = fixture.debugElement.nativeElement;
 
-        expect(compiled.querySelectorAll('path.bar').length).toEqual(6);
-        done();
-      });
-    });
+      expect(compiled.querySelectorAll('path.bar').length).toEqual(6);
+    }));
 
-    it('should render correct cell size', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render correct cell size', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const bars = compiled.querySelectorAll('[ngx-charts-bar]');
-        const bar = d3.select(bars[0]);
+      const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.attr('ng-reflect-width')).toEqual('53'); // ~(360 - 5 * barPadding) / 6 
-        done();
-      });
-    });
+      expect(bar.componentInstance.width).toEqual(53); // ~(360 - 5 * barPadding) / 6 
+    }));
   });
 
   describe('padding', () => {
 
-    it('should render correct cell size, with zero padding', (done) => {
+    it('should render correct cell size, with zero padding', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -107,16 +97,13 @@ describe('<ngx-charts-bar-vertical>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const bars = compiled.querySelectorAll('[ngx-charts-bar]');
-        const bar = d3.select(bars[0]);
+        const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.attr('ng-reflect-width')).toEqual('60'); // ~(360 - 5 * barPadding) / 6 
-        done();
+        expect(bar.componentInstance.width).toEqual(60); // ~(360 - 5 * barPadding) / 6
       });
-    });
+    }));
 
-    it('should render correct cell size, with padding', (done) => {
+    it('should render correct cell size, with padding', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -133,13 +120,10 @@ describe('<ngx-charts-bar-vertical>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const bars = compiled.querySelectorAll('[ngx-charts-bar]');
-        const bar = d3.select(bars[0]);
+        const bar = fixture.debugElement.query(By.directive(BarComponent));
 
-        expect(bar.attr('ng-reflect-width')).toEqual('43'); // ~(360 - 5 * barPadding) / 6 
-        done();
+        expect(bar.componentInstance.width).toEqual(43); // ~(360 - 5 * barPadding) / 6
       });
-    });
+    }));
   });
 });

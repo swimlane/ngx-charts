@@ -1,4 +1,3 @@
-"use strict";
 /**
  * Formats a label given a date, number or string.
  *
@@ -6,7 +5,13 @@
  * @param {*} label
  * @returns {string}
  */
-function formatLabel(label) {
+/**
+ * Formats a label given a date, number or string.
+ *
+ * @export
+ * @param {*} label
+ * @returns {string}
+ */ export function formatLabel(label) {
     if (label instanceof Date) {
         label = label.toLocaleDateString();
     }
@@ -15,5 +20,4 @@ function formatLabel(label) {
     }
     return label;
 }
-exports.formatLabel = formatLabel;
 //# sourceMappingURL=label.helper.js.map

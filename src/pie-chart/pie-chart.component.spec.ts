@@ -1,7 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { Component } from '@angular/core';
-import d3 from '../d3';
-import '../../config/testing-utils';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { arc } from 'd3-shape';
+
 import { single } from '../../demo/data';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -23,7 +24,7 @@ describe('<ngx-charts-pie>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [PieChartModule],
+      imports: [NoopAnimationsModule, PieChartModule],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'}
       ]
@@ -32,7 +33,7 @@ describe('<ngx-charts-pie>', () => {
 
   describe('basic setup', () => {
 
-    beforeEach(() => {
+    beforeEach(async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -43,57 +44,46 @@ describe('<ngx-charts-pie>', () => {
                 [doughnut]="false">
             </ngx-charts-pie-chart>`
         }
-      });
-    });
+      }).compileComponents();
+    }));
 
-    it('should set the svg width and height', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should set the svg width and height', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
+      const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        expect(svg.attr('width')).toEqual('400');
-        expect(svg.attr('height')).toEqual('800');
-        done();
-      });
-    });
+      expect(svg.getAttribute('width')).toBe('400');
+      expect(svg.getAttribute('height')).toBe('800');
+    }));
 
-    it('should render 6 arc elements', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render 6 arc elements', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
+      const compiled = fixture.debugElement.nativeElement;
 
-        expect(compiled.querySelectorAll('path.arc').length).toEqual(6);
-        done();
-      });
-    });
+      expect(compiled.querySelectorAll('path.arc').length).toEqual(6);
+    }));
 
-    it('should render an arc', (done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should render an arc', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const arcs = compiled.querySelectorAll('path.arc');
+      const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
 
-        const arc = d3.arc()
-          .innerRadius(0)
-          .outerRadius(440 / 3)
-          .startAngle(0)
-          .endAngle(1.0996941056424656);
+      const testArc: any = arc()
+        .innerRadius(0)
+        .outerRadius(180)
+        .startAngle(0)
+        .endAngle(1.0996941056424656);
 
-        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
-        done();
-      });
-    });
+      expect(arcElement.getAttribute('d')).toEqual(testArc());
+    }));
   });
 
   describe('doughnut', () => {
-    it('should render an arc, default width', (done) => {
+    it('should render an arc, default width', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -110,22 +100,20 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const arcs = compiled.querySelectorAll('path.arc');
-        const outerRadius = 440 / 3;
+        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
+        const outerRadius = 180;
 
-        const arc = d3.arc()
+        const testArc: any = arc()
           .innerRadius(outerRadius * 3 / 4) // default arc is 1/4 outerwidth
           .outerRadius(outerRadius)
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
-        done();
+        expect(arcElement.getAttribute('d')).toEqual(testArc());
       });
-    });
+    }));
 
-    it('should render an arc, set width', (done) => {
+    it('should render an arc, set width', async(() => {
       TestBed.overrideComponent(TestComponent, {
         set: {
           template: `
@@ -143,19 +131,17 @@ describe('<ngx-charts-pie>', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
-        const arcs = compiled.querySelectorAll('path.arc');
-        const outerRadius = 440 / 3;
+        const arcElement = fixture.debugElement.nativeElement.querySelector('path.arc');
+        const outerRadius = 180;
 
-        const arc = d3.arc()
+        const testArc: any = arc()
           .innerRadius(outerRadius * 0.90) // default arc is 1/4 outerwidth
           .outerRadius(outerRadius)
           .startAngle(0)
           .endAngle(1.0996941056424656);
 
-        expect(d3.select(arcs[0]).attr('d')).toEqual(arc());
-        done();
+        expect(arcElement.getAttribute('d')).toEqual(testArc());
       });
-    });
+    }));
   });
 });

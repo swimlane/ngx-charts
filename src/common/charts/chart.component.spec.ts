@@ -3,8 +3,7 @@ import {
   async
 } from '@angular/core/testing';
 import { Component  } from '@angular/core';
-import d3 from '../../d3';
-import '../../../config/testing-utils';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ChartCommonModule } from '../chart-common.module';
 
@@ -21,14 +20,14 @@ describe('<ngx-charts-chart>', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [ChartCommonModule]
+      imports: [NoopAnimationsModule, ChartCommonModule]
     });
 
   });
 
   describe('basic setup', () => {
 
-    beforeEach(() => {
+    beforeEach(async(() => {
       // set up a  basic chart
       TestBed.overrideComponent(TestComponent, {
         set: {
@@ -40,35 +39,26 @@ describe('<ngx-charts-chart>', () => {
                     </ngx-charts-chart>
                 `
         }
-      });
-    });
-
-    it('should set the svg width and height', async(() => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
-
-        const compiled = fixture.debugElement.nativeElement;
-
-        const svg = compiled.querySelectorAll('svg')[0];
-        expect(d3.select(svg).attr('width')).toEqual('400');
-        expect(d3.select(svg).attr('height')).toEqual('800');
-      });
+      }).compileComponents();
     }));
 
-    it('should correctly project the inner content', async((done) => {
-      TestBed.compileComponents().then(() => {
-        const fixture = TestBed.createComponent(TestComponent);
-        fixture.detectChanges();
+    it('should set the svg width and height', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-        const compiled = fixture.debugElement.nativeElement;
+      const svg = fixture.debugElement.nativeElement.querySelector('svg');
 
-        const svg = d3.select(compiled.querySelectorAll('svg')[0]);
+      expect(svg.getAttribute('width')).toBe('400');
+      expect(svg.getAttribute('height')).toBe('800');
+    }));
 
-        const textNode = svg.select('p');
-        expect(textNode.text()).toEqual('ngx-charts is cool!');
+    it('should correctly project the inner content', async(() => {
+      const fixture = TestBed.createComponent(TestComponent);
+      fixture.detectChanges();
 
-      });
+      const textNode = fixture.debugElement.nativeElement.querySelector('svg p');
+
+      expect(textNode.textContent).toEqual('ngx-charts is cool!');
     }));
 
   });

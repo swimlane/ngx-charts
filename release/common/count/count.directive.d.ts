@@ -21,7 +21,7 @@ export declare class CountUpDirective implements OnDestroy {
     countChange: EventEmitter<{}>;
     countFinish: EventEmitter<{}>;
     nativeElement: any;
-    private value;
+    value: any;
     private animationReq;
     private _countDecimals;
     private _countTo;

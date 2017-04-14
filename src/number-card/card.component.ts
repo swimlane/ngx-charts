@@ -1,10 +1,10 @@
 import {
   Component, Input, Output, EventEmitter, ElementRef,
   SimpleChanges, OnChanges, ViewChild, ChangeDetectionStrategy,
-  ChangeDetectorRef, NgZone, OnDestroy
+  ChangeDetectorRef, NgZone, OnDestroy, ViewEncapsulation
 } from '@angular/core';
 import { trimLabel } from '../common/trim-label.helper';
-import { invertColor } from '../utils/color-utils';
+import { roundedRect } from '../common/shape.helper';
 import { count, decimalChecker } from '../common/count';
 
 @Component({
@@ -17,42 +17,42 @@ import { count, decimalChecker } from '../common/count';
       <svg:rect
         class="card"
         [style.fill]="color"
-        style="cursor: pointer;"
         [attr.width]="cardWidth"
         [attr.height]="cardHeight"
         rx="3"
         ry="3"
       />
+      <svg:path
+        *ngIf="bandColor && bandColor !== color"
+        class="card-band"
+        [attr.fill]="bandColor"
+        [attr.transform]="transformBand"
+        stroke="none"
+        [attr.d]="bandPath"
+      />
       <title>{{label}}</title>
       <svg:foreignObject
+        class="trimmed-label"
         x="5"
-        [attr.y]="height * 0.7"
+        [attr.x]="textPadding[3]"
+        [attr.y]="textPadding[0] + textFontSize + labelFontSize"
         [attr.width]="textWidth"
-        [attr.height]="height * 0.3"
-        style="font-size: 12px;
-               pointer-events: none;
-               text-transform: uppercase;
-               overflow: hidden;
-               text-align: center;
-               line-height: 1em;">
+        [attr.height]="labelFontSize + textPadding[2]"
+        alignment-baseline="hanging">
         <xhtml:p
-          [style.color]="getTextColor(color)"
-          style="overflow: hidden;
-                 white-space: nowrap;
-                 text-overflow: ellipsis;
-                 width: 100%;">
+          [style.color]="textColor"
+          [style.fontSize.px]="labelFontSize">
           {{trimmedLabel}}
         </xhtml:p>
       </svg:foreignObject>
       <svg:text #textEl
-        [attr.x]="cardWidth / 2"
-        [attr.y]="height * 0.30"
-        dy=".35em"
         class="value-text"
-        [style.fill]="getTextColor(color)"
-        text-anchor="middle"
-        [style.font-size.pt]="textFontSize"
-        style="pointer-events: none;">
+        [attr.x]="textPadding[3]"
+        [attr.y]="textPadding[0]"
+        [style.fill]="textColor"
+        text-anchor="start"
+        alignment-baseline="hanging"
+        [style.font-size.pt]="textFontSize">
         {{value}}
       </svg:text>
     </svg:g>
@@ -62,12 +62,16 @@ import { count, decimalChecker } from '../common/count';
 export class CardComponent implements OnChanges, OnDestroy {
 
   @Input() color;
+  @Input() bandColor;
+  @Input() textColor;
+
   @Input() x;
   @Input() y;
   @Input() width;
   @Input() height;
   @Input() label;
   @Input() data;
+  @Input() medianSize: number;
 
   @Output() select = new EventEmitter();
 
@@ -90,6 +94,13 @@ export class CardComponent implements OnChanges, OnDestroy {
   initialized: boolean = false;
   animationReq: any;
 
+  bandHeight: number = 10;
+  transformBand: string;
+  textPadding = [10, 20, 10, 20];
+  labelFontSize = 12;
+
+  bandPath: string;
+
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
   }
@@ -103,24 +114,35 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   update(): void {
-    this.zone.run(() => {
-      this.transform = `translate(${this.x} , ${this.y})`;
+    const hasValue = this.data && typeof this.data.value !== 'undefined';
 
-      this.textWidth = Math.max(0, this.width - 15);
-      this.cardWidth = Math.max(0, this.width - 5);
-      this.cardHeight = Math.max(0, this.height - 5);
+    this.transform = `translate(${this.x} , ${this.y})`;
 
-      this.label = this.data.name;
-      this.trimmedLabel = trimLabel(this.label, 55);
-      this.value = this.data.value.toLocaleString();
+    this.textWidth = Math.max(0, this.width) - this.textPadding[1] - this.textPadding[3];
+    this.cardWidth = Math.max(0, this.width);
+    this.cardHeight = Math.max(0, this.height);
 
-      setTimeout(() => this.scaleText());
+    this.label = this.data ? this.data.name : '';
+    this.trimmedLabel = trimLabel(this.label, 55);
+    this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
+
+    const value = this.value = hasValue ? this.data.value.toLocaleString() : '';
+
+    if (this.medianSize && this.medianSize > value.length) {
+      this.value = this.value + '\u2007'.repeat(this.medianSize - value.length);
+    }
+
+    const textHeight = this.textFontSize + 2 * this.labelFontSize;
+    this.textPadding[0] = this.textPadding[2] = (this.cardHeight - textHeight - this.bandHeight) / 2 ;
+
+    this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
+
+    setTimeout(() => {
+      this.scaleText();
+      this.value = value;
+
       setTimeout(() => this.startCount(), 20);
-    });
-  }
-
-  getTextColor(color): string {
-    return invertColor(color);
+    }, 0);
   }
 
   startCount(): void {
@@ -131,10 +153,11 @@ export class CardComponent implements OnChanges, OnDestroy {
       const decs = decimalChecker(val);
 
       const callback = ({ value }) => {
-        this.zone.run(() => {
-          this.value = value.toLocaleString();
-          this.cd.markForCheck();
-        });
+        this.value = value.toLocaleString();
+        if (this.medianSize && this.medianSize > value.length) {
+          this.value = this.value + '\u2007'.repeat(this.medianSize - value.length);
+        }
+        this.cd.markForCheck();
       };
 
       this.animationReq = count(0, val, decs, 1, callback);
@@ -143,33 +166,38 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   scaleText(): void {
-    this.zone.run(() => {
-      const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
-      if (width === 0 || height === 0) {
-        return;
-      }
+    const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+    if (width === 0 || height === 0) {
+      return;
+    }
 
-      const availableWidth = this.cardWidth * 0.85;
-      const availableHeight = this.cardHeight * 0.60;
+    this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
 
-      if (!this.originalWidthRatio) {
-        this.originalWidthRatio = availableWidth / width;
-        this.originalWidth = availableWidth;
-      }
+    const availableWidth = this.cardWidth - this.textPadding[1] - this.textPadding[3];
+    const availableHeight = this.cardHeight / 3;
 
-      if (!this.originalHeightRatio) {
-        this.originalHeightRatio = availableHeight / height;
-        this.originalHeight = availableHeight;
-      }
+    if (!this.originalWidthRatio) {
+      this.originalWidthRatio = availableWidth / width;
+      this.originalWidth = availableWidth;
+    }
 
-      const newWidthRatio = (availableWidth / this.originalWidth) * this.originalWidthRatio;
-      const newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
+    if (!this.originalHeightRatio) {
+      this.originalHeightRatio = availableHeight / height;
+      this.originalHeight = availableHeight;
+    }
 
-      this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
+    const newWidthRatio = (availableWidth / this.originalWidth) * this.originalWidthRatio;
+    const newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
 
-      this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
-      this.cd.markForCheck();
-    });
+    this.resizeScale = Math.min(newWidthRatio, newHeightRatio);
+
+    this.textFontSize = Number.parseInt((35 * this.resizeScale).toString());
+    this.labelFontSize = Math.min(this.textFontSize, 12);
+
+    const textHeight = this.textFontSize + 2 * this.labelFontSize;
+    this.textPadding[0] = this.textPadding[2] = (this.cardHeight - textHeight - this.bandHeight) / 2 ;
+
+    this.cd.markForCheck();
   }
 
   onClick(): void {
@@ -178,5 +206,4 @@ export class CardComponent implements OnChanges, OnDestroy {
       value: this.data.value
     });
   }
-
 }

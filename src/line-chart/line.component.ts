@@ -4,12 +4,15 @@ import {
   Output,
   EventEmitter,
   ElementRef,
-  trigger,
-  style,
-  transition,
-  animate,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'g[ngx-charts-line]',

@@ -1,15 +1,16 @@
-"use strict";
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var label_helper_1 = require('../common/label.helper');
-var id_1 = require('../utils/id');
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, } from '@angular/core';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { formatLabel } from '../common/label.helper';
+import { id } from '../utils/id';
 var CircleSeriesComponent = (function () {
     function CircleSeriesComponent(location) {
         this.location = location;
         this.type = 'standard';
-        this.select = new core_1.EventEmitter();
-        this.activate = new core_1.EventEmitter();
-        this.deactivate = new core_1.EventEmitter();
+        this.tooltipDisabled = false;
+        this.select = new EventEmitter();
+        this.activate = new EventEmitter();
+        this.deactivate = new EventEmitter();
     }
     CircleSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -20,11 +21,13 @@ var CircleSeriesComponent = (function () {
     CircleSeriesComponent.prototype.getCircles = function () {
         var _this = this;
         var seriesName = this.data.name;
-        var pageUrl = this.location.path();
+        var pageUrl = this.location instanceof PathLocationStrategy
+            ? this.location.path()
+            : '';
         return this.data.series.map(function (d, i) {
             var value = d.value;
             var label = d.name;
-            var tooltipLabel = label_helper_1.formatLabel(label);
+            var tooltipLabel = formatLabel(label);
             if (value) {
                 var cx = void 0;
                 if (_this.scaleType === 'time') {
@@ -43,7 +46,7 @@ var CircleSeriesComponent = (function () {
                 if (label && _this.visibleValue && label.toString() === _this.visibleValue.toString()) {
                     opacity = 1;
                 }
-                var gradientId = 'grad' + id_1.id().toString();
+                var gradientId = 'grad' + id().toString();
                 var gradientFill = "url(" + pageUrl + "#" + gradientId + ")";
                 var color = void 0;
                 if (_this.colors.scaleType === 'linear') {
@@ -58,7 +61,7 @@ var CircleSeriesComponent = (function () {
                     color = _this.colors.getColor(seriesName);
                 }
                 return {
-                    classNames: [("circle-data-" + i)],
+                    classNames: ["circle-data-" + i],
                     value: value,
                     label: label,
                     cx: cx,
@@ -119,7 +122,8 @@ var CircleSeriesComponent = (function () {
                 offset: 100,
                 color: color,
                 opacity: 1
-            }];
+            }
+        ];
     };
     CircleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({
@@ -149,41 +153,42 @@ var CircleSeriesComponent = (function () {
         circle.barVisible = false;
         this.deactivate.emit({ name: this.data.name });
     };
-    CircleSeriesComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'g[ngx-charts-circle-series]',
-                    template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
-                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    animations: [
-                        core_1.trigger('animationState', [
-                            core_1.transition('void => *', [
-                                core_1.style({
-                                    opacity: 0,
-                                }),
-                                core_1.animate(250, core_1.style({ opacity: 1 }))
-                            ])
-                        ])
-                    ]
-                },] },
-    ];
-    /** @nocollapse */
-    CircleSeriesComponent.ctorParameters = function () { return [
-        { type: common_1.Location, },
-    ]; };
-    CircleSeriesComponent.propDecorators = {
-        'data': [{ type: core_1.Input },],
-        'type': [{ type: core_1.Input },],
-        'xScale': [{ type: core_1.Input },],
-        'yScale': [{ type: core_1.Input },],
-        'colors': [{ type: core_1.Input },],
-        'scaleType': [{ type: core_1.Input },],
-        'visibleValue': [{ type: core_1.Input },],
-        'activeEntries': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-        'activate': [{ type: core_1.Output },],
-        'deactivate': [{ type: core_1.Output },],
-    };
     return CircleSeriesComponent;
 }());
-exports.CircleSeriesComponent = CircleSeriesComponent;
+export { CircleSeriesComponent };
+CircleSeriesComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'g[ngx-charts-circle-series]',
+                template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient\n          [color]=\"color\"\n          orientation=\"vertical\"\n          [name]=\"circle.gradientId\"\n          [stops]=\"circle.gradientStops\"\n        />\n      </defs>\n      <svg:rect\n        *ngIf=\"circle.barVisible && type === 'standard'\"\n        [@animationState]=\"'active'\"\n        [attr.x]=\"circle.cx - circle.radius\"\n        [attr.y]=\"circle.cy\"\n        [attr.width]=\"circle.radius * 2\"\n        [attr.height]=\"circle.height\"\n        [attr.fill]=\"circle.gradientFill\"\n        class=\"tooltip-bar\"\n      />\n      <svg:g ngx-charts-circle\n        *ngIf=\"isVisible(circle)\"\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [class.active]=\"isActive({name: circle.seriesName})\"\n        [pointerEvents]=\"circle.value === 0 ? 'none': 'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                animations: [
+                    trigger('animationState', [
+                        transition('void => *', [
+                            style({
+                                opacity: 0,
+                            }),
+                            animate(250, style({ opacity: 1 }))
+                        ])
+                    ])
+                ]
+            },] },
+];
+/** @nocollapse */
+CircleSeriesComponent.ctorParameters = function () { return [
+    { type: LocationStrategy, },
+]; };
+CircleSeriesComponent.propDecorators = {
+    'data': [{ type: Input },],
+    'type': [{ type: Input },],
+    'xScale': [{ type: Input },],
+    'yScale': [{ type: Input },],
+    'colors': [{ type: Input },],
+    'scaleType': [{ type: Input },],
+    'visibleValue': [{ type: Input },],
+    'activeEntries': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'select': [{ type: Output },],
+    'activate': [{ type: Output },],
+    'deactivate': [{ type: Output },],
+};
 //# sourceMappingURL=circle-series.component.js.map
