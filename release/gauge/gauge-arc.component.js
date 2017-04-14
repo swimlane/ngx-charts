@@ -10,7 +10,13 @@ var GaugeArcComponent = (function () {
     }
     GaugeArcComponent.prototype.tooltipText = function (arc) {
         var label = formatLabel(arc.data.name);
-        var val = formatLabel(arc.data.value);
+        var val;
+        if (this.valueFormatting) {
+            val = this.valueFormatting(arc.data.value);
+        }
+        else {
+            val = formatLabel(arc.data.value);
+        }
         return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
     };
     return GaugeArcComponent;
@@ -32,6 +38,7 @@ GaugeArcComponent.propDecorators = {
     'colors': [{ type: Input },],
     'isActive': [{ type: Input },],
     'tooltipDisabled': [{ type: Input },],
+    'valueFormatting': [{ type: Input },],
     'select': [{ type: Output },],
     'activate': [{ type: Output },],
     'deactivate': [{ type: Output },],

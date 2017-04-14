@@ -24,6 +24,9 @@ var VisibilityObserver = (function () {
     VisibilityObserver.prototype.runCheck = function () {
         var _this = this;
         var check = function () {
+            if (!_this.element) {
+                return;
+            }
             // https://davidwalsh.name/offsetheight-visibility
             var _a = _this.element.nativeElement, offsetHeight = _a.offsetHeight, offsetWidth = _a.offsetWidth;
             if (offsetHeight && offsetWidth) {
