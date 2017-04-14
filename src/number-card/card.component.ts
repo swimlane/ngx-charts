@@ -140,9 +140,7 @@ export class CardComponent implements OnChanges, OnDestroy {
 
     this.value = this.paddedValue(value);
 
-    const textHeight = this.textFontSize + 2 * this.labelFontSize;
-    this.textPadding[0] = this.textPadding[2] = (this.cardHeight - textHeight - this.bandHeight) / 2 ;
-
+    this.setPadding();
     this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
 
     setTimeout(() => {
@@ -213,11 +211,14 @@ export class CardComponent implements OnChanges, OnDestroy {
     this.textFontSize = Number.parseInt((35 * resizeScale).toString());
     this.labelFontSize = Math.min(this.textFontSize, 12);
 
+    this.setPadding();
+    this.cd.markForCheck();
+  }
+
+  setPadding() {
     const padding = this.cardHeight / 2;
     this.textPadding[0] = padding - this.textFontSize - this.labelFontSize / 2;
     this.textPadding[2] = padding - this.labelFontSize;
-
-    this.cd.markForCheck();
   }
 
   onClick(): void {

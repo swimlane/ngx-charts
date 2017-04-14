@@ -21,9 +21,7 @@ function multiFormat(value) {
   value /= 60;
   if (value < 60) return `${twoDigits(value)}mins`;
   value /= 60;
-  if (value < 24) return `${twoDigits(value)}hrs`;
-  value /= 24;
-  return `${twoDigits(value)}days`;
+  return `${twoDigits(value)}hrs`;
 }
 
 @Component({
@@ -273,27 +271,6 @@ export class AppComponent implements OnInit {
     this.view = [this.width, this.height];
   }
 
-  getStatusData() {
-    return [
-      {
-        name: 'Count',
-        value: Math.round(10000 * Math.random())
-      },
-      {
-        name: 'Time',
-        value: 10 * 60 * 60 * 1000 * Math.random()
-      },
-      {
-        name: 'Cost',
-        value: Math.round(4000000 * Math.random()) / 100
-      },
-      {
-        name: 'Percent',
-        value: Math.random()
-      }
-    ];
-  }
-
   toggleFitContainer(event) {
     this.fitContainer = event;
 
@@ -463,29 +440,45 @@ export class AppComponent implements OnInit {
     return `\$${c.value.toLocaleString()}`;
   }
 
+  getStatusData() {
+    const sess = 10000 * Math.random();
+    const dur = 360000 * Math.random();
+    const rate = Math.random() / 10;
+    const value = 10000000 * sess * rate / dur;
+    return [
+      {
+        name: 'Sessions',
+        value: sess
+      },
+      {
+        name: 'Avg. Session',
+        value: dur
+      },
+      {
+        name: 'Sales Rate',
+        value: rate
+      },
+      {
+        name: 'Value',
+        value
+      }
+    ];
+  }
+
   statusValueFormat(c): string {
     switch(c.label) {
-      case 'Cost':
-        return `\$${c.value.toLocaleString()}`;
-      case 'Time':
+      case 'Value':
+        return `\$${Math.round(c.value).toLocaleString()}`;
+      case 'Avg. Session':
         return multiFormat(c.value);
-      case 'Percent':
-        return `${Math.floor(c.value * 100)}%`;
+      case 'Sales Rate':
+        return `${Math.floor(c.value * 1000) / 10}%`;
       default:
         return c.value.toLocaleString();
     }
   }
 
   statusLabelFormat(c): string {
-    switch(c.label) {
-      case 'Cost':
-        return 'Cost<br/><small style="color: #a8b2c7">This week</small>';
-      case 'Time':
-        return 'Time<br/><small style="color: #a8b2c7">This week</small>';
-      case 'Percent':
-        return 'Percent<br/><small style="color: #a8b2c7">This week</small>';
-      default:
-        return 'Count<br/><small style="color: #a8b2c7">This week</small>';
-    }
+    return `${c.label}<br/><small class="number-card-label">This week</small>`;
   }
 }
