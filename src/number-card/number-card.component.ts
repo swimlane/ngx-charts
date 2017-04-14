@@ -26,6 +26,7 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
           [dims]="dims"
           [innerPadding]="innerPadding"
           [valueFormatting]="valueFormatting"
+          [labelFormatting]="labelFormatting"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -45,6 +46,7 @@ export class NumberCardComponent extends BaseChartComponent {
   @Input() innerPadding = 15;
   @Input() textColor: string;
   @Input() valueFormatting: any;
+  @Input() labelFormatting: any;
 
   dims: ViewDimensions;
   data: any[];

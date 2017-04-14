@@ -476,4 +476,16 @@ export class AppComponent implements OnInit {
     }
   }
 
+  statusLabelFormat(c): string {
+    switch(c.label) {
+      case 'Cost':
+        return 'Cost<br/><small style="color: #a8b2c7">This week</small>';
+      case 'Time':
+        return 'Time<br/><small style="color: #a8b2c7">This week</small>';
+      case 'Percent':
+        return 'Percent<br/><small style="color: #a8b2c7">This week</small>';
+      default:
+        return 'Count<br/><small style="color: #a8b2c7">This week</small>';
+    }
+  }
 }
