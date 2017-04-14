@@ -168,7 +168,8 @@ export class CardComponent implements OnChanges, OnDestroy {
       const decs = decimalChecker(val);
 
       const callback = ({value, finished}) => {
-        const v = this.valueFormatting({label: this.label, data: this.data, finished ? val : value});
+        value = finished ? val : value;
+        const v = this.valueFormatting({label: this.label, data: this.data, value});
         this.value = this.paddedValue(v);
         this.cd.markForCheck();
       };
