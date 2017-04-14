@@ -167,8 +167,8 @@ export class CardComponent implements OnChanges, OnDestroy {
       const val = this.data.value;
       const decs = decimalChecker(val);
 
-      const callback = ({value}) => {
-        const v = this.valueFormatting({label: this.label, data: this.data, value});
+      const callback = ({value, finished}) => {
+        const v = this.valueFormatting({label: this.label, data: this.data, finished ? val : value});
         this.value = this.paddedValue(v);
         this.cd.markForCheck();
       };
@@ -203,10 +203,6 @@ export class CardComponent implements OnChanges, OnDestroy {
     const newHeightRatio = (availableHeight / this.originalHeight) * this.originalHeightRatio;
 
     const resizeScale = Math.min(newWidthRatio, newHeightRatio);
-
-    if (resizeScale > 1) {
-      return;
-    }
 
     this.textFontSize = Number.parseInt((35 * resizeScale).toString());
     this.labelFontSize = Math.min(this.textFontSize, 12);

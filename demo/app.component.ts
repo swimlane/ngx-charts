@@ -10,18 +10,14 @@ import chartGroups from './chartTypes';
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
 
-function twoDigits(value) {
-  return Math.round(value * 10) / 10;
-}
-
 function multiFormat(value) {
-  if (value < 1000) return `${twoDigits(value)}ms`;
+  if (value < 1000) return `${value.toFixed(2)}ms`;
   value /= 1000;
-  if (value < 60) return `${twoDigits(value)}s`;
+  if (value < 60) return `${value.toFixed(2)}s`;
   value /= 60;
-  if (value < 60) return `${twoDigits(value)}mins`;
+  if (value < 60) return `${value.toFixed(2)}mins`;
   value /= 60;
-  return `${twoDigits(value)}hrs`;
+  return `${value.toFixed(2)}hrs`;
 }
 
 @Component({
@@ -441,7 +437,7 @@ export class AppComponent implements OnInit {
   }
 
   getStatusData() {
-    const sess = 10000 * Math.random();
+    const sess = Math.round(10000 * Math.random());
     const dur = 360000 * Math.random();
     const rate = Math.random() / 10;
     const value = 10000000 * sess * rate / dur;
@@ -472,7 +468,7 @@ export class AppComponent implements OnInit {
       case 'Avg. Session':
         return multiFormat(c.value);
       case 'Sales Rate':
-        return `${Math.floor(c.value * 1000) / 10}%`;
+        return `${(c.value * 100).toFixed(2)}%`;
       default:
         return c.value.toLocaleString();
     }
