@@ -35,6 +35,7 @@ import { ColorHelper } from '../common/color.helper';
             [colors]="colors"
             [isActive]="isActive(arc.valueArc.data)"
             [tooltipDisabled]="tooltipDisabled"
+            [valueFormatting]="valueFormatting"
             (select)="onClick($event)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)">
@@ -88,7 +89,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
-  @Input() valueFormatting: any;
+  @Input() valueFormatting: (value) => string;
 
   // Specify margins
   @Input() margin: any[];
@@ -284,7 +285,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.select.emit(data);
   }
 
-  getLegendOptions() {
+  getLegendOptions(): any {
     return {
       scaleType: 'ordinal',
       colors: this.colors,
@@ -296,7 +297,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.colors = new ColorHelper(this.scheme, 'ordinal', this.domain, this.customColors);
   }
 
-  onActivate(item) {
+  onActivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });
@@ -308,7 +309,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(item) {
+  onDeactivate(item): void {
     const idx = this.activeEntries.findIndex(d => {
       return d.name === item.name && d.value === item.value;
     });

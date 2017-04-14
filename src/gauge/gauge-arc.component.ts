@@ -52,14 +52,21 @@ export class GaugeArcComponent {
   @Input() colors: ColorHelper;
   @Input() isActive: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() valueFormatting: (value) => string;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
 
-  tooltipText(arc) {
+  tooltipText(arc): string {
     const label = formatLabel(arc.data.name);
-    const val = formatLabel(arc.data.value);
+    let val;
+
+    if(this.valueFormatting) {
+      val = this.valueFormatting(arc.data.value);
+    } else {
+      val = formatLabel(arc.data.value);
+    }
 
     return `
       <span class="tooltip-label">${label}</span>
