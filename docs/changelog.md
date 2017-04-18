@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.0.1
+- Enhancement: `valueFormatting` applies to Gauge Arc Labels too
+
 ## 5.0.0
 - Breaking: Upgrade to angular 4
 
