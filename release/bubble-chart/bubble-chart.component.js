@@ -16,6 +16,7 @@ var BubbleChartComponent = (function (_super) {
         _this.view = [400, 400];
         _this.showGridLines = true;
         _this.legend = false;
+        _this.legendTitle = 'Legend';
         _this.xAxis = true;
         _this.yAxis = true;
         _this.roundDomains = false;
@@ -116,11 +117,13 @@ var BubbleChartComponent = (function (_super) {
             scaleType: this.schemeType,
             colors: undefined,
             domain: [],
-            position: this.legendPosition
+            position: this.legendPosition,
+            title: undefined
         };
         if (opts.scaleType === 'ordinal') {
             opts.domain = this.seriesDomain;
             opts.colors = this.colors;
+            opts.title = this.legendTitle;
         }
         else {
             opts.domain = this.rDomain;
@@ -222,6 +225,7 @@ BubbleChartComponent.propDecorators = {
     'results': [{ type: Input },],
     'showGridLines': [{ type: Input },],
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'xAxis': [{ type: Input },],
     'yAxis': [{ type: Input },],
     'showXAxisLabel': [{ type: Input },],
