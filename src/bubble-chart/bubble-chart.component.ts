@@ -13,6 +13,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
       [view]="[width, height]"
       [showLegend]="legend"
       [activeEntries]="activeEntries"
+      [legendTitle]="legendTitle"
       [legendOptions]="legendOptions"
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
@@ -79,6 +80,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() results;
   @Input() showGridLines: boolean = true;
   @Input() legend = false;
+  @Input() legendTitle: string = 'Legend';
   @Input() xAxis: boolean = true;
   @Input() yAxis: boolean = true;
   @Input() showXAxisLabel: boolean;
@@ -228,12 +230,14 @@ export class BubbleChartComponent extends BaseChartComponent {
       scaleType: this.schemeType,
       colors: undefined,
       domain: [],
-      position: this.legendPosition
+      position: this.legendPosition,
+      title: undefined
     };
 
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
+      opts.title = this.legendTitle;
     } else {
       opts.domain = this.rDomain;
       opts.colors = this.colors.scale;

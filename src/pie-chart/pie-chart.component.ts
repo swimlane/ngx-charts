@@ -18,6 +18,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
+      [legendTitle]="legendTitle"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)"
       (legendLabelClick)="onClick($event)">
@@ -52,6 +53,7 @@ export class PieChartComponent extends BaseChartComponent {
 
   @Input() labels = false;
   @Input() legend = false;
+  @Input() legendTitle: string = 'Legend';
   @Input() explodeSlices = false;
   @Input() doughnut = false;
   @Input() arcWidth = 0.25;
@@ -146,7 +148,8 @@ export class PieChartComponent extends BaseChartComponent {
     return {
       scaleType: 'ordinal',
       domain: this.domain,
-      colors: this.colors
+      colors: this.colors,
+      title: this.legendTitle
     };
   }
 
