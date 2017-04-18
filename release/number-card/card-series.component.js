@@ -13,6 +13,7 @@ var CardSeriesComponent = (function () {
     CardSeriesComponent.prototype.update = function () {
         var _this = this;
         if (this.data.length > 2) {
+            this.valueFormatting = this.valueFormatting || (function (card) { return card.data.value.toLocaleString(); });
             var sortedLengths = this.data
                 .map(function (d) {
                 var hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;

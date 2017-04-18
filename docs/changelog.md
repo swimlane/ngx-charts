@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.1.1
+- Bug: Add default value for label format  (#334)
+
 ## 5.1.0
 - Enhancement: Added valueFormatting input to number card chart (#325)
 - Enhancement: Added label formatting input to number card chart (#332)
