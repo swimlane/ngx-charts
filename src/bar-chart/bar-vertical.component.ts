@@ -44,6 +44,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g ngx-charts-series-vertical
+          [type]="type"
           [xScale]="xScale"
           [yScale]="yScale"
           [colors]="colors"
@@ -77,6 +78,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
+  @Input() type: string = 'standard';
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
