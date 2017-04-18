@@ -71,6 +71,7 @@ export class AppComponent implements OnInit {
   roundDomains = false;
   maxRadius = 10;
   minRadius = 3;
+  showSeriesOnHover = true;
 
   // line interpolation
   curveType: string = 'Linear';
