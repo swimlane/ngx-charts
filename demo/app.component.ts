@@ -1,15 +1,29 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
+import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
+import { formatLabel } from '../src/common/label.helper';
 import { single, multi, countries, bubble, generateData, generateGraph } from './data';
 import chartGroups from './chartTypes';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
 
+function multiFormat(value) {
+  if (value < 1000) return `${value.toFixed(2)}ms`;
+  value /= 1000;
+  if (value < 60) return `${value.toFixed(2)}s`;
+  value /= 60;
+  if (value < 60) return `${value.toFixed(2)}mins`;
+  value /= 60;
+  return `${value.toFixed(2)}hrs`;
+}
+
 @Component({
   selector: 'app',
+  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'
@@ -19,7 +33,7 @@ export class AppComponent implements OnInit {
   version = APP_VERSION;
 
   theme = 'dark';
-  chartType = 'bar-vertical';
+  chartType: string;
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;
@@ -29,6 +43,7 @@ export class AppComponent implements OnInit {
   dateData: any[];
   dateDataWithRange: any[];
   calendarData: any[];
+  statusData: any[];
   graph: { links: any[], nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -109,7 +124,7 @@ export class AppComponent implements OnInit {
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
 
-  constructor() {
+  constructor(public location: Location) {
     Object.assign(this, {
       single,
       multi,
@@ -124,6 +139,7 @@ export class AppComponent implements OnInit {
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
     this.calendarData = this.getCalendarData();
+    this.statusData = this.getStatusData();
   }
 
   get dateDataWithOrWithoutRange() {
@@ -132,11 +148,11 @@ export class AppComponent implements OnInit {
     } else {
       return this.dateData;
     }
-
   }
 
   ngOnInit() {
-    this.selectChart(this.chartType);
+    const state = this.location.path(true);
+    this.selectChart(state.length ? state : 'bar-vertical');
 
     setInterval(this.updateData.bind(this), 1000);
 
@@ -238,6 +254,8 @@ export class AppComponent implements OnInit {
       };
 
       this.bubble = [...this.bubble, bubbleEntry];
+
+      this.statusData = this.getStatusData();
     }
 
     this.dateData = generateData(5, false);
@@ -261,7 +279,8 @@ export class AppComponent implements OnInit {
   }
 
   selectChart(chartSelector) {
-    this.chartType = chartSelector;
+    this.chartType = chartSelector = chartSelector.replace('/', '');
+    this.location.replaceState(this.chartType);
 
     this.linearScale = this.chartType === 'line-chart' ||
       this.chartType === 'line-chart-with-ranges' ||
@@ -414,4 +433,59 @@ export class AppComponent implements OnInit {
     `;
   }
 
+  pieTooltipText({data}) {
+    const label = formatLabel(data.name);
+    const val = formatLabel(data.value);
+
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">$${val}</span>
+    `;
+  }
+
+  dollarValueFormat(c): string {
+    return `\$${c.value.toLocaleString()}`;
+  }
+
+  getStatusData() {
+    const sess = Math.round(10000 * Math.random());
+    const dur = 360000 * Math.random();
+    const rate = Math.random() / 10;
+    const value = 10000000 * sess * rate / dur;
+    return [
+      {
+        name: 'Sessions',
+        value: sess
+      },
+      {
+        name: 'Avg. Session',
+        value: dur
+      },
+      {
+        name: 'Sales Rate',
+        value: rate
+      },
+      {
+        name: 'Value',
+        value
+      }
+    ];
+  }
+
+  statusValueFormat(c): string {
+    switch(c.label) {
+      case 'Value':
+        return `\$${Math.round(c.value).toLocaleString()}`;
+      case 'Avg. Session':
+        return multiFormat(c.value);
+      case 'Sales Rate':
+        return `${(c.value * 100).toFixed(2)}%`;
+      default:
+        return c.value.toLocaleString();
+    }
+  }
+
+  statusLabelFormat(c): string {
+    return `${c.label}<br/><small class="number-card-label">This week</small>`;
+  }
 }

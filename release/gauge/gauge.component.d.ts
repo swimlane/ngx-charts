@@ -17,7 +17,7 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     activeEntries: any[];
     axisTickFormatting: any;
     tooltipDisabled: boolean;
-    valueFormatting: any;
+    valueFormatting: (value) => string;
     margin: any[];
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
@@ -46,11 +46,7 @@ export declare class GaugeComponent extends BaseChartComponent implements AfterV
     getDisplayValue(): string;
     scaleText(repeat?: boolean): void;
     onClick(data: any): void;
-    getLegendOptions(): {
-        scaleType: string;
-        colors: ColorHelper;
-        domain: any[];
-    };
+    getLegendOptions(): any;
     setColors(): void;
     onActivate(item: any): void;
     onDeactivate(item: any): void;

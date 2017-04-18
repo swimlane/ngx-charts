@@ -228,6 +228,12 @@ const chartGroups = [
           'colorScheme', 'showXAxis', 'showYAxis', 'gradient', 'showLegend',
           'innerPadding', 'tooltipDisabled'
         ]
+      },
+      {
+        name: 'Number Cards - Status',
+        selector: 'status-demo',
+        inputFormat: 'statusData',
+        options: ['colorScheme']
       }
     ]
   }

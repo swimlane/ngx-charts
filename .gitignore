@@ -9,3 +9,6 @@ coverage/
 yarn.lock
 /ngx-charts.iml
 ngx-charts.iml
+release/src/
+release/demo/
+.vscode/
