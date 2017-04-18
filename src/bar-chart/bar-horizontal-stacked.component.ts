@@ -201,7 +201,10 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   getYScale(): any {
-    const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
+    let spacing = parseInt(this.barPadding);
+    if (this.barPadding != (spacing + '%')) {
+      spacing = this.groupDomain.length / (this.dims.height / spacing + 1);
+    }
 
     return scaleBand()
       .rangeRound([this.dims.height, 0])

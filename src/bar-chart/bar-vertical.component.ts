@@ -127,7 +127,10 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   getXScale(): any {
     this.xDomain = this.getXDomain();
-    const spacing = this.xDomain.length / (this.dims.width / this.barPadding + 1);
+    let spacing = parseInt(this.barPadding);
+    if (this.barPadding != (spacing + '%')) {
+      spacing = this.xDomain.length / (this.dims.width / spacing + 1);
+    }
     return scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)

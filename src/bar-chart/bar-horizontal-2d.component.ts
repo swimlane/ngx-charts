@@ -166,7 +166,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getGroupScale(): any {
-    const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
+    let spacing = parseInt(this.groupPadding);
+    if (this.groupPadding != (spacing + '%')) {
+      spacing = this.groupDomain.length / (this.dims.height / spacing + 1);
+    }
 
     return scaleBand()
       .rangeRound([this.dims.height, 0])
@@ -177,7 +180,10 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
   getInnerScale(): any {
     const height = this.groupScale.bandwidth();
-    const spacing = this.innerDomain.length / (height / this.barPadding + 1);
+    let spacing = parseInt(this.barPadding);
+    if (this.barPadding != (spacing + '%')) {
+      spacing = this.innerDomain.length / (height / spacing + 1);
+    }
 
     return scaleBand()
       .rangeRound([0, height])
