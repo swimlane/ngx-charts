@@ -20,6 +20,7 @@
 | gradient        | boolean  | false         | fill elements with a gradient instead of a solid color                                                          |
 | activeEntries   | object[] | []            | elements to highlight                                                                                           |
 | tooltipDisabled | boolean  | false         | show or hide the tooltip                                                                                        |
+| tooltipText     | function |               | a function that formats the tooltip                                                                             |
 
 # Outputs
 

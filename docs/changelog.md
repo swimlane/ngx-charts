@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.1.0
+- Enhancement: Added valueFormatting input to number card chart (#325)
+- Enhancement: Added label formatting input to number card chart (#332)
+- Enhancement: Added tooltipText to pie charts (#331)
+- Enhancement: Added option in line-chart for disabling series on hover (#323)
+- Enhancement: Added an input for custom legend title (#317)
+- Bug: Fixed number card text scaling when values change (#330)
+- Bug: Inverted y-axis on horizontal bar charts (#328)
+- Bug: Fix division by zero in pie label component
+
 ## 5.0.1
 - Enhancement: `valueFormatting` applies to Gauge Arc Labels too
 
