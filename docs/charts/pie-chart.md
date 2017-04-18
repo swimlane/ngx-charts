@@ -14,6 +14,7 @@
 | labels          | boolean  | false         | show or hide the labels                                                                                         |
 | labelFormatting | function |               | function that formats the label text                                                                            |
 | legend          | boolean  | false         | show or hide the legend                                                                                         |
+| legendTitle     | string   | 'Legend'      | the legend title                                                                                                |
 | explodeSlices   | boolean  | false         | make the radius of each slice proportional to it's value                                                        |
 | doughnut        | boolean  | false         | should doughnut instead of pie slices                                                                           |
 | arcWidth        | number   | 0.25          | arc width, expressed as a fraction of outer radius                                                              |

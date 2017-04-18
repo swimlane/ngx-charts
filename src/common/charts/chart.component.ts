@@ -68,7 +68,6 @@ export class ChartComponent implements OnChanges {
   @Input() data;
   @Input() legendData;
   @Input() legendType: any;
-  @Input() legendTitle = 'Legend';
   @Input() colors: any;
   @Input() activeEntries: any[];
 

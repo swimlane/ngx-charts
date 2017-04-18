@@ -26,7 +26,6 @@ import { BaseChartComponent } from '../common/base-chart.component';
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="legend"
-      [legendTitle]="legendTitle"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
       (legendLabelActivate)="onActivate($event)"
