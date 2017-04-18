@@ -204,7 +204,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
 
     return scaleBand()
-      .rangeRound([this.dims.height, 0])
+      .rangeRound([0, this.dims.height])
       .paddingInner(spacing)
       .domain(this.groupDomain);
   }
