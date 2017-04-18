@@ -80,6 +80,8 @@ export class CardSeriesComponent implements OnChanges {
 
   update(): void {
     if (this.data.length > 2) {
+      this.valueFormatting = this.valueFormatting || (card => card.data.value.toLocaleString());
+
       const sortedLengths = this.data
         .map(d => {
           const hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;
