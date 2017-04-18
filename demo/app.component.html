@@ -194,6 +194,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
         (select)="select($event)">
       </ngx-charts-pie-chart>
       <ngx-charts-advanced-pie-chart
@@ -205,6 +206,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
         (select)="select($event)">
       </ngx-charts-advanced-pie-chart>
       <ngx-charts-pie-grid
@@ -215,6 +217,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [results]="single"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
         (select)="select($event)">
       </ngx-charts-pie-grid>
       <ngx-charts-line-chart

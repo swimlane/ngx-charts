@@ -4,6 +4,7 @@ import * as shape from 'd3-shape';
 import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
+import { formatLabel } from '../src/common/label.helper';
 import { single, multi, countries, bubble, generateData, generateGraph } from './data';
 import chartGroups from './chartTypes';
 
@@ -429,6 +430,16 @@ export class AppComponent implements OnInit {
     return `
       <span class="tooltip-label">${c.label} • ${c.cell.date.toLocaleDateString()}</span>
       <span class="tooltip-val">${c.data.toLocaleString()}</span>
+    `;
+  }
+
+  pieTooltipText({data}) {
+    const label = formatLabel(data.name);
+    const val = formatLabel(data.value);
+
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">$${val}</span>
     `;
   }
 

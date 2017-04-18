@@ -34,6 +34,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
               [outerRadius]="outerRadius"
               [gradient]="gradient"
               [tooltipDisabled]="tooltipDisabled"
+              [tooltipText]="tooltipText"
               (select)="onClick($event)">
             </svg:g>
           </svg:g>
@@ -66,6 +67,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipText: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
