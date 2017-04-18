@@ -44,7 +44,7 @@ import { reduceTicks } from './ticks.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XAxisTicksComponent implements OnChanges, AfterViewInit {
-  
+
   @Input() scale;
   @Input() orient;
   @Input() tickArguments = [5];
@@ -157,20 +157,13 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   getTicks() {
     let ticks;
-    const maxTicks = this.getMaxTicks();
+    const maxTicks = this.getMaxTicks(20);
+    const maxScaleTicks = this.getMaxTicks(100);
 
     if (this.tickValues) {
       ticks = this.tickValues;
     } else if (this.scale.ticks) {
-      ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-      if (ticks.length > maxTicks) {
-        if (this.tickArguments) {
-          this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-        } else {
-          this.tickArguments = [maxTicks];
-        }
-        ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-      }
+      ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
     } else {
       ticks = this.scale.domain();
       ticks = reduceTicks(ticks, maxTicks);
@@ -179,8 +172,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     return ticks;
   }
 
-  getMaxTicks(): number {
-    const tickWidth = 20;
+  getMaxTicks(tickWidth: number): number {
     return Math.floor(this.width / tickWidth);
   }
 

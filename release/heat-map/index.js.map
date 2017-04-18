@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/heat-map/index.ts"],"names":[],"mappings":";;;;AAAA,iBAAc,mBAAmB,CAAC,EAAA;AAClC,iBAAc,sBAAsB,CAAC,EAAA;AACrC,iBAAc,2BAA2B,CAAC,EAAA;AAC1C,iBAAc,kCAAkC,CAAC,EAAA"}
+{"version":3,"sources":["../../build/heat-map/index.ts"],"names":[],"mappings":"AAAA,cAAc,mBAAmB,CAAC;AAClC,cAAc,sBAAsB,CAAC;AACrC,cAAc,2BAA2B,CAAC;AAC1C,cAAc,kCAAkC,CAAC","file":"index.js","sourceRoot":""}

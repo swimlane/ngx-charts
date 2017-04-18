@@ -1,0 +1,85 @@
+.ngx-charts {
+  float: left;
+
+  .circle,
+  .bar,
+  .arc {
+    cursor: pointer;
+  }
+
+  .bar,
+  .cell,
+  .arc,
+  .card {
+    &.active,
+    &:hover {
+      opacity: 0.8;
+      transition: opacity 100ms ease-in-out;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  g {
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .line-series,
+  .line-series-range,
+  .area-series {
+    &.inactive {
+      transition: opacity 100ms ease-in-out;
+      opacity: .2
+    }
+  }
+
+  .line-highlight {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .area {
+    opacity: 0.6;
+  }
+
+  .circle {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .label {
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  .tooltip-anchor {
+    fill: rgb(0,0,0);
+  }
+
+  .gridline-path {
+    stroke: #ddd;
+    stroke-width: 1;
+    fill: none;
+  }
+
+  .grid-panel {
+    rect {
+      fill: none;
+    }
+
+    &.odd {
+      rect {
+        fill: rgba(0,0,0,0.05);
+      }
+    }
+  }
+
+}

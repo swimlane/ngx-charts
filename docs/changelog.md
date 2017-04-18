@@ -1,5 +1,87 @@
 # Changelog
 
+## 5.0.1
+- Enhancement: `valueFormatting` applies to Gauge Arc Labels too
+
+## 5.0.0
+- Breaking: Upgrade to angular 4
+
+## 4.4.0
+- Feature: Added ability to set card text color in number card (#284)
+- Enhancement: Added more heatmap options and support for various inputs for innerPadding (#297, #301)
+- Enhancement: Added valueFormatting input to linear gauge chart
+- Enhancement: Added valueFormatting input to gauge chart
+- Enhancement: Added labelFormatting input to pie chart
+- Enhancement: Updated pie chart label animations (#291)
+- Bug: Fixed pie chart positioning
+- Bug: Fixed ticks calculation on resize (#295)
+- Bug: Fixed percentage value in pie grid when the total is 0 (#288)
+- Bug: Fixed date formatting in bubble chart tooltips (#285)
+- Bug: Fixed Scale.round error in line chart ()#287)
+- Chore: AOT error fixes
+
+## 4.3.0
+- Enhancement: Improved pie chart label positioning (#273)
+- Enhancement: Improved number card design and scaling (#272)
+- Chore: Refactored charts to use d3 modules directly in library components (#270)
+
+## 4.2.1
+- Bug: Fixed customColors mapping
+- Chore: Various AoT compilation and build improvements (#255, #257, #258, #259, #256, #263, #260, #266)
+
+## 4.2.0
+- Chore: AoT compilation compatibility improvements (#253, #252, #251)
+- Enhancement: Added option to disable tooltips (#223)
+
+## 4.1.3
+- Enhancement: Added option to override the value in gauge chart
+- Bug: Fixed padding on bubble charts
+- Chore: Compile SCSS into CSS before building
+- Chore: Expor ChartComponent through the main module
+
+## 4.1.2
+- Bug: Fix tooltip when axis labels are not shown in bubble chart
+- Bug: Do not round scales when they are not linear
+- Enhancement: Show Axis labels in bubble chart tooltip (#210)
+
+## 4.1.1
+- Bug: Fix items not always deactivating on bubble chart
+- Bug: Fix bubbles not showing for when y value is 0
+- Bug: Fix realtime data generator on demo page for line and area charts
+
+## 4.1.0
+- Feature: Added scatter/bubble chart (#197)
+- Bug: Made line-area-tooltip anchor visible on light theme
+- Bug: Fixed precision on pie grid percentage values (#202)
+
+## 4.0.3
+- Bug: Update zone.js version
+
+## 4.0.2
+- Bug: Fixed css scope
+- Bug: Fixed vertical alignment issue of advanced pie legend
+- Bug: Fixed AOT issue where scss files were missing in the release folder
+- Chore: Made tooltip injector use Renderer
+- Chore: Updated Angular to 2.4.5
+
+## 4.0.1
+- Bug: Fixed regressions from CSS refactor
+
+## 4.0.0
+- Enhancement: Added `barPadding` and `groupPadding` properties to bar-charts (#185)
+- Enhancement: Added `innerPadding` property for heatmap, to control padding between cells (#165)
+- Enhancement: Added `axisTickformatting` property to bar, area, line, gauge and heatmap charts, for custom axis tick formatting (#167)
+- Enhancement: Added `innerRadius` property to pie charts, Fixes #104 (#162)
+- Enhancement: Added `roundDomain` property to all charts with axis, allowing it to round the domains to nice values (#183)
+- Enhancement: Added animation to areaTooltip anchors (#183)
+- Bug: Charts not rendering if container is hidden by default (#170)
+- Bug: Use old parent dimensions if new dimensions are undefined or 0
+- Bug: Fixed axis number formatting (#171)
+- Chore: Updated dependencies
+- Chore: Replaced moment with d3 timeFormat. Moment.js is no longer a dependency (#173)
+- Chore: Only include used Rxjs operators to decrease file size (#169)
+- Chore: Refactored CSS and embedded it into the chart components. No need to import the css file separately any longer. [Breaking change]
+
 ## 3.1.2
 - Enhancement: Add `ngx-charts-outer` class to `ngx-charts` inner element
 - Chore: Update dependencies

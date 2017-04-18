@@ -3,7 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewEncapsulation
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -27,20 +28,21 @@ import { BaseChartComponent } from '../common/base-chart.component';
             class="pie chart">
             <svg:g ngx-charts-pie-series
               [colors]="colors"
-              [showLabels]="labels"
               [series]="results"
               [innerRadius]="innerRadius"
               [activeEntries]="activeEntries"
               [outerRadius]="outerRadius"
               [gradient]="gradient"
+              [tooltipDisabled]="tooltipDisabled"
               (select)="onClick($event)">
             </svg:g>
           </svg:g>
         </ngx-charts-chart>
       </div>
-      <div 
+      <div
         class="advanced-pie-legend-wrapper"
-        [style.width.px]="width - dims.width">
+        [style.width.px]="width - dims.width"
+        [style.height.px]="height">
         <ngx-charts-advanced-legend
           [data]="results"
           [colors]="colors"
@@ -52,12 +54,18 @@ import { BaseChartComponent } from '../common/base-chart.component';
       </div>
     </div>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './advanced-pie-chart.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedPieChartComponent extends BaseChartComponent {
 
   @Input() gradient: boolean;
   @Input() activeEntries: any[] = [];
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -75,25 +83,23 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width * 4 / 12.0,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.domain = this.getDomain();
-      this.setColors();
-
-      const xOffset = this.dims.width / 2;
-      const yOffset = this.margin[0] + this.dims.height / 2;
-      this.legendWidth = this.width - this.dims.width - this.margin[1];
-
-      this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
-      this.innerRadius = this.outerRadius * 0.75;
-
-      this.transform = `translate(${xOffset} , ${yOffset})`;
+    this.dims = calculateViewDimensions({
+      width: this.width * 4 / 12.0,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.domain = this.getDomain();
+    this.setColors();
+
+    const xOffset = this.dims.width / 2;
+    const yOffset = this.margin[0] + this.dims.height / 2;
+    this.legendWidth = this.width - this.dims.width - this.margin[1];
+
+    this.outerRadius = Math.min(this.dims.width, this.dims.height) / 2.5;
+    this.innerRadius = this.outerRadius * 0.75;
+
+    this.transform = `translate(${xOffset} , ${yOffset})`;
   }
 
   getDomain(): any[] {

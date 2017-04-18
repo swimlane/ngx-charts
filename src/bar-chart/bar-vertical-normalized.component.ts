@@ -3,16 +3,21 @@ import {
   Input,
   Output,
   EventEmitter,
-  trigger,
-  style,
-  transition,
-  animate,
+  ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+import { scaleBand, scaleLinear } from 'd3-scale';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-bar-vertical-normalized',
@@ -58,6 +63,7 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
             [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
@@ -67,6 +73,8 @@ import d3 from '../d3';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
@@ -89,12 +97,15 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() barPadding = 8;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -115,35 +126,33 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      this.formatDates();
-
-      this.groupDomain = this.getGroupDomain();
-      this.innerDomain = this.getInnerDomain();
-      this.valueDomain = this.getValueDomain();
-
-      this.xScale = this.getXScale();
-      this.yScale = this.getYScale();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    this.formatDates();
+
+    this.groupDomain = this.getGroupDomain();
+    this.innerDomain = this.getInnerDomain();
+    this.valueDomain = this.getValueDomain();
+
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getGroupDomain() {
@@ -174,28 +183,31 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     return [0, 100];
   }
 
-  getXScale() {
-    const spacing = 0.1;
-    return d3.scaleBand()
+  getXScale(): any {
+    const spacing = this.groupDomain.length / (this.dims.width / this.barPadding + 1);
+
+    return scaleBand()
       .rangeRound([0, this.dims.width])
       .paddingInner(spacing)
       .domain(this.groupDomain);
   }
 
-  getYScale() {
-    return d3.scaleLinear()
+  getYScale(): any {
+    const scale = scaleLinear()
       .range([this.dims.height, 0])
       .domain(this.valueDomain);
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   groupTransform(group) {
     return `translate(${this.xScale(group.name)}, 0)`;
   }
 
-  onClick(data, group) {
+  onClick(data, group?) {
     if (group) {
       data.series = group.name;
     }
+
     this.select.emit(data);
   }
 
@@ -241,7 +253,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(event, group) {
+  onActivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -258,7 +270,7 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group) {
+  onDeactivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;

@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const commonConfig = require('./webpack.common');
 const { ENV, dir, APP_VERSION } = require('./helpers');
 // const ngtools = require('@ngtools/webpack');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 const banner =
 `/**
@@ -22,18 +23,10 @@ module.exports = function(env) {
         {
           test: /\.ts$/,
           loaders: [
-            'awesome-typescript-loader'
+            'awesome-typescript-loader',
+            'angular2-template-loader'
           ],
           exclude: [/\.(spec|e2e|d)\.ts$/]
-        },
-        {
-          test: /\.scss$/,
-          loaders: [
-            'style-loader',
-            'css-loader?sourceMap',
-            'postcss-loader?sourceMap',
-            'sass-loader?sourceMap'
-          ]
         }
       ]
     },
@@ -47,6 +40,7 @@ module.exports = function(env) {
       umdNamedDefine: true
     },
     externals: {
+      '@angular/animations': '@angular/animations',
       '@angular/platform-browser-dynamic': '@angular/platform-browser-dynamic',
       '@angular/platform-browser': '@angular/platform-browser',
       '@angular/core': '@angular/core',
@@ -65,6 +59,8 @@ module.exports = function(env) {
       'd3-selection': 'd3-selection',
       'd3-shape': 'd3-shape',
       'd3-hierarchy': 'd3-hierarchy',
+      'd3-time': 'd3-time',
+      'd3-time-format': 'd3-time-format',
       'rxjs': 'rxjs',
       'rxjs/Rx': 'rxjs/Rx',
       'rxjs/Observable': 'rxjs/Observable',
@@ -73,6 +69,7 @@ module.exports = function(env) {
       'zone.js/dist/zone': 'zone.js/dist/zone'
     },
     plugins: [
+      new CheckerPlugin(),
       new webpack.BannerPlugin({
         banner: banner,
         raw: true,

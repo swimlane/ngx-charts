@@ -1,7 +1,9 @@
-"use strict";
-var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var Rx_1 = require('rxjs/Rx');
+import { ElementRef, NgZone, ChangeDetectorRef, Component, Input, Output, EventEmitter } from '@angular/core';
+import { LocationStrategy } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/debounceTime';
+import { VisibilityObserver } from '../utils';
 var BaseChartComponent = (function () {
     function BaseChartComponent(chartElement, zone, cd, location) {
         this.chartElement = chartElement;
@@ -9,13 +11,20 @@ var BaseChartComponent = (function () {
         this.cd = cd;
         this.location = location;
         this.schemeType = 'ordinal';
-        this.select = new core_1.EventEmitter();
+        this.select = new EventEmitter();
     }
     BaseChartComponent.prototype.ngAfterViewInit = function () {
         this.bindWindowResizeEvent();
+        // listen for visibility of the element for hidden by default scenario
+        this.visibilityObserver = new VisibilityObserver(this.chartElement, this.zone);
+        this.visibilityObserver.visible.subscribe(this.update.bind(this));
     };
     BaseChartComponent.prototype.ngOnDestroy = function () {
         this.unbindEvents();
+        if (this.visibilityObserver) {
+            this.visibilityObserver.visible.unsubscribe();
+            this.visibilityObserver.destroy();
+        }
     };
     BaseChartComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -30,23 +39,32 @@ var BaseChartComponent = (function () {
         }
         else {
             var dims = this.getContainerDims();
-            this.width = dims.width;
-            this.height = dims.height;
+            if (dims) {
+                this.width = dims.width;
+                this.height = dims.height;
+            }
+        }
+        if (!this.width || !this.height) {
+            this.width = this.height = 0;
         }
         if (this.cd) {
             this.cd.markForCheck();
         }
     };
     BaseChartComponent.prototype.getContainerDims = function () {
-        var width = 0;
-        var height = 0;
+        var width;
+        var height;
         var hostElem = this.chartElement.nativeElement;
         if (hostElem.parentNode !== null) {
             // Get the container dimensions
-            width = hostElem.parentNode.clientWidth;
-            height = hostElem.parentNode.clientHeight;
+            var dims = hostElem.parentNode.getBoundingClientRect();
+            width = dims.width;
+            height = dims.height;
         }
-        return { width: width, height: height };
+        if (width && height) {
+            return { width: width, height: height };
+        }
+        return null;
     };
     /**
      * Converts all date objects that appear as name
@@ -75,16 +93,14 @@ var BaseChartComponent = (function () {
     };
     BaseChartComponent.prototype.bindWindowResizeEvent = function () {
         var _this = this;
-        this.zone.run(function () {
-            var source = Rx_1.Observable.fromEvent(window, 'resize', null, null);
-            var subscription = source.debounceTime(200).subscribe(function (e) {
-                _this.update();
-                if (_this.cd) {
-                    _this.cd.markForCheck();
-                }
-            });
-            _this.resizeSubscription = subscription;
+        var source = Observable.fromEvent(window, 'resize', null, null);
+        var subscription = source.debounceTime(200).subscribe(function (e) {
+            _this.update();
+            if (_this.cd) {
+                _this.cd.markForCheck();
+            }
         });
+        this.resizeSubscription = subscription;
     };
     /**
      * Clones the data into a new object
@@ -113,32 +129,35 @@ var BaseChartComponent = (function () {
                     copy['series'].push(seriesItemCopy);
                 }
             }
+            if (item['extra'] !== undefined) {
+                copy['extra'] = JSON.parse(JSON.stringify(item['extra']));
+            }
             results.push(copy);
         }
         return results;
     };
-    BaseChartComponent.decorators = [
-        { type: core_1.Component, args: [{
-                    selector: 'base-chart',
-                    template: ""
-                },] },
-    ];
-    /** @nocollapse */
-    BaseChartComponent.ctorParameters = function () { return [
-        { type: core_1.ElementRef, },
-        { type: core_1.NgZone, },
-        { type: core_1.ChangeDetectorRef, },
-        { type: common_1.Location, },
-    ]; };
-    BaseChartComponent.propDecorators = {
-        'results': [{ type: core_1.Input },],
-        'view': [{ type: core_1.Input },],
-        'scheme': [{ type: core_1.Input },],
-        'schemeType': [{ type: core_1.Input },],
-        'customColors': [{ type: core_1.Input },],
-        'select': [{ type: core_1.Output },],
-    };
     return BaseChartComponent;
 }());
-exports.BaseChartComponent = BaseChartComponent;
+export { BaseChartComponent };
+BaseChartComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'base-chart',
+                template: "<div></div>"
+            },] },
+];
+/** @nocollapse */
+BaseChartComponent.ctorParameters = function () { return [
+    { type: ElementRef, },
+    { type: NgZone, },
+    { type: ChangeDetectorRef, },
+    { type: LocationStrategy, },
+]; };
+BaseChartComponent.propDecorators = {
+    'results': [{ type: Input },],
+    'view': [{ type: Input },],
+    'scheme': [{ type: Input },],
+    'schemeType': [{ type: Input },],
+    'customColors': [{ type: Input },],
+    'select': [{ type: Output },],
+};
 //# sourceMappingURL=base-chart.component.js.map

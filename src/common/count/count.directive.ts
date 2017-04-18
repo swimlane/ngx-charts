@@ -59,7 +59,7 @@ export class CountUpDirective implements OnDestroy {
 
   nativeElement: any;
 
-  private value: any = '';
+  value: any = '';
   private animationReq: any;
 
   private _countDecimals: number = 0;
@@ -78,20 +78,18 @@ export class CountUpDirective implements OnDestroy {
     cancelAnimationFrame(this.animationReq);
 
     const callback = ({ value, progress, finished }) => {
-      this.zone.run(() => {
-        this.value = `${this.countPrefix}${value.toLocaleString()}${this.countSuffix}`;
-        this.cd.markForCheck();
+      this.value = `${this.countPrefix}${value.toLocaleString()}${this.countSuffix}`;
+      this.cd.markForCheck();
 
-        if(!finished) this.countChange.emit({ value, progress });
-        if(finished) this.countFinish.emit({ value, progress });
-      });
+      if(!finished) this.countChange.emit({ value, progress });
+      if(finished) this.countFinish.emit({ value, progress });
     };
 
     this.animationReq = count(
-      this.countFrom, 
-      this.countTo, 
-      this.countDecimals, 
-      this.countDuration, 
+      this.countFrom,
+      this.countTo,
+      this.countDecimals,
+      this.countDuration,
       callback);
   }
 

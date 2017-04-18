@@ -1,9 +1,12 @@
 import {
   Component,
+  Input,
+  ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { min } from 'd3-array';
+import { format } from 'd3-format';
 
-import d3 from '../d3';
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -29,6 +32,7 @@ import { formatLabel } from '../common/label.helper';
             [outerRadius]="series.outerRadius"
             (select)="onClick($event)"
             ngx-tooltip
+            [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="getTooltipText(series.label, series.value.toLocaleString())"
@@ -38,7 +42,7 @@ import { formatLabel } from '../common/label.helper';
             dy="-0.5em"
             x="0"
             y="5"
-            ngx-charts-count-up 
+            ngx-charts-count-up
             [countTo]="series.percent"
             [countSuffix]="'%'"
             text-anchor="middle">
@@ -57,7 +61,7 @@ import { formatLabel } from '../common/label.helper';
             x="0"
             [attr.y]="series.outerRadius"
             text-anchor="middle"
-            ngx-charts-count-up 
+            ngx-charts-count-up
             [countTo]="series.total"
             [countPrefix]="'Total: '">
           </svg:text>
@@ -65,10 +69,16 @@ import { formatLabel } from '../common/label.helper';
       </svg:g>
     </ngx-charts-chart>
   `,
+  styleUrls: [
+    '../common/base-chart.component.scss',
+    './pie-grid.component.scss'
+  ],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PieGridComponent extends BaseChartComponent {
-  
+  @Input() tooltipDisabled: boolean = false;
+
   dims: ViewDimensions;
   data: any[];
   transform: string;
@@ -80,21 +90,19 @@ export class PieGridComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin
-      });
-
-      this.domain = this.getDomain();
-
-      this.data = gridLayout(this.dims, this.results, 150);
-      this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
-
-      this.series = this.getSeries();
-      this.setColors();
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin
     });
+
+    this.domain = this.getDomain();
+
+    this.data = gridLayout(this.dims, this.results, 150);
+    this.transform = `translate(${this.margin[3]} , ${this.margin[0]})`;
+
+    this.series = this.getSeries();
+    this.setColors();
   }
 
   getTooltipText(label, val): string {
@@ -116,7 +124,7 @@ export class PieGridComponent extends BaseChartComponent {
       const padding = 10;
       const label = formatLabel(d.data.name);
       const value = d.data.value;
-      const radius = (d3.min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
+      const radius = (min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
       const innerRadius = radius * 0.9;
 
       let count = 0;
@@ -140,7 +148,7 @@ export class PieGridComponent extends BaseChartComponent {
         label: trimLabel(label),
         total: value,
         value,
-        percent: d3.format('.1p')(d.data.percent),
+        percent: format('.1%')(d.data.percent),
         data: [d, {
           data: {
             other: true,
@@ -155,7 +163,7 @@ export class PieGridComponent extends BaseChartComponent {
   getTotal(): any {
     return this.results
       .map(d => d.value)
-      .reduce((sum, d) => { return sum + d; }, 0);
+      .reduce((sum, d) => sum + d, 0);
   }
 
   onClick(data): void {

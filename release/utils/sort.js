@@ -1,6 +1,4 @@
-"use strict";
-var moment = require('moment');
-function sortLinear(data, property, direction) {
+export function sortLinear(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
         if (direction === 'asc') {
@@ -11,8 +9,7 @@ function sortLinear(data, property, direction) {
         }
     });
 }
-exports.sortLinear = sortLinear;
-function sortByDomain(data, property, direction, domain) {
+export function sortByDomain(data, property, direction, domain) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
         var aVal = a[property];
@@ -27,27 +24,25 @@ function sortByDomain(data, property, direction, domain) {
         }
     });
 }
-exports.sortByDomain = sortByDomain;
-function sortByTime(data, property, direction) {
+export function sortByTime(data, property, direction) {
     if (direction === void 0) { direction = 'asc'; }
     return data.sort(function (a, b) {
-        var aDate = moment(a[property]);
-        var bDate = moment(b[property]);
+        var aDate = a[property].getTime();
+        var bDate = b[property].getTime();
         if (direction === 'asc') {
-            if (aDate.isAfter(bDate))
+            if (aDate > bDate)
                 return 1;
-            if (bDate.isAfter(aDate))
+            if (bDate > aDate)
                 return -1;
             return 0;
         }
         else {
-            if (aDate.isAfter(bDate))
+            if (aDate > bDate)
                 return -1;
-            if (bDate.isAfter(aDate))
+            if (bDate > aDate)
                 return 1;
             return 0;
         }
     });
 }
-exports.sortByTime = sortByTime;
 //# sourceMappingURL=sort.js.map

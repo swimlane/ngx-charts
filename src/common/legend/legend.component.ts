@@ -1,13 +1,6 @@
 import {
-  Component,
-  Input,
-  ChangeDetectionStrategy,
-  Output,
-  EventEmitter,
-  SimpleChanges,
-  OnChanges,
-  ChangeDetectorRef,
-  NgZone
+  Component, Input, ChangeDetectionStrategy, Output, EventEmitter,
+  SimpleChanges, OnChanges, ChangeDetectorRef, NgZone, ViewEncapsulation
  } from '@angular/core';
  import { formatLabel } from '../label.helper';
 
@@ -39,6 +32,8 @@ import {
       </div>
     </div>
   `,
+  styleUrls: ['./legend.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LegendComponent implements OnChanges {
@@ -63,10 +58,8 @@ export class LegendComponent implements OnChanges {
   }
 
   update(): void {
-    this.zone.run(() => {
-      this.cd.markForCheck();
-      this.legendEntries = this.getLegendEntries();
-    });
+    this.cd.markForCheck();
+    this.legendEntries = this.getLegendEntries();
   }
 
   getLegendEntries(): any[] {
@@ -93,22 +86,18 @@ export class LegendComponent implements OnChanges {
 
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
-    const item = this.activeEntries.find(d => {      
+    const item = this.activeEntries.find(d => {
       return entry.label === d.name;
     });
     return item !== undefined;
   }
 
   activate(item) {
-    this.zone.run(() => {
-      this.labelActivate.emit(item);
-    });
+    this.labelActivate.emit(item);
   }
 
   deactivate(item) {
-    this.zone.run(() => {
-      this.labelDeactivate.emit(item);
-    });
+    this.labelDeactivate.emit(item);
   }
 
   trackBy(index, item): string {

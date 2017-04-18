@@ -1,663 +1,44 @@
-import {Component, OnInit} from '@angular/core';
-import d3 from '../src/d3';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import * as shape from 'd3-shape';
+import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
-import '../src/ngx-charts.scss';
-
-import {single, multi, countries, generateData, generateGraph} from './data';
+import { single, multi, countries, bubble, generateData, generateGraph } from './data';
 import chartGroups from './chartTypes';
-import './demo.scss';
+
+const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
+const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
+
+function twoDigits(value) {
+  return Math.round(value * 10) / 10;
+}
+
+function multiFormat(value) {
+  if (value < 1000) return `${twoDigits(value)}ms`;
+  value /= 1000;
+  if (value < 60) return `${twoDigits(value)}s`;
+  value /= 60;
+  if (value < 60) return `${twoDigits(value)}mins`;
+  value /= 60;
+  if (value < 24) return `${twoDigits(value)}hrs`;
+  value /= 24;
+  return `${twoDigits(value)}days`;
+}
 
 @Component({
   selector: 'app',
-  template: `
-    <main [class]="theme">
-      <div class="chart-col">
-        <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;">
-          <ngx-charts-bar-vertical
-            *ngIf="chartType === 'bar-vertical'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="single"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [showGridLines]="showGridLines"
-            (select)="select($event)"
-            (legendLabelClick)="onLegendLabelClick($event)">
-          </ngx-charts-bar-vertical>
-          <ngx-charts-bar-horizontal
-            *ngIf="chartType === 'bar-horizontal'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="single"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [showGridLines]="showGridLines"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            (select)="select($event)">
-          </ngx-charts-bar-horizontal>
-          <ngx-charts-bar-vertical-2d
-            *ngIf="chartType === 'bar-vertical-2d'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="multi"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showGridLines]="showGridLines"
-            (select)="select($event)">
-          </ngx-charts-bar-vertical-2d>
-          <ngx-charts-bar-horizontal-2d
-            *ngIf="chartType === 'bar-horizontal-2d'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="multi"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [showGridLines]="showGridLines"
-            (select)="select($event)">
-          </ngx-charts-bar-horizontal-2d>
-          <ngx-charts-bar-vertical-stacked
-            *ngIf="chartType === 'bar-vertical-stacked'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="multi"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [showGridLines]="showGridLines"
-            (select)="select($event)">
-          </ngx-charts-bar-vertical-stacked>
-          <ngx-charts-bar-horizontal-stacked
-            *ngIf="chartType === 'bar-horizontal-stacked'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="multi"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [showGridLines]="showGridLines"
-            (select)="select($event)">
-          </ngx-charts-bar-horizontal-stacked>
-          <ngx-charts-bar-vertical-normalized
-            *ngIf="chartType === 'bar-vertical-normalized'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="multi"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [showGridLines]="showGridLines"
-            (select)="select($event)">
-          </ngx-charts-bar-vertical-normalized>
-          <ngx-charts-bar-horizontal-normalized
-            *ngIf="chartType === 'bar-horizontal-normalized'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="multi"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showGridLines]="showGridLines"
-            (select)="select($event)">
-          </ngx-charts-bar-horizontal-normalized>
-          <ngx-charts-pie-chart
-            *ngIf="chartType === 'pie-chart'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="single"
-            [legend]="showLegend"
-            [explodeSlices]="explodeSlices"
-            [labels]="showLabels"
-            [doughnut]="doughnut"
-            [arcWidth]="arcWidth"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [gradient]="gradient"
-            (select)="select($event)">
-          </ngx-charts-pie-chart>
-          <ngx-charts-advanced-pie-chart
-            *ngIf="chartType === 'advanced-pie-chart'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="single"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [gradient]="gradient"
-            (select)="select($event)">
-          </ngx-charts-advanced-pie-chart>
-          <ngx-charts-pie-grid
-            *ngIf="chartType === 'pie-grid'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [results]="single"
-            (select)="select($event)">
-          </ngx-charts-pie-grid>
-          <ngx-charts-line-chart
-            *ngIf="chartType === 'line-chart'"
-            [view]="view"
-            class="chart-container"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="dateDataWithOrWithoutRange"
-            [legend]="showLegend"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [autoScale]="autoScale"
-            [timeline]="timeline"
-            [showGridLines]="showGridLines"
-            [curve]="curve"
-            [rangeFillOpacity]="rangeFillOpacity"
-            (select)="select($event)">
-          </ngx-charts-line-chart>
-          <ngx-charts-force-directed-graph
-            *ngIf="chartType === 'force-directed-graph'"
-            class="chart-container"
-            [legend]="showLegend"
-            [links]="graph.links"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [nodes]="graph.nodes"
-            [scheme]="colorScheme"
-            [view]="view"
-            (select)="select($event)">
-          </ngx-charts-force-directed-graph>
-          <ngx-charts-area-chart
-            *ngIf="chartType === 'area-chart'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="dateData"
-            [legend]="showLegend"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [autoScale]="autoScale"
-            [timeline]="timeline"
-            [showGridLines]="showGridLines"
-            [curve]="curve"
-            (select)="select($event)">
-          </ngx-charts-area-chart>
-          <ngx-charts-area-chart-stacked
-            *ngIf="chartType === 'area-chart-stacked'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="dateData"
-            [legend]="showLegend"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [showGridLines]="showGridLines"
-            [curve]="curve"
-            (select)="select($event)">
-          </ngx-charts-area-chart-stacked>
-          <ngx-charts-area-chart-normalized
-            *ngIf="chartType === 'area-chart-normalized'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [schemeType]="schemeType"
-            [results]="dateData"
-            [legend]="showLegend"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [yAxis]="showYAxis"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [showGridLines]="showGridLines"
-            [curve]="curve"
-            (select)="select($event)">
-          </ngx-charts-area-chart-normalized>
-          <ngx-charts-heat-map
-            *ngIf="chartType === 'heat-map'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [results]="multi"
-            [legend]="showLegend"
-            [gradient]="gradient"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [innerPadding]="innerPadding"
-            (select)="select($event)">
-          </ngx-charts-heat-map>
-          <ngx-charts-tree-map
-            *ngIf="chartType === 'tree-map'"
-            class="chart-container"
-            [view]="view"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [scheme]="colorScheme"
-            [results]="single"
-            (select)="select($event)">
-          </ngx-charts-tree-map>
-          <ngx-charts-number-card
-            *ngIf="chartType === 'number-card'"
-            class="chart-container"
-            [view]="view"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [scheme]="colorScheme"
-            [results]="single"
-            (select)="select($event)">
-          </ngx-charts-number-card>
-          <ngx-charts-gauge
-            *ngIf="chartType === 'gauge'"
-            class="chart-container"
-            [view]="view"
-            [legend]="showLegend"
-            [results]="single"
-            [scheme]="colorScheme"
-            [min]="gaugeMin"
-            [max]="gaugeMax"
-            [units]="gaugeUnits"
-            [angleSpan]="gaugeAngleSpan"
-            [startAngle]="gaugeStartAngle"
-            [showAxis]="gaugeShowAxis"
-            [bigSegments]="gaugeLargeSegments"
-            [smallSegments]="gaugeSmallSegments"
-            [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null"
-            (select)="select($event)"
-            (legendLabelClick)="onLegendLabelClick($event)">
-          </ngx-charts-gauge>
-          <ngx-charts-linear-gauge
-            *ngIf="chartType === 'linear-gauge'"
-            class="chart-container"
-            [view]="view"
-            [scheme]="colorScheme"
-            [min]="gaugeMin"
-            [max]="gaugeMax"
-            [value]="gaugeValue"
-            [previousValue]="gaugePreviousValue"
-            [units]="gaugeUnits"
-            (select)="select($event)">
-          </ngx-charts-linear-gauge>
-        </div>
-      </div>
-      <div class="sidebar">
-        <h1>
-          Ngx-<strong>Charts</strong>
-          <small>Angular2 D3 Chart Framework</small>
-        </h1>
-        <div style="margin:20px">
-
-        <h3>Chart Type</h3>
-        <select
-          [ngModel]="chartType"
-          (ngModelChange)="selectChart($event)">
-          <template ngFor let-group [ngForOf]="chartGroups">
-            <optgroup [label]="group.name">
-              <option *ngFor="let chart of group.charts" [value]="chart.selector">{{chart.name}}</option>
-            </optgroup>
-          </template>
-        </select>
-
-        <h3>Theme</h3>
-        <select
-          [ngModel]="theme"
-          (ngModelChange)="theme = $event">>
-          <option [value]="'dark'">Dark</option>
-          <option [value]="'light'">Light</option>
-        </select>
-
-        <h3 (click)="dataVisable = !dataVisable" style="cursor: pointer">
-          <span
-            [class.arrow-down]="dataVisable"
-            [class.arrow-right]="!dataVisable">
-          </span>
-          <strong>Data</strong>
-        </h3>
-        <div [hidden]="!dataVisable" style="margin-left: 10px;">
-          <pre *ngIf="chart.inputFormat === 'singleSeries'">{{single | json}}</pre>
-          <pre *ngIf="chart.inputFormat === 'multiSeries' && !linearScale">{{multi | json}}</pre>
-          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
-          <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
-          <div>
-            <label>
-              <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
-              Real-time
-            </label>
-
-           <label *ngIf="chartType === 'line-chart'">
-              <br />
-              <input type="checkbox" [checked]="range" (change)="range = $event.target.checked">
-              Show min and max values
-            </label>
-          </div>
-        </div>
-        <div>
-          <h3 (click)="dimVisiable = !dimVisiable" style="cursor: pointer">
-            <span
-              [class.arrow-down]="dimVisiable"
-              [class.arrow-right]="!dimVisiable">
-            </span>
-            <strong>Dimensions</strong>
-          </h3>
-          <div [hidden]="!dimVisiable" style="margin-left: 10px;">
-            <label>
-              <input type="checkbox" [checked]="fitContainer" (change)="toggleFitContainer($event.target.checked)">
-              Fit Container
-            </label> <br />
-            <div *ngIf="!fitContainer">
-              <label>Width:</label><br />
-              <input type="number" [(ngModel)]="width"><br />
-              <label>Height:</label><br />
-              <input type="number" [(ngModel)]="height"><br />
-              <button (click)="applyDimensions()">Apply dimensions</button>
-            </div>
-          </div>
-        </div>
-        <h3 (click)="colorVisible = !colorVisible" style="cursor: pointer">
-          <span
-            [class.arrow-down]="colorVisible"
-            [class.arrow-right]="!colorVisible">
-          </span>
-          <strong>Color Scheme</strong>
-        </h3>
-        <select
-          [hidden]="!colorVisible"
-          style="margin-left: 10px;"
-          [ngModel]="selectedColorScheme"
-          (ngModelChange)="setColorScheme($event)">
-          <option *ngFor="let scheme of colorSets" [value]="scheme.name">{{scheme.name}}</option>
-        </select>
-
-        <select
-          *ngIf="chart.options.includes('schemeType')"
-          [hidden]="!colorVisible"
-          style="margin-left: 10px;"
-          [ngModel]="schemeType"
-          (ngModelChange)="schemeType = $event">
-          <option value="ordinal">Ordinal</option>
-          <option value="linear">Linear</option>
-        </select>
-
-        <div [hidden]="(!colorVisible) || (!range)" style="margin-left: 10px;">
-           <div>
-            <label>Range fill color opacity (0.0 - 1.0):</label><br />
-            <input type="number" [(ngModel)]="rangeFillOpacity"><br />
-          </div>
-        </div>
-
-        <h3 (click)="optsVisible = !optsVisible" style="cursor: pointer">
-          <span
-            [class.arrow-down]="optsVisible"
-            [class.arrow-right]="!optsVisible">
-          </span>
-          <strong>Options</strong>
-        </h3>
-        <div [hidden]="!optsVisible" style="margin-left: 10px;">
-          <div *ngIf="chart.options.includes('showXAxis')">
-            <label>
-              <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
-              Show X Axis
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('showYAxis')">
-            <label>
-              <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked">
-              Show Y Axis
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('showGridLines')">
-            <label>
-              <input type="checkbox" [checked]="showGridLines" (change)="showGridLines = $event.target.checked">
-              Show Grid Lines
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('gradient')">
-            <label>
-              <input type="checkbox" [checked]="gradient" (change)="gradient = $event.target.checked">
-              Use Gradients
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('showLegend')">
-            <label>
-              <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
-              Show Legend
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('showXAxisLabel')">
-            <label>
-              <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
-              Show X Axis Label
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('xAxisLabel')">
-            <label>X Axis Label:</label><br />
-            <input type="text" [(ngModel)]="xAxisLabel"><br />
-          </div>
-          <div *ngIf="chart.options.includes('showYAxisLabel')">
-            <label>
-              <input type="checkbox" [checked]="showYAxisLabel" (change)="showYAxisLabel = $event.target.checked">
-              Show Y Axis Label
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('yAxisLabel')">
-            <label>Y Axis Label:</label><br />
-            <input type="text" [(ngModel)]="yAxisLabel"><br />
-          </div>
-          <div *ngIf="chart.options.includes('showLabels')">
-            <label>
-              <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked">
-              Show Labels
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('doughnut')">
-            <label>
-              <input type="checkbox" [checked]="doughnut" (change)="doughnut = $event.target.checked">
-              Doughnut
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('arcWidth') && doughnut">
-            <label>Arc width (fraction of radius):</label><br />
-            <input type="number" [disabled]="!doughnut" [(ngModel)]="arcWidth"
-              max="1" min="0" step="0.01"><br />
-          </div>
-          <div *ngIf="chart.options.includes('explodeSlices') && !doughnut">
-            <label>
-              <input type="checkbox" [checked]="explodeSlices" (change)="explodeSlices = $event.target.checked">
-              Explode Slices
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('autoScale')">
-            <label>
-              <input type="checkbox" [checked]="autoScale" (change)="autoScale = $event.target.checked">
-              Auto Scale
-            </label> <br />
-          </div>
-          <div *ngIf="chart.options.includes('timeline')">
-            <label>
-              <input type="checkbox" [checked]="timeline" (change)="timeline = $event.target.checked">
-              Timeline
-            </label> <br />
-          </div>
-
-          <div *ngIf="chart.options.includes('curve')">
-            <label>Line Interpolation</label>
-            <select
-              [ngModel]="curveType"
-              (ngModelChange)="setInterpolationType($event)">
-              <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">
-                {{interpolationType}}
-              </option>
-            </select>
-          </div>
-
-          <div *ngIf="chart.options.includes('min')">
-            <label>Min value:</label><br />
-            <input type="number" [(ngModel)]="gaugeMin"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('max')">
-            <label>Max value:</label><br />
-            <input type="number" [(ngModel)]="gaugeMax"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('innerPadding')">
-            <label>Inner padding value:</label><br />
-            <input type="number" [(ngModel)]="innerPadding" min="0" step="1"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('value')">
-            <label>Value:</label><br />
-            <input type="number" [(ngModel)]="gaugeValue"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('previousValue')">
-            <label>Previous value:</label><br />
-            <input type="number" [(ngModel)]="gaugePreviousValue"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('angleSpan')">
-            <label>Angle span:</label><br />
-            <input type="number" [(ngModel)]="gaugeAngleSpan"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('startAngle')">
-            <label>Start Angle:</label><br />
-            <input type="number" [(ngModel)]="gaugeStartAngle"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('showAxis')">
-            <label>
-              <input type="checkbox" [checked]="gaugeShowAxis" (change)="gaugeShowAxis = $event.target.checked">
-              Show Axis
-            </label> <br />
-          </div>
-
-          <div *ngIf="chart.options.includes('largeSegments')">
-            <label>Number of large segments:</label><br />
-            <input type="number" [(ngModel)]="gaugeLargeSegments"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('smallSegments')">
-            <label>Number of small segments:</label><br />
-            <input type="number" [(ngModel)]="gaugeSmallSegments"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('units')">
-            <label>Units:</label><br />
-            <input type="text" [(ngModel)]="gaugeUnits"><br />
-          </div>
-
-          <div *ngIf="chart.options.includes('margin')">
-            <label>
-              <input type="checkbox" [checked]="margin" (change)="margin = $event.target.checked">
-              Show Margin
-            </label> <br />
-          </div>
-
-          <div *ngIf="chart.options.includes('margin') && margin">
-            <label>Top:</label><input type="number" [(ngModel)]="marginTop"><br />
-            <label>Right:</label><input type="number" [(ngModel)]="marginRight"><br />
-            <label>Bottom:</label><input type="number" [(ngModel)]="marginBottom"><br />
-            <label>Left:</label><input type="number" [(ngModel)]="marginLeft"><br />
-          </div>
-        </div>
-        <h3><a href="https://swimlane.gitbooks.io/ngx-charts/content/" target="_blank">Documentation</a></h3>
-        </div>
-      </div>
-    </main>
-  `
+  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 
+  version = APP_VERSION;
+
   theme = 'dark';
-  chartType = 'bar-vertical';
+  chartType: string;
   chartGroups: any[];
   chart: any;
   realTimeData: boolean = false;
@@ -666,7 +47,10 @@ export class AppComponent implements OnInit {
   multi: any[];
   dateData: any[];
   dateDataWithRange: any[];
+  calendarData: any[];
+  statusData: any[];
   graph: { links: any[], nodes: any[] };
+  bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
 
@@ -681,15 +65,21 @@ export class AppComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
+  tooltipDisabled = false;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'GDP Per Capita';
   showGridLines = true;
-  innerPadding = 8;
+  innerPadding = '10%';
+  barPadding = 8;
+  groupPadding = 16;
+  roundDomains = false;
+  maxRadius = 10;
+  minRadius = 3;
 
   // line interpolation
   curveType: string = 'Linear';
-  curve = d3.shape.curveLinear;
+  curve: any = shape.curveLinear;
   interpolationTypes = [
     'Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X',
     'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'
@@ -700,6 +90,14 @@ export class AppComponent implements OnInit {
   schemeType: string = 'ordinal';
   selectedColorScheme: string;
   rangeFillOpacity: number = 0.15;
+
+  // Override colors for certain values
+  // customColors: any[] = [
+  //   {
+  //     name: 'Germany',
+  //     value: '#0000ff'
+  //   }
+  // ];
 
   // pie
   showLabels = true;
@@ -723,6 +121,7 @@ export class AppComponent implements OnInit {
   gaugeMax: number = 100;
   gaugeLargeSegments: number = 10;
   gaugeSmallSegments: number = 5;
+  gaugeTextValue: string = '';
   gaugeUnits: string = 'alerts';
   gaugeAngleSpan: number = 240;
   gaugeStartAngle: number = -120;
@@ -730,19 +129,22 @@ export class AppComponent implements OnInit {
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
 
-  constructor() {
+  constructor(public location: Location) {
     Object.assign(this, {
       single,
       multi,
       countries,
       chartGroups,
       colorSets,
-      graph: generateGraph(50)
+      graph: generateGraph(50),
+      bubble
     });
 
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
+    this.calendarData = this.getCalendarData();
+    this.statusData = this.getStatusData();
   }
 
   get dateDataWithOrWithoutRange() {
@@ -751,11 +153,11 @@ export class AppComponent implements OnInit {
     } else {
       return this.dateData;
     }
-
   }
 
   ngOnInit() {
-    this.selectChart(this.chartType);
+    const state = this.location.path(true);
+    this.selectChart(state.length ? state : 'bar-vertical');
 
     setInterval(this.updateData.bind(this), 1000);
 
@@ -786,6 +188,12 @@ export class AppComponent implements OnInit {
         const index = Math.floor(Math.random() * this.multi.length);
         this.multi.splice(index, 1);
         this.multi = [...this.multi];
+      }
+
+      if (this.bubble.length > 1) {
+        const index = Math.floor(Math.random() * this.bubble.length);
+        this.bubble.splice(index, 1);
+        this.bubble = [...this.bubble];
       }
 
       if (this.graph.nodes.length > 1) {
@@ -833,11 +241,57 @@ export class AppComponent implements OnInit {
       };
       const links = [ ...this.graph.links, link];
       this.graph = { links, nodes };
+
+      // bubble
+      const bubbleEntry = {
+        name: country,
+        series: [{
+          name: '2010',
+          x: Math.floor(10000 + Math.random() * 20000),
+          y: Math.floor(30 + Math.random() * 70),
+          r: Math.floor(30 + Math.random() * 20),
+        }, {
+          name: '2011',
+          x: Math.floor(10000 + Math.random() * 20000),
+          y: Math.floor(30 + Math.random() * 70),
+          r: Math.floor(30 + Math.random() * 20),
+        }]
+      };
+
+      this.bubble = [...this.bubble, bubbleEntry];
+
+      this.statusData = this.getStatusData();
     }
+
+    this.dateData = generateData(5, false);
+    this.dateDataWithRange = generateData(2, true);
+
+    if (this.chart.inputFormat === 'calendarData') this.calendarData = this.getCalendarData();
   }
 
   applyDimensions() {
     this.view = [this.width, this.height];
+  }
+
+  getStatusData() {
+    return [
+      {
+        name: 'Count',
+        value: Math.round(10000 * Math.random())
+      },
+      {
+        name: 'Time',
+        value: 10 * 60 * 60 * 1000 * Math.random()
+      },
+      {
+        name: 'Cost',
+        value: Math.round(4000000 * Math.random()) / 100
+      },
+      {
+        name: 'Percent',
+        value: Math.random()
+      }
+    ];
   }
 
   toggleFitContainer(event) {
@@ -851,13 +305,34 @@ export class AppComponent implements OnInit {
   }
 
   selectChart(chartSelector) {
-    this.chartType = chartSelector;
+    this.chartType = chartSelector = chartSelector.replace('/', '');
+    this.location.replaceState(this.chartType);
 
     this.linearScale = this.chartType === 'line-chart' ||
       this.chartType === 'line-chart-with-ranges' ||
       this.chartType === 'area-chart' ||
       this.chartType === 'area-chart-normalized' ||
       this.chartType === 'area-chart-stacked';
+
+    if (this.chartType === 'bubble-chart') {
+      this.xAxisLabel = 'GDP Per Capita';
+      this.yAxisLabel = 'Life expectancy [years]';
+    } else {
+      this.yAxisLabel = 'GDP Per Capita';
+      this.xAxisLabel = 'Country';
+    }
+
+    if (this.chartType === 'calendar') {
+      this.width = 1100;
+      this.height = 200;
+    } else {
+      this.width = 700;
+      this.height = 300;
+    }
+
+    if (!this.fitContainer) {
+      this.applyDimensions();
+    }
 
     for (const group of this.chartGroups) {
       for (const chart of group.charts) {
@@ -876,37 +351,37 @@ export class AppComponent implements OnInit {
   setInterpolationType(curveType) {
     this.curveType = curveType;
     if (curveType === 'Basis') {
-      this.curve = d3.shape.curveBasis;
+      this.curve = shape.curveBasis;
     }
     if (curveType === 'Bundle') {
-      this.curve = d3.shape.curveBundle.beta(1);
+      this.curve = shape.curveBundle.beta(1);
     }
     if (curveType === 'Cardinal') {
-      this.curve = d3.shape.curveCardinal;
+      this.curve = shape.curveCardinal;
     }
     if (curveType === 'Catmull Rom') {
-      this.curve = d3.shape.curveCatmullRom;
+      this.curve = shape.curveCatmullRom;
     }
     if (curveType === 'Linear') {
-      this.curve = d3.shape.curveLinear;
+      this.curve = shape.curveLinear;
     }
     if (curveType === 'Monotone X') {
-      this.curve = d3.shape.curveMonotoneX;
+      this.curve = shape.curveMonotoneX;
     }
     if (curveType === 'Monotone Y') {
-      this.curve = d3.shape.curveMonotoneY;
+      this.curve = shape.curveMonotoneY;
     }
     if (curveType === 'Natural') {
-      this.curve = d3.shape.curveNatural;
+      this.curve = shape.curveNatural;
     }
     if (curveType === 'Step') {
-      this.curve = d3.shape.curveStep;
+      this.curve = shape.curveStep;
     }
     if (curveType === 'Step After') {
-      this.curve = d3.shape.curveStepAfter;
+      this.curve = shape.curveStepAfter;
     }
     if (curveType === 'Step Before') {
-      this.curve = d3.shape.curveStepBefore;
+      this.curve = shape.curveStepBefore;
     }
   }
 
@@ -917,6 +392,88 @@ export class AppComponent implements OnInit {
 
   onLegendLabelClick(entry) {
     console.log('Legend clicked', entry);
+  }
+
+  getCalendarData(): any[] {
+    // today
+    const now = new Date();
+    const todaysDay = now.getDate();
+    const thisDay = new Date(now.getFullYear(), now.getMonth(), todaysDay);
+
+    // Monday
+    const thisMonday = new Date(thisDay.getFullYear(), thisDay.getMonth(), todaysDay - thisDay.getDay() + 1);
+    const thisMondayDay = thisMonday.getDate();
+    const thisMondayYear = thisMonday.getFullYear();
+    const thisMondayMonth = thisMonday.getMonth();
+
+    // 52 weeks before monday
+    const calendarData = [];
+    const getDate = d => new Date(thisMondayYear, thisMondayMonth, d);
+    for (let week = -52; week <= 0; week++) {
+      const mondayDay = thisMondayDay + (week * 7);
+      const monday = getDate(mondayDay);
+
+      // one week
+      const series = [];
+      for (let dayOfWeek = 7; dayOfWeek > 0; dayOfWeek--) {
+        const date = getDate(mondayDay - 1 + dayOfWeek);
+
+        // skip future dates
+        if (date > now) {
+          continue;
+        }
+
+        // value
+        const value = (dayOfWeek < 6) ? (date.getMonth() + 1) : 0;
+
+        series.push({
+          date,
+          name: weekdayName.format(date),
+          value
+        });
+      }
+
+      calendarData.push({
+        name: monday.toString(),
+        series
+      });
+    }
+
+    return calendarData;
+  }
+
+  calendarAxisTickFormatting(mondayString: string) {
+    const monday = new Date(mondayString);
+    const month = monday.getMonth();
+    const day = monday.getDate();
+    const year = monday.getFullYear();
+    const lastSunday = new Date(year, month, day - 1);
+    const nextSunday = new Date(year, month, day + 6);
+    return (lastSunday.getMonth() !== nextSunday.getMonth()) ? monthName.format(nextSunday) : '';
+  }
+
+  calendarTooltipText(c): string {
+    return `
+      <span class="tooltip-label">${c.label} • ${c.cell.date.toLocaleDateString()}</span>
+      <span class="tooltip-val">${c.data.toLocaleString()}</span>
+    `;
+  }
+
+  dollarValueFormat(c): string {
+    return `\$${c.value.toLocaleString()}`;
+  }
+
+  statusValueFormat(c): string {
+    switch(c.label) {
+      case 'Cost':
+        return `\$${c.value.toLocaleString()}`;
+      case 'Time':
+        return multiFormat(c.value);
+      case 'Percent':
+        return `${Math.floor(c.value * 100)}%`;
+      default:
+        return c.value.toLocaleString();
+    }
   }
 
 }

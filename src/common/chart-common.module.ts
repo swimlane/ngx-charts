@@ -14,7 +14,7 @@ import { GridPanelComponent } from './grid-panel.component';
 import { GridPanelSeriesComponent } from './grid-panel-series.component';
 import { SvgLinearGradientComponent } from './svg-linear-gradient.component';
 import { SvgRadialGradientComponent } from './svg-radial-gradient.component';
-import { Timeline } from './timeline.component';
+import { Timeline } from './timeline';
 import { CommonModule } from '@angular/common';
 import { AreaComponent } from './area.component';
 import { AreaTooltip } from './area-tooltip.component';
@@ -62,5 +62,4 @@ const COMPONENTS = [
     ...COMPONENTS
   ]
 })
-export class ChartCommonModule {
-}
+export class ChartCommonModule { }

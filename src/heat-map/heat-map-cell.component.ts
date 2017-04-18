@@ -8,9 +8,10 @@ import {
   OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { Location } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { select } from 'd3-selection';
+
 import { id } from '../utils/id';
-import d3 from '../d3';
 
 @Component({
   selector: 'g[ngx-charts-heat-map-cell]',
@@ -58,13 +59,16 @@ export class HeatMapCellComponent implements OnChanges {
   gradientUrl: string;
   gradientStops: any[];
 
-  constructor(element: ElementRef, private location: Location) {
+  constructor(element: ElementRef, private location: LocationStrategy) {
     this.element = element.nativeElement;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.transform = `translate(${this.x} , ${this.y})`;
-    const pageUrl = this.location.path();
+
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
 
     this.startOpacity = 0.3;
     this.gradientId = 'grad' + id().toString();
@@ -89,13 +93,13 @@ export class HeatMapCellComponent implements OnChanges {
   }
 
   loadAnimation(): void {
-    const node = d3.select(this.element).select('.cell');
+    const node = select(this.element).select('.cell');
     node.attr('opacity', 0);
     this.animateToCurrentForm();
   }
 
   animateToCurrentForm(): void {
-    const node = d3.select(this.element).select('.cell');
+    const node = select(this.element).select('.cell');
 
     node.transition().duration(750)
       .attr('opacity', 1);

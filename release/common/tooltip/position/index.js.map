@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../src/common/tooltip/position/index.ts"],"names":[],"mappings":";;;;AAAA,iBAAc,kBAAkB,CAAC,EAAA;AACjC,iBAAc,YAAY,CAAC,EAAA"}
+{"version":3,"sources":["../../../../build/common/tooltip/position/index.ts"],"names":[],"mappings":"AAAA,cAAc,kBAAkB,CAAC;AACjC,cAAc,YAAY,CAAC","file":"index.js","sourceRoot":""}

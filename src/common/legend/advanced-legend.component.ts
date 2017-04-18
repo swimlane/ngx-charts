@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   SimpleChanges,
+  ViewEncapsulation,
   OnChanges
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
@@ -53,6 +54,8 @@ import { formatLabel } from '../label.helper';
       </div>
     </div>
   `,
+  styleUrls: ['./advanced-legend.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdvancedLegendComponent implements OnChanges  {
@@ -77,7 +80,7 @@ export class AdvancedLegendComponent implements OnChanges  {
   getTotal(): number {
     return this.data
       .map(d => d.value)
-      .reduce((sum, d) => { return sum + d; }, 0);
+      .reduce((sum, d) => sum + d, 0);
   }
 
   update(): void {

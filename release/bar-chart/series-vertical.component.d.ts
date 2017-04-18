@@ -6,6 +6,7 @@ export declare class SeriesVerticalComponent implements OnChanges {
     xScale: any;
     yScale: any;
     colors: any;
+    tooltipDisabled: boolean;
     gradient: boolean;
     activeEntries: any[];
     seriesName: string;

@@ -22,6 +22,7 @@ import {
       [valueType]="c.valueType"
       (select)="onClick($event)"
       ngx-tooltip
+      [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="getTooltipText(c)"
@@ -34,6 +35,7 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() data;
   @Input() dims;
   @Input() colors;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
 

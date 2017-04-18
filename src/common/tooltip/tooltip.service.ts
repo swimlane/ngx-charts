@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { InjectionRegistery, InjectionService } from '../../services';
-import { TooltipContentComponent } from '.';
+import { InjectionService } from './injection.service';
+import { InjectionRegistery } from './injection-registery.service';
+import { TooltipContentComponent } from './tooltip.component';
 
 @Injectable()
 export class TooltipService extends InjectionRegistery {

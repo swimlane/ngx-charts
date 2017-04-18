@@ -3,6 +3,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 import { ColorHelper } from '../common/color.helper';
 export declare class TreeMapComponent extends BaseChartComponent {
     results: any;
+    tooltipDisabled: boolean;
     select: EventEmitter<{}>;
     dims: any;
     domain: any;

@@ -1,5 +1,5 @@
 import {
-  Input, Component, ElementRef, AfterViewInit,
+  Input, Component, ElementRef, AfterViewInit, ViewEncapsulation,
   HostListener, ViewChild, HostBinding, Renderer
 } from '@angular/core';
 
@@ -20,10 +20,10 @@ import { AlignmentTypes } from './alignment.type';
       </span>
       <div class="tooltip-content">
         <span *ngIf="!title">
-          <template
+          <ng-template
             [ngTemplateOutlet]="template"
             [ngOutletContext]="{ model: context }">
-          </template>
+          </ng-template>
         </span>
         <span
           *ngIf="title"
@@ -31,7 +31,9 @@ import { AlignmentTypes } from './alignment.type';
         </span>
       </div>
     </div>
-  `
+  `,
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./tooltip.component.scss']
 })
 export class TooltipContentComponent implements AfterViewInit {
 

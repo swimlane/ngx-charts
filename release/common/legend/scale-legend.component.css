@@ -1,0 +1,16 @@
+.chart-legend {
+  display: inline-block;
+  padding: 0;
+  width: auto !important; }
+  .chart-legend .scale-legend {
+    text-align: center;
+    display: flex;
+    flex-direction: column; }
+  .chart-legend .scale-legend-wrap {
+    display: inline-block;
+    flex: 1;
+    width: 30px;
+    border-radius: 5px;
+    margin: 0 auto; }
+  .chart-legend .scale-legend-label {
+    font-size: 12px; }

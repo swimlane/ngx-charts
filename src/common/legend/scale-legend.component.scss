@@ -1,0 +1,23 @@
+.chart-legend {
+  display: inline-block;
+  padding: 0;
+  width: auto !important;
+
+  .scale-legend {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scale-legend-wrap {
+    display: inline-block;
+    flex: 1;
+    width: 30px;
+    border-radius: 5px;
+    margin: 0 auto;
+  }
+
+  .scale-legend-label{
+    font-size: 12px;
+  }
+}

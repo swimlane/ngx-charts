@@ -1,8 +1,10 @@
 # Gauge
 
-<iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/MylIDCFIpzg1oH5tatDs?show=preview"></iframe>
+<iframe width="100%" height="550" frameborder="0" src="https://embed.plnkr.co/MylIDCFIpzg1oH5tatDs?show=preview">
+</iframe>
 
 # Inputs
+
 | Property           | Type     | Default Value | Description                                                                                                     |
 |:-------------------|:---------|:--------------|:----------------------------------------------------------------------------------------------------------------|
 | view               | number[] |               | the dimensions of the chart [width, height]. If left undefined, the chart will fit to the parent container size |
@@ -17,10 +19,13 @@
 | smallSegments      | number   | 5             | number of small segments between every big segment                                                              |
 | showAxis           | boolean  | true          | show or hide the axis                                                                                           |
 | axisTickFormatting | function |               | the axis tick formatting                                                                                        |
+| valueFormatting    | function |               | function that formats the value in the middle of the chart                                                      |
 | angleSpan          | number   | 240           | the angle that the chart spans (in degrees)                                                                     |
 | startAngle         | number   | -120          | the angle that the chart is rotated by. Use negative half of the spanning angle to centralize                   |
+| tooltipDisabled    | boolean  | false         | show or hide the tooltip                                                                                        |
 
 # Outputs
+
 | Property   | Description                              |
 |:-----------|:-----------------------------------------|
 | select     | click event                              |
@@ -28,6 +33,7 @@
 | deactivate | element deactivation event (mouse leave) |
 
 # Data Format
+
 The data format is single series:
 
 ```

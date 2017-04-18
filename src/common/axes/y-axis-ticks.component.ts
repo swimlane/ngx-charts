@@ -172,29 +172,22 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
 
   getTicks(): any {
     let ticks;
-    const maxTicks = this.getMaxTicks();
+    const maxTicks = this.getMaxTicks(20);
+    const maxScaleTicks = this.getMaxTicks(50);
 
     if (this.tickValues) {
       ticks = this.tickValues;
     } else if (this.scale.ticks) {
-      ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-      if (ticks.length > maxTicks) {
-        if (this.tickArguments) {
-          this.tickArguments[0] = Math.min(this.tickArguments[0], maxTicks);
-        } else {
-          this.tickArguments = [maxTicks];
-        }
-        ticks = this.scale.ticks.apply(this.scale, this.tickArguments);
-      }
+      ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
     } else {
       ticks = this.scale.domain();
       ticks = reduceTicks(ticks, maxTicks);
     }
+
     return ticks;
   }
 
-  getMaxTicks(): number {
-    const tickHeight = 20;
+  getMaxTicks(tickHeight: number): number {
     return Math.floor(this.height / tickHeight);
   }
 

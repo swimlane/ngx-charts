@@ -28,8 +28,10 @@
    * [Number Card Chart](charts/number-card.md)
    * [Gauge Chart](charts/gauge.md)
    * [Linear Gauge Chart](charts/linear-gauge.md)
+   * [DAG Chart](https://github.com/swimlane/ngx-charts-dag)
 * Contributing
    * [Building](contributing/building.md)
+   * [Troubleshooting](contributing/troubleshooting.md)
    * [Guidelines](contributing/guidelines.md)
    * [Community](contributing/community.md)
    * [Credits](contributing/credits.md)

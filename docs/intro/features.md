@@ -13,6 +13,7 @@ to build charts. Outside of the following chart types:
 - Heatmap
 - Treemap
 - Number Cards
+- Bubble/Scatter
 
 ### Customization
 - Autoscaling
@@ -23,14 +24,9 @@ to build charts. Outside of the following chart types:
 - Advanced Label Positioning
 - Real-time data support
 - Advanced Tooltips
+- Responsive Layout
 - Data point Event Handlers
 - Works with ngUpgrade
-
-## Coming Soon
-- Responsive Layout
-- Transitions / Animations
-- Better RX Support
-- More Chart Types such as Bubble, Radar, Scatter
 
 If you have an idea for a new feature, create a Github issue or even better a PR ;).
 Make sure to include the use case, an example image of the chart (if applicable) and

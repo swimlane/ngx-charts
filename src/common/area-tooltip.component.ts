@@ -7,9 +7,15 @@ import {
   ViewChildren,
   SimpleChanges,
   Renderer,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 @Component({
   selector: 'g[ngx-charts-area-tooltip]',
   template: `
@@ -22,11 +28,11 @@ import {
         y="0"
         [attr.width]="tooltipArea.width"
         [attr.height]="height"
-        style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
+        style="opacity: 0; cursor: 'auto';"
         (mouseenter)="showTooltip(i)"
         (mouseleave)="hideTooltip(i)"
       />
-      <xhtml:template #tooltipTemplate>
+      <xhtml:ng-template #tooltipTemplate>
         <xhtml:div class="area-tooltip-container">
           <xhtml:div
             *ngFor="let tooltipItem of tooltipArea.values"
@@ -38,25 +44,42 @@ import {
             {{getToolTipText(tooltipItem)}}
           </xhtml:div>
         </xhtml:div>
-      </xhtml:template>
+      </xhtml:ng-template>
       <svg:rect
+        [@animationState]="anchorOpacity[i] !== 0 ? 'active' : 'inactive'"
         class="tooltip-anchor"
         [attr.x]="tooltipArea.tooltipAnchor"
         y="0"
         [attr.width]="1"
         [attr.height]="height"
-        style="fill: rgb(255, 255, 255);"
         [style.opacity]="anchorOpacity[i]"
         [style.pointer-events]="'none'"
         ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
-        [tooltipSpacing]="5"
+        [tooltipSpacing]="15"
         [tooltipTemplate]="tooltipTemplate"
       />
     </svg:g>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition('inactive => active', [
+        style({
+          opacity: 0,
+        }),
+        animate(250, style({opacity: 0.7}))
+      ]),
+      transition('active => inactive', [
+        style({
+          opacity: 0.7,
+        }),
+        animate(250, style({opacity: 0}))
+      ])
+    ])
+  ]
 })
 export class AreaTooltip implements OnChanges {
   tooltipAreas: any[];
@@ -69,6 +92,7 @@ export class AreaTooltip implements OnChanges {
   @Input() height;
   @Input() colors;
   @Input() showPercentage: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() hover = new EventEmitter();
 

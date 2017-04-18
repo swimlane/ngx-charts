@@ -6,12 +6,15 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  trigger,
-  style,
-  transition,
-  animate
 } from '@angular/core';
-import { Location } from '@angular/common';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { formatLabel } from '../common/label.helper';
 import { id } from '../utils/id';
 
@@ -52,6 +55,7 @@ import { id } from '../utils/id';
         (activate)="activateCircle(circle)"
         (deactivate)="deactivateCircle(circle)"
         ngx-tooltip
+        [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="getTooltipText(circle)"
@@ -80,6 +84,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() scaleType;
   @Input() visibleValue;
   @Input() activeEntries: any[];
+  @Input() tooltipDisabled: boolean = false;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -88,7 +93,7 @@ export class CircleSeriesComponent implements OnChanges {
   areaPath: any;
   circles: any[];
 
-  constructor(private location: Location) {
+  constructor(private location: LocationStrategy) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -101,7 +106,10 @@ export class CircleSeriesComponent implements OnChanges {
 
   getCircles(): any[] {
     const seriesName = this.data.name;
-    const pageUrl = this.location.path();
+
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
 
     return this.data.series.map((d, i) => {
       const value = d.value;

@@ -1,5 +1,5 @@
 import { OnChanges, SimpleChanges } from '@angular/core';
-import { Location } from '@angular/common';
+import { LocationStrategy } from '@angular/common';
 export declare class LineSeriesComponent implements OnChanges {
     private location;
     data: any;
@@ -7,7 +7,7 @@ export declare class LineSeriesComponent implements OnChanges {
     yScale: any;
     colors: any;
     scaleType: any;
-    curve: string;
+    curve: any;
     activeEntries: any[];
     rangeFillOpacity: number;
     path: string;
@@ -18,7 +18,7 @@ export declare class LineSeriesComponent implements OnChanges {
     hasGradient: boolean;
     gradientStops: any[];
     areaGradientStops: any[];
-    constructor(location: Location);
+    constructor(location: LocationStrategy);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;
     getLineGenerator(): any;

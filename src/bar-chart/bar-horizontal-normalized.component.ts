@@ -2,17 +2,23 @@ import {
   Component,
   Input,
   Output,
+  ViewEncapsulation,
   EventEmitter,
-  trigger,
-  style,
-  transition,
-  animate,
   ChangeDetectionStrategy
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+
+import { scaleBand, scaleLinear } from 'd3-scale';
+
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
-import d3 from '../d3';
 
 @Component({
   selector: 'ngx-charts-bar-horizontal-normalized',
@@ -58,6 +64,7 @@ import d3 from '../d3';
             [series]="group.series"
             [dims]="dims"
             [gradient]="gradient"
+            [tooltipDisabled]="tooltipDisabled"
             [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
@@ -68,6 +75,8 @@ import d3 from '../d3';
     </ngx-charts-chart>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['../common/base-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('animationState', [
       transition('* => void', [
@@ -89,12 +98,15 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() showYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
+  @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
+  @Input() barPadding = 8;
+  @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -115,35 +127,33 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   update(): void {
     super.update();
 
-    this.zone.run(() => {
-      this.dims = calculateViewDimensions({
-        width: this.width,
-        height: this.height,
-        margins: this.margin,
-        showXAxis: this.xAxis,
-        showYAxis: this.yAxis,
-        xAxisHeight: this.xAxisHeight,
-        yAxisWidth: this.yAxisWidth,
-        showXLabel: this.showXAxisLabel,
-        showYLabel: this.showYAxisLabel,
-        showLegend: this.legend,
-        legendType: this.schemeType
-      });
-
-      this.formatDates();
-
-      this.groupDomain = this.getGroupDomain();
-      this.innerDomain = this.getInnerDomain();
-      this.valueDomain = this.getValueDomain();
-
-      this.xScale = this.getXScale();
-      this.yScale = this.getYScale();
-
-      this.setColors();
-      this.legendOptions = this.getLegendOptions();
-
-      this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
+    this.dims = calculateViewDimensions({
+      width: this.width,
+      height: this.height,
+      margins: this.margin,
+      showXAxis: this.xAxis,
+      showYAxis: this.yAxis,
+      xAxisHeight: this.xAxisHeight,
+      yAxisWidth: this.yAxisWidth,
+      showXLabel: this.showXAxisLabel,
+      showYLabel: this.showYAxisLabel,
+      showLegend: this.legend,
+      legendType: this.schemeType
     });
+
+    this.formatDates();
+
+    this.groupDomain = this.getGroupDomain();
+    this.innerDomain = this.getInnerDomain();
+    this.valueDomain = this.getValueDomain();
+
+    this.xScale = this.getXScale();
+    this.yScale = this.getYScale();
+
+    this.setColors();
+    this.legendOptions = this.getLegendOptions();
+
+    this.transform = `translate(${ this.dims.xOffset } , ${ this.margin[0] })`;
   }
 
   getGroupDomain(): any[] {
@@ -176,26 +186,27 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     return [0, 100];
   }
 
-  getYScale() {
-    const spacing = 0.1;
+  getYScale(): any {
+    const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
 
-    return d3.scaleBand()
+    return scaleBand()
       .rangeRound([this.dims.height, 0])
       .paddingInner(spacing)
       .domain(this.groupDomain);
   }
 
-  getXScale() {
-    return d3.scaleLinear()
+  getXScale(): any {
+    const scale = scaleLinear()
       .range([0, this.dims.width])
       .domain(this.valueDomain);
+    return this.roundDomains ? scale.nice() : scale;
   }
 
   groupTransform(group): string {
     return `translate(0, ${this.yScale(group.name)})`;
   }
 
-  onClick(data, group): void {
+  onClick(data, group?): void {
     if (group) {
       data.series = group.name;
     }
@@ -245,7 +256,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     this.update();
   }
 
-  onActivate(event, group) {
+  onActivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
@@ -262,7 +273,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
-  onDeactivate(event, group) {
+  onDeactivate(event, group?) {
     const item = Object.assign({}, event);
     if (group) {
       item.series = group.name;
