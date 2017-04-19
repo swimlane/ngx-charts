@@ -169,6 +169,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     let spacing = parseInt(this.groupPadding.toString(), 10);
     if (this.groupPadding !== (spacing + '%')) {
       spacing = this.groupDomain.length / (this.dims.height / spacing + 1);
+    } else {
+      spacing /= 100;
     }
 
     return scaleBand()
@@ -183,6 +185,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     let spacing = parseInt(this.barPadding.toString(), 10);
     if (this.barPadding !== (spacing + '%')) {
       spacing = this.innerDomain.length / (height / spacing + 1);
+    } else {
+      spacing /= 100;
     }
 
     return scaleBand()

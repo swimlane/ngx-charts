@@ -187,6 +187,8 @@ export class BarVerticalNormalizedComponent extends BaseChartComponent {
     let spacing = parseInt(this.barPadding.toString(), 10);
     if (this.barPadding !== (spacing + '%')) {
       spacing = this.groupDomain.length / (this.dims.width / spacing + 1);
+    } else {
+      spacing /= 100;
     }
     return scaleBand()
       .rangeRound([0, this.dims.width])
