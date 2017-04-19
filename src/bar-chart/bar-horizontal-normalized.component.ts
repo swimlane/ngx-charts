@@ -105,7 +105,7 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
-  @Input() barPadding = 8;
+  @Input() barPadding: string | number  = 8;
   @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -187,8 +187,8 @@ export class BarHorizontalNormalizedComponent extends BaseChartComponent {
   }
 
   getYScale(): any {
-    let spacing = parseInt(this.barPadding);
-    if (this.barPadding != (spacing + '%')) {
+    let spacing = parseInt(this.barPadding.toString(), 10);
+    if (this.barPadding !== (spacing + '%')) {
       spacing = this.groupDomain.length / (this.dims.height / spacing + 1);
     }
 

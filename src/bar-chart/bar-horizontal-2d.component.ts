@@ -111,8 +111,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
-  @Input() groupPadding = 16;
-  @Input() barPadding = 8;
+  @Input() groupPadding = '16';
+  @Input() barPadding: string | number = 8;
   @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -166,8 +166,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   }
 
   getGroupScale(): any {
-    let spacing = parseInt(this.groupPadding);
-    if (this.groupPadding != (spacing + '%')) {
+    let spacing = parseInt(this.groupPadding.toString(), 10);
+    if (this.groupPadding !== (spacing + '%')) {
       spacing = this.groupDomain.length / (this.dims.height / spacing + 1);
     }
 
@@ -180,8 +180,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
 
   getInnerScale(): any {
     const height = this.groupScale.bandwidth();
-    let spacing = parseInt(this.barPadding);
-    if (this.barPadding != (spacing + '%')) {
+    let spacing = parseInt(this.barPadding.toString(), 10);
+    if (this.barPadding !== (spacing + '%')) {
       spacing = this.innerDomain.length / (height / spacing + 1);
     }
 
