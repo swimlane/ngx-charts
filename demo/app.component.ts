@@ -243,13 +243,8 @@ export class AppComponent implements OnInit {
       const bubbleEntry = {
         name: country,
         series: [{
-          name: '2010',
-          x: Math.floor(10000 + Math.random() * 20000),
-          y: Math.floor(30 + Math.random() * 70),
-          r: Math.floor(30 + Math.random() * 20),
-        }, {
-          name: '2011',
-          x: Math.floor(10000 + Math.random() * 20000),
+          name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+          x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
           y: Math.floor(30 + Math.random() * 70),
           r: Math.floor(30 + Math.random() * 20),
         }]

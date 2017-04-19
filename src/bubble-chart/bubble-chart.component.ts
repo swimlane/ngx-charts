@@ -200,7 +200,10 @@ export class BubbleChartComponent extends BaseChartComponent {
       }
     }
 
-    return [yMin, xMax - this.dims.width, yMax - this.dims.height, xMin];
+    xMax = Math.max(xMax - this.dims.width, 0);
+    yMax = Math.max(yMax - this.dims.height, 0);
+
+    return [yMin, xMax, yMax, xMin];
   }
 
   setScales() {
