@@ -111,42 +111,44 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   update(): void {
-    const hasValue = this.data && typeof this.data.value !== 'undefined';
-    this.valueFormatting = this.valueFormatting || (card => card.data.value.toLocaleString());
-    this.labelFormatting = this.labelFormatting || (card => trimLabel(card.label, 55));
+    this.zone.run(() => {
+      const hasValue = this.data && typeof this.data.value !== 'undefined';
+      this.valueFormatting = this.valueFormatting || (card => card.data.value.toLocaleString());
+      this.labelFormatting = this.labelFormatting || (card => trimLabel(card.label, 55));
 
-    this.transform = `translate(${this.x} , ${this.y})`;
+      this.transform = `translate(${this.x} , ${this.y})`;
 
-    this.textWidth = Math.max(0, this.width) - this.textPadding[1] - this.textPadding[3];
-    this.cardWidth = Math.max(0, this.width);
-    this.cardHeight = Math.max(0, this.height);
+      this.textWidth = Math.max(0, this.width) - this.textPadding[1] - this.textPadding[3];
+      this.cardWidth = Math.max(0, this.width);
+      this.cardHeight = Math.max(0, this.height);
 
-    this.label = this.data ? this.data.name : '';
+      this.label = this.data ? this.data.name : '';
 
-    const cardData = {
-      label: this.label,
-      data: this.data,
-      value: this.data.value
-    };
+      const cardData = {
+        label: this.label,
+        data: this.data,
+        value: this.data.value
+      };
 
-    this.formattedLabel = this.labelFormatting(cardData);
-    this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
+      this.formattedLabel = this.labelFormatting(cardData);
+      this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
 
-    const value = hasValue ? this.valueFormatting(cardData) : '';
+      const value = hasValue ? this.valueFormatting(cardData) : '';
 
-    this.value = this.paddedValue(value);
+      this.value = this.paddedValue(value);
 
-    this.setPadding();
-    this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
+      this.setPadding();
+      this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
 
-    setTimeout(() => {
-      this.scaleText();
-      this.value = value;
-      
-      if (hasValue) {
-        setTimeout(() => this.startCount(), 20);
-      }
-    }, 0);
+      setTimeout(() => {
+        this.scaleText();
+        this.value = value;
+        
+        if (hasValue) {
+          setTimeout(() => this.startCount(), 20);
+        }
+      }, 0);
+    });
   }
 
   paddedValue(value: string) {
