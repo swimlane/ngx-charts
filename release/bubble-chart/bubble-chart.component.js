@@ -94,7 +94,9 @@ var BubbleChartComponent = (function (_super) {
                 xMax = Math.max(cx + r, xMax);
             }
         }
-        return [yMin, xMax - this.dims.width, yMax - this.dims.height, xMin];
+        xMax = Math.max(xMax - this.dims.width, 0);
+        yMax = Math.max(yMax - this.dims.height, 0);
+        return [yMin, xMax, yMax, xMin];
     };
     BubbleChartComponent.prototype.setScales = function () {
         this.xScale = this.getXScale(this.xDomain, this.dims.width - this.bubblePadding[1]);

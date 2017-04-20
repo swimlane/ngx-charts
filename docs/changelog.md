@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.1.2
+- Bug: Fix number card scaling in hybrid apps using ngUpgrade  (#338)
+- Bug: Fix label trimming and clipped SVGs (#340)
+
 ## 5.1.1
 - Bug: Add default value for label format  (#334)
 

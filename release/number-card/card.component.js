@@ -24,32 +24,34 @@ var CardComponent = (function () {
     };
     CardComponent.prototype.update = function () {
         var _this = this;
-        var hasValue = this.data && typeof this.data.value !== 'undefined';
-        this.valueFormatting = this.valueFormatting || (function (card) { return card.data.value.toLocaleString(); });
-        this.labelFormatting = this.labelFormatting || (function (card) { return trimLabel(card.label, 55); });
-        this.transform = "translate(" + this.x + " , " + this.y + ")";
-        this.textWidth = Math.max(0, this.width) - this.textPadding[1] - this.textPadding[3];
-        this.cardWidth = Math.max(0, this.width);
-        this.cardHeight = Math.max(0, this.height);
-        this.label = this.data ? this.data.name : '';
-        var cardData = {
-            label: this.label,
-            data: this.data,
-            value: this.data.value
-        };
-        this.formattedLabel = this.labelFormatting(cardData);
-        this.transformBand = "translate(0 , " + (this.cardHeight - this.bandHeight) + ")";
-        var value = hasValue ? this.valueFormatting(cardData) : '';
-        this.value = this.paddedValue(value);
-        this.setPadding();
-        this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
-        setTimeout(function () {
-            _this.scaleText();
-            _this.value = value;
-            if (hasValue) {
-                setTimeout(function () { return _this.startCount(); }, 20);
-            }
-        }, 0);
+        this.zone.run(function () {
+            var hasValue = _this.data && typeof _this.data.value !== 'undefined';
+            _this.valueFormatting = _this.valueFormatting || (function (card) { return card.data.value.toLocaleString(); });
+            _this.labelFormatting = _this.labelFormatting || (function (card) { return trimLabel(card.label, 55); });
+            _this.transform = "translate(" + _this.x + " , " + _this.y + ")";
+            _this.textWidth = Math.max(0, _this.width) - _this.textPadding[1] - _this.textPadding[3];
+            _this.cardWidth = Math.max(0, _this.width);
+            _this.cardHeight = Math.max(0, _this.height);
+            _this.label = _this.data ? _this.data.name : '';
+            var cardData = {
+                label: _this.label,
+                data: _this.data,
+                value: _this.data.value
+            };
+            _this.formattedLabel = _this.labelFormatting(cardData);
+            _this.transformBand = "translate(0 , " + (_this.cardHeight - _this.bandHeight) + ")";
+            var value = hasValue ? _this.valueFormatting(cardData) : '';
+            _this.value = _this.paddedValue(value);
+            _this.setPadding();
+            _this.bandPath = roundedRect(0, 0, _this.cardWidth, _this.bandHeight, 3, false, false, true, true);
+            setTimeout(function () {
+                _this.scaleText();
+                _this.value = value;
+                if (hasValue) {
+                    setTimeout(function () { return _this.startCount(); }, 20);
+                }
+            }, 0);
+        });
     };
     CardComponent.prototype.paddedValue = function (value) {
         if (this.medianSize && this.medianSize > value.length) {
