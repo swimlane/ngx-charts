@@ -14,6 +14,7 @@ var BarHorizontal2DComponent = (function (_super) {
     function BarHorizontal2DComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.legend = false;
+        _this.legendTitle = 'Legend';
         _this.tooltipDisabled = false;
         _this.showGridLines = true;
         _this.activeEntries = [];
@@ -56,7 +57,7 @@ var BarHorizontal2DComponent = (function (_super) {
     BarHorizontal2DComponent.prototype.getGroupScale = function () {
         var spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
         return scaleBand()
-            .rangeRound([this.dims.height, 0])
+            .rangeRound([0, this.dims.height])
             .paddingInner(spacing)
             .paddingOuter(spacing / 2)
             .domain(this.groupDomain);
@@ -139,11 +140,13 @@ var BarHorizontal2DComponent = (function (_super) {
         var opts = {
             scaleType: this.schemeType,
             colors: undefined,
-            domain: []
+            domain: [],
+            title: undefined
         };
         if (opts.scaleType === 'ordinal') {
             opts.domain = this.innerDomain;
             opts.colors = this.colors;
+            opts.title = this.legendTitle;
         }
         else {
             opts.domain = this.valuesDomain;
@@ -214,6 +217,7 @@ BarHorizontal2DComponent.decorators = [
 BarHorizontal2DComponent.ctorParameters = function () { return []; };
 BarHorizontal2DComponent.propDecorators = {
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'xAxis': [{ type: Input },],
     'yAxis': [{ type: Input },],
     'showXAxisLabel': [{ type: Input },],

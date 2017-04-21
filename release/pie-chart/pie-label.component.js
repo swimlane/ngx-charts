@@ -24,6 +24,9 @@ var PieLabelComponent = (function () {
         // Calculate innerPos then scale outer position to match label position
         var innerPos = innerArc.centroid(this.data);
         var scale = this.data.pos[1] / innerPos[1];
+        if (this.data.pos[1] === 0 || innerPos[1] === 0) {
+            scale = 1;
+        }
         var outerPos = [scale * innerPos[0], scale * innerPos[1]];
         this.line = "M" + innerPos + "L" + outerPos + "L" + this.data.pos;
     };

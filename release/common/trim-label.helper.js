@@ -8,11 +8,12 @@ export function trimLabel(s, max) {
             return '';
         }
     }
+    s = s.trim();
     if (s.length <= max) {
         return s;
     }
     else {
-        return s.slice(0, max).trim() + "...";
+        return s.slice(0, max) + "...";
     }
 }
 //# sourceMappingURL=trim-label.helper.js.map

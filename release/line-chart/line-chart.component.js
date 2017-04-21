@@ -15,11 +15,13 @@ var LineChartComponent = (function (_super) {
     __extends(LineChartComponent, _super);
     function LineChartComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.legendTitle = 'Legend';
         _this.showGridLines = true;
         _this.curve = curveLinear;
         _this.activeEntries = [];
         _this.roundDomains = false;
         _this.tooltipDisabled = false;
+        _this.showSeriesOnHover = true;
         _this.activate = new EventEmitter();
         _this.deactivate = new EventEmitter();
         _this.margin = [10, 20, 10, 20];
@@ -227,11 +229,13 @@ var LineChartComponent = (function (_super) {
         var opts = {
             scaleType: this.schemeType,
             colors: undefined,
-            domain: []
+            domain: [],
+            title: undefined
         };
         if (opts.scaleType === 'ordinal') {
             opts.domain = this.seriesDomain;
             opts.colors = this.colors;
+            opts.title = this.legendTitle;
         }
         else {
             opts.domain = this.yDomain;
@@ -256,7 +260,7 @@ var LineChartComponent = (function (_super) {
         if (idx > -1) {
             return;
         }
-        this.activeEntries = [item].concat(this.activeEntries);
+        this.activeEntries = this.showSeriesOnHover ? [item].concat(this.activeEntries) : this.activeEntries;
         this.activate.emit({ value: item, entries: this.activeEntries });
     };
     LineChartComponent.prototype.onDeactivate = function (item) {
@@ -291,6 +295,7 @@ LineChartComponent.decorators = [
 LineChartComponent.ctorParameters = function () { return []; };
 LineChartComponent.propDecorators = {
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'xAxis': [{ type: Input },],
     'yAxis': [{ type: Input },],
     'showXAxisLabel': [{ type: Input },],
@@ -309,6 +314,7 @@ LineChartComponent.propDecorators = {
     'yAxisTickFormatting': [{ type: Input },],
     'roundDomains': [{ type: Input },],
     'tooltipDisabled': [{ type: Input },],
+    'showSeriesOnHover': [{ type: Input },],
     'activate': [{ type: Output },],
     'deactivate': [{ type: Output },],
     'hideCircles': [{ type: HostListener, args: ['mouseleave',] },],

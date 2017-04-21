@@ -13,6 +13,7 @@ var GaugeComponent = (function (_super) {
     function GaugeComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.legend = false;
+        _this.legendTitle = 'Legend';
         _this.min = 0;
         _this.max = 100;
         _this.bigSegments = 10;
@@ -176,7 +177,8 @@ var GaugeComponent = (function (_super) {
         return {
             scaleType: 'ordinal',
             colors: this.colors,
-            domain: this.domain
+            domain: this.domain,
+            title: this.legendTitle
         };
     };
     GaugeComponent.prototype.setColors = function () {
@@ -227,6 +229,7 @@ GaugeComponent.decorators = [
 GaugeComponent.ctorParameters = function () { return []; };
 GaugeComponent.propDecorators = {
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'min': [{ type: Input },],
     'max': [{ type: Input },],
     'textValue': [{ type: Input },],

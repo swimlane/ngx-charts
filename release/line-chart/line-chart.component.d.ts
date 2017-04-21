@@ -4,6 +4,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class LineChartComponent extends BaseChartComponent {
     legend: any;
+    legendTitle: string;
     xAxis: any;
     yAxis: any;
     showXAxisLabel: any;
@@ -22,6 +23,7 @@ export declare class LineChartComponent extends BaseChartComponent {
     yAxisTickFormatting: any;
     roundDomains: boolean;
     tooltipDisabled: boolean;
+    showSeriesOnHover: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     dims: ViewDimensions;
@@ -70,6 +72,7 @@ export declare class LineChartComponent extends BaseChartComponent {
         scaleType: string;
         colors: any;
         domain: any[];
+        title: any;
     };
     updateYAxisWidth({width}: {
         width: any;

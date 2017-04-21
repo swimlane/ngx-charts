@@ -14,6 +14,7 @@ var BarHorizontalStackedComponent = (function (_super) {
     function BarHorizontalStackedComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.legend = false;
+        _this.legendTitle = 'Legend';
         _this.tooltipDisabled = false;
         _this.showGridLines = true;
         _this.activeEntries = [];
@@ -92,7 +93,7 @@ var BarHorizontalStackedComponent = (function (_super) {
     BarHorizontalStackedComponent.prototype.getYScale = function () {
         var spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
         return scaleBand()
-            .rangeRound([this.dims.height, 0])
+            .rangeRound([0, this.dims.height])
             .paddingInner(spacing)
             .domain(this.groupDomain);
     };
@@ -128,11 +129,13 @@ var BarHorizontalStackedComponent = (function (_super) {
         var opts = {
             scaleType: this.schemeType,
             colors: undefined,
-            domain: []
+            domain: [],
+            title: undefined
         };
         if (opts.scaleType === 'ordinal') {
             opts.domain = this.innerDomain;
             opts.colors = this.colors;
+            opts.title = this.legendTitle;
         }
         else {
             opts.domain = this.valueDomain;
@@ -203,6 +206,7 @@ BarHorizontalStackedComponent.decorators = [
 BarHorizontalStackedComponent.ctorParameters = function () { return []; };
 BarHorizontalStackedComponent.propDecorators = {
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'xAxis': [{ type: Input },],
     'yAxis': [{ type: Input },],
     'showXAxisLabel': [{ type: Input },],

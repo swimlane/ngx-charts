@@ -127,6 +127,7 @@ import { id } from '../utils/id';
 export class LineChartComponent extends BaseChartComponent {
 
   @Input() legend;
+  @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -145,6 +146,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() showSeriesOnHover: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -409,11 +411,13 @@ export class LineChartComponent extends BaseChartComponent {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      title: undefined
     };
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
+      opts.title = this.legendTitle;
     } else {
       opts.domain = this.yDomain;
       opts.colors = this.colors.scale;
@@ -438,8 +442,7 @@ export class LineChartComponent extends BaseChartComponent {
     if (idx > -1) {
       return;
     }
-
-    this.activeEntries = [ item, ...this.activeEntries ];
+    this.activeEntries = this.showSeriesOnHover ? [ item, ...this.activeEntries ] : this.activeEntries;
     this.activate.emit({ value: item, entries: this.activeEntries });
   }
 
