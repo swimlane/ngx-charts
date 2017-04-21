@@ -13,6 +13,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
@@ -36,6 +37,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
@@ -59,6 +61,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [tooltipDisabled]="tooltipDisabled"
@@ -85,6 +88,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
@@ -110,6 +114,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
@@ -133,6 +138,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showYAxisLabel]="showYAxisLabel"
@@ -156,6 +162,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         (legendLabelClick)="onLegendLabelClick($event)"
         [showYAxisLabel]="showYAxisLabel"
@@ -179,6 +186,7 @@
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
         [xAxisLabel]="xAxisLabel"
@@ -197,6 +205,7 @@
         [scheme]="colorScheme"
         [results]="single"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [explodeSlices]="explodeSlices"
         [labels]="showLabels"
         [doughnut]="doughnut"
@@ -204,6 +213,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
         (select)="select($event)">
       </ngx-charts-pie-chart>
       <ngx-charts-advanced-pie-chart
@@ -215,6 +225,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
         (select)="select($event)">
       </ngx-charts-advanced-pie-chart>
       <ngx-charts-pie-grid
@@ -225,6 +236,7 @@
         (legendLabelClick)="onLegendLabelClick($event)"
         [results]="single"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="pieTooltipText"
         (select)="select($event)">
       </ngx-charts-pie-grid>
       <ngx-charts-line-chart
@@ -235,6 +247,7 @@
         [schemeType]="schemeType"
         [results]="dateDataWithOrWithoutRange"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -250,6 +263,7 @@
         [rangeFillOpacity]="rangeFillOpacity"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
+        [showSeriesOnHover]="showSeriesOnHover"
         (select)="select($event)">
       </ngx-charts-line-chart>
       <ngx-charts-bubble-chart
@@ -259,6 +273,7 @@
         [results]="bubble"
         [showGridLines]="showGridLines"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
@@ -269,7 +284,7 @@
         [scheme]="colorScheme"
         [schemeType]="schemeType"
         [roundDomains]="roundDomains"
-        [tooltipDisabled]="tooltipDisabled">
+        [tooltipDisabled]="tooltipDisabled"
         [minRadius]="minRadius"
         [maxRadius]="maxRadius">
       </ngx-charts-bubble-chart>
@@ -277,6 +292,7 @@
         *ngIf="chartType === 'force-directed-graph'"
         class="chart-container"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [links]="graph.links"
         (legendLabelClick)="onLegendLabelClick($event)"
         [nodes]="graph.nodes"
@@ -293,6 +309,7 @@
         [schemeType]="schemeType"
         [results]="dateData"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         (legendLabelClick)="onLegendLabelClick($event)"
         [gradient]="gradient"
         [xAxis]="showXAxis"
@@ -317,6 +334,7 @@
         [schemeType]="schemeType"
         [results]="dateData"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
@@ -340,6 +358,7 @@
         [schemeType]="schemeType"
         [results]="dateData"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         (legendLabelClick)="onLegendLabelClick($event)"
@@ -412,7 +431,6 @@
         cardColor="#232837"
         emptyColor="#1e222e"
         [results]="single"
-        [valueFormatting]="dollarValueFormat"
         (select)="select($event)">
       </ngx-charts-number-card>
       <ngx-charts-number-card
@@ -425,6 +443,7 @@
         emptyColor="#1e222e"
         [results]="statusData"
         [valueFormatting]="statusValueFormat"
+        [labelFormatting]="statusLabelFormat"
         (select)="select($event)">
       </ngx-charts-number-card>
       <ngx-charts-gauge
@@ -432,6 +451,7 @@
         class="chart-container"
         [view]="view"
         [legend]="showLegend"
+        [legendTitle]="legendTitle"
         [results]="single"
         [textValue]="gaugeTextValue"
         [scheme]="colorScheme"
@@ -613,16 +633,20 @@
           Show Legend
         </label> <br />
       </div>
-      <div *ngIf="chart.options.includes('showXAxisLabel')">
-        <label>
-          <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
-          Show X Axis Label
-        </label> <br />
+      <div *ngIf="chart.options.includes('legendTitle')">
+        <label>Legend Title:</label><br />
+        <input type="text" [(ngModel)]="legendTitle"><br />
       </div>
       <div *ngIf="chart.options.includes('tooltipDisabled')">
         <label>
           <input type="checkbox" [checked]="tooltipDisabled" (change)="tooltipDisabled = $event.target.checked">
           Disable tooltip
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('showXAxisLabel')">
+        <label>
+          <input type="checkbox" [checked]="showXAxisLabel" (change)="showXAxisLabel = $event.target.checked">
+          Show X Axis Label
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('xAxisLabel')">

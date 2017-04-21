@@ -4,6 +4,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 export declare class PieChartComponent extends BaseChartComponent {
     labels: boolean;
     legend: boolean;
+    legendTitle: string;
     explodeSlices: boolean;
     doughnut: boolean;
     arcWidth: number;
@@ -11,6 +12,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     activeEntries: any[];
     tooltipDisabled: boolean;
     labelFormatting: any;
+    tooltipText: any;
     select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
@@ -31,6 +33,7 @@ export declare class PieChartComponent extends BaseChartComponent {
         scaleType: string;
         domain: any;
         colors: ColorHelper;
+        title: string;
     };
     onActivate(item: any): void;
     onDeactivate(item: any): void;

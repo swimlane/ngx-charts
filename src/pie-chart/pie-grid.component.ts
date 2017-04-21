@@ -35,7 +35,7 @@ import { formatLabel } from '../common/label.helper';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="getTooltipText(series.label, series.value.toLocaleString())"
+            [tooltipTitle]="tooltipText({data: series})"
           />
           <svg:text
             class="label percent-label"
@@ -78,6 +78,7 @@ import { formatLabel } from '../common/label.helper';
 })
 export class PieGridComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipText: any;
 
   dims: ViewDimensions;
   data: any[];
@@ -103,9 +104,13 @@ export class PieGridComponent extends BaseChartComponent {
 
     this.series = this.getSeries();
     this.setColors();
+
+    this.tooltipText = this.tooltipText || this.defaultTooltipText;
   }
 
-  getTooltipText(label, val): string {
+  defaultTooltipText({data}): string {
+    const label = trimLabel(formatLabel(data.name));
+    const val = data.value.toLocaleString();
     return `
       <span class="tooltip-label">${label}</span>
       <span class="tooltip-val">${val}</span>
@@ -122,7 +127,8 @@ export class PieGridComponent extends BaseChartComponent {
     return this.data.map((d) => {
       const baselineLabelHeight = 20;
       const padding = 10;
-      const label = formatLabel(d.data.name);
+      const name = d.data.name;
+      const label = formatLabel(name);
       const value = d.data.value;
       const radius = (min([d.width - padding, d.height - baselineLabelHeight]) / 2) - 5;
       const innerRadius = radius * 0.9;
@@ -145,6 +151,7 @@ export class PieGridComponent extends BaseChartComponent {
         colors,
         innerRadius,
         outerRadius: radius,
+        name,
         label: trimLabel(label),
         total: value,
         value,

@@ -19,6 +19,7 @@ var ForceDirectedGraphComponent = (function (_super) {
             .force('x', forceX())
             .force('y', forceY());
         _this.forceLink = forceLink().id(function (node) { return node.value; });
+        _this.legendTitle = 'Legend';
         _this.nodes = [];
         _this.links = [];
         _this.activeEntries = [];
@@ -83,7 +84,8 @@ var ForceDirectedGraphComponent = (function (_super) {
         return {
             scaleType: 'ordinal',
             domain: this.seriesDomain,
-            colors: this.colors
+            colors: this.colors,
+            title: this.legendTitle
         };
     };
     // Easier to use Angular2 event management than use d3.drag
@@ -129,6 +131,7 @@ ForceDirectedGraphComponent.propDecorators = {
     'force': [{ type: Input },],
     'forceLink': [{ type: Input },],
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'nodes': [{ type: Input },],
     'links': [{ type: Input },],
     'activeEntries': [{ type: Input },],

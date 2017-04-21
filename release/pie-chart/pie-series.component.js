@@ -24,6 +24,7 @@ var PieSeriesComponent = (function () {
             return d.value;
         });
         this.data = this.calculateLabelPositions(arcData);
+        this.tooltipText = this.tooltipText || this.defaultTooltipText;
     };
     PieSeriesComponent.prototype.midAngle = function (d) {
         return d.startAngle + (d.endAngle - d.startAngle) / 2;
@@ -72,7 +73,7 @@ var PieSeriesComponent = (function () {
     PieSeriesComponent.prototype.label = function (arc) {
         return formatLabel(arc.data.name);
     };
-    PieSeriesComponent.prototype.tooltipText = function (arc) {
+    PieSeriesComponent.prototype.defaultTooltipText = function (arc) {
         var label = this.label(arc);
         var val = formatLabel(arc.data.value);
         return "\n      <span class=\"tooltip-label\">" + label + "</span>\n      <span class=\"tooltip-val\">" + val + "</span>\n    ";
@@ -118,6 +119,7 @@ PieSeriesComponent.propDecorators = {
     'activeEntries': [{ type: Input },],
     'tooltipDisabled': [{ type: Input },],
     'labelFormatting': [{ type: Input },],
+    'tooltipText': [{ type: Input },],
     'select': [{ type: Output },],
     'activate': [{ type: Output },],
     'deactivate': [{ type: Output },],

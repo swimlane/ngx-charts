@@ -92,6 +92,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 export class BarHorizontalStackedComponent extends BaseChartComponent {
 
   @Input() legend = false;
+  @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -208,7 +209,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
       spacing /= 100;
     }
     return scaleBand()
-      .rangeRound([this.dims.height, 0])
+      .rangeRound([0, this.dims.height])
       .paddingInner(spacing)
       .domain(this.groupDomain);
   }
@@ -251,11 +252,13 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      title: undefined
     };
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
+      opts.title = this.legendTitle;
     } else {
       opts.domain = this.valueDomain;
       opts.colors = this.colors.scale;

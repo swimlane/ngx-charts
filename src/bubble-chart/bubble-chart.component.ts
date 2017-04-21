@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+  ViewEncapsulation,
+  ChangeDetectionStrategy } from '@angular/core';
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -71,7 +78,10 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
             (deactivate)="onDeactivate($event)" />
         </svg:g>
       </svg:g>
-    </ngx-charts-chart>`
+    </ngx-charts-chart>`,
+    styleUrls: ['../common/base-chart.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class BubbleChartComponent extends BaseChartComponent {
   @Input() view: number[] = [400, 400];
@@ -79,6 +89,7 @@ export class BubbleChartComponent extends BaseChartComponent {
   @Input() results;
   @Input() showGridLines: boolean = true;
   @Input() legend = false;
+  @Input() legendTitle: string = 'Legend';
   @Input() xAxis: boolean = true;
   @Input() yAxis: boolean = true;
   @Input() showXAxisLabel: boolean;
@@ -199,7 +210,10 @@ export class BubbleChartComponent extends BaseChartComponent {
       }
     }
 
-    return [yMin, xMax - this.dims.width, yMax - this.dims.height, xMin];
+    xMax = Math.max(xMax - this.dims.width, 0);
+    yMax = Math.max(yMax - this.dims.height, 0);
+
+    return [yMin, xMax, yMax, xMin];
   }
 
   setScales() {
@@ -228,12 +242,14 @@ export class BubbleChartComponent extends BaseChartComponent {
       scaleType: this.schemeType,
       colors: undefined,
       domain: [],
-      position: this.legendPosition
+      position: this.legendPosition,
+      title: undefined
     };
 
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.seriesDomain;
       opts.colors = this.colors;
+      opts.title = this.legendTitle;
     } else {
       opts.domain = this.rDomain;
       opts.colors = this.colors.scale;

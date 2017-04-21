@@ -12,6 +12,7 @@ var HeatMapComponent = (function (_super) {
     __extends(HeatMapComponent, _super);
     function HeatMapComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.legendTitle = 'Legend';
         _this.innerPadding = 8;
         _this.tooltipDisabled = false;
         _this.margin = [10, 20, 10, 20];
@@ -177,7 +178,8 @@ var HeatMapComponent = (function (_super) {
         return {
             scaleType: this.scaleType,
             domain: this.valueDomain,
-            colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale
+            colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
+            title: this.scaleType === 'ordinal' ? this.legendTitle : undefined
         };
     };
     HeatMapComponent.prototype.updateYAxisWidth = function (_a) {
@@ -206,6 +208,7 @@ HeatMapComponent.decorators = [
 HeatMapComponent.ctorParameters = function () { return []; };
 HeatMapComponent.propDecorators = {
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'xAxis': [{ type: Input },],
     'yAxis': [{ type: Input },],
     'showXAxisLabel': [{ type: Input },],

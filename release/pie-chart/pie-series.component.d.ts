@@ -11,6 +11,7 @@ export declare class PieSeriesComponent implements OnChanges {
     activeEntries: any[];
     tooltipDisabled: boolean;
     labelFormatting: any;
+    tooltipText: any;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -24,7 +25,7 @@ export declare class PieSeriesComponent implements OnChanges {
     labelVisible(arc: any): boolean;
     labelText(arc: any): string;
     label(arc: any): string;
-    tooltipText(arc: any): string;
+    defaultTooltipText(arc: any): string;
     color(arc: any): any;
     trackBy(index: any, item: any): string;
     onClick(data: any): void;
