@@ -1,7 +1,9 @@
 import { OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Rx';
 import { PieLabelOption } from '../src/common';
 export declare class AppComponent implements OnInit {
+    location: Location;
     version: string;
     theme: string;
     chartType: string;
@@ -14,6 +16,7 @@ export declare class AppComponent implements OnInit {
     dateData: any[];
     dateDataWithRange: any[];
     calendarData: any[];
+    statusData: any[];
     graph: {
         links: any[];
         nodes: any[];
@@ -29,6 +32,7 @@ export declare class AppComponent implements OnInit {
     showYAxis: boolean;
     gradient: boolean;
     showLegend: boolean;
+    legendTitle: string;
     showXAxisLabel: boolean;
     tooltipDisabled: boolean;
     xAxisLabel: string;
@@ -41,6 +45,7 @@ export declare class AppComponent implements OnInit {
     roundDomains: boolean;
     maxRadius: number;
     minRadius: number;
+    showSeriesOnHover: boolean;
     curveType: string;
     curve: any;
     interpolationTypes: string[];
@@ -73,7 +78,7 @@ export declare class AppComponent implements OnInit {
     gaugeShowAxis: boolean;
     gaugeValue: number;
     gaugePreviousValue: number;
-    constructor();
+    constructor(location: Location);
     readonly dateDataWithOrWithoutRange: any[];
     ngOnInit(): void;
     updateData(): void;
@@ -87,5 +92,15 @@ export declare class AppComponent implements OnInit {
     getCalendarData(): any[];
     calendarAxisTickFormatting(mondayString: string): string;
     calendarTooltipText(c: any): string;
+    pieTooltipText({data}: {
+        data: any;
+    }): string;
+    dollarValueFormat(c: any): string;
+    getStatusData(): {
+        name: string;
+        value: number;
+    }[];
+    statusValueFormat(c: any): string;
+    statusLabelFormat(c: any): string;
     pieLabelOptionChanged(): void;
 }

@@ -6,6 +6,7 @@ export declare class AdvancedPieChartComponent extends BaseChartComponent {
     gradient: boolean;
     activeEntries: any[];
     tooltipDisabled: boolean;
+    tooltipText: any;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     data: any;
