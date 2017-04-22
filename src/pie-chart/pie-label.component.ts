@@ -134,4 +134,5 @@ export class PieLabelComponent implements OnChanges {
     return formattedLabel;
 
   }
+
 }
