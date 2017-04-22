@@ -1,5 +1,6 @@
 .ngx-charts {
-  float: left; }
+  float: left;
+  overflow: visible; }
   .ngx-charts .circle,
   .ngx-charts .bar,
   .ngx-charts .arc {

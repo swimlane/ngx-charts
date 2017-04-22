@@ -7,6 +7,7 @@ export declare class BubbleChartComponent extends BaseChartComponent {
     results: any;
     showGridLines: boolean;
     legend: boolean;
+    legendTitle: string;
     xAxis: boolean;
     yAxis: boolean;
     showXAxisLabel: boolean;

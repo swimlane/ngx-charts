@@ -3,6 +3,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class PieGridComponent extends BaseChartComponent {
     tooltipDisabled: boolean;
+    tooltipText: any;
     dims: ViewDimensions;
     data: any[];
     transform: string;
@@ -11,7 +12,9 @@ export declare class PieGridComponent extends BaseChartComponent {
     colorScale: ColorHelper;
     margin: number[];
     update(): void;
-    getTooltipText(label: any, val: any): string;
+    defaultTooltipText({data}: {
+        data: any;
+    }): string;
     getDomain(): any[];
     getSeries(): any[];
     getTotal(): any;

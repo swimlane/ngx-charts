@@ -49,7 +49,7 @@ export class PieLabelComponent implements OnChanges {
   line: string;
 
   private readonly isIE = /(edge|msie|trident)/i.test(navigator.userAgent);
-  
+
   constructor() {
     this.trimLabel = trimLabel;
   }
@@ -75,7 +75,11 @@ export class PieLabelComponent implements OnChanges {
 
     // Calculate innerPos then scale outer position to match label position
     const innerPos = innerArc.centroid(this.data);
-    const scale = this.data.pos[1] / innerPos[1];
+
+    let scale = this.data.pos[1] / innerPos[1];
+    if (this.data.pos[1] === 0 || innerPos[1] === 0) {
+      scale = 1;
+    }
     const outerPos = [scale * innerPos[0], scale * innerPos[1]];
 
     this.line = `M${innerPos}L${outerPos}L${this.data.pos}`;

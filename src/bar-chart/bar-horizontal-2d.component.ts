@@ -98,6 +98,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
 export class BarHorizontal2DComponent extends BaseChartComponent {
 
   @Input() legend = false;
+  @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -169,7 +170,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     const spacing = this.groupDomain.length / (this.dims.height / this.groupPadding + 1);
 
     return scaleBand()
-      .rangeRound([this.dims.height, 0])
+      .rangeRound([0, this.dims.height])
       .paddingInner(spacing)
       .paddingOuter(spacing / 2)
       .domain(this.groupDomain);
@@ -267,11 +268,13 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     const opts = {
       scaleType: this.schemeType,
       colors: undefined,
-      domain: []
+      domain: [],
+      title: undefined
     };
     if (opts.scaleType === 'ordinal') {
       opts.domain = this.innerDomain;
       opts.colors = this.colors;
+      opts.title = this.legendTitle;
     } else {
       opts.domain = this.valuesDomain;
       opts.colors = this.colors.scale;

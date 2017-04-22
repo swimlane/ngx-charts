@@ -4,6 +4,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class BarVerticalComponent extends BaseChartComponent {
     legend: boolean;
+    legendTitle: string;
     xAxis: any;
     yAxis: any;
     showXAxisLabel: any;
@@ -43,6 +44,7 @@ export declare class BarVerticalComponent extends BaseChartComponent {
         scaleType: string;
         colors: any;
         domain: any[];
+        title: any;
     };
     updateYAxisWidth({width}: {
         width: any;

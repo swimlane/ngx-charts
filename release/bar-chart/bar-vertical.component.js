@@ -13,6 +13,7 @@ var BarVerticalComponent = (function (_super) {
     function BarVerticalComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.legend = false;
+        _this.legendTitle = 'Legend';
         _this.tooltipDisabled = false;
         _this.showGridLines = true;
         _this.activeEntries = [];
@@ -87,11 +88,13 @@ var BarVerticalComponent = (function (_super) {
         var opts = {
             scaleType: this.schemeType,
             colors: undefined,
-            domain: []
+            domain: [],
+            title: undefined
         };
         if (opts.scaleType === 'ordinal') {
             opts.domain = this.xDomain;
             opts.colors = this.colors;
+            opts.title = this.legendTitle;
         }
         else {
             opts.domain = this.yDomain;
@@ -143,6 +146,7 @@ BarVerticalComponent.decorators = [
 BarVerticalComponent.ctorParameters = function () { return []; };
 BarVerticalComponent.propDecorators = {
     'legend': [{ type: Input },],
+    'legendTitle': [{ type: Input },],
     'xAxis': [{ type: Input },],
     'yAxis': [{ type: Input },],
     'showXAxisLabel': [{ type: Input },],

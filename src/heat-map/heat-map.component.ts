@@ -65,6 +65,7 @@ import { ColorHelper } from '../common/color.helper';
 export class HeatMapComponent extends BaseChartComponent {
 
   @Input() legend;
+  @Input() legendTitle: string = 'Legend';
   @Input() xAxis;
   @Input() yAxis;
   @Input() showXAxisLabel;
@@ -272,7 +273,8 @@ export class HeatMapComponent extends BaseChartComponent {
     return {
       scaleType: this.scaleType,
       domain: this.valueDomain,
-      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale
+      colors: this.scaleType === 'ordinal' ? this.colors : this.colors.scale,
+      title: this.scaleType === 'ordinal' ? this.legendTitle : undefined
     };
   }
 

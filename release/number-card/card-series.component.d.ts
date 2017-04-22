@@ -20,6 +20,8 @@ export declare class CardSeriesComponent implements OnChanges {
     bandColor: any;
     emptyColor: string;
     textColor: any;
+    valueFormatting: any;
+    labelFormatting: any;
     select: EventEmitter<{}>;
     cards: CardModel[];
     emptySlots: any[];
