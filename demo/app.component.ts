@@ -126,6 +126,11 @@ export class AppComponent implements OnInit {
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
 
+  // demos
+  totalSales = 0;
+  salePrice = 100;
+  personnelCost = 100;
+
   constructor(public location: Location) {
     Object.assign(this, {
       single,
@@ -445,38 +450,51 @@ export class AppComponent implements OnInit {
   }
 
   getStatusData() {
-    const sess = Math.round(10000 * Math.random());
-    const dur = 360000 * Math.random();
-    const rate = Math.random() / 10;
-    const value = 10000000 * sess * rate / dur;
+    const sales = Math.round(1E4 * Math.random());
+    const dur = 36E5 * Math.random();
+    return this.calcStatusData(sales, dur);
+  }
+
+  calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {
+    const ret = sales * this.salePrice;
+    const cost = sales * dur / 60 / 60 / 1000 * this.personnelCost;
+    const ROI = (ret - cost) / cost;
     return [
       {
-        name: 'Sessions',
-        value: sess
+        name: 'Sales',
+        value: sales
       },
       {
-        name: 'Avg. Session',
-        value: dur
+        name: 'Gross',
+        value: ret,
+        extra: { format: 'currency' }
       },
       {
-        name: 'Sales Rate',
-        value: rate
+        name: 'Avg. Time',
+        value: dur,
+        extra: { format: 'time' }
       },
       {
-        name: 'Value',
-        value
+        name: 'Cost',
+        value: cost,
+        extra: { format: 'currency' }
+      },
+      {
+        name: 'ROI',
+        value: ROI,
+        extra: { format: 'percent' }
       }
     ];
   }
 
   statusValueFormat(c): string {
-    switch(c.label) {
-      case 'Value':
+    switch(c.data.extra ? c.data.extra.format : '') {
+      case 'currency':
         return `\$${Math.round(c.value).toLocaleString()}`;
-      case 'Avg. Session':
+      case 'time':
         return multiFormat(c.value);
-      case 'Sales Rate':
-        return `${(c.value * 100).toFixed(2)}%`;
+      case 'percent':
+        return `${Math.round(c.value * 100)}%`;
       default:
         return c.value.toLocaleString();
     }

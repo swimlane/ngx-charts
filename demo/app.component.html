@@ -423,19 +423,27 @@
         [results]="single"
         (select)="select($event)">
       </ngx-charts-number-card>
-      <ngx-charts-number-card
-        *ngIf="chartType === 'status-demo'"
-        class="chart-container"
-        [view]="view"
-        (legendLabelClick)="onLegendLabelClick($event)"
-        [scheme]="colorScheme"
-        cardColor="#232837"
-        emptyColor="#1e222e"
-        [results]="statusData"
-        [valueFormatting]="statusValueFormat"
-        [labelFormatting]="statusLabelFormat"
-        (select)="select($event)">
-      </ngx-charts-number-card>
+      <div *ngIf="chartType === 'status-demo'">
+        Price [$]: <input type="number"
+          [(ngModel)]="salePrice"
+          (ngModelChange)="statusData = calcStatusData()"
+          min="0" max="10000" step="100" />
+        Cost [$/hr]: <input type="number"
+          [(ngModel)]="personnelCost" (ngModelChange)="statusData = calcStatusData()"
+          min="0" max="10000" step="100" />
+        <ngx-charts-number-card
+          class="chart-container"
+          [view]="view"
+          (legendLabelClick)="onLegendLabelClick($event)"
+          [scheme]="colorScheme"
+          cardColor="#232837"
+          emptyColor="#1e222e"
+          [results]="statusData"
+          [valueFormatting]="statusValueFormat"
+          [labelFormatting]="statusLabelFormat"
+          (select)="select($event)">
+        </ngx-charts-number-card>
+      </div>
       <ngx-charts-gauge
         *ngIf="chartType === 'gauge'"
         class="chart-container"
