@@ -424,13 +424,25 @@
         (select)="select($event)">
       </ngx-charts-number-card>
       <div *ngIf="chartType === 'status-demo'">
-        Price [$]: <input type="number"
+        <ngx-slider
           [(ngModel)]="salePrice"
-          (ngModelChange)="statusData = calcStatusData()"
-          min="0" max="10000" step="100" />
-        Cost [$/hr]: <input type="number"
-          [(ngModel)]="personnelCost" (ngModelChange)="statusData = calcStatusData()"
-          min="0" max="10000" step="100" />
+          [step]="100"
+          [filled]="true"
+          [min]="0"
+          [max]="10000"
+          (change)="statusData = calcStatusData()">
+        </ngx-slider>
+        Price: ${{salePrice}}
+        <br />
+        <ngx-slider
+          [(ngModel)]="personnelCost"
+          [step]="100"
+          [filled]="true"
+          [min]="0"
+          [max]="10000"
+          (change)="statusData = calcStatusData()">
+        </ngx-slider>
+        Cost: ${{personnelCost}} / hr
         <ngx-charts-number-card
           class="chart-container"
           [view]="view"

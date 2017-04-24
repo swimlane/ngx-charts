@@ -89,6 +89,7 @@
     "@angular/platform-browser": "~4.0.1",
     "@angular/platform-browser-dynamic": "~4.0.1",
     "@angular/platform-server": "~4.0.1",
+    "@swimlane/ngx-ui": "^14.2.4",
     "@types/d3-array": "1.1.0",
     "@types/d3-brush": "1.0.6",
     "@types/d3-color": "1.0.4",
