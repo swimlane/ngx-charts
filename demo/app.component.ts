@@ -1,3 +1,5 @@
+declare var APP_VERSION: string;
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
@@ -126,6 +128,11 @@ export class AppComponent implements OnInit {
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
 
+  // demos
+  totalSales = 0;
+  salePrice = 100;
+  personnelCost = 100;
+
   constructor(public location: Location) {
     Object.assign(this, {
       single,
@@ -240,11 +247,12 @@ export class AppComponent implements OnInit {
       this.graph = { links, nodes };
 
       // bubble
+      const bubbleYear = Math.floor((2010 - 1990) * Math.random() + 1990);
       const bubbleEntry = {
         name: country,
         series: [{
-          name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-          x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+          name: '' + bubbleYear,
+          x: new Date(bubbleYear, 0, 1),
           y: Math.floor(30 + Math.random() * 70),
           r: Math.floor(30 + Math.random() * 20),
         }]
@@ -286,7 +294,7 @@ export class AppComponent implements OnInit {
       this.chartType === 'area-chart-stacked';
 
     if (this.chartType === 'bubble-chart') {
-      this.xAxisLabel = 'GDP Per Capita';
+      this.xAxisLabel = 'Census Date';
       this.yAxisLabel = 'Life expectancy [years]';
     } else {
       this.yAxisLabel = 'GDP Per Capita';
@@ -445,38 +453,51 @@ export class AppComponent implements OnInit {
   }
 
   getStatusData() {
-    const sess = Math.round(10000 * Math.random());
-    const dur = 360000 * Math.random();
-    const rate = Math.random() / 10;
-    const value = 10000000 * sess * rate / dur;
+    const sales = Math.round(1E4 * Math.random());
+    const dur = 36E5 * Math.random();
+    return this.calcStatusData(sales, dur);
+  }
+
+  calcStatusData(sales = this.statusData[0].value, dur = this.statusData[2].value) {
+    const ret = sales * this.salePrice;
+    const cost = sales * dur / 60 / 60 / 1000 * this.personnelCost;
+    const ROI = (ret - cost) / cost;
     return [
       {
-        name: 'Sessions',
-        value: sess
+        name: 'Sales',
+        value: sales
       },
       {
-        name: 'Avg. Session',
-        value: dur
+        name: 'Gross',
+        value: ret,
+        extra: { format: 'currency' }
       },
       {
-        name: 'Sales Rate',
-        value: rate
+        name: 'Avg. Time',
+        value: dur,
+        extra: { format: 'time' }
       },
       {
-        name: 'Value',
-        value
+        name: 'Cost',
+        value: cost,
+        extra: { format: 'currency' }
+      },
+      {
+        name: 'ROI',
+        value: ROI,
+        extra: { format: 'percent' }
       }
     ];
   }
 
   statusValueFormat(c): string {
-    switch(c.label) {
-      case 'Value':
+    switch(c.data.extra ? c.data.extra.format : '') {
+      case 'currency':
         return `\$${Math.round(c.value).toLocaleString()}`;
-      case 'Avg. Session':
+      case 'time':
         return multiFormat(c.value);
-      case 'Sales Rate':
-        return `${(c.value * 100).toFixed(2)}%`;
+      case 'percent':
+        return `${Math.round(c.value * 100)}%`;
       default:
         return c.value.toLocaleString();
     }

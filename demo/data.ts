@@ -101,20 +101,20 @@ export const bubble = [
     name: 'Germany',
     series: [
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2010',
+        x: new Date(2010, 0, 1),
         y: 80.3,
         r: 80.4
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2000',
+        x: new Date(2000, 0, 1),
         y: 80.3,
         r: 78
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '1990',
+        x: new Date(1990, 0, 1),
         y: 75.4,
         r: 79
       }
@@ -124,20 +124,20 @@ export const bubble = [
     name: 'USA',
     series: [
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2010',
+        x: new Date(2010, 0, 1),
         y: 78.8,
         r: 310
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2000',
+        x: new Date(2000, 0, 1),
         y: 76.9,
         r: 283
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '1990',
+        x: new Date(1990, 0, 1),
         y: 75.4,
         r: 253
       }
@@ -147,20 +147,20 @@ export const bubble = [
     name: 'France',
     series: [
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2010',
+        x: new Date(2010, 0, 1),
         y: 81.4,
         r: 63
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2000',
+        x: new Date(2000, 0, 1),
         y: 79.1,
         r: 59.4
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '1990',
+        x: new Date(1990, 0, 1),
         y: 77.2,
         r: 56.9
       }
@@ -170,20 +170,20 @@ export const bubble = [
     name: 'United Kingdom',
     series: [
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2010',
+        x: new Date(2010, 0, 1),
         y: 80.2,
         r: 62.7
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '2000',
+        x: new Date(2000, 0, 1),
         y: 77.8,
         r: 58.9
       },
       {
-        name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-        x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+        name: '1990',
+        x: new Date(1990, 0, 1),
         y: 75.7,
         r: 57.1
       }
