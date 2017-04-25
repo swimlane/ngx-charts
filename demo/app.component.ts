@@ -430,7 +430,28 @@ export class AppComponent implements OnInit {
     `;
   }
 
+  // verticalBarTooltipsText(data) {
+  //   this.tooltipText = "this is custom text"
+  //   return this.tooltipText
+  // }
+
+  verticalBarTooltipsText({data}) {
+
+    const label = data.name;
+    const val = data.value;
+    let thresh: any
+    if (val < 35000 ? thresh = "Below Threshold" : thresh = '')
+    console.log('data', data)
+      return `
+      <span class="tooltip-label">Country: ${label}</span>
+      <span class="tooltip-val">$${val}</span>
+      <span>${thresh}</span>
+    `;
+
+  }
+
   pieTooltipText({data}) {
+    console.log("pie chart", data)
     const label = formatLabel(data.name);
     const val = formatLabel(data.value);
 

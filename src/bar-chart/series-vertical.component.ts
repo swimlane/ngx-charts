@@ -38,7 +38,7 @@ import { formatLabel } from '../common/label.helper';
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="bar.tooltipText">
+      [tooltipTitle]="bar.tooltipText(bar)">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,7 +66,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
-
+  @Input() tooltipText: any
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
@@ -80,6 +80,7 @@ export class SeriesVerticalComponent implements OnChanges {
   }
 
   update(): void {
+    console.log(this.tooltipText)
     let width;
     if (this.series.length) {
       width = this.xScale.bandwidth();
@@ -165,14 +166,18 @@ export class SeriesVerticalComponent implements OnChanges {
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
       }
-
-      bar.tooltipText = `
+      
+      bar.tooltipText = this.tooltipText || `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
       return bar;
     });
+  }
+
+  customTooltipText(event) {
+    console.log('custom tool tip', event)
   }
 
   isActive(entry): boolean {

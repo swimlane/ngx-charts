@@ -52,6 +52,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
           [activeEntries]="activeEntries"
+          [tooltipText]="tooltipText"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
           (select)="onClick($event)">
@@ -74,6 +75,7 @@ export class BarVerticalComponent extends BaseChartComponent {
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipText: any;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
   @Input() activeEntries: any[] = [];
@@ -100,7 +102,7 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-
+    console.log('bar data', this.tooltipText)
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
@@ -117,6 +119,8 @@ export class BarVerticalComponent extends BaseChartComponent {
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
+
+    this.tooltipText = this.tooltipText
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();
