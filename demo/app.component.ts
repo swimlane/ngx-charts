@@ -1,3 +1,5 @@
+declare var APP_VERSION: string;
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
@@ -245,11 +247,12 @@ export class AppComponent implements OnInit {
       this.graph = { links, nodes };
 
       // bubble
+      const bubbleYear = Math.floor((2010 - 1990) * Math.random() + 1990);
       const bubbleEntry = {
         name: country,
         series: [{
-          name: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
-          x: new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)),
+          name: '' + bubbleYear,
+          x: new Date(bubbleYear, 0, 1),
           y: Math.floor(30 + Math.random() * 70),
           r: Math.floor(30 + Math.random() * 20),
         }]
@@ -291,7 +294,7 @@ export class AppComponent implements OnInit {
       this.chartType === 'area-chart-stacked';
 
     if (this.chartType === 'bubble-chart') {
-      this.xAxisLabel = 'GDP Per Capita';
+      this.xAxisLabel = 'Census Date';
       this.yAxisLabel = 'Life expectancy [years]';
     } else {
       this.yAxisLabel = 'GDP Per Capita';
