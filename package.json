@@ -86,6 +86,7 @@
     "@angular/compiler-cli": "~4.0.1",
     "@angular/core": "~4.0.1",
     "@angular/forms": "~4.0.1",
+    "@angular/http": "^4.0.3",
     "@angular/platform-browser": "~4.0.1",
     "@angular/platform-browser-dynamic": "~4.0.1",
     "@angular/platform-server": "~4.0.1",
