@@ -24,7 +24,6 @@ import { id } from '../utils/id';
     <svg:g *ngFor="let circle of circles">
       <defs>
         <svg:g ngx-charts-svg-linear-gradient
-          [color]="color"
           orientation="vertical"
           [name]="circle.gradientId"
           [stops]="circle.gradientStops"

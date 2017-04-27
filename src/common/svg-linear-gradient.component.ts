@@ -19,15 +19,14 @@ import {
         [attr.offset]="stop.offset + '%'"
         [style.stop-color]="stop.color"
         [style.stop-opacity]="stop.opacity"
-      />     
+      />
     </svg:linearGradient>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SvgLinearGradientComponent implements OnChanges {
-  
+
   @Input() orientation = 'vertical';
-  @Input() color;
   @Input() name;
   @Input() stops: any[];
 
