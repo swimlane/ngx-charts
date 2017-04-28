@@ -1,7 +1,7 @@
 # ngx-charts (f.k.a. ng2d3)
 [![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts) 
-[![Code Climate](https://codeclimate.com/github/swimlane/ngx-charts/badges/gpa.svg)](https://codeclimate.com/github/swimlane/ngx-charts)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b097196f7f544412a79a99080a41bbc1)](https://www.codacy.com/app/Swimlane/ngx-charts?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=swimlane/ngx-charts&amp;utm_campaign=Badge_Grade)
 [![Test Coverage](https://codeclimate.com/github/swimlane/ngx-charts/badges/coverage.svg)](https://codeclimate.com/github/swimlane/ngx-charts/coverage)
 
 Declarative Charting Framework for Angular2 and beyond!
