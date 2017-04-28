@@ -19,7 +19,6 @@ import { id } from '../utils/id';
     <svg:g [attr.transform]="transform" class="cell">
       <defs *ngIf="gradient">
         <svg:g ngx-charts-svg-linear-gradient
-          [color]="fill"
           orientation="vertical"
           [name]="gradientId"
           [stops]="gradientStops"

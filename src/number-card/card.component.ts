@@ -101,7 +101,7 @@ export class CardComponent implements OnChanges, OnDestroy {
   constructor(element: ElementRef, private cd: ChangeDetectorRef, private zone: NgZone) {
     this.element = element.nativeElement;
   }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
@@ -136,18 +136,18 @@ export class CardComponent implements OnChanges, OnDestroy {
       const value = hasValue ? this.valueFormatting(cardData) : '';
 
       this.value = this.paddedValue(value);
-
       this.setPadding();
+
       this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
 
       setTimeout(() => {
         this.scaleText();
         this.value = value;
         
-        if (hasValue) {
+        if (hasValue && !this.initialized) {
           setTimeout(() => this.startCount(), 20);
         }
-      }, 0);
+      }, 8);
     });
   }
 
@@ -166,10 +166,14 @@ export class CardComponent implements OnChanges, OnDestroy {
       const decs = decimalChecker(val);
 
       const callback = ({value, finished}) => {
-        value = finished ? val : value;
-        const v = this.valueFormatting({label: this.label, data: this.data, value});
-        this.value = this.paddedValue(v);
-        this.cd.markForCheck();
+        this.zone.run(() => {
+          value = finished ? val : value;
+          this.value = this.valueFormatting({label: this.label, data: this.data, value});
+          if (!finished) {
+            this.value = this.paddedValue(this.value);
+          }
+          this.cd.markForCheck();
+        });
       };
 
       this.animationReq = count(0, val, decs, 1, callback);
@@ -178,24 +182,27 @@ export class CardComponent implements OnChanges, OnDestroy {
   }
 
   scaleText(): void {
-    const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
-    if (width === 0 || height === 0) {
-      return;
-    }
+    this.zone.run(() => {
+      const { width, height } = this.textEl.nativeElement.getBoundingClientRect();
+      if (width === 0 || height === 0) {
+        return;
+      }
 
-    const textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
-    const availableWidth = this.cardWidth - 2 * textPadding;
-    const availableHeight = this.cardHeight / 3;
+      const textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
+      const availableWidth = this.cardWidth - 2 * textPadding;
+      const availableHeight = this.cardHeight / 3;
 
-    const resizeScale = Math.min(availableWidth / width, availableHeight / height);
-    this.textFontSize = Math.round(this.textFontSize * resizeScale);
-    this.labelFontSize = Math.min(this.textFontSize, 12);
+      const resizeScale = Math.min(availableWidth / width, availableHeight / height);
+      this.textFontSize = Math.floor(this.textFontSize * resizeScale);
+      this.labelFontSize = Math.min(this.textFontSize, 12);
 
-    this.setPadding();
-    this.cd.markForCheck();
+      this.setPadding();
+      this.cd.markForCheck();
+    });
   }
 
   setPadding() {
+    this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
     const padding = this.cardHeight / 2;
     this.textPadding[0] = padding - this.textFontSize - this.labelFontSize / 2;
     this.textPadding[2] = padding - this.labelFontSize;

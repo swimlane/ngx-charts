@@ -20,7 +20,6 @@ import { id } from '../utils/id';
   template: `
     <svg:defs *ngIf="hasGradient">
       <svg:g ngx-charts-svg-linear-gradient
-        [color]="fill"
         [orientation]="orientation"
         [name]="gradientId"
         [stops]="gradientStops"

@@ -47,7 +47,8 @@ export function gridLayout(dims, data, minWidth) {
     res[i] = {};
     res[i].data = {
       name: data[i] ? data[i].name : '',
-      value: data[i] ? data[i].value : undefined
+      value: data[i] ? data[i].value : undefined,
+      extra: data[i] ? data[i].extra : undefined,
     };
     res[i].x = xScale(i % columns);
     res[i].y = yScale(Math.floor(i / columns));
