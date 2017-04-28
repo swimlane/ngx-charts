@@ -6,7 +6,8 @@ import {
   OnChanges,
   ViewChildren,
   SimpleChanges,
-  Renderer, TemplateRef, ViewContainerRef, ChangeDetectionStrategy
+  Renderer,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   trigger,
@@ -105,7 +106,7 @@ export class AreaTooltip implements OnChanges {
 
   @ViewChildren('tooltips') tooltips;
 
-  constructor(private renderer: Renderer, private vcRef: ViewContainerRef) { }
+  constructor(private renderer: Renderer) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
