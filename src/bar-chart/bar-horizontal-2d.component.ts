@@ -120,6 +120,7 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() roundEdges: boolean = true;
+  @Input() xAxisMinScale: number = 0;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -239,9 +240,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
     }
 
     const min = Math.min(0, ...domain);
-    const max = Math.max(...domain);
-
-    return [ min, max ];
+    const max = Math.max(this.xAxisMinScale, ...domain);
+    return [min, max];
   }
 
   groupTransform(group) {

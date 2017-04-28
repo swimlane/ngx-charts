@@ -28,6 +28,7 @@
 | tooltipDisabled     | boolean     | false         | show or hide the tooltip                                                                                                                                                                                                                  |
 | showSeriesOnHover   | boolean     | true          | show or hide all points on the line on hover                                                                                                                                                                                              |
 | tooltipTemplate     | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                                                                                                                                                   |
+| yAxisMinScale       | number      |               | force y axis scaling to the provided value (ignored if chart data contains a higher value)                                                                                                                                                |
 
 # Outputs
 

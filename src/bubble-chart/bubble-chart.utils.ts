@@ -27,20 +27,29 @@ function isDate(value: any): boolean {
   return false;
 }
 
-export function getDomain(values, scaleType, autoScale): number[] {
+export function getDomain(values, scaleType, autoScale, minScale?): number[] {
     let domain: number[] = [];
 
     if (scaleType === 'time') {
       const min = Math.min(...values);
-      const max = Math.max(...values);
+
+      const max = minScale
+        ? Math.max(minScale, ...values)
+        : Math.max(...values);
+
       domain = [min, max];
     } else if (scaleType === 'linear') {
       values = values.map(v => Number(v));
       let min = Math.min(...values);
-      const max = Math.max(...values);
+
       if (!autoScale) {
         min = Math.min(0, min);
       }
+
+      const max = minScale
+        ? Math.max(minScale, ...values)
+        : Math.max(...values);
+
       domain = [min, max];
     } else {
       domain = values;

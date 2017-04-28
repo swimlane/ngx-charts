@@ -32,6 +32,8 @@
 | tooltipDisabled       | boolean     | false         | show or hide the tooltip                                                                                                         |
 | tooltipTemplate       | TemplateRef |               | a custom ng-template to be displayed inside the tooltip when hovering a single point                                             |
 | seriesTooltipTemplate | TemplateRef |               | a custom ng-template to be displayed inside the tooltip when hovering series                                                     |
+| xAxisMinScale         | object      |               | force x axis scaling to the provided value (ignored if chart data contains a higher value)                                       |
+| yAxisMinScale         | number      |               | force y axis scaling to the provided value (ignored if chart data contains a higher value)                                       |
 
 # Outputs
 
