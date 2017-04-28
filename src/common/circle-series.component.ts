@@ -85,7 +85,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() visibleValue;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
-
+  @Input() tooltipText: any
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
@@ -101,6 +101,7 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   update(): void {
+    console.log('tooltip', this.tooltipText)
     this.circles = this.getCircles();
   }
 
@@ -173,10 +174,17 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   getTooltipText({ tooltipLabel, value, seriesName, min, max}): string {
-    return `
+    console.log('test')
+    if(this.tooltipText) {
+      let data = { label: tooltipLabel, value: value, seriesName: seriesName, min: min, max: max }
+      return this.tooltipText({data})
+
+    } else {
+          return `
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
       <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
     `;
+    }
   }
 
   getTooltipMinMaxText(min: any, max: any) {

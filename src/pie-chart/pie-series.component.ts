@@ -79,6 +79,7 @@ export class PieSeriesComponent implements OnChanges {
   }
 
   update(): void {
+    console.log(this.tooltipText)
     const pieGenerator = pie<any, any>()
       .value((d) => d.value)
       .sort(null);

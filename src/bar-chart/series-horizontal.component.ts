@@ -71,7 +71,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
-
+  @Input() tooltipText: any
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
@@ -159,13 +159,28 @@ export class SeriesHorizontal implements OnChanges {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
       }
 
-      bar.tooltipText = `
-        <span class="tooltip-label">${tooltipLabel}</span>
-        <span class="tooltip-val">${value.toLocaleString()}</span>
-      `;
+      if(this.tooltipText === undefined) {
+        console.log('test')
+        bar.tooltipText = this.defaultTooltipText(bar);
+      }
+      else {
+        console.log('test')
+        bar.tooltipText = this.tooltipText(bar)
+      }
 
       return bar;
     });
+  }
+
+    defaultTooltipText(bar) {
+    console.log(bar)
+    const label = bar.label;
+    const val = formatLabel(bar.value);
+
+    return `
+      <span class="tooltip-label">${label}</span>
+      <span class="tooltip-val">${val.toLocaleString()}</span>
+    `;
   }
 
   isActive(entry): boolean {

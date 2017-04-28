@@ -66,6 +66,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
             [seriesName]="group.name"
+            [tooltipText]="tooltipText"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
@@ -108,7 +109,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
-
+  @Input()  tooltipText: any
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

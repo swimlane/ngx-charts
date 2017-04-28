@@ -66,7 +66,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() curve: any;
   @Input() activeEntries: any[];
   @Input() rangeFillOpacity: number;
-
+  @Input() tooltipText: any;
   path: string;
   outerPath: string;
   areaPath: string;

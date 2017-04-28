@@ -435,8 +435,7 @@ export class AppComponent implements OnInit {
   //   return this.tooltipText
   // }
 
-  verticalBarTooltipsText({data}) {
-
+  barTooltipText({data}) {
     const label = data.name;
     const val = data.value;
     let thresh: any
@@ -444,10 +443,38 @@ export class AppComponent implements OnInit {
     console.log('data', data)
       return `
       <span class="tooltip-label">Country: ${label}</span>
-      <span class="tooltip-val">$${val}</span>
+      <span class="tooltip-val">$${val.toLocaleString()}</span>
       <span>${thresh}</span>
     `;
 
+  }
+
+    lineTooltipText({data}) {
+      // console.log('app', data)
+      if (data.value < 5000) {
+      return `
+      <span class="tooltip-label tresh">${data.seriesName} • ${data.label}</span>
+      <span class="tooltip-val tresh">$${data.value.toLocaleString()}</span>
+    `;
+      } else {
+      return `<span class="tooltip-label">${data.seriesName} • ${data.label}</span>
+      <span class="tooltip-val">$${data.value.toLocaleString()}</span>
+    `;
+      }
+
+  }
+
+  allToolTips(value) {
+    console.log(value)
+    if (value.value < 5000) {
+                return `
+      <span class="tresh">${value.result} $${value.value.toLocaleString()}</span>
+    `;
+    } else {
+      return `
+      <span>${value.result} $${value.value}</span>
+    `;
+    }
   }
 
   pieTooltipText({data}) {

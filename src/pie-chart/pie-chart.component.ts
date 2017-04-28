@@ -78,7 +78,7 @@ export class PieChartComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-
+    console.log("pie",this.tooltipText)
     if (this.labels) {
       this.margin = [30, 80, 30, 80];
     }
