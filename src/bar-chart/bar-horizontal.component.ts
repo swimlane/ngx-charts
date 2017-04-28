@@ -83,7 +83,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
-  @Input() tooltipText: any
+  @Input() tooltipText: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -102,7 +102,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-    this.tooltipText = this.tooltipText
+    
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,

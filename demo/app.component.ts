@@ -25,7 +25,7 @@ function multiFormat(value) {
 
 @Component({
   selector: 'app',
-  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'
@@ -204,7 +204,7 @@ export class AppComponent implements OnInit {
         const index = Math.floor(Math.random() * this.graph.nodes.length);
         const value = this.graph.nodes[index].value;
         this.graph.nodes.splice(index, 1);
-        const nodes = [ ...this.graph.nodes ];
+        const nodes = [...this.graph.nodes];
 
         const links = this.graph.links.filter(link => {
           return link.source !== value && link.source.value !== value &&
@@ -238,12 +238,12 @@ export class AppComponent implements OnInit {
 
       // graph
       const node = { value: country };
-      const nodes = [ ...this.graph.nodes, node];
+      const nodes = [...this.graph.nodes, node];
       const link = {
         source: country,
         target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value,
       };
-      const links = [ ...this.graph.links, link];
+      const links = [...this.graph.links, link];
       this.graph = { links, nodes };
 
       // bubble
@@ -438,18 +438,12 @@ export class AppComponent implements OnInit {
     `;
   }
 
-  // verticalBarTooltipsText(data) {
-  //   this.tooltipText = "this is custom text"
-  //   return this.tooltipText
-  // }
-
-  barTooltipText({data}) {
-    const label = data.name;
+  barTooltipText({ data }) {
+    const label = data.name; 
     const val = data.value;
-    let thresh: any
-    if (val < 35000 ? thresh = "Below Threshold" : thresh = '')
-    console.log('data', data)
-      return `
+    let thresh: string;
+    val < 35000 ? thresh = 'Below Threshold' : thresh = '';
+    return `
       <span class="tooltip-label">Country: ${label}</span>
       <span class="tooltip-val">$${val.toLocaleString()}</span>
       <span>${thresh}</span>
@@ -457,36 +451,33 @@ export class AppComponent implements OnInit {
 
   }
 
-    lineTooltipText({data}) {
-      // console.log('app', data)
-      if (data.value < 5000) {
+  lineTooltipText({data}) {
+    if (data.value < 5000) {
       return `
       <span class="tooltip-label tresh">${data.seriesName} • ${data.label}</span>
       <span class="tooltip-val tresh">$${data.value.toLocaleString()}</span>
     `;
-      } else {
+    } else {
       return `<span class="tooltip-label">${data.seriesName} • ${data.label}</span>
       <span class="tooltip-val">$${data.value.toLocaleString()}</span>
     `;
-      }
+    }
 
   }
 
   allToolTips(value) {
-    console.log(value)
     if (value.value < 5000) {
-                return `
-      <span class="tresh">${value.result} $${value.value.toLocaleString()}</span>
+      return `
+      <span class="tresh">${value.label} $${value.value.toLocaleString()}</span>
     `;
     } else {
       return `
-      <span>${value.result} $${value.value}</span>
+      <span>${value.label} $${value.value}</span>
     `;
     }
   }
 
-  pieTooltipText({data}) {
-    console.log("pie chart", data)
+  pieTooltipText({ data }) {
     const label = formatLabel(data.name);
     const val = formatLabel(data.value);
 
@@ -539,7 +530,7 @@ export class AppComponent implements OnInit {
   }
 
   statusValueFormat(c): string {
-    switch(c.data.extra ? c.data.extra.format : '') {
+    switch (c.data.extra ? c.data.extra.format : '') {
       case 'currency':
         return `\$${Math.round(c.value).toLocaleString()}`;
       case 'time':

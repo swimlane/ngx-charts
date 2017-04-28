@@ -71,7 +71,8 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
-  @Input() tooltipText: any
+  @Input() tooltipText: any;
+
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
@@ -160,20 +161,15 @@ export class SeriesHorizontal implements OnChanges {
       }
 
       if(this.tooltipText === undefined) {
-        console.log('test')
         bar.tooltipText = this.defaultTooltipText(bar);
+      } else {
+        bar.tooltipText = this.tooltipText(bar);
       }
-      else {
-        console.log('test')
-        bar.tooltipText = this.tooltipText(bar)
-      }
-
       return bar;
     });
   }
 
     defaultTooltipText(bar) {
-    console.log(bar)
     const label = bar.label;
     const val = formatLabel(bar.value);
 

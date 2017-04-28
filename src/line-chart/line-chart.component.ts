@@ -150,7 +150,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() showSeriesOnHover: boolean = true;
   @Input() tooltipText: any;
-  @Input() tooltipTemplate: any
+  @Input() tooltipTemplate: any;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -185,8 +186,6 @@ export class LineChartComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-    console.log(this.tooltipTemplate)
-    this.tooltipText = this.tooltipText
 
     this.dims = calculateViewDimensions({
       width: this.width,

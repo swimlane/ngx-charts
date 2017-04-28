@@ -102,7 +102,7 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-    console.log('bar data', this.tooltipText)
+
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
@@ -119,8 +119,6 @@ export class BarVerticalComponent extends BaseChartComponent {
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
-
-    this.tooltipText = this.tooltipText
 
     this.setColors();
     this.legendOptions = this.getLegendOptions();

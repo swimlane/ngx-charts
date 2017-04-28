@@ -66,7 +66,8 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
-  @Input() tooltipText: any
+  @Input() tooltipText: any;
+  
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
@@ -80,7 +81,6 @@ export class SeriesVerticalComponent implements OnChanges {
   }
 
   update(): void {
-    console.log(this.tooltipText)
     let width;
     if (this.series.length) {
       width = this.xScale.bandwidth();
@@ -167,24 +167,17 @@ export class SeriesVerticalComponent implements OnChanges {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
       }
       if(this.tooltipText === undefined) {
-        console.log('test')
         bar.tooltipText = this.defaultTooltipText(bar);
+      } else {
+        bar.tooltipText = this.tooltipText(bar);
       }
-      else {
-        console.log('test')
-        bar.tooltipText = this.tooltipText(bar)
-      }
-      
-
       return bar;
     });
   }
 
   defaultTooltipText(bar) {
-    console.log(bar)
     const label = bar.label;
     const val = formatLabel(bar.value);
-
     return `
       <span class="tooltip-label">${label}</span>
       <span class="tooltip-val">${val.toLocaleString()}</span>

@@ -108,7 +108,8 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
-  @Input() tooltipText: any
+  @Input() tooltipText: any;
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
@@ -142,8 +143,6 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
       showLegend: this.legend,
       legendType: this.schemeType
     });
-
-    this.tooltipText = this.tooltipText
 
     this.formatDates();
 

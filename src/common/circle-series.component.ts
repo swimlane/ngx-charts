@@ -68,7 +68,7 @@ import { id } from '../utils/id';
         style({
           opacity: 0,
         }),
-        animate(250, style({opacity: 1}))
+        animate(250, style({ opacity: 1 }))
       ])
     ])
   ]
@@ -84,7 +84,8 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() visibleValue;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipText: any
+  @Input() tooltipText: any;
+
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
@@ -100,7 +101,6 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   update(): void {
-    console.log('tooltip', this.tooltipText)
     this.circles = this.getCircles();
   }
 
@@ -172,14 +172,13 @@ export class CircleSeriesComponent implements OnChanges {
     }).filter((circle) => circle !== undefined);
   }
 
-  getTooltipText({ tooltipLabel, value, seriesName, min, max}): string {
-    console.log('test')
-    if(this.tooltipText) {
-      let data = { label: tooltipLabel, value: value, seriesName: seriesName, min: min, max: max }
-      return this.tooltipText({data})
+  getTooltipText({ tooltipLabel, value, seriesName, min, max }): string {
+    if (this.tooltipText) {
+      const data = { label: tooltipLabel, value: value, seriesName: seriesName, min: min, max: max };
+      return this.tooltipText({data});
 
     } else {
-          return `
+      return `
       <span class="tooltip-label">${seriesName} • ${tooltipLabel}</span>
       <span class="tooltip-val">${value.toLocaleString()}${this.getTooltipMinMaxText(min, max)}</span>
     `;
@@ -187,7 +186,7 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   getTooltipMinMaxText(min: any, max: any) {
-    if (min !== undefined || max  !== undefined) {
+    if (min !== undefined || max !== undefined) {
       let result = ' (';
       if (min !== undefined) {
         if (max === undefined) {
@@ -221,7 +220,7 @@ export class CircleSeriesComponent implements OnChanges {
         offset: 100,
         color,
         opacity: 1
-    }];
+      }];
   }
 
   onClick(value, label): void {
@@ -232,7 +231,7 @@ export class CircleSeriesComponent implements OnChanges {
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name;
     });
@@ -241,7 +240,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   isVisible(circle): boolean {
     if (this.activeEntries.length > 0) {
-      return this.isActive({name: circle.seriesName});
+      return this.isActive({ name: circle.seriesName });
     }
 
     return circle.opacity !== 0;
@@ -249,12 +248,12 @@ export class CircleSeriesComponent implements OnChanges {
 
   activateCircle(circle): void {
     circle.barVisible = true;
-    this.activate.emit({name: this.data.name});
+    this.activate.emit({ name: this.data.name });
   }
 
   deactivateCircle(circle): void {
     circle.barVisible = false;
-    this.deactivate.emit({name: this.data.name});
+    this.deactivate.emit({ name: this.data.name });
   }
 
 }

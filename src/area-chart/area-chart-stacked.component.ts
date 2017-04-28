@@ -150,8 +150,9 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipText
-  @Input() tooltipTemplate
+  @Input() tooltipText: any;
+  @Input() tooltipTemplate: any;
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

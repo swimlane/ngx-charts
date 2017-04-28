@@ -74,13 +74,13 @@ import {
         style({
           opacity: 0,
         }),
-        animate(250, style({opacity: 0.7}))
+        animate(250, style({ opacity: 0.7 }))
       ]),
       transition('active => inactive', [
         style({
           opacity: 0.7,
         }),
-        animate(250, style({opacity: 0}))
+        animate(250, style({ opacity: 0 }))
       ])
     ])
   ]
@@ -97,9 +97,12 @@ export class AreaTooltip implements OnChanges {
   @Input() colors;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipTemplate: any
+  @Input() tooltipTemplate: any;
+
   @Output() hover = new EventEmitter();
-  defaultToolitp: any
+
+  customTooltip: any;
+
   @ViewChildren('tooltips') tooltips;
 
   constructor(private renderer: Renderer, private vcRef: ViewContainerRef) { }
@@ -109,8 +112,9 @@ export class AreaTooltip implements OnChanges {
   }
 
   update(): void {
-    if (this.tooltipTemplate !== undefined)
-    this.defaultToolitp = this.tooltipTemplate('')
+    if (this.tooltipTemplate !== undefined) {
+      this.customTooltip = this.tooltipTemplate('');
+    }
     this.tooltipAreas = this.getTooltipAreas();
   }
 
@@ -214,7 +218,7 @@ export class AreaTooltip implements OnChanges {
 
   showTooltip(index): void {
     const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
-    const event = new MouseEvent('mouseenter', {bubbles: false});
+    const event = new MouseEvent('mouseenter', { bubbles: false });
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0.7;
     this.hover.emit(this.tooltipAreas[index]);
@@ -222,16 +226,15 @@ export class AreaTooltip implements OnChanges {
 
   hideTooltip(index): void {
     const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
-    const event = new MouseEvent('mouseleave', {bubbles: false});
+    const event = new MouseEvent('mouseleave', { bubbles: false });
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0;
   }
 
   customToolTip(result, value) {
-    const t = {result: result, value: value}
-          this.defaultToolitp = this.tooltipTemplate(t);
-          console.log('customToolTip', value)
-          return this.defaultToolitp
+    const data = { label: result, value: value };
+    this.customTooltip = this.tooltipTemplate(data);
+    return this.customTooltip;
   }
 
   getToolTipText(tooltipItem: any): string {
@@ -244,10 +247,10 @@ export class AreaTooltip implements OnChanges {
     result += ': ';
     if (tooltipItem.value !== undefined) {
 
-      if(this.defaultToolitp !== undefined) {
+      if (this.customTooltip !== undefined) {
         result = this.customToolTip(result, tooltipItem.value);
       } else {
-          result += tooltipItem.value.toLocaleString();
+        result += tooltipItem.value.toLocaleString();
       }
 
     }
