@@ -53,8 +53,8 @@ export function calculateViewDimensions({
   chartHeight = Math.max(0, chartHeight);
 
   return {
-    width: Math.round(chartWidth),
-    height: Math.round(chartHeight),
-    xOffset: Math.round(xOffset)
+    width: ~~chartWidth,
+    height: ~~chartHeight,
+    xOffset: ~~xOffset
   };
 }
