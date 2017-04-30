@@ -25,7 +25,7 @@ function multiFormat(value) {
 
 @Component({
   selector: 'app',
-  providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'
@@ -556,7 +556,7 @@ export class AppComponent implements OnInit {
   }
 
   statusValueFormat(c): string {
-    switch (c.data.extra ? c.data.extra.format : '') {
+    switch(c.data.extra ? c.data.extra.format : '') {
       case 'currency':
         return `\$${Math.round(c.value).toLocaleString()}`;
       case 'time':
