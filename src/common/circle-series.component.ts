@@ -174,8 +174,7 @@ export class CircleSeriesComponent implements OnChanges {
 
   getTooltipText({ tooltipLabel, value, seriesName, min, max }): string {
     if (this.tooltipText) {
-      const data = { label: tooltipLabel, value: value, seriesName: seriesName, min: min, max: max };
-      return this.tooltipText({data});
+      return this.tooltipText({label: tooltipLabel, value, seriesName, min, max});
 
     } else {
       return `

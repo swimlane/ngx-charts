@@ -169,16 +169,16 @@ export class SeriesVerticalComponent implements OnChanges {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
       }
       if(this.tooltipText !== undefined && this.seriesName && this.type === 'normalized') {
-        bar.tooltipText = this.tooltipText({value: value, actual: actual, label: formattedLabel});
+        bar.tooltipText = this.tooltipText({value, series: this.seriesName, actual, label: formattedLabel});
       } else if(this.tooltipText !== undefined && this.seriesName) {
-        bar.tooltipText = this.tooltipText({value: value, series: this.seriesName, label: formattedLabel});
+        bar.tooltipText = this.tooltipText({value, series: this.seriesName, label: formattedLabel});
       }else if(this.tooltipText !== undefined && !this.seriesName) {
-        bar.tooltipText = this.tooltipText({value: value, label: formattedLabel});
+        bar.tooltipText = this.tooltipText({value, label: formattedLabel});
       } else {
         bar.tooltipText =  `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
-      `
+      `;
       } 
       return bar;
     });

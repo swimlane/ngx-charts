@@ -232,8 +232,7 @@ export class AreaTooltip implements OnChanges {
   }
 
   customToolTip(result, value) {
-    const data = { label: result, value: value };
-    return this.tooltipTemplate(data);
+    return this.tooltipTemplate({label: result, value});
   }
 
   getToolTipText(tooltipItem: any): string {

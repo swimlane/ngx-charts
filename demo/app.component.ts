@@ -438,7 +438,6 @@ export class AppComponent implements OnInit {
   }
 
   barTooltipText(data) {
-    console.log(data)
     const label = data.label;
     const val = data.value;
     let thresh: string;
@@ -477,7 +476,7 @@ export class AppComponent implements OnInit {
     `;
   }
 
-  lineTooltipText({ data }) {
+  lineTooltipText(data) {
     if (data.value < 5000) {
       return `
       <span class="tooltip-label below">${data.seriesName} • ${data.label}</span>
