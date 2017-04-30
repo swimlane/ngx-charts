@@ -103,7 +103,7 @@ export class AreaTooltip implements OnChanges {
 
   @Output() hover = new EventEmitter();
 
-  @Input() customSeriesTooltip: any;
+  @Input() customSeriesTooltip: boolean = false;
 
   @ViewChildren('tooltips') tooltips;
 
@@ -246,7 +246,7 @@ export class AreaTooltip implements OnChanges {
     result += ': ';
     if (tooltipItem.value !== undefined) {
 
-      if (this.customSeriesTooltip) {
+      if (this.tooltipTemplate !== undefined) {
         result = this.customToolTip(result, tooltipItem.value);
       } else {
         result += tooltipItem.value.toLocaleString();

@@ -78,7 +78,6 @@ import { id } from '../utils/id';
             [colors]="colors"
             [tooltipDisabled]="tooltipDisabled"
             [tooltipTemplate]="tooltipTemplate"
-            [customSeriesTooltip]="customSeriesTooltip"
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
@@ -152,8 +151,7 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
   @Input() tooltipTemplate: any;
-  @Input()  customSeriesTooltip: boolean
-
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

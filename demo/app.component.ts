@@ -50,8 +50,6 @@ export class AppComponent implements OnInit {
   bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
-  customSeriesTooltip: boolean = true;
-
   view: any[];
   width: number = 700;
   height: number = 300;
@@ -439,8 +437,9 @@ export class AppComponent implements OnInit {
     `;
   }
 
-  barTooltipText({ data }) {
-    const label = data.name; 
+  barTooltipText(data) {
+    console.log(data)
+    const label = data.label;
     const val = data.value;
     let thresh: string;
     val < 35000 ? thresh = 'Below Threshold' : thresh = '';
@@ -449,14 +448,40 @@ export class AppComponent implements OnInit {
       <span class="tooltip-val">$${val.toLocaleString()}</span>
       <span>${thresh}</span>
     `;
-
   }
 
-  lineTooltipText({data}) {
+  barSeriesTooltipText(data) {
+    const series = data.series;
+    const label = data.label;
+    const val = data.value;
+    let thresh: string;
+    val < 35000 ? thresh = 'Below Threshold' : thresh = '';
+    return `
+      <span class="tooltip-label">${series} • ${label}</span>
+      <span class="tooltip-val">$${val.toLocaleString()}</span>
+      <span>${thresh}</span>
+    `;
+  }
+
+  barSeriesNormalizedTooltipText(data) {
+    const series = data.series;
+    const label = data.label;
+    const actual = data.actual;
+    const val = parseFloat(data.value);
+    let thresh: string;
+    actual < 35000 ? thresh = 'is Below Threshold' : thresh = '';
+    return `
+      <span class="tooltip-label">${series} • ${label}</span>
+      <span class="tooltip-val">${val.toLocaleString()}%</span>
+      <span>$${actual.toLocaleString()} ${thresh} </span>
+    `;
+  }
+
+  lineTooltipText({ data }) {
     if (data.value < 5000) {
       return `
       <span class="tooltip-label below">${data.seriesName} • ${data.label}</span>
-      <span class="tooltip-val tresh">$${data.value.toLocaleString()}</span>
+      <span class="tooltip-val tresh">$${data.value.toLocaleString()} Bellow</span>
     `;
     } else {
       return `<span class="tooltip-label">${data.seriesName} • ${data.label}</span>
@@ -466,12 +491,10 @@ export class AppComponent implements OnInit {
 
   }
 
-  allToolTips(data) {
-    console.log(Number(data.value))
-    // Number(data.value)
+  seriesToolTips(data) {
     if (data.value < 5000) {
       return `
-      <span class="below">${data.label} $${data.value.toLocaleString() } bellow</span>
+      <span class="below">${data.label} $${data.value.toLocaleString()} Bellow</span>
     `;
     } else {
       return `
@@ -480,7 +503,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  pieTooltipText({data}) {
+  pieTooltipText({ data }) {
     const label = formatLabel(data.name);
     const val = formatLabel(data.value);
 

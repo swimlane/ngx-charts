@@ -79,7 +79,6 @@ import { id } from '../utils/id';
             [tooltipDisabled]="tooltipDisabled"
             (hover)="updateHoveredVertical($event)"
             [tooltipTemplate]="tooltipTemplate"
-            [customSeriesTooltip]="customSeriesTooltip"
           />
           <svg:g *ngFor="let series of results">
             <svg:g ngx-charts-circle-series
@@ -152,7 +151,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() showSeriesOnHover: boolean = true;
   @Input() tooltipText: any;
   @Input() tooltipTemplate: any;
-  @Input() customSeriesTooltip: any;
+
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

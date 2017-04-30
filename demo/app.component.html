@@ -121,7 +121,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
-        [tooltipText]="barTooltipText"
+        [tooltipText]="barSeriesTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-horizontal-stacked
@@ -145,7 +145,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
-        [tooltipText]="barTooltipText"
+        [tooltipText]="barSeriesTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-stacked>
       <ngx-charts-bar-vertical-normalized
@@ -169,7 +169,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
-        [tooltipText]="barTooltipText"
+        [tooltipText]="barSeriesNormalizedTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-vertical-normalized>
       <ngx-charts-bar-horizontal-normalized
@@ -193,7 +193,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
-        [tooltipText]="barTooltipText"
+        [tooltipText]="barSeriesNormalizedTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-normalized>
       <ngx-charts-pie-chart
@@ -262,8 +262,7 @@
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="lineTooltipText"
-        [tooltipTemplate]="allToolTips"
-        [customSeriesTooltip]="customSeriesTooltip"
+        [tooltipTemplate]="seriesToolTips"
         [showSeriesOnHover]="showSeriesOnHover"
         (select)="select($event)">
       </ngx-charts-line-chart>
@@ -326,8 +325,7 @@
         [curve]="curve"
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="lineTooltipText"
-        [tooltipTemplate]="allToolTips"
-        [customSeriesTooltip]="customSeriesTooltip"
+        [tooltipTemplate]="seriesToolTips"
         (select)="select($event)">
       </ngx-charts-area-chart>
       <ngx-charts-area-chart-stacked
@@ -352,7 +350,7 @@
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
         [tooltipText]="lineTooltipText"
-        [tooltipTemplate]="allToolTips"
+        [tooltipTemplate]="seriesToolTips"
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-stacked>
