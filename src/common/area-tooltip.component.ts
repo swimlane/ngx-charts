@@ -64,6 +64,7 @@ import {
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="15"
         [tooltipTemplate]="tooltipTemplate"
+        customTooltip="customTooltip"
       />
 
     </svg:g>
@@ -102,7 +103,7 @@ export class AreaTooltip implements OnChanges {
 
   @Output() hover = new EventEmitter();
 
-  customTooltip: any;
+  @Input() customSeriesTooltip: any;
 
   @ViewChildren('tooltips') tooltips;
 
@@ -113,9 +114,7 @@ export class AreaTooltip implements OnChanges {
   }
 
   update(): void {
-    if (this.tooltipTemplate !== undefined) {
-      this.customTooltip = this.tooltipTemplate('');
-    }
+
     this.tooltipAreas = this.getTooltipAreas();
   }
 
@@ -234,8 +233,7 @@ export class AreaTooltip implements OnChanges {
 
   customToolTip(result, value) {
     const data = { label: result, value: value };
-    this.customTooltip = this.tooltipTemplate(data);
-    return this.customTooltip;
+    return this.tooltipTemplate(data);
   }
 
   getToolTipText(tooltipItem: any): string {
@@ -248,13 +246,12 @@ export class AreaTooltip implements OnChanges {
     result += ': ';
     if (tooltipItem.value !== undefined) {
 
-      if (this.customTooltip !== undefined) {
+      if (this.customSeriesTooltip) {
         result = this.customToolTip(result, tooltipItem.value);
       } else {
         result += tooltipItem.value.toLocaleString();
       }
-
-    }
+    } 
     if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
       result += ' (';
       if (tooltipItem.min !== undefined) {
