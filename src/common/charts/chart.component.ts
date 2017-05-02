@@ -103,8 +103,8 @@ export class ChartComponent implements OnChanges {
 
     const chartColumns = 12 - legendColumns;
 
-    this.chartWidth = Math.round(this.view[0] * chartColumns / 12.0);
-    this.legendWidth = Math.round(this.view[0] * legendColumns / 12.0);
+    this.chartWidth = ~~(this.view[0] * chartColumns / 12.0);
+    this.legendWidth = ~~(this.view[0] * legendColumns / 12.0);
   }
 
   getLegendType(): string {
