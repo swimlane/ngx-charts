@@ -90,7 +90,7 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
-  @Input() valueFormatting: (value) => string;
+  @Input() valueFormatting: (value: any) => string;
 
   // Specify margins
   @Input() margin: any[];

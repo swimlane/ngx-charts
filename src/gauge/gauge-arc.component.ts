@@ -52,7 +52,7 @@ export class GaugeArcComponent {
   @Input() colors: ColorHelper;
   @Input() isActive: boolean = false;
   @Input() tooltipDisabled: boolean = false;
-  @Input() valueFormatting: (value) => string;
+  @Input() valueFormatting: (value: any) => string;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
