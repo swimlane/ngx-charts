@@ -1,40 +1,36 @@
+import * as d3_color from 'd3-color';
+import { RGBColor } from '@types/d3-color';
+
 /**
  * Converts a hex to RGB
- * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
  *
  * @export
  * @param {string} hex
  * @returns {*}
  */
-export function hexToRgb(hex: string): any {
-  const result =
-    hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
-      , (m, r, g, b) => '#' + r + r + g + g + b + b)
-    .substring(1).match(/.{2}/g)
-    .map(x => parseInt(x, 16));
-
-  return {
-    r: result[0],
-    g: result[1],
-    b: result[2]
-  };
+export function hexToRgb(value: string): RGBColor {
+  // deprecated, use d3.color()
+  return d3_color.rgb(value);
 }
 
 /**
- * Accepts a hex color and returns a inverted hex color
+ * Accepts a color (string) and returns a inverted hex color (string)
  * http://stackoverflow.com/questions/9600295/automatically-change-text-color-to-assure-readability
  *
  * @export
- * @param {any} color
+ * @param {any} value
  * @returns {string}
  */
-export function invertColor(hex): any {
-  const { r, g, b } = hexToRgb(hex);
+export function invertColor(value: string): string {
+  const color = d3_color.rgb(value);
+  const { r, g, b, opacity } = color;
+  if (opacity === 0) {
+    return color.toString();
+  }
   const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-  const darken = (yiq >= 128);
-  const depth = darken ? -.8 : .8;
+  const depth = (yiq >= 128) ? -.8 : .8;
 
-  return shadeRGBColor({ r, g, b }, depth);
+  return shadeRGBColor(color, depth);
 }
 
 /**

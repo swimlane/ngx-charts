@@ -42,7 +42,7 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
 export class NumberCardComponent extends BaseChartComponent {
   @Input() cardColor: string;
   @Input() bandColor: string;
-  @Input() emptyColor: string;
+  @Input() emptyColor: string = 'rgba(0, 0, 0, 0)';
   @Input() innerPadding = 15;
   @Input() textColor: string;
   @Input() valueFormatting: any;
