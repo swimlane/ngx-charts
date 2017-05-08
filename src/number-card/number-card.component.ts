@@ -15,7 +15,7 @@ import { gridLayout, gridSize } from '../common/grid-layout.helper';
     <ngx-charts-chart
       [view]="[width, height]"
       [showLegend]="false">
-      <svg:g [attr.transform]="transform" class="number-card chart">
+      <svg:g [attr.transform]="transform" class="number-card chart" [class.clickable]="clickable">
         <svg:g ngx-charts-card-series
           [colors]="colors"
           [cardColor]="cardColor"
@@ -57,6 +57,10 @@ export class NumberCardComponent extends BaseChartComponent {
   margin = [10, 10, 10, 10];
 
   backgroundCards: any[];
+
+  get clickable() {
+    return !!this.select.observers.length;
+  }
 
   update(): void {
     super.update();
