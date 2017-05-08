@@ -56,7 +56,7 @@ export const multi = [
       },
       {
         name: '1990',
-        value: 3706
+        value: 37060
       }
     ]
   },

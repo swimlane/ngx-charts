@@ -76,12 +76,37 @@ export class AppComponent implements OnInit {
   minRadius = 3;
   showSeriesOnHover = true;
 
+  curves = {
+    Basis: shape.curveBasis,
+    'Basis Closed': shape.curveBasisClosed,
+    Bundle: shape.curveBundle.beta(1),
+    Cardinal: shape.curveCardinal,
+    'Cardinal Closed': shape.curveCardinalClosed,
+    'Catmull Rom': shape.curveCatmullRom,
+    'Catmull Rom Closed': shape.curveCatmullRomClosed,
+    Linear: shape.curveLinear,
+    'Linear Closed': shape.curveLinearClosed,
+    'Monotone X': shape.curveMonotoneX,
+    'Monotone Y': shape.curveMonotoneY,
+    Natural: shape.curveNatural,
+    Step: shape.curveStep,
+    'Step After': shape.curveStepAfter,
+    'Step Before': shape.curveStepBefore,
+    default: shape.curveLinear
+  };
+
   // line interpolation
   curveType: string = 'Linear';
-  curve: any = shape.curveLinear;
+  curve: any = this.curves[this.curveType];
   interpolationTypes = [
     'Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X',
     'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'
+  ];
+
+  closedCurveType: string = 'Linear Closed';
+  closedCurve: any = this.curves[this.closedCurveType];
+  closedInterpolationTypes = [
+    'Basis Closed', 'Cardinal Closed', 'Catmull Rom Closed', 'Linear Closed'
   ];
 
   colorSets: any;
@@ -226,11 +251,14 @@ export class AppComponent implements OnInit {
       const multiEntry = {
         name: country,
         series: [{
-          name: '2010',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          name: '1990',
+          value: Math.floor(10000 + Math.random() * 50000)
         }, {
-          name: '2011',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          name: '2000',
+          value: Math.floor(10000 + Math.random() * 50000)
+        }, {
+          name: '2010',
+          value: Math.floor(10000 + Math.random() * 50000)
         }]
       };
 
@@ -296,9 +324,13 @@ export class AppComponent implements OnInit {
     if (this.chartType === 'bubble-chart') {
       this.xAxisLabel = 'Census Date';
       this.yAxisLabel = 'Life expectancy [years]';
-    } else {
+    } else if (this.chartType === 'line-chart' ||
+      this.chartType === 'polar-chart') {
+      this.xAxisLabel = 'Census Date';
       this.yAxisLabel = 'GDP Per Capita';
+    } else {
       this.xAxisLabel = 'Country';
+      this.yAxisLabel = 'GDP Per Capita';
     }
 
     if (this.chartType === 'calendar') {
@@ -327,41 +359,8 @@ export class AppComponent implements OnInit {
     console.log('Item clicked', data);
   }
 
-  setInterpolationType(curveType) {
-    this.curveType = curveType;
-    if (curveType === 'Basis') {
-      this.curve = shape.curveBasis;
-    }
-    if (curveType === 'Bundle') {
-      this.curve = shape.curveBundle.beta(1);
-    }
-    if (curveType === 'Cardinal') {
-      this.curve = shape.curveCardinal;
-    }
-    if (curveType === 'Catmull Rom') {
-      this.curve = shape.curveCatmullRom;
-    }
-    if (curveType === 'Linear') {
-      this.curve = shape.curveLinear;
-    }
-    if (curveType === 'Monotone X') {
-      this.curve = shape.curveMonotoneX;
-    }
-    if (curveType === 'Monotone Y') {
-      this.curve = shape.curveMonotoneY;
-    }
-    if (curveType === 'Natural') {
-      this.curve = shape.curveNatural;
-    }
-    if (curveType === 'Step') {
-      this.curve = shape.curveStep;
-    }
-    if (curveType === 'Step After') {
-      this.curve = shape.curveStepAfter;
-    }
-    if (curveType === 'Step Before') {
-      this.curve = shape.curveStepBefore;
-    }
+  getInterpolationType(curveType) {
+    return this.curves[curveType] || this.curves['default'];
   }
 
   setColorScheme(name) {

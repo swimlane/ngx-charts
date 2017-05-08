@@ -256,6 +256,32 @@
         [showSeriesOnHover]="showSeriesOnHover"
         (select)="select($event)">
       </ngx-charts-line-chart>
+      <ngx-charts-polar-chart
+        *ngIf="chartType === 'polar-chart'"
+        [view]="view"
+        class="chart-container"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="multi"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [showGridLines]="showGridLines"
+        [rangeFillOpacity]="rangeFillOpacity"
+        [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
+        [showSeriesOnHover]="showSeriesOnHover"
+        [curve]="closedCurve"
+        (select)="select($event)">
+      </ngx-charts-polar-chart>
       <ngx-charts-bubble-chart
         *ngIf="chartType === 'bubble-chart'"
         [view]="view"
@@ -711,9 +737,19 @@
       <div *ngIf="chart.options.includes('curve')">
         <label>Line Interpolation</label>
         <select
-          [ngModel]="curveType"
-          (ngModelChange)="setInterpolationType($event)">
+          [(ngModel)]="curveType"
+          (ngModelChange)="curve = getInterpolationType($event)">
           <option *ngFor="let interpolationType of interpolationTypes" [value]="interpolationType">
+            {{interpolationType}}
+          </option>
+        </select>
+      </div>
+      <div *ngIf="chart.options.includes('curveClosed')">
+        <label>Line Interpolation</label>
+        <select
+          [(ngModel)]="closedCurveType"
+          (ngModelChange)="closedCurve = getInterpolationType($event)">
+          <option *ngFor="let interpolationType of closedInterpolationTypes" [value]="interpolationType">
             {{interpolationType}}
           </option>
         </select>

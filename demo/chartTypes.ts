@@ -125,6 +125,17 @@ const chartGroups = [
         ]
       },
       {
+        name: 'Polar Chart',
+        selector: 'polar-chart',
+        inputFormat: 'multiSeries',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'showGridLines', 'curveClosed',
+          'roundDomains', 'tooltipDisabled'
+        ]
+      },
+      {
         name: 'Area Chart',
         selector: 'area-chart',
         inputFormat: 'multiSeries',
