@@ -493,7 +493,7 @@ export class AppComponent implements OnInit {
   statusValueFormat(c): string {
     switch(c.data.extra ? c.data.extra.format : '') {
       case 'currency':
-        return `\$${Math.round(c.value).toLocaleString()}`;
+        return this.currencyFormatting(c);
       case 'time':
         return multiFormat(c.value);
       case 'percent':
@@ -501,6 +501,14 @@ export class AppComponent implements OnInit {
       default:
         return c.value.toLocaleString();
     }
+  }
+
+  currencyFormatting(c) {
+    return `\$${Math.round(c.value).toLocaleString()}`;
+  }
+
+  gdpLabelFormatting(c) {
+    return `${c.label}<br/>GDP Per Capita`;
   }
 
   statusLabelFormat(c): string {

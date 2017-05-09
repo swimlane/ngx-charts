@@ -5,6 +5,7 @@ import {
 import { select } from 'd3-selection';
 
 import { invertColor } from '../utils/color-utils';
+import { trimLabel } from '../common/trim-label.helper';
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell]',
@@ -30,14 +31,14 @@ import { invertColor } from '../utils/color-utils';
           [style.color]="getTextColor()"
           [style.height]="height + 'px'"
           [style.width]="width + 'px'">
-          <xhtml:span class="treemap-label">
-            {{label}}
+          <xhtml:span class="treemap-label" [innerHTML]="formattedLabel">
           </xhtml:span>
           <xhtml:br />
           <xhtml:span 
             class="treemap-val" 
             ngx-charts-count-up 
-            [countTo]="value">
+            [countTo]="value"
+            [valueFormatting]="valueFormatting">
           </xhtml:span>
         </xhtml:p>
       </svg:foreignObject>
@@ -47,6 +48,7 @@ import { invertColor } from '../utils/color-utils';
 })
 export class TreeMapCellComponent implements OnChanges {
 
+  @Input() data;
   @Input() fill;
   @Input() x;
   @Input() y;
@@ -55,20 +57,34 @@ export class TreeMapCellComponent implements OnChanges {
   @Input() label;
   @Input() value;
   @Input() valueType;
+  @Input() valueFormatting: any;
+  @Input() labelFormatting: any;
 
   @Output() select = new EventEmitter();
 
   element: HTMLElement;
   transform: string;
-  formattedValue: string; // todo check string or number ?
+  formattedLabel: string;
   initialized: boolean = false;
 
   constructor(element: ElementRef) {
     this.element = element.nativeElement;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(/* changes: SimpleChanges */): void {
     this.update();
+
+    const hasValue = this.data && typeof this.data.value !== 'undefined';
+    this.valueFormatting = this.valueFormatting || (cell => cell.value.toLocaleString());
+    const labelFormatting = this.labelFormatting || (cell => trimLabel(cell.label, 55));
+
+    const cellData = {
+      data: this.data,
+      label: this.label,
+      value: this.value
+    };
+
+    this.formattedLabel = labelFormatting(cellData);
   }
 
   update(): void {

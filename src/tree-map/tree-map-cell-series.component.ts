@@ -12,6 +12,7 @@ import {
   selector: 'g[ngx-charts-tree-map-cell-series]',
   template: `
     <svg:g ngx-charts-tree-map-cell *ngFor="let c of cells; trackBy:trackBy"
+      [data]="c"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -20,6 +21,8 @@ import {
       [label]="c.label"
       [value]="c.value"
       [valueType]="c.valueType"
+      [valueFormatting]="valueFormatting"
+      [labelFormatting]="labelFormatting"
       (select)="onClick($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
@@ -36,6 +39,8 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() dims;
   @Input() colors;
   @Input() tooltipDisabled: boolean = false;
+  @Input() valueFormatting: any;
+  @Input() labelFormatting: any;
 
   @Output() select = new EventEmitter();
 
