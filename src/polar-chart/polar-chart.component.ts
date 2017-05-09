@@ -211,12 +211,27 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   setTicks() {
+    let tickFormat;
+    if (this.xAxisTickFormatting) {
+      tickFormat = this.xAxisTickFormatting;
+    } else if (this.xScale.tickFormat) {
+      tickFormat = this.xScale.tickFormat.apply(this.xScale, [5]);
+    } else {
+      tickFormat = d => {
+        if (isDate(d)) {
+          return d.toLocaleDateString();
+        }
+        return d.toLocaleString();
+      };
+    }
+
     const outerRadius = this.outerRadius;
     const s = 1.1;
 
     this.thetaTicks = this.xDomain.map(d => {
       const startAngle = this.xScale(d);
       const dd = s * outerRadius * (startAngle > Math.PI ? -1 : 1);
+      const label = tickFormat(d);
 
       const startPos = [outerRadius * Math.sin(startAngle), -outerRadius * Math.cos(startAngle)];
       const pos = [dd, s * startPos[1]];
@@ -226,7 +241,7 @@ export class PolarChartComponent extends BaseChartComponent {
         startAngle,
         endAngle: startAngle,
         value: outerRadius,
-        label: d,
+        label,
         startPos,
         pos
       };
