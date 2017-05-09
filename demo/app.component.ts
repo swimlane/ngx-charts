@@ -159,7 +159,7 @@ export class AppComponent implements OnInit {
   personnelCost = 100;
 
   mathText = 'sin(x)*cos(x)';
-  mathFunction: Function;
+  mathFunction: (o: any) => any;
 
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
