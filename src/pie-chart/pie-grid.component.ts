@@ -78,7 +78,7 @@ import { formatLabel } from '../common/label.helper';
 })
 export class PieGridComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
-  @Input() tooltipText: any;
+  @Input() tooltipText: (o: any) => any;
 
   dims: ViewDimensions;
   data: any[];

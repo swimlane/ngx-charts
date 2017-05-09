@@ -17,6 +17,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
       [attr.class]="yAxisClassName"
       [attr.transform]="transform">
       <svg:g ngx-charts-y-axis-ticks
+        *ngIf="yScale"
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
@@ -27,7 +28,6 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [height]="dims.height"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
-
       <svg:g ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
