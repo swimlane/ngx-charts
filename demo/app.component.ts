@@ -508,7 +508,7 @@ export class AppComponent implements OnInit {
   }
 
   gdpLabelFormatting(c) {
-    return `${c.label}<br/>GDP Per Capita`;
+    return `${c.label}<br/><small class="number-card-label">GDP Per Capita</small>`;
   }
 
   statusLabelFormat(c): string {
