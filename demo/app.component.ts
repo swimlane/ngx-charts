@@ -287,39 +287,26 @@ export class AppComponent implements OnInit {
     this.chartType = chartSelector = chartSelector.replace('/', '');
     this.location.replaceState(this.chartType);
 
-    this.linearScale = this.chartType === 'line-chart' ||
-      this.chartType === 'line-chart-with-ranges' ||
-      this.chartType === 'area-chart' ||
-      this.chartType === 'area-chart-normalized' ||
-      this.chartType === 'area-chart-stacked';
-
-    if (this.chartType === 'bubble-chart') {
-      this.xAxisLabel = 'Census Date';
-      this.yAxisLabel = 'Life expectancy [years]';
-    } else {
-      this.yAxisLabel = 'GDP Per Capita';
-      this.xAxisLabel = 'Country';
+    for (const group of this.chartGroups) {
+      this.chart = group.charts.find(x => x.selector === chartSelector);
+      if (this.chart) break;
     }
 
-    if (this.chartType === 'calendar') {
-      this.width = 1100;
-      this.height = 200;
-    } else {
-      this.width = 700;
-      this.height = 300;
+    this.linearScale = false;
+    this.yAxisLabel = 'GDP Per Capita';
+    this.xAxisLabel = 'Country';
+
+    this.width = 700;
+    this.height = 300;
+
+    for (const k in this.chart.defaults) {
+      if (this.chart.defaults.hasOwnProperty(k)) {
+        this[k] = this.chart.defaults[k];
+      }
     }
 
     if (!this.fitContainer) {
       this.applyDimensions();
-    }
-
-    for (const group of this.chartGroups) {
-      for (const chart of group.charts) {
-        if (chart.selector === chartSelector) {
-          this.chart = chart;
-          return;
-        }
-      }
     }
   }
 
