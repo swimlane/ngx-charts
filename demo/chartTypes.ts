@@ -192,7 +192,7 @@ const chartGroups = [
         name: 'Tree Map',
         selector: 'tree-map',
         inputFormat: 'singleSeries',
-        options: ['colorScheme', 'tooltipDisabled']
+        options: ['colorScheme', 'tooltipDisabled', 'gradient']
       },
       {
         name: 'Number Cards',
