@@ -299,7 +299,7 @@ export class AppComponent implements OnInit {
     this.width = 700;
     this.height = 300;
 
-    for (const k in this.chart.defaults){
+    for (const k in this.chart.defaults) {
       if (this.chart.defaults.hasOwnProperty(k)) {
         this[k] = this.chart.defaults[k];
       }
