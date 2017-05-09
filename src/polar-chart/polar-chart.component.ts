@@ -31,8 +31,8 @@ import { reduceTicks } from '../common/axes/ticks.helper';
       (legendLabelClick)="onClick($event)"
       (legendLabelActivate)="onActivate($event)"
       (legendLabelDeactivate)="onDeactivate($event)">
-      <svg:g class="polar-chart chart">
-        <svg:g [attr.transform]="transform">
+      <svg:g class="polar-chart chart" [attr.transform]="transform">
+        <svg:g [attr.transform]="transformPlot">
           <svg:circle
             class="polar-chart-background"
             cx="0" cy="0"
@@ -57,8 +57,8 @@ import { reduceTicks } from '../common/axes/ticks.helper';
           </svg:g>
         </svg:g>
         <svg:g ngx-charts-y-axis
+          [attr.transform]="transformYAxis"
           *ngIf="yAxis"
-          [attr.transform]="yAxisTransform"
           [yScale]="yAxisScale"
           [dims]="yAxisDims"
           [showGridLines]="showGridLines"
@@ -67,17 +67,15 @@ import { reduceTicks } from '../common/axes/ticks.helper';
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g ngx-charts-x-axis
-          *ngIf="xAxis"
-          [attr.transform]="xAxisTransform"
-          [dims]="dims"
-          [showGridLines]="false"
-          [showLabel]="showXAxisLabel"
-          [labelText]="xAxisLabel"
-          [tickFormatting]="xAxisTickFormatting"
-          (dimensionsChanged)="updateXAxisHeight($event)">
+        <svg:g ngx-charts-axis-label
+          *ngIf="xAxis && showXAxisLabel"
+          [label]="xAxisLabel"
+          [offset]="labelOffset"
+          [orient]="'bottom'"
+          [height]="dims.height"
+          [width]="dims.width">
         </svg:g>
-        <svg:g [attr.transform]="transform">
+        <svg:g [attr.transform]="transformPlot">
           <svg:g *ngFor="let series of results; trackBy: series?.name">
             <svg:g ngx-charts-polar-series
               [xScale]="xScale"
@@ -113,13 +111,11 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() autoScale: boolean;
-  // @Input() timeline;
-  @Input() gradient: boolean; // ???
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveCardinalClosed;
   @Input() activeEntries: any[] = [];
   @Input() schemeType: string;
-  @Input() rangeFillOpacity: number; // ???
+  @Input() rangeFillOpacity: number = 0.15;
   @Input() xAxisTickFormatting: (o: any) => any;
   @Input() yAxisTickFormatting: (o: any) => any;
   @Input() roundDomains: boolean = false;
@@ -131,7 +127,7 @@ export class PolarChartComponent extends BaseChartComponent {
 
   dims: ViewDimensions;
   yAxisDims: ViewDimensions;
-  // xSet: any;
+  labelOffset: number;
   xDomain: any;
   yDomain: any;
   seriesDomain: any;
@@ -141,14 +137,11 @@ export class PolarChartComponent extends BaseChartComponent {
   colors: ColorHelper;
   scaleType: string;
   transform: string;
-  yAxisTransform: string;
-  xAxisTransform: string;
-  // clipPath: string;
-  // clipPathId: string;
+  transformPlot: string;
+  transformYAxis: string;
+  transformXAxis: string;
   series: any; // ???
-  // areaPath: any;
   margin = [10, 20, 10, 20];
-  // hoveredVertical: any; // the value of the x axis that is hovered over
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   filteredDomain: any;
@@ -163,13 +156,6 @@ export class PolarChartComponent extends BaseChartComponent {
     this.setDims();
     this.setScales();
     this.legendOptions = this.getLegendOptions();
-
-    /* const pageUrl = this.location instanceof PathLocationStrategy
-      ? this.location.path()
-      : '';
-
-    this.clipPathId = 'clip' + id().toString();
-    this.clipPath = `url(${pageUrl}#${this.clipPathId})`; */
 
     this.setTicks();
   }
@@ -189,22 +175,24 @@ export class PolarChartComponent extends BaseChartComponent {
       legendType: this.schemeType
     });
 
+    console.log(this.dims);
+
     const halfWidth = ~~(this.dims.width / 2);
     const halfHeight = ~~(this.dims.height / 2);
 
     const outerRadius = this.outerRadius = Math.min(halfHeight, halfWidth);
 
-    const yOffset = Math.max(0, halfHeight - this.outerRadius);
-    const xOffset = Math.max(0, halfWidth - this.outerRadius);
+    const yOffset = Math.max(0, halfHeight - outerRadius);
 
     this.yAxisDims = {
       ...this.dims,
       width: halfWidth
     };
 
-    this.transform = `translate(${ halfWidth + xOffset } , ${ halfHeight })`;
-    this.xAxisTransform = `translate(${ xOffset }, 0)`;
-    this.yAxisTransform = `translate(${ xOffset }, ${ yOffset })`;
+    this.transform = `translate(${ this.dims.xOffset }, ${ this.margin[0] })`;
+    this.transformYAxis = `translate(0, ${yOffset})`;
+    this.labelOffset = this.dims.height + 40;
+    this.transformPlot = `translate(${halfWidth}, ${halfHeight})`;
   }
 
   setScales() {
@@ -218,8 +206,6 @@ export class PolarChartComponent extends BaseChartComponent {
     this.xScale = this.getXScale(this.xDomain, 2 * Math.PI);
     this.yScale = this.getYScale(this.yDomain, this.outerRadius);
     this.yAxisScale = this.getYScale(this.yDomain.reverse(), this.outerRadius);
-
-    // this.updateTimeline();
 
     this.setColors();
   }
@@ -335,29 +321,22 @@ export class PolarChartComponent extends BaseChartComponent {
   }
 
   getXScale(domain, width): any {
-    let scale;
-
-    if (this.scaleType === 'time') {
-      scale = scaleTime()
-        .range([0, width])
-        .domain(domain);
-    } else if (this.scaleType === 'linear') {
-      scale = scaleLinear()
-        .range([0, width])
-        .domain(domain);
-
-      if (this.roundDomains) {
-        scale = scale.nice();
-      }
-    } else if (this.scaleType === 'ordinal') {
-      const d = 2 * Math.PI / domain.length;
-      scale = scalePoint()
-        .range([0, width - d])
-        .padding(0)
-        .domain(domain);
+    switch (this.scaleType) {
+      case 'time':
+        return scaleTime()
+          .range([0, width])
+          .domain(domain);
+      case 'linear':
+        const scale = scaleLinear()
+          .range([0, width])
+          .domain(domain);
+        return this.roundDomains ? scale.nice() : scale;
+      default:
+        return scalePoint()
+          .range([0, width - 2 * Math.PI / domain.length])
+          .padding(0)
+          .domain(domain);
     }
-
-    return scale;
   }
 
   getYScale(domain, height): any {
@@ -386,23 +365,6 @@ export class PolarChartComponent extends BaseChartComponent {
     if (num) return 'linear';
     return 'ordinal';
   }
-
-  /* updateDomain(domain): void {
-    this.filteredDomain = domain;
-    this.xDomain = this.filteredDomain;
-    this.xScale = this.getXScale(this.xDomain, this.dims.width);
-  }
-
-  updateHoveredVertical(item): void {
-    this.hoveredVertical = item.value;
-    this.deactivateAll();
-  }
-
-  @HostListener('mouseleave')
-  hideCircles(): void {
-    this.hoveredVertical = null;
-    this.deactivateAll();
-  } */
 
   onClick(data, series?): void {
     if (series) {
