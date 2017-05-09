@@ -245,6 +245,16 @@ const chartGroups = [
         selector: 'status-demo',
         inputFormat: 'statusData',
         options: ['colorScheme']
+      },
+      {
+        name: 'Equation Plots',
+        selector: 'plot-demo',
+        inputFormat: 'statusData',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis',
+          'autoScale', 'showGridLines', 'curveClosed', 'curve',
+          'roundDomains', 'tooltipDisabled'
+        ]
       }
     ]
   }

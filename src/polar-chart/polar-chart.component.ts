@@ -20,6 +20,8 @@ import { id } from '../utils/id';
 import { isDate, isNumber } from '../utils/types';
 import { reduceTicks } from '../common/axes/ticks.helper';
 
+const twoPI = 2 * Math.PI;
+
 @Component({
   selector: 'ngx-charts-polar-chart',
   template: `
@@ -175,8 +177,6 @@ export class PolarChartComponent extends BaseChartComponent {
       legendType: this.schemeType
     });
 
-    console.log(this.dims);
-
     const halfWidth = ~~(this.dims.width / 2);
     const halfHeight = ~~(this.dims.height / 2);
 
@@ -203,7 +203,7 @@ export class PolarChartComponent extends BaseChartComponent {
     this.yDomain = this.getYDomain();
     this.seriesDomain = this.getSeriesDomain();
 
-    this.xScale = this.getXScale(this.xDomain, 2 * Math.PI);
+    this.xScale = this.getXScale(this.xDomain, twoPI);
     this.yScale = this.getYScale(this.yDomain, this.outerRadius);
     this.yAxisScale = this.getYScale(this.yDomain.reverse(), this.outerRadius);
 
@@ -309,6 +309,7 @@ export class PolarChartComponent extends BaseChartComponent {
   getYDomain(domain = this.getYValues()): any[] {
     let min = Math.min(...domain);
     const max = Math.max(...domain);
+    min = Math.max(0, min);
     if (!this.autoScale) {
       min = Math.min(0, min);
     }
@@ -333,7 +334,7 @@ export class PolarChartComponent extends BaseChartComponent {
         return this.roundDomains ? scale.nice() : scale;
       default:
         return scalePoint()
-          .range([0, width - 2 * Math.PI / domain.length])
+          .range([0, width - twoPI / domain.length])
           .padding(0)
           .domain(domain);
     }

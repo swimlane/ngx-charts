@@ -158,7 +158,12 @@ export class AppComponent implements OnInit {
   salePrice = 100;
   personnelCost = 100;
 
+  mathText = 'sin(x)*cos(x)';
+  mathFunction: Function;
+
   constructor(public location: Location) {
+    this.mathFunction = this.getFunction();
+
     Object.assign(this, {
       single,
       multi,
@@ -166,7 +171,8 @@ export class AppComponent implements OnInit {
       chartGroups,
       colorSets,
       graph: generateGraph(50),
-      bubble
+      bubble,
+      plotData: this.generatePlotData()
     });
 
     this.dateData = generateData(5, false);
@@ -504,5 +510,37 @@ export class AppComponent implements OnInit {
 
   statusLabelFormat(c): string {
     return `${c.label}<br/><small class="number-card-label">This week</small>`;
+  }
+
+  generatePlotData() {
+    if (!this.mathFunction) {
+      return [];
+    }
+    const twoPi = 2 * Math.PI;
+    const length = 25;
+    const series = Array.apply(null, { length })
+      .map((d, i) => {
+        const x = i / (length - 1);
+        const t = x * twoPi;
+        return {
+          name: ~~(x * 360),
+          value: this.mathFunction(t)
+        };
+      });
+
+    return [{
+      name: this.mathText,
+      series
+    }];
+  }
+
+  getFunction(text = this.mathText) {
+    try {
+      text = `with (Math) { return ${this.mathText} }`;
+      const fn = new Function('x', text).bind(Math);
+      return (typeof fn(1) === 'number') ? fn : null;
+    } catch(err) {
+      return null;
+    }
   }
 }

@@ -515,6 +515,67 @@
         [units]="gaugeUnits"
         (select)="select($event)">
       </ngx-charts-linear-gauge>
+      <div *ngIf="chartType === 'plot-demo'">
+        <ngx-input
+          type="text"
+          [required]="true"
+          [(ngModel)]="mathText"
+          (change)="mathFunction = getFunction(mathText); plotData = generatePlotData()">
+        </ngx-input>
+        <ngx-charts-line-chart
+          style="position: static; display: inline-block; transform: none;"
+          [view]="view"
+          class="chart-container"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="plotData"
+          [legend]="false"
+          [legendTitle]="legendTitle"
+          (legendLabelClick)="onLegendLabelClick($event)"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxisLabel]="'angle'"
+          [yAxisLabel]="'radius'"
+          [autoScale]="autoScale"
+          [timeline]="timeline"
+          [showGridLines]="showGridLines"
+          [curve]="curves['Cardinal']"
+          [rangeFillOpacity]="rangeFillOpacity"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [showSeriesOnHover]="showSeriesOnHover"
+          (select)="select($event)">
+        </ngx-charts-line-chart>
+        <p></p>
+        <ngx-charts-polar-chart
+          style="position: static; display: inline-block; transform: none;"
+          [view]="view"
+          class="chart-container"
+          [scheme]="colorScheme"
+          [schemeType]="schemeType"
+          [results]="plotData"
+          [legend]="false"
+          [legendTitle]="legendTitle"
+          (legendLabelClick)="onLegendLabelClick($event)"
+          [xAxis]="false"
+          [yAxis]="true"
+          [showXAxisLabel]="false"
+          [showYAxisLabel]="false"
+          [xAxisLabel]="'angle'"
+          [yAxisLabel]="'radius'"
+          [autoScale]="autoScale"
+          [showGridLines]="showGridLines"
+          [rangeFillOpacity]="rangeFillOpacity"
+          [roundDomains]="roundDomains"
+          [tooltipDisabled]="tooltipDisabled"
+          [showSeriesOnHover]="showSeriesOnHover"
+          [curve]="curves['Cardinal Closed']"
+          (select)="select($event)">
+        </ngx-charts-polar-chart>
+      </div>
     </div>
   </div>
   <div class="sidebar">

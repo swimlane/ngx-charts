@@ -197,8 +197,6 @@ export class LineChartComponent extends BaseChartComponent {
       legendType: this.schemeType
     });
 
-    console.log(this.dims);
-
     if (this.timeline) {
       this.dims.height -= (this.timelineHeight + this.margin[2] + this.timelinePadding);
     }
