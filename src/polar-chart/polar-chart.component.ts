@@ -324,6 +324,7 @@ export class PolarChartComponent extends BaseChartComponent {
   getYDomain(domain = this.getYValues()): any[] {
     let min = Math.min(...domain);
     const max = Math.max(...domain);
+
     min = Math.max(0, min);
     if (!this.autoScale) {
       min = Math.min(0, min);

@@ -15,6 +15,13 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   selector: 'g[ngx-charts-polar-series]',
   template: `
     <svg:g class="polar-charts-series">
+      <!-- defs>
+        <svg:g ngx-charts-svg-radial-gradient ng-if="hasGradient"
+          orientation="vertical"
+          [name]="gradientId"
+          [stops]="gradientStops"
+        />
+      </defs -->
       <svg:g ngx-charts-line
         class="polar-series-path"
         [path]="path"
@@ -30,7 +37,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [cx]="circle.cx"
         [cy]="circle.cy"
         [r]="circleRadius"
-        [fill]="seriesColor"
+        [fill]="circle.color"
         [style.opacity]="inactive ? 0.2 : 1"
         ngx-tooltip
         [tooltipDisabled]="tooltipDisabled"
@@ -80,22 +87,32 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   update(): void {
+    this.updateGradients();
+
     const line = this.getLineGenerator();
 
     const data = this.sortData(this.data.series);
 
-    this.seriesColor = this.colors.getColor(this.data.name);
+    const seriesName = this.data.name;
+    const linearScaleType = this.colors.scaleType === 'linear';
+    const min = this.yScale.domain()[0];
+    this.seriesColor = this.colors.getColor(linearScaleType ? min : seriesName);
+    console.log(this.seriesColor);
 
     this.path = line(data) || '';
 
     this.circles = data.map(d => {
       const a = this.getAngle(d);
       const r = this.getRadius(d);
+      const value = d.value;
+
+      const color = this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
 
       return {
         cx: r * Math.sin(a),
         cy: -r * Math.cos(a),
-        value: d.value,
+        value,
+        color,
         label: d.name
       };
     });
@@ -156,5 +173,25 @@ export class PolarSeriesComponent implements OnChanges {
       <span class="tooltip-label">${this.data.name} • ${label}</span>
       <span class="tooltip-val">${value.toLocaleString()}</span>
     `;
+  }
+
+  updateGradients() {
+    if (this.colors.scaleType === 'linear') {
+      this.hasGradient = true;
+
+      const pageUrl = this.location instanceof PathLocationStrategy
+        ? this.location.path()
+        : '';
+
+      this.gradientId = 'grad' + id().toString();
+      this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+      const values = this.data.series.map(d => d.value);
+      const max = Math.max(...values);
+      const min = Math.min(...values);
+      this.gradientStops = this.colors.getLinearGradientStops(max, min);
+    } else {
+      this.hasGradient = false;
+      this.gradientStops = undefined;
+    }
   }
 }
