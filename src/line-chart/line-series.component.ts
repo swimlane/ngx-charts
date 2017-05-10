@@ -16,7 +16,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   template: `
     <svg:g>
       <defs>
-        <svg:g ngx-charts-svg-linear-gradient ng-if="hasGradient"
+        <svg:g ngx-charts-svg-linear-gradient *ngIf="hasGradient"
           orientation="vertical"
           [name]="gradientId"
           [stops]="gradientStops"

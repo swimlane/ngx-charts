@@ -21,7 +21,7 @@ import {
       [@animationState]="'active'"
       class="line"
       [attr.d]="path"
-      fill="none"
+      [attr.fill]="fill"
       [attr.stroke]="stroke"
       stroke-width="1.5px"
     />
@@ -46,13 +46,10 @@ export class LineComponent {
   @Input() path;
   @Input() stroke;
   @Input() data;
+  @Input() fill: string = 'none';
 
   @Output() select = new EventEmitter();
 
-  element: ElementRef;
-
-  constructor(element: ElementRef) {
-    this.element = element.nativeElement;
+  constructor(private element: ElementRef) {
   }
-
 }

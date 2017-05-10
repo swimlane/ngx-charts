@@ -65,7 +65,7 @@ export class PieSeriesComponent implements OnChanges {
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
   @Input() labelFormatting: any;
-  @Input() tooltipText: any;
+  @Input() tooltipText: (o: any) => any;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
