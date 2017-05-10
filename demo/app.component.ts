@@ -4,11 +4,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
 import * as d3 from 'd3';
+import { Observable } from 'rxjs/Rx';
 
 import { colorSets } from '../src/utils/color-sets';
 import { formatLabel } from '../src/common/label.helper';
 import { single, multi, countries, bubble, generateData, generateGraph } from './data';
 import chartGroups from './chartTypes';
+import { PieLabelOption } from '../src/common';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -104,6 +106,10 @@ export class AppComponent implements OnInit {
   doughnut = false;
   arcWidth = 0.25;
 
+  // pie chart label options
+  pieLabelOption = new PieLabelOption();
+  pieLabelOption$: Observable<PieLabelOption>;
+
   // line, area
   autoScale = true;
   timeline = false;
@@ -168,6 +174,8 @@ export class AppComponent implements OnInit {
     if (!this.fitContainer) {
       this.applyDimensions();
     }
+
+    this.pieLabelOption$ = Observable.of(this.pieLabelOption);
   }
 
   updateData() {
@@ -493,4 +501,11 @@ export class AppComponent implements OnInit {
   statusLabelFormat(c): string {
     return `${c.label}<br/><small class="number-card-label">This week</small>`;
   }
+
+  pieLabelOptionChanged() {
+    console.log(`Pie label option changed: ${JSON.stringify(this.pieLabelOption)}`);
+    const newPieLabelOption = Object.assign({}, this.pieLabelOption);
+    this.pieLabelOption$ = Observable.of(newPieLabelOption);
+  }
+
 }
