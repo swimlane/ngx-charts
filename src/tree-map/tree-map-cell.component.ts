@@ -86,7 +86,6 @@ export class TreeMapCellComponent implements OnChanges {
   }
 
   ngOnChanges(/* changes: SimpleChanges */): void {
-    console.log('ngOnChanges');
     this.update();
 
     const hasValue = this.data && typeof this.data.value !== 'undefined';
