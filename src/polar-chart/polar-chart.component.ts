@@ -80,6 +80,7 @@ const twoPI = 2 * Math.PI;
         <svg:g [attr.transform]="transformPlot">
           <svg:g *ngFor="let series of results; trackBy: series?.name">
             <svg:g ngx-charts-polar-series
+              [gradient]="gradient"
               [xScale]="xScale"
               [yScale]="yScale"
               [colors]="colors"
@@ -123,6 +124,7 @@ export class PolarChartComponent extends BaseChartComponent {
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() showSeriesOnHover: boolean = true;
+  @Input() gradient: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -157,6 +159,7 @@ export class PolarChartComponent extends BaseChartComponent {
 
     this.setDims();
     this.setScales();
+    this.setColors();
     this.legendOptions = this.getLegendOptions();
 
     this.setTicks();
@@ -180,7 +183,7 @@ export class PolarChartComponent extends BaseChartComponent {
     const halfWidth = ~~(this.dims.width / 2);
     const halfHeight = ~~(this.dims.height / 2);
 
-    const outerRadius = this.outerRadius = Math.min(halfHeight, halfWidth);
+    const outerRadius = this.outerRadius = Math.min(halfHeight / 1.5, halfWidth / 1.5);
 
     const yOffset = Math.max(0, halfHeight - outerRadius);
 
@@ -206,8 +209,6 @@ export class PolarChartComponent extends BaseChartComponent {
     this.xScale = this.getXScale(this.xDomain, twoPI);
     this.yScale = this.getYScale(this.yDomain, this.outerRadius);
     this.yAxisScale = this.getYScale(this.yDomain.reverse(), this.outerRadius);
-
-    this.setColors();
   }
 
   setTicks() {
@@ -394,7 +395,7 @@ export class PolarChartComponent extends BaseChartComponent {
   setColors(): void {
     const domain = (this.schemeType === 'ordinal') ?
       this.seriesDomain :
-      this.yDomain;
+      this.yDomain.reverse();
     this.colors = new ColorHelper(this.scheme, this.schemeType, domain, this.customColors);
   }
 

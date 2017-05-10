@@ -154,7 +154,7 @@ const chartGroups = [
         selector: 'polar-chart',
         inputFormat: 'multiSeries',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis',
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'showGridLines', 'curveClosed',
           'roundDomains', 'tooltipDisabled'

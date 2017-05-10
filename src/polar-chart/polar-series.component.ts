@@ -15,21 +15,24 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   selector: 'g[ngx-charts-polar-series]',
   template: `
     <svg:g class="polar-charts-series">
-      <!-- defs>
-        <svg:g ngx-charts-svg-radial-gradient ng-if="hasGradient"
+      <defs>
+        <svg:g ngx-charts-svg-radial-gradient *ngIf="gradient"
           orientation="vertical"
+          [color]="seriesColor"
           [name]="gradientId"
+          [startOpacity]="0.25"
+          [endOpacity]="1"
           [stops]="gradientStops"
         />
-      </defs -->
+      </defs>
       <svg:g ngx-charts-line
         class="polar-series-path"
         [path]="path"
-        [stroke]="seriesColor"
+        [stroke]="gradient ? gradientUrl : seriesColor"
         [class.active]="active"
         [class.inactive]="inactive"
         [attr.fill-opacity]="rangeFillOpacity"
-        [fill]="seriesColor"
+        [fill]="gradient ? gradientUrl : seriesColor"
       />
       <svg:g ngx-charts-circle
         *ngFor="let circle of circles"
@@ -62,6 +65,7 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() rangeFillOpacity: number;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: (o: any) => string;
+  @Input() gradient: boolean = false;
 
   path: string;
   circles: any[];
@@ -97,7 +101,6 @@ export class PolarSeriesComponent implements OnChanges {
     const linearScaleType = this.colors.scaleType === 'linear';
     const min = this.yScale.domain()[0];
     this.seriesColor = this.colors.getColor(linearScaleType ? min : seriesName);
-    console.log(this.seriesColor);
 
     this.path = line(data) || '';
 
@@ -176,21 +179,19 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   updateGradients() {
+    const pageUrl = this.location instanceof PathLocationStrategy
+      ? this.location.path()
+      : '';
+
+    this.gradientId = 'grad' + id().toString();
+    this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
+
     if (this.colors.scaleType === 'linear') {
-      this.hasGradient = true;
-
-      const pageUrl = this.location instanceof PathLocationStrategy
-        ? this.location.path()
-        : '';
-
-      this.gradientId = 'grad' + id().toString();
-      this.gradientUrl = `url(${pageUrl}#${this.gradientId})`;
       const values = this.data.series.map(d => d.value);
       const max = Math.max(...values);
       const min = Math.min(...values);
       this.gradientStops = this.colors.getLinearGradientStops(max, min);
     } else {
-      this.hasGradient = false;
       this.gradientStops = undefined;
     }
   }

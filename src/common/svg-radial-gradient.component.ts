@@ -11,11 +11,6 @@ import {
       [attr.cy]="cy"
       [attr.r]="r"
       gradientUnits="userSpaceOnUse">
-      <svg:stop
-        offset="0%"
-        [style.stop-color]="color"
-        [style.stop-opacity]="startOpacity"
-      />
       <svg:stop *ngFor="let stop of stops"
         [attr.offset]="stop.offset + '%'"
         [style.stop-color]="stop.color"
