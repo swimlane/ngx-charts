@@ -73,11 +73,6 @@ export class CountUpDirective implements OnDestroy {
     this.nativeElement = element.nativeElement;
   }
 
-  ngOnChanges() {
-    this.valueFormatting = this.valueFormatting ||
-      (data => `${this.countPrefix}${data.value.toLocaleString()}${this.countSuffix}`);
-  }
-
   ngOnDestroy(): void {
     cancelAnimationFrame(this.animationReq);
   }
@@ -85,8 +80,11 @@ export class CountUpDirective implements OnDestroy {
   start(): void {
     cancelAnimationFrame(this.animationReq);
 
+    const valueFormatting = this.valueFormatting ||
+      (data => `${this.countPrefix}${data.value.toLocaleString()}${this.countSuffix}`);
+
     const callback = ({ value, progress, finished }) => {
-      this.value = this.valueFormatting({value});
+      this.value = valueFormatting({value});
       this.cd.markForCheck();
 
       if(!finished) this.countChange.emit({ value, progress });
