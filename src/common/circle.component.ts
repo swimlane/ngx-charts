@@ -57,7 +57,10 @@ export class CircleComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.classNames = this.classNames.join(' ') + 'circle';
+    this.classNames = Array.isArray(this.classNames) ?
+      this.classNames.join(' ') : 
+      '';
+    this.classNames += 'circle';
   }
 
 }

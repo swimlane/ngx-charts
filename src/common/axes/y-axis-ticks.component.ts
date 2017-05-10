@@ -70,8 +70,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   y1: any;
   y2: any;
   adjustedScale: any;
-  transform: any;
-  tickFormat: any;
+  transform: (o: any) => string;
+  tickFormat: (o: any) => string;
   ticks: any;
   width: number = 0;
   outerTickSize: number = 6;
@@ -171,20 +171,16 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   getTicks(): any {
-    let ticks;
     const maxTicks = this.getMaxTicks(20);
     const maxScaleTicks = this.getMaxTicks(50);
 
     if (this.tickValues) {
-      ticks = this.tickValues;
-    } else if (this.scale.ticks) {
-      ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
-    } else {
-      ticks = this.scale.domain();
-      ticks = reduceTicks(ticks, maxTicks);
+      return this.tickValues;
     }
-
-    return ticks;
+    if (this.scale.ticks) {
+      return this.scale.ticks.call(this.scale, maxScaleTicks);
+    }
+    return reduceTicks(this.scale.domain(), maxTicks);
   }
 
   getMaxTicks(tickHeight: number): number {
@@ -192,7 +188,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   tickTransform(tick): string {
-    return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
+    return `translate(${this.adjustedScale(tick)},${this.verticalSpacing})`;
   }
 
   gridLineTransform(): string {

@@ -150,6 +150,22 @@ const chartGroups = [
         }
       },
       {
+        name: 'Polar Chart',
+        selector: 'polar-chart',
+        inputFormat: 'multiSeries',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'showGridLines', 'curveClosed',
+          'roundDomains', 'tooltipDisabled'
+        ],
+        defaults: {
+          yAxisLabel: 'GDP Per Capita',
+          xAxisLabel: 'Census Date',
+          linearScale: true
+        }
+      },
+      {
         name: 'Area Chart',
         selector: 'area-chart',
         inputFormat: 'multiSeries',
@@ -286,6 +302,16 @@ const chartGroups = [
         selector: 'status-demo',
         inputFormat: 'statusData',
         options: ['colorScheme']
+      },
+      {
+        name: 'Equation Plots',
+        selector: 'plot-demo',
+        inputFormat: 'statusData',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis',
+          'autoScale', 'showGridLines', 'gradient',
+          'roundDomains', 'tooltipDisabled'
+        ]
       }
     ]
   }

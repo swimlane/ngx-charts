@@ -76,12 +76,37 @@ export class AppComponent implements OnInit {
   minRadius = 3;
   showSeriesOnHover = true;
 
+  curves = {
+    Basis: shape.curveBasis,
+    'Basis Closed': shape.curveBasisClosed,
+    Bundle: shape.curveBundle.beta(1),
+    Cardinal: shape.curveCardinal,
+    'Cardinal Closed': shape.curveCardinalClosed,
+    'Catmull Rom': shape.curveCatmullRom,
+    'Catmull Rom Closed': shape.curveCatmullRomClosed,
+    Linear: shape.curveLinear,
+    'Linear Closed': shape.curveLinearClosed,
+    'Monotone X': shape.curveMonotoneX,
+    'Monotone Y': shape.curveMonotoneY,
+    Natural: shape.curveNatural,
+    Step: shape.curveStep,
+    'Step After': shape.curveStepAfter,
+    'Step Before': shape.curveStepBefore,
+    default: shape.curveLinear
+  };
+
   // line interpolation
   curveType: string = 'Linear';
-  curve: any = shape.curveLinear;
+  curve: any = this.curves[this.curveType];
   interpolationTypes = [
     'Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X',
     'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'
+  ];
+
+  closedCurveType: string = 'Linear Closed';
+  closedCurve: any = this.curves[this.closedCurveType];
+  closedInterpolationTypes = [
+    'Basis Closed', 'Cardinal Closed', 'Catmull Rom Closed', 'Linear Closed'
   ];
 
   colorSets: any;
@@ -133,7 +158,12 @@ export class AppComponent implements OnInit {
   salePrice = 100;
   personnelCost = 100;
 
+  mathText = '3 - 1.5*sin(x) + cos(2*x) - 2*abs(cos(x))';
+  mathFunction: (o: any) => any;
+
   constructor(public location: Location) {
+    this.mathFunction = this.getFunction();
+
     Object.assign(this, {
       single,
       multi,
@@ -141,7 +171,8 @@ export class AppComponent implements OnInit {
       chartGroups,
       colorSets,
       graph: generateGraph(50),
-      bubble
+      bubble,
+      plotData: this.generatePlotData()
     });
 
     this.dateData = generateData(5, false);
@@ -226,11 +257,14 @@ export class AppComponent implements OnInit {
       const multiEntry = {
         name: country,
         series: [{
-          name: '2010',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          name: '1990',
+          value: Math.floor(10000 + Math.random() * 50000)
         }, {
-          name: '2011',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          name: '2000',
+          value: Math.floor(10000 + Math.random() * 50000)
+        }, {
+          name: '2010',
+          value: Math.floor(10000 + Math.random() * 50000)
         }]
       };
 
@@ -299,11 +333,7 @@ export class AppComponent implements OnInit {
     this.width = 700;
     this.height = 300;
 
-    for (const k in this.chart.defaults) {
-      if (this.chart.defaults.hasOwnProperty(k)) {
-        this[k] = this.chart.defaults[k];
-      }
-    }
+    Object.assign(this, this.chart.defaults);
 
     if (!this.fitContainer) {
       this.applyDimensions();
@@ -314,41 +344,8 @@ export class AppComponent implements OnInit {
     console.log('Item clicked', data);
   }
 
-  setInterpolationType(curveType) {
-    this.curveType = curveType;
-    if (curveType === 'Basis') {
-      this.curve = shape.curveBasis;
-    }
-    if (curveType === 'Bundle') {
-      this.curve = shape.curveBundle.beta(1);
-    }
-    if (curveType === 'Cardinal') {
-      this.curve = shape.curveCardinal;
-    }
-    if (curveType === 'Catmull Rom') {
-      this.curve = shape.curveCatmullRom;
-    }
-    if (curveType === 'Linear') {
-      this.curve = shape.curveLinear;
-    }
-    if (curveType === 'Monotone X') {
-      this.curve = shape.curveMonotoneX;
-    }
-    if (curveType === 'Monotone Y') {
-      this.curve = shape.curveMonotoneY;
-    }
-    if (curveType === 'Natural') {
-      this.curve = shape.curveNatural;
-    }
-    if (curveType === 'Step') {
-      this.curve = shape.curveStep;
-    }
-    if (curveType === 'Step After') {
-      this.curve = shape.curveStepAfter;
-    }
-    if (curveType === 'Step Before') {
-      this.curve = shape.curveStepBefore;
-    }
+  getInterpolationType(curveType) {
+    return this.curves[curveType] || this.curves['default'];
   }
 
   setColorScheme(name) {
@@ -492,5 +489,37 @@ export class AppComponent implements OnInit {
 
   statusLabelFormat(c): string {
     return `${c.label}<br/><small class="number-card-label">This week</small>`;
+  }
+
+  generatePlotData() {
+    if (!this.mathFunction) {
+      return [];
+    }
+    const twoPi = 2 * Math.PI;
+    const length = 25;
+    const series = Array.apply(null, { length })
+      .map((d, i) => {
+        const x = i / (length - 1);
+        const t = x * twoPi;
+        return {
+          name: ~~(x * 360),
+          value: this.mathFunction(t)
+        };
+      });
+
+    return [{
+      name: this.mathText,
+      series
+    }];
+  }
+
+  getFunction(text = this.mathText) {
+    try {
+      text = `with (Math) { return ${this.mathText} }`;
+      const fn = new Function('x', text).bind(Math);
+      return (typeof fn(1) === 'number') ? fn : null;
+    } catch(err) {
+      return null;
+    }
   }
 }

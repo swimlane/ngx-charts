@@ -1,0 +1,24 @@
+.polar-chart {
+  .polar-chart-background {
+    fill: none;
+  }
+
+  .radial-gridline-path {
+    stroke-dasharray: 10 10;
+    fill: none;
+  }
+
+  .pie-label-line {
+    stroke: #2f3646;
+  }
+}
+
+.polar-charts-series {
+  .polar-series-area {
+    pointer-events: none;
+  }
+}
+
+.polar-series-path {
+  pointer-events: none;
+}
