@@ -16,7 +16,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
   template: `
     <svg:g class="polar-charts-series">
       <defs>
-        <svg:g ngx-charts-svg-radial-gradient *ngIf="gradient"
+        <svg:g ngx-charts-svg-radial-gradient *ngIf="hasGradient"
           orientation="vertical"
           [color]="seriesColor"
           [name]="gradientId"
@@ -28,11 +28,11 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       <svg:g ngx-charts-line
         class="polar-series-path"
         [path]="path"
-        [stroke]="gradient ? gradientUrl : seriesColor"
+        [stroke]="hasGradient ? gradientUrl : seriesColor"
         [class.active]="active"
         [class.inactive]="inactive"
         [attr.fill-opacity]="rangeFillOpacity"
-        [fill]="gradient ? gradientUrl : seriesColor"
+        [fill]="hasGradient ? gradientUrl : seriesColor"
       />
       <svg:g ngx-charts-circle
         *ngFor="let circle of circles"
@@ -179,6 +179,12 @@ export class PolarSeriesComponent implements OnChanges {
   }
 
   updateGradients() {
+    this.hasGradient = this.gradient || this.colors.scaleType === 'linear';
+
+    if (!this.hasGradient) {
+      return;
+    }
+
     const pageUrl = this.location instanceof PathLocationStrategy
       ? this.location.path()
       : '';
