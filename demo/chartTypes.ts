@@ -309,7 +309,7 @@ const chartGroups = [
         inputFormat: 'statusData',
         options: [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis',
-          'autoScale', 'showGridLines',
+          'autoScale', 'showGridLines', 'gradient',
           'roundDomains', 'tooltipDisabled'
         ]
       }
