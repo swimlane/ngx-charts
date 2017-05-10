@@ -113,8 +113,8 @@ export class CardComponent implements OnChanges, OnDestroy {
   update(): void {
     this.zone.run(() => {
       const hasValue = this.data && typeof this.data.value !== 'undefined';
-      this.valueFormatting = this.valueFormatting || (card => card.data.value.toLocaleString());
-      this.labelFormatting = this.labelFormatting || (card => trimLabel(card.label, 55));
+      const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
+      const labelFormatting = this.labelFormatting || (card => trimLabel(card.label, 55));
 
       this.transform = `translate(${this.x} , ${this.y})`;
 
@@ -130,10 +130,10 @@ export class CardComponent implements OnChanges, OnDestroy {
         value: this.data.value
       };
 
-      this.formattedLabel = this.labelFormatting(cardData);
+      this.formattedLabel = labelFormatting(cardData);
       this.transformBand = `translate(0 , ${this.cardHeight - this.bandHeight})`;
 
-      const value = hasValue ? this.valueFormatting(cardData) : '';
+      const value = hasValue ? valueFormatting(cardData) : '';
 
       this.value = this.paddedValue(value);
       this.setPadding();
@@ -143,7 +143,6 @@ export class CardComponent implements OnChanges, OnDestroy {
       setTimeout(() => {
         this.scaleText();
         this.value = value;
-        
         if (hasValue && !this.initialized) {
           setTimeout(() => this.startCount(), 20);
         }
@@ -164,11 +163,12 @@ export class CardComponent implements OnChanges, OnDestroy {
 
       const val = this.data.value;
       const decs = decimalChecker(val);
+      const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
 
       const callback = ({value, finished}) => {
         this.zone.run(() => {
           value = finished ? val : value;
-          this.value = this.valueFormatting({label: this.label, data: this.data, value});
+          this.value = valueFormatting({label: this.label, data: this.data, value});
           if (!finished) {
             this.value = this.paddedValue(this.value);
           }
