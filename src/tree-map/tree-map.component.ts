@@ -26,6 +26,7 @@ import { ColorHelper } from '../common/color.helper';
           [tooltipDisabled]="tooltipDisabled"
           [valueFormatting]="valueFormatting"
           [labelFormatting]="labelFormatting"
+          [gradient]="gradient"
           (select)="onClick($event)"
         />
       </svg:g>
@@ -41,6 +42,7 @@ export class TreeMapComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
+  @Input() gradient: boolean = false;
 
   @Output() select = new EventEmitter();
 

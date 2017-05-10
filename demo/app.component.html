@@ -412,6 +412,7 @@
         [tooltipDisabled]="tooltipDisabled"
         [labelFormatting]="gdpLabelFormatting"
         [valueFormatting]="currencyFormatting"
+        [gradient]="gradient"
         (select)="select($event)">
       </ngx-charts-tree-map>
       <ngx-charts-number-card
@@ -454,8 +455,7 @@
           emptyColor="#1e222e"
           [results]="statusData"
           [valueFormatting]="statusValueFormat"
-          [labelFormatting]="statusLabelFormat"
-          (select)="select($event)">
+          [labelFormatting]="statusLabelFormat">
         </ngx-charts-number-card>
       </div>
       <ngx-charts-gauge
