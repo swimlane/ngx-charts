@@ -487,6 +487,14 @@ export class AppComponent implements OnInit {
     }
   }
 
+  currencyFormatting(c) {
+    return `\$${Math.round(c.value).toLocaleString()}`;
+  }
+
+  gdpLabelFormatting(c) {
+    return `${c.label}<br/><small class="number-card-label">GDP Per Capita</small>`;
+  }
+
   statusLabelFormat(c): string {
     return `${c.label}<br/><small class="number-card-label">This week</small>`;
   }

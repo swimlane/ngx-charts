@@ -12,6 +12,8 @@ results         | object[] |               | the chart data
 scheme          | object   |               | the color scheme of the chart
 customColors    | object   |               | custom colors for the chart. Used to override a color for a specific value
 tooltipDisabled | boolean  | false         | show or hide the tooltip
+valueFormatting | function |               | function that formats the cell value
+labelFormatting | function |               | function that formats the cell label
 gradient        | boolean  | false         | fill elements with a gradient instead of a solid color
 
 # Outputs
