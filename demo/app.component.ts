@@ -158,7 +158,7 @@ export class AppComponent implements OnInit {
   salePrice = 100;
   personnelCost = 100;
 
-  mathText = '3 - 1.5*sin(x) + cos(2*x) - 2*abs(cos(x))';
+  mathText = '3 - 1.5*sin(x) + cos(2*x) - 1.5*abs(cos(x))';
   mathFunction: (o: any) => any;
 
   constructor(public location: Location) {

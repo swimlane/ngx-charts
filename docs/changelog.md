@@ -1,5 +1,19 @@
 # Changelog
 
+## 5.2.0
+- Feature: Added Polar/Radar chart type (#380)
+- Enhancement: Disable pointer if no click events are attached to number cards (#378)
+- Enhancement: Added gradiant to tree map chart (#382)
+- Enhancement: Added support for inverted colors from rgba values in number cards (#366)
+- Enhancement: Added value and albel formatting to tree map (#383)
+- Refactor: loremess restrictive angular dependency versioning (#358)
+- Bug: Fixed types in gauge chart (#364)
+- Bug: Fixed axis and tooltips on bubble chart (#352)
+- Bug: Added styleUrls and changeDetection to bubble chart
+- Bug: Truncate dimension values
+- Bug: Fixed number card count animation (#387)
+- Bug: Added type to gauge chart valueFormatting parameter (#388)
+
 ## 5.1.2
 - Bug: Fix number card scaling in hybrid apps using ngUpgrade  (#338)
 - Bug: Fix label trimming and clipped SVGs (#340)

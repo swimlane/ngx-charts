@@ -65,9 +65,11 @@ var CountUpDirective = (function () {
     CountUpDirective.prototype.start = function () {
         var _this = this;
         cancelAnimationFrame(this.animationReq);
+        var valueFormatting = this.valueFormatting ||
+            (function (data) { return "" + _this.countPrefix + data.value.toLocaleString() + _this.countSuffix; });
         var callback = function (_a) {
             var value = _a.value, progress = _a.progress, finished = _a.finished;
-            _this.value = "" + _this.countPrefix + value.toLocaleString() + _this.countSuffix;
+            _this.value = valueFormatting({ value: value });
             _this.cd.markForCheck();
             if (!finished)
                 _this.countChange.emit({ value: value, progress: progress });
@@ -95,6 +97,7 @@ CountUpDirective.propDecorators = {
     'countDuration': [{ type: Input },],
     'countPrefix': [{ type: Input },],
     'countSuffix': [{ type: Input },],
+    'valueFormatting': [{ type: Input },],
     'countDecimals': [{ type: Input },],
     'countTo': [{ type: Input },],
     'countFrom': [{ type: Input },],

@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"5.1.2" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"5.2.0" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -28,6 +28,8 @@
     outline: none; }
   .ngx-charts .line-series.inactive,
   .ngx-charts .line-series-range.inactive,
+  .ngx-charts .polar-series-path.inactive,
+  .ngx-charts .polar-series-area.inactive,
   .ngx-charts .area-series.inactive {
     transition: opacity 100ms ease-in-out;
     opacity: .2; }
@@ -48,6 +50,12 @@
     stroke: #ddd;
     stroke-width: 1;
     fill: none; }
+  .ngx-charts .gridline-path-dotted {
+    stroke: #ddd;
+    stroke-width: 1;
+    fill: none;
+    stroke-dasharray: 1, 20;
+    stroke-dashoffset: 3; }
   .ngx-charts .grid-panel rect {
     fill: none; }
   .ngx-charts .grid-panel.odd rect {

@@ -21,8 +21,8 @@ export declare class YAxisTicksComponent implements OnChanges, AfterViewInit {
     y1: any;
     y2: any;
     adjustedScale: any;
-    transform: any;
-    tickFormat: any;
+    transform: (o: any) => string;
+    tickFormat: (o: any) => string;
     ticks: any;
     width: number;
     outerTickSize: number;

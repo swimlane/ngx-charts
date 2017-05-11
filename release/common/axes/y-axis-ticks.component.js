@@ -98,26 +98,21 @@ var YAxisTicksComponent = (function () {
         setTimeout(function () { return _this.updateDims(); });
     };
     YAxisTicksComponent.prototype.getTicks = function () {
-        var ticks;
         var maxTicks = this.getMaxTicks(20);
         var maxScaleTicks = this.getMaxTicks(50);
         if (this.tickValues) {
-            ticks = this.tickValues;
+            return this.tickValues;
         }
-        else if (this.scale.ticks) {
-            ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
+        if (this.scale.ticks) {
+            return this.scale.ticks.call(this.scale, maxScaleTicks);
         }
-        else {
-            ticks = this.scale.domain();
-            ticks = reduceTicks(ticks, maxTicks);
-        }
-        return ticks;
+        return reduceTicks(this.scale.domain(), maxTicks);
     };
     YAxisTicksComponent.prototype.getMaxTicks = function (tickHeight) {
         return Math.floor(this.height / tickHeight);
     };
     YAxisTicksComponent.prototype.tickTransform = function (tick) {
-        return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
+        return "translate(" + this.adjustedScale(tick) + "," + this.verticalSpacing + ")";
     };
     YAxisTicksComponent.prototype.gridLineTransform = function () {
         return "translate(5,0)";

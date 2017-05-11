@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
 var TreeMapCellSeriesComponent = (function () {
     function TreeMapCellSeriesComponent() {
         this.tooltipDisabled = false;
+        this.gradient = false;
         this.select = new EventEmitter();
     }
     TreeMapCellSeriesComponent.prototype.ngOnChanges = function (changes) {
@@ -43,7 +44,7 @@ export { TreeMapCellSeriesComponent };
 TreeMapCellSeriesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-tree-map-cell-series]',
-                template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
+                template: "\n    <svg:g ngx-charts-tree-map-cell *ngFor=\"let c of cells; trackBy:trackBy\"\n      [data]=\"c\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [label]=\"c.label\"\n      [value]=\"c.value\"\n      [valueType]=\"c.valueType\"\n      [valueFormatting]=\"valueFormatting\"\n      [labelFormatting]=\"labelFormatting\"\n      [gradient]=\"gradient\"\n      (select)=\"onClick($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"getTooltipText(c)\"\n    />\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
 ];
@@ -54,6 +55,9 @@ TreeMapCellSeriesComponent.propDecorators = {
     'dims': [{ type: Input },],
     'colors': [{ type: Input },],
     'tooltipDisabled': [{ type: Input },],
+    'valueFormatting': [{ type: Input },],
+    'labelFormatting': [{ type: Input },],
+    'gradient': [{ type: Input },],
     'select': [{ type: Output },],
 };
 //# sourceMappingURL=tree-map-cell-series.component.js.map

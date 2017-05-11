@@ -6,6 +6,7 @@ export declare class SvgRadialGradientComponent implements OnChanges {
     endOpacity: number;
     cx: number;
     cy: number;
+    stops: any[];
     r: string;
     ngOnChanges(changes: SimpleChanges): void;
 }

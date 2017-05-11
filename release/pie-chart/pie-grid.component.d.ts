@@ -3,7 +3,7 @@ import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class PieGridComponent extends BaseChartComponent {
     tooltipDisabled: boolean;
-    tooltipText: any;
+    tooltipText: (o: any) => any;
     dims: ViewDimensions;
     data: any[];
     transform: string;

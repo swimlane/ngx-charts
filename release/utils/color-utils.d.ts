@@ -1,21 +1,21 @@
+import { RGBColor } from '@types/d3-color';
 /**
  * Converts a hex to RGB
- * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
  *
  * @export
  * @param {string} hex
  * @returns {*}
  */
-export declare function hexToRgb(hex: string): any;
+export declare function hexToRgb(value: string): RGBColor;
 /**
- * Accepts a hex color and returns a inverted hex color
+ * Accepts a color (string) and returns a inverted hex color (string)
  * http://stackoverflow.com/questions/9600295/automatically-change-text-color-to-assure-readability
  *
  * @export
- * @param {any} color
+ * @param {any} value
  * @returns {string}
  */
-export declare function invertColor(hex: any): any;
+export declare function invertColor(value: string): string;
 /**
  * Given a rgb, it will darken/lighten
  * http://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors

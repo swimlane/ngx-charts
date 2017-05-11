@@ -52,12 +52,20 @@ var BubbleSeriesComponent = (function () {
     };
     BubbleSeriesComponent.prototype.getTooltipText = function (circle) {
         var hasRadius = typeof circle.r !== 'undefined';
+        var hasTooltipLabel = circle.tooltipLabel && circle.tooltipLabel.length;
+        var hasSeriesName = circle.seriesName && circle.seriesName.length;
         var radiusValue = hasRadius ? formatLabel(circle.r) : '';
         var xAxisLabel = this.xAxisLabel && this.xAxisLabel !== '' ? this.xAxisLabel + ":" : '';
         var yAxisLabel = this.yAxisLabel && this.yAxisLabel !== '' ? this.yAxisLabel + ":" : '';
         var x = formatLabel(circle.x);
         var y = formatLabel(circle.y);
-        return "\n      <span class=\"tooltip-label\">\n        " + circle.seriesName + " \u2022 " + circle.tooltipLabel + "\n      </span>\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + x + "<br />\n        <label>" + yAxisLabel + "</label> " + y + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
+        var name = (hasSeriesName && hasTooltipLabel) ?
+            circle.seriesName + " \u2022 " + circle.tooltipLabel :
+            circle.seriesName + circle.tooltipLabel;
+        var tooltipTitle = (hasSeriesName || hasTooltipLabel) ?
+            "<span class=\"tooltip-label\">" + name + "</span>" :
+            '';
+        return "\n      " + tooltipTitle + "\n      <span class=\"tooltip-label\">\n        <label>" + xAxisLabel + "</label> " + x + "<br />\n        <label>" + yAxisLabel + "</label> " + y + "\n      </span>\n      <span class=\"tooltip-val\">\n        " + radiusValue + "\n      </span>\n    ";
     };
     BubbleSeriesComponent.prototype.onClick = function (value, label) {
         this.select.emit({

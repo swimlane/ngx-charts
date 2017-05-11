@@ -26,8 +26,8 @@ var CardComponent = (function () {
         var _this = this;
         this.zone.run(function () {
             var hasValue = _this.data && typeof _this.data.value !== 'undefined';
-            _this.valueFormatting = _this.valueFormatting || (function (card) { return card.data.value.toLocaleString(); });
-            _this.labelFormatting = _this.labelFormatting || (function (card) { return trimLabel(card.label, 55); });
+            var valueFormatting = _this.valueFormatting || (function (card) { return card.value.toLocaleString(); });
+            var labelFormatting = _this.labelFormatting || (function (card) { return trimLabel(card.label, 55); });
             _this.transform = "translate(" + _this.x + " , " + _this.y + ")";
             _this.textWidth = Math.max(0, _this.width) - _this.textPadding[1] - _this.textPadding[3];
             _this.cardWidth = Math.max(0, _this.width);
@@ -38,19 +38,19 @@ var CardComponent = (function () {
                 data: _this.data,
                 value: _this.data.value
             };
-            _this.formattedLabel = _this.labelFormatting(cardData);
+            _this.formattedLabel = labelFormatting(cardData);
             _this.transformBand = "translate(0 , " + (_this.cardHeight - _this.bandHeight) + ")";
-            var value = hasValue ? _this.valueFormatting(cardData) : '';
+            var value = hasValue ? valueFormatting(cardData) : '';
             _this.value = _this.paddedValue(value);
             _this.setPadding();
             _this.bandPath = roundedRect(0, 0, _this.cardWidth, _this.bandHeight, 3, false, false, true, true);
             setTimeout(function () {
                 _this.scaleText();
                 _this.value = value;
-                if (hasValue) {
+                if (hasValue && !_this.initialized) {
                     setTimeout(function () { return _this.startCount(); }, 20);
                 }
-            }, 0);
+            }, 8);
         });
     };
     CardComponent.prototype.paddedValue = function (value) {
@@ -65,32 +65,41 @@ var CardComponent = (function () {
             cancelAnimationFrame(this.animationReq);
             var val_1 = this.data.value;
             var decs = decimalChecker(val_1);
+            var valueFormatting_1 = this.valueFormatting || (function (card) { return card.value.toLocaleString(); });
             var callback = function (_a) {
                 var value = _a.value, finished = _a.finished;
-                value = finished ? val_1 : value;
-                var v = _this.valueFormatting({ label: _this.label, data: _this.data, value: value });
-                _this.value = _this.paddedValue(v);
-                _this.cd.markForCheck();
+                _this.zone.run(function () {
+                    value = finished ? val_1 : value;
+                    _this.value = valueFormatting_1({ label: _this.label, data: _this.data, value: value });
+                    if (!finished) {
+                        _this.value = _this.paddedValue(_this.value);
+                    }
+                    _this.cd.markForCheck();
+                });
             };
             this.animationReq = count(0, val_1, decs, 1, callback);
             this.initialized = true;
         }
     };
     CardComponent.prototype.scaleText = function () {
-        var _a = this.textEl.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
-        if (width === 0 || height === 0) {
-            return;
-        }
-        var textPadding = this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
-        var availableWidth = this.cardWidth - 2 * textPadding;
-        var availableHeight = this.cardHeight / 3;
-        var resizeScale = Math.min(availableWidth / width, availableHeight / height);
-        this.textFontSize = Math.round(this.textFontSize * resizeScale);
-        this.labelFontSize = Math.min(this.textFontSize, 12);
-        this.setPadding();
-        this.cd.markForCheck();
+        var _this = this;
+        this.zone.run(function () {
+            var _a = _this.textEl.nativeElement.getBoundingClientRect(), width = _a.width, height = _a.height;
+            if (width === 0 || height === 0) {
+                return;
+            }
+            var textPadding = _this.textPadding[1] = _this.textPadding[3] = _this.cardWidth / 8;
+            var availableWidth = _this.cardWidth - 2 * textPadding;
+            var availableHeight = _this.cardHeight / 3;
+            var resizeScale = Math.min(availableWidth / width, availableHeight / height);
+            _this.textFontSize = Math.floor(_this.textFontSize * resizeScale);
+            _this.labelFontSize = Math.min(_this.textFontSize, 12);
+            _this.setPadding();
+            _this.cd.markForCheck();
+        });
     };
     CardComponent.prototype.setPadding = function () {
+        this.textPadding[1] = this.textPadding[3] = this.cardWidth / 8;
         var padding = this.cardHeight / 2;
         this.textPadding[0] = padding - this.textFontSize - this.labelFontSize / 2;
         this.textPadding[2] = padding - this.labelFontSize;

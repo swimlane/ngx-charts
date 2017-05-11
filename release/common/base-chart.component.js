@@ -47,6 +47,8 @@ var BaseChartComponent = (function () {
         if (!this.width || !this.height) {
             this.width = this.height = 0;
         }
+        this.width = ~~this.width;
+        this.height = ~~this.height;
         if (this.cd) {
             this.cd.markForCheck();
         }

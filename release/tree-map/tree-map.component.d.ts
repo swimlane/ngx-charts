@@ -4,6 +4,9 @@ import { ColorHelper } from '../common/color.helper';
 export declare class TreeMapComponent extends BaseChartComponent {
     results: any;
     tooltipDisabled: boolean;
+    valueFormatting: any;
+    labelFormatting: any;
+    gradient: boolean;
     select: EventEmitter<{}>;
     dims: any;
     domain: any;

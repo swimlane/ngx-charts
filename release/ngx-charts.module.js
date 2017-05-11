@@ -6,6 +6,7 @@ import { BubbleChartModule } from './bubble-chart/bubble-chart.module';
 import { ForceDirectedGraphModule } from './force-directed-graph/force-directed-graph.module';
 import { HeatMapModule } from './heat-map/heat-map.module';
 import { LineChartModule } from './line-chart/line-chart.module';
+import { PolarChartModule } from './polar-chart/polar-chart.module';
 import { NumberCardModule } from './number-card/number-card.module';
 import { PieChartModule } from './pie-chart/pie-chart.module';
 import { TreeMapModule } from './tree-map/tree-map.module';
@@ -26,6 +27,7 @@ NgxChartsModule.decorators = [
                     ForceDirectedGraphModule,
                     HeatMapModule,
                     LineChartModule,
+                    PolarChartModule,
                     NumberCardModule,
                     PieChartModule,
                     TreeMapModule,
