@@ -84,9 +84,6 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
     encapsulation: ViewEncapsulation.None
 })
 export class BubbleChartComponent extends BaseChartComponent {
-  @Input() view: number[] = [400, 400];
-
-  @Input() results;
   @Input() showGridLines: boolean = true;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
