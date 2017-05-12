@@ -1,5 +1,4 @@
 import * as d3_color from 'd3-color';
-import { RGBColor } from '@types/d3-color';
 
 /**
  * Converts a hex to RGB
@@ -8,7 +7,7 @@ import { RGBColor } from '@types/d3-color';
  * @param {string} hex
  * @returns {*}
  */
-export function hexToRgb(value: string): RGBColor {
+export function hexToRgb(value: string): any {
   // deprecated, use d3.color()
   return d3_color.rgb(value);
 }
