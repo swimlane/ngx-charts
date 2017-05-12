@@ -1,4 +1,3 @@
-import { RGBColor } from '@types/d3-color';
 /**
  * Converts a hex to RGB
  *
@@ -6,7 +5,7 @@ import { RGBColor } from '@types/d3-color';
  * @param {string} hex
  * @returns {*}
  */
-export declare function hexToRgb(value: string): RGBColor;
+export declare function hexToRgb(value: string): any;
 /**
  * Accepts a color (string) and returns a inverted hex color (string)
  * http://stackoverflow.com/questions/9600295/automatically-change-text-color-to-assure-readability

@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.2.1
+- Bug: Remove RGBColor type from color-util file (#394)
+
 ## 5.2.0
 - Feature: Added Polar/Radar chart type (#380)
 - Enhancement: Disable pointer if no click events are attached to number cards (#378)
