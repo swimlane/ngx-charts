@@ -50,6 +50,8 @@ export class YAxisComponent implements OnChanges {
   @Input() labelText;
   @Input() yAxisTickInterval;
   @Input() yAxisTickCount: any;
+  @Input() yOrient: string = 'left';
+  
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
@@ -57,7 +59,7 @@ export class YAxisComponent implements OnChanges {
   offset: any;
   transform: any;
   yAxisOffset: number = -5;
-  yOrient: string = 'left';
+
   labelOffset: number = 80;
   fill: string = 'none';
   stroke: string = '#CCC';
