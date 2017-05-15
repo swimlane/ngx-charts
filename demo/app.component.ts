@@ -7,7 +7,7 @@ import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
 import { formatLabel } from '../src/common/label.helper';
-import { single, multi, countries, bubble, generateData, generateGraph } from './data';
+import { single, multi, countries, bubble, generateData, generateGraph, treemap } from './data';
 import chartGroups from './chartTypes';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
@@ -27,7 +27,7 @@ function multiFormat(value) {
   selector: 'app',
   providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['../node_modules/@swimlane/ngx-ui/release/index.css', './app.component.scss'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -160,6 +160,10 @@ export class AppComponent implements OnInit {
 
   mathText = '3 - 1.5*sin(x) + cos(2*x) - 1.5*abs(cos(x))';
   mathFunction: (o: any) => any;
+  
+  treemap: any[];
+  treemapPath: any[] = [];
+  sumBy: string = 'Size';
 
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
@@ -172,8 +176,11 @@ export class AppComponent implements OnInit {
       colorSets,
       graph: generateGraph(50),
       bubble,
-      plotData: this.generatePlotData()
+      plotData: this.generatePlotData(),
+      treemap
     });
+
+    this.treemapProcess();
 
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
@@ -528,6 +535,37 @@ export class AppComponent implements OnInit {
       return (typeof fn(1) === 'number') ? fn : null;
     } catch(err) {
       return null;
+    }
+  }
+
+  treemapProcess(sumBy = this.sumBy) {
+    this.sumBy = sumBy;
+    const children = treemap[0];
+    const value = (sumBy === 'Size') ? sumChildren(children) : countChildren(children);
+    this.treemap = [children];
+    this.treemapPath = [{name: 'Top', children: [children], value }];
+
+    function sumChildren(node) {
+      return node.value = node.size || d3.sum(node.children, sumChildren);
+    }
+
+    function countChildren(node) {
+      return node.value = node.children ? d3.sum(node.children, countChildren) : 1;
+    }
+  }
+
+  treemapSelect(item) {
+    let node;
+    if (item.children) {
+      const idx = this.treemapPath.indexOf(item);
+      this.treemapPath.splice(idx + 1);
+      this.treemap = this.treemapPath[idx].children;
+      return;
+    }
+    node = this.treemap.find(d => d.name === item.name);
+    if (node.children) {
+      this.treemapPath.push(node);
+      this.treemap = node.children;
     }
   }
 }

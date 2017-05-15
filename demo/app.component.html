@@ -580,6 +580,34 @@
           (select)="select($event)">
         </ngx-charts-polar-chart>
       </div>
+      <div class="chart-container"
+        *ngIf="chartType === 'tree-map-demo'"
+        style="padding: 10px; border: 1px solid white;">
+        <h4 style="text-align: center;">
+          <button class="btn btn-link" [class.active]="sumBy === 'Size'" (click)="treemapProcess('Size')">By Size</button>
+          <button class="btn btn-link" [class.active]="sumBy === 'Count'" (click)="treemapProcess('Count')">By Count</button>
+        </h4>
+        <div style="height: 17px; font-size: 12px;">
+          <ng-container *ngFor="let item of treemapPath; let last = last;">
+            <button
+              class="btn btn-link"
+              [class.active]="last"
+              [disabled]="last"
+              (click)="treemapSelect(item)">{{item.name}} ({{item.value}})
+            </button>
+            <span *ngIf="!last"> / </span>
+          </ng-container>
+        </div>
+        <ngx-charts-tree-map
+          [view]="view"
+          (legendLabelClick)="onLegendLabelClick($event)"
+          [scheme]="colorScheme"
+          [results]="treemap"
+          [tooltipDisabled]="tooltipDisabled"
+          [gradient]="gradient"
+          (select)="treemapSelect($event)">
+        </ngx-charts-tree-map>
+      </div>
     </div>
   </div>
   <div class="sidebar">

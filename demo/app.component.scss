@@ -55,6 +55,15 @@ button {
     outline: none;
     background: #097dff;
   }
+
+  &.btn.btn-link {
+    padding: 0;
+
+    &.active {
+      font-weight: 800;
+      color: #097dff;
+    }
+  }
 }
 
 .arrow-down {

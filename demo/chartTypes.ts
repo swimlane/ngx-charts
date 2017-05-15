@@ -304,6 +304,12 @@ const chartGroups = [
         options: ['colorScheme']
       },
       {
+        name: 'TreeMap - Interactive',
+        selector: 'tree-map-demo',
+        inputFormat: 'treemap',
+        options: ['colorScheme']
+      },
+      {
         name: 'Equation Plots',
         selector: 'plot-demo',
         inputFormat: 'statusData',
