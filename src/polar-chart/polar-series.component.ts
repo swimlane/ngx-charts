@@ -3,7 +3,9 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { area, radialLine } from 'd3-shape';
@@ -46,8 +48,16 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         tooltipType="tooltip"
-        [tooltipTitle]="tooltipText(circle)"
-      />
+        [tooltipTitle]="tooltipTemplate ? undefiend : tooltipText(circle)"
+        [tooltipTemplate]="tooltipTpl">
+
+        <ng-template #tooltipTpl>
+          <ng-template
+            [ngTemplateOutlet]="tooltipTemplate"
+            [ngOutletContext]="{ item: circle.data }">
+          </ng-template>
+        </ng-template>
+      </svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -66,6 +76,9 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: (o: any) => string;
   @Input() gradient: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
+
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   path: string;
   circles: any[];
@@ -111,7 +124,14 @@ export class PolarSeriesComponent implements OnChanges {
 
       const color = this.colors.getColor(linearScaleType ? Math.abs(value) : seriesName);
 
+      const cData = {
+        series: seriesName,
+        value,
+        name: d.name
+      };
+
       return {
+        data: cData,
         cx: r * Math.sin(a),
         cy: -r * Math.cos(a),
         value,

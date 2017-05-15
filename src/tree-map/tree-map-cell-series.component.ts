@@ -5,7 +5,9 @@ import {
   Output,
   SimpleChanges,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 
 @Component({
@@ -29,8 +31,16 @@ import {
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="getTooltipText(c)"
-    />
+      [tooltipTitle]="tooltipTemplate ? undefiend : getTooltipText(c)"
+      [tooltipTemplate]="tooltipTpl">
+
+      <ng-template #tooltipTpl>
+        <ng-template
+          [ngTemplateOutlet]="tooltipTemplate"
+          [ngOutletContext]="{ item: c.data }">
+        </ng-template>
+      </ng-template>
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -39,12 +49,15 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() data;
   @Input() dims;
   @Input() colors;
-  @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: any;
   @Input() labelFormatting: any;
   @Input() gradient: boolean = false;
+  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
+
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   cells: any[];
 
@@ -60,7 +73,13 @@ export class TreeMapCellSeriesComponent implements OnChanges {
       .map((d, index) => {
         const label = d.id;
 
+        const data = {
+          name: label,
+          value: d.value
+        };
+
         return {
+          data,
           x: d.x0,
           y: d.y0,
           width: d.x1 - d.x0,

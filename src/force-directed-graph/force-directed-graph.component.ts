@@ -62,10 +62,18 @@ import { ColorHelper } from '../common/color.helper';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="node.value">
+            [tooltipTitle]="tooltipTemplate ? undefiend : node.value"
+            [tooltipTemplate]="tooltipTpl">
             <ng-template *ngIf="nodeTemplate"
               [ngTemplateOutlet]="nodeTemplate"
               [ngOutletContext]="{ $implicit: node }">
+            </ng-template>
+
+            <ng-template #tooltipTpl>
+              <ng-template
+                [ngTemplateOutlet]="tooltipTemplate"
+                [ngOutletContext]="{ item: node }">
+              </ng-template>
             </ng-template>
             <svg:circle *ngIf="!nodeTemplate" r="5" />
           </svg:g>
@@ -101,6 +109,8 @@ export class ForceDirectedGraphComponent extends BaseChartComponent {
 
   @ContentChild('linkTemplate') linkTemplate: TemplateRef<any>;
   @ContentChild('nodeTemplate') nodeTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
   @ViewChild(ChartComponent, { read: ElementRef }) chart: ElementRef;
 
   colors: ColorHelper;

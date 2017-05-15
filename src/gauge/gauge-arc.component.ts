@@ -3,7 +3,9 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { formatLabel } from '../common/label.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -39,7 +41,15 @@ import { ColorHelper } from '../common/color.helper';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipText(valueArc)">
+        [tooltipTitle]="tooltipTemplate ? undefiend : tooltipText(valueArc)"
+        [tooltipTemplate]="tooltipTpl">
+
+        <ng-template #tooltipTpl>
+          <ng-template
+            [ngTemplateOutlet]="tooltipTemplate"
+            [ngOutletContext]="{ item: valueArc.data }">
+          </ng-template>
+        </ng-template>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,10 +63,13 @@ export class GaugeArcComponent {
   @Input() isActive: boolean = false;
   @Input() tooltipDisabled: boolean = false;
   @Input() valueFormatting: (value: any) => string;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   tooltipText(arc): string {
     const label = formatLabel(arc.data.name);

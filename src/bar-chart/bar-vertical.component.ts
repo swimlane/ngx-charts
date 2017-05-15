@@ -4,7 +4,9 @@ import {
   ViewEncapsulation,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
@@ -51,6 +53,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [dims]="dims"
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
+          [tooltipTemplate]="tooltipTemplate"
           [activeEntries]="activeEntries"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -85,6 +88,8 @@ export class BarVerticalComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xScale: any;

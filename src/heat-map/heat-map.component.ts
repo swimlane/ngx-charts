@@ -2,7 +2,9 @@ import {
   Component,
   Input,
   ViewEncapsulation,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { scaleBand } from 'd3-scale';
 
@@ -52,6 +54,7 @@ import { ColorHelper } from '../common/color.helper';
           [data]="results"
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
+          [tooltipTemplate]="tooltipTemplate"
           [tooltipText]="tooltipText"
           (select)="onClick($event)"
         />
@@ -78,6 +81,8 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   xDomain: any[];

@@ -4,7 +4,9 @@ import {
   Output,
   EventEmitter,
   ViewEncapsulation,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,
@@ -65,6 +67,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [dims]="dims"
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
             [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
@@ -111,6 +114,8 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   groupDomain: any[];

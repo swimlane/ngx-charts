@@ -6,6 +6,8 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,
@@ -57,8 +59,16 @@ import { id } from '../utils/id';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="getTooltipText(circle)"
+        [tooltipTitle]="tooltipTemplate ? undefiend : getTooltipText(circle)"
+        [tooltipTemplate]="tooltipTpl"
       />
+
+      <ng-template #tooltipTpl>
+        <ng-template
+          [ngTemplateOutlet]="tooltipTemplate"
+          [ngOutletContext]="{ item: circle.data }">
+        </ng-template>
+      </ng-template>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -84,10 +94,13 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() visibleValue;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   areaPath: any;
   circles: any[];
@@ -148,10 +161,17 @@ export class CircleSeriesComponent implements OnChanges {
           color = this.colors.getColor(seriesName);
         }
 
+        const data = {
+          series: seriesName,
+          value,
+          name: label
+        };
+
         return {
           classNames: [`circle-data-${i}`],
           value,
           label,
+          data,
           cx,
           cy,
           radius,

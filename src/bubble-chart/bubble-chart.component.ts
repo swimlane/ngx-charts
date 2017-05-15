@@ -5,7 +5,10 @@ import {
   EventEmitter,
   HostListener,
   ViewEncapsulation,
-  ChangeDetectionStrategy } from '@angular/core';
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
+} from '@angular/core';
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -73,6 +76,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
             [data]="series"
             [activeEntries]="activeEntries"
             [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
             (select)="onClick($event, series)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)" />
@@ -105,6 +109,8 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   colors: ColorHelper;

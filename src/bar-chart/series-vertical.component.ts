@@ -4,7 +4,9 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
  } from '@angular/core';
  import {
    trigger,
@@ -38,7 +40,15 @@ import { formatLabel } from '../common/label.helper';
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="bar.tooltipText">
+      [tooltipTitle]="tooltipTemplate ? undefiend : bar.tooltipText"
+      [tooltipTemplate]="tooltipTpl">
+
+      <ng-template #tooltipTpl>
+        <ng-template
+          [ngTemplateOutlet]="tooltipTemplate"
+          [ngOutletContext]="{ item: bar.data }">
+        </ng-template>
+      </ng-template>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -62,14 +72,17 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
-  @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
+  @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   bars: any;
   x: any;
@@ -164,6 +177,7 @@ export class SeriesVerticalComponent implements OnChanges {
       let tooltipLabel = formattedLabel;
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
+        bar.data.series = this.seriesName;
       }
 
       bar.tooltipText = `

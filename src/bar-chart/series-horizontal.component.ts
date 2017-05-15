@@ -5,7 +5,9 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,
@@ -40,7 +42,15 @@ import {
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="bar.tooltipText">
+      [tooltipTitle]="tooltipTemplate ? undefiend : bar.tooltipText"
+      [tooltipTemplate]="tooltipTpl">
+
+      <ng-template #tooltipTpl>
+        <ng-template
+          [ngTemplateOutlet]="tooltipTemplate"
+          [ngOutletContext]="{ item: bar.data }">
+        </ng-template>
+      </ng-template>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,10 +81,13 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
@@ -157,6 +170,7 @@ export class SeriesHorizontal implements OnChanges {
       let tooltipLabel = formattedLabel;
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
+        bar.data.series = this.seriesName;
       }
 
       bar.tooltipText = `

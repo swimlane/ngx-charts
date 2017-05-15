@@ -6,6 +6,8 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,
@@ -39,8 +41,16 @@ import { id } from '../utils/id';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="getTooltipText(circle)"
+        [tooltipTitle]="tooltipTemplate ? undefiend : getTooltipText(circle)"
+        [tooltipTemplate]="tooltipTpl"
       />
+
+      <ng-template #tooltipTpl>
+        <ng-template
+          [ngTemplateOutlet]="tooltipTemplate"
+          [ngOutletContext]="{ item: circle.data }">
+        </ng-template>
+      </ng-template>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,10 +79,13 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+
+  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   areaPath: any;
   circles: any[];
@@ -107,7 +120,15 @@ export class BubbleSeriesComponent implements OnChanges {
         const isActive = !this.activeEntries.length ? true : this.isActive({name: seriesName});
         const opacity = isActive ? 1 : 0.3;
 
+        const data = {
+          series: seriesName,
+          name: d.name,
+          value: d.y,
+          radius: d.r
+        };
+
         return {
+          data,
           x,
           y,
           r,

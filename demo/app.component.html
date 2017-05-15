@@ -608,6 +608,36 @@
           (select)="treemapSelect($event)">
         </ngx-charts-tree-map>
       </div>
+      <ngx-charts-bar-vertical
+        *ngIf="chartType === 'tooltip-templates'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [customColors]="customColors"
+        [results]="single"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [tooltipDisabled]="tooltipDisabled"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [showGridLines]="showGridLines"
+        [barPadding]="barPadding"
+        [roundDomains]="roundDomains"
+        (select)="select($event)"
+        (legendLabelClick)="onLegendLabelClick($event)">
+        <ng-template #tooltipTemplate let-item="item">
+          <h1>
+            {{getFlag(item.name)}}
+          </h1>
+          <h2>{{item.name}}: {{item.value}}</h2>
+        </ng-template>
+      </ngx-charts-bar-vertical>
     </div>
   </div>
   <div class="sidebar">

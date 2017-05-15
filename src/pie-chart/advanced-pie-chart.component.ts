@@ -4,7 +4,9 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 
 import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
@@ -34,6 +36,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
               [outerRadius]="outerRadius"
               [gradient]="gradient"
               [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
               [tooltipText]="tooltipText"
               (select)="onClick($event)">
             </svg:g>
@@ -71,6 +74,8 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   data: any;
   dims: ViewDimensions;

@@ -5,7 +5,9 @@ import {
   EventEmitter,
   ViewEncapsulation,
   HostListener,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
@@ -90,6 +92,7 @@ const twoPI = 2 * Math.PI;
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
               [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
             />
           </svg:g>
         </svg:g>
@@ -128,6 +131,8 @@ export class PolarChartComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   yAxisDims: ViewDimensions;
