@@ -3,8 +3,10 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnChanges,
   ElementRef,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  SimpleChanges
 } from '@angular/core';
 import {
   trigger,
@@ -13,6 +15,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { select } from 'd3-selection';
 
 @Component({
   selector: 'g[ngx-charts-line]',
@@ -29,7 +32,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition('void => *', [
+      transition(':enter', [
         style({
           strokeDasharray: 2000,
           strokeDashoffset: 2000,
@@ -41,7 +44,7 @@ import {
     ])
   ]
 })
-export class LineComponent {
+export class LineComponent implements OnChanges {
 
   @Input() path;
   @Input() stroke;
@@ -50,6 +53,23 @@ export class LineComponent {
 
   @Output() select = new EventEmitter();
 
+  initialized: boolean = false;
+
   constructor(private element: ElementRef) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.initialized) {
+      this.initialized = true;
+    } else {
+      this.animateToCurrentForm();
+    }
+  }
+
+  animateToCurrentForm(): void {
+    let node = select(this.element.nativeElement).select('.line');
+
+    node.transition().duration(750)
+      .attr('d', this.path);
   }
 }
