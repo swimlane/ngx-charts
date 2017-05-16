@@ -49,7 +49,7 @@ import { id } from '../utils/id';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition('void => *', [
+      transition(':enter', [
         style({
           opacity: 0,
         }),

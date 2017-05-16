@@ -51,7 +51,7 @@ import { TooltipService } from '../tooltip';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition('void => *', [
+      transition(':enter', [
         style({ opacity: 0 }),
         animate('500ms 100ms', style({ opacity: 1 }))
       ])

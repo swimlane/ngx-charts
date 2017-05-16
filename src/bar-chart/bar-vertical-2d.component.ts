@@ -85,7 +85,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition('* => void', [
+      transition(':leave', [
         style({
           opacity: 1,
           transform: '*',

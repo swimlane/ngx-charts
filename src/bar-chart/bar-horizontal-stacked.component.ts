@@ -82,7 +82,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
   encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('animationState', [
-      transition('* => void', [
+      transition(':leave', [
         style({
           opacity: 1,
           transform: '*',
