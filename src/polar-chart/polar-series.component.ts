@@ -48,7 +48,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         tooltipType="tooltip"
-        [tooltipTitle]="tooltipTemplate ? undefiend : tooltipText(circle)"
+        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
         [tooltipTemplate]="tooltipTpl">
 
         <ng-template #tooltipTpl>

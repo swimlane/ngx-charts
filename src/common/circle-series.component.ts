@@ -59,7 +59,7 @@ import { id } from '../utils/id';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipTemplate ? undefiend : getTooltipText(circle)"
+        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
         [tooltipTemplate]="tooltipTpl"
       />
 

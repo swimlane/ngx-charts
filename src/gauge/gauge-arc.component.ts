@@ -41,7 +41,7 @@ import { ColorHelper } from '../common/color.helper';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipTemplate ? undefiend : tooltipText(valueArc)"
+        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(valueArc)"
         [tooltipTemplate]="tooltipTpl">
 
         <ng-template #tooltipTpl>

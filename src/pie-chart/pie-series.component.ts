@@ -48,7 +48,7 @@ import { formatLabel } from '../common/label.helper';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipTemplate ? undefiend : tooltipText(arc)"
+        [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(arc)"
         [tooltipTemplate]="tooltipTpl">
 
         <ng-template #tooltipTpl>

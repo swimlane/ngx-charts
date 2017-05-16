@@ -62,7 +62,7 @@ import { ColorHelper } from '../common/color.helper';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="tooltipTemplate ? undefiend : node.value"
+            [tooltipTitle]="tooltipTemplate ? undefined : node.value"
             [tooltipTemplate]="tooltipTpl">
             <ng-template *ngIf="nodeTemplate"
               [ngTemplateOutlet]="nodeTemplate"

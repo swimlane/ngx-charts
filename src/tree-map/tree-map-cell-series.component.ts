@@ -31,7 +31,7 @@ import {
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="tooltipTemplate ? undefiend : getTooltipText(c)"
+      [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
       [tooltipTemplate]="tooltipTpl">
 
       <ng-template #tooltipTpl>
