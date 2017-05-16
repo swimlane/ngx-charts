@@ -223,7 +223,7 @@ export function generateData(seriesLength: number, includeMinMaxRange: boolean, 
     domain.push(new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)));
   }
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < seriesLength; i++) {
     const country = countries[Math.floor(Math.random() * countries.length)];
     const series = {
       name: country.name,
