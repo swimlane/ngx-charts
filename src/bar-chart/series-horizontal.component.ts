@@ -51,10 +51,9 @@ import {
     trigger('animationState', [
       transition(':leave', [
         style({
-          opacity: 1,
-          transform: '*',
+          opacity: 1
         }),
-        animate(500, style({opacity: 0, transform: 'scale(0)'}))
+        animate(500, style({opacity: 0}))
       ])
     ])
   ]
