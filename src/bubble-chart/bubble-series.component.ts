@@ -207,7 +207,6 @@ export class BubbleSeriesComponent implements OnChanges {
   }
 
   trackBy(index, circle): string {
-    console.log(`${circle.data.series} ${circle.data.name}`);
     return `${circle.data.series} ${circle.data.name}`;
   }
 }
