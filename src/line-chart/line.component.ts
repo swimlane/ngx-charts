@@ -67,7 +67,7 @@ export class LineComponent implements OnChanges {
   }
 
   animateToCurrentForm(): void {
-    let node = select(this.element.nativeElement).select('.line');
+    const node = select(this.element.nativeElement).select('.line');
 
     node.transition().duration(750)
       .attr('d', this.path);

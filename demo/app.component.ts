@@ -307,10 +307,8 @@ export class AppComponent implements OnInit {
       this.statusData = this.getStatusData();
     }
 
-    // this.dateData = generateData(5, false);
-
-    let date = new Date(Math.floor(1473700105009 +  Math.random() * 1000000000));
-    for (let series of this.dateData) {
+    const date = new Date(Math.floor(1473700105009 +  Math.random() * 1000000000));
+    for (const series of this.dateData) {
       series.series.push({
         name: date,
         value: Math.floor(2000 + Math.random() * 5000)
