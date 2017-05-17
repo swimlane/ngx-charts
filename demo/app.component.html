@@ -608,6 +608,14 @@
           (select)="treemapSelect($event)">
         </ngx-charts-tree-map>
       </div>
+      <ngx-charts-sparkline
+        *ngIf="chartType === 'sparkline'"
+        [view]="[100,50]"
+        class="chart-container"
+        [scheme]="'flame'"
+        [results]="sparklineData"
+        [curve]="curve">
+      </ngx-charts-sparkline>
     </div>
   </div>
   <div class="sidebar">

@@ -318,7 +318,15 @@ const chartGroups = [
           'autoScale', 'showGridLines', 'gradient',
           'roundDomains', 'tooltipDisabled'
         ]
-      }
+      },
+      {
+        name: 'Sparklines',
+        selector: 'sparkline',
+        inputFormat: 'multiSeries',
+        options: [
+          'curve'
+        ]
+      },
     ]
   }
 ];

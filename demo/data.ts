@@ -259,12 +259,12 @@ export function generateGraph(nodeCount: number) {
   return { links, nodes };
 }
 
-export function generateData(seriesLength: number, includeMinMaxRange: boolean): any[] {
+export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 5): any[] {
   const results = [];
 
   const domain: Date[] = []; // array of time stamps in milliseconds
 
-  for (let j = 0; j < 5; j++) {
+  for (let j = 0; j < dataPoints; j++) {
     // random dates between Sep 12, 2016 and Sep 24, 2016
     domain.push(new Date(Math.floor(1473700105009 +  Math.random() * 1000000000)));
   }
