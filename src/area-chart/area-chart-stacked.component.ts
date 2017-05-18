@@ -80,6 +80,7 @@ import { id } from '../utils/id';
             [height]="dims.height"
             [colors]="colors"
             [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="seriesTooltipTemplate"
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results; trackBy:trackBy">
@@ -156,6 +157,7 @@ export class AreaChartStackedComponent extends BaseChartComponent {
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
+  @ContentChild('seriesTooltipTemplate') seriesTooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   scaleType: string;
