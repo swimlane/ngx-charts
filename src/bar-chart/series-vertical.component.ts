@@ -5,7 +5,6 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  ContentChild,
   TemplateRef
  } from '@angular/core';
  import {
@@ -20,7 +19,8 @@ import { formatLabel } from '../common/label.helper';
 @Component({
   selector: 'g[ngx-charts-series-vertical]',
   template: `
-    <svg:g ngx-charts-bar *ngFor="let bar of bars; trackBy: trackBy"
+    <svg:g ngx-charts-bar
+      *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
@@ -41,14 +41,8 @@ import { formatLabel } from '../common/label.helper';
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
-      [tooltipTemplate]="tooltipTpl">
-
-      <ng-template #tooltipTpl>
-        <ng-template
-          [ngTemplateOutlet]="tooltipTemplate"
-          [ngOutletContext]="{ item: bar.data }">
-        </ng-template>
-      </ng-template>
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="bar.data">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -81,8 +75,6 @@ export class SeriesVerticalComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
-
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   bars: any;
   x: any;

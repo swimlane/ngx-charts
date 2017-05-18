@@ -4,7 +4,6 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectionStrategy,
-  ContentChild,
   TemplateRef
 } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -49,14 +48,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         [tooltipPlacement]="'top'"
         tooltipType="tooltip"
         [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(circle)"
-        [tooltipTemplate]="tooltipTpl">
-
-        <ng-template #tooltipTpl>
-          <ng-template
-            [ngTemplateOutlet]="tooltipTemplate"
-            [ngOutletContext]="{ item: circle.data }">
-          </ng-template>
-        </ng-template>
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="circle.data">
       </svg:g>
     </svg:g>
   `,
@@ -77,8 +70,6 @@ export class PolarSeriesComponent implements OnChanges {
   @Input() tooltipText: (o: any) => string;
   @Input() gradient: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
-
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   path: string;
   circles: any[];

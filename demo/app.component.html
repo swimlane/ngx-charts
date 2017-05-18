@@ -631,11 +631,11 @@
         [roundDomains]="roundDomains"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
-        <ng-template #tooltipTemplate let-item="item">
+        <ng-template #tooltipTemplate let-model="model">
           <h1>
-            {{getFlag(item.name)}}
+            {{getFlag(model.name)}}
           </h1>
-          <h2>{{item.name}}: {{item.value}}</h2>
+          <h2>{{model.name}}: {{model.value}}</h2>
         </ng-template>
       </ngx-charts-bar-vertical>
     </div>

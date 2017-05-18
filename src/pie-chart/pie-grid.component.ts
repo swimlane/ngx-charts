@@ -38,14 +38,9 @@ import { formatLabel } from '../common/label.helper';
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
             [tooltipTitle]="tooltipTemplate ? undefined : tooltipText({data: series})"
-            [tooltipTemplate]="tooltipTpl"
+            [tooltipTemplate]="tooltipTemplate"
+            [tooltipContext]="series.data[0].data"
           />
-          <ng-template #tooltipTpl>
-            <ng-template
-              [ngTemplateOutlet]="tooltipTemplate"
-              [ngOutletContext]="{ item: series.data[0].data }">
-            </ng-template>
-          </ng-template>
           <svg:text
             class="label percent-label"
             dy="-0.5em"
@@ -88,7 +83,7 @@ import { formatLabel } from '../common/label.helper';
 export class PieGridComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: (o: any) => any;
-
+  
   dims: ViewDimensions;
   data: any[];
   transform: string;
@@ -98,7 +93,6 @@ export class PieGridComponent extends BaseChartComponent {
   margin = [20, 20, 20, 20];
 
   @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   update(): void {
     super.update();

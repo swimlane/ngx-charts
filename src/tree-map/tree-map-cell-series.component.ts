@@ -6,7 +6,6 @@ import {
   SimpleChanges,
   EventEmitter,
   ChangeDetectionStrategy,
-  ContentChild,
   TemplateRef
 } from '@angular/core';
 
@@ -32,14 +31,8 @@ import {
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
-      [tooltipTemplate]="tooltipTpl">
-
-      <ng-template #tooltipTpl>
-        <ng-template
-          [ngTemplateOutlet]="tooltipTemplate"
-          [ngOutletContext]="{ item: c.data }">
-        </ng-template>
-      </ng-template>
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="c.data">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -56,8 +49,6 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
-
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   cells: any[];
 

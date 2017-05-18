@@ -6,7 +6,6 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  ContentChild,
   TemplateRef
 } from '@angular/core';
 import {
@@ -42,15 +41,9 @@ import { id } from '../utils/id';
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
-        [tooltipTemplate]="tooltipTpl"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="circle.data"
       />
-
-      <ng-template #tooltipTpl>
-        <ng-template
-          [ngTemplateOutlet]="tooltipTemplate"
-          [ngOutletContext]="{ item: circle.data }">
-        </ng-template>
-      </ng-template>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -84,8 +77,6 @@ export class BubbleSeriesComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
-
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   areaPath: any;
   circles: any[];

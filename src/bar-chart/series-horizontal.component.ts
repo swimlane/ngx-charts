@@ -6,7 +6,6 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectionStrategy,
-  ContentChild,
   TemplateRef
 } from '@angular/core';
 import {
@@ -43,14 +42,8 @@ import {
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
-      [tooltipTemplate]="tooltipTpl">
-
-      <ng-template #tooltipTpl>
-        <ng-template
-          [ngTemplateOutlet]="tooltipTemplate"
-          [ngOutletContext]="{ item: bar.data }">
-        </ng-template>
-      </ng-template>
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="bar.data">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -86,8 +79,6 @@ export class SeriesHorizontal implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
-
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();

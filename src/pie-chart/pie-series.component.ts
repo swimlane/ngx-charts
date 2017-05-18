@@ -6,7 +6,6 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
-  ContentChild,
   TemplateRef
 } from '@angular/core';
 import { max } from 'd3-array';
@@ -49,14 +48,8 @@ import { formatLabel } from '../common/label.helper';
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
         [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(arc)"
-        [tooltipTemplate]="tooltipTpl">
-
-        <ng-template #tooltipTpl>
-          <ng-template
-            [ngTemplateOutlet]="tooltipTemplate"
-            [ngOutletContext]="{ item: arc.data }">
-          </ng-template>
-        </ng-template>
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="arc.data">
       </svg:g>
     </svg:g>
   `,
@@ -81,8 +74,6 @@ export class PieSeriesComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
-
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   max: number;
   data: any;

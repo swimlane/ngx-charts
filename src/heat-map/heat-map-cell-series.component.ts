@@ -7,7 +7,6 @@ import {
   OnChanges,
   OnInit,
   ChangeDetectionStrategy,
-  ContentChild,
   TemplateRef
 } from '@angular/core';
 import { formatLabel } from '../common/label.helper';
@@ -31,14 +30,8 @@ import { formatLabel } from '../common/label.helper';
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
       [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
-      [tooltipTemplate]="tooltipTpl">
-
-      <ng-template #tooltipTpl>
-        <ng-template
-          [ngTemplateOutlet]="tooltipTemplate"
-          [ngOutletContext]="{ item: {series: c.series, name: c.label, value: c.data }}">
-        </ng-template>
-      </ng-template>
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="{series: c.series, name: c.label, value: c.data}">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,8 +48,6 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
-
-  @ContentChild('tooltipTpl') tooltipTpl: TemplateRef<any>;
 
   cells: any[];
 
