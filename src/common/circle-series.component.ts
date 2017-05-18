@@ -6,6 +6,7 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,
@@ -57,7 +58,9 @@ import { id } from '../utils/id';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="getTooltipText(circle)"
+        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="circle.data"
       />
     </svg:g>
   `,
@@ -84,6 +87,7 @@ export class CircleSeriesComponent implements OnChanges {
   @Input() visibleValue;
   @Input() activeEntries: any[];
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -148,10 +152,17 @@ export class CircleSeriesComponent implements OnChanges {
           color = this.colors.getColor(seriesName);
         }
 
+        const data = {
+          series: seriesName,
+          value,
+          name: label
+        };
+
         return {
           classNames: [`circle-data-${i}`],
           value,
           label,
+          data,
           cx,
           cy,
           radius,

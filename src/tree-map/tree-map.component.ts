@@ -4,7 +4,9 @@ import {
   Output,
   EventEmitter,
   ViewEncapsulation,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { treemap, stratify } from 'd3-hierarchy';
 
@@ -24,6 +26,7 @@ import { ColorHelper } from '../common/color.helper';
           [data]="data"
           [dims]="dims"
           [tooltipDisabled]="tooltipDisabled"
+          [tooltipTemplate]="tooltipTemplate"
           [valueFormatting]="valueFormatting"
           [labelFormatting]="labelFormatting"
           [gradient]="gradient"
@@ -45,6 +48,8 @@ export class TreeMapComponent extends BaseChartComponent {
   @Input() gradient: boolean = false;
 
   @Output() select = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: any;
   domain: any;

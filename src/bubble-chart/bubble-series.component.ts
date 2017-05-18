@@ -6,6 +6,7 @@ import {
   EventEmitter,
   OnChanges,
   ChangeDetectionStrategy,
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,
@@ -39,7 +40,9 @@ import { id } from '../utils/id';
         [tooltipDisabled]="tooltipDisabled"
         [tooltipPlacement]="'top'"
         [tooltipType]="'tooltip'"
-        [tooltipTitle]="getTooltipText(circle)"
+        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+        [tooltipTemplate]="tooltipTemplate"
+        [tooltipContext]="circle.data"
       />
     </svg:g>
   `,
@@ -69,6 +72,7 @@ export class BubbleSeriesComponent implements OnChanges {
   @Input() xAxisLabel: string;
   @Input() yAxisLabel: string;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -107,7 +111,15 @@ export class BubbleSeriesComponent implements OnChanges {
         const isActive = !this.activeEntries.length ? true : this.isActive({name: seriesName});
         const opacity = isActive ? 1 : 0.3;
 
+        const data = {
+          series: seriesName,
+          name: d.name,
+          value: d.y,
+          radius: d.r
+        };
+
         return {
+          data,
           x,
           y,
           r,
