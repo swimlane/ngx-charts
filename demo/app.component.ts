@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
   dateDataWithRange: any[];
   calendarData: any[];
   statusData: any[];
+  sparklineData: any[];
   graph: { links: any[], nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
   maxRadius = 10;
   minRadius = 3;
   showSeriesOnHover = true;
+  roundEdges: boolean = true;
 
   curves = {
     Basis: shape.curveBasis,

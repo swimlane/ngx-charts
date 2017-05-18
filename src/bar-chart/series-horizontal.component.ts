@@ -71,6 +71,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
+  @Input() roundEdges: boolean;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -91,7 +92,7 @@ export class SeriesHorizontal implements OnChanges {
       let value = d.value;
       const label = d.name;
       const formattedLabel = formatLabel(label);
-      const roundEdges = this.type === 'standard';
+      const roundEdges = this.roundEdges;
 
       const bar: any = {
         value,
