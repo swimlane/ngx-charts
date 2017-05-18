@@ -13,6 +13,7 @@
 | customColors    | object      |               | custom colors for the chart. Used to override a color for a specific value                                      |
 | gradient        | boolean     | false         | fill elements with a gradient instead of a solid color                                                          |
 | activeEntries   | object[]    | []            | elements to highlight                                                                                           |
+| label           | string      | 'Total'       | The text to show under the total value                                                                          |
 | tooltipDisabled | boolean     | false         | show or hide the tooltip                                                                                        |
 | tooltipTemplate | TemplateRef |               | a custom ng-template to be displayed inside the tooltip                                                         |
 
