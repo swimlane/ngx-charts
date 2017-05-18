@@ -93,7 +93,7 @@
     "@swimlane/ngx-ui": "^14.2.4",
     "@types/d3-array": "1.1.0",
     "@types/d3-brush": "1.0.6",
-    "@types/d3-color": "1.0.4",
+    "@types/d3-color": "1.0.3",
     "@types/d3-force": "1.0.6",
     "@types/d3-format": "1.1.0",
     "@types/d3-hierarchy": "1.1.0",
