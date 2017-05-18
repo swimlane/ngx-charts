@@ -51,7 +51,6 @@ export class AppComponent implements OnInit {
   bubble: any;
   linearScale: boolean = false;
   range: boolean = false;
-
   view: any[];
   width: number = 700;
   height: number = 300;
@@ -244,7 +243,7 @@ export class AppComponent implements OnInit {
         const index = Math.floor(Math.random() * this.graph.nodes.length);
         const value = this.graph.nodes[index].value;
         this.graph.nodes.splice(index, 1);
-        const nodes = [ ...this.graph.nodes ];
+        const nodes = [...this.graph.nodes];
 
         const links = this.graph.links.filter(link => {
           return link.source !== value && link.source.value !== value &&
@@ -281,12 +280,12 @@ export class AppComponent implements OnInit {
 
       // graph
       const node = { value: country };
-      const nodes = [ ...this.graph.nodes, node];
+      const nodes = [...this.graph.nodes, node];
       const link = {
         source: country,
         target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value,
       };
-      const links = [ ...this.graph.links, link];
+      const links = [...this.graph.links, link];
       this.graph = { links, nodes };
 
       // bubble
@@ -431,7 +430,72 @@ export class AppComponent implements OnInit {
     `;
   }
 
-  pieTooltipText({data}) {
+  barTooltipText(data) {
+    const label = data.label;
+    const val = data.value;
+    let thresh: string;
+    val < 35000 ? thresh = 'Below Threshold' : thresh = '';
+    return `
+      <span class="tooltip-label">Country: ${label}</span>
+      <span class="tooltip-val">$${val.toLocaleString()}</span>
+      <span>${thresh}</span>
+    `;
+  }
+
+  barSeriesTooltipText(data) {
+    const series = data.series;
+    const label = data.label;
+    const val = data.value;
+    let thresh: string;
+    val < 35000 ? thresh = 'Below Threshold' : thresh = '';
+    return `
+      <span class="tooltip-label">${series} • ${label}</span>
+      <span class="tooltip-val">$${val.toLocaleString()}</span>
+      <span>${thresh}</span>
+    `;
+  }
+
+  barSeriesNormalizedTooltipText(data) {
+    const series = data.series;
+    const label = data.label;
+    const actual = data.actual;
+    const val = parseFloat(data.value);
+    let thresh: string;
+    actual < 35000 ? thresh = 'is Below Threshold' : thresh = '';
+    return `
+      <span class="tooltip-label">${series} • ${label}</span>
+      <span class="tooltip-val">${val.toLocaleString()}%</span>
+      <span>$${actual.toLocaleString()} ${thresh} </span>
+    `;
+  }
+
+  lineTooltipText(data) {
+    if (data.value < 5000) {
+      return `
+      <span class="tooltip-label below">${data.seriesName} • ${data.label}</span>
+      <span class="tooltip-val tresh">$${data.value.toLocaleString()} Bellow</span>
+    `;
+    } else {
+      return `<span class="tooltip-label">${data.seriesName} • ${data.label}</span>
+      <span class="tooltip-val">$${data.value.toLocaleString()}</span>
+    `;
+    }
+
+  }
+
+  seriesToolTips(data) {
+    if (data.value < 5000) {
+      return `
+      <span class="below">${data.label} $${data.value.toLocaleString()} Bellow</span>
+    `;
+    } else {
+      return `
+      <span>${data.label} $${data.value.toLocaleString()}</span>
+    `;
+    }
+  }
+
+  pieTooltipText({ data }) {
     const label = formatLabel(data.name);
     const val = formatLabel(data.value);
 

@@ -77,6 +77,7 @@ import { id } from '../utils/id';
             [height]="dims.height"
             [colors]="colors"
             [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
             (hover)="updateHoveredVertical($event)"
           />
           <svg:g *ngFor="let series of results">
@@ -90,6 +91,7 @@ import { id } from '../utils/id';
               [visibleValue]="hoveredVertical"
               [tooltipDisabled]="tooltipDisabled"
               (select)="onClick($event, series)"
+              [tooltipText]="tooltipText"
               (activate)="onActivate($event)"
               (deactivate)="onDeactivate($event)"
             />
@@ -147,7 +149,9 @@ export class AreaChartComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() roundDomains: boolean = false;
   @Input() tooltipDisabled: boolean = false;
-
+  @Input() tooltipText: any;
+  @Input() tooltipTemplate: any;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

@@ -66,6 +66,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [tooltipDisabled]="tooltipDisabled"
             [seriesName]="group.name"
             (select)="onClick($event, group)"
+            [tooltipText]="tooltipText"
             (activate)="onActivate($event, group)"
             (deactivate)="onDeactivate($event, group)"
           />
@@ -107,6 +108,7 @@ export class BarVerticalStackedComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() tooltipText: any;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

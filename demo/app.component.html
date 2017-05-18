@@ -22,6 +22,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barTooltipText"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-bar-vertical>
@@ -45,6 +46,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barTooltipText"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)">
       </ngx-charts-bar-horizontal>
@@ -70,6 +72,7 @@
         [barPadding]="barPadding"
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -94,6 +97,7 @@
         [barPadding]="barPadding"
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barSeriesTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -117,6 +121,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barSeriesTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-vertical-stacked>
       <ngx-charts-bar-horizontal-stacked
@@ -140,6 +145,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barSeriesTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-stacked>
       <ngx-charts-bar-vertical-normalized
@@ -163,6 +169,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barSeriesNormalizedTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-vertical-normalized>
       <ngx-charts-bar-horizontal-normalized
@@ -186,6 +193,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [tooltipText]="barSeriesNormalizedTooltipText"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-normalized>
       <ngx-charts-pie-chart
@@ -253,6 +261,8 @@
         [rangeFillOpacity]="rangeFillOpacity"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="lineTooltipText"
+        [tooltipTemplate]="seriesToolTips"
         [showSeriesOnHover]="showSeriesOnHover"
         (select)="select($event)">
       </ngx-charts-line-chart>
@@ -340,6 +350,8 @@
         [roundDomains]="roundDomains"
         [curve]="curve"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="lineTooltipText"
+        [tooltipTemplate]="seriesToolTips"
         (select)="select($event)">
       </ngx-charts-area-chart>
       <ngx-charts-area-chart-stacked
@@ -363,6 +375,8 @@
         [showGridLines]="showGridLines"
         [roundDomains]="roundDomains"
         [tooltipDisabled]="tooltipDisabled"
+        [tooltipText]="lineTooltipText"
+        [tooltipTemplate]="seriesToolTips"
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-stacked>

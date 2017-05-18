@@ -14,7 +14,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
- import { formatLabel } from '../common/label.helper';
+import { formatLabel } from '../common/label.helper';
 
 @Component({
   selector: 'g[ngx-charts-series-horizontal]',
@@ -51,7 +51,7 @@ import {
           opacity: 1,
           transform: '*',
         }),
-        animate(500, style({opacity: 0, transform: 'scale(0)'}))
+        animate(500, style({ opacity: 0, transform: 'scale(0)' }))
       ])
     ])
   ]
@@ -71,6 +71,7 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
+  @Input() tooltipText: any;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -83,6 +84,7 @@ export class SeriesHorizontal implements OnChanges {
   update(): void {
     let d0 = 0;
     let total;
+    let actual;
     if (this.type === 'normalized') {
       total = this.series.map(d => d.value).reduce((sum, d) => sum + d, 0);
     }
@@ -139,6 +141,7 @@ export class SeriesHorizontal implements OnChanges {
         bar.y = 0;
         bar.offset0 = offset0;
         bar.offset1 = offset1;
+        actual = value;
         value = (offset1 - offset0).toFixed(2) + '%';
       }
 
@@ -159,17 +162,24 @@ export class SeriesHorizontal implements OnChanges {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
       }
 
-      bar.tooltipText = `
+      if (this.tooltipText !== undefined && this.seriesName && this.type === 'normalized') {
+        bar.tooltipText = this.tooltipText({ value, series: this.seriesName, actual, label: formattedLabel });
+      } else if (this.tooltipText !== undefined && this.seriesName) {
+        bar.tooltipText = this.tooltipText({ value, series: this.seriesName, label: formattedLabel });
+      } else if (this.tooltipText !== undefined && !this.seriesName) {
+        bar.tooltipText = this.tooltipText({ value, label: formattedLabel });
+      } else {
+        bar.tooltipText = `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
-
+      }
       return bar;
     });
   }
 
   isActive(entry): boolean {
-    if(!this.activeEntries) return false;
+    if (!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
       return entry.name === d.name && entry.series === d.series;
     });

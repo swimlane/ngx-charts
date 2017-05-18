@@ -71,6 +71,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
             [dims]="dims"
             [gradient]="gradient"
             [tooltipDisabled]="tooltipDisabled"
+            [tooltipText]="tooltipText"
             [seriesName]="group.name"
             (select)="onClick($event, group)"
             (activate)="onActivate($event, group)"
@@ -115,7 +116,8 @@ export class BarHorizontal2DComponent extends BaseChartComponent {
   @Input() groupPadding = 16;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
-
+  @Input() tooltipText: any;
+  
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 

@@ -7,7 +7,7 @@ import {
   ViewChildren,
   SimpleChanges,
   Renderer,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   trigger,
@@ -19,6 +19,7 @@ import {
 @Component({
   selector: 'g[ngx-charts-area-tooltip]',
   template: `
+
     <svg:g
       #tooltips
       *ngFor="let tooltipArea of tooltipAreas; let i = index">
@@ -35,13 +36,16 @@ import {
       <xhtml:ng-template #tooltipTemplate>
         <xhtml:div class="area-tooltip-container">
           <xhtml:div
+
             *ngFor="let tooltipItem of tooltipArea.values"
             class="tooltip-item">
-            <span
+                        
+            <span 
               class="tooltip-item-color"
               [style.background-color]="tooltipItem.color">
+              
             </span>
-            {{getToolTipText(tooltipItem)}}
+            <span [innerHTML]="getToolTipText(tooltipItem)"></span>
           </xhtml:div>
         </xhtml:div>
       </xhtml:ng-template>
@@ -60,7 +64,9 @@ import {
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="15"
         [tooltipTemplate]="tooltipTemplate"
+        customTooltip="customTooltip"
       />
+
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -70,13 +76,13 @@ import {
         style({
           opacity: 0,
         }),
-        animate(250, style({opacity: 0.7}))
+        animate(250, style({ opacity: 0.7 }))
       ]),
       transition('active => inactive', [
         style({
           opacity: 0.7,
         }),
-        animate(250, style({opacity: 0}))
+        animate(250, style({ opacity: 0 }))
       ])
     ])
   ]
@@ -93,8 +99,11 @@ export class AreaTooltip implements OnChanges {
   @Input() colors;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: any;
 
   @Output() hover = new EventEmitter();
+
+  @Input() customSeriesTooltip: boolean = false;
 
   @ViewChildren('tooltips') tooltips;
 
@@ -105,6 +114,7 @@ export class AreaTooltip implements OnChanges {
   }
 
   update(): void {
+
     this.tooltipAreas = this.getTooltipAreas();
   }
 
@@ -208,7 +218,7 @@ export class AreaTooltip implements OnChanges {
 
   showTooltip(index): void {
     const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
-    const event = new MouseEvent('mouseenter', {bubbles: false});
+    const event = new MouseEvent('mouseenter', { bubbles: false });
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0.7;
     this.hover.emit(this.tooltipAreas[index]);
@@ -216,9 +226,13 @@ export class AreaTooltip implements OnChanges {
 
   hideTooltip(index): void {
     const tooltipAnchor = this.tooltips.toArray()[index].nativeElement.getElementsByTagName('rect')[1];
-    const event = new MouseEvent('mouseleave', {bubbles: false});
+    const event = new MouseEvent('mouseleave', { bubbles: false });
     this.renderer.invokeElementMethod(tooltipAnchor, 'dispatchEvent', [event]);
     this.anchorOpacity[index] = 0;
+  }
+
+  customToolTip(result, value) {
+    return this.tooltipTemplate({label: result, value});
   }
 
   getToolTipText(tooltipItem: any): string {
@@ -230,8 +244,13 @@ export class AreaTooltip implements OnChanges {
     }
     result += ': ';
     if (tooltipItem.value !== undefined) {
-      result += tooltipItem.value.toLocaleString();
-    }
+
+      if (this.tooltipTemplate !== undefined) {
+        result = this.customToolTip(result, tooltipItem.value);
+      } else {
+        result += tooltipItem.value.toLocaleString();
+      }
+    } 
     if (tooltipItem.min !== undefined || tooltipItem.max !== undefined) {
       result += ' (';
       if (tooltipItem.min !== undefined) {
