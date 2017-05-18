@@ -52,6 +52,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [gradient]="gradient"
           [tooltipDisabled]="tooltipDisabled"
           [activeEntries]="activeEntries"
+          [roundEdges]="roundEdges"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
@@ -82,6 +83,7 @@ export class BarHorizontalComponent extends BaseChartComponent {
   @Input() yAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() roundEdges: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
