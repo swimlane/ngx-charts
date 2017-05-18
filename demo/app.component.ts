@@ -47,6 +47,7 @@ export class AppComponent implements OnInit {
   dateDataWithRange: any[];
   calendarData: any[];
   statusData: any[];
+  sparklineData: any[];
   graph: { links: any[], nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -188,6 +189,7 @@ export class AppComponent implements OnInit {
     this.setColorScheme('cool');
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
+    this.sparklineData = generateData(1, false, 30);
   }
 
   get dateDataWithOrWithoutRange() {

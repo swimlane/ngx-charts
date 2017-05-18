@@ -638,6 +638,14 @@
           <h2>{{model.name}}: {{model.value}}</h2>
         </ng-template>
       </ngx-charts-bar-vertical>
+      <ngx-charts-sparkline
+        *ngIf="chartType === 'sparkline'"
+        [view]="[100,50]"
+        class="chart-container"
+        [scheme]="'flame'"
+        [results]="sparklineData"
+        [curve]="curve">
+      </ngx-charts-sparkline>
     </div>
   </div>
   <div class="sidebar">

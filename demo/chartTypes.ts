@@ -328,6 +328,14 @@ const chartGroups = [
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'showGridLines', 'roundDomains', 'tooltipDisabled'
         ]
+      },
+      {
+        name: 'Sparklines',
+        selector: 'sparkline',
+        inputFormat: 'multiSeries',
+        options: [
+          'curve'
+        ]
       }
     ]
   }

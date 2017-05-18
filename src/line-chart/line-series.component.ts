@@ -38,7 +38,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         class="line-series"
         [data]="data"
         [path]="path"
-        [stroke]="hasGradient ? gradientUrl : colors.getColor(data.name)"
+        [stroke]="stroke"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />
@@ -74,6 +74,7 @@ export class LineSeriesComponent implements OnChanges {
   hasGradient: boolean;
   gradientStops: any[];
   areaGradientStops: any[];
+  stroke: any;
 
   constructor(private location: LocationStrategy) {
   }
@@ -94,6 +95,15 @@ export class LineSeriesComponent implements OnChanges {
     this.path = line(data) || '';
     this.outerPath = range(data) || '';
     this.areaPath = area(data) || '';
+
+    this.stroke = this.hasGradient ? this.gradientUrl : this.colors.getColor(this.data.name);
+
+    const values = this.data.series.map(d => d.value);
+    const max = Math.max(...values);
+    const min = Math.min(...values);
+    if (max === min) {
+      this.stroke = this.colors.getColor(max);
+    }
   }
 
   getLineGenerator(): any {
