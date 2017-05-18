@@ -51,6 +51,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [data]="results"
           [colors]="colors"
           [width]="width - dims.width - margin[1]"
+          [label]="label"
           (select)="onClick($event)"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
@@ -71,6 +72,7 @@ export class AdvancedPieChartComponent extends BaseChartComponent {
   @Input() activeEntries: any[] = [];
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+  @Input() label: string = 'Total';
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

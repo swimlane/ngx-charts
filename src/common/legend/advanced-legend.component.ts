@@ -22,7 +22,7 @@ import { formatLabel } from '../label.helper';
         [countTo]="roundedTotal">
       </div>
       <div class="total-label">
-        {{totalLabel}}
+        {{label}}
       </div>
       <div class="legend-items-container">
         <div class="legend-items">
@@ -63,13 +63,13 @@ export class AdvancedLegendComponent implements OnChanges  {
   @Input() width: number;
   @Input() data;
   @Input() colors;
+  @Input() label: string = 'Total';
 
   @Output() select: EventEmitter<any> = new EventEmitter();
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
 
   legendItems: any[] = [];
-  totalLabel: string = 'total';
   total: number;
   roundedTotal: number;
 
@@ -96,7 +96,7 @@ export class AdvancedLegendComponent implements OnChanges  {
       const value = d.value;
       const percentage = value / this.total * 100;
       const color = this.colors.getColor(label);
-      
+
       return {
         value,
         color,
