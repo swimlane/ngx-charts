@@ -10,6 +10,7 @@ export declare class LineSeriesComponent implements OnChanges {
     curve: any;
     activeEntries: any[];
     rangeFillOpacity: number;
+    hasRange: boolean;
     path: string;
     outerPath: string;
     areaPath: string;
@@ -18,6 +19,7 @@ export declare class LineSeriesComponent implements OnChanges {
     hasGradient: boolean;
     gradientStops: any[];
     areaGradientStops: any[];
+    stroke: any;
     constructor(location: LocationStrategy);
     ngOnChanges(changes: SimpleChanges): void;
     update(): void;

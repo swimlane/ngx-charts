@@ -21,39 +21,43 @@ import { id } from '../utils/id';
 @Component({
   selector: 'g[ngx-charts-bubble-series]',
   template: `
-    <svg:g *ngFor="let circle of circles">
-      <svg:g ngx-charts-circle
-        class="circle"
-        [cx]="circle.cx"
-        [cy]="circle.cy"
-        [r]="circle.radius"
-        [fill]="circle.color"
-        [style.opacity]="circle.opacity"
-        [class.active]="circle.isActive"
-        [pointerEvents]="'all'"
-        [data]="circle.value"
-        [classNames]="circle.classNames"
-        (select)="onClick($event, circle.label)"
-        (activate)="activateCircle(circle)"
-        (deactivate)="deactivateCircle(circle)"
-        ngx-tooltip
-        [tooltipDisabled]="tooltipDisabled"
-        [tooltipPlacement]="'top'"
-        [tooltipType]="'tooltip'"
-        [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
-        [tooltipTemplate]="tooltipTemplate"
-        [tooltipContext]="circle.data"
-      />
+    <svg:g *ngFor="let circle of circles; trackBy: trackBy">
+      <svg:g [attr.transform]="circle.transform">
+        <svg:g ngx-charts-circle
+          [@animationState]="'active'"
+          class="circle"
+          [cx]="0"
+          [cy]="0"
+          [r]="circle.radius"
+          [fill]="circle.color"
+          [style.opacity]="circle.opacity"
+          [class.active]="circle.isActive"
+          [pointerEvents]="'all'"
+          [data]="circle.value"
+          [classNames]="circle.classNames"
+          (select)="onClick($event, circle.label)"
+          (activate)="activateCircle(circle)"
+          (deactivate)="deactivateCircle(circle)"
+          ngx-tooltip
+          [tooltipDisabled]="tooltipDisabled"
+          [tooltipPlacement]="'top'"
+          [tooltipType]="'tooltip'"
+          [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(circle)"
+          [tooltipTemplate]="tooltipTemplate"
+          [tooltipContext]="circle.data"
+        />
+      </svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition('void => *', [
+      transition(':enter', [
         style({
           opacity: 0,
+          transform: 'scale(0)'
         }),
-        animate(250, style({opacity: 1}))
+        animate(250, style({opacity: 1, transform: 'scale(1)'}))
       ])
     ])
   ]
@@ -133,7 +137,8 @@ export class BubbleSeriesComponent implements OnChanges {
           color,
           opacity,
           seriesName,
-          isActive
+          isActive,
+          transform: `translate(${cx},${cy})`
         };
       }
     }).filter((circle) => circle !== undefined);
@@ -201,4 +206,7 @@ export class BubbleSeriesComponent implements OnChanges {
     this.deactivate.emit({name: this.data.name});
   }
 
+  trackBy(index, circle): string {
+    return `${circle.data.series} ${circle.data.name}`;
+  }
 }

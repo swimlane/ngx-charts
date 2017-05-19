@@ -9,6 +9,13 @@ import {
   ContentChild,
   TemplateRef
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
@@ -59,7 +66,7 @@ import { id } from '../utils/id';
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
-          <svg:g *ngFor="let series of results; trackBy:trackBy">
+          <svg:g *ngFor="let series of results; trackBy:trackBy" [@animationState]="'active'">
             <svg:g ngx-charts-line-series
               [xScale]="xScale"
               [yScale]="yScale"
@@ -69,6 +76,7 @@ import { id } from '../utils/id';
               [scaleType]="scaleType"
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
+              [hasRange]="hasRange"
             />
           </svg:g>
           <svg:g ngx-charts-area-tooltip
@@ -119,6 +127,7 @@ import { id } from '../utils/id';
             [data]="series"
             [scaleType]="scaleType"
             [curve]="curve"
+            [hasRange]="hasRange"
           />
         </svg:g>
       </svg:g>
@@ -127,6 +136,18 @@ import { id } from '../utils/id';
   styleUrls: ['../common/base-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition(':leave', [
+        style({
+          opacity: 1,
+        }),
+        animate(500, style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class LineChartComponent extends BaseChartComponent {
 
@@ -178,6 +199,7 @@ export class LineChartComponent extends BaseChartComponent {
   yAxisWidth: number = 0;
   filteredDomain: any;
   legendOptions: any;
+  hasRange: boolean; // whether the line has a min-max range around it
 
   timelineWidth: any;
   timelineHeight: number = 50;
@@ -282,18 +304,19 @@ export class LineChartComponent extends BaseChartComponent {
 
   getYDomain(): any[] {
     const domain = [];
-
     for (const results of this.results) {
       for (const d of results.series){
         if (domain.indexOf(d.value) < 0) {
           domain.push(d.value);
         }
         if (d.min !== undefined) {
+          this.hasRange = true;
           if (domain.indexOf(d.min) < 0) {
             domain.push(d.min);
           }
         }
         if (d.max !== undefined) {
+          this.hasRange = true;
           if (domain.indexOf(d.max) < 0) {
             domain.push(d.max);
           }

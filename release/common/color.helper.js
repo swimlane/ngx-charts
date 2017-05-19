@@ -12,7 +12,7 @@ var ColorHelper = (function () {
         this.scaleType = type;
         this.domain = domain;
         this.customColors = customColors;
-        this.scale = this.generateColorScheme(scheme, type, domain);
+        this.scale = this.generateColorScheme(scheme, type, this.domain);
     }
     ColorHelper.prototype.generateColorScheme = function (scheme, type, domain) {
         if (typeof (scheme) === 'string') {
@@ -32,9 +32,16 @@ var ColorHelper = (function () {
                 .domain(domain);
         }
         else if (type === 'linear') {
+            // linear schemes must have at least 2 colors
+            var colorDomain = scheme.domain.slice();
+            if (colorDomain.length === 1) {
+                colorDomain.push(colorDomain[0]);
+                this.colorDomain = colorDomain;
+            }
+            var points = range(0, 1, 1.0 / colorDomain.length);
             colorScale = scaleLinear()
-                .domain(range(0, 1, 1.0 / (scheme.domain.length - 1)))
-                .range(scheme.domain);
+                .domain(points)
+                .range(colorDomain);
         }
         return colorScale;
     };
@@ -62,7 +69,7 @@ var ColorHelper = (function () {
         }
     };
     ColorHelper.prototype.getLinearGradientStops = function (value, start) {
-        if (!start) {
+        if (start === undefined) {
             start = this.domain[0];
         }
         var valueScale = scaleLinear()
@@ -76,12 +83,13 @@ var ColorHelper = (function () {
         var startVal = valueScale(start);
         var startColor = this.getColor(start);
         var endVal = valueScale(value);
-        var i = 0;
+        var i = 1;
         var currentVal = startVal;
         var stops = [];
         stops.push({
             color: startColor,
-            offset: 0,
+            offset: startVal,
+            originalOffset: startVal,
             opacity: 1
         });
         while (currentVal < endVal && i < this.colorDomain.length) {
@@ -91,7 +99,7 @@ var ColorHelper = (function () {
                 i++;
                 continue;
             }
-            if (offset >= endVal) {
+            if (offset.toFixed(4) >= (endVal - colorValueScale.bandwidth()).toFixed(4)) {
                 break;
             }
             stops.push({
@@ -102,15 +110,25 @@ var ColorHelper = (function () {
             currentVal = offset;
             i++;
         }
-        stops.push({
-            color: endColor,
-            offset: endVal,
-            opacity: 1
-        });
-        // normalize the offsets into percentages
-        for (var _i = 0, stops_1 = stops; _i < stops_1.length; _i++) {
-            var s = stops_1[_i];
-            s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
+        if (stops[stops.length - 1].offset < 100) {
+            stops.push({
+                color: endColor,
+                offset: endVal,
+                opacity: 1
+            });
+        }
+        if (endVal === startVal) {
+            stops[0].offset = 0;
+            stops[1].offset = 100;
+        }
+        else {
+            // normalize the offsets into percentages
+            if (stops[stops.length - 1].offset !== 100) {
+                for (var _i = 0, stops_1 = stops; _i < stops_1.length; _i++) {
+                    var s = stops_1[_i];
+                    s.offset = ((s.offset - startVal) / (endVal - startVal)) * 100;
+                }
+            }
         }
         return stops;
     };

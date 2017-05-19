@@ -94,6 +94,7 @@ var SeriesVerticalComponent = (function () {
             var tooltipLabel = formattedLabel;
             if (_this.seriesName) {
                 tooltipLabel = _this.seriesName + " \u2022 " + formattedLabel;
+                bar.data.series = _this.seriesName;
             }
             bar.tooltipText = "\n        <span class=\"tooltip-label\">" + tooltipLabel + "</span>\n        <span class=\"tooltip-val\">" + value.toLocaleString() + "</span>\n      ";
             return bar;
@@ -119,16 +120,15 @@ export { SeriesVerticalComponent };
 SeriesVerticalComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-series-vertical]',
-                template: "\n    <svg:g ngx-charts-bar *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"bar.tooltipText\">\n    </svg:g>\n  ",
+                template: "\n    <svg:g ngx-charts-bar\n      *ngFor=\"let bar of bars; trackBy: trackBy\"\n      [@animationState]=\"'active'\"\n      [width]=\"bar.width\"\n      [height]=\"bar.height\"\n      [x]=\"bar.x\"\n      [y]=\"bar.y\"\n      [fill]=\"bar.color\"\n      [stops]=\"bar.gradientStops\"\n      [data]=\"bar.data\"\n      [orientation]=\"'vertical'\"\n      [roundEdges]=\"bar.roundEdges\"\n      [gradient]=\"gradient\"\n      [isActive]=\"isActive(bar.data)\"\n      (select)=\"onClick($event)\"\n      (activate)=\"activate.emit($event)\"\n      (deactivate)=\"deactivate.emit($event)\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : bar.tooltipText\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"bar.data\">\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [
                     trigger('animationState', [
-                        transition('* => void', [
+                        transition(':leave', [
                             style({
-                                opacity: 1,
-                                transform: '*',
+                                opacity: 1
                             }),
-                            animate(500, style({ opacity: 0, transform: 'scale(0)' }))
+                            animate(500, style({ opacity: 0 }))
                         ])
                     ])
                 ]
@@ -143,10 +143,11 @@ SeriesVerticalComponent.propDecorators = {
     'xScale': [{ type: Input },],
     'yScale': [{ type: Input },],
     'colors': [{ type: Input },],
-    'tooltipDisabled': [{ type: Input },],
     'gradient': [{ type: Input },],
     'activeEntries': [{ type: Input },],
     'seriesName': [{ type: Input },],
+    'tooltipDisabled': [{ type: Input },],
+    'tooltipTemplate': [{ type: Input },],
     'select': [{ type: Output },],
     'activate': [{ type: Output },],
     'deactivate': [{ type: Output },],

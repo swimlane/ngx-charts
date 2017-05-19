@@ -58,7 +58,7 @@ export { HeatCellSeriesComponent };
 HeatCellSeriesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-heat-map-cell-series]',
-                template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipText(c)\"\n    />\n  ",
+                template: "\n    <svg:g\n      ngx-charts-heat-map-cell\n      *ngFor=\"let c of cells; trackBy:trackBy\"\n      [x]=\"c.x\"\n      [y]=\"c.y\"\n      [width]=\"c.width\"\n      [height]=\"c.height\"\n      [fill]=\"c.fill\"\n      [data]=\"c.data\"\n      (select)=\"onClick($event, c.label, c.series)\"\n      [gradient]=\"gradient\"\n      ngx-tooltip\n      [tooltipDisabled]=\"tooltipDisabled\"\n      [tooltipPlacement]=\"'top'\"\n      [tooltipType]=\"'tooltip'\"\n      [tooltipTitle]=\"tooltipTemplate ? undefined : tooltipText(c)\"\n      [tooltipTemplate]=\"tooltipTemplate\"\n      [tooltipContext]=\"{series: c.series, name: c.label, value: c.data}\">\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush,
             },] },
 ];
@@ -72,6 +72,7 @@ HeatCellSeriesComponent.propDecorators = {
     'gradient': [{ type: Input },],
     'tooltipDisabled': [{ type: Input },],
     'tooltipText': [{ type: Input },],
+    'tooltipTemplate': [{ type: Input },],
     'select': [{ type: Output },],
 };
 //# sourceMappingURL=heat-map-cell-series.component.js.map

@@ -3,10 +3,10 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
 var YAxisComponent = (function () {
     function YAxisComponent() {
         this.showGridLines = false;
+        this.yOrient = 'left';
         this.dimensionsChanged = new EventEmitter();
         this.yAxisClassName = 'y axis';
         this.yAxisOffset = -5;
-        this.yOrient = 'left';
         this.labelOffset = 80;
         this.fill = 'none';
         this.stroke = '#CCC';
@@ -59,6 +59,7 @@ YAxisComponent.propDecorators = {
     'labelText': [{ type: Input },],
     'yAxisTickInterval': [{ type: Input },],
     'yAxisTickCount': [{ type: Input },],
+    'yOrient': [{ type: Input },],
     'dimensionsChanged': [{ type: Output },],
     'ticksComponent': [{ type: ViewChild, args: [YAxisTicksComponent,] },],
 };

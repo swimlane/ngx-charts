@@ -1,4 +1,4 @@
-import { OnChanges, SimpleChanges } from '@angular/core';
+import { OnChanges, SimpleChanges, TemplateRef } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 export declare class PolarSeriesComponent implements OnChanges {
     private location;
@@ -14,6 +14,7 @@ export declare class PolarSeriesComponent implements OnChanges {
     tooltipDisabled: boolean;
     tooltipText: (o: any) => string;
     gradient: boolean;
+    tooltipTemplate: TemplateRef<any>;
     path: string;
     circles: any[];
     circleRadius: number;

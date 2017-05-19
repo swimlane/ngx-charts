@@ -1,3 +1,4 @@
+import { TemplateRef } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
@@ -16,6 +17,7 @@ export declare class HeatMapComponent extends BaseChartComponent {
     yAxisTickFormatting: any;
     tooltipDisabled: boolean;
     tooltipText: any;
+    tooltipTemplate: TemplateRef<any>;
     dims: ViewDimensions;
     xDomain: any[];
     yDomain: any[];

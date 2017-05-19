@@ -307,7 +307,15 @@ export class AppComponent implements OnInit {
       this.statusData = this.getStatusData();
     }
 
-    this.dateData = generateData(5, false);
+    const date = new Date(Math.floor(1473700105009 +  Math.random() * 1000000000));
+    for (const series of this.dateData) {
+      series.series.push({
+        name: date,
+        value: Math.floor(2000 + Math.random() * 5000)
+      });
+    }
+    this.dateData = [...this.dateData];
+
     this.dateDataWithRange = generateData(2, true);
 
     if (this.chart.inputFormat === 'calendarData') this.calendarData = this.getCalendarData();
