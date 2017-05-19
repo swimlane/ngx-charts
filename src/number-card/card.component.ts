@@ -138,7 +138,7 @@ export class CardComponent implements OnChanges, OnDestroy {
       this.value = this.paddedValue(value);
       this.setPadding();
 
-      this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, false, false, true, true);
+      this.bandPath = roundedRect(0, 0, this.cardWidth, this.bandHeight, 3, [false, false, true, true]);
 
       setTimeout(() => {
         this.scaleText();

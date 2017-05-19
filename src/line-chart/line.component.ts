@@ -16,6 +16,7 @@ import {
   transition
 } from '@angular/animations';
 import { select } from 'd3-selection';
+import { pathTween } from '../utils/path-tween';
 
 @Component({
   selector: 'g[ngx-charts-line]',
@@ -23,7 +24,7 @@ import { select } from 'd3-selection';
     <svg:path
       [@animationState]="'active'"
       class="line"
-      [attr.d]="path"
+      [attr.d]="initialPath"
       [attr.fill]="fill"
       [attr.stroke]="stroke"
       stroke-width="1.5px"
@@ -54,6 +55,7 @@ export class LineComponent implements OnChanges {
   @Output() select = new EventEmitter();
 
   initialized: boolean = false;
+  initialPath: string;
 
   constructor(private element: ElementRef) {
   }
@@ -61,6 +63,7 @@ export class LineComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.initialized) {
       this.initialized = true;
+      this.initialPath = this.path;
     } else {
       this.animateToCurrentForm();
     }
@@ -69,7 +72,8 @@ export class LineComponent implements OnChanges {
   animateToCurrentForm(): void {
     const node = select(this.element.nativeElement).select('.line');
 
-    node.transition().duration(750)
-      .attr('d', this.path);
+    node
+      .transition().duration(750)
+      .attrTween('d', pathTween(this.path, 1));
   }
 }
