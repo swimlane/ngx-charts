@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, TemplateRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -25,6 +25,8 @@ export declare class AreaChartComponent extends BaseChartComponent {
     tooltipDisabled: boolean;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
+    tooltipTemplate: TemplateRef<any>;
+    seriesTooltipTemplate: TemplateRef<any>;
     dims: ViewDimensions;
     xSet: any;
     xDomain: any;

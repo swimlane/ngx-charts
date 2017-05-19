@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, TemplateRef } from '@angular/core';
 import { BaseChartComponent } from '../common/base-chart.component';
 import { ColorHelper } from '../common/color.helper';
 export declare class TreeMapComponent extends BaseChartComponent {
@@ -8,6 +8,7 @@ export declare class TreeMapComponent extends BaseChartComponent {
     labelFormatting: any;
     gradient: boolean;
     select: EventEmitter<{}>;
+    tooltipTemplate: TemplateRef<any>;
     dims: any;
     domain: any;
     transform: any;

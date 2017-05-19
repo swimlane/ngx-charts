@@ -1,12 +1,13 @@
-import { OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
+import { OnChanges, SimpleChanges, EventEmitter, TemplateRef } from '@angular/core';
 export declare class TreeMapCellSeriesComponent implements OnChanges {
     data: any;
     dims: any;
     colors: any;
-    tooltipDisabled: boolean;
     valueFormatting: any;
     labelFormatting: any;
     gradient: boolean;
+    tooltipDisabled: boolean;
+    tooltipTemplate: TemplateRef<any>;
     select: EventEmitter<{}>;
     cells: any[];
     ngOnChanges(changes: SimpleChanges): void;

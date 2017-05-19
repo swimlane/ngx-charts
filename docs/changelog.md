@@ -1,5 +1,17 @@
 # Changelog
 
+## 5.3.0
+- Feature: Added option to pass custom ng-templates for tooltips to all charts
+- Enhancement: Added 'label' input to advanced pie chart component
+- Enhancement: Exposed xOrient and yOrient properties on axis components
+- Enhancement: Set default dimensions if width or height are undefined or 0
+- Enhancement: Set a default color scheme
+- Bug: Fixed bubble chart overriding the view input
+- Bug: Fixed linear color scheme when there are less than 3 colors
+- Bug: Fixed gradient not applying to straight lines
+- Demo: Added sparkline custom demo chart
+- Demo: Added interactive treemap demo chart
+
 ## 5.2.1
 - Bug: Remove RGBColor type from color-util file (#394)
 

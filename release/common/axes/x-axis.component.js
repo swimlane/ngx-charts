@@ -3,9 +3,9 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
 var XAxisComponent = (function () {
     function XAxisComponent() {
         this.showGridLines = false;
+        this.xOrient = 'bottom';
         this.dimensionsChanged = new EventEmitter();
         this.xAxisClassName = 'x axis';
-        this.xOrient = 'bottom';
         this.labelOffset = 80;
         this.fill = 'none';
         this.stroke = 'stroke';
@@ -54,6 +54,7 @@ XAxisComponent.propDecorators = {
     'labelText': [{ type: Input },],
     'xAxisTickInterval': [{ type: Input },],
     'xAxisTickCount': [{ type: Input },],
+    'xOrient': [{ type: Input },],
     'dimensionsChanged': [{ type: Output },],
     'ticksComponent': [{ type: ViewChild, args: [XAxisTicksComponent,] },],
 };

@@ -10,6 +10,7 @@ var BaseChartComponent = (function () {
         this.zone = zone;
         this.cd = cd;
         this.location = location;
+        this.scheme = 'cool';
         this.schemeType = 'ordinal';
         this.select = new EventEmitter();
     }
@@ -44,8 +45,12 @@ var BaseChartComponent = (function () {
                 this.height = dims.height;
             }
         }
-        if (!this.width || !this.height) {
-            this.width = this.height = 0;
+        // default values if width or height are 0 or undefined
+        if (!this.width) {
+            this.width = 600;
+        }
+        if (!this.height) {
+            this.height = 400;
         }
         this.width = ~~this.width;
         this.height = ~~this.height;
