@@ -1,4 +1,4 @@
-import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
+import { SimpleChanges, EventEmitter, OnChanges, TemplateRef } from '@angular/core';
 import { LocationStrategy } from '@angular/common';
 export declare class CircleSeriesComponent implements OnChanges {
     private location;
@@ -11,6 +11,7 @@ export declare class CircleSeriesComponent implements OnChanges {
     visibleValue: any;
     activeEntries: any[];
     tooltipDisabled: boolean;
+    tooltipTemplate: TemplateRef<any>;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

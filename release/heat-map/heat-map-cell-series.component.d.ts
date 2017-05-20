@@ -1,4 +1,4 @@
-import { SimpleChanges, EventEmitter, OnChanges, OnInit } from '@angular/core';
+import { SimpleChanges, EventEmitter, OnChanges, OnInit, TemplateRef } from '@angular/core';
 export declare class HeatCellSeriesComponent implements OnChanges, OnInit {
     data: any;
     colors: any;
@@ -7,6 +7,7 @@ export declare class HeatCellSeriesComponent implements OnChanges, OnInit {
     gradient: boolean;
     tooltipDisabled: boolean;
     tooltipText: any;
+    tooltipTemplate: TemplateRef<any>;
     select: EventEmitter<{}>;
     cells: any[];
     ngOnInit(): void;

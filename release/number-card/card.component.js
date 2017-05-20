@@ -43,7 +43,7 @@ var CardComponent = (function () {
             var value = hasValue ? valueFormatting(cardData) : '';
             _this.value = _this.paddedValue(value);
             _this.setPadding();
-            _this.bandPath = roundedRect(0, 0, _this.cardWidth, _this.bandHeight, 3, false, false, true, true);
+            _this.bandPath = roundedRect(0, 0, _this.cardWidth, _this.bandHeight, 3, [false, false, true, true]);
             setTimeout(function () {
                 _this.scaleText();
                 _this.value = value;

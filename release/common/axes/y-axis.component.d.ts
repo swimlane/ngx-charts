@@ -9,13 +9,13 @@ export declare class YAxisComponent implements OnChanges {
     labelText: any;
     yAxisTickInterval: any;
     yAxisTickCount: any;
+    yOrient: string;
     dimensionsChanged: EventEmitter<{}>;
     yAxisClassName: string;
     tickArguments: any;
     offset: any;
     transform: any;
     yAxisOffset: number;
-    yOrient: string;
     labelOffset: number;
     fill: string;
     stroke: string;

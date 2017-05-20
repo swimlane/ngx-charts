@@ -39,7 +39,7 @@ import { calculateViewDimensions, ViewDimensions, BaseChartComponent, ColorHelpe
 })
 export class SparklineComponent extends BaseChartComponent {
 
-  @Input() autoScale;
+  @Input() autoScale = false;
   @Input() curve: any = curveLinear;
   @Input() schemeType: string = 'linear';
   @Input() valueDomain: number[];

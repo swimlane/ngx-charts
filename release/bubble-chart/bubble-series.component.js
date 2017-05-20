@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { formatLabel } from '../common/label.helper';
 var BubbleSeriesComponent = (function () {
@@ -31,7 +31,14 @@ var BubbleSeriesComponent = (function () {
                     _this.colors.getColor(seriesName);
                 var isActive = !_this.activeEntries.length ? true : _this.isActive({ name: seriesName });
                 var opacity = isActive ? 1 : 0.3;
+                var data = {
+                    series: seriesName,
+                    name: d.name,
+                    value: d.y,
+                    radius: d.r
+                };
                 return {
+                    data: data,
                     x: x,
                     y: y,
                     r: r,
@@ -45,7 +52,8 @@ var BubbleSeriesComponent = (function () {
                     color: color,
                     opacity: opacity,
                     seriesName: seriesName,
-                    isActive: isActive
+                    isActive: isActive,
+                    transform: "translate(" + cx + "," + cy + ")"
                 };
             }
         }).filter(function (circle) { return circle !== undefined; });
@@ -95,21 +103,25 @@ var BubbleSeriesComponent = (function () {
         circle.barVisible = false;
         this.deactivate.emit({ name: this.data.name });
     };
+    BubbleSeriesComponent.prototype.trackBy = function (index, circle) {
+        return circle.data.series + " " + circle.data.name;
+    };
     return BubbleSeriesComponent;
 }());
 export { BubbleSeriesComponent };
 BubbleSeriesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-bubble-series]',
-                template: "\n    <svg:g *ngFor=\"let circle of circles\">\n      <svg:g ngx-charts-circle\n        class=\"circle\"\n        [cx]=\"circle.cx\"\n        [cy]=\"circle.cy\"\n        [r]=\"circle.radius\"\n        [fill]=\"circle.color\"\n        [style.opacity]=\"circle.opacity\"\n        [class.active]=\"circle.isActive\"\n        [pointerEvents]=\"'all'\"\n        [data]=\"circle.value\"\n        [classNames]=\"circle.classNames\"\n        (select)=\"onClick($event, circle.label)\"\n        (activate)=\"activateCircle(circle)\"\n        (deactivate)=\"deactivateCircle(circle)\"\n        ngx-tooltip\n        [tooltipDisabled]=\"tooltipDisabled\"\n        [tooltipPlacement]=\"'top'\"\n        [tooltipType]=\"'tooltip'\"\n        [tooltipTitle]=\"getTooltipText(circle)\"\n      />\n    </svg:g>\n  ",
+                template: "\n    <svg:g *ngFor=\"let circle of circles; trackBy: trackBy\">\n      <svg:g [attr.transform]=\"circle.transform\">\n        <svg:g ngx-charts-circle\n          [@animationState]=\"'active'\"\n          class=\"circle\"\n          [cx]=\"0\"\n          [cy]=\"0\"\n          [r]=\"circle.radius\"\n          [fill]=\"circle.color\"\n          [style.opacity]=\"circle.opacity\"\n          [class.active]=\"circle.isActive\"\n          [pointerEvents]=\"'all'\"\n          [data]=\"circle.value\"\n          [classNames]=\"circle.classNames\"\n          (select)=\"onClick($event, circle.label)\"\n          (activate)=\"activateCircle(circle)\"\n          (deactivate)=\"deactivateCircle(circle)\"\n          ngx-tooltip\n          [tooltipDisabled]=\"tooltipDisabled\"\n          [tooltipPlacement]=\"'top'\"\n          [tooltipType]=\"'tooltip'\"\n          [tooltipTitle]=\"tooltipTemplate ? undefined : getTooltipText(circle)\"\n          [tooltipTemplate]=\"tooltipTemplate\"\n          [tooltipContext]=\"circle.data\"\n        />\n      </svg:g>\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [
                     trigger('animationState', [
-                        transition('void => *', [
+                        transition(':enter', [
                             style({
                                 opacity: 0,
+                                transform: 'scale(0)'
                             }),
-                            animate(250, style({ opacity: 1 }))
+                            animate(250, style({ opacity: 1, transform: 'scale(1)' }))
                         ])
                     ])
                 ]
@@ -130,6 +142,7 @@ BubbleSeriesComponent.propDecorators = {
     'xAxisLabel': [{ type: Input },],
     'yAxisLabel': [{ type: Input },],
     'tooltipDisabled': [{ type: Input },],
+    'tooltipTemplate': [{ type: Input },],
     'select': [{ type: Output },],
     'activate': [{ type: Output },],
     'deactivate': [{ type: Output },],

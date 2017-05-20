@@ -7,7 +7,8 @@ import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
 import { formatLabel } from '../src/common/label.helper';
-import { single, multi, countries, bubble, generateData, generateGraph, treemap } from './data';
+import { single, multi, bubble, generateData, generateGraph, treemap } from './data';
+import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
@@ -189,7 +190,7 @@ export class AppComponent implements OnInit {
     this.setColorScheme('cool');
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
-    this.sparklineData = generateData(1, false, 25);
+    this.sparklineData = generateData(1, false, 30);
   }
 
   get dateDataWithOrWithoutRange() {
@@ -258,14 +259,14 @@ export class AppComponent implements OnInit {
     if (add) {
       // single
       const entry = {
-        name: country,
+        name: country.name,
         value: Math.floor(10000 + Math.random() * 50000)
       };
       this.single = [...this.single, entry];
 
       // multi
       const multiEntry = {
-        name: country,
+        name: country.name,
         series: [{
           name: '1990',
           value: Math.floor(10000 + Math.random() * 50000)
@@ -281,10 +282,10 @@ export class AppComponent implements OnInit {
       this.multi = [...this.multi, multiEntry];
 
       // graph
-      const node = { value: country };
+      const node = { value: country.name };
       const nodes = [ ...this.graph.nodes, node];
       const link = {
-        source: country,
+        source: country.name,
         target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value,
       };
       const links = [ ...this.graph.links, link];
@@ -293,7 +294,7 @@ export class AppComponent implements OnInit {
       // bubble
       const bubbleYear = Math.floor((2010 - 1990) * Math.random() + 1990);
       const bubbleEntry = {
-        name: country,
+        name: country.name,
         series: [{
           name: '' + bubbleYear,
           x: new Date(bubbleYear, 0, 1),
@@ -307,7 +308,15 @@ export class AppComponent implements OnInit {
       this.statusData = this.getStatusData();
     }
 
-    this.dateData = generateData(5, false);
+    const date = new Date(Math.floor(1473700105009 +  Math.random() * 1000000000));
+    for (const series of this.dateData) {
+      series.series.push({
+        name: date,
+        value: Math.floor(2000 + Math.random() * 5000)
+      });
+    }
+    this.dateData = [...this.dateData];
+
     this.dateDataWithRange = generateData(2, true);
 
     if (this.chart.inputFormat === 'calendarData') this.calendarData = this.getCalendarData();
@@ -570,5 +579,9 @@ export class AppComponent implements OnInit {
       this.treemapPath.push(node);
       this.treemap = node.children;
     }
+  }
+
+  getFlag(country) {
+    return this.countries.find(c => c.name === country).emoji;
   }
 }
