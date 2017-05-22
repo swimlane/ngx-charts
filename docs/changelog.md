@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.3.1
+- Bug: Fix bug where the axis component would not emit a dimensionsChanged event in some cases
+
 ## 5.3.0
 - Feature: Added option to pass custom ng-templates for tooltips to all charts
 - Enhancement: Added 'label' input to advanced pie chart component
