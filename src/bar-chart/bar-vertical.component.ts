@@ -7,8 +7,6 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
-  ContentChild,
-  TemplateRef
 } from '@angular/core';
 import { scaleBand, scaleLinear } from 'd3-scale';
 
