@@ -35,6 +35,7 @@ export declare class BarComponent implements OnChanges {
     getPath(): any;
     getRadius(): number;
     getStartOpacity(): number;
+    readonly edges: boolean[];
     onMouseEnter(): void;
     onMouseLeave(): void;
 }

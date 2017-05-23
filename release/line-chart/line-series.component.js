@@ -12,13 +12,22 @@ var LineSeriesComponent = (function () {
     };
     LineSeriesComponent.prototype.update = function () {
         this.updateGradients();
-        var line = this.getLineGenerator();
-        var area = this.getAreaGenerator();
-        var range = this.getRangeGenerator();
         var data = this.sortData(this.data.series);
+        var line = this.getLineGenerator();
         this.path = line(data) || '';
-        this.outerPath = range(data) || '';
+        var area = this.getAreaGenerator();
         this.areaPath = area(data) || '';
+        if (this.hasRange) {
+            var range = this.getRangeGenerator();
+            this.outerPath = range(data) || '';
+        }
+        this.stroke = this.hasGradient ? this.gradientUrl : this.colors.getColor(this.data.name);
+        var values = this.data.series.map(function (d) { return d.value; });
+        var max = Math.max.apply(Math, values);
+        var min = Math.min.apply(Math, values);
+        if (max === min) {
+            this.stroke = this.colors.getColor(max);
+        }
     };
     LineSeriesComponent.prototype.getLineGenerator = function () {
         var _this = this;
@@ -127,7 +136,7 @@ export { LineSeriesComponent };
 LineSeriesComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-line-series]',
-                template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient *ngIf=\"hasGradient\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
+                template: "\n    <svg:g>\n      <defs>\n        <svg:g ngx-charts-svg-linear-gradient *ngIf=\"hasGradient\"\n          orientation=\"vertical\"\n          [name]=\"gradientId\"\n          [stops]=\"gradientStops\"\n        />\n      </defs>\n      <svg:g ngx-charts-area\n        class=\"line-highlight\"\n        [data]=\"data\"\n        [path]=\"areaPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [opacity]=\"0.25\"\n        [startOpacity]=\"0\"\n        [gradient]=\"true\"\n        [stops]=\"areaGradientStops\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n      <svg:g ngx-charts-line\n        class=\"line-series\"\n        [data]=\"data\"\n        [path]=\"path\"\n        [stroke]=\"stroke\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n      />\n     <svg:g ngx-charts-area\n        *ngIf=\"hasRange\"\n        class=\"line-series-range\"\n        [data]=\"data\"\n        [path]=\"outerPath\"\n        [fill]=\"hasGradient ? gradientUrl : colors.getColor(data.name)\"\n        [class.active]=\"isActive(data)\"\n        [class.inactive]=\"isInactive(data)\"\n        [opacity]=\"rangeFillOpacity\"\n      />\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
 ];
@@ -144,5 +153,6 @@ LineSeriesComponent.propDecorators = {
     'curve': [{ type: Input },],
     'activeEntries': [{ type: Input },],
     'rangeFillOpacity': [{ type: Input },],
+    'hasRange': [{ type: Input },],
 };
 //# sourceMappingURL=line-series.component.js.map

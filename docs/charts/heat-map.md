@@ -24,6 +24,7 @@
 | innerPadding        | number or number[] | 8             | the inner padding in px                                                                                         |
 | tooltipDisabled     | boolean            | false         | show or hide the tooltip                                                                                        |
 | tooltipText         | function           | (see source)  | the HTML text to display in the tooltip                                                                         |
+| tooltipTemplate     | TemplateRef        |               | a custom ng-template to be displayed inside the tooltip                                                         |
 
 # Outputs
 

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, HostListener, ElementRef, Chang
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
+import { pathTween } from '../utils/path-tween';
 import { id } from '../utils/id';
 var BarComponent = (function () {
     function BarComponent(element, location) {
@@ -48,8 +49,8 @@ var BarComponent = (function () {
     BarComponent.prototype.animateToCurrentForm = function () {
         var node = select(this.element).select('.bar');
         var path = this.getPath();
-        node.transition().duration(750)
-            .attr('d', path);
+        node.transition().duration(500)
+            .attrTween('d', pathTween(path, 1));
     };
     BarComponent.prototype.getGradient = function () {
         if (this.stops) {
@@ -71,22 +72,23 @@ var BarComponent = (function () {
     BarComponent.prototype.getStartingPath = function () {
         var radius = this.getRadius();
         var path;
+        var edges = [false, false, false, false];
         if (this.roundEdges) {
             if (this.orientation === 'vertical') {
                 radius = Math.min(this.height, radius);
-                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
+                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
             }
             else if (this.orientation === 'horizontal') {
                 radius = Math.min(this.width, radius);
-                path = roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
+                path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
             }
         }
         else {
             if (this.orientation === 'vertical') {
-                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, false, false, false, false);
+                path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
             }
             else if (this.orientation === 'horizontal') {
-                path = roundedRect(this.x, this.y, 0, this.height, radius, false, false, false, false);
+                path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
             }
         }
         return path;
@@ -97,15 +99,15 @@ var BarComponent = (function () {
         if (this.roundEdges) {
             if (this.orientation === 'vertical') {
                 radius = Math.min(this.height, radius);
-                path = roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
+                path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
             }
             else if (this.orientation === 'horizontal') {
                 radius = Math.min(this.width, radius);
-                path = roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
+                path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
             }
         }
         else {
-            path = roundedRect(this.x, this.y, this.width, this.height, radius, false, false, false, false);
+            path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
         }
         return path;
     };
@@ -124,6 +126,32 @@ var BarComponent = (function () {
             return 0.5;
         }
     };
+    Object.defineProperty(BarComponent.prototype, "edges", {
+        get: function () {
+            var edges = [false, false, false, false];
+            if (this.roundEdges) {
+                if (this.orientation === 'vertical') {
+                    if (this.data.value > 0) {
+                        edges = [true, true, false, false];
+                    }
+                    else {
+                        edges = [false, false, true, true];
+                    }
+                }
+                else if (this.orientation === 'horizontal') {
+                    if (this.data.value > 0) {
+                        edges = [false, true, false, true];
+                    }
+                    else {
+                        edges = [true, false, true, false];
+                    }
+                }
+            }
+            return edges;
+        },
+        enumerable: true,
+        configurable: true
+    });
     BarComponent.prototype.onMouseEnter = function () {
         this.activate.emit(this.data);
     };

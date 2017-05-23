@@ -8,6 +8,7 @@ import {
   SimpleChanges,
   Renderer,
   ChangeDetectionStrategy,
+  TemplateRef,
 } from '@angular/core';
 import {
   trigger,
@@ -32,10 +33,10 @@ import {
         (mouseenter)="showTooltip(i)"
         (mouseleave)="hideTooltip(i)"
       />
-      <xhtml:ng-template #tooltipTemplate>
+      <xhtml:ng-template #defaultTooltipTemplate let-model="model">
         <xhtml:div class="area-tooltip-container">
           <xhtml:div
-            *ngFor="let tooltipItem of tooltipArea.values"
+            *ngFor="let tooltipItem of model"
             class="tooltip-item">
             <span
               class="tooltip-item-color"
@@ -59,7 +60,8 @@ import {
         [tooltipPlacement]="'right'"
         [tooltipType]="'tooltip'"
         [tooltipSpacing]="15"
-        [tooltipTemplate]="tooltipTemplate"
+        [tooltipTemplate]="tooltipTemplate ? tooltipTemplate: defaultTooltipTemplate"
+        [tooltipContext]="tooltipArea.values"
       />
     </svg:g>
   `,
@@ -93,6 +95,7 @@ export class AreaTooltip implements OnChanges {
   @Input() colors;
   @Input() showPercentage: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() hover = new EventEmitter();
 

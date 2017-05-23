@@ -2,7 +2,9 @@ import {
   Component,
   Input,
   ViewEncapsulation,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { min } from 'd3-array';
 import { format } from 'd3-format';
@@ -35,7 +37,9 @@ import { formatLabel } from '../common/label.helper';
             [tooltipDisabled]="tooltipDisabled"
             [tooltipPlacement]="'top'"
             [tooltipType]="'tooltip'"
-            [tooltipTitle]="tooltipText({data: series})"
+            [tooltipTitle]="tooltipTemplate ? undefined : tooltipText({data: series})"
+            [tooltipTemplate]="tooltipTemplate"
+            [tooltipContext]="series.data[0].data"
           />
           <svg:text
             class="label percent-label"
@@ -79,7 +83,7 @@ import { formatLabel } from '../common/label.helper';
 export class PieGridComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: (o: any) => any;
-
+  
   dims: ViewDimensions;
   data: any[];
   transform: string;
@@ -87,6 +91,8 @@ export class PieGridComponent extends BaseChartComponent {
   domain: any[];
   colorScale: ColorHelper;
   margin = [20, 20, 20, 20];
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   update(): void {
     super.update();

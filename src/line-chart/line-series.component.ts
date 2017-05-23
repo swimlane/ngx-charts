@@ -38,11 +38,12 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
         class="line-series"
         [data]="data"
         [path]="path"
-        [stroke]="hasGradient ? gradientUrl : colors.getColor(data.name)"
+        [stroke]="stroke"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
       />
      <svg:g ngx-charts-area
+        *ngIf="hasRange"
         class="line-series-range"
         [data]="data"
         [path]="outerPath"
@@ -65,6 +66,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() curve: any;
   @Input() activeEntries: any[];
   @Input() rangeFillOpacity: number;
+  @Input() hasRange: boolean;
 
   path: string;
   outerPath: string;
@@ -74,6 +76,7 @@ export class LineSeriesComponent implements OnChanges {
   hasGradient: boolean;
   gradientStops: any[];
   areaGradientStops: any[];
+  stroke: any;
 
   constructor(private location: LocationStrategy) {
   }
@@ -85,15 +88,27 @@ export class LineSeriesComponent implements OnChanges {
   update(): void {
     this.updateGradients();
 
-    const line = this.getLineGenerator();
-    const area = this.getAreaGenerator();
-    const range = this.getRangeGenerator();
-
     const data = this.sortData(this.data.series);
 
+    const line = this.getLineGenerator();
     this.path = line(data) || '';
-    this.outerPath = range(data) || '';
+
+    const area = this.getAreaGenerator();
     this.areaPath = area(data) || '';
+
+    if (this.hasRange) {
+      const range = this.getRangeGenerator();
+      this.outerPath = range(data) || '';
+    }
+
+    this.stroke = this.hasGradient ? this.gradientUrl : this.colors.getColor(this.data.name);
+
+    const values = this.data.series.map(d => d.value);
+    const max = Math.max(...values);
+    const min = Math.min(...values);
+    if (max === min) {
+      this.stroke = this.colors.getColor(max);
+    }
   }
 
   getLineGenerator(): any {

@@ -12,7 +12,7 @@ import {
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { select } from 'd3-selection';
 import { roundedRect } from '../common/shape.helper';
-
+import { pathTween } from '../utils/path-tween';
 import { id } from '../utils/id';
 
 @Component({
@@ -104,8 +104,8 @@ export class BarComponent implements OnChanges {
     const node = select(this.element).select('.bar');
     const path = this.getPath();
 
-    node.transition().duration(750)
-      .attr('d', path);
+    node.transition().duration(500)
+      .attrTween('d', pathTween(path, 1));
   }
 
   getGradient() {
@@ -130,19 +130,20 @@ export class BarComponent implements OnChanges {
     let radius = this.getRadius();
     let path;
 
+    const edges: boolean[] = [false, false, false, false];
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         radius = Math.min(this.height, radius);
-        path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, true, true, false, false);
+        path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
       } else if (this.orientation === 'horizontal') {
         radius = Math.min(this.width, radius);
-        path = roundedRect(this.x, this.y, 0, this.height, radius, false, true, false, true);
+        path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
       }
     } else {
       if (this.orientation === 'vertical') {
-        path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, false, false, false, false);
+        path = roundedRect(this.x, this.y + this.height, this.width, 0, radius, edges);
       } else if (this.orientation === 'horizontal') {
-        path = roundedRect(this.x, this.y, 0, this.height, radius, false, false, false, false);
+        path = roundedRect(this.x, this.y, 0, this.height, radius, edges);
       }
     }
 
@@ -156,13 +157,13 @@ export class BarComponent implements OnChanges {
     if (this.roundEdges) {
       if (this.orientation === 'vertical') {
         radius = Math.min(this.height, radius);
-        path = roundedRect(this.x, this.y, this.width, this.height, radius, true, true, false, false);
+        path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
       } else if (this.orientation === 'horizontal') {
         radius = Math.min(this.width, radius);
-        path = roundedRect(this.x, this.y, this.width, this.height, radius, false, true, false, true);
+        path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
       }
     } else {
-      path = roundedRect(this.x, this.y, this.width, this.height, radius, false, false, false, false);
+      path = roundedRect(this.x, this.y, this.width, this.height, radius, this.edges);
     }
 
     return path;
@@ -184,6 +185,26 @@ export class BarComponent implements OnChanges {
     } else {
       return 0.5;
     }
+  }
+
+  get edges() {
+    let edges = [false, false, false, false];
+    if (this.roundEdges) {
+      if (this.orientation === 'vertical') {
+        if (this.data.value > 0) {
+          edges =  [true, true, false, false];
+        } else {
+          edges =  [false, false, true, true];
+        }
+      } else if (this.orientation === 'horizontal') {
+        if (this.data.value > 0) {
+          edges =  [false, true, false, true];
+        } else {
+          edges =  [true, false, true, false];
+        }
+      }
+    }
+    return edges;
   }
 
   @HostListener('mouseenter')

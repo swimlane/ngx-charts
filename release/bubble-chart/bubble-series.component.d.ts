@@ -1,4 +1,4 @@
-import { SimpleChanges, EventEmitter, OnChanges } from '@angular/core';
+import { SimpleChanges, EventEmitter, OnChanges, TemplateRef } from '@angular/core';
 export declare class BubbleSeriesComponent implements OnChanges {
     data: any;
     xScale: any;
@@ -12,6 +12,7 @@ export declare class BubbleSeriesComponent implements OnChanges {
     xAxisLabel: string;
     yAxisLabel: string;
     tooltipDisabled: boolean;
+    tooltipTemplate: TemplateRef<any>;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;
@@ -26,4 +27,5 @@ export declare class BubbleSeriesComponent implements OnChanges {
     isVisible(circle: any): boolean;
     activateCircle(circle: any): void;
     deactivateCircle(circle: any): void;
+    trackBy(index: any, circle: any): string;
 }

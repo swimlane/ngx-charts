@@ -5,8 +5,17 @@ import {
   EventEmitter,
   ViewEncapsulation,
   HostListener,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { PathLocationStrategy } from '@angular/common';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear, curveLinearClosed, curveCardinalClosed } from 'd3-shape';
@@ -78,7 +87,7 @@ const twoPI = 2 * Math.PI;
           [width]="dims.width">
         </svg:g>
         <svg:g [attr.transform]="transformPlot">
-          <svg:g *ngFor="let series of results; trackBy: series?.name">
+          <svg:g *ngFor="let series of results; trackBy:trackBy" [@animationState]="'active'">
             <svg:g ngx-charts-polar-series
               [gradient]="gradient"
               [xScale]="xScale"
@@ -90,6 +99,7 @@ const twoPI = 2 * Math.PI;
               [curve]="curve"
               [rangeFillOpacity]="rangeFillOpacity"
               [tooltipDisabled]="tooltipDisabled"
+              [tooltipTemplate]="tooltipTemplate"
             />
           </svg:g>
         </svg:g>
@@ -102,6 +112,18 @@ const twoPI = 2 * Math.PI;
     './polar-chart.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('animationState', [
+      transition(':leave', [
+        style({
+          opacity: 1,
+        }),
+        animate(500, style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class PolarChartComponent extends BaseChartComponent {
 
@@ -128,6 +150,8 @@ export class PolarChartComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   yAxisDims: ViewDimensions;
@@ -454,5 +478,9 @@ export class PolarChartComponent extends BaseChartComponent {
       this.deactivate.emit({ value: entry, entries: [] });
     }
     this.activeEntries = [];
+  }
+
+  trackBy(index, item) {
+    return item.name;
   }
 }

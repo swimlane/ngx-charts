@@ -21,7 +21,7 @@ export class ColorHelper {
     this.domain = domain;
     this.customColors = customColors;
 
-    this.scale = this.generateColorScheme(scheme, type, domain);
+    this.scale = this.generateColorScheme(scheme, type, this.domain);
   }
 
   generateColorScheme(scheme, type, domain) {
@@ -42,9 +42,17 @@ export class ColorHelper {
         .domain(domain);
 
     } else if (type === 'linear') {
+      // linear schemes must have at least 2 colors
+      const colorDomain = [...scheme.domain];
+      if (colorDomain.length === 1) {
+        colorDomain.push(colorDomain[0]);
+        this.colorDomain = colorDomain;
+      }
+
+      const points = range(0, 1, 1.0 / colorDomain.length);
       colorScale = scaleLinear()
-        .domain(range(0, 1, 1.0 / (scheme.domain.length - 1)))
-        .range(scheme.domain);
+        .domain(points)
+        .range(colorDomain);
     }
 
     return colorScale;
@@ -75,7 +83,7 @@ export class ColorHelper {
   }
 
   getLinearGradientStops(value, start) {
-    if (!start) {
+    if (start === undefined) {
       start = this.domain[0];
     }
 
@@ -94,12 +102,14 @@ export class ColorHelper {
     const startColor = this.getColor(start);
 
     const endVal = valueScale(value);
-    let i = 0;
+    let i = 1;
     let currentVal = startVal;
     const stops = [];
+
     stops.push({
       color: startColor,
-      offset: 0,
+      offset: startVal,
+      originalOffset: startVal,
       opacity: 1
     });
 
@@ -110,7 +120,8 @@ export class ColorHelper {
         i++;
         continue;
       }
-      if (offset >= endVal) {
+
+      if (offset.toFixed(4) >= (endVal - colorValueScale.bandwidth()).toFixed(4) ) {
         break;
       }
 
@@ -123,15 +134,24 @@ export class ColorHelper {
       i++;
     }
 
-    stops.push({
-      color: endColor,
-      offset: endVal,
-      opacity: 1
-    });
+    if (stops[stops.length - 1].offset < 100) {
+      stops.push({
+        color: endColor,
+        offset: endVal,
+        opacity: 1
+      });
+    }
 
-    // normalize the offsets into percentages
-    for (const s of stops) {
-      s.offset = Math.floor(((s.offset - startVal) / (endVal - startVal)) * 100);
+    if (endVal === startVal) {
+      stops[0].offset = 0;
+      stops[1].offset = 100;
+    } else {
+      // normalize the offsets into percentages
+      if (stops[stops.length - 1].offset !== 100) {
+        for (const s of stops) {
+          s.offset = ((s.offset - startVal) / (endVal - startVal)) * 100;
+        }
+      }
     }
 
     return stops;

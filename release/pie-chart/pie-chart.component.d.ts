@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, TemplateRef } from '@angular/core';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class PieChartComponent extends BaseChartComponent {
@@ -16,6 +16,7 @@ export declare class PieChartComponent extends BaseChartComponent {
     select: EventEmitter<{}>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
+    tooltipTemplate: TemplateRef<any>;
     translation: string;
     outerRadius: number;
     innerRadius: number;

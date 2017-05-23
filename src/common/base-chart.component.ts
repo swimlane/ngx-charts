@@ -17,7 +17,7 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Input() results: any;
   @Input() view: number[];
-  @Input() scheme: any;
+  @Input() scheme: any = 'cool';
   @Input() schemeType: string = 'ordinal';
   @Input() customColors: any;
 
@@ -71,8 +71,13 @@ export class BaseChartComponent implements OnChanges, AfterViewInit, OnDestroy {
       }
     }
 
-    if (!this.width || !this.height) {
-      this.width = this.height = 0;
+    // default values if width or height are 0 or undefined
+    if (!this.width) {
+      this.width = 600;
+    }
+
+    if (!this.height) {
+      this.height = 400;
     }
 
     this.width = ~~this.width;
