@@ -1,5 +1,5 @@
 /**
- * ngx-charts v"5.3.0" (https://github.com/swimlane/ngx-charts)
+ * ngx-charts v"5.3.1" (https://github.com/swimlane/ngx-charts)
  * Copyright 2016
  * Licensed under MIT
  */
@@ -8691,7 +8691,7 @@ var XAxisComponent = (function () {
         this.xOrient = 'bottom';
         this.dimensionsChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.xAxisClassName = 'x axis';
-        this.labelOffset = 80;
+        this.labelOffset = 0;
         this.fill = 'none';
         this.stroke = 'stroke';
         this.tickStroke = '#ccc';
