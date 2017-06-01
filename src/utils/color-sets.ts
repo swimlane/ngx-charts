@@ -120,5 +120,29 @@ export let colorSets = [
       '#4e31a5', '#9c25a7', '#3065ab', '#57468b', '#904497', '#46648b', 
       '#32118d', '#a00fb3', '#1052a2', '#6e51bd', '#b63cc3', '#6c97cb', '#8671c1', '#b455be', '#7496c3'
     ]
+  },
+  {
+    name: 'singleLightBlue',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b'
+    ]
+  },
+  {
+    name: 'coolthree',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b','#a8385d', '#7aa3e5'
+    ]
+  },
+  {
+    name: 'coolthree',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#7aa3e5', '#01579b', '#a8385d' 
+    ]
   }
 ];

@@ -1,6 +1,6 @@
 declare var APP_VERSION: string;
 
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
 import * as d3 from 'd3';
@@ -10,6 +10,7 @@ import { formatLabel } from '../src/common/label.helper';
 import { single, multi, bubble, generateData, generateGraph, treemap } from './data';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
+import { lineChart, barChart, lineChartSeries } from './combo-chart-data'
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -112,7 +113,7 @@ export class AppComponent implements OnInit {
   ];
 
   colorSets: any;
-  colorScheme: any;
+  colorScheme: any[];
   schemeType: string = 'ordinal';
   selectedColorScheme: string;
   rangeFillOpacity: number = 0.15;
@@ -187,6 +188,7 @@ export class AppComponent implements OnInit {
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
+    this.setComboBarScheme('singleLightBlue');
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
     this.sparklineData = generateData(1, false, 30);
@@ -583,4 +585,87 @@ export class AppComponent implements OnInit {
   getFlag(country) {
     return this.countries.find(c => c.name === country).emoji;
   }
+
+  /*
+  **
+  Combo Chart
+  **
+  */
+// @ViewChild(ComboChartComponent) combo: ComboChartComponent
+// @ViewChild(LineComponent) comboLine: LineComponent
+showComboLegend: boolean = true;
+barChart: any[] = barChart
+lineChart: any[] = lineChart
+lineChartSeries: any[] = lineChartSeries
+comboBarScheme: any[];
+lineChartScheme =   {
+    name: 'coolthree',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#7aa3e5', '#01579b', '#a8385d' 
+    ]
+  }
+showRightYAxisLabel: boolean = true;
+yAxisLabelRight: string = "Utilization"
+  ngOnChanges() {
+    
+  }
+
+  yLeftAxisScale(min, max) {
+    return { min: min, max: max };
+  }
+
+  yRightAxisScale(min, max) {
+    return { min: min, max: max };
+  }
+
+  yLeftTickFormat(data) {
+    return `${data.toLocaleString()}`;
+  }
+
+  yRightTickFormat(data) {
+    return `${data}%`;
+  }
+
+  setComboBarScheme(name) {
+    // this.selectedColorScheme = name;
+    this.comboBarScheme = this.colorSets.find(s => s.name === name);
+  }
+
+  
+  onSelect(event) {
+    console.log(event);
+  }
+
+
+      syncAxis(results) {
+        console.log('results', results)
+      var scaled = results.map(d => {
+        const valueLength = Math.round(d.value).toString().length;
+        console.log(valueLength, d.value);
+        let s = checkScaledAxis(valueLength, d.value);
+
+        return {name: d.name, value: s}
+      });
+
+
+    function checkScaledAxis(length, value) {
+        let v = value;
+        if(length === 5) {
+          return v/1000;
+        } else if(length === 4) {
+          return v/1000;
+        } else if(length === 3) {
+          return v/100;
+        } else {
+          return v;
+        }
+    }
+  }
+    /*
+  **
+  End of Combo Chart
+  **
+  */
 }

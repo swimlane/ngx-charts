@@ -2,6 +2,16 @@ const chartGroups = [
   {
     name: 'Bar Charts',
     charts: [
+            {
+        name: 'Combo Chart',
+        selector: 'combo-chart',
+        inputFormat: 'multi',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
+          'showGridLines', 'roundDomains', 'tooltipDisabled'
+        ]
+      },
       {
         name: 'Vertical Bar Chart',
         selector: 'bar-vertical',

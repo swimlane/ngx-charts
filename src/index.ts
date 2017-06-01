@@ -11,3 +11,5 @@ export * from './number-card';
 export * from './pie-chart';
 export * from './tree-map';
 export * from './gauge';
+export * from './gauge';
+export * from './combo-chart'

@@ -1,6 +1,31 @@
 <main [class]="theme">
   <div class="chart-col">
     <div style="position: absolute; top: 50px; left: 50px; right: 50px; bottom: 50px;">
+<combo-chart-component
+      *ngIf="chartType === 'combo-chart'"
+      class="chart-container"
+      [view]="view"
+      [scheme]="comboBarScheme"
+      [colorSchemeLine]="lineChartScheme"
+      [results]="barChart"
+      [lineChart]="lineChartSeries"
+      [yAxisTickFormatting]="yLeftTickFormat"
+      [yLeftAxisScaleFactor]="yLeftAxisScale"
+      [yRightAxisScaleFactor]="yRightAxisScale"
+      [yRightAxisTickFormatting]="yRightTickFormat"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [syncAxis]="syncAxis"
+      [legend]="showComboLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [showRightYAxisLabel]="showRightYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [yAxisLabelRight]="yAxisLabelRight"
+      (select)="onSelect($event)">
+</combo-chart-component>
       <ngx-charts-bar-vertical
         *ngIf="chartType === 'bar-vertical'"
         class="chart-container"
