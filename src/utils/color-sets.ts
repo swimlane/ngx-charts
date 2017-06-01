@@ -134,7 +134,7 @@ export let colorSets = [
     selectable: true,
     group: 'Ordinal',
     domain: [
-      '#01579b','#a8385d', '#7aa3e5'
+      '#01579b', '#a8385d', '#7aa3e5'
     ]
   },
   {

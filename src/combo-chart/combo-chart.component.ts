@@ -29,7 +29,6 @@ import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensio
 import { ColorHelper } from '../common/color.helper';
 import { id } from '../utils/id';
 
-
 @Component({
   selector: 'combo-chart-component',
   template:  `
@@ -144,10 +143,10 @@ export class ComboChartComponent extends BaseChartComponent  {
   @Input() yAxis;
   @Input() showXAxisLabel;
   @Input() showYAxisLabel;
+  @Input() showRightYAxisLabel;
   @Input() xAxisLabel;
   @Input() yAxisLabel;
   @Input() yAxisLabelRight;
-  @Input() showRightYAxisLabel
   @Input() tooltipDisabled: boolean = false;
   @Input() gradient: boolean;
   @Input() showGridLines: boolean = true;
@@ -158,7 +157,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   @Input() yRightAxisTickFormatting: any;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
-  @Input() colorSchemeLine
+  @Input() colorSchemeLine: any[];
   @Input() autoScale;
   @Input() lineChart: any;
   @Input() yLeftAxisScaleFactor: any;
@@ -184,28 +183,20 @@ export class ComboChartComponent extends BaseChartComponent  {
   xAxisHeight: number = 0;
   yAxisWidth: number = 0;
   legendOptions: any;
-  scaleType = 'linear'
-  hoveredVertical: any;
-  clipPath: string;
-  xScaleLine
-  yScaleLine
-  xDomainLine 
-  yDomainLine
-  seriesDomain
-  xSet
-  filteredDomain: any;
-  scaledAxis
-  combinedSeries
+  scaleType = 'linear';
+  xScaleLine;
+  yScaleLine;
+  xDomainLine;
+  yDomainLine;
+  seriesDomain;
+  scaledAxis;
+  combinedSeries;
 
   trackBy(index, item): string {
     return item.name;
   }
-  
 
-ngOnInit() {
-}
-
-update(): void {
+  update(): void {
     super.update();
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -220,12 +211,11 @@ update(): void {
       showLegend: this.legend,
       legendType: this.schemeType
     });
-    // console.log('dims ==>', this.dims);
+
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
-    //line chart
-
+    // line chart
     this.xDomainLine = this.getXDomainLine();
     if (this.filteredDomain) {
       this.xDomainLine = this.filteredDomain;
@@ -264,7 +254,6 @@ update(): void {
     this.deactivateAll();
   }
 
-
   updateDomain(domain): void {
     this.filteredDomain = domain;
     this.xDomainLine = this.filteredDomain;
@@ -272,13 +261,13 @@ update(): void {
   }
 
   getSeriesDomain(): any[] {
-  this.combinedSeries = this.lineChart.slice(0);
-  this.combinedSeries.push(
-    {name: this.yAxisLabel,
-    series: this.results
-  });
+    this.combinedSeries = this.lineChart.slice(0);
+    this.combinedSeries.push(
+      {name: this.yAxisLabel,
+      series: this.results
+    });
     if (this.syncAxis) {
-          this.syncAxis(this.results);
+      this.syncAxis(this.results);
     }
     return this.combinedSeries.map(d => d.name);
   }
@@ -310,8 +299,7 @@ update(): void {
     return 'ordinal';
   } 
 
-
-    getXDomainLine(): any[] {
+  getXDomainLine(): any[] {
     let values = [];
 
     for (const results of this.lineChart) {
@@ -365,16 +353,18 @@ update(): void {
 
     let min = Math.min(...domain);
     const max = Math.max(...domain);
-    if (!this.autoScale) {
+    if (this.yRightAxisScaleFactor) {
+      const minMax = this.yRightAxisScaleFactor(min, max);
+      return [Math.min(0, minMax.min), minMax.max];
+    } else {
       min = Math.min(0, min);
+      return [min, max];
     }
-
-    return [min, max];
   }
 
-    getXScaleLine(domain, width): any {
-      let scale;
-      let barOffset = ((this.dims.width - this.dims.xOffset + this.barPadding) / this.xDomain.length)/2
+  getXScaleLine(domain, width): any {
+    let scale;
+    const barOffset = ((this.dims.width - this.dims.xOffset + this.barPadding) / this.xDomain.length) / 2;
     if (this.scaleType === 'time') {
       scale = scaleTime()
         .range([0, width])
@@ -395,7 +385,7 @@ update(): void {
     }
 
     return scale;
-  }
+}
 
     getYScaleLine(domain, height): any {
     const scale = scaleLinear()
@@ -405,7 +395,7 @@ update(): void {
     return this.roundDomains ? scale.nice() : scale;
   }
 
-  //bar scales
+  // bar scales
 
   getXScale(): any {
     this.xDomain = this.getXDomain();
@@ -417,8 +407,6 @@ update(): void {
   }
 
   getYScale(): any {
- 
-    // change this to use  this.getYDomainLine()
     this.yDomain = this.getYDomain();
     const scale = scaleLinear()
       .range([this.dims.height, 0])
@@ -432,26 +420,11 @@ update(): void {
 
   getYDomain() {
     const values = this.results.map(d => d.value);
-    let min = Math.min(0, ...values);
-    let max = Math.max(...values);
+    const min = Math.min(0, ...values);
+    const max = Math.max(...values);
     if (this.yLeftAxisScaleFactor) {
-      min = this.yLeftAxisScaleFactor(min, max).min;
-      max = this.yLeftAxisScaleFactor(min, max).max;
-      return [min, max];
-    } else {
-      return [min, max];
-    }
-
-  }
-
-  getY2Domain() {
-    const values = this.results.map(d => d.value);
-    let min = Math.min(0, ...values);
-    let max = Math.max(...values);
-    if (this.yLeftAxisScaleFactor) {
-      min = this.yRightAxisScaleFactor(min, max).min;
-      max = this.yRightAxisScaleFactor(min, max).max;
-      return [min, max];
+      const minMax = this.yLeftAxisScaleFactor(min, max);
+      return [ Math.min(0, minMax.min), minMax.max];
     } else {
       return [min, max];
     }
@@ -522,5 +495,4 @@ update(): void {
 
     this.deactivate.emit({ value: item, entries: this.activeEntries });
   }
-
 }

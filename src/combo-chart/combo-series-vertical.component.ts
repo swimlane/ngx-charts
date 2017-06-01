@@ -59,7 +59,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
-  @Input() seriesLine
+  @Input() seriesLine;
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
@@ -169,9 +169,8 @@ export class ComboSeriesVerticalComponent implements OnChanges {
       }
       
       this.getSeriesTooltips(this.seriesLine, index);
-      // let lineValue = this.getSeriesTooltips(this.seriesLine, index);
-      let lineValue = this.seriesLine[0].series[index].value
-      let lineName = this.seriesLine[0].series[index].name
+      const lineValue = this.seriesLine[0].series[index].value;
+      const lineName = this.seriesLine[0].series[index].name;
       bar.tooltipText = `
         <span class="tooltip-label">${tooltipLabel }</span>
         <span class="tooltip-val"> Y1 - ${value.toLocaleString()} • Y2 - ${lineValue.toLocaleString()}%</span>
@@ -182,7 +181,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   }
   getSeriesTooltips(seriesLine, index) {
     return seriesLine.map(d => {
-      return d.series[index]
+      return d.series[index];
     });
   }
   isActive(entry): boolean {

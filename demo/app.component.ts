@@ -10,7 +10,7 @@ import { formatLabel } from '../src/common/label.helper';
 import { single, multi, bubble, generateData, generateGraph, treemap } from './data';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
-import { lineChart, barChart, lineChartSeries } from './combo-chart-data'
+import { barChart, lineChartSeries } from './combo-chart-data';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -155,6 +155,22 @@ export class AppComponent implements OnInit {
   gaugeShowAxis: boolean = true;
   gaugeValue: number = 50; // linear gauge value
   gaugePreviousValue: number = 70;
+
+  // Combo Chart
+  showComboLegend: boolean = true;
+  barChart: any[] = barChart;
+  lineChartSeries: any[] = lineChartSeries;
+  comboBarScheme: any[];
+  lineChartScheme =   {
+      name: 'coolthree',
+      selectable: true,
+      group: 'Ordinal',
+      domain: [
+        '#01579b', '#7aa3e5', '#a8385d', '#00bfa5'
+      ]
+    };
+  showRightYAxisLabel: boolean = true;
+  yAxisLabelRight: string = 'Utilization';
 
   // demos
   totalSales = 0;
@@ -591,33 +607,21 @@ export class AppComponent implements OnInit {
   Combo Chart
   **
   */
-// @ViewChild(ComboChartComponent) combo: ComboChartComponent
-// @ViewChild(LineComponent) comboLine: LineComponent
-showComboLegend: boolean = true;
-barChart: any[] = barChart
-lineChart: any[] = lineChart
-lineChartSeries: any[] = lineChartSeries
-comboBarScheme: any[];
-lineChartScheme =   {
-    name: 'coolthree',
-    selectable: true,
-    group: 'Ordinal',
-    domain: [
-      '#7aa3e5', '#01579b', '#a8385d' 
-    ]
-  }
-showRightYAxisLabel: boolean = true;
-yAxisLabelRight: string = "Utilization"
-  ngOnChanges() {
-    
-  }
+
+  /*
+  **
+  [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale" 
+  exposes the left and right min and max axis values for custom scaling, it is probably best to scale 
+  one axis in relation to the other axis but for flexibility to scale either the left or right axis we expose both.
+  **
+  */
 
   yLeftAxisScale(min, max) {
-    return { min: min, max: max };
+    return {min: `${min}`, max: `${max}`};
   }
 
   yRightAxisScale(min, max) {
-    return { min: min, max: max };
+    return {min: `${min}`, max: `${max}`};
   }
 
   yLeftTickFormat(data) {
@@ -629,38 +633,38 @@ yAxisLabelRight: string = "Utilization"
   }
 
   setComboBarScheme(name) {
-    // this.selectedColorScheme = name;
     this.comboBarScheme = this.colorSets.find(s => s.name === name);
   }
 
-  
   onSelect(event) {
     console.log(event);
   }
 
+  /*
+  **
+  [syncAxis]=="syncAxis" is used to sync both axes to allow for the data to be in the same chart view.
+  The examples is using percentages that where the max will never be over 100%.
+  **
+  */
 
-      syncAxis(results) {
-        console.log('results', results)
-      var scaled = results.map(d => {
-        const valueLength = Math.round(d.value).toString().length;
-        console.log(valueLength, d.value);
-        let s = checkScaledAxis(valueLength, d.value);
-
-        return {name: d.name, value: s}
-      });
-
+  syncAxis(results) {
+    const scaled = results.map(d => {
+    const valueLength = Math.round(d.value).toString().length;
+    const scaledAxis = checkScaledAxis(valueLength, d.value);
+    return {name: d.name, value: scaledAxis};
+  });
 
     function checkScaledAxis(length, value) {
-        let v = value;
-        if(length === 5) {
-          return v/1000;
-        } else if(length === 4) {
-          return v/1000;
-        } else if(length === 3) {
-          return v/100;
-        } else {
-          return v;
-        }
+      const val = value;
+      if(length === 5) {
+        return val / 1000;
+      } else if(length === 4) {
+        return val / 1000;
+      } else if(length === 3) {
+        return val / 100;
+      } else { 
+        return val;
+      }
     }
   }
     /*
