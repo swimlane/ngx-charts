@@ -191,9 +191,9 @@ export class ComboChartComponent extends BaseChartComponent  {
   seriesDomain;
   scaledAxis;
   combinedSeries;
-  xSet
-  filteredDomain
-  hoveredVertical
+  xSet;
+  filteredDomain;
+  hoveredVertical;
   
   trackBy(index, item): string {
     return item.name;
