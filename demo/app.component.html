@@ -608,6 +608,35 @@
           (select)="treemapSelect($event)">
         </ngx-charts-tree-map>
       </div>
+      <ngx-charts-line-chart
+        *ngIf="chartType === 'line-reference-lines'"
+        [view]="view"
+        class="chart-container"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="multi"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabelReference"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [timeline]="timeline"
+        [showGridLines]="showGridLines"
+        [curve]="curve"
+        [rangeFillOpacity]="rangeFillOpacity"
+        [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
+        [showSeriesOnHover]="showSeriesOnHover"
+        [showRefLines]="showRefLines"
+        [referenceLines]="refLines"
+        (select)="select($event)">
+      </ngx-charts-line-chart>
       <ngx-charts-bar-vertical
         *ngIf="chartType === 'tooltip-templates'"
         class="chart-container"

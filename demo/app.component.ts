@@ -134,6 +134,7 @@ export class AppComponent implements OnInit {
   // line, area
   autoScale = true;
   timeline = false;
+  showRefLines: boolean = true;
 
   // margin
   margin: boolean = false;
@@ -201,6 +202,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('reflines', this.refLines)
     const state = this.location.path(true);
     this.selectChart(state.length ? state : 'bar-vertical');
 
@@ -583,4 +585,18 @@ export class AppComponent implements OnInit {
   getFlag(country) {
     return this.countries.find(c => c.name === country).emoji;
   }
+  /**
+   **
+   Line Chart with reference lines
+   **
+   **/
+     referenceLines = {  
+       max: 42500, min: 33000, avg: 37750 }
+     xAxisLabelReference = "Year"
+
+      refLines = [
+       { max: {value: 42500, name: 'UCL'},
+        avg: {value: 37750, name: 'AVG'},
+        min: {value: 33000, name: 'LCL' }}
+       ]
 }

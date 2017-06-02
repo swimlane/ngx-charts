@@ -12,6 +12,8 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
+import { roundedRect } from '../../common/shape.helper';
+import { scaleBand } from 'd3-scale';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
@@ -31,6 +33,70 @@ import { reduceTicks } from './ticks.helper';
         </svg:text>
       </svg:g>
     </svg:g>
+  
+    <svg:path *ngIf="referenceLines"
+      class=""
+      stroke="none"
+      [attr.d]="path"
+      [attr.fill]="fill"
+      fill-opacity="0.15"
+      [attr.transform]="gridLineTransform()"
+    />
+      <svg:g *ngIf="referenceLines"
+      [attr.transform]="transform(referenceLines[0].max.value)">
+    <svg:line
+    class="max-ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
+    </svg:g>
+
+    <svg:g *ngIf="referenceLines"
+      [attr.transform]="transform(referenceLines[0].avg.value)">
+    <svg:line
+    class="avg-ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
+    </svg:g>
+    <svg:g *ngIf="referenceLines"
+      [attr.transform]="transform(referenceLines[0].min.value)">
+    <svg:line
+    class="min-ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
+    </svg:g>
+    <svg:g [attr.transform]="transform(referenceLines[0].max.value)">
+      <title>{{referenceLines[0].max.name}}</title>
+      <svg:text
+        stroke-width="0.01"
+        [attr.dy]="dy"
+        [attr.x]="gridLineWidth + outerTickSize + innerTickSize"
+        [attr.text-anchor]="textAnchor"
+        [style.font-size]="'12px'">
+        {{referenceLines[0].max.name}}
+      </svg:text>
+    </svg:g>
+    <svg:g [attr.transform]="transform(referenceLines[0].avg.value)">
+      <title>{{referenceLines[0].avg.name}}</title>
+      <svg:text
+        stroke-width="0.01"
+        [attr.dy]="dy"
+        [attr.x]="gridLineWidth + outerTickSize + innerTickSize"
+        [attr.text-anchor]="textAnchor"
+        [style.font-size]="'12px'">
+        {{referenceLines[0].avg.name}}
+      </svg:text>
+    </svg:g>
+    <svg:g [attr.transform]="transform(referenceLines[0].min.value)">
+      <title>{{referenceLines[0].min.name}}</title>
+      <svg:text
+        stroke-width="0.01"
+        [attr.dy]="dy"
+        [attr.x]="gridLineWidth + outerTickSize + innerTickSize"
+        [attr.text-anchor]="textAnchor"
+        [style.font-size]="'12px'">
+        {{referenceLines[0].min.name}}
+      </svg:text>
+    </svg:g>
     <svg:g *ngFor="let tick of ticks"
       [attr.transform]="transform(tick)">
       <svg:g
@@ -46,6 +112,12 @@ import { reduceTicks } from './ticks.helper';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisTicksComponent implements OnChanges, AfterViewInit {
+path
+radius = Math.min(this.height, 0);
+edges: boolean[] = [false, false, false, false];
+
+// path="M5,2h334.74745159539174a5,5 0 0 1 5,5v21a5,5 0 0 1 -5,5h-334.74745159539174h-5v-5v-21v-5h5z";
+fill = '#666666';
 
   @Input() scale;
   @Input() orient;
@@ -56,6 +128,7 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() showGridLines = false;
   @Input() gridLineWidth;
   @Input() height;
+  @Input() referenceLines;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -77,6 +150,9 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   outerTickSize: number = 6;
   rotateLabels: boolean = false;
   trimLabel: any;
+  refMax;
+  refMin;
+  refAvg;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -89,6 +165,11 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    if (this.referenceLines) {
+      this.refMax = this.adjustedScale(this.referenceLines[0].max.value);
+      this.refAvg = this.adjustedScale(this.referenceLines[0].avg.value);
+      this.refMin = this.adjustedScale(this.referenceLines[0].min.value);
+    }
     setTimeout(() => this.updateDims());
   }
 
@@ -101,9 +182,18 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  update(): void {
-    let scale;
+  getYScale(): any {
 
+    return scaleBand()
+      .rangeRound([0, this.height]);
+  }
+
+  update(): void {
+    console.log(this.ticksElement)
+    let scale;
+    if (this.referenceLines) {
+      this.path = roundedRect(0, this.refMax - this.innerTickSize, this.gridLineWidth - this.outerTickSize + this.innerTickSize, (this.refMin - this.refMax) - this.tickPadding, 0, this.edges);
+    }
     const sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
     this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 

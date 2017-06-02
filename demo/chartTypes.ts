@@ -336,6 +336,14 @@ const chartGroups = [
         options: [
           'curve'
         ]
+      },
+      {
+        name: 'Line Chart with Reference Lines',
+        selector: 'line-reference-lines',
+        inputFormat: 'reference-lines',
+        options: [
+          'curve'
+        ]
       }
     ]
   }

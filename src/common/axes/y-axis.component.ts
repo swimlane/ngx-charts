@@ -25,6 +25,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [orient]="yOrient"
         [showGridLines]="showGridLines"
         [gridLineWidth]="dims.width"
+        [referenceLines]="referenceLines"
         [height]="dims.height"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
@@ -51,7 +52,8 @@ export class YAxisComponent implements OnChanges {
   @Input() yAxisTickInterval;
   @Input() yAxisTickCount: any;
   @Input() yOrient: string = 'left';
-  
+  @Input() referenceLines;
+
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
@@ -69,6 +71,7 @@ export class YAxisComponent implements OnChanges {
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('dims', this.yScale);
     this.update();
   }
 

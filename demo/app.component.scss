@@ -234,6 +234,10 @@ main {
     .gridline-path {
       stroke: $color-bg-med;
     }
+    .refline-path {
+      stroke: $color-bg-med;
+      stroke-width: 2;
+    }
 
     .grid-panel {
       &.odd {
