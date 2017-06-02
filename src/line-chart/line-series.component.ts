@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { area, line } from 'd3-shape';
-
 import { id } from '../utils/id';
 import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
 

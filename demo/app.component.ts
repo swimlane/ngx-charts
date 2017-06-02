@@ -72,7 +72,9 @@ export class AppComponent implements OnInit {
   showGridLines = true;
   innerPadding = '10%';
   barPadding = 8;
+  paddingProportion = 0;
   groupPadding = 16;
+  groupProportion = 0;
   roundDomains = false;
   maxRadius = 10;
   minRadius = 3;

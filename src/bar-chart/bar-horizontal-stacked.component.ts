@@ -109,7 +109,7 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   @Input() schemeType: string;
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
-  @Input() barPadding = 8;
+  @Input() barPadding: string | number  = 8;
   @Input() roundDomains: boolean = false;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
@@ -207,8 +207,12 @@ export class BarHorizontalStackedComponent extends BaseChartComponent {
   }
 
   getYScale(): any {
-    const spacing = this.groupDomain.length / (this.dims.height / this.barPadding + 1);
-
+    let spacing = parseInt(this.barPadding.toString(), 10);
+    if (this.barPadding !== (spacing + '%')) {
+      spacing = this.groupDomain.length / (this.dims.height / spacing + 1);
+    } else {
+      spacing /= 100;
+    }
     return scaleBand()
       .rangeRound([0, this.dims.height])
       .paddingInner(spacing)

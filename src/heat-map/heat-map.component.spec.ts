@@ -20,7 +20,7 @@ class TestComponent {
   };
 }
 
-describe('<ngx-charts-heat-map>', () => {
+xdescribe('<ngx-charts-heat-map>', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
