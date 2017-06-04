@@ -64,6 +64,8 @@ import { id } from '../utils/id';
           [labelText]="yAxisLabel"
           [tickFormatting]="yAxisTickFormatting"
           [referenceLines]="referenceLines"
+          [showRefLines]="showRefLines"
+          [showRefLabels]="showRefLabels"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -174,7 +176,8 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() tooltipDisabled: boolean = false;
   @Input() showSeriesOnHover: boolean = true;
   @Input() showRefLines: boolean = false;
-  @Input() referenceLines: Object;
+  @Input() referenceLines: any;
+  @Input() showRefLabels: boolean;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -214,8 +217,6 @@ export class LineChartComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-
-    console.log('ref', this.referenceLines);
 
     this.dims = calculateViewDimensions({
       width: this.width,
@@ -368,7 +369,6 @@ export class LineChartComponent extends BaseChartComponent {
   }
 
   getYScale(domain, height): any {
-    console.log(domain);
     const scale = scaleLinear()
       .range([height, 0])
       .domain(domain);

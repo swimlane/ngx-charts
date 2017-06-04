@@ -623,7 +623,7 @@
         [yAxis]="showYAxis"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabelReference"
+        [xAxisLabel]="xAxisLabel"
         [yAxisLabel]="yAxisLabel"
         [autoScale]="autoScale"
         [timeline]="timeline"
@@ -634,6 +634,7 @@
         [tooltipDisabled]="tooltipDisabled"
         [showSeriesOnHover]="showSeriesOnHover"
         [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
         [referenceLines]="refLines"
         (select)="select($event)">
       </ngx-charts-line-chart>
@@ -796,6 +797,18 @@
         <label>
           <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
           Show X Axis
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('showRefLabels')">
+        <label>
+          <input type="checkbox" [checked]="showRefLabels" (change)="showRefLabels = $event.target.checked">
+          Show Reference Labels
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('showRefLines')">
+        <label>
+          <input type="checkbox" [checked]="showRefLines" (change)="showRefLines = $event.target.checked">
+          Show Reference Lines
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('showYAxis')">

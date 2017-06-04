@@ -141,7 +141,8 @@ const chartGroups = [
           'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
           'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
-          'rangeFillOpacity', 'roundDomains', 'tooltipDisabled'
+          'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
+          'referenceLines', 'showRefLabels'
         ],
         defaults: {
           yAxisLabel: 'GDP Per Capita',
@@ -340,10 +341,19 @@ const chartGroups = [
       {
         name: 'Line Chart with Reference Lines',
         selector: 'line-reference-lines',
-        inputFormat: 'reference-lines',
+        inputFormat: 'multiSeries',
         options: [
-          'curve'
-        ]
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient',
+          'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel',
+          'yAxisLabel', 'autoScale', 'timeline', 'showGridLines', 'curve',
+          'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
+          'referenceLines', 'showRefLabels'
+        ],
+         defaults: {
+          yAxisLabel: 'GDP Per Capita',
+          xAxisLabel: 'Year',
+          linearScale: false
+        }
       }
     ]
   }

@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
+import { AxisService } from './axis.service';
 import { roundedRect } from '../../common/shape.helper';
 import { scaleBand } from 'd3-scale';
 
@@ -34,89 +35,118 @@ import { scaleBand } from 'd3-scale';
       </svg:g>
     </svg:g>
   
-    <svg:path *ngIf="referenceLines"
+    <svg:path *ngIf="refMax && refMin && showRefLines && showGridLines"
       class=""
       stroke="none"
       [attr.d]="path"
       [attr.fill]="fill"
-      fill-opacity="0.15"
+      fill-opacity="0.12"
       [attr.transform]="gridLineTransform()"
     />
-      <svg:g *ngIf="referenceLines"
-      [attr.transform]="transform(referenceLines[0].max.value)">
-    <svg:line
-    class="max-ref-path refline-path gridline-path-horizontal"
-      x1="0" stroke-dasharray="5, 5"
-      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
-    </svg:g>
-
-    <svg:g *ngIf="referenceLines"
-      [attr.transform]="transform(referenceLines[0].avg.value)">
-    <svg:line
-    class="avg-ref-path refline-path gridline-path-horizontal"
-      x1="0" stroke-dasharray="5, 5"
-      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
-    </svg:g>
-    <svg:g *ngIf="referenceLines"
-      [attr.transform]="transform(referenceLines[0].min.value)">
-    <svg:line
-    class="min-ref-path refline-path gridline-path-horizontal"
-      x1="0" stroke-dasharray="5, 5"
-      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
-    </svg:g>
-    <svg:g [attr.transform]="transform(referenceLines[0].max.value)">
-      <title>{{referenceLines[0].max.name}}</title>
-      <svg:text
-        stroke-width="0.01"
-        [attr.dy]="dy"
-        [attr.x]="gridLineWidth + outerTickSize + innerTickSize"
-        [attr.text-anchor]="textAnchor"
-        [style.font-size]="'12px'">
-        {{referenceLines[0].max.name}}
-      </svg:text>
-    </svg:g>
-    <svg:g [attr.transform]="transform(referenceLines[0].avg.value)">
-      <title>{{referenceLines[0].avg.name}}</title>
-      <svg:text
-        stroke-width="0.01"
-        [attr.dy]="dy"
-        [attr.x]="gridLineWidth + outerTickSize + innerTickSize"
-        [attr.text-anchor]="textAnchor"
-        [style.font-size]="'12px'">
-        {{referenceLines[0].avg.name}}
-      </svg:text>
-    </svg:g>
-    <svg:g [attr.transform]="transform(referenceLines[0].min.value)">
-      <title>{{referenceLines[0].min.name}}</title>
-      <svg:text
-        stroke-width="0.01"
-        [attr.dy]="dy"
-        [attr.x]="gridLineWidth + outerTickSize + innerTickSize"
-        [attr.text-anchor]="textAnchor"
-        [style.font-size]="'12px'">
-        {{referenceLines[0].min.name}}
-      </svg:text>
-    </svg:g>
     <svg:g *ngFor="let tick of ticks"
       [attr.transform]="transform(tick)">
       <svg:g
         *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
-        <svg:line
+        <svg:line *ngIf="showRefLabels"
+          class="gridline-path gridline-path-horizontal"
+          x1="0"
+          [attr.x2]="gridLineWidth - verticalSpacing" />
+        <svg:line *ngIf="!showRefLabels"
           class="gridline-path gridline-path-horizontal"
           x1="0"
           [attr.x2]="gridLineWidth" />
       </svg:g>
     </svg:g>
+    <svg:g *ngIf="showRefLines && showGridLines" [attr.transform]="yAxisChanges.transform">
+    <svg:g *ngIf="refMax && !referenceLines.value"
+      [attr.transform]="transform(referenceLines[0].max.value)">
+    <svg:line
+    class="max-ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth - (yAxisChanges.value * 2)" [attr.transform]="gridLineTransform()"/>
+    <svg:g *ngIf="referenceLines[0].max.name && showRefLabels && !referenceLines.value"
+      [attr.transform]="transform(referenceLines[0].max.value)">
+      <title>{{trimLabel(tickFormat(referenceLines[0].max.value))}}</title>
+      <svg:text
+        stroke-width="0.01"
+        [attr.dy]="dy"
+        [attr.x]="(gridLineWidth - yAxisChanges.value) + 10"
+        [attr.text-anchor]="textAnchor"
+        [style.font-size]="'12px'">
+        {{referenceLines[0].max.name}}
+      </svg:text>
+    </svg:g>
+    </svg:g>
+
+    <svg:g *ngIf="refAvg && !referenceLines.value"
+      [attr.transform]="transform(referenceLines[0].avg.value)">
+    <svg:line
+    class="avg-ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth - (yAxisChanges.value * 2)" [attr.transform]="gridLineTransform()"/>
+      <svg:g *ngIf="referenceLines[0].avg.name && showRefLabels && !referenceLines.value"
+        [attr.transform]="transform(referenceLines[0].avg.value)">
+        <title>{{trimLabel(tickFormat(referenceLines[0].avg.value))}}</title>
+        <svg:text
+          stroke-width="0.01"
+          [attr.dy]="dy"
+          [attr.x]="(gridLineWidth - yAxisChanges.value) + 10"
+          [attr.text-anchor]="textAnchor"
+          [style.font-size]="'12px'">
+          {{referenceLines[0].avg.name}}
+        </svg:text>
+      </svg:g>
+    </svg:g>
+
+    <svg:g *ngIf="refMin && !referenceLines.value"
+      [attr.transform]="transform(referenceLines[0].min.value, verticalSpacing)" >
+    <svg:line
+    class="min-ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth - (yAxisChanges.value * 2)" [attr.transform]="gridLineTransform()"/>
+    <svg:g *ngIf="referenceLines[0].min.name && showRefLabels && !referenceLines.value" 
+      [attr.transform]="transform(referenceLines[0].min.value)">
+      <title>{{trimLabel(tickFormat(referenceLines[0].min.value))}}</title>
+      <svg:text
+        stroke-width="0.01"
+        [attr.dy]="dy"
+        [attr.x]="(gridLineWidth - yAxisChanges.value) + 10"
+        [attr.text-anchor]="textAnchor"
+        [style.font-size]="'12px'">
+        {{referenceLines[0].min.name}}
+      </svg:text>
+    </svg:g>
+    </svg:g>
+
+    <svg:g *ngIf="referenceLines.name && showRefLines"
+      [attr.transform]="transform(referenceLines.value)">
+    <svg:line
+    class="ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth - (yAxisChanges.value * 2)" [attr.transform]="gridLineTransform()"/>
+    </svg:g>
+      <svg:g *ngIf="referenceLines.name && showRefLabels" [attr.transform]="transform(referenceLines.value)">
+      <title>{{trimLabel(tickFormat(referenceLines.value))}}</title>
+      <svg:text 
+        stroke-width="0.01"
+        [attr.dy]="dy"
+        [attr.x]="(gridLineWidth - yAxisChanges.value) + 10"
+        [attr.text-anchor]="textAnchor"
+        [style.font-size]="'12px'">
+        {{referenceLines.name}}
+      </svg:text>
+    </svg:g>
+  </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisTicksComponent implements OnChanges, AfterViewInit {
-path
+
+path;
 radius = Math.min(this.height, 0);
 edges: boolean[] = [false, false, false, false];
 
-// path="M5,2h334.74745159539174a5,5 0 0 1 5,5v21a5,5 0 0 1 -5,5h-334.74745159539174h-5v-5v-21v-5h5z";
 fill = '#666666';
 
   @Input() scale;
@@ -129,7 +159,8 @@ fill = '#666666';
   @Input() gridLineWidth;
   @Input() height;
   @Input() referenceLines;
-
+  @Input() showRefLabels: boolean = false;
+  @Input() showRefLines: boolean = false;
   @Output() dimensionsChanged = new EventEmitter();
 
   innerTickSize: any = 6;
@@ -153,10 +184,12 @@ fill = '#666666';
   refMax;
   refMin;
   refAvg;
+  refLine;
+  yAxisChanges = {transform: `translate(0, 0)`, value: 0};
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
-  constructor() {
+  constructor(private _axisService: AxisService) {
     this.trimLabel = trimLabel;
   }
 
@@ -165,11 +198,6 @@ fill = '#666666';
   }
 
   ngAfterViewInit(): void {
-    if (this.referenceLines) {
-      this.refMax = this.adjustedScale(this.referenceLines[0].max.value);
-      this.refAvg = this.adjustedScale(this.referenceLines[0].avg.value);
-      this.refMin = this.adjustedScale(this.referenceLines[0].min.value);
-    }
     setTimeout(() => this.updateDims());
   }
 
@@ -189,11 +217,11 @@ fill = '#666666';
   }
 
   update(): void {
-    console.log(this.ticksElement)
     let scale;
-    if (this.referenceLines) {
-      this.path = roundedRect(0, this.refMax - this.innerTickSize, this.gridLineWidth - this.outerTickSize + this.innerTickSize, (this.refMin - this.refMax) - this.tickPadding, 0, this.edges);
-    }
+    this._axisService.getXaxis().subscribe(axis => {
+      this.yAxisChanges = axis;
+    });
+
     const sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
     this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 
@@ -216,6 +244,8 @@ fill = '#666666';
     this.adjustedScale = scale.bandwidth ? function(d) {
       return scale(d) + scale.bandwidth() * 0.5;
     } : scale;
+
+    this.setReferencelines();
 
     switch (this.orient) {
       case 'top':
@@ -256,8 +286,20 @@ fill = '#666666';
         break;
       default:
     }
-
     setTimeout(() => this.updateDims());
+  }
+
+  setReferencelines(): void {
+    if (this.showRefLines && this.referenceLines[0]) {
+      this.refMax = this.adjustedScale(this.referenceLines[0].max.value);
+      this.refAvg = this.adjustedScale(this.referenceLines[0].avg.value);
+      this.refMin = this.adjustedScale(this.referenceLines[0].min.value);
+
+      this.path = roundedRect(this.yAxisChanges.value,
+      this.refMax,
+      this.gridLineWidth - (this.yAxisChanges.value * 2),
+      this.refMin - this.refMax, 0, this.edges);
+    }
   }
 
   getTicks(): any {

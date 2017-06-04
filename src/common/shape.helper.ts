@@ -6,7 +6,6 @@
  * @returns {string}
  */
 export function roundedRect(x, y, w, h, r, [tl, tr, bl, br]: boolean[]) {
-  console.log(x, y, w, h, r, [tl, tr, bl, br])
   let retval = '';
 
   retval = `M${[x + r, y]}`;
