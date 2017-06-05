@@ -12,14 +12,13 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
-import { AxisService } from './axis.service';
 
 @Component({
   selector: 'g[ngx-charts-x-axis-ticks]',
   template: `
     <svg:g #ticksel>
-      <svg:g *ngFor="let tick of ticks; let i = index; let f = first" class="tick"
-        [attr.transform]="tickTransform(tick, f)">
+      <svg:g *ngFor="let tick of ticks" class="tick"
+        [attr.transform]="tickTransform(tick)">
         <title>{{tickFormat(tick)}}</title>
         <svg:text
           stroke-width="0.01"
@@ -31,8 +30,8 @@ import { AxisService } from './axis.service';
       </svg:g>
     </svg:g>
 
-    <svg:g *ngFor="let tick of ticks; let i = index"
-      [attr.transform]="tickTransform(tick, i)">
+    <svg:g *ngFor="let tick of ticks"
+      [attr.transform]="tickTransform(tick)">
       <svg:g *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
         <svg:line
@@ -75,7 +74,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
-  constructor(private _axisSerice: AxisService) {
+  constructor() {
     this.trimLabel = trimLabel;
   }
 
@@ -177,11 +176,7 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
     return Math.floor(this.width / tickWidth);
   }
 
-  tickTransform(tick, i): string {
-    if (i === true) {
-      const translateXaxis = this.adjustedScale(tick);
-      this._axisSerice.setXaxis(translateXaxis);
-    }
+  tickTransform(tick): string {
     return 'translate(' + this.adjustedScale(tick) + ',' + this.verticalSpacing + ')';
   }
 

@@ -66,6 +66,7 @@ import { id } from '../utils/id';
           [referenceLines]="referenceLines"
           [showRefLines]="showRefLines"
           [showRefLabels]="showRefLabels"
+          [refLabelsWidth]="refLabelsWidth"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
         <svg:g [attr.clip-path]="clipPath">
@@ -206,6 +207,7 @@ export class LineChartComponent extends BaseChartComponent {
   filteredDomain: any;
   legendOptions: any;
   hasRange: boolean; // whether the line has a min-max range around it
+  refLabelsWidth: number = 35;
 
   timelineWidth: any;
   timelineHeight: number = 50;
@@ -345,6 +347,10 @@ export class LineChartComponent extends BaseChartComponent {
 
   getXScale(domain, width): any {
     let scale;
+  
+    if (this.showRefLabels && this.showRefLines && this.showGridLines) {
+      this.width = this.width + this.refLabelsWidth;
+    }
 
     if (this.scaleType === 'time') {
       scale = scaleTime()

@@ -28,6 +28,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [referenceLines]="referenceLines"
         [showRefLines]="showRefLines"
         [showRefLabels]="showRefLabels"
+        [refLabelsWidth]="refLabelsWidth"
         [height]="dims.height"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
@@ -57,6 +58,7 @@ export class YAxisComponent implements OnChanges {
   @Input() referenceLines;
   @Input() showRefLines;
   @Input() showRefLabels;
+  @Input() refLabelsWidth;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
