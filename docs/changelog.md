@@ -23,7 +23,7 @@
 - Enhancement: Disable pointer if no click events are attached to number cards (#378)
 - Enhancement: Added gradiant to tree map chart (#382)
 - Enhancement: Added support for inverted colors from rgba values in number cards (#366)
-- Enhancement: Added value and albel formatting to tree map (#383)
+- Enhancement: Added value and label formatting to tree map (#383)
 - Refactor: loremess restrictive angular dependency versioning (#358)
 - Bug: Fixed types in gauge chart (#364)
 - Bug: Fixed axis and tooltips on bubble chart (#352)
