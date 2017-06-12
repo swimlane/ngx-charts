@@ -12,6 +12,6 @@ Below is a list of community blog posts or projects that use ngx-charts:
 
 ## Companies Using ngx-charts:
 - [Swimlane](http://swimlane.com)
-- [Terradata](https://twitter.com/kyleledbetter/status/826136067203928064)
+- [Teradata](https://twitter.com/kyleledbetter/status/826136067203928064)
 
 If you have a project using the charts and would love to share with the community, please reach out on github issues and we would love to add it to the growing list!
