@@ -72,7 +72,7 @@ export class YAxisComponent implements OnChanges {
 
   update(): void {
     if (this.yOrient === 'right') {
-      this.labelOffset = 80;
+      this.labelOffset = 65;
     }
     
     this.offset = this.yAxisOffset;

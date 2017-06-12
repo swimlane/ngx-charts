@@ -157,7 +157,6 @@ export class AppComponent implements OnInit {
   gaugePreviousValue: number = 70;
 
   // Combo Chart
-  showComboLegend: boolean = true;
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;
   comboBarScheme: any[];

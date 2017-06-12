@@ -25,13 +25,12 @@ import { NgxChartsModule, BaseChartComponent, LineComponent, LineSeriesComponent
 import { area, line, curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src';
-import { id } from '../../src/utils/id';
 
 @Component({
   selector: 'combo-chart-component',
   template:  `
     <ngx-charts-chart
-      [view]="[width + 100, height]"
+      [view]="[width + legendSpacing, height]"
       [showLegend]="legend"
       [legendOptions]="legendOptions"
       [activeEntries]="activeEntries"
@@ -196,6 +195,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   hoveredVertical;
   yOrientLeft = 'left';
   yOrientRight = 'right';
+  legendSpacing = 0;
   
   trackBy(index, item): string {
     return item.name;
@@ -216,6 +216,12 @@ export class ComboChartComponent extends BaseChartComponent  {
       showLegend: this.legend,
       legendType: this.schemeType
     });
+    
+    if(this.showYAxisLabel) {
+      this.legendSpacing = 100;
+    } else {
+      this.legendSpacing = 40;
+    }
 
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
