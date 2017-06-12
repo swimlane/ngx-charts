@@ -98,6 +98,8 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
       this.width = width;
       this.dimensionsChanged.emit({ width });
       setTimeout(() => this.updateDims());
+    } else if(!width) {
+      this.dimensionsChanged.emit({ width });
     }
   }
 
