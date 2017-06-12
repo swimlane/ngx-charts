@@ -64,6 +64,7 @@ import { id } from '../../src/utils/id';
           *ngIf="yAxis"
           [yScale]="yScaleLine"
           [dims]="dims"
+          [yOrient]="yOrientRight"
           [showGridLines]="showGridLines"
           [showLabel]="showRightYAxisLabel"
           [labelText]="yAxisLabelRight"
@@ -194,6 +195,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   filteredDomain;
   hoveredVertical;
   yOrientLeft = 'left';
+  yOrientRight = 'right';
   
   trackBy(index, item): string {
     return item.name;

@@ -287,9 +287,9 @@ const chartGroups = [
       {
         name: 'Combo Chart',
         selector: 'combo-chart',
-        inputFormat: 'multi',
+        inputFormat: 'comboChart',
         options: [
-          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'showXAxis', 'showYAxis', 'gradient', 'barPadding',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'showGridLines', 'roundDomains', 'tooltipDisabled'
         ]

@@ -50,7 +50,7 @@ export class YAxisComponent implements OnChanges {
   @Input() labelText;
   @Input() yAxisTickInterval;
   @Input() yAxisTickCount: any;
-  @Input()  yOrient: string = 'right';
+  @Input()  yOrient: string = 'left';
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
@@ -88,8 +88,13 @@ export class YAxisComponent implements OnChanges {
   }
 
   emitTicksWidth({ width }): void {
-    if (width !== this.labelOffset) {
+    if (width !== this.labelOffset && this.yOrient === 'right' ) {
       this.labelOffset = width + this.labelOffset;
+      setTimeout(() => {
+        this.dimensionsChanged.emit({width});
+      }, 0);
+    } else if (width !== this.labelOffset) {
+      this.labelOffset = width; 
       setTimeout(() => {
         this.dimensionsChanged.emit({width});
       }, 0);
