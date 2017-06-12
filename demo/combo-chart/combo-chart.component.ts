@@ -22,12 +22,12 @@ import {
 } from '@angular/animations';
 
 import { NgxChartsModule, BaseChartComponent, LineComponent, LineSeriesComponent } from '../../../ngx-charts';
-import { YAxisComponent } from '../common/axes/y-axis.component';
+// import { YAxisComponent } from '../common/axes/y-axis.component';
 import { area, line, curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-import { ColorHelper } from '../common/color.helper';
-import { id } from '../utils/id';
+// import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
+// import { ColorHelper } from '../common/color.helper';
+// import { id } from '../utils/id';
 
 @Component({
   selector: 'combo-chart-component',
