@@ -51,10 +51,11 @@ import { id } from '../utils/id';
           [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-y-axis
+        <svg:g ngx-charts-right-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
+          [yOrient]="yOrientLeft"
           [showGridLines]="showGridLines"
           [showLabel]="showYAxisLabel"
           [labelText]="yAxisLabel"
@@ -194,6 +195,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   xSet;
   filteredDomain;
   hoveredVertical;
+  yOrientLeft = "left";
   
   trackBy(index, item): string {
     return item.name;

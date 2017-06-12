@@ -58,11 +58,12 @@ export class RightYAxisComponent implements OnChanges {
   offset: any;
   transform: any;
   yAxisOffset: number = -5;
-  labelOffset: number = 35;
+  labelOffset: number = 15;
   fill: string = 'none';
   stroke: string = '#CCC';
   tickStroke: string = '#CCC';
   strokeWidth: number = 1;
+  
 
   @ViewChild(RightYAxisTicksComponent) ticksComponent: RightYAxisTicksComponent;
 
@@ -71,6 +72,10 @@ export class RightYAxisComponent implements OnChanges {
   }
 
   update(): void {
+    if (this.yOrient === 'right') {
+      this.labelOffset = 80;
+    }
+    
     this.offset = this.yAxisOffset;
     if (this.yOrient === 'right') {
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
