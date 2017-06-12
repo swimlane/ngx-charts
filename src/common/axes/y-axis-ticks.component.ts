@@ -10,8 +10,8 @@ import {
   ChangeDetectionStrategy,
   SimpleChanges
 } from '@angular/core';
-import { trimLabel } from '../../common/trim-label.helper';
-import { reduceTicks } from '../../common/axes/ticks.helper';
+import { trimLabel } from '../trim-label.helper';
+import { reduceTicks } from './ticks.helper';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',

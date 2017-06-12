@@ -1,6 +1,6 @@
 declare var APP_VERSION: string;
 
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import * as shape from 'd3-shape';
 import * as d3 from 'd3';
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
   ];
 
   colorSets: any;
-  colorScheme: any[];
+  colorScheme: any;
   schemeType: string = 'ordinal';
   selectedColorScheme: string;
   rangeFillOpacity: number = 0.15;
