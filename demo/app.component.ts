@@ -621,10 +621,4 @@ export class AppComponent implements OnInit {
   getFlag(country) {
     return this.countries.find(c => c.name === country).emoji;
   }
-  
-  /*
-   **
-   Line Chart with reference lines
-   **
-  */
 }
