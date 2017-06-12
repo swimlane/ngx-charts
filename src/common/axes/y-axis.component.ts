@@ -72,9 +72,7 @@ export class YAxisComponent implements OnChanges {
   }
 
   update(): void {
-    
     this.offset = this.yAxisOffset;
-
     if (this.yOrient === 'right') {
       this.labelOffset = 65;
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
