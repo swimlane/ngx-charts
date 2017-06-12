@@ -22,12 +22,10 @@ import {
 } from '@angular/animations';
 
 import { NgxChartsModule, BaseChartComponent, LineComponent, LineSeriesComponent } from '../../../ngx-charts';
-// import { YAxisComponent } from '../common/axes/y-axis.component';
 import { area, line, curveLinear } from 'd3-shape';
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
-// import { calculateViewDimensions, ViewDimensions } from '../common/view-dimensions.helper';
-// import { ColorHelper } from '../common/color.helper';
-// import { id } from '../utils/id';
+import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src';
+import { id } from '../../src/utils/id';
 
 @Component({
   selector: 'combo-chart-component',
@@ -51,7 +49,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           [tickFormatting]="xAxisTickFormatting"
           (dimensionsChanged)="updateXAxisHeight($event)">
         </svg:g>
-        <svg:g ngx-charts-right-y-axis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScale"
           [dims]="dims"
@@ -62,7 +60,7 @@ import { scaleBand, scaleLinear, scalePoint, scaleTime } from 'd3-scale';
           [tickFormatting]="yAxisTickFormatting"
           (dimensionsChanged)="updateYAxisWidth($event)">
         </svg:g>
-        <svg:g ngx-charts-right-y-axis
+        <svg:g ngx-charts-y-axis
           *ngIf="yAxis"
           [yScale]="yScaleLine"
           [dims]="dims"
@@ -195,7 +193,7 @@ export class ComboChartComponent extends BaseChartComponent  {
   xSet;
   filteredDomain;
   hoveredVertical;
-  yOrientLeft = "left";
+  yOrientLeft = 'left';
   
   trackBy(index, item): string {
     return item.name;

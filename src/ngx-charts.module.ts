@@ -11,7 +11,6 @@ import { NumberCardModule } from './number-card/number-card.module';
 import { PieChartModule } from './pie-chart/pie-chart.module';
 import { TreeMapModule } from './tree-map/tree-map.module';
 import { GaugeModule } from './gauge/gauge.module';
-import { ComboChartModule } from './combo-chart/combo-chart.module';
 @NgModule({
   exports: [
     ChartCommonModule,
@@ -25,8 +24,7 @@ import { ComboChartModule } from './combo-chart/combo-chart.module';
     NumberCardModule,
     PieChartModule,
     TreeMapModule,
-    GaugeModule,
-    ComboChartModule
+    GaugeModule
   ]
 })
 export class NgxChartsModule {}

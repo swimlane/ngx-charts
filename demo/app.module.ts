@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { SparklineComponent } from './sparkline/sparkline.component';
 import { NgxChartsModule } from '../src';
 import { NgxUIModule } from '@swimlane/ngx-ui';
+import { ComboChartComponent, ComboSeriesVerticalComponent } from './combo-chart';
 
 @NgModule({
   providers: [
@@ -16,7 +17,7 @@ import { NgxUIModule } from '@swimlane/ngx-ui';
     }
   ],
   imports: [NgxChartsModule, BrowserModule, BrowserAnimationsModule, FormsModule, NgxUIModule],
-  declarations: [AppComponent, SparklineComponent],
+  declarations: [AppComponent, SparklineComponent, ComboChartComponent, ComboSeriesVerticalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

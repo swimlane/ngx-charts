@@ -161,7 +161,6 @@ export class YAxisComponent implements OnChanges {
   tickStroke: string = '#CCC';
   strokeWidth: number = 1;
   
-
   @ViewChild(YAxisTicksComponent) ticksComponent: YAxisTicksComponent;
 
   ngOnChanges(changes: SimpleChanges): void {
