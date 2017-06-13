@@ -646,6 +646,23 @@
         [results]="sparklineData"
         [curve]="curve">
       </ngx-charts-sparkline>
+      <ngx-charts-timeline-filter-bar-chart
+        *ngIf="chartType === 'timeline-filter-bar-chart-demo'"
+        [view]="view"
+        class="chart-container"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="timelineFilterBarData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="false"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="'Executions'"
+        [showGridLines]="showGridLines"
+        (onFilter)="onFilter($event)">
+      </ngx-charts-timeline-filter-bar-chart>
     </div>
   </div>
   <div class="sidebar">
