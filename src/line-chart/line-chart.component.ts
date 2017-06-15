@@ -348,7 +348,7 @@ export class LineChartComponent extends BaseChartComponent {
   getXScale(domain, width): any {
     let scale;
   
-    if (this.showRefLabels && this.showRefLines && this.showGridLines) {
+    if (this.showRefLabels && this.showRefLines && this.showGridLines && this.yAxis) {
       this.width = this.width + this.refLabelsWidth;
     }
 

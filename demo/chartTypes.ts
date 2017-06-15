@@ -354,6 +354,15 @@ const chartGroups = [
           xAxisLabel: 'Year',
           linearScale: false
         }
+      },
+      {
+        name: 'Timeline Filter Bar Chart',
+        selector: 'timeline-filter-bar-chart-demo',
+        inputFormat: 'singleSeries',
+        options: [
+          'colorScheme', 'schemeType', 'showXAxis', 'showYAxis', 'gradient', 'showGridLines',
+          'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel'
+        ]
       }
     ]
   }
