@@ -127,7 +127,7 @@ import { scaleBand } from 'd3-scale';
       <svg:text 
         stroke-width="0.01"
         [attr.dy]="dy"
-        [attr.x]="gridLineWidth + 10"
+        [attr.x]="gridLineWidth + refLabelsWidth"
         [attr.text-anchor]="textAnchor"
         [style.font-size]="'12px'">
         {{referenceLines.name}}

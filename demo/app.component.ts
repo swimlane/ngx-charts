@@ -173,13 +173,8 @@ export class AppComponent implements OnInit {
   showRefLabels: boolean = true;
 
   // Single reference line, for DEMO Line Chart with Reference line
-  referenceLines = {  
+  avgRefLine = {  
     value: 37750,
-    name: 'AVG'
-  };
-  // For Chart Type Line Chart
-  timeRefenceLines = {  
-    value: 4350,
     name: 'AVG'
   };
 
@@ -195,14 +190,6 @@ export class AppComponent implements OnInit {
       max: { value: 42500, name: 'MAX' },
       avg: { value: 37750, name: 'AVG' },
       min: { value: 33000, name: 'MIN' }
-    }
-  ];
-  // For Chart Type Line Chart
-  timeRefLines = [
-    {
-      max: { value: 5000, name: 'MAX' },
-      avg: { value: 4350, name: 'AVG' },
-      min: { value: 3700, name: 'MIN' }
     }
   ];
   
