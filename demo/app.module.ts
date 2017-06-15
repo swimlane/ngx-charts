@@ -17,12 +17,19 @@ import { ComboChartComponent, ComboSeriesVerticalComponent } from './combo-chart
       useFactory: getBaseLocation
     }
   ],
-  imports: [NgxChartsModule, BrowserModule, BrowserAnimationsModule, FormsModule, NgxUIModule],
-<<<<<<< HEAD
-  declarations: [AppComponent, SparklineComponent, ComboChartComponent, ComboSeriesVerticalComponent],
-=======
-  declarations: [AppComponent, SparklineComponent, TimelineFilterBarChartComponent],
->>>>>>> master
+  imports: [
+    NgxChartsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    NgxUIModule
+  ],
+  declarations: [AppComponent,
+    SparklineComponent,
+    TimelineFilterBarChartComponent,
+    ComboChartComponent,
+    ComboSeriesVerticalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

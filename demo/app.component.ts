@@ -603,7 +603,10 @@ export class AppComponent implements OnInit {
     return this.countries.find(c => c.name === country).emoji;
   }
 
-<<<<<<< HEAD
+  onFilter(event) {
+    console.log('timeline filter', event);
+  }
+
   /*
   **
   Combo Chart
@@ -674,9 +677,4 @@ export class AppComponent implements OnInit {
   End of Combo Chart
   **
   */
-=======
-  onFilter(event) {
-    console.log('timeline filter', event);
-  }
->>>>>>> master
 }
