@@ -213,6 +213,24 @@ export function generateGraph(nodeCount: number) {
   return { links, nodes };
 }
 
+export function timelineFilterBarData() {
+  const results: any[] = [];
+  const dataPoints = 30;
+  const domain: Date[] = []; // array of time stamps in milliseconds
+  const dayLength = 24 * 60 * 60 * 1000;
+  let date = 1473700105009; // Sep 12, 2016
+  for (let j = 0; j < dataPoints; j++) {
+    // random dates between Sep 12, 2016 and Sep 24, 2016
+    results.push({
+      name: new Date(date),
+      value: Math.floor(Math.random() * 300)
+    });
+    date += dayLength;
+  }
+
+  return results;
+}
+
 export function generateData(seriesLength: number, includeMinMaxRange: boolean, dataPoints: number = 5): any[] {
   const results = [];
 
