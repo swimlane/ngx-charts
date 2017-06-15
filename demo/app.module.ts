@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF, Location } from '@angular/common';
 import { AppComponent } from './app.component';
 import { SparklineComponent } from './sparkline/sparkline.component';
+import { TimelineFilterBarChartComponent } from './timeline-filter-bar-chart/timeline-filter-bar-chart.component';
 import { NgxChartsModule } from '../src';
 import { NgxUIModule } from '@swimlane/ngx-ui';
 import { ComboChartComponent, ComboSeriesVerticalComponent } from './combo-chart';
@@ -17,7 +18,11 @@ import { ComboChartComponent, ComboSeriesVerticalComponent } from './combo-chart
     }
   ],
   imports: [NgxChartsModule, BrowserModule, BrowserAnimationsModule, FormsModule, NgxUIModule],
+<<<<<<< HEAD
   declarations: [AppComponent, SparklineComponent, ComboChartComponent, ComboSeriesVerticalComponent],
+=======
+  declarations: [AppComponent, SparklineComponent, TimelineFilterBarChartComponent],
+>>>>>>> master
   bootstrap: [AppComponent]
 })
 export class AppModule { }

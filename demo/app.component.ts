@@ -7,7 +7,7 @@ import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
 import { formatLabel } from '../src/common/label.helper';
-import { single, multi, bubble, generateData, generateGraph, treemap } from './data';
+import { single, multi, bubble, generateData, generateGraph, treemap, timelineFilterBarData } from './data';
 import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 import { barChart, lineChartSeries } from './combo-chart-data';
@@ -49,6 +49,7 @@ export class AppComponent implements OnInit {
   calendarData: any[];
   statusData: any[];
   sparklineData: any[];
+  timelineFilterBarData: any[];
   graph: { links: any[], nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -207,6 +208,7 @@ export class AppComponent implements OnInit {
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
     this.sparklineData = generateData(1, false, 30);
+    this.timelineFilterBarData = timelineFilterBarData();
   }
 
   get dateDataWithOrWithoutRange() {
@@ -601,6 +603,7 @@ export class AppComponent implements OnInit {
     return this.countries.find(c => c.name === country).emoji;
   }
 
+<<<<<<< HEAD
   /*
   **
   Combo Chart
@@ -671,4 +674,9 @@ export class AppComponent implements OnInit {
   End of Combo Chart
   **
   */
+=======
+  onFilter(event) {
+    console.log('timeline filter', event);
+  }
+>>>>>>> master
 }
