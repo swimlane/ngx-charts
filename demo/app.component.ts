@@ -175,7 +175,7 @@ export class AppComponent implements OnInit {
   // Single reference line, for DEMO Line Chart with Reference line
   avgRefLine = {  
     value: 37750,
-    name: 'AVG'
+    name: 'Average'
   };
 
   /* Supports max, average and min.
@@ -187,9 +187,9 @@ export class AppComponent implements OnInit {
   */
   refLines = [
     {
-      max: { value: 42500, name: 'MAX' },
-      avg: { value: 37750, name: 'AVG' },
-      min: { value: 33000, name: 'MIN' }
+      max: { value: 42500, name: 'Maximum' },
+      avg: { value: 37750, name: 'Average' },
+      min: { value: 33000, name: 'Minimum' }
     }
   ];
   

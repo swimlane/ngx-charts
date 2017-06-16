@@ -69,9 +69,10 @@ import { scaleBand } from 'd3-scale';
       <svg:text
         stroke-width="0.01"
         [attr.dy]="dy"
-        [attr.x]="gridLineWidth + refLabelsWidth"
+        [attr.y]="-6"
+        [attr.x]="gridLineWidth"
         [attr.text-anchor]="textAnchor"
-        [style.font-size]="'12px'">
+        [style.font-size]="'9px'">
         {{referenceLines[0].max.name}}
       </svg:text>
     </svg:g>
@@ -88,9 +89,10 @@ import { scaleBand } from 'd3-scale';
         <svg:text
           stroke-width="0.01"
           [attr.dy]="dy"
-          [attr.x]="gridLineWidth + refLabelsWidth"
+          [attr.y]="-6"
+          [attr.x]="gridLineWidth"
           [attr.text-anchor]="textAnchor"
-          [style.font-size]="'12px'">
+          [style.font-size]="'9px'">
           {{referenceLines[0].avg.name}}
         </svg:text>
       </svg:g>
@@ -107,9 +109,10 @@ import { scaleBand } from 'd3-scale';
       <svg:text
         stroke-width="0.01"
         [attr.dy]="dy"
-        [attr.x]="gridLineWidth + refLabelsWidth"
+        [attr.y]="-6"
+        [attr.x]="gridLineWidth"
         [attr.text-anchor]="textAnchor"
-        [style.font-size]="'12px'">
+        [style.font-size]="'9px'">
         {{referenceLines[0].min.name}}
       </svg:text>
     </svg:g>
@@ -127,9 +130,10 @@ import { scaleBand } from 'd3-scale';
       <svg:text 
         stroke-width="0.01"
         [attr.dy]="dy"
-        [attr.x]="gridLineWidth + refLabelsWidth"
+        [attr.y]="-6"
+        [attr.x]="gridLineWidth"
         [attr.text-anchor]="textAnchor"
-        [style.font-size]="'12px'">
+        [style.font-size]="'9px'">
         {{referenceLines.name}}
       </svg:text>
     </svg:g>
@@ -157,7 +161,6 @@ fill = '#666666';
   @Input() referenceLines;
   @Input() showRefLabels: boolean = false;
   @Input() showRefLines: boolean = false;
-  @Input() refLabelsWidth;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -215,7 +218,6 @@ fill = '#666666';
 
   update(): void {
     let scale;
-
     const sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
     this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 
