@@ -626,7 +626,7 @@ export class AppComponent implements OnInit {
   }
 
   yRightAxisScale(min, max) {
-    return {min: `${0}`, max: `${max}`};
+    return {min: `${min}`, max: `${max}`};
   }
 
   yLeftTickFormat(data) {
@@ -640,41 +640,14 @@ export class AppComponent implements OnInit {
   setComboBarScheme(name) {
     this.comboBarScheme = this.colorSets.find(s => s.name === name);
   }
+  /*
+  **
+  End of Combo Chart
+  **
+  */
 
   onSelect(event) {
     console.log(event);
   }
 
-  /*
-  **
-  [syncAxis]=="syncAxis" is used to sync both axes to allow for the data to be in the same chart view.
-  The examples is using percentages where the max will never be over 100%.
-  **
-  */
-
-  syncAxis(results) {
-    const scaled = results.map(d => {
-    const valueLength = Math.round(d.value).toString().length;
-    const scaledAxis = checkScaledAxis(valueLength, d.value);
-    return {name: d.name, value: scaledAxis};
-  });
-
-    function checkScaledAxis(length, value) {
-      const val = value;
-      if(length === 5) {
-        return val / 1000;
-      } else if(length === 4) {
-        return val / 1000;
-      } else if(length === 3) {
-        return val / 100;
-      } else { 
-        return val;
-      }
-    }
-  }
-    /*
-  **
-  End of Combo Chart
-  **
-  */
 }

@@ -280,9 +280,6 @@ export class ComboChartComponent extends BaseChartComponent  {
       {name: this.yAxisLabel,
       series: this.results
     });
-    if (this.syncAxis) {
-      this.syncAxis(this.results);
-    }
     return this.combinedSeries.map(d => d.name);
   }
 
