@@ -626,7 +626,7 @@ export class AppComponent implements OnInit {
   }
 
   yRightAxisScale(min, max) {
-    return {min: `${min}`, max: `${max}`};
+    return {min: `${0}`, max: `${max}`};
   }
 
   yLeftTickFormat(data) {
@@ -648,7 +648,7 @@ export class AppComponent implements OnInit {
   /*
   **
   [syncAxis]=="syncAxis" is used to sync both axes to allow for the data to be in the same chart view.
-  The examples is using percentages that where the max will never be over 100%.
+  The examples is using percentages where the max will never be over 100%.
   **
   */
 
