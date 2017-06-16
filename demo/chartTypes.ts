@@ -289,7 +289,7 @@ const chartGroups = [
         selector: 'combo-chart',
         inputFormat: 'comboChart',
         options: [
-          'showXAxis', 'showYAxis', 'gradient', 'barPadding',
+          'showXAxis', 'showYAxis', 'gradient',
           'showLegend', 'legendTitle', 'showXAxisLabel', 'xAxisLabel', 'showYAxisLabel', 'yAxisLabel',
           'showGridLines', 'roundDomains', 'tooltipDisabled'
         ]

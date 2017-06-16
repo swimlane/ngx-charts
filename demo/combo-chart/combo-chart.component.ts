@@ -82,6 +82,7 @@ import { calculateViewDimensions, ViewDimensions, ColorHelper } from '../../src'
           [activeEntries]="activeEntries"
           (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)"
+          (bandwidth)="updateLineWidth($event)"
           (select)="onClick($event)">
         </svg:g>
       </svg:g>
@@ -154,7 +155,6 @@ export class ComboChartComponent extends BaseChartComponent  {
   @Input() xAxisTickFormatting: any;
   @Input() yAxisTickFormatting: any;
   @Input() yRightAxisTickFormatting: any;
-  @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
   @Input() colorSchemeLine: any[];
   @Input() autoScale;
@@ -196,6 +196,8 @@ export class ComboChartComponent extends BaseChartComponent  {
   yOrientLeft = 'left';
   yOrientRight = 'right';
   legendSpacing = 0;
+  bandwidth;
+  barPadding = 8;
   
   trackBy(index, item): string {
     return item.name;
@@ -216,13 +218,14 @@ export class ComboChartComponent extends BaseChartComponent  {
       showLegend: this.legend,
       legendType: this.schemeType
     });
-    
-    if(this.showYAxisLabel) {
+
+    if (!this.yAxis && this.yAxis) {
+      this.legendSpacing = 0;
+    } else if (this.showYAxisLabel && this.yAxis) {
       this.legendSpacing = 100;
     } else {
-      this.legendSpacing = 40;
+      this.legendSpacing = 0;
     }
-
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
 
@@ -375,7 +378,10 @@ export class ComboChartComponent extends BaseChartComponent  {
 
   getXScaleLine(domain, width): any {
     let scale;
-    const barOffset = ((this.dims.width - this.dims.xOffset + this.barPadding) / this.xDomain.length) / 2;
+    if (this.bandwidth === undefined) {
+      this.bandwidth = (this.dims.width - this.barPadding);
+    }
+
     if (this.scaleType === 'time') {
       scale = scaleTime()
         .range([0, width])
@@ -390,8 +396,7 @@ export class ComboChartComponent extends BaseChartComponent  {
       }
     } else if (this.scaleType === 'ordinal') {
       scale = scalePoint()
-        .range([barOffset, width - barOffset])
-        .padding(0.1)
+        .range([this.bandwidth / 2, width - this.bandwidth / 2])
         .domain(domain);
     }
 
@@ -472,6 +477,10 @@ export class ComboChartComponent extends BaseChartComponent  {
       opts.colors = this.colors.scale;
     }
     return opts;
+  }
+
+  updateLineWidth(width): void {
+    this.bandwidth = width;
   }
 
   updateYAxisWidth({ width }): void {

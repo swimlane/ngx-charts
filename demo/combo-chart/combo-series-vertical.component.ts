@@ -71,6 +71,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() bandwidth = new EventEmitter();
 
   bars: any;
   x: any;
@@ -84,6 +85,7 @@ export class ComboSeriesVerticalComponent implements OnChanges {
     let width;
     if (this.series.length) {
       width = this.xScale.bandwidth();
+      this.bandwidth.emit(width);
     }
 
     let d0 = 0;
