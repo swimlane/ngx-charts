@@ -219,12 +219,12 @@ export class ComboChartComponent extends BaseChartComponent  {
       legendType: this.schemeType
     });
 
-    if (!this.yAxis && this.yAxis) {
+    if (!this.yAxis) {
       this.legendSpacing = 0;
     } else if (this.showYAxisLabel && this.yAxis) {
       this.legendSpacing = 100;
     } else {
-      this.legendSpacing = 0;
+      this.legendSpacing = 40;
     }
     this.xScale = this.getXScale();
     this.yScale = this.getYScale();
