@@ -110,7 +110,6 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
 
   update(): void {
     super.update();
-
     this.dims = calculateViewDimensions({
       width: this.width,
       height: this.height,
@@ -164,9 +163,16 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     this.scaleType = this.getScaleType(values);
     let domain = [];
 
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    domain = [min, max];
+    let min = new Date(Math.min(...values));
+    min.setHours(0);
+    min.setMinutes(0);
+    min.setSeconds(0);
+
+    let max = new Date(Math.max(...values));
+    max.setHours(23);
+    max.setMinutes(59);
+    max.setSeconds(59)
+    domain = [min.getTime(), max.getTime()];
 
     this.xSet = values;
     return domain;
@@ -208,6 +214,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     return scaleBand()
       .rangeRound([0, width])
       .paddingInner(0.1)
+      .paddingOuter(0)
       .domain(domain);
   }
 
@@ -250,7 +257,6 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
   }
 
   updateXAxisHeight({ height }): void {
-    console.log('height', height);
     this.xAxisHeight = height;
     this.update();
   }
