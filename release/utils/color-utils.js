@@ -1,42 +1,32 @@
+import * as d3_color from 'd3-color';
 /**
  * Converts a hex to RGB
- * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
  *
  * @export
  * @param {string} hex
  * @returns {*}
  */
-/**
- * Converts a hex to RGB
- * http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
- *
- * @export
- * @param {string} hex
- * @returns {*}
- */ export function hexToRgb(hex) {
-    var result = hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, function (m, r, g, b) { return '#' + r + r + g + g + b + b; })
-        .substring(1).match(/.{2}/g)
-        .map(function (x) { return parseInt(x, 16); });
-    return {
-        r: result[0],
-        g: result[1],
-        b: result[2]
-    };
+export function hexToRgb(value) {
+    // deprecated, use d3.color()
+    return d3_color.rgb(value);
 }
 /**
- * Accepts a hex color and returns a inverted hex color
+ * Accepts a color (string) and returns a inverted hex color (string)
  * http://stackoverflow.com/questions/9600295/automatically-change-text-color-to-assure-readability
  *
  * @export
- * @param {any} color
+ * @param {any} value
  * @returns {string}
  */
-export function invertColor(hex) {
-    var _a = hexToRgb(hex), r = _a.r, g = _a.g, b = _a.b;
+export function invertColor(value) {
+    var color = d3_color.rgb(value);
+    var r = color.r, g = color.g, b = color.b, opacity = color.opacity;
+    if (opacity === 0) {
+        return color.toString();
+    }
     var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    var darken = (yiq >= 128);
-    var depth = darken ? -.8 : .8;
-    return shadeRGBColor({ r: r, g: g, b: b }, depth);
+    var depth = (yiq >= 128) ? -.8 : .8;
+    return shadeRGBColor(color, depth);
 }
 /**
  * Given a rgb, it will darken/lighten

@@ -12,10 +12,18 @@ var NumberCardComponent = (function (_super) {
     __extends(NumberCardComponent, _super);
     function NumberCardComponent() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.emptyColor = 'rgba(0, 0, 0, 0)';
         _this.innerPadding = 15;
         _this.margin = [10, 10, 10, 10];
         return _this;
     }
+    Object.defineProperty(NumberCardComponent.prototype, "clickable", {
+        get: function () {
+            return !!this.select.observers.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
     NumberCardComponent.prototype.update = function () {
         _super.prototype.update.call(this);
         this.dims = calculateViewDimensions({
@@ -49,7 +57,7 @@ export { NumberCardComponent };
 NumberCardComponent.decorators = [
     { type: Component, args: [{
                 selector: 'ngx-charts-number-card',
-                template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [cardColor]=\"cardColor\"\n          [bandColor]=\"bandColor\"\n          [textColor]=\"textColor\"\n          [emptyColor]=\"emptyColor\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [innerPadding]=\"innerPadding\"\n          [valueFormatting]=\"valueFormatting\"\n          [labelFormatting]=\"labelFormatting\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
+                template: "\n    <ngx-charts-chart\n      [view]=\"[width, height]\"\n      [showLegend]=\"false\">\n      <svg:g [attr.transform]=\"transform\" class=\"number-card chart\" [class.clickable]=\"clickable\">\n        <svg:g ngx-charts-card-series\n          [colors]=\"colors\"\n          [cardColor]=\"cardColor\"\n          [bandColor]=\"bandColor\"\n          [textColor]=\"textColor\"\n          [emptyColor]=\"emptyColor\"\n          [data]=\"data\"\n          [dims]=\"dims\"\n          [innerPadding]=\"innerPadding\"\n          [valueFormatting]=\"valueFormatting\"\n          [labelFormatting]=\"labelFormatting\"\n          (select)=\"onClick($event)\"\n        />\n      </svg:g>\n    </ngx-charts-chart>\n  ",
                 styleUrls: [
                     '../common/base-chart.component.css',
                     './card.component.css'

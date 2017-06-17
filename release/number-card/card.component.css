@@ -1,6 +1,3 @@
-ngx-charts-number-card .cell .card, ngx-charts-number-card .cell .cardBand {
-  cursor: pointer; }
-
 ngx-charts-number-card .cell .trimmed-label {
   font-size: 12px;
   pointer-events: none;
@@ -18,3 +15,6 @@ ngx-charts-number-card .cell .trimmed-label {
 
 ngx-charts-number-card .cell .value-text {
   pointer-events: none; }
+
+ngx-charts-number-card .number-card.clickable .cell .card, ngx-charts-number-card .number-card.clickable .cell .card-band {
+  cursor: pointer; }

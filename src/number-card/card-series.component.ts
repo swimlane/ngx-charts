@@ -82,12 +82,12 @@ export class CardSeriesComponent implements OnChanges {
 
   update(): void {
     if (this.data.length > 2) {
-      this.valueFormatting = this.valueFormatting || (card => card.data.value.toLocaleString());
+      const valueFormatting = this.valueFormatting || (card => card.value.toLocaleString());
 
       const sortedLengths = this.data
         .map(d => {
           const hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;
-          return hasValue ? this.valueFormatting({
+          return hasValue ? valueFormatting({
             data: d.data,
             label: d ? d.data.name : '',
             value: (d && d.data) ? d.data.value : ''
@@ -123,7 +123,7 @@ export class CardSeriesComponent implements OnChanges {
 
         const value = d.data.value;
         const valueColor = label ? this.colors.getColor(label) : this.emptyColor;
-        const color = this.cardColor || valueColor;
+        const color = this.cardColor || valueColor || '#000';
         return {
           x: d.x,
           y: d.y,

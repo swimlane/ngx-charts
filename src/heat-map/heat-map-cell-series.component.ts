@@ -6,7 +6,8 @@ import {
   EventEmitter,
   OnChanges,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  TemplateRef
 } from '@angular/core';
 import { formatLabel } from '../common/label.helper';
 
@@ -28,8 +29,10 @@ import { formatLabel } from '../common/label.helper';
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="tooltipText(c)"
-    />
+      [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="{series: c.series, name: c.label, value: c.data}">
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -42,6 +45,7 @@ export class HeatCellSeriesComponent implements OnChanges, OnInit {
   @Input() gradient: boolean;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipText: any;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
 

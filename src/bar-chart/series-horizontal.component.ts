@@ -5,7 +5,8 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  TemplateRef
 } from '@angular/core';
 import {
   trigger,
@@ -40,18 +41,19 @@ import {
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="bar.tooltipText">
+      [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="bar.data">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition('* => void', [
+      transition(':leave', [
         style({
-          opacity: 1,
-          transform: '*',
+          opacity: 1
         }),
-        animate(500, style({opacity: 0, transform: 'scale(0)'}))
+        animate(500, style({opacity: 0}))
       ])
     ])
   ]
@@ -71,6 +73,8 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
+  @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() roundEdges: boolean;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -91,7 +95,7 @@ export class SeriesHorizontal implements OnChanges {
       let value = d.value;
       const label = d.name;
       const formattedLabel = formatLabel(label);
-      const roundEdges = this.type === 'standard';
+      const roundEdges = this.roundEdges;
 
       const bar: any = {
         value,
@@ -157,6 +161,7 @@ export class SeriesHorizontal implements OnChanges {
       let tooltipLabel = formattedLabel;
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
+        bar.data.series = this.seriesName;
       }
 
       bar.tooltipText = `

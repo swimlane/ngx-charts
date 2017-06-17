@@ -17,6 +17,7 @@ export declare class NumberCardComponent extends BaseChartComponent {
     domain: any[];
     margin: number[];
     backgroundCards: any[];
+    readonly clickable: boolean;
     update(): void;
     getDomain(): any[];
     onClick(data: any): void;

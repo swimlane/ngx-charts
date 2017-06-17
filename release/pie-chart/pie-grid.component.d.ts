@@ -1,9 +1,10 @@
+import { TemplateRef } from '@angular/core';
 import { ViewDimensions } from '../common/view-dimensions.helper';
 import { ColorHelper } from '../common/color.helper';
 import { BaseChartComponent } from '../common/base-chart.component';
 export declare class PieGridComponent extends BaseChartComponent {
     tooltipDisabled: boolean;
-    tooltipText: any;
+    tooltipText: (o: any) => any;
     dims: ViewDimensions;
     data: any[];
     transform: string;
@@ -11,6 +12,7 @@ export declare class PieGridComponent extends BaseChartComponent {
     domain: any[];
     colorScale: ColorHelper;
     margin: number[];
+    tooltipTemplate: TemplateRef<any>;
     update(): void;
     defaultTooltipText({data}: {
         data: any;

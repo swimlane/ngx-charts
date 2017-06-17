@@ -18,6 +18,7 @@ export declare class ForceDirectedGraphComponent extends BaseChartComponent {
     deactivate: EventEmitter<any>;
     linkTemplate: TemplateRef<any>;
     nodeTemplate: TemplateRef<any>;
+    tooltipTemplate: TemplateRef<any>;
     chart: ElementRef;
     colors: ColorHelper;
     dims: ViewDimensions;

@@ -7,7 +7,8 @@ import * as d3 from 'd3';
 
 import { colorSets } from '../src/utils/color-sets';
 import { formatLabel } from '../src/common/label.helper';
-import { single, multi, countries, bubble, generateData, generateGraph } from './data';
+import { single, multi, bubble, generateData, generateGraph, treemap, timelineFilterBarData } from './data';
+import { data as countries } from 'emoji-flags';
 import chartGroups from './chartTypes';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
@@ -27,7 +28,7 @@ function multiFormat(value) {
   selector: 'app',
   providers: [Location, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['../node_modules/@swimlane/ngx-ui/release/index.css', './app.component.scss'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -46,6 +47,8 @@ export class AppComponent implements OnInit {
   dateDataWithRange: any[];
   calendarData: any[];
   statusData: any[];
+  sparklineData: any[];
+  timelineFilterBarData: any[];
   graph: { links: any[], nodes: any[] };
   bubble: any;
   linearScale: boolean = false;
@@ -75,13 +78,39 @@ export class AppComponent implements OnInit {
   maxRadius = 10;
   minRadius = 3;
   showSeriesOnHover = true;
+  roundEdges: boolean = true;
+
+  curves = {
+    Basis: shape.curveBasis,
+    'Basis Closed': shape.curveBasisClosed,
+    Bundle: shape.curveBundle.beta(1),
+    Cardinal: shape.curveCardinal,
+    'Cardinal Closed': shape.curveCardinalClosed,
+    'Catmull Rom': shape.curveCatmullRom,
+    'Catmull Rom Closed': shape.curveCatmullRomClosed,
+    Linear: shape.curveLinear,
+    'Linear Closed': shape.curveLinearClosed,
+    'Monotone X': shape.curveMonotoneX,
+    'Monotone Y': shape.curveMonotoneY,
+    Natural: shape.curveNatural,
+    Step: shape.curveStep,
+    'Step After': shape.curveStepAfter,
+    'Step Before': shape.curveStepBefore,
+    default: shape.curveLinear
+  };
 
   // line interpolation
   curveType: string = 'Linear';
-  curve: any = shape.curveLinear;
+  curve: any = this.curves[this.curveType];
   interpolationTypes = [
     'Basis', 'Bundle', 'Cardinal', 'Catmull Rom', 'Linear', 'Monotone X',
     'Monotone Y', 'Natural', 'Step', 'Step After', 'Step Before'
+  ];
+
+  closedCurveType: string = 'Linear Closed';
+  closedCurve: any = this.curves[this.closedCurveType];
+  closedInterpolationTypes = [
+    'Basis Closed', 'Cardinal Closed', 'Catmull Rom Closed', 'Linear Closed'
   ];
 
   colorSets: any;
@@ -133,7 +162,16 @@ export class AppComponent implements OnInit {
   salePrice = 100;
   personnelCost = 100;
 
+  mathText = '3 - 1.5*sin(x) + cos(2*x) - 1.5*abs(cos(x))';
+  mathFunction: (o: any) => any;
+
+  treemap: any[];
+  treemapPath: any[] = [];
+  sumBy: string = 'Size';
+
   constructor(public location: Location) {
+    this.mathFunction = this.getFunction();
+
     Object.assign(this, {
       single,
       multi,
@@ -141,14 +179,20 @@ export class AppComponent implements OnInit {
       chartGroups,
       colorSets,
       graph: generateGraph(50),
-      bubble
+      bubble,
+      plotData: this.generatePlotData(),
+      treemap
     });
+
+    this.treemapProcess();
 
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
+    this.sparklineData = generateData(1, false, 30);
+    this.timelineFilterBarData = timelineFilterBarData();
   }
 
   get dateDataWithOrWithoutRange() {
@@ -217,30 +261,33 @@ export class AppComponent implements OnInit {
     if (add) {
       // single
       const entry = {
-        name: country,
+        name: country.name,
         value: Math.floor(10000 + Math.random() * 50000)
       };
       this.single = [...this.single, entry];
 
       // multi
       const multiEntry = {
-        name: country,
+        name: country.name,
         series: [{
-          name: '2010',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          name: '1990',
+          value: Math.floor(10000 + Math.random() * 50000)
         }, {
-          name: '2011',
-          value: Math.floor(1000000 + Math.random() * 20000000)
+          name: '2000',
+          value: Math.floor(10000 + Math.random() * 50000)
+        }, {
+          name: '2010',
+          value: Math.floor(10000 + Math.random() * 50000)
         }]
       };
 
       this.multi = [...this.multi, multiEntry];
 
       // graph
-      const node = { value: country };
+      const node = { value: country.name };
       const nodes = [ ...this.graph.nodes, node];
       const link = {
-        source: country,
+        source: country.name,
         target: nodes[Math.floor(Math.random() * (nodes.length - 1))].value,
       };
       const links = [ ...this.graph.links, link];
@@ -249,7 +296,7 @@ export class AppComponent implements OnInit {
       // bubble
       const bubbleYear = Math.floor((2010 - 1990) * Math.random() + 1990);
       const bubbleEntry = {
-        name: country,
+        name: country.name,
         series: [{
           name: '' + bubbleYear,
           x: new Date(bubbleYear, 0, 1),
@@ -263,7 +310,15 @@ export class AppComponent implements OnInit {
       this.statusData = this.getStatusData();
     }
 
-    this.dateData = generateData(5, false);
+    const date = new Date(Math.floor(1473700105009 +  Math.random() * 1000000000));
+    for (const series of this.dateData) {
+      series.series.push({
+        name: date,
+        value: Math.floor(2000 + Math.random() * 5000)
+      });
+    }
+    this.dateData = [...this.dateData];
+
     this.dateDataWithRange = generateData(2, true);
 
     if (this.chart.inputFormat === 'calendarData') this.calendarData = this.getCalendarData();
@@ -287,39 +342,22 @@ export class AppComponent implements OnInit {
     this.chartType = chartSelector = chartSelector.replace('/', '');
     this.location.replaceState(this.chartType);
 
-    this.linearScale = this.chartType === 'line-chart' ||
-      this.chartType === 'line-chart-with-ranges' ||
-      this.chartType === 'area-chart' ||
-      this.chartType === 'area-chart-normalized' ||
-      this.chartType === 'area-chart-stacked';
-
-    if (this.chartType === 'bubble-chart') {
-      this.xAxisLabel = 'Census Date';
-      this.yAxisLabel = 'Life expectancy [years]';
-    } else {
-      this.yAxisLabel = 'GDP Per Capita';
-      this.xAxisLabel = 'Country';
+    for (const group of this.chartGroups) {
+      this.chart = group.charts.find(x => x.selector === chartSelector);
+      if (this.chart) break;
     }
 
-    if (this.chartType === 'calendar') {
-      this.width = 1100;
-      this.height = 200;
-    } else {
-      this.width = 700;
-      this.height = 300;
-    }
+    this.linearScale = false;
+    this.yAxisLabel = 'GDP Per Capita';
+    this.xAxisLabel = 'Country';
+
+    this.width = 700;
+    this.height = 300;
+
+    Object.assign(this, this.chart.defaults);
 
     if (!this.fitContainer) {
       this.applyDimensions();
-    }
-
-    for (const group of this.chartGroups) {
-      for (const chart of group.charts) {
-        if (chart.selector === chartSelector) {
-          this.chart = chart;
-          return;
-        }
-      }
     }
   }
 
@@ -327,41 +365,8 @@ export class AppComponent implements OnInit {
     console.log('Item clicked', data);
   }
 
-  setInterpolationType(curveType) {
-    this.curveType = curveType;
-    if (curveType === 'Basis') {
-      this.curve = shape.curveBasis;
-    }
-    if (curveType === 'Bundle') {
-      this.curve = shape.curveBundle.beta(1);
-    }
-    if (curveType === 'Cardinal') {
-      this.curve = shape.curveCardinal;
-    }
-    if (curveType === 'Catmull Rom') {
-      this.curve = shape.curveCatmullRom;
-    }
-    if (curveType === 'Linear') {
-      this.curve = shape.curveLinear;
-    }
-    if (curveType === 'Monotone X') {
-      this.curve = shape.curveMonotoneX;
-    }
-    if (curveType === 'Monotone Y') {
-      this.curve = shape.curveMonotoneY;
-    }
-    if (curveType === 'Natural') {
-      this.curve = shape.curveNatural;
-    }
-    if (curveType === 'Step') {
-      this.curve = shape.curveStep;
-    }
-    if (curveType === 'Step After') {
-      this.curve = shape.curveStepAfter;
-    }
-    if (curveType === 'Step Before') {
-      this.curve = shape.curveStepBefore;
-    }
+  getInterpolationType(curveType) {
+    return this.curves[curveType] || this.curves['default'];
   }
 
   setColorScheme(name) {
@@ -503,7 +508,86 @@ export class AppComponent implements OnInit {
     }
   }
 
+  currencyFormatting(c) {
+    return `\$${Math.round(c.value).toLocaleString()}`;
+  }
+
+  gdpLabelFormatting(c) {
+    return `${c.label}<br/><small class="number-card-label">GDP Per Capita</small>`;
+  }
+
   statusLabelFormat(c): string {
     return `${c.label}<br/><small class="number-card-label">This week</small>`;
+  }
+
+  generatePlotData() {
+    if (!this.mathFunction) {
+      return [];
+    }
+    const twoPi = 2 * Math.PI;
+    const length = 25;
+    const series = Array.apply(null, { length })
+      .map((d, i) => {
+        const x = i / (length - 1);
+        const t = x * twoPi;
+        return {
+          name: ~~(x * 360),
+          value: this.mathFunction(t)
+        };
+      });
+
+    return [{
+      name: this.mathText,
+      series
+    }];
+  }
+
+  getFunction(text = this.mathText) {
+    try {
+      text = `with (Math) { return ${this.mathText} }`;
+      const fn = new Function('x', text).bind(Math);
+      return (typeof fn(1) === 'number') ? fn : null;
+    } catch(err) {
+      return null;
+    }
+  }
+
+  treemapProcess(sumBy = this.sumBy) {
+    this.sumBy = sumBy;
+    const children = treemap[0];
+    const value = (sumBy === 'Size') ? sumChildren(children) : countChildren(children);
+    this.treemap = [children];
+    this.treemapPath = [{name: 'Top', children: [children], value }];
+
+    function sumChildren(node) {
+      return node.value = node.size || d3.sum(node.children, sumChildren);
+    }
+
+    function countChildren(node) {
+      return node.value = node.children ? d3.sum(node.children, countChildren) : 1;
+    }
+  }
+
+  treemapSelect(item) {
+    let node;
+    if (item.children) {
+      const idx = this.treemapPath.indexOf(item);
+      this.treemapPath.splice(idx + 1);
+      this.treemap = this.treemapPath[idx].children;
+      return;
+    }
+    node = this.treemap.find(d => d.name === item.name);
+    if (node.children) {
+      this.treemapPath.push(node);
+      this.treemap = node.children;
+    }
+  }
+
+  getFlag(country) {
+    return this.countries.find(c => c.name === country).emoji;
+  }
+
+  onFilter(event) {
+    console.log('timeline filter', event);
   }
 }

@@ -11,13 +11,12 @@ var CardSeriesComponent = (function () {
         this.update();
     };
     CardSeriesComponent.prototype.update = function () {
-        var _this = this;
         if (this.data.length > 2) {
-            this.valueFormatting = this.valueFormatting || (function (card) { return card.data.value.toLocaleString(); });
+            var valueFormatting_1 = this.valueFormatting || (function (card) { return card.value.toLocaleString(); });
             var sortedLengths = this.data
                 .map(function (d) {
                 var hasValue = d && d.data && typeof d.data.value !== 'undefined' && d.data.value !== null;
-                return hasValue ? _this.valueFormatting({
+                return hasValue ? valueFormatting_1({
                     data: d.data,
                     label: d ? d.data.name : '',
                     value: (d && d.data) ? d.data.value : ''
@@ -51,7 +50,7 @@ var CardSeriesComponent = (function () {
             d.data.name = label;
             var value = d.data.value;
             var valueColor = label ? _this.colors.getColor(label) : _this.emptyColor;
-            var color = _this.cardColor || valueColor;
+            var color = _this.cardColor || valueColor || '#000';
             return {
                 x: d.x,
                 y: d.y,

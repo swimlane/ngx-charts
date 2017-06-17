@@ -17,6 +17,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
       [attr.class]="yAxisClassName"
       [attr.transform]="transform">
       <svg:g ngx-charts-y-axis-ticks
+        *ngIf="yScale"
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
@@ -27,7 +28,6 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [height]="dims.height"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
-
       <svg:g ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
@@ -50,6 +50,8 @@ export class YAxisComponent implements OnChanges {
   @Input() labelText;
   @Input() yAxisTickInterval;
   @Input() yAxisTickCount: any;
+  @Input() yOrient: string = 'left';
+  
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';
@@ -57,7 +59,7 @@ export class YAxisComponent implements OnChanges {
   offset: any;
   transform: any;
   yAxisOffset: number = -5;
-  yOrient: string = 'left';
+
   labelOffset: number = 80;
   fill: string = 'none';
   stroke: string = '#CCC';

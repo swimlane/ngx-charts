@@ -17,12 +17,12 @@ export declare class XAxisTicksComponent implements OnChanges, AfterViewInit {
     textAnchor: string;
     maxTicksLength: number;
     maxAllowedLength: number;
-    trimLabel: any;
+    trimLabel: (o: any) => any;
     adjustedScale: any;
     tickValues: any;
     textTransform: any;
     ticks: any;
-    tickFormat: any;
+    tickFormat: (o: any) => any;
     height: number;
     ticksElement: ElementRef;
     constructor();

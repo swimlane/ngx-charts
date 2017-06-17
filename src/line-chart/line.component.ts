@@ -3,8 +3,10 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnChanges,
   ElementRef,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  SimpleChanges
 } from '@angular/core';
 import {
   trigger,
@@ -13,6 +15,8 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { select } from 'd3-selection';
+import { pathTween } from '../utils/path-tween';
 
 @Component({
   selector: 'g[ngx-charts-line]',
@@ -20,8 +24,8 @@ import {
     <svg:path
       [@animationState]="'active'"
       class="line"
-      [attr.d]="path"
-      fill="none"
+      [attr.d]="initialPath"
+      [attr.fill]="fill"
       [attr.stroke]="stroke"
       stroke-width="1.5px"
     />
@@ -29,7 +33,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition('void => *', [
+      transition(':enter', [
         style({
           strokeDasharray: 2000,
           strokeDashoffset: 2000,
@@ -41,18 +45,35 @@ import {
     ])
   ]
 })
-export class LineComponent {
+export class LineComponent implements OnChanges {
 
   @Input() path;
   @Input() stroke;
   @Input() data;
+  @Input() fill: string = 'none';
 
   @Output() select = new EventEmitter();
 
-  element: ElementRef;
+  initialized: boolean = false;
+  initialPath: string;
 
-  constructor(element: ElementRef) {
-    this.element = element.nativeElement;
+  constructor(private element: ElementRef) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.initialized) {
+      this.initialized = true;
+      this.initialPath = this.path;
+    } else {
+      this.animateToCurrentForm();
+    }
+  }
+
+  animateToCurrentForm(): void {
+    const node = select(this.element.nativeElement).select('.line');
+
+    node
+      .transition().duration(750)
+      .attrTween('d', pathTween(this.path, 1));
+  }
 }

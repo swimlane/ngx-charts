@@ -31,6 +31,8 @@
 
   .line-series,
   .line-series-range,
+  .polar-series-path,
+  .polar-series-area,
   .area-series {
     &.inactive {
       transition: opacity 100ms ease-in-out;
@@ -69,6 +71,14 @@
     stroke: #ddd;
     stroke-width: 1;
     fill: none;
+  }
+
+  .gridline-path-dotted {
+    stroke: #ddd;
+    stroke-width: 1;
+    fill: none;
+    stroke-dasharray: 1, 20;
+    stroke-dashoffset: 3;
   }
 
   .grid-panel {

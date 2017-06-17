@@ -5,13 +5,15 @@ import {
   Output,
   SimpleChanges,
   EventEmitter,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  TemplateRef
 } from '@angular/core';
 
 @Component({
   selector: 'g[ngx-charts-tree-map-cell-series]',
   template: `
     <svg:g ngx-charts-tree-map-cell *ngFor="let c of cells; trackBy:trackBy"
+      [data]="c"
       [x]="c.x"
       [y]="c.y"
       [width]="c.width"
@@ -20,13 +22,18 @@ import {
       [label]="c.label"
       [value]="c.value"
       [valueType]="c.valueType"
+      [valueFormatting]="valueFormatting"
+      [labelFormatting]="labelFormatting"
+      [gradient]="gradient"
       (select)="onClick($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
       [tooltipPlacement]="'top'"
       [tooltipType]="'tooltip'"
-      [tooltipTitle]="getTooltipText(c)"
-    />
+      [tooltipTitle]="tooltipTemplate ? undefined : getTooltipText(c)"
+      [tooltipTemplate]="tooltipTemplate"
+      [tooltipContext]="c.data">
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -35,7 +42,11 @@ export class TreeMapCellSeriesComponent implements OnChanges {
   @Input() data;
   @Input() dims;
   @Input() colors;
+  @Input() valueFormatting: any;
+  @Input() labelFormatting: any;
+  @Input() gradient: boolean = false;
   @Input() tooltipDisabled: boolean = false;
+  @Input() tooltipTemplate: TemplateRef<any>;
 
   @Output() select = new EventEmitter();
 
@@ -53,7 +64,13 @@ export class TreeMapCellSeriesComponent implements OnChanges {
       .map((d, index) => {
         const label = d.id;
 
+        const data = {
+          name: label,
+          value: d.value
+        };
+
         return {
+          data,
           x: d.x0,
           y: d.y0,
           width: d.x1 - d.x0,

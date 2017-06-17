@@ -55,6 +55,15 @@ button {
     outline: none;
     background: #097dff;
   }
+
+  &.btn.btn-link {
+    padding: 0;
+
+    &.active {
+      font-weight: 800;
+      color: #097dff;
+    }
+  }
 }
 
 .arrow-down {
@@ -286,6 +295,10 @@ main {
           stroke: #aaa;
         }
       }
+    }
+
+    .polar-chart .polar-chart-background {
+      fill: rgb(30, 34, 46);
     }
 
   }

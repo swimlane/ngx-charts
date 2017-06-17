@@ -1,13 +1,11 @@
 # ngx-charts (f.k.a. ng2d3)
 [![Join the chat at https://gitter.im/swimlane/ngx-charts](https://badges.gitter.im/swimlane/ngx-charts.svg)](https://gitter.im/swimlane/ngx-charts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 [![Build Status](https://travis-ci.org/swimlane/ngx-charts.svg?branch=master)](https://travis-ci.org/swimlane/ngx-charts) 
-[![Code Climate](https://codeclimate.com/github/swimlane/ngx-charts/badges/gpa.svg)](https://codeclimate.com/github/swimlane/ngx-charts)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b097196f7f544412a79a99080a41bbc1)](https://www.codacy.com/app/Swimlane/ngx-charts?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=swimlane/ngx-charts&amp;utm_campaign=Badge_Grade)
 [![Test Coverage](https://codeclimate.com/github/swimlane/ngx-charts/badges/coverage.svg)](https://codeclimate.com/github/swimlane/ngx-charts/coverage)
+[![npm version](https://badge.fury.io/js/%40swimlane%2Fngx-charts.svg)](https://badge.fury.io/js/%40swimlane%2Fngx-charts)
 
 Declarative Charting Framework for Angular2 and beyond!
-
-**Note: ngx-charts 5.0.0 works only with Angular 4.x. 
-To use ngx-charts with Angular 2.x, use ngx-charts 4.x.**
 
 ngx-charts is unique because we don't merely wrap d3, nor any other chart engine for that matter. It is using Angular to render and animate the SVG elements with all of its binding and speed goodness, and uses d3 for the excellent math functions, scales, axis and shape generators, etc. By having Angular do all of the rendering it opens us up to endless possibilities the Angular platform provides such as AoT, Universal, etc. 
 
@@ -49,6 +47,9 @@ To use ngx-charts in your project install it via [npm](https://www.npmjs.com/pac
 ```
 npm i @swimlane/ngx-charts --save
 ```
+
+**Note: ngx-charts 5.0.0 works only with Angular 4.x. 
+To use ngx-charts with Angular 2.x, use ngx-charts 4.x.**
 
 ## Credits
 `ngx-charts` is a [Swimlane](http://swimlane.com) open-source project; we believe in giving back to the open-source community by sharing some of the projects we build for our application. Swimlane is an automated cyber security operations and incident response platform that enables cyber security teams to leverage threat intelligence, speed up incident response and automate security operations.

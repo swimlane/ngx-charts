@@ -23,6 +23,7 @@ export class CountUpDirective implements OnDestroy {
   @Input() countDuration: number = 1;
   @Input() countPrefix: string = '';
   @Input() countSuffix: string = '';
+  @Input() valueFormatting: any;
 
   @Input()
   set countDecimals(val: number) {
@@ -60,6 +61,8 @@ export class CountUpDirective implements OnDestroy {
   nativeElement: any;
 
   value: any = '';
+  formattedValue: string;
+
   private animationReq: any;
 
   private _countDecimals: number = 0;
@@ -77,8 +80,11 @@ export class CountUpDirective implements OnDestroy {
   start(): void {
     cancelAnimationFrame(this.animationReq);
 
+    const valueFormatting = this.valueFormatting ||
+      (data => `${this.countPrefix}${data.value.toLocaleString()}${this.countSuffix}`);
+
     const callback = ({ value, progress, finished }) => {
-      this.value = `${this.countPrefix}${value.toLocaleString()}${this.countSuffix}`;
+      this.value = valueFormatting({value});
       this.cd.markForCheck();
 
       if(!finished) this.countChange.emit({ value, progress });

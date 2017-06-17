@@ -3,10 +3,10 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
 var YAxisComponent = (function () {
     function YAxisComponent() {
         this.showGridLines = false;
+        this.yOrient = 'left';
         this.dimensionsChanged = new EventEmitter();
         this.yAxisClassName = 'y axis';
         this.yAxisOffset = -5;
-        this.yOrient = 'left';
         this.labelOffset = 80;
         this.fill = 'none';
         this.stroke = '#CCC';
@@ -44,7 +44,7 @@ export { YAxisComponent };
 YAxisComponent.decorators = [
     { type: Component, args: [{
                 selector: 'g[ngx-charts-y-axis]',
-                template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-y-axis-ticks\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineWidth]=\"dims.width\"\n        [height]=\"dims.height\"\n        (dimensionsChanged)=\"emitTicksWidth($event)\"\n      />\n\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
+                template: "\n    <svg:g\n      [attr.class]=\"yAxisClassName\"\n      [attr.transform]=\"transform\">\n      <svg:g ngx-charts-y-axis-ticks\n        *ngIf=\"yScale\"\n        [tickFormatting]=\"tickFormatting\"\n        [tickArguments]=\"tickArguments\"\n        [tickStroke]=\"tickStroke\"\n        [scale]=\"yScale\"\n        [orient]=\"yOrient\"\n        [showGridLines]=\"showGridLines\"\n        [gridLineWidth]=\"dims.width\"\n        [height]=\"dims.height\"\n        (dimensionsChanged)=\"emitTicksWidth($event)\"\n      />\n      <svg:g ngx-charts-axis-label\n        *ngIf=\"showLabel\"\n        [label]=\"labelText\"\n        [offset]=\"labelOffset\"\n        [orient]=\"yOrient\"\n        [height]=\"dims.height\"\n        [width]=\"dims.width\">\n      </svg:g>\n    </svg:g>\n  ",
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] },
 ];
@@ -59,6 +59,7 @@ YAxisComponent.propDecorators = {
     'labelText': [{ type: Input },],
     'yAxisTickInterval': [{ type: Input },],
     'yAxisTickCount': [{ type: Input },],
+    'yOrient': [{ type: Input },],
     'dimensionsChanged': [{ type: Output },],
     'ticksComponent': [{ type: ViewChild, args: [YAxisTicksComponent,] },],
 };

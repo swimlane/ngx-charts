@@ -3,11 +3,11 @@ export declare class AdvancedLegendComponent implements OnChanges {
     width: number;
     data: any;
     colors: any;
+    label: string;
     select: EventEmitter<any>;
     activate: EventEmitter<any>;
     deactivate: EventEmitter<any>;
     legendItems: any[];
-    totalLabel: string;
     total: number;
     roundedTotal: number;
     ngOnChanges(changes: SimpleChanges): void;

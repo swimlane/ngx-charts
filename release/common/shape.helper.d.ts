@@ -5,4 +5,4 @@
  * @param {*} x, y, w, h, r, tl, tr, bl, br
  * @returns {string}
  */
-export declare function roundedRect(x: any, y: any, w: any, h: any, r: any, tl: any, tr: any, bl: any, br: any): string;
+export declare function roundedRect(x: any, y: any, w: any, h: any, r: any, [tl, tr, bl, br]: boolean[]): string;

@@ -18,6 +18,7 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
       [attr.class]="xAxisClassName"
       [attr.transform]="transform">
       <svg:g ngx-charts-x-axis-ticks
+        *ngIf="xScale"
         [tickFormatting]="tickFormatting"
         [tickArguments]="tickArguments"
         [tickStroke]="tickStroke"
@@ -28,7 +29,6 @@ import { XAxisTicksComponent } from './x-axis-ticks.component';
         [width]="dims.width"
         (dimensionsChanged)="emitTicksHeight($event)"
       />
-
       <svg:g ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
@@ -51,14 +51,15 @@ export class XAxisComponent implements OnChanges {
   @Input() labelText;
   @Input() xAxisTickInterval;
   @Input() xAxisTickCount: any;
+  @Input() xOrient: string = 'bottom';
 
   @Output() dimensionsChanged = new EventEmitter();
 
   xAxisClassName: string = 'x axis';
-  xOrient: string = 'bottom';
+
   tickArguments: any;
   transform: any;
-  labelOffset: number = 80;
+  labelOffset: number = 0;
   fill: string = 'none';
   stroke: string = 'stroke';
   tickStroke: string = '#ccc';

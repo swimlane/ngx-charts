@@ -5,7 +5,17 @@ import {
   EventEmitter,
   HostListener,
   ViewEncapsulation,
-  ChangeDetectionStrategy } from '@angular/core';
+  ChangeDetectionStrategy,
+  ContentChild,
+  TemplateRef
+} from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 import { scaleLinear } from 'd3-scale';
 
 import { BaseChartComponent } from '../common/base-chart.component';
@@ -60,7 +70,7 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
           style="fill: rgb(255, 0, 0); opacity: 0; cursor: 'auto';"
           (mouseenter)="deactivateAll()"
         />
-        <svg:g *ngFor="let series of data">
+        <svg:g *ngFor="let series of data; trackBy:trackBy" [@animationState]="'active'">
           <svg:g ngx-charts-bubble-series
             [xScale]="xScale"
             [yScale]="yScale"
@@ -73,20 +83,31 @@ import { getScaleType, getDomain, getScale } from './bubble-chart.utils';
             [data]="series"
             [activeEntries]="activeEntries"
             [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
             (select)="onClick($event, series)"
             (activate)="onActivate($event)"
             (deactivate)="onDeactivate($event)" />
         </svg:g>
       </svg:g>
-    </ngx-charts-chart>`,
-    styleUrls: ['../common/base-chart.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    </ngx-charts-chart>
+  `,
+  styleUrls: ['../common/base-chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+    trigger('animationState', [
+      transition(':leave', [
+        style({
+          opacity: 1,
+        }),
+        animate(500, style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class BubbleChartComponent extends BaseChartComponent {
-  @Input() view: number[] = [400, 400];
-
-  @Input() results;
   @Input() showGridLines: boolean = true;
   @Input() legend = false;
   @Input() legendTitle: string = 'Legend';
@@ -108,6 +129,8 @@ export class BubbleChartComponent extends BaseChartComponent {
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   dims: ViewDimensions;
   colors: ColorHelper;
@@ -342,5 +365,9 @@ export class BubbleChartComponent extends BaseChartComponent {
       this.deactivate.emit({ value: entry, entries: [] });
     }
     this.activeEntries = [];
+  }
+
+  trackBy(index, item): string {
+    return item.name;
   }
 }

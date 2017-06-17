@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, TemplateRef } from '@angular/core';
 import { ColorHelper } from '../common/color.helper';
 export declare class GaugeArcComponent {
     backgroundArc: any;
@@ -7,7 +7,8 @@ export declare class GaugeArcComponent {
     colors: ColorHelper;
     isActive: boolean;
     tooltipDisabled: boolean;
-    valueFormatting: (value) => string;
+    valueFormatting: (value: any) => string;
+    tooltipTemplate: TemplateRef<any>;
     select: EventEmitter<{}>;
     activate: EventEmitter<{}>;
     deactivate: EventEmitter<{}>;

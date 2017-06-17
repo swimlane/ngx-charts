@@ -15,7 +15,10 @@ var CircleComponent = (function () {
         this.deactivate.emit(this.data);
     };
     CircleComponent.prototype.ngOnChanges = function (changes) {
-        this.classNames = this.classNames.join(' ') + 'circle';
+        this.classNames = Array.isArray(this.classNames) ?
+            this.classNames.join(' ') :
+            '';
+        this.classNames += 'circle';
     };
     return CircleComponent;
 }());

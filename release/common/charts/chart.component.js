@@ -26,8 +26,8 @@ var ChartComponent = (function () {
             }
         }
         var chartColumns = 12 - legendColumns;
-        this.chartWidth = this.view[0] * chartColumns / 12.0;
-        this.legendWidth = this.view[0] * legendColumns / 12.0;
+        this.chartWidth = ~~(this.view[0] * chartColumns / 12.0);
+        this.legendWidth = ~~(this.view[0] * legendColumns / 12.0);
     };
     ChartComponent.prototype.getLegendType = function () {
         if (this.legendOptions.scaleType === 'linear') {
@@ -48,7 +48,7 @@ ChartComponent.decorators = [
                 changeDetection: ChangeDetectionStrategy.OnPush,
                 animations: [
                     trigger('animationState', [
-                        transition('void => *', [
+                        transition(':enter', [
                             style({ opacity: 0 }),
                             animate('500ms 100ms', style({ opacity: 1 }))
                         ])

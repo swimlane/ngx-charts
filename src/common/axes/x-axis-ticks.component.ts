@@ -64,12 +64,12 @@ export class XAxisTicksComponent implements OnChanges, AfterViewInit {
   textAnchor: string = 'middle';
   maxTicksLength: number = 0;
   maxAllowedLength: number = 16;
-  trimLabel: any;
+  trimLabel: (o: any) => any;
   adjustedScale: any;
   tickValues: any;
   textTransform: any;
   ticks: any;
-  tickFormat: any;
+  tickFormat: (o: any) => any;
   height: number = 0;
 
   @ViewChild('ticksel') ticksElement: ElementRef;

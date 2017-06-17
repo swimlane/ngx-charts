@@ -7,7 +7,9 @@ import {
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ContentChild,
+  TemplateRef
 } from '@angular/core';
 import { scaleLinear } from 'd3-scale';
 
@@ -35,6 +37,7 @@ import { ColorHelper } from '../common/color.helper';
             [colors]="colors"
             [isActive]="isActive(arc.valueArc.data)"
             [tooltipDisabled]="tooltipDisabled"
+            [tooltipTemplate]="tooltipTemplate"
             [valueFormatting]="valueFormatting"
             (select)="onClick($event)"
             (activate)="onActivate($event)"
@@ -90,13 +93,15 @@ export class GaugeComponent extends BaseChartComponent implements AfterViewInit 
   @Input() activeEntries: any[] = [];
   @Input() axisTickFormatting: any;
   @Input() tooltipDisabled: boolean = false;
-  @Input() valueFormatting: (value) => string;
+  @Input() valueFormatting: (value: any) => string;
 
   // Specify margins
   @Input() margin: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
+
+  @ContentChild('tooltipTemplate') tooltipTemplate: TemplateRef<any>;
 
   @ViewChild('textEl') textEl: ElementRef;
 
