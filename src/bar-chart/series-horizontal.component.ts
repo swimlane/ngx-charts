@@ -39,8 +39,8 @@ import {
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipType]="tooltipType"
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data">
@@ -80,11 +80,15 @@ export class SeriesHorizontal implements OnChanges {
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
 
+  tooltipPlacement: string;
+  tooltipType: string;
+
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
   }
 
   update(): void {
+    this.updateTooltipSettings();
     let d0 = 0;
     let total;
     if (this.type === 'normalized') {
@@ -164,13 +168,18 @@ export class SeriesHorizontal implements OnChanges {
         bar.data.series = this.seriesName;
       }
 
-      bar.tooltipText = `
+      bar.tooltipText = this.tooltipDisabled ? undefined : `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
       return bar;
     });
+  }
+
+  updateTooltipSettings() {
+    this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
+    this.tooltipType =  this.tooltipDisabled ? undefined : 'tooltip';
   }
 
   isActive(entry): boolean {

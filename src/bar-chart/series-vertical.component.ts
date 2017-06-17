@@ -38,8 +38,8 @@ import { formatLabel } from '../common/label.helper';
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipType]="tooltipType"
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data">
@@ -76,6 +76,9 @@ export class SeriesVerticalComponent implements OnChanges {
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
 
+  tooltipPlacement: string;
+  tooltipType: string;
+  
   bars: any;
   x: any;
   y: any;
@@ -85,6 +88,7 @@ export class SeriesVerticalComponent implements OnChanges {
   }
 
   update(): void {
+    this.updateTooltipSettings();
     let width;
     if (this.series.length) {
       width = this.xScale.bandwidth();
@@ -172,13 +176,18 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.data.series = this.seriesName;
       }
 
-      bar.tooltipText = `
+      bar.tooltipText = this.tooltipDisabled ? undefined : `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
       return bar;
     });
+  }
+
+  updateTooltipSettings() {
+    this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
+    this.tooltipType =  this.tooltipDisabled ? undefined : 'tooltip';
   }
 
   isActive(entry): boolean {

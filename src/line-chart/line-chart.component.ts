@@ -80,6 +80,7 @@ import { id } from '../utils/id';
             />
           </svg:g>
           <svg:g ngx-charts-area-tooltip
+            *ngIf="!tooltipDisabled"
             [xSet]="xSet"
             [xScale]="xScale"
             [yScale]="yScale"
