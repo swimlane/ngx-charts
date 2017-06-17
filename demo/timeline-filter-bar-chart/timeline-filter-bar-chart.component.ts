@@ -163,15 +163,16 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     this.scaleType = this.getScaleType(values);
     let domain = [];
 
-    let min = new Date(Math.min(...values));
+    const min = new Date(Math.min(...values));
     min.setHours(0);
     min.setMinutes(0);
     min.setSeconds(0);
 
-    let max = new Date(Math.max(...values));
+    const max = new Date(Math.max(...values));
     max.setHours(23);
     max.setMinutes(59);
-    max.setSeconds(59)
+    max.setSeconds(59);
+    
     domain = [min.getTime(), max.getTime()];
 
     this.xSet = values;
