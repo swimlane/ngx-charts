@@ -70,6 +70,7 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() seriesName: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() roundEdges: boolean;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
@@ -99,7 +100,7 @@ export class SeriesVerticalComponent implements OnChanges {
       let value = d.value;
       const label = d.name;
       const formattedLabel = formatLabel(label);
-      const roundEdges = this.type === 'standard';
+      const roundEdges = this.roundEdges;
 
       const bar: any = {
         value,

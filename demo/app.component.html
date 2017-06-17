@@ -22,6 +22,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-bar-vertical>
@@ -45,6 +46,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)">
       </ngx-charts-bar-horizontal>
@@ -70,6 +72,7 @@
         [barPadding]="barPadding"
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (select)="select($event)">
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -94,6 +97,7 @@
         [barPadding]="barPadding"
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -814,6 +818,12 @@
         <label>
           <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
           Show Legend
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('roundEdges')">
+        <label>
+          <input type="checkbox" [checked]="roundEdges" (change)="roundEdges = $event.target.checked">
+          Round Bar Edges
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('legendTitle')">
