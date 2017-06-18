@@ -160,8 +160,7 @@ export class AppComponent implements OnInit {
   // Combo Chart
   barChart: any[] = barChart;
   lineChartSeries: any[] = lineChartSeries;
-  comboBarScheme: any[];
-  lineChartScheme =   {
+  lineChartScheme = {
       name: 'coolthree',
       selectable: true,
       group: 'Ordinal',
@@ -169,6 +168,16 @@ export class AppComponent implements OnInit {
         '#01579b', '#7aa3e5', '#a8385d', '#00bfa5'
       ]
     };
+
+  comboBarScheme = {
+    name: 'singleLightBlue',
+    selectable: true,
+    group: 'Ordinal',
+    domain: [
+      '#01579b'
+    ]
+  };
+
   showRightYAxisLabel: boolean = true;
   yAxisLabelRight: string = 'Utilization';
 
@@ -204,7 +213,6 @@ export class AppComponent implements OnInit {
     this.dateData = generateData(5, false);
     this.dateDataWithRange = generateData(2, true);
     this.setColorScheme('cool');
-    this.setComboBarScheme('singleLightBlue');
     this.calendarData = this.getCalendarData();
     this.statusData = this.getStatusData();
     this.sparklineData = generateData(1, false, 30);
@@ -611,13 +619,10 @@ export class AppComponent implements OnInit {
   **
   Combo Chart
   **
-  */
-
-  /*
-  **
   [yLeftAxisScaleFactor]="yLeftAxisScale" and [yRightAxisScaleFactor]="yRightAxisScale" 
-  exposes the left and right min and max axis values for custom scaling, it is probably best to scale 
-  one axis in relation to the other axis but for flexibility to scale either the left or right axis we expose both.
+  exposes the left and right min and max axis values for custom scaling, it is probably best to
+  scale one axis in relation to the other axis but for flexibility to scale either the left or 
+  right axis bowth were exposed.
   **
   */
 
@@ -635,10 +640,6 @@ export class AppComponent implements OnInit {
 
   yRightTickFormat(data) {
     return `${data}%`;
-  }
-
-  setComboBarScheme(name) {
-    this.comboBarScheme = this.colorSets.find(s => s.name === name);
   }
   /*
   **
