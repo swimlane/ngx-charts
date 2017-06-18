@@ -172,25 +172,11 @@ export class AppComponent implements OnInit {
   showRefLines: boolean = true;
   showRefLabels: boolean = true;
 
-  // Single reference line, for DEMO Line Chart with Reference line
-  avgRefLine = {  
-    value: 37750,
-    name: 'Average'
-  };
-
-  /* Supports max, average and min.
-  **
-  Can use any combination of the 3. To change color use CSS.
-  To turn off labels omit them from the data.
-  **
-  For DEMO Line Chart with Reference line
-  */
+  // Supports any number of reference lines.
   refLines = [
-    {
-      max: { value: 42500, name: 'Maximum' },
-      avg: { value: 37750, name: 'Average' },
-      min: { value: 33000, name: 'Minimum' }
-    }
+      { value: 42500, name: 'Maximum' },
+      { value: 37750, name: 'Average' },
+      { value: 33000, name: 'Minimum' }
   ];
   
   constructor(public location: Location) {
