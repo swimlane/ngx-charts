@@ -22,6 +22,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (select)="select($event)"
         (legendLabelClick)="onLegendLabelClick($event)">
       </ngx-charts-bar-vertical>
@@ -45,6 +46,7 @@
         [showGridLines]="showGridLines"
         [barPadding]="barPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (legendLabelClick)="onLegendLabelClick($event)"
         (select)="select($event)">
       </ngx-charts-bar-horizontal>
@@ -70,6 +72,7 @@
         [barPadding]="barPadding"
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (select)="select($event)">
       </ngx-charts-bar-vertical-2d>
       <ngx-charts-bar-horizontal-2d
@@ -94,6 +97,7 @@
         [barPadding]="barPadding"
         [groupPadding]="groupPadding"
         [roundDomains]="roundDomains"
+        [roundEdges]="roundEdges"
         (select)="select($event)">
       </ngx-charts-bar-horizontal-2d>
       <ngx-charts-bar-vertical-stacked
@@ -390,6 +394,33 @@
         [curve]="curve"
         (select)="select($event)">
       </ngx-charts-area-chart-normalized>
+      <combo-chart-component
+        *ngIf="chartType === 'combo-chart'"
+        class="chart-container"
+        [view]="view"
+        [scheme]="comboBarScheme"
+        [colorSchemeLine]="lineChartScheme"
+        [results]="barChart"
+        [lineChart]="lineChartSeries"
+        [tooltipDisabled]="tooltipDisabled"
+        [yAxisTickFormatting]="yLeftTickFormat"
+        [yLeftAxisScaleFactor]="yLeftAxisScale"
+        [yRightAxisScaleFactor]="yRightAxisScale"
+        [yRightAxisTickFormatting]="yRightTickFormat"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        [showGridLines]="showGridLines"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [showRightYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [yAxisLabelRight]="yAxisLabelRight"
+        (select)="onSelect($event)">
+      </combo-chart-component>
       <ngx-charts-heat-map
         *ngIf="chartType === 'heat-map'"
         class="chart-container"
@@ -735,6 +766,8 @@
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && (!range)">{{dateData | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'multiSeries' && linearScale && range">{{dateDataWithRange | json}}</pre>
       <pre *ngIf="chart.inputFormat === 'bubble'">{{bubble | json}}</pre>
+      <pre *ngIf="chart.inputFormat === 'comboChart'">{{barChart | json}}</pre>
+      <pre *ngIf="chart.inputFormat === 'comboChart'">{{lineChartSeries | json}}</pre>
       <div>
         <label>
           <input type="checkbox" [checked]="realTimeData" (change)="realTimeData = $event.target.checked">
@@ -856,6 +889,12 @@
         <label>
           <input type="checkbox" [checked]="showLegend" (change)="showLegend = $event.target.checked">
           Show Legend
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('roundEdges')">
+        <label>
+          <input type="checkbox" [checked]="roundEdges" (change)="roundEdges = $event.target.checked">
+          Round Bar Edges
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('legendTitle')">

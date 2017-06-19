@@ -31,6 +31,7 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [height]="dims.height"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
+
       <svg:g ngx-charts-axis-label
         *ngIf="showLabel"
         [label]="labelText"
@@ -64,8 +65,7 @@ export class YAxisComponent implements OnChanges {
   offset: any;
   transform: any;
   yAxisOffset: number = -5;
-
-  labelOffset: number = 80;
+  labelOffset: number = 15;
   fill: string = 'none';
   stroke: string = '#CCC';
   tickStroke: string = '#CCC';
@@ -80,6 +80,7 @@ export class YAxisComponent implements OnChanges {
   update(): void {
     this.offset = this.yAxisOffset;
     if (this.yOrient === 'right') {
+      this.labelOffset = 65;
       this.transform = `translate(${this.offset + this.dims.width} , 0)`;
     } else {
       this.transform = `translate(${this.offset} , 0)`;
@@ -91,7 +92,12 @@ export class YAxisComponent implements OnChanges {
   }
 
   emitTicksWidth({ width }): void {
-    if (width !== this.labelOffset) {
+    if (width !== this.labelOffset && this.yOrient === 'right' ) {
+      this.labelOffset = width + this.labelOffset;
+      setTimeout(() => {
+        this.dimensionsChanged.emit({width});
+      }, 0);
+    } else if (width !== this.labelOffset) {
       this.labelOffset = width;
       setTimeout(() => {
         this.dimensionsChanged.emit({width});

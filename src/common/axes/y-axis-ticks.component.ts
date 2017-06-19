@@ -47,14 +47,14 @@ import { scaleBand } from 'd3-scale';
       <svg:g
         *ngIf="showGridLines"
         [attr.transform]="gridLineTransform()">
-        <svg:line *ngIf="showRefLabels"
+        <svg:line *ngIf="orient === 'left'"
           class="gridline-path gridline-path-horizontal"
           x1="0"
           [attr.x2]="gridLineWidth" />
-        <svg:line *ngIf="!showRefLabels"
+        <svg:line *ngIf="orient === 'right'"
           class="gridline-path gridline-path-horizontal"
           x1="0"
-          [attr.x2]="gridLineWidth" />
+          [attr.x2]="-gridLineWidth" />
       </svg:g>
     </svg:g>
         <svg:g *ngFor="let refLine of referenceLines">
@@ -236,16 +236,20 @@ fill = '#666666';
   }
 
   getTicks(): any {
+    let ticks;
     const maxTicks = this.getMaxTicks(20);
     const maxScaleTicks = this.getMaxTicks(50);
 
     if (this.tickValues) {
-      return this.tickValues;
+      ticks = this.tickValues;
+    } else if (this.scale.ticks) {
+      ticks = this.scale.ticks.apply(this.scale, [maxScaleTicks]);
+    } else {
+      ticks = this.scale.domain();
+      ticks = reduceTicks(ticks, maxTicks);
     }
-    if (this.scale.ticks) {
-      return this.scale.ticks.call(this.scale, maxScaleTicks);
-    }
-    return reduceTicks(this.scale.domain(), maxTicks);
+
+    return ticks;
   }
 
   getMaxTicks(tickHeight: number): number {

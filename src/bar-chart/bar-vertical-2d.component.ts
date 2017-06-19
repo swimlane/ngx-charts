@@ -73,6 +73,7 @@ import { BaseChartComponent } from '../common/base-chart.component';
           [tooltipDisabled]="tooltipDisabled"
           [tooltipTemplate]="tooltipTemplate"
           [seriesName]="group.name"
+          [roundEdges]="roundEdges"
           (select)="onClick($event, group)"
           (activate)="onActivate($event, group)"
           (deactivate)="onDeactivate($event, group)"
@@ -116,6 +117,7 @@ export class BarVertical2DComponent extends BaseChartComponent {
   @Input() groupPadding = 16;
   @Input() barPadding = 8;
   @Input() roundDomains: boolean = false;
+  @Input() roundEdges: boolean = true;
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();

@@ -38,8 +38,8 @@ import { formatLabel } from '../common/label.helper';
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="'top'"
-      [tooltipType]="'tooltip'"
+      [tooltipPlacement]="tooltipPlacement"
+      [tooltipType]="tooltipType"
       [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
       [tooltipTemplate]="tooltipTemplate"
       [tooltipContext]="bar.data">
@@ -70,11 +70,15 @@ export class SeriesVerticalComponent implements OnChanges {
   @Input() seriesName: string;
   @Input() tooltipDisabled: boolean = false;
   @Input() tooltipTemplate: TemplateRef<any>;
+  @Input() roundEdges: boolean;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
 
+  tooltipPlacement: string;
+  tooltipType: string;
+  
   bars: any;
   x: any;
   y: any;
@@ -84,6 +88,7 @@ export class SeriesVerticalComponent implements OnChanges {
   }
 
   update(): void {
+    this.updateTooltipSettings();
     let width;
     if (this.series.length) {
       width = this.xScale.bandwidth();
@@ -99,7 +104,7 @@ export class SeriesVerticalComponent implements OnChanges {
       let value = d.value;
       const label = d.name;
       const formattedLabel = formatLabel(label);
-      const roundEdges = this.type === 'standard';
+      const roundEdges = this.roundEdges;
 
       const bar: any = {
         value,
@@ -171,13 +176,18 @@ export class SeriesVerticalComponent implements OnChanges {
         bar.data.series = this.seriesName;
       }
 
-      bar.tooltipText = `
+      bar.tooltipText = this.tooltipDisabled ? undefined : `
         <span class="tooltip-label">${tooltipLabel}</span>
         <span class="tooltip-val">${value.toLocaleString()}</span>
       `;
 
       return bar;
     });
+  }
+
+  updateTooltipSettings() {
+    this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
+    this.tooltipType =  this.tooltipDisabled ? undefined : 'tooltip';
   }
 
   isActive(entry): boolean {

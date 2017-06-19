@@ -4,24 +4,21 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-  TemplateRef
-} from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
- import { formatLabel } from '../common/label.helper';
+  ChangeDetectionStrategy
+ } from '@angular/core';
+ import {
+   trigger,
+   state,
+   style,
+   animate,
+   transition
+ } from '@angular/animations';
+import { formatLabel } from '../../src/common/label.helper';
 
 @Component({
-  selector: 'g[ngx-charts-series-horizontal]',
+  selector: 'g[ngx-combo-charts-series-vertical]',
   template: `
-    <svg:g ngx-charts-bar
-      *ngFor="let bar of bars; trackBy:trackBy"
+    <svg:g ngx-charts-bar *ngFor="let bar of bars; trackBy: trackBy"
       [@animationState]="'active'"
       [width]="bar.width"
       [height]="bar.height"
@@ -30,42 +27,39 @@ import {
       [fill]="bar.color"
       [stops]="bar.gradientStops"
       [data]="bar.data"
-      [orientation]="'horizontal'"
+      [orientation]="'vertical'"
       [roundEdges]="bar.roundEdges"
-      (select)="click($event)"
       [gradient]="gradient"
       [isActive]="isActive(bar.data)"
+      (select)="onClick($event)"
       (activate)="activate.emit($event)"
       (deactivate)="deactivate.emit($event)"
       ngx-tooltip
       [tooltipDisabled]="tooltipDisabled"
-      [tooltipPlacement]="tooltipPlacement"
-      [tooltipType]="tooltipType"
-      [tooltipTitle]="tooltipTemplate ? undefined : bar.tooltipText"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipContext]="bar.data">
+      [tooltipPlacement]="'top'"
+      [tooltipType]="'tooltip'"
+      [tooltipTitle]="bar.tooltipText">
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('animationState', [
-      transition(':leave', [
+      transition('* => void', [
         style({
-          opacity: 1
+          opacity: 1,
+          transform: '*',
         }),
-        animate(500, style({opacity: 0}))
+        animate(500, style({opacity: 0, transform: 'scale(0)'}))
       ])
     ])
   ]
 })
-export class SeriesHorizontal implements OnChanges {
-  bars: any;
-  x: any;
-  y: any;
+export class ComboSeriesVerticalComponent implements OnChanges {
 
   @Input() dims;
   @Input() type = 'standard';
   @Input() series;
+  @Input() seriesLine;
   @Input() xScale;
   @Input() yScale;
   @Input() colors;
@@ -73,22 +67,27 @@ export class SeriesHorizontal implements OnChanges {
   @Input() gradient: boolean;
   @Input() activeEntries: any[];
   @Input() seriesName: string;
-  @Input() tooltipTemplate: TemplateRef<any>;
-  @Input() roundEdges: boolean;
 
   @Output() select = new EventEmitter();
   @Output() activate = new EventEmitter();
   @Output() deactivate = new EventEmitter();
+  @Output() bandwidth = new EventEmitter();
 
-  tooltipPlacement: string;
-  tooltipType: string;
+  bars: any;
+  x: any;
+  y: any;
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes): void {
     this.update();
   }
 
   update(): void {
-    this.updateTooltipSettings();
+    let width;
+    if (this.series.length) {
+      width = this.xScale.bandwidth();
+      this.bandwidth.emit(width);
+    }
+
     let d0 = 0;
     let total;
     if (this.type === 'normalized') {
@@ -96,37 +95,41 @@ export class SeriesHorizontal implements OnChanges {
     }
 
     this.bars = this.series.map((d, index) => {
+
       let value = d.value;
       const label = d.name;
       const formattedLabel = formatLabel(label);
-      const roundEdges = this.roundEdges;
+      const roundEdges = this.type === 'standard';
 
       const bar: any = {
         value,
         label,
         roundEdges,
         data: d,
-        formattedLabel
+        width,
+        formattedLabel,
+        height: 0,
+        x: 0,
+        y: 0
       };
 
-      bar.height = this.yScale.bandwidth();
-
       if (this.type === 'standard') {
-        bar.width = Math.abs(this.xScale(value) - this.xScale(0));
+        bar.height = Math.abs(this.yScale(value) - this.yScale(0));
+        bar.x = this.xScale(label);
+
         if (value < 0) {
-          bar.x = this.xScale(value);
+          bar.y = this.yScale(0);
         } else {
-          bar.x = this.xScale(0);
+          bar.y = this.yScale(value);
         }
-        bar.y = this.yScale(label);
       } else if (this.type === 'stacked') {
         const offset0 = d0;
         const offset1 = offset0 + value;
         d0 += value;
 
-        bar.width = this.xScale(offset1) - this.xScale(offset0);
-        bar.x = this.xScale(offset0);
-        bar.y = 0;
+        bar.height = this.yScale(offset0) - this.yScale(offset1);
+        bar.x = 0;
+        bar.y = this.yScale(offset1);
         bar.offset0 = offset0;
         bar.offset1 = offset1;
       } else if (this.type === 'normalized') {
@@ -142,9 +145,9 @@ export class SeriesHorizontal implements OnChanges {
           offset1 = 0;
         }
 
-        bar.width = this.xScale(offset1) - this.xScale(offset0);
-        bar.x = this.xScale(offset0);
-        bar.y = 0;
+        bar.height = this.yScale(offset0) - this.yScale(offset1);
+        bar.x = 0;
+        bar.y = this.yScale(offset1);
         bar.offset0 = offset0;
         bar.offset1 = offset1;
         value = (offset1 - offset0).toFixed(2) + '%';
@@ -165,23 +168,24 @@ export class SeriesHorizontal implements OnChanges {
       let tooltipLabel = formattedLabel;
       if (this.seriesName) {
         tooltipLabel = `${this.seriesName} • ${formattedLabel}`;
-        bar.data.series = this.seriesName;
       }
-
-      bar.tooltipText = this.tooltipDisabled ? undefined : `
-        <span class="tooltip-label">${tooltipLabel}</span>
-        <span class="tooltip-val">${value.toLocaleString()}</span>
+      
+      this.getSeriesTooltips(this.seriesLine, index);
+      const lineValue = this.seriesLine[0].series[index].value;
+      const lineName = this.seriesLine[0].series[index].name;
+      bar.tooltipText = `
+        <span class="tooltip-label">${tooltipLabel }</span>
+        <span class="tooltip-val"> Y1 - ${value.toLocaleString()} • Y2 - ${lineValue.toLocaleString()}%</span>
       `;
 
       return bar;
     });
   }
-
-  updateTooltipSettings() {
-    this.tooltipPlacement = this.tooltipDisabled ? undefined : 'top';
-    this.tooltipType =  this.tooltipDisabled ? undefined : 'tooltip';
+  getSeriesTooltips(seriesLine, index) {
+    return seriesLine.map(d => {
+      return d.series[index];
+    });
   }
-
   isActive(entry): boolean {
     if(!this.activeEntries) return false;
     const item = this.activeEntries.find(d => {
@@ -190,11 +194,12 @@ export class SeriesHorizontal implements OnChanges {
     return item !== undefined;
   }
 
-  trackBy(index, bar) {
+  onClick(data): void {
+    this.select.emit(data);
+  }
+
+  trackBy(index, bar): string {
     return bar.label;
   }
 
-  click(data): void {
-    this.select.emit(data);
-  }
 }
