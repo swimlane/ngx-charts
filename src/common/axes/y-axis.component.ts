@@ -25,6 +25,9 @@ import { YAxisTicksComponent } from './y-axis-ticks.component';
         [orient]="yOrient"
         [showGridLines]="showGridLines"
         [gridLineWidth]="dims.width"
+        [referenceLines]="referenceLines"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
         [height]="dims.height"
         (dimensionsChanged)="emitTicksWidth($event)"
       />
@@ -52,7 +55,9 @@ export class YAxisComponent implements OnChanges {
   @Input() yAxisTickInterval;
   @Input() yAxisTickCount: any;
   @Input() yOrient: string = 'left';
-  
+  @Input() referenceLines;
+  @Input() showRefLines;
+  @Input() showRefLabels;
   @Output() dimensionsChanged = new EventEmitter();
 
   yAxisClassName: string = 'y axis';

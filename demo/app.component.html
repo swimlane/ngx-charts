@@ -639,6 +639,36 @@
           (select)="treemapSelect($event)">
         </ngx-charts-tree-map>
       </div>
+      <ngx-charts-line-chart
+        *ngIf="chartType === 'line-reference-lines'"
+        [view]="view"
+        class="chart-container"
+        [scheme]="colorScheme"
+        [schemeType]="schemeType"
+        [results]="multi"
+        [legend]="showLegend"
+        [legendTitle]="legendTitle"
+        (legendLabelClick)="onLegendLabelClick($event)"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [autoScale]="autoScale"
+        [timeline]="timeline"
+        [showGridLines]="showGridLines"
+        [curve]="curve"
+        [rangeFillOpacity]="rangeFillOpacity"
+        [roundDomains]="roundDomains"
+        [tooltipDisabled]="tooltipDisabled"
+        [showSeriesOnHover]="showSeriesOnHover"
+        [showRefLines]="showRefLines"
+        [showRefLabels]="showRefLabels"
+        [referenceLines]="refLines"
+        (select)="select($event)">
+      </ngx-charts-line-chart>
       <ngx-charts-bar-vertical
         *ngIf="chartType === 'tooltip-templates'"
         class="chart-container"
@@ -817,6 +847,18 @@
         <label>
           <input type="checkbox" [checked]="showXAxis" (change)="showXAxis = $event.target.checked">
           Show X Axis
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('showRefLabels')">
+        <label>
+          <input type="checkbox" [checked]="showRefLabels" (change)="showRefLabels = $event.target.checked">
+          Show Reference Labels
+        </label> <br />
+      </div>
+      <div *ngIf="chart.options.includes('showRefLines')">
+        <label>
+          <input type="checkbox" [checked]="showRefLines" (change)="showRefLines = $event.target.checked">
+          Show Reference Lines
         </label> <br />
       </div>
       <div *ngIf="chart.options.includes('showYAxis')">

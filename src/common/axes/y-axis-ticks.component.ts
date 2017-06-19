@@ -12,6 +12,8 @@ import {
 } from '@angular/core';
 import { trimLabel } from '../trim-label.helper';
 import { reduceTicks } from './ticks.helper';
+import { roundedRect } from '../../common/shape.helper';
+import { scaleBand } from 'd3-scale';
 
 @Component({
   selector: 'g[ngx-charts-y-axis-ticks]',
@@ -31,6 +33,15 @@ import { reduceTicks } from './ticks.helper';
         </svg:text>
       </svg:g>
     </svg:g>
+  
+    <svg:path *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines && showGridLines"
+      class=""
+      stroke="none"
+      [attr.d]="path"
+      [attr.fill]="fill"
+      fill-opacity="0.12"
+      [attr.transform]="gridLineTransform()"
+    />
     <svg:g *ngFor="let tick of ticks"
       [attr.transform]="transform(tick)">
       <svg:g
@@ -46,10 +57,35 @@ import { reduceTicks } from './ticks.helper';
           [attr.x2]="-gridLineWidth" />
       </svg:g>
     </svg:g>
+        <svg:g *ngFor="let refLine of referenceLines">
+    <svg:g *ngIf="showRefLines && showGridLines" [attr.transform]="transform(refLine.value)">
+    <svg:line
+    class="max-ref-path refline-path gridline-path-horizontal"
+      x1="0" stroke-dasharray="5, 5"
+      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
+    <svg:g *ngIf="showRefLabels">
+      <title>{{trimLabel(tickFormat(refLine.value))}}</title>
+      <svg:text
+        stroke-width="0.01"
+        [attr.dy]="dy"
+        [attr.y]="-6"
+        [attr.x]="gridLineWidth"
+        [attr.text-anchor]="textAnchor"
+        [style.font-size]="'9px'">
+        {{refLine.name}}
+      </svg:text>
+    </svg:g>
+    </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisTicksComponent implements OnChanges, AfterViewInit {
+
+path;
+radius = Math.min(this.height, 0);
+edges: boolean[] = [false, false, false, false];
+
+fill = '#666666';
 
   @Input() scale;
   @Input() orient;
@@ -60,6 +96,9 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   @Input() showGridLines = false;
   @Input() gridLineWidth;
   @Input() height;
+  @Input() referenceLines;
+  @Input() showRefLabels: boolean = false;
+  @Input() showRefLines: boolean = false;
 
   @Output() dimensionsChanged = new EventEmitter();
 
@@ -81,6 +120,9 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
   outerTickSize: number = 6;
   rotateLabels: boolean = false;
   trimLabel: any;
+  refMax;
+  refMin;
+  referenceLineLength: number = 0;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -105,9 +147,14 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  getYScale(): any {
+
+    return scaleBand()
+      .rangeRound([0, this.height]);
+  }
+
   update(): void {
     let scale;
-
     const sign = this.orient === 'top' || this.orient === 'right' ? -1 : 1;
     this.tickSpacing = Math.max(this.innerTickSize, 0) + this.tickPadding;
 
@@ -130,6 +177,10 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
     this.adjustedScale = scale.bandwidth ? function(d) {
       return scale(d) + scale.bandwidth() * 0.5;
     } : scale;
+
+    if (this.showRefLines && this.referenceLines) {
+      this.setReferencelines();
+    }
 
     switch (this.orient) {
       case 'top':
@@ -170,8 +221,18 @@ export class YAxisTicksComponent implements OnChanges, AfterViewInit {
         break;
       default:
     }
-
     setTimeout(() => this.updateDims());
+  }
+  
+  setReferencelines(): void {
+        this.refMin = this.adjustedScale(Math.min.apply(null, this.referenceLines.map(item => item.value)));
+        this.refMax = this.adjustedScale(Math.max.apply(null, this.referenceLines.map(item => item.value)));
+        this.referenceLineLength = this.referenceLines.length;
+
+        this.path = roundedRect(0,
+        this.refMax,
+        this.gridLineWidth,
+        this.refMin - this.refMax, 0, this.edges);
   }
 
   getTicks(): any {

@@ -76,6 +76,11 @@ button {
   margin-right: 5px;
 }
 
+.refline-path {
+  stroke: #a8b2c7;
+  stroke-width: 1;
+}
+
 .arrow-right {
   margin-right: 5px;
   display: inline-block;
@@ -233,6 +238,10 @@ main {
 
     .gridline-path {
       stroke: $color-bg-med;
+    }
+    .refline-path {
+      stroke: $color-bg-med;
+      stroke-width: 2;
     }
 
     .grid-panel {

@@ -194,6 +194,17 @@ export class AppComponent implements OnInit {
   treemapPath: any[] = [];
   sumBy: string = 'Size';
 
+  // Reference lines
+  showRefLines: boolean = true;
+  showRefLabels: boolean = true;
+
+  // Supports any number of reference lines.
+  refLines = [
+      { value: 42500, name: 'Maximum' },
+      { value: 37750, name: 'Average' },
+      { value: 33000, name: 'Minimum' }
+  ];
+  
   constructor(public location: Location) {
     this.mathFunction = this.getFunction();
 
