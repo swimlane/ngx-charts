@@ -105,7 +105,7 @@ export class BarComponent implements OnChanges {
     const path = this.getPath();
 
     node.transition().duration(500)
-      .attrTween('d', pathTween(path, 1));
+      .attrTween('d', pathTween(path, 2));
   }
 
   getGradient() {

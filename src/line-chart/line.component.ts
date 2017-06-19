@@ -16,7 +16,6 @@ import {
   transition
 } from '@angular/animations';
 import { select } from 'd3-selection';
-import { pathTween } from '../utils/path-tween';
 
 @Component({
   selector: 'g[ngx-charts-line]',
@@ -74,6 +73,6 @@ export class LineComponent implements OnChanges {
 
     node
       .transition().duration(750)
-      .attrTween('d', pathTween(this.path, 1));
+      .attr('d', this.path);
   }
 }
