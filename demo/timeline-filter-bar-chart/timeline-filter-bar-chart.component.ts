@@ -172,7 +172,7 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
     max.setHours(23);
     max.setMinutes(59);
     max.setSeconds(59);
-    
+
     domain = [min.getTime(), max.getTime()];
 
     this.xSet = values;
@@ -213,9 +213,8 @@ export class TimelineFilterBarChartComponent extends BaseChartComponent {
 
   getXScale(domain, width): any {
     return scaleBand()
-      .rangeRound([0, width])
+      .range([0, width])
       .paddingInner(0.1)
-      .paddingOuter(0)
       .domain(domain);
   }
 
