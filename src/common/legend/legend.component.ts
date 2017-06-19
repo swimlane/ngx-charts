@@ -9,7 +9,6 @@ import {
   template: `
     <div [style.width.px]="width">
       <header class="legend-title">
-        <span class="legend-icon icon-eye"></span>
         <span class="legend-title-text">{{title}}</span>
       </header>
       <div class="legend-wrap">

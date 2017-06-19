@@ -33,13 +33,10 @@ import { scaleBand } from 'd3-scale';
         </svg:text>
       </svg:g>
     </svg:g>
-  
-    <svg:path *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines && showGridLines"
-      class=""
-      stroke="none"
-      [attr.d]="path"
-      [attr.fill]="fill"
-      fill-opacity="0.12"
+
+    <svg:path *ngIf="referenceLineLength > 1 && refMax && refMin && showRefLines"
+      class="reference-area"
+      [attr.d]="referenceAreaPath"
       [attr.transform]="gridLineTransform()"
     />
     <svg:g *ngFor="let tick of ticks"
@@ -57,35 +54,30 @@ import { scaleBand } from 'd3-scale';
           [attr.x2]="-gridLineWidth" />
       </svg:g>
     </svg:g>
-        <svg:g *ngFor="let refLine of referenceLines">
-    <svg:g *ngIf="showRefLines && showGridLines" [attr.transform]="transform(refLine.value)">
-    <svg:line
-    class="max-ref-path refline-path gridline-path-horizontal"
-      x1="0" stroke-dasharray="5, 5"
-      [attr.x2]="gridLineWidth" [attr.transform]="gridLineTransform()"/>
-    <svg:g *ngIf="showRefLabels">
-      <title>{{trimLabel(tickFormat(refLine.value))}}</title>
-      <svg:text
-        stroke-width="0.01"
-        [attr.dy]="dy"
-        [attr.y]="-6"
-        [attr.x]="gridLineWidth"
-        [attr.text-anchor]="textAnchor"
-        [style.font-size]="'9px'">
-        {{refLine.name}}
-      </svg:text>
-    </svg:g>
+
+    <svg:g *ngFor="let refLine of referenceLines">
+      <svg:g *ngIf="showRefLines" [attr.transform]="transform(refLine.value)">
+        <svg:line class="refline-path gridline-path-horizontal"
+          x1="0"
+          [attr.x2]="gridLineWidth"
+          [attr.transform]="gridLineTransform()"/>
+        <svg:g *ngIf="showRefLabels">
+          <title>{{trimLabel(tickFormat(refLine.value))}}</title>
+          <svg:text
+            class="refline-label"
+            [attr.dy]="dy"
+            [attr.y]="-6"
+            [attr.x]="gridLineWidth"
+            [attr.text-anchor]="textAnchor" >
+            {{refLine.name}}
+          </svg:text>
+        </svg:g>
+      </svg:g>
     </svg:g>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YAxisTicksComponent implements OnChanges, AfterViewInit {
-
-path;
-radius = Math.min(this.height, 0);
-edges: boolean[] = [false, false, false, false];
-
-fill = '#666666';
 
   @Input() scale;
   @Input() orient;
@@ -120,9 +112,10 @@ fill = '#666666';
   outerTickSize: number = 6;
   rotateLabels: boolean = false;
   trimLabel: any;
-  refMax;
-  refMin;
+  refMax: number;
+  refMin: number;
   referenceLineLength: number = 0;
+  referenceAreaPath: string;
 
   @ViewChild('ticksel') ticksElement: ElementRef;
 
@@ -145,12 +138,6 @@ fill = '#666666';
       this.dimensionsChanged.emit({ width });
       setTimeout(() => this.updateDims());
     }
-  }
-
-  getYScale(): any {
-
-    return scaleBand()
-      .rangeRound([0, this.height]);
   }
 
   update(): void {
@@ -223,16 +210,14 @@ fill = '#666666';
     }
     setTimeout(() => this.updateDims());
   }
-  
-  setReferencelines(): void {
-        this.refMin = this.adjustedScale(Math.min.apply(null, this.referenceLines.map(item => item.value)));
-        this.refMax = this.adjustedScale(Math.max.apply(null, this.referenceLines.map(item => item.value)));
-        this.referenceLineLength = this.referenceLines.length;
 
-        this.path = roundedRect(0,
-        this.refMax,
-        this.gridLineWidth,
-        this.refMin - this.refMax, 0, this.edges);
+  setReferencelines(): void {
+    this.refMin = this.adjustedScale(Math.min.apply(null, this.referenceLines.map(item => item.value)));
+    this.refMax = this.adjustedScale(Math.max.apply(null, this.referenceLines.map(item => item.value)));
+    this.referenceLineLength = this.referenceLines.length;
+
+    this.referenceAreaPath = roundedRect(0, this.refMax, this.gridLineWidth, this.refMin - this.refMax,
+      0, [false, false, false, false]);
   }
 
   getTicks(): any {

@@ -359,7 +359,7 @@ const chartGroups = [
           'rangeFillOpacity', 'roundDomains', 'tooltipDisabled', 'showRefLines',
           'referenceLines', 'showRefLabels'
         ],
-         defaults: {
+        defaults: {
           yAxisLabel: 'GDP Per Capita',
           xAxisLabel: 'Year',
           linearScale: false
